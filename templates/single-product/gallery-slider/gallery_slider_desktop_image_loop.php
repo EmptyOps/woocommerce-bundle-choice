@@ -83,6 +83,10 @@ if(!empty($gallery_images_template_data['attachment_ids_loop_image'])){
     }
 }
 
+
+array_push($slider_loop_container_classes, 'exzoom_img_ul');
+array_push($slider_loop_container_classes, 'splide__list');
+
 /*---- a code /purple_theme/application/controllers/publics/pages/Content_Single_Product.php no che
 -- main container */
 $template = array(
@@ -94,8 +98,10 @@ $template = array(
         'class'=>'splide__track',
         'child'=>array(
             'type'=>'ul',
-            'class'=>'exzoom_img_ul splide__list',
+            'class'=>$slider_loop_container_classes,
             'child'=>$template_inner
         )
     )
 );
+
+// wbc_pr($template); die();

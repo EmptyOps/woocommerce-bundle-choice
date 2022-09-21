@@ -53,7 +53,7 @@ class WBC_Common {
 		return $return_category;
 	}
 
-	public function get_product_category($post,$in_category) {
+	public function get_product_category($post,$in_category,$is_ids = false) {
 		if(!empty($post) and !empty($in_category) and is_array($in_category)){
 
 			$ancestors = array();
@@ -64,17 +64,47 @@ class WBC_Common {
 					$ancestors[] = $id;
 				}				
 			}
-			$term_slug=array_map(array(wbc()->wp,"cat_id2slug"),$ancestors);				
 
-			$matches = array_intersect($in_category,$term_slug);				
-			if(!empty($matches) and is_array($matches)){					
-				$matches = array_values($matches);
-				return $matches[0];
-			} else {
-				return false;
+			if($is_ids){
+				$matches = array_intersect($in_category,$ancestors);				
+				if(!empty($matches) and is_array($matches)){	
+
+					$matches = array_values($matches);
+					return $matches[0];
+				} else {
+					return false;
+				}
+			}else{
+
+				$term_slug=array_map(array(wbc()->wp,"cat_id2slug"),$ancestors);	
+				$matches = array_intersect($in_category,$term_slug);				
+				if(!empty($matches) and is_array($matches)){
+
+					$matches = array_values($matches);
+					return $matches[0];
+				} else {
+					return false;
+				}
 			}
 		} else {
 			return false;
+		}
+	}
+
+	public function is_product_under_category($product,$in_category = null,$in_category_array = null) {
+
+		if (!empty($in_category)) {
+
+			if(has_term($in_category,'product_cat',$product->get_id())){
+
+				return true;
+			} else {
+				
+				return !empty($this->get_product_category($product,array($in_category),true))? true : false;
+			}
+		} else {
+
+			//return $this->get_product_category($product,$in_category);
 		}
 	}
 

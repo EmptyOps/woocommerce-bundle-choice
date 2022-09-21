@@ -66,6 +66,45 @@ class WBC_WC {
         }
     }
 
+    public function get_term_children($id, $taxonomy='product_cat', $format='name') {
+
+        $children_ids = get_term_children( $id, $taxonomy );
+        
+        foreach($children_ids as $children_id){
+            
+            $term = get_term( $children_id, $taxonomy ); 
+            
+            if( $format == 'name' ) {
+
+                $terms_html[] = $term->name;  
+            } else {
+                
+                $term_link = get_term_link( $term, $taxonomy ); 
+                if ( is_wp_error( $term_link ) ) $term_link = '';
+
+                $terms_html[] = '<a href="' . esc_url( $term_link ) . '" rel="tag" class="' . $term->slug . '">' . $term->name . '</a>';
+            }
+        }
+
+        if( $format == 'name' ) {
+
+            return implode( ', ', $terms_html );
+    
+        } else {
+            
+            return '<span class="subcategories-category-id-' . $id . '">' . implode( ', ', $terms_html ) . '</span>';
+        }
+    }
+
+    /////// @shraddha ///////
+    public function get_sub_category_of_category_in_product($id, $product) {
+
+        // ACTIVE_TODO right now we are getting category using a separate get_term_children call but in future we should rely on $product object to get category structure of category and sub-category and from their at the sub-category to get the benefits of cashing and so on of woocommerce.
+
+        return $this->get_term_children($id);
+
+    }
+
     public function is_wc_endpoint_url( $endpoint = false ) {
         
         if(function_exists('is_wc_endpoint_url')) {         
@@ -381,7 +420,7 @@ class WBC_WC {
         return $term->name;
     }
 
-    public function get_productCats($parent_slug = '', $format = ''){
+    public function get_productCats($parent_slug = '', $format = '', $sp_eid_type_value = 'prod_cat'){
         
         $parent = '';
         if( !empty($parent_slug) ) {
@@ -419,7 +458,7 @@ class WBC_WC {
             } elseif( $format == 'detailed_dropdown' ) {
                 $option_list.='<div class="item" data-value="'.$base->term_id.'" data-sp_eid="'.$separator.'prod_cat'.$separator.$base->term_id.'">'.str_replace("'","\'",$base->name).'</div>'.$this->get_productCats($base->slug, $format);
             } elseif( $format == 'detailed') {
-                $option_list[$base->term_id] = array('label'=>str_replace("'","\'",$base->name), 'attr'=>' data-sp_eid="'.$separator.'prod_cat'.$separator.$base->term_id.' " ', $format);
+                $option_list[$base->term_id] = array('label'=>str_replace("'","\'",$base->name), 'attr'=>' data-sp_eid="'.$separator.$sp_eid_type_value.$separator.$base->term_id.' " ', $format);
 
 
                 $option_list = array_replace($option_list, self::get_productCats($base->slug, $format)); //array_merge($option_list, self::get_productCats($base->slug, $format));
@@ -495,7 +534,7 @@ class WBC_WC {
         return $opts_arr;
     } 
 
-    ////// 29-04-2022 -- @shraddha -- for options attribute //////
+    ////// 29-04-2022 -- @shraddha -- for options category //////
     public static function eo_wbc_prime_category($slug='',$prefix='',$opts_arr=array()) {
 
         $separator = wbc()->config->separator();
@@ -524,7 +563,7 @@ class WBC_WC {
         // return $category_option_list;
         return $opts_arr;
     }
-    ////// 29-04-2022 -- @shraddha -- for options attribute //////
+    ////// 29-04-2022 -- @shraddha -- for options attribute/category //////
     public static function wc_data_detailed_dropdown() {
 
         $attribute = self::instance()->eo_wbc_attributes();
@@ -549,6 +588,34 @@ class WBC_WC {
         }
 
         return false;
+    }
+
+    public function get_terms_order_data(){
+
+        $attributes = array();        
+       
+        foreach (wc_get_attribute_taxonomies() as $taxonomy) {
+            
+            
+            $terms=get_terms(array('taxonomy'=>wc_attribute_taxonomy_name($taxonomy->attribute_name),'hide_empty'=>false));
+
+            if(is_wp_error($terms)){
+
+                $terms=get_terms(wc_attribute_taxonomy_name($taxonomy->attribute_name),array('hide_empty'=>false));
+            }
+            
+            if(!empty($terms) and !is_wp_error($terms)){
+               
+                $terms_collaction = array();                
+                foreach ($terms as $term_key => $term_value) {                    
+                    $terms_collaction[str_replace(' ','_',trim($term_value->name))] = $term_key;
+                    
+                }
+                $attributes[wc_attribute_taxonomy_name($taxonomy->attribute_name)] = $terms_collaction;
+            }            
+        }       
+        return $attributes;
+
     }
 
 }

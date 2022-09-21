@@ -6,7 +6,7 @@
  * @package woo-bundle-choice
  *
  * @wordpress-plugin
- * Plugin Name: Woo Choice Plugin | Ring Builder | Pair Maker | Guidance Tool
+ * Plugin Name: Woo Choice Plugin | Ring Builder | Pair Maker | Guidance Tool ui_QCed
  * Plugin URI: https://wordpress.org/plugins/woo-bundle-choice/
  * Description: Product bundling as ring builder for jewelry, pair maker for clothing and guidance tool for home decor, cosmetics etc. Product bundling as per user's choice.
 <<<<<<< HEAD
@@ -189,6 +189,10 @@ if(!class_exists('Woo_Bundle_Choice') ) {
 		}
 
 		public function init() {
+			/*ACTIVE_TODO_OC_START
+			ACTIVE_TODO we need to create one function or flow to call all such hooks related binding from root class init function of this class end sp_index class.
+			ACTIVE_TODO_OC_END*/
+			\eo\wbc\model\data_model\SP_WBC_Product::hooks();
 
 			do_action( 'before_eowbc_load' );
 			

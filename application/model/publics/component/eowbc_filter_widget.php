@@ -870,13 +870,18 @@ class EOWBC_Filter_Widget {
 			}	
 
 			/*if(array_intersect(array(wbc()->options->get_option('filters_altr_filt_widgts','second_category_altr_filt_widgts'),wbc()->options->get_option('filters_altr_filt_widgts','first_category_altr_filt_widgts')),array('fc4','sc4'))){*/
-				ob_start();
+				/*ACTIVE_TODO_OC_START
+				ACTIVE_TODO we have moved below css to standerd asset.php file but we need to move all above js css in this hook as soon as we get chance
+				ACTIVE_TODO_OC_END*/ 
+				// ob_start();
 				?>
-					<style type="text/css">
-						<?php echo wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_additional_css',''); ?>
-					</style>
+					<!-- <style type="text/css"> -->
+						<?php /*echo wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_additional_css','');*/ ?>
+					<!-- </style> -->
 				<?php
-				echo ob_get_clean();
+				// echo ob_get_clean();
+				$this->load_asset(array('filter_assets_php'=> true));
+
 				/*
 			}  */
 			/*if(wbc()->options->get_option('configuration','config_alternate_breadcrumb','default')=='template_1' and wbc()->options->get_option('appearance_breadcrumb','breadcrumb_backcolor_active','#dde5ed')=='#dde5ed'){
@@ -888,7 +893,8 @@ class EOWBC_Filter_Widget {
         }, 10 );
 	
         // wp_register_script('eo_wbc_filter_js',plugins_url('asset/js/eo_wbc_filter.js',__FILE__),array('jquery'));
-		wbc()->load->asset('js','publics/eo_wbc_filter',array('jquery'));
+		// wbc()->load->asset('js','publics/eo_wbc_filter',array('jquery'));
+		$this->load_asset();
 
 		global $wp_query;
 		$site_url = '';
@@ -954,7 +960,29 @@ class EOWBC_Filter_Widget {
 
         /*wp_enqueue_script('eo_wbc_filter_js');*/
         
-	}		
+	}	
+
+	public function load_asset($args = array()){
+
+		if(!empty($args['filter_assets_php'])){
+
+			add_action( ( !is_admin() ? 'wp_enqueue_scripts' : 'admin_enqueue_scripts') ,function(){
+
+				wbc()->load->asset( 'asset.php', constant( 'EOWBC_ASSET_DIR' ).'js/filter.assets.php' );
+				
+			}, 1049);	
+
+		}else{
+
+			add_action( ( !is_admin() ? 'wp_enqueue_scripts' : 'admin_enqueue_scripts') ,function(){
+
+				wbc()->load->asset('js','publics/eo_wbc_filter',array('jquery'));
+				
+			}, 1049);
+
+		}
+
+	}	
 
 	public function product_url() {
 		$url = '';
@@ -1612,9 +1640,9 @@ class EOWBC_Filter_Widget {
 					<?php if(empty(wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','filter_setting_btnfilter_now'))): ?>
 
 						//////// 27-05-2022 - @drashti /////////
-						--add to be confirmed--
-						window.document.splugins.wbc.filters.core.eo_wbc_filter_change_wrapper(false,'form#<?php echo $this->filter_prefix; ?>eo_wbc_filter','',{'this':this,'event':event});
-						jQuery.fn.eo_wbc_filter_change(false,'form#<?php echo $this->filter_prefix; ?>eo_wbc_filter','',{'this':this,'event':event});
+						// --add to be confirmed--
+						window.document.splugins.wbc.filters.api.eo_wbc_filter_change_wrapper(false,'form#<?php echo $this->filter_prefix; ?>eo_wbc_filter','',{'this':this,'event':event});
+						// jQuery.fn.eo_wbc_filter_change(false,'form#<?php /*echo $this->filter_prefix;*/ ?>eo_wbc_filter','',{'this':this,'event':event});
 						////////////////////////////////////////
 					<?php endif; ?>
 				});
@@ -1762,7 +1790,7 @@ class EOWBC_Filter_Widget {
 
 			// 	$this->input_step_slider($this->__prefix,$item/*$item['name'],$item['label'],$item['type'],0,$item['column_width'],0,(isset($item['popup'])?$item['popup']:false),$advance*/);		
 			// }
-			elseif($item['type']==0 || $item['type']==1 ) {				
+			elseif($item['type']==0 || $item['type']==1 || $item['type']=='two_tabs') {				
 				switch ($item['input']) {
 					case 'icon':
 					case 'icon_text':												
@@ -1828,7 +1856,7 @@ class EOWBC_Filter_Widget {
 
 					//$this->input_step_slider($this->__prefix,$item/*$item['name'],$item['label'],$item['type'],1,$item['column_width'],$reset=!empty($item['reset'])*/);		
 				//}
-				elseif($item['type']==0 || $item['type']==1 ) {
+				elseif($item['type']==0 || $item['type']==1 || $item['type']=='two_tabs' ) {
 					switch ($item['input']) {
 						case 'icon':
 						case 'icon_text':												
@@ -1939,7 +1967,7 @@ class EOWBC_Filter_Widget {
 								if( !empty( $term ) and !is_wp_error( $term ) ) {
 									$this->___category[] = $term->slug;
 								}
-						} elseif ($item['type']==0 ) {
+						} elseif ($item['type']==0 || $item['type']=='two_tabs') {
 							//on 27-06-2020 now added support for all missing input types. as discussed between hiren and mahesh. 
 							// $this->input_step_slider($item['name'],$item['label'],$item['type'],1,100,$reset=!empty($item['reset']));		
 							switch ($item['input']) {
@@ -2145,7 +2173,17 @@ class EOWBC_Filter_Widget {
 
 				}
 
-				$mark = in_array($term_item->id,$query_list);				
+				$query_params = \eo\wbc\model\SP_WBC_Router::instance()->get_query_params_formatted('url_and_filter_form', array('attr'), 'REQUEST', null);
+				$query_paramas_options = null;
+				if(in_array($term->slug , $query_params)){
+
+					$query_paramas_options = \eo\wbc\model\SP_WBC_Router::instance()->get_query_params_formatted('url_and_filter_form', array('attr_options', $term->slug) , 'REQUEST', null);
+				}			
+
+				// $mark = in_array($term_item->id,$query_list);				
+				$mark = in_array($term_item->slug,$query_paramas_options);				
+
+				// ACTIVE_TODO if non edit required to be supported by our new router based url attribute support than need to manage below 
 				if($non_edit==false && in_array($term_item->id,$query_list)) {
 					$non_edit=true;						
 				}
@@ -2160,16 +2198,24 @@ class EOWBC_Filter_Widget {
 
 				if(empty($icon)) {					
 					$icon = $woocommerce->plugin_url() . '/assets/images/placeholder.png';
-				}
+				}			
 				
 				if(!empty(wbc()->sanitize->get('CAT_LINK'))) {
-					$query_list = array_filter(explode('|',str_replace([' ','+',','],'|',wbc()->sanitize->get('CAT_LINK'))));
+					// -- need to plan flow for this -- to h
+						// NOTE: since we are just continuing with older flow of m so nothing to here as of now, but if required than we need to manage     
+					$query_list = array_filter(explode('|',str_replace([' ','+',','],'|',\eo\wbc\model\SP_WBC_Router::instance()->set_query_params_formatted( 'to_filter_field', 
+												                array('prod_cat'), 
+												                \eo\wbc\model\SP_WBC_Router::instance()->get_query_params_formatted('url_and_form_field_raw',
+																				                array('prod_cat'),
+																				                'REQUEST',
+																				                null))/*wbc()->sanitize->get('CAT_LINK')*/)));
 
 					/*$query_list = explode('|', str_replace('' wbc()->sanitize->get('CAT_LINK') );*/
 
 				}
 
 				$mark = in_array($term_item->slug,$query_list);
+
 				if($non_edit==false && in_array($term_item->slug,$query_list)) {
 					$non_edit=true;						
 				}
@@ -2339,9 +2385,9 @@ class EOWBC_Filter_Widget {
 						<?php if(empty(wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','filter_setting_btnfilter_now'))): ?>
 
 						//////// 27-05-2022 - @drashti /////////
-						--add to be confirmed--
-						window.document.splugins.wbc.filters.core.eo_wbc_filter_change_wrapper(false,'form#<?php echo $this->filter_prefix; ?>eo_wbc_filter','',{'this':this,'event':event});
-						jQuery.fn.eo_wbc_filter_change(false,'form#<?php echo $this->filter_prefix; ?>eo_wbc_filter','',{'this':this,'event':event});
+						// --add to be confirmed--
+						window.document.splugins.wbc.filters.api.eo_wbc_filter_change_wrapper(false,'form#<?php echo $this->filter_prefix; ?>eo_wbc_filter','',{'this':this,'event':event});
+						// jQuery.fn.eo_wbc_filter_change(false,'form#<?php /*echo $this->filter_prefix;*/ ?>eo_wbc_filter','',{'this':this,'event':event});
 						////////////////////////////////////////
 
 						<?php endif; ?>
@@ -2757,44 +2803,141 @@ class EOWBC_Filter_Widget {
 		    							
 		<?php 
 
-		if(
-				!empty(wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','filter_setting_advance_two_tabs',false)) 
-				and 
-				!empty(wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','filter_setting_advance_first_tabs',false))
-				and
-				!empty(wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','filter_setting_advance_second_tabs',false))
-				and 
-				!empty(wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','filter_setting_advance_first_category',false))
-				and 
-				!empty(wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','filter_setting_advance_second_category',false))
-			) {
-			
-			$filter_sets = unserialize(wbc()->options->get_option_group('filters_filter_set',"a:0:{}"));
+		// filter_sets_data
+		// ACTIVE_TODO/TODO here our asssumption is that the $current_category is pointing to root category but if it is not true than we mange here.
+		$is_first_category = false;
+		$is_second_category = false;
+		if(\eo\wbc\model\SP_WBC_Router::instance()->is_first_category(null, $current_category)){
 
-			$filter_sets_first_tab = wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','filter_setting_advance_first_tabs',false);
+			$is_first_category = true;
 
-			$filter_sets_second_tab = wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','filter_setting_advance_second_tabs',false);
+		} elseif(\eo\wbc\model\SP_WBC_Router::instance()->is_second_category(null, $current_category)){
+
+			$is_second_category = true;
+		}
+
+		// wbc_pr($current_category); 
+		// wbc_pr(wbc()->options->get_option('configuration','first_slug')); 
+		// wbc_pr($is_second_category );
+		// die();
+
+		$filter_sets_data = array();
+
+		$filter_sets = unserialize(wbc()->options->get_option_group('filters_'.$this->filter_prefix.'filter_set',"a:0:{}"));
+		foreach ($filter_sets as $filter_sets_key => $filter_sets_val) {
+
+			$filter_sets_first_tab = $filter_sets_key/*wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','filter_setting_advance_first_tabs',false)*/;
+
+			// $filter_sets_second_tab = wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','filter_setting_advance_second_tabs',false);
+
+			$is_continue = true;
+			if ($is_first_category) {
+
+				if(!empty($filter_sets[$filter_sets_first_tab]['filter_set_two_tabs_first'])){
+
+					$is_continue = false;
+				}
+
+			} elseif($is_second_category){
+
+				if(!empty($filter_sets[$filter_sets_first_tab]['filter_set_two_tabs_second'])){
+
+					$is_continue = false;
+				}
+
+			} else{
+
+				$is_continue = true;
+			}
+
+			if ($is_continue) {
+				
+				continue;
+			}
 
 			$filter_sets_first = ( (empty($filter_sets[$filter_sets_first_tab]) or empty($filter_sets[$filter_sets_first_tab]['filter_set_name'])) ? $filter_sets_first_tab : $filter_sets[$filter_sets_first_tab]['filter_set_name'] );
 
 
-			$first_sets_category = wbc()->wc->get_term_by('term_taxonomy_id',wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','filter_setting_advance_first_category',false),'product_cat');
+			$first_sets_category = wbc()->wc->get_term_by('term_taxonomy_id',/*wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','filter_setting_advance_first_category',false)*/$filter_sets[$filter_sets_first_tab]['filter_set_category'],'product_cat');
 			if(!empty($first_sets_category) and !is_wp_error($first_sets_category)){
 				$first_sets_category = $first_sets_category->slug;
 			}
 
-			$filter_sets_second = ( (empty($filter_sets[$filter_sets_second_tab]) or empty($filter_sets[$filter_sets_second_tab]['filter_set_name'])) ? $filter_sets_second_tab : $filter_sets[$filter_sets_second_tab]['filter_set_name'] );
+			// $filter_sets_second = ( (empty($filter_sets[$filter_sets_second_tab]) or empty($filter_sets[$filter_sets_second_tab]['filter_set_name'])) ? $filter_sets_second_tab : $filter_sets[$filter_sets_second_tab]['filter_set_name'] );
 
-			$second_sets_category = wbc()->wc->get_term_by('term_taxonomy_id',wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','filter_setting_advance_second_category',false),'product_cat');
-			if(!empty($second_sets_category) and !is_wp_error($second_sets_category)){
-				$second_sets_category = $second_sets_category->slug;
-			}
+			// $second_sets_category = wbc()->wc->get_term_by('term_taxonomy_id',wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','filter_setting_advance_second_category',false),'product_cat');
+			// if(!empty($second_sets_category) and !is_wp_error($second_sets_category)){
+			// 	$second_sets_category = $second_sets_category->slug;
+			// }
 
 			/*var_dump($current_category);
 			var_dump($first_sets_category);
 			die();*/
 
-			if($current_category === $first_sets_category ){
+			$tab_data = array(
+					'first_tab_label'=>$filter_sets_first,
+					'first_tab_id'=>$filter_sets_first_tab,
+					'first_tab_category'=>$first_sets_category,
+				);
+			
+			if(
+				!empty($filter_sets_first) 
+				and 
+				!empty($filter_sets_first_tab)
+				and 
+				!empty($first_sets_category)
+			){
+
+				array_push($filter_sets_data,$tab_data);
+
+			}	
+		
+		}
+
+		if(
+				// !empty(wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','filter_setting_advance_two_tabs',false)) 
+				// and 
+				// !empty(wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','filter_setting_advance_first_tabs',false))
+				// and
+				// !empty(wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','filter_setting_advance_second_tabs',false))
+				// and 
+				// !empty(wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','filter_setting_advance_first_category',false))
+				// and 
+				// !empty(wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','filter_setting_advance_second_category',false))
+
+				sizeof($filter_sets_data) >= 2
+			) {
+			
+			// --- aa code if condition ni bar muki ne loop chalavu se ---
+			// 	--- start ---
+			// $filter_sets = unserialize(wbc()->options->get_option_group('filters_filter_set',"a:0:{}"));
+
+			// $filter_sets_first_tab = wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','filter_setting_advance_first_tabs',false);
+
+			// $filter_sets_second_tab = wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','filter_setting_advance_second_tabs',false);
+
+			// $filter_sets_first = ( (empty($filter_sets[$filter_sets_first_tab]) or empty($filter_sets[$filter_sets_first_tab]['filter_set_name'])) ? $filter_sets_first_tab : $filter_sets[$filter_sets_first_tab]['filter_set_name'] );
+
+
+			// $first_sets_category = wbc()->wc->get_term_by('term_taxonomy_id',wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','filter_setting_advance_first_category',false),'product_cat');
+			// if(!empty($first_sets_category) and !is_wp_error($first_sets_category)){
+			// 	$first_sets_category = $first_sets_category->slug;
+			// }
+
+			// $filter_sets_second = ( (empty($filter_sets[$filter_sets_second_tab]) or empty($filter_sets[$filter_sets_second_tab]['filter_set_name'])) ? $filter_sets_second_tab : $filter_sets[$filter_sets_second_tab]['filter_set_name'] );
+
+			// $second_sets_category = wbc()->wc->get_term_by('term_taxonomy_id',wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','filter_setting_advance_second_category',false),'product_cat');
+			// if(!empty($second_sets_category) and !is_wp_error($second_sets_category)){
+			// 	$second_sets_category = $second_sets_category->slug;
+			// }
+				
+			// /*var_dump($current_category);
+			// var_dump($first_sets_category);
+			// die();*/
+			// 	--- end ---
+
+			// NOTE: here now this condition is no more necessary so added true or condition below. but in fuser if any issue comes up then we may need to double confirm our decision here. 
+			if(true or $current_category === $first_sets_category ){
 				$non_adv_ordered_filter = array_merge(
 						[array(
 							$prefix.'_fconfig_input_type'=>'two_tabs',
@@ -2802,15 +2945,26 @@ class EOWBC_Filter_Widget {
 							'input'=>'two_tabs',
 							'name'=>'two_tabs',
 							'advance'=>false,
-							'first_tab_label'=>$filter_sets_first,
-							'first_tab_id'=>$filter_sets_first_tab,
-							'first_tab_category'=>$first_sets_category,
-							'second_tab_label'=>$filter_sets_second,
-							'second_tab_id'=>$filter_sets_second_tab,
-							'second_tab_category'=>$second_sets_category,
+							// 'first_tab_label'=>$filter_sets_first,
+							// 'first_tab_id'=>$filter_sets_first_tab,
+							// 'first_tab_category'=>$first_sets_category,
+							// 'second_tab_label'=>$filter_sets_second,
+							// 'second_tab_id'=>$filter_sets_second_tab,
+							// 'second_tab_category'=>$second_sets_category,
+							'filter_sets_data'=>$filter_sets_data,
 						)],array_values($non_adv_ordered_filter));			
 			}
 		}
+
+
+		// filter_sets_confings
+		$filter_sets_confings = array();
+		$filter_sets_confings['filter_setting_alternate_mobile'] = wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile');
+		$filter_sets_confings['filter_prefix'] = $this->filter_prefix;
+		$filter_sets_confings['filter_sets_data'] = $filter_sets_data;
+
+		wbc()->load->asset('localize','filter_sets',array("filter_sets_confings" => $filter_sets_confings));
+
 
 		/*echo "non_adv_ordered_filter and adv_ordered_filter dump 1";
 		wbc()->common->pr($non_adv_ordered_filter);
@@ -2828,7 +2982,6 @@ class EOWBC_Filter_Widget {
 	}
 
 	public function load_filters($non_adv_ordered_filter,$adv_ordered_filter){
-
 		wbc()->load->template('publics/filters/load_filters',array('non_adv_ordered_filter'=>$non_adv_ordered_filter,'adv_ordered_filter'=>$adv_ordered_filter,'filter_ui'=>$this));		
 	}
 
@@ -2868,5 +3021,10 @@ class EOWBC_Filter_Widget {
 			\EOWBC_Error_Handler::log('Could not find current category in eo\wbc\model\publics\component\EO_WBC_Filter_Widget');
 		}
 	}
+
+	public function get_filter_sets($filter_prefix=''){
+
+		return /*$filter_sets =*/ unserialize(wbc()->options->get_option_group('filters_'.$filter_prefix.'filter_set',"a:0:{}"));
+	}	
 }	
 ?>

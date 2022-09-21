@@ -19,7 +19,7 @@ class Options extends \eo\wbc\controllers\publics\Controller {
         
     }
 
-    public function should_init(){
+    public static function should_init($args = array()){
     	return true;
     }
     public function init($args = array()){
@@ -729,7 +729,8 @@ class Options extends \eo\wbc\controllers\publics\Controller {
 
 		// put ui-builder in autoloader function in config file and then remove load model ui builder statement from everywhere -- to b
 		$ui = $this->render_woo_dropdown_attribute_html_data($data,$args);
-		//echo ">!>!>!";
+		// echo ">!>!>!";
+		// wbc_pr($ui); /*die();*/
         \sp\theme\view\ui\builder\Page_Builder::instance()->build_page_widgets($ui,'woo_dropdown_attribute_html');
         //echo "<<<<<>!>!>!";
 		$html = apply_filters('sp_render_swatches_data_by_attribute_type',null,$data);

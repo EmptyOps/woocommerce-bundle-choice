@@ -2,6 +2,37 @@
 <?php
 // --- a code /woo-bundle-choice/application/model/publics/sp-model-single-product.php no che
 ?>
+
+<!-- /*tejas_22_07_2022 it for new QC upgrades so it is permenent*/ -->
+<?php
+if( is_product() ) {
+?>
+
+<style type="text/css">
+	table.variations tbody>tr:nth-child(odd)>td, table.variations tbody>tr:nth-child(odd)>th {
+	    background: transparent;
+	}
+
+	.woocommerce div.product form.cart .variations {
+	    display: inline-block;
+	}
+	.woocommerce div.product form.cart .variations th.label {
+	    padding: 15px 5px;
+	}
+	table.variations tbody tr:hover>td, table.variations tbody tr:hover>th {
+	    background-color: #fff;
+	}
+	.woocommerce div.product form.cart .variations th.label label {
+	    font-size: 15px;
+	    line-height: 1.1;
+	    text-transform: capitalize;
+	    text-align:left;
+	}
+	.woocommerce div.product form.cart .variations td, .woocommerce div.product form.cart .variations th {
+	    vertical-align: top;
+	}
+</style>
+
 <style type="text/css">
 	.ui.mini.images .variable-item.image{
 		width: auto;						
@@ -154,7 +185,396 @@
 		background-color: <?php _e($bg_hover_color); ?>;
 		color: <?php _e($font_hover_color); ?>;	
 	}
+
+
+	/*--color-disable*/
+	.disabled .spui_color_variable_item_contents::before{
+        background-image: var(--spui-dis-check);
+        background-position: 50%;
+        background-repeat: no-repeat;
+        background-size: 100%;
+        content: " ";
+        display: block;
+        height: 100%;
+        position: absolute;
+        width: 100%;
+    }
+
+	/*coman*/
+    .disabled {
+        cursor: not-allowed !important;
+        overflow: hidden;
+        pointer-events: all;
+        position: relative;
+        color: rgba(101,101,101,.5)!important;
+    }
+
+    
+	/*--btn-disabled--*/
+
+	.disabled .spui_button_variable_item_contents::before{
+        background-image: var(--spui-dis-check);
+        background-position: 50%;
+        background-repeat: no-repeat;
+        background-size: 100%;
+        content: " ";
+        display: block;
+        height: 100%;
+        position: absolute;
+        width: 100%;
+    }
+
+    /*------Out-OF-Stock-----*/
+    .out-of-stock {
+        cursor: not-allowed !important;
+        display: inline-block;
+        pointer-events: none;
+    }
+    /*--OutStock_Color--*/
+     .out-of-stock .spui_color_variable_item_contents {
+        opacity: .6;
+    }
+    
+    .out-of-stock .spui_color_variable_item_contents::before {
+        position: absolute;
+        content: "";
+        background-image: var(--spui-dis-check);
+        background-position: 50%;
+        background-repeat: no-repeat;
+        background-size: 100%;
+        display: block;
+        height: 100%;
+        width: 100%;
+    }
+    /*--OutStock_button--*/
+     .out-of-stock .spui_button_variable_item_contents{
+        opacity: .6;
+    }
+
+    .out-of-stock .spui_button_variable_item_contents::before {
+        position: absolute;
+        content: "";
+        background-image: var(--spui-dis-check);
+        background-position: 50%;
+        background-repeat: no-repeat;
+        background-size: 100%;
+        display: block;
+        height: 100%;
+        width: 100%;
+    }
+    /*--Outstck_Image---*/
+
+   .out-of-stock .spui_color_icon_variable_item_contents {
+       opacity: .6;
+    }
+   
+
+    .out-of-stock .spui_color_icon_variable_item_contents::before {
+        position: absolute;
+        content: "";
+        background-image: var(--spui-dis-check);
+        background-position: 50%;
+        background-repeat: no-repeat;
+        background-size: 100%;
+        display: block;
+        height: 100%;
+        width: 100%;
+    }
+
 </style>
+
+<?php 
+} 
+
+if(is_shop() || is_product_category()) {
+?>
+
+	<!--Color-->
+	<style>
+	    .spui_color_widget{
+	        float: left;
+	        width: 100%;
+	    }
+	    .spui_color_widget ul {
+	        float: left;
+	        width: 100%;
+	        display: flex;
+	        flex-wrap: wrap;
+	        justify-content: flex-start;
+	        list-style-type: none;
+	        padding: 0;
+	        margin: 0;
+	    }
+	    .spui_color_widget ul li{
+	        margin: 4px;
+	        padding: 2px;
+	        position: relative;
+	        width: 30px;
+	        height: 30px;
+	        background: #ffffff;
+	        color: #000;
+	        border-radius: 2px;
+	        box-shadow: 0 0 0 1px #a8a8a8;
+	        cursor: pointer;
+	    }
+
+	    .spui_color_widget ul li .spui_color_variable_item_contents {
+	        float: left;
+	        -webkit-box-orient: vertical;
+	        -webkit-box-direction: normal;
+	        -webkit-box-pack: center;
+	        -ms-flex-pack: center;
+	        display: -webkit-box;
+	        display: -ms-flexbox;
+	        display: flex;
+	        -ms-flex-direction: column;
+	        flex-direction: column;
+	        height: 100%;
+	        justify-content: center;
+	        position: relative;
+	        width: 100%;
+	    }
+	    .spui_color_widget ul li.spui_color_variable_item.selected {
+	        box-shadow: 0 0 0 2px #000000;
+	    }
+	    .spui_color_widget ul li .spui_color_variable_item_contents span.spui_variable_item_span_color {
+	        display: block;
+	        height: 100%;
+	        width: 100%;
+	    }
+
+	</style>
+
+	<!--button-->
+	<style>
+	    /*.spui_size_widget{
+	        float: left;
+	        width: 100%;
+	    }
+	    .spui_size_widget ul{
+	        -webkit-box-pack: start;
+	        -ms-flex-pack: start;
+	        display: -webkit-box;
+	        display: -ms-flexbox;
+	        display: flex;
+	        -ms-flex-wrap: wrap;
+	        flex-wrap: wrap;
+	        justify-content: flex-start;
+	        list-style: none;
+	        margin: 0;
+	        padding: 0;
+	    }
+	    .spui_size_widget ul li{
+	        margin: 4px;
+	        padding: 2px;
+	        position: relative;
+	        width: 30px;
+	        height: 30px;
+	        line-height: 30px;
+	        text-align: center;
+	        background: #ffffff;
+	        color: #000;
+	        border-radius: 2px;
+	        box-shadow: 0 0 0 1px #a8a8a8;
+	        cursor: pointer;
+	    }
+	    .spui_size_widget ul li.spui_size_variable_item.selected{
+	        box-shadow: 0 0 0 2px #000000;
+	    }
+	    .spui_size_widget ul li .spui_size_variable_item_contents {
+	        -webkit-box-orient: vertical;
+	        -webkit-box-direction: normal;
+	        -webkit-box-pack: center;
+	        -ms-flex-pack: center;
+	        display: -webkit-box;
+	        display: -ms-flexbox;
+	        display: flex;
+	        -ms-flex-direction: column;
+	        flex-direction: column;
+	        height: 100%;
+	        justify-content: center;
+	        position: relative;
+	        width: 100%;
+	    }
+	    .spui_size_widget ul li .spui_size_variable_item_contents span.spui_variable_item_span_size {
+	        padding: 0 5px;
+	    }*/
+	/*=====BUTTON_START====*/
+    .spui_button_widget{
+        float: left;
+        width: 100%;
+    }
+    .spui_button_widget ul{
+        -webkit-box-pack: start;
+        -ms-flex-pack: start;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+    .spui_button_widget ul li{
+        margin: 4px;
+        padding: 2px;
+        position: relative;
+        min-width: 30px;
+        height: 30px;
+        line-height: 30px;
+        text-align: center;
+        background: #ffffff;
+        color: #000;
+        border-radius: 2px;
+        box-shadow: 0 0 0 1px #a8a8a8;
+        cursor: pointer;
+    }
+    .spui_button_widget ul li.spui_button_variable_item.selected{
+        box-shadow: 0 0 0 2px #000000;
+    }
+    .spui_button_widget ul li .spui_button_variable_item_contents {
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        height: 100%;
+        justify-content: center;
+        position: relative;
+        width: 100%;
+    }
+    .spui_button_widget ul li .spui_button_variable_item_contents span.spui_variable_item_span_button {
+        padding: 0 5px;
+    }
+
+
+    /*.disabled .spui_button_variable_item_contents::before{
+        background-image: var(--spui-dis-check);
+        background-position: 50%;
+        background-repeat: no-repeat;
+        background-size: 100%;
+        content: " ";
+        display: block;
+        height: 100%;
+        position: absolute;
+        width: 100%;
+    }
+*/
+    /*=====BUTTON_END====*/
+
+
+	</style>
+
+	<!--image-->
+	<style>
+	   :root {
+	        --spui-check: url("data:image/svg+xml;utf8,%3Csvg filter='drop-shadow(0px 0px 2px rgb(0 0 0 / .8))' xmlns='http://www.w3.org/2000/svg'  viewBox='0 0 30 30'%3E%3Cpath fill='none' stroke='%23ffffff' stroke-linecap='round' stroke-linejoin='round' stroke-width='4' d='M4 16L11 23 27 7'/%3E%3C/svg%3E");
+	        --spui-dis-check:url("data:image/svg+xml;utf8,%3Csvg filter='drop-shadow(0px 0px 5px rgb(255 255 255 / .6))' xmlns='http://www.w3.org/2000/svg' width='72px' height='72px' viewBox='0 0 24 24'%3E%3Cpath fill='none' stroke='%23ff0000' stroke-linecap='round' stroke-width='0.6' d='M5 5L19 19M19 5L5 19'/%3E%3C/svg%3E");
+	    }
+	    .spui_color_icon_widget{
+	        float: left;
+	        width: 100%; 
+	    }
+	    .spui_color_icon_widget ul{
+	        -webkit-box-pack: start;
+	        -ms-flex-pack: start;
+	        display: -webkit-box;
+	        display: -ms-flexbox;
+	        display: flex;
+	        -ms-flex-wrap: wrap;
+	        flex-wrap: wrap;
+	        justify-content: flex-start;
+	        list-style: none;
+	        margin: 0;
+	        padding: 0; 
+	    }
+	    .spui_color_icon_widget ul li.spui_color_icon_variable_item{
+	        margin: 4px;
+	        padding: 2px;
+	        position: relative;
+	        width: 30px;
+	        height: 30px;
+	        line-height: 30px;
+	        text-align: center;
+	        background: #ffffff;
+	        color: #000;
+	        border-radius: 2px;
+	        box-shadow: 0 0 0 1px #a8a8a8;
+	        cursor: pointer;
+	    }
+	    .spui_color_icon_widget ul li.spui_color_icon_variable_item .spui_color_icon_variable_item_contents{
+	        webkit-box-orient: vertical;
+	        -webkit-box-direction: normal;
+	        -webkit-box-pack: center;
+	        -ms-flex-pack: center;
+	        display: -webkit-box;
+	        display: -ms-flexbox;
+	        display: flex;
+	        -ms-flex-direction: column;
+	        flex-direction: column;
+	        height: 100%;
+	        justify-content: center;
+	        position: relative;
+	        width: 100%;
+	    }
+	    .spui_color_icon_widget ul li.spui_color_icon_variable_item .spui_color_icon_variable_item_contents img.spui_variable_item_image {
+	        display: block;
+	        max-width: 100%;
+	        margin: auto;
+	    }
+	    .spui_color_icon_widget ul li.spui_color_icon_variable_item.selected {
+	        box-shadow: 0 0 0 2px #000000;
+	    }
+	    .spui_color_icon_widget ul li.spui_color_icon_variable_item.selected .spui_color_icon_variable_item_contents::before{
+	        background-image: var(--spui-check);
+	        background-position: 50%;
+	        background-repeat: no-repeat;
+	        background-size: 60%;
+	        content: " ";
+	        display: block;
+	        height: 100%;
+	        position: absolute;
+	        width: 100%;
+	    }
+	    .spui_color_icon_widget ul li.spui_color_icon_variable_item.disabled .spui_color_icon_variable_item_contents::before{
+	        background-image: var(--spui-dis-check);
+	        background-position: 50%;
+	        background-repeat: no-repeat;
+	        background-size: 60%;
+	        content: " ";
+	        display: block;
+	        height: 100%;
+	        position: absolute;
+	        width: 100%;
+	    }
+
+	</style>
+	<style type="text/css">
+		/*---more-css---*/
+	    .spui_swatches_more__container {
+	        width: auto !important;
+	        height: auto !important;
+	        box-shadow: none !important;
+	        border-radius: 0 !important;
+	        align-self: center !important;
+	    }
+	    .spui_swatches_more__container a{ 
+	        color: #0274be !important;
+	        text-decoration: none !important;
+	        display: block !important;
+	    }
+	</style>
+	
+<?php	
+}
+?>
+
 <script>
 	<?php 
 	if(!has_action('woocommerce_before_variations_form')) {
@@ -165,6 +585,8 @@
 	
 	jQuery(document).ready(function($){
 		// ACTIVE_TODO below sections might be of use so keeping it on for now, but we must double confirm like legacy woo js layers provide full dropdown template supports. but i think still sementic specific matters need to be managed because we are using sementic templates.
+			do we need to disable the blow change event implimention -- to h
+			 	eithere way blowo class would be loading only when the dropdown template of simentic is used on item page -- to h
 		jQuery(".dropdown").dropdown().on('change',function(){
 			var target_selector =  $('#'+$(this).find('input[type="hidden"]').data('id'));
 			target_selector.val($(this).find('input[type="hidden"]').val());
@@ -173,6 +595,10 @@
 			jQuery(".variations_form" ).trigger('check_variations');
 			$(target_selector).trigger('change');
 		});
+
+
+		ACTIVE_TODO we shoud simply put this class on the perticuler template html dom and coment the code below -- to h & -- to s
+			for now lats comment the code but after confirming with t -- to t
 		if($('table.variations tbody>tr').length>0){
 			$('table.variations').addClass('ui raised segment');	
 		}
@@ -210,3 +636,34 @@
 		
 	});
 </script>
+
+/*---TOOLTIP--- @tejas*/
+/*----JS----*/
+<script type="text/javascript">
+jQuery( document ).ready(function() {
+    jQuery('[data-toggle="popover"]').popover(); 
+});
+</script>
+/*----CSS---*/
+<style type="text/css">
+	:root{
+        --spui_tooltip_bg:#8224e3;
+        --spui_tooltip_text:#fff;
+        --spui_tooltip_textsize:0.8rem;
+        --spui_tooltip_padding:.5rem 1.75rem;
+        --spui_tooltip_body:none;
+    }
+    .popover-header{
+        background: var(--spui_tooltip_bg);
+        color: var(--spui_tooltip_text);
+        font-size: var(--spui_tooltip_textsize);
+        font-weight: normal;
+        padding: var(--spui_tooltip_padding);
+    }
+    .popover-body{
+        display: var(--spui_tooltip_body);
+    }
+    .bs-popover-auto[x-placement^=top]>.arrow::after, .bs-popover-top>.arrow::after{
+        border-top-color:var(--spui_tooltip_bg);
+    }
+</style>

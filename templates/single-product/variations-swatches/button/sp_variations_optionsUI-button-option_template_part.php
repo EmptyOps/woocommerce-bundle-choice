@@ -14,7 +14,7 @@ $slug_or_option = is_object($term) ? $term->slug : $term;
 
 $template = array(
     'type' => 'div',
-    'class' => 'variable-item-span variable-item-span-'.esc_attr( $variable_item_data['options_loop_type'][$slug_or_option]). ' spui-wbc-swatches-variable-item spui-wbc-swatches-variable-item-'.$variable_item_data['options_loop_type'][$slug_or_option].' variable-item-'.wbc()->common->current_theme_key().' variable-item-'.esc_attr( $variable_item_data['options_loop_type'][$slug_or_option] ).'-'.wbc()->common->current_theme_key(),
+    'class' => 'variable-item-span variable-item-span-'.esc_attr( $variable_item_data['options_loop_type'][$slug_or_option]),
     'preHTML' => esc_html( $term->name ),
 );
 

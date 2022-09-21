@@ -366,7 +366,7 @@ class Eowbc_Model {
 				$this->legacy_admin_css();	
 			} 
 
-			wbc()->load->asset('js','admin-js');
+			wbc()->load->asset('js','admin-js',array('jquery'),"0.1.4",false,true,null,null,true);
 			wp_localize_script(
 			    'admin-js',
 			    'eowbc_object',

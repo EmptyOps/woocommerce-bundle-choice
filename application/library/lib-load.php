@@ -19,7 +19,42 @@ if(!class_exists('WBC_Loader')) {
 			//	no implemetations 
 		}
 
-		public function asset($type,$path,$param = array(),$version="",$load_instantly=false,$is_prefix_handle=false,$localize_var=null,$localize_var_val=null) {
+		// ACTIVE_TODO we mostly confirmed that built in asset function ned to be createad, we had some older points noted some wher retlated to simantic loding and as of now allso keeping in mind thei ui builder -- to h and -- to b
+		// 	-- ACTIVE_TODO the main idea for above function is to allways ensure commun handler key for given biltin asset -- to h and -- to b
+		public function built_in_asset($asset_group) {
+			
+			/*if(!apply_filters('wbc_load_asset_filter',true,$asset_group,$path,$deps,$version,$load_instantly)) {
+				return true;
+			}*/
+
+			switch ($asset_group) {
+				case 'bootstrap':
+					if (false) {
+						?>
+						<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+						<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+						<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+						<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+						<?php
+					}
+					wbc()->load->asset('css','https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css',array(),"",false,true,null,null,false,true);
+					wbc()->load->asset('js','https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js',array('jquery'),"",false,true,null,null,false,true);
+					wbc()->load->asset('js','https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js',array('jquery'),"",false,true,null,null,false,true);			
+				case 'semantic':
+					//ACTIVE_TODO update code below to use wbc()->load->asset function call insted of below dairact wp api call.
+					add_action( 'wp_enqueue_scripts',function() { 
+		        	
+		            wp_register_style('fomantic-semantic.min',constant('EOWBC_ASSET_URL').'css/fomantic/semantic.min.css');
+		            wp_enqueue_style( 'fomantic-semantic.min');
+		            wp_register_script('fomantic-semantic.min',constant('EOWBC_ASSET_URL').'js/fomantic/semantic.min.js',array('jquery'),false);    
+		            wp_enqueue_script( 'fomantic-semantic.min');        
+		        },100);		
+				default:				
+					break;
+			}			
+		}
+ 
+		public function asset($type,$path,$param = array(),$version="",$load_instantly=false,$is_prefix_handle=false,$localize_var=null,$localize_var_val=null,$in_footer = false,$is_absolute_url = false) {
 			
 			if(!apply_filters('wbc_load_asset_filter',true,$type,$path,$param,$version,$load_instantly)) {
 				return true;
@@ -29,7 +64,12 @@ if(!class_exists('WBC_Loader')) {
 			$_handle = ( $is_prefix_handle ? "sp_wbc_" : "" ) . str_replace(' ','-',str_replace('/','-',$path));			
 			switch ($type) {
 				case 'css':
-					$_path = constant('EOWBC_ASSET_URL').'css'.'/'.$path.'.css';
+					if ($is_absolute_url) {
+						$_path = $_path;
+					}else {
+						$_path = constant('EOWBC_ASSET_URL').'css'.'/'.$path.'.css';
+					}
+
 					if($load_instantly) {
 						echo '<link rel="stylesheet" type="text/css" href="'.$_path.'">';
 					}
@@ -44,7 +84,11 @@ if(!class_exists('WBC_Loader')) {
 					}
 					break;
 				case 'js':
-					$_path = constant('EOWBC_ASSET_URL').'js'.'/'.$path.'.js';	
+					if ($is_absolute_url) {
+						$_path = $_path;
+					}else {
+						$_path = constant('EOWBC_ASSET_URL').'js'.'/'.$path.'.js';	
+					}
 
 					if($load_instantly) {
 
@@ -57,10 +101,10 @@ if(!class_exists('WBC_Loader')) {
 							}
 
 							if(empty($version)) {
-								wp_register_script($_handle, $_path, $param );
+								wp_register_script($_handle, $_path, $param, false, $in_footer );
 							}
 							else {
-								wp_register_script($_handle, $_path, $param, $version );
+								wp_register_script($_handle, $_path, $param, $version, $in_footer );
 							}				
 							wp_enqueue_script($_handle);					
 
@@ -82,12 +126,12 @@ if(!class_exists('WBC_Loader')) {
 
 						}
 
-						if(empty($version)) {
-							wp_register_script($_handle, $_path, $param );
-						}
-						else {
-							wp_register_script($_handle, $_path, $param, $version );
-						}				
+							if(empty($version)) {
+								wp_register_script($_handle, $_path, $param, false, $in_footer );
+							}
+							else {
+								wp_register_script($_handle, $_path, $param, $version, $in_footer );
+							}				
 						wp_enqueue_script($_handle);					
 
 						if( !empty($localize_var) && !empty($localize_var_val) ) {
@@ -122,6 +166,18 @@ if(!class_exists('WBC_Loader')) {
 					break;
 			}			
 		}
+		
+		public function template_key_option($args){
+
+	        
+	        $template_key_option = '';
+
+	        if(!empty($args['template_option_key'])) {
+	            $template_key_option = wbc()->options->get_option($args['option_group_key'],$args['template_option_key'],isset($args['template_option_default'])?$args['template_option_default']:'');
+	        }
+
+	        return $template_key_option;
+	    }
 
 	    public function template_path($args){
 
@@ -143,11 +199,7 @@ if(!class_exists('WBC_Loader')) {
 
 	        $template_key = null;
 
-	        $template_key_option = '';
-
-	        if(!empty($args['template_option_key'])) {
-	            $template_key_option = wbc()->options->get_option($args['option_group_key'],$args['template_option_key'],isset($args['template_option_default'])?$args['template_option_default']:'');
-	        }
+	        $template_key_option = $this->template_key_option($args);
 
             $template_dir = str_replace('{{template_key}}',$template_key_option,$template_dir);
 
@@ -163,12 +215,18 @@ if(!class_exists('WBC_Loader')) {
 	        return $template_dir.$template_key;
 	    }
 
-		public function template( $template_path, $data=array(),$is_template_dir_extended = false,$singleton_function = null,$is_return_template = false,$is_devices_templates = false) {
+		public function template( $template_path, $data=array(),$is_template_dir_extended = false,$singleton_function = null,$is_return_template = false,$is_devices_templates = false, $alternate_widget_hook = null,$template_key_option = null) {
 			//	load template file under /view directory
 			//wbc_pr($template_path);
 			$path = null;
 			if ($is_template_dir_extended) {
-				$path = constant( strtoupper( $singleton_function ).'_TEMPLATE_DIR_EXTENDED').$template_path.".php";
+
+				if (empty($alternate_widget_hook)) {
+					$path = constant( strtoupper( $singleton_function ).'_TEMPLATE_DIR_EXTENDED').$template_path.".php";
+				}else{
+					$path = constant(apply_filters($alternate_widget_hook,strtoupper( $singleton_function ).'_TEMPLATE_DIR_EXTENDED',$template_path,$data,$template_key_option) ).$template_path.".php";
+				}
+				
 			}else{
 				$path = constant('EOWBC_TEMPLATE_DIR').$template_path.".php";
 			}
@@ -197,7 +255,6 @@ if(!class_exists('WBC_Loader')) {
 		            	$template_path_new = str_replace('{{template_key_device}}','desktop',$path);
 		            	$path = $template_path_new;
 		            }
-
 
 		            // wbc_pr( "path >>>>>>>>>>>>>>>>>>>>>>> " . $path );
 		            // wbc_pr( "template_path_new >>>>>>>>>>>>>>>>>>>>>>> " . $template_path_new );

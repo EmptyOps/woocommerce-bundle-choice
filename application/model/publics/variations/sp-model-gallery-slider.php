@@ -43,7 +43,13 @@ class SP_Model_Gallery_Slider extends Eowbc_Base_Model_Publics {
 		});
 		
 		add_filter('sp_slzm_slider_container', function($classes){
-			$classes[] = 'small-img';
+			$classes[] = 'splide_slider_container';
+
+			return $classes;
+		});
+
+		add_filter('sp_slzm_slider_loop_container', function($classes){
+			$classes[] = 'splide_slider_container-loop';
 
 			return $classes;
 		});
@@ -57,6 +63,7 @@ class SP_Model_Gallery_Slider extends Eowbc_Base_Model_Publics {
 			$image['alt'] = '{{data.alt}}';
 			$image['title'] = '{{data.title}}';
 			$image['post_thumbnail_id'] = '{{data.post_thumbnail_id}}';
+			$image['index'] = '{{data.index}}';
 
 			$data = array();
 			$data['image'] = $image;
@@ -68,7 +75,7 @@ class SP_Model_Gallery_Slider extends Eowbc_Base_Model_Publics {
             $template_data['singleton_function'] = 'wbc';
 
             //$template_data['data']['image'] = -1;
-        	$template_data['data']['index'] = -1;
+        	// $template_data['data']['index'] = -1;
 
         	$template_data['data']['gallery_images_template_data'] = array();
         	$template_data['data']['gallery_images_template_data']['attachment_ids_loop_post_thumbnail_id'] = array();
@@ -103,6 +110,12 @@ class SP_Model_Gallery_Slider extends Eowbc_Base_Model_Publics {
 
 				$classes = array('sp-variations-gallery-images-slider');
 				$classes = apply_filters('sp_slzm_slider_container',$classes);
+
+				// ACTIVE_TODO when it becomes necessary we need to implement loop from here or otherwise just get main container and loop container html in different hooks so we get html in different parts.
+				// 	ACTIVE_TODO and than what we need to do is create loop container div from here and apply loop container classes from here. right now it is passed from below to loop template file.
+				$images_data['slider_loop_container_classes'] = array('sp-variations-gallery-images-slider-loop');
+				$images_data['slider_loop_container_classes'] = apply_filters('sp_slzm_slider_loop_container',$images_data['slider_loop_container_classes']);
+
 
 				$html = null;
 				$html = apply_filters('sp_slzm_slider_images_html',$html,$images_data);

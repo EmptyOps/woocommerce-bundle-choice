@@ -815,6 +815,7 @@ class Product {
 
                     $category_link=$this->eo_wbc_category_link();
 
+                    // ACTIVE_TODO it seems that CAT_LINK support is not added here and if it is breadcume or any other category url than we may need to add support. But i think standerd ring builder navigation management does controll categary url deply so if should not be routed to secound leval after it is captured and used from default or first leval CAT_LINK peram set in menus and so on. So we may simply need to remove this ACTIVE_TODO in 2nd revision.
                     $url=$site_url.($remove_index?'':'/index.php')."/{$category_base}/".$category_link.
                     wbc()->common->http_query(array('EO_WBC'=>1,'BEGIN'=>wbc()->sanitize->get('BEGIN'),'STEP'=>2,'FIRST'=>$post->ID,'SECOND'=>wbc()->sanitize->get('SECOND'),'CART'=>wbc()->sanitize->get('CART'),'ATT_LINK'=>implode(' ',$this->att_link),'CAT_LINK'=>substr($category_link,0,strpos($category_link,'/')))).$site_url_get;
 
@@ -822,6 +823,8 @@ class Product {
                 } elseif($category==$this->second_category_slug) {
 
                     $category_link=$this->eo_wbc_category_link();
+
+                    // ACTIVE_TODO it seems that CAT_LINK support is not added here and if it is breadcume or any other category url than we may need to add support. But i think standerd ring builder navigation management does controll categary url deply so if should not be routed to secound leval after it is captured and used from default or first leval CAT_LINK peram set in menus and so on. So we may simply need to remove this ACTIVE_TODO in 2nd revision.                    
                     $url=$site_url.($remove_index?'':'/index.php')."/{$category_base}/".$category_link
                     .wbc()->common->http_query(array('EO_WBC'=>1,'BEGIN'=>wbc()->sanitize->get('BEGIN'),'STEP'=>2,'FIRST'=>wbc()->sanitize->get('FIRST'),'SECOND'=>$post->ID,'CART'=>wbc()->sanitize->get('CART'),'ATT_LINK'=>implode(' ',$this->att_link),'CAT_LINK'=>substr($category_link,0,strpos($category_link,'/')))).$site_url_get;
                 }

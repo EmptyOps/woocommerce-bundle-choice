@@ -38,6 +38,15 @@ class WBC_Config {
 				array( 'type'=>'file', 'path'=> constant('EOWBC_DIRECTORY')."/application/controllers/publics/variations/sp-gallery-zoom.php" ), 
 
 		 		array( 'type'=>'file', 'path'=> constant('EOWBC_DIRECTORY')."/application/model/admin/eowbc_model.php" ), 
+
+				// TODO temp . remove it as sun as selectron autolode is updated
+				array( 'type'=>'file', 'path'=> constant('EOWBC_DIRECTORY')."vendor/sphereplugins/selectron/application/controller/publics/Controller.php" ),
+				array( 'type'=>'file', 'path'=> constant('EOWBC_DIRECTORY')."vendor/sphereplugins/selectron/application/controller/publics/container/container.php" ),
+				array( 'type'=>'file', 'path'=> constant('EOWBC_DIRECTORY')."vendor/sphereplugins/selectron/vendor/autoload.php" ),
+
+		 		array( 'type'=>'file', 'path'=> constant('EOWBC_DIRECTORY')."/application/controllers/publics/feed/loop/selectron/sp-slctrn-swatches-reset-link.php" ),
+		 		array( 'type'=>'file', 'path'=> constant('EOWBC_DIRECTORY')."/application/controllers/publics/feed/loop/selectron/sp-slctrn-swatches-cart-form.php" ),
+
 			), 
 			'both'=> array(
 
@@ -46,6 +55,12 @@ class WBC_Config {
 		 		array( 'type'=>'file', 'path'=> constant('EOWBC_DIRECTORY')."/application/model/publics/component/eowbc_filter_widget.php" ), 
 		 		
 		 		array( 'type'=>'file', 'path'=> constant('EOWBC_DIRECTORY')."/application/controllers/extensions-http-handler.php" ), 
+
+		 		array( 'type'=>'file', 'path'=> constant('EOWBC_DIRECTORY')."/application/model/publics/data_model/sp-wbc-product.php" ), 
+
+		 		array( 'type'=>'file', 'path'=> constant('EOWBC_DIRECTORY')."application/model/publics/data_model/sp-wbc-data-layer.php" ),
+		 		
+
 			)	
 
 		);
@@ -100,47 +115,47 @@ class WBC_Config {
 		return array(			
 			'plugin_slug' => 'woo-bundle-choice', 
 			'widget_sections'=>array(
-						'category_page' => array(
-							'test_slug' => '/product-category/eo_setting_shape_cat', 
-							'mandatory' => array(
-								array(
-									'key' => 'woocommerce_before_main_content', 
-									'label' => '', 	//user friendly name (optional)
-									'type' => 'filter',	
-									'filter_priority_1' => 10,	
-									'filter_priority_2' => 1	
-								)
-							),
-							'recommended' => array(
-								array(
-									'key' => 'woocommerce_before_main_content', 
-									'label' => '', 	//user friendly name (optional)
-									'type' => 'filter',	
-									'filter_priority_1' => 10,	
-									'filter_priority_2' => 1	
-								)
-							)
-						), 
-						'item_page' => array(
-							'test_slug' => '/product-item-page-slug/of-our-sample-data-base-product', 
-							'mandatory' => array(
-								array(
-									'key' => 'woocommerce_before_add_to_cart_button', 
-									'label' => '', 	//user friendly name (optional)
-									'type' => 'action'	
-								)
-							),
-							'recommended' => array(
-								array(
-									'key' => 'woocommerce_product_additional_information', 
-									'label' => '', 	//user friendly name (optional)
-									'type' => 'action',	
-									'filter_priority_1' => 10,	
-									'filter_priority_2' => 1	
-								)
-							)
-						), 
-				)
+				'category_page' => array(
+					'test_slug' => '/product-category/eo_setting_shape_cat', 
+					'mandatory' => array(
+						array(
+							'key' => 'woocommerce_before_main_content', 
+							'label' => '', 	//user friendly name (optional)
+							'type' => 'filter',	
+							'filter_priority_1' => 10,	
+							'filter_priority_2' => 1	
+						)
+					),
+					'recommended' => array(
+						array(
+							'key' => 'woocommerce_before_main_content', 
+							'label' => '', 	//user friendly name (optional)
+							'type' => 'filter',	
+							'filter_priority_1' => 10,	
+							'filter_priority_2' => 1	
+						)
+					)
+				), 
+				'item_page' => array(
+					'test_slug' => '/product-item-page-slug/of-our-sample-data-base-product', 
+					'mandatory' => array(
+						array(
+							'key' => 'woocommerce_before_add_to_cart_button', 
+							'label' => '', 	//user friendly name (optional)
+							'type' => 'action'	
+						)
+					),
+					'recommended' => array(
+						array(
+							'key' => 'woocommerce_product_additional_information', 
+							'label' => '', 	//user friendly name (optional)
+							'type' => 'action',	
+							'filter_priority_1' => 10,	
+							'filter_priority_2' => 1	
+						)
+					)
+				), 
+			)
 		);
 	}
 
@@ -152,13 +167,14 @@ class WBC_Config {
 	public function product_variations_configs(){
 
 		return array( 
-					'sp_variations_attributes'=> array( 
+			'sp_variations_attributes'=> array( 
 
 
-					),
-					'sp_variations_data_fields'=> array( 
+			),
+			'sp_variations_data_fields'=> array( 
 
-					)
+			),
+			'sp_variations_swatches_cat_display_limit' => 3,
 
 		);
 	}

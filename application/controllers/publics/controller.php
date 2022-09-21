@@ -48,10 +48,27 @@ class Controller extends \eo\wbc\controllers\Controller{
 
         if(!empty($template_path)) {
          
-            return wbc()->load->template($template_path,(isset($args['data'])?$args['data']:array()),true,$args['singleton_function'],true,true);
+            return wbc()->load->template($template_path,(isset($args['data'])?$args['data']:array()),true,$args['singleton_function'],true,true,isset($args['alternate_widget_hook'])?$args['alternate_widget_hook']:null,isset($args['alternate_widget_hook'])?wbc()->load->template_key_option($args):null);
         } else {
             return null;
         }
         
     }
+
+    public static function should_init($args = array()){
+
+        if($args['page'] == 'feed' && (is_product_category() || is_shop()) ){
+
+            return true;
+        
+        } elseif( $args['page'] == 'single-product' && is_product()){
+
+            return true;
+        
+        }
+        
+        return false;
+
+    }
+
 }

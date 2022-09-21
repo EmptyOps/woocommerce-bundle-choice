@@ -22,12 +22,13 @@ add_action( 'wp_enqueue_scripts' ,function(){
 			})(jQuery);
 		</script>
 		<?php
-	} else { ?> 
 
-?> 
-		<!-- ---- a code /themes/purple_theme/woocommerce/content-single-product.php no che 
-		-- zoom no
-		 -->
+	} else { 
+
+		// ---- a code /themes/purple_theme/woocommerce/content-single-product.php no che 
+		// -- zoom no
+
+	?> 
 		<script>
 		 	// jQuery(document).ready(function(){
 		 	document.addEventListener("DOMContentLoaded", function() { 
@@ -40,8 +41,10 @@ add_action( 'wp_enqueue_scripts' ,function(){
 		        //     jQuery(".big-img").attr('src',jQuery(this).attr('src'));
 		        // });
 
-			    var init_function = function(){
+			    var zoom_init_function = function(){
 			    	
+	            	console.log(" zoom asset init_function ");
+
 			        jQuery(".big-img").imagezoomsl({
 			            /*zoomrange:[3,3],
 			            disablewheel: true,
@@ -60,6 +63,8 @@ add_action( 'wp_enqueue_scripts' ,function(){
 				        zoomrange: [2,2],
 				        innerzoom: true,
 				        magnifierborder: "none",
+   			            /*magnifiersize: [502, 502],
+   			            cursorshadeborder: "1px solid black",*/
 				        /*disablewheel: true,
 		                zoomstart: 3,
 		                zoomrange: [3,3],
@@ -71,13 +76,21 @@ add_action( 'wp_enqueue_scripts' ,function(){
 
 			    var bind_listeners = function(){
 
-		            window.document.splugins.wbc.variations.gallery_images.sp_slzm.api.init_listener(function(){
+			    	console.log(" zoom asset bind_listeners ");
 
-		                init_function();
+		            window.document.splugins.wbc.variations.gallery_images.sp_slzm.api.init_listener('imagezoomsl', function(event, stat_object, notification_response){
+
+		            	console.log(" zoom asset init_listener ");
+		                
+		                zoom_init_function();
+
 		            });
-		            window.document.splugins.wbc.variations.gallery_images.sp_slzm.api.refresh_listener(function(){
-		            	
-		                init_function();
+		            window.document.splugins.wbc.variations.gallery_images.sp_slzm.api.refresh_listener('imagezoomsl' ,function(event, stat_object, notification_response){
+
+		            	console.log(" zoom asset refresh_listener ");
+
+		                zoom_init_function();
+
 		            });
 
 			    };
@@ -97,25 +110,43 @@ add_action( 'wp_enqueue_scripts' ,function(){
 
 				//     bind_listeners();
 				// }
-				document.addEventListener("DOMContentLoaded", function() { 
+
+				console.log(" gallery zoom asset DOMContentLoaded");
+
+				// document.addEventListener("DOMContentLoaded", function() { 
 				// jQuery( window ).on('load', function() {
+
+					console.log(" zoom asset DOMContentLoaded");
+
 					if(typeof(jQuery.fn.imagezoomsl)!=='function'){
+						
+						console.log(" zoom asset DOMContentLoaded");
+						
 						let script = document.createElement('script');
 						script.src = "<?php echo constant( strtoupper( 'EOWBC_ASSET_URL' ) ).'js/variations/gallery_images/external-plugins/zoomsl/zoomsl.min.js'; ?>";
 						document.head.append(script);
 
 				        window.setTimeout(function(){
 
+							console.log(" zoom asset DOMContentLoaded timeout if");
+
 		       			    bind_listeners();
 
-				        },2000);	
+				        },1000);	
 
 					} else {
 
-					    bind_listeners();
-					}
-				});
+					    window.setTimeout(function(){
 
+							console.log(" zoom asset DOMContentLoaded timeout else");
+
+		       			    bind_listeners();
+
+				        },1000);	
+					}
+				// });
+
+				// ACTIVE_TODO we can use error event only for page loading context but after that we need to cancle them othrewising thay keep firing on any errors. 
 		        window.addEventListener('error', function(e){
 
 	   	            // ACTIVETODO enable below code if requared
@@ -126,9 +157,11 @@ add_action( 'wp_enqueue_scripts' ,function(){
 
 			        window.setTimeout(function(){
 
+		            	console.log(" zoom asset addEventListener error ");
+
 	       			    bind_listeners();
 
-			        },2000);	
+			        },1000);	
 			     
 			    });
 
@@ -192,87 +225,6 @@ add_action( 'wp_enqueue_scripts' ,function(){
 			}
 
 
-			/*====Slider=====*/
-
-
-			div#slider1 {
-			    float: left;
-			    width: 80px;
-			    position: relative;
-			}
-
-			.splide__list{
-			    height: auto;
-			}
-
-
-
-			body div#slider1 .splide__list li {
-			    border-radius: 5px;
-			    cursor: pointer;
-			    padding: 1px;
-			    margin-bottom: 10px;
-			}
-
-
-			div#slider1 .splide__list li img{
-			    width: 100%;
-			    height: 100%;
-			    object-fit: contain !important;
-			}
-
-
-
-			div#slider1 .splide__arrows .splide__arrow.splide__arrow--prev {
-			    top: -1.5rem;
-			    left: 50%;
-			    transform: translate(-50%);
-			    background: transparent;
-			    border: 0;
-			    cursor: pointer;
-			    position: absolute;
-			}
-
-
-			div#slider1 .splide__arrows .splide__arrow.splide__arrow--next {
-			    bottom: -0.8rem;
-			    top: auto;
-			    left: 50%;
-			    transform: translate(-50%);
-			    right: -2.5rem;
-			    background: transparent;
-			    border: 0;
-			    cursor: pointer;
-			    position: absolute;
-			}
-
-
-			div#slider1 .splide__arrows .splide__arrow.splide__arrow--prev svg {
-			    transform: rotate(-90deg);
-			    fill: #333;
-			    stroke: currentColor;
-			    stroke-linecap: square;
-			    stroke-width: 0px;
-			    height: 1.2rem;
-			    vertical-align: middle;
-			    width: 1.2rem;
-			}
-
-
-
-			 .splide__arrows .splide__arrow.splide__arrow--next svg {
-			    transform: rotate(90deg);
-			    fill: #333;
-			    stroke: currentColor;
-			    stroke-linecap: square;
-			    stroke-width: 0px;
-			    height: 1.2rem;
-			    vertical-align: middle;
-			    width: 1.2rem;
-			}
-
-
-
 			/*=======Zoom=====*/
 			img.img-fluid.big-img {
 			    width: 454px;
@@ -287,9 +239,17 @@ add_action( 'wp_enqueue_scripts' ,function(){
 			    position: relative;
 			    float: left;
 			}
-			.img-fluid.big-img {
-			    display: none;
+
+			.imagezoomsl_zoom_container {
+			    width: calc(100% - 130px);
+			    margin-left: 15px;
+			    float: left;
+			    clear: right;
+			    position: relative;
 			}
+			/*.img-fluid.big-img {
+			    display: none;
+			}*/
 		</style>
 		<script type="text/javascript">
 			// ACTIVE_TODO zoom asset.php ma last ma ek script haji rai gai, te I thikn similar che but please confirm -- to a 
@@ -297,15 +257,15 @@ add_action( 'wp_enqueue_scripts' ,function(){
 			document.addEventListener("DOMContentLoaded", function() { 
 				//zoom
 			    
-			    if(typeof(jQuery.fn.imagezoomsl)=='function'){
-			        jQuery(".big-img").imagezoomsl({
-			            disablewheel: true,
-			            zoomstart: 3,
-			            zoomrange: [3,3],
-			            magnifiersize: [502, 502],
-			            cursorshadeborder: "1px solid black",
-			        });
-			    }
+			    // if(typeof(jQuery.fn.imagezoomsl)=='function'){
+			    //     jQuery(".big-img").imagezoomsl({
+			    //         disablewheel: true,
+			    //         zoomstart: 3,
+			    //         zoomrange: [3,3],
+			    //         magnifiersize: [502, 502],
+			    //         cursorshadeborder: "1px solid black",
+			    //     });
+			    // }
 
 			    /* -- a seme che uper lode kerli che
 			    if(typeof(jQuery.fn.imagezoomsl)!=='function'){

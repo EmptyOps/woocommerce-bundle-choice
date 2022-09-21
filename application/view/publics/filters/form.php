@@ -8,55 +8,77 @@
 
 $current_category = implode(',',$thisObj->___category);
 
-if(wbc()->options->get_option('filters_'.$thisObj->filter_prefix.'filter_setting','filter_setting_advance_two_tabs',false)) {
+$is_first_root_category = true;
+// $filter_sets = unserialize(wbc()->options->get_option_group('filters_filter_set',"a:0:{}"));
+$filter_sets = \eo\wbc\model\publics\component\EOWBC_Filter_Widget::instance()->get_filter_sets($thisObj->filter_prefix);
+//wbc()->common->pr($filter_sets);
+if(!empty($filter_sets) and is_array($filter_sets)){
+	foreach ($filter_sets as $filter_sets_key => $filter_sets_val) {
+		//$filter_sets[$filter_sets_key] = $filter_sets_val['filter_set_name'];
+		//if(wbc()->options->get_option('filters_filter_setting','filter_setting_advance_two_tabs')) {
 
-	$first_tab_term = wbc()->options->get_option('filters_'.$thisObj->filter_prefix.'filter_setting','filter_setting_advance_first_category',false);
-	if(!empty($first_tab_term)) {
-		$first_tab_term = wbc()->wc->get_term_by('id',$first_tab_term, 'product_cat');
-		if(!empty($first_tab_term) and !is_wp_error($first_tab_term)) {
-			$first_tab_term = $first_tab_term->slug;
+        //}
 
-			if(!empty($_GET[wbc()->options->get_option('filters_'.$thisObj->filter_prefix.'filter_setting','filter_setting_advance_first_tabs',false)])) {
+        //if(wbc()->options->get_option('filters_'.$thisObj->filter_prefix.'filter_setting','filter_setting_advance_two_tabs',false)) {
 
-				$current_category = $first_tab_term;
+        if ( ( $is_first_root_category and !empty($filter_sets_val['filter_set_two_tabs_first']) ) or
+        	(!$is_first_root_category and !empty($filter_sets_val['filter_set_two_tabs_second']))
+    		) {
+
+			$first_tab_term = $filter_sets_val['filter_set_category'];
+			if(!empty($first_tab_term)) {
+				$first_tab_term = wbc()->wc->get_term_by('id',$first_tab_term, 'product_cat');
+				if(!empty($first_tab_term) and !is_wp_error($first_tab_term)) {
+					$first_tab_term = $first_tab_term->slug;
+
+					if(!empty($_GET[$filter_sets_val['filter_set_two_tabs_first']])) {
+
+						$current_category = $first_tab_term;
+					}
+				} else {
+					$first_tab_term = false;
+				}
+			} else {
+				$first_tab_term = false;
 			}
-		} else {
-			$first_tab_term = false;
-		}
-	} else {
-		$first_tab_term = false;
-	}
 
-	$second_tab_term = wbc()->options->get_option('filters_'.$thisObj->filter_prefix.'filter_setting','filter_setting_advance_second_category',false);
-	if(!empty($second_tab_term)) {
-		$second_tab_term = wbc()->wc->get_term_by('id',$second_tab_term, 'product_cat');
-		if(!empty($second_tab_term) and !is_wp_error($second_tab_term)) {
-			$second_tab_term = $second_tab_term->slug;
-			
-			if( !empty($_GET[wbc()->options->get_option('filters_'.$thisObj->filter_prefix.'filter_setting','filter_setting_advance_second_tabs',false)]) ) {
-				$current_category = $second_tab_term;
+			// $second_tab_term = wbc()->options->get_option('filters_'.$thisObj->filter_prefix.'filter_setting','filter_setting_advance_second_category',false);
+			// if(!empty($second_tab_term)) {
+			// 	$second_tab_term = wbc()->wc->get_term_by('id',$second_tab_term, 'product_cat');
+			// 	if(!empty($second_tab_term) and !is_wp_error($second_tab_term)) {
+			// 		$second_tab_term = $second_tab_term->slug;
+					
+			// 		if( !empty($_GET[wbc()->options->get_option('filters_'.$thisObj->filter_prefix.'filter_setting','filter_setting_advance_second_tabs',false)]) ) {
+			// 			$current_category = $second_tab_term;
+			// 		}
+			// 	} else {
+			// 		$second_tab_term = false;
+			// 	}
+			// } else {
+			// 	$second_tab_term = false;
+			// }
+
+
+			if(!isset($_GET[$filter_sets_val['filter_set_two_tabs_first']])) {
+				if(array_search($first_tab_term,$thisObj->___category) !==false ) {			
+					unset($thisObj->___category[array_search($first_tab_term,$thisObj->___category)]);
+				}
+
+			} else {
+
+				// if(array_search($second_tab_term,$thisObj->___category) !==false ) {
+
+				// 	unset($thisObj->___category[array_search($second_tab_term,$thisObj->___category)]);
+				// }		
 			}
-		} else {
-			$second_tab_term = false;
-		}
-	} else {
-		$second_tab_term = false;
-	}
-
-
-	if(isset($_GET[wbc()->options->get_option('filters_'.$thisObj->filter_prefix.'filter_setting','filter_setting_advance_second_tabs',false)])) {
-		if(array_search($first_tab_term,$thisObj->___category) !==false ) {			
-			unset($thisObj->___category[array_search($first_tab_term,$thisObj->___category)]);
+			break;
 		}
 
-	} else {
-
-		if(array_search($second_tab_term,$thisObj->___category) !==false ) {
-
-			unset($thisObj->___category[array_search($second_tab_term,$thisObj->___category)]);
-		}		
 	}
-}
+}	
+
+
+
 
 if(empty($current_category) and empty($_GET['EO_WBC'])) {
 	$current_category = wbc()->common->get_category('category',null, explode(',', wbc()->options->get_option('sc_filter_setting','shop_cat_filter_category') ) );
@@ -123,10 +145,20 @@ if(empty($_per_page)){
 		<input type="hidden" name="action" value="eo_wbc_filter"/>
 		<?php endif; ?>
 
-		<input type="hidden" name="_current_category" value="<?php echo (!empty(wbc()->sanitize->get('CAT_LINK'))?wbc()->sanitize->get('CAT_LINK'):$current_category); ?>" />
+		<input type="hidden" name="_current_category" value="<?php echo (!empty(wbc()->sanitize->get('CAT_LINK'))? \eo\wbc\model\SP_WBC_Router::instance()->set_query_params_formatted( 'to_form_field', 
+														                array('prod_cat'), 
+														                \eo\wbc\model\SP_WBC_Router::instance()->get_query_params_formatted('url_and_form_field_raw',
+															                array('prod_cat'),
+															                'REQUEST',
+															                null))/*wbc()->sanitize->get('CAT_LINK')*/:$current_category); ?>" />
 
 		<input type="hidden" name="_category_query" id="eo_wbc_cat_query" 
-			value="<?php echo (!empty(wbc()->sanitize->get('CAT_LINK'))?wbc()->sanitize->get('CAT_LINK'):''/*$current_category*/); ?>" />
+			value="<?php echo (!empty(wbc()->sanitize->get('CAT_LINK'))? \eo\wbc\model\SP_WBC_Router::instance()->set_query_params_formatted( 'to_form_field', 
+							                array('prod_cat'), 
+							                \eo\wbc\model\SP_WBC_Router::instance()->get_query_params_formatted('url_and_form_field_raw',
+								                array('prod_cat'),
+								                'REQUEST',
+								                null))/*wbc()->sanitize->get('CAT_LINK')*/:''/*$current_category*/); ?>" />
 			
 		<input type="hidden" name="_category" value="<?php echo implode(',',$thisObj->___category) ?>"/>
 		
@@ -331,9 +363,9 @@ if(empty($_per_page)){
 					    	<?php if(empty(wbc()->options->get_option('filters_'.$filter_prefix.'filter_setting','filter_setting_btnfilter_now'))): ?>
 
 					    	//////// 27-05-2022 - @drashti /////////
-							--add to be confirmed--
-							window.document.splugins.wbc.filters.core.eo_wbc_filter_change_wrapper(false,'form#<?php echo $filter_ui->filter_prefix; ?>eo_wbc_filter','',{'this':this,'event':new Event('change',this)});
-					    	jQuery.fn.eo_wbc_filter_change(false,'form#<?php echo $filter_ui->filter_prefix; ?>eo_wbc_filter','',{'this':this,'event':new Event('change',this)});
+							// --add to be confirmed--
+							window.document.splugins.wbc.filters.api.eo_wbc_filter_change_wrapper(false,'form#<?php echo $filter_ui->filter_prefix; ?>eo_wbc_filter','',{'this':this,'event':new Event('change',this)});
+					    	// jQuery.fn.eo_wbc_filter_change(false,'form#<?php /*echo $filter_ui->filter_prefix;*/ ?>eo_wbc_filter','',{'this':this,'event':new Event('change',this)});
 							////////////////////////////////////////
 
 					    	<?php endif; ?>
@@ -531,9 +563,9 @@ if(empty($_per_page)){
 			    	<?php if(empty(wbc()->options->get_option('filters_'.$filter_prefix.'filter_setting','filter_setting_btnfilter_now'))): ?>
 
 			    	//////// 27-05-2022 - @drashti /////////
-					--add to be confirmed--
-					window.document.splugins.wbc.filters.core.eo_wbc_filter_change_wrapper(false,'form#<?php echo $filter_ui->filter_prefix; ?>eo_wbc_filter','',{'this':this,'event':event});
-			    	jQuery.fn.eo_wbc_filter_change(false,'form#<?php echo $filter_ui->filter_prefix; ?>eo_wbc_filter','',{'this':this,'event':event});
+					// --add to be confirmed--
+					window.document.splugins.wbc.filters.api.eo_wbc_filter_change_wrapper(false,'form#<?php echo $filter_ui->filter_prefix; ?>eo_wbc_filter','',{'this':this,'event':event});
+			    	// jQuery.fn.eo_wbc_filter_change(false,'form#<?php/* echo $filter_ui->filter_prefix;*/ ?>eo_wbc_filter','',{'this':this,'event':event});
 					////////////////////////////////////////
 			    	<?php endif; ?>
 				}});				
