@@ -43,7 +43,7 @@ class SP_Model_Feed extends SP_Feed {
 		return parent::filter_container_location_action( $is_shop_cat_filter, $is_shortcode_filter );
 	}
 
-	public function render_ui() {
+	public function render_ui($ui) {
 
 		$this->render_variations_ui();
 	}

@@ -224,7 +224,7 @@ if(!class_exists('WBC_Loader')) {
 				if (empty($alternate_widget_hook)) {
 					$path = constant( strtoupper( $singleton_function ).'_TEMPLATE_DIR_EXTENDED').$template_path.".php";
 				}else{
-					$path = constant(apply_filters($alternate_widget_hook,strtoupper( $singleton_function ).'_TEMPLATE_DIR_EXTENDED'),$template_path,$data,$template_key_option).$template_path.".php";
+					$path = constant(apply_filters($alternate_widget_hook,strtoupper( $singleton_function ).'_TEMPLATE_DIR_EXTENDED',$template_path,$data,$template_key_option) ).$template_path.".php";
 				}
 				
 			}else{
