@@ -212,7 +212,15 @@ if(!class_exists('WBC_Loader')) {
 	            $template_key = $template_key_option;
 	        }
 
-	        return $template_dir.$template_key;
+	        if (empty($args['is_absolute_path'])) {
+
+	         	return $template_dir.$template_key;
+
+	        } else {
+
+	        	return constant( strtoupper( $args['singleton_function'] ).'_TEMPLATE_DIR_EXTENDED').$template_dir.$template_key.".php";
+	        }
+
 	    }
 
 		public function template( $template_path, $data=array(),$is_template_dir_extended = false,$singleton_function = null,$is_return_template = false,$is_devices_templates = false, $alternate_widget_hook = null,$template_key_option = null) {
