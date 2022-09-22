@@ -76,15 +76,15 @@ class SP_WBC_Variations extends SP_Variations {
 
 
 		// comment by @s
-		}elseif( ($for_section == "swatches" /*|| $for_section == "gallery_images"*/)/* && $args['page'] != 'feed'*/ ) {
-			$this->swatches_hooks();
+		}elseif( ($for_section == "swatches" /*|| $for_section == "gallery_images"*/)/* && $args['page'] != 'feed'*/ ) {*
+			$this->swatches_hooks();*
 
-			$sp_variations_data['attributes'] = $product->get_variation_attributes();
-			$sp_variations_data['variations'] = $product->get_available_variations();
+			$sp_variations_data['attributes'] = $product->get_variation_attributes(); aa nu su karavanu
+			$sp_variations_data['variations'] = $product->get_available_variations(); aa nu su karavanu
 
-		}elseif( ($for_section == "gallery_images") {
+		}elseif( ($for_section == "gallery_images") {*
 
-			$this->gallery_images_hooks();
+			$this->gallery_images_hooks();*
 		}	
 
 					// ACTIVE_TODO_OC_START
@@ -1809,7 +1809,7 @@ class SP_WBC_Variations extends SP_Variations {
 			}
 
 			return $data;
-		});
+		},10);
 	}
 
 	private function gallery_images_hooks(){
@@ -1822,7 +1822,7 @@ class SP_WBC_Variations extends SP_Variations {
 			}
 
 			return $data;
-		});
+		},10);
 
 	}
 }
