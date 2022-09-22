@@ -1168,16 +1168,17 @@ window.document.splugins.wbc.filters.core = function( configs ) {
     var on_reset_click_listener = function(form_selector){
 
     	jQuery(document).on('click',".reset_all_filters",function(){
-        jQuery("[data-reset]").each(function(e){
-            eval(jQuery(this).data('reset'));
-        })
-        // jQuery.fn.eo_wbc_filter_change();
+	        
+	        jQuery("[data-reset]").each(function(e){
+	            
+	            eval(jQuery(this).data('reset'));
+	        });
+	        
+	        // jQuery.fn.eo_wbc_filter_change();
+	        window.document.splugins.filters.api.eo_wbc_filter_change_wrapper();
 
-        s: question ?parameter
-        window.document.splugins.filters.api.eo_wbc_filter_change_wrapper();
-        // eo_wbc_filter_change_wrapper( init_call, form_selector, render_container, parameters );
         	return false;
-		})
+		});
 
 		////////////////////////
 
@@ -1313,7 +1314,6 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		window.document.splugins.wbc.pagination.api.reset();
 
 		// jQuery.fn.eo_wbc_filter_change();
-		s: question parameter
 		window.document.splugins.filters.api.eo_wbc_filter_change_wrapper();
 		// eo_wbc_filter_change_wrapper();
     };
@@ -2083,6 +2083,7 @@ ACTIVE_TODO_OC_END
 		ACTIVE_TODO_OC_END	
 
 		// if(window.eo_wbc_object.enable_filter===false){
+		question ----- flag should_search ma hovo joie e check karavanu 25.11
 		// 	return false;
 		// }
 
@@ -2146,6 +2147,7 @@ ACTIVE_TODO_OC_END
 		window.eo_wbc_filter_change = jQuery.fn.eo_wbc_filter_change_native;
 	}
 
+	s: question need to manage this global layer
 	if( (typeof(jQuery.fn.eo_wbc_filter_change)=="undefined" || jQuery.fn.eo_wbc_filter_change==undefined) && typeof(window.eo_wbc_e_tabview) !== 'object' ){		
 		jQuery.fn.eo_wbc_filter_change = jQuery.fn.eo_wbc_filter_change_native;
 	}
@@ -2221,7 +2223,7 @@ jQuery(document).ready(function($){
 		//jQuery(".woocommerce-pagination,.pagination,jet-filters-pagination").html('');	
 
 		s: question niche code block filter module na "on_change_listener" function ma chhe to e fucntion call karavanu -- to s
-			this seems to be limited 
+			this seems to be limited only for the tableview so need top figureout if this is not needed for filter js then should be moved to tableview js and all other such things in this if block of disp_regular condition above -- to h & -- to s
 		if(!window.eo_wbc_object.btnfilter_now){			
 			jQuery("#eo_wbc_filter").on('change',"input:not(:checkbox)",function(){
 				jQuery('[name="paged"]').val('1');
@@ -2230,6 +2232,7 @@ jQuery(document).ready(function($){
 			});
 		}
 
+		s: question need to manage this global layer
 		if(typeof(jQuery.fn.eo_wbc_filter_change) === typeof(undefined) &&  typeof(window.eo_wbc_filter_change) === 'function') {
 			jQuery.fn.eo_wbc_filter_change = window.eo_wbc_filter_change;				
 		}
@@ -2237,6 +2240,7 @@ jQuery(document).ready(function($){
 
 		//changes: mahesh@emptyops.com
 		// To prevent initial call for the ajax -- speed optimization -- stop ajax at init load;
+		s: question need to manage this global layer
 		if(typeof(eo_wbc_e_tabview)===typeof(undefined) || typeof(eo_wbc_e_tabview.init_data)===typeof(undefined) || typeof(eo_wbc_object)==typeof(eo_wbc_object) ){
 			// jQuery.fn.eo_wbc_filter_change(true);
 			window.document.splugins.filters.api.eo_wbc_filter_change_wrapper();
@@ -2281,8 +2285,7 @@ jQuery(document).ready(function($){
 	/////////////////////////
 	////////////////////////
 	// create function advance_filter_accordian in filters js module and move below code there -- to d done 
-		--	and then from just make call to that private function from the init_private of the same module -- to d /*done*/
-		this task is complete
+		// --	and then from just make call to that private function from the init_private of the same module -- to d done
 
 	// if(jQuery.fn.hasOwnProperty('accordion') && typeof(jQuery.fn.accordion)==='function'){
 	// 	jQuery( ".eo_wbc_advance_filter" ).accordion({
