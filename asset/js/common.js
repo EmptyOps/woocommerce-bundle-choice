@@ -4103,7 +4103,7 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
 
         super.init();
 
-        _this.#init_preprocess(event);
+        _this.#init_preprocess(null);
 
         _this.#update_configs();
 
@@ -4113,7 +4113,7 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
 
         var _this = this; 
 
-        _this.#preprocess(element, event)
+        _this.#preprocess(null, event)
     
     }
 
@@ -4121,7 +4121,7 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
 
         var _this = this; 
 
-        _this.#process_images(type,element);
+        _this.#process_images(null,element);
     
     }
 
@@ -4242,6 +4242,8 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
 
             var images = super.get_current_variation().variation_gallery_images;
 
+            var hasGallery = images.length > 1;
+
             jQuery( images).each(function (index_inner,image) {
                 
                 image.index = index_inner;
@@ -4324,7 +4326,7 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
     } 
 
 }
-window.document.splugins.wbc.variations.gallery_images.feed_page = window.document.splugins.wbc.variations.gallery_images.single_product || {};
+window.document.splugins.wbc.variations.gallery_images.feed_page = window.document.splugins.wbc.variations.gallery_images.feed_page || {};
 
 window.document.splugins.wbc.variations.gallery_images.feed_page.core = function( configs ) {
 
@@ -4343,7 +4345,7 @@ if(window.document.splugins.common.is_category_page) {
         // window.setTimeout(function(){
 
             //  publish it 
-            window.document.splugins.wbc.variations.gallery_images.single_product.api = window.document.splugins.wbc.variations.gallery_images.single_product.core( common_configs.single_product_configs );
+            window.document.splugins.wbc.variations.gallery_images.feed_page.api = window.document.splugins.wbc.variations.gallery_images.feed_page.core( common_configs.single_product_configs );
 
             // window.document.splugins.wbc.variations.gallery_images.single_product.api.init();
             // base_container = jQuery( ( window.document.splugins.common._o( common_configs.configs, 'base_container_loop_selector') ? common_configs.configs.base_container_selector : '.variations_form' ) );      
