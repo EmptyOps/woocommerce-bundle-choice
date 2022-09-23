@@ -506,9 +506,15 @@ class Term_Meta {
 
 			<div class="form-field term-slug-wrap">				
 				<label for="tag-slug">Display Limit(Loopbox)</label>
-				<input name="sp_variations_swatches_cat_display_limit" id="sp_variations_swatches_cat_display_limit" type="number" value="<?php echo wbc()->config->product_variations_configs()['sp_variations_swatches_cat_display_limit']; ?>" class="sp_variations_swatches_cat_display_limit"  style="width: 94%;" value=''>	
+				<input name="sp_variations_swatches_cat_display_limit" id="sp_variations_swatches_cat_display_limit" type="number" value="<?php echo wbc()->config->product_variations_configs()['sp_variations_swatches_cat_display_limit']; ?>" class="sp_variations_swatches_cat_display_limit"  style="width: 94%;">	
 				<p>Limit number of swatches options to display on shop/category page Loopbox.</p>
-			</div>		
+			</div>	
+
+			<div class="form-field term-slug-wrap">				
+				<label for="tag-slug">Show on shop page(Loopbox)</label>
+				<input name="sp_variations_swatches_show_on_shop_page" id="sp_variations_swatches_show_on_shop_page" type="checkbox" value="1" checked class="sp_variations_swatches_show_on_shop_page"  style="width: 94%;" >	
+				<p>Show swatches options for this attribute on shop/category page Loopbox.</p>
+			</div>	
 
 		<?php
 		echo ob_get_clean();
@@ -549,6 +555,22 @@ class Term_Meta {
 					<p>Limit number of swatches options to display on shop/category page Loopbox.</p>
 				</td>
 			</div>
+
+			<?php 
+				$show_on_shop_page = get_term_meta( $taxonomy_id ,'sp_variations_swatches_show_on_shop_page',true);
+				if (empty($show_on_shop_page)) {
+					$show_on_shop_page = 1;
+				}
+			?>
+			<div class="form-field term-slug-wrap">				
+				<th scope="row" valign="top">				
+					<label for="tag-slug">Show on shop page(Loopbox)</label>				
+				</th>
+				<td>
+					<input name="sp_variations_swatches_show_on_shop_page" id="sp_variations_swatches_show_on_shop_page" type="checkbox" class="sp_variations_swatches_show_on_shop_page"  style="width: 94%;" value='1'<?php echo ($show_on_shop_page == 1?'checked':''); ?>>	
+					<p>Show swatches options for this attribute on shop/category page Loopbox.</p>
+				</td>
+			</div>
 		<?php
 		echo ob_get_clean();
 	}
@@ -561,6 +583,13 @@ class Term_Meta {
 		if(!empty(wbc()->sanitize->post('sp_variations_swatches_cat_display_limit'))) {
 			update_term_meta($id,'sp_variations_swatches_cat_display_limit',wbc()->sanitize->post('sp_variations_swatches_cat_display_limit'));
 		}	
+
+		if(!empty(wbc()->sanitize->post('sp_variations_swatches_show_on_shop_page'))) {
+			update_term_meta($id,'sp_variations_swatches_show_on_shop_page',wbc()->sanitize->post('sp_variations_swatches_show_on_shop_page'));
+		}else{
+			update_term_meta($id,'sp_variations_swatches_show_on_shop_page',-1);
+		}
+
 	}
 }
 
