@@ -131,7 +131,7 @@ add_action('wp_footer',function(){
 
 		        // window.setTimeout(function(){
 
-		            // window.document.splugins.wbc.variations.gallery_images.single_product.api.init();
+		            // window.document.splugins.wbc.variations.gallery_images.feed_page.api.init();
 		            base_container = jQuery( ( window.document.splugins.common._o( common_configs.gallery_images_configs, 'base_container_loop_selector') ? common_configs.configs.base_container_selector : '.variations_form' ) );      
 		            jQuery(base_container).sp_wbc_variations_gallery_images_feed_page();
 

@@ -1105,6 +1105,15 @@ class SP_WBC_Variations extends SP_Variations {
 		}
 
 
+		// show_on_shop_page  
+		$data['woo_dropdown_attribute_html_data']['args']['sp_variations_swatches_show_on_shop_page'] = get_term_meta( $data['woo_dropdown_attribute_html_data']['args']['attribute_object']->attribute_id, 'sp_variations_swatches_show_on_shop_page', true );
+
+		if (empty($data['woo_dropdown_attribute_html_data']['args']['sp_variations_swatches_show_on_shop_page'] )) {
+
+			$data['woo_dropdown_attribute_html_data']['args']['sp_variations_swatches_show_on_shop_page'] = 1;
+		}
+
+
 		if ( empty( $data['woo_dropdown_attribute_html_data']['options'] ) && ! empty( $data['woo_dropdown_attribute_html_data']['product'] ) && ! empty( $data['woo_dropdown_attribute_html_data']['attribute'] ) ) {
 			/*ACTIVE_TODO_OC_START
 			-- recieve data in function params to till this function, since I think we have exact same data on above layers but still confirm -- to b 
