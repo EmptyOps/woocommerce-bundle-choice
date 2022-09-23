@@ -246,13 +246,31 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
 		// from 1 	
 
+		from slick and filter
 		var form=jQuery(form_selector);
+
+
+		new code
+		if(init_call) {
+			jQuery("form#eo_wbc_filter [name='paged']").val('1');
+			jQuery("form#eo_wbc_filter [name='last_paged']").val('1');
+
+			jQuery("form#eo_wbc_filter [name='_category']").val(jQuery("form#eo_wbc_filter [name='_current_category']"));
+			jQuery("form#eo_wbc_filter [name='_attribute']").val("");
+		}
+		s: question from template1 only 
+		
+		new code
+		var form=jQuery("form#eo_wbc_filter");
+		s: question from template1 template2 aa var niche chhe but sequence ma ahiya chhe
+
+		from slick table
 		if(form.find('[name="html_destination"]').length>0) {
 
 			render_container = form.find('[name="html_destination"]').val();
 		}
 
-
+		from slick table
 		if(form.find('[name="filter_native"]').length>0) {
 			// jQuery.fn.eo_wbc_filter_change_native(init_call,form_selector,render_container);
 			ACTIVE_TODO now we need to restructure this, need to find out why mahesh had to maintain native and so on separetely? is it stemming due to the diamond quiz flow? -- to h and -- to s 
@@ -261,15 +279,20 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 			return true;
 		}					
 
+		new code
+		jQuery.fn.eo_wbc_filter_change_native(init_call,form_selector,render_container);
+		a: question slcik table ma aa function no call chhe but ahiya move nathi thayel so sequance mate mukel chhe 
+
 		ACTIVE_TODO_OC_START
 		from 1 after eo_wbc_filter_change_native call 
 		ACTIVE_TODO_OC_END
-
+		
+		from slick template1 template2
 		jQuery(form).attr('method','POST');	
 		jQuery("[name*='action']").val("eo_wbc_e_tabview");
 
 		//
-
+		from slick template1 template2
 		form_data=undefined;
 
 		--	we most likely need to serialize form in init call case also means when init call is true. -- to h & -- to s
@@ -278,7 +301,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		if(init_call)
 		{
 			if( jQuery("[name='_category_query']").val() !== undefined && jQuery("[name='_category_query']").val().trim()=='' ) {
-				_products_in = jQuery("[name='products_in']").val();
+				_products_in = jQuery("[name='products_in']").val()
 				if(_products_in == undefined){
 					_products_in = '';
 				} else {
@@ -299,9 +322,11 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 				//form_data={_category:jQuery("[name='_category']").val().trim(),action:'eo_wbc_filter'};	
 
 
+				from slick and template1
 				/*move to tableview done -- to s
 				form_data=jQuery("#tableview_order,#tableview_order_direction,[name='_current_category'],[name='_category'],[name^='cat_filter_'],[name='action'],[name='products_in']").serialize();*/
 
+				from  template2
 				form_data=jQuery("[name='_current_category'],[name='_category'],[name^='cat_filter_'],[name='action'],[name='products_in']").serialize();
 
 				// move to tableview done -- to s
@@ -567,6 +592,42 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
 	};	
 	
+	// so here there will be those ajax callback functions like beforeSend, complete, success, error and so on? mostly yes so that we can call it from wrapper and especially put all the refactored code from different instances of ht eo_wbc_filter_change functions in here 
+		--	so let just do it -- to d. done. had already did it for two functions below 
+		ACTIVE_TODO_OC_START
+		--	for all four functions below bring the code from all applicable functions -- to d 
+			--	and compare and put common only once and for identical means different put separetely and comment for both -- to d. ask b for how to do this process precisely, and do it precisely no more in rubbish way. 
+			--	and note one thing clearly that identical table code that is identified here need to be moved in their own calling layers to this function, so there will be some call back or so that need to be defined that can cover it. or we can simply use what is available by way of observer pattern and their notification callback that is planned that maybe of help if finalized -- to d 
+		ACTIVE_TODO_OC_END	
+	var before_send = function(xhr, form_selector) {
+
+		window.eo_wbc_object.enable_filter_table = false;
+		window.document.splugins.eo_wbc_object.enable_filter_table = false;
+		
+		// to avoide duplicate real time calls
+		if(window.eo_wbc_object.hasOwnProperty('xhr')){
+			window.eo_wbc_object.xhr.abort();
+		}
+		window.eo_wbc_object.xhr = xhr;
+		window.document.splugins.eo_wbc_object.xhr = xhr;
+
+
+		///////////////////////////
+		// /var/www/html/drashti_project/27-05-2022/woocommerce-bundle-choice/asset/js/publics/eo_wbc_filter.js
+
+		window.eo_wbc_object.enable_filter = false;
+		window.document.splugins.eo_wbc_object.enable_filter = false;
+		// console.log(this.url);
+
+		var before_send_callback = null ;
+        window.document.splugins.events.api.notifyAllObservers( 'filters', 'before_send', {}, before_send_callback, form_selector==null ? _this.$base_container : form_selector );
+
+		///////////////////////////
+
+		show_loader(form_selector);
+
+	};
+
 	if apply_all_observer_filters notification has any issues for tableview callback requirements then callbacks passed in below parameters var can also work. -- to h
 		// INVALID NOTE: callback is not sufficent for the fundamental flow here which requires independent event or notification like bindings where child extensions like tableview and so on do not need to remember once the bind the events remember anything else 
 		ACTIVE_TODO_QC_START
@@ -654,42 +715,6 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		// compatability(section, object, expected_result);
 
 		return true;
-
-	};
-
-	// so here there will be those ajax callback functions like beforeSend, complete, success, error and so on? mostly yes so that we can call it from wrapper and especially put all the refactored code from different instances of ht eo_wbc_filter_change functions in here 
-		--	so let just do it -- to d. done. had already did it for two functions below 
-		ACTIVE_TODO_OC_START
-		--	for all four functions below bring the code from all applicable functions -- to d 
-			--	and compare and put common only once and for identical means different put separetely and comment for both -- to d. ask b for how to do this process precisely, and do it precisely no more in rubbish way. 
-			--	and note one thing clearly that identical table code that is identified here need to be moved in their own calling layers to this function, so there will be some call back or so that need to be defined that can cover it. or we can simply use what is available by way of observer pattern and their notification callback that is planned that maybe of help if finalized -- to d 
-		ACTIVE_TODO_OC_END	
-	var before_send = function(xhr, form_selector) {
-
-		window.eo_wbc_object.enable_filter_table = false;
-		window.document.splugins.eo_wbc_object.enable_filter_table = false;
-		
-		// to avoide duplicate real time calls
-		if(window.eo_wbc_object.hasOwnProperty('xhr')){
-			window.eo_wbc_object.xhr.abort();
-		}
-		window.eo_wbc_object.xhr = xhr;
-		window.document.splugins.eo_wbc_object.xhr = xhr;
-
-
-		///////////////////////////
-		// /var/www/html/drashti_project/27-05-2022/woocommerce-bundle-choice/asset/js/publics/eo_wbc_filter.js
-
-		window.eo_wbc_object.enable_filter = false;
-		window.document.splugins.eo_wbc_object.enable_filter = false;
-		// console.log(this.url);
-
-		var before_send_callback = null ;
-        window.document.splugins.events.api.notifyAllObservers( 'filters', 'before_send', {}, before_send_callback, form_selector==null ? _this.$base_container : form_selector );
-
-		///////////////////////////
-
-		show_loader(form_selector);
 
 	};
 
@@ -2074,21 +2099,12 @@ ACTIVE_TODO_OC_END
 					--	maybe we will good with dedicated js modules for diamond quiz, custom attribute filters and so on but that will not be reusable and maintaining will be burden so we simply a mature inherited modules flow where this filters module being the based like dapii lib class and the other js module will be extending it but this time not like diamond api but it will be these js modules own unique flow maybe like sp_api and ftp/csv-excel extending it 
 		ACTIVE_TODO_OC_END
 					
-		console.log(form_selector);
-	//flag indicates if to show products in tabular view or woocommerce's default style.		
-
-		ACTIVE_TODO_OC_START
-		below logic should be in the init_search function so there will be a init_search function that we need to create -- to d 
-			--	actually not in init_search but do it in the should_search function -- to d 
-		ACTIVE_TODO_OC_END	
+		// console.log(form_selector);
+	flag indicates if to show products in tabular view or woocommerce's default style.		
 
 		// if(window.eo_wbc_object.enable_filter===false){
-		question ----- flag should_search ma hovo joie e check karavanu 25.11
 		// 	return false;
 		// }
-
-			NOTE: if there are any return false etc statement occur below this statement then this core function call should be moved underneath the return statement because this core functions is supposed to be called only if search actually happens but yeah at earliest possible also so that there are any dependent flow below or elsewhere then they are taken care of properly 
-		window.document.splugins.wbc.filters.api.before_send( xhr, form_selector );
 
 		related to serise 3
 		and below will be inside the init_search also -- to d
@@ -2186,7 +2202,8 @@ jQuery(document).ready(function($){
 	ask t for what it is -- to d 
 		-- then need to create if applicable then applicable function in applicable js module and mode code there -- to d 
 	ACTIVE_TODO_OC_END
-		
+	
+	we most likely need to comment below code but lets confirm one last time -- to h & -- to s
 	jQuery("[data-toggle_column]").click(function(){
 		if(jQuery(this).hasClass('active')){		
 			jQuery("[data-toggle_slug='"+jQuery(this).data('toggle_column')+"']").css('display','none');
