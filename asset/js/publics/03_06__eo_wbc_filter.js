@@ -8,7 +8,6 @@ window.document.splugins.wbc.filters = window.document.splugins.wbc.filters || {
 		moved to asana 
 
 
-
 		// ACTIVE_TODO/TODO now we are doing in adiition to above patterns the jQuery interface style plugin pattern which is a obvious base standard and maybe it was naturalroot direction for us that we now routed or something such but either way while we are in mix of this lets also try to implement above like observer patterns with jQuery interface style and something such that is inherantly popular in the entire community of javascript jQuery whenever we require something such or filter need of it.
 
 window.document.splugins.wbc.filters.core = function( configs ) {
@@ -40,12 +39,12 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		need to define below notifications -- to s 
 				--	the notifications for the filters module will be in detail since it will be almost central to everythings of the category page and many moduels that would come on different kind of category pages : NOTE 
 					--	NOTE: and maybe in future for some modules of item page also like, vertical pair builder. 
-			--	init search form 
-			--	before search -- already set but need to update 
-			--	show loader -- it might be used by some js layers of alternate templates or so if they want to alter/control ui. but that will not be its fundamental use case the fundamental might be some functions that some js layers would need to do around show loader and hide loader etc. events, like if they want to manage some ui/ux aspects which would be affected by these show hide_loader events 
-			--	prepare_query_data -- maybe many js layers including the extensions layers would be interested in this notification, and using the callback they may want to pass their modification/overrides. -- but is this correct data flow, and is this something that we envisioned and anticipated on filters js module. 
-			--	list all other here like before_send(so before search and before_send will be different and I think there was that flag checking logic in before_search or even before that), success, complete, error and so on. so this list will include even the smaller layers and so a detailed event flow will be here, and it may help pagination and tableview which are already seeing different issues. 
-						--	it is should_search where we have all that flags logic, and since we have should_search now so maybe we need to drop the before_search but keep the before_send of course. and maybe dropping the before_search is what we planned but check in related points listed in this module and confirm. 
+			// --	init search form done
+			// --	before search -- already set but need to update done
+			// --	show loader -- it might be used by some js layers of alternate templates or so if they want to alter/control ui. but that will not be its fundamental use case the fundamental might be some functions that some js layers would need to do around show loader and hide loader etc. events, like if they want to manage some ui/ux aspects which would be affected by these show hide_loader events done
+			// --	prepare_query_data -- maybe many js layers including the extensions layers would be interested in this notification, and using the callback they may want to pass their modification/overrides. -- but is this correct data flow, and is this something that we envisioned and anticipated on filters js module. done
+			// --	list all other here like before_send(so before search and before_send will be different and I think there was that flag checking logic in before_search or even before that), success, complete, error and so on. so this list will include even the smaller layers and so a detailed event flow will be here, and it may help pagination and tableview which are already seeing different issues. done
+						// --	it is should_search where we have all that flags logic, and since we have should_search now so maybe we need to drop the before_search but keep the before_send of course. and maybe dropping the before_search is what we planned but check in related points listed in this module and confirm. done
 				--	and yeah it will also include like render_html, no_products_found, no_products_found render and so on 
 					--	so can we use the events above to pass data object to other layers like tableview and so on. I think we had this task on queue already on backend layers. so we may like to do the needful at right time so that we do not need to worry about two different layers and something such. 
 						--	however above is only for data passing but apart from that I think we already had in place by m or had planned to use only one data response for any kind of result feeds like traditional gallery view, tableview and so on. 
@@ -162,8 +161,9 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 			}
 		}*/
 
-		var init_search_callback = null ;
-        window.document.splugins.events.api.notifyAllObservers( 'filters', 'init_search', {}, init_search_callback, form_selector==null ? _this.$base_container : form_selector );
+	    // ACTIVE_TODO/TODO if ever required to manage or control any logic here in this function or in before send and so on function then we have planned and though out the flow of using even the flag classes like add class for any flag and then on the filter js means the base module the parent module in filter js the filter module in perticuler function for example should search and before send it should just check the hasclass condition with some generic class name. we have to confirm this flow once but this sounds like the idea. otherwise the other option is apply filter notification but we want to but we should simply avoid it if possible.
+		// var init_search_callback = null ;
+  //       window.document.splugins.events.api.notifyAllObservers( 'filters', 'init_search', {}, init_search_callback, form_selector==null ? _this.$base_container : form_selector );
 
     };
 
@@ -228,7 +228,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
 		apply filter notification no more support 
 		// var should_search_callback = null ;
-  //       window.document.splugins.events.api.notifyAllObservers( 'filters', 'should_search', {}, should_search_callback, form_selector==null ? _this.$base_container : form_selector );
+        // window.document.splugins.events.api.notifyAllObservers( 'filters', 'should_search', {}, should_search_callback, form_selector==null ? _this.$base_container : form_selector );
 
         return true;				
 
@@ -274,14 +274,13 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		if(form.find('[name="filter_native"]').length>0) {
 			// jQuery.fn.eo_wbc_filter_change_native(init_call,form_selector,render_container);
 			ACTIVE_TODO now we need to restructure this, need to find out why mahesh had to maintain native and so on separetely? is it stemming due to the diamond quiz flow? -- to h and -- to s 
-			s: question diamond quize manthi nathi aavelu (25.35)
 			window.document.splugins.filters.api.eo_wbc_filter_change_wrapper( init_call, form_selector );
 			return true;
 		}					
 
 		new code
 		jQuery.fn.eo_wbc_filter_change_native(init_call,form_selector,render_container);
-		a: question slcik table ma aa function no call chhe but ahiya move nathi thayel so sequance mate mukel chhe 
+		s: question slcik table ma aa function no call chhe but ahiya move nathi thayel so sequance mate mukel chhe 
 
 		ACTIVE_TODO_OC_START
 		from 1 after eo_wbc_filter_change_native call 
@@ -298,10 +297,13 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		--	we most likely need to serialize form in init call case also means when init call is true. -- to h & -- to s
 		--	but maybe instead of serializing entire form in init call which is against the old flow so instead of right now changing all the changing major flow we can simply consider passing the additional fields that we need to pass like those attribute related fields and category related is i think already covered so i think we can do that. -- to h & -- to s
 			--	still maybe it is not either that much of concern if we serialize entire from because maybe things should just work still it is better idea that we go with the above option instead of this one.
+		from slick template1 template2
 		if(init_call)
 		{
+			from slick template1 template2
 			if( jQuery("[name='_category_query']").val() !== undefined && jQuery("[name='_category_query']").val().trim()=='' ) {
 				_products_in = jQuery("[name='products_in']").val()
+				from slick template1 template2
 				if(_products_in == undefined){
 					_products_in = '';
 				} else {
@@ -309,6 +311,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 				}
 
 				// move to tableview -- to s
+				from slick template1 template2
 				form_data={_current_category:jQuery("[name='_current_category']").val().trim(),action:'eo_wbc_e_tabview',products_in:_products_in};
 				s: question moved from tableview so need to managed flag
 					--	it seems that per page if in tableview prepare_query_data need to manage a littel 
@@ -329,18 +332,22 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 				from  template2
 				form_data=jQuery("[name='_current_category'],[name='_category'],[name^='cat_filter_'],[name='action'],[name='products_in']").serialize();
 
+				from slick and template1
 				// move to tableview done -- to s
 				// if(eo_wbc_e_tabview.eo_table_view_per_page){
 				// 	form_data.eo_wbc_page = jQuery('[name="eo_wbc_page"]').val();
 				// }
 			}
+			
 			// if(jQuery("select[name='orderby']").length>0){
 			// 	form_data.orderby=jQuery("select[name='orderby']:eq(0)").val();
 			// }
 			if(jQuery("select[name='orderby']").length>0){
 				form_data.orderby=jQuery("select[name='orderby']:eq(0)").val();
 			}
-			
+			s: question template1 and slick_table 
+
+			from slick_table
 			// move to tableview -- to s 
 			form_data.action='eo_wbc_e_tabview';
 		} else {
@@ -359,6 +366,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 				form_data+='&orderby='+jQuery("select[name='orderby']:eq(0)").val();
 			}
 
+			from template1 and template2
 			/*move to tableview done -- to s
 			if(jQuery("#tableview_order").val()!=='' && jQuery("#tableview_order_direction").val()!==''){
 				form_data+='&tableview_order='+jQuery("#tableview_order").val();
@@ -368,6 +376,8 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 			// move to tableview -- to s
 			form_data+='&action=eo_wbc_e_tabview';
 		}
+
+		next sequance ma ajax valu chhe so eo_wbc_filter_change_wrapper_private funciton no call hovo joie ahiya and jo bije kyay thi aa fucntion call thay chhe to aa ajax and !init_call ni condition ahiya thi lagavi joie
 		////////////////////////////////
 		// /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/sp_tv_template.js
 		// --add to be confirmed 2601 TO 2705--
@@ -376,6 +386,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 			jQuery("form#eo_wbc_filter [name='paged']").val('1');
 			jQuery("form#eo_wbc_filter [name='last_paged']").val('1');
 			jQuery("form#eo_wbc_filter [name='_category']").val(jQuery("form#eo_wbc_filter [name='_current_category']"));
+			s: question aa flag bandh karavno evu recording ma kidhu chhe. and _attribute 25.35 approx recording confirm karavanu
 			jQuery("form#eo_wbc_filter [name='_attribute']").val("");
 		}
 		var form=jQuery("form#eo_wbc_filter");	
@@ -566,6 +577,8 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		// 	render_container = form.find('[name="html_destination"]').val();
 		// }
 		/////////////////////////////////////////////////////
+
+		aa logic filter js ma ajax pachhi chhe so sequance maintain karavani reshe -- to s
 		var site_url=eo_wbc_object.eo_cat_site_url;
 		var ajax_url = '';
 
@@ -579,6 +592,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
 		// success(data);
 
+		s: question aa condition tableview js ma mahesh bhai na juna code manthi move thai chhe so tya confirm karavanu and sequance tyathi checxk karine maintain karavani and check karavanu and logic confirm karavanu chhe k ahiya rakhavanu chhe k nai. -- to s
 		need to finalize, this code is not part of any logic here -- to h & -- to s 
 			if(typeof(form_data)==='string'){
 				form_data = Object.fromEntries(new URLSearchParams(form_data))
@@ -619,8 +633,9 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		window.document.splugins.eo_wbc_object.enable_filter = false;
 		// console.log(this.url);
 
-		var before_send_callback = null ;
-        window.document.splugins.events.api.notifyAllObservers( 'filters', 'before_send', {}, before_send_callback, form_selector==null ? _this.$base_container : form_selector );
+		// ACTIVE_TODO/TODO if ever required to manage or control any logic here in this function or in before send and so on function then we have planned and though out the flow of using even the flag classes like add class for any flag and then on the filter js means the base module the parent module in filter js the filter module in perticuler function for example should search and before send it should just check the hasclass condition with some generic class name. we have to confirm this flow once but this sounds like the idea. otherwise the other option is apply filter notification but we want to but we should simply avoid it if possible.
+		// var before_send_callback = null ;
+        // window.document.splugins.events.api.notifyAllObservers( 'filters', 'before_send', {}, before_send_callback, form_selector==null ? _this.$base_container : form_selector );
 
 		///////////////////////////
 
@@ -629,10 +644,12 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 	};
 
 	if apply_all_observer_filters notification has any issues for tableview callback requirements then callbacks passed in below parameters var can also work. -- to h
-		// INVALID NOTE: callback is not sufficent for the fundamental flow here which requires independent event or notification like bindings where child extensions like tableview and so on do not need to remember once the bind the events remember anything else 
+		// INVALID 
+		// NOTE: callback is not sufficent for the fundamental flow here which requires independent event or notification like bindings where child extensions like tableview and so on do not need to remember once the bind the events remember anything else 
+
 		ACTIVE_TODO_QC_START
 		--  but still first check points and notes above related to callbacks flow that we planed -- to h
-		ACTIVE_TODO_QC_END
+		ACTIVE_TODO_QC_END opacity
 	var eo_wbc_filter_change_wrapper_private = function(init_call, form_selector, render_container, parameters) {
 
 		it will be if condition here -- to s 
@@ -699,6 +716,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
 		} );	
 
+		from template1 and slick table
 		if(!init_call){
 			jQuery(".reset_all_filters.mobile_2").removeClass('mobile_2_hidden');
 		}	
@@ -872,13 +890,13 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
         }else if(section == 'render_container'){
 
-			if(render_container.length<=0) {
+			if(object.render_container.length<=0) {
 		
-				render_container = jQuery(".elementor-products-grid");
+				object.render_container = jQuery(".elementor-products-grid");
 		
-				if(render_container.length<=0) {
+				if(object.render_container.length<=0) {
 
-					render_container = jQuery(".jet-woo-products");
+					object.render_container = jQuery(".jet-woo-products");
 				}
 
 			}
@@ -957,11 +975,12 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 				// }			
 			}						
 			else {
+				/*ACTIVE_TODO_QC_START
 				we need to track execution of this function so search in all 5 repos and confirm where this function is defined -- to d /woo-bundle-choice/application/view/publics/category.php
 					--	and if that is found then only track above where is_card_view_rendered to see from which different locations it is defined and/or coming -- to d 
-				It is 
-				s: question aa function define karel nathi 
+						// NOTE: It is not defined in eo_wbc_filter.js atleast 
 				wbc_attach_card_views();
+				ACTIVE_TODO_QC_END*/
 			}
 
 			// ACTIVE_TODO as soon as we find the gallery_view_container or lopp box <a> container compatibility patche flow reliable and hop fully by secound revision. Than at that time let just apply on of that compatibility patch flow for this <a> links layer below -- to h & -- to a  
@@ -1217,6 +1236,13 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 			// jQuery('[name="paged"]').val('1');
 			window.document.splugins.wbc.pagination.api.reset();
 
+				
+				this logic is from template1 reset event but we may like to consider it for the router query layer support -- to h
+				jQuery("form#eo_wbc_filter [name='_category']").val(jQuery("form#eo_wbc_filter [name='_current_category']"));
+			    jQuery("form#eo_wbc_filter [name='_attribute']").val("");
+
+
+
 			// jQuery.fn.eo_wbc_filter_change(true);
 			window.document.splugins.filters.api.eo_wbc_filter_change_wrapper(true, form_selector);
 			// eo_wbc_filter_change_wrapper( true, form_selector );
@@ -1364,9 +1390,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 			// }
 		}
 
-		compatability('render_container', object, 1);
-
-		return render_container;
+		return compatability('render_container', {render_container:render_container}, 1).render_container;
 
     }; 
 
