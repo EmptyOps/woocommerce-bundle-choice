@@ -905,13 +905,13 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
         }else if(section == 'render_container'){
 
-			if(render_container.length<=0) {
+			if(object.render_container.length<=0) {
 		
-				render_container = jQuery(".elementor-products-grid");
+				object.render_container = jQuery(".elementor-products-grid");
 		
-				if(render_container.length<=0) {
+				if(object.render_container.length<=0) {
 
-					render_container = jQuery(".jet-woo-products");
+					object.render_container = jQuery(".jet-woo-products");
 				}
 
 			}
@@ -1406,9 +1406,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 			// }
 		}
 
-		compatability('render_container', object, 1);
-
-		return render_container;
+		return compatability('render_container', {render_container:render_container}, 1).render_container;
 
     }; 
 
