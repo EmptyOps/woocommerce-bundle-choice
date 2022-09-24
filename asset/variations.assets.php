@@ -343,6 +343,48 @@ if(is_shop() || is_product_category()) {
 	        width: 100%;
 	    }
 
+	    /*===Variation_css====*/
+        form.variations_form {
+            float: left;
+            width: 100%;
+        }
+        form.variations_form table.variations {
+            border: none !important;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+        }
+        
+        form.variations_form table.variations tbody {
+            width: 100%;
+            float: left;
+        }
+        form.variations_form table.variations tbody tr {
+            width: 100%;
+            float: left;
+            display: table-row !important;
+        }
+        form.variations_form table.variations tbody th.label {
+            display: none;
+        }
+        form.variations_form table.variations tbody th, form.variations_form table.variations tbody td {
+            padding: 0;
+            border: none;
+            background: #fff !important;
+        }
+        form.variations_form table.variations tbody td {
+            width: 100%;
+            float: left;
+        }
+
+        form.variations_form table.variations tbody td ul{
+            list-style-type: none;
+        }
+
+		form.variations_form table.variations tbody td select {
+		    display: none !important;
+		}
+
 	</style>
 
 	<!--button-->
