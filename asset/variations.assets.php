@@ -1,5 +1,6 @@
 
 <?php
+
 // --- a code /woo-bundle-choice/application/model/publics/sp-model-single-product.php no che
 ?>
 
@@ -399,73 +400,72 @@ if(is_shop() || is_product_category()) {
 	    .spui_size_widget ul li .spui_size_variable_item_contents span.spui_variable_item_span_size {
 	        padding: 0 5px;
 	    }*/
-	/*=====BUTTON_START====*/
-    .spui_button_widget{
-        float: left;
-        width: 100%;
-    }
-    .spui_button_widget ul{
-        -webkit-box-pack: start;
-        -ms-flex-pack: start;
-        display: -webkit-box;
-        display: -ms-flexbox;
-        display: flex;
-        -ms-flex-wrap: wrap;
-        flex-wrap: wrap;
-        justify-content: flex-start;
-        list-style: none;
-        margin: 0;
-        padding: 0;
-    }
-    .spui_button_widget ul li{
-        margin: 4px;
-        padding: 2px;
-        position: relative;
-        min-width: 30px;
-        height: 30px;
-        line-height: 30px;
-        text-align: center;
-        background: #ffffff;
-        color: #000;
-        border-radius: 2px;
-        box-shadow: 0 0 0 1px #a8a8a8;
-        cursor: pointer;
-    }
-    .spui_button_widget ul li.spui_button_variable_item.selected{
-        box-shadow: 0 0 0 2px #000000;
-    }
-    .spui_button_widget ul li .spui_button_variable_item_contents {
-        -webkit-box-orient: vertical;
-        -webkit-box-direction: normal;
-        -webkit-box-pack: center;
-        -ms-flex-pack: center;
-        display: -webkit-box;
-        display: -ms-flexbox;
-        display: flex;
-        -ms-flex-direction: column;
-        flex-direction: column;
-        height: 100%;
-        justify-content: center;
-        position: relative;
-        width: 100%;
-    }
-    .spui_button_widget ul li .spui_button_variable_item_contents span.spui_variable_item_span_button {
-        padding: 0 5px;
-    }
+		/*=====BUTTON_START====*/
+	    .spui_button_widget{
+	        float: left;
+	        width: 100%;
+	    }
+	    .spui_button_widget ul{
+	        -webkit-box-pack: start;
+	        -ms-flex-pack: start;
+	        display: -webkit-box;
+	        display: -ms-flexbox;
+	        display: flex;
+	        -ms-flex-wrap: wrap;
+	        flex-wrap: wrap;
+	        justify-content: flex-start;
+	        list-style: none;
+	        margin: 0;
+	        padding: 0;
+	    }
+	    .spui_button_widget ul li{
+	        margin: 4px;
+	        padding: 2px;
+	        position: relative;
+	        min-width: 30px;
+	        height: 30px;
+	        line-height: 30px;
+	        text-align: center;
+	        background: #ffffff;
+	        color: #000;
+	        border-radius: 2px;
+	        box-shadow: 0 0 0 1px #a8a8a8;
+	        cursor: pointer;
+	    }
+	    .spui_button_widget ul li.spui_button_variable_item.selected{
+	        box-shadow: 0 0 0 2px #000000;
+	    }
+	    .spui_button_widget ul li .spui_button_variable_item_contents {
+	        -webkit-box-orient: vertical;
+	        -webkit-box-direction: normal;
+	        -webkit-box-pack: center;
+	        -ms-flex-pack: center;
+	        display: -webkit-box;
+	        display: -ms-flexbox;
+	        display: flex;
+	        -ms-flex-direction: column;
+	        flex-direction: column;
+	        height: 100%;
+	        justify-content: center;
+	        position: relative;
+	        width: 100%;
+	    }
+	    .spui_button_widget ul li .spui_button_variable_item_contents span.spui_variable_item_span_button {
+	        padding: 0 5px;
+	    }
 
 
-    /*.disabled .spui_button_variable_item_contents::before{
-        background-image: var(--spui-dis-check);
-        background-position: 50%;
-        background-repeat: no-repeat;
-        background-size: 100%;
-        content: " ";
-        display: block;
-        height: 100%;
-        position: absolute;
-        width: 100%;
-    }
-*/
+	    /*.disabled .spui_button_variable_item_contents::before{
+	        background-image: var(--spui-dis-check);
+	        background-position: 50%;
+	        background-repeat: no-repeat;
+	        background-size: 100%;
+	        content: " ";
+	        display: block;
+	        height: 100%;
+	        position: absolute;
+	        width: 100%;
+	    } */
     /*=====BUTTON_END====*/
 
 

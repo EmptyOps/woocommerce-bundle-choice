@@ -238,7 +238,7 @@ class SP_Model_Feed extends SP_Feed {
 
 	public function load_asset(){
 
-		add_action( 'wp_enqueue_scripts' ,function(){
+		add_action( 'wp_footer'/*'wp_enqueue_scripts'*/ ,function(){
 			
 			wbc()->load->asset('css','fomantic/semantic.min');
 			wbc()->load->asset('js','fomantic/semantic.min',array('jquery'));
