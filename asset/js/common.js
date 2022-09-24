@@ -3462,7 +3462,9 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations{
 
                 var aLocateclassAll = aLocate.attr('class').split(" ");
 
-                var aLocateclass = aLocateclassAll.indexOf(aLocateclass_p);
+                var aLocateclassAll_index = aLocateclassAll.indexOf(aLocateclass_p);
+
+                var aLocateclass = aLocateclassAll[aLocateclassAll_index];
 
                 console.log('<a> class split');
 

@@ -851,7 +851,10 @@ window.document.splugins.wbc.filters.core = function( configs ) {
     	// do the call from where the below section is moved here, and if you already did the call then show and confirm with me -- to d 
     	// ACTIVE_TODO_OC_END
         if(section == 'product-listing'){
+
+        	-- in final revision most probebly we need to comment below statment -- to h & to a
             jQuery('.products:eq(0),.product-listing:eq(0),.row-inner>.col-lg-9:eq(0)').addClass('product_grid_view');
+            
             //jQuery('.products,.product-listing,.row-inner>.col-lg-9:eq(0),.woocommerce-pagination,.pagination').css('visibility','visible');
             if(jQuery(".row-inner>.col-lg-9").length>0){
 
@@ -871,7 +874,8 @@ window.document.splugins.wbc.filters.core = function( configs ) {
             		-- and if we have to use below code and seprate beetwin this module and pagination module compatibility function than need to think about notification layer -- to h 
             // --- pagination module move this code ---
             // jQuery('.products,.product-listing,.row-inner>.col-lg-9:eq(0),.woocommerce-pagination,.pagination,jet-filters-pagination').css('visibility','visible');
-            // --- end ---
+            // --- end ---        	
+        	-- in final revision most probebly we need to comment below statment -- to h & to a
             window.document.splugins.wbc.pagination.api.init();
 
             // Fix for the yith wishlist.
@@ -890,6 +894,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
         }else if(section == 'render_container'){
 
+        	-- aa if conditions tableview na badha selectore and calling sysuance joy ne confirm karvani se -- to a
 			if(object.render_container.length<=0) {
 		
 				object.render_container = jQuery(".elementor-products-grid");
@@ -1211,6 +1216,8 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
     var on_reset_click_listener = function(form_selector){
 
+    	-- all 7 demo(wp page) ma kya nathi -- to a
+    	-- jewellery demo ma Show Reset Filters Button ni switch enable kari pasi aa selectore male se and work kare se -- to a
     	jQuery(document).on('click',".reset_all_filters",function(){
 	        
 	        jQuery("[data-reset]").each(function(e){
@@ -1227,6 +1234,8 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		////////////////////////
 
 		// reset click event 
+    	-- all 7 demo(wp page) ma kya nathi -- to a
+    	-- jewellery demo ma alternate filter widget change karya pasi pan aa selectore nathi malto -- to a
 		jQuery(".eo_wbc_srch_btn:eq(2)").click(function(){					
 			///////////////////////////////////////////
 			document.forms.eo_wbc_filter.reset();
@@ -2257,7 +2266,8 @@ jQuery(document).ready(function($){
 	// moved to assets php
   	// window.document.splugins.filters.api.init();
 
-	if(window.eo_wbc_object.disp_regular){
+  	// NOTE: admin ma "disp_regular" aa flag thi find karyu tena related kay malyu nathi
+ 	if(window.eo_wbc_object.disp_regular){
 	
 		create function bind_click in filters js module and move below code there -- to d done
 			--	and then from just make call to that private function from the init_private of the same module -- to d done
@@ -2265,6 +2275,7 @@ jQuery(document).ready(function($){
 
 		s: question niche code block filter module na "on_change_listener" function ma chhe to e fucntion call karavanu -- to s
 			this seems to be limited only for the tableview so need top figureout if this is not needed for filter js then should be moved to tableview js and all other such things in this if block of disp_regular condition above -- to h & -- to s
+		-- jewellery demo ma apply filter nu button work kare se -- to a	
 		if(!window.eo_wbc_object.btnfilter_now){			
 			jQuery("#eo_wbc_filter").on('change',"input:not(:checkbox)",function(){
 				jQuery('[name="paged"]').val('1');
@@ -2482,7 +2493,6 @@ window.document.splugins.wbc.filter_sets.core = function( configs ) {
 	      _category.push('_two_tabs');
 	      $("[name='_category']").val(_category.join(','));
 	    }
-
 	    $('[name="cat_filter__two_tabs"]').val($(this).data('category'));*/
 
 	    jQuery('[name="_current_category"]').val(jQuery(this).data('category'));
@@ -2588,5 +2598,3 @@ window.document.splugins.wbc.filter_sets.api = window.document.splugins.wbc.filt
 	// moved to assets php
 	// window.document.splugins.wbc.filter_sets.api.init(); 	
 // });
-
-
