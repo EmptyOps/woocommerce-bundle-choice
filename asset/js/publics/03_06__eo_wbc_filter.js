@@ -940,8 +940,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
 		render_container_selectore = result_container(_render_container);
 
-		// render_container = result_container(render_container);
-		render_container = set_archive_html(container_html, render_container);
+		render_container = result_container(render_container);
 
 		ACTIVE_TODO_OC_START
 		// create two function show_loader and hide_loader in filters core js module -- to d done
@@ -993,7 +992,8 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 				// if(jQuery('.products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products').length<=0) {
 					// jQuery(render_container).html(container_html);
 				// } else {
-					jQuery(render_container).html(container_html);
+					// jQuery(render_container).html(container_html);
+					set_archive_html(container_html, render_container);
 				// }			
 			}						
 			else {
