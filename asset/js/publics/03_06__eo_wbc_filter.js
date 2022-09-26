@@ -191,6 +191,12 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		// }	
 
 
+		s: question /sp_slick_tableview/js/slick_table.js mathi move thayo chhe aa code filetr js and tableview js ma kyay chalu ma find nato thato so ahiya move karel chhe. 
+		if(window.eo_wbc_object.enable_filter_table===false){
+			return false;
+		}
+
+
 
 		// /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/template1.js
 		// --add to be confirmed 630 TO 734--
@@ -202,7 +208,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		}
 		console.log(init_call,window.eo_wbc_filter_change_table_view_service);
 
-		if(window.eo_wbc_object.enable_filter===false){
+		if(/*window.eo_wbc_object.enable_filter*/get_enable_filter()===false){
 			return false;
 		}
 
@@ -644,8 +650,9 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		///////////////////////////
 		// /var/www/html/drashti_project/27-05-2022/woocommerce-bundle-choice/asset/js/publics/eo_wbc_filter.js
 
-		window.eo_wbc_object.enable_filter = false;
-		window.document.splugins.eo_wbc_object.enable_filter = false;
+		// window.eo_wbc_object.enable_filter = false;
+		// window.document.splugins.eo_wbc_object.enable_filter = false;
+		set_enable_filter(false);
 		// console.log(this.url);
 
 		// ACTIVE_TODO/TODO if ever required to manage or control any logic here in this function or in before send and so on function then we have planned and though out the flow of using even the flag classes like add class for any flag and then on the filter js means the base module the parent module in filter js the filter module in perticuler function for example should search and before send it should just check the hasclass condition with some generic class name. we have to confirm this flow once but this sounds like the idea. otherwise the other option is apply filter notification but we want to but we should simply avoid it if possible.
@@ -681,8 +688,11 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
 		prepare_query_data(init_call, form_selector);
 
-		sp_filter_request variable tv_template.js ma move karavano, if required -- to h & -- to s
-		jQuery.fn.sp_filter_request = jQuery.ajax(
+		// sp_filter_request variable tv_template.js ma move karavano, if required -- to h & -- to s
+		// 	INVALID
+			// --	sp_filter_request aa flag slick ma flase set thay chhe biji koi js ma find nathi thato. [eo_wbc_e_tabview.eo_view_tabular && typeof(jQuery.fn.eo_wbc_filter_change_alt)===typeof(undefined)] aa if table_view_service() ma and tyathi flase set thay chhe.
+			// 		NOTE: this var is not used anywhere but set only 2 times so this var is turned off completely.
+		/*jQuery.fn.sp_filter_request = */jQuery.ajax(
 		{	
 			--	below 2 params namely url and data will set from the object return from the prepare_query_data function above -- to h & -- to s
 			url: eo_wbc_object.eo_admin_ajax_url,//form.attr('action'),
@@ -771,8 +781,9 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		// 	-- rectify if there are any such similar issue
 
 		//////// 02-04-2022 @shraddha /////// 
-		// eo_wbc_e_render_table(data, type);	
-		// window.eo_wbc_object.enable_filter_table = true;
+		s: question aa call and flag move thayel hato but badhe j comment lagi gayo hato so aa open karel chhe.
+		eo_wbc_e_render_table(data, type);	
+		window.eo_wbc_object.enable_filter_table = true;
 		// jQuery(".ui.sticky").sticky('refresh');
 
 		// /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/sp_tv_template.js
@@ -807,8 +818,9 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
 		eo_wbc_filter_render_html(data, render_container, form_selector);
 
-		window.eo_wbc_object.enable_filter = true;
-		window.document.splugins.eo_wbc_object.enable_filter = true;
+		// window.eo_wbc_object.enable_filter = true;
+		// window.document.splugins.eo_wbc_object.enable_filter = true;
+		set_enable_filter(true);
 
 		/////////////////////////////
 		var success_callback = null ;
@@ -828,8 +840,9 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		////////////////////////////
 		// /var/www/html/drashti_project/27-05-2022/woocommerce-bundle-choice/asset/js/publics/eo_wbc_filter.js
 
-		window.eo_wbc_object.enable_filter = true;
-		window.document.splugins.eo_wbc_object.enable_filter = true;
+		// window.eo_wbc_object.enable_filter = true;
+		// window.document.splugins.eo_wbc_object.enable_filter = true;
+		set_enable_filter(true);
 
 		///////////////////////////////
 
@@ -1243,6 +1256,9 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		////////////////////////
 
 		// reset click event 
+		/*ACTIVE_TODO_QC_START
+		there is critical flag handling in template1.js at line no:768 which is needed to be applied here as soon as possible -- to h & -- to s
+		ACTIVE_TODO_QC_END*/
 		jQuery(".eo_wbc_srch_btn:eq(2)").click(function(){					
 			///////////////////////////////////////////
 			document.forms.eo_wbc_filter.reset();
@@ -1441,12 +1457,13 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
     var get_enable_filter = function() {
 
-    	s:question hiren bhai ne puchhine karavanu baki chhe.
+    	return window.document.splugins.eo_wbc_object.enable_filter/*window.eo_wbc_object.enable_filter*/;
     };
 
-    var set_enable_filter = function() {
+    var set_enable_filter = function(value) {
 
-    	s:question hiren bhai ne puchhine karavanu baki chhe.
+    	window.eo_wbc_object.enable_filter = value;
+    	window.document.splugins.eo_wbc_object.enable_filter = value;
     };
 
     ///////////////////////////////////////////////////////
@@ -2124,8 +2141,9 @@ ACTIVE_TODO_OC_END
 /*if(eo_wbc_object.disp_regular=='1'){
 	*/
 --	disp_regular aa wbc and tableview ma serch ekaravano -- to s
-	window.eo_wbc_object.enable_filter = true;
-	window.document.splugins.eo_wbc_object.enable_filter = true;
+	// window.eo_wbc_object.enable_filter = true;
+	// window.document.splugins.eo_wbc_object.enable_filter = true;
+	window.document.splugins.wbc.filters.api.set_enable_filter(true);
 	jQuery.fn.eo_wbc_filter_change_native= function(init_call=false,form_selector="form#eo_wbc_filter",render_container='',parameters={}) {
 
 		ACTIVE_TODO_OC_START
