@@ -190,11 +190,9 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		// 	jQuery(".reset_all_filters.mobile_2").removeClass('mobile_2_hidden');
 		// }	
 
-
-		s: question /sp_slick_tableview/js/slick_table.js mathi move thayo chhe aa code filetr js and tableview js ma kyay chalu ma find nato thato so ahiya move karel chhe. 
-		if(window.eo_wbc_object.enable_filter_table===false){
-			return false;
-		}
+		// if(window.eo_wbc_object.enable_filter_table===false){
+		// 	return false;
+		// }
 
 
 
@@ -636,8 +634,8 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		ACTIVE_TODO_OC_END	
 	var before_send = function(xhr, form_selector) {
 
-		window.eo_wbc_object.enable_filter_table = false;
-		window.document.splugins.eo_wbc_object.enable_filter_table = false;
+		// window.eo_wbc_object.enable_filter_table = false;
+		// window.document.splugins.eo_wbc_object.enable_filter_table = false;
 		
 		// to avoide duplicate real time calls
 		if(window.eo_wbc_object.hasOwnProperty('xhr')){
@@ -767,6 +765,9 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		// NOTE: hide_loader is called from success and error also but in future we most likely will remove call from success and error function.
 		hide_loader(form_selector);
 
+		// added new on 26-09-2022
+		set_enable_filter(true);
+
 		var complete_callback = null ;
         window.document.splugins.events.api.notifyAllObservers( 'filters', 'complete', {}, complete_callback, form_selector==null ? _this.$base_container : form_selector );
 	}; 
@@ -781,9 +782,8 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		// 	-- rectify if there are any such similar issue
 
 		//////// 02-04-2022 @shraddha /////// 
-		s: question aa call and flag move thayel hato but badhe j comment lagi gayo hato so aa open karel chhe.
-		eo_wbc_e_render_table(data, type);	
-		window.eo_wbc_object.enable_filter_table = true;
+		// eo_wbc_e_render_table(data, type);	
+		// window.eo_wbc_object.enable_filter_table = true;
 		// jQuery(".ui.sticky").sticky('refresh');
 
 		// /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/sp_tv_template.js
@@ -833,9 +833,9 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		// console.log('error');
 		// console.log(data);
 
-		ACTIVE_TODO from tableview /// shraddha
-		window.eo_wbc_object.enable_filter_table = true;
-		window.document.splugins.eo_wbc_object.enable_filter_table = true;
+		// ACTIVE_TODO from tableview /// shraddha
+		// window.eo_wbc_object.enable_filter_table = true;
+		// window.document.splugins.eo_wbc_object.enable_filter_table = true;
 
 		////////////////////////////
 		// /var/www/html/drashti_project/27-05-2022/woocommerce-bundle-choice/asset/js/publics/eo_wbc_filter.js
@@ -1462,6 +1462,9 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
     var set_enable_filter = function(value) {
 
+    	window.eo_wbc_object.enable_filter = window.eo_wbc_object.enable_filter || value;
+    	window.document.splugins.eo_wbc_object.enable_filter = window.document.splugins.eo_wbc_object.enable_filter || value;
+    	
     	window.eo_wbc_object.enable_filter = value;
     	window.document.splugins.eo_wbc_object.enable_filter = value;
     };
@@ -1836,11 +1839,12 @@ ACTIVE_TODO_OC_END
 window.eo_wbc_object.enable_filter = window.eo_wbc_object.enable_filter || false;*/
 /*=======*/
 window.eo_wbc_object = window.eo_wbc_object || {};
-window.eo_wbc_object.enable_filter = window.eo_wbc_object.enable_filter || false;
+// window.eo_wbc_object.enable_filter = window.eo_wbc_object.enable_filter || false;
 /*>>>>>>> dad35916d59c134734156ded85678133f6c607a0*/
 //////////// shraddha ////////////////
 window.document.splugins.eo_wbc_object = window.document.splugins.eo_wbc_object || {};
-window.document.splugins.eo_wbc_object.enable_filter = window.document.splugins.eo_wbc_object.enable_filter || false;
+// window.document.splugins.eo_wbc_object.enable_filter = window.document.splugins.eo_wbc_object.enable_filter || false;
+set_enable_filter(false);
 /////////////////////////////////////
 
 // mostly we are not going to do with below fix function flows and how we manage it. but should we need to do anything with it as of now?  
@@ -2234,10 +2238,11 @@ jQuery(document).ready(function($){
 	ACTIVE_TODO_OC_END
 		
 	window.eo_wbc_object = window.eo_wbc_object || {};
-	window.eo_wbc_object.enable_filter = window.eo_wbc_object.enable_filter || false;
+	// window.eo_wbc_object.enable_filter = window.eo_wbc_object.enable_filter || false;
 	//////////// shraddha //////////////
 	window.document.splugins.eo_wbc_object = window.document.splugins.eo_wbc_object || {};
-	window.document.splugins.eo_wbc_object.enable_filter = window.document.splugins.eo_wbc_object.enable_filter || false;
+	// window.document.splugins.eo_wbc_object.enable_filter = window.document.splugins.eo_wbc_object.enable_filter || false;
+	set_enable_filter(false);
 	////////////////////////////////////
 	//done move to pagination js modules bind_click function -- to d 
 		
