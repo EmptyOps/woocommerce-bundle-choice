@@ -2485,7 +2485,7 @@ class EOWBC_Filter_Widget {
     public function eo_wbc_get_category() {        
         
         
-        return wbc()->common->get_category('category',null,array($this->first_category_slug,$this->second_category_slug));
+        return wbc()->common->get_category('category',null,array($this->first_category_slug,$this->second_category_slug),true);
 
         global $wp_query;
 
