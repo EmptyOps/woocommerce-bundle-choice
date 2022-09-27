@@ -116,4 +116,22 @@ class SP_WBC_Compatibility extends SP_Compatibility {
 
  	}
 
+ 	public function router_compatability($page_section,$args = array()) {
+
+
+		// NOTE: here this is actualy the ultimate sort to get the category id, but off cource we will need to add whenever required the specific compatibility patches like based on elementor or wpml conditions above this patche in hirarchical if structure to ensure that plateform specific issues like of wpml or elementor is handeled matuarly and using standard api.
+		
+		$c_res = array();
+ 		if($page_section == 'current_page_category_id') {
+
+			$category = wbc()->wc->get_category_by_url($url, 'id');
+
+			$c_res['term_id'] = $category->cat_ID;
+
+			$c_res['slug'] = $category->slug;
+ 		}
+
+ 		return $c_res;
+ 	}
+
 }
