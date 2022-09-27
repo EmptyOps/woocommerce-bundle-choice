@@ -188,9 +188,11 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
 		// if(!init_call){
 		// 	jQuery(".reset_all_filters.mobile_2").removeClass('mobile_2_hidden');
-		// }	
+		// }
 
-
+		// if(window.eo_wbc_object.enable_filter_table===false){
+		// 	return false;
+		// }
 
 		// /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/template1.js
 		// --add to be confirmed 630 TO 734--
@@ -201,8 +203,8 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 			return false;
 		}
 		console.log(init_call,window.eo_wbc_filter_change_table_view_service);
-
-		if(window.eo_wbc_object.enable_filter===false){
+	
+		if(/*window.eo_wbc_object.enable_filter*/get_enable_filter()===false){
 			return false;
 		}
 
@@ -235,7 +237,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
     };	 	 
 
-	var prepare_query_data = function(form_data, init_call) {
+	var prepare_query_data = function(init_call, form_selector) {
 
 		ACTIVE_TODO_OC_START
 		from 0= this file function 
@@ -252,30 +254,32 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
 
 		new code 
-
+		from template1 only 
+		not in filter
 		if(init_call) {
 			jQuery("form#eo_wbc_filter [name='paged']").val('1');
 			jQuery("form#eo_wbc_filter [name='last_paged']").val('1');
 
 			jQuery("form#eo_wbc_filter [name='_category']").val(jQuery("form#eo_wbc_filter [name='_current_category']"));
-
+			s: question aa flag bandh karavno evu recording ma kidhu chhe. and _attribute 25.35.3 approx recording confirm karavanu
 			jQuery("form#eo_wbc_filter [name='_attribute']").val("");
 		}
 		s: question from template1 only 
 		
 		new code
-
+		from template1 template2
+		not in filter
 		var form=jQuery("form#eo_wbc_filter");
 		s: question from template1 template2 aa var niche chhe but sequence ma ahiya chhe
 
-		from slick_table
+		from slick_table filter
 		if(form.find('[name="html_destination"]').length>0) {
 
 			render_container = form.find('[name="html_destination"]').val();
 		}
 
 		from slick table
-
+		not in filter
 		if(form.find('[name="filter_native"]').length>0) {
 			// jQuery.fn.eo_wbc_filter_change_native(init_call,form_selector,render_container);
 			ACTIVE_TODO now we need to restructure this, need to find out why mahesh had to maintain native and so on separetely? is it stemming due to the diamond quiz flow? -- to h and -- to s 
@@ -292,7 +296,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		ACTIVE_TODO_OC_END
 		
 		from slick template1 template2
-
+		not in filter
 		jQuery(form).attr('method','POST');	
 		jQuery("[name*='action']").val("eo_wbc_e_tabview");
 
@@ -304,7 +308,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		--	but maybe instead of serializing entire form in init call which is against the old flow so instead of right now changing all the changing major flow we can simply consider passing the additional fields that we need to pass like those attribute related fields and category related is i think already covered so i think we can do that. -- to h & -- to s
 			--	still maybe it is not either that much of concern if we serialize entire from because maybe things should just work still it is better idea that we go with the above option instead of this one.
 		from slick template1 template2
-
+		not in filter
 		if(init_call)
 		{
 			from slick template1 template2
@@ -357,7 +361,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 			from slick_table
 			// move to tableview -- to s 
 			form_data.action='eo_wbc_e_tabview';
-
+		not in filter
 		} else {
 			after all prepare_query_data move are finalized then we need to structure form_data preparation properly -- to h
 				--  like form serialize or base form preparation conataining all base wbc fields should happen in here on wbc layer only. -- to h & -- to s
@@ -366,7 +370,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
 			s: question moved from tableview so need to managed flag
 			// move to tableview -- to s 
-
+			from slick_table template1 template2
 			form_data=form.serialize();
 			if(eo_wbc_e_tabview.eo_table_view_per_page){
 				form_data+='&eo_wbc_page='+jQuery('[name="eo_wbc_page"]').val();
@@ -383,7 +387,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 			}*/
 
 			// move to tableview -- to s
-
+			from slick
 			form_data+='&action=eo_wbc_e_tabview';
 		}
 
@@ -590,7 +594,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		// }
 		/////////////////////////////////////////////////////
 
-
+		from filter
 		aa logic filter js ma ajax pachhi chhe so sequance maintain karavani reshe -- to s
 		var site_url=eo_wbc_object.eo_cat_site_url;
 		var ajax_url = '';
@@ -628,8 +632,8 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		ACTIVE_TODO_OC_END	
 	var before_send = function(xhr, form_selector) {
 
-		window.eo_wbc_object.enable_filter_table = false;
-		window.document.splugins.eo_wbc_object.enable_filter_table = false;
+		// window.eo_wbc_object.enable_filter_table = false;
+		// window.document.splugins.eo_wbc_object.enable_filter_table = false;
 		
 		// to avoide duplicate real time calls
 		if(window.eo_wbc_object.hasOwnProperty('xhr')){
@@ -642,8 +646,9 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		///////////////////////////
 		// /var/www/html/drashti_project/27-05-2022/woocommerce-bundle-choice/asset/js/publics/eo_wbc_filter.js
 
-		window.eo_wbc_object.enable_filter = false;
-		window.document.splugins.eo_wbc_object.enable_filter = false;
+		// window.eo_wbc_object.enable_filter = false;
+		// window.document.splugins.eo_wbc_object.enable_filter = false;
+		set_enable_filter(false);
 		// console.log(this.url);
 
 		// ACTIVE_TODO/TODO if ever required to manage or control any logic here in this function or in before send and so on function then we have planned and though out the flow of using even the flag classes like add class for any flag and then on the filter js means the base module the parent module in filter js the filter module in perticuler function for example should search and before send it should just check the hasclass condition with some generic class name. we have to confirm this flow once but this sounds like the idea. otherwise the other option is apply filter notification but we want to but we should simply avoid it if possible.
@@ -680,8 +685,11 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		form data param already pass karel hato j
 		prepare_query_data(init_call, form_selector);
 
-		sp_filter_request variable tv_template.js ma move karavano, if required -- to h & -- to s
-		jQuery.fn.sp_filter_request = jQuery.ajax(
+		// sp_filter_request variable tv_template.js ma move karavano, if required -- to h & -- to s
+		// 	INVALID
+			// --	sp_filter_request aa flag slick ma flase set thay chhe biji koi js ma find nathi thato. [eo_wbc_e_tabview.eo_view_tabular && typeof(jQuery.fn.eo_wbc_filter_change_alt)===typeof(undefined)] aa if table_view_service() ma and tyathi flase set thay chhe.
+			// 		NOTE: this var is not used anywhere but set only 2 times so this var is turned off completely.
+		/*jQuery.fn.sp_filter_request = */jQuery.ajax(
 		{	
 			--	below 2 params namely url and data will set from the object return from the prepare_query_data function above -- to h & -- to s
 			url: eo_wbc_object.eo_admin_ajax_url,//form.attr('action'),
@@ -689,9 +697,9 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 			type:'POST', // POST
 
 			beforeSend:function(xhr) {
-		
-				before_send(xhr, form_selector);
+
 				console.log(this.url);
+				before_send(xhr, form_selector);
 
 			},
 
@@ -731,7 +739,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		} );	
 
 		from template1 and slick table
-
+		not in filter
 		if(!init_call){
 			jQuery(".reset_all_filters.mobile_2").removeClass('mobile_2_hidden');
 		}	
@@ -756,6 +764,9 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
 		// NOTE: hide_loader is called from success and error also but in future we most likely will remove call from success and error function.
 		hide_loader(form_selector);
+
+		// added new on 26-09-2022
+		set_enable_filter(true);
 
 		var complete_callback = null ;
         window.document.splugins.events.api.notifyAllObservers( 'filters', 'complete', {}, complete_callback, form_selector==null ? _this.$base_container : form_selector );
@@ -807,8 +818,9 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
 		eo_wbc_filter_render_html(data, render_container, form_selector);
 
-		window.eo_wbc_object.enable_filter = true;
-		window.document.splugins.eo_wbc_object.enable_filter = true;
+		// window.eo_wbc_object.enable_filter = true;
+		// window.document.splugins.eo_wbc_object.enable_filter = true;
+		set_enable_filter(true);
 
 		/////////////////////////////
 		var success_callback = null ;
@@ -821,15 +833,16 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		// console.log('error');
 		// console.log(data);
 
-		ACTIVE_TODO from tableview /// shraddha
-		window.eo_wbc_object.enable_filter_table = true;
-		window.document.splugins.eo_wbc_object.enable_filter_table = true;
+		// ACTIVE_TODO from tableview /// shraddha
+		// window.eo_wbc_object.enable_filter_table = true;
+		// window.document.splugins.eo_wbc_object.enable_filter_table = true;
 
 		////////////////////////////
 		// /var/www/html/drashti_project/27-05-2022/woocommerce-bundle-choice/asset/js/publics/eo_wbc_filter.js
 
-		window.eo_wbc_object.enable_filter = true;
-		window.document.splugins.eo_wbc_object.enable_filter = true;
+		// window.eo_wbc_object.enable_filter = true;
+		// window.document.splugins.eo_wbc_object.enable_filter = true;
+		set_enable_filter(true);
 
 		///////////////////////////////
 
@@ -1454,12 +1467,16 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
     var get_enable_filter = function() {
 
-    	s:question hiren bhai ne puchhine karavanu baki chhe.
+    	return window.document.splugins.eo_wbc_object.enable_filter/*window.eo_wbc_object.enable_filter*/;
     };
 
     var set_enable_filter = function() {
 
-    	s:question hiren bhai ne puchhine karavanu baki chhe.
+    	window.eo_wbc_object.enable_filter = window.eo_wbc_object.enable_filter || value;
+    	window.document.splugins.eo_wbc_object.enable_filter = window.document.splugins.eo_wbc_object.enable_filter || value;
+    	
+    	window.eo_wbc_object.enable_filter = value;
+    	window.document.splugins.eo_wbc_object.enable_filter = value;
     };
     
     var get_archive_html = function() {
@@ -1846,11 +1863,12 @@ ACTIVE_TODO_OC_END
 window.eo_wbc_object.enable_filter = window.eo_wbc_object.enable_filter || false;*/
 /*=======*/
 window.eo_wbc_object = window.eo_wbc_object || {};
-window.eo_wbc_object.enable_filter = window.eo_wbc_object.enable_filter || false;
+// window.eo_wbc_object.enable_filter = window.eo_wbc_object.enable_filter || false;
 /*>>>>>>> dad35916d59c134734156ded85678133f6c607a0*/
 //////////// shraddha ////////////////
 window.document.splugins.eo_wbc_object = window.document.splugins.eo_wbc_object || {};
-window.document.splugins.eo_wbc_object.enable_filter = window.document.splugins.eo_wbc_object.enable_filter || false;
+// window.document.splugins.eo_wbc_object.enable_filter = window.document.splugins.eo_wbc_object.enable_filter || false;
+set_enable_filter(false);
 /////////////////////////////////////
 
 // mostly we are not going to do with below fix function flows and how we manage it. but should we need to do anything with it as of now?  
@@ -2151,8 +2169,9 @@ ACTIVE_TODO_OC_END
 /*if(eo_wbc_object.disp_regular=='1'){
 	*/
 --	disp_regular aa wbc and tableview ma serch ekaravano -- to s
-	window.eo_wbc_object.enable_filter = true;
-	window.document.splugins.eo_wbc_object.enable_filter = true;
+	// window.eo_wbc_object.enable_filter = true;
+	// window.document.splugins.eo_wbc_object.enable_filter = true;
+	window.document.splugins.wbc.filters.api.set_enable_filter(true);
 	jQuery.fn.eo_wbc_filter_change_native= function(init_call=false,form_selector="form#eo_wbc_filter",render_container='',parameters={}) {
 
 		ACTIVE_TODO_OC_START
@@ -2243,10 +2262,11 @@ jQuery(document).ready(function($){
 	ACTIVE_TODO_OC_END
 		
 	window.eo_wbc_object = window.eo_wbc_object || {};
-	window.eo_wbc_object.enable_filter = window.eo_wbc_object.enable_filter || false;
+	// window.eo_wbc_object.enable_filter = window.eo_wbc_object.enable_filter || false;
 	//////////// shraddha //////////////
 	window.document.splugins.eo_wbc_object = window.document.splugins.eo_wbc_object || {};
-	window.document.splugins.eo_wbc_object.enable_filter = window.document.splugins.eo_wbc_object.enable_filter || false;
+	// window.document.splugins.eo_wbc_object.enable_filter = window.document.splugins.eo_wbc_object.enable_filter || false;
+	set_enable_filter(false);
 	////////////////////////////////////
 	//done move to pagination js modules bind_click function -- to d 
 		
