@@ -188,13 +188,11 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
 		// if(!init_call){
 		// 	jQuery(".reset_all_filters.mobile_2").removeClass('mobile_2_hidden');
-		// }	
+		// }
 
 		// if(window.eo_wbc_object.enable_filter_table===false){
 		// 	return false;
 		// }
-
-
 
 		// /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/template1.js
 		// --add to be confirmed 630 TO 734--
@@ -205,7 +203,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 			return false;
 		}
 		console.log(init_call,window.eo_wbc_filter_change_table_view_service);
-
+	
 		if(/*window.eo_wbc_object.enable_filter*/get_enable_filter()===false){
 			return false;
 		}
@@ -306,6 +304,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		from slick template1 template2
 		form_data=undefined;
 
+		s: question ---- aa note mukavani kidhi hati - 31.29
 		--	we most likely need to serialize form in init call case also means when init call is true. -- to h & -- to s
 		--	but maybe instead of serializing entire form in init call which is against the old flow so instead of right now changing all the changing major flow we can simply consider passing the additional fields that we need to pass like those attribute related fields and category related is i think already covered so i think we can do that. -- to h & -- to s
 			--	still maybe it is not either that much of concern if we serialize entire from because maybe things should just work still it is better idea that we go with the above option instead of this one.
@@ -352,9 +351,11 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 				// }
 			}
 			
-			// if(jQuery("select[name='orderby']").length>0){
-			// 	form_data.orderby=jQuery("select[name='orderby']:eq(0)").val();
-			// }
+			if(jQuery("select[name='orderby']").length>0){
+				form_data.orderby=jQuery("select[name='orderby']:eq(0)").val();
+			}
+
+			// NOTE: this if is duplicate of above and still we can not confirm if it was intentional or not so just kept it till we can not confirm accuratly.
 			if(jQuery("select[name='orderby']").length>0){
 				form_data.orderby=jQuery("select[name='orderby']:eq(0)").val();
 			}
@@ -602,7 +603,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		var ajax_url = '';
 
 		if(site_url.includes('?')) {
-			ajax_url = site_url+	;
+			ajax_url = site_url+eo_wbc_object.eo_cat_query;
 		} else {
 			ajax_url = site_url+'/?'+eo_wbc_object.eo_cat_query;
 		}
@@ -683,7 +684,8 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		}
 
 		// sould_search();
-
+		
+		form data param already pass karel hato j
 		prepare_query_data(init_call, form_selector);
 
 		// sp_filter_request variable tv_template.js ma move karavano, if required -- to h & -- to s
@@ -698,9 +700,10 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 			type:'POST', // POST
 
 			beforeSend:function(xhr) {
-		
+
 				console.log(this.url);
 				before_send(xhr, form_selector);
+
 			},
 
 			success:function(data) {
@@ -874,11 +877,14 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		}
 	};
     ///////////// -- 15-06-2022 -- @drashti -- ///////////////////////////////
-    var compatability = function(section, object, expected_result) {
+    var compatability = function(section, object, expected_result, form_selector) {
     	// ACTIVE_TODO_OC_START
     	// do the call from where the below section is moved here, and if you already did the call then show and confirm with me -- to d 
     	// ACTIVE_TODO_OC_END
         if(section == 'product-listing'){
+
+        	-- in final revision most probebly we need to comment below statment -- to h & to a
+
             jQuery('.products:eq(0),.product-listing:eq(0),.row-inner>.col-lg-9:eq(0)').addClass('product_grid_view');
             //jQuery('.products,.product-listing,.row-inner>.col-lg-9:eq(0),.woocommerce-pagination,.pagination').css('visibility','visible');
             if(jQuery(".row-inner>.col-lg-9").length>0){
@@ -900,6 +906,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
             // --- pagination module move this code ---
             // jQuery('.products,.product-listing,.row-inner>.col-lg-9:eq(0),.woocommerce-pagination,.pagination,jet-filters-pagination').css('visibility','visible');
             // --- end ---
+	            -- in final revision most probebly we need to comment below statment -- to h & to a
             window.document.splugins.wbc.pagination.api.init();
 
             // Fix for the yith wishlist.
@@ -918,6 +925,8 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
         }else if(section == 'render_container'){
 
+			-- aa if conditions tableview na badha selectore and calling sysuance joy ne confirm karvani se -- to a
+			
 			if(object.render_container.length<=0) {
 		
 				object.render_container = jQuery(".elementor-products-grid");
@@ -999,15 +1008,17 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 				// if(jQuery('.products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products').length<=0) {
 					// jQuery(render_container).html(container_html);
 				// } else {
-					jQuery(render_container).html(container_html);
+					// jQuery(render_container).html(container_html);
+					set_archive_html(container_html, render_container);
 				// }			
 			}						
 			else {
 				/*ACTIVE_TODO_QC_START
 				we need to track execution of this function so search in all 5 repos and confirm where this function is defined -- to d /woo-bundle-choice/application/view/publics/category.php
 					--	and if that is found then only track above where is_card_view_rendered to see from which different locations it is defined and/or coming -- to d 
+				// NOTE: It is not defined in eo_wbc_filter.js atleast, it is atleast created in /woo-bundle-choice/application/view/publics/category.php		
 				ACTIVE_TODO_QC_END*/
-						// NOTE: It is not defined in eo_wbc_filter.js atleast, it is atleast created in /woo-bundle-choice/application/view/publics/category.php
+						
 				wbc_attach_card_views();
 				
 			}
@@ -1240,6 +1251,9 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
     var on_reset_click_listener = function(form_selector){
 
+	    -- all 7 demo(wp page) ma kya nathi -- to a	
+    	-- jewellery demo ma Show Reset Filters Button ni switch enable kari pasi aa selectore male se and work kare se -- to a
+
     	jQuery(document).on('click',".reset_all_filters",function(){
 	        
 	        jQuery("[data-reset]").each(function(e){
@@ -1256,9 +1270,11 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		////////////////////////
 
 		// reset click event 
-		/*ACTIVE_TODO_QC_START
-		there is critical flag handling in template1.js at line no:768 which is needed to be applied here as soon as possible -- to h & -- to s
+		/*ACTIVE_TODO_QC_START	
+		there is critical flag handling in template1.js at line no:768 which is needed to be applied here as soon as possible -- to h & -- to s	
 		ACTIVE_TODO_QC_END*/
+    	-- all 7 demo(wp page) ma kya nathi -- to a	
+    	-- jewellery demo ma alternate filter widget change karya pasi pan aa selectore nathi malto -- to a
 		jQuery(".eo_wbc_srch_btn:eq(2)").click(function(){					
 			///////////////////////////////////////////
 			document.forms.eo_wbc_filter.reset();
@@ -1467,6 +1483,20 @@ window.document.splugins.wbc.filters.core = function( configs ) {
     	
     	window.eo_wbc_object.enable_filter = value;
     	window.document.splugins.eo_wbc_object.enable_filter = value;
+    };
+    
+    var get_archive_html = function() {
+    	// TODO implement when required
+    };
+
+    var set_archive_html = function(html, render_container=null) {
+
+    	if(render_container == null) {
+
+    		render_container = result_container();
+    	}
+
+    	jQuery(render_container).html(html);
     };
 
     ///////////////////////////////////////////////////////
@@ -2267,6 +2297,8 @@ jQuery(document).ready(function($){
 	ACTIVE_TODO_OC_END
 	
 	we most likely need to comment below code but lets confirm one last time -- to h & -- to s
+		t ni last follow up aave pachhi if false maravnu. -- to s	
+			after if false we need to rely on details from m -- to h
 	jQuery("[data-toggle_column]").click(function(){
 		if(jQuery(this).hasClass('active')){		
 			jQuery("[data-toggle_slug='"+jQuery(this).data('toggle_column')+"']").css('display','none');
@@ -2296,6 +2328,7 @@ jQuery(document).ready(function($){
 	// moved to assets php
   	// window.document.splugins.filters.api.init();
 
+	// NOTE: admin ma "disp_regular" aa flag thi find karyu tena related kay malyu nathi
 	if(window.eo_wbc_object.disp_regular){
 	
 		create function bind_click in filters js module and move below code there -- to d done
@@ -2304,6 +2337,7 @@ jQuery(document).ready(function($){
 
 		s: question niche code block filter module na "on_change_listener" function ma chhe to e fucntion call karavanu -- to s
 			this seems to be limited only for the tableview so need top figureout if this is not needed for filter js then should be moved to tableview js and all other such things in this if block of disp_regular condition above -- to h & -- to s
+		-- jewellery demo ma apply filter nu button work kare se -- to a
 		if(!window.eo_wbc_object.btnfilter_now){			
 			jQuery("#eo_wbc_filter").on('change',"input:not(:checkbox)",function(){
 				jQuery('[name="paged"]').val('1');
@@ -2627,5 +2661,4 @@ window.document.splugins.wbc.filter_sets.api = window.document.splugins.wbc.filt
 	// moved to assets php
 	// window.document.splugins.wbc.filter_sets.api.init(); 	
 // });
-
 
