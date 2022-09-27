@@ -128,6 +128,13 @@ class Feed extends \eo\wbc\controllers\publics\Controller{
             
             add_action( 'woocommerce_before_shop_loop_item_title', function() use($page_section,$args) {  
 
+                do_action( 'sp_wbc_woo_template_loop_product_thumbnail');
+
+
+            }, 15 );
+
+            add_action('sp_wbc_woo_template_loop_product_thumbnail', function() use($page_section,$args) {  
+
                 $args['hook_callback_args'] = array();
                 // $args['hook_callback_args']['html'] = $html;
                 // $args['hook_callback_args']['hook_args'] = $hook_args;
@@ -135,10 +142,17 @@ class Feed extends \eo\wbc\controllers\publics\Controller{
 
                 return $this->selectron_hook_render($page_section,'gallery_images',false,$args);
 
-
             }, 15 );
+
         } elseif ($page_section == 'swatches') {
+
             add_filter( 'woocommerce_dropdown_variation_attribute_options_html',  function($html, $hook_args) use($page_section,$args){
+
+                return apply_filters ( 'sp_wbc_get_variation_attr_opts_html',$html, $hook_args);
+
+            }, 200, 2);
+
+            add_filter('sp_wbc_get_variation_attr_opts_html',function($html, $hook_args) use($page_section,$args){
 
                 $args['hook_callback_args'] = array();
                 $args['hook_callback_args']['html'] = $html;
@@ -146,8 +160,9 @@ class Feed extends \eo\wbc\controllers\publics\Controller{
 
 
                 return $this->selectron_hook_render($page_section,'swatches',false,$args);
-
+                
             }, 200, 2);
+
         } else if ($args['page_section'] == 'swatches_cart_form') {
 
             $SP_SLCTRN_Swatches_Cart_Form_class = "\\sp\\wbc\\controller\\publics\\feed\\loop\\selectron\\SP_SLCTRN_Swatches_Cart_Form";                      

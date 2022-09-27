@@ -46,8 +46,16 @@ class SP_WBC_Variations extends SP_Variations {
 		if( $for_section == "gallery_images_init" ) {
 
 			//	below hooked function will add our data layers of sp_variations gallery_images and maybe also others of the sp_variations to the woo data 					
-			add_filter( 'woocommerce_available_variation', function($variation_get_max_purchase_quantity,  $instance,  $variation) use($args){
+			add_filter('woocommerce_available_variation',function($variation_get_max_purchase_quantity,  $instance,  $variation) use($args){
+
+				return apply_filters ( 'sp_wbc_get_variation', $variation_get_max_purchase_quantity,  $instance,  $variation);
+
+			}, 90, 3);
+
+			add_filter('sp_wbc_get_variation',function($variation_get_max_purchase_quantity,  $instance,  $variation) use($args){
+
 				return self::instance()->get_available_variation_hook_callback($variation_get_max_purchase_quantity,  $instance,  $variation, $args);
+				
 			}, 90, 3);
 			
 		}elseif( $for_section == "swatches_init"/* && $args['page'] != 'feed'*/ ) {
