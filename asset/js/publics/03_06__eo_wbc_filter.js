@@ -306,6 +306,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		from slick template1 template2
 		form_data=undefined;
 
+		s: question ---- aa note mukavani kidhi hati - 31.29
 		--	we most likely need to serialize form in init call case also means when init call is true. -- to h & -- to s
 		--	but maybe instead of serializing entire form in init call which is against the old flow so instead of right now changing all the changing major flow we can simply consider passing the additional fields that we need to pass like those attribute related fields and category related is i think already covered so i think we can do that. -- to h & -- to s
 			--	still maybe it is not either that much of concern if we serialize entire from because maybe things should just work still it is better idea that we go with the above option instead of this one.
@@ -352,9 +353,11 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 				// }
 			}
 			
-			// if(jQuery("select[name='orderby']").length>0){
-			// 	form_data.orderby=jQuery("select[name='orderby']:eq(0)").val();
-			// }
+			if(jQuery("select[name='orderby']").length>0){
+				form_data.orderby=jQuery("select[name='orderby']:eq(0)").val();
+			}
+
+			// NOTE: this if is duplicate of above and still we can not confirm if it was intentional or not so just kept it till we can not confirm accuratly.
 			if(jQuery("select[name='orderby']").length>0){
 				form_data.orderby=jQuery("select[name='orderby']:eq(0)").val();
 			}
@@ -2267,6 +2270,8 @@ jQuery(document).ready(function($){
 	ACTIVE_TODO_OC_END
 	
 	we most likely need to comment below code but lets confirm one last time -- to h & -- to s
+		t ni last follow up aave pachhi if false maravnu. -- to s
+			after if false we need to rely on details from m -- to h
 	jQuery("[data-toggle_column]").click(function(){
 		if(jQuery(this).hasClass('active')){		
 			jQuery("[data-toggle_slug='"+jQuery(this).data('toggle_column')+"']").css('display','none');
