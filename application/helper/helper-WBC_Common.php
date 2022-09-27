@@ -13,7 +13,7 @@ class WBC_Common {
 		return self::$_instance;
 	}
 
-	public function get_category($page='product',int $post_id = null,array $in_category=array()){
+	public function get_category($page='product',int $post_id = null,array $in_category=array(), $is_apply_compatibility=false){
 
 		// ACTIVE_TODO just for the notes that, almost all the logic of this function seems to be deeply implemented for the proper working of the different premium pair builders supported by the earring pendant builder extension, so let keep that in mind while we are getting into the refactoring of those earring pendant builder and other related extensions of category page and item page set 
 
@@ -25,22 +25,50 @@ class WBC_Common {
 		$post_id = apply_filters('eoowbc_helper_common_get_category_post_id',$post_id);
 		$return_category = '';
 		if($page == 'category' ) {
+			
 			global $wp_query;
+
+			$qo_term_id = null;
+			$qo_term_slug = null;
 			if(empty($wp_query->get_queried_object()) or !property_exists($wp_query->get_queried_object(),'term_id')) {
-				return false;
+				
+				if($is_apply_compatibility) {
+
+					// NOTE: here this is actualy the ultimate sort to get the category id, but off cource we will need to add whenever required the specific compatibility patches like based on elementor or wpml conditions above this patche in hirarchical if structure to ensure that plateform specific issues like of wpml or elementor is handeled matuarly and using standard api.
+					
+					$c_res = \eo\wbc\model\SP_WBC_Compatibility::instance()->router_compatability('current_page_category_id');
+
+					if(empty($c_res)) {
+					
+						return false;
+					}
+					// $term = wbc()->wc->get_term_by( 'id', $c_res['term_id'], 'product_cat' );
+
+					$qo_term_id = $c_res['term_id'];
+					$qo_term_slug = $c_res['slug'];
+
+				} else {
+
+					return false;
+				}
+			} else {
+
+				$qo_term_id = $wp_query->get_queried_object()->term_id;
+				$qo_term_slug = $wp_query->get_queried_object()->slug;
 			}
+
 			if(!empty($in_category) and is_array($in_category)) {
-				$term_slug=array_map(array(wbc()->wp,"cat_id2slug"),get_ancestors($wp_query->get_queried_object()->term_id, 'product_cat'));				
-				$term_slug[]=$wp_query->get_queried_object()->slug;					
+				$term_slug=array_map(array(wbc()->wp,"cat_id2slug"),get_ancestors($qo_term_id/*$wp_query->get_queried_object()->term_id*/, 'product_cat'));				
+				$term_slug[]=$qo_term_slug/*$wp_query->get_queried_object()->slug*/;					
 				$matches = array_intersect($in_category,$term_slug);				
 				if(!empty($matches) and is_array($matches)){
 					$matches = array_values($matches);					
 					$return_category = $matches[0];
 				} else {
-					$return_category = $wp_query->get_queried_object()->slug;
+					$return_category = $qo_term_slug/*$wp_query->get_queried_object()->slug*/;
 				}
 			} else {
-				$return_category = $wp_query->get_queried_object()->slug;	
+				$return_category = $qo_term_slug/*$wp_query->get_queried_object()->slug*/;	
 			}			
 		} elseif( $page == 'product' and !empty($post_id) and !empty($in_category) and is_array($in_category) ) {
 			$post = wbc()->wc->eo_wbc_get_product($post_id);
@@ -492,6 +520,12 @@ class WBC_Common {
 	public function is_mobile() {
 
 		return  wp_is_mobile();
+	}
+
+	public function get_current_url() {
+
+	    global $wp;  
+		return home_url(add_query_arg(array($_GET), $wp->request));
 	}
 
 }

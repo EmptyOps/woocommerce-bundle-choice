@@ -502,7 +502,7 @@ class WBC_WC {
 
             } elseif( $format == 'detailed' ) {
 
-                $option_list['pa_'.$attribute->attribute_name] = array('label'=>$attribute->attribute_label, 'attr'=>'data-sp_eid="'.$separator.'attr'.$separator.$attribute->attribute_id.' " ', $format);  
+                $option_list['pa_'.$attribute->attribute_name] = array('label'=>$attribute->attribute_label, 'attr'=>'data-sp_eid="'.$separator.'attr'.$separator.$attribute->attribute_id.'" ', $format);  
 
             } elseif( $format == 'id_and_title' ) {
                 $option_list[$attribute->attribute_id] = $attribute->attribute_label;
@@ -616,6 +616,60 @@ class WBC_WC {
         }       
         return $attributes;
 
+    }
+
+    // credit : https://stackoverflow.com/questions/12798665/wordpress-get-category-id-from-url
+    public function get_category_by_url($url=null, $result_format='id', $is_based_on_wp_api=false, $is_based_on_url=false, $is_based_on_category_title=false) {
+    
+        if( empty($url) ) {
+
+            $url = wbc()->common->get_current_url();
+        } 
+
+        $wp_category = null;
+        if($is_based_on_wp_api) {
+
+            foreach( (get_the_category()) as $category) {
+                
+                if ( get_category_link($category->cat_ID) == $url ) {
+                    
+                    $wp_category = $category;
+                    
+                    break;
+                }
+            }
+        } elseif($is_based_on_url) {
+
+            // global $wp;
+            // $current_url = home_url( add_query_arg( array(), $wp->request ) );
+            $current_url = $url;
+
+            $url_array = explode('?',$current_url); 
+
+            $url_array = explode('/',$url_array[0]); 
+            $retVal = !empty($url_array[5]) ? $url_array[5] : $url_array[4] ;
+            // /*$idObj*/$wp_category = get_category_by_slug($retVal); 
+            // $wp_category = get_term_by( 'slug', $retVal, 'product_cat' ); 
+            $wp_category = wbc()->wc->get_term_by( 'slug', $retVal, 'product_cat' ); 
+            // echo /*$idObj*/$wp_category->name
+
+        } elseif($is_based_on_category_title) {
+
+            $cur_cat = get_cat_ID( single_cat_title("",false) ); //get the cat id
+            /*$category*/$wp_category = &get_category($cur_cat);
+            // /*$category*/$wp_category->slug; //get cat slug
+        }
+
+        if($result_format == 'id') {
+
+            return $wp_category->cat_ID;
+        } elseif($result_format == 'slug') {
+
+            return $wp_category->slug;
+        } else {
+
+            return $wp_category;
+        }
     }
 
 }
