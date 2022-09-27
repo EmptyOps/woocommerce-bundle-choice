@@ -91,7 +91,7 @@ add_action( ( !is_admin() ? 'wp_enqueue_scripts' : 'admin_enqueue_scripts'),func
 		wbc()->load->asset('js','common',array('jquery'),"0.1.4",false,true);
 	}
 
-}, 999);
+},( !is_admin() ? 999 : 5) );
 
 
 add_action('wp_footer',function(){               
