@@ -304,6 +304,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		from slick template1 template2
 		form_data=undefined;
 
+		s: question ---- aa note mukavani kidhi hati - 31.29
 		--	we most likely need to serialize form in init call case also means when init call is true. -- to h & -- to s
 		--	but maybe instead of serializing entire form in init call which is against the old flow so instead of right now changing all the changing major flow we can simply consider passing the additional fields that we need to pass like those attribute related fields and category related is i think already covered so i think we can do that. -- to h & -- to s
 			--	still maybe it is not either that much of concern if we serialize entire from because maybe things should just work still it is better idea that we go with the above option instead of this one.
@@ -350,9 +351,11 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 				// }
 			}
 			
-			// if(jQuery("select[name='orderby']").length>0){
-			// 	form_data.orderby=jQuery("select[name='orderby']:eq(0)").val();
-			// }
+			if(jQuery("select[name='orderby']").length>0){
+				form_data.orderby=jQuery("select[name='orderby']:eq(0)").val();
+			}
+
+			// NOTE: this if is duplicate of above and still we can not confirm if it was intentional or not so just kept it till we can not confirm accuratly.
 			if(jQuery("select[name='orderby']").length>0){
 				form_data.orderby=jQuery("select[name='orderby']:eq(0)").val();
 			}
@@ -396,15 +399,15 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		// /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/sp_tv_template.js
 		// --add to be confirmed 2601 TO 2705--
 
-		if(init_call) {
-			ACTIVE_TODO this should be moved in pagination as soon as possible, next by 2nd revision -- to h & -- to a
-			jQuery("form#eo_wbc_filter [name='paged']").val('1');
-			jQuery("form#eo_wbc_filter [name='last_paged']").val('1');
-			jQuery("form#eo_wbc_filter [name='_category']").val(jQuery("form#eo_wbc_filter [name='_current_category']"));
-			s: question aa flag bandh karavno evu recording ma kidhu chhe. and _attribute 25.35 approx recording confirm karavanu
-			jQuery("form#eo_wbc_filter [name='_attribute']").val("");
-		}
-		var form=jQuery("form#eo_wbc_filter");	
+		// if(init_call) {
+		// 	ACTIVE_TODO this should be moved in pagination as soon as possible, next by 2nd revision -- to h & -- to a
+		// 	jQuery("form#eo_wbc_filter [name='paged']").val('1');
+		// 	jQuery("form#eo_wbc_filter [name='last_paged']").val('1');
+		// 	jQuery("form#eo_wbc_filter [name='_category']").val(jQuery("form#eo_wbc_filter [name='_current_category']"));
+		// 	s: question aa flag bandh karavno evu recording ma kidhu chhe. and _attribute 25.35 approx recording confirm karavanu
+		// 	jQuery("form#eo_wbc_filter [name='_attribute']").val("");
+		// }
+		// var form=jQuery("form#eo_wbc_filter");	
 
 		// jQuery(form).attr('method','POST');	
 		// jQuery("[name*='action']").val("eo_wbc_e_tabview");	
@@ -937,7 +940,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
         } 
 
         var compatability_callback = null ;
-        window.document.splugins.events.api.notifyAllObservers( 'filters', 'compatability', {}, compatability_callback, form_selector==null ? _this.$base_container : form_selector );
+        window.document.splugins.events.api.notifyAllObservers( 'filters', 'compatability', {}, compatability_callback, ( object!=null && window.document.splugins.common._o( _this.configs, 'form_selector' ) ) ? _this.$base_container : form_selector );
         
         return object;
     };
@@ -1267,6 +1270,9 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		////////////////////////
 
 		// reset click event 
+		/*ACTIVE_TODO_QC_START	
+		there is critical flag handling in template1.js at line no:768 which is needed to be applied here as soon as possible -- to h & -- to s	
+		ACTIVE_TODO_QC_END*/
     	-- all 7 demo(wp page) ma kya nathi -- to a	
     	-- jewellery demo ma alternate filter widget change karya pasi pan aa selectore nathi malto -- to a
 		jQuery(".eo_wbc_srch_btn:eq(2)").click(function(){					
@@ -1470,7 +1476,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
     	return window.document.splugins.eo_wbc_object.enable_filter/*window.eo_wbc_object.enable_filter*/;
     };
 
-    var set_enable_filter = function() {
+    var set_enable_filter = function(value) {
 
     	window.eo_wbc_object.enable_filter = window.eo_wbc_object.enable_filter || value;
     	window.document.splugins.eo_wbc_object.enable_filter = window.document.splugins.eo_wbc_object.enable_filter || value;
@@ -2291,6 +2297,8 @@ jQuery(document).ready(function($){
 	ACTIVE_TODO_OC_END
 	
 	we most likely need to comment below code but lets confirm one last time -- to h & -- to s
+		t ni last follow up aave pachhi if false maravnu. -- to s	
+			after if false we need to rely on details from m -- to h
 	jQuery("[data-toggle_column]").click(function(){
 		if(jQuery(this).hasClass('active')){		
 			jQuery("[data-toggle_slug='"+jQuery(this).data('toggle_column')+"']").css('display','none');
