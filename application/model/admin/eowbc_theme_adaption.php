@@ -27,7 +27,7 @@ class Eowbc_Theme_Adaption extends Eowbc_Model {
 		
 	}
 
-	public function get( $form_definition ) {
+	public function get( $form_definition, $args = null ) {
 		
 		$page_slug = wbc()->sanitize->get('page');
 		$plugin_slug = explode("---", $page_slug)[0];
@@ -184,7 +184,7 @@ class Eowbc_Theme_Adaption extends Eowbc_Model {
 	    return $form_definition; 
 	}
 
-	public function save( $form_definition, $is_auto_insert_for_template=false ) {
+	public function save( $form_definition, $is_auto_insert_for_template=false, $args = null ) {
 		
 		wbc()->sanitize->clean($form_definition);
 		wbc()->validate->check($form_definition);

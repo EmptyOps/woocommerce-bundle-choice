@@ -502,7 +502,7 @@ class WBC_WC {
 
             } elseif( $format == 'detailed' ) {
 
-                $option_list['pa_'.$attribute->attribute_name] = array('label'=>$attribute->attribute_label, 'attr'=>'data-sp_eid="'.$separator.'attr'.$separator.$attribute->attribute_id.' " ', $format);  
+                $option_list['pa_'.$attribute->attribute_name] = array('label'=>$attribute->attribute_label, 'attr'=>'data-sp_eid="'.$separator.'attr'.$separator.$attribute->attribute_id.'" ', $format);  
 
             } elseif( $format == 'id_and_title' ) {
                 $option_list[$attribute->attribute_id] = $attribute->attribute_label;
@@ -616,6 +616,33 @@ class WBC_WC {
         }       
         return $attributes;
 
+    }
+
+    // credit : https://stackoverflow.com/questions/12798665/wordpress-get-category-id-from-url
+    public function get_category_by_url($url=null, $result_format='id') {
+    
+        if( empty($url) ) {
+
+            $url = wbc()->common->get_current_url();
+        } 
+
+        foreach( (get_the_category()) as $category) {
+            
+            if ( get_category_link($category->cat_ID) == $url ) {
+            
+                if($result_format == 'id') {
+               
+                    return $category->cat_ID;
+                } elseif($result_format == 'slug') {
+               
+                    return $category->slug;
+                } else {
+
+                    return $category;
+                }
+            }
+        }
+        return false;
     }
 
 }

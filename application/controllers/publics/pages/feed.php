@@ -305,23 +305,25 @@ class Feed extends \eo\wbc\controllers\publics\Controller{
 
         // put ui-builder in autoloader function in config file and then remove load model ui builder statement from everywhere -- to b
         $ui = $this->render_woo_dropdown_attribute_html_data($data,$args);
-        // echo ">!>!>!";
-        // wbc_pr($ui); /*die();*/
         \sp\theme\view\ui\builder\Page_Builder::instance()->build_page_widgets($ui,'woo_dropdown_attribute_html');
-        //echo "<<<<<>!>!>!";
-        $html = apply_filters('sp_render_swatches_data_by_attribute_type',null,$data);
 
-        if (!empty($html)) {
-            $ui = $html;
-        }else{
 
-            $data['variable_item_ui'] = $this->render_variable_item_data($data,$args);
+        if ($data['woo_dropdown_attribute_html_data']['args']['sp_variations_swatches_show_on_shop_page'] == 1) {
+           
+            $html = apply_filters('sp_render_swatches_data_by_attribute_type',null,$data);
 
-            $ui = $this->render_variable_item_wrapper_data($data,$args );           
+            if (!empty($html)) {
+                $ui = $html;
+            }else{
+
+                $data['variable_item_ui'] = $this->render_variable_item_data($data,$args);
+
+                $ui = $this->render_variable_item_wrapper_data($data,$args );           
+            }
+            //wbc_pr($ui); die();
+
+            \sp\theme\view\ui\builder\Page_Builder::instance()->build_page_widgets($ui,'swatches');
         }
-        //wbc_pr($ui); die();
-
-        \sp\theme\view\ui\builder\Page_Builder::instance()->build_page_widgets($ui,'swatches');
     }
 
     public function render_woo_dropdown_attribute_html_data($data,$args = array()){
