@@ -239,182 +239,271 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
 	var prepare_query_data = function(init_call, form_selector) {
 
-		ACTIVE_TODO_OC_START
-		from 0= this file function 
-		bring here the code from there -- to d 
-
-		here we assume that all sections moved from different places, are now merged with duplicate check and so on. please confirm. -- to s 
-			--	and also confirm if they are logically correct with regard to execution sequence and the if conditions for different layers that are merged -- to s
-		ACTIVE_TODO_OC_END
+		// from 0= this file function 
 
 		// from 1 	
 
-		from slick and filter
-		var form=jQuery(form_selector);
-
-
-		new code 
-		from template1 only 
-		not in filter
-		if(init_call) {
-			jQuery("form#eo_wbc_filter [name='paged']").val('1');
-			jQuery("form#eo_wbc_filter [name='last_paged']").val('1');
-
-			jQuery("form#eo_wbc_filter [name='_category']").val(jQuery("form#eo_wbc_filter [name='_current_category']"));
-			s: question aa flag bandh karavno evu recording ma kidhu chhe. and _attribute 25.35.3 approx recording confirm karavanu
-			jQuery("form#eo_wbc_filter [name='_attribute']").val("");
-		}
-		s: question from template1 only 
+		// from slick and filter
+		// if(type == 'slick_table' || type == 'filter') {
 		
-		new code
-		from template1 template2
-		not in filter
-		var form=jQuery("form#eo_wbc_filter");
-		s: question from template1 template2 aa var niche chhe but sequence ma ahiya chhe
+			// made global 
+			var form=jQuery(form_selector);
+		// }
 
-		from slick_table filter
-		if(form.find('[name="html_destination"]').length>0) {
-
-			render_container = form.find('[name="html_destination"]').val();
-		}
-
-		from slick table
-		not in filter
-		if(form.find('[name="filter_native"]').length>0) {
-			// jQuery.fn.eo_wbc_filter_change_native(init_call,form_selector,render_container);
-			ACTIVE_TODO now we need to restructure this, need to find out why mahesh had to maintain native and so on separetely? is it stemming due to the diamond quiz flow? -- to h and -- to s 
-			window.document.splugins.filters.api.eo_wbc_filter_change_wrapper( init_call, form_selector );
-			return true;
-		}					
-
-		new code
-		jQuery.fn.eo_wbc_filter_change_native(init_call,form_selector,render_container);
-		s: question slcik table ma aa function no call chhe but ahiya move nathi thayel so sequance mate mukel chhe 
-
-		ACTIVE_TODO_OC_START
-		from 1 after eo_wbc_filter_change_native call 
-		ACTIVE_TODO_OC_END
+		var form_data = null;
+		var ajax_url = '';
 		
-		from slick template1 template2
-		not in filter
-		/*ACTIVE_TODO_QC_START
-		--	below statment is commented because of the disabled data layer of tableview but if by any chance it create any issue then we may need to upgrad any applicable flow if required otherwise lets just delete it after 2nd revision
-			--	we may face issue in dapii - for the notes
-		ACTIVE_TODO_QC_END*/
-		// jQuery(form).attr('method','POST');	
-		/*ACTIVE_TODO_QC_START
-		--	below disabled action is commented because of the disabled data layer of tableview but if by any chance it create any issue then we may need to upgrad any applicable flow if required otherwise lets just delete it after 2nd revision
-		ACTIVE_TODO_QC_END*/
-		// jQuery("[name*='action']").val("eo_wbc_e_tabview");
+		// if(type == 'template1') {
 
-		//
-		from slick template1 template2
-		form_data=undefined;
+			// from template1 only 
+				// not in filter
+			if(init_call) {
+				
+				/*ACTIVE_TODO_QC_START
+				--	the default if ever we need to set default 1 1 that should be on our base filter form which is on wbc filter templates layer.
+					--	a part from that we most likely an must need to implement support for pagination which is like if paginated url is directly entered on the browser then at that time we need to detect the page number and set that on that filter form on the wbc filter templates layer from were the form is gnerated. so that we need to do but apart from that here isnt seem to be necessary so we should keep it comment even when we finalize template1 -- to h
+				jQuery("form#eo_wbc_filter [name='paged']").val('1');
+				jQuery("form#eo_wbc_filter [name='last_paged']").val('1');
+				ACTIVE_TODO_QC_END*/
 
-		s: question ---- aa note mukavani kidhi hati - 31.29
-		--	we most likely need to serialize form in init call case also means when init call is true. -- to h & -- to s
-		--	but maybe instead of serializing entire form in init call which is against the old flow so instead of right now changing all the changing major flow we can simply consider passing the additional fields that we need to pass like those attribute related fields and category related is i think already covered so i think we can do that. -- to h & -- to s
-			--	still maybe it is not either that much of concern if we serialize entire from because maybe things should just work still it is better idea that we go with the above option instead of this one.
-		from slick template1 template2
-		not in filter
-		if(init_call)
-		{
-			--	after the very 1st run we need to apply the necessary upgrads listed below
-				--	which is appling the necessary settings of series 13, -- to s
-					--	which are disabling override of _attribute and oter such attribute fields
-					--	and same for all _category, current_category and so on fields
-						--	which are a especially for the init_call flag 
-						--	an addition to disabling to override we laso nees to pass the fields which are missing here from the serise 13 supported or required fields.
-				--	and maybe after second revision we may like to pass entire form during page load init_call also --  to h 
-			from slick template1 template2
-			if( jQuery("[name='_category_query']").val() !== undefined && jQuery("[name='_category_query']").val().trim()=='' ) {
-				_products_in = jQuery("[name='products_in']").val()
-				from slick template1 template2
-				if(_products_in == undefined){
-					_products_in = '';
-				} else {
-					_products_in = _products_in.trim();
-				}
+				/*ACTIVE_TODO_QC_START
+				--	on tableview php layer also there was one statement maybe in filter widget class init function which was setting _current_category to _category but that was merged and commented due to merge with query layer pf wbc and so on. so we may like to keep that in mind before droping below statment support otherwise it is just for the notes when we enable template1 -- to h
+				jQuery("form#eo_wbc_filter [name='_category']").val(jQuery("form#eo_wbc_filter [name='_current_category']"));
+				ACTIVE_TODO_QC_END*/
 
-				// move to tableview -- to s
-				from slick template1 template2
-				form_data={_current_category:jQuery("[name='_current_category']").val().trim(),action:'eo_wbc_e_tabview',products_in:_products_in};
-				s: question moved from tableview so need to managed flag
-					--	it seems that per page if in tableview prepare_query_data need to manage a littel 
-					--	and all the code should be moved to filter js? it seems so anyway
-				if(eo_wbc_e_tabview.eo_table_view_per_page){
-					form_data.eo_wbc_page = jQuery('[name="eo_wbc_page"]').val();
-				}
+				/*ACTIVE_TODO_QC_START 
+				s: question aa flag bandh karavno evu recording ma kidhu chhe. and _attribute 25.35.3 approx recording confirm karavanu
+				jQuery("form#eo_wbc_filter [name='_attribute']").val("");
+				ACTIVE_TODO_QC_END*/
+
 			}
-			else
+
+		// }
+
+		// if(type == 'template1' || type == 'template2') {
+
+		// 	new code
+		// 	from template1 template2
+		// 	not in filter
+		// 		commented permenetly 
+		// 	var form=jQuery("form#eo_wbc_filter");
+		// 	s: question from template1 template2 aa var niche chhe but sequence ma ahiya chhe
+		// }
+		
+		// below code moved to eo_wbc_filter_render_html
+		/*if(type == 'slick_table' || type == 'filter') {
+		
+			from slick_table filter
+				to be made global 
+			if(form.find('[name="html_destination"]').length>0) {
+
+				render_container = form.find('[name="html_destination"]').val();
+			}
+		}*/
+
+		// if(type == 'slick_table') {
+		
+		// 	from slick table 
+		// 	not in filter
+		// 		// NOTE: since now the filter_change is only one global function so no need to manage below logic. as long as above html destination is managed even the diamond quize will work just fine so commented.
+		// 	if(form.find('[name="filter_native"]').length>0) {
+		
+		// 		// jQuery.fn.eo_wbc_filter_change_native(init_call,form_selector,render_container);
+		// 		ACTIVE_TODO now we need to restructure this, need to find out why mahesh had to maintain native and so on separetely? is it stemming due to the diamond quiz flow? -- to h and -- to s 
+		// 		window.document.splugins.filters.api.eo_wbc_filter_change_wrapper( init_call, form_selector );
+		// 		return true;
+		// 	}					
+
+		// 	// NOTE: since now the tv data layer id disabled so now only one global ajax search call so below is commented
+		// 	// jQuery.fn.eo_wbc_filter_change_native(init_call,form_selector,render_container);
+		// }
+
+		// from 1 after eo_wbc_filter_change_native call 
+		
+		// if(type == 'slick_table' ||  type == 'template1' || type == 'template2') {
+			
+		// 	from slick template1 template2
+		// 	not in filter
+			/*ACTIVE_TODO_QC_START
+			--	below statment is commented because of the disabled data layer of tableview but if by any chance it create any issue then we may need to upgrad any applicable flow if required otherwise lets just delete it after 2nd revision
+				--	we may face issue in dapii - for the notes
+			ACTIVE_TODO_QC_END*/
+			// jQuery(form).attr('method','POST');	
+			/*ACTIVE_TODO_QC_START
+			--	below disabled action is commented because of the disabled data layer of tableview but if by any chance it create any issue then we may need to upgrad any applicable flow if required otherwise lets just delete it after 2nd revision
+			ACTIVE_TODO_QC_END*/
+			// jQuery("[name*='action']").val("eo_wbc_e_tabview");
+
+			//
+			// from slick template1 template2
+			// 	made global
+			form_data=undefined;
+		// }
+
+		// --	we most likely need to serialize form in init call case also means when init call is true. -- to h & -- to s INVALID
+			// --	but maybe instead of serializing entire form in init call which is against the old flow so instead of right now changing all the changing major flow we can simply consider passing the additional fields that we need to pass like those attribute related fields and category related is i think already covered so i think we can do that. -- to h & -- to s done
+				// --	still maybe it is not either that much of concern if we serialize entire from because maybe things should just work still it is better idea that we go with the above option instead of this one. done
+		// if(type == 'slick_table' || type == 'template1' || type == 'template2') {
+			
+			// from slick template1 template2
+			// not in filter
+			if(init_call)
 			{
-				//form_data={_category:jQuery("[name='_category']").val().trim(),action:'eo_wbc_filter'};	
+			
+				/*ACTIVE_TODO_QC_START
+				--	after the very 1st run we need to apply the necessary upgrads listed below
+					--	which is appling the necessary settings of series 13, -- to s
+						--	which are disabling override of _attribute and oter such attribute fields
+						--	and same for all _category, current_category and so on fields
+							--	which are a especially for the init_call flag 
+							--	an addition to disabling to override we laso nees to pass the fields which are missing here from the serise 13 supported or required fields.
+					--	and maybe after second revision we may like to pass entire form during page load init_call also --  to h 
+				ACTIVE_TODO_QC_END*/
+				// from slick template1 template2
+				if( jQuery("[name='_category_query']").val() !== undefined && jQuery("[name='_category_query']").val().trim()=='' ) {
+			
+					_products_in = jQuery("[name='products_in']").val()
+					
+					// from slick template1 template2
+					if(_products_in == undefined){
+			
+						_products_in = '';
+					} else {
+			
+						_products_in = _products_in.trim();
+					}
+
+					// move to tableview -- to s
+					from slick template1 template2
+					form_data={_current_category:jQuery("[name='_current_category']").val().trim(),action:jQuery("[name='action']").val().trim()/*'eo_wbc_e_tabview'*/,products_in:_products_in};
+
+						// --	it seems that per page if in tableview prepare_query_data need to manage a littel done 
+						// --	and all the code should be moved to filter js? it seems so anyway done
+					// NOTE: since we are not using apply filter notification so we are supposed to use here the hasClass condition but since below eo_wbc_page dropdown tag is already available so we had put condition based on that 
+					if(/*eo_wbc_e_tabview.eo_table_view_per_page*/jQuery('[name="eo_wbc_page"]').length > 0){
+			
+						form_data.eo_wbc_page = jQuery('[name="eo_wbc_page"]').val();
+					}
+				}
+				else
+				{
+					//form_data={_category:jQuery("[name='_category']").val().trim(),action:'eo_wbc_filter'};	
 
 
-				from slick and template1
-				/*move to tableview done -- to s
-				form_data=jQuery("#tableview_order,#tableview_order_direction,[name='_current_category'],[name='_category'],[name^='cat_filter_'],[name='action'],[name='products_in']").serialize();*/
+					// from slick and template1 and template2
+					// move to tableview done -- to s
+					form_data=jQuery("[name='_current_category'],[name='_category'],[name^='cat_filter_'],[name='action'],[name='products_in']").serialize();
+					
+					// from slick and template1 and template2
+					// move to tableview done -- to s
+					if(/*eo_wbc_e_tabview.eo_table_view_per_page*/jQuery('[name="eo_wbc_page"]').length > 0){
 
-				from  template2
-				form_data=jQuery("[name='_current_category'],[name='_category'],[name^='cat_filter_'],[name='action'],[name='products_in']").serialize();
+						form_data.eo_wbc_page = jQuery('[name="eo_wbc_page"]').val();
+					}
+				
+				}
+				
+				/*ACTIVE_TODO_QC_START
+				--	orderby field might needed to be moved to tableview if tha logic and functionality of below field is for tableview only. -- to h
+				ACTIVE_TODO_QC_END*/
+				if(jQuery("select[name='orderby']").length>0){
+				
+					form_data.orderby=jQuery("select[name='orderby']:eq(0)").val();
+				}
 
-				from slick and template1
-				// move to tableview done -- to s
-				// if(eo_wbc_e_tabview.eo_table_view_per_page){
-				// 	form_data.eo_wbc_page = jQuery('[name="eo_wbc_page"]').val();
+				// NOTE: this if is duplicate of above and still we can not confirm if it was intentional or not so just kept it till we can not confirm accuratly.
+				if(jQuery("select[name='orderby']").length>0){
+				
+					form_data.orderby=jQuery("select[name='orderby']:eq(0)").val();
+				}
+
+				// if(type == slick_table) {
+					
+					// --	below statment is commented because that is already covered in above if else.
+					// from slick_table
+					// form_data.action=jQuery("[name='action']").val().trim()/*'eo_wbc_e_tabview'*/;
 				// }
+			
+			} else {	not in filter
+
+				after all prepare_query_data move are finalized then we need to structure form_data preparation properly -- to h
+					--  like form serialize or base form preparation conataining all base wbc fields should happen in here on wbc layer only. -- to h & -- to s
+						--  so after above is done then remove from.serialize statements from tableview layer. -- to s
+						ACTIVE_TODO and same will be applicable to other js layers like diamond_quize and so on. -- to s
+
+				s: question moved from tableview so need to managed flag
+				// move to tableview -- to s 
+				from slick_table template1 template2 filter 
+				form_data=form.serialize();
+
+				if(/*eo_wbc_e_tabview.eo_table_view_per_page*/jQuery('[name="eo_wbc_page"]').length > 0){
+				
+					form_data+='&eo_wbc_page='+jQuery('[name="eo_wbc_page"]').val();
+				}
+				
+				/*ACTIVE_TODO_QC_START
+				--	orderby field might needed to be moved to tableview if tha logic and functionality of below field is for tableview only. -- to h
+				ACTIVE_TODO_QC_END*/
+				if(jQuery("select[name='orderby']").length>0){
+				
+					form_data+='&orderby='+jQuery("select[name='orderby']:eq(0)").val();
+				}
+
+				// if(type == 'template1' || type == 'template2') {
+				
+					// from template1 and template2
+					/*move to tableview done -- to s
+					if(jQuery("#tableview_order").val()!=='' && jQuery("#tableview_order_direction").val()!==''){
+						form_data+='&tableview_order='+jQuery("#tableview_order").val();
+						form_data+='&tableview_order_direction='+jQuery("#tableview_order_direction").val();
+					}*/
+				// } elseif(type == 'slick_table') {
+
+					// move to tableview -- to s
+					// from slick_table
+					// form_data+='&action=eo_wbc_e_tabview';
+
+					// --	below statment is commented because that is already covered in above serialize.
+					// form_data+='&action='+jQuery("[name='action']").val().trim();
+				// }
+
+				// from filter
+				// aa logic filter js ma ajax pachhi chhe so sequance maintain karavani reshe -- to s
+				var site_url=eo_wbc_object.eo_cat_site_url;
+				// var ajax_url = '';
+
+				if(site_url.includes('?')) {
+					
+					ajax_url = site_url+eo_wbc_object.eo_cat_query;
+				} else {
+					
+					ajax_url = site_url+'/?'+eo_wbc_object.eo_cat_query;
+				}
+
+				console.log(eo_wbc_object);	
 			}
-			
-			if(jQuery("select[name='orderby']").length>0){
-			
-				form_data.orderby=jQuery("select[name='orderby']:eq(0)").val();
-			}
 
-			// NOTE: this if is duplicate of above and still we can not confirm if it was intentional or not so just kept it till we can not confirm accuratly.
-			if(jQuery("select[name='orderby']").length>0){
-			
-				form_data.orderby=jQuery("select[name='orderby']:eq(0)").val();
-			}
-			s: question template1 and slick_table 
+		// } else { this else is merged with above else
 
-			from slick_table
-			// move to tableview -- to s 
-			form_data.action='eo_wbc_e_tabview';
-		
-		} else {	not in filter
+		// 	form_data = form.serialize();
 
-			after all prepare_query_data move are finalized then we need to structure form_data preparation properly -- to h
-				--  like form serialize or base form preparation conataining all base wbc fields should happen in here on wbc layer only. -- to h & -- to s
-					--  so after above is done then remove from.serialize statements from tableview layer. -- to s
-					ACTIVE_TODO and same will be applicable to other js layers like diamond_quize and so on. -- to s
+		// 	from filter
+		// 	aa logic filter js ma ajax pachhi chhe so sequance maintain karavani reshe -- to s
+		// 	var site_url=eo_wbc_object.eo_cat_site_url;
+		// 	var ajax_url = '';
 
-			s: question moved from tableview so need to managed flag
-			// move to tableview -- to s 
-			from slick_table template1 template2
-			form_data=form.serialize();
-			if(eo_wbc_e_tabview.eo_table_view_per_page){
-			
-				form_data+='&eo_wbc_page='+jQuery('[name="eo_wbc_page"]').val();
-			}
-			
-			if(jQuery("select[name='orderby']").length>0){
-			
-				form_data+='&orderby='+jQuery("select[name='orderby']:eq(0)").val();
-			}
+		// 	if(site_url.includes('?')) {
+				
+		// 		ajax_url = site_url+eo_wbc_object.eo_cat_query;
+		// 	} else {
+				
+		// 		ajax_url = site_url+'/?'+eo_wbc_object.eo_cat_query;
+		// 	}
 
-			from template1 and template2
-			/*move to tableview done -- to s
-			if(jQuery("#tableview_order").val()!=='' && jQuery("#tableview_order_direction").val()!==''){
-				form_data+='&tableview_order='+jQuery("#tableview_order").val();
-				form_data+='&tableview_order_direction='+jQuery("#tableview_order_direction").val();
-			}*/
+		// 	console.log(eo_wbc_object);	
 
-			// move to tableview -- to s
-			from slick
-			form_data+='&action=eo_wbc_e_tabview';
-		}
+		// }
 
-		next sequance ma ajax valu chhe so eo_wbc_filter_change_wrapper_private funciton no call hovo joie ahiya and jo bije kyay thi aa fucntion call thay chhe to aa ajax and !init_call ni condition ahiya thi lagavi joie
 		////////////////////////////////
 		// /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/sp_tv_template.js
 		// --add to be confirmed 2601 TO 2705--
@@ -617,24 +706,12 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		// }
 		/////////////////////////////////////////////////////
 
-		from filter
-		aa logic filter js ma ajax pachhi chhe so sequance maintain karavani reshe -- to s
-		var site_url=eo_wbc_object.eo_cat_site_url;
-		var ajax_url = '';
-
-		if(site_url.includes('?')) {
-			ajax_url = site_url+eo_wbc_object.eo_cat_query;
-		} else {
-			ajax_url = site_url+'/?'+eo_wbc_object.eo_cat_query;
-		}
-
-		console.log(eo_wbc_object);	
-
 		// success(data);
 
 		s: question aa condition tableview js ma mahesh bhai na juna code manthi move thai chhe so tya confirm karavanu and sequance tyathi check karine maintain karavani and check karavanu and logic confirm karavanu chhe k ahiya rakhavanu chhe k nai. -- to s
 		need to finalize, this code is not part of any logic here -- to h & -- to s 
 							if(typeof(form_data)==='string'){
+								
 								form_data = Object.fromEntries(new URLSearchParams(form_data))
 							}	
 
@@ -642,7 +719,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		// var prepare_query_data_callback = null ;
   //       window.document.splugins.events.api.apply_all_observer_filters( 'filters', 'prepare_query_data', {form_data:form_data, init_call:init_call }, prepare_query_data_callback );
 	
-        return form_data;
+        return { form_data:form_data, ajax_url:ajax_url };
 
 	};	
 	
@@ -706,7 +783,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		// sould_search();
 		
 		form data param already pass karel hato j
-		prepare_query_data(init_call, form_selector);
+		var pq_data = prepare_query_data(init_call, form_selector);
 
 		// sp_filter_request variable tv_template.js ma move karavano, if required -- to h & -- to s
 		// 	INVALID
@@ -714,9 +791,12 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 			// 		NOTE: this var is not used anywhere but set only 2 times so this var is turned off completely.
 		/*jQuery.fn.sp_filter_request = */jQuery.ajax(
 		{	
-			--	below 2 params namely url and data will set from the object return from the prepare_query_data function above -- to h & -- to s
-			url: eo_wbc_object.eo_admin_ajax_url,//form.attr('action'),
-			data:form_data, // form data
+			// --	below 2 params namely url and data will set from the object return from the prepare_query_data function above -- to h & -- to s done
+				/*ACTIVE_TODO_QC_START
+				--	now the below 2 parameters are updated, but the url below is now used of the wbc layer only and the tableview url logic is disabled like data layer is disabled so if we face any issue then should take note of this. otherwise remove ACTIVE_TODO by 3rd revision.
+				ACTIVE_TODO_QC_END*/
+			url: pq_data.ajax_url, //eo_wbc_object.eo_admin_ajax_url,//form.attr('action'),
+			data: pq_data.form_data,//form_data, // form data
 			type: 'GET', //'POST', // POST
 
 			beforeSend:function(xhr) {
@@ -967,9 +1047,18 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
     var eo_wbc_filter_render_html = function(data, render_container, form_selector){
 
-
 		/*jQuery("#loading").removeClass('loading');
 		return true;*/
+
+		// if(type == 'slick_table' || type == 'filter') {
+		
+		// 	from slick_table filter
+		// 		made global 
+			if(jQuery(form_selector).find('[name="html_destination"]').length>0) {
+
+				render_container = jQuery(form_selector).find('[name="html_destination"]').val();
+			}
+		// }
 
 		// render_data = data;
 		_render_container = render_container;
@@ -2270,15 +2359,15 @@ ACTIVE_TODO_OC_END
 		return false;
 	}	
 	
-	s: question need to manage this global layer
+	/*s: question need to manage this global layer
 	if(typeof(window.eo_wbc_filter_change) === 'undefined') {
 		window.eo_wbc_filter_change = jQuery.fn.eo_wbc_filter_change_native;
-	}
+	}*/
 
-	s: question need to manage this global layer
+	/*s: question need to manage this global layer
 	if( (typeof(jQuery.fn.eo_wbc_filter_change)=="undefined" || jQuery.fn.eo_wbc_filter_change==undefined) && typeof(window.eo_wbc_e_tabview) !== 'object' ){		
 		jQuery.fn.eo_wbc_filter_change = jQuery.fn.eo_wbc_filter_change_native;
-	}
+	}*/
 /*}*/
 
 jQuery(document).ready(function($){
@@ -2366,19 +2455,20 @@ jQuery(document).ready(function($){
 			});
 		}
 
-		s: question need to manage this global layer
+		/*s: question need to manage this global layer
 		if(typeof(jQuery.fn.eo_wbc_filter_change) === typeof(undefined) &&  typeof(window.eo_wbc_filter_change) === 'function') {
 			jQuery.fn.eo_wbc_filter_change = window.eo_wbc_filter_change;				
-		}
+		}*/
 		
 
 		//changes: mahesh@emptyops.com
 		// To prevent initial call for the ajax -- speed optimization -- stop ajax at init load;
-		s: question need to manage this global layer
-		if(typeof(eo_wbc_e_tabview)===typeof(undefined) || typeof(eo_wbc_e_tabview.init_data)===typeof(undefined) || typeof(eo_wbc_object)==typeof(eo_wbc_object) ){
-			// jQuery.fn.eo_wbc_filter_change(true);
-			window.document.splugins.filters.api.eo_wbc_filter_change_wrapper();
-		}
+		// s: question need to manage this global layer
+		// NOTE: now below call which is on opage load is disabled and so now we need to make sujre if any issue during page load occurs then we need to handel it. however if there are any olther call during page load in ready or so then that also should be disabled.
+		// if(typeof(eo_wbc_e_tabview)===typeof(undefined) || typeof(eo_wbc_e_tabview.init_data)===typeof(undefined) || typeof(eo_wbc_object)==typeof(eo_wbc_object) ){
+		// 	// jQuery.fn.eo_wbc_filter_change(true);
+		// 	window.document.splugins.filters.api.eo_wbc_filter_change_wrapper();
+		// }
 
 		//pagination for non-table based view
 
