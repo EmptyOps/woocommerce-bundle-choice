@@ -900,11 +900,31 @@ class EOWBC_Filter_Widget {
 		$site_url = '';
 		$product_url = '';
 
+		$is_apply_compatibility = true; 
+		
 		/*if( !$this->is_shortcode_filter && !$this->is_shop_cat_filter ) {*/
 			$current_category = $wp_query->get_queried_object();
 			if(!empty($current_category) and !is_wp_error($current_category)){
 
-				$current_category = $current_category->slug;
+				if (!empty($current_category->slug)) {
+					
+					$current_category = $current_category->slug;
+
+				} else {
+
+					if($is_apply_compatibility) {
+
+						// NOTE: here this is actualy the ultimate sort to get the category id, but off cource we will need to add whenever required the specific compatibility patches like based on elementor or wpml conditions above this patche in hirarchical if structure to ensure that plateform specific issues like of wpml or elementor is handeled matuarly and using standard api.
+						
+						$c_res = \eo\wbc\model\SP_WBC_Compatibility::instance()->router_compatability('current_page_category_id');
+
+						if(!empty($c_res['slug'])) {
+						
+							$current_category = $c_res['slug'];
+
+						}
+					} 
+				}
 			} else{
 
 				$current_category=$this->_category;

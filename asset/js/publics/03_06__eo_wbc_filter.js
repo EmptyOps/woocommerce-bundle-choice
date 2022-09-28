@@ -298,6 +298,9 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		from slick template1 template2
 		not in filter
 		jQuery(form).attr('method','POST');	
+		/*ACTIVE_TODO_QC_START
+		--	below disabled action is commented because of the disabled data layer of tableview but if by any chance it create any issue then we may need to upgrad any applicable flow if required otherwise lets just delete it after 2nd revision
+		ACTIVE_TODO_QC_END*/
 		jQuery("[name*='action']").val("eo_wbc_e_tabview");
 
 		//
@@ -312,6 +315,13 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		not in filter
 		if(init_call)
 		{
+			--	after the very 1st run we need to apply the necessary upgrads listed below
+				--	which is appling the necessary settings of series 13, -- to s
+					--	which are disabling override of _attribute and oter such attribute fields
+					--	and same for all _category, current_category and so on fields
+						--	which are a especially for the init_call flag 
+						--	an addition to disabling to override we laso nees to pass the fields which are missing here from the serise 13 supported or required fields.
+				--	and maybe after second revision we may like to pass entire form during page load init_call also --  to h 
 			from slick template1 template2
 			if( jQuery("[name='_category_query']").val() !== undefined && jQuery("[name='_category_query']").val().trim()=='' ) {
 				_products_in = jQuery("[name='products_in']").val()
@@ -364,8 +374,9 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 			from slick_table
 			// move to tableview -- to s 
 			form_data.action='eo_wbc_e_tabview';
-		not in filter
-		} else {
+		
+		} else {	not in filter
+
 			after all prepare_query_data move are finalized then we need to structure form_data preparation properly -- to h
 				--  like form serialize or base form preparation conataining all base wbc fields should happen in here on wbc layer only. -- to h & -- to s
 					--  so after above is done then remove from.serialize statements from tableview layer. -- to s
@@ -2661,4 +2672,3 @@ window.document.splugins.wbc.filter_sets.api = window.document.splugins.wbc.filt
 	// moved to assets php
 	// window.document.splugins.wbc.filter_sets.api.init(); 	
 // });
-

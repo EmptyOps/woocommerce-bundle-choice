@@ -2404,7 +2404,7 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
 
         var _this = this; 
         
-        _this.#click(type, element, event);
+        _this.#reset(type, element, event);
     }
 
     // ACTIVE_TODO_OC_START
