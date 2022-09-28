@@ -297,11 +297,15 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		
 		from slick template1 template2
 		not in filter
-		jQuery(form).attr('method','POST');	
+		/*ACTIVE_TODO_QC_START
+		--	below statment is commented because of the disabled data layer of tableview but if by any chance it create any issue then we may need to upgrad any applicable flow if required otherwise lets just delete it after 2nd revision
+			--	we may face issue in dapii - for the notes
+		ACTIVE_TODO_QC_END*/
+		// jQuery(form).attr('method','POST');	
 		/*ACTIVE_TODO_QC_START
 		--	below disabled action is commented because of the disabled data layer of tableview but if by any chance it create any issue then we may need to upgrad any applicable flow if required otherwise lets just delete it after 2nd revision
 		ACTIVE_TODO_QC_END*/
-		jQuery("[name*='action']").val("eo_wbc_e_tabview");
+		// jQuery("[name*='action']").val("eo_wbc_e_tabview");
 
 		//
 		from slick template1 template2
@@ -713,7 +717,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 			--	below 2 params namely url and data will set from the object return from the prepare_query_data function above -- to h & -- to s
 			url: eo_wbc_object.eo_admin_ajax_url,//form.attr('action'),
 			data:form_data, // form data
-			type:'POST', // POST
+			type: 'GET', //'POST', // POST
 
 			beforeSend:function(xhr) {
 
