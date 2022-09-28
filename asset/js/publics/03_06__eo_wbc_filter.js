@@ -2437,7 +2437,6 @@ jQuery(document).ready(function($){
 	// moved to assets php
   	// window.document.splugins.filters.api.init();
 
-	// NOTE: admin ma "disp_regular" aa flag thi find karyu tena related kay malyu nathi
 	if(window.eo_wbc_object.disp_regular){
 	
 		create function bind_click in filters js module and move below code there -- to d done
