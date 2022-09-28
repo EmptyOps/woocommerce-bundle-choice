@@ -3426,13 +3426,13 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations{
 
     #get_loop_box_anchor(variation) {
 
-        -- 1 -- aa class thi find karvanu -- to a
-        var finalAncher = jQuery('div.woocommerce ul.products li.product a.woocommerce-LoopProduct-link');
-        var faLocateHref = finalAncher.attr("href");
-        if(faLocateHref.indexOf("/product/") >= 0){
+        // -- 1 -- aa class thi find karvanu -- to a
+        // var finalAncher = jQuery('div.woocommerce ul.products li.product a.woocommerce-LoopProduct-link');
+        // var faLocateHref = finalAncher.attr("href");
+        // if(faLocateHref.indexOf("/product/") >= 0){
 
-            console.log("find success");
-        }
+        //     console.log("find success");
+        // }
         -- aa <a> find karva mate banavyu se final karva nu se @a--
         --- start ---
 
