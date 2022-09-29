@@ -151,7 +151,7 @@ class SP_WBC_Variations extends SP_Variations {
 	}
 
 	// for reference see wc_get_product_attachment_props function source code 
-	public function get_product_attachment_props( $attachment_id, $product_id = false, $type = null ) {
+	public function get_product_attachment_props( $attachment_id, $product_id = false, $type = null, $strict = true ) {
 
 		// wbc_pr( 'attachment_id >>>>>>>>>>>>> ' );
 		// wbc_pr( $attachment_id );
@@ -231,7 +231,23 @@ class SP_WBC_Variations extends SP_Variations {
 
 		}
 
-		$attachment = get_post( $attachment_id );
+
+		$attachment = null;
+
+		if ($strict) {
+
+			$attachment = get_post( $attachment_id );
+
+		} else {
+
+			if (!$strict) {
+
+				$props['url']                         = wc_placeholder_img_src();
+				$props['full_src']                    = $props['url'];
+				$props['src']                         = $props['url'];
+			}
+
+		}
 
 		if ( $attachment ) {
 
@@ -621,7 +637,10 @@ class SP_WBC_Variations extends SP_Variations {
 		if ( !empty($data['sp_variations']["form"]) ) {
 
 			foreach ( $gallery_images as $i=>$value ) {
-				
+				echo ">>>>>>>>>>> gallery_images (wbc-variations)";
+				wbc_pr($value['value']);
+				wbc_pr($value['type']);
+		
 				if ( is_array($value) ) {
 
 					$image = $this->get_product_attachment_props( $value['value'],false,$value['type']);
