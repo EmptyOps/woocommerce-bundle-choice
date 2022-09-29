@@ -4,11 +4,11 @@ window.document.splugins.wbc = window.document.splugins.wbc || {};
 
 // the filters js module
 window.document.splugins.wbc.filters = window.document.splugins.wbc.filters || {};
-	maybe observer pattern with filters as subject, filter types like ring builder filters, shop/cat filters, shortcode filters and diamond quiz etc filters as observer(subscriber) but also the filter fields also as observer(subscriber)(as per standard it should be only filter types not fields but we can implement by adding subtype field in the definition arcitecture and still it is not pure standard but would work), and also the filter or any of its layers like network(ajax) or render(html render) as the singleton factory design pattern 
-		moved to asana 
+	// maybe observer pattern with filters as subject, filter types like ring builder filters, shop/cat filters, shortcode filters and diamond quiz etc filters as observer(subscriber) but also the filter fields also as observer(subscriber)(as per standard it should be only filter types not fields but we can implement by adding subtype field in the definition arcitecture and still it is not pure standard but would work), and also the filter or any of its layers like network(ajax) or render(html render) as the singleton factory design pattern 
+		// moved to asana 
 
 
-		// ACTIVE_TODO/TODO now we are doing in adiition to above patterns the jQuery interface style plugin pattern which is a obvious base standard and maybe it was naturalroot direction for us that we now routed or something such but either way while we are in mix of this lets also try to implement above like observer patterns with jQuery interface style and something such that is inherantly popular in the entire community of javascript jQuery whenever we require something such or filter need of it.
+		// ACTIVE_TODO/TODO now we are doing in adiition to above patterns the jQuery interface style plugin pattern which is a obvious base standard and maybe it was natural root direction for us that we now routed or something such but either way while we are in mix of this lets also try to implement above like observer patterns with jQuery interface style and something such that is inherantly popular in the entire community of javascript jQuery whenever we require something such or feel need of it.
 
 window.document.splugins.wbc.filters.core = function( configs ) {
 
@@ -17,16 +17,16 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 	_this.configs = jQuery.extend({}, {}/*default configs*/, configs);	
 
     // _this.$base_container =  null  /*jQuery( ( window.document.splugins.common._o( _this.configs, 'base_container_selector') ? _this.configs.base_container_selector : '' ) )*/;  // ACTIVE_TODO/TODO whenever it become necessary to use base_container for events or so then at that time need to init base_container using our standard filters section conatainer selector.
-    NOTE: the serch form selector is the base_container of this filter module.
-	    ACTIVE_TODO/TODO but however if required in future then we can define an additional $base_container_search_widget or something like that for the search widget container to encapsulate this entire search widget area but only if that is necessary.
-	    	NOTE: ultimately we should create common parent class & module for filters while the diamond quiz, shortcode filters and so on will have their own child modules just like the swatches and gallery images module. of course then it will be only jQuery interface style and there will be no form_selector param supported for the eo_wbc_filter_change_wrapper function. so diamond quiz, shortcode filters and so on would just init using their own selector like as if jQuery interface style plugin. 
-	    		ACTIVE_TODO and we may like to do it by 3rd revision or so. 
+    // NOTE: the serch form selector is the base_container of this filter module.
+	    // ACTIVE_TODO/TODO but however if required in future then we can define an additional $base_container_search_widget or something like that for the search widget container to encapsulate this entire search widget area but only if that is necessary.
+	    	// NOTE: ultimately we should create common parent class & module for filters while the diamond quiz, shortcode filters and so on will have their own child modules just like the swatches and gallery images module. of course then it will be only jQuery interface style and there will be no form_selector param supported for the eo_wbc_filter_change_wrapper function. so diamond quiz, shortcode filters and so on would just init using their own selector like as if jQuery interface style plugin. 
+	    		// ACTIVE_TODO and we may like to do it by 3rd revision or so. 
     _this.$base_container = jQuery( ( window.document.splugins.common._o( _this.configs, 'base_container_selector') ? _this.configs.base_container_selector : "form#eo_wbc_filter,form[id*='eo_wbc_filter']" ) );
 
     //	private functions 
     var init_private = function() {
 
-		ACTIVE_TODO_OC_START
+		/*ACTIVE_TODO_OC_START
 			    	// do general development like published init tobe defined below will call this private init function -- to d done
 
 
@@ -130,7 +130,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 			--	so do we need to rely on export import statement for adding class as dependancy on those asset.php inline javascript. that may work but that might be heavy and unnecessarily complex maybe. 
 
 		 
-		ACTIVE_TODO_OC_END
+		ACTIVE_TODO_OC_END*/
 
 		//	the filter events 
 		window.document.splugins.events.api.createSubject( 'filters', ['before_send', 'prepare_query_data', 'show_loader', 'init_search', 'no_products_found', 'should_search', 'complete', 'success', 'error', 'compatability', 'eo_wbc_filter_render_html', 'hide_loader', 'on_reset_click_listener', 'on_change_listener'] );
@@ -163,7 +163,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
 	    // ACTIVE_TODO/TODO if ever required to manage or control any logic here in this function or in before send and so on function then we have planned and though out the flow of using even the flag classes like add class for any flag and then on the filter js means the base module the parent module in filter js the filter module in perticuler function for example should search and before send it should just check the hasclass condition with some generic class name. we have to confirm this flow once but this sounds like the idea. otherwise the other option is apply filter notification but we want to but we should simply avoid it if possible.
 		// var init_search_callback = null ;
-  //       window.document.splugins.events.api.notifyAllObservers( 'filters', 'init_search', {}, init_search_callback, form_selector==null ? _this.$base_container : form_selector );
+        // window.document.splugins.events.api.notifyAllObservers( 'filters', 'init_search', {}, init_search_callback, form_selector==null ? _this.$base_container : form_selector );
 
     };
 
@@ -197,14 +197,16 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		// /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/template1.js
 		// --add to be confirmed 630 TO 734--
 
-		--	aa if template1 mathi move thayel chhe. - 25.43
+		// NOTE: below logic was for tv template 1 only and that might be for preventing ajax search call during page load. but now we are controlling such flows of page load calls from other layers which is obvious and right architecture so their is no need to control it from here. and if we need any such control then below enable_filter flag based condition is providing such mechanism.
 		if(init_call/* || typeof(window.eo_wbc_filter_change_table_view_service)===typeof(undefined)*/) {
+		
 			/*window.eo_wbc_filter_change_table_view_service = true*/
 			return false;
 		}
 		console.log(init_call,window.eo_wbc_filter_change_table_view_service);
 	
 		if(/*window.eo_wbc_object.enable_filter*/get_enable_filter()===false){
+		
 			return false;
 		}
 
@@ -229,9 +231,9 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		// 	return false;
 		// }
 
-		apply filter notification no more support 
+		// apply filter notification no more supported
 		// var should_search_callback = null ;
-        // window.document.splugins.events.api.notifyAllObservers( 'filters', 'should_search', {}, should_search_callback, form_selector==null ? _this.$base_container : form_selector );
+        // window.document.splugins.events.api.apply_all_observer_filters( 'filters', 'should_search', {}, should_search_callback, form_selector==null ? _this.$base_container : form_selector );
 
         return true;				
 
@@ -261,7 +263,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 				
 				/*ACTIVE_TODO_QC_START
 				--	the default if ever we need to set default 1 1 that should be on our base filter form which is on wbc filter templates layer.
-					--	a part from that we most likely an must need to implement support for pagination which is like if paginated url is directly entered on the browser then at that time we need to detect the page number and set that on that filter form on the wbc filter templates layer from were the form is gnerated. so that we need to do but apart from that here isnt seem to be necessary so we should keep it comment even when we finalize template1 -- to h
+					--	a part from that we most likely an must need to implement support for pagination which is like if paginated url is directly entered on the browser then at that time we need to detect the page number and set that on that filter form on the wbc filter templates layer from were the form is gnerated. so that we need to do but apart from that here isn't seem to be necessary so we should keep it comment even when we finalize template1 -- to h
 				jQuery("form#eo_wbc_filter [name='paged']").val('1');
 				jQuery("form#eo_wbc_filter [name='last_paged']").val('1');
 				ACTIVE_TODO_QC_END*/
@@ -377,7 +379,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 					from slick template1 template2
 					form_data={_current_category:jQuery("[name='_current_category']").val().trim(),action:jQuery("[name='action']").val().trim()/*'eo_wbc_e_tabview'*/,products_in:_products_in};
 
-						// --	it seems that per page if in tableview prepare_query_data need to manage a littel done 
+						// --	it seems that per page if in tableview prepare_query_data need to manage a little done 
 						// --	and all the code should be moved to filter js? it seems so anyway done
 					// NOTE: since we are not using apply filter notification so we are supposed to use here the hasClass condition but since below eo_wbc_page dropdown tag is already available so we had put condition based on that 
 					if(/*eo_wbc_e_tabview.eo_table_view_per_page*/jQuery('[name="eo_wbc_page"]').length > 0){
@@ -424,7 +426,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 					// form_data.action=jQuery("[name='action']").val().trim()/*'eo_wbc_e_tabview'*/;
 				// }
 			
-			} else {	not in filter
+			} else {	/*not in filter*/
 
 				after all prepare_query_data move are finalized then we need to structure form_data preparation properly -- to h
 					--  like form serialize or base form preparation conataining all base wbc fields should happen in here on wbc layer only. -- to h & -- to s
@@ -708,28 +710,15 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
 		// success(data);
 
-		s: question aa condition tableview js ma mahesh bhai na juna code manthi move thai chhe so tya confirm karavanu and sequance tyathi check karine maintain karavani and check karavanu and logic confirm karavanu chhe k ahiya rakhavanu chhe k nai. -- to s
-		need to finalize, this code is not part of any logic here -- to h & -- to s 
-							if(typeof(form_data)==='string'){
-								
-								form_data = Object.fromEntries(new URLSearchParams(form_data))
-							}	
-
-		apply filter notification no more support 
+		// apply filter notification no more supported
 		// var prepare_query_data_callback = null ;
-  //       window.document.splugins.events.api.apply_all_observer_filters( 'filters', 'prepare_query_data', {form_data:form_data, init_call:init_call }, prepare_query_data_callback );
+        // window.document.splugins.events.api.apply_all_observer_filters( 'filters', 'prepare_query_data', {form_data:form_data, init_call:init_call }, prepare_query_data_callback );
 	
         return { form_data:form_data, ajax_url:ajax_url };
 
 	};	
 	
 	// so here there will be those ajax callback functions like beforeSend, complete, success, error and so on? mostly yes so that we can call it from wrapper and especially put all the refactored code from different instances of ht eo_wbc_filter_change functions in here 
-		--	so let just do it -- to d. done. had already did it for two functions below 
-		ACTIVE_TODO_OC_START
-		--	for all four functions below bring the code from all applicable functions -- to d 
-			--	and compare and put common only once and for identical means different put separetely and comment for both -- to d. ask b for how to do this process precisely, and do it precisely no more in rubbish way. 
-			--	and note one thing clearly that identical table code that is identified here need to be moved in their own calling layers to this function, so there will be some call back or so that need to be defined that can cover it. or we can simply use what is available by way of observer pattern and their notification callback that is planned that maybe of help if finalized -- to d 
-		ACTIVE_TODO_OC_END	
 	var before_send = function(xhr, form_selector) {
 
 		// window.eo_wbc_object.enable_filter_table = false;
@@ -761,18 +750,12 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
 	};
 
-	if apply_all_observer_filters notification has any issues for tableview callback requirements then callbacks passed in below parameters var can also work. -- to h
+	// if apply_all_observer_filters notification has any issues for tableview callback requirements then callbacks passed in below parameters var can also work. -- to h
 		// INVALID 
 		// NOTE: callback is not sufficent for the fundamental flow here which requires independent event or notification like bindings where child extensions like tableview and so on do not need to remember once the bind the events remember anything else 
 
-		ACTIVE_TODO_QC_START
-		--  but still first check points and notes above related to callbacks flow that we planed -- to h
-		ACTIVE_TODO_QC_END opacity
+		// --  but still first check points and notes above related to callbacks flow that we planed -- to h done
 	var eo_wbc_filter_change_wrapper_private = function(init_call, form_selector, render_container, parameters) {
-
-		it will be if condition here -- to s 
-			--	and like for almost all the notifications of filters module, the notification of the should_search will also be a notify all observer filter notification -- to s 
-				--	so in this regard convert all notification that are raised before_send and including before_send to the filter notification -- to s 
 
 		if( !should_search(init_call) ){
 
@@ -781,8 +764,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		}
 
 		// sould_search();
-		
-		form data param already pass karel hato j
+
 		var pq_data = prepare_query_data(init_call, form_selector);
 
 		// sp_filter_request variable tv_template.js ma move karavano, if required -- to h & -- to s
@@ -815,8 +797,6 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 			// 	//console.log(data);
 			// 	//document.write(data);
 			// 	//jQuery("#loading").removeClass('loading');
-				--	and this is called for the slick_table if block so is not the type should be slick_table here? discuss with shraddha -- to d 
-					-- rectify if there are any such similar issue
 
 			// 	//////// 02-04-2022 @shraddha /////// 
 			// 	eo_wbc_e_render_table(type,data);	
@@ -843,18 +823,22 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
 		from template1 and slick table
 		not in filter
+			--	this is most likely need to be moved to tableview or do we need to made it global? if it is filter layer logic. -- to h
+				--	lets confirm only after folow up from t.
 		if(!init_call){
 			jQuery(".reset_all_filters.mobile_2").removeClass('mobile_2_hidden');
 		}	
 
+		/*ACTIVE_TODO_OC_START
 		double confirm that compatibility matters are well implemented so that their patches are actually applied and used when become necessary -- to s 
-			--	and in that regard when compatibility patches are used then the normal default layer logic should be skipped or I think they are applied first and then compatibility so need of skipping. but yeah still lets confirm all patches and their execution sequence. -- to s 
+			--	and in that regard when compatibility patches are used then the normal default layer logic should be skipped or I think they are applied first and then compatibility so no need of skipping. but yeah still lets confirm all patches and their execution sequence. -- to s 
 				--	and on this regard need to have proper conditions to run the patches only when necessary. but I think we can simply run patche all the time. this seems normal but lets atleast confirm all the patches to confirm that they are not causing any harm to our normal code execution. -- to s 
+		ACTIVE_TODO_OC_END*/
 
-				--	before working on any of the below point, first comment entire eo_wbc_filter_render_html function which is now moved inside filters module. so just confirm everything from the outer function and then comment that -- to s (outside of filter module)
-						--	then confirm that compatibility function call below and the compatibility which is also called from inside the eo_wbc_filter_render_html has any issue. -- to s 
-				--	and we of course can not call compatibility simply from here. so lets simply call from different places with right section key. like we have did in those two modules and for example the compatibility most likely need to be called before eo_wbc_filter_render_html call since inside compatibility eo_wbc_filter_render_html is called. -- to h and -- to s 
-					--	and remove the eo_wbc_filter_render_html call from inside the compatibility function. -- to s 
+				// --	before working on any of the below point, first comment entire eo_wbc_filter_render_html function which is now moved inside filters module. so just confirm everything from the outer function and then comment that -- to s (outside of filter module) done
+						// --	then confirm that compatibility function call below and the compatibility which is also called from inside the eo_wbc_filter_render_html has any issue. -- to s done
+				// --	and we of course can not call compatibility simply from here. so lets simply call from different places with right section key. like we have did in those two modules and for example the compatibility most likely need to be called before eo_wbc_filter_render_html call since inside compatibility eo_wbc_filter_render_html is called. -- to h and -- to s done
+					// --	and remove the eo_wbc_filter_render_html call from inside the compatibility function. -- to s done
 		// @s
 		// compatability(section, object, expected_result);
 
@@ -959,31 +943,41 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
 		// create one function update_result_count in filters core js module -- to d done
 		// --	and then move the below code in that -- to d done
+		/*ACTIVE_TODO_OC_START
 		--	and check all the change function implementation and move show related code in that function -- to d 
 		--	I have some doubt the below condition's logic it is setting to empty when there is not result count container is returned. but I guess that is exceptional scenario which would never be happening but if it happens then we need to handle that exceptional scenario, so for now keeping it open and if no such thing show up after 1st or 2nd revision then remove this task ACTIVE_TODO -- to b 
+		ACTIVE_TODO_OC_END*/
 			// --	move above task comment also with the code -- to d done
 					
 		//Replace Result Count Status...
 		if(jQuery('.woocommerce-result-count',jQuery(data)).html()!==undefined){
+		
 			if(jQuery(".woocommerce-result-count").length>0){
+		
 				jQuery(".woocommerce-result-count").html(jQuery('.woocommerce-result-count',jQuery(data)).html());
 			} else {
+		
 				// jQuery(jQuery('.woocommerce-result-count',jQuery(render_data)).get(0).outerHTML).insertBefore('.products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products');
 				jQuery(jQuery('.woocommerce-result-count',jQuery(data)).get(0).outerHTML).insertBefore(render_container);
 			}
 		}
 		else {
+		
 			jQuery(".woocommerce-result-count").html('');	
 		}
 	};
+
     ///////////// -- 15-06-2022 -- @drashti -- ///////////////////////////////
     var compatability = function(section, object, expected_result, form_selector) {
+    	
     	// ACTIVE_TODO_OC_START
     	// do the call from where the below section is moved here, and if you already did the call then show and confirm with me -- to d 
     	// ACTIVE_TODO_OC_END
         if(section == 'product-listing'){
 
+        	/*ACTIVE_TODO_OC_START
         	-- in final revision most probebly we need to comment below statment -- to h & to a
+        	ACTIVE_TODO_OC_END*/
 
             jQuery('.products:eq(0),.product-listing:eq(0),.row-inner>.col-lg-9:eq(0)').addClass('product_grid_view');
             //jQuery('.products,.product-listing,.row-inner>.col-lg-9:eq(0),.woocommerce-pagination,.pagination').css('visibility','visible');
@@ -1000,6 +994,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
                 jQuery(".double-gutter .tmb").css('display','inline-flex');
             }
 
+            /*ACTIVE_TODO_OC_START
             -- amathi code seprate thay ne pagination no je se te pagination na compatibility function ma jase -- to h & to a
             	-- but before that lets finish all that php side rendering and also toggleview click event implementation and than we can deside wich of below code need to be active since below code is for visibility hide show logic -- to h
             		-- and if we have to use below code and seprate beetwin this module and pagination module compatibility function than need to think about notification layer -- to h 
@@ -1007,6 +1002,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
             // jQuery('.products,.product-listing,.row-inner>.col-lg-9:eq(0),.woocommerce-pagination,.pagination,jet-filters-pagination').css('visibility','visible');
             // --- end ---
 	            -- in final revision most probebly we need to comment below statment -- to h & to a
+	        ACTIVE_TODO_OC_END*/
             window.document.splugins.wbc.pagination.api.init();
 
             // Fix for the yith wishlist.
@@ -1025,8 +1021,10 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
         }else if(section == 'render_container'){
 
+			/*ACTIVE_TODO_OC_START
 			-- aa if conditions tableview na badha selectore and calling sysuance joy ne confirm karvani se -- to a
-			
+			ACTIVE_TODO_OC_END*/
+
 			if(object.render_container.length<=0) {
 		
 				object.render_container = jQuery(".elementor-products-grid");
@@ -1067,7 +1065,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
 		render_container = result_container(render_container);
 
-		ACTIVE_TODO_OC_START
+		/*ACTIVE_TODO_OC_START
 		// create two function show_loader and hide_loader in filters core js module -- to d done
 			// --	and then move the below code in the hide_loader -- to d done
 			// --	and check all the change function implementation and move show related code in the show_loader function and hide related code in the hide_loader function -- to d done
@@ -1075,7 +1073,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 				--	so that what happen is that in future if the events namespace is firing the search or any related events around and if by any change any event that the filters module recieve is related to the show hide loader flow then that is taken care of implicitly.  
 		// jQuery("#loading").removeClass('loading');
 
-		ACTIVE_TODO_OC_END	
+		ACTIVE_TODO_OC_END	*/
 		// below code move in update_result_count function 
 		/*//Replace Result Count Status...
 		if(jQuery('.woocommerce-result-count',jQuery(data)).html()!==undefined){
@@ -1091,15 +1089,18 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		update_result_count(render_container);
 
 		//Replacing Product listings....
+		/*ACTIVE_TODO_OC_START
 		like vars under window object are moved filter core js module, similarly move below var also to filters js module and underneath below statement set it in the filters js module -- to d 
+		ACTIVE_TODO_OC_END*/
+		document.wbc_data = data;
 		window.document.splugins.document.wbc_data = data;
 		
 		/*console.log(data);*/
-		ACTIVE_TODO_OC_START
+		/*ACTIVE_TODO_OC_START
 		we can define a compatibility check flow, where the compatibility function will be available in each js module -- to d 
 			-- that will recieve a object and second argument will be the excpected result. -- to d 
 			-- if that is not matched then the compatibility function will apply its all available compatibility scenarios -- to d. like the below elementor-products-grid class statement would then go inside compatibility if. and .jet-woo-products also belong there, but let it be there and same for any js module layers where we have compatibility patch is mixed with basic/standard implementation statement to avoid the errors while separating them. 
-		ACTIVE_TODO_OC_END
+		ACTIVE_TODO_OC_END*/
 
 		// let container_html = jQuery('.products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products',jQuery(data)).html();	
 		let container_html = jQuery(render_container_selectore, jQuery(data)).html();	
@@ -1108,9 +1109,9 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 			container_html = jQuery(jQuery(data),'.products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products').html();
 		}*/
 
-		if(container_html===undefined || container_html==='') {
+		/*if(container_html===undefined || container_html==='') {
 			// container_html = jQuery(".elementor-products-grid",jQuery(data)).html();
-		}
+		}*/
 
 		if(container_html!==undefined && container_html!=='') {	
 			if( typeof(is_card_view_rendered) == undefined || typeof(is_card_view_rendered) == 'undefined' || is_card_view_rendered == false ) {
@@ -1148,24 +1149,22 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 			});
 		}
 		else {
-			ACTIVE_TODO_OC_START
+			/*ACTIVE_TODO_OC_START
 			ACTIVE_TODO instead of determining if products are found or not on the js layer, it is really if we send a flag var from the php layer. so do it. in the dapii feed layers it is already like that but ensure that in wbc and tableview(in tableview also it is at least almost planned and roughly implemented) -- to h or -- to d 
 			// 	ACTIVE_TODO commented below events subject creation, during testing only. so temporary only.
-			ACTIVE_TODO_OC_END
+			ACTIVE_TODO_OC_END*/
 			// window.document.splugins.wbc.filters.core.no_products_found();
 
-			ACTIVE_TODO_OC_START
-			just move below line in the no_products_found function of the filters js module -- to d 
+			/*ACTIVE_TODO_OC_START
+			// just move below line in the no_products_found function of the filters js module -- to d done
 				--	and so now the render_container will recieve one parameter that is render_container, it will defaults to null so from where it is applicable it is passed otherwise it will be left blank -- to d 
-			ACTIVE_TODO_OC_END
-			below line are moved in no_products_found -- to s
+			ACTIVE_TODO_OC_END*/
 			// jQuery(render_container/*".products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products"*/).html('<p class="woocommerce-info" style="width: 100%;">No products were found matching your selection.</p>');	
-			call proper -- to s
 			no_products_found_private(form_selector);
 		}	
 
-		ACTIVE_TODO_OC_START
-		/*if(render_container===".products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products"){*/
+		/*ACTIVE_TODO_OC_START
+		// if(render_container===".products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products"){
 			//Replacing Pagination details.....		
 			//console.log(jQuery('.woocommerce-pagination,.pagination,jet-filters-pagination',jQuery(data)).html());
 
@@ -1177,7 +1176,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 					-- //done 	click -- to d. put comment inside function "it will internally implement all flows related to pagination link click event". so it is private function. 
 						-- //done 	call this function from above on_click -- to d 	
 						-- raise on_click notification using notifyAllObservers -- to d 
-						-- in init_private function first create the subject for observer pattern also -- to d 
+						// -- in init_private function first create the subject for observer pattern also -- to d done
 						-- //done  so also create init_private and init(public) function -- to d 
 					-- //done 	compatibility -- to d. it is private function. 
 					-- //done 	get_page_number -- to d. it is public function. 
@@ -1187,14 +1186,14 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 						--	external layers would simply call this function, since observer pattern is not seem necessary here -- to d 
 						-- //done 	and from this function call the private reset function -- to d 
 					-- //done 	reset -- to d. it is private function. 
-						-- raise on_reset notification using notifyAllObservers -- to d 
+						-- raise on_reset notification using notifyAllObservers -- to d
 					tableview and so on would depend on that extended flow of observer pattern where notification will provide a callback, this flow is to be confirmed so either it or something else that is confirmed there on common js variations notes will be used. 
 						-- tableview will use it for its flows like binding click event, which is ideal use case of the observer pattern -- to d 
 						-- and it will also use it for triggerring the click event, means of its own pagination links dom -- to d 
-							-- ACTIVE_TODO but very soon maybe the tableview may not have its own pagination links dom if that is not necessary for it -- to h and -- to d 
+							// --  but very soon maybe the tableview may not have its own pagination links dom if that is not necessary for it -- to h and -- to d done
 						-- and for setting and getting current page_number 
 							--	for it may simply need to use the pagination modules published api interface -- to d 
-		ACTIVE_TODO_OC_END			
+		ACTIVE_TODO_OC_END*/			
 			// --- pagination module move this code ---
 			// if(jQuery('.woocommerce-pagination,.pagination,jet-filters-pagination',jQuery(data)).html()!==undefined) {
 			// 	if(jQuery('.woocommerce-pagination,.pagination,jet-filters-pagination').length>0){
@@ -1225,7 +1224,6 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		/*}*/
 
 
-		and below one to the hide_loader function -- to d 
 		//jQuery("body").fadeTo('fast','1')									
 		// jQuery("#loading").removeClass('loading');
 		hide_loader(form_selector);
@@ -1243,7 +1241,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		// 	    }
 		// 	});
 		// 	jQuery(".t-entry-visual-overlay").removeClass('t-entry-visual-overlay');
-		// 	jQuery(".double-gutter .tmb").css('width','50%');
+		// 	jQuery(".do1uble-gutter .tmb").css('width','50%');
 		// 	jQuery(".double-gutter .tmb").css('display','inline-flex');
 		// }
 		
@@ -1360,8 +1358,10 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
     var on_reset_click_listener = function(form_selector){
 
+	    /*ACTIVE_TODO_OC_START
 	    -- all 7 demo(wp page) ma kya nathi -- to a	
     	-- jewellery demo ma Show Reset Filters Button ni switch enable kari pasi aa selectore male se and work kare se -- to a
+    	ACTIVE_TODO_OC_END*/
 
     	jQuery(document).on('click',".reset_all_filters",function(){
 	        
@@ -1382,8 +1382,11 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		/*ACTIVE_TODO_QC_START	
 		there is critical flag handling in template1.js at line no:768 which is needed to be applied here as soon as possible -- to h & -- to s	
 		ACTIVE_TODO_QC_END*/
+		/*ACTIVE_TODO_OC_START
     	-- all 7 demo(wp page) ma kya nathi -- to a	
     	-- jewellery demo ma alternate filter widget change karya pasi pan aa selectore nathi malto -- to a
+    	ACTIVE_TODO_OC_END*/
+
 		jQuery(".eo_wbc_srch_btn:eq(2)").click(function(){					
 			///////////////////////////////////////////
 			document.forms.eo_wbc_filter.reset();
@@ -1393,8 +1396,9 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 			// jQuery('[name="paged"]').val('1');
 			window.document.splugins.wbc.pagination.api.reset();
 
-				
+				/*ACTIVE_TODO_OC_START
 				this logic is from template1 reset event but we may like to consider it for the router query layer support -- to h
+				ACTIVE_TODO_OC_END*/
 				jQuery("form#eo_wbc_filter [name='_category']").val(jQuery("form#eo_wbc_filter [name='_current_category']"));
 			    jQuery("form#eo_wbc_filter [name='_attribute']").val("");
 
@@ -1413,7 +1417,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
     };
 
-    --- move to filter_set module @a ---
+    // --- move to filter_set module @a ---
   //   var on_filter_set_click_listener = function(){
 
   //   	on_filter_set_click();
@@ -1445,7 +1449,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
     };
 
-    --- move to filter_set module @a ---
+    // --- move to filter_set module @a ---
     // var on_filter_set_click = function() {
 
     // 	filter_set_click();
@@ -1462,7 +1466,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
     };
 
-    --- move to filter_set module @a ---
+    // --- move to filter_set module @a ---
    //  var filter_set_click = function() {
 
    //     	window.document.splugins.events.api.subscribe_observer_filter('filters', 'wbc', 'filter_set_click');
@@ -1565,11 +1569,13 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		var no_products_found_callback = null;
 		window.document.splugins.events.api.notifyAllObservers( 'filters', 'no_products_found', {}, no_products_found_callback, form_selector==null ? _this.$base_container : form_selector );
 
+		/*ACTIVE_TODO_OC_START
 		-- aa je code move karyo se te upper code se tena jovo j se @a--
 			// --- aa code sp_tableview/asset/js/publics/sp_tableview.js ma window.document.splugins.sp_tv.template.render_private() mathi move karyo se ---
 			// --- start ---
 			--	execute filters task -- to a 
 				--	it will mostly involve making sure that if there are any selectors or compatibility matters that wbc filter js module does not have then that is moved there if that is grid view or legacy standard flows specific -- to a 
+		ACTIVE_TODO_OC_END*/
 			jQuery(".products:eq(0),.product-listing:eq(0),.row-inner>.col-lg-9:eq(0)").html('<p class="woocommerce-info" style="width: 100%;display:table;">No products were found matching your selection.</p>');		
 			// --- end ---
 
@@ -1610,13 +1616,14 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
     ///////////////////////////////////////////////////////
 
- 	ACTIVE_TODO_OC_START
+ 	/*ACTIVE_TODO_OC_START
 			what other functions we would like to be here? maybe the functions like before_search, no_products_found, preprocess_data(it may contain some of those render_html layer logic like they are in this file or in that sp_tv_template file), find_container/locate_container/determine_target_container, reset_all_filters(should even create rest_filter and then send to that specific functions like reset_icon, reset_slider and so on? maybe yes), apply_filters and so on
-	ACTIVE_TODO_OC_END 
+				lets do it in 2nd revision at least aspecially the last part of reset hirarchy of functions
+	ACTIVE_TODO_OC_END*/ 
 
     //	published public functions 
     return {
-		    	ACTIVE_TODO_OC_START
+		    	/*ACTIVE_TODO_OC_START
 		    	// below before_search function need to make private done
 		    		--	however it will continue to broadcast before search notification, and whoever interested in the before_search event should bind to that event notification -- to h and -- to d 
 		    		--	and there will be one more function like should_search, which will also be private. and that will handle onle the logic of checking flags and so on like the enable_filter_table flag above 
@@ -1625,10 +1632,11 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		    			--	and if there are any such other flags that come around then just implement it from above said should_search function -- to d 
 
 
-		    		--	and the whole ajax request layer will be handled by the private instance of the eo_wbc_filter_change_wrapper function -- to h and -- to d 
+		    		// --	and the whole ajax request layer will be handled by the private instance of the eo_wbc_filter_change_wrapper function -- to h and -- to d done
 		    			--	and wherever there are layer specific logic like if tableview, diamond quiz and so on have they own additional or identical logic on their layers then cover it through ovserver pattern callback, and maybe for this we can use simple callback but that would make the process lengthy in terms of the additional code that required. but the observer pattern is not seem ideal in terms of the execution sequence that would become complex so simply have the caller pass the applicable callback in the last parameters arg in the below eo_wbc_filter_change_wrapper -- to d 
 		    				--	and pass that to till all applicable functions and layers in this module, and if that become overwhelming process then can matainn the last parameters var in the this object stat but that would be not so standard flow in terms of the stat management especially while this wrapper function is supposed to one way function that can be called any number of times by any layers. so simply need to pass the parameters var everywhere in all function and layers that are called within the module. -- to d 
-		    				--	so now the above tableview flag namely the enable_filter_table will also be handled by such callbacks provided from their calling layer, so now handle that accordingly -- to d 
+		    				// --	so now the above tableview flag namely the enable_filter_table will also be handled by such callbacks provided from their calling layer, so now handle that accordingly -- to d 
+		    				// INVALID
 
 		    		--	and below public wrapper function namely eo_wbc_filter_change_wrapper will call functios like should_search, before_search and then at delegate the rest to eo_wbc_filter_change_wrapper_private function -- to d 
 		    			--	and so should_search function call will be inside if condition and would cancel the entire function call if that returned false -- to d 
@@ -1637,15 +1645,16 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		    		--	and the before_search will set flags like enable_filter_table(now the name should be changed, but to maintain trace to older var names need to keep the old flga names commented right above it) and it should not be by the should_search function 
 		    			--	find all traces of enable_filter_table flag and show it to me, and now as planned it will be handled only on the tableview layers and will not be set in before_search like said above so need to confirm all its traces -- to d 
 
-		    		--	and then refactor and implement the eo_wbc_filter_change function instance of this file itself at bottom 
-		    				--	just move all the different sections to their applicable functions, like you did moved all instances of the function eo_wbc_filter_change below and then moved their sections to their applicable functions above -- to d. do it like we did atleast some moving for the prepare_query_data function, so  first cover the one point below related to prepare_query_data,.  
-		    				--	and same for all the other instances that you already moved below, so from there move it to their respective functions, like we did above -- to d 
-		    			-- and then need to focus on loading stack that starts maybe from the load or ready event at the bottom of this file 
+		    		// --	and then refactor and implement the eo_wbc_filter_change function instance of this file itself at bottom done
+		    				// --	just move all the different sections to their applicable functions, like you did moved all instances of the function eo_wbc_filter_change below and then moved their sections to their applicable functions above -- to d. do it like we did atleast some moving for the prepare_query_data function, so  first cover the one point below related to prepare_query_data,. done
+		    				// --	and same for all the other instances that you already moved below, so from there move it to their respective functions, like we did above -- to d done
+		    			// -- and then need to focus on loading stack that starts maybe from the load or ready event at the bottom of this file done
 
 		    	regarding events 
 		    		--	the variations module would like bind to the render event of the filtrs, which would be broadcasted from the render_html function 
 		    			--	so that on each render event, variations module could take care the ops related to variations swatches and gallery changes or modification that is required on each render event -- means simply the loopbox refresh will be required 
-			ACTIVE_TODO_OC_END 	
+		    			all above points might be INVALID
+			ACTIVE_TODO_OC_END 	*/
 
     	init: function() {
 
@@ -1676,13 +1685,11 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
 			// make sure that any js layers of wbc or any extensions which is calling the eo_wbc_filter_change function should call this function of this filters module -- to d done
 
-			ACTIVE_TODO_OC_START
-				--	above is done basically but yet to confirm the basic syntax there -- to h and -- to d.
-					--	first confirm with me calls from wbc and tableview -- to d 
-					--	and then at you your own self be sure to do confirm with me for the rest of the extensions -- to d 
+				// --	above is done basically but yet to confirm the basic syntax there -- to h and -- to d. done
+					// --	first confirm with me calls from wbc and tableview -- to d done
+					// --	and then at you your own self be sure to do confirm with me for the rest of the extensions -- to d done
 
-			and this function will simply call the private wrapper function eo_wbc_filter_change_wrapper_private -- to d 
-			ACTIVE_TODO_OC_END
+			// and this function will simply call the private wrapper function eo_wbc_filter_change_wrapper_private -- to d done
 
 			eo_wbc_filter_change_wrapper_private(init_call, form_selector, render_container, parameters);
 
@@ -1702,9 +1709,9 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
 			// prepare_query_data();
 
-			ACTIVE_TODO_OC_START							
+			/*ACTIVE_TODO_OC_START							
 			--	above call is okay but move it to private wrapper above and also the if statement above it but make that commented -- to d 
-			ACTIVE_TODO_OC_END
+			ACTIVE_TODO_OC_END*/
 			
 
 			// /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/template1.js
@@ -1748,16 +1755,18 @@ window.document.splugins.wbc.pagination.core = function( configs ) {
 
 	var init_private = function() {
 
-		ACTIVE_TODO whenever in future if required  to run compatibility check during run time means after the base container selectore is defined than we can call compatibility layers additionaly from here 
+		// ACTIVE_TODO whenever in future if required  to run compatibility check during run time means after the base container selectore is defined than we can call compatibility layers additionaly from here 
     	var base_container_selector_callback = null;
 		var stat_object = window.document.splugins.events.api.apply_all_observer_filters( 'pagination', 'base_container_selector',{type:_this.$base_container},base_container_selector_callback);  
 
+		/*ACTIVE_TODO_OC_START
 		like from the filters module, we may need to raise notification from all key functions of this module as well.
 			--	like tableview may like to recieve click notification, but does it require to handle anuy logic related to it? since the wbc layers will only host the pagination module and layers so maybe tableview does not need to manage many or maybe not need to manage none of those things. 
 				--	NOTE: and on this regard in case of dapii custom data based feed, when the pagination links are created by the dapii layers even then also all the standard and compatibility listeners of the bind_click for pagination links below will do its job. means roughly except the dapii creating the pagination links the rest all will be handled by the wbc layers. 
 
 				--	so whatever logic tableview requires after the pagination click can be covered by raised notification from here -- to s 
 					--	do the same for the other key functions below and raise notification but only if it is necessary otherwise we would skip that and only add when required. -- to s  
+		ACTIVE_TODO_OC_END*/
 		// --- move this code frome this file
         jQuery('.products,.product-listing,.row-inner>.col-lg-9:eq(0),.woocommerce-pagination,.pagination,jet-filters-pagination').css('visibility','visible');
 
@@ -1772,18 +1781,22 @@ window.document.splugins.wbc.pagination.core = function( configs ) {
 	var set_pagination_html_private = function(data){
 		
 		// -- aa function mathi code pagination sub module na module ma move thase ane baki no jo applicable hoy to aa module ma rese. Pan aa point execute karvi te pela niche point confirm karvano rese. -- to a & -- to h INVALID 
+		/*ACTIVE_TODO_OC_START
 			-- need to confirm ke aa call diamond api mathi j ave se ne ane te jo no male to ani calling sycuance hirenbhai sathe confirm karvi. -- to a
 			-- ane je aya compatibility no code dekhay se te aa code je module ma finally implement thay tena compatibility function ma move karva no -- to a
 				-- aa code jya thi move thyo teni calling sycuanc(03-08-2022) -- to a
 		// --- move this code frome this file in this eo_wbc_filter_render_html()
 		-- aa code diamond api ma move nathi kavano aya j implementation karvanu-- to a
+		ACTIVE_TODO_OC_END*/
 		if(jQuery('.woocommerce-pagination,.pagination'+compatability('pagination_link_selector',null,null),jQuery(data)).html()!==undefined) {
 			if(jQuery('.woocommerce-pagination,.pagination'+compatability('pagination_link_selector',null,null)).length>0){
 				jQuery(".woocommerce-pagination,.pagination"+compatability('pagination_link_selector',null,null)).html(jQuery('.woocommerce-pagination,.pagination'+compatability('pagination_link_selector',null,null),jQuery(data)).html());
 			} else {
 
+				/*ACTIVE_TODO_OC_START
 				@d once all the pagination related layers brought to this function, we need to check if the below incomplete implementation is completely implemented anywhere in our repo -- to d 
 					--	if not then test with the elementor created category feed page and also with elementor hello themes custom loop to check if it works. if not then must uncomment the last uncommented line and finish the implementation -- to d or -- to b 
+				ACTIVE_TODO_OC_END*/
 				let product_container = jQuery(".products:eq(0),.product-listing:eq(0),.row-inner>.col-lg-9:eq(0)");
 				if(product_container.length<=0) {
 					product_container = jQuery(".elementor-products-grid");
@@ -1803,15 +1816,17 @@ window.document.splugins.wbc.pagination.core = function( configs ) {
 	}
 	
 	var on_click_listener = function(){
-		ACTIVE_TODO_OC_START
+		/*ACTIVE_TODO_OC_START
 		NOTE : it will bind to all kind of such on_click events of pagination, it will be private but it may broadcast notification with a callback which js layers of like tableview and so on can call when they recieve their own click event or they can simply call below on_click function". so it is private function.
-		ACTIVE_TODO_OC_END
+		ACTIVE_TODO_OC_END*/
+		/*ACTIVE_TODO_OC_START
 		-- aa 3 mate comman click event banavano -- to a
 		-- compatibility function mathi selector lavano -- to a 
 			-- compatibility function ma section ni condition kem implement karvani(shraddha ne pushvu, compatibility function na example jova hoy to common.js ma swatches module mase) -- to a
 		// -- aama click no event binding j khali rese baki andar no code base function ma move thse(shradhha ne pusvu)-- to a	
 		// -- click event no code rakhvano baki no base function ma move thase (360 ma karyo te rite)-- to a	
-		move all below bind click code to the click function. but instead just create the three functions like we do in the listener style. and then move the code -- to s     	
+		move all below bind click code to the click function. but instead just create the three functions like we do in the listener style. and then move the code -- to s 
+		ACTIVE_TODO_OC_END   */	
 		// jQuery('body').on('click','.navigation .page-numbers,.woocommerce-pagination a.page-numbers',function(e){
 		// 	e.preventDefault();
 		// 	e.stopPropagation();
@@ -1853,23 +1868,26 @@ window.document.splugins.wbc.pagination.core = function( configs ) {
 		// 	window.document.splugins.filters.api.eo_wbc_filter_change_wrapper(false,'form#'+jQuery(this).parents().has('[id$="eo_wbc_filter"]').find('[id$="eo_wbc_filter"]').attr('id'));
 		// });
 
+		/*ACTIVE_TODO_OC_START
 		-- confirm with hirenbhai --to a
+		ACTIVE_TODO_OC_END*/
 		// on_click();
 
 	};
 
     var on_click = function(){
 
-  		ACTIVE_TODO_OC_START
-		NOTE : it will internally implement all flows related to pagination link click event
-		ACTIVE_TODO_OC_END
+		// NOTE : it will internally implement all flows related to pagination link click event
 
 		click();
 
     };
 
     var click = function(){
+    	
+    	/*ACTIVE_TODO_OC_START
     	-- event var aya sudhi pogadvano se -- to a
+    	ACTIVE_TODO_OC_END*/
     	event.preventDefault();
 		event.stopPropagation();								
 		
@@ -1963,15 +1981,14 @@ window.document.splugins.wbc.pagination.core = function( configs ) {
 
 };
 
-do we need to set any configs here?? -- to h & -- to s
 //  publish it 
 window.document.splugins.wbc.pagination.api = window.document.splugins.wbc.pagination.core( {}/*if required then the php layer configs can be set here by using the js vars defined from the php layer*/ );
 
-ACTIVE_TODO_OC_START
+/*ACTIVE_TODO_OC_START
 now this state mantaining flow should be inside its own module so inside the filters module above, but does it mean that we will stop keeping it direcly under the window object or we will keep it but start using the filters module stat everywhere and once everything sound stable then comment out below? 
 	--	maybe later is the right idea but the point is that if at some places the calls are still going to below stat vars instead of the modules stat then js layer may not show sign but if comment it now then it will crash and that is enough for us to know. but yeah the fact is also that for sometime some js layers are going to be used un-refactored they will depending on below stat vars so we need keep it as per the former option. 
 	--	anyway create the stat vars inside the filters module and set it there also from underneath below statements -- to d 
-ACTIVE_TODO_OC_END
+ACTIVE_TODO_OC_END*/
 
 /*<<<<<<< HEAD*/
 /*window.eo_wbc_object = window.eo_wbc_object || {};
@@ -2051,17 +2068,17 @@ function eowbc_lazyload(){
     }, false);
 }
 
+/*ACTIVE_TODO_OC_START
 check in all 3 files if in use -- to s
 	ACTIVE_TODO check in all filters related js layers & files if in use -- to s
+ACTIVE_TODO_OC_END*/
 var render_data = '';
 var _render_container = '';
 
-ACTIVE_TODO_OC_START
 // move all fundamental functions like below inside the filters core js module -- to d. it will be as private functions mostly done
-	-- also wherever you have found the change function instance in any repo then there check for the eo_wbc_filter_render_html function like below and copy their code over to the filters js module where below code is moved, but yeah where you copy above it put a comment stating from which repo and which file line it is moved -- to d 
+	// -- also wherever you have found the change function instance in any repo then there check for the eo_wbc_filter_render_html function like below and copy their code over to the filters js module where below code is moved, but yeah where you copy above it put a comment stating from which repo and which file line it is moved -- to d done
 		// done for 3 files
-		ACTIVE_TODO check in all filters related js layers & files if in use -- to s
-ACTIVE_TODO_OC_END	
+		// ACTIVE_TODO check in all filters related js layers & files if in use -- to s
 //render products DOM to view
 // function eo_wbc_filter_render_html(data,render_container) {
 
@@ -2317,10 +2334,11 @@ ACTIVE_TODO_OC_END
 		// }
 
 		related to serise 3
-		var form=jQuery(form_selector/*"form#eo_wbc_filter"*/);	
-		if(form.find('[name="html_destination"]').length>0){
-			render_container = form.find('[name="html_destination"]').val();
-		}
+		// var form=jQuery(form_selector/*"form#eo_wbc_filter"*/);	
+		// if(form.find('[name="html_destination"]').length>0){
+		// 	render_container = form.find('[name="html_destination"]').val();
+		// }
+
 		// var site_url=eo_wbc_object.eo_cat_site_url;
 		// var ajax_url = '';
 
