@@ -679,14 +679,14 @@ if(is_shop() || is_product_category()) {
 	});
 </script>
 
-/*---TOOLTIP--- @tejas*/
-/*----JS----*/
+<!-- /*---TOOLTIP--- @tejas*/
+/*----JS----*/ -->
 <script type="text/javascript">
 jQuery( document ).ready(function() {
     jQuery('[data-toggle="popover"]').popover(); 
 });
 </script>
-/*----CSS---*/
+<!-- /*----CSS---*/ -->
 <style type="text/css">
 	:root{
         --spui_tooltip_bg:#8224e3;
