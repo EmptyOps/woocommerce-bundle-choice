@@ -174,7 +174,10 @@ class EOWBC_Filter_Widget {
 			<?php
 		},99);
 
-		wbc()->load->asset('js','publics/eo_wbc_filter');
+		// 29-09-2022 @h  @s 
+		// wbc()->load->asset('js','publics/eo_wbc_filter');
+		$this->load_asset();
+
 		wbc()->theme->load('css','filter');
         wbc()->theme->load('js','filter');
         //wbc()->load->asset('js','filter');
@@ -996,7 +999,7 @@ class EOWBC_Filter_Widget {
 
 			add_action( ( !is_admin() ? 'wp_enqueue_scripts' : 'admin_enqueue_scripts') ,function(){
 
-				wbc()->load->asset('js','publics/eo_wbc_filter',array('jquery'));
+				wbc()->load->asset('js', 'publics/eo_wbc_filter', array('jquery'), "", false, true, null, null, true);
 				
 			}, 1049);
 
@@ -2633,7 +2636,10 @@ class EOWBC_Filter_Widget {
 			var eo_wbc_object = JSON.parse('<?php echo json_encode($data); ?>');
 		</script>
 		<?php
-		wbc()->load->asset('js','publics/eo_wbc_filter',array('jquery'));		
+		// 29-09-2022 @h  @s 
+		// wbc()->load->asset('js','publics/eo_wbc_filter',array('jquery'));	
+		$this->load_asset();
+	
 	}
 
 	public function get_widget() {
