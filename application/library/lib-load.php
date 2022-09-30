@@ -159,8 +159,25 @@ if(!class_exists('WBC_Loader')) {
 					break;
 				case 'localize':
 
-					//wbc_pr( "localize " . $_handle );	
+					// wbc_pr( "localize " . $_handle );	
+					// wbc_pr( $param );	
+					// wbc_pr( "localize 1 " );	
+					// wbc_pr( array_keys($param)[0] );	
+					// wbc_pr( "localize 2" );	
+					// wbc_pr( $param[array_keys($param)[0]] );	
+
 					wp_localize_script($_handle,array_keys($param)[0],$param[array_keys($param)[0]]);
+					break;
+
+				case 'localize_data':
+
+					// NOTE: should never be used for configs. and only be used if there is exteam requirement of data dumping. 
+						// NOTE: and since this is about dump to browser so loading sequance hooks and the output buffer should be kept in mind. 
+					?>
+					<script>
+						var eo_wbc_object = JSON.parse('<?php echo json_encode($data); ?>');
+					</script>
+					<?php
 					break;				
 				default:				
 					break;
