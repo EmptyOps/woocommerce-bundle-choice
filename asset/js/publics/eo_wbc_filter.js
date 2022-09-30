@@ -1728,7 +1728,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 			no_products_found_private(form_selector);
 		},
 		set_enable_filter: function(value) {
-			
+
 			set_enable_filter_private(value);
 		}		
     };
@@ -2517,7 +2517,9 @@ jQuery(document).ready(function($){
 		// 	window.document.splugins.filters.api.eo_wbc_filter_change_wrapper(false,'form#'+jQuery(this).parents().has('[id$="eo_wbc_filter"]').find('[id$="eo_wbc_filter"]').attr('id'));
 		// });
 		// --- end ---
+		/*ACTIVE_TODO_OC_START
 		window.document.splugins.pagination.api.on_click_listener();
+		ACTIVE_TODO_OC_END*/
 	}
 	/////////////////////////
 	////////////////////////
@@ -2615,7 +2617,7 @@ window.document.splugins.wbc.filter_sets.core = function( configs ) {
     
     var init_preprocess = function(event) { 
 
-        preprocess(element, event);
+        preprocess(null, event);
 
       	jQuery('.filter_setting_advance_two_tabs .item.active').click();
 
@@ -2623,7 +2625,7 @@ window.document.splugins.wbc.filter_sets.core = function( configs ) {
 
     var preprocess = function(element, event) { 
 
-        process_types(type,element);
+        process_types(null,element);
     }
 
     var process_types = function(type=null, element=null) { 
