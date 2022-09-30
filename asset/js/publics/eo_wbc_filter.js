@@ -376,7 +376,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 					}
 
 					// move to tableview -- to s
-					from slick template1 template2
+					// from slick template1 template2
 					form_data={_current_category:jQuery("[name='_current_category']").val().trim(),action:jQuery("[name='action']").val().trim()/*'eo_wbc_e_tabview'*/,products_in:_products_in};
 
 						// --	it seems that per page if in tableview prepare_query_data need to manage a little done 
@@ -428,14 +428,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 			
 			} else {	/*not in filter*/
 
-				after all prepare_query_data move are finalized then we need to structure form_data preparation properly -- to h
-					--  like form serialize or base form preparation conataining all base wbc fields should happen in here on wbc layer only. -- to h & -- to s
-						--  so after above is done then remove from.serialize statements from tableview layer. -- to s
-						ACTIVE_TODO and same will be applicable to other js layers like diamond_quize and so on. -- to s
-
-				s: question moved from tableview so need to managed flag
-				// move to tableview -- to s 
-				from slick_table template1 template2 filter 
+				// from slick_table template1 template2 filter 
 				form_data=form.serialize();
 
 				if(/*eo_wbc_e_tabview.eo_table_view_per_page*/jQuery('[name="eo_wbc_page"]').length > 0){
@@ -737,7 +730,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
 		// window.eo_wbc_object.enable_filter = false;
 		// window.document.splugins.eo_wbc_object.enable_filter = false;
-		set_enable_filter(false);
+		set_enable_filter_private(false);
 		// console.log(this.url);
 
 		// ACTIVE_TODO/TODO if ever required to manage or control any logic here in this function or in before send and so on function then we have planned and though out the flow of using even the flag classes like add class for any flag and then on the filter js means the base module the parent module in filter js the filter module in perticuler function for example should search and before send it should just check the hasclass condition with some generic class name. we have to confirm this flow once but this sounds like the idea. otherwise the other option is apply filter notification but we want to but we should simply avoid it if possible.
@@ -821,14 +814,6 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
 		} );	
 
-		from template1 and slick table
-		not in filter
-			--	this is most likely need to be moved to tableview or do we need to made it global? if it is filter layer logic. -- to h
-				--	lets confirm only after folow up from t.
-		if(!init_call){
-			jQuery(".reset_all_filters.mobile_2").removeClass('mobile_2_hidden');
-		}	
-
 		/*ACTIVE_TODO_OC_START
 		double confirm that compatibility matters are well implemented so that their patches are actually applied and used when become necessary -- to s 
 			--	and in that regard when compatibility patches are used then the normal default layer logic should be skipped or I think they are applied first and then compatibility so no need of skipping. but yeah still lets confirm all patches and their execution sequence. -- to s 
@@ -842,6 +827,9 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		// @s
 		// compatability(section, object, expected_result);
 
+		var eo_wbc_filter_change_wrapper_callback = null ;
+        window.document.splugins.events.api.notifyAllObservers( 'filters', 'eo_wbc_filter_change_wrapper', {init_call:init_call}, eo_wbc_filter_change_wrapper_callback, form_selector==null ? _this.$base_container : form_selector );
+
 		return true;
 
 	};
@@ -853,7 +841,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		hide_loader(form_selector);
 
 		// added new on 26-09-2022
-		set_enable_filter(true);
+		set_enable_filter_private(true);
 
 		var complete_callback = null ;
         window.document.splugins.events.api.notifyAllObservers( 'filters', 'complete', {}, complete_callback, form_selector==null ? _this.$base_container : form_selector );
@@ -907,7 +895,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
 		// window.eo_wbc_object.enable_filter = true;
 		// window.document.splugins.eo_wbc_object.enable_filter = true;
-		set_enable_filter(true);
+		set_enable_filter_private(true);
 
 		/////////////////////////////
 		var success_callback = null ;
@@ -929,7 +917,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
 		// window.eo_wbc_object.enable_filter = true;
 		// window.document.splugins.eo_wbc_object.enable_filter = true;
-		set_enable_filter(true);
+		set_enable_filter_private(true);
 
 		///////////////////////////////
 
@@ -1595,7 +1583,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
     	return window.document.splugins.eo_wbc_object.enable_filter/*window.eo_wbc_object.enable_filter*/;
     };
 
-    var set_enable_filter = function(value) {
+    var set_enable_filter_private = function(value) {
 
     	window.eo_wbc_object.enable_filter = window.eo_wbc_object.enable_filter || value;
     	window.document.splugins.eo_wbc_object.enable_filter = window.document.splugins.eo_wbc_object.enable_filter || value;
@@ -1738,13 +1726,16 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		no_products_found: function(form_selector) {
 
 			no_products_found_private(form_selector);
-		}
+		},
+		set_enable_filter: function(value) {
+			
+			set_enable_filter_private(value);
+		}		
     };
 };
 
-should we pass here the eo_wbc_object or something such which is localized as js var ? -- to h & -- to s
 //  publish it 
-window.document.splugins.wbc.filters.api = window.document.splugins.wbc.filters.core( {} );
+window.document.splugins.wbc.filters.api = window.document.splugins.wbc.filters.core( eo_wbc_object );
 
 // the pagination js module
 window.document.splugins.wbc.pagination = window.document.splugins.wbc.pagination || {};
@@ -2004,7 +1995,7 @@ window.eo_wbc_object = window.eo_wbc_object || {};
 //////////// shraddha ////////////////
 window.document.splugins.eo_wbc_object = window.document.splugins.eo_wbc_object || {};
 // window.document.splugins.eo_wbc_object.enable_filter = window.document.splugins.eo_wbc_object.enable_filter || false;
-set_enable_filter(false);
+window.document.splugins.wbc.filters.api.set_enable_filter(false);
 /////////////////////////////////////
 
 // mostly we are not going to do with below fix function flows and how we manage it. but should we need to do anything with it as of now?  
@@ -2400,13 +2391,13 @@ jQuery(document).ready(function($){
 	//////////// shraddha //////////////
 	window.document.splugins.eo_wbc_object = window.document.splugins.eo_wbc_object || {};
 	// window.document.splugins.eo_wbc_object.enable_filter = window.document.splugins.eo_wbc_object.enable_filter || false;
-	set_enable_filter(false);
+	window.document.splugins.wbc.filters.api.set_enable_filter(false);
 	////////////////////////////////////
 	//done move to pagination js modules bind_click function -- to d 
 		
 		// --	and also be sure to the filter_change function call. and why that is so far not changed? -- to d 
-		--//done  and comment code below but the pagination modules init function need to be called from here -- to d 
-			--//done	so first export and publish that module under ...api -- to d 	
+			// --	and comment code below but the pagination modules init function need to be called from here -- to d done
+			// 	--	so first export and publish that module under ...api -- to d done	
 
 	// jQuery('body').on('click','.navigation .page-numbers,.woocommerce-pagination a.page-numbers',function(e){
 	//     e.preventDefault();
@@ -2460,13 +2451,15 @@ jQuery(document).ready(function($){
 
 	if(window.eo_wbc_object.disp_regular){
 	
-		create function bind_click in filters js module and move below code there -- to d done
-			--	and then from just make call to that private function from the init_private of the same module -- to d done
+		// create function bind_click in filters js module and move below code there -- to d done
+		// 	--	and then from just make call to that private function from the init_private of the same module -- to d done
 		//jQuery(".woocommerce-pagination,.pagination,jet-filters-pagination").html('');	
 
+		/*ACTIVE_TODO_OC_START
 		s: question niche code block filter module na "on_change_listener" function ma chhe to e fucntion call karavanu -- to s
 			this seems to be limited only for the tableview so need top figureout if this is not needed for filter js then should be moved to tableview js and all other such things in this if block of disp_regular condition above -- to h & -- to s
 		-- jewellery demo ma apply filter nu button work kare se -- to a
+		ACTIVE_TODO_OC_END*/
 		if(!window.eo_wbc_object.btnfilter_now){			
 			jQuery("#eo_wbc_filter").on('change',"input:not(:checkbox)",function(){
 				jQuery('[name="paged"]').val('1');
@@ -2673,7 +2666,7 @@ window.document.splugins.wbc.filter_sets.core = function( configs ) {
 	    let display_style = 'inline-block';
 
 	    // <?php /*if(wp_is_mobile() and !wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile')):*/ ?>
-	    if((window.document.splugins.common.is_mobile) and !(_this.configs.filter_setting_alternate_mobile)){
+	    if((window.document.splugins.common.is_mobile) && !(_this.configs.filter_setting_alternate_mobile)){
 	    
 	      display_style='block';
 	    
@@ -2712,7 +2705,8 @@ window.document.splugins.wbc.filter_sets.core = function( configs ) {
 
         	if(group_id == tab_data.first_tab_id){
 
-        		continue;
+        		//return means continue
+        		return;
         	}
 
 			let group_id_alt = tab_data.first_tab_id/*$(this).data('tab-altname')*/;
@@ -2725,7 +2719,7 @@ window.document.splugins.wbc.filter_sets.core = function( configs ) {
 		      }        
 
 		      // <?php if(wp_is_mobile() and !wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile')): ?>
-		      if((window.document.splugins.common.is_mobile) and !(_this.configs.filter_setting_alternate_mobile)){
+		      if((window.document.splugins.common.is_mobile) && !(_this.configs.filter_setting_alternate_mobile)){
 
 		        if($(this).hasClass('active')){
 		          $(this).trigger('click');
@@ -2737,7 +2731,7 @@ window.document.splugins.wbc.filter_sets.core = function( configs ) {
 		      }
 
 		      // <?php if(wp_is_mobile() and wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile')): ?>
-		      if((window.document.splugins.common.is_mobile) and (_this.configs.filter_setting_alternate_mobile)){
+		      if((window.document.splugins.common.is_mobile) && (_this.configs.filter_setting_alternate_mobile)){
 
 		        if($(this).hasClass('active')){
 		          $(this).trigger('click');
@@ -2758,7 +2752,7 @@ window.document.splugins.wbc.filter_sets.core = function( configs ) {
         });
 
 	    // <?php if(wp_is_mobile() and wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile')): ?>
-	    if((window.document.splugins.common.is_mobile) and (_this.configs.filter_setting_alternate_mobile)){
+	    if((window.document.splugins.common.is_mobile) && (_this.configs.filter_setting_alternate_mobile)){
 
 	      $('#advance_filter_mob_alternate').removeClass('status_hidden');
 

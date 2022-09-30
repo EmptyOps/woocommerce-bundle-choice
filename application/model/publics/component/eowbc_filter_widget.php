@@ -997,6 +997,7 @@ class EOWBC_Filter_Widget {
 
 		}else{
 
+			// NOTE: below hook is currently not working and the js is loading from js vars file
 			add_action( ( !is_admin() ? 'wp_enqueue_scripts' : 'admin_enqueue_scripts') ,function(){
 
 				wbc()->load->asset('js', 'publics/eo_wbc_filter', array('jquery'), "", false, true, null, null, true);
@@ -2989,7 +2990,7 @@ class EOWBC_Filter_Widget {
 		$filter_sets_confings['filter_prefix'] = $this->filter_prefix;
 		$filter_sets_confings['filter_sets_data'] = $filter_sets_data;
 
-		wbc()->load->asset('localize','filter_sets',array("filter_sets_confings" => $filter_sets_confings));
+		wbc()->load->asset('localize_data','publics/sp_filter_sets',array("filter_sets_confings" => $filter_sets_confings));
 
 
 		/*echo "non_adv_ordered_filter and adv_ordered_filter dump 1";

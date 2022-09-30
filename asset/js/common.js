@@ -37,15 +37,15 @@ class SP_WBC extends SP_SPlugins {
 }
 window.document.splugins.wbc = window.document.splugins.wbc || {};
  
- port the very base namespace and also some key and common libraries and functions 
+ // port the very base namespace and also some key and common libraries and functions 
 var splugins = window.document.splugins;    
 
-put the is item page and is category page conditions for below underscore js port statement -- to s done
-    --  and also put same both conditions for while during exporting the three modules namely swatches, gallery_images and sp_slzm -- to s done
-    --  and the is_category_page and is_item_page flgs are not set properly on the js.vars asset php file so set it there. look at public handler file if required -- to s done 
-    --  and also put the php side is_category_page and is_item_page conditions for underscore js loading since that is going to be used on these two page only -- to s done
-    --  and also the export statement still miss one line of calling init, I think. so look at the form builder asset php and if that is the case then put init function call under is js module where it is exported under .api object -- to s done
-        --  all modules means also the pagination and filters module in the filters js. and also the module in sp tv template js file. -- to s done
+// put the is item page and is category page conditions for below underscore js port statement -- to s done
+//     --  and also put same both conditions for while during exporting the three modules namely swatches, gallery_images and sp_slzm -- to s done
+//     --  and the is_category_page and is_item_page flgs are not set properly on the js.vars asset php file so set it there. look at public handler file if required -- to s done 
+//     --  and also put the php side is_category_page and is_item_page conditions for underscore js loading since that is going to be used on these two page only -- to s done
+//     --  and also the export statement still miss one line of calling init, I think. so look at the form builder asset php and if that is the case then put init function call under is js module where it is exported under .api object -- to s done
+//         --  all modules means also the pagination and filters module in the filters js. and also the module in sp tv template js file. -- to s done
 if(window.document.splugins.common.is_item_page || window.document.splugins.common.is_category_page) {
 
     splugins._ = _;    //   underscore js 
@@ -175,10 +175,12 @@ if(window.document.splugins.common.is_item_page || window.document.splugins.comm
     return baseURL + "?" + newAdditionalURL + rows_txt;
 } 
 
+/*ACTIVE_TODO_OC_START
 var newURL = updateURLParameter(window.location.href, 'locId', 'newLoc');
 newURL = updateURLParameter(newURL, 'resId', 'newResId');
 
 window.history.replaceState('', '', updateURLParameter(window.location.href, "param", "value"));
+ACTIVE_TODO_OC_END*/
  
  //  TODO publish defs from here of the any design pattern that we define to be used as common patter like design pattern of the wbc.filters module 
      //  below the observer design pattern implemented for Feed.events act as one of published defs
@@ -2610,10 +2612,16 @@ window.document.splugins.wbc.variations.swatches.api = window.document.splugins.
 class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations{
 
     #configs;
-    #$base_container_selector;
+    #base_container_selector;
     #$base_container;
     #data;
     #binding_stats;
+    #$base_element;
+    #$slider_container;
+    #$zoom_container;
+    #$slider_loop_container;
+    #$wrapper;
+    #$variations_form;
 
     constructor(element, configs){
         
@@ -2622,15 +2630,15 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations{
 
         var _this = this; 
      
-        _this.#$configs = jQuery.extend({}, {}/*default configs*/, configs);  
+        _this.#configs = jQuery.extend({}, {}/*default configs*/, configs);  
 
-        _this.#$base_container_selector = ( window.document.splugins.common._o( _this.#configs, 'base_container_selector') ? _this.#configs.base_container_selector : ''  );     
+        _this.#base_container_selector = ( window.document.splugins.common._o( _this.#configs, 'base_container_selector') ? _this.#configs.base_container_selector : ''  );     
 
         // NOTE: for the notes base_container object is the base_element if we consider it with analogy of _jQueryInterface style modules
         _this.#$base_container = jQuery(element);   //( _this.base_container_selector );     
      
-        _this.#$data = {};
-        _this.#$binding_stats = {};
+        _this.#data = {};
+        _this.#binding_stats = {};
         
         _this.#data.is_skip_sp_slzm = false;  
         _this.#data.is_skip_sp_slider = false;  
@@ -2681,9 +2689,9 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations{
     #init_preprocess(event) {
 
         var _this = this;
-        console.log(" gallery_images init_preprocess "+_this.#$base_container_selector);
+        console.log(" gallery_images init_preprocess "+_this.#base_container_selector);
 
-        if(jQuery(_this.#$base_container_selector+':not(.spui-wbc-gallery_images-product-type-variable):not(.spui-wbc-gallery_images-loaded)').length>0) {
+        if(jQuery(_this.#base_container_selector+':not(.spui-wbc-gallery_images-product-type-variable):not(.spui-wbc-gallery_images-loaded)').length>0) {
 
             console.log(" gallery_images init_preprocess if ");
 
@@ -2724,11 +2732,13 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations{
         }
         if( _this.#$variations_form == null || _this.#$variations_form.length == 0 ) {
 
+            /*ACTIVE_TODO_OC_START
             -- need to manage here selectore -- to s
+            ACTIVE_TODO_OC_END*/
             _this.#$variations_form = jQuery( 'form.variations_form' );  //  ACTIVE_TODO need to mature workaround here, or is it mature enough? -- to s
         }
 
-        _this.#data.product_variations = _this.#variations_form.data('product_variations') || [];      
+        _this.#data.product_variations = _this.#$variations_form.data('product_variations') || [];      
 
                /*ACTIVE_TODO_OC_START
                this.$attributeFields = this.$variations_form.find('.variations select');
@@ -2737,8 +2747,8 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations{
                this.$thumbnail = $('.woo-variation-gallery-thumbnail-slider', this._element);
                 ACTIVE_TODO_OC_END*/
 
-         _this.product_id = _this.#variations_form.data('product_id');
-         _this.#data.is_variation_product = _this.#variations_form.length > 0;
+         _this.product_id = _this.#$variations_form.data('product_id');
+         _this.#data.is_variation_product = _this.#$variations_form.length > 0;
  
          _this.#$base_element.addClass('spui-wbc-gallery_images-loaded');
  
@@ -3049,7 +3059,23 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations{
     
     }
 
+    template_public( tmpl_id, templating_lib ) {
+
+        var _this = this;
+
+        return window.document.splugins.templating.api.get_template( tmpl_id, templating_lib );
+    
+    }
+
     #apply_template_data( template, template_data, templating_lib ) {
+        
+        var _this = this;
+
+        return window.document.splugins.templating.api.apply_data( template, template_data, templating_lib );
+    
+    }
+
+    apply_template_data_public( template, template_data, templating_lib ) {
         
         var _this = this;
 
@@ -3407,8 +3433,8 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations{
         var url = _this.#get_loop_box_anchor();
         url = url +'?variation_id='+ variation.variation_id;
 
-        ACTIVE_TODO as soon as required we need to enabled url support if applicable for simple type product 
-            ACTIVE_TODO very soon we should also use here the router class Query perams function layer instant of directly using hard coded_attr_checklist etc formate  
+        // ACTIVE_TODO as soon as required we need to enabled url support if applicable for simple type product 
+        //     ACTIVE_TODO very soon we should also use here the php layer router class Query perams function layer instant of directly using hard coded_attr_checklist etc formate  
         var attributeSlug_global = '';
         jQuery.each(attributes,function(key, val) {
 
@@ -3433,8 +3459,8 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations{
 
         //     console.log("find success");
         // }
-        -- aa <a> find karva mate banavyu se final karva nu se @a--
-        --- start ---
+        // -- aa <a> find karva mate banavyu se final karva nu se @a--
+        // --- start ---
 
         function isEmpty(val){
             return (val == undefined || val == null || val.length <= 0) ? true : false;
@@ -3483,7 +3509,7 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations{
                 console.log("HREF thi <a> malyo");
             }
         };
-        --- end ---
+        // --- end ---
 
         return finalAncher;
     
@@ -3491,7 +3517,9 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations{
 
     #set_variation_url(variation) {
 
+        /*ACTIVE_TODO_OC_START
         -- aa function swatchis module ma mukvanu hatu and gallery module ma mukelu se, since show_variation event swatches ma nathi -- to a
+        ACTIVE_TODO_OC_END*/
         var _this = this;
 
         var a = _this.#get_loop_box_anchor(variation);
@@ -4035,7 +4063,8 @@ class SP_WBC_Variations_Swatches_Feed_Page extends SP_WBC_Variations_Swatches {
 
         super.init();
 
-        _this.#update_configs();
+        // s: question aa call mate recording confirm karavnu.
+        // _this.#update_configs();
     }
 
     init() {
@@ -4082,8 +4111,10 @@ if(window.document.splugins.common.is_category_page) {
 class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Gallery_Images {
 
     #$configs;
-    #$data;
+    #data;
     #$binding_stats;
+    #$zoom_container;
+
 
     constructor(element, configs) {
 
@@ -4094,7 +4125,7 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
      
         _this.#$configs = jQuery.extend({}, {}/*default configs*/, configs);  
      
-        _this.#$data = {};
+        _this.#data = {};
         _this.#$binding_stats = {};        
     
     }
@@ -4168,11 +4199,11 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
             
         }
         
-        if(window.document.splugins.common._b(_this.#binding_stats, 'zoom_area_hover_in_listener', type)){
+        if(window.document.splugins.common._b(_this.#$binding_stats, 'zoom_area_hover_in_listener', type)){
             return false;
         }        
         
-        _this.#zoom_container.on("mouseenter","",function() {
+        _this.#$zoom_container.on("mouseenter","",function() {
             
             _this.#on_zoom_area_hover_in(type);            
         });
@@ -4195,7 +4226,7 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
             
         }
 
-        if(window.document.splugins.common._b(_this.#binding_stats, 'zoom_area_hover_out_listener', type)){
+        if(window.document.splugins.common._b(_this.#$binding_stats, 'zoom_area_hover_out_listener', type)){
             return false;
         }   
 
@@ -4232,11 +4263,11 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
             return false;
         }
         
-        var templating_lib = window.document.splugins.common._o( _this.#configs, 'templating_lib') ? _this.#configs.templating_lib : 'wp';
+        var templating_lib = window.document.splugins.common._o( _this.#$configs, 'templating_lib') ? _this.#$configs.templating_lib : 'wp';
 
         /*-- index config add @a --*/
         // var template_id = _this.#configs.template.zoom.id+'_'+index_inner (?) + '_hover';
-        var template_id = _this.#configs.template.zoom.id+'_'+_this.#configs.options.tiny_features_option_ui_loop_box_hover_media_index + '_hover';
+        var template_id = _this.#$configs.template.zoom.id+'_'+_this.#$configs.options.tiny_features_option_ui_loop_box_hover_media_index + '_hover';
 
         if(splugins.templating.is_template_exists(template_id, templating_lib)) {
 
@@ -4254,12 +4285,12 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
                 console.log(index_inner);
 
                 // if(index_inner (?) == index_inner){
-                if( _this.#configs.options.tiny_features_option_ui_loop_box_hover_media_index == index_inner){
+                if( _this.#$configs.options.tiny_features_option_ui_loop_box_hover_media_index == index_inner){
                     
                     console.log(" gallery_images_child zoom_area_hover_in inner inner if" );
 
-                    var template_var = _this.#template( template_id, templating_lib );
-                    zoom_inner_html += _this.#apply_template_data(template_var, image, templating_lib);
+                    var template_var = _this.template_public( template_id, templating_lib );
+                    zoom_inner_html += _this.apply_template_data_public(template_var, image, templating_lib);
 
                     return false;
                 }
@@ -4308,7 +4339,7 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
 
     #update_configs() {
         
-        NOTE: In future if we find better flow or structure which is mature standard then we can deprecate this function
+        // NOTE: In future if we find better flow or structure which is mature standard then we can deprecate this function
 
         var configs = super.get_config();
         configs.template = configs.template_loop;
