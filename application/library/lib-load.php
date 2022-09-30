@@ -54,7 +54,7 @@ if(!class_exists('WBC_Loader')) {
 			}			
 		}
  
-		public function asset($type,$path,$param = array(),$version="",$load_instantly=false,$is_prefix_handle=false,$localize_var=null,$localize_var_val=null,$in_footer = false,$is_absolute_url = false) {
+		public function asset($type,$path,$param = array(),$version="",$load_instantly=false,$is_prefix_handle=false,$localize_var=null,$localize_var_val=null,$in_footer = false,$is_absolute_url = false,$singleton_function = null) {
 			
 			if(!apply_filters('wbc_load_asset_filter',true,$type,$path,$param,$version,$load_instantly)) {
 				return true;
@@ -86,7 +86,12 @@ if(!class_exists('WBC_Loader')) {
 				case 'js':
 					if ($is_absolute_url) {
 						$_path = $_path;
-					}else {
+					
+					} elseif( !empty( $singleton_function ) ) {
+
+						$_path = constant( strtoupper( $singleton_function ).'_ASSET_URL').'js'.'/'.$path.'.js';	
+					} else {
+						
 						$_path = constant('EOWBC_ASSET_URL').'js'.'/'.$path.'.js';	
 					}
 
@@ -171,11 +176,11 @@ if(!class_exists('WBC_Loader')) {
 
 				case 'localize_data':
 
-					// NOTE: should never be used for configs. and only be used if there is exteam requirement of data dumping. 
+					// NOTE: should never be used for js file configs. and only be used if there is exteam requirement of independent configs or data dumping. 
 						// NOTE: and since this is about dump to browser so loading sequance hooks and the output buffer should be kept in mind. 
 					?>
 					<script>
-						var eo_wbc_object = JSON.parse('<?php echo json_encode($data); ?>');
+						var <?php echo array_keys($param)[0]; ?> = JSON.parse('<?php echo json_encode($param[array_keys($param)[0]]); ?>');
 					</script>
 					<?php
 					break;				
