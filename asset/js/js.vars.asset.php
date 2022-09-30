@@ -105,6 +105,7 @@ add_action('wp_footer',function(){
 
 			window.document.splugins.wbc.filter_sets.api.init();
 
+   		// ACTIVE_TODO we should confirm once and then disable category condition or part below because it seems unnecessary for the category page. or is it necessary for the purple theme loopbox slider? or for the tableview sidebar or popup if it has jQuery slider or zoom? 
     		if(window.document.splugins.common.is_item_page || window.document.splugins.common.is_category_page) {
     
 		        // window.setTimeout(function(){

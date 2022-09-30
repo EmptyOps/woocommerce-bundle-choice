@@ -1757,7 +1757,7 @@ window.document.splugins.wbc.pagination.core = function( configs ) {
 
 	_this.$base_container = null  /*jQuery( ( window.document.splugins.common._o( _this.configs, 'base_container_selector') ? _this.configs.base_container_selector : '' ) )*/;  // ACTIVE_TODO/TODO whenever it become necessary to use base_container for events or so then at that time need to init base_container using standard pagination section conatainer selector.
 
-	var init_private = function() {
+	var init_private = function(event) {
 
 		// ACTIVE_TODO whenever in future if required  to run compatibility check during run time means after the base container selectore is defined than we can call compatibility layers additionaly from here 
     	var base_container_selector_callback = null;
@@ -1774,7 +1774,7 @@ window.document.splugins.wbc.pagination.core = function( configs ) {
 		// --- move this code frome this file
         jQuery('.products,.product-listing,.row-inner>.col-lg-9:eq(0),.woocommerce-pagination,.pagination,jet-filters-pagination').css('visibility','visible');
 
-		on_click_listener();
+		on_click_listener(event);
 
 	};
 
@@ -1819,7 +1819,7 @@ window.document.splugins.wbc.pagination.core = function( configs ) {
 		}
 	}
 	
-	var on_click_listener = function(){
+	var on_click_listener = function(event){
 		/*ACTIVE_TODO_OC_START
 		NOTE : it will bind to all kind of such on_click events of pagination, it will be private but it may broadcast notification with a callback which js layers of like tableview and so on can call when they recieve their own click event or they can simply call below on_click function". so it is private function.
 		ACTIVE_TODO_OC_END*/
@@ -1842,7 +1842,7 @@ window.document.splugins.wbc.pagination.core = function( configs ) {
 
 		jQuery("body").on('click','.woocommerce-pagination a,.pagination a,.jet-filters-pagination a,.woocommerce-pagination .jet-filters-pagination__link,.pagination .jet-filters-pagination__link,.jet-filters-pagination .jet-filters-pagination__link,.navigation .page-numbers,.woocommerce-pagination a.page-numbers',function(event){
 			
-			on_click();
+			on_click(event);
 		});
 
 		// --- aa code aa file ma document.ready mathi move karelo se ---
@@ -1879,15 +1879,15 @@ window.document.splugins.wbc.pagination.core = function( configs ) {
 
 	};
 
-    var on_click = function(){
+    var on_click = function(event){
 
 		// NOTE : it will internally implement all flows related to pagination link click event
 
-		click();
+		click(event);
 
     };
 
-    var click = function(){
+    var click = function(event){
     	
     	/*ACTIVE_TODO_OC_START
     	-- event var aya sudhi pogadvano se -- to a
@@ -1928,9 +1928,9 @@ window.document.splugins.wbc.pagination.core = function( configs ) {
 	
 	return {
 		
-		init: function() {
+		init: function(event) {
 
-			init_private();	
+			init_private(event);	
 		},
 
 		// on_click: function() {
