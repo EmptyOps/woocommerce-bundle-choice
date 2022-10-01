@@ -1409,6 +1409,323 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
     };
 
+    var slider_change_event_listener = function(){
+
+		// --- move this code from woo-bundle-choice/application/view/publics/filters/form.php ---
+		// --- start ---
+		//Slider creation function
+		window.eo.slider=function(selector){
+
+			jQuery(selector).each(function(i,e){
+
+				_min = Number(jQuery(e).attr('data-min'));						
+				_max = Number(jQuery(e).attr('data-max'));												
+				_labels = jQuery(e).attr('data-labels');						
+
+				_params=new Object();												
+										
+				if(_labels != undefined && _labels != false){
+
+					_labels=_labels.split(',');
+					_params.interpretLabel=function(value){ 						
+						_labels = jQuery(e).attr('data-labels');
+						_labels=_labels.split(',');
+						/*console.log(value);
+						console.log(_labels);*/
+						if(_labels!=undefined){
+							let _label_value = _labels[value];
+							let _label_max_length = parseInt(jQuery(e).data('label_max_size'));
+
+							if((typeof(_label_max_length)==typeof(undefined)) || _label_max_length==""){
+								_label_max_length = <?php _e((int)wbc()->options->get_option('filters_'.$filter_prefix.'filter_setting','filter_setting_slider_max_lblsize',6)) ?>;
+							}								
+
+							if(_label_value.length>_label_max_length){
+								_label_value = _label_value.split(' ');
+								_label_value = _label_value.map(function(_label_value_ele){
+									return _label_value_ele[0];
+								});
+								_label_value = _label_value.join('');
+							}
+							return '<span title="'+_labels[value]+'" alt="'+_labels[value]+'">'+_label_value+'</span>';								
+						} else {
+							return value;
+						}
+						
+					};
+
+					_params.step=1;
+
+					_params.min=0;
+					_params.max=_labels.length-1;
+					_params.start=0;
+					_params.end=_labels.length-1;
+
+				} else {
+
+					_params.min=_min;
+					_params.max=_max;
+					_params.start=_min;
+					_params.end=_max;
+
+					_params.smooth=true;
+					_params.step=(_max-_min)/100;	
+				}
+				_params.smooth=true;
+				_params.autoAdjustLabels=true;
+				_params.decimalPlaces=4;
+				
+				_params.onMove=function(value, min, max) {
+
+					__slugs = jQuery(e).attr('data-slugs');
+					
+					if(typeof __slugs != typeof undefined && __slugs != false){
+						//PASS
+					} else {
+						_sep = jQuery(e).attr('data-sep');
+						_prefix = jQuery(this).data('prefix');
+						if(typeof(_prefix) == typeof(undefined) || _prefix=='undefined'){
+							_prefix = '';
+						}
+
+						_postfix = jQuery(this).data('postfix');
+						if(typeof(_postfix) == typeof(undefined) || _postfix=='undefined'){
+							_postfix = '';
+						}
+
+			        	jQuery("input[name='text_min_"+jQuery(e).attr('data-slug')+"']").val( _prefix+(_sep=='.'?Number(min).toFixed(2):(Number(min).toFixed(2)).toString().replace('.',','))+_postfix );
+			        	jQuery("input[name='text_max_"+jQuery(e).attr('data-slug')+"']").val( _prefix+(_sep=='.'?Number(max).toFixed(2):(Number(max).toFixed(2)).toString().replace('.',','))+_postfix);
+			        }					      	
+				};
+
+				_params.onChange=function(value, min, max) {	
+					_labels = jQuery(e).attr('data-labels');
+					__slugs = jQuery(e).attr('data-slugs');
+					
+					_min = Number (jQuery(e).attr('data-min'));						
+					_max = Number(jQuery(e).attr('data-max'));
+					_sep = jQuery(e).attr('data-sep');
+
+					console.log(min,_min,max,_max);
+
+					if(typeof _labels != typeof undefined && _labels != false){
+						_labels=_labels.split(',');
+						_min=0;
+						_max=_labels.length-1;
+					}
+
+					if(
+						(
+							(jQuery(this).data('prev_val_min')!=min && jQuery(this).data('prev_val_min')!=undefined)
+							|| 
+							(jQuery(this).data('prev_val_max')!=max && jQuery(this).data('prev_val_max')!=undefined)
+						)
+						||
+						( min!=_min || max!=_max )
+					){
+
+						if(typeof __slugs != typeof undefined && __slugs != false){
+								
+							jQuery("input[name='min_"+jQuery(e).attr('data-slug')+"']").val(__slugs.split(',')[min]);
+				        	jQuery("input[name='max_"+jQuery(e).attr('data-slug')+"']").val(__slugs.split(',')[max]);
+
+						} else {
+
+				        	jQuery("input[name='min_"+jQuery(e).attr('data-slug')+"']").val(Number(min).toFixed(2));
+				        	jQuery("input[name='max_"+jQuery(e).attr('data-slug')+"']").val(Number(max).toFixed(2));
+				        }
+
+				        if(jQuery(this).attr('data-slug')!='price'){
+					    	//Action of notifying filter change when changes are done.
+					    	if(jQuery(this).attr('data-min')==min && jQuery(this).attr('data-max')==max) {
+
+					    		if(jQuery("[name='_attribute']").val().includes(jQuery(this).attr('data-slug'))) {
+					    			
+					    			_values=jQuery("[name='_attribute']").val().split(',')
+					    			_index=_values.indexOf(jQuery(this).attr('data-slug'))
+					    			_values.splice(_index,1)
+					    			jQuery("[name='_attribute']").val(_values.join());
+					    		}
+					    	}
+					    	else {
+					    		if(! jQuery("[name='_attribute']").val().includes(jQuery(this).attr('data-slug'))) {
+					    			_values=jQuery("[name='_attribute']").val().split(',')
+					    			_values.push(jQuery(this).attr('data-slug'))
+					    			jQuery("[name='_attribute']").val(_values.join())
+					    		}
+					    	}
+				    	}
+				    	jQuery('[name="paged"]').val('1');
+				    	<?php if(empty(wbc()->options->get_option('filters_'.$filter_prefix.'filter_setting','filter_setting_btnfilter_now'))): ?>
+
+				    	//////// 27-05-2022 - @drashti /////////
+						// --add to be confirmed--
+						window.document.splugins.wbc.filters.api.eo_wbc_filter_change_wrapper(false,'form#<?php echo $filter_ui->filter_prefix; ?>eo_wbc_filter','',{'this':this,'event':new Event('change',this)});
+				    	// jQuery.fn.eo_wbc_filter_change(false,'form#<?php /*echo $filter_ui->filter_prefix;*/ ?>eo_wbc_filter','',{'this':this,'event':new Event('change',this)});
+						////////////////////////////////////////
+
+				    	<?php endif; ?>
+				    } else if( min==_min && max==_max ){
+				    	if(jQuery(this).attr('data-slug')!='price'){
+					    	//Action of notifying filter change when changes are done.						    	
+				    		if(jQuery("[name='_attribute']").val().includes(jQuery(this).attr('data-slug'))) {
+				    			
+				    			_values=jQuery("[name='_attribute']").val().split(',')
+				    			_index=_values.indexOf(jQuery(this).attr('data-slug'))
+				    			_values.splice(_index,1)
+				    			jQuery("[name='_attribute']").val(_values.join());
+				    		}
+				    	}
+				    }
+				    
+				    jQuery(this).data('prev_val_min',min);						    
+				    jQuery(this).data('prev_val_max',max);
+				};
+				
+				let _adjust_label = jQuery(this).data('label_adjust');
+				
+				if(_adjust_label!=1 && jQuery(this).hasClass('labeled')){
+					
+					_params.autoAdjustLabels=false;	
+				}					
+				
+				jQuery("input.text_slider_"+jQuery(e).attr('data-slug')).change(function() {				    
+					
+					//jQuery("#text_slider_"+jQuery(e).attr('data-slug')).slider("set rangeValue",jQuery("[name=min_"+jQuery(e).attr('data-slug')+"]").val(),jQuery("[name=max_"+jQuery(e).attr('data-slug')+"]").val());
+
+					let prefix = jQuery(e).attr('data-prefix');
+					let postfix = jQuery(e).attr('data-postfix');
+					
+					let min_value = jQuery("[name='text_min_"+jQuery(e).attr('data-slug')+"']").val();
+					
+					let max_value = jQuery("[name='text_max_"+jQuery(e).attr('data-slug')+"']").val();
+					
+					if(prefix!=='' && typeof(prefix)!==typeof(undefined) && prefix.hasOwnProperty('length')){
+						if(min_value.includes(prefix)){
+							min_value = min_value.slice(prefix.length);	
+						}							
+						if(max_value.includes(prefix)){
+							max_value = max_value.slice(prefix.length);
+						}
+					}
+
+					if(postfix!=='' && typeof(postfix)!==typeof(undefined) && postfix.hasOwnProperty('length')){
+						if(min_value.includes(postfix)){
+							min_value = min_value.slice(0,-1*postfix.length);
+						}
+						if(min_value.includes(postfix)){
+							max_value = max_value.slice(0,-1*postfix.length);
+						}
+					}
+					
+					jQuery("#text_slider_"+jQuery(e).attr('data-slug')).slider("set rangeValue",min_value,max_value);
+				});
+
+				let ui_slider = jQuery.fn.slider;
+
+				jQuery.fn.slider = window.document.splugins.ui.slider;
+				jQuery(e).slider(_params);
+				jQuery.fn.slider = ui_slider;
+			});
+		};
+		// --- end ---
+    };
+
+    var checkbox_change_event_listener = function(){
+
+		// --- move this code from woo-bundle-choice/application/view/publics/filters/form.php ---
+		// --- start ---			
+		if( typeof(jQuery.fn.checkbox) ==='function' ) {
+
+			jQuery('.checkbox').checkbox({onChange:function(event){
+
+				/*__slug=jQuery(this).attr('data-filter-slug');
+
+				if(__slug=='' || typeof(__slug)===typeof(undefined)){
+					return true;
+				}					
+
+				_values= Array();
+				jQuery('[data-filter-slug="'+__slug+'"]:checked').each(function(index,item){ 
+					_values.push(jQuery(item).attr('data-slug'));
+				});
+
+				jQuery('#checklist_'+__slug).val(_values.join());
+
+				if( ( jQuery('.checklist_'+__slug+':checkbox').length==jQuery('.checklist_'+__slug+':checkbox:checked').length)  || (jQuery('.checklist_'+__slug+':checkbox:checked').length==0) ) {
+
+		    		if(jQuery("[name='_attribute']").val().includes(__slug)) {
+		    			
+		    			_values=jQuery("[name='_attribute']").val().split(',')
+		    			_index=_values.indexOf(__slug)			    			
+		    			_values.splice(_index,1)				    			
+		    			jQuery("[name='_attribute']").val(_values.join());
+		    		}
+		    	}
+		    	else {
+		    		if(! jQuery("[name='_attribute']").val().includes(__slug)) {
+		    			_values=jQuery("[name='_attribute']").val().split(',')
+		    			_values.push(__slug)
+		    			jQuery("[name='_attribute']").val(_values.join())
+		    		}
+		    	}*/
+
+				__slug=jQuery(this).attr('data-filter-slug');
+
+				if(__slug=='' || typeof(__slug)===typeof(undefined)){
+					return true;
+				}					
+
+				_values= Array();
+				if(jQuery('[name="checklist_'+__slug+'"]').length>0 && typeof(jQuery('[name="checklist_'+__slug+'"]').val()) !== typeof(undefined)){
+					_values = jQuery('[name="checklist_'+__slug+'"]').val().split(',');	
+				}				
+
+				if(_values.indexOf(jQuery(this).attr('data-slug'))!=-1){
+
+					_values=jQuery('[name="checklist_'+__slug+'"]').val().split(',');
+					_index=_values.indexOf(jQuery(this).attr('data-slug'));
+					_values.splice(_index,1);						
+					jQuery('[name="checklist_'+__slug+'"]').val(_values.join());
+
+				} else {
+
+					_values=jQuery('[name="checklist_'+__slug+'"]').val().split(',');
+	    			_values.push(jQuery(this).attr('data-slug'));
+	    			jQuery('[name="checklist_'+__slug+'"]').val(_values.join());
+				}
+				
+				if( ( jQuery('.checklist_'+__slug+':checkbox').length==jQuery('.checklist_'+__slug+':checkbox:checked').length)  || (jQuery('.checklist_'+__slug+':checkbox:checked').length==0) ) {
+
+		    		if(jQuery("[name='_attribute']").val().includes(__slug)) {
+		    			
+		    			_values=jQuery("[name='_attribute']").val().split(',')
+		    			_index=_values.indexOf(__slug)			    			
+		    			_values.splice(_index,1)				    			
+		    			jQuery("[name='_attribute']").val(_values.join());
+		    		}
+		    	}
+		    	else {
+		    		if(! jQuery("[name='_attribute']").val().includes(__slug)) {
+		    			_values=jQuery("[name='_attribute']").val().split(',')
+		    			_values.push(__slug)
+		    			jQuery("[name='_attribute']").val(_values.join())
+		    		}
+		    	}
+		    	jQuery('[name="paged"]').val('1');
+		    	<?php if(empty(wbc()->options->get_option('filters_'.$filter_prefix.'filter_setting','filter_setting_btnfilter_now'))): ?>
+
+		    	//////// 27-05-2022 - @drashti /////////
+				// --add to be confirmed--
+				window.document.splugins.wbc.filters.api.eo_wbc_filter_change_wrapper(false,'form#<?php echo $filter_ui->filter_prefix; ?>eo_wbc_filter','',{'this':this,'event':event});
+		    	// jQuery.fn.eo_wbc_filter_change(false,'form#<?php/* echo $filter_ui->filter_prefix;*/ ?>eo_wbc_filter','',{'this':this,'event':event});
+				////////////////////////////////////////
+		    	<?php endif; ?>
+			}});				
+		}
+		// --- end ---
+    };
+
     // --- move to filter_set module @a ---
   //   var on_filter_set_click_listener = function(){
 
@@ -1451,6 +1768,14 @@ window.document.splugins.wbc.filters.core = function( configs ) {
     var on_change = function(form_selector) {
 
    		change(form_selector);
+
+    };
+
+    var on_slider_change_event = function(){
+
+    };
+
+    var on_checkbox_change_event = function(){
 
     };
 
@@ -1604,6 +1929,14 @@ window.document.splugins.wbc.filters.core = function( configs ) {
     	}
 
     	jQuery(render_container).html(html);
+    };
+
+    var slider_change_event = function(){
+
+    };
+
+    var checkbox_change_event = function(){
+
     };
 
     ///////////////////////////////////////////////////////

@@ -2198,7 +2198,7 @@ class EOWBC_Filter_Widget {
 				}
 
 				$query_params = \eo\wbc\model\SP_WBC_Router::instance()->get_query_params_formatted('url_and_filter_form', array('attr'), 'REQUEST', null);
-				$query_paramas_options = null;
+				$query_paramas_options = [];
 				if(in_array($term->slug , $query_params)){
 
 					$query_paramas_options = \eo\wbc\model\SP_WBC_Router::instance()->get_query_params_formatted('url_and_filter_form', array('attr_options', $term->slug) , 'REQUEST', null);
@@ -2988,7 +2988,7 @@ class EOWBC_Filter_Widget {
 		$filter_sets_confings = array();
 		$filter_sets_confings['filter_setting_alternate_mobile'] = wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile');
 		$filter_sets_confings['filter_prefix'] = $this->filter_prefix;
-		$filter_sets_confings['filter_sets_data'] = $filter_sets_data;
+		$filter_sets_confings['filter_sets_data'] = $filter_sets_data;	
 
 		wbc()->load->asset('localize_data','publics/sp_filter_sets',array("filter_sets_confings" => $filter_sets_confings));
 
@@ -3003,6 +3003,11 @@ class EOWBC_Filter_Widget {
 		if( $this->is_shortcode_filter ) {
 			//wbc()->load->template('publics/filters/shortcode_flt_search_btn', array("is_shortcode_filter"=>$this->is_shortcode_filter,'filter_ui'=>$this)); 	
 		}
+
+		// filter_sub_confings
+		$filter_sub_confings = array();		
+		$filter_sub_confings['filter_setting_btnfilter_now'] = wbc()->options->get_option('filters_'.$filter_prefix.'filter_setting','filter_setting_btnfilter_now');
+		$filter_sub_confings['filter_setting_slider_max_lblsize'] = wbc()->options->get_option('filters_'.$filter_prefix.'filter_setting','filter_setting_slider_max_lblsize',6);		
 
 		wbc()->load->template('publics/filters/form', array("thisObj"=>$this,"current_category"=>$current_category,'filter_prefix'=>$this->filter_prefix,'filter_ui'=>$this)); 
 		do_action('eowbc_after_filter_widget');
