@@ -143,6 +143,10 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
 		init_advance_filter_accordian();
 
+		// allow the filter search event after all init level logic is executed
+		// NOTE: now almost all other page load level flag set logic is disabled and initialy the flag is set at page load time only from here. 
+		set_enable_filter_private(true);	
+
     };
 
     var init_search = function(form_selector){
@@ -1910,11 +1914,15 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
     var set_enable_filter_private = function(value) {
 
+		console.log("filter module set_enable_filter_private before "+get_enable_filter()); 	
+
     	window.eo_wbc_object.enable_filter = window.eo_wbc_object.enable_filter || value;
     	window.document.splugins.eo_wbc_object.enable_filter = window.document.splugins.eo_wbc_object.enable_filter || value;
     	
     	window.eo_wbc_object.enable_filter = value;
     	window.document.splugins.eo_wbc_object.enable_filter = value;
+
+		console.log("filter module set_enable_filter_private after "+get_enable_filter()); 	
     };
     
     var get_archive_html = function() {
@@ -2328,7 +2336,8 @@ window.eo_wbc_object = window.eo_wbc_object || {};
 //////////// shraddha ////////////////
 window.document.splugins.eo_wbc_object = window.document.splugins.eo_wbc_object || {};
 // window.document.splugins.eo_wbc_object.enable_filter = window.document.splugins.eo_wbc_object.enable_filter || false;
-window.document.splugins.wbc.filters.api.set_enable_filter(false);
+// NOTE: now below flag set logic is disabled and initialy the flag is set at page load time only from the init_private function of filters module. 
+// window.document.splugins.wbc.filters.api.set_enable_filter(false);
 /////////////////////////////////////
 
 // mostly we are not going to do with below fix function flows and how we manage it. but should we need to do anything with it as of now?  
@@ -2631,8 +2640,10 @@ var _render_container = '';
 // --	disp_regular aa wbc and tableview ma serch ekaravano -- to s
 	// window.eo_wbc_object.enable_filter = true;
 	// window.document.splugins.eo_wbc_object.enable_filter = true;
-	window.document.splugins.wbc.filters.api.set_enable_filter(true);
-	jQuery.fn.eo_wbc_filter_change_native= function(init_call=false,form_selector="form#eo_wbc_filter",render_container='',parameters={}) {
+	// NOTE: now below flag set logic is disabled and initialy the flag is set at page load time only from the init_private function of filters module. 
+	// window.document.splugins.wbc.filters.api.set_enable_filter(true);
+
+	// jQuery.fn.eo_wbc_filter_change_native= function(init_call=false,form_selector="form#eo_wbc_filter",render_container='',parameters={}) {
 
 		/*ACTIVE_TODO_OC_START
 		on an important note there should a 
@@ -2701,8 +2712,8 @@ var _render_container = '';
 		// 	}
 		// });
 
-		return false;
-	}	
+		// return false;
+	// }	
 	
 	/*s: question need to manage this global layer
 	if(typeof(window.eo_wbc_filter_change) === 'undefined') {
@@ -2718,14 +2729,16 @@ var _render_container = '';
 jQuery(document).ready(function($){
 
 	// if any of the below vars are related to the stat and so on vars that we planned to rename or move then should be covered here also, otherwise at runtime it will break and would not run and crash -- to d done
-		
+	
+	console.log("filter js ready event"); 	
 	window.eo_wbc_object = window.eo_wbc_object || {};
 	// window.eo_wbc_object.enable_filter = window.eo_wbc_object.enable_filter || false;
-	//////////// shraddha //////////////
+
 	window.document.splugins.eo_wbc_object = window.document.splugins.eo_wbc_object || {};
 	// window.document.splugins.eo_wbc_object.enable_filter = window.document.splugins.eo_wbc_object.enable_filter || false;
-	window.document.splugins.wbc.filters.api.set_enable_filter(false);
-	////////////////////////////////////
+	// NOTE: now below flag set logic is disabled and initialy the flag is set at page load time only from the init_private function of filters module. 
+	// window.document.splugins.wbc.filters.api.set_enable_filter(false);
+
 	//done move to pagination js modules bind_click function -- to d 
 		
 		// --	and also be sure to the filter_change function call. and why that is so far not changed? -- to d 
@@ -2941,7 +2954,15 @@ window.document.splugins.wbc.filter_sets = window.document.splugins.wbc.filter_s
 
 window.document.splugins.wbc.filter_sets.core = function( configs ) {
 
+	var _this = this; 
+
+	_this.configs = jQuery.extend({}, {}/*default configs*/, configs);
+
 	var init_private = function() {
+
+		console.log("filter_sets init_private ");
+
+		console.log(_this.configs);
 
         window.document.splugins.events.api.createSubject( 'filter_sets', ['filter_set_click_before_loop'] );
 
@@ -2978,6 +2999,8 @@ window.document.splugins.wbc.filter_sets.core = function( configs ) {
 
     var filter_set_click_listener = function() { 
 		
+		console.log("filter_sets filter_set_click_listener");
+
 		var on_filter_set_click_listener_callback = null ;
 
 		jQuery('.filter_setting_advance_two_tabs .item').on('click',function(event){
@@ -2994,6 +3017,8 @@ window.document.splugins.wbc.filter_sets.core = function( configs ) {
     }
 
     var filter_set_click = function() {
+
+		console.log("filter_sets filter_set_click 11");
 
     	// --- aa code woo-bundle-choice/application/view/publics/filters/two_tabs.php mathi move karyo se @a ---
     	// --- start ---
@@ -3028,6 +3053,8 @@ window.document.splugins.wbc.filter_sets.core = function( configs ) {
 
 	    let group_id = $(this).data('tab-name');
 
+		console.log("filter_sets filter_set_click 22");
+
 	    // $('[data-tab-group="'+group_id+'"]:not(.toggle_sticky_mob_filter.advance_filter_mob)').not('[data-tab-group]:has([data-switch_filter_type-alternate])').css('display',stat_object.display_style);	
 	    var filter_set_click_callback = function(stat_object){
 
@@ -3036,7 +3063,13 @@ window.document.splugins.wbc.filter_sets.core = function( configs ) {
     	};
 	    window.document.splugins.events.api.notifyAllObservers( 'filters', 'filter_set_click_before_loop',{display_style:display_style},filter_set_click_callback);          
 
+		
+		console.log("filter_sets filter_set_click 33");
+		console.log(_this.configs.filter_sets_data);
+
         jQuery( _this.configs.filter_sets_data ).each(function (i, tab_data) {
+
+			console.log("filter_sets filter_set_click 33.11");
 
         	if(group_id == tab_data.first_tab_id){
 
@@ -3048,8 +3081,10 @@ window.document.splugins.wbc.filter_sets.core = function( configs ) {
 		    $('[data-tab-group="'+group_id_alt+'"]').css('display','none');        	
 
 			$('[data-tab-group="'+group_id_alt+'"]').each(function(){
+		      
 		      let reset_script = $(this).find('[data-reset]').data('reset');
 		      if(typeof(reset_script)!==typeof(undefined) && reset_script!=''){
+		       
 		        eval(reset_script);
 		      }        
 
@@ -3057,10 +3092,13 @@ window.document.splugins.wbc.filter_sets.core = function( configs ) {
 		      if((window.document.splugins.common.is_mobile) && !(_this.configs.filter_setting_alternate_mobile)){
 
 		        if($(this).hasClass('active')){
+		      
 		          $(this).trigger('click');
 		        }
+		      
 		        reset_script = $(this).next().find('[data-reset]').data('reset');
 		        if(typeof(reset_script)!==typeof(undefined) && reset_script!=''){
+		      
 		          eval(reset_script);
 		        }        
 		      }
@@ -3069,11 +3107,13 @@ window.document.splugins.wbc.filter_sets.core = function( configs ) {
 		      if((window.document.splugins.common.is_mobile) && (_this.configs.filter_setting_alternate_mobile)){
 
 		        if($(this).hasClass('active')){
+		      
 		          $(this).trigger('click');
 		        }          
 		        
 		        reset_script = $(this).next().find('[data-reset]').data('reset');
 		        if(typeof(reset_script)!==typeof(undefined) && reset_script!=''){
+		      
 		          eval(reset_script);
 		        }  
 
@@ -3088,16 +3128,19 @@ window.document.splugins.wbc.filter_sets.core = function( configs ) {
 
 	    // <?php if(wp_is_mobile() and wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile')): ?>
 	    if((window.document.splugins.common.is_mobile) && (_this.configs.filter_setting_alternate_mobile)){
+			console.log("filter_sets filter_set_click 44");
+			
+			$('#advance_filter_mob_alternate').removeClass('status_hidden');
 
-	      $('#advance_filter_mob_alternate').removeClass('status_hidden');
+			jQuery( _this.configs.filter_sets_data ).each(function (i, tab_data) {
 
-		  jQuery( _this.configs.filter_sets_data ).each(function (i, tab_data) {
+			  	$(".toggle_sticky_mob_filter.advance_filter_mob[data-tab-group='"+tab_data.first_tab_id/*$(this).data('tab-altname')*/+"'],.toggle_sticky_mob_filter.advance_filter_mob[data-tab-group='']").hide();
 
-		  	$(".toggle_sticky_mob_filter.advance_filter_mob[data-tab-group='"+tab_data.first_tab_id/*$(this).data('tab-altname')*/+"'],.toggle_sticky_mob_filter.advance_filter_mob[data-tab-group='']").hide();
-
-		  });
+		  	});
 	      
 	    }
+
+		console.log("filter_sets filter_set_click 55");
 
 	    // window.document.splugins.wbc.filters.core.eo_wbc_filter_change_wrapper(false,'form#<?php echo $filter_ui->filter_prefix; ?>eo_wbc_filter','',{'this':this,'event':event});
 	    window.document.splugins.wbc.filters.api.eo_wbc_filter_change_wrapper(false,'form#'+_this.configs.filter_prefix +'eo_wbc_filter','',{'this':this,'event':event});
@@ -3115,7 +3158,9 @@ window.document.splugins.wbc.filter_sets.core = function( configs ) {
 
 };
 
-window.document.splugins.wbc.filter_sets.api = window.document.splugins.wbc.filter_sets.core( filter_sets_confings.filter_sets_confings );
+console.log(filter_sets_confings);
+
+window.document.splugins.wbc.filter_sets.api = window.document.splugins.wbc.filter_sets.core( filter_sets_confings );
 // jQuery(document).ready(function(){
 	// moved to assets php
 	// window.document.splugins.wbc.filter_sets.api.init(); 	
