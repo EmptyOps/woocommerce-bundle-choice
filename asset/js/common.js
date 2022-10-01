@@ -644,7 +644,7 @@ ACTIVE_TODO_OC_END*/
  window.document.splugins.templating.api = window.document.splugins.templating.core( {}/*if required then the php layer configs can be set here by using the js vars defined from the php layer*/ );
 
  // port it to access it easily
- splugins.templating = window.document.splugins.templating.api; 
+ splugins.tmpl_lib = window.document.splugins.templating.api; 
  
  ///////////// -- 15-06-2022 -- @drashti -- ///////////////////////////////
  
@@ -4269,7 +4269,7 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
         // var template_id = _this.#configs.template.zoom.id+'_'+index_inner (?) + '_hover';
         var template_id = _this.#$configs.template.zoom.id+'_'+_this.#$configs.options.tiny_features_option_ui_loop_box_hover_media_index + '_hover';
 
-        if(splugins.templating.is_template_exists(template_id, templating_lib)) {
+        if(splugins.tmpl_lib.is_template_exists(template_id, templating_lib)) {
 
             var zoom_inner_html = '';
 
