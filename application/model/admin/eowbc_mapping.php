@@ -27,7 +27,7 @@ class Eowbc_Mapping extends Eowbc_Model {
 		
 	}
 
-	public function get( $form_definition ) {
+	public function get( $form_definition, $args = null) {
 		
 		//loop through form tabs and save 
 	    foreach ($form_definition as $key => $tab) {
@@ -116,7 +116,7 @@ class Eowbc_Mapping extends Eowbc_Model {
 	    return $form_definition; 
 	}
 
-	public function save( $form_definition, $is_auto_insert_for_template=false ) {
+	public function save( $form_definition, $is_auto_insert_for_template=false, $args = null ) {
 		
 		wbc()->sanitize->clean($form_definition);
 		wbc()->validate->check($form_definition);
