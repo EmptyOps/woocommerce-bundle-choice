@@ -1093,7 +1093,9 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
     #binding_stats;
 
     constructor(element, configs) {
-        
+            
+        console.log("SP_WBC_Variations_Swatches constructor");
+
         // Calling parent's constructor
         super(element, configs);
 
@@ -2500,7 +2502,7 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
 
     }
 
-    #reset(type, element) {
+    #reset(type, element, event) {
 
         // jQuery('.variable-items-wrapper .selected').removeClass('selected');
         // jQuery('.variable-items-wrapper .dropdown').dropdown('restore defaults');
@@ -2586,10 +2588,17 @@ window.document.splugins.wbc.variations.swatches = window.document.splugins.wbc.
 
 window.document.splugins.wbc.variations.swatches.core = function( configs ) {
 
+    console.log("SP_WBC_Variations_Swatches .core");
+
     jQuery.fn.sp_wbc_variations_swatches = function () {
+        
+        console.log("SP_WBC_Variations_Swatches function object");
+
         return this.each(function () {
 
-            new SP_WBC_Variations_Swatches(this,configs);
+            console.log("SP_WBC_Variations_Swatches object");
+
+            (new SP_WBC_Variations_Swatches(this,configs)).init();
         });
     };
 
@@ -3880,7 +3889,7 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
     jQuery.fn.sp_wbc_variations_gallery_images = function () {
         return this.each(function () {
 
-            new SP_WBC_Variations_Gallery_Images(this,configs);
+            (new SP_WBC_Variations_Gallery_Images(this,configs)).init();
         });
     };
     
@@ -4086,10 +4095,17 @@ window.document.splugins.wbc.variations.swatches.feed_page = window.document.spl
 
 window.document.splugins.wbc.variations.swatches.feed_page.core = function( configs ) {
 
+    console.log("SP_WBC_Variations_Swatches_Feed_Page .core child");
+
     jQuery.fn.sp_wbc_variations_swatches_feed_page = function () {
+       
+        console.log("SP_WBC_Variations_Swatches_Feed_Page function child");
+       
         return this.each(function () {
 
-            new SP_WBC_Variations_Swatches_Feed_Page(this,configs);
+            console.log("SP_WBC_Variations_Swatches_Feed_Page object child");
+
+            (new SP_WBC_Variations_Swatches_Feed_Page(this,configs)).init();
         });
     };
 };
@@ -4140,11 +4156,11 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
 
         var _this = this; 
 
+        _this.#update_configs();
+        
         super.init();
 
         _this.#init_preprocess(null);
-
-        _this.#update_configs();
 
     }
 
@@ -4349,11 +4365,9 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
 
         var configs = super.get_configs();
         configs.template = configs.template_loop;
-        configs.class = configs.classes_loop;
+        configs.classes = configs.classes_loop;
 
-        var configs = super.set_configs();
-        configs.template = configs.template_loop;
-        configs.class = configs.classes_loop;
+        super.set_configs(configs);
     }        
  
     init() { 
@@ -4372,7 +4386,7 @@ window.document.splugins.wbc.variations.gallery_images.feed_page.core = function
     jQuery.fn.sp_wbc_variations_gallery_images_feed_page = function () {
         return this.each(function () {
             
-            new SP_WBC_Variations_Gallery_Images_Feed_Page(this,configs);
+            (new SP_WBC_Variations_Gallery_Images_Feed_Page(this,configs)).init();
         });
     };
 };

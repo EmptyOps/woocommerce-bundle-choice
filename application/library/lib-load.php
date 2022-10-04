@@ -121,9 +121,19 @@ if(!class_exists('WBC_Loader')) {
 							$this->asset('localize_data',$path,$param,$version,$load_instantly,$is_prefix_handle,$localize_var,$localize_var_val,$in_footer,$is_absolute_url,$singleton_function);
 						}
 
-						if(isset($param[0]) && ($param[0]=='jquery' || $param[0]=='jQuery')) {
+						// if(isset($param[0]) && ($param[0]=='jquery' || $param[0]=='jQuery')) {
+						if(in_array('jquery', $param) || in_array('jQuery', $param)) {
 							echo '<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>';
 						}
+						
+						if(in_array('underscore', $param)) {
+							echo '<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.13.3/underscore-min.js"></script>';
+						}
+						
+						if(in_array('wc-add-to-cart-variation', $param)) {
+							echo '<script src="'.wbc()->common->site_url(). '/wp-content/plugins/woocommerce/assets/js/frontend/add-to-cart-variation.min.js'.'"></script>';
+						}
+
 						echo '<script src="'.$_path.'"></script>';
 					}
 					else {
