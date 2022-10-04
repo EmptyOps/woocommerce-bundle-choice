@@ -54,6 +54,28 @@ if(!class_exists('WBC_Loader')) {
 			}			
 		}
  
+		private function asset_load_instantly($path,$param,$version,$load_instantly,$is_prefix_handle,$localize_var,$localize_var_val,$in_footer,$is_absolute_url,$singleton_function){
+
+			 // ACTIVE_TODO below function is temporary
+			$this->asset('localize_data',$path,$param,$version,$load_instantly,$is_prefix_handle,$localize_var,$localize_var_val,$in_footer,$is_absolute_url,$singleton_function);
+
+			// if(isset($param[0]) && ($param[0]=='jquery' || $param[0]=='jQuery')) {
+			if(in_array('jquery', $param) || in_array('jQuery', $param)) {
+				echo '<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>';
+			}
+			
+			if(in_array('underscore', $param)) {
+				echo '<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.13.3/underscore-min.js"></script>';
+			}
+			
+			if(in_array('wc-add-to-cart-variation', $param)) {
+				echo '<script src="'.wbc()->common->site_url(). '/wp-content/plugins/woocommerce/assets/js/frontend/add-to-cart-variation.min.js'.'"></script>';
+			}
+
+			echo '<script src="'.$_path.'"></script>';
+
+		}
+
 		public function asset($type,$path,$param = array(),$version="",$load_instantly=false,$is_prefix_handle=false,$localize_var=null,$localize_var_val=null,$in_footer = false,$is_absolute_url = false,$singleton_function = null) {
 			
 			if(!apply_filters('wbc_load_asset_filter',true,$type,$path,$param,$version,$load_instantly)) {
@@ -118,8 +140,20 @@ if(!class_exists('WBC_Loader')) {
 							    $localize_var,
 							    $localize_var_val
 							);*/
-							$this->asset('localize_data',$path,$param,$version,$load_instantly,$is_prefix_handle,$localize_var,$localize_var_val,$in_footer,$is_absolute_url,$singleton_function);
 						}
+
+						if(empty($in_footer)){
+
+							wbc_pr("in_footer inner if");
+							$this->asset_load_instantly($path,$param,$version,$load_instantly,$is_prefix_handle,$localize_var,$localize_var_val,$in_footer,$is_absolute_url,$singleton_function);
+						}else{
+
+							wbc_pr("in_footer inner else");							
+							add_action('wp_footer',function() use($path,$param,$version,$load_instantly,$is_prefix_handle,$localize_var,$localize_var_val,$in_footer,$is_absolute_url,$singleton_function){
+
+								$this->asset_load_instantly($path,$param,$version,$load_instantly,$is_prefix_handle,$localize_var,$localize_var_val,$in_footer,$is_absolute_url,$singleton_function);
+							}, 5);
+						}					
 
 						if(isset($param[0]) && ($param[0]=='jquery' || $param[0]=='jQuery')) {
 							echo '<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>';
