@@ -3780,6 +3780,7 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations{
          if(section == 'init'){
              jQuery(function (jQuery)
              {
+                -- ama '.variations_form' aa selectore base_container thi manage nay atle biji rite manage karvo padse aa selectore -- to a
                  jQuery(document).on('wc_variation_form', '.variations_form', function (event) {
                    // $jQuery('.woo-variation-gallery-wrapper:not(.wvg-loaded)').WooVariationGallery();
 
