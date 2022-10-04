@@ -637,9 +637,9 @@ class SP_WBC_Variations extends SP_Variations {
 		if ( !empty($data['sp_variations']["form"]) ) {
 
 			foreach ( $gallery_images as $i=>$value ) {
-				echo ">>>>>>>>>>> gallery_images (wbc-variations)";
-				wbc_pr($value['value']);
-				wbc_pr($value['type']);
+				// echo ">>>>>>>>>>> gallery_images (wbc-variations)";
+				// wbc_pr($value['value']);
+				// wbc_pr($value['type']);
 		
 				if ( is_array($value) ) {
 
@@ -1777,6 +1777,9 @@ class SP_WBC_Variations extends SP_Variations {
 			            array_push( $data['gallery_images_template_data']['attachment_ids_loop_classes'][$index], '' );
 			        }
 
+			        //ACTIVE_TODO right now we are creating class wrapper per image but it should be only once for the entire gallery_images wrapper. so we need to remove that unnecessary data from $image and fix that as soon as we get chance. 
+			        $data['gallery_images_template_data']['class_wrapper'] = $image['class_wrapper'];
+
 			        //ACTIVE_TODO publish hook if required 
 			        // $data['gallery_images_template_data']['attachment_ids_loop_classes'][$id] = apply_filters( '', $classes, $id, $image );
 			        
@@ -1809,6 +1812,9 @@ class SP_WBC_Variations extends SP_Variations {
 			            array_push( $data['gallery_images_template_data']['attachment_ids_loop_classes'][$id], '' );
 			        }
 
+			        //ACTIVE_TODO right now we are creating class wrapper per image but it should be only once for the entire gallery_images wrapper. so we need to remove that unnecessary data from $image and fix that as soon as we get chance. 
+			        $data['gallery_images_template_data']['class_wrapper'] = $data['gallery_images_template_data']['attachment_ids_loop_image'][$index]['class_wrapper'];
+			        
 			        //ACTIVE_TODO publish hook if required 
 			        // $data['gallery_images_template_data']['attachment_ids_loop_classes'][$id] = apply_filters( '', $classes, $id, $image );
 			        
