@@ -105,7 +105,7 @@ if(!class_exists('WBC_Loader')) {
 
 							}
 
-							if(empty($version)) {
+							/*if(empty($version)) {
 								wp_register_script($_handle, $_path, $param, false, $in_footer );
 							}
 							else {
@@ -117,7 +117,8 @@ if(!class_exists('WBC_Loader')) {
 							    $_handle,
 							    $localize_var,
 							    $localize_var_val
-							);
+							);*/
+							$this->asset('localize_data',$path,$param,$version,$load_instantly,$is_prefix_handle,$localize_var,$localize_var_val,$in_footer,$is_absolute_url,$singleton_function);
 						}
 
 						if(isset($param[0]) && ($param[0]=='jquery' || $param[0]=='jQuery')) {
@@ -137,6 +138,7 @@ if(!class_exists('WBC_Loader')) {
 							else {
 								wp_register_script($_handle, $_path, $param, $version, $in_footer );
 							}				
+											
 						wp_enqueue_script($_handle);					
 
 						if( !empty($localize_var) && !empty($localize_var_val) ) {
@@ -178,11 +180,23 @@ if(!class_exists('WBC_Loader')) {
 
 					// NOTE: should never be used for js file configs. and only be used if there is exteam requirement of independent configs or data dumping. 
 						// NOTE: and since this is about dump to browser so loading sequance hooks and the output buffer should be kept in mind. 
-					?>
-					<script>
-						var <?php echo array_keys($param)[0]; ?> = JSON.parse('<?php echo json_encode($param[array_keys($param)[0]]); ?>');
-					</script>
-					<?php
+					if( !empty($localize_var) && !empty($localize_var_val) ) {
+					
+						?>
+						<script>
+							var <?php echo $localize_var; ?> = JSON.parse('<?php echo json_encode($localize_var_val); ?>');
+						</script>
+						<?php
+
+					} else {
+					
+						?>
+						<script>
+							var <?php echo array_keys($param)[0]; ?> = JSON.parse('<?php echo json_encode($param[array_keys($param)[0]]); ?>');
+						</script>
+						<?php
+					
+					}
 					break;				
 				default:				
 					break;

@@ -1141,7 +1141,8 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
 
             console.log("init_private wc_variation_form event");
 
-            if( !( jQuery(this).has('.spui-wbc-swatches-loaded') ) ){
+            // if( !( jQuery(this).has('.spui-wbc-swatches-loaded') ) ){
+            if( !( jQuery(this).hasClass('spui-wbc-swatches-loaded') ) ){
 
                 //  had we used the _jQueryInterface style the _jQueryInterface call would have started from here 
                 _this.#preprocess( this, event );  
@@ -1167,9 +1168,11 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
             console.log("init_private inner ajaxComplete");
 
           splugins._.delay(function () {
+           
             jQuery( _this.#$base_container /*'.variations_form:not(.spui-wbc-swatches-loaded)'*/).each(function () {
 
                 if( !( jQuery(this).has('.spui-wbc-swatches-loaded') ) ){
+                    
                     jQuery(this).wc_variation_form();
                 }
             });
@@ -1214,13 +1217,16 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
         
             console.log("init_private inner aln_reloaded");
 
-          splugins._.delay(function () {
-            jQuery( _this.#$base_container /*'.variations_form:not(.spui-wbc-swatches-loaded)'*/).each(function () {
-                if( !( jQuery(this).has('.spui-wbc-swatches-loaded') ) ){
-                    jQuery(this).wc_variation_form();
-                }
-            });
-          }, 100);
+            splugins._.delay(function () {
+           
+                jQuery( _this.#$base_container /*'.variations_form:not(.spui-wbc-swatches-loaded)'*/).each(function () {
+                    
+                    if( !( jQuery(this).has('.spui-wbc-swatches-loaded') ) ){
+                    
+                        jQuery(this).wc_variation_form();
+                    }
+                });
+            }, 100);
         });
     }
 
@@ -2557,12 +2563,12 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
         return object;
     } 
 
-    get_config() {
+    get_configs() {
 
         return _this.#configs;
     }
 
-    set_config(configs) {
+    set_configs(configs) {
 
         _this.#configs = configs;
     }
@@ -3830,12 +3836,12 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations{
         
     }
 
-    get_config() {
+    get_configs() {
 
         return _this.#configs;
     }
 
-    set_config(configs) {
+    set_configs(configs) {
 
         _this.#configs = configs;
     }
@@ -4341,11 +4347,11 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
         
         // NOTE: In future if we find better flow or structure which is mature standard then we can deprecate this function
 
-        var configs = super.get_config();
+        var configs = super.get_configs();
         configs.template = configs.template_loop;
         configs.class = configs.classes_loop;
 
-        var configs = super.set_config();
+        var configs = super.set_configs();
         configs.template = configs.template_loop;
         configs.class = configs.classes_loop;
     }        
