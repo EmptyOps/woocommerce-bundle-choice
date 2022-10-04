@@ -119,7 +119,12 @@ add_action( ( !is_admin() ? 'wp_enqueue_scripts' : 'admin_enqueue_scripts'),func
 add_action('wp_footer',function(){               
    ?>
    <script>
+    	
+    	console.log("js.vras.asset outer ready event");
+    	
     	jQuery(document).ready(function() {
+    		
+    		console.log("js.vras.asset ready event");
 
     		window.document.splugins.wbc.pagination.api.init();
 
@@ -164,7 +169,9 @@ add_action('wp_footer',function(){
 
      		var base_container_swatches = null;
         	if(window.document.splugins.common.is_item_page) {
-			    
+			    	
+			    	console.log("js vars ready item page if 1");
+
 		        // window.setTimeout(function(){
 		            // window.document.splugins.wbc.variations.swatches.api.init();
 		            base_container = jQuery( ( window.document.splugins.common._o( common_configs.swatches_config, 'base_container_selector') ? common_configs.configs.base_container_selector : '.variations_form' ) );      
@@ -176,12 +183,17 @@ add_action('wp_footer',function(){
 			}
 
 			if(window.document.splugins.common.is_category_page) {
-			    
+			    	
+			    	console.log("js vars ready item page if 2");
+
 		        // window.setTimeout(function(){
 
 		            // window.document.splugins.wbc.variations.swatches.feed_page.api.init();
 		            base_container = jQuery( ( window.document.splugins.common._o( common_configs.swatches_config, 'base_container_loop_selector') ? common_configs.configs.base_container_selector : '.variations_form' ) );      
 		            jQuery(base_container).sp_wbc_variations_swatches_feed_page();
+
+		            console.log("js vars ready item page if base_container 3");
+		            console.log(base_container);
 
 		            base_container_swatches = base_container;
 

@@ -141,6 +141,10 @@ if(!class_exists('WBC_Loader')) {
 							    $localize_var_val
 							);*/
 						}
+						// echo "_handle  : ";
+						// echo $_handle;
+						// echo " path  :  ";
+						// echo $path;
 
 						if(empty($in_footer)){
 
@@ -153,12 +157,8 @@ if(!class_exists('WBC_Loader')) {
 
 								$this->asset_load_instantly($path,$param,$version,$load_instantly,$is_prefix_handle,$localize_var,$localize_var_val,$in_footer,$is_absolute_url,$singleton_function);
 							}, 5);
-						}					
-
-						if(isset($param[0]) && ($param[0]=='jquery' || $param[0]=='jQuery')) {
-							echo '<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>';
 						}
-						echo '<script src="'.$_path.'"></script>';
+						
 					}
 					else {
 						if(empty($param)){
@@ -211,11 +211,15 @@ if(!class_exists('WBC_Loader')) {
 					break;
 
 				case 'localize_data':
+					wbc_pr('localize_var');
+					wbc_pr($localize_var);
+					wbc_pr('localize_var_val');
+					wbc_pr($localize_var_val);
 
 					// NOTE: should never be used for js file configs. and only be used if there is exteam requirement of independent configs or data dumping. 
 						// NOTE: and since this is about dump to browser so loading sequance hooks and the output buffer should be kept in mind. 
 					if( !empty($localize_var) && !empty($localize_var_val) ) {
-					
+					echo "load_localize_data inner if";
 						?>
 						<script>
 							var <?php echo $localize_var; ?> = JSON.parse('<?php echo json_encode($localize_var_val); ?>');
@@ -223,7 +227,9 @@ if(!class_exists('WBC_Loader')) {
 						<?php
 
 					} else {
-					
+					echo "localize_data inner else";
+					wbc_pr('load_param');
+					wbc_pr($param);
 						?>
 						<script>
 							var <?php echo array_keys($param)[0]; ?> = JSON.parse('<?php echo json_encode($param[array_keys($param)[0]]); ?>');
