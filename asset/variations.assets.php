@@ -619,7 +619,7 @@ if(is_shop() || is_product_category()) {
 
 <script>
 	<?php 
-	if(!has_action('woocommerce_before_variations_form')) {
+	if(is_product() && !has_action('woocommerce_before_variations_form')) {
 	?>
 		jQuery(".variations_form").before('<span id="wbc_variation_toggle" class="ui raised segment"><?php _e($toggle_text); ?><i class="caret up icon" style="text-align: center;line-height: 1em;"></i></span>');	
 
@@ -627,8 +627,10 @@ if(is_shop() || is_product_category()) {
 	
 	jQuery(document).ready(function($){
 		// ACTIVE_TODO below sections might be of use so keeping it on for now, but we must double confirm like legacy woo js layers provide full dropdown template supports. but i think still sementic specific matters need to be managed because we are using sementic templates.
-			do we need to disable the blow change event implimention -- to h
-			 	eithere way blowo class would be loading only when the dropdown template of simentic is used on item page -- to h
+			// ACTIVE_TODO_OC_START
+			// do we need to disable the blow change event implimention -- to h
+			//  	eithere way blowo class would be loading only when the dropdown template of simentic is used on item page -- to h
+			// ACTIVE_TODO_OC_END 	
 		jQuery(".dropdown").dropdown().on('change',function(){
 			var target_selector =  $('#'+$(this).find('input[type="hidden"]').data('id'));
 			target_selector.val($(this).find('input[type="hidden"]').val());
@@ -639,8 +641,8 @@ if(is_shop() || is_product_category()) {
 		});
 
 
-		ACTIVE_TODO we shoud simply put this class on the perticuler template html dom and coment the code below -- to h & -- to s
-			for now lats comment the code but after confirming with t -- to t
+		// ACTIVE_TODO we shoud simply put this class on the perticuler template html dom and coment the code below -- to h & -- to s
+			// for now lats comment the code but after confirming with t -- to t
 		if($('table.variations tbody>tr').length>0){
 			$('table.variations').addClass('ui raised segment');	
 		}
