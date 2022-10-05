@@ -569,10 +569,10 @@ if(empty($_per_page)){
 
 			//     	//////// 27-05-2022 - @drashti /////////
 			// 		// --add to be confirmed--
-			// 		window.document.splugins.wbc.filters.api.eo_wbc_filter_change_wrapper(false,'form#<?php echo $filter_ui->filter_prefix; ?>eo_wbc_filter','',{'this':this,'event':event});
+			// 		window.document.splugins.wbc.filters.api.eo_wbc_filter_change_wrapper(false,'form#<?php //echo $filter_ui->filter_prefix; ?>eo_wbc_filter','',{'this':this,'event':event});
 			//     	// jQuery.fn.eo_wbc_filter_change(false,'form#<?php/* echo $filter_ui->filter_prefix;*/ ?>eo_wbc_filter','',{'this':this,'event':event});
 			// 		////////////////////////////////////////
-			//     	<?php endif; ?>
+			//     	<?php //endif; ?>
 			// 	}});				
 			// }
 			// --- end ---
