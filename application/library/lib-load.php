@@ -54,6 +54,28 @@ if(!class_exists('WBC_Loader')) {
 			}			
 		}
  
+		private function asset_load_instantly($path,$param,$version,$load_instantly,$is_prefix_handle,$localize_var,$localize_var_val,$in_footer,$is_absolute_url,$singleton_function){
+
+			 // ACTIVE_TODO below function is temporary
+			$this->asset('localize_data',$path,$param,$version,$load_instantly,$is_prefix_handle,$localize_var,$localize_var_val,$in_footer,$is_absolute_url,$singleton_function);
+
+			// if(isset($param[0]) && ($param[0]=='jquery' || $param[0]=='jQuery')) {
+			if(in_array('jquery', $param) || in_array('jQuery', $param)) {
+				echo '<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>';
+			}
+			
+			if(in_array('underscore', $param)) {
+				echo '<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.13.3/underscore-min.js"></script>';
+			}
+			
+			if(in_array('wc-add-to-cart-variation', $param)) {
+				echo '<script src="'.wbc()->common->site_url(). '/wp-content/plugins/woocommerce/assets/js/frontend/add-to-cart-variation.min.js'.'"></script>';
+			}
+
+			echo '<script src="'.$_path.'"></script>';
+
+		}
+
 		public function asset($type,$path,$param = array(),$version="",$load_instantly=false,$is_prefix_handle=false,$localize_var=null,$localize_var_val=null,$in_footer = false,$is_absolute_url = false,$singleton_function = null) {
 			
 			if(!apply_filters('wbc_load_asset_filter',true,$type,$path,$param,$version,$load_instantly)) {
@@ -105,7 +127,7 @@ if(!class_exists('WBC_Loader')) {
 
 							}
 
-							if(empty($version)) {
+							/*if(empty($version)) {
 								wp_register_script($_handle, $_path, $param, false, $in_footer );
 							}
 							else {
@@ -117,13 +139,26 @@ if(!class_exists('WBC_Loader')) {
 							    $_handle,
 							    $localize_var,
 							    $localize_var_val
-							);
+							);*/
 						}
+						// echo "_handle  : ";
+						// echo $_handle;
+						// echo " path  :  ";
+						// echo $path;
 
-						if(isset($param[0]) && ($param[0]=='jquery' || $param[0]=='jQuery')) {
-							echo '<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>';
+						if(empty($in_footer)){
+
+							wbc_pr("in_footer inner if");
+							$this->asset_load_instantly($path,$param,$version,$load_instantly,$is_prefix_handle,$localize_var,$localize_var_val,$in_footer,$is_absolute_url,$singleton_function);
+						}else{
+
+							wbc_pr("in_footer inner else");							
+							add_action('wp_footer',function() use($path,$param,$version,$load_instantly,$is_prefix_handle,$localize_var,$localize_var_val,$in_footer,$is_absolute_url,$singleton_function){
+
+								$this->asset_load_instantly($path,$param,$version,$load_instantly,$is_prefix_handle,$localize_var,$localize_var_val,$in_footer,$is_absolute_url,$singleton_function);
+							}, 5);
 						}
-						echo '<script src="'.$_path.'"></script>';
+						
 					}
 					else {
 						if(empty($param)){
@@ -137,6 +172,7 @@ if(!class_exists('WBC_Loader')) {
 							else {
 								wp_register_script($_handle, $_path, $param, $version, $in_footer );
 							}				
+											
 						wp_enqueue_script($_handle);					
 
 						if( !empty($localize_var) && !empty($localize_var_val) ) {
@@ -175,14 +211,32 @@ if(!class_exists('WBC_Loader')) {
 					break;
 
 				case 'localize_data':
+					wbc_pr('localize_var');
+					wbc_pr($localize_var);
+					wbc_pr('localize_var_val');
+					wbc_pr($localize_var_val);
 
 					// NOTE: should never be used for js file configs. and only be used if there is exteam requirement of independent configs or data dumping. 
 						// NOTE: and since this is about dump to browser so loading sequance hooks and the output buffer should be kept in mind. 
-					?>
-					<script>
-						var <?php echo array_keys($param)[0]; ?> = JSON.parse('<?php echo json_encode($param[array_keys($param)[0]]); ?>');
-					</script>
-					<?php
+					if( !empty($localize_var) && !empty($localize_var_val) ) {
+					echo "load_localize_data inner if";
+						?>
+						<script>
+							var <?php echo $localize_var; ?> = JSON.parse('<?php echo json_encode($localize_var_val); ?>');
+						</script>
+						<?php
+
+					} else {
+					echo "localize_data inner else";
+					wbc_pr('load_param');
+					wbc_pr($param);
+						?>
+						<script>
+							var <?php echo array_keys($param)[0]; ?> = JSON.parse('<?php echo json_encode($param[array_keys($param)[0]]); ?>');
+						</script>
+						<?php
+					
+					}
 					break;				
 				default:				
 					break;

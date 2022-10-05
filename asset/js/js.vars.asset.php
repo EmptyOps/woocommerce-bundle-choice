@@ -89,7 +89,23 @@ add_action( ( !is_admin() ? 'wp_enqueue_scripts' : 'admin_enqueue_scripts'),func
 		// ACTIVE_TODO temp. hold for removel and we need to remove as soon as we refactore the loading sequance of filter widget class and load asset function og that class. so it is highly temporary. and we need to fix if we face issues whwrw filter feature is not active on certain pages but still that is loading below asset then we need to prevent that also and other such issues.
 		if( is_shop() || is_product_category() ) {
 			
-			wbc()->load->asset('js', 'publics/eo_wbc_filter', array('jquery'), "", false, true, null, null, true);
+			$site_url = get_site_url();
+			$product_url = '';
+			$filter_prefix = '';
+			// wbc()->load->asset('js', 'publics/eo_wbc_filter', array('jquery'), "", false, true, null, null, true);
+			wbc()->load->asset('js', 'publics/eo_wbc_filter', array( 'eo_wbc_object' => array(
+        					'eo_product_url'=>$product_url,
+        					//'eo_view_tabular'=>($current_category=='solitaire'?1:0),
+        					'disp_regular'=>wbc()->options->get('eo_wbc_e_tabview_status',false)/*get_option('eo_wbc_e_tabview_status',false)*/?1:0,
+        					'eo_admin_ajax_url'=>admin_url( 'admin-ajax.php'),
+        					'eo_part_site_url'=>get_site_url().'/index.php',
+        					'eo_part_end_url'=>'/'.$product_url,
+        					'eo_cat_site_url'=>$site_url,
+        					'eo_cat_query'=>http_build_query($_GET),
+        					'btnfilter_now'=>(empty(wbc()->options->get_option('filters_'.$filter_prefix.'filter_setting','filter_setting_btnfilter_now'))?false:true),
+        					'btnreset_now'=>(empty(wbc()->options->get_option('filters_'.$filter_prefix.'filter_setting','filter_setting_reset_now'))?false:true),
+        					'_prefix_' => $filter_prefix,
+        				)), "", false, true, null, null, true);			
 		}
 		
 	} else {
@@ -103,7 +119,12 @@ add_action( ( !is_admin() ? 'wp_enqueue_scripts' : 'admin_enqueue_scripts'),func
 add_action('wp_footer',function(){               
    ?>
    <script>
+    	
+    	console.log("js.vras.asset outer ready event");
+    	
     	jQuery(document).ready(function() {
+    		
+    		console.log("js.vras.asset ready event");
 
     		window.document.splugins.wbc.pagination.api.init();
 
@@ -148,7 +169,9 @@ add_action('wp_footer',function(){
 
      		var base_container_swatches = null;
         	if(window.document.splugins.common.is_item_page) {
-			    
+			    	
+			    	console.log("js vars ready item page if 1");
+
 		        // window.setTimeout(function(){
 		            // window.document.splugins.wbc.variations.swatches.api.init();
 		            base_container = jQuery( ( window.document.splugins.common._o( common_configs.swatches_config, 'base_container_selector') ? common_configs.configs.base_container_selector : '.variations_form' ) );      
@@ -160,12 +183,17 @@ add_action('wp_footer',function(){
 			}
 
 			if(window.document.splugins.common.is_category_page) {
-			    
+			    	
+			    	console.log("js vars ready item page if 2");
+
 		        // window.setTimeout(function(){
 
 		            // window.document.splugins.wbc.variations.swatches.feed_page.api.init();
 		            base_container = jQuery( ( window.document.splugins.common._o( common_configs.swatches_config, 'base_container_loop_selector') ? common_configs.configs.base_container_selector : '.variations_form' ) );      
 		            jQuery(base_container).sp_wbc_variations_swatches_feed_page();
+
+		            console.log("js vars ready item page if base_container 3");
+		            console.log(base_container);
 
 		            base_container_swatches = base_container;
 

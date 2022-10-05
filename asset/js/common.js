@@ -1093,7 +1093,9 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
     #binding_stats;
 
     constructor(element, configs) {
-        
+            
+        console.log("SP_WBC_Variations_Swatches constructor");
+
         // Calling parent's constructor
         super(element, configs);
 
@@ -1141,7 +1143,8 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
 
             console.log("init_private wc_variation_form event");
 
-            if( !( jQuery(this).has('.spui-wbc-swatches-loaded') ) ){
+            // if( !( jQuery(this).has('.spui-wbc-swatches-loaded') ) ){
+            if( !( jQuery(this).hasClass('spui-wbc-swatches-loaded') ) ){
 
                 //  had we used the _jQueryInterface style the _jQueryInterface call would have started from here 
                 _this.#preprocess( this, event );  
@@ -1167,9 +1170,11 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
             console.log("init_private inner ajaxComplete");
 
           splugins._.delay(function () {
+           
             jQuery( _this.#$base_container /*'.variations_form:not(.spui-wbc-swatches-loaded)'*/).each(function () {
 
                 if( !( jQuery(this).has('.spui-wbc-swatches-loaded') ) ){
+                    
                     jQuery(this).wc_variation_form();
                 }
             });
@@ -1214,13 +1219,16 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
         
             console.log("init_private inner aln_reloaded");
 
-          splugins._.delay(function () {
-            jQuery( _this.#$base_container /*'.variations_form:not(.spui-wbc-swatches-loaded)'*/).each(function () {
-                if( !( jQuery(this).has('.spui-wbc-swatches-loaded') ) ){
-                    jQuery(this).wc_variation_form();
-                }
-            });
-          }, 100);
+            splugins._.delay(function () {
+           
+                jQuery( _this.#$base_container /*'.variations_form:not(.spui-wbc-swatches-loaded)'*/).each(function () {
+                    
+                    if( !( jQuery(this).has('.spui-wbc-swatches-loaded') ) ){
+                    
+                        jQuery(this).wc_variation_form();
+                    }
+                });
+            }, 100);
         });
     }
 
@@ -2494,7 +2502,7 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
 
     }
 
-    #reset(type, element) {
+    #reset(type, element, event) {
 
         // jQuery('.variable-items-wrapper .selected').removeClass('selected');
         // jQuery('.variable-items-wrapper .dropdown').dropdown('restore defaults');
@@ -2557,12 +2565,12 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
         return object;
     } 
 
-    get_config() {
+    get_configs() {
 
         return _this.#configs;
     }
 
-    set_config(configs) {
+    set_configs(configs) {
 
         _this.#configs = configs;
     }
@@ -2580,10 +2588,17 @@ window.document.splugins.wbc.variations.swatches = window.document.splugins.wbc.
 
 window.document.splugins.wbc.variations.swatches.core = function( configs ) {
 
+    console.log("SP_WBC_Variations_Swatches .core");
+
     jQuery.fn.sp_wbc_variations_swatches = function () {
+        
+        console.log("SP_WBC_Variations_Swatches function object");
+
         return this.each(function () {
 
-            new SP_WBC_Variations_Swatches(this,configs);
+            console.log("SP_WBC_Variations_Swatches object");
+
+            (new SP_WBC_Variations_Swatches(this,configs)).init();
         });
     };
 
@@ -3780,6 +3795,7 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations{
          if(section == 'init'){
              jQuery(function (jQuery)
              {
+                -- ama '.variations_form' aa selectore base_container thi manage nay atle biji rite manage karvo padse aa selectore -- to a
                  jQuery(document).on('wc_variation_form', '.variations_form', function (event) {
                    // $jQuery('.woo-variation-gallery-wrapper:not(.wvg-loaded)').WooVariationGallery();
 
@@ -3830,12 +3846,12 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations{
         
     }
 
-    get_config() {
+    get_configs() {
 
         return _this.#configs;
     }
 
-    set_config(configs) {
+    set_configs(configs) {
 
         _this.#configs = configs;
     }
@@ -3874,7 +3890,7 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
     jQuery.fn.sp_wbc_variations_gallery_images = function () {
         return this.each(function () {
 
-            new SP_WBC_Variations_Gallery_Images(this,configs);
+            (new SP_WBC_Variations_Gallery_Images(this,configs)).init();
         });
     };
     
@@ -4080,10 +4096,17 @@ window.document.splugins.wbc.variations.swatches.feed_page = window.document.spl
 
 window.document.splugins.wbc.variations.swatches.feed_page.core = function( configs ) {
 
+    console.log("SP_WBC_Variations_Swatches_Feed_Page .core child");
+
     jQuery.fn.sp_wbc_variations_swatches_feed_page = function () {
+       
+        console.log("SP_WBC_Variations_Swatches_Feed_Page function child");
+       
         return this.each(function () {
 
-            new SP_WBC_Variations_Swatches_Feed_Page(this,configs);
+            console.log("SP_WBC_Variations_Swatches_Feed_Page object child");
+
+            (new SP_WBC_Variations_Swatches_Feed_Page(this,configs)).init();
         });
     };
 };
@@ -4134,11 +4157,11 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
 
         var _this = this; 
 
+        _this.#update_configs();
+        
         super.init();
 
         _this.#init_preprocess(null);
-
-        _this.#update_configs();
 
     }
 
@@ -4341,13 +4364,11 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
         
         // NOTE: In future if we find better flow or structure which is mature standard then we can deprecate this function
 
-        var configs = super.get_config();
+        var configs = super.get_configs();
         configs.template = configs.template_loop;
-        configs.class = configs.classes_loop;
+        configs.classes = configs.classes_loop;
 
-        var configs = super.set_config();
-        configs.template = configs.template_loop;
-        configs.class = configs.classes_loop;
+        super.set_configs(configs);
     }        
  
     init() { 
@@ -4366,7 +4387,7 @@ window.document.splugins.wbc.variations.gallery_images.feed_page.core = function
     jQuery.fn.sp_wbc_variations_gallery_images_feed_page = function () {
         return this.each(function () {
             
-            new SP_WBC_Variations_Gallery_Images_Feed_Page(this,configs);
+            (new SP_WBC_Variations_Gallery_Images_Feed_Page(this,configs)).init();
         });
     };
 };
