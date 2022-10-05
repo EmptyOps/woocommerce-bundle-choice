@@ -1173,7 +1173,7 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
            
             jQuery( _this.#$base_container /*'.variations_form:not(.spui-wbc-swatches-loaded)'*/).each(function () {
 
-                if( !( jQuery(this).has('.spui-wbc-swatches-loaded') ) ){
+                if( !( jQuery(this).hasClass('spui-wbc-swatches-loaded') ) ){
                     
                     jQuery(this).wc_variation_form();
                 }
@@ -1223,7 +1223,7 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
            
                 jQuery( _this.#$base_container /*'.variations_form:not(.spui-wbc-swatches-loaded)'*/).each(function () {
                     
-                    if( !( jQuery(this).has('.spui-wbc-swatches-loaded') ) ){
+                    if( !( jQuery(this).hasClass('spui-wbc-swatches-loaded') ) ){
                     
                         jQuery(this).wc_variation_form();
                     }
@@ -2542,7 +2542,7 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
 
                 jQuery( _this.#$base_container /*'.variations_form:not(.spui-wbc-swatches-loaded)'*/).each(function () {
 
-                    if( !( jQuery(this).has('.spui-wbc-swatches-loaded') ) ){
+                    if( !( jQuery(this).hasClass('spui-wbc-swatches-loaded') ) ){
                         jQuery(this).wc_variation_form();
                     }
                 });
@@ -2733,7 +2733,9 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations{
                  --  then I will tell you which to keep and which to drop -- to a 
             ACTIVE_TODO_OC_END*/
             _this.#$wrapper = _this.#$base_element.closest('.product');  /*ACTIVE_TODO we may need to manage this selector stability.*/
-            _this.#$variations_form = _this.#$wrapper.find('.variations_form');
+            // NOTE: since we are using .variations_form as the base_container_selector and it is our almost plan to use the .variations_form as base_container_selector for this module, so we have set $variations_form below from the $base_container.
+            //     NOTE: however if we ever need to use other selector as base_container_selector for this module then we need to apply ternry operator condition below to handle such scenario 
+            _this.#$variations_form = _this.#$base_container; //_this.#$wrapper.find('.variations_form');
             
         // ACTIVE_TODO_OC_START
         // ACTIVE_TODO need to add produce class at the appropriate container, if rerequired then simply take a look at different theme demos of ours and at demos of other plugins we were exploring -- to t 
@@ -3792,10 +3794,13 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations{
         
         var _this = this;
          ////////////////////////////////////////////////////
-         if(section == 'init'){
-             jQuery(function (jQuery)
-             {
+        if(section == 'init'){
+            jQuery(function (jQuery)
+            {
+                /*ACTIVE_TODO_OC_START
                 -- ama '.variations_form' aa selectore base_container thi manage nay atle biji rite manage karvo padse aa selectore -- to a
+                ACTIVE_TODO_OC_END*/
+                
                  jQuery(document).on('wc_variation_form', '.variations_form', function (event) {
                    // $jQuery('.woo-variation-gallery-wrapper:not(.wvg-loaded)').WooVariationGallery();
 
@@ -3825,8 +3830,8 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations{
 
                    });
                  }
-             });     
-         }    
+            });     
+        }    
  
          /////////////////////////////////////////////////////        
  
@@ -4079,7 +4084,7 @@ class SP_WBC_Variations_Swatches_Feed_Page extends SP_WBC_Variations_Swatches {
 
         super.init();
 
-        // s: question aa call mate recording confirm karavnu.
+        // ACTIVE_TODO/TODO enable below call when required otherwise remove the TODO from here if it is not necessary ever.
         // _this.#update_configs();
     }
 
