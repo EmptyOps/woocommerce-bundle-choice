@@ -1532,7 +1532,7 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
 
                 if ( true || window.document.splugins.common._o(_this.#configs.attribute_types_keys, type_inner)) {
 
-                     _this.process_attribute_types_inner(type_inner, element);
+                     _this.#process_attribute_types_inner(type_inner, element);
 
                 }                          
                 else {
@@ -1700,7 +1700,7 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
 
         // ACTIVE_TODO we do not have any more (class woo-variation-swatches-variable-item-more) class related flow yet. but t you need to first plan the template structure -- to t
             // ACTIVE_TODO -- then once template ready then implaemnt on php side and do the needful on js layers -- to s
-       /* data.*/inner_list = jQuery(element).find('li:not(.spui-wbc-swatches-variable-item-more)');
+       /* data.*/var inner_list = jQuery(element).find('li:not(.spui-wbc-swatches-variable-item-more)');
             // ACTIVE_TODO however note that, for this once t gives conclusion our final implementation will follow -- to t 
         data.reselect_clear = jQuery(element).hasClass('reselect-clear');
 
@@ -2567,10 +2567,14 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
 
     get_configs() {
 
+        var _this = this; 
+
         return _this.#configs;
     }
 
     set_configs(configs) {
+
+        var _this = this; 
 
         _this.#configs = configs;
     }
@@ -2640,12 +2644,19 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations{
 
     constructor(element, configs){
         
+        console.log("gallery_images constructor");
+        
         // Calling parent's constructor
         super(element, configs);
 
         var _this = this; 
-     
+        
+        console.log(_this.#configs);
+        console.log(configs);
+        
         _this.#configs = jQuery.extend({}, {}/*default configs*/, configs);  
+
+        console.log(_this.#configs);
 
         _this.#base_container_selector = ( window.document.splugins.common._o( _this.#configs, 'base_container_selector') ? _this.#configs.base_container_selector : ''  );     
 
@@ -3853,12 +3864,17 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations{
 
     get_configs() {
 
+        var _this = this; 
+
         return _this.#configs;
     }
 
     set_configs(configs) {
 
+        var _this = this; 
+        
         _this.#configs = configs;
+
     }
  
      // ACTIVE_TODO_OC_START
@@ -4101,17 +4117,21 @@ window.document.splugins.wbc.variations.swatches.feed_page = window.document.spl
 
 window.document.splugins.wbc.variations.swatches.feed_page.core = function( configs ) {
 
-    console.log("SP_WBC_Variations_Swatches_Feed_Page .core child");
+    // console.log("SP_WBC_Variations_Swatches_Feed_Page .core child");
 
     jQuery.fn.sp_wbc_variations_swatches_feed_page = function () {
        
-        console.log("SP_WBC_Variations_Swatches_Feed_Page function child");
+        // console.log("SP_WBC_Variations_Swatches_Feed_Page function child");
        
         return this.each(function () {
 
             console.log("SP_WBC_Variations_Swatches_Feed_Page object child");
 
             (new SP_WBC_Variations_Swatches_Feed_Page(this,configs)).init();
+
+            // ACTIVE_TODO temp.
+            return false;
+
         });
     };
 };
@@ -4123,7 +4143,7 @@ if(window.document.splugins.common.is_category_page) {
         // window.setTimeout(function(){
 
             //  publish it 
-            window.document.splugins.wbc.variations.swatches.feed_page.api = window.document.splugins.wbc.variations.swatches.feed_page.core( common_configs.feed_page_config );
+            window.document.splugins.wbc.variations.swatches.feed_page.api = window.document.splugins.wbc.variations.swatches.feed_page.core( common_configs.swatches_config );
 
             // window.document.splugins.wbc.variations.swatches.feed_page.api.init();
             // base_container = jQuery( ( window.document.splugins.common._o( common_configs.configs, 'base_container_loop_selector') ? common_configs.configs.base_container_selector : '.variations_form' ) );      
@@ -4159,6 +4179,8 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
     }
  
     #init_private() {
+
+        return false;
 
         var _this = this; 
 
@@ -4366,10 +4388,11 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
     }  
 
     #update_configs() {
-        
+
         // NOTE: In future if we find better flow or structure which is mature standard then we can deprecate this function
 
         var configs = super.get_configs();
+
         configs.template = configs.template_loop;
         configs.classes = configs.classes_loop;
 
@@ -4392,7 +4415,12 @@ window.document.splugins.wbc.variations.gallery_images.feed_page.core = function
     jQuery.fn.sp_wbc_variations_gallery_images_feed_page = function () {
         return this.each(function () {
             
+            console.log("sp_wbc_variations_gallery_images_feed_page object child");
+
             (new SP_WBC_Variations_Gallery_Images_Feed_Page(this,configs)).init();
+
+            // ACTIVE_TODO temp.
+            return false;
         });
     };
 };
@@ -4404,7 +4432,7 @@ if(window.document.splugins.common.is_category_page) {
         // window.setTimeout(function(){
 
             //  publish it 
-            window.document.splugins.wbc.variations.gallery_images.feed_page.api = window.document.splugins.wbc.variations.gallery_images.feed_page.core( common_configs.single_product_configs );
+            window.document.splugins.wbc.variations.gallery_images.feed_page.api = window.document.splugins.wbc.variations.gallery_images.feed_page.core( common_configs.gallery_images_configs );
 
             // window.document.splugins.wbc.variations.gallery_images.single_product.api.init();
             // base_container = jQuery( ( window.document.splugins.common._o( common_configs.configs, 'base_container_loop_selector') ? common_configs.configs.base_container_selector : '.variations_form' ) );      
