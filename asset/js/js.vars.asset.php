@@ -89,23 +89,23 @@ add_action( ( !is_admin() ? 'wp_enqueue_scripts' : 'admin_enqueue_scripts'),func
 		// ACTIVE_TODO temp. hold for removel and we need to remove as soon as we refactore the loading sequance of filter widget class and load asset function og that class. so it is highly temporary. and we need to fix if we face issues whwrw filter feature is not active on certain pages but still that is loading below asset then we need to prevent that also and other such issues.
 		if( is_shop() || is_product_category() ) {
 			
-			$site_url = get_site_url();
-			$product_url = '';
-			$filter_prefix = '';
-			// wbc()->load->asset('js', 'publics/eo_wbc_filter', array('jquery'), "", false, true, null, null, true);
-			wbc()->load->asset('js', 'publics/eo_wbc_filter', array( 'eo_wbc_object' => array(
-        					'eo_product_url'=>$product_url,
-        					//'eo_view_tabular'=>($current_category=='solitaire'?1:0),
-        					'disp_regular'=>wbc()->options->get('eo_wbc_e_tabview_status',false)/*get_option('eo_wbc_e_tabview_status',false)*/?1:0,
-        					'eo_admin_ajax_url'=>admin_url( 'admin-ajax.php'),
-        					'eo_part_site_url'=>get_site_url().'/index.php',
-        					'eo_part_end_url'=>'/'.$product_url,
-        					'eo_cat_site_url'=>$site_url,
-        					'eo_cat_query'=>http_build_query($_GET),
-        					'btnfilter_now'=>(empty(wbc()->options->get_option('filters_'.$filter_prefix.'filter_setting','filter_setting_btnfilter_now'))?false:true),
-        					'btnreset_now'=>(empty(wbc()->options->get_option('filters_'.$filter_prefix.'filter_setting','filter_setting_reset_now'))?false:true),
-        					'_prefix_' => $filter_prefix,
-        				)), "", false, true, null, null, true);			
+			// $site_url = get_site_url();
+			// $product_url = '';
+			// $filter_prefix = '';
+			wbc()->load->asset('js', 'publics/eo_wbc_filter', array('jquery'), "", false, true, null, null, true);
+			// wbc()->load->asset('js', 'publics/eo_wbc_filter', array( 'eo_wbc_object' => array(
+   //      					'eo_product_url'=>$product_url,
+   //      					//'eo_view_tabular'=>($current_category=='solitaire'?1:0),
+   //      					'disp_regular'=>wbc()->options->get('eo_wbc_e_tabview_status',false)/*get_option('eo_wbc_e_tabview_status',false)*/?1:0,
+   //      					'eo_admin_ajax_url'=>admin_url( 'admin-ajax.php'),
+   //      					'eo_part_site_url'=>get_site_url().'/index.php',
+   //      					'eo_part_end_url'=>'/'.$product_url,
+   //      					'eo_cat_site_url'=>$site_url,
+   //      					'eo_cat_query'=>http_build_query($_GET),
+   //      					'btnfilter_now'=>(empty(wbc()->options->get_option('filters_'.$filter_prefix.'filter_setting','filter_setting_btnfilter_now'))?false:true),
+   //      					'btnreset_now'=>(empty(wbc()->options->get_option('filters_'.$filter_prefix.'filter_setting','filter_setting_reset_now'))?false:true),
+   //      					'_prefix_' => $filter_prefix,
+   //      				)), "", false, true, null, null, true);			
 		}
 		
 	} else {
