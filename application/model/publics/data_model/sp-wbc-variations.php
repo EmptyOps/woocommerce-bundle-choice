@@ -569,9 +569,9 @@ class SP_WBC_Variations extends SP_Variations {
 
 				$value = $fv['value'];
 				
-				// echo ">>>>>>>>>>> data fields";
-				// wbc_pr($key);
-				// wbc_pr($fv);
+				echo ">>>>>>>>>>> data fields";
+				wbc_pr($key);
+				wbc_pr($fv);
 
 				if ( strpos( $key, 'sp_variations_gallery_images' ) !== false ) {
 
