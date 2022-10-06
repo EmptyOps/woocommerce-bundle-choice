@@ -61,7 +61,7 @@ add_action( ( !is_admin() ? 'wp_enqueue_scripts' : 'admin_enqueue_scripts'),func
 		
 
 		$gallery_images_configs['base_container_selector']    = '.spui-sp-variations-gallery-images';
-		$gallery_images_configs['base_container_loop_selector']    = '.spui-sp-variations-loop-gallery-images';
+		$gallery_images_configs['base_container_loop_selector']    = '.variations_form'; //'.spui-sp-variations-loop-gallery-images';
 
 		$gallery_images_configs['template'] 				  = array('slider'=>array('id'=>'sp_slzm_slider_image_loop'), 'zoom'=>array('id'=>'sp_slzm_zoom_image_loop'));	
 		$gallery_images_configs['classes'] 				      = array('slider'=>array('container'=>'sp-variations-gallery-images-slider','loop_container'=>'sp-variations-gallery-images-slider-loop'), 'zoom'=>array('container'=>'sp-variations-gallery-images-zoom'));	
@@ -121,17 +121,19 @@ add_action('wp_footer',function(){
    ?>
    <script>
     	
-    	console.log("js.vras.asset outer ready event");
+    	// console.log("js.vras.asset outer ready event");
     	
     	jQuery(document).ready(function() {
     		
-    		console.log("js.vras.asset ready event");
+    		// console.log("js.vras.asset ready event");
 
     		window.document.splugins.wbc.pagination.api.init();
 
 			window.document.splugins.wbc.filters.api.init();
 
 			window.document.splugins.wbc.filter_sets.api.init();
+
+    		console.log("js.vras.asset ready event 1");
 
    		// ACTIVE_TODO we should confirm once and then disable category condition or part below because it seems unnecessary for the category page. or is it necessary for the purple theme loopbox slider? or for the tableview sidebar or popup if it has jQuery slider or zoom? 
     		if(window.document.splugins.common.is_item_page || window.document.splugins.common.is_category_page) {
@@ -144,29 +146,37 @@ add_action('wp_footer',function(){
 
 			}
 
+			console.log("js.vras.asset ready event 2");
+
         	if(window.document.splugins.common.is_item_page) {
 
 		        // window.setTimeout(function(){
 
 		            // window.document.splugins.wbc.variations.gallery_images.api.init();
-		            base_container = jQuery( ( window.document.splugins.common._o( common_configs.gallery_images_configs, 'base_container_selector') ? common_configs.configs.base_container_selector : '.variations_form' ) );      
+		            base_container = jQuery( ( window.document.splugins.common._o( common_configs.gallery_images_configs, 'base_container_selector') ? common_configs.gallery_images_configs.base_container_selector : '.variations_form' ) );      
 		            jQuery(base_container).sp_wbc_variations_gallery_images();
 
 		        // },2000);
 
 			}
 
+			console.log("js.vras.asset ready event 3");
+
 			if(window.document.splugins.common.is_category_page) {
+
+				console.log("js.vras.asset ready event 3.1");
 
 		        // window.setTimeout(function(){
 
 		            // window.document.splugins.wbc.variations.gallery_images.feed_page.api.init();
-		            base_container = jQuery( ( window.document.splugins.common._o( common_configs.gallery_images_configs, 'base_container_loop_selector') ? common_configs.configs.base_container_selector : '.variations_form' ) );      
+		            base_container = jQuery( ( window.document.splugins.common._o( common_configs.gallery_images_configs, 'base_container_loop_selector') ? common_configs.gallery_images_configs.base_container_loop_selector : '.variations_form' ) );      
 		            jQuery(base_container).sp_wbc_variations_gallery_images_feed_page();
 
 		        // },2000);
 
 			}
+
+			console.log("js.vras.asset ready event 4");
 
      		var base_container_swatches = null;
         	if(window.document.splugins.common.is_item_page) {
@@ -175,7 +185,7 @@ add_action('wp_footer',function(){
 
 		        // window.setTimeout(function(){
 		            // window.document.splugins.wbc.variations.swatches.api.init();
-		            base_container = jQuery( ( window.document.splugins.common._o( common_configs.swatches_config, 'base_container_selector') ? common_configs.configs.base_container_selector : '.variations_form' ) );      
+		            base_container = jQuery( ( window.document.splugins.common._o( common_configs.swatches_config, 'base_container_selector') ? common_configs.swatches_config.base_container_selector : '.variations_form' ) );      
 		            jQuery(base_container).sp_wbc_variations_swatches();
 
 		            base_container_swatches = base_container;
@@ -189,18 +199,21 @@ add_action('wp_footer',function(){
 
 		        // window.setTimeout(function(){
 
+						console.log("js vars ready item page if base_container 3");
+		            console.log(( window.document.splugins.common._o( common_configs.swatches_config, 'base_container_loop_selector') ? common_configs.swatches_config.base_container_loop_selector : '.variations_form' ));
+
 		            // window.document.splugins.wbc.variations.swatches.feed_page.api.init();
-		            base_container = jQuery( ( window.document.splugins.common._o( common_configs.swatches_config, 'base_container_loop_selector') ? common_configs.configs.base_container_selector : '.variations_form' ) );      
+		            base_container = jQuery( ( window.document.splugins.common._o( common_configs.swatches_config, 'base_container_loop_selector') ? common_configs.swatches_config.base_container_loop_selector : '.variations_form' ) );      
 		            jQuery(base_container).sp_wbc_variations_swatches_feed_page();
-
-		            console.log("js vars ready item page if base_container 3");
-		            console.log(base_container);
-
+		   
 		            base_container_swatches = base_container;
 
 		        // },2000);    
 
 			}
+
+			console.log("js vars ready after all if 2");
+			console.log(base_container_swatches);
 
 			jQuery(base_container_swatches).check_variations();
     	});
