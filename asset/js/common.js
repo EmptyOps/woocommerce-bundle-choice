@@ -1665,8 +1665,11 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
     }
 
     #process_attribute_template(type, element, mode = null) {
-        
+
         var _this = this; 
+
+        console.log("swatches process_attribute_template product id="+ _this.#data.product_id +" type="+ type);
+        console.log(element);
         
         var data = {};
 

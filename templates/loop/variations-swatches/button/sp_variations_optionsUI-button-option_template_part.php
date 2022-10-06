@@ -24,7 +24,7 @@ $slug_or_option = is_object($term) ? $term->slug : $term;
 $template = array(
     'type' => 'li',
     'class' => 'spui_button_variable_item '.$woo_dropdown_attribute_html_data['class'].' '.$woo_dropdown_attribute_html_data['options_loop_class'][$slug_or_option],
-    'attr' => array_merge (array( 'aria-checked' => 'false', 'tabindex' => '0', 'role' => 'radio','data-placement'=>'top','title'=>esc_html( $term->name ),'data-toggle'=>'popover', 'data-trigger'=>'hover' ), $woo_dropdown_attribute_html_data['options_loop_html_attr'][$term->slug] )
+    'attr' => array_merge (array( 'aria-checked' => 'false', 'tabindex' => '0', 'role' => 'radio','data-placement'=>'top','title'=>esc_html( $term->name ),'data-toggle'=>'popover', 'data-trigger'=>'hover' ), $woo_dropdown_attribute_html_data['options_loop_html_attr'][$term->slug] ),
 
     'child' => array(
         array(
