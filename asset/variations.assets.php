@@ -354,6 +354,8 @@ if(is_shop() || is_product_category()) {
             margin: 0;
             padding: 0;
             width: 100%;
+            -webkit-box-shadow: none !important;
+            box-shadow: none !important;
         }
         
         form.variations_form table.variations tbody {
