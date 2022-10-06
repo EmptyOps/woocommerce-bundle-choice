@@ -1144,10 +1144,12 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
             console.log("init_private wc_variation_form event");
 
             // if( !( jQuery(this).has('.spui-wbc-swatches-loaded') ) ){
-            if( !( jQuery(this).hasClass('spui-wbc-swatches-loaded') ) ){
-
+            if( !( jQuery(_this.#$base_container).hasClass('spui-wbc-swatches-loaded') ) ){
+                
+                console.log("swatches init_private inner if");
+            
                 //  had we used the _jQueryInterface style the _jQueryInterface call would have started from here 
-                _this.#preprocess( this, event );  
+                _this.#preprocess( _this.#$base_container, event );  
 
             }
             
@@ -1517,6 +1519,8 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
 
         if(type == null){
 
+            console.log("swatches process_attribute_types");
+
             // _this.data.attribute_types.each( function( i, type ) {
             // _this.$base_element.find('ul.spui-wbc-swatches-variable-item,.spui-wbc-swatches-variable-item').each(function (i, element) {
             _this.$base_element.find('ul.variable-items-wrapper').each(function (i, element) {
@@ -1760,13 +1764,13 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
             // _.contains(in_stocks, attribute_value)
             // _.includes(in_stocks, attribute_value)
            
-            console.log("process_attribute_template outer if ");
+            console.log("process_attribute_template outer if product id="+ _this.#data.product_id +" type="+ type);
             console.log(data.in_stocks);
             console.log(data.attribute_value);
 
             if (splugins._.includes(data.in_stocks, data.attribute_value)) {
         
-                console.log("process_attribute_template selected disabled in if ");
+                console.log("process_attribute_template selected disabled in if product id="+ _this.#data.product_id +" type="+ type);
                 console.log(inner_element);
 
               jQuery(inner_element).removeClass('selected disabled');
@@ -1777,7 +1781,7 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
 
               if (data.attribute_value === data.selected) {
                 
-                console.log("process_attribute_template selected in if if");
+                console.log("process_attribute_template selected in if if product id="+ _this.#data.product_id +" type="+ type);
                 console.log(inner_element);
 
                 jQuery(inner_element).addClass('selected');
@@ -4129,9 +4133,6 @@ window.document.splugins.wbc.variations.swatches.feed_page.core = function( conf
 
             (new SP_WBC_Variations_Swatches_Feed_Page(this,configs)).init();
 
-            // ACTIVE_TODO temp.
-            return false;
-
         });
     };
 };
@@ -4419,8 +4420,6 @@ window.document.splugins.wbc.variations.gallery_images.feed_page.core = function
 
             (new SP_WBC_Variations_Gallery_Images_Feed_Page(this,configs)).init();
 
-            // ACTIVE_TODO temp.
-            return false;
         });
     };
 };
