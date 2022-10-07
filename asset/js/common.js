@@ -128,6 +128,11 @@ if(window.document.splugins.common.is_item_page || window.document.splugins.comm
  
  }  
 
+ window.document.splugins.common.isEmpty = function(val) {
+    
+    return (val == undefined || val == null || val.length <= 0) ? true : false;
+ }
+
 /**
  * http://stackoverflow.com/a/10997390/11236
  */ 
@@ -3084,6 +3089,11 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations{
           // ACTIVE_TODO_OC_END    
               // if( type == 'radio' ) 
 
+        if(!window.document.splugins.common.isEmpty(self.#child_obj)) {
+
+            _this.#child_obj.process_images_inner();
+        }
+         
     }
     
     #template( tmpl_id, templating_lib ) {
@@ -3497,9 +3507,10 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations{
         // -- aa <a> find karva mate banavyu se final karva nu se @a--
         // --- start ---
 
-        function isEmpty(val){
-            return (val == undefined || val == null || val.length <= 0) ? true : false;
-        };
+        // -- aa function comman namespace ni ander muki didhu se @a-- 
+        // function isEmpty(val){
+        //     return (val == undefined || val == null || val.length <= 0) ? true : false;
+        // };
 
         function ancher_locate_function(base_container_p = 'variations_form',aLocateclass_p = 'woocommerce-LoopProduct-link',liLocate_class_p = 'product'){
 
@@ -3507,7 +3518,7 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations{
             
             var liLocate = base_container.closest('.' + liLocate_class_p);
 
-            if(isEmpty(liLocate)){
+            if( window.document.splugins.common.isEmpty(liLocate)){
 
                 var liLocate = base_container.closest('li');
                 
@@ -3869,6 +3880,16 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations{
         
     }
 
+    #set_child_obj_private(child_obj) {
+
+        var _this = this;
+
+        // NOTE: right now we are setting the child obj at broad leval but we may like to refactore it to make me more apropre at by only passing it only for the function highrisy where it is needed.
+        _this.#child_obj = child_obj;
+
+
+    }
+
     get_configs() {
 
         var _this = this; 
@@ -3909,6 +3930,13 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations{
     
         _this.#init_private();
     } 
+
+    set_child_obj(child_obj) {
+
+        var _this = this; 
+
+        _this.#set_child_obj_private(child_obj);
+    }
  
 }
 window.document.splugins.wbc.variations.gallery_images = window.document.splugins.wbc.variations.gallery_images || {};
@@ -4165,6 +4193,7 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
     #$configs;
     #data;
     #$binding_stats;
+    #child_obj;
     #$zoom_container;
 
 
@@ -4190,9 +4219,11 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
 
         _this.#update_configs();
         
+        super.set_child_obj(_this);
+
         super.init();
 
-        _this.#init_preprocess(null);
+        // _this.#init_preprocess(null);
 
     }
 
@@ -4220,7 +4251,7 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
     
     }       
 
-    #process_images_inner(type, element) {
+    #process_images_inner_private(type, element) {
 
         var _this = this; 
 
@@ -4409,7 +4440,14 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
 
         _this.#init_private();
     
-    } 
+    }
+
+    process_images_inner() {
+
+        var _this = this; 
+
+        _this.#process_images_inner_private();
+    }
 
 }
 window.document.splugins.wbc.variations.gallery_images.feed_page = window.document.splugins.wbc.variations.gallery_images.feed_page || {};
