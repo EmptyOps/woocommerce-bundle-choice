@@ -1477,12 +1477,17 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
 
     #process_attribute_data(type, element, data, mode = null) {
 
+        // console.log("swatches process_attribute_data");
+
         data.options.each(function () {
             if (jQuery(this).val() !== '') {
                 data.selects.push(jQuery(this).val());
                 data.selected = data.current.length === 0 ? data.eq.val() : data.current.val();
             }
         });
+
+        // console.log(data.options);
+        // console.log(data.selects);
 
         data.disabled.each(function () {
             if (jQuery(this).val() !== '') {
@@ -1707,8 +1712,9 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
         data.eq = data.select.find('option').eq(1);
 
         console.log("select and disable log");
-        console.log(data.options);
-        console.log(data.disabled);
+        // console.log(data.options);
+        // console.log(data.disabled);
+        // console.log(data.select);
 
         // ACTIVE_TODO we do not have any more (class woo-variation-swatches-variable-item-more) class related flow yet. but t you need to first plan the template structure -- to t
             // ACTIVE_TODO -- then once template ready then implaemnt on php side and do the needful on js layers -- to s
@@ -2643,7 +2649,7 @@ window.document.splugins.wbc.variations.swatches.api = window.document.splugins.
 class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations{
 
     #configs;
-    #base_container_selector;
+    // #base_container_selector;
     #$base_container;
     #data;
     #binding_stats;
@@ -2670,7 +2676,8 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations{
 
         console.log(_this.#configs);
 
-        _this.#base_container_selector = ( window.document.splugins.common._o( _this.#configs, 'base_container_selector') ? _this.#configs.base_container_selector : ''  );     
+        // NOTE: base_container_selector is no more used after the module is upgraded to jQuery interface style, so it should be not supported. and must not be used in future. so commented below statment.
+        // _this.#base_container_selector = ( window.document.splugins.common._o( _this.#configs, 'base_container_selector') ? _this.#configs.base_container_selector : ''  );     
 
         // NOTE: for the notes base_container object is the base_element if we consider it with analogy of _jQueryInterface style modules
         _this.#$base_container = jQuery(element);   //( _this.base_container_selector );     
@@ -2727,13 +2734,15 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations{
     #init_preprocess(event) {
 
         var _this = this;
-        console.log(" gallery_images init_preprocess "+_this.#base_container_selector);
+        console.log(" gallery_images init_preprocess ");
 
-        if(jQuery(_this.#base_container_selector+':not(.spui-wbc-gallery_images-product-type-variable):not(.spui-wbc-gallery_images-loaded)').length>0) {
+        // if(jQuery(_this.#base_container_selector+':not(.spui-wbc-gallery_images-product-type-variable):not(.spui-wbc-gallery_images-loaded)').length>0) {
+        if( ! jQuery(_this.#$base_container).hasClass('spui-wbc-gallery_images-product-type-variable') && ! jQuery(_this.#$base_container).hasClass('spui-wbc-gallery_images-loaded') ) {
 
             console.log(" gallery_images init_preprocess if ");
 
-            _this.#preprocess(jQuery(_this.#base_container_selector+':not(.spui-wbc-gallery_images-product-type-variable):not(.spui-wbc-gallery_images-loaded)'), event);
+            // _this.#preprocess(jQuery(_this.#base_container_selector+':not(.spui-wbc-gallery_images-product-type-variable):not(.spui-wbc-gallery_images-loaded)'), event);
+            _this.#preprocess(_this.#$base_container, event);
 
         }
 
@@ -2747,11 +2756,6 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations{
         _this.base_element = element;
         _this.#$base_element = jQuery( _this.base_element );
         
-        _this.#$slider_container = _this.#$base_element.find( '.'+ _this.#configs.classes.slider.container );
-        _this.#$zoom_container = _this.#$base_element.find( '.'+ _this.#configs.classes.zoom.container );
-            
-        _this.#$slider_loop_container = _this.#$slider_container.find( '.'+ _this.#configs.classes.slider.loop_container );
-
             /*ACTIVE_TODO_OC_START
                  --  then I will tell you which to keep and which to drop -- to a 
             ACTIVE_TODO_OC_END*/
@@ -2787,11 +2791,17 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations{
                this.$thumbnail = $('.woo-variation-gallery-thumbnail-slider', this._element);
                 ACTIVE_TODO_OC_END*/
 
-         _this.product_id = _this.#$variations_form.data('product_id');
-         _this.#data.is_variation_product = _this.#$variations_form.length > 0;
+        _this.product_id = _this.#$variations_form.data('product_id');
+        _this.#data.is_variation_product = _this.#$variations_form.length > 0;
  
-         _this.#$base_element.addClass('spui-wbc-gallery_images-loaded');
+        _this.#$base_element.addClass('spui-wbc-gallery_images-loaded');
  
+        _this.#$slider_container = window.document.splugins.common.is_item_page ? _this.#$base_element.find( '.'+ _this.#configs.classes.slider.container ) : _this.#$base_element.closest( '.'+ _this.#configs.classes.slider.container );
+        _this.#$zoom_container = window.document.splugins.common.is_item_page ? _this.#$base_element.find( '.'+ _this.#configs.classes.zoom.container ) : jQuery( _this.#configs.classes.zoom.container.replace('{product_id}', _this.product_id) );
+        // console.log(_this.#$zoom_container);
+            
+        _this.#$slider_loop_container = _this.#$slider_container.find( '.'+ _this.#configs.classes.slider.loop_container );
+
                // ACTIVE_TODO if required then need to init def for simple product and so on.
                // this.defaultGallery();
  
@@ -3295,8 +3305,11 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations{
 
 
         if (hasGallery) {
+
           _this.#$zoom_container.html(zoom_inner_html);
+       
         } else {
+         
           _this.#$zoom_container.html('');
         } //this._element.trigger('woo_variation_gallery_init', [this, images]);
 
@@ -3448,7 +3461,7 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations{
             return false;
         }
        
-        console.log("variation_change_listener 2");
+        console.log("variation_change_listener 2 product_id = "+_this.product_id +" product_id = "+_this.#$variations_form.data('product_id'));
         
          _this.#$variations_form.on('show_variation', function (event, variation) {
             
@@ -3562,6 +3575,9 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations{
     }
 
     #set_variation_url(variation) {
+
+        // ACTIVE_TODO temp
+        return false;
 
         /*ACTIVE_TODO_OC_START
         -- aa function swatchis module ma mukvanu hatu and gallery module ma mukelu se, since show_variation event swatches ma nathi -- to a
@@ -3914,7 +3930,16 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations{
  
     get_current_variation() {
 
+        var _this = this; 
+        
         return _this.#data.current_variation;    
+    }
+
+    get_zoom_container() {
+
+        var _this = this; 
+        
+        return _this.#$zoom_container;    
     }
 
     process_zoom_template_public(images,index,hasGallery) {
@@ -4213,8 +4238,6 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
  
     #init_private() {
 
-        return false;
-
         var _this = this; 
 
         _this.#update_configs();
@@ -4288,8 +4311,9 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
             return false;
         }        
         
-        _this.#$zoom_container.on("mouseenter","",function() {
-            
+        // _this.#$zoom_container.on("mouseenter","",function() {
+        super.get_zoom_container().on("mouseenter","",function() {
+
             _this.#on_zoom_area_hover_in(type);            
         });
 
@@ -4315,7 +4339,8 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
             return false;
         }   
 
-        _this.#$zoom_container.on("mouseleave","",function() {
+        // _this.#$zoom_container.on("mouseleave","",function() {
+        super.get_zoom_container().on("mouseleave","",function() {
 
             _this.#on_zoom_area_hover_out(type); 
         });   
