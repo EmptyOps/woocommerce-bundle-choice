@@ -614,7 +614,7 @@ ACTIVE_TODO_OC_END*/
      var is_template_exists_private = function( tmpl_id, templating_lib ) {
  
          //  TODO need to upgrade logic if below condition is not relible 
-         if(jQuery('#'+tmpl_id).length > 0) {
+         if(jQuery('#tmpl-'+tmpl_id).length > 0) {
             
             return true;
          } else{
@@ -2653,6 +2653,7 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations{
     #$base_container;
     #data;
     #binding_stats;
+    #child_obj;
     #$base_element;
     #$slider_container;
     #$zoom_container;
@@ -3099,7 +3100,7 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations{
           // ACTIVE_TODO_OC_END    
               // if( type == 'radio' ) 
 
-        if(!window.document.splugins.common.isEmpty(self.#child_obj)) {
+        if(!window.document.splugins.common.isEmpty(_this.#child_obj)) {
 
             _this.#child_obj.process_images_inner();
         }
@@ -3118,7 +3119,7 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations{
 
         var _this = this;
 
-        return window.document.splugins.templating.api.get_template( tmpl_id, templating_lib );
+        return _this.#template( tmpl_id, templating_lib );
     
     }
 
@@ -3134,7 +3135,7 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations{
         
         var _this = this;
 
-        return window.document.splugins.templating.api.apply_data( template, template_data, templating_lib );
+        return _this.#apply_template_data( template, template_data, templating_lib );
     
     }
 
@@ -3942,6 +3943,13 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations{
         return _this.#$zoom_container;    
     }
 
+    get_base_container() {
+
+        var _this = this; 
+
+        return _this.#$base_container;
+    }
+
     process_zoom_template_public(images,index,hasGallery) {
 
         var _this = this; 
@@ -4218,7 +4226,6 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
     #$configs;
     #data;
     #$binding_stats;
-    #child_obj;
     #$zoom_container;
 
 
@@ -4242,6 +4249,8 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
 
         _this.#update_configs();
         
+        console.log('gallery_images_child init_private');
+
         super.set_child_obj(_this);
 
         super.init();
@@ -4270,7 +4279,7 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
 
         var _this = this; 
 
-        _this.#process_images_inner(type, element);    
+        _this.#process_images_inner_private(type, element);    
     
     }       
 
@@ -4366,6 +4375,7 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
 
     #zoom_area_hover_in(type) {
  
+
         var _this = this; 
 
         if (super.get_current_variation() == null) {
@@ -4373,11 +4383,17 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
             return false;
         }
         
+        // TODO if in loop box ever need to manage index like if slider is supported in loop box for example in purple theme than at that time need to recive or read the index from the apllicable container of perant module.
+        var index = 0;
+
         var templating_lib = window.document.splugins.common._o( _this.#$configs, 'templating_lib') ? _this.#$configs.templating_lib : 'wp';
 
         /*-- index config add @a --*/
         // var template_id = _this.#configs.template.zoom.id+'_'+index_inner (?) + '_hover';
         var template_id = _this.#$configs.template.zoom.id+'_'+_this.#$configs.options.tiny_features_option_ui_loop_box_hover_media_index + '_hover';
+
+        console.log('zoom_area_hover_in() template_id');
+        console.log(template_id);
 
         if(splugins.tmpl_lib.is_template_exists(template_id, templating_lib)) {
 
@@ -4387,7 +4403,9 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
 
             var hasGallery = images.length > 1;
 
-            jQuery( images).each(function (index_inner,image) {
+            console.log('zoom_area_hover_in() images');
+            console.log(images);
+            jQuery(images).each(function (index_inner,image) {
                 
                 image.index = index_inner;
 
@@ -4400,7 +4418,14 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
                     console.log(" gallery_images_child zoom_area_hover_in inner inner if" );
 
                     var template_var = _this.template_public( template_id, templating_lib );
+
+                    // console.log('zoom_area_hover_in template_var');
+                    // console.log(template_var);
+
                     zoom_inner_html += _this.apply_template_data_public(template_var, image, templating_lib);
+
+                    // console.log('zoom_inner_html');
+                    // console.log(zoom_inner_html);
 
                     return false;
                 }
@@ -4414,16 +4439,26 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
 
 
             if (hasGallery) {
-              _this.#$zoom_container.html(zoom_inner_html);
+
+              // console.log(" hasGallery if inner _this.zoom_container is "+super.get_zoom_container() );  
+              // console.log(zoom_inner_html);
+              // _this.#$zoom_container.html(zoom_inner_html);
+              super.get_zoom_container().html(zoom_inner_html);
             } else {
-              _this.#$zoom_container.html('');
+              // _this.#$zoom_container.html('');
+              super.get_zoom_container().html('');
             } //this._element.trigger('woo_variation_gallery_init', [this, images]);
 
             // ACTIVE_TODO/TODO it is better heirachically, if the click is bind on our img-item class stuctor only, and then we recive here that element only in above function Arguments.
             //     -- and than we can simply get type from element data-type which is mentanable due to well maintained heirachy insted of below index based image data read which is bound to change.
 
+            console.log('zoom_area_hover_in() index');       
+            // console.log(index);
+
+            console.log('super.get_base_container()');
+            console.log(super.get_base_container());
             var zoom_area_hover_in_callback = null;
-            window.document.splugins.events.api.notifyAllObservers( 'gallery_images_feed_page', 'zoom_area_hover_in', {type:images[index].extra_params_org.type,image:images[index]}, zoom_area_hover_in_callback );            
+            window.document.splugins.events.api.notifyAllObservers( 'gallery_images_feed_page', 'zoom_area_hover_in', {type:images[index].extra_params_org.type,image:images[index]}, zoom_area_hover_in_callback, super.get_base_container() );            
 
         } 
 
@@ -4438,16 +4473,24 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
             return false;
         }
 
+        // TODO if in loop box ever need to manage index like if slider is supported in loop box for example in purple theme than at that time need to recive or read the index from the apllicable container of perant module.
+        var index = 0;
+
         var images = super.get_current_variation().variation_gallery_images;
         
         super.process_zoom_template_public(images, 0, true/*we are simply setting it to true but if requred than need to manage it*/);
 
+        console.log('zoom_area_hover_out() index');       
+        console.log(index);       
+
         var zoom_area_hover_out_callback = null;
-        window.document.splugins.events.api.notifyAllObservers( 'gallery_images_feed_page', 'zoom_area_hover_out', {type:images[index].extra_params_org.type,image:images[index]}, zoom_area_hover_out_callback );       
+        window.document.splugins.events.api.notifyAllObservers( 'gallery_images_feed_page', 'zoom_area_hover_out', {type:images[index].extra_params_org.type,image:images[index]}, zoom_area_hover_out_callback, super.get_base_container() );       
                 
     }  
 
     #update_configs() {
+
+        var _this = this; 
 
         // NOTE: In future if we find better flow or structure which is mature standard then we can deprecate this function
 
@@ -4457,6 +4500,10 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
         configs.classes = configs.classes_loop;
 
         super.set_configs(configs);
+
+        // NOTE: update in child module too.
+        _this.#$configs = super.get_configs();
+    
     }        
  
     init() { 
