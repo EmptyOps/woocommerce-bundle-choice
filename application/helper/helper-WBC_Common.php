@@ -13,7 +13,7 @@ class WBC_Common {
 		return self::$_instance;
 	}
 
-	public function get_category($page='product',int $post_id = null,array $in_category=array()){
+	public function get_category($page='product',int $post_id = null,array $in_category=array(), $is_apply_compatibility=false){
 
 		// ACTIVE_TODO just for the notes that, almost all the logic of this function seems to be deeply implemented for the proper working of the different premium pair builders supported by the earring pendant builder extension, so let keep that in mind while we are getting into the refactoring of those earring pendant builder and other related extensions of category page and item page set 
 
@@ -25,26 +25,32 @@ class WBC_Common {
 		$post_id = apply_filters('eoowbc_helper_common_get_category_post_id',$post_id);
 		$return_category = '';
 		if($page == 'category' ) {
+			
 			global $wp_query;
 
 			$qo_term_id = null;
 			$qo_term_slug = null;
 			if(empty($wp_query->get_queried_object()) or !property_exists($wp_query->get_queried_object(),'term_id')) {
 				
-				// NOTE: here this is actualy the ultimate sort to get the category id, but off cource we will need to add whenever required the specific compatibility patches like based on elementor or wpml conditions above this patche in hirarchical if structure to ensure that plateform specific issues like of wpml or elementor is handeled matuarly and using standard api.
-				
-				$c_res = \eo\wbc\model\SP_WBC_Compatibility::instance()->router_compatability('current_page_category_id');
+				if($is_apply_compatibility) {
 
-				if(empty($c_res)) {
+					// NOTE: here this is actualy the ultimate sort to get the category id, but off cource we will need to add whenever required the specific compatibility patches like based on elementor or wpml conditions above this patche in hirarchical if structure to ensure that plateform specific issues like of wpml or elementor is handeled matuarly and using standard api.
+					
+					$c_res = \eo\wbc\model\SP_WBC_Compatibility::instance()->router_compatability('current_page_category_id');
+
+					if(empty($c_res)) {
+					
+						return false;
+					}
+					// $term = wbc()->wc->get_term_by( 'id', $c_res['term_id'], 'product_cat' );
+
+					$qo_term_id = $c_res['term_id'];
+					$qo_term_slug = $c_res['slug'];
+
+				} else {
+
 					return false;
 				}
-				// $term = wbc()->wc->get_term_by( 'id', $c_res['term_id'], 'product_cat' );
-
-				$qo_term_id = $c_res['term_id'];
-				$qo_term_slug = $c_res['slug'];
-
-				// s: question ahiya aa comment maravanu chhe? 
-				// return false;
 			} else {
 
 				$qo_term_id = $wp_query->get_queried_object()->term_id;
@@ -150,7 +156,7 @@ class WBC_Common {
 
 		if( !is_array($ar) )
 		{
-			echo 'the common helper pr function says the var provided is not an array. still var dumping.<br><br>';
+			// echo 'the common helper pr function says the var provided is not an array. still var dumping.<br><br>';
 			$this->var_dump($ar,$force_debug,$die);
 			return false;
 		}

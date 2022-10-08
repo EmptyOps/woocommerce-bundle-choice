@@ -174,7 +174,10 @@ class EOWBC_Filter_Widget {
 			<?php
 		},99);
 
-		wbc()->load->asset('js','publics/eo_wbc_filter');
+		// 29-09-2022 @h  @s 
+		// wbc()->load->asset('js','publics/eo_wbc_filter');
+		$this->load_asset();
+
 		wbc()->theme->load('css','filter');
         wbc()->theme->load('js','filter');
         //wbc()->load->asset('js','filter');
@@ -900,11 +903,31 @@ class EOWBC_Filter_Widget {
 		$site_url = '';
 		$product_url = '';
 
+		$is_apply_compatibility = true; 
+		
 		/*if( !$this->is_shortcode_filter && !$this->is_shop_cat_filter ) {*/
 			$current_category = $wp_query->get_queried_object();
 			if(!empty($current_category) and !is_wp_error($current_category)){
 
-				$current_category = $current_category->slug;
+				if (!empty($current_category->slug)) {
+					
+					$current_category = $current_category->slug;
+
+				} else {
+
+					if($is_apply_compatibility) {
+
+						// NOTE: here this is actualy the ultimate sort to get the category id, but off cource we will need to add whenever required the specific compatibility patches like based on elementor or wpml conditions above this patche in hirarchical if structure to ensure that plateform specific issues like of wpml or elementor is handeled matuarly and using standard api.
+						
+						$c_res = \eo\wbc\model\SP_WBC_Compatibility::instance()->router_compatability('current_page_category_id');
+
+						if(!empty($c_res['slug'])) {
+						
+							$current_category = $c_res['slug'];
+
+						}
+					} 
+				}
 			} else{
 
 				$current_category=$this->_category;
@@ -974,9 +997,10 @@ class EOWBC_Filter_Widget {
 
 		}else{
 
+			// NOTE: below hook is currently not working and the js is loading from js vars file
 			add_action( ( !is_admin() ? 'wp_enqueue_scripts' : 'admin_enqueue_scripts') ,function(){
 
-				wbc()->load->asset('js','publics/eo_wbc_filter',array('jquery'));
+				wbc()->load->asset('js', 'publics/eo_wbc_filter', array('jquery'), "", false, true, null, null, true);
 				
 			}, 1049);
 
@@ -2174,7 +2198,7 @@ class EOWBC_Filter_Widget {
 				}
 
 				$query_params = \eo\wbc\model\SP_WBC_Router::instance()->get_query_params_formatted('url_and_filter_form', array('attr'), 'REQUEST', null);
-				$query_paramas_options = null;
+				$query_paramas_options = [];
 				if(in_array($term->slug , $query_params)){
 
 					$query_paramas_options = \eo\wbc\model\SP_WBC_Router::instance()->get_query_params_formatted('url_and_filter_form', array('attr_options', $term->slug) , 'REQUEST', null);
@@ -2485,7 +2509,7 @@ class EOWBC_Filter_Widget {
     public function eo_wbc_get_category() {        
         
         
-        return wbc()->common->get_category('category',null,array($this->first_category_slug,$this->second_category_slug));
+        return wbc()->common->get_category('category',null,array($this->first_category_slug,$this->second_category_slug),true);
 
         global $wp_query;
 
@@ -2613,7 +2637,10 @@ class EOWBC_Filter_Widget {
 			var eo_wbc_object = JSON.parse('<?php echo json_encode($data); ?>');
 		</script>
 		<?php
-		wbc()->load->asset('js','publics/eo_wbc_filter',array('jquery'));		
+		// 29-09-2022 @h  @s 
+		// wbc()->load->asset('js','publics/eo_wbc_filter',array('jquery'));	
+		$this->load_asset();
+	
 	}
 
 	public function get_widget() {
@@ -2961,9 +2988,9 @@ class EOWBC_Filter_Widget {
 		$filter_sets_confings = array();
 		$filter_sets_confings['filter_setting_alternate_mobile'] = wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile');
 		$filter_sets_confings['filter_prefix'] = $this->filter_prefix;
-		$filter_sets_confings['filter_sets_data'] = $filter_sets_data;
+		$filter_sets_confings['filter_sets_data'] = $filter_sets_data;	
 
-		wbc()->load->asset('localize','filter_sets',array("filter_sets_confings" => $filter_sets_confings));
+		wbc()->load->asset('localize_data','publics/sp_filter_sets',array("filter_sets_confings" => $filter_sets_confings));
 
 
 		/*echo "non_adv_ordered_filter and adv_ordered_filter dump 1";
@@ -2976,6 +3003,11 @@ class EOWBC_Filter_Widget {
 		if( $this->is_shortcode_filter ) {
 			//wbc()->load->template('publics/filters/shortcode_flt_search_btn', array("is_shortcode_filter"=>$this->is_shortcode_filter,'filter_ui'=>$this)); 	
 		}
+
+		// filter_sub_confings
+		$filter_sub_confings = array();		
+		$filter_sub_confings['filter_setting_btnfilter_now'] = wbc()->options->get_option('filters_'.$filter_prefix.'filter_setting','filter_setting_btnfilter_now');
+		$filter_sub_confings['filter_setting_slider_max_lblsize'] = wbc()->options->get_option('filters_'.$filter_prefix.'filter_setting','filter_setting_slider_max_lblsize',6);		
 
 		wbc()->load->template('publics/filters/form', array("thisObj"=>$this,"current_category"=>$current_category,'filter_prefix'=>$this->filter_prefix,'filter_ui'=>$this)); 
 		do_action('eowbc_after_filter_widget');

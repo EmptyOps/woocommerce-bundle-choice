@@ -124,7 +124,24 @@ class SP_WBC_Compatibility extends SP_Compatibility {
 		$c_res = array();
  		if($page_section == 'current_page_category_id') {
 
-			$category = wbc()->wc->get_category_by_url($url, 'id');
+			$category = wbc()->wc->get_category_by_url(null, null, true, false, false);
+
+			if( empty($category) ) {
+
+				$category = wbc()->wc->get_category_by_url(null, null, false, true, false);
+			
+				if( empty($category) ) {
+
+					$category = wbc()->wc->get_category_by_url(null, null, false, false, true);
+
+					if( empty($category) ) {
+
+						return $c_res;
+					}
+				}
+			}
+
+			// $category = wbc()->wc->get_category_by_url($url, 'id');
 
 			$c_res['term_id'] = $category->cat_ID;
 

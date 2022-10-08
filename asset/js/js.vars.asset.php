@@ -61,7 +61,7 @@ add_action( ( !is_admin() ? 'wp_enqueue_scripts' : 'admin_enqueue_scripts'),func
 		
 
 		$gallery_images_configs['base_container_selector']    = '.spui-sp-variations-gallery-images';
-		$gallery_images_configs['base_container_loop_selector']    = '.spui-sp-variations-loop-gallery-images';
+		$gallery_images_configs['base_container_loop_selector']    = '.variations_form'; //'.spui-sp-variations-loop-gallery-images';
 
 		$gallery_images_configs['template'] 				  = array('slider'=>array('id'=>'sp_slzm_slider_image_loop'), 'zoom'=>array('id'=>'sp_slzm_zoom_image_loop'));	
 		$gallery_images_configs['classes'] 				      = array('slider'=>array('container'=>'sp-variations-gallery-images-slider','loop_container'=>'sp-variations-gallery-images-slider-loop'), 'zoom'=>array('container'=>'sp-variations-gallery-images-zoom'));	
@@ -71,12 +71,12 @@ add_action( ( !is_admin() ? 'wp_enqueue_scripts' : 'admin_enqueue_scripts'),func
 
 		// ----loop---	
 		$gallery_images_configs['template_loop'] 				  = array('slider'=>array('id'=>'sp_slzm_loop_slider_image_loop'), 'zoom'=>array('id'=>'sp_slzm_loop_zoom_image_loop'));		
-		$gallery_images_configs['classes_loop'] 				      = array('slider'=>array('container'=>'sp-variations-loop-gallery-images-slider','loop_container'=>'sp-variations-loop-gallery-images-slider-loop'), 'zoom'=>array('container'=>'sp-variations-loop-gallery-images-zoom'));		
+		$gallery_images_configs['classes_loop'] 				      = array('slider'=>array('container'=>'sp-variations-loop-gallery-images-slider','loop_container'=>'sp-variations-loop-gallery-images-slider-loop'), 'zoom'=>array('container'=>/*'sp-variations-loop-gallery-images-zoom'*/'#sp_variations_loop_gallery_images_zoom_{product_id}'));		
 		// ACTIVE_TODO we neet to manage the loding secuance here so that any zoom layers including external plugin implimentetion layers can add filter do it 	
 		$gallery_images_configs['template_loop']['zoom']['all_in_dom'] = apply_filters('sp_slzm_loop_zoom_template_all_in_dom',0);	
 
 		$gallery_images_configs['options'] = array('gallery_reset_on_variation_change'=>false,
-																 'tiny_features_option_ui_loop_box_hover_media_index'=>wbc()->options->get_option('tiny_features','tiny_features_option_ui_loop_box_hover_media_index','0'));
+																 'tiny_features_option_ui_loop_box_hover_media_index'=>wbc()->options->get_option('tiny_features','tiny_features_option_ui_loop_box_hover_media_index','2'));
 
 		// ACTIVE_TODO asset enque and other asset flows
 			// --  first need to confirm that minified asset only are loaded -- to t
@@ -85,6 +85,29 @@ add_action( ( !is_admin() ? 'wp_enqueue_scripts' : 'admin_enqueue_scripts'),func
 		// ACTIVE_TODO/TODO when the variations and its child modules are moved out from the below loaded common js then at that time, also move te wc-cart variation dependancy mentioned below 
 	
 		wbc()->load->asset('js','common',array('jquery','wc-add-to-cart-variation'),"0.1.4",false,true,'common_configs',array('swatches_config'=>$swatches_configs, 'gallery_images_configs'=>$gallery_images_configs),true);
+
+		// ACTIVE_TODO temp. hold for removel and we need to remove as soon as we refactore the loading sequance of filter widget class and load asset function og that class. so it is highly temporary. and we need to fix if we face issues whwrw filter feature is not active on certain pages but still that is loading below asset then we need to prevent that also and other such issues.
+		if( is_shop() || is_product_category() ) {
+			
+			 wbc()->load->asset('js', 'publics/eo_wbc_filter', array('jquery'), "", false, true, null, null, true);
+
+			// $site_url = get_site_url();
+			// $product_url = '';
+			// $filter_prefix = '';
+			// wbc()->load->asset('js', 'publics/eo_wbc_filter', array( 'eo_wbc_object' => array(
+			// 	'eo_product_url'=>$product_url,
+			// 	//'eo_view_tabular'=>($current_category=='solitaire'?1:0),
+			// 	'disp_regular'=>wbc()->options->get('eo_wbc_e_tabview_status',false)/*get_option('eo_wbc_e_tabview_status',false)*/?1:0,
+			// 	'eo_admin_ajax_url'=>admin_url( 'admin-ajax.php'),
+			// 	'eo_part_site_url'=>get_site_url().'/index.php',
+			// 	'eo_part_end_url'=>'/'.$product_url,
+			// 	'eo_cat_site_url'=>$site_url,
+			// 	'eo_cat_query'=>http_build_query($_GET),
+			// 	'btnfilter_now'=>(empty(wbc()->options->get_option('filters_'.$filter_prefix.'filter_setting','filter_setting_btnfilter_now'))?false:true),
+			// 	'btnreset_now'=>(empty(wbc()->options->get_option('filters_'.$filter_prefix.'filter_setting','filter_setting_reset_now'))?false:true),
+			// 	'_prefix_' => $filter_prefix,
+			// )), "", false, true, null, null, true);
+		}
 		
 	} else {
 
@@ -97,7 +120,12 @@ add_action( ( !is_admin() ? 'wp_enqueue_scripts' : 'admin_enqueue_scripts'),func
 add_action('wp_footer',function(){               
    ?>
    <script>
+    	
+    	// console.log("js.vras.asset outer ready event");
+    	
     	jQuery(document).ready(function() {
+    		
+    		// console.log("js.vras.asset ready event");
 
     		window.document.splugins.wbc.pagination.api.init();
 
@@ -105,6 +133,9 @@ add_action('wp_footer',function(){
 
 			window.document.splugins.wbc.filter_sets.api.init();
 
+    		console.log("js.vras.asset ready event 1");
+
+   		// ACTIVE_TODO we should confirm once and then disable category condition or part below because it seems unnecessary for the category page. or is it necessary for the purple theme loopbox slider? or for the tableview sidebar or popup if it has jQuery slider or zoom? 
     		if(window.document.splugins.common.is_item_page || window.document.splugins.common.is_category_page) {
     
 		        // window.setTimeout(function(){
@@ -115,36 +146,46 @@ add_action('wp_footer',function(){
 
 			}
 
+			console.log("js.vras.asset ready event 2");
+
         	if(window.document.splugins.common.is_item_page) {
 
 		        // window.setTimeout(function(){
 
 		            // window.document.splugins.wbc.variations.gallery_images.api.init();
-		            base_container = jQuery( ( window.document.splugins.common._o( common_configs.gallery_images_configs, 'base_container_selector') ? common_configs.configs.base_container_selector : '.variations_form' ) );      
+		            base_container = jQuery( ( window.document.splugins.common._o( common_configs.gallery_images_configs, 'base_container_selector') ? common_configs.gallery_images_configs.base_container_selector : '.variations_form' ) );      
 		            jQuery(base_container).sp_wbc_variations_gallery_images();
 
 		        // },2000);
 
 			}
 
+			console.log("js.vras.asset ready event 3");
+
 			if(window.document.splugins.common.is_category_page) {
+
+				console.log("js.vras.asset ready event 3.1");
 
 		        // window.setTimeout(function(){
 
 		            // window.document.splugins.wbc.variations.gallery_images.feed_page.api.init();
-		            base_container = jQuery( ( window.document.splugins.common._o( common_configs.gallery_images_configs, 'base_container_loop_selector') ? common_configs.configs.base_container_selector : '.variations_form' ) );      
+		            base_container = jQuery( ( window.document.splugins.common._o( common_configs.gallery_images_configs, 'base_container_loop_selector') ? common_configs.gallery_images_configs.base_container_loop_selector : '.variations_form' ) );      
 		            jQuery(base_container).sp_wbc_variations_gallery_images_feed_page();
 
 		        // },2000);
 
 			}
 
+			console.log("js.vras.asset ready event 4");
+
      		var base_container_swatches = null;
         	if(window.document.splugins.common.is_item_page) {
-			    
+			    	
+			    	console.log("js vars ready item page if 1");
+
 		        // window.setTimeout(function(){
 		            // window.document.splugins.wbc.variations.swatches.api.init();
-		            base_container = jQuery( ( window.document.splugins.common._o( common_configs.swatches_config, 'base_container_selector') ? common_configs.configs.base_container_selector : '.variations_form' ) );      
+		            base_container = jQuery( ( window.document.splugins.common._o( common_configs.swatches_config, 'base_container_selector') ? common_configs.swatches_config.base_container_selector : '.variations_form' ) );      
 		            jQuery(base_container).sp_wbc_variations_swatches();
 
 		            base_container_swatches = base_container;
@@ -153,20 +194,29 @@ add_action('wp_footer',function(){
 			}
 
 			if(window.document.splugins.common.is_category_page) {
-			    
+			    	
+			    	console.log("js vars ready item page if 2");
+
 		        // window.setTimeout(function(){
 
-		            // window.document.splugins.wbc.variations.swatches.feed_page.api.init();
-		            base_container = jQuery( ( window.document.splugins.common._o( common_configs.swatches_config, 'base_container_loop_selector') ? common_configs.configs.base_container_selector : '.variations_form' ) );      
-		            jQuery(base_container).sp_wbc_variations_swatches_feed_page();
+						console.log("js vars ready item page if base_container 3");
+		            console.log(( window.document.splugins.common._o( common_configs.swatches_config, 'base_container_loop_selector') ? common_configs.swatches_config.base_container_loop_selector : '.variations_form' ));
 
+		            // window.document.splugins.wbc.variations.swatches.feed_page.api.init();
+		            base_container = jQuery( ( window.document.splugins.common._o( common_configs.swatches_config, 'base_container_loop_selector') ? common_configs.swatches_config.base_container_loop_selector : '.variations_form' ) );      
+		            jQuery(base_container).sp_wbc_variations_swatches_feed_page();
+		   
 		            base_container_swatches = base_container;
 
 		        // },2000);    
 
 			}
 
-			jQuery(base_container_swatches).check_variations();
+			console.log("js vars ready after all if 2");
+			console.log(base_container_swatches);
+
+			// jQuery(base_container_swatches).check_variations();
+			jQuery('.variations_form').trigger('check_variations');
     	});
    </script>    
   <?php      

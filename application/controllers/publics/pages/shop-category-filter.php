@@ -54,7 +54,8 @@ class Shop_Category_Filter extends Category {
         // parent::instance()->is_shop_cat_filter = true;
         // parent::instance()->filter_prefix ='sc_';
 
-        add_filter('eowbc_table_view_forced',function(){
+        // add_filter('eowbc_table_view_forced',function(){
+        add_filter('sp_tv_category_enabled',function(){
             return true;
         });
         /*

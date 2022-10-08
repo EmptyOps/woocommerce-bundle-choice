@@ -68,12 +68,12 @@ if ( $woo_dropdown_attribute_html_data['args']['sp_variations_swatches_cat_displ
 }
 
 $template = array(
-    'type' => 'div',
-    'class' => $div_class,
-    'child' => array(
-        array(
+    // 'type' => 'div',
+    // 'class' => $div_class,
+    // 'child' => array(
+    //     array(
             'type' => 'ul',
-            'class' => $ul_class . $variable_item_wrapper_data['class_wrapper'],
+            'class' => $ul_class . $variable_item_wrapper_data['class_wrapper'] ." ". $div_class,
             'attr' => array( 'data-attribute_name' => esc_attr( wc_variation_attribute_name( $attribute ) ),'data-attribute_values' =>wc_esc_json( wp_json_encode( array_values( $woo_dropdown_attribute_html_data['options'] ) ) ), 'data-type'=>$woo_dropdown_attribute_html_data['type'],'role' => $ul_role, 'aria-label' => $ul_label),
             'child'=>array(
                 array(
@@ -85,7 +85,7 @@ $template = array(
                     'child'=>$template,
                 ),
             )
-        )
-    )
+        // )
+    // )
 );
 

@@ -163,7 +163,7 @@ class SP_WBC_Variations extends SP_Variations {
 	}
 
 	// for reference see wc_get_product_attachment_props function source code 
-	public function get_product_attachment_props( $attachment_id, $product_id = false, $type = null ) {
+	public function get_product_attachment_props( $attachment_id, $product_id = false, $type = null, $strict = true ) {
 
 		// wbc_pr( 'attachment_id >>>>>>>>>>>>> ' );
 		// wbc_pr( $attachment_id );
@@ -243,7 +243,23 @@ class SP_WBC_Variations extends SP_Variations {
 
 		}
 
-		$attachment = get_post( $attachment_id );
+
+		$attachment = null;
+
+		if ($strict) {
+
+			$attachment = get_post( $attachment_id );
+
+		} else {
+
+			if (!$strict) {
+
+				$props['url']                         = wc_placeholder_img_src();
+				$props['full_src']                    = $props['url'];
+				$props['src']                         = $props['url'];
+			}
+
+		}
 
 		if ( $attachment ) {
 
@@ -633,7 +649,10 @@ class SP_WBC_Variations extends SP_Variations {
 		if ( !empty($data['sp_variations']["form"]) ) {
 
 			foreach ( $gallery_images as $i=>$value ) {
-				
+				// echo ">>>>>>>>>>> gallery_images (wbc-variations)";
+				// wbc_pr($value['value']);
+				// wbc_pr($value['type']);
+		
 				if ( is_array($value) ) {
 
 					$image = $this->get_product_attachment_props( $value['value'],false,$value['type']);
@@ -1770,6 +1789,9 @@ class SP_WBC_Variations extends SP_Variations {
 			            array_push( $data['gallery_images_template_data']['attachment_ids_loop_classes'][$index], '' );
 			        }
 
+			        //ACTIVE_TODO right now we are creating class wrapper per image but it should be only once for the entire gallery_images wrapper. so we need to remove that unnecessary data from $image and fix that as soon as we get chance. 
+			        $data['gallery_images_template_data']['class_wrapper'] = $image['class_wrapper'];
+
 			        //ACTIVE_TODO publish hook if required 
 			        // $data['gallery_images_template_data']['attachment_ids_loop_classes'][$id] = apply_filters( '', $classes, $id, $image );
 			        
@@ -1802,6 +1824,9 @@ class SP_WBC_Variations extends SP_Variations {
 			            array_push( $data['gallery_images_template_data']['attachment_ids_loop_classes'][$id], '' );
 			        }
 
+			        //ACTIVE_TODO right now we are creating class wrapper per image but it should be only once for the entire gallery_images wrapper. so we need to remove that unnecessary data from $image and fix that as soon as we get chance. 
+			        $data['gallery_images_template_data']['class_wrapper'] = $data['gallery_images_template_data']['attachment_ids_loop_image'][$index]['class_wrapper'];
+			        
 			        //ACTIVE_TODO publish hook if required 
 			        // $data['gallery_images_template_data']['attachment_ids_loop_classes'][$id] = apply_filters( '', $classes, $id, $image );
 			        

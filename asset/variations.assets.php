@@ -296,7 +296,7 @@ if(is_shop() || is_product_category()) {
 	        float: left;
 	        width: 100%;
 	    }
-	    .spui_color_widget ul {
+	    .spui_color_widget {
 	        float: left;
 	        width: 100%;
 	        display: flex;
@@ -306,7 +306,7 @@ if(is_shop() || is_product_category()) {
 	        padding: 0;
 	        margin: 0;
 	    }
-	    .spui_color_widget ul li{
+	    .spui_color_widget li{
 	        margin: 4px;
 	        padding: 2px;
 	        position: relative;
@@ -319,7 +319,7 @@ if(is_shop() || is_product_category()) {
 	        cursor: pointer;
 	    }
 
-	    .spui_color_widget ul li .spui_color_variable_item_contents {
+	    .spui_color_widget li .spui_color_variable_item_contents {
 	        float: left;
 	        -webkit-box-orient: vertical;
 	        -webkit-box-direction: normal;
@@ -335,10 +335,10 @@ if(is_shop() || is_product_category()) {
 	        position: relative;
 	        width: 100%;
 	    }
-	    .spui_color_widget ul li.spui_color_variable_item.selected {
+	    .spui_color_widget li.spui_color_variable_item.selected {
 	        box-shadow: 0 0 0 2px #000000;
 	    }
-	    .spui_color_widget ul li .spui_color_variable_item_contents span.spui_variable_item_span_color {
+	    .spui_color_widget li .spui_color_variable_item_contents span.spui_variable_item_span_color {
 	        display: block;
 	        height: 100%;
 	        width: 100%;
@@ -354,6 +354,8 @@ if(is_shop() || is_product_category()) {
             margin: 0;
             padding: 0;
             width: 100%;
+            -webkit-box-shadow: none !important;
+            box-shadow: none !important;
         }
         
         form.variations_form table.variations tbody {
@@ -447,7 +449,7 @@ if(is_shop() || is_product_category()) {
 	        float: left;
 	        width: 100%;
 	    }
-	    .spui_button_widget ul{
+	    .spui_button_widget {
 	        -webkit-box-pack: start;
 	        -ms-flex-pack: start;
 	        display: -webkit-box;
@@ -460,7 +462,7 @@ if(is_shop() || is_product_category()) {
 	        margin: 0;
 	        padding: 0;
 	    }
-	    .spui_button_widget ul li{
+	    .spui_button_widget li{
 	        margin: 4px;
 	        padding: 2px;
 	        position: relative;
@@ -474,10 +476,10 @@ if(is_shop() || is_product_category()) {
 	        box-shadow: 0 0 0 1px #a8a8a8;
 	        cursor: pointer;
 	    }
-	    .spui_button_widget ul li.spui_button_variable_item.selected{
+	    .spui_button_widget li.spui_button_variable_item.selected{
 	        box-shadow: 0 0 0 2px #000000;
 	    }
-	    .spui_button_widget ul li .spui_button_variable_item_contents {
+	    .spui_button_widget li .spui_button_variable_item_contents {
 	        -webkit-box-orient: vertical;
 	        -webkit-box-direction: normal;
 	        -webkit-box-pack: center;
@@ -492,7 +494,7 @@ if(is_shop() || is_product_category()) {
 	        position: relative;
 	        width: 100%;
 	    }
-	    .spui_button_widget ul li .spui_button_variable_item_contents span.spui_variable_item_span_button {
+	    .spui_button_widget li .spui_button_variable_item_contents span.spui_variable_item_span_button {
 	        padding: 0 5px;
 	    }
 
@@ -523,7 +525,7 @@ if(is_shop() || is_product_category()) {
 	        float: left;
 	        width: 100%; 
 	    }
-	    .spui_color_icon_widget ul{
+	    .spui_color_icon_widget {
 	        -webkit-box-pack: start;
 	        -ms-flex-pack: start;
 	        display: -webkit-box;
@@ -536,7 +538,7 @@ if(is_shop() || is_product_category()) {
 	        margin: 0;
 	        padding: 0; 
 	    }
-	    .spui_color_icon_widget ul li.spui_color_icon_variable_item{
+	    .spui_color_icon_widget li.spui_color_icon_variable_item{
 	        margin: 4px;
 	        padding: 2px;
 	        position: relative;
@@ -550,7 +552,7 @@ if(is_shop() || is_product_category()) {
 	        box-shadow: 0 0 0 1px #a8a8a8;
 	        cursor: pointer;
 	    }
-	    .spui_color_icon_widget ul li.spui_color_icon_variable_item .spui_color_icon_variable_item_contents{
+	    .spui_color_icon_widget li.spui_color_icon_variable_item .spui_color_icon_variable_item_contents{
 	        webkit-box-orient: vertical;
 	        -webkit-box-direction: normal;
 	        -webkit-box-pack: center;
@@ -565,15 +567,15 @@ if(is_shop() || is_product_category()) {
 	        position: relative;
 	        width: 100%;
 	    }
-	    .spui_color_icon_widget ul li.spui_color_icon_variable_item .spui_color_icon_variable_item_contents img.spui_variable_item_image {
+	    .spui_color_icon_widget li.spui_color_icon_variable_item .spui_color_icon_variable_item_contents img.spui_variable_item_image {
 	        display: block;
 	        max-width: 100%;
 	        margin: auto;
 	    }
-	    .spui_color_icon_widget ul li.spui_color_icon_variable_item.selected {
+	    .spui_color_icon_widget li.spui_color_icon_variable_item.selected {
 	        box-shadow: 0 0 0 2px #000000;
 	    }
-	    .spui_color_icon_widget ul li.spui_color_icon_variable_item.selected .spui_color_icon_variable_item_contents::before{
+	    .spui_color_icon_widget li.spui_color_icon_variable_item.selected .spui_color_icon_variable_item_contents::before{
 	        background-image: var(--spui-check);
 	        background-position: 50%;
 	        background-repeat: no-repeat;
@@ -584,7 +586,7 @@ if(is_shop() || is_product_category()) {
 	        position: absolute;
 	        width: 100%;
 	    }
-	    .spui_color_icon_widget ul li.spui_color_icon_variable_item.disabled .spui_color_icon_variable_item_contents::before{
+	    .spui_color_icon_widget li.spui_color_icon_variable_item.disabled .spui_color_icon_variable_item_contents::before{
 	        background-image: var(--spui-dis-check);
 	        background-position: 50%;
 	        background-repeat: no-repeat;
@@ -619,7 +621,7 @@ if(is_shop() || is_product_category()) {
 
 <script>
 	<?php 
-	if(!has_action('woocommerce_before_variations_form')) {
+	if(is_product() && !has_action('woocommerce_before_variations_form')) {
 	?>
 		jQuery(".variations_form").before('<span id="wbc_variation_toggle" class="ui raised segment"><?php _e($toggle_text); ?><i class="caret up icon" style="text-align: center;line-height: 1em;"></i></span>');	
 
@@ -627,8 +629,10 @@ if(is_shop() || is_product_category()) {
 	
 	jQuery(document).ready(function($){
 		// ACTIVE_TODO below sections might be of use so keeping it on for now, but we must double confirm like legacy woo js layers provide full dropdown template supports. but i think still sementic specific matters need to be managed because we are using sementic templates.
-			do we need to disable the blow change event implimention -- to h
-			 	eithere way blowo class would be loading only when the dropdown template of simentic is used on item page -- to h
+			// ACTIVE_TODO_OC_START
+			// do we need to disable the blow change event implimention -- to h
+			//  	eithere way blowo class would be loading only when the dropdown template of simentic is used on item page -- to h
+			// ACTIVE_TODO_OC_END 	
 		jQuery(".dropdown").dropdown().on('change',function(){
 			var target_selector =  $('#'+$(this).find('input[type="hidden"]').data('id'));
 			target_selector.val($(this).find('input[type="hidden"]').val());
@@ -639,8 +643,8 @@ if(is_shop() || is_product_category()) {
 		});
 
 
-		ACTIVE_TODO we shoud simply put this class on the perticuler template html dom and coment the code below -- to h & -- to s
-			for now lats comment the code but after confirming with t -- to t
+		// ACTIVE_TODO we shoud simply put this class on the perticuler template html dom and coment the code below -- to h & -- to s
+			// for now lats comment the code but after confirming with t -- to t
 		if($('table.variations tbody>tr').length>0){
 			$('table.variations').addClass('ui raised segment');	
 		}
@@ -679,14 +683,14 @@ if(is_shop() || is_product_category()) {
 	});
 </script>
 
-/*---TOOLTIP--- @tejas*/
-/*----JS----*/
+<!-- /*---TOOLTIP--- @tejas*/
+/*----JS----*/ -->
 <script type="text/javascript">
 jQuery( document ).ready(function() {
     jQuery('[data-toggle="popover"]').popover(); 
 });
 </script>
-/*----CSS---*/
+<!-- /*----CSS---*/ -->
 <style type="text/css">
 	:root{
         --spui_tooltip_bg:#8224e3;

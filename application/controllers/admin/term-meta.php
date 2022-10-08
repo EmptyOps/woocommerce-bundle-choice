@@ -493,6 +493,12 @@ class Term_Meta {
 
 		add_action( 'woocommerce_after_edit_attribute_fields',array($this,'edit_taxonomy_form'), 10, 1 );
 		add_action( 'woocommerce_after_add_attribute_fields',array($this,'add_taxonomy_form'), 10, 1 );
+
+		add_action( 'woocommerce_after_edit_attribute_fields',array($this,'edit_taxonomy_form_feild_1'), 10, 1 );
+		add_action( 'woocommerce_after_add_attribute_fields',array($this,'add_taxonomy_form_feild_1'), 10, 1 );
+		
+		add_action( 'woocommerce_after_edit_attribute_fields',array($this,'edit_taxonomy_form_feild_2'), 10, 1 );
+		add_action( 'woocommerce_after_add_attribute_fields',array($this,'add_taxonomy_form_feild_1'), 10, 1 );
 	}
 
 	public function add_taxonomy_form() {
@@ -502,18 +508,6 @@ class Term_Meta {
 				<label for="tag-slug">Ribbon Color</label>
 				<input name="wbc_color" id="wbc_color" type="color" class="wbc_color"  style="width: 94%;" value=''>	
 				<p>Choose a color for the ribbon on variation form.</p>
-			</div>	
-
-			<div class="form-field term-slug-wrap">				
-				<label for="tag-slug">Display Limit(Loopbox)</label>
-				<input name="sp_variations_swatches_cat_display_limit" id="sp_variations_swatches_cat_display_limit" type="number" value="<?php echo wbc()->config->product_variations_configs()['sp_variations_swatches_cat_display_limit']; ?>" class="sp_variations_swatches_cat_display_limit"  style="width: 94%;">	
-				<p>Limit number of swatches options to display on shop/category page Loopbox.</p>
-			</div>	
-
-			<div class="form-field term-slug-wrap">				
-				<label for="tag-slug">Show on shop page(Loopbox)</label>
-				<input name="sp_variations_swatches_show_on_shop_page" id="sp_variations_swatches_show_on_shop_page" type="checkbox" value="1" checked class="sp_variations_swatches_show_on_shop_page"  style="width: 94%;" >	
-				<p>Show swatches options for this attribute on shop/category page Loopbox.</p>
 			</div>	
 
 		<?php
@@ -540,6 +534,42 @@ class Term_Meta {
 				</td>
 			</div>	
 
+		<?php
+		echo ob_get_clean();
+	}
+
+	public function save_taxonomy_form($id, $data) {
+		if(!empty(wbc()->sanitize->post('wbc_color'))) {
+			update_term_meta($id,'wbc_ribbon_color',wbc()->sanitize->post('wbc_color'));
+		}
+
+	}
+
+
+	public function add_taxonomy_form_feild_1() {
+		ob_start();
+		?>
+			<div class="form-field term-slug-wrap">				
+				<label for="tag-slug">Display Limit(Loopbox)</label>
+				<input name="sp_variations_swatches_cat_display_limit" id="sp_variations_swatches_cat_display_limit" type="number" value="<?php echo wbc()->config->product_variations_configs()['sp_variations_swatches_cat_display_limit']; ?>" class="sp_variations_swatches_cat_display_limit"  style="width: 94%;">	
+				<p>Limit number of swatches options to display on shop/category page Loopbox.</p>
+			</div>	
+
+		<?php
+		echo ob_get_clean();
+	}
+
+	public function edit_taxonomy_form_feild_1() {	
+		
+		if(empty(wbc()->sanitize->get('edit'))) return;
+		
+		$taxonomy_id = wbc()->sanitize->get('edit');
+		/*wbc()->load->model('category-attribute');
+		eo\wbc\model\Category_Attribute::instance()->get_attribute($taxonomy_id);*/
+		
+		ob_start();
+		?>
+			
 			<?php 
 				$display_limit = get_term_meta( $taxonomy_id ,'sp_variations_swatches_cat_display_limit',true);
 				if (empty($display_limit)) {
@@ -556,6 +586,43 @@ class Term_Meta {
 				</td>
 			</div>
 
+		<?php
+		echo ob_get_clean();
+	}
+
+	public function save_taxonomy_form_feild_1($id, $data) {
+		
+		if(!empty(wbc()->sanitize->post('sp_variations_swatches_cat_display_limit'))) {
+			update_term_meta($id,'sp_variations_swatches_cat_display_limit',wbc()->sanitize->post('sp_variations_swatches_cat_display_limit'));
+		}	
+
+
+	}
+
+
+	public function add_taxonomy_form_feild_2() {
+		ob_start();
+		?>
+			<div class="form-field term-slug-wrap">				
+				<label for="tag-slug">Show on shop page(Loopbox)</label>
+				<input name="sp_variations_swatches_show_on_shop_page" id="sp_variations_swatches_show_on_shop_page" type="checkbox" value="1" checked class="sp_variations_swatches_show_on_shop_page"  style="width: 94%;" >	
+				<p>Show swatches options for this attribute on shop/category page Loopbox.</p>
+			</div>	
+
+		<?php
+		echo ob_get_clean();
+	}
+
+	public function edit_taxonomy_form_feild_2() {	
+		
+		if(empty(wbc()->sanitize->get('edit'))) return;
+		
+		$taxonomy_id = wbc()->sanitize->get('edit');
+		/*wbc()->load->model('category-attribute');
+		eo\wbc\model\Category_Attribute::instance()->get_attribute($taxonomy_id);*/
+		
+		ob_start();
+		?>
 			<?php 
 				$show_on_shop_page = get_term_meta( $taxonomy_id ,'sp_variations_swatches_show_on_shop_page',true);
 				if (empty($show_on_shop_page)) {
@@ -575,15 +642,8 @@ class Term_Meta {
 		echo ob_get_clean();
 	}
 
-	public function save_taxonomy_form($id, $data) {
-		if(!empty(wbc()->sanitize->post('wbc_color'))) {
-			update_term_meta($id,'wbc_ribbon_color',wbc()->sanitize->post('wbc_color'));
-		}
-
-		if(!empty(wbc()->sanitize->post('sp_variations_swatches_cat_display_limit'))) {
-			update_term_meta($id,'sp_variations_swatches_cat_display_limit',wbc()->sanitize->post('sp_variations_swatches_cat_display_limit'));
-		}	
-
+	public function save_taxonomy_form_feild_2($id, $data) {
+		
 		if(!empty(wbc()->sanitize->post('sp_variations_swatches_show_on_shop_page'))) {
 			update_term_meta($id,'sp_variations_swatches_show_on_shop_page',wbc()->sanitize->post('sp_variations_swatches_show_on_shop_page'));
 		}else{
