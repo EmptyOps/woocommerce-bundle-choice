@@ -155,8 +155,9 @@ class SP_Model_Loop_Gallery_Zoom extends Eowbc_Base_Model_Publics {
 				$ui = array(
 					'type'=>'div',
 					'class'=>$classes,
-					'child'=>$html
-				);
+					'child'=>$html,
+					'id'=>'sp_variations_loop_gallery_images_zoom_'.$images_data['gallery_images_template_data']['product_id'],
+				); 
 				//\sp\theme\view\ui\builder\Page_Builder::instance()->build_page_widgets($ui,'sp_variations_gallery_images_zoom_container');
 
 

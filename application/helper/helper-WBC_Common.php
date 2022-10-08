@@ -156,7 +156,7 @@ class WBC_Common {
 
 		if( !is_array($ar) )
 		{
-			echo 'the common helper pr function says the var provided is not an array. still var dumping.<br><br>';
+			// echo 'the common helper pr function says the var provided is not an array. still var dumping.<br><br>';
 			$this->var_dump($ar,$force_debug,$die);
 			return false;
 		}
