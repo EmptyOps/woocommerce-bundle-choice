@@ -3307,6 +3307,8 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations{
 
         if (hasGallery) {
 
+            console.log("gallery_images process_zoom_template if hasgallery");
+            console.log(_this.#$zoom_container);
            _this.#$zoom_container.html(zoom_inner_html);
        
         } else {
