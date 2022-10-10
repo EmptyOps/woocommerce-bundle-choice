@@ -3307,14 +3307,16 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations{
 
         if (hasGallery) {
 
-          _this.#$zoom_container.html(zoom_inner_html);
+           _this.#$zoom_container.html(zoom_inner_html);
        
         } else {
          
+            console.log("gallery_images process_zoom_template else hasgallery");
+
           _this.#$zoom_container.html('');
         } //this._element.trigger('woo_variation_gallery_init', [this, images]);
 
-        // ACTIVE_TODO/TODO it is better heirachically, if the click is bind on our img-item class stuctor only, and then we recive here that element only in above function Arguments.
+        // ACTIVE_TODO/TODO it is better hierarchically, if the click is bind on our img-item class stuctor only, and then we receive here that element only in above function Arguments.
         //     -- and than we can simply get type from element data-type which is mentanable due to well maintained heirachy insted of below index based image data read which is bound to change.
         var process_zoom_template_callback = null;
         window.document.splugins.events.api.notifyAllObservers( 'gallery_images', 'process_zoom_template', {type:images[index].extra_params_org.type,image:images[index]}, process_zoom_template_callback, _this.#$base_container ); 
@@ -4464,7 +4466,7 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
             // window.document.splugins.events.api.notifyAllObservers( 'gallery_images_feed_page', 'zoom_area_hover_in', {type:images[index].extra_params_org.type,image:images[index]}, zoom_area_hover_in_callback, super.get_base_container() );            
             window.document.splugins.events.api.notifyAllObservers( 'gallery_images_feed_page', 'zoom_area_hover_in', {type:images[index].extra_params_org.type, 
                 hover_index_type: window.document.splugins.common._o(images,_this.#$configs.options.tiny_features_option_ui_loop_box_hover_media_index) ? images[_this.#$configs.options.tiny_features_option_ui_loop_box_hover_media_index].extra_params_org.type : null
-            , image:images[index]}, zoom_area_hover_in_callback, super.get_base_container(), _this.#$base_container );            
+            , image:images[index]}, zoom_area_hover_in_callback, super.get_base_container(), super.get_base_container() );            
 
         } 
 
@@ -4490,7 +4492,7 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
         console.log(index);       
 
         var zoom_area_hover_out_callback = null;
-        window.document.splugins.events.api.notifyAllObservers( 'gallery_images_feed_page', 'zoom_area_hover_out', {type:images[index].extra_params_org.type,image:images[index]}, zoom_area_hover_out_callback, super.get_base_container(), _this.#$base_container );       
+        window.document.splugins.events.api.notifyAllObservers( 'gallery_images_feed_page', 'zoom_area_hover_out', {type:images[index].extra_params_org.type,image:images[index]}, zoom_area_hover_out_callback, super.get_base_container(), super.get_base_container() );       
                 
     }  
 
