@@ -3317,7 +3317,7 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations{
         // ACTIVE_TODO/TODO it is better heirachically, if the click is bind on our img-item class stuctor only, and then we recive here that element only in above function Arguments.
         //     -- and than we can simply get type from element data-type which is mentanable due to well maintained heirachy insted of below index based image data read which is bound to change.
         var process_zoom_template_callback = null;
-        window.document.splugins.events.api.notifyAllObservers( 'gallery_images', 'process_zoom_template', {type:images[index].extra_params_org.type,image:images[index]}, process_zoom_template_callback ); 
+        window.document.splugins.events.api.notifyAllObservers( 'gallery_images', 'process_zoom_template', {type:images[index].extra_params_org.type,image:images[index]}, process_zoom_template_callback, _this.#$base_container ); 
 
     }
 
@@ -3765,14 +3765,14 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations{
             console.log("sp_slzm_refresh_zoom notification");
 
             var sp_slzm_refresh_zoom_callback = null;
-            window.document.splugins.events.api.notifyAllObservers( 'gallery_images', 'sp_slzm_refresh_zoom', {}, sp_slzm_refresh_zoom_callback );
+            window.document.splugins.events.api.notifyAllObservers( 'gallery_images', 'sp_slzm_refresh_zoom', {}, sp_slzm_refresh_zoom_callback, _this.#$base_container );
 
         }
 
         // ACTIVE_TODO/TODO it is better heirachically, if the click is bind on our img-item class stuctor only, and then we recive here that element only in above function Arguments.
         //     -- and than we can simply get type from element data-type which is mentanable due to well maintained heirachy insted of below index based image data read which is bound to change.
         var slider_thumb_click_callback = null;
-        window.document.splugins.events.api.notifyAllObservers( 'gallery_images', 'slider_thumb_click', {type:_this.#data.current_variation.variation_gallery_images[index].extra_params_org.type,image:_this.#data.current_variation.variation_gallery_images[index]}, slider_thumb_click_callback ); 
+        window.document.splugins.events.api.notifyAllObservers( 'gallery_images', 'slider_thumb_click', {type:_this.#data.current_variation.variation_gallery_images[index].extra_params_org.type,image:_this.#data.current_variation.variation_gallery_images[index]}, slider_thumb_click_callback, _this.#$base_container ); 
         
     }
 
@@ -3892,7 +3892,7 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations{
             console.log("sp_slzm_init notification");
 
             var sp_slzm_init_callback = null;
-            window.document.splugins.events.api.notifyAllObservers( 'gallery_images', 'sp_slzm_init', {} , sp_slzm_init_callback);
+            window.document.splugins.events.api.notifyAllObservers( 'gallery_images', 'sp_slzm_init', {} , sp_slzm_init_callback, _this.#$base_container);
         }
         
     }
@@ -4458,7 +4458,7 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
             console.log('super.get_base_container()');
             console.log(super.get_base_container());
             var zoom_area_hover_in_callback = null;
-            window.document.splugins.events.api.notifyAllObservers( 'gallery_images_feed_page', 'zoom_area_hover_in', {type:images[index].extra_params_org.type,image:images[index]}, zoom_area_hover_in_callback, super.get_base_container() );            
+            window.document.splugins.events.api.notifyAllObservers( 'gallery_images_feed_page', 'zoom_area_hover_in', {type:images[index].extra_params_org.type,image:images[index]}, zoom_area_hover_in_callback, super.get_base_container(), _this.#$base_container );            
 
         } 
 
@@ -4484,7 +4484,7 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
         console.log(index);       
 
         var zoom_area_hover_out_callback = null;
-        window.document.splugins.events.api.notifyAllObservers( 'gallery_images_feed_page', 'zoom_area_hover_out', {type:images[index].extra_params_org.type,image:images[index]}, zoom_area_hover_out_callback, super.get_base_container() );       
+        window.document.splugins.events.api.notifyAllObservers( 'gallery_images_feed_page', 'zoom_area_hover_out', {type:images[index].extra_params_org.type,image:images[index]}, zoom_area_hover_out_callback, super.get_base_container(), _this.#$base_container );       
                 
     }  
 
