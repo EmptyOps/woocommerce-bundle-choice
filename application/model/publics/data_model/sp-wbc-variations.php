@@ -657,7 +657,7 @@ class SP_WBC_Variations extends SP_Variations {
 
 					$image = $this->get_product_attachment_props( $value['value'],false,$value['type']);
 
-					$variation_get_max_purchase_quantity['variation_gallery_images'][ $i ] = apply_filters('sp_variations_available_variation_image_attachment_props', $image, $value, $value['key'], $variation );
+					$variation_get_max_purchase_quantity['variation_gallery_images'][ $i ] = apply_filters('sp_variations_available_variation_image_attachment_props', $image, $value, $value['key'], $variation, $instance );
 		// 			echo ">>>>>>>>>>> gallery_images_finel".$i;
 		// wbc_pr($variation_get_max_purchase_quantity['variation_gallery_images'][ $i ]);
 
