@@ -4457,8 +4457,14 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
 
             console.log('super.get_base_container()');
             console.log(super.get_base_container());
+            console.log('images[index].extra_params_org.type');
+            console.log(images[index].extra_params_org);
             var zoom_area_hover_in_callback = null;
-            window.document.splugins.events.api.notifyAllObservers( 'gallery_images_feed_page', 'zoom_area_hover_in', {type:images[index].extra_params_org.type,image:images[index]}, zoom_area_hover_in_callback, super.get_base_container(), _this.#$base_container );            
+
+            // window.document.splugins.events.api.notifyAllObservers( 'gallery_images_feed_page', 'zoom_area_hover_in', {type:images[index].extra_params_org.type,image:images[index]}, zoom_area_hover_in_callback, super.get_base_container() );            
+            window.document.splugins.events.api.notifyAllObservers( 'gallery_images_feed_page', 'zoom_area_hover_in', {type:images[index].extra_params_org.type, 
+                hover_index_type: window.document.splugins.common._o(images,_this.#$configs.options.tiny_features_option_ui_loop_box_hover_media_index) ? images[_this.#$configs.options.tiny_features_option_ui_loop_box_hover_media_index].extra_params_org.type : null
+            , image:images[index]}, zoom_area_hover_in_callback, super.get_base_container(), _this.#$base_container );            
 
         } 
 
