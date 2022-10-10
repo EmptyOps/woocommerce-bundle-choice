@@ -4322,9 +4322,10 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
             return false;
         }        
         
+        console.log('zoom_area_hover_in_listener()');
         // _this.#$zoom_container.on("mouseenter","",function() {
-        super.get_zoom_container().on("mouseenter","",function() {
-
+        super.get_zoom_container().hover(function() {
+            
             _this.#on_zoom_area_hover_in(type);            
         });
 
