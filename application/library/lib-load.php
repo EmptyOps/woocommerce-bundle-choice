@@ -54,7 +54,7 @@ if(!class_exists('WBC_Loader')) {
 			}			
 		}
  
-		private function asset_load_instantly($path,$param,$version,$load_instantly,$is_prefix_handle,$localize_var,$localize_var_val,$in_footer,$is_absolute_url,$singleton_function){
+		private function asset_load_instantly($path,$param,$version,$load_instantly,$is_prefix_handle,$localize_var,$localize_var_val,$in_footer,$is_absolute_url,$singleton_function,$_path){
 
 			 // ACTIVE_TODO below function is temporary
 			$this->asset('localize_data',$path,$param,$version,$load_instantly,$is_prefix_handle,$localize_var,$localize_var_val,$in_footer,$is_absolute_url,$singleton_function);
@@ -77,7 +77,16 @@ if(!class_exists('WBC_Loader')) {
 		}
 
 		public function asset($type,$path,$param = array(),$version="",$load_instantly=false,$is_prefix_handle=false,$localize_var=null,$localize_var_val=null,$in_footer = false,$is_absolute_url = false,$singleton_function = null) {
-			
+		
+			// NOTE: load_instantly solution provided here is for expesional scenarios only. and for the most of the users on the free support tickets and so on we must fix the actual loading problems to ensure that for most of the scenarios not even platforms the standard solution work and this solution is to be used hardcoded and for temporary periods only for some specific user environments and in the quick support requirements.
+			// NOTE: this solution assumes the loading sequance of caller, so it must be handled carefully and clearly by the loading sequances of the caller.
+			// 	NOTE: so it is realy importnt that there is not even single hook in the non load_instantly layers or section here in this function or in the dependent function of this function
+
+
+			// hardcoded override for the load instantly option
+				// TODO whenever it become necessory then make even this flag solution dynamic instead of managing hardcoded.
+			// $load_instantly = true;
+
 			if(!apply_filters('wbc_load_asset_filter',true,$type,$path,$param,$version,$load_instantly)) {
 				return true;
 			}
@@ -148,14 +157,14 @@ if(!class_exists('WBC_Loader')) {
 
 						if(empty($in_footer)){
 
-							wbc_pr("in_footer inner if");
-							$this->asset_load_instantly($path,$param,$version,$load_instantly,$is_prefix_handle,$localize_var,$localize_var_val,$in_footer,$is_absolute_url,$singleton_function);
+							// wbc_pr("in_footer inner if");
+							$this->asset_load_instantly($path,$param,$version,$load_instantly,$is_prefix_handle,$localize_var,$localize_var_val,$in_footer,$is_absolute_url,$singleton_function,$_path);
 						}else{
 
-							wbc_pr("in_footer inner else");							
+							// wbc_pr("in_footer inner else");							
 							add_action('wp_footer',function() use($path,$param,$version,$load_instantly,$is_prefix_handle,$localize_var,$localize_var_val,$in_footer,$is_absolute_url,$singleton_function){
 
-								$this->asset_load_instantly($path,$param,$version,$load_instantly,$is_prefix_handle,$localize_var,$localize_var_val,$in_footer,$is_absolute_url,$singleton_function);
+								$this->asset_load_instantly($path,$param,$version,$load_instantly,$is_prefix_handle,$localize_var,$localize_var_val,$in_footer,$is_absolute_url,$singleton_function,$_path);
 							}, 5);
 						}
 						
@@ -199,6 +208,11 @@ if(!class_exists('WBC_Loader')) {
 					require_once $_path;
 					break;
 				case 'localize':
+
+					if($load_instantly) {
+
+						return $this->asset('localize_data',$path,$param,$version,$load_instantly,$is_prefix_handle,$localize_var,$localize_var_val,$in_footer,$is_absolute_url,$singleton_function);
+					}
 
 					// wbc_pr( "localize " . $_handle );	
 					// wbc_pr( $param );	
