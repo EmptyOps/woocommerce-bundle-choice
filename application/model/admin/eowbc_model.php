@@ -68,7 +68,7 @@ class Eowbc_Model {
 							// TODO implement
 						} elseif( $fv['save_as'] == "post_meta" ) {
 
-							if( !isset($save_as_data['post_meta']) ) {
+							if( !isset($save_as_data['post_meta']) and !empty($args['id']) ) {
 
 								// NOTE: id is standard column name that we use for our options module based simple entity storage, so for the legacy admin flows also where necessary we can simply use the same where the necessity arise to maintain one uniqid and I think it will be almost always. 
 								$save_as_data['post_meta'] = get_post_meta( $args['id'], $args['page_section'].'_data', true );	
@@ -76,8 +76,10 @@ class Eowbc_Model {
 						}
 
 						if(empty($form_definition[$key]["form"][$fk]["force_value"])){
+							-- need to mac us of data mapping here and in below statement as applicabel.
 							$form_definition[$key]["form"][$fk]["value"] = ( isset($save_as_data['post_meta'][$fk]) ? $save_as_data['post_meta'][$fk] : ( isset($form_definition[$key]["form"][$fk]["value"]) ? $form_definition[$key]["form"][$fk]["value"] : '' ) );		
 
+							-- am melu tu /woo-bundle-choice/application/model/publics/data_model/sp-wbc-variations.php: line 569
 							// ACTIVE_TODO/TODO implement 
 							if( !empty($args['is_convert_das_to_array'])){
 								
