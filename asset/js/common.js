@@ -3307,6 +3307,8 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations{
 
         if (hasGallery) {
 
+            console.log("gallery_images process_zoom_template if hasgallery");
+            console.log(_this.#$zoom_container);
            _this.#$zoom_container.html(zoom_inner_html);
        
         } else {
@@ -4322,9 +4324,10 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
             return false;
         }        
         
+        console.log('zoom_area_hover_in_listener()');
         // _this.#$zoom_container.on("mouseenter","",function() {
-        super.get_zoom_container().on("mouseenter","",function() {
-
+        super.get_zoom_container().hover(function() {
+            
             _this.#on_zoom_area_hover_in(type);            
         });
 
