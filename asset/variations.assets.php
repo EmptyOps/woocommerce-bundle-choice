@@ -742,16 +742,16 @@ jQuery( document ).ready(function() {
         --spui_tooltip_body:none;
     }
     .popover-header{
-        background: var(--spui_tooltip_bg);
-        color: var(--spui_tooltip_text);
-        font-size: var(--spui_tooltip_textsize);
+        background: var(--spui_tooltip_bg) !important;
+        color: var(--spui_tooltip_text) !important;
+        font-size: var(--spui_tooltip_textsize) !important;
         font-weight: normal;
-        padding: var(--spui_tooltip_padding);
+        padding: var(--spui_tooltip_padding) !important;
     }
     .popover-body{
         display: var(--spui_tooltip_body);
     }
     .bs-popover-auto[x-placement^=top]>.arrow::after, .bs-popover-top>.arrow::after{
-        border-top-color:var(--spui_tooltip_bg);
+        border-top-color:var(--spui_tooltip_bg) !important;
     }
 </style>
