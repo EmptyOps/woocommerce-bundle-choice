@@ -3026,9 +3026,13 @@ class EOWBC_Filter_Widget {
 		}
 
 		// filter_sub_confings
-		$filter_sub_confings = array();		
-		$filter_sub_confings['filter_setting_btnfilter_now'] = wbc()->options->get_option('filters_'.$filter_prefix.'filter_setting','filter_setting_btnfilter_now');
-		$filter_sub_confings['filter_setting_slider_max_lblsize'] = wbc()->options->get_option('filters_'.$filter_prefix.'filter_setting','filter_setting_slider_max_lblsize',6);		
+		$filters_sub_confings = array();		
+		$filters_sub_confings['filter_setting_btnfilter_now'] = wbc()->options->get_option('filters_'.$filter_prefix.'filter_setting','filter_setting_btnfilter_now');
+		$filters_sub_confings['filter_setting_slider_max_lblsize'] = _e((int)wbc()->options->get_option('filters_'.$filter_prefix.'filter_setting','filter_setting_slider_max_lblsize',6));	
+		$filters_sub_confings['filter_prefix'] = $this->filter_prefix;	
+
+		wbc()->load->asset('localize_data','filters_sub_confings',array("filters_sub_confings" => $filters_sub_confings));
+
 
 		wbc()->load->template('publics/filters/form', array("thisObj"=>$this,"current_category"=>$current_category,'filter_prefix'=>$this->filter_prefix,'filter_ui'=>$this)); 
 		do_action('eowbc_after_filter_widget');
