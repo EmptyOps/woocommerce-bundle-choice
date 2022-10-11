@@ -614,6 +614,42 @@ if(is_shop() || is_product_category()) {
 	        display: block !important;
 	    }
 	</style>
+
+	<!--LoopBox-->
+	<style type="text/css">
+		:root {
+			--spui_thumbnail_shop_asset_height: 300px;
+		}
+
+		.spui_thumbnail_shop_wrap{
+	        float: left;
+	        width: 100%;
+	    }
+	    .spui_thumbnail_shop_asset{
+	        float: left;
+	        width: 100%;
+	    }
+	    .spui_thumbnail_shop_asset img{
+	        min-height: var(--spui_thumbnail_shop_asset_height);
+	        max-height: var(--spui_thumbnail_shop_asset_height);
+	        display: block;
+	        margin: auto;
+	        -o-object-fit: contain;
+	        object-fit: contain;
+	    }
+	    .spui_thumbnail_shop_video{
+	        float: left;
+	        width: 100%;
+	    }
+	    .spui_thumbnail_shop_video video{
+	        min-height: var(--spui_thumbnail_shop_asset_height);
+	        max-height: var(--spui_thumbnail_shop_asset_height);
+	        display: block;
+	        margin: auto;
+	        -o-object-fit: contain;
+	        object-fit: contain;
+	    }
+	</style>
 	
 <?php	
 }
