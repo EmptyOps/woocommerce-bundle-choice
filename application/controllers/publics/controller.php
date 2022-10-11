@@ -71,4 +71,27 @@ class Controller extends \eo\wbc\controllers\Controller{
 
     }
 
+    public function init($args = array()) {
+
+        // the_post
+        $this->hook_action_the_post($args);
+
+    }
+
+    // NOTE: here we are following the same hook architecture that wp ecosystem have. so all applicable hook might be implemented in structured manner same as it is in wp ecosystem. so now all applicable class heirarchy of ours would follow this and implement necessary wp, woo, theme hooks and other plugins popular hooks, but mostly only the fundamental, significant and popular hooks. so it is now appicable to our this very class heirarchy of the mvc and actuallyy especially this class heirarchy will be mainly implementing this flow and other may need rarely or may not even need it. 
+    //     NOTE: and on this regard the very init function we have here in our controller of our mvc structure, would conflict with the wp init hook. but I think it would not since we are to name the hook function names in pattern hook_action_ and hook_filter_ for both type of hooks respectively. 
+    //         NOTE: and while we are implementing this flow it should be clearly kept in mind that the platform entity suppor we have added and we are yet to support that in detail in future should abstract our this flow and ensure that different platforms seemlessly adapt to it. and that might be counter inituitive or ocnflicting but with some mature and effective refactoring we can achieve this and even with very lite and efficient memory and execution foot print  if implement neatly and simply and clean refactoring and architecture. 
+    private function hook_action_the_post( $args = array() ) {
+
+        if (isset($args['child_obj']) and method_exists($args['child_obj'],'hook_action_the_post')) {
+           
+            add_action( 'the_post',function(/*$post_object*/) use($args){
+
+                // NOTE: from here whenever and if required then we can pass the hook args in hooked args element in our $args param, like we are doing in our selectron funciton heirarchy. 
+
+                $args['child_obj']->hook_action_the_post();
+            });
+        }
+    }
+
 }
