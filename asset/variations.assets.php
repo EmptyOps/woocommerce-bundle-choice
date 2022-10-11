@@ -349,6 +349,10 @@ if(is_shop() || is_product_category()) {
             float: left;
             width: 100%;
         }
+        form.variations_form a {
+		    width: 100%;
+		    float: left;
+		}
         form.variations_form table.variations {
             border: none !important;
             margin: 0;
@@ -366,7 +370,9 @@ if(is_shop() || is_product_category()) {
             width: 100%;
             float: left;
             display: table-row !important;
+        	border: none !important;
         }
+
         form.variations_form table.variations tbody th.label {
             display: none;
         }
