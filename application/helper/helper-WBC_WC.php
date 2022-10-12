@@ -672,4 +672,9 @@ class WBC_WC {
         }
     }
 
+    public function attribute_taxonomy_name_by_id($attribute_id) {
+
+        return wc_attribute_taxonomy_name_by_id((int) $attribute_id);
+    }
+
 }
