@@ -932,7 +932,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
         window.document.splugins.events.api.notifyAllObservers( 'filters', 'error', {}, error_callback, form_selector==null ? _this.$base_container : form_selector );
 	};
 
-	var update_result_count = function(render_container){
+	var update_result_count = function(render_container, data){
 
 		// create one function update_result_count in filters core js module -- to d done
 		// --	and then move the below code in that -- to d done
@@ -1083,14 +1083,14 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		else {
 			jQuery(".woocommerce-result-count").html('');	
 		}*/
-		update_result_count(render_container);
+		update_result_count(render_container, data);
 
 		//Replacing Product listings....
 		/*ACTIVE_TODO_OC_START
 		like vars under window object are moved filter core js module, similarly move below var also to filters js module and underneath below statement set it in the filters js module -- to d 
 		ACTIVE_TODO_OC_END*/
 		document.wbc_data = data;
-		window.document.splugins.document.wbc_data = data;
+		window.document.splugins.wbc_data = data;
 		
 		/*console.log(data);*/
 		/*ACTIVE_TODO_OC_START

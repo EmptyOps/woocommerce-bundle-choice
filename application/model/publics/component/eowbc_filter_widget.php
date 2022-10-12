@@ -2666,6 +2666,8 @@ class EOWBC_Filter_Widget {
 
 	public function get_widget() {
 		
+		wbc_pr("eowbc_filter_widget get_widget 1");
+
 		do_action('eowbc_before_filter_widget');
 
 		$this->_category = apply_filters('eowbc_filter_widget_category',$this->eo_wbc_get_category());
@@ -2763,6 +2765,8 @@ class EOWBC_Filter_Widget {
 			return !empty($filter_element[$prefix.'_fconfig_add_enabled']);
 		});
 
+		wbc_pr("eowbc_filter_widget get_widget 2");
+		
 		$filter =  apply_filters( 'eowbc_filter_widget_filters_post_clean',$filter,$prefix);
 		$this->__filters__=$filter;
 		$filter =  apply_filters( 'eowbc_filter_widget_filters',$filter,$prefix);
@@ -2826,9 +2830,9 @@ class EOWBC_Filter_Widget {
 
 		$non_adv_ordered_filter = apply_filters('custome_filter_widget_non_advance_filter',$non_adv_ordered_filter,$this->filter_prefix);
 
-		/*echo "non_adv_ordered_filter and adv_ordered_filter dump";
+		echo "non_adv_ordered_filter and adv_ordered_filter dump";
 		wbc()->common->pr($non_adv_ordered_filter);
-		wbc()->common->pr($adv_ordered_filter);*/
+		wbc()->common->pr($adv_ordered_filter);
 
 		?>
 		<!--Primary filter button that will only be visible on desktop/tablet-->
@@ -3061,13 +3065,16 @@ class EOWBC_Filter_Widget {
 		$this->filter_prefix = $filter_prefix;
 		$this->_category= !$this->is_shortcode_filter && !$this->is_shop_cat_filter ? apply_filters('eowbc_filter_widget_category',$this->eo_wbc_get_category()) : '';
 		
+		wbc_pr("eowbc_filter_widget init 1");
 		if(!empty($this->_category) or $this->is_shop_cat_filter or $this->is_shortcode_filter){
 		
 			if(get_option('eo_wbc_dropdown_filter',false) and !wp_is_mobile()) {
 
+				wbc_pr("eowbc_filter_widget init 2 if");
 				require_once 'includes/dropdown_filter.php';				
 
 			} else {					
+				wbc_pr("eowbc_filter_widget init 3 else");
 				$this->get_widget();				
 			}
 			
