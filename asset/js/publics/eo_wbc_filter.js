@@ -3257,18 +3257,18 @@ window.document.splugins.wbc.filter_sets.core = function( configs ) {
 
 		jQuery('.filter_setting_advance_two_tabs .item').on('click',function(event){
 
-			on_filter_set_click();
+			on_filter_set_click(this);
 		});
 
     	
     }
 
-    var on_filter_set_click = function() { 
+    var on_filter_set_click = function(element) { 
     
-    	filter_set_click();
+    	filter_set_click(element);
     }
 
-    var filter_set_click = function() {
+    var filter_set_click = function(element) {
 
 		console.log("filter_sets filter_set_click 11");
 
@@ -3293,17 +3293,17 @@ window.document.splugins.wbc.filter_sets.core = function( configs ) {
 
 	    $('[name="cat_filter__two_tabs"]').val($(this).data('category'));*/
 
-	    jQuery('[name="_current_category"]').val(jQuery(this).data('category'));
+	    jQuery('[name="_current_category"]').val(jQuery(element/*this*/).data('category'));
 
-	    jQuery('[name="_category"]').val(jQuery(this).data('category'));
+	    jQuery('[name="_category"]').val(jQuery(element/*this*/).data('category'));
 
 	    //cat_filter__two_tabs
 	    
 	    $('.filter_setting_advance_two_tabs .item').removeClass('active');
 
-		$(this).addClass('active');
+		$(element/*this*/).addClass('active');
 
-	    let group_id = $(this).data('tab-name');
+	    let group_id = $(element/*this*/).data('tab-name');
 
 		console.log("filter_sets filter_set_click 22");
 
@@ -3334,7 +3334,7 @@ window.document.splugins.wbc.filter_sets.core = function( configs ) {
 
 			$('[data-tab-group="'+group_id_alt+'"]').each(function(){
 		      
-		      let reset_script = $(this).find('[data-reset]').data('reset');
+		      let reset_script = $(element/*this*/).find('[data-reset]').data('reset');
 		      if(typeof(reset_script)!==typeof(undefined) && reset_script!=''){
 		       
 		        eval(reset_script);
@@ -3343,12 +3343,12 @@ window.document.splugins.wbc.filter_sets.core = function( configs ) {
 		      // <?php if(wp_is_mobile() and !wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile')): ?>
 		      if((window.document.splugins.common.is_mobile) && !(_this.configs.filter_setting_alternate_mobile)){
 
-		        if($(this).hasClass('active')){
+		        if($(element/*this*/).hasClass('active')){
 		      
-		          $(this).trigger('click');
+		          $(element/*this*/).trigger('click');
 		        }
 		      
-		        reset_script = $(this).next().find('[data-reset]').data('reset');
+		        reset_script = $(element/*this*/).next().find('[data-reset]').data('reset');
 		        if(typeof(reset_script)!==typeof(undefined) && reset_script!=''){
 		      
 		          eval(reset_script);
@@ -3358,12 +3358,12 @@ window.document.splugins.wbc.filter_sets.core = function( configs ) {
 		      // <?php if(wp_is_mobile() and wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile')): ?>
 		      if((window.document.splugins.common.is_mobile) && (_this.configs.filter_setting_alternate_mobile)){
 
-		        if($(this).hasClass('active')){
+		        if($(element/*this*/).hasClass('active')){
 		      
-		          $(this).trigger('click');
+		          $(element/*this*/).trigger('click');
 		        }          
 		        
-		        reset_script = $(this).next().find('[data-reset]').data('reset');
+		        reset_script = $(element/*this*/).next().find('[data-reset]').data('reset');
 		        if(typeof(reset_script)!==typeof(undefined) && reset_script!=''){
 		      
 		          eval(reset_script);
@@ -3395,7 +3395,7 @@ window.document.splugins.wbc.filter_sets.core = function( configs ) {
 		console.log("filter_sets filter_set_click 55");
 
 	    // window.document.splugins.wbc.filters.core.eo_wbc_filter_change_wrapper(false,'form#<?php echo $filter_ui->filter_prefix; ?>eo_wbc_filter','',{'this':this,'event':event});
-	    window.document.splugins.wbc.filters.api.eo_wbc_filter_change_wrapper(false,'form#'+_this.configs.filter_prefix +'eo_wbc_filter','',{'this':this,'event':event});
+	    window.document.splugins.wbc.filters.api.eo_wbc_filter_change_wrapper(false,'form#'+_this.configs.filter_prefix +'eo_wbc_filter','',{'this':element/*this*/,'event':event});
 
 	    // --- end ---	
     };

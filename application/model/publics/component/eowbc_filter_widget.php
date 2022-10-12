@@ -1654,7 +1654,7 @@ class EOWBC_Filter_Widget {
 
 				// 	if($(this).hasClass('eo_wbc_button_selected')){
 				// 		$(this).removeClass('eo_wbc_button_selected');
-				// 		let old_val = $("form#<?php/* echo $this->filter_prefix; ?>eo_wbc_filter  #checklist_<?php echo $filter['slug'];*/ ?>").val();
+				// 		let old_val = $("form#<?php //echo $this->filter_prefix; ?>eo_wbc_filter  #checklist_<?php //echo $filter['slug']; ?>").val();
 				// 		old_val = old_val.split(',');
 				// 		if(old_val.indexOf($(this).data('slug'))!=-1){
 				// 			let _slug = $(this).data('slug');
