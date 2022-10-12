@@ -701,14 +701,8 @@ class Form_Builder implements Builder {
 									}
 
 									$added_counter = isset($save_as_data['post_meta'][$das_counter_field_id]) ? $save_as_data['post_meta'][$das_counter_field_id] : $added_counter;
-								}
-
-
-								if( $args["sub_action"] == "save" ) {
-
-									$added_counter = wbc()->sanitize->post($das_counter_field_id);
 									
-								} else if( !empty($data_raw) ) {
+								} else if( !empty($args['data_raw']) ) {
 
 									-- need to mac us of data mapping here and in below statement as applicabel. 
 

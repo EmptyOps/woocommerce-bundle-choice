@@ -48,12 +48,12 @@ class SP_WBC_Variations extends SP_Variations {
 			//	below hooked function will add our data layers of sp_variations gallery_images and maybe also others of the sp_variations to the woo data 					
 			add_filter('woocommerce_available_variation',function($variation_get_max_purchase_quantity,  $instance,  $variation) use($args){
 
-				return apply_filters ( 'sp_wbc_get_variation', $variation_get_max_purchase_quantity,  $instance,  $variation);
+				return apply_filters ( 'sp_wbc_woo_available_variation', $variation_get_max_purchase_quantity,  $instance,  $variation);
 
 			}, 90, 3);
-
-			add_filter('sp_wbc_get_variation',function($variation_get_max_purchase_quantity,  $instance,  $variation) use($args){
-
+			
+			add_filter('sp_wbc_woo_available_variation',function($variation_get_max_purchase_quantity,  $instance,  $variation) use($args){
+					here we do not need any not empty html lick condishone becos the apply_filters hosted becos the perant hook hosted the apply_filters as alrady menaged the prayorati basd check on and than this particuley hook is apply from thar so it well ather from dapi leyar or the wbc so we do not need that. but lat stil keep it as note teel we not do the finel taly befor run an than delete this oppen comment.
 				return self::instance()->get_available_variation_hook_callback($variation_get_max_purchase_quantity,  $instance,  $variation, $args);
 				
 			}, 90, 3);
@@ -84,15 +84,28 @@ class SP_WBC_Variations extends SP_Variations {
 
 
 		// comment by @s
-		}elseif( ($for_section == "swatches" /*|| $for_section == "gallery_images"*/)/* && $args['page'] != 'feed'*/ ) {*
-			$this->swatches_hooks();*
+		}elseif( ($for_section == "swatches" /*|| $for_section == "gallery_images"*/)/* && $args['page'] != 'feed'*/ ) {
+			$this->swatches_hooks();
+
+			add_filter('sp_wbc_get_variations',function($data, $product){
+
+				if (!empty($data)) {
+
+					return $data;
+				}
+			
+				return $product->get_available_variations(); 
+			},10);
 
 			$sp_variations_data['attributes'] = $product->get_variation_attributes(); aa nu su karavanu
-			$sp_variations_data['variations'] = $product->get_available_variations(); aa nu su karavanu
+			//$sp_variations_data['variations'] = $product->get_available_variations(); aa nu su karavanu
+			$sp_variations_data['variations'] = apply_filters('sp_wbc_get_variations',null,$product);
 
-		}elseif( ($for_section == "gallery_images") {*
+			
 
-			$this->gallery_images_hooks();*
+		}elseif( ($for_section == "gallery_images") {
+
+			$this->gallery_images_hooks();
 		}	
 
 					// ACTIVE_TODO_OC_START

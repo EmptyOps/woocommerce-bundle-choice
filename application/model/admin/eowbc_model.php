@@ -77,7 +77,30 @@ class Eowbc_Model {
 
 						if(empty($form_definition[$key]["form"][$fk]["force_value"])){
 							-- need to mac us of data mapping here and in below statement as applicabel.
-							$form_definition[$key]["form"][$fk]["value"] = ( isset($save_as_data['post_meta'][$fk]) ? $save_as_data['post_meta'][$fk] : ( isset($form_definition[$key]["form"][$fk]["value"]) ? $form_definition[$key]["form"][$fk]["value"] : '' ) );		
+							//$form_definition[$key]["form"][$fk]["value"] = ( isset($save_as_data['post_meta'][$fk]) ? $save_as_data['post_meta'][$fk] : ( isset($form_definition[$key]["form"][$fk]["value"]) ? $form_definition[$key]["form"][$fk]["value"] :'' ) );
+							if (isset($args['data_raw'][$fk])) {
+
+								$form_definition[$key]["form"][$fk]["value"] = $args['data_raw'][$fk];
+
+							} elseif( isset($save_as_data['post_meta'][$fk]) ){
+
+								$form_definition[$key]["form"][$fk]["value"] = $save_as_data['post_meta'][$fk]; 
+
+							} else{
+
+								if( isset($form_definition[$key]["form"][$fk]["value"]) ){
+
+									 $form_definition[$key]["form"][$fk]["value"] = $form_definition[$key]["form"][$fk]["value"];
+
+								} else{
+
+									$form_definition[$key]["form"][$fk]["value"] = '';
+
+								}
+
+							}	
+
+
 
 							-- am melu tu /woo-bundle-choice/application/model/publics/data_model/sp-wbc-variations.php: line 569
 							// ACTIVE_TODO/TODO implement 
