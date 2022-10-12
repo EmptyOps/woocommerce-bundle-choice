@@ -210,15 +210,15 @@ if(empty($_per_page)){
 	<script type="text/javascript">		
 
 		jQuery(document).ready(function($){			
-
+			
 			window.document.splugins = window.document.splugins || {};
 			window.document.splugins.ui = window.document.splugins.ui || {};
 			window.document.splugins.ui.slider = window.document.splugins.ui.slider || jQuery.fn.slider;
 
-			window.eo=new Object();
-			
 			// --- move this code in woo-bundle-choice/asset/js/publics/eo_wbc_filter.js window.document.splugins.wbc.filters.api.slider_change_event_listener(); ---
 			// --- start ---
+			// window.eo=new Object();
+
 			// //Slider creation function
 			// window.eo.slider=function(selector){
 
