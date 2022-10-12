@@ -246,13 +246,15 @@ class SP_WBC_Variations extends SP_Variations {
 
 		$attachment = null;
 
+		$attachment = get_post( $attachment_id );
+
 		if ($strict) {
 
-			$attachment = get_post( $attachment_id );
+			// $attachment = get_post( $attachment_id );
 
 		} else {
 
-			if (!$strict) {
+			if (!$strict and empty($attachment)) {
 
 				$props['url']                         = wc_placeholder_img_src();
 				$props['full_src']                    = $props['url'];

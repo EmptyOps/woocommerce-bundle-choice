@@ -967,19 +967,39 @@ class EOWBC_Filter_Widget {
 			unset($_REQUEST['_category']);
 		}*/
 
-        wbc()->load->asset('localize','publics/eo_wbc_filter',array( 'eo_wbc_object' => array(
-        					'eo_product_url'=>$product_url,
-        					//'eo_view_tabular'=>($current_category=='solitaire'?1:0),
-        					'disp_regular'=>wbc()->options->get('eo_wbc_e_tabview_status',false)/*get_option('eo_wbc_e_tabview_status',false)*/?1:0,
-        					'eo_admin_ajax_url'=>admin_url( 'admin-ajax.php'),
-        					'eo_part_site_url'=>get_site_url().'/index.php',
-        					'eo_part_end_url'=>'/'.$product_url,
-        					'eo_cat_site_url'=>$site_url,
-        					'eo_cat_query'=>http_build_query($_GET),
-        					'btnfilter_now'=>(empty(wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','filter_setting_btnfilter_now'))?false:true),
-        					'btnreset_now'=>(empty(wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','filter_setting_reset_now'))?false:true),
-        					'_prefix_' => $this->filter_prefix,
-        				)));
+		// ACTIVE_TODO it is temporary. and we need to clear it when we clear the eo_wbc_filter js loading. and when we clear eo_wbc_filter js loading at that time also need to drop the redundant loading of eo_wbc_filter js that is from js.vars.asset file.
+		$eo_wbc_object = array("eo_wbc_object" => array(
+			'eo_product_url'=>$product_url,
+			//'eo_view_tabular'=>($current_category=='solitaire'?1:0),
+			'disp_regular'=>wbc()->options->get('eo_wbc_e_tabview_status',false)/*get_option('eo_wbc_e_tabview_status',false)*/?1:0,
+			'eo_admin_ajax_url'=>admin_url( 'admin-ajax.php'),
+			'eo_part_site_url'=>get_site_url().'/index.php',
+			'eo_part_end_url'=>'/'.$product_url,
+			'eo_cat_site_url'=>$site_url,
+			'eo_cat_query'=>http_build_query($_GET),
+			'btnfilter_now'=>(empty(wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','filter_setting_btnfilter_now'))?false:true),
+			'btnreset_now'=>(empty(wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','filter_setting_reset_now'))?false:true),
+			'_prefix_' => $this->filter_prefix,
+		) );
+		wbc()->load->asset('localize_data','publics/eo_wbc_filter',$eo_wbc_object);
+
+
+        // wbc()->load->asset('localize','publics/eo_wbc_filter',array( 'eo_wbc_object' => array(
+        // 					'eo_product_url'=>$product_url,
+        // 					//'eo_view_tabular'=>($current_category=='solitaire'?1:0),
+        // 					'disp_regular'=>wbc()->options->get('eo_wbc_e_tabview_status',false)/*get_option('eo_wbc_e_tabview_status',false)*/?1:0,
+        // 					'eo_admin_ajax_url'=>admin_url( 'admin-ajax.php'),
+        // 					'eo_part_site_url'=>get_site_url().'/index.php',
+        // 					'eo_part_end_url'=>'/'.$product_url,
+        // 					'eo_cat_site_url'=>$site_url,
+        // 					'eo_cat_query'=>http_build_query($_GET),
+        // 					'btnfilter_now'=>(empty(wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','filter_setting_btnfilter_now'))?false:true),
+        // 					'btnreset_now'=>(empty(wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','filter_setting_reset_now'))?false:true),
+        // 					'_prefix_' => $this->filter_prefix,
+        // 				)));
+        wbc()->load->asset('localize','publics/eo_wbc_filter');
+
+       	
 
         /*wp_enqueue_script('eo_wbc_filter_js');*/
         
@@ -2618,6 +2638,7 @@ class EOWBC_Filter_Widget {
 	      	$product_url = $this->product_url();
 		/*}*/
 
+		wbc_pr("localize_script localize");
 		$data = array(
     					'eo_product_url'=>$product_url,
     					//'eo_view_tabular'=>($current_category=='solitaire'?1:0),
@@ -3005,9 +3026,13 @@ class EOWBC_Filter_Widget {
 		}
 
 		// filter_sub_confings
-		$filter_sub_confings = array();		
-		$filter_sub_confings['filter_setting_btnfilter_now'] = wbc()->options->get_option('filters_'.$filter_prefix.'filter_setting','filter_setting_btnfilter_now');
-		$filter_sub_confings['filter_setting_slider_max_lblsize'] = wbc()->options->get_option('filters_'.$filter_prefix.'filter_setting','filter_setting_slider_max_lblsize',6);		
+		$filters_sub_confings = array();		
+		$filters_sub_confings['filter_setting_btnfilter_now'] = wbc()->options->get_option('filters_'.$filter_prefix.'filter_setting','filter_setting_btnfilter_now');
+		$filters_sub_confings['filter_setting_slider_max_lblsize'] = _e((int)wbc()->options->get_option('filters_'.$filter_prefix.'filter_setting','filter_setting_slider_max_lblsize',6));	
+		$filters_sub_confings['filter_prefix'] = $this->filter_prefix;	
+
+		wbc()->load->asset('localize_data','filters_sub_confings',array("filters_sub_confings" => $filters_sub_confings));
+
 
 		wbc()->load->template('publics/filters/form', array("thisObj"=>$this,"current_category"=>$current_category,'filter_prefix'=>$this->filter_prefix,'filter_ui'=>$this)); 
 		do_action('eowbc_after_filter_widget');

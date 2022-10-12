@@ -349,6 +349,10 @@ if(is_shop() || is_product_category()) {
             float: left;
             width: 100%;
         }
+        form.variations_form a {
+		    width: 100%;
+		    float: left;
+		}
         form.variations_form table.variations {
             border: none !important;
             margin: 0;
@@ -366,7 +370,9 @@ if(is_shop() || is_product_category()) {
             width: 100%;
             float: left;
             display: table-row !important;
+        	border: none !important;
         }
+
         form.variations_form table.variations tbody th.label {
             display: none;
         }
@@ -614,6 +620,42 @@ if(is_shop() || is_product_category()) {
 	        display: block !important;
 	    }
 	</style>
+
+	<!--LoopBox-->
+	<style type="text/css">
+		:root {
+			--spui_thumbnail_shop_asset_height: 300px;
+		}
+
+		.spui_thumbnail_shop_wrap{
+	        float: left;
+	        width: 100%;
+	    }
+	    .spui_thumbnail_shop_asset{
+	        float: left;
+	        width: 100%;
+	    }
+	    .spui_thumbnail_shop_asset img{
+	        min-height: var(--spui_thumbnail_shop_asset_height);
+	        max-height: var(--spui_thumbnail_shop_asset_height);
+	        display: block;
+	        margin: auto;
+	        -o-object-fit: contain;
+	        object-fit: contain;
+	    }
+	    .spui_thumbnail_shop_video{
+	        float: left;
+	        width: 100%;
+	    }
+	    .spui_thumbnail_shop_video video{
+	        min-height: var(--spui_thumbnail_shop_asset_height);
+	        max-height: var(--spui_thumbnail_shop_asset_height);
+	        display: block;
+	        margin: auto;
+	        -o-object-fit: contain;
+	        object-fit: contain;
+	    }
+	</style>
 	
 <?php	
 }
@@ -700,16 +742,16 @@ jQuery( document ).ready(function() {
         --spui_tooltip_body:none;
     }
     .popover-header{
-        background: var(--spui_tooltip_bg);
-        color: var(--spui_tooltip_text);
-        font-size: var(--spui_tooltip_textsize);
+        background: var(--spui_tooltip_bg) !important;
+        color: var(--spui_tooltip_text) !important;
+        font-size: var(--spui_tooltip_textsize) !important;
         font-weight: normal;
-        padding: var(--spui_tooltip_padding);
+        padding: var(--spui_tooltip_padding) !important;
     }
     .popover-body{
         display: var(--spui_tooltip_body);
     }
     .bs-popover-auto[x-placement^=top]>.arrow::after, .bs-popover-top>.arrow::after{
-        border-top-color:var(--spui_tooltip_bg);
+        border-top-color:var(--spui_tooltip_bg) !important;
     }
 </style>
