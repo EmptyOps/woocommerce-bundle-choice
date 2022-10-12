@@ -3569,7 +3569,7 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations{
                 console.log('<a> class no split');
             }        
 
-            if(aLocateclass = aLocateclass_p){
+            if(aLocateclass == aLocateclass_p){
 
                 console.log("class thi <a> malyo");
             }else if(aLocate.attr("href").indexOf("/product/") >= 0) {
