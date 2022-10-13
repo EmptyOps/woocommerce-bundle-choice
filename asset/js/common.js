@@ -128,7 +128,7 @@ if(window.document.splugins.common.is_item_page || window.document.splugins.comm
  
  }  
 
- window.document.splugins.common.isEmpty = function(val) {
+ window.document.splugins.common.is_empty = function(val) {
     
     return (val == undefined || val == null || val.length <= 0) ? true : false;
  }
@@ -2630,9 +2630,12 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
 
 };
 
-//  publish it 
-window.document.splugins.wbc.variations.swatches.api = window.document.splugins.wbc.variations.swatches.core( common_configs.swatches_config );
-            
+jQuery(document).ready(function(){
+
+    //  publish it 
+    window.document.splugins.wbc.variations.swatches.api = window.document.splugins.wbc.variations.swatches.core( common_configs.swatches_config );
+}); 
+
 // if(window.document.splugins.common.is_item_page) {
 
 //     jQuery(document).ready(function() {
@@ -2650,7 +2653,7 @@ window.document.splugins.wbc.variations.swatches.api = window.document.splugins.
 // }
 
 // the variations gallery_images js module
-class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations{
+class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
 
     #configs;
     // #base_container_selector;
@@ -3066,6 +3069,8 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations{
 
               _this.#process_pages(type);
               
+              console.log('_this.#data.is_skip_sp_slider');
+              console.log(_this.#data.is_skip_sp_slider);
               if(!_this.#data.is_skip_sp_slider) {
 
                 _this.#process_slider_and_zoom(type);  
@@ -3104,7 +3109,7 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations{
           // ACTIVE_TODO_OC_END    
               // if( type == 'radio' ) 
 
-        if(!window.document.splugins.common.isEmpty(_this.#child_obj)) {
+        if(!window.document.splugins.common.is_empty(_this.#child_obj)) {
 
             _this.#child_obj.process_images_inner();
         }
@@ -3540,7 +3545,7 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations{
             
             var liLocate = base_container.closest('.' + liLocate_class_p);
 
-            if( window.document.splugins.common.isEmpty(liLocate)){
+            if( window.document.splugins.common.is_empty(liLocate)){
 
                 var liLocate = base_container.closest('li');
                 
@@ -3980,21 +3985,28 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations{
     }
  
 }
+
+console.log('gallery_images module 00');
 window.document.splugins.wbc.variations.gallery_images = window.document.splugins.wbc.variations.gallery_images || {};
 
 window.document.splugins.wbc.variations.gallery_images.core = function( configs ) {
+            
+    console.log('gallery_images module');
 
     jQuery.fn.sp_wbc_variations_gallery_images = function () {
+        
         return this.each(function () {
 
             (new SP_WBC_Variations_Gallery_Images(this,configs)).init();
         });
     };
-    
+    console.log('gallery_images module 01');
 };
 
-//  publish it 
-window.document.splugins.wbc.variations.gallery_images.api = window.document.splugins.wbc.variations.gallery_images.core( common_configs.gallery_images_configs );
+jQuery(document).ready(function(){
+    //  publish it 
+    window.document.splugins.wbc.variations.gallery_images.api = window.document.splugins.wbc.variations.gallery_images.core( common_configs.gallery_images_configs );
+});
 
 // if(window.document.splugins.common.is_item_page) {
 
@@ -4523,6 +4535,7 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
  
     init() { 
 
+        console.log('feed_gallery_init');
         var _this = this; 
 
         _this.#init_private();

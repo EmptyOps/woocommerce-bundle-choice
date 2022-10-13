@@ -1453,10 +1453,16 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		// --- start ---			
 		if( typeof(jQuery.fn.checkbox) ==='function' ) {
 
+			// --- compare_start (1) woo-bundle-choice/application/view/publics/filters/form.php ---
 			jQuery('.checkbox').checkbox({onChange:function(event){			
 
 				on_checkbox_change_event(event, this);
-			}});				
+			}});
+			// -- (2) sp-purple-woo-bundle-choice/application/view/publics/filters/load_desktop.php
+			jQuery('.filter_checkbox').on('change',function(event){
+        	});     				
+            // --- compare_end ---			
+
 		}
 		// --- end ---
     };
@@ -2018,10 +2024,16 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 	    	//////// 27-05-2022 - @drashti /////////
 			// --add to be confirmed--
 
+			// --- compare_start (1) woo-bundle-choice/application/view/publics/filters/form.php ---
 			// window.document.splugins.wbc.filters.api.eo_wbc_filter_change_wrapper(false,'form#<?php echo $filter_ui->filter_prefix; ?>eo_wbc_filter','',{'this':this,'event':event});
 			window.document.splugins.wbc.filters.api.eo_wbc_filter_change_wrapper(false,'form#'+ _this.sub_configs.filter_prefix +'eo_wbc_filter','',{'this':element,'event':event});
 	    	// jQuery.fn.eo_wbc_filter_change(false,'form#<?php/* echo $filter_ui->filter_prefix;*/ ?>eo_wbc_filter','',{'this':this,'event':event});
 			////////////////////////////////////////
+
+			// -- (2) sp-purple-woo-bundle-choice/application/view/publics/filters/load_desktop.php
+            // jQuery.fn.eo_wbc_filter_change(false,'form#<?php echo $filter_ui->filter_prefix; ?>eo_wbc_filter','',{'this':this,'event':event});
+            jQuery.fn.eo_wbc_filter_change(false,'form#'+ _this.sub_configs.filter_prefix +'eo_wbc_filter','',{'this':this,'event':event});
+            // --- compare_end ---
     	// <?php endif; ?>
     	}			
 
@@ -2351,6 +2363,7 @@ window.document.splugins.wbc.pagination = window.document.splugins.wbc.paginatio
 
 window.document.splugins.wbc.pagination.core = function( configs ) {
 
+	console.log('pagination_module');
     var _this = this; 
 
 	_this.configs = jQuery.extend({}, {}/*default configs*/, configs);	
@@ -2359,6 +2372,7 @@ window.document.splugins.wbc.pagination.core = function( configs ) {
 
 	var init_private = function(event) {
 
+		console.log('pagination_init');
 		// ACTIVE_TODO whenever in future if required  to run compatibility check during run time means after the base container selectore is defined than we can call compatibility layers additionaly from here 
     	var base_container_selector_callback = null;
 		var stat_object = window.document.splugins.events.api.apply_all_observer_filters( 'pagination', 'base_container_selector',{type:_this.$base_container},base_container_selector_callback);  
@@ -2489,6 +2503,7 @@ window.document.splugins.wbc.pagination.core = function( configs ) {
 
     var click = function(event){
     	
+    	console.log('pagination_click');
     	/*ACTIVE_TODO_OC_START
     	-- event var aya sudhi pogadvano se -- to a
     	ACTIVE_TODO_OC_END*/

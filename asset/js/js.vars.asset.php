@@ -32,7 +32,7 @@ add_action( ( !is_admin() ? 'wp_enqueue_scripts' : 'admin_enqueue_scripts'),func
 		window.document.splugins.common.is_mobile = <?php echo ((wbc_is_mobile()) ? "true" : "false");?>;
 		
 		window.document.splugins.common.is_tablet = <?php echo ((wbc_is_mobile()) ? "true" : "false");?>;
-		
+		console.log('js.var');		
 
 	</script>
 <?php  
@@ -125,15 +125,19 @@ add_action('wp_footer',function(){
     	
     	jQuery(document).ready(function() {
     		
-    		// console.log("js.vras.asset ready event");
+    		console.log("js.vras.asset ready event");
 
-    		window.document.splugins.wbc.pagination.api.init();
+ 	 		if(window.document.splugins.common.is_category_page) {
+ 
+	    		window.document.splugins.wbc.pagination.api.init();
 
-			window.document.splugins.wbc.filters.api.init();
+				window.document.splugins.wbc.filters.api.init();
 
-			window.document.splugins.wbc.filter_sets.api.init();
+				window.document.splugins.wbc.filter_sets.api.init();
 
-    		console.log("js.vras.asset ready event 1");
+   		}
+
+   		console.log("js.vras.asset ready event 1");
 
    		// ACTIVE_TODO we should confirm once and then disable category condition or part below because it seems unnecessary for the category page. or is it necessary for the purple theme loopbox slider? or for the tableview sidebar or popup if it has jQuery slider or zoom? 
     		if(window.document.splugins.common.is_item_page || window.document.splugins.common.is_category_page) {

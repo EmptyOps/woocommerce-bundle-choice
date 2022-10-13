@@ -225,6 +225,7 @@ if(!class_exists('WBC_Loader')) {
 					break;
 
 				case 'localize_data':
+					// debug_print_backtrace();
 					// wbc_pr('localize_var');
 					// wbc_pr($localize_var);
 					// wbc_pr('localize_var_val');
@@ -240,7 +241,7 @@ if(!class_exists('WBC_Loader')) {
 						</script>
 						<?php
 
-					} else {
+					} elseif( !empty(array_keys($param)[0]) && !empty($param[array_keys($param)[0]]) ) {
 					// echo "localize_data inner else";
 					// wbc_pr('load_param');
 					// wbc_pr($param);
