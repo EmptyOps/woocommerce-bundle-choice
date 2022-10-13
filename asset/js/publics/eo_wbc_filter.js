@@ -138,9 +138,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
 		init_search();
 
-		on_reset_click_listener();
-
-		on_change_listener();
+		process_events();
 
 		init_advance_filter_accordian();
 
@@ -148,6 +146,21 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		// NOTE: now almost all other page load level flag set logic is disabled and initialy the flag is set at page load time only from here. 
 		set_enable_filter_private(true);	
 
+    };
+
+    var process_events = function(){
+
+		on_reset_click_listener();
+
+		on_change_listener();
+
+		slider_change_event_listener();
+
+		checkbox_change_event_listener();
+
+		input_type_icon_click_listener();
+
+		input_type_button_click_listener();
     };
 
     var init_search = function(form_selector){
@@ -1416,6 +1429,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
     var slider_change_event_listener = function(selector){
 
+    	console.log("filter slider_change_event_listener");
 		// --- move this code from woo-bundle-choice/application/view/publics/filters/form.php ---
 		// --- start ---
 
@@ -1433,7 +1447,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		// --- end ---
     };
 
-    var checkbox_change_event_listener = function(event){
+    var checkbox_change_event_listener = function(){
 
 		// --- move this code from woo-bundle-choice/application/view/publics/filters/form.php ---
 		// --- start ---			
@@ -1447,8 +1461,9 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		// --- end ---
     };
 
-    var input_type_icon_click_listener = function(e) {
+    var input_type_icon_click_listener = function() {
 
+    	return false;
     	// --- aa code woo-bundle-choice/application/model/publics/component/eowbc_filter_widget.php eo_wbc_filter_ui_icon() mathi move karyo se @a ---
     	// --- start ---
 		// jQuery(filter_container).find('[data-filter="'+"<?php echo $term->slug; ?>"+'"]:not(.none_editable)').on('click',function(e){
@@ -1461,7 +1476,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
     };
 
-    var input_type_button_click_listener = function(event) {
+    var input_type_button_click_listener = function() {
 
     	// --- aa code woo-bundle-choice/application/model/publics/component/eowbc_filter_widget.php input_button(); mathi move karyo se @a ---
     	// --- start ---
