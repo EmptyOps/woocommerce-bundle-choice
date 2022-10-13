@@ -599,13 +599,31 @@ class SP_WBC_Variations extends SP_Variations {
 				}
 
 			}
+			//echo'ssssssssssssss';
 			// wbc_pr($gallery_images);
 
-		} else {
+		} /*else {
+			wbc_pr($gallery_images);
+			// $gallery_images = $product->get_gallery_image_ids();
+			$gallery_images = $instance->get_gallery_image_ids();
+		}*/
+
+		$is_empty = true;
+		foreach($gallery_images as $image){
+
+			if (!empty($image['value'])) {
+				
+				$is_empty = false;
+
+				break;
+			}
+		}
+
+		if ($is_empty){
+
 			// $gallery_images = $product->get_gallery_image_ids();
 			$gallery_images = $instance->get_gallery_image_ids();
 		}
-
 
 		/*ACTIVE_TODO here we still needd one more hook to let any layers set their item at particular index -- to s
 			--  apply filter from here
@@ -1827,7 +1845,22 @@ class SP_WBC_Variations extends SP_Variations {
 
 		}
 
-		else {
+		if('variable' !== $data['gallery_images_template_data']['product_type'] or !isset( $data['gallery_images_template_data']['product_variation']['variation_gallery_images'] )) {
+
+			if('variable' !== $data['gallery_images_template_data']['product_type'] or !isset( $data['gallery_images_template_data']['product_variation']['variation_gallery_images'] )) {
+
+				if (!empty($data['gallery_images_template_data']['post_thumbnail_id'])) {
+
+					if (!is_array($data['gallery_images_template_data']['attachment_ids'])) {
+						
+						$data['gallery_images_template_data']['attachment_ids'] = array();
+					}
+
+					array_unshift( $data['gallery_images_template_data']['attachment_ids'], $data['gallery_images_template_data']['post_thumbnail_id'] );
+				}
+				
+			}
+
 			if(!empty($data['gallery_images_template_data']['attachment_ids'])){
 			    
 			    foreach ($data['gallery_images_template_data']['attachment_ids'] as $index=>$id) {
