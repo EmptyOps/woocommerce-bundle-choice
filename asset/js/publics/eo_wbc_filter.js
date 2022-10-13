@@ -2014,6 +2014,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
     var input_type_icon_click = function(e, element) {
 
+    	console.log("filter input_type_icon_click");
 		event = e;
 		
 		e.stopPropagation();
