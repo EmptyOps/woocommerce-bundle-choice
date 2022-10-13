@@ -366,7 +366,7 @@ if(empty($_per_page)){
 
 			// 		    	//////// 27-05-2022 - @drashti /////////
 			// 				// --add to be confirmed--
-			// 				window.document.splugins.wbc.filters.api.eo_wbc_filter_change_wrapper(false,'form#<?php echo $filter_ui->filter_prefix; ?>eo_wbc_filter','',{'this':this,'event':new Event('change',this)});
+			// 				window.document.splugins.wbc.filters.api.eo_wbc_filter_change_wrapper(false,'form#<?php /*echo $filter_ui->filter_prefix;*/ ?>eo_wbc_filter','',{'this':this,'event':new Event('change',this)});
 			// 		    	// jQuery.fn.eo_wbc_filter_change(false,'form#<?php /*echo $filter_ui->filter_prefix;*/ ?>eo_wbc_filter','',{'this':this,'event':new Event('change',this)});
 			// 				////////////////////////////////////////
 
@@ -435,6 +435,7 @@ if(empty($_per_page)){
 			// 	});
 			// };
 			// --- end ---
+			window.document.splugins.wbc.filters.api.slider_change_event(selector);
 
 			var primary_filter=jQuery(".eo-wbc-container.filters .ui.segment:not(.secondary)");
 
@@ -576,6 +577,7 @@ if(empty($_per_page)){
 			// 	}});				
 			// }
 			// --- end ---
+			window.document.splugins.wbc.filters.api.checkbox_change_event(event);
 			/*----------------------------------------------------*/
 			/*----------------------------------------------------*/
 

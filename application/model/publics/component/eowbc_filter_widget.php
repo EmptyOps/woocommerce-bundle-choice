@@ -1640,56 +1640,60 @@ class EOWBC_Filter_Widget {
 		?>
 		<script type="text/javascript">
 			jQuery(document).ready(function($){
-				$('[data-filter-slug="<?php echo $filter['slug']; ?>"]').on('click',function(event){
+				// --- aa code woo-bundle-choice/asset/js/publics/eo_wbc_filter.js input_type_button_click(); ma move karyo se @a---
+				// --- start ---
+				// $('[data-filter-slug="<?php /*echo $filter['slug']; */?>"]').on('click',function(event){
 
-					<?php if($filter_type==1): ?>
-						let filter_target = jQuery('form#<?php echo $this->filter_prefix; ?>eo_wbc_filter [name="_attribute"]');
-					<?php else: ?>
-						let filter_target = jQuery('form#<?php echo $this->filter_prefix; ?>eo_wbc_filter [name="_category"]');
-					<?php endif;?>
+					<?php/* if($filter_type==1):*/ ?>
+				// 		let filter_target = jQuery('form#<?php /*echo $this->filter_prefix; */?>eo_wbc_filter [name="_attribute"]');
+				// 	<?php /*else:*/ ?>
+				// 		let filter_target = jQuery('form#<?php /*echo $this->filter_prefix; */?>eo_wbc_filter [name="_category"]');
+				// 	<?php /*endif;*/?>
 					
-					let filter_name = jQuery(this).attr('data-filter-slug');
+				// 	let filter_name = jQuery(this).attr('data-filter-slug');
 
-					if($(this).hasClass('eo_wbc_button_selected')){
-						$(this).removeClass('eo_wbc_button_selected');
-						let old_val = $("form#<?php echo $this->filter_prefix; ?>eo_wbc_filter  #checklist_<?php echo $filter['slug']; ?>").val();
-						old_val = old_val.split(',');
-						if(old_val.indexOf($(this).data('slug'))!=-1){
-							let _slug = $(this).data('slug');
-							old_val = old_val.filter(function(item){
-								return item==_slug?false:true;
-							});
-							new_val = old_val.join();
-							$("form#<?php echo $this->filter_prefix; ?>eo_wbc_filter  #checklist_<?php echo $filter['slug']; ?>").val(new_val);
-						}
+				// 	if($(this).hasClass('eo_wbc_button_selected')){
+				// 		$(this).removeClass('eo_wbc_button_selected');
+				// 		let old_val = $("form#<?php //echo $this->filter_prefix; ?>eo_wbc_filter  #checklist_<?php //echo $filter['slug']; ?>").val();
+				// 		old_val = old_val.split(',');
+				// 		if(old_val.indexOf($(this).data('slug'))!=-1){
+				// 			let _slug = $(this).data('slug');
+				// 			old_val = old_val.filter(function(item){
+				// 				return item==_slug?false:true;
+				// 			});
+				// 			new_val = old_val.join();
+							// $("form#<?php /*echo $this->filter_prefix; ?>eo_wbc_filter  #checklist_<?php echo $filter['slug'];*/ ?>").val(new_val);
+				// 		}
 
-					} else {
-						$(this).addClass('eo_wbc_button_selected');
-						let old_val = $("form#<?php echo $this->filter_prefix; ?>eo_wbc_filter  #checklist_<?php echo $filter['slug']; ?>").val();
-						old_val = old_val.split(',');
-						if(old_val.indexOf($(this).data('slug'))==-1){
-							let _slug = $(this).data('slug');
-							old_val.push(_slug);
-							new_val = old_val.join();
-							$("form#<?php echo $this->filter_prefix; ?>eo_wbc_filter  #checklist_<?php echo $filter['slug']; ?>").val(new_val);
-						}
-					}
+				// 	} else {
+				// 		$(this).addClass('eo_wbc_button_selected');
+						// let old_val = $("form#<?php /*echo $this->filter_prefix; ?>eo_wbc_filter  #checklist_<?php echo $filter['slug'];*/ ?>").val();
+				// 		old_val = old_val.split(',');
+				// 		if(old_val.indexOf($(this).data('slug'))==-1){
+				// 			let _slug = $(this).data('slug');
+				// 			old_val.push(_slug);
+				// 			new_val = old_val.join();
+							// $("form#<?php /*echo $this->filter_prefix;*/ ?>eo_wbc_filter  #checklist_<?php /*echo $filter['slug'];*/ ?>").val(new_val);
+				// 		}
+				// 	}
 
-					if(filter_target.val().includes(filter_name) && $("form#<?php echo $this->filter_prefix; ?>eo_wbc_filter  #checklist_<?php echo $filter['slug']; ?>").val().length==0) {
-						filter_target.val(filter_target.val().replace(','+filter_name,''));
-					} else { if((!filter_target.val().includes(filter_name)) && $("form#<?php echo $this->filter_prefix; ?>eo_wbc_filter #checklist_<?php echo $filter['slug']; ?>").val().length) {
-						filter_target.val(filter_target.val()+','+filter_name);	
-					} }	
+					// if(filter_target.val().includes(filter_name) && $("form#<?php /*echo $this->filter_prefix;*/ ?>eo_wbc_filter  #checklist_<?php /*echo $filter['slug'];*/ ?>").val().length==0) {
+				// 		filter_target.val(filter_target.val().replace(','+filter_name,''));
+					// } else { if((!filter_target.val().includes(filter_name)) && $("form#<?php /*echo $this->filter_prefix;*/ ?>eo_wbc_filter #checklist_<?php /*echo $filter['slug'];*/ ?>").val().length) {
+				// 		filter_target.val(filter_target.val()+','+filter_name);	
+				// 	} }	
 
-					<?php if(empty(wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','filter_setting_btnfilter_now'))): ?>
+					<?php /*if(empty(wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','filter_setting_btnfilter_now'))):*/ ?>
 
-						//////// 27-05-2022 - @drashti /////////
-						// --add to be confirmed--
-						window.document.splugins.wbc.filters.api.eo_wbc_filter_change_wrapper(false,'form#<?php echo $this->filter_prefix; ?>eo_wbc_filter','',{'this':this,'event':event});
-						// jQuery.fn.eo_wbc_filter_change(false,'form#<?php /*echo $this->filter_prefix;*/ ?>eo_wbc_filter','',{'this':this,'event':event});
-						////////////////////////////////////////
-					<?php endif; ?>
-				});
+				// 		//////// 27-05-2022 - @drashti /////////
+				// 		// --add to be confirmed--
+						// window.document.splugins.wbc.filters.api.eo_wbc_filter_change_wrapper(false,'form#<?php /*echo $this->filter_prefix;*/ ?>eo_wbc_filter','',{'this':this,'event':event});
+				// 		// jQuery.fn.eo_wbc_filter_change(false,'form#<?php /*echo $this->filter_prefix;*/ ?>eo_wbc_filter','',{'this':this,'event':event});
+				// 		////////////////////////////////////////
+					<?php /*endif;*/ ?>
+				// });
+				// --- end ---
+				window.document.splugins.wbc.filters.api.input_type_button_click(event);
 			});
 		</script>
 		<?php
@@ -2360,82 +2364,87 @@ class EOWBC_Filter_Widget {
 					let filter_container = jQuery('form#<?php echo $this->filter_prefix; ?>eo_wbc_filter').parents().has('[data-filter="<?php echo $term->slug; ?>"]').get(0);
 
 					jQuery(filter_container).find('[data-filter="'+"<?php echo $term->slug; ?>"+'"]:not(.none_editable)').off();
-					jQuery(filter_container).find('[data-filter="'+"<?php echo $term->slug; ?>"+'"]:not(.none_editable)').on('click',function(e){
+					
+					// --- aa code woo-bundle-choice/asset/js/publics/eo_wbc_filter.js input_type_icon_click() ma move karyo se ---
+					// --- start ---
+					// jQuery(filter_container).find('[data-filter="'+"<?php /*echo $term->slug;*/ ?>"+'"]:not(.none_editable)').on('click',function(e){
 						
-						event = e;
+					// 	event = e;
 						
-						e.stopPropagation();
-						e.preventDefault();
+					// 	e.stopPropagation();
+					// 	e.preventDefault();
 
-						var icon_filter_type = jQuery(this).attr('data-type');
-						var filter_name = jQuery(this).attr('data-filter');
+					// 	var icon_filter_type = jQuery(this).attr('data-type');
+					// 	var filter_name = jQuery(this).attr('data-filter');
 
-						var filter_list= undefined;
-						var filter_target = undefined;
+					// 	var filter_list= undefined;
+					// 	var filter_target = undefined;
 						
-						if(icon_filter_type == 1) {
-							/*filter_list = jQuery('[name="checklist_'+__data_filter_slug+'"]');*/
-							filter_list = jQuery('form#<?php echo $this->filter_prefix; ?>eo_wbc_filter [name="checklist_'+"<?php echo $term->slug; ?>"+'"]');
-							filter_target = jQuery('form#<?php echo $this->filter_prefix; ?>eo_wbc_filter [name="_attribute"]');
+					// 	if(icon_filter_type == 1) {
+					// 		/*filter_list = jQuery('[name="checklist_'+__data_filter_slug+'"]');*/
+					// 		filter_list = jQuery('form#<?php /*echo $this->filter_prefix;*/ ?>eo_wbc_filter [name="checklist_'+"<?php /*echo $term->slug;*/ ?>"+'"]');
+					// 		filter_target = jQuery('form#<?php /*echo $this->filter_prefix;*/ ?>eo_wbc_filter [name="_attribute"]');
 
-							/*console.log(jQuery('[name="checklist_'+__data_filter_slug+'"]'));*/
-							console.log(jQuery('form#<?php echo $this->filter_prefix; ?>eo_wbc_filter [name="checklist_'+"<?php echo $term->slug; ?>"+'"]'));
-							console.log(jQuery('form#<?php echo $this->filter_prefix; ?>eo_wbc_filter [name="_attribute"]'));
-						} else {
-							/*filter_list = jQuery('[name="cat_filter_'+__data_filter_slug+'"]');*/
-							filter_list = jQuery('form#<?php echo $this->filter_prefix; ?>eo_wbc_filter [name="cat_filter_'+"<?php echo $term->slug; ?>"+'"]');
-							filter_target = jQuery('form#<?php echo $this->filter_prefix; ?>eo_wbc_filter [name="_category"]');
-						}
+					// 		/*console.log(jQuery('[name="checklist_'+__data_filter_slug+'"]'));*/
+					// 		console.log(jQuery('form#<?php /*echo $this->filter_prefix;*/ ?>eo_wbc_filter [name="checklist_'+"<?php /*echo $term->slug;*/ ?>"+'"]'));
+					// 		console.log(jQuery('form#<?php /*echo $this->filter_prefix;*/ ?>eo_wbc_filter [name="_attribute"]'));
+					// 	} else {
+					// 		/*filter_list = jQuery('[name="cat_filter_'+__data_filter_slug+'"]');*/
+					// 		filter_list = jQuery('form#<?php /*echo $this->filter_prefix;*/ ?>eo_wbc_filter [name="cat_filter_'+"<?php /*echo $term->slug;*/ ?>"+'"]');
+					// 		filter_target = jQuery('form#<?php /*echo $this->filter_prefix;*/ ?>eo_wbc_filter [name="_category"]');
+					// 	}
 
-						let is_single_select = jQuery(this).data('single_select');
-						if(typeof(is_single_select) !== typeof(undefined) && is_single_select==1){
-							jQuery('form#<?php echo $this->filter_prefix; ?>eo_wbc_filter [data-filter="'+"<?php echo $term->slug; ?>"+'"]:not(.none_editable)').removeClass('eo_wbc_filter_icon_select');
-							let toggleable_selections = jQuery('form#<?php echo $this->filter_prefix; ?>eo_wbc_filter .toggled_image[data-filter="'+"<?php echo $term->slug; ?>"+'"]:not(.none_editable)');
-							console.log(toggleable_selections);
-							if(typeof(toggleable_selections)!==typeof(undefined) && toggleable_selections.length>0){
+					// 	let is_single_select = jQuery(this).data('single_select');
+					// 	if(typeof(is_single_select) !== typeof(undefined) && is_single_select==1){
+					// 		jQuery('form#<?php /*echo $this->filter_prefix;*/ ?>eo_wbc_filter [data-filter="'+"<?php /*echo $term->slug;*/ ?>"+'"]:not(.none_editable)').removeClass('eo_wbc_filter_icon_select');
+					// 		let toggleable_selections = jQuery('form#<?php /*echo $this->filter_prefix;*/ ?>eo_wbc_filter .toggled_image[data-filter="'+"<?php /*echo $term->slug;*/ ?>"+'"]:not(.none_editable)');
+					// 		console.log(toggleable_selections);
+					// 		if(typeof(toggleable_selections)!==typeof(undefined) && toggleable_selections.length>0){
 								
-								jQuery.fn.wbc_flip_toggle_image(toggleable_selections[0]);
-							}							
-							filter_list.val(jQuery(this).attr("data-slug"));
-						} else {							
+					// 			jQuery.fn.wbc_flip_toggle_image(toggleable_selections[0]);
+					// 		}							
+					// 		filter_list.val(jQuery(this).attr("data-slug"));
+					// 	} else {							
 
-							if(filter_list.val().includes(jQuery(this).attr('data-slug'))){
+					// 		if(filter_list.val().includes(jQuery(this).attr('data-slug'))){
 
-								let filter_list_items = filter_list.val().split(',');
-								let this_slug = jQuery(this).attr('data-slug').trim();
+					// 			let filter_list_items = filter_list.val().split(',');
+					// 			let this_slug = jQuery(this).attr('data-slug').trim();
 
-								if(filter_list_items.includes(this_slug)) {
-									filter_list_items.splice(filter_list_items.indexOf(this_slug),1);
-								}
+					// 			if(filter_list_items.includes(this_slug)) {
+					// 				filter_list_items.splice(filter_list_items.indexOf(this_slug),1);
+					// 			}
 
-								filter_list.val( filter_list_items.join(',') /*filter_list.val().replace(','+jQuery(this).attr('data-slug'),'')*/);
-							}
-							else {
-								filter_list.val(filter_list.val()+','+jQuery(this).attr("data-slug"));
-							}	
-						}						
+					// 			filter_list.val( filter_list_items.join(',') /*filter_list.val().replace(','+jQuery(this).attr('data-slug'),'')*/);
+					// 		}
+					// 		else {
+					// 			filter_list.val(filter_list.val()+','+jQuery(this).attr("data-slug"));
+					// 		}	
+					// 	}						
 
-						if(filter_target.val().includes(filter_name) && filter_list.val().length==0) {
-							filter_target.val(filter_target.val().replace(','+filter_name,''));
-						} else { if((!filter_target.val().includes(filter_name)) && filter_list.val().length) {
-							filter_target.val(filter_target.val()+','+filter_name);	
-						} }					
+					// 	if(filter_target.val().includes(filter_name) && filter_list.val().length==0) {
+					// 		filter_target.val(filter_target.val().replace(','+filter_name,''));
+					// 	} else { if((!filter_target.val().includes(filter_name)) && filter_list.val().length) {
+					// 		filter_target.val(filter_target.val()+','+filter_name);	
+					// 	} }					
 
-						var icon_val=jQuery(filter_list).val();	
-						jQuery(filter_list).val(icon_val.substr(0,icon_val.length));
+					// 	var icon_val=jQuery(filter_list).val();	
+					// 	jQuery(filter_list).val(icon_val.substr(0,icon_val.length));
 						
-						jQuery(this).toggleClass('eo_wbc_filter_icon_select');
-						$('[name="paged"]').val('1');
-						<?php if(empty(wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','filter_setting_btnfilter_now'))): ?>
+					// 	jQuery(this).toggleClass('eo_wbc_filter_icon_select');
+					// 	$('[name="paged"]').val('1');
+						<?php /*if(empty(wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','filter_setting_btnfilter_now'))):*/ ?>
 
-						//////// 27-05-2022 - @drashti /////////
-						// --add to be confirmed--
-						window.document.splugins.wbc.filters.api.eo_wbc_filter_change_wrapper(false,'form#<?php echo $this->filter_prefix; ?>eo_wbc_filter','',{'this':this,'event':event});
-						// jQuery.fn.eo_wbc_filter_change(false,'form#<?php /*echo $this->filter_prefix;*/ ?>eo_wbc_filter','',{'this':this,'event':event});
-						////////////////////////////////////////
+					// 	//////// 27-05-2022 - @drashti /////////
+					// 	// --add to be confirmed--
+					// 	window.document.splugins.wbc.filters.api.eo_wbc_filter_change_wrapper(false,'form#<?php /*echo $this->filter_prefix;*/ ?>eo_wbc_filter','',{'this':this,'event':event});
+					// 	// jQuery.fn.eo_wbc_filter_change(false,'form#<?php /*echo $this->filter_prefix;*/ ?>eo_wbc_filter','',{'this':this,'event':event});
+					// 	////////////////////////////////////////
 
-						<?php endif; ?>
-					});
+					// 	<?php /*endif;*/ ?>
+					// });
+					// --- end ---
+					window.document.splugins.wbc.filters.api.input_type_icon_click(e);
 
 					jQuery(".eo_wbc_srch_btn:eq(2)").on('reset',function(){	
 						var icon_filter_type = "<?php echo $type; ?>";
@@ -2666,6 +2675,8 @@ class EOWBC_Filter_Widget {
 
 	public function get_widget() {
 		
+		wbc_pr("eowbc_filter_widget get_widget 1");
+
 		do_action('eowbc_before_filter_widget');
 
 		$this->_category = apply_filters('eowbc_filter_widget_category',$this->eo_wbc_get_category());
@@ -2763,6 +2774,8 @@ class EOWBC_Filter_Widget {
 			return !empty($filter_element[$prefix.'_fconfig_add_enabled']);
 		});
 
+		wbc_pr("eowbc_filter_widget get_widget 2");
+		
 		$filter =  apply_filters( 'eowbc_filter_widget_filters_post_clean',$filter,$prefix);
 		$this->__filters__=$filter;
 		$filter =  apply_filters( 'eowbc_filter_widget_filters',$filter,$prefix);
@@ -2826,9 +2839,9 @@ class EOWBC_Filter_Widget {
 
 		$non_adv_ordered_filter = apply_filters('custome_filter_widget_non_advance_filter',$non_adv_ordered_filter,$this->filter_prefix);
 
-		/*echo "non_adv_ordered_filter and adv_ordered_filter dump";
+		echo "non_adv_ordered_filter and adv_ordered_filter dump";
 		wbc()->common->pr($non_adv_ordered_filter);
-		wbc()->common->pr($adv_ordered_filter);*/
+		wbc()->common->pr($adv_ordered_filter);
 
 		?>
 		<!--Primary filter button that will only be visible on desktop/tablet-->
@@ -3027,9 +3040,15 @@ class EOWBC_Filter_Widget {
 
 		// filter_sub_confings
 		$filters_sub_confings = array();		
-		$filters_sub_confings['filter_setting_btnfilter_now'] = wbc()->options->get_option('filters_'.$filter_prefix.'filter_setting','filter_setting_btnfilter_now');
+		
+		// $filters_sub_confings['filter_setting_btnfilter_now'] = wbc()->options->get_option('filters_'.$filter_prefix.'filter_setting','filter_setting_btnfilter_now');
+		$filters_sub_confings['filter_setting_btnfilter_now'] = wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','filter_setting_btnfilter_now');
+
 		$filters_sub_confings['filter_setting_slider_max_lblsize'] = _e((int)wbc()->options->get_option('filters_'.$filter_prefix.'filter_setting','filter_setting_slider_max_lblsize',6));	
 		$filters_sub_confings['filter_prefix'] = $this->filter_prefix;	
+		$filters_sub_confings['filter_slug'] = $filter['slug'];
+		$filters_sub_confings['filter_type'] = $filter_type;
+		$filters_sub_confings['term_slug'] = $term->slug;
 
 		wbc()->load->asset('localize_data','filters_sub_confings',array("filters_sub_confings" => $filters_sub_confings));
 
@@ -3061,13 +3080,16 @@ class EOWBC_Filter_Widget {
 		$this->filter_prefix = $filter_prefix;
 		$this->_category= !$this->is_shortcode_filter && !$this->is_shop_cat_filter ? apply_filters('eowbc_filter_widget_category',$this->eo_wbc_get_category()) : '';
 		
+		wbc_pr("eowbc_filter_widget init 1");
 		if(!empty($this->_category) or $this->is_shop_cat_filter or $this->is_shortcode_filter){
 		
 			if(get_option('eo_wbc_dropdown_filter',false) and !wp_is_mobile()) {
 
+				wbc_pr("eowbc_filter_widget init 2 if");
 				require_once 'includes/dropdown_filter.php';				
 
 			} else {					
+				wbc_pr("eowbc_filter_widget init 3 else");
 				$this->get_widget();				
 			}
 			

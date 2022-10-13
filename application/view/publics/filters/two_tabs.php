@@ -1,4 +1,17 @@
+<?php
 
+$is_default_tab_active = true;
+foreach ($filter_sets_data as $key => $tab_data ){
+    
+    if(isset($_GET[$tab_data["first_tab_id"]])){
+        
+      $is_default_tab_active = false;
+      break;
+    }
+
+}
+
+?>
 <?php $category_array = array_column($filter_sets_data, 'first_tab_category'); ?>
 <?php
     // wbc_pr($category_array);
@@ -11,13 +24,22 @@
 // NOTE: now since we are preparing data only on the data layer and from there only the required if condition is applied. so here never should be the requirement to add the if condition here. so added true or condition here. 
 if( true or in_array( wbc()->common->get_category('category',null,array(wbc()->options->get_option('configuration','first_slug'),wbc()->options->get_option('configuration','second_slug')),true), /*array($first_tab_category,$second_tab_category)*/$category_array ) ){  ?>
     <div class="ui top attached tabular menu filter_setting_advance_two_tabs" style="margin-top: 3em;">
-        <?php foreach ($filter_sets_data as $key => $tab_data ){  ?>
+        <?php 
+        $counter = -1;
+        foreach ($filter_sets_data as $key => $tab_data ){  
+            $counter++;
+            $class = '';
+            if(isset($_GET[$tab_data["first_tab_id"]]) || ($is_default_tab_active && $counter == 0)){
+
+                $class = 'active';
+            }
+            ?>
             <!-- <a class="item center <?php //echo isset($_GET[$tab_data["first_tab_id"]])?'active':'' ?>" data-category="<?php //_e($tab_data["first_tab_category"]); ?>" style="margin-right: 0px !important;" data-tab="filter_setting_advance_first_tabs" data-tab-name="<?php //_e($tab_data["first_tab_id"]); ?>" data-tab-altname=""/*<?php //_e($second_tab_id); ?>*/>
                 // $prefix.'_fconfig_set' 
             <?php //_e($tab_data["first_tab_label"]); ?>
             </a>  -->
 
-            <a class="item center <?php echo isset($_GET[$tab_data["first_tab_id"]])?'active':'' ?>" data-category="<?php _e($tab_data["first_tab_category"]); ?>" style="margin-right: 0px !important;" data-tab="filter_setting_advance_first_tabs_<?php echo $tab_data["first_tab_id"]; ?>" data-tab-name="<?php _e($tab_data["first_tab_id"]); ?>" data-tab-altname=""> <?php _e($tab_data["first_tab_label"]); ?> </a> 
+            <a class="item center <?php echo $class/*isset($_GET[$tab_data["first_tab_id"]])?'active':''*/ ?>" data-category="<?php _e($tab_data["first_tab_category"]); ?>" style="margin-right: 0px !important;" data-tab="filter_setting_advance_first_tabs_<?php echo $tab_data["first_tab_id"]; ?>" data-tab-name="<?php _e($tab_data["first_tab_id"]); ?>" data-tab-altname=""> <?php _e($tab_data["first_tab_label"]); ?> </a> 
         <?php } ?>  
 
       	<!-- <a class="center item <?php /*echo isset($_GET[$second_tab_id])?'active':'' */?>" data-category="<?php/* _e($second_tab_category);*/ ?>" style="margin-left: 0px !important;" data-tab="filter_setting_advance_second_tabs" data-tab-name="<?php/* _e($second_tab_id); */?>" data-tab-altname="<?php /*_e($first_tab_id); */?>">
@@ -26,7 +48,7 @@ if( true or in_array( wbc()->common->get_category('category',null,array(wbc()->o
       	<script type="text/javascript">
             // --- aa code woo-bundle-choice/asset/js/publics/03_06__eo_wbc_filter.js filter_set_click() ma move karyo se @a ---
             // --- start ---
-        		// jQuery(document).ready(function($){
+        		jQuery(document).ready(function($){
 
             	// $('.filter_setting_advance_two_tabs .item').on('click',function(event){
                 
@@ -110,10 +132,17 @@ if( true or in_array( wbc()->common->get_category('category',null,array(wbc()->o
                 // --- end ---
                 ////////////////////////////////////////
         			// });
+                window.document.splugins.events.api.subscribeObserver('filter_sets', 'wbc', 'filter_set_click_before_loop',function(event, stat_object, notification_response){       
+
+                    console.log('filter_set_click_before_loop subscribeObserver default');            
+
+                    notification_response(stat_object);
+
+                });    
               //jQuery('[data-tab="filter_setting_advance_first_tabs"]').trigger('click');
               // jQuery('.filter_setting_advance_two_tabs .item.active').click();
 
-            // });
+            });
              // --- end ---
     	</script>
     </div>

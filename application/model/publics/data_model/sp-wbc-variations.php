@@ -661,6 +661,41 @@ class SP_WBC_Variations extends SP_Variations {
 		// echo ">>>>>>>>>>> gallery_images";
 		// wbc_pr($gallery_images);
 
+		// sort 
+		$gallery_images_new = array();
+		$gallery_images_sort_order = array();
+
+		foreach($gallery_images as $value){
+
+			if (isset($value['sort_order']) ) {
+
+				array_push($gallery_images_sort_order, $value);
+
+			} else {
+
+				// NOTE: keep the default at top.
+				array_push($gallery_images_new, $value);
+
+			}
+
+		}
+
+		usort($gallery_images_sort_order,function($a,$b){
+            // return $a[2]-$b[2];
+            return ((int)$a['sort_order'])-((int)$b['sort_order']);
+        });
+
+        foreach($gallery_images_sort_order as $value){
+
+			array_push($gallery_images_new, $value);
+
+		}
+
+		$gallery_images = $gallery_images_new;
+
+		// echo ">>>>>>>>>>> gallery_images";
+		// wbc_pr($gallery_images);
+		
 		if ( !empty($data['sp_variations']["form"]) ) {
 
 			foreach ( $gallery_images as $i=>$value ) {
