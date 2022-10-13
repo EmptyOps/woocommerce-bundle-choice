@@ -3224,10 +3224,13 @@ window.document.splugins.wbc.filter_sets.core = function( configs ) {
     
     var init_preprocess = function(event) { 
 
+        console.log('init_preprocess() 01');
+
         preprocess(null, event);
 
-      	jQuery('.filter_setting_advance_two_tabs .item.active').click();
-
+        console.log('init_preprocess() 02');
+  
+   		jQuery('.filter_setting_advance_two_tabs .item.active, .filter_setting_advance_two_tabs .item .nav-link.active').click();
     }
 
     var preprocess = function(element, event) { 
@@ -3311,10 +3314,11 @@ window.document.splugins.wbc.filter_sets.core = function( configs ) {
 	    // $('[data-tab-group="'+group_id+'"]:not(.toggle_sticky_mob_filter.advance_filter_mob)').not('[data-tab-group]:has([data-switch_filter_type-alternate])').css('display',stat_object.display_style);	
 	    var filter_set_click_callback = function(stat_object){
 
+	    	console.log('filter_set_click_callback()');
             $('[data-tab-group="'+group_id+'"]:not(.toggle_sticky_mob_filter.advance_filter_mob)').not('[data-tab-group]:has([data-switch_filter_type-alternate])').css('display',stat_object.display_style);	
 
     	};
-	    window.document.splugins.events.api.notifyAllObservers( 'filters', 'filter_set_click_before_loop',{display_style:display_style},filter_set_click_callback);          
+	    window.document.splugins.events.api.notifyAllObservers( 'filter_sets', 'filter_set_click_before_loop',{display_style:display_style},filter_set_click_callback);          
 
 		
 		console.log("filter_sets filter_set_click 33");
