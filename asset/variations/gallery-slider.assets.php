@@ -38,12 +38,25 @@
         margin-bottom: 10px;
         border: 1px solid #d3d3d3;
     }
+    .splide__track .splide__list {
+        height: auto;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+            -ms-flex-direction: column;
+                flex-direction: column;
+    }
 
 
     div#slider1 .splide__list li img{
         width: 100%;
         height: 100%;
-        object-fit: contain !important;
+        -o-object-fit: contain !important;
+           object-fit: contain !important;
+        max-height: 6rem;
+        min-height: 5rem;
+        display: block;
+        margin: auto;
+        max-width: 100%;
     }
 
 
