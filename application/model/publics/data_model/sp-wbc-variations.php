@@ -854,10 +854,12 @@ class SP_WBC_Variations extends SP_Variations {
         
         $attribute_name = sanitize_title( $args['hook_callback_args']['hook_args'][ 'attribute' ] );
 
-        wbc()->load->model('category-attribute');
-        $attribute = \eo\wbc\model\Category_Attribute::instance()->get_attribute(str_replace('pa_','',$args['hook_callback_args']['hook_args'][ 'attribute' ]));
+        // wbc()->load->model('category-attribute');
+        // $attribute = \eo\wbc\model\Category_Attribute::instance()->get_attribute(str_replace('pa_','',$args['hook_callback_args']['hook_args'][ 'attribute' ]));
+        $attribute = apply_filters('sp_wbc_get_attribute', null, str_replace('pa_','',$args['hook_callback_args']['hook_args'][ 'attribute' ]) );
 
         $product_id = $args['hook_callback_args']['hook_args'][ 'product' ]->get_id();
+
 
         /*ACTIVE_TODO_OC_START
 		----------- most of is to be discared 
@@ -1892,6 +1894,18 @@ class SP_WBC_Variations extends SP_Variations {
 	}
 
 	private function swatches_hooks(){
+ 
+        add_filter( 'sp_wbc_get_attribute',  function($data){
+
+			if (!empty($data)) {
+
+				return $data;
+			}
+
+			wbc()->load->model('category-attribute');
+        	return = \eo\wbc\model\Category_Attribute::instance()->get_attribute(str_replace('pa_','',$args['hook_callback_args']['hook_args'][ 'attribute' ]));
+        	
+		},10);
 
 		add_filter( '? Well be provided leter in recoding',  function($data){
 
