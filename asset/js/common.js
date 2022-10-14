@@ -1142,7 +1142,7 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
         window.document.splugins.events.api.createSubject( 'swatches', ['process_attribute_types', 'sp_variations_swatches_loaded'] );
 
         console.log("swatches init_private");
-
+        // console.log(_this.#$base_container);
         // init on all applicable events 
         jQuery(document).on('wc_variation_form', _this.#$base_container/*'.variations_form:not(.spui-wbc-swatches-loaded)'*/, function (event) {
 
