@@ -27,8 +27,22 @@ if(!class_exists('WBC_Loader')) {
 				return true;
 			}*/
 
+			// ACTIVE_TODO right now we are doing a temporary solution of preventing loading of asset multiple times using the constant option but later we need to apply the standard solution. 
+			$constant = 'SP_WBC_BUILT_IN_ASSET_'.$asset_group.'_LOADED';
+
+			if(defined($constant)){
+
+				return false;
+
+			}
+
+			define($constant,true);
+
+
 			switch ($asset_group) {
+
 				case 'bootstrap':
+
 					if (false) {
 						?>
 						<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -37,9 +51,10 @@ if(!class_exists('WBC_Loader')) {
 						<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 						<?php
 					}
-					wbc()->load->asset('css','https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css',array(),"",false,true,null,null,false,true);
-					wbc()->load->asset('js','https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js',array('jquery'),"",false,true,null,null,false,true);
-					wbc()->load->asset('js','https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js',array('jquery'),"",false,true,null,null,false,true);			
+
+					wbc()->load->asset('css','https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css',array(),"",true,true,null,null,false,true,null,true);
+					wbc()->load->asset('js','https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js',array(/*'jquery'*/),"",true,true,null,null,false,true,null,true);
+					wbc()->load->asset('js','https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js',array(/*'jquery'*/),"",true,true,null,null,false,true,null,true);			
 				case 'semantic':
 					//ACTIVE_TODO update code below to use wbc()->load->asset function call insted of below dairact wp api call.
 					add_action( 'wp_enqueue_scripts',function() { 
@@ -76,7 +91,7 @@ if(!class_exists('WBC_Loader')) {
 
 		}
 
-		public function asset($type,$path,$param = array(),$version="",$load_instantly=false,$is_prefix_handle=false,$localize_var=null,$localize_var_val=null,$in_footer = false,$is_absolute_url = false,$singleton_function = null) {
+		public function asset($type,$path,$param = array(),$version="",$load_instantly=false,$is_prefix_handle=false,$localize_var=null,$localize_var_val=null,$in_footer = false,$is_absolute_url = false,$singleton_function = null,$is_skip_jquery = false) {
 		
 			// NOTE: load_instantly solution provided here is for expesional scenarios only. and for the most of the users on the free support tickets and so on we must fix the actual loading problems to ensure that for most of the scenarios not even platforms the standard solution work and this solution is to be used hardcoded and for temporary periods only for some specific user environments and in the quick support requirements.
 			// NOTE: this solution assumes the loading sequance of caller, so it must be handled carefully and clearly by the loading sequances of the caller.
@@ -96,7 +111,7 @@ if(!class_exists('WBC_Loader')) {
 			switch ($type) {
 				case 'css':
 					if ($is_absolute_url) {
-						$_path = $_path;
+						$_path = $path/*$_path*/;
 					}else {
 						$_path = constant('EOWBC_ASSET_URL').'css'.'/'.$path.'.css';
 					}
@@ -116,7 +131,7 @@ if(!class_exists('WBC_Loader')) {
 					break;
 				case 'js':
 					if ($is_absolute_url) {
-						$_path = $_path;
+						$_path = $path/*$_path*/;
 					
 					} elseif( !empty( $singleton_function ) ) {
 
@@ -131,7 +146,7 @@ if(!class_exists('WBC_Loader')) {
 						// ACTIVE_TODO below if block is temporary, and we can not support localize on directly loads. and if we should then that would be direct script echo here with json_encode of var to be localized -- to s 
 						if( !empty($localize_var) && !empty($localize_var_val) ) {
 	
-							if(empty($param)){
+							if(empty($param) and !$is_skip_jquery){
 								$param = array('jquery');
 
 							}
@@ -170,7 +185,7 @@ if(!class_exists('WBC_Loader')) {
 						
 					}
 					else {
-						if(empty($param)){
+						if(empty($param) and !$is_skip_jquery){
 							$param = array('jquery');
 
 						}
