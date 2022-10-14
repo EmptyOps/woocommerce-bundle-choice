@@ -60,7 +60,7 @@ add_action( ( !is_admin() ? 'wp_enqueue_scripts' : 'admin_enqueue_scripts'),func
 		$gallery_images_configs['product_variations_configs'] = wbc()->config->product_variations_configs();
 		
 
-		$gallery_images_configs['base_container_selector']    = '.spui-sp-variations-gallery-images';
+		$gallery_images_configs['base_container_selector']    = '.variations_form'/*'.spui-sp-variations-gallery-images'*/;
 		$gallery_images_configs['base_container_loop_selector']    = '.variations_form'; //'.spui-sp-variations-loop-gallery-images';
 
 		$gallery_images_configs['template'] 				  = array('slider'=>array('id'=>'sp_slzm_slider_image_loop'), 'zoom'=>array('id'=>'sp_slzm_zoom_image_loop'));	
@@ -156,6 +156,7 @@ add_action('wp_footer',function(){
 
 		        // window.setTimeout(function(){
 
+		        		console.log(" js vars asset " + ( window.document.splugins.common._o( common_configs.gallery_images_configs, 'base_container_selector') ? common_configs.gallery_images_configs.base_container_selector : '.variations_form' ) );
 		            // window.document.splugins.wbc.variations.gallery_images.api.init();
 		            base_container = jQuery( ( window.document.splugins.common._o( common_configs.gallery_images_configs, 'base_container_selector') ? common_configs.gallery_images_configs.base_container_selector : '.variations_form' ) );      
 		            jQuery(base_container).sp_wbc_variations_gallery_images();
