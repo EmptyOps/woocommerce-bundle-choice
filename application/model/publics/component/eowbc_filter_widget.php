@@ -1693,7 +1693,10 @@ class EOWBC_Filter_Widget {
 					<?php /*endif;*/ ?>
 				// });
 				// --- end ---
-				window.document.splugins.wbc.filters.api.input_type_button_click(event);
+				if(false) {
+
+					window.document.splugins.wbc.filters.api.input_type_button_click(event);
+				}
 			});
 		</script>
 		<?php
@@ -2444,7 +2447,10 @@ class EOWBC_Filter_Widget {
 					// 	<?php /*endif;*/ ?>
 					// });
 					// --- end ---
-					window.document.splugins.wbc.filters.api.input_type_icon_click();
+					if(false) {
+
+						window.document.splugins.wbc.filters.api.input_type_icon_click();
+					}
 
 					jQuery(".eo_wbc_srch_btn:eq(2)").on('reset',function(){	
 						var icon_filter_type = "<?php echo $type; ?>";
