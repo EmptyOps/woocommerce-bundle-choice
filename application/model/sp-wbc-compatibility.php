@@ -103,6 +103,15 @@ class SP_WBC_Compatibility extends SP_Compatibility {
 
 	}
 
+	public function woo_product_images_template_compatability($page_section,$args = array()){
+
+        $result = parent::woo_product_images_template_compatability($page_section,$args);
+
+        // NOTE: nothing so far here but here the frontend templaet and js/css layer Compatibility would come 
+
+        return $result; 
+    }
+
 	public function woo_general_broad_matters_compatability($section){
 
         if($section == 'woocommerce_configure_bundle'){

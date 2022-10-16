@@ -138,9 +138,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
 		init_search();
 
-		on_reset_click_listener();
-
-		on_change_listener();
+		process_events();
 
 		init_advance_filter_accordian();
 
@@ -148,6 +146,23 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		// NOTE: now almost all other page load level flag set logic is disabled and initialy the flag is set at page load time only from here. 
 		set_enable_filter_private(true);	
 
+    };
+
+    var process_events = function(){
+
+		console.log("filter process_events");
+		
+		on_reset_click_listener();
+
+		on_change_listener();
+
+		slider_change_event_listener();
+
+		checkbox_change_event_listener();
+
+		input_type_icon_click_listener();
+
+		input_type_button_click_listener();
     };
 
     var init_search = function(form_selector){
@@ -174,6 +189,8 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
 	// --	and there will be one more function like should_search, which will also be private. and that will handle only the logic of checking flags and so on like the enable_filter_table flag above 
     var should_search = function(init_call) {
+
+		console.log("filter should_search");
 
     	// /var/www/html/drashti_project/27-05-2022/sp_tableview/asset/js/publics/sp_tv_template.js
 		// --add to be confirmed 2601 TO 2705--		
@@ -246,6 +263,8 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
 	var prepare_query_data = function(init_call, form_selector) {
 
+		console.log("filter prepare_query_data");
+		
 		// from 0= this file function 
 
 		// from 1 	
@@ -719,6 +738,8 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 	// so here there will be those ajax callback functions like beforeSend, complete, success, error and so on? mostly yes so that we can call it from wrapper and especially put all the refactored code from different instances of ht eo_wbc_filter_change functions in here 
 	var before_send = function(xhr, form_selector) {
 
+		console.log("filter before_send");
+		
 		// window.eo_wbc_object.enable_filter_table = false;
 		// window.document.splugins.eo_wbc_object.enable_filter_table = false;
 		
@@ -754,6 +775,8 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
 		// --  but still first check points and notes above related to callbacks flow that we planed -- to h done
 	var eo_wbc_filter_change_wrapper_private = function(init_call, form_selector, render_container, parameters) {
+
+		console.log("filter eo_wbc_filter_change_wrapper_private");
 
 		if( !should_search(init_call) ){
 
@@ -840,6 +863,9 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 	};
 
 	var complete = function(form_selector){
+		
+		console.log("filter complete");
+		
 		// console.log(this.url);
 
 		// NOTE: hide_loader is called from success and error also but in future we most likely will remove call from success and error function.
@@ -854,6 +880,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
 	var success = function(data, render_container, form_selector) {
 
+		console.log("filter success");
 
 		//console.log(data);
 		//document.write(data);
@@ -910,6 +937,8 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
 	var error = function(data, form_selector){
 		
+		console.log("filter error");
+		
 		// console.log('error');
 		// console.log(data);
 
@@ -934,6 +963,8 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
 	var update_result_count = function(render_container, data){
 
+		console.log("filter update_result_count");
+		
 		// create one function update_result_count in filters core js module -- to d done
 		// --	and then move the below code in that -- to d done
 		/*ACTIVE_TODO_OC_START
@@ -962,6 +993,8 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
     ///////////// -- 15-06-2022 -- @drashti -- ///////////////////////////////
     var compatability = function(section, object, expected_result, form_selector) {
+    	
+		console.log("filter compatability");
     	
     	// ACTIVE_TODO_OC_START
     	// do the call from where the below section is moved here, and if you already did the call then show and confirm with me -- to d 
@@ -1416,6 +1449,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
     var slider_change_event_listener = function(selector){
 
+    	console.log("filter slider_change_event_listener");
 		// --- move this code from woo-bundle-choice/application/view/publics/filters/form.php ---
 		// --- start ---
 
@@ -1433,22 +1467,29 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		// --- end ---
     };
 
-    var checkbox_change_event_listener = function(event){
+    var checkbox_change_event_listener = function(){
 
 		// --- move this code from woo-bundle-choice/application/view/publics/filters/form.php ---
 		// --- start ---			
 		if( typeof(jQuery.fn.checkbox) ==='function' ) {
 
+			// --- compare_start (1) woo-bundle-choice/application/view/publics/filters/form.php ---
 			jQuery('.checkbox').checkbox({onChange:function(event){			
 
 				on_checkbox_change_event(event, this);
-			}});				
+			}});
+			// -- (2) sp-purple-woo-bundle-choice/application/view/publics/filters/load_desktop.php
+			jQuery('.filter_checkbox').on('change',function(event){
+        	});     				
+            // --- compare_end ---			
+
 		}
 		// --- end ---
     };
 
-    var input_type_icon_click_listener = function(e) {
+    var input_type_icon_click_listener = function() {
 
+    	return false;
     	// --- aa code woo-bundle-choice/application/model/publics/component/eowbc_filter_widget.php eo_wbc_filter_ui_icon() mathi move karyo se @a ---
     	// --- start ---
 		// jQuery(filter_container).find('[data-filter="'+"<?php echo $term->slug; ?>"+'"]:not(.none_editable)').on('click',function(e){
@@ -1461,7 +1502,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
     };
 
-    var input_type_button_click_listener = function(event) {
+    var input_type_button_click_listener = function() {
 
     	// --- aa code woo-bundle-choice/application/model/publics/component/eowbc_filter_widget.php input_button(); mathi move karyo se @a ---
     	// --- start ---
@@ -2003,10 +2044,16 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 	    	//////// 27-05-2022 - @drashti /////////
 			// --add to be confirmed--
 
+			// --- compare_start (1) woo-bundle-choice/application/view/publics/filters/form.php ---
 			// window.document.splugins.wbc.filters.api.eo_wbc_filter_change_wrapper(false,'form#<?php echo $filter_ui->filter_prefix; ?>eo_wbc_filter','',{'this':this,'event':event});
 			window.document.splugins.wbc.filters.api.eo_wbc_filter_change_wrapper(false,'form#'+ _this.sub_configs.filter_prefix +'eo_wbc_filter','',{'this':element,'event':event});
 	    	// jQuery.fn.eo_wbc_filter_change(false,'form#<?php/* echo $filter_ui->filter_prefix;*/ ?>eo_wbc_filter','',{'this':this,'event':event});
 			////////////////////////////////////////
+
+			// -- (2) sp-purple-woo-bundle-choice/application/view/publics/filters/load_desktop.php
+            // jQuery.fn.eo_wbc_filter_change(false,'form#<?php echo $filter_ui->filter_prefix; ?>eo_wbc_filter','',{'this':this,'event':event});
+            jQuery.fn.eo_wbc_filter_change(false,'form#'+ _this.sub_configs.filter_prefix +'eo_wbc_filter','',{'this':this,'event':event});
+            // --- compare_end ---
     	// <?php endif; ?>
     	}			
 
@@ -2014,6 +2061,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
     var input_type_icon_click = function(e, element) {
 
+    	console.log("filter input_type_icon_click");
 		event = e;
 		
 		e.stopPropagation();
@@ -2335,6 +2383,7 @@ window.document.splugins.wbc.pagination = window.document.splugins.wbc.paginatio
 
 window.document.splugins.wbc.pagination.core = function( configs ) {
 
+	console.log('pagination_module');
     var _this = this; 
 
 	_this.configs = jQuery.extend({}, {}/*default configs*/, configs);	
@@ -2343,6 +2392,7 @@ window.document.splugins.wbc.pagination.core = function( configs ) {
 
 	var init_private = function(event) {
 
+		console.log('pagination_init');
 		// ACTIVE_TODO whenever in future if required  to run compatibility check during run time means after the base container selectore is defined than we can call compatibility layers additionaly from here 
     	var base_container_selector_callback = null;
 		var stat_object = window.document.splugins.events.api.apply_all_observer_filters( 'pagination', 'base_container_selector',{type:_this.$base_container},base_container_selector_callback);  
@@ -2403,7 +2453,7 @@ window.document.splugins.wbc.pagination.core = function( configs ) {
 		}
 	}
 	
-	var on_click_listener = function(event){
+	var on_click_listener = function(e){
 		/*ACTIVE_TODO_OC_START
 		NOTE : it will bind to all kind of such on_click events of pagination, it will be private but it may broadcast notification with a callback which js layers of like tableview and so on can call when they recieve their own click event or they can simply call below on_click function". so it is private function.
 		ACTIVE_TODO_OC_END*/
@@ -2473,6 +2523,7 @@ window.document.splugins.wbc.pagination.core = function( configs ) {
 
     var click = function(event){
     	
+    	console.log('pagination_click');
     	/*ACTIVE_TODO_OC_START
     	-- event var aya sudhi pogadvano se -- to a
     	ACTIVE_TODO_OC_END*/
@@ -2484,21 +2535,21 @@ window.document.splugins.wbc.pagination.core = function( configs ) {
 		
 			if(jQuery(this).hasClass("next")){
 				// jQuery("[name='paged']").val(parseInt(jQuery(".page-numbers.current").text())+1);
-				set_page_number( get_page_number()+1 );
+				window.document.splugins.wbc.pagination.api.set_page_number( window.document.splugins.wbc.pagination.api.get_page_number()+1 );
 			}
 			if(jQuery(this).hasClass("prev")){
 				// jQuery("[name='paged']").val(parseInt(jQuery(".page-numbers.current").text())-1);
-				set_page_number( get_page_number()-1 );
+				window.document.splugins.wbc.pagination.api.set_page_number( window.document.splugins.wbc.pagination.api.get_page_number()-1 );
 			}	
 		}		
 		else {
 			// jQuery("[name='paged']").val(jQuery(this).text());
-			set_page_number( get_page_number());
+			window.document.splugins.wbc.pagination.api.set_page_number( window.document.splugins.wbc.pagination.api.get_page_number());
 		}		
 
 		// jQuery('[name="paged"]').val(parseInt(jQuery(this).text().replace(',','')));
 		// jQuery.fn.eo_wbc_filter_change(false,'form#'+jQuery(this).parents().has('[id$="eo_wbc_filter"]').find('[id$="eo_wbc_filter"]').attr('id'));
-		window.document.splugins.filters.api.eo_wbc_filter_change_wrapper(false, 'form#'+jQuery(this).parents().has('[id$="eo_wbc_filter"]').find('[id$="eo_wbc_filter"]').attr('id') );
+		window.document.splugins.wbc.filters.api.eo_wbc_filter_change_wrapper(false, 'form#'+jQuery(this).parents().has('[id$="eo_wbc_filter"]').find('[id$="eo_wbc_filter"]').attr('id') );
 
     };
 
