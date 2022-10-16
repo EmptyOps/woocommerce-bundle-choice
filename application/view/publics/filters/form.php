@@ -435,7 +435,10 @@ if(empty($_per_page)){
 			// 	});
 			// };
 			// --- end ---
-			window.document.splugins.wbc.filters.api.slider_change_event(selector);
+			if(false) {
+
+				window.document.splugins.wbc.filters.api.slider_change_event(selector);
+			}
 
 			var primary_filter=jQuery(".eo-wbc-container.filters .ui.segment:not(.secondary)");
 
@@ -453,7 +456,10 @@ if(empty($_per_page)){
 				jQuery('.ui.accordion').accordion();
 			}
 
-			window.eo.slider(jQuery('.eo-wbc-container.filters').find('.ui.slider'));				
+			if (false) {
+
+				window.eo.slider(jQuery('.eo-wbc-container.filters').find('.ui.slider'));				
+			}
 		
 			/* Activate initiation of sliders at secondary segments. */
 			if(jQuery(secondary_computer_only).css('display')!='none'){			
@@ -577,7 +583,10 @@ if(empty($_per_page)){
 			// 	}});				
 			// }
 			// --- end ---
-			window.document.splugins.wbc.filters.api.checkbox_change_event(event);
+			if(false) {
+
+				window.document.splugins.wbc.filters.api.checkbox_change_event(event);
+			}
 			/*----------------------------------------------------*/
 			/*----------------------------------------------------*/
 
