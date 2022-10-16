@@ -53,8 +53,8 @@ if(!class_exists('WBC_Loader')) {
 					}
 
 					wbc()->load->asset('css','https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css',array(),"",true,true,null,null,false,true,null,true);
-					wbc()->load->asset('js','https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js',array(/*'jquery'*/),"",true,true,null,null,false,true,null,true);
-					wbc()->load->asset('js','https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js',array(/*'jquery'*/),"",true,true,null,null,false,true,null,true);			
+					wbc()->load->asset('js','https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js', wbc()->common->current_theme_key() != "themes___purple_theme" ? array():array('jquery'),"",true,true,null,null,false,true,null,true);
+					wbc()->load->asset('js','https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js',wbc()->common->current_theme_key() != "themes___purple_theme" ? array():array('jquery'),"",true,true,null,null,false,true,null,true);			
 				case 'semantic':
 					//ACTIVE_TODO update code below to use wbc()->load->asset function call insted of below dairact wp api call.
 					add_action( 'wp_enqueue_scripts',function() { 
