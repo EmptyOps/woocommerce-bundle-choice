@@ -98,10 +98,8 @@ class Eowbc_Model {
 
 								}
 
-							}	
-
-
-
+							}
+							
 							-- am melu tu /woo-bundle-choice/application/model/publics/data_model/sp-wbc-variations.php: line 569
 							// ACTIVE_TODO/TODO implement 
 							if( !empty($args['is_convert_das_to_array'])){

@@ -1928,7 +1928,7 @@ class SP_WBC_Variations extends SP_Variations {
 
 	private function swatches_hooks(){
  
-        add_filter( 'sp_wbc_get_attribute',  function($data){
+        add_filter( 'sp_wbc_get_attribute',  function($data,$attribute){
 
 			if (!empty($data)) {
 
@@ -1936,7 +1936,7 @@ class SP_WBC_Variations extends SP_Variations {
 			}
 
 			wbc()->load->model('category-attribute');
-        	return = \eo\wbc\model\Category_Attribute::instance()->get_attribute(str_replace('pa_','',$args['hook_callback_args']['hook_args'][ 'attribute' ]));
+        	return \eo\wbc\model\Category_Attribute::instance()->get_attribute($attribute/*str_replace('pa_','',$args['hook_callback_args']['hook_args'][ 'attribute' ])*/);
         	
 		},10);
 
