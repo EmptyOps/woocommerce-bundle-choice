@@ -466,7 +466,7 @@ if(empty($_per_page)){
 
 				jQuery("#advance_filter").on('click',function(){
 					jQuery("#advance_filter").find('.ui.icon').toggleClass('up down');
-					jQuery(secondary_filter).transition('slide down');
+					jQuery(secondary_filter+":eq(0)").transition('slide down');
 				}).trigger('click');			
 
 			} else if(jQuery(secondary_mobile_only).css('display')!='none') {
