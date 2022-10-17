@@ -435,10 +435,8 @@ if(empty($_per_page)){
 			// 	});
 			// };
 			// --- end ---
-			if(false) {
 
-				window.document.splugins.wbc.filters.api.slider_change_event(selector);
-			}
+			// window.document.splugins.wbc.filters.api.slider_change_event(selector);
 
 			var primary_filter=jQuery(".eo-wbc-container.filters .ui.segment:not(.secondary)");
 
@@ -446,7 +444,8 @@ if(empty($_per_page)){
 
 			var primary_mobile_only=jQuery(primary_filter).find(".mobile.only");
 
-			var secondary_filter=jQuery(".eo-wbc-container.filters .ui.segment.secondary");
+			// var secondary_filter=jQuery(".eo-wbc-container.filters .ui.segment.secondary");
+			var secondary_filter=".eo-wbc-container.filters .ui.segment.secondary";
 
 			var secondary_computer_only=jQuery(secondary_filter).find(".computer.tablet.only");
 
@@ -456,10 +455,7 @@ if(empty($_per_page)){
 				jQuery('.ui.accordion').accordion();
 			}
 
-			if (false) {
-
-				window.eo.slider(jQuery('.eo-wbc-container.filters').find('.ui.slider'));				
-			}
+			// window.eo.slider(jQuery('.eo-wbc-container.filters').find('.ui.slider'));				
 		
 			/* Activate initiation of sliders at secondary segments. */
 			if(jQuery(secondary_computer_only).css('display')!='none'){			
@@ -583,10 +579,9 @@ if(empty($_per_page)){
 			// 	}});				
 			// }
 			// --- end ---
-			if(false) {
 
-				window.document.splugins.wbc.filters.api.checkbox_change_event(event);
-			}
+			// window.document.splugins.wbc.filters.api.checkbox_change_event(event);
+			
 			/*----------------------------------------------------*/
 			/*----------------------------------------------------*/
 
