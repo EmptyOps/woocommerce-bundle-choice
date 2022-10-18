@@ -10,6 +10,14 @@ if( is_product() ) {
 ?>
 
 <style type="text/css">
+	form.variations_form.cart table.variations {
+	    -webkit-box-shadow: none !important;
+	            box-shadow: none !important;
+	    border: none !important;
+	}	
+</style>
+
+<style type="text/css">
 	table.variations tbody>tr:nth-child(odd)>td, table.variations tbody>tr:nth-child(odd)>th {
 	    background: transparent;
 	}
@@ -36,7 +44,8 @@ if( is_product() ) {
 
 <style type="text/css">
 	.ui.mini.images .variable-item.image{
-		width: auto;						
+		width: auto;
+		border-width:1px;						
 	}					
 	.image-variable-item{
 		border: none !important;
