@@ -576,12 +576,18 @@ class SP_WBC_Variations extends SP_Variations {
 		$variation_id       = absint( $variation->get_id() );
 		$variation_image_id = absint( $variation->get_image_id() );
 
+		return $this->get_variations_and_simple_type_fields($variation_get_max_purchase_quantity,  $instance,  $variation,$product_id, $variation_id, $variation_image_id, $args);
+
+	}
+	
+	private function get_variations_and_simple_type_fields( $variation_get_max_purchase_quantity,  $instance,  $variation,$product_id, $id, $variation_image_id, $args = array()){
+		
 
 		$gallery_images_types 					  = self::sp_variations_gallery_images_supported_types(array('is_base_type_only'=>true));	
 
-		$args['form_definition'] = \eo\wbc\controllers\admin\menu\page\Tiny_features::instance()->init(array('temporary_get_form_directly'=>true, 'is_legacy_admin'=>true, 'data'=>array('id'=>$variation_id)));
+		$args['form_definition'] = \eo\wbc\controllers\admin\menu\page\Tiny_features::instance()->init(array('temporary_get_form_directly'=>true, 'is_legacy_admin'=>true, 'data'=>array('id'=>$id)));
 		// ACTIVE_TODO there is big architectural error here but it as might be because of our incomplete implementation of data class(which would be commonly used by the admin and frontend modules) which planned in get data function of single product model -- the error here is it is directly calling the function of parent class instead of calling its own model of the tiny features. 
-		$data 				= \eo\wbc\model\admin\Eowbc_Model::instance()->get($args['form_definition'],array('page_section'=>'sp_variations', 'is_convert_das_to_array'=>true, 'id'=>$variation_id, 'is_legacy_admin'=>true ));
+		$data 				= \eo\wbc\model\admin\Eowbc_Model::instance()->get($args['form_definition'],array('page_section'=>'sp_variations', 'is_convert_das_to_array'=>true, 'id'=>$id, 'is_legacy_admin'=>true ));
 		//  $product                      = wc_get_product( $product_id );
 
 		$gallery_images = array();	
@@ -755,7 +761,7 @@ class SP_WBC_Variations extends SP_Variations {
 		return $variation_get_max_purchase_quantity;
 
 	}
-	
+
 	public function get_default_gallery_images( $product_id ) {
 
 		$product              = wc_get_product( $product_id );
@@ -1888,35 +1894,23 @@ class SP_WBC_Variations extends SP_Variations {
 				
 			}
 
+			$simple_type_fields = self::instance()->get_variations_and_simple_type_fields(array(),  $product, $product,$data['gallery_images_template_data']['product_id'], $data['gallery_images_template_data']['product_id'], $data['gallery_images_template_data']['post_thumbnail_id'], $args);
+
 			if(!empty($data['gallery_images_template_data']['attachment_ids'])){
 			    
 			    foreach ($data['gallery_images_template_data']['attachment_ids'] as $index=>$id) {
 
-			       	
+			    	$data['gallery_images_template_data']['attachment_ids_loop_image'][$index] = \eo\wbc\model\publics\data_model\SP_WBC_Variations::instance()->get_product_attachment_props( $id );
 
-			        $data['gallery_images_template_data']['attachment_ids_loop_image'][$index] = \eo\wbc\model\publics\data_model\SP_WBC_Variations::instance()->get_product_attachment_props( $id );
-			        $data['gallery_images_template_data']['attachment_ids_loop_post_thumbnail_id'][$index] = $product->get_image_id();
+			    	$data = self::prepare_gallery_template_data_item($data, $index, $id, $product);
+			    }
 
-			        $data['gallery_images_template_data']['attachment_ids_loop_remove_featured_image'][$index] = false;
+			    -- here we need to add the simple_type_fields into attachment_ids other wise we well fetcs mani integrity issus. so plan the right flow -- to h
+			    foreach ($simple_type_fields as $index=>$image) {
 
-			        if ( $data['gallery_images_template_data']['attachment_ids_loop_remove_featured_image'][$index] && absint( $id ) == absint( $data['gallery_images_template_data']['attachment_ids_loop_post_thumbnail_id'][$index] ) ) {
-			            return '';
-			        }
+			    	$data['gallery_images_template_data']['attachment_ids_loop_image'][$index] = $image;
 
-			        $data['gallery_images_template_data']['attachment_ids_loop_classes'][$id] = array( '' );
-
-			        if ( isset( $data['gallery_images_template_data']['attachment_ids_loop_image'][$id]['video_link'] ) && ! empty( $data['gallery_images_template_data']['attachment_ids_loop_image'][$id]['video_link'] ) ) {
-			            array_push( $data['gallery_images_template_data']['attachment_ids_loop_classes'][$id], '' );
-			        }
-
-			        //ACTIVE_TODO right now we are creating class wrapper per image but it should be only once for the entire gallery_images wrapper. so we need to remove that unnecessary data from $image and fix that as soon as we get chance. 
-			        $data['gallery_images_template_data']['class_wrapper'] = $data['gallery_images_template_data']['attachment_ids_loop_image'][$index]['class_wrapper'];
-			        
-			        //ACTIVE_TODO publish hook if required 
-			        // $data['gallery_images_template_data']['attachment_ids_loop_classes'][$id] = apply_filters( '', $classes, $id, $image );
-			        
-			       //return '<div class="' . esc_attr( implode( ' ', array_map( 'sanitize_html_class', array_unique( $classes ) ) ) ) . '"><div>' . $inner_html . '</div></div>';
-	     
+			    	$data = self::prepare_gallery_template_data_item($data, $index, $image['image_id'], $product);
 			    }
 			}
 		}
@@ -1925,6 +1919,34 @@ class SP_WBC_Variations extends SP_Variations {
 
 		// ACTIVE_TODO ultimately move all below core implementtaion in the new core class of gallery_images or maybe simply in the wbc variations class 
 	}
+
+	public static function prepare_gallery_template_data_item($data, $index, $id, $product, $args = array()) {
+
+        
+        $data['gallery_images_template_data']['attachment_ids_loop_post_thumbnail_id'][$index] = $product->get_image_id();
+
+        $data['gallery_images_template_data']['attachment_ids_loop_remove_featured_image'][$index] = false;
+
+        if ( $data['gallery_images_template_data']['attachment_ids_loop_remove_featured_image'][$index] && absint( $id ) == absint( $data['gallery_images_template_data']['attachment_ids_loop_post_thumbnail_id'][$index] ) ) {
+            return '';
+        }
+
+        $data['gallery_images_template_data']['attachment_ids_loop_classes'][$id] = array( '' );
+
+        if ( isset( $data['gallery_images_template_data']['attachment_ids_loop_image'][$id]['video_link'] ) && ! empty( $data['gallery_images_template_data']['attachment_ids_loop_image'][$id]['video_link'] ) ) {
+            array_push( $data['gallery_images_template_data']['attachment_ids_loop_classes'][$id], '' );
+        }
+
+        //ACTIVE_TODO right now we are creating class wrapper per image but it should be only once for the entire gallery_images wrapper. so we need to remove that unnecessary data from $image and fix that as soon as we get chance. 
+        $data['gallery_images_template_data']['class_wrapper'] = $data['gallery_images_template_data']['attachment_ids_loop_image'][$index]['class_wrapper'];
+        
+        //ACTIVE_TODO publish hook if required 
+        // $data['gallery_images_template_data']['attachment_ids_loop_classes'][$id] = apply_filters( '', $classes, $id, $image );
+        
+       //return '<div class="' . esc_attr( implode( ' ', array_map( 'sanitize_html_class', array_unique( $classes ) ) ) ) . '"><div>' . $inner_html . '</div></div>';
+
+        return $data;
+   	}
 
 	private function swatches_hooks(){
  
