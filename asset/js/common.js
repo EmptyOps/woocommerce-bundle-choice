@@ -3569,30 +3569,43 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
 
             var aLocate = liLocate.find('a');
 
-            if(aLocate.attr('class').indexOf(' ') >= 0){
+            for (let i = 0; i < aLocate.length; i++){
 
-                var aLocateclassAll = aLocate.attr('class').split(" ");
+                if(aLocate.attr('class').indexOf(' ') >= 0){
 
-                var aLocateclassAll_index = aLocateclassAll.indexOf(aLocateclass_p);
+                    var aLocateclassAll = aLocate.attr('class').split(" ");
 
-                var aLocateclass = aLocateclassAll[aLocateclassAll_index];
+                    var aLocateclassAll_index = aLocateclassAll.indexOf(aLocateclass_p);
 
-                console.log('<a> class split');
+                    if( aLocateclassAll_index != -1) {
 
-            }else{
+                        var aLocateclass = aLocateclassAll[aLocateclassAll_index];
+                        
+                    }else if(aLocate.attr("href").indexOf("/product/") >= 0) {
 
-                var aLocateclass = aLocate.attr('class');
+                        console.log("HREF thi <a> malyo");
+                    }
 
-                console.log('<a> class no split');
-            }        
+                    console.log('<a> class split');
 
-            if(aLocateclass == aLocateclass_p){
+                    var finalAncher = aLocate[i];
 
-                console.log("class thi <a> malyo");
-            }else if(aLocate.attr("href").indexOf("/product/") >= 0) {
+                }else{
 
-                console.log("HREF thi <a> malyo");
+                    var aLocateclass = aLocate.attr('class');
+
+                    console.log('<a> class no split');
+
+                    if(aLocateclass == aLocateclass_p){
+
+                        console.log("class thi <a> malyo");
+                    }else if(aLocate.attr("href").indexOf("/product/") >= 0) {
+
+                        console.log("HREF thi <a> malyo");
+                    }
+                } 
             }
+
         };
         // --- end ---
 
