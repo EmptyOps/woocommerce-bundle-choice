@@ -44,7 +44,8 @@ if( is_product() ) {
 
 <style type="text/css">
 	.ui.mini.images .variable-item.image{
-		width: auto;						
+		width: auto;
+		border-width:1px;						
 	}					
 	.image-variable-item{
 		border: none !important;
