@@ -4,6 +4,10 @@ window.document.splugins.wbc = window.document.splugins.wbc || {};
 
 // the filters js module
 window.document.splugins.wbc.filters = window.document.splugins.wbc.filters || {};
+
+window.document.splugins.wbc.filters.filter_field = window.document.splugins.wbc.filters.filter_field || {};
+
+window.document.splugins.wbc.filters.filter_field.slider = window.document.splugins.wbc.filters.filter_field.slider || {};
 	// maybe observer pattern with filters as subject, filter types like ring builder filters, shop/cat filters, shortcode filters and diamond quiz etc filters as observer(subscriber) but also the filter fields also as observer(subscriber)(as per standard it should be only filter types not fields but we can implement by adding subtype field in the definition arcitecture and still it is not pure standard but would work), and also the filter or any of its layers like network(ajax) or render(html render) as the singleton factory design pattern 
 		// moved to asana 
 
@@ -1460,11 +1464,13 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		window.eo=new Object();
 
 		//Slider creation function
-		window.eo.slider=function(selector){
-
+		// window.eo.slider=function(selector){
+		window.document.splugins.wbc.filters.filter_field.slider = function(selector){
+ 
 			on_slider_change_event(selector, this);
 		};
 		// --- end ---
+    	window.document.splugins.wbc.filters.filter_field.slider(jQuery('.eo-wbc-container.filters').find('.ui.slider'));
     };
 
     var checkbox_change_event_listener = function(){
@@ -1479,26 +1485,42 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 				on_checkbox_change_event(event, this);
 			}});
 			// -- (2) sp-purple-woo-bundle-choice/application/view/publics/filters/load_desktop.php
-			jQuery('.filter_checkbox').on('change',function(event){
-        	});     				
+			// jQuery('.filter_checkbox').on('change',function(event){
+   //      	});     				
             // --- compare_end ---			
 
 		}
 		// --- end ---
+    
     };
 
     var input_type_icon_click_listener = function() {
 
-    	return false;
-    	// --- aa code woo-bundle-choice/application/model/publics/component/eowbc_filter_widget.php eo_wbc_filter_ui_icon() mathi move karyo se @a ---
-    	// --- start ---
-		// jQuery(filter_container).find('[data-filter="'+"<?php echo $term->slug; ?>"+'"]:not(.none_editable)').on('click',function(e){
-		jQuery(filter_container).find('[data-filter="'+ _this.sub_configs.term_slug +'"]:not(.none_editable)').on('click',function(e){
-			
-			on_input_type_icon_click(e, this);
-			
-		});
-		// --- end ---
+    	console.log('input_type_icon_click_listener()');
+    	
+        jQuery( EO_WBC_FILTER_UI_ICON_TERM_SLUG ).each(function (i, term_slug) {
+
+	    	// --- aa code woo-bundle-choice/application/model/publics/component/eowbc_filter_widget.php eo_wbc_filter_ui_icon() mathi move karyo se @a ---
+	    	// --- start ---
+	    	if(term_slug){
+
+				//TO BE FIXED LATER.
+				/*jQuery('[data-filter="'+__data_filter_slug+'"]:not(.none_editable)').off();
+				jQuery('[data-filter="'+__data_filter_slug+'"]:not(.none_editable)').on('click',function(e){*/
+				// let filter_container = jQuery('form#<?php echo $this->filter_prefix; ?>eo_wbc_filter').parents().has('[data-filter="<?php echo $term->slug; ?>"]').get(0);
+				let filter_container = jQuery('form#'+ _this.sub_configs.filter_prefix +'eo_wbc_filter').parents().has('[data-filter="'+ term_slug +'"]').get(0);
+
+				jQuery(filter_container).find('[data-filter="'+"<?php echo $term->slug; ?>"+'"]:not(.none_editable)').off();
+				// jQuery(filter_container).find('[data-filter="'+"<?php echo $term->slug; ?>"+'"]:not(.none_editable)').on('click',function(e){
+				jQuery(filter_container).find('[data-filter="'+ term_slug +'"]:not(.none_editable)').on('click',function(e){
+					
+					console.log('input_type_icon_click_listener() 02');
+					on_input_type_icon_click(e, this, term_slug);
+					
+				});
+	    	}
+			// --- end ---          
+        });    	
 
     };
 
@@ -1566,14 +1588,15 @@ window.document.splugins.wbc.filters.core = function( configs ) {
     	slider_change_event(selector, element);
     };
 
-    var on_checkbox_change_event = function(event){
+    var on_checkbox_change_event = function(event, element){
 
     	checkbox_change_event(event, element);
     };
 
-    var on_input_type_icon_click = function(e, element) {
+    var on_input_type_icon_click = function(e, element, term_slug) {
 
-    	input_type_icon_click(e, element);
+    	console.log('on_input_type_icon_click()');
+    	input_type_icon_click(e, element, term_slug);
     };
 
     var on_input_type_button_click = function(event, element) {
@@ -1884,7 +1907,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
 
 			    	// <?php if(empty(wbc()->options->get_option('filters_'.$filter_prefix.'filter_setting','filter_setting_btnfilter_now'))): ?>
-			    	if(isEmpty(_this.sub_configs.filter_setting_btnfilter_now)){
+			    	if(_this.sub_configs.filter_setting_btnfilter_now != 'filter_setting_btnfilter_now'){
 
 				    	//////// 27-05-2022 - @drashti /////////
 						// --add to be confirmed--
@@ -2039,7 +2062,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
     	window.document.splugins.wbc.pagination.api.reset();
     	
     	// <?php if(empty(wbc()->options->get_option('filters_'.$filter_prefix.'filter_setting','filter_setting_btnfilter_now'))): ?>
-    	if(isEmpty(_this.sub_configs.filter_setting_btnfilter_now)){
+    	if(_this.sub_configs.filter_setting_btnfilter_now != 'filter_setting_btnfilter_now'){
 
 	    	//////// 27-05-2022 - @drashti /////////
 			// --add to be confirmed--
@@ -2052,14 +2075,16 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
 			// -- (2) sp-purple-woo-bundle-choice/application/view/publics/filters/load_desktop.php
             // jQuery.fn.eo_wbc_filter_change(false,'form#<?php echo $filter_ui->filter_prefix; ?>eo_wbc_filter','',{'this':this,'event':event});
-            jQuery.fn.eo_wbc_filter_change(false,'form#'+ _this.sub_configs.filter_prefix +'eo_wbc_filter','',{'this':this,'event':event});
+            // -- temp comment ---
+            // jQuery.fn.eo_wbc_filter_change(false,'form#'+ _this.sub_configs.filter_prefix +'eo_wbc_filter','',{'this':this,'event':event});
+            // -- temp comment end---
             // --- compare_end ---
     	// <?php endif; ?>
     	}			
 
     };
 
-    var input_type_icon_click = function(e, element) {
+    var input_type_icon_click = function(e, element, term_slug) {
 
     	console.log("filter input_type_icon_click");
 		event = e;
@@ -2076,19 +2101,19 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		if(icon_filter_type == 1) {
 			/*filter_list = jQuery('[name="checklist_'+__data_filter_slug+'"]');*/
 			// filter_list = jQuery('form#<?php echo $this->filter_prefix; ?>eo_wbc_filter [name="checklist_'+"<?php echo $term->slug; ?>"+'"]');
-			filter_list = jQuery('form#'+ _this.sub_configs.filter_prefix +'eo_wbc_filter [name="checklist_'+ _this.sub_configs.term_slug +'"]');
+			filter_list = jQuery('form#'+ _this.sub_configs.filter_prefix +'eo_wbc_filter [name="checklist_'+ term_slug +'"]');
 
 			// filter_target = jQuery('form#<?php echo $this->filter_prefix; ?>eo_wbc_filter [name="_attribute"]');
 			filter_target = jQuery('form#'+ _this.sub_configs.filter_prefix +'eo_wbc_filter [name="_attribute"]');
 
 			/*console.log(jQuery('[name="checklist_'+__data_filter_slug+'"]'));*/
-			console.log(jQuery('form#'+ _this.sub_configs.filter_prefix +'eo_wbc_filter [name="checklist_'+ _this.sub_configs.term_slug +'"]'));
+			console.log(jQuery('form#'+ _this.sub_configs.filter_prefix +'eo_wbc_filter [name="checklist_'+ term_slug +'"]'));
 
 			console.log(jQuery('form#'+ _this.sub_configs.filter_prefix +'eo_wbc_filter [name="_attribute"]'));
 		} else {
 			/*filter_list = jQuery('[name="cat_filter_'+__data_filter_slug+'"]');*/
 			// filter_list = jQuery('form#<?php echo $this->filter_prefix; ?>eo_wbc_filter [name="cat_filter_'+"<?php echo $term->slug; ?>"+'"]');
-			filter_list = jQuery('form#'+ _this.sub_configs.filter_prefix +'eo_wbc_filter [name="cat_filter_'+ _this.sub_configs.term_slug +'"]');
+			filter_list = jQuery('form#'+ _this.sub_configs.filter_prefix +'eo_wbc_filter [name="cat_filter_'+ term_slug +'"]');
 
 			// filter_target = jQuery('form#<?php echo $this->filter_prefix; ?>eo_wbc_filter [name="_category"]');
 			filter_target = jQuery('form#'+ _this.sub_configs.filter_prefix +'eo_wbc_filter [name="_category"]');
@@ -2097,10 +2122,10 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		let is_single_select = jQuery(/*this*/element).data('single_select');
 		if(typeof(is_single_select) !== typeof(undefined) && is_single_select==1){
 			// jQuery('form#<?php echo $this->filter_prefix; ?>eo_wbc_filter [data-filter="'+"<?php echo $term->slug; ?>"+'"]:not(.none_editable)').removeClass('eo_wbc_filter_icon_select');
-			jQuery('form#'+ _this.sub_configs.filter_prefix +'eo_wbc_filter [data-filter="'+ _this.sub_configs.term_slug +'"]:not(.none_editable)').removeClass('eo_wbc_filter_icon_select');
+			jQuery('form#'+ _this.sub_configs.filter_prefix +'eo_wbc_filter [data-filter="'+ term_slug +'"]:not(.none_editable)').removeClass('eo_wbc_filter_icon_select');
 
 			// let toggleable_selections = jQuery('form#<?php echo $this->filter_prefix; ?>eo_wbc_filter .toggled_image[data-filter="'+"<?php echo $term->slug; ?>"+'"]:not(.none_editable)');
-			let toggleable_selections = jQuery('form#'+ _this.sub_configs.filter_prefix +'eo_wbc_filter .toggled_image[data-filter="'+ _this.sub_configs.term_slug +'"]:not(.none_editable)');
+			let toggleable_selections = jQuery('form#'+ _this.sub_configs.filter_prefix +'eo_wbc_filter .toggled_image[data-filter="'+ term_slug +'"]:not(.none_editable)');
 
 			console.log(toggleable_selections);
 			if(typeof(toggleable_selections)!==typeof(undefined) && toggleable_selections.length>0){
@@ -2138,7 +2163,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		jQuery(/*this*/element).toggleClass('eo_wbc_filter_icon_select');
 		$('[name="paged"]').val('1');
 		// <?php if(empty(wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','filter_setting_btnfilter_now'))): ?>
-		if(isEmpty(_this.sub_configs.filter_setting_btnfilter_now)){
+		if(_this.sub_configs.filter_setting_btnfilter_now != 'filter_setting_btnfilter_now'){
 
 		//////// 27-05-2022 - @drashti /////////
 		// --add to be confirmed--
@@ -2211,7 +2236,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		} }	
 
 		// <?php if(empty(wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','filter_setting_btnfilter_now'))): ?>
-		if(isEmpty(_this.sub_configs.filter_setting_btnfilter_now)){
+		if(_this.sub_configs.filter_setting_btnfilter_now != 'filter_setting_btnfilter_now'){
 
 			//////// 27-05-2022 - @drashti /////////
 			// --add to be confirmed--

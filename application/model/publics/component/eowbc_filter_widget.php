@@ -430,25 +430,27 @@ class EOWBC_Filter_Widget {
 				}
 				?>
 				<script type="text/javascript">
-					jQuery.fn.wbc_flip_toggle_image=function(element){
-						let img = jQuery(element).find('img');						
-						if(jQuery(element).hasClass('eo_wbc_filter_icon_select')) {
-							let toggle_src = jQuery(img).attr('data-toggleimgsrc');
-							if((typeof(toggle_src)!==typeof(undefined)) && toggle_src.trim()!==''){
-								console.log(toggle_src);
-								jQuery(element).addClass('toggled_image');
-								jQuery(img).attr('src',toggle_src);
-							}			
-						} else {
-							let img_src = jQuery(img).attr('data-imgsrc');
-							if((typeof(img_src)!==typeof(undefined)) && img_src.trim()!==''){
-								console.log(img_src);
-								jQuery(element).removeClass('toggled_image');
-								jQuery(img).attr('src',img_src); 
+
+					jQuery(document).ready(function($){			
+
+						jQuery.fn.wbc_flip_toggle_image=function(element){
+							let img = jQuery(element).find('img');						
+							if(jQuery(element).hasClass('eo_wbc_filter_icon_select')) {
+								let toggle_src = jQuery(img).attr('data-toggleimgsrc');
+								if((typeof(toggle_src)!==typeof(undefined)) && toggle_src.trim()!==''){
+									console.log(toggle_src);
+									jQuery(element).addClass('toggled_image');
+									jQuery(img).attr('src',toggle_src);
+								}			
+							} else {
+								let img_src = jQuery(img).attr('data-imgsrc');
+								if((typeof(img_src)!==typeof(undefined)) && img_src.trim()!==''){
+									console.log(img_src);
+									jQuery(element).removeClass('toggled_image');
+									jQuery(img).attr('src',img_src); 
+								}
 							}
 						}
-					}
-					jQuery(document).ready(function($){						
 
 						$('.eo_wbc_filter_icon').click(function(){					
 							jQuery.fn.wbc_flip_toggle_image(this);
@@ -1693,10 +1695,8 @@ class EOWBC_Filter_Widget {
 					<?php /*endif;*/ ?>
 				// });
 				// --- end ---
-				if(false) {
 
-					window.document.splugins.wbc.filters.api.input_type_button_click(event);
-				}
+				// window.document.splugins.wbc.filters.api.input_type_button_click(event);
 			});
 		</script>
 		<?php
@@ -2129,6 +2129,22 @@ class EOWBC_Filter_Widget {
 
 	public function eo_wbc_filter_ui_icon($__prefix,$item/*$id,$title='',$type=0,$input='icon',$desktop=1,$width='50',$icon_width=FALSE,$label_size=FALSE,$reset = 0,$child_label=false,$hidden = false,$help='',$advance=0*/) {
 		
+		// ACTIVE_TODO temp. 
+		if(!defined('EO_WBC_FILTER_UI_ICON_CALLED')){
+			define('EO_WBC_FILTER_UI_ICON_CALLED',true);
+			
+			?>
+
+			<script type="text/javascript">
+				
+				var EO_WBC_FILTER_UI_ICON_TERM_SLUG = [];
+
+			</script>
+
+			<?php
+
+		}
+
 		global $sitepress;
 
 		$current_language = '';
@@ -2358,18 +2374,19 @@ class EOWBC_Filter_Widget {
 		<script type="text/javascript">
 			jQuery(document).ready(function($){
 				
+				EO_WBC_FILTER_UI_ICON_TERM_SLUG.push("<?php echo $term->slug; ?>");
 				/*__data_filter_slug="<?php echo $term->slug; ?>";*/
 				/*if(__data_filter_slug){*/
 				if("<?php echo $term->slug; ?>") {
-					//TO BE FIXED LATER.
-					/*jQuery('[data-filter="'+__data_filter_slug+'"]:not(.none_editable)').off();
-					jQuery('[data-filter="'+__data_filter_slug+'"]:not(.none_editable)').on('click',function(e){*/
-					let filter_container = jQuery('form#<?php echo $this->filter_prefix; ?>eo_wbc_filter').parents().has('[data-filter="<?php echo $term->slug; ?>"]').get(0);
-
-					jQuery(filter_container).find('[data-filter="'+"<?php echo $term->slug; ?>"+'"]:not(.none_editable)').off();
-					
 					// --- aa code woo-bundle-choice/asset/js/publics/eo_wbc_filter.js input_type_icon_click() ma move karyo se ---
 					// --- start ---
+					// //TO BE FIXED LATER.
+					// /*jQuery('[data-filter="'+__data_filter_slug+'"]:not(.none_editable)').off();
+					// jQuery('[data-filter="'+__data_filter_slug+'"]:not(.none_editable)').on('click',function(e){*/
+					// let filter_container = jQuery('form#<?php echo $this->filter_prefix; ?>eo_wbc_filter').parents().has('[data-filter="<?php echo $term->slug; ?>"]').get(0);
+
+					// jQuery(filter_container).find('[data-filter="'+"<?php echo $term->slug; ?>"+'"]:not(.none_editable)').off();					
+
 					// jQuery(filter_container).find('[data-filter="'+"<?php /*echo $term->slug;*/ ?>"+'"]:not(.none_editable)').on('click',function(e){
 						
 					// 	event = e;
@@ -2447,10 +2464,8 @@ class EOWBC_Filter_Widget {
 					// 	<?php /*endif;*/ ?>
 					// });
 					// --- end ---
-					if(false) {
 
-						window.document.splugins.wbc.filters.api.input_type_icon_click();
-					}
+					// window.document.splugins.wbc.filters.api.input_type_icon_click();
 
 					jQuery(".eo_wbc_srch_btn:eq(2)").on('reset',function(){	
 						var icon_filter_type = "<?php echo $type; ?>";
@@ -3054,7 +3069,7 @@ class EOWBC_Filter_Widget {
 		$filters_sub_confings['filter_prefix'] = $this->filter_prefix;	
 		$filters_sub_confings['filter_slug'] = $filter['slug'];
 		$filters_sub_confings['filter_type'] = $filter_type;
-		$filters_sub_confings['term_slug'] = $term->slug;
+		// $filters_sub_confings['term_slug'] = $term->slug;
 
 		wbc()->load->asset('localize_data','filters_sub_confings',array("filters_sub_confings" => $filters_sub_confings));
 

@@ -487,6 +487,8 @@ class WBC_WC {
             $option_list='<div class="divider"></div><div class="header">'.__('Attributes','diamond-api-integrator').'</div>';
         } elseif( $format == 'detailed' ) {
             $option_list=array();
+        } elseif( $format == 'detailed_vattr' ) {
+            $option_list=array();
         } elseif( $format == 'id_and_title' ) {
             $option_list=array();
         }
@@ -503,6 +505,12 @@ class WBC_WC {
             } elseif( $format == 'detailed' ) {
 
                 $option_list['pa_'.$attribute->attribute_name] = array('label'=>$attribute->attribute_label, 'attr'=>'data-sp_eid="'.$separator.'attr'.$separator.$attribute->attribute_id.'" ', $format);  
+
+            } elseif( $format == 'detailed_vattr' ) {
+
+                $option_list['pa_'.$attribute->attribute_name] = array('label'=>$attribute->attribute_label, 'attr'=>'data-sp_eid="'.$separator.'attr'.$separator.$attribute->attribute_id.'" ', $format);  
+
+                $option_list['pa_'.$attribute->attribute_name] = array('label'=>$attribute->attribute_label.'(use for variations)', 'attr'=>'data-sp_eid="'.$separator.'attr'.$separator.$attribute->attribute_id.$separator.'vattr''" ', $format);  
 
             } elseif( $format == 'id_and_title' ) {
                 $option_list[$attribute->attribute_id] = $attribute->attribute_label;
