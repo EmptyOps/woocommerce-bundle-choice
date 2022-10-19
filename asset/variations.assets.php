@@ -14,6 +14,17 @@ if( is_product() ) {
 	    -webkit-box-shadow: none !important;
 	            box-shadow: none !important;
 	    border: none !important;
+	}
+	.woocommerce div.product form.cart {
+	    margin-bottom: 30px;
+	    float: left;
+	    width: 100%;
+	}
+	.ui.disabled.image, .ui.disabled.images{
+		opacity: 0.8;
+	}
+	.woocommerce .summary.entry-summary table.variations tr{
+		border: none;
 	}	
 </style>
 
