@@ -3551,6 +3551,8 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
         //     return (val == undefined || val == null || val.length <= 0) ? true : false;
         // };
 
+        var allA = [];
+
         function ancher_locate_function(base_container_p = 'variations_form',aLocateclass_p = 'woocommerce-LoopProduct-link',liLocate_class_p = 'product'){
 
             var base_container = jQuery('.' + base_container_p);
@@ -3561,7 +3563,9 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
 
                 var liLocate = base_container.closest('li');
                 
-                console.log('li thi loop box malyu se');
+                window.document.splugins.common.is_empty(liLocate) ? console.log('liLocate not define'): console.log('li thi loop box malyu se');
+                console.log(liLocate);
+
             }else{
 
                 console.log('class thi loop box malyu se');
@@ -3569,44 +3573,72 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
 
             var aLocate = liLocate.find('a');
 
-            for (let i = 0; i < aLocate.length; i++){
+            if(!window.document.splugins.common.is_empty(aLocate)) {
+                
+                console.log('aLocate is define');
+                console.log(aLocate);
+                for (let i = 0; i < aLocate.length; i++){
 
-                if(aLocate.attr('class').indexOf(' ') >= 0){
+                    console.log('<a> for loop');
 
-                    var aLocateclassAll = aLocate.attr('class').split(" ");
+                    if(jQuery(aLocate[i]).attr('class').indexOf(' ') >= 0){
 
-                    var aLocateclassAll_index = aLocateclassAll.indexOf(aLocateclass_p);
+                        console.log('<a> for loop inner if');
+                        console.log(jQuery(aLocate[i]));
+                        var aLocateclassAll = jQuery(aLocate[i]).attr('class').split(" ");
 
-                    if( aLocateclassAll_index != -1) {
+                        var aLocateclassAll_index = aLocateclassAll.indexOf(aLocateclass_p);
 
-                        var aLocateclass = aLocateclassAll[aLocateclassAll_index];
-                        
-                    }else if(aLocate.attr("href").indexOf("/product/") >= 0) {
+                        if( aLocateclassAll_index != -1 && aLocateclassAll[aLocateclassAll_index] == aLocateclass_p) {
 
-                        console.log("HREF thi <a> malyo");
-                    }
+                            var finalAncher = jQuery(aLocate[i]);
+                            console.log('<a> for loop in if aLocateclassAll_index');
+                            
+                        }else if(jQuery(aLocate[i]).attr("href").indexOf("/product/") >= 0) {
+                            
+                            var finalAncher = jQuery(aLocate[i]);
+                            console.log("HREF thi <a> malyo");
+                        }
 
-                    console.log('<a> class split');
+                        if(!window.document.splugins.common.is_empty(finalAncher)) {
 
-                    var finalAncher = aLocate[i];
+                           break; 
+                        }
 
-                }else{
+                        console.log('<a> class split');
 
-                    var aLocateclass = aLocate.attr('class');
+                    }else{
 
-                    console.log('<a> class no split');
+                        console.log('<a> for loop inner if');
+                        console.log(jQuery(aLocate[i]));
+                        var aLocateclass = jQuery(aLocate[i]).attr('class');
 
-                    if(aLocateclass == aLocateclass_p){
+                        console.log('<a> class no split');
 
-                        console.log("class thi <a> malyo");
-                    }else if(aLocate.attr("href").indexOf("/product/") >= 0) {
+                        if(aLocateclass == aLocateclass_p){
 
-                        console.log("HREF thi <a> malyo");
-                    }
-                } 
+                            var finalAncher = jQuery(aLocate[i]);
+                            console.log("class thi <a> malyo");
+        
+                        }else if(jQuery(aLocate[i]).attr("href").indexOf("/product/") >= 0) {
+
+                            var finalAncher = jQuery(aLocate[i]);
+                            console.log("HREF thi <a> malyo");
+                            console.log(finalAncher);
+                        }
+
+                        if(!window.document.splugins.common.is_empty(finalAncher)) {
+
+                           break; 
+                        }
+                    } 
+                }                
             }
 
+            allA.push(finalAncher);
+
         };
+
         // --- end ---
 
         return finalAncher;

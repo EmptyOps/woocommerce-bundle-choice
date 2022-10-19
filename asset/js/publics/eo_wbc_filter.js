@@ -168,6 +168,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
 		input_type_button_click_listener();
 
+		console.log("filter process_events 01");
 		// ACTIVE_TODO temp. remove this code when we clear 34.13
 		var process_events_callback = null ;
         window.document.splugins.events.api.notifyAllObservers( 'filters', 'process_events', {}, process_events_callback, null/*form_selector==null ? _this.$base_container : form_selector*/ );
@@ -1480,6 +1481,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
     var checkbox_change_event_listener = function(){
 
+    	console.log('checkbox_change_event_listener');
 		// --- move this code from woo-bundle-choice/application/view/publics/filters/form.php ---
 		// --- start ---			
 		if( typeof(jQuery.fn.checkbox) ==='function' ) {
@@ -1487,16 +1489,18 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 			// --- compare_start (1) woo-bundle-choice/application/view/publics/filters/form.php ---
 			jQuery('.checkbox').checkbox({onChange:function(event){			
 
+				console.log('other theme checkbox_change_event_listener');
 				on_checkbox_change_event(event, this);
-			}});
-			// -- (2) sp-purple-woo-bundle-choice/application/view/publics/filters/load_desktop.php
-			jQuery('.filter_checkbox').on('change',function(event){
-        	
-				on_checkbox_change_event(event, this);
-        	});     				
+			}});  				
             // --- compare_end ---			
 
 		}
+		// -- (2) sp-purple-woo-bundle-choice/application/view/publics/filters/load_desktop.php
+		jQuery('.filter_checkbox').on('change',function(event){
+		
+			console.log('purple theme checkbox_change_event_listener');
+			on_checkbox_change_event(event, this);
+    	});   
 		// --- end ---
     
     };
