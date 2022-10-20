@@ -247,6 +247,14 @@ add_action( 'wp_enqueue_scripts' ,function(){
 			    clear: right;
 			    position: relative;
 			}
+			.spui_video_container video {
+			    max-width: 454px;
+			    -o-object-fit: contain;
+			       object-fit: contain;
+			    display: block;
+			    margin: auto;
+			    min-height: 454px;
+			}
 			/*.img-fluid.big-img {
 			    display: none;
 			}*/
