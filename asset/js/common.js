@@ -2736,7 +2736,7 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
         _this.#init_preprocess(null);
  
         _this.#compatability('init');
- 
+
     }
  
     #init_preprocess(event) {
@@ -3536,9 +3536,12 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
 
     #get_loop_box_anchor(variation) {
 
+        console.log('get_loop_box_anchor');
+        var _this = this;
+
         // -- 1 -- aa class thi find karvanu -- to a
-        // var finalAncher = jQuery('div.woocommerce ul.products li.product a.woocommerce-LoopProduct-link');
-        // var faLocateHref = finalAncher.attr("href");
+        // var finalAnchor = jQuery('div.woocommerce ul.products li.product a.woocommerce-LoopProduct-link');
+        // var faLocateHref = finalAnchor.attr("href");
         // if(faLocateHref.indexOf("/product/") >= 0){
 
         //     console.log("find success");
@@ -3551,97 +3554,207 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
         //     return (val == undefined || val == null || val.length <= 0) ? true : false;
         // };
 
-        var allA = [];
+        // var allA = [];
 
-        function ancher_locate_function(base_container_p = 'variations_form',aLocateclass_p = 'woocommerce-LoopProduct-link',liLocate_class_p = 'product'){
-
-            var base_container = jQuery('.' + base_container_p);
+        // function compatability_(section, object, expected_result) {
+                
+        //     if(section == 'purple_theme') {
+        //         object = '.col-xl-3';
+        //     }    
             
-            var liLocate = base_container.closest('.' + liLocate_class_p);
+        //     return object;
 
-            if( window.document.splugins.common.is_empty(liLocate)){
+        // }
 
-                var liLocate = base_container.closest('li');
+        // function Anchor_locate_function(base_container_p = 'variations_form',aLocateclass_p = 'woocommerce-LoopProduct-link',liLocate_class_p = 'product'){
+
+        //     var base_container = jQuery('.' + base_container_p);
+            
+        //     var liLocate = base_container.closest('.' + liLocate_class_p);
+
+        //     if( window.document.splugins.common.is_empty(liLocate)){
+
+        //         var liLocate = base_container.closest('li');
                 
-                window.document.splugins.common.is_empty(liLocate) ? console.log('liLocate not define'): console.log('li thi loop box malyu se');
-                console.log(liLocate);
+        //         if(window.document.splugins.common.is_empty(liLocate)){
 
-            }else{
+        //             console.log('liLocate not define');   
 
-                console.log('class thi loop box malyu se');
-            }
+        //             // liLocate = base_container.closest(compatability_('purple_theme'));
+        //             liLocate = base_container.closest(_this.compatability('selectore_loop_box_for_Anchor_tag purple_theme'));
 
-            var aLocate = liLocate.find('a');
+        //         }else{
+        //             console.log('li thi loop box malyu se');
+        //         } 
+        //         console.log(liLocate);
 
-            if(!window.document.splugins.common.is_empty(aLocate)) {
+        //     }else{
+
+        //         console.log('class thi loop box malyu se');
+        //     }
+
+        //     var aLocate = liLocate.find('a');
+
+        //     if(!window.document.splugins.common.is_empty(aLocate)) {
                 
-                console.log('aLocate is define');
-                console.log(aLocate);
-                for (let i = 0; i < aLocate.length; i++){
+        //         console.log('aLocate is define');
+        //         console.log(aLocate);
+        //         for (let i = 0; i < aLocate.length; i++){
 
-                    console.log('<a> for loop');
+        //             console.log('<a> for loop');
 
-                    if(jQuery(aLocate[i]).attr('class').indexOf(' ') >= 0){
+        //             if(jQuery(aLocate[i]).attr('class').indexOf(' ') >= 0){
 
-                        console.log('<a> for loop inner if');
-                        console.log(jQuery(aLocate[i]));
-                        var aLocateclassAll = jQuery(aLocate[i]).attr('class').split(" ");
+        //                 console.log('<a> for loop inner if');
+        //                 console.log(jQuery(aLocate[i]));
+        //                 var aLocateclassAll = jQuery(aLocate[i]).attr('class').split(" ");
 
-                        var aLocateclassAll_index = aLocateclassAll.indexOf(aLocateclass_p);
+        //                 var aLocateclassAll_index = aLocateclassAll.indexOf(aLocateclass_p);
 
-                        if( aLocateclassAll_index != -1 && aLocateclassAll[aLocateclassAll_index] == aLocateclass_p) {
+        //                 if( aLocateclassAll_index != -1 && aLocateclassAll[aLocateclassAll_index] == aLocateclass_p) {
 
-                            var finalAncher = jQuery(aLocate[i]);
-                            console.log('<a> for loop in if aLocateclassAll_index');
+        //                     var finalAnchor = jQuery(aLocate[i]);
+        //                     console.log('<a> for loop in if aLocateclassAll_index');
                             
-                        }else if(jQuery(aLocate[i]).attr("href").indexOf("/product/") >= 0) {
+        //                 }else if(jQuery(aLocate[i]).attr("href").indexOf("/product/") >= 0) {
                             
-                            var finalAncher = jQuery(aLocate[i]);
-                            console.log("HREF thi <a> malyo");
-                        }
+        //                     var finalAnchor = jQuery(aLocate[i]);
+        //                     console.log("HREF thi <a> malyo");
+        //                 }
 
-                        if(!window.document.splugins.common.is_empty(finalAncher)) {
+        //                 if(!window.document.splugins.common.is_empty(finalAnchor)) {
 
-                           break; 
-                        }
+        //                    break; 
+        //                 }
 
-                        console.log('<a> class split');
+        //                 console.log('<a> class split');
 
-                    }else{
+        //             }else{
 
-                        console.log('<a> for loop inner if');
-                        console.log(jQuery(aLocate[i]));
-                        var aLocateclass = jQuery(aLocate[i]).attr('class');
+        //                 console.log('<a> for loop inner if');
+        //                 console.log(jQuery(aLocate[i]));
+        //                 var aLocateclass = jQuery(aLocate[i]).attr('class');
 
-                        console.log('<a> class no split');
+        //                 console.log('<a> class no split');
 
-                        if(aLocateclass == aLocateclass_p){
+        //                 if(aLocateclass == aLocateclass_p){
 
-                            var finalAncher = jQuery(aLocate[i]);
-                            console.log("class thi <a> malyo");
+        //                     var finalAnchor = jQuery(aLocate[i]);
+        //                     console.log("class thi <a> malyo");
         
-                        }else if(jQuery(aLocate[i]).attr("href").indexOf("/product/") >= 0) {
+        //                 }else if(jQuery(aLocate[i]).attr("href").indexOf("/product/") >= 0) {
 
-                            var finalAncher = jQuery(aLocate[i]);
-                            console.log("HREF thi <a> malyo");
-                            console.log(finalAncher);
-                        }
+        //                     var finalAnchor = jQuery(aLocate[i]);
+        //                     console.log("HREF thi <a> malyo");
+        //                     console.log(finalAnchor);
+        //                 }
 
-                        if(!window.document.splugins.common.is_empty(finalAncher)) {
+        //                 if(!window.document.splugins.common.is_empty(finalAnchor)) {
 
-                           break; 
-                        }
-                    } 
-                }                
-            }
+        //                    break; 
+        //                 }
+        //             } 
+        //         }                
+        //     }
 
-            allA.push(finalAncher);
+        //     allA.push(finalAnchor);
 
-        };
+        // };
 
         // --- end ---
+        
+        let base_container_p = 'variations_form';
+        let aLocateclass_p = 'woocommerce-LoopProduct-link';
+        let liLocate_class_p = 'product';
 
-        return finalAncher;
+        var liLocate = base_container.closest('.' + liLocate_class_p);
+
+        if( window.document.splugins.common.is_empty(liLocate)){
+
+            var liLocate = base_container.closest('li');
+            
+            if(window.document.splugins.common.is_empty(liLocate)){
+
+                console.log('liLocate not define');   
+                console.log(_this.#compatability('selectore_loop_box_for_Anchor_tag'));
+                // liLocate = base_container.closest(compatability_('purple_theme'));
+                liLocate = base_container.closest(_this.#compatability('selectore_loop_box_for_Anchor_tag'));
+
+            }else{
+                console.log('li thi loop box malyu se');
+            } 
+            console.log(liLocate);
+
+        }else{
+
+            console.log('class thi loop box malyu se');
+        }
+
+        var aLocate = liLocate.find('a');
+
+        if(!window.document.splugins.common.is_empty(aLocate)) {
+            
+            console.log('aLocate is define');
+            console.log(aLocate);
+            for (let i = 0; i < aLocate.length; i++){
+
+                console.log('<a> for loop');
+
+                if(jQuery(aLocate[i]).attr('class').indexOf(' ') >= 0){
+
+                    console.log('<a> for loop inner if');
+                    console.log(jQuery(aLocate[i]));
+                    var aLocateclassAll = jQuery(aLocate[i]).attr('class').split(" ");
+
+                    var aLocateclassAll_index = aLocateclassAll.indexOf(aLocateclass_p);
+
+                    if( aLocateclassAll_index != -1 && aLocateclassAll[aLocateclassAll_index] == aLocateclass_p) {
+
+                        var finalAnchor = jQuery(aLocate[i]);
+                        console.log('<a> for loop in if aLocateclassAll_index');
+                        
+                    }else if(jQuery(aLocate[i]).attr("href").indexOf("/product/") >= 0) {
+                        
+                        var finalAnchor = jQuery(aLocate[i]);
+                        console.log("HREF thi <a> malyo");
+                    }
+
+                    if(!window.document.splugins.common.is_empty(finalAnchor)) {
+
+                       break; 
+                    }
+
+                    console.log('<a> class split');
+
+                }else{
+
+                    console.log('<a> for loop inner if');
+                    console.log(jQuery(aLocate[i]));
+                    var aLocateclass = jQuery(aLocate[i]).attr('class');
+
+                    console.log('<a> class no split');
+
+                    if(aLocateclass == aLocateclass_p){
+
+                        var finalAnchor = jQuery(aLocate[i]);
+                        console.log("class thi <a> malyo");
+
+                    }else if(jQuery(aLocate[i]).attr("href").indexOf("/product/") >= 0) {
+
+                        var finalAnchor = jQuery(aLocate[i]);
+                        console.log("HREF thi <a> malyo");
+                        console.log(finalAnchor);
+                    }
+
+                    if(!window.document.splugins.common.is_empty(finalAnchor)) {
+
+                       break; 
+                    }
+                } 
+            }                
+        }
+
+        return finalAnchor;
     
     }
 
@@ -3947,8 +4060,19 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
                    });
                  }
             });     
+        }else if(section == 'selectore_loop_box_for_Anchor_tag') {
+            
+            console.log('selectore_loop_box_for_Anchor_tag if');
+           
+            if(window.document.splugins.common.current_theme_key == 'themes___purple_theme') {
+    
+                console.log('selectore_loop_box_for_Anchor_tag if themes___purple_theme');
+
+                object = '.col-xl-3';
+            }
         }    
- 
+        
+        return object;
          /////////////////////////////////////////////////////        
  
     }
