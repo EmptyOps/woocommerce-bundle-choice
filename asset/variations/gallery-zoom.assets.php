@@ -231,6 +231,7 @@ add_action( 'wp_enqueue_scripts' ,function(){
 			    height: 454px;
 			    object-fit: contain;
 			    margin: auto;
+			    display: block;
 			    border-radius: 5px;
 			}
 			.Zoom_Rigt-sec {
