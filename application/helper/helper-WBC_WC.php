@@ -510,7 +510,7 @@ class WBC_WC {
 
                 $option_list['pa_'.$attribute->attribute_name] = array('label'=>$attribute->attribute_label, 'attr'=>'data-sp_eid="'.$separator.'attr'.$separator.$attribute->attribute_id.'" ', $format);  
 
-                $option_list['pa_'.$attribute->attribute_name] = array('label'=>$attribute->attribute_label.'(use for variations)', 'attr'=>'data-sp_eid="'.$separator.'attr'.$separator.$attribute->attribute_id.$separator.'vattr''" ', $format);  
+                $option_list['pa_'.$attribute->attribute_name] = array('label'=>$attribute->attribute_label.'(use for variations)', 'attr'=>'data-sp_eid="'.$separator.'attr'.$separator.$attribute->attribute_id.$separator.'vattr" ', $format);  
 
             } elseif( $format == 'id_and_title' ) {
                 $option_list[$attribute->attribute_id] = $attribute->attribute_label;
