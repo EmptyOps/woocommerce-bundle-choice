@@ -20,7 +20,7 @@ if( is_product() ) {
 	    float: left;
 	    width: 100%;
 	}
-	.ui.disabled.image, .ui.disabled.images{
+	.ui.disabled.image, .ui.disabled.images,.disabled{
 		opacity: 0.8;
 	}
 	.woocommerce .summary.entry-summary table.variations tr{
