@@ -704,9 +704,22 @@ class Form_Builder implements Builder {
 									
 								} else if( !empty($args['data_raw']) ) {
 
-									-- need to mac us of data mapping here and in below statement as applicabel. 
+									$dm_based_field = null;
 
-									$added_counter = isset($args['data_raw'][$das_counter_field_id]) ? sizeof($args['data_raw'][$das_counter_field_id]): $added_counter;
+									foreach ($args['dm']['map_fields'] as $dm_key->$dm_value) {
+
+										if ( isset($args['dm']['sp_eids'][$dm_key]['extra_to']) and strpos($das_counter_field_id, $args['dm']['sp_eids'][$dm_key]['extra_to']) !== false ) {
+
+											$dm_based_field = $dm_key; ? here jo jarur pade to apday key confome kerva ni avche mapp_field permane. 
+
+											break;
+										}
+									}
+
+									if (!empty($dm_based_field)) {
+									
+										$added_counter = isset($args['data_raw'][$dm_based_field]) ? sizeof($args['data_raw'][$dm_based_field]): $added_counter;
+									}
 								}
 
 

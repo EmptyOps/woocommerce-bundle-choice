@@ -77,10 +77,24 @@ class Eowbc_Model {
 
 						if(empty($form_definition[$key]["form"][$fk]["force_value"])){
 							-- need to mac us of data mapping here and in below statement as applicabel.
-							//$form_definition[$key]["form"][$fk]["value"] = ( isset($save_as_data['post_meta'][$fk]) ? $save_as_data['post_meta'][$fk] : ( isset($form_definition[$key]["form"][$fk]["value"]) ? $form_definition[$key]["form"][$fk]["value"] :'' ) );
-							if (isset($args['data_raw'][$fk])) {
+							
+							$dm_based_field = null;
 
-								$form_definition[$key]["form"][$fk]["value"] = $args['data_raw'][$fk];
+							foreach ($args['dm']['map_fields'] as $dm_key->$dm_value) {
+
+								if ( isset($args['dm']['sp_eids'][$dm_key]['extra_to']) and strpos($fk, $args['dm']['sp_eids'][$dm_key]['extra_to']) !== false ) {
+
+									$dm_based_field = $dm_key; ? here jo jarur pade to apday key confome kerva ni avche mapp_field permane. or do the need full as applycbel in below if.
+
+									break;
+								}
+							}
+
+
+							//$form_definition[$key]["form"][$fk]["value"] = ( isset($save_as_data['post_meta'][$fk]) ? $save_as_data['post_meta'][$fk] : ( isset($form_definition[$key]["form"][$fk]["value"]) ? $form_definition[$key]["form"][$fk]["value"] :'' ) );
+							if ( isset($args['data_raw'][$fk]) and !empty($dm_based_field) ) {
+
+								$form_definition[$key]["form"][$fk]["value"] = $args['data_raw'][$dm_based_field];
 
 							} elseif( isset($save_as_data['post_meta'][$fk]) ){
 
@@ -100,8 +114,8 @@ class Eowbc_Model {
 
 							}
 							
-							-- am melu tu /woo-bundle-choice/application/model/publics/data_model/sp-wbc-variations.php: line 569
 							// ACTIVE_TODO/TODO implement 
+								// -- this flag is passed from /woo-bundle-choice/application/model/publics/data_model/sp-wbc-variations.php 
 							if( !empty($args['is_convert_das_to_array'])){
 								
 							}
@@ -210,8 +224,25 @@ class Eowbc_Model {
 								$save_as_data_meta['post_meta_found'] = true;	
 							}
 
-							$save_as_data['post_meta'][$fk] = ( isset($_POST[$fk]) ? wbc()->sanitize->_post($fk) : '' ); 
+							-- need to finlise code in side the below if -- to h
+							if(!empty($args['data_raw'])) {
+
+								-- as per the 44 we ma need only litel logzic here.
+								$dm_based_field ?
+
+								ACTIVE_TODO here we are reading the directly passed custom data inside data_raw element, which is bad practice for security. so we should refactor this as soon as we get a chance and make sure that we either sanitize this or we use the standard input method on we like the post, get, request. but I think it is better that we simply sanitize this custom data by passing it to our sanitize library in the function which is accepting custom data.
+								if (!empty($dm_based_field)) {
+									
+									$save_as_data['post_meta'][$fk] = ( isset($_POST[$fk]) ? wbc()->sanitize->_post($fk) : '' );
+								}
+
+							} else {
+
+								$save_as_data['post_meta'][$fk] = ( isset($_POST[$fk]) ? wbc()->sanitize->_post($fk) : '' ); 
+							}
 						}
+
+
 
 				    }
 				}
