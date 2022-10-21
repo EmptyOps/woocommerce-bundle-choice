@@ -2353,7 +2353,6 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
               jQuery(element).parent('li.spui-wbc-swatches-variable-item-radio').trigger('spui-wbc-swatches-variable-item-selected', [value, select, _this.$element]); // Custom Event for li
             });*/
         }
-
     }
 
     #on_reset_listener(type, element) {
@@ -3491,18 +3490,32 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
         
          _this.#$variations_form.on('show_variation', function (event, variation) {
             
-            console.log("variation_change_listener 2 show_variation");
+           console.log("variation_change_listener 2 show_variation");
+           console.log(event);
 
+           if(!window.document.splugins.common.is_empty(event) && !window.document.splugins.common.is_empty(variation)) {
+
+                console.log('call set_variation_url');
+                _this.#set_variation_url(event, variation);
+           }
            _this.#on_variation_change(event, variation);
+         
          });
  
     }
 
-    #create_variation_url(variation) {
+    #create_variation_url(element, event, variation) {
+
+        console.log('create_variation_url');
+        console.log(event);
 
         var _this = this;
-        
+        var attributes = [];
+
         jQuery('table.variations select').each(function() {
+    
+            console.log('create_variation_url loop');
+
             var value = jQuery(this).val();
             if (value) {
                 attributes.push({
@@ -3514,7 +3527,9 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
             }*/
         });
 
-        var url = _this.#get_loop_box_anchor();
+        console.log('create_variation_url 01');
+        console.log(element);
+        var url = element.attr('href');
         url = url +'?variation_id='+ variation.variation_id;
 
         // ACTIVE_TODO as soon as required we need to enabled url support if applicable for simple type product 
@@ -3534,140 +3549,15 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
     
     }    
 
-    #get_loop_box_anchor(variation) {
+    #get_loop_box_anchor(event, variation) {
 
         console.log('get_loop_box_anchor');
         var _this = this;
-
-        // -- 1 -- aa class thi find karvanu -- to a
-        // var finalAnchor = jQuery('div.woocommerce ul.products li.product a.woocommerce-LoopProduct-link');
-        // var faLocateHref = finalAnchor.attr("href");
-        // if(faLocateHref.indexOf("/product/") >= 0){
-
-        //     console.log("find success");
-        // }
-        // -- aa <a> find karva mate banavyu se final karva nu se @a--
-        // --- start ---
-
-        // -- aa function comman namespace ni ander muki didhu se @a-- 
-        // function isEmpty(val){
-        //     return (val == undefined || val == null || val.length <= 0) ? true : false;
-        // };
-
-        // var allA = [];
-
-        // function compatability_(section, object, expected_result) {
-                
-        //     if(section == 'purple_theme') {
-        //         object = '.col-xl-3';
-        //     }    
-            
-        //     return object;
-
-        // }
-
-        // function Anchor_locate_function(base_container_p = 'variations_form',aLocateclass_p = 'woocommerce-LoopProduct-link',liLocate_class_p = 'product'){
-
-        //     var base_container = jQuery('.' + base_container_p);
-            
-        //     var liLocate = base_container.closest('.' + liLocate_class_p);
-
-        //     if( window.document.splugins.common.is_empty(liLocate)){
-
-        //         var liLocate = base_container.closest('li');
-                
-        //         if(window.document.splugins.common.is_empty(liLocate)){
-
-        //             console.log('liLocate not define');   
-
-        //             // liLocate = base_container.closest(compatability_('purple_theme'));
-        //             liLocate = base_container.closest(_this.compatability('selectore_loop_box_for_Anchor_tag purple_theme'));
-
-        //         }else{
-        //             console.log('li thi loop box malyu se');
-        //         } 
-        //         console.log(liLocate);
-
-        //     }else{
-
-        //         console.log('class thi loop box malyu se');
-        //     }
-
-        //     var aLocate = liLocate.find('a');
-
-        //     if(!window.document.splugins.common.is_empty(aLocate)) {
-                
-        //         console.log('aLocate is define');
-        //         console.log(aLocate);
-        //         for (let i = 0; i < aLocate.length; i++){
-
-        //             console.log('<a> for loop');
-
-        //             if(jQuery(aLocate[i]).attr('class').indexOf(' ') >= 0){
-
-        //                 console.log('<a> for loop inner if');
-        //                 console.log(jQuery(aLocate[i]));
-        //                 var aLocateclassAll = jQuery(aLocate[i]).attr('class').split(" ");
-
-        //                 var aLocateclassAll_index = aLocateclassAll.indexOf(aLocateclass_p);
-
-        //                 if( aLocateclassAll_index != -1 && aLocateclassAll[aLocateclassAll_index] == aLocateclass_p) {
-
-        //                     var finalAnchor = jQuery(aLocate[i]);
-        //                     console.log('<a> for loop in if aLocateclassAll_index');
-                            
-        //                 }else if(jQuery(aLocate[i]).attr("href").indexOf("/product/") >= 0) {
-                            
-        //                     var finalAnchor = jQuery(aLocate[i]);
-        //                     console.log("HREF thi <a> malyo");
-        //                 }
-
-        //                 if(!window.document.splugins.common.is_empty(finalAnchor)) {
-
-        //                    break; 
-        //                 }
-
-        //                 console.log('<a> class split');
-
-        //             }else{
-
-        //                 console.log('<a> for loop inner if');
-        //                 console.log(jQuery(aLocate[i]));
-        //                 var aLocateclass = jQuery(aLocate[i]).attr('class');
-
-        //                 console.log('<a> class no split');
-
-        //                 if(aLocateclass == aLocateclass_p){
-
-        //                     var finalAnchor = jQuery(aLocate[i]);
-        //                     console.log("class thi <a> malyo");
         
-        //                 }else if(jQuery(aLocate[i]).attr("href").indexOf("/product/") >= 0) {
+        var aLocateclass_p = 'woocommerce-LoopProduct-link';
+        var liLocate_class_p = 'product';
 
-        //                     var finalAnchor = jQuery(aLocate[i]);
-        //                     console.log("HREF thi <a> malyo");
-        //                     console.log(finalAnchor);
-        //                 }
-
-        //                 if(!window.document.splugins.common.is_empty(finalAnchor)) {
-
-        //                    break; 
-        //                 }
-        //             } 
-        //         }                
-        //     }
-
-        //     allA.push(finalAnchor);
-
-        // };
-
-        // --- end ---
-        
-        let base_container_p = 'variations_form';
-        let aLocateclass_p = 'woocommerce-LoopProduct-link';
-        let liLocate_class_p = 'product';
-
-        var liLocate = base_container.closest('.' + liLocate_class_p);
+        var liLocate = _this.#$base_container.closest('.' + liLocate_class_p);
 
         if( window.document.splugins.common.is_empty(liLocate)){
 
@@ -3676,7 +3566,7 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
             if(window.document.splugins.common.is_empty(liLocate)){
 
                 console.log('liLocate not define');   
-                console.log(_this.#compatability('selectore_loop_box_for_Anchor_tag'));
+
                 // liLocate = base_container.closest(compatability_('purple_theme'));
                 liLocate = base_container.closest(_this.#compatability('selectore_loop_box_for_Anchor_tag'));
 
@@ -3695,7 +3585,8 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
         if(!window.document.splugins.common.is_empty(aLocate)) {
             
             console.log('aLocate is define');
-            console.log(aLocate);
+            // console.log(aLocate);
+
             for (let i = 0; i < aLocate.length; i++){
 
                 console.log('<a> for loop');
@@ -3703,7 +3594,7 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
                 if(jQuery(aLocate[i]).attr('class').indexOf(' ') >= 0){
 
                     console.log('<a> for loop inner if');
-                    console.log(jQuery(aLocate[i]));
+                    // console.log(jQuery(aLocate[i]));
                     var aLocateclassAll = jQuery(aLocate[i]).attr('class').split(" ");
 
                     var aLocateclassAll_index = aLocateclassAll.indexOf(aLocateclass_p);
@@ -3729,7 +3620,7 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
                 }else{
 
                     console.log('<a> for loop inner if');
-                    console.log(jQuery(aLocate[i]));
+                    // console.log(jQuery(aLocate[i]));
                     var aLocateclass = jQuery(aLocate[i]).attr('class');
 
                     console.log('<a> class no split');
@@ -3743,7 +3634,6 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
 
                         var finalAnchor = jQuery(aLocate[i]);
                         console.log("HREF thi <a> malyo");
-                        console.log(finalAnchor);
                     }
 
                     if(!window.document.splugins.common.is_empty(finalAnchor)) {
@@ -3753,15 +3643,19 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
                 } 
             }                
         }
+        console.log('final anchor');
+        console.log(finalAnchor);
+
+        // var anchorUrl = finalAnchor.attr("href");
 
         return finalAnchor;
     
     }
 
-    #set_variation_url(variation) {
+    #set_variation_url(event, variation) {
 
         // ACTIVE_TODO temp
-        return false;
+        // return false;
 
         /*ACTIVE_TODO_OC_START
         -- aa function swatchis module ma mukvanu hatu and gallery module ma mukelu se, since show_variation event swatches ma nathi -- to a
@@ -3769,8 +3663,11 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
         var _this = this;
 
         var a = _this.#get_loop_box_anchor(variation);
-        var base_url = jQuery(a).attr("href", "");
-    
+        console.log(a.attr('href'));
+        var variation_url = _this.#create_variation_url(a);
+        var base_url = a.attr('href', variation_url);
+        console.log(a.attr('href'))
+
     }
 
     #reset_variation_listener(type) {
