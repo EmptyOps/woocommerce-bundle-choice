@@ -167,6 +167,12 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		input_type_icon_click_listener();
 
 		input_type_button_click_listener();
+
+		console.log("filter process_events 01");
+		// ACTIVE_TODO temp. remove this code when we clear 34.13
+		var process_events_callback = null ;
+        window.document.splugins.events.api.notifyAllObservers( 'filters', 'process_events', {}, process_events_callback, null/*form_selector==null ? _this.$base_container : form_selector*/ );
+
     };
 
     var init_search = function(form_selector){
@@ -1461,7 +1467,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		window.document.splugins.ui = window.document.splugins.ui || {};
 		window.document.splugins.ui.slider = window.document.splugins.ui.slider || jQuery.fn.slider;
 		
-		window.eo=new Object();
+		// window.eo=new Object();
 
 		//Slider creation function
 		// window.eo.slider=function(selector){
@@ -1475,6 +1481,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
     var checkbox_change_event_listener = function(){
 
+    	console.log('checkbox_change_event_listener');
 		// --- move this code from woo-bundle-choice/application/view/publics/filters/form.php ---
 		// --- start ---			
 		if( typeof(jQuery.fn.checkbox) ==='function' ) {
@@ -1482,14 +1489,18 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 			// --- compare_start (1) woo-bundle-choice/application/view/publics/filters/form.php ---
 			jQuery('.checkbox').checkbox({onChange:function(event){			
 
+				console.log('other theme checkbox_change_event_listener');
 				on_checkbox_change_event(event, this);
-			}});
-			// -- (2) sp-purple-woo-bundle-choice/application/view/publics/filters/load_desktop.php
-			// jQuery('.filter_checkbox').on('change',function(event){
-   //      	});     				
+			}});  				
             // --- compare_end ---			
 
 		}
+		// -- (2) sp-purple-woo-bundle-choice/application/view/publics/filters/load_desktop.php
+		jQuery('.filter_checkbox').on('change',function(event){
+		
+			console.log('purple theme checkbox_change_event_listener');
+			on_checkbox_change_event(event, this);
+    	});   
 		// --- end ---
     
     };
@@ -1498,29 +1509,33 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
     	console.log('input_type_icon_click_listener()');
     	
-        jQuery( EO_WBC_FILTER_UI_ICON_TERM_SLUG ).each(function (i, term_slug) {
+    	if(typeof(EO_WBC_FILTER_UI_ICON_TERM_SLUG) != typeof(undefined) && !window.document.splugins.common.is_empty(EO_WBC_FILTER_UI_ICON_TERM_SLUG)) {
+	
+	        jQuery( EO_WBC_FILTER_UI_ICON_TERM_SLUG ).each(function (i, term_slug) {
 
-	    	// --- aa code woo-bundle-choice/application/model/publics/component/eowbc_filter_widget.php eo_wbc_filter_ui_icon() mathi move karyo se @a ---
-	    	// --- start ---
-	    	if(term_slug){
+		    	// --- aa code woo-bundle-choice/application/model/publics/component/eowbc_filter_widget.php eo_wbc_filter_ui_icon() mathi move karyo se @a ---
+		    	// --- start ---
+		    	if(term_slug){
 
-				//TO BE FIXED LATER.
-				/*jQuery('[data-filter="'+__data_filter_slug+'"]:not(.none_editable)').off();
-				jQuery('[data-filter="'+__data_filter_slug+'"]:not(.none_editable)').on('click',function(e){*/
-				// let filter_container = jQuery('form#<?php echo $this->filter_prefix; ?>eo_wbc_filter').parents().has('[data-filter="<?php echo $term->slug; ?>"]').get(0);
-				let filter_container = jQuery('form#'+ _this.sub_configs.filter_prefix +'eo_wbc_filter').parents().has('[data-filter="'+ term_slug +'"]').get(0);
+					//TO BE FIXED LATER.
+					/*jQuery('[data-filter="'+__data_filter_slug+'"]:not(.none_editable)').off();
+					jQuery('[data-filter="'+__data_filter_slug+'"]:not(.none_editable)').on('click',function(e){*/
+					// let filter_container = jQuery('form#<?php echo $this->filter_prefix; ?>eo_wbc_filter').parents().has('[data-filter="<?php echo $term->slug; ?>"]').get(0);
+					let filter_container = jQuery('form#'+ _this.sub_configs.filter_prefix +'eo_wbc_filter').parents().has('[data-filter="'+ term_slug +'"]').get(0);
 
-				jQuery(filter_container).find('[data-filter="'+"<?php echo $term->slug; ?>"+'"]:not(.none_editable)').off();
-				// jQuery(filter_container).find('[data-filter="'+"<?php echo $term->slug; ?>"+'"]:not(.none_editable)').on('click',function(e){
-				jQuery(filter_container).find('[data-filter="'+ term_slug +'"]:not(.none_editable)').on('click',function(e){
-					
-					console.log('input_type_icon_click_listener() 02');
-					on_input_type_icon_click(e, this, term_slug);
-					
-				});
-	    	}
-			// --- end ---          
-        });    	
+					jQuery(filter_container).find('[data-filter="'+"<?php echo $term->slug; ?>"+'"]:not(.none_editable)').off();
+					// jQuery(filter_container).find('[data-filter="'+"<?php echo $term->slug; ?>"+'"]:not(.none_editable)').on('click',function(e){
+					jQuery(filter_container).find('[data-filter="'+ term_slug +'"]:not(.none_editable)').on('click',function(e){
+						
+						console.log('input_type_icon_click_listener() 02');
+						on_input_type_icon_click(e, this, term_slug);
+						
+					});
+		    	}
+				// --- end ---          
+	        });   
+    
+    	} 	
 
     };
 

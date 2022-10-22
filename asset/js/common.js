@@ -2353,7 +2353,6 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
               jQuery(element).parent('li.spui-wbc-swatches-variable-item-radio').trigger('spui-wbc-swatches-variable-item-selected', [value, select, _this.$element]); // Custom Event for li
             });*/
         }
-
     }
 
     #on_reset_listener(type, element) {
@@ -2736,7 +2735,7 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
         _this.#init_preprocess(null);
  
         _this.#compatability('init');
- 
+
     }
  
     #init_preprocess(event) {
@@ -3491,18 +3490,32 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
         
          _this.#$variations_form.on('show_variation', function (event, variation) {
             
-            console.log("variation_change_listener 2 show_variation");
+           console.log("variation_change_listener 2 show_variation");
+           console.log(event);
 
+           if(!window.document.splugins.common.is_empty(event) && !window.document.splugins.common.is_empty(variation)) {
+
+                console.log('call set_variation_url');
+                _this.#set_variation_url(event, variation);
+           }
            _this.#on_variation_change(event, variation);
+         
          });
  
     }
 
-    #create_variation_url(variation) {
+    #create_variation_url(element, event, variation) {
+
+        console.log('create_variation_url');
+        console.log(event);
 
         var _this = this;
-        
+        var attributes = [];
+
         jQuery('table.variations select').each(function() {
+    
+            console.log('create_variation_url loop');
+
             var value = jQuery(this).val();
             if (value) {
                 attributes.push({
@@ -3514,7 +3527,9 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
             }*/
         });
 
-        var url = _this.#get_loop_box_anchor();
+        console.log('create_variation_url 01');
+        console.log(element);
+        var url = element.attr('href');
         url = url +'?variation_id='+ variation.variation_id;
 
         // ACTIVE_TODO as soon as required we need to enabled url support if applicable for simple type product 
@@ -3534,76 +3549,113 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
     
     }    
 
-    #get_loop_box_anchor(variation) {
+    #get_loop_box_anchor(event, variation) {
 
-        // -- 1 -- aa class thi find karvanu -- to a
-        // var finalAncher = jQuery('div.woocommerce ul.products li.product a.woocommerce-LoopProduct-link');
-        // var faLocateHref = finalAncher.attr("href");
-        // if(faLocateHref.indexOf("/product/") >= 0){
+        console.log('get_loop_box_anchor');
+        var _this = this;
+        
+        var aLocateclass_p = 'woocommerce-LoopProduct-link';
+        var liLocate_class_p = 'product';
 
-        //     console.log("find success");
-        // }
-        // -- aa <a> find karva mate banavyu se final karva nu se @a--
-        // --- start ---
+        var liLocate = _this.#$base_container.closest('.' + liLocate_class_p);
 
-        // -- aa function comman namespace ni ander muki didhu se @a-- 
-        // function isEmpty(val){
-        //     return (val == undefined || val == null || val.length <= 0) ? true : false;
-        // };
+        if( window.document.splugins.common.is_empty(liLocate)){
 
-        function ancher_locate_function(base_container_p = 'variations_form',aLocateclass_p = 'woocommerce-LoopProduct-link',liLocate_class_p = 'product'){
-
-            var base_container = jQuery('.' + base_container_p);
+            var liLocate = base_container.closest('li');
             
-            var liLocate = base_container.closest('.' + liLocate_class_p);
+            if(window.document.splugins.common.is_empty(liLocate)){
 
-            if( window.document.splugins.common.is_empty(liLocate)){
+                console.log('liLocate not define');   
 
-                var liLocate = base_container.closest('li');
-                
+                // liLocate = base_container.closest(compatability_('purple_theme'));
+                liLocate = base_container.closest(_this.#compatability('selectore_loop_box_for_Anchor_tag'));
+
+            }else{
                 console.log('li thi loop box malyu se');
-            }else{
+            } 
+            console.log(liLocate);
 
-                console.log('class thi loop box malyu se');
-            }
+        }else{
 
-            var aLocate = liLocate.find('a');
+            console.log('class thi loop box malyu se');
+        }
 
-            if(aLocate.attr('class').indexOf(' ') >= 0){
+        var aLocate = liLocate.find('a');
 
-                var aLocateclassAll = aLocate.attr('class').split(" ");
+        if(!window.document.splugins.common.is_empty(aLocate)) {
+            
+            console.log('aLocate is define');
+            // console.log(aLocate);
 
-                var aLocateclassAll_index = aLocateclassAll.indexOf(aLocateclass_p);
+            for (let i = 0; i < aLocate.length; i++){
 
-                var aLocateclass = aLocateclassAll[aLocateclassAll_index];
+                console.log('<a> for loop');
 
-                console.log('<a> class split');
+                if(jQuery(aLocate[i]).attr('class').indexOf(' ') >= 0){
 
-            }else{
+                    console.log('<a> for loop inner if');
+                    // console.log(jQuery(aLocate[i]));
+                    var aLocateclassAll = jQuery(aLocate[i]).attr('class').split(" ");
 
-                var aLocateclass = aLocate.attr('class');
+                    var aLocateclassAll_index = aLocateclassAll.indexOf(aLocateclass_p);
 
-                console.log('<a> class no split');
-            }        
+                    if( aLocateclassAll_index != -1 && aLocateclassAll[aLocateclassAll_index] == aLocateclass_p) {
 
-            if(aLocateclass == aLocateclass_p){
+                        var finalAnchor = jQuery(aLocate[i]);
+                        console.log('<a> for loop in if aLocateclassAll_index');
+                        
+                    }else if(jQuery(aLocate[i]).attr("href").indexOf("/product/") >= 0) {
+                        
+                        var finalAnchor = jQuery(aLocate[i]);
+                        console.log("HREF thi <a> malyo");
+                    }
 
-                console.log("class thi <a> malyo");
-            }else if(aLocate.attr("href").indexOf("/product/") >= 0) {
+                    if(!window.document.splugins.common.is_empty(finalAnchor)) {
 
-                console.log("HREF thi <a> malyo");
-            }
-        };
-        // --- end ---
+                       break; 
+                    }
 
-        return finalAncher;
+                    console.log('<a> class split');
+
+                }else{
+
+                    console.log('<a> for loop inner if');
+                    // console.log(jQuery(aLocate[i]));
+                    var aLocateclass = jQuery(aLocate[i]).attr('class');
+
+                    console.log('<a> class no split');
+
+                    if(aLocateclass == aLocateclass_p){
+
+                        var finalAnchor = jQuery(aLocate[i]);
+                        console.log("class thi <a> malyo");
+
+                    }else if(jQuery(aLocate[i]).attr("href").indexOf("/product/") >= 0) {
+
+                        var finalAnchor = jQuery(aLocate[i]);
+                        console.log("HREF thi <a> malyo");
+                    }
+
+                    if(!window.document.splugins.common.is_empty(finalAnchor)) {
+
+                       break; 
+                    }
+                } 
+            }                
+        }
+        console.log('final anchor');
+        console.log(finalAnchor);
+
+        // var anchorUrl = finalAnchor.attr("href");
+
+        return finalAnchor;
     
     }
 
-    #set_variation_url(variation) {
+    #set_variation_url(event, variation) {
 
         // ACTIVE_TODO temp
-        return false;
+        // return false;
 
         /*ACTIVE_TODO_OC_START
         -- aa function swatchis module ma mukvanu hatu and gallery module ma mukelu se, since show_variation event swatches ma nathi -- to a
@@ -3611,8 +3663,11 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
         var _this = this;
 
         var a = _this.#get_loop_box_anchor(variation);
-        var base_url = jQuery(a).attr("href", "");
-    
+        console.log(a.attr('href'));
+        var variation_url = _this.#create_variation_url(a);
+        var base_url = a.attr('href', variation_url);
+        console.log(a.attr('href'))
+
     }
 
     #reset_variation_listener(type) {
@@ -3902,8 +3957,19 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
                    });
                  }
             });     
+        }else if(section == 'selectore_loop_box_for_Anchor_tag') {
+            
+            console.log('selectore_loop_box_for_Anchor_tag if');
+           
+            if(window.document.splugins.common.current_theme_key == 'themes___purple_theme') {
+    
+                console.log('selectore_loop_box_for_Anchor_tag if themes___purple_theme');
+
+                object = '.col-xl-3';
+            }
         }    
- 
+        
+        return object;
          /////////////////////////////////////////////////////        
  
     }
