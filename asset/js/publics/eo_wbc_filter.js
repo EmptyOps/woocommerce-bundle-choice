@@ -1508,13 +1508,17 @@ window.document.splugins.wbc.filters.core = function( configs ) {
     var input_type_icon_click_listener = function() {
 
     	console.log('input_type_icon_click_listener()');
-    	
+    	console.log(EO_WBC_FILTER_UI_ICON_TERM_SLUG);
+
     	if(typeof(EO_WBC_FILTER_UI_ICON_TERM_SLUG) != typeof(undefined) && !window.document.splugins.common.is_empty(EO_WBC_FILTER_UI_ICON_TERM_SLUG)) {
+    		
+    		console.log('input_type_icon_click_listener() 01');
 	
 	        jQuery( EO_WBC_FILTER_UI_ICON_TERM_SLUG ).each(function (i, term_slug) {
 
 		    	// --- aa code woo-bundle-choice/application/model/publics/component/eowbc_filter_widget.php eo_wbc_filter_ui_icon() mathi move karyo se @a ---
 		    	// --- start ---
+		    	console.log(term_slug);
 		    	if(term_slug){
 
 					//TO BE FIXED LATER.
@@ -1525,6 +1529,8 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
 					jQuery(filter_container).find('[data-filter="'+"<?php echo $term->slug; ?>"+'"]:not(.none_editable)').off();
 					// jQuery(filter_container).find('[data-filter="'+"<?php echo $term->slug; ?>"+'"]:not(.none_editable)').on('click',function(e){
+					console.log(filter_container);
+					console.log('[data-filter="'+ term_slug +'"]');
 					jQuery(filter_container).find('[data-filter="'+ term_slug +'"]:not(.none_editable)').on('click',function(e){
 						
 						console.log('input_type_icon_click_listener() 02');
@@ -1532,6 +1538,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 						
 					});
 		    	}
+
 				// --- end ---          
 	        });   
     
@@ -1996,6 +2003,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 			jQuery(e).slider(_params);
 			jQuery.fn.slider = ui_slider;
 		});
+    
     };
 
     var checkbox_change_event = function(event, element){
