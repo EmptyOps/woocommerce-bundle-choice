@@ -73,6 +73,7 @@ class SP_WBC_Variations extends SP_Variations {
 			}, 8, 2);
 
 			add_filter('default_sp_variations_swatches_variation_attribute_options_html', function($status, $hook_args){
+
 				//wbc_pr(self::sp_variations_swatches_supported_attribute_types()); die();
 				if(!isset(self::sp_variations_swatches_supported_attribute_types()[$hook_args['type']])){
 					return true;
@@ -86,26 +87,24 @@ class SP_WBC_Variations extends SP_Variations {
 		// comment by @s
 		}elseif( ($for_section == "swatches" /*|| $for_section == "gallery_images"*/)/* && $args['page'] != 'feed'*/ ) {
 			$this->swatches_hooks();
-
-			add_filter('sp_wbc_get_variations',function($data, $product){
-
-				if (!empty($data)) {
-
-					return $data;
-				}
-			
-				return $product->get_available_variations(); 
-			},10);
-
-			$sp_variations_data['attributes'] = $product->get_variation_attributes(); aa nu su karavanu
-			//$sp_variations_data['variations'] = $product->get_available_variations(); aa nu su karavanu
-			$sp_variations_data['variations'] = apply_filters('sp_wbc_get_variations',null,$product);
+ 
+			ACTIVE_TODO it is noted that this call is redundantly called from the swatches data layers mens it called every time perticular attributes swatches rendered so if non at loop box or item page there are create swatches than called 3 time which is relly not requaird and it may have few impact on the perfomance and aficeancy so we must skip that hidded call sum. this is applicable to both below statments which preparing attributes and variations -- to h
+				ACTIVE_TODO and there are statments like this "$attributes           = wc_get_attribute_taxonomies();" in function wc_product_has_attribute_type() in this class which is similar to below $product->get_variation_attributes(); funtion call. so this are also redundant calls and we must refeactor it for perfomace -- to h
+			// $sp_variations_data['attributes'] = $product->get_variation_attributes(); aa nu su karavanu
+			$sp_variations_data['attributes'] = apply_filters('sp_wbc_get_variation_attrs',null,$product);
+			// ACTIVE_TODO and eitherway we are supose to as per that perfomance optimasation not or series that we had planed we shoud avoid even this one single call after removeing redunduncy since it most likely not ussed in that asset. -- to h 
+			// 	 keeping above ACTIVE_TODO open for observation and during that optimasation notes or series planed we can drop even the single call from the below gallery images if. but at that time we may need to call if explicitly from custom layers 
+			// 	NOTE: lets keep one time call since woo may not be calling it otherwise but we are moving it to gallery images if below it to avoid call for ech swatch.
+			// // $sp_variations_data['variations'] = $product->get_available_variations(); aa nu su karavanu
+			// $sp_variations_data['variations'] = apply_filters('sp_wbc_get_variations',null,$product);
 
 			
 
 		}elseif( ($for_section == "gallery_images") {
 
 			$this->gallery_images_hooks();
+
+			$sp_variations_data['variations'] = apply_filters('sp_wbc_get_variations',null,$product,$args);
 		}	
 
 					// ACTIVE_TODO_OC_START
@@ -870,19 +869,18 @@ class SP_WBC_Variations extends SP_Variations {
 		// ACTIVE_TODO it will be necessary when we do caching implementation 
 		// $currency       = get_woocommerce_currency();
 
-
-		/*ACTIVE_TODO_OC_START
-		----------- most of is to be discared 
-		ACTIVE_TODO_OC_END*/
-        $attribute_id = wc_variation_attribute_name( $args['hook_callback_args']['hook_args'][ 'attribute' ] );
+        // commented on 24-10-2022 becose was unussed
+        // $attribute_id = wc_variation_attribute_name( $args['hook_callback_args']['hook_args'][ 'attribute' ] );
         
-        $attribute_name = sanitize_title( $args['hook_callback_args']['hook_args'][ 'attribute' ] );
+        // commented on 24-10-2022 becose was unussed
+        // $attribute_name = sanitize_title( $args['hook_callback_args']['hook_args'][ 'attribute' ] );
 
         // wbc()->load->model('category-attribute');
         // $attribute = \eo\wbc\model\Category_Attribute::instance()->get_attribute(str_replace('pa_','',$args['hook_callback_args']['hook_args'][ 'attribute' ]));
         $attribute = apply_filters('sp_wbc_get_attribute', null, str_replace('pa_','',$args['hook_callback_args']['hook_args'][ 'attribute' ]) );
 
-        $product_id = $args['hook_callback_args']['hook_args'][ 'product' ]->get_id();
+        // commented on 24-10-2022 becose was unussed
+        // $product_id = $args['hook_callback_args']['hook_args'][ 'product' ]->get_id();
 
 
         /*ACTIVE_TODO_OC_START
@@ -908,8 +906,10 @@ class SP_WBC_Variations extends SP_Variations {
 		}
 
 		$data = self::fetch_data('swatches', $product, $args)/*get_data('swatches')*/; 
-		$attributes = $data['attributes']; /*$product->get_variation_attributes();*/
-		$variations = $data['variations']; /*$product->get_available_variations();*/
+        // commented on 24-10-2022 becose was unussed
+		// $attributes = $data['attributes']; /*$product->get_variation_attributes();*/
+        // commented on 24-10-2022 becose was unussed
+		// $variations = $data['variations']; /*$product->get_available_variations();*/
 
 
         $type = null;	// 'select';     
@@ -1114,6 +1114,8 @@ class SP_WBC_Variations extends SP_Variations {
 
 		// TODO OPTIMIZATION in future if it seems worth it then we can prevent above layers from preparing unnecessary options and then we can simply skip array slice from below.
 		$data['woo_dropdown_attribute_html_data']['args']['actual_total_options'] = null;
+		
+		global $woocommerce_loop;
 
 		if ( $data['woo_dropdown_attribute_html_data']['args']['sp_variations_swatches_cat_display_limit'] > 0 && ( ! is_product() || $woocommerce_loop['name'] == 'related' ) ) {
 			
@@ -1153,7 +1155,8 @@ class SP_WBC_Variations extends SP_Variations {
 
 		$data['woo_dropdown_attribute_html_data'] = array();
 		$attributes = $data['attributes']; /*$product->get_variation_attributes();*/
-		$variations = $data['variations'];
+        // commented on 24-10-2022 becose was unussed
+		// $variations = $data['variations'];
 
 		// create two static methods in the SP_Attribue clas s, namely variation_attribute_name and variation_option_name -- to d done
 		// 	and the ove the respective logic from below to there -- to d done 
@@ -1193,7 +1196,7 @@ class SP_WBC_Variations extends SP_Variations {
 		$data['woo_dropdown_attribute_html_data']['options']               = $args['hook_callback_args']['hook_args']['options'];
 		$data['woo_dropdown_attribute_html_data']['product']               = $args['hook_callback_args']['hook_args']['product'];
 		$data['woo_dropdown_attribute_html_data']['attribute']             = $args['hook_callback_args']['hook_args']['attribute'];
-		$data['woo_dropdown_attribute_html_data']['name']                  = $args['hook_callback_args']['hook_args']['name'] ? $args['hook_callback_args']['hook_args']['name'] : \eo\wbc\system\core\data_model\SP_Attribute::variation_attribute_name($data['woo_dropdown_attribute_html_data']['attribute']);
+		$data['woo_dropdown_attribute_html_data']['name']                  = $args['hook_callback_args']['hook_args']['name'] ? $args['hook_callback_args']['hook_args']['name'] : apply_filters('sp_wbc_variation_attribute_name', null, $data['woo_dropdown_attribute_html_data']['attribute']);  /*\eo\wbc\system\core\data_model\SP_Attribute::variation_attribute_name($data['woo_dropdown_attribute_html_data']['attribute']);*/
 		$data['woo_dropdown_attribute_html_data']['id']                    = $args['hook_callback_args']['hook_args']['id'] ? $args['hook_callback_args']['hook_args']['id'] : sanitize_title( $data['woo_dropdown_attribute_html_data']['attribute']);
 		$data['woo_dropdown_attribute_html_data']['class']                 = $args['hook_callback_args']['hook_args']['class'];
 		$data['woo_dropdown_attribute_html_data']['show_option_none']      = $args['hook_callback_args']['hook_args']['show_option_none'] ? true : false;
@@ -1215,6 +1218,7 @@ class SP_WBC_Variations extends SP_Variations {
 		// show_on_shop_page  
 		$data['woo_dropdown_attribute_html_data']['args']['sp_variations_swatches_show_on_shop_page'] = get_term_meta( $data['woo_dropdown_attribute_html_data']['args']['attribute_object']->attribute_id, 'sp_variations_swatches_show_on_shop_page', true );
 
+		//	set default 
 		if (empty($data['woo_dropdown_attribute_html_data']['args']['sp_variations_swatches_show_on_shop_page'] )) {
 
 			$data['woo_dropdown_attribute_html_data']['args']['sp_variations_swatches_show_on_shop_page'] = 1;
@@ -1235,7 +1239,7 @@ class SP_WBC_Variations extends SP_Variations {
 		--------------a etlu wvs_default_button_variation_attribute_options alg che
 		ACTIVE_TODO_OC_END*/
 		if ( $data['woo_dropdown_attribute_html_data']['product'] ) {
-			$data['woo_dropdown_attribute_html_data']['attribute_name'] = \eo\wbc\system\core\data_model\SP_Attribute::variation_attribute_name($data['woo_dropdown_attribute_html_data']['attribute']);
+			$data['woo_dropdown_attribute_html_data']['attribute_name'] = apply_filters('sp_wbc_variation_attribute_name', null, $data['woo_dropdown_attribute_html_data']['attribute']);//\eo\wbc\system\core\data_model\SP_Attribute::variation_attribute_name($data['woo_dropdown_attribute_html_data']['attribute']);
 
 			/*echo '<select id="' . esc_attr( $id ) . '" class="' . esc_attr( $class ) . ' hide woo-variation-raw-select woo-variation-raw-type-' . $type . '" style="display:none" name="' . esc_attr( $name ) . '" data-attribute_name="' . esc_attr( wc_variation_attribute_name( $attribute ) ) . '" data-show_option_none="' . ( $show_option_none ? 'yes' : 'no' ) . '">';*/
 
@@ -1283,7 +1287,7 @@ class SP_WBC_Variations extends SP_Variations {
 
 			if ( $data['woo_dropdown_attribute_html_data']['product'] && taxonomy_exists( $data['woo_dropdown_attribute_html_data']['attribute'] ) ) {
 				// Get terms if this is a taxonomy - ordered. We need the names too.
-				$data['woo_dropdown_attribute_html_data']['terms'] = \eo\wbc\system\core\data_model\SP_Attribute::get_product_terms( $data['woo_dropdown_attribute_html_data']['product']->get_id(), $data['woo_dropdown_attribute_html_data']['attribute'], array( 'fields' => 'all' ) );
+				$data['woo_dropdown_attribute_html_data']['terms'] = apply_filters('sp_wbc_get_product_terms', null, $data['woo_dropdown_attribute_html_data']['product'], $data['woo_dropdown_attribute_html_data']['attribute'], array( 'fields' => 'all' ), $data);// \eo\wbc\system\core\data_model\SP_Attribute::get_product_terms( $data['woo_dropdown_attribute_html_data']['product']->get_id(), $data['woo_dropdown_attribute_html_data']['attribute'], array( 'fields' => 'all' ) );
 
 				$data['woo_dropdown_attribute_html_data']['options_loop_selected'] = array();
 				$data['woo_dropdown_attribute_html_data']['options_loop_option_name'] = array();
@@ -1296,7 +1300,7 @@ class SP_WBC_Variations extends SP_Variations {
 
 						$data['woo_dropdown_attribute_html_data']['options_loop_selected'][$term->slug] = ( ( (sanitize_title( $args['hook_callback_args']['hook_args']['selected'] ) === $args['hook_callback_args']['hook_args']['selected']) || (!empty($data['woo_dropdown_attribute_html_data']['query_paramas_options']) && in_array($term->slug, $data['woo_dropdown_attribute_html_data']['query_paramas_options'])) ) ? selected( $args['hook_callback_args']['hook_args']['selected'], sanitize_title( $term->slug ), false ) : selected( $args['hook_callback_args']['hook_args']['selected'], $term->slug, false ) );
 
-						$data['woo_dropdown_attribute_html_data']['options_loop_option_name'][$term->slug] = \eo\wbc\system\core\data_model\SP_Attribute::variation_option_name( $term->name, $term, $data['woo_dropdown_attribute_html_data']['attribute'], $data['woo_dropdown_attribute_html_data']['product']);
+						$data['woo_dropdown_attribute_html_data']['options_loop_option_name'][$term->slug] = apply_filters('sp_wbc_variation_option_name', null, $term->name , $term, $data['woo_dropdown_attribute_html_data']['attribute'], $data['woo_dropdown_attribute_html_data']['product']); //\eo\wbc\system\core\data_model\SP_Attribute::variation_option_name( $term->name, $term, $data['woo_dropdown_attribute_html_data']['attribute'], $data['woo_dropdown_attribute_html_data']['product']);
 
 						// ACTIVE_TODO right now we are managing selected attribute from the common woo dropdown attribute template but in future we should managing from the data layer here.
 						$data['woo_dropdown_attribute_html_data']['options_loop_html_attr'][$term->slug] = array('data-value'=>esc_attr( $term->slug ), 'data-title'=>$data['woo_dropdown_attribute_html_data']['options_loop_option_name'][$term->slug] );
@@ -1318,7 +1322,7 @@ class SP_WBC_Variations extends SP_Variations {
 					// This handles < 2.4.0 bw compatibility where text attributes were not sanitized.
 					$data['woo_dropdown_attribute_html_data']['options_loop_selected'][$option] = ( ( ( sanitize_title( $args['hook_callback_args']['hook_args']['selected'] ) === $args['hook_callback_args']['hook_args']['selected']) || (!empty($data['woo_dropdown_attribute_html_data']['query_paramas_options']) && in_array($option, $data['woo_dropdown_attribute_html_data']['query_paramas_options'])) ) ? selected( $args['hook_callback_args']['hook_args']['selected'], sanitize_title( $option ), false ) : selected( $args['hook_callback_args']['hook_args']['selected'], $option, false ) );
 
-					$data['woo_dropdown_attribute_html_data']['options_loop_option_name'][$option] = \eo\wbc\system\core\data_model\SP_Attribute::variation_option_name( $option, null, $data['woo_dropdown_attribute_html_data']['attribute'], $data['woo_dropdown_attribute_html_data']['product']);
+					$data['woo_dropdown_attribute_html_data']['options_loop_option_name'][$option] = apply_filters('sp_wbc_variation_option_name', null, $option , null, $data['woo_dropdown_attribute_html_data']['attribute'], $data['woo_dropdown_attribute_html_data']['product']); // \eo\wbc\system\core\data_model\SP_Attribute::variation_option_name( $option, null, $data['woo_dropdown_attribute_html_data']['attribute'], $data['woo_dropdown_attribute_html_data']['product']);
 
 					// ACTIVE_TODO right now we are managing selected attribute from the common woo dropdown attribute template but in future we should managing from the data layer here.
 					$data['woo_dropdown_attribute_html_data']['options_loop_html_attr'] = array('data-value' => esc_attr( $option ), 'data-title' => esc_attr( $option ) );
@@ -1366,9 +1370,9 @@ class SP_WBC_Variations extends SP_Variations {
 
 			if ( $data['woo_dropdown_attribute_html_data']['product'] && taxonomy_exists( $data['variable_item_data']['attribute'] ) ) {
 
-				$data['variable_item_data']['terms'] = \eo\wbc\system\core\data_model\SP_Attribute::get_product_terms( $data['woo_dropdown_attribute_html_data']['product']->get_id(), $data['variable_item_data']['attribute'], array( 'fields' => 'all' ) );
+				$data['variable_item_data']['terms'] = apply_filters('sp_wbc_get_product_terms', null, $data['woo_dropdown_attribute_html_data']['product'], $data['variable_item_data']['attribute'], array( 'fields' => 'all' )); //\eo\wbc\system\core\data_model\SP_Attribute::get_product_terms( $data['woo_dropdown_attribute_html_data']['product']->get_id(), $data['variable_item_data']['attribute'], array( 'fields' => 'all' ) );
 
-				$data['variable_item_data']['name']  = uniqid( \eo\wbc\system\core\data_model\SP_Attribute::variation_attribute_name( $data['variable_item_data']['attribute'] ) );
+				$data['variable_item_data']['name']  = uniqid(apply_filters('sp_wbc_variation_attribute_name', null, $data['variable_item_data']['attribute']) /*\eo\wbc\system\core\data_model\SP_Attribute::variation_attribute_name( $data['variable_item_data']['attribute'] )*/ );
 				/*ACTIVE_TODO_OC_START
 				keep it and use below data params to make our tempalte dynamic -- to b 	
 				------- m have this additional
@@ -1456,7 +1460,7 @@ class SP_WBC_Variations extends SP_Variations {
 
 						// aria-checked="false"
 						// $data['variable_item_data'][$term->slug]['option'] = esc_html( apply_filters( 'woocommerce_variation_option_name', $term->name, $term, $data['variable_item_data']['attribute'], $data['woo_dropdown_attribute_html_data']['product'] ) );
-						$data['variable_item_data']['options_loop_option'][$term->slug] = esc_html( \eo\wbc\system\core\data_model\SP_Attribute::variation_option_name($term->name, $term, $data['variable_item_data']['attribute'], $data['woo_dropdown_attribute_html_data']['product'] ) );
+						$data['variable_item_data']['options_loop_option'][$term->slug] = esc_html(apply_filters('sp_wbc_variation_option_name', null, $term->name, $term, $data['variable_item_data']['attribute'], $data['woo_dropdown_attribute_html_data']['product']) /*\eo\wbc\system\core\data_model\SP_Attribute::variation_option_name($term->name, $term, $data['variable_item_data']['attribute'], $data['woo_dropdown_attribute_html_data']['product'] ) */);
 
 						$data['variable_item_data']['options_loop_is_selected'][$term->slug]    = ( ( sanitize_title( $data['woo_dropdown_attribute_html_data']['args']['selected'] ) == $term->slug ) ) || (!empty($data['woo_dropdown_attribute_html_data']['query_paramas_options']) && in_array($term->slug, $data['woo_dropdown_attribute_html_data']['query_paramas_options']) ) ? true : false;
 						$data['variable_item_data']['options_loop_selected_class'][$term->slug] = $data['variable_item_data']['options_loop_is_selected'][$term->slug] ? 'selected' : '';
@@ -1576,7 +1580,7 @@ class SP_WBC_Variations extends SP_Variations {
 					foreach ( $data['woo_dropdown_attribute_html_data']['options'] as $option ) {
 						// This handles < 2.4.0 bw compatibility where text attributes were not sanitized.
 
-						$data['variable_item_data']['options_loop_option'][$option] = esc_html( \eo\wbc\system\core\data_model\SP_Attribute()::instance()->variation_option_name( $option, null, $data['variable_item_data']['attribute'], $data['woo_dropdown_attribute_html_data']['product'] ) );
+						$data['variable_item_data']['options_loop_option'][$option] = esc_html(apply_filters('sp_wbc_variation_option_name', null, $option, null, $data['variable_item_data']['attribute'], $data['woo_dropdown_attribute_html_data']['product']) /*\eo\wbc\system\core\data_model\SP_Attribute()::instance()->variation_option_name( $option, null, $data['variable_item_data']['attribute'], $data['woo_dropdown_attribute_html_data']['product'] )*/ );
 
 						$data['variable_item_data']['options_loop_is_selected'][$option] = ( ( sanitize_title( $data['variable_item_data']['options_loop_option'][$option] ) == sanitize_title( $data['woo_dropdown_attribute_html_data']['args']['selected'] ) ) || (!empty($data['woo_dropdown_attribute_html_data']['query_paramas_options']) && in_array($option, $data['woo_dropdown_attribute_html_data']['query_paramas_options']) ) ) ? true : false;
 
@@ -1716,7 +1720,7 @@ class SP_WBC_Variations extends SP_Variations {
 		// 	and the move the respective logic from below to there -- to d done
 		// 		--	and then replace below statements with function calls to that class -- to d done
 
-		$data['gallery_images_template_data']['product_id'] = $product->get_id();
+		$data['gallery_images_template_data']['product_id'] = apply_filters('sp_wbc_product_get_id', null, $product); //$product->get_id();
 
 		$data['gallery_images_template_data']['default_attributes'] = \eo\wbc\model\publics\data_model\SP_WBC_Variations::instance()->get_default_attributes($data['gallery_images_template_data']['product_id']);
 
@@ -1724,7 +1728,7 @@ class SP_WBC_Variations extends SP_Variations {
 
 		$data['gallery_images_template_data']['default_variation_id'] = \eo\wbc\model\publics\data_model\SP_WBC_Variations::instance()->get_default_variation_id($product, $data['gallery_images_template_data']['default_attributes'] );
 
-		$data['gallery_images_template_data']['product_type'] = $product->get_type();
+		$data['gallery_images_template_data']['product_type'] = apply_filters('sp_wbc_product_get_type', null, $product); //$product->get_type();
 
 		// ACTIVE_TODO we may like to use the columns var later to till gallery_images slider and zoom module layers including till applicable js layers -- to h or -- to d 
 		$data['gallery_images_template_data']['columns'] = -1;	//	thumbnail columns 
@@ -1952,7 +1956,7 @@ class SP_WBC_Variations extends SP_Variations {
  
         add_filter( 'sp_wbc_get_attribute',  function($data,$attribute){
 
-			if (!empty($data)) {
+			if ($data !== null) {
 
 				return $data;
 			}
@@ -1960,8 +1964,61 @@ class SP_WBC_Variations extends SP_Variations {
 			wbc()->load->model('category-attribute');
         	return \eo\wbc\model\Category_Attribute::instance()->get_attribute($attribute/*str_replace('pa_','',$args['hook_callback_args']['hook_args'][ 'attribute' ])*/);
         	
-		},10);
+		}, 10, 2);
 
+        add_filter( 'sp_wbc_variation_attribute_name',  function($data,$attribute){
+
+			if ($data !== null) {
+
+				return $data;
+			}
+
+			return \eo\wbc\system\core\data_model\SP_Attribute::variation_attribute_name($attribute);
+        	
+		}, 10, 2);
+
+        add_filter( 'sp_wbc_get_product_terms',  function($data, $product, $attribute, $funation_calls_args, $caller_data){
+
+			if ($data !== null) {
+
+				return $data;
+			}
+
+			return \eo\wbc\system\core\data_model\SP_Attribute::get_product_terms($product->get_id(), $attribute, $funation_calls_r);
+        	
+		}, 10, 5);
+
+        add_filter( 'sp_wbc_variation_option_name',  function($data, $term_name , $term, $attribute, $product){
+
+			if ($data !== null) {
+
+				return $data;
+			}
+
+			return \eo\wbc\system\core\data_model\SP_Attribute::variation_option_name($term_name , $term, $attribute, $product);
+        	
+		}, 10, 5);
+
+		add_filter('sp_wbc_get_variations',function($data, $product ,$args){
+
+			if ($data !== null) {
+
+				return $data;
+			}
+		
+			return $product->get_available_variations(); 
+		},10,3);
+		
+		add_filter('sp_wbc_get_variation_attrs',function($data, $product){
+
+			if ($data !== null) {
+
+				return $data;
+			}
+		
+			return $product->get_variation_attributes(); 
+		},10,2);
+	
 		add_filter( '? Well be provided leter in recoding',  function($data){
 
 			if (!empty($data)) {
@@ -1974,6 +2031,28 @@ class SP_WBC_Variations extends SP_Variations {
 	}
 
 	private function gallery_images_hooks(){
+        
+        add_filter( 'sp_wbc_product_get_id',  function($data,$product){
+
+			if ($data !== null) {
+
+				return $data;
+			}
+
+        	return $product->get_id();
+        	
+		}, 10, 2);
+        
+        add_filter( 'sp_wbc_product_get_type',  function($data,$product){
+
+			if ($data !== null) {
+
+				return $data;
+			}
+
+        	return $product->get_id();
+        	
+		}, 10, 2);
 
 		add_filter( '? Well be provided leter in recoding',  function($data){
 
