@@ -25,6 +25,12 @@ if( is_product() ) {
 	}
 	.woocommerce .summary.entry-summary table.variations tr{
 		border: none;
+	}
+	table.variations.ui.raised.segment .ui.mini.images .variable-item.image {
+	    padding: 0 2px;
+	}
+	table.variations.ui.raised.segment .ui.mini.images .variable-item.image .variable-item-span-button {
+	    padding: 0 5px;
 	}	
 </style>
 
