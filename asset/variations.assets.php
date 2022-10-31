@@ -419,6 +419,10 @@ if( is_product() ) {
 
 
 <style type="text/css">
+	#wbc_variation_toggle .caret {
+	    border-top: 0px dashed;
+	    margin: 0 auto;
+	}
 	form.variations_form.cart table.variations {
 	    -webkit-box-shadow: none !important;
 	            box-shadow: none !important;
