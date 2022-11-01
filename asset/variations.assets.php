@@ -10,8 +10,75 @@ if( is_product() ) {
 ?>
 
 <style type="text/css">
+	
+	/*----Variation_th------*/
+	:root{
+	   --spui-variable-th-text-align: left;
+	   --spui-variable-th-text-size:15px;
+	   --spui-variable-th-text-color:#242424;
+	}
+
+	.variations_form .variations th.label {
+	    display: table-cell !important;
+	    text-align: var(--spui-variable-th-text-align) !important;
+	    vertical-align: top;
+	    border: none !important;
+	}
+
+	.woocommerce div.product form.cart .variations th.label label {
+	    font-size: var(--spui-variable-th-text-size) !important;
+	    line-height: 1.1;
+	    text-transform: capitalize;
+	    text-align: left;
+	    display: inline-block;
+	    vertical-align: middle;
+	    font-weight: normal;
+	    color: var(--spui-variable-th-text-color) !important;
+	}
+
+	body .variations_form .variations td {
+	    padding-left: 1rem !important;
+	    padding: 0 0 20px 0;
+	    width: 100%;
+	    border: none !important;	
+	}
+
+	.variations_form .variations td .ui.segment .label {
+	    background: transparent !important;
+	    border-color: transparent !important;
+	    color: #333 !important;
+	    left: 0;
+	    margin-right: 0;
+	    padding-left: 0;
+	    display: none !important;
+	}
+	.variations_form .variations td .ui.segment {
+	    border: none;
+	    box-shadow: none;
+	    margin-top: 0;
+	    background: transparent !important;
+	    padding: 0;
+	    margin: 0;
+	}
+	body .variations_form table.variations .value a.reset_variations {
+	    margin: 0;
+	    margin-top: 1rem !important;
+	    font-size: 12px !IMPORTANT;
+	    color: #242424 !important;
+	    text-transform: uppercase;
+	    width: 100%;
+	    float: left !important;
+	    text-decoration: none !important;
+	    border: none !important;
+	    padding: 0 !important;
+	}
+	table.variations .value ul {
+	    margin: 0;
+	    padding: 0;
+	}
+
 	/*------Variable-btn----*/
-		:root{
+	:root{
 	        --spui-single-button-product-item-height:30px;
             --spui-single-button-product-item-width:30px;
             --spui-selected-item-box-shadow:#000;
@@ -541,12 +608,12 @@ if( is_product() ) {
 	{
 		padding: 0.7em;
 		margin-bottom: 0.7em;
-		border:1px solid #5e5c5b;
+		border:1px solid #d8d3d3;
 		display: inline-block;
 		color: #2d2d2d;
 		font-size:1rem;
 		cursor: pointer;
-		border-radius: 1px !important;
+		border-radius: 5px !important;
 	} 
 	table.variations{
 		padding: 5px;
