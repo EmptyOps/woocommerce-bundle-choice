@@ -72,6 +72,10 @@ if( is_product() ) {
 	    border: none !important;
 	    padding: 0 !important;
 	}
+	table.variations .value ul {
+	    margin: 0;
+	    padding: 0;
+	}
 
 	/*------Variable-btn----*/
 	:root{
