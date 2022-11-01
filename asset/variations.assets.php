@@ -10,8 +10,66 @@ if( is_product() ) {
 ?>
 
 <style type="text/css">
+	
+	/*----Variation_th------*/
+	:root{
+	   --spui-variable-th-text-align: left;
+	   --spui-variable-th-text-size:15px;
+	   --spui-variable-th-text-color:#242424;
+	}
+
+	.variations_form .variations th.label {
+	    display: table-cell !important;
+	    text-align: var(--spui-variable-th-text-align) !important;
+	    vertical-align: top;
+	}
+
+	.woocommerce div.product form.cart .variations th.label label {
+	    font-size: var(--spui-variable-th-text-size) !important;
+	    line-height: 1.1;
+	    text-transform: capitalize;
+	    text-align: left;
+	    display: inline-block;
+	    vertical-align: middle;
+	    font-weight: normal;
+	    color: var(--spui-variable-th-text-color) !important;
+	}
+
+	.variations_form .variations td {
+	    padding-left: 1rem !important;
+	    padding: 0 0 20px 0;
+	    width: 100%;
+	}
+	.variations_form .variations td .ui.segment .label {
+	    background: transparent !important;
+	    border-color: transparent !important;
+	    color: #333 !important;
+	    left: 0;
+	    margin-right: 0;
+	    padding-left: 0;
+	    display: none !important;
+	}
+	.variations_form .variations td .ui.segment {
+	    border: none;
+	    box-shadow: none;
+	    margin-top: 0;
+	    background: transparent !important;
+	    padding: 0;
+	    margin: 0;
+	}
+	.single-product div.product table.variations .value a.reset_variations {
+	    margin: 0;
+	    margin-top: 1rem;
+	    font-size: 12px;
+	    color: #242424;
+	    text-transform: uppercase;
+	    width: 100%;
+	    float: left;
+	    text-decoration: none !important;
+	}
+
 	/*------Variable-btn----*/
-		:root{
+	:root{
 	        --spui-single-button-product-item-height:30px;
             --spui-single-button-product-item-width:30px;
             --spui-selected-item-box-shadow:#000;
