@@ -54,6 +54,19 @@ if ( ! class_exists( 'Filters' ) ) {
 	        return $opts_arr;
 	    }
 
+	    protected static function get_filter_sets($option_group_key = 'filters_filter_set', $args=array()) {
+
+			$filter_sets = unserialize(wbc()->options->get_option_group($option_group_key,"a:0:{}"));
+			//wbc()->common->pr($filter_sets);
+			if(!empty($filter_sets) and is_array($filter_sets)){
+				foreach ($filter_sets as $filter_sets_key => $filter_sets_val) {
+					$filter_sets[$filter_sets_key] = $filter_sets_val['filter_set_name'];
+				}
+			}	    	
+
+			return $filter_sets;
+	    }
+
 		public static function get_form_definition( $is_add_sample_values = false ) {
 			
 			wbc()->load->model('admin/form-builder');
@@ -62,14 +75,14 @@ if ( ! class_exists( 'Filters' ) ) {
 			
 			$features = unserialize(wbc()->options->get_option('setting_status_setting_status_setting','features',serialize(array())));
 
-			$filter_sets = unserialize(wbc()->options->get_option_group('filters_filter_set',"a:0:{}"));
-			//wbc()->common->pr($filter_sets);
-			if(!empty($filter_sets) and is_array($filter_sets)){
-				foreach ($filter_sets as $filter_sets_key => $filter_sets_val) {
-					$filter_sets[$filter_sets_key] = $filter_sets_val['filter_set_name'];
-				}
-			}
-			
+			// $filter_sets = unserialize(wbc()->options->get_option_group('filters_filter_set',"a:0:{}"));
+			// //wbc()->common->pr($filter_sets);
+			// if(!empty($filter_sets) and is_array($filter_sets)){
+			// 	foreach ($filter_sets as $filter_sets_key => $filter_sets_val) {
+			// 		$filter_sets[$filter_sets_key] = $filter_sets_val['filter_set_name'];
+			// 	}
+			// }
+			$filter_sets = self::get_filter_sets();
 
 			$is_ring_builder = (!empty($features['ring_builder']));			
 			//Diamond Page Filter Configuration's list

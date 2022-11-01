@@ -3147,7 +3147,7 @@ jQuery(document).ready(function($){
   	// window.document.splugins.filters.api.init();
 
 	if(window.eo_wbc_object.disp_regular){
-	
+
 		// create function bind_click in filters js module and move below code there -- to d done
 		// 	--	and then from just make call to that private function from the init_private of the same module -- to d done
 		//jQuery(".woocommerce-pagination,.pagination,jet-filters-pagination").html('');	
@@ -3433,6 +3433,8 @@ window.document.splugins.wbc.filter_sets.core = function( configs ) {
         	}
 
 			let group_id_alt = tab_data.first_tab_id/*$(this).data('tab-altname')*/;
+			console.log('tab_data');
+			console.log(tab_data);
 		    $('[data-tab-group="'+group_id_alt+'"]').css('display','none');        	
 
 			$('[data-tab-group="'+group_id_alt+'"]').each(function(){

@@ -153,6 +153,5 @@ if(wp_is_mobile()) {
 	}
 
 } else {	
-
 	$filter_ui->load_desktop($non_adv_ordered_filter, $adv_ordered_filter);				
 }

@@ -3489,7 +3489,7 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
        
         console.log("variation_change_listener 2 product_id = "+_this.product_id +" product_id = "+_this.#$variations_form.data('product_id'));
         
-         _this.#$variations_form.on('show_variation', function (event, variation) {
+        _this.#$variations_form.on('show_variation', function (event, variation) {
             
            console.log("variation_change_listener 2 show_variation");
            console.log(event);
@@ -3505,7 +3505,7 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
 
            _this.#on_variation_change(event, variation);
          
-         });
+        });
  
     }
 
