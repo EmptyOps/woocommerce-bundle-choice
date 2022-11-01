@@ -22,6 +22,7 @@ if( is_product() ) {
 	    display: table-cell !important;
 	    text-align: var(--spui-variable-th-text-align) !important;
 	    vertical-align: top;
+	    border: none !important;
 	}
 
 	.woocommerce div.product form.cart .variations th.label label {
@@ -35,11 +36,13 @@ if( is_product() ) {
 	    color: var(--spui-variable-th-text-color) !important;
 	}
 
-	.variations_form .variations td {
+	body .variations_form .variations td {
 	    padding-left: 1rem !important;
 	    padding: 0 0 20px 0;
 	    width: 100%;
+	    border: none !important;	
 	}
+
 	.variations_form .variations td .ui.segment .label {
 	    background: transparent !important;
 	    border-color: transparent !important;
@@ -57,15 +60,17 @@ if( is_product() ) {
 	    padding: 0;
 	    margin: 0;
 	}
-	.single-product div.product table.variations .value a.reset_variations {
+	body .variations_form table.variations .value a.reset_variations {
 	    margin: 0;
-	    margin-top: 1rem;
-	    font-size: 12px;
-	    color: #242424;
+	    margin-top: 1rem !important;
+	    font-size: 12px !IMPORTANT;
+	    color: #242424 !important;
 	    text-transform: uppercase;
 	    width: 100%;
-	    float: left;
+	    float: left !important;
 	    text-decoration: none !important;
+	    border: none !important;
+	    padding: 0 !important;
 	}
 
 	/*------Variable-btn----*/
