@@ -608,12 +608,12 @@ if( is_product() ) {
 	{
 		padding: 0.7em;
 		margin-bottom: 0.7em;
-		border:1px solid #5e5c5b;
+		border:1px solid #d8d3d3;
 		display: inline-block;
 		color: #2d2d2d;
 		font-size:1rem;
 		cursor: pointer;
-		border-radius: 1px !important;
+		border-radius: 5px !important;
 	} 
 	table.variations{
 		padding: 5px;

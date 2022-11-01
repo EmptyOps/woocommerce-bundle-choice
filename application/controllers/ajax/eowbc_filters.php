@@ -7,7 +7,6 @@
 $res = array( "type"=>"success", "msg"=>"" );
 
 if(wp_verify_nonce(wbc()->sanitize->post('_wpnonce'),'eowbc_filters')) {
-echo "abcdefghijklmnopqrstuvwxyz";
 	
 	wbc()->load->model('admin/eowbc_filters');
 	wbc()->load->model('admin\form-builder');
