@@ -137,6 +137,7 @@ if(window.document.splugins.common.is_item_page || window.document.splugins.comm
  * http://stackoverflow.com/a/10997390/11236
  */ 
  window.document.splugins.common.updateURLParameter = function(url, param, paramVal){
+    console.log('updateURLParameter()');
     var TheAnchor = null;
     var newAdditionalURL = "";
     var tempArray = url.split("?");
@@ -3497,7 +3498,11 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
 
                 console.log('call set_variation_url');
                 _this.#set_variation_url(event, variation);
+           }else {
+
+                console.log('set_variation_url_not_call');
            }
+
            _this.#on_variation_change(event, variation);
          
          });
@@ -3507,15 +3512,16 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
     #create_variation_url(element, event, variation) {
 
         console.log('create_variation_url');
-        console.log(event);
+        console.log(variation);
 
         var _this = this;
-        var attributes = [];
+        var attributes = [];        
 
-        jQuery('table.variations select').each(function() {
+        // https://stackoverflow.com/questions/54965487/get-currently-selected-variation-and-data-from-woocommerce-variable-product
+        jQuery(_this.#$base_container.find('table.variations select')).each(function() {
     
             console.log('create_variation_url loop');
-
+            
             var value = jQuery(this).val();
             if (value) {
                 attributes.push({
@@ -3527,15 +3533,22 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
             }*/
         });
 
-        console.log('create_variation_url 01');
-        console.log(element);
         var url = element.attr('href');
+        
+        console.log('create_variation_url_attributes');
+        console.log(attributes);
+        console.log('old_url');
+        console.log(url);
+
         url = url +'?variation_id='+ variation.variation_id;
 
         // ACTIVE_TODO as soon as required we need to enabled url support if applicable for simple type product 
         //     ACTIVE_TODO very soon we should also use here the php layer router class Query perams function layer instant of directly using hard coded_attr_checklist etc formate  
         var attributeSlug_global = '';
         jQuery.each(attributes,function(key, val) {
+            
+            console.log('create_variation_url() loop');
+            console.log('key = '+key+' , val = '+val);
 
             var attributeSlug = val.id.replace('attribute_',''); //val.id.replace('attribute_pa_','');
             // url += '&_attribute=' + attributeSlug + '&checklist_' + attributeSlug + "=" + val.value;
@@ -3545,14 +3558,19 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
 
         url = window.document.splugins.common.updateURLParameter(url, '_attribute=', attributeSlug_global);
 
+        console.log('new_url');
+        console.log(url);
+
         return url;
     
     }    
 
     #get_loop_box_anchor(event, variation) {
 
-        console.log('get_loop_box_anchor');
         var _this = this;
+
+        console.log('get_loop_box_anchor');
+        console.log(_this.#$base_container);
         
         var aLocateclass_p = 'woocommerce-LoopProduct-link';
         var liLocate_class_p = 'product';
@@ -3561,40 +3579,24 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
 
         if( window.document.splugins.common.is_empty(liLocate)){
 
-            var liLocate = base_container.closest('li');
+            var liLocate = _this.#$base_container.closest('li');
             
             if(window.document.splugins.common.is_empty(liLocate)){
 
-                console.log('liLocate not define');   
+                liLocate = _this.#$base_container.closest(_this.#compatability('selectore_loop_box_for_Anchor_tag'));
 
-                // liLocate = base_container.closest(compatability_('purple_theme'));
-                liLocate = base_container.closest(_this.#compatability('selectore_loop_box_for_Anchor_tag'));
+            }
 
-            }else{
-                console.log('li thi loop box malyu se');
-            } 
-            console.log(liLocate);
-
-        }else{
-
-            console.log('class thi loop box malyu se');
         }
 
         var aLocate = liLocate.find('a');
 
         if(!window.document.splugins.common.is_empty(aLocate)) {
-            
-            console.log('aLocate is define');
-            // console.log(aLocate);
 
             for (let i = 0; i < aLocate.length; i++){
 
-                console.log('<a> for loop');
-
                 if(jQuery(aLocate[i]).attr('class').indexOf(' ') >= 0){
 
-                    console.log('<a> for loop inner if');
-                    // console.log(jQuery(aLocate[i]));
                     var aLocateclassAll = jQuery(aLocate[i]).attr('class').split(" ");
 
                     var aLocateclassAll_index = aLocateclassAll.indexOf(aLocateclass_p);
@@ -3602,12 +3604,11 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
                     if( aLocateclassAll_index != -1 && aLocateclassAll[aLocateclassAll_index] == aLocateclass_p) {
 
                         var finalAnchor = jQuery(aLocate[i]);
-                        console.log('<a> for loop in if aLocateclassAll_index');
-                        
-                    }else if(jQuery(aLocate[i]).attr("href").indexOf("/product/") >= 0) {
+                            
+                    }else if( !window.document.splugins.common.is_empty(jQuery(aLocate[i]).attr("href")) && jQuery(aLocate[i]).attr("href").indexOf("/product/") >= 0) {
                         
                         var finalAnchor = jQuery(aLocate[i]);
-                        console.log("HREF thi <a> malyo");
+
                     }
 
                     if(!window.document.splugins.common.is_empty(finalAnchor)) {
@@ -3615,12 +3616,8 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
                        break; 
                     }
 
-                    console.log('<a> class split');
+                }else if(!window.document.splugins.common.is_empty(jQuery(aLocate[i]).attr('class'))){
 
-                }else{
-
-                    console.log('<a> for loop inner if');
-                    // console.log(jQuery(aLocate[i]));
                     var aLocateclass = jQuery(aLocate[i]).attr('class');
 
                     console.log('<a> class no split');
@@ -3640,20 +3637,20 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
 
                        break; 
                     }
+                
                 } 
             }                
         }
+
         console.log('final anchor');
         console.log(finalAnchor);
-
-        // var anchorUrl = finalAnchor.attr("href");
 
         return finalAnchor;
     
     }
 
     #set_variation_url(event, variation) {
-
+        console.log('set_variation_url');
         // ACTIVE_TODO temp
         // return false;
 
@@ -3663,9 +3660,14 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
         var _this = this;
 
         var a = _this.#get_loop_box_anchor(variation);
+
+        console.log("a.attr('href')");
         console.log(a.attr('href'));
-        var variation_url = _this.#create_variation_url(a);
+    
+        var variation_url = _this.#create_variation_url(a, event, variation);
         var base_url = a.attr('href', variation_url);
+        
+        console.log("a.attr('href')");
         console.log(a.attr('href'))
 
     }
@@ -3882,8 +3884,6 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
                     --  we may not need show_gallery_images and show_variation_gallery_images, as long as we pass the right variable to process_images_template. and process_images_template is already created.      
         ACTIVE_TODO_OC_END*/
         _this.#process_images_template(variation.variation_gallery_images);
-
-        _this.#set_variation_url(variation);
 
     }
  

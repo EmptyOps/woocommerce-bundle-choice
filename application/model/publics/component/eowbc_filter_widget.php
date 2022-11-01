@@ -2375,6 +2375,7 @@ class EOWBC_Filter_Widget {
 			jQuery(document).ready(function($){
 				
 				EO_WBC_FILTER_UI_ICON_TERM_SLUG.push("<?php echo $term->slug; ?>");
+
 				/*__data_filter_slug="<?php echo $term->slug; ?>";*/
 				/*if(__data_filter_slug){*/
 				if("<?php echo $term->slug; ?>") {
