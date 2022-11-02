@@ -3493,14 +3493,19 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
             
            console.log("variation_change_listener 2 show_variation");
            console.log(event);
+           console.log(variation);
 
-           if(!window.document.splugins.common.is_empty(event) && !window.document.splugins.common.is_empty(variation)) {
+           // -- aya only is_category_page ni if condition mari se 02-11-2022 @a --
+           if(window.document.splugins.common.is_category_page) {
+               
+               if(!window.document.splugins.common.is_empty(event) && !window.document.splugins.common.is_empty(variation)) {
 
-                console.log('call set_variation_url');
-                _this.#set_variation_url(event, variation);
-           }else {
+                    console.log('call set_variation_url');
+                    _this.#set_variation_url(event, variation);
+               }else {
 
-                console.log('set_variation_url_not_call');
+                    console.log('set_variation_url_not_call');
+               }
            }
 
            _this.#on_variation_change(event, variation);
@@ -3835,6 +3840,8 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
         if(_this.#configs.template.zoom.all_in_dom == 0){
             // update one tamplate 
 
+            console.log("_this.#data.current_variation");
+            console.log(_this.#data);
             _this.#process_zoom_template(_this.#data.current_variation.variation_gallery_images,index,_this.#data.current_variation.variation_gallery_images.length > 1);             
 
         }else{
