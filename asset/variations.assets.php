@@ -118,6 +118,7 @@ if( is_product() ) {
 	    justify-content: center;
 	    position: relative;
 	    width: 100%;
+	    padding: 0 5px;
 	}
 
 	.spui-wbc-swatches-variable-items-wrapper-button li.variable-item.selected{
