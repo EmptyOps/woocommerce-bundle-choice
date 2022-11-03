@@ -2239,7 +2239,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 			// let old_val = $("form#<?php echo $this->filter_prefix; ?>eo_wbc_filter  #checklist_<?php echo $filter['slug']; ?>").val();
 			let old_val = jQuery("form#"+ _this.sub_configs.filter_prefix +"eo_wbc_filter  #checklist_" + _this.sub_configs.filter_slug).val();
 			old_val = old_val.split(',');
-			if(old_val.indexOf($(/*this*/element).data('slug'))==-1){
+			if(old_val.indexOf(jQuery(/*this*/element).data('slug'))==-1){
 				let _slug = jQuery(/*this*/element).data('slug');
 				old_val.push(_slug);
 				new_val = old_val.join();
