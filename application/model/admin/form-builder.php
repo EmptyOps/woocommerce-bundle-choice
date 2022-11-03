@@ -906,4 +906,34 @@ class Form_Builder implements Builder {
 		return array("text","checkbox","color","hidden","radio","select","textarea","icon","time",'number','link','date');
 	}
 
+	public function clean_form_properties( $form_definition, $fields_to_keep = array() ) {
+
+		// clin the entire abowe sp_variations_data form propertys as planned and keep here only key,type,value,etc...
+	    foreach ($form_definition as $key => $tab) {
+
+			foreach ($tab["form"] as $fk => $fv) {
+				if( $fv["type"] == "table" ) {
+					
+					// ACTIVE_TODO here we shoud erase all other such type like table in if above wich are not nassasary for us one this layer -- to s & -- to a
+					$form_definition[$key]["form"][$fk] = null;
+				}
+				else {
+
+					foreach($fv as $fv_key => $fv_value){
+
+						yet to be confirmed 
+						if( !in_array( $fields_to_keep, $fv_key )/*$fv_key != 'type' && $fv_key != 'value'*/ ){
+
+							unset($form_definition[$key]["form"][$fk][$fv_key]);
+
+						}						
+					}						
+				}		  
+			}
+	    }
+
+	    return $form_definition;
+
+	}
+
 }
