@@ -130,21 +130,21 @@ class Feed extends \eo\wbc\controllers\publics\Controller{
 
                 global $product;
                 
-                do_action( 'sp_wbc_woo_template_loop_product_thumbnail',$product);
+                do_action( 'sp_wbc_woo_template_loop_product_thumbnail', $product, null);
 
 
             }, 15 );
 
-            add_action('sp_wbc_woo_template_loop_product_thumbnail', function($product) use($page_section,$args) {  
+            add_action('sp_wbc_woo_template_loop_product_thumbnail', function($product, $extra_args) use($page_section,$args) {  
 
                 $args['hook_callback_args'] = array();
                 $args['hook_callback_args']['product'] = $product;
                 // $args['hook_callback_args']['hook_args'] = $hook_args;
-
+                $args['hook_callback_args']['extra_args'] = $extra_args;
 
                 return $this->selectron_hook_render($page_section,'gallery_images',false,$args);
 
-            }, 15 );
+            }, 15, 2);
 
         } elseif ($page_section == 'swatches') {
 

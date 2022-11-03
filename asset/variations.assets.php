@@ -1967,6 +1967,9 @@ jQuery( document ).ready(function() {
         --spui_tooltip_padding:.5rem 1.75rem;
         --spui_tooltip_body:none;
     }
+    .popover{
+    	height: auto !important;
+    }
     .popover-header{
         background: var(--spui_tooltip_bg) !important;
         color: var(--spui_tooltip_text) !important;

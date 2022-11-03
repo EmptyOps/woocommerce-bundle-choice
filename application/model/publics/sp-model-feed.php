@@ -366,7 +366,8 @@ class SP_Model_Feed extends SP_Feed {
 		// 	}
 		// }
 
-        $data = \eo\wbc\model\publics\data_model\SP_WBC_Variations::prepare_gallery_template_data(array('page'=>'feed'));
+		$args['page'] = 'feed';
+        $data = \eo\wbc\model\publics\data_model\SP_WBC_Variations::prepare_gallery_template_data($args);
         
 		//////////////// start core
 
