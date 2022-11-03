@@ -31,6 +31,8 @@ window.document.splugins.wbc.filters.core = function( configs ) {
     //	private functions 
     var init_private = function() {
 
+    	console.log('filters init_private()');
+
 		/*ACTIVE_TODO_OC_START
 			    	// do general development like published init tobe defined below will call this private init function -- to d done
 
@@ -154,7 +156,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
     var process_events = function(){
 
-		console.log("filter process_events");
+		console.log("filter process_events 01");
 		
 		on_reset_click_listener();
 
@@ -162,13 +164,15 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
 		slider_change_event_listener();
 
+		console.log("filter process_events 02");
+
 		checkbox_change_event_listener();
 
 		input_type_icon_click_listener();
 
 		input_type_button_click_listener();
 
-		console.log("filter process_events 01");
+		console.log("filter process_events 03");
 		// ACTIVE_TODO temp. remove this code when we clear 34.13
 		var process_events_callback = null ;
         window.document.splugins.events.api.notifyAllObservers( 'filters', 'process_events', {}, process_events_callback, null/*form_selector==null ? _this.$base_container : form_selector*/ );
@@ -1606,6 +1610,8 @@ window.document.splugins.wbc.filters.core = function( configs ) {
     };
 
     var on_slider_change_event = function(selector, element){
+    	
+    	console.log('on_slider_change_event');
 
     	slider_change_event(selector, element);
     };
@@ -1784,7 +1790,11 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
     var slider_change_event = function(selector, element){
 
+    	console.log('slider_change_event');
+
 		jQuery(selector).each(function(i,e){
+
+	    	console.log('slider_change_event loop');
 
 			_min = Number(jQuery(e).attr('data-min'));						
 			_max = Number(jQuery(e).attr('data-max'));												
@@ -2000,7 +2010,13 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 			let ui_slider = jQuery.fn.slider;
 
 			jQuery.fn.slider = window.document.splugins.ui.slider;
+			
+	    	console.log('slider_change_event loop 01');
+			console.log(e);
+			console.log(_params);
+
 			jQuery(e).slider(_params);
+	    				
 			jQuery.fn.slider = ui_slider;
 		});
     
