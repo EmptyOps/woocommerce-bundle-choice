@@ -2200,7 +2200,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		jQuery(filter_list).val(icon_val.substr(0,icon_val.length));
 		
 		jQuery(/*this*/element).toggleClass('eo_wbc_filter_icon_select');
-		$('[name="paged"]').val('1');
+		jQuery('[name="paged"]').val('1');
 		// <?php if(empty(wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','filter_setting_btnfilter_now'))): ?>
 		if(_this.sub_configs.filter_setting_btnfilter_now != 'filter_setting_btnfilter_now'){
 
@@ -2235,41 +2235,41 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		
 		let filter_name = jQuery(/*this*/element).attr('data-filter-slug');
 
-		if($(/*this*/element).hasClass('eo_wbc_button_selected')){
-			$(/*this*/element).removeClass('eo_wbc_button_selected');
+		if(jQuery(/*this*/element).hasClass('eo_wbc_button_selected')){
+			jQuery(/*this*/element).removeClass('eo_wbc_button_selected');
 			// let old_val = $("form#<?php echo $this->filter_prefix; ?>eo_wbc_filter  #checklist_<?php echo $filter['slug']; ?>").val();
-			let old_val = $("form#"+ _this.sub_configs.filter_prefix +"eo_wbc_filter  #checklist_" + _this.sub_configs.filter_slug).val();
+			let old_val = jQuery("form#"+ _this.sub_configs.filter_prefix +"eo_wbc_filter  #checklist_" + _this.sub_configs.filter_slug).val();
 			old_val = old_val.split(',');
-			if(old_val.indexOf($(/*this*/element).data('slug'))!=-1){
-				let _slug = $(/*this*/element).data('slug');
+			if(old_val.indexOf(jQuery(/*this*/element).data('slug'))!=-1){
+				let _slug = jQuery(/*this*/element).data('slug');
 				old_val = old_val.filter(function(item){
 					return item==_slug?false:true;
 				});
 				new_val = old_val.join();
 				// $("form#<?php echo $this->filter_prefix; ?>eo_wbc_filter  #checklist_<?php echo $filter['slug']; ?>").val(new_val);
-				$("form#"+ _this.sub_configs.filter_prefix +"eo_wbc_filter  #checklist_" + _this.sub_configs.filter_slug).val(new_val);
+				jQuery("form#"+ _this.sub_configs.filter_prefix +"eo_wbc_filter  #checklist_" + _this.sub_configs.filter_slug).val(new_val);
 			}
 
 		} else {
-			$(/*this*/element).addClass('eo_wbc_button_selected');
+			jQuery(/*this*/element).addClass('eo_wbc_button_selected');
 			// let old_val = $("form#<?php echo $this->filter_prefix; ?>eo_wbc_filter  #checklist_<?php echo $filter['slug']; ?>").val();
-			let old_val = $("form#"+ _this.sub_configs.filter_prefix +"eo_wbc_filter  #checklist_" + _this.sub_configs.filter_slug).val();
+			let old_val = jQuery("form#"+ _this.sub_configs.filter_prefix +"eo_wbc_filter  #checklist_" + _this.sub_configs.filter_slug).val();
 			old_val = old_val.split(',');
-			if(old_val.indexOf($(/*this*/element).data('slug'))==-1){
-				let _slug = $(/*this*/element).data('slug');
+			if(old_val.indexOf(jQuery(/*this*/element).data('slug'))==-1){
+				let _slug = jQuery(/*this*/element).data('slug');
 				old_val.push(_slug);
 				new_val = old_val.join();
 				// $("form#<?php echo $this->filter_prefix; ?>eo_wbc_filter  #checklist_<?php echo $filter['slug']; ?>").val(new_val);
-				$("form#"+ _this.sub_configs.filter_prefix +"eo_wbc_filter  #checklist_" + _this.sub_configs.filter_slug).val(new_val);
+				jQuery("form#"+ _this.sub_configs.filter_prefix +"eo_wbc_filter  #checklist_" + _this.sub_configs.filter_slug).val(new_val);
 			}
 		}
 
 		// if(filter_target.val().includes(filter_name) && $("form#<?php echo $this->filter_prefix; ?>eo_wbc_filter  #checklist_<?php echo $filter['slug']; ?>").val().length==0) {
-		if(filter_target.val().includes(filter_name) && $("form#"+ _this.sub_configs.filter_prefix +"eo_wbc_filter  #checklist_" + _this.sub_configs.filter_slug).val().length==0) {
+		if(filter_target.val().includes(filter_name) && jQuery("form#"+ _this.sub_configs.filter_prefix +"eo_wbc_filter  #checklist_" + _this.sub_configs.filter_slug).val().length==0) {
 			filter_target.val(filter_target.val().replace(','+filter_name,''));
 
 		// } else { if((!filter_target.val().includes(filter_name)) && $("form#<?php echo $this->filter_prefix; ?>eo_wbc_filter #checklist_<?php echo $filter['slug']; ?>").val().length) {
-		} else { if((!filter_target.val().includes(filter_name)) && $("form#"+ _this.sub_configs.filter_prefix +"eo_wbc_filter #checklist_" + _this.sub_configs.filter_slug).val().length) {
+		} else { if((!filter_target.val().includes(filter_name)) && jQuery("form#"+ _this.sub_configs.filter_prefix +"eo_wbc_filter #checklist_" + _this.sub_configs.filter_slug).val().length) {
 
 			filter_target.val(filter_target.val()+','+filter_name);	
 		} }	
@@ -3417,11 +3417,11 @@ window.document.splugins.wbc.filter_sets.core = function( configs ) {
 
 	    //cat_filter__two_tabs
 	    
-	    $('.filter_setting_advance_two_tabs .item').removeClass('active');
+	    jQuery('.filter_setting_advance_two_tabs .item').removeClass('active');
 
-		$(element/*this*/).addClass('active');
+		jQuery(element/*this*/).addClass('active');
 
-	    let group_id = $(element/*this*/).data('tab-name');
+	    let group_id = jQuery(element/*this*/).data('tab-name');
 
 		console.log("filter_sets filter_set_click 22");
 
@@ -3429,7 +3429,7 @@ window.document.splugins.wbc.filter_sets.core = function( configs ) {
 	    var filter_set_click_callback = function(stat_object){
 
 	    	console.log('filter_set_click_callback()');
-            $('[data-tab-group="'+group_id+'"]:not(.toggle_sticky_mob_filter.advance_filter_mob)').not('[data-tab-group]:has([data-switch_filter_type-alternate])').css('display',stat_object.display_style);	
+            jQuery('[data-tab-group="'+group_id+'"]:not(.toggle_sticky_mob_filter.advance_filter_mob)').not('[data-tab-group]:has([data-switch_filter_type-alternate])').css('display',stat_object.display_style);	
 
     	};
 	    window.document.splugins.events.api.notifyAllObservers( 'filter_sets', 'filter_set_click_before_loop',{display_style:display_style},filter_set_click_callback);          
@@ -3451,11 +3451,11 @@ window.document.splugins.wbc.filter_sets.core = function( configs ) {
 			let group_id_alt = tab_data.first_tab_id/*$(this).data('tab-altname')*/;
 			console.log('tab_data');
 			console.log(tab_data);
-		    $('[data-tab-group="'+group_id_alt+'"]').css('display','none');        	
+		    jQuery('[data-tab-group="'+group_id_alt+'"]').css('display','none');        	
 
-			$('[data-tab-group="'+group_id_alt+'"]').each(function(){
+			jQuery('[data-tab-group="'+group_id_alt+'"]').each(function(){
 		      
-		      let reset_script = $(element/*this*/).find('[data-reset]').data('reset');
+		      let reset_script = jQuery(element/*this*/).find('[data-reset]').data('reset');
 		      if(typeof(reset_script)!==typeof(undefined) && reset_script!=''){
 		       
 		        eval(reset_script);
@@ -3464,12 +3464,12 @@ window.document.splugins.wbc.filter_sets.core = function( configs ) {
 		      // <?php if(wp_is_mobile() and !wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile')): ?>
 		      if((window.document.splugins.common.is_mobile) && !(_this.configs.filter_setting_alternate_mobile)){
 
-		        if($(element/*this*/).hasClass('active')){
+		        if(jQuery(element/*this*/).hasClass('active')){
 		      
-		          $(element/*this*/).trigger('click');
+		          jQuery(element/*this*/).trigger('click');
 		        }
 		      
-		        reset_script = $(element/*this*/).next().find('[data-reset]').data('reset');
+		        reset_script = jQuery(element/*this*/).next().find('[data-reset]').data('reset');
 		        if(typeof(reset_script)!==typeof(undefined) && reset_script!=''){
 		      
 		          eval(reset_script);
@@ -3479,12 +3479,12 @@ window.document.splugins.wbc.filter_sets.core = function( configs ) {
 		      // <?php if(wp_is_mobile() and wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile')): ?>
 		      if((window.document.splugins.common.is_mobile) && (_this.configs.filter_setting_alternate_mobile)){
 
-		        if($(element/*this*/).hasClass('active')){
+		        if(jQuery(element/*this*/).hasClass('active')){
 		      
-		          $(element/*this*/).trigger('click');
+		          jQuery(element/*this*/).trigger('click');
 		        }          
 		        
-		        reset_script = $(element/*this*/).next().find('[data-reset]').data('reset');
+		        reset_script = jQuery(element/*this*/).next().find('[data-reset]').data('reset');
 		        if(typeof(reset_script)!==typeof(undefined) && reset_script!=''){
 		      
 		          eval(reset_script);
@@ -3503,11 +3503,11 @@ window.document.splugins.wbc.filter_sets.core = function( configs ) {
 	    if((window.document.splugins.common.is_mobile) && (_this.configs.filter_setting_alternate_mobile)){
 			console.log("filter_sets filter_set_click 44");
 			
-			$('#advance_filter_mob_alternate').removeClass('status_hidden');
+			jQuery('#advance_filter_mob_alternate').removeClass('status_hidden');
 
 			jQuery( _this.configs.filter_sets_data ).each(function (i, tab_data) {
 
-			  	$(".toggle_sticky_mob_filter.advance_filter_mob[data-tab-group='"+tab_data.first_tab_id/*$(this).data('tab-altname')*/+"'],.toggle_sticky_mob_filter.advance_filter_mob[data-tab-group='']").hide();
+			  	jQuery(".toggle_sticky_mob_filter.advance_filter_mob[data-tab-group='"+tab_data.first_tab_id/*$(this).data('tab-altname')*/+"'],.toggle_sticky_mob_filter.advance_filter_mob[data-tab-group='']").hide();
 
 		  	});
 	      
