@@ -1914,6 +1914,7 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
          }); */
         
         console.log("swatches on_change_listener after if");
+        console.log(_this.$base_element);
 
         _this.$base_element.off('woocommerce_variation_has_changed');
         _this.$base_element.on('woocommerce_variation_has_changed', function (event) {
@@ -2426,6 +2427,7 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
 
     #on_click(type, element_inner, event, reselect_clear, is_selected_selctor, data) {
 
+        console.log('swatches on_click');
         var _this = this; 
         
         _this.#click(type, element_inner, event, reselect_clear, is_selected_selctor, data);
@@ -2461,7 +2463,12 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
 
     #click(type, element_inner, event, reselect_clear, is_selected_selctor, data) {
 
+        console.log('swatches click');
+
         if(reselect_clear) {
+            
+            console.log('swatches click if');
+          
             event.preventDefault();
             event.stopPropagation();
             var value = null;
@@ -2500,11 +2507,16 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
             }
 
         } else {
+            
+            console.log('swatches click else');
+            console.log(value);
 
             event.preventDefault();
             event.stopPropagation();
 
             var value = jQuery(element_inner).data('value');
+            console.log(value);
+
             // console.log("gggggggg");
             // console.log(element_inner);
             // console.log(data.select);
@@ -2517,6 +2529,7 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
             }
 
             jQuery(element_inner).trigger('focus'); // Mobile tooltip
+            console.log('swatches click else 01');
 
             // ACTIVE_TODO here we may like to raise our notification evemnt to completly implement and finish our notifications structure and hierarchic 
             // jQuery(element_inner).trigger('wvs-selected-item', [value, select, _this._element]); // Custom Event for li
@@ -3484,6 +3497,7 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
         }
 
         if(window.document.splugins.common._b(_this.#binding_stats, 'variation_change_listener', uniquely_managed_type)){
+            console.log('variation_change_listener return false');
             return false;
         }
        
@@ -3514,7 +3528,7 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
  
     }
 
-    #create_variation_url(element, event, variation) {
+    #create_variation_url(element_url, event, variation) {
 
         console.log('create_variation_url');
         console.log(variation);
@@ -3524,8 +3538,6 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
 
         // https://stackoverflow.com/questions/54965487/get-currently-selected-variation-and-data-from-woocommerce-variable-product
         jQuery(_this.#$base_container.find('table.variations select')).each(function() {
-    
-            console.log('create_variation_url loop');
             
             var value = jQuery(this).val();
             if (value) {
@@ -3538,12 +3550,8 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
             }*/
         });
 
-        var url = element.attr('href');
-        
-        console.log('create_variation_url_attributes');
-        console.log(attributes);
-        console.log('old_url');
-        console.log(url);
+        // var url = element.attr('href');
+        var url = element_url;
 
         url = url +'?variation_id='+ variation.variation_id;
 
@@ -3552,9 +3560,6 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
         var attributeSlug_global = '';
         jQuery.each(attributes,function(key, val) {
             
-            console.log('create_variation_url() loop');
-            console.log('key = '+key+' , val = '+val);
-
             var attributeSlug = val.id.replace('attribute_',''); //val.id.replace('attribute_pa_','');
             // url += '&_attribute=' + attributeSlug + '&checklist_' + attributeSlug + "=" + val.value;
             attributeSlug_global += ',' + attributeSlug;
@@ -3562,9 +3567,6 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
         });
 
         url = window.document.splugins.common.updateURLParameter(url, '_attribute=', attributeSlug_global);
-
-        console.log('new_url');
-        console.log(url);
 
         return url;
     
@@ -3575,7 +3577,6 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
         var _this = this;
 
         console.log('get_loop_box_anchor');
-        console.log(_this.#$base_container);
         
         var aLocateclass_p = 'woocommerce-LoopProduct-link';
         var liLocate_class_p = 'product';
@@ -3650,7 +3651,9 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
         console.log('final anchor');
         console.log(finalAnchor);
 
-        return finalAnchor;
+        _this.finalAnchor = finalAnchor;
+
+        return _this.finalAnchor;
     
     }
 
@@ -3664,17 +3667,26 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
         ACTIVE_TODO_OC_END*/
         var _this = this;
 
-        var a = _this.#get_loop_box_anchor(variation);
+        if(window.document.splugins.common.is_empty(_this.finalAnchor)) {
+            console.log('_this.finalAnchor is empty if');
+            _this.finalAnchor = _this.#get_loop_box_anchor(event, variation);
+        }
 
-        console.log("a.attr('href')");
-        console.log(a.attr('href'));
+        if(window.document.splugins.common.is_empty(_this.finalAnchor_url)) {
+            console.log('_this.finalAnchor_url is empty if');
+            _this.finalAnchor_url = _this.finalAnchor.attr('href');
+        }
+
+        // var a = _this.#get_loop_box_anchor(event, variation);
+
+        console.log("a.attr('href') start");
+        console.log(_this.finalAnchor_url);
     
-        var variation_url = _this.#create_variation_url(a, event, variation);
-        var base_url = a.attr('href', variation_url);
-        
-        console.log("a.attr('href')");
-        console.log(a.attr('href'))
+        var variation_url = _this.#create_variation_url(_this.finalAnchor_url, event, variation);
+        var base_url = _this.finalAnchor.attr('href', variation_url);
 
+        console.log("a.attr('href') end");
+        console.log(_this.finalAnchor.attr('href'));
     }
 
     #reset_variation_listener(type) {
