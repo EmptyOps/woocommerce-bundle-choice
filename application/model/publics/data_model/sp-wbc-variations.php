@@ -1811,13 +1811,13 @@ class SP_WBC_Variations extends SP_Variations {
 
 		$data['gallery_images_template_data']['post_thumbnail_id'] =  apply_filters('sp_wbc_get_image_id', null, $product); // \eo\wbc\system\core\data_model\SP_Product::get_image_id($product);
 
-		$data['gallery_images_template_data']['attachment_ids'] = apply_filters('sp_wbc_get_gallery_image_ids', null, $product); //\eo\wbc\system\core\data_model\SP_Product::get_gallery_image_ids($product);
+		$data['gallery_images_template_data']['attachment_ids'] = apply_filters('sp_wbc_get_gallery_image_ids', null, $product, $data['gallery_images_template_data']['product_id'], $data['gallery_images_template_data']['post_thumbnail_id'], $args); //\eo\wbc\system\core\data_model\SP_Product::get_gallery_image_ids($product);
 
 		$data['gallery_images_template_data']['has_post_thumbnail'] = apply_filters('sp_wbc_has_post_thumbnail', null); //has_post_thumbnail();
 
 		// No main image but gallery
 		if ( ! $data['gallery_images_template_data']['has_post_thumbnail'] && count( $data['gallery_images_template_data']['attachment_ids'] ) > 0 ) {
-			$data['gallery_images_template_data']['post_thumbnail_id'] = $data['gallery_images_template_data']['attachment_ids'][0];
+			$data['gallery_images_template_data']['post_thumbnail_id'] = $data['gallery_images_template_data']['attachment_ids'][0]['image_id'];
 			array_shift( $data['gallery_images_template_data']['attachment_ids'] );
 			$data['gallery_images_template_data']['has_post_thumbnail'] = true;
 		}
@@ -1969,28 +1969,18 @@ class SP_WBC_Variations extends SP_Variations {
 						$data['gallery_images_template_data']['attachment_ids'] = array();
 					}
 
-					array_unshift( $data['gallery_images_template_data']['attachment_ids'], $data['gallery_images_template_data']['post_thumbnail_id'] );
+					array_unshift( $data['gallery_images_template_data']['attachment_ids'], \eo\wbc\model\publics\data_model\SP_WBC_Variations::instance()->get_product_attachment_props( $data['gallery_images_template_data']['post_thumbnail_id'] ) );
 				}
 				
 			}
-
-			$simple_type_fields = self::instance()->get_variations_and_simple_type_fields(array(),  $product, $product,$data['gallery_images_template_data']['product_id'], $data['gallery_images_template_data']['product_id'], $data['gallery_images_template_data']['post_thumbnail_id'], $args);
 
 			if(!empty($data['gallery_images_template_data']['attachment_ids'])){
 			    
 			    foreach ($data['gallery_images_template_data']['attachment_ids'] as $index=>$id) {
 
-			    	$data['gallery_images_template_data']['attachment_ids_loop_image'][$index] = \eo\wbc\model\publics\data_model\SP_WBC_Variations::instance()->get_product_attachment_props( $id );
+			    	$data['gallery_images_template_data']['attachment_ids_loop_image'][$index] = $id;
 
 			    	$data = self::prepare_gallery_template_data_item($data, $index, $id, $product);
-			    }
-
-			    -- here we need to add the simple_type_fields into attachment_ids other wise we well fetcs mani integrity issus. so plan the right flow -- to h
-			    foreach ($simple_type_fields as $index=>$image) {
-
-			    	$data['gallery_images_template_data']['attachment_ids_loop_image'][$index] = $image;
-
-			    	$data = self::prepare_gallery_template_data_item($data, $index, $image['image_id'], $product);
 			    }
 			}
 		}
@@ -2000,21 +1990,20 @@ class SP_WBC_Variations extends SP_Variations {
 		// ACTIVE_TODO ultimately move all below core implementtaion in the new core class of gallery_images or maybe simply in the wbc variations class 
 	}
 
-	public static function prepare_gallery_template_data_item($data, $index, $id, $product, $args = array()) {
+	public static function prepare_gallery_template_data_item($data, $index, $image/*$id*/, $product, $args = array()) {
 
-        
-        $data['gallery_images_template_data']['attachment_ids_loop_post_thumbnail_id'][$index] = $product->get_image_id();
+        $data['gallery_images_template_data']['attachment_ids_loop_post_thumbnail_id'][$index] = apply_filters('sp_wbc_get_image_id', null, $product); //$product->get_image_id();
 
         $data['gallery_images_template_data']['attachment_ids_loop_remove_featured_image'][$index] = false;
 
-        if ( $data['gallery_images_template_data']['attachment_ids_loop_remove_featured_image'][$index] && absint( $id ) == absint( $data['gallery_images_template_data']['attachment_ids_loop_post_thumbnail_id'][$index] ) ) {
+        if ( $data['gallery_images_template_data']['attachment_ids_loop_remove_featured_image'][$index] && absint( $image['image_id']/*$id*/ ) == absint( $data['gallery_images_template_data']['attachment_ids_loop_post_thumbnail_id'][$index] ) ) {
             return '';
         }
 
-        $data['gallery_images_template_data']['attachment_ids_loop_classes'][$id] = array( '' );
+        $data['gallery_images_template_data']['attachment_ids_loop_classes'][$image['image_id']/*$id*/] = array( '' );
 
-        if ( isset( $data['gallery_images_template_data']['attachment_ids_loop_image'][$id]['video_link'] ) && ! empty( $data['gallery_images_template_data']['attachment_ids_loop_image'][$id]['video_link'] ) ) {
-            array_push( $data['gallery_images_template_data']['attachment_ids_loop_classes'][$id], '' );
+        if ( isset( $data['gallery_images_template_data']['attachment_ids_loop_image'][$image['image_id']/*$id*/]['video_link'] ) && ! empty( $data['gallery_images_template_data']['attachment_ids_loop_image'][$image['image_id']/*$id*/]['video_link'] ) ) {
+            array_push( $data['gallery_images_template_data']['attachment_ids_loop_classes'][$image['image_id']/*$id*/], '' );
         }
 
         //ACTIVE_TODO right now we are creating class wrapper per image but it should be only once for the entire gallery_images wrapper. so we need to remove that unnecessary data from $image and fix that as soon as we get chance. 
@@ -2129,15 +2118,18 @@ class SP_WBC_Variations extends SP_Variations {
         	return \eo\wbc\system\core\data_model\SP_Product::get_image_id($product);
 		}, 10, 2);
 
-		add_filter( 'sp_wbc_get_gallery_image_ids',  function($data,$product){
+		add_filter( 'sp_wbc_get_gallery_image_ids',  function($data,$product,$product_id,$post_thumbnail_id,$args){
 
 			if ($data !== null) {
 
 				return $data;
 			}
 
-        	return \eo\wbc\system\core\data_model\SP_Product::get_gallery_image_ids($product);
-		}, 10, 2);
+        	// return \eo\wbc\system\core\data_model\SP_Product::get_gallery_image_ids($product);
+			-- need to confirm here that $product_id will be ok for the simple type product as long as the meta field of the legacy form is concerned and genrated using $product_id or variation_id -- to h & -- to a & -- to s 
+			return self::instance()->get_variations_and_simple_type_fields(array(),  $product, $product, $product_id, $product_id, $post_thumbnail_id, $args);
+
+		}, 10, 5);
         
         add_filter( 'sp_wbc_has_post_thumbnail',  function($data){
 
