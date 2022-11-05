@@ -248,7 +248,7 @@ add_action( 'wp_enqueue_scripts' ,function(){
 			    clear: right;
 			    position: relative;
 			}
-			.spui_video_container video {
+			body .spui_video_container video {
 			    max-width: 100%;
 			    -o-object-fit: contain;
 			       object-fit: contain;
