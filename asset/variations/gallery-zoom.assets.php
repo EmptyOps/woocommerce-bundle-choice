@@ -249,12 +249,13 @@ add_action( 'wp_enqueue_scripts' ,function(){
 			    position: relative;
 			}
 			.spui_video_container video {
-			    max-width: 454px;
+			    max-width: 100%;
 			    -o-object-fit: contain;
 			       object-fit: contain;
 			    display: block;
 			    margin: auto;
 			    min-height: 454px;
+			    width: 454px;
 			}
 			/*.img-fluid.big-img {
 			    display: none;
