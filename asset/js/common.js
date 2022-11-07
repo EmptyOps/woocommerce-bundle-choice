@@ -2790,7 +2790,16 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
             _this.#$variations_form = jQuery( 'form.variations_form' );  //  ACTIVE_TODO need to mature workaround here, or is it mature enough? -- to s
         }
 
-        _this.#data.product_variations = _this.#$variations_form.data('product_variations') || [];      
+        // _this.#data.product_variations = _this.#$variations_form.data('product_variations') || [];      
+
+        if(_this.#data.is_variation_product) {
+
+            _this.#data.product_variations = _this.#$variations_form.data('product_variations') || [];      
+
+        } else{
+
+            _this.#data.product_variations = _this.#$variations_form.data('product_simple') || [];      
+        }
 
                /*ACTIVE_TODO_OC_START
                this.$attributeFields = this.$variations_form.find('.variations select');
@@ -2809,6 +2818,8 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
         // console.log(_this.#$zoom_container);
             
         _this.#$slider_loop_container = _this.#$slider_container.find( '.'+ _this.#configs.classes.slider.loop_container );
+
+
 
                // ACTIVE_TODO if required then need to init def for simple product and so on.
                // this.defaultGallery();
