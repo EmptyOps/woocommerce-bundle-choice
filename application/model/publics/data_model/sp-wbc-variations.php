@@ -2127,7 +2127,7 @@ class SP_WBC_Variations extends SP_Variations {
 
         	// return \eo\wbc\system\core\data_model\SP_Product::get_gallery_image_ids($product);
 			-- need to confirm here that $product_id will be ok for the simple type product as long as the meta field of the legacy form is concerned and genrated using $product_id or variation_id -- to h & -- to a & -- to s 
-			return self::instance()->get_variations_and_simple_type_fields(array(),  $product, $product, $product_id, $product_id, $post_thumbnail_id, $args);
+			return self::instance()->get_variations_and_simple_type_fields(array(),  $product, $product, $product_id, $product_id, $post_thumbnail_id, $args)['variation_gallery_images'];
 
 		}, 10, 5);
         
