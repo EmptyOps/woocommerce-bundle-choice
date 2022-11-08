@@ -2993,7 +2993,9 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
         if(type == null) {
             
             console.log("gallery_images process_images if");
-
+            // //-- aa types temp banavelo se @a --
+            // _this.#data.types = ["image", 'video', 'darklight_hand_image', '360_video_url'];
+            console.log(_this.#data.types);
             //  process images
             jQuery( _this.#data.types ).each( function( i, type_inner ) {
     
@@ -3038,7 +3040,7 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
                         }
 
                     };
-
+                    console.log('common.js process_images notification');
                     window.document.splugins.events.api.notifyAllObservers( 'gallery_images', 'process_images', {type:type_inner}, process_images_callback, _this.#$base_container );
 
                     /*ACTIVE_TODO_OC_START
@@ -3805,7 +3807,7 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
     }
  
     #slider_thumb_click(type,element){
-        
+        console.log('common slider_thumb_click()');
         var _this = this;
         // ACTIVE_TODO_OC_START
         // mobile zoom logic
@@ -3857,6 +3859,7 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
             _this.#process_zoom_template(_this.#data.current_variation.variation_gallery_images,index,_this.#data.current_variation.variation_gallery_images.length > 1);             
 
         }else{
+            console.log('slider_thumb_click else');
             // ACTIVE_TODO hide and show image elements
             // process_zoom_template(_this.data.current_variation.variation_gallery_images,index,_this.data.current_variation.variation_gallery_images.length > 1);          
         }
