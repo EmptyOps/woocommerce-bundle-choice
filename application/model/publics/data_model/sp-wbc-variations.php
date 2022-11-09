@@ -53,6 +53,7 @@ class SP_WBC_Variations extends SP_Variations {
 			}, 90, 3);
 			
 			add_filter('sp_wbc_woo_available_variation',function($variation_get_max_purchase_quantity,  $instance,  $variation) use($args){
+		
 					here we do not need any not empty html lick condishone becos the apply_filters hosted becos the perant hook hosted the apply_filters as alrady menaged the prayorati basd check on and than this particuley hook is apply from thar so it well ather from dapi leyar or the wbc so we do not need that. but lat stil keep it as note teel we not do the finel taly befor run an than delete this oppen comment.
 				return self::instance()->get_available_variation_hook_callback($variation_get_max_purchase_quantity,  $instance,  $variation, $args);
 				
@@ -86,7 +87,7 @@ class SP_WBC_Variations extends SP_Variations {
 
 		// comment by @s
 		}elseif( ($for_section == "swatches" /*|| $for_section == "gallery_images"*/)/* && $args['page'] != 'feed'*/ ) {
-			$this->swatches_hooks();
+			self::swatches_hooks();
  
 			ACTIVE_TODO it is noted that this call is redundantly called from the swatches data layers means it is called every time perticular attributes swatches rendered so if on a loop box or item page there are three swatches than called 3 time which is relly not requaird and it may have huge impact on the perfomance and aficeancy so we must skip that redundant call somehow. this is applicable to both below statments which preparing attributes and variations -- to h
 				ACTIVE_TODO and there are statments like this "$attributes           = wc_get_attribute_taxonomies();" in function wc_product_has_attribute_type() in this class which is similar to below $product->get_variation_attributes(); funtion call. so this are also redundant calls and we must refeactor it for perfomace -- to h
@@ -102,7 +103,7 @@ class SP_WBC_Variations extends SP_Variations {
 
 		}elseif( ($for_section == "gallery_images") {
 
-			$this->gallery_images_hooks();
+			self::gallery_images_hooks();
 
 			$sp_variations_data['variations'] = apply_filters('sp_wbc_get_variations',null,$product,$args);
 		}	
@@ -2017,7 +2018,7 @@ class SP_WBC_Variations extends SP_Variations {
         return $data;
    	}
 
-	private function swatches_hooks(){
+	private static function swatches_hooks(){
  
         add_filter( 'sp_wbc_get_attribute',  function($data,$attribute){
 
@@ -2083,19 +2084,9 @@ class SP_WBC_Variations extends SP_Variations {
 		
 			return $product->get_variation_attributes(); 
 		},10,2);
-	
-		add_filter( '? Well be provided leter in recoding',  function($data){
-
-			if (!empty($data)) {
-
-				return $data;
-			}
-
-			return $data;
-		},10);
 	}
 
-	private function gallery_images_hooks(){
+	private static function gallery_images_hooks(){
         
         add_filter( 'sp_wbc_product_get_id',  function($data,$product){
 
@@ -2151,16 +2142,6 @@ class SP_WBC_Variations extends SP_Variations {
         	return $product->get_type();
         	
 		}, 10, 2);
-
-		add_filter( '? Well be provided leter in recoding',  function($data){
-
-			if (!empty($data)) {
-				
-				return $data;
-			}
-
-			return $data;
-		},10);
 
 	}
 }

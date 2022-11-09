@@ -61,10 +61,12 @@ class Feed extends \eo\wbc\controllers\publics\Controller{
         
         if ($page_section == 'swatches') {
             if ($container_class == 'swatches') {
+
                 $data = \eo\wbc\model\publics\SP_Model_Feed::instance()->prepare_swatches_data($args);
                 if (!empty($data['is_return_default_html'])) {
                     return $data['html'];
                 }
+
                 //wbc_pr($data); die();
                 return $this->load_view($data,$args);
             }
