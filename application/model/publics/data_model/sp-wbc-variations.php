@@ -372,6 +372,10 @@ class SP_WBC_Variations extends SP_Variations {
 				$props['srcset'] = wp_get_attachment_image_srcset( $attachment_id, $image_size );
 				$props['sizes']  = wp_get_attachment_image_sizes( $attachment_id, $image_size );
 
+				/*wbc_pr($props);
+				echo">>>>>>>>>>>>>>>>><br>";
+				wbc_pr($attachment_id);*/
+
 			}else{
 
 				$src            = wp_get_attachment_url( $attachment_id);

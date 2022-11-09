@@ -3071,7 +3071,8 @@ class EOWBC_Filter_Widget {
 		// $filters_sub_confings['filter_setting_btnfilter_now'] = wbc()->options->get_option('filters_'.$filter_prefix.'filter_setting','filter_setting_btnfilter_now');
 		$filters_sub_confings['filter_setting_btnfilter_now'] = wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','filter_setting_btnfilter_now');
 
-		$filters_sub_confings['filter_setting_slider_max_lblsize'] = _e((int)wbc()->options->get_option('filters_'.$filter_prefix.'filter_setting','filter_setting_slider_max_lblsize',6));	
+		//$filters_sub_confings['filter_setting_slider_max_lblsize'] = _e((int)wbc()->options->get_option('filters_'.$filter_prefix.'filter_setting','filter_setting_slider_max_lblsize',6));	
+		$filters_sub_confings['filter_setting_slider_max_lblsize'] = (int)wbc()->options->get_option('filters_'.$filter_prefix.'filter_setting','filter_setting_slider_max_lblsize',6);
 		$filters_sub_confings['filter_prefix'] = $this->filter_prefix;	
 		$filters_sub_confings['filter_slug'] = $filter['slug'];
 		$filters_sub_confings['filter_type'] = $filter_type;

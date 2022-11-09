@@ -128,7 +128,8 @@ if( !class_exists('\\eo\wbc\model\data_model\SP_WBC_Data_Layer') ) {
 
 		public static function to_column_names($map_fields, $sp_eids=null) {
 
-	    	$column_names = self::to_column_names_schema($map_fields,$sp_eids,$column_names);
+			//debug_print_backtrace();
+	    	$column_names = self::to_column_names_schema($map_fields,$sp_eids/*,$column_names*/);
 
 	    	return apply_filters('sp_data_layer_to_column_names', $column_names, $map_fields, $sp_eids);
 	    }
