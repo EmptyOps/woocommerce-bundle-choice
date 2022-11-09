@@ -376,6 +376,16 @@ class SP_WBC_Variations extends SP_Variations {
 				echo">>>>>>>>>>>>>>>>><br>";
 				wbc_pr($attachment_id);*/
 
+				// -- dump @a--
+				if( wbc()->sanitize->get('is_test') == 1 ) {
+				// 	wbc_pr('wp_get_attachment_url');
+				// 	wbc_pr(wp_get_attachment_url(13780)); 
+					wbc_pr('srcset dump');
+					wbc_pr(wp_get_attachment_image_srcset( $attachment_id,  array( 'i600', 'i1000', 'i1200' )  ));
+					wbc_pr($attachment_id);
+					wbc_pr($image_size);
+				}
+
 			}else{
 
 				$src            = wp_get_attachment_url( $attachment_id);

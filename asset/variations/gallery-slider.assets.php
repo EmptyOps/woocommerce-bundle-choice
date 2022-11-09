@@ -17,7 +17,10 @@
     }
 
     /*====Slider=====*/
-
+    :root{
+        --spui-slider-unselected-border-color: #d3d3d3;
+        --spui-slider-hover-selected-border-color: #000000;
+    }
 
     div#slider1 {
         float: left;
@@ -36,8 +39,17 @@
         cursor: pointer;
         padding: 1px;
         margin-bottom: 10px;
-        border: 1px solid #d3d3d3;
+        border: 1px solid var(--spui-slider-unselected-border-color);
     }
+    body div#slider1 .splide__list li:hover,
+    body div#slider1 .splide__list li:active,
+    body div#slider1 .splide__list li:focus,
+    body div#slider1 .splide__list li:target,
+    body div#slider1 .splide__list li:visited
+    {
+        border-color: var(--spui-slider-hover-selected-border-color);
+    }
+
     .splide__track .splide__list {
         height: auto;
         -webkit-box-orient: vertical;
@@ -57,6 +69,15 @@
         display: block;
         margin: auto;
         max-width: 100%;
+        opacity: .5;
+    }
+    body div#slider1 .splide__list li:hover img,
+    body div#slider1 .splide__list li:active img,
+    body div#slider1 .splide__list li:focus img,
+    body div#slider1 .splide__list li:target img,
+    body div#slider1 .splide__list li:visited img
+    {
+        opacity: 1;
     }
 
 
