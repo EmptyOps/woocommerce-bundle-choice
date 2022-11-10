@@ -372,9 +372,11 @@ class SP_WBC_Variations extends SP_Variations {
 				$props['srcset'] = wp_get_attachment_image_srcset( $attachment_id, $image_size );
 				$props['sizes']  = wp_get_attachment_image_sizes( $attachment_id, $image_size );
 
-				/*wbc_pr($props);
-				echo">>>>>>>>>>>>>>>>><br>";
-				wbc_pr($attachment_id);*/
+				//ACTIVE_TODO/TODO we have fixed here a issue related to srcset. the issue was that srcset function was returning the false and it was creating issue on the browsers. but we have no idea why for some images it was returned false. now we had just fixed the browsr side issue by setting bool false to empty string or anything that is empty to empty string. so it solved the browser error but the data error is not solved and on different devices or for different image size requiremnets it maybe a big concern. so we may like to fix it asap. or if it is not an issue at all then just remove the ACTIVE_TODO and TODO. 
+				if (empty($props['srcset'])) {
+					
+					$props['srcset'] = '';
+				}
 
 				// -- dump @a--
 				if( wbc()->sanitize->get('is_test') == 1 ) {
