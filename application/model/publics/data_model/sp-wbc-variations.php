@@ -372,11 +372,9 @@ class SP_WBC_Variations extends SP_Variations {
 				$props['srcset'] = wp_get_attachment_image_srcset( $attachment_id, $image_size );
 				$props['sizes']  = wp_get_attachment_image_sizes( $attachment_id, $image_size );
 
-				//ACTIVE_TODO/TODO we have fixed here a issue related to srcset. the issue was that srcset function was returning the false and it was creating issue on the browsers. but we have no idea why for some images it was returned false. now we had just fixed the browsr side issue by setting bool false to empty string or anything that is empty to empty string. so it solved the browser error but the data error is not solved and on different devices or for different image size requiremnets it maybe a big concern. so we may like to fix it asap. or if it is not an issue at all then just remove the ACTIVE_TODO and TODO. 
-				if (empty($props['srcset'])) {
-					
-					$props['srcset'] = '';
-				}
+				/*wbc_pr($props);
+				echo">>>>>>>>>>>>>>>>><br>";
+				wbc_pr($attachment_id);*/
 
 				// -- dump @a--
 				if( wbc()->sanitize->get('is_test') == 1 ) {
@@ -903,6 +901,16 @@ class SP_WBC_Variations extends SP_Variations {
         	$args['hook_callback_args']['hook_args']['type'] = $type;	
         } else {
         	$type = 'select';
+        }
+
+        // ACTIVE_TODO even the below is temporary but we may like to make the button type as the default to make sure that when we wbc swatches is on users get the default and improvised ui of button template other then the default of the woocommerce and so on. -- to h & -- to s
+        // ACTIVE_TODO Temp. 
+        	// here we have temporarily set the button type or the non supported types. and if  there are any other non supported types then that should also be added here. and once we finish the development part of some point that are yet left like the ACTIVE_TODO in above if and some other such and other such. as well as it is an additional note and not confirmed with the flow that we implemented in our initial version but in might be helpful that what we need to focus on is simply ensuring that the type provided by woocommerce is supported by that and the type provided by wbc is supported by wbc so the if condition below of has wc has supported product type or and additional condition at below layer ya that function name is wc product has type or an additional condition at that layer might be needed to check simply if we are supporting the types or otherwise simply return and i think there are many ACTIVE_TODO and notes in between in this layer which might already have this logic.
+        if( $type == 'select' || $type == 'dropdown' || $args['hook_callback_args']['hook_args']['type'] == 'select' || $args['hook_callback_args']['hook_args']['type'] == 'dropdown' ) {
+
+        	$type = 'button';
+        	$args['hook_callback_args']['hook_args']['type'] = 'button';
+
         }
 
 
