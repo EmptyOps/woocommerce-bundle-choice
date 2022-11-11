@@ -2518,6 +2518,9 @@ window.document.splugins.wbc.pagination.core = function( configs ) {
 	}
 	
 	var on_click_listener = function(e){
+		
+		console.log('pagination on_click_listener()');
+
 		/*ACTIVE_TODO_OC_START
 		NOTE : it will bind to all kind of such on_click events of pagination, it will be private but it may broadcast notification with a callback which js layers of like tableview and so on can call when they recieve their own click event or they can simply call below on_click function". so it is private function.
 		ACTIVE_TODO_OC_END*/
@@ -2538,7 +2541,16 @@ window.document.splugins.wbc.pagination.core = function( configs ) {
 			// window.document.splugins.filters.api.eo_wbc_filter_change_wrapper(false,'form#'+jQuery(this).parents().has('[id$="eo_wbc_filter"]').find('[id$="eo_wbc_filter"]').attr('id'));
 		// });
 
-		jQuery("body").on('click','.woocommerce-pagination a,.pagination a,.jet-filters-pagination a,.woocommerce-pagination .jet-filters-pagination__link,.pagination .jet-filters-pagination__link,.jet-filters-pagination .jet-filters-pagination__link,.navigation .page-numbers,.woocommerce-pagination a.page-numbers',function(event){
+		// jQuery("body").on('click','.woocommerce-pagination a,.pagination a,.jet-filters-pagination a,.woocommerce-pagination .jet-filters-pagination__link,.pagination .jet-filters-pagination__link,.jet-filters-pagination .jet-filters-pagination__link,.navigation .page-numbers,.woocommerce-pagination a.page-numbers',function(event){
+			
+		// 	on_click(event);
+		// });
+
+		let pagination_container = jQuery('.woocommerce-pagination a,.pagination a,.navigation .page-numbers,.woocommerce-pagination a.page-numbers');
+
+		_this.$base_pagination_container = compatability('pagination',{pagination_container:pagination_container},1).pagination_container;
+
+		_this.$base_pagination_container.on('click', function(event){
 			
 			on_click(event);
 		});
@@ -2588,6 +2600,8 @@ window.document.splugins.wbc.pagination.core = function( configs ) {
     var click = function(event){
     	
     	console.log('pagination_click');
+    	console.log(_this.$base_pagination_container);
+
     	/*ACTIVE_TODO_OC_START
     	-- event var aya sudhi pogadvano se -- to a
     	ACTIVE_TODO_OC_END*/
@@ -2595,30 +2609,41 @@ window.document.splugins.wbc.pagination.core = function( configs ) {
 		event.stopPropagation();								
 		
 		// ACTIVE_TODO page nnumber text would break below with multilanguage so instead use the data attribute to store and read the page number -- to a and/or -- to h
-		if(jQuery(this).hasClass("next") || jQuery(this).hasClass("prev")){
-		
-			if(jQuery(this).hasClass("next")){
+		if(_this.$base_pagination_container.hasClass("next") || _this.$base_pagination_container.hasClass("prev")){
+			
+			console.log('pagination click if');
+			if(_this.$base_pagination_container.hasClass("next")){
 				// jQuery("[name='paged']").val(parseInt(jQuery(".page-numbers.current").text())+1);
 				window.document.splugins.wbc.pagination.api.set_page_number( window.document.splugins.wbc.pagination.api.get_page_number()+1 );
 			}
-			if(jQuery(this).hasClass("prev")){
+			if(_this.$base_pagination_container.hasClass("prev")){
 				// jQuery("[name='paged']").val(parseInt(jQuery(".page-numbers.current").text())-1);
 				window.document.splugins.wbc.pagination.api.set_page_number( window.document.splugins.wbc.pagination.api.get_page_number()-1 );
 			}	
 		}		
 		else {
+			console.log('pagination click else');
 			// jQuery("[name='paged']").val(jQuery(this).text());
 			window.document.splugins.wbc.pagination.api.set_page_number( window.document.splugins.wbc.pagination.api.get_page_number());
 		}		
 
 		// jQuery('[name="paged"]').val(parseInt(jQuery(this).text().replace(',','')));
 		// jQuery.fn.eo_wbc_filter_change(false,'form#'+jQuery(this).parents().has('[id$="eo_wbc_filter"]').find('[id$="eo_wbc_filter"]').attr('id'));
-		window.document.splugins.wbc.filters.api.eo_wbc_filter_change_wrapper(false, 'form#'+jQuery(this).parents().has('[id$="eo_wbc_filter"]').find('[id$="eo_wbc_filter"]').attr('id') );
+		window.document.splugins.wbc.filters.api.eo_wbc_filter_change_wrapper(false, 'form#'+_this.$base_pagination_container.parents().has('[id$="eo_wbc_filter"]').find('[id$="eo_wbc_filter"]').attr('id') );
 
     };
 
-    var compatability = function(section, object, expected_result){
-        
+    var compatability = function(section, object, expected_result, form_selector){
+
+        if(section == 'pagination'){
+
+			if(object.pagination_container.length<=0) {
+		
+				object.pagination_container = jQuery(".jet-filters-pagination a,.woocommerce-pagination .jet-filters-pagination__link,.pagination .jet-filters-pagination__link,.jet-filters-pagination .jet-filters-pagination__link");
+			}
+        } 
+
+        return object;
     };
 
     var reset_private = function(){
@@ -2655,7 +2680,7 @@ window.document.splugins.wbc.pagination.core = function( configs ) {
 
 		set_page_number: function(page_number) {
 
-			if(page_number == 1 || empty(page_number)) {
+			if(page_number == 1 || window.document.splugins.common.is_empty(page_number)) {
 
 				reset_private();
 			}

@@ -132,6 +132,8 @@ add_action('wp_footer',function(){
  	 		if(window.document.splugins.common.is_category_page) {
  
 	    		window.document.splugins.wbc.pagination.api.init();
+	
+	    		console.log("js.vras.asset ready event 001");
 
 				window.document.splugins.wbc.filters.api.init();
 
