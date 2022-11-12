@@ -444,11 +444,6 @@ class SP_WBC_Variations extends SP_Variations {
 					$props['srcset'] = wp_get_attachment_image_srcset( $attachment_id, $image_size );
 					$props['sizes']  = wp_get_attachment_image_sizes( $attachment_id, $image_size );
 				}
-<<<<<<< HEAD
-=======
-				$props['class']  = "wp-post-image spui-post-image attachment-$image_size_class size-$image_size_class ";
-				$props['srcset'] = wp_get_attachment_image_srcset( $attachment_id, $image_size );
-				$props['sizes']  = wp_get_attachment_image_sizes( $attachment_id, $image_size );
 
 				/*wbc_pr($props);
 				echo">>>>>>>>>>>>>>>>><br>";
@@ -464,7 +459,6 @@ class SP_WBC_Variations extends SP_Variations {
 					wbc_pr($image_size);
 				}
 
->>>>>>> a939bd365d503597b38e53875ef43422c078eed4
 			}else{
 
 				$src            = wp_get_attachment_url( $attachment_id);
