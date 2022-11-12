@@ -65,7 +65,7 @@ if(
 				<?php endif; ?>
 
 				<?php if(!empty($advance_filters)): ?>
-					<div class="ui button primary" id="advance_filter" style="border-radius: 0 0 0 0;width: fit-content !important;"> <?php spext_lang("ADVANCED FILTERS", 'woo-bundle-choice') ?> &nbsp;<i class="ui icon angle double up"></i></div>
+					<div class="ui button primary" id="advance_filter" style="border-radius: 0 0 0 0;width: fit-content !important;"> <?php echo spext_lang("ADVANCED FILTERS", 'woo-bundle-choice'); ?> &nbsp;<i class="ui icon angle double up"></i></div>
 				<?php endif; ?>
 
 				<?php if(!empty(wbc()->options->get_option('filters_'.$filter_ui->filter_prefix.'filter_setting','filter_setting_btnfilter_now'))): ?>
