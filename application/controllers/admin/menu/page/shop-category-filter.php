@@ -43,6 +43,7 @@ if ( ! class_exists( 'Shop_Category_Filter' ) ) {
 			unset($form_definition['altr_filt_widgts']['form']['second_category_altr_filt_widgts']);
 			
 			$form_definition['d_fconfig']['label'] = 'Filter Configuration';
+			$form_definition['d_fconfig']['form']['d_fconfig_set']['options'] = parent::get_filter_sets('filters_sc_filter_set');
 			$form_definition['d_fconfig']['form']['d_fconfig_save_sec_title']['label'] = 'Add Filter Field';
 
 			// add new fields 

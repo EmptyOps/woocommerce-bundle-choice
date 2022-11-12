@@ -324,7 +324,9 @@ class Eowbc_Model {
 
 	public function delete( $ids, $key/*,$by_key=false*/, $check_by_id=false ) {
 
-		throw new Exception("ACTIVE_TODO implement, implement and then have all child classes of respective admin models does call this function. -- to s.", 1);
+		// ACTIVE_TODO implement, implement and then have all child classes of respective admin models does call this function. -- to s.
+		// 	-- previously we have throw Exception below but now that is to be removed soon after we implement below function as per QCed upgrade. and till it is not upgraded we had commented below throw Exception.
+		// throw new Exception("ACTIVE_TODO implement, implement and then have all child classes of respective admin models does call this function. -- to s.", 1);
 		
 		$res = array();
 		$res["type"] = "success";

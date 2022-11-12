@@ -444,6 +444,27 @@ class SP_WBC_Variations extends SP_Variations {
 					$props['srcset'] = wp_get_attachment_image_srcset( $attachment_id, $image_size );
 					$props['sizes']  = wp_get_attachment_image_sizes( $attachment_id, $image_size );
 				}
+<<<<<<< HEAD
+=======
+				$props['class']  = "wp-post-image spui-post-image attachment-$image_size_class size-$image_size_class ";
+				$props['srcset'] = wp_get_attachment_image_srcset( $attachment_id, $image_size );
+				$props['sizes']  = wp_get_attachment_image_sizes( $attachment_id, $image_size );
+
+				/*wbc_pr($props);
+				echo">>>>>>>>>>>>>>>>><br>";
+				wbc_pr($attachment_id);*/
+
+				// -- dump @a--
+				if( wbc()->sanitize->get('is_test') == 1 ) {
+				// 	wbc_pr('wp_get_attachment_url');
+				// 	wbc_pr(wp_get_attachment_url(13780)); 
+					wbc_pr('srcset dump');
+					wbc_pr(wp_get_attachment_image_srcset( $attachment_id,  array( 'i600', 'i1000', 'i1200' )  ));
+					wbc_pr($attachment_id);
+					wbc_pr($image_size);
+				}
+
+>>>>>>> a939bd365d503597b38e53875ef43422c078eed4
 			}else{
 
 				$src            = wp_get_attachment_url( $attachment_id);
@@ -990,6 +1011,16 @@ class SP_WBC_Variations extends SP_Variations {
         	$type = 'select';
         }
 
+        // ACTIVE_TODO even the below is temporary but we may like to make the button type as the default to make sure that when we wbc swatches is on users get the default and improvised ui of button template other then the default of the woocommerce and so on. -- to h & -- to s
+        // ACTIVE_TODO Temp. 
+        	// here we have temporarily set the button type or the non supported types. and if  there are any other non supported types then that should also be added here. and once we finish the development part of some point that are yet left like the ACTIVE_TODO in above if and some other such and other such. as well as it is an additional note and not confirmed with the flow that we implemented in our initial version but in might be helpful that what we need to focus on is simply ensuring that the type provided by woocommerce is supported by that and the type provided by wbc is supported by wbc so the if condition below of has wc has supported product type or and additional condition at below layer ya that function name is wc product has type or an additional condition at that layer might be needed to check simply if we are supporting the types or otherwise simply return and i think there are many ACTIVE_TODO and notes in between in this layer which might already have this logic.
+        if( $type == 'select' || $type == 'dropdown' || $args['hook_callback_args']['hook_args']['type'] == 'select' || $args['hook_callback_args']['hook_args']['type'] == 'dropdown' ) {
+
+        	$type = 'button';
+        	$args['hook_callback_args']['hook_args']['type'] = 'button';
+
+        }
+
 
         // //add or condition here to apply_filter with key sp_variations_supporting_attribute_type with default to false and second arg will be type -- to b done
         // 	//--	and now need to add that hook to add type on woo attribute admin, see details in ssm variations class -- to d done
@@ -1347,6 +1378,8 @@ class SP_WBC_Variations extends SP_Variations {
 
 			
 			$query_params = \eo\wbc\model\SP_WBC_Router::instance()->get_query_params_formatted('url_and_filter_form', array('attr'), 'REQUEST', null);
+			// wbc_pr("query_params");
+			// wbc_pr($query_params);
 			$data['woo_dropdown_attribute_html_data']['query_paramas_options'] = null;
 			if(in_array($data['woo_dropdown_attribute_html_data']['attribute'] , $query_params)){
 

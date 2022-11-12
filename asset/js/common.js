@@ -1914,6 +1914,7 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
          }); */
         
         console.log("swatches on_change_listener after if");
+        console.log(_this.$base_element);
 
         _this.$base_element.off('woocommerce_variation_has_changed');
         _this.$base_element.on('woocommerce_variation_has_changed', function (event) {
@@ -2426,6 +2427,7 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
 
     #on_click(type, element_inner, event, reselect_clear, is_selected_selctor, data) {
 
+        console.log('swatches on_click');
         var _this = this; 
         
         _this.#click(type, element_inner, event, reselect_clear, is_selected_selctor, data);
@@ -2461,7 +2463,12 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
 
     #click(type, element_inner, event, reselect_clear, is_selected_selctor, data) {
 
+        console.log('swatches click');
+
         if(reselect_clear) {
+            
+            console.log('swatches click if');
+          
             event.preventDefault();
             event.stopPropagation();
             var value = null;
@@ -2500,11 +2507,16 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
             }
 
         } else {
+            
+            console.log('swatches click else');
+            console.log(value);
 
             event.preventDefault();
             event.stopPropagation();
 
             var value = jQuery(element_inner).data('value');
+            console.log(value);
+
             // console.log("gggggggg");
             // console.log(element_inner);
             // console.log(data.select);
@@ -2517,6 +2529,7 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
             }
 
             jQuery(element_inner).trigger('focus'); // Mobile tooltip
+            console.log('swatches click else 01');
 
             // ACTIVE_TODO here we may like to raise our notification evemnt to completly implement and finish our notifications structure and hierarchic 
             // jQuery(element_inner).trigger('wvs-selected-item', [value, select, _this._element]); // Custom Event for li
@@ -2991,7 +3004,9 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
         if(type == null) {
             
             console.log("gallery_images process_images if");
-
+            // //-- aa types temp banavelo se @a --
+            // _this.#data.types = ["image", 'video', 'darklight_hand_image', '360_video_url'];
+            console.log(_this.#data.types);
             //  process images
             jQuery( _this.#data.types ).each( function( i, type_inner ) {
     
@@ -3036,7 +3051,7 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
                         }
 
                     };
-
+                    console.log('common.js process_images notification');
                     window.document.splugins.events.api.notifyAllObservers( 'gallery_images', 'process_images', {type:type_inner}, process_images_callback, _this.#$base_container );
 
                     /*ACTIVE_TODO_OC_START
@@ -3495,32 +3510,38 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
         }
 
         if(window.document.splugins.common._b(_this.#binding_stats, 'variation_change_listener', uniquely_managed_type)){
+            console.log('variation_change_listener return false');
             return false;
         }
        
         console.log("variation_change_listener 2 product_id = "+_this.product_id +" product_id = "+_this.#$variations_form.data('product_id'));
         
-         _this.#$variations_form.on('show_variation', function (event, variation) {
+        _this.#$variations_form.on('show_variation', function (event, variation) {
             
            console.log("variation_change_listener 2 show_variation");
            console.log(event);
+           console.log(variation);
 
-           if(!window.document.splugins.common.is_empty(event) && !window.document.splugins.common.is_empty(variation)) {
+           // -- aya only is_category_page ni if condition mari se 02-11-2022 @a --
+           if(window.document.splugins.common.is_category_page) {
+               
+               if(!window.document.splugins.common.is_empty(event) && !window.document.splugins.common.is_empty(variation)) {
 
-                console.log('call set_variation_url');
-                _this.#set_variation_url(event, variation);
-           }else {
+                    console.log('call set_variation_url');
+                    _this.#set_variation_url(event, variation);
+               }else {
 
-                console.log('set_variation_url_not_call');
+                    console.log('set_variation_url_not_call');
+               }
            }
 
            _this.#on_variation_change(event, variation);
          
-         });
+        });
  
     }
 
-    #create_variation_url(element, event, variation) {
+    #create_variation_url(element_url, event, variation) {
 
         console.log('create_variation_url');
         console.log(variation);
@@ -3530,8 +3551,6 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
 
         // https://stackoverflow.com/questions/54965487/get-currently-selected-variation-and-data-from-woocommerce-variable-product
         jQuery(_this.#$base_container.find('table.variations select')).each(function() {
-    
-            console.log('create_variation_url loop');
             
             var value = jQuery(this).val();
             if (value) {
@@ -3544,12 +3563,8 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
             }*/
         });
 
-        var url = element.attr('href');
-        
-        console.log('create_variation_url_attributes');
-        console.log(attributes);
-        console.log('old_url');
-        console.log(url);
+        // var url = element.attr('href');
+        var url = element_url;
 
         url = url +'?variation_id='+ variation.variation_id;
 
@@ -3558,9 +3573,6 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
         var attributeSlug_global = '';
         jQuery.each(attributes,function(key, val) {
             
-            console.log('create_variation_url() loop');
-            console.log('key = '+key+' , val = '+val);
-
             var attributeSlug = val.id.replace('attribute_',''); //val.id.replace('attribute_pa_','');
             // url += '&_attribute=' + attributeSlug + '&checklist_' + attributeSlug + "=" + val.value;
             attributeSlug_global += ',' + attributeSlug;
@@ -3568,9 +3580,6 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
         });
 
         url = window.document.splugins.common.updateURLParameter(url, '_attribute=', attributeSlug_global);
-
-        console.log('new_url');
-        console.log(url);
 
         return url;
     
@@ -3581,7 +3590,6 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
         var _this = this;
 
         console.log('get_loop_box_anchor');
-        console.log(_this.#$base_container);
         
         var aLocateclass_p = 'woocommerce-LoopProduct-link';
         var liLocate_class_p = 'product';
@@ -3656,7 +3664,9 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
         console.log('final anchor');
         console.log(finalAnchor);
 
-        return finalAnchor;
+        _this.finalAnchor = finalAnchor;
+
+        return _this.finalAnchor;
     
     }
 
@@ -3670,17 +3680,26 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
         ACTIVE_TODO_OC_END*/
         var _this = this;
 
-        var a = _this.#get_loop_box_anchor(variation);
+        if(window.document.splugins.common.is_empty(_this.finalAnchor)) {
+            console.log('_this.finalAnchor is empty if');
+            _this.finalAnchor = _this.#get_loop_box_anchor(event, variation);
+        }
 
-        console.log("a.attr('href')");
-        console.log(a.attr('href'));
+        if(window.document.splugins.common.is_empty(_this.finalAnchor_url)) {
+            console.log('_this.finalAnchor_url is empty if');
+            _this.finalAnchor_url = _this.finalAnchor.attr('href');
+        }
+
+        // var a = _this.#get_loop_box_anchor(event, variation);
+
+        console.log("a.attr('href') start");
+        console.log(_this.finalAnchor_url);
     
-        var variation_url = _this.#create_variation_url(a, event, variation);
-        var base_url = a.attr('href', variation_url);
-        
-        console.log("a.attr('href')");
-        console.log(a.attr('href'))
+        var variation_url = _this.#create_variation_url(_this.finalAnchor_url, event, variation);
+        var base_url = _this.finalAnchor.attr('href', variation_url);
 
+        console.log("a.attr('href') end");
+        console.log(_this.finalAnchor.attr('href'));
     }
 
     #reset_variation_listener(type) {
@@ -3799,7 +3818,7 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
     }
  
     #slider_thumb_click(type,element){
-        
+        console.log('common slider_thumb_click()');
         var _this = this;
         // ACTIVE_TODO_OC_START
         // mobile zoom logic
@@ -3846,9 +3865,12 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
         if(_this.#configs.template.zoom.all_in_dom == 0){
             // update one tamplate 
 
+            console.log("_this.#data.current_variation");
+            console.log(_this.#data);
             _this.#process_zoom_template(_this.#data.current_variation.variation_gallery_images,index,_this.#data.current_variation.variation_gallery_images.length > 1);             
 
         }else{
+            console.log('slider_thumb_click else');
             // ACTIVE_TODO hide and show image elements
             // process_zoom_template(_this.data.current_variation.variation_gallery_images,index,_this.data.current_variation.variation_gallery_images.length > 1);          
         }
