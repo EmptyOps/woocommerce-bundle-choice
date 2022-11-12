@@ -415,6 +415,8 @@ class SP_Model_Feed extends SP_Feed {
 
 	public function prepare_swatches_data($args = array()){
 
+		$args['page'] = 'feed';
+		
 		return \eo\wbc\model\publics\data_model\SP_WBC_Variations::prepare_swatches_data($args);
 
 	}
