@@ -3569,7 +3569,8 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
         });
 
         _this.#$zoom_container.data('sp_variation_url',url);
-
+        console.log('zoom container sp_variation_url data');
+        console.log(_this.#$zoom_container.data('sp_variation_url'));
         url = window.document.splugins.common.updateURLParameter(url, '_attribute', attributeSlug_global);
 
         return url;
@@ -4480,12 +4481,15 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
         }        
         
         console.log('zoom_area_hover_in_listener()');
+        console.log(super.get_zoom_container());
+        //Flag var, set to false below to avoid undefine error on first execution.
+        _this.#data.is_zoom_area_hover_in_progress = false;
+
         // _this.#$zoom_container.on("mouseenter","",function() {
         super.get_zoom_container().hover(function() {
-            
-            _this.#on_zoom_area_hover_in(type);            
-        });
 
+            _this.#on_zoom_area_hover_in(type);                   
+        });  
 
     }
 
@@ -4513,8 +4517,7 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
 
             _this.#on_zoom_area_hover_out(type); 
         });   
-
-          
+         
     }
 
     #on_zoom_area_hover_in(type) {
@@ -4545,14 +4548,20 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
  
 
         var _this = this; 
-        console.log('gc zoom_area_hover_in');
-        // return false;
+        
+        if(_this.#data.is_zoom_area_hover_in_progress) {
+
+            return false;            
+        }
+        _this.#data.is_zoom_area_hover_in_progress = true; 
 
         if (super.get_current_variation() == null) {
 
             return false;
         }
-        
+
+        console.log('gc zoom_area_hover_in');
+
         // TODO if in loop box ever need to manage index like if slider is supported in loop box for example in purple theme than at that time need to recive or read the index from the apllicable container of perant module.
         var index = 0;
 
@@ -4643,7 +4652,9 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
     #zoom_area_hover_out(type) {
         
         var _this = this; 
-
+        
+        _this.#data.is_zoom_area_hover_in_progress = false; 
+        
         if (super.get_current_variation() == null) {
 
             return false;
