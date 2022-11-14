@@ -2091,16 +2091,6 @@ class SP_WBC_Variations extends SP_Variations {
 			return \eo\wbc\system\core\data_model\SP_Attribute::variation_option_name($term_name , $term, $attribute, $product);
         	
 		}, 10, 5);
-
-		add_filter('sp_wbc_get_variations',function($data, $product ,$args){
-
-			if ($data !== null) {
-
-				return $data;
-			}
-		
-			return $product->get_available_variations(); 
-		},10,3);
 		
 		add_filter('sp_wbc_get_variation_attrs',function($data, $product){
 
@@ -2158,6 +2148,16 @@ class SP_WBC_Variations extends SP_Variations {
 
         	return has_post_thumbnail();
 		}, 10, 1);
+
+		add_filter('sp_wbc_get_variations',function($data, $product ,$args){
+
+			if ($data !== null) {
+
+				return $data;
+			}
+		
+			return $product->get_available_variations(); 
+		},10,3);
 
         add_filter( 'sp_wbc_product_get_type',  function($data,$product){
 
