@@ -1204,7 +1204,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 				--	and so now the render_container will recieve one parameter that is render_container, it will defaults to null so from where it is applicable it is passed otherwise it will be left blank -- to d 
 			ACTIVE_TODO_OC_END*/
 			// jQuery(render_container/*".products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products"*/).html('<p class="woocommerce-info" style="width: 100%;">No products were found matching your selection.</p>');	
-			no_products_found_private(form_selector);
+			no_products_found_private(form_selector, render_container);
 		}	
 
 		/*ACTIVE_TODO_OC_START
@@ -1725,7 +1725,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
     }; 
 
-    var no_products_found_private = function(form_selector) {
+    var no_products_found_private = function(form_selector, render_container) {
 
     	// ACTIVE_TODO_OC_START
     	// create private counter part of the no_products_found function with name no_products_found_private, so that the inner private layers can call that internally -- to d 
@@ -1895,9 +1895,9 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
 				if(
 					(
-						(jQuery(/*this*/element).data('prev_val_min')!=min && jQuery(/*this*/element).data('prev_val_min')!=undefined)
+						(jQuery(this/*element*/).data('prev_val_min')!=min && jQuery(/*this*/element).data('prev_val_min')!=undefined)
 						|| 
-						(jQuery(/*this*/element).data('prev_val_max')!=max && jQuery(/*this*/element).data('prev_val_max')!=undefined)
+						(jQuery(this/*element*/).data('prev_val_max')!=max && jQuery(/*this*/element).data('prev_val_max')!=undefined)
 					)
 					||
 					( min!=_min || max!=_max )
@@ -1914,14 +1914,22 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 			        	jQuery("input[name='max_"+jQuery(e).attr('data-slug')+"']").val(Number(max).toFixed(2));
 			        }
 
-			        if(jQuery(/*this*/element).attr('data-slug')!='price'){
-				    	//Action of notifying filter change when changes are done.
-				    	if(jQuery(/*this*/element).attr('data-min')==min && jQuery(/*this*/element).attr('data-max')==max) {
+			        console.log("slider_change_event above price");
 
-				    		if(jQuery("[name='_attribute']").val().includes(jQuery(/*this*/element).attr('data-slug'))) {
+			        if(jQuery(this/*element*/).attr('data-slug')!='price'){
+				    	//Action of notifying filter change when changes are done.
+			        	
+			        	console.log("slider_change_event inner price");
+				    	console.log(jQuery(this/*element*/).attr('data-min'));
+
+				    	if(jQuery(this/*element*/).attr('data-min')==min && jQuery(this/*element*/).attr('data-max')==max) {
+
+					        console.log("slider_change_event above name = _attribute");
+
+				    		if(jQuery("[name='_attribute']").val().includes(jQuery(this/*element*/).attr('data-slug'))) {
 				    			
 				    			_values=jQuery("[name='_attribute']").val().split(',')
-				    			_index=_values.indexOf(jQuery(/*this*/element).attr('data-slug'))
+				    			_index=_values.indexOf(jQuery(this/*element*/).attr('data-slug'))
 				    			_values.splice(_index,1)
 				    			jQuery("[name='_attribute']").val(_values.join());
 				    		}
@@ -1929,7 +1937,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 				    	else {
 				    		if(! jQuery("[name='_attribute']").val().includes(jQuery(/*this*/element).attr('data-slug'))) {
 				    			_values=jQuery("[name='_attribute']").val().split(',')
-				    			_values.push(jQuery(/*this*/element).attr('data-slug'))
+				    			_values.push(jQuery(this/*element*/).attr('data-slug'))
 				    			jQuery("[name='_attribute']").val(_values.join())
 				    		}
 				    	}
