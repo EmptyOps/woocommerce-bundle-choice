@@ -229,7 +229,8 @@ add_action( 'wp_enqueue_scripts' ,function(){
 			img.img-fluid.big-img {
 			    width: 454px;
 			    height: 454px;
-			    object-fit: contain;
+			    -o-object-fit: contain;
+			       object-fit: contain;
 			    margin: auto;
 			    display: block;
 			    border-radius: 5px;
@@ -248,6 +249,11 @@ add_action( 'wp_enqueue_scripts' ,function(){
 			    clear: right;
 			    position: relative;
 			}
+			.imagezoomsl_zoom_container .Zoom_Rigt-sec.img-wrapper {
+			    width: 100% !important;
+				margin-left: 0;
+			}
+
 			body .spui_video_container video {
 			    max-width: 100%;
 			    -o-object-fit: contain;

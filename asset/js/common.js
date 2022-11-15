@@ -3565,10 +3565,13 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
             var attributeSlug = val.id.replace('attribute_',''); //val.id.replace('attribute_pa_','');
             // url += '&_attribute=' + attributeSlug + '&checklist_' + attributeSlug + "=" + val.value;
             attributeSlug_global += ',' + attributeSlug;
-            url = window.document.splugins.common.updateURLParameter(url, 'checklist_' + attributeSlug + "=", val.value);
+            url = window.document.splugins.common.updateURLParameter(url, 'checklist_' + attributeSlug, val.value);
         });
 
-        url = window.document.splugins.common.updateURLParameter(url, '_attribute=', attributeSlug_global);
+        _this.#$zoom_container.data('sp_variation_url',url);
+        console.log('zoom container sp_variation_url data');
+        console.log(_this.#$zoom_container.data('sp_variation_url'));
+        url = window.document.splugins.common.updateURLParameter(url, '_attribute', attributeSlug_global);
 
         return url;
     
@@ -3679,7 +3682,7 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
             _this.finalAnchor_url = _this.finalAnchor.attr('href');
         }
 
-        // var a = _this.#get_loop_box_anchor(event, variation);
+        // var a = _this.#get_loop_box_anchor(event, variation);    
 
         console.log("a.attr('href') start");
         console.log(_this.finalAnchor_url);
@@ -4063,6 +4066,21 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
         return _this.#$base_container;
     }
 
+    is_variation_product() {
+        
+        var _this = this;
+    
+        return _this.#data.is_variation_product;
+
+    }
+
+    data() {
+
+        var _this = this;
+
+        return _this.#data;
+    }
+
     process_zoom_template_public(images,index,hasGallery) {
 
         var _this = this; 
@@ -4360,7 +4378,7 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
      
         _this.#data = {};
         _this.#$binding_stats = {};        
-    
+
     }
  
     #init_private() {
@@ -4376,6 +4394,8 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
         super.init();
 
         // _this.#init_preprocess(null);
+        console.log('super.get_zoom_container()');
+        console.log(super.get_zoom_container());
 
     }
 
@@ -4419,6 +4439,26 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
     
         _this.#zoom_area_hover_out_listener(type);
 
+        if(super.is_variation_product()) {
+    
+            _this.#zoom_area_click_listener();
+
+        }
+
+    }
+
+    #zoom_area_click_listener(type) {
+
+        console.log('gc zoom_area_click_listener');
+
+        var _this = this; 
+
+        super.get_zoom_container().on('click',function() {
+
+            _this.#on_zoom_area_click();
+
+        })
+
     }
 
     #zoom_area_hover_in_listener(type) {
@@ -4441,12 +4481,15 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
         }        
         
         console.log('zoom_area_hover_in_listener()');
+        console.log(super.get_zoom_container());
+        //Flag var, set to false below to avoid undefine error on first execution.
+        _this.#data.is_zoom_area_hover_in_progress = false;
+
         // _this.#$zoom_container.on("mouseenter","",function() {
         super.get_zoom_container().hover(function() {
-            
-            _this.#on_zoom_area_hover_in(type);            
-        });
 
+            _this.#on_zoom_area_hover_in(type);                   
+        });  
 
     }
 
@@ -4474,8 +4517,7 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
 
             _this.#on_zoom_area_hover_out(type); 
         });   
-
-          
+         
     }
 
     #on_zoom_area_hover_in(type) {
@@ -4494,16 +4536,32 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
     
     }
 
+    #on_zoom_area_click(type) {
+
+        console.log('gc on_zoom_area_click 01');
+        var _this = this; 
+
+        _this.#zoom_area_click();
+    }
+
     #zoom_area_hover_in(type) {
  
 
         var _this = this; 
+        
+        if(_this.#data.is_zoom_area_hover_in_progress) {
+
+            return false;            
+        }
+        _this.#data.is_zoom_area_hover_in_progress = true; 
 
         if (super.get_current_variation() == null) {
 
             return false;
         }
-        
+
+        console.log('gc zoom_area_hover_in');
+
         // TODO if in loop box ever need to manage index like if slider is supported in loop box for example in purple theme than at that time need to recive or read the index from the apllicable container of perant module.
         var index = 0;
 
@@ -4592,9 +4650,11 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
     }
 
     #zoom_area_hover_out(type) {
-
+        
         var _this = this; 
-
+        
+        _this.#data.is_zoom_area_hover_in_progress = false; 
+        
         if (super.get_current_variation() == null) {
 
             return false;
@@ -4614,6 +4674,24 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
         window.document.splugins.events.api.notifyAllObservers( 'gallery_images_feed_page', 'zoom_area_hover_out', {type:images[index].extra_params_org.type,image:images[index]}, zoom_area_hover_out_callback, super.get_base_container(), super.get_base_container() );       
                 
     }  
+
+    #zoom_area_click(type) {
+
+        var _this = this; 
+
+        var sp_variation_url = super.get_zoom_container().data('sp_variation_url'); 
+
+        if(window.document.splugins.common.is_empty(sp_variation_set_url)) {
+            
+            window.location.href = sp_variation_url;
+
+        }else {
+
+            window.location.href = sp_variation_set_url;
+
+        }
+
+    }
 
     #update_configs() {
 
