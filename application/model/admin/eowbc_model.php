@@ -76,15 +76,18 @@ class Eowbc_Model {
 						}
 
 						if(empty($form_definition[$key]["form"][$fk]["force_value"])){
+
 							-- need to mac us of data mapping here and in below statement as applicabel.
 							
 							$dm_based_field = null;
 
-							foreach ($args['dm']['map_fields'] as $dm_key->$dm_value) {
+							foreach ($args['dm']['map_fields'] as $dm_key=>$dm_value) {
 
-								if ( isset($args['dm']['sp_eids'][$dm_key]['extra_to']) and strpos($fk, $args['dm']['sp_eids'][$dm_key]['extra_to']) !== false ) {
+								if ( isset($args['dm']['sp_eids'][$dm_key]['extra_2']) and strpos($fk, $args['dm']['sp_eids'][$dm_key]['extra_2']) !== false ) {
 
-									$dm_based_field = $dm_key; ? here jo jarur pade to apday key confome kerva ni avche mapp_field permane. or do the need full as applycbel in below if.
+									here jo jarur pade to apday key confome kerva ni avche mapp_field permane. or do the need full as applycbel in below if.
+										--	most probebly whta we do id simply make sure that $args['data_raw'] passed here dose contant the properly formatted form key($fk) as per the Form_Builder standard and rest will be and then mybe their is nothing else create to be done -- to h & -- to s 
+									$dm_based_field = $dm_key; 
 
 									break;
 								}
@@ -145,7 +148,7 @@ class Eowbc_Model {
 		    //$res['post']=$_POST;
 			wbc()->load->model('admin\form-builder');
 
-			$saved_tab_key = !empty(wbc()->sanitize->post("sp_frmb_saved_tab_key")) ? wbc()->sanitize->post("sp_frmb_saved_tab_key") : ""; 
+			$saved_tab_key = !empty(wbc()->sanitize->post("sp_frmb_saved_tab_key")) ? wbc()->sanitize->post("sp_frmb_saved_tab_key") : ( !empty( $args("sp_frmb_saved_tab_key") ) ? $args("sp_frmb_saved_tab_key") : "" ); 
 			$skip_fileds = array('sp_frmb_saved_tab_key');
 			
 			if($saved_tab_key == $this->tab_key_prefix.'altr_filt_widgts') {
@@ -224,10 +227,15 @@ class Eowbc_Model {
 								$save_as_data_meta['post_meta_found'] = true;	
 							}
 
-							-- need to finlise code in side the below if -- to h
 							if(!empty($args['data_raw'])) {
 
 								-- as per the 44 we ma need only litel logzic here.
+									-- may be all that we need to do is simply read from the form definition itself instad of the post in the below if --to h & -- to s.
+										-- and so since data_raw will not going to passed so maybe the above not empty if condition need to be adjusted with something else -- to h & -- to s
+											-- i had thougt of doing not empty condition in form_definition using $fk but since some value might be set to 0 or empty so not empty will not work and not even isset because isset maybe become true even for normal case of the else condition below.
+											{
+												$this->foo = $foo;
+											}
 								$dm_based_field ?
 
 								ACTIVE_TODO here we are reading the directly passed custom data inside data_raw element, which is bad practice for security. so we should refactor this as soon as we get a chance and make sure that we either sanitize this or we use the standard input method on we like the post, get, request. but I think it is better that we simply sanitize this custom data by passing it to our sanitize library in the function which is accepting custom data.
