@@ -1294,11 +1294,11 @@ if(is_shop() || is_product_category()) {
 
 <!-- /*---TOOLTIP--- @tejas*/
 /*----JS----*/ -->
-<script type="text/javascript">
+<!-- <script type="text/javascript">
 jQuery( document ).ready(function() {
     jQuery('[data-toggle="popover"]').popover(); 
 });
-</script>
+</script> -->
 <!-- /*----CSS---*/ -->
 <style type="text/css">
 	:root{
