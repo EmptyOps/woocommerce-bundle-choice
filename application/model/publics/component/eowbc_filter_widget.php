@@ -1882,7 +1882,7 @@ class EOWBC_Filter_Widget {
 	}
 
 	public function load_grid_desktop($filters,$advance) {
-		
+		// wbc_pr('e load_grid_desktop()');
 		if(!empty($filters) && (is_array($filters) or is_object($filters) ) ){
 			foreach ($filters as $key => $item) {
 
@@ -1977,7 +1977,7 @@ class EOWBC_Filter_Widget {
 	}
 
 	public function load_collapsable_desktop($general_filters, $advance_filters) {
-
+		// wbc_pr('e load_collapsable_desktop()');
 		$filters = array_merge($general_filters,$advance_filters);
 
 		if(!is_wp_error($filters) and !empty($filters)){
@@ -2137,6 +2137,9 @@ class EOWBC_Filter_Widget {
 			<script type="text/javascript">
 				
 				var EO_WBC_FILTER_UI_ICON_TERM_SLUG = [];
+
+				console.log('EO_WBC_FILTER_UI_ICON_TERM_SLUG empty');
+				console.log(EO_WBC_FILTER_UI_ICON_TERM_SLUG);
 
 			</script>
 
@@ -2372,7 +2375,8 @@ class EOWBC_Filter_Widget {
 		?>					
 		<script type="text/javascript">
 			jQuery(document).ready(function($){
-				
+				console.log('EO_WBC_FILTER_UI_ICON_TERM_SLUG');
+				console.log(EO_WBC_FILTER_UI_ICON_TERM_SLUG);
 				EO_WBC_FILTER_UI_ICON_TERM_SLUG.push("<?php echo $term->slug; ?>");
 
 				/*__data_filter_slug="<?php echo $term->slug; ?>";*/

@@ -2113,7 +2113,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
 	    	//////// 27-05-2022 - @drashti /////////
 			// --add to be confirmed--
-
+			console.log('checkbox_change_event change ajax call');	
 			// --- compare_start (1) woo-bundle-choice/application/view/publics/filters/form.php ---
 			// window.document.splugins.wbc.filters.api.eo_wbc_filter_change_wrapper(false,'form#<?php echo $filter_ui->filter_prefix; ?>eo_wbc_filter','',{'this':this,'event':event});
 			window.document.splugins.wbc.filters.api.eo_wbc_filter_change_wrapper(false,'form#'+ _this.sub_configs.filter_prefix +'eo_wbc_filter','',{'this':element,'event':event});

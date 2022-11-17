@@ -3568,10 +3568,11 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
             url = window.document.splugins.common.updateURLParameter(url, 'checklist_' + attributeSlug, val.value);
         });
 
-        _this.#$zoom_container.data('sp_variation_url',url);
-        console.log('zoom container sp_variation_url data');
-        console.log(_this.#$zoom_container.data('sp_variation_url'));
         url = window.document.splugins.common.updateURLParameter(url, '_attribute', attributeSlug_global);
+        
+        _this.#$zoom_container.data('sp_variation_url',url);
+        // console.log('zoom container sp_variation_url data');
+        // console.log(_this.#$zoom_container.data('sp_variation_url'));
 
         return url;
     
@@ -4396,7 +4397,6 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
         // _this.#init_preprocess(null);
         console.log('super.get_zoom_container()');
         console.log(super.get_zoom_container());
-
     }
 
     #init_preprocess(event) {
@@ -4439,6 +4439,7 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
     
         _this.#zoom_area_hover_out_listener(type);
 
+        // ACTIVE_TODO for simple type also we may need to use below click lisner so in that case simply comment or remove below if.
         if(super.is_variation_product()) {
     
             _this.#zoom_area_click_listener();
@@ -4484,7 +4485,7 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
         console.log(super.get_zoom_container());
         //Flag var, set to false below to avoid undefine error on first execution.
         _this.#data.is_zoom_area_hover_in_progress = false;
-
+       
         // _this.#$zoom_container.on("mouseenter","",function() {
         super.get_zoom_container().hover(function() {
 
@@ -4511,7 +4512,7 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
         if(window.document.splugins.common._b(_this.#$binding_stats, 'zoom_area_hover_out_listener', type)){
             return false;
         }   
-
+        
         // _this.#$zoom_container.on("mouseleave","",function() {
         super.get_zoom_container().on("mouseleave","",function() {
 
@@ -4677,17 +4678,19 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
 
     #zoom_area_click(type) {
 
+        console.log('gc zoom_area_click()');
+
         var _this = this; 
 
         var sp_variation_url = super.get_zoom_container().data('sp_variation_url'); 
+        console.log('sp_variation_url');
+        console.log(sp_variation_url);
 
-        if(window.document.splugins.common.is_empty(sp_variation_set_url)) {
+        // -- jo color change nay kare to click upper redirect old link par thavu joye te add karvanu se @a--
+        
+        if(!window.document.splugins.common.is_empty(sp_variation_url)) {
             
             window.location.href = sp_variation_url;
-
-        }else {
-
-            window.location.href = sp_variation_set_url;
 
         }
 

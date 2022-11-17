@@ -1258,10 +1258,17 @@ class SP_WBC_Variations extends SP_Variations {
 
 			
 			$query_params = \eo\wbc\model\SP_WBC_Router::instance()->get_query_params_formatted('url_and_filter_form', array('attr'), 'REQUEST', null);
+			// wbc_pr('query_params');
+			// wbc_pr($query_params);
+			// wbc_pr($data['woo_dropdown_attribute_html_data']['attribute']);
+
 			$data['woo_dropdown_attribute_html_data']['query_paramas_options'] = null;
 			if(in_array($data['woo_dropdown_attribute_html_data']['attribute'] , $query_params)){
 
+				// wbc_pr('in if');
 				$data['woo_dropdown_attribute_html_data']['query_paramas_options'] = \eo\wbc\model\SP_WBC_Router::instance()->get_query_params_formatted('url_and_filter_form', array('attr_options', $data['woo_dropdown_attribute_html_data']['attribute']) , 'REQUEST', null);
+				// wbc_pr("data['woo_dropdown_attribute_html_data']['query_paramas_options']");
+				// wbc_pr($data['woo_dropdown_attribute_html_data']['query_paramas_options']);
 			}
 
 			if ( $data['woo_dropdown_attribute_html_data']['product'] && taxonomy_exists( $data['woo_dropdown_attribute_html_data']['attribute'] ) ) {
@@ -1279,6 +1286,10 @@ class SP_WBC_Variations extends SP_Variations {
 
 							$data['woo_dropdown_attribute_html_data']['args'][ 'selected' ] = $term->slug;
 						}
+
+						// wbc_pr("data['woo_dropdown_attribute_html_data']['args'][ 'selected' ]01");
+						// wbc_pr($data['woo_dropdown_attribute_html_data']['args'][ 'selected' ]);
+						// wbc_pr($data['woo_dropdown_attribute_html_data']['query_paramas_options']);
 
 						$data['woo_dropdown_attribute_html_data']['options_loop_class'][$term->slug] = esc_attr( $data['woo_dropdown_attribute_html_data']['type'] ).'-variable-item-'.esc_attr( $term->slug );
 
@@ -1305,6 +1316,8 @@ class SP_WBC_Variations extends SP_Variations {
 
 						$data['woo_dropdown_attribute_html_data']['args'][ 'selected' ] = $option;
 					}
+					// wbc_pr("data['woo_dropdown_attribute_html_data']['args'][ 'selected' ]02");
+					// wbc_pr($data['woo_dropdown_attribute_html_data']['args'][ 'selected' ]);
 
 					$data['woo_dropdown_attribute_html_data']['options_loop_class'][$option] = esc_attr( $data['woo_dropdown_attribute_html_data']['type'] ).'-variable-item-'.esc_attr( $option );
 
@@ -1451,7 +1464,11 @@ class SP_WBC_Variations extends SP_Variations {
 
 							$data['woo_dropdown_attribute_html_data']['args'][ 'selected' ] = $term->slug;
 						}
-						
+
+						// wbc_pr("data['woo_dropdown_attribute_html_data']['args'][ 'selected' ]03");
+						// wbc_pr($data['woo_dropdown_attribute_html_data']['args'][ 'selected' ]);
+						// wbc_pr($data['woo_dropdown_attribute_html_data']['query_paramas_options']);
+
 						// aria-checked="false"
 						// $data['variable_item_data'][$term->slug]['option'] = esc_html( apply_filters( 'woocommerce_variation_option_name', $term->name, $term, $data['variable_item_data']['attribute'], $data['woo_dropdown_attribute_html_data']['product'] ) );
 						$data['variable_item_data']['options_loop_option'][$term->slug] = esc_html( \eo\wbc\system\core\data_model\SP_Attribute::variation_option_name($term->name, $term, $data['variable_item_data']['attribute'], $data['woo_dropdown_attribute_html_data']['product'] ) );
@@ -1577,6 +1594,8 @@ class SP_WBC_Variations extends SP_Variations {
 
 							$data['woo_dropdown_attribute_html_data']['args'][ 'selected' ] = $option;
 						}
+						// wbc_pr("data['woo_dropdown_attribute_html_data']['args'][ 'selected' ]04");
+						// wbc_pr($data['woo_dropdown_attribute_html_data']['args'][ 'selected' ]);
 
 						$data['variable_item_data']['options_loop_option'][$option] = esc_html( \eo\wbc\system\core\data_model\SP_Attribute()::instance()->variation_option_name( $option, null, $data['variable_item_data']['attribute'], $data['woo_dropdown_attribute_html_data']['product'] ) );
 

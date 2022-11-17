@@ -9,6 +9,7 @@ add_action( ( !is_admin() ? 'wp_enqueue_scripts' : 'admin_enqueue_scripts'),func
 ?>
 
 	<script type="text/javascript">
+		console.log('add_action heder');
 		//	define namespaces 
 		window.document.splugins = window.document.splugins || {};
 		window.document.splugins.common = window.document.splugins.common || {};
@@ -28,6 +29,9 @@ add_action( ( !is_admin() ? 'wp_enqueue_scripts' : 'admin_enqueue_scripts'),func
     	window.document.splugins.common.current_theme_key = '<?php echo wbc()->common->current_theme_key(); ?>';
 
 		window.document.splugins.common.is_category_page = <?php echo ((is_product_category()) ? "true" : "false");?>; 
+
+		console.log('window.document.splugins.common.is_category_page');
+		console.log(window.document.splugins.common.is_category_page);
 
 		window.document.splugins.common.is_item_page = <?php echo ((is_product()) ? "true" : "false");?>;
 
@@ -122,12 +126,13 @@ add_action( ( !is_admin() ? 'wp_enqueue_scripts' : 'admin_enqueue_scripts'),func
 add_action('wp_footer',function(){               
    ?>
    <script>
-    	
+		console.log('add_action wp_footer');
     	// console.log("js.vras.asset outer ready event");
     	
     	jQuery(document).ready(function() {
     		
     		console.log("js.vras.asset ready event");
+    		console.log(window.document.splugins.common.is_category_page);
 
  	 		if(window.document.splugins.common.is_category_page) {
  
@@ -137,7 +142,11 @@ add_action('wp_footer',function(){
 
 				window.document.splugins.wbc.filters.api.init();
 
+	    		console.log("js.vras.asset ready event 002");
+
 				window.document.splugins.wbc.filter_sets.api.init();
+
+	    		console.log("js.vras.asset ready event 003");
 
    		}
 
