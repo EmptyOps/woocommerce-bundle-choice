@@ -1061,17 +1061,38 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
         }else if(section == 'render_container'){
 
+        	console.log("compatability inner else if");
+
 			/*ACTIVE_TODO_OC_START
 			-- aa if conditions tableview na badha selectore and calling sysuance joy ne confirm karvani se -- to a
 			ACTIVE_TODO_OC_END*/
 
 			if(object.render_container.length<=0) {
 		
-				object.render_container = jQuery(".elementor-products-grid");
-		
+	        	console.log("compatability inner else if inner if");
+				
+				if(object.is_return_string_selector) {
+
+					object.render_container_selector = ".elementor-products-grid";
+					object.render_container = jQuery(".elementor-products-grid");
+				} else {
+					
+					object.render_container = jQuery(".elementor-products-grid");
+				}
+
 				if(object.render_container.length<=0) {
 
-					object.render_container = jQuery(".jet-woo-products");
+		        	console.log("compatability inner else if inner if inner if");
+					
+					if(object.is_return_string_selector) {
+
+						object.render_container_selector = ".jet-woo-products";
+						object.render_container = jQuery(".jet-woo-products");
+					} else {
+						
+						object.render_container = jQuery(".jet-woo-products");
+					}
+
 				}
 
 			}
@@ -1085,6 +1106,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
     var eo_wbc_filter_render_html = function(data, render_container, form_selector){
 
+		console.log("filter eo_wbc_filter_render_html");
 		/*jQuery("#loading").removeClass('loading');
 		return true;*/
 
@@ -1105,7 +1127,9 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		// render_data = data;
 		_render_container = render_container;
 
-		render_container_selectore = result_container(_render_container);
+		console.log("filter render_container_selector");
+		console.log(_render_container);
+		render_container_selector = result_container(_render_container, true);
 
 		render_container = result_container(render_container);
 
@@ -1147,8 +1171,11 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		ACTIVE_TODO_OC_END*/
 
 		// let container_html = jQuery('.products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products',jQuery(data)).html();	
-		let container_html = jQuery(render_container_selectore, jQuery(data)).html();	
-		
+		console.log(data);
+		console.log("filter eo_wbc_filter_render_html container_html");
+		let container_html = jQuery(render_container_selector/*render_container*/, jQuery(data)).html();	
+		console.log(container_html);
+
 		/*if(container_html===undefined || container_html==='') {
 			container_html = jQuery(jQuery(data),'.products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products').html();
 		}*/
@@ -1158,7 +1185,13 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		}*/
 
 		if(container_html!==undefined && container_html!=='') {	
+			
+			console.log("filter eo_wbc_filter_render_html container_html inner if");
+
 			if( typeof(is_card_view_rendered) == undefined || typeof(is_card_view_rendered) == 'undefined' || is_card_view_rendered == false ) {
+				
+				console.log("filter eo_wbc_filter_render_html container_html inner if inner if");
+
 				// if(jQuery('.products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products').length<=0) {
 					// jQuery(render_container).html(container_html);
 				// } else {
@@ -1711,17 +1744,42 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
     };
 
-    var result_container = function(render_container) {
+    var result_container = function(render_container, is_return_string_selector = false) {
 
-    	if(render_container==='') {
-			render_container = jQuery(".products:eq(0),.product-listing:eq(0),.row-inner>.col-lg-9:eq(0)");
+		console.log("filter result_container");
+		console.log(render_container);
+
+		var render_container_selector = render_container;
+
+		// TODO maybe we simply need to drop the first empty string condition below and only keep the is empty condition. not sure why m add earlier used === for empty string check.
+    	if( render_container==='' || window.document.splugins.common.is_empty(render_container) ) {
+
+			console.log("filter result_container inner if");
+						
+			if(is_return_string_selector) {
+
+				render_container_selector = ".products:eq(0),.product-listing:eq(0),.row-inner>.col-lg-9:eq(0)";
+				render_container = jQuery(".products:eq(0),.product-listing:eq(0),.row-inner>.col-lg-9:eq(0)");
+			} else {
+
+				render_container = jQuery(".products:eq(0),.product-listing:eq(0),.row-inner>.col-lg-9:eq(0)");
+			}
+
 			// -- move to compatability() @a --
 			// if(render_container.length<=0) {
 			// 	render_container = jQuery(".elementor-products-grid");
 			// }
 		}
 
-		return compatability('render_container', {render_container:render_container}, 1).render_container;
+		var result_obj = compatability('render_container', {render_container:render_container, render_container_selector:render_container_selector, is_return_string_selector:is_return_string_selector}, 1);
+
+		if(is_return_string_selector) {
+		
+			return result_obj.render_container_selector;
+		} else {
+
+			return result_obj.render_container;
+		}
 
     }; 
 
@@ -1773,7 +1831,15 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
 		console.log("filter module set_enable_filter_private after "+get_enable_filter()); 	
     };
-    
+
+    var temp_result_clone_div = function() {
+
+        _this.$temp_result_clone_div = jQuery('<div />').appendTo('body');
+        // _this.$temp_result_clone_div.attr('id', 'splugins_temp_result_clone_div');  
+        _this.$temp_result_clone_div.hide();  
+
+    };
+
     var get_archive_html = function() {
     	// TODO implement when required
     };
@@ -1782,9 +1848,21 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
     	if(render_container == null) {
 
+			console.log("set_archive_html 1");
     		render_container = result_container();
     	}
 
+    	// ACTIVE_TODO temp. below logic is temp. remove it as soon as we make sure that sp_tv js templates are rendered outside archive container. -- to h & -- to s
+    	if( window.document.splugins.common.is_empty(_this.$temp_result_clone_div) ) {
+
+    		temp_result_clone_div();
+
+    		_this.$temp_result_clone_div.html(jQuery(render_container).html());
+    	}
+
+		console.log("set_archive_html");
+		console.log(render_container);
+		console.log(html);
     	jQuery(render_container).html(html);
     };
 
