@@ -505,11 +505,16 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 				var site_url=eo_wbc_object.eo_cat_site_url;
 				// var ajax_url = '';
 
+				console.log("filter prepare_query_data site_url");
+				console.log(site_url);
+
 				if(site_url.includes('?')) {
 					
+					console.log("filter prepare_query_data site_url if");
 					ajax_url = site_url+eo_wbc_object.eo_cat_query;
 				} else {
-					
+
+					console.log("filter prepare_query_data site_url else");
 					ajax_url = site_url+'/?'+eo_wbc_object.eo_cat_query;
 				}
 
@@ -802,6 +807,9 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
 		var pq_data = prepare_query_data(init_call, form_selector);
 
+		console.log('filters eo_wbc_filter_change_wrapper_private pq_data');
+		console.log(pq_data.ajax_url);
+
 		// sp_filter_request variable tv_template.js ma move karavano, if required -- to h & -- to s
 		// 	INVALID
 			// --	sp_filter_request aa flag slick ma flase set thay chhe biji koi js ma find nathi thato. [eo_wbc_e_tabview.eo_view_tabular && typeof(jQuery.fn.eo_wbc_filter_change_alt)===typeof(undefined)] aa if table_view_service() ma and tyathi flase set thay chhe.
@@ -818,6 +826,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
 			beforeSend:function(xhr) {
 
+				console.log('filters eo_wbc_filter_change_wrapper_private beforeSend');
 				console.log(this.url);
 				before_send(xhr, form_selector);
 
@@ -1973,9 +1982,9 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
 				if(
 					(
-						(jQuery(/*this*/element).data('prev_val_min')!=min && jQuery(/*this*/element).data('prev_val_min')!=undefined)
+						(jQuery(this/*element*/).data('prev_val_min')!=min && jQuery(/*this*/element).data('prev_val_min')!=undefined)
 						|| 
-						(jQuery(/*this*/element).data('prev_val_max')!=max && jQuery(/*this*/element).data('prev_val_max')!=undefined)
+						(jQuery(this/*element*/).data('prev_val_max')!=max && jQuery(/*this*/element).data('prev_val_max')!=undefined)
 					)
 					||
 					( min!=_min || max!=_max )
@@ -1992,14 +2001,22 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 			        	jQuery("input[name='max_"+jQuery(e).attr('data-slug')+"']").val(Number(max).toFixed(2));
 			        }
 
-			        if(jQuery(/*this*/element).attr('data-slug')!='price'){
-				    	//Action of notifying filter change when changes are done.
-				    	if(jQuery(/*this*/element).attr('data-min')==min && jQuery(/*this*/element).attr('data-max')==max) {
+			        console.log("slider_change_event above price");
 
-				    		if(jQuery("[name='_attribute']").val().includes(jQuery(/*this*/element).attr('data-slug'))) {
+			        if(jQuery(this/*element*/).attr('data-slug')!='price'){
+				    	//Action of notifying filter change when changes are done.
+			        	
+			        	console.log("slider_change_event inner price");
+				    	console.log(jQuery(this/*element*/).attr('data-min'));
+
+				    	if(jQuery(this/*element*/).attr('data-min')==min && jQuery(this/*element*/).attr('data-max')==max) {
+
+					        console.log("slider_change_event above name = _attribute");
+
+				    		if(jQuery("[name='_attribute']").val().includes(jQuery(this/*element*/).attr('data-slug'))) {
 				    			
 				    			_values=jQuery("[name='_attribute']").val().split(',')
-				    			_index=_values.indexOf(jQuery(/*this*/element).attr('data-slug'))
+				    			_index=_values.indexOf(jQuery(this/*element*/).attr('data-slug'))
 				    			_values.splice(_index,1)
 				    			jQuery("[name='_attribute']").val(_values.join());
 				    		}
@@ -2007,7 +2024,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 				    	else {
 				    		if(! jQuery("[name='_attribute']").val().includes(jQuery(/*this*/element).attr('data-slug'))) {
 				    			_values=jQuery("[name='_attribute']").val().split(',')
-				    			_values.push(jQuery(/*this*/element).attr('data-slug'))
+				    			_values.push(jQuery(this/*element*/).attr('data-slug'))
 				    			jQuery("[name='_attribute']").val(_values.join())
 				    		}
 				    	}
@@ -2630,7 +2647,7 @@ window.document.splugins.wbc.pagination.core = function( configs ) {
 
 		_this.$base_pagination_container.on('click', function(event){
 			
-			on_click(event);
+			on_click(event,this);
 		});
 
 		// --- aa code aa file ma document.ready mathi move karelo se ---
@@ -2667,15 +2684,15 @@ window.document.splugins.wbc.pagination.core = function( configs ) {
 
 	};
 
-    var on_click = function(event){
+    var on_click = function(event,element){
 
 		// NOTE : it will internally implement all flows related to pagination link click event
 
-		click(event);
+		click(event,element);
 
     };
 
-    var click = function(event){
+    var click = function(event,element){
     	
     	console.log('pagination_click');
     	console.log(_this.$base_pagination_container);
@@ -2687,14 +2704,14 @@ window.document.splugins.wbc.pagination.core = function( configs ) {
 		event.stopPropagation();								
 		
 		// ACTIVE_TODO page nnumber text would break below with multilanguage so instead use the data attribute to store and read the page number -- to a and/or -- to h
-		if(_this.$base_pagination_container.hasClass("next") || _this.$base_pagination_container.hasClass("prev")){
+		if(/*_this.$base_pagination_container*/jQuery(element).hasClass("next") || /*_this.$base_pagination_container*/jQuery(element).hasClass("prev")){
 			
 			console.log('pagination click if');
-			if(_this.$base_pagination_container.hasClass("next")){
+			if(/*_this.$base_pagination_container*/jQuery(element).hasClass("next")){
 				// jQuery("[name='paged']").val(parseInt(jQuery(".page-numbers.current").text())+1);
 				window.document.splugins.wbc.pagination.api.set_page_number( window.document.splugins.wbc.pagination.api.get_page_number()+1 );
 			}
-			if(_this.$base_pagination_container.hasClass("prev")){
+			if(/*_this.$base_pagination_container*/jQuery(element).hasClass("prev")){
 				// jQuery("[name='paged']").val(parseInt(jQuery(".page-numbers.current").text())-1);
 				window.document.splugins.wbc.pagination.api.set_page_number( window.document.splugins.wbc.pagination.api.get_page_number()-1 );
 			}	
@@ -2702,12 +2719,15 @@ window.document.splugins.wbc.pagination.core = function( configs ) {
 		else {
 			console.log('pagination click else');
 			// jQuery("[name='paged']").val(jQuery(this).text());
-			window.document.splugins.wbc.pagination.api.set_page_number( window.document.splugins.wbc.pagination.api.get_page_number());
+			window.document.splugins.wbc.pagination.api.set_page_number( window.document.splugins.wbc.pagination.api.get_page_number(jQuery(element)));
 		}		
 
+		console.log('pagination click() 01');
+		console.log(jQuery(element).parents().has('[id$="eo_wbc_filter"]').find('[id$="eo_wbc_filter"]').attr('id'));
+		
 		// jQuery('[name="paged"]').val(parseInt(jQuery(this).text().replace(',','')));
 		// jQuery.fn.eo_wbc_filter_change(false,'form#'+jQuery(this).parents().has('[id$="eo_wbc_filter"]').find('[id$="eo_wbc_filter"]').attr('id'));
-		window.document.splugins.wbc.filters.api.eo_wbc_filter_change_wrapper(false, 'form#'+_this.$base_pagination_container.parents().has('[id$="eo_wbc_filter"]').find('[id$="eo_wbc_filter"]').attr('id') );
+		window.document.splugins.wbc.filters.api.eo_wbc_filter_change_wrapper(false, 'form#'+/*_this.$base_pagination_container*/jQuery(element).parents().has('[id$="eo_wbc_filter"]').find('[id$="eo_wbc_filter"]').attr('id') );
 
     };
 
