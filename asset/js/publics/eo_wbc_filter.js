@@ -1878,6 +1878,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
     var slider_change_event = function(selector, element){
 
     	console.log('slider_change_event');
+    	console.log(selector);
 
 		jQuery(selector).each(function(i,e){
 
@@ -1949,12 +1950,12 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 					//PASS
 				} else {
 					_sep = jQuery(e).attr('data-sep');
-					_prefix = jQuery(/*this*/element).data('prefix');
+					_prefix = jQuery(this/*element*/).data('prefix');
 					if(typeof(_prefix) == typeof(undefined) || _prefix=='undefined'){
 						_prefix = '';
 					}
 
-					_postfix = jQuery(/*this*/element).data('postfix');
+					_postfix = jQuery(this/*element*/).data('postfix');
 					if(typeof(_postfix) == typeof(undefined) || _postfix=='undefined'){
 						_postfix = '';
 					}
@@ -1982,9 +1983,9 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
 				if(
 					(
-						(jQuery(this/*element*/).data('prev_val_min')!=min && jQuery(/*this*/element).data('prev_val_min')!=undefined)
+						(jQuery(this/*element*/).data('prev_val_min')!=min && jQuery(this/*element*/).data('prev_val_min')!=undefined)
 						|| 
-						(jQuery(this/*element*/).data('prev_val_max')!=max && jQuery(/*this*/element).data('prev_val_max')!=undefined)
+						(jQuery(this/*element*/).data('prev_val_max')!=max && jQuery(this/*element*/).data('prev_val_max')!=undefined)
 					)
 					||
 					( min!=_min || max!=_max )
@@ -2022,7 +2023,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 				    		}
 				    	}
 				    	else {
-				    		if(! jQuery("[name='_attribute']").val().includes(jQuery(/*this*/element).attr('data-slug'))) {
+				    		if(! jQuery("[name='_attribute']").val().includes(jQuery(this/*element*/).attr('data-slug'))) {
 				    			_values=jQuery("[name='_attribute']").val().split(',')
 				    			_values.push(jQuery(this/*element*/).attr('data-slug'))
 				    			jQuery("[name='_attribute']").val(_values.join())
@@ -2040,32 +2041,32 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 						// --add to be confirmed--
 
 						// window.document.splugins.wbc.filters.api.eo_wbc_filter_change_wrapper(false,'form#<?php echo $filter_ui->filter_prefix; ?>eo_wbc_filter','',{'this':this,'event':new Event('change',this)});
-						window.document.splugins.wbc.filters.api.eo_wbc_filter_change_wrapper(false,'form#'+ _this.sub_configs.filter_prefix +'eo_wbc_filter','',{'this':/*this*/element,'event':new Event('change',/*this*/element)});
+						window.document.splugins.wbc.filters.api.eo_wbc_filter_change_wrapper(false,'form#'+ _this.sub_configs.filter_prefix +'eo_wbc_filter','',{'this':this/*element*/,'event':new Event('change',this/*element*/)});
 				    	// jQuery.fn.eo_wbc_filter_change(false,'form#<?php /*echo $filter_ui->filter_prefix;*/ ?>eo_wbc_filter','',{'this':this,'event':new Event('change',this)});
 						////////////////////////////////////////
 
 			    	// <?php endif; ?>
 			    	}
 			    } else if( min==_min && max==_max ){
-			    	if(jQuery(/*this*/element).attr('data-slug')!='price'){
+			    	if(jQuery(this/*element*/).attr('data-slug')!='price'){
 				    	//Action of notifying filter change when changes are done.						    	
-			    		if(jQuery("[name='_attribute']").val().includes(jQuery(/*this*/element).attr('data-slug'))) {
+			    		if(jQuery("[name='_attribute']").val().includes(jQuery(this/*element*/).attr('data-slug'))) {
 			    			
 			    			_values=jQuery("[name='_attribute']").val().split(',')
-			    			_index=_values.indexOf(jQuery(/*this*/element).attr('data-slug'))
+			    			_index=_values.indexOf(jQuery(this/*element*/).attr('data-slug'))
 			    			_values.splice(_index,1)
 			    			jQuery("[name='_attribute']").val(_values.join());
 			    		}
 			    	}
 			    }
 			    
-			    jQuery(/*this*/element).data('prev_val_min',min);						    
-			    jQuery(/*this*/element).data('prev_val_max',max);
+			    jQuery(this/*element*/).data('prev_val_min',min);						    
+			    jQuery(this/*element*/).data('prev_val_max',max);
 			};
 			
-			let _adjust_label = jQuery(/*this*/element).data('label_adjust');
+			let _adjust_label = jQuery(this/*element*/).data('label_adjust');
 			
-			if(_adjust_label!=1 && jQuery(/*this*/element).hasClass('labeled')){
+			if(_adjust_label!=1 && jQuery(this/*element*/).hasClass('labeled')){
 				
 				_params.autoAdjustLabels=false;	
 			}					
