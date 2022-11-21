@@ -706,9 +706,9 @@ class Form_Builder implements Builder {
 
 									$dm_based_field = null;
 
-									foreach ($args['dm']['map_fields'] as $dm_key->$dm_value) {
+									foreach ($args['dm']['map_fields'] as $dm_key=>$dm_value) {
 
-										if ( isset($args['dm']['sp_eids'][$dm_key]['extra_to']) and strpos($das_counter_field_id, $args['dm']['sp_eids'][$dm_key]['extra_to']) !== false ) {
+										if ( isset($args['dm']['sp_eids'][$dm_key]['extra_2']) and strpos($das_counter_field_id, $args['dm']['sp_eids'][$dm_key]['extra_2']) !== false ) {
 
 											$dm_based_field = $dm_key; ? here jo jarur pade to apday key confome kerva ni avche mapp_field permane. 
 
@@ -718,7 +718,7 @@ class Form_Builder implements Builder {
 
 									if (!empty($dm_based_field)) {
 									
-										$added_counter = isset($args['data_raw'][$dm_based_field]) ? sizeof($args['data_raw'][$dm_based_field]): $added_counter;
+										$added_counter = isset($args['data_raw'][$dm_based_field]) ? ( is_array($args['data_raw'][$dm_based_field])) ? sizeof($args['data_raw'][$dm_based_field]) : 1 ) : $added_counter;
 									}
 								}
 

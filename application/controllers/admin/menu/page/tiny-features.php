@@ -194,13 +194,23 @@ if ( ! class_exists( 'Tiny_features' ) ) {
 				}, 10, 3 );
 
 
-				-- $variation_id nu $id kervu ne che but penethi su pass thay te jovanu che 
 				add_action( 'woocommerce_process_product_meta', function( $id /* $variation_id, $loop*/ ) use($page_section,$args){
 
-					-- simpel type mateno flag pass kervano av to kervano
+					ACTIVE_TODO we may need to add if condition here for the simple type so that only if the product is simple type then only this form is rendered otherwise the issue we may face is that the form may be created for two diffrerent tab for the variable products -- to h & -- to b or -- to s
+
+					if($type != 'simple'){
+
+						return; 
+					}
+
+					$type = define karavanu baki chhe->is_type('simple') ? 'simple' : null;
+
+					-- simpel type mateno flag pass kervano av to kervano ----- delete karva nu kidhu hatu but nichena hook manthi delete karyu chhe 
 
 					$args['hook_callback_args'] = array();
 					$args['hook_callback_args']['id'] = absint( $id /*$variation_id*/ );
+
+					$args['product_type'] = $type;
 
 					// maybe this hook is need to be moved controller right before the form_definition is passed to parent class function. and the form_definition will be filter parameter. -- and yeah there would be one hook only that maybe needed. not separate needed for render and save 
 					// apply_filters('sp_variations_data_before_save', '');
@@ -210,13 +220,22 @@ if ( ! class_exists( 'Tiny_features' ) ) {
 
 				add_action('woocommerce_product_options_inventory_product_data', function( /*$loop, $variation_data, $variation*/ ) use($page_section,$args) {
 
-					-- simpel type mateno flag pass kervano av to kervano
+					ACTIVE_TODO we may need to add if condition here for the simple type so that only if the product is simple type then only this form is rendered otherwise the issue we may face is that the form may be created for two diffrerent tab for the variable products -- to h & -- to b or -- to s
+
+					if($type != 'simple'){
+
+						return; 
+					}
+
+					$type = define karavanu baki chhe->is_type('simple') ? 'simple' : null;
 
 					$args['hook_callback_args'] = array();
 	            	
 					// NOTE: id is standard column name that we use for our options module based simple entity storage, so for the legacy admin flows also where necessary we can simply use the same where the necessity arise to maintain one uniqid and I think it will be almost always. 
 					$args['hook_callback_args']['id'] = absint( $variation->ID );
-	
+		
+					$args['product_type'] = $type;
+
 					return $this->selectron_hook_render($page_section,'sp_variations_html',$args);
 
 				}, 10, 3 );

@@ -445,9 +445,11 @@ class SP_WBC_Variations extends SP_Variations {
 					$props['sizes']  = wp_get_attachment_image_sizes( $attachment_id, $image_size );
 				}
 
-				/*wbc_pr($props);
-				echo">>>>>>>>>>>>>>>>><br>";
-				wbc_pr($attachment_id);*/
+				//ACTIVE_TODO/TODO we have fixed here a issue related to srcset. the issue was that srcset function was returning the false and it was creating issue on the browsers. but we have no idea why for some images it was returned false. now we had just fixed the browsr side issue by setting bool false to empty string or anything that is empty to empty string. so it solved the browser error but the data error is not solved and on different devices or for different image size requiremnets it maybe a big concern. so we may like to fix it asap. or if it is not an issue at all then just remove the ACTIVE_TODO and TODO. 
+				if (empty($props['srcset'])) {
+					
+					$props['srcset'] = '';
+				}
 
 				// -- dump @a--
 				if( wbc()->sanitize->get('is_test') == 1 ) {
@@ -1005,16 +1007,6 @@ class SP_WBC_Variations extends SP_Variations {
         	$type = 'select';
         }
 
-        // ACTIVE_TODO even the below is temporary but we may like to make the button type as the default to make sure that when we wbc swatches is on users get the default and improvised ui of button template other then the default of the woocommerce and so on. -- to h & -- to s
-        // ACTIVE_TODO Temp. 
-        	// here we have temporarily set the button type or the non supported types. and if  there are any other non supported types then that should also be added here. and once we finish the development part of some point that are yet left like the ACTIVE_TODO in above if and some other such and other such. as well as it is an additional note and not confirmed with the flow that we implemented in our initial version but in might be helpful that what we need to focus on is simply ensuring that the type provided by woocommerce is supported by that and the type provided by wbc is supported by wbc so the if condition below of has wc has supported product type or and additional condition at below layer ya that function name is wc product has type or an additional condition at that layer might be needed to check simply if we are supporting the types or otherwise simply return and i think there are many ACTIVE_TODO and notes in between in this layer which might already have this logic.
-        if( $type == 'select' || $type == 'dropdown' || $args['hook_callback_args']['hook_args']['type'] == 'select' || $args['hook_callback_args']['hook_args']['type'] == 'dropdown' ) {
-
-        	$type = 'button';
-        	$args['hook_callback_args']['hook_args']['type'] = 'button';
-
-        }
-
 
         // //add or condition here to apply_filter with key sp_variations_supporting_attribute_type with default to false and second arg will be type -- to b done
         // 	//--	and now need to add that hook to add type on woo attribute admin, see details in ssm variations class -- to d done
@@ -1372,8 +1364,6 @@ class SP_WBC_Variations extends SP_Variations {
 
 			
 			$query_params = \eo\wbc\model\SP_WBC_Router::instance()->get_query_params_formatted('url_and_filter_form', array('attr'), 'REQUEST', null);
-			// wbc_pr("query_params");
-			// wbc_pr($query_params);
 			$data['woo_dropdown_attribute_html_data']['query_paramas_options'] = null;
 			if(in_array($data['woo_dropdown_attribute_html_data']['attribute'] , $query_params)){
 
@@ -1391,9 +1381,14 @@ class SP_WBC_Variations extends SP_Variations {
 				foreach ( $data['woo_dropdown_attribute_html_data']['terms'] as $term ) {
 					if ( in_array( $term->slug, $data['woo_dropdown_attribute_html_data']['options'], true ) ) {
 
+						if(!empty($data['woo_dropdown_attribute_html_data']['query_paramas_options']) && in_array($term->slug, $data['woo_dropdown_attribute_html_data']['query_paramas_options'])) {
+
+							$data['woo_dropdown_attribute_html_data']['args'][ 'selected' ] = $term->slug;
+						}
+
 						$data['woo_dropdown_attribute_html_data']['options_loop_class'][$term->slug] = esc_attr( $data['woo_dropdown_attribute_html_data']['type'] ).'-variable-item-'.esc_attr( $term->slug );
 
-						$data['woo_dropdown_attribute_html_data']['options_loop_selected'][$term->slug] = ( ( (sanitize_title( $args['hook_callback_args']['hook_args']['selected'] ) === $args['hook_callback_args']['hook_args']['selected']) || (!empty($data['woo_dropdown_attribute_html_data']['query_paramas_options']) && in_array($term->slug, $data['woo_dropdown_attribute_html_data']['query_paramas_options'])) ) ? selected( $args['hook_callback_args']['hook_args']['selected'], sanitize_title( $term->slug ), false ) : selected( $args['hook_callback_args']['hook_args']['selected'], $term->slug, false ) );
+						$data['woo_dropdown_attribute_html_data']['options_loop_selected'][$term->slug] = ( ( (sanitize_title( $args['hook_callback_args']['hook_args']['selected'] ) === $args['hook_callback_args']['hook_args']['selected']) /*|| (!empty($data['woo_dropdown_attribute_html_data']['query_paramas_options']) && in_array($term->slug, $data['woo_dropdown_attribute_html_data']['query_paramas_options']))*/ ) ? selected( $args['hook_callback_args']['hook_args']['selected'], sanitize_title( $term->slug ), false ) : selected( $args['hook_callback_args']['hook_args']['selected'], $term->slug, false ) );
 
 						$data['woo_dropdown_attribute_html_data']['options_loop_option_name'][$term->slug] = apply_filters('sp_wbc_variation_option_name', null, $term->name , $term, $data['woo_dropdown_attribute_html_data']['attribute'], $data['woo_dropdown_attribute_html_data']['product']); //\eo\wbc\system\core\data_model\SP_Attribute::variation_option_name( $term->name, $term, $data['woo_dropdown_attribute_html_data']['attribute'], $data['woo_dropdown_attribute_html_data']['product']);
 
@@ -1412,10 +1407,15 @@ class SP_WBC_Variations extends SP_Variations {
 				$data['woo_dropdown_attribute_html_data']['options_loop_html_attr'] = array();
 				foreach ( $data['woo_dropdown_attribute_html_data']['options'] as $option ) {
 
+					if(!empty($data['woo_dropdown_attribute_html_data']['query_paramas_options']) && in_array($option, $data['woo_dropdown_attribute_html_data']['query_paramas_options'])) {
+
+						$data['woo_dropdown_attribute_html_data']['args'][ 'selected' ] = $option;
+					}
+
 					$data['woo_dropdown_attribute_html_data']['options_loop_class'][$option] = esc_attr( $data['woo_dropdown_attribute_html_data']['type'] ).'-variable-item-'.esc_attr( $option );
 
 					// This handles < 2.4.0 bw compatibility where text attributes were not sanitized.
-					$data['woo_dropdown_attribute_html_data']['options_loop_selected'][$option] = ( ( ( sanitize_title( $args['hook_callback_args']['hook_args']['selected'] ) === $args['hook_callback_args']['hook_args']['selected']) || (!empty($data['woo_dropdown_attribute_html_data']['query_paramas_options']) && in_array($option, $data['woo_dropdown_attribute_html_data']['query_paramas_options'])) ) ? selected( $args['hook_callback_args']['hook_args']['selected'], sanitize_title( $option ), false ) : selected( $args['hook_callback_args']['hook_args']['selected'], $option, false ) );
+					$data['woo_dropdown_attribute_html_data']['options_loop_selected'][$option] = ( ( ( sanitize_title( $args['hook_callback_args']['hook_args']['selected'] ) === $args['hook_callback_args']['hook_args']['selected']) /*|| (!empty($data['woo_dropdown_attribute_html_data']['query_paramas_options']) && in_array($option, $data['woo_dropdown_attribute_html_data']['query_paramas_options']))*/ ) ? selected( $args['hook_callback_args']['hook_args']['selected'], sanitize_title( $option ), false ) : selected( $args['hook_callback_args']['hook_args']['selected'], $option, false ) );
 
 					$data['woo_dropdown_attribute_html_data']['options_loop_option_name'][$option] = apply_filters('sp_wbc_variation_option_name', null, $option , null, $data['woo_dropdown_attribute_html_data']['attribute'], $data['woo_dropdown_attribute_html_data']['product']); // \eo\wbc\system\core\data_model\SP_Attribute::variation_option_name( $option, null, $data['woo_dropdown_attribute_html_data']['attribute'], $data['woo_dropdown_attribute_html_data']['product']);
 
@@ -1553,18 +1553,22 @@ class SP_WBC_Variations extends SP_Variations {
 					
 					if ( in_array( $term->slug, $data['woo_dropdown_attribute_html_data']['options'], true ) ) {
 
+						if(!empty($data['woo_dropdown_attribute_html_data']['query_paramas_options']) && in_array($term->slug, $data['woo_dropdown_attribute_html_data']['query_paramas_options']) ) {
+
+							$data['woo_dropdown_attribute_html_data']['args'][ 'selected' ] = $term->slug;
+						}
+						
 						// aria-checked="false"
 						// $data['variable_item_data'][$term->slug]['option'] = esc_html( apply_filters( 'woocommerce_variation_option_name', $term->name, $term, $data['variable_item_data']['attribute'], $data['woo_dropdown_attribute_html_data']['product'] ) );
 						$data['variable_item_data']['options_loop_option'][$term->slug] = esc_html(apply_filters('sp_wbc_variation_option_name', null, $term->name, $term, $data['variable_item_data']['attribute'], $data['woo_dropdown_attribute_html_data']['product']) /*\eo\wbc\system\core\data_model\SP_Attribute::variation_option_name($term->name, $term, $data['variable_item_data']['attribute'], $data['woo_dropdown_attribute_html_data']['product'] ) */);
 
-						$data['variable_item_data']['options_loop_is_selected'][$term->slug]    = ( ( sanitize_title( $data['woo_dropdown_attribute_html_data']['args']['selected'] ) == $term->slug ) ) || (!empty($data['woo_dropdown_attribute_html_data']['query_paramas_options']) && in_array($term->slug, $data['woo_dropdown_attribute_html_data']['query_paramas_options']) ) ? true : false;
+						$data['variable_item_data']['options_loop_is_selected'][$term->slug]    = ( ( sanitize_title( $data['woo_dropdown_attribute_html_data']['args']['selected'] ) == $term->slug ) ) /*|| (!empty($data['woo_dropdown_attribute_html_data']['query_paramas_options']) && in_array($term->slug, $data['woo_dropdown_attribute_html_data']['query_paramas_options']) )*/ ? true : false;
 						$data['variable_item_data']['options_loop_selected_class'][$term->slug] = $data['variable_item_data']['options_loop_is_selected'][$term->slug] ? 'selected' : '';
 
 						$data['variable_item_data']['options_loop_tooltip'][$term->slug]        = '';
 
 
-
-						$data['variable_item_data']['options_loop_selected_class'][$term->slug] = ( sanitize_title( $data['woo_dropdown_attribute_html_data']['args'][ 'selected' ] ) == $term->slug ) ? 'selected' : '';
+						$data['variable_item_data']['options_loop_selected_class'][$term->slug] = ( sanitize_title( $data['woo_dropdown_attribute_html_data']['args'][ 'selected' ] ) == $term->slug )  ? 'selected' : '';
 
 
 						$data['woo_dropdown_attribute_html_data']['options_loop_class'][$term->slug] = esc_attr( $data['woo_dropdown_attribute_html_data']['type'] ).'-variable-item-'.esc_attr( $term->slug ).' '.esc_attr( $data['variable_item_data']['options_loop_selected_class'][$term->slug]);
@@ -1675,9 +1679,14 @@ class SP_WBC_Variations extends SP_Variations {
 					foreach ( $data['woo_dropdown_attribute_html_data']['options'] as $option ) {
 						// This handles < 2.4.0 bw compatibility where text attributes were not sanitized.
 
+						if(!empty($data['woo_dropdown_attribute_html_data']['query_paramas_options']) && in_array($option, $data['woo_dropdown_attribute_html_data']['query_paramas_options']) ) {
+
+							$data['woo_dropdown_attribute_html_data']['args'][ 'selected' ] = $option;
+						}
+
 						$data['variable_item_data']['options_loop_option'][$option] = esc_html(apply_filters('sp_wbc_variation_option_name', null, $option, null, $data['variable_item_data']['attribute'], $data['woo_dropdown_attribute_html_data']['product']) /*\eo\wbc\system\core\data_model\SP_Attribute()::instance()->variation_option_name( $option, null, $data['variable_item_data']['attribute'], $data['woo_dropdown_attribute_html_data']['product'] )*/ );
 
-						$data['variable_item_data']['options_loop_is_selected'][$option] = ( ( sanitize_title( $data['variable_item_data']['options_loop_option'][$option] ) == sanitize_title( $data['woo_dropdown_attribute_html_data']['args']['selected'] ) ) || (!empty($data['woo_dropdown_attribute_html_data']['query_paramas_options']) && in_array($option, $data['woo_dropdown_attribute_html_data']['query_paramas_options']) ) ) ? true : false;
+						$data['variable_item_data']['options_loop_is_selected'][$option] = ( ( sanitize_title( $data['variable_item_data']['options_loop_option'][$option] ) == sanitize_title( $data['woo_dropdown_attribute_html_data']['args']['selected'] ) ) /*|| (!empty($data['woo_dropdown_attribute_html_data']['query_paramas_options']) && in_array($option, $data['woo_dropdown_attribute_html_data']['query_paramas_options']) )*/ ) ? true : false;
 
 
 						$data['variable_item_data']['options_loop_selected_class'][$option] = $data['variable_item_data']['options_loop_is_selected'][$option] ? 'selected' : '';
@@ -2091,16 +2100,6 @@ class SP_WBC_Variations extends SP_Variations {
 			return \eo\wbc\system\core\data_model\SP_Attribute::variation_option_name($term_name , $term, $attribute, $product);
         	
 		}, 10, 5);
-
-		add_filter('sp_wbc_get_variations',function($data, $product ,$args){
-
-			if ($data !== null) {
-
-				return $data;
-			}
-		
-			return $product->get_available_variations(); 
-		},10,3);
 		
 		add_filter('sp_wbc_get_variation_attrs',function($data, $product){
 
@@ -2158,6 +2157,16 @@ class SP_WBC_Variations extends SP_Variations {
 
         	return has_post_thumbnail();
 		}, 10, 1);
+
+		add_filter('sp_wbc_get_variations',function($data, $product ,$args){
+
+			if ($data !== null) {
+
+				return $data;
+			}
+		
+			return $product->get_available_variations(); 
+		},10,3);
 
         add_filter( 'sp_wbc_product_get_type',  function($data,$product){
 
