@@ -57,7 +57,7 @@ class SP_Model_Query extends SP_Query {
 				// --- end ---
 
 		        return apply_filters('filter_widget_ajax_post_query',$query);
-		    });		   
+		    },10);		   
 		}
 	}
 
