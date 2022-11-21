@@ -87,6 +87,17 @@ class Controller extends \eo\wbc\controllers\Controller{
            
             add_action( 'the_post',function(/*$post_object*/) use($args){
 
+                //ACTIVE_TODO/TODO below Compatibility pach is not in use but if required in the future then we can make use of it or otherwise remove this point in below if.
+                if (false) {
+                    
+                    global $product;
+                    
+                    $args['product'] = $product;
+
+                    $args['product'] = \eo\wbc\model\SP_WBC_Compatibility::instance()->woo_general_broad_matters_compatability('woocommerce_the_post_hook_wc_product_obj',$args);
+                }
+
+
                 // NOTE: from here whenever and if required then we can pass the hook args in hooked args element in our $args param, like we are doing in our selectron funciton heirarchy. 
 
                 $args['child_obj']->hook_action_the_post($args);

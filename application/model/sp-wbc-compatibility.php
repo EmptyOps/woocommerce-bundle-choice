@@ -112,13 +112,24 @@ class SP_WBC_Compatibility extends SP_Compatibility {
         return $result; 
     }
 
-	public function woo_general_broad_matters_compatability($section){
+	public function woo_general_broad_matters_compatability($section,$args = array()){
 
         if($section == 'woocommerce_configure_bundle'){
 		    if ( isset( $_POST[ 'action' ] ) && wbc()->sanitize->post('action') === 'woocommerce_configure_bundle_order_item' ) {
             	return true;
         	}
-        }
+        }else if($section == 'woocommerce_the_post_hook_wc_product_obj'){
+
+	        if (wbc()->wc->is_variation_object($args['product'])) {
+	        	
+	        	return wc_get_product($args['product']->get_parent_id());
+
+	        }
+
+	        return $args['product'];
+	    }
+
+
 	}
 
 	public function feed_quickview_container_compatability($page_section,$args = array()){
