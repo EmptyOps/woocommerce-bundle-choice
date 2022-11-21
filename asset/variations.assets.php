@@ -1205,6 +1205,7 @@ if(is_shop() || is_product_category()) {
 	        margin: auto;
 	        -o-object-fit: contain;
 	        object-fit: contain;
+	        cursor: pointer;
 	    }
 	    .spui_thumbnail_shop_video{
 	        float: left;
@@ -1218,6 +1219,7 @@ if(is_shop() || is_product_category()) {
 	        -o-object-fit: contain;
 	        object-fit: contain;
 	        max-width: 100%;
+	        cursor: pointer;
 	    }
 	</style>
 
