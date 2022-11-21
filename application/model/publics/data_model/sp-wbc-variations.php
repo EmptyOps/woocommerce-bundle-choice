@@ -1825,7 +1825,7 @@ class SP_WBC_Variations extends SP_Variations {
 
 		$data['gallery_images_template_data']['default_attributes'] = self::selected_variation_attributes($data['gallery_images_template_data']['default_attributes']);
 
-		ACTIVE_TODO we ma like to add apply_filters hook here like above hook sp_wbc_product_get_id if we have to support defolt varashon on page lode. an at that time ma need to creat apply_filters hook for above deflate attribute also. -- to h  
+		ACTIVE_TODO we ma like to add apply_filters hook here like above hook sp_wbc_product_get_id if we have to support defolt varashon on page lode. an at that time ma need to creat apply_filters hook for above default attribute also. -- to h  
 		$data['gallery_images_template_data']['default_variation_id'] = null;
 		if (!empty($data['gallery_images_template_data']['default_attributes'])) {
 		
