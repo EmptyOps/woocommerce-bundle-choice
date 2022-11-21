@@ -1326,4 +1326,45 @@ jQuery( document ).ready(function() {
     .bs-popover-auto[x-placement^=top]>.arrow::after, .bs-popover-top>.arrow::after{
         border-top-color:var(--spui_tooltip_bg) !important;
     }
+
+    /*----Loader-css----*/
+    	:root{
+
+    		--spui-loader-background-color:rgba(255,255,255, 0.6);
+    	}
+
+    	.loading {
+	    background-image: url(https://kuyum.crewmedya.com/wp-content/plugins/woo-bundle-choice/asset/icon/spinner.gif);
+	    background-color: var(--spui-loader-background-color) !important;
+	    background-position: center center;
+	    background-repeat: no-repeat;
+	    margin: 0;
+	    position: fixed !important;
+	    top: 0 !important;
+	    left: 0 !important;
+	    z-index: 10000 !important;
+	    width: 100vw !important;
+	    height: 100vh !important;
+	}
+	/*----Loader-cssEnd----*/
+
+	/*----Breadcum----*/
+	body .ui.grid>.column:not(.row) {
+	    padding-top: 1rem;
+	    padding-bottom: 1rem;
+	}
+	/*---Breadcum-End----*/
+	
+	/*---Filter-tab---*/
+	.tax-product_cat .eo-wbc-container.filters .ui.menu {
+                -ms-flex-wrap: wrap;
+                    flex-wrap: wrap;
+                -webkit-box-pack: center;
+                    -ms-flex-pack: center;
+                        justify-content: center;
+            }
+            .tax-product_cat .eo-wbc-container.filters .ui.menu a.item.center {
+                margin-left: 0 !important;
+            }
+        /*---Filter-tabEnd---*/  
 </style>
