@@ -2645,8 +2645,10 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
 
 jQuery(document).ready(function(){
 
-    //  publish it 
-    window.document.splugins.wbc.variations.swatches.api = window.document.splugins.wbc.variations.swatches.core( common_configs.swatches_config );
+    if (!window.document.splugins.common.is_admin) {
+        //  publish it 
+        window.document.splugins.wbc.variations.swatches.api = window.document.splugins.wbc.variations.swatches.core( common_configs.swatches_config );
+    }
 }); 
 
 // if(window.document.splugins.common.is_item_page) {
@@ -4146,8 +4148,11 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
 };
 
 jQuery(document).ready(function(){
-    //  publish it 
-    window.document.splugins.wbc.variations.gallery_images.api = window.document.splugins.wbc.variations.gallery_images.core( common_configs.gallery_images_configs );
+    
+    if (!window.document.splugins.common.is_admin) {
+        //  publish it 
+        window.document.splugins.wbc.variations.gallery_images.api = window.document.splugins.wbc.variations.gallery_images.core( common_configs.gallery_images_configs );
+    }
 });
 
 // if(window.document.splugins.common.is_item_page) {

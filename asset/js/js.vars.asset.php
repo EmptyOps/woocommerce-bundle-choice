@@ -20,8 +20,17 @@ add_action( ( !is_admin() ? 'wp_enqueue_scripts' : 'admin_enqueue_scripts'),func
 		if( is_admin() ){
 
 			?>
+
+			window.document.splugins.common.is_admin = <?php echo "true";?>;
+
 			window.document.splugins.admin.is_legacy_admin_page = <?php echo ((apply_filters('sp_is_legacy_admin_page', true)) ? "true" : "false");?>; 
 			<?php 
+		} else {
+
+			?>
+			window.document.splugins.common.is_admin = <?php echo "false";?>;
+			<?php
+			
 		}
 
 		?>
