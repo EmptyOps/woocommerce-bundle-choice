@@ -1180,10 +1180,10 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		ACTIVE_TODO_OC_END*/
 
 		// let container_html = jQuery('.products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products',jQuery(data)).html();	
-		console.log(data);
 		console.log("filter eo_wbc_filter_render_html container_html");
+		console.log(render_container_selector);
 		let container_html = jQuery(render_container_selector/*render_container*/, jQuery(data)).html();	
-		console.log(container_html);
+		// console.log(container_html);
 
 		/*if(container_html===undefined || container_html==='') {
 			container_html = jQuery(jQuery(data),'.products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products').html();
