@@ -2112,7 +2112,9 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 			console.log(_params);
 
 			jQuery(e).slider(_params);
-	    				
+
+	    	console.log('slider_change_event loop 02');
+	    					
 			jQuery.fn.slider = ui_slider;
 		});
     
