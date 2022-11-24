@@ -2828,7 +2828,8 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
  
         _this.#$slider_container = window.document.splugins.common.is_item_page ? _this.#$additional_container/*base_element*/.find( '.'+ _this.#configs.classes.slider.container ) : _this.#$additional_container/*base_element*/.closest( '.'+ _this.#configs.classes.slider.container );
         _this.#$zoom_container = window.document.splugins.common.is_item_page ? _this.#$additional_container/*base_element*/.find( '.'+ _this.#configs.classes.zoom.container ) : jQuery( _this.#configs.classes.zoom.container.replace('{product_id}', _this.product_id) );
-        // console.log(_this.#$zoom_container);
+        console.log('_this.#$zoom_container');
+        console.log(_this.#$zoom_container);
             
         _this.#$slider_loop_container = _this.#$slider_container.find( '.'+ _this.#configs.classes.slider.loop_container );
 
@@ -3541,7 +3542,7 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
  
     }
 
-    #create_variation_url(element_url, event, variation) {
+    #create_variation_url(element, event, variation) {
 
         console.log('create_variation_url');
         console.log(variation);
@@ -3564,7 +3565,7 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
         });
 
         // var url = element.attr('href');
-        var url = element_url;
+        var url = element.attr('href');
 
         url = url +'?variation_id='+ variation.variation_id;
 
@@ -3579,21 +3580,32 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
             url = window.document.splugins.common.updateURLParameter(url, 'checklist_' + attributeSlug, val.value);
         });
 
-        _this.#$zoom_container.data('sp_variation_url',url);
-        console.log('zoom container sp_variation_url data');
-        console.log(_this.#$zoom_container.data('sp_variation_url'));
         url = window.document.splugins.common.updateURLParameter(url, '_attribute', attributeSlug_global);
+        
+        _this.#$zoom_container.data('sp_variation_url',url);
+        // console.log('zoom container sp_variation_url data');
+        // console.log(_this.#$zoom_container.data('sp_variation_url'));
 
         return url;
     
     }    
 
-    #get_loop_box_anchor(event, variation) {
+    #get_loop_box_anchor_private(event, variation) {
 
         var _this = this;
 
-        console.log('get_loop_box_anchor');
-        
+        console.log('get_loop_box_anchor');        
+
+        if(!window.document.splugins.common.is_empty(_this.finalAnchor)) {
+            
+            // console.log('get_loop_box_anchor if');  
+            // console.log(_this.finalAnchor);      
+            
+            return _this.finalAnchor;
+        }
+
+        // console.log('get_loop_box_anchor 01');        
+
         var aLocateclass_p = 'woocommerce-LoopProduct-link';
         var liLocate_class_p = 'product';
 
@@ -3652,7 +3664,12 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
                     }else if(jQuery(aLocate[i]).attr("href").indexOf("/product/") >= 0) {
 
                         var finalAnchor = jQuery(aLocate[i]);
-                        console.log("HREF thi <a> malyo");
+                        console.log("/product/ HREF thi <a> malyo");
+
+                    }else if(jQuery(aLocate[i]).attr("href").indexOf("/producto/") >= 0) {
+
+                        var finalAnchor = jQuery(aLocate[i]);
+                        console.log("/producto/ HREF thi <a> malyo");
                     }
 
                     if(!window.document.splugins.common.is_empty(finalAnchor)) {
@@ -3664,8 +3681,8 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
             }                
         }
 
-        console.log('final anchor');
-        console.log(finalAnchor);
+        // console.log('final anchor');
+        // console.log(finalAnchor);
 
         _this.finalAnchor = finalAnchor;
 
@@ -3683,26 +3700,26 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
         ACTIVE_TODO_OC_END*/
         var _this = this;
 
-        if(window.document.splugins.common.is_empty(_this.finalAnchor)) {
-            console.log('_this.finalAnchor is empty if');
-            _this.finalAnchor = _this.#get_loop_box_anchor(event, variation);
-        }
+        // if(window.document.splugins.common.is_empty(_this.finalAnchor)) {
+        //     console.log('_this.finalAnchor is empty if');
+        //     _this.finalAnchor = _this.#get_loop_box_anchor_private(event, variation);
+        // }
 
-        if(window.document.splugins.common.is_empty(_this.finalAnchor_url)) {
-            console.log('_this.finalAnchor_url is empty if');
-            _this.finalAnchor_url = _this.finalAnchor.attr('href');
-        }
+        // if(window.document.splugins.common.is_empty(_this.finalAnchor_url)) {
+        //     console.log('_this.finalAnchor_url is empty if');
+        //     _this.finalAnchor_url = _this.finalAnchor.attr('href');
+        // }
 
-        // var a = _this.#get_loop_box_anchor(event, variation);    
+        // var a = _this.#get_loop_box_anchor_private(event, variation);    
 
-        console.log("a.attr('href') start");
-        console.log(_this.finalAnchor_url);
+        // console.log("a.attr('href') start");
+        // console.log(_this.finalAnchor_url);
     
-        var variation_url = _this.#create_variation_url(_this.finalAnchor_url, event, variation);
-        var base_url = _this.finalAnchor.attr('href', variation_url);
+        var variation_url = _this.#create_variation_url(_this.#get_loop_box_anchor_private(), event, variation);
+        var base_url = _this.#get_loop_box_anchor_private().attr('href', variation_url);
 
         console.log("a.attr('href') end");
-        console.log(_this.finalAnchor.attr('href'));
+        console.log(_this.#get_loop_box_anchor_private().attr('href'));
     }
 
     #reset_variation_listener(type) {
@@ -4099,6 +4116,13 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
         return _this.#process_zoom_template(images,index,hasGallery);            
     }
 
+    get_loop_box_anchor() {
+
+        var _this = this; 
+    
+        return _this.#get_loop_box_anchor_private();
+    }
+
     init() { 
 
         var _this = this; 
@@ -4407,11 +4431,12 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
         // _this.#init_preprocess(null);
         console.log('super.get_zoom_container()');
         console.log(super.get_zoom_container());
-
     }
 
     #init_preprocess(event) {
 
+        console.log('gallery_images_child init_preprocess');
+      
         var _this = this; 
 
         _this.#preprocess(null, event)
@@ -4419,6 +4444,8 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
     }
 
     #preprocess(element, event) {
+
+        console.log('SP_WBC_Variations_Gallery_Images_Feed_Page preprocess');
 
         var _this = this; 
 
@@ -4428,6 +4455,8 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
 
     #process_images(type=null, element=null) {
 
+        console.log('SP_WBC_Variations_Gallery_Images_Feed_Page process_images');
+
         var _this = this; 
 
         _this.#process_images_inner_private(type, element);    
@@ -4435,6 +4464,8 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
     }       
 
     #process_images_inner_private(type, element) {
+
+        console.log('SP_WBC_Variations_Gallery_Images_Feed_Page process_images_inner_private');
 
         var _this = this; 
 
@@ -4444,17 +4475,20 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
 
     #process_events(type) {
 
+        console.log('SP_WBC_Variations_Gallery_Images_Feed_Page process_events');
+
         var _this = this; 
 
         _this.#zoom_area_hover_in_listener(type);
     
         _this.#zoom_area_hover_out_listener(type);
 
-        if(super.is_variation_product()) {
+        // ACTIVE_TODO for simple type also we may need to use below click lisner so in that case simply comment or remove below if.
+        // if(super.is_variation_product()) {
     
-            _this.#zoom_area_click_listener();
+        _this.#zoom_area_click_listener();
 
-        }
+        // }
 
     }
 
@@ -4463,6 +4497,8 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
         console.log('gc zoom_area_click_listener');
 
         var _this = this; 
+
+        console.log(super.get_zoom_container());
 
         super.get_zoom_container().on('click',function() {
 
@@ -4495,7 +4531,7 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
         console.log(super.get_zoom_container());
         //Flag var, set to false below to avoid undefine error on first execution.
         _this.#data.is_zoom_area_hover_in_progress = false;
-
+       
         // _this.#$zoom_container.on("mouseenter","",function() {
         super.get_zoom_container().hover(function() {
 
@@ -4522,7 +4558,7 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
         if(window.document.splugins.common._b(_this.#$binding_stats, 'zoom_area_hover_out_listener', type)){
             return false;
         }   
-
+        
         // _this.#$zoom_container.on("mouseleave","",function() {
         super.get_zoom_container().on("mouseleave","",function() {
 
@@ -4688,20 +4724,48 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
 
     #zoom_area_click(type) {
 
+        console.log('gc zoom_area_click()');
+
         var _this = this; 
 
-        var sp_variation_url = super.get_zoom_container().data('sp_variation_url'); 
+        var sp_anchor_url = super.get_loop_box_anchor().attr('href');
 
-        if(window.document.splugins.common.is_empty(sp_variation_set_url)) {
+        // console.log(sp_anchor_url);
+        
+        if(!window.document.splugins.common.is_empty(sp_anchor_url)) {
             
-            window.location.href = sp_variation_url;
-
-        }else {
-
-            window.location.href = sp_variation_set_url;
-
+            console.log('gc zoom_area_click() if');
+                
+            // window.location.href = sp_anchor_url;
         }
 
+        // _this#compatability('zoom_area_click');
+    }
+    
+    #compatability(section, object, expected_result) {
+        
+        var _this = this;
+
+        // if(section == 'zoom_area_click') {
+
+        //     var sp_variation_url = super.get_zoom_container().data('sp_variation_url'); 
+        //     console.log('sp_variation_url');
+        //     console.log(sp_variation_url);
+       
+        //     if(!window.document.splugins.common.is_empty(sp_variation_url)) {
+                
+        //         window.location.href = sp_variation_url;
+
+        //     }else {
+
+        //         var sp_anchor_url = super.get_loop_box_anchor().attr('href');
+                
+        //         window.location.href = sp_anchor_url;
+        //     }
+
+        // }
+
+        return object;
     }
 
     #update_configs() {

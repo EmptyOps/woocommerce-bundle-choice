@@ -79,6 +79,11 @@ class Feed extends \eo\wbc\controllers\publics\Controller{
                 // }
                 // //wbc_pr($data); die();
                 // return $this->load_view($data,$args);
+
+                $args['product'] = $args['hook_callback_args']['product'];
+                $args['extra_args'] = $args['hook_callback_args']['extra_args'];
+                unset($args['hook_callback_args']);
+
                 \eo\wbc\model\publics\SP_Model_Feed::instance()->render_gallery_images_template_callback($args);
             }
 

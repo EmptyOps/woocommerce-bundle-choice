@@ -88,12 +88,22 @@ class SP_Query {
 
 	public function prepare_query_direct( $query=null, $input_method=null, $additional_data=array() ) {
         
+		if( wbc()->sanitize->get('is_test') == 1 ) {
+
+			wbc_pr("wbc prepare_query_directe");
+		}
+
 		$query = $this->valid_query($query);
         // $_DATA = empty($input_method) ? null : ( $input_method == 'GET' ? $_GET : $_POST );
         $_DATA = empty($input_method) ? null : ( $input_method == 'GET' ? $_GET : ( $input_method == 'REQUEST' ? $_REQUEST : $_POST ) );
         $input_method_small = empty($input_method) ? null : strtolower( $input_method );
 
         if( !empty($input_method) and $query->is_main_query() and !empty($query->query_vars['product_cat'])) {
+
+	        if( wbc()->sanitize->get('is_test') == 1 ) {
+
+				wbc_pr("wbc prepare_query_directe inner if");
+			}
 
         	$query = $this->post__in( $_DATA, $query, $input_method_small );
 
@@ -114,6 +124,11 @@ class SP_Query {
 	        $query->query_vars['suppress_filters'] = true;
 
         }		        		        
+
+        if( wbc()->sanitize->get('is_test') == 1 ) {
+
+			wbc_pr("wbc prepare_query_directe above return");
+		}
 
         return $query;
 	}
