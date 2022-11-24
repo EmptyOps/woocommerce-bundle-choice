@@ -921,8 +921,7 @@ class Form_Builder implements Builder {
 
 					foreach($fv as $fv_key => $fv_value){
 
-						yet to be confirmed 
-						if( !in_array( $fields_to_keep, $fv_key )/*$fv_key != 'type' && $fv_key != 'value'*/ ){
+						if( !in_array( $fv_key, $fields_to_keep )/*$fv_key != 'type' && $fv_key != 'value'*/ ){
 
 							unset($form_definition[$key]["form"][$fk][$fv_key]);
 
