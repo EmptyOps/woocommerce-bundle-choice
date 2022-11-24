@@ -1102,6 +1102,34 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 						object.render_container = jQuery(".jet-woo-products");
 					}
 
+
+					// NOTE: theme specific patches any other generic patches should go above this if section 
+					if( false && object.render_container.length<=0) {
+
+			        	console.log("compatability inner else if inner if inner if themes patch");
+						
+						var selector_string_local = null; 
+
+						if(window.document.splugins.common.current_theme_key == 'themes___dello-child') {
+
+				        	console.log("compatability inner else if inner if inner if themes patch dello");
+
+							selector_string_local = '.radiantthemes-shop';
+						}
+
+						if(object.is_return_string_selector) {
+
+							object.render_container_selector = selector_string_local;
+							object.render_container = jQuery(selector_string_local);
+						} else {
+							
+							object.render_container = jQuery(selector_string_local);
+						}
+
+
+
+					}
+
 				}
 
 			}
@@ -1246,7 +1274,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 				--	and so now the render_container will recieve one parameter that is render_container, it will defaults to null so from where it is applicable it is passed otherwise it will be left blank -- to d 
 			ACTIVE_TODO_OC_END*/
 			// jQuery(render_container/*".products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products"*/).html('<p class="woocommerce-info" style="width: 100%;">No products were found matching your selection.</p>');	
-			no_products_found_private(form_selector);
+			no_products_found_private(form_selector,render_container);
 		}	
 
 		/*ACTIVE_TODO_OC_START
@@ -1792,7 +1820,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
     }; 
 
-    var no_products_found_private = function(form_selector) {
+    var no_products_found_private = function(form_selector,render_container) {
 
     	// ACTIVE_TODO_OC_START
     	// create private counter part of the no_products_found function with name no_products_found_private, so that the inner private layers can call that internally -- to d 
