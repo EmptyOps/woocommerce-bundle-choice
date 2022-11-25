@@ -114,6 +114,8 @@ class SP_WBC_Compatibility extends SP_Compatibility {
 
 	public function woo_general_broad_matters_compatability($section,$args = array()){
 
+		// ACTIVE_TODO the parent class funtion is missing for this function so need to add that as soon as we gate chanse or required. -- to h
+		
         if($section == 'woocommerce_configure_bundle'){
 		    if ( isset( $_POST[ 'action' ] ) && wbc()->sanitize->post('action') === 'woocommerce_configure_bundle_order_item' ) {
             	return true;
@@ -127,6 +129,15 @@ class SP_WBC_Compatibility extends SP_Compatibility {
 	        }
 
 	        return $args['product'];
+	    }else if($section == 'woocommerce_archive_container_class'){
+
+	        if (wbc()->common->current_theme_key() == 'themes___dello-child') {
+	        	
+	        	return 'radiantthemes-shop';
+
+	        }
+
+	        return $args['class'];
 	    }
 
 

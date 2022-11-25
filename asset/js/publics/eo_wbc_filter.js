@@ -1105,7 +1105,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
 
 					// NOTE: theme specific patches any other generic patches should go above this if section 
-					if( false && object.render_container.length<=0) {
+					if(object.render_container.length<=0) {
 
 			        	console.log("compatability inner else if inner if inner if themes patch");
 						
@@ -1126,8 +1126,6 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 							
 							object.render_container = jQuery(selector_string_local);
 						}
-
-
 
 					}
 
@@ -1213,7 +1211,8 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		console.log("filter eo_wbc_filter_render_html container_html");
 		console.log(render_container_selector);
 		let container_html = jQuery(render_container_selector/*render_container*/, jQuery(data)).html();	
-		// console.log(container_html);
+		console.log("eo_wbc_filter_render_html container_html");
+		console.log(container_html);
 
 		/*if(container_html===undefined || container_html==='') {
 			container_html = jQuery(jQuery(data),'.products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products').html();
@@ -2142,7 +2141,9 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 			console.log(_params);
 
 			jQuery(e).slider(_params);
-	    				
+
+	    	console.log('slider_change_event loop 02');
+	    					
 			jQuery.fn.slider = ui_slider;
 		});
     
