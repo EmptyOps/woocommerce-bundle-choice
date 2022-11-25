@@ -904,6 +904,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 	var success = function(data, render_container, form_selector) {
 
 		console.log("filter success");
+		console.log(render_container);
 
 		//console.log(data);
 		//document.write(data);
@@ -1144,6 +1145,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
     var eo_wbc_filter_render_html = function(data, render_container, form_selector){
 
 		console.log("filter eo_wbc_filter_render_html");
+		console.log(render_container);
 		/*jQuery("#loading").removeClass('loading');
 		return true;*/
 
