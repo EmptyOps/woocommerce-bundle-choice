@@ -198,18 +198,14 @@ if ( ! class_exists( 'Tiny_features' ) ) {
 
 					global $post;
 
-					$type = $post->is_type('simple') ? 'simple' : null;
+					$type = $post->post_type;	//$post->is_type('simple') ? 'simple' : 'variable';
 
 					// NOTE: we needed to add if condition here for the simple type so that only if the product is simple type then only this form is rendered otherwise the issue we may face is that the form may be created for two diffrerent tab for the variable products 
-
-					$type = $post->is_type();
-
 					if($type != 'simple'){
 					
 						return; 
 					}
 
-					-- simpel type mateno flag pass kervano av to kervano ----- delete karva nu kidhu hatu but nichena hook manthi delete karyu chhe 
 
 					$args['hook_callback_args'] = array();
 					$args['hook_callback_args']['id'] = absint( $id /*$variation_id*/ );
@@ -226,16 +222,14 @@ if ( ! class_exists( 'Tiny_features' ) ) {
 
 					global $post;
 
-					$type = $post->is_type('simple') ? 'simple' : null;
+					$type = $post->post_type;	//$post->is_type('simple') ? 'simple' : 'variable';
 
-					// NOTE: we needed to add if condition here for the simple type so that only if the product is simple type then only this form is rendered otherwise the issue we may face is that the form may be created for two diffrerent tab for the variable products -- to h & -- to b or -- to s
-
-					$type = $post->is_type();
-
+					// NOTE: we needed to add if condition here for the simple type so that only if the product is simple type then only this form is rendered otherwise the issue we may face is that the form may be created for two diffrerent tab for the variable products 
 					if($type != 'simple'){
 
 						return; 
 					}
+
 
 					$args['hook_callback_args'] = array();
 	            	
