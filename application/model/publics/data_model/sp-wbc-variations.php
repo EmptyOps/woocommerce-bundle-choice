@@ -2018,6 +2018,13 @@ class SP_WBC_Variations extends SP_Variations {
 
 			if('variable' !== $data['gallery_images_template_data']['product_type'] or !isset( $data['gallery_images_template_data']['product_variation']['variation_gallery_images'] )) {
 
+				// after now the get_variations_and_simple_type_fields are called from add filter hook, the below might be counter intuitive since the post_thumbnail_id might already been set only from the result of the get_variations_and_simple_type_fields fields. -- to h 
+				// 	but may be it is not possible in case of the varible type -- to h 
+				// 	but what about the simple type -- to h 
+						ACTIVE_TODO it is supposed to work for the varible type as well, and if required then necessary upgrade should be applied to post_thumbnail_id handling in the get_variations_and_simple_type_fields function so that post_thumbnail_id is added in final result of variation_gallery_images. and then the below section should be simply turned off by adding in false and mark this point as NOTE -- to h 
+						--	either way now maybe need revisit this whole if and above if of varible type and revise and refactor as applicable to make it simple and mature architecture -- to h 
+
+							add two above in ACTIVE_TODO start end 
 				if (!empty($data['gallery_images_template_data']['post_thumbnail_id'])) {
 
 					if (!is_array($data['gallery_images_template_data']['attachment_ids'])) {

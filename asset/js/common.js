@@ -2980,7 +2980,11 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
         data.types = [];
         jQuery( data.product_variations ).each(function (i, variation) {
 
+           // -- variation_gallery_images -> gallery_images data
+
           jQuery(variation.variation_gallery_images).each(function (index,image) {
+           
+            // -- data.types -> gallery_images types(images,video,360)
 
             data.types.push(image.extra_params_org.type);
           });

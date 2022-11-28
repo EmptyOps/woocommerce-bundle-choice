@@ -710,7 +710,7 @@ class Form_Builder implements Builder {
 
 										if ( isset($args['dm']['sp_eids'][$dm_key]['extra_2']) and strpos($das_counter_field_id, $args['dm']['sp_eids'][$dm_key]['extra_2']) !== false ) {
 
-											$dm_based_field = $dm_key; ? here jo jarur pade to apday key confome kerva ni avche mapp_field permane. 
+											$dm_based_field = $dm_key;   
 
 											break;
 										}
@@ -921,8 +921,7 @@ class Form_Builder implements Builder {
 
 					foreach($fv as $fv_key => $fv_value){
 
-						yet to be confirmed 
-						if( !in_array( $fields_to_keep, $fv_key )/*$fv_key != 'type' && $fv_key != 'value'*/ ){
+						if( !in_array( $fv_key, $fields_to_keep )/*$fv_key != 'type' && $fv_key != 'value'*/ ){
 
 							unset($form_definition[$key]["form"][$fk][$fv_key]);
 
