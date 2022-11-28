@@ -3273,6 +3273,7 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
 
         var _this = this;
         console.log(" gallery_images process_slider_template " );
+        console.log(images);
 
         var templating_lib = window.document.splugins.common._o( _this.#configs, 'templating_lib') ? _this.#configs.templating_lib : 'wp';
         
@@ -3281,6 +3282,10 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
         var slider_inner_html= '';
         // var slider_inner_html = images.map(function (image) {
         jQuery( images).each(function (index_inner,image) {
+
+            console.log('gallery_images process_slider_template 01');
+            console.log(index_inner);
+            console.log(image);
 
             image.index = index_inner;
 

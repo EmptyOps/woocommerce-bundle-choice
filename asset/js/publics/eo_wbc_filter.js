@@ -1334,6 +1334,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 			// 	jQuery(".woocommerce-pagination,.pagination,jet-filters-pagination").html('');	
 			// }
 			// --- end ---				
+		console.log('render_html set_pagination_html()');	
 		window.document.splugins.wbc.pagination.api.set_pagination_html(data);
 
 		/*}*/
@@ -1908,7 +1909,10 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
     	console.log('slider_change_event');
     	console.log(selector);
-
+		
+		// _this._params_t = new Array;
+		// _this.e_t = new Array;
+		
 		jQuery(selector).each(function(i,e){
 
 	    	console.log('slider_change_event loop');
@@ -2145,7 +2149,19 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 	    	console.log('slider_change_event loop 02');
 	    					
 			jQuery.fn.slider = ui_slider;
+			
+			// _this._params_t.push(_params);
+			// _this.e_t.push(e);
+
 		});
+		
+		// for (let i = 0; i < _this._params_t.length; i++) {
+
+		// 	console.log(_this._params_t[i]);	
+		// 	  jQuery(_this.e_t[i]).slider(_this._params_t[i]);
+		// }
+		
+
     
     };
 
@@ -2609,6 +2625,7 @@ window.document.splugins.wbc.pagination.core = function( configs ) {
 
 	var set_pagination_html_private = function(data){
 		
+		console.log('set_pagination_html_private()');
 		// -- aa function mathi code pagination sub module na module ma move thase ane baki no jo applicable hoy to aa module ma rese. Pan aa point execute karvi te pela niche point confirm karvano rese. -- to a & -- to h INVALID 
 		/*ACTIVE_TODO_OC_START
 			-- need to confirm ke aa call diamond api mathi j ave se ne ane te jo no male to ani calling sycuance hirenbhai sathe confirm karvi. -- to a
@@ -2618,9 +2635,17 @@ window.document.splugins.wbc.pagination.core = function( configs ) {
 		-- aa code diamond api ma move nathi kavano aya j implementation karvanu-- to a
 		ACTIVE_TODO_OC_END*/
 		if(jQuery('.woocommerce-pagination,.pagination'+compatability('pagination_link_selector',null,null),jQuery(data)).html()!==undefined) {
+
+			console.log('set_pagination_html_private() if');
+
 			if(jQuery('.woocommerce-pagination,.pagination'+compatability('pagination_link_selector',null,null)).length>0){
+
+				console.log('set_pagination_html_private() if if');
+
 				jQuery(".woocommerce-pagination,.pagination"+compatability('pagination_link_selector',null,null)).html(jQuery('.woocommerce-pagination,.pagination'+compatability('pagination_link_selector',null,null),jQuery(data)).html());
 			} else {
+
+				console.log('set_pagination_html_private() if else');
 
 				/*ACTIVE_TODO_OC_START
 				@d once all the pagination related layers brought to this function, we need to check if the below incomplete implementation is completely implemented anywhere in our repo -- to d 
@@ -2640,6 +2665,9 @@ window.document.splugins.wbc.pagination.core = function( configs ) {
 			}
 		}
 		else {
+
+			console.log('set_pagination_html_private() else');
+
 			jQuery(".woocommerce-pagination,.pagination"+compatability('pagination_link_selector',null,null)).html('');	
 		}
 	}
