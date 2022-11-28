@@ -1910,8 +1910,8 @@ window.document.splugins.wbc.filters.core = function( configs ) {
     	console.log('slider_change_event');
     	console.log(selector);
 		
-		// _this._params_t = new Array;
-		// _this.e_t = new Array;
+		_this.slider._params_t = new Array;
+		_this.slider.e_t = new Array;
 		
 		jQuery(selector).each(function(i,e){
 
@@ -2144,24 +2144,23 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 			console.log(e);
 			console.log(_params);
 
-			jQuery(e).slider(_params);
+			// jQuery(e).slider(_params);
 
 	    	console.log('slider_change_event loop 02');
 	    					
 			jQuery.fn.slider = ui_slider;
 			
-			// _this._params_t.push(_params);
-			// _this.e_t.push(e);
+			_this.slider._params_t.push(_params);
+			_this.slider.e_t.push(e);
 
 		});
-		
-		// for (let i = 0; i < _this._params_t.length; i++) {
 
-		// 	console.log(_this._params_t[i]);	
-		// 	  jQuery(_this.e_t[i]).slider(_this._params_t[i]);
-		// }
-		
+		for (let i = 0; i < _this.slider.e_t.length; i++) {
 
+			console.log(_this.slider._params_t[i]);	
+			  jQuery(_this.slider.e_t[i]).slider(_this.slider._params_t[i]);
+		}
+		
     
     };
 
