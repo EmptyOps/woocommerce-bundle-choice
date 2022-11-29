@@ -20,13 +20,24 @@ add_action( ( !is_admin() ? 'wp_enqueue_scripts' : 'admin_enqueue_scripts'),func
 		if( is_admin() ){
 
 			?>
+
+			window.document.splugins.common.is_admin = <?php echo "true";?>;
+
 			window.document.splugins.admin.is_legacy_admin_page = <?php echo ((apply_filters('sp_is_legacy_admin_page', true)) ? "true" : "false");?>; 
 			<?php 
+		} else {
+
+			?>
+			window.document.splugins.common.is_admin = <?php echo "false";?>;
+			<?php
+			
 		}
 
 		?>
 
     	window.document.splugins.common.current_theme_key = '<?php echo wbc()->common->current_theme_key(); ?>';
+    	console.log("current theme key");
+    	console.log(window.document.splugins.common.current_theme_key);
 
 		window.document.splugins.common.is_category_page = <?php echo ((is_product_category()) ? "true" : "false");?>; 
 

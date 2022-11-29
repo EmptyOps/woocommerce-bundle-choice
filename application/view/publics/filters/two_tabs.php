@@ -34,7 +34,7 @@ if( true or in_array( wbc()->common->get_category('category',null,array(wbc()->o
                 $class = 'active';
             }
             ?>
-            <!-- <a class="item center <?php //echo isset($_GET[$tab_data["first_tab_id"]])?'active':'' ?>" data-category="<?php //_e($tab_data["first_tab_category"]); ?>" style="margin-right: 0px !important;" data-tab="filter_setting_advance_first_tabs" data-tab-name="<?php //_e($tab_data["first_tab_id"]); ?>" data-tab-altname=""/*<?php //_e($second_tab_id); ?>*/>
+            <!-- <a class="item center <?php /*echo isset($_GET[$tab_data["first_tab_id"]])?'active':''*/ ?>" data-category="<?php /*_e($tab_data["first_tab_category"]);*/ ?>" style="margin-right: 0px !important;" data-tab="filter_setting_advance_first_tabs" data-tab-name="<?php /*_e($tab_data["first_tab_id"]);*/ ?>" data-tab-altname=""<?php /*_e($second_tab_id);*/ ?>>
                 // $prefix.'_fconfig_set' 
             <?php //_e($tab_data["first_tab_label"]); ?>
             </a>  -->
@@ -42,8 +42,8 @@ if( true or in_array( wbc()->common->get_category('category',null,array(wbc()->o
             <a class="item center <?php echo $class/*isset($_GET[$tab_data["first_tab_id"]])?'active':''*/ ?>" data-category="<?php _e($tab_data["first_tab_category"]); ?>" style="margin-right: 0px !important;" data-tab="filter_setting_advance_first_tabs_<?php echo $tab_data["first_tab_id"]; ?>" data-tab-name="<?php _e($tab_data["first_tab_id"]); ?>" data-tab-altname=""> <?php _e($tab_data["first_tab_label"]); ?> </a> 
         <?php } ?>  
 
-      	<!-- <a class="center item <?php /*echo isset($_GET[$second_tab_id])?'active':'' */?>" data-category="<?php/* _e($second_tab_category);*/ ?>" style="margin-left: 0px !important;" data-tab="filter_setting_advance_second_tabs" data-tab-name="<?php/* _e($second_tab_id); */?>" data-tab-altname="<?php /*_e($first_tab_id); */?>">
-        <?php _e($second_tab_label); ?> 
+      	<!-- <a class="center item <?php /*echo isset($_GET[$second_tab_id])?'active':'' */?>" data-category="<?php  /*_e($second_tab_category);*/  ?>" style="margin-left: 0px !important;" data-tab="filter_setting_advance_second_tabs" data-tab-name="<?php  /*_e($second_tab_id);*/  ?>" data-tab-altname="<?php  /*_e($first_tab_id);*/ ?>">
+        <?php  /*_e($second_tab_label);*/ ?> 
       	</a>-->
       	<script type="text/javascript">
             // --- aa code woo-bundle-choice/asset/js/publics/03_06__eo_wbc_filter.js filter_set_click() ma move karyo se @a ---

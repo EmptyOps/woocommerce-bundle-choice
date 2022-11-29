@@ -456,7 +456,7 @@ if(empty($_per_page)){
 			}
 
 			// window.eo.slider(jQuery('.eo-wbc-container.filters').find('.ui.slider'));				
-		
+
 			/* Activate initiation of sliders at secondary segments. */
 			if(jQuery(secondary_computer_only).css('display')!='none'){			
 
