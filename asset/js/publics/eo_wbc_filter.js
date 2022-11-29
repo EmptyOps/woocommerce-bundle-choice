@@ -3361,6 +3361,7 @@ jQuery(document).ready(function($){
 		ACTIVE_TODO_OC_END*/
 		if(!window.eo_wbc_object.btnfilter_now){			
 			jQuery("#eo_wbc_filter").on('change',"input:not(:checkbox)",function(){
+				console.log("btnfilter_now");
 				jQuery('[name="paged"]').val('1');
 				// jQuery.fn.eo_wbc_filter_change();	
 				window.document.splugins.filters.api.eo_wbc_filter_change_wrapper();									
