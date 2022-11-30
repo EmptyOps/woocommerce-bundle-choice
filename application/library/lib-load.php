@@ -64,6 +64,7 @@ if(!class_exists('WBC_Loader')) {
 		            wp_register_script('fomantic-semantic.min',constant('EOWBC_ASSET_URL').'js/fomantic/semantic.min.js',array('jquery'),false);    
 		            wp_enqueue_script( 'fomantic-semantic.min');        
 		        },100);	
+
 		        case 'ion.rangeSlider':
 
 					wbc()->load->asset('css', constant('EOWBC_ASSET_URL') . 'css/rangeslider/ion.rangeSlider.min.css',array(),"",true,true,null,null,false,true,null,true);
