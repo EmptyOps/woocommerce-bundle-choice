@@ -65,7 +65,7 @@ if(!class_exists('WBC_Loader')) {
 		            wp_enqueue_script( 'fomantic-semantic.min');        
 		        },100);	
 		        case 'ion.rangeSlider':
-		        	wbc_pr('built_in_asset ion.rangeSlider');
+
 					wbc()->load->asset('css', constant('EOWBC_ASSET_URL') . 'css/rangeslider/ion.rangeSlider.min.css',array(),"",true,true,null,null,false,true,null,true);
 					wbc()->load->asset('js', constant('EOWBC_ASSET_URL') . 'js/rangeslider/ion.rangeSlider.min.js', wbc()->common->current_theme_key() != "themes___purple_theme" ? array():array('jquery'),"",true,true,null,null,false,true,null,true);
 				default:				
