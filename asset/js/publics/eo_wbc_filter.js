@@ -2157,6 +2157,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 			
 			temp_patch_slider_change_event_child(slider);
 		}
+
     };
 
 	// ACTIVE_TODO temp. added on 30-11-2022. remove as soon as the standerd fix is ready. 
