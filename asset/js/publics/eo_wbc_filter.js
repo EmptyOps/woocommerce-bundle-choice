@@ -1910,10 +1910,10 @@ window.document.splugins.wbc.filters.core = function( configs ) {
     	console.log('slider_change_event');
     	console.log(selector);
     	
-    	_this.slider = {};
-		_this.slider._params_t = new Array;
-		_this.slider.e_t = new Array;
-
+    	let slider = {};
+		slider.params = [];
+		slider.element = [];
+		
 		jQuery(selector).each(function(i,e){
 
 	    	console.log('slider_change_event loop');
@@ -2144,28 +2144,34 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 	    	console.log('slider_change_event loop 01');
 			console.log(e);
 			console.log(_params);
-
-			// jQuery(e).slider(_params);
 			
 			jQuery.fn.slider = ui_slider;
 			
-			_this.slider._params_t.push(_params);
-			_this.slider.e_t.push(e);
+			slider.params.push(_params);
+			slider.element.push(e);
+
+		});
+	
+		// ACTIVE_TODO temp. added on 30-11-2022. remove as soon as the standerd fix is ready. 
+		if(window.document.splugins.common.current_theme_key == 'themes___alpha-store-pro-child' || window.document.splugins.common.current_theme_key == 'themes___maia-child' || window.document.splugins.common.current_theme_key == 'themes___moonte-child') {
+			
+			temp_patch_slider_change_event_child(slider);
+		}
+    };
+
+	// ACTIVE_TODO temp. added on 30-11-2022. remove as soon as the standerd fix is ready. 
+    var temp_patch_slider_change_event_child = function(slider) {
+		
+		jQuery.getScript("https://demo.woochoiceplugin.com/hify-store/wp-content/plugins/woo-bundle-choice/asset/js/fomantic/semantic.min.js?ver=5.0.10", function(data, status, jqxhr) {
+	
+	    	for (let i = 0; i < slider.element.length; i++) {
+
+				console.log(slider.params[i]);	
+				jQuery(slider.element[i]).slider(slider.params[i]);
+			}	
 
 		});
 
-		slider_change_event_child(_this.slider);
-
-    };
-
-    var slider_change_event_child = function(slider) {
-
-    	for (let i = 0; i < slider.e_t.length; i++) {
-
-			console.log(slider._params_t[i]);	
-			jQuery(slider.e_t[i]).slider(slider._params_t[i]);
-		}	
-		// jQuery(e).slider(_params);	
     };
     
     var checkbox_change_event = function(event, element){
