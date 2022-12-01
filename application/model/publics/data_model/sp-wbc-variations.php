@@ -1871,7 +1871,7 @@ class SP_WBC_Variations extends SP_Variations {
 
 		$data['gallery_images_template_data']['attachment_ids'] = apply_filters('sp_wbc_get_gallery_image_ids', null, $product, $data['gallery_images_template_data']['product_id'], $data['gallery_images_template_data']['post_thumbnail_id'], $args); //\eo\wbc\system\core\data_model\SP_Product::get_gallery_image_ids($product);
 
-		$data['gallery_images_template_data']['has_post_thumbnail'] = apply_filters('sp_wbc_has_post_thumbnail', null); //has_post_thumbnail();
+		$data['gallery_images_template_data']['has_post_thumbnail'] = apply_filters('sp_wbc_has_post_thumbnail', null, $data['gallery_images_template_data']['post_thumbnail_id']); //has_post_thumbnail();
 
 		// No main image but gallery
 		if ( ! $data['gallery_images_template_data']['has_post_thumbnail'] && count( $data['gallery_images_template_data']['attachment_ids'] ) > 0 ) {
@@ -2176,7 +2176,7 @@ class SP_WBC_Variations extends SP_Variations {
 
 		}, 10, 5);
         
-        add_filter( 'sp_wbc_has_post_thumbnail',  function($data){
+        add_filter( 'sp_wbc_has_post_thumbnail',  function($data, $post_thumbnail_id){
 
 			if ($data !== null) {
 
@@ -2184,7 +2184,7 @@ class SP_WBC_Variations extends SP_Variations {
 			}
 
         	return has_post_thumbnail();
-		}, 10, 1);
+		}, 10, 2);
 
 		add_filter('sp_wbc_get_variations',function($data, $product ,$args){
 
