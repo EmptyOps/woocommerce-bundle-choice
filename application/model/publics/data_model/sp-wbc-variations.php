@@ -726,6 +726,8 @@ class SP_WBC_Variations extends SP_Variations {
 
 		if ($is_empty){
 
+			// ACTIVE_TODO/TODO here if requaird than simply apply the is_class condition for wc_product class or even wc_variation class but nothing else. -- to h -- to a
+				// ACTIVE_TODO and we should creat two common function for checking object for both above classes -- to h -- to a   
 			if(is_object($instance)){
 
 				// $gallery_images = $product->get_gallery_image_ids();
