@@ -85,15 +85,42 @@ class Eowbc_Model {
 
 									$dm_based_field = $dm_key; 
 
+									if(!isset($args['cn'])) {
+
+										if(isset($args['data_raw'][$dm_key])) {
+
+											$dm_based_field = $dm_key;   
+										} else {
+
+											$dm_based_field = null;
+										}
+
+									} else {
+
+										if( isset( $args['data_raw'][ $args['cn'][$dm_key] ] ) ) {
+
+											$dm_based_field = $args['cn'][$dm_key];   
+										} else {
+
+											$dm_based_field = null;
+										}
+									}
+
 									break;
 								}
 							}
 
 
 							//$form_definition[$key]["form"][$fk]["value"] = ( isset($save_as_data['post_meta'][$fk]) ? $save_as_data['post_meta'][$fk] : ( isset($form_definition[$key]["form"][$fk]["value"]) ? $form_definition[$key]["form"][$fk]["value"] :'' ) );
-							if ( isset($args['data_raw'][$fk is this $fk key correct here or even this isset is needed? ]) and !empty($dm_based_field) ) {
+							if ( !empty( $dm_based_field ) ) {
 
-								$form_definition[$key]["form"][$fk]["value"] = $args['data_raw'][$dm_based_field];
+								if( isset( $args['data_raw'][$dm_based_field] ) ) {
+
+									$form_definition[$key]["form"][$fk]["value"] = $args['data_raw'][$dm_based_field];
+								} else {
+
+									$form_definition[$key]["form"][$fk]["value"] = '';
+								}
 
 							} elseif( isset($save_as_data['post_meta'][$fk]) ){
 
