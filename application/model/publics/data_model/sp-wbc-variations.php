@@ -637,7 +637,7 @@ class SP_WBC_Variations extends SP_Variations {
 		
 
 		$product_id         = is_object($variation)? absint( $variation->get_parent_id() ) : null;
-		$variation_id       = is_object($variation)? absint( $variation->get_id() ) : $variation['variation_id'];
+		$variation_id       = is_object($variation)? absint( $variation->get_id() ) : null;
 		$variation_image_id = is_object($variation)? absint( $variation->get_image_id() ) : null;
 
 		return $this->get_variations_and_simple_type_fields($variation_get_max_purchase_quantity,  $instance,  $variation,$product_id, $variation_id, $variation_image_id, $args);
