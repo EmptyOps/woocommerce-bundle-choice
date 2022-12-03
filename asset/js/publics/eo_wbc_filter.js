@@ -904,6 +904,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 	var success = function(data, render_container, form_selector) {
 
 		console.log("filter success");
+		console.log(render_container);
 
 		//console.log(data);
 		//document.write(data);
@@ -1102,6 +1103,32 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 						object.render_container = jQuery(".jet-woo-products");
 					}
 
+
+					// NOTE: theme specific patches any other generic patches should go above this if section 
+					if(object.render_container.length<=0) {
+
+			        	console.log("compatability inner else if inner if inner if themes patch");
+						
+						var selector_string_local = null; 
+
+						if(window.document.splugins.common.current_theme_key == 'themes___dello-child') {
+
+				        	console.log("compatability inner else if inner if inner if themes patch dello");
+
+							selector_string_local = '.radiantthemes-shop';
+						}
+
+						if(object.is_return_string_selector) {
+
+							object.render_container_selector = selector_string_local;
+							object.render_container = jQuery(selector_string_local);
+						} else {
+							
+							object.render_container = jQuery(selector_string_local);
+						}
+
+					}
+
 				}
 
 			}
@@ -1116,6 +1143,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
     var eo_wbc_filter_render_html = function(data, render_container, form_selector){
 
 		console.log("filter eo_wbc_filter_render_html");
+		console.log(render_container);
 		/*jQuery("#loading").removeClass('loading');
 		return true;*/
 
@@ -1180,9 +1208,10 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		ACTIVE_TODO_OC_END*/
 
 		// let container_html = jQuery('.products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products',jQuery(data)).html();	
-		console.log(data);
 		console.log("filter eo_wbc_filter_render_html container_html");
+		console.log(render_container_selector);
 		let container_html = jQuery(render_container_selector/*render_container*/, jQuery(data)).html();	
+		console.log("eo_wbc_filter_render_html container_html");
 		console.log(container_html);
 
 		/*if(container_html===undefined || container_html==='') {
@@ -1246,7 +1275,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 				--	and so now the render_container will recieve one parameter that is render_container, it will defaults to null so from where it is applicable it is passed otherwise it will be left blank -- to d 
 			ACTIVE_TODO_OC_END*/
 			// jQuery(render_container/*".products,.product-listing,.row-inner>.col-lg-9:eq(0),.jet-woo-products"*/).html('<p class="woocommerce-info" style="width: 100%;">No products were found matching your selection.</p>');	
-			no_products_found_private(form_selector);
+			no_products_found_private(form_selector,render_container);
 		}	
 
 		/*ACTIVE_TODO_OC_START
@@ -1305,6 +1334,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 			// 	jQuery(".woocommerce-pagination,.pagination,jet-filters-pagination").html('');	
 			// }
 			// --- end ---				
+		console.log('render_html set_pagination_html()');	
 		window.document.splugins.wbc.pagination.api.set_pagination_html(data);
 
 		/*}*/
@@ -1792,7 +1822,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
     }; 
 
-    var no_products_found_private = function(form_selector) {
+    var no_products_found_private = function(form_selector,render_container) {
 
     	// ACTIVE_TODO_OC_START
     	// create private counter part of the no_products_found function with name no_products_found_private, so that the inner private layers can call that internally -- to d 
@@ -1874,12 +1904,16 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		console.log(html);
     	jQuery(render_container).html(html);
     };
-
+    
     var slider_change_event = function(selector, element){
 
     	console.log('slider_change_event');
     	console.log(selector);
-
+    	
+    	let slider = {};
+		slider.params = [];
+		slider.element = [];
+		
 		jQuery(selector).each(function(i,e){
 
 	    	console.log('slider_change_event loop');
@@ -2110,14 +2144,37 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 	    	console.log('slider_change_event loop 01');
 			console.log(e);
 			console.log(_params);
-
-			jQuery(e).slider(_params);
-	    				
+			
 			jQuery.fn.slider = ui_slider;
+			
+			slider.params.push(_params);
+			slider.element.push(e);
+
 		});
-    
+	
+		// ACTIVE_TODO temp. added on 30-11-2022. remove as soon as the standerd fix is ready. 
+		if(window.document.splugins.common.current_theme_key == 'themes___alpha-store-pro-child' || window.document.splugins.common.current_theme_key == 'themes___maia-child' || window.document.splugins.common.current_theme_key == 'themes___moonte-child') {
+			
+			temp_patch_slider_change_event_child(slider);
+		}
+
     };
 
+	// ACTIVE_TODO temp. added on 30-11-2022. remove as soon as the standerd fix is ready. 
+    var temp_patch_slider_change_event_child = function(slider) {
+		
+		jQuery.getScript("https://demo.woochoiceplugin.com/hify-store/wp-content/plugins/woo-bundle-choice/asset/js/fomantic/semantic.min.js?ver=5.0.10", function(data, status, jqxhr) {
+	
+	    	for (let i = 0; i < slider.element.length; i++) {
+
+				console.log(slider.params[i]);	
+				jQuery(slider.element[i]).slider(slider.params[i]);
+			}	
+
+		});
+
+    };
+    
     var checkbox_change_event = function(event, element){
 
 		/*__slug=jQuery(this).attr('data-filter-slug');
@@ -2578,6 +2635,7 @@ window.document.splugins.wbc.pagination.core = function( configs ) {
 
 	var set_pagination_html_private = function(data){
 		
+		console.log('set_pagination_html_private()');
 		// -- aa function mathi code pagination sub module na module ma move thase ane baki no jo applicable hoy to aa module ma rese. Pan aa point execute karvi te pela niche point confirm karvano rese. -- to a & -- to h INVALID 
 		/*ACTIVE_TODO_OC_START
 			-- need to confirm ke aa call diamond api mathi j ave se ne ane te jo no male to ani calling sycuance hirenbhai sathe confirm karvi. -- to a
@@ -2587,9 +2645,17 @@ window.document.splugins.wbc.pagination.core = function( configs ) {
 		-- aa code diamond api ma move nathi kavano aya j implementation karvanu-- to a
 		ACTIVE_TODO_OC_END*/
 		if(jQuery('.woocommerce-pagination,.pagination'+compatability('pagination_link_selector',null,null),jQuery(data)).html()!==undefined) {
+
+			console.log('set_pagination_html_private() if');
+
 			if(jQuery('.woocommerce-pagination,.pagination'+compatability('pagination_link_selector',null,null)).length>0){
+
+				console.log('set_pagination_html_private() if if');
+
 				jQuery(".woocommerce-pagination,.pagination"+compatability('pagination_link_selector',null,null)).html(jQuery('.woocommerce-pagination,.pagination'+compatability('pagination_link_selector',null,null),jQuery(data)).html());
 			} else {
+
+				console.log('set_pagination_html_private() if else');
 
 				/*ACTIVE_TODO_OC_START
 				@d once all the pagination related layers brought to this function, we need to check if the below incomplete implementation is completely implemented anywhere in our repo -- to d 
@@ -2609,6 +2675,9 @@ window.document.splugins.wbc.pagination.core = function( configs ) {
 			}
 		}
 		else {
+
+			console.log('set_pagination_html_private() else');
+
 			jQuery(".woocommerce-pagination,.pagination"+compatability('pagination_link_selector',null,null)).html('');	
 		}
 	}
@@ -3299,6 +3368,7 @@ jQuery(document).ready(function($){
 		ACTIVE_TODO_OC_END*/
 		if(!window.eo_wbc_object.btnfilter_now){			
 			jQuery("#eo_wbc_filter").on('change',"input:not(:checkbox)",function(){
+				console.log("btnfilter_now");
 				jQuery('[name="paged"]').val('1');
 				// jQuery.fn.eo_wbc_filter_change();	
 				window.document.splugins.filters.api.eo_wbc_filter_change_wrapper();									

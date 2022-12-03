@@ -266,6 +266,30 @@ add_action( 'wp_enqueue_scripts' ,function(){
 			/*.img-fluid.big-img {
 			    display: none;
 			}*/
+
+
+
+			/*------Responsive------*/
+			@media(max-width:480px){
+				.Product_Left_Wrapper_Plugin_Images .imagezoomsl_zoom_container {
+				    width: 100%;
+				    float: none !important;
+				    margin-left: 0;
+				}
+				body img.img-fluid.big-img{
+					 width: 395px;
+			    	height: 395px;
+				}
+				body .spui_video_container video{
+					min-height: 395px;
+    				width: 395px;
+				}
+				
+			}
+			
+
+
+
 		</style>
 		<script type="text/javascript">
 			// ACTIVE_TODO zoom asset.php ma last ma ek script haji rai gai, te I thikn similar che but please confirm -- to a 
