@@ -528,6 +528,55 @@ class WBC_Common {
 		return home_url(add_query_arg(array($_GET), $wp->request));
 	}
 
+	// NOTE: basically it is wp_is_mobile. but conditionally it overrides the default behaviour by adding condition  based on page or section and so on keys.  
+		// NOTE: however it is critical note that in normal scenarios override is not supposed to be used at all. but it is only in some exceptional scenarios and that is even only for the temporary period.  
+	public function is_mobile_by_page_sections($key = null) {
+
+		if (wp_is_mobile()) {
+
+			$theme_key = wbc()->common->current_theme_key();
+
+			if ($theme_key == 'themes___purple_theme') {
+
+				if ($key == 'loop') {
+
+					return false;
+
+				} elseif ($key == 'cat_shop_page') {
+
+					return false;
+
+				} elseif ($key == 'header') {
+
+					return false;
+
+				} elseif ($key == 'footer') {
+
+					return false;
+
+				} elseif ($key == 'home') {
+
+					return false;
+
+				} elseif ($key == 'product_page') {
+
+					return false;
+
+				} else {
+
+					return true;
+				}
+
+			} else {
+
+				return true;
+			}
+
+		} else {
+
+			return false;
+		}   
+	}
 }
 
 function wbc_pr($ar, $force_debug = false, $die = false) {
@@ -654,4 +703,10 @@ function wbc_is_mobile() {
 
 	return wbc()->common->is_mobile();
 	
+}
+
+function wbc_is_mobile_by_page_sections($key = null) {
+
+	return wbc()->common->is_mobile_by_page_sections($key);
+
 }
