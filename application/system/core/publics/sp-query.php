@@ -418,9 +418,6 @@ class SP_Query {
         // make the data layer dynamic here as required, as of now the data layer is static and reads only from the _REQUEST 
         //	TODO sanitize the input data here before passing to query, it is noted that so far not sanitized because sanitize function was affecting price values somehow. But maybe it couldn't be the case
         if(!empty($_REQUEST['min_price']) and !empty($_REQUEST['max_price']) and empty($meta_quer_args)) {
-    	---- table viwe ma alge che
-    	if(!empty($__post['min_price']) && !empty($__post['max_price'])) {
-    	----
             $meta_quer_args[] = array(
                                     'key'     => '_price',
                                     'value'   => array(
@@ -441,10 +438,6 @@ class SP_Query {
                             );*/
 
             $meta_quer_args['relation'] = 'AND';
-            ---- table viwe ma alge che
-            unset($_POST['min_price']);     //remove _POST `min_price` param
-            unset($_POST['max_price']);     //remove _POST `max_price` param
-            -----
         }
         
         //	TODO shouldn't it be moved to the numeric extension? 
@@ -480,9 +473,6 @@ class SP_Query {
                     if(!empty($_DATA['_meta_field_'.$meta_key])) {
 
                         if($meta_filter_data['value_type'] === 'boolean') {
-                        	---- table viwe ma alge che 
-                        	$args['meta_query'][] = array(
-                        	----
                             $meta_quer_args[] = array(
                                    'relation' => 'OR',
                                     array(
@@ -496,18 +486,11 @@ class SP_Query {
                                     ),
                             );
                         } elseif ($meta_filter_data['value_type'] === 'days') {
-                        	---- table viwe ma alge che 
-                        	$args['meta_query'][] = array( 
-                        	----
                             $meta_quer_args[] = array(                                       
                                 'key' => $meta_key,
                                 'value' => $this->meta_query_data( $input_method_small, '_meta_field_'.$meta_key, $_DATA ),
                                 'compare' => '<=',
                                 'type' => 'DATE'
-                                ---- table viwe ma alge che 
-	                        	'value' => $__post['_meta_field_'.$meta_key],
-                                'type' => 'NUMERIC'
-	                        	----
                             );
                         }
 

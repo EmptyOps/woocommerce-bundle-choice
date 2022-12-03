@@ -81,8 +81,8 @@ add_action( ( !is_admin() ? 'wp_enqueue_scripts' : 'admin_enqueue_scripts'),func
 		$gallery_images_configs['base_container_loop_selector']    = '.variations_form'; //'.spui-sp-variations-loop-gallery-images';
 
 		// for simple type
-		$gallery_images_configs['base_container_selector_simple']    = need to update here the base_container_selectore;
-		$gallery_images_configs['base_container_loop_selector_simple']    = need to update here the base_container_selectore;
+		$gallery_images_configs['base_container_selector_simple']    = null /*ACTIVE_TODO_OC_START need to update here the base_container_selectore ACTIVE_TODO_OC_END*/;
+		$gallery_images_configs['base_container_loop_selector_simple']    = null /*ACTIVE_TODO_OC_START need to update here the base_container_selectore ACTIVE_TODO_OC_END*/;
 
 		$gallery_images_configs['template'] 				  = array('slider'=>array('id'=>'sp_slzm_slider_image_loop'), 'zoom'=>array('id'=>'sp_slzm_zoom_image_loop'));	
 		$gallery_images_configs['classes'] 				      = array('slider'=>array('container'=>'sp-variations-gallery-images-slider','loop_container'=>'sp-variations-gallery-images-slider-loop'), 'zoom'=>array('container'=>'sp-variations-gallery-images-zoom'));	

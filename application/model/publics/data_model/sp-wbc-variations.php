@@ -53,8 +53,7 @@ class SP_WBC_Variations extends SP_Variations {
 			}, 90, 3);
 			
 			add_filter('sp_wbc_woo_available_variation',function($variation_get_max_purchase_quantity,  $instance,  $variation) use($args){
-		
-					here we do not need any not empty html lick condishone becos the apply_filters hosted becos the perant hook hosted the apply_filters as alrady menaged the prayorati basd check on and than this particuley hook is apply from thar so it well ather from dapi leyar or the wbc so we do not need that. but lat stil keep it as note teel we not do the finel taly befor run an than delete this oppen comment.
+
 				return self::instance()->get_available_variation_hook_callback($variation_get_max_purchase_quantity,  $instance,  $variation, $args);
 				
 			}, 90, 3);
@@ -88,9 +87,11 @@ class SP_WBC_Variations extends SP_Variations {
 		// comment by @s
 		}elseif( ($for_section == "swatches" /*|| $for_section == "gallery_images"*/)/* && $args['page'] != 'feed'*/ ) {
 			self::swatches_hooks();
- 
+ 	
+ 			/*ACTIVE_TODO_OC_START
 			ACTIVE_TODO it is noted that this call is redundantly called from the swatches data layers means it is called every time perticular attributes swatches rendered so if on a loop box or item page there are three swatches than called 3 time which is relly not requaird and it may have huge impact on the perfomance and aficeancy so we must skip that redundant call somehow. this is applicable to both below statments which preparing attributes and variations -- to h
 				ACTIVE_TODO and there are statments like this "$attributes           = wc_get_attribute_taxonomies();" in function wc_product_has_attribute_type() in this class which is similar to below $product->get_variation_attributes(); funtion call. so this are also redundant calls and we must refeactor it for perfomace -- to h
+			ACTIVE_TODO_OC_END*/
 			// $sp_variations_data['attributes'] = $product->get_variation_attributes(); aa nu su karavanu
 			$sp_variations_data['attributes'] = apply_filters('sp_wbc_get_variation_attrs',null,$product);
 			// ACTIVE_TODO and eitherway we are supose to as per that perfomance optimasation notes or series that we had planed, we shoud avoid even this one single call after removeing redunduncy since it is most likely not ussed in that asset. -- to h 
@@ -101,7 +102,7 @@ class SP_WBC_Variations extends SP_Variations {
 
 			
 
-		}elseif( ($for_section == "gallery_images") {
+		}elseif($for_section == "gallery_images") {
 
 			self::gallery_images_hooks();
 
@@ -1855,7 +1856,9 @@ class SP_WBC_Variations extends SP_Variations {
 
 		$data['gallery_images_template_data']['default_attributes'] = self::selected_variation_attributes($data['gallery_images_template_data']['default_attributes']);
 
+		/*ACTIVE_TODO_OC_START
 		ACTIVE_TODO we ma like to add apply_filters hook here like above hook sp_wbc_product_get_id if we have to support defolt varashon on page lode. an at that time ma need to creat apply_filters hook for above default attribute also. -- to h  
+		ACTIVE_TODO_OC_END*/
 		$data['gallery_images_template_data']['default_variation_id'] = null;
 		if (!empty($data['gallery_images_template_data']['default_attributes'])) {
 		
@@ -2023,10 +2026,11 @@ class SP_WBC_Variations extends SP_Variations {
 				// after now the get_variations_and_simple_type_fields are called from add filter hook, the below might be counter intuitive since the post_thumbnail_id might already been set only from the result of the get_variations_and_simple_type_fields fields. -- to h 
 				// 	but may be it is not possible in case of the varible type -- to h 
 				// 	but what about the simple type -- to h 
+						/*ACTIVE_TODO_OC_START
 						ACTIVE_TODO it is supposed to work for the varible type as well, and if required then necessary upgrade should be applied to post_thumbnail_id handling in the get_variations_and_simple_type_fields function so that post_thumbnail_id is added in final result of variation_gallery_images. and then the below section should be simply turned off by adding in false and mark this point as NOTE -- to h 
 						--	either way now maybe need revisit this whole if and above if of varible type and revise and refactor as applicable to make it simple and mature architecture -- to h 
 
-							add two above in ACTIVE_TODO start end 
+						ACTIVE_TODO_OC_END*/
 				if (!empty($data['gallery_images_template_data']['post_thumbnail_id'])) {
 
 					if (!is_array($data['gallery_images_template_data']['attachment_ids'])) {
@@ -2171,7 +2175,6 @@ class SP_WBC_Variations extends SP_Variations {
 			}
 
         	// return \eo\wbc\system\core\data_model\SP_Product::get_gallery_image_ids($product);
-			-- need to confirm here that $product_id will be ok for the simple type product as long as the meta field of the legacy form is concerned and genrated using $product_id or variation_id -- to h & -- to a & -- to s 
 			return self::instance()->get_variations_and_simple_type_fields(array(),  $product, $product, $product_id, $product_id, $post_thumbnail_id, $args)['variation_gallery_images'];
 
 		}, 10, 5);
