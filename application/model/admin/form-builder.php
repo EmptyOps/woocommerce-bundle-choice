@@ -737,7 +737,7 @@ class Form_Builder implements Builder {
 
 									if (!empty($dm_based_field)) {
 									
-										$added_counter = isset($args['data_raw'][$dm_based_field]) ? ( is_array($args['data_raw'][$dm_based_field])) ? sizeof($args['data_raw'][$dm_based_field]) : 1 ) : $added_counter;
+										$added_counter = ( isset($args['data_raw'][$dm_based_field]) ? ( is_array($args['data_raw'][$dm_based_field]) ? sizeof($args['data_raw'][$dm_based_field]) : 1 ) : $added_counter );
 									}
 								}
 
