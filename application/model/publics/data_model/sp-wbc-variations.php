@@ -59,6 +59,9 @@ class SP_WBC_Variations extends SP_Variations {
 			}, 90, 3);
 			
 		}elseif( $for_section == "swatches_init"/* && $args['page'] != 'feed'*/ ) {
+
+			self::swatches_hooks();
+
 			add_filter( 'woocommerce_ajax_variation_threshold',  function($int){
 
 				// ACTIVE_TODO_OC_START
@@ -86,7 +89,6 @@ class SP_WBC_Variations extends SP_Variations {
 
 		// comment by @s
 		}elseif( ($for_section == "swatches" /*|| $for_section == "gallery_images"*/)/* && $args['page'] != 'feed'*/ ) {
-			self::swatches_hooks();
  	
  			/*ACTIVE_TODO_OC_START
 			ACTIVE_TODO it is noted that this call is redundantly called from the swatches data layers means it is called every time perticular attributes swatches rendered so if on a loop box or item page there are three swatches than called 3 time which is relly not requaird and it may have huge impact on the perfomance and aficeancy so we must skip that redundant call somehow. this is applicable to both below statments which preparing attributes and variations -- to h
@@ -1870,7 +1872,7 @@ class SP_WBC_Variations extends SP_Variations {
 		// ACTIVE_TODO we may like to use the columns var later to till gallery_images slider and zoom module layers including till applicable js layers -- to h or -- to d 
 		$data['gallery_images_template_data']['columns'] = -1;	//	thumbnail columns 
 
-		$data['gallery_images_template_data']['post_thumbnail_id'] =  apply_filters('sp_wbc_get_image_id', null, $product); // \eo\wbc\system\core\data_model\SP_Product::get_image_id($product);
+		$data['gallery_images_template_data']['post_thumbnail_id'] =  apply_filters('sp_wbc_get_image_id', null, $product,null); // \eo\wbc\system\core\data_model\SP_Product::get_image_id($product);
 
 		$data['gallery_images_template_data']['attachment_ids'] = apply_filters('sp_wbc_get_gallery_image_ids', null, $product, $data['gallery_images_template_data']['product_id'], $data['gallery_images_template_data']['post_thumbnail_id'], $args); //\eo\wbc\system\core\data_model\SP_Product::get_gallery_image_ids($product);
 
@@ -2061,7 +2063,7 @@ class SP_WBC_Variations extends SP_Variations {
 
 	public static function prepare_gallery_template_data_item($data, $index, $image/*$id*/, $product, $args = array()) {
 
-        $data['gallery_images_template_data']['attachment_ids_loop_post_thumbnail_id'][$index] = apply_filters('sp_wbc_get_image_id', null, $product); //$product->get_image_id();
+        $data['gallery_images_template_data']['attachment_ids_loop_post_thumbnail_id'][$index] = apply_filters('sp_wbc_get_image_id', null, $product, null); //$product->get_image_id();
 
         $data['gallery_images_template_data']['attachment_ids_loop_remove_featured_image'][$index] = false;
 
