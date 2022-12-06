@@ -2145,16 +2145,28 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 			console.log(e);
 			console.log(_params);
 			
-			jQuery.fn.slider = ui_slider;
+			// ACTIVE_TODO temp. added on 30-11-2022. remove as soon as the standerd fix is ready. 
+			if(window.document.splugins.common.current_theme_key != 'themes___alpha-store-pro-child' && window.document.splugins.common.current_theme_key != 'themes___maia-child' && window.document.splugins.common.current_theme_key != 'themes___moonte-child' && window.document.splugins.common.current_theme_key != 'themes___frank-jewelry-store'){		
+
+				jQuery(e).slider(_params);
+			}else{
+				
+				console.log('else temp_patch_slider_change_event_child call');
+				
+				slider.params.push(_params);
+				slider.element.push(e);
+			}
 			
-			slider.params.push(_params);
-			slider.element.push(e);
+			
+			jQuery.fn.slider = ui_slider;
 
 		});
 	
 		// ACTIVE_TODO temp. added on 30-11-2022. remove as soon as the standerd fix is ready. 
-		if(window.document.splugins.common.current_theme_key == 'themes___alpha-store-pro-child' || window.document.splugins.common.current_theme_key == 'themes___maia-child' || window.document.splugins.common.current_theme_key == 'themes___moonte-child') {
+		if(window.document.splugins.common.current_theme_key == 'themes___alpha-store-pro-child' || window.document.splugins.common.current_theme_key == 'themes___maia-child' || window.document.splugins.common.current_theme_key == 'themes___moonte-child' || window.document.splugins.common.current_theme_key == 'themes___frank-jewelry-store') {
 			
+			console.log('if temp_patch_slider_change_event_child call');
+
 			temp_patch_slider_change_event_child(slider);
 		}
 
@@ -2163,6 +2175,8 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 	// ACTIVE_TODO temp. added on 30-11-2022. remove as soon as the standerd fix is ready. 
     var temp_patch_slider_change_event_child = function(slider) {
 		
+    	console.log('temp_patch_slider_change_event_child()');
+
 		jQuery.getScript("https://demo.woochoiceplugin.com/hify-store/wp-content/plugins/woo-bundle-choice/asset/js/fomantic/semantic.min.js?ver=5.0.10", function(data, status, jqxhr) {
 	
 	    	for (let i = 0; i < slider.element.length; i++) {
