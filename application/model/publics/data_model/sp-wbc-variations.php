@@ -647,7 +647,7 @@ class SP_WBC_Variations extends SP_Variations {
 
 	}
 	
-	private function get_variations_and_simple_type_fields( $variation_get_max_purchase_quantity,  $instance,  $variation,$product_id, $id, $variation_image_id, $args = array()){
+	public function get_variations_and_simple_type_fields( $variation_get_max_purchase_quantity,  $instance,  $variation,$product_id, $id, $variation_image_id, $args = array()){
 		
 
 		$gallery_images_types 					  = self::sp_variations_gallery_images_supported_types(array('is_base_type_only'=>true));	
