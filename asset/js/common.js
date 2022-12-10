@@ -4648,13 +4648,13 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
 
                     var template_var = _this.template_public( template_id, templating_lib );
 
-                    // console.log('zoom_area_hover_in template_var');
-                    // console.log(template_var);
+                    console.log('zoom_area_hover_in templating_lib');
+                    console.log(templating_lib);
 
                     zoom_inner_html += _this.apply_template_data_public(template_var, image, templating_lib);
 
-                    // console.log('zoom_inner_html');
-                    // console.log(zoom_inner_html);
+                    console.log('zoom_inner_html');
+                    console.log(zoom_inner_html);
 
                     return false;
                 }
@@ -4682,12 +4682,12 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
             //     -- and than we can simply get type from element data-type which is mentanable due to well maintained heirachy insted of below index based image data read which is bound to change.
 
             console.log('zoom_area_hover_in() index');       
-            // console.log(index);
+            console.log(index);
 
             console.log('super.get_base_container()');
             console.log(super.get_base_container());
             console.log('images[index].extra_params_org.type');
-            console.log(images[index].extra_params_org);
+            console.log(images[index]);
             var zoom_area_hover_in_callback = null;
 
             // window.document.splugins.events.api.notifyAllObservers( 'gallery_images_feed_page', 'zoom_area_hover_in', {type:images[index].extra_params_org.type,image:images[index]}, zoom_area_hover_in_callback, super.get_base_container() );            
