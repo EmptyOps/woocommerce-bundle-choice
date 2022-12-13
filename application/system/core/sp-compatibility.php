@@ -111,6 +111,66 @@ class SP_Compatibility {
 
 			}
 
+		} elseif($page_section == 'product_image_get_template') {
+
+	 		$current_theme_key = wbc()->common->current_theme_key();
+
+			// ACTIVE_TODO/TODO here the two different teams may name the same name to a child theme means the alpha-store-pro-child name could be used by someone else and at that time our confirmation can not be considered valid so we may like to rectify theme detection and make it still deep. 
+	 		if($current_theme_key == "themes___corano-child") {
+
+				return 'single-product/product-image-magnifier.php';
+
+			} else{
+		    
+				return $args['default_val'];
+
+			}
+
+		} elseif($page_section == 'product_thumbnails_get_template') {
+
+	 		$current_theme_key = wbc()->common->current_theme_key();
+
+			// ACTIVE_TODO/TODO here the two different teams may name the same name to a child theme means the alpha-store-pro-child name could be used by someone else and at that time our confirmation can not be considered valid so we may like to rectify theme detection and make it still deep. 
+	 		if($current_theme_key == "themes___corano-child") {
+
+				return 'single-product/product-thumbnails-magnifier.php';
+
+			} else{
+		    
+				return $args['default_val'];
+
+			}
+
+		} elseif($page_section == 'product_image_get_template_part') {
+
+	 		$current_theme_key = wbc()->common->current_theme_key();
+
+			// ACTIVE_TODO/TODO here the two different teams may name the same name to a child theme means the alpha-store-pro-child name could be used by someone else and at that time our confirmation can not be considered valid so we may like to rectify theme detection and make it still deep. 
+	 		if($current_theme_key == "themes___corano-child") {
+
+				return 'single-product/product-image-magnifier';
+
+			} else{
+		    
+				return $args['default_val'];
+
+			}
+
+		} elseif($page_section == 'product_thumbnails_get_template_part') {
+
+	 		$current_theme_key = wbc()->common->current_theme_key();
+
+			// ACTIVE_TODO/TODO here the two different teams may name the same name to a child theme means the alpha-store-pro-child name could be used by someone else and at that time our confirmation can not be considered valid so we may like to rectify theme detection and make it still deep. 
+	 		if($current_theme_key == "themes___corano-child") {
+
+				return 'single-product/product-thumbnails-magnifier';
+
+			} else{
+		    
+				return $args['default_val'];
+
+			}
+
 		}
 
 		return false;
