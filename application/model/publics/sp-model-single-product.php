@@ -960,11 +960,11 @@ class SP_Model_Single_Product extends SP_Single_Product {
 				return $old_template;
 			}
 
-			if ( $template_name == 'single-product/product-image.php' ) {
+			if ( $template_name == \eo\wbc\model\SP_WBC_Compatibility::instance()->woo_product_images_template_compatability('product_image_get_template', array('default_val'=>'single-product/product-image.php'))/*'single-product/product-image.php'*/ ) {
 				$template = constant('EOWBC_DIRECTORY').'templates/single-product/product-images.php';
 			}
 
-			if ( $template_name == 'single-product/product-thumbnails.php' ) {
+			if ( $template_name == \eo\wbc\model\SP_WBC_Compatibility::instance()->woo_product_images_template_compatability('product_thumbnails_get_template', array('default_val'=>'single-product/product-thumbnails.php'))/*'single-product/product-thumbnails.php'*/ ) {
 				$template = constant('EOWBC_DIRECTORY').'templates/single-product/product-thumbnails.php';
 			}
 
@@ -980,12 +980,12 @@ class SP_Model_Single_Product extends SP_Single_Product {
 				return $old_template;
 			}
 
-			if ( $slug == 'single-product/product-image' ) {
+			if ( $slug == \eo\wbc\model\SP_WBC_Compatibility::instance()->woo_product_images_template_compatability('product_image_get_template_part', array('default_val'=>'single-product/product-image'))/*'single-product/product-image'*/ ) {
 				$template = constant('EOWBC_DIRECTORY').'templates/single-product/product-images.php';
 
 			}
 
-			if ( $slug == 'single-product/product-thumbnails' ) {
+			if ( $slug == \eo\wbc\model\SP_WBC_Compatibility::instance()->woo_product_images_template_compatability('product_thumbnails_get_template_part', array('default_val'=>'single-product/product-thumbnails'))/*'single-product/product-thumbnails'*/ ) {
 				$template = constant('EOWBC_DIRECTORY').'templates/single-product/product-thumbnails.php';
 
 			}

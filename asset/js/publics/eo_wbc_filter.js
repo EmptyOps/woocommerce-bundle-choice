@@ -1077,6 +1077,8 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 			-- aa if conditions tableview na badha selectore and calling sysuance joy ne confirm karvani se -- to a
 			ACTIVE_TODO_OC_END*/
 
+        	console.log(object.render_container);
+        	console.log(object.render_container.length);
 			if(object.render_container.length<=0) {
 		
 	        	console.log("compatability inner else if inner if");
@@ -1167,6 +1169,9 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		console.log("filter render_container_selector");
 		console.log(_render_container);
 		render_container_selector = result_container(_render_container, true);
+
+		console.log("render_container_selector");
+		console.log(render_container_selector);
 
 		render_container = result_container(render_container);
 
@@ -1794,23 +1799,24 @@ window.document.splugins.wbc.filters.core = function( configs ) {
     	if( render_container==='' || window.document.splugins.common.is_empty(render_container) ) {
 
 			console.log("filter result_container inner if");
-						
-			if(is_return_string_selector) {
-
-				render_container_selector = ".products:eq(0),.product-listing:eq(0),.row-inner>.col-lg-9:eq(0)";
-				render_container = jQuery(".products:eq(0),.product-listing:eq(0),.row-inner>.col-lg-9:eq(0)");
-			} else {
-
-				render_container = jQuery(".products:eq(0),.product-listing:eq(0),.row-inner>.col-lg-9:eq(0)");
-			}
-
+			render_container = ".products:eq(0),.product-listing:eq(0),.row-inner>.col-lg-9:eq(0)";
 			// -- move to compatability() @a --
 			// if(render_container.length<=0) {
 			// 	render_container = jQuery(".elementor-products-grid");
 			// }
 		}
 
+		if(is_return_string_selector) {
+
+			render_container_selector = render_container;
+		}
+
+		render_container = jQuery(render_container);
+
 		var result_obj = compatability('render_container', {render_container:render_container, render_container_selector:render_container_selector, is_return_string_selector:is_return_string_selector}, 1);
+
+		console.log("result_obj.render_container_selector");
+		console.log(result_obj);
 
 		if(is_return_string_selector) {
 		
@@ -2145,16 +2151,30 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 			console.log(e);
 			console.log(_params);
 			
-			jQuery.fn.slider = ui_slider;
+			// ACTIVE_TODO temp. added on 30-11-2022. remove as soon as the standerd fix is ready. 
+			if(window.document.splugins.common.current_theme_key != 'themes___alpha-store-pro-child' && window.document.splugins.common.current_theme_key != 'themes___maia-child' && window.document.splugins.common.current_theme_key != 'themes___moonte-child' && window.document.splugins.common.current_theme_key != 'themes___frank-jewelry-store'){		
+				
+				console.log('if jQuery(e).slider(_params) call');
+
+				jQuery(e).slider(_params);
+			}else{
+				
+				console.log('else temp_patch_slider_change_event_child call');
+				
+				slider.params.push(_params);
+				slider.element.push(e);
+			}
 			
-			slider.params.push(_params);
-			slider.element.push(e);
+			
+			jQuery.fn.slider = ui_slider;
 
 		});
 	
 		// ACTIVE_TODO temp. added on 30-11-2022. remove as soon as the standerd fix is ready. 
-		if(window.document.splugins.common.current_theme_key == 'themes___alpha-store-pro-child' || window.document.splugins.common.current_theme_key == 'themes___maia-child' || window.document.splugins.common.current_theme_key == 'themes___moonte-child') {
+		if(window.document.splugins.common.current_theme_key == 'themes___alpha-store-pro-child' || window.document.splugins.common.current_theme_key == 'themes___maia-child' || window.document.splugins.common.current_theme_key == 'themes___moonte-child' || window.document.splugins.common.current_theme_key == 'themes___frank-jewelry-store') {
 			
+			console.log('if temp_patch_slider_change_event_child call');
+
 			temp_patch_slider_change_event_child(slider);
 		}
 
@@ -2163,6 +2183,8 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 	// ACTIVE_TODO temp. added on 30-11-2022. remove as soon as the standerd fix is ready. 
     var temp_patch_slider_change_event_child = function(slider) {
 		
+    	console.log('temp_patch_slider_change_event_child()');
+
 		jQuery.getScript("https://demo.woochoiceplugin.com/hify-store/wp-content/plugins/woo-bundle-choice/asset/js/fomantic/semantic.min.js?ver=5.0.10", function(data, status, jqxhr) {
 	
 	    	for (let i = 0; i < slider.element.length; i++) {
