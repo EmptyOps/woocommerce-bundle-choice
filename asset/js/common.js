@@ -3916,6 +3916,8 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
         var _this = this;
 
         _this.#data.current_variation = variation;
+        console.log("_this.data.current_variation");
+        console.log(_this.#data.current_variation);
 
         /*ACTIVE_TODO_OC_START
          -- to a  
@@ -4077,6 +4079,8 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
 
         var _this = this; 
         
+        console.log('get_current_variation()');
+        console.log(_this.#data.current_variation);
         return _this.#data.current_variation;    
     }
 
@@ -4458,7 +4462,7 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
 
     #process_images(type=null, element=null) {
 
-        console.log('SP_WBC_Variations_Gallery_Images_Feed_Page process_images');
+        console.log('SP_WBC_Variations_Gallery_Images_Feed_Page process_images_01');
 
         var _this = this; 
 
@@ -4478,7 +4482,7 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
 
     #process_events(type) {
 
-        console.log('SP_WBC_Variations_Gallery_Images_Feed_Page process_events');
+        console.log('SP_WBC_Variations_Gallery_Images_Feed_Page process_events_01');
 
         var _this = this; 
 
@@ -4525,12 +4529,14 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
             uniquely_managed_type = 'default';            
             
         }
-        
+
         if(window.document.splugins.common._b(_this.#$binding_stats, 'zoom_area_hover_in_listener', type)){
             return false;
-        }        
-        
-        console.log('zoom_area_hover_in_listener()');
+        }
+                
+        console.log("window.document.splugins.common._b(_this.#$binding_stats, 'zoom_area_hover_in_listener', type");
+        console.log(_this);
+        console.log( type);
         console.log(super.get_zoom_container());
         //Flag var, set to false below to avoid undefine error on first execution.
         _this.#data.is_zoom_area_hover_in_progress = false;
@@ -4598,7 +4604,10 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
  
 
         var _this = this; 
-        
+
+        console.log("_this.#data.is_zoom_area_hover_in_progress");
+        console.log(_this.#data.is_zoom_area_hover_in_progress);
+
         if(_this.#data.is_zoom_area_hover_in_progress) {
 
             return false;            
@@ -4640,6 +4649,10 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
 
                 console.log(" gallery_images_child zoom_area_hover_in inner loop" );
                 console.log(index_inner);
+
+                console.log("_this.configs");
+                console.log(_this.#$configs);
+                console.log(_this.#$configs.options.tiny_features_option_ui_loop_box_hover_media_index);
 
                 // if(index_inner (?) == index_inner){
                 if( _this.#$configs.options.tiny_features_option_ui_loop_box_hover_media_index == index_inner){
