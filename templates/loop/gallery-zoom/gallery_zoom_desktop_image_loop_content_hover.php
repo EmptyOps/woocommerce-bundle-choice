@@ -4,31 +4,11 @@
  * in case if you want to implement your custom html then follow our documentation guide on how to add add custom html templates by following this link https://sphereplugins.com/docs/how-to-override-templates-using-custom-html
  */
 
-/*<div class="spui_thumbnail_shop_wrap">
-    <!--asset-->
-    <div class="spui_thumbnail_shop_asset">
-        <img src="" alt="asset_shop_1" class="img-fluid">
-    </div>
-    <!--video-->
-    <div class="spui_thumbnail_shop_video">
-        <video autoplay muted>
-            <source src="" type="video/mp4">
-            <source src="" type="video/ogg">
-        </video>
-    </div>
-    <!--iframe-->
-    <div class="spui_thumbnail_shop_video_iframe">
-        <iframe src=""></iframe>
-    </div>
-
-</div>
-*/
-
 $template = null;
 // wbc_pr($image['extra_params_org']['type']);
 //     die();
 if(empty($image['extra_params_org']['type']) || $image['extra_params_org']['type'] == 'image' ) {
-
+    
     $template = array(
         'type' => 'div',
         'class' => 'spui_thumbnail_shop_asset '.$image['class'],
@@ -89,7 +69,8 @@ if(empty($image['extra_params_org']['type']) || $image['extra_params_org']['type
                 ),
             );
         }
-    }
+    }    
 }
 
-$template = apply_filters( 'woocommerce_single_product_image_thumbnail_html',$template, $image['image_id'] );
+
+// $template = apply_filters( 'woocommerce_single_product_image_thumbnail_html',$template, $image['image_id'] );

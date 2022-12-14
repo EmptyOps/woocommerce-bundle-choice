@@ -53,6 +53,9 @@ class EOWBC_Filter_Widget {
 
 		if(!(is_array($filter) xor is_object($filter)) or empty($filter)) return false;
 		if(apply_filters('eowbc_enque_filter_assets','__return_true')){
+			if( wbc()->sanitize->get('is_test') == 1 ||  wbc()->sanitize->get('is_test') == 9 ){
+				wbc_pr('eo_wbc_filter_enque_asset_f_eo_wbc_object');
+			}	
 			$this->eo_wbc_filter_enque_asset();
 		} else {
 			$this->localize_script();
@@ -983,6 +986,11 @@ class EOWBC_Filter_Widget {
 			'btnreset_now'=>(empty(wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','filter_setting_reset_now'))?false:true),
 			'_prefix_' => $this->filter_prefix,
 		) );
+
+		if( wbc()->sanitize->get('is_test') == 1 ||  wbc()->sanitize->get('is_test') == 9 ){
+			wbc_pr('eo_wbc_object');
+		}
+		
 		wbc()->load->asset('localize_data','publics/eo_wbc_filter',$eo_wbc_object);
 
 
@@ -2689,6 +2697,7 @@ class EOWBC_Filter_Widget {
 
 		?>
 		<script>
+			console.log('data_filter_widgets');
 			var eo_wbc_object = JSON.parse('<?php echo json_encode($data); ?>');
 		</script>
 		<?php
@@ -2700,7 +2709,10 @@ class EOWBC_Filter_Widget {
 
 	public function get_widget() {
 		
-		// wbc_pr("eowbc_filter_widget get_widget 1");
+		if( wbc()->sanitize->get('is_test') == 1 ||  wbc()->sanitize->get('is_test') == 9 ){
+		
+			wbc_pr("get_widget_f_eo_wbc_object");
+		}	
 
 		do_action('eowbc_before_filter_widget');
 
@@ -2775,7 +2787,10 @@ class EOWBC_Filter_Widget {
 
 		if(!(is_array($filter) xor is_object($filter)) or empty($filter)) return false;
 
-		if(apply_filters('eowbc_enque_filter_assets','__return_true')){			
+		if(apply_filters('eowbc_enque_filter_assets','__return_true')){		
+			if( wbc()->sanitize->get('is_test') == 1 ||  wbc()->sanitize->get('is_test') == 9 ){
+				wbc_pr('eo_wbc_filter_enque_asset_f1_eo_wbc_object');
+			}		
 			$this->eo_wbc_filter_enque_asset();
 		} else {
 			$this->localize_script();
@@ -3054,7 +3069,7 @@ class EOWBC_Filter_Widget {
 		$filter_sets_confings['filter_setting_alternate_mobile'] = wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile');
 		$filter_sets_confings['filter_prefix'] = $this->filter_prefix;
 		$filter_sets_confings['filter_sets_data'] = $filter_sets_data;	
-
+		// wbc_pr('filter_sets_confings');
 		wbc()->load->asset('localize_data','publics/sp_filter_sets',array("filter_sets_confings" => $filter_sets_confings));
 
 
@@ -3096,6 +3111,11 @@ class EOWBC_Filter_Widget {
 
 	public function init($is_shop_cat_filter=false,$filter_prefix='',$is_shortcode_filter=false) {
 		
+		if( wbc()->sanitize->get('is_test') == 1 ||  wbc()->sanitize->get('is_test') == 9 ){
+		
+			wbc_pr("init_f_eo_wbc_object");
+		}
+
 		$this->first_category_slug = wbc()->options->get_option('configuration','first_slug');
         $first_category_object = get_term_by('slug',$this->first_category_slug,'product_cat');
         if(!empty($first_category_object) and !is_wp_error($first_category_object)) {
