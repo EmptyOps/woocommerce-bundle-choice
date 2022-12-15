@@ -52,7 +52,17 @@ class SP_WBC_Variations extends SP_Variations {
 
 			}, 90, 3);
 			
+			if( wbc()->sanitize->get('is_test') == 1 ) {
+
+				wbc_pr("SP_WBC_Variations fetch_data toDefinition above sp_wbc_woo_available_variation");
+			}
+
 			add_filter('sp_wbc_woo_available_variation',function($variation_get_max_purchase_quantity,  $instance,  $variation) use($args){
+
+				if( wbc()->sanitize->get('is_test') == 1 ) {
+
+					wbc_pr("SP_WBC_Variations fetch_data toDefinition sp_wbc_woo_available_variation");
+				}
 
 				return self::instance()->get_available_variation_hook_callback($variation_get_max_purchase_quantity,  $instance,  $variation, $args);
 				
@@ -659,9 +669,7 @@ class SP_WBC_Variations extends SP_Variations {
 			$data 				= \eo\wbc\model\admin\Eowbc_Model::instance()->get($args['form_definition'],array('page_section'=>'sp_variations', 'is_convert_das_to_array'=>true, 'id'=>$id, 'is_legacy_admin'=>true ));
 		}else{
 
-			$data = array();
-			$data['sp_variations'] = array();
-			$data['sp_variations']["form"] = $variation_get_max_purchase_quantity['form'];
+			$data = $variation_get_max_purchase_quantity['form'];
 		}
 
 
@@ -669,19 +677,24 @@ class SP_WBC_Variations extends SP_Variations {
 
 		$gallery_images = array();	
 		if ( !empty($data['sp_variations']["form"]) ) {
-			// echo"12121212112";
-			// wbc_pr($data['sp_variations']["form"]); 
+			echo"12121212112";
+			wbc_pr($data['sp_variations']["form"]); 
 			foreach($data['sp_variations']["form"] as $key=>$fv){
 
 				if( !in_array($fv["type"], \eo\wbc\model\admin\Form_Builder::savable_types())) {
+
+					wbc_pr("continue type if");
+					wbc_pr(\eo\wbc\model\admin\Form_Builder::savable_types());
+					wbc_pr($fv['type']);
+					
 					continue;
 				}
 
 				$value = $fv['value'];
 				
-				// echo ">>>>>>>>>>> data fields";
-				// wbc_pr($key);
-				// wbc_pr($fv);
+				echo ">>>>>>>>>>> data fields";
+				wbc_pr($key);
+				wbc_pr($fv);
 
 				if ( strpos( $key, 'sp_variations_gallery_images' ) !== false ) {
 
@@ -698,8 +711,8 @@ class SP_WBC_Variations extends SP_Variations {
 				} else {
 
 					$value_arr = apply_filters('sp_variations_available_variation_type', array('type'=>null,'value'=>$value,'key'=>$key), $key );
-					// echo "2222222222";	
-					// wbc_pr($value_arr);
+					echo "2222222222";	
+					wbc_pr($value_arr);
 					if( !empty($value_arr['type']) && !empty($gallery_images_types[$value_arr['type']]) ) {
 
 						array_push($gallery_images, $value_arr);
@@ -771,8 +784,8 @@ class SP_WBC_Variations extends SP_Variations {
 
 		$variation_get_max_purchase_quantity['variation_gallery_images'] = array();
 
-		// echo ">>>>>>>>>>> gallery_images";
-		// wbc_pr($gallery_images);
+		echo ">>>>>>>>>>> gallery_images";
+		wbc_pr($gallery_images);
 
 		// sort 
 		$gallery_images_new = array();
