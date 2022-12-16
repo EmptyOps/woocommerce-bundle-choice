@@ -60,6 +60,11 @@ class SP_Model_Feed extends SP_Feed {
 		// add that four conditions here in below if, simply as or conditions -- to d or -- to b done
 		if( $for_section == "gallery_images_init" || $for_section == "gallery_images" || $for_section == 'swatches_init') {
 
+			if( wbc()->sanitize->get('is_test') == 1 ) {
+				
+                wbc()->common->var_dump( "wbc model feed get_data ".$for_section);
+            }
+
 			if($for_section == 'gallery_images_init') {
 				$args['data_definition'] = null;
 				$args['form_definition'] = null;	

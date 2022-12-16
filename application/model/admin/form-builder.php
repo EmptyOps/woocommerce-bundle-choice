@@ -612,7 +612,7 @@ class Form_Builder implements Builder {
 			wbc()->common->var_dump( "Form_Builder das_form_definition_support" );
 		}
 
-		if( $args["sub_action"] != "save" && empty($args['data']['id']) ) {
+		if( $args["sub_action"] != "save" && empty($args['data']['id']) && empty($args['data_raw']) ) {
 
 			//	just return the default value if it do not required any processing 
 			return $args['form_definition'];	
@@ -737,7 +737,7 @@ class Form_Builder implements Builder {
 
 									if (!empty($dm_based_field)) {
 									
-										$added_counter = ( isset($args['data_raw'][$dm_based_field]) ? ( is_array($args['data_raw'][$dm_based_field]) ? sizeof($args['data_raw'][$dm_based_field]) : 1 ) : $added_counter );
+										$added_counter = ( isset($args['data_raw'][$dm_based_field]) ? ( is_array($args['data_raw'][$dm_based_field]) ? sizeof($args['data_raw'][$dm_based_field])-1 : 0 ) : $added_counter );
 									}
 								}
 
@@ -786,7 +786,7 @@ class Form_Builder implements Builder {
 						}
 					}
 
-					$args['form_definition'][$tab_slug]['form'] = $newform;		
+					$args['form_definition'][$tab_slug]['form'] = $newform;
 				}
 			}
 

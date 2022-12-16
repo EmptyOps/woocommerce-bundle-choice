@@ -28,6 +28,11 @@ class SP_WBC_Variations extends SP_Variations {
 
 	public static function fetch_data($for_section, $product = null,  $args = array() ) {
 
+		if( wbc()->sanitize->get('is_test') == 1 ) {
+
+			wbc_pr("SP_WBC_Variations fetch_data");
+		}
+
 		$sp_variations_data = array();
 			//	NOTE: this is default object format of $sp_variations_data and when there is no data available it will return empty array instead of the null or false etc. 
 
@@ -714,7 +719,7 @@ class SP_WBC_Variations extends SP_Variations {
 					echo "2222222222";	
 					wbc_pr($value_arr);
 					if( !empty($value_arr['type']) && !empty($gallery_images_types[$value_arr['type']]) ) {
-
+						
 						array_push($gallery_images, $value_arr);
 					}
 				}
