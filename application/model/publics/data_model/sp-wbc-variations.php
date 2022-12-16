@@ -28,6 +28,11 @@ class SP_WBC_Variations extends SP_Variations {
 
 	public static function fetch_data($for_section, $product = null,  $args = array() ) {
 
+		if( wbc()->sanitize->get('is_test') == 1 ) {
+
+			wbc_pr("SP_WBC_Variations fetch_data");
+		}
+
 		$sp_variations_data = array();
 			//	NOTE: this is default object format of $sp_variations_data and when there is no data available it will return empty array instead of the null or false etc. 
 
@@ -52,14 +57,26 @@ class SP_WBC_Variations extends SP_Variations {
 
 			}, 90, 3);
 			
+			if( wbc()->sanitize->get('is_test') == 1 ) {
+
+				wbc_pr("SP_WBC_Variations fetch_data toDefinition above sp_wbc_woo_available_variation");
+			}
+
 			add_filter('sp_wbc_woo_available_variation',function($variation_get_max_purchase_quantity,  $instance,  $variation) use($args){
-		
-					here we do not need any not empty html lick condishone becos the apply_filters hosted becos the perant hook hosted the apply_filters as alrady menaged the prayorati basd check on and than this particuley hook is apply from thar so it well ather from dapi leyar or the wbc so we do not need that. but lat stil keep it as note teel we not do the finel taly befor run an than delete this oppen comment.
+
+				if( wbc()->sanitize->get('is_test') == 1 ) {
+
+					wbc_pr("SP_WBC_Variations fetch_data toDefinition sp_wbc_woo_available_variation");
+				}
+
 				return self::instance()->get_available_variation_hook_callback($variation_get_max_purchase_quantity,  $instance,  $variation, $args);
 				
 			}, 90, 3);
 			
 		}elseif( $for_section == "swatches_init"/* && $args['page'] != 'feed'*/ ) {
+
+			self::swatches_hooks();
+
 			add_filter( 'woocommerce_ajax_variation_threshold',  function($int){
 
 				// ACTIVE_TODO_OC_START
@@ -87,10 +104,11 @@ class SP_WBC_Variations extends SP_Variations {
 
 		// comment by @s
 		}elseif( ($for_section == "swatches" /*|| $for_section == "gallery_images"*/)/* && $args['page'] != 'feed'*/ ) {
-			self::swatches_hooks();
- 
+ 	
+ 			/*ACTIVE_TODO_OC_START
 			ACTIVE_TODO it is noted that this call is redundantly called from the swatches data layers means it is called every time perticular attributes swatches rendered so if on a loop box or item page there are three swatches than called 3 time which is relly not requaird and it may have huge impact on the perfomance and aficeancy so we must skip that redundant call somehow. this is applicable to both below statments which preparing attributes and variations -- to h
 				ACTIVE_TODO and there are statments like this "$attributes           = wc_get_attribute_taxonomies();" in function wc_product_has_attribute_type() in this class which is similar to below $product->get_variation_attributes(); funtion call. so this are also redundant calls and we must refeactor it for perfomace -- to h
+			ACTIVE_TODO_OC_END*/
 			// $sp_variations_data['attributes'] = $product->get_variation_attributes(); aa nu su karavanu
 			$sp_variations_data['attributes'] = apply_filters('sp_wbc_get_variation_attrs',null,$product);
 			// ACTIVE_TODO and eitherway we are supose to as per that perfomance optimasation notes or series that we had planed, we shoud avoid even this one single call after removeing redunduncy since it is most likely not ussed in that asset. -- to h 
@@ -101,7 +119,7 @@ class SP_WBC_Variations extends SP_Variations {
 
 			
 
-		}elseif( ($for_section == "gallery_images") {
+		}elseif($for_section == "gallery_images") {
 
 			self::gallery_images_hooks();
 
@@ -637,14 +655,14 @@ class SP_WBC_Variations extends SP_Variations {
 		
 
 		$product_id         = is_object($variation)? absint( $variation->get_parent_id() ) : null;
-		$variation_id       = is_object($variation)? absint( $variation->get_id() ) : $variation['variation_id'];
+		$variation_id       = is_object($variation)? absint( $variation->get_id() ) : null;
 		$variation_image_id = is_object($variation)? absint( $variation->get_image_id() ) : null;
 
 		return $this->get_variations_and_simple_type_fields($variation_get_max_purchase_quantity,  $instance,  $variation,$product_id, $variation_id, $variation_image_id, $args);
 
 	}
 	
-	private function get_variations_and_simple_type_fields( $variation_get_max_purchase_quantity,  $instance,  $variation,$product_id, $id, $variation_image_id, $args = array()){
+	public function get_variations_and_simple_type_fields( $variation_get_max_purchase_quantity,  $instance,  $variation,$product_id, $id, $variation_image_id, $args = array()){
 		
 
 		$gallery_images_types 					  = self::sp_variations_gallery_images_supported_types(array('is_base_type_only'=>true));	
@@ -656,9 +674,7 @@ class SP_WBC_Variations extends SP_Variations {
 			$data 				= \eo\wbc\model\admin\Eowbc_Model::instance()->get($args['form_definition'],array('page_section'=>'sp_variations', 'is_convert_das_to_array'=>true, 'id'=>$id, 'is_legacy_admin'=>true ));
 		}else{
 
-			$data = array();
-			$data['sp_variations'] = array();
-			$data['sp_variations']["form"] = $variation_get_max_purchase_quantity['form'];
+			$data = $variation_get_max_purchase_quantity['form'];
 		}
 
 
@@ -666,19 +682,24 @@ class SP_WBC_Variations extends SP_Variations {
 
 		$gallery_images = array();	
 		if ( !empty($data['sp_variations']["form"]) ) {
-			// echo"12121212112";
-			// wbc_pr($data['sp_variations']["form"]); 
+			echo"12121212112";
+			wbc_pr($data['sp_variations']["form"]); 
 			foreach($data['sp_variations']["form"] as $key=>$fv){
 
 				if( !in_array($fv["type"], \eo\wbc\model\admin\Form_Builder::savable_types())) {
+
+					wbc_pr("continue type if");
+					wbc_pr(\eo\wbc\model\admin\Form_Builder::savable_types());
+					wbc_pr($fv['type']);
+					
 					continue;
 				}
 
 				$value = $fv['value'];
 				
-				// echo ">>>>>>>>>>> data fields";
-				// wbc_pr($key);
-				// wbc_pr($fv);
+				echo ">>>>>>>>>>> data fields";
+				wbc_pr($key);
+				wbc_pr($fv);
 
 				if ( strpos( $key, 'sp_variations_gallery_images' ) !== false ) {
 
@@ -695,10 +716,10 @@ class SP_WBC_Variations extends SP_Variations {
 				} else {
 
 					$value_arr = apply_filters('sp_variations_available_variation_type', array('type'=>null,'value'=>$value,'key'=>$key), $key );
-					// echo "2222222222";	
-					// wbc_pr($value_arr);
+					echo "2222222222";	
+					wbc_pr($value_arr);
 					if( !empty($value_arr['type']) && !empty($gallery_images_types[$value_arr['type']]) ) {
-
+						
 						array_push($gallery_images, $value_arr);
 					}
 				}
@@ -768,8 +789,8 @@ class SP_WBC_Variations extends SP_Variations {
 
 		$variation_get_max_purchase_quantity['variation_gallery_images'] = array();
 
-		// echo ">>>>>>>>>>> gallery_images";
-		// wbc_pr($gallery_images);
+		echo ">>>>>>>>>>> gallery_images";
+		wbc_pr($gallery_images);
 
 		// sort 
 		$gallery_images_new = array();
@@ -1855,7 +1876,9 @@ class SP_WBC_Variations extends SP_Variations {
 
 		$data['gallery_images_template_data']['default_attributes'] = self::selected_variation_attributes($data['gallery_images_template_data']['default_attributes']);
 
+		/*ACTIVE_TODO_OC_START
 		ACTIVE_TODO we ma like to add apply_filters hook here like above hook sp_wbc_product_get_id if we have to support defolt varashon on page lode. an at that time ma need to creat apply_filters hook for above default attribute also. -- to h  
+		ACTIVE_TODO_OC_END*/
 		$data['gallery_images_template_data']['default_variation_id'] = null;
 		if (!empty($data['gallery_images_template_data']['default_attributes'])) {
 		
@@ -1867,7 +1890,7 @@ class SP_WBC_Variations extends SP_Variations {
 		// ACTIVE_TODO we may like to use the columns var later to till gallery_images slider and zoom module layers including till applicable js layers -- to h or -- to d 
 		$data['gallery_images_template_data']['columns'] = -1;	//	thumbnail columns 
 
-		$data['gallery_images_template_data']['post_thumbnail_id'] =  apply_filters('sp_wbc_get_image_id', null, $product); // \eo\wbc\system\core\data_model\SP_Product::get_image_id($product);
+		$data['gallery_images_template_data']['post_thumbnail_id'] =  apply_filters('sp_wbc_get_image_id', null, $product,null); // \eo\wbc\system\core\data_model\SP_Product::get_image_id($product);
 
 		$data['gallery_images_template_data']['attachment_ids'] = apply_filters('sp_wbc_get_gallery_image_ids', null, $product, $data['gallery_images_template_data']['product_id'], $data['gallery_images_template_data']['post_thumbnail_id'], $args); //\eo\wbc\system\core\data_model\SP_Product::get_gallery_image_ids($product);
 
@@ -2023,10 +2046,11 @@ class SP_WBC_Variations extends SP_Variations {
 				// after now the get_variations_and_simple_type_fields are called from add filter hook, the below might be counter intuitive since the post_thumbnail_id might already been set only from the result of the get_variations_and_simple_type_fields fields. -- to h 
 				// 	but may be it is not possible in case of the varible type -- to h 
 				// 	but what about the simple type -- to h 
+						/*ACTIVE_TODO_OC_START
 						ACTIVE_TODO it is supposed to work for the varible type as well, and if required then necessary upgrade should be applied to post_thumbnail_id handling in the get_variations_and_simple_type_fields function so that post_thumbnail_id is added in final result of variation_gallery_images. and then the below section should be simply turned off by adding in false and mark this point as NOTE -- to h 
 						--	either way now maybe need revisit this whole if and above if of varible type and revise and refactor as applicable to make it simple and mature architecture -- to h 
 
-							add two above in ACTIVE_TODO start end 
+						ACTIVE_TODO_OC_END*/
 				if (!empty($data['gallery_images_template_data']['post_thumbnail_id'])) {
 
 					if (!is_array($data['gallery_images_template_data']['attachment_ids'])) {
@@ -2057,7 +2081,7 @@ class SP_WBC_Variations extends SP_Variations {
 
 	public static function prepare_gallery_template_data_item($data, $index, $image/*$id*/, $product, $args = array()) {
 
-        $data['gallery_images_template_data']['attachment_ids_loop_post_thumbnail_id'][$index] = apply_filters('sp_wbc_get_image_id', null, $product); //$product->get_image_id();
+        $data['gallery_images_template_data']['attachment_ids_loop_post_thumbnail_id'][$index] = apply_filters('sp_wbc_get_image_id', null, $product, null); //$product->get_image_id();
 
         $data['gallery_images_template_data']['attachment_ids_loop_remove_featured_image'][$index] = false;
 
@@ -2171,7 +2195,6 @@ class SP_WBC_Variations extends SP_Variations {
 			}
 
         	// return \eo\wbc\system\core\data_model\SP_Product::get_gallery_image_ids($product);
-			-- need to confirm here that $product_id will be ok for the simple type product as long as the meta field of the legacy form is concerned and genrated using $product_id or variation_id -- to h & -- to a & -- to s 
 			return self::instance()->get_variations_and_simple_type_fields(array(),  $product, $product, $product_id, $product_id, $post_thumbnail_id, $args)['variation_gallery_images'];
 
 		}, 10, 5);

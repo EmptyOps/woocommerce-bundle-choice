@@ -28,7 +28,7 @@ class SP_Model_Query extends SP_Query {
 		    	}
 
 				if( wbc()->sanitize->get('is_test') == 1 ) {
-					wbc()->common->var_dump( "SP_Model_Query wbc prepare_query pre_get_posts ".$input_method );
+					wbc()->common->var_dump( "SP_Model_Query wbc prepare_query pre_get_posts input_method = ".$input_method );
 				}
 				
 				// --- move to ssm_dt submodule sp_tableview/application/library/shared/submodule/sp_experimental_tobe_splitted/application/model/publics/sp-ssm-dt-model-feed.php do_loop() @a ---
@@ -57,7 +57,7 @@ class SP_Model_Query extends SP_Query {
 				// --- end ---
 
 		        return apply_filters('filter_widget_ajax_post_query',$query);
-		    });		   
+		    },10);		   
 		}
 	}
 

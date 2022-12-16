@@ -1704,6 +1704,9 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
         // --  and as mentioned above this object will always be passed from all .each loops under element, so use that element inside the process_attribute_template -- to s done
         ACTIVE_TODO_OC_END*/
 
+        console.log('data.select creat');
+        console.log(element);
+
         data.select = jQuery(element).siblings('select.woo-variation-raw-select');
         data.selected = '';
         data.options = data.select.find('option');
@@ -2310,6 +2313,7 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
 
             console.log("on_click_listener else");
             console.log(_this.#configs.mouse_event_name);
+            console.log(jQuery(element).find('li:not(.radio-variable-item):not(.spui-wbc-swatches-variable-item-more)'));
 
             jQuery(element).on(_this.#configs.mouse_event_name, 'li:not(.radio-variable-item):not(.spui-wbc-swatches-variable-item-more)', function (event) {
 
@@ -2509,7 +2513,7 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
         } else {
             
             console.log('swatches click else');
-            console.log(value);
+            console.log(data);
 
             event.preventDefault();
             event.stopPropagation();
@@ -2523,7 +2527,7 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
             // console.log("value" +value);
             data.select.val(value).trigger('change');
             data.select.trigger('click');
-            data.select.trigger('focusin');
+            data.select.trigger('focusin'); 
             if (window.document.splugins.common.is_mobile) {
                 data.select.trigger('touchstart');
             }
@@ -2645,8 +2649,10 @@ window.document.splugins.wbc.variations.swatches.core = function( configs ) {
 
 jQuery(document).ready(function(){
 
-    //  publish it 
-    window.document.splugins.wbc.variations.swatches.api = window.document.splugins.wbc.variations.swatches.core( common_configs.swatches_config );
+    if (!window.document.splugins.common.is_admin) {
+        //  publish it 
+        window.document.splugins.wbc.variations.swatches.api = window.document.splugins.wbc.variations.swatches.core( common_configs.swatches_config );
+    }
 }); 
 
 // if(window.document.splugins.common.is_item_page) {
@@ -3291,6 +3297,7 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
 
         var _this = this;
         console.log(" gallery_images process_slider_template " );
+        console.log(images);
 
         var templating_lib = window.document.splugins.common._o( _this.#configs, 'templating_lib') ? _this.#configs.templating_lib : 'wp';
         
@@ -3299,6 +3306,10 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
         var slider_inner_html= '';
         // var slider_inner_html = images.map(function (image) {
         jQuery( images).each(function (index_inner,image) {
+
+            console.log('gallery_images process_slider_template 01');
+            console.log(index_inner);
+            console.log(image);
 
             image.index = index_inner;
 
@@ -4174,8 +4185,11 @@ window.document.splugins.wbc.variations.gallery_images.core = function( configs 
 };
 
 jQuery(document).ready(function(){
-    //  publish it 
-    window.document.splugins.wbc.variations.gallery_images.api = window.document.splugins.wbc.variations.gallery_images.core( common_configs.gallery_images_configs );
+    
+    if (!window.document.splugins.common.is_admin) {
+        //  publish it 
+        window.document.splugins.wbc.variations.gallery_images.api = window.document.splugins.wbc.variations.gallery_images.core( common_configs.gallery_images_configs );
+    }
 });
 
 // if(window.document.splugins.common.is_item_page) {
@@ -4662,13 +4676,13 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
 
                     var template_var = _this.template_public( template_id, templating_lib );
 
-                    // console.log('zoom_area_hover_in template_var');
-                    // console.log(template_var);
+                    console.log('zoom_area_hover_in templating_lib');
+                    console.log(templating_lib);
 
                     zoom_inner_html += _this.apply_template_data_public(template_var, image, templating_lib);
 
-                    // console.log('zoom_inner_html');
-                    // console.log(zoom_inner_html);
+                    console.log('zoom_inner_html');
+                    console.log(zoom_inner_html);
 
                     return false;
                 }
@@ -4696,18 +4710,18 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
             //     -- and than we can simply get type from element data-type which is mentanable due to well maintained heirachy insted of below index based image data read which is bound to change.
 
             console.log('zoom_area_hover_in() index');       
-            // console.log(index);
+            console.log(index);
 
             console.log('super.get_base_container()');
             console.log(super.get_base_container());
             console.log('images[index].extra_params_org.type');
-            console.log(images[index].extra_params_org);
+            console.log(images[index]);
             var zoom_area_hover_in_callback = null;
 
             // window.document.splugins.events.api.notifyAllObservers( 'gallery_images_feed_page', 'zoom_area_hover_in', {type:images[index].extra_params_org.type,image:images[index]}, zoom_area_hover_in_callback, super.get_base_container() );            
             window.document.splugins.events.api.notifyAllObservers( 'gallery_images_feed_page', 'zoom_area_hover_in', {type:images[index].extra_params_org.type, 
                 hover_index_type: window.document.splugins.common._o(images,_this.#$configs.options.tiny_features_option_ui_loop_box_hover_media_index) ? images[_this.#$configs.options.tiny_features_option_ui_loop_box_hover_media_index].extra_params_org.type : null
-            , image:images[index]}, zoom_area_hover_in_callback, super.get_base_container() );            
+            , image:images[index], container:super.get_zoom_container()}, zoom_area_hover_in_callback, super.get_base_container() );            
 
         } 
 
@@ -4753,7 +4767,7 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
             
             console.log('gc zoom_area_click() if');
                 
-            // window.location.href = sp_anchor_url;
+            window.location.href = sp_anchor_url;
         }
 
         // _this#compatability('zoom_area_click');

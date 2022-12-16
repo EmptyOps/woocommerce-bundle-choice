@@ -20,13 +20,24 @@ add_action( ( !is_admin() ? 'wp_enqueue_scripts' : 'admin_enqueue_scripts'),func
 		if( is_admin() ){
 
 			?>
+
+			window.document.splugins.common.is_admin = <?php echo "true";?>;
+
 			window.document.splugins.admin.is_legacy_admin_page = <?php echo ((apply_filters('sp_is_legacy_admin_page', true)) ? "true" : "false");?>; 
 			<?php 
+		} else {
+
+			?>
+			window.document.splugins.common.is_admin = <?php echo "false";?>;
+			<?php
+			
 		}
 
 		?>
 
     	window.document.splugins.common.current_theme_key = '<?php echo wbc()->common->current_theme_key(); ?>';
+    	console.log("current theme key");
+    	console.log(window.document.splugins.common.current_theme_key);
 
 		window.document.splugins.common.is_category_page = <?php echo ((is_product_category()) ? "true" : "false");?>; 
 
@@ -70,8 +81,8 @@ add_action( ( !is_admin() ? 'wp_enqueue_scripts' : 'admin_enqueue_scripts'),func
 		$gallery_images_configs['base_container_loop_selector']    = '.variations_form'; //'.spui-sp-variations-loop-gallery-images';
 
 		// for simple type
-		$gallery_images_configs['base_container_selector_simple']    = need to update here the base_container_selectore;
-		$gallery_images_configs['base_container_loop_selector_simple']    = need to update here the base_container_selectore;
+		$gallery_images_configs['base_container_selector_simple']    = null /*ACTIVE_TODO_OC_START need to update here the base_container_selectore ACTIVE_TODO_OC_END*/;
+		$gallery_images_configs['base_container_loop_selector_simple']    = null /*ACTIVE_TODO_OC_START need to update here the base_container_selectore ACTIVE_TODO_OC_END*/;
 
 		$gallery_images_configs['template'] 				  = array('slider'=>array('id'=>'sp_slzm_slider_image_loop'), 'zoom'=>array('id'=>'sp_slzm_zoom_image_loop'));	
 		$gallery_images_configs['classes'] 				      = array('slider'=>array('container'=>'sp-variations-gallery-images-slider','loop_container'=>'sp-variations-gallery-images-slider-loop'), 'zoom'=>array('container'=>'sp-variations-gallery-images-zoom'));	
@@ -178,7 +189,7 @@ add_action('wp_footer',function(){
 		            base_container = jQuery( ( window.document.splugins.common._o( common_configs.gallery_images_configs, 'base_container_selector') ? common_configs.gallery_images_configs.base_container_selector : '.variations_form' ) );      
 		            jQuery(base_container).sp_wbc_variations_gallery_images();
 
-		            base_container_simple = jQuery( ( window.document.splugins.common._o( common_configs.gallery_images_configs, 'base_container_selector_simple') ? common_configs.gallery_images_configs.base_container_selector_simple : need to update here the base_container_selectore ) );      
+		            base_container_simple = jQuery( ( window.document.splugins.common._o( common_configs.gallery_images_configs, 'base_container_selector_simple') ? common_configs.gallery_images_configs.base_container_selector_simple : null /*ACTIVE_TODO_OC_START need to update here the base_container_selectore ACTIVE_TODO_OC_END */) );      
 		            jQuery(base_container_simple).sp_wbc_variations_gallery_images();
 
 		        // },2000);
@@ -198,7 +209,7 @@ add_action('wp_footer',function(){
 		            base_container = jQuery( ( window.document.splugins.common._o( common_configs.gallery_images_configs, 'base_container_loop_selector') ? common_configs.gallery_images_configs.base_container_loop_selector : '.variations_form' ) );      
 		            jQuery(base_container).sp_wbc_variations_gallery_images_feed_page();
 
-		            base_container_simple = jQuery( ( window.document.splugins.common._o( common_configs.gallery_images_configs, 'base_container_loop_selector_simple') ? common_configs.gallery_images_configs.base_container_loop_selector_simple : need to update here the base_container_selectore ) );      
+		            base_container_simple = jQuery( ( window.document.splugins.common._o( common_configs.gallery_images_configs, 'base_container_loop_selector_simple') ? common_configs.gallery_images_configs.base_container_loop_selector_simple : null /*ACTIVE_TODO_OC_START need to update here the base_container_selectore ACTIVE_TODO_OC_END */) );      
 		            jQuery(base_container_simple).sp_wbc_variations_gallery_images_feed_page();
 
 		        // },2000);

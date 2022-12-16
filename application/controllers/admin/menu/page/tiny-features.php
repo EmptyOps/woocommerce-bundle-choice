@@ -282,7 +282,7 @@ if ( ! class_exists( 'Tiny_features' ) ) {
 								'type'=>'devider'
 							),
 
-							'sp_variations_gallery_images{{id}}'=>array(
+							'sp_variations_gallery_images{{id}}{{data.added_counter}}'=>array(
 								'label'=>' ',
 								'type'=>'icon',
 								'sanitize'=>'sanitize_text_field',

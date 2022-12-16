@@ -117,7 +117,7 @@ class EOWBC_Filter_Widget {
 		<div id="loading" style="z-index: -999;height: 100%; width: 100%; position: fixed; top: 0;<?php (wbc()->options->get_option('appearance_filters','appearance_filters_loader') OR apply_filters('eowbc_filter_widget_loader',false))?_e('display:none !important;'):'';?>"></div>	
 		    							
 		<?php 
-			if(wp_is_mobile()) {
+			if(/*wp_is_mobile()*/ wbc_is_mobile_by_page_sections('cat_shop_page')) {
 
 				
 				if(!is_wp_error($non_adv_ordered_filter) and !empty($non_adv_ordered_filter)) {
@@ -340,7 +340,7 @@ class EOWBC_Filter_Widget {
 						padding-left: 2px !important;
 						padding-right: 2px !important;
 					}
-					".(!(wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile',false)=='mobile_2' and wp_is_mobile())?".eo_wbc_filter_icon_select{
+					".(!(wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile',false)=='mobile_2' and /*wp_is_mobile()*/ wbc_is_mobile_by_page_sections('cat_shop_page'))?".eo_wbc_filter_icon_select{
 						border-bottom:2px solid ".wbc()->options->get_option('appearance_filters','slider_nodes_backcolor_active',$active_color)." !important;
 					}				
 					.eo_wbc_filter_icon:hover:not(.none_editable){
@@ -404,7 +404,7 @@ class EOWBC_Filter_Widget {
 					#advance_filter,#apply_filter,#reset_filter{
 						width: auto !important;
 					}
-					".((wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile',false)=='mobile_2' and wp_is_mobile())?'#primary_filter,':'')."#advance_filter,#apply_filter{
+					".((wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile',false)=='mobile_2' and /*wp_is_mobile()*/ wbc_is_mobile_by_page_sections('cat_shop_page'))?'#primary_filter,':'')."#advance_filter,#apply_filter{
 						background-color:".wbc()->options->get_option('appearance_wid_btns','button_backcolor_active',$active_color)." !important;
 					}".((!wp_is_mobile() and !empty(wbc()->options->get_option('appearance_filters','appearance_filters_limit_height')))?".container.filters>.segments>.ui.segment .wide.column{ height: ".wbc()->options->get_option('appearance_filters','appearance_filters_limit_height').";}":"")."
 									
@@ -472,7 +472,7 @@ class EOWBC_Filter_Widget {
 
 				</style>
 				<?php
-			if(wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile',false)=='mobile_1' and wp_is_mobile()){
+			if(wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile',false)=='mobile_1' and /*wp_is_mobile()*/ wbc_is_mobile_by_page_sections('cat_shop_page')){
 				ob_start();
 				?>
 				<style type="text/css">
@@ -578,7 +578,7 @@ class EOWBC_Filter_Widget {
 				echo ob_get_clean();
 			}
 
-			if(wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile',false)=='mobile_2' and wp_is_mobile()){
+			if(wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile',false)=='mobile_2' and /*wp_is_mobile()*/ wbc_is_mobile_by_page_sections('cat_shop_page')){
 				ob_start();
 				?>
 				<style type="text/css">
@@ -1947,7 +1947,7 @@ class EOWBC_Filter_Widget {
 		$item['filter_ui'] = $this;
 		if(($this->first_theme==apply_filters('eowbc_filter_prefix',$this->filter_prefix).'theme'/*$this->second_theme=='theme'*//* and $this->_category==$this->second_category_slug) or ($this->first_theme=='theme' and $this->_category==$this->first_category_slug*/) or $this->first_theme === 'theme') {
 			// var_dump('two_tabs() filter_widgets');
-			if(wp_is_mobile()){
+			if(/*wp_is_mobile()*/ wbc_is_mobile_by_page_sections('cat_shop_page')){
 				wbc()->load->template('publics/filters/theme_two_tabs_mobile',$item);
 			} else {
 				wbc()->load->template('publics/filters/theme_two_tabs',$item);

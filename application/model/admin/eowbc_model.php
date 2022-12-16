@@ -85,15 +85,57 @@ class Eowbc_Model {
 
 									$dm_based_field = $dm_key; 
 
+									if(!isset($args['cn'])) {
+
+										if(isset($args['data_raw'][$dm_key])) {
+
+											$dm_based_field = $dm_key;   
+										} else {
+
+											$dm_based_field = null;
+										}
+
+									} else {
+
+										if( isset( $args['data_raw'][ $args['cn'][$dm_key] ] ) ) {
+
+											$dm_based_field = $args['cn'][$dm_key];   
+										} else {
+
+											$dm_based_field = null;
+										}
+									}
+
 									break;
 								}
 							}
 
+							if( wbc()->sanitize->get('is_test') == 1 ) {
+
+								wbc_pr("Eowbc_Model get");
+								wbc_pr($dm_based_field);
+								wbc_pr($fk);
+							}
 
 							//$form_definition[$key]["form"][$fk]["value"] = ( isset($save_as_data['post_meta'][$fk]) ? $save_as_data['post_meta'][$fk] : ( isset($form_definition[$key]["form"][$fk]["value"]) ? $form_definition[$key]["form"][$fk]["value"] :'' ) );
-							if ( isset($args['data_raw'][$fk is this $fk key correct here or even this isset is needed? ]) and !empty($dm_based_field) ) {
+							if ( !empty( $dm_based_field ) ) {
 
-								$form_definition[$key]["form"][$fk]["value"] = $args['data_raw'][$dm_based_field];
+								if( isset( $args['data_raw'][$dm_based_field] ) ) {
+
+									/*ACTIVE_TODO_OC_START
+									ACTIVE_TODO temp. below is highly temp if condition and suppose to remove that as soon we add das support on higher layers or here. and it is critical to note that appropriate balance of modularity of coupling and cohastion is better if we add das support on higher layers and here it remains transperant.
+									ACTIVE_TODO_OC_END*/
+									if($fk == 'sp_variations_gallery_images________' || $fk == 'sp_variations_gallery_images____________1____'){
+
+										$form_definition[$key]["form"][$fk]["value"] = $args['data_raw'][$dm_based_field][0];
+									}else{
+
+										$form_definition[$key]["form"][$fk]["value"] = $args['data_raw'][$dm_based_field];
+									}
+								} else {
+
+									$form_definition[$key]["form"][$fk]["value"] = '';
+								}
 
 							} elseif( isset($save_as_data['post_meta'][$fk]) ){
 

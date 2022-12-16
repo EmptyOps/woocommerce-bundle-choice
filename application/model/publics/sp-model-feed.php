@@ -53,8 +53,17 @@ class SP_Model_Feed extends SP_Feed {
 		
 		global $product;	
 
+		/*ACTIVE_TODO_OC_START
+		ACTIVE_TODO here it seems that we had made an error during feed model implementation that the swatces init if is missing here. which seems to be fundamnetal and is already there on the item page. so we must fix this as soon as we get chance after the stuller run. -- to h 
+			now added the swatches_init key in below if on 05-12-2022
+		ACTIVE_TODO_OC_END*/
 		// add that four conditions here in below if, simply as or conditions -- to d or -- to b done
-		if( $for_section == "gallery_images_init" || $for_section == "gallery_images") {
+		if( $for_section == "gallery_images_init" || $for_section == "gallery_images" || $for_section == 'swatches_init') {
+
+			if( wbc()->sanitize->get('is_test') == 1 ) {
+				
+                wbc()->common->var_dump( "wbc model feed get_data ".$for_section);
+            }
 
 			if($for_section == 'gallery_images_init') {
 				$args['data_definition'] = null;

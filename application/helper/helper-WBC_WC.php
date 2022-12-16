@@ -508,7 +508,8 @@ class WBC_WC {
 
             } elseif( $format == 'detailed_vattr' ) {
 
-                $option_list['pa_'.$attribute->attribute_name] = array('label'=>$attribute->attribute_label, 'attr'=>'data-sp_eid="'.$separator.'attr'.$separator.$attribute->attribute_id.'" ', $format);  
+                // temp comment (run on api demo) @s
+                // $option_list['pa_'.$attribute->attribute_name] = array('label'=>$attribute->attribute_label, 'attr'=>'data-sp_eid="'.$separator.'attr'.$separator.$attribute->attribute_id.'" ', $format);  
 
                 $option_list['pa_'.$attribute->attribute_name] = array('label'=>$attribute->attribute_label.'(use for variations)', 'attr'=>'data-sp_eid="'.$separator.'attr'.$separator.$attribute->attribute_id.$separator.'vattr" ', $format);  
 

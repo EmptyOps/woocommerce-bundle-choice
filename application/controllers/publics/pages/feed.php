@@ -25,7 +25,11 @@ class Feed extends \eo\wbc\controllers\publics\Controller{
     public function init($args = array()){
 
         if(self::instance()->should_load_options_view()) {
-         
+            
+            if( wbc()->sanitize->get('is_test') == 1 ) {
+                wbc()->common->var_dump( "wbc feed init");
+            }
+
             $args['data'] = \eo\wbc\model\publics\SP_Model_Feed::instance()->get_data('swatches_init');
             $args['page_section'] = 'swatches';
             self::instance()->selectron($args['page_section'],$args);

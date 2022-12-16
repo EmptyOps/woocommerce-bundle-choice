@@ -29,7 +29,13 @@ if(!class_exists('WBC_Loader')) {
 
 			// ACTIVE_TODO right now we are doing a temporary solution of preventing loading of asset multiple times using the constant option but later we need to apply the standard solution. 
 			$constant = 'SP_WBC_BUILT_IN_ASSET_'.$asset_group.'_LOADED';
-
+        	
+        	if( wbc()->sanitize->get('is_test') == 1 ) {
+			
+				wbc_pr('built_in_asset constant');
+				wbc_pr($constant);
+			}
+			
 			if(defined($constant)){
 
 				return false;
@@ -43,6 +49,11 @@ if(!class_exists('WBC_Loader')) {
 
 				case 'bootstrap':
 
+		        	if( wbc()->sanitize->get('is_test') == 1 ) {
+					
+						wbc_pr('bootstrap case constant is '. $constant);
+					}
+
 					if (false) {
 						?>
 						<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -54,7 +65,8 @@ if(!class_exists('WBC_Loader')) {
 
 					wbc()->load->asset('css','https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css',array(),"",true,true,null,null,false,true,null,true);
 					wbc()->load->asset('js','https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js', wbc()->common->current_theme_key() != "themes___purple_theme" ? array():array('jquery'),"",true,true,null,null,false,true,null,true);
-					wbc()->load->asset('js','https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js',wbc()->common->current_theme_key() != "themes___purple_theme" ? array():array('jquery'),"",true,true,null,null,false,true,null,true);			
+					wbc()->load->asset('js','https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js',wbc()->common->current_theme_key() != "themes___purple_theme" ? array():array('jquery'),"",true,true,null,null,false,true,null,true);	
+					break;		
 				case 'semantic':
 					//ACTIVE_TODO update code below to use wbc()->load->asset function call insted of below dairact wp api call.
 					add_action( 'wp_enqueue_scripts',function() { 
@@ -64,9 +76,17 @@ if(!class_exists('WBC_Loader')) {
 		            wp_register_script('fomantic-semantic.min',constant('EOWBC_ASSET_URL').'js/fomantic/semantic.min.js',array('jquery'),false);    
 		            wp_enqueue_script( 'fomantic-semantic.min');        
 		        },100);	
-		        case 'ion.rangeSlider':
+					break;
+		        case 'ion_rangeSlider':
+		        	
+		        	if( wbc()->sanitize->get('is_test') == 1 ) {
+    				
+						wbc_pr('ion_rangeSlider case constant is '. $constant);
+    				}
+		        	
 					wbc()->load->asset('css', constant('EOWBC_ASSET_URL') . 'css/rangeslider/ion.rangeSlider.min.css',array(),"",true,true,null,null,false,true,null,true);
 					wbc()->load->asset('js', constant('EOWBC_ASSET_URL') . 'js/rangeslider/ion.rangeSlider.min.js', wbc()->common->current_theme_key() != "themes___purple_theme" ? array():array('jquery'),"",true,true,null,null,false,true,null,true);
+					break;
 				default:				
 					break;
 			}			
