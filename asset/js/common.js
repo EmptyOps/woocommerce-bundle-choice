@@ -3083,6 +3083,11 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
         // ACTIVE_TODO temp. 
         // _this.data.current_variation = _this.data.product_variations[4];
         // _this.#process_images_template(_this.data.product_variations[0].variation_gallery_images);
+        
+        if (!_this.#data.is_variation_product) {
+         
+            _this.#process_images_template(_this.#data.product_variations[0].variation_gallery_images);            
+        }
 
         var sp_variations_gallery_images_loaded_callback = null ;
         window.document.splugins.events.api.notifyAllObservers( 'gallery_images', 'sp_variations_gallery_images_loaded', {}, sp_variations_gallery_images_loaded_callback, _this.#$base_container );
@@ -3968,11 +3973,13 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
  
      // -- base events - after the above events are handled by their particular function/layer, they would call below functions to do the ultimate work         
         // NOTE : so far this not in use since base function variation change is handling all base logic but if requared central base logic of change couled be moved here 
+    
     #change() {
  
     }
  
          ///////////// -- 15-06-2022 -- @drashti -- ///////////////////////////////
+    
     #compatability(section, object, expected_result) {
         
         var _this = this;
@@ -4024,6 +4031,12 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
 
                 object = '.col-xl-3';
             }
+        }/*aa else if simple type mate add kareli se confirm karvani baki se @a*/else if(section == 'simple_type') {
+            
+            console.log('compatability_simple_type');
+
+            object = '.product';
+        
         }    
         
         return object;
