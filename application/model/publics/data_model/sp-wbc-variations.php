@@ -678,6 +678,12 @@ class SP_WBC_Variations extends SP_Variations {
 		}
 
 
+		if( wbc()->sanitize->get('is_test') == 1 ) {
+
+			wbc_pr("sp_wbc_variation get_variations_and_simple_type_fields");
+			wbc_pr($data);
+		}
+
 		//  $product                      = wc_get_product( $product_id );
 
 		$gallery_images = array();	

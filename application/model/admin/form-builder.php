@@ -787,6 +787,12 @@ class Form_Builder implements Builder {
 					}
 
 					$args['form_definition'][$tab_slug]['form'] = $newform;
+
+					// if( wbc()->sanitize->get('is_test') == 1 ) {
+
+					// 	wbc_pr("Form_Builder das_form_definition_support form_definition");
+					// 	wbc_pr($args['form_definition'][$tab_slug]['form']);
+					// }
 				}
 			}
 
