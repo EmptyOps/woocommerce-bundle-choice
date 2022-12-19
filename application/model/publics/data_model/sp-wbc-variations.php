@@ -2232,6 +2232,11 @@ class SP_WBC_Variations extends SP_Variations {
 				return $data;
 			}
 
+			if( wbc()->sanitize->get('is_test') == 1 ) {
+			
+				wbc_pr("sp_wbc_variation gallery_images_hooks sp_wbc_product_get_type");
+			}
+
         	return $product->get_type();
         	
 		}, 10, 2);
