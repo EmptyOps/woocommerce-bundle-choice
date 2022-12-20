@@ -677,35 +677,28 @@ class SP_WBC_Variations extends SP_Variations {
 			$data = $variation_get_max_purchase_quantity['form'];
 		}
 
-
-		if( wbc()->sanitize->get('is_test') == 1 ) {
-
-			wbc_pr("sp_wbc_variation get_variations_and_simple_type_fields");
-			wbc_pr($data);
-		}
-
 		//  $product                      = wc_get_product( $product_id );
 
 		$gallery_images = array();	
 		if ( !empty($data['sp_variations']["form"]) ) {
-			echo"12121212112";
-			wbc_pr($data['sp_variations']["form"]); 
+			// echo"12121212112";
+			// wbc_pr($data['sp_variations']["form"]); 
 			foreach($data['sp_variations']["form"] as $key=>$fv){
 
 				if( !in_array($fv["type"], \eo\wbc\model\admin\Form_Builder::savable_types())) {
 
-					wbc_pr("continue type if");
-					wbc_pr(\eo\wbc\model\admin\Form_Builder::savable_types());
-					wbc_pr($fv['type']);
+					// wbc_pr("continue type if");
+					// wbc_pr(\eo\wbc\model\admin\Form_Builder::savable_types());
+					// wbc_pr($fv['type']);
 					
 					continue;
 				}
 
 				$value = $fv['value'];
 				
-				echo ">>>>>>>>>>> data fields";
-				wbc_pr($key);
-				wbc_pr($fv);
+				// echo ">>>>>>>>>>> data fields";
+				// wbc_pr($key);
+				// wbc_pr($fv);
 
 				if ( strpos( $key, 'sp_variations_gallery_images' ) !== false ) {
 
@@ -722,8 +715,8 @@ class SP_WBC_Variations extends SP_Variations {
 				} else {
 
 					$value_arr = apply_filters('sp_variations_available_variation_type', array('type'=>null,'value'=>$value,'key'=>$key), $key );
-					echo "2222222222";	
-					wbc_pr($value_arr);
+					// echo "2222222222";	
+					// wbc_pr($value_arr);
 					if( !empty($value_arr['type']) && !empty($gallery_images_types[$value_arr['type']]) ) {
 						
 						array_push($gallery_images, $value_arr);
@@ -795,8 +788,8 @@ class SP_WBC_Variations extends SP_Variations {
 
 		$variation_get_max_purchase_quantity['variation_gallery_images'] = array();
 
-		echo ">>>>>>>>>>> gallery_images";
-		wbc_pr($gallery_images);
+		// echo ">>>>>>>>>>> gallery_images";
+		// wbc_pr($gallery_images);
 
 		// sort 
 		$gallery_images_new = array();
@@ -2232,10 +2225,6 @@ class SP_WBC_Variations extends SP_Variations {
 				return $data;
 			}
 
-			if( wbc()->sanitize->get('is_test') == 1 ) {
-			
-				wbc_pr("sp_wbc_variation gallery_images_hooks sp_wbc_product_get_type");
-			}
 
         	return $product->get_type();
         	

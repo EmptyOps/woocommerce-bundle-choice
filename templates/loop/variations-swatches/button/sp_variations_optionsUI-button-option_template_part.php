@@ -21,6 +21,8 @@ $template = null;
 
 $slug_or_option = is_object($term) ? $term->slug : $term;
 
+$name_or_option = is_object($term) ? $term->name : $term;
+
 $template = array(
     'type' => 'li',
     'class' => 'spui_button_variable_item '.$woo_dropdown_attribute_html_data['class'].' '.$woo_dropdown_attribute_html_data['options_loop_class'][$slug_or_option],
@@ -34,7 +36,7 @@ $template = array(
                 array(
                     'type' => 'span',
                     'class' => 'spui_variable_item_span_button',
-                    'preHTML' => esc_html( $term->name ),
+                    'preHTML' => esc_html( $name_or_option /*$term->name*/ ),
                 ),
             ),
         ),

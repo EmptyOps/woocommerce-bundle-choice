@@ -66,8 +66,13 @@ class Feed extends \eo\wbc\controllers\publics\Controller{
         if ($page_section == 'swatches') {
             if ($container_class == 'swatches') {
 
+                $args['product'] = $args['hook_callback_args']['product'];
+                // $args['extra_args'] = $args['hook_callback_args']['extra_args'];
+                // unset($args['hook_callback_args']);
+
                 $data = \eo\wbc\model\publics\SP_Model_Feed::instance()->prepare_swatches_data($args);
-                if (!empty($data['is_return_default_html'])) {
+                if (!empty($data['is_return_default_html'])) {    
+
                     return $data['html'];
                 }
 
@@ -161,20 +166,22 @@ class Feed extends \eo\wbc\controllers\publics\Controller{
 
             add_filter( 'woocommerce_dropdown_variation_attribute_options_html',  function($html, $hook_args) use($page_section,$args){
 
-                return apply_filters ( 'sp_wbc_get_variation_attr_opts_html',$html, $hook_args);
+                return apply_filters ( 'sp_wbc_get_variation_attr_opts_html',$html, $hook_args, null);
 
             }, 200, 2);
 
-            add_filter('sp_wbc_get_variation_attr_opts_html',function($html, $hook_args) use($page_section,$args){
+            add_filter('sp_wbc_get_variation_attr_opts_html',function($html, $hook_args, $product) use($page_section,$args){
+
 
                 $args['hook_callback_args'] = array();
                 $args['hook_callback_args']['html'] = $html;
                 $args['hook_callback_args']['hook_args'] = $hook_args;
+                $args['hook_callback_args']['product'] = $product;
 
 
                 return $this->selectron_hook_render($page_section,'swatches',false,$args);
                 
-            }, 200, 2);
+            }, 200, 3);
 
         } else if ($args['page_section'] == 'swatches_cart_form') {
 
@@ -336,8 +343,8 @@ class Feed extends \eo\wbc\controllers\publics\Controller{
         \sp\theme\view\ui\builder\Page_Builder::instance()->build_page_widgets($ui,'woo_dropdown_attribute_html');
 
 
-        if ($data['woo_dropdown_attribute_html_data']['args']['sp_variations_swatches_show_on_shop_page'] == 1) {
-           
+        if ($data['woo_dropdown_attribute_html_data']['args']['sp_variations_swatches_show_on_shop_page'] == 1) { 
+
             $html = apply_filters('sp_render_swatches_data_by_attribute_type',null,$data);
 
             if (!empty($html)) {
