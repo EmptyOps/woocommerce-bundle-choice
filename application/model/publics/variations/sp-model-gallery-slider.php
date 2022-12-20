@@ -33,7 +33,8 @@ class SP_Model_Gallery_Slider extends Eowbc_Base_Model_Publics {
 	public function render_ui(){
 		
 		add_filter('sp_variations_gallery_images_core_container_class', function($classes){
-			if (wbc_is_mobile()) {
+			// ACTIVE_TODO temp: wen we enabel back the mobile site at that time remove below false condition.
+			if (false and wbc_is_mobile()) {
 				$classes[] = 'Product_MObail_View_Images';
 				$classes[] = 'sp-purple-theme-product-dots';
 			} else {
