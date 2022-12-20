@@ -378,6 +378,12 @@ class SP_Model_Feed extends SP_Feed {
 		$args['page'] = 'feed';
         $data = \eo\wbc\model\publics\data_model\SP_WBC_Variations::prepare_gallery_template_data($args);
         
+        if( wbc()->sanitize->get('is_test') == 1 ) {
+
+			wbc_pr("wbc SP_Model_Feed render_gallery_images_template_callback");
+			wbc_pr($data);
+		}
+
 		//////////////// start core
 
 		//bind to hook from here for the hook that is applied from both slider and zoom module for the images. means add filter here, and provide back with gallery_images data. so simply entire data var will be added to filter var but yeah the variation_gallery_images, attachment_ids etc. would be key -- to b done

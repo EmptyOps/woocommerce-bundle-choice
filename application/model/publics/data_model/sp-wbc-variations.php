@@ -1895,6 +1895,14 @@ class SP_WBC_Variations extends SP_Variations {
 
 		$data['gallery_images_template_data']['has_post_thumbnail'] = apply_filters('sp_wbc_has_post_thumbnail', null, $data['gallery_images_template_data']['post_thumbnail_id']); //has_post_thumbnail();
 
+		if( wbc()->sanitize->get('is_test') == 1 ) {
+
+			wbc_pr("SP_WBC_Variations prepare_gallery_template_data");
+			wbc_pr($data['gallery_images_template_data']['post_thumbnail_id']);
+			wbc_pr($data['gallery_images_template_data']['attachment_ids']);
+			wbc_pr($data['gallery_images_template_data']['has_post_thumbnail']);
+		}
+
 		// No main image but gallery
 		if ( ! $data['gallery_images_template_data']['has_post_thumbnail'] && count( $data['gallery_images_template_data']['attachment_ids'] ) > 0 ) {
 			$data['gallery_images_template_data']['post_thumbnail_id'] = $data['gallery_images_template_data']['attachment_ids'][0]['image_id'];
