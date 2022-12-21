@@ -473,14 +473,14 @@ class SP_WBC_Variations extends SP_Variations {
 				}
 
 				// -- dump @a--
-				if( wbc()->sanitize->get('is_test') == 1 ) {
-				// 	wbc_pr('wp_get_attachment_url');
-				// 	wbc_pr(wp_get_attachment_url(13780)); 
-					wbc_pr('srcset dump');
-					wbc_pr(wp_get_attachment_image_srcset( $attachment_id,  array( 'i600', 'i1000', 'i1200' )  ));
-					wbc_pr($attachment_id);
-					wbc_pr($image_size);
-				}
+				// if( wbc()->sanitize->get('is_test') == 1 ) {
+				// // 	wbc_pr('wp_get_attachment_url');
+				// // 	wbc_pr(wp_get_attachment_url(13780)); 
+				// 	wbc_pr('srcset dump');
+				// 	wbc_pr(wp_get_attachment_image_srcset( $attachment_id,  array( 'i600', 'i1000', 'i1200' )  ));
+				// 	wbc_pr($attachment_id);
+				// 	wbc_pr($image_size);
+				// }
 
 			}else{
 
@@ -1838,12 +1838,6 @@ class SP_WBC_Variations extends SP_Variations {
 		/*ACTIVE_TODO_OC_START
 		----product no peramiter pass kervano baki che
 		ACTIVE_TODO_OC_END*/
-		
-		if( wbc()->sanitize->get('is_test') == 1 ) {
-			wbc_pr('prepare_gallery_template_data');
-			echo '<pre>';
-			debug_print_backtrace();
-		}
 
 		if(empty($args['product'])) {
 
@@ -1925,7 +1919,7 @@ class SP_WBC_Variations extends SP_Variations {
 
 			$data['gallery_images_template_data']['product_variation'] = \eo\wbc\model\publics\data_model\SP_WBC_Variations::instance()->get_available_variation($data['gallery_images_template_data']['product_id'], $data['gallery_images_template_data']['default_variation_id']);
 
-			if( wbc()->sanitize->get('is_test') == 1 ) {
+			if( wbc()->sanitize->get('is_light_test') == 1 ) {
 
 				wbc_pr("SP_WBC_Variations prepare_gallery_template_data");
 				wbc_pr($data['gallery_images_template_data']['product_variation']);

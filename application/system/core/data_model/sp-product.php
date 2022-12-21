@@ -45,18 +45,7 @@ class SP_Product extends SP_Entity {
 
 	public static function get_image_id($product){
 
-		if( wbc()->sanitize->get('is_test') == 1 ) {
-			
-			wbc_pr("wbc SP_Product get_image_id");
-			echo "<pre>";
-			debug_print_backtrace();
-			echo "</pre>";
-			wbc_pr("vdgfghrdg");
-		}
-
-		return $product->get_image_id();
-
-		
+		return $product->get_image_id();	
 	}
 
 	public static function get_gallery_image_ids($product){
