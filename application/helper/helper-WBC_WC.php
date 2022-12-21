@@ -599,6 +599,15 @@ class WBC_WC {
         return false;
     }
 
+    public function is_wc_object($product){
+
+        if(is_a( $product, 'WC_Product' ) or is_a( $product, 'WC_Product_Variable' ) or is_a( $product, 'WC_Product_Variation' )){
+           return true;
+        }
+
+        return false;
+    }
+
     public function get_terms_order_data(){
 
         $attributes = array();        

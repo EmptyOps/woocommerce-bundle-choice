@@ -1,3 +1,4 @@
+throw "";
 window.document.splugins = window.document.splugins || {};
 
 window.document.splugins.wbc = window.document.splugins.wbc || {};

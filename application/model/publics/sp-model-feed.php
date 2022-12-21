@@ -378,11 +378,11 @@ class SP_Model_Feed extends SP_Feed {
 		$args['page'] = 'feed';
         $data = \eo\wbc\model\publics\data_model\SP_WBC_Variations::prepare_gallery_template_data($args);
         
-        if( wbc()->sanitize->get('is_test') == 1 ) {
+        // if( wbc()->sanitize->get('is_test') == 1 ) {
 
-			wbc_pr("wbc SP_Model_Feed render_gallery_images_template_callback");
-			wbc_pr($data);
-		}
+		// 	wbc_pr("wbc SP_Model_Feed render_gallery_images_template_callback");
+		// 	wbc_pr($data);
+		// }
 
 		//////////////// start core
 
