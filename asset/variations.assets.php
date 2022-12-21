@@ -899,7 +899,8 @@ if(is_shop() || is_product_category()) {
         	border: none !important;
         }
 
-        form.variations_form table.variations tbody th.label {
+        form.variations_form table.variations tbody th.label,
+        form.variations_form table.variations tbody td.label {
             display: none;
         }
         form.variations_form table.variations tbody th, form.variations_form table.variations tbody td {
