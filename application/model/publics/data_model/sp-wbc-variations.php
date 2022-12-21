@@ -682,24 +682,24 @@ class SP_WBC_Variations extends SP_Variations {
 
 		$gallery_images = array();	
 		if ( !empty($data['sp_variations']["form"]) ) {
-			echo"12121212112";
-			wbc_pr($data['sp_variations']["form"]); 
+			// echo"12121212112";
+			// wbc_pr($data['sp_variations']["form"]); 
 			foreach($data['sp_variations']["form"] as $key=>$fv){
 
 				if( !in_array($fv["type"], \eo\wbc\model\admin\Form_Builder::savable_types())) {
 
-					wbc_pr("continue type if");
-					wbc_pr(\eo\wbc\model\admin\Form_Builder::savable_types());
-					wbc_pr($fv['type']);
+					// wbc_pr("continue type if");
+					// wbc_pr(\eo\wbc\model\admin\Form_Builder::savable_types());
+					// wbc_pr($fv['type']);
 					
 					continue;
 				}
 
 				$value = $fv['value'];
 				
-				echo ">>>>>>>>>>> data fields";
-				wbc_pr($key);
-				wbc_pr($fv);
+				// echo ">>>>>>>>>>> data fields";
+				// wbc_pr($key);
+				// wbc_pr($fv);
 
 				if ( strpos( $key, 'sp_variations_gallery_images' ) !== false ) {
 
@@ -716,8 +716,8 @@ class SP_WBC_Variations extends SP_Variations {
 				} else {
 
 					$value_arr = apply_filters('sp_variations_available_variation_type', array('type'=>null,'value'=>$value,'key'=>$key), $key );
-					echo "2222222222";	
-					wbc_pr($value_arr);
+					// echo "2222222222";	
+					// wbc_pr($value_arr);
 					if( !empty($value_arr['type']) && !empty($gallery_images_types[$value_arr['type']]) ) {
 						
 						array_push($gallery_images, $value_arr);
@@ -789,8 +789,8 @@ class SP_WBC_Variations extends SP_Variations {
 
 		$variation_get_max_purchase_quantity['variation_gallery_images'] = array();
 
-		echo ">>>>>>>>>>> gallery_images";
-		wbc_pr($gallery_images);
+		// echo ">>>>>>>>>>> gallery_images";
+		// wbc_pr($gallery_images);
 
 		// sort 
 		$gallery_images_new = array();
@@ -1836,6 +1836,12 @@ class SP_WBC_Variations extends SP_Variations {
 		/*ACTIVE_TODO_OC_START
 		----product no peramiter pass kervano baki che
 		ACTIVE_TODO_OC_END*/
+		
+		if( wbc()->sanitize->get('is_test') == 1 ) {
+			wbc_pr('prepare_gallery_template_data');
+			echo '<pre>';
+			debug_print_backtrace();
+		}
 
 		if(empty($args['product'])) {
 
@@ -1868,6 +1874,11 @@ class SP_WBC_Variations extends SP_Variations {
 
 		$data['gallery_images_template_data']['product_id'] = apply_filters('sp_wbc_product_get_id', null, $product); //$product->get_id();
 
+		if( wbc()->sanitize->get('is_test') == 1 ) {
+			wbc_pr('gallery_images_template_data_product_id');
+			wbc_pr($data['gallery_images_template_data']['product_id']);
+		}
+
 		$data['gallery_images_template_data']['default_attributes'] =  null;
 		if (!empty($data['gallery_images_template_data']['product_id'])) {
 			
@@ -1886,6 +1897,11 @@ class SP_WBC_Variations extends SP_Variations {
 		}
 
 		$data['gallery_images_template_data']['product_type'] = apply_filters('sp_wbc_product_get_type', null, $product); //$product->get_type();
+
+		if( wbc()->sanitize->get('is_test') == 1 ) {
+			wbc_pr('gallery_images_template_data_product_type');
+			wbc_pr($data['gallery_images_template_data']['product_type']);
+		}
 
 		// ACTIVE_TODO we may like to use the columns var later to till gallery_images slider and zoom module layers including till applicable js layers -- to h or -- to d 
 		$data['gallery_images_template_data']['columns'] = -1;	//	thumbnail columns 
@@ -2072,6 +2088,11 @@ class SP_WBC_Variations extends SP_Variations {
 			    	$data = self::prepare_gallery_template_data_item($data, $index, $id, $product);
 			    }
 			}
+		}
+		
+		if( wbc()->sanitize->get('is_test') == 1 ) {
+			wbc_pr('gallery_images_template_data_all');
+			wbc_pr($data);
 		}
 
 		return $data;

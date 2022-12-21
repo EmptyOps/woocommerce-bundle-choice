@@ -2811,6 +2811,18 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
 
         // _this.#data.product_variations = _this.#$variations_form.data('product_variations') || [];      
 
+               /*ACTIVE_TODO_OC_START
+               this.$attributeFields = this.$variations_form.find('.variations select');
+               this.$target = this._element.parent();
+               this.$slider = $('.woo-variation-gallery-slider', this._element);
+               this.$thumbnail = $('.woo-variation-gallery-thumbnail-slider', this._element);
+                ACTIVE_TODO_OC_END*/
+
+        -- here to determine product type if simple or not best possible way seem to be is we support pasing config from where we run jquery plugin -- to h -- to a
+            -- and ofcorse if we do it than need to add config passing, extend and so on support on the jquery plugins inisializetion layers. -- to h -- to a
+        _this.product_id = _this.#$variations_form.data('product_id');
+        _this.#data.is_variation_product = _this.#$variations_form.length > 0;
+ 
         if(_this.#data.is_variation_product) {
 
             _this.#data.product_variations = _this.#$variations_form.data('product_variations') || [];      
@@ -2820,16 +2832,6 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
             _this.#data.product_variations = _this.#$variations_form.data('product_simple') || [];      
         }
 
-               /*ACTIVE_TODO_OC_START
-               this.$attributeFields = this.$variations_form.find('.variations select');
-               this.$target = this._element.parent();
-               this.$slider = $('.woo-variation-gallery-slider', this._element);
-               this.$thumbnail = $('.woo-variation-gallery-thumbnail-slider', this._element);
-                ACTIVE_TODO_OC_END*/
-
-        _this.product_id = _this.#$variations_form.data('product_id');
-        _this.#data.is_variation_product = _this.#$variations_form.length > 0;
- 
         _this.#$additional_container/*base_element*/.addClass('spui-wbc-gallery_images-loaded');
  
         _this.#$slider_container = window.document.splugins.common.is_item_page ? _this.#$additional_container/*base_element*/.find( '.'+ _this.#configs.classes.slider.container ) : _this.#$additional_container/*base_element*/.closest( '.'+ _this.#configs.classes.slider.container );
@@ -3091,7 +3093,10 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
         // _this.#process_images_template(_this.data.product_variations[0].variation_gallery_images);
         
         if (!_this.#data.is_variation_product) {
-         
+
+            -- below current variation inisializetion logic is almost final but still confirm if there is any conflict -- to h -- to a
+            _this.#data.current_variation = _this.data.product_variations[0];
+            
             _this.#process_images_template(_this.#data.product_variations[0].variation_gallery_images);            
         }
 
