@@ -202,6 +202,7 @@ add_action('wp_footer',function(){
 			if(window.document.splugins.common.is_category_page) {
 
 				console.log("js.vras.asset ready event 3.1");
+				console.log(common_configs.gallery_images_configs.base_container_loop_selector);
 
 		        // window.setTimeout(function(){
 

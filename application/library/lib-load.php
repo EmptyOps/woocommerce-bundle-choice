@@ -375,7 +375,8 @@ if(!class_exists('WBC_Loader')) {
 
 		        if(strpos($path,'{{template_key_device}}') !== FALSE){
 
-		            if (wbc_is_mobile()) {
+		        	// ACTIVE_TODO temp: wen we enabel back the mobile site at that time remove below false condition. 
+		            if (false and wbc_is_mobile()) {
 
 		                $template_path_new = str_replace('{{template_key_device}}','mobile',$path);
 

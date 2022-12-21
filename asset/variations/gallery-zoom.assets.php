@@ -1,7 +1,8 @@
 <?php
 add_action( 'wp_enqueue_scripts' ,function(){
 
-	if (wbc_is_mobile()) {
+	// ACTIVE_TODO temp: wen we enabel back the mobile site at that time remove below false condition.
+	if (false and wbc_is_mobile()) {
 
 		wbc()->load->asset('css','variations/gallery_images/external-plugins/xzoom/xzoom',array(),"",false,true);
 

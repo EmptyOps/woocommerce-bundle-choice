@@ -1175,6 +1175,10 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
 		render_container = result_container(render_container);
 
+		console.log("render_container after result_container log");
+		console.log(render_container);
+
+
 		/*ACTIVE_TODO_OC_START
 		// create two function show_loader and hide_loader in filters core js module -- to d done
 			// --	and then move the below code in the hide_loader -- to d done
