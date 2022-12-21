@@ -147,6 +147,10 @@ class Feed extends \eo\wbc\controllers\publics\Controller{
 
                 global $product;
                 
+                if( wbc()->sanitize->get('is_test') == 1 ) {
+                    wbc_pr('Feed selectron');
+                    wbc_pr($product);
+                }
                 do_action( 'sp_wbc_woo_template_loop_product_thumbnail', $product, null);
 
 
