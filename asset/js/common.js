@@ -2816,8 +2816,6 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
                this.$thumbnail = $('.woo-variation-gallery-thumbnail-slider', this._element);
                 ACTIVE_TODO_OC_END*/
 
-        -- here to determine product type if simple or not best possible way seem to be is we support pasing config from where we run jquery plugin -- to h -- to a
-            -- and ofcorse if we do it than need to add config passing, extend and so on support on the jquery plugins inisializetion layers. -- to h -- to a
         _this.product_id = _this.#$variations_form.data('product_id');
         console.log("_this.product_id");
         console.log(_this.product_id);
@@ -3094,7 +3092,6 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
         
         if (!_this.#data.is_variation_product) {
 
-            -- below current variation inisializetion logic is almost final but still confirm if there is any conflict -- to h -- to a
             _this.#data.current_variation = _this.data.product_variations[0];
             
             _this.#process_images_template(_this.#data.product_variations[0].variation_gallery_images);            
@@ -3338,6 +3335,16 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
         var zoom_inner_html = '';
         jQuery( images).each(function (index_inner,image) {
             
+            var type_template = null;
+
+            if( _this.#configs.product_variations_configs.is_gallery_images_type_based_template == 1 ){
+
+                type_template = image.extra_params_org.type;
+            } else {
+
+                type_template = index_inner;
+            }
+
             image.index = index_inner;
 
             // console.log(" gallery_images process_zoom_template inner loop" );
@@ -3351,7 +3358,7 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
                     
                     // console.log(" gallery_images process_zoom_template inner inner if" );
 
-                    var template_var = _this.#template( _this.#configs.template.zoom.id+'_'+index_inner, templating_lib );
+                    var template_var = _this.#template( _this.#configs.template.zoom.id+'_'+/*index_inner*/type_template, templating_lib );
 
                     zoom_inner_html += _this.#apply_template_data(template_var, image, templating_lib);
 
@@ -3365,7 +3372,7 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
             }else{
                 // console.log(" gallery_images process_zoom_template outer if" );
 
-                var template_var = _this.#template( _this.#configs.template.zoom.id+'_'+index_inner, templating_lib );
+                var template_var = _this.#template( _this.#configs.template.zoom.id+'_'+/*index_inner*/type_template, templating_lib );
 
                 zoom_inner_html += _this.#apply_template_data(template_var, image, templating_lib);
             }
@@ -4690,7 +4697,17 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
 
                 // if(index_inner (?) == index_inner){
                 if( _this.#$configs.options.tiny_features_option_ui_loop_box_hover_media_index == index_inner){
-                    
+            
+                    var type_template = null;
+
+                    if( _this.#$configs.product_variations_configs.is_gallery_images_type_based_template == 1 ){
+
+                        template_id = _this.#$configs.template.zoom.id+'_' + image.extra_params_org.type + '_hover';
+                    } else {
+
+                        template_id = _this.#$configs.template.zoom.id+'_'+_this.#$configs.options.tiny_features_option_ui_loop_box_hover_media_index + '_hover';
+                    }
+
                     // console.log(" gallery_images_child zoom_area_hover_in inner inner if" );
 
                     var template_var = _this.template_public( template_id, templating_lib );

@@ -195,8 +195,36 @@ class SP_Model_Loop_Gallery_Zoom extends Eowbc_Base_Model_Publics {
 			foreach( $images_data['gallery_images_template_data']['attachment_ids_loop_image'] as $index => $image ) {
 
 				foreach($hook_array as $hook_key) {
-				
+					
+					$type_template = null;
+
+					if(wbc()->config->product_variations_configs()['is_gallery_images_type_based_template'] == 1) {
+
+						$type_template = $image['extra_params_org']['type'];
+
+						$constant_key = 'sp_slzm_loop_zoom_image_loop_'.$type_template.($hook_key=='sp_slzm_loop_zoom_image_loop_js_tempalte_hover'?'_hover':'')."_created";
+
+						if(defined($constant_key) ) {
+
+							continue;
+						}
+						
+						if( wbc()->sanitize->get('is_test') == 1 ) {
+
+							wbc_pr("SP_Model_Gallery_Zoom wbc");
+							wbc_pr($constant_key);
+						}
+
+						define($constant_key, true);
+						
+					} else {
+
+						$type_template = $index;
+					}
+
+
 					$html = null;
+					
 					$html = apply_filters($hook_key, $html, $index, $image);
 
 					if(wbc()->sanitize->get('is_test') == 1 || wbc()->sanitize->get('is_test') == 9) {
@@ -211,7 +239,7 @@ class SP_Model_Loop_Gallery_Zoom extends Eowbc_Base_Model_Publics {
 						wbc_pr($html);
 					}
 
-					echo \eo\wbc\model\UI_Builder::instance()->js_template_wrap('sp_slzm_loop_zoom_image_loop_'.$index.($hook_key=='sp_slzm_loop_zoom_image_loop_js_tempalte_hover'?'_hover':''),$html,'wp');
+					echo \eo\wbc\model\UI_Builder::instance()->js_template_wrap('sp_slzm_loop_zoom_image_loop_'./*$index*/$type_template.($hook_key=='sp_slzm_loop_zoom_image_loop_js_tempalte_hover'?'_hover':''),$html,'wp');
 				}
 				
 			}

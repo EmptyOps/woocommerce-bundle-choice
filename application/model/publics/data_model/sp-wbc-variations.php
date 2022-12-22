@@ -290,6 +290,8 @@ class SP_WBC_Variations extends SP_Variations {
 			$props['url']                         = $attachment_id/*wc_placeholder_img_src()*/;
 			$props['full_src']                    = $props['url'];
 			$props['src']                         = $props['url'];
+			$props['gallery_thumbnail_src']       = $props['url'];
+			$props['archive_src']                 = $props['url'];
 
 			$attachment_id = 0;
 		}
