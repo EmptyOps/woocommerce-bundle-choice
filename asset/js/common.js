@@ -3521,6 +3521,7 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
         _this.#$variations_form.on('show_variation', function (event, variation) {
             
            console.log("variation_change_listener 2 show_variation");
+           console.log(_this.#$zoom_container);
            console.log(event);
            console.log(variation);
 
@@ -3597,12 +3598,12 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
 
         // console.log('get_loop_box_anchor');        
 
-        if(!window.document.splugins.common.is_empty(_this.finalAnchor)) {
+        if(!window.document.splugins.common.is_empty(_this.$finalAnchor)) {
             
             // console.log('get_loop_box_anchor if');  
-            // console.log(_this.finalAnchor);      
+            // console.log(_this.$finalAnchor);      
             
-            return _this.finalAnchor;
+            return _this.$finalAnchor;
         }
 
         // console.log('get_loop_box_anchor 01');        
@@ -3630,28 +3631,24 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
 
             for (let i = 0; i < aLocate.length; i++){
 
-                if(jQuery(aLocate[i]).attr('class').indexOf(' ') >= 0){
+                console.log('aLocate index : ' + i);
+                console.log(aLocate[i]);
+                
+                if(!window.document.splugins.common.is_empty(jQuery(aLocate[i]).attr('class'))){
+                    
+                    if(jQuery(aLocate[i]).attr('class').indexOf(' ') >= 0){
 
-                    var aLocateclassAll = jQuery(aLocate[i]).attr('class').split(" ");
+                        var aLocateclassAll = jQuery(aLocate[i]).attr('class').split(" ");
 
-                    var aLocateclassAll_index = aLocateclassAll.indexOf(aLocateclass_p);
+                        var aLocateclassAll_index = aLocateclassAll.indexOf(aLocateclass_p);
 
-                    if( aLocateclassAll_index != -1 && aLocateclassAll[aLocateclassAll_index] == aLocateclass_p) {
+                        if( aLocateclassAll_index != -1 && aLocateclassAll[aLocateclassAll_index] == aLocateclass_p) {
 
-                        var finalAnchor = jQuery(aLocate[i]);
-                            
-                    }else if( !window.document.splugins.common.is_empty(jQuery(aLocate[i]).attr("href")) && jQuery(aLocate[i]).attr("href").indexOf("/product/") >= 0) {
-                        
-                        var finalAnchor = jQuery(aLocate[i]);
+                            _this.$finalAnchor = jQuery(aLocate[i]);
+                                
+                        }
 
                     }
-
-                    if(!window.document.splugins.common.is_empty(finalAnchor)) {
-
-                       break; 
-                    }
-
-                }else if(!window.document.splugins.common.is_empty(jQuery(aLocate[i]).attr('class'))){
 
                     var aLocateclass = jQuery(aLocate[i]).attr('class');
 
@@ -3659,36 +3656,33 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
 
                     if(aLocateclass == aLocateclass_p){
 
-                        var finalAnchor = jQuery(aLocate[i]);
+                        _this.$finalAnchor = jQuery(aLocate[i]);
                         // console.log("class thi <a> malyo");
 
-                    }else if(jQuery(aLocate[i]).attr("href").indexOf("/product/") >= 0) {
-
-                        var finalAnchor = jQuery(aLocate[i]);
-                        // console.log("/product/ HREF thi <a> malyo");
-
-                    }else if(jQuery(aLocate[i]).attr("href").indexOf("/producto/") >= 0) {
-
-                        var finalAnchor = jQuery(aLocate[i]);
-                        // console.log("/producto/ HREF thi <a> malyo");
-                    }
-
-                    if(!window.document.splugins.common.is_empty(finalAnchor)) {
-
-                       break; 
                     }
                 
-                } 
+
+                }
+
+                if(!window.document.splugins.common.is_empty(jQuery(aLocate[i]).attr("href")) && (jQuery(aLocate[i]).attr("href").indexOf("/product/") >= 0 || jQuery(aLocate[i]).attr("href").indexOf("/producto/") >= 0 )) {
+
+                    _this.$finalAnchor = jQuery(aLocate[i]);
+                    // console.log("/product/ HREF thi <a> malyo");
+
+                }
+
+                if(!window.document.splugins.common.is_empty(_this.$finalAnchor)) {
+
+                   break; 
+                }
+
             }                
         }
 
-        // console.log('final anchor');
-        // console.log(finalAnchor);
+        console.log('final anchor');
+        console.log(_this.$finalAnchor);
 
-        _this.finalAnchor = finalAnchor;
-
-        return _this.finalAnchor;
-    
+        return _this.$finalAnchor; 
     }
 
     #set_variation_url(event, variation) {
@@ -3701,14 +3695,14 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
         ACTIVE_TODO_OC_END*/
         var _this = this;
 
-        // if(window.document.splugins.common.is_empty(_this.finalAnchor)) {
-        //     console.log('_this.finalAnchor is empty if');
-        //     _this.finalAnchor = _this.#get_loop_box_anchor_private(event, variation);
+        // if(window.document.splugins.common.is_empty(_this.$finalAnchor)) {
+        //     console.log('_this.$finalAnchor is empty if');
+        //     _this.$finalAnchor = _this.#get_loop_box_anchor_private(event, variation);
         // }
 
         // if(window.document.splugins.common.is_empty(_this.finalAnchor_url)) {
         //     console.log('_this.finalAnchor_url is empty if');
-        //     _this.finalAnchor_url = _this.finalAnchor.attr('href');
+        //     _this.finalAnchor_url = _this.$finalAnchor.attr('href');
         // }
 
         // var a = _this.#get_loop_box_anchor_private(event, variation);    
@@ -4145,6 +4139,7 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
 }
 
 console.log('gallery_images module 00');
+console.log(eo_wbc_object);
 window.document.splugins.wbc.variations.gallery_images = window.document.splugins.wbc.variations.gallery_images || {};
 
 window.document.splugins.wbc.variations.gallery_images.core = function( configs ) {
@@ -4607,7 +4602,7 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
         var _this = this; 
 
         console.log("_this.#data.is_zoom_area_hover_in_progress");
-        // console.log(_this.#data.is_zoom_area_hover_in_progress);
+        console.log(_this.#data.is_zoom_area_hover_in_progress);
 
         if(_this.#data.is_zoom_area_hover_in_progress) {
 
@@ -4642,8 +4637,8 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
 
             var hasGallery = images.length > 1;
 
-            // console.log('zoom_area_hover_in() images');
-            // console.log(images);
+            console.log('zoom_area_hover_in() images');
+            console.log(images);
             jQuery(images).each(function (index_inner,image) {
                 
                 image.index = index_inner;
@@ -4683,8 +4678,8 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
 
             if (hasGallery) {
 
-              // console.log(" hasGallery if inner _this.zoom_container is "+super.get_zoom_container() );  
-              // console.log(zoom_inner_html);
+              console.log(" hasGallery if inner _this.zoom_container is "+super.get_zoom_container() );  
+              console.log(zoom_inner_html);
               // _this.#$zoom_container.html(zoom_inner_html);
               super.get_zoom_container().html(zoom_inner_html);
             } else {

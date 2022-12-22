@@ -70,7 +70,7 @@ if ( ! class_exists( 'Tiny_features' ) ) {
 
 	    private function selectron($page_section,$args = array()){
 			if ($page_section == 'sp_variations') {
-
+				
 				add_action( 'woocommerce_save_product_variation', function( $variation_id, $loop ) use($page_section,$args){
 
 					$args['hook_callback_args'] = array();
