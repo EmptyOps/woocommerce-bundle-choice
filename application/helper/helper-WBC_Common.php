@@ -542,6 +542,10 @@ class WBC_Common {
 
 					return false;
 
+				} elseif ($key == 'loop_content') {
+
+					return false;
+
 				} elseif ($key == 'cat_shop_page') {
 
 					return false;
@@ -562,6 +566,10 @@ class WBC_Common {
 
 					return false;
 
+				} elseif ($key == 'cart') {
+
+					return false;
+
 				} else {
 
 					return true;
@@ -569,7 +577,14 @@ class WBC_Common {
 
 			} else {
 
-				return true;
+				if ($key == 'loop_content') {
+
+					return false;
+
+				} else{
+
+					return true;
+				}
 			}
 
 		} else {
