@@ -110,12 +110,6 @@ class Eowbc_Model {
 								}
 							}
 
-							if( wbc()->sanitize->get('is_test') == 1 ) {
-
-								wbc_pr("Eowbc_Model get");
-								wbc_pr($dm_based_field);
-								wbc_pr($fk);
-							}
 
 							//$form_definition[$key]["form"][$fk]["value"] = ( isset($save_as_data['post_meta'][$fk]) ? $save_as_data['post_meta'][$fk] : ( isset($form_definition[$key]["form"][$fk]["value"]) ? $form_definition[$key]["form"][$fk]["value"] :'' ) );
 							if ( !empty( $dm_based_field ) ) {
