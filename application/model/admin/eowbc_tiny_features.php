@@ -72,7 +72,7 @@ class Tiny_Features extends Eowbc_Model {
 		
 		?>
 		<style type="text/css">
-			/ Enter Your Custom Admin CSS Here /
+			/*Enter Your Custom Admin CSS Here*/
 			.ui.pointing.secondary.menu {
 				padding: 10px 20px 10px 16px!important;
 				margin: 9px 0;
