@@ -3339,7 +3339,7 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
 
             if( _this.#configs.product_variations_configs.is_gallery_images_type_based_template == 1 ){
 
-                type_template = image.extra_params_org.type;
+                type_template = !window.document.splugins.common.is_empty(image.extra_params_org.type) ? image.extra_params_org.type : '';
             } else {
 
                 type_template = index_inner;
@@ -4702,7 +4702,7 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
 
                     if( _this.#$configs.product_variations_configs.is_gallery_images_type_based_template == 1 ){
 
-                        template_id = _this.#$configs.template.zoom.id+'_' + image.extra_params_org.type + '_hover';
+                        template_id = _this.#$configs.template.zoom.id+'_' + (!window.document.splugins.common.is_empty(image.extra_params_org.type) ? image.extra_params_org.type : '') + '_hover';
                     } else {
 
                         template_id = _this.#$configs.template.zoom.id+'_'+_this.#$configs.options.tiny_features_option_ui_loop_box_hover_media_index + '_hover';
