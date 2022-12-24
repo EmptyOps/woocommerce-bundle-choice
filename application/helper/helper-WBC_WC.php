@@ -86,6 +86,13 @@ class WBC_WC {
             }
         }
 
+        //added on 24-12-2022 
+        if (!is_array($terms_html)) {
+
+            $terms_html = array($terms_html);
+
+        }
+
         if( $format == 'name' ) {
 
             return implode( ', ', $terms_html );
