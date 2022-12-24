@@ -68,8 +68,7 @@ class Tiny_Features extends Eowbc_Model {
 		parent::render_ui_sub_process($form, $args);
 		
 		//	if there is any module specific js or css then it should be loaded view file or asset.php file -- both have their pros and cons. but I think asset.php is for flows var a asset file was necessary and where view is available we can simply put such js/css stuff there but in case of the admin also now we are moving the render related logic model and so maybe there will be little things in the view file 
-
-		
+		// ACTIVE_TODO temp. added on 24-Dec-2022. move it to right place and remove from here.		
 		?>
 		<style type="text/css">
 			/*Enter Your Custom Admin CSS Here*/
@@ -89,6 +88,8 @@ class Tiny_Features extends Eowbc_Model {
 				padding: 10px 20px 10px 13px!important;
 				margin: 9px 0;
 				border-bottom: 1px solid #eee;
+				float: left;
+				width: 100%;
 			}
 
 			.eight.wide.field.upload_image .ui.button.inverted.primary {
