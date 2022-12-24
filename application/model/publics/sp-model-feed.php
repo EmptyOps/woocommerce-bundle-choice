@@ -53,8 +53,17 @@ class SP_Model_Feed extends SP_Feed {
 		
 		global $product;	
 
+		/*ACTIVE_TODO_OC_START
+		ACTIVE_TODO here it seems that we had made an error during feed model implementation that the swatces init if is missing here. which seems to be fundamnetal and is already there on the item page. so we must fix this as soon as we get chance after the stuller run. -- to h 
+			now added the swatches_init key in below if on 05-12-2022
+		ACTIVE_TODO_OC_END*/
 		// add that four conditions here in below if, simply as or conditions -- to d or -- to b done
-		if( $for_section == "gallery_images_init" || $for_section == "gallery_images") {
+		if( $for_section == "gallery_images_init" || $for_section == "gallery_images" || $for_section == 'swatches_init') {
+
+			if( wbc()->sanitize->get('is_test') == 1 ) {
+				
+                wbc()->common->var_dump( "wbc model feed get_data ".$for_section);
+            }
 
 			if($for_section == 'gallery_images_init') {
 				$args['data_definition'] = null;
@@ -366,8 +375,15 @@ class SP_Model_Feed extends SP_Feed {
 		// 	}
 		// }
 
-        $data = \eo\wbc\model\publics\data_model\SP_WBC_Variations::prepare_gallery_template_data(array('page'=>'feed'));
+		$args['page'] = 'feed';
+        $data = \eo\wbc\model\publics\data_model\SP_WBC_Variations::prepare_gallery_template_data($args);
         
+        // if( wbc()->sanitize->get('is_test') == 1 ) {
+
+		// 	wbc_pr("wbc SP_Model_Feed render_gallery_images_template_callback");
+		// 	wbc_pr($data);
+		// }
+
 		//////////////// start core
 
 		//bind to hook from here for the hook that is applied from both slider and zoom module for the images. means add filter here, and provide back with gallery_images data. so simply entire data var will be added to filter var but yeah the variation_gallery_images, attachment_ids etc. would be key -- to b done
@@ -414,6 +430,8 @@ class SP_Model_Feed extends SP_Feed {
 
 	public function prepare_swatches_data($args = array()){
 
+		$args['page'] = 'feed';
+		
 		return \eo\wbc\model\publics\data_model\SP_WBC_Variations::prepare_swatches_data($args);
 
 	}

@@ -444,7 +444,7 @@ class WBC_WC {
             $option_list=array();    
         } elseif( $format == 'detailed_dropdown' ) {
             $option_list='';    
-        } elseif( $format == 'detailed'){
+        } elseif( $format == 'detailed' || 'detailed_slug'){
             $option_list=array();
         } elseif( $format == 'id_and_title' ){
             $option_list=array();
@@ -457,8 +457,8 @@ class WBC_WC {
                 $option_list[$base->term_id] = $base->slug;
             } elseif( $format == 'detailed_dropdown' ) {
                 $option_list.='<div class="item" data-value="'.$base->term_id.'" data-sp_eid="'.$separator.'prod_cat'.$separator.$base->term_id.'">'.str_replace("'","\'",$base->name).'</div>'.$this->get_productCats($base->slug, $format);
-            } elseif( $format == 'detailed') {
-                $option_list[$base->term_id] = array('label'=>str_replace("'","\'",$base->name), 'attr'=>' data-sp_eid="'.$separator.$sp_eid_type_value.$separator.$base->term_id.' " ', $format);
+            } elseif( $format == 'detailed' || 'detailed_slug') {
+                $option_list[$base->term_id] = array('label'=> $format = 'detailed_slug' ? str_replace("'","\'",$base->name).'('.$base->slug.')' : str_replace("'","\'",$base->name), 'attr'=>' data-sp_eid="'.$separator.$sp_eid_type_value.$separator.$base->term_id.' " ', $format);
 
 
                 $option_list = array_replace($option_list, self::get_productCats($base->slug, $format)); //array_merge($option_list, self::get_productCats($base->slug, $format));
@@ -508,7 +508,8 @@ class WBC_WC {
 
             } elseif( $format == 'detailed_vattr' ) {
 
-                $option_list['pa_'.$attribute->attribute_name] = array('label'=>$attribute->attribute_label, 'attr'=>'data-sp_eid="'.$separator.'attr'.$separator.$attribute->attribute_id.'" ', $format);  
+                // temp comment (run on api demo) @s
+                // $option_list['pa_'.$attribute->attribute_name] = array('label'=>$attribute->attribute_label, 'attr'=>'data-sp_eid="'.$separator.'attr'.$separator.$attribute->attribute_id.'" ', $format);  
 
                 $option_list['pa_'.$attribute->attribute_name] = array('label'=>$attribute->attribute_label.'(use for variations)', 'attr'=>'data-sp_eid="'.$separator.'attr'.$separator.$attribute->attribute_id.$separator.'vattr" ', $format);  
 
@@ -592,6 +593,15 @@ class WBC_WC {
     public function is_variation_object($product){
 
         if(is_a( $product, 'WC_Product_Variable' ) or is_a( $product, 'WC_Product_Variation' )){
+           return true;
+        }
+
+        return false;
+    }
+
+    public function is_wc_object($product){
+
+        if(is_a( $product, 'WC_Product' ) or is_a( $product, 'WC_Product_Variable' ) or is_a( $product, 'WC_Product_Variation' )){
            return true;
         }
 

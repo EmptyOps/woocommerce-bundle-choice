@@ -498,7 +498,6 @@ class SP_Query {
                 }
             }
         }
-
         $query->set('meta_query',$meta_quer_args);
 
         return $query;

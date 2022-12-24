@@ -25,7 +25,11 @@ class Feed extends \eo\wbc\controllers\publics\Controller{
     public function init($args = array()){
 
         if(self::instance()->should_load_options_view()) {
-         
+            
+            if( wbc()->sanitize->get('is_test') == 1 ) {
+                wbc()->common->var_dump( "wbc feed init");
+            }
+
             $args['data'] = \eo\wbc\model\publics\SP_Model_Feed::instance()->get_data('swatches_init');
             $args['page_section'] = 'swatches';
             self::instance()->selectron($args['page_section'],$args);
@@ -61,10 +65,18 @@ class Feed extends \eo\wbc\controllers\publics\Controller{
         
         if ($page_section == 'swatches') {
             if ($container_class == 'swatches') {
+
+                $args['product'] = $args['hook_callback_args']['product'];
+                $args['is_return_html'] = $args['hook_callback_args']['is_return_html'];
+                // $args['extra_args'] = $args['hook_callback_args']['extra_args'];
+                // unset($args['hook_callback_args']);
+
                 $data = \eo\wbc\model\publics\SP_Model_Feed::instance()->prepare_swatches_data($args);
-                if (!empty($data['is_return_default_html'])) {
+                if (!empty($data['is_return_default_html'])) {    
+
                     return $data['html'];
                 }
+
                 //wbc_pr($data); die();
                 return $this->load_view($data,$args);
             }
@@ -77,6 +89,11 @@ class Feed extends \eo\wbc\controllers\publics\Controller{
                 // }
                 // //wbc_pr($data); die();
                 // return $this->load_view($data,$args);
+
+                $args['product'] = $args['hook_callback_args']['product'];
+                $args['extra_args'] = $args['hook_callback_args']['extra_args'];
+                unset($args['hook_callback_args']);
+
                 \eo\wbc\model\publics\SP_Model_Feed::instance()->render_gallery_images_template_callback($args);
             }
 
@@ -126,28 +143,52 @@ class Feed extends \eo\wbc\controllers\publics\Controller{
             remove_action( 'woocommerce_before_shop_loop_item_title', 'woocommerce_template_loop_product_thumbnail', 10 );
             \eo\wbc\model\SP_WBC_Compatibility::instance()->loop_render_compatability('before_shop_loop_item_loop_thumbnail_action', $args);
             
-            add_action( 'woocommerce_before_shop_loop_item_title', function() use($page_section,$args) {  
+            add_action( 'woocommerce_before_shop_loop_item_title', function() use($page_section,$args) {
 
-                $args['hook_callback_args'] = array();
-                // $args['hook_callback_args']['html'] = $html;
-                // $args['hook_callback_args']['hook_args'] = $hook_args;
-
-
-                return $this->selectron_hook_render($page_section,'gallery_images',false,$args);
+                global $product;
+                
+                // if( wbc()->sanitize->get('is_test') == 1 ) {
+                //     wbc_pr('Feed selectron');
+                //     wbc_pr($product);
+                // }
+                do_action( 'sp_wbc_woo_template_loop_product_thumbnail', $product, null);
 
 
             }, 15 );
+
+            add_action('sp_wbc_woo_template_loop_product_thumbnail', function($product, $extra_args) use($page_section,$args) {  
+
+                $args['hook_callback_args'] = array();
+                $args['hook_callback_args']['product'] = $product;
+                // $args['hook_callback_args']['hook_args'] = $hook_args;
+                $args['hook_callback_args']['extra_args'] = $extra_args;
+
+                return $this->selectron_hook_render($page_section,'gallery_images',false,$args);
+
+            }, 15, 2);
+
         } elseif ($page_section == 'swatches') {
+
             add_filter( 'woocommerce_dropdown_variation_attribute_options_html',  function($html, $hook_args) use($page_section,$args){
+
+                return apply_filters ( 'sp_wbc_get_variation_attr_opts_html',$html, $hook_args, null, false);
+
+            }, 200, 2);
+
+            add_filter('sp_wbc_get_variation_attr_opts_html',function($html, $hook_args, $product, $is_return_html) use($page_section,$args){
+
 
                 $args['hook_callback_args'] = array();
                 $args['hook_callback_args']['html'] = $html;
                 $args['hook_callback_args']['hook_args'] = $hook_args;
+                $args['hook_callback_args']['product'] = $product;
+                $args['hook_callback_args']['is_return_html'] = $is_return_html;
 
 
                 return $this->selectron_hook_render($page_section,'swatches',false,$args);
+                
+            }, 200, 4);
 
-            }, 200, 2);
         } else if ($args['page_section'] == 'swatches_cart_form') {
 
             $SP_SLCTRN_Swatches_Cart_Form_class = "\\sp\\wbc\\controller\\publics\\feed\\loop\\selectron\\SP_SLCTRN_Swatches_Cart_Form";                      
@@ -193,7 +234,7 @@ class Feed extends \eo\wbc\controllers\publics\Controller{
             $this->render_swatches_data_by_attribute_type($data,$args);
         } elseif ($args['page_section'] == 'swatches') {
 
-            $this->render_swatches_data_by_attribute_type($data,$args);
+            return $this->render_swatches_data_by_attribute_type($data,$args);
 
         }
     }
@@ -303,13 +344,15 @@ class Feed extends \eo\wbc\controllers\publics\Controller{
 
     public function render_swatches_data_by_attribute_type($data,$args = array()){
 
+        $result_html = '';
+
         // put ui-builder in autoloader function in config file and then remove load model ui builder statement from everywhere -- to b
         $ui = $this->render_woo_dropdown_attribute_html_data($data,$args);
-        \sp\theme\view\ui\builder\Page_Builder::instance()->build_page_widgets($ui,'woo_dropdown_attribute_html');
+        $result_html .= \sp\theme\view\ui\builder\Page_Builder::instance()->build_page_widgets($ui, 'woo_dropdown_attribute_html', array(), $args['is_return_html']);
 
 
-        if ($data['woo_dropdown_attribute_html_data']['args']['sp_variations_swatches_show_on_shop_page'] == 1) {
-           
+        if ($data['woo_dropdown_attribute_html_data']['args']['sp_variations_swatches_show_on_shop_page'] == 1) { 
+
             $html = apply_filters('sp_render_swatches_data_by_attribute_type',null,$data);
 
             if (!empty($html)) {
@@ -322,8 +365,16 @@ class Feed extends \eo\wbc\controllers\publics\Controller{
             }
             //wbc_pr($ui); die();
 
-            \sp\theme\view\ui\builder\Page_Builder::instance()->build_page_widgets($ui,'swatches');
+            if( wbc()->sanitize->get('is_test') == 1 ) {
+
+                wbc_pr("wbc Feed render_swatches_data_by_attribute_type inner if");
+                wbc_pr($data['variable_item_ui']);
+            }
+
+            $result_html .= \sp\theme\view\ui\builder\Page_Builder::instance()->build_page_widgets($ui, 'swatches', array(), $args['is_return_html']);
         }
+
+        return $result_html;
     }
 
     public function render_woo_dropdown_attribute_html_data($data,$args = array()){

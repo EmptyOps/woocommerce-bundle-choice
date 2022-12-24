@@ -612,7 +612,7 @@ class Form_Builder implements Builder {
 			wbc()->common->var_dump( "Form_Builder das_form_definition_support" );
 		}
 
-		if( $args["sub_action"] != "save" && empty($args['data']['id']) ) {
+		if( $args["sub_action"] != "save" && empty($args['data']['id']) && empty($args['data_raw']) ) {
 
 			//	just return the default value if it do not required any processing 
 			return $args['form_definition'];	
@@ -701,7 +701,47 @@ class Form_Builder implements Builder {
 									}
 
 									$added_counter = isset($save_as_data['post_meta'][$das_counter_field_id]) ? $save_as_data['post_meta'][$das_counter_field_id] : $added_counter;
+									
+								} else if( !empty($args['data_raw']) ) {
+
+									$dm_based_field = null;
+
+									foreach ($args['dm']['map_fields'] as $dm_key=>$dm_value) {
+
+										if ( isset($args['dm']['sp_eids'][$dm_key]['extra_2']) and strpos($das_counter_field_id, $args['dm']['sp_eids'][$dm_key]['extra_2']) !== false ) {
+
+											if(!isset($args['cn'])) {
+
+												if(isset($args['data_raw'][$dm_key])) {
+
+													$dm_based_field = $dm_key;   
+												} else {
+
+													$dm_based_field = null;
+												}
+
+											} else {
+
+												if( isset( $args['data_raw'][ $args['cn'][$dm_key] ] ) ) {
+
+													$dm_based_field = $args['cn'][$dm_key];   
+												} else {
+
+													$dm_based_field = null;
+												}
+											}
+
+											break;
+										}
+									}
+
+									if (!empty($dm_based_field)) {
+									
+										$added_counter = ( isset($args['data_raw'][$dm_based_field]) ? ( is_array($args['data_raw'][$dm_based_field]) ? sizeof($args['data_raw'][$dm_based_field])-1 : 0 ) : $added_counter );
+									}
 								}
+
+
 
 								//	ACTIVE_TODO during filter save (edit mode)
 
@@ -746,7 +786,13 @@ class Form_Builder implements Builder {
 						}
 					}
 
-					$args['form_definition'][$tab_slug]['form'] = $newform;		
+					$args['form_definition'][$tab_slug]['form'] = $newform;
+
+					// if( wbc()->sanitize->get('is_test') == 1 ) {
+
+					// 	wbc_pr("Form_Builder das_form_definition_support form_definition");
+					// 	wbc_pr($args['form_definition'][$tab_slug]['form']);
+					// }
 				}
 			}
 
@@ -883,6 +929,35 @@ class Form_Builder implements Builder {
 
 	public static function savable_types() {
 		return array("text","checkbox","color","hidden","radio","select","textarea","icon","time",'number','link','date');
+	}
+
+	public function clean_form_properties( $form_definition, $fields_to_keep = array() ) {
+
+		// clin the entire abowe sp_variations_data form propertys as planned and keep here only key,type,value,etc...
+	    foreach ($form_definition as $key => $tab) {
+
+			foreach ($tab["form"] as $fk => $fv) {
+				if( $fv["type"] == "table" ) {
+					
+					// ACTIVE_TODO here we shoud erase all other such type like table in if above wich are not nassasary for us one this layer -- to s & -- to a
+					$form_definition[$key]["form"][$fk] = null;
+				}
+				else {
+
+					foreach($fv as $fv_key => $fv_value){
+
+						if( !in_array( $fv_key, $fields_to_keep )/*$fv_key != 'type' && $fv_key != 'value'*/ ){
+
+							unset($form_definition[$key]["form"][$fk][$fv_key]);
+
+						}						
+					}						
+				}		  
+			}
+	    }
+
+	    return $form_definition;
+
 	}
 
 }

@@ -538,6 +538,11 @@ class WBC_Common {
 
 			if ($theme_key == 'themes___purple_theme') {
 
+				if (is_admin()) {
+					
+					return true;
+				}
+
 				if ($key == 'loop') {
 
 					return false;

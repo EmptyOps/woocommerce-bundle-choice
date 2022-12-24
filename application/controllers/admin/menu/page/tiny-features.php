@@ -70,7 +70,7 @@ if ( ! class_exists( 'Tiny_features' ) ) {
 
 	    private function selectron($page_section,$args = array()){
 			if ($page_section == 'sp_variations') {
-				
+
 				add_action( 'woocommerce_save_product_variation', function( $variation_id, $loop ) use($page_section,$args){
 
 					$args['hook_callback_args'] = array();
@@ -193,6 +193,73 @@ if ( ! class_exists( 'Tiny_features' ) ) {
 
 				}, 10, 3 );
 
+
+				add_action( 'woocommerce_process_product_meta', function( $id /* $variation_id, $loop*/ ) use($page_section,$args){
+
+					if( wbc()->sanitize->get('is_test') == 1 ) {
+						wbc_pr('tiny_features_selectron_inner_woocommerce_process_product_meta');
+					}
+
+					global $post;
+
+					// NOTE: the wc product type detaction seems not possible here but if it is posible by standerd api hooks or standerd api than need to set it below.
+					$type = null; //$post->post_type;	//$post->is_type('simple') ? 'simple' : 'variable';
+
+					// NOTE: we needed to add if condition here for the simple type so that only if the product is simple type then only this form is rendered otherwise the issue we may face is that the form may be created for two diffrerent tab for the variable products 		
+					// ACTIVE_TODO below if is commented becose product type detections is not posibble here and so as of now the form is rendering for both in simple and variable type. But as soon as we get chanse we must disable the form for varible type any how. and since stander api dosn't since to be supporting product type detection we may need to creat wc product object and something such to take care of it but we need to do it presizely using if api option is available and othore wise using the other options.and the fact is that if it reline on wc product option and than that will be not available product save on add mode that is also chalanging
+					// if($type != 'simple'){
+					
+					// 	return; 
+					// }
+
+
+					$args['hook_callback_args'] = array();
+					$args['hook_callback_args']['id'] = absint( $id /*$variation_id*/ );
+
+					$args['product_type'] = $type;
+
+					// maybe this hook is need to be moved controller right before the form_definition is passed to parent class function. and the form_definition will be filter parameter. -- and yeah there would be one hook only that maybe needed. not separate needed for render and save 
+					// apply_filters('sp_variations_data_before_save', '');
+
+					return $this->selectron_hook_render($page_section,'sp_variations_save_html',$args);
+				}, 10, 2 );
+
+				add_action('woocommerce_product_options_inventory_product_data', function( /*$loop, $variation_data, $variation*/ ) use($page_section,$args) {
+
+					if( wbc()->sanitize->get('is_test') == 1 ) {
+						wbc_pr('tiny_features_selectron_inner_woocommerce_product_options_inventory_product_data');
+					}
+
+					global $post;
+
+					// NOTE: the wc product type detaction seems not possible here but if it is posible by standerd api hooks or standerd api than need to set it below.
+					$type = null; //$post->post_type;	//$post->is_type('simple') ? 'simple' : 'variable';
+
+					if( wbc()->sanitize->get('is_test') == 1 ) {
+						wbc_pr('tiny_features_selectron_inner');
+						wbc_pr($type);
+						wbc_pr($post);
+					}
+
+					// NOTE: we needed to add if condition here for the simple type so that only if the product is simple type then only this form is rendered otherwise the issue we may face is that the form may be created for two diffrerent tab for the variable products 
+					// ACTIVE_TODO below if is commented becose product type detections is not posibble here and so as of now the form is rendering for both in simple and variable type. But as soon as we get chanse we must disable the form for varible type any how. and since stander api dosn't since to be supporting product type detection we may need to creat wc product object and something such to take care of it but we need to do it presizely using if api option is available and othore wise using the other options.and the fact is that if it reline on wc product option and than that will be not available product save on add mode that is also chalanging
+					// if($type != 'simple'){
+
+					// 	return; 
+					// }
+
+
+					$args['hook_callback_args'] = array();
+	            	
+					// NOTE: id is standard column name that we use for our options module based simple entity storage, so for the legacy admin flows also where necessary we can simply use the same where the necessity arise to maintain one uniqid and I think it will be almost always. 
+					$args['hook_callback_args']['id'] = absint( /*$variation*/$post->ID );
+		
+					$args['product_type'] = $type;
+
+					return $this->selectron_hook_render($page_section,'sp_variations_html',$args);
+
+				}, 10, 3 );
+
 			} 
 	    }
 
@@ -229,7 +296,7 @@ if ( ! class_exists( 'Tiny_features' ) ) {
 								'type'=>'devider'
 							),
 
-							'sp_variations_gallery_images{{id}}'=>array(
+							'sp_variations_gallery_images{{id}}{{data.added_counter}}'=>array(
 								'label'=>' ',
 								'type'=>'icon',
 								'sanitize'=>'sanitize_text_field',
