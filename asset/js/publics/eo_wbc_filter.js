@@ -1870,7 +1870,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
     var set_enable_filter_private = function(value) {
 
-		console.log("filter module set_enable_filter_private before "+get_enable_filter()); 	
+		console.log("filter module set_enable_filter_private before_ "+get_enable_filter()); 	
 
     	window.eo_wbc_object.enable_filter = window.eo_wbc_object.enable_filter || value;
     	window.document.splugins.eo_wbc_object.enable_filter = window.document.splugins.eo_wbc_object.enable_filter || value;
@@ -2618,6 +2618,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
     };
 };
 
+console.log('eo_wbc_filter_js_loded');
 //  publish it 
 window.document.splugins.wbc.filters.api = window.document.splugins.wbc.filters.core( eo_wbc_object );
 

@@ -68,6 +68,74 @@ class Tiny_Features extends Eowbc_Model {
 		parent::render_ui_sub_process($form, $args);
 		
 		//	if there is any module specific js or css then it should be loaded view file or asset.php file -- both have their pros and cons. but I think asset.php is for flows var a asset file was necessary and where view is available we can simply put such js/css stuff there but in case of the admin also now we are moving the render related logic model and so maybe there will be little things in the view file 
+		// ACTIVE_TODO temp. added on 24-Dec-2022. move it to right place and remove from here.		
+		?>
+		<style type="text/css">
+			/*Enter Your Custom Admin CSS Here*/
+			.ui.pointing.secondary.menu {
+				padding: 10px 20px 10px 16px!important;
+				margin: 9px 0;
+				border-bottom: 1px solid #eee;
+			}
+
+			.ui.pointing.secondary.menu a.item {
+				color: #5b5b5b;
+			}
+
+			h4.ui.dividing.header {
+				color: #333;
+				font-weight: bold;
+				padding: 10px 20px 10px 13px!important;
+				margin: 9px 0;
+				border-bottom: 1px solid #eee;
+				float: left;
+				width: 100%;
+			}
+
+			.eight.wide.field.upload_image .ui.button.inverted.primary {
+				margin-left: 1rem;
+				display: flex!important;
+			}
+
+			.ui.tiny.image {
+				float: left;
+				padding-right: 10px;
+			}
+
+			.eight.wide.field.upload_image {
+				display: inline-block;
+				padding: 10px 20px 10px 13px!important;
+			}
+
+			.eight.wide.field.upload_image .ui.tiny.image img {
+				display: block;
+				max-width: 100%;
+				max-height: 100px;
+				object-fit: contain;
+			}
+
+			.eight.wide.field.upload_image .ui.button.inverted.primary {
+				margin-left: 1rem;
+			}
+
+			.inline.fields ~ .fields {
+				padding: 10px 20px 10px 13px!important;
+				border-bottom: 1px solid #eee;
+				margin: 9px 0;
+				width: 100%;
+				float: left;
+			}
+
+			.ui.tiny.image ~ .ui.button.inverted.primary {
+				margin-top: 2rem;
+			}
+
+
+			p.form-field._eowbc_certificate_url_field label[for="_eowbc_certificate_url"] {
+			    display: none;
+			}
+		</style>
+		<?php
 		
 	}
 
