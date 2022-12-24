@@ -434,6 +434,8 @@ class EOWBC_Filter_Widget {
 				?>
 				<script type="text/javascript">
 
+					console.log('filter_widgets');
+
 					jQuery(document).ready(function($){			
 
 						jQuery.fn.wbc_flip_toggle_image=function(element){
@@ -2699,6 +2701,7 @@ class EOWBC_Filter_Widget {
 		<script>
 			console.log('data_filter_widgets');
 			var eo_wbc_object = JSON.parse('<?php echo json_encode($data); ?>');
+			console.log(eo_wbc_object);
 		</script>
 		<?php
 		// 29-09-2022 @h  @s 

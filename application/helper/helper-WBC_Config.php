@@ -176,6 +176,8 @@ class WBC_Config {
 			),
 			'sp_variations_swatches_cat_display_limit' => 3,
 
+			'is_gallery_images_type_based_template' => 1,
+
 		);
 	}
 }
