@@ -984,6 +984,7 @@ if(is_shop() || is_product_category()) {
             --spui-single-button-product-item-height:30px;
             --spui-single-button-product-item-width:30px;
             --spui-selected-item-box-shadow:#000;
+            --spui-button-item-box-font-size:1rem;
         }
 	    .spui_button_widget{
 	        float: left;
@@ -1049,6 +1050,7 @@ if(is_shop() || is_product_category()) {
 	    }
 	    .spui_button_widget li .spui_button_variable_item_contents span.spui_variable_item_span_button {
 	        padding: 0 5px;
+	        font-size: var(--spui-button-item-box-font-size) !important;
 	    }
 
 
