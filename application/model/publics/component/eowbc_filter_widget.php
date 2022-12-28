@@ -53,7 +53,7 @@ class EOWBC_Filter_Widget {
 
 		if(!(is_array($filter) xor is_object($filter)) or empty($filter)) return false;
 		if(apply_filters('eowbc_enque_filter_assets','__return_true')){
-			if( wbc()->sanitize->get('is_test') == 1 ||  wbc()->sanitize->get('is_test') == 9 ){
+			if( wbc()->sanitize->get('is_test') == 1 ){
 				wbc_pr('eo_wbc_filter_enque_asset_f_eo_wbc_object');
 			}	
 			$this->eo_wbc_filter_enque_asset();
@@ -989,7 +989,7 @@ class EOWBC_Filter_Widget {
 			'_prefix_' => $this->filter_prefix,
 		) );
 
-		if( wbc()->sanitize->get('is_test') == 1 ||  wbc()->sanitize->get('is_test') == 9 ){
+		if( wbc()->sanitize->get('is_test') == 1 ){
 			wbc_pr('eo_wbc_object');
 		}
 		
@@ -2712,7 +2712,7 @@ class EOWBC_Filter_Widget {
 
 	public function get_widget() {
 		
-		if( wbc()->sanitize->get('is_test') == 1 ||  wbc()->sanitize->get('is_test') == 9 ){
+		if( wbc()->sanitize->get('is_test') == 1 ){
 		
 			wbc_pr("get_widget_f_eo_wbc_object");
 		}	
@@ -2791,7 +2791,7 @@ class EOWBC_Filter_Widget {
 		if(!(is_array($filter) xor is_object($filter)) or empty($filter)) return false;
 
 		if(apply_filters('eowbc_enque_filter_assets','__return_true')){		
-			if( wbc()->sanitize->get('is_test') == 1 ||  wbc()->sanitize->get('is_test') == 9 ){
+			if( wbc()->sanitize->get('is_test') == 1 ){
 				wbc_pr('eo_wbc_filter_enque_asset_f1_eo_wbc_object');
 			}		
 			$this->eo_wbc_filter_enque_asset();
@@ -3114,7 +3114,7 @@ class EOWBC_Filter_Widget {
 
 	public function init($is_shop_cat_filter=false,$filter_prefix='',$is_shortcode_filter=false) {
 		
-		if( wbc()->sanitize->get('is_test') == 1 ||  wbc()->sanitize->get('is_test') == 9 ){
+		if( wbc()->sanitize->get('is_test') == 1 ){
 		
 			wbc_pr("init_f_eo_wbc_object");
 		}
