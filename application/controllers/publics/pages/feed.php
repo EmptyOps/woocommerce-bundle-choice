@@ -160,6 +160,11 @@ class Feed extends \eo\wbc\controllers\publics\Controller{
 
                 $args['hook_callback_args'] = array();
                 $args['hook_callback_args']['product'] = $product;
+                if( wbc()->sanitize->get('is_test') == 1 ) {
+
+                    wbc_pr('feed selectron_hook_render args2');
+                    wbc_pr($args);
+                }
                 // $args['hook_callback_args']['hook_args'] = $hook_args;
                 $args['hook_callback_args']['extra_args'] = $extra_args;
 

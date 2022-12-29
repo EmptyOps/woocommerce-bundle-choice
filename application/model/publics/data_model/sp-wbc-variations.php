@@ -1840,7 +1840,10 @@ class SP_WBC_Variations extends SP_Variations {
 		/*ACTIVE_TODO_OC_START
 		----product no peramiter pass kervano baki che
 		ACTIVE_TODO_OC_END*/
-
+		if( wbc()->sanitize->get('is_test') == 1 ) {
+	        wbc_pr('wbc-variations prepare_gallery_template_data args');
+	    	wbc_pr($args);
+	    }
 		if(empty($args['product'])) {
 
 			global $product;
@@ -1905,7 +1908,10 @@ class SP_WBC_Variations extends SP_Variations {
 		$data['gallery_images_template_data']['columns'] = -1;	//	thumbnail columns 
 
 		$data['gallery_images_template_data']['post_thumbnail_id'] =  apply_filters('sp_wbc_get_image_id', null, $product,null); // \eo\wbc\system\core\data_model\SP_Product::get_image_id($product);
-
+	    
+	    if( wbc()->sanitize->get('is_test') == 1 ) {
+	        wbc_pr('wbc-variations sp_wbc_get_gallery_image_ids');
+	    }
 		$data['gallery_images_template_data']['attachment_ids'] = apply_filters('sp_wbc_get_gallery_image_ids', null, $product, $data['gallery_images_template_data']['product_id'], $data['gallery_images_template_data']['post_thumbnail_id'], $args); //\eo\wbc\system\core\data_model\SP_Product::get_gallery_image_ids($product);
 
 		$data['gallery_images_template_data']['has_post_thumbnail'] = apply_filters('sp_wbc_has_post_thumbnail', null, $data['gallery_images_template_data']['post_thumbnail_id']); //has_post_thumbnail();
@@ -2214,6 +2220,12 @@ class SP_WBC_Variations extends SP_Variations {
 
 		add_filter( 'sp_wbc_get_gallery_image_ids',  function($data,$product,$product_id,$post_thumbnail_id,$args){
 
+			if( wbc()->sanitize->get('is_test') == 1 ) {
+				wbc_pr('wbc-variations gallery_images_hooks sp_wbc_get_gallery_image_ids');
+				wbc_pr($product_id);
+				wbc_pr($post_thumbnail_id);
+				wbc_pr($args);
+			}
 			if ($data !== null) {
 
 				return $data;
