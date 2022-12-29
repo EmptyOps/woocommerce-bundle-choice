@@ -1478,10 +1478,12 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
 
     #process_attribute_data(type, element, data, mode = null) {
 
-        // console.log("swatches process_attribute_data");
+        console.log("swatches process_attribute_data");
+        console.log(data.options);
 
         data.options.each(function () {
             if (jQuery(this).val() !== '') {
+                console.log(jQuery(this));
                 data.selects.push(jQuery(this).val());
                 data.selected = data.current.length === 0 ? data.eq.val() : data.current.val();
             }
@@ -1503,6 +1505,8 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
             }
         });
 
+        console.log('process_attribute_data selects', data.selects)
+        console.log('process_attribute_data disabled_selects', data.disabled_selects)
         data.in_stocks = splugins._.difference(data.selects, data.disabled_selects);
 
         // console.log('out of stock', out_of_stock_selects)
@@ -1704,8 +1708,8 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
         // --  and as mentioned above this object will always be passed from all .each loops under element, so use that element inside the process_attribute_template -- to s done
         ACTIVE_TODO_OC_END*/
 
-        // console.log('data.select creat');
-        // console.log(element);
+        console.log('data.select creat');
+        console.log(element);
 
         data.select = jQuery(element).siblings('select.woo-variation-raw-select');
         data.selected = '';
@@ -1767,6 +1771,9 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
             data.attribute_value = jQuery(inner_element).attr('data-value');
             data.attribute_title = jQuery(inner_element).attr('data-title');
 
+            console.log('process_attribute_template');
+            console.log(inner_element);
+            console.log(element);
             // Resetting LI
             jQuery(inner_element).removeClass('selected disabled out-of-stock').addClass('disabled');
             jQuery(inner_element).attr('aria-checked', 'false');
@@ -1782,15 +1789,16 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
             // _.contains(in_stocks, attribute_value)
             // _.includes(in_stocks, attribute_value)
            
-            // console.log("process_attribute_template outer if product id="+ _this.#data.product_id +" type="+ type);
-            // console.log(data.in_stocks);
-            // console.log(data.attribute_value);
+            console.log("process_attribute_template outer if product id="+ _this.#data.product_id +" type="+ type);
+            console.log(data.in_stocks);
+            console.log(data.attribute_value);
 
             if (splugins._.includes(data.in_stocks, data.attribute_value)) {
         
                 // console.log("process_attribute_template selected disabled in if product id="+ _this.#data.product_id +" type="+ type);
                 // console.log(inner_element);
-
+                console.log('process_attribute_template_01');
+    
               jQuery(inner_element).removeClass('selected disabled');
               jQuery(inner_element).removeAttr('aria-hidden');
               jQuery(inner_element).attr('tabindex', '0');
