@@ -3094,7 +3094,6 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
         
         if (!_this.#data.is_variation_product) {
 
-            -- below current variation inisializetion logic is almost final but still confirm if there is any conflict -- to h -- to a
             _this.#data.current_variation = _this.data.product_variations[0];
             
             _this.#process_images_template(_this.#data.product_variations[0].variation_gallery_images);            
