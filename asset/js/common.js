@@ -2819,7 +2819,7 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
         _this.product_id = _this.#$variations_form.data('product_id');
         console.log("_this.product_id");
         console.log(_this.product_id);
-        _this.#data.is_variation_product = _this.#$variations_form.length > 0;
+        _this.#data.is_variation_product =  (!window.document.splugins.common.is_empty(_this.#configs.product_type) && _this.#configs.product_type == 'simple') ? false : true; //_this.#$variations_form.length > 0;
  
         if(_this.#data.is_variation_product) {
 
@@ -4182,15 +4182,17 @@ console.log('gallery_images module 00');
 console.log(eo_wbc_object);
 window.document.splugins.wbc.variations.gallery_images = window.document.splugins.wbc.variations.gallery_images || {};
 
-window.document.splugins.wbc.variations.gallery_images.core = function( configs ) {
+window.document.splugins.wbc.variations.gallery_images.core = function( default_options ) {
             
     console.log('gallery_images module');
 
-    jQuery.fn.sp_wbc_variations_gallery_images = function () {
-        
+    jQuery.fn.sp_wbc_variations_gallery_images = function ( options ) {
+
+        options = jQuery.extend(default_options, options);
+
         return this.each(function () {
 
-            (new SP_WBC_Variations_Gallery_Images(this,configs)).init();
+            (new SP_WBC_Variations_Gallery_Images(this,options)).init();
         });
     };
     console.log('gallery_images module 01');
@@ -4867,13 +4869,16 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
 }
 window.document.splugins.wbc.variations.gallery_images.feed_page = window.document.splugins.wbc.variations.gallery_images.feed_page || {};
 
-window.document.splugins.wbc.variations.gallery_images.feed_page.core = function( configs ) {
+window.document.splugins.wbc.variations.gallery_images.feed_page.core = function( default_options ) {
 
-    jQuery.fn.sp_wbc_variations_gallery_images_feed_page = function () {
+    jQuery.fn.sp_wbc_variations_gallery_images_feed_page = function (options) {
+        
+        options = jQuery.extend(default_options, options);
+
         return this.each(function () {
             
             console.log("sp_wbc_variations_gallery_images_feed_page object child");
-            (new SP_WBC_Variations_Gallery_Images_Feed_Page(this,configs)).init();
+            (new SP_WBC_Variations_Gallery_Images_Feed_Page(this,options)).init();
 
         });
     };
