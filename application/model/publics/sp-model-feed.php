@@ -404,12 +404,12 @@ class SP_Model_Feed extends SP_Feed {
 		do_action( 'sp_variations_loop_gallery_images_core' );
 
 		$classes = array('spui-sp-variations-loop-gallery-images','spui-sp-variations-loop-gallery-images-'.$data['gallery_images_template_data']['product_type']);
-		$classes = apply_filters('sp_variations_loop_gallery_images_core_container_class',$classes);
-	
+		$classes = apply_filters('sp_variations_loop_gallery_images_core_container_class',$classes);	
+
 		$ui = array(
 			'type'=>'div',
 			'class'=>$classes,
-			'attr' => ($data['gallery_images_template_data']['product_type'] == 'simple') ? apply_filters('sp_wbc_simple_product_type_html_attributes', array(), $data, $args) : array(),
+			'attr' => ($data['gallery_images_template_data']['product_type'] == 'simple') ? apply_filters('sp_wbc_simple_product_type_html_attributes', null, $data, $args) : array(),
 			'child'=>array(
 				/*array(
 					'type'=>'html',

@@ -110,6 +110,13 @@ class Eowbc_Model {
 								}
 							}
 
+							if(wbc()->sanitize->get('is_test') == 1) {
+								
+								wbc_pr('eowbc_model_dm_based_field');
+								wbc_pr($args['data_raw']);
+								wbc_pr($fk);
+								wbc_pr($dm_based_field);
+							}
 
 							//$form_definition[$key]["form"][$fk]["value"] = ( isset($save_as_data['post_meta'][$fk]) ? $save_as_data['post_meta'][$fk] : ( isset($form_definition[$key]["form"][$fk]["value"]) ? $form_definition[$key]["form"][$fk]["value"] :'' ) );
 							if ( !empty( $dm_based_field ) ) {
@@ -119,7 +126,7 @@ class Eowbc_Model {
 									/*ACTIVE_TODO_OC_START
 									ACTIVE_TODO temp. below is highly temp if condition and suppose to remove that as soon we add das support on higher layers or here. and it is critical to note that appropriate balance of modularity of coupling and cohastion is better if we add das support on higher layers and here it remains transperant.
 									ACTIVE_TODO_OC_END*/
-									if($fk == 'sp_variations_gallery_images________' || $fk == 'sp_variations_gallery_images____________1____'){
+									if(($fk == 'sp_variations_gallery_images________' || $fk == 'sp_variations_gallery_images____________1____') && is_array($args['data_raw'][$dm_based_field]) ){
 
 										$form_definition[$key]["form"][$fk]["value"] = $args['data_raw'][$dm_based_field][0];
 									}else{
