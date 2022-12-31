@@ -146,7 +146,7 @@ if ( ! class_exists( 'Queue' ) ) {
 							'attr'=>array("href='javascript:void(0);'", " onclick='window.document.splugins.common.confirm_and_redirect( \"Are sure you to delete all synced data created by this plugin? Please confirm. Note that depending on the storage option and the api inventory size it may take sometime for this process to finish.\", \"".admin_url('admin.php?page='.$plugin_slug.'---sp-queue&reset=1&sbkey='.$sbkey.'&hsulf=1&hsulf_dt=1')."\" )' "),	
 							'class'=>array('secondary'),
 						),
-						'visible_info_flush_everything'=>array( 'label'=>'Click above link to flush all synced data created by this plugin. Be sure that you understand the outcomes of flushing all synced data(created by this plugin) since it will make your website frontend feed empty till the sync process do not catch up again. You may not need to do it normally except if there are any exceptional scenarios. <strong></strong>',
+						'visible_info_flush_everything'=>array( 'label'=>'Click above link to flush all synced data(it will flush all APIs data. so ACTIVE_TODO to move it to general tab so need to add general tab) created by this plugin. Be sure that you understand the outcomes of flushing all synced data(created by this plugin) since it will make your website frontend feed empty till the sync process do not catch up again. You may not need to do it normally except if there are any exceptional scenarios. <strong></strong>',
 							'type'=>'visible_info',
 							'class'=>array('fluid', 'small'),
 							'size_class'=>array('sixteen','wide','required'),
