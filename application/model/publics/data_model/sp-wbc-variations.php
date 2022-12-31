@@ -2274,5 +2274,22 @@ class SP_WBC_Variations extends SP_Variations {
         	
 		}, 10, 2);
 
+		add_filter( 'sp_wbc_simple_product_type_html_attributes',  function($data,$caller_data,$args){
+
+			if ($data !== null) {
+
+				return $data;
+			}
+
+			$simple_types_html_attributes = array();
+			
+			$simple_types_html_attributes[0] = array();
+			
+			$simple_types_html_attributes[0]['variation_gallery_images'] = $caller_data['gallery_images_template_data']['attachment_ids'];
+        	
+        	return array( 'data-product_id' => $caller_data['gallery_images_template_data']['product_id'], 'data-product_simple' => $simple_types_html_attributes);
+        	
+		}, 10, 3);
+
 	}
 }

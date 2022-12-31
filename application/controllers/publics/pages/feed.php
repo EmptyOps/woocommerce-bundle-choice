@@ -144,7 +144,7 @@ class Feed extends \eo\wbc\controllers\publics\Controller{
             \eo\wbc\model\SP_WBC_Compatibility::instance()->loop_render_compatability('before_shop_loop_item_loop_thumbnail_action', $args);
             
             add_action( 'woocommerce_before_shop_loop_item_title', function() use($page_section,$args) {
-
+                
                 global $product;
                 
                 // if( wbc()->sanitize->get('is_test') == 1 ) {
