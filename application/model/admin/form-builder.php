@@ -931,7 +931,7 @@ class Form_Builder implements Builder {
 		return array("text","checkbox","color","hidden","radio","select","textarea","icon","time",'number','link','date');
 	}
 
-	public function clean_form_properties( $form_definition, $fields_to_keep = array() ) {
+	public static function clean_form_properties( $form_definition, $fields_to_keep = array() ) {
 
 		// clin the entire abowe sp_variations_data form propertys as planned and keep here only key,type,value,etc...
 	    foreach ($form_definition as $key => $tab) {
