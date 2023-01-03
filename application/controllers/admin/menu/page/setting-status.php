@@ -188,7 +188,17 @@ class Setting_status {
 								'class'=>array(),
 								'size_class'=>array('eight','wide'),
 								'inline'=>true,
-							),							
+							),
+							'enable_side_bar_widget'=>array(
+								'label'=>eowbc_lang('Enable side-bar widget'),
+								'type'=>'checkbox',
+								'sanitize'=>'sanitize_text_field',
+								'value'=>array(),
+								'options'=>array('enable_side_bar_widget'=>'Enable side-bar widget'),
+								'class'=>array(),
+								'size_class'=>array('eight','wide'),
+								'inline'=>true,
+							),								
 							'submit_button'=>array(
 								'label'=>eowbc_lang('Save'),
 								'type'=>'button',

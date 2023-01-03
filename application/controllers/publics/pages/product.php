@@ -45,28 +45,28 @@ class Product {
             }, 10, 1 );
 
 
-
             //if data available at _GET then add to out custom cart
             if(!empty(wbc()->sanitize->get('eo_wbc_add_to_cart_preview'))) {                
                 $this->add2cart();
                 $cart_url = wbc()->wc->eo_wbc_get_cart_url();
-                
+
                 do_action('sp_wbc_after_add2cart_redirect');
-                if(strpos($cart_url,'?')!==false){
+                if(strpos($cart_url,'?')!==false) {
                     $cart_url_parts = explode('?', $cart_url);
-                    $cart_url = explode('?', $cart_url)[0];
-                    
+                    $cart_url = $cart_url_parts[0];
+
                     if (!empty($cart_url_parts[1])) {
                         $url_params = false;
-                        parse_str( $cart_url_parts[1],$url_params );
+                        parse_str( $cart_url_parts[1],$url_params );                       
+
+                        $allowed_params = array('lang'=>'lang','page_id'=>'page_id');
+                        $url_params = array_intersect_key($url_params,$allowed_params);
                         
-                        if(!empty($url_params['lang'])) {
-                            $cart_url.='?lang='.$url_params['lang'];
-                        }
+                        $cart_url = site_url('?'.http_build_query($url_params));  
                     }
-                }
-                
+                }                
                 exit(wp_redirect($cart_url));
+                die();
             }
 
             if(!empty(wbc()->sanitize->get('CART'))) {
@@ -179,13 +179,44 @@ class Product {
 
         add_filter('woocommerce_get_price_html',function($price,$product) use($first,$second,$first_parent,$second_parent){
             
-            //var_dump($product->get_id(), $second->get_id(),$first->get_id());
+            // var_dump($product->get_id(), $second->get_id(),$first->get_id());
 
-            if(!empty($second) and !empty($first) and ($product->get_id() === $second_parent->get_id()) ) {
-                return wc_price( $first->get_price() + $second->get_price() );
+            if(!empty($second) and !empty($first)) {   
+                
+                $product_var_id = !empty($product) and wbc()->wc->is_variation_object($product) ? $product->get_parent_id() : $product->get_id();
+                $second_parent_var_id = !empty($second_parent) and wbc()->wc->is_variation_object($second_parent) ? $second_parent->get_parent_id() : $second_parent->get_id();
+
+                if( $product_var_id === $second_parent_var_id ) {
+                    return wc_price( $first->get_price() + $second->get_price() );
+                }
             } 
             return $price;
         },10,2);
+        
+        /*add_filter('woocommerce_product_variation_get_regular_price', function($price, $product){
+            echo "<pre>";
+            print_r($price);
+            echo"<pre>";
+            return $price;
+        },10,3);
+        add_filter('woocommerce_product_variation_get_price', function($price, $product){
+            echo "22";
+
+            return $price;
+        },10,3);
+
+        // Variations (of a variable product)
+        add_filter('woocommerce_variation_prices_price', function($price, $variation, $product){
+            echo "33";
+
+            return $price;
+        },10,4);
+        add_filter('woocommerce_variation_prices_regular_price', function($price, $variation, $product){
+            echo "44";
+
+            return $price;
+        },10,4);*/
+
         //remove options
         add_filter('woocommerce_product_single_add_to_cart_text', function() {
             return '...';
@@ -442,7 +473,10 @@ class Product {
 
         if( ( !isset($_GET['EO_WBC']) and !empty($bonus_features['opts_uis_item_page']) )/*(!isset($_GET['EO_WBC']) and wbc()->options->get_option('tiny_features','tiny_features_option_ui_toggle_status',false))*/ or ( isset($_GET['EO_WBC']) and wbc()->options->get_option('appearance_product_page','show_options_ui_in_pair_builder',false) ) ){
 
-            \eo\wbc\controllers\publics\Options::instance()->run();        
+            //\eo\wbc\controllers\publics\Options::instance()->run();   
+            if( \eo\wbc\controllers\publics\Options::instance()->should_init() ) {
+                \eo\wbc\controllers\publics\Options::instance()->init();
+            } 
         }
     }
     
@@ -781,6 +815,7 @@ class Product {
 
                     $category_link=$this->eo_wbc_category_link();
 
+                    // ACTIVE_TODO it seems that CAT_LINK support is not added here and if it is breadcume or any other category url than we may need to add support. But i think standerd ring builder navigation management does controll categary url deply so if should not be routed to secound leval after it is captured and used from default or first leval CAT_LINK peram set in menus and so on. So we may simply need to remove this ACTIVE_TODO in 2nd revision.
                     $url=$site_url.($remove_index?'':'/index.php')."/{$category_base}/".$category_link.
                     wbc()->common->http_query(array('EO_WBC'=>1,'BEGIN'=>wbc()->sanitize->get('BEGIN'),'STEP'=>2,'FIRST'=>$post->ID,'SECOND'=>wbc()->sanitize->get('SECOND'),'CART'=>wbc()->sanitize->get('CART'),'ATT_LINK'=>implode(' ',$this->att_link),'CAT_LINK'=>substr($category_link,0,strpos($category_link,'/')))).$site_url_get;
 
@@ -788,6 +823,8 @@ class Product {
                 } elseif($category==$this->second_category_slug) {
 
                     $category_link=$this->eo_wbc_category_link();
+
+                    // ACTIVE_TODO it seems that CAT_LINK support is not added here and if it is breadcume or any other category url than we may need to add support. But i think standerd ring builder navigation management does controll categary url deply so if should not be routed to secound leval after it is captured and used from default or first leval CAT_LINK peram set in menus and so on. So we may simply need to remove this ACTIVE_TODO in 2nd revision.                    
                     $url=$site_url.($remove_index?'':'/index.php')."/{$category_base}/".$category_link
                     .wbc()->common->http_query(array('EO_WBC'=>1,'BEGIN'=>wbc()->sanitize->get('BEGIN'),'STEP'=>2,'FIRST'=>wbc()->sanitize->get('FIRST'),'SECOND'=>$post->ID,'CART'=>wbc()->sanitize->get('CART'),'ATT_LINK'=>implode(' ',$this->att_link),'CAT_LINK'=>substr($category_link,0,strpos($category_link,'/')))).$site_url_get;
                 }
@@ -798,7 +835,7 @@ class Product {
                 if($return_link) {
                     return $url;
                 }
-
+                
                 return header("Location: {$url}");
                 wp_die();
                 //wp_safe_redirect($url ,301 );               

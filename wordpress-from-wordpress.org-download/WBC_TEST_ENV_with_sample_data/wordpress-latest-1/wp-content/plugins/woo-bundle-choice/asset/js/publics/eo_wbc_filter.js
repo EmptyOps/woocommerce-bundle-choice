@@ -75,7 +75,14 @@ if(eo_wbc_object.disp_regular){
 	
 	if(typeof(jQuery.fn.eo_wbc_filter_change)=="undefined" || jQuery.fn.eo_wbc_filter_change==undefined){
 
-		jQuery.fn.eo_wbc_filter_change= function(init_call=false) {				
+
+		//////// 27-05-2022 - @drashti /////////
+		--add to be confirmed 85 TO 110--
+		window.document.splugins.wbc.filters.core.eo_wbc_filter_change_wrapper();
+		jQuery.fn.eo_wbc_filter_change= function(init_call=false) 
+		////////////////////////////////////////
+
+		{				
 		//flag indicates if to show products in tabular view or woocommerce's default style.
 
 			var form=jQuery("form#eo_wbc_filter");	
@@ -110,7 +117,12 @@ jQuery(document).ready(function($){
         jQuery("[data-reset]").each(function(e){
             eval(jQuery(this).data('reset'));
         })
+
+        //////// 27-05-2022 - @drashti /////////
+		--add to be confirmed--
+		window.document.splugins.wbc.filters.core.eo_wbc_filter_change_wrapper();
         jQuery.fn.eo_wbc_filter_change();
+		////////////////////////////////////////
         return false;
     })  
 
@@ -120,11 +132,20 @@ jQuery(document).ready(function($){
 		if(!eo_wbc_object.btnfilter_now){			
 			$("#eo_wbc_filter").on('change',"input:not(:checkbox)",function(){
 				$('[name="paged"]').val('1');
-				jQuery.fn.eo_wbc_filter_change();										
+
+				//////// 27-05-2022 - @drashti /////////
+				--add to be confirmed--
+				window.document.splugins.wbc.filters.core.eo_wbc_filter_change_wrapper();
+                jQuery.fn.eo_wbc_filter_change();
+				////////////////////////////////////////								
 			});
 		}
 
+		//////// 27-05-2022 - @drashti /////////
+		--add to be confirmed--
+		window.document.splugins.wbc.filters.core.eo_wbc_filter_change_wrapper(true);
 		jQuery.fn.eo_wbc_filter_change(true);
+		////////////////////////////////////////
 
 		//pagination for non-table based view
 		$(".woocommerce-pagination,.pagination").on('click','a',function(event){
@@ -144,7 +165,11 @@ jQuery(document).ready(function($){
 			else {
 				$("[name='paged']").val($(this).text());
 			}		
+			//////// 27-05-2022 - @drashti /////////
+			--add to be confirmed--
+			window.document.splugins.wbc.filters.core.eo_wbc_filter_change_wrapper();
 			jQuery.fn.eo_wbc_filter_change();
+			////////////////////////////////////////
 		});
 	}
 	/////////////////////////
@@ -162,7 +187,11 @@ jQuery(document).ready(function($){
 		jQuery(".eo_wbc_srch_btn:eq(2)").trigger('reset');
 		jQuery("#eo_wbc_attr_query").val("");
 		jQuery('[name="paged"]').val('1');
+		//////// 27-05-2022 - @drashti /////////
+		--add to be confirmed--
+		window.document.splugins.wbc.filters.core.eo_wbc_filter_change_wrapper(true);
 		jQuery.fn.eo_wbc_filter_change(true);
+		////////////////////////////////////////
 
 	});	
 });

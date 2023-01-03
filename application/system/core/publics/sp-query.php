@@ -88,12 +88,22 @@ class SP_Query {
 
 	public function prepare_query_direct( $query=null, $input_method=null, $additional_data=array() ) {
         
+		if( wbc()->sanitize->get('is_test') == 1 ) {
+
+			wbc_pr("wbc prepare_query_directe");
+		}
+
 		$query = $this->valid_query($query);
         // $_DATA = empty($input_method) ? null : ( $input_method == 'GET' ? $_GET : $_POST );
         $_DATA = empty($input_method) ? null : ( $input_method == 'GET' ? $_GET : ( $input_method == 'REQUEST' ? $_REQUEST : $_POST ) );
         $input_method_small = empty($input_method) ? null : strtolower( $input_method );
 
         if( !empty($input_method) and $query->is_main_query() and !empty($query->query_vars['product_cat'])) {
+
+	        if( wbc()->sanitize->get('is_test') == 1 ) {
+
+				wbc_pr("wbc prepare_query_directe inner if");
+			}
 
         	$query = $this->post__in( $_DATA, $query, $input_method_small );
 
@@ -114,6 +124,11 @@ class SP_Query {
 	        $query->query_vars['suppress_filters'] = true;
 
         }		        		        
+
+        if( wbc()->sanitize->get('is_test') == 1 ) {
+
+			wbc_pr("wbc prepare_query_directe above return");
+		}
 
         return $query;
 	}
@@ -153,6 +168,28 @@ class SP_Query {
                         );
                         $tax_query['relation'] = 'AND';
                     }
+                    /*ACTIVE_TODO_OC_START
+                    ACTIVE_TODO need to finalaize -- to a & -- to h
+                    		for now we hade applied below else block, but nide to confirm once firmly ACTIVE_TODO
+	  					ACTIVE_TODO if we can not confirm at bashed on the understanding of router and quarry layer and we can simply than lets skip it as active todo and if there are any issue comes up for tableview query layer especially the tableview legacy query layer which is now commented than we can think about it
+	  				ACTIVE_TODO_OC_END*/
+                    // --- aa code sp_tableview/application/model/publics/sp-model-query.php mathi move thayo se @a ---
+                    // --- start ---                    
+                    else {
+                    	/*ACTIVE_TODO_OC_START
+                        -- below code is aditional in tableview and is not there in wbc so we must check if it is really nessasary before running the code -- to h
+                        ACTIVE_TODO_OC_END*/
+                        $tax_query[]=array(
+                            'relation' => 'AND',
+                            array(
+                                'taxonomy' => 'product_cat',
+                                'field' => 'slug',
+                                'terms' => array( $_category ),
+                                'compare'=>'EXISTS IN'
+                            )
+                        );                    
+                    }
+                    // --- end ---
                 }  
             }
             
@@ -224,6 +261,23 @@ class SP_Query {
                                 'terms' => $this->range($attr,wbc()->sanitize->{$input_method_small}('min_'.$attr),wbc()->sanitize->{$input_method_small}('max_'.$attr),true),
                                 'compare'=>'EXISTS IN'
                             );
+                            /*ACTIVE_TODO_OC_START
+		                    ACTIVE_TODO need to finalaize -- to a & -- to h
+		                    		most likely we nide this logic but notte that the moved structure is different than from where it is moved  -- to a & -- to h
+			  					ACTIVE_TODO if we can not confirm it based on the understanding of router and quarry layer and we can simply than lets keep it as active todo and if there are any issue comes up for tableview query layer especially the tableview legacy query layer which is now commented than we can think about it                            
+                            --- aa code sp_tableview/application/model/publics/sp-model-query.php mathi move karyo se @a ---
+                            --- start ---                            
+                            -- below code is aditional in tableview and is not there in wbc so we must check if it is really nessasary before running the code -- to h
+                            array(
+                                'taxonomy' => $attr,
+                                'operator' => 'NOT EXISTS'
+                            ),array(
+                                'key' => $attr,
+                                'value' => false,
+                                'type' => 'BOOLEAN'
+                            )
+                            --- end ---
+                            ACTIVE_TODO_OC_END*/
                         }
                         else {
 
@@ -233,6 +287,22 @@ class SP_Query {
                                 'terms' => $this->range($attr,wbc()->sanitize->{$input_method_small}('min_'.$attr),wbc()->sanitize->{$input_method_small}('max_'.$attr)),
                                 'compare'=>'EXISTS IN'
                             );
+                            /*ACTIVE_TODO_OC_START
+		                    ACTIVE_TODO need to finalaize -- to a & -- to h
+									most likely we nide this logic but notte that the moved structure is different than from where it is moved  -- to a & -- to h
+			  					ACTIVE_TODO if we can not confirm it based on the understanding of router and quarry layer and we can simply than lets keep it as active todo and if there are any issue comes up for tableview query layer especially the tableview legacy query layer which is now commented than we can think about it                            
+                            --- aa code sp_tableview/application/model/publics/sp-model-query.php mathi move karyo se @a ---
+                            --- start ---
+                            array(
+                                'taxonomy' => $attr,
+                                'operator' => 'NOT EXISTS'
+                            ),array(
+                                'key' => $attr,
+                                'value' => false,
+                                'type' => 'BOOLEAN'
+                            )                                                       
+							--- end ---   
+							ACTIVE_TODO_OC_END*/                         
                         }                   
                     }
                     elseif (isset($_DATA['checklist_'.$attr]) && !empty(wbc()->sanitize->{$input_method_small}('checklist_'.$attr))) {
@@ -428,7 +498,6 @@ class SP_Query {
                 }
             }
         }
-
         $query->set('meta_query',$meta_quer_args);
 
         return $query;

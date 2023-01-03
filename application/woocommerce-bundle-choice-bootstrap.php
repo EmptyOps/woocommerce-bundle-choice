@@ -18,6 +18,8 @@ use eo\wbc\controllers\Http_Handler;
 
 use eo\wbc\system\core\Platform;
 
+use eo\wbc\controllers\admin\Admin;
+
 class WooCommerce_Bundle_Choice_Bootstrap {
 
 	private static $_instance = null;
@@ -48,7 +50,12 @@ class WooCommerce_Bundle_Choice_Bootstrap {
 		add_action('woocommerce_attribute_added', array(\eo\wbc\controllers\admin\Term_Meta::instance(),'save_taxonomy_form'), 10,2);
 		add_action('woocommerce_attribute_updated', array(\eo\wbc\controllers\admin\Term_Meta::instance(),'save_taxonomy_form'), 10, 2);
 
-		
+		add_action('woocommerce_attribute_added', array(\eo\wbc\controllers\admin\Term_Meta::instance(),'save_taxonomy_form_feild_1'), 10,2);
+		add_action('woocommerce_attribute_updated', array(\eo\wbc\controllers\admin\Term_Meta::instance(),'save_taxonomy_form_feild_1'), 10, 2);
+
+		add_action('woocommerce_attribute_added', array(\eo\wbc\controllers\admin\Term_Meta::instance(),'save_taxonomy_form_feild_2'), 10,2);
+		add_action('woocommerce_attribute_updated', array(\eo\wbc\controllers\admin\Term_Meta::instance(),'save_taxonomy_form_feild_2'), 10, 2);
+
 		
 		//Add form to the attribute page
     	if(!empty(wbc()->sanitize->get('post_type')) and wbc()->sanitize->get('post_type')=='product' and !empty(wbc()->sanitize->get('page')) and wbc()->sanitize->get('page')=='product_attributes'){
@@ -67,6 +74,10 @@ class WooCommerce_Bundle_Choice_Bootstrap {
     	$this->visual_composer();
 
 		if((function_exists('is_ajax') and is_ajax()) or defined('WP_AJAX')) {
+
+			//	legacy admin process need to be initiated during ajax also, so that its applicable modules can bind with the legacy admin side hooks of wp, woo and other plugins 
+				// ACTIVE_TODO but yeah need to impement flow that only those admin process which has something to do with particular ajax action does only executed and not others 
+			Admin::legacy_admin_process( true );
 			
 			add_action( "wp_ajax_nopriv_eowbc_ajax",array($this,'ajax'),10);
 			add_action( "wp_ajax_eowbc_ajax",array($this,'ajax'),10);

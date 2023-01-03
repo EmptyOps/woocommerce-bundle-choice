@@ -66,6 +66,52 @@ class WBC_WC {
         }
     }
 
+    public function get_term_children($id, $taxonomy='product_cat', $format='name') {
+
+        $children_ids = get_term_children( $id, $taxonomy );
+        
+        foreach($children_ids as $children_id){
+            
+            $term = get_term( $children_id, $taxonomy ); 
+            
+            if( $format == 'name' ) {
+
+                $terms_html[] = $term->name;  
+            } else {
+                
+                $term_link = get_term_link( $term, $taxonomy ); 
+                if ( is_wp_error( $term_link ) ) $term_link = '';
+
+                $terms_html[] = '<a href="' . esc_url( $term_link ) . '" rel="tag" class="' . $term->slug . '">' . $term->name . '</a>';
+            }
+        }
+
+        //added on 24-12-2022 
+        if (!is_array($terms_html)) {
+
+            $terms_html = array($terms_html);
+
+        }
+
+        if( $format == 'name' ) {
+
+            return implode( ', ', $terms_html );
+    
+        } else {
+            
+            return '<span class="subcategories-category-id-' . $id . '">' . implode( ', ', $terms_html ) . '</span>';
+        }
+    }
+
+    /////// @shraddha ///////
+    public function get_sub_category_of_category_in_product($id, $product) {
+
+        // ACTIVE_TODO right now we are getting category using a separate get_term_children call but in future we should rely on $product object to get category structure of category and sub-category and from their at the sub-category to get the benefits of cashing and so on of woocommerce.
+
+        return $this->get_term_children($id);
+
+    }
+
     public function is_wc_endpoint_url( $endpoint = false ) {
         
         if(function_exists('is_wc_endpoint_url')) {         
@@ -381,7 +427,7 @@ class WBC_WC {
         return $term->name;
     }
 
-    public function get_productCats($parent_slug = '', $format = ''){
+    public function get_productCats($parent_slug = '', $format = '', $sp_eid_type_value = 'prod_cat'){
         
         $parent = '';
         if( !empty($parent_slug) ) {
@@ -405,7 +451,7 @@ class WBC_WC {
             $option_list=array();    
         } elseif( $format == 'detailed_dropdown' ) {
             $option_list='';    
-        } elseif( $format == 'detailed'){
+        } elseif( $format == 'detailed' || 'detailed_slug'){
             $option_list=array();
         } elseif( $format == 'id_and_title' ){
             $option_list=array();
@@ -418,8 +464,8 @@ class WBC_WC {
                 $option_list[$base->term_id] = $base->slug;
             } elseif( $format == 'detailed_dropdown' ) {
                 $option_list.='<div class="item" data-value="'.$base->term_id.'" data-sp_eid="'.$separator.'prod_cat'.$separator.$base->term_id.'">'.str_replace("'","\'",$base->name).'</div>'.$this->get_productCats($base->slug, $format);
-            } elseif( $format == 'detailed') {
-                $option_list[$base->term_id] = array('label'=>str_replace("'","\'",$base->name), 'attr'=>' data-sp_eid="'.$separator.'prod_cat'.$separator.$base->term_id.' " ', $format);
+            } elseif( $format == 'detailed' || 'detailed_slug') {
+                $option_list[$base->term_id] = array('label'=> $format = 'detailed_slug' ? str_replace("'","\'",$base->name).'('.$base->slug.')' : str_replace("'","\'",$base->name), 'attr'=>' data-sp_eid="'.$separator.$sp_eid_type_value.$separator.$base->term_id.' " ', $format);
 
 
                 $option_list = array_replace($option_list, self::get_productCats($base->slug, $format)); //array_merge($option_list, self::get_productCats($base->slug, $format));
@@ -448,6 +494,8 @@ class WBC_WC {
             $option_list='<div class="divider"></div><div class="header">'.__('Attributes','diamond-api-integrator').'</div>';
         } elseif( $format == 'detailed' ) {
             $option_list=array();
+        } elseif( $format == 'detailed_vattr' ) {
+            $option_list=array();
         } elseif( $format == 'id_and_title' ) {
             $option_list=array();
         }
@@ -463,7 +511,14 @@ class WBC_WC {
 
             } elseif( $format == 'detailed' ) {
 
-                $option_list['pa_'.$attribute->attribute_name] = array('label'=>$attribute->attribute_label, 'attr'=>'data-sp_eid="'.$separator.'attr'.$separator.$attribute->attribute_id.' " ', $format);  
+                $option_list['pa_'.$attribute->attribute_name] = array('label'=>$attribute->attribute_label, 'attr'=>'data-sp_eid="'.$separator.'attr'.$separator.$attribute->attribute_id.'" ', $format);  
+
+            } elseif( $format == 'detailed_vattr' ) {
+
+                // temp comment (run on api demo) @s
+                // $option_list['pa_'.$attribute->attribute_name] = array('label'=>$attribute->attribute_label, 'attr'=>'data-sp_eid="'.$separator.'attr'.$separator.$attribute->attribute_id.'" ', $format);  
+
+                $option_list['pa_'.$attribute->attribute_name] = array('label'=>$attribute->attribute_label.'(use for variations)', 'attr'=>'data-sp_eid="'.$separator.'attr'.$separator.$attribute->attribute_id.$separator.'vattr" ', $format);  
 
             } elseif( $format == 'id_and_title' ) {
                 $option_list[$attribute->attribute_id] = $attribute->attribute_label;
@@ -495,7 +550,7 @@ class WBC_WC {
         return $opts_arr;
     } 
 
-    ////// 29-04-2022 -- @shraddha -- for options attribute //////
+    ////// 29-04-2022 -- @shraddha -- for options category //////
     public static function eo_wbc_prime_category($slug='',$prefix='',$opts_arr=array()) {
 
         $separator = wbc()->config->separator();
@@ -524,14 +579,127 @@ class WBC_WC {
         // return $category_option_list;
         return $opts_arr;
     }
-    ////// 29-04-2022 -- @shraddha -- for options attribute //////
+    ////// 29-04-2022 -- @shraddha -- for options attribute/category //////
     public static function wc_data_detailed_dropdown() {
 
         $attribute = self::instance()->eo_wbc_attributes();
         $categories = self::instance()->eo_wbc_prime_category();
         return array_replace($attribute, $categories);
 
-    }   
- 
+    }  
+     
+    public function is_variable($product){
+
+        if( $product->is_type( 'variable' )){
+           return true;
+        }
+
+        return false;
+    }
+
+    public function is_variation_object($product){
+
+        if(is_a( $product, 'WC_Product_Variable' ) or is_a( $product, 'WC_Product_Variation' )){
+           return true;
+        }
+
+        return false;
+    }
+
+    public function is_wc_object($product){
+
+        if(is_a( $product, 'WC_Product' ) or is_a( $product, 'WC_Product_Variable' ) or is_a( $product, 'WC_Product_Variation' )){
+           return true;
+        }
+
+        return false;
+    }
+
+    public function get_terms_order_data(){
+
+        $attributes = array();        
+       
+        foreach (wc_get_attribute_taxonomies() as $taxonomy) {
+            
+            
+            $terms=get_terms(array('taxonomy'=>wc_attribute_taxonomy_name($taxonomy->attribute_name),'hide_empty'=>false));
+
+            if(is_wp_error($terms)){
+
+                $terms=get_terms(wc_attribute_taxonomy_name($taxonomy->attribute_name),array('hide_empty'=>false));
+            }
+            
+            if(!empty($terms) and !is_wp_error($terms)){
+               
+                $terms_collaction = array();                
+                foreach ($terms as $term_key => $term_value) {                    
+                    $terms_collaction[str_replace(' ','_',trim($term_value->name))] = $term_key;
+                    
+                }
+                $attributes[wc_attribute_taxonomy_name($taxonomy->attribute_name)] = $terms_collaction;
+            }            
+        }       
+        return $attributes;
+
+    }
+
+    // credit : https://stackoverflow.com/questions/12798665/wordpress-get-category-id-from-url
+    public function get_category_by_url($url=null, $result_format='id', $is_based_on_wp_api=false, $is_based_on_url=false, $is_based_on_category_title=false) {
+    
+        if( empty($url) ) {
+
+            $url = wbc()->common->get_current_url();
+        } 
+
+        $wp_category = null;
+        if($is_based_on_wp_api) {
+
+            foreach( (get_the_category()) as $category) {
+                
+                if ( get_category_link($category->cat_ID) == $url ) {
+                    
+                    $wp_category = $category;
+                    
+                    break;
+                }
+            }
+        } elseif($is_based_on_url) {
+
+            // global $wp;
+            // $current_url = home_url( add_query_arg( array(), $wp->request ) );
+            $current_url = $url;
+
+            $url_array = explode('?',$current_url); 
+
+            $url_array = explode('/',$url_array[0]); 
+            $retVal = !empty($url_array[5]) ? $url_array[5] : $url_array[4] ;
+            // /*$idObj*/$wp_category = get_category_by_slug($retVal); 
+            // $wp_category = get_term_by( 'slug', $retVal, 'product_cat' ); 
+            $wp_category = wbc()->wc->get_term_by( 'slug', $retVal, 'product_cat' ); 
+            // echo /*$idObj*/$wp_category->name
+
+        } elseif($is_based_on_category_title) {
+
+            $cur_cat = get_cat_ID( single_cat_title("",false) ); //get the cat id
+            /*$category*/$wp_category = &get_category($cur_cat);
+            // /*$category*/$wp_category->slug; //get cat slug
+        }
+
+        if($result_format == 'id') {
+
+            return $wp_category->cat_ID;
+        } elseif($result_format == 'slug') {
+
+            return $wp_category->slug;
+        } else {
+
+            return $wp_category;
+        }
+    }
+
+    public function attribute_taxonomy_name_by_id($attribute_id) {
+
+        return wc_attribute_taxonomy_name_by_id((int) $attribute_id);
+    }
 
 }

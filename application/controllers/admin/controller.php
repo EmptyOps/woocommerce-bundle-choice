@@ -8,6 +8,12 @@ class Controller extends \eo\wbc\controllers\Controller {
 
 	private static $_instance = null;
 
+	// base_key -- the slug of the page, main key of the option group of the particular module should be defined based on this key 
+	private $base_key = null;
+
+	// base_key_suffix -- so if there are custom logic then that controller can be handled 
+	private $base_key_suffix = null;
+
 	public static function instance() {
 		if ( ! isset( self::$_instance ) ) {
 			self::$_instance = new self;
@@ -18,6 +24,26 @@ class Controller extends \eo\wbc\controllers\Controller {
 	/*public function __construct() {
 		
 	}	*/
+
+	public function get_base_key() {
+
+		return $this->base_key;
+	}
+
+	protected function set_base_key($base_key) {
+
+		$this->base_key = $base_key;
+	}
+
+	public function get_base_key_suffix() {
+
+		return $this->base_key_suffix;
+	}
+
+	protected function set_base_key_suffix($base_key_suffix) {
+
+		$this->base_key_suffix = $base_key_suffix;
+	}
 
 	protected function _get($name) {
 
@@ -31,8 +57,59 @@ class Controller extends \eo\wbc\controllers\Controller {
 
 	}
 
+	public function pre_process_form_definition($form_definition,$args = array()) {
+		
+		$separator = wbc()->config->separator();
+
+		// ACTIVE_TODO need to add recursion only till level 3 or 4 for replacingn {{id}} -- to s		
+		foreach($form_definition as $tab_slug => $tab_data) {
+
+			foreach($tab_data['form'] as $fdfk=>$fdfv) {
+					
+				if (strpos($fdfk,'{{id}}') !== false) {
+					
+					unset($form_definition[$tab_slug]['form'][$fdfk]);
+					$fdfk = (str_replace('{{id}}',$separator.$args['data']['id'].$separator,$fdfk));
+					$form_definition[$tab_slug]['form'][$fdfk] = $fdfv;
+				}
+			}
+		}
+		return $form_definition; 
+	}
+
 	public function get_form_defination($args = array()){
 		// To do here.
+	}
+
+
+
+	// ACTIVE_TODO need to refactor get_form_defination function on all admin controllers including the theme admin controllers and ensure one flow only which like below a static function with args param -- to s
+	// 	ACTIVE_TODO but yeah __ at last in the name should be dropped. -- to s
+			// ACTIVE_TODO and there is spell mistake type in above and below function need to fix that too, to bring it in like with function defs in all controllers -- to s 
+	public function get_form_defination__($args = null) {
+
+		// during post save 
+		// 	maybe everything will be handled by the form builder like detecting the added counter field post data and simulating based on that 
+		if( ( !empty($_POST) && empty(wbc()->sanitize->post("sub_action")) ) or wbc()->sanitize->post("sub_action") == "save" ) {
+
+			$args["sub_action"] = "save";
+		} else {
+
+			$args["sub_action"] = "";
+		}
+			
+		// during the featch filter 	
+		// 	ACTIVE_TODO it will determine the post related data if required like save tab key that was there in that model but nothing else like that id and so on 
+		// 		ACTIVE_TODO and this fetch filter data will be passed to the form builder function 
+					//	NOTE: now the id based repopulate support for das will populate its part of the form(using js layers for rendering) repopulation. 
+
+		// and then the rest just will be handled by form builder 
+		// 	and that will return the processed form definition 
+		return \eo\wbc\model\admin\Form_Builder::instance()->das_form_definition_support($args);	
+	}
+
+	public function get_legacy_ui_definition($section, $args=null){
+		return $this->get_form_defination__($args);
 	}
 
 	/*public function get_admin_form($args = array()){
@@ -48,7 +125,8 @@ class Controller extends \eo\wbc\controllers\Controller {
 			'span'=>array('text','color','back_color','font_family','font_size','visibility'),
 			'header'=>array('text','color','back_color','font_family','font_size','visibility'),
 			'sub_header'=>array('text','color','back_color','font_family','font_size','visibility'),
-			'checkbox'=>array('checkbox','visibility'),
+			'checkbox'=>array('checkbox'),
+			'text'=>array('text','visibility'),
 			'image'=>array('height','width','image','visibility'),
 			'img'=>array('height','width','image','visibility'),
 			'button'=>array('text','color','back_color','font_family','font_size','radius','visibility'),
@@ -102,11 +180,12 @@ class Controller extends \eo\wbc\controllers\Controller {
 				echo "</pre>";
 				die();*/
 
+				// lup attr 
+
 				if(!empty($form_value[$key][2]) and  !empty($form_value[$key][2]['type'])) {
 
 					$control_element = $this->default_uis($form_value[$key][2]['type'],$excep_controls);
 					if(empty($control_element)/* and $form_value['type'] === 'hidden'*/){
-
 						$control_element = array($form_value[$key][2]['type']);
 					}
 
@@ -229,8 +308,7 @@ class Controller extends \eo\wbc\controllers\Controller {
 
 					/*$controls[$form_key.'_form_segment'] = array(
 						'label'=> $form_value[$key][0],
-						'typ
-						e'=>'devider',
+						'type'=>'devider',
 					);*/
 					
 					$form_control_key = '';
@@ -350,4 +428,6 @@ class Controller extends \eo\wbc\controllers\Controller {
 
 		return $controls_data;
 	}
+
+	
 }

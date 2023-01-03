@@ -11,8 +11,10 @@
 	padding-left: 0 !important;	
 }
 
-#wpfooter{
-	position: relative !important;
+#wpfooter {
+    position: relative !important;
+    float: left;
+    width: 100%;
 }
 
 .notice, div.error, div.updated{

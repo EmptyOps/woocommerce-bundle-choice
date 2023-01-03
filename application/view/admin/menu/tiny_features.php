@@ -156,6 +156,7 @@ $form['data'] = array(
 						// 'size_class'=>array('sixteen','wide'),
 					),
 				),	*/
+				
 				'tiny_features_option_ui_toggle_init_status'=>array(
 					'label'=>eowbc_lang('Show variation form at initial?'),
 					'type'=>'checkbox',
@@ -385,6 +386,22 @@ $form['data'] = array(
 						'size_class'=>array('sixteen','wide'),
 					),	
 				), 
+				'tiny_features_option_ui_loop_box_hover_media_index'=>array(
+					'label'=>eowbc_lang('Loop box hover media index'),
+					'type'=>'number',
+					'value'=>wbc()->options->get_option('tiny_features','tiny_features_option_ui_loop_box_hover_media_index','2'),
+					'sanitize'=>'sanitize_text_field',
+					'class'=>array('fluid'),			
+					'size_class'=>array('eight','wide'/*,'required'*/),
+					'inline'=>false,
+
+					'visible_info'=>array( 'label'=>eowbc_lang('Set here the index of thumb image or media to show on hover. For example you may like to show video on hover so set index as per your gallery images thumbnails display order.'),
+						'type'=>'visible_info',
+						'class'=>array('small','fluid'),
+						// 'size_class'=>array('sixteen','wide'),
+					),
+					'attr'=>array("min='0',max='10'")					
+				),
 				'tiny_features_option_ui_save'=>array(
 							'label'=>'Save',
 							'type'=>'button',		
