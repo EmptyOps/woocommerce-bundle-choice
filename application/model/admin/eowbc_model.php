@@ -109,7 +109,7 @@ class Eowbc_Model {
 									break;
 								}
 							}
-
+							
 							if(wbc()->sanitize->get('is_test') == 1) {
 								
 								wbc_pr('eowbc_model_dm_based_field');

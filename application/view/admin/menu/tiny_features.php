@@ -387,9 +387,10 @@ $form['data'] = array(
 					),	
 				), 
 				'tiny_features_option_ui_loop_box_hover_media_index'=>array(
-					'label'=>eowbc_lang('Loop box hover media index'),
-					'type'=>'number',
-					'value'=>wbc()->options->get_option('tiny_features','tiny_features_option_ui_loop_box_hover_media_index','2'),
+					'label'=>wbc()->config->product_variations_configs()['is_gallery_images_type_based_template'] == 1 ? eowbc_lang('Loop box media type to show on hover') : eowbc_lang('Loop box hover media index'),
+					'type'=>wbc()->config->product_variations_configs()['is_gallery_images_type_based_template'] == 1 ? 'select' : 'number',
+					'value'=>wbc()->options->get_option('tiny_features','tiny_features_option_ui_loop_box_hover_media_index',wbc()->config->product_variations_configs()['is_gallery_images_type_based_template'] == 1 ? 'video' :  '2'),
+					'options'=>wbc()->config->product_variations_configs()['is_gallery_images_type_based_template'] == 1 ? apply_filters('sp_variations_loop_box_hover_media_type',array(''=>'none','image'=>'Image','video'=>'Video')) : array(),
 					'sanitize'=>'sanitize_text_field',
 					'class'=>array('fluid'),			
 					'size_class'=>array('eight','wide'/*,'required'*/),

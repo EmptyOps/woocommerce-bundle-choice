@@ -214,7 +214,7 @@ add_action('wp_footer',function(){
 		            base_container = jQuery( ( window.document.splugins.common._o( common_configs.gallery_images_configs, 'base_container_loop_selector') ? common_configs.gallery_images_configs.base_container_loop_selector : '.variations_form' ) );      
 		            jQuery(base_container).sp_wbc_variations_gallery_images_feed_page();
 
-		            base_container_simple = jQuery( ( window.document.splugins.common._o( common_configs.gallery_images_configs, 'base_container_loop_selector_simple') ? common_configs.gallery_images_configs.base_container_loop_selector_simple : null /*ACTIVE_TODO_OC_START need to update here the base_container_selectore ACTIVE_TODO_OC_END */) );      
+		            base_container_simple = jQuery( ( window.document.splugins.common._o( common_configs.gallery_images_configs, 'base_container_loop_selector_simple') ? common_configs.gallery_images_configs.base_container_loop_selector_simple : null /*ACTIVE_TODO_OC_START need to update here the base_container_selectore ACTIVE_TODO_OC_END */) );    
 		            jQuery(base_container_simple).sp_wbc_variations_gallery_images_feed_page({product_type:'simple'});
 
 		        // },2000);
