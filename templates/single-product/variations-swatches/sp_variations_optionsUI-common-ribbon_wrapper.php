@@ -21,9 +21,19 @@ $ribbon_color = get_term_meta( $attribute_object->attribute_id,'wbc_ribbon_color
 
 
 $template = array(
-    'type' => 'div',
-    'class' => 'ui segment',
-
+    'type' => 'ul',
+    'class' => array(
+                    'ui',
+                    'mini',
+                    'segment',
+                    'images',
+                    'variable-items-wrapper',
+                    /*trim( implode( ' ', array_unique( $css_classes ) ) ),*/
+                    'spui-wbc-swatches-variable-items-wrapper',
+                    'spui-wbc-swatches-variable-items-wrapper-'.$woo_dropdown_attribute_html_data['type'],
+                    $woo_dropdown_attribute_html_data['type']."-variable-wrapper"
+                ), 
+    'attr' => array( 'data-attribute_name' => esc_attr( wc_variation_attribute_name( $attribute ) ),'data-attribute_values' =>wc_esc_json( wp_json_encode( array_values( $woo_dropdown_attribute_html_data['options'] ) ) ), 'data-type'=>$woo_dropdown_attribute_html_data['type']),
     'child' => array(
         array(
             'type' => 'span',
@@ -36,18 +46,8 @@ $template = array(
             'child' => array(
                 array(
                     'type' =>'ul',
-                    'class' => array(
-                                        'ui',
-                                        'mini',
-                                        'images',
-                                        'variable-items-wrapper',
-                                        /*trim( implode( ' ', array_unique( $css_classes ) ) ),*/
-                                        'spui-wbc-swatches-variable-items-wrapper',
-                                        'spui-wbc-swatches-variable-items-wrapper-'.$woo_dropdown_attribute_html_data['type'],
-                                        $woo_dropdown_attribute_html_data['type']."-variable-wrapper"
-                                    ), 
+                    'class' =>'', 
                     // 'preHTML' => $contents,
-                    'attr' => array( 'data-attribute_name' => esc_attr( wc_variation_attribute_name( $attribute ) ),'data-attribute_values' =>wc_esc_json( wp_json_encode( array_values( $woo_dropdown_attribute_html_data['options'] ) ) ), 'data-type'=>$woo_dropdown_attribute_html_data['type']),
                     'child' => $variable_item_ui
                    
                 )

@@ -2073,7 +2073,7 @@ class SP_WBC_Variations extends SP_Variations {
 
 		if('variable' !== $data['gallery_images_template_data']['product_type'] or !isset( $data['gallery_images_template_data']['product_variation']['variation_gallery_images'] )) {
 
-			if('variable' !== $data['gallery_images_template_data']['product_type'] or !isset( $data['gallery_images_template_data']['product_variation']['variation_gallery_images'] )) {
+			if('variable' === $data['gallery_images_template_data']['product_type'] and !isset( $data['gallery_images_template_data']['product_variation']['variation_gallery_images'] )) {
 
 				// after now the get_variations_and_simple_type_fields are called from add filter hook, the below might be counter intuitive since the post_thumbnail_id might already been set only from the result of the get_variations_and_simple_type_fields fields. -- to h 
 				// 	but may be it is not possible in case of the varible type -- to h 
