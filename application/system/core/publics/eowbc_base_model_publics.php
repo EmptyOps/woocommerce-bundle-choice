@@ -23,4 +23,16 @@ class Eowbc_Base_Model_Publics {
 	private function __construct() {		
 	}
 
+	ACTIVE_TODO eventualy we nshould move it to the common parent class of this base model publics as well as base model used on admin side -- to h
+		-- so most probebly we must have planned for a common parent class and if not then we may need to think about it -- to h 
+	public static function split_sp_eids() {
+
+	}
+
+	ACTIVE_TODO eventualy we nshould move it to the common parent class of this base model publics as well as base model used on admin side -- to h
+		-- so most probebly we must have planned for a common parent class and if not then we may need to think about it -- to h 
+	public static function concate_sp_eids_value($sp_eid, $separator) {
+
+		$sp_eid['type'.$separator.'val'] =  explode($separator, $sp_eid);
+	}
 }
