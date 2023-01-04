@@ -358,7 +358,7 @@ class SP_Query {
 		elseif ( $field == '_current_category__array_filter') {
 			return array_filter(explode(',',wbc()->sanitize->{$input_method_small}('_current_category')));
 		}
-		elseif ( $field == 'CAT_LINK') {
+		elseif ( $field == 'CAT_LINK'  google search karine mukavanu chhe but google ma malatu nathi) {
 			return array_filter(explode(',',wbc()->sanitize->{$input_method_small}('CAT_LINK') ));
 		}
 		elseif ( $field == '_attribute') {
