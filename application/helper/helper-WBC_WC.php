@@ -66,17 +66,41 @@ class WBC_WC {
         }
     }
 
-    public function get_term_children($id, $taxonomy='product_cat', $format='name') {
+    public function get_term_children($id, $taxonomy='product_cat', $format='name', $product = null) {
+
+        $terms_html = array();
 
         $children_ids = get_term_children( $id, $taxonomy );
         
         foreach($children_ids as $children_id){
             
-            $term = get_term( $children_id, $taxonomy ); 
+            if ($product != null and !has_term( $children_id, 'product_cat', $product->get_id() ) ) { 
+
+                continue;
+            }
+
+            $term = null;
+
+            if ($format != 'image') {
+
+                $term = get_term( $children_id, $taxonomy ); 
+
+            }
+            
             
             if( $format == 'name' ) {
 
                 $terms_html[] = $term->name;  
+            } elseif( $format == 'image' ) {
+
+                $thumbnail_id = get_term_meta( $children_id, 'thumbnail_id', true );
+                $cat_image = wp_get_attachment_url( $thumbnail_id );
+                if(!empty($cat_image) and !is_wp_error($cat_image)){
+
+                    $terms_html[] = $cat_image; 
+
+                }
+                                 
             } else {
                 
                 $term_link = get_term_link( $term, $taxonomy ); 
@@ -97,6 +121,10 @@ class WBC_WC {
 
             return implode( ', ', $terms_html );
     
+        } elseif( $format == 'image' ) {
+
+            return implode( '|', $terms_html );
+
         } else {
             
             return '<span class="subcategories-category-id-' . $id . '">' . implode( ', ', $terms_html ) . '</span>';
@@ -104,11 +132,11 @@ class WBC_WC {
     }
 
     /////// @shraddha ///////
-    public function get_sub_category_of_category_in_product($id, $product) {
+    public function get_sub_category_of_category_in_product($id, $product, $format='name') {
 
         // ACTIVE_TODO right now we are getting category using a separate get_term_children call but in future we should rely on $product object to get category structure of category and sub-category and from their at the sub-category to get the benefits of cashing and so on of woocommerce.
 
-        return $this->get_term_children($id);
+        return $this->get_term_children($id,'product_cat',$format, $product);
 
     }
 
@@ -427,6 +455,50 @@ class WBC_WC {
         return $term->name;
     }
 
+    public function get_cat_image($id, $slug = null, $name = null) {
+
+        $term_id = null;
+
+        if( !empty($id) ) {
+
+            $term_id = $id;     
+
+        } elseif(!empty($slug)) {
+
+            $term = $this->get_term_by( 'slug', $slug, 'product_cat' );
+
+            if(!empty($term) and !is_wp_error($term)){
+                
+                $term_id = $term->term_id;
+            }
+
+        } elseif(!empty($name)) {
+
+            $term = $this->get_term_by( 'name', $name, 'product_cat' );
+
+            if(!empty($term) and !is_wp_error($term)){
+                
+                $term_id = $term->term_id;
+            }
+
+        }
+
+        if (!empty($term_id)) {
+            
+            $thumbnail_id = get_term_meta( $term_id, 'thumbnail_id', true );
+            $cat_image = wp_get_attachment_url( $thumbnail_id );
+            if(!empty($cat_image) and !is_wp_error($cat_image)){
+
+                return $cat_image; 
+
+            }
+
+        }
+            
+        return null;
+
+    }
+
     public function get_productCats($parent_slug = '', $format = '', $sp_eid_type_value = 'prod_cat'){
         
         $parent = '';
@@ -463,12 +535,12 @@ class WBC_WC {
 
                 $option_list[$base->term_id] = $base->slug;
             } elseif( $format == 'detailed_dropdown' ) {
-                $option_list.='<div class="item" data-value="'.$base->term_id.'" data-sp_eid="'.$separator.'prod_cat'.$separator.$base->term_id.'">'.str_replace("'","\'",$base->name).'</div>'.$this->get_productCats($base->slug, $format);
+                $option_list.='<div class="item" data-value="'.$base->term_id.'" data-sp_eid="'.$separator.'prod_cat'.$separator.$base->term_id.'">'.str_replace("'","\'",$base->name).'</div>'.$this->get_productCats($base->slug, $format, $sp_eid_type_value);
             } elseif( $format == 'detailed' || 'detailed_slug') {
                 $option_list[$base->term_id] = array('label'=> $format = 'detailed_slug' ? str_replace("'","\'",$base->name).'('.$base->slug.')' : str_replace("'","\'",$base->name), 'attr'=>' data-sp_eid="'.$separator.$sp_eid_type_value.$separator.$base->term_id.' " ', $format);
 
 
-                $option_list = array_replace($option_list, self::get_productCats($base->slug, $format)); //array_merge($option_list, self::get_productCats($base->slug, $format));
+                $option_list = array_replace($option_list, self::get_productCats($base->slug, $format, $sp_eid_type_value)); //array_merge($option_list, self::get_productCats($base->slug, $format));
 
             } elseif( $format == 'id_and_title' ){
                 $option_list[$base->term_id] = $base->name;
