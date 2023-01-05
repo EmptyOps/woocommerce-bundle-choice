@@ -212,6 +212,9 @@ add_action('wp_footer',function(){
 
 		            // window.document.splugins.wbc.variations.gallery_images.feed_page.api.init();
 		            base_container = jQuery( ( window.document.splugins.common._o( common_configs.gallery_images_configs, 'base_container_loop_selector') ? common_configs.gallery_images_configs.base_container_loop_selector : '.variations_form' ) );      
+		            console.log('js.vras.asset ready event 3.1.1');
+		            console.log(window.document.splugins.common._o( common_configs.gallery_images_configs, 'base_container_loop_selector'));
+		            console.log(jQuery('.variations_form'));
 		            jQuery(base_container).sp_wbc_variations_gallery_images_feed_page();
 
 		            base_container_simple = jQuery( ( window.document.splugins.common._o( common_configs.gallery_images_configs, 'base_container_loop_selector_simple') ? common_configs.gallery_images_configs.base_container_loop_selector_simple : null /*ACTIVE_TODO_OC_START need to update here the base_container_selectore ACTIVE_TODO_OC_END */) );    

@@ -131,11 +131,37 @@ class SP_Model_Gallery_Slider extends Eowbc_Base_Model_Publics {
 				return $ui;
 			}, 10);	
 
-			//js template
-			$html = null;
-			$html = apply_filters('sp_slzm_slider_image_loop_js_template',$html);
-			$html = \sp\theme\view\ui\builder\Page_Builder::instance()->build_page_widgets($html,'sp_variations_gallery_images_slider_container',array(),true);
-			echo \eo\wbc\model\UI_Builder::instance()->js_template_wrap('sp_slzm_slider_image_loop',$html,'wp');
+			//type based template
+			$is_skip = false;
+
+			$type_template = null;
+
+			if(wbc()->config->product_variations_configs()['is_gallery_images_type_based_template'] == 1) {
+
+				$type_template = ''/*$image['extra_params_org']['type']*/;
+
+				$constant_key = 'sp_slzm_slider_image_loop_'.$type_template."_created";
+
+				if(defined($constant_key) ) {
+
+					$is_skip = true;
+				} else {
+
+					define($constant_key, true);
+				}
+			} else {
+
+				$type_template = '';
+			}
+
+			if(!$is_skip) {
+
+				//js template
+				$html = null;
+				$html = apply_filters('sp_slzm_slider_image_loop_js_template',$html);
+				$html = \sp\theme\view\ui\builder\Page_Builder::instance()->build_page_widgets($html,'sp_variations_gallery_images_slider_container',array(),true);
+				echo \eo\wbc\model\UI_Builder::instance()->js_template_wrap('sp_slzm_slider_image_loop'.$type_template,$html,'wp');
+			}
 
 		}, 10);	
 

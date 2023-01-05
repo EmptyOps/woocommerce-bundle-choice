@@ -3103,7 +3103,7 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
 
             _this.#data.current_variation = _this.data.product_variations[0];
             
-            _this.#process_images_template(_this.#data.product_variations[0].variation_gallery_images);            
+            _this.#process_images_template(_this.#data.current_variation.variation_gallery_images);            
         }
 
         var sp_variations_gallery_images_loaded_callback = null ;
@@ -4670,8 +4670,9 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
         // var template_id = _this.#configs.template.zoom.id+'_'+index_inner (?) + '_hover';
         var template_id = _this.#$configs.template.zoom.id+'_'+_this.#$configs.options.tiny_features_option_ui_loop_box_hover_media_index + '_hover';
 
-        // console.log('zoom_area_hover_in() template_id');
-        // console.log(template_id);
+        console.log('zoom_area_hover_in() template_id');
+        console.log(template_id);
+        console.log(templating_lib);
 
         if(splugins.tmpl_lib.is_template_exists(template_id, templating_lib)) {
 
@@ -4687,11 +4688,11 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
                 
                 image.index = index_inner;
 
-                // console.log("tiny_features_option_ui_loop_box_hover_media_index" );
-                // console.log(_this.#$configs.options.tiny_features_option_ui_loop_box_hover_media_index);
-                // console.log(" gallery_images_child zoom_area_hover_in inner loop" );
-                // console.log(index_inner);
-                // console.log(image);
+                console.log("tiny_features_option_ui_loop_box_hover_media_index" );
+                console.log(_this.#$configs.options.tiny_features_option_ui_loop_box_hover_media_index);
+                console.log(" gallery_images_child zoom_area_hover_in inner loop" );
+                console.log(index_inner);
+                console.log(image);
 
                 // console.log("_this.configs");
                 // console.log(_this.#$configs);
@@ -4710,7 +4711,7 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
                         template_id = _this.#$configs.template.zoom.id+'_'+_this.#$configs.options.tiny_features_option_ui_loop_box_hover_media_index + '_hover';
                     }
 
-                    // console.log(" gallery_images_child zoom_area_hover_in inner inner if" );
+                    console.log(" gallery_images_child zoom_area_hover_in inner inner if" );
 
                     var template_var = _this.template_public( template_id, templating_lib );
 
@@ -4719,8 +4720,8 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
 
                     zoom_inner_html += _this.apply_template_data_public(template_var, image, templating_lib);
 
-                    // console.log('zoom_inner_html');
-                    // console.log(zoom_inner_html);
+                    console.log('zoom_inner_html');
+                    console.log(zoom_inner_html);
 
                     return false;
                 }
