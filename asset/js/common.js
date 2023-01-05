@@ -3071,7 +3071,7 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
                         }
 
                     };
-                    // console.log('common.js process_images notification');
+                    console.log('common.js process_images notification');
                     window.document.splugins.events.api.notifyAllObservers( 'gallery_images', 'process_images', {type:type_inner}, process_images_callback, _this.#$base_container );
 
                     /*ACTIVE_TODO_OC_START
@@ -4880,6 +4880,9 @@ window.document.splugins.wbc.variations.gallery_images.feed_page.core = function
         
         options = jQuery.extend(default_options, options);
 
+        console.log("sp_wbc_variations_gallery_images_feed_page object child 01");
+        console.log(this);
+        
         return this.each(function () {
             
             console.log("sp_wbc_variations_gallery_images_feed_page object child");
