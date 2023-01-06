@@ -838,6 +838,9 @@ if(is_shop() || is_product_category()) {
 	        -webkit-transition: all .2s ease;
             -o-transition: all .2s ease;
             transition: all .2s ease;
+            -webkit-box-flex: 1 !important;
+	    -ms-flex: 1 1 auto !important;
+	        flex: 1 1 auto !important;
 	    }
 
 	    .spui_color_widget li .spui_color_variable_item_contents {
@@ -1022,6 +1025,10 @@ if(is_shop() || is_product_category()) {
 	        -webkit-transition: all .2s ease;
             -o-transition: all .2s ease;
             transition: all .2s ease;
+	    -webkit-box-flex: 1 !important;
+	    -ms-flex: 1 1 auto !important;
+	        flex: 1 1 auto !important;
+	    
 	    }
 
 	    .spui_button_widget li.spui_button_variable_item.selected{
