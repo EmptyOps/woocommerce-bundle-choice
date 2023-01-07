@@ -187,7 +187,7 @@ class Eowbc_Model {
 		    //$res['post']=$_POST;
 			wbc()->load->model('admin\form-builder');
 
-			$saved_tab_key = !empty(wbc()->sanitize->post("sp_frmb_saved_tab_key")) ? wbc()->sanitize->post("sp_frmb_saved_tab_key") : ( !empty( $args("sp_frmb_saved_tab_key") ) ? $args("sp_frmb_saved_tab_key") : "" ); 
+			$saved_tab_key = !empty(wbc()->sanitize->post("sp_frmb_saved_tab_key")) ? wbc()->sanitize->post("sp_frmb_saved_tab_key") : ( !empty( $args["sp_frmb_saved_tab_key"] ) ? $args["sp_frmb_saved_tab_key"] : "" ); 
 			$skip_fileds = array('sp_frmb_saved_tab_key');
 			
 			if($saved_tab_key == $this->tab_key_prefix.'altr_filt_widgts') {
