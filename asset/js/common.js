@@ -2796,7 +2796,9 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
             // NOTE: since we are using .variations_form as the base_container_selector and it is our almost plan to use the .variations_form as base_container_selector for this module, so we have set $variations_form below from the $base_container.
             //     NOTE: however if we ever need to use other selector as base_container_selector for this module then we need to apply ternry operator condition below to handle such scenario 
             _this.#$variations_form = _this.#$base_container; //_this.#$wrapper.find('.variations_form');
-             
+            
+            console.log( 'preprocess _this.#$base_container'); 
+            console.log(_this.#$base_container); 
         // ACTIVE_TODO_OC_START
         // ACTIVE_TODO need to add produce class at the appropriate container, if rerequired then simply take a look at different theme demos of ours and at demos of other plugins we were exploring -- to t 
         //     ACTIVE_TODO once the container is confirmed give its details to b or s to add it -- to b or -- to s 
@@ -2844,7 +2846,7 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
         _this.#$slider_container = window.document.splugins.common.is_item_page ? _this.#$additional_container/*base_element*/.find( '.'+ _this.#configs.classes.slider.container ) : _this.#$additional_container/*base_element*/.closest( '.'+ _this.#configs.classes.slider.container );
         _this.#$zoom_container = window.document.splugins.common.is_item_page ? _this.#$additional_container/*base_element*/.find( '.'+ _this.#configs.classes.zoom.container ) : jQuery( _this.#configs.classes.zoom.container.replace('{product_id}', _this.product_id) );
         console.log('_this.#$zoom_container');
-        console.log(_this.#$zoom_container);
+        // console.log(_this.#$zoom_container);
             
         _this.#$slider_loop_container = _this.#$slider_container.find( '.'+ _this.#configs.classes.slider.loop_container );
 
@@ -4189,7 +4191,7 @@ window.document.splugins.wbc.variations.gallery_images.core = function( default_
 
     jQuery.fn.sp_wbc_variations_gallery_images = function ( options ) {
 
-        options = jQuery.extend(default_options, options);
+        options = jQuery.extend({}, default_options, options);
 
         return this.each(function () {
 
@@ -4540,13 +4542,15 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
 
     #zoom_area_click_listener(type) {
 
-        // console.log('gc zoom_area_click_listener');
+        console.log('gc zoom_area_click_listener');
 
         var _this = this; 
 
-        // console.log(super.get_zoom_container());
+        console.log(super.get_zoom_container());
 
         super.get_zoom_container().on('click',function() {
+
+            console.log('gc zoom_area_click_listener_click');
 
             _this.#on_zoom_area_click();
 
@@ -4675,9 +4679,9 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
         // var template_id = _this.#configs.template.zoom.id+'_'+index_inner (?) + '_hover';
         var template_id = _this.#$configs.template.zoom.id+'_'+_this.#$configs.options.tiny_features_option_ui_loop_box_hover_media_index + '_hover';
 
-        console.log('zoom_area_hover_in() template_id');
-        console.log(template_id);
-        console.log(templating_lib);
+        // console.log('zoom_area_hover_in() template_id');
+        // console.log(template_id);
+        // console.log(templating_lib);
 
         if(splugins.tmpl_lib.is_template_exists(template_id, templating_lib)) {
 
@@ -4693,10 +4697,10 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
                 
                 image.index = index_inner;
 
-                console.log("tiny_features_option_ui_loop_box_hover_media_index" );
-                console.log(_this.#$configs.options.tiny_features_option_ui_loop_box_hover_media_index);
-                console.log(" gallery_images_child zoom_area_hover_in inner loop" );
-                console.log(index_inner);
+                // console.log("tiny_features_option_ui_loop_box_hover_media_index" );
+                // console.log(_this.#$configs.options.tiny_features_option_ui_loop_box_hover_media_index);
+                // console.log(" gallery_images_child zoom_area_hover_in inner loop" );
+                // console.log(index_inner);
                 console.log(image);
 
                 // console.log("_this.configs");
@@ -4717,7 +4721,7 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
                         template_id = _this.#$configs.template.zoom.id+'_'+_this.#$configs.options.tiny_features_option_ui_loop_box_hover_media_index + '_hover';
                     }
 
-                    console.log(" gallery_images_child zoom_area_hover_in inner inner if" );
+                    // console.log(" gallery_images_child zoom_area_hover_in inner inner if" );
 
                     var template_var = _this.template_public( template_id, templating_lib );
 
@@ -4726,8 +4730,8 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
 
                     zoom_inner_html += _this.apply_template_data_public(template_var, image, templating_lib);
 
-                    console.log('zoom_inner_html');
-                    console.log(zoom_inner_html);
+                    // console.log('zoom_inner_html');
+                    // console.log(zoom_inner_html);
 
                     return false;
                 }
@@ -4806,11 +4810,11 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
 
         var sp_anchor_url = super.get_loop_box_anchor().attr('href');
 
-        // console.log(sp_anchor_url);
+        console.log(sp_anchor_url);
         
         if(!window.document.splugins.common.is_empty(sp_anchor_url)) {
             
-            // console.log('gc zoom_area_click() if');
+            console.log('gc zoom_area_click() if');
                 
             window.location.href = sp_anchor_url;
         }
@@ -4885,7 +4889,7 @@ window.document.splugins.wbc.variations.gallery_images.feed_page.core = function
 
     jQuery.fn.sp_wbc_variations_gallery_images_feed_page = function (options) {
         
-        options = jQuery.extend(default_options, options);
+        options = jQuery.extend({}, default_options, options);
 
         console.log("sp_wbc_variations_gallery_images_feed_page object child 01");
         console.log(this);
