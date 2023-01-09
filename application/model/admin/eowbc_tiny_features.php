@@ -153,12 +153,7 @@ class Tiny_Features extends Eowbc_Model {
 	}
 
 	public function save( $form_definition, $is_auto_insert_for_template=false, $args = null ) {
-		if( wbc()->sanitize->get('is_test') == 1 ) {
-			echo">>>>>>>>Dddddddddddd";
-			wbc_pr($form_definition);
-			wbc_pr($is_auto_insert_for_template);
-			wbc_pr($args);
-		}
+		
 		$res = null;			
 		
 		if( !empty($args['is_legacy_admin']) ) {
