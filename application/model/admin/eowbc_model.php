@@ -178,7 +178,7 @@ class Eowbc_Model {
 	public function save( $form_definition, $is_auto_insert_for_template=false, $args = null ) {
 		
 		if( !empty($args['is_legacy_admin']) ) {
-			
+
 			wbc()->sanitize->clean($form_definition);
 			wbc()->validate->check($form_definition);
 			$res = array();
@@ -199,7 +199,7 @@ class Eowbc_Model {
 			$save_as_data = array();	
 			$save_as_data_meta = array();	
 
-		    //loop through form tabs and save 
+	    //loop through form tabs and save 
 		    foreach ($form_definition as $key => $tab) {
 		    	if( $key != $saved_tab_key ) {
 		    		continue;
@@ -217,8 +217,11 @@ class Eowbc_Model {
 				    //loop through form fields, read from POST/GET and save
 				    //may need to check field type here and read accordingly only
 				    //only for those for which POST is set
-
-				    if( in_array($fv["type"], \eo\wbc\model\admin\Form_Builder::savable_types()) && ( isset($_POST[$fk]) || $fv["type"]=='checkbox'  ) ) {
+					
+					/*ACTIVE_TODO_OC_START
+					ACTIVE_TODO currently we are doing isset on the isset($args['data_raw']) instead of isset($args['data_raw'][$fk]) means without checking on the $fk so if we face any issues during edit or delete or some such action then need to manage accoringly. 
+					ACTIVE_TODO_OC_END*/
+				    if( in_array($fv["type"], \eo\wbc\model\admin\Form_Builder::savable_types()) && ( ( isset($_POST[$fk]) || isset($args['data_raw']/*[$fk]*/) ) || $fv["type"]=='checkbox'  ) ) {
 
 				    	//skip fields where applicable
 						if( in_array($fk, $skip_fileds) ) {
@@ -261,26 +264,28 @@ class Eowbc_Model {
 								$save_as_data['post_meta'] = array();	
 							}
 
-							if( isset($_POST[$fk]) ) {
+							/*ACTIVE_TODO_OC_START
+							ACTIVE_TODO currently we are doing isset on the isset($args['data_raw']) instead of isset($args['data_raw'][$fk]) means without checking on the $fk so if we face any issues during edit or delete or some such action then need to manage accoringly. 
+							ACTIVE_TODO_OC_END*/
+							if( isset($_POST[$fk]) or isset($args['data_raw']/*[$fk]*/) ) {
 
 								$save_as_data_meta['post_meta_found'] = true;	
 							}
 
 							if(!empty($args['data_raw'])) {
-
 								// -- as per the flow planned/thought of we ma need only litel logzic here.
 								// 	-- may be all that we need to do is simply read from the form definition itself instad of the post in the below if --to h & -- to s.
 								// 		-- and so since data_raw will not going to passed so maybe the above not empty if condition need to be adjusted with something else -- to h & -- to s
 								// 			-- i had thougt of doing not empty condition in form_definition using $fk but since some value might be set to 0 or empty so not empty will not work and not even isset because isset maybe become true even for normal case of the else condition below.
 								// 				NOTE: it feels that we can not do anything else except the isset so in below if in the ternary operator simply the isset is assed 
 								if (true /*true or since no dependancy on the dm based field so far*/ or !empty($dm_based_field)) {
-									
+
 									// ACTIVE_TODO here we are reading the directly passed custom data inside data_raw element, which is bad practice for security. so we should refactor this as soon as we get a chance and make sure that we either sanitize this or we use the standard input method on we like the post, get, request. but I think it is better that we simply sanitize this custom data by passing it to our sanitize library in the function which is accepting custom data.
-									$save_as_data['post_meta'][$fk] = ( isset($fv[$fk]['value']) ? $fv[$fk]['value'] : '' );
+									$save_as_data['post_meta'][$fk] = ( isset($fv/*[$fk]*/['value']) ? $fv/*[$fk]*/['value'] : '' );
+
 								}
 
 							} else {
-
 								$save_as_data['post_meta'][$fk] = ( isset($_POST[$fk]) ? wbc()->sanitize->_post($fk) : '' ); 
 							}
 						}
@@ -300,6 +305,7 @@ class Eowbc_Model {
 						// TODO we may like to use post meta api functions like get_post_meta(used above), update_post_meta/delete_post_meta(used below) through our common wp helper 
 
 						if ( !empty( $save_as_data_meta['post_meta_found'] ) ) {
+
 							update_post_meta( $args['id'], $args['page_section'].'_data', $sadv );
 						} else {
 							delete_post_meta( $args['id'], $args['page_section'].'_data' );
