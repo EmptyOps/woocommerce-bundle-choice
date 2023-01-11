@@ -2830,6 +2830,8 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
 
         console.log("_this.product_id");
         console.log(_this.product_id);
+        console.log(_this.#configs.product_type);
+
         _this.#data.is_variation_product =  (!window.document.splugins.common.is_empty(_this.#configs.product_type) && _this.#configs.product_type == 'simple') ? false : true; //_this.#$variations_form.length > 0;
  
         if(_this.#data.is_variation_product) {
@@ -2847,6 +2849,9 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
         _this.#$zoom_container = window.document.splugins.common.is_item_page ? _this.#$additional_container/*base_element*/.find( '.'+ _this.#configs.classes.zoom.container ) : jQuery( _this.#configs.classes.zoom.container.replace('{product_id}', _this.product_id) );
         console.log('_this.#$zoom_container');
         // console.log(_this.#$zoom_container);
+
+        console.log(_this.#data.is_variation_product);
+        console.log(_this.#data.product_variations);
             
         _this.#$slider_loop_container = _this.#$slider_container.find( '.'+ _this.#configs.classes.slider.loop_container );
 
@@ -2991,7 +2996,7 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
 
         var _this = this;
 
-        // console.log( " gallery_images preprocess_data ");
+        console.log( " gallery_images preprocess_data 00001");
         // console.log( data.product_variations ); 
 
         data.types = [];
@@ -3103,7 +3108,7 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
         
         if (!_this.#data.is_variation_product) {
 
-            _this.#data.current_variation = _this.data.product_variations[0];
+            _this.#data.current_variation = _this.#data.product_variations[0];
             
             _this.#process_images_template(_this.#data.current_variation.variation_gallery_images);            
         }
