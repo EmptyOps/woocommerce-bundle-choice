@@ -570,32 +570,40 @@ class WBC_WC {
             $option_list=array();
         } elseif( $format == 'id_and_title' ) {
             $option_list=array();
+        } elseif( $format == 'opts_id_and_title' ) {
+            $option_list=array();
         }
 
         if(is_array($attributes) and !empty($attributes)){
-          foreach ($attributes as $attribute) {        
-            if( empty($format) ) {
+            foreach ($attributes as $attribute) {        
+                if( empty($format) ) {
 
-                $option_list[$attribute->attribute_id] = 'pa_'.$attribute->attribute_name.'';
-            } elseif( $format == 'detailed_dropdown' ) {
+                    $option_list[$attribute->attribute_id] = 'pa_'.$attribute->attribute_name.'';
+                } elseif( $format == 'detailed_dropdown' ) {
 
-                $option_list.='<div class="item" data-value="pa_'.$attribute->attribute_name.'" data-sp_eid="'.$separator.'attr'.$separator.$attribute->attribute_id.'">'.$attribute->attribute_label.'</div>';
+                    $option_list.='<div class="item" data-value="pa_'.$attribute->attribute_name.'" data-sp_eid="'.$separator.'attr'.$separator.$attribute->attribute_id.'">'.$attribute->attribute_label.'</div>';
 
-            } elseif( $format == 'detailed' ) {
+                } elseif( $format == 'detailed' ) {
 
-                $option_list['pa_'.$attribute->attribute_name] = array('label'=>$attribute->attribute_label, 'attr'=>'data-sp_eid="'.$separator.'attr'.$separator.$attribute->attribute_id.'" ', $format);  
+                    $option_list['pa_'.$attribute->attribute_name] = array('label'=>$attribute->attribute_label, 'attr'=>'data-sp_eid="'.$separator.'attr'.$separator.$attribute->attribute_id.'" ', $format);  
 
-            } elseif( $format == 'detailed_vattr' ) {
+                } elseif( $format == 'detailed_vattr' ) {
 
-                // temp comment (run on api demo) @s
-                // $option_list['pa_'.$attribute->attribute_name] = array('label'=>$attribute->attribute_label, 'attr'=>'data-sp_eid="'.$separator.'attr'.$separator.$attribute->attribute_id.'" ', $format);  
+                    // temp comment (run on api demo) @s
+                    // $option_list['pa_'.$attribute->attribute_name] = array('label'=>$attribute->attribute_label, 'attr'=>'data-sp_eid="'.$separator.'attr'.$separator.$attribute->attribute_id.'" ', $format);  
 
-                $option_list['pa_'.$attribute->attribute_name] = array('label'=>$attribute->attribute_label.'(use for variations)', 'attr'=>'data-sp_eid="'.$separator.'attr'.$separator.$attribute->attribute_id.$separator.'vattr" ', $format);  
+                    $option_list['pa_'.$attribute->attribute_name] = array('label'=>$attribute->attribute_label.'(use for variations)', 'attr'=>'data-sp_eid="'.$separator.'attr'.$separator.$attribute->attribute_id.$separator.'vattr" ', $format);  
 
-            } elseif( $format == 'id_and_title' ) {
-                $option_list[$attribute->attribute_id] = $attribute->attribute_label;
+                } elseif( $format == 'id_and_title' ) {
+                    $option_list[$attribute->attribute_id] = $attribute->attribute_label;
+                } elseif( $format == 'opts_id_and_title' ) {
+
+                    foreach (get_terms(['taxonomy' => wc_attribute_taxonomy_name($attribute->attribute_name),'hide_empty' => false]) as $term) {
+ 
+                        $option_list[$term->term_taxonomy_id] = $term->name;  
+                    }
+                }
             }
-          }
         }
         return $option_list;
     }
