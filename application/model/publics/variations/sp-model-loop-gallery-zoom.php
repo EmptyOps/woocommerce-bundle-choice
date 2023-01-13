@@ -133,9 +133,10 @@ class SP_Model_Loop_Gallery_Zoom extends Eowbc_Base_Model_Publics {
 	            $html =  wbc()->load->template($template_data['template_sub_dir'].'/'.$template_data['template_key'],(isset($template_data['data'])?$template_data['data']:array()),true,$template_data['singleton_function'],true,true);
 
 	            // if(wbc()->sanitize->get('is_test') == 1 || wbc()->sanitize->get('is_test') == 9) {
- 		            
+ 		        
  		        //     wbc_pr('End SP_Model_Gallery_Zoom index key_is = '.$hook_key.' index_is = ' . $index);
 				// 	wbc_pr( $html );	            	
+
 	            // }
 	
 				return $html;
@@ -227,17 +228,17 @@ class SP_Model_Loop_Gallery_Zoom extends Eowbc_Base_Model_Publics {
 					
 					$html = apply_filters($hook_key, $html, $index, $image);
 
-					if(wbc()->sanitize->get('is_test') == 1 || wbc()->sanitize->get('is_test') == 9) {
-						wbc_pr('html = apply_filters(hook_key, html, index, image) key_is = '.$hook_key.' index_is = ' . $index);
-						wbc_pr($html);
-					}
+					// if(wbc()->sanitize->get('is_test') == 1 || wbc()->sanitize->get('is_test') == 9) {
+					// 	wbc_pr('html = apply_filters(hook_key, html, index, image) key_is = '.$hook_key.' index_is = ' . $index);
+					// 	wbc_pr($html);
+					// }
 
 					$html = \sp\theme\view\ui\builder\Page_Builder::instance()->build_page_widgets($html,'sp_variations_gallery_images_zoom_container',array(),true);
 
-					if(wbc()->sanitize->get('is_test') == 1 || wbc()->sanitize->get('is_test') == 9) {
-						wbc_pr('after set html key_is = '.$hook_key.' index_is = ' . $index);
-						wbc_pr($html);
-					}
+					// if(wbc()->sanitize->get('is_test') == 1 || wbc()->sanitize->get('is_test') == 9) {
+					// 	wbc_pr('after set html key_is = '.$hook_key.' index_is = ' . $index);
+					// 	wbc_pr($html);
+					// }
 
 					echo \eo\wbc\model\UI_Builder::instance()->js_template_wrap('sp_slzm_loop_zoom_image_loop_'./*$index*/$type_template.($hook_key=='sp_slzm_loop_zoom_image_loop_js_tempalte_hover'?'_hover':''),$html,'wp');
 				}

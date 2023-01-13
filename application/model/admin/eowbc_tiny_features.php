@@ -153,7 +153,7 @@ class Tiny_Features extends Eowbc_Model {
 	}
 
 	public function save( $form_definition, $is_auto_insert_for_template=false, $args = null ) {
-
+		
 		$res = null;			
 		
 		if( !empty($args['is_legacy_admin']) ) {

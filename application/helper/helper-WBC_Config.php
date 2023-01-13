@@ -26,8 +26,6 @@ class WBC_Config {
 
 		 		array( 'type'=>'file', 'path'=> constant('EOWBC_DIRECTORY')."/application/controllers/admin/legacy_admin/legacy-admin.php" ), 
 
-		 		array( 'type'=>'file', 'path'=> constant('EOWBC_DIRECTORY')."/application/model/admin/eowbc_tiny_features.php" ), 
-
 			), 
 			'frontend'=> array(
 
@@ -59,7 +57,8 @@ class WBC_Config {
 		 		array( 'type'=>'file', 'path'=> constant('EOWBC_DIRECTORY')."/application/model/publics/data_model/sp-wbc-product.php" ), 
 
 		 		array( 'type'=>'file', 'path'=> constant('EOWBC_DIRECTORY')."application/model/publics/data_model/sp-wbc-data-layer.php" ),
-		 		
+
+		 		array( 'type'=>'file', 'path'=> constant('EOWBC_DIRECTORY')."/application/model/admin/eowbc_tiny_features.php" ),	 		
 
 			)	
 

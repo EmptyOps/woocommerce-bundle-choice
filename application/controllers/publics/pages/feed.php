@@ -175,7 +175,11 @@ class Feed extends \eo\wbc\controllers\publics\Controller{
         } elseif ($page_section == 'swatches') {
 
             add_filter( 'woocommerce_dropdown_variation_attribute_options_html',  function($html, $hook_args) use($page_section,$args){
+                if( wbc()->sanitize->get('is_test') == 1 ) {
 
+                    wbc_pr('feed selectron_hook_render swatches if');
+                    wbc_pr($args);
+                }        
                 return apply_filters ( 'sp_wbc_get_variation_attr_opts_html',$html, $hook_args, null, false);
 
             }, 200, 2);

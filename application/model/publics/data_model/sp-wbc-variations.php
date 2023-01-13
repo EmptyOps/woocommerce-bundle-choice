@@ -707,8 +707,10 @@ class SP_WBC_Variations extends SP_Variations {
 
 				if ( strpos( $key, 'sp_variations_gallery_images' ) !== false ) {
 
-					array_push($gallery_images,array('type'=>'image','value'=>$value,'key'=>$key));
-
+					if (!empty($value)) {
+						array_push($gallery_images,array('type'=>'image','value'=>$value,'key'=>$key));
+					}
+					
 				} elseif ( strpos( $key, 'sp_variations_video_url' ) !== false ) {
 
 					array_push($gallery_images,array('type'=>'video_url','value'=>$value,'key'=>$key));
@@ -761,6 +763,12 @@ class SP_WBC_Variations extends SP_Variations {
 
 		}
 
+		if( wbc()->sanitize->get('is_test') == 1 ) {
+
+			wbc_pr("fffffffffffffffffffffffff");
+			wbc_pr($variation_image_id);
+		}
+
 		/*ACTIVE_TODO here we still needd one more hook to let any layers set their item at particular index -- to s
 			--  apply filter from here
 				--  add filter from ssm_shared class 
@@ -768,6 +776,7 @@ class SP_WBC_Variations extends SP_Variations {
 
 		// NOTE: this function will return also the default(or say the data that are supported and provided by legacy api) data as applicable like below image or all other such applicable default data 
 		if ( $variation_image_id ) {
+
 			// Add Variation Default Image
 			array_unshift( $gallery_images, $variation_image_id );
 		} else {
@@ -1915,9 +1924,6 @@ class SP_WBC_Variations extends SP_Variations {
 
 		$data['gallery_images_template_data']['post_thumbnail_id'] =  apply_filters('sp_wbc_get_image_id', null, $product,null); // \eo\wbc\system\core\data_model\SP_Product::get_image_id($product);
 	    
-	    if( wbc()->sanitize->get('is_test') == 1 ) {
-	        wbc_pr('wbc-variations sp_wbc_get_gallery_image_ids');
-	    }
 		$data['gallery_images_template_data']['attachment_ids'] = apply_filters('sp_wbc_get_gallery_image_ids', null, $product, $data['gallery_images_template_data']['product_id'], $data['gallery_images_template_data']['post_thumbnail_id'], $args); //\eo\wbc\system\core\data_model\SP_Product::get_gallery_image_ids($product);
 
 		$data['gallery_images_template_data']['has_post_thumbnail'] = apply_filters('sp_wbc_has_post_thumbnail', null, $data['gallery_images_template_data']['post_thumbnail_id']); //has_post_thumbnail();
@@ -2073,7 +2079,7 @@ class SP_WBC_Variations extends SP_Variations {
 
 		if('variable' !== $data['gallery_images_template_data']['product_type'] or !isset( $data['gallery_images_template_data']['product_variation']['variation_gallery_images'] )) {
 
-			if('variable' !== $data['gallery_images_template_data']['product_type'] or !isset( $data['gallery_images_template_data']['product_variation']['variation_gallery_images'] )) {
+			if('variable' === $data['gallery_images_template_data']['product_type'] and !isset( $data['gallery_images_template_data']['product_variation']['variation_gallery_images'] )) {
 
 				// after now the get_variations_and_simple_type_fields are called from add filter hook, the below might be counter intuitive since the post_thumbnail_id might already been set only from the result of the get_variations_and_simple_type_fields fields. -- to h 
 				// 	but may be it is not possible in case of the varible type -- to h 
@@ -2105,6 +2111,7 @@ class SP_WBC_Variations extends SP_Variations {
 			    }
 			}
 		}
+
 		
 		if( wbc()->sanitize->get('is_test') == 1 ) {
 			wbc_pr('gallery_images_template_data_all');
@@ -2226,12 +2233,6 @@ class SP_WBC_Variations extends SP_Variations {
 
 		add_filter( 'sp_wbc_get_gallery_image_ids',  function($data,$product,$product_id,$post_thumbnail_id,$args){
 
-			if( wbc()->sanitize->get('is_test') == 1 ) {
-				wbc_pr('wbc-variations gallery_images_hooks sp_wbc_get_gallery_image_ids');
-				wbc_pr($product_id);
-				wbc_pr($post_thumbnail_id);
-				wbc_pr($args);
-			}
 			if ($data !== null) {
 
 				return $data;
