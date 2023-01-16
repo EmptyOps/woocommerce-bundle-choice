@@ -1245,7 +1245,7 @@ class SP_Model_Single_Product extends SP_Single_Product {
 			
 			$simple_types_html_attributes[0]['variation_gallery_images'] = $data['gallery_images_template_data']['attachment_ids'];
 
-			$simple_types_html_attributes = array( 'data-product_id' => $data['gallery_images_template_data']['product_id'], 'data-product_simple=\''.json_encode($simple_types_html_attributes).'\''=>null);	
+			$simple_types_html_attributes = array( 'data-product_id' => $data['gallery_images_template_data']['product_sku_experimental'], 'data-product_simple=\''.json_encode($simple_types_html_attributes).'\''=>null);	
 		}
 
 		$ui = array(

@@ -1890,6 +1890,8 @@ class SP_WBC_Variations extends SP_Variations {
 
 		$data['gallery_images_template_data']['product_id'] = apply_filters('sp_wbc_product_get_id', null, $product); //$product->get_id();
 
+		$data['gallery_images_template_data']['product_sku_experimental'] = apply_filters('sp_wbc_product_get_sku', null, $product);
+
 		if( wbc()->sanitize->get('is_test') == 1 ) {
 			wbc_pr('gallery_images_template_data_product_id');
 			wbc_pr($data['gallery_images_template_data']['product_id']);
@@ -2221,6 +2223,18 @@ class SP_WBC_Variations extends SP_Variations {
         	
 		}, 10, 2);
 
+		add_filter( 'sp_wbc_product_get_sku',  function($data,$product){
+
+			if ($data !== null) {
+
+				return $data;
+			}
+
+			// NOTE: below we are using id is sku but it is the intended and standard behavior as per the stucture planed.
+        	return $product->get_id();
+        	
+		}, 10, 2);
+
 		add_filter( 'sp_wbc_get_image_id',  function($data,$product){
 
 			if ($data !== null) {
@@ -2288,7 +2302,7 @@ class SP_WBC_Variations extends SP_Variations {
 			
 			$simple_types_html_attributes[0]['variation_gallery_images'] = $caller_data['gallery_images_template_data']['attachment_ids'];
 
-        	return array( 'data-product_id' => $caller_data['gallery_images_template_data']['product_id'], 'data-product_simple' => json_encode($simple_types_html_attributes));
+        	return array( 'data-product_id' => $caller_data['gallery_images_template_data']['product_sku_experimental'], 'data-product_simple' => json_encode($simple_types_html_attributes));
         	
 		}, 10, 3);
 

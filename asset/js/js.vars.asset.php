@@ -230,16 +230,23 @@ add_action('wp_footer',function(){
 		            // ACTIVE_TODO_OC_START
 				      // ACTIVE_TODO Below ajax complete will have serious issue when the other ajax invokes this function means other than the eowbc js ajax call. So we need to simply bind on the success on render HTML notification simply the eowbs filter HTML notification and remove the ajax complete dependency from here and when that notification is fired inside the subscribe function here we can simply init the required modules. ya so simply put all the code that is the ajaxComplete function into the subscribe function of our notification module. -- to h
 				      // 	-- But still it not be inuf because the notification has a base container means host diffidency and that can not be used here because of the uncertainly of that container and even if firing that global notification that is also lead to the same issue for which the base_container based on notification are created. So we simply need to we simply the filter module calling sycuantion and make sure that for the fundamental filter search calls to that main function of filter wrapper or something such of the web, ajax is a being we need to make sure that the fundamental filter event there is only one selector of the container that is used. means we need to diffrenciat this search call of the category page from other search calls that may be happening from the diamond quiz popup, and other such things. And then we can simply use that container selector here -- to h       
-				      // ACTIVE_TODO_OC_END	    		            
+				      // ACTIVE_TODO_OC_END	    	
+
 				      jQuery(document).ajaxComplete(function (event, request, settings) {
 		            	
+					      // ACTIVE_TODO temp. below setTimeout is temparary. But may be we may like to make this time out setting permanant if 360 flow requirs it.	            
+							setTimeout(function(){
+
 			            	console.log('js.vras.asset ready event 3.1 simple');
 
-		            		var base_container_loop_simple_feed_page = jQuery( ( window.document.splugins.common._o( common_configs.gallery_images_configs, 'base_container_loop_selector_simple') ? common_configs.gallery_images_configs.base_container_loop_selector_simple : null /*ACTIVE_TODO_OC_START need to update here the base_container_selectore ACTIVE_TODO_OC_END */) );    
+			         		var base_container_loop_simple_feed_page = jQuery( ( window.document.splugins.common._o( common_configs.gallery_images_configs, 'base_container_loop_selector_simple') ? common_configs.gallery_images_configs.base_container_loop_selector_simple : null /*ACTIVE_TODO_OC_START need to update here the base_container_selectore ACTIVE_TODO_OC_END */) );    
 
 			            	console.log(base_container_loop_simple_feed_page);
 
 				            jQuery(base_container_loop_simple_feed_page).sp_wbc_variations_gallery_images_feed_page(loop_simple_feed_page_options);
+
+							},500);
+
 				      });
 
 		        // },2000);
