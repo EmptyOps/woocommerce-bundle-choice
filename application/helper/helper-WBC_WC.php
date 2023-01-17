@@ -499,7 +499,7 @@ class WBC_WC {
 
     }
 
-    public function get_productCats($parent_slug = '', $format = '', $sp_eid_type_value = 'prod_cat'){
+    public function get_productCats($parent_slug = '', $format = '', $sp_eid_type_value = 'prod_cat', $is_return_data_only = false){
         
         $parent = '';
         if( !empty($parent_slug) ) {
@@ -523,13 +523,15 @@ class WBC_WC {
             $option_list=array();    
         } elseif( $format == 'detailed_dropdown' ) {
             $option_list='';    
-        } elseif( $format == 'detailed' || 'detailed_slug'){
+        } elseif( $format == 'detailed' || 'detailed_slug') {
             $option_list=array();
-        } elseif( $format == 'id_and_title' ){
+        } elseif( $format == 'id_and_title' ) {
+            $option_list=array();
+        } elseif( $format == 'opts_detailed' ) {
             $option_list=array();
         }
 
-        if(is_array($map_base) and !empty($map_base)){
+        if(is_array($map_base) and !empty($map_base)) {
           foreach ($map_base as $base) {        
             if( empty($format) ) {
 
@@ -542,8 +544,22 @@ class WBC_WC {
 
                 $option_list = array_replace($option_list, self::get_productCats($base->slug, $format, $sp_eid_type_value)); //array_merge($option_list, self::get_productCats($base->slug, $format));
 
-            } elseif( $format == 'id_and_title' ){
+            } elseif( $format == 'id_and_title' ) {
                 $option_list[$base->term_id] = $base->name;
+
+            } elseif( $format == 'opts_detailed' ) {
+
+                ACTIVE_TODO/TODO right now we are not supporting child structure because it is not necessary in the calling layers just because the slugs are unique for the category so it is not necessary. but if require then we can apply the structure here and at that time need to make necessary changes on the calling layer in dapii and so on. and if nothing comes up then simply mark it as TODO and remove ACTIVE_TODO by third revision -- to h  
+                if($is_return_data_only) {
+
+                    $option_list[$base->term_id] = array('label'=> $format = 'detailed_slug' ? str_replace("'","\'",$base->name).'('.$base->slug.')' : str_replace("'","\'",$base->name), 'sp_eid'=>' data-sp_eid="'.$separator.$sp_eid_type_value.$separator.$base->term_id.' " ', 'parent_slug'=>$base->slug, 'parent_sp_eid'=>$separator.$sp_eid_type_value.$separator.$base->term_id, $format);
+                } else {
+
+                    $option_list[$base->term_id] = array('sp_eid'=>' data-sp_eid="'.$separator.$sp_eid_type_value.$separator.$base->term_id.' " ', 'label'=> $format = 'detailed_slug' ? str_replace("'","\'",$base->name).'('.$base->slug.')' : str_replace("'","\'",$base->name), 'slug'=>$base->slug);
+                }
+
+
+                $option_list = array_replace($option_list, self::get_productCats($base->slug, $format, $sp_eid_type_value,$is_return_data_only)); //array_merge($option_list, self::get_productCats($base->slug, $format));
             }
           }
         }
@@ -551,7 +567,7 @@ class WBC_WC {
         return $option_list;
     }
 
-    public function get_productAttributes($format = ''){
+    public function get_productAttributes($format = '', $is_return_data_only = false){
 
         $attributes = null;
         if(function_exists('wc_get_attribute_taxonomies')){
@@ -571,6 +587,8 @@ class WBC_WC {
         } elseif( $format == 'id_and_title' ) {
             $option_list=array();
         } elseif( $format == 'opts_id_and_title' ) {
+            $option_list=array();
+        } elseif( $format == 'opts_detailed' ) {
             $option_list=array();
         }
 
@@ -601,6 +619,19 @@ class WBC_WC {
                     foreach (get_terms(['taxonomy' => wc_attribute_taxonomy_name($attribute->attribute_name),'hide_empty' => false]) as $term) {
  
                         $option_list[$term->term_taxonomy_id] = $term->name;  
+                    }
+                } elseif( $format == 'opts_detailed' ) {
+
+                    foreach (get_terms(['taxonomy' => wc_attribute_taxonomy_name($attribute->attribute_name),'hide_empty' => false]) as $term) {
+
+                        ACTIVE_TODO/TODO mostly for the notes and if applicable then keep in mind that we have just added attr_opt based sp_eid support for the attribute option which was so far missing and we where by a big error and we were actualy doing a big error by using attr type of sp_eid as the type of the attribute options. so it should be well noted that so far everywere for attribute oprion the attr type is being used and that need to be rectified as soon as we get chance. -- to h 
+                        if($is_return_data_only) {
+                            
+                            $option_list[$term->term_taxonomy_id] = array('sp_eid'=>'data-sp_eid="'.$separator.'attr_opt'.$separator.$attribute->attribute_id.'" ', 'slug'=>$term->attribute_name,'label'=>$term->name, 'attr_slug'=>$attribute->attribute_name, 'attr_sp_eid'=>$separator.'attr'.$separator.$attribute->attribute_id);  
+                        } else {
+
+                            $option_list[$term->term_taxonomy_id] = array('sp_eid'=>'data-sp_eid="'.$separator.'attr_opt'.$separator.$attribute->attribute_id.'" ', 'label'=>$term->name, 'slug'=>$term->slug);  
+                        }
                     }
                 }
             }
@@ -781,5 +812,36 @@ class WBC_WC {
 
         return wc_attribute_taxonomy_name_by_id((int) $attribute_id);
     }
+
+    public function slug_to_id($type, $slug) {
+
+        if($type == 'prod_cat') {
+
+            $term = $this->get_term_by( 'slug', $slug, 'product_cat' );
+
+            if(!empty($term) and !is_wp_error($term)){
+                
+                $term_id = $term->term_id;
+            }
+
+            return $term_id;
+
+        } elseif($type == 'attr') {
+
+            $term = $this->get_term_by( 'slug', $slug, ''? );
+
+            if(!empty($term) and !is_wp_error($term)){
+                
+                $term_id = $term->term_id;
+            }
+
+            return $term_id;
+
+        } else {
+
+        }
+
+        return null;
+    } 
 
 }
