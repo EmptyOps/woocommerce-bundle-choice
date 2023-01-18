@@ -3031,10 +3031,10 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
 
         if(type == null) {
             
-            // console.log("gallery_images process_images if");
+            console.log("gallery_images process_images if");
             // //-- aa types temp banavelo se @a --
             // _this.#data.types = ["image", 'video', 'darklight_hand_image', '360_video_url'];
-            // console.log(_this.#data.types);
+            console.log(_this.#data.types);
             //  process images
             jQuery( _this.#data.types ).each( function( i, type_inner ) {
     
@@ -3053,7 +3053,7 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
 
                  if (window.document.splugins.common._o(_this.#configs.types, type_inner)) {
                     
-                    // console.log("gallery_images process_images inner if");
+                    console.log("gallery_images process_images inner if");
 
                     _this.#process_images_inner(type_inner, element);    
 
