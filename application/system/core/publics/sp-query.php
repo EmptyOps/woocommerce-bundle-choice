@@ -526,14 +526,21 @@ class SP_Query {
     	return $term;
     }
 
-    public function attribute_lists($term,$list){    	
+    public function attribute_lists($term,$list,$is_preserve_keys = false){    	
     	$new_list = array();
     	if(!empty($term) and !empty($list) and is_array($list)){    		
-    		foreach ($list as $list_item) {
+    		foreach ($list as $l_key=>$list_item) {
     			$term_obj = $this->get_term($term,$list_item);    			   			
     			//	TODO @mahesh in below condition there seems a bug, it should be checking the empty case for term_obj
     			if(!empty($term)){
-    				$new_list[]= $term_obj->name;    				
+
+    				if($is_preserve_keys) {
+
+   		 				$new_list[$l_key]= $term_obj->name;    				
+       				} else {
+
+       					$new_list[]= $term_obj->name;
+       				}
     			}
     		}
     	} 	    	

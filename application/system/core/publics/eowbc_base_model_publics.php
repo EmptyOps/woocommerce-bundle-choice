@@ -39,6 +39,6 @@ class Eowbc_Base_Model_Publics {
 
 		$separator = wbc()->config->separator();
 
-		return $separator."".$values['type']."".$separator."".$values['val']."".$separator;
+		return $separator.$values['type'].$separator.$values['val'].$separator;
 	}
 }
