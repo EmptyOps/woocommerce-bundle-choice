@@ -2998,7 +2998,7 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
         var _this = this;
 
         console.log( " gallery_images preprocess_data 00001");
-        // console.log( data.product_variations ); 
+         console.log( data.product_variations ); 
 
         data.types = [];
         jQuery( data.product_variations ).each(function (i, variation) {
