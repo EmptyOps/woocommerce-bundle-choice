@@ -2302,7 +2302,7 @@ class SP_WBC_Variations extends SP_Variations {
 			
 			$simple_types_html_attributes[0]['variation_gallery_images'] = $caller_data['gallery_images_template_data']['attachment_ids'];
 
-        	return array( 'data-product_id' => $caller_data['gallery_images_template_data']['product_sku_experimental'], 'data-product_simple' => json_encode($simple_types_html_attributes));
+        	return array( 'data-product_id' => $caller_data['gallery_images_template_data']['product_sku_experimental'], 'data-product_simple=\''.json_encode($simple_types_html_attributes).'\'' => null);
         	
 		}, 10, 3);
 
