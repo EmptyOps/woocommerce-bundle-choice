@@ -552,12 +552,11 @@ class WBC_WC {
                 ACTIVE_TODO/TODO right now we are not supporting child structure because it is not necessary in the calling layers just because the slugs are unique for the category so it is not necessary. but if require then we can apply the structure here and at that time need to make necessary changes on the calling layer in dapii and so on. and if nothing comes up then simply mark it as TODO and remove ACTIVE_TODO by third revision -- to h  
                 if($is_return_data_only) {
 
-                    $option_list[$base->term_id] = array('label'=> $format = 'detailed_slug' ? str_replace("'","\'",$base->name).'('.$base->slug.')' : str_replace("'","\'",$base->name), 'sp_eid'=>' data-sp_eid="'.$separator.$sp_eid_type_value.$separator.$base->term_id.' " ', 'parent_slug'=>$base->slug, 'parent_sp_eid'=>$separator.$sp_eid_type_value.$separator.$base->term_id, $format);
+                    $option_list[$base->term_id] = array('label'=>str_replace("'","\'",$base->name), 'sp_eid'=>' data-sp_eid="'.$separator.$sp_eid_type_value.$separator.$base->term_id.' " ', 'parent_slug'=>$base->slug, 'parent_sp_eid'=>$separator.$sp_eid_type_value.$separator.$base->term_id, $format);
                 } else {
 
-                    $option_list[$base->term_id] = array('sp_eid'=>' data-sp_eid="'.$separator.$sp_eid_type_value.$separator.$base->term_id.' " ', 'label'=> $format = 'detailed_slug' ? str_replace("'","\'",$base->name).'('.$base->slug.')' : str_replace("'","\'",$base->name), 'slug'=>$base->slug);
+                    $option_list[$base->term_id] = array('sp_eid'=>' data-sp_eid="'.$separator.$sp_eid_type_value.$separator.$base->term_id.' " ', 'label'=>str_replace("'","\'",$base->name), 'slug'=>$base->slug);
                 }
-
 
                 $option_list = array_replace($option_list, self::get_productCats($base->slug, $format, $sp_eid_type_value,$is_return_data_only)); //array_merge($option_list, self::get_productCats($base->slug, $format));
             }
