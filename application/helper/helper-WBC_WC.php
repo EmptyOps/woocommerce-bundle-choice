@@ -549,13 +549,13 @@ class WBC_WC {
 
             } elseif( $format == 'opts_detailed' ) {
 
-                ACTIVE_TODO/TODO right now we are not supporting child structure because it is not necessary in the calling layers just because the slugs are unique for the category so it is not necessary. but if require then we can apply the structure here and at that time need to make necessary changes on the calling layer in dapii and so on. and if nothing comes up then simply mark it as TODO and remove ACTIVE_TODO by third revision -- to h  
+                // ACTIVE_TODO/TODO right now we are not supporting parent child structure because it is not necessary in the calling layers just because the slugs are unique for the category so it is not necessary. but if require then we can apply the structure here and at that time need to make necessary changes on the calling layer in dapii and so on. and if nothing comes up then simply mark it as TODO and remove ACTIVE_TODO by third revision -- to h  
                 if($is_return_data_only) {
 
-                    $option_list[$base->term_id] = array('label'=>str_replace("'","\'",$base->name), 'sp_eid'=>' data-sp_eid="'.$separator.$sp_eid_type_value.$separator.$base->term_id.' " ', 'parent_slug'=>$base->slug, 'parent_sp_eid'=>$separator.$sp_eid_type_value.$separator.$base->term_id, $format);
+                    $option_list[$base->term_id] = array('label'=>/*str_replace("'","\'",*/$base->name/*)*/, 'slug'=>$base->slug, 'sp_eid'=>$separator.$sp_eid_type_value.$separator.$base->term_id, 'parent_slug'=>$base->slug, 'parent_sp_eid'=>$separator.$sp_eid_type_value.$separator.$base->term_id);
                 } else {
 
-                    $option_list[$base->term_id] = array('sp_eid'=>' data-sp_eid="'.$separator.$sp_eid_type_value.$separator.$base->term_id.' " ', 'label'=>str_replace("'","\'",$base->name), 'slug'=>$base->slug);
+                    $option_list[$base->term_id] = array('attr'=>' data-sp_eid="'.$separator.$sp_eid_type_value.$separator.$base->term_id.'" ', 'label'=>str_replace("'","\'",$base->name), 'slug'=>$base->slug);
                 }
 
                 $option_list = array_replace($option_list, self::get_productCats($base->slug, $format, $sp_eid_type_value,$is_return_data_only)); //array_merge($option_list, self::get_productCats($base->slug, $format));
@@ -623,13 +623,16 @@ class WBC_WC {
 
                     foreach (get_terms(['taxonomy' => wc_attribute_taxonomy_name($attribute->attribute_name),'hide_empty' => false]) as $term) {
 
-                        ACTIVE_TODO/TODO mostly for the notes and if applicable then keep in mind that we have just added attr_opt based sp_eid support for the attribute option which was so far missing and we where by a big error and we were actualy doing a big error by using attr type of sp_eid as the type of the attribute options. so it should be well noted that so far everywere for attribute oprion the attr type is being used and that need to be rectified as soon as we get chance. -- to h 
+                        /*ACTIVE_TODO_OC_START
+                        ACTIVE_TODO mostly for the notes and if applicable then keep in mind that we have just added attr_opt based sp_eid support for the attribute option which was so far missing and we were most probabely actualy doing a big error by using attr type of sp_eid as the type of the attribute options. so it should be well noted that so far everywere for attribute option the attr type is being used and that need to be rectified as soon as we get chance. -- to h
+                        ACTIVE_TODO_OC_END*/
                         if($is_return_data_only) {
                             
-                            $option_list[$term->term_taxonomy_id] = array('sp_eid'=>'data-sp_eid="'.$separator.'attr_opt'.$separator.$attribute->attribute_id.'" ', 'slug'=>$term->attribute_name,'label'=>$term->name, 'attr_slug'=>$attribute->attribute_name, 'attr_sp_eid'=>$separator.'attr'.$separator.$attribute->attribute_id);  
+                            $option_list[$term->term_taxonomy_id] = array('sp_eid'=>$separator.'attr_opt'.$separator.$term->term_taxonomy_id, 'slug'=>$term->slug, 'label'=>$term->name, 'attr_slug'=>'pa_'.$attribute->attribute_name, 'attr_sp_eid'=>$separator.'attr'.$separator.$attribute->attribute_id ); 
+
                         } else {
 
-                            $option_list[$term->term_taxonomy_id] = array('sp_eid'=>'data-sp_eid="'.$separator.'attr_opt'.$separator.$attribute->attribute_id.'" ', 'label'=>$term->name, 'slug'=>$term->slug);  
+                            $option_list[$term->term_taxonomy_id] = array('attr'=>'data-sp_eid="'.$separator.'attr_opt'.$separator.$attribute->attribute_id.'" ', 'label'=>$term->name, 'slug'=>$term->slug);  
                         }
                     }
                 }
@@ -820,10 +823,8 @@ class WBC_WC {
 
             if(!empty($term) and !is_wp_error($term)){
                 
-                $term_id = $term->term_id;
+                return $term->term_id;
             }
-
-            return $term_id;
 
         } elseif($type == 'attr') {
 
@@ -831,10 +832,23 @@ class WBC_WC {
 
             if(!empty($term) and !is_wp_error($term)){
                 
-                $term_id = $term->term_id;
+                return $term->term_id;
             }
 
-            return $term_id;
+            //////////////////////////////////
+            --  for example
+            $shape_meta = get_term_by( 'term_taxonomy_id', $option_id,wc_attribute_taxonomy_name(wbc()->options->get_option('diffrent_shape_configure','shape_attribute')));
+
+
+            $_attribute = $this->tax_query_data( $input_method_small, '_attribute' );
+            foreach ($_attribute as $_attribute_key) {
+                $_min_object = get_term_by('slug',$min_key_name /*$_min*/,$_attribute_key);
+            }
+
+
+            $field_slug=$term->slug;
+            $taxonomy = wbc()->wc->get_term_by('slug',$elements[0],$field_slug);
+            ////////////////////////////////////
 
         } else {
 
