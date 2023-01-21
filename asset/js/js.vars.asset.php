@@ -205,7 +205,8 @@ add_action('wp_footer',function(){
 				      // ACTIVE_TODO_OC_END	
 				      jQuery(document).ajaxComplete(function (event, request, settings) {
 		            	
-							// console.log('[js.vars.asset wp_footer] gim_feed ajaxComplete variations');
+							console.log('[js.vars.asset wp_footer] gim_feed ajaxComplete variations');
+							console.log(jQuery(base_container_loop_feed_page));
 
 		            	jQuery(base_container_loop_feed_page).sp_wbc_variations_gallery_images_feed_page();   
 				      });
@@ -224,7 +225,7 @@ add_action('wp_footer',function(){
 					      // ACTIVE_TODO temp. below setTimeout is temparary. But may be we may like to make this time out setting permanant if 360 flow requirs it.	            
 							setTimeout(function(){
 
-								// console.log('[js.vars.asset wp_footer] gim_feed ajaxComplete simple');
+								console.log('[js.vars.asset wp_footer] gim_feed ajaxComplete simple');
 			         		var base_container_loop_simple_feed_page = jQuery( ( window.document.splugins.common._o( common_configs.gallery_images_configs, 'base_container_loop_selector_simple') ? common_configs.gallery_images_configs.base_container_loop_selector_simple : null /*ACTIVE_TODO_OC_START need to update here the base_container_selectore ACTIVE_TODO_OC_END */) );    
 
 			            	console.log(base_container_loop_simple_feed_page);
