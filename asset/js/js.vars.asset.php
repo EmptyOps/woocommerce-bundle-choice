@@ -13,7 +13,7 @@ add_action( ( !is_admin() ? 'wp_enqueue_scripts' : 'admin_enqueue_scripts'),func
 ?>
 
 	<script type="text/javascript">
-		console.log('add_action heder');
+
 		//	define namespaces 
 		window.document.splugins = window.document.splugins || {};
 		window.document.splugins.common = window.document.splugins.common || {};
@@ -40,20 +40,14 @@ add_action( ( !is_admin() ? 'wp_enqueue_scripts' : 'admin_enqueue_scripts'),func
 		?>
 
     	window.document.splugins.common.current_theme_key = '<?php echo wbc()->common->current_theme_key(); ?>';
-    	console.log("current theme key");
-    	console.log(window.document.splugins.common.current_theme_key);
 
 		window.document.splugins.common.is_category_page = <?php echo ((is_product_category()) ? "true" : "false");?>; 
-
-		console.log('window.document.splugins.common.is_category_page');
-		console.log(window.document.splugins.common.is_category_page);
 
 		window.document.splugins.common.is_item_page = <?php echo ((is_product()) ? "true" : "false");?>;
 
 		window.document.splugins.common.is_mobile = <?php echo ((wbc_is_mobile()) ? "true" : "false");?>;
 		
-		window.document.splugins.common.is_tablet = <?php echo ((wbc_is_mobile()) ? "true" : "false");?>;
-		console.log('js.var');		
+		window.document.splugins.common.is_tablet = <?php echo ((wbc_is_mobile()) ? "true" : "false");?>;	
 
 	</script>
 <?php  
@@ -145,31 +139,24 @@ add_action( ( !is_admin() ? 'wp_enqueue_scripts' : 'admin_enqueue_scripts'),func
 add_action('wp_footer',function(){               
    ?>
    <script>
-		console.log('add_action wp_footer');
+		console.log('[js.vars.asset wp_footer]');
     	// console.log("js.vras.asset outer ready event");
     	
     	jQuery(document).ready(function() {
     		
-    		console.log("js.vras.asset ready event");
-    		console.log(window.document.splugins.common.is_category_page);
+			console.log('[js.vars.asset wp_footer] document.ready');
 
  	 		if(window.document.splugins.common.is_category_page) {
  
+				console.log('[js.vars.asset wp_footer] is_category_page');
+
 	    		window.document.splugins.wbc.pagination.api.init();
-	
-	    		console.log("js.vras.asset ready event 001");
 
 				window.document.splugins.wbc.filters.api.init();
 
-	    		console.log("js.vras.asset ready event 002");
-
 				window.document.splugins.wbc.filter_sets.api.init();
 
-	    		console.log("js.vras.asset ready event 003");
-
    		}
-
-   		console.log("js.vras.asset ready event 1");
 
    		// ACTIVE_TODO we should confirm once and then disable category condition or part below because it seems unnecessary for the category page. or is it necessary for the purple theme loopbox slider? or for the tableview sidebar or popup if it has jQuery slider or zoom? 
     		if(window.document.splugins.common.is_item_page || window.document.splugins.common.is_category_page) {
@@ -182,11 +169,9 @@ add_action('wp_footer',function(){
 
 			}
 
-			console.log("js.vras.asset ready event 2");
-
         	if(window.document.splugins.common.is_item_page) {
 	
-				console.log("js.vras.asset ready event 2.1");
+				console.log('[js.vars.asset wp_footer] gim');
 
 		        // window.setTimeout(function(){
 
@@ -203,16 +188,15 @@ add_action('wp_footer',function(){
 
 			}
 
-			console.log("js.vras.asset ready event 3");
-
 			if(window.document.splugins.common.is_category_page) {
 
-				console.log("js.vras.asset ready event 3.1");
-				console.log(common_configs.gallery_images_configs.base_container_loop_selector);
+				console.log('[js.vars.asset wp_footer] gim_feed');
 
 		        // window.setTimeout(function(){
 
 		            // window.document.splugins.wbc.variations.gallery_images.feed_page.api.init();
+
+						// console.log('[js.vars.asset wp_footer] gim_feed variations');
 		            var base_container_loop_feed_page = jQuery( ( window.document.splugins.common._o( common_configs.gallery_images_configs, 'base_container_loop_selector') ? common_configs.gallery_images_configs.base_container_loop_selector : '.variations_form' ) );      
 		            jQuery(base_container_loop_feed_page).sp_wbc_variations_gallery_images_feed_page();
 		            // ACTIVE_TODO_OC_START
@@ -221,9 +205,12 @@ add_action('wp_footer',function(){
 				      // ACTIVE_TODO_OC_END	
 				      jQuery(document).ajaxComplete(function (event, request, settings) {
 		            	
+							// console.log('[js.vars.asset wp_footer] gim_feed ajaxComplete variations');
+
 		            	jQuery(base_container_loop_feed_page).sp_wbc_variations_gallery_images_feed_page();   
 				      });
 
+						// console.log('[js.vars.asset wp_footer] gim_feed simple');
 		            var base_container_loop_simple_feed_page = jQuery( ( window.document.splugins.common._o( common_configs.gallery_images_configs, 'base_container_loop_selector_simple') ? common_configs.gallery_images_configs.base_container_loop_selector_simple : null /*ACTIVE_TODO_OC_START need to update here the base_container_selectore ACTIVE_TODO_OC_END */) );    
 		            var loop_simple_feed_page_options = {product_type:'simple'};
 		            jQuery(base_container_loop_simple_feed_page).sp_wbc_variations_gallery_images_feed_page(loop_simple_feed_page_options);
@@ -237,8 +224,7 @@ add_action('wp_footer',function(){
 					      // ACTIVE_TODO temp. below setTimeout is temparary. But may be we may like to make this time out setting permanant if 360 flow requirs it.	            
 							setTimeout(function(){
 
-			            	console.log('js.vras.asset ready event 3.1 simple');
-
+								// console.log('[js.vars.asset wp_footer] gim_feed ajaxComplete simple');
 			         		var base_container_loop_simple_feed_page = jQuery( ( window.document.splugins.common._o( common_configs.gallery_images_configs, 'base_container_loop_selector_simple') ? common_configs.gallery_images_configs.base_container_loop_selector_simple : null /*ACTIVE_TODO_OC_START need to update here the base_container_selectore ACTIVE_TODO_OC_END */) );    
 
 			            	console.log(base_container_loop_simple_feed_page);
@@ -253,12 +239,10 @@ add_action('wp_footer',function(){
 
 			}
 
-			console.log("js.vras.asset ready event 4");
-
      		var base_container_swatches = null;
         	if(window.document.splugins.common.is_item_page) {
 			    	
-			    	console.log("js vars ready item page if 1");
+					// console.log('[js.vars.asset wp_footer] vs');
 
 		        // window.setTimeout(function(){
 		            // window.document.splugins.wbc.variations.swatches.api.init();
@@ -272,12 +256,9 @@ add_action('wp_footer',function(){
 
 			if(window.document.splugins.common.is_category_page) {
 			    	
-			    	console.log("js vars ready item page if 2");
+				// console.log('[js.vars.asset wp_footer] vs_feed');
 
 		        // window.setTimeout(function(){
-
-						console.log("js vars ready item page if base_container 3");
-		            console.log(( window.document.splugins.common._o( common_configs.swatches_config, 'base_container_loop_selector') ? common_configs.swatches_config.base_container_loop_selector : '.variations_form' ));
 
 		            // window.document.splugins.wbc.variations.swatches.feed_page.api.init();
 		            base_container_loop_feed_page = jQuery( ( window.document.splugins.common._o( common_configs.swatches_config, 'base_container_loop_selector') ? common_configs.swatches_config.base_container_loop_selector : '.variations_form' ) );      
@@ -287,6 +268,8 @@ add_action('wp_footer',function(){
 				      // 	-- But still it not be inuf because the notification has a base container means host diffidency and that can not be used here because of the uncertainly of that container and even if firing that global notification that is also lead to the same issue for which the base_container based on notification are created. So we simply need to we simply the filter module calling sycuantion and make sure that for the fundamental filter search calls to that main function of filter wrapper or something such of the web, ajax is a being we need to make sure that the fundamental filter event there is only one selector of the container that is used. means we need to diffrenciat this search call of the category page from other search calls that may be happening from the diamond quiz popup, and other such things. And then we can simply use that container selector here -- to h       
 				      // ACTIVE_TODO_OC_END	 		            
 				      jQuery(document).ajaxComplete(function (event, request, settings) {
+							
+							// console.log('[js.vars.asset wp_footer] vs_feed ajaxComplete');
 		            	
 			            jQuery(base_container_loop_feed_page).sp_wbc_variations_swatches_feed_page();
 				      });
@@ -296,9 +279,6 @@ add_action('wp_footer',function(){
 		        // },2000);    
 
 			}
-
-			console.log("js vars ready after all if 2");
-			console.log(base_container_swatches);
 
 			// jQuery(base_container_swatches).check_variations();
 			jQuery('.variations_form').trigger('check_variations');
