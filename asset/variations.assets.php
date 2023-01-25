@@ -96,7 +96,8 @@ if( is_product() ) {
 	    background: #ffffff;
 	    color: #000;
 	    border-radius: 2px;
-	    box-shadow: 0 0 0 1px #a8a8a8;
+	    -webkit-box-shadow: 0 0 0 1px #a8a8a8;
+               box-shadow: 0 0 0 1px #a8a8a8;
 	    cursor: pointer;
 	    -webkit-transition: all .2s ease;
 	    -o-transition: all .2s ease;
@@ -146,7 +147,8 @@ if( is_product() ) {
         background: #ffffff;
         color: #000;
         border-radius: 2px;
-        box-shadow: 0 0 0 1px #a8a8a8;
+        -webkit-box-shadow: 0 0 0 1px #a8a8a8;
+               box-shadow: 0 0 0 1px #a8a8a8;
         cursor: pointer;
         -webkit-transition: all .2s ease;
         -o-transition: all .2s ease;
@@ -198,7 +200,8 @@ if( is_product() ) {
         background: #ffffff;
         color: #000;
         border-radius: 2px;
-        box-shadow: 0 0 0 1px #a8a8a8;
+        -webkit-box-shadow: 0 0 0 1px #a8a8a8;
+               box-shadow: 0 0 0 1px #a8a8a8;
         cursor: pointer;
         -webkit-transition: all .2s ease;
                 -o-transition: all .2s ease;
@@ -251,7 +254,8 @@ if( is_product() ) {
 	    background: #ffffff;
 	    color: #000;
 	    border-radius: 2px;
-	    box-shadow: 0 0 0 1px #a8a8a8;
+	    -webkit-box-shadow: 0 0 0 1px #a8a8a8;
+               box-shadow: 0 0 0 1px #a8a8a8;
 	    cursor: pointer;
 	    -webkit-transition: all .2s ease;
 	    -o-transition: all .2s ease;
@@ -301,7 +305,8 @@ if( is_product() ) {
 	    background: #ffffff;
 	    color: #000;
 	    border-radius: 2px;
-	    box-shadow: 0 0 0 1px #a8a8a8;
+	    -webkit-box-shadow: 0 0 0 1px #a8a8a8;
+               box-shadow: 0 0 0 1px #a8a8a8;
 	    cursor: pointer;
 	    -webkit-transition: all .2s ease;
 	    -o-transition: all .2s ease;
@@ -350,7 +355,8 @@ if( is_product() ) {
 	    background: #ffffff;
 	    color: #000;
 	    border-radius: 2px;
-	    box-shadow: 0 0 0 1px #a8a8a8;
+	    -webkit-box-shadow: 0 0 0 1px #a8a8a8;
+               box-shadow: 0 0 0 1px #a8a8a8;
 	    cursor: pointer;
 	    -webkit-transition: all .2s ease;
 	    -o-transition: all .2s ease;
@@ -409,7 +415,8 @@ if( is_product() ) {
 	    background: #ffffff;
 	    color: #000;
 	    border-radius: 2px;
-	    box-shadow: 0 0 0 1px #a8a8a8;
+	    -webkit-box-shadow: 0 0 0 1px #a8a8a8;
+               box-shadow: 0 0 0 1px #a8a8a8;
 	    cursor: pointer;
 	    -webkit-transition: all .2s ease;
 	    -o-transition: all .2s ease;
@@ -450,7 +457,8 @@ if( is_product() ) {
 	    background: #ffffff;
 	    color: #000;
 	    border-radius: 2px;
-	    box-shadow: 0 0 0 1px #a8a8a8;
+	    -webkit-box-shadow: 0 0 0 1px #a8a8a8;
+               box-shadow: 0 0 0 1px #a8a8a8;
 	    cursor: pointer;
 	    -webkit-transition: all .2s ease;
 	    -o-transition: all .2s ease;
