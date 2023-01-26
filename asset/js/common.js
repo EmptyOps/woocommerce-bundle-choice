@@ -3123,6 +3123,7 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
 
             _this.#data.current_variation = _this.#data.product_variations[0];
             
+            console.log(_this.#$zoom_container);
             console.log(_this.#data.current_variation);
 
             _this.#process_images_template(_this.#data.current_variation.variation_gallery_images);            
@@ -3570,7 +3571,7 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
         
         _this.#$variations_form.on('show_variation', function (event, variation) {
             
-            // console.log("gim [variation_change_listener] show_variation");
+            console.log("gim [variation_change_listener] show_variation");
 
            // -- aya only is_category_page ni if condition mari se 02-11-2022 @a --
            if(window.document.splugins.common.is_category_page) {
