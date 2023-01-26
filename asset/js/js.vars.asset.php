@@ -41,6 +41,8 @@ add_action( ( !is_admin() ? 'wp_enqueue_scripts' : 'admin_enqueue_scripts'),func
 
     	window.document.splugins.common.current_theme_key = '<?php echo wbc()->common->current_theme_key(); ?>';
 
+		window.document.splugins.common.is_shop_page = <?php echo ((is_shop()) ? "true" : "false");?>; 
+
 		window.document.splugins.common.is_category_page = <?php echo ((is_product_category()) ? "true" : "false");?>; 
 
 		window.document.splugins.common.is_item_page = <?php echo ((is_product()) ? "true" : "false");?>;
@@ -146,7 +148,7 @@ add_action('wp_footer',function(){
     		
 			console.log('[js.vars.asset wp_footer] document.ready');
 
- 	 		if(window.document.splugins.common.is_category_page) {
+ 	 		if(window.document.splugins.common.is_category_page || window.document.splugins.common.is_shop_page) {
  
 				console.log('[js.vars.asset wp_footer] is_category_page');
 
@@ -205,10 +207,14 @@ add_action('wp_footer',function(){
 				      // ACTIVE_TODO_OC_END	
 				      jQuery(document).ajaxComplete(function (event, request, settings) {
 		            	
-							console.log('[js.vars.asset wp_footer] gim_feed ajaxComplete variations');
-							console.log(jQuery(base_container_loop_feed_page));
+		            	if(settings.url.indexOf('/product-category/') >= 0){
+								console.log('[js.vars.asset wp_footer] gim_feed ajaxComplete variations');
+								console.log(jQuery(base_container_loop_feed_page));
 
-		            	jQuery(base_container_loop_feed_page).sp_wbc_variations_gallery_images_feed_page();   
+			            	jQuery(base_container_loop_feed_page).sp_wbc_variations_gallery_images_feed_page();   
+		            	}
+
+
 				      });
 
 						// console.log('[js.vars.asset wp_footer] gim_feed simple');
@@ -222,17 +228,19 @@ add_action('wp_footer',function(){
 
 				      jQuery(document).ajaxComplete(function (event, request, settings) {
 		            	
-					      // ACTIVE_TODO temp. below setTimeout is temparary. But may be we may like to make this time out setting permanant if 360 flow requirs it.	            
-							setTimeout(function(){
+		            	if(settings.url.indexOf('/product-category/') >= 0){
+						      // ACTIVE_TODO temp. below setTimeout is temparary. But may be we may like to make this time out setting permanant if 360 flow requirs it.	            
+								setTimeout(function(){
 
-								console.log('[js.vars.asset wp_footer] gim_feed ajaxComplete simple');
-			         		var base_container_loop_simple_feed_page = jQuery( ( window.document.splugins.common._o( common_configs.gallery_images_configs, 'base_container_loop_selector_simple') ? common_configs.gallery_images_configs.base_container_loop_selector_simple : null /*ACTIVE_TODO_OC_START need to update here the base_container_selectore ACTIVE_TODO_OC_END */) );    
+									console.log('[js.vars.asset wp_footer] gim_feed ajaxComplete simple');
+				         		var base_container_loop_simple_feed_page = jQuery( ( window.document.splugins.common._o( common_configs.gallery_images_configs, 'base_container_loop_selector_simple') ? common_configs.gallery_images_configs.base_container_loop_selector_simple : null /*ACTIVE_TODO_OC_START need to update here the base_container_selectore ACTIVE_TODO_OC_END */) );    
 
-			            	console.log(base_container_loop_simple_feed_page);
+				            	console.log(base_container_loop_simple_feed_page);
 
-				            jQuery(base_container_loop_simple_feed_page).sp_wbc_variations_gallery_images_feed_page(loop_simple_feed_page_options);
+					            jQuery(base_container_loop_simple_feed_page).sp_wbc_variations_gallery_images_feed_page(loop_simple_feed_page_options);
 
-							},500);
+								},500);
+							}
 
 				      });
 
