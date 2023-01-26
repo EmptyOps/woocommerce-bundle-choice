@@ -828,27 +828,19 @@ class WBC_WC {
 
         } elseif($type == 'attr') {
 
-            $term = $this->get_term_by( 'slug', $slug, ''? );
-
-            if(!empty($term) and !is_wp_error($term)){
+            
+            if(function_exists('wc_get_attribute_taxonomies')){
                 
-                return $term->term_id;
+                $attributes = wc_get_attribute_taxonomies();
+                
+                foreach($attributes as $attribute_obj) {
+
+                    if( $attribute_obj->attribute_name == $slug ) {
+
+                        return $attribute_obj->attribute_id;
+                    }
+                }
             }
-
-            //////////////////////////////////
-            --  for example
-            $shape_meta = get_term_by( 'term_taxonomy_id', $option_id,wc_attribute_taxonomy_name(wbc()->options->get_option('diffrent_shape_configure','shape_attribute')));
-
-
-            $_attribute = $this->tax_query_data( $input_method_small, '_attribute' );
-            foreach ($_attribute as $_attribute_key) {
-                $_min_object = get_term_by('slug',$min_key_name /*$_min*/,$_attribute_key);
-            }
-
-
-            $field_slug=$term->slug;
-            $taxonomy = wbc()->wc->get_term_by('slug',$elements[0],$field_slug);
-            ////////////////////////////////////
 
         } else {
 

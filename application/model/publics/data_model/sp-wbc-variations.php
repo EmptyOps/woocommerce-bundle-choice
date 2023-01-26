@@ -1766,7 +1766,7 @@ class SP_WBC_Variations extends SP_Variations {
 						if( wbc()->sanitize->get('is_test') == 1 ) {
 							wbc_pr("SP_WBC_Variations 111");
 							wbc_pr($data['variable_item_data']);
-							wbc_pr($data['variable_item_data']['options_loop_option'][$option]['option']);
+							// wbc_pr($data['variable_item_data']['options_loop_option'][$option]['option']);
 						}
 
 						if ( !is_array($data['variable_item_data']['assigned']) || ! isset( $data['variable_item_data']['assigned'][ $data['variable_item_data']['options_loop_option'][$option]['option'] ] ) || empty( $data['variable_item_data']['assigned'][ $data['variable_item_data']['options_loop_option'][$option] ]['image_id'] ) ) {

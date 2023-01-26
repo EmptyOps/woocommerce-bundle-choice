@@ -364,7 +364,7 @@ class SP_Query {
 		elseif ( $field == '_attribute') {
 			return array_filter(explode(',',wbc()->sanitize->{$input_method_small}('_attribute') ));
 		}
-		elseif ( $field == 'sku'  google search karine mukavanu chhe but google ma malatu nathi) {
+		elseif ( $field == 'sku' ) {
 			return array_filter(explode(',',wbc()->sanitize->{$input_method_small}('sku') ));
 		}
 
@@ -547,7 +547,7 @@ class SP_Query {
     	return $new_list;
     }
 
-    public function attribute_range($term,$min,$max) {
+    public function attribute_range($term,$min,$max,$is_return_slugs_also=false) {
 
         $list=array();
         $list=get_terms(array('taxonomy'=>$term,'hide_empty'=>FALSE));                        
@@ -557,7 +557,19 @@ class SP_Query {
         });
         $_min=array_search($min,array_keys($list_slug));
         $_max=array_search($max,array_keys($list_slug));                              
-        $list = array_slice(array_values($list_slug),$_min,($_max-$_min)+1);        
+        $list = array_slice(array_values($list_slug),$_min,($_max-$_min)+1);  
+
+        $slugs = null;
+        if($is_return_slugs_also) {
+
+	        $slugs = array_slice(array_keys($list_slug),$_min,($_max-$_min)+1);  
+        }
+
+        if($is_return_slugs_also) {
+
+        	return array($list, $slugs);
+		}
+        
         return $list;
     }  
 }
