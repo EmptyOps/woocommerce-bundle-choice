@@ -144,10 +144,37 @@ class SP_Model_Gallery_Zoom extends Eowbc_Base_Model_Publics {
 			//js template
 			foreach( $images_data['gallery_images_template_data']['attachment_ids_loop_image'] as $index => $image ) {
 
+				//type based template
+				$type_template = null;
+
+				if(wbc()->config->product_variations_configs()['is_gallery_images_type_based_template'] == 1) {
+
+					$type_template = $image['extra_params_org']['type'];
+
+					$constant_key = 'sp_slzm_zoom_image_loop_'.$type_template."_created";
+
+					if(defined($constant_key) ) {
+
+						continue;
+					}
+					
+					if( wbc()->sanitize->get('is_test') == 1 ) {
+
+						wbc_pr("SP_Model_Gallery_Zoom wbc");
+						wbc_pr($constant_key);
+					}
+
+					define($constant_key, true);
+					
+				} else {
+
+					$type_template = $index;
+				}
+
 				$html = null;
 				$html = apply_filters('sp_slzm_zoom_image_loop_js_tempalte',$html,$index,$image);
 				$html = \sp\theme\view\ui\builder\Page_Builder::instance()->build_page_widgets($html,'sp_variations_gallery_images_zoom_container',array(),true);
-				echo \eo\wbc\model\UI_Builder::instance()->js_template_wrap('sp_slzm_zoom_image_loop_'.$index,$html,'wp');
+				echo \eo\wbc\model\UI_Builder::instance()->js_template_wrap('sp_slzm_zoom_image_loop_'./*$index*/$type_template,$html,'wp');
 			}
 
 		}, 10);	

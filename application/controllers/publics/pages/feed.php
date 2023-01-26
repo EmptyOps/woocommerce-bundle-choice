@@ -144,7 +144,7 @@ class Feed extends \eo\wbc\controllers\publics\Controller{
             \eo\wbc\model\SP_WBC_Compatibility::instance()->loop_render_compatability('before_shop_loop_item_loop_thumbnail_action', $args);
             
             add_action( 'woocommerce_before_shop_loop_item_title', function() use($page_section,$args) {
-
+                
                 global $product;
                 
                 // if( wbc()->sanitize->get('is_test') == 1 ) {
@@ -160,6 +160,11 @@ class Feed extends \eo\wbc\controllers\publics\Controller{
 
                 $args['hook_callback_args'] = array();
                 $args['hook_callback_args']['product'] = $product;
+                if( wbc()->sanitize->get('is_test') == 1 ) {
+
+                    wbc_pr('feed selectron_hook_render args2');
+                    wbc_pr($args);
+                }
                 // $args['hook_callback_args']['hook_args'] = $hook_args;
                 $args['hook_callback_args']['extra_args'] = $extra_args;
 
@@ -170,7 +175,11 @@ class Feed extends \eo\wbc\controllers\publics\Controller{
         } elseif ($page_section == 'swatches') {
 
             add_filter( 'woocommerce_dropdown_variation_attribute_options_html',  function($html, $hook_args) use($page_section,$args){
+                if( wbc()->sanitize->get('is_test') == 1 ) {
 
+                    wbc_pr('feed selectron_hook_render swatches if');
+                    wbc_pr($args);
+                }        
                 return apply_filters ( 'sp_wbc_get_variation_attr_opts_html',$html, $hook_args, null, false);
 
             }, 200, 2);

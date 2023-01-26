@@ -387,15 +387,16 @@ $form['data'] = array(
 					),	
 				), 
 				'tiny_features_option_ui_loop_box_hover_media_index'=>array(
-					'label'=>eowbc_lang('Loop box hover media index'),
-					'type'=>'number',
-					'value'=>wbc()->options->get_option('tiny_features','tiny_features_option_ui_loop_box_hover_media_index','2'),
+					'label'=>wbc()->config->product_variations_configs()['is_gallery_images_type_based_template'] == 1 ? eowbc_lang('Loop box media type to show on hover') : eowbc_lang('Loop box hover media index'),
+					'type'=>wbc()->config->product_variations_configs()['is_gallery_images_type_based_template'] == 1 ? 'select' : 'number',
+					'value'=>wbc()->options->get_option('tiny_features','tiny_features_option_ui_loop_box_hover_media_index',wbc()->config->product_variations_configs()['is_gallery_images_type_based_template'] == 1 ? 'video' :  '2'),
+					'options'=>wbc()->config->product_variations_configs()['is_gallery_images_type_based_template'] == 1 ? apply_filters('sp_variations_loop_box_hover_media_type',array('image'=>'Image','video'=>'Video')) : array(),
 					'sanitize'=>'sanitize_text_field',
 					'class'=>array('fluid'),			
 					'size_class'=>array('eight','wide'/*,'required'*/),
 					'inline'=>false,
 
-					'visible_info'=>array( 'label'=>eowbc_lang('Set here the index of thumb image or media to show on hover. For example you may like to show video on hover so set index as per your gallery images thumbnails display order.'),
+					'visible_info'=>array( 'label'=>wbc()->config->product_variations_configs()['is_gallery_images_type_based_template'] == 1 ? eowbc_lang('Set here the type of media to show on hover. For example you may like to show video or image on hover, leave it blank to disable the hover feature.') : eowbc_lang('Set here the index of thumb image or media to show on hover. For example you may like to show video on hover so set index as per your gallery images thumbnails display order.'),
 						'type'=>'visible_info',
 						'class'=>array('small','fluid'),
 						// 'size_class'=>array('sixteen','wide'),
@@ -407,7 +408,55 @@ $form['data'] = array(
 							'type'=>'button',		
 							'class'=>array('primary'),
 							'attr'=>array("data-action='save'")				
-				)
+				),
+				'tiny_features_variation_swatches_admin_settings_and_configrations'=>array(
+					'label'=>'Variation Swatches Admin Settings And Configrations',
+					'form'=>array(
+						/*'tiny_features_option_ui_toggle_status'=>array(
+							'label'=>eowbc_lang('Toggle Button Enabled?'),
+							'type'=>'checkbox',
+							'value'=>array(wbc()->options->get_option('tiny_features','tiny_features_option_ui_toggle_status')),
+							'sanitize'=>'sanitize_text_field',
+							'options'=>array('tiny_features_option_ui_toggle_status'=>'Toggle Button Status'),
+							'class'=>array('fluid'),						
+							// 'size_class'=>array('eight','wide'),
+							'inline'=>false,
+
+							'visible_info'=>array( 'label'=>eowbc_lang('Enables the toogle buton to toggle the variation form at product page.'),
+								'type'=>'visible_info',
+								'class'=>array('small'),
+								// 'size_class'=>array('sixteen','wide'),
+							),
+						),	*/
+						
+						'tiny_features_option_ui_toggle_init_status'=>array(
+							'label'=>eowbc_lang('Show variation form at initial?'),
+							'type'=>'checkbox',
+							'value'=>array(wbc()->options->get_option('tiny_features','tiny_features_option_ui_toggle_init_status')),
+							'sanitize'=>'sanitize_text_field',
+							'options'=>array('tiny_features_option_ui_toggle_init_status'=>'Variation Form Visiblity'),
+							'class'=>array('fluid'),						
+							// 'size_class'=>array('eight','wide'),
+							'inline'=>false,
+
+							'visible_info'=>array( 'label'=>eowbc_lang('Enables to set the variation form open at initial.'),
+								'type'=>'visible_info',
+								'class'=>array('small'),
+								// 'size_class'=>array('sixteen','wide'),
+							),
+						),	
+						'tiny_features_hide_sku_category_product_page'=>array(
+							'label'=>eowbc_lang('Hide SKU,Categories sections?'),
+							'type'=>'checkbox',
+							'value'=>array(wbc()->options->get_option('tiny_features','tiny_features_hide_sku_category_product_page')),
+							'sanitize'=>'sanitize_text_field',
+							'options'=>array('tiny_features_hide_sku_category_product_page'=>' '),
+							'class'=>array('fluid'),						
+							// 'size_class'=>array('eight','wide'),
+							'inline'=>false,					
+						),
+					)
+				),
 			)
 		),
 	'tiny_features_specification_view'=>array(

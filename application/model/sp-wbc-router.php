@@ -128,6 +128,22 @@ class SP_WBC_Router extends SP_Router {
                 $result = true;
             }
 
+        }else{
+
+            if (is_product()) {
+
+                global $post;
+                if (has_term(wbc()->options->get_option('configuration',($step_number == 1 ?'first_name':'second_name')),'product_cat',$post->ID)) {
+               
+                    $result = true;
+                }
+
+            }else{
+                if (get_queried_object()->slug == wbc()->options->get_option('configuration',($step_number == 1 ?'first_slug':'second_slug'))) {
+               
+                    $result = true;
+                }
+            }
         }
 
         // ACTIVE_TODO we may like to publish hook here to suport the pair builders provided by extensions 

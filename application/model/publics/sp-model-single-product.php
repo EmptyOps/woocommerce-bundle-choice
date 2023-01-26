@@ -1234,12 +1234,24 @@ class SP_Model_Single_Product extends SP_Single_Product {
 				//-- and so all three hooks of both slider and zoom module should be applied or bind to within this action hook -- to b done
 		do_action( 'sp_variations_gallery_images_core' );
 
-		$classes = array('spui-sp-variations-gallery-images');
+		$classes = array('spui-sp-variations-gallery-images', 'spui-sp-variations-gallery-images-'.$data['gallery_images_template_data']['product_type']);
 		$classes = apply_filters('sp_variations_gallery_images_core_container_class',$classes);
-	
+
+		$simple_types_html_attributes = array();
+
+		if($data['gallery_images_template_data']['product_type'] == 'simple') {
+			
+			$simple_types_html_attributes[0] = array();
+			
+			$simple_types_html_attributes[0]['variation_gallery_images'] = $data['gallery_images_template_data']['attachment_ids'];
+
+			$simple_types_html_attributes = array( 'data-product_id' => $data['gallery_images_template_data']['product_sku_experimental'], 'data-product_simple=\''.json_encode($simple_types_html_attributes).'\''=>null);	
+		}
+
 		$ui = array(
 			'type'=>'div',
 			'class'=>$classes,
+			'attr' => $simple_types_html_attributes,
 			'child'=>array(
 				array(
 					'type'=>'html',

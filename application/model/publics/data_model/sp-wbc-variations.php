@@ -290,6 +290,8 @@ class SP_WBC_Variations extends SP_Variations {
 			$props['url']                         = $attachment_id/*wc_placeholder_img_src()*/;
 			$props['full_src']                    = $props['url'];
 			$props['src']                         = $props['url'];
+			$props['gallery_thumbnail_src']       = $props['url'];
+			$props['archive_src']                 = $props['url'];
 
 			$attachment_id = 0;
 		}
@@ -705,8 +707,10 @@ class SP_WBC_Variations extends SP_Variations {
 
 				if ( strpos( $key, 'sp_variations_gallery_images' ) !== false ) {
 
-					array_push($gallery_images,array('type'=>'image','value'=>$value,'key'=>$key));
-
+					if (!empty($value)) {
+						array_push($gallery_images,array('type'=>'image','value'=>$value,'key'=>$key));
+					}
+					
 				} elseif ( strpos( $key, 'sp_variations_video_url' ) !== false ) {
 
 					array_push($gallery_images,array('type'=>'video_url','value'=>$value,'key'=>$key));
@@ -759,6 +763,12 @@ class SP_WBC_Variations extends SP_Variations {
 
 		}
 
+		if( wbc()->sanitize->get('is_test') == 1 ) {
+
+			wbc_pr("fffffffffffffffffffffffff");
+			wbc_pr($variation_image_id);
+		}
+
 		/*ACTIVE_TODO here we still needd one more hook to let any layers set their item at particular index -- to s
 			--  apply filter from here
 				--  add filter from ssm_shared class 
@@ -766,6 +776,7 @@ class SP_WBC_Variations extends SP_Variations {
 
 		// NOTE: this function will return also the default(or say the data that are supported and provided by legacy api) data as applicable like below image or all other such applicable default data 
 		if ( $variation_image_id ) {
+
 			// Add Variation Default Image
 			array_unshift( $gallery_images, $variation_image_id );
 		} else {
@@ -1752,7 +1763,13 @@ class SP_WBC_Variations extends SP_Variations {
 
 						$data['variable_item_data']['options_loop_type'][$option] = isset( $data['variable_item_data']['assigned'][ $data['variable_item_data']['options_loop_option'][$option] ] ) ? $data['variable_item_data']['assigned'][ $data['variable_item_data']['options_loop_option'][$option] ]['type'] : $data['variable_item_data']['options_loop_type'][$option];
 
-						if ( ! isset( $data['variable_item_data']['assigned'][ $data['variable_item_data']['options_loop_option'][$option]['option'] ] ) || empty( $data['variable_item_data']['assigned'][ $data['variable_item_data']['options_loop_option'][$option] ]['image_id'] ) ) {
+						if( wbc()->sanitize->get('is_test') == 1 ) {
+							wbc_pr("SP_WBC_Variations 111");
+							wbc_pr($data['variable_item_data']);
+							wbc_pr($data['variable_item_data']['options_loop_option'][$option]['option']);
+						}
+
+						if ( !is_array($data['variable_item_data']['assigned']) || ! isset( $data['variable_item_data']['assigned'][ $data['variable_item_data']['options_loop_option'][$option]['option'] ] ) || empty( $data['variable_item_data']['assigned'][ $data['variable_item_data']['options_loop_option'][$option] ]['image_id'] ) ) {
 							$data['variable_item_data']['options_loop_type'][$option] = 'button';
 						}
 
@@ -1838,7 +1855,10 @@ class SP_WBC_Variations extends SP_Variations {
 		/*ACTIVE_TODO_OC_START
 		----product no peramiter pass kervano baki che
 		ACTIVE_TODO_OC_END*/
-
+		if( wbc()->sanitize->get('is_test') == 1 ) {
+	        wbc_pr('wbc-variations prepare_gallery_template_data args');
+	    	wbc_pr($args);
+	    }
 		if(empty($args['product'])) {
 
 			global $product;
@@ -1869,6 +1889,8 @@ class SP_WBC_Variations extends SP_Variations {
 		// 		--	and then replace below statements with function calls to that class -- to d done
 
 		$data['gallery_images_template_data']['product_id'] = apply_filters('sp_wbc_product_get_id', null, $product); //$product->get_id();
+
+		$data['gallery_images_template_data']['product_sku_experimental'] = apply_filters('sp_wbc_product_get_sku', null, $product);
 
 		if( wbc()->sanitize->get('is_test') == 1 ) {
 			wbc_pr('gallery_images_template_data_product_id');
@@ -1903,7 +1925,7 @@ class SP_WBC_Variations extends SP_Variations {
 		$data['gallery_images_template_data']['columns'] = -1;	//	thumbnail columns 
 
 		$data['gallery_images_template_data']['post_thumbnail_id'] =  apply_filters('sp_wbc_get_image_id', null, $product,null); // \eo\wbc\system\core\data_model\SP_Product::get_image_id($product);
-
+	    
 		$data['gallery_images_template_data']['attachment_ids'] = apply_filters('sp_wbc_get_gallery_image_ids', null, $product, $data['gallery_images_template_data']['product_id'], $data['gallery_images_template_data']['post_thumbnail_id'], $args); //\eo\wbc\system\core\data_model\SP_Product::get_gallery_image_ids($product);
 
 		$data['gallery_images_template_data']['has_post_thumbnail'] = apply_filters('sp_wbc_has_post_thumbnail', null, $data['gallery_images_template_data']['post_thumbnail_id']); //has_post_thumbnail();
@@ -2059,7 +2081,7 @@ class SP_WBC_Variations extends SP_Variations {
 
 		if('variable' !== $data['gallery_images_template_data']['product_type'] or !isset( $data['gallery_images_template_data']['product_variation']['variation_gallery_images'] )) {
 
-			if('variable' !== $data['gallery_images_template_data']['product_type'] or !isset( $data['gallery_images_template_data']['product_variation']['variation_gallery_images'] )) {
+			if('variable' === $data['gallery_images_template_data']['product_type'] and !isset( $data['gallery_images_template_data']['product_variation']['variation_gallery_images'] )) {
 
 				// after now the get_variations_and_simple_type_fields are called from add filter hook, the below might be counter intuitive since the post_thumbnail_id might already been set only from the result of the get_variations_and_simple_type_fields fields. -- to h 
 				// 	but may be it is not possible in case of the varible type -- to h 
@@ -2091,6 +2113,7 @@ class SP_WBC_Variations extends SP_Variations {
 			    }
 			}
 		}
+
 		
 		if( wbc()->sanitize->get('is_test') == 1 ) {
 			wbc_pr('gallery_images_template_data_all');
@@ -2200,6 +2223,18 @@ class SP_WBC_Variations extends SP_Variations {
         	
 		}, 10, 2);
 
+		add_filter( 'sp_wbc_product_get_sku',  function($data,$product){
+
+			if ($data !== null) {
+
+				return $data;
+			}
+
+			// NOTE: below we are using id is sku but it is the intended and standard behavior as per the stucture planed.
+        	return $product->get_id();
+        	
+		}, 10, 2);
+
 		add_filter( 'sp_wbc_get_image_id',  function($data,$product){
 
 			if ($data !== null) {
@@ -2253,6 +2288,23 @@ class SP_WBC_Variations extends SP_Variations {
         	return $product->get_type();
         	
 		}, 10, 2);
+
+		add_filter( 'sp_wbc_simple_product_type_html_attributes',  function($data,$caller_data,$args){
+
+			if ($data !== null) {
+
+				return $data;
+			}
+
+			$simple_types_html_attributes = array();
+			
+			$simple_types_html_attributes[0] = array();
+			
+			$simple_types_html_attributes[0]['variation_gallery_images'] = $caller_data['gallery_images_template_data']['attachment_ids'];
+
+        	return array( 'data-product_id' => $caller_data['gallery_images_template_data']['product_sku_experimental'], 'data-product_simple=\''.json_encode($simple_types_html_attributes).'\'' => null);
+        	
+		}, 10, 3);
 
 	}
 }

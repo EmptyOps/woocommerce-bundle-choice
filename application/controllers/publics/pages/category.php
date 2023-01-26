@@ -77,7 +77,7 @@ class Category {
                     if($this->eo_wbc_get_category()==$this->first_category_slug && wbc()->options->get_option_group('filters_d_fconfig',FALSE)) {
                         SP_Model_Feed::instance()->add_to_cart_text();
                     }
-                    if( wbc()->sanitize->get('is_test') == 1 ||  wbc()->sanitize->get('is_test') == 9 ){
+                    if( wbc()->sanitize->get('is_test') == 1 ){
         
                         wbc_pr("Category init_f_eo_wbc_object");
                     }
@@ -173,7 +173,7 @@ class Category {
     }
 
     public function add_filter_widget(){
-        if( wbc()->sanitize->get('is_test') == 1 ||  wbc()->sanitize->get('is_test') == 9 ){
+        if( wbc()->sanitize->get('is_test') == 1 ){
         
             wbc_pr("add_filter_widget_f_eo_wbc_object");
         }
@@ -205,7 +205,7 @@ class Category {
             });*/
 
             $filter_container_location_action = SP_Model_Feed::instance()->filter_container_location_action( $this->is_shop_cat_filter, $this->is_shortcode_filter );
-            if( wbc()->sanitize->get('is_test') == 1 ||  wbc()->sanitize->get('is_test') == 9 ){
+            if( wbc()->sanitize->get('is_test') == 1 ){
 
                 wbc_pr("Category eo_wbc_add_filters_f_eo_wbc_object");
                 wbc_pr($filter_container_location_action);

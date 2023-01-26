@@ -42,22 +42,22 @@ class SP_Model_Loop_Gallery_Zoom extends Eowbc_Base_Model_Publics {
 		foreach($hook_array as $hook_key) {
 			add_filter($hook_key /*'sp_slzm_zoom_image_loop_js_tempalte'*/,function($html, $index, $image) use($hook_key){
 
-				if(wbc()->sanitize->get('is_test') == 1 || wbc()->sanitize->get('is_test') == 9) {
+				// if(wbc()->sanitize->get('is_test') == 1 || wbc()->sanitize->get('is_test') == 9) {
 
-					wbc_pr( "SP_Model_Gallery_Zoom index ".$index );
-					wbc_pr('SP_Model_Gallery_Zoom index key_is = '.$hook_key.' index_is = ' . $index);
-					wbc_pr( $html );	
-				}
+				// 	wbc_pr( "SP_Model_Gallery_Zoom index ".$index );
+				// 	wbc_pr('SP_Model_Gallery_Zoom index key_is = '.$hook_key.' index_is = ' . $index);
+				// 	wbc_pr( $html );	
+				// }
 					
 				
 				// NOTE: this hook will intend to run at last by setting the priority to 100, so that if any other layer wants to provide the js tempates then they can and in that case this hook will just provided html. so it will apply html from here only if html is not applied by any other layers. 
 				if( !empty($html) ) {
 					
-					if(wbc()->sanitize->get('is_test') == 1 || wbc()->sanitize->get('is_test') == 9) {
+					// if(wbc()->sanitize->get('is_test') == 1 || wbc()->sanitize->get('is_test') == 9) {
 
-						wbc_pr( "!empty(html) if" );
-						wbc_pr( $html );	
-					}
+					// 	wbc_pr( "!empty(html) if" );
+					// 	wbc_pr( $html );	
+					// }
 					
 					return $html;	
 				}
@@ -132,11 +132,12 @@ class SP_Model_Loop_Gallery_Zoom extends Eowbc_Base_Model_Publics {
 	        	$template_data['data']['gallery_images_template_data']['attachment_ids_loop_post_thumbnail_id'][$template_data['data']['image']['index']] = -1;
 	            $html =  wbc()->load->template($template_data['template_sub_dir'].'/'.$template_data['template_key'],(isset($template_data['data'])?$template_data['data']:array()),true,$template_data['singleton_function'],true,true);
 
-	            if(wbc()->sanitize->get('is_test') == 1 || wbc()->sanitize->get('is_test') == 9) {
- 		            
- 		            wbc_pr('End SP_Model_Gallery_Zoom index key_is = '.$hook_key.' index_is = ' . $index);
-					wbc_pr( $html );	            	
-	            }
+	            // if(wbc()->sanitize->get('is_test') == 1 || wbc()->sanitize->get('is_test') == 9) {
+ 		        
+ 		        //     wbc_pr('End SP_Model_Gallery_Zoom index key_is = '.$hook_key.' index_is = ' . $index);
+				// 	wbc_pr( $html );	            	
+
+	            // }
 	
 				return $html;
 			}, 100, 3);
@@ -181,7 +182,8 @@ class SP_Model_Loop_Gallery_Zoom extends Eowbc_Base_Model_Publics {
 					'type'=>'div',
 					'class'=>$classes,
 					'child'=>$html,
-					'id'=>'sp_variations_loop_gallery_images_zoom_'.$images_data['gallery_images_template_data']['product_id'],
+					// 'id'=>'sp_variations_loop_gallery_images_zoom_'.$images_data['gallery_images_template_data']['product_id'],
+					'id'=>'sp_variations_loop_gallery_images_zoom_'.$images_data['gallery_images_template_data']['product_sku_experimental'],
 				); 
 				//\sp\theme\view\ui\builder\Page_Builder::instance()->build_page_widgets($ui,'sp_variations_gallery_images_zoom_container');
 
@@ -195,23 +197,51 @@ class SP_Model_Loop_Gallery_Zoom extends Eowbc_Base_Model_Publics {
 			foreach( $images_data['gallery_images_template_data']['attachment_ids_loop_image'] as $index => $image ) {
 
 				foreach($hook_array as $hook_key) {
-				
+					
+					$type_template = null;
+
+					if(wbc()->config->product_variations_configs()['is_gallery_images_type_based_template'] == 1) {
+
+						$type_template = $image['extra_params_org']['type'];
+
+						$constant_key = 'sp_slzm_loop_zoom_image_loop_'.$type_template.($hook_key=='sp_slzm_loop_zoom_image_loop_js_tempalte_hover'?'_hover':'')."_created";
+
+						if(defined($constant_key) ) {
+
+							continue;
+						}
+						
+						if( wbc()->sanitize->get('is_test') == 1 ) {
+
+							wbc_pr("SP_Model_Gallery_Zoom wbc");
+							wbc_pr($constant_key);
+						}
+
+						define($constant_key, true);
+						
+					} else {
+
+						$type_template = $index;
+					}
+
+
 					$html = null;
+					
 					$html = apply_filters($hook_key, $html, $index, $image);
 
-					if(wbc()->sanitize->get('is_test') == 1 || wbc()->sanitize->get('is_test') == 9) {
-						wbc_pr('html = apply_filters(hook_key, html, index, image) key_is = '.$hook_key.' index_is = ' . $index);
-						wbc_pr($html);
-					}
+					// if(wbc()->sanitize->get('is_test') == 1 || wbc()->sanitize->get('is_test') == 9) {
+					// 	wbc_pr('html = apply_filters(hook_key, html, index, image) key_is = '.$hook_key.' index_is = ' . $index);
+					// 	wbc_pr($html);
+					// }
 
 					$html = \sp\theme\view\ui\builder\Page_Builder::instance()->build_page_widgets($html,'sp_variations_gallery_images_zoom_container',array(),true);
 
-					if(wbc()->sanitize->get('is_test') == 1 || wbc()->sanitize->get('is_test') == 9) {
-						wbc_pr('after set html key_is = '.$hook_key.' index_is = ' . $index);
-						wbc_pr($html);
-					}
+					// if(wbc()->sanitize->get('is_test') == 1 || wbc()->sanitize->get('is_test') == 9) {
+					// 	wbc_pr('after set html key_is = '.$hook_key.' index_is = ' . $index);
+					// 	wbc_pr($html);
+					// }
 
-					echo \eo\wbc\model\UI_Builder::instance()->js_template_wrap('sp_slzm_loop_zoom_image_loop_'.$index.($hook_key=='sp_slzm_loop_zoom_image_loop_js_tempalte_hover'?'_hover':''),$html,'wp');
+					echo \eo\wbc\model\UI_Builder::instance()->js_template_wrap('sp_slzm_loop_zoom_image_loop_'./*$index*/$type_template.($hook_key=='sp_slzm_loop_zoom_image_loop_js_tempalte_hover'?'_hover':''),$html,'wp');
 				}
 				
 			}

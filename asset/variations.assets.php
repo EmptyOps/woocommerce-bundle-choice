@@ -96,7 +96,8 @@ if( is_product() ) {
 	    background: #ffffff;
 	    color: #000;
 	    border-radius: 2px;
-	    box-shadow: 0 0 0 1px #a8a8a8;
+	    -webkit-box-shadow: 0 0 0 1px #a8a8a8;
+               box-shadow: 0 0 0 1px #a8a8a8;
 	    cursor: pointer;
 	    -webkit-transition: all .2s ease;
 	    -o-transition: all .2s ease;
@@ -146,7 +147,8 @@ if( is_product() ) {
         background: #ffffff;
         color: #000;
         border-radius: 2px;
-        box-shadow: 0 0 0 1px #a8a8a8;
+        -webkit-box-shadow: 0 0 0 1px #a8a8a8;
+               box-shadow: 0 0 0 1px #a8a8a8;
         cursor: pointer;
         -webkit-transition: all .2s ease;
         -o-transition: all .2s ease;
@@ -198,7 +200,8 @@ if( is_product() ) {
         background: #ffffff;
         color: #000;
         border-radius: 2px;
-        box-shadow: 0 0 0 1px #a8a8a8;
+        -webkit-box-shadow: 0 0 0 1px #a8a8a8;
+               box-shadow: 0 0 0 1px #a8a8a8;
         cursor: pointer;
         -webkit-transition: all .2s ease;
                 -o-transition: all .2s ease;
@@ -251,7 +254,8 @@ if( is_product() ) {
 	    background: #ffffff;
 	    color: #000;
 	    border-radius: 2px;
-	    box-shadow: 0 0 0 1px #a8a8a8;
+	    -webkit-box-shadow: 0 0 0 1px #a8a8a8;
+               box-shadow: 0 0 0 1px #a8a8a8;
 	    cursor: pointer;
 	    -webkit-transition: all .2s ease;
 	    -o-transition: all .2s ease;
@@ -301,7 +305,8 @@ if( is_product() ) {
 	    background: #ffffff;
 	    color: #000;
 	    border-radius: 2px;
-	    box-shadow: 0 0 0 1px #a8a8a8;
+	    -webkit-box-shadow: 0 0 0 1px #a8a8a8;
+               box-shadow: 0 0 0 1px #a8a8a8;
 	    cursor: pointer;
 	    -webkit-transition: all .2s ease;
 	    -o-transition: all .2s ease;
@@ -350,7 +355,8 @@ if( is_product() ) {
 	    background: #ffffff;
 	    color: #000;
 	    border-radius: 2px;
-	    box-shadow: 0 0 0 1px #a8a8a8;
+	    -webkit-box-shadow: 0 0 0 1px #a8a8a8;
+               box-shadow: 0 0 0 1px #a8a8a8;
 	    cursor: pointer;
 	    -webkit-transition: all .2s ease;
 	    -o-transition: all .2s ease;
@@ -409,7 +415,8 @@ if( is_product() ) {
 	    background: #ffffff;
 	    color: #000;
 	    border-radius: 2px;
-	    box-shadow: 0 0 0 1px #a8a8a8;
+	    -webkit-box-shadow: 0 0 0 1px #a8a8a8;
+               box-shadow: 0 0 0 1px #a8a8a8;
 	    cursor: pointer;
 	    -webkit-transition: all .2s ease;
 	    -o-transition: all .2s ease;
@@ -450,7 +457,8 @@ if( is_product() ) {
 	    background: #ffffff;
 	    color: #000;
 	    border-radius: 2px;
-	    box-shadow: 0 0 0 1px #a8a8a8;
+	    -webkit-box-shadow: 0 0 0 1px #a8a8a8;
+               box-shadow: 0 0 0 1px #a8a8a8;
 	    cursor: pointer;
 	    -webkit-transition: all .2s ease;
 	    -o-transition: all .2s ease;
@@ -838,6 +846,9 @@ if(is_shop() || is_product_category()) {
 	        -webkit-transition: all .2s ease;
             -o-transition: all .2s ease;
             transition: all .2s ease;
+            -webkit-box-flex: 1 !important;
+	    -ms-flex: 1 1 auto !important;
+	        flex: 1 1 auto !important;
 	    }
 
 	    .spui_color_widget li .spui_color_variable_item_contents {
@@ -984,6 +995,7 @@ if(is_shop() || is_product_category()) {
             --spui-single-button-product-item-height:30px;
             --spui-single-button-product-item-width:30px;
             --spui-selected-item-box-shadow:#000;
+            --spui-button-item-box-font-size:1rem;
         }
 	    .spui_button_widget{
 	        float: left;
@@ -1021,6 +1033,10 @@ if(is_shop() || is_product_category()) {
 	        -webkit-transition: all .2s ease;
             -o-transition: all .2s ease;
             transition: all .2s ease;
+	    -webkit-box-flex: 1 !important;
+	    -ms-flex: 1 1 auto !important;
+	        flex: 1 1 auto !important;
+	    
 	    }
 
 	    .spui_button_widget li.spui_button_variable_item.selected{
@@ -1049,6 +1065,7 @@ if(is_shop() || is_product_category()) {
 	    }
 	    .spui_button_widget li .spui_button_variable_item_contents span.spui_variable_item_span_button {
 	        padding: 0 5px;
+	        font-size: var(--spui-button-item-box-font-size) !important;
 	    }
 
 
