@@ -204,6 +204,7 @@ add_action('wp_footer',function(){
 		            // ACTIVE_TODO_OC_START
 				      // ACTIVE_TODO Below ajax complete will have serious issue when the other ajax invokes this function means other than the eowbc js ajax call. So we need to simply bind on the success on render HTML notification simply the eowbs filter HTML notification and remove the ajax complete dependency from here and when that notification is fired inside the subscribe function here we can simply init the required modules. ya so simply put all the code that is the ajaxComplete function into the subscribe function of our notification module. -- to h
 				      // 	-- But still it not be inuf because the notification has a base container means host diffidency and that can not be used here because of the uncertainly of that container and even if firing that global notification that is also lead to the same issue for which the base_container based on notification are created. So we simply need to we simply the filter module calling sycuantion and make sure that for the fundamental filter search calls to that main function of filter wrapper or something such of the web, ajax is a being we need to make sure that the fundamental filter event there is only one selector of the container that is used. means we need to diffrenciat this search call of the category page from other search calls that may be happening from the diamond quiz popup, and other such things. And then we can simply use that container selector here -- to h       
+			      	// 	--	now after a while to fix some unwanted ajax related bug the index of based url condition is added below, but obviously that is not the intended standard fix since it will prevent some ajax events which we want to let them go inside but they will not be with below condition. so now we need a reliable fix to this whole ajaxComplete problem. actually we should simply rely on the ajaxComplete which we have inside particular jQuery plugin of ours like sp_wbc_variations_swatches or sp_wbc_variations_gallery_images have that. and most probably the community standard must be that otherwise we need to do research on that and figure out the appropriate standard architecture implementation. 
 				      // ACTIVE_TODO_OC_END	
 				      jQuery(document).ajaxComplete(function (event, request, settings) {
 		            	
@@ -224,7 +225,8 @@ add_action('wp_footer',function(){
 		            // ACTIVE_TODO_OC_START
 				      // ACTIVE_TODO Below ajax complete will have serious issue when the other ajax invokes this function means other than the eowbc js ajax call. So we need to simply bind on the success on render HTML notification simply the eowbs filter HTML notification and remove the ajax complete dependency from here and when that notification is fired inside the subscribe function here we can simply init the required modules. ya so simply put all the code that is the ajaxComplete function into the subscribe function of our notification module. -- to h
 				      // 	-- But still it not be inuf because the notification has a base container means host diffidency and that can not be used here because of the uncertainly of that container and even if firing that global notification that is also lead to the same issue for which the base_container based on notification are created. So we simply need to we simply the filter module calling sycuantion and make sure that for the fundamental filter search calls to that main function of filter wrapper or something such of the web, ajax is a being we need to make sure that the fundamental filter event there is only one selector of the container that is used. means we need to diffrenciat this search call of the category page from other search calls that may be happening from the diamond quiz popup, and other such things. And then we can simply use that container selector here -- to h       
-				      // ACTIVE_TODO_OC_END	    	
+			      	// 	--	now after a while to fix some unwanted ajax related bug the index of based url condition is added below, but obviously that is not the intended standard fix since it will prevent some ajax events which we want to let them go inside but they will not be with below condition. so now we need a reliable fix to this whole ajaxComplete problem. actually we should simply rely on the ajaxComplete which we have inside particular jQuery plugin of ours like sp_wbc_variations_swatches or sp_wbc_variations_gallery_images have that. and most probably the community standard must be that otherwise we need to do research on that and figure out the appropriate standard architecture implementation. 
+				      // ACTIVE_TODO_OC_END	
 
 				      jQuery(document).ajaxComplete(function (event, request, settings) {
 		            	
@@ -279,8 +281,11 @@ add_action('wp_footer',function(){
 				      jQuery(document).ajaxComplete(function (event, request, settings) {
 							
 							// console.log('[js.vars.asset wp_footer] vs_feed ajaxComplete');
+		            	if(settings.url.indexOf('/product-category/') >= 0){
+
+			            	jQuery(base_container_loop_feed_page).sp_wbc_variations_swatches_feed_page();
+		            	}
 		            	
-			            jQuery(base_container_loop_feed_page).sp_wbc_variations_swatches_feed_page();
 				      });
 
 		            base_container_swatches = base_container_loop_feed_page;
