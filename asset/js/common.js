@@ -1674,6 +1674,8 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
 
     #process_template(type, element) {
 
+        console.log('process_template() swatches');
+
         var _this = this; 
         
         // ACTIVE_TODO_OC_START
@@ -2861,7 +2863,8 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
         console.log("gim [preprocess] _this.#data.product_variations");
         console.log(_this.#data.product_variations);
 
-        _this.#$additional_container/*base_element*/.addClass('spui-wbc-gallery_images-loaded');
+        // _this.#$additional_container/*base_element*/.addClass('spui-wbc-gallery_images-loaded');
+        _this.#$base_container.addClass('spui-wbc-gallery_images-loaded');
  
         _this.#$slider_container = window.document.splugins.common.is_item_page ? _this.#$additional_container/*base_element*/.find( '.'+ _this.#configs.classes.slider.container ) : _this.#$additional_container/*base_element*/.closest( '.'+ _this.#configs.classes.slider.container );
         _this.#$zoom_container = window.document.splugins.common.is_item_page ? _this.#$additional_container/*base_element*/.find( '.'+ _this.#configs.classes.zoom.container ) : jQuery( _this.#configs.classes.zoom.container.replace('{product_id}', _this.product_id) );
