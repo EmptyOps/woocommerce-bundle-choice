@@ -365,6 +365,14 @@ class SP_Query {
 			return array_filter(explode(',',wbc()->sanitize->{$input_method_small}('_attribute') ));
 		}
 		elseif ( $field == 'sku' ) {
+
+			if(wbc()->sanitize->get('is_test') == 1) {
+				
+				wbc_pr("SP_Query tax_query_data");
+				wbc_pr(wbc()->sanitize->{$input_method_small}('sku'));
+				wbc_pr(explode(',',wbc()->sanitize->{$input_method_small}('sku') ));
+			}
+			
 			return array_filter(explode(',',wbc()->sanitize->{$input_method_small}('sku') ));
 		}
 

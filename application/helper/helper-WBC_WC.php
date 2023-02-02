@@ -539,7 +539,7 @@ class WBC_WC {
             } elseif( $format == 'detailed_dropdown' ) {
                 $option_list.='<div class="item" data-value="'.$base->term_id.'" data-sp_eid="'.$separator.'prod_cat'.$separator.$base->term_id.'">'.str_replace("'","\'",$base->name).'</div>'.$this->get_productCats($base->slug, $format, $sp_eid_type_value);
             } elseif( $format == 'detailed' || 'detailed_slug') {
-                $option_list[$base->term_id] = array('label'=> $format = 'detailed_slug' ? str_replace("'","\'",$base->name).'('.$base->slug.')' : str_replace("'","\'",$base->name), 'attr'=>' data-sp_eid="'.$separator.$sp_eid_type_value.$separator.$base->term_id.' " ', $format);
+                $option_list[$base->term_id] = array('label'=> $format = 'detailed_slug' ? str_replace("'","\'",$base->name).'('.$base->slug.')' : str_replace("'","\'",$base->name), 'attr'=>' data-sp_eid="'.$separator.$sp_eid_type_value.$separator.$base->term_id.$separator.'" ', $format);
 
 
                 $option_list = array_replace($option_list, self::get_productCats($base->slug, $format, $sp_eid_type_value)); //array_merge($option_list, self::get_productCats($base->slug, $format));
@@ -602,14 +602,14 @@ class WBC_WC {
 
                 } elseif( $format == 'detailed' ) {
 
-                    $option_list['pa_'.$attribute->attribute_name] = array('label'=>$attribute->attribute_label, 'attr'=>'data-sp_eid="'.$separator.'attr'.$separator.$attribute->attribute_id.'" ', $format);  
+                    $option_list['pa_'.$attribute->attribute_name] = array('label'=>$attribute->attribute_label, 'attr'=>'data-sp_eid="'.$separator.'attr'.$separator.$attribute->attribute_id.$separator.'" ', $format);  
 
                 } elseif( $format == 'detailed_vattr' ) {
 
                     // temp comment (run on api demo) @s
                     // $option_list['pa_'.$attribute->attribute_name] = array('label'=>$attribute->attribute_label, 'attr'=>'data-sp_eid="'.$separator.'attr'.$separator.$attribute->attribute_id.'" ', $format);  
 
-                    $option_list['pa_'.$attribute->attribute_name] = array('label'=>$attribute->attribute_label.'(use for variations)', 'attr'=>'data-sp_eid="'.$separator.'attr'.$separator.$attribute->attribute_id.$separator.'vattr" ', $format);  
+                    $option_list['pa_'.$attribute->attribute_name] = array('label'=>$attribute->attribute_label.'(use for variations)', 'attr'=>'data-sp_eid="'.$separator.'attr'.$separator.$attribute->attribute_id.$separator.'vattr'.$separator.'" ', $format);  
 
                 } elseif( $format == 'id_and_title' ) {
                     $option_list[$attribute->attribute_id] = $attribute->attribute_label;
@@ -628,11 +628,11 @@ class WBC_WC {
                         ACTIVE_TODO_OC_END*/
                         if($is_return_data_only) {
                             
-                            $option_list[$term->term_taxonomy_id] = array('sp_eid'=>$separator.'attr_opt'.$separator.$term->term_taxonomy_id, 'slug'=>$term->slug, 'label'=>$term->name, 'attr_slug'=>'pa_'.$attribute->attribute_name, 'attr_sp_eid'=>$separator.'attr'.$separator.$attribute->attribute_id ); 
+                            $option_list[$term->term_taxonomy_id] = array('sp_eid'=>$separator.'attr_opt'.$separator.$term->term_taxonomy_id, 'slug'=>$term->slug, 'label'=>$term->name, 'attr_slug'=>'pa_'.$attribute->attribute_name, 'attr_sp_eid'=>$separator.'attr'.$separator.$attribute->attribute_id.$separator ); 
 
                         } else {
 
-                            $option_list[$term->term_taxonomy_id] = array('attr'=>'data-sp_eid="'.$separator.'attr_opt'.$separator.$attribute->attribute_id.'" ', 'label'=>$term->name, 'slug'=>$term->slug);  
+                            $option_list[$term->term_taxonomy_id] = array('attr'=>'data-sp_eid="'.$separator.'attr_opt'.$separator.$attribute->attribute_id.$separator.'" ', 'label'=>$term->name, 'slug'=>$term->slug);  
                         }
                     }
                 }
@@ -656,7 +656,9 @@ class WBC_WC {
             foreach (get_terms(['taxonomy' => wc_attribute_taxonomy_name($attribute->attribute_name),'hide_empty' => false]) as $term) {
 
                 // $taxonomies.="<div class='item' data-value='".$term->term_taxonomy_id."'>".$term->name."</div>";   
-                $opts_arr[$term->term_taxonomy_id] = array( 'label'=>$term->name , 'attr'=>'data-sp_eid="'.$separator.'attr'.$separator.$term->term_taxonomy_id.' " ');  
+                // commented and changed on 31-01-2023
+                // $opts_arr[$term->term_taxonomy_id] = array( 'label'=>$term->name , 'attr'=>'data-sp_eid="'.$separator.'attr'.$separator.$term->term_taxonomy_id.' " ');  
+                $opts_arr[$term->term_taxonomy_id] = array( 'label'=>$term->name , 'attr'=>'data-sp_eid="'.$separator.'attr'.$separator.$term->term_taxonomy_id.$separator.'" ');  
             }
         }
         // return $taxonomies;

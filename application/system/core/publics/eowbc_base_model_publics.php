@@ -41,6 +41,11 @@ class Eowbc_Base_Model_Publics {
 	ACTIVE_TODO_OC_END*/
 	public static function concate_sp_eid_values($values) {
 
+		if(wbc()->sanitize->get('is_test') == 1) {
+
+			wbc_pr("dapii Eowbc_Base_Model_Publics concate_sp_eid_values");
+		}
+
 		$separator = wbc()->config->separator();
 
 		return $separator.$values['type'].$separator.$values['val'].$separator;
