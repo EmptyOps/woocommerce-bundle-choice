@@ -1496,7 +1496,7 @@ class SP_WBC_Variations extends SP_Variations {
 					}
 
 					// ACTIVE_TODO right now we are managing selected attribute from the common woo dropdown attribute template but in future we should managing from the data layer here.
-					$data['woo_dropdown_attribute_html_data']['options_loop_html_attr'][$option] = array('data-value' => esc_attr( $option ), 'data-title' => esc_attr( $option ) );
+					$data['woo_dropdown_attribute_html_data']['options_loop_html_attr'] = array('data-value' => esc_attr( $option ), 'data-title' => esc_attr( $option ) );
 
 					/*echo '<option value="' . esc_attr( $option ) . '" ' . $selected . '>' . esc_html( \eo\wbc\system\core\data_model\SP_Attribute()::instance()->variation_option_name( $term_name, $term, $attribute, $product) . '</option>';*/
 				}
