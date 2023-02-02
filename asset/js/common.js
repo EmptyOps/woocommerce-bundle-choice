@@ -3070,7 +3070,7 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
 
         if(type == null) {
             
-            // console.log("gim [process_images] if");
+            console.log("gim [process_images] if");
 
             // //-- aa types temp banavelo se @a --
             // _this.#data.types = ["image", 'video', 'darklight_hand_image', '360_video_url'];
@@ -3094,7 +3094,7 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
 
                  if (window.document.splugins.common._o(_this.#configs.types, type_inner)) {
 
-                   // console.log("gim [process_images] if innner loop if");
+                   console.log("gim [process_images] if innner loop if");
 
                     _this.#process_images_inner(type_inner, element);    
 
@@ -3170,7 +3170,7 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
 
     #process_images_inner(type, element){
 
-        // console.log("gim [process_images_inner]");
+        console.log("gim [process_images_inner]");
 
         var _this = this;
          // ACTIVE_TODO_OC_START   
@@ -3475,11 +3475,13 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
  
     #process_events(type) {
 
-        // console.log("gim [process_events]");
+        console.log("gim [process_events]");
 
         var _this = this;
     
         if(!_this.#data.is_skip_sp_slider){
+
+            console.log("gim [process_events] if");
 
             _this.#slider_thumb_click_listener(type);   
         }    
@@ -3516,7 +3518,7 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
         
         var _this = this;
 
-        // console.log("gim [slider_thumb_click_listener]");
+        console.log("gim [slider_thumb_click_listener]");
 
         /*ACTIVE_TODO_OC_START
         // as per the one of the fundamental objective of the heirachical and layered calling sequence structures in these two modules, the type variable will be overridden here if there is anything in unique need to be handled in these layers. and the rest all will default to type equal to default. -- to s done
