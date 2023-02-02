@@ -1274,6 +1274,10 @@ class SP_WBC_Variations extends SP_Variations {
 
 	public static function prepare_woo_dropdown_attribute_html_data ($data,$args = array()){
 
+		if( wbc()->sanitize->get('is_test') == 1 ) {
+			wbc_pr('sp-wbc-variations [prepare_woo_dropdown_attribute_html_data]');
+		}
+
 		$data['woo_dropdown_attribute_html_data'] = array();
 		$attributes = $data['attributes']; /*$product->get_variation_attributes();*/
         // commented on 24-10-2022 becose was unussed
@@ -1414,6 +1418,11 @@ class SP_WBC_Variations extends SP_Variations {
 			}
 
 			if ( $data['woo_dropdown_attribute_html_data']['product'] && taxonomy_exists( $data['woo_dropdown_attribute_html_data']['attribute'] ) ) {
+				
+				if( wbc()->sanitize->get('is_test') == 1 ) {
+					wbc_pr('sp-wbc-variations [prepare_woo_dropdown_attribute_html_data] if');
+				}
+
 				// Get terms if this is a taxonomy - ordered. We need the names too.
 				$data['woo_dropdown_attribute_html_data']['terms'] = apply_filters('sp_wbc_get_product_terms', null, $data['woo_dropdown_attribute_html_data']['product'], $data['woo_dropdown_attribute_html_data']['attribute'], array( 'fields' => 'all' ), $data);// \eo\wbc\system\core\data_model\SP_Attribute::get_product_terms( $data['woo_dropdown_attribute_html_data']['product']->get_id(), $data['woo_dropdown_attribute_html_data']['attribute'], array( 'fields' => 'all' ) );
 
@@ -1442,17 +1451,30 @@ class SP_WBC_Variations extends SP_Variations {
 						// ACTIVE_TODO right now we are managing selected attribute from the common woo dropdown attribute template but in future we should managing from the data layer here.
 						$data['woo_dropdown_attribute_html_data']['options_loop_html_attr'][$term->slug] = array('data-value'=>esc_attr( $term->slug ), 'data-title'=>$data['woo_dropdown_attribute_html_data']['options_loop_option_name'][$term->slug] );
 
+						if( wbc()->sanitize->get('is_test') == 1 ) {
+							wbc_pr('sp-wbc-variations [prepare_woo_dropdown_attribute_html_data] if data-value');
+							wbc_pr($data['woo_dropdown_attribute_html_data']['options_loop_html_attr'][$term->slug]);
+						}
+
 						/*echo '<option value="' . esc_attr( $term->slug ) . '" ' . selected( sanitize_title( $args['selected'] ), $term->slug, false ) . '>' . esc_html( \eo\wbc\system\core\data_model\SP_Attribute()::instance()->variation_option_name( $term_name, $term, $attribute, $product) ) . '</option>';*/
 					}
 				}
 
 			} else {
 
+				if( wbc()->sanitize->get('is_test') == 1 ) {
+					wbc_pr('sp-wbc-variations [prepare_woo_dropdown_attribute_html_data] else');
+				}
+
 				$data['woo_dropdown_attribute_html_data']['options_loop_selected'] = array();
 				$data['woo_dropdown_attribute_html_data']['options_loop_option_name'] = array();
 				$data['woo_dropdown_attribute_html_data']['options_loop_class'] = array();
 				$data['woo_dropdown_attribute_html_data']['options_loop_html_attr'] = array();
 				foreach ( $data['woo_dropdown_attribute_html_data']['options'] as $option ) {
+
+					if( wbc()->sanitize->get('is_test') == 1 ) {
+						wbc_pr('sp-wbc-variations [prepare_woo_dropdown_attribute_html_data] else loop');
+					}
 
 					if(!empty($data['woo_dropdown_attribute_html_data']['query_paramas_options']) && in_array($option, $data['woo_dropdown_attribute_html_data']['query_paramas_options'])) {
 
@@ -1468,8 +1490,13 @@ class SP_WBC_Variations extends SP_Variations {
 
 					$data['woo_dropdown_attribute_html_data']['options_loop_option_name'][$option] = apply_filters('sp_wbc_variation_option_name', null, $option , null, $data['woo_dropdown_attribute_html_data']['attribute'], $data['woo_dropdown_attribute_html_data']['product']); // \eo\wbc\system\core\data_model\SP_Attribute::variation_option_name( $option, null, $data['woo_dropdown_attribute_html_data']['attribute'], $data['woo_dropdown_attribute_html_data']['product']);
 
+					if( wbc()->sanitize->get('is_test') == 1 ) {
+						wbc_pr('sp-wbc-variations [prepare_woo_dropdown_attribute_html_data] else loop data-value');
+						wbc_pr($data['woo_dropdown_attribute_html_data']['options_loop_html_attr']);
+					}
+
 					// ACTIVE_TODO right now we are managing selected attribute from the common woo dropdown attribute template but in future we should managing from the data layer here.
-					$data['woo_dropdown_attribute_html_data']['options_loop_html_attr'] = array('data-value' => esc_attr( $option ), 'data-title' => esc_attr( $option ) );
+					$data['woo_dropdown_attribute_html_data']['options_loop_html_attr'][$option] = array('data-value' => esc_attr( $option ), 'data-title' => esc_attr( $option ) );
 
 					/*echo '<option value="' . esc_attr( $option ) . '" ' . $selected . '>' . esc_html( \eo\wbc\system\core\data_model\SP_Attribute()::instance()->variation_option_name( $term_name, $term, $attribute, $product) . '</option>';*/
 				}
@@ -1482,6 +1509,10 @@ class SP_WBC_Variations extends SP_Variations {
 	}
 
 	public static function prepare_variable_item_data ($data,$args = array()){
+
+		if( wbc()->sanitize->get('is_test') == 1 ) {
+			wbc_pr('sp-wbc-variations [prepare_variable_item_data]');
+		}
 
 		$data['variable_item_data'] = array();
 
@@ -1513,6 +1544,10 @@ class SP_WBC_Variations extends SP_Variations {
 		if ( ! empty( $data['woo_dropdown_attribute_html_data']['options'] ) ) {
 
 			if ( $data['woo_dropdown_attribute_html_data']['product'] && taxonomy_exists( $data['variable_item_data']['attribute'] ) ) {
+
+				if( wbc()->sanitize->get('is_test') == 1 ) {
+					wbc_pr('sp-wbc-variations [prepare_variable_item_data] if');
+				}
 
 				$data['variable_item_data']['terms'] = apply_filters('sp_wbc_get_product_terms', null, $data['woo_dropdown_attribute_html_data']['product'], $data['variable_item_data']['attribute'], array( 'fields' => 'all' ), $data); //\eo\wbc\system\core\data_model\SP_Attribute::get_product_terms( $data['woo_dropdown_attribute_html_data']['product']->get_id(), $data['variable_item_data']['attribute'], array( 'fields' => 'all' ) );
 
@@ -1600,6 +1635,10 @@ class SP_WBC_Variations extends SP_Variations {
 				$data['variable_item_data']['options_loop_html_attr'] = array();
 				foreach ( $data['variable_item_data']['terms'] as $term ) {
 					
+					if( wbc()->sanitize->get('is_test') == 1 ) {
+						wbc_pr('sp-wbc-variations [prepare_variable_item_data] if loop');
+					}
+
 					if ( in_array( $term->slug, $data['woo_dropdown_attribute_html_data']['options'], true ) ) {
 
 						if(!empty($data['woo_dropdown_attribute_html_data']['query_paramas_options']) && in_array($term->slug, $data['woo_dropdown_attribute_html_data']['query_paramas_options']) ) {
@@ -1628,6 +1667,11 @@ class SP_WBC_Variations extends SP_Variations {
 
 						// ACTIVE_TODO right now we are managing selected attribute from the common woo dropdown attribute template but in future we should managing from the data layer here.
 						$data['variable_item_data']['options_loop_html_attr'][$term->slug] = array( 'data-value' => esc_html( $term->slug ), 'data-title' => esc_html( $term->slug ) );
+
+						if( wbc()->sanitize->get('is_test') == 1 ) {
+							wbc_pr('sp-wbc-variations [prepare_variable_item_data] if data-value');
+							wbc_pr($data['variable_item_data']['options_loop_html_attr'][$term->slug]);
+						}
 
 						/*ACTIVE_TODO_OC_START
 						--------- a etlu wvs_default_variable_item alg che
@@ -1716,7 +1760,11 @@ class SP_WBC_Variations extends SP_Variations {
 			--------- a etlu wvs_default_variable_item alg che
 			ACTIVE_TODO_OC_END*/
 				else{
-
+					
+					if( wbc()->sanitize->get('is_test') == 1 ) {
+						wbc_pr('sp-wbc-variations [prepare_variable_item_data] else');
+					}
+					
 					$data['variable_item_data']['options_loop_option'] = array();
 					$data['variable_item_data']['options_loop_is_selected'] = array();
 					$data['variable_item_data']['options_loop_selected_class'] = array();
