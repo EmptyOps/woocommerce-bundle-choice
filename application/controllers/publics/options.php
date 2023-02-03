@@ -140,7 +140,7 @@ class Options extends \eo\wbc\controllers\publics\Controller {
     } 
 
     protected function get_ui_definition($args = array()){
-    	
+
     	if (!isset($args['data'])) {
 
 			$args['data'] = array();

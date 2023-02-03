@@ -1414,6 +1414,11 @@ class SP_WBC_Variations extends SP_Variations {
 			}
 
 			if ( $data['woo_dropdown_attribute_html_data']['product'] && taxonomy_exists( $data['woo_dropdown_attribute_html_data']['attribute'] ) ) {
+
+				if( wbc()->sanitize->get('is_test') == 1 ) {
+					wbc_pr('sp-wbc-variations [prepare_woo_dropdown_attribute_html_data] if');
+				}
+
 				// Get terms if this is a taxonomy - ordered. We need the names too.
 				$data['woo_dropdown_attribute_html_data']['terms'] = apply_filters('sp_wbc_get_product_terms', null, $data['woo_dropdown_attribute_html_data']['product'], $data['woo_dropdown_attribute_html_data']['attribute'], array( 'fields' => 'all' ), $data);// \eo\wbc\system\core\data_model\SP_Attribute::get_product_terms( $data['woo_dropdown_attribute_html_data']['product']->get_id(), $data['woo_dropdown_attribute_html_data']['attribute'], array( 'fields' => 'all' ) );
 
@@ -1448,6 +1453,10 @@ class SP_WBC_Variations extends SP_Variations {
 
 			} else {
 
+				if( wbc()->sanitize->get('is_test') == 1 ) {
+					wbc_pr('sp-wbc-variations [prepare_woo_dropdown_attribute_html_data] else');
+				}
+
 				$data['woo_dropdown_attribute_html_data']['options_loop_selected'] = array();
 				$data['woo_dropdown_attribute_html_data']['options_loop_option_name'] = array();
 				$data['woo_dropdown_attribute_html_data']['options_loop_class'] = array();
@@ -1468,8 +1477,12 @@ class SP_WBC_Variations extends SP_Variations {
 
 					$data['woo_dropdown_attribute_html_data']['options_loop_option_name'][$option] = apply_filters('sp_wbc_variation_option_name', null, $option , null, $data['woo_dropdown_attribute_html_data']['attribute'], $data['woo_dropdown_attribute_html_data']['product']); // \eo\wbc\system\core\data_model\SP_Attribute::variation_option_name( $option, null, $data['woo_dropdown_attribute_html_data']['attribute'], $data['woo_dropdown_attribute_html_data']['product']);
 
-					// ACTIVE_TODO right now we are managing selected attribute from the common woo dropdown attribute template but in future we should managing from the data layer here.
-					$data['woo_dropdown_attribute_html_data']['options_loop_html_attr'] = array('data-value' => esc_attr( $option ), 'data-title' => esc_attr( $option ) );
+					if( wbc()->sanitize->get('is_test') == 1 ) {
+						wbc_pr('sp-wbc-variations [prepare_woo_dropdown_attribute_html_data] else loop data-value');
+						wbc_pr($data['woo_dropdown_attribute_html_data']['options_loop_html_attr']);
+					}
+
+					$data['woo_dropdown_attribute_html_data']['options_loop_html_attr'][$option] = array('data-value' => esc_attr( $option ), 'data-title' => esc_attr( $option ) );
 
 					/*echo '<option value="' . esc_attr( $option ) . '" ' . $selected . '>' . esc_html( \eo\wbc\system\core\data_model\SP_Attribute()::instance()->variation_option_name( $term_name, $term, $attribute, $product) . '</option>';*/
 				}
@@ -1513,6 +1526,10 @@ class SP_WBC_Variations extends SP_Variations {
 		if ( ! empty( $data['woo_dropdown_attribute_html_data']['options'] ) ) {
 
 			if ( $data['woo_dropdown_attribute_html_data']['product'] && taxonomy_exists( $data['variable_item_data']['attribute'] ) ) {
+
+				if( wbc()->sanitize->get('is_test') == 1 ) {
+					wbc_pr('sp-wbc-variations [prepare_variable_item_data] if');
+				}
 
 				$data['variable_item_data']['terms'] = apply_filters('sp_wbc_get_product_terms', null, $data['woo_dropdown_attribute_html_data']['product'], $data['variable_item_data']['attribute'], array( 'fields' => 'all' ), $data); //\eo\wbc\system\core\data_model\SP_Attribute::get_product_terms( $data['woo_dropdown_attribute_html_data']['product']->get_id(), $data['variable_item_data']['attribute'], array( 'fields' => 'all' ) );
 
@@ -1717,6 +1734,10 @@ class SP_WBC_Variations extends SP_Variations {
 			ACTIVE_TODO_OC_END*/
 				else{
 
+					if( wbc()->sanitize->get('is_test') == 1 ) {
+						wbc_pr('sp-wbc-variations [prepare_variable_item_data] else');
+					}
+
 					$data['variable_item_data']['options_loop_option'] = array();
 					$data['variable_item_data']['options_loop_is_selected'] = array();
 					$data['variable_item_data']['options_loop_selected_class'] = array();
@@ -1747,7 +1768,6 @@ class SP_WBC_Variations extends SP_Variations {
 						$data['variable_item_data']['options_loop_selected_class'][$option] = $data['variable_item_data']['options_loop_is_selected'][$option] ? 'selected' : '';
 						$data['variable_item_data']['options_loop_tooltip'][$option]        = trim( apply_filters( 'wvs_variable_item_tooltip', $data['variable_item_data']['options_loop_option'][$option], $data['woo_dropdown_attribute_html_data']['options'], $data['woo_dropdown_attribute_html_data']['args'] ) );
 
-						// ACTIVE_TODO right now we are managing selected attribute from the common woo dropdown attribute template but in future we should managing from the data layer here.
 						$data['variable_item_data']['options_loop_html_attr'][$option] = array('data-value' => esc_html( $option ), 'data-title' => esc_html( $option ));
 
 						if ( $data['variable_item_data']['is_archive'] && ! $show_archive_tooltip ) {

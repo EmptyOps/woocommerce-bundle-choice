@@ -61,7 +61,10 @@ $template = null;
 // -------------
 // ACTIVE_TODO_OC_END
 
+if( wbc()->sanitize->get('is_test') == 1 ) {
 
+    var_dump('woo_dropdown_attribute m');
+}  
 
 $template_inner = array();
 
@@ -81,6 +84,11 @@ $options = null;
 
 if ( ! empty( $woo_dropdown_attribute_html_data['options'] ) ) {
 
+    if( wbc()->sanitize->get('is_test') == 1 ) {
+
+        var_dump('woo_dropdown_attribute m if');
+    }  
+
     if ( $woo_dropdown_attribute_html_data['product'] && taxonomy_exists( $woo_dropdown_attribute_html_data['attribute'] ) ) {
 
         $options = $woo_dropdown_attribute_html_data['terms'];  
@@ -99,8 +107,15 @@ if ( ! empty( $woo_dropdown_attribute_html_data['options'] ) ) {
             }
 
             if (!empty($template_data['template_key'])) {
+                
+                
                 $template_data['data']['term'] = $term;
                 $template_inner[] = wbc()->load->template($template_data['template_sub_dir'].'/'.$template_data['template_key'],(isset($template_data['data'])?$template_data['data']:array()),true,$template_data['singleton_function'],true);
+
+                if( wbc()->sanitize->get('is_test') == 1 ) {
+
+                    wbc_pr('woo_dropdown_attribute m if loop');
+                }  
             }
         }
     }
@@ -127,14 +142,14 @@ if ( $woo_dropdown_attribute_html_data['product'] && taxonomy_exists( $woo_dropd
 
 } else {
     // echo '<select id="' . esc_attr( $id ) . '" class="' . esc_attr( $class ) . '" name="' . esc_attr( $name ) . '" data-attribute_name="' . esc_attr( wc_variation_attribute_name( $attribute ) ) . '" data-show_option_none="' . ( $show_option_none ? 'yes' : 'no' ) . '">';
-
+     
 
     $template = array(
         'type' => 'select',
         'class' => esc_attr( $woo_dropdown_attribute_html_data['class'] ) . ' hide woo-variation-raw-select woo-variation-raw-type-' . esc_attr($woo_dropdown_attribute_html_data['type']). ' spui-wbc-swatches-raw-select spui-wbc-swatches-raw-select'.$woo_dropdown_attribute_html_data['type'],
         'id' => esc_attr( $woo_dropdown_attribute_html_data['id'] ),
         'name' => esc_attr( $woo_dropdown_attribute_html_data['name'] ),
-        'attr' => array( 'data-attribute_name' => esc_attr( wc_variation_attribute_name( $woo_dropdown_attribute_html_data['attribute'] ) ), 'data-show_option_none' => ( $woo_dropdown_attribute_html_data['show_option_none'] ? 'yes' : 'no' ) ),
+        'attr' => array( 'style' => 'display:none', 'data-attribute_name' => esc_attr( wc_variation_attribute_name( $woo_dropdown_attribute_html_data['attribute'] ) ), 'data-show_option_none' => ( $woo_dropdown_attribute_html_data['show_option_none'] ? 'yes' : 'no' ) ),
         'child'=>$template_inner
     );
 
