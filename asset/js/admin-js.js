@@ -6,6 +6,8 @@ window.document.splugins.is_test_script_debug = false;
 
 window.document.splugins.common = window.document.splugins.common || {};
 
+window.document.splugins.admin = window.document.splugins.admin || {};
+
 window.document.splugins.process_debug_log = function(obj,debug_log) {  
    if( window.document.splugins.is_test_script_debug ) {
         var __debug_log = jQuery(obj).attr('data-debug_log');
@@ -43,6 +45,9 @@ window.document.splugins.extractJSON = function(str) {
     } while(firstOpen != -1);
 }
 
+// ACTIVE_TODO below function and other functions above should be moved under the common namespace and in the common js file -- to d 
+//     ACTIVE_TODO but yeah if there are any admin specific function only then move those under admin namespace -- to d 
+    // ACTIVE_TODO note that below parseJSON in already implemented under common namespace and extended a bit so just comment below function and change all calls to the common namespace function -- to d 
 window.document.splugins.parseJSON = function(result) {
     var resjson = null;
     try{
@@ -97,11 +102,14 @@ $ = jQuery;
 
 function eowbc_ready($){
 
-    $(".ui.selection.dropdown:not(.additions)").dropdown();
-    $(".ui.selection.dropdown.additions").dropdown({ allowAdditions: true });   
-    $(".ui.pointing.secondary.menu>.item").tab();
-    $(".exclamation.circle.icon").popup({position:'bottom left',hoverable:true});
-    $('.ui.accordion').accordion({selector: {trigger: '.title'}});
+    if( !window.document.splugins.admin.is_legacy_admin_page ) {
+
+        $(".ui.selection.dropdown:not(.additions)").dropdown();
+        $(".ui.selection.dropdown.additions").dropdown({ allowAdditions: true });   
+        $(".ui.pointing.secondary.menu>.item").tab();
+        $(".exclamation.circle.icon").popup({position:'bottom left',hoverable:true});
+        $('.ui.accordion').accordion({selector: {trigger: '.title'}});
+    }
     
     jQuery("#d_fconfig_input_type_dropdown_div,#s_fconfig_input_type_dropdown_div").on('change',function(){
         let value = jQuery(this).dropdown('get value')
@@ -140,10 +148,10 @@ function eowbc_ready($){
     });
 
     //Open wordpress media manager on button click
-    jQuery('.field.upload_image>.ui.button').off('click');
-    jQuery('.field.upload_image>.ui.button').on('click',function(event){
+    window.document.splugins.admin.upload_image = function(thisObj,event) {
+
         event.preventDefault();
-        action_root=$(this).parent();
+        action_root=$(thisObj).parent();
         // If the media frame already exists, reopen it.
         /*if (typeof(file_frame)!=undefined) {                 
             // Open frame
@@ -160,12 +168,32 @@ function eowbc_ready($){
         });
         file_frame.on('select', function() {
             attachment = file_frame.state().get('selection').first().toJSON();          
-            action_root.find("img").attr('src',attachment.url).css( 'width', 'auto' );
+            console.log(attachment);
+            action_root.find("img").attr('src',attachment.url).css( 'width', '64px'/*'auto'*/ );
             action_root.find("input[type='hidden']").val( attachment.id );
+
+            action_root.find("input[type='hidden']").trigger('change');
         });
         // Finally, open the modal
         file_frame.open();
-    }); 
+    };
+    window.document.splugins.admin.upload_image_bind = function() {
+
+        if (window.document.splugins.common._o(window.document.splugins.admin,'is_upload_image_bind')) {
+
+            return true;
+        } 
+
+        window.document.splugins.admin.is_upload_image_bind = true;
+
+        jQuery('.field.upload_image>.ui.button').off('click');
+
+        // jQuery('.field.upload_image>.ui.button').on('click',function(event){
+        jQuery(document).on('click','.field.upload_image>.ui.button',function(event){
+
+            window.document.splugins.admin.upload_image(this,event);  
+        });
+    };
 
     $('button.ui.button[data-action="cancel"]').on('click',function(e){
         e.preventDefault();
@@ -245,6 +273,16 @@ function eowbc_ready($){
                     serform += encodeURIComponent(input.attr('name'))+'='+encodeURIComponent(input.val())+'&';
                 }
             );            
+        }
+
+        if( typeof(jQuery(this).data('save-reset')) !== typeof(undefined)) {
+        
+
+            if(typeof(serform) === typeof({})) {
+                serform.is_form_reset = true;
+            } else {
+                serform+='&is_form_reset=true&'
+            }
         }
 
         // if(is_update_post_values){            
@@ -419,7 +457,9 @@ function eowbc_ready($){
     });
 
     jQuery(document).ready(function(){
-        jQuery(".question.circle.outline.eo_help.icon").popup({hoverable:true,onShow:function(){jQuery('.ui.popup').css('max-height', jQuery(window).height());}});
+        if( !window.document.splugins.admin.is_legacy_admin_page ) {
+            jQuery(".question.circle.outline.eo_help.icon").popup({hoverable:true,onShow:function(){jQuery('.ui.popup').css('max-height', jQuery(window).height());}});
+        }
     });
 
     $(".ui.negative.message .close.icon").click(function(){
@@ -530,6 +570,13 @@ function eowbc_ready($){
         }
         return false;
     });
+
+    window.document.splugins.admin.do_event_binding = function() {
+
+        window.document.splugins.admin.upload_image_bind();  
+    };
+
+    window.document.splugins.admin.do_event_binding();
 }
 
 jQuery(document).ready(function($){

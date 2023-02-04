@@ -77,6 +77,10 @@ class Category {
                     if($this->eo_wbc_get_category()==$this->first_category_slug && wbc()->options->get_option_group('filters_d_fconfig',FALSE)) {
                         SP_Model_Feed::instance()->add_to_cart_text();
                     }
+                    if( wbc()->sanitize->get('is_test') == 1 ){
+        
+                        wbc_pr("Category init_f_eo_wbc_object");
+                    }
                     $this->eo_wbc_add_filters();          
                 }
             }        
@@ -169,6 +173,10 @@ class Category {
     }
 
     public function add_filter_widget(){
+        if( wbc()->sanitize->get('is_test') == 1 ){
+        
+            wbc_pr("add_filter_widget_f_eo_wbc_object");
+        }
         if(empty($this->filter_showing_status)) {
             wbc()->load->model('publics/component/eowbc_filter_widget');          
             // if (class_exists('EO_WBC_Filter_Widget')) {
@@ -197,6 +205,11 @@ class Category {
             });*/
 
             $filter_container_location_action = SP_Model_Feed::instance()->filter_container_location_action( $this->is_shop_cat_filter, $this->is_shortcode_filter );
+            if( wbc()->sanitize->get('is_test') == 1 ){
+
+                wbc_pr("Category eo_wbc_add_filters_f_eo_wbc_object");
+                wbc_pr($filter_container_location_action);
+            }
             add_action($filter_container_location_action /*'woocommerce_before_shop_loop'*/ /*'woocommerce_archive_description'*/,array($this,'add_filter_widget'),1);
 
         /*}

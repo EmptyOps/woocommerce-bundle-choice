@@ -143,6 +143,20 @@ class UI_Builder implements Builder {
 							}
 
 							$ui_ele['style'].='margin-right:'.wbc()->options->get_option($option_key,$ui_ele['id'].'_margin_right','',true,true).' !important;';
+						}
+
+						if(in_array('visibility',$controls)) {
+					
+							if(empty($ui_ele['style'])){
+								$ui_ele['style'] = '';
+							}
+
+
+							if (wbc()->options->get_option($option_key,$ui_ele['id'].'_visibility',-1,true,true) == 1) {
+								//$ui_ele['style'].='display: none !important;';
+								return;	//simply return from here and skip addind element 
+							}
+					
 						}					
 
 					}
@@ -150,7 +164,8 @@ class UI_Builder implements Builder {
 					$ui_ele['option_key'] =$option_key;
 					$ui_ele['process_form'] =$process_form;
 					// passing self contained object so the template can use the child parameter in the $ui_ele to created a nested complax UI.
-					$ui_ele['builder'] = $this;					
+					$ui_ele['builder'] = $this;		
+								
 					wbc()->load->template('core/ui/components/'.$ui_ele['type'],$ui_ele);
 				}
 			}
@@ -490,6 +505,16 @@ class UI_Builder implements Builder {
 			wbc()->load->model('utilities/eowbc_theme_adaption_check');
 			Eowbc_Theme_Adaption_Check::instance()->run();
 		}
+	}
+
+	static function js_template_wrap(string $id, string $html, string $js_templating_lib) {
+
+		// wrap with tag as appliable as per the js_templating_lib 
+		if( $js_templating_lib == 'wp' ) {
+
+			return '<script type="text/html" id="tmpl-'.$id.'">' . $html . '</script>'; 
+		}
+			
 	}
 
 }

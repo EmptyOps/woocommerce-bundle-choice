@@ -27,8 +27,8 @@ class Eowbc_Queue extends Eowbc_Model {
 		
 	}
 
-	public function get( $form_definition ) {
-
+	public function get( $form_definition, $args = null ) {
+		
 		$page_slug = wbc()->sanitize->get('page');
 		$plugin_slug = explode("---", $page_slug)[0];
 		if(empty($page_slug)) {
@@ -155,90 +155,7 @@ class Eowbc_Queue extends Eowbc_Model {
 	    return $form_definition; 
 	}
 
-	// public function save( $form_definition, $is_auto_insert_for_template = false) {
-	// 	$res = array( "type"=>"success", "msg"=>"Updated successfully!" );		
-		
-	// 	wbc()->sanitize->clean($form_definition);	    
- //    	wbc()->validate->check($form_definition);
-    	
-	// 	//loop through form tabs and save
-	//     foreach ($form_definition as $key => $tab) {
-
-	//     	if(wbc()->sanitize->post('saved_tab_key')!=$key){
-	//     		continue;
-	//     	}
-
-	//     	$is_table_save = $key == "bookappoint_store" ? true : false;
-	// 		$table_data = array();
-
-	//     	foreach ($tab["form"] as $fk => $fv) {
-
-	//     		if($fv["type"]=='checkbox' and is_array($fv["options"]) and !empty($fv["options"])) {
-
-	// 	    		$checkbox_keys= array_keys($fv["options"]);
-	// 	    		$checbox_status = array();
-	// 	    		foreach($checkbox_keys as $checkbox_key){
-	// 	    			if(empty(wbc()->sanitize->post($checkbox_key))){
-	// 	    				$checbox_status[$checkbox_key]='';
-	// 	    			} else {
-	// 	    				$checbox_status[$checkbox_key]=wbc()->sanitize->post($checkbox_key);
-	// 	    			}
-	// 	    		}
-	// 	    		$_POST[$fk] = serialize($checbox_status);		    		
-	// 	    	}
-			   	
-	// 		   	//save
-	// 	    	if( $is_table_save ) {
-	// 	    		$table_data[$fk] = ( isset($_POST[$fk]) ? wbc()->sanitize->post($fk) : '' ); 
-	// 	    	} elseif( in_array($fv["type"], \eo\wbc\model\admin\Form_Builder::savable_types()) && (isset($_POST[$fk]) || $fv["type"]=='checkbox')) {
-	// 		    	wbc()->options->update_option(wbc()->sanitize->post('saved_tab_key'),$fk,(isset($_POST[$fk])? wbc()->sanitize->post($fk):'' ));	
-	// 		    }
-	// 		}
-
-	// 		if( $is_table_save ) {
-
-	// 			$store_data = unserialize(wbc()->options->get_option_group('list_'.$key,"a:0:{}"));
-				
-	// 	        if(!empty(wbc()->sanitize->post('bookappoint_store_id')) and !empty($store_data[wbc()->sanitize->post('bookappoint_store_id')])) {
-	// 	        	$table_data["id"] = wbc()->common->createUniqueId();
-	// 	        	$store_data[wbc()->sanitize->post('bookappoint_store_id')] = $table_data;
-	// 	        	wbc()->options->update_option_group( 'list_'.$key, serialize($store_data) );
-		        	
-	// 	        	$res["msg"] = eowbc_lang('Store Location Updated Successfully'); 
-	// 	        	return $res;
-			        
-	// 	        } else{
-	// 		        foreach ($store_data as $fdkey=>$value) {
-			            
-	// 		            $match_found = false;
-
-	// 	                if($value["store_location"]==$table_data["store_location"]) {                 
-	// 	                    $match_found = true;
-	// 	                    break;
-	// 	                }
-
-	// 		            if ($match_found) { 
-	// 		                $res["type"] = "error";
-	// 		    			$res["msg"] = eowbc_lang('Store Location Already Exists');
-	// 		                return $res;
-	// 		            }
-	// 		        }
-	// 		    }
-
-	// 			$table_data["id"] = wbc()->common->createUniqueId();
-	// 	        $store_data[$table_data["id"]] = $table_data;
-
-	// 	        wbc()->options->update_option_group( 'list_'.$key, serialize($store_data) );
-
-	// 	        $res["msg"] = eowbc_lang('New Store Location Added Successfully'); 
-
-	// 		}
-	//     }
-		
-	// 	return $res;
-	// }
-
-	public function save( $form_definition, $is_auto_insert_for_template=false ) {
+	public function save( $form_definition, $is_auto_insert_for_template=false, $args = null ) {
 
 		wbc()->sanitize->clean($form_definition);
 		wbc()->validate->check($form_definition);

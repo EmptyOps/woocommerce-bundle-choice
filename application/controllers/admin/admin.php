@@ -32,6 +32,10 @@ class Admin {
 		$bonus_features = array_filter(unserialize(wbc()->options->get_option('setting_status_setting_status_setting','bonus_features',serialize(array()))));
         if(!empty($bonus_features['price_control'])){
             wbc()->load->model('admin/eowbc_price_control_save_update_prices');
+            
+            add_action( 'woocommerce_before_data_object_save',array(\eo\wbc\model\admin\Eowbc_Price_Control_Save_Update_Prices::instance(),'update_product'),10,2);
+            add_action( 'woocommerce_before_product_object_save',array(\eo\wbc\model\admin\Eowbc_Price_Control_Save_Update_Prices::instance(),'update_product'),10,2);
+
 			add_action( 'save_post',array(\eo\wbc\model\admin\Eowbc_Price_Control_Save_Update_Prices::instance(),'update_prices'),10,3);
         }
 		
@@ -88,10 +92,16 @@ class Admin {
 	        }
         }        
 
-        //Initiate Orders Page
-        \eo\wbc\controllers\admin\orders\Orders::instance()->init(); 
-	
+		self::legacy_admin_process();
+
 		do_action( 'wbc_after_admin_process_request' );
+	}
+
+	public static function legacy_admin_process($is_ajax=false){
+
+        //Initiate legacy admin 
+        \eo\wbc\controllers\admin\legacy_admin\Legacy_Admin::instance()->init(); 
+	
 	}
 
 	public function menu() {
@@ -107,6 +117,11 @@ class Admin {
 		$menu_slugs[]=$menu_items['slug'];
 		$page_slug = wbc()->sanitize->get('page');
 		if(!empty($page_slug) and in_array($page_slug,$menu_slugs)){
+
+			add_filter('sp_is_legacy_admin_page', function($status) {
+
+				return false;
+			});
 
 			//	perform initial task 
 			self::instance()->init();

@@ -140,7 +140,7 @@ class WBC_WP {
 
 
     /* Add image to the wordpress image media gallary */
-    public function add_image_gallary($path) {
+    public function add_image_gallary($path, $path_separator = 'woo-bundle-choice', $source_path = null) {
 
         if(!$path) return FALSE;
 
@@ -157,16 +157,26 @@ class WBC_WP {
           return $posts[0]->ID;
         }
 
-        $file = wp_upload_bits($name, null, file_get_contents($path));
+
+        //$file = wp_upload_bits($name, null, file_get_contents($path));
+        ///////////// 14-05-2022 -- @drashti /////////////
+
+        $file_bits = wbc()->common->file_get_contents($path, $path_separator, $source_path);
+
+        $file = wp_upload_bits($name, null, $file_bits);
+        
+        /////////////////////////////////////////////////
+
 
         if (!$file['error']) {
 
             $type = wp_check_filetype($name, null );
 
             $attachment = array(
+                'guid' => $file['url'],
                 'post_mime_type' => $type['type'],
                 'post_parent' => null,
-                'post_title' => preg_replace('/\.[^.]+$/', '', $name),
+                'post_title' => sanitize_file_name($name),
                 'post_content' => '',
                 'post_status' => 'inherit'
             );
@@ -232,5 +242,14 @@ class WBC_WP {
         $registration_only = ob_get_clean();
 
         return $registration_only;
+    }
+
+    public function wbc_is_plugin_active( $plugin_slug ) {
+
+        // NOTE: we will always use plugin slug for such condition creation. or the most reliable and simpest method to check if certain plugin is active by passing their slug so we would need to create the applicable function in the wp helper.
+
+        
+        // ACTIVE_TODO implement based on  plugin slug -- to h
+        return is_plugin_active( $plugin );
     }
 }

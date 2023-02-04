@@ -38,10 +38,15 @@ class WBC_File {
 	 */
 	public  function file_read( $filepath )
 	{
-		$fp = fopen($filepath, "r");
+		$content = null;
 
-		$content = fread($fp, filesize($filepath));
-		fclose($fp);
+		if( $this->file_exists($filepath) ) {
+			
+			$fp = fopen($filepath, "r");
+
+			$content = fread($fp, filesize($filepath));
+			fclose($fp);
+		}
 
 		return $content;
 	}
@@ -64,6 +69,48 @@ class WBC_File {
 
 	public function unlink($filepath) {
 		return unlink( $filepath );
+	}
+
+	//	not supporting recursion yet, and when we support recursion as a simple precaution GET based param or something of that sort that requires devs to specify in URL or so would save from disasters some time. but anyway the ultimate solution is always follow the backup and workflow policies accurately like working max on staging domain and never even debug such things on live. so debug at max on staging only. 
+	public function list_files( $in_dir, $filter_by=null ) {
+
+		$files = array();
+		$source = $in_dir;
+
+		$dir = opendir( $source );
+		while( false !== ( $file = readdir( $dir ) ) )
+		{
+			if ( ( $file != '.' ) && ( $file != '..' ) )
+			{
+				if( is_dir( $source . '/' . $file ) )
+				{
+
+					//	implement recursion here 
+				}
+				else
+				{
+
+					if( empty($filter_by) or strpos($file, $filter_by) !== FALSE ) {
+
+						$files[] = $source . '/' . $file;
+					}
+				}
+			}
+		}
+		closedir($dir);
+
+		return $files;
+	}
+
+	//	not supporting recursion yet, and when we support recursion as a simple precaution GET based param or something of that sort that requires devs to specify in URL or so would save from disasters some time. but anyway the ultimate solution is always follow the backup and workflow policies accurately like working max on staging domain and never even debug such things on live. so debug at max on staging only. 
+	public function delete_files( $in_dir, $filter_by=null ) {
+		
+		$files = $this->list_files( $in_dir, $filter_by );
+
+		foreach ($files as $key => $file) {
+
+			$this->unlink($file);				
+		}
 	}
 
 	public function save_json($filepath, $data) {
@@ -389,5 +436,80 @@ class WBC_File {
 	// {
 	// 	return str_replace($dirToRemove, $replace, $path);
 	// }
+
+}
+
+function wbc_extension_from_path($filepath) {
+
+	return wbc()->file->extension_from_path($filepath);
+}
+
+
+function wbc_file_exists($filepath) {
+
+	return wbc()->file->file_exists($filepath);
+
+}
+
+function wbc_file_write( $filepath, $content )
+{
+
+	return wbc()->file->file_write($filepath, $content);
+
+}
+
+function wbc_file_read( $filepath )
+{
+
+	return wbc()->file->file_read($filepath);
+	
+}
+
+function wbc_file_lines( $filepath )
+{
+
+	return wbc()->file->file_lines($filepath);
+
+}
+
+function wbc_rename_file($source, $dest) {
+
+	return wbc()->file->rename_file($source, $dest);
+
+}
+
+function wbc_delete_file($filepath) {
+
+	return wbc()->file->delete_file($filepath);
+
+}
+
+function wbc_unlink($filepath) {
+
+	return wbc()->file->unlink($filepath);
+
+}
+
+function wbc_list_files( $in_dir, $filter_by=null ) {
+
+	return wbc()->file->list_files($in_dir, $filter_by);
+
+}
+
+function wbc_delete_files( $in_dir, $filter_by=null ) {
+	
+	return wbc()->file->delete_files($in_dir, $filter_by);
+
+}
+
+function wbc_save_json($filepath, $data) {
+
+	return wbc()->file->save_json($filepath, $data);
+
+}
+
+function wbc_get_json($filepath) {
+
+	return wbc()->file->get_json($filepath);
 
 }

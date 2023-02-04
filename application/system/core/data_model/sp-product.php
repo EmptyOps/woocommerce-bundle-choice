@@ -43,4 +43,15 @@ class SP_Product extends SP_Entity {
 
 	}
 
+	public static function get_image_id($product){
+
+		return $product->get_image_id();	
+	}
+
+	public static function get_gallery_image_ids($product){
+
+		return $product->get_gallery_image_ids();
+
+	}
+
 }

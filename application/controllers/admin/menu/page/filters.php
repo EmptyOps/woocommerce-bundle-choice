@@ -54,6 +54,19 @@ if ( ! class_exists( 'Filters' ) ) {
 	        return $opts_arr;
 	    }
 
+	    protected static function get_filter_sets($option_group_key = 'filters_filter_set', $args=array()) {
+
+			$filter_sets = unserialize(wbc()->options->get_option_group($option_group_key,"a:0:{}"));
+			//wbc()->common->pr($filter_sets);
+			if(!empty($filter_sets) and is_array($filter_sets)){
+				foreach ($filter_sets as $filter_sets_key => $filter_sets_val) {
+					$filter_sets[$filter_sets_key] = $filter_sets_val['filter_set_name'];
+				}
+			}	    	
+
+			return $filter_sets;
+	    }
+
 		public static function get_form_definition( $is_add_sample_values = false ) {
 			
 			wbc()->load->model('admin/form-builder');
@@ -62,14 +75,14 @@ if ( ! class_exists( 'Filters' ) ) {
 			
 			$features = unserialize(wbc()->options->get_option('setting_status_setting_status_setting','features',serialize(array())));
 
-			$filter_sets = unserialize(wbc()->options->get_option_group('filters_filter_set',"a:0:{}"));
-			//wbc()->common->pr($filter_sets);
-			if(!empty($filter_sets) and is_array($filter_sets)){
-				foreach ($filter_sets as $filter_sets_key => $filter_sets_val) {
-					$filter_sets[$filter_sets_key] = $filter_sets_val['filter_set_name'];
-				}
-			}
-			
+			// $filter_sets = unserialize(wbc()->options->get_option_group('filters_filter_set',"a:0:{}"));
+			// //wbc()->common->pr($filter_sets);
+			// if(!empty($filter_sets) and is_array($filter_sets)){
+			// 	foreach ($filter_sets as $filter_sets_key => $filter_sets_val) {
+			// 		$filter_sets[$filter_sets_key] = $filter_sets_val['filter_set_name'];
+			// 	}
+			// }
+			$filter_sets = self::get_filter_sets();
 
 			$is_ring_builder = (!empty($features['ring_builder']));			
 			//Diamond Page Filter Configuration's list
@@ -299,7 +312,22 @@ if ( ! class_exists( 'Filters' ) ) {
 						'is_header' => 1,
 						'val' => 'Filter Set',
 						'field_id'=>'filter_set_name'
-					),					
+					),	
+					2=>array(
+						'is_header' => 1/*2*/,
+						'val' => 'First(or Diamond) category filters',
+						'field_id'=>'filter_set_two_tabs_first'
+					),	
+					3=>array(
+						'is_header' => 1/*3*/,
+						'val' => 'First(or Setting) category filters',
+						'field_id'=>'filter_set_two_tabs_second'
+					),
+					4=>array(
+						'is_header' => 1/*4*/,
+						'val' => 'Category',
+						'field_id'=>'filter_set_category'
+					),			
 				),
 			);
 			$filter_set_table['body'] = array(
@@ -514,17 +542,36 @@ if ( ! class_exists( 'Filters' ) ) {
 								'label'=>'Two tabs setting',
 								'type'=>'devider',
 							),
-							'filter_setting_advance_two_tabs'=>array(
+							'move_to_filter_setting_advance_two_tabs'=>array(
+								'label'=>'Note: This setting is moved to "Woo Choice Plugin -> Filter -> Filter Sets"',
+								'type'=>'visible_info',
+							),
+							/*'filter_setting_advance_two_tabs'=>array(
 								'label'=>' ',
 								'type'=>'checkbox',
 								'sanitize'=>'sanitize_text_field',
 								'value'=>array(),
-								'options'=>array('filter_setting_advance_two_tabs'=>'Enable/Disable two tabs for the First(or Diamond) category filters'),
+								'options'=>array('filter_setting_advance_two_tabs'=>'Enable Collections Tabs(earlier: Two tabs setting) for the First(or Diamond) category filters'),
 								'class'=>array(),
 								'size_class'=>array('eight','wide'),
 								'inline'=>true,
-							),
-							'filter_setting_advance_first_tabs'=>array(
+							),*/
+							// --	comment four fields below -- to b done
+								// --	and move the category field below to the filter set form -- to b done
+									// --	and one more checkbox in filter set form with label (Add as Special Collections Tab) -- to b done
+							// --	then on frontend find all the logic with below and above keys -- to b done
+								// --	then first lets extend the php layer. so simply will implement loop instead of the two static tab implementation -- to b done
+								// --	and on javascript layer nothing additional need to be done I think but lets confirm -- to b done
+									// --	then search everywhere with above keywords in wbc, sp_tv. and let me know if there are any placed where the upgrade is not done yet. -- to a done
+										/*ACTIVE_TODO_OC_START
+										--	and like above also search in the custom numeric, custom attribute, heirarchical filters, diamond quiz and earring pendant builder. and in this case if found at any place then mark them as active todo. -- to a 
+									-- eowbc_bradcome ma if condition nu logic confirm karvanu baki se(12-08-2022) -- to h & -- to a
+									ACTIVE_TODO_OC_END*/
+									// -- data "altname" vala logic jova na se two tabs vali file ma js se tema chek karvu(12-08-2022) -- to a done
+								/*ACTIVE_TODO_OC_START
+								-- the filter sets to work with earring pendant bilder we need to upgerad if condishons as aplicabel so that first and second switch here connect with right category
+								ACTIVE_TODO_OC_END*/
+							/*'filter_setting_advance_first_tabs'=>array(
 								'label'=>'Select first tab\'s filter set' ,
 								'type'=>'select',
 								'value'=>'',
@@ -561,7 +608,7 @@ if ( ! class_exists( 'Filters' ) ) {
 								'options'=> \eo\wbc\controllers\admin\menu\page\Filters::eo_wbc_prime_category_(),
 								'class'=>array('fluid'),
 								'size_class'=>array('three','wide','required'),
-							),
+							),*/
 							'config_advance_end'=>array(
 								'type'=>'accordian',
 								'section_type'=>'end'
@@ -1348,7 +1395,7 @@ if ( ! class_exists( 'Filters' ) ) {
 							'config_advance_end'=>array(
 								'type'=>'accordian',
 								'section_type'=>'end'
-							),						
+							),					
 							's_fconfig_submit_btn'=>array(
 								'label'=>eowbc_lang('Save'),
 								'type'=>'button',
@@ -1413,6 +1460,39 @@ if ( ! class_exists( 'Filters' ) ) {
 									'class'=>array('small'),
 									// 'size_class'=>array('sixteen','wide'),
 								),
+							),
+							'filter_set_two_tabs_first'=>array(
+								'label'=>'First(or Diamond) category filters',
+								'type'=>'checkbox',
+								'sanitize'=>'sanitize_text_field',
+								'value'=>array(),
+								'options'=>array('filter_set_two_tabs_first'=>'Enable Collections Tabs(earlier: Two tabs setting) for the First(or Diamond) category filters'),
+								'class'=>array(),
+								'size_class'=>array('eight','wide'),
+								'is_id_as_name'=>true,
+								'inline'=>true,
+							),
+							'filter_set_two_tabs_second'=>array(
+								'label'=>'Second(or Setting) category filters',
+								'type'=>'checkbox',
+								'sanitize'=>'sanitize_text_field',
+								'value'=>array(),
+								'options'=>array('filter_set_two_tabs_second'=>'Enable Collections Tabs(earlier: Two tabs setting) for the Second(or Ring) category filters'),
+								'class'=>array(),
+								'size_class'=>array('eight','wide'),
+								'is_id_as_name'=>true,
+								'inline'=>true,
+							),
+							'filter_set_category'=>array(
+								'label'=>'Category for First Filter Set',
+								'type'=>'select',
+								'sanitize'=>'sanitize_text_field',
+								'value'=>'',
+								'sanitize'=>'sanitize_text_field',
+								'validate'=>array('required'=>''),
+								'options'=> \eo\wbc\controllers\admin\menu\page\Filters::eo_wbc_prime_category_(),
+								'class'=>array('fluid'),
+								'size_class'=>array('three','wide','required'),
 							),	
 							'filter_set_add_enabled'=>array(
 								'type'=>'hidden',

@@ -8,55 +8,77 @@
 
 $current_category = implode(',',$thisObj->___category);
 
-if(wbc()->options->get_option('filters_'.$thisObj->filter_prefix.'filter_setting','filter_setting_advance_two_tabs',false)) {
+$is_first_root_category = true;
+// $filter_sets = unserialize(wbc()->options->get_option_group('filters_filter_set',"a:0:{}"));
+$filter_sets = \eo\wbc\model\publics\component\EOWBC_Filter_Widget::instance()->get_filter_sets($thisObj->filter_prefix);
+//wbc()->common->pr($filter_sets);
+if(!empty($filter_sets) and is_array($filter_sets)){
+	foreach ($filter_sets as $filter_sets_key => $filter_sets_val) {
+		//$filter_sets[$filter_sets_key] = $filter_sets_val['filter_set_name'];
+		//if(wbc()->options->get_option('filters_filter_setting','filter_setting_advance_two_tabs')) {
 
-	$first_tab_term = wbc()->options->get_option('filters_'.$thisObj->filter_prefix.'filter_setting','filter_setting_advance_first_category',false);
-	if(!empty($first_tab_term)) {
-		$first_tab_term = wbc()->wc->get_term_by('id',$first_tab_term, 'product_cat');
-		if(!empty($first_tab_term) and !is_wp_error($first_tab_term)) {
-			$first_tab_term = $first_tab_term->slug;
+        //}
 
-			if(!empty($_GET[wbc()->options->get_option('filters_'.$thisObj->filter_prefix.'filter_setting','filter_setting_advance_first_tabs',false)])) {
+        //if(wbc()->options->get_option('filters_'.$thisObj->filter_prefix.'filter_setting','filter_setting_advance_two_tabs',false)) {
 
-				$current_category = $first_tab_term;
+        if ( ( $is_first_root_category and !empty($filter_sets_val['filter_set_two_tabs_first']) ) or
+        	(!$is_first_root_category and !empty($filter_sets_val['filter_set_two_tabs_second']))
+    		) {
+
+			$first_tab_term = $filter_sets_val['filter_set_category'];
+			if(!empty($first_tab_term)) {
+				$first_tab_term = wbc()->wc->get_term_by('id',$first_tab_term, 'product_cat');
+				if(!empty($first_tab_term) and !is_wp_error($first_tab_term)) {
+					$first_tab_term = $first_tab_term->slug;
+
+					if(!empty($_GET[$filter_sets_val['filter_set_two_tabs_first']])) {
+
+						$current_category = $first_tab_term;
+					}
+				} else {
+					$first_tab_term = false;
+				}
+			} else {
+				$first_tab_term = false;
 			}
-		} else {
-			$first_tab_term = false;
-		}
-	} else {
-		$first_tab_term = false;
-	}
 
-	$second_tab_term = wbc()->options->get_option('filters_'.$thisObj->filter_prefix.'filter_setting','filter_setting_advance_second_category',false);
-	if(!empty($second_tab_term)) {
-		$second_tab_term = wbc()->wc->get_term_by('id',$second_tab_term, 'product_cat');
-		if(!empty($second_tab_term) and !is_wp_error($second_tab_term)) {
-			$second_tab_term = $second_tab_term->slug;
-			
-			if( !empty($_GET[wbc()->options->get_option('filters_'.$thisObj->filter_prefix.'filter_setting','filter_setting_advance_second_tabs',false)]) ) {
-				$current_category = $second_tab_term;
+			// $second_tab_term = wbc()->options->get_option('filters_'.$thisObj->filter_prefix.'filter_setting','filter_setting_advance_second_category',false);
+			// if(!empty($second_tab_term)) {
+			// 	$second_tab_term = wbc()->wc->get_term_by('id',$second_tab_term, 'product_cat');
+			// 	if(!empty($second_tab_term) and !is_wp_error($second_tab_term)) {
+			// 		$second_tab_term = $second_tab_term->slug;
+					
+			// 		if( !empty($_GET[wbc()->options->get_option('filters_'.$thisObj->filter_prefix.'filter_setting','filter_setting_advance_second_tabs',false)]) ) {
+			// 			$current_category = $second_tab_term;
+			// 		}
+			// 	} else {
+			// 		$second_tab_term = false;
+			// 	}
+			// } else {
+			// 	$second_tab_term = false;
+			// }
+
+
+			if(!isset($_GET[$filter_sets_val['filter_set_two_tabs_first']])) {
+				if(array_search($first_tab_term,$thisObj->___category) !==false ) {			
+					unset($thisObj->___category[array_search($first_tab_term,$thisObj->___category)]);
+				}
+
+			} else {
+
+				// if(array_search($second_tab_term,$thisObj->___category) !==false ) {
+
+				// 	unset($thisObj->___category[array_search($second_tab_term,$thisObj->___category)]);
+				// }		
 			}
-		} else {
-			$second_tab_term = false;
-		}
-	} else {
-		$second_tab_term = false;
-	}
-
-
-	if(isset($_GET[wbc()->options->get_option('filters_'.$thisObj->filter_prefix.'filter_setting','filter_setting_advance_second_tabs',false)])) {
-		if(array_search($first_tab_term,$thisObj->___category) !==false ) {			
-			unset($thisObj->___category[array_search($first_tab_term,$thisObj->___category)]);
+			break;
 		}
 
-	} else {
-
-		if(array_search($second_tab_term,$thisObj->___category) !==false ) {
-
-			unset($thisObj->___category[array_search($second_tab_term,$thisObj->___category)]);
-		}		
 	}
-}
+}	
+
+
+
 
 if(empty($current_category) and empty($_GET['EO_WBC'])) {
 	$current_category = wbc()->common->get_category('category',null, explode(',', wbc()->options->get_option('sc_filter_setting','shop_cat_filter_category') ) );
@@ -123,10 +145,20 @@ if(empty($_per_page)){
 		<input type="hidden" name="action" value="eo_wbc_filter"/>
 		<?php endif; ?>
 
-		<input type="hidden" name="_current_category" value="<?php echo (!empty(wbc()->sanitize->get('CAT_LINK'))?wbc()->sanitize->get('CAT_LINK'):$current_category); ?>" />
+		<input type="hidden" name="_current_category" value="<?php echo (!empty(wbc()->sanitize->get('CAT_LINK'))? \eo\wbc\model\SP_WBC_Router::instance()->set_query_params_formatted( 'to_form_field', 
+														                array('prod_cat'), 
+														                \eo\wbc\model\SP_WBC_Router::instance()->get_query_params_formatted('url_and_form_field_raw',
+															                array('prod_cat'),
+															                'REQUEST',
+															                null))/*wbc()->sanitize->get('CAT_LINK')*/:$current_category); ?>" />
 
 		<input type="hidden" name="_category_query" id="eo_wbc_cat_query" 
-			value="<?php echo (!empty(wbc()->sanitize->get('CAT_LINK'))?wbc()->sanitize->get('CAT_LINK'):''/*$current_category*/); ?>" />
+			value="<?php echo (!empty(wbc()->sanitize->get('CAT_LINK'))? \eo\wbc\model\SP_WBC_Router::instance()->set_query_params_formatted( 'to_form_field', 
+							                array('prod_cat'), 
+							                \eo\wbc\model\SP_WBC_Router::instance()->get_query_params_formatted('url_and_form_field_raw',
+								                array('prod_cat'),
+								                'REQUEST',
+								                null))/*wbc()->sanitize->get('CAT_LINK')*/:''/*$current_category*/); ?>" />
 			
 		<input type="hidden" name="_category" value="<?php echo implode(',',$thisObj->___category) ?>"/>
 		
@@ -178,222 +210,233 @@ if(empty($_per_page)){
 	<script type="text/javascript">		
 
 		jQuery(document).ready(function($){			
-
+			
 			window.document.splugins = window.document.splugins || {};
 			window.document.splugins.ui = window.document.splugins.ui || {};
 			window.document.splugins.ui.slider = window.document.splugins.ui.slider || jQuery.fn.slider;
 
-			window.eo=new Object();
-			
-			//Slider creation function
-			window.eo.slider=function(selector){
+			// --- move this code in woo-bundle-choice/asset/js/publics/eo_wbc_filter.js window.document.splugins.wbc.filters.api.slider_change_event_listener(); ---
+			// --- start ---
+			// window.eo=new Object();
 
-				jQuery(selector).each(function(i,e){
+			// //Slider creation function
+			// window.eo.slider=function(selector){
 
-					_min = Number(jQuery(e).attr('data-min'));						
-					_max = Number(jQuery(e).attr('data-max'));												
-					_labels = jQuery(e).attr('data-labels');						
+			// 	jQuery(selector).each(function(i,e){
 
-					_params=new Object();												
+			// 		_min = Number(jQuery(e).attr('data-min'));						
+			// 		_max = Number(jQuery(e).attr('data-max'));												
+			// 		_labels = jQuery(e).attr('data-labels');						
+
+			// 		_params=new Object();												
 											
-					if(_labels != undefined && _labels != false){
+			// 		if(_labels != undefined && _labels != false){
 
-						_labels=_labels.split(',');
-						_params.interpretLabel=function(value){ 						
-							_labels = jQuery(e).attr('data-labels');
-							_labels=_labels.split(',');
-							/*console.log(value);
-							console.log(_labels);*/
-							if(_labels!=undefined){
-								let _label_value = _labels[value];
-								let _label_max_length = parseInt(jQuery(e).data('label_max_size'));
+			// 			_labels=_labels.split(',');
+			// 			_params.interpretLabel=function(value){ 						
+			// 				_labels = jQuery(e).attr('data-labels');
+			// 				_labels=_labels.split(',');
+			// 				/*console.log(value);
+			// 				console.log(_labels);*/
+			// 				if(_labels!=undefined){
+			// 					let _label_value = _labels[value];
+			// 					let _label_max_length = parseInt(jQuery(e).data('label_max_size'));
 
-								if((typeof(_label_max_length)==typeof(undefined)) || _label_max_length==""){
-									_label_max_length = <?php _e((int)wbc()->options->get_option('filters_'.$filter_prefix.'filter_setting','filter_setting_slider_max_lblsize',6)) ?>;
-								}								
+			// 					if((typeof(_label_max_length)==typeof(undefined)) || _label_max_length==""){
+			//						_label_max_length = <?php /*_e((int)wbc()->options->get_option('filters_'.$filter_prefix.'filter_setting','filter_setting_slider_max_lblsize',6))*/ ?>;
+			// 					}								
 
-								if(_label_value.length>_label_max_length){
-									_label_value = _label_value.split(' ');
-									_label_value = _label_value.map(function(_label_value_ele){
-										return _label_value_ele[0];
-									});
-									_label_value = _label_value.join('');
-								}
-								return '<span title="'+_labels[value]+'" alt="'+_labels[value]+'">'+_label_value+'</span>';								
-							} else {
-								return value;
-							}
+			// 					if(_label_value.length>_label_max_length){
+			// 						_label_value = _label_value.split(' ');
+			// 						_label_value = _label_value.map(function(_label_value_ele){
+			// 							return _label_value_ele[0];
+			// 						});
+			// 						_label_value = _label_value.join('');
+			// 					}
+			// 					return '<span title="'+_labels[value]+'" alt="'+_labels[value]+'">'+_label_value+'</span>';								
+			// 				} else {
+			// 					return value;
+			// 				}
 							
-						};
+			// 			};
 
-						_params.step=1;
+			// 			_params.step=1;
 
-						_params.min=0;
-						_params.max=_labels.length-1;
-						_params.start=0;
-						_params.end=_labels.length-1;
+			// 			_params.min=0;
+			// 			_params.max=_labels.length-1;
+			// 			_params.start=0;
+			// 			_params.end=_labels.length-1;
 
-					} else {
+			// 		} else {
 
-						_params.min=_min;
-						_params.max=_max;
-						_params.start=_min;
-						_params.end=_max;
+			// 			_params.min=_min;
+			// 			_params.max=_max;
+			// 			_params.start=_min;
+			// 			_params.end=_max;
 
-						_params.smooth=true;
-						_params.step=(_max-_min)/100;	
-					}
-					_params.smooth=true;
-					_params.autoAdjustLabels=true;
-					_params.decimalPlaces=4;
+			// 			_params.smooth=true;
+			// 			_params.step=(_max-_min)/100;	
+			// 		}
+			// 		_params.smooth=true;
+			// 		_params.autoAdjustLabels=true;
+			// 		_params.decimalPlaces=4;
 					
-					_params.onMove=function(value, min, max) {
+			// 		_params.onMove=function(value, min, max) {
 
-						__slugs = jQuery(e).attr('data-slugs');
+			// 			__slugs = jQuery(e).attr('data-slugs');
 						
-						if(typeof __slugs != typeof undefined && __slugs != false){
-							//PASS
-						} else {
-							_sep = jQuery(e).attr('data-sep');
-							_prefix = jQuery(this).data('prefix');
-							if(typeof(_prefix) == typeof(undefined) || _prefix=='undefined'){
-								_prefix = '';
-							}
+			// 			if(typeof __slugs != typeof undefined && __slugs != false){
+			// 				//PASS
+			// 			} else {
+			// 				_sep = jQuery(e).attr('data-sep');
+			// 				_prefix = jQuery(this).data('prefix');
+			// 				if(typeof(_prefix) == typeof(undefined) || _prefix=='undefined'){
+			// 					_prefix = '';
+			// 				}
 
-							_postfix = jQuery(this).data('postfix');
-							if(typeof(_postfix) == typeof(undefined) || _postfix=='undefined'){
-								_postfix = '';
-							}
+			// 				_postfix = jQuery(this).data('postfix');
+			// 				if(typeof(_postfix) == typeof(undefined) || _postfix=='undefined'){
+			// 					_postfix = '';
+			// 				}
 
-				        	jQuery("input[name='text_min_"+jQuery(e).attr('data-slug')+"']").val( _prefix+(_sep=='.'?Number(min).toFixed(2):(Number(min).toFixed(2)).toString().replace('.',','))+_postfix );
-				        	jQuery("input[name='text_max_"+jQuery(e).attr('data-slug')+"']").val( _prefix+(_sep=='.'?Number(max).toFixed(2):(Number(max).toFixed(2)).toString().replace('.',','))+_postfix);
-				        }					      	
-					};
+			// 	        	jQuery("input[name='text_min_"+jQuery(e).attr('data-slug')+"']").val( _prefix+(_sep=='.'?Number(min).toFixed(2):(Number(min).toFixed(2)).toString().replace('.',','))+_postfix );
+			// 	        	jQuery("input[name='text_max_"+jQuery(e).attr('data-slug')+"']").val( _prefix+(_sep=='.'?Number(max).toFixed(2):(Number(max).toFixed(2)).toString().replace('.',','))+_postfix);
+			// 	        }					      	
+			// 		};
 
-					_params.onChange=function(value, min, max) {	
-						_labels = jQuery(e).attr('data-labels');
-						__slugs = jQuery(e).attr('data-slugs');
+			// 		_params.onChange=function(value, min, max) {	
+			// 			_labels = jQuery(e).attr('data-labels');
+			// 			__slugs = jQuery(e).attr('data-slugs');
 						
-						_min = Number (jQuery(e).attr('data-min'));						
-						_max = Number(jQuery(e).attr('data-max'));
-						_sep = jQuery(e).attr('data-sep');
+			// 			_min = Number (jQuery(e).attr('data-min'));						
+			// 			_max = Number(jQuery(e).attr('data-max'));
+			// 			_sep = jQuery(e).attr('data-sep');
 
-						console.log(min,_min,max,_max);
+			// 			console.log(min,_min,max,_max);
 
-						if(typeof _labels != typeof undefined && _labels != false){
-							_labels=_labels.split(',');
-							_min=0;
-							_max=_labels.length-1;
-						}
+			// 			if(typeof _labels != typeof undefined && _labels != false){
+			// 				_labels=_labels.split(',');
+			// 				_min=0;
+			// 				_max=_labels.length-1;
+			// 			}
 
-						if(
-							(
-								(jQuery(this).data('prev_val_min')!=min && jQuery(this).data('prev_val_min')!=undefined)
-								|| 
-								(jQuery(this).data('prev_val_max')!=max && jQuery(this).data('prev_val_max')!=undefined)
-							)
-							||
-							( min!=_min || max!=_max )
-						){
+			// 			if(
+			// 				(
+			// 					(jQuery(this).data('prev_val_min')!=min && jQuery(this).data('prev_val_min')!=undefined)
+			// 					|| 
+			// 					(jQuery(this).data('prev_val_max')!=max && jQuery(this).data('prev_val_max')!=undefined)
+			// 				)
+			// 				||
+			// 				( min!=_min || max!=_max )
+			// 			){
 
-							if(typeof __slugs != typeof undefined && __slugs != false){
+			// 				if(typeof __slugs != typeof undefined && __slugs != false){
 									
-								jQuery("input[name='min_"+jQuery(e).attr('data-slug')+"']").val(__slugs.split(',')[min]);
-					        	jQuery("input[name='max_"+jQuery(e).attr('data-slug')+"']").val(__slugs.split(',')[max]);
+			// 					jQuery("input[name='min_"+jQuery(e).attr('data-slug')+"']").val(__slugs.split(',')[min]);
+			// 		        	jQuery("input[name='max_"+jQuery(e).attr('data-slug')+"']").val(__slugs.split(',')[max]);
 
-							} else {
+			// 				} else {
 
-					        	jQuery("input[name='min_"+jQuery(e).attr('data-slug')+"']").val(Number(min).toFixed(2));
-					        	jQuery("input[name='max_"+jQuery(e).attr('data-slug')+"']").val(Number(max).toFixed(2));
-					        }
+			// 		        	jQuery("input[name='min_"+jQuery(e).attr('data-slug')+"']").val(Number(min).toFixed(2));
+			// 		        	jQuery("input[name='max_"+jQuery(e).attr('data-slug')+"']").val(Number(max).toFixed(2));
+			// 		        }
 
-					        if(jQuery(this).attr('data-slug')!='price'){
-						    	//Action of notifying filter change when changes are done.
-						    	if(jQuery(this).attr('data-min')==min && jQuery(this).attr('data-max')==max) {
+			// 		        if(jQuery(this).attr('data-slug')!='price'){
+			// 			    	//Action of notifying filter change when changes are done.
+			// 			    	if(jQuery(this).attr('data-min')==min && jQuery(this).attr('data-max')==max) {
 
-						    		if(jQuery("[name='_attribute']").val().includes(jQuery(this).attr('data-slug'))) {
+			// 			    		if(jQuery("[name='_attribute']").val().includes(jQuery(this).attr('data-slug'))) {
 						    			
-						    			_values=jQuery("[name='_attribute']").val().split(',')
-						    			_index=_values.indexOf(jQuery(this).attr('data-slug'))
-						    			_values.splice(_index,1)
-						    			jQuery("[name='_attribute']").val(_values.join());
-						    		}
-						    	}
-						    	else {
-						    		if(! jQuery("[name='_attribute']").val().includes(jQuery(this).attr('data-slug'))) {
-						    			_values=jQuery("[name='_attribute']").val().split(',')
-						    			_values.push(jQuery(this).attr('data-slug'))
-						    			jQuery("[name='_attribute']").val(_values.join())
-						    		}
-						    	}
-					    	}
-					    	jQuery('[name="paged"]').val('1');
-					    	<?php if(empty(wbc()->options->get_option('filters_'.$filter_prefix.'filter_setting','filter_setting_btnfilter_now'))): ?>
-					    	jQuery.fn.eo_wbc_filter_change(false,'form#<?php echo $filter_ui->filter_prefix; ?>eo_wbc_filter','',{'this':this,'event':new Event('change',this)});
-					    	<?php endif; ?>
-					    } else if( min==_min && max==_max ){
-					    	if(jQuery(this).attr('data-slug')!='price'){
-						    	//Action of notifying filter change when changes are done.						    	
-					    		if(jQuery("[name='_attribute']").val().includes(jQuery(this).attr('data-slug'))) {
+			// 			    			_values=jQuery("[name='_attribute']").val().split(',')
+			// 			    			_index=_values.indexOf(jQuery(this).attr('data-slug'))
+			// 			    			_values.splice(_index,1)
+			// 			    			jQuery("[name='_attribute']").val(_values.join());
+			// 			    		}
+			// 			    	}
+			// 			    	else {
+			// 			    		if(! jQuery("[name='_attribute']").val().includes(jQuery(this).attr('data-slug'))) {
+			// 			    			_values=jQuery("[name='_attribute']").val().split(',')
+			// 			    			_values.push(jQuery(this).attr('data-slug'))
+			// 			    			jQuery("[name='_attribute']").val(_values.join())
+			// 			    		}
+			// 			    	}
+			// 		    	}
+			// 		    	jQuery('[name="paged"]').val('1');
+					    	<?php /*if(empty(wbc()->options->get_option('filters_'.$filter_prefix.'filter_setting','filter_setting_btnfilter_now'))):*/ ?>
+
+			// 		    	//////// 27-05-2022 - @drashti /////////
+			// 				// --add to be confirmed--
+			// 				window.document.splugins.wbc.filters.api.eo_wbc_filter_change_wrapper(false,'form#<?php /*echo $filter_ui->filter_prefix;*/ ?>eo_wbc_filter','',{'this':this,'event':new Event('change',this)});
+			// 		    	// jQuery.fn.eo_wbc_filter_change(false,'form#<?php /*echo $filter_ui->filter_prefix;*/ ?>eo_wbc_filter','',{'this':this,'event':new Event('change',this)});
+			// 				////////////////////////////////////////
+
+			// 		    	<?php /*endif; */?>
+			// 		    } else if( min==_min && max==_max ){
+			// 		    	if(jQuery(this).attr('data-slug')!='price'){
+			// 			    	//Action of notifying filter change when changes are done.						    	
+			// 		    		if(jQuery("[name='_attribute']").val().includes(jQuery(this).attr('data-slug'))) {
 					    			
-					    			_values=jQuery("[name='_attribute']").val().split(',')
-					    			_index=_values.indexOf(jQuery(this).attr('data-slug'))
-					    			_values.splice(_index,1)
-					    			jQuery("[name='_attribute']").val(_values.join());
-					    		}
-					    	}
-					    }
+			// 		    			_values=jQuery("[name='_attribute']").val().split(',')
+			// 		    			_index=_values.indexOf(jQuery(this).attr('data-slug'))
+			// 		    			_values.splice(_index,1)
+			// 		    			jQuery("[name='_attribute']").val(_values.join());
+			// 		    		}
+			// 		    	}
+			// 		    }
 					    
-					    jQuery(this).data('prev_val_min',min);						    
-					    jQuery(this).data('prev_val_max',max);
-					};
+			// 		    jQuery(this).data('prev_val_min',min);						    
+			// 		    jQuery(this).data('prev_val_max',max);
+			// 		};
 					
-					let _adjust_label = jQuery(this).data('label_adjust');
+			// 		let _adjust_label = jQuery(this).data('label_adjust');
 					
-					if(_adjust_label!=1 && jQuery(this).hasClass('labeled')){
+			// 		if(_adjust_label!=1 && jQuery(this).hasClass('labeled')){
 						
-						_params.autoAdjustLabels=false;	
-					}					
+			// 			_params.autoAdjustLabels=false;	
+			// 		}					
 					
-					jQuery("input.text_slider_"+jQuery(e).attr('data-slug')).change(function() {				    
+			// 		jQuery("input.text_slider_"+jQuery(e).attr('data-slug')).change(function() {				    
 						
-						//jQuery("#text_slider_"+jQuery(e).attr('data-slug')).slider("set rangeValue",jQuery("[name=min_"+jQuery(e).attr('data-slug')+"]").val(),jQuery("[name=max_"+jQuery(e).attr('data-slug')+"]").val());
+			// 			//jQuery("#text_slider_"+jQuery(e).attr('data-slug')).slider("set rangeValue",jQuery("[name=min_"+jQuery(e).attr('data-slug')+"]").val(),jQuery("[name=max_"+jQuery(e).attr('data-slug')+"]").val());
 
-						let prefix = jQuery(e).attr('data-prefix');
-						let postfix = jQuery(e).attr('data-postfix');
+			// 			let prefix = jQuery(e).attr('data-prefix');
+			// 			let postfix = jQuery(e).attr('data-postfix');
 						
-						let min_value = jQuery("[name='text_min_"+jQuery(e).attr('data-slug')+"']").val();
+			// 			let min_value = jQuery("[name='text_min_"+jQuery(e).attr('data-slug')+"']").val();
 						
-						let max_value = jQuery("[name='text_max_"+jQuery(e).attr('data-slug')+"']").val();
+			// 			let max_value = jQuery("[name='text_max_"+jQuery(e).attr('data-slug')+"']").val();
 						
-						if(prefix!=='' && typeof(prefix)!==typeof(undefined) && prefix.hasOwnProperty('length')){
-							if(min_value.includes(prefix)){
-								min_value = min_value.slice(prefix.length);	
-							}							
-							if(max_value.includes(prefix)){
-								max_value = max_value.slice(prefix.length);
-							}
-						}
+			// 			if(prefix!=='' && typeof(prefix)!==typeof(undefined) && prefix.hasOwnProperty('length')){
+			// 				if(min_value.includes(prefix)){
+			// 					min_value = min_value.slice(prefix.length);	
+			// 				}							
+			// 				if(max_value.includes(prefix)){
+			// 					max_value = max_value.slice(prefix.length);
+			// 				}
+			// 			}
 
-						if(postfix!=='' && typeof(postfix)!==typeof(undefined) && postfix.hasOwnProperty('length')){
-							if(min_value.includes(postfix)){
-								min_value = min_value.slice(0,-1*postfix.length);
-							}
-							if(min_value.includes(postfix)){
-								max_value = max_value.slice(0,-1*postfix.length);
-							}
-						}
+			// 			if(postfix!=='' && typeof(postfix)!==typeof(undefined) && postfix.hasOwnProperty('length')){
+			// 				if(min_value.includes(postfix)){
+			// 					min_value = min_value.slice(0,-1*postfix.length);
+			// 				}
+			// 				if(min_value.includes(postfix)){
+			// 					max_value = max_value.slice(0,-1*postfix.length);
+			// 				}
+			// 			}
 						
-						jQuery("#text_slider_"+jQuery(e).attr('data-slug')).slider("set rangeValue",min_value,max_value);
-					});
+			// 			jQuery("#text_slider_"+jQuery(e).attr('data-slug')).slider("set rangeValue",min_value,max_value);
+			// 		});
 
-					let ui_slider = jQuery.fn.slider;
+			// 		let ui_slider = jQuery.fn.slider;
 
-					jQuery.fn.slider = window.document.splugins.ui.slider;
-					jQuery(e).slider(_params);
-					jQuery.fn.slider = ui_slider;
-				});
-			};
+			// 		jQuery.fn.slider = window.document.splugins.ui.slider;
+			// 		jQuery(e).slider(_params);
+			// 		jQuery.fn.slider = ui_slider;
+			// 	});
+			// };
+			// --- end ---
+
+			// window.document.splugins.wbc.filters.api.slider_change_event(selector);
 
 			var primary_filter=jQuery(".eo-wbc-container.filters .ui.segment:not(.secondary)");
 
@@ -401,7 +444,8 @@ if(empty($_per_page)){
 
 			var primary_mobile_only=jQuery(primary_filter).find(".mobile.only");
 
-			var secondary_filter=jQuery(".eo-wbc-container.filters .ui.segment.secondary");
+			// var secondary_filter=jQuery(".eo-wbc-container.filters .ui.segment.secondary");
+			var secondary_filter=".eo-wbc-container.filters .ui.segment.secondary";
 
 			var secondary_computer_only=jQuery(secondary_filter).find(".computer.tablet.only");
 
@@ -411,14 +455,14 @@ if(empty($_per_page)){
 				jQuery('.ui.accordion').accordion();
 			}
 
-			window.eo.slider(jQuery('.eo-wbc-container.filters').find('.ui.slider'));				
-		
+			// window.eo.slider(jQuery('.eo-wbc-container.filters').find('.ui.slider'));				
+
 			/* Activate initiation of sliders at secondary segments. */
 			if(jQuery(secondary_computer_only).css('display')!='none'){			
 
 				jQuery("#advance_filter").on('click',function(){
 					jQuery("#advance_filter").find('.ui.icon').toggleClass('up down');
-					jQuery(secondary_filter).transition('slide down');
+					jQuery(secondary_filter+":eq(0)").transition('slide down');
 				}).trigger('click');			
 
 			} else if(jQuery(secondary_mobile_only).css('display')!='none') {
@@ -444,89 +488,100 @@ if(empty($_per_page)){
 			/*----------------------------------------------------*/
 			/*----------------------------------------------------*/
 
-			if( typeof(jQuery.fn.checkbox) ==='function' ) {
+			// --- move this code in woo-bundle-choice/asset/js/publics/eo_wbc_filter.js window.document.splugins.wbc.filters.api.slider_change_event_listener(); ---
+			// --- start ---			
+			// if( typeof(jQuery.fn.checkbox) ==='function' ) {
 
-				jQuery('.checkbox').checkbox({onChange:function(event){
+			// 	jQuery('.checkbox').checkbox({onChange:function(event){
 
-					/*__slug=jQuery(this).attr('data-filter-slug');
+			// 		/*__slug=jQuery(this).attr('data-filter-slug');
 
-					if(__slug=='' || typeof(__slug)===typeof(undefined)){
-						return true;
-					}					
+			// 		if(__slug=='' || typeof(__slug)===typeof(undefined)){
+			// 			return true;
+			// 		}					
 
-					_values= Array();
-					jQuery('[data-filter-slug="'+__slug+'"]:checked').each(function(index,item){ 
-						_values.push(jQuery(item).attr('data-slug'));
-					});
+			// 		_values= Array();
+			// 		jQuery('[data-filter-slug="'+__slug+'"]:checked').each(function(index,item){ 
+			// 			_values.push(jQuery(item).attr('data-slug'));
+			// 		});
 
-					jQuery('#checklist_'+__slug).val(_values.join());
+			// 		jQuery('#checklist_'+__slug).val(_values.join());
 
-					if( ( jQuery('.checklist_'+__slug+':checkbox').length==jQuery('.checklist_'+__slug+':checkbox:checked').length)  || (jQuery('.checklist_'+__slug+':checkbox:checked').length==0) ) {
+			// 		if( ( jQuery('.checklist_'+__slug+':checkbox').length==jQuery('.checklist_'+__slug+':checkbox:checked').length)  || (jQuery('.checklist_'+__slug+':checkbox:checked').length==0) ) {
 
-			    		if(jQuery("[name='_attribute']").val().includes(__slug)) {
+			//     		if(jQuery("[name='_attribute']").val().includes(__slug)) {
 			    			
-			    			_values=jQuery("[name='_attribute']").val().split(',')
-			    			_index=_values.indexOf(__slug)			    			
-			    			_values.splice(_index,1)				    			
-			    			jQuery("[name='_attribute']").val(_values.join());
-			    		}
-			    	}
-			    	else {
-			    		if(! jQuery("[name='_attribute']").val().includes(__slug)) {
-			    			_values=jQuery("[name='_attribute']").val().split(',')
-			    			_values.push(__slug)
-			    			jQuery("[name='_attribute']").val(_values.join())
-			    		}
-			    	}*/
+			//     			_values=jQuery("[name='_attribute']").val().split(',')
+			//     			_index=_values.indexOf(__slug)			    			
+			//     			_values.splice(_index,1)				    			
+			//     			jQuery("[name='_attribute']").val(_values.join());
+			//     		}
+			//     	}
+			//     	else {
+			//     		if(! jQuery("[name='_attribute']").val().includes(__slug)) {
+			//     			_values=jQuery("[name='_attribute']").val().split(',')
+			//     			_values.push(__slug)
+			//     			jQuery("[name='_attribute']").val(_values.join())
+			//     		}
+			//     	}*/
 
-					__slug=jQuery(this).attr('data-filter-slug');
+			// 		__slug=jQuery(this).attr('data-filter-slug');
 
-					if(__slug=='' || typeof(__slug)===typeof(undefined)){
-						return true;
-					}					
+			// 		if(__slug=='' || typeof(__slug)===typeof(undefined)){
+			// 			return true;
+			// 		}					
 
-					_values= Array();
-					if(jQuery('[name="checklist_'+__slug+'"]').length>0 && typeof(jQuery('[name="checklist_'+__slug+'"]').val()) !== typeof(undefined)){
-						_values = jQuery('[name="checklist_'+__slug+'"]').val().split(',');	
-					}				
+			// 		_values= Array();
+			// 		if(jQuery('[name="checklist_'+__slug+'"]').length>0 && typeof(jQuery('[name="checklist_'+__slug+'"]').val()) !== typeof(undefined)){
+			// 			_values = jQuery('[name="checklist_'+__slug+'"]').val().split(',');	
+			// 		}				
 
-					if(_values.indexOf(jQuery(this).attr('data-slug'))!=-1){
+			// 		if(_values.indexOf(jQuery(this).attr('data-slug'))!=-1){
 
-						_values=jQuery('[name="checklist_'+__slug+'"]').val().split(',');
-						_index=_values.indexOf(jQuery(this).attr('data-slug'));
-						_values.splice(_index,1);						
-						jQuery('[name="checklist_'+__slug+'"]').val(_values.join());
+			// 			_values=jQuery('[name="checklist_'+__slug+'"]').val().split(',');
+			// 			_index=_values.indexOf(jQuery(this).attr('data-slug'));
+			// 			_values.splice(_index,1);						
+			// 			jQuery('[name="checklist_'+__slug+'"]').val(_values.join());
 
-					} else {
+			// 		} else {
 
-						_values=jQuery('[name="checklist_'+__slug+'"]').val().split(',');
-		    			_values.push(jQuery(this).attr('data-slug'));
-		    			jQuery('[name="checklist_'+__slug+'"]').val(_values.join());
-					}
+			// 			_values=jQuery('[name="checklist_'+__slug+'"]').val().split(',');
+		 //    			_values.push(jQuery(this).attr('data-slug'));
+		 //    			jQuery('[name="checklist_'+__slug+'"]').val(_values.join());
+			// 		}
 					
-					if( ( jQuery('.checklist_'+__slug+':checkbox').length==jQuery('.checklist_'+__slug+':checkbox:checked').length)  || (jQuery('.checklist_'+__slug+':checkbox:checked').length==0) ) {
+			// 		if( ( jQuery('.checklist_'+__slug+':checkbox').length==jQuery('.checklist_'+__slug+':checkbox:checked').length)  || (jQuery('.checklist_'+__slug+':checkbox:checked').length==0) ) {
 
-			    		if(jQuery("[name='_attribute']").val().includes(__slug)) {
+			//     		if(jQuery("[name='_attribute']").val().includes(__slug)) {
 			    			
-			    			_values=jQuery("[name='_attribute']").val().split(',')
-			    			_index=_values.indexOf(__slug)			    			
-			    			_values.splice(_index,1)				    			
-			    			jQuery("[name='_attribute']").val(_values.join());
-			    		}
-			    	}
-			    	else {
-			    		if(! jQuery("[name='_attribute']").val().includes(__slug)) {
-			    			_values=jQuery("[name='_attribute']").val().split(',')
-			    			_values.push(__slug)
-			    			jQuery("[name='_attribute']").val(_values.join())
-			    		}
-			    	}
-			    	jQuery('[name="paged"]').val('1');
-			    	<?php if(empty(wbc()->options->get_option('filters_'.$filter_prefix.'filter_setting','filter_setting_btnfilter_now'))): ?>
-			    	jQuery.fn.eo_wbc_filter_change(false,'form#<?php echo $filter_ui->filter_prefix; ?>eo_wbc_filter','',{'this':this,'event':event});
-			    	<?php endif; ?>
-				}});				
-			}
+			//     			_values=jQuery("[name='_attribute']").val().split(',')
+			//     			_index=_values.indexOf(__slug)			    			
+			//     			_values.splice(_index,1)				    			
+			//     			jQuery("[name='_attribute']").val(_values.join());
+			//     		}
+			//     	}
+			//     	else {
+			//     		if(! jQuery("[name='_attribute']").val().includes(__slug)) {
+			//     			_values=jQuery("[name='_attribute']").val().split(',')
+			//     			_values.push(__slug)
+			//     			jQuery("[name='_attribute']").val(_values.join())
+			//     		}
+			//     	}
+			//     	jQuery('[name="paged"]').val('1');
+			    	<?php /*if(empty(wbc()->options->get_option('filters_'.$filter_prefix.'filter_setting','filter_setting_btnfilter_now'))):*/ ?>
+
+			//     	//////// 27-05-2022 - @drashti /////////
+			// 		// --add to be confirmed--
+			// 		window.document.splugins.wbc.filters.api.eo_wbc_filter_change_wrapper(false,'form#<?php //echo $filter_ui->filter_prefix; ?>eo_wbc_filter','',{'this':this,'event':event});
+			//     	// jQuery.fn.eo_wbc_filter_change(false,'form#<?php //echo $filter_ui->filter_prefix; ?>eo_wbc_filter','',{'this':this,'event':event});
+			// 		////////////////////////////////////////
+			//     	<?php //endif; ?>
+			// 	}});				
+			// }
+			// --- end ---
+
+			// window.document.splugins.wbc.filters.api.checkbox_change_event(event);
+			
 			/*----------------------------------------------------*/
 			/*----------------------------------------------------*/
 

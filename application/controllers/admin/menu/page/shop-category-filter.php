@@ -27,7 +27,7 @@ if ( ! class_exists( 'Shop_Category_Filter' ) ) {
 
 			// update labels, remove unnecessary tabs
 			unset($form_definition['s_fconfig']);
-			unset($form_definition['filter_set']);
+			// unset($form_definition['filter_set']); @h and @a 13-08-2022 enabled filter set for the shop_cat. NOTE: Stile need to enable and confirm emplementation of other applycable layers on admin as well as firntend 
 			
 			if(isset($form_definition['d_fconfig']['form']['d_fconfig_builder'])) {
 				unset($form_definition['d_fconfig']['form']['d_fconfig_builder']);
@@ -43,6 +43,7 @@ if ( ! class_exists( 'Shop_Category_Filter' ) ) {
 			unset($form_definition['altr_filt_widgts']['form']['second_category_altr_filt_widgts']);
 			
 			$form_definition['d_fconfig']['label'] = 'Filter Configuration';
+			$form_definition['d_fconfig']['form']['d_fconfig_set']['options'] = parent::get_filter_sets('filters_sc_filter_set');
 			$form_definition['d_fconfig']['form']['d_fconfig_save_sec_title']['label'] = 'Add Filter Field';
 
 			// add new fields 

@@ -182,7 +182,9 @@ if(!class_exists('SP_Plugin_Index_Class') ) {
 			$singleton_functionUpper = strtoupper( $this->SP_Extension->singleton_function() );
 
 			defined( $singleton_functionUpper.'_DIRECTORY') || define($singleton_functionUpper.'_DIRECTORY', method_exists($this->SP_Extension, 'DIRECTORY') ? $this->SP_Extension->DIRECTORY() : $plugin_dir_path );
+			
 			// defined('EOWBC_BASE_DIRECTORY') || define('EOWBC_BASE_DIRECTORY', basename(__DIR__));
+			defined( $singleton_functionUpper.'_BASE_DIRECTORY') || define($singleton_functionUpper.'_BASE_DIRECTORY', method_exists($this->SP_Extension, 'BASE_DIRECTORY') ? $this->SP_Extension->BASE_DIRECTORY() : basename($plugin_dir_path) );
 			
 			// defined('EOWBC_NAME') || define('EOWBC_NAME', 'Woo Choice Plugin' /*$plugin_data['Name']*/);
 			defined( $singleton_functionUpper.'_NAME') || define($singleton_functionUpper.'_NAME', method_exists($this->SP_Extension, 'NAME') ? $this->SP_Extension->NAME() : $plugin_data['Name'] );
@@ -190,8 +192,9 @@ if(!class_exists('SP_Plugin_Index_Class') ) {
 			// defined('EOWBC_VERSION') || define('EOWBC_VERSION', $plugin_data['Version']);
 
 			// defined('EOWBC_ASSET_DIR') || define('EOWBC_ASSET_DIR', constant('EOWBC_DIRECTORY').'asset/');
-			defined( $singleton_functionUpper.'_ASSET_DIR') || define($singleton_functionUpper.'_ASSET_DIR', method_exists($this->SP_Extension, 'ASSET_DIR') ? $this->SP_Extension->ASSET_DIR() : constant($singleton_functionUpper.'_DIRECTORY').'asset/' );
+			defined( $singleton_functionUpper.'_ASSET_DIR') || define($singleton_functionUpper.'_ASSET_DIR', method_exists($this->SP_Extension, 'ASSET_DIR') ? $this->SP_Extension->ASSET_DIR() : constant($singleton_functionUpper.'_DIRECTORY').'assets/' );
 			// defined('EOWBC_ASSET_URL') || define('EOWBC_ASSET_URL', plugins_url(constant('EOWBC_BASE_DIRECTORY')).'/asset/');
+			defined( $singleton_functionUpper.'_ASSET_URL') || define($singleton_functionUpper.'_ASSET_URL', method_exists($this->SP_Extension, 'ASSET_URL') ? $this->SP_Extension->ASSET_URL() : plugins_url(constant($singleton_functionUpper.'_BASE_DIRECTORY')).'/assets/' );
 			
 			// defined('EOWBC_MIGRATION_DIR') || define('EOWBC_MIGRATION_DIR', constant('EOWBC_DIRECTORY').'application/migration/');			
 			// defined('EOWBC_TOOLS_DIR') || define('EOWBC_TOOLS_DIR', constant('EOWBC_DIRECTORY').'application/system/tools/');
@@ -200,6 +203,9 @@ if(!class_exists('SP_Plugin_Index_Class') ) {
 			// defined('EOWBC_LIBRARY_DIR') || define('EOWBC_LIBRARY_DIR', constant('EOWBC_DIRECTORY').'application/library/');
 			// defined('EOWBC_TEMPLATE_DIR') || define('EOWBC_TEMPLATE_DIR', constant('EOWBC_DIRECTORY').'application/view/');
 			defined( $singleton_functionUpper.'_TEMPLATE_DIR') || define($singleton_functionUpper.'_TEMPLATE_DIR', method_exists($this->SP_Extension, 'TEMPLATE_DIR') ? $this->SP_Extension->TEMPLATE_DIR() : constant($singleton_functionUpper.'_DIRECTORY').'application/view/' );
+
+			//new _TEMPLATE_DIR
+			defined( $singleton_functionUpper.'_TEMPLATE_DIR_EXTENDED') || define($singleton_functionUpper.'_TEMPLATE_DIR_EXTENDED', method_exists($this->SP_Extension, 'TEMPLATE_DIR_EXTENDED') ? $this->SP_Extension->TEMPLATE_DIR() : constant($singleton_functionUpper.'_DIRECTORY').'templates/' );
 
 			// defined('EOWBC_LOG_DIR') || define('EOWBC_LOG_DIR', constant('EOWBC_ASSET_DIR').'logs/');
 

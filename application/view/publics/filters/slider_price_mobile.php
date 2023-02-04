@@ -9,7 +9,7 @@
 	    <i class="dropdown icon"></i>		    
 	    Price		    
 		<?php if($reset): ?>
-		&nbsp; <span class="ui grey text" style="cursor: pointer;" onclick="reset_price(event,'<?php echo $min; ?>','<?php echo $max; ?>')">&nbsp;<u>reset</u></span>
+		&nbsp; <span class="ui grey text" style="cursor: pointer;" onclick="reset_price(event,'<?php echo $min; ?>','<?php echo $max; ?>')">&nbsp;<u><?php spext_lang("reset", 'woo-bundle-choice') ?></u></span>
 		<?php endif; ?>
 	</div>
   	<div class="content">	
