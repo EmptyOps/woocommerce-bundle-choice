@@ -51,6 +51,8 @@ $template = array(
     'type' => 'option',
     'preHTML' => esc_html( $variation_option_name ),
     'attr' => $attr,
+    // -- aa temp mukelu se @a
+    // 'class' => array('attached','enabled'),
 );
 
 	

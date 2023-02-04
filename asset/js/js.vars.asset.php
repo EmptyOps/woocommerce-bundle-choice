@@ -305,7 +305,7 @@ add_action('wp_footer',function(){
 			}
 
 			// jQuery(base_container_swatches).check_variations();
-			jQuery('.variations_form').trigger('check_variations');
+				jQuery('.variations_form').trigger('check_variations');
 
 			// ACTIVE_TODO temp. aa code temparary mukelo se variation_form mate @a 
 			window.setTimeout(function(){
@@ -316,12 +316,13 @@ add_action('wp_footer',function(){
 					 */
 					var VariationForm = function( $form ) {
 						var self = this;
+						console.log('show_variation [VariationForm] 1');
+						console.log($form);
+						console.log(this);
 
 						self.$form                = $form;
 						self.$attributeFields     = $form.find( '.variations select' );
 						self.$singleVariation     = $form.find( '.single_variation' );
-						console.log('show_variation loop');
-						console.log(self.$singleVariation);
 						self.$singleVariationWrap = $form.find( '.single_variation_wrap' );
 						self.$resetVariations     = $form.find( '.reset_variations' );
 						self.$product             = $form.closest( '.product' );
@@ -355,7 +356,6 @@ add_action('wp_footer',function(){
 
 						// Init after gallery.
 						setTimeout( function() {
-							console.log('add-to-cart-variation file');
 							$form.trigger( 'check_variations' );
 							$form.trigger( 'wc_variation_form', self );
 							self.loading = false;
@@ -478,9 +478,17 @@ add_action('wp_footer',function(){
 						var form              = event.data.variationForm,
 							attributes        = 'undefined' !== typeof chosenAttributes ? chosenAttributes : form.getChosenAttributes(),
 							currentAttributes = attributes.data;
+						console.log('show_variation [onFindVariation]');
+						console.log(attributes);
 
 						if ( attributes.count && attributes.count === attributes.chosenCount ) {
+							
+							console.log('show_variation [onFindVariation] 1');
+
 							if ( form.useAjax ) {
+								
+								console.log('show_variation [onFindVariation] 1 if');
+
 								if ( form.xhr ) {
 									form.xhr.abort();
 								}
@@ -515,6 +523,9 @@ add_action('wp_footer',function(){
 									}
 								} );
 							} else {
+
+								console.log('show_variation [onFindVariation] 1 else');
+
 								form.$form.trigger( 'update_variation_values' );
 
 								var matching_variations = form.findMatchingVariations( form.variationData, currentAttributes ),
@@ -551,6 +562,9 @@ add_action('wp_footer',function(){
 					 * Triggered when a variation has been found which matches all attributes.
 					 */
 					VariationForm.prototype.onFoundVariation = function( event, variation ) {
+
+						console.log('show_variation [onFoundVariation]');
+
 						var form           = event.data.variationForm,
 							$sku           = form.$product.find( '.product_meta' ).find( '.sku' ),
 							$weight        = form.$product.find(
@@ -629,12 +643,13 @@ add_action('wp_footer',function(){
 
 						// Reveal
 						if ( form.$singleVariation.text().trim() ) {
-							console.log('show_variation trigger 1');
+	
+							console.log('show_variation [onFoundVariation] if');
 							console.log(form.$singleVariation);
-							console.log(form);
+		
 							form.$singleVariation.slideDown( 200 ).trigger( 'show_variation', [ variation, purchasable ] );
 						} else {
-							console.log('show_variation trigger 11');
+							console.log('show_variation [onFoundVariation] else');
 							form.$singleVariation.show().trigger( 'show_variation', [ variation, purchasable ] );
 						}
 					};
@@ -682,6 +697,8 @@ add_action('wp_footer',function(){
 							return;
 						}
 
+						console.log('show_variation [onUpdateAttributes]');
+
 						// Loop through selects and disable/enable options based on selections.
 						form.$attributeFields.each( function( index, el ) {
 							var current_attr_select     = $( el ),
@@ -717,22 +734,43 @@ add_action('wp_footer',function(){
 
 							var variations = form.findMatchingVariations( form.variationData, checkAttributes );
 
+							// console.log('show_variation [onUpdateAttributes] variations');
+							// console.log(variations);
+
 							// Loop through variations.
 							for ( var num in variations ) {
 								if ( typeof( variations[ num ] ) !== 'undefined' ) {
 									var variationAttributes = variations[ num ].attributes;
+		
+									// console.log('show_variation [onUpdateAttributes] loop variationAttributes');
+									// console.log(variationAttributes);
 
 									for ( var attr_name in variationAttributes ) {
+
+										// console.log('show_variation [onUpdateAttributes] loop variationAttributes loop');
+
 										if ( variationAttributes.hasOwnProperty( attr_name ) ) {
+
+											// console.log('show_variation [onUpdateAttributes] loop variationAttributes loop if');
+
 											var attr_val         = variationAttributes[ attr_name ],
 												variation_active = '';
 
 											if ( attr_name === current_attr_name ) {
+
+												// console.log('show_variation [onUpdateAttributes] loop variationAttributes loop if if');
+
 												if ( variations[ num ].variation_is_active ) {
+													
+													// console.log('show_variation [onUpdateAttributes] loop variationAttributes loop if if if1');
+
 													variation_active = 'enabled';
 												}
 
 												if ( attr_val ) {
+													
+													// console.log('show_variation [onUpdateAttributes] loop variationAttributes loop if if if2');
+
 													// Decode entities.
 													attr_val = $( '<div/>' ).html( attr_val ).text();
 
@@ -740,6 +778,9 @@ add_action('wp_footer',function(){
 													// TEXT values rather than any HTML entities.
 													var $option_elements = new_attr_select.find( 'option' );
 													if ( $option_elements.length ) {
+														
+														// console.log('show_variation [onUpdateAttributes] loop variationAttributes loop if if if2 if');
+
 														for (var i = 0, len = $option_elements.length; i < len; i++) {
 															var $option_element = $( $option_elements[i] ),
 																option_value = $option_element.val();
@@ -751,6 +792,9 @@ add_action('wp_footer',function(){
 														}
 													}
 												} else {
+													
+													// console.log('show_variation [onUpdateAttributes] loop variationAttributes loop if if else');
+
 													// Attach all apart from placeholder.
 													new_attr_select.find( 'option:gt(0)' ).addClass( 'attached ' + variation_active );
 												}
@@ -891,6 +935,10 @@ add_action('wp_footer',function(){
 					 * Function to call wc_variation_form on jquery selector.
 					 */
 					$.fn.wc_variation_form = function() {
+						
+						console.log('show_variation [wc_variation_form]');
+						console.log(this);
+
 						new VariationForm( this );
 						return this;
 					};
@@ -1056,6 +1104,8 @@ add_action('wp_footer',function(){
 					$(function() {
 						if ( typeof wc_add_to_cart_variation_params !== 'undefined' ) {
 							$( '.variations_form' ).each( function() {
+								console.log('show_variation [load] 1 loop');
+								// console.log(this);
 								$( this ).wc_variation_form();
 							});
 						}
@@ -1135,11 +1185,10 @@ add_action('wp_footer',function(){
 
 				})( jQuery, window, document );
 			},1000);
-	      jQuery(document).ajaxComplete(function (event, request, settings) {
-				window.setTimeout(function(){
-					
-					jQuery('.variations_form').trigger('check_variations');
 
+	      jQuery(document).ajaxComplete(function (event, request, settings) {
+
+				window.setTimeout(function(){
 					/*global wc_add_to_cart_variation_params */
 					;(function ( $, window, document, undefined ) {
 						/**
@@ -1147,12 +1196,13 @@ add_action('wp_footer',function(){
 						 */
 						var VariationForm = function( $form ) {
 							var self = this;
+							console.log('show_variation [VariationForm]');
+							// console.log($form);
+							// console.log(this);
 
 							self.$form                = $form;
 							self.$attributeFields     = $form.find( '.variations select' );
 							self.$singleVariation     = $form.find( '.single_variation' );
-							console.log('show_variation loop 2');
-							console.log(self.$singleVariation);
 							self.$singleVariationWrap = $form.find( '.single_variation_wrap' );
 							self.$resetVariations     = $form.find( '.reset_variations' );
 							self.$product             = $form.closest( '.product' );
@@ -1186,13 +1236,10 @@ add_action('wp_footer',function(){
 
 							// Init after gallery.
 							setTimeout( function() {
-								console.log('add-to-cart-variation file');
 								$form.trigger( 'check_variations' );
 								$form.trigger( 'wc_variation_form', self );
 								self.loading = false;
 							}, 100 );
-							console.log('show_variation loop 2 0');
-							console.log(self.$singleVariation);
 						};
 
 						/**
@@ -1286,9 +1333,6 @@ add_action('wp_footer',function(){
 						 */
 						VariationForm.prototype.onResetDisplayedVariation = function( event ) {
 							var form = event.data.variationForm;
-							console.log('show_variation loop 2 1');
-							console.log(form.$singleVariation);
-
 							form.$product.find( '.product_meta' ).find( '.sku' ).wc_reset_content();
 							form.$product
 								.find( '.product_weight, .woocommerce-product-attributes-item--weight .woocommerce-product-attributes-item__value' )
@@ -1314,13 +1358,17 @@ add_action('wp_footer',function(){
 							var form              = event.data.variationForm,
 								attributes        = 'undefined' !== typeof chosenAttributes ? chosenAttributes : form.getChosenAttributes(),
 								currentAttributes = attributes.data;
-							
-							console.log('show_variation 2 onFindVariation');
-							console.log(form.$singleVariation);
+							console.log('show_variation [onFindVariation]');
 							console.log(attributes);
 
 							if ( attributes.count && attributes.count === attributes.chosenCount ) {
+								
+								console.log('show_variation [onFindVariation] 1');
+
 								if ( form.useAjax ) {
+									
+									console.log('show_variation [onFindVariation] 1 if');
+
 									if ( form.xhr ) {
 										form.xhr.abort();
 									}
@@ -1333,7 +1381,6 @@ add_action('wp_footer',function(){
 										data: currentAttributes,
 										success: function( variation ) {
 											if ( variation ) {
-												console.log('show_variation 2 onFindVariation success');
 												form.$form.trigger( 'found_variation', [ variation ] );
 											} else {
 												form.$form.trigger( 'reset_data' );
@@ -1357,16 +1404,21 @@ add_action('wp_footer',function(){
 									} );
 								} else {
 
+									console.log('show_variation [onFindVariation] 1 else');
+
 									form.$form.trigger( 'update_variation_values' );
 
 									var matching_variations = form.findMatchingVariations( form.variationData, currentAttributes ),
 										variation           = matching_variations.shift();
 
-									console.log('show_variation 2 onFindVariation else');
+									console.log('show_variation [onFindVariation] 1 else variation');
+									console.log(form.$form);
 									console.log(variation);
-
+									
 									if ( variation ) {
-										console.log('show_variation 2 onFindVariation else inner');
+										
+										console.log('show_variation [onFindVariation] 1 else if');
+
 										form.$form.trigger( 'found_variation', [ variation ] );
 									} else {
 										form.$form.trigger( 'reset_data' );
@@ -1397,6 +1449,9 @@ add_action('wp_footer',function(){
 						 * Triggered when a variation has been found which matches all attributes.
 						 */
 						VariationForm.prototype.onFoundVariation = function( event, variation ) {
+
+							console.log('show_variation [onFoundVariation]');
+
 							var form           = event.data.variationForm,
 								$sku           = form.$product.find( '.product_meta' ).find( '.sku' ),
 								$weight        = form.$product.find(
@@ -1410,9 +1465,6 @@ add_action('wp_footer',function(){
 								variation_id   = '',
 								template       = false,
 								$template_html = '';
-
-							console.log('show_variation loop 2 2');
-							console.log(form.$singleVariation);
 
 							if ( variation.sku ) {
 								$sku.wc_set_content( variation.sku );
@@ -1478,12 +1530,13 @@ add_action('wp_footer',function(){
 
 							// Reveal
 							if ( form.$singleVariation.text().trim() ) {
-								console.log('show_variation trigger 2 3');
+		
+								console.log('show_variation [onFoundVariation] 2 if');
 								console.log(form.$singleVariation);
-								console.log(form);
+			
 								form.$singleVariation.slideDown( 200 ).trigger( 'show_variation', [ variation, purchasable ] );
 							} else {
-								console.log('show_variation trigger 22');
+								console.log('show_variation [onFoundVariation] else');
 								form.$singleVariation.show().trigger( 'show_variation', [ variation, purchasable ] );
 							}
 						};
@@ -1565,23 +1618,44 @@ add_action('wp_footer',function(){
 								checkAttributes[ current_attr_name ] = '';
 
 								var variations = form.findMatchingVariations( form.variationData, checkAttributes );
+	
+								console.log('show_variation [onUpdateAttributes] variations');
+								console.log(variations);
 
 								// Loop through variations.
 								for ( var num in variations ) {
 									if ( typeof( variations[ num ] ) !== 'undefined' ) {
 										var variationAttributes = variations[ num ].attributes;
+			
+										// console.log('show_variation [onUpdateAttributes] loop variationAttributes');
+										// console.log(variationAttributes);
 
 										for ( var attr_name in variationAttributes ) {
+
+											// console.log('show_variation [onUpdateAttributes] loop variationAttributes loop');
+
 											if ( variationAttributes.hasOwnProperty( attr_name ) ) {
+
+												// console.log('show_variation [onUpdateAttributes] loop variationAttributes loop if');
+
 												var attr_val         = variationAttributes[ attr_name ],
 													variation_active = '';
 
 												if ( attr_name === current_attr_name ) {
+
+													// console.log('show_variation [onUpdateAttributes] loop variationAttributes loop if if');
+
 													if ( variations[ num ].variation_is_active ) {
+														
+														// console.log('show_variation [onUpdateAttributes] loop variationAttributes loop if if if1');
+
 														variation_active = 'enabled';
 													}
 
 													if ( attr_val ) {
+														
+														// console.log('show_variation [onUpdateAttributes] loop variationAttributes loop if if if2');
+
 														// Decode entities.
 														attr_val = $( '<div/>' ).html( attr_val ).text();
 
@@ -1589,6 +1663,9 @@ add_action('wp_footer',function(){
 														// TEXT values rather than any HTML entities.
 														var $option_elements = new_attr_select.find( 'option' );
 														if ( $option_elements.length ) {
+															
+															// console.log('show_variation [onUpdateAttributes] loop variationAttributes loop if if if2 if');
+
 															for (var i = 0, len = $option_elements.length; i < len; i++) {
 																var $option_element = $( $option_elements[i] ),
 																	option_value = $option_element.val();
@@ -1600,6 +1677,9 @@ add_action('wp_footer',function(){
 															}
 														}
 													} else {
+														
+														// console.log('show_variation [onUpdateAttributes] loop variationAttributes loop if if else');
+
 														// Attach all apart from placeholder.
 														new_attr_select.find( 'option:gt(0)' ).addClass( 'attached ' + variation_active );
 													}
@@ -1641,8 +1721,10 @@ add_action('wp_footer',function(){
 								// Detach unattached.
 								new_attr_select.find( 'option' + option_gt_filter + ':not(.attached)' ).remove();
 
+// if(false){
 								// Finally, copy to DOM and set value.
 								current_attr_select.html( new_attr_select.html() );
+// }
 								current_attr_select.find( 'option' + option_gt_filter + ':not(.enabled)' ).prop( 'disabled', true );
 
 								// Choose selected value.
@@ -1671,13 +1753,15 @@ add_action('wp_footer',function(){
 							var count  = 0;
 							var chosen = 0;
 
-							console.log('show_variation 2 getChosenAttributes');
+							console.log('show_variation [getChosenAttributes]');
+							console.log(this.$attributeFields);
+							console.log(this);
 
 							this.$attributeFields.each( function() {
 								var attribute_name = $( this ).data( 'attribute_name' ) || $( this ).attr( 'name' );
 								var value          = $( this ).val() || '';
 
-								console.log('show_variation 2 getChosenAttributes each');
+								console.log('show_variation [getChosenAttributes] loop');
 								console.log(value);
 
 								if ( value.length > 0 ) {
@@ -1745,6 +1829,10 @@ add_action('wp_footer',function(){
 						 * Function to call wc_variation_form on jquery selector.
 						 */
 						$.fn.wc_variation_form = function() {
+							
+							console.log('show_variation [wc_variation_form]');
+							console.log(this);
+
 							new VariationForm( this );
 							return this;
 						};
@@ -1910,6 +1998,8 @@ add_action('wp_footer',function(){
 						$(function() {
 							if ( typeof wc_add_to_cart_variation_params !== 'undefined' ) {
 								$( '.variations_form' ).each( function() {
+									console.log('show_variation [load] loop');
+									// console.log(this);
 									$( this ).wc_variation_form();
 								});
 							}

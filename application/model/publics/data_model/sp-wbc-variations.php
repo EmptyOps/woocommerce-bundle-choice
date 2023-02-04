@@ -1308,6 +1308,11 @@ class SP_WBC_Variations extends SP_Variations {
 			)
 		);
 
+		if( wbc()->sanitize->get('is_test') == 1 ){
+
+			wbc_pr('sp-wbc-variations [prepare_woo_dropdown_attribute_html_data] attribute');
+			wbc_pr($args['hook_callback_args']['hook_args']['attribute']);
+		}
 		// ACTIVE_TODO here we should be setting the values from the woo_dropdown data args and not from hook callback args, but still check the plugin we were exploring to see if there is any reason to do it other way around. -- to b 
 		$data['woo_dropdown_attribute_html_data']['type']                  = $args['hook_callback_args']['hook_args'][ 'type' ];
 		/*ACTIVE_TODO_OC_START
