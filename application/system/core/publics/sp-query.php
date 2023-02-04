@@ -364,6 +364,17 @@ class SP_Query {
 		elseif ( $field == '_attribute') {
 			return array_filter(explode(',',wbc()->sanitize->{$input_method_small}('_attribute') ));
 		}
+		elseif ( $field == 'sku' ) {
+
+			if(wbc()->sanitize->get('is_test') == 1) {
+				
+				wbc_pr("SP_Query tax_query_data");
+				wbc_pr(wbc()->sanitize->{$input_method_small}('sku'));
+				wbc_pr(explode(',',wbc()->sanitize->{$input_method_small}('sku') ));
+			}
+			
+			return array_filter(explode(',',wbc()->sanitize->{$input_method_small}('sku') ));
+		}
 
 		return null;			        	
 	}
@@ -523,21 +534,28 @@ class SP_Query {
     	return $term;
     }
 
-    public function attribute_lists($term,$list){    	
+    public function attribute_lists($term,$list,$is_preserve_keys = false){    	
     	$new_list = array();
     	if(!empty($term) and !empty($list) and is_array($list)){    		
-    		foreach ($list as $list_item) {
+    		foreach ($list as $l_key=>$list_item) {
     			$term_obj = $this->get_term($term,$list_item);    			   			
     			//	TODO @mahesh in below condition there seems a bug, it should be checking the empty case for term_obj
     			if(!empty($term)){
-    				$new_list[]= $term_obj->name;    				
+
+    				if($is_preserve_keys) {
+
+   		 				$new_list[$l_key]= $term_obj->name;    				
+       				} else {
+
+       					$new_list[]= $term_obj->name;
+       				}
     			}
     		}
     	} 	    	
     	return $new_list;
     }
 
-    public function attribute_range($term,$min,$max) {
+    public function attribute_range($term,$min,$max,$is_return_slugs_also=false) {
 
         $list=array();
         $list=get_terms(array('taxonomy'=>$term,'hide_empty'=>FALSE));                        
@@ -547,7 +565,19 @@ class SP_Query {
         });
         $_min=array_search($min,array_keys($list_slug));
         $_max=array_search($max,array_keys($list_slug));                              
-        $list = array_slice(array_values($list_slug),$_min,($_max-$_min)+1);        
+        $list = array_slice(array_values($list_slug),$_min,($_max-$_min)+1);  
+
+        $slugs = null;
+        if($is_return_slugs_also) {
+
+	        $slugs = array_slice(array_keys($list_slug),$_min,($_max-$_min)+1);  
+        }
+
+        if($is_return_slugs_also) {
+
+        	return array($list, $slugs);
+		}
+        
         return $list;
     }  
 }
