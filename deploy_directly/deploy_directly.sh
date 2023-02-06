@@ -12,14 +12,14 @@ if [[ "$yn" != "YES_AGAIN" ]]; then
     exit; 
 fi
 
-read -p "Please confirm readme.txt file update? please enter YES in capital" yn
+read -p "Please confirm readme.txt file is updated? please enter YES in capital" yn
 if [[ "$yn" != "YES" ]]; then
     echo "Confirmation failed"
     exit; 
 fi
 
-read -p "Please confirm readme.txt file update? Please confirm again. Please enter YES_AGAIN in capital" yn
-if [[ "$yn" != "YES_AGAIN" ]]; then
+read -p "Please confirm readme.txt file is updated? Please confirm again. Please enter YES_UPDATED in capital" yn
+if [[ "$yn" != "YES_UPDATED" ]]; then
     echo "Confirmation failed"
     exit; 
 fi
@@ -44,18 +44,6 @@ PLUGIN_BUILDS_PATH="$PROJECT_ROOT/build"
 PLUGIN_BUILD_CONFIG_PATH="$PROJECT_ROOT/build-cfg"
 VERSION=$(php -f "$PLUGIN_BUILD_CONFIG_PATH/utils/version.php")
 
-echo WP_ORG_USERNAME 
-echo PLUGIN
-echo PROJECT_ROOT
-echo PLUGIN_BUILDS_PATH
-echo PLUGIN_BUILD_CONFIG_PATH
-echo VERSION
-
-exit;
-
-
-
-
 # Check if the tag exists for the version we are building
 TAG=$(svn ls "https://plugins.svn.wordpress.org/$PLUGIN/tags/$VERSION")
 error=$?
@@ -79,6 +67,7 @@ rm -fR "*"
     # {'application','asset','languages','index.php','README.txt','uninstall.php','woo-bundle-choice.php'}
 # exclude_list="{"
 exclude_list=()
+shopt -s dotglob
 for f in "$PROJECT_ROOT"/*; do
     bname=$(basename "$f")
         
