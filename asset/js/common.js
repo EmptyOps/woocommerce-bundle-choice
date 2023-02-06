@@ -2343,8 +2343,8 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
         } else {
 
             console.log("on_click_listener else");
-            // console.log(_this.#configs.mouse_event_name);
-            // console.log(jQuery(element));
+            console.log(_this.#configs.mouse_event_name);
+            console.log(jQuery(element));
 
             jQuery(element).on(_this.#configs.mouse_event_name, 'li:not(.radio-variable-item):not(.spui-wbc-swatches-variable-item-more)', function (event) {
 

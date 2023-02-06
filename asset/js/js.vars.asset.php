@@ -1188,7 +1188,9 @@ add_action('wp_footer',function(){
 
 	      jQuery(document).ajaxComplete(function (event, request, settings) {
 
-				window.setTimeout(function(){
+				if(settings.url.indexOf('/product-category/') >= 0){
+
+					window.setTimeout(function(){
 					/*global wc_add_to_cart_variation_params */
 					;(function ( $, window, document, undefined ) {
 						/**
@@ -2079,6 +2081,7 @@ add_action('wp_footer',function(){
 
 					})( jQuery, window, document );
 				},1000);
+	      	}
 	      });
 
     	});
