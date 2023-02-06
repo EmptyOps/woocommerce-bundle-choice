@@ -1274,6 +1274,10 @@ class SP_WBC_Variations extends SP_Variations {
 
 	public static function prepare_woo_dropdown_attribute_html_data ($data,$args = array()){
 
+		if( wbc()->sanitize->get('is_test') == 1 ) {
+			wbc_pr('sp-wbc-variations [prepare_woo_dropdown_attribute_html_data]');
+		}
+
 		$data['woo_dropdown_attribute_html_data'] = array();
 		$attributes = $data['attributes']; /*$product->get_variation_attributes();*/
         // commented on 24-10-2022 becose was unussed
@@ -1304,6 +1308,11 @@ class SP_WBC_Variations extends SP_Variations {
 			)
 		);
 
+		if( wbc()->sanitize->get('is_test') == 1 ){
+
+			wbc_pr('sp-wbc-variations [prepare_woo_dropdown_attribute_html_data] attribute');
+			wbc_pr($args['hook_callback_args']['hook_args']['attribute']);
+		}
 		// ACTIVE_TODO here we should be setting the values from the woo_dropdown data args and not from hook callback args, but still check the plugin we were exploring to see if there is any reason to do it other way around. -- to b 
 		$data['woo_dropdown_attribute_html_data']['type']                  = $args['hook_callback_args']['hook_args'][ 'type' ];
 		/*ACTIVE_TODO_OC_START
@@ -1447,6 +1456,11 @@ class SP_WBC_Variations extends SP_Variations {
 						// ACTIVE_TODO right now we are managing selected attribute from the common woo dropdown attribute template but in future we should managing from the data layer here.
 						$data['woo_dropdown_attribute_html_data']['options_loop_html_attr'][$term->slug] = array('data-value'=>esc_attr( $term->slug ), 'data-title'=>$data['woo_dropdown_attribute_html_data']['options_loop_option_name'][$term->slug] );
 
+						if( wbc()->sanitize->get('is_test') == 1 ) {
+							wbc_pr('sp-wbc-variations [prepare_woo_dropdown_attribute_html_data] if data-value');
+							wbc_pr($data['woo_dropdown_attribute_html_data']['options_loop_html_attr'][$term->slug]);
+						}
+
 						/*echo '<option value="' . esc_attr( $term->slug ) . '" ' . selected( sanitize_title( $args['selected'] ), $term->slug, false ) . '>' . esc_html( \eo\wbc\system\core\data_model\SP_Attribute()::instance()->variation_option_name( $term_name, $term, $attribute, $product) ) . '</option>';*/
 					}
 				}
@@ -1462,6 +1476,10 @@ class SP_WBC_Variations extends SP_Variations {
 				$data['woo_dropdown_attribute_html_data']['options_loop_class'] = array();
 				$data['woo_dropdown_attribute_html_data']['options_loop_html_attr'] = array();
 				foreach ( $data['woo_dropdown_attribute_html_data']['options'] as $option ) {
+
+					if( wbc()->sanitize->get('is_test') == 1 ) {
+						wbc_pr('sp-wbc-variations [prepare_woo_dropdown_attribute_html_data] else loop');
+					}
 
 					if(!empty($data['woo_dropdown_attribute_html_data']['query_paramas_options']) && in_array($option, $data['woo_dropdown_attribute_html_data']['query_paramas_options'])) {
 
@@ -1495,6 +1513,10 @@ class SP_WBC_Variations extends SP_Variations {
 	}
 
 	public static function prepare_variable_item_data ($data,$args = array()){
+
+		if( wbc()->sanitize->get('is_test') == 1 ) {
+			wbc_pr('sp-wbc-variations [prepare_variable_item_data]');
+		}
 
 		$data['variable_item_data'] = array();
 
@@ -1617,6 +1639,10 @@ class SP_WBC_Variations extends SP_Variations {
 				$data['variable_item_data']['options_loop_html_attr'] = array();
 				foreach ( $data['variable_item_data']['terms'] as $term ) {
 					
+					if( wbc()->sanitize->get('is_test') == 1 ) {
+						wbc_pr('sp-wbc-variations [prepare_variable_item_data] if loop');
+					}
+
 					if ( in_array( $term->slug, $data['woo_dropdown_attribute_html_data']['options'], true ) ) {
 
 						if(!empty($data['woo_dropdown_attribute_html_data']['query_paramas_options']) && in_array($term->slug, $data['woo_dropdown_attribute_html_data']['query_paramas_options']) ) {
@@ -1645,6 +1671,11 @@ class SP_WBC_Variations extends SP_Variations {
 
 						// ACTIVE_TODO right now we are managing selected attribute from the common woo dropdown attribute template but in future we should managing from the data layer here.
 						$data['variable_item_data']['options_loop_html_attr'][$term->slug] = array( 'data-value' => esc_html( $term->slug ), 'data-title' => esc_html( $term->slug ) );
+
+						if( wbc()->sanitize->get('is_test') == 1 ) {
+							wbc_pr('sp-wbc-variations [prepare_variable_item_data] if data-value');
+							wbc_pr($data['variable_item_data']['options_loop_html_attr'][$term->slug]);
+						}
 
 						/*ACTIVE_TODO_OC_START
 						--------- a etlu wvs_default_variable_item alg che

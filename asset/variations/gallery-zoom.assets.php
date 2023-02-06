@@ -269,6 +269,16 @@ add_action( 'wp_enqueue_scripts' ,function(){
 			}*/
 
 
+			.Product_Left_Wrapper_Plugin_Images .imagezoomsl_zoom_container{
+				min-height: 454px;
+			}
+
+
+			@media(max-width:767px){
+				.Product_Left_Wrapper_Plugin_Images .imagezoomsl_zoom_container{
+					min-height: auto;
+				}
+			}
 
 			/*------Responsive------*/
 			@media(max-width:480px){

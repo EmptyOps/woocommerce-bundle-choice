@@ -17,6 +17,7 @@ class Eowbc_Queue extends Eowbc_Model {
 	private function __construct() {
 		
 	}
+
 	public function get( $form_definition, $args = null ) {
 		
 		$page_slug = wbc()->sanitize->get('page');
@@ -126,6 +127,7 @@ class Eowbc_Queue extends Eowbc_Model {
 	    }
 	    return $form_definition; 
 	}
+
 	public function save( $form_definition, $is_auto_insert_for_template=false, $args = null ) {
 		
 		wbc()->sanitize->clean($form_definition);
