@@ -1136,7 +1136,9 @@ add_action('wp_footer',function(){
 				})( jQuery, window, document );
 			},1000);
 	      jQuery(document).ajaxComplete(function (event, request, settings) {
-				window.setTimeout(function(){
+				if(settings.url.indexOf('/product-category/') >= 0){
+					
+					window.setTimeout(function(){
 					
 					jQuery('.variations_form').trigger('check_variations');
 
@@ -1989,6 +1991,7 @@ add_action('wp_footer',function(){
 
 					})( jQuery, window, document );
 				},1000);
+				}
 	      });
 
     	});
