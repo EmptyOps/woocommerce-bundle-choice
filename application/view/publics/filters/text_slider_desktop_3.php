@@ -5,7 +5,7 @@
 */
 
 ?>
-	<div class="<?php echo $width_class; ?>" data-tab-group="<?php _e($tab_set); ?>">
+	<div class="spui-semantic-slider-column <?php echo $width_class; ?>" data-tab-group="<?php _e($tab_set); ?>">
 		<p>
 			<span class="ui header"><?php echo $filter['title']; ?></span>
 			<?php if($help): ?>
