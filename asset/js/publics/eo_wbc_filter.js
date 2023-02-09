@@ -1914,6 +1914,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		console.log(render_container);
 		console.log(html);
     	jQuery(render_container).html(html);
+    	
     };
     
     var slider_change_event = function(selector, element){
@@ -3596,7 +3597,7 @@ window.document.splugins.wbc.filter_sets.core = function( configs ) {
 		var on_filter_set_click_listener_callback = null ;
 
 		jQuery('.filter_setting_advance_two_tabs .item').on('click',function(event){
-
+			console.log('filter_sets filter_set_click_listener on_click');
 			on_filter_set_click(this);
 		});
 
@@ -3683,39 +3684,50 @@ window.document.splugins.wbc.filter_sets.core = function( configs ) {
 		        eval(reset_script);
 		      }        
 
-		      // <?php if(wp_is_mobile() and !wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile')): ?>
-		      if((window.document.splugins.common.is_mobile) && !(_this.configs.filter_setting_alternate_mobile)){
+		      if(eo_wbc_object.wbc_is_mobile_by_page_sections != 1) {
 
-		        if(jQuery(element/*this*/).hasClass('active')){
-		      
-		          jQuery(element/*this*/).trigger('click');
-		        }
-		      
-		        reset_script = jQuery(element/*this*/).next().find('[data-reset]').data('reset');
-		        if(typeof(reset_script)!==typeof(undefined) && reset_script!=''){
-		      
-		          eval(reset_script);
-		        }        
+			      console.log('filter filter_set_click');
+			      console.log(_this.configs.filter_setting_alternate_mobile);
+			      // <?php if(wp_is_mobile() and !wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile')): ?>
+			      if((window.document.splugins.common.is_mobile) && !(_this.configs.filter_setting_alternate_mobile)){
+
+			      	console.log('filter filter_set_click 1');
+			      	console.log(element);
+
+			        if(jQuery(element/*this*/).hasClass('active')){
+			      
+			          jQuery(element/*this*/).trigger('click');
+			        }
+			      
+			        reset_script = jQuery(element/*this*/).next().find('[data-reset]').data('reset');
+			        if(typeof(reset_script)!==typeof(undefined) && reset_script!=''){
+			      
+			          eval(reset_script);
+			        }        
+			      }
+
+			      // <?php if(wp_is_mobile() and wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile')): ?>
+			      if((window.document.splugins.common.is_mobile) && (_this.configs.filter_setting_alternate_mobile)){
+
+			      	console.log('filter filter_set_click 2');
+			      	console.log(element);
+
+			        if(jQuery(element/*this*/).hasClass('active')){
+			      
+			          jQuery(element/*this*/).trigger('click');
+			        }          
+			        
+			        reset_script = jQuery(element/*this*/).next().find('[data-reset]').data('reset');
+			        if(typeof(reset_script)!==typeof(undefined) && reset_script!=''){
+			      
+			          eval(reset_script);
+			        }  
+
+			        jQuery(".close_sticky_mob_filter").trigger('click');
+
+			      }  
+
 		      }
-
-		      // <?php if(wp_is_mobile() and wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile')): ?>
-		      if((window.document.splugins.common.is_mobile) && (_this.configs.filter_setting_alternate_mobile)){
-
-		        if(jQuery(element/*this*/).hasClass('active')){
-		      
-		          jQuery(element/*this*/).trigger('click');
-		        }          
-		        
-		        reset_script = jQuery(element/*this*/).next().find('[data-reset]').data('reset');
-		        if(typeof(reset_script)!==typeof(undefined) && reset_script!=''){
-		      
-		          eval(reset_script);
-		        }  
-
-		        jQuery(".close_sticky_mob_filter").trigger('click');
-
-		      }  
-
 		      
 		    });        	
           

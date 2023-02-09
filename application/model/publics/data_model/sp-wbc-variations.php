@@ -86,9 +86,19 @@ class SP_WBC_Variations extends SP_Variations {
 				// return absint( get_option( 'threshold' ) );\
 				// ACTIVE_TODO_OC_END
 
+				if( wbc()->sanitize->get('is_test') == 1 ) {
+
+					wbc_pr("SP_WBC_Variations fetch_data toDefinition woocommerce_ajax_variation_threshold");
+				}
+
+				// ACTIVE_TODO_OC_START
+				// ACTIVE_TODO temp. below value is temparary and may be we simply need to keep it to 30 which is less than default of woo which is 50. 
+				// ACTIVE_TODO_OC_END
+				$int = 100;
+
 				return $int;
 
-			}, 8, 2);
+			}, 8, 1/*2*/);
 
 			add_filter('default_sp_variations_swatches_variation_attribute_options_html', function($status, $hook_args){
 
