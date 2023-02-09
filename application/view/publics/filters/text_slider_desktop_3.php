@@ -17,7 +17,7 @@
 		</p>
 
 		<div class="ui tiny form">
-		  <div class="three fields">
+		  <div class="three fields" style="-ms-flex-wrap:nowrap !important; flex-wrap:nowrap !important;">
 		    <div class="field">	      
 		      <input value="<?php echo ($filter['seprator']=='.'?$filter['min_value']['name']:str_replace('.',',',$filter['min_value']['name'])); ?>" type="text" class="text_slider_<?php echo $filter['slug'] ?> aligned left" name="text_min_<?php echo $filter['slug'] ?>">
 		    </div>

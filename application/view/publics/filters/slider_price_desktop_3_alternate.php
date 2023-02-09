@@ -14,7 +14,7 @@
 	</p>							
 	<div class="ui range slider text_slider wbc" id="text_slider_price" data-min="<?php echo $min; ?>" data-max="<?php echo $max; ?>" data-slug="price" data-sep="<?php _e($seprator); ?>" data-reset="reset_price(new Event('click'),'<?php echo $min; ?>','<?php echo $max; ?>')" data-prefix="<?php _e($prefix); ?>" data-postfix="<?php _e($postfix); ?>"></div>
 	<div class="ui tiny form">
-	  <div class="three fields">
+	  <div class="three fields" style="-ms-flex-wrap:nowrap !important; flex-wrap:nowrap !important;">
 	    <div class="field">	      
 	      <input value="<?php echo $prefix.$min.$postfix; ?>" type="text" class="text_slider_price aligned left" name="text_min_price" data-sep="<?php _e($seprator); ?>">
 	    </div>
