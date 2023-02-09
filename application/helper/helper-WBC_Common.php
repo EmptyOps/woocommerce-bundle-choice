@@ -155,9 +155,20 @@ class WBC_Common {
 		//TODO yet to implement optional arg force_debug
 
 		if( !is_array($ar) )
-		{
+		{	
+			if(is_object($ar)) {
+
+				echo "<pre>";
+			}
+
 			// echo 'the common helper pr function says the var provided is not an array. still var dumping.<br><br>';
 			$this->var_dump($ar,$force_debug,$die);
+
+			if(is_object($ar)) {
+
+				echo "</pre>";
+			}
+
 			return false;
 		}
 
