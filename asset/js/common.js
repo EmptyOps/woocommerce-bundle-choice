@@ -3039,8 +3039,8 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
     #preprocess_data(data) {
 
         var _this = this;
-         console.log("gim [preprocess_data]");
-         console.log( data.product_variations ); 
+         // console.log("gim [preprocess_data]");
+         // console.log( data.product_variations ); 
 
         data.types = [];
         jQuery( data.product_variations ).each(function (i, variation) {
@@ -3420,6 +3420,9 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
                     var template_var = _this.#template( _this.#configs.template.zoom.id+'_'+/*index_inner*/type_template, templating_lib );
 
                     zoom_inner_html += _this.#apply_template_data(template_var, image, templating_lib);
+                    
+                    console.log("gim [process_images_template] images_loop if if " + index_inner + 'after');
+                    console.log(zoom_inner_html);
 
                 }else{
 
@@ -3439,6 +3442,8 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
         // }).join('');
         });
 
+        console.log("gim [process_images_template] $zoom_container");
+        console.log(_this.#$zoom_container);
 
         if (hasGallery) {
 
