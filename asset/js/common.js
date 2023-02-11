@@ -1694,7 +1694,7 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
 
     }
 
-    #process_attribute_template(type, element, mode = null) {
+    #process_attribute_template(type, element, mode = null, is_reusability_recursion = false) {
 
         console.log('vs [process_attribute_template]');
 
@@ -1856,11 +1856,14 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
         // });
         console.log('vs [process_attribute_template] 01');
 
-        _this.#on_click_listener(type, element, data.reselect_clear, data);
+        if(is_reusability_recursion === false) {
+ 
+            _this.#on_click_listener(type, element, data.reselect_clear, data);
 
-        _this.#on_keydown_listener(type, element);   
+            _this.#on_keydown_listener(type, element);   
 
-        _this.#on_change_listener(type, element, data.reselect_clear, null, data); 
+            _this.#on_change_listener(type, element, data.reselect_clear, null, data); 
+        }
 
     }
 
@@ -2110,7 +2113,7 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
           //   // $(this).trigger('wvs-items-updated');
           // });
             
-          _this.#process_attribute_template(type, element, 'change');  
+          _this.#process_attribute_template(type, element, 'change', true);  
 
           _this.#on_change(type, element, event);
 
