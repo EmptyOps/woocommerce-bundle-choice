@@ -30,9 +30,42 @@ $model_images = \eo\wbc\model\Images::instance();
         margin: auto !important;
     }    
 
+    /*--------Breadcumb  @tejas 08-02-2023 responsive---------*/
+    @media only screen and (max-width: 768px){
+        body .eo-wbc-container.spui-semantic-breadcrumb>.ui.steps .step {
+            padding-left: 2em !important;
+        }
+        body .eo-wbc-container.spui-semantic-breadcrumb>.ui.steps .step .column.product_image_section img {
+            margin-left: 0 !important;
+        }
+    }
+
+
+
+    @media only screen and (max-width: 767px){
+        .ui.steps:not(.unstackable) .step:after{
+            display: none!important;
+        }
+        body .eo-wbc-container.spui-semantic-breadcrumb>.ui.steps .step {
+            padding-left: 1em !important;
+        }
+    }
+
+
+    @media only screen and (max-width: 325px){
+        body .eo-wbc-container.spui-semantic-breadcrumb>.ui.steps .step:first-child {
+            padding-left: 0em !important;
+        }
+        body .eo-wbc-container.spui-semantic-breadcrumb>.ui.steps .step {
+            padding-left: 0em !important;
+        }
+        body .eo-wbc-container.spui-semantic-breadcrumb>.ui.steps .step .column.product_image_section img {
+            margin-left: 0% !important;
+        }
+    }
 </style>
 
-<div class="step <?php echo (($step==$order)?'active ':(($step>$order)?'completed ':(!empty(\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$clickable_breadcrumb)?'':(!empty(\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$clickable_breadcrumb)?'':'disabled')))); ?>" style="" >            
+<div class="step spui-semantic-step <?php echo (($step==$order)?'active ':(($step>$order)?'completed ':(!empty(\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$clickable_breadcrumb)?'':(!empty(\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$clickable_breadcrumb)?'':'disabled')))); ?>" style="" >            
     <div class="ui equal width grid" style="width: 100%;margin-top: -1em !important;">
         <div class="ui grid" style="width: fit-content !important;">
             <div class="column eowbc_breadcrumb_font"><?php echo $order; ?></div>

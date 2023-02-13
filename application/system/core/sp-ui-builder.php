@@ -2,13 +2,13 @@
 /*
 *	A UI builder class to generate UI based on the array of params recived.
 */
-namespace sp\purple_theme\system\core;
+namespace sp\wbc\system\core;
 use eo\wbc\model\interfaces\Builder;
 use eo\wbc\model\utilities\Eowbc_Theme_Adaption_Check;
 
 defined( 'ABSPATH' ) || exit;
 
-class SP_UI_Builder implements Builder {
+class SP_Ui_Builder implements Builder {
 
 	private static $_instance = null;
 

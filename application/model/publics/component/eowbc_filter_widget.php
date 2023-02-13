@@ -2148,8 +2148,8 @@ class EOWBC_Filter_Widget {
 				
 				var EO_WBC_FILTER_UI_ICON_TERM_SLUG = [];
 
-				console.log('EO_WBC_FILTER_UI_ICON_TERM_SLUG empty');
-				console.log(EO_WBC_FILTER_UI_ICON_TERM_SLUG);
+				// console.log('EO_WBC_FILTER_UI_ICON_TERM_SLUG empty');
+				// console.log(EO_WBC_FILTER_UI_ICON_TERM_SLUG);
 
 			</script>
 
@@ -2699,9 +2699,9 @@ class EOWBC_Filter_Widget {
 
 		?>
 		<script>
-			console.log('data_filter_widgets');
+			// console.log('eo_wbc_object');
 			var eo_wbc_object = JSON.parse('<?php echo json_encode($data); ?>');
-			console.log(eo_wbc_object);
+			// console.log(eo_wbc_object);
 		</script>
 		<?php
 		// 29-09-2022 @h  @s 
