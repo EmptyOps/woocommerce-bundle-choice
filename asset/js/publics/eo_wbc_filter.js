@@ -2318,6 +2318,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		var filter_list= undefined;
 		var filter_target = undefined;
 		
+		console.log(icon_filter_type);
 		if(icon_filter_type == 1) {
 			/*filter_list = jQuery('[name="checklist_'+__data_filter_slug+'"]');*/
 			// filter_list = jQuery('form#<?php echo $this->filter_prefix; ?>eo_wbc_filter [name="checklist_'+"<?php echo $term->slug; ?>"+'"]');
@@ -2385,6 +2386,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		// <?php if(empty(wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','filter_setting_btnfilter_now'))): ?>
 		if(_this.sub_configs.filter_setting_btnfilter_now != 'filter_setting_btnfilter_now'){
 
+		console.log("filter input_type_icon_click eo_wbc_filter_change_wrapper call");
 		//////// 27-05-2022 - @drashti /////////
 		// --add to be confirmed--
 		// window.document.splugins.wbc.filters.api.eo_wbc_filter_change_wrapper(false,'form#<?php echo $this->filter_prefix; ?>eo_wbc_filter','',{'this':this,'event':event});
