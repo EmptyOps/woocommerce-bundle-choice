@@ -71,6 +71,7 @@ if(empty($image['extra_params_org']['type']) || $image['extra_params_org']['type
                     array(
                         'type' => 'video',
                         'attr' => array('controlsList'=>'nodownload','autoplay'=>'','muted'=>''),
+                        'preHTML'=>'Your browser does not support the video tag.',
                         'child' => array(
                             array(
                                 'type'=>'header',

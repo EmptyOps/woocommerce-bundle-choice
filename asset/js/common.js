@@ -3156,13 +3156,9 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
         
         if (!_this.#data.is_variation_product) {
 
-<<<<<<< HEAD
-            _this.#data.current_variation = _this.data.product_variations[0];
-=======
             console.log("gim [process_images] if2");
 
             _this.#data.current_variation = _this.#data.product_variations[0];
->>>>>>> 54c28942f8cd20eca671ad116acda32988e2a15b
             
             console.log(_this.#$zoom_container);
             console.log(_this.#data.current_variation);

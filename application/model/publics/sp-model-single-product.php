@@ -82,7 +82,7 @@ class SP_Model_Single_Product extends SP_Single_Product {
 		///////////////////////////woocommerce-bundle-choice/application/controllers/publics/options.php
 		////////////////////////function run()
 		/*---- move to public function render_variations_swatches() ma*/
-		if (false) {
+		// if (false) {
 			add_action('wp_footer',function(){
 				/*ACTIVE_TODO_OC_START
 				--	check below two files and check if there is any optionsUI related flow there -- to b 
@@ -310,7 +310,9 @@ class SP_Model_Single_Product extends SP_Single_Product {
 		        				$('#wbc_variation_toggle').trigger('click');
 		        			<?php endif; ?>
 
-		        			--	below two click events would be implemented in the core variations js module, in that case it will be remove here 
+		        			// ACTIVE_TODO_OC_START
+		        			// --	below two click events would be implemented in the core variations js module, in that case it will be remove here
+		        			// ACTIVE_TODO_OC_END 
 		        			$('.variable-item').on('click',function(){
 		        				var target_selector = $('#'+$(this).data('id'));
 		        				target_selector.val($(this).data('value'));
@@ -356,7 +358,7 @@ class SP_Model_Single_Product extends SP_Single_Product {
 					}				
 				}
 			});
-		}
+		// }
 		
 		// ACTIVE_TODO do the needful asap as per the demand -- to h and -- to d 
 		// 	--	first check in the plugin we were exploring, if there is any implementation that is necessary -- to d 
