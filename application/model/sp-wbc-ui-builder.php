@@ -8,7 +8,7 @@ use eo\wbc\model\utilities\Eowbc_Theme_Adaption_Check;
 
 defined( 'ABSPATH' ) || exit;
 
-class SP_WBC_UI_Builder implements \sp\purple_theme\system\core\SP_UI_Builder {
+class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 
 	private static $_instance = null;
 

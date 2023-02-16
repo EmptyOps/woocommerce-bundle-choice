@@ -7,7 +7,7 @@ use \sp\theme\view\ui\Composer_Elements;
 
 defined( 'ABSPATH' ) || exit;
 
-class SP_WBC_Page_Builder extends \sp\purple_theme\system\core\SP_Page_Builder {
+class SP_WBC_Page_Builder extends \sp\wbc\system\core\SP_Page_Builder {
 
 	private static $_instance = null;
 
