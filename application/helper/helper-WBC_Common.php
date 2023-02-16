@@ -155,9 +155,20 @@ class WBC_Common {
 		//TODO yet to implement optional arg force_debug
 
 		if( !is_array($ar) )
-		{
+		{	
+			if(is_object($ar)) {
+
+				echo "<pre>";
+			}
+
 			// echo 'the common helper pr function says the var provided is not an array. still var dumping.<br><br>';
 			$this->var_dump($ar,$force_debug,$die);
+
+			if(is_object($ar)) {
+
+				echo "</pre>";
+			}
+
 			return false;
 		}
 
@@ -600,6 +611,20 @@ class WBC_Common {
 
 			return false;
 		}   
+	}
+
+	// reference: https://gist.github.com/Billy-/bc6865066981e80e097f
+	public function in_array_r($needle, $haystack, $strict = false) {
+
+	    foreach ($haystack as $item) {
+
+	        if (($strict ? $item === $needle : $item == $needle) || (is_array($item) && $this->in_array_r($needle, $item, $strict))) {
+
+	            return true;
+	        }
+	    }
+
+	    return false;
 	}
 }
 

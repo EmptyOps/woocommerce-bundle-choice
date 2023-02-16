@@ -9,7 +9,6 @@
 namespace eo\wbc;
 if (!defined('ABSPATH')) exit;
 
-
 use eo\wbc\model\SP_Extension;
 
 use eo\wbc\system\bootstrap\Extensions_Activate;
@@ -46,8 +45,9 @@ class SP_Extensions_Bootstrap {
 	}
 
 	public function run() {
-		
+
 		add_action( 'init', function() {
+			
 			$this->migrate();
 		}, 999 );
 
@@ -84,7 +84,8 @@ class SP_Extensions_Bootstrap {
 			// add_action( "wp_ajax_nopriv_eowbc_ajax",array($this,'ajax'),10);
 			// add_action( "wp_ajax_eowbc_ajax",array($this,'ajax'),10);
 
-		} else {			
+		} else {	
+			
 			// system core
 			$this->system_core();
 
@@ -100,7 +101,7 @@ class SP_Extensions_Bootstrap {
 		$enable_wpbakery = true;
 		$enable_elementor = false;
 		$enable_beaver = false;
-
+		
 		if($enable_wpbakery and class_exists('Vc_Manager') and defined('WPB_PLUGIN_FILE')){
 			/*add_action('init',function(){*/
 				\eo\wbc\controllers\visual_tools\WP_Bakery::instance()->system_init();
@@ -142,7 +143,7 @@ class SP_Extensions_Bootstrap {
 	}
 
 	private function system_core(){
-
+	
 		//	core loaders
 		//
 		if( method_exists($this->SP_Extension->singleton_function()(), 'system_core_loader') ) {
@@ -152,6 +153,7 @@ class SP_Extensions_Bootstrap {
 		//	core init 
 		//
 		if( method_exists($this->SP_Extension->singleton_function()(), 'system_core_init') ) {
+			
 			$this->SP_Extension->singleton_function()()->system_core_init();
 		}
 

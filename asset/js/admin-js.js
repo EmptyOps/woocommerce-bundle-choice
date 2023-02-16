@@ -207,7 +207,7 @@ function eowbc_ready($){
         e.preventDefault();
         e.stopPropagation();
         var $this = this;
-
+        console.log('abc');
         var original_txt = jQuery($this).text();
         var original_cursor = jQuery($this).css('cursor');
         var processing_txt = window.document.splugins.hasAttr(this,'data-loading_text') ? jQuery($this).attr('data-loading_text') : 'Processing...';

@@ -278,7 +278,12 @@ class Feed extends \eo\wbc\controllers\publics\Controller{
         ACTIVE_TODO_OC_END*/
 
         if ($args['page_section'] == 'woo_dropdown_attribute_html') {
-
+            
+            if( wbc()->sanitize->get('is_test') == 1 ) {
+                // wbc_pr('woo_dropdown_attribute-template_part');
+                var_dump('wbc feed woo_dropdown_attribute_html');
+            }
+            
             //drop type var from below and set name of the one only template, simply set it hardcoded -- to b done
             $args['data']['template_data'] = array();
             $args['data']['template_data']['template_key'] = 'woo_dropdown_attribute-template_part';
@@ -296,6 +301,7 @@ class Feed extends \eo\wbc\controllers\publics\Controller{
 
 
         }else if ($args['page_section'] == 'variable_item') {
+
             /*ACTIVE_TODO_OC_START
             dropd template part from both actual key params below, it will be loaded from inside the below main template -- to b 
                 --  from inside the commong template below the particular template would be loaded -- to b 
@@ -377,7 +383,7 @@ class Feed extends \eo\wbc\controllers\publics\Controller{
             if( wbc()->sanitize->get('is_test') == 1 ) {
 
                 wbc_pr("wbc Feed render_swatches_data_by_attribute_type inner if");
-                wbc_pr($data['variable_item_ui']);
+                // wbc_pr($data['variable_item_ui']);
             }
 
             $result_html .= \sp\theme\view\ui\builder\Page_Builder::instance()->build_page_widgets($ui, 'swatches', array(), $args['is_return_html']);

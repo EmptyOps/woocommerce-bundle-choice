@@ -86,9 +86,19 @@ class SP_WBC_Variations extends SP_Variations {
 				// return absint( get_option( 'threshold' ) );\
 				// ACTIVE_TODO_OC_END
 
+				if( wbc()->sanitize->get('is_test') == 1 ) {
+
+					wbc_pr("SP_WBC_Variations fetch_data toDefinition woocommerce_ajax_variation_threshold");
+				}
+
+				// ACTIVE_TODO_OC_START
+				// ACTIVE_TODO temp. below value is temparary and may be we simply need to keep it to 30 which is less than default of woo which is 50. 
+				// ACTIVE_TODO_OC_END
+				$int = 100;
+
 				return $int;
 
-			}, 8, 2);
+			}, 8, 1/*2*/);
 
 			add_filter('default_sp_variations_swatches_variation_attribute_options_html', function($status, $hook_args){
 
@@ -1308,6 +1318,11 @@ class SP_WBC_Variations extends SP_Variations {
 			)
 		);
 
+		if( wbc()->sanitize->get('is_test') == 1 ){
+
+			wbc_pr('sp-wbc-variations [prepare_woo_dropdown_attribute_html_data] attribute');
+			wbc_pr($args['hook_callback_args']['hook_args']['attribute']);
+		}
 		// ACTIVE_TODO here we should be setting the values from the woo_dropdown data args and not from hook callback args, but still check the plugin we were exploring to see if there is any reason to do it other way around. -- to b 
 		$data['woo_dropdown_attribute_html_data']['type']                  = $args['hook_callback_args']['hook_args'][ 'type' ];
 		/*ACTIVE_TODO_OC_START
@@ -1419,7 +1434,7 @@ class SP_WBC_Variations extends SP_Variations {
 			}
 
 			if ( $data['woo_dropdown_attribute_html_data']['product'] && taxonomy_exists( $data['woo_dropdown_attribute_html_data']['attribute'] ) ) {
-				
+
 				if( wbc()->sanitize->get('is_test') == 1 ) {
 					wbc_pr('sp-wbc-variations [prepare_woo_dropdown_attribute_html_data] if');
 				}
@@ -1496,8 +1511,7 @@ class SP_WBC_Variations extends SP_Variations {
 						wbc_pr($data['woo_dropdown_attribute_html_data']['options_loop_html_attr']);
 					}
 
-					// ACTIVE_TODO right now we are managing selected attribute from the common woo dropdown attribute template but in future we should managing from the data layer here.
-					$data['woo_dropdown_attribute_html_data']['options_loop_html_attr'] = array('data-value' => esc_attr( $option ), 'data-title' => esc_attr( $option ) );
+					$data['woo_dropdown_attribute_html_data']['options_loop_html_attr'][$option] = array('data-value' => esc_attr( $option ), 'data-title' => esc_attr( $option ) );
 
 					/*echo '<option value="' . esc_attr( $option ) . '" ' . $selected . '>' . esc_html( \eo\wbc\system\core\data_model\SP_Attribute()::instance()->variation_option_name( $term_name, $term, $attribute, $product) . '</option>';*/
 				}
@@ -1761,11 +1775,11 @@ class SP_WBC_Variations extends SP_Variations {
 			--------- a etlu wvs_default_variable_item alg che
 			ACTIVE_TODO_OC_END*/
 				else{
-					
+
 					if( wbc()->sanitize->get('is_test') == 1 ) {
 						wbc_pr('sp-wbc-variations [prepare_variable_item_data] else');
 					}
-					
+
 					$data['variable_item_data']['options_loop_option'] = array();
 					$data['variable_item_data']['options_loop_is_selected'] = array();
 					$data['variable_item_data']['options_loop_selected_class'] = array();
@@ -1796,7 +1810,6 @@ class SP_WBC_Variations extends SP_Variations {
 						$data['variable_item_data']['options_loop_selected_class'][$option] = $data['variable_item_data']['options_loop_is_selected'][$option] ? 'selected' : '';
 						$data['variable_item_data']['options_loop_tooltip'][$option]        = trim( apply_filters( 'wvs_variable_item_tooltip', $data['variable_item_data']['options_loop_option'][$option], $data['woo_dropdown_attribute_html_data']['options'], $data['woo_dropdown_attribute_html_data']['args'] ) );
 
-						// ACTIVE_TODO right now we are managing selected attribute from the common woo dropdown attribute template but in future we should managing from the data layer here.
 						$data['variable_item_data']['options_loop_html_attr'][$option] = array('data-value' => esc_html( $option ), 'data-title' => esc_html( $option ));
 
 						if ( $data['variable_item_data']['is_archive'] && ! $show_archive_tooltip ) {
@@ -1815,7 +1828,7 @@ class SP_WBC_Variations extends SP_Variations {
 						if( wbc()->sanitize->get('is_test') == 1 ) {
 							wbc_pr("SP_WBC_Variations 111");
 							wbc_pr($data['variable_item_data']);
-							wbc_pr($data['variable_item_data']['options_loop_option'][$option]['option']);
+							// wbc_pr($data['variable_item_data']['options_loop_option'][$option]['option']);
 						}
 
 						if ( !is_array($data['variable_item_data']['assigned']) || ! isset( $data['variable_item_data']['assigned'][ $data['variable_item_data']['options_loop_option'][$option]['option'] ] ) || empty( $data['variable_item_data']['assigned'][ $data['variable_item_data']['options_loop_option'][$option] ]['image_id'] ) ) {

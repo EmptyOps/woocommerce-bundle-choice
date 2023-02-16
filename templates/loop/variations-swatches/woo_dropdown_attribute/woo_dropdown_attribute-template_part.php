@@ -23,7 +23,13 @@ $template = null;
 
 
 // This handles < 2.4.0 bw compatibility where text attributes were not sanitized.
-/*echo '<option value="' . esc_attr( $option ) . '" ' . $woo_dropdown_attribute_html_data['options_loop_selected'][$option] . '>' . esc_html( \eo\wbc\system\core\data_model\SP_Attribute()::instance()->variation_option_name( $term_name, $term, $woo_dropdown_attribute_html_data['attribute'], $woo_dropdown_attribute_html_data['product']) . '</option>';*/
+/*echo '<option value="' . esc_attr( $option ) . '" ' . $woo_dropdown_attribute_html_data['options_loop_selected'][$option] . '>' . esc_html( \eo\wbc\system\core\data_model\SP_Attribute()::instance()->variation_option_name( $term_name, $term, $woo_dropdown_attribute_html_data['attribute'], $woo_dropdown_attribute_html_data['product']) . '</option>';*/  
+
+
+if( wbc()->sanitize->get('is_test') == 1 ) {
+
+    var_dump('woo_dropdown_attribute-template_part m');
+}  
 
 $attr = null;
 $variation_option_name = null;
@@ -38,8 +44,13 @@ if (is_object($term)) {
    	$variation_option_name = \eo\wbc\system\core\data_model\SP_Attribute::variation_option_name( $term->name, $term, $woo_dropdown_attribute_html_data['attribute'], $woo_dropdown_attribute_html_data['product']);
 
 } else{
+	
+	if( wbc()->sanitize->get('is_test') == 1 ) {
 
-	$attr = array( 'value' => esc_attr( $term ) );
+	    var_dump('woo_dropdown_attribute-template_part m else');
+	}  
+
+	$attr = array_merge( array( 'value' => esc_attr( $term ) ), $woo_dropdown_attribute_html_data['options_loop_html_attr'][$term] );
 	if (!empty($woo_dropdown_attribute_html_data['options_loop_selected'][$term])) {
 		$attr['selected'] = 'selected';
 	}
@@ -51,6 +62,8 @@ $template = array(
     'type' => 'option',
     'preHTML' => esc_html( $variation_option_name ),
     'attr' => $attr,
+    // -- aa temp mukelu se @a
+    // 'class' => array('attached','enabled'),
 );
 
 	

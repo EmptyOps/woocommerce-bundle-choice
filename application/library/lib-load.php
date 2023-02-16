@@ -496,26 +496,31 @@ if(!class_exists('WBC_Loader')) {
 		{
 			// $actual_link = __DIR__;
 			$files = scandir($path);
-			$files = array_diff(scandir($path), array('.', '..'));
+
+			// added on 24-01-2023 @h & @s
+			if( !is_array($files) ) {
+
+				return;
+			}
+
+			$files = array_diff($files, array('.', '..'));
 
 			foreach($files as $file)
 			{
-			  if(is_dir($path.'/'.$file))
-			  {
-			      if($is_recurssive)
-			      {
-			          $this->load_classes( $path.'/'.$file, $is_recurssive);
-			      }
-			  }
-			 else
-			 {
-			          if(($file != ".") 
-			             && ($file != "..")
-			             && (strtolower(substr($file, strrpos($file, '.') + 1)) == 'php'))
-			          {
+				if(is_dir($path.'/'.$file)){
+
+				    if($is_recurssive) {
+
+				        $this->load_classes( $path.'/'.$file, $is_recurssive);
+				    }
+				} else {
+			        if(($file != ".") 
+			            && ($file != "..")
+			            && (strtolower(substr($file, strrpos($file, '.') + 1)) == 'php'))
+			        {
 			          // echo '<LI><a href="'.$file.'">',$actual_link.'/'.$path.'/'.$file.'</a>';
 			          	$this->load_class_file( $path.'/'.$file ); 
-			         }
+			        }
 			     }
 			}	
 		}
