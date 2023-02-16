@@ -30,7 +30,8 @@ class SP_Ui_Builder implements Builder {
 		if(!empty($ui) and is_array($ui)){
 			
 			foreach ($ui as $ui_key => $ui_ele) {
-								
+			
+				-- below if needto bemoved to process_build function so that need to be creacted in this class -- to h -- to b		
 				if(!empty($ui_ele['type'])) {
 
 					if(empty($ui_ele['id']) and is_string($ui_key)) {
@@ -40,6 +41,73 @@ class SP_Ui_Builder implements Builder {
 					if(empty($ui_ele['name']) and is_string($ui_key)) {
 						$ui_ele['name'] = $ui_key;
 					}
+
+					------------------------
+					-- a code sp_theme_ui/application/view/ui/Base_Builder.php no process_build() no che
+
+					if(!empty($ui_ele['class']) and is_array($ui_ele['class'])) {
+						$ui_ele['class'] = implode(' ', $ui_ele['class']);
+					}
+
+					if(!empty($ui_ele['child']) and !empty($ui_ele['child']['type'])) {
+						$ui_ele['child'] = array($ui_ele['child']);
+					}
+
+					if(!empty($ui_ele['attr']) and is_array($ui_ele['attr'])) {
+					    
+						//$ui_ele['child'] = array($ui_ele['child']);
+						$attribute='';
+						foreach ($ui_ele['attr'] as $attr_key => $attr_value) {
+							// @bhavesh - 18-06-2021 -- modification due to error : array to string conversion
+							//$attribute.=" ${attr_key}=\"${attr_value}\" ";
+							if(!is_null($attr_value)) {
+
+								if(is_array($attr_value)) {
+
+								    //$attribute.=" ${attr_key}=".implode(',',$attr_value);
+								    $attribute.=" ${attr_key}=\"".implode(',',$attr_value)."\" ";
+								} else {
+
+								    $attribute.=" ${attr_key}=\"${attr_value}\" ";
+								}
+								
+							} else {
+
+								// NOTE: the support for custom attributes is now added. which means in attr_value if null is passed then whatever is availabale in attr_key is echoed as the attribute.
+								$attribute.=" ${attr_key} ";
+							}
+						}
+						$ui_ele['attr'] = $attribute;
+					}
+
+					-------------------------
+
+					--------------------------
+					-- a code sp_theme_ui/application/view/ui/Base_Builder.php no process_build() no che
+
+					if(!empty($ui_ele['appearence_controls']) and !empty($ui_ele['id']) and !empty($this->process_ui_form) ){
+				
+						$control_group = '';
+						if(!empty($ui_ele['appearence_controls'][1]['type'])) {
+							$control_group = $ui_ele['appearence_controls'][1]['type'];
+						} elseif(!empty($ui_ele['type'])){
+							$control_group = $ui_ele['type'];
+						} else {
+							$control_group = 'label';
+						}
+
+						$controls = $this->default_uis($control_group,$ui_ele['appearence_controls'][1]);
+						
+						//var_dump($controls);
+
+						if(!empty($ui_ele['appearence_controls'][2]['control_key'])){
+							$key = $ui_ele['appearence_controls'][2]['control_key'];
+						}
+						
+						$customizer_value = get_theme_mod($ui_ele['id']);
+				
+
+					----------------------
 
 					if(!empty($ui_ele['appearence_controls']) and !empty($ui_ele['id']) and $process_form) {
 						
@@ -51,7 +119,30 @@ class SP_Ui_Builder implements Builder {
 								$ui_ele['label'] = '';
 							}
 
-							$ui_ele['label'] = wbc()->options->get_option($option_key,$ui_ele['id'].'_text',$ui_ele['label'],true,true);					
+							$ui_ele['label'] = wbc()->options->get_option($option_key,$ui_ele['id'].'_text',$ui_ele['label'],true,true);	
+
+							------------------
+							-- a code sp_theme_ui/application/view/ui/Base_Builder.php no process_build() no che
+
+							$ui_ele['label'] = wbc()->options->get_option($key,$ui_ele['id'].'_text',$ui_ele['label'],true,true);
+							if(isset($ui_ele['postHTML'])) {
+
+								$ui_ele['postHTML'] = wbc()->options->get_option($key,$ui_ele['id'].'_text',$ui_ele['postHTML'],true,true);
+							} elseif (!empty($ui_ele['preHTML'])){
+									$ui_ele['preHTML'] = wbc()->options->get_option($key,$ui_ele['id'].'_text',$ui_ele['preHTML'],true,true);
+							}
+
+							if(!empty($customizer_value)) {
+								$ui_ele['label'] = $customizer_value;				
+								if(isset($ui_ele['postHTML'])) {
+									$ui_ele['postHTML'] = $customizer_value;
+								} else {
+									$ui_ele['preHTML'] = $customizer_value;	
+								}
+								
+							}
+
+							---------------------				
 						}
 
 						if(in_array('image',$controls)) {
@@ -60,10 +151,69 @@ class SP_Ui_Builder implements Builder {
 								$ui_ele['src'] = '';
 							}
 
-							$ui_ele['src'] = wbc()->options->get_option($option_key,$ui_ele['id'].'_image',$ui_ele['src'],true,true);					
+							$ui_ele['src'] = wbc()->options->get_option($option_key,$ui_ele['id'].'_image',$ui_ele['src'],true,true);
+
+							-------------------
+							-- a code sp_theme_ui/application/view/ui/Base_Builder.php no process_build() no che
+
+							$ui_ele['src'] = wbc()->options->get_option($key,$ui_ele['id'].'_image',$ui_ele['src'],true,true);
+
+							$__width__ = wbc()->options->get_option($key,$ui_ele['id'].'_width',$ui_ele['src'],true,true);
+							$__height__ = wbc()->options->get_option($key,$ui_ele['id'].'_height',$ui_ele['src'],true,true);
+
+							$dimensions_css = "";
+							if(!empty($__width__)) {
+								$dimensions_css .= "width:".$__width__.";";
+							}
+
+							if(!empty($__height__)) {
+								$dimensions_css .= "height:".$__height__.";";
+							}
+
+
+							/*if(!empty(trim($dimensions_css))) {
+								if(!isset($ui_ele['attr'])) {
+									$ui_ele['attr'] = '';	
+								}*/
+
+							if(!empty(trim($dimensions_css)) and !empty($ui_ele['attr']) and is_array($ui_ele['attr'])) {
+
+								$ui_ele['attr'] .= " style='${dimensions_css}' ";
+							}
+							
+							if(is_numeric($ui_ele['src'])){
+								$ui_ele['src'] = wp_get_attachment_url($ui_ele['src']);
+							}
+												
+							//$ui_ele['src'] = $customizer_value;
+
+							if(!empty($customizer_value)) {
+								$ui_ele['src'] = $customizer_value;
+							}
+
+							----------------------			
 						}
 
 						
+						--------------
+						-- a code sp_theme_ui/application/view/ui/Base_Builder.php no process_build() no che
+
+						if(in_array('href',$controls)) {
+					
+							if(empty($ui_ele['href'])){
+								$ui_ele['href'] = '';
+							}
+							
+							$ui_ele['href'] = wbc()->options->get_option($key,$ui_ele['id'].'_url',$ui_ele['href'],true,true);
+
+							if(!empty($customizer_value)) {
+								$ui_ele['href'] = $customizer_value;
+							}
+
+						}
+
+						-----------------
+
 						if(in_array('color',$controls)) {
 							
 							if(empty($ui_ele['style'])){
@@ -71,6 +221,11 @@ class SP_Ui_Builder implements Builder {
 							}
 
 							$ui_ele['style'].='color:'.wbc()->options->get_option($option_key,$ui_ele['id'].'_color','',true,true).' !important;';
+
+							------------------
+							-- a code sp_theme_ui/application/view/ui/Base_Builder.php no process_build() no che
+							$ui_ele['style'].='color:'.wbc()->options->get_option($key,$ui_ele['id'].'_color','',true,true).' !important;';
+							-----------------
 						}
 
 						if(in_array('back_color',$controls)) {
@@ -80,6 +235,11 @@ class SP_Ui_Builder implements Builder {
 							}
 
 							$ui_ele['style'].='background-color:'.wbc()->options->get_option($option_key,$ui_ele['id'].'_back_color','',true,true).' !important;';
+
+							------------------
+							-- a code sp_theme_ui/application/view/ui/Base_Builder.php no process_build() no che
+							$ui_ele['style'].='background-color:'.wbc()->options->get_option($key,$ui_ele['id'].'_back_color','',true,true).' !important;';
+							-----------------
 						}
 
 						if(in_array('font_family',$controls)) {
@@ -89,6 +249,10 @@ class SP_Ui_Builder implements Builder {
 							}
 
 							$ui_ele['style'].='font-family:'.wbc()->options->get_option($option_key,$ui_ele['id'].'_font_family','',true,true).' !important;';
+							------------------
+							-- a code sp_theme_ui/application/view/ui/Base_Builder.php no process_build() no che
+							$ui_ele['style'].='font-family:'.wbc()->options->get_option($key,$ui_ele['id'].'_font_family','',true,true).' !important;';
+							-----------------
 						}
 
 						if(in_array('font_size',$controls)) {
@@ -98,6 +262,10 @@ class SP_Ui_Builder implements Builder {
 							}
 
 							$ui_ele['style'].='font-size:'.wbc()->options->get_option($option_key,$ui_ele['id'].'_font_size','',true,true).' !important;';
+							------------------
+							-- a code sp_theme_ui/application/view/ui/Base_Builder.php no process_build() no che
+							$ui_ele['style'].='font-size:'.wbc()->options->get_option($key,$ui_ele['id'].'_font_size','',true,true).' !important;';
+							-----------------
 						}					
 
 						if(in_array('height',$controls)) {
@@ -107,6 +275,10 @@ class SP_Ui_Builder implements Builder {
 							}
 
 							$ui_ele['style'].='height:'.wbc()->options->get_option($option_key,$ui_ele['id'].'_height','',true,true).' !important;';
+							------------------
+							-- a code sp_theme_ui/application/view/ui/Base_Builder.php no process_build() no che
+							$ui_ele['style'].='height:'.wbc()->options->get_option($key,$ui_ele['id'].'_height','',true,true).' !important;';
+							-----------------
 						}	
 
 						if(in_array('width',$controls)) {
@@ -116,6 +288,10 @@ class SP_Ui_Builder implements Builder {
 							}
 
 							$ui_ele['style'].='width:'.wbc()->options->get_option($option_key,$ui_ele['id'].'_width','',true,true).' !important;';
+							------------------
+							-- a code sp_theme_ui/application/view/ui/Base_Builder.php no process_build() no che
+							$ui_ele['style'].='width:'.wbc()->options->get_option($key,$ui_ele['id'].'_width','',true,true).' !important;';
+							-----------------
 						}	
 
 						if(in_array('radius',$controls)) {
@@ -125,6 +301,10 @@ class SP_Ui_Builder implements Builder {
 							}
 
 							$ui_ele['style'].='radius:'.wbc()->options->get_option($option_key,$ui_ele['id'].'_radius','',true,true).' !important;';
+							------------------
+							-- a code sp_theme_ui/application/view/ui/Base_Builder.php no process_build() no che
+							$ui_ele['style'].='radius:'.wbc()->options->get_option($key,$ui_ele['id'].'_radius','',true,true).' !important;';
+							-----------------
 						}
 
 						if(in_array('margin_left',$controls)) {
@@ -134,6 +314,10 @@ class SP_Ui_Builder implements Builder {
 							}
 
 							$ui_ele['style'].='margin-left:'.wbc()->options->get_option($option_key,$ui_ele['id'].'_margin_left','',true,true).' !important;';
+							------------------
+							-- a code sp_theme_ui/application/view/ui/Base_Builder.php no process_build() no che
+							$ui_ele['style'].='margin-left:'.wbc()->options->get_option($key,$ui_ele['id'].'_margin_left','',true,true).' !important;';
+							-----------------
 						}
 
 						if(in_array('margin_right',$controls)) {
@@ -143,6 +327,10 @@ class SP_Ui_Builder implements Builder {
 							}
 
 							$ui_ele['style'].='margin-right:'.wbc()->options->get_option($option_key,$ui_ele['id'].'_margin_right','',true,true).' !important;';
+							------------------
+							-- a code sp_theme_ui/application/view/ui/Base_Builder.php no process_build() no che
+							$ui_ele['style'].='margin-right:'.wbc()->options->get_option($key,$ui_ele['id'].'_margin_right','',true,true).' !important;';
+							-----------------
 						}
 
 						if(in_array('visibility',$controls)) {
@@ -156,11 +344,185 @@ class SP_Ui_Builder implements Builder {
 								//$ui_ele['style'].='display: none !important;';
 								return;	//simply return from here and skip addind element 
 							}
+							---------------
+							-- a code sp_theme_ui/application/view/ui/Base_Builder.php no process_build() no che
+							if (wbc()->options->get_option($key,$ui_ele['id'].'_visibility',-1,true,true) == 1) {
+								//$ui_ele['style'].='display: none !important;';
+								return;	//simply return from here and skip addind element 
+							}
+							--------------
 					
 						}					
 
 					}
+					-------------------------
+					-- a code sp_theme_ui/application/view/ui/Base_Builder.php no process_build() no che
+
+					submodul ma move kervano che.....
+					if(!empty($ui_ele['configuration_controls']) and !empty($ui_ele['configuration_controls'][2])){
+
+						if( !empty($ui_ele['configuration_controls'][2]['type']) and $ui_ele['configuration_controls'][2]['type']=='wc_attribute_field'){
+
+							if(!empty($ui_ele['configuration_controls'][2]['option_key']) and !empty($ui_ele['configuration_controls'][2]['id'])){
+
+								global $post;
+								if(!empty($post) and !is_wp_error($post)){
+									$product = wc_get_product($post->ID);	
+
+									if(!empty($product) and !is_wp_error($product)) {
+										$item_attributes = $product->get_attributes();
+
+										$_data_key_ = $ui_ele['configuration_controls'][2]['id'];
+										$_option_key_ = $ui_ele['configuration_controls'][2]['option_key'];
+
+
+										$__data__ = '';
+
+										if( !empty(wbc()->options->get_option($_option_key_,$_data_key_.'_attribute')) and !empty($item_attributes['pa_'.wbc()->options->get_option($_option_key_,$_data_key_.'_attribute')])) {
+
+									    	$data_term = $item_attributes['pa_'.wbc()->options->get_option($_option_key_,$_data_key_.'_attribute')];
+
+									    	if(!empty($data_term) and !is_wp_error($data_term) and !empty($data_term->get_options())){
+									    		$data_term = get_term_by('id',$data_term->get_options()[0],$data_term->get_name());
+									    		
+									    		if(!empty($data_term) and !is_wp_error($data_term)) {
+									    			$__data__ = $data_term->name;
+									    		}
+									    	}
+									    }
+									    
+									    $___term_empty = false;
+
+									    if (!empty(wbc()->options->get_option($_option_key_,$_data_key_.'_checkbox')) and empty($__data__) ) {
+									    	$___term_empty = true;
+									    	if(empty($ui_ele['class'])){
+									    		$ui_ele['class']=" d-none ";	
+									    	} else{
+							    				$ui_ele['class'].=" d-none ";
+							    			}
+
+							    		} elseif (!empty(wbc()->options->get_option($_option_key_,$_data_key_.'_text')) and empty($__data__) ) {
+							    			$___term_empty = true;
+							    			$__data__ = wbc()->options->get_option($_option_key_,$_data_key_.'_text');
+							    		} elseif(empty($__data__)) {
+							    			$___term_empty = true;
+							    			$__data__ = 'N/A';
+							    		}
+
+							    		if(isset($ui_ele['value'])){
+							    			if(!empty($__data__)) {
+							    				$ui_ele['value'] = sprintf($ui_ele['value'],$__data__);
+							    			} else {
+
+							    			}
+						    				
+						    			} elseif(isset($ui_ele['preHTML'])) {
+						    				
+						    				if($___term_empty){
+						    					$ui_ele['preHTML'] = str_replace('ct','',str_replace('mm','',str_replace('%','',sprintf($ui_ele['preHTML'],$__data__))));
+						    				} else {
+						    					$ui_ele['preHTML'] = sprintf($ui_ele['preHTML'],$__data__);	
+						    				}
+						    				
+						    			} elseif(isset($ui_ele['postHTML'])) {
+						    				
+
+
+						    				if($___term_empty){
+						    					
+						    					$ui_ele['postHTML'] = str_replace('ct','',str_replace('mm','',str_replace('%','',sprintf($ui_ele['postHTML'],$__data__))));
+						    				} else {
+						    					$ui_ele['postHTML'] = sprintf($ui_ele['postHTML'],$__data__);	
+						    				}
+						    				
+						    			} else {
+						    				if($___term_empty and !empty($ui_ele['value'])) {
+						    					$ui_ele['value'] = str_replace('ct','',str_replace('mm','',str_replace('%','',sprintf($ui_ele['value'],$__data__))));
+						    				} else {
+						    					$ui_ele['value'] = $__data__;	
+						    				}
+						    			}
+
+
+
+									}
+								}
+
+							}
+
+						}
+					}
+
+					if(!empty($ui_ele['data_controls']) and !empty($ui_ele['data_controls']['type'])){
+						if($ui_ele['data_controls']['type'] === 'send_email_on_click'){
+							
+							wbc()->load->asset('js','publics/ui_builder');
+							wbc()->load->asset('localize','publics/ui_builder',array( 'sp_urls'=>array('ajax_url'=>admin_url('admin-ajax.php'))));
+							?>
+							<script type="text/javascript">
+								jQuery(window).on('load',function(){
+									window.setTimeout(function(){
+										//if(typeof(jQuery.fn.EmailForm)==='function'){
+											window.document.splugins.EmailForm('<?php echo empty($ui_ele['data_controls']['form_field'])?'':$ui_ele['data_controls']['form_field']; ?>','#<?php echo $ui_ele['id']; ?>');
+										//}
+									},2000);
+								});
+							</script>
+							<?php
+							if(!empty($ui_ele['data_controls']['_wpnonce']) and !empty($ui_ele['data_controls']['resolver'])){
+
+								/*echo "<pre>";
+								print_r(\eo\wbc\controllers\admin\Controller::instance()->get_control_data($ui_ele['data_controls']['ui_defination']));
+								echo "</pre>";*/
+
+								$this->build(
+									array(
+										
+										array(
+											'type'=>'hidden',
+											'name'=>'email_field_vars',
+											'class'=>'email_form_field',
+											'value'=>$ui_ele['data_controls']['email_vars'],
+											'value_quote'=>"'"
+										),
+										array(
+											'type'=>'hidden',
+											'name'=>'_wpnonce',
+											'class'=>'email_form_field',
+											'value'=>wp_create_nonce($ui_ele['data_controls']['_wpnonce'])
+										),
+										array(
+											'type'=>'hidden',
+											'name'=>'action',
+											'class'=>'email_form_field',
+											'value'=>'eowbc_ajax'
+										),
+										array(
+											'type'=>'hidden',
+											'name'=>'resolver',
+											'class'=>'email_form_field',
+											'value'=>$ui_ele['data_controls']['resolver']
+										),
+										(!empty($ui_ele['data_controls']['resolver_path'])?array(
+											'type'=>'hidden',
+											'name'=>'resolver_path',
+											'class'=>'email_form_field',
+											'value'=>$ui_ele['data_controls']['resolver_path']
+										):array())
+									)
+								);
+							}
+						}
+					}
+
 					
+					$ui_ele['option_key'] =$key;
+					// passing self contained object so the template can use the child parameter in the $ui_ele to created a nested complax UI.
+					$ui_ele['builder'] = $this;		
+					/*wbc_pr($ui_ele);*//* die();	*/	
+					sp_tui()->load->template('ui/element/'.$ui_ele['type'],$ui_ele);
+
+					-------------------------
 					$ui_ele['option_key'] =$option_key;
 					$ui_ele['process_form'] =$process_form;
 					// passing self contained object so the template can use the child parameter in the $ui_ele to created a nested complax UI.
