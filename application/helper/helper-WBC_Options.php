@@ -103,3 +103,13 @@ class WBC_Options {
 	}
 
 }
+
+function get(string $option,$default = false) {
+
+	return wbc()->options->get($option, $default);
+}
+
+function set(string $option,$value) {
+
+	return wbc()->options->set($option, $value);
+}
