@@ -1097,10 +1097,6 @@ window.document.splugins.wbc.variations = window.document.splugins.wbc.variation
 // the variations swatches js module
 class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
 
-    /*#*/configs_private;
-    /*#*/$base_container_private;
-    /*#*/data_private;
-    /*#*/binding_stats_private;
 
     constructor(element, configs) {
             
@@ -1108,6 +1104,14 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
 
         // Calling parent's constructor
         super(element, configs);
+
+        // ACTIVE_TODO_OC_START
+        // ACTIVE_TODO Till the safari incompatablity issue is not solwed we needed to move below variable decleration insight constructore. As soon as this safari compatiblity issue is fixed as soon move it move this variable declearation section back to the above constuctore.  
+        // ACTIVE_TODO_OC_END
+        this./*#*/configs_private;
+        this./*#*/$base_container_private;
+        this./*#*/data_private;
+        this./*#*/binding_stats_private;
 
         var _this = this; 
 
@@ -1871,8 +1875,8 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
     /*#*/process_slider_and_zoom_private(type, element){
         
     }
-/*
- */_private   /*#*/process_events_private(type, element){
+    
+    /*#*/process_events_private(type, element){
 
         // on_change_listener(type, element);    
 
@@ -2686,18 +2690,6 @@ jQuery(document).ready(function(){
 // the variations gallery_images js module
 class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
 
-    /*#*/configs_private;
-    // #base_container_selector;
-    /*#*/$base_container_private;
-    /*#*/data_private;
-    /*#*/binding_stats_private;
-    /*#*/child_obj_private;
-    /*#*/$additional_container_private/*base_element*/;
-    /*#*/$slider_container_private;
-    /*#*/$zoom_container_private;
-    /*#*/$slider_loop_container_private;
-    /*#*/$wrapper_private;
-    /*#*/$variations_form_private;
 
     constructor(element, configs){
         
@@ -2705,6 +2697,19 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
         
         // Calling parent's constructor
         super(element, configs);
+
+        this./*#*/configs_private;
+        // #base_container_selector;
+        this./*#*/$base_container_private;
+        this./*#*/data_private;
+        this./*#*/binding_stats_private;
+        this./*#*/child_obj_private;
+        this./*#*/$additional_container_private/*base_element*/;
+        this./*#*/$slider_container_private;
+        this./*#*/$zoom_container_private;
+        this./*#*/$slider_loop_container_private;
+        this./*#*/$wrapper_private;
+        this./*#*/$variations_form_private;
 
         var _this = this; 
         
@@ -4322,14 +4327,15 @@ if(window.document.splugins.common.is_item_page || window.document.splugins.comm
 // the variations swatches js module
 class SP_WBC_Variations_Swatches_Feed_Page extends SP_WBC_Variations_Swatches {
 
-    /*#*/configs_private;
-    /*#*/data_private;
-    /*#*/binding_stats_private;
 
     constructor(element, configs) {
 
         // Calling parent's constructor
         super(element, configs);
+
+        this./*#*/configs_private;
+        this./*#*/data_private;
+        this./*#*/binding_stats_private;
 
         var _this = this; 
 
@@ -4404,10 +4410,6 @@ if(window.document.splugins.common.is_category_page) {
 // the variations gallery images js module
 class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Gallery_Images {
 
-    /*#*/$configs_private;
-    /*#*/data_private;
-    /*#*/$binding_stats_private;
-    /*#*/$zoom_container_private;
 
 
     constructor(element, configs) {
@@ -4415,6 +4417,11 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
         // Calling parent's constructor
         super(element, configs);
         
+        this./*#*/$configs_private;
+        this./*#*/data_private;
+        this./*#*/$binding_stats_private;
+        this./*#*/$zoom_container_private;
+
         var _this = this; 
      
         _this./*#*/$configs_private = jQuery.extend({}, {}/*default configs*/, configs);  
