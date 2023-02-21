@@ -2620,7 +2620,6 @@ window.document.splugins.wbc.filters.core = function( configs ) {
     };
 };
 
-console.log('eo_wbc_filter_js_loded');
 //  publish it 
 window.document.splugins.wbc.filters.api = window.document.splugins.wbc.filters.core( eo_wbc_object );
 
@@ -2629,7 +2628,7 @@ window.document.splugins.wbc.pagination = window.document.splugins.wbc.paginatio
 
 window.document.splugins.wbc.pagination.core = function( configs ) {
 
-	console.log('pagination_module');
+	console.log('[pagination]');
     var _this = this; 
 
 	_this.configs = jQuery.extend({}, {}/*default configs*/, configs);	
@@ -2638,7 +2637,7 @@ window.document.splugins.wbc.pagination.core = function( configs ) {
 
 	var init_private = function(event) {
 
-		console.log('pagination_init');
+		console.log('pagination [init_private]');
 		// ACTIVE_TODO whenever in future if required  to run compatibility check during run time means after the base container selectore is defined than we can call compatibility layers additionaly from here 
     	var base_container_selector_callback = null;
 		var stat_object = window.document.splugins.events.api.apply_all_observer_filters( 'pagination', 'base_container_selector',{type:_this.$base_container},base_container_selector_callback);  
@@ -2664,7 +2663,8 @@ window.document.splugins.wbc.pagination.core = function( configs ) {
 
 	var set_pagination_html_private = function(data){
 		
-		console.log('set_pagination_html_private()');
+		console.log('pagination [set_pagination_html_private]');
+
 		// -- aa function mathi code pagination sub module na module ma move thase ane baki no jo applicable hoy to aa module ma rese. Pan aa point execute karvi te pela niche point confirm karvano rese. -- to a & -- to h INVALID 
 		/*ACTIVE_TODO_OC_START
 			-- need to confirm ke aa call diamond api mathi j ave se ne ane te jo no male to ani calling sycuance hirenbhai sathe confirm karvi. -- to a
@@ -2675,16 +2675,10 @@ window.document.splugins.wbc.pagination.core = function( configs ) {
 		ACTIVE_TODO_OC_END*/
 		if(jQuery('.woocommerce-pagination,.pagination'+compatability('pagination_link_selector',null,null),jQuery(data)).html()!==undefined) {
 
-			console.log('set_pagination_html_private() if');
-
 			if(jQuery('.woocommerce-pagination,.pagination'+compatability('pagination_link_selector',null,null)).length>0){
-
-				console.log('set_pagination_html_private() if if');
 
 				jQuery(".woocommerce-pagination,.pagination"+compatability('pagination_link_selector',null,null)).html(jQuery('.woocommerce-pagination,.pagination'+compatability('pagination_link_selector',null,null),jQuery(data)).html());
 			} else {
-
-				console.log('set_pagination_html_private() if else');
 
 				/*ACTIVE_TODO_OC_START
 				@d once all the pagination related layers brought to this function, we need to check if the below incomplete implementation is completely implemented anywhere in our repo -- to d 
@@ -2705,15 +2699,13 @@ window.document.splugins.wbc.pagination.core = function( configs ) {
 		}
 		else {
 
-			console.log('set_pagination_html_private() else');
-
 			jQuery(".woocommerce-pagination,.pagination"+compatability('pagination_link_selector',null,null)).html('');	
 		}
 	}
 	
 	var on_click_listener = function(e){
 		
-		console.log('pagination on_click_listener()');
+		console.log('pagination [on_click_listener]');
 
 		/*ACTIVE_TODO_OC_START
 		NOTE : it will bind to all kind of such on_click events of pagination, it will be private but it may broadcast notification with a callback which js layers of like tableview and so on can call when they recieve their own click event or they can simply call below on_click function". so it is private function.
@@ -2793,8 +2785,7 @@ window.document.splugins.wbc.pagination.core = function( configs ) {
 
     var click = function(event,element){
     	
-    	console.log('pagination_click');
-    	console.log(_this.$base_pagination_container);
+		console.log('pagination [click]');
 
     	/*ACTIVE_TODO_OC_START
     	-- event var aya sudhi pogadvano se -- to a
@@ -2805,7 +2796,6 @@ window.document.splugins.wbc.pagination.core = function( configs ) {
 		// ACTIVE_TODO page nnumber text would break below with multilanguage so instead use the data attribute to store and read the page number -- to a and/or -- to h
 		if(/*_this.$base_pagination_container*/jQuery(element).hasClass("next") || /*_this.$base_pagination_container*/jQuery(element).hasClass("prev")){
 			
-			console.log('pagination click if');
 			if(/*_this.$base_pagination_container*/jQuery(element).hasClass("next")){
 				// jQuery("[name='paged']").val(parseInt(jQuery(".page-numbers.current").text())+1);
 				window.document.splugins.wbc.pagination.api.set_page_number( window.document.splugins.wbc.pagination.api.get_page_number()+1 );
@@ -2816,13 +2806,9 @@ window.document.splugins.wbc.pagination.core = function( configs ) {
 			}	
 		}		
 		else {
-			console.log('pagination click else');
 			// jQuery("[name='paged']").val(jQuery(this).text());
 			window.document.splugins.wbc.pagination.api.set_page_number( window.document.splugins.wbc.pagination.api.get_page_number(jQuery(element)));
 		}		
-
-		console.log('pagination click() 01');
-		console.log(jQuery(element).parents().has('[id$="eo_wbc_filter"]').find('[id$="eo_wbc_filter"]').attr('id'));
 		
 		// jQuery('[name="paged"]').val(parseInt(jQuery(this).text().replace(',','')));
 		// jQuery.fn.eo_wbc_filter_change(false,'form#'+jQuery(this).parents().has('[id$="eo_wbc_filter"]').find('[id$="eo_wbc_filter"]').attr('id'));

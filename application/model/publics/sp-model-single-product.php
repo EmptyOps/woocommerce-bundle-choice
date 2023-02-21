@@ -82,7 +82,7 @@ class SP_Model_Single_Product extends SP_Single_Product {
 		///////////////////////////woocommerce-bundle-choice/application/controllers/publics/options.php
 		////////////////////////function run()
 		/*---- move to public function render_variations_swatches() ma*/
-		// if (false) {
+		if (false) {
 			add_action('wp_footer',function(){
 				/*ACTIVE_TODO_OC_START
 				--	check below two files and check if there is any optionsUI related flow there -- to b 
@@ -135,7 +135,7 @@ class SP_Model_Single_Product extends SP_Single_Product {
 							border: none !important;
 							border-bottom: 2px solid transparent !important;
 						}
-						.image-variable-item.selected,.image-variable-item:hover{	        			
+						body .image-variable-item.selected,.image-variable-item:hover{	        			
 							box-shadow: none !important;        			
 		        			border-bottom: 2px <?php _e($border_hover_color) ?> solid !important;
 		        		}
@@ -242,42 +242,42 @@ class SP_Model_Single_Product extends SP_Single_Product {
 		        			margin: auto;
 		        			display: block;
 		        		}
-		        		.variable-items-wrapper .variable-item{        			
+		        		body .variable-items-wrapper .variable-item{        			
 		        			/*display: inline-table;*/
-		        			height: <?php _e($dimention); ?>;
-		        			width: <?php _e($dimention); ?>;
+		        			height: <?php _e($dimention); ?> !important;
+		        			width: <?php _e($dimention); ?> !important;
 		        			min-width: 35px;						
 							text-align: center;						
-		        			line-height: <?php _e($dimention); ?>;	        			
+		        			line-height: <?php _e($dimention); ?> !important;	        			
 		        			cursor: pointer;
 		        			margin: 0.25rem;
 		        			text-align: center;
-		        			border: <?php _e($border_width) ?> solid <?php _e($border_color) ?>;
-		        			border-radius: <?php _e($border_radius); ?>;
+		        			border: <?php _e($border_width) ?> solid <?php _e($border_color) ?> !important;
+		        			border-radius: <?php _e($border_radius); ?> !important;
 		        			overflow: hidden;
 		        		}	
-		        		.variable-items-wrapper .variable-item:hover,.variable-items-wrapper .selected{
-		        			box-shadow:0px 0px <?php _e($border_hover_width) ?> <?php _e($border_hover_color) ?>;        			
-		        			border: 1px <?php _e($border_hover_color) ?> solid;
+		        		body .variable-items-wrapper .variable-item:hover,.variable-items-wrapper .selected{
+		        			box-shadow:0px 0px <?php _e($border_hover_width) ?> <?php _e($border_hover_color) ?> !important;        			
+		        			border: 1px <?php _e($border_hover_color) ?> solid !important;
 		        		}
 		        		ul.variable-items-wrapper{
 		        			margin: 0px;
 		        		}
-		        		.variable-item-color-fill,.variable-item-span{        			
-		        			height: <?php _e($dimention); ?>;
+		        		body .variable-item-color-fill,.variable-item-span{        			
+		        			height: <?php _e($dimention); ?> !important;
 		        			width: 100%;
-		        			line-height: <?php _e($dimention); ?>;
+		        			line-height: <?php _e($dimention); ?> !important;
 		        		}
 		        		.select2,.select3-selection{
 		        			display: none !important;
 		        		}
-		        		.button-variable-item{
-		        			background-color: <?php _e($bg_color); ?>;
-		        			color: <?php _e($font_color); ?>;
+		        		body .button-variable-item{
+		        			background-color: <?php _e($bg_color); ?> !important;
+		        			color: <?php _e($font_color); ?> !important;
 		        		}
-		        		.button-variable-item:hover{
-		        			background-color: <?php _e($bg_hover_color); ?>;
-		        			color: <?php _e($font_hover_color); ?>;	
+		        		body .button-variable-item:hover{
+		        			background-color: <?php _e($bg_hover_color); ?> !important;
+		        			color: <?php _e($font_hover_color); ?> !important;	
 		        		}
 		        	</style>
 		        	<script>
@@ -358,7 +358,7 @@ class SP_Model_Single_Product extends SP_Single_Product {
 					}				
 				}
 			});
-		// }
+		}
 		
 		// ACTIVE_TODO do the needful asap as per the demand -- to h and -- to d 
 		// 	--	first check in the plugin we were exploring, if there is any implementation that is necessary -- to d 

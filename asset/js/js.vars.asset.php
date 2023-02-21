@@ -13,6 +13,46 @@ add_action( ( !is_admin() ? 'wp_enqueue_scripts' : 'admin_enqueue_scripts'),func
 ?>
 
 	<script type="text/javascript">
+	
+		// var log = console.log;
+		// console.log = function () {
+			
+		// 	var base_log = null;
+		// 	// window.temp = arguments[0];
+
+		// 	if(typeof arguments[0] == 'string'){
+
+		// 		var conditions = [arguments[0].indexOf('] ') >= 0,
+		// 			arguments[0].indexOf('gim_feed [') >= 0,
+		// 			arguments[0].indexOf('gim [') >= 0,
+		// 			arguments[0].indexOf('vs [') >= 0,
+		// 			arguments[0].indexOf('A_OFF') >= 0,
+		// 			arguments[0].indexOf('A_ON') >= 0				
+		// 			];
+
+		// 		for (let i = 0; i < conditions.length; i++) {
+		// 			var condition = false;
+		// 			if(conditions[i]){
+		// 				condition = true;
+		// 				break;
+		// 			}
+		// 		};
+		// 	}
+
+		// 	if(condition){
+
+		// 		base_log = false;
+		// 	}else{
+		// 		base_log = true;
+
+		// 	}
+
+		// 	if(base_log){
+
+		//     log.apply(console, arguments);
+		// 	}
+
+		// }
 
 		//	define namespaces 
 		window.document.splugins = window.document.splugins || {};
