@@ -876,16 +876,16 @@ add_action('wp_footer',function(){
 							var count  = 0;
 							var chosen = 0;
 
-							// console.log('A_OFF show_variation [getChosenAttributes]');
-							// console.log(this.$attributeFields);
-							// console.log(this);
+							console.log('A_OFF show_variation [getChosenAttributes]');
+							console.log(this.$attributeFields);
+							console.log(this);
 
 							this.$attributeFields.each( function() {
 								var attribute_name = $( this ).data( 'attribute_name' ) || $( this ).attr( 'name' );
 								var value          = $( this ).val() || '';
 
-								// console.log('A_OFF show_variation [getChosenAttributes] loop');
-								// console.log(value);
+								console.log('A_OFF show_variation [getChosenAttributes] loop');
+								console.log(value);
 
 								if ( value.length > 0 ) {
 									chosen ++;

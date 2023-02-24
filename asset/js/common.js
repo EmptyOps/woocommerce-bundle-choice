@@ -4737,13 +4737,28 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
             console.log('gim_feed [zoom_area_hover_in] images');
             console.log(images);
 
+            var found_count = 0;
+
             jQuery(images).each(function (index_inner,image) {
                 
-                // console.log('gim_feed zoom_area_hover_in each_loop');
+                console.log('gim_feed zoom_area_hover_in each_loop');
+                console.log(_this.#$configs.options.tiny_features_option_ui_loop_box_hover_media_index);
+                console.log(image.extra_params_org.type);
 
                 image.index = index_inner;
 
-                if(_this.#$configs.options.tiny_features_option_ui_loop_box_hover_media_index == image.extra_params_org.type){
+                if(
+                    _this.#$configs.options.tiny_features_option_ui_loop_box_hover_media_index == image.extra_params_org.type 
+                    ||
+                    (_this.#$configs.options.tiny_features_option_ui_loop_box_hover_media_index == 'image' && window.document.splugins.common.is_empty(image.extra_params_org.type)/*empty value means default type which is considerd as image type*/)
+                    ) {
+
+                    found_count ++;
+                    
+                    if(_this.#$configs.options.tiny_features_option_ui_loop_box_hover_media_index == 'image' && found_count == 1){
+
+                        return;
+                    }
 
                     console.log('gim_feed [zoom_area_hover_in] each_loop if');
 
@@ -4775,9 +4790,14 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
             // }).join('');
             });
 
+            if(hover_media_index === null) {
+
+                return false;
+            }
+
             if (hasGallery) {
 
-              super.get_zoom_container().html(zoom_inner_html);
+                super.get_zoom_container().html(zoom_inner_html);
            
             } else {
 

@@ -434,7 +434,7 @@ class EOWBC_Filter_Widget {
 				?>
 				<script type="text/javascript">
 
-					console.log('filter_widgets');
+					// console.log('filter_widgets');
 
 					jQuery(document).ready(function($){			
 
