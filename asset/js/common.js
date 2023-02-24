@@ -4742,7 +4742,7 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
 
             jQuery(images).each(function (index_inner,image) {
                 
-                // console.log('gim_feed zoom_area_hover_in each_loop');
+                console.log('gim_feed zoom_area_hover_in each_loop');
 
                 image.index = index_inner;
 

@@ -138,7 +138,7 @@ $form['tabs'] = true;
 $form['data'] = array(
 	
 	'tiny_features_item_page_option'=>array(
-			'label'=>'Options UI for Item Page',
+			'label'=>'Swatches UI for Item Page',
 			'form'=>array(
 				/*'tiny_features_option_ui_toggle_status'=>array(
 					'label'=>eowbc_lang('Toggle Button Enabled?'),
@@ -228,171 +228,6 @@ $form['data'] = array(
 					// 'size_class'=>array('eight','wide'),
 					'inline'=>false,					
 				),								
-				'tiny_features_option_ui_toggle_text'=>array(
-					'label'=>eowbc_lang('Toggle Buton Text'),
-					'type'=>'text',
-					'value'=>wbc()->options->get_option('tiny_features','tiny_features_option_ui_toggle_text',__('CUSTOMIZE THIS PRODUCT')),
-					'sanitize'=>'sanitize_text_field',
-					'class'=>array('fluid'),						
-					'size_class'=>array('eight','wide','required'),
-					'inline'=>false,
-
-					'visible_info'=>array( 'label'=>eowbc_lang('Text to be shown on the toggle button.'),
-						'type'=>'visible_info',
-						'class'=>array('small','fluid'),
-						// 'size_class'=>array('sixteen','wide'),
-					)
-				),
-				'tiny_features_option_ui_option_dimention'=>array(
-					'label'=>eowbc_lang('Options Box Dimention'),
-					'type'=>'text',
-					'value'=>wbc()->options->get_option('tiny_features','tiny_features_option_ui_option_dimention','2em'),
-					'sanitize'=>'sanitize_text_field',
-					'class'=>array('fluid'),	
-					'size_class'=>array('eight','wide','required'),
-					'inline'=>false,
-
-					'visible_info'=>array( 'label'=>eowbc_lang('The height and width of the option\'s box.<strong>(prepend px,em,rem as measurement)</strong>'),
-						'type'=>'visible_info',
-						'class'=>array('small','fluid'),
-						// 'size_class'=>array('sixteen','wide'),
-					)
-				),
-				'tiny_features_option_ui_border_color'=>array(
-					'label'=>eowbc_lang('Options Border Color'),
-					'type'=>'color',
-					'value'=>wbc()->options->get_option('tiny_features','tiny_features_option_ui_border_color','#ECECEC'),
-					'sanitize'=>'sanitize_hex_color',
-					'class'=>array('fluid'),				
-					'size_class'=>array('eight','wide','required'),
-					'inline'=>false,
-
-					'visible_info'=>array( 'label'=>eowbc_lang('<br/>The color of the option\'s border'),
-						'type'=>'visible_info',
-						'class'=>array('small','fluid'),
-						// 'size_class'=>array('sixteen','wide'),
-					)
-				),
-				'tiny_features_option_ui_border_width'=>array(
-					'label'=>eowbc_lang('Options Border width'),
-					'type'=>'text',
-					'value'=>wbc()->options->get_option('tiny_features','tiny_features_option_ui_border_width','2px'),
-					'sanitize'=>'sanitize_text_field',
-					'class'=>array('fluid'),			
-					'size_class'=>array('eight','wide','required'),
-					'inline'=>false,
-
-					'visible_info'=>array( 'label'=>eowbc_lang('The border width of the option\'s border.<strong>(prepend px,em,rem as measurement)</strong>'),
-						'type'=>'visible_info',
-						'class'=>array('small','fluid'),
-						// 'size_class'=>array('sixteen','wide'),
-					)
-				),
-				'tiny_features_option_ui_border_color_hover'=>array(
-					'label'=>eowbc_lang('Options Border Color on Hover'),
-					'type'=>'color',
-					'value'=>wbc()->options->get_option('tiny_features','tiny_features_option_ui_border_color_hover','#3D3D3D'),
-					'sanitize'=>'sanitize_hex_color',
-					'class'=>array('fluid'),				
-					'size_class'=>array('eight','wide','required'),
-					'inline'=>false,
-
-					'visible_info'=>array( 'label'=>eowbc_lang('<br/>The color of the option\'s border on hover.'),
-						'type'=>'visible_info',
-						'class'=>array('small'),
-						// 'size_class'=>array('sixteen','wide'),
-					)
-				),
-				'tiny_features_option_ui_border_width_hover'=>array(
-					'label'=>eowbc_lang('Options Border width on Hover'),
-					'type'=>'text',
-					'value'=>wbc()->options->get_option('tiny_features','tiny_features_option_ui_border_width_hover','2px'),
-					'sanitize'=>'sanitize_text_field',
-					'class'=>array('fluid'),
-					'size_class'=>array('eight','wide','required'),
-					'inline'=>false,
-
-					'visible_info'=>array( 'label'=>eowbc_lang('The border width of the option\'s border on hover.<strong>(prepend px,em,rem as measurement)</strong>'),
-						'type'=>'visible_info',
-						'class'=>array('small'),
-						// 'size_class'=>array('sixteen','wide'),
-					)
-				),
-				'tiny_features_option_ui_border_radius'=>array(
-					'label'=>eowbc_lang('Options Border Radius'),
-					'type'=>'text',
-					'value'=>wbc()->options->get_option('tiny_features','tiny_features_option_ui_border_radius','1px'),
-					'sanitize'=>'sanitize_text_field',
-					'class'=>array('fluid'),	
-					'size_class'=>array('eight','wide','required'),
-					'inline'=>false,
-
-					'visible_info'=>array( 'label'=>eowbc_lang('The border radius of the option\'s border.<strong>(prepend px,em,rem as measurement)</strong>'),
-						'type'=>'visible_info',
-						'class'=>array('small'),
-						// 'size_class'=>array('sixteen','wide'),
-					)
-				),						
-				'tiny_features_option_ui_font_color'=>array(
-					'label'=>eowbc_lang('Options Font Color'),
-					'type'=>'color',
-					'value'=>wbc()->options->get_option('tiny_features','tiny_features_option_ui_font_color','#DBDBDB'),
-					'sanitize'=>'sanitize_hex_color',
-					'class'=>array('fluid'),
-					'size_class'=>array('eight','wide','required'),
-					'inline'=>false,
-
-					'visible_info'=>array( 'label'=>eowbc_lang('<br/>The color of the option\'s text.'),
-						'type'=>'visible_info',
-						'class'=>array('small'),
-						// 'size_class'=>array('sixteen','wide'),
-					)
-				),
-				'tiny_features_option_ui_font_color_hover'=>array(
-					'label'=>eowbc_lang('Options Font Color on Hover'),
-					'type'=>'color',
-					'value'=>wbc()->options->get_option('tiny_features','tiny_features_option_ui_font_color_hover','#AA7D7D'),
-					'sanitize'=>'sanitize_hex_color',
-					'class'=>array('fluid'),
-					'size_class'=>array('eight','wide','required'),
-					'inline'=>false,
-
-					'visible_info'=>array( 'label'=>eowbc_lang('<br/>The color of the option\'s text on hover.'),
-						'type'=>'visible_info',
-						'class'=>array('small'),
-						// 'size_class'=>array('sixteen','wide'),
-					)
-				),
-				'tiny_features_option_ui_bg_color'=>array(
-					'label'=>eowbc_lang('Options Background Color'),
-					'type'=>'color',
-					'value'=>wbc()->options->get_option('tiny_features','tiny_features_option_ui_bg_color','#ffffff'),
-					'sanitize'=>'sanitize_hex_color',
-					'class'=>array('fluid'),
-					'size_class'=>array('eight','wide','required'),
-					'inline'=>false,
-
-					'visible_info'=>array( 'label'=>eowbc_lang('<br/>The color of the option\'s background.'),
-						'type'=>'visible_info',
-						'class'=>array('small'),
-						// 'size_class'=>array('sixteen','wide'),
-					)
-				),
-				'tiny_features_option_ui_bg_color_hover'=>array(
-					'label'=>eowbc_lang('Options Background Color on Hover'),
-					'type'=>'color',
-					'value'=>wbc()->options->get_option('tiny_features','tiny_features_option_ui_bg_color_hover','#DCC7C7'),
-					'sanitize'=>'sanitize_hex_color',
-					'class'=>array('fluid'),
-					'size_class'=>array('eight','wide','required'),
-					'inline'=>false,
-
-					'visible_info'=>array( 'label'=>eowbc_lang('<br/>The color of the option\'s background on hover.'),
-						'type'=>'visible_info',
-						'class'=>array('small'),
-						// 'size_class'=>array('sixteen','wide'),
-					)
-				),
 				'product_page_hide_first_variation_form'=>array(
 					'label'=>'Hide first category\'s variation menu',
 					'type'=>'checkbox',
@@ -421,23 +256,171 @@ $form['data'] = array(
 						'size_class'=>array('sixteen','wide'),
 					),	
 				), 
-				'tiny_features_option_ui_loop_box_hover_media_index'=>array(
-					'label'=>wbc()->config->product_variations_configs()['is_gallery_images_type_based_template'] == 1 ? eowbc_lang('Loop box media type to show on hover') : eowbc_lang('Loop box hover media index'),
-					'type'=>wbc()->config->product_variations_configs()['is_gallery_images_type_based_template'] == 1 ? 'select' : 'number',
-					'value'=>wbc()->options->get_option('tiny_features','tiny_features_option_ui_loop_box_hover_media_index',wbc()->config->product_variations_configs()['is_gallery_images_type_based_template'] == 1 ? 'video' :  '2'),
-					'options'=>wbc()->config->product_variations_configs()['is_gallery_images_type_based_template'] == 1 ? apply_filters('sp_variations_loop_box_hover_media_type',array('image'=>'Image','video'=>'Video')) : array(),
+				'tiny_features_option_ui_toggle_text'=>array(
+					'label'=>eowbc_lang('Toggle Buton Text'),
+					'type'=>'text',
+					'value'=>wbc()->options->get_option('tiny_features','tiny_features_option_ui_toggle_text',__('CUSTOMIZE THIS PRODUCT')),
 					'sanitize'=>'sanitize_text_field',
-					'class'=>array('fluid'),			
-					'size_class'=>array('eight','wide'/*,'required'*/),
+					'class'=>array('fluid'),						
+					'size_class'=>array('eight','wide','required'),
 					'inline'=>false,
 
-					'visible_info'=>array( 'label'=>wbc()->config->product_variations_configs()['is_gallery_images_type_based_template'] == 1 ? eowbc_lang('Set here the type of media to show on hover. For example you may like to show video or image on hover, leave it blank to disable the hover feature.') : eowbc_lang('Set here the index of thumb image or media to show on hover. For example you may like to show video on hover so set index as per your gallery images thumbnails display order.'),
+					'visible_info'=>array( 'label'=>eowbc_lang('Text to be shown on the toggle button.'),
 						'type'=>'visible_info',
 						'class'=>array('small','fluid'),
 						// 'size_class'=>array('sixteen','wide'),
-					),
-					'attr'=>array("min='0',max='10'")					
-				),	
+					)
+				),
+				'tiny_features_option_ui_option_dimention'=>array(
+					'label'=>eowbc_lang('Swatches Box Dimention'),
+					'type'=>'text',
+					'value'=>wbc()->options->get_option('tiny_features','tiny_features_option_ui_option_dimention','2em'),
+					'sanitize'=>'sanitize_text_field',
+					'class'=>array('fluid'),	
+					'size_class'=>array('eight','wide','required'),
+					'inline'=>false,
+
+					'visible_info'=>array( 'label'=>eowbc_lang('The height and width of the option\'s box.<strong>(prepend px,em,rem as measurement)</strong>'),
+						'type'=>'visible_info',
+						'class'=>array('small','fluid'),
+						// 'size_class'=>array('sixteen','wide'),
+					)
+				),
+				'tiny_features_option_ui_border_color'=>array(
+					'label'=>eowbc_lang('Swatches Border Color'),
+					'type'=>'color',
+					'value'=>wbc()->options->get_option('tiny_features','tiny_features_option_ui_border_color','#ECECEC'),
+					'sanitize'=>'sanitize_hex_color',
+					'class'=>array('fluid'),				
+					'size_class'=>array('eight','wide','required'),
+					'inline'=>false,
+
+					'visible_info'=>array( 'label'=>eowbc_lang('<br/>The color of the Swatches border'),
+						'type'=>'visible_info',
+						'class'=>array('small','fluid'),
+						// 'size_class'=>array('sixteen','wide'),
+					)
+				),
+				'tiny_features_option_ui_border_width'=>array(
+					'label'=>eowbc_lang('Swatches Border width'),
+					'type'=>'text',
+					'value'=>wbc()->options->get_option('tiny_features','tiny_features_option_ui_border_width','2px'),
+					'sanitize'=>'sanitize_text_field',
+					'class'=>array('fluid'),			
+					'size_class'=>array('eight','wide','required'),
+					'inline'=>false,
+
+					'visible_info'=>array( 'label'=>eowbc_lang('The border width of the Swatches border.<strong>(prepend px,em,rem as measurement)</strong>'),
+						'type'=>'visible_info',
+						'class'=>array('small','fluid'),
+						// 'size_class'=>array('sixteen','wide'),
+					)
+				),
+				'tiny_features_option_ui_border_color_hover'=>array(
+					'label'=>eowbc_lang('Swatches Border Color on Hover'),
+					'type'=>'color',
+					'value'=>wbc()->options->get_option('tiny_features','tiny_features_option_ui_border_color_hover','#3D3D3D'),
+					'sanitize'=>'sanitize_hex_color',
+					'class'=>array('fluid'),				
+					'size_class'=>array('eight','wide','required'),
+					'inline'=>false,
+
+					'visible_info'=>array( 'label'=>eowbc_lang('<br/>The color of the Swatches border on hover.'),
+						'type'=>'visible_info',
+						'class'=>array('small'),
+						// 'size_class'=>array('sixteen','wide'),
+					)
+				),
+				'tiny_features_option_ui_border_width_hover'=>array(
+					'label'=>eowbc_lang('Swatches Border width on Hover'),
+					'type'=>'text',
+					'value'=>wbc()->options->get_option('tiny_features','tiny_features_option_ui_border_width_hover','2px'),
+					'sanitize'=>'sanitize_text_field',
+					'class'=>array('fluid'),
+					'size_class'=>array('eight','wide','required'),
+					'inline'=>false,
+
+					'visible_info'=>array( 'label'=>eowbc_lang('The border width of the Swatches border on hover.<strong>(prepend px,em,rem as measurement)</strong>'),
+						'type'=>'visible_info',
+						'class'=>array('small'),
+						// 'size_class'=>array('sixteen','wide'),
+					)
+				),
+				'tiny_features_option_ui_border_radius'=>array(
+					'label'=>eowbc_lang('Swatches Border Radius'),
+					'type'=>'text',
+					'value'=>wbc()->options->get_option('tiny_features','tiny_features_option_ui_border_radius','1px'),
+					'sanitize'=>'sanitize_text_field',
+					'class'=>array('fluid'),	
+					'size_class'=>array('eight','wide','required'),
+					'inline'=>false,
+
+					'visible_info'=>array( 'label'=>eowbc_lang('The border radius of the Swatches border.<strong>(prepend px,em,rem as measurement)</strong>'),
+						'type'=>'visible_info',
+						'class'=>array('small'),
+						// 'size_class'=>array('sixteen','wide'),
+					)
+				),						
+				'tiny_features_option_ui_font_color'=>array(
+					'label'=>eowbc_lang('Swatches Font Color'),
+					'type'=>'color',
+					'value'=>wbc()->options->get_option('tiny_features','tiny_features_option_ui_font_color','#DBDBDB'),
+					'sanitize'=>'sanitize_hex_color',
+					'class'=>array('fluid'),
+					'size_class'=>array('eight','wide','required'),
+					'inline'=>false,
+
+					'visible_info'=>array( 'label'=>eowbc_lang('<br/>The color of the Swatches text.'),
+						'type'=>'visible_info',
+						'class'=>array('small'),
+						// 'size_class'=>array('sixteen','wide'),
+					)
+				),
+				'tiny_features_option_ui_font_color_hover'=>array(
+					'label'=>eowbc_lang('Swatches Font Color on Hover'),
+					'type'=>'color',
+					'value'=>wbc()->options->get_option('tiny_features','tiny_features_option_ui_font_color_hover','#AA7D7D'),
+					'sanitize'=>'sanitize_hex_color',
+					'class'=>array('fluid'),
+					'size_class'=>array('eight','wide','required'),
+					'inline'=>false,
+
+					'visible_info'=>array( 'label'=>eowbc_lang('<br/>The color of the Swatches text on hover.'),
+						'type'=>'visible_info',
+						'class'=>array('small'),
+						// 'size_class'=>array('sixteen','wide'),
+					)
+				),
+				'tiny_features_option_ui_bg_color'=>array(
+					'label'=>eowbc_lang('Swatches Background Color'),
+					'type'=>'color',
+					'value'=>wbc()->options->get_option('tiny_features','tiny_features_option_ui_bg_color','#ffffff'),
+					'sanitize'=>'sanitize_hex_color',
+					'class'=>array('fluid'),
+					'size_class'=>array('eight','wide','required'),
+					'inline'=>false,
+
+					'visible_info'=>array( 'label'=>eowbc_lang('<br/>The color of the Swatches background.'),
+						'type'=>'visible_info',
+						'class'=>array('small'),
+						// 'size_class'=>array('sixteen','wide'),
+					)
+				),
+				'tiny_features_option_ui_bg_color_hover'=>array(
+					'label'=>eowbc_lang('Swatches Background Color on Hover'),
+					'type'=>'color',
+					'value'=>wbc()->options->get_option('tiny_features','tiny_features_option_ui_bg_color_hover','#DCC7C7'),
+					'sanitize'=>'sanitize_hex_color',
+					'class'=>array('fluid'),
+					'size_class'=>array('eight','wide','required'),
+					'inline'=>false,
+
+					'visible_info'=>array( 'label'=>eowbc_lang('<br/>The color of the Swatches background on hover.'),
+						'type'=>'visible_info',
+						'class'=>array('small'),
+						// 'size_class'=>array('sixteen','wide'),
+					)
+				),
 				'tiny_features_product_page_tab_end'=>array(
 					'type'=>'accordian',
 					'section_type'=>'end'
@@ -494,7 +477,7 @@ $form['data'] = array(
 					),	
 				), 
 				'tiny_features_shop_page_option_ui_option_dimention'=>array(
-					'label'=>eowbc_lang('Options Box Dimention'),
+					'label'=>eowbc_lang('Swatches Box Dimention'),
 					'type'=>'text',
 					'value'=>wbc()->options->get_option('tiny_features','tiny_features_shop_page_option_ui_option_dimention','2em'),
 					'sanitize'=>'sanitize_text_field',
@@ -502,14 +485,14 @@ $form['data'] = array(
 					'size_class'=>array('eight','wide','required'),
 					'inline'=>false,
 
-					'visible_info'=>array( 'label'=>eowbc_lang('The height and width of the option\'s box.<strong>(prepend px,em,rem as measurement)</strong>'),
+					'visible_info'=>array( 'label'=>eowbc_lang('The height and width of the Swatches box.<strong>(prepend px,em,rem as measurement)</strong>'),
 						'type'=>'visible_info',
 						'class'=>array('small','fluid'),
 						// 'size_class'=>array('sixteen','wide'),
 					)
 				),				
 				'tiny_features_shop_page_option_ui_border_color'=>array(
-					'label'=>eowbc_lang('Options Border Color'),
+					'label'=>eowbc_lang('Swatches Border Color'),
 					'type'=>'color',
 					'value'=>wbc()->options->get_option('tiny_features','tiny_features_shop_page_option_ui_border_color','#ECECEC'),
 					'sanitize'=>'sanitize_hex_color',
@@ -517,14 +500,14 @@ $form['data'] = array(
 					'size_class'=>array('eight','wide','required'),
 					'inline'=>false,
 
-					'visible_info'=>array( 'label'=>eowbc_lang('<br/>The color of the option\'s border'),
+					'visible_info'=>array( 'label'=>eowbc_lang('<br/>The color of the Swatches border'),
 						'type'=>'visible_info',
 						'class'=>array('small','fluid'),
 						// 'size_class'=>array('sixteen','wide'),
 					)
 				),
 				'tiny_features_shop_page_option_ui_border_width'=>array(
-					'label'=>eowbc_lang('Options Border width'),
+					'label'=>eowbc_lang('Swatches Border width'),
 					'type'=>'text',
 					'value'=>wbc()->options->get_option('tiny_features','tiny_features_shop_page_option_ui_border_width','2px'),
 					'sanitize'=>'sanitize_text_field',
@@ -532,14 +515,14 @@ $form['data'] = array(
 					'size_class'=>array('eight','wide','required'),
 					'inline'=>false,
 
-					'visible_info'=>array( 'label'=>eowbc_lang('The border width of the option\'s border.<strong>(prepend px,em,rem as measurement)</strong>'),
+					'visible_info'=>array( 'label'=>eowbc_lang('The border width of the Swatches border.<strong>(prepend px,em,rem as measurement)</strong>'),
 						'type'=>'visible_info',
 						'class'=>array('small','fluid'),
 						// 'size_class'=>array('sixteen','wide'),
 					)
 				),
 				'tiny_features_shop_page_option_ui_border_color_hover'=>array(
-					'label'=>eowbc_lang('Options Border Color on Hover -- Not work(selectore issue)'),
+					'label'=>eowbc_lang('Swatches Border Color on Hover -- Not work(selectore issue)'),
 					'type'=>'color',
 					'value'=>wbc()->options->get_option('tiny_features','tiny_features_shop_page_option_ui_border_color_hover','#3D3D3D'),
 					'sanitize'=>'sanitize_hex_color',
@@ -547,14 +530,14 @@ $form['data'] = array(
 					'size_class'=>array('eight','wide','required'),
 					'inline'=>false,
 
-					'visible_info'=>array( 'label'=>eowbc_lang('<br/>The color of the option\'s border on hover.'),
+					'visible_info'=>array( 'label'=>eowbc_lang('<br/>The color of the Swatches border on hover.'),
 						'type'=>'visible_info',
 						'class'=>array('small'),
 						// 'size_class'=>array('sixteen','wide'),
 					)
 				),
 				'tiny_features_shop_page_option_ui_border_width_hover'=>array(
-					'label'=>eowbc_lang('Options Border width on Hover'),
+					'label'=>eowbc_lang('Swatches Border width on Hover'),
 					'type'=>'text',
 					'value'=>wbc()->options->get_option('tiny_features','tiny_features_shop_page_option_ui_border_width_hover','2px'),
 					'sanitize'=>'sanitize_text_field',
@@ -562,14 +545,14 @@ $form['data'] = array(
 					'size_class'=>array('eight','wide','required'),
 					'inline'=>false,
 
-					'visible_info'=>array( 'label'=>eowbc_lang('The border width of the option\'s border on hover.<strong>(prepend px,em,rem as measurement)</strong>'),
+					'visible_info'=>array( 'label'=>eowbc_lang('The border width of the Swatches border on hover.<strong>(prepend px,em,rem as measurement)</strong>'),
 						'type'=>'visible_info',
 						'class'=>array('small'),
 						// 'size_class'=>array('sixteen','wide'),
 					)
 				),
 				'tiny_features_shop_page_option_ui_border_radius'=>array(
-					'label'=>eowbc_lang('Options Border Radius'),
+					'label'=>eowbc_lang('Swatches Border Radius'),
 					'type'=>'text',
 					'value'=>wbc()->options->get_option('tiny_features','tiny_features_shop_page_option_ui_border_radius','1px'),
 					'sanitize'=>'sanitize_text_field',
@@ -577,14 +560,14 @@ $form['data'] = array(
 					'size_class'=>array('eight','wide','required'),
 					'inline'=>false,
 
-					'visible_info'=>array( 'label'=>eowbc_lang('The border radius of the option\'s border.<strong>(prepend px,em,rem as measurement)</strong>'),
+					'visible_info'=>array( 'label'=>eowbc_lang('The border radius of the Swatches border.<strong>(prepend px,em,rem as measurement)</strong>'),
 						'type'=>'visible_info',
 						'class'=>array('small'),
 						// 'size_class'=>array('sixteen','wide'),
 					)
 				),						
 				'tiny_features_shop_page_option_ui_font_color'=>array(
-					'label'=>eowbc_lang('Options Font Color -- Not work(variation file css override)'),
+					'label'=>eowbc_lang('Swatches Font Color -- Not work(variation file css override)'),
 					'type'=>'color',
 					'value'=>wbc()->options->get_option('tiny_features','tiny_features_shop_page_option_ui_font_color','#DBDBDB'),
 					'sanitize'=>'sanitize_hex_color',
@@ -592,14 +575,14 @@ $form['data'] = array(
 					'size_class'=>array('eight','wide','required'),
 					'inline'=>false,
 
-					'visible_info'=>array( 'label'=>eowbc_lang('<br/>The color of the option\'s text.'),
+					'visible_info'=>array( 'label'=>eowbc_lang('<br/>The color of the Swatches text.'),
 						'type'=>'visible_info',
 						'class'=>array('small'),
 						// 'size_class'=>array('sixteen','wide'),
 					)
 				),
 				'tiny_features_shop_page_option_ui_font_color_hover'=>array(
-					'label'=>eowbc_lang('Options Font Color on Hover'),
+					'label'=>eowbc_lang('Swatches Font Color on Hover'),
 					'type'=>'color',
 					'value'=>wbc()->options->get_option('tiny_features','tiny_features_shop_page_option_ui_font_color_hover','#AA7D7D'),
 					'sanitize'=>'sanitize_hex_color',
@@ -607,14 +590,14 @@ $form['data'] = array(
 					'size_class'=>array('eight','wide','required'),
 					'inline'=>false,
 
-					'visible_info'=>array( 'label'=>eowbc_lang('<br/>The color of the option\'s text on hover.'),
+					'visible_info'=>array( 'label'=>eowbc_lang('<br/>The color of the Swatches text on hover.'),
 						'type'=>'visible_info',
 						'class'=>array('small'),
 						// 'size_class'=>array('sixteen','wide'),
 					)
 				),
 				'tiny_features_shop_page_option_ui_bg_color'=>array(
-					'label'=>eowbc_lang('Options Background Color -- Not work(variation file css override)'),
+					'label'=>eowbc_lang('Swatches Background Color -- Not work(variation file css override)'),
 					'type'=>'color',
 					'value'=>wbc()->options->get_option('tiny_features','tiny_features_shop_page_option_ui_bg_color','#ffffff'),
 					'sanitize'=>'sanitize_hex_color',
@@ -622,14 +605,14 @@ $form['data'] = array(
 					'size_class'=>array('eight','wide','required'),
 					'inline'=>false,
 
-					'visible_info'=>array( 'label'=>eowbc_lang('<br/>The color of the option\'s background.'),
+					'visible_info'=>array( 'label'=>eowbc_lang('<br/>The color of the Swatches background.'),
 						'type'=>'visible_info',
 						'class'=>array('small'),
 						// 'size_class'=>array('sixteen','wide'),
 					)
 				),
 				'tiny_features_shop_page_option_ui_bg_color_hover'=>array(
-					'label'=>eowbc_lang('Options Background Color on Hover'),
+					'label'=>eowbc_lang('Swatches Background Color on Hover'),
 					'type'=>'color',
 					'value'=>wbc()->options->get_option('tiny_features','tiny_features_shop_page_option_ui_bg_color_hover','#DCC7C7'),
 					'sanitize'=>'sanitize_hex_color',
@@ -637,7 +620,7 @@ $form['data'] = array(
 					'size_class'=>array('eight','wide','required'),
 					'inline'=>false,
 
-					'visible_info'=>array( 'label'=>eowbc_lang('<br/>The color of the option\'s background on hover.'),
+					'visible_info'=>array( 'label'=>eowbc_lang('<br/>The color of the Swatches background on hover.'),
 						'type'=>'visible_info',
 						'class'=>array('small'),
 						// 'size_class'=>array('sixteen','wide'),

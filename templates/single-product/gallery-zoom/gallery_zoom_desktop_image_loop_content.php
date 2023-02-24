@@ -43,7 +43,7 @@ if(empty($image['extra_params_org']['type']) || $image['extra_params_org']['type
                 'child' => array(
                     array(
                         'type' => 'video',
-                        'attr' => array('preload'=>'auto', 'controlsList'=>'nodownload','autoplay'=>'','muted' => ''),
+                        'attr' => array('preload'=>'auto', 'controlsList'=>'nodownload','autoplay'=>'','muted' => ''/*,'poster'=>'http://localhost/demo/wp-content/uploads/2023/02/giphy-1.gif'*/),
                         'child' => array(
                             array(
                                 'type'=>'header',
