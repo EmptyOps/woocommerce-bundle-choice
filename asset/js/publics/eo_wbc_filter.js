@@ -440,7 +440,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
 						form_data.eo_wbc_page = jQuery('[name="eo_wbc_page"]').val();
 					}
-				
+
 				}
 				
 				/*ACTIVE_TODO_QC_START
@@ -507,6 +507,34 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
 				console.log("filter prepare_query_data site_url");
 				console.log(site_url);
+
+
+				if(jQuery('.filter_setting_advance_two_tabs .active').length > 0) {
+
+					var url_split = site_url.split("?");
+
+					var url_split_final = url_split[0].split("/");
+
+					var url_segment_minus = 1;
+					
+					if( window.document.splugins.common.is_empty(url_split_final[url_split_final.length-1]) ) {
+
+						url_segment_minus = 2;
+					}
+
+					url_split_final[url_split_final.length-url_segment_minus] = jQuery('.filter_setting_advance_two_tabs .active').data('category').trim(); 
+
+					if( site_url.indexOf("?") > -1 ){
+
+						site_url = url_split_final.join("/")+"?"+url_split[1];
+					} else {
+
+						site_url = url_split_final.join("/");
+					}
+
+					console.log(site_url);
+				}
+
 
 				if(site_url.includes('?')) {
 					
