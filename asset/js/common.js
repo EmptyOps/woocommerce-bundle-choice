@@ -22,8 +22,12 @@ class SP_SPlugins {
     init() {
 
         var _this = this; 
-        _this./*#*/init_private();
 
+        // ACTIVE_TODO_OC_START
+        // ACTIVE_TODO It should be well noted that mere droping # for same name functions in parent and child class results in recurtion so we had to call it using prototype. When we enable back the support for # at that time simply uncomment below line and comment the line under neth it.
+        // ACTIVE_TODO_OC_END
+        // _this./*#*/init_private();
+        SP_SPlugins.prototype.init_private.call(_this);
     }  
     
 }
@@ -2664,7 +2668,8 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
 
         var _this = this; 
         
-        _this./*#*/init_private();
+        // _this./*#*/init_private();
+        SP_WBC_Variations_Swatches.prototype.init_private.call(_this);
 
     }
 }
@@ -2749,7 +2754,10 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
 
         // NOTE: for the notes base_container object is the base_element if we consider it with analogy of _jQueryInterface style modules
         _this./*#*/$base_container_private = jQuery(element);   //( _this.base_container_selector );     
-     
+        console.log('gim [init] base_container_private');
+        console.log(_this./*#*/$base_container_private);
+        // console.log(element);
+
         _this./*#*/data_private = {};
         _this./*#*/binding_stats_private = {};
         
@@ -2781,10 +2789,13 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
     /*#*/init_private() {
 
         console.log("gim [init_private]");
+        console.log(this);
 
         var _this = this;
 
         super.init();
+
+        console.log("gim [init_private] 01");
 
         if(window.document.splugins.common.is_category_page){
 
@@ -2796,13 +2807,21 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
             _this./*#*/data_private.is_skip_sp_slider = true; 
         }
 
+        console.log("gim [init_private] 02");
+
         window.document.splugins.events.api.createSubject( 'gallery_images', ['process_images','sp_slzm_refresh', 'sp_variations_gallery_images_loaded', 'sp_slzm_init', 'sp_slzm_refresh_zoom', 'slider_thumb_click', 'process_zoom_template'] );
- 
+
         // // For Single Product
         // $('.woo-variation-gallery-wrapper:not(.wvg-loaded)').WooVariationGallery(); // Ajax and Variation Product
-        _this./*#*/init_preprocess_private(null);
+        
+        // ACTIVE_TODO_OC_START
+        // ACTIVE_TODO It should be well noted that mere droping # for same name functions in parent and child class results in recurtion so we had to call it using prototype. When we enable back the support for # at that time simply uncomment below line and comment the line under neth it.
+        // ACTIVE_TODO_OC_END
+        // _this./*#*/init_preprocess_private(null);
+        SP_WBC_Variations_Gallery_Images.prototype.init_preprocess_private.call(_this);
  
-        _this./*#*/compatability_private('init');
+        // _this./*#*/compatability_private('init');
+        SP_WBC_Variations_Gallery_Images.prototype.compatability_private.call(_this,'init');
 
     }
  
@@ -2810,14 +2829,17 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
 
         var _this = this;
         console.log("gim [init_preprocess]");
-
+        console.log(this);
+        console.log(_this./*#*/$base_container_private);
+        
         // if(jQuery(_this.#base_container_selector+':not(.spui-wbc-gallery_images-product-type-variable):not(.spui-wbc-gallery_images-loaded)').length>0) {
         if( ! jQuery(_this./*#*/$base_container_private).hasClass('spui-wbc-gallery_images-product-type-variable') && ! jQuery(_this./*#*/$base_container_private).hasClass('spui-wbc-gallery_images-loaded') ) {
 
             console.log("gim [init_preprocess] if");
 
             // _this./*#*/preprocess_private(jQuery(_this.#base_container_selector+':not(.spui-wbc-gallery_images-product-type-variable):not(.spui-wbc-gallery_images-loaded)'), event);
-            _this./*#*/preprocess_private(_this./*#*/$base_container_private, event);
+            // _this./*#*/preprocess_private(_this./*#*/$base_container_private, event);
+            SP_WBC_Variations_Gallery_Images.prototype.preprocess_private.call(_this,_this./*#*/$base_container_private, event);
 
         }
 
@@ -2875,6 +2897,9 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
 
         _this./*#*/data_private.is_variation_product =  (!window.document.splugins.common.is_empty(_this./*#*/configs_private.product_type) && _this./*#*/configs_private.product_type == 'simple') ? false : true; //_this./*#*/$variations_form_private.length > 0;
  
+        console.log('gim [preprocess] is_variation_product');
+        console.log(_this./*#*/data_private.is_variation_product);
+        
         if(_this./*#*/data_private.is_variation_product) {
 
             _this./*#*/data_private.product_variations = _this./*#*/$variations_form_private.data('product_variations') || [];      
@@ -2890,14 +2915,18 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
         // _this.#$additional_container/*base_element*/.addClass('spui-wbc-gallery_images-loaded');
         _this./*#*/$base_container_private.addClass('spui-wbc-gallery_images-loaded');
  
-        _this./*#*/slider_container_private = window.document.splugins.common.is_item_page ? _this./*#*/$additional_container_private/*base_element*/.find( '.'+ _this./*#*/configs_private.classes.slider.container ) : _this./*#*/$additional_container_private/*base_element*/.closest( '.'+ _this./*#*/configs_private.classes.slider.container );
+        _this./*#*/$slider_container_private = window.document.splugins.common.is_item_page ? _this./*#*/$additional_container_private/*base_element*/.find( '.'+ _this./*#*/configs_private.classes.slider.container ) : _this./*#*/$additional_container_private/*base_element*/.closest( '.'+ _this./*#*/configs_private.classes.slider.container );
         _this./*#*/$zoom_container_private = window.document.splugins.common.is_item_page ? _this./*#*/$additional_container_private/*base_element*/.find( '.'+ _this./*#*/configs_private.classes.zoom.container ) : jQuery( _this./*#*/configs_private.classes.zoom.container.replace('{product_id}', _this.product_id) );
 
         console.log("gim [preprocess] _this./*#*/$zoom_container_private");
         console.log(_this./*#*/$zoom_container_private);
             
+        console.log("gim [preprocess] _this./*#*/$slider_container_private");
+        console.log(_this);
+
         _this./*#*/$slider_loop_container_private = _this./*#*/$slider_container_private.find( '.'+ _this./*#*/configs_private.classes.slider.loop_container );
 
+        
                // ACTIVE_TODO if required then need to init def for simple product and so on.
                // this.defaultGallery();
  
@@ -3027,7 +3056,9 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
             //         --  and since the actual images would be available only after the variation change event(and specifically the event binding and other stat should be set and maintained for currently active images of current variation only so it must be on variation change event, and in case of simple product types that will not be the cases) so the process_images function should be called on each such stat changes -- to d 
             //             --done  move entire section below inside that function -- to d 
             // ACTIVE_TODO_OC_END
-            _this./*#*/process_images_private();   
+            // _this./*#*/process_images_private();   
+            SP_WBC_Variations_Gallery_Images.prototype.process_images_private.call(_this);
+
          
         }, 500)();
 
@@ -3098,7 +3129,8 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
                     console.log("gim [process_images] if innner loop if");
                     // console.log("gallery_images process_images inner if");
 
-                    _this./*#*/process_images_inner_private(type_inner, element);    
+                    // _this./*#*/process_images_inner_private(type_inner, element);    
+                    SP_WBC_Variations_Gallery_Images.prototype.process_images_inner_private.call(_this,type_inner, element);    
 
                   } else {
                         // console.log("gim [process_images] if innner loop else");
@@ -3119,8 +3151,9 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
                     var process_images_callback = function(type_inner_1) {
 
                         if (window.document.splugins.common._o(_this./*#*/data_private.types, type_inner_1)) {
-                            _this./*#*/process_images_private(type_inner_1, element);
-                            
+                            // _this./*#*/process_images_private(type_inner_1, element);
+                            SP_WBC_Variations_Gallery_Images.prototype.process_images_private.call(_this,type_inner_1, element);
+
                         }
 
                     };
@@ -3145,7 +3178,8 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
             
             // console.log("gim [process_images] else");
 
-            _this./*#*/process_images_inner_private(type, element);
+            // _this./*#*/process_images_inner_private(type, element);
+            SP_WBC_Variations_Gallery_Images.prototype.process_images_inner_private.call(_this,type, element);
 
         }
 
@@ -3192,7 +3226,8 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
                 _this./*#*/process_slider_and_zoom_private(type);  
               }
               
-              _this./*#*/process_events_private(type);
+              // _this./*#*/process_events_private(type);
+              SP_WBC_Variations_Gallery_Images.prototype.process_events_private.call(_this,type);
 
               _this./*#*/process_and_manage_effects_private(type);
 
@@ -3506,11 +3541,13 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
 
         if(type == 'image'){
  
-            _this./*#*/compatability_private("image_section");
+            // _this./*#*/compatability_private("image_section");
+            SP_WBC_Variations_Gallery_Images.prototype.compatability_private.call(_this,"image_section");
  
         }else if(type == 'video'){
  
-            _this./*#*/compatability_private("video_section");
+            // _this./*#*/compatability_private("video_section");
+            SP_WBC_Variations_Gallery_Images.prototype.compatability_private.call(_this,"video_section");
  
         }
  
@@ -3703,7 +3740,8 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
             
             if(window.document.splugins.common.is_empty(liLocate)){
 
-                liLocate = _this./*#*/$base_container_private.closest(_this./*#*/compatability_private('selectore_loop_box_for_Anchor_tag'));
+                // liLocate = _this./*#*/$base_container_private.closest(_this./*#*/compatability_private('selectore_loop_box_for_Anchor_tag'));
+                liLocate = _this./*#*/$base_container_private.closest(SP_WBC_Variations_Gallery_Images.prototype.compatability_private.call(_this,'selectore_loop_box_for_Anchor_tag'));
 
             }
 
@@ -4048,8 +4086,9 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
             
                     console.log("gim [compatability] init wc_variation_form");
 
-                   _this./*#*/init_preprocess_private(event);
-
+                   // _this./*#*/init_preprocess_private(event);
+                    SP_WBC_Variations_Gallery_Images.prototype.init_preprocess_private.call(_this,event);
+                 
                  }); // Support for Jetpack's Infinite Scroll,
 
                  jQuery(document.body).on('post-load', function (event) {
@@ -4057,8 +4096,9 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
 
                     console.log("gim [compatability] init post-load");
 
-                   _this./*#*/init_preprocess_private(event);
-
+                   // _this./*#*/init_preprocess_private(event);
+                    SP_WBC_Variations_Gallery_Images.prototype.init_preprocess_private.call(_this,event);
+                 
                  }); // YITH Quickview
 
                  jQuery(document).on('qv_loader_stop', function (event) {
@@ -4066,8 +4106,9 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
 
                     console.log("gim [compatability] init qv_loader_stop");
 
-                   _this./*#*/init_preprocess_private(event);
-
+                   // _this./*#*/init_preprocess_private(event);
+                    SP_WBC_Variations_Gallery_Images.prototype.init_preprocess_private.call(_this,event);
+                 
                  }); // Elementor
 
                  if (window.elementorFrontend && window.elementorFrontend.hooks) {
@@ -4076,7 +4117,8 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
 
                     console.log("gim [compatability] init if");
                      
-                     _this./*#*/init_preprocess_private(event);
+                     // _this./*#*/init_preprocess_private(event);
+                    SP_WBC_Variations_Gallery_Images.prototype.init_preprocess_private.call(_this,event);
 
                    });
                  }
@@ -4114,8 +4156,9 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
         
     }
 
-    /*#*/set_child_obj_private_private(child_obj) {
+    /*#*/set_child_obj_private(child_obj) {
 
+        console.log('gim [set_child_obj_private]');
         var _this = this;
 
         // NOTE: right now we are setting the child obj at broad leval but we may like to refactore it to make me more apropre at by only passing it only for the function highrisy where it is needed.
@@ -4202,18 +4245,26 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
 
     init() { 
 
-        // console.log("gim [init]");
+        console.log("gim [init]");
+        console.log(this);
 
         var _this = this; 
-    
-        _this./*#*/init_private();
+
+       // ACTIVE_TODO_OC_START
+        // ACTIVE_TODO It should be well noted that mere droping # for same name functions in parent and child class results in recurtion so we had to call it using prototype. When we enable back the support for # at that time simply uncomment below line and comment the line under neth it.
+        // ACTIVE_TODO_OC_END
+        // _this./*#*/init_private();
+        SP_WBC_Variations_Gallery_Images.prototype.init_private.call(_this,_this);    
+
     } 
 
     set_child_obj(child_obj) {
 
+        console.log('gim [set_child_obj]');
+
         var _this = this; 
 
-        _this./*#*/set_child_obj_private_private(child_obj);
+        _this./*#*/set_child_obj_private(child_obj);
     }
  
 }
@@ -4505,7 +4556,8 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
  
     /*#*/init_private() {
 
-        // console.log('gim_feed [init_private]');
+        console.log('gim_feed [init_private]');
+        console.log(this);
 
         var _this = this; 
 
@@ -4901,9 +4953,14 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
     init() { 
 
         console.log('gim_feed [init]');
+        console.log(this);
         var _this = this; 
 
-        _this./*#*/init_private();
+       // ACTIVE_TODO_OC_START
+        // ACTIVE_TODO It should be well noted that mere droping # for same name functions in parent and child class results in recurtion so we had to call it using prototype. When we enable back the support for # at that time simply uncomment below line and comment the line under neth it.
+        // ACTIVE_TODO_OC_END
+        // _this./*#*/init_private();
+        SP_WBC_Variations_Gallery_Images_Feed_Page.prototype.init_private.call(_this,);
     
     }
 
