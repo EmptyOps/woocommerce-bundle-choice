@@ -119,6 +119,7 @@ class Controller extends \eo\wbc\controllers\Controller {
 		}
 	}*/
 	public function default_uis($type,$exceptance) {
+		/*--a code /sp_theme_ui/application/view/ui/Base_Builder.php sathe marj karalo chhe.*/
 		$defaults = array(
 			'label'=>array('text','color','back_color','font_family','font_size','visibility'),
 			'p'=>array('text','color','back_color','font_family','font_size','visibility'),
@@ -132,7 +133,7 @@ class Controller extends \eo\wbc\controllers\Controller {
 			'button'=>array('text','color','back_color','font_family','font_size','radius','visibility'),
 			'container'=>array('height','width','margin_left','margin_right','visibility'),
 			'wc_attribute_field'=>array('attribute','checkbox','text','visibility'),
-			'a'=>array('url','text','visibility')
+			'a'=>array('href','url','text','visibility')
 		);
 
 		$collection = array();

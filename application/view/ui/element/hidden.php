@@ -1,0 +1,1 @@
+<input type="hidden" <?php echo (!empty($class) ? 'class="'.$class.'"':''); ?> <?php echo (!empty($id) ? 'id="'.$id.'"':''); ?> <?php echo (!empty($attr)? $attr: ''); ?> <?php echo (!empty($name) ? 'name="'.$name.'"':''); ?> value=<?php echo empty($value_quote)?'"':$value_quote; ?><?php echo !empty($value)?$value:''; ?><?php echo empty($value_quote)?'"':$value_quote; ?>>

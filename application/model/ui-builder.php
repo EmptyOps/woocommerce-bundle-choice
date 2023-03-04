@@ -8,6 +8,7 @@ use eo\wbc\model\utilities\Eowbc_Theme_Adaption_Check;
 
 defined( 'ABSPATH' ) || exit;
 
+/*ACTIVE_TODO a akho class comper thai gayo che now it is marked dapricated. and jayre badha colars ni dipandeche an par thai remove thie jase minchhe koy bhi ana par dipend ni hoy teyra a class ne comment mari devano chhe -- to h & to b*/
 class UI_Builder implements Builder {
 
 	private static $_instance = null;
