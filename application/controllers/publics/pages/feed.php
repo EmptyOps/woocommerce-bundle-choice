@@ -127,7 +127,7 @@ class Feed extends \eo\wbc\controllers\publics\Controller{
             }
 
         } else{
-            \eo\wbc\controller\publics\Feed::instance()->getUI();
+            \eo\wbc\controller\publics\Feed::instance()->getUI(null);
         }
     }
 
