@@ -782,4 +782,13 @@ class WBC_WC {
         return wc_attribute_taxonomy_name_by_id((int) $attribute_id);
     }
 
+    public function is_shop_or_category() {
+
+        return ( is_shop() || is_category() ); 
+    }
+}
+
+function wbc_is_shop_or_category() {
+
+    wbc()->wc->is_shop_or_category();
 }
