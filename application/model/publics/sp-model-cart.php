@@ -9,7 +9,7 @@ defined( 'ABSPATH' ) || exit;
 
 use eo\wbc\system\core\publics\SP_Cart;
 
-class SP_Model_Cart extends SP_Feed {
+class SP_Model_Cart extends SP_Cart {
 
 	private static $_instance = null;
 
