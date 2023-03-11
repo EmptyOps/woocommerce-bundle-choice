@@ -784,7 +784,7 @@ class WBC_WC {
 
     public function is_shop_or_category() {
 
-        return ( is_shop() || is_category() ); 
+        return ( is_shop() || is_product_category() ); 
     }
 }
 
