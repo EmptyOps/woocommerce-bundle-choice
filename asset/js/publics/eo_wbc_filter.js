@@ -532,9 +532,9 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 						site_url = url_split_final.join("/");
 					}
 
-					console.log(site_url);
 				}
-
+				
+				console.log(site_url);
 
 				if(site_url.includes('?')) {
 					
@@ -777,7 +777,10 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		// apply filter notification no more supported
 		// var prepare_query_data_callback = null ;
         // window.document.splugins.events.api.apply_all_observer_filters( 'filters', 'prepare_query_data', {form_data:form_data, init_call:init_call }, prepare_query_data_callback );
-	
+		
+		console.log("filter prepare_query_data return statment");
+		console.log(ajax_url);
+
         return { form_data:form_data, ajax_url:ajax_url };
 
 	};	
@@ -837,6 +840,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
 		console.log('filters eo_wbc_filter_change_wrapper_private pq_data');
 		console.log(pq_data.ajax_url);
+		console.log(pq_data.form_data);
 
 		// sp_filter_request variable tv_template.js ma move karavano, if required -- to h & -- to s
 		// 	INVALID
