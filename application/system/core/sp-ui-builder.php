@@ -24,12 +24,12 @@ class SP_Ui_Builder implements Builder {
 		
 	}
 
-	public function build(array $ui,$option_key='',$process_form = true,$ui_generator = null){
+	public function build(array $ui,$option_key='',$process_form = true,$ui_generator = null, $ui_definition = null){
 		
 		// nothig to do here so far 
 	}
 
-	protected function process_build($ui_key,$ui_ele,$ui,$option_key='',$process_form = true,$ui_generator = null) {
+	protected function process_build($ui_key,$ui_ele,$ui,$option_key='',$process_form = true,$ui_generator = null, $ui_element_definition = null) {
 		
 		// nothig to do here so far 
 	}
