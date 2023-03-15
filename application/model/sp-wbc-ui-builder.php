@@ -24,7 +24,7 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 		
 	}
 
-	public function build(array $ui,$option_key='',$process_form = true,$ui_generator = null){
+	public function build(array $ui,$option_key='',$process_form = true,$ui_generator = null, $ui_definition = null){
 
 		\sp\wbc\system\core\SP_Ui_Builder::instance()->build($ui, $option_key, $process_form,$ui_generator);
 
@@ -34,20 +34,20 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 			foreach ($ui as $ui_key => $ui_ele) {
 				
 				-- a if /sp_theme_ui/application/view/ui/Base_Builder.php build function  ni chhe
-				if(!empty($ui_ele['configuration_controls']) and !empty($ui_ele['configuration_controls'][2])){
+				if(!empty($ui_definition['controls'][$ui_key]['configuration_controls']) and !empty($ui_definition['controls'][$ui_key]['configuration_controls'][2])){
 
-					if(!empty($ui_ele['configuration_controls'][2]['action']) and $ui_ele['configuration_controls'][2]['action']==='toggle_section') {
+					if(!empty($ui_definition['controls'][$ui_key]['configuration_controls'][2]['action']) and $ui_definition['controls'][$ui_key]['configuration_controls'][2]['action']==='toggle_section') {
 
-						$_data_key_ = $ui_ele['configuration_controls'][2]['id'];
-						$_option_key_ = $ui_ele['configuration_controls'][2]['control_key'];
+						$_data_key_ = $ui_definition['controls'][$ui_key]['configuration_controls'][2]['id'];
+						$_option_key_ = $ui_definition['controls'][$ui_key]['configuration_controls'][2]['control_key'];
 
 						$type = '';
 						if(!empty($ui_ele['type'])){
 							$type = $ui_ele['type'];
 						} 
 
-						if(!empty($ui_ele['configuration_controls'][2]['type'])) {
-							$type = $ui_ele['configuration_controls'][2]['type'];
+						if(!empty($ui_definition['controls'][$ui_key]['configuration_controls'][2]['type'])) {
+							$type = $ui_definition['controls'][$ui_key]['configuration_controls'][2]['type'];
 						}
 
 						if(!empty($type)) {
@@ -57,21 +57,21 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 						if(wbc()->options->get_option($_option_key_,$_data_key_)){
 							continue;
 						} else {
-							$this->process_build($ui_key,$ui_ele,$ui,$option_key,$process_form,$ui_generator);		
+							$this->process_build($ui_key,$ui_ele,$ui,$option_key,$process_form,$ui_generator,isset($ui_definition['controls'][$ui_key])?$ui_definition['controls'][$ui_key]:null);		
 						}
 					} else {
-						$this->process_build($ui_key,$ui_ele,$ui,$option_key,$process_form,$ui_generator);
+						$this->process_build($ui_key,$ui_ele,$ui,$option_key,$process_form,$ui_generator,isset($ui_definition['controls'][$ui_key])?$ui_definition['controls'][$ui_key]:null);
 					}
 
 				} else {
-					$this->process_build($ui_key,$ui_ele,$ui,$option_key,$process_form,$ui_generator);
+					$this->process_build($ui_key,$ui_ele,$ui,$option_key,$process_form,$ui_generator,isset($ui_definition['controls'][$ui_key])?$ui_definition['controls'][$ui_key]:null);
 				}
 			}
 
 		}
 	}
 
-	private function process_build($ui_key,$ui_ele,$ui,$option_key='',$process_form = true,$ui_generator = null) {
+	private function process_build($ui_key,$ui_ele,$ui,$option_key='',$process_form = true,$ui_generator = null, $ui_element_definition = null) {
 
 		\sp\wbc\system\core\SP_Ui_Builder::instance()->process_build($ui_key,$ui_ele,$ui,$option_key,$process_form,$ui_generator);
 
@@ -126,11 +126,13 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 			/*-------------------------*/
 
 	
-			if(!empty($ui_ele['appearence_controls']) and !empty($ui_ele['id']) and $process_form) {
+			//if(!empty($ui_ele['appearence_controls']) and !empty($ui_ele['id']) and $process_form) {
+			if (!empty($ui_element_definition['appearence_controls']) and !empty($ui_ele['id']) and $process_form) {
+				
 				
 				$control_group = '';
-				if(!empty($ui_ele['appearence_controls'][1]['type'])) {
-					$control_group = $ui_ele['appearence_controls'][1]['type'];
+				if(!empty($ui_element_definition['appearence_controls'][1]['type'])) {
+					$control_group = $ui_element_definition['appearence_controls'][1]['type'];
 				} elseif(!empty($ui_ele['type'])){
 					$control_group = $ui_ele['type'];
 				} else {
@@ -138,10 +140,10 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 				}
 
 				ACTIVE_TODO as aplicabel we need to do imprument or revision of the default_uis function for the below. but only if that is aplicabel or nashshori for the ui builder imprument. other wish simply markisid todo max by the fast or secnd revishon -- to h -- to b 
-				$controls = $ui_generator->default_uis($control_group/*'label'*/,$ui_ele['appearence_controls'][1]);
+				$controls = $ui_generator->default_uis($control_group/*'label'*/,$ui_element_definition['appearence_controls'][1]);
 
-				if(!empty($ui_ele['appearence_controls'][2]['control_key'])){
-					$option_key = $ui_ele['appearence_controls'][2]['control_key'];
+				if(!empty($ui_element_definition['appearence_controls'][2]['control_key'])){
+					$option_key = $ui_element_definition['appearence_controls'][2]['control_key'];
 				}
 				
 				$customizer_value = get_theme_mod($ui_ele['id']);
@@ -347,11 +349,11 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 			-- a code sp_theme_ui/application/view/ui/Base_Builder.php no process_build() no che
 
 			--submodul ma move kervano che.....  but we need to dished the function overied flow or the hooks but hooks cims anneshryi exjshiv at this plse --to h & to b
-			if(!empty($ui_ele['configuration_controls']) and !empty($ui_ele['configuration_controls'][2])){
+			//if(!empty($ui_ele['configuration_controls']) and !empty($ui_ele['configuration_controls'][2])){
+			if (!empty($ui_element_definition['configuration_controls']) and !empty($ui_element_definition['configuration_controls'][2]) ) {
+				if( !empty($ui_element_definition['configuration_controls'][2]['type']) and $ui_element_definition['configuration_controls'][2]['type']=='wc_attribute_field'){
 
-				if( !empty($ui_ele['configuration_controls'][2]['type']) and $ui_ele['configuration_controls'][2]['type']=='wc_attribute_field'){
-
-					if(!empty($ui_ele['configuration_controls'][2]['option_key']) and !empty($ui_ele['configuration_controls'][2]['id'])){
+					if(!empty($ui_element_definition['configuration_controls'][2]['option_key']) and !empty($ui_element_definition['configuration_controls'][2]['id'])){
 
 						global $post;
 						if(!empty($post) and !is_wp_error($post)){
@@ -360,8 +362,8 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 							if(!empty($product) and !is_wp_error($product)) {
 								$item_attributes = $product->get_attributes();
 
-								$_data_key_ = $ui_ele['configuration_controls'][2]['id'];
-								$_option_key_ = $ui_ele['configuration_controls'][2]['option_key'];
+								$_data_key_ = $ui_element_definition['configuration_controls'][2]['id'];
+								$_option_key_ = $ui_element_definition['configuration_controls'][2]['option_key'];
 
 
 								$__data__ = '';
@@ -442,8 +444,10 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 			}
 
 			--submodul ma move kervano che.....  but we need to dished the function overied flow or the hooks but hooks cims anneshryi exjshiv at this plse --to h & to b
-			if(!empty($ui_ele['data_controls']) and !empty($ui_ele['data_controls']['type'])){
-				if($ui_ele['data_controls']['type'] === 'send_email_on_click'){
+				-- also we need to mac syore that we refacter and upgrad the ajax handlare to send mail which is in controllers ajax folder -- to h & -- to b 
+			// if(!empty($ui_ele['data_controls']) and !empty($ui_ele['data_controls']['type'])){
+			if(!empty($ui_element_definition['data_controls']) and !empty($ui_element_definition['data_controls']['type'])){
+				if($$ui_element_definition['data_controls']['type'] === 'send_email_on_click'){
 					
 					wbc()->load->asset('js','publics/ui_builder');
 					wbc()->load->asset('localize','publics/ui_builder',array( 'sp_urls'=>array('ajax_url'=>admin_url('admin-ajax.php'))));
@@ -452,13 +456,13 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 						jQuery(window).on('load',function(){
 							window.setTimeout(function(){
 								//if(typeof(jQuery.fn.EmailForm)==='function'){
-									window.document.splugins.EmailForm('<?php echo empty($ui_ele['data_controls']['form_field'])?'':$ui_ele['data_controls']['form_field']; ?>','#<?php echo $ui_ele['id']; ?>');
+									window.document.splugins.EmailForm('<?php echo empty($ui_element_definition['data_controls']['form_field'])?'':$ui_element_definition['data_controls']['form_field']; ?>','#<?php echo $ui_ele['id']; ?>');
 								//}
 							},2000);
 						});
 					</script>
 					<?php
-					if(!empty($ui_ele['data_controls']['_wpnonce']) and !empty($ui_ele['data_controls']['resolver'])){
+					if(!empty($ui_element_definition['data_controls']['_wpnonce']) and !empty($ui_element_definition['data_controls']['resolver'])){
 
 						/*echo "<pre>";
 						print_r(\eo\wbc\controllers\admin\Controller::instance()->get_control_data($ui_ele['data_controls']['ui_defination']));
@@ -471,14 +475,14 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 									'type'=>'hidden',
 									'name'=>'email_field_vars',
 									'class'=>'email_form_field',
-									'value'=>$ui_ele['data_controls']['email_vars'],
+									'value'=>$ui_element_definition['data_controls']['email_vars'],
 									'value_quote'=>"'"
 								),
 								array(
 									'type'=>'hidden',
 									'name'=>'_wpnonce',
 									'class'=>'email_form_field',
-									'value'=>wp_create_nonce($ui_ele['data_controls']['_wpnonce'])
+									'value'=>wp_create_nonce($ui_element_definition['data_controls']['_wpnonce'])
 								),
 								array(
 									'type'=>'hidden',
@@ -490,13 +494,13 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 									'type'=>'hidden',
 									'name'=>'resolver',
 									'class'=>'email_form_field',
-									'value'=>$ui_ele['data_controls']['resolver']
+									'value'=>$ui_element_definition['data_controls']['resolver']
 								),
-								(!empty($ui_ele['data_controls']['resolver_path'])?array(
+								(!empty($ui_element_definition['data_controls']['resolver_path'])?array(
 									'type'=>'hidden',
 									'name'=>'resolver_path',
 									'class'=>'email_form_field',
-									'value'=>$ui_ele['data_controls']['resolver_path']
+									'value'=>$ui_element_definition['data_controls']['resolver_path']
 								):array())
 							)
 						);
