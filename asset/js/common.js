@@ -3611,6 +3611,8 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
         _this.#$variations_form.on('show_variation', function (event, variation) {
             
             console.log("gim [variation_change_listener] show_variation");
+            
+            _this.#process_gallery_images_data();
 
            // -- aya only is_category_page ni if condition mari se 02-11-2022 @a --
            if(window.document.splugins.common.is_category_page) {
@@ -3627,6 +3629,13 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
          
         });
  
+    }
+
+    #process_gallery_images_data() {
+        
+        // -- aa notification add_inscription mate se @a 125.3
+        var variation_change_listener_callback = null;
+        window.document.splugins.events.api.notifyAllObservers( 'gallery_images_product_page', 'variation_change_listener', {variation:variation}, variation_change_listener_callback, _this.#$base_container );
     }
 
     #create_variation_url(element, event, variation) {
