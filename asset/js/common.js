@@ -4772,8 +4772,8 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
 
                     zoom_inner_html += _this.apply_template_data_public(template_var, image, templating_lib);
 
-                    // console.log('gim_feed zoom_area_hover_in each_loop if zoom_inner_html');
-                    // console.log(zoom_inner_html);
+                    console.log('gim_feed zoom_area_hover_in each_loop if zoom_inner_html');
+                    console.log(zoom_inner_html);
 
                     return false;
                 }

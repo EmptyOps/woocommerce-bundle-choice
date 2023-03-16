@@ -519,7 +519,14 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 						url_segment_minus = 2;
 					}
 
-					url_split_final[url_split_final.length-url_segment_minus] = jQuery('.filter_setting_advance_two_tabs .active').data('category').trim(); 
+					if(window.document.splugins.common.current_theme_key == 'themes___purple_theme') {
+						
+						url_split_final[url_split_final.length-url_segment_minus] = jQuery('.filter_setting_advance_two_tabs li.active').data('category').trim(); 
+					} else {
+
+						url_split_final[url_split_final.length-url_segment_minus] = jQuery('.filter_setting_advance_two_tabs .active').data('category').trim(); 
+					}
+
 
 					if( site_url.indexOf("?") > -1 ){
 
