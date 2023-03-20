@@ -632,7 +632,7 @@ class WBC_WC {
 
                         } else {
 
-                            $option_list[$term->term_taxonomy_id] = array('attr'=>'data-sp_eid="'.$separator.'attr_opt'.$separator.$attribute->attribute_id.$separator.'" ', 'label'=>$term->name, 'slug'=>$term->slug);  
+                            $option_list[$term->term_taxonomy_id] = array('attr'=>'data-sp_eid="'.$separator.'attr_opt'.$separator./*$attribute->attribute_id*/$term->term_taxonomy_id.$separator.$separator.$term->term_id.$separator.'" ', 'label'=>$term->name, 'slug'=>$term->slug);  
                         }
                     }
                 }
@@ -850,5 +850,59 @@ class WBC_WC {
 
         return null;
     } 
+
+    public function id_to_slug($type, $id) {
+
+        if($type == 'prod_cat') {
+
+            // yet to implement
+            /*$term = $this->get_term_by( 'slug', $slug, 'product_cat' );
+
+            if(!empty($term) and !is_wp_error($term)){
+                
+                return $term->term_id;
+            }*/
+
+        } elseif($type == 'attr') {
+
+            $attribute = wc_get_attribute( $id );
+            
+            if(!empty($attribute) and !is_wp_error($attribute)){
+                
+                return $attribute->slug;
+            }
+
+        } elseif($type == 'attr_opt') {
+
+            $term = get_term( $id );
+            
+            if(!empty($term) and !is_wp_error($term)){
+                
+                return $term->slug;
+            }
+
+        } else {
+
+        }
+
+        return null;
+    } 
+
+    public function parent_category_id($category_id) {
+
+        //firstly, load data for your child category
+        $child = get_term_by( 'id', $category_id, 'product_cat' )/*get_category($category_id)*/;
+
+        //from your child category, grab parent ID
+        $parent = $child->parent;
+
+        //load object for parent category
+        $parent_cat = get_term_by( 'id', $parent, 'product_cat' )/*get_category($parent)*/;
+
+        /*ACTIVE_TODO_OC_START
+        ACTIVE_TODO here we are using term_taxonomy_id but we are not sure if term_id is right or term_taxonomy_id is right. normaly term_taxonomy_id is what that is used to determine the wp_query quired object's category id. but anyway now we should understand clearly the whole taxonomy data structure. so tthat we can clearly confirm this point as well. let just do it by second revision -- to h
+        ACTIVE_TODO_OC_END*/
+        return $parent_cat->term_taxonomy_id;
+    }
 
 }
