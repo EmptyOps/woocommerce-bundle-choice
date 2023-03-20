@@ -1175,19 +1175,12 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
         // console.log("init_private before ajaxComplete");
 
         jQuery(document).ajaxComplete(function (event, request, settings) {
-            
-          console.log("init_private inner ajaxComplete");
 
           splugins._.delay(function () {
            
             jQuery( _this.#$base_container /*'.variations_form:not(.spui-wbc-swatches-loaded)'*/).each(function () {
 
-                console.log("init_private inner ajaxComplete inner");
-                console.log(jQuery(this));
-
                 if( !( jQuery(this).hasClass('spui-wbc-swatches-loaded') ) ){
-                    
-                    console.log("init_private inner ajaxComplete inner");
 
                     jQuery(this).wc_variation_form();
                 }
@@ -1230,16 +1223,12 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
         // console.log("init_private before aln_reloaded");
 
         jQuery('body').on('aln_reloaded', function () {
-        
-            console.log("init_private inner aln_reloaded");
 
             splugins._.delay(function () {
            
                 jQuery( _this.#$base_container /*'.variations_form:not(.spui-wbc-swatches-loaded)'*/).each(function () {
                     
                     if( !( jQuery(this).hasClass('spui-wbc-swatches-loaded') ) ){
-                    
-                        console.log("init_private inner aln_reloaded inner");
 
                         jQuery(this).wc_variation_form();
                     }
@@ -2673,15 +2662,14 @@ window.document.splugins.wbc.variations.swatches = window.document.splugins.wbc.
 
 window.document.splugins.wbc.variations.swatches.core = function( configs ) {
 
-    console.log("SP_WBC_Variations_Swatches .core");
 
     jQuery.fn.sp_wbc_variations_swatches = function () {
         
-        console.log("SP_WBC_Variations_Swatches function object");
+        console.log("[vs] module called");
 
         return this.each(function () {
 
-            console.log("SP_WBC_Variations_Swatches object");
+            // console.log("[vs] [jQuery.fn.sp_wbc_variations_swatches] each_loop");
 
             (new SP_WBC_Variations_Swatches(this,configs)).init();
         });
@@ -4227,13 +4215,13 @@ window.document.splugins.wbc.variations.gallery_images.core = function( default_
 
     jQuery.fn.sp_wbc_variations_gallery_images = function ( options ) {
 
-        console.log("module called [jQuery.fn.sp_wbc_variations_gallery_images]");
+        console.log("[gim] module called");
 
         options = jQuery.extend({}, default_options, options);
 
         return this.each(function () {
 
-            console.log("[jQuery.fn.sp_wbc_variations_gallery_images] each_loop");
+            // console.log("[gim] [jQuery.fn.sp_wbc_variations_gallery_images] each_loop");
 
             (new SP_WBC_Variations_Gallery_Images(this,options)).init();
         });
@@ -4784,8 +4772,8 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
 
                     zoom_inner_html += _this.apply_template_data_public(template_var, image, templating_lib);
 
-                    // console.log('gim_feed zoom_area_hover_in each_loop if zoom_inner_html');
-                    // console.log(zoom_inner_html);
+                    console.log('gim_feed zoom_area_hover_in each_loop if zoom_inner_html');
+                    console.log(zoom_inner_html);
 
                     return false;
                 }
@@ -4944,14 +4932,14 @@ window.document.splugins.wbc.variations.gallery_images.feed_page.core = function
         
         options = jQuery.extend({}, default_options, options);
 
-        console.log("module called [jQuery.fn.sp_wbc_variations_gallery_images_feed_page]");
+        console.log("[gim_feed] module called");
         
         // console.log("gim_feed 'this'");
         // console.log(this);
         
         return this.each(function () {
             
-            // console.log("[jQuery.fn.sp_wbc_variations_gallery_images_feed_page] each_loop");
+            // console.log("[gim_feed] each_loop");
             (new SP_WBC_Variations_Gallery_Images_Feed_Page(this,options)).init();
 
         });
