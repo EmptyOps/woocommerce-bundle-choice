@@ -855,6 +855,16 @@ class WBC_WC {
 
         return null;
     } 
+
+    public function product_has_category($categories_to_check, $product_id) {
+
+        if ( has_term( $categories_to_check, 'product_cat', $product_id ) ) { 
+
+            return true;
+        }
+        
+        return false;
+    }
 }
 
 function wbc_is_shop_or_category() {

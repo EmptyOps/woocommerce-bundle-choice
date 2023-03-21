@@ -65,6 +65,10 @@ class Controller extends \eo\wbc\controllers\Controller{
 
             return true;
         
+        } elseif( $args['page'] == 'custom-page' /*&& is_product()*/){
+
+            return true;
+        
         }
         
         return false;
