@@ -870,4 +870,4 @@ class WBC_WC {
 function wbc_is_shop_or_category() {
 
     wbc()->wc->is_shop_or_category();
-}
+} 
