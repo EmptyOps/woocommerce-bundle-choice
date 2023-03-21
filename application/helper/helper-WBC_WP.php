@@ -252,4 +252,10 @@ class WBC_WP {
         // ACTIVE_TODO implement based on  plugin slug -- to h
         return is_plugin_active( $plugin );
     }
+
+
+    public function attachment_id_to_url($attachment_id) {
+        
+        return wp_get_attachment_url($attachment_id); 
+    } 
 }

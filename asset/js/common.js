@@ -4045,6 +4045,9 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
         ACTIVE_TODO_OC_END*/
         _this./*#*/process_images_template_private(variation.variation_gallery_images);
 
+        var variation_change_private_callback = null;
+        window.document.splugins.events.api.notifyAllObservers( 'gallery_images', 'variation_change_private', { current_variation : _this./*#*/data_private.current_variation }, variation_change_private_callback, _this.$base_container_private );         
+
     }
  
     /*#*/reset_variation_private(type) {
