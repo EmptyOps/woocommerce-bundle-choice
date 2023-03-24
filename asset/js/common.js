@@ -3619,7 +3619,8 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
         _this.#$variations_form.on('show_variation', function (event, variation) {
             
             console.log("gim [variation_change_listener] show_variation");
-            console.log(_this.#$variations_form);
+            // console.log(_this.#$variations_form);
+            console.log(variation);
 
            // -- aya only is_category_page ni if condition mari se 02-11-2022 @a --
            if(window.document.splugins.common.is_category_page) {
