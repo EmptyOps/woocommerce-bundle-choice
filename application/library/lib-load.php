@@ -77,6 +77,16 @@ if(!class_exists('WBC_Loader')) {
 		            wp_enqueue_script( 'fomantic-semantic.min');        
 		        },100);	
 					break;
+
+				case 'react':
+
+					wbc()->load->asset('js','https://unpkg.com/react@18/umd/react.production.min.js',array(),"",true,true,null,null,false,true,null,true);
+
+				break;
+				case 'react_lazyload':
+					-- tejas exjample app e set karvanu chhe.
+				break;
+
 		        case 'ion_rangeSlider':
 		        	
 		        	if( wbc()->sanitize->get('is_test') == 1 ) {

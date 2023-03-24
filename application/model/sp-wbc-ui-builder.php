@@ -444,7 +444,7 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 			}
 
 			--submodul ma move kervano che.....  but we need to dished the function overied flow or the hooks but hooks cims anneshryi exjshiv at this plse --to h & to b
-				-- also we need to mac syore that we refacter and upgrad the ajax handlare to send mail which is in controllers ajax folder -- to h & -- to b 
+				// -- also we need to mac syore that we refacter and upgrad the ajax handlare to send mail which is in controllers ajax folder -- to h & -- to b done
 			// if(!empty($ui_ele['data_controls']) and !empty($ui_ele['data_controls']['type'])){
 			if(!empty($ui_element_definition['data_controls']) and !empty($ui_element_definition['data_controls']['type'])){
 				if($$ui_element_definition['data_controls']['type'] === 'send_email_on_click'){
