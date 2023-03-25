@@ -3393,6 +3393,9 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
 
       }
 
+        var process_images_template_callback = null;
+        window.document.splugins.events.api.notifyAllObservers( 'gallery_images', 'process_images_template', { current_variation : _this./*#*/data_private.current_variation }, process_images_template_callback, _this.$base_container_private );
+
     };
  
     /*#*/process_slider_template_private(images){
@@ -4038,8 +4041,12 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
         ACTIVE_TODO_OC_END*/
         _this./*#*/process_images_template_private(variation.variation_gallery_images);
 
-        var variation_change_private_callback = null;
-        window.document.splugins.events.api.notifyAllObservers( 'gallery_images', 'variation_change_private', { current_variation : variation }, variation_change_private_callback, _this.$base_container_private );         
+        // ACTIVE_TODO/TODO below notification is disabled becose is no more in use. But if required we can simply enable it by removing false condition. 
+        if(false) {
+
+            var variation_change_private_callback = null;
+            window.document.splugins.events.api.notifyAllObservers( 'gallery_images', 'variation_change_private', { current_variation : variation }, variation_change_private_callback, _this.$base_container_private );         
+        }
 
     }
  
