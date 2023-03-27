@@ -447,64 +447,13 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 				// -- also we need to mac syore that we refacter and upgrad the ajax handlare to send mail which is in controllers ajax folder -- to h & -- to b done
 			// if(!empty($ui_ele['data_controls']) and !empty($ui_ele['data_controls']['type'])){
 			if(!empty($ui_element_definition['data_controls']) and !empty($ui_element_definition['data_controls']['type'])){
-				if($$ui_element_definition['data_controls']['type'] === 'send_email_on_click'){
+				if($ui_element_definition['data_controls']['type'] === 'example_exshon'){
 					
-					wbc()->load->asset('js','publics/ui_builder');
-					wbc()->load->asset('localize','publics/ui_builder',array( 'sp_urls'=>array('ajax_url'=>admin_url('admin-ajax.php'))));
-					?>
-					<script type="text/javascript">
-						jQuery(window).on('load',function(){
-							window.setTimeout(function(){
-								//if(typeof(jQuery.fn.EmailForm)==='function'){
-									window.document.splugins.EmailForm('<?php echo empty($ui_element_definition['data_controls']['form_field'])?'':$ui_element_definition['data_controls']['form_field']; ?>','#<?php echo $ui_ele['id']; ?>');
-								//}
-							},2000);
-						});
-					</script>
-					<?php
-					if(!empty($ui_element_definition['data_controls']['_wpnonce']) and !empty($ui_element_definition['data_controls']['resolver'])){
+					// NOTE: from here we are not duing the do_action but in future if required than we can also do do_action for manged type for the type suported here on the wbc leyer. so wen if you do that the simply we can move the do_action from the else below to below the this vole if else an makit aplicabel for all if and else condishon. the men reshon regading anneshshory hooks we need to now cep the hook feld wery lick so allthe nessory hook well be added. 
 
-						/*echo "<pre>";
-						print_r(\eo\wbc\controllers\admin\Controller::instance()->get_control_data($ui_ele['data_controls']['ui_defination']));
-						echo "</pre>";*/
+				} else {
 
-						$this->build(
-							array(
-								
-								array(
-									'type'=>'hidden',
-									'name'=>'email_field_vars',
-									'class'=>'email_form_field',
-									'value'=>$ui_element_definition['data_controls']['email_vars'],
-									'value_quote'=>"'"
-								),
-								array(
-									'type'=>'hidden',
-									'name'=>'_wpnonce',
-									'class'=>'email_form_field',
-									'value'=>wp_create_nonce($ui_element_definition['data_controls']['_wpnonce'])
-								),
-								array(
-									'type'=>'hidden',
-									'name'=>'action',
-									'class'=>'email_form_field',
-									'value'=>'eowbc_ajax'
-								),
-								array(
-									'type'=>'hidden',
-									'name'=>'resolver',
-									'class'=>'email_form_field',
-									'value'=>$ui_element_definition['data_controls']['resolver']
-								),
-								(!empty($ui_element_definition['data_controls']['resolver_path'])?array(
-									'type'=>'hidden',
-									'name'=>'resolver_path',
-									'class'=>'email_form_field',
-									'value'=>$ui_element_definition['data_controls']['resolver_path']
-								):array())
-							)
-						);
-					}
+					do_action('sp_ui_builder_build_data_controls_type', $ui_element_definition['data_controls']);
 				}
 			}
 
