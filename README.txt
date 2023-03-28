@@ -314,7 +314,7 @@ Yes, it is.
 
 = 1.0.21 (March 28,2023) =
   ** This update is tested with the latest version of WordPress(version 6.1.1) and WooCommerce (version 7.5.1). ** 
-  ** As well as we are happy to say that we have just released the [beta documentation](https://sphereplugins.com/docs/bundloice/), please check it out and be sure to send us your valuable feedback that helps us improve. **
+  ** Woo Choice Plugin from now on will be called BUNDLOICE. This update contains changes related to the name change of our plugin. **
 = 1.0.8 (Aug 05,2021) =
   ** This update is tested with the latest version of WordPress(version 5.8) and WooCommerce (version 5.5.2). ** 
   ** As well as we are happy to say that we have just released the [beta documentation](https://sphereplugins.com/docs/bundloice/), please check it out and be sure to send us your valuable feedback that helps us improve. **
