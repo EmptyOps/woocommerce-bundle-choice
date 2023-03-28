@@ -43,8 +43,8 @@ if ( ! class_exists( 'Admin_Menu' ) ) {
 						),
 						array(
 							'parent_slug'=>'eowbc',
-							'title'=>eowbc_lang('General').' - '.constant('EOWBC_NAME'),	//eowbc_lang('General - Woo Choice Plugin'),
-							'menu_title'=>eowbc_lang('General'),	//eowbc_lang('General - Woo Choice Plugin'),
+							'title'=>eowbc_lang('General').' - '.constant('EOWBC_NAME'),	//eowbc_lang('General - BUNDLOICE (formerly Woo Choice Plugin)'),
+							'menu_title'=>eowbc_lang('General'),	//eowbc_lang('General - BUNDLOICE (formerly Woo Choice Plugin)'),
 							'capability'=>'manage_options',
 							'slug'=>'eowbc-configuration',
 							'template'=>'admin/menu/configuration',

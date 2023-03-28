@@ -75,7 +75,7 @@ class Setup_Wizard {
 
 		$position = empty($menu['position'])?66:$menu['position'];
 
-		// add_menu_page( eowbc_lang('Woo Choice Plugin Setup'),eowbc_lang('Woo Choice Plugin Setup'),'manage_options','eo-wbc-init',$callback,$this->get_icon_url(),$position );   
+		// add_menu_page( eowbc_lang('BUNDLOICE (formerly Woo Choice Plugin) Setup'),eowbc_lang('Woo Choice Plugin Setup'),'manage_options','eo-wbc-init',$callback,$this->get_icon_url(),$position );   
 
 		return true;
 	}
