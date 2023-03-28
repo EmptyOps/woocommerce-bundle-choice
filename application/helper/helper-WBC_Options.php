@@ -104,12 +104,12 @@ class WBC_Options {
 
 }
 
-function get(string $option,$default = false) {
+function wbc_get_option(string $option,$default = false) {
 
 	return wbc()->options->get($option, $default);
 }
 
-function set(string $option,$value) {
+function wbc_update_option(string $option,$value) {
 
 	return wbc()->options->set($option, $value);
 }
