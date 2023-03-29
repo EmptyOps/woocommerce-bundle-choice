@@ -95,57 +95,82 @@ echo "exclude_list... ${exclude_list[@]/#/--exclude=}"
 # rsync -avr --exclude=$exclude_list "$PROJECT_ROOT/" "$PLUGIN_BUILDS_PATH/$PLUGIN"
 rsync -avr "${exclude_list[@]/#/--exclude=}" "$PROJECT_ROOT/" "$PLUGIN_BUILDS_PATH/$PLUGIN"
 
-echo "check build folder this is temporary message so remove after first run and also exit statment below it"
-exit;
 
-# # Checkout the SVN repo
-# svn co -q "http://svn.wp-plugins.org/$PLUGIN" svn
+# Checkout the SVN repo
+svn co -q "http://svn.wp-plugins.org/$PLUGIN" svn
 
-# # Move out the trunk directory to a temp location
-# mv svn/trunk ./svn-trunk
-# # Create trunk directory
-# mkdir svn/trunk
-# # Copy our new version of the plugin into trunk
-# rsync -r -p $PLUGIN/* svn/trunk
+echo "checkout done"
 
-# # Copy all the .svn folders from the checked out copy of trunk to the new trunk.
 
-# # This is necessary as the Travis container runs Subversion 1.6 which has .svn dirs in every sub dir
-# cd svn/trunk/
-# TARGET=$(pwd)
-# cd ../../svn-trunk/
+read -p "Do you want to run svn cleanup? please enter YES in capital" yn
+if [[ "$yn" == "YES" ]]; then
+    
+    read -p "Do you want to run svn cleanup? Please confirm again. Please enter YES_DO_CLEANUP in capital" yn
+    if [[ "$yn" == "YES_DO_CLEANUP" ]]; then
+        svn cleanup
+    fi
+fi
 
-# # Find all .svn dirs in sub dirs
-# SVN_DIRS=`find . -type d -iname .svn`
 
-# for SVN_DIR in $SVN_DIRS; do
-#     SOURCE_DIR=${SVN_DIR/.}
-#     TARGET_DIR=$TARGET${SOURCE_DIR/.svn}
-#     TARGET_SVN_DIR=$TARGET${SVN_DIR/.}
-#     if [ -d "$TARGET_DIR" ]; then
-#         # Copy the .svn directory to trunk dir
-#         cp -r $SVN_DIR $TARGET_SVN_DIR
-#     fi
-# done
+# Move out the trunk directory to a temp location
+mv svn/trunk ./svn-trunk
+# Create trunk directory
+mkdir svn/trunk
+# Copy our new version of the plugin into trunk
+rsync -r -p $PLUGIN/* svn/trunk
 
-# # Back to builds dir
-# cd ../
+echo "rsync done"
 
-# # Remove checked out dir
-# rm -fR svn-trunk
 
-# # Add new version tag
-# mkdir svn/tags/$VERSION
-# rsync -r -p $PLUGIN/* svn/tags/$VERSION
+# Copy all the .svn folders from the checked out copy of trunk to the new trunk.
 
-# # Add new files to SVN
-# svn stat svn | grep '^?' | awk '{print $2}' | xargs -I x svn add x@
-# # Remove deleted files from SVN
-# svn stat svn | grep '^!' | awk '{print $2}' | xargs -I x svn rm --force x@
-# svn stat svn
+# This is necessary as the Travis container runs Subversion 1.6 which has .svn dirs in every sub dir
+cd svn/trunk/
+TARGET=$(pwd)
+cd ../../svn-trunk/
 
-# # Commit to SVN
-# svn ci --no-auth-cache --username $WP_ORG_USERNAME --password $WP_ORG_PASSWORD svn -m "Deploy version $VERSION"
+# Find all .svn dirs in sub dirs
+SVN_DIRS=`find . -type d -iname .svn`
 
-# # Remove SVN temp dir
-# rm -fR svn
+for SVN_DIR in $SVN_DIRS; do
+    SOURCE_DIR=${SVN_DIR/.}
+    TARGET_DIR=$TARGET${SOURCE_DIR/.svn}
+    TARGET_SVN_DIR=$TARGET${SVN_DIR/.}
+    if [ -d "$TARGET_DIR" ]; then
+        # Copy the .svn directory to trunk dir
+        cp -r $SVN_DIR $TARGET_SVN_DIR
+    fi
+done
+
+echo "Copy dierectories done"
+
+
+# Back to builds dir
+cd ../
+
+# Remove checked out dir
+rm -fR svn-trunk
+
+# Add new version tag
+mkdir svn/tags/$VERSION
+rsync -r -p $PLUGIN/* svn/tags/$VERSION
+
+echo "rsync done again"
+
+
+# Add new files to SVN
+svn stat svn | grep '^?' | awk '{print $2}' | xargs -I x svn add x@
+# Remove deleted files from SVN
+svn stat svn | grep '^!' | awk '{print $2}' | xargs -I x svn rm --force x@
+svn stat svn
+
+# Commit to SVN
+svn ci --no-auth-cache --username $WP_ORG_USERNAME --password $WP_ORG_PASSWORD svn -m "Deploy version $VERSION"
+
+echo "commit done"
+
+
+# Remove SVN temp dir
+rm -fR svn
+
+echo "done"
