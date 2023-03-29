@@ -79,35 +79,39 @@ class Eowbc_Model {
 							
 							$dm_based_field = null;
 
-							foreach ($args['dm']['map_fields'] as $dm_key=>$dm_value) {
+							if(!empty($args['dm']['map_fields'])) {
 
-								if ( isset($args['dm']['sp_eids'][$dm_key]['extra_2']) and strpos($fk, $args['dm']['sp_eids'][$dm_key]['extra_2']) !== false ) {
+								foreach ($args['dm']['map_fields'] as $dm_key=>$dm_value) {
 
-									$dm_based_field = $dm_key; 
+									if ( isset($args['dm']['sp_eids'][$dm_key]['extra_2']) and strpos($fk, $args['dm']['sp_eids'][$dm_key]['extra_2']) !== false ) {
 
-									if(!isset($args['cn'])) {
+										$dm_based_field = $dm_key; 
 
-										if(isset($args['data_raw'][$dm_key])) {
+										if(!isset($args['cn'])) {
 
-											$dm_based_field = $dm_key;   
+											if(isset($args['data_raw'][$dm_key])) {
+
+												$dm_based_field = $dm_key;   
+											} else {
+
+												$dm_based_field = null;
+											}
+
 										} else {
 
-											$dm_based_field = null;
+											if( isset( $args['data_raw'][ $args['cn'][$dm_key] ] ) ) {
+
+												$dm_based_field = $args['cn'][$dm_key];   
+											} else {
+
+												$dm_based_field = null;
+											}
 										}
 
-									} else {
-
-										if( isset( $args['data_raw'][ $args['cn'][$dm_key] ] ) ) {
-
-											$dm_based_field = $args['cn'][$dm_key];   
-										} else {
-
-											$dm_based_field = null;
-										}
+										break;
 									}
-
-									break;
 								}
+								
 							}
 							
 							if(wbc()->sanitize->get('is_test') == 1) {
