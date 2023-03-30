@@ -65,7 +65,7 @@ if(!function_exists('eo_wbc_code')){
 	function eo_wbc_code() //script to get color code from buttons
 	{
 		//commented since set in buttons.js
-	    // return '<!-- Created with Wordpress plugin - WooCommerce Product bundle choice --><script>'.
+	    // return '<!-- Created with Wordpress plugin - BUNDLOICE (formerly Woo Choice Plugin) --><script>'.
 	    //         'jQuery(document).ready(function($){'.
 	    //           '$(".eo_button_container .button").each(function(i,e){'.
 	    //             '$(e).attr("href",$(e).attr("href")+"&EO_WBC_CODE="+window.btoa($(".woocommerce a.button").css("background-color")+"/"+$(".woocommerce a.button").css("color")));'.
@@ -101,7 +101,7 @@ if(!function_exists('eo_wbc_buttons_css')){
 	}
 }
 ?>
-<!-- Created with Wordpress plugin - WooCommerce Product bundle choice -->
+<!-- Created with Wordpress plugin - BUNDLOICE (formerly Woo Choice Plugin) -->
 <div id="wbc_" class="eo_wbc_container" <?php echo (isset($is_embed_using_js) && $is_embed_using_js) ? 'style="display: none !important;"' : '';?>>
 	<h2 class="ui center aligned header" style="text-align: center !important;">
 		<?php _e($heading); ?>
@@ -125,4 +125,4 @@ if(!function_exists('eo_wbc_buttons_css')){
 	<br/><br/>
 	<?php echo eo_wbc_code(); ?>
 </div>
-<!-- Created with Wordpress plugin - WooCommerce Product bundle choice -->
+<!-- Created with Wordpress plugin - BUNDLOICE (formerly Woo Choice Plugin) -->

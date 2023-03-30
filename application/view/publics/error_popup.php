@@ -34,7 +34,7 @@
     jQuery.fn.slider = jQuery.fn.ui_slider;
   }
 </script>
-<!-- Created with Wordpress plugin - WooCommerce Product bundle choice -->
+<!-- Created with Wordpress plugin - BUNDLOICE (formerly Woo Choice Plugin) -->
 <div class="ui modal align center tiny centered">
 <div class="ui header">              
   <h4>There is an error on <strong><?php echo constant('EOWBC_NAME'); ?></strong></h4>

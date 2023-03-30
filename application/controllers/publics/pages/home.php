@@ -109,7 +109,7 @@ class Home {
     //moved inside buttons template
     // public function eo_wbc_code() //script to get color code from buttons
     // {
-    //     return '<!-- Created with Wordpress plugin - WooCommerce Product bundle choice --><script>'.
+    //     return '<!-- Created with Wordpress plugin - BUNDLOICE (formerly Woo Choice Plugin) --><script>'.
     //             'jQuery(document).ready(function($){'.
     //               '$(".eo_button_container .button").each(function(i,e){'.
     //                 '$(e).attr("href",$(e).attr("href")+"&EO_WBC_CODE="+window.btoa($(".woocommerce a.button").css("background-color")+"/"+$(".woocommerce a.button").css("color")));'.
@@ -161,7 +161,7 @@ class Home {
           $second_url.='?';
       }      
 
-      return '<!-- Created with Wordpress plugin - WooCommerce Product bundle choice --><div id="wbc_" class="eo-wbc-container"><h2 class="ui center aligned header" style="text-align: center !important;">'.($heading?$heading:__('Make your own pair from recommendation','woo-bundle-choice')).'</h2><div class="ui grid center aligned container"><div class="ui buttons large row stackable"><button class="ui button primary column" href="'. $first_url .'EO_WBC=1&BEGIN='.get_option('eo_wbc_first_slug').'&STEP=1" >'.(get_option('eo_wbc_home_btn_text',__('Start with ','woo-bundle-choice'))).' '.get_option('eo_wbc_first_name','FIRST').'</button> <div class="or"></div><button class="ui button primary column" href="'. $second_url .'EO_WBC=1&BEGIN='.get_option('eo_wbc_second_slug').'&STEP=1" >'. (get_option('eo_wbc_home_btn_text',__('Start with','woo-bundle-choice'))).' '.get_option('eo_wbc_second_name','SECOND').'</button></div></div><style>.ui.grid{margin-left: auto;margin-right: auto;}  '.$this->eo_wbc_buttons_css().' @media only screen and (max-width: 768px){ .eo-wbc-container .ui.buttons .button{ border-radius: 0 !important; } }</style><br/><br/></div><!-- Created with Wordpress plugin - WooCommerce Product bundle choice -->';
+      return '<!-- Created with Wordpress plugin - BUNDLOICE (formerly Woo Choice Plugin) --><div id="wbc_" class="eo-wbc-container"><h2 class="ui center aligned header" style="text-align: center !important;">'.($heading?$heading:__('Make your own pair from recommendation','woo-bundle-choice')).'</h2><div class="ui grid center aligned container"><div class="ui buttons large row stackable"><button class="ui button primary column" href="'. $first_url .'EO_WBC=1&BEGIN='.get_option('eo_wbc_first_slug').'&STEP=1" >'.(get_option('eo_wbc_home_btn_text',__('Start with ','woo-bundle-choice'))).' '.get_option('eo_wbc_first_name','FIRST').'</button> <div class="or"></div><button class="ui button primary column" href="'. $second_url .'EO_WBC=1&BEGIN='.get_option('eo_wbc_second_slug').'&STEP=1" >'. (get_option('eo_wbc_home_btn_text',__('Start with','woo-bundle-choice'))).' '.get_option('eo_wbc_second_name','SECOND').'</button></div></div><style>.ui.grid{margin-left: auto;margin-right: auto;}  '.$this->eo_wbc_buttons_css().' @media only screen and (max-width: 768px){ .eo-wbc-container .ui.buttons .button{ border-radius: 0 !important; } }</style><br/><br/></div><!-- Created with Wordpress plugin - BUNDLOICE (formerly Woo Choice Plugin) -->';
       */
 
       	if(wbc()->options->get_option('configuration','buttons_page')==3 or wbc()->options->get_option('configuration','buttons_page')==1) {

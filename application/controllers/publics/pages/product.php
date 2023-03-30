@@ -546,13 +546,13 @@ class Product {
             //Add Js to the footer.
             add_action('wp_footer',function(){
                 ?>
-                <!-- WBC{ WooCommerce Product Bundle Choice wiget STARTS. } -->
+                <!-- WBC{ BUNDLOICE (formerly Woo Choice Plugin) wiget STARTS. } -->
                 <script>
                     jQuery(document).ready(function(){
                         jQuery('form.cart').prepend("<input type='hidden' name='eo_wbc_target' value='<?php echo $this->page_category; ?>'/><input type='hidden' name='eo_wbc_product_id' value='<?php global $post; echo $post->ID; ?>'/>");
                     });
                 </script>
-                <!-- WBC{ WooCommerce Product Bundle Choice wiget ENDS. } -->
+                <!-- WBC{ BUNDLOICE (formerly Woo Choice Plugin) wiget ENDS. } -->
                 <?php
             });
         }       
@@ -671,7 +671,7 @@ class Product {
             if(!empty($product) and !is_wp_error($product) and  $product->is_in_stock()) {
 
             ?>
-            <!-- Created with Wordpress plugin - WooCommerce Product bundle choice -->
+            <!-- Created with Wordpress plugin - BUNDLOICE (formerly Woo Choice Plugin) -->
             <script type="text/javascript">
                 jQuery(".single_add_to_cart_button.button.alt").ready(function(){
                     jQuery('form.cart').prepend("<input type='hidden' name='eo_wbc_target' value='<?php echo $this->page_category; ?>'/><input type='hidden' name='eo_wbc_product_id' value='<?php global $post; echo $post->ID; ?>'/>");

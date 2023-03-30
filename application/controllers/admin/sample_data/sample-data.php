@@ -28,7 +28,7 @@ class Sample_Data {
         
         $callback = $this->get_page( $this->model->data_template()->get_attributes(), $this->model->data_template()->get_categories(), $this->model->data_template()->get_maps() );
         $position = empty($position)?66:$position;    
-        add_menu_page( eowbc_lang('WooCommerce Bundle Choice'),eowbc_lang('WooCommerce Bundle Choice'),'manage_options','eowbc',$callback,$this->get_icon_url(),$position );
+        add_menu_page( eowbc_lang('BUNDLOICE (formerly Woo Choice Plugin)'),eowbc_lang('BUNDLOICE (formerly Woo Choice Plugin)'),'manage_options','eowbc',$callback,$this->get_icon_url(),$position );
     }
 
     public function get_icon_url() {

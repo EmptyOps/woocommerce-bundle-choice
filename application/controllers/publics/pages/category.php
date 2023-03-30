@@ -297,7 +297,7 @@ class Category {
             add_action( 'woocommerce_no_products_found', function(){
 
                 remove_action( 'woocommerce_no_products_found', 'wc_no_products_found', 10 );
-                $html='<!-- Created with Wordpress plugin - WooCommerce Product bundle choice --><br/><br/>';
+                $html='<!-- Created with Wordpress plugin - BUNDLOICE (formerly Woo Choice Plugin) --><br/><br/>';
                 $html.='<div class="woocommerce ui grid centered">';
                     $html.='<div class="ui row" style="height:max-content;">';                    
                         $html.="<div class='ui grid centered'>";

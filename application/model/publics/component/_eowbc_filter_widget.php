@@ -110,7 +110,7 @@ class EOWBC_Filter_Widget {
 
 		?>
 		<!--Primary filter button that will only be visible on desktop/tablet-->
-		<!-- This widget is created with Wordpress plugin - WooCommerce Product bundle choice -->
+		<!-- This widget is created with Wordpress plugin - BUNDLOICE (formerly Woo Choice Plugin) -->
 		<div id="loading" style="z-index: -999;height: 100%; width: 100%; position: fixed; top: 0;<?php (wbc()->options->get_option('appearance_filters','appearance_filters_loader') OR apply_filters('eowbc_filter_widget_loader',false))?_e('display:none !important;'):'';?>"></div>	
 		    							
 		<?php 
@@ -2673,7 +2673,7 @@ class EOWBC_Filter_Widget {
 
 		?>
 		<!--Primary filter button that will only be visible on desktop/tablet-->
-		<!-- This widget is created with Wordpress plugin - WooCommerce Product bundle choice -->
+		<!-- This widget is created with Wordpress plugin - BUNDLOICE (formerly Woo Choice Plugin) -->
 		<div id="loading" style="z-index: -999; height: 100%; width: 100%; position: fixed; top: 0;<?php (wbc()->options->get_option('appearance_filters','appearance_filters_loader') OR apply_filters('eowbc_filter_widget_loader',false))?_e('display:none !important;'):'';?>"></div>
 		
 		<script type="text/javascript">

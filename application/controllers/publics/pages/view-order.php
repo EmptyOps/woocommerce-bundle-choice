@@ -80,7 +80,7 @@ class View_Order {
           }
         
         $price=0;
-        $row="<!-- Created with Wordpress plugin - WooCommerce Product bundle choice --><tr>".
+        $row="<!-- Created with Wordpress plugin - BUNDLOICE (formerly Woo Choice Plugin) --><tr>".
             "<td class=\'eo_wbc_row\'>".
               "<span class=\'eo_wbc_column-1\'>".
                   wbc()->wc->eo_wbc_get_product($set[0][0])->get_image("thumbnail")."&nbsp;&nbsp;<p>".

@@ -5,7 +5,7 @@
 */
 
 ?>  
-<!-- Created with Wordpress plugin - WooCommerce Product bundle choice -->
+<!-- Created with Wordpress plugin - BUNDLOICE (formerly Woo Choice Plugin) -->
 <style type="text/css">
     .cat_products{
         border:1.3px solid #80808059;
@@ -111,7 +111,7 @@
                     if(!empty($prev_product && $curr_product)) {
                         //create a card layout within containers
                         ?>         
-                        <!-- Created with Wordpress plugin - WooCommerce Product bundle choice -->                             
+                        <!-- Created with Wordpress plugin - BUNDLOICE (formerly Woo Choice Plugin) -->                             
                         <div class="cat_products five wide column">
                             <?php if( (wbc()->options->get_option('configuration','pair_maker_upper_card',1)/*get_option('eo_wbc_pair_upper_card',1)*/==1 && $category_object->eo_wbc_get_category()==wbc()->options->get_option('configuration','first_slug')/*get_option('eo_wbc_first_slug')*/) OR (wbc()->options->get_option('configuration','pair_maker_upper_card',1)/*get_option('eo_wbc_pair_upper_card',1)*/==2 && $category_object->eo_wbc_get_category()==wbc()->options->get_option('configuration','second_slug')/*get_option('eo_wbc_second_slug')*/)): ?>  
                                 <div class="ui special cards centered">
@@ -196,7 +196,7 @@
                                 </div>                                                   
                             <?php endif;?>
                         </div>
-                        <!-- Created with Wordpress plugin - WooCommerce Product bundle choice -->
+                        <!-- Created with Wordpress plugin - BUNDLOICE (formerly Woo Choice Plugin) -->
                         <?php
                     }
                 }
@@ -205,7 +205,7 @@
     ?>                              
     </div>
 </div>
-<!-- Created with Wordpress plugin - WooCommerce Product bundle choice -->
+<!-- Created with Wordpress plugin - BUNDLOICE (formerly Woo Choice Plugin) -->
 <script>
     $ = jQuery;
 
@@ -241,4 +241,4 @@
         display: block !important;
     }                                                
 </style> 
-<!-- Created with Wordpress plugin - WooCommerce Product bundle choice -->        
+<!-- Created with Wordpress plugin - BUNDLOICE (formerly Woo Choice Plugin) -->        

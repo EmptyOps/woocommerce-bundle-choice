@@ -43,7 +43,7 @@ class Customizer {
 		add_action('customize_register', function($wp_customize) {
 	        //adding section in wordpress customizer   
 	        $wp_customize->add_section('woo_bundle_choice', array(
-	            'title'          => 'Woo Bundle Choice',
+	            'title'          => 'BUNDLOICE (formerly Woo Choice Plugin)',
 	            'active_callback' => 'is_front_page'
 	        ));
 

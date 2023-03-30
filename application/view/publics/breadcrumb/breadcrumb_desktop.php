@@ -1,6 +1,6 @@
 <?php
 if(isset($_GET['FIRST']) and isset($_GET['SECOND'])) {
-    $html='<!-- Widget start Wordpress plugin - WooCommerce Product bundle choice --><div class="eo-wbc-container container" style="direction: ltr;">';
+    $html='<!-- Widget start Wordpress plugin - BUNDLOICE (formerly Woo Choice Plugin) --><div class="eo-wbc-container container" style="direction: ltr;">';
         //$html.='<div class="ui ordered steps">';
         $html.='<div class="ui steps">'; 
         if(!empty(wbc()->options->get_option('appearance_breadcrumb','appearance_breadcrumb_fixed_navigation'))){

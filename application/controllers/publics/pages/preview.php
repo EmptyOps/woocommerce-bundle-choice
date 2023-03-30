@@ -321,7 +321,7 @@ class Preview {
                 wbc()->load->model('publics/component/eowbc_breadcrumb');
                 $content= \eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_add_breadcrumb(wbc()->sanitize->get('STEP'),wbc()->sanitize->get('BEGIN')).'<br/>';
                 
-                $content.='<!-- Created with Wordpress plugin - WooCommerce Product bundle choice --><div class="ui special cards centered" style="margin: auto !important;direction: ltr;
+                $content.='<!-- Created with Wordpress plugin - BUNDLOICE (formerly Woo Choice Plugin) --><div class="ui special cards centered" style="margin: auto !important;direction: ltr;
     min-width: fit-content !important;max-width: fit-content !important;">'.
                     '<div class="card">'.
                         '<div class="blurring dimmable image">'.

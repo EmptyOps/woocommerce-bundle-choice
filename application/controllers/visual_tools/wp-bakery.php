@@ -22,7 +22,7 @@ class WP_Bakery extends \WPBakeryShortCode {
 			vc_map( array(
 		        "name"       => __( 'The Two Buttons', 'woo-bundle-choice' ),
 		        "base"       => 'render_two_buttons',
-		        'category' => __( 'Woo Bundle Choice', 'woo-bundle-choice' ),
+		        'category' => __( 'BUNDLOICE (formerly Woo Choice Plugin)', 'woo-bundle-choice' ),
 		        'description' => __( 'Add two button widget to show the buttons for starting the bundle builder.', 'woo-bundle-choice' ),
 		        "icon" => 'https://img.icons8.com/ios/2x/button2.png',
 		        'params'=>
