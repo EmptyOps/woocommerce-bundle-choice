@@ -1691,6 +1691,8 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
 
         // if( type == 'radio' )
 
+        var process_attribute_types_inner_callback = null;
+        window.document.splugins.events.api.notifyAllObservers( 'swatches', 'process_attribute_types_inner', {type:type}, process_attribute_types_inner_callback, _this./*#*/$base_container_private );              
     }
 
     /*#*/process_template_private(type, element) {
@@ -3198,7 +3200,6 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
             console.log(_this./*#*/data_private.current_variation);
 
             _this./*#*/process_images_template_private(_this./*#*/data_private.current_variation.variation_gallery_images);            
-            _this.process_gallery_images_data(_this./*#*/data_private.current_variation.variation_gallery_images);
         }
 
         var sp_variations_gallery_images_loaded_callback = null ;
@@ -3391,6 +3392,9 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
         }, 1); 
 
       }
+
+        var process_images_template_callback = null;
+        window.document.splugins.events.api.notifyAllObservers( 'gallery_images', 'process_images_template', { current_variation : _this./*#*/data_private.current_variation }, process_images_template_callback, _this.$base_container_private );
 
     };
  
@@ -3652,8 +3656,6 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
         _this./*#*/$variations_form_private.on('show_variation', function (event, variation) {
             
             console.log("gim [variation_change_listener] show_variation");
-            
-            _this.process_gallery_images_data(variation);
 
            // -- aya only is_category_page ni if condition mari se 02-11-2022 @a --
            if(window.document.splugins.common.is_category_page) {
@@ -3671,13 +3673,6 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
          
         });
  
-    }
-
-    process_gallery_images_data(variation) {
-        
-        // -- aa notification add_inscription mate se @a 125.3
-        var variation_change_listener_callback = null;
-        window.document.splugins.events.api.notifyAllObservers( 'gallery_images_product_page', 'variation_change_listener', {variation:variation}, variation_change_listener_callback, _this.#$base_container );
     }
 
     /*#*/create_variation_url_private(element, event, variation) {
@@ -4045,6 +4040,13 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
                     --  we may not need show_gallery_images and show_variation_gallery_images, as long as we pass the right variable to process_images_template. and process_images_template is already created.      
         ACTIVE_TODO_OC_END*/
         _this./*#*/process_images_template_private(variation.variation_gallery_images);
+
+        // ACTIVE_TODO/TODO below notification is disabled becose is no more in use. But if required we can simply enable it by removing false condition. 
+        if(false) {
+
+            var variation_change_private_callback = null;
+            window.document.splugins.events.api.notifyAllObservers( 'gallery_images', 'variation_change_private', { current_variation : variation }, variation_change_private_callback, _this.$base_container_private );         
+        }
 
     }
  
@@ -4856,13 +4858,13 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
             //     -- and than we can simply get type from element data-type which is mentanable due to well maintained heirachy insted of below index based image data read which is bound to change.
 
 
-            var zoom_area_hover_in_callback = null;
 
             if(hover_media_index !== null) {
 
                 console.log('gim_feed [zoom_area_hover_in] if_01');
 
                 // window.document.splugins.events.api.notifyAllObservers( 'gallery_images_feed_page', 'zoom_area_hover_in', {type:images[index].extra_params_org.type,image:images[index]}, zoom_area_hover_in_callback, super.get_base_container() );            
+                var zoom_area_hover_in_callback = null;
                 window.document.splugins.events.api.notifyAllObservers( 'gallery_images_feed_page', 'zoom_area_hover_in', {type:images[hover_media_index].extra_params_org.type, 
                     hover_index_type: window.document.splugins.common._o(images,hover_media_index) ? images[hover_media_index].extra_params_org.type : null
                 , image:images[hover_media_index], container:super.get_zoom_container()}, zoom_area_hover_in_callback, super.get_base_container() );            

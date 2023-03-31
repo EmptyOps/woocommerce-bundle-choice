@@ -601,6 +601,11 @@ class WBC_Common {
 			return false;
 		}   
 	}
+
+	public function placeholder_img_src( () {
+
+		return wc_placeholder_img_src();
+	}
 }
 
 function wbc_pr($ar, $force_debug = false, $die = false) {
@@ -732,5 +737,11 @@ function wbc_is_mobile() {
 function wbc_is_mobile_by_page_sections($key = null, $is_other_theme = false) {
 
 	return wbc()->common->is_mobile_by_page_sections($key,$is_other_theme);
+
+}
+
+function wbc_placeholder_img_src() {
+
+	return wbc()->common->placeholder_img_src();
 
 }

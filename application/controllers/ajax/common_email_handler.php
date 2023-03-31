@@ -3,6 +3,8 @@
 *	Ajax handler to handle ajax save request for eowbc_filters form.	
 *
 */
+
+ACTIVE_TODO most probeli now this file not is use sinche the this leyer not applicebel in wbc and it is moved to the pro layers. so to mac so that wbc leyers are net and do not cantent an any anneshory junk kode lat jast get rede of here sa sun as get sanche. and lat do it as sun as posibul. -- to h
 $res = array( "type"=>"success", "msg"=>"" );
 
 function sp_validate_unique_email($fields,$key) {
