@@ -1180,12 +1180,17 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
            
             jQuery( _this.#$base_container /*'.variations_form:not(.spui-wbc-swatches-loaded)'*/).each(function () {
 
+                console.log('vs [init_private] ajaxComplete');
+                console.log(jQuery(this));
+                console.log(jQuery(this).attr('class'));
                 if( !( jQuery(this).hasClass('spui-wbc-swatches-loaded') ) ){
-
+                    
+                    console.log('vs [init_private] ajaxComplete 1');
+                    console.log(this);
                     jQuery(this).wc_variation_form();
                 }
             });
-          }, 100);
+          }, 1000);
         });
 
         // Composite product load

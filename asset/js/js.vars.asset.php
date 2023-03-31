@@ -180,9 +180,14 @@ add_action('wp_footer',function(){
 		        		console.log(" js vars asset " + ( window.document.splugins.common._o( common_configs.gallery_images_configs, 'base_container_selector') ? common_configs.gallery_images_configs.base_container_selector : '.variations_form' ) );
 		            // window.document.splugins.wbc.variations.gallery_images.api.init();
 		            base_container = jQuery( ( window.document.splugins.common._o( common_configs.gallery_images_configs, 'base_container_selector') ? common_configs.gallery_images_configs.base_container_selector : '.variations_form' ) );      
+		            console.log('[js.vars.asset wp_footer] gim 01');
+		            console.log(base_container);
 		            jQuery(base_container).sp_wbc_variations_gallery_images();
 
 		            base_container_simple = jQuery( ( window.document.splugins.common._o( common_configs.gallery_images_configs, 'base_container_selector_simple') ? common_configs.gallery_images_configs.base_container_selector_simple : null /*ACTIVE_TODO_OC_START need to update here the base_container_selectore ACTIVE_TODO_OC_END */) );      
+		            console.log('[js.vars.asset wp_footer] gim 02');
+		            console.log(base_container);
+		            
 		            jQuery(base_container_simple).sp_wbc_variations_gallery_images({product_type:'simple'});
 
 		        // },2000);
@@ -964,7 +969,7 @@ add_action('wp_footer',function(){
 						 */
 						$.fn.wc_variation_form = function() {
 							
-							// console.log('A_OFF show_variation [wc_variation_form]');
+							console.log('A_OFF show_variation [wc_variation_form]');
 							// console.log(this);
 
 							new VariationForm( this );
@@ -1874,7 +1879,7 @@ add_action('wp_footer',function(){
 						 */
 						$.fn.wc_variation_form = function() {
 							
-							// console.log('A_ON show_variation [wc_variation_form]');
+							console.log('A_ON show_variation [wc_variation_form]');
 							// console.log(this);
 
 							new VariationForm( this );
