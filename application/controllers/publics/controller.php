@@ -69,6 +69,14 @@ class Controller extends \eo\wbc\controllers\Controller{
 
             return true;
         
+        }  elseif( $args['page'] == 'cart' && is_cart() ){
+
+            return true;
+        
+        } elseif( $args['page'] == 'checkout' && is_checkout() ){
+
+            return true;
+        
         }
         
         return false;
