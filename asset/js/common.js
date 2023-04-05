@@ -112,9 +112,12 @@ if(window.document.splugins.common.is_item_page || window.document.splugins.comm
 
      binding_stats[event] = binding_stats[event]  || {};
 
-     // console.log(binding_stats );
+     // console.log('[binding_stats]');
+     // console.log(window.document.splugins.common._o(binding_stats[event], key));
+     // console.log(binding_stats[event]);
+     // console.log(key);
 
- 
+    
      if( !window.document.splugins.common._o(binding_stats[event], key) ){
     
      // console.log("_b called if");
@@ -1553,13 +1556,16 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
 
                 // is the woo input template type means dropdown is mandatorily kept by plugins, not seems likely but still confirm and then we need a way to determine(always) the exact input type based on the field/input type selected on woo panel or otherwise simply support the input_template_type field which will be set in background implicitly based on the field/input type selected on woo panel -- this field is simply better then managing many different template names of extensions and defining based on that -- and it will default to the above field/input type for wbc nothing to manage, only if condition below that if input_template_type is not defined then read simply above field/input type. and in case of extensions that need to be defined based on the template that is selected on their admin panel. so this template option should be only be defining it and passing it where applicable so that is gets here. and it is need to be defined based on that only to avoid confusion and many unnecessary and confusing configuration overheads. no simply need to stick to attribute type only means field/input-type selected on woo panel and that is standard and clean. so implement here based on that only. -- to h or -- to d 
                 // ACTIVE_TODO_OC_END
-
+                console.log('vs [process_attribute_types] loop');
+                console.log(element);
                 if ( true || window.document.splugins.common._o(_this.#configs.attribute_types_keys, type_inner)) {
-
+                    console.log('vs [process_attribute_types] loop if');
                      _this.#process_attribute_types_inner(type_inner, element);
 
                 }                          
                 else {
+                    console.log('vs [process_attribute_types] loop else');
+
                     // ACTIVE_TODO_OC_START
                     // --  and we can and should simply use observer pattern events to host for example the slider listener here and then emit internal change event from here     
                     //     --  still in this case the variation.swatches will register its event subject and emit bootstrap level notification like bootstrap/on.load maybe on.load is more user friendly 
@@ -1816,6 +1822,10 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
 
               jQuery(inner_element).find('input.spui-wbc-swatches-variable-item-radio:radio').prop('disabled', false);
 
+              console.log('vs [process_attribute_template] 1');
+              console.log(data.attribute_value);
+              console.log(data.selected);
+
               if (data.attribute_value === data.selected) {
                 
                 // console.log("process_attribute_template selected in if if product id="+ _this.#data.product_id +" type="+ type);
@@ -1851,7 +1861,9 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
         console.log('vs [process_attribute_template] 01');
 
         if(is_reusability_recursion === false) {
- 
+            
+            console.log('vs [process_attribute_template] if');
+
             _this.#on_click_listener(type, element, data.reselect_clear, data);
 
             _this.#on_keydown_listener(type, element);   
@@ -1919,6 +1931,7 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
     #on_change_listener(type, element, reselect_clear, uniquely_managed_type, data) {
 
         console.log('vs [on_change_listener]');
+        console.log(element);
 
         var _this = this; 
         
@@ -1934,9 +1947,15 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
 
         }
 
+        console.log('vs [on_change_listener] binding_stats');
+        console.log(_this.#binding_stats);
+        console.log(uniquely_managed_type);
+
         if(window.document.splugins.common._b(_this.#binding_stats, 'on_change_listener', uniquely_managed_type)){
             return false;
         }
+
+        console.log('vs [on_change_listener] after false');
 
         /*jQuery('#select_attribute_of_variation').on('woocommerce_variation_has_changed', function(){
             // do your magic here...
@@ -2106,7 +2125,10 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
           //   // Items Updated
           //   // $(this).trigger('wvs-items-updated');
           // });
-            
+          
+            console.log('vs [on_change_listener] 1');
+            console.log(element);
+
           _this.#process_attribute_template(type, element, 'change', true);  
 
           _this.#on_change(type, element, event);
@@ -2555,14 +2577,23 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
             // console.log(data.select);
             // console.log("value" +value);
             data.select.val(value).trigger('change');
+            
+            console.log('swatches click else 1');
+
             data.select.trigger('click');
+            
+            console.log('swatches click else 2');
+
             data.select.trigger('focusin'); 
+            
+            console.log('swatches click else 3');
+
             if (window.document.splugins.common.is_mobile) {
                 data.select.trigger('touchstart');
             }
 
             jQuery(element_inner).trigger('focus'); // Mobile tooltip
-            console.log('swatches click else 01');
+            console.log('swatches click else 4');
 
             // ACTIVE_TODO here we may like to raise our notification evemnt to completly implement and finish our notifications structure and hierarchic 
             // jQuery(element_inner).trigger('wvs-selected-item', [value, select, _this._element]); // Custom Event for li
@@ -3228,6 +3259,10 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
     
     #template( tmpl_id, templating_lib ) {
 
+        // console.log("gim [template]");
+        // console.log(tmpl_id);
+        // console.log(templating_lib);
+        
         var _this = this;
 
         return window.document.splugins.templating.api.get_template( tmpl_id, templating_lib );
@@ -3245,6 +3280,8 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
     #apply_template_data( template, template_data, templating_lib ) {
         
         var _this = this;
+
+        console.log("gim [apply_template_data]");
 
         return window.document.splugins.templating.api.apply_data( template, template_data, templating_lib );
     
@@ -3409,9 +3446,11 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
                 if(index == index_inner){
                     
                     console.log("gim [process_images_template] images_loop if if " + index_inner);
+                    console.log(_this.#configs.template.zoom.id+'_'+/*index_inner*/type_template, templating_lib);
 
                     var template_var = _this.#template( _this.#configs.template.zoom.id+'_'+/*index_inner*/type_template, templating_lib );
 
+                    console.log("gim [process_images_template]" + template_var);
                     zoom_inner_html += _this.#apply_template_data(template_var, image, templating_lib);
                     
                     console.log("gim [process_images_template] images_loop if if " + index_inner + 'after');
