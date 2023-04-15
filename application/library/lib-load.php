@@ -82,10 +82,7 @@ if(!class_exists('WBC_Loader')) {
 
 					wbc()->load->asset('js','https://unpkg.com/react@18/umd/react.production.min.js',array(),"",true,true,null,null,false,true,null,true);
 
-				break;
-				case 'react_lazyload':
-					-- tejas exjample app e set karvanu chhe.
-				break;
+					break;
 
 		        case 'ion_rangeSlider':
 		        	
