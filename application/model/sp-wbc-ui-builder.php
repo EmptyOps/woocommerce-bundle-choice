@@ -57,6 +57,7 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 						if(wbc()->options->get_option($_option_key_,$_data_key_)){
 							continue;
 						} else {
+				? question recording 130.14 ma je $ui_ele ma id lakhel hashe tya replace karvanu kidhu chhe pan tya id kyay pass karel j nathi aakha build funaction ma 
 							$this->process_build($ui_key,$ui_ele,$ui,$option_key,$process_form,$ui_generator,isset($ui_definition['controls'][$ui_key])?$ui_definition['controls'][$ui_key]:null);		
 						}
 					} else {
@@ -77,8 +78,8 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 
 		if(!empty($ui_ele['type'])) {
 
-			if(empty($ui_ele['id']) and is_string($ui_key)) {
-				$ui_ele['id'] = $ui_key;
+			if(empty(/*$ui_ele['id']*/$ui_ele['id_key']) and is_string($ui_key)) {
+				/*$ui_ele['id']*/$ui_ele['id_key'] = $ui_key;
 			}
 
 			if(empty($ui_ele['name']) and is_string($ui_key)) {
@@ -126,8 +127,8 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 			/*-------------------------*/
 
 	
-			//if(!empty($ui_ele['appearence_controls']) and !empty($ui_ele['id']) and $process_form) {
-			if (!empty($ui_element_definition['appearence_controls']) and !empty($ui_ele['id']) and $process_form) {
+			//if(!empty($ui_ele['appearence_controls']) and !empty(/*$ui_ele['id']*/$ui_ele['id_key']) and $process_form) {
+			if (!empty($ui_element_definition['appearence_controls']) and !empty(/*$ui_ele['id']*/$ui_ele['id_key']) and $process_form) {
 				
 				
 				$control_group = '';
@@ -146,7 +147,7 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 					$option_key = $ui_element_definition['appearence_controls'][2]['control_key'];
 				}
 				
-				$customizer_value = get_theme_mod($ui_ele['id']);
+				$customizer_value = get_theme_mod(/*$ui_ele['id']*/$ui_ele['id_key']);
 				
 				if(in_array('text',$controls)) {
 					
@@ -157,13 +158,13 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 					/*------------------
 					-- a code sp_theme_ui/application/view/ui/Base_Builder.php no process_build() no che*/
 
-					$ui_ele['label'] = wbc()->options->get_option($option_key,$ui_ele['id'].'_text',$ui_ele['label'],true,true);
+					$ui_ele['label'] = wbc()->options->get_option($option_key,/*$ui_ele['id']*/$ui_ele['id_key'].'_text',$ui_ele['label'],true,true);
 					if(isset($ui_ele['postHTML'])) {
 
-						$ui_ele['postHTML'] = wbc()->options->get_option($option_key,$ui_ele['id'].'_text',$ui_ele['postHTML'],true,true);
+						$ui_ele['postHTML'] = wbc()->options->get_option($option_key,/*$ui_ele['id']*/$ui_ele['id_key'].'_text',$ui_ele['postHTML'],true,true);
 					} elseif (!empty($ui_ele['preHTML'])){
 
-						$ui_ele['preHTML'] = wbc()->options->get_option($option_key,$ui_ele['id'].'_text',$ui_ele['preHTML'],true,true);
+						$ui_ele['preHTML'] = wbc()->options->get_option($option_key,/*$ui_ele['id']*/$ui_ele['id_key'].'_text',$ui_ele['preHTML'],true,true);
 					}
 
 					if(!empty($customizer_value)) {
@@ -191,10 +192,10 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 					/*-------------------
 					-- a code sp_theme_ui/application/view/ui/Base_Builder.php no process_build() no che*/
 
-					$ui_ele['src'] = wbc()->options->get_option($option_key,$ui_ele['id'].'_image',$ui_ele['src'],true,true);
+					$ui_ele['src'] = wbc()->options->get_option($option_key,/*$ui_ele['id']*/$ui_ele['id_key'].'_image',$ui_ele['src'],true,true);
 
-					$__width__ = wbc()->options->get_option($option_key,$ui_ele['id'].'_width',$ui_ele['src'],true,true);
-					$__height__ = wbc()->options->get_option($option_key,$ui_ele['id'].'_height',$ui_ele['src'],true,true);
+					$__width__ = wbc()->options->get_option($option_key,/*$ui_ele['id']*/$ui_ele['id_key'].'_width',$ui_ele['src'],true,true);
+					$__height__ = wbc()->options->get_option($option_key,/*$ui_ele['id']*/$ui_ele['id_key'].'_height',$ui_ele['src'],true,true);
 
 					$dimensions_css = "";
 					if(!empty($__width__)) {
@@ -239,7 +240,7 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 						$ui_ele['href'] = '';
 					}
 					
-					$ui_ele['href'] = wbc()->options->get_option($option_key,$ui_ele['id'].'_url',$ui_ele['href'],true,true);
+					$ui_ele['href'] = wbc()->options->get_option($option_key,/*$ui_ele['id']*/$ui_ele['id_key'].'_url',$ui_ele['href'],true,true);
 
 					if(!empty($customizer_value)) {
 						$ui_ele['href'] = $customizer_value;
@@ -255,7 +256,7 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 						$ui_ele['style'] = '';
 					}
 
-					$ui_ele['style'].='color:'.wbc()->options->get_option($option_key,$ui_ele['id'].'_color','',true,true).' !important;';
+					$ui_ele['style'].='color:'.wbc()->options->get_option($option_key,/*$ui_ele['id']*/$ui_ele['id_key'].'_color','',true,true).' !important;';
 				}
 
 				if(in_array('back_color',$controls)) {
@@ -264,7 +265,7 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 						$ui_ele['style'] = '';
 					}
 
-					$ui_ele['style'].='background-color:'.wbc()->options->get_option($option_key,$ui_ele['id'].'_back_color','',true,true).' !important;';
+					$ui_ele['style'].='background-color:'.wbc()->options->get_option($option_key,/*$ui_ele['id']*/$ui_ele['id_key'].'_back_color','',true,true).' !important;';
 				}
 
 				if(in_array('font_family',$controls)) {
@@ -273,7 +274,7 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 						$ui_ele['style'] = '';
 					}
 
-					$ui_ele['style'].='font-family:'.wbc()->options->get_option($option_key,$ui_ele['id'].'_font_family','',true,true).' !important;';
+					$ui_ele['style'].='font-family:'.wbc()->options->get_option($option_key,/*$ui_ele['id']*/$ui_ele['id_key'].'_font_family','',true,true).' !important;';
 				}
 
 				if(in_array('font_size',$controls)) {
@@ -282,7 +283,7 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 						$ui_ele['style'] = '';
 					}
 
-					$ui_ele['style'].='font-size:'.wbc()->options->get_option($option_key,$ui_ele['id'].'_font_size','',true,true).' !important;';
+					$ui_ele['style'].='font-size:'.wbc()->options->get_option($option_key,/*$ui_ele['id']*/$ui_ele['id_key'].'_font_size','',true,true).' !important;';
 				}					
 
 				if(in_array('height',$controls)) {
@@ -291,7 +292,7 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 						$ui_ele['style'] = '';
 					}
 
-					$ui_ele['style'].='height:'.wbc()->options->get_option($option_key,$ui_ele['id'].'_height','',true,true).' !important;';
+					$ui_ele['style'].='height:'.wbc()->options->get_option($option_key,/*$ui_ele['id']*/$ui_ele['id_key'].'_height','',true,true).' !important;';
 				}	
 
 				if(in_array('width',$controls)) {
@@ -300,7 +301,7 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 						$ui_ele['style'] = '';
 					}
 
-					$ui_ele['style'].='width:'.wbc()->options->get_option($option_key,$ui_ele['id'].'_width','',true,true).' !important;';
+					$ui_ele['style'].='width:'.wbc()->options->get_option($option_key,/*$ui_ele['id']*/$ui_ele['id_key'].'_width','',true,true).' !important;';
 				}	
 
 				if(in_array('radius',$controls)) {
@@ -309,7 +310,7 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 						$ui_ele['style'] = '';
 					}
 
-					$ui_ele['style'].='radius:'.wbc()->options->get_option($option_key,$ui_ele['id'].'_radius','',true,true).' !important;';
+					$ui_ele['style'].='radius:'.wbc()->options->get_option($option_key,/*$ui_ele['id']*/$ui_ele['id_key'].'_radius','',true,true).' !important;';
 				}
 
 				if(in_array('margin_left',$controls)) {
@@ -318,7 +319,7 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 						$ui_ele['style'] = '';
 					}
 
-					$ui_ele['style'].='margin-left:'.wbc()->options->get_option($option_key,$ui_ele['id'].'_margin_left','',true,true).' !important;';
+					$ui_ele['style'].='margin-left:'.wbc()->options->get_option($option_key,/*$ui_ele['id']*/$ui_ele['id_key'].'_margin_left','',true,true).' !important;';
 				}
 
 				if(in_array('margin_right',$controls)) {
@@ -327,7 +328,7 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 						$ui_ele['style'] = '';
 					}
 
-					$ui_ele['style'].='margin-right:'.wbc()->options->get_option($option_key,$ui_ele['id'].'_margin_right','',true,true).' !important;';
+					$ui_ele['style'].='margin-right:'.wbc()->options->get_option($option_key,/*$ui_ele['id']*/$ui_ele['id_key'].'_margin_right','',true,true).' !important;';
 				}
 
 				if(in_array('visibility',$controls)) {
@@ -337,7 +338,7 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 					}
 
 
-					if (wbc()->options->get_option($option_key,$ui_ele['id'].'_visibility',-1,true,true) == 1) {
+					if (wbc()->options->get_option($option_key,/*$ui_ele['id']*/$ui_ele['id_key'].'_visibility',-1,true,true) == 1) {
 						//$ui_ele['style'].='display: none !important;';
 						return;	//simply return from here and skip addind element 
 					}
