@@ -187,7 +187,35 @@ if(window.document.splugins.common.is_item_page || window.document.splugins.comm
 
     var rows_txt = temp + "" + param + "=" + paramVal;
     return baseURL + "?" + newAdditionalURL + rows_txt;
-} 
+ } 
+
+ window.document.splugins.common.load_script_url = function(url,is_show_loading,callback) {
+ 
+    var s = document.createElement('script');
+    s.type = 'text/javascript';
+    s.async = false;
+    s.src = url;
+
+    // s.onload = callback;
+
+    var x = document.getElementsByTagName('head')[0];
+    x.appendChild(s);
+
+ }
+
+ window.document.splugins.common.load_css_url = function(url,is_show_loading,callback) {
+ 
+    var l = document.createElement('link');
+    l.rel = 'stylesheet';
+    l.type = 'text/css';
+    // l.async = false;
+    l.href = url;
+
+    // l.onload = l.onreadystatechange = callback;
+
+    var x = document.getElementsByTagName('head')[0];
+    x.appendChild(l);
+ }
 
 /*ACTIVE_TODO_OC_START
 var newURL = updateURLParameter(window.location.href, 'locId', 'newLoc');
@@ -3199,7 +3227,8 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
             console.log(_this./*#*/$zoom_container_private);
             console.log(_this./*#*/data_private.current_variation);
 
-            _this./*#*/process_images_template_private(_this./*#*/data_private.current_variation.variation_gallery_images);            
+            // _this./*#*/process_images_template_private(_this./*#*/data_private.current_variation.variation_gallery_images);        
+            _this.process_gallery_images_data_private(_this./*#*/data_private.current_variation.variation_gallery_images);
         }
 
         var sp_variations_gallery_images_loaded_callback = null ;
@@ -3393,11 +3422,19 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
 
       }
 
-        var process_images_template_callback = null;
-        window.document.splugins.events.api.notifyAllObservers( 'gallery_images', 'process_images_template', { current_variation : _this./*#*/data_private.current_variation }, process_images_template_callback, _this.$base_container_private );
+        // var process_images_template_callback = null;
+        // window.document.splugins.events.api.notifyAllObservers( 'gallery_images', 'process_images_template', { current_variation : _this./*#*/data_private.current_variation }, process_images_template_callback, _this.$base_container_private );
 
     };
- 
+    
+    process_gallery_images_data_private(variation) {
+
+        _this.process_gallery_images_data_private(variation);
+
+        var process_gallery_images_data_callback = null;
+        window.document.splugins.events.api.notifyAllObservers( 'gallery_images', 'process_gallery_images_data', { current_variation : _this./*#*/data_private.current_variation }, process_gallery_images_data_callback, _this.$base_container_private );
+    };
+
     /*#*/process_slider_template_private(images){
 
         // console.log("gim [process_images_template]");
@@ -4039,7 +4076,8 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
                  --  and both above function from inside call the process_template heirarchy of function like process_gallery_images_template -- to h   
                     --  we may not need show_gallery_images and show_variation_gallery_images, as long as we pass the right variable to process_images_template. and process_images_template is already created.      
         ACTIVE_TODO_OC_END*/
-        _this./*#*/process_images_template_private(variation.variation_gallery_images);
+        // _this./*#*/process_images_template_private(variation.variation_gallery_images);
+        _this.process_gallery_images_data_private(variation.variation_gallery_images);
 
         // ACTIVE_TODO/TODO below notification is disabled becose is no more in use. But if required we can simply enable it by removing false condition. 
         if(false) {
