@@ -909,29 +909,60 @@ class Product {
             }*/
             /*$setting_page_url  = */
                         
-            $preview_product_id = (empty($_GET['SECOND'])?$post->ID:$_GET['SECOND']);            
-            $setting_page_url = get_permalink($preview_product_id);
 
-            if(wbc()->sanitize->get('FIRST')==='' OR $category==$this->first_category_slug) {
+            if( empty(wbc()->options->get_option('appearance_preview_page','show_cards_view')) ) {
 
-                $url=wbc()->common->http_query(array('EO_WBC'=>1,'WBC_PREVIEW'=>1,'BEGIN'=>wbc()->sanitize->get('BEGIN'),'STEP'=>3,'FIRST'=>$post->ID,'SECOND'=>wbc()->sanitize->get('SECOND')));
+                $preview_product_id = (empty($_GET['SECOND'])?$post->ID:$_GET['SECOND']);            
+                $setting_page_url = get_permalink($preview_product_id);
 
-            } elseif (wbc()->sanitize->get('SECOND')==='' OR $category==$this->second_category_slug) {
+                if(wbc()->sanitize->get('FIRST')==='' OR $category==$this->first_category_slug) {
 
-                $url=wbc()->common->http_query(array('EO_WBC'=>1,'WBC_PREVIEW'=>1,'BEGIN'=>wbc()->sanitize->get('BEGIN'),'STEP'=>3,'FIRST'=>wbc()->sanitize->get('FIRST'),'SECOND'=>$post->ID));
+                    $url=wbc()->common->http_query(array('EO_WBC'=>1,'WBC_PREVIEW'=>1,'BEGIN'=>wbc()->sanitize->get('BEGIN'),'STEP'=>3,'FIRST'=>$post->ID,'SECOND'=>wbc()->sanitize->get('SECOND')));
 
+                } elseif (wbc()->sanitize->get('SECOND')==='' OR $category==$this->second_category_slug) {
+
+                    $url=wbc()->common->http_query(array('EO_WBC'=>1,'WBC_PREVIEW'=>1,'BEGIN'=>wbc()->sanitize->get('BEGIN'),'STEP'=>3,'FIRST'=>wbc()->sanitize->get('FIRST'),'SECOND'=>$post->ID));
+
+                } else {
+
+                    $url='';
+                }
+
+                if(!empty($url) and !empty($setting_page_url)) {
+                    if(strpos($setting_page_url,'?')===false){
+                        $url = $setting_page_url.'?'.$url;
+                    } else {
+                        $url = $setting_page_url.'&'.$url;
+                    }                
+                }
             } else {
 
-                $url='';
-            }
+                $review_page_url = '';
 
-            if(!empty($url) and !empty($setting_page_url)) {
-                if(strpos($setting_page_url,'?')===false){
-                    $url = $setting_page_url.'?'.$url;
+                $review_page = get_page_by_path('eo-wbc-product-review');
+                
+                if(empty($review_page) or is_wp_error($review_page)){
+                    $review_page_url = home_url('/eo-wbc-product-review/');
                 } else {
-                    $url = $setting_page_url.'&'.$url;
-                }                
+                    $review_page_url = get_permalink($review_page);
+                }           
+            
+                if(wbc()->sanitize->get('FIRST')==='' OR $category==wbc()->options->get_option('configuration','first_slug'))
+                {
+                    $url=$review_page_url
+                        .'?'.wbc()->common->http_query(array('EO_WBC'=>1,'BEGIN'=>wbc()->sanitize->get('BEGIN'),'STEP'=>3,'FIRST'=>$post->ID,'SECOND'=>wbc()->sanitize->get('SECOND')));
+                }
+                elseif (wbc()->sanitize->get('SECOND')==='' OR $category==wbc()->options->get_option('configuration','second_slug'))
+                {
+                    $url=$review_page_url
+                        .'?'.wbc()->common->http_query(array('EO_WBC'=>1,'BEGIN'=>wbc()->sanitize->get('BEGIN'),'STEP'=>3,'FIRST'=>wbc()->sanitize->get('FIRST'),'SECOND'=>$post->ID));
+                }
+                else
+                {
+                    $url='';
+                }      
             }            
+                        
         }  
         
         return $url;

@@ -1368,6 +1368,7 @@ class SP_WBC_Variations extends SP_Variations {
 		if ( empty( $data['woo_dropdown_attribute_html_data']['options'] ) && ! empty( $data['woo_dropdown_attribute_html_data']['product'] ) && ! empty( $data['woo_dropdown_attribute_html_data']['attribute'] ) ) {
 			/*ACTIVE_TODO_OC_START
 			-- recieve data in function params to till this function, since I think we have exact same data on above layers but still confirm -- to b 
+				-- below we seem to have made be mistack by commenting the below line which was reading variation attributes using $product from function get_variation_attributes, because here the read of data must be product specific -- to h
 			ACTIVE_TODO_OC_END*/
 			//$data['woo_dropdown_attribute_html_data']['attributes'] = $product->get_variation_attributes();
 			$data['woo_dropdown_attribute_html_data']['options']    = $attributes[ $data['woo_dropdown_attribute_html_data']['attribute']  ];

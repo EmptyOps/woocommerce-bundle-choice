@@ -1,5 +1,5 @@
 <?php
-if(wp_is_mobile()) {
+if(/*wp_is_mobile()*/ wbc_is_mobile_by_page_sections('cat_shop_page',true)) {
 	?>
 	<div id="help_modal" class="ui small modal"><i class="close icon" style="top: 0;right: 0;color: #000;" onclick='jQuery("#help_modal").modal("hide")'></i><div class="header"></div>
 	<div class="content"></div>

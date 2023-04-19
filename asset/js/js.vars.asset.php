@@ -316,6 +316,7 @@ add_action('wp_footer',function(){
 			window.setTimeout(function(){
 				/*global wc_add_to_cart_variation_params */
 				;(function ( $, window, document, undefined ) {
+
 						/**
 						 * VariationForm class which handles variation forms and attributes.
 						 */
@@ -2129,6 +2130,7 @@ add_action('wp_footer',function(){
 					})( jQuery, window, document );
 				},1000);
 	      	}
+
 	      });
 
     	});
