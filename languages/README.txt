@@ -1,0 +1,1 @@
+This is the languages folder for language translation files. genrate the language files for the languages you want to provide on your site, we recommend using wpml, polylang. we will add revise and add more plugins in the recommended plugins list here but you can use any other language plugin as well as long as you know that is reliable.

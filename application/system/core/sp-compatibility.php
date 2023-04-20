@@ -94,6 +94,21 @@ class SP_Compatibility {
 		 }
  	}
 
+	public function single_product_render_compatability( $page_section, $args = array() ) {
+
+		if($page_section == 'woocommerce_after_add_to_cart_button') {
+	 	
+	 		$current_theme_key = wbc()->common->current_theme_key();
+
+	 		if ($current_theme_key == 'themes___purple_theme') {
+	        	
+	        	return 'woocommerce_after_add_to_cart_form';
+	        }
+
+	        return $args['hook_key'];
+	 	}
+	}
+
  	public function woo_product_images_template_compatability($page_section,$args = array()){
 
  		if($page_section == 'default_render_action') {
