@@ -448,9 +448,9 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 				// -- also we need to mac syore that we refacter and upgrad the ajax handlare to send mail which is in controllers ajax folder -- to h & -- to b done
 			// if(!empty($ui_ele['data_controls']) and !empty($ui_ele['data_controls']['type'])){
 			if(!empty($ui_element_definition['data_controls']) and !empty($ui_element_definition['data_controls']['type'])){
-				if($ui_element_definition['data_controls']['type'] === 'example_exshon'){
+				if($ui_element_definition['data_controls']['type'] === 'example_action'){
 					
-					// NOTE: from here we are not duing the do_action but in future if required than we can also do do_action for manged type for the type suported here on the wbc leyer. so wen if you do that the simply we can move the do_action from the else below to below the this vole if else an makit aplicabel for all if and else condishon. the men reshon regading anneshshory hooks we need to now cep the hook feld wery lick so allthe nessory hook well be added. 
+					// NOTE: from here we are not duing the do_action but in future if required than we can also do do_action for manged type for the type suported here on the wbc leyer. so wen if you do that then simply we can move the do_action from the else below, to below the this vole if else and make it aplicabel for all if and else condishon. the men reshon we are avoiding anneshshory hooks is that we need to now keep the hook footprint very light so only the nessory hook well be added. 
 
 				} else {
 
