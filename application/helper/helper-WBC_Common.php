@@ -541,13 +541,13 @@ class WBC_Common {
 
 	// NOTE: basically it is wp_is_mobile. but conditionally it overrides the default behaviour by adding condition  based on page or section and so on keys.  
 		// NOTE: however it is critical note that in normal scenarios override is not supposed to be used at all. but it is only in some exceptional scenarios and that is even only for the temporary period.  
-	public function is_mobile_by_page_sections($key = null) {
+	public function is_mobile_by_page_sections($key = null, $is_other_theme = false) {
 
 		if (wp_is_mobile()) {
 
 			$theme_key = wbc()->common->current_theme_key();
 
-			if ($theme_key == 'themes___purple_theme') {
+			if ($theme_key == 'themes___purple_theme' or $is_other_theme) {
 
 				if (is_admin()) {
 					
@@ -583,6 +583,10 @@ class WBC_Common {
 					return false;
 
 				} elseif ($key == 'cart') {
+
+					return false;
+
+				} elseif ($key == 'ring_size') {
 
 					return false;
 
@@ -750,8 +754,8 @@ function wbc_is_mobile() {
 	
 }
 
-function wbc_is_mobile_by_page_sections($key = null) {
+function wbc_is_mobile_by_page_sections($key = null, $is_other_theme = false) {
 
-	return wbc()->common->is_mobile_by_page_sections($key);
+	return wbc()->common->is_mobile_by_page_sections($key,$is_other_theme);
 
 }
