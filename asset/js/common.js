@@ -3107,6 +3107,7 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
             jQuery( _this.#data.types ).each( function( i, type_inner ) {
     
                console.log("gim [process_images] if innner loop " + type_inner);
+               console.log(_this.#configs.types);
  
                  // ACTIVE_TODO_OC_START
                  // --  the key controller here in case of gallery_images module, for defining the calling sequences and flow will be, the image index(even though we had plan to use index but that is only when it is must to use that), otherwise there should be gallery_item_type field that take care implicitly the things like custom_html images for zoom area and so on 
