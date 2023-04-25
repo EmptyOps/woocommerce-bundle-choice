@@ -26,7 +26,7 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 
 	public function build(array $ui,$option_key='',$process_form = true,$ui_generator = null, $ui_definition = null){
 
-		\sp\wbc\system\core\SP_Ui_Builder::instance()->build($ui, $option_key, $process_form,$ui_generator);
+		/*\sp\wbc\system\core\SP_Ui_Builder::instance()->*/parent::build($ui, $option_key, $process_form,$ui_generator, $ui_definition);
 
 		$ui_generator = \eo\wbc\controllers\admin\Controller::instance();
 		if(!empty($ui) and is_array($ui)){
@@ -74,7 +74,7 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 
 	private function process_build($ui_key,$ui_ele,$ui,$option_key='',$process_form = true,$ui_generator = null, $ui_element_definition = null) {
 
-		\sp\wbc\system\core\SP_Ui_Builder::instance()->process_build($ui_key,$ui_ele,$ui,$option_key,$process_form,$ui_generator);
+		/*\sp\wbc\system\core\SP_Ui_Builder::instance()->*/ parent::process_build($ui_key,$ui_ele,$ui,$option_key,$process_form,$ui_generator,$ui_element_definition);
 
 		if(!empty($ui_ele['type'])) {
 
@@ -184,7 +184,7 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 				}
 
 				if(in_array('image',$controls)) {
-					die();
+
 					if(empty($ui_ele['src'])){
 						$ui_ele['src'] = '';
 					}
@@ -459,8 +459,8 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 			}
 
 			
-			--jo submodul ma koy template rakvanu hoy to or any way submodul module ma template host karvanu suport ni jarur padchhe -- to h & to b
-			sp_tui()->load->template('ui/element/'.$ui_ele['type'],$ui_ele);
+			
+
 
 			-------------------------
 			$ui_ele['option_key'] =$option_key;
