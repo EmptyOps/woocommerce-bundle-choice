@@ -27,7 +27,7 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 	public function build(array $ui,$option_key='',$process_form = true,$ui_generator = null, $ui_definition = null){
 
 		/*\sp\wbc\system\core\SP_Ui_Builder::instance()->*/parent::build($ui, $option_key, $process_form,$ui_generator, $ui_definition);
-
+		--ui_builder.php mathi $ui_generator avyo chhe
 		$ui_generator = \eo\wbc\controllers\admin\Controller::instance();
 		if(!empty($ui) and is_array($ui)){
 			
@@ -58,6 +58,7 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 							continue;
 						} else {
 				? question recording 130.14 ma je $ui_ele ma id lakhel hashe tya replace karvanu kidhu chhe pan tya id kyay pass karel j nathi aakha build funaction ma 
+					? 144.10->4.11mint nu chhe tema pan question chhe
 							$this->process_build($ui_key,$ui_ele,$ui,$option_key,$process_form,$ui_generator,isset($ui_definition['controls'][$ui_key])?$ui_definition['controls'][$ui_key]:null);		
 						}
 					} else {
