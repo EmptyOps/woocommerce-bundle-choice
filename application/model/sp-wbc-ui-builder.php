@@ -33,7 +33,7 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 			
 			foreach ($ui as $ui_key => $ui_ele) {
 				
-				-- a if /sp_theme_ui/application/view/ui/Base_Builder.php build function  ni chhe
+				-- a if /sp_theme_ui/application/view/ui/Base_Builder.php build function ni chhe
 				if(!empty($ui_definition['controls'][$ui_key]['configuration_controls']) and !empty($ui_definition['controls'][$ui_key]['configuration_controls'][2])){
 
 					if(!empty($ui_definition['controls'][$ui_key]['configuration_controls'][2]['action']) and $ui_definition['controls'][$ui_key]['configuration_controls'][2]['action']==='toggle_section') {
@@ -59,17 +59,55 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 						} else {
 				? question recording 130.14 ma je $ui_ele ma id lakhel hashe tya replace karvanu kidhu chhe pan tya id kyay pass karel j nathi aakha build funaction ma 
 					? 144.10->4.11mint nu chhe tema pan question chhe
-							$this->process_build($ui_key,$ui_ele,$ui,$option_key,$process_form,$ui_generator,isset($ui_definition['controls'][$ui_key])?$ui_definition['controls'][$ui_key]:null);		
+							$this->call_process_build($ui_key,$ui_ele,$ui,$option_key,$process_form,$ui_generator,isset($ui_definition['controls'][$ui_key])?$ui_definition['controls'][$ui_key]:null,$ui_definition);		
 						}
 					} else {
-						$this->process_build($ui_key,$ui_ele,$ui,$option_key,$process_form,$ui_generator,isset($ui_definition['controls'][$ui_key])?$ui_definition['controls'][$ui_key]:null);
+						$this->call_process_build($ui_key,$ui_ele,$ui,$option_key,$process_form,$ui_generator,isset($ui_definition['controls'][$ui_key])?$ui_definition['controls'][$ui_key]:null,$ui_definition);
 					}
 
 				} else {
-					$this->process_build($ui_key,$ui_ele,$ui,$option_key,$process_form,$ui_generator,isset($ui_definition['controls'][$ui_key])?$ui_definition['controls'][$ui_key]:null);
+					$this->call_process_build($ui_key,$ui_ele,$ui,$option_key,$process_form,$ui_generator,isset($ui_definition['controls'][$ui_key])?$ui_definition['controls'][$ui_key]:null,$ui_definition);
 				}
 			}
 
+		}
+	}
+
+	private function call_process_build($ui_key,$ui_ele,$ui,$option_key='',$process_form = true,$ui_generator = null, $ui_element_definition = null, $ui_definition = null){
+
+		$this->process_build($ui_key, $ui_ele, $ui, $option_key, $process_form, $ui_generator, $ui_element_definition);
+
+		if (!empty($ui_ele['das_node'])) {
+
+			$das_node_count = isset($ui_ele['das_node_defaults']) ? sizeof($ui_ele['das_node_defaults']) : 0 ;
+
+			for($i = 0; $i<$das_node_count; $++) {
+
+				if (isset($ui_ele['das_node_defaults'][$i])) {
+					
+					if (empty($ui_ele['das_node_defaults'][$i]['id_key'])) {
+						
+						$ui_ele['das_node_defaults'][$i]['id_key'] = $ui_ele['id_key']."_".$i;
+					}
+
+				}
+
+				ACTIVE_TODO From below call we are passing the controls of the default provided by user but if the controls is provided for one particular layer for example configuration controls but appearance and data controls are not provided on the main node appearance controls is supported that sud be passed from here so additionally if is need here to tac car of that meter, so jas add the applicable if conditions here. we may need to do at as soon as we face an issue or next by the 1st or 2ed revision-- to h & -- to b
+
+				$this->process_build(
+					$i/*$ui_key*/, 
+
+					isset($ui_ele['das_node_defaults'][$i]) ? $ui_ele['das_node_defaults'][$i] : $ui_ele, 
+
+					$ui, 
+					$option_key, 
+					$process_form, 
+					$ui_generator, 
+
+					-- ahi j id_key nu j logic karlu chhe e $id_key nu logic process_build ma haju baki chhee badhe karvanu. je call_process_build na call ma uprathi lagu padyu hashe te pramane ahiya implement thayu chhe ne e confirm karvanu aavashe.jyare $id_key nu logic 144 ni seris ma aagal karvanu aavyu em thayu pachhi.
+					isset($ui_definition['controls'][$ui_ele['das_node_defaults'][$i]['id_key']]) ? $ui_definition['controls'][$ui_ele['das_node_defaults'][$i]['id_key']] : $ui_element_definition
+				);
+			}
 		}
 	}
 

@@ -134,6 +134,7 @@ class Controller extends \eo\wbc\controllers\Controller {
 			'container'=>array('height','width','margin_left','margin_right','visibility'),
 			'wc_attribute_field'=>array('attribute','checkbox','text','visibility'),
 			'a'=>array('href','url','text','visibility')
+			'td'=>array('text','color','back_color','font_family','font_size','visibility'),
 		);
 
 		$collection = array();
