@@ -246,6 +246,8 @@ class WBC_WP {
 
     public function wbc_is_plugin_active( $plugin_slug ) {
 
+        NOTE: here it for certain plugin the check if better and reliable by detecting their class then we can simply apply those if condition by checking the plugin slug and the everything else will be based on the wp api. but ya if that is our required otherwise we can simply rely on the wp-api as long as that is available and reliable. 
+        
         // NOTE: we will always use plugin slug for such condition creation. or the most reliable and simpest method to check if certain plugin is active by passing their slug so we would need to create the applicable function in the wp helper.
 
         
