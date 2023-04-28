@@ -7,7 +7,7 @@
 ?>
 <div class="ui equal width middle aligned grid" style="width: 100%;padding-top: 0px;text-transform:none;font-family: 'ZapfHumanist601BT-Roman';">        
 
-    <div class="ui column left aligned eowbc_breadcrumb_font"> <?php spext_lang("3", 'woo-bundle-choice') ?> </div>
+    <div class="ui column left aligned eowbc_breadcrumb_font"> <?php /*spext_lang*/_e("3", 'woo-bundle-choice') ?> </div>
     <div class="ui column left aligned">
         <div class="title eowbc_breadcrumb_font"> <?php spext_lang("Complete", 'woo-bundle-choice') ?> <?php _e($preview_name); ?></div>
     </div>
