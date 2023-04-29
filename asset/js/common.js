@@ -1706,7 +1706,8 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
 
     }
 
-    /*#*/process_attribute_template_private(type, element, mode = null) {
+
+    /*#*/process_attribute_template_private(type, element, mode = null, is_reusability_recursion = false) {
 
         console.log('vs [process_attribute_template]');
 
@@ -1868,11 +1869,14 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
         // });
         console.log('vs [process_attribute_template] 01');
 
-        _this./*#*/on_click_listener_private(type, element, data.reselect_clear, data);
+        if(is_reusability_recursion === false) {
+            
+            _this./*#*/on_click_listener_private(type, element, data.reselect_clear, data);
 
-        _this./*#*/on_keydown_listener_private(type, element);   
+            _this./*#*/on_keydown_listener_private(type, element);   
 
-        _this./*#*/on_change_listener_private(type, element, data.reselect_clear, null, data); 
+            _this./*#*/on_change_listener_private(type, element, data.reselect_clear, null, data); 
+        }
 
     }
 
@@ -1938,20 +1942,20 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
         var _this = this; 
         
         // console.log("swatches on_change_listener");
-        // var uniquely_managed_type = null;
-        if(type == 'radio'/*change radio with your uniquely managed type*/) {
+        // // var uniquely_managed_type = null;
+        // if(type == 'radio'/*change radio with your uniquely managed type*/) {
 
-            uniquely_managed_type = type;
+        //     uniquely_managed_type = type;
 
-        } else {
+        // } else {
 
-            uniquely_managed_type = 'default';            
+        //     uniquely_managed_type = 'default';            
 
-        }
+        // }
 
-        if(window.document.splugins.common._b(_this./*#*/binding_stats_private, 'on_change_listener', uniquely_managed_type)){
-            return false;
-        }
+        // if(window.document.splugins.common._b(_this./*#*/binding_stats_private, 'on_change_listener', uniquely_managed_type)){
+        //     return false;
+        // }
 
         /*jQuery('#select_attribute_of_variation').on('woocommerce_variation_has_changed', function(){
             // do your magic here...
@@ -2121,8 +2125,11 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
           //   // Items Updated
           //   // $(this).trigger('wvs-items-updated');
           // });
-            
-          _this./*#*/process_attribute_template_private(type, element, 'change');  
+          
+            console.log('vs [on_change_listener] 1');
+            console.log(element);
+
+          _this./*#*/process_attribute_template_private(type, element, 'change', true);  
 
           _this./*#*/on_change_private(type, element, event);
 
@@ -4793,13 +4800,27 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
             console.log('gim_feed [zoom_area_hover_in] images');
             console.log(images);
 
+            var found_count = 0;
+
             jQuery(images).each(function (index_inner,image) {
                 
-                // console.log('gim_feed zoom_area_hover_in each_loop');
+                console.log('gim_feed zoom_area_hover_in each_loop');
+                console.log(image.extra_params_org.type);
 
                 image.index = index_inner;
 
-                if(_this./*#*/$configs_private.options.tiny_features_option_ui_loop_box_hover_media_index == image.extra_params_org.type){
+                if(
+                    _this./*#*/$configs_private.options.tiny_features_option_ui_loop_box_hover_media_index == image.extra_params_org.type 
+                    ||
+                    (_this./*#*/$configs_private.options.tiny_features_option_ui_loop_box_hover_media_index == 'image' && window.document.splugins.common.is_empty(image.extra_params_org.type)/*empty value means default type which is considerd as image type*/)
+                    ) {
+
+                    found_count ++;
+                    
+                    if(_this./*#*/$configs_private.options.tiny_features_option_ui_loop_box_hover_media_index == 'image' && found_count == 1){
+
+                        return;
+                    }
 
                     console.log('gim_feed [zoom_area_hover_in] each_loop if');
 
@@ -4822,8 +4843,8 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
 
                     zoom_inner_html += _this.apply_template_data_public(template_var, image, templating_lib);
 
-                    // console.log('gim_feed zoom_area_hover_in each_loop if zoom_inner_html');
-                    // console.log(zoom_inner_html);
+                    console.log('gim_feed zoom_area_hover_in each_loop if zoom_inner_html');
+                    console.log(zoom_inner_html);
 
                     return false;
                 }
@@ -4831,9 +4852,14 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
             // }).join('');
             });
 
+            if(hover_media_index === null) {
+
+                return false;
+            }
+
             if (hasGallery) {
 
-              super.get_zoom_container().html(zoom_inner_html);
+                super.get_zoom_container().html(zoom_inner_html);
            
             } else {
 
