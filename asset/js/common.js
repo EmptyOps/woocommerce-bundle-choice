@@ -2927,7 +2927,7 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
 
         console.log("gim [preprocess] _this./*#*/$zoom_container_private");
         console.log(_this./*#*/$zoom_container_private);
-            
+
         console.log("gim [preprocess] _this./*#*/$slider_container_private");
         console.log(_this);
 
@@ -3344,8 +3344,8 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
  
     /*#*/process_images_template_private(images) {
  
-     // console.log("gim [process_images_template]");
-
+     console.log("gim [process_images_template]");
+        
       var _this = this;  
 
       var hasGallery = images.length > 1;
@@ -3357,13 +3357,15 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
 
       if(!_this./*#*/data_private.is_skip_sp_slider){
 
-        _this./*#*/process_slider_template_private(images);  
+        _this./*#*/process_slider_template_private(images,hasGallery);  
       }
       
       var index = 0;
       if (typeof _this./*#*/$slider_loop_container_private.data('selected-index') !== 'undefined') {
         index = _this./*#*/$slider_loop_container_private.data('selected-index');
       }
+        console.log('aa_process_images_template_private2');
+
 
       _this./*#*/process_zoom_template_private(images,index,hasGallery);
 
@@ -3399,7 +3401,7 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
 
     };
  
-    /*#*/process_slider_template_private(images){
+    /*#*/process_slider_template_private(images,hasGallery){
 
         // console.log("gim [process_images_template]");
 
@@ -3418,7 +3420,13 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
             slider_inner_html += _this./*#*/apply_template_data_private(template_var, image, templating_lib);
         });
 
-        _this./*#*/$slider_loop_container_private.html(slider_inner_html);
+        if(hasGallery){
+
+            _this./*#*/$slider_loop_container_private.html(slider_inner_html);
+        }else{
+
+            _this./*#*/$slider_loop_container_private.html('');
+        }
 
     };
 
@@ -3481,14 +3489,14 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
         });
 
 
-        if (hasGallery) {
+        // if (hasGallery) {
 
            _this./*#*/$zoom_container_private.html(zoom_inner_html);
        
-        } else {
+        // } else {
 
-          _this./*#*/$zoom_container_private.html('');
-        } //this._element.trigger('woo_variation_gallery_init', [this, images]);
+        //   _this./*#*/$zoom_container_private.html('');
+        // } //this._element.trigger('woo_variation_gallery_init', [this, images]);
 
         // console.log("gim [process_images_template] 01");
 
