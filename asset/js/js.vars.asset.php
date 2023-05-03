@@ -97,7 +97,7 @@ add_action( ( !is_admin() ? 'wp_enqueue_scripts' : 'admin_enqueue_scripts'),func
 		$gallery_images_configs['template_loop']['zoom']['all_in_dom'] = apply_filters('sp_slzm_loop_zoom_template_all_in_dom',0);	
 
 		$gallery_images_configs['options'] = array('gallery_reset_on_variation_change'=>false,
-																 'tiny_features_option_ui_loop_box_hover_media_index'=>wbc()->options->get_option('tiny_features','tiny_features_option_ui_loop_box_hover_media_index','2'));
+																 'tiny_features_option_ui_loop_box_hover_media_index'=>/*wbc()->options->get_option('tiny_features','tiny_features_option_ui_loop_box_hover_media_index','2')*/apply_filters('ssm_vrtns_loop_box_hover_media_type',wbc()->options->get_option('tiny_features','tiny_features_option_ui_loop_box_hover_media_index','2')));
 
 		// ACTIVE_TODO asset enque and other asset flows
 			// --  first need to confirm that minified asset only are loaded -- to t
@@ -165,11 +165,17 @@ add_action('wp_footer',function(){
     
 		        // window.setTimeout(function(){
 
+						console.log('[js.vars.asset wp_footer] document.ready 01');
 		            window.document.splugins.wbc.variations.gallery_images.sp_slzm.api.init();
+						console.log('[js.vars.asset wp_footer] document.ready 02');
 		            
 		        // }, 2500);
 
 			}
+
+			console.log('[js.vars.asset wp_footer] document.ready 03');
+
+			console.log(window.document.splugins.common.is_item_page);
 
         	if(window.document.splugins.common.is_item_page) {
 	
