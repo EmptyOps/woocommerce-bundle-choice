@@ -79,7 +79,7 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 
 		if (!empty($ui_ele['das_node'])) {
 
-			$das_node_count = isset($ui_ele['das_node_defaults']) ? sizeof($ui_ele['das_node_defaults']) : 0 ;
+			$das_node_count = wbc()->options->get_option($ui_definition['data_controls'][2]['tab_key'],$ui_ele['id_key']."das_node_count",(isset($ui_ele['das_node_defaults']) ? sizeof($ui_ele['das_node_defaults']) : 0),true,true);
 
 			for($i = 0; $i<$das_node_count; $++) {
 

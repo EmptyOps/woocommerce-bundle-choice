@@ -255,6 +255,7 @@ class Controller extends \eo\wbc\controllers\Controller {
 
 				// lup attr 
 
+				ACTIVE_TODO here instad of haveing our tem and user to spsefive the node_type adishnaly for the controls fild it is beter we can refacterit so that it can read dieracly from the ui array, so last do it as long as posibul without lusing the balnche of the module caplins or cohensh. but it seems at like the das node count default fild below it is not possibel without compromishing on the lusly cupled modules flow on the lusly cupled module standed, but late think about if it is possibel. other wish as long as thar is no way and it seems nasral to lat usr defined hard code way last markit as invalid.
 				if( !empty($form_value[$key][2]) and  !empty($form_value[$key][2]['type']) or (!empty($form_value[$key][2]) and  !empty($form_value[$key][2]['node_type'])) ) {
 
 					$dynamic_type = ( !empty($form_value[$key][2]) and  !empty($form_value[$key][2]['type']) ? !empty($form_value[$key][2]) and  !empty($form_value[$key][2]['type']) : !empty($form_value[$key][2]) and  !empty($form_value[$key][2]['node_type']) );
@@ -293,7 +294,7 @@ class Controller extends \eo\wbc\controllers\Controller {
 
 					}
 
-					ACTIVE_TODO here we are depanding on the das node count default fild that is set from the data controls but in fusher we sud refacter the code as long as it is possible withe usliy cupled flow to ansyor that the default count seting is red from the ui array dieracly instad of dipanding on the defolt that is need to set sapratly. but i thing thar is no issy way and if you sumthing that it well not be lusly cupled so may be it is the work that we need our user and tem to that we need our tem and user to do acive this. but if it is possibel than las do it other wish we can markitis todo or mac this point invalid.
+					ACTIVE_TODO here we are depanding on the das node count default fild that is set from the data controls but in fusher we sud refacter the code as long as it is possible withe usliy cupled flow to ansyor that the default count seting is red from the ui array dieracly instad of dipanding on the defolt that is need to set sapratly. but i thing thar is no issy way and if you do sumthing that it well not be lusly cupled so may be it is the work that we need our user and tem to that we need our tem and user to do to acive this. but if it is possibel than las do it other wish we can markitis todo or mac this point invalid.
 					$controls[$form_key.'_das_node_type_count'] = array(
 						'label'=>'increase\decrease '.$form_value[$key][0],
 						'type'=>'number',
