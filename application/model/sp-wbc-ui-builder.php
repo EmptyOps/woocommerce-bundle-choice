@@ -94,6 +94,7 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 
 				ACTIVE_TODO From below call we are passing the controls of the default provided by user but if the controls is provided for one particular layer for example configuration controls but appearance and data controls are not provided on the main node appearance controls is supported that sud be passed from here so additionally if is need here to tac car of that meter, so jas add the applicable if conditions here. we may need to do at as soon as we face an issue or next by the 1st or 2ed revision-- to h & -- to b
 
+				ACTIVE_TODO this is wary sansitiv flow issue here that we need to pass the brod layer variables data lick $ui_definition and so on to dapdown to althe layer and than that is calling back the mane function so we need to refactrit and mac sur that recarshon hapans only from the build funaction or next to the sub call_process_build function and the depandancy on passing $ui_definition all the way to the element files. so simply this is a reyali bade flow we need to refactrit as sun as we get sanche. and lats do is next by the 2ed revision and any how.-- to h & -- to b
 				$this->process_build(
 					$i/*$ui_key*/, 
 
@@ -105,13 +106,15 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 					$ui_generator, 
 
 					-- ahi j id_key nu j logic karlu chhe e $id_key nu logic process_build ma haju baki chhee badhe karvanu. je call_process_build na call ma uprathi lagu padyu hashe te pramane ahiya implement thayu chhe ne e confirm karvanu aavashe.jyare $id_key nu logic 144 ni seris ma aagal karvanu aavyu em thayu pachhi.
-					isset($ui_definition['controls'][$ui_ele['das_node_defaults'][$i]['id_key']]) ? $ui_definition['controls'][$ui_ele['das_node_defaults'][$i]['id_key']] : $ui_element_definition
+					isset($ui_definition['controls'][$ui_ele['das_node_defaults'][$i]['id_key']]) ? $ui_definition['controls'][$ui_ele['das_node_defaults'][$i]['id_key']] : $ui_element_definition,
+
+					$ui_definition
 				);
 			}
 		}
 	}
 
-	private function process_build($ui_key,$ui_ele,$ui,$option_key='',$process_form = true,$ui_generator = null, $ui_element_definition = null) {
+	private function process_build($ui_key,$ui_ele,$ui,$option_key='',$process_form = true,$ui_generator = null, $ui_element_definition = null, $ui_definition = null) {
 
 		/*\sp\wbc\system\core\SP_Ui_Builder::instance()->*/ parent::process_build($ui_key,$ui_ele,$ui,$option_key,$process_form,$ui_generator,$ui_element_definition);
 
@@ -506,6 +509,8 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 			$ui_ele['process_form'] =$process_form;
 			// passing self contained object so the template can use the child parameter in the $ui_ele to created a nested complax UI.
 			$ui_ele['builder'] = $this;
+
+			$ui_ele['ui_definition'] = $ui_definition;
 
 			ACTIVE_TODO_OC_START			
 			ACTIVE_TODO even though it is vital to avoid keeping duplicates but till the form builder is not refactored till the form builder or say old version of ui builder also will load the duplicate components from the folder 'core/ui/components/'. but we must refactor the form builder or atleast refactor this part only so that we can avoid this huge duplicate code. lets do max by 1st or 2nd revision. -- to h & -- to b 

@@ -255,37 +255,52 @@ class Controller extends \eo\wbc\controllers\Controller {
 
 				// lup attr 
 
-				if(!empty($form_value[$key][2]) and  !empty($form_value[$key][2]['type'])) {
+				if( !empty($form_value[$key][2]) and  !empty($form_value[$key][2]['type']) or (!empty($form_value[$key][2]) and  !empty($form_value[$key][2]['node_type'])) ) {
 
-					$control_element = $this->default_uis($form_value[$key][2]['type'],$excep_controls);
+					$dynamic_type = ( !empty($form_value[$key][2]) and  !empty($form_value[$key][2]['type']) ? !empty($form_value[$key][2]) and  !empty($form_value[$key][2]['type']) : !empty($form_value[$key][2]) and  !empty($form_value[$key][2]['node_type']) );
+
+					$control_element = $this->default_uis(/*$form_value[$key][2]['type']*/$dynamic_type,$excep_controls);
 					if(empty($control_element)/* and $form_value['type'] === 'hidden'*/){
-						$control_element = array($form_value[$key][2]['type']);
+						$control_element = array(/*$form_value[$key][2]['type']*/$dynamic_type);
 					}
 
 				} elseif(!empty($form_value['type'])) {
 					$control_element = $this->default_uis($form_value['type'],$excep_controls);
 				} 
 
-				if(!empty($control_element)){
+				if( !empty($control_element) or ( $key == 'data_controls' and !empty(!empty($form_value[$key][2]) and  !empty($form_value[$key][2]['das_node_type'])) ) ){
 
 					$controls[$form_key.'_form_segment'] = array(
 						'label'=> $form_value[$key][0],
 						'type'=>'devider',
 					);
 
-					foreach ($control_element as $control) {
+					if( !empty($control_element) ) {
 
-						if(empty($form_value[$key][2])){
-							$controls[$form_key.'_'.$control] = call_user_func_array(array($admin_ui,$control),array($form_key.'_'.$control,$form_value[$key][0]));
-						} else {
-							$control_key = $form_key.'_'.$control;
-							if(!empty($form_value[$key][2]['id'])){
-								$control_key = $form_value[$key][2]['id'].'_'.$control;
+						foreach ($control_element as $control) {
+
+							if(empty($form_value[$key][2])){
+								$controls[$form_key.'_'.$control] = call_user_func_array(array($admin_ui,$control),array($form_key.'_'.$control,$form_value[$key][0]));
+							} else {
+								$control_key = $form_key.'_'.$control;
+								if(!empty($form_value[$key][2]['id'])){
+									$control_key = $form_value[$key][2]['id'].'_'.$control;
+								}
+								$controls[$control_key] = call_user_func_array(array($admin_ui,$control),array($control_key,$form_value[$key][0],$form_value[$key][2]));
+								
 							}
-							$controls[$control_key] = call_user_func_array(array($admin_ui,$control),array($control_key,$form_value[$key][0],$form_value[$key][2]));
-							
 						}
+
 					}
+
+					ACTIVE_TODO here we are depanding on the das node count default fild that is set from the data controls but in fusher we sud refacter the code as long as it is possible withe usliy cupled flow to ansyor that the default count seting is red from the ui array dieracly instad of dipanding on the defolt that is need to set sapratly. but i thing thar is no issy way and if you sumthing that it well not be lusly cupled so may be it is the work that we need our user and tem to that we need our tem and user to do acive this. but if it is possibel than las do it other wish we can markitis todo or mac this point invalid.
+					$controls[$form_key.'_das_node_type_count'] = array(
+						'label'=>'increase\decrease '.$form_value[$key][0],
+						'type'=>'number',
+						'value'=> ( !empty($form_value[$key][2]['das_node_type_count_default']) ? $form_value[$key][2]['das_node_type_count_default'] : 0 ),							
+						'sanitize'=>'sanitize_text_field',
+						'size_class'=>array(''),
+					);
 				}
 			}
 
