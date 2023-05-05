@@ -2836,6 +2836,15 @@ window.document.splugins.wbc.pagination.core = function( configs ) {
 			if(object.pagination_container.length<=0) {
 		
 				object.pagination_container = jQuery(".jet-filters-pagination a,.woocommerce-pagination .jet-filters-pagination__link,.pagination .jet-filters-pagination__link,.jet-filters-pagination .jet-filters-pagination__link");
+
+				if(object.pagination_container.length<=0){
+					
+					if(window.document.splugins.common.current_theme_key == 'themes___elessi-theme-child'){
+
+						object.pagination_container = jQuery('.nasa-pagination .page-numbers .page-numbers');	
+					
+					}
+				}
 			}
         } 
 
