@@ -278,23 +278,25 @@ class Controller extends \eo\wbc\controllers\Controller {
 
 					if( !empty($control_element) ) {
 
-						foreach ($control_element as $control) {
+						$controls = $this->generate_form_controls($control_element, $form_value, $key,$form_key, $admin_ui);
 
-							if(empty($form_value[$key][2])){
-								$controls[$form_key.'_'.$control] = call_user_func_array(array($admin_ui,$control),array($form_key.'_'.$control,$form_value[$key][0]));
-							} else {
-								$control_key = $form_key.'_'.$control;
-								if(!empty($form_value[$key][2]['id'])){
-									$control_key = $form_value[$key][2]['id'].'_'.$control;
-								}
-								$controls[$control_key] = call_user_func_array(array($admin_ui,$control),array($control_key,$form_value[$key][0],$form_value[$key][2]));
+						$das_node_count = wbc()->options->get_option($form_value[$key][2]['data_tab_key'],$form_key."_das_node_count",(isset($form_value[$key][2]['das_node_defaults']) ? sizeof($form_value[$key][2]['das_node_defaults']) : 0),true,true);
+
+						if (!empty($form_value[$key][2]['das_node_enabled'])) {
+
+							if($das_node_count >0){
 								
+								for($i = 0; $i<$das_node_count; $++) {
+
+									$controls = $this->generate_form_controls($control_element, $form_value, $key,$form_key.'_'.$i, $admin_ui);
+								}
 							}
 						}
 
 					}
 
 					ACTIVE_TODO here we are depanding on the das node count default fild that is set from the data controls but in fusher we sud refacter the code as long as it is possible withe usliy cupled flow to ansyor that the default count seting is red from the ui array dieracly instad of dipanding on the defolt that is need to set sapratly. but i thing thar is no issy way and if you do sumthing that it well not be lusly cupled so may be it is the work that we need our user and tem to that we need our tem and user to do to acive this. but if it is possibel than las do it other wish we can markitis todo or mac this point invalid.
+					ACTIVE_TODO and it futcher we may lick to provide on admin the increase or decrease support directly on the particular appearence or configuration tab instead of asking use of increase or decrease fast on the data tab. so that user expression can be improved but as long as it is simple and visible, when and if we do that then we can use the than factors we can usually sam das support field that is added from builder but that exactly we can not used on form array but we can at least us that javascript api. lat do it if required by 3rd revision other wishes we can markitis todo. -- to h & -- to b 
 					$controls[$form_key.'_das_node_type_count'] = array(
 						'label'=>'increase\decrease '.$form_value[$key][0],
 						'type'=>'number',
@@ -349,6 +351,31 @@ class Controller extends \eo\wbc\controllers\Controller {
 		}
 
 		return $controls;
+	}
+
+	private function generate_form_controls($control_element, $form_value, $key,$form_key, $admin_ui) {
+		
+		foreach ($control_element as $control) {
+
+			if(empty($form_value[$key][2])){
+
+				$controls[$form_key.'_'.$control] = call_user_func_array(array($admin_ui,$control),array($form_key.'_'.$control,$form_value[$key][0]));
+
+			} else {
+
+				$control_key = $form_key.'_'.$control;
+
+				--here jo apdy id had coded support karva hot to ano support ds mate ansyor karvo padchhe nitar hard coded id atlist nava emplymentshon ma ni use kari shaky or simply no kariy to chaly so lat simply figerat out and jo us karva pady am hoy to we can not confrom karvu posibul no hoy to simply wbc ui builder ma aaj singel cot ma id paramiter chhe jay jay us thayelu hoy te find kari ne puchi thei apdy teno ahi support confrom kari shky -- to h & -- to b
+				if(!empty($form_value[$key][2]['id'])){
+
+					$control_key = $form_value[$key][2]['id'].'_'.$control;
+				}
+				$controls[$control_key] = call_user_func_array(array($admin_ui,$control),array($control_key,$form_value[$key][0],$form_value[$key][2]));
+			}
+		}
+
+		return $controls;
+
 	}
 
 		// return all appearance control data to be dumped in to json

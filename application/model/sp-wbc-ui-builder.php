@@ -75,6 +75,8 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 
 	private function call_process_build($ui_key,$ui_ele,$ui,$option_key='',$process_form = true,$ui_generator = null, $ui_element_definition = null, $ui_definition = null){
 
+		NOTE: The das node support add in the ui builder is a standard support with the simple and nasarel stretcher. and user can yous the support to increase or decrease field no mater if it is supported on the wp customizer page builders lick elementor and so on, wish mins if user can use the support than they even if they do not use the increase or decrease support of the external of the wp customizer or external page builder than also they can be fine with thay recruitment other wishes they are also free can use the support of the wp customizer or external page builder to increase or decrease in wish cas they can keep using this support.
+
 		$this->process_build($ui_key, $ui_ele, $ui, $option_key, $process_form, $ui_generator, $ui_element_definition);
 
 		if (!empty($ui_ele['das_node'])) {
@@ -89,7 +91,6 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 						
 						$ui_ele['das_node_defaults'][$i]['id_key'] = $ui_ele['id_key']."_".$i;
 					}
-
 				}
 
 				ACTIVE_TODO From below call we are passing the controls of the default provided by user but if the controls is provided for one particular layer for example configuration controls but appearance and data controls are not provided on the main node appearance controls is supported that sud be passed from here so additionally if is need here to tac car of that meter, so jas add the applicable if conditions here. we may need to do at as soon as we face an issue or next by the 1st or 2ed revision-- to h & -- to b
@@ -496,7 +497,7 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 
 				} else {
 
-					do_action('sp_ui_builder_build_data_controls_type', $ui_element_definition['data_controls']);
+					do_action('sp_ui_builder_build_data_controls_type', $ui_element_definition['data_controls'], $this, /*as long as it is not nashory it is a recruitment that we do not rely on this object passing to keep it simple, but if it is received then we can pass as well as if required we can re may also may to pass the colur obj witches calling this class not $this but they vary class wichis calling this function layer*/ );
 				}
 			}
 

@@ -4,7 +4,7 @@
 *
 */
 
-ACTIVE_TODO most probeli now this file is not in use sinche the this leyer wos not applicebel in wbc and it is moved to the pro layers. so to mac sur that wbc leyers are net and do not cantent any anneshory junk kode lat jast get rede of here sa sun as get sanche. and lats do it as sun as posibul. -- to h
+ACTIVE_TODO most probeli now this file is not in use sinche the this leyer wos not applicebel in wbc and it is moved to the pro layers. so to mac sur that wbc leyers are net and do not contain any anneshory junk kode lat jast get rede of here as sun as get sanche. and lats do it as sun as posibul. -- to h
 $res = array( "type"=>"success", "msg"=>"" );
 
 function sp_validate_unique_email($fields,$key) {
