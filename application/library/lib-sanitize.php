@@ -145,7 +145,7 @@ if(!class_exists('WBC_Sanitize')) {
 			
 		}
 
-		ACTIVE_TODO in here we are duing sum validation call but we ned to sud mack thay are moved to comman senitijer library we du not use any dublicated code here. but mostprobly this code dujent exit only sentij library on the comnen senitijer library wbc in that cas we simly extend the senitijer library. mins exted of this code relay need to sty only here they extend the class then call the senitijer class from here ned move this all validation code from this class leyer to that extemded senitijer class -- to h
+		ACTIVE_TODO in here we are duing sum validation call but we ned to make sure thay are moved to comman senitijer library and we du not use any dublicated code here. but mostprobly this code does not exist on the santize library on the comnen senitijer library of the wbc, in that case we sipmly extend the senitijer library. mins extend if this code need to sty only here they extend the class then call the senitijer class from here and move this all validation code from this class leyer to that extended senitijer class -- to h
 		ACTIVE_TODO this function moved out of comnen email hendler. it is not us comnen by any other layers access the ajax email handler or ajax comnen handler layer so we jast need to refactrit for the mact it useabel for comnen layer. other wish we can simply dapricatit in fusher verjan and lat other layer incuding ajax email or ajax layer use the other comnen function for the empliment. alt markited to do by 3rd revision if plan to do it after the 3rd revision is finshed. -- to h   
 		public function sp_validate_unique_email($fields,$key) {
 			if(!empty($fields) and is_array($fields) and !empty($key)) {

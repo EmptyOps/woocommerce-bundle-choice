@@ -134,6 +134,7 @@ class Controller extends \eo\wbc\controllers\Controller {
 			'container'=>array('height','width','margin_left','margin_right','visibility'),
 			'wc_attribute_field'=>array('attribute','checkbox','text','visibility'),
 			'a'=>array('href','url','text','visibility')
+			'td'=>array('text','color','back_color','font_family','font_size','visibility'),
 		);
 
 		$collection = array();
@@ -152,7 +153,78 @@ class Controller extends \eo\wbc\controllers\Controller {
 		return $collection;
 	}
 
-	public function generate_form($form,$key='appearence_controls') {
+	public function generate_form_wrapper($form_definition, $singleton_function, $tab_key_prefix, $page_prefix, $page_section, $md_obj) {
+
+		$controls = array('appearence_controls'=>'Appearence Controls',
+			'configuration_controls'=>'Configuration Controls',
+			'data_controls'=>'Data Controls'
+		);
+
+		foreach($controls as $control_key->$control_title){
+
+			foreach($page_section as $ps_key->$ps_title){
+
+				$ui_definition = null;
+				if (method_exists($md_obj,'ui_{$control_key}_definition')) {
+					
+					$ui_definition = $md_obj->{'ui_{$control_key}_definition'}(null, $ps_key);
+
+				}
+
+				$form = array();
+				if (!empty($ui_definition)) {
+					
+					$form_part = $this->generate_form(/*$publics_form*/$ui_definition['controls'], $control_key, true);
+
+					if (!empty($form_part)) {
+						
+						$form = array_merge(
+							$form,
+							array($singleton_function.'_'.$control_key.'_'.$ps_key.'_advanced_tab_start'=>array(
+									'type'=>'accordian',
+									'section_type'=>'start',
+									'class'=>array('field', 'styled'),
+									'label'=>'<span class="ui large text">'.$ps_title.'</span>',
+								),
+							),
+							$form_part,
+							array($singleton_function.'_'.$control_key.'_'.$ps_key.'_advanced_tab_end'=>array(
+									'type'=>'accordian',
+									'section_type'=>'end'
+								),
+							),
+							/*array('attribute'=>array(
+					    		'label'=>'ATTRIBUTE',
+					    		'type'=>'devider'),	
+							)*/
+						);
+					}
+				}
+
+			}
+
+			if(!empty($form)){
+				$tab_key = $singleton_function.'_'.$tab_key_prefix.'_'.$control_key;
+				$form['save'] = array(
+							'label'=>'Save',
+							'type'=>'button',		
+							'class'=>array('primary'),
+							'attr'=>array("data-action='save'",'data-tab_key="'.$tab_key.'"')	
+						);
+
+				if (wbc_isEmptyArr($form)) {
+
+					$form_definition[$tab_key] = array('label'=>$page_prefix.' '.$control_title,'form'=>$form);		
+				}
+			}
+
+		}
+
+		return $form_definition;
+		
+	}
+
+	public function generate_form($form,$key='appearence_controls',$is_ui_definition = false) {
 		if(empty($form) or !is_array($form)){
 			return array();
 		}
@@ -183,37 +255,55 @@ class Controller extends \eo\wbc\controllers\Controller {
 
 				// lup attr 
 
-				if(!empty($form_value[$key][2]) and  !empty($form_value[$key][2]['type'])) {
+				ACTIVE_TODO here instad of haveing our tem and user to spsefive the node_type adishnaly for the controls fild it is beter we can refacterit so that it can read dieracly from the ui array, so last do it as long as posibul without lusing the balnche of the module caplins or cohensh. but it seems at like the das node count default fild below it is not possibel without compromishing on the lusly cupled modules flow on the lusly cupled module standed, but late think about if it is possibel. other wish as long as thar is no way and it seems nasral to lat usr defined hard code way last markit as invalid.
+				if( !empty($form_value[$key][2]) and  !empty($form_value[$key][2]['type']) or (!empty($form_value[$key][2]) and  !empty($form_value[$key][2]['node_type'])) ) {
 
-					$control_element = $this->default_uis($form_value[$key][2]['type'],$excep_controls);
+					$dynamic_type = ( !empty($form_value[$key][2]) and  !empty($form_value[$key][2]['type']) ? !empty($form_value[$key][2]) and  !empty($form_value[$key][2]['type']) : !empty($form_value[$key][2]) and  !empty($form_value[$key][2]['node_type']) );
+
+					$control_element = $this->default_uis(/*$form_value[$key][2]['type']*/$dynamic_type,$excep_controls);
 					if(empty($control_element)/* and $form_value['type'] === 'hidden'*/){
-						$control_element = array($form_value[$key][2]['type']);
+						$control_element = array(/*$form_value[$key][2]['type']*/$dynamic_type);
 					}
 
 				} elseif(!empty($form_value['type'])) {
 					$control_element = $this->default_uis($form_value['type'],$excep_controls);
 				} 
 
-				if(!empty($control_element)){
+				if( !empty($control_element) or ( $key == 'data_controls' and !empty(!empty($form_value[$key][2]) and  !empty($form_value[$key][2]['das_node_type'])) ) ){
 
 					$controls[$form_key.'_form_segment'] = array(
 						'label'=> $form_value[$key][0],
 						'type'=>'devider',
 					);
 
-					foreach ($control_element as $control) {
+					if( !empty($control_element) ) {
 
-						if(empty($form_value[$key][2])){
-							$controls[$form_key.'_'.$control] = call_user_func_array(array($admin_ui,$control),array($form_key.'_'.$control,$form_value[$key][0]));
-						} else {
-							$control_key = $form_key.'_'.$control;
-							if(!empty($form_value[$key][2]['id'])){
-								$control_key = $form_value[$key][2]['id'].'_'.$control;
+						$controls = $this->generate_form_controls($control_element, $form_value, $key,$form_key, $admin_ui);
+
+						$das_node_count = wbc()->options->get_option($form_value[$key][2]['data_tab_key'],$form_key."_das_node_count",(isset($form_value[$key][2]['das_node_defaults']) ? sizeof($form_value[$key][2]['das_node_defaults']) : 0),true,true);
+
+						if (!empty($form_value[$key][2]['das_node_enabled'])) {
+
+							if($das_node_count >0){
+								
+								for($i = 0; $i<$das_node_count; $++) {
+
+									$controls = $this->generate_form_controls($control_element, $form_value, $key,$form_key.'_'.$i, $admin_ui);
+								}
 							}
-							$controls[$control_key] = call_user_func_array(array($admin_ui,$control),array($control_key,$form_value[$key][0],$form_value[$key][2]));
-							
 						}
+
 					}
+
+					ACTIVE_TODO here we are depanding on the das node count default fild that is set from the data controls but in fusher we sud refacter the code as long as it is possible withe usliy cupled flow to ansyor that the default count seting is red from the ui array dieracly instad of dipanding on the defolt that is need to set sapratly. but i thing thar is no issy way and if you do sumthing that it well not be lusly cupled so may be it is the work that we need our user and tem to that we need our tem and user to do to acive this. but if it is possibel than las do it other wish we can markitis todo or mac this point invalid.
+					ACTIVE_TODO and it futcher we may lick to provide on admin the increase or decrease support directly on the particular appearence or configuration tab instead of asking use of increase or decrease fast on the data tab. so that user expression can be improved but as long as it is simple and visible, when and if we do that then we can use the than factors we can usually sam das support field that is added from builder but that exactly we can not used on form array but we can at least us that javascript api. lat do it if required by 3rd revision other wishes we can markitis todo. -- to h & -- to b 
+					$controls[$form_key.'_das_node_type_count'] = array(
+						'label'=>'increase\decrease '.$form_value[$key][0],
+						'type'=>'number',
+						'value'=> ( !empty($form_value[$key][2]['das_node_type_count_default']) ? $form_value[$key][2]['das_node_type_count_default'] : 0 ),							
+						'sanitize'=>'sanitize_text_field',
+						'size_class'=>array(''),
+					);
 				}
 			}
 
@@ -261,6 +351,31 @@ class Controller extends \eo\wbc\controllers\Controller {
 		}
 
 		return $controls;
+	}
+
+	private function generate_form_controls($control_element, $form_value, $key,$form_key, $admin_ui) {
+		
+		foreach ($control_element as $control) {
+
+			if(empty($form_value[$key][2])){
+
+				$controls[$form_key.'_'.$control] = call_user_func_array(array($admin_ui,$control),array($form_key.'_'.$control,$form_value[$key][0]));
+
+			} else {
+
+				$control_key = $form_key.'_'.$control;
+
+				--here jo apdy id had coded support karva hot to ano support ds mate ansyor karvo padchhe nitar hard coded id atlist nava emplymentshon ma ni use kari shaky or simply no kariy to chaly so lat simply figerat out and jo us karva pady am hoy to we can not confrom karvu posibul no hoy to simply wbc ui builder ma aaj singel cot ma id paramiter chhe jay jay us thayelu hoy te find kari ne puchi thei apdy teno ahi support confrom kari shky -- to h & -- to b
+				if(!empty($form_value[$key][2]['id'])){
+
+					$control_key = $form_value[$key][2]['id'].'_'.$control;
+				}
+				$controls[$control_key] = call_user_func_array(array($admin_ui,$control),array($control_key,$form_value[$key][0],$form_value[$key][2]));
+			}
+		}
+
+		return $controls;
+
 	}
 
 		// return all appearance control data to be dumped in to json
