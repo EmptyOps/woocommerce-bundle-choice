@@ -588,6 +588,8 @@ class WBC_WC {
             $option_list=array();
         } elseif( $format == 'opts_detailed' ) {
             $option_list=array();
+        } elseif( $format == 'detailed_sp_eid' ) {
+            $option_list=array();
         }
 
         if(is_array($attributes) and !empty($attributes)){
@@ -634,6 +636,9 @@ class WBC_WC {
                             $option_list[$term->term_taxonomy_id] = array('attr'=>'data-sp_eid="'.$separator.'attr_opt'.$separator./*$attribute->attribute_id*/$term->term_taxonomy_id.$separator.$separator.$term->term_id.$separator.'" ', 'label'=>$term->name, 'slug'=>$term->slug);  
                         }
                     }
+                } elseif( $format == 'detailed_sp_eid' ) {
+
+                    $option_list[$separator.'attr'.$separator.$attribute->attribute_id] = array('label'=>$attribute->attribute_label, $format); 
                 }
             }
         }
