@@ -24,6 +24,7 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 		
 	}
 
+	-- As observed in the option layer in the option halper layer the get option function as by default overrides ecowell to true, so lets just set it to false for the all get option call within wbc ui builder and maybe also generate form but if it is a complicated to confirm for generate form then simply do it here in the wbc ui builder and all other ui builder and page builder classes so lat simply check 6 classes  -- to h & -- to b
 	public function build(array $ui,$option_key='',$process_form = true,$ui_generator = null, $ui_definition = null){
 
 		/*\sp\wbc\system\core\SP_Ui_Builder::instance()->*/parent::build($ui, $option_key, $process_form,$ui_generator, $ui_definition);
@@ -869,6 +870,19 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 
 			return '<script type="text/html" id="tmpl-'.$id.'">' . $html . '</script>'; 
 		}
-			
+
+	}
+
+	public function build_and_return(array $ui,$option_key='',$process_form = true,$ui_generator = null, $ui_definition = null){
+
+		$html = parent::build_and_return($ui, $option_key, $process_form,$ui_generator, $ui_definition);
+
+        ob_start();
+
+        $this->build($ui, $option_key, $process_form,$ui_generator, $ui_definition);
+
+        $html ob_get_clean();
+
+		return $html;
 	}
 }

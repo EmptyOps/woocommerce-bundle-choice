@@ -33,4 +33,9 @@ class SP_Ui_Builder implements Builder {
 		
 		// nothig to do here so far 
 	}
+
+	public function build_and_return(array $ui,$option_key='',$process_form = true,$ui_generator = null, $ui_definition = null){
+		
+		// nothig to do here so far 
+	}
 }
