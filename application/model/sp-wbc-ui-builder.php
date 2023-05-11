@@ -26,14 +26,14 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 
 	public function build(array $ui,$option_key='',$process_form = true,$ui_generator = null, $ui_definition = null){
 
-		\sp\wbc\system\core\SP_Ui_Builder::instance()->build($ui, $option_key, $process_form,$ui_generator);
-
+		/*\sp\wbc\system\core\SP_Ui_Builder::instance()->*/parent::build($ui, $option_key, $process_form,$ui_generator, $ui_definition);
+		--ui_builder.php mathi $ui_generator avyo chhe
 		$ui_generator = \eo\wbc\controllers\admin\Controller::instance();
 		if(!empty($ui) and is_array($ui)){
 			
 			foreach ($ui as $ui_key => $ui_ele) {
 				
-				-- a if /sp_theme_ui/application/view/ui/Base_Builder.php build function  ni chhe
+				-- a if /sp_theme_ui/application/view/ui/Base_Builder.php build function ni chhe
 				if(!empty($ui_definition['controls'][$ui_key]['configuration_controls']) and !empty($ui_definition['controls'][$ui_key]['configuration_controls'][2])){
 
 					if(!empty($ui_definition['controls'][$ui_key]['configuration_controls'][2]['action']) and $ui_definition['controls'][$ui_key]['configuration_controls'][2]['action']==='toggle_section') {
@@ -58,23 +58,66 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 							continue;
 						} else {
 				? question recording 130.14 ma je $ui_ele ma id lakhel hashe tya replace karvanu kidhu chhe pan tya id kyay pass karel j nathi aakha build funaction ma 
-							$this->process_build($ui_key,$ui_ele,$ui,$option_key,$process_form,$ui_generator,isset($ui_definition['controls'][$ui_key])?$ui_definition['controls'][$ui_key]:null);		
+					? 144.10->4.11mint nu chhe tema pan question chhe
+							$this->call_process_build($ui_key,$ui_ele,$ui,$option_key,$process_form,$ui_generator,isset($ui_definition['controls'][$ui_key])?$ui_definition['controls'][$ui_key]:null,$ui_definition);		
 						}
 					} else {
-						$this->process_build($ui_key,$ui_ele,$ui,$option_key,$process_form,$ui_generator,isset($ui_definition['controls'][$ui_key])?$ui_definition['controls'][$ui_key]:null);
+						$this->call_process_build($ui_key,$ui_ele,$ui,$option_key,$process_form,$ui_generator,isset($ui_definition['controls'][$ui_key])?$ui_definition['controls'][$ui_key]:null,$ui_definition);
 					}
 
 				} else {
-					$this->process_build($ui_key,$ui_ele,$ui,$option_key,$process_form,$ui_generator,isset($ui_definition['controls'][$ui_key])?$ui_definition['controls'][$ui_key]:null);
+					$this->call_process_build($ui_key,$ui_ele,$ui,$option_key,$process_form,$ui_generator,isset($ui_definition['controls'][$ui_key])?$ui_definition['controls'][$ui_key]:null,$ui_definition);
 				}
 			}
 
 		}
 	}
 
-	private function process_build($ui_key,$ui_ele,$ui,$option_key='',$process_form = true,$ui_generator = null, $ui_element_definition = null) {
+	private function call_process_build($ui_key,$ui_ele,$ui,$option_key='',$process_form = true,$ui_generator = null, $ui_element_definition = null, $ui_definition = null){
 
-		\sp\wbc\system\core\SP_Ui_Builder::instance()->process_build($ui_key,$ui_ele,$ui,$option_key,$process_form,$ui_generator);
+		NOTE: The das node support add in the ui builder is a standard support with the simple and nasarel stretcher. and user can yous the support to increase or decrease field no mater if it is supported on the wp customizer page builders lick elementor and so on, wish mins if user can use the support than they even if they do not use the increase or decrease support of the external of the wp customizer or external page builder than also they can be fine with thay recruitment other wishes they are also free can use the support of the wp customizer or external page builder to increase or decrease in wish cas they can keep using this support.
+
+		$this->process_build($ui_key, $ui_ele, $ui, $option_key, $process_form, $ui_generator, $ui_element_definition);
+
+		if (!empty($ui_ele['das_node'])) {
+
+			$das_node_count = wbc()->options->get_option($ui_definition['data_controls'][2]['tab_key'],$ui_ele['id_key']."das_node_count",(isset($ui_ele['das_node_defaults']) ? sizeof($ui_ele['das_node_defaults']) : 0),true,true);
+
+			for($i = 0; $i<$das_node_count; $++) {
+
+				if (isset($ui_ele['das_node_defaults'][$i])) {
+					
+					if (empty($ui_ele['das_node_defaults'][$i]['id_key'])) {
+						
+						$ui_ele['das_node_defaults'][$i]['id_key'] = $ui_ele['id_key']."_".$i;
+					}
+				}
+
+				ACTIVE_TODO From below call we are passing the controls of the default provided by user but if the controls is provided for one particular layer for example configuration controls but appearance and data controls are not provided on the main node appearance controls is supported that sud be passed from here so additionally if is need here to tac car of that meter, so jas add the applicable if conditions here. we may need to do at as soon as we face an issue or next by the 1st or 2ed revision-- to h & -- to b
+
+				ACTIVE_TODO this is wary sansitiv flow issue here that we need to pass the brod layer variables data lick $ui_definition and so on to dapdown to althe layer and than that is calling back the mane function so we need to refactrit and mac sur that recarshon hapans only from the build funaction or next to the sub call_process_build function and the depandancy on passing $ui_definition all the way to the element files. so simply this is a reyali bade flow we need to refactrit as sun as we get sanche. and lats do is next by the 2ed revision and any how.-- to h & -- to b
+				$this->process_build(
+					$i/*$ui_key*/, 
+
+					isset($ui_ele['das_node_defaults'][$i]) ? $ui_ele['das_node_defaults'][$i] : $ui_ele, 
+
+					$ui, 
+					$option_key, 
+					$process_form, 
+					$ui_generator, 
+
+					-- ahi j id_key nu j logic karlu chhe e $id_key nu logic process_build ma haju baki chhee badhe karvanu. je call_process_build na call ma uprathi lagu padyu hashe te pramane ahiya implement thayu chhe ne e confirm karvanu aavashe.jyare $id_key nu logic 144 ni seris ma aagal karvanu aavyu em thayu pachhi.
+					isset($ui_definition['controls'][$ui_ele['das_node_defaults'][$i]['id_key']]) ? $ui_definition['controls'][$ui_ele['das_node_defaults'][$i]['id_key']] : $ui_element_definition,
+
+					$ui_definition
+				);
+			}
+		}
+	}
+
+	private function process_build($ui_key,$ui_ele,$ui,$option_key='',$process_form = true,$ui_generator = null, $ui_element_definition = null, $ui_definition = null) {
+
+		/*\sp\wbc\system\core\SP_Ui_Builder::instance()->*/ parent::process_build($ui_key,$ui_ele,$ui,$option_key,$process_form,$ui_generator,$ui_element_definition);
 
 		if(!empty($ui_ele['type'])) {
 
@@ -184,7 +227,7 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 				}
 
 				if(in_array('image',$controls)) {
-					die();
+
 					if(empty($ui_ele['src'])){
 						$ui_ele['src'] = '';
 					}
@@ -448,25 +491,27 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 				// -- also we need to mac syore that we refacter and upgrad the ajax handlare to send mail which is in controllers ajax folder -- to h & -- to b done
 			// if(!empty($ui_ele['data_controls']) and !empty($ui_ele['data_controls']['type'])){
 			if(!empty($ui_element_definition['data_controls']) and !empty($ui_element_definition['data_controls']['type'])){
-				if($ui_element_definition['data_controls']['type'] === 'example_exshon'){
+				if($ui_element_definition['data_controls']['type'] === 'example_action'){
 					
-					// NOTE: from here we are not duing the do_action but in future if required than we can also do do_action for manged type for the type suported here on the wbc leyer. so wen if you do that the simply we can move the do_action from the else below to below the this vole if else an makit aplicabel for all if and else condishon. the men reshon regading anneshshory hooks we need to now cep the hook feld wery lick so allthe nessory hook well be added. 
+					// NOTE: from here we are not duing the do_action but in future if required than we can also do do_action for manged type for the type suported here on the wbc leyer. so wen if you do that then simply we can move the do_action from the else below, to below the this vole if else and make it aplicabel for all if and else condishon. the men reshon we are avoiding anneshshory hooks is that we need to now keep the hook footprint very light so only the nessory hook well be added. 
 
 				} else {
 
-					do_action('sp_ui_builder_build_data_controls_type', $ui_element_definition['data_controls']);
+					do_action('sp_ui_builder_build_data_controls_type', $ui_element_definition['data_controls'], $this, /*as long as it is not nashory it is a recruitment that we do not rely on this object passing to keep it simple, but if it is received then we can pass as well as if required we can re may also may to pass the colur obj witches calling this class not $this but they vary class wichis calling this function layer*/ );
 				}
 			}
 
 			
-			--jo submodul ma koy template rakvanu hoy to or any way submodul module ma template host karvanu suport ni jarur padchhe -- to h & to b
-			sp_tui()->load->template('ui/element/'.$ui_ele['type'],$ui_ele);
+			
+
 
 			-------------------------
 			$ui_ele['option_key'] =$option_key;
 			$ui_ele['process_form'] =$process_form;
 			// passing self contained object so the template can use the child parameter in the $ui_ele to created a nested complax UI.
 			$ui_ele['builder'] = $this;
+
+			$ui_ele['ui_definition'] = $ui_definition;
 
 			ACTIVE_TODO_OC_START			
 			ACTIVE_TODO even though it is vital to avoid keeping duplicates but till the form builder is not refactored till the form builder or say old version of ui builder also will load the duplicate components from the folder 'core/ui/components/'. but we must refactor the form builder or atleast refactor this part only so that we can avoid this huge duplicate code. lets do max by 1st or 2nd revision. -- to h & -- to b 

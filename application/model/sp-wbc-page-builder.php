@@ -30,7 +30,7 @@ class SP_WBC_Page_Builder extends \sp\wbc\system\core\SP_Page_Builder {
 
 	public function build_page($ui,$key = 'theme_ui',$process_form = true) {
 
-		parent::instance()->build_page($ui,$key,$process_form);
+		parent::build_page($ui,$key,$process_form);
 
 		ACTIVE_TODO_OC_START
 		--we need to tac car of this wen need to do the need full here wer we impliment composeer supot weri sun after the fast run of thes ui and page builder class hierarche -- to h & to b
@@ -99,7 +99,7 @@ class SP_WBC_Page_Builder extends \sp\wbc\system\core\SP_Page_Builder {
         	ob_start();
         }
 
-        \sp\theme\view\ui\builder\Page_Builder::instance()->build_page($ui);
+        /*\sp\theme\view\ui\builder\Page_Builder*/ self::instance()->build_page($ui);
         
         if ($is_return_html) {
         	return ob_get_clean();

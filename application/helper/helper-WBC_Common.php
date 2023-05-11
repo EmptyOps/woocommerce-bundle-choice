@@ -579,6 +579,10 @@ class WBC_Common {
 
 					return false;
 
+				} elseif ($key == 'product_page_explainer_widgets') {
+
+					return false;
+
 				} else {
 
 					return true;

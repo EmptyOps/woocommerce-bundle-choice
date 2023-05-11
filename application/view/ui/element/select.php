@@ -8,7 +8,7 @@
 
 		}elseif(!empty($child) and !empty($builder)) {
 
-			$builder->build($child);
+			$builder->build($child, $option_key, $process_form, null, $ui_definition);
 
 		}
 	?>
