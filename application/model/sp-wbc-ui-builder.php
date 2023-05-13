@@ -81,7 +81,7 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 
 		NOTE: The das node support add in the ui builder is a standard support with the simple and nasarel stretcher. and user can yous the support to increase or decrease field no mater if it is supported on the wp customizer page builders lick elementor and so on, wish mins if user can use the support than they even if they do not use the increase or decrease support of the external of the wp customizer or external page builder than also they can be fine with thay recruitment other wishes they are also free can use the support of the wp customizer or external page builder to increase or decrease in wish cas they can keep using this support.
 
-		$this->process_build($ui_key, $ui_ele, $ui, $option_key, $process_form, $ui_generator, $ui_element_definition);
+		$this->process_build($ui_key, $ui_ele, $ui, $option_key, $process_form, $ui_generator, $ui_element_definition,$ui_definition);
 
 		if (!empty($ui_ele['das_node'])) {
 
