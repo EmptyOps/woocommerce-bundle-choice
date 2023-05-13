@@ -153,25 +153,25 @@ class Controller extends \eo\wbc\controllers\Controller {
 		return $collection;
 	}
 
-	public function generate_form_wrapper($form_definition, $singleton_function, $tab_key_prefix, $page_prefix, $page_section, $md_obj) {
+	public function generate_form_wrapper($form_definition, $singleton_function, $tab_key_prefix, $page_title_prefix, $page_sections, $mdl_obj) {
 
 		$controls = array('appearence_controls'=>'Appearence Controls',
 			'configuration_controls'=>'Configuration Controls',
 			'data_controls'=>'Data Controls'
 		);
 
-		foreach($controls as $control_key->$control_title){
+		foreach($controls as $control_key=>$control_title){
 
-			foreach($page_section as $ps_key->$ps_title){
+			$form = array();
+			foreach($page_sections as $ps_key=>$ps_title){
 
 				$ui_definition = null;
-				if (method_exists($md_obj,'ui_{$control_key}_definition')) {
+				if (method_exists($mdl_obj,'ui_{$control_key}_definition')) {
 					
-					$ui_definition = $md_obj->{'ui_{$control_key}_definition'}(null, $ps_key);
+					$ui_definition = $mdl_obj->{'ui_{$control_key}_definition'}(null, $ps_key);
 
 				}
 
-				$form = array();
 				if (!empty($ui_definition)) {
 					
 					$form_part = $this->generate_form(/*$publics_form*/$ui_definition['controls'], $control_key, true);
@@ -180,7 +180,7 @@ class Controller extends \eo\wbc\controllers\Controller {
 						
 						$form = array_merge(
 							$form,
-							array($singleton_function.'_'.$control_key.'_'.$ps_key.'_advanced_tab_start'=>array(
+							array($singleton_function.'_'.$control_key.'_'.$ps_key.'_accordian_start'=>array(
 									'type'=>'accordian',
 									'section_type'=>'start',
 									'class'=>array('field', 'styled'),
@@ -188,34 +188,29 @@ class Controller extends \eo\wbc\controllers\Controller {
 								),
 							),
 							$form_part,
-							array($singleton_function.'_'.$control_key.'_'.$ps_key.'_advanced_tab_end'=>array(
+							array($singleton_function.'_'.$control_key.'_'.$ps_key.'_accordian_end'=>array(
 									'type'=>'accordian',
 									'section_type'=>'end'
 								),
 							),
-							/*array('attribute'=>array(
-					    		'label'=>'ATTRIBUTE',
-					    		'type'=>'devider'),	
-							)*/
 						);
 					}
 				}
 
 			}
 
-			if(!empty($form)){
+			if(!wbc_isEmptyArr($form)){
+
 				$tab_key = $singleton_function.'_'.$tab_key_prefix.'_'.$control_key;
+
 				$form['save'] = array(
-							'label'=>'Save',
-							'type'=>'button',		
-							'class'=>array('primary'),
-							'attr'=>array("data-action='save'",'data-tab_key="'.$tab_key.'"')	
-						);
+					'label'=>'Save',
+					'type'=>'button',		
+					'class'=>array('primary'),
+					'attr'=>array("data-action='save'",'data-tab_key="'.$tab_key.'"')	
+				);
 
-				if (wbc_isEmptyArr($form)) {
-
-					$form_definition[$tab_key] = array('label'=>$page_prefix.' '.$control_title,'form'=>$form);		
-				}
+				$form_definition[$tab_key] = array('label'=>trim($page_title_prefix.' '.$control_title),'form'=>$form);		
 			}
 
 		}

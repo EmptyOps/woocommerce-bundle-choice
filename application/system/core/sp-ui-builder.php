@@ -1,6 +1,6 @@
 <?php
 /*
-*	A UI builder class to generate UI based on the array of params recived.
+*	A UI builder class to generate UI based on the array of params received.
 */
 namespace sp\wbc\system\core;
 use eo\wbc\model\interfaces\Builder;
@@ -24,17 +24,17 @@ class SP_Ui_Builder implements Builder {
 		
 	}
 
-	public function build(array $ui,$option_key='',$process_form = true,$ui_generator = null, $ui_definition = null){
+	public function build($ui,$option_key='',$process_form = true,$ui_generator = null, $ui_definition = null){
 		
 		// nothig to do here so far 
 	}
 
-	protected function process_build($ui_key,$ui_ele,$ui,$option_key='',$process_form = true,$ui_generator = null, $ui_element_definition = null) {
+	protected function process_build($ui_key,$ui_ele,$ui,$option_key='',$process_form = true,$ui_generator = null, $ui_element_definition = null,$ui_definition = null) {
 		
 		// nothig to do here so far 
 	}
 
-	public function build_and_return(array $ui,$option_key='',$process_form = true,$ui_generator = null, $ui_definition = null){
+	public function build_and_return($ui,$option_key='',$process_form = true,$ui_generator = null, $ui_definition = null){
 		
 		// nothig to do here so far 
 	}
