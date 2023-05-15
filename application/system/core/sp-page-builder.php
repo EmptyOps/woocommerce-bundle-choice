@@ -28,12 +28,12 @@ class SP_Page_Builder extends \sp\theme\view\ui\Base_Builder {
 		return $this->ui;
 	}
 
-	public function build_page($ui,$key = 'theme_ui',$process_form = true) {
+	public function build_page($ui,$key = 'theme_ui',$process_form = true,$ui_definition = null) {
 
 		// nothing to do here so far 
 	}
 
-	public static function build_page_widgets($ui,$page_key,$args = array(),$is_return_html = false){
+	public static function build_page_widgets($ui,$page_key,$args = array(),$is_return_html = false,$ui_definition = null){
 
 		// nothing to do here so far 
 	}
