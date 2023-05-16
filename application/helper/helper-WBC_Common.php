@@ -583,6 +583,10 @@ class WBC_Common {
 
 					return false;
 
+				} elseif ($key == 'product_page_inspection_button') {
+
+					return false;
+
 				} else {
 
 					return true;
