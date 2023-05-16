@@ -515,6 +515,7 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 			// passing self contained object so the template can use the child parameter in the $ui_ele to created a nested complax UI.
 			$ui_ele['builder'] = $this;
 
+			ACTIVE_TODO this is very sensitive flow issue here that we need to pass this broad layers variables and data like $ui_definition and so on deep down to all the layers and that is callling back this main build function so we need to refactor it and make sure that recursion happens only from the build function or max to the call process_build function and the depandancy of passing $ui_definition all the way to the element files. so simply this is a really bad flow and we need to refacrtor it as soon as we get chance and lets do it max by the second revision anyhow. -- to h & -- to b 
 			$ui_ele['ui_definition'] = $ui_definition;
 
 			ACTIVE_TODO_OC_START			

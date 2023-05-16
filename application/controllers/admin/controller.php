@@ -251,9 +251,10 @@ class Controller extends \eo\wbc\controllers\Controller {
 				// lup attr 
 
 				ACTIVE_TODO here instad of haveing our tem and user to spsefive the node_type adishnaly for the controls fild it is beter we can refacterit so that it can read dieracly from the ui array, so last do it as long as posibul without lusing the balnche of the module caplins or cohensh. but it seems at like the das node count default fild below it is not possibel without compromishing on the lusly cupled modules flow on the lusly cupled module standed, but late think about if it is possibel. other wish as long as thar is no way and it seems nasral to lat usr defined hard code way last markit as invalid.
-				if( !empty($form_value[$key][2]) and  !empty($form_value[$key][2]['type']) or (!empty($form_value[$key][2]) and  !empty($form_value[$key][2]['node_type'])) ) {
+					-- 	configuration controls and data controls ma node_type set karvanu avchhe?
+				if( !empty($form_value[$key][2]) and ( !empty($form_value[$key][2]['type']) or !empty($form_value[$key][2]['node_type']) ) ) {
 
-					$dynamic_type = ( !empty($form_value[$key][2]) and  !empty($form_value[$key][2]['type']) ? !empty($form_value[$key][2]) and  !empty($form_value[$key][2]['type']) : !empty($form_value[$key][2]) and  !empty($form_value[$key][2]['node_type']) );
+					$dynamic_type = ( !empty($form_value[$key][2]['type']) ? $form_value[$key][2]['type'] : $form_value[$key][2]['node_type'] );
 
 					$control_element = $this->default_uis(/*$form_value[$key][2]['type']*/$dynamic_type,$excep_controls);
 					if(empty($control_element)/* and $form_value['type'] === 'hidden'*/){
@@ -264,7 +265,7 @@ class Controller extends \eo\wbc\controllers\Controller {
 					$control_element = $this->default_uis($form_value['type'],$excep_controls);
 				} 
 
-				if( !empty($control_element) or ( $key == 'data_controls' and !empty(!empty($form_value[$key][2]) and  !empty($form_value[$key][2]['das_node_type'])) ) ){
+				if( !empty($control_element) or ( $key == 'data_controls' and !empty($form_value[$key][2]['das_node' ahi das_node_enabled karvanu chhe? ]) ) ){
 
 					$controls[$form_key.'_form_segment'] = array(
 						'label'=> $form_value[$key][0],
@@ -292,10 +293,10 @@ class Controller extends \eo\wbc\controllers\Controller {
 
 					ACTIVE_TODO here we are depanding on the das node count default fild that is set from the data controls but in fusher we sud refacter the code as long as it is possible withe usliy cupled flow to ansyor that the default count seting is red from the ui array dieracly instad of dipanding on the defolt that is need to set sapratly. but i thing thar is no issy way and if you do sumthing that it well not be lusly cupled so may be it is the work that we need our user and tem to that we need our tem and user to do to acive this. but if it is possibel than las do it other wish we can markitis todo or mac this point invalid.
 					ACTIVE_TODO and it futcher we may lick to provide on admin the increase or decrease support directly on the particular appearence or configuration tab instead of asking use of increase or decrease fast on the data tab. so that user expression can be improved but as long as it is simple and visible, when and if we do that then we can use the than factors we can usually sam das support field that is added from builder but that exactly we can not used on form array but we can at least us that javascript api. lat do it if required by 3rd revision other wishes we can markitis todo. -- to h & -- to b 
-					$controls[$form_key.'_das_node_type_count'] = array(
+					$controls[$form_key.'_das_node_count'] = array(
 						'label'=>'increase\decrease '.$form_value[$key][0],
 						'type'=>'number',
-						'value'=> ( !empty($form_value[$key][2]['das_node_type_count_default']) ? $form_value[$key][2]['das_node_type_count_default'] : 0 ),							
+						'value'=> ( !empty($form_value[$key][2]['das_node_count_default']) ? $form_value[$key][2]['das_node_count_default'] : 0 ),							
 						'sanitize'=>'sanitize_text_field',
 						'size_class'=>array(''),
 					);
