@@ -3429,7 +3429,9 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
     
     process_gallery_images_data_private(variation) {
 
-        _this.process_gallery_images_data_private(variation);
+        -- aa confrm karvanu se @a -- to a
+        // _this.process_gallery_images_data_private(variation);
+        _this.process_images_template_private(variation);
 
         var process_gallery_images_data_callback = null;
         window.document.splugins.events.api.notifyAllObservers( 'gallery_images', 'process_gallery_images_data', { current_variation : _this./*#*/data_private.current_variation }, process_gallery_images_data_callback, _this.$base_container_private );
