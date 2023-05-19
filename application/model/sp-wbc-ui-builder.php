@@ -79,42 +79,43 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 
 	private function call_process_build($ui_key,$ui_ele,$ui,$option_key='',$process_form = true,$ui_generator = null, $ui_element_definition = null, $ui_definition = null){
 
-		NOTE: The das node support add in the ui builder is a standard support with the simple and nasarel stretcher. and user can yous the support to increase or decrease field no mater if it is supported on the wp customizer page builders lick elementor and so on, wish mins if user can use the support than they even if they do not use the increase or decrease support of the external of the wp customizer or external page builder than also they can be fine with thay recruitment other wishes they are also free can use the support of the wp customizer or external page builder to increase or decrease in wish cas they can keep using this support.
+		NOTE: The das node support added in the ui builder is standard support with the simple and naturel structure. and the user can use this support to increase or decrease field no mater if it is supported on the wp customizer page builders like elementor and so on, which means if user can use this support than even if they do not use the increase or decrease support of the wp customizer or external page builder than also they can be fine with their requirement otherwise they are also free to use the support of the wp customizer or external page builder to increase or decrease in which case they can keep using this support.
 
 		$this->process_build($ui_key, $ui_ele, $ui, $option_key, $process_form, $ui_generator, $ui_element_definition,$ui_definition);
 
 		if (!empty($ui_ele['das_node'])) {
 
-			$das_node_count = wbc()->options->get_option($ui_definition['data_controls'][2]['tab_key'],$ui_ele['id_key']."das_node_count",(isset($ui_ele['das_node_defaults']) ? sizeof($ui_ele['das_node_defaults']) : 0),true,true);
+			if (!empty($ui_ele['id_key'])) {
 
-			for($i = 0; $i<$das_node_count; $i++) {
+				$das_node_count = wbc()->options->get_option($ui_element_definition['data_controls'][2]['tab_key'],$ui_ele['id_key']."_das_node_count",(isset($ui_ele['das_node_defaults']) ? sizeof($ui_ele['das_node_defaults']) : 0),false,false);
 
-				--	here we most probably need to set id_key for the das node at $i index no matter if it is set in defaults or not. beucase otherwise if the id_key used of main node than it will override the main nodes admin options so it seems fundamental and we may have missed this in the flow -- to h 
-				if (isset($ui_ele['das_node_defaults'][$i])) {
-					
-					if (empty($ui_ele['das_node_defaults'][$i]['id_key'])) {
+				for($i = 0; $i<$das_node_count; $i++) {
+
+					--	here we most probably need to set id_key for the das node at $i index no matter if it is set in defaults or not. beucase otherwise if the id_key used of main node than it will override the main nodes admin options so it seems fundamental and we may have missed this in the flow -- to h 
+					if (isset($ui_ele['das_node_defaults'][$i])) {
 						
-						$ui_ele['das_node_defaults'][$i]['id_key'] = $ui_ele['id_key']."_".$i;
+						//if (empty($ui_ele['das_node_defaults'][$i]['id_key'])) {
+							
+							$ui_ele['das_node_defaults'][$i]['id_key'] = $ui_ele['id_key']."_".$i;
+						//}
 					}
+
+					ACTIVE_TODO this is wary sansitiv flow issue here that we need to pass the brod layer variables data lick $ui_definition and so on to dapdown to althe layer and than that is calling back the mane function so we need to refactrit and mac sur that recarshon hapans only from the build funaction or next to the sub call_process_build function and the depandancy on passing $ui_definition all the way to the element files. so simply this is a reyali bade flow we need to refactrit as sun as we get sanche. and lats do is next by the 2ed revision and any how.-- to h & -- to b
+					$this->process_build(
+						$i/*$ui_key*/, 
+
+						isset($ui_ele['das_node_defaults'][$i]) ? $ui_ele['das_node_defaults'][$i] : $ui_ele, 
+
+						$ui, 
+						$option_key, 
+						$process_form, 
+						$ui_generator, 
+
+						isset($ui_definition['controls'][$ui_ele['das_node_defaults'][$i]['id_key']]) ? $ui_definition['controls'][$ui_ele['das_node_defaults'][$i]['id_key']] : $ui_element_definition,
+
+						$ui_definition
+					);
 				}
-
-				ACTIVE_TODO From below call we are passing the controls of the defaults provided by user but if the controls is provided for one particular layer for example configuration controls but appearance and data controls are not provided, and if on the main node appearance controls is supported then that sud be passed from here so additionally it is needed to tac car of that meter, so jast add the applicable if conditions here. we may need to do it as soon as we face any such issue or max by the 1st or 2ed revision-- to h & -- to b
-
-				ACTIVE_TODO this is wary sansitiv flow issue here that we need to pass the brod layer variables data lick $ui_definition and so on to dapdown to althe layer and than that is calling back the mane function so we need to refactrit and mac sur that recarshon hapans only from the build funaction or next to the sub call_process_build function and the depandancy on passing $ui_definition all the way to the element files. so simply this is a reyali bade flow we need to refactrit as sun as we get sanche. and lats do is next by the 2ed revision and any how.-- to h & -- to b
-				$this->process_build(
-					$i/*$ui_key*/, 
-
-					isset($ui_ele['das_node_defaults'][$i]) ? $ui_ele['das_node_defaults'][$i] : $ui_ele, 
-
-					$ui, 
-					$option_key, 
-					$process_form, 
-					$ui_generator, 
-
-					isset($ui_definition['controls'][$ui_ele['das_node_defaults'][$i]['id_key']]) ? $ui_definition['controls'][$ui_ele['das_node_defaults'][$i]['id_key']] : $ui_element_definition,
-
-					$ui_definition
-				);
 			}
 		}
 	}
@@ -501,7 +502,7 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 
 				} else {
 
-					do_action('sp_ui_builder_build_data_controls_type', $ui_element_definition['data_controls'], $ui_ele['id_key'], $this, /*as long as it is not nashory it is a recruitment that we do not rely on this object passing to keep it simple, but if it is received then we can pass as well as if required we can re may also may to pass the colur obj witches calling this class not $this but they vary class wichis calling this function layer*/ );
+					do_action('sp_ui_builder_build_data_controls_type', $ui_element_definition['data_controls'], $ui_ele['id_key'], $this, /*as long as it is not nashesary it is a recommended that we do not rely on this object passing to keep it simple, but if it is required then we can pass it as well as if required we may also need to pass the colur obj wich is calling this class not $this but the vary class wich is calling this function layer*/ );
 				}
 			}
 
@@ -515,6 +516,7 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 			// passing self contained object so the template can use the child parameter in the $ui_ele to created a nested complax UI.
 			$ui_ele['builder'] = $this;
 
+			ACTIVE_TODO this is very sensitive flow issue here that we need to pass this broad layers variables and data like $ui_definition and so on deep down to all the layers and that is callling back this main build function so we need to refactor it and make sure that recursion happens only from the build function or max to the call process_build function and the depandancy of passing $ui_definition all the way to the element files. so simply this is a really bad flow and we need to refacrtor it as soon as we get chance and lets do it max by the second revision anyhow. -- to h & -- to b 
 			$ui_ele['ui_definition'] = $ui_definition;
 
 			ACTIVE_TODO_OC_START			
