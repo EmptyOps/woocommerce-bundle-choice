@@ -10,6 +10,8 @@ jQuery(function(){
 				this.field_class = field_class;
 			}
 
+			this.field_class = '.sp-ssm-themes-ui-builder-form-field-global,'+sp-ssm-themes-ui-builder-form-field-global;
+
 			if(typeof(button_selector) === typeof(undefined)){
 				this.button_selector = '.email_form_button';
 			} else {
@@ -99,7 +101,9 @@ jQuery(function(){
 						});
 						return true; }) ) {
 
-						alert('Please set unique email to the fields.');
+						ACTIVE_TODO For better idea user experience we need to show parse size validation messages here especially as we planned this well moved to especially as we planned and mentioned planned point sum war else the common email handler an so on we need to move validation to php side and sed the validation error messages that refer to the particular field label also. he is important for the user experience so lets do it for the all validation error messages and warning throughout this js ui builder layer and all aur ui builder layer.  lats do this next by 2nd or 3rd revision anyhow. -- to h & -- to b
+						//alert('Please set unique email to the fields.');
+						alert('Please set unique email withe in all applicabel email fields.');
 						validation_status = false;
 						return validation_status;	
 					}

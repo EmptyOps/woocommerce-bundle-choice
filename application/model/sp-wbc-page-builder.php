@@ -28,12 +28,12 @@ class SP_WBC_Page_Builder extends \sp\wbc\system\core\SP_Page_Builder {
 		return $this->ui;
 	}
 
-	public function build_page($ui,$key = 'theme_ui',$process_form = true) {
+	public function build_page($ui,$key = 'theme_ui',$process_form = true,$ui_definition = null) {
 
-		parent::build_page($ui,$key,$process_form);
+		parent::build_page($ui,$key,$process_form,$ui_definition);
 
 		ACTIVE_TODO_OC_START
-		--we need to tac car of this wen need to do the need full here wer we impliment composeer supot weri sun after the fast run of thes ui and page builder class hierarche -- to h & to b
+		--we need to take care of this wen need to do the needful here when we implement composer support weri sun after the fast run of thes ui and page builder class hierarchy -- to h & to b
 		ACTIVE_TODO_OC_END
 		$composer = \sp\theme\view\ui\Composer_Elements::instance();
 
@@ -61,8 +61,10 @@ class SP_WBC_Page_Builder extends \sp\wbc\system\core\SP_Page_Builder {
 					$this->process_ui_form = $process_form;
 					
 					ACTIVE_TODO most probeli we ma need to call the ui builder class of the hire layers lick wbc application layer or even other hier layer or shimply the coluer of the function can impliment thar verjon of this function and defined wiche ui builder calss to be colued fast but any way insted of that a hook based of sum other appropriat arcitacer is beter insed of the colur impliment ther of vergan of this function an creat the duplicat code. if nathig comes up atleast than simply markitsid todo by 3td revishon -- to h & to b
+						NOTE: so far is sems that below we have implimented the call to wbc ui builder build funaction.
 					//$this->build($ui['content']['form'],$key);
-					\eo\wbc\model\SP_WBC_Ui_Builder::instance()->build($ui['content']['form'],$key,$this->process_ui_form);
+					\eo\wbc\model\SP_WBC_Ui_Builder::instance()->build($ui['content']['form'],$key,$this->process_ui_form,null,$ui_definition);
+
 				}				
 
 				ACTIVE_TODO_OC_START
@@ -81,9 +83,9 @@ class SP_WBC_Page_Builder extends \sp\wbc\system\core\SP_Page_Builder {
 		}
 	}
 
-	public static function build_page_widgets($ui,$page_key,$args = array(),$is_return_html = false){
+	public static function build_page_widgets($ui,$page_key,$args = array(),$is_return_html = false,$ui_definition = null){
 		
-		parent::instance()->build_page_widgets($ui,$page_key,$args,$is_return_html);
+		parent::build_page_widgets($ui,$page_key,$args,$is_return_html,$ui_definition);
 
 		$ui=array(
 			'widgets'=>array('content'),
@@ -99,7 +101,7 @@ class SP_WBC_Page_Builder extends \sp\wbc\system\core\SP_Page_Builder {
         	ob_start();
         }
 
-        /*\sp\theme\view\ui\builder\Page_Builder*/ self::instance()->build_page($ui);
+        /*\sp\theme\view\ui\builder\Page_Builder*/ self::instance()->build_page($ui,'theme_ui',true,$ui_definition);
         
         if ($is_return_html) {
         	return ob_get_clean();

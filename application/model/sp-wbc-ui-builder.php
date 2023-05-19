@@ -24,30 +24,36 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 		
 	}
 
-	public function build(array $ui,$option_key='',$process_form = true,$ui_generator = null, $ui_definition = null){
+	-- As observed in the option layer in the option halper layer the get option function as by default overrides ecowell to true, so lets just set it to false for the all get option call within wbc ui builder and maybe also generate form but if it is a complicated to confirm for generate form then simply do it here in the wbc ui builder and all other ui builder and page builder classes so lat simply check 6 classes  -- to h & -- to b
+	public function build($ui,$option_key='',$process_form = true,$ui_generator = null, $ui_definition = null){
 
-		/*\sp\wbc\system\core\SP_Ui_Builder::instance()->*/parent::build($ui, $option_key, $process_form,$ui_generator, $ui_definition);
-		--ui_builder.php mathi $ui_generator avyo chhe
-		$ui_generator = \eo\wbc\controllers\admin\Controller::instance();
+		parent::build($ui, $option_key, $process_form,$ui_generator, $ui_definition);
+		
+		if ($ui_generator === null) {
+			
+			// --ui_builder.php mathi $ui_generator avyo chhe
+			$ui_generator = \eo\wbc\controllers\admin\Controller::instance();
+		}
+
 		if(!empty($ui) and is_array($ui)){
 			
 			foreach ($ui as $ui_key => $ui_ele) {
 				
 				-- a if /sp_theme_ui/application/view/ui/Base_Builder.php build function ni chhe
-				if(!empty($ui_definition['controls'][$ui_key]['configuration_controls']) and !empty($ui_definition['controls'][$ui_key]['configuration_controls'][2])){
+				if(!empty($ui_definition['controls'][$ui_ele['id_key']]['configuration_controls']) and !empty($ui_definition['controls'][$ui_ele['id_key']]['configuration_controls'][2])){
 
-					if(!empty($ui_definition['controls'][$ui_key]['configuration_controls'][2]['action']) and $ui_definition['controls'][$ui_key]['configuration_controls'][2]['action']==='toggle_section') {
+					if(!empty($ui_definition['controls'][$ui_ele['id_key']]['configuration_controls'][2]['action']) and $ui_definition['controls'][$ui_ele['id_key']]['configuration_controls'][2]['action']==='toggle_section') {
 
-						$_data_key_ = $ui_definition['controls'][$ui_key]['configuration_controls'][2]['id'];
-						$_option_key_ = $ui_definition['controls'][$ui_key]['configuration_controls'][2]['control_key'];
+						$_data_key_ = $ui_definition['controls'][$ui_ele['id_key']]['configuration_controls'][2]['id'];
+						$_option_key_ = $ui_definition['controls'][$ui_ele['id_key']]['configuration_controls'][2]['control_key'];
 
 						$type = '';
 						if(!empty($ui_ele['type'])){
 							$type = $ui_ele['type'];
 						} 
 
-						if(!empty($ui_definition['controls'][$ui_key]['configuration_controls'][2]['type'])) {
-							$type = $ui_definition['controls'][$ui_key]['configuration_controls'][2]['type'];
+						if(!empty($ui_definition['controls'][$ui_ele['id_key']]['configuration_controls'][2]['type'])) {
+							$type = $ui_definition['controls'][$ui_ele['id_key']]['configuration_controls'][2]['type'];
 						}
 
 						if(!empty($type)) {
@@ -57,16 +63,14 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 						if(wbc()->options->get_option($_option_key_,$_data_key_)){
 							continue;
 						} else {
-				? question recording 130.14 ma je $ui_ele ma id lakhel hashe tya replace karvanu kidhu chhe pan tya id kyay pass karel j nathi aakha build funaction ma 
-					? 144.10->4.11mint nu chhe tema pan question chhe
-							$this->call_process_build($ui_key,$ui_ele,$ui,$option_key,$process_form,$ui_generator,isset($ui_definition['controls'][$ui_key])?$ui_definition['controls'][$ui_key]:null,$ui_definition);		
+							$this->call_process_build($ui_key,$ui_ele,$ui,$option_key,$process_form,$ui_generator,isset($ui_definition['controls'][$ui_ele['id_key']])?$ui_definition['controls'][$ui_ele['id_key']]:null,$ui_definition);		
 						}
 					} else {
-						$this->call_process_build($ui_key,$ui_ele,$ui,$option_key,$process_form,$ui_generator,isset($ui_definition['controls'][$ui_key])?$ui_definition['controls'][$ui_key]:null,$ui_definition);
+						$this->call_process_build($ui_key,$ui_ele,$ui,$option_key,$process_form,$ui_generator,isset($ui_definition['controls'][$ui_ele['id_key']])?$ui_definition['controls'][$ui_ele['id_key']]:null,$ui_definition);
 					}
 
 				} else {
-					$this->call_process_build($ui_key,$ui_ele,$ui,$option_key,$process_form,$ui_generator,isset($ui_definition['controls'][$ui_key])?$ui_definition['controls'][$ui_key]:null,$ui_definition);
+					$this->call_process_build($ui_key,$ui_ele,$ui,$option_key,$process_form,$ui_generator,isset($ui_definition['controls'][$ui_ele['id_key']])?$ui_definition['controls'][$ui_ele['id_key']]:null,$ui_definition);
 				}
 			}
 
@@ -75,54 +79,55 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 
 	private function call_process_build($ui_key,$ui_ele,$ui,$option_key='',$process_form = true,$ui_generator = null, $ui_element_definition = null, $ui_definition = null){
 
-		NOTE: The das node support add in the ui builder is a standard support with the simple and nasarel stretcher. and user can yous the support to increase or decrease field no mater if it is supported on the wp customizer page builders lick elementor and so on, wish mins if user can use the support than they even if they do not use the increase or decrease support of the external of the wp customizer or external page builder than also they can be fine with thay recruitment other wishes they are also free can use the support of the wp customizer or external page builder to increase or decrease in wish cas they can keep using this support.
+		NOTE: The das node support added in the ui builder is standard support with the simple and naturel structure. and the user can use this support to increase or decrease field no mater if it is supported on the wp customizer page builders like elementor and so on, which means if user can use this support than even if they do not use the increase or decrease support of the wp customizer or external page builder than also they can be fine with their requirement otherwise they are also free to use the support of the wp customizer or external page builder to increase or decrease in which case they can keep using this support.
 
-		$this->process_build($ui_key, $ui_ele, $ui, $option_key, $process_form, $ui_generator, $ui_element_definition);
+		$this->process_build($ui_key, $ui_ele, $ui, $option_key, $process_form, $ui_generator, $ui_element_definition,$ui_definition);
 
 		if (!empty($ui_ele['das_node'])) {
 
-			$das_node_count = wbc()->options->get_option($ui_definition['data_controls'][2]['tab_key'],$ui_ele['id_key']."das_node_count",(isset($ui_ele['das_node_defaults']) ? sizeof($ui_ele['das_node_defaults']) : 0),true,true);
+			if (!empty($ui_ele['id_key'])) {
 
-			for($i = 0; $i<$das_node_count; $++) {
+				$das_node_count = wbc()->options->get_option($ui_element_definition['data_controls'][2]['tab_key'],$ui_ele['id_key']."_das_node_count",(isset($ui_ele['das_node_defaults']) ? sizeof($ui_ele['das_node_defaults']) : 0),false,false);
 
-				if (isset($ui_ele['das_node_defaults'][$i])) {
-					
-					if (empty($ui_ele['das_node_defaults'][$i]['id_key'])) {
+				for($i = 0; $i<$das_node_count; $i++) {
+
+					--	here we most probably need to set id_key for the das node at $i index no matter if it is set in defaults or not. beucase otherwise if the id_key used of main node than it will override the main nodes admin options so it seems fundamental and we may have missed this in the flow -- to h 
+					if (isset($ui_ele['das_node_defaults'][$i])) {
 						
-						$ui_ele['das_node_defaults'][$i]['id_key'] = $ui_ele['id_key']."_".$i;
+						//if (empty($ui_ele['das_node_defaults'][$i]['id_key'])) {
+							
+							$ui_ele['das_node_defaults'][$i]['id_key'] = $ui_ele['id_key']."_".$i;
+						//}
 					}
+
+					ACTIVE_TODO this is wary sansitiv flow issue here that we need to pass the brod layer variables data lick $ui_definition and so on to dapdown to althe layer and than that is calling back the mane function so we need to refactrit and mac sur that recarshon hapans only from the build funaction or next to the sub call_process_build function and the depandancy on passing $ui_definition all the way to the element files. so simply this is a reyali bade flow we need to refactrit as sun as we get sanche. and lats do is next by the 2ed revision and any how.-- to h & -- to b
+					$this->process_build(
+						$i/*$ui_key*/, 
+
+						isset($ui_ele['das_node_defaults'][$i]) ? $ui_ele['das_node_defaults'][$i] : $ui_ele, 
+
+						$ui, 
+						$option_key, 
+						$process_form, 
+						$ui_generator, 
+
+						isset($ui_definition['controls'][$ui_ele['das_node_defaults'][$i]['id_key']]) ? $ui_definition['controls'][$ui_ele['das_node_defaults'][$i]['id_key']] : $ui_element_definition,
+
+						$ui_definition
+					);
 				}
-
-				ACTIVE_TODO From below call we are passing the controls of the default provided by user but if the controls is provided for one particular layer for example configuration controls but appearance and data controls are not provided on the main node appearance controls is supported that sud be passed from here so additionally if is need here to tac car of that meter, so jas add the applicable if conditions here. we may need to do at as soon as we face an issue or next by the 1st or 2ed revision-- to h & -- to b
-
-				ACTIVE_TODO this is wary sansitiv flow issue here that we need to pass the brod layer variables data lick $ui_definition and so on to dapdown to althe layer and than that is calling back the mane function so we need to refactrit and mac sur that recarshon hapans only from the build funaction or next to the sub call_process_build function and the depandancy on passing $ui_definition all the way to the element files. so simply this is a reyali bade flow we need to refactrit as sun as we get sanche. and lats do is next by the 2ed revision and any how.-- to h & -- to b
-				$this->process_build(
-					$i/*$ui_key*/, 
-
-					isset($ui_ele['das_node_defaults'][$i]) ? $ui_ele['das_node_defaults'][$i] : $ui_ele, 
-
-					$ui, 
-					$option_key, 
-					$process_form, 
-					$ui_generator, 
-
-					-- ahi j id_key nu j logic karlu chhe e $id_key nu logic process_build ma haju baki chhee badhe karvanu. je call_process_build na call ma uprathi lagu padyu hashe te pramane ahiya implement thayu chhe ne e confirm karvanu aavashe.jyare $id_key nu logic 144 ni seris ma aagal karvanu aavyu em thayu pachhi.
-					isset($ui_definition['controls'][$ui_ele['das_node_defaults'][$i]['id_key']]) ? $ui_definition['controls'][$ui_ele['das_node_defaults'][$i]['id_key']] : $ui_element_definition,
-
-					$ui_definition
-				);
 			}
 		}
 	}
 
-	private function process_build($ui_key,$ui_ele,$ui,$option_key='',$process_form = true,$ui_generator = null, $ui_element_definition = null, $ui_definition = null) {
+	protected function process_build($ui_key,$ui_ele,$ui,$option_key='',$process_form = true,$ui_generator = null, $ui_element_definition = null, $ui_definition = null) {
 
-		/*\sp\wbc\system\core\SP_Ui_Builder::instance()->*/ parent::process_build($ui_key,$ui_ele,$ui,$option_key,$process_form,$ui_generator,$ui_element_definition);
+		parent::process_build($ui_key,$ui_ele,$ui,$option_key,$process_form,$ui_generator,$ui_element_definition,$ui_definition);
 
 		if(!empty($ui_ele['type'])) {
 
-			if(empty(/*$ui_ele['id']*/$ui_ele['id_key']) and is_string($ui_key)) {
-				/*$ui_ele['id']*/$ui_ele['id_key'] = $ui_key;
+			if(empty($ui_ele['id_key']) and is_string($ui_key)) {
+				$ui_ele['id_key'] = $ui_key;
 			}
 
 			if(empty($ui_ele['name']) and is_string($ui_key)) {
@@ -170,8 +175,8 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 			/*-------------------------*/
 
 	
-			//if(!empty($ui_ele['appearence_controls']) and !empty(/*$ui_ele['id']*/$ui_ele['id_key']) and $process_form) {
-			if (!empty($ui_element_definition['appearence_controls']) and !empty(/*$ui_ele['id']*/$ui_ele['id_key']) and $process_form) {
+			//if(!empty($ui_ele['appearence_controls']) and !empty($ui_ele['id_key']) and $process_form) {
+			if (!empty($ui_element_definition['appearence_controls']) and !empty($ui_ele['id_key']) and $process_form) {
 				
 				
 				$control_group = '';
@@ -190,7 +195,7 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 					$option_key = $ui_element_definition['appearence_controls'][2]['control_key'];
 				}
 				
-				$customizer_value = get_theme_mod(/*$ui_ele['id']*/$ui_ele['id_key']);
+				$customizer_value = get_theme_mod($ui_ele['id_key']);
 				
 				if(in_array('text',$controls)) {
 					
@@ -201,13 +206,13 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 					/*------------------
 					-- a code sp_theme_ui/application/view/ui/Base_Builder.php no process_build() no che*/
 
-					$ui_ele['label'] = wbc()->options->get_option($option_key,/*$ui_ele['id']*/$ui_ele['id_key'].'_text',$ui_ele['label'],true,true);
+					$ui_ele['label'] = wbc()->options->get_option($option_key,$ui_ele['id_key'].'_text',$ui_ele['label'],true,true);
 					if(isset($ui_ele['postHTML'])) {
 
-						$ui_ele['postHTML'] = wbc()->options->get_option($option_key,/*$ui_ele['id']*/$ui_ele['id_key'].'_text',$ui_ele['postHTML'],true,true);
+						$ui_ele['postHTML'] = wbc()->options->get_option($option_key,$ui_ele['id_key'].'_text',$ui_ele['postHTML'],true,true);
 					} elseif (!empty($ui_ele['preHTML'])){
 
-						$ui_ele['preHTML'] = wbc()->options->get_option($option_key,/*$ui_ele['id']*/$ui_ele['id_key'].'_text',$ui_ele['preHTML'],true,true);
+						$ui_ele['preHTML'] = wbc()->options->get_option($option_key,$ui_ele['id_key'].'_text',$ui_ele['preHTML'],true,true);
 					}
 
 					if(!empty($customizer_value)) {
@@ -235,10 +240,10 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 					/*-------------------
 					-- a code sp_theme_ui/application/view/ui/Base_Builder.php no process_build() no che*/
 
-					$ui_ele['src'] = wbc()->options->get_option($option_key,/*$ui_ele['id']*/$ui_ele['id_key'].'_image',$ui_ele['src'],true,true);
+					$ui_ele['src'] = wbc()->options->get_option($option_key,$ui_ele['id_key'].'_image',$ui_ele['src'],true,true);
 
-					$__width__ = wbc()->options->get_option($option_key,/*$ui_ele['id']*/$ui_ele['id_key'].'_width',$ui_ele['src'],true,true);
-					$__height__ = wbc()->options->get_option($option_key,/*$ui_ele['id']*/$ui_ele['id_key'].'_height',$ui_ele['src'],true,true);
+					$__width__ = wbc()->options->get_option($option_key,$ui_ele['id_key'].'_width',$ui_ele['src'],true,true);
+					$__height__ = wbc()->options->get_option($option_key,$ui_ele['id_key'].'_height',$ui_ele['src'],true,true);
 
 					$dimensions_css = "";
 					if(!empty($__width__)) {
@@ -283,7 +288,7 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 						$ui_ele['href'] = '';
 					}
 					
-					$ui_ele['href'] = wbc()->options->get_option($option_key,/*$ui_ele['id']*/$ui_ele['id_key'].'_url',$ui_ele['href'],true,true);
+					$ui_ele['href'] = wbc()->options->get_option($option_key,$ui_ele['id_key'].'_url',$ui_ele['href'],true,true);
 
 					if(!empty($customizer_value)) {
 						$ui_ele['href'] = $customizer_value;
@@ -299,7 +304,7 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 						$ui_ele['style'] = '';
 					}
 
-					$ui_ele['style'].='color:'.wbc()->options->get_option($option_key,/*$ui_ele['id']*/$ui_ele['id_key'].'_color','',true,true).' !important;';
+					$ui_ele['style'].='color:'.wbc()->options->get_option($option_key,$ui_ele['id_key'].'_color','',true,true).' !important;';
 				}
 
 				if(in_array('back_color',$controls)) {
@@ -308,7 +313,7 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 						$ui_ele['style'] = '';
 					}
 
-					$ui_ele['style'].='background-color:'.wbc()->options->get_option($option_key,/*$ui_ele['id']*/$ui_ele['id_key'].'_back_color','',true,true).' !important;';
+					$ui_ele['style'].='background-color:'.wbc()->options->get_option($option_key,$ui_ele['id_key'].'_back_color','',true,true).' !important;';
 				}
 
 				if(in_array('font_family',$controls)) {
@@ -317,7 +322,7 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 						$ui_ele['style'] = '';
 					}
 
-					$ui_ele['style'].='font-family:'.wbc()->options->get_option($option_key,/*$ui_ele['id']*/$ui_ele['id_key'].'_font_family','',true,true).' !important;';
+					$ui_ele['style'].='font-family:'.wbc()->options->get_option($option_key,$ui_ele['id_key'].'_font_family','',true,true).' !important;';
 				}
 
 				if(in_array('font_size',$controls)) {
@@ -326,7 +331,7 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 						$ui_ele['style'] = '';
 					}
 
-					$ui_ele['style'].='font-size:'.wbc()->options->get_option($option_key,/*$ui_ele['id']*/$ui_ele['id_key'].'_font_size','',true,true).' !important;';
+					$ui_ele['style'].='font-size:'.wbc()->options->get_option($option_key,$ui_ele['id_key'].'_font_size','',true,true).' !important;';
 				}					
 
 				if(in_array('height',$controls)) {
@@ -335,7 +340,7 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 						$ui_ele['style'] = '';
 					}
 
-					$ui_ele['style'].='height:'.wbc()->options->get_option($option_key,/*$ui_ele['id']*/$ui_ele['id_key'].'_height','',true,true).' !important;';
+					$ui_ele['style'].='height:'.wbc()->options->get_option($option_key,$ui_ele['id_key'].'_height','',true,true).' !important;';
 				}	
 
 				if(in_array('width',$controls)) {
@@ -344,7 +349,7 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 						$ui_ele['style'] = '';
 					}
 
-					$ui_ele['style'].='width:'.wbc()->options->get_option($option_key,/*$ui_ele['id']*/$ui_ele['id_key'].'_width','',true,true).' !important;';
+					$ui_ele['style'].='width:'.wbc()->options->get_option($option_key,$ui_ele['id_key'].'_width','',true,true).' !important;';
 				}	
 
 				if(in_array('radius',$controls)) {
@@ -353,7 +358,7 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 						$ui_ele['style'] = '';
 					}
 
-					$ui_ele['style'].='radius:'.wbc()->options->get_option($option_key,/*$ui_ele['id']*/$ui_ele['id_key'].'_radius','',true,true).' !important;';
+					$ui_ele['style'].='radius:'.wbc()->options->get_option($option_key,$ui_ele['id_key'].'_radius','',true,true).' !important;';
 				}
 
 				if(in_array('margin_left',$controls)) {
@@ -362,7 +367,7 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 						$ui_ele['style'] = '';
 					}
 
-					$ui_ele['style'].='margin-left:'.wbc()->options->get_option($option_key,/*$ui_ele['id']*/$ui_ele['id_key'].'_margin_left','',true,true).' !important;';
+					$ui_ele['style'].='margin-left:'.wbc()->options->get_option($option_key,$ui_ele['id_key'].'_margin_left','',true,true).' !important;';
 				}
 
 				if(in_array('margin_right',$controls)) {
@@ -371,7 +376,7 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 						$ui_ele['style'] = '';
 					}
 
-					$ui_ele['style'].='margin-right:'.wbc()->options->get_option($option_key,/*$ui_ele['id']*/$ui_ele['id_key'].'_margin_right','',true,true).' !important;';
+					$ui_ele['style'].='margin-right:'.wbc()->options->get_option($option_key,$ui_ele['id_key'].'_margin_right','',true,true).' !important;';
 				}
 
 				if(in_array('visibility',$controls)) {
@@ -381,7 +386,7 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 					}
 
 
-					if (wbc()->options->get_option($option_key,/*$ui_ele['id']*/$ui_ele['id_key'].'_visibility',-1,true,true) == 1) {
+					if (wbc()->options->get_option($option_key,$ui_ele['id_key'].'_visibility',-1,true,true) == 1) {
 						//$ui_ele['style'].='display: none !important;';
 						return;	//simply return from here and skip addind element 
 					}
@@ -497,7 +502,7 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 
 				} else {
 
-					do_action('sp_ui_builder_build_data_controls_type', $ui_element_definition['data_controls'], $this, /*as long as it is not nashory it is a recruitment that we do not rely on this object passing to keep it simple, but if it is received then we can pass as well as if required we can re may also may to pass the colur obj witches calling this class not $this but they vary class wichis calling this function layer*/ );
+					do_action('sp_ui_builder_build_data_controls_type', $ui_element_definition['data_controls'], $ui_ele['id_key'], $this, /*as long as it is not nashesary it is a recommended that we do not rely on this object passing to keep it simple, but if it is required then we can pass it as well as if required we may also need to pass the colur obj wich is calling this class not $this but the vary class wich is calling this function layer*/ );
 				}
 			}
 
@@ -511,6 +516,7 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 			// passing self contained object so the template can use the child parameter in the $ui_ele to created a nested complax UI.
 			$ui_ele['builder'] = $this;
 
+			ACTIVE_TODO this is very sensitive flow issue here that we need to pass this broad layers variables and data like $ui_definition and so on deep down to all the layers and that is callling back this main build function so we need to refactor it and make sure that recursion happens only from the build function or max to the call process_build function and the depandancy of passing $ui_definition all the way to the element files. so simply this is a really bad flow and we need to refacrtor it as soon as we get chance and lets do it max by the second revision anyhow. -- to h & -- to b 
 			$ui_ele['ui_definition'] = $ui_definition;
 
 			ACTIVE_TODO_OC_START			
@@ -521,7 +527,7 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 	}
 
 	ACTIVE_TODO_OC_START
-	-a function most probly refactored karvana and simply remove thei jachhe wen we impliment extenl page builder suport -- to h & to b
+	-a function most probly refactored karvana or simply ahiya thei remove thei jachhe wen we impliment externl page builder suport -- to h & to b
 	ACTIVE_TODO_OC_END
 	public function elementor_form($object,$form,$depth=0,$parent_key='') {
 
@@ -634,7 +640,7 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 	}
 
 	ACTIVE_TODO_OC_START
-	-a function most probly refactored karvana and simply remove thei jachhe wen we impliment extenl page builder suport -- to h & to b
+	-a function most probly refactored karvana or simply ahiya thei remove thei jachhe wen we impliment externl page builder suport -- to h & to b
 	ACTIVE_TODO_OC_END
 	public function elementor_render($settings,$form,$depth='') {
 		if(!empty($form) and is_array($form)) {
@@ -853,7 +859,8 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 	}
 
 	// added on 01-01-2022
-	-system core mathi a function delete karva na chhe and jay thie a function juna ui builder ma call thaya hoy teni jagye a class ma call karva na chhe a most probly theme adpshon check root file ma woo choice plugins extension ni root file ma thei call thyela hachhe -- to h & to b
+	// -system core mathi a function delete karva na chhe done
+	-- and jay thie a function juna ui builder ma call thaya hoy teni jagye aa class ma call karva na chhe, aa most probly theme adpshon check function, woo choice plugins root file ma thei and extension ni root file ma thei call thyela hachhe -- to h & to b
 	public function theme_adaption_check() {
 		if( !empty(wbc()->sanitize->get('thadc')) && wbc()->sanitize->get('thadc') == 1 ) {
 			wbc()->load->model('utilities/eowbc_theme_adaption_check');
@@ -861,7 +868,8 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 		}
 	}
 
-	-system core mathi a function delete karva na chhe and jay thie a function juna ui builder ma call thaya hoy teni jagye a class ma call karva na chhe a most probly theme adpshon check root file ma woo choice plugins and extension ma thei call thyela hachhe -- to h & to b
+	// - system core mathi a function delete karva na chhe done
+	-- and jay thie a function juna ui builder ma call thaya hoy teni jagye aa class ma call karva na chhe -- to h & to b
 	public static function js_template_wrap(string $id, string $html, string $js_templating_lib) {
 
 		// wrap with tag as appliable as per the js_templating_lib 
@@ -869,6 +877,19 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 
 			return '<script type="text/html" id="tmpl-'.$id.'">' . $html . '</script>'; 
 		}
-			
+
+	}
+
+	public function build_and_return($ui,$option_key='',$process_form = true,$ui_generator = null, $ui_definition = null){
+
+		$html = parent::build_and_return($ui, $option_key, $process_form,$ui_generator, $ui_definition);
+
+        ob_start();
+
+        $this->build($ui, $option_key, $process_form,$ui_generator, $ui_definition);
+
+        $html ob_get_clean();
+
+		return $html;
 	}
 }
