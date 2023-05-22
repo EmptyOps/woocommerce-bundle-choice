@@ -129,4 +129,24 @@ class Controller extends \eo\wbc\controllers\Controller{
         }
     }
 
+    protected function ajax_response($res, $args = array()){
+
+        if (!isset($res['type'])) {
+            
+            $res['type'] = 'success';
+        }
+
+        if (!isset($res['msg'])) {
+            
+            $res['msg'] = '';
+        }
+
+
+        // ob_start();
+
+        // wp_send_json( $res );
+
+        wbc()->rest->response($res);
+    }
+
 }
