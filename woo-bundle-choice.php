@@ -215,6 +215,10 @@ if(!class_exists('Woo_Bundle_Choice') ) {
 		if(function_exists('wc')){
 			wbc()->construct_init();
 
+			ACTIVE_TODO the eowbc_lang function and extension lang function are no more suppose to be used, so we need to replace call to these functions with standard gettext call functions like __, _e and so on. and in the new gettext call implementation we have used standard function like __, _e and so on and not used the eowbc_lang and so on, so lets do change the call asap in the alredy implemented gettext calls.
+				ACTIVE_TODO and as soon as above is done we need to mark the eowbc_lang and extension lang and so on as deprecated. 
+			load_plugin_textdomain( 'woo-bundle-choice', false, dirname( plugin_basename( _FILE_ ) ) . '/languages/' );
+
 			//run base service for theme adaption check 
 			eo\wbc\model\UI_Builder::instance()->theme_adaption_check();
 		}

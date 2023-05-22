@@ -404,6 +404,9 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 
 					if(!empty($ui_element_definition['configuration_controls'][2]['option_key']) and !empty($ui_element_definition['configuration_controls'][2]['id'])){
 
+						// NOTE: even though so far wc_attribute_field is used on the product page ui widgets but it can simply work within the loop scope of the archive and so on layers. it can work simply because the global $post variable refer to the reference of the post object in loop.
+							ACTIVE_TODO however we need to run and test it once before we consider using it within the loop scope. -- to h 
+
 						global $post;
 						if(!empty($post) and !is_wp_error($post)){
 							$product = wc_get_product($post->ID);	
