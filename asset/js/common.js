@@ -1840,8 +1840,8 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
 
               if (data.attribute_value === data.selected) {
                 
-                // console.log("process_attribute_template selected in if if product id="+ _this./*#*/data_private.product_id +" type="+ type);
-                // console.log(inner_element);
+                console.log("process_attribute_template selected in if if product id="+ _this./*#*/data_private.product_id +" type="+ type);
+                console.log(inner_element);
 
                 jQuery(inner_element).addClass('selected');
                 
@@ -2135,7 +2135,7 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
             console.log('vs [on_change_listener] 1');
             console.log(element);
 
-          _this./*#*/process_attribute_template(type, element, 'change', true);  
+          _this./*#*/process_attribute_template_private(type, element, 'change', true);  
 
           _this./*#*/on_change_private(type, element, event);
 
@@ -3685,7 +3685,7 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
                
                if(!window.document.splugins.common.is_empty(event) && !window.document.splugins.common.is_empty(variation)) {
 
-                    // console.log("gim [variation_change_listener] show_variation if");
+                    console.log("gim [variation_change_listener] show_variation if");
 
                     _this./*#*/set_variation_url_private(event, variation);
 
