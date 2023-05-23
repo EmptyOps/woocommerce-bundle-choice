@@ -95,7 +95,7 @@ class Controller extends \eo\wbc\controllers\Controller{
     public function init($args = array()) {
 
         // NOTE: So far we have no need for this support in the feed page layer so it is disabled for that 
-        // TODO but if in future required than we can simply enable it -- to h
+            // TODO but if in future required than we can simply enable it -- to h
 
         // the_post
         self::hook_action_the_post($args);
