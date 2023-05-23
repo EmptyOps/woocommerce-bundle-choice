@@ -274,7 +274,7 @@ class Controller extends \eo\wbc\controllers\Controller {
 
 					if( !empty($control_element) ) {
 
-						$controls = $this->generate_form_controls($controls, $control_element, $form_value, $key,$form_key, $admin_ui);
+						$controls = $this->generate_form_controls($controls, $control_element, $form_value, $key,$form_key, $admin_ui, $is_ui_definition);
 
 						if (!empty($form_value[$key][2]['das_node_enabled'])) {
 					
@@ -284,7 +284,7 @@ class Controller extends \eo\wbc\controllers\Controller {
 								
 								for($i = 0; $i<$das_node_count; $i++) {
 
-									$controls = $this->generate_form_controls($controls, $control_element, $form_value, $key,$form_key.'_'.$i, $admin_ui);
+									$controls = $this->generate_form_controls($controls, $control_element, $form_value, $key,$form_key.'_'.$i, $admin_ui, $is_ui_definition);
 								}
 							}
 						}
@@ -349,13 +349,45 @@ class Controller extends \eo\wbc\controllers\Controller {
 		return $controls;
 	}
 
-	private function generate_form_controls($controls, $control_element, $form_value, $key, $form_key, $admin_ui) {
+	private function generate_form_controls($controls, $control_element, $form_value, $key, $form_key, $admin_ui, $is_ui_definition = false) {
 		
 		foreach ($control_element as $control) {
 
+			NOTE: here we are implementing some specific and necessary peoperties for the elements which is requiredto be done at the defect all layer like from here.
+
+			$control_args = null;
+
+			if( $is_ui_definition ) {
+
+				$control_args = array();
+
+				if( 'text' == $control ) {
+					
+					if( isset($form_value[$key][2]['original_text']) ) {
+
+						ACTIVE_TODO in future in addition to help text we may also like to detect the text property of this field from the get text call and check if it is modifed from the laguage file(we can check by comparing the value retrieved from gettext call against the value of original_text property of the appearance control, and maybe the gettext call value would be directly available in the prehtml property of ui node so we may not need to do anything for aquring the value of gettext call) then we can show warning here that or disable this text field that this is no more applicable.
+						
+						$control_args['info'] = array(
+																	'label'=>'<b>If you are editing  the text from the language files then this text property will not work from here.</b>',
+																	'type'=>'visible_info',
+																	'class'=>array('medium'),
+																);
+					}
+				} elseif( 'attribute' == $control ) {
+
+					$control_args['is_sp_eid'] = true; 
+				}
+			}
+
 			if(empty($form_value[$key][2])){
 
-				$controls[$form_key.'_'.$control] = call_user_func_array(array($admin_ui,$control),array($form_key.'_'.$control,$form_value[$key][0]));
+				if( $control_args === null ) {
+
+					$controls[$form_key.'_'.$control] = call_user_func_array(array($admin_ui,$control),array($form_key.'_'.$control,$form_value[$key][0]));
+				} else {
+
+					$controls[$form_key.'_'.$control] = call_user_func_array(array($admin_ui,$control),array($form_key.'_'.$control,$form_value[$key][0],$control_args));
+				}
 
 			} else {
 
@@ -367,6 +399,12 @@ class Controller extends \eo\wbc\controllers\Controller {
 
 					$control_key = $form_value[$key][2]['id'].'_'.$control;
 				}
+
+				if( $is_ui_definition ) {
+
+					$form_value[$key][2] = array_replace($form_value[$key][2], $control_args);
+				}
+
 				$controls[$control_key] = call_user_func_array(array($admin_ui,$control),array($control_key,$form_value[$key][0],$form_value[$key][2]));
 			}
 		}

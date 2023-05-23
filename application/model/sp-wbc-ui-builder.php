@@ -420,9 +420,20 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 
 								$__data__ = '';
 
-								if( !empty(wbc()->options->get_option($_option_key_,$_data_key_.'_attribute')) and !empty($item_attributes['pa_'.wbc()->options->get_option($_option_key_,$_data_key_.'_attribute')])) {
+								$sp_eid = wbc()->options->get_option($_option_key_,$_data_key_.'_attribute');
 
-							    	$data_term = $item_attributes['pa_'.wbc()->options->get_option($_option_key_,$_data_key_.'_attribute')];
+								$attribute_slug = null;
+
+								if( !empty( $sp_eid ) ) {
+
+									$attribute_slug = wbc()->wc->id_to_slug('attr',\eo\wbc\system\core\publics\Eowbc_Base_Model_Publics::split_sp_eid($sp_eid)[2]);
+								}
+
+								// if( !empty(wbc()->options->get_option($_option_key_,$_data_key_.'_attribute')) and !empty($item_attributes['pa_'.wbc()->options->get_option($_option_key_,$_data_key_.'_attribute')])) {
+								if( !empty($attribute_slug) and !empty($item_attributes['pa_'.$attribute_slug])) {
+
+							    	// $data_term = $item_attributes['pa_'.wbc()->options->get_option($_option_key_,$_data_key_.'_attribute')];
+							    	$data_term = $item_attributes['pa_'.$attribute_slug];
 
 							    	if(!empty($data_term) and !is_wp_error($data_term) and !empty($data_term->get_options())){
 							    		$data_term = get_term_by('id',$data_term->get_options()[0],$data_term->get_name());
@@ -443,7 +454,9 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 					    				$ui_ele['class'].=" d-none ";
 					    			}
 
-					    		} elseif (!empty(wbc()->options->get_option($_option_key_,$_data_key_.'_text')) and empty($__data__) ) {
+					    		} 
+					    		ACTIVE_TODO here it is better if we can refactor the ui builder layers further and can use the standard appearance controls for managing the static label like text property for wc_attribute field which would be applicable when the attribute has no option selected for particular post or wc product. lets do it by 3rd revision or mark it is as todo. 
+					    		elseif (!empty(wbc()->options->get_option($_option_key_,$_data_key_.'_text')) and empty($__data__) ) {
 					    			$___term_empty = true;
 					    			$__data__ = wbc()->options->get_option($_option_key_,$_data_key_.'_text');
 					    		} elseif(empty($__data__)) {
@@ -451,6 +464,8 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 					    			$__data__ = 'N/A';
 					    		}
 
+					    		ACTIVE_TODO_OC_START
+					    		--	below layers needs refactoring where it needs to manage the ct, mm, % and so on hardcoded part, it should be simply either %s and everything else can not be managed here. and anyway it might not be necessary either as long as the preHTML and postHTML values are not unnecessarily taking care of the ct, mm, % and so on. 
 					    		if(isset($ui_ele['value'])){
 					    			if(!empty($__data__)) {
 					    				$ui_ele['value'] = sprintf($ui_ele['value'],$__data__);
