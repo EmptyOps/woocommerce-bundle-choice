@@ -229,7 +229,14 @@ class Form_Elements {
 		}
 
 		if(empty($options)){
-			$options = \eo\wbc\model\Category_Attribute::instance()->get_attributs();
+
+			if( !empty( $args['is_sp_eid'] ) ) {
+
+				$options = wbc()->wc->get_productAttributes('detailed_sp_eid');
+			} else {
+
+				$options = \eo\wbc\model\Category_Attribute::instance()->get_attributs();
+			}
 		}
 
 		if(empty($id)){
