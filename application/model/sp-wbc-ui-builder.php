@@ -79,7 +79,7 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 
 	private function call_process_build($ui_key,$ui_ele,$ui,$option_key='',$process_form = true,$ui_generator = null, $ui_element_definition = null, $ui_definition = null){
 
-		NOTE: The das node support added in the ui builder is standard support with the simple and naturel structure. and the user can use this support to increase or decrease field no mater if it is supported on the wp customizer page builders like elementor and so on, which means if user can use this support than even if they do not use the increase or decrease support of the wp customizer or external page builder than also they can be fine with their requirement otherwise they are also free to use the support of the wp customizer or external page builder to increase or decrease in which case they can keep using this support.
+		NOTE: The das node support added in the ui builder is standard support with the simple and naturel structure. and the user can use this support to increase or decrease field no matter if it is supported on the wp customizer and external page builders like elementor and so on, which means if user can use this support than even if they do not use the increase or decrease support of the wp customizer or external page builders than also they can be fine with their requirement otherwise they are also free to use the support of the wp customizer or external page builder to increase or decrease in which case they can skip using this support. 
 
 		$this->process_build($ui_key, $ui_ele, $ui, $option_key, $process_form, $ui_generator, $ui_element_definition,$ui_definition);
 
@@ -87,17 +87,22 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 
 			if (!empty($ui_ele['id_key'])) {
 
-				$das_node_count = wbc()->options->get_option($ui_element_definition['data_controls'][2]['tab_key'],$ui_ele['id_key']."_das_node_count",(isset($ui_ele['das_node_defaults']) ? sizeof($ui_ele['das_node_defaults']) : 0),false,false);
+				$id_key_org = $ui_ele['id_key']; 
+
+				$das_node_count = wbc()->options->get_option($ui_element_definition['data_controls'][2]['tab_key'],$id_key_org."_das_node_count",(isset($ui_ele['das_node_defaults']) ? sizeof($ui_ele['das_node_defaults']) : 0),false,false);
 
 				for($i = 0; $i<$das_node_count; $i++) {
 
-					--	here we most probably need to set id_key for the das node at $i index no matter if it is set in defaults or not. beucase otherwise if the id_key used of main node than it will override the main nodes admin options so it seems fundamental and we may have missed this in the flow -- to h 
+					// --	here we most probably need to set id_key for the das node at $i index no matter if it is set in defaults or not. beucase otherwise if the id_key used of main node than it will override the main nodes admin options so it seems fundamental and we may have missed this in the flow -- to h done 
 					if (isset($ui_ele['das_node_defaults'][$i])) {
 						
 						//if (empty($ui_ele['das_node_defaults'][$i]['id_key'])) {
 							
-							$ui_ele['das_node_defaults'][$i]['id_key'] = $ui_ele['id_key']."_".$i;
+							$ui_ele['das_node_defaults'][$i]['id_key'] = /*$ui_ele['id_key']*/$id_key_org."_".$i;
 						//}
+					} else {
+
+						$ui_ele['id_key'] = /*$ui_ele['id_key']*/$id_key_org."_".$i;
 					}
 
 					ACTIVE_TODO this is wary sansitiv flow issue here that we need to pass the brod layer variables data lick $ui_definition and so on to dapdown to althe layer and than that is calling back the mane function so we need to refactrit and mac sur that recarshon hapans only from the build funaction or next to the sub call_process_build function and the depandancy on passing $ui_definition all the way to the element files. so simply this is a reyali bade flow we need to refactrit as sun as we get sanche. and lats do is next by the 2ed revision and any how.-- to h & -- to b
@@ -505,7 +510,7 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 
 				} else {
 
-					do_action('sp_ui_builder_build_data_controls_type', $ui_element_definition['data_controls'], $ui_ele['id_key'], $this, /*as long as it is not nashesary it is a recommended that we do not rely on this object passing to keep it simple, but if it is required then we can pass it as well as if required we may also need to pass the colur obj wich is calling this class not $this but the vary class wich is calling this function layer*/ );
+					do_action('sp_ui_builder_build_data_controls_type', $ui_element_definition['data_controls'], $ui_ele['id_key'], $this /*as long as it is not nashesary it is a recommended that we do not rely on this object passing to keep it simple, but if it is required then we can pass it as well as if required we may also need to pass the caller obj wich is calling this class so not $this but the vary class wich is calling this function layer*/ );
 				}
 			}
 
