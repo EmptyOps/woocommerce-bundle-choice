@@ -250,8 +250,8 @@ class Controller extends \eo\wbc\controllers\Controller {
 
 				// lup attr 
 
-				ACTIVE_TODO here instad of having our team and user to specify the node_type adishnaly for the controls fild it is beter that we can refacter it so that it can read dieracly from the ui array, so lats do it as long as it is posibul without lusing the balnche of the modules capling or cohesion. but it seems at like the das node count default fild below it is not possibel without compromising on the lusly cupled modules standerd, but lats think about if it is possibel. other wish as long as thar is no way and it seems naturel to lat user defined hard coded way lats mark it as invalid.
-					-- 	configuration controls and data controls ma node_type set karvanu avchhe?
+				ACTIVE_TODO here instad of having our team and user to specify the node_type adishnaly for the controls fild it is beter if we can refacter it so that it can read dieracly from the ui array, so lats do it as long as it is posibul without lusing the balnche of the modules capling or cohesion. but it seems that like the das node count default fild below it is not possibel without compromising on the lusly cupled modules standerd, but lats think about if it is possibel. other wish as long as thar is no way and it seems naturel to lat users define it hard coded way lats mark it as invalid.
+					// -- 	configuration controls and data controls ma node_type set karvanu avchhe? so far NO done 
 				if( !empty($form_value[$key][2]) and ( !empty($form_value[$key][2]['type']) or !empty($form_value[$key][2]['node_type']) ) ) {
 
 					$dynamic_type = ( !empty($form_value[$key][2]['type']) ? $form_value[$key][2]['type'] : $form_value[$key][2]['node_type'] );
@@ -265,7 +265,7 @@ class Controller extends \eo\wbc\controllers\Controller {
 					$control_element = $this->default_uis($form_value['type'],$excep_controls);
 				} 
 
-				if( !empty($control_element) or ( $key == 'data_controls' and !empty($form_value[$key][2]['das_node' ahi das_node_enabled karvanu chhe? ]) ) ){
+				if( !empty($control_element) or ( $key == 'data_controls' and !empty($form_value[$key][2]['das_node_enabled']) ) ){
 
 					$controls[$form_key.'_form_segment'] = array(
 						'label'=> $form_value[$key][0],
@@ -291,15 +291,18 @@ class Controller extends \eo\wbc\controllers\Controller {
 
 					}
 
-					ACTIVE_TODO here we are depanding on the das node count default fild that is set from the data controls but in fusher we sud refacter the code as long as it is possible with loosely cupled flow to ansyor that the default count seting is read from the ui array diractly instad of dipanding on the defolt that is need to be set sapratly. but i thing thar is no essy way and if you do sumthing than it well not be lusly cupled so may be it is the work that we need our team and user to do to achive this. but if it is possibel than lats do it other wish we can mark it is todo or mac this point invalid.
-					ACTIVE_TODO and in futcher we may lick to provide on admin the increase or decrease support directly on the particular appearence or configuration tab instead of asking user to increase or decrease fast on the data tab. so that user expereince can be improved but as long as it is simple and feasible, and when and if we do that than afcorse we can use the sam das support that is added for the form builder but that exactly we can not be used on form array but we can at least us that javascript api. lats do it if required by 3rd revision other wish we can mark it as todo. -- to h & -- to b 
-					$controls[$form_key.'_das_node_count'] = array(
-						'label'=>'increase\decrease '.$form_value[$key][0],
-						'type'=>'number',
-						'value'=> ( !empty($form_value[$key][2]['das_node_count_default']) ? $form_value[$key][2]['das_node_count_default'] : 0 ),							
-						'sanitize'=>'sanitize_text_field',
-						'size_class'=>array(''),
-					);
+					ACTIVE_TODO here we are depanding on the das node count default fild that is set from the data controls but in fusher we sud refacter the code as long as it is possible with loosely cupled flow to ansyor that the default count seting is read from the ui array diractly instad of dipanding on the defolt that is need to be set sapratly. but i thing thar is no essy way and if we do sumthing than it well not be lusly cupled so may be it is the work that we need our team and user to do to achive this. but if it is possibel than lats do it other wish we can mark it is todo or mac this point invalid.
+					ACTIVE_TODO and in futcher we may lick to provide on admin the increase or decrease support directly on the particular appearence or configuration tab instead of asking user to increase or decrease fast on the data tab. so that user expereince can be improved but as long as it is simple and feasible, and when and if we do that than afcorse we can use the sam das support that is added for the form builder but that exactly can not be used on form array but we can at least us that javascript api. lats do it if required by 3rd revision other wish we can mark it as todo. -- to h & -- to b 
+					if( $key == 'data_controls' and !empty($form_value[$key][2]['das_node_enabled']) ) {
+
+						$controls[$form_key.'_das_node_count'] = array(
+							'label'=>'increase\decrease '.$form_value[$key][0],
+							'type'=>'number',
+							'value'=> ( !empty($form_value[$key][2]['das_node_count_default']) ? $form_value[$key][2]['das_node_count_default'] : 0 ),							
+							'sanitize'=>'sanitize_text_field',
+							'size_class'=>array(''),
+						);
+					}
 				}
 			}
 
@@ -394,11 +397,20 @@ class Controller extends \eo\wbc\controllers\Controller {
 
 				$control_key = $form_key.'_'.$control;
 
-				--here jo apdy id had coded support karva hot to ano support ds mate ansyor karvo padchhe nitar hard coded id atlist nava emplymentshon ma ni use kari shaky or simply no kariy to chale am hoy to betar chhe. so lat simply figerat out and jo us karva pady am hoy or we can not mins confrom karvu posibul no hoy to simply wbc ui builder ma aa je singel cot ma id paramiter chhe jay jay us thayelu hoy te find kari ne puchi thei apdy teno ahi support confrom kari shky -- to h & -- to b
-					-- we can not use id for das other wish it well be com vari canfuging -- to h
-				if(!empty($form_value[$key][2]['id'])){
+				// --here jo apdy id had coded support karva hot to ano support ds mate ansyor karvo padchhe nitar hard coded id atlist nava emplymentshon ma ni use kari shaky or simply no kariy to chale am hoy to betar chhe. so lat simply figerat out and jo us karva pady am hoy or we can not mins confrom karvu posibul no hoy to simply wbc ui builder ma aa je singel cot ma id paramiter chhe jay jay us thayelu hoy te find kari ne puchi thei apdy teno ahi support confrom kari shky -- to h & -- to b done 
+				// 	-- we can not use id for das other wish it well be com vari canfuging -- to h done 
+				if( $is_ui_definition ) {
 
-					$control_key = $form_value[$key][2]['id'].'_'.$control;
+					if(!empty($form_value[$key][2]['id_key'])){
+
+						$control_key = $form_value[$key][2]['id_key'].'_'.$control;
+					}
+				} else {
+
+					if(!empty($form_value[$key][2]['id'])){
+
+						$control_key = $form_value[$key][2]['id'].'_'.$control;
+					}
 				}
 
 				if( $is_ui_definition ) {
