@@ -94,9 +94,6 @@ class Controller extends \eo\wbc\controllers\Controller{
 
     public function init($args = array()) {
 
-        // NOTE: So far we have no need for this support in the feed page layer so it is disabled for that 
-            // TODO but if in future required than we can simply enable it -- to h
-
         // the_post
         self::hook_action_the_post($args);
 
@@ -107,6 +104,8 @@ class Controller extends \eo\wbc\controllers\Controller{
     //         NOTE: and while we are implementing this flow it should be clearly kept in mind that the platform entity suppor we have added and we are yet to support that in detail in future should abstract our this flow and ensure that different platforms seemlessly adapt to it. and that might be counter inituitive or ocnflicting but with some mature and effective refactoring we can achieve this and even with very lite and efficient memory and execution foot print  if implement neatly and simply and clean refactoring and architecture. 
     public function hook_action_the_post( $args = array() ) {
 
+        // NOTE: So far we have no need for this support in the feed page layer so it is disabled for that, so just desabled it by not keping the hook_action_the_post funtion in the feed controller.
+            // TODO but if in future required than we can simply enable it, but yeah we need to confirm the flow and also need to implement some additional logic or strcuture to ensure that it works appropriately within the loop scope. -- to h
         if (isset($args['child_obj']) and method_exists($args['child_obj'],'hook_action_the_post')) {
            
             add_action( 'the_post',function(/*$post_object*/) use($args){
