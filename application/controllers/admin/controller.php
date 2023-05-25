@@ -356,27 +356,28 @@ class Controller extends \eo\wbc\controllers\Controller {
 		
 		foreach ($control_element as $control) {
 
-			NOTE: here we are implementing some specific and necessary peoperties for the elements which is requiredto be done at the defect all layer like from here.
-
+			// NOTE: here we are implementing some specific and necessary peoperties for the elements which is required to be done at the defecto layer like from here.
 			$control_args = null;
 
 			if( $is_ui_definition ) {
-
-				$control_args = array();
 
 				if( 'text' == $control ) {
 					
 					if( isset($form_value[$key][2]['original_text']) ) {
 
+						$control_args = array();
+
 						ACTIVE_TODO in future in addition to help text we may also like to detect the text property of this field from the get text call and check if it is modifed from the laguage file(we can check by comparing the value retrieved from gettext call against the value of original_text property of the appearance control, and maybe the gettext call value would be directly available in the prehtml property of ui node so we may not need to do anything for aquring the value of gettext call) then we can show warning here that or disable this text field that this is no more applicable.
 						
 						$control_args['info'] = array(
-																	'label'=>'<b>If you are editing  the text from the language files then this text property will not work from here.</b>',
-																	'type'=>'visible_info',
-																	'class'=>array('medium'),
-																);
+													'label'=>'<b>If you are editing  the text from the language files then this text property will not work from here.</b>',
+													'type'=>'visible_info',
+													'class'=>array('medium'),
+												);
 					}
 				} elseif( 'attribute' == $control ) {
+
+					$control_args = array();
 
 					$control_args['is_sp_eid'] = true; 
 				}
@@ -414,7 +415,10 @@ class Controller extends \eo\wbc\controllers\Controller {
 
 				if( $is_ui_definition ) {
 
-					$form_value[$key][2] = array_replace($form_value[$key][2], $control_args);
+					if( is_array($control_args) ) {
+
+						$form_value[$key][2] = array_replace($form_value[$key][2], $control_args);
+					}
 				}
 
 				$controls[$control_key] = call_user_func_array(array($admin_ui,$control),array($control_key,$form_value[$key][0],$form_value[$key][2]));
