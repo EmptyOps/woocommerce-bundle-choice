@@ -370,7 +370,7 @@ class Controller extends \eo\wbc\controllers\Controller {
 						ACTIVE_TODO in future in addition to help text we may also like to detect the text property of this field from the get text call and check if it is modifed from the laguage file(we can check by comparing the value retrieved from gettext call against the value of original_text property of the appearance control, and maybe the gettext call value would be directly available in the prehtml property of ui node so we may not need to do anything for aquring the value of gettext call) then we can show warning here that or disable this text field that this is no more applicable.
 						
 						$control_args['info'] = array(
-													'label'=>'<b>If you are editing  the text from the language files then this text property will not work from here.</b>',
+													'label'=>'<b>If you are editing the text from the language files then this text property will not work from here.</b>',
 													'type'=>'visible_info',
 													'class'=>array('medium'),
 												);
