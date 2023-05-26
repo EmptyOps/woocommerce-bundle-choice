@@ -10,7 +10,7 @@ jQuery(function(){
 				this.field_class = field_class;
 			}
 
-			this.field_class = '.sp-ssm-themes-ui-builder-form-field-global,'+sp-ssm-themes-ui-builder-form-field-global;
+			this.field_class = '.sp-ssm-themes-ui-builder-form-field-global,'+this.field_class;
 
 			if(typeof(button_selector) === typeof(undefined)){
 				this.button_selector = '.email_form_button';

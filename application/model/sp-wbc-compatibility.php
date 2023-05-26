@@ -62,8 +62,10 @@ class SP_WBC_Compatibility extends SP_Compatibility {
 		}
 
 		///////////////////////////
-
-		ACTIVE_TODO we will need to consider wpml hooks like below to create random patches to address some perticular issues 
+		
+		// ACTIVE_TODO_OC_START
+		// ACTIVE_TODO we will need to consider wpml hooks like below to create random patches to address some perticular issues 
+		// ACTIVE_TODO_OC_END
 			$term = wbc()->wc->get_term_by('id',apply_filters( 'wpml_object_id',$id,'category', FALSE, 'en'),'product_cat');
 
 

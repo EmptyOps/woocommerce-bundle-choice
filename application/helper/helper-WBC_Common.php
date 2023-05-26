@@ -610,7 +610,7 @@ class WBC_Common {
 		}   
 	}
 
-	public function placeholder_img_src( () {
+	public function placeholder_img_src() {
 
 		return wc_placeholder_img_src();
 	}
