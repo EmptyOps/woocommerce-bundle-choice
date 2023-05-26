@@ -24,7 +24,7 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 		
 	}
 
-	-- As observed in the option layer in the option halper layer the get option function as by default overrides ecowell to true, so lets just set it to false for the all get option call within wbc ui builder and maybe also generate form but if it is a complicated to confirm for generate form then simply do it here in the wbc ui builder and all other ui builder and page builder classes so lat simply check 6 classes  -- to h & -- to b
+	-- As observed in the options layer, in the option halper layer, the get option function have the overrides paramiter wech is by default (overrides) equal to true, so lets just set it to false for the all get option call within wbc ui builder and maybe also within the generate_form funaction layer but if it is a complicated to confirm for generate form then simply do it here in the wbc ui builder and all other ui builder and page builder classes so lat simply check 6 classes  -- to h & -- to b
 	public function build($ui,$option_key='',$process_form = true,$ui_generator = null, $ui_definition = null){
 
 		parent::build($ui, $option_key, $process_form,$ui_generator, $ui_definition);
@@ -44,7 +44,7 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 
 					if(!empty($ui_definition['controls'][$ui_ele['id_key']]['configuration_controls'][2]['action']) and $ui_definition['controls'][$ui_ele['id_key']]['configuration_controls'][2]['action']==='toggle_section') {
 
-						$_data_key_ = $ui_definition['controls'][$ui_ele['id_key']]['configuration_controls'][2]['id'];
+						$_data_key_ = $ui_definition['controls'][$ui_ele['id_key']]['configuration_controls'][2][/*'id'*/'id_key'];
 						$_option_key_ = $ui_definition['controls'][$ui_ele['id_key']]['configuration_controls'][2]['control_key'];
 
 						$type = '';
@@ -407,7 +407,7 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 			if (!empty($ui_element_definition['configuration_controls']) and !empty($ui_element_definition['configuration_controls'][2]) ) {
 				if( !empty($ui_element_definition['configuration_controls'][2]['type']) and $ui_element_definition['configuration_controls'][2]['type']=='wc_attribute_field'){
 
-					if(!empty($ui_element_definition['configuration_controls'][2]['option_key']) and !empty($ui_element_definition['configuration_controls'][2]['id'])){
+					if(!empty($ui_element_definition['configuration_controls'][2]['option_key']) and !empty($ui_element_definition['configuration_controls'][2][/*'id'*/'id_key'])){
 
 						// NOTE: even though so far wc_attribute_field is used on the product page ui widgets but it can simply work within the loop scope of the archive and so on layers. it can work simply because the global $post variable refer to the reference of the post object in loop.
 							ACTIVE_TODO however we need to run and test it once before we consider using it within the loop scope. -- to h 
@@ -419,7 +419,7 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 							if(!empty($product) and !is_wp_error($product)) {
 								$item_attributes = $product->get_attributes();
 
-								$_data_key_ = $ui_element_definition['configuration_controls'][2]['id'];
+								$_data_key_ = $ui_element_definition['configuration_controls'][2][/*'id'*/'id_key'];
 								$_option_key_ = $ui_element_definition['configuration_controls'][2]['option_key'];
 
 
@@ -525,7 +525,7 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 
 				} else {
 
-					do_action('sp_ui_builder_build_data_controls_type', $ui_element_definition['data_controls'], $ui_ele['id_key'], $this /*as long as it is not nashesary it is a recommended that we do not rely on this object passing to keep it simple, but if it is required then we can pass it as well as if required we may also need to pass the caller obj wich is calling this class so not $this but the vary class wich is calling this function layer*/ );
+					do_action('sp_ui_builder_build_data_controls_type', $ui_element_definition['data_controls'], $ui_ele['id_key'], isset($ui_ele['id']) ? $ui_ele['id'] : '', $this /*as long as it is not nashesary it is a recommended that we do not rely on this object passing to keep it simple, but if it is required then we can pass it as well as if required we may also need to pass the caller obj wich is calling this class so not $this but the vary class wich is calling this function layer*/ );
 				}
 			}
 
@@ -559,8 +559,8 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 				
 				$preserve_form_key = $form_key;
 
-				if(!empty($form_value['appearence_controls']) and !empty($form_value['appearence_controls'][2]) and !empty($form_value['appearence_controls'][2]['id'])) {
-					$form_key = $form_value['appearence_controls'][2]['id'];
+				if(!empty($form_value['appearence_controls']) and !empty($form_value['appearence_controls'][2]) and !empty($form_value['appearence_controls'][2][/*'id'*/'id_key'])) {
+					$form_key = $form_value['appearence_controls'][2][/*'id'*/'id_key'];
 				}
 				$form_key.=$parent_key;
 
@@ -670,8 +670,8 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 			foreach ($form as $form_key => $form_value) {
 				
 				$safe_form_key = $form_key;
-				if(!empty($form_value['appearence_controls']) and !empty($form_value['appearence_controls'][2]) and !empty($form_value['appearence_controls'][2]['id'])) {
-					$form_key = $form_value['appearence_controls'][2]['id'];
+				if(!empty($form_value['appearence_controls']) and !empty($form_value['appearence_controls'][2]) and !empty($form_value['appearence_controls'][2][/*'id'*/'id_key'])) {
+					$form_key = $form_value['appearence_controls'][2][/*'id'*/'id_key'];
 				}
 				$form_key.=$depth;
 
@@ -911,7 +911,7 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 
         $this->build($ui, $option_key, $process_form,$ui_generator, $ui_definition);
 
-        $html ob_get_clean();
+        $html = ob_get_clean();
 
 		return $html;
 	}
