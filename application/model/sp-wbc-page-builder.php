@@ -32,17 +32,17 @@ class SP_WBC_Page_Builder extends \sp\wbc\system\core\SP_Page_Builder {
 
 		parent::build_page($ui,$key,$process_form,$ui_definition);
 
-		ACTIVE_TODO_OC_START
-		--we need to take care of this wen need to do the needful here when we implement composer support weri sun after the fast run of thes ui and page builder class hierarchy -- to h & to b
-		ACTIVE_TODO_OC_END
+		// ACTIVE_TODO_OC_START
+		// --we need to tac car of this wen need to do the need full here, we we impliment composeer supot weri sun after the fast run of thes ui and page builder class hierarche -- to h & to b
+		// ACTIVE_TODO_OC_END
 		$composer = \sp\theme\view\ui\Composer_Elements::instance();
 
 		if(!empty($ui)){
 
 			if(!empty($ui['widgets']) and is_array($ui['widgets'])){
-				ACTIVE_TODO_OC_START
-				--we ma need to du sumthing or the need full wen we implyment extenul page builder suport weri sun after the fast or secund run -- to h & to b
-				ACTIVE_TODO_OC_END
+				// ACTIVE_TODO_OC_START
+				// --we ma need to du sumthing or the need full wen we implyment externul page builder suport weri sun after the fast or secund run -- to h & to b
+				// ACTIVE_TODO_OC_END
 				if(array_search('header',$ui['widgets'])!==false) {
 					get_template_part('header');
 				}
@@ -60,16 +60,16 @@ class SP_WBC_Page_Builder extends \sp\wbc\system\core\SP_Page_Builder {
 					$this->ui = $ui;
 					$this->process_ui_form = $process_form;
 					
-					ACTIVE_TODO most probebli we ma need to call the ui builder class of the hire layers lick wbc application layer or even other hire layer or shimply the coller of the function can impliment thar verjon of this function and define wich ui builder calss to be colled fast but any way insted of that a hook based on sum other appropriat arcitacture is beter insted of the colur impliment ther vergan of this function and create the duplicat code. if nathig comes up atleast than simply mark it as todo by 3rd revishon -- to h & to b
+					// ACTIVE_TODO most probeli we ma need to call the ui builder class of the hire layers lick wbc application layer or even other hier layer or shimply the coluer of the function can impliment thar verjon of this function and defined wiche ui builder calss to be colued fast but any way insted of that a hook based of sum other appropriat arcitacer is beter insed of the colur impliment ther of vergan of this function an creat the duplicat code. if nathig cum sub last than simply markitsid todo by 3td revishon -- to h & to b
 						NOTE: so far is seems that below we have implimented the call to wbc ui builder build funaction.
 					//$this->build($ui['content']['form'],$key);
 					\eo\wbc\model\SP_WBC_Ui_Builder::instance()->build($ui['content']['form'],$key,$this->process_ui_form,null,$ui_definition);
 
 				}				
 
-				ACTIVE_TODO_OC_START
-				--we ma need to du sumthing or the need full wen we implyment extenul page builder suport weri sun after the fast or secund run -- to h & to b
-				ACTIVE_TODO_OC_END
+				// ACTIVE_TODO_OC_START
+				// --we ma need to du sumthing or the need full wen we implyment externul page builder suport weri sun after the fast or secund run -- to h & to b
+				// ACTIVE_TODO_OC_END
 				if(array_search('footer',$ui['widgets'])!==false) {					
 
 					if(array_key_exists($composer->get_prefered_builders(),$composer->get_builders()) and !empty($composer->get_footer_template())) {

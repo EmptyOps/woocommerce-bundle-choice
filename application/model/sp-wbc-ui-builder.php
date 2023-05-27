@@ -24,7 +24,9 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 		
 	}
 
-	-- As observed in the options layer, in the option halper layer, the get option function have the overrides paramiter wech is by default (overrides) equal to true, so lets just set it to false for the all get option call within wbc ui builder and maybe also within the generate_form funaction layer but if it is a complicated to confirm for generate form then simply do it here in the wbc ui builder and all other ui builder and page builder classes so lat simply check 6 classes  -- to h & -- to b
+	// ACTIVE_TODO_OC_START
+	// -- As observed in the options layer, in the option halper layer, the get option function have the overrides paramiter wech is by default (overrides) equal to true, so lets just set it to false for the all get option call within wbc ui builder and maybe also within the generate_form funaction layer but if it is a complicated to confirm for generate form then simply do it here in the wbc ui builder and all other ui builder and page builder classes so lat simply check 6 classes  -- to h & -- to b
+	// ACTIVE_TODO_OC_END
 	public function build($ui,$option_key='',$process_form = true,$ui_generator = null, $ui_definition = null){
 
 		parent::build($ui, $option_key, $process_form,$ui_generator, $ui_definition);
@@ -39,7 +41,7 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 			
 			foreach ($ui as $ui_key => $ui_ele) {
 				
-				-- a if /sp_theme_ui/application/view/ui/Base_Builder.php build function ni chhe
+				// -- a if /sp_theme_ui/application/view/ui/Base_Builder.php build function ni chhe
 				if(!empty($ui_definition['controls'][$ui_ele['id_key']]['configuration_controls']) and !empty($ui_definition['controls'][$ui_ele['id_key']]['configuration_controls'][2])){
 
 					if(!empty($ui_definition['controls'][$ui_ele['id_key']]['configuration_controls'][2]['action']) and $ui_definition['controls'][$ui_ele['id_key']]['configuration_controls'][2]['action']==='toggle_section') {
@@ -79,7 +81,7 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 
 	private function call_process_build($ui_key,$ui_ele,$ui,$option_key='',$process_form = true,$ui_generator = null, $ui_element_definition = null, $ui_definition = null){
 
-		NOTE: The das node support added in the ui builder is standard support with the simple and naturel structure. and the user can use this support to increase or decrease field no matter if it is supported on the wp customizer and external page builders like elementor and so on, which means if user can use this support than even if they do not use the increase or decrease support of the wp customizer or external page builders than also they can be fine with their requirement otherwise they are also free to use the support of the wp customizer or external page builder to increase or decrease in which case they can skip using this support. 
+		// NOTE: The das node support added in the ui builder is standard support with the simple and naturel structure. and the user can use this support to increase or decrease field no matter if it is supported on the wp customizer and external page builders like elementor and so on, which means if user can use this support than even if they do not use the increase or decrease support of the wp customizer or external page builders than also they can be fine with their requirement otherwise they are also free to use the support of the wp customizer or external page builder to increase or decrease in which case they can skip using this support. 
 
 		$this->process_build($ui_key, $ui_ele, $ui, $option_key, $process_form, $ui_generator, $ui_element_definition,$ui_definition);
 
@@ -105,7 +107,7 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 						$ui_ele['id_key'] = /*$ui_ele['id_key']*/$id_key_org."_".$i;
 					}
 
-					ACTIVE_TODO this is wary sansitiv flow issue here that we need to pass the brod layer variables data lick $ui_definition and so on to dapdown to althe layer and than that is calling back the mane function so we need to refactrit and mac sur that recarshon hapans only from the build funaction or next to the sub call_process_build function and the depandancy on passing $ui_definition all the way to the element files. so simply this is a reyali bade flow we need to refactrit as sun as we get sanche. and lats do is next by the 2ed revision and any how.-- to h & -- to b
+					// ACTIVE_TODO this is wary sansitiv flow issue here that we need to pass the broad layer variables data lick $ui_definition and so on to deep down to all the layer and than that is calling back the main function so we need to refactor it and mac sur that recarshon hapans only from the build funaction or next to the sub call_process_build function and the depandancy on passing $ui_definition all the way to the element files is removed. so simply this is a reyali bade flow we need to refactor it as sun as we get sanche. and lats do is max by the 2ed revision and any how.-- to h & -- to b
 					$this->process_build(
 						$i/*$ui_key*/, 
 
@@ -193,7 +195,7 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 					$control_group = 'label';
 				}
 
-				ACTIVE_TODO as aplicabel we need to do imprument or revision of the default_uis function for the below. but only if that is aplicabel or nashshori for the ui builder imprument. other wish simply markisid todo max by the fast or secnd revishon -- to h -- to b 
+				// ACTIVE_TODO as aplicabel we need to do impruvment or revision of the default_uis function for the below. but only if that is aplicabel or nashshori for the ui builder impruvment. other wish simply mark it as todo max by the fast or secnd revishon -- to h -- to b 
 				$controls = $ui_generator->default_uis($control_group/*'label'*/,$ui_element_definition['appearence_controls'][1]);
 
 				if(!empty($ui_element_definition['appearence_controls'][2]['control_key'])){
@@ -399,18 +401,23 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 				}					
 
 			}
-			-------------------------
-			-- a code sp_theme_ui/application/view/ui/Base_Builder.php no process_build() no che
 
-			--submodul ma move kervano che.....  but we need to dished the function overied flow or the hooks but hooks cims anneshryi exjshiv at this plse --to h & to b
+			// -------------------------
+			// -- a code sp_theme_ui/application/view/ui/Base_Builder.php no process_build() no che
+
+			// ACTIVE_TODO_OC_START
+			// --submodul ma move kervano che.....  but we need to dished the function overied flow or the hooks but hooks cims anneshryi exjshiv at this plse --to h & to b
+			// ACTIVE_TODO_OC_END
 			//if(!empty($ui_ele['configuration_controls']) and !empty($ui_ele['configuration_controls'][2])){
 			if (!empty($ui_element_definition['configuration_controls']) and !empty($ui_element_definition['configuration_controls'][2]) ) {
 				if( !empty($ui_element_definition['configuration_controls'][2]['type']) and $ui_element_definition['configuration_controls'][2]['type']=='wc_attribute_field'){
 
 					if(!empty($ui_element_definition['configuration_controls'][2]['option_key']) and !empty($ui_element_definition['configuration_controls'][2][/*'id'*/'id_key'])){
 
-						// NOTE: even though so far wc_attribute_field is used on the product page ui widgets but it can simply work within the loop scope of the archive and so on layers. it can work simply because the global $post variable refer to the reference of the post object in loop.
-							ACTIVE_TODO however we need to run and test it once before we consider using it within the loop scope. -- to h 
+						// ACTIVE_TODO_OC_START
+						// // NOTE: even though so far wc_attribute_field is used on the product page ui widgets but it can simply work within the loop scope of the archive and so on layers. it can work simply because the global $post variable refer to the reference of the post object in loop.
+						// 	ACTIVE_TODO however we need to run and test it once before we consider using it within the loop scope. -- to h 
+						// ACTIVE_TODO_OC_END
 
 						global $post;
 						if(!empty($post) and !is_wp_error($post)){
@@ -460,7 +467,7 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 					    			}
 
 					    		} 
-					    		ACTIVE_TODO here it is better if we can refactor the ui builder layers further and can use the standard appearance controls for managing the static label like text property for wc_attribute field which would be applicable when the attribute has no option selected for particular post or wc product. lets do it by 3rd revision or mark it is as todo. 
+					    		// ACTIVE_TODO here it is better if we can refactor the ui builder layers further and can use the standard appearance controls for managing the static label like text property for wc_attribute field which would be applicable when the attribute has no option selected for particular post or wc product or maybe simply applicable in all cases. lets do it by 3rd revision or mark it is as todo. 
 					    		elseif (!empty(wbc()->options->get_option($_option_key_,$_data_key_.'_text')) and empty($__data__) ) {
 					    			$___term_empty = true;
 					    			$__data__ = wbc()->options->get_option($_option_key_,$_data_key_.'_text');
@@ -469,8 +476,9 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 					    			$__data__ = 'N/A';
 					    		}
 
-					    		ACTIVE_TODO_OC_START
-					    		--	below layers needs refactoring where it needs to manage the ct, mm, % and so on hardcoded part, it should be simply either %s and everything else can not be managed here. and anyway it might not be necessary either as long as the preHTML and postHTML values are not unnecessarily taking care of the ct, mm, % and so on. 
+					    		// ACTIVE_TODO_OC_START
+					    		// --	below layers needs refactoring where it needs to manage the ct, mm, % and so on hardcoded part, it should be simply either %s and everything else can not be managed here. and anyway it might not be necessary either as long as the preHTML and postHTML values are not unnecessarily taking care of the ct, mm, % and so on.
+					    		// ACTIVE_TODO_OC_END
 					    		if(isset($ui_ele['value'])){
 					    			if(!empty($__data__)) {
 					    				$ui_ele['value'] = sprintf($ui_ele['value'],$__data__);
@@ -515,7 +523,7 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 				}
 			}
 
-			--submodul ma move kervano che.....  but we need to dished the function overied flow or the hooks but hooks cims anneshryi exjshiv at this plse --to h & to b
+			// --submodul ma move kervano che.....  but we need to dished the function overied flow or the hooks but hooks cims anneshryi exjshiv at this plse --to h & to b done
 				// -- also we need to mac syore that we refacter and upgrad the ajax handlare to send mail which is in controllers ajax folder -- to h & -- to b done
 			// if(!empty($ui_ele['data_controls']) and !empty($ui_ele['data_controls']['type'])){
 			if(!empty($ui_element_definition['data_controls']) and !empty($ui_element_definition['data_controls']['type'])){
@@ -529,29 +537,26 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 				}
 			}
 
-			
-			
+			// -------------------------
 
-
-			-------------------------
 			$ui_ele['option_key'] =$option_key;
 			$ui_ele['process_form'] =$process_form;
 			// passing self contained object so the template can use the child parameter in the $ui_ele to created a nested complax UI.
 			$ui_ele['builder'] = $this;
 
-			ACTIVE_TODO this is very sensitive flow issue here that we need to pass this broad layers variables and data like $ui_definition and so on deep down to all the layers and that is callling back this main build function so we need to refactor it and make sure that recursion happens only from the build function or max to the call process_build function and the depandancy of passing $ui_definition all the way to the element files. so simply this is a really bad flow and we need to refacrtor it as soon as we get chance and lets do it max by the second revision anyhow. -- to h & -- to b 
+			// ACTIVE_TODO this is very sensitive flow issue here that we need to pass this broad layers variables and data like $ui_definition and so on deep down to all the layers and that is callling back this main build function so we need to refactor it and make sure that recursion happens only from the build function or max to the call process_build function and the depandancy of passing $ui_definition all the way to the element files. so simply this is a really bad flow and we need to refacrtor it as soon as we get chance and lets do it max by the second revision anyhow. -- to h & -- to b 
 			$ui_ele['ui_definition'] = $ui_definition;
 
-			ACTIVE_TODO_OC_START			
-			ACTIVE_TODO even though it is vital to avoid keeping duplicates but till the form builder is not refactored till the form builder or say old version of ui builder also will load the duplicate components from the folder 'core/ui/components/'. but we must refactor the form builder or atleast refactor this part only so that we can avoid this huge duplicate code. lets do max by 1st or 2nd revision. -- to h & -- to b 
-			ACTIVE_TODO_OC_END
+			// ACTIVE_TODO_OC_START			
+			// ACTIVE_TODO even though it is vital to avoid keeping duplicates but till the form builder is not refactored till the form builder or say old version of ui builder also will load the duplicate components from the folder 'core/ui/components/'. but we must refactor the form builder or atleast refactor this part only so that we can avoid this huge duplicate code. lets do max by 1st or 2nd revision. -- to h & -- to b 
+			// ACTIVE_TODO_OC_END
 			wbc()->load->template('ui/element/'/*'core/ui/components/'*/.$ui_ele['type'],$ui_ele);
 		}
 	}
 
-	ACTIVE_TODO_OC_START
-	-a function most probly refactored karvana or simply ahiya thei remove thei jachhe wen we impliment externl page builder suport -- to h & to b
-	ACTIVE_TODO_OC_END
+	//ACTIVE_TODO_OC_START
+	// -a function most probly refactored karvana or simply ahiya thei remove thei jachhe wen we impliment externl page builder suport -- to h & to b
+	// ACTIVE_TODO_OC_END
 	public function elementor_form($object,$form,$depth=0,$parent_key='') {
 
 		if(!empty($form) and is_array($form)) {
@@ -662,9 +667,9 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 		}
 	}
 
-	ACTIVE_TODO_OC_START
-	-a function most probly refactored karvana or simply ahiya thei remove thei jachhe wen we impliment externl page builder suport -- to h & to b
-	ACTIVE_TODO_OC_END
+	// ACTIVE_TODO_OC_START
+	// -a function most probly refactored karvana or simply ahiya thei remove thei jachhe wen we impliment externl page builder suport -- to h & to b
+	// ACTIVE_TODO_OC_END
 	public function elementor_render($settings,$form,$depth='') {
 		if(!empty($form) and is_array($form)) {
 			foreach ($form as $form_key => $form_value) {
@@ -883,7 +888,9 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 
 	// added on 01-01-2022
 	// -system core mathi a function delete karva na chhe done
-	-- and jay thie a function juna ui builder ma call thaya hoy teni jagye aa class ma call karva na chhe, aa most probly theme adpshon check function, woo choice plugins root file ma thei and extension ni root file ma thei call thyela hachhe -- to h & to b
+	// ACTIVE_TODO_OC_START
+	// -- and jay thie a function juna ui builder ma call thaya hoy teni jagye aa class ma call karva na chhe, aa most probly theme adpshon check function, woo choice plugins root file ma thei and extension ni root file ma thei call thyela hachhe -- to h & to b
+	// ACTIVE_TODO_OC_END
 	public function theme_adaption_check() {
 		if( !empty(wbc()->sanitize->get('thadc')) && wbc()->sanitize->get('thadc') == 1 ) {
 			wbc()->load->model('utilities/eowbc_theme_adaption_check');
@@ -892,7 +899,9 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 	}
 
 	// - system core mathi a function delete karva na chhe done
-	-- and jay thie a function juna ui builder ma call thaya hoy teni jagye aa class ma call karva na chhe -- to h & to b
+	// ACTIVE_TODO_OC_START
+	// -- and jay thie a function juna ui builder ma call thaya hoy teni jagye aa class ma call karva na chhe -- to h & to b
+	// ACTIVE_TODO_OC_END
 	public static function js_template_wrap(string $id, string $html, string $js_templating_lib) {
 
 		// wrap with tag as appliable as per the js_templating_lib 
