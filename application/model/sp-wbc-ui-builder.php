@@ -40,22 +40,28 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 		if(!empty($ui) and is_array($ui)){
 			
 			foreach ($ui as $ui_key => $ui_ele) {
+
+				// wbc_pr('ffffffffffffff');
+				// wbc_pr($ui_key);
+				// wbc_pr($ui_ele);
+
+				$ui_ele_id_key = isset($ui_ele['id_key']) ? $ui_ele['id_key'] : null ;
 				
 				// -- a if /sp_theme_ui/application/view/ui/Base_Builder.php build function ni chhe
-				if(!empty($ui_definition['controls'][$ui_ele['id_key']]['configuration_controls']) and !empty($ui_definition['controls'][$ui_ele['id_key']]['configuration_controls'][2])){
+				if(!empty($ui_definition['controls'][$ui_ele_id_key]['configuration_controls']) and !empty($ui_definition['controls'][$ui_ele_id_key]['configuration_controls'][2])){
 
-					if(!empty($ui_definition['controls'][$ui_ele['id_key']]['configuration_controls'][2]['action']) and $ui_definition['controls'][$ui_ele['id_key']]['configuration_controls'][2]['action']==='toggle_section') {
+					if(!empty($ui_definition['controls'][$ui_ele_id_key]['configuration_controls'][2]['action']) and $ui_definition['controls'][$ui_ele_id_key]['configuration_controls'][2]['action']==='toggle_section') {
 
-						$_data_key_ = $ui_definition['controls'][$ui_ele['id_key']]['configuration_controls'][2][/*'id'*/'id_key'];
-						$_option_key_ = $ui_definition['controls'][$ui_ele['id_key']]['configuration_controls'][2]['control_key'];
+						$_data_key_ = $ui_definition['controls'][$ui_ele_id_key]['configuration_controls'][2][/*'id'*/'id_key'];
+						$_option_key_ = $ui_definition['controls'][$ui_ele_id_key]['configuration_controls'][2]['control_key'];
 
 						$type = '';
 						if(!empty($ui_ele['type'])){
 							$type = $ui_ele['type'];
 						} 
 
-						if(!empty($ui_definition['controls'][$ui_ele['id_key']]['configuration_controls'][2]['type'])) {
-							$type = $ui_definition['controls'][$ui_ele['id_key']]['configuration_controls'][2]['type'];
+						if(!empty($ui_definition['controls'][$ui_ele_id_key]['configuration_controls'][2]['type'])) {
+							$type = $ui_definition['controls'][$ui_ele_id_key]['configuration_controls'][2]['type'];
 						}
 
 						if(!empty($type)) {
@@ -65,14 +71,14 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 						if(wbc()->options->get_option($_option_key_,$_data_key_)){
 							continue;
 						} else {
-							$this->call_process_build($ui_key,$ui_ele,$ui,$option_key,$process_form,$ui_generator,isset($ui_definition['controls'][$ui_ele['id_key']])?$ui_definition['controls'][$ui_ele['id_key']]:null,$ui_definition);		
+							$this->call_process_build($ui_key,$ui_ele,$ui,$option_key,$process_form,$ui_generator,isset($ui_definition['controls'][$ui_ele_id_key])?$ui_definition['controls'][$ui_ele_id_key]:null,$ui_definition);		
 						}
 					} else {
-						$this->call_process_build($ui_key,$ui_ele,$ui,$option_key,$process_form,$ui_generator,isset($ui_definition['controls'][$ui_ele['id_key']])?$ui_definition['controls'][$ui_ele['id_key']]:null,$ui_definition);
+						$this->call_process_build($ui_key,$ui_ele,$ui,$option_key,$process_form,$ui_generator,isset($ui_definition['controls'][$ui_ele_id_key])?$ui_definition['controls'][$ui_ele_id_key]:null,$ui_definition);
 					}
 
 				} else {
-					$this->call_process_build($ui_key,$ui_ele,$ui,$option_key,$process_form,$ui_generator,isset($ui_definition['controls'][$ui_ele['id_key']])?$ui_definition['controls'][$ui_ele['id_key']]:null,$ui_definition);
+					$this->call_process_build($ui_key,$ui_ele,$ui,$option_key,$process_form,$ui_generator,isset($ui_definition['controls'][$ui_ele_id_key])?$ui_definition['controls'][$ui_ele_id_key]:null,$ui_definition);
 				}
 			}
 
