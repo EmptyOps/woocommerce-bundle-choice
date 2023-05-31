@@ -133,7 +133,7 @@ class Controller extends \eo\wbc\controllers\Controller {
 			'button'=>array('text','color','back_color','font_family','font_size','radius','visibility'),
 			'container'=>array('height','width','margin_left','margin_right','visibility'),
 			'wc_attribute_field'=>array('attribute','checkbox','text','visibility'),
-			'a'=>array('href','url','text','visibility')
+			'a'=>array('href','url','text','visibility'),
 			'td'=>array('text','color','back_color','font_family','font_size','visibility'),
 		);
 
@@ -166,9 +166,9 @@ class Controller extends \eo\wbc\controllers\Controller {
 			foreach($page_sections as $ps_key=>$ps_title){
 
 				$ui_definition = null;
-				if (method_exists($mdl_obj,'ui_{$control_key}_definition')) {
-					
-					$ui_definition = $mdl_obj->{'ui_{$control_key}_definition'}(null, $ps_key);
+				if (method_exists($mdl_obj,'ui_'.$control_key.'_definition')) {
+
+					$ui_definition = $mdl_obj->{'ui_'.$control_key.'_definition'}(null, $ps_key);
 
 				}
 
@@ -250,7 +250,7 @@ class Controller extends \eo\wbc\controllers\Controller {
 
 				// lup attr 
 
-				ACTIVE_TODO here instad of having our team and user to specify the node_type adishnaly for the controls fild it is beter if we can refacter it so that it can read dieracly from the ui array, so lats do it as long as it is posibul without lusing the balnche of the modules capling or cohesion. but it seems that like the das node count default fild below it is not possibel without compromising on the lusly cupled modules standerd, but lats think about if it is possibel. other wish as long as thar is no way and it seems naturel to lat users define it hard coded way lats mark it as invalid.
+				// ACTIVE_TODO here instad of having our team and user to specify the node_type adishnaly for the controls fild it is beter if we can refacter it so that it can read dieracly from the ui array, so lats do it as long as it is posibul without lusing the balnche of the modules capling or cohesion. but it seems that like the das node count default fild below it is not possibel without compromising on the lusly cupled modules standerd, but lats think about if it is possibel. other wish as long as thar is no way and it seems naturel to lat users define it hard coded way lats mark it as invalid.
 					// -- 	configuration controls and data controls ma node_type set karvanu avchhe? so far NO done 
 				if( !empty($form_value[$key][2]) and ( !empty($form_value[$key][2]['type']) or !empty($form_value[$key][2]['node_type']) ) ) {
 
@@ -291,8 +291,8 @@ class Controller extends \eo\wbc\controllers\Controller {
 
 					}
 
-					ACTIVE_TODO here we are depanding on the das node count default fild that is set from the data controls but in fusher we sud refacter the code as long as it is possible with loosely cupled flow to ansyor that the default count seting is read from the ui array diractly instad of dipanding on the defolt that is need to be set sapratly. but i thing thar is no essy way and if we do sumthing than it well not be lusly cupled so may be it is the work that we need our team and user to do to achive this. but if it is possibel than lats do it other wish we can mark it is todo or mac this point invalid.
-					ACTIVE_TODO and in futcher we may lick to provide on admin the increase or decrease support directly on the particular appearence or configuration tab instead of asking user to increase or decrease fast on the data tab. so that user expereince can be improved but as long as it is simple and feasible, and when and if we do that than afcorse we can use the sam das support that is added for the form builder but that exactly can not be used on form array but we can at least us that javascript api. lats do it if required by 3rd revision other wish we can mark it as todo. -- to h & -- to b 
+					// ACTIVE_TODO here we are depanding on the das node count default fild that is set from the data controls but in fusher we sud refacter the code as long as it is possible with loosely cupled flow to ansyor that the default count seting is read from the ui array diractly instad of dipanding on the defolt that is need to be set sapratly. but i thing thar is no essy way and if we do sumthing than it well not be lusly cupled so may be it is the work that we need our team and user to do to achive this. but if it is possibel than lats do it other wish we can mark it is todo or mac this point invalid.
+					// ACTIVE_TODO and in futcher we may lick to provide on admin the increase or decrease support directly on the particular appearence or configuration tab instead of asking user to increase or decrease fast on the data tab. so that user expereince can be improved but as long as it is simple and feasible, and when and if we do that than afcorse we can use the sam das support that is added for the form builder but that exactly can not be used on form array but we can at least us that javascript api. lats do it if required by 3rd revision other wish we can mark it as todo. -- to h & -- to b 
 					if( $key == 'data_controls' and !empty($form_value[$key][2]['das_node_enabled']) ) {
 
 						$controls[$form_key.'_das_node_count'] = array(
@@ -367,10 +367,10 @@ class Controller extends \eo\wbc\controllers\Controller {
 
 						$control_args = array();
 
-						ACTIVE_TODO in future in addition to help text we may also like to detect the text property of this field from the get text call and check if it is modifed from the laguage file(we can check by comparing the value retrieved from gettext call against the value of original_text property of the appearance control, and maybe the gettext call value would be directly available in the prehtml property of ui node so we may not need to do anything for aquring the value of gettext call) then we can show warning here that or disable this text field that this is no more applicable.
+						// ACTIVE_TODO in future in addition to help text we may also like to detect the text property of this field from the get text call and check if it is modifed from the laguage file(we can check by comparing the value retrieved from gettext call against the value of original_text property of the appearance control, and maybe the gettext call value would be directly available in the prehtml property of ui node so we may not need to do anything for aquring the value of gettext call) then we can show warning here that or disable this text field that this is no more applicable.
 						
 						$control_args['info'] = array(
-													'label'=>'<b>If you are editing  the text from the language files then this text property will not work from here.</b>',
+													'label'=>'<b>If you are editing the text from the language files then this text property will not work from here.</b>',
 													'type'=>'visible_info',
 													'class'=>array('medium'),
 												);
