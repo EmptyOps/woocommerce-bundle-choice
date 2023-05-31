@@ -166,9 +166,9 @@ class Controller extends \eo\wbc\controllers\Controller {
 			foreach($page_sections as $ps_key=>$ps_title){
 
 				$ui_definition = null;
-				if (method_exists($mdl_obj,'ui_{$control_key}_definition')) {
-					
-					$ui_definition = $mdl_obj->{'ui_{$control_key}_definition'}(null, $ps_key);
+				if (method_exists($mdl_obj,'ui_'.$control_key.'_definition')) {
+
+					$ui_definition = $mdl_obj->{'ui_'.$control_key.'_definition'}(null, $ps_key);
 
 				}
 
