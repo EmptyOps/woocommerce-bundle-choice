@@ -124,7 +124,8 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 						$process_form, 
 						$ui_generator, 
 
-						isset($ui_definition['controls'][$ui_ele['das_node_defaults'][$i]['id_key']]) ? $ui_definition['controls'][$ui_ele['das_node_defaults'][$i]['id_key']] : $ui_element_definition,
+						// isset($ui_definition['controls'][$ui_ele['das_node_defaults'][$i]['id_key']]) ? $ui_definition['controls'][$ui_ele['das_node_defaults'][$i]['id_key']] : 
+						$ui_element_definition,
 
 						$ui_definition
 					);
