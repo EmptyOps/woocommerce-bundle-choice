@@ -4,10 +4,11 @@
 */
 namespace eo\wbc\system\core;
 use \sp\theme\view\ui\Composer_Elements;
+use eo\wbc\model\interfaces\Builder;
 
 defined( 'ABSPATH' ) || exit;
 
-class SP_Page_Builder extends \sp\theme\view\ui\Base_Builder {
+class SP_Page_Builder implements Builder {
 
 	private static $_instance = null;
 

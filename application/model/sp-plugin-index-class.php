@@ -311,9 +311,13 @@ if(!class_exists('SP_Plugin_Index_Class') ) {
 				});
 			}
 
-			register_activation_hook( $this->getFILE(), 'SP_Extensions_Bootstrap::activate');
-			register_deactivation_hook( $this->getFILE(), 'SP_Extensions_Bootstrap::deactivate');
-			register_uninstall_hook( $this->getFILE(), 'SP_Extensions_Bootstrap::uninstall');
+			// ACTIVE_TODO temp. remove below temp when we finalize the implementation of the activate, deactivate and uninstall callback. and lets do it as soon as we get the chance, as this is critical for occasional maintainance, especially gathering user feedbacks or running campaigns on activate actions, user experience and so on. maybe lets do it in 2nd or 3rd even if there is no demand in particular. -- to h 
+			if( false ) {
+
+				register_activation_hook( $this->getFILE(), 'SP_Extensions_Bootstrap::activate');
+				register_deactivation_hook( $this->getFILE(), 'SP_Extensions_Bootstrap::deactivate');
+				register_uninstall_hook( $this->getFILE(), 'SP_Extensions_Bootstrap::uninstall');
+			}
 
 		}
 

@@ -7,7 +7,7 @@ use \sp\theme\view\ui\Composer_Elements;
 
 defined( 'ABSPATH' ) || exit;
 
-class SP_WBC_Page_Builder extends \sp\wbc\system\core\SP_Page_Builder {
+class SP_WBC_Page_Builder extends \eo\wbc\system\core\SP_Page_Builder {
 
 	private static $_instance = null;
 
@@ -61,7 +61,7 @@ class SP_WBC_Page_Builder extends \sp\wbc\system\core\SP_Page_Builder {
 					$this->process_ui_form = $process_form;
 					
 					// ACTIVE_TODO most probeli we ma need to call the ui builder class of the hire layers lick wbc application layer or even other hier layer or shimply the coluer of the function can impliment thar verjon of this function and defined wiche ui builder calss to be colued fast but any way insted of that a hook based of sum other appropriat arcitacer is beter insed of the colur impliment ther of vergan of this function an creat the duplicat code. if nathig cum sub last than simply markitsid todo by 3td revishon -- to h & to b
-						NOTE: so far is seems that below we have implimented the call to wbc ui builder build funaction.
+						// NOTE: so far it seems that below we have implimented the call to wbc ui builder build funaction.
 					//$this->build($ui['content']['form'],$key);
 					\eo\wbc\model\SP_WBC_Ui_Builder::instance()->build($ui['content']['form'],$key,$this->process_ui_form,null,$ui_definition);
 

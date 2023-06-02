@@ -133,7 +133,7 @@ class Controller extends \eo\wbc\controllers\Controller {
 			'button'=>array('text','color','back_color','font_family','font_size','radius','visibility'),
 			'container'=>array('height','width','margin_left','margin_right','visibility'),
 			'wc_attribute_field'=>array('attribute','checkbox','text','visibility'),
-			'a'=>array('href','url','text','visibility'),
+			'a'=>array(/*'href',*/'url','text','visibility'),
 			'td'=>array('text','color','back_color','font_family','font_size','visibility'),
 		);
 
@@ -231,6 +231,7 @@ class Controller extends \eo\wbc\controllers\Controller {
 		
 		foreach ($form as $form_key => $form_value) {
 			
+			// ACTIVE_TODO is the use of xor intentional or just a silly mistake, lets confirm and replace it with the or when required if it is affecting our team and user experience. or otherwise mark it as todo by 3rd revision. -- to h 
 			if(!empty($form_value[$key]) and ( empty($this->check_show_on_admin) xor (!empty($form_value[$key][2]) and !empty($form_value[$key][2]['show_on_admin']) ) ) ) {	
 
 				$control_element = array();
@@ -284,7 +285,7 @@ class Controller extends \eo\wbc\controllers\Controller {
 								
 								for($i = 0; $i<$das_node_count; $i++) {
 
-									$controls = $this->generate_form_controls($controls, $control_element, $form_value, $key,$form_key.'_'.$i, $admin_ui, $is_ui_definition);
+									$controls = $this->generate_form_controls($controls, $control_element, $form_value, $key,($form_key.'_'.$i), $admin_ui, $is_ui_definition);
 								}
 							}
 						}
@@ -296,7 +297,7 @@ class Controller extends \eo\wbc\controllers\Controller {
 					if( $key == 'data_controls' and !empty($form_value[$key][2]['das_node_enabled']) ) {
 
 						$controls[$form_key.'_das_node_count'] = array(
-							'label'=>'increase\decrease '.$form_value[$key][0],
+							'label'=>'increase/decrease '.$form_value[$key][0],
 							'type'=>'number',
 							'value'=> ( !empty($form_value[$key][2]['das_node_count_default']) ? $form_value[$key][2]['das_node_count_default'] : 0 ),							
 							'sanitize'=>'sanitize_text_field',
@@ -353,7 +354,7 @@ class Controller extends \eo\wbc\controllers\Controller {
 	}
 
 	private function generate_form_controls($controls, $control_element, $form_value, $key, $form_key, $admin_ui, $is_ui_definition = false) {
-		
+
 		foreach ($control_element as $control) {
 
 			// NOTE: here we are implementing some specific and necessary peoperties for the elements which is required to be done at the defecto layer like from here.
@@ -401,10 +402,11 @@ class Controller extends \eo\wbc\controllers\Controller {
 				// 	-- we can not use id for das other wish it well be com vari canfuging -- to h done 
 				if( $is_ui_definition ) {
 
-					if(!empty($form_value[$key][2]['id_key'])){
+					// NOTE: disabled below if because for the ui_definition based upgraded layer the id_key and the form_key is alaways same. and when the form_key reach above it have some overrides so need to take that into consideration so this is commented. 
+					// if(!empty($form_value[$key][2]['id_key'])){
 
-						$control_key = $form_value[$key][2]['id_key'].'_'.$control;
-					}
+					// 	$control_key = $form_value[$key][2]['id_key'].'_'.$control;
+					// }
 				} else {
 
 					if(!empty($form_value[$key][2]['id'])){
@@ -445,6 +447,7 @@ class Controller extends \eo\wbc\controllers\Controller {
 		
 		foreach ($form as $form_key => $form_value) {
 			
+			// ACTIVE_TODO is the use of xor intentional or just a silly mistake, lets confirm and replace it with the or when required if it is affecting our team and user experience. or otherwise mark it as todo by 3rd revision. -- to h 
 			if(!empty($form_value[$key]) and ( empty($this->check_show_on_admin) xor (!empty($form_value[$key][2]) and !empty($form_value[$key][2]['show_on_admin']) ) ) ) {	
 
 				$control_element = array();

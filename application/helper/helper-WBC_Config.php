@@ -47,6 +47,7 @@ class WBC_Config {
 
 
 		 		array( 'type'=>'file', 'path'=> constant('EOWBC_DIRECTORY')."/application/system/core/sp-ui-builder.php" ),
+		 		array( 'type'=>'file', 'path'=> constant('EOWBC_DIRECTORY')."/application/system/core/sp-page-builder.php" ),
 
 			), 
 			'both'=> array(

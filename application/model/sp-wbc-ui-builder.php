@@ -295,7 +295,7 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 				/*--------------
 				-- a code sp_theme_ui/application/view/ui/Base_Builder.php no process_build() no che*/
 
-				if(in_array('href',$controls)) {
+				if(in_array(/*'href'*/'url',$controls)) {
 			
 					if(empty($ui_ele['href'])){
 						$ui_ele['href'] = '';
@@ -448,10 +448,10 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 								}
 
 								// if( !empty(wbc()->options->get_option($_option_key_,$_data_key_.'_attribute')) and !empty($item_attributes['pa_'.wbc()->options->get_option($_option_key_,$_data_key_.'_attribute')])) {
-								if( !empty($attribute_slug) and !empty($item_attributes['pa_'.$attribute_slug])) {
+								if( !empty($attribute_slug) and !empty($item_attributes[/*'pa_'.*/$attribute_slug])) {
 
 							    	// $data_term = $item_attributes['pa_'.wbc()->options->get_option($_option_key_,$_data_key_.'_attribute')];
-							    	$data_term = $item_attributes['pa_'.$attribute_slug];
+							    	$data_term = $item_attributes[/*'pa_'.*/$attribute_slug];
 
 							    	if(!empty($data_term) and !is_wp_error($data_term) and !empty($data_term->get_options())){
 							    		$data_term = get_term_by('id',$data_term->get_options()[0],$data_term->get_name());
@@ -924,7 +924,7 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 
         ob_start();
 
-        $this->build($ui, $option_key, $process_form,$ui_generator, $ui_definition);
+        $this->build($ui, $option_key, $process_form, $ui_generator, $ui_definition);
 
         $html = ob_get_clean();
 
