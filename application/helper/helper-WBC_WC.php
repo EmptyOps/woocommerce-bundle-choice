@@ -782,4 +782,48 @@ class WBC_WC {
         return wc_attribute_taxonomy_name_by_id((int) $attribute_id);
     }
 
+    public function slug_to_label($type, $slug, $taxonomy=null) {
+
+        if($type == 'prod_cat') {
+
+            $taxonomy = 'product_cat'; 
+
+            $term = $this->get_term_by('slug',$slug,$taxonomy);
+
+            if(!empty($term) and !is_wp_error($term)) {
+                 return $term->name;
+            }
+            
+
+        } elseif($type == 'attr') {
+
+            $taxonomy = $slug; 
+
+            if( strpos($taxonomy, 'pa_') !== 0 ) {
+
+                $taxonomy   = 'pa_' . $taxonomy; 
+            }
+
+            return wc_attribute_label( $taxonomy );
+            
+        } elseif($type == 'attr_opt') {
+
+            if( strpos($taxonomy, 'pa_') !== 0 ) {
+
+                $taxonomy   = 'pa_' . $taxonomy; 
+            }
+
+            $term = $this->get_term_by('slug',$slug,$taxonomy);
+
+            if(!empty($term) and !is_wp_error($term)) {
+                 return $term->name;
+            }
+
+        } else {
+
+        }
+
+        return null;
+    }
+
 }
