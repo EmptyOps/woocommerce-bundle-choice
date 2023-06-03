@@ -46,12 +46,11 @@ class Controller extends \eo\wbc\controllers\Controller{
 
         $template_path = wbc()->load->template_path($args); 
 
-        if(!empty($data['sp_localize_key']) && !empty($data['sp_localize_data']) ){
-
+        if(!empty($args['data']['sp_localize_key']) && !empty($args['data']['sp_localize_data'])) {
             // ACTIVE_TODO right now we are simply reliying on the load instantly option available within the wbc load library layer but in future when we merge with the upgraded QCed branch wich is lounch on the wp org at that time we need to refactore and upgrade the code here to make it work with the stadard wp enquescript and localize funtion so that our updats are not paused becouse of this load instance script tag uses. and this is ofcourse by any means we need to do it when merge this branch for launch in wp org and so on. and as per the standard we also need to do this. -- to a && -- to h  
-            wbc()->load->asset("localize_data", "", array(), "", true, false, $args['data']['sp_localize_key'], $args['data']['sp_localize_data']);
+            wbc()->load->asset("localize_data", "", array(), "", true, false, $args['data']['sp_localize_key'], $args['data']['sp_localize_data'], false, false, null, false, true);
 
-            // unset is for to avoid creating localize data twice if there is any recursion here as well as to optimize memory foot print since we do not need this large data var any more after it is loaded already.
+            // unset is for to avoid creating localize data clise if there is any recurtion here as well as to optimize memory uses since we do not need this large data var any more after it is loaded already.
             unset($args['data']['sp_localize_key']);
             unset($args['data']['sp_localize_data']);
         }
