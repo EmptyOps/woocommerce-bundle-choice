@@ -3429,6 +3429,8 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
     
     process_gallery_images_data_private(images) {
 
+        var _this = this;
+
         _this.process_images_template_private(images);
 
         var process_gallery_images_data_callback = null;
