@@ -121,7 +121,7 @@ if(!class_exists('WBC_Loader')) {
 
 		}
 
-		public function asset($type,$path,$param = array(),$version="",$load_instantly=false,$is_prefix_handle=false,$localize_var=null,$localize_var_val=null,$in_footer = false,$is_absolute_url = false,$singleton_function = null,$is_skip_jquery = false,$is_stringify = false) {
+		public function asset($type,$path,$param = array(),$version="",$load_instantly=false,$is_prefix_handle=false,$localize_var=null,$localize_var_val=null,$in_footer = false,$is_absolute_url = false,$singleton_function = null,$is_skip_jquery = false) {
 		
 			// NOTE: load_instantly solution provided here is for expesional scenarios only. and for the most of the users on the free support tickets and so on we must fix the actual loading problems to ensure that for most of the scenarios not even platforms the standard solution work and this solution is to be used hardcoded and for temporary periods only for some specific user environments and in the quick support requirements.
 			// NOTE: this solution assumes the loading sequance of caller, so it must be handled carefully and clearly by the loading sequances of the caller.
@@ -280,22 +280,12 @@ if(!class_exists('WBC_Loader')) {
 						// NOTE: and since this is about dump to browser so loading sequance hooks and the output buffer should be kept in mind. 
 					if( !empty($localize_var) && !empty($localize_var_val) ) {
 					//echo "load_localize_data inner if";
-
-						if($is_stringify) {
-							
-							?>
-							<script>
-								var <?php echo $localize_var; ?> = JSON.stringify('<?php echo json_encode($localize_var_val); ?>');
-							</script>
-							<?php							
-						} else {		
 										
-							?>
-							<script>
-								var <?php echo $localize_var; ?> = JSON.parse('<?php echo json_encode($localize_var_val); ?>');
-							</script>
-							<?php
-						}
+						?>
+						<script>
+							var <?php echo $localize_var; ?> = JSON.parse('<?php echo json_encode($localize_var_val); ?>');
+						</script>
+						<?php
 
 					} elseif( !empty(array_keys($param)[0]) && !empty($param[array_keys($param)[0]]) ) {
 					// echo "localize_data inner else";
