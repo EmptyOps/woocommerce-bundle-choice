@@ -101,7 +101,7 @@ jQuery(function(){
 						});
 						return true; }) ) {
 
-						ACTIVE_TODO For better user experience we need to show parecise validation messages here and especially as we planned and mentioned points sum war else in the common email handler and so on. we need to move all validation to php side and mac sure the validation error messages refer to the particular field (label) for which it is generated, this is important for the user experience so lets do it for the all validation error messages and warnings throughout this js ui builder layer and all over ui builder layer. lats do this max by 2nd or 3rd revision anyhow. -- to h & -- to b
+						// ACTIVE_TODO For better user experience we need to show parecise validation messages here and especially as we planned and mentioned points sum war else in the common email handler and so on. we need to move all validation to php side and mac sure the validation error messages refer to the particular field (label) for which it is generated, this is important for the user experience so lets do it for the all validation error messages and warnings throughout this js ui builder layer and all over ui builder layer. lats do this max by 2nd or 3rd revision anyhow. -- to h & -- to b
 						//alert('Please set unique email to the fields.');
 						alert('Please set unique email within all applicable email fields.');
 						validation_status = false;
