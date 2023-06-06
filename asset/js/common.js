@@ -141,6 +141,16 @@ if(window.document.splugins.common.is_item_page || window.document.splugins.comm
     return (val == undefined || val == null || val.length <= 0) ? true : false;
  }
 
+
+window.document.splugins.common.preload_images = function(val) {
+    
+    for (var i = 0; i < arguments.length; i++) {
+        images[i] = new Image();
+        images[i].src = preload.arguments[i];
+    }
+    
+ }
+
 /**
  * http://stackoverflow.com/a/10997390/11236
  */ 
