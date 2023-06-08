@@ -1,7 +1,6 @@
 <?php
-
-
 namespace eo\wbc;
+
 /**
  *	Plugins's main class to begin all the oprations.
  */
@@ -125,8 +124,31 @@ class WooCommerce_Bundle_Choice_Bootstrap {
 	public function ajax(){
 
 		if(!empty(wbc()->sanitize->post('email_header_template')) and !empty(wbc()->sanitize->post('email_body_template'))) {
-			require_once constant('EOWBC_DIRECTORY').'application/controllers/ajax/common_email_handler.php';
-			
+
+			// NOTE: below we have added the singleton function based flow for security to avoid exposing and consuming the php resolver_path directly. this is vital for security concerns. and maybe we may like to make it a permanent practice. 
+			// 	ACTIVE_TODO so we need to confirm the above said point means below flow if it is mature architecture otherwise we need to make necessary improvements but need to make the mature and solid architecture. lets do by 2nd revision maybe. -- to h 
+			if (wbc()->sanitize->post('resolver_path') == 'sp-ssm-themes-application-controllers-ajax-ui-builder-build-data-controls-type-resolver') {
+
+				// ACTIVE_TODO for extensions we have added support here but eeventaully should move it to the extensions bootstrap class. so lets do it by 2nd or 3rd recvision maybe. and if due to any reason the extensions bootstrap ajax function is executed first than we should do it now. -- to h 
+				// NOTE: for security reasons we must use the resolver if conditions below instead of making the singleton function dynamic. 
+				if( wbc()->sanitize->post('resolver') == 'sp-fmrs' ){
+
+					require_once constant( strtoupper( sp_fmrs()->SP_Extension()->singleton_function() ).'_DIRECTORY' ).'application/library/shared/submodule/sp_ssm_themes/application/controllers/ajax/ui-builder-build-data-controls-type-resolver.php';
+				
+				} else if( wbc()->sanitize->post('resolver') == 'request-diamond' ){
+
+					require_once constant( strtoupper( sp_rad()->SP_Extension()->singleton_function() ).'_DIRECTORY' ).'application/library/shared/submodule/sp_ssm_themes/application/controllers/ajax/ui-builder-build-data-controls-type-resolver.php';
+				
+				} else if( wbc()->sanitize->post('resolver') == 'bookappoint' ){
+
+					require_once constant( strtoupper( sp_baa()->SP_Extension()->singleton_function() ).'_DIRECTORY' ).'application/library/shared/submodule/sp_ssm_themes/application/controllers/ajax/ui-builder-build-data-controls-type-resolver.php';
+				}
+
+			} else {
+
+				require_once constant('EOWBC_DIRECTORY').'application/controllers/ajax/common_email_handler.php';
+			}
+				
 		} elseif(!empty(wbc()->sanitize->post('_wpnonce')) and !empty(wbc()->sanitize->post('resolver'))) {	
 
 			$resolver_path = constant('EOWBC_DIRECTORY').'application/controllers/ajax/'.sanitize_text_field(wbc()->sanitize->post('resolver')).'.php';				

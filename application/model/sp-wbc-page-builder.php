@@ -7,7 +7,7 @@ use \sp\theme\view\ui\Composer_Elements;
 
 defined( 'ABSPATH' ) || exit;
 
-class SP_WBC_Page_Builder extends \sp\wbc\system\core\SP_Page_Builder {
+class SP_WBC_Page_Builder extends \eo\wbc\system\core\SP_Page_Builder {
 
 	private static $_instance = null;
 
@@ -28,13 +28,21 @@ class SP_WBC_Page_Builder extends \sp\wbc\system\core\SP_Page_Builder {
 		return $this->ui;
 	}
 
-	public function build_page($ui,$key = 'theme_ui',$process_form = true) {
+	public function build_page($ui,$key = 'theme_ui',$process_form = true,$ui_definition = null) {
 
+		parent::build_page($ui,$key,$process_form,$ui_definition);
+
+		// ACTIVE_TODO_OC_START
+		// --we need to tac car of this wen need to do the need full here, we we impliment composeer supot weri sun after the fast run of thes ui and page builder class hierarche -- to h & to b
+		// ACTIVE_TODO_OC_END
 		$composer = \sp\theme\view\ui\Composer_Elements::instance();
 
 		if(!empty($ui)){
 
 			if(!empty($ui['widgets']) and is_array($ui['widgets'])){
+				// ACTIVE_TODO_OC_START
+				// --we ma need to du sumthing or the need full wen we implyment externul page builder suport weri sun after the fast or secund run -- to h & to b
+				// ACTIVE_TODO_OC_END
 				if(array_search('header',$ui['widgets'])!==false) {
 					get_template_part('header');
 				}
@@ -51,9 +59,17 @@ class SP_WBC_Page_Builder extends \sp\wbc\system\core\SP_Page_Builder {
 				if(array_search('content',$ui['widgets'])!==false and !empty($ui['content'])) {
 					$this->ui = $ui;
 					$this->process_ui_form = $process_form;
-					$this->build($ui['content']['form'],$key);
+					
+					// ACTIVE_TODO most probeli we ma need to call the ui builder class of the hire layers lick wbc application layer or even other hier layer or shimply the coluer of the function can impliment thar verjon of this function and defined wiche ui builder calss to be colued fast but any way insted of that a hook based of sum other appropriat arcitacer is beter insed of the colur impliment ther of vergan of this function an creat the duplicat code. if nathig cum sub last than simply markitsid todo by 3td revishon -- to h & to b
+						// NOTE: so far it seems that below we have implimented the call to wbc ui builder build funaction.
+					//$this->build($ui['content']['form'],$key);
+					\eo\wbc\model\SP_WBC_Ui_Builder::instance()->build($ui['content']['form'],$key,$this->process_ui_form,null,$ui_definition);
+
 				}				
 
+				// ACTIVE_TODO_OC_START
+				// --we ma need to du sumthing or the need full wen we implyment externul page builder suport weri sun after the fast or secund run -- to h & to b
+				// ACTIVE_TODO_OC_END
 				if(array_search('footer',$ui['widgets'])!==false) {					
 
 					if(array_key_exists($composer->get_prefered_builders(),$composer->get_builders()) and !empty($composer->get_footer_template())) {
@@ -67,9 +83,10 @@ class SP_WBC_Page_Builder extends \sp\wbc\system\core\SP_Page_Builder {
 		}
 	}
 
-	public static function build_page_widgets($ui,$page_key,$args = array(),$is_return_html = false){
-		/*echo "build_page_widgets";
-		wbc_pr($page_key);*/
+	public static function build_page_widgets($ui,$page_key,$args = array(),$is_return_html = false,$ui_definition = null){
+		
+		parent::build_page_widgets($ui,$page_key,$args,$is_return_html,$ui_definition);
+
 		$ui=array(
 			'widgets'=>array('content'),
 			'content'=>array(
@@ -84,14 +101,13 @@ class SP_WBC_Page_Builder extends \sp\wbc\system\core\SP_Page_Builder {
         	ob_start();
         }
 
-        \sp\theme\view\ui\builder\Page_Builder::instance()->build_page($ui);
+        /*\sp\theme\view\ui\builder\Page_Builder*/ self::instance()->build_page($ui,'theme_ui',true,$ui_definition);
         
         if ($is_return_html) {
         	return ob_get_clean();
         }	
 		
 	}
-
 }
 
 /*$all_post_ids = get_posts(array(
