@@ -142,12 +142,12 @@ if(window.document.splugins.common.is_item_page || window.document.splugins.comm
  }
 
 
-window.document.splugins.common.preload_images = function(val) {
+window.document.splugins.common.preload_images = function(src) {
     
-    for (var i = 0; i < arguments.length; i++) {
+    // for (var i = 0; i < arguments.length; i++) {
         images[i] = new Image();
-        images[i].src = preload.arguments[i];
-    }
+        images[i].src = /*preload.arguments[i]*/src;
+    // }
     
  }
 
