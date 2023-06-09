@@ -203,8 +203,10 @@ add_action('wp_footer',function(){
 
 		            // window.document.splugins.wbc.variations.gallery_images.feed_page.api.init();
 
-						// console.log('[js.vars.asset wp_footer] gim_feed variations');
 		            var base_container_loop_feed_page = jQuery( ( window.document.splugins.common._o( common_configs.gallery_images_configs, 'base_container_loop_selector') ? common_configs.gallery_images_configs.base_container_loop_selector : '.variations_form' ) );      
+						console.log('[js.vars.asset wp_footer] gim_feed variations');
+						console.log(base_container_loop_feed_page);
+						
 		            jQuery(base_container_loop_feed_page).sp_wbc_variations_gallery_images_feed_page();
 		            // ACTIVE_TODO_OC_START
 				      // ACTIVE_TODO Below ajax complete will have serious issue when the other ajax invokes this function means other than the eowbc js ajax call. So we need to simply bind on the success on render HTML notification simply the eowbs filter HTML notification and remove the ajax complete dependency from here and when that notification is fired inside the subscribe function here we can simply init the required modules. ya so simply put all the code that is the ajaxComplete function into the subscribe function of our notification module. -- to h
