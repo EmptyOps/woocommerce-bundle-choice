@@ -144,14 +144,27 @@ if(window.document.splugins.common.is_item_page || window.document.splugins.comm
     return (val == undefined || val == null || val.length <= 0) ? true : false;
  }
 
+ // reference: https://stackoverflow.com/a/175787
+ window.document.splugins.common.isNumeric = function(str) {
+    
+    // if (typeof str != "string") return false; // we only process strings!  
+    return !isNaN(str) && // use type coercion to parse the _entirety_ of the string (`parseFloat` alone does not do this)...
+     !isNaN(parseFloat(str)); // ...and ensure strings of whitespace fail
+ }
 
-window.document.splugins.common.preload_images = function(val) {
+
+ var images = [];
+ window.document.splugins.common.preload_images = function(src) {
     
-    for (var i = 0; i < arguments.length; i++) {
-        images[i] = new Image();
-        images[i].src = preload.arguments[i];
-    }
+    console.log('window.document.splugins.common.preload_images');
+    console.log(src);
+
+    // for (var i = 0; i < arguments.length; i++) {
+        var image/*s[i]*/ = new Image();
+        image/*s[i]*/.src = /*preload.arguments[i]*/src;
+    // }
     
+    images.push(image);
  }
 
 /**
