@@ -220,9 +220,14 @@ add_action('wp_footer',function(){
 		        		console.log(" js vars asset " + ( window.document.splugins.common._o( common_configs.gallery_images_configs, 'base_container_selector') ? common_configs.gallery_images_configs.base_container_selector : '.variations_form' ) );
 		            // window.document.splugins.wbc.variations.gallery_images.api.init();
 		            base_container = jQuery( ( window.document.splugins.common._o( common_configs.gallery_images_configs, 'base_container_selector') ? common_configs.gallery_images_configs.base_container_selector : '.variations_form' ) );      
+		            console.log('[js.vars.asset wp_footer] gim 01');
+		            console.log(base_container);
 		            jQuery(base_container).sp_wbc_variations_gallery_images();
 
 		            base_container_simple = jQuery( ( window.document.splugins.common._o( common_configs.gallery_images_configs, 'base_container_selector_simple') ? common_configs.gallery_images_configs.base_container_selector_simple : null /*ACTIVE_TODO_OC_START need to update here the base_container_selectore ACTIVE_TODO_OC_END */) );      
+		            console.log('[js.vars.asset wp_footer] gim 02');
+		            console.log(base_container);
+		            
 		            jQuery(base_container_simple).sp_wbc_variations_gallery_images({product_type:'simple'});
 
 		        // },2000);
@@ -238,8 +243,10 @@ add_action('wp_footer',function(){
 
 		            // window.document.splugins.wbc.variations.gallery_images.feed_page.api.init();
 
-						// console.log('[js.vars.asset wp_footer] gim_feed variations');
 		            var base_container_loop_feed_page = jQuery( ( window.document.splugins.common._o( common_configs.gallery_images_configs, 'base_container_loop_selector') ? common_configs.gallery_images_configs.base_container_loop_selector : '.variations_form' ) );      
+						console.log('[js.vars.asset wp_footer] gim_feed variations');
+						console.log(base_container_loop_feed_page);
+						
 		            jQuery(base_container_loop_feed_page).sp_wbc_variations_gallery_images_feed_page();
 		            // ACTIVE_TODO_OC_START
 				      // ACTIVE_TODO Below ajax complete will have serious issue when the other ajax invokes this function means other than the eowbc js ajax call. So we need to simply bind on the success on render HTML notification simply the eowbs filter HTML notification and remove the ajax complete dependency from here and when that notification is fired inside the subscribe function here we can simply init the required modules. ya so simply put all the code that is the ajaxComplete function into the subscribe function of our notification module. -- to h
@@ -351,6 +358,7 @@ add_action('wp_footer',function(){
 			window.setTimeout(function(){
 				/*global wc_add_to_cart_variation_params */
 				;(function ( $, window, document, undefined ) {
+
 						/**
 						 * VariationForm class which handles variation forms and attributes.
 						 */
@@ -916,16 +924,16 @@ add_action('wp_footer',function(){
 							var count  = 0;
 							var chosen = 0;
 
-							// console.log('A_OFF show_variation [getChosenAttributes]');
-							// console.log(this.$attributeFields);
-							// console.log(this);
+							console.log('A_OFF show_variation [getChosenAttributes]');
+							console.log(this.$attributeFields);
+							console.log(this);
 
 							this.$attributeFields.each( function() {
 								var attribute_name = $( this ).data( 'attribute_name' ) || $( this ).attr( 'name' );
 								var value          = $( this ).val() || '';
 
-								// console.log('A_OFF show_variation [getChosenAttributes] loop');
-								// console.log(value);
+								console.log('A_OFF show_variation [getChosenAttributes] loop');
+								console.log(value);
 
 								if ( value.length > 0 ) {
 									chosen ++;
@@ -1004,7 +1012,7 @@ add_action('wp_footer',function(){
 						 */
 						$.fn.wc_variation_form = function() {
 							
-							// console.log('A_OFF show_variation [wc_variation_form]');
+							console.log('A_OFF show_variation [wc_variation_form]');
 							// console.log(this);
 
 							new VariationForm( this );
@@ -1914,7 +1922,7 @@ add_action('wp_footer',function(){
 						 */
 						$.fn.wc_variation_form = function() {
 							
-							// console.log('A_ON show_variation [wc_variation_form]');
+							console.log('A_ON show_variation [wc_variation_form]');
 							// console.log(this);
 
 							new VariationForm( this );
