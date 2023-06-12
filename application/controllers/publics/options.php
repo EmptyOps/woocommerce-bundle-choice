@@ -23,18 +23,58 @@ class Options extends \eo\wbc\controllers\publics\Controller {
     	return true;
     }
     public function init($args = array()){
-    	$args['data'] = \eo\wbc\model\publics\SP_Model_Single_Product::instance()->get_data('swatches_init');
-    	$args['page_section'] = 'swatches';
-        self::instance()->selectron($args['page_section'],$args);
 
-        $args['data'] = \eo\wbc\model\publics\SP_Model_Single_Product::instance()->get_data('gallery_images_init');
-        \eo\wbc\model\publics\SP_Model_Single_Product::instance()->render_gallery_images_template($args);
+    	if(self::instance()->should_load_options_view()) {
 
-    	//call the getUI from here once so that default render_ui is called once at last for handling general matters -- to b done
-    		//--	and for getUI set two args first is $page_section and second is $args -- to b done
-    			//-- empty page_section means call will go to default render_ui function -- to b done
-    				//--	and so page_section param will also be passed to get_ui_definition but there it will be passed through in args param -- to b done
-    	$this->getUI(null,$args);
+	    	$args['data'] = \eo\wbc\model\publics\SP_Model_Single_Product::instance()->get_data('swatches_init');
+	    	$args['page_section'] = 'swatches';
+	        self::instance()->selectron($args['page_section'],$args);
+
+	        $args['data'] = \eo\wbc\model\publics\SP_Model_Single_Product::instance()->get_data('gallery_images_init');
+	        \eo\wbc\model\publics\SP_Model_Single_Product::instance()->render_gallery_images_template($args);
+
+	    	//call the getUI from here once so that default render_ui is called once at last for handling general matters -- to b done
+	    		//--	and for getUI set two args first is $page_section and second is $args -- to b done
+	    			//-- empty page_section means call will go to default render_ui function -- to b done
+	    				//--	and so page_section param will also be passed to get_ui_definition but there it will be passed through in args param -- to b done
+	    	$this->getUI(null,$args);
+    	}
+    }
+
+    public function should_load_options_view() {
+
+        $tiny_features_enable_only_for_categories = wbc()->options->get_option('tiny_features_item_page_option','tiny_features_enable_only_for_categories');
+        
+        $show_on_categories = !empty($tiny_features_enable_only_for_categories) ? explode(',', $tiny_features_enable_only_for_categories) : array();
+
+        if( !wbc_isEmptyArr($show_on_categories) ) { 
+
+			$ids = null;
+            
+            global $post;
+	        $pid = $post->ID;
+
+	        if(!empty($pid)) {
+	            $product = wbc()->wc->eo_wbc_get_product($pid); 
+	            
+	            if(!empty($product) and !is_wp_error($product)){
+
+	                $ids = $product->get_category_ids();
+	            }
+	        }
+
+			$result=array_intersect($show_on_categories,$ids);
+
+            if(!empty($result)) {
+
+                return true;
+            } else {
+
+                return false;       
+            }
+        }
+
+        return true;
     }
 
     public function selectron_hook_render($page_section,$container_class,$args = array()){

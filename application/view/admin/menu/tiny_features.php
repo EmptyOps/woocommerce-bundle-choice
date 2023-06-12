@@ -176,16 +176,7 @@ $form['data'] = array(
 					'type'=>'accordian',
 					'section_type'=>'end'
 				),
-				'tiny_features_advanced_tab_start'=>array(
-					'type'=>'accordian',
-					'section_type'=>'start',
-					'class'=>array('field', 'styled'),
-					'label'=>'<span class="ui large text">Advanced</span>',
-				),
-				'tiny_features_advanced_tab_end'=>array(
-					'type'=>'accordian',
-					'section_type'=>'end'
-				),
+				
 				'tiny_features_styling_tab_start'=>array(
 					'type'=>'accordian',
 					'section_type'=>'start',
@@ -196,6 +187,7 @@ $form['data'] = array(
 					'type'=>'accordian',
 					'section_type'=>'end'
 				),
+
 				'tiny_features_product_page_tab_start'=>array(
 					'type'=>'accordian',
 					'section_type'=>'start',
@@ -425,6 +417,7 @@ $form['data'] = array(
 					'type'=>'accordian',
 					'section_type'=>'end'
 				),
+
 				'tiny_features_shop_tab_start'=>array(
 					'type'=>'accordian',
 					'section_type'=>'start',
@@ -630,6 +623,7 @@ $form['data'] = array(
 					'type'=>'accordian',
 					'section_type'=>'end'
 				),
+
 				'tiny_features_special_attributes_tab_start'=>array(
 					'type'=>'accordian',
 					'section_type'=>'start',
@@ -641,6 +635,32 @@ $form['data'] = array(
 					'section_type'=>'end'
 				),
 
+				'tiny_features_advanced_tab_start'=>array(
+					'type'=>'accordian',
+					'section_type'=>'start',
+					'class'=>array('field', 'styled'),
+					'label'=>'<span class="ui large text">Advanced</span>',
+				),
+				'tiny_features_enable_only_for_categories'=>array(
+					'label'=>eowbc_lang('Enable Only For Categories(optional)'),
+					'type'=>'select',
+					'value'=> '',
+					'sanitize'=>'sanitize_text_field',
+					'options'=> \eo\wbc\model\Category_Attribute::instance()->get_category(),
+					'class'=>array('fluid','additions','search','multiple','clearable'),
+					'visible_info'=>array( 
+						'label'=>eowbc_lang('Simply select the categories for which only you want to enable the variation swatches. Leave it blank if you want to keep it on for all categories, by default it is enabled for all categories.'),
+						'type'=>'visible_info',
+						'class'=>array('small'),
+						'size_class'=>array('eight','wide'),
+					),
+					'size_class'=>array('three','wide'),
+					'inline'=>false,	
+				),
+				'tiny_features_advanced_tab_end'=>array(
+					'type'=>'accordian',
+					'section_type'=>'end'
+				),
 				// //--- start @a ---
 				// 'tiny_features_variation_swatches_admin_settings_and_configrations'=>array(
 				// 				'label'=>eowbc_lang('Variation Swatches Admin Settings And Configrations'),
