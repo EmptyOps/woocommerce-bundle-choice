@@ -46,7 +46,7 @@ class Controller extends \eo\wbc\controllers\Controller{
 
         $template_path = wbc()->load->template_path($args); 
 
-        if( wbc()->sanitize->get('is_test') == 2 ){
+        if( wbc()->sanitize->get('is_test') == 1 ){
 
             wbc_pr('sp_localize_key_dump');
             wbc_pr($args['data']['sp_localize_key']);
