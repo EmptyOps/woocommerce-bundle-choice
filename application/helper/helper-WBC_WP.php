@@ -259,4 +259,9 @@ class WBC_WP {
 
         return attachment_url_to_postid( $attachment_url );
     }
+
+    public function attachment_id_to_url($attachment_id) {
+        
+        return wp_get_attachment_url($attachment_id); 
+    } 
 }

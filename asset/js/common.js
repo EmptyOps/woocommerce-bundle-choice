@@ -144,6 +144,29 @@ if(window.document.splugins.common.is_item_page || window.document.splugins.comm
     return (val == undefined || val == null || val.length <= 0) ? true : false;
  }
 
+ // reference: https://stackoverflow.com/a/175787
+ window.document.splugins.common.isNumeric = function(str) {
+    
+    // if (typeof str != "string") return false; // we only process strings!  
+    return !isNaN(str) && // use type coercion to parse the _entirety_ of the string (`parseFloat` alone does not do this)...
+     !isNaN(parseFloat(str)); // ...and ensure strings of whitespace fail
+ }
+
+
+ var images = [];
+ window.document.splugins.common.preload_images = function(src) {
+    
+    console.log('window.document.splugins.common.preload_images');
+    console.log(src);
+
+    // for (var i = 0; i < arguments.length; i++) {
+        var image/*s[i]*/ = new Image();
+        image/*s[i]*/.src = /*preload.arguments[i]*/src;
+    // }
+    
+    images.push(image);
+ }
+
 /**
  * http://stackoverflow.com/a/10997390/11236
  */ 
@@ -190,7 +213,35 @@ if(window.document.splugins.common.is_item_page || window.document.splugins.comm
 
     var rows_txt = temp + "" + param + "=" + paramVal;
     return baseURL + "?" + newAdditionalURL + rows_txt;
-} 
+ } 
+
+ window.document.splugins.common.load_script_url = function(url,is_show_loading,callback) {
+ 
+    var s = document.createElement('script');
+    s.type = 'text/javascript';
+    s.async = false;
+    s.src = url;
+
+    // s.onload = callback;
+
+    var x = document.getElementsByTagName('head')[0];
+    x.appendChild(s);
+
+ }
+
+ window.document.splugins.common.load_css_url = function(url,is_show_loading,callback) {
+ 
+    var l = document.createElement('link');
+    l.rel = 'stylesheet';
+    l.type = 'text/css';
+    // l.async = false;
+    l.href = url;
+
+    // l.onload = l.onreadystatechange = callback;
+
+    var x = document.getElementsByTagName('head')[0];
+    x.appendChild(l);
+ }
 
 /*ACTIVE_TODO_OC_START
 var newURL = updateURLParameter(window.location.href, 'locId', 'newLoc');
@@ -757,6 +808,7 @@ window.document.splugins.wbc.variations = window.document.splugins.wbc.variation
  //                         //     --  and the name/key gallery_item_type may change, so lets just use the right one only -- to d and -- to b 
  //                                 --  lets simply name it type but within that e params that we thought of -- to h 
  //                                     --  and if this type param is detected then even though still the image or video base type is resepcted on applicable layers to achieve optimum reusability like we envision for the swatches module with base_type field, but the responsibility of managing templates will be on their applicable layers of extensions and they would either repond with template or just replace there on their layers -- to h 
+ //                                                --  now during implementation of the vwsz, after a through thought and study it feels that instead of implementing the base_type support further or even the idea of using the base types independently(and implement the template of vwsz using the attribute condition and publish 1-2 more hook from wbc for rendering template) felt unnecessary because with the first idea we had to invent some new structures or atleast ensure some necessary conditions while with the second the situation is similar where new strtucre and flow would be required. so instead just mimic the base type(now actually the flow of vwds) flow and so duplicated some few lines of template code. the reason was simple that we can simply reuse the same fundamental struycture and no need to implement and test new strctures but yeah some additional code will be required to implement the vwsz slider but that will its unique and standard. - but later we may like to try the either of the two ideas but anyway as of now it felt unnecessary and maybe in future also it may feel unnecessary. -- to h 
  //                                         --  so for this need to work out that now that js tempalte hook let the extensions to create and dump their own tempalte and manage simply on their end, this hook simply need to give that ability when above additional type is detected -- to b or -- to s or -- to a 
  //                                                -- the hook and tamplate neet to be at index leval  -- to a 
  //                                         --  and also need to publish configs accordingly for applicable extensions, and on this note publish configs of all extensions -- to s or -- to a 
@@ -1689,6 +1741,8 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
 
         // if( type == 'radio' )
 
+        var process_attribute_types_inner_callback = null;
+        window.document.splugins.events.api.notifyAllObservers( 'swatches', 'process_attribute_types_inner', {type:type}, process_attribute_types_inner_callback, _this./*#*/$base_container_private );              
     }
 
     /*#*/process_template_private(type, element) {
@@ -3218,7 +3272,8 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
             console.log(_this./*#*/$zoom_container_private);
             console.log(_this./*#*/data_private.current_variation);
 
-            _this./*#*/process_images_template_private(_this./*#*/data_private.current_variation.variation_gallery_images);            
+            // _this./*#*/process_images_template_private(_this./*#*/data_private.current_variation.variation_gallery_images);        
+            _this.process_gallery_images_data_private(_this./*#*/data_private.current_variation.variation_gallery_images);
         }
 
         var sp_variations_gallery_images_loaded_callback = null ;
@@ -3418,8 +3473,21 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
 
       }
 
+        // var process_images_template_callback = null;
+        // window.document.splugins.events.api.notifyAllObservers( 'gallery_images', 'process_images_template', { current_variation : _this./*#*/data_private.current_variation }, process_images_template_callback, _this.$base_container_private );
+
     };
- 
+    
+    process_gallery_images_data_private(images) {
+
+        var _this = this;
+
+        _this.process_images_template_private(images);
+
+        var process_gallery_images_data_callback = null;
+        window.document.splugins.events.api.notifyAllObservers( 'gallery_images', 'process_gallery_images_data', { /*images: images,*/ current_variation : _this./*#*/data_private.current_variation }, process_gallery_images_data_callback, _this.$base_container_private );
+    };
+
     /*#*/process_slider_template_private(images){
 
         // console.log("gim [process_images_template]");
@@ -4062,7 +4130,15 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
                  --  and both above function from inside call the process_template heirarchy of function like process_gallery_images_template -- to h   
                     --  we may not need show_gallery_images and show_variation_gallery_images, as long as we pass the right variable to process_images_template. and process_images_template is already created.      
         ACTIVE_TODO_OC_END*/
-        _this./*#*/process_images_template_private(variation.variation_gallery_images);
+        // _this./*#*/process_images_template_private(variation.variation_gallery_images);
+        _this.process_gallery_images_data_private(variation.variation_gallery_images);
+
+        // ACTIVE_TODO/TODO below notification is disabled becose is no more in use. But if required we can simply enable it by removing false condition. 
+        if(false) {
+
+            var variation_change_private_callback = null;
+            window.document.splugins.events.api.notifyAllObservers( 'gallery_images', 'variation_change_private', { current_variation : variation }, variation_change_private_callback, _this.$base_container_private );         
+        }
 
     }
  
@@ -4893,13 +4969,13 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
             //     -- and than we can simply get type from element data-type which is mentanable due to well maintained heirachy insted of below index based image data read which is bound to change.
 
 
-            var zoom_area_hover_in_callback = null;
 
             if(hover_media_index !== null) {
 
                 console.log('gim_feed [zoom_area_hover_in] if_01');
 
                 // window.document.splugins.events.api.notifyAllObservers( 'gallery_images_feed_page', 'zoom_area_hover_in', {type:images[index].extra_params_org.type,image:images[index]}, zoom_area_hover_in_callback, super.get_base_container() );            
+                var zoom_area_hover_in_callback = null;
                 window.document.splugins.events.api.notifyAllObservers( 'gallery_images_feed_page', 'zoom_area_hover_in', {type:images[hover_media_index].extra_params_org.type, 
                     hover_index_type: window.document.splugins.common._o(images,hover_media_index) ? images[hover_media_index].extra_params_org.type : null
                 , image:images[hover_media_index], container:super.get_zoom_container()}, zoom_area_hover_in_callback, super.get_base_container() );            
