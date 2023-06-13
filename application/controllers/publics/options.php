@@ -24,7 +24,11 @@ class Options extends \eo\wbc\controllers\publics\Controller {
     }
     public function init($args = array()){
 
+       	// if( wbc()->sanitize->get('is_test') == 2 ) {wbc()->common->var_dump( "wbc options init");}
+
     	if(self::instance()->should_load_options_view()) {
+
+           	// if( wbc()->sanitize->get('is_test') == 2 ) {wbc()->common->var_dump( "wbc options init if");}
 
 	    	$args['data'] = \eo\wbc\model\publics\SP_Model_Single_Product::instance()->get_data('swatches_init');
 	    	$args['page_section'] = 'swatches';
@@ -43,11 +47,15 @@ class Options extends \eo\wbc\controllers\publics\Controller {
 
     public function should_load_options_view() {
 
-        $tiny_features_enable_only_for_categories = wbc()->options->get_option('tiny_features_item_page_option','tiny_features_enable_only_for_categories');
+        $tiny_features_enable_only_for_categories = wbc()->options->get_option('tiny_features','tiny_features_enable_only_for_categories');
         
         $show_on_categories = !empty($tiny_features_enable_only_for_categories) ? explode(',', $tiny_features_enable_only_for_categories) : array();
 
+        // if( wbc()->sanitize->get('is_test') == 2 ) {wbc()->common->var_dump( "wbc options should_load_options_view"); wbc_pr($tiny_features_enable_only_for_categories);}
+
         if( !wbc_isEmptyArr($show_on_categories) ) { 
+
+            // if( wbc()->sanitize->get('is_test') == 2 ) {wbc()->common->var_dump( "wbc options should_load_options_view if 1");}
 
 			$ids = null;
             
@@ -67,8 +75,12 @@ class Options extends \eo\wbc\controllers\publics\Controller {
 
             if(!empty($result)) {
 
+            	// if( wbc()->sanitize->get('is_test') == 2 ) {wbc()->common->var_dump( "wbc options should_load_options_view if 2");}
+
                 return true;
             } else {
+
+            	// if( wbc()->sanitize->get('is_test') == 2 ) {wbc()->common->var_dump( "wbc options should_load_options_view else 2");}
 
                 return false;       
             }

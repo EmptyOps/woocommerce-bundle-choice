@@ -101,7 +101,10 @@ if(wp_verify_nonce(wbc()->sanitize->post('_wpnonce'),'eowbc_tiny_features')){
 	wbc()->options->update_option('tiny_features','tiny_features_shop_page_option_ui_bg_color',(empty(wbc()->sanitize->post('tiny_features_shop_page_option_ui_bg_color'))?'#ffffff':wbc()->sanitize->post('tiny_features_shop_page_option_ui_bg_color')));
 
 	wbc()->options->update_option('tiny_features','tiny_features_shop_page_option_ui_bg_color_hover',(empty(wbc()->sanitize->post('tiny_features_shop_page_option_ui_bg_color_hover'))?'#ffffff':wbc()->sanitize->post('tiny_features_shop_page_option_ui_bg_color_hover')));
-	
+
+
+	wbc()->options->update_option('tiny_features','tiny_features_enable_only_for_categories', (empty(wbc()->sanitize->post('tiny_features_enable_only_for_categories'))?'':wbc()->sanitize->post('tiny_features_enable_only_for_categories')));
+
 	//$res['msg'] = "Updated successfully!";
 	//wbc()->options->update_option('configuration','config_category',1);
 	//wbc()->options->update_option('configuration','config_map',1);
