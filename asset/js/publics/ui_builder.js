@@ -41,7 +41,13 @@ jQuery(function(){
 				jQuery(required_fields).each(function(index,field){
 					let value = jQuery(field).val();					
 					if( typeof(value)===typeof(undefined) || value.trim()==='' ){
-						alert('Please fill the required fields.');
+						if(jQuery(field).data('label') != '' ) {
+
+							alert('The '+jQuery(field).data('label')+' field is a required field.');
+						} else {
+
+							alert('Please fill the required fields.');
+						}
 						validation_status = false;						
 						return validation_status;
 					}
