@@ -77,6 +77,13 @@ if(!class_exists('WBC_Loader')) {
 		            wp_enqueue_script( 'fomantic-semantic.min');        
 		        },100);	
 					break;
+
+				case 'react':
+
+					wbc()->load->asset('js','https://unpkg.com/react@18/umd/react.production.min.js',array(),"",true,true,null,null,false,true,null,true);
+
+					break;
+
 		        case 'ion_rangeSlider':
 		        	
 		        	if( wbc()->sanitize->get('is_test') == 1 ) {
@@ -273,6 +280,7 @@ if(!class_exists('WBC_Loader')) {
 						// NOTE: and since this is about dump to browser so loading sequance hooks and the output buffer should be kept in mind. 
 					if( !empty($localize_var) && !empty($localize_var_val) ) {
 					//echo "load_localize_data inner if";
+										
 						?>
 						<script>
 							var <?php echo $localize_var; ?> = JSON.parse('<?php echo json_encode($localize_var_val); ?>');

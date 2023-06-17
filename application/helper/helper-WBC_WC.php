@@ -529,6 +529,8 @@ class WBC_WC {
             $option_list=array();
         } elseif( $format == 'opts_detailed' ) {
             $option_list=array();
+        } elseif( $format == 'opts_detailed' ) {
+            $option_list=array();
         }
 
         if(is_array($map_base) and !empty($map_base)) {
@@ -545,8 +547,8 @@ class WBC_WC {
                 $option_list = array_replace($option_list, self::get_productCats($base->slug, $format, $sp_eid_type_value)); //array_merge($option_list, self::get_productCats($base->slug, $format));
 
             } elseif( $format == 'id_and_title' ) {
+               
                 $option_list[$base->term_id] = $base->name;
-
             } elseif( $format == 'opts_detailed' ) {
 
                 // ACTIVE_TODO/TODO right now we are not supporting parent child structure because it is not necessary in the calling layers just because the slugs are unique for the category so it is not necessary. but if require then we can apply the structure here and at that time need to make necessary changes on the calling layer in dapii and so on. and if nothing comes up then simply mark it as TODO and remove ACTIVE_TODO by third revision -- to h  
@@ -588,6 +590,8 @@ class WBC_WC {
         } elseif( $format == 'opts_id_and_title' ) {
             $option_list=array();
         } elseif( $format == 'opts_detailed' ) {
+            $option_list=array();
+        } elseif( $format == 'detailed_sp_eid' ) {
             $option_list=array();
         }
 
@@ -635,6 +639,9 @@ class WBC_WC {
                             $option_list[$term->term_taxonomy_id] = array('attr'=>'data-sp_eid="'.$separator.'attr_opt'.$separator./*$attribute->attribute_id*/$term->term_taxonomy_id.$separator.$separator.$term->term_id.$separator.'" ', 'label'=>$term->name, 'slug'=>$term->slug);  
                         }
                     }
+                } elseif( $format == 'detailed_sp_eid' ) {
+
+                    $option_list[$separator.'attr'.$separator.$attribute->attribute_id] = array('label'=>$attribute->attribute_label, $format); 
                 }
             }
         }
@@ -851,6 +858,11 @@ class WBC_WC {
         return null;
     } 
 
+    public function is_shop_or_category() {
+
+        return ( is_shop() || is_product_category() ); 
+    }
+
     public function id_to_slug($type, $id) {
 
         if($type == 'prod_cat') {
@@ -927,6 +939,7 @@ class WBC_WC {
         return null;
     } 
 
+
     public function parent_category_id($category_id) {
 
         //firstly, load data for your child category
@@ -944,4 +957,18 @@ class WBC_WC {
         return $parent_cat->term_taxonomy_id;
     }
 
+    public function product_has_category($categories_to_check, $product_id) {
+
+        if ( has_term( $categories_to_check, 'product_cat', $product_id ) ) { 
+
+            return true;
+        }
+        
+        return false;
+    }
+}
+
+function wbc_is_shop_or_category() {
+
+    wbc()->wc->is_shop_or_category();
 }

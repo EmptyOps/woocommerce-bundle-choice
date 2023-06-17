@@ -4,10 +4,11 @@
 */
 namespace eo\wbc\system\core;
 use \sp\theme\view\ui\Composer_Elements;
+use eo\wbc\model\interfaces\Builder;
 
 defined( 'ABSPATH' ) || exit;
 
-class SP_Page_Builder extends \sp\theme\view\ui\Base_Builder {
+class SP_Page_Builder implements Builder {
 
 	private static $_instance = null;
 
@@ -28,68 +29,14 @@ class SP_Page_Builder extends \sp\theme\view\ui\Base_Builder {
 		return $this->ui;
 	}
 
-	public function build_page($ui,$key = 'theme_ui',$process_form = true) {
+	public function build_page($ui,$key = 'theme_ui',$process_form = true,$ui_definition = null) {
 
-		$composer = \sp\theme\view\ui\Composer_Elements::instance();
-
-		if(!empty($ui)){
-
-			if(!empty($ui['widgets']) and is_array($ui['widgets'])){
-				if(array_search('header',$ui['widgets'])!==false) {
-					get_template_part('header');
-				}
-				
-				// changes by mahesh as its part of header
-				// Please override at the header template with content
-				/*if(array_search('menu',$ui['widgets'])!==false) {					
-					wp_nav_menu(array(
-						'menu_class'=>'menu-item nav-item',
-						'container_class'=>'navbar-nav mr-auto'
-					));
-				}*/
-
-				if(array_search('content',$ui['widgets'])!==false and !empty($ui['content'])) {
-					$this->ui = $ui;
-					$this->process_ui_form = $process_form;
-					$this->build($ui['content']['form'],$key);
-				}				
-
-				if(array_search('footer',$ui['widgets'])!==false) {					
-
-					if(array_key_exists($composer->get_prefered_builders(),$composer->get_builders()) and !empty($composer->get_footer_template())) {
-
-						echo \Elementor\Plugin::instance()->frontend->get_builder_content_for_display($composer->get_footer_template(),true);
-					} else {
-						get_template_part('footer');
-					}					
-				}
-			}
-		}
+		// nothing to do here so far 
 	}
 
-	public static function build_page_widgets($ui,$page_key,$args = array(),$is_return_html = false){
-		/*echo "build_page_widgets";
-		wbc_pr($page_key);*/
-		$ui=array(
-			'widgets'=>array('content'),
-			'content'=>array(
-				'page'=>$page_key,
-				'form'=>array(
-					'content'=>$ui
-				)
-			)
-		);
-        
-        if ($is_return_html) {
-        	ob_start();
-        }
+	public static function build_page_widgets($ui,$page_key,$args = array(),$is_return_html = false,$ui_definition = null){
 
-        \sp\theme\view\ui\builder\Page_Builder::instance()->build_page($ui);
-        
-        if ($is_return_html) {
-        	return ob_get_clean();
-        }	
-		
+		// nothing to do here so far 
 	}
 
 }

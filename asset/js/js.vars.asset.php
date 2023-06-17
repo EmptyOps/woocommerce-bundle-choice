@@ -183,7 +183,6 @@ add_action('wp_footer',function(){
 
 		        // window.setTimeout(function(){
 
-		        		console.log(" js vars asset " + ( window.document.splugins.common._o( common_configs.gallery_images_configs, 'base_container_selector') ? common_configs.gallery_images_configs.base_container_selector : '.variations_form' ) );
 		            // window.document.splugins.wbc.variations.gallery_images.api.init();
 		            base_container = jQuery( ( window.document.splugins.common._o( common_configs.gallery_images_configs, 'base_container_selector') ? common_configs.gallery_images_configs.base_container_selector : '.variations_form' ) );      
 		            console.log('[js.vars.asset wp_footer] gim 01');
