@@ -1096,11 +1096,17 @@ window.document.splugins.wbc.filters.core = function( configs ) {
             if(typeof(LazyLoad)=='function'){
                 eowbc_lazyload();
             } 
-        }else if(section == 'pagination_link_selector'){
+        }
+        // ACTIVE_TODO_OC_START
+        // -- below else if copy moved to pagination module and most probebly it is added here by mistack so need to remove it during telly -- to a && -- to h
+        // ACTIVE_TODO_OC_END
+/*        else if(section == 'pagination_link_selector'){
+	
+	        console.log('jet-filters-pagination');
 
         	object = ',jet-filters-pagination';
 
-        }else if(section == 'products-grid'){
+        }*/else if(section == 'products-grid'){
 
         }else if(section == 'render_container'){
 
@@ -1169,9 +1175,16 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 			}
         } 
 
+        console.log('jet-filters-pagination 1');
+        console.log(section);
+        console.log(object);
+
         var compatability_callback = null ;
         window.document.splugins.events.api.notifyAllObservers( 'filters', 'compatability', {}, compatability_callback, ( object!=null && window.document.splugins.common._o( _this.configs, 'form_selector' ) ) ? _this.$base_container : form_selector );
         
+        console.log('jet-filters-pagination 2');
+        console.log(object);
+
         return object;
     };
 
@@ -2888,7 +2901,16 @@ window.document.splugins.wbc.pagination.core = function( configs ) {
 					}
 				}
 			}
-        } 
+        }else if(section == 'pagination_link_selector'){
+
+        	object = ',.jet-filters-pagination';
+
+        	if(window.document.splugins.common.current_theme_key == 'themes___elessi-theme-child'){
+
+	        	object += ',.nasa-paginations-warp';
+        	}
+
+        }
 
         return object;
     };
