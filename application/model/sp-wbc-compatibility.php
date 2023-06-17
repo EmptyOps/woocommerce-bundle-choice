@@ -62,8 +62,11 @@ class SP_WBC_Compatibility extends SP_Compatibility {
 		}
 
 		///////////////////////////
-
-		$term = wbc()->wc->get_term_by('id',apply_filters( 'wpml_object_id',$id,'category', FALSE, 'en'),'product_cat');
+		
+		// ACTIVE_TODO_OC_START
+		// ACTIVE_TODO we will need to consider wpml hooks like below to create random patches to address some perticular issues 
+		// ACTIVE_TODO_OC_END
+			$term = wbc()->wc->get_term_by('id',apply_filters( 'wpml_object_id',$id,'category', FALSE, 'en'),'product_cat');
 
 
 			$term_list = wbc()->wc->get_terms(apply_filters( 'wpml_object_id',$id,'category', FALSE, 'en'),'menu_order');
@@ -102,6 +105,15 @@ class SP_WBC_Compatibility extends SP_Compatibility {
 		// NOTE: nothing so far here but here the frontend templaet and js/css layer Compatibility would come 
 
 	}
+
+ 	public function single_product_render_compatability( $page_section, $args = array() ) {
+
+ 		$result = parent::single_product_render_compatability( $page_section, $args );
+
+		// NOTE: nothing so far here but here the frontend templaet and js/css layer Compatibility would come 
+
+		return $result;
+ 	}
 
 	public function woo_product_images_template_compatability($page_section,$args = array()){
 

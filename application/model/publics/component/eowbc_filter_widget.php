@@ -31,6 +31,8 @@ class EOWBC_Filter_Widget {
 
 	public function get_widget_standalone(array $filter) {
 		
+		// ACTIVE_TODO The hooks like eowbc_before_filter_widget,eowbc_after_filter_widget are not supported for this standalone function which is called only from the tiny fetures layer, so we may need to add support for it. But even better is if we simply refactore the call from tiny fetures layer and merge this function to main rendaring layer may be by creating a wrapper function so that maintainablity and reusablity can be ensured. -- to h && -- to a	
+		
 		$this->_category = '';
 		$current_category=$this->_category;
 		

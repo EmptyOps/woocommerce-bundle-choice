@@ -115,6 +115,8 @@ class EOWBC_Breadcrumb
         //hiren added on 03-06-2020, as replacement to global loading of old version
         self::eo_wbc_enque_asset();
 
+        do_action('wbc_before_breadcrumb_widget');
+
         /**
             CLASS: 
             -------------------------------------------------
@@ -129,6 +131,9 @@ class EOWBC_Breadcrumb
         } else {           
             return self::eo_wbc_breadcrumb_desktop($step,$begin);
         }
+
+        do_action('wbc_after_breadcrumb_widget');
+
     }
 
     //hiren added on 03-06-2020, as replacement to global loading of old version

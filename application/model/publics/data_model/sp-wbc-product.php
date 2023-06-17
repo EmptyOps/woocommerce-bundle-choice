@@ -27,6 +27,12 @@ class SP_WBC_Product extends SP_Product {
     		return $prod_structure_def;
     	}, 10, 1);
 
+   		// ACTIVE_TODO_OC_START
+	    // // -- do we need to create hooks function here -- to h done
+	    // 	-- if we create hooks funciton then we need ot add two add_filter hook with the key "wbc_pair_builder_first_cat_title", "wbc_pair_builder_second_cat_title" -- to h & -- to s
+	    // 		-- and then need to make sure that above add_filter hook does return the title of the first and second category and when we do this we need to make sure that we set the priority default 10 here and for the earring pendant builder we set the priority to some higher level so let simply set it to 50 for the earring pendant builder -- to h & -- to s
+	    // ACTIVE_TODO_OC_END
     }
+
 
 }

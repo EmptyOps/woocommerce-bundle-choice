@@ -111,6 +111,7 @@ class Eowbc_Model {
 										break;
 									}
 								}
+								
 							}
 							
 							// if(wbc()->sanitize->get('is_test') == 1) {

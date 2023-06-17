@@ -464,7 +464,7 @@ class Feed extends \eo\wbc\controllers\publics\Controller{
 
     }
 
-    private function ajax_response($data, $args = array()){
+    protected function ajax_response($data, $args = array()){
         ob_start();
 
         wp_send_json( $data );
