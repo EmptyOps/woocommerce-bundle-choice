@@ -83,7 +83,7 @@ class Product {
             }
 
             $this->init_safe_click();
-
+            $this->product_options_view();        
             $this->render_preview();
         } else {
 
@@ -261,7 +261,7 @@ class Product {
                         return false;
                     });
 
-                    jQuery("table.variations").remove();
+                    // jQuery("table.variations").remove();
                 });
             </script>
             <?php
