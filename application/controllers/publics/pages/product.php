@@ -935,6 +935,16 @@ class Product {
                         $url = $setting_page_url.'&'.$url;
                     }                
                 }
+
+                $eo_wbc_sets=wbc()->session->get('EO_WBC_SETS',array());
+
+                if(!empty($eo_wbc_sets)){
+                    if(strpos($url,'?')===false) {
+                        $url = $url.'?variation_id='.$eo_wbc_sets['SECOND'][2];
+                    } else {
+                        $url = $url.'&variation_id='.$eo_wbc_sets['SECOND'][2];
+                    }
+                }
             } else {
 
                 $review_page_url = '';

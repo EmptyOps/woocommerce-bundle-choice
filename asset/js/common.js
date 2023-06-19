@@ -3803,6 +3803,9 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
 
         url = url +'?variation_id='+ variation.variation_id;
 
+        console.log('create_variation_url_private_11');
+        console.log(url);
+
         // ACTIVE_TODO as soon as required we need to enabled url support if applicable for simple type product 
         //     ACTIVE_TODO very soon we should also use here the php layer router class Query perams function layer instant of directly using hard coded_attr_checklist etc formate  
         var attributeSlug_global = '';
@@ -3817,6 +3820,9 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
         url = window.document.splugins.common.updateURLParameter(url, '_attribute', attributeSlug_global);
         
         _this./*#*/$zoom_container_private.data('sp_variation_url',url);
+        
+        console.log('create_variation_url_private_22');
+        console.log(url);
 
         return url;
     
