@@ -1,4 +1,5 @@
 <?php
+// return false;
 /**
  *
  * @link https://wordpress.org/plugins/woo-bundle-choice/

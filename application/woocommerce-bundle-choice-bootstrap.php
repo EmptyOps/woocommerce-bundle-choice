@@ -81,10 +81,6 @@ class WooCommerce_Bundle_Choice_Bootstrap {
 			add_action( "wp_ajax_nopriv_eowbc_ajax",array($this,'ajax'),10);
 			add_action( "wp_ajax_eowbc_ajax",array($this,'ajax'),10);
 
-			-- here if required we need to manage the if condition of wc_ajax using the wc_ajax constant or somthing such if we need to prevent above other ajax binding and legacy admin call and so on. And even if requird than we may also need to do getting inside the if we can simply do else if to ensure simple structure but if there is wc_ajax or somthing such constant available -- to h && -- to a
-			add_action( "wc_ajax_nopriv"? get_availbale_variation avu perameter ajax vakhte jatu hase te action perameter aya mukvanu se@a 154.4.2,array($this,'sp_variations_get_available_variation_ajax'),1);
-			add_action( "wc_ajax"?,array($this,'sp_variations_get_available_variation_ajax'),1);			
-
 		} else {			
 			// system core
 			$this->system_core();
@@ -95,6 +91,16 @@ class WooCommerce_Bundle_Choice_Bootstrap {
 
 			if(!empty(wbc()->sanitize->get('eo_wbc_filter'))) {
 				\eo\wbc\controllers\ajax\Filter::instance()->filter();				
+			}
+		}
+
+		if(!is_admin()) {
+
+			if(defined('WC_DOING_AJAX')) {				
+
+				-- here if required we need to manage the if condition of wc_ajax using the wc_ajax constant or somthing such if we need to prevent above other ajax binding and legacy admin call and so on. And even if requird than we may also need to do getting inside the if we can simply do else if to ensure simple structure but if there is wc_ajax or somthing such constant available -- to h && -- to a done
+				add_action( "wc_ajax_nopriv_get_variation",array($this,'sp_variations_get_variation_ajax'),1);
+				add_action( "wc_ajax_get_variation",array($this,'sp_variations_get_variation_ajax'),1);			
 			}
 		}	
 	}
@@ -168,11 +174,11 @@ class WooCommerce_Bundle_Choice_Bootstrap {
 		die();
 	}
 
-	public function sp_variations_get_available_variation_ajax(){
+	public function sp_variations_get_variation_ajax(){
 
 		ACTIVE_TODO If requird to support the ajax for the feed page than we can simply put the call to feed controller from here than may be we can simply but ya than at that time we will need to put this feed controller call inside if condition of shop or category page and the same way the below options controller call inside the if condition of single product page. -- to h
 
-		single product page
+		// single product page
 		\eo\wbc\controllers\publics\Options::instance()->ajax();
 	
 		die();
