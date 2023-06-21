@@ -176,7 +176,8 @@ class WooCommerce_Bundle_Choice_Bootstrap {
 
 	public function sp_variations_get_variation_ajax(){
 
-		ACTIVE_TODO If requird to support the ajax for the feed page than we can simply put the call to feed controller from here than may be we can simply but ya than at that time we will need to put this feed controller call inside if condition of shop or category page and the same way the below options controller call inside the if condition of single product page. -- to h
+		// feed page
+		ACTIVE_TODO If requird to support the ajax for the feed page than we can simply put the call to feed controller from here than may be we can simply do that from here but lets confirm once. but ya than at that time we will need to put this feed controller call inside if condition of shop or category page and the same way the below options controller call inside the if condition of single product page. -- to h
 
 		// single product page
 		\eo\wbc\controllers\publics\Options::instance()->ajax();

@@ -592,6 +592,13 @@ class SP_WBC_Variations extends SP_Variations {
 
 	public static function get_default_variation_id($product, $attributes){
 
+		NOTE: right now we have added the variation id support in url get perameter in below if condition but if we find better placeholder for this layer than we can move out of this function.
+		$variation_id = wbc()->sanitize->get('variation_id');
+		if(!empty($variation_id)) {
+
+			return $variation_id;
+		}
+
 		if ( is_numeric( $product ) ) {
 			$product = wc_get_product( $product );
 		}

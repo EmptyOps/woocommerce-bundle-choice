@@ -2984,8 +2984,7 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
             _this./*#*/data_private.product_variations = _this./*#*/$variations_form_private.data('product_simple') || [];      
         }
 
-        console.log("gim [preprocess] _this./*#*/data_private.product_variations");
-        console.log(_this./*#*/data_private.product_variations);
+        _this./*#*/data_private.is_ajax_variation =  _this./*#*/data_private.product_variations.length < 1;
 
         // _this.#$additional_container/*base_element*/.addClass('spui-wbc-gallery_images-loaded');
         _this./*#*/$base_container_private.addClass('spui-wbc-gallery_images-loaded');
