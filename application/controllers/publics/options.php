@@ -836,7 +836,9 @@ class Options extends \eo\wbc\controllers\publics\Controller {
         // \eo\wbc\controller\publics\Options::instance()->selectron('get_variation_gallery');
 
 
-		-- for the notes that we may be need to do the similar wc_ajax hooks binding and ajax function calling of perticullar controller in extantion like we did here for all applicable extantions which supports gallery images types since with the standard loading call to the get data function of model for perticullar page section will not happen so we most likely need to do that. so lets confirm that and impliment if requird -- to h 
+		// ACTIVE_TODO_OC_START
+		// -- for the notes that we may be need to do the similar wc_ajax hooks binding and ajax function calling of perticullar controller in extantion like we did here for all applicable extantions which supports gallery images types since with the standard loading call to the get data function of model for perticullar page section will not happen so we most likely need to do that. so lets confirm that and impliment if requird -- to h 
+		// ACTIVE_TODO_OC_END
 	    /*$args['data'] = */\eo\wbc\model\publics\SP_Model_Single_Product::instance()->get_data('swatches_init');
 	    
 	    /*$args['data'] = */\eo\wbc\model\publics\SP_Model_Single_Product::instance()->get_data('gallery_images_init');

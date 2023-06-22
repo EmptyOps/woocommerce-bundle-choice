@@ -94,7 +94,7 @@ class SP_WBC_Variations extends SP_Variations {
 				// ACTIVE_TODO_OC_START
 				// ACTIVE_TODO temp. below value is temparary and may be we simply need to keep it to 30 which is less than default of woo which is 50. 
 				// ACTIVE_TODO_OC_END
-				$int = 100;
+				// $int = 100;
 
 				return $int;
 
@@ -579,6 +579,7 @@ class SP_WBC_Variations extends SP_Variations {
 
 		/*ACTIVE_TODO_OC_START
 		ACTIVE_TODO we must do it by second revision right now we are not supporting the variation id or query paramas of _attributs and checklist and so on to load selected variation based dom and its images. but we must do by second revision or before that as soon as the seo reports and so on requires that or something else requires it.
+			NOTE: the variation_id support is now added in the get_default_variation_id function as that seem to be more suitabe layer for that. 
 		ACTIVE_TODO_OC_END*/
 		// $default_attributes = \eo\wbc\system\core\SP_Router::get_query_params_formated('attr', $input_method, 'key_value');
 
@@ -592,7 +593,7 @@ class SP_WBC_Variations extends SP_Variations {
 
 	public static function get_default_variation_id($product, $attributes){
 
-		NOTE: right now we have added the variation id support in url get perameter in below if condition but if we find better placeholder for this layer than we can move out of this function.
+		// NOTE: right now we have added the variation id support in url get perameter in below if condition but if we find better placeholder for this layer than we can move out of this function.
 		$variation_id = wbc()->sanitize->get('variation_id');
 		if(!empty($variation_id)) {
 
