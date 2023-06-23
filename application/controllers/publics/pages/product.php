@@ -235,6 +235,14 @@ class Product {
             ?>
             <style> body .wcp_preview_first_product_title, body .wcp_preview_second_product_title{font-size: 1.6rem;line-height: 2.4rem;white-space: nowrap;width: 24rem;overflow: hidden;text-overflow: ellipsis;float: left;} @media only screen and (max-width: 480px) { body .wcp_preview_first_product_title, body .wcp_preview_second_product_title { font-size: 1rem !important; line-height: 2rem !important; width: inherit !important; word-break: break-word; max-width: 20rem; } } @media only screen and (max-width: 320px) { body .wcp_preview_first_product_title, body .wcp_preview_second_product_title { font-size: 1rem !important; line-height: 2rem !important; width: inherit !important; word-break: break-word; max-width: 17rem; } }</style>
             <style type="text/css">table.variations{display: none;}</style>
+            <style type="text/css">
+                .variations_form .variations, #wbc_variation_toggle {
+                    display: none !important;
+                }
+                .Product_Left_Wrapper_Plugin_Images .imagezoomsl_zoom_container .Zoom_Rigt-sec .small-image.corner-image.corner-toggle-image {
+                    display: none;
+                }
+            </style>
             <script type="text/javascript">
                 jQuery(".single_add_to_cart_button.button.alt").ready(function(){
 
