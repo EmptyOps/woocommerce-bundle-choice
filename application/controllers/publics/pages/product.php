@@ -747,6 +747,13 @@ class Product {
                         );
                     <?php endif; ?>
                     });
+
+                jQuery('.variations_form').on('show_variation', function (event, variation) {
+    
+                    window.eo_wbc_object.url = window.document.splugins.common.updateURLParameter(window.eo_wbc_object.url,'variation_id',variation.variation_id);
+                }); 
+
+                // -- current product page jo secound category nu hoy and secound step hoy toj mukvani 
             </script>
             
             <?php 
