@@ -756,12 +756,28 @@ class Product {
                     <?php endif; ?>
                     });
 
-                jQuery('.variations_form').on('show_variation', function (event, variation) {
-    
-                    window.eo_wbc_object.url = window.document.splugins.common.updateURLParameter(window.eo_wbc_object.url,'variation_id',variation.variation_id);
-                }); 
 
-                // -- current product page jo secound category nu hoy and secound step hoy toj mukvani 
+                <?php
+                
+                $step = wbc()->sanitize->get('STEP');
+
+                if( $step == 2 && wbc()->common->is_product_under_category($product,wbc()->options->get_option('configuration','second_name')) ) {
+
+                    ?>
+                    console.log('variations_form_show_variation');
+                    console.log(jQuery._data( jQuery('.variations_form')[0], "events" ));
+
+                    jQuery('.variations_form').on('show_variation', function (event, variation) {
+                        
+                        console.log('variations_form_show_variation_01');
+                        window.eo_wbc_object.url = window.document.splugins.common.updateURLParameter(window.eo_wbc_object.url,'variation_id',variation.variation_id);
+                        console.log('variations_form_show_variation_02');
+                        console.log(jQuery._data( jQuery('.variations_form')[0], "events" ));
+                    });
+                    console.log('variations_form_show_variation_03');
+                    console.log(jQuery._data( jQuery('.variations_form')[0], "events" ));
+                    <?php 
+                }?>
             </script>
             
             <?php 
