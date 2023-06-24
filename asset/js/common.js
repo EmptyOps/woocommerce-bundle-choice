@@ -3145,20 +3145,27 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
          // console.log( data.product_variations ); 
 
         data.types = [];
-        jQuery( data.product_variations ).each(function (i, variation) {
+        if(false) {
 
-           // -- variation_gallery_images -> gallery_images data
+            jQuery( data.product_variations ).each(function (i, variation) {
 
-          jQuery(variation.variation_gallery_images).each(function (index,image) {
-           
-            // -- data.types -> gallery_images types(images,video,360)
+               // -- variation_gallery_images -> gallery_images data
 
-            data.types.push(image.extra_params_org.type);
-          });
+              jQuery(variation.variation_gallery_images).each(function (index,image) {
+               
+                // -- data.types -> gallery_images types(images,video,360)
 
-          return false;
-        });
-        
+                data.types.push(image.extra_params_org.type);
+              });
+
+              return false;
+            });
+            
+        }
+
+        data.types.push('image');
+        data.types.push('video');
+
         return data;
     
     }

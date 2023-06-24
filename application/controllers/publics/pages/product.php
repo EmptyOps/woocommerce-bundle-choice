@@ -761,21 +761,15 @@ class Product {
                 
                 $step = wbc()->sanitize->get('STEP');
 
-                if( $step == 2 && wbc()->common->is_product_under_category($product,wbc()->options->get_option('configuration','second_name')) ) {
+                if( $step == 2 && wbc()->common->is_product_under_category($product,wbc()->options->get_option('configuration','second_name')) && $product->is_type( 'variable' ) ) {
+                    ?>  
 
-                    ?>
-                    console.log('variations_form_show_variation');
-                    console.log(jQuery._data( jQuery('.variations_form')[0], "events" ));
+                    //  define namespaces 
+                    window.document.splugins = window.document.splugins || {};
+                    window.document.splugins.common = window.document.splugins.common || {};
+                    
+                    window.document.splugins.common.is_handle_variation_id_pair_builder_step_2 = true;
 
-                    jQuery('.variations_form').on('show_variation', function (event, variation) {
-                        
-                        console.log('variations_form_show_variation_01');
-                        window.eo_wbc_object.url = window.document.splugins.common.updateURLParameter(window.eo_wbc_object.url,'variation_id',variation.variation_id);
-                        console.log('variations_form_show_variation_02');
-                        console.log(jQuery._data( jQuery('.variations_form')[0], "events" ));
-                    });
-                    console.log('variations_form_show_variation_03');
-                    console.log(jQuery._data( jQuery('.variations_form')[0], "events" ));
                     <?php 
                 }?>
             </script>
