@@ -121,6 +121,29 @@ class WBC_File {
 		return json_decode( $this->file_read( $filepath ), true );
 	}
 
+	public function save_csv($filepath, $rows, $header_row=null) {
+		
+		// Open a file in write mode ('w')
+		$fp = fopen($filepath, 'w');
+
+		// TODO if required we may need to provide support for generating header_row here
+		    
+	    fputcsv($fp, $header_row);
+
+		// Loop through file pointer and a line
+		foreach ($rows as $fields) {
+		    fputcsv($fp, $fields);
+		}
+		  
+		fclose($fp);
+
+		return true;
+	}
+
+	// public function get_csv($filepath) {
+	// 	return json_decode( $this->file_read( $filepath ), true );
+	// }
+
 	// /* 
 	//   filename without extension 
 	//   ex: file_core_name('toto.jpg') -> 'toto'

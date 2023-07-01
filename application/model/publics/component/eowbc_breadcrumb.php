@@ -126,14 +126,16 @@ class EOWBC_Breadcrumb
             title - set title on breadcrumb.
             description - set description on breadcrumb.
          */
+        $return_value = null;    
         if(/*wp_is_mobile()*/wbc_is_mobile_by_page_sections('cat_shop_page',true)){
-            return self::eo_wbc_breadcrumb_mobile($step,$begin);
+            /*return*/$return_value = self::eo_wbc_breadcrumb_mobile($step,$begin);
         } else {           
-            return self::eo_wbc_breadcrumb_desktop($step,$begin);
+            /*return*/$return_value = self::eo_wbc_breadcrumb_desktop($step,$begin);
         }
 
         do_action('wbc_after_breadcrumb_widget');
 
+        return $return_value;
     }
 
     //hiren added on 03-06-2020, as replacement to global loading of old version

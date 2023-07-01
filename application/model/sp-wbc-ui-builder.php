@@ -220,15 +220,58 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 					/*------------------
 					-- a code sp_theme_ui/application/view/ui/Base_Builder.php no process_build() no che*/
 
-					$ui_ele['label'] = wbc()->options->get_option($option_key,$ui_ele['id_key'].'_text',$ui_ele['label'],true,true);
-					if(isset($ui_ele['postHTML'])) {
+					$is_get_text_applicable = false;
 
-						$ui_ele['postHTML'] = wbc()->options->get_option($option_key,$ui_ele['id_key'].'_text',$ui_ele['postHTML'],true,true);
-					} elseif (!empty($ui_ele['preHTML'])){
+					if( isset($ui_element_definition['appearence_controls']) ) { 
 
-						$ui_ele['preHTML'] = wbc()->options->get_option($option_key,$ui_ele['id_key'].'_text',$ui_ele['preHTML'],true,true);
+						if(  !empty($ui_element_definition['appearence_controls'][2]['original_text']) ) {
+
+							if( $ui_element_definition['appearence_controls'][2]['original_text'] != $ui_ele['label'] ) {
+
+								$is_get_text_applicable = true;
+							}
+						}
 					}
 
+					$ui_ele['label'] = ($is_get_text_applicable ? $ui_ele['label'] : wbc()->options->get_option($option_key,$ui_ele['id_key'].'_text',$ui_ele['label'],true,true));
+					if(isset($ui_ele['postHTML'])) {
+
+						$is_get_text_applicable = false;
+
+						if( isset($ui_element_definition['appearence_controls']) ) { 
+
+							if(  !empty($ui_element_definition['appearence_controls'][2]['original_text']) ) {
+
+								if( $ui_element_definition['appearence_controls'][2]['original_text'] != $ui_ele['postHTML'] ) {
+
+									$is_get_text_applicable = true;
+								}
+							}
+						}
+
+						$ui_ele['postHTML'] = ($is_get_text_applicable ? $ui_ele['postHTML'] : wbc()->options->get_option($option_key,$ui_ele['id_key'].'_text',$ui_ele['postHTML'],true,true));
+
+					} elseif (!empty($ui_ele['preHTML'])){
+
+						$is_get_text_applicable = false;
+
+						if( isset($ui_element_definition['appearence_controls']) ) { 
+
+							if(  !empty($ui_element_definition['appearence_controls'][2]['original_text']) ) {
+
+								if( $ui_element_definition['appearence_controls'][2]['original_text'] != $ui_ele['preHTML'] ) {
+
+									$is_get_text_applicable = true;
+								}
+							}
+						}
+
+						$ui_ele['preHTML'] = ($is_get_text_applicable ? $ui_ele['preHTML'] : wbc()->options->get_option($option_key,$ui_ele['id_key'].'_text',$ui_ele['preHTML'],true,true));
+					}
+
+					// ACTIVE_TODO_OC_START
+					// 	-- when we implement the support for customizer and external page builders like elementor and so on at that time need to upgrade below if and do the needful so that $customizer_value variable that is overriding label, prehtml and so on below does not affected if they are not supposed to be affected. -- to h
+					// ACTIVE_TODO_OC_END
 					if(!empty($customizer_value)) {
 
 						$ui_ele['label'] = $customizer_value;				
