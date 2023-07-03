@@ -71,6 +71,18 @@ $form['data'] = array(
 						'size_class'=>array('sixteen','wide'),
 						'inline'=>false,
 						), 
+				
+					'jpc_target'=>array(
+						'label'=>eowbc_lang('Target'),
+						'type'=>'select',
+						'value'=>'0',
+						'sanitize'=>'sanitize_text_field',
+						'options'=>apply_filters('wbc_price_control_target_options', array('default'=>'')),
+						'class'=>array('fluid'),
+						'size_class'=>array('eight','wide'),
+						'inline'=>false,
+						), 
+
 					'jpc_field'=>array(
 						'label'=>eowbc_lang('Field'),
 						'type'=>'select',
