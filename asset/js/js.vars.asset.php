@@ -191,13 +191,17 @@ add_action('wp_footer',function(){
  	 		if(window.document.splugins.common.is_category_page || window.document.splugins.common.is_shop_page) {
  
 				console.log('[js.vars.asset wp_footer] is_category_page');
-
-	    		window.document.splugins.wbc.pagination.api.init();
-
-				window.document.splugins.wbc.filters.api.init();
-
-				window.document.splugins.wbc.filter_sets.api.init();
-
+				
+				// added on 30-06-2023
+				// NOTE: even though we have checked in below script if the eo_wbc_object is not available then it is created but as per the structure we need to skip execution. And till we do not refactor the loading of scripts and execution further we need below if. Ideally we should not load this js file if the filters widget is not rendered on the particular page. 
+				if( typeof(eo_wbc_object) != 'undefined'){
+	    		
+	    			window.document.splugins.wbc.pagination.api.init();
+					
+					window.document.splugins.wbc.filters.api.init();
+					window.document.splugins.wbc.filter_sets.api.init();
+	    		}
+	    			
    		}
 
    		// ACTIVE_TODO we should confirm once and then disable category condition or part below because it seems unnecessary for the category page. or is it necessary for the purple theme loopbox slider? or for the tableview sidebar or popup if it has jQuery slider or zoom? 

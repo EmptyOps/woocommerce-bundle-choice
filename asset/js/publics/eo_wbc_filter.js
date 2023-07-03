@@ -2674,7 +2674,6 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 };
 
 //  publish it 
-//  publish it 
 // added on 30-06-2023
 // NOTE: even though we have checked in below script if the eo_wbc_object is not available then it is created but as per the structure we need to skip execution. And till we do not refactor the loading of scripts and execution further we need below if. Ideally we should not load this js file if the filters widget is not rendered on the particular page. 
 if( typeof(eo_wbc_object) != 'undefined'){
@@ -2765,12 +2764,14 @@ if( typeof(eo_wbc_object) != 'undefined'){
 			}
 			else {
 
+				console.log('set_pagination_html_private() else');
+
 				jQuery(".woocommerce-pagination,.pagination"+compatability('pagination_link_selector',null,null)).html('');	
 			}
 		}
 		
 		var on_click_listener = function(e){
-			
+
 			console.log('pagination [on_click_listener]');
 
 			/*ACTIVE_TODO_OC_START
@@ -2851,7 +2852,8 @@ if( typeof(eo_wbc_object) != 'undefined'){
 
 	    var click = function(event,element){
 	    	
-			console.log('pagination [click]');
+	    	console.log('pagination_click');
+	    	console.log(_this.$base_pagination_container);
 
 	    	/*ACTIVE_TODO_OC_START
 	    	-- event var aya sudhi pogadvano se -- to a
@@ -2862,6 +2864,7 @@ if( typeof(eo_wbc_object) != 'undefined'){
 			// ACTIVE_TODO page nnumber text would break below with multilanguage so instead use the data attribute to store and read the page number -- to a and/or -- to h
 			if(/*_this.$base_pagination_container*/jQuery(element).hasClass("next") || /*_this.$base_pagination_container*/jQuery(element).hasClass("prev")){
 				
+				console.log('pagination click if');
 				if(/*_this.$base_pagination_container*/jQuery(element).hasClass("next")){
 					// jQuery("[name='paged']").val(parseInt(jQuery(".page-numbers.current").text())+1);
 					window.document.splugins.wbc.pagination.api.set_page_number( window.document.splugins.wbc.pagination.api.get_page_number()+1 );
@@ -2872,9 +2875,14 @@ if( typeof(eo_wbc_object) != 'undefined'){
 				}	
 			}		
 			else {
+
+				console.log('pagination click else');
 				// jQuery("[name='paged']").val(jQuery(this).text());
 				window.document.splugins.wbc.pagination.api.set_page_number( window.document.splugins.wbc.pagination.api.get_page_number(jQuery(element)));
 			}		
+
+			console.log('pagination click() 01');
+			console.log(jQuery(element).parents().has('[id$="eo_wbc_filter"]').find('[id$="eo_wbc_filter"]').attr('id'));
 			
 			// jQuery('[name="paged"]').val(parseInt(jQuery(this).text().replace(',','')));
 			// jQuery.fn.eo_wbc_filter_change(false,'form#'+jQuery(this).parents().has('[id$="eo_wbc_filter"]').find('[id$="eo_wbc_filter"]').attr('id'));
