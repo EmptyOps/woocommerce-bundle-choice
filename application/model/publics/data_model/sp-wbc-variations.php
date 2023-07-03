@@ -1061,11 +1061,6 @@ class SP_WBC_Variations extends SP_Variations {
         	$type = 'select';
         }
 
-		// if( wbc()->sanitize->get('is_test') == 2 ) {
-		// 	wbc_pr('sp_variations_swatches_supported_attribute_types');
-		// 	wbc_pr(self::sp_variations_swatches_supported_attribute_types());
-		// }
-
         // added on 03-07-2023
         // NOTE: as we have thought of and very well planned to support the legacy types and on that regard all the legacy layers and functions and flows, so here now we have enabled the legecy type support.
         if(!in_array($type,self::sp_variations_swatches_supported_attribute_types())) {
