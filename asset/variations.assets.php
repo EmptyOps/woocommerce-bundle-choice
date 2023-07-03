@@ -929,9 +929,9 @@ console.log('is_shop_css');
             list-style-type: none;
         }
 
-		form.variations_form table.variations tbody td select {
+		/*form.variations_form table.variations tbody td select {
 		    display: none !important;
-		}
+		}*/
 
 	</style>
 
