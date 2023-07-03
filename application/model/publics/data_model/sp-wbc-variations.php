@@ -1053,6 +1053,25 @@ class SP_WBC_Variations extends SP_Variations {
         	$type = 'select';
         }
 
+        // added on 03-07-2023
+        // NOTE: as we have thought of and very well planned to support the legacy types and on that regard all the legacy layers and functions and flows, so here now we have enabled the legecy type support.
+        if(!in_array($type,self::sp_variations_swatches_supported_attribute_types())) {
+			
+			// if( wbc()->sanitize->get('is_test') == 2 ) {
+			// 	wbc_pr('sp_variations_swatches_supported_attribute_types if');
+			// 	wbc_pr($type);
+			// }
+
+			// ACTIVE_TODO so far we have tested and enabled only the select type of woocommerce. But as soon as we get chance lets enable the other legacy type that woocommerce supports.
+			// 	NOTE: and for the notes the default imlimentation of the wbc sp_variations is seprate thing and is supposed to be implimented on the underneath to this layer in the else condition below, that is dedicated for the default layer of the wbc sp_variations type support. 
+        	if( 'select' == $type ) {
+	
+				$data = array();			
+				$data['is_return_default_html'] = true;
+				$data['html'] = $args['hook_callback_args']['html'];
+				return $data;
+        	}
+        }    
 
         // //add or condition here to apply_filter with key sp_variations_supporting_attribute_type with default to false and second arg will be type -- to b done
         // 	//--	and now need to add that hook to add type on woo attribute admin, see details in ssm variations class -- to d done

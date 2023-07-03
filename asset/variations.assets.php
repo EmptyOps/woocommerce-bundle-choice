@@ -929,9 +929,9 @@ if(is_shop() || is_product_category()) {
             list-style-type: none;
         }
 
-		form.variations_form table.variations tbody td select {
+		/*form.variations_form table.variations tbody td select {
 		    display: none !important;
-		}
+		}*/
 
 	</style>
 
