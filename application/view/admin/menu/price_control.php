@@ -77,7 +77,7 @@ $form['data'] = array(
 						'type'=>'select',
 						'value'=>'0',
 						'sanitize'=>'sanitize_text_field',
-						'options'=>apply_filters('wbc_price_control_target_options', array('default'=>'')),
+						'options'=>apply_filters('wbc_price_control_target_options', array(''=>'Default')),
 						'class'=>array('fluid'),
 						'size_class'=>array('eight','wide'),
 						'inline'=>false,

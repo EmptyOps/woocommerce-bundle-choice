@@ -62,6 +62,13 @@ class Eowbc_Price_Control_Save_Update_Prices {
 		$res["type"] = "success";
 	    $res["msg"] = "";
 	    
+	    ACTIVE_TODO_OC_START
+	    -- we need to confirm that below queries are not having any issues aspecialy so that the prices are not updated on any unwanted products. yaah after that we need to take test the entire function once we need to run and test the entire funciton once, means when the user click save and update pricces button from the price control admin pannel the last button that is that entire process is a yet not run and tested -- to h & -- to s
+	    	-- so below return is temporary and we have added that so that as of now the action do not go furture and do not affect anything till it is not run and tested so simply remove it and we do run and tested.
+	    ACTIVE_TODO_OC_END
+
+	    return $result;
+
 	    global $wpdb;
 
 	    $q_gen="( SELECT DISTINCT({$wpdb->prefix}term_relationships.object_id), {$wpdb->prefix}terms.name,{$wpdb->prefix}terms.slug,{$wpdb->prefix}term_taxonomy.taxonomy FROM {$wpdb->prefix}term_relationships LEFT JOIN {$wpdb->prefix}term_taxonomy ON {$wpdb->prefix}term_relationships.term_taxonomy_id={$wpdb->prefix}term_taxonomy.term_taxonomy_id LEFT JOIN {$wpdb->prefix}terms ON {$wpdb->prefix}term_taxonomy.term_id={$wpdb->prefix}terms.term_id WHERE ({$wpdb->prefix}term_taxonomy.taxonomy='product_cat' ) OR ({$wpdb->prefix}term_taxonomy.taxonomy LIKE 'pa_%') )";
@@ -93,6 +100,9 @@ class Eowbc_Price_Control_Save_Update_Prices {
 		$res["msg"] = $update_cnt." times product(s) prices updated";
 	    if(is_array($jpc_data) OR is_object($jpc_data)){
 
+	        -- we now most probebly need to disable this loop but before that we need to confirm that nothing is breaking aspecialy the above if of is null and the query will remain working as it is -- to h & -- to s
+	        	-- and regarding queries most probebly it should remain working but we need to confirm about above is null condition -- to h & -- to s
+	        	-- and in the same way we need to confirm if there is anything else that is if breaking then we need to take care of it 
 	        foreach ($jpc_data as $q_data) {
 
 	            
@@ -127,16 +137,44 @@ class Eowbc_Price_Control_Save_Update_Prices {
 	                    
 	                    if(!empty($q_data[count($q_data)-1]->sales_price)){
 
-	                    	//here seems bug should be regular_price instead of sales_price
-	                        //update_post_meta($post_id->object_id,'_price',$q_data[count($q_data)-1]->sales_price);
-	                        update_post_meta($post_id->object_id,'_price',$q_data[count($q_data)-1]->regular_price);
-	                        update_post_meta($post_id->object_id,'_sale_price',$q_data[count($q_data)-1]->sales_price);
+	                    	$prices_data = array();
+	                    	
+	                    	$prices_data['price'] = get_post_meta($post_id->object_id,'_price');
+	                    	$prices_data['sales_price'] = get_post_meta($post_id->object_id,'_sale_price');
+
+	                    	-- we need to figure out here how to prepare the $prices_data to pass in below function -- to h & -- to s
+							$prices_data = self::price_markup_def_apply_rules($prices_data);
+
+	                    	// //here seems bug should be regular_price instead of sales_price
+	                        // //update_post_meta($post_id->object_id,'_price',$q_data[count($q_data)-1]->sales_price);
+	                        // update_post_meta($post_id->object_id,'_price',$q_data[count($q_data)-1]->regular_price);
+	                        // update_post_meta($post_id->object_id,'_sale_price',$q_data[count($q_data)-1]->sales_price);
+	                        update_post_meta($post_id->object_id,'_price',$prices_data['price']);
+	                        update_post_meta($post_id->object_id,'_sale_price',$prices_data['sales_price']);
 
 	                    } else{
+
+	                    	$prices_data = array();
+
+	                    	$prices_data['price'] = get_post_meta($post_id->object_id,'_price');
+	                        
+	                        -- we need to figure out here how to prepare the $prices_data to pass in below function -- to h & -- to s
+							$prices_data = self::price_markup_def_apply_rules($prices_data);
+
 	                        delete_post_meta($post_id->object_id,'_sale_price');                    
-	                        update_post_meta($post_id->object_id,'_price',$q_data[count($q_data)-1]->regular_price);
-	                    }            
-	                    update_post_meta($post_id->object_id,'_regular_price',$q_data[count($q_data)-1]->regular_price);   
+	                        // update_post_meta($post_id->object_id,'_price',$q_data[count($q_data)-1]->regular_price);
+	                        update_post_meta($post_id->object_id,'_price',$prices_data['price']);
+	                    } 
+
+	                    $prices_data = array();
+
+                    	$prices_data['regular_price'] = get_post_meta($post_id->object_id,'_regular_price');
+                        
+                        -- we need to figure out here how to prepare the $prices_data to pass in below function -- to h & -- to s
+						$prices_data = self::price_markup_def_apply_rules($prices_data);
+
+	                    // update_post_meta($post_id->object_id,'_regular_price',$q_data[count($q_data)-1]->regular_price);   
+	                    update_post_meta($post_id->object_id,'_regular_price',$prices_data['regular_price']);   
 	                    wc_delete_product_transients( $post_id->object_id );
 	                }
 	            }
@@ -170,15 +208,43 @@ class Eowbc_Price_Control_Save_Update_Prices {
 
 	                    if(!empty($q_data[count($q_data)-1]->sales_price)){
 
-	                        update_post_meta($pid,'_price',$q_data[count($q_data)-1]->sales_price);
-	                        update_post_meta($pid,'_sale_price',$q_data[count($q_data)-1]->sales_price);
+	                    	$prices_data = array();
+
+	                    	$prices_data['price'] = get_post_meta($pid,'_price');
+	                    	$prices_data['sales_price'] = get_post_meta($pid,'_sale_price');
+	                        
+	                        -- we need to figure out here how to prepare the $prices_data to pass in below function -- to h & -- to s
+							$prices_data = self::price_markup_def_apply_rules($prices_data);
+
+	                        // update_post_meta($pid,'_price',$q_data[count($q_data)-1]->sales_price);
+	                        // update_post_meta($pid,'_sale_price',$q_data[count($q_data)-1]->sales_price);
+	                        update_post_meta($pid,'_price',$prices_data['price']);
+	                        update_post_meta($pid,'_sale_price',$prices_data['sales_price']);
 
 	                    } else{
+
+	                    	$prices_data = array();
+
+	                    	$prices_data['price'] = get_post_meta($pid,'_price');
+	                        
+	                        -- we need to figure out here how to prepare the $prices_data to pass in below function -- to h & -- to s
+							$prices_data = self::price_markup_def_apply_rules($prices_data);
+
 	                        delete_post_meta($pid,'_sale_price');                    
-	                        update_post_meta($pid,'_price',$q_data[count($q_data)-1]->regular_price);
+	                        // update_post_meta($pid,'_price',$q_data[count($q_data)-1]->regular_price);
+	                        update_post_meta($pid,'_price',$prices_data['price']);
 	                    }            
 	                    if(!empty($q_data[count($q_data)-1]->regular_price)){
-	                    	update_post_meta($pid,'_regular_price',$q_data[count($q_data)-1]->regular_price); 
+	                    	
+	                    	$prices_data = array();
+
+	                    	$prices_data['regular_price'] = get_post_meta($pid,'_regular_price');
+	                        
+	                        -- we need to figure out here how to prepare the $prices_data to pass in below function -- to h & -- to s
+							$prices_data = self::price_markup_def_apply_rules($prices_data);
+
+	                    	// update_post_meta($pid,'_regular_price',$q_data[count($q_data)-1]->regular_price); 
+	                    	update_post_meta($pid,'_regular_price',$prices_data['regular_price']); 
 	                    }
 	                    wc_delete_product_transients($pid);  
 	                }
@@ -186,9 +252,6 @@ class Eowbc_Price_Control_Save_Update_Prices {
 	        }
 
 			$res["msg"] = $update_cnt." times product(s) prices updated";
-
-		    -- we need to figure out here how to prepare the $prices_data to pass in below function -- to h & -- to s
-			self::price_markup_def_apply_rules($prices_data, $args);
 
 	    }
 	    else {
@@ -206,6 +269,7 @@ class Eowbc_Price_Control_Save_Update_Prices {
 
 		-- here we need to set the static variables like we read for bulders list so that we can reuse it for multiple calls that happen.
 
+		aa delete maravani chhe.
 		$price_markup_rules = array( 
 						'prod_cat'=>array(
 
@@ -219,29 +283,21 @@ class Eowbc_Price_Control_Save_Update_Prices {
 					);
 
 
-		$jpc_data = array();
+		$price_markup_rules/*jpc_data*/ = array();
 	    $jpc_str = wbc()->options->get_option('price_control','rules_data', false);
 	    if( $jpc_str ) {
 	    	// $jpc_data = json_decode( stripslashes( unserialize( wbc()->options->get_option('price_control','rules_data',serialize(array())) ) ), true );
-	    	$jpc_data = json_decode( stripslashes( unserialize( $jpc_str ) ), true );
-	    	if(empty($jpc_data)){
+	    	$price_markup_rules/*jpc_data*/ = json_decode( stripslashes( unserialize( $jpc_str ) ), true );
+	    	if(empty($price_markup_rules/*jpc_data*/)){
 	    		return false;
 	    	}
 	    }
-	    
-	    if( !is_null($post_ID) ) {
-
-	    	return false;
-	    	//here we need smarter way to keep only those rules in jpc_data of which category or attribute condition/criteria/range have the post_ID in its range, is is important for performance/effciency also 
-		    $jpc_data = array( $todo_keep_applicable_rules_only );
-		}
-
 		
 		return apply_filters('wbc_price_markup_rules', $price_markup_rules);
 	}
 
 	/**
-	 *	@param $prices_data should be in formate array('woocommerce product_id'=>array('price_field_key'e.g.'regular_price'=>100, 'sales_price'=>90))
+	 *	@param $prices_data should be in array
 	 */
 	public static function price_markup_def_apply_rules($prices_data, $args = array()) {
 
@@ -250,6 +306,11 @@ class Eowbc_Price_Control_Save_Update_Prices {
 		// NOTE: prod_structure_def function should be called and of use to those which supports entire loop and so on. like dapii, tableview and so on. 
 
 		$price_markup_rules = self::price_markup_rules();
+
+		if( is_array($price_markup_rules) OR is_object($price_markup_rules) ) {
+
+			return $prices_data;
+		} 
 
 		$prices_data = apply_filters('wbc_price_markup_def_apply_rules', $prices_data, $price_markup_rules, $args);
 
@@ -370,10 +431,7 @@ class Eowbc_Price_Control_Save_Update_Prices {
 		return $prices_data;
 	}
 
-	public static function apply_rule( $rule, $prices_data ) {
+	public static function apply_rule( $rule, $price ) {
 
-		foreach( $prices_data as $product_id=>$product_data ) {
-
-		}
 	}
 }
