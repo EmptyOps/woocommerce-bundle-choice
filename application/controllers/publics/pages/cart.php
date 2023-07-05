@@ -272,7 +272,34 @@ class Cart {
 
         add_filter('woocommerce_cart_item_name',function($name, $cart_item, $cart_item_key ){
             if(!empty($cart_item['datas'])){
-               return $cart_item['datas']['FIRST']->get_name().'<br/>'.$cart_item['datas']['SECOND']->get_name();
+
+                $name = '';
+
+                if(is_object($cart_item['datas']['SECOND'])) {
+
+                    $name .= $cart_item['datas']['SECOND']->get_name().'<br/>';
+
+                    if($cart_item['datas']['SECOND']->is_type( 'variation' )){
+
+                        $cart_item['data'] = $cart_item['datas']['SECOND'];
+                        $cart_item['variation'] = $cart_item['SECOND']['variation'];
+                        $name .= wc_get_formatted_cart_item_data( $cart_item ).'<br/>'.'<br/>';
+                    }
+                }
+
+                if(is_object($cart_item['datas']['FIRST'])) {
+
+                    $name .= $cart_item['datas']['FIRST']->get_name().'<br/>';
+
+                    if($cart_item['datas']['FIRST']->is_type( 'variation' )){
+
+                        $cart_item['data'] = $cart_item['datas']['FIRST'];
+                        $cart_item['variation'] = $cart_item['FIRST']['variation'];
+                        // $name .= wc_get_formatted_cart_item_data( $cart_item ).'<br/>'.'<br/>';
+                    }
+                }
+
+               return $name;
             } else {
                 return $name;
             }
@@ -362,7 +389,9 @@ class Cart {
 
 
         add_filter( 'woocommerce_get_item_data',function($item_data, $cart_item ){
-            return array();
+            
+            // return array();
+            return $item_data;
         },10,2);
 
         add_filter('woocommerce_cart_item_remove_link',function($link,$cart_item_key
