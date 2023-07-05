@@ -3200,13 +3200,17 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
                 
                  // console.log(_this./*#*/configs_private.types);
 
-                 if (window.document.splugins.common._o(_this./*#*/configs_private.types, type_inner)) {
-                    
-                    console.log("gim [process_images] if innner loop if");
-                    // console.log("gallery_images process_images inner if");
+                // ACTIVE_TODO temp. this is temparary but if we can confirm it as meture structure than lets make it final and remove active_todo temp.-- to a -- to h
+                //     ACTIVE_TODO Before validating the structure to be mature or not there is a consern that this null type of item which is actually product default thumb, so the concern is that it is not part of the prime data layer of variations. While taking this dicesion we would like to go throgh the flow and notes of the simple type implimentation on our whole php data layer and js layer. -- to h -- to a
+                if(window.document.splugins.common.is_empty(type_inner)) {
+                   type_inner = 'image'; 
+                }
 
-                    // _this./*#*/process_images_inner_private(type_inner, element);    
-                    SP_WBC_Variations_Gallery_Images.prototype.process_images_inner_private.call(_this,type_inner, element);    
+                 if (window.document.splugins.common._o(_this.#configs.types, type_inner)) {
+
+                   console.log("gim [process_images] if innner loop if");
+
+                    _this.#process_images_inner(type_inner, element);    
 
                   } else {
                         // console.log("gim [process_images] if innner loop else");
