@@ -4,9 +4,37 @@
 */
 
 ?>
+<link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/semantic.min.css"
+    integrity="sha512-KXol4x3sVoO+8ZsWPFI/r5KBVB/ssCGB5tsv2nVOKwLg33wTFP3fmnXa47FdSVIshVTgsYk/1734xSk9aFIa4A=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+/>
+
+<script
+    src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"
+    integrity="sha512-bnIvzh6FU75ZKxp0GXLH9bewza/OIw6dLVh9ICg0gogclmYGguQJWl8U30WpbsGTqbIiAwxTsbe76DErLq5EDQ=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+></script>
+
+<script
+    src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/semantic.min.js"
+    integrity="sha512-Xo0Jh8MsOn72LGV8kU5LsclG7SUzJsWGhXbWcYs2MAmChkQzwiW/yTQwdJ8w6UA9C6EVG18GHb/TrYpYCjyAQw=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+></script>
+
+<style type="text/css">
+    .buttons{
+        padding-top: 1em;
+    }
+</style>
+
 			<input type="hidden" name="action" value="feature">
 			<div class="ui form segment">
-			  	<div class="grouped fields">
+			  	<div class="grouped fields" style="display:none;">
 
 			    	<label class="ui large text"><?php _e('Choose features','woo-bundle-choice'); ?> <span class="ui medium grey text"><?php echo eowbc_lang( "(You can later change these options from Settings page)" ); ?></span></label>
 
@@ -123,7 +151,7 @@
 
 			  	</div>
 			  	<br/>
-			  	<div class=" inline fields">	
+			  	<div class=" inline fields" style="display:none;">	
 					<div class="field">
 		 				<label for="bonus_features">Bonus features</label> 	
 		 				<hr/>
@@ -167,7 +195,40 @@
 					</div>
 				</div>
 
-			  	<div class="inline fields">
+                <div class="ui sizer vertical segment">
+                  
+                  <div class="ui huge header">You Selected Below Feture </div>
+                  
+                  <div class="ui divider"></div>
+                  <div class="ui large header">
+
+                  <?php 
+                     
+                    if($_GET['select_option'] == 'bn-rbald'){
+                        echo 'Ring Builder & Loos Diamond Search Page';
+                    }else if($_GET['select_option'] == 'bn-vs'){
+                        echo 'Variation Swatches';
+                    }else if($_GET['select_option'] == 'bn-ajdf'){
+                        echo 'All Jewelry And Diamond Fetures';
+                    }
+                  ?>
+
+                  </div>
+                  
+                  <p>
+                   <?php 
+                     
+                    if($_GET['select_option'] == 'bn-rbald' || $_GET['select_option'] == 'bn-vs'){
+                        echo 'In futur if you want to change the choise you made here means if you want to enable or disable any feture and that you can go to settings tab. from settings tab you can enable disable feture at any time.';
+                    }else if($_GET['select_option'] == 'bn-ajdf'){
+                        echo 'we have enabled all the fetures that are availabkle for free for jewelry and diamond websites. If you would like to no more about our all the fetures than please visit our website at bundeloich.com or simply drop as a <a href="https://sphereplugins.com/contact">Msg</a>';
+                    }
+                  ?>
+
+                  </p>
+                </div>
+
+			  	<div class="inline fields buttons">
 			  		<div class="field">
 			  			<button class="ui inverted red button" type="submit" onclick="window.history.go(-1); return false;">Back</button>
 			  		</div>
@@ -176,3 +237,26 @@
 			  		</div>
 			  	</div>
 			</div>
+
+
+<script type="text/javascript">
+
+	jQuery('[type="checkbox"]').prop("checked", false);
+<?php 
+    if($_GET['select_option'] == 'bn-rbald'){ ?>
+        jQuery('#ring_builder').prop("checked", true);
+        jQuery('#filters_shop_cat').prop("checked", true);
+<?php
+    }else if($_GET['select_option'] == 'bn-vs'){ ?>
+        jQuery('#ring_builder').prop("checked", true);
+        jQuery('#opts_uis_item_page').prop("checked", true);        
+<?php
+    }else if($_GET['select_option'] == 'bn-ajdf'){ ?>
+        jQuery('#ring_builder').prop("checked", true);
+        jQuery('#filters_shop_cat').prop("checked", true);
+        jQuery('#opts_uis_item_page').prop("checked", true);
+<?php
+    }
+?>
+
+</script>
