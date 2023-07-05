@@ -259,4 +259,9 @@ class WBC_WP {
 
         return attachment_url_to_postid( $attachment_url );
     }
+
+    public function get_user_role_types() {
+
+        return wp_roles()->get_names();;
+    }
 }

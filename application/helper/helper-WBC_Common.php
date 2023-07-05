@@ -512,10 +512,16 @@ class WBC_Common {
 
 	}
 
-	public function key_to_title( $key ) {
+	public function key_to_title( $key, $is_basic_conversion = false ) {
 
 		// ACTIVE_TODO implement this function with simple flow like pgTitle of the ci system, so maybe simply copy from there. -- to s 
 		// 	ACTIVE_TODO and also create one more function that applies the sanitization and for that use the wordpress sanitized title function they have -- to s 
+
+		if( $is_basic_conversion ) {
+
+			$key = ucwords( str_replace(array('_', '-'), ' ', $key) );
+		}
+
 		return $key;
 
 	}
@@ -732,9 +738,9 @@ function wbc_special_characters() {
 
 }
 
-function wbc_key_to_title( $key ) {
+function wbc_key_to_title( $key, $is_basic_conversion = false ) {
 
-	return wbc()->common->key_to_title($key);
+	return wbc()->common->key_to_title($key, $is_basic_conversion);
 
 }
 
