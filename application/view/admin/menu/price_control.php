@@ -2,6 +2,9 @@
 defined( 'ABSPATH' ) || exit;
 
 function eo_wbc_jpc_list_categories($slug='',$prefix='',$opts_arr=array()){
+    
+    $separator = wbc()->config->separator();
+    
     $map_base = get_categories(array(
         'exclude'=>array(1),
         'hierarchical' => 1,
@@ -16,7 +19,8 @@ function eo_wbc_jpc_list_categories($slug='',$prefix='',$opts_arr=array()){
     foreach ($map_base as $base) {
 
         // $category_option_list.="<div data-type='0' class='item' data-value='{$base->slug}'>{$prefix}{$base->name}</div>".eo_wbc_jpc_list_categories($base->slug,'--');
-        $opts_arr[$base->slug] = array( 'label'=>$prefix.$base->name, 'attr'=>'data-type="0"' );
+        // $opts_arr[$base->slug] = array( 'label'=>$prefix.$base->name, 'attr'=>'data-type="0"' );
+        $opts_arr[$base->slug] = array( 'label'=>$prefix.$base->name, 'attr'=>'data-type="0", data-sp_eid="'.$separator.$sp_eid_type_value.$separator.$base->term_id.$separator.'"' );
         $opts_arr = eo_wbc_jpc_list_categories($base->slug,'--',$opts_arr);
     }
 
@@ -25,10 +29,15 @@ function eo_wbc_jpc_list_categories($slug='',$prefix='',$opts_arr=array()){
 }
 
 function eo_wbc_jpc_list_attributes( $opts_arr=array() ){
+    
+    $separator = wbc()->config->separator();
+
     // $attributes="";        
     foreach (wc_get_attribute_taxonomies() as $item) {                     
         // $attributes .= "<div data-type='1' class='item' data-value='{$item->attribute_name}'>{$item->attribute_label}</div>";            
-        $opts_arr[$item->attribute_name] = array( 'label'=>$item->attribute_label, 'attr'=>'data-type="1"' );
+        // $opts_arr[$item->attribute_name] = array( 'label'=>$item->attribute_label, 'attr'=>'data-type="1"' );
+        $opts_arr[$item->attribute_name] = array( 'label'=>$item->attribute_label, 'attr'=>'data-type="1", data-sp_eid="'.$separator.'attr'.$separator.$item->attribute_id.$separator.'" ' );
+
     }
     // return $attributes;
     return $opts_arr;
@@ -52,6 +61,10 @@ function eo_wbc_jpc_attributes_values(){
 
     return $attr_vals;
 }
+
+	
+$field_key = 'jpc_field';
+$field_key_sp_eid = $field_key.'_sp_eid';
 
 
 $form = array();
@@ -83,11 +96,16 @@ $form['data'] = array(
 						'inline'=>false,
 						), 
 
-					'jpc_field'=>array(
+					$field_key_sp_eid=>array(
+						'type'=>'hidden',
+						'sanitize'=>'sanitize_text_field',
+						), 
+					/*'jpc_field'*/$field_key=>array(
 						'label'=>eowbc_lang('Field'),
 						'type'=>'select',
 						'value'=>'0',
 						'sanitize'=>'sanitize_text_field',
+						'attr'=>array(' onchange="window.document.splugins.common.admin.form_builder.api.set_sp_eid( \'#'.$field_key.'_dropdown_div\', \''.$field_key_sp_eid.'\' )" '),
 						'options'=>eo_wbc_jpc_list_attributes( eo_wbc_jpc_list_categories() ),
 						'class'=>array('fluid'),
 						'size_class'=>array('eight','wide'),

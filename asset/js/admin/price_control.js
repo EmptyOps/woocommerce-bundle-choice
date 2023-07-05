@@ -213,6 +213,9 @@ jQuery(document).ready(function(jQuery){
             row_obj_data.value_name=jQuery(data[3]).text();
             row_obj_data.value_data=[jQuery(data[3]).data('value_1'),jQuery(data[3]).data('value_2')];
 
+            nicheni line ma question chhe @s
+            row_obj_data.field_sp_eid=jQuery(data[?]).data('value');
+
             row_obj.push(row_obj_data);
 
             if(jQuery(data[1]).data('value')=='1'){
