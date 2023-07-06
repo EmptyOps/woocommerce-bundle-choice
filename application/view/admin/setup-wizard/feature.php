@@ -248,7 +248,6 @@
         jQuery('#filters_shop_cat').prop("checked", true);
 <?php
     }else if($_GET['select_option'] == 'bn-vs'){ ?>
-        jQuery('#ring_builder').prop("checked", true);
         jQuery('#opts_uis_item_page').prop("checked", true);        
 <?php
     }else if($_GET['select_option'] == 'bn-ajdf'){ ?>
