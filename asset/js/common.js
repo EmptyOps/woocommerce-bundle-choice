@@ -3205,14 +3205,15 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
                 if(window.document.splugins.common.is_empty(type_inner)) {
                    type_inner = 'image'; 
                 }
+                 if (window.document.splugins.common._o(_this./*#*/configs_private.types, type_inner)) {
+                    
+                    console.log("gim [process_images] if innner loop if");
+                    // console.log("gallery_images process_images inner if");
 
-                 if (window.document.splugins.common._o(_this.#configs.types, type_inner)) {
-
-                   console.log("gim [process_images] if innner loop if");
-
-                    _this.#process_images_inner(type_inner, element);    
-
-                  } else {
+                    // _this./*#*/process_images_inner_private(type_inner, element);    
+                    SP_WBC_Variations_Gallery_Images.prototype.process_images_inner_private.call(_this,type_inner, element);   
+                
+                } else {
                         // console.log("gim [process_images] if innner loop else");
 
                         //     ACTIVE_TODO_OC_START
