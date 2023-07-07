@@ -93,7 +93,7 @@ class WBC_Config {
 	}
 
 	public function get_available_samples() {
-		return array('ring_builder','pair_maker','filters_shop_cat');
+		return array('ring_builder','pair_maker','filters_shop_cat','opts_uis_item_page');
 	}
 
 	public function get_inventory_types() {

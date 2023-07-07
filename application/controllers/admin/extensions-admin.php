@@ -70,10 +70,11 @@ class Extensions_Admin extends Admin {
 					do_action('wbc_auto_sample_class');					
 
 	        		foreach ($enabled_features as $efk => $efv) {
+		        			// die(wbc()->config->get_available_samples());
 	        			if( in_array($efv, wbc()->config->get_available_samples()) ) {
 		        			$class = str_replace(" ", "_", ucwords( str_replace("_", " ", $efv) ) );
+
 		        			$class = '\\eo\\wbc\\controllers\\admin\\sample_data\\' . $class;
-		        			
 	        				if( class_exists($class) ) {
 		        				$class::instance()->init();	
 		        				break;
