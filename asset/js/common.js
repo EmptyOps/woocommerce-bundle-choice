@@ -3145,8 +3145,7 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
          // console.log( data.product_variations ); 
 
         data.types = [];
-        // ACTIVE_TODO Temp Below if false is temporary and as soon as we refectory the loading sequence for something such to ensure that we have the types available here even for the ajax variation are enabled than at that time just remove the if false and delete the else below.
-        if(false) {
+        if(!_this./*#*/data_private.is_ajax_variation) {
 
             jQuery( data.product_variations ).each(function (i, variation) {
 
@@ -3164,6 +3163,7 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
             
         }else{
             
+            // ACTIVE_TODO Temp Below if is temporary and as soon as we refectory the loading sequence for something such to ensure that we have the types available here even for the ajax variation are enabled than at that time just remove the below hardcoded section and use something like in above if.
             data.types.push('image');
             data.types.push('video');
         }
