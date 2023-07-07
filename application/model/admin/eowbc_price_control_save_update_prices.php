@@ -63,8 +63,8 @@ class Eowbc_Price_Control_Save_Update_Prices {
 	    $res["msg"] = "";
 	    
 	    ACTIVE_TODO_OC_START
-	    -- we need to confirm that below queries are not having any issues aspecialy so that the prices are not updated on any unwanted products. yaah after that we need to take test the entire function once we need to run and test the entire funciton once, means when the user click save and update pricces button from the price control admin pannel the last button that is that entire process is a yet not run and tested -- to h & -- to s
-	    	-- so below return is temporary and we have added that so that as of now the action do not go furture and do not affect anything till it is not run and tested so simply remove it and we do run and tested.
+	    -- we need to confirm that below queries are not having any issues aspecialy so that the prices are not updated on any unwanted products. yaah after that we need to take test the entire function once we need to run and test the entire funciton once, means when the user click save and update prices button from the price control admin pannel the last button that is that entire process is a yet not run and tested -- to h & -- to s
+	    	-- so below return is temporary and we have added that so that as of now the action do not go furture and do not affect anything till it is not run and tested so simply remove it and we do run and testing.
 	    ACTIVE_TODO_OC_END
 
 	    return $result;
@@ -267,7 +267,7 @@ class Eowbc_Price_Control_Save_Update_Prices {
 	 */
 	public static function price_markup_rules(){
 
-		-- here we need to set the static variables like we read for bulders list so that we can reuse it for multiple calls that happen.
+		-- here we need to set the static variables like we read for builders list so that we can reuse it for multiple calls that happen.
 
 		aa delete maravani chhe.
 		$price_markup_rules = array( 
