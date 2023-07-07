@@ -52,6 +52,9 @@ class Eowbc_Price_Control_Save_Update_Prices {
 
 	public function update_prices( $post_ID=null, $post=null, $update=null){                           
 
+		ACTIVE_TODO in furure when required we need to add the cron support for the wbc free layer of price control. but yaah it is a fact that when we always need to keep in mind that the fundamental function of updating entire catelog prices based on one click on the save update prices button is important and thnat should always remains working and supported and so the cron is only in addition to that and we can do that only when required. and maybe that is not so necessary as of now. and if user wants to update there jewelery product prices based on gold based on changing gold rate so something such for jewelery items then in that case they need to use pai so that it works just like the diamond api with the fundamental cron of the dapii. so maybe we can simply mark it as todo if nothing comes up by  third and second revision -- to h
+
+
 		//when called from hook 
         if ( !is_null($post) ) {
         	if( $post->post_type != 'product' || is_null($post_ID) ) {
@@ -318,7 +321,10 @@ class Eowbc_Price_Control_Save_Update_Prices {
 
 			if( empty($val->jpc_target) ){
 
-				$prices_data = self::apply_rule($val, $prices_data);
+				foreach( $prices_data as $price_field_key => $price_field_value ) {
+
+					$prices_data[$price_field_key] = self::apply_rule($val, $price_field_value);
+				}
             }
 
 
@@ -433,5 +439,6 @@ class Eowbc_Price_Control_Save_Update_Prices {
 
 	public static function apply_rule( $rule, $price ) {
 
+		return $price;
 	}
 }
