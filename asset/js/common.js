@@ -3145,8 +3145,7 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
          // console.log( data.product_variations ); 
 
         data.types = [];
-        // ACTIVE_TODO Temp Below if false is temporary and as soon as we refectory the loading sequence for something such to ensure that we have the types available here even for the ajax variation are enabled than at that time just remove the if false and delete the else below.
-        if(false) {
+        if(!_this./*#*/data_private.is_ajax_variation) {
 
             jQuery( data.product_variations ).each(function (i, variation) {
 
@@ -3164,6 +3163,7 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
             
         }else{
             
+            // ACTIVE_TODO Temp Below if is temporary and as soon as we refectory the loading sequence for something such to ensure that we have the types available here even for the ajax variation are enabled than at that time just remove the below hardcoded section and use something like in above if.
             data.types.push('image');
             data.types.push('video');
         }
@@ -3209,15 +3209,20 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
                 
                  // console.log(_this./*#*/configs_private.types);
 
+                // ACTIVE_TODO temp. this is temparary but if we can confirm it as meture structure than lets make it final and remove active_todo temp.-- to a -- to h
+                //     ACTIVE_TODO Before validating the structure to be mature or not there is a consern that this null type of item which is actually product default thumb, so the concern is that it is not part of the prime data layer of variations. While taking this dicesion we would like to go throgh the flow and notes of the simple type implimentation on our whole php data layer and js layer. -- to h -- to a
+                if(window.document.splugins.common.is_empty(type_inner)) {
+                   type_inner = 'image'; 
+                }
                  if (window.document.splugins.common._o(_this./*#*/configs_private.types, type_inner)) {
                     
                     console.log("gim [process_images] if innner loop if");
                     // console.log("gallery_images process_images inner if");
 
                     // _this./*#*/process_images_inner_private(type_inner, element);    
-                    SP_WBC_Variations_Gallery_Images.prototype.process_images_inner_private.call(_this,type_inner, element);    
-
-                  } else {
+                    SP_WBC_Variations_Gallery_Images.prototype.process_images_inner_private.call(_this,type_inner, element);   
+                
+                } else {
                         // console.log("gim [process_images] if innner loop else");
 
                         //     ACTIVE_TODO_OC_START
