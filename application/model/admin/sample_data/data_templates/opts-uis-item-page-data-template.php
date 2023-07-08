@@ -24,6 +24,203 @@ class Opts_Uis_Item_Page_Data_Template extends Pair_Builder_Data_Template {
     private function __construct() {
         
         $this->asset_folder = 'jewelry';
+
+        // ACTIVE_TODO_OC_START
+        // -- either 2 product banavani avse -- to a && -- to h
+        //     -- or we may need to use some if condition on applicable layer when data read( so we can apply in if condition in the operent sata temlate class function ) so that only do products are send back to the calling layer -- to a && -- to h
+        // ACTIVE_TODO_OC_END
+        return array(
+            array(
+                'title' => 'Setting #8800950587',
+                'thumb' => $_img_url.
+                'Products/w-r-2.jpg',
+                'images' => array('w-r-3.jpg', 'w-r-1.jpg'),
+                'content' => '',
+                'sku' => 'SET-8800950587-0',
+                'regular_price' => '',
+                'sale_price' => '',
+                'price' => '',
+                'type' => 'variable', //simple | variable
+                'category' => array('eo_setting_shape_cat'),
+                'attribute' => array('pa_eo_metal_attr' => array(
+                        'name' => 'pa_eo_metal_attr',
+                        'value' => '14K Yellow Gold|14K White Gold|14K Rose Gold',
+                        'position' => 0,
+                        'is_visible' => 1,
+                        'is_variation' => 1,
+                        'is_taxonomy' => 1
+                    ),
+                    'pa_eo_size_attr' => array(
+                        'name' => 'pa_eo_size_attr',
+                        'value' => '4.0|5.0|6.0|7.0',
+                        'position' => 1,
+                        'is_visible' => 1,
+                        'is_variation' => 1,
+                        'is_taxonomy' => 1
+                    ),
+                ),
+                'variation' => array(
+                    array(
+                        'regular_price' => '250',
+                        'price' => '245',
+                        'terms' => array('pa_eo_metal_attr' => '14K Rose Gold', 'pa_eo_size_attr' => '4.0'),
+                        'woo_variation_image' => '',
+                        'sp_variations_gallery_images' => '',
+                        'sp_variations_video_url' => '',
+                    ),
+                    array(
+                        'regular_price' => '260',
+                        'price' => '255',
+                        'terms' => array('pa_eo_metal_attr' => '14K Rose Gold', 'pa_eo_size_attr' => '5.0')
+                    ),
+                    array(
+                        'regular_price' => '270',
+                        'price' => '265',
+                        'terms' => array('pa_eo_metal_attr' => '14K Rose Gold', 'pa_eo_size_attr' => '6.0')
+                    ),
+                    array(
+                        'regular_price' => '280',
+                        'price' => '275',
+                        'terms' => array('pa_eo_metal_attr' => '14K Rose Gold', 'pa_eo_size_attr' => '7.0')
+                    ),
+                    array(
+                        'regular_price' => '300',
+                        'price' => '295',
+                        'terms' => array('pa_eo_metal_attr' => '14K White Gold', 'pa_eo_size_attr' => '4.0')
+                    ),
+                    array(
+                        'regular_price' => '310',
+                        'price' => '305',
+                        'terms' => array('pa_eo_metal_attr' => '14K White Gold', 'pa_eo_size_attr' => '5.0')
+                    ),
+                    array(
+                        'regular_price' => '320',
+                        'price' => '315',
+                        'terms' => array('pa_eo_metal_attr' => '14K White Gold', 'pa_eo_size_attr' => '6.0')
+                    ),
+                    array(
+                        'regular_price' => '330',
+                        'price' => '325',
+                        'terms' => array('pa_eo_metal_attr' => '14K White Gold', 'pa_eo_size_attr' => '7.0')
+                    ),
+                    array(
+                        'regular_price' => '340',
+                        'price' => '335',
+                        'terms' => array('pa_eo_metal_attr' => '14K Yellow Gold', 'pa_eo_size_attr' => '4.0')
+                    ),
+                    array(
+                        'regular_price' => '350',
+                        'price' => '345',
+                        'terms' => array('pa_eo_metal_attr' => '14K Yellow Gold', 'pa_eo_size_attr' => '5.0')
+                    ),
+                    array(
+                        'regular_price' => '360',
+                        'price' => '365',
+                        'terms' => array('pa_eo_metal_attr' => '14K Yellow Gold', 'pa_eo_size_attr' => '6.0')
+                    ),
+                    array(
+                        'regular_price' => '370',
+                        'price' => '365',
+                        'terms' => array('pa_eo_metal_attr' => '14K Yellow Gold', 'pa_eo_size_attr' => '7.0')
+                    )
+                )
+            ),
+            array(
+                'title' => 'Setting #8800950587',
+                'thumb' => $_img_url.
+                'Products/w-r-2.jpg',
+                'images' => array('w-r-3.jpg', 'w-r-1.jpg'),
+                'content' => '',
+                'sku' => 'SET-8800950587-0',
+                'regular_price' => '',
+                'sale_price' => '',
+                'price' => '',
+                'type' => 'variable', //simple | variable
+                'category' => array('eo_setting_shape_cat'),
+                'attribute' => array('pa_eo_metal_attr' => array(
+                        'name' => 'pa_eo_metal_attr',
+                        'value' => '14K Yellow Gold|14K White Gold|14K Rose Gold',
+                        'position' => 0,
+                        'is_visible' => 1,
+                        'is_variation' => 1,
+                        'is_taxonomy' => 1
+                    ),
+                    'pa_eo_size_attr' => array(
+                        'name' => 'pa_eo_size_attr',
+                        'value' => '4.0|5.0|6.0|7.0',
+                        'position' => 1,
+                        'is_visible' => 1,
+                        'is_variation' => 1,
+                        'is_taxonomy' => 1
+                    ),
+                ),
+                'variation' => array(
+                    array(
+                        'regular_price' => '250',
+                        'price' => '245',
+                        'terms' => array('pa_eo_metal_attr' => '14K Rose Gold', 'pa_eo_size_attr' => '4.0'),
+                        'woo_variation_image' => '',
+                        'sp_variations_gallery_images' => '',
+                        'sp_variations_video_url' => '',
+                    ),
+                    array(
+                        'regular_price' => '260',
+                        'price' => '255',
+                        'terms' => array('pa_eo_metal_attr' => '14K Rose Gold', 'pa_eo_size_attr' => '5.0')
+                    ),
+                    array(
+                        'regular_price' => '270',
+                        'price' => '265',
+                        'terms' => array('pa_eo_metal_attr' => '14K Rose Gold', 'pa_eo_size_attr' => '6.0')
+                    ),
+                    array(
+                        'regular_price' => '280',
+                        'price' => '275',
+                        'terms' => array('pa_eo_metal_attr' => '14K Rose Gold', 'pa_eo_size_attr' => '7.0')
+                    ),
+                    array(
+                        'regular_price' => '300',
+                        'price' => '295',
+                        'terms' => array('pa_eo_metal_attr' => '14K White Gold', 'pa_eo_size_attr' => '4.0')
+                    ),
+                    array(
+                        'regular_price' => '310',
+                        'price' => '305',
+                        'terms' => array('pa_eo_metal_attr' => '14K White Gold', 'pa_eo_size_attr' => '5.0')
+                    ),
+                    array(
+                        'regular_price' => '320',
+                        'price' => '315',
+                        'terms' => array('pa_eo_metal_attr' => '14K White Gold', 'pa_eo_size_attr' => '6.0')
+                    ),
+                    array(
+                        'regular_price' => '330',
+                        'price' => '325',
+                        'terms' => array('pa_eo_metal_attr' => '14K White Gold', 'pa_eo_size_attr' => '7.0')
+                    ),
+                    array(
+                        'regular_price' => '340',
+                        'price' => '335',
+                        'terms' => array('pa_eo_metal_attr' => '14K Yellow Gold', 'pa_eo_size_attr' => '4.0')
+                    ),
+                    array(
+                        'regular_price' => '350',
+                        'price' => '345',
+                        'terms' => array('pa_eo_metal_attr' => '14K Yellow Gold', 'pa_eo_size_attr' => '5.0')
+                    ),
+                    array(
+                        'regular_price' => '360',
+                        'price' => '365',
+                        'terms' => array('pa_eo_metal_attr' => '14K Yellow Gold', 'pa_eo_size_attr' => '6.0')
+                    ),
+                    array(
+                        'regular_price' => '370',
+                        'price' => '365',
+                        'terms' => array('pa_eo_metal_attr' => '14K Yellow Gold', 'pa_eo_size_attr' => '7.0')
+                    )
+                )
+            ),
+        );
     }
 
     public function get_attributes() {
@@ -313,7 +510,7 @@ class Opts_Uis_Item_Page_Data_Template extends Pair_Builder_Data_Template {
                     ),
                     
                     /*Lab-Growns ----*/
-                    array(
+                    /*array(
                         'thumb' => '',
                         'name' => 'Lab-Grown',
                         'description' => 'Lab-Grown',
@@ -391,7 +588,7 @@ class Opts_Uis_Item_Page_Data_Template extends Pair_Builder_Data_Template {
                                     'slug' => 'eo_lab_diamond_cushion_shape_cat'
                                 )
                         )
-                    ),
+                    ),*/
                     /*LAb-Growns ---- END*/
 
                     array(
