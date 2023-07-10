@@ -88,7 +88,7 @@ $form['data'] = array(
 					'jpc_target'=>array(
 						'label'=>eowbc_lang('Target'),
 						'type'=>'select',
-						'value'=>'0',
+						'value'=>'',
 						'sanitize'=>'sanitize_text_field',
 						'options'=>apply_filters('wbc_price_control_target_options', array(''=>'Default')),
 						'class'=>array('fluid'),

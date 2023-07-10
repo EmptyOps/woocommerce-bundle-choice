@@ -66,10 +66,9 @@ class Eowbc_Price_Control_Save_Update_Prices {
 	    $res["msg"] = "";
 	    
 	    ACTIVE_TODO_OC_START
-	    -- we need to confirm that below queries are not having any issues aspecialy so that the prices are not updated on any unwanted products. yaah after that we need to take test the entire function once we need to run and test the entire funciton once, means when the user click save and update prices button from the price control admin pannel the last button that is that entire process is a yet not run and tested -- to h & -- to s
-	    	-- so below return is temporary and we have added that so that as of now the action do not go furture and do not affect anything till it is not run and tested so simply remove it and we do run and testing.
+	    -- we need to confirm that below queries are not having any issues aspecialy so that the prices are not updated on any unwanted products. yaah after that we need to run and test the entire funciton once, means when the user click save and update prices button from the price control admin pannel, the last button. that entire process is yet not run and tested -- to h & -- to s
+	    	-- so below return is temporary and we have added that so that as of now the action do not go further and do not affect anything till it is not run and tested so simply remove it and when we do run and testing.
 	    ACTIVE_TODO_OC_END
-
 	    return $result;
 
 	    global $wpdb;
@@ -272,21 +271,9 @@ class Eowbc_Price_Control_Save_Update_Prices {
 
 		-- here we need to set the static variables like we read for builders list so that we can reuse it for multiple calls that happen.
 
-		aa delete maravani chhe.
-		$price_markup_rules = array( 
-						'prod_cat'=>array(
-
-						), 
-						'attr'=>array(
-
-						),
-						'variation'=>array(
-							array( 'legacy_key'=> 'meta', 'map_def_key'=>'meta', 'meta_key'=>'sp_variations_data need to confirm exact key', 'requirement'=>'' )
-						),
-					);
-
 
 		$price_markup_rules/*jpc_data*/ = array();
+
 	    $jpc_str = wbc()->options->get_option('price_control','rules_data', false);
 	    if( $jpc_str ) {
 	    	// $jpc_data = json_decode( stripslashes( unserialize( wbc()->options->get_option('price_control','rules_data',serialize(array())) ) ), true );
@@ -300,17 +287,16 @@ class Eowbc_Price_Control_Save_Update_Prices {
 	}
 
 	/**
-	 *	@param $prices_data should be in array
+	 * 
+	 *	@param $prices_data should be as array type
 	 */
 	public static function price_markup_def_apply_rules($prices_data, $args = array()) {
 
 		// $prices_data = array();
 
-		// NOTE: prod_structure_def function should be called and of use to those which supports entire loop and so on. like dapii, tableview and so on. 
-
 		$price_markup_rules = self::price_markup_rules();
 
-		if( is_array($price_markup_rules) OR is_object($price_markup_rules) ) {
+		if( !is_array($price_markup_rules) and !is_object($price_markup_rules) ) {
 
 			return $prices_data;
 		} 
