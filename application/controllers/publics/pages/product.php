@@ -1145,17 +1145,25 @@ class Product {
 
         $link.="/?";           
         if(is_array($taxonomy) && !empty($taxonomy)){            
-            
+
+            // TODO/NOTE: even though below changes are confirmed with all affecting layers but still if there are regression effects and especially the exist in query do not work on our sp query class than we may need to add if condition there by using the below option of the mapping pref or something such. the changes are made on 12-07-2023.             
             $filter_query=array();
             // $attr_pref=get_option('eo_wbc_map_attr_pref','or');
             $attr_pref=wbc()->options->get_option('mapping_prod_mapping_pref','prod_mapping_pref_attribute','or');
             $glue=($attr_pref === 'or' ? ',' : '+' );           
 
+            $_attribute_param_str = "";
+
             foreach ($taxonomy as  $_tax => $_tems) {
-                $filter_query["query_type_{$_tax}"] = $attr_pref;
-                $filter_query["filter_{$_tax}"] = implode($glue,array_unique(array_filter($_tems)));
+                // $filter_query["query_type_{$_tax}"] = $attr_pref;
+                // $filter_query["filter_{$_tax}"] = implode($glue,array_unique(array_filter($_tems)));
+                $_attribute_param_str .= "pa_" . $_tax . ",";
+                $filter_query["checklist_pa_{$_tax}"] = implode($glue,array_unique(array_filter($_tems)));
             }
-            $link.=http_build_query($filter_query).'&';            
+
+            $filter_query["_attribute"] = rtrim($_attribute_param_str, ',');
+
+            $link.=http_build_query($filter_query).'&';               
         }    
 
         if(!empty($product_in) && is_array($product_in)) {
