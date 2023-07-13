@@ -1661,6 +1661,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
 					jQuery(filter_container).find('[data-filter="'+"<?php echo $term->slug; ?>"+'"]:not(.none_editable)').off();
 					// jQuery(filter_container).find('[data-filter="'+"<?php echo $term->slug; ?>"+'"]:not(.none_editable)').on('click',function(e){
+					console.log('input_type_icon_click_listener() 011');
 					console.log(filter_container);
 					console.log('[data-filter="'+ term_slug +'"]');
 					jQuery(filter_container).find('[data-filter="'+ term_slug +'"]:not(.none_editable)').on('click',function(e){

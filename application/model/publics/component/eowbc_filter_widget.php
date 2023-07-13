@@ -2271,7 +2271,8 @@ class EOWBC_Filter_Widget {
 				$mark = in_array($term_item->slug,$query_paramas_options);				
 
 				// ACTIVE_TODO if non edit required to be supported by our new router based url attribute support than need to manage below 
-				if($non_edit==false && in_array($term_item->id,$query_list)) {
+				// if($non_edit==false && in_array($term_item->id,$query_list)) {
+				if($non_edit==false && $mark) {
 					$non_edit=true;						
 				}
 				$select_icon = get_term_meta($term_item->id, 'wbc_attachment',true);

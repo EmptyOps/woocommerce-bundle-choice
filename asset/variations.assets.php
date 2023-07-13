@@ -1390,3 +1390,39 @@ jQuery( document ).ready(function() {
             }
         /*---Filter-tabEnd---*/  
 </style>
+
+<?php
+// ACTIVE_TODO_OC_START
+// ACTIVE_TODO as of now we have implimented this support for the mapping based conditions here but in future if there is better place than we shoud move it over there -- to h
+// 	ACTIVE_TODO as weel as once we have the varations swatches beta update available we may lite to use the disable and hide flow of that version. Especialy the disable flow this much needed for providing apropriate and perfect user experiance -- to h
+// ACTIVE_TODO_OC_END
+// below false is temparary
+if(false) {
+
+	if(is_product()) {
+
+		$_attribute_perams = explode(',', \eo\wbc\model\SP_WBC_Router::get_query_params('_attribute', 'REQUEST') );	
+
+		foreach($_attribute_perams as $_attribute_slug) {
+			
+
+			if(!empty( wbc()->sanitize->get('checklist_'.$_attribute_slug) )) {
+				?> 
+				<style type="text/css">
+
+					label[for = <?php echo $_attribute_slug ?>] {
+					    display: none;
+					}
+
+					body form table.variations tbody td .spui-wbc-swatches-variable-items-wrapper-<?php echo $_attribute_slug ?>{
+						display: none !important;
+					}
+				</style>
+
+				<?php
+			}
+		}
+
+	}
+}	
+

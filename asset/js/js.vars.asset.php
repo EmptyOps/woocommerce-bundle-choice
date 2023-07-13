@@ -498,7 +498,15 @@ add_action('wp_footer',function(){
 							var form              = event.data.variationForm,
 								attributes        = 'undefined' !== typeof chosenAttributes ? chosenAttributes : form.getChosenAttributes(),
 								currentAttributes = attributes.data;
-							console.log('A_OFF show_variation [onFindVariation]');
+							console.log('A_OFF show_variation [onFindVariation] form');
+							console.log(form);
+							console.log('A_OFF show_variation [onFindVariation] chosenAttributes');
+							console.log(chosenAttributes);
+							console.log('A_OFF show_variation [onFindVariation] form.getChosenAttributes()');
+							console.log(form.getChosenAttributes());
+							console.log('A_OFF show_variation [onFindVariation] currentAttributes');
+							console.log(currentAttributes);
+							console.log('A_OFF show_variation [onFindVariation] attributes');
 							console.log(attributes);
 
 							if ( attributes.count && attributes.count === attributes.chosenCount ) {
