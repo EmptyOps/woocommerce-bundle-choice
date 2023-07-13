@@ -9,50 +9,57 @@ add_action( ( !is_admin() ? 'wp_enqueue_scripts' : 'admin_enqueue_scripts'),func
 	if( wbc()->sanitize->get('is_test') == 1 ) {
 		wbc_pr('js_var_is_loaded');
 	}
+	
+	$inline_script = "
+	//	define namespaces 
+	window.document.splugins = window.document.splugins || {};
+	window.document.splugins.common = window.document.splugins.common || {};
+	window.document.splugins.admin = true;";
+	wp_add_inline_script( 'jquery', $inline_script );
+
+	
+	if( is_admin() ){
+
+		$window_document_splugins_common_is_admin = "true";
+		$sp_is_legacy_admin_page_v = apply_filters('sp_is_legacy_admin_page', "true") ? "true" : "false";
+
+		$inline_script = "window.document.splugins.common.is_admin = ".$window_document_splugins_common_is_admin."; 
+		window.document.splugins.admin.is_legacy_admin_page =".$sp_is_legacy_admin_page_v.";";
+		wp_add_inline_script( 'jquery', $inline_script );
+
+	} else {
+
+		$window_document_splugins_common_is_admin = "false";
+
+		$inline_script = "window.document.splugins.common.is_admin = ".$window_document_splugins_common_is_admin.";" ;
+		wp_add_inline_script( 'jquery', $inline_script );
+	}
+
+	$current_theme_key_v = wbc()->common->current_theme_key();
+	$is_shop_v = ((is_shop()) ? "true" : "false");
+	$is_product_category_v = ((is_product_category()) ? "true" : "false");
+	$is_product_v = ((is_product()) ? "true" : "false");
+	$wbc_is_mobile_v = ((wbc_is_mobile()) ? "true" : "false");
+
+ 	$inline_script = "window.document.splugins.common.current_theme_key = ".$current_theme_key_v.";
+
+	window.document.splugins.common.is_shop_page = ".$is_shop_v."; 
+
+	window.document.splugins.common.is_category_page = ".$is_product_category_v."; 
+
+	window.document.splugins.common.is_item_page = ".$is_product_v.";
+
+	window.document.splugins.common.is_mobile = ".$wbc_is_mobile_v.";
+	
+	window.document.splugins.common.is_tablet = ".$wbc_is_mobile_v.";";	
+
+	wp_add_inline_script( 'jquery', $inline_script );
+
+if(false) {
 
 ?>
 
 	<script type="text/javascript">
-	
-		// var log = console.log;
-		// console.log = function () {
-			
-		// 	var base_log = null;
-		// 	// window.temp = arguments[0];
-
-		// 	if(typeof arguments[0] == 'string'){
-
-		// 		var conditions = [arguments[0].indexOf('] ') >= 0,
-		// 			arguments[0].indexOf('gim_feed [') >= 0,
-		// 			arguments[0].indexOf('gim [') >= 0,
-		// 			arguments[0].indexOf('vs [') >= 0,
-		// 			arguments[0].indexOf('A_OFF') >= 0,
-		// 			arguments[0].indexOf('A_ON') >= 0				
-		// 			];
-
-		// 		for (let i = 0; i < conditions.length; i++) {
-		// 			var condition = false;
-		// 			if(conditions[i]){
-		// 				condition = true;
-		// 				break;
-		// 			}
-		// 		};
-		// 	}
-
-		// 	if(condition){
-
-		// 		base_log = false;
-		// 	}else{
-		// 		base_log = true;
-
-		// 	}
-
-		// 	if(base_log){
-
-		//     log.apply(console, arguments);
-		// 	}
-
-		// }
 
 		//	define namespaces 
 		window.document.splugins = window.document.splugins || {};
@@ -93,6 +100,7 @@ add_action( ( !is_admin() ? 'wp_enqueue_scripts' : 'admin_enqueue_scripts'),func
 
 	</script>
 <?php  
+}
 		
 	if( is_shop() || is_product_category() || is_product() ) {
 	
