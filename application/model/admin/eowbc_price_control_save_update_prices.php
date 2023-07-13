@@ -52,7 +52,7 @@ class Eowbc_Price_Control_Save_Update_Prices {
 
 	public function update_prices( $post_ID=null, $post=null, $update=null){                           
 
-		ACTIVE_TODO in furure when required we need to add the cron support for the wbc free layer of price control. but yaah it is a fact that when we always need to keep in mind that the fundamental function of updating entire catelog prices based on one click on the save update prices button is important and thnat should always remains working and supported and so the cron is only in addition to that and we can do that only when required. and maybe that is not so necessary as of now. and if user wants to update there jewelery product prices based on gold based on changing gold rate so something such for jewelery items then in that case they need to use pai so that it works just like the diamond api with the fundamental cron of the dapii. so maybe we can simply mark it as todo if nothing comes up by  third and second revision -- to h
+		ACTIVE_TODO in furure when required we need to add the cron support for the wbc free layer of price control. but yaah it is a fact that when we always need to keep in mind that the fundamental function of updating entire catelog prices based on one click on the save update prices button is important and that should always remains working and supported and so the cron is only in addition to that and we can do that only when required. and maybe that is not so necessary as of now. and if user wants to update their jewelery product prices based on changing gold rate or something such for jewelery items then in that case they need to use jewelry api extension so that it works just like the diamond api with the fundamental cron of the dapii. so maybe we can simply mark it as todo if nothing comes up by second or third revision -- to h
 
 
 		//when called from hook 
@@ -67,6 +67,7 @@ class Eowbc_Price_Control_Save_Update_Prices {
 	    
 	    ACTIVE_TODO_OC_START
 	    -- we need to confirm that below queries are not having any issues aspecialy so that the prices are not updated on any unwanted products. yaah after that we need to run and test the entire funciton once, means when the user click save and update prices button from the price control admin pannel, the last button. that entire process is yet not run and tested -- to h & -- to s
+	    		--	and when we confirm everything we must keep in mind that there seems grouping supported means multiple category or attributes based rules can be created and then one regular_price and sales_price expression can be set on that. which means directly or indirectly it is grouping of multiple rules. so when we run and test everything this need to be confirmed. and this is contradictory to what we initially thought that it is not supporting grouping and it may require grouping -- to h 
 	    	-- so below return is temporary and we have added that so that as of now the action do not go further and do not affect anything till it is not run and tested so simply remove it and when we do run and testing.
 	    ACTIVE_TODO_OC_END
 	    return $result;
@@ -275,10 +276,14 @@ class Eowbc_Price_Control_Save_Update_Prices {
 		$price_markup_rules/*jpc_data*/ = array();
 
 	    $jpc_str = wbc()->options->get_option('price_control','rules_data', false);
+
 	    if( $jpc_str ) {
+
 	    	// $jpc_data = json_decode( stripslashes( unserialize( wbc()->options->get_option('price_control','rules_data',serialize(array())) ) ), true );
 	    	$price_markup_rules/*jpc_data*/ = json_decode( stripslashes( unserialize( $jpc_str ) ), true );
+	    	
 	    	if(empty($price_markup_rules/*jpc_data*/)){
+
 	    		return false;
 	    	}
 	    }

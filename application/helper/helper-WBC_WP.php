@@ -262,6 +262,6 @@ class WBC_WP {
 
     public function get_user_role_types() {
 
-        return wp_roles()->get_names();;
+        return wp_roles()->get_names();
     }
 }

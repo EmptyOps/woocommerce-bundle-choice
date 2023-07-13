@@ -85,6 +85,8 @@ $form['data'] = array(
 						'inline'=>false,
 						), 
 				
+					NOTE: even though we have added the target field here but we do not have any plans to support the different targets for a single rule so that should be well noted.
+						ACTIVE_TODO and in future we maybe should simply move it with the regular and sales price fields which are added at last after a complete rule is created on admin so that will be proper data structure wise. 
 					'jpc_target'=>array(
 						'label'=>eowbc_lang('Target'),
 						'type'=>'select',
