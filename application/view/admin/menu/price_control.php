@@ -20,7 +20,7 @@ function eo_wbc_jpc_list_categories($slug='',$prefix='',$opts_arr=array()){
 
         // $category_option_list.="<div data-type='0' class='item' data-value='{$base->slug}'>{$prefix}{$base->name}</div>".eo_wbc_jpc_list_categories($base->slug,'--');
         // $opts_arr[$base->slug] = array( 'label'=>$prefix.$base->name, 'attr'=>'data-type="0"' );
-        $opts_arr[$base->slug] = array( 'label'=>$prefix.$base->name, 'attr'=>'data-type="0", data-sp_eid="'.$separator.$sp_eid_type_value.$separator.$base->term_id.$separator.'"' );
+        $opts_arr[$base->slug] = array( 'label'=>$prefix.$base->name, 'attr'=>'data-type="0" data-sp_eid="'.$separator.'prod_cat'.$separator.$base->term_id.$separator.'"' );
         $opts_arr = eo_wbc_jpc_list_categories($base->slug,'--',$opts_arr);
     }
 
@@ -36,7 +36,7 @@ function eo_wbc_jpc_list_attributes( $opts_arr=array() ){
     foreach (wc_get_attribute_taxonomies() as $item) {                     
         // $attributes .= "<div data-type='1' class='item' data-value='{$item->attribute_name}'>{$item->attribute_label}</div>";            
         // $opts_arr[$item->attribute_name] = array( 'label'=>$item->attribute_label, 'attr'=>'data-type="1"' );
-        $opts_arr[$item->attribute_name] = array( 'label'=>$item->attribute_label, 'attr'=>'data-type="1", data-sp_eid="'.$separator.'attr'.$separator.$item->attribute_id.$separator.'" ' );
+        $opts_arr[$item->attribute_name] = array( 'label'=>$item->attribute_label, 'attr'=>'data-type="1" data-sp_eid="'.$separator.'attr'.$separator.$item->attribute_id.$separator.'" ' );
 
     }
     // return $attributes;

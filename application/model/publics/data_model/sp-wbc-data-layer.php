@@ -118,6 +118,14 @@ if( !class_exists('\\eo\wbc\model\data_model\SP_WBC_Data_Layer') ) {
 				}
 				else {
 
+					move to asana 
+					// ACTIVE_TODO below we have commented the statement and simplified the structure of this kind of prod_structure_def, rendering dd and so on hook based structures. however if it is affecting fundamental flow or if the reusability is compromised significantly then we should give it a second thought and maybe enable below kind of layer. if nothing such thing comes up then simply mark it is as TODO by second revision. -- to h 	
+					// 	INVALID 
+					// 	ACTIVE_TODO there can be a solution to above point if we call this function "at last" from the below function of to_column_names then both the reusability can be ensured to optimum level as well as the other layers binding to this layer s hooks does not get affected. but anyway then if they have to do something on some specific data that is then reprocessed from here then that would be a big problem. so maybe the simplified structure of depending on if and not doing anything as default in else is good idea. 
+					// 		INVALID 
+					// 		ACTIVE_TODO maybe the standard and natural solution to this problem is that this function should not be called from the base function of to_column_names below and instead this function s entire layer should also be added in the add filter hook that this function should bind simply so yeah we do not need to depend on any other loading sequence to ensure that this add function s add filter hook is bound on time. 
+					// 		INVALID 
+								all above points are invalid now but in future we may like to take into consideration the last points above s idea of even adding filter hook binding ofor the to_column_names_schema function layer 
 					$column_names[$key] = $value["type"]."__".$value["val"];
 				}
 			}

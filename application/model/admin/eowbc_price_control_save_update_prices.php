@@ -103,9 +103,12 @@ class Eowbc_Price_Control_Save_Update_Prices {
 		$res["msg"] = $update_cnt." times product(s) prices updated";
 	    if(is_array($jpc_data) OR is_object($jpc_data)){
 
+		    ACTIVE_TODO_OC_START
 	        -- we now most probebly need to disable this loop but before that we need to confirm that nothing is breaking aspecialy the above if of is null and the query will remain working as it is -- to h & -- to s
+	        		--	it would not be that easier and straight forward, especially since the based on below rules loop of jpc_data and then the q_data loop the sql query is generated products to be processed are determined. so maybe we should think about it again, maybe simply the wbc layers implementation here in the price_markup_def_apply_rules would skip implementing any conditions related to category and attribute and it should be simply done from here and then the particular rule linked to particular data should be sent in the prices_data var. 
 	        	-- and regarding queries most probebly it should remain working but we need to confirm about above is null condition -- to h & -- to s
 	        	-- and in the same way we need to confirm if there is anything else that is if breaking then we need to take care of it 
+		    ACTIVE_TODO_OC_END
 	        foreach ($jpc_data as $q_data) {
 
 	            
@@ -145,7 +148,11 @@ class Eowbc_Price_Control_Save_Update_Prices {
 	                    	$prices_data['price'] = get_post_meta($post_id->object_id,'_price');
 	                    	$prices_data['sales_price'] = get_post_meta($post_id->object_id,'_sale_price');
 
-	                    	-- we need to figure out here how to prepare the $prices_data to pass in below function -- to h & -- to s
+						    ACTIVE_TODO_OC_START
+	                    	-- we need to figure out here how to prepare the $prices_data to pass in below function -- to h & -- to s done 
+	               				--	above is done but maybe we need additional conditions layer to make sure that if legacy storage products wants to skip the non default target rules then it should or simply maybe the target dropdown based if condition everywhere is enough for that not it is not since the data is commonly passed everywhere so we simply need to add some param like data source and maybe use that to add condition for specific layer then only it would be suffice. -- to h 
+	               					--	and maybe we needed all these conditions, and separate layers, because the conditions of rule s category and attribute if match or not is required to be executed on different (data) storage layers like here in wbc the sql query on woo catalog data while on dapii it would be on the definition data layer. so if that is the case then that is worth it but we need to confirm otherwise it feels that we need to rethink about the structure and implementation and just simplify it, and make it mature and solid structure. 
+						    ACTIVE_TODO_OC_END
 							$prices_data = self::price_markup_def_apply_rules($prices_data);
 
 	                    	// //here seems bug should be regular_price instead of sales_price
@@ -161,7 +168,11 @@ class Eowbc_Price_Control_Save_Update_Prices {
 
 	                    	$prices_data['price'] = get_post_meta($post_id->object_id,'_price');
 	                        
-	                        -- we need to figure out here how to prepare the $prices_data to pass in below function -- to h & -- to s
+						    ACTIVE_TODO_OC_START
+	                    	-- we need to figure out here how to prepare the $prices_data to pass in below function -- to h & -- to s done 
+	               				--	above is done but maybe we need additional conditions layer to make sure that if legacy storage products wants to skip the non default target rules then it should or simply maybe the target dropdown based if condition everywhere is enough for that not it is not since the data is commonly passed everywhere so we simply need to add some param like data source and maybe use that to add condition for specific layer then only it would be suffice. -- to h 
+	               					--	and maybe we needed all these conditions, and separate layers, because the conditions of rule s category and attribute if match or not is required to be executed on different (data) storage layers like here in wbc the sql query on woo catalog data while on dapii it would be on the definition data layer. so if that is the case then that is worth it but we need to confirm otherwise it feels that we need to rethink about the structure and implementation and just simplify it, and make it mature and solid structure. 
+						    ACTIVE_TODO_OC_END
 							$prices_data = self::price_markup_def_apply_rules($prices_data);
 
 	                        delete_post_meta($post_id->object_id,'_sale_price');                    
@@ -173,7 +184,11 @@ class Eowbc_Price_Control_Save_Update_Prices {
 
                     	$prices_data['regular_price'] = get_post_meta($post_id->object_id,'_regular_price');
                         
-                        -- we need to figure out here how to prepare the $prices_data to pass in below function -- to h & -- to s
+					    ACTIVE_TODO_OC_START
+                    	-- we need to figure out here how to prepare the $prices_data to pass in below function -- to h & -- to s done 
+               				--	above is done but maybe we need additional conditions layer to make sure that if legacy storage products wants to skip the non default target rules then it should or simply maybe the target dropdown based if condition everywhere is enough for that not it is not since the data is commonly passed everywhere so we simply need to add some param like data source and maybe use that to add condition for specific layer then only it would be suffice. -- to h 
+               					--	and maybe we needed all these conditions, and separate layers, because the conditions of rule s category and attribute if match or not is required to be executed on different (data) storage layers like here in wbc the sql query on woo catalog data while on dapii it would be on the definition data layer. so if that is the case then that is worth it but we need to confirm otherwise it feels that we need to rethink about the structure and implementation and just simplify it, and make it mature and solid structure. 
+					    ACTIVE_TODO_OC_END
 						$prices_data = self::price_markup_def_apply_rules($prices_data);
 
 	                    // update_post_meta($post_id->object_id,'_regular_price',$q_data[count($q_data)-1]->regular_price);   
@@ -216,7 +231,11 @@ class Eowbc_Price_Control_Save_Update_Prices {
 	                    	$prices_data['price'] = get_post_meta($pid,'_price');
 	                    	$prices_data['sales_price'] = get_post_meta($pid,'_sale_price');
 	                        
-	                        -- we need to figure out here how to prepare the $prices_data to pass in below function -- to h & -- to s
+						    ACTIVE_TODO_OC_START
+	                    	-- we need to figure out here how to prepare the $prices_data to pass in below function -- to h & -- to s done 
+	               				--	above is done but maybe we need additional conditions layer to make sure that if legacy storage products wants to skip the non default target rules then it should or simply maybe the target dropdown based if condition everywhere is enough for that not it is not since the data is commonly passed everywhere so we simply need to add some param like data source and maybe use that to add condition for specific layer then only it would be suffice. -- to h 
+	               					--	and maybe we needed all these conditions, and separate layers, because the conditions of rule s category and attribute if match or not is required to be executed on different (data) storage layers like here in wbc the sql query on woo catalog data while on dapii it would be on the definition data layer. so if that is the case then that is worth it but we need to confirm otherwise it feels that we need to rethink about the structure and implementation and just simplify it, and make it mature and solid structure. 
+						    ACTIVE_TODO_OC_END
 							$prices_data = self::price_markup_def_apply_rules($prices_data);
 
 	                        // update_post_meta($pid,'_price',$q_data[count($q_data)-1]->sales_price);
@@ -230,7 +249,11 @@ class Eowbc_Price_Control_Save_Update_Prices {
 
 	                    	$prices_data['price'] = get_post_meta($pid,'_price');
 	                        
-	                        -- we need to figure out here how to prepare the $prices_data to pass in below function -- to h & -- to s
+						    ACTIVE_TODO_OC_START
+	                    	-- we need to figure out here how to prepare the $prices_data to pass in below function -- to h & -- to s done 
+	               				--	above is done but maybe we need additional conditions layer to make sure that if legacy storage products wants to skip the non default target rules then it should or simply maybe the target dropdown based if condition everywhere is enough for that not it is not since the data is commonly passed everywhere so we simply need to add some param like data source and maybe use that to add condition for specific layer then only it would be suffice. -- to h 
+	               					--	and maybe we needed all these conditions, and separate layers, because the conditions of rule s category and attribute if match or not is required to be executed on different (data) storage layers like here in wbc the sql query on woo catalog data while on dapii it would be on the definition data layer. so if that is the case then that is worth it but we need to confirm otherwise it feels that we need to rethink about the structure and implementation and just simplify it, and make it mature and solid structure. 
+						    ACTIVE_TODO_OC_END
 							$prices_data = self::price_markup_def_apply_rules($prices_data);
 
 	                        delete_post_meta($pid,'_sale_price');                    
@@ -243,7 +266,11 @@ class Eowbc_Price_Control_Save_Update_Prices {
 
 	                    	$prices_data['regular_price'] = get_post_meta($pid,'_regular_price');
 	                        
-	                        -- we need to figure out here how to prepare the $prices_data to pass in below function -- to h & -- to s
+						    ACTIVE_TODO_OC_START
+	                    	-- we need to figure out here how to prepare the $prices_data to pass in below function -- to h & -- to s done 
+	               				--	above is done but maybe we need additional conditions layer to make sure that if legacy storage products wants to skip the non default target rules then it should or simply maybe the target dropdown based if condition everywhere is enough for that not it is not since the data is commonly passed everywhere so we simply need to add some param like data source and maybe use that to add condition for specific layer then only it would be suffice. -- to h 
+	               					--	and maybe we needed all these conditions, and separate layers, because the conditions of rule s category and attribute if match or not is required to be executed on different (data) storage layers like here in wbc the sql query on woo catalog data while on dapii it would be on the definition data layer. so if that is the case then that is worth it but we need to confirm otherwise it feels that we need to rethink about the structure and implementation and just simplify it, and make it mature and solid structure. 
+						    ACTIVE_TODO_OC_END
 							$prices_data = self::price_markup_def_apply_rules($prices_data);
 
 	                    	// update_post_meta($pid,'_regular_price',$q_data[count($q_data)-1]->regular_price); 
@@ -281,7 +308,7 @@ class Eowbc_Price_Control_Save_Update_Prices {
 
 	    	// $jpc_data = json_decode( stripslashes( unserialize( wbc()->options->get_option('price_control','rules_data',serialize(array())) ) ), true );
 	    	$price_markup_rules/*jpc_data*/ = json_decode( stripslashes( unserialize( $jpc_str ) ), true );
-	    	
+
 	    	if(empty($price_markup_rules/*jpc_data*/)){
 
 	    		return false;

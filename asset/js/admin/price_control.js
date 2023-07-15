@@ -207,6 +207,8 @@ jQuery(document).ready(function(jQuery){
         var jpc_target_label = jQuery('#jpc_target_dropdown_div').dropdown('get text');
         rows_data += 'Target: '+jpc_target_label+'<br/><br/>';
 
+        var jpc_field_sp_eid = jQuery('#jpc_field_sp_eid').val();
+
         jQuery("#jpc_rules_table tbody").find('tr').each(function(i,e){
 
             data=jQuery(e).find('td');                    
@@ -215,6 +217,8 @@ jQuery(document).ready(function(jQuery){
             NOTE: since we are not planning to use different targets for different sub rules of the rule so the target field is simply read directly from the form and not from the looped tr tag here of the jpc_rules_table. and as per standard data structure if we are not supposed to use that then that should not be set per row means for each tr tag rows. 
             row_obj_data.jpc_target = jpc_target;
             row_obj_data.jpc_target_label = jpc_target_label;
+
+            row_obj_data.field_sp_eid = jpc_field_sp_eid;
 
             row_obj_data.field_name=jQuery(data[0]).text();
             row_obj_data.field_value=jQuery(data[0]).data('value');
@@ -225,9 +229,6 @@ jQuery(document).ready(function(jQuery){
 
             row_obj_data.value_name=jQuery(data[3]).text();
             row_obj_data.value_data=[jQuery(data[3]).data('value_1'),jQuery(data[3]).data('value_2')];
-
-            nicheni line ma question chhe @s
-            row_obj_data.field_sp_eid=jQuery(data[?]).data('value');
 
             row_obj.push(row_obj_data);
 

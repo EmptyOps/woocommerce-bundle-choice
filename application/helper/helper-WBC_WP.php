@@ -264,4 +264,24 @@ class WBC_WP {
 
         return wp_roles()->get_names();
     }
+
+    /** 
+     * 
+     * reference https://stackoverflow.com/a/10085775 
+     * 
+     * This method is not applicable if I have two or more roles added in a user, the reason is it only return single or first role that is being added to the user, shifted using array_shift PHP function.
+     * 
+     * 
+     * Note that $current_user always exist and by default is filled with empty attributes, so although this code looks like you'll get object access and index problems, it actually works. The returned role for a new visitor will be NULL. 
+     * 
+     */
+    public function get_current_user_role() {
+
+        global $current_user;
+
+        $user_roles = $current_user->roles;
+        $user_role = array_shift($user_roles);
+
+        return $user_role;
+    }
 }
