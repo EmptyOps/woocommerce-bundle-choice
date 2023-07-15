@@ -3684,37 +3684,40 @@ window.document.splugins.wbc.filter_sets.core = function( configs ) {
 		      }        
 
 		      // <?php if(wp_is_mobile() and !wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile')): ?>
-		      if((window.document.splugins.common.is_mobile) && !(_this.configs.filter_setting_alternate_mobile)){
+		      if(window.document.splugins.Feed.is_mobile_by_page_sections__cat_shop_page){
+		      	
+			      if((window.document.splugins.common.is_mobile) && !(_this.configs.filter_setting_alternate_mobile)){
 
-		        if(jQuery(element/*this*/).hasClass('active')){
-		      
-		          jQuery(element/*this*/).trigger('click');
-		        }
-		      
-		        reset_script = jQuery(element/*this*/).next().find('[data-reset]').data('reset');
-		        if(typeof(reset_script)!==typeof(undefined) && reset_script!=''){
-		      
-		          eval(reset_script);
-		        }        
+			        if(jQuery(element/*this*/).hasClass('active')){
+			      
+			          jQuery(element/*this*/).trigger('click');
+			        }
+			      
+			        reset_script = jQuery(element/*this*/).next().find('[data-reset]').data('reset');
+			        if(typeof(reset_script)!==typeof(undefined) && reset_script!=''){
+			      
+			          eval(reset_script);
+			        }        
+			      }
+
+			      // <?php if(wp_is_mobile() and wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile')): ?>
+			      if((window.document.splugins.common.is_mobile) && (_this.configs.filter_setting_alternate_mobile)){
+
+			        if(jQuery(element/*this*/).hasClass('active')){
+			      
+			          jQuery(element/*this*/).trigger('click');
+			        }          
+			        
+			        reset_script = jQuery(element/*this*/).next().find('[data-reset]').data('reset');
+			        if(typeof(reset_script)!==typeof(undefined) && reset_script!=''){
+			      
+			          eval(reset_script);
+			        }  
+
+			        jQuery(".close_sticky_mob_filter").trigger('click');
+
+			      }  
 		      }
-
-		      // <?php if(wp_is_mobile() and wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile')): ?>
-		      if((window.document.splugins.common.is_mobile) && (_this.configs.filter_setting_alternate_mobile)){
-
-		        if(jQuery(element/*this*/).hasClass('active')){
-		      
-		          jQuery(element/*this*/).trigger('click');
-		        }          
-		        
-		        reset_script = jQuery(element/*this*/).next().find('[data-reset]').data('reset');
-		        if(typeof(reset_script)!==typeof(undefined) && reset_script!=''){
-		      
-		          eval(reset_script);
-		        }  
-
-		        jQuery(".close_sticky_mob_filter").trigger('click');
-
-		      }  
 
 		      
 		    });        	

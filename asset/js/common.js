@@ -1568,6 +1568,7 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
         console.log('process_attribute_data selects', data.selects)
         console.log('process_attribute_data disabled_selects', data.disabled_selects)
         data.in_stocks = splugins._.difference(data.selects, data.disabled_selects);
+        console.log('data.in_stocks', data.in_stocks)
 
         // console.log('out of stock', out_of_stock_selects)
         // console.log('in stock', in_stocks)
@@ -1831,6 +1832,8 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
         // }
         var object = _this./*#*/compatability_private('attribute_options', {'element':element, 'data':data});
         data = object.data;
+        console.log('vs [process_attribute_template] data');
+        console.log(data);
 
         data = _this./*#*/process_attribute_data_private(type, element, data, mode);
         

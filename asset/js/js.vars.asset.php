@@ -110,6 +110,17 @@ add_action( ( !is_admin() ? 'wp_enqueue_scripts' : 'admin_enqueue_scripts'),func
 		// ACTIVE_TODO temp. hold for removel and we need to remove as soon as we refactore the loading sequance of filter widget class and load asset function og that class. so it is highly temporary. and we need to fix if we face issues whwrw filter feature is not active on certain pages but still that is loading below asset then we need to prevent that also and other such issues.
 		if( is_shop() || is_product_category() ) {
 			
+
+?>
+
+			<script type="text/javascript">
+			 	//  Feed 
+				window.document.splugins.Feed = window.document.splugins.Feed || {};
+
+				window.document.splugins.Feed.is_mobile_by_page_sections__cat_shop_page = <?php echo ((wbc_is_mobile_by_page_sections('cat_shop_page')) ? "true" : "false");?>; 
+		
+			</script>
+<?php
 			 wbc()->load->asset('js', 'publics/eo_wbc_filter', array('jquery'), "", false, true, null, null, true);
 
 			// $site_url = get_site_url();
