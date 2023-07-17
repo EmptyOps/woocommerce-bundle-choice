@@ -163,6 +163,12 @@ if ( ! class_exists( 'Admin_Menu' ) ) {
 				unset($submenu[7]);
 			}
 
+			// // -- $_GET se tya url avse pasi condition check thase @a 154 and 154.2--
+			// if(!empty($_GET['select_option']) && $_GET['select_option'] == 'bn-vs'){
+			// 	unset($submenu[10]);
+			// 	unset($submenu[11]);
+			// }
+
 			$menu['submenu'] = $submenu;
 			return $menu;
 		}

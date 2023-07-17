@@ -130,6 +130,37 @@ $shortcode_table['body'] = array(
 	),
 );
 
+// ------ aa sample data mate ni field muki ana mate var banavela se @a 154.2 -------
+wbc()->load->model('admin/form-builder');
+wbc()->load->model('category-attribute');
+
+// check it out link
+$check_it_out_link_type = 'skip';
+$check_it_out_link_label = 'Check it out!';
+$check_it_out_link = '';
+$lbl_txt = 'Congratulations! It seems that you have completed the setup process, click below link to check it out in working on your website.';
+$active_feature = \eo\wbc\controllers\admin\menu\Admin_Menu::active_pair_builder_feature();
+if( !empty($active_feature) && \eo\wbc\controllers\admin\menu\Admin_Menu::is_pair_builder_feature_all_setup() ) {
+
+	$configuration_buttons_page = wbc()->options->get_option('configuration','buttons_page',false);
+	if( $configuration_buttons_page===0 or $configuration_buttons_page==='0' ) {			
+		$check_it_out_link_type = 'link';
+		$check_it_out_link = site_url('index.php/design-your-own-ring');
+    }
+    elseif( $configuration_buttons_page==1 or $configuration_buttons_page==3 ) {			
+		$check_it_out_link_type = 'link';
+		$check_it_out_link = site_url( /*'?#wbc_' only add hashtag to url if required since the user is not setting position on home page they will find our where it is displayed so unnecessarily putting #wbc_ is not good and annoying.*/);
+    }
+    elseif( $configuration_buttons_page==2 ) {			
+		$check_it_out_link_type = 'label';
+		$check_it_out_link_label = 'You have choose to display buttons using Shortcode only, so please go to the page in which you put the Shortcode to check it.';
+		$lbl_txt = 'Congratulations! It seems that you have completed the setup process.';
+    }
+}
+
+$bonus_features = unserialize(wbc()->options->get_option('setting_status_setting_status_setting','bonus_features',serialize(array())));
+
+// ------
 
 $form['id']='eowbc_tiny_features';
 $form['title']='Tiny Features';
@@ -178,32 +209,11 @@ $form['data'] = array(
 					// 'class'=>array('fluid'),
 					// 'size_class'=>array('eight','wide')
 				),
-				
-				'config_automation_shop_category_link'=>(!empty($bonus_features['filters_shop_cat'])?array(
-					'label'=>'Click here for automated configuration and setup Shop/Category Filters',
-					'type'=>'link',
-					'attr'=>array("href='".admin_url('admin.php?page=eowbc&eo_wbc_view_auto_jewel=1&f=filters_shop_cat')."'"),
-					'class'=>array('secondary'),
-					'visible_info'=>array( 'label'=>'Please visit at '.site_url(get_option('woocommerce_permalinks')['category_base'].'eo_diamond_shape_cat/'),
-						'type'=>'visible_info',
-						'class'=>array('fluid', 'small'),
-						'size_class'=>array('sixteen','wide'),
-					),	
-				):array()),
-
-				'config_automation_shop_category_link_visible_info'=>(!empty($bonus_features['filters_shop_cat'])?
-					array(
-						'label'=>'Please visit at '.site_url(get_option('woocommerce_permalinks')['category_base'].'/eo_diamond_shape_cat/')." OR ".site_url(get_option('woocommerce_permalinks')['category_base'].'/eo_setting_shape_cat/')."</br>(The URLs will works with default setting of permalink, if you are using any other setting then follow accodingly)",
-						'type'=>'visible_info',
-						'class'=>array('fluid', 'medium'),
-						'size_class'=>array('sixteen','wide'),
-						'inline'=>false,
-					):array()),
 
 				'config_automation_link'=>array(
 					'label'=>'Click here for automated configuration and setup',
 					'type'=>'link',
-					'attr'=>array("href='".admin_url('admin.php?page=eowbc&eo_wbc_view_auto_jewel=1&f='.$active_feature)."'"),
+					'attr'=>array("href='".admin_url("admin.php?setup_wizard_run=1&page=eowbc&eo_wbc_view_auto_jewel=1&f=opts_uis_item_page")."'"),
 					'class'=>array('secondary')	
 				),
 				'config_automation_visible_info'=>array(
@@ -236,7 +246,7 @@ $form['data'] = array(
 					'type'=>$check_it_out_link_type,
 					'attr'=>array("href='".$check_it_out_link."'"),
 					'class'=>array('secondary')	
-				)								
+				),								
 				'tiny_features_general_tab_end'=>array(
 					'type'=>'accordian',
 					'section_type'=>'end'
