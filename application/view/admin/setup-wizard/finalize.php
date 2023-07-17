@@ -44,3 +44,19 @@ var_dump($available_feature);*/
 				</div>
 			  	
 			</div>
+
+<?php
+
+// -- aa condition last setupwizard pasi admin ma redirect thay tyare mukvani se 154 recording @a
+// if( !empty($_GET['f']) && $_GET['f'] != 'opts_uis_item_page' ) {
+
+// 	redirect general tab
+// 	extention ni tab show karvani 
+// }elseif( !empty($_GET['f']) && $_GET['f'] == 'opts_uis_item_page' ) {
+	
+// 	redirect bounce feture
+// 	extention ni tab show nathi karvani 
+// }
+
+
+?>
