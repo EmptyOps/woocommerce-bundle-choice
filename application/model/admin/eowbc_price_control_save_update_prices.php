@@ -295,27 +295,31 @@ class Eowbc_Price_Control_Save_Update_Prices {
 	/**
 	 *	Price Markup rules
 	 */
+	private static $_price_markup_rules = null;
 	public static function price_markup_rules(){
 
-		-- here we need to set the static variables like we read for builders list so that we can reuse it for multiple calls that happen.
+		if ( ! isset( self::$_price_markup_rules ) ) {
 
+			$price_markup_rules/*jpc_data*/ = array();
+		    $jpc_str = wbc()->options->get_option('price_control','rules_data', false);
+		    
+		    if( $jpc_str ) {
 
-		$price_markup_rules/*jpc_data*/ = array();
+		    	// $jpc_data = json_decode( stripslashes( unserialize( wbc()->options->get_option('price_control','rules_data',serialize(array())) ) ), true );
+		    	$price_markup_rules/*jpc_data*/ = json_decode( stripslashes( unserialize( $jpc_str ) ), true );
+		    	
+		    	if(empty($price_markup_rules/*jpc_data*/)){
 
-	    $jpc_str = wbc()->options->get_option('price_control','rules_data', false);
+		    		self::$_price_markup_rules = false;
 
-	    if( $jpc_str ) {
+		    		return self::$_price_markup_rules;
+		    	}
+		    }
+			
+			self::$_price_markup_rules = apply_filters('wbc_price_markup_rules', $price_markup_rules);
+		}
 
-	    	// $jpc_data = json_decode( stripslashes( unserialize( wbc()->options->get_option('price_control','rules_data',serialize(array())) ) ), true );
-	    	$price_markup_rules/*jpc_data*/ = json_decode( stripslashes( unserialize( $jpc_str ) ), true );
-
-	    	if(empty($price_markup_rules/*jpc_data*/)){
-
-	    		return false;
-	    	}
-	    }
-		
-		return apply_filters('wbc_price_markup_rules', $price_markup_rules);
+		return self::$_price_markup_rules;
 	}
 
 	/**
@@ -337,11 +341,11 @@ class Eowbc_Price_Control_Save_Update_Prices {
 
 		foreach($price_markup_rules as $type => $val) {
 
-			if( empty($val->jpc_target) ){
+			if( empty($val[0]->jpc_target) ){
 
 				foreach( $prices_data as $price_field_key => $price_field_value ) {
 
-					$prices_data[$price_field_key] = self::apply_rule($val, $price_field_value);
+					$prices_data[$price_field_key] = self::apply_rule( $val, $price_field_value, (strpos( $price_field_key, "sales_price" ) !== FALSE ? true : false) );
 				}
             }
 
@@ -455,8 +459,14 @@ class Eowbc_Price_Control_Save_Update_Prices {
 		return $prices_data;
 	}
 
-	public static function apply_rule( $rule, $price ) {
+	public static function apply_rule( $rule, $price, $is_sales_price ) {
 
-		return $price;
+		if($is_sales_price) {
+
+			return ( $price + ( $price * ( $rule[count($rule)-1]->sales_price / 100 ) ) );
+		} else {
+
+			return ( $price + ( $price * ( $rule[count($rule)-1]->regular_price / 100 ) ) );
+		}
 	}
 }

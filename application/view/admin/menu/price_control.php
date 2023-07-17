@@ -246,7 +246,7 @@ $form['data'] = array_merge( $form['data'], array(
 								) 
 							), 
 						'regular_price_label'=>array(
-							'label'=>eowbc_lang('Regular Price'),
+							'label'=>eowbc_lang('Regular Price(%)'),
 							'type'=>'label',
 							//'class'=>array('fluid'),
 							'size_class'=>array('three','wide','jpc_rules_table'),
@@ -256,11 +256,12 @@ $form['data'] = array_merge( $form['data'], array(
 						'regular_price'=>array(
 							//'label'=>eowbc_lang('Regular Price'),
 							'no_label' => true,
-							'placeholder'=>eowbc_lang('Regular Price'),
-							'type'=>'text',
+							'placeholder'=>eowbc_lang('Regular Price(%)'),
+							'type'=>'number',
 							'value'=>'0',
 							'sanitize'=>'sanitize_text_field',
 							'options'=>array(),
+							'attr'=>array("min='-100'"),	
 							//'class'=>array('fluid'),
 							'size_class'=>array('three','wide','jpc_rules_table'),
 							'prev_inline'=>true,
@@ -268,7 +269,7 @@ $form['data'] = array_merge( $form['data'], array(
 							'inline'=>true,
 							),
 						'sales_price_label'=>array(
-							'label'=>eowbc_lang('Sales Price'),
+							'label'=>eowbc_lang('Sales Price(%)'),
 							'type'=>'label',
 							//'class'=>array('fluid'),
 							'size_class'=>array('three','wide','jpc_rules_table'),
@@ -279,11 +280,12 @@ $form['data'] = array_merge( $form['data'], array(
 						'sales_price'=>array(
 							//'label'=>eowbc_lang('Sales Price'),
 							'no_label' => true,
-							'placeholder'=>eowbc_lang('Sales Price'),
-							'type'=>'text',
+							'placeholder'=>eowbc_lang('Sales Price(%)'),
+							'type'=>'number',
 							'value'=>'0',
 							'sanitize'=>'sanitize_text_field',
 							'options'=>array(),
+							'attr'=>array("min='-100'"),	
 							//'class'=>array('fluid'),
 							'size_class'=>array('three','wide','jpc_rules_table'),
 							'prev_inline'=>true,
