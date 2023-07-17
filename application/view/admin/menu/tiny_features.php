@@ -171,7 +171,72 @@ $form['data'] = array(
 					'class'=>array('fluid'),						
 					// 'size_class'=>array('eight','wide'),
 					'inline'=>false,					
-				),							
+				),			
+				'add_sample_data'=>array(
+					'label'=>'Add Sample Data',
+					'type'=>'devider',
+					// 'class'=>array('fluid'),
+					// 'size_class'=>array('eight','wide')
+				),
+				
+				'config_automation_shop_category_link'=>(!empty($bonus_features['filters_shop_cat'])?array(
+					'label'=>'Click here for automated configuration and setup Shop/Category Filters',
+					'type'=>'link',
+					'attr'=>array("href='".admin_url('admin.php?page=eowbc&eo_wbc_view_auto_jewel=1&f=filters_shop_cat')."'"),
+					'class'=>array('secondary'),
+					'visible_info'=>array( 'label'=>'Please visit at '.site_url(get_option('woocommerce_permalinks')['category_base'].'eo_diamond_shape_cat/'),
+						'type'=>'visible_info',
+						'class'=>array('fluid', 'small'),
+						'size_class'=>array('sixteen','wide'),
+					),	
+				):array()),
+
+				'config_automation_shop_category_link_visible_info'=>(!empty($bonus_features['filters_shop_cat'])?
+					array(
+						'label'=>'Please visit at '.site_url(get_option('woocommerce_permalinks')['category_base'].'/eo_diamond_shape_cat/')." OR ".site_url(get_option('woocommerce_permalinks')['category_base'].'/eo_setting_shape_cat/')."</br>(The URLs will works with default setting of permalink, if you are using any other setting then follow accodingly)",
+						'type'=>'visible_info',
+						'class'=>array('fluid', 'medium'),
+						'size_class'=>array('sixteen','wide'),
+						'inline'=>false,
+					):array()),
+
+				'config_automation_link'=>array(
+					'label'=>'Click here for automated configuration and setup',
+					'type'=>'link',
+					'attr'=>array("href='".admin_url('admin.php?page=eowbc&eo_wbc_view_auto_jewel=1&f='.$active_feature)."'"),
+					'class'=>array('secondary')	
+				),
+				'config_automation_visible_info'=>array(
+					'label'=>eowbc_lang('We recommend that you try sample data if you have not yet, in addition to providing the preview of how plugin look like on frontend of your website, sample data & configurations will also serve as boilerplate template for configuring the plugin.'),
+					'type'=>'visible_info',
+					'class'=>array('fluid', 'medium'),
+					'size_class'=>array('sixteen','wide'),
+					'inline'=>false,
+				),
+				
+				
+				/*'config_save_automation'=>array(
+					'label'=>'Save',
+					'type'=>'button',				
+					'class'=>array('primary'),
+					'attr'=>array("data-action='save'")
+				)*/
+				'check_it_out_status'=>array(
+					'label'=>'Setup Status',
+					'type'=>($check_it_out_link_type != 'skip' ?'devider':$check_it_out_link_type),
+					// 'class'=>array('fluid'),
+					// 'size_class'=>array('eight','wide')
+				),
+				'check_it_out_msg'=>array(
+					'label'=>$lbl_txt,
+					'type'=>($check_it_out_link_type != 'skip' ?'label':$check_it_out_link_type)
+				),
+				'check_it_out_link'=>array(
+					'label'=>$check_it_out_link_label,
+					'type'=>$check_it_out_link_type,
+					'attr'=>array("href='".$check_it_out_link."'"),
+					'class'=>array('secondary')	
+				)								
 				'tiny_features_general_tab_end'=>array(
 					'type'=>'accordian',
 					'section_type'=>'end'
