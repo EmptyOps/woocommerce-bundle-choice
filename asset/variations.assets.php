@@ -1396,17 +1396,20 @@ jQuery( document ).ready(function() {
 // ACTIVE_TODO as of now we have implimented this support for the mapping based conditions here but in future if there is better place than we shoud move it over there -- to h
 // 	ACTIVE_TODO as weel as once we have the varations swatches beta update available we may lite to use the disable and hide flow of that version. Especialy the disable flow this much needed for providing apropriate and perfect user experiance -- to h
 // ACTIVE_TODO_OC_END
-// below false is temparary
-if(false) {
+
 
 	if(is_product()) {
 
-		$_attribute_perams = explode(',', \eo\wbc\model\SP_WBC_Router::get_query_params('_attribute', 'REQUEST') );	
+		// $_attribute_perams = explode(',', \eo\wbc\model\SP_WBC_Router::get_query_params('_attribute', 'REQUEST') );	
+		$_attribute_perams = explode(',', wbc()->sanitize->get('__mapped_attribute') );	
+
+		// wbc_pr('__attribute_perams');
+		// wbc_pr($_attribute_perams);
 
 		foreach($_attribute_perams as $_attribute_slug) {
 			
-
-			if(!empty( wbc()->sanitize->get('checklist_'.$_attribute_slug) )) {
+			// NOTE: so far no need to check if checklist is empty so true or condition is added for now. 
+			if(true || !empty( wbc()->sanitize->get('checklist_'.$_attribute_slug) )) {
 				?> 
 				<style type="text/css">
 
@@ -1424,5 +1427,5 @@ if(false) {
 		}
 
 	}
-}	
+
 

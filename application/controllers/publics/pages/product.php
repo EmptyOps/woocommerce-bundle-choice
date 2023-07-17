@@ -1163,6 +1163,8 @@ class Product {
 
             $filter_query["_attribute"] = rtrim($_attribute_param_str, ',');
 
+            $filter_query["__mapped_attribute"] = rtrim($_attribute_param_str, ',');
+
             $link.=http_build_query($filter_query).'&';               
         }    
 
