@@ -1554,7 +1554,12 @@ class SP_WBC_Variations extends SP_Variations {
 				}
 			}
 		}
-
+	
+		if( wbc()->sanitize->get('is_test') == 1 ) {
+			wbc_pr('sp-wbc-variations [prepare_woo_dropdown_attribute_html_data] else loop data-value');
+			wbc_pr($data['woo_dropdown_attribute_html_data']['options_loop_html_attr']);
+		}
+	
 		/*echo '</select>';*/
 
 		return $data;
