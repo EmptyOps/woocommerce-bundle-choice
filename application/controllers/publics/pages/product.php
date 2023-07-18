@@ -1143,7 +1143,12 @@ class Product {
                     /*$this->first_category_slug*/;                    
         }
 
-        $link.="/?";           
+        $link.="/?";       
+
+        if(is_array($category) && !empty($category)) {              
+            $link .= '__mapped_categories='.implode( ',' , $category ).'&';
+        } 
+        
         if(is_array($taxonomy) && !empty($taxonomy)){            
 
             // TODO/NOTE: even though below changes are confirmed with all affecting layers but still if there are regression effects and especially the exist in query do not work on our sp query class than we may need to add if condition there by using the below option of the mapping pref or something such. the changes are made on 12-07-2023.             
