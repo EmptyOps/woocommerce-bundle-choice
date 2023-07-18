@@ -1021,6 +1021,11 @@ class SP_WBC_Variations extends SP_Variations {
 
         // wbc()->load->model('category-attribute');
         // $attribute = \eo\wbc\model\Category_Attribute::instance()->get_attribute(str_replace('pa_','',$args['hook_callback_args']['hook_args'][ 'attribute' ]));
+        if(wbc()->sanitize->get('is_test') == 3){
+
+        	wbc_pr('111111111111111111');
+        	wbc_pr($args['hook_callback_args']['hook_args'][ 'attribute' ]);
+        }
         $attribute = apply_filters('sp_wbc_get_attribute', null, str_replace('pa_','',$args['hook_callback_args']['hook_args'][ 'attribute' ]) );
 
         // commented on 24-10-2022 becose was unussed
