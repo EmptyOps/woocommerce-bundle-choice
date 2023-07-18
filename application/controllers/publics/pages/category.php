@@ -309,24 +309,26 @@ class Category {
                     $html.='<div class="ui row" style="height:max-content;">';                    
                         $html.="<div class='ui grid centered'>";
                             $html.="<div class='ui row' style='padding-bottom:3rem !important'>";
-                                $html.="<h1 style='font-size:10vw;color:#767676;'>".echo __('Ooops!', 'woo-bundle-choice')."</h1>";
+                                $html.="<h1 style='font-size:10vw;color:#767676;'>"./*echo*/ __('Ooops!', 'woo-bundle-choice')."</h1>";
                             $html.="</div>";
                             $html.="<div class='ui row' style='padding-bottom:0px'>";
                                 $html.='<span class="ui inverted text">' . __( 'No products were found matching your selection.', 'woocommerce' ) .'<span>';
                             $html.="</div>";    
                             $html.="<div class='ui row'  style='padding-bottom:3rem !important'>";   
                                 // TODO here isn't it better if i's simple javascript back in history - hiren                         
-                                $html.='<button href="'.$this->eo_wbc_prev_url().'" class="ui inverted secondary single_add_to_cart_button button alt">'.echo __('Go back', 'woo-bundle-choice').'</button>&nbsp;&nbsp;';
-                                $html.='<button href="'.((empty(wbc()->sanitize->get('FIRST')) XOR empty(wbc()->sanitize->get('SECOND')))?strtok(get_permalink((empty(wbc()->sanitize->get('FIRST'))?wbc()->sanitize->get('SECOND'):wbc()->sanitize->get('FIRST'))),'?'):'').'" class="ui grey button single_add_to_cart_button alt">'. echo __('Continue buying single item', 'woo-bundle-choice').'</button>&nbsp;&nbsp;';
+                                $html.='<button href="'.$this->eo_wbc_prev_url().'" class="ui inverted secondary single_add_to_cart_button button alt">'./*echo*/ __('Go back', 'woo-bundle-choice').'</button>&nbsp;&nbsp;';
+                                $html.='<button href="'.((empty(wbc()->sanitize->get('FIRST')) XOR empty(wbc()->sanitize->get('SECOND')))?strtok(get_permalink((empty(wbc()->sanitize->get('FIRST'))?wbc()->sanitize->get('SECOND'):wbc()->sanitize->get('FIRST'))),'?'):'').'" class="ui grey button single_add_to_cart_button alt">'. /*echo*/ __('Continue buying single item', 'woo-bundle-choice').'</button>&nbsp;&nbsp;';
                             $html.="</div>";    
                                                         
                             if(current_user_can('manage_options')){
                                 //Manage the mapping section
                                 $html.="<div class='ui row' style='padding-bottom:0rem !important'>";
-                                    $html.='<a href="'.admin_url('admin.php?page=eowbc-mapping').'"><span class="ui text primary">'. echo __('As admin of this site please create a product mapping to fix this problem.', 'woo-bundle-choice').'</span></a>';
+                                    $html.='<a href="'.admin_url('admin.php?page=eowbc-mapping').'"><span class="ui text primary">'. /*echo*/ __('As admin of this site please create a product mapping to fix this problem.', 'woo-bundle-choice').'</span></a>';
                                 $html.="</div>";    
 
+                                /*ACTIVE_TODO_OC_START
                                 here need to define how to manage %s and so on markers for the dynamic vars, like the dynamic var in below label -- to h & -- to s
+                                ACTIVE_TODO_OC_END*/
                                 $html.="<div class='ui row' style='padding-bottom:0rem !important'>";
                                     $html.='Adequate mapping(s) needs to be added in the '.constant('EOWBC_NAME').' for Pair Builder to work properly.';
                                 $html.="</div>";                                                    
