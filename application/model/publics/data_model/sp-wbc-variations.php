@@ -515,10 +515,16 @@ class SP_WBC_Variations extends SP_Variations {
 		$type['button']='Button';
 		$type['color']='Color';
 		$type['image']='Icon';
-		$type['image_text']='Icons with Text';
-		$type['dropdown_image']='Dropdown with Icons';
-		$type['dropdown_image_only']='Dropdown with Icons Only';
-		$type['dropdown']='Dropdown';
+		// ACTIVE_TODO_OC_START
+		// -- as soon as the get chance for the max to max milestonlets enable this template and after running and testing it once
+		// ACTIVE_TODO_OC_END
+		if(false) {
+
+			$type['image_text']='Icons with Text';
+			$type['dropdown_image']='Dropdown with Icons';
+			$type['dropdown_image_only']='Dropdown with Icons Only';
+			$type['dropdown']='Dropdown';
+		}
 
 		if(empty($type['is_base_type_only'])){
 
