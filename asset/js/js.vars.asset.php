@@ -97,7 +97,7 @@ add_action( ( !is_admin() ? 'wp_enqueue_scripts' : 'admin_enqueue_scripts'),func
 		$gallery_images_configs['template_loop']['zoom']['all_in_dom'] = apply_filters('sp_slzm_loop_zoom_template_all_in_dom',0);	
 
 		$gallery_images_configs['options'] = array('gallery_reset_on_variation_change'=>false,
-																 'tiny_features_option_ui_loop_box_hover_media_index'=>wbc()->options->get_option('tiny_features','tiny_features_option_ui_loop_box_hover_media_index','2'));
+																 'tiny_features_option_ui_loop_box_hover_media_index'=>/*wbc()->options->get_option('tiny_features','tiny_features_option_ui_loop_box_hover_media_index','2')*/apply_filters('ssm_vrtns_loop_box_hover_media_type',wbc()->options->get_option('tiny_features','tiny_features_option_ui_loop_box_hover_media_index','2')));
 
 		// ACTIVE_TODO asset enque and other asset flows
 			// --  first need to confirm that minified asset only are loaded -- to t
@@ -151,13 +151,17 @@ add_action('wp_footer',function(){
  	 		if(window.document.splugins.common.is_category_page || window.document.splugins.common.is_shop_page) {
  
 				console.log('[js.vars.asset wp_footer] is_category_page');
-
-	    		window.document.splugins.wbc.pagination.api.init();
-
-				window.document.splugins.wbc.filters.api.init();
-
-				window.document.splugins.wbc.filter_sets.api.init();
-
+				
+				// added on 30-06-2023
+				// NOTE: even though we have checked in below script if the eo_wbc_object is not available then it is created but as per the structure we need to skip execution. And till we do not refactor the loading of scripts and execution further we need below if. Ideally we should not load this js file if the filters widget is not rendered on the particular page. 
+				if( typeof(eo_wbc_object) != 'undefined'){
+	    		
+	    			window.document.splugins.wbc.pagination.api.init();
+					
+					window.document.splugins.wbc.filters.api.init();
+					window.document.splugins.wbc.filter_sets.api.init();
+	    		}
+	    			
    		}
 
    		// ACTIVE_TODO we should confirm once and then disable category condition or part below because it seems unnecessary for the category page. or is it necessary for the purple theme loopbox slider? or for the tableview sidebar or popup if it has jQuery slider or zoom? 
@@ -165,11 +169,17 @@ add_action('wp_footer',function(){
     
 		        // window.setTimeout(function(){
 
+						console.log('[js.vars.asset wp_footer] document.ready 01');
 		            window.document.splugins.wbc.variations.gallery_images.sp_slzm.api.init();
+						console.log('[js.vars.asset wp_footer] document.ready 02');
 		            
 		        // }, 2500);
 
 			}
+
+			console.log('[js.vars.asset wp_footer] document.ready 03');
+
+			console.log(window.document.splugins.common.is_item_page);
 
         	if(window.document.splugins.common.is_item_page) {
 	
@@ -177,12 +187,16 @@ add_action('wp_footer',function(){
 
 		        // window.setTimeout(function(){
 
-		        		console.log(" js vars asset " + ( window.document.splugins.common._o( common_configs.gallery_images_configs, 'base_container_selector') ? common_configs.gallery_images_configs.base_container_selector : '.variations_form' ) );
 		            // window.document.splugins.wbc.variations.gallery_images.api.init();
 		            base_container = jQuery( ( window.document.splugins.common._o( common_configs.gallery_images_configs, 'base_container_selector') ? common_configs.gallery_images_configs.base_container_selector : '.variations_form' ) );      
+		            console.log('[js.vars.asset wp_footer] gim 01');
+		            console.log(base_container);
 		            jQuery(base_container).sp_wbc_variations_gallery_images();
 
 		            base_container_simple = jQuery( ( window.document.splugins.common._o( common_configs.gallery_images_configs, 'base_container_selector_simple') ? common_configs.gallery_images_configs.base_container_selector_simple : null /*ACTIVE_TODO_OC_START need to update here the base_container_selectore ACTIVE_TODO_OC_END */) );      
+		            console.log('[js.vars.asset wp_footer] gim 02');
+		            console.log(base_container);
+		            
 		            jQuery(base_container_simple).sp_wbc_variations_gallery_images({product_type:'simple'});
 
 		        // },2000);
@@ -198,8 +212,10 @@ add_action('wp_footer',function(){
 
 		            // window.document.splugins.wbc.variations.gallery_images.feed_page.api.init();
 
-						// console.log('[js.vars.asset wp_footer] gim_feed variations');
 		            var base_container_loop_feed_page = jQuery( ( window.document.splugins.common._o( common_configs.gallery_images_configs, 'base_container_loop_selector') ? common_configs.gallery_images_configs.base_container_loop_selector : '.variations_form' ) );      
+						console.log('[js.vars.asset wp_footer] gim_feed variations');
+						console.log(base_container_loop_feed_page);
+						
 		            jQuery(base_container_loop_feed_page).sp_wbc_variations_gallery_images_feed_page();
 		            // ACTIVE_TODO_OC_START
 				      // ACTIVE_TODO Below ajax complete will have serious issue when the other ajax invokes this function means other than the eowbc js ajax call. So we need to simply bind on the success on render HTML notification simply the eowbs filter HTML notification and remove the ajax complete dependency from here and when that notification is fired inside the subscribe function here we can simply init the required modules. ya so simply put all the code that is the ajaxComplete function into the subscribe function of our notification module. -- to h
@@ -311,6 +327,7 @@ add_action('wp_footer',function(){
 			window.setTimeout(function(){
 				/*global wc_add_to_cart_variation_params */
 				;(function ( $, window, document, undefined ) {
+
 						/**
 						 * VariationForm class which handles variation forms and attributes.
 						 */
@@ -876,16 +893,16 @@ add_action('wp_footer',function(){
 							var count  = 0;
 							var chosen = 0;
 
-							// console.log('A_OFF show_variation [getChosenAttributes]');
-							// console.log(this.$attributeFields);
-							// console.log(this);
+							console.log('A_OFF show_variation [getChosenAttributes]');
+							console.log(this.$attributeFields);
+							console.log(this);
 
 							this.$attributeFields.each( function() {
 								var attribute_name = $( this ).data( 'attribute_name' ) || $( this ).attr( 'name' );
 								var value          = $( this ).val() || '';
 
-								// console.log('A_OFF show_variation [getChosenAttributes] loop');
-								// console.log(value);
+								console.log('A_OFF show_variation [getChosenAttributes] loop');
+								console.log(value);
 
 								if ( value.length > 0 ) {
 									chosen ++;
@@ -964,7 +981,7 @@ add_action('wp_footer',function(){
 						 */
 						$.fn.wc_variation_form = function() {
 							
-							// console.log('A_OFF show_variation [wc_variation_form]');
+							console.log('A_OFF show_variation [wc_variation_form]');
 							// console.log(this);
 
 							new VariationForm( this );
@@ -1874,7 +1891,7 @@ add_action('wp_footer',function(){
 						 */
 						$.fn.wc_variation_form = function() {
 							
-							// console.log('A_ON show_variation [wc_variation_form]');
+							console.log('A_ON show_variation [wc_variation_form]');
 							// console.log(this);
 
 							new VariationForm( this );
@@ -2124,6 +2141,7 @@ add_action('wp_footer',function(){
 					})( jQuery, window, document );
 				},1000);
 	      	}
+
 	      });
 
     	});

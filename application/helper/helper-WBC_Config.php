@@ -45,6 +45,10 @@ class WBC_Config {
 		 		array( 'type'=>'file', 'path'=> constant('EOWBC_DIRECTORY')."/application/controllers/publics/feed/loop/selectron/sp-slctrn-swatches-reset-link.php" ),
 		 		array( 'type'=>'file', 'path'=> constant('EOWBC_DIRECTORY')."/application/controllers/publics/feed/loop/selectron/sp-slctrn-swatches-cart-form.php" ),
 
+
+		 		array( 'type'=>'file', 'path'=> constant('EOWBC_DIRECTORY')."/application/system/core/sp-ui-builder.php" ),
+		 		array( 'type'=>'file', 'path'=> constant('EOWBC_DIRECTORY')."/application/system/core/sp-page-builder.php" ),
+
 			), 
 			'both'=> array(
 

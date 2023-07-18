@@ -31,6 +31,8 @@ class EOWBC_Filter_Widget {
 
 	public function get_widget_standalone(array $filter) {
 		
+		// ACTIVE_TODO The hooks like eowbc_before_filter_widget,eowbc_after_filter_widget are not supported for this standalone function which is called only from the tiny fetures layer, so we may need to add support for it. But even better is if we simply refactore the call from tiny fetures layer and merge this function to main rendaring layer may be by creating a wrapper function so that maintainablity and reusablity can be ensured. -- to h && -- to a	
+		
 		$this->_category = '';
 		$current_category=$this->_category;
 		
@@ -434,7 +436,7 @@ class EOWBC_Filter_Widget {
 				?>
 				<script type="text/javascript">
 
-					console.log('filter_widgets');
+					// console.log('filter_widgets');
 
 					jQuery(document).ready(function($){			
 
@@ -991,7 +993,7 @@ class EOWBC_Filter_Widget {
 			// ACTIVE_TODO temp. below is temparary js layer flag for its php counter part of the function wbc_is_mobile_by_page_sections. So as soon as php template layer is not depandent on the function wbc_is_mobile_by_page_sections than at that time set false for below flag.
 			// 	-- And as soon as the js layer depandancy on this flag is removed than delete this flag from here. 
 			// ACTIVE_TODO_OC_END
-			'wbc_is_mobile_by_page_sections' => 1,
+			'wbc_is_mobile_by_page_sections' => /*1*/(wbc_is_mobile_by_page_sections('cat_shop_page') ? 0 : 1),
 		) );
 
 		// if( wbc()->sanitize->get('is_test') == 1 ){
@@ -2701,6 +2703,11 @@ class EOWBC_Filter_Widget {
     					'btnfilter_now'=>(empty(wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','filter_setting_btnfilter_now'))?false:true),
     					'btnreset_now'=>(empty(wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','filter_setting_reset_now'))?false:true),
     					'_prefix_' => $this->filter_prefix,
+    					// ACTIVE_TODO_OC_START
+						// ACTIVE_TODO temp. below is temparary js layer flag for its php counter part of the function wbc_is_mobile_by_page_sections. So as soon as php template layer is not depandent on the function wbc_is_mobile_by_page_sections than at that time set false for below flag.
+						// 	-- And as soon as the js layer depandancy on this flag is removed than delete this flag from here. 
+						// ACTIVE_TODO_OC_END
+						'wbc_is_mobile_by_page_sections' => /*1*/(wbc_is_mobile_by_page_sections('cat_shop_page') ? 0 : 1),
     				);
 
 		?>

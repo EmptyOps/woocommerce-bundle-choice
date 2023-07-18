@@ -5,7 +5,7 @@
 */
 
 ?>
-<div class="<?php echo $width_class; ?>">
+<div class="spui-semantic-slider-column <?php echo $width_class; ?>">
 	<p>
 		<span class="ui header">Price</span>				
 		<?php if($reset): ?>

@@ -119,6 +119,7 @@ class Controller extends \eo\wbc\controllers\Controller {
 		}
 	}*/
 	public function default_uis($type,$exceptance) {
+		/*--a code /sp_theme_ui/application/view/ui/Base_Builder.php sathe marj karalo chhe.*/
 		$defaults = array(
 			'label'=>array('text','color','back_color','font_family','font_size','visibility'),
 			'p'=>array('text','color','back_color','font_family','font_size','visibility'),
@@ -132,7 +133,8 @@ class Controller extends \eo\wbc\controllers\Controller {
 			'button'=>array('text','color','back_color','font_family','font_size','radius','visibility'),
 			'container'=>array('height','width','margin_left','margin_right','visibility'),
 			'wc_attribute_field'=>array('attribute','checkbox','text','visibility'),
-			'a'=>array('url','text','visibility')
+			'a'=>array(/*'href',*/'url','text','visibility'),
+			'td'=>array('text','color','back_color','font_family','font_size','visibility'),
 		);
 
 		$collection = array();
@@ -151,7 +153,73 @@ class Controller extends \eo\wbc\controllers\Controller {
 		return $collection;
 	}
 
-	public function generate_form($form,$key='appearence_controls') {
+	public function generate_form_wrapper($form_definition, $singleton_function, $tab_key_prefix, $page_title_prefix, $page_sections, $mdl_obj) {
+
+		$controls = array('appearence_controls'=>'Appearence Controls',
+			'configuration_controls'=>'Configuration Controls',
+			'data_controls'=>'Data Controls'
+		);
+
+		foreach($controls as $control_key=>$control_title){
+
+			$form = array();
+			foreach($page_sections as $ps_key=>$ps_title){
+
+				$ui_definition = null;
+				if (method_exists($mdl_obj,'ui_'.$control_key.'_definition')) {
+
+					$ui_definition = $mdl_obj->{'ui_'.$control_key.'_definition'}(null, $ps_key);
+
+				}
+
+				if (!empty($ui_definition)) {
+					
+					$form_part = $this->generate_form(/*$publics_form*/$ui_definition['controls'], $control_key, true);
+
+					if (!empty($form_part)) {
+						
+						$form = array_merge(
+							$form,
+							array($singleton_function.'_'.$control_key.'_'.$ps_key.'_accordian_start'=>array(
+									'type'=>'accordian',
+									'section_type'=>'start',
+									'class'=>array('field', 'styled'),
+									'label'=>'<span class="ui large text">'.$ps_title.'</span>',
+								),
+							),
+							$form_part,
+							array($singleton_function.'_'.$control_key.'_'.$ps_key.'_accordian_end'=>array(
+									'type'=>'accordian',
+									'section_type'=>'end'
+								),
+							),
+						);
+					}
+				}
+
+			}
+
+			if(!wbc_isEmptyArr($form)){
+
+				$tab_key = $singleton_function.'_'.$tab_key_prefix.'_'.$control_key;
+
+				$form['save'] = array(
+					'label'=>'Save',
+					'type'=>'button',		
+					'class'=>array('primary'),
+					'attr'=>array("data-action='save'",'data-tab_key="'.$tab_key.'"')	
+				);
+
+				$form_definition[$tab_key] = array('label'=>trim($page_title_prefix.' '.$control_title),'form'=>$form);		
+			}
+
+		}
+
+		return $form_definition;
+		
+	}
+
+	public function generate_form($form,$key='appearence_controls',$is_ui_definition = false) {
 		if(empty($form) or !is_array($form)){
 			return array();
 		}
@@ -163,6 +231,7 @@ class Controller extends \eo\wbc\controllers\Controller {
 		
 		foreach ($form as $form_key => $form_value) {
 			
+			// ACTIVE_TODO is the use of xor intentional or just a silly mistake, lets confirm and replace it with the or when required if it is affecting our team and user experience. or otherwise mark it as todo by 3rd revision. -- to h 
 			if(!empty($form_value[$key]) and ( empty($this->check_show_on_admin) xor (!empty($form_value[$key][2]) and !empty($form_value[$key][2]['show_on_admin']) ) ) ) {	
 
 				$control_element = array();
@@ -182,36 +251,58 @@ class Controller extends \eo\wbc\controllers\Controller {
 
 				// lup attr 
 
-				if(!empty($form_value[$key][2]) and  !empty($form_value[$key][2]['type'])) {
+				// ACTIVE_TODO here instad of having our team and user to specify the node_type adishnaly for the controls fild it is beter if we can refacter it so that it can read dieracly from the ui array, so lats do it as long as it is posibul without lusing the balnche of the modules capling or cohesion. but it seems that like the das node count default fild below it is not possibel without compromising on the lusly cupled modules standerd, but lats think about if it is possibel. other wish as long as thar is no way and it seems naturel to lat users define it hard coded way lats mark it as invalid.
+					// -- 	configuration controls and data controls ma node_type set karvanu avchhe? so far NO done 
+				if( !empty($form_value[$key][2]) and ( !empty($form_value[$key][2]['type']) or !empty($form_value[$key][2]['node_type']) ) ) {
 
-					$control_element = $this->default_uis($form_value[$key][2]['type'],$excep_controls);
+					$dynamic_type = ( !empty($form_value[$key][2]['type']) ? $form_value[$key][2]['type'] : $form_value[$key][2]['node_type'] );
+
+					$control_element = $this->default_uis(/*$form_value[$key][2]['type']*/$dynamic_type,$excep_controls);
 					if(empty($control_element)/* and $form_value['type'] === 'hidden'*/){
-						$control_element = array($form_value[$key][2]['type']);
+						$control_element = array(/*$form_value[$key][2]['type']*/$dynamic_type);
 					}
 
 				} elseif(!empty($form_value['type'])) {
 					$control_element = $this->default_uis($form_value['type'],$excep_controls);
 				} 
 
-				if(!empty($control_element)){
+				if( !empty($control_element) or ( $key == 'data_controls' and !empty($form_value[$key][2]['das_node_enabled']) ) ){
 
 					$controls[$form_key.'_form_segment'] = array(
 						'label'=> $form_value[$key][0],
 						'type'=>'devider',
 					);
 
-					foreach ($control_element as $control) {
+					if( !empty($control_element) ) {
 
-						if(empty($form_value[$key][2])){
-							$controls[$form_key.'_'.$control] = call_user_func_array(array($admin_ui,$control),array($form_key.'_'.$control,$form_value[$key][0]));
-						} else {
-							$control_key = $form_key.'_'.$control;
-							if(!empty($form_value[$key][2]['id'])){
-								$control_key = $form_value[$key][2]['id'].'_'.$control;
+						$controls = $this->generate_form_controls($controls, $control_element, $form_value, $key,$form_key, $admin_ui, $is_ui_definition);
+
+						if (!empty($form_value[$key][2]['das_node_enabled'])) {
+					
+							$das_node_count = wbc()->options->get_option($form_value[$key][2]['data_tab_key'],$form_key."_das_node_count",(isset($form_value[$key][2]['das_node_count_default']) ? $form_value[$key][2]['das_node_count_default'] : 0),false,false);
+
+							if($das_node_count > 0){
+								
+								for($i = 0; $i<$das_node_count; $i++) {
+
+									$controls = $this->generate_form_controls($controls, $control_element, $form_value, $key,($form_key.'_'.$i), $admin_ui, $is_ui_definition);
+								}
 							}
-							$controls[$control_key] = call_user_func_array(array($admin_ui,$control),array($control_key,$form_value[$key][0],$form_value[$key][2]));
-							
 						}
+
+					}
+
+					// ACTIVE_TODO here we are depanding on the das node count default fild that is set from the data controls but in fusher we sud refacter the code as long as it is possible with loosely cupled flow to ansyor that the default count seting is read from the ui array diractly instad of dipanding on the defolt that is need to be set sapratly. but i thing thar is no essy way and if we do sumthing than it well not be lusly cupled so may be it is the work that we need our team and user to do to achive this. but if it is possibel than lats do it other wish we can mark it is todo or mac this point invalid.
+					// ACTIVE_TODO and in futcher we may lick to provide on admin the increase or decrease support directly on the particular appearence or configuration tab instead of asking user to increase or decrease fast on the data tab. so that user expereince can be improved but as long as it is simple and feasible, and when and if we do that than afcorse we can use the sam das support that is added for the form builder but that exactly can not be used on form array but we can at least us that javascript api. lats do it if required by 3rd revision other wish we can mark it as todo. -- to h & -- to b 
+					if( $key == 'data_controls' and !empty($form_value[$key][2]['das_node_enabled']) ) {
+
+						$controls[$form_key.'_das_node_count'] = array(
+							'label'=>'increase/decrease '.$form_value[$key][0],
+							'type'=>'number',
+							'value'=> ( !empty($form_value[$key][2]['das_node_count_default']) ? $form_value[$key][2]['das_node_count_default'] : 0 ),							
+							'sanitize'=>'sanitize_text_field',
+							'size_class'=>array(''),
+						);
 					}
 				}
 			}
@@ -262,6 +353,84 @@ class Controller extends \eo\wbc\controllers\Controller {
 		return $controls;
 	}
 
+	private function generate_form_controls($controls, $control_element, $form_value, $key, $form_key, $admin_ui, $is_ui_definition = false) {
+
+		foreach ($control_element as $control) {
+
+			// NOTE: here we are implementing some specific and necessary peoperties for the elements which is required to be done at the defecto layer like from here.
+			$control_args = null;
+
+			if( $is_ui_definition ) {
+
+				if( 'text' == $control ) {
+					
+					if( isset($form_value[$key][2]['original_text']) ) {
+
+						$control_args = array();
+
+						// ACTIVE_TODO in future in addition to help text we may also like to detect the text property of this field from the get text call and check if it is modifed from the laguage file(we can check by comparing the value retrieved from gettext call against the value of original_text property of the appearance control, and maybe the gettext call value would be directly available in the prehtml property of ui node so we may not need to do anything for aquring the value of gettext call) then we can show warning here that or disable this text field that this is no more applicable.
+						
+						$control_args['info'] = array(
+													'label'=>'<b>If you are editing the text from the language files then this text property will not work from here.</b>',
+													'type'=>'visible_info',
+													'class'=>array('medium'),
+												);
+					}
+				} elseif( 'attribute' == $control ) {
+
+					$control_args = array();
+
+					$control_args['is_sp_eid'] = true; 
+				}
+			}
+
+			if(empty($form_value[$key][2])){
+
+				if( $control_args === null ) {
+
+					$controls[$form_key.'_'.$control] = call_user_func_array(array($admin_ui,$control),array($form_key.'_'.$control,$form_value[$key][0]));
+				} else {
+
+					$controls[$form_key.'_'.$control] = call_user_func_array(array($admin_ui,$control),array($form_key.'_'.$control,$form_value[$key][0],$control_args));
+				}
+
+			} else {
+
+				$control_key = $form_key.'_'.$control;
+
+				// --here jo apdy id had coded support karva hot to ano support ds mate ansyor karvo padchhe nitar hard coded id atlist nava emplymentshon ma ni use kari shaky or simply no kariy to chale am hoy to betar chhe. so lat simply figerat out and jo us karva pady am hoy or we can not mins confrom karvu posibul no hoy to simply wbc ui builder ma aa je singel cot ma id paramiter chhe jay jay us thayelu hoy te find kari ne puchi thei apdy teno ahi support confrom kari shky -- to h & -- to b done 
+				// 	-- we can not use id for das other wish it well be com vari canfuging -- to h done 
+				if( $is_ui_definition ) {
+
+					// NOTE: disabled below if because for the ui_definition based upgraded layer the id_key and the form_key is alaways same. and when the form_key reach above it have some overrides so need to take that into consideration so this is commented. 
+					// if(!empty($form_value[$key][2]['id_key'])){
+
+					// 	$control_key = $form_value[$key][2]['id_key'].'_'.$control;
+					// }
+				} else {
+
+					if(!empty($form_value[$key][2]['id'])){
+
+						$control_key = $form_value[$key][2]['id'].'_'.$control;
+					}
+				}
+
+				if( $is_ui_definition ) {
+
+					if( is_array($control_args) ) {
+
+						$form_value[$key][2] = array_replace($form_value[$key][2], $control_args);
+					}
+				}
+
+				$controls[$control_key] = call_user_func_array(array($admin_ui,$control),array($control_key,$form_value[$key][0],$form_value[$key][2]));
+			}
+		}
+
+		return $controls;
+
+	}
+
 		// return all appearance control data to be dumped in to json
 	// format must include `form_control_key` as third array element and the id if necessary.
 	
@@ -278,6 +447,7 @@ class Controller extends \eo\wbc\controllers\Controller {
 		
 		foreach ($form as $form_key => $form_value) {
 			
+			// ACTIVE_TODO is the use of xor intentional or just a silly mistake, lets confirm and replace it with the or when required if it is affecting our team and user experience. or otherwise mark it as todo by 3rd revision. -- to h 
 			if(!empty($form_value[$key]) and ( empty($this->check_show_on_admin) xor (!empty($form_value[$key][2]) and !empty($form_value[$key][2]['show_on_admin']) ) ) ) {	
 
 				$control_element = array();

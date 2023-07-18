@@ -723,11 +723,16 @@ class SP_WBC_Variations extends SP_Variations {
 					
 				} elseif ( strpos( $key, 'sp_variations_video_url' ) !== false ) {
 
-					array_push($gallery_images,array('type'=>'video_url','value'=>$value,'key'=>$key));
+					if (!empty($value)) {
+						
+						array_push($gallery_images,array('type'=>'video_url','value'=>$value,'key'=>$key));
+					}
 
 				} elseif ( strpos( $key, 'sp_variations_video' ) !== false ) {
 
-					array_push($gallery_images,array('type'=>'video','value'=>$value,'key'=>$key));
+					if (!empty($value)) {
+						array_push($gallery_images,array('type'=>'video','value'=>$value,'key'=>$key));
+					}
 
 				} else {
 
@@ -1053,6 +1058,25 @@ class SP_WBC_Variations extends SP_Variations {
         	$type = 'select';
         }
 
+        // added on 03-07-2023
+        // NOTE: as we have thought of and very well planned to support the legacy types and on that regard all the legacy layers and functions and flows, so here now we have enabled the legecy type support.
+        if(!in_array($type,self::sp_variations_swatches_supported_attribute_types())) {
+			
+			// if( wbc()->sanitize->get('is_test') == 2 ) {
+			// 	wbc_pr('sp_variations_swatches_supported_attribute_types if');
+			// 	wbc_pr($type);
+			// }
+
+			// ACTIVE_TODO so far we have tested and enabled only the select type of woocommerce. But as soon as we get chance lets enable the other legacy type that woocommerce supports.
+			// 	NOTE: and for the notes the default imlimentation of the wbc sp_variations is seprate thing and is supposed to be implimented on the underneath to this layer in the else condition below, that is dedicated for the default layer of the wbc sp_variations type support. 
+        	if( 'select' == $type ) {
+	
+				$data = array();			
+				$data['is_return_default_html'] = true;
+				$data['html'] = $args['hook_callback_args']['html'];
+				return $data;
+        	}
+        }    
 
         // //add or condition here to apply_filter with key sp_variations_supporting_attribute_type with default to false and second arg will be type -- to b done
         // 	//--	and now need to add that hook to add type on woo attribute admin, see details in ssm variations class -- to d done
@@ -1368,6 +1392,7 @@ class SP_WBC_Variations extends SP_Variations {
 		if ( empty( $data['woo_dropdown_attribute_html_data']['options'] ) && ! empty( $data['woo_dropdown_attribute_html_data']['product'] ) && ! empty( $data['woo_dropdown_attribute_html_data']['attribute'] ) ) {
 			/*ACTIVE_TODO_OC_START
 			-- recieve data in function params to till this function, since I think we have exact same data on above layers but still confirm -- to b 
+				-- below we seem to have made be mistack by commenting the below line which was reading variation attributes using $product from function get_variation_attributes, because here the read of data must be product specific -- to h
 			ACTIVE_TODO_OC_END*/
 			//$data['woo_dropdown_attribute_html_data']['attributes'] = $product->get_variation_attributes();
 			$data['woo_dropdown_attribute_html_data']['options']    = $attributes[ $data['woo_dropdown_attribute_html_data']['attribute']  ];

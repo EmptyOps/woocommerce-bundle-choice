@@ -284,4 +284,9 @@ class WBC_WP {
 
         return $user_role;
     }
+
+    public function attachment_id_to_url($attachment_id) {
+        
+        return wp_get_attachment_url($attachment_id); 
+    } 
 }

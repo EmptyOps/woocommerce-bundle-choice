@@ -46,6 +46,23 @@ class Controller extends \eo\wbc\controllers\Controller{
 
         $template_path = wbc()->load->template_path($args); 
 
+        if( wbc()->sanitize->get('is_test') == 1 ){
+
+            wbc_pr('sp_localize_key_dump');
+            wbc_pr($args['data']['sp_localize_key']);
+            wbc_pr($args['data']['sp_localize_data']);
+        }
+
+        if(!empty($args['data']['sp_localize_key']) && !empty($args['data']['sp_localize_data'])) {
+
+            // ACTIVE_TODO right now we are simply reliying on the load instantly option available within the wbc load library layer but in future when we merge with the upgraded QCed branch wich is lounch on the wp org at that time we need to refactore and upgrade the code here to make it work with the stadard wp enquescript and localize funtion so that our updats are not paused becouse of this load instance script tag uses. and this is ofcourse by any means we need to do it when merge this branch for launch in wp org and so on. and as per the standard we also need to do this. -- to a && -- to h  
+            wbc()->load->asset("localize_data", "", array(), "", true, false, $args['data']['sp_localize_key'], $args['data']['sp_localize_data']);
+
+            // unset is for to avoid creating localize data twice if there is any recursion here as well as to optimize memory foot print since we do not need this large data var any more after it is loaded already.
+            unset($args['data']['sp_localize_key']);
+            unset($args['data']['sp_localize_data']);
+        }
+
         if(!empty($template_path)) {
          
             return wbc()->load->template($template_path,(isset($args['data'])?$args['data']:array()),true,$args['singleton_function'],true,true,isset($args['alternate_widget_hook'])?$args['alternate_widget_hook']:null,isset($args['alternate_widget_hook'])?wbc()->load->template_key_option($args):null);
@@ -62,6 +79,18 @@ class Controller extends \eo\wbc\controllers\Controller{
             return true;
         
         } elseif( $args['page'] == 'single-product' && is_product()){
+
+            return true;
+        
+        } elseif( $args['page'] == 'custom-page' /*&& is_product()*/){
+
+            return true;
+        
+        }  elseif( $args['page'] == 'cart' && is_cart() ){
+
+            return true;
+        
+        } elseif( $args['page'] == 'checkout' && is_checkout() ){
 
             return true;
         
@@ -83,6 +112,8 @@ class Controller extends \eo\wbc\controllers\Controller{
     //         NOTE: and while we are implementing this flow it should be clearly kept in mind that the platform entity suppor we have added and we are yet to support that in detail in future should abstract our this flow and ensure that different platforms seemlessly adapt to it. and that might be counter inituitive or ocnflicting but with some mature and effective refactoring we can achieve this and even with very lite and efficient memory and execution foot print  if implement neatly and simply and clean refactoring and architecture. 
     public function hook_action_the_post( $args = array() ) {
 
+        // NOTE: So far we have no need for this support in the feed page layer so it is disabled for that, so just desabled it by not keping the hook_action_the_post funtion in the feed controller.
+            // TODO but if in future required than we can simply enable it, but yeah we need to confirm the flow and also need to implement some additional logic or strcuture to ensure that it works appropriately within the loop scope. -- to h
         if (isset($args['child_obj']) and method_exists($args['child_obj'],'hook_action_the_post')) {
            
             add_action( 'the_post',function(/*$post_object*/) use($args){
@@ -103,6 +134,26 @@ class Controller extends \eo\wbc\controllers\Controller{
                 $args['child_obj']->hook_action_the_post($args);
             });
         }
+    }
+
+    protected function ajax_response($res, $args = array()){
+
+        if (!isset($res['type'])) {
+            
+            $res['type'] = 'success';
+        }
+
+        if (!isset($res['msg'])) {
+            
+            $res['msg'] = '';
+        }
+
+
+        // ob_start();
+
+        // wp_send_json( $res );
+
+        wbc()->rest->response($res);
     }
 
 }

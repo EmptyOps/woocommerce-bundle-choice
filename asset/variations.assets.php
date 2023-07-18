@@ -929,9 +929,9 @@ if(is_shop() || is_product_category()) {
             list-style-type: none;
         }
 
-		form.variations_form table.variations tbody td select {
+		/*form.variations_form table.variations tbody td select {
 		    display: none !important;
-		}
+		}*/
 
 	</style>
 
@@ -1355,7 +1355,8 @@ jQuery( document ).ready(function() {
     	}
 
     	.loading {
-	    background-image: url(https://kuyum.crewmedya.com/wp-content/plugins/woo-bundle-choice/asset/icon/spinner.gif);
+	    /*background-image: url(https://kuyum.crewmedya.com/wp-content/plugins/woo-bundle-choice/asset/icon/spinner.gif);*/
+	    background-image:url(".constant('EOWBC_ASSET_URL')."icon/spinner.gif);
 	    background-color: var(--spui-loader-background-color) !important;
 	    background-position: center center;
 	    background-repeat: no-repeat;
