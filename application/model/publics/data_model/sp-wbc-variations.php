@@ -1758,6 +1758,7 @@ class SP_WBC_Variations extends SP_Variations {
 						switch ( $data['variable_item_data']['options_loop_type'][$term->slug] ):
 							case 'color':
 
+								wbc_pr('colorrrrrrrrrrrrrrrrrrrrr');
 								$data['variable_item_data']['options_loop_color'][$term->slug]['color'] = sanitize_hex_color( wvs_get_product_attribute_color( $term ) );
 								// $data  .= sprintf( '<span class="variable-item-span variable-item-span-%s" style="background-color:%s;"></span>', esc_attr( $data['variable_item_data']['options_loop_type'][$term->slug] ), esc_attr( $color ) );
 
@@ -1766,6 +1767,7 @@ class SP_WBC_Variations extends SP_Variations {
 								break;
 
 							case 'image':
+								wbc_pr('imageeeeeeeeeeeeeeeeeeeeeee');
 								/*ACTIVE_TODO_OC_START
 								--------- a etlu wvs_default_variable_item alg che
 								ACTIVE_TODO_OC_END*/
@@ -1785,6 +1787,7 @@ class SP_WBC_Variations extends SP_Variations {
 
 
 							case 'button':
+								wbc_pr('buttonnnnnnnnnnnnnnnnnnn');
 								// $data .= sprintf( '<span class="variable-item-span variable-item-span-%s">%s</span>', esc_attr( $data['variable_item_data']['options_loop_type'][$term->slug] ), $data['variable_item_data']['options_loop_option'][$term->slug] );
 								break;
 
