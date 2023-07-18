@@ -162,6 +162,12 @@ jQuery(document).ready(function(jQuery){
             jQuery('.jpc_price_ctl_table').transition('hide');
             jQuery("#jpc_save_price_ctl").transition('hide');
         }                
+
+        //for saving the final form
+        jQuery("[name='eo_wbc_jpc_form_data']").val(JSON.stringify(window.eo_wbc.jpc_data));
+
+        // fire the ajax action 
+        jQuery('#jpc_save_price_ctl').trigger('click');
     });
 
     jQuery("#jpc_add_price_ctl").on('click touch',function(e){
@@ -214,7 +220,7 @@ jQuery(document).ready(function(jQuery){
             data=jQuery(e).find('td');                    
             row_obj_data=Object();
 
-            NOTE: since we are not planning to use different targets for different sub rules of the rule so the target field is simply read directly from the form and not from the looped tr tag here of the jpc_rules_table. and as per standard data structure if we are not supposed to use that then that should not be set per row means for each tr tag rows. 
+            // NOTE: since we are not planning to use different targets for different sub rules of the rule so the target field is simply read directly from the form and not from the looped tr tag here of the jpc_rules_table. and as per standard data structure if we are not supposed to use that then that should not be set per row means for each tr tag rows. 
             row_obj_data.jpc_target = jpc_target;
             row_obj_data.jpc_target_label = jpc_target_label;
 
