@@ -42,7 +42,7 @@ add_action( ( !is_admin() ? 'wp_enqueue_scripts' : 'admin_enqueue_scripts'),func
 	$is_product_v = ((is_product()) ? "true" : "false");
 	$wbc_is_mobile_v = ((wbc_is_mobile()) ? "true" : "false");
 
- 	$inline_script = "window.document.splugins.common.current_theme_key = ".$current_theme_key_v.";
+ 	$inline_script = "window.document.splugins.common.current_theme_key = '".$current_theme_key_v."';
 
 	window.document.splugins.common.is_shop_page = ".$is_shop_v."; 
 
