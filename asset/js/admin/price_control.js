@@ -213,7 +213,6 @@ jQuery(document).ready(function(jQuery){
         var jpc_target_label = jQuery('#jpc_target_dropdown_div').dropdown('get text');
         rows_data += 'Target: '+jpc_target_label+'<br/><br/>';
 
-        var jpc_field_sp_eid = jQuery('#jpc_field_sp_eid').val();
 
         jQuery("#jpc_rules_table tbody").find('tr').each(function(i,e){
 
@@ -223,6 +222,8 @@ jQuery(document).ready(function(jQuery){
             // NOTE: since we are not planning to use different targets for different sub rules of the rule so the target field is simply read directly from the form and not from the looped tr tag here of the jpc_rules_table. and as per standard data structure if we are not supposed to use that then that should not be set per row means for each tr tag rows. 
             row_obj_data.jpc_target = jpc_target;
             row_obj_data.jpc_target_label = jpc_target_label;
+
+            var jpc_field_sp_eid = jQuery(data[0]).data('jpc_field_sp_eid');//jQuery('#jpc_field_sp_eid').val();
 
             row_obj_data.field_sp_eid = jpc_field_sp_eid;
 
@@ -275,6 +276,8 @@ jQuery(document).ready(function(jQuery){
 
 function eowbc_pc_add_rule_btn_click() {
                 
+    var jpc_field_sp_eid = jQuery('#jpc_field_sp_eid').val();
+    
     _field_name=jQuery("[name='jpc_field_name']").val().trim();
     _field_value=jQuery("[name='jpc_field_value']").val().trim();
     _field_type=jQuery("[name='jpc_field_type']").val().trim();
@@ -313,7 +316,7 @@ function eowbc_pc_add_rule_btn_click() {
         }
     }
     
-    jQuery("#jpc_rules_table tbody").append('<tr> <td class="left aligned" data-value="'+_field_value+'">'+_field_name+'</td><td class="left aligned" data-value="'+_field_type+'">'+(_field_type=='1'?'Attribute':'Category')+'</td><td class="center aligned" data-value="'+_compare_value+'">'+_compare_name+'</td><td class="center aligned" data-value_1="'+_value_value_1+'" data-value_2="'+_value_value_2+'">'+_value_name_1+(_value_name_2?'-'+_value_name_2:'')+'</td></tr>')
+    jQuery("#jpc_rules_table tbody").append('<tr> <td class="left aligned" data-value="'+_field_value+'" data-jpc_field_sp_eid="'+jpc_field_sp_eid+'">'+_field_name+'</td><td class="left aligned" data-value="'+_field_type+'">'+(_field_type=='1'?'Attribute':'Category')+'</td><td class="center aligned" data-value="'+_compare_value+'">'+_compare_name+'</td><td class="center aligned" data-value_1="'+_value_value_1+'" data-value_2="'+_value_value_2+'">'+_value_name_1+(_value_name_2?'-'+_value_name_2:'')+'</td></tr>')
     //jQuery("#jpc_rules_table").parent().transition('show');
     jQuery('.jpc_rules_table').transition('show');
 

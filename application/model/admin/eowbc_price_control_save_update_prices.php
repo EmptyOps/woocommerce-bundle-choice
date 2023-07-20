@@ -328,6 +328,12 @@ class Eowbc_Price_Control_Save_Update_Prices {
 	 */
 	public static function price_markup_def_apply_rules($prices_data, $args = array()) {
 
+		if( wbc()->sanitize->get('is_test') == 1 ) {
+
+			wbc_pr("Eowbc_Price_Control_Save_Update_Prices price_markup_def_apply_rules 1");
+			wbc_pr($prices_data);
+		}
+
 		// $prices_data = array();
 
 		$price_markup_rules = self::price_markup_rules();
@@ -341,7 +347,7 @@ class Eowbc_Price_Control_Save_Update_Prices {
 
 		foreach($price_markup_rules as $type => $val) {
 
-			if( empty($val[0]->jpc_target) ){
+			if( empty($val[0]['jpc_target']) ){
 
 				foreach( $prices_data as $price_field_key => $price_field_value ) {
 
@@ -356,16 +362,24 @@ class Eowbc_Price_Control_Save_Update_Prices {
 
 	public static function apply_rule( $rule, $price, $is_sales_price ) {
 
+		// if( wbc()->sanitize->get('is_test') == 1 ) {
+
+		// 	wbc_pr("Eowbc_Price_Control_Save_Update_Prices apply_rule 1");
+		// 	wbc_pr($rule);
+		// 	wbc_pr($price);
+		// }
+
+
 		// -- below apply rules logic there is one bit flow error maybe that we are not actualy appling the % rules and as far as a remember yaa we have that missing so far so now we need to detect if it is % or so but anyway what we should to do at this point the simply set the % in the label in the price control admin so that user know that only % are supported and maybe we can also put help text -- to h done 
 		// 	-- so maybe we should simply add the % in the label at last and also help text -- to h & -- to s done help text was not neccessary so that is not added
 
 
 		if($is_sales_price) {
 
-			return ( $price + ( $price * ( $rule[count($rule)-1]->sales_price / 100 ) ) );
+			return ( $price + ( $price * ( $rule[count($rule)-1]['sales_price'] / 100 ) ) );
 		} else {
 
-			return ( $price + ( $price * ( $rule[count($rule)-1]->regular_price / 100 ) ) );
+			return ( $price + ( $price * ( $rule[count($rule)-1]['regular_price'] / 100 ) ) );
 		}
 	}
 }
