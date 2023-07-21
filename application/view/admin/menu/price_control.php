@@ -21,7 +21,7 @@ function eo_wbc_jpc_list_categories($slug='',$prefix='',$opts_arr=array()){
         // $category_option_list.="<div data-type='0' class='item' data-value='{$base->slug}'>{$prefix}{$base->name}</div>".eo_wbc_jpc_list_categories($base->slug,'--');
         // $opts_arr[$base->slug] = array( 'label'=>$prefix.$base->name, 'attr'=>'data-type="0"' );
         $opts_arr[$base->slug] = array( 'label'=>$prefix.$base->name, 'attr'=>'data-type="0" data-sp_eid="'.$separator.'prod_cat'.$separator.$base->term_id.$separator.'"' );
-        $opts_arr = eo_wbc_jpc_list_categories($base->slug,'--',$opts_arr);
+        $opts_arr = eo_wbc_jpc_list_categories($base->slug,/*'--'*/'  ',$opts_arr);
     }
 
     // return $category_option_list;
