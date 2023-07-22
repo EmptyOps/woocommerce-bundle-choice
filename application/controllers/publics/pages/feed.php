@@ -24,11 +24,15 @@ class Feed extends \eo\wbc\controllers\publics\Controller{
 
     public function init($args = array()){
 
+        // if( wbc()->sanitize->get('is_test') == 2 ) {
+        //     wbc()->common->var_dump( "wbc feed init");
+        // }
+
         if(self::instance()->should_load_options_view()) {
             
-            if( wbc()->sanitize->get('is_test') == 1 ) {
-                wbc()->common->var_dump( "wbc feed init");
-            }
+            // if( wbc()->sanitize->get('is_test') == 2 ) {
+            //     wbc()->common->var_dump( "wbc feed init if");
+            // }
 
             $args['data'] = \eo\wbc\model\publics\SP_Model_Feed::instance()->get_data('swatches_init');
             $args['page_section'] = 'swatches';
@@ -56,6 +60,37 @@ class Feed extends \eo\wbc\controllers\publics\Controller{
         $bonus_features = array_filter(unserialize(wbc()->options->get_option('setting_status_setting_status_setting','bonus_features',serialize(array()))));
 
         if( ( !isset($_GET['EO_WBC']) and !empty($bonus_features['opts_uis_item_page']) )/*(!isset($_GET['EO_WBC']) and wbc()->options->get_option('tiny_features','tiny_features_option_ui_toggle_status',false))*/ or ( isset($_GET['EO_WBC']) and wbc()->options->get_option('appearance_product_page','show_options_ui_in_pair_builder',false) ) ){
+
+            $tiny_features_enable_only_for_categories = wbc()->options->get_option('tiny_features','tiny_features_enable_only_for_categories');
+            
+            $show_on_categories = !empty($tiny_features_enable_only_for_categories) ? explode(',', $tiny_features_enable_only_for_categories) : array();
+
+            // if( wbc()->sanitize->get('is_test') == 2 ) {wbc()->common->var_dump( "wbc feed should_load_options_view if 1"); wbc_pr($tiny_features_enable_only_for_categories);}
+
+            if( !wbc_isEmptyArr($show_on_categories) ) { 
+
+                // if( wbc()->sanitize->get('is_test') == 2 ) {wbc()->common->var_dump( "wbc feed should_load_options_view if 2");}
+
+                global $wp_query;
+
+                $term_taxonomy_id = null;
+                if(!empty($wp_query->get_queried_object()) and property_exists($wp_query->get_queried_object(),'term_taxonomy_id')) {
+
+                    // if( wbc()->sanitize->get('is_test') == 2 ) {wbc()->common->var_dump( "wbc feed should_load_options_view if 3");}
+
+                    $term_taxonomy_id = $wp_query->get_queried_object()->term_taxonomy_id;
+                }
+
+                if( !empty($term_taxonomy_id) and in_array( $term_taxonomy_id, $show_on_categories) ) {
+
+                    return true;
+                } else {
+                    
+                    // if( wbc()->sanitize->get('is_test') == 2 ) {wbc()->common->var_dump( "wbc feed should_load_options_view else 3.1");}
+
+                    return false;       
+                }
+            }
 
             return true;
         }

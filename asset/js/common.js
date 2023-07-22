@@ -2984,8 +2984,7 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
             _this./*#*/data_private.product_variations = _this./*#*/$variations_form_private.data('product_simple') || [];      
         }
 
-        console.log("gim [preprocess] _this./*#*/data_private.product_variations");
-        console.log(_this./*#*/data_private.product_variations);
+        _this./*#*/data_private.is_ajax_variation =  _this./*#*/data_private.product_variations.length < 1;
 
         // _this.#$additional_container/*base_element*/.addClass('spui-wbc-gallery_images-loaded');
         _this./*#*/$base_container_private.addClass('spui-wbc-gallery_images-loaded');
@@ -3146,20 +3145,30 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
          // console.log( data.product_variations ); 
 
         data.types = [];
-        jQuery( data.product_variations ).each(function (i, variation) {
+        if(!_this./*#*/data_private.is_ajax_variation) {
 
-           // -- variation_gallery_images -> gallery_images data
+            jQuery( data.product_variations ).each(function (i, variation) {
 
-          jQuery(variation.variation_gallery_images).each(function (index,image) {
-           
-            // -- data.types -> gallery_images types(images,video,360)
+               // -- variation_gallery_images -> gallery_images data
 
-            data.types.push(image.extra_params_org.type);
-          });
+              jQuery(variation.variation_gallery_images).each(function (index,image) {
+               
+                // -- data.types -> gallery_images types(images,video,360)
 
-          return false;
-        });
-        
+                data.types.push(image.extra_params_org.type);
+              });
+
+              return false;
+            });
+            
+        }else{
+            
+            // ACTIVE_TODO Temp Below if is temporary and as soon as we refectory the loading sequence for something such to ensure that we have the types available here even for the ajax variation are enabled than at that time just remove the below hardcoded section and use something like in above if.
+            data.types.push('image');
+            data.types.push('video');
+        }
+
+
         return data;
     
     }
@@ -3762,6 +3771,10 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
         console.log(_this./*#*/$variations_form_private);
 
         _this./*#*/$variations_form_private.on('show_variation', function (event, variation) {
+            
+            console.log("gim [variation_change_listener] show_variation");
+            // console.log(_this.#$variations_form);
+            console.log(variation);
 
            // -- aya only is_category_page ni if condition mari se 02-11-2022 @a --
            if(window.document.splugins.common.is_category_page) {
@@ -3821,6 +3834,9 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
 
         url = url +'?variation_id='+ variation.variation_id;
 
+        console.log('create_variation_url_private_11');
+        console.log(url);
+
         // ACTIVE_TODO as soon as required we need to enabled url support if applicable for simple type product 
         //     ACTIVE_TODO very soon we should also use here the php layer router class Query perams function layer instant of directly using hard coded_attr_checklist etc formate  
         var attributeSlug_global = '';
@@ -3835,6 +3851,9 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
         url = window.document.splugins.common.updateURLParameter(url, '_attribute', attributeSlug_global);
         
         _this./*#*/$zoom_container_private.data('sp_variation_url',url);
+        
+        console.log('create_variation_url_private_22');
+        console.log(url);
 
         return url;
     
@@ -4951,6 +4970,7 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
             jQuery(images).each(function (index_inner,image) {
                 
                 console.log('gim_feed zoom_area_hover_in each_loop');
+
                 console.log(image.extra_params_org.type);
 
                 image.index = index_inner;

@@ -83,7 +83,7 @@ class Product {
             }
 
             $this->init_safe_click();
-
+            $this->product_options_view();        
             $this->render_preview();
         } else {
 
@@ -235,6 +235,14 @@ class Product {
             ?>
             <style> body .wcp_preview_first_product_title, body .wcp_preview_second_product_title{font-size: 1.6rem;line-height: 2.4rem;white-space: nowrap;width: 24rem;overflow: hidden;text-overflow: ellipsis;float: left;} @media only screen and (max-width: 480px) { body .wcp_preview_first_product_title, body .wcp_preview_second_product_title { font-size: 1rem !important; line-height: 2rem !important; width: inherit !important; word-break: break-word; max-width: 20rem; } } @media only screen and (max-width: 320px) { body .wcp_preview_first_product_title, body .wcp_preview_second_product_title { font-size: 1rem !important; line-height: 2rem !important; width: inherit !important; word-break: break-word; max-width: 17rem; } }</style>
             <style type="text/css">table.variations{display: none;}</style>
+            <style type="text/css">
+                .variations_form .variations, #wbc_variation_toggle {
+                    display: none !important;
+                }
+                .Product_Left_Wrapper_Plugin_Images .imagezoomsl_zoom_container .Zoom_Rigt-sec .small-image.corner-image.corner-toggle-image {
+                    display: none;
+                }
+            </style>
             <script type="text/javascript">
                 jQuery(".single_add_to_cart_button.button.alt").ready(function(){
 
@@ -261,7 +269,7 @@ class Product {
                         return false;
                     });
 
-                    jQuery("table.variations").remove();
+                    // jQuery("table.variations").remove();
                 });
             </script>
             <?php
@@ -747,6 +755,23 @@ class Product {
                         );
                     <?php endif; ?>
                     });
+
+
+                <?php
+                
+                $step = wbc()->sanitize->get('STEP');
+
+                if( $step == 2 && wbc()->common->is_product_under_category($product,wbc()->options->get_option('configuration','second_name')) && $product->is_type( 'variable' ) ) {
+                    ?>  
+
+                    //  define namespaces 
+                    window.document.splugins = window.document.splugins || {};
+                    window.document.splugins.common = window.document.splugins.common || {};
+                    
+                    window.document.splugins.common.is_handle_variation_id_pair_builder_step_2 = true;
+
+                    <?php 
+                }?>
             </script>
             
             <?php 
@@ -935,6 +960,7 @@ class Product {
                         $url = $setting_page_url.'&'.$url;
                     }                
                 }
+
             } else {
 
                 $review_page_url = '';
@@ -963,6 +989,20 @@ class Product {
                 }      
             }            
                         
+            // added on 21-06-2023
+            $eo_wbc_sets=wbc()->session->get('EO_WBC_SETS',array());
+
+            if(!empty($eo_wbc_sets)){
+
+                if( isset($eo_wbc_sets['SECOND'][2]) ) {
+
+                    if(strpos($url,'?')===false) {
+                        $url = $url.'?variation_id='.$eo_wbc_sets['SECOND'][2];
+                    } else {
+                        $url = $url.'&variation_id='.$eo_wbc_sets['SECOND'][2];
+                    }
+                }
+            }
         }  
         
         return $url;

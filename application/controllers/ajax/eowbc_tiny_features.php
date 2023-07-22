@@ -72,11 +72,40 @@ if(wp_verify_nonce(wbc()->sanitize->post('_wpnonce'),'eowbc_tiny_features')){
 
 	wbc()->options->update_option('tiny_features','product_page_hide_second_variation_form',(empty(wbc()->sanitize->post('product_page_hide_second_variation_form'))?'':1));
 
+	wbc()->options->update_option('tiny_features','tiny_features_unlock_swatches_switch', (empty(wbc()->sanitize->post('tiny_features_unlock_swatches_switch'))?'':wbc()->sanitize->post('tiny_features_unlock_swatches_switch')));
+	
 	wbc()->options->update_option('tiny_features','tiny_features_option_ui_loop_box_hover_media_index',(empty(wbc()->sanitize->post('tiny_features_option_ui_loop_box_hover_media_index'))?'2':wbc()->sanitize->post('tiny_features_option_ui_loop_box_hover_media_index')));
 
 	wbc()->options->update_option('tiny_features','tiny_features_specification_meta_keys',(empty(wbc()->sanitize->post('tiny_features_specification_meta_keys'))?'':wbc()->sanitize->post('tiny_features_specification_meta_keys')));
 
+	
+	
+	wbc()->options->update_option('tiny_features','shop_page_hide_first_variation_form',(empty(wbc()->sanitize->post('shop_page_hide_first_variation_form'))?'':1));
 
+	wbc()->options->update_option('tiny_features','shop_page_hide_second_variation_form',(empty(wbc()->sanitize->post('shop_page_hide_second_variation_form'))?'':1));
+
+	wbc()->options->update_option('tiny_features','tiny_features_shop_page_option_ui_option_dimention',(empty(wbc()->sanitize->post('tiny_features_shop_page_option_ui_option_dimention'))?'2em':wbc()->sanitize->post('tiny_features_shop_page_option_ui_option_dimention')));
+
+	wbc()->options->update_option('tiny_features','tiny_features_shop_page_option_ui_border_color',(empty(wbc()->sanitize->post('tiny_features_shop_page_option_ui_border_color'))?'#ffffff':wbc()->sanitize->post('tiny_features_shop_page_option_ui_border_color')));	
+
+	wbc()->options->update_option('tiny_features','tiny_features_shop_page_option_ui_border_width',(empty(wbc()->sanitize->post('tiny_features_shop_page_option_ui_border_width'))?'1px':wbc()->sanitize->post('tiny_features_shop_page_option_ui_border_width')));
+
+	wbc()->options->update_option('tiny_features','tiny_features_shop_page_option_ui_border_color_hover',(empty(wbc()->sanitize->post('tiny_features_shop_page_option_ui_border_color_hover'))?'#ffffff':wbc()->sanitize->post('tiny_features_shop_page_option_ui_border_color_hover')));
+
+	wbc()->options->update_option('tiny_features','tiny_features_shop_page_option_ui_border_width_hover',(empty(wbc()->sanitize->post('tiny_features_shop_page_option_ui_border_width_hover'))?'1px':wbc()->sanitize->post('tiny_features_shop_page_option_ui_border_width_hover')));
+
+	wbc()->options->update_option('tiny_features','tiny_features_shop_page_option_ui_border_radius',(empty(wbc()->sanitize->post('tiny_features_shop_page_option_ui_border_radius'))?'1px':wbc()->sanitize->post('tiny_features_shop_page_option_ui_border_radius')));
+
+	wbc()->options->update_option('tiny_features','tiny_features_shop_page_option_ui_font_color',(empty(wbc()->sanitize->post('tiny_features_shop_page_option_ui_font_color'))?'#ffffff':wbc()->sanitize->post('tiny_features_shop_page_option_ui_font_color')));
+
+	wbc()->options->update_option('tiny_features','tiny_features_shop_page_option_ui_font_color_hover',(empty(wbc()->sanitize->post('tiny_features_shop_page_option_ui_font_color_hover'))?'#ffffff':wbc()->sanitize->post('tiny_features_shop_page_option_ui_font_color_hover')));
+
+	wbc()->options->update_option('tiny_features','tiny_features_shop_page_option_ui_bg_color',(empty(wbc()->sanitize->post('tiny_features_shop_page_option_ui_bg_color'))?'#ffffff':wbc()->sanitize->post('tiny_features_shop_page_option_ui_bg_color')));
+
+	wbc()->options->update_option('tiny_features','tiny_features_shop_page_option_ui_bg_color_hover',(empty(wbc()->sanitize->post('tiny_features_shop_page_option_ui_bg_color_hover'))?'#ffffff':wbc()->sanitize->post('tiny_features_shop_page_option_ui_bg_color_hover')));
+
+
+	wbc()->options->update_option('tiny_features','tiny_features_enable_only_for_categories', (empty(wbc()->sanitize->post('tiny_features_enable_only_for_categories'))?'':wbc()->sanitize->post('tiny_features_enable_only_for_categories')));
 
 	//$res['msg'] = "Updated successfully!";
 	//wbc()->options->update_option('configuration','config_category',1);

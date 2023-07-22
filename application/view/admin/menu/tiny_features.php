@@ -138,7 +138,7 @@ $form['tabs'] = true;
 $form['data'] = array(
 	
 	'tiny_features_item_page_option'=>array(
-			'label'=>'Options UI for Item Page',
+			'label'=>'Swatches UI for Item Page',
 			'form'=>array(
 				/*'tiny_features_option_ui_toggle_status'=>array(
 					'label'=>eowbc_lang('Toggle Button Enabled?'),
@@ -156,7 +156,44 @@ $form['data'] = array(
 						// 'size_class'=>array('sixteen','wide'),
 					),
 				),	*/
+				'tiny_features_general_tab_start'=>array(
+					'type'=>'accordian',
+					'section_type'=>'start',
+					'class'=>array('field', 'styled'),
+					'label'=>'<span class="ui large text">General</span>',
+				),					
+				'tiny_features_dropdown_icon_only'=>array(
+					'label'=>eowbc_lang('Display Icon Only on Dropdown?'),
+					'type'=>'checkbox',
+					'value'=>array(wbc()->options->get_option('tiny_features','tiny_features_dropdown_icon_only')),
+					'sanitize'=>'sanitize_text_field',
+					'options'=>array('tiny_features_dropdown_icon_only'=>' '),
+					'class'=>array('fluid'),						
+					// 'size_class'=>array('eight','wide'),
+					'inline'=>false,					
+				),							
+				'tiny_features_general_tab_end'=>array(
+					'type'=>'accordian',
+					'section_type'=>'end'
+				),
 				
+				'tiny_features_styling_tab_start'=>array(
+					'type'=>'accordian',
+					'section_type'=>'start',
+					'class'=>array('field', 'styled'),
+					'label'=>'<span class="ui large text">Styling</span>',
+				),
+				'tiny_features_styling_tab_end'=>array(
+					'type'=>'accordian',
+					'section_type'=>'end'
+				),
+
+				'tiny_features_product_page_tab_start'=>array(
+					'type'=>'accordian',
+					'section_type'=>'start',
+					'class'=>array('field', 'styled'),
+					'label'=>'<span class="ui large text">Product Page</span>',
+				),
 				'tiny_features_option_ui_toggle_init_status'=>array(
 					'label'=>eowbc_lang('Show variation form at initial?'),
 					'type'=>'checkbox',
@@ -182,182 +219,7 @@ $form['data'] = array(
 					'class'=>array('fluid'),						
 					// 'size_class'=>array('eight','wide'),
 					'inline'=>false,					
-				),
-				'tiny_features_dropdown_icon_only'=>array(
-					'label'=>eowbc_lang('Display Icon Only on Dropdown?'),
-					'type'=>'checkbox',
-					'value'=>array(wbc()->options->get_option('tiny_features','tiny_features_dropdown_icon_only')),
-					'sanitize'=>'sanitize_text_field',
-					'options'=>array('tiny_features_dropdown_icon_only'=>' '),
-					'class'=>array('fluid'),						
-					// 'size_class'=>array('eight','wide'),
-					'inline'=>false,					
-				),					
-				'tiny_features_option_ui_toggle_text'=>array(
-					'label'=>eowbc_lang('Toggle Buton Text'),
-					'type'=>'text',
-					'value'=>wbc()->options->get_option('tiny_features','tiny_features_option_ui_toggle_text',__('CUSTOMIZE THIS PRODUCT')),
-					'sanitize'=>'sanitize_text_field',
-					'class'=>array('fluid'),						
-					'size_class'=>array('eight','wide','required'),
-					'inline'=>false,
-
-					'visible_info'=>array( 'label'=>eowbc_lang('Text to be shown on the toggle button.'),
-						'type'=>'visible_info',
-						'class'=>array('small','fluid'),
-						// 'size_class'=>array('sixteen','wide'),
-					)
-				),
-				'tiny_features_option_ui_option_dimention'=>array(
-					'label'=>eowbc_lang('Options Box Dimention'),
-					'type'=>'text',
-					'value'=>wbc()->options->get_option('tiny_features','tiny_features_option_ui_option_dimention','2em'),
-					'sanitize'=>'sanitize_text_field',
-					'class'=>array('fluid'),	
-					'size_class'=>array('eight','wide','required'),
-					'inline'=>false,
-
-					'visible_info'=>array( 'label'=>eowbc_lang('The height and width of the option\'s box.<strong>(prepend px,em,rem as measurement)</strong>'),
-						'type'=>'visible_info',
-						'class'=>array('small','fluid'),
-						// 'size_class'=>array('sixteen','wide'),
-					)
-				),
-				'tiny_features_option_ui_border_color'=>array(
-					'label'=>eowbc_lang('Options Border Color'),
-					'type'=>'color',
-					'value'=>wbc()->options->get_option('tiny_features','tiny_features_option_ui_border_color','#ECECEC'),
-					'sanitize'=>'sanitize_hex_color',
-					'class'=>array('fluid'),				
-					'size_class'=>array('eight','wide','required'),
-					'inline'=>false,
-
-					'visible_info'=>array( 'label'=>eowbc_lang('<br/>The color of the option\'s border'),
-						'type'=>'visible_info',
-						'class'=>array('small','fluid'),
-						// 'size_class'=>array('sixteen','wide'),
-					)
-				),
-				'tiny_features_option_ui_border_width'=>array(
-					'label'=>eowbc_lang('Options Border width'),
-					'type'=>'text',
-					'value'=>wbc()->options->get_option('tiny_features','tiny_features_option_ui_border_width','2px'),
-					'sanitize'=>'sanitize_text_field',
-					'class'=>array('fluid'),			
-					'size_class'=>array('eight','wide','required'),
-					'inline'=>false,
-
-					'visible_info'=>array( 'label'=>eowbc_lang('The border width of the option\'s border.<strong>(prepend px,em,rem as measurement)</strong>'),
-						'type'=>'visible_info',
-						'class'=>array('small','fluid'),
-						// 'size_class'=>array('sixteen','wide'),
-					)
-				),
-				'tiny_features_option_ui_border_color_hover'=>array(
-					'label'=>eowbc_lang('Options Border Color on Hover'),
-					'type'=>'color',
-					'value'=>wbc()->options->get_option('tiny_features','tiny_features_option_ui_border_color_hover','#3D3D3D'),
-					'sanitize'=>'sanitize_hex_color',
-					'class'=>array('fluid'),				
-					'size_class'=>array('eight','wide','required'),
-					'inline'=>false,
-
-					'visible_info'=>array( 'label'=>eowbc_lang('<br/>The color of the option\'s border on hover.'),
-						'type'=>'visible_info',
-						'class'=>array('small'),
-						// 'size_class'=>array('sixteen','wide'),
-					)
-				),
-				'tiny_features_option_ui_border_width_hover'=>array(
-					'label'=>eowbc_lang('Options Border width on Hover'),
-					'type'=>'text',
-					'value'=>wbc()->options->get_option('tiny_features','tiny_features_option_ui_border_width_hover','2px'),
-					'sanitize'=>'sanitize_text_field',
-					'class'=>array('fluid'),
-					'size_class'=>array('eight','wide','required'),
-					'inline'=>false,
-
-					'visible_info'=>array( 'label'=>eowbc_lang('The border width of the option\'s border on hover.<strong>(prepend px,em,rem as measurement)</strong>'),
-						'type'=>'visible_info',
-						'class'=>array('small'),
-						// 'size_class'=>array('sixteen','wide'),
-					)
-				),
-				'tiny_features_option_ui_border_radius'=>array(
-					'label'=>eowbc_lang('Options Border Radius'),
-					'type'=>'text',
-					'value'=>wbc()->options->get_option('tiny_features','tiny_features_option_ui_border_radius','1px'),
-					'sanitize'=>'sanitize_text_field',
-					'class'=>array('fluid'),	
-					'size_class'=>array('eight','wide','required'),
-					'inline'=>false,
-
-					'visible_info'=>array( 'label'=>eowbc_lang('The border radius of the option\'s border.<strong>(prepend px,em,rem as measurement)</strong>'),
-						'type'=>'visible_info',
-						'class'=>array('small'),
-						// 'size_class'=>array('sixteen','wide'),
-					)
-				),						
-				'tiny_features_option_ui_font_color'=>array(
-					'label'=>eowbc_lang('Options Font Color'),
-					'type'=>'color',
-					'value'=>wbc()->options->get_option('tiny_features','tiny_features_option_ui_font_color','#DBDBDB'),
-					'sanitize'=>'sanitize_hex_color',
-					'class'=>array('fluid'),
-					'size_class'=>array('eight','wide','required'),
-					'inline'=>false,
-
-					'visible_info'=>array( 'label'=>eowbc_lang('<br/>The color of the option\'s text.'),
-						'type'=>'visible_info',
-						'class'=>array('small'),
-						// 'size_class'=>array('sixteen','wide'),
-					)
-				),
-				'tiny_features_option_ui_font_color_hover'=>array(
-					'label'=>eowbc_lang('Options Font Color on Hover'),
-					'type'=>'color',
-					'value'=>wbc()->options->get_option('tiny_features','tiny_features_option_ui_font_color_hover','#AA7D7D'),
-					'sanitize'=>'sanitize_hex_color',
-					'class'=>array('fluid'),
-					'size_class'=>array('eight','wide','required'),
-					'inline'=>false,
-
-					'visible_info'=>array( 'label'=>eowbc_lang('<br/>The color of the option\'s text on hover.'),
-						'type'=>'visible_info',
-						'class'=>array('small'),
-						// 'size_class'=>array('sixteen','wide'),
-					)
-				),
-				'tiny_features_option_ui_bg_color'=>array(
-					'label'=>eowbc_lang('Options Background Color'),
-					'type'=>'color',
-					'value'=>wbc()->options->get_option('tiny_features','tiny_features_option_ui_bg_color','#ffffff'),
-					'sanitize'=>'sanitize_hex_color',
-					'class'=>array('fluid'),
-					'size_class'=>array('eight','wide','required'),
-					'inline'=>false,
-
-					'visible_info'=>array( 'label'=>eowbc_lang('<br/>The color of the option\'s background.'),
-						'type'=>'visible_info',
-						'class'=>array('small'),
-						// 'size_class'=>array('sixteen','wide'),
-					)
-				),
-				'tiny_features_option_ui_bg_color_hover'=>array(
-					'label'=>eowbc_lang('Options Background Color on Hover'),
-					'type'=>'color',
-					'value'=>wbc()->options->get_option('tiny_features','tiny_features_option_ui_bg_color_hover','#DCC7C7'),
-					'sanitize'=>'sanitize_hex_color',
-					'class'=>array('fluid'),
-					'size_class'=>array('eight','wide','required'),
-					'inline'=>false,
-
-					'visible_info'=>array( 'label'=>eowbc_lang('<br/>The color of the option\'s background on hover.'),
-						'type'=>'visible_info',
-						'class'=>array('small'),
-						// 'size_class'=>array('sixteen','wide'),
-					)
-				),
+				),								
 				'product_page_hide_first_variation_form'=>array(
 					'label'=>'Hide first category\'s variation menu',
 					'type'=>'checkbox',
@@ -386,6 +248,197 @@ $form['data'] = array(
 						'size_class'=>array('sixteen','wide'),
 					),	
 				), 
+				'tiny_features_option_ui_toggle_text'=>array(
+					'label'=>eowbc_lang('Toggle Buton Text'),
+					'type'=>'text',
+					'value'=>wbc()->options->get_option('tiny_features','tiny_features_option_ui_toggle_text',__('CUSTOMIZE THIS PRODUCT')),
+					'sanitize'=>'sanitize_text_field',
+					'class'=>array('fluid'),						
+					'size_class'=>array('eight','wide','required'),
+					'inline'=>false,
+
+					'visible_info'=>array( 'label'=>eowbc_lang('Text to be shown on the toggle button.'),
+						'type'=>'visible_info',
+						'class'=>array('small','fluid'),
+						// 'size_class'=>array('sixteen','wide'),
+					)
+				),
+				'tiny_features_option_ui_option_dimention'=>array(
+					'label'=>eowbc_lang('Swatches Box Dimention'),
+					'type'=>'text',
+					'value'=>wbc()->options->get_option('tiny_features','tiny_features_option_ui_option_dimention','2em'),
+					'sanitize'=>'sanitize_text_field',
+					'class'=>array('fluid'),	
+					'size_class'=>array('eight','wide','required'),
+					'inline'=>false,
+
+					'visible_info'=>array( 'label'=>eowbc_lang('The height and width of the option\'s box.<strong>(prepend px,em,rem as measurement)</strong>'),
+						'type'=>'visible_info',
+						'class'=>array('small','fluid'),
+						// 'size_class'=>array('sixteen','wide'),
+					)
+				),
+				'tiny_features_option_ui_border_color'=>array(
+					'label'=>eowbc_lang('Swatches Border Color'),
+					'type'=>'color',
+					'value'=>wbc()->options->get_option('tiny_features','tiny_features_option_ui_border_color','#ECECEC'),
+					'sanitize'=>'sanitize_hex_color',
+					'class'=>array('fluid'),				
+					'size_class'=>array('eight','wide','required'),
+					'inline'=>false,
+
+					'visible_info'=>array( 'label'=>eowbc_lang('<br/>The color of the Swatches border'),
+						'type'=>'visible_info',
+						'class'=>array('small','fluid'),
+						// 'size_class'=>array('sixteen','wide'),
+					)
+				),
+				'tiny_features_option_ui_border_width'=>array(
+					'label'=>eowbc_lang('Swatches Border width'),
+					'type'=>'text',
+					'value'=>wbc()->options->get_option('tiny_features','tiny_features_option_ui_border_width','2px'),
+					'sanitize'=>'sanitize_text_field',
+					'class'=>array('fluid'),			
+					'size_class'=>array('eight','wide','required'),
+					'inline'=>false,
+
+					'visible_info'=>array( 'label'=>eowbc_lang('The border width of the Swatches border.<strong>(prepend px,em,rem as measurement)</strong>'),
+						'type'=>'visible_info',
+						'class'=>array('small','fluid'),
+						// 'size_class'=>array('sixteen','wide'),
+					)
+				),
+				'tiny_features_option_ui_border_color_hover'=>array(
+					'label'=>eowbc_lang('Swatches Border Color on Hover'),
+					'type'=>'color',
+					'value'=>wbc()->options->get_option('tiny_features','tiny_features_option_ui_border_color_hover','#3D3D3D'),
+					'sanitize'=>'sanitize_hex_color',
+					'class'=>array('fluid'),				
+					'size_class'=>array('eight','wide','required'),
+					'inline'=>false,
+
+					'visible_info'=>array( 'label'=>eowbc_lang('<br/>The color of the Swatches border on hover.'),
+						'type'=>'visible_info',
+						'class'=>array('small'),
+						// 'size_class'=>array('sixteen','wide'),
+					)
+				),
+				'tiny_features_option_ui_border_width_hover'=>array(
+					'label'=>eowbc_lang('Swatches Border width on Hover'),
+					'type'=>'text',
+					'value'=>wbc()->options->get_option('tiny_features','tiny_features_option_ui_border_width_hover','2px'),
+					'sanitize'=>'sanitize_text_field',
+					'class'=>array('fluid'),
+					'size_class'=>array('eight','wide','required'),
+					'inline'=>false,
+
+					'visible_info'=>array( 'label'=>eowbc_lang('The border width of the Swatches border on hover.<strong>(prepend px,em,rem as measurement)</strong>'),
+						'type'=>'visible_info',
+						'class'=>array('small'),
+						// 'size_class'=>array('sixteen','wide'),
+					)
+				),
+				'tiny_features_option_ui_border_radius'=>array(
+					'label'=>eowbc_lang('Swatches Border Radius'),
+					'type'=>'text',
+					'value'=>wbc()->options->get_option('tiny_features','tiny_features_option_ui_border_radius','1px'),
+					'sanitize'=>'sanitize_text_field',
+					'class'=>array('fluid'),	
+					'size_class'=>array('eight','wide','required'),
+					'inline'=>false,
+
+					'visible_info'=>array( 'label'=>eowbc_lang('The border radius of the Swatches border.<strong>(prepend px,em,rem as measurement)</strong>'),
+						'type'=>'visible_info',
+						'class'=>array('small'),
+						// 'size_class'=>array('sixteen','wide'),
+					)
+				),						
+				'tiny_features_option_ui_font_color'=>array(
+					'label'=>eowbc_lang('Swatches Font Color'),
+					'type'=>'color',
+					'value'=>wbc()->options->get_option('tiny_features','tiny_features_option_ui_font_color','#DBDBDB'),
+					'sanitize'=>'sanitize_hex_color',
+					'class'=>array('fluid'),
+					'size_class'=>array('eight','wide','required'),
+					'inline'=>false,
+
+					'visible_info'=>array( 'label'=>eowbc_lang('<br/>The color of the Swatches text.'),
+						'type'=>'visible_info',
+						'class'=>array('small'),
+						// 'size_class'=>array('sixteen','wide'),
+					)
+				),
+				'tiny_features_option_ui_font_color_hover'=>array(
+					'label'=>eowbc_lang('Swatches Font Color on Hover'),
+					'type'=>'color',
+					'value'=>wbc()->options->get_option('tiny_features','tiny_features_option_ui_font_color_hover','#AA7D7D'),
+					'sanitize'=>'sanitize_hex_color',
+					'class'=>array('fluid'),
+					'size_class'=>array('eight','wide','required'),
+					'inline'=>false,
+
+					'visible_info'=>array( 'label'=>eowbc_lang('<br/>The color of the Swatches text on hover.'),
+						'type'=>'visible_info',
+						'class'=>array('small'),
+						// 'size_class'=>array('sixteen','wide'),
+					)
+				),
+				'tiny_features_option_ui_bg_color'=>array(
+					'label'=>eowbc_lang('Swatches Background Color'),
+					'type'=>'color',
+					'value'=>wbc()->options->get_option('tiny_features','tiny_features_option_ui_bg_color','#ffffff'),
+					'sanitize'=>'sanitize_hex_color',
+					'class'=>array('fluid'),
+					'size_class'=>array('eight','wide','required'),
+					'inline'=>false,
+
+					'visible_info'=>array( 'label'=>eowbc_lang('<br/>The color of the Swatches background.'),
+						'type'=>'visible_info',
+						'class'=>array('small'),
+						// 'size_class'=>array('sixteen','wide'),
+					)
+				),
+				'tiny_features_option_ui_bg_color_hover'=>array(
+					'label'=>eowbc_lang('Swatches Background Color on Hover'),
+					'type'=>'color',
+					'value'=>wbc()->options->get_option('tiny_features','tiny_features_option_ui_bg_color_hover','#DCC7C7'),
+					'sanitize'=>'sanitize_hex_color',
+					'class'=>array('fluid'),
+					'size_class'=>array('eight','wide','required'),
+					'inline'=>false,
+
+					'visible_info'=>array( 'label'=>eowbc_lang('<br/>The color of the Swatches background on hover.'),
+						'type'=>'visible_info',
+						'class'=>array('small'),
+						// 'size_class'=>array('sixteen','wide'),
+					)
+				),
+				'tiny_features_product_page_tab_end'=>array(
+					'type'=>'accordian',
+					'section_type'=>'end'
+				),
+
+				'tiny_features_shop_tab_start'=>array(
+					'type'=>'accordian',
+					'section_type'=>'start',
+					'class'=>array('field', 'styled'),
+					'label'=>'<span class="ui large text">Archive / Shop</span>',
+				),
+				// -- wbc()->options->get_option('tiny_features','tiny_features_enable_only_for_categories') == 'tiny_features_enable_only_for_categories' ? array('done'):array('not done') 
+				'tiny_features_unlock_swatches_switch'=>array(
+					'label'=>'Unlock swatches for the shop/category page',
+					'type'=>'checkbox',
+					'sanitize'=>'sanitize_text_field',
+					'value'=>array(wbc()->options->get_option('tiny_features','tiny_features_unlock_swatches_switch')),
+					'options'=>array('1'=>' '),
+					'is_id_as_name'=>true,
+					'class'=>array(),
+					'visible_info'=>array( 'label'=>'Simply request to enable this feature with some CSS confirmation',
+						'type'=>'visible_info',
+						'class'=>array('fluid', 'small'),
+						'size_class'=>array('sixteen','wide'),
+					),	
+				), 
 				'tiny_features_option_ui_loop_box_hover_media_index'=>array(
 					'label'=>wbc()->config->product_variations_configs()['is_gallery_images_type_based_template'] == 1 ? eowbc_lang('Loop box media type to show on hover') : eowbc_lang('Loop box hover media index'),
 					'type'=>wbc()->config->product_variations_configs()['is_gallery_images_type_based_template'] == 1 ? 'select' : 'number',
@@ -402,13 +455,362 @@ $form['data'] = array(
 						// 'size_class'=>array('sixteen','wide'),
 					),
 					'attr'=>array("min='0',max='10'")					
+				),						
+				'shop_page_hide_first_variation_form'=>array(
+					'label'=>'Hide first category\'s variation menu',
+					'type'=>'checkbox',
+					'sanitize'=>'sanitize_text_field',
+					'value'=>array(wbc()->options->get_option('tiny_features','shop_page_hide_first_variation_form')),
+					'options'=>array('1'=>' '),
+					'is_id_as_name'=>true,
+					'class'=>array(),
+					'visible_info'=>array( 'label'=>'If enabled the variation selection table for first category\'s products will be hidden if default variations are set',
+						'type'=>'visible_info',
+						'class'=>array('fluid', 'small'),
+						'size_class'=>array('sixteen','wide'),
+					),	
+				), 
+				'shop_page_hide_second_variation_form'=>array(
+					'label'=>'Hide second category\'s variation menu',
+					'type'=>'checkbox',
+					'sanitize'=>'sanitize_text_field',
+					'value'=>array(wbc()->options->get_option('tiny_features','shop_page_hide_second_variation_form')),
+					'options'=>array('1'=>' '),
+					'is_id_as_name'=>true,
+					'class'=>array(),
+					'visible_info'=>array( 'label'=>'If enabled the variation selection table for second category\'s products will be hidden if default variations are set',
+						'type'=>'visible_info',
+						'class'=>array('fluid', 'small'),
+						'size_class'=>array('sixteen','wide'),
+					),	
+				), 
+				'tiny_features_shop_page_option_ui_option_dimention'=>array(
+					'label'=>eowbc_lang('Swatches Box Dimention'),
+					'type'=>'text',
+					'value'=>wbc()->options->get_option('tiny_features','tiny_features_shop_page_option_ui_option_dimention','2em'),
+					'sanitize'=>'sanitize_text_field',
+					'class'=>array('fluid'),	
+					'size_class'=>array('eight','wide','required'),
+					'inline'=>false,
+
+					'visible_info'=>array( 'label'=>eowbc_lang('The height and width of the Swatches box.<strong>(prepend px,em,rem as measurement)</strong>'),
+						'type'=>'visible_info',
+						'class'=>array('small','fluid'),
+						// 'size_class'=>array('sixteen','wide'),
+					)
+				),				
+				'tiny_features_shop_page_option_ui_border_color'=>array(
+					'label'=>eowbc_lang('Swatches Border Color'),
+					'type'=>'color',
+					'value'=>wbc()->options->get_option('tiny_features','tiny_features_shop_page_option_ui_border_color','#ECECEC'),
+					'sanitize'=>'sanitize_hex_color',
+					'class'=>array('fluid'),				
+					'size_class'=>array('eight','wide','required'),
+					'inline'=>false,
+
+					'visible_info'=>array( 'label'=>eowbc_lang('<br/>The color of the Swatches border'),
+						'type'=>'visible_info',
+						'class'=>array('small','fluid'),
+						// 'size_class'=>array('sixteen','wide'),
+					)
 				),
+				'tiny_features_shop_page_option_ui_border_width'=>array(
+					'label'=>eowbc_lang('Swatches Border width'),
+					'type'=>'text',
+					'value'=>wbc()->options->get_option('tiny_features','tiny_features_shop_page_option_ui_border_width','2px'),
+					'sanitize'=>'sanitize_text_field',
+					'class'=>array('fluid'),			
+					'size_class'=>array('eight','wide','required'),
+					'inline'=>false,
+
+					'visible_info'=>array( 'label'=>eowbc_lang('The border width of the Swatches border.<strong>(prepend px,em,rem as measurement)</strong>'),
+						'type'=>'visible_info',
+						'class'=>array('small','fluid'),
+						// 'size_class'=>array('sixteen','wide'),
+					)
+				),
+				'tiny_features_shop_page_option_ui_border_color_hover'=>array(
+					'label'=>eowbc_lang('Swatches Border Color on Hover -- Not work(selectore issue)'),
+					'type'=>'color',
+					'value'=>wbc()->options->get_option('tiny_features','tiny_features_shop_page_option_ui_border_color_hover','#3D3D3D'),
+					'sanitize'=>'sanitize_hex_color',
+					'class'=>array('fluid'),				
+					'size_class'=>array('eight','wide','required'),
+					'inline'=>false,
+
+					'visible_info'=>array( 'label'=>eowbc_lang('<br/>The color of the Swatches border on hover.'),
+						'type'=>'visible_info',
+						'class'=>array('small'),
+						// 'size_class'=>array('sixteen','wide'),
+					)
+				),
+				'tiny_features_shop_page_option_ui_border_width_hover'=>array(
+					'label'=>eowbc_lang('Swatches Border width on Hover'),
+					'type'=>'text',
+					'value'=>wbc()->options->get_option('tiny_features','tiny_features_shop_page_option_ui_border_width_hover','2px'),
+					'sanitize'=>'sanitize_text_field',
+					'class'=>array('fluid'),
+					'size_class'=>array('eight','wide','required'),
+					'inline'=>false,
+
+					'visible_info'=>array( 'label'=>eowbc_lang('The border width of the Swatches border on hover.<strong>(prepend px,em,rem as measurement)</strong>'),
+						'type'=>'visible_info',
+						'class'=>array('small'),
+						// 'size_class'=>array('sixteen','wide'),
+					)
+				),
+				'tiny_features_shop_page_option_ui_border_radius'=>array(
+					'label'=>eowbc_lang('Swatches Border Radius'),
+					'type'=>'text',
+					'value'=>wbc()->options->get_option('tiny_features','tiny_features_shop_page_option_ui_border_radius','1px'),
+					'sanitize'=>'sanitize_text_field',
+					'class'=>array('fluid'),	
+					'size_class'=>array('eight','wide','required'),
+					'inline'=>false,
+
+					'visible_info'=>array( 'label'=>eowbc_lang('The border radius of the Swatches border.<strong>(prepend px,em,rem as measurement)</strong>'),
+						'type'=>'visible_info',
+						'class'=>array('small'),
+						// 'size_class'=>array('sixteen','wide'),
+					)
+				),						
+				'tiny_features_shop_page_option_ui_font_color'=>array(
+					'label'=>eowbc_lang('Swatches Font Color -- Not work(variation file css override)'),
+					'type'=>'color',
+					'value'=>wbc()->options->get_option('tiny_features','tiny_features_shop_page_option_ui_font_color','#DBDBDB'),
+					'sanitize'=>'sanitize_hex_color',
+					'class'=>array('fluid'),
+					'size_class'=>array('eight','wide','required'),
+					'inline'=>false,
+
+					'visible_info'=>array( 'label'=>eowbc_lang('<br/>The color of the Swatches text.'),
+						'type'=>'visible_info',
+						'class'=>array('small'),
+						// 'size_class'=>array('sixteen','wide'),
+					)
+				),
+				'tiny_features_shop_page_option_ui_font_color_hover'=>array(
+					'label'=>eowbc_lang('Swatches Font Color on Hover'),
+					'type'=>'color',
+					'value'=>wbc()->options->get_option('tiny_features','tiny_features_shop_page_option_ui_font_color_hover','#AA7D7D'),
+					'sanitize'=>'sanitize_hex_color',
+					'class'=>array('fluid'),
+					'size_class'=>array('eight','wide','required'),
+					'inline'=>false,
+
+					'visible_info'=>array( 'label'=>eowbc_lang('<br/>The color of the Swatches text on hover.'),
+						'type'=>'visible_info',
+						'class'=>array('small'),
+						// 'size_class'=>array('sixteen','wide'),
+					)
+				),
+				'tiny_features_shop_page_option_ui_bg_color'=>array(
+					'label'=>eowbc_lang('Swatches Background Color -- Not work(variation file css override)'),
+					'type'=>'color',
+					'value'=>wbc()->options->get_option('tiny_features','tiny_features_shop_page_option_ui_bg_color','#ffffff'),
+					'sanitize'=>'sanitize_hex_color',
+					'class'=>array('fluid'),
+					'size_class'=>array('eight','wide','required'),
+					'inline'=>false,
+
+					'visible_info'=>array( 'label'=>eowbc_lang('<br/>The color of the Swatches background.'),
+						'type'=>'visible_info',
+						'class'=>array('small'),
+						// 'size_class'=>array('sixteen','wide'),
+					)
+				),
+				'tiny_features_shop_page_option_ui_bg_color_hover'=>array(
+					'label'=>eowbc_lang('Swatches Background Color on Hover'),
+					'type'=>'color',
+					'value'=>wbc()->options->get_option('tiny_features','tiny_features_shop_page_option_ui_bg_color_hover','#DCC7C7'),
+					'sanitize'=>'sanitize_hex_color',
+					'class'=>array('fluid'),
+					'size_class'=>array('eight','wide','required'),
+					'inline'=>false,
+
+					'visible_info'=>array( 'label'=>eowbc_lang('<br/>The color of the Swatches background on hover.'),
+						'type'=>'visible_info',
+						'class'=>array('small'),
+						// 'size_class'=>array('sixteen','wide'),
+					)
+				),
+				'tiny_features_shop_tab_end'=>array(
+					'type'=>'accordian',
+					'section_type'=>'end'
+				),
+
+				'tiny_features_special_attributes_tab_start'=>array(
+					'type'=>'accordian',
+					'section_type'=>'start',
+					'class'=>array('field', 'styled'),
+					'label'=>'<span class="ui large text">Special Attributes</span>',
+				),
+				'tiny_features_special_attributes_tab_end'=>array(
+					'type'=>'accordian',
+					'section_type'=>'end'
+				),
+
+				'tiny_features_advanced_tab_start'=>array(
+					'type'=>'accordian',
+					'section_type'=>'start',
+					'class'=>array('field', 'styled'),
+					'label'=>'<span class="ui large text">Advanced</span>',
+				),
+				'tiny_features_enable_only_for_categories'=>array(
+					'label'=>eowbc_lang('Enable Only For Categories(optional)'),
+					'type'=>'select',
+					'value'=> wbc()->options->get_option('tiny_features','tiny_features_enable_only_for_categories'/*,'#DCC7C7'*/),
+					'sanitize'=>'sanitize_text_field',
+					'options'=> \eo\wbc\model\Category_Attribute::instance()->get_category(),
+					'class'=>array('fluid','additions','search','multiple','clearable'),
+					'visible_info'=>array( 
+						'label'=>eowbc_lang('Simply select the categories for which only you want to enable the variation swatches. Leave it blank if you want to keep it on for all categories, by default it is enabled for all categories.'),
+						'type'=>'visible_info',
+						'class'=>array('small'),
+						'size_class'=>array('eight','wide'),
+					),
+					'size_class'=>array('three','wide'),
+					'inline'=>false,	
+				),
+				'tiny_features_advanced_tab_end'=>array(
+					'type'=>'accordian',
+					'section_type'=>'end'
+				),
+				// //--- start @a ---
+				// 'tiny_features_variation_swatches_admin_settings_and_configrations'=>array(
+				// 				'label'=>eowbc_lang('Variation Swatches Admin Settings And Configrations'),
+				// 				'type'=>'devider',
+				// 				'class'=>array('dividing', 'ui', 'vertical', 'segment'),
+				// ),
+
+				// 'tiny_features_category_page'=>array(
+				// 				'label'=>eowbc_lang('Category Page'),
+				// 				'type'=>'devider',
+				// 				'class'=>array('dividing', 'ui', 'vertical', 'segment'),
+				// ),
+				// 'tiny_features_category_general_settings'=>array(
+				// 				'label'=>eowbc_lang('Category General Settings'),
+				// 				'type'=>'devider',
+				// 				'class'=>array('dividing', 'ui', 'vertical', 'segment'),								
+				// ),
+				// 'product_page_hide_second_variation_form_03'=>array(
+				// 	'label'=>'Hide second category\'s variation menu',
+				// 	'type'=>'checkbox',
+				// 	'sanitize'=>'sanitize_text_field',
+				// 	'value'=>array(wbc()->options->get_option('tiny_features','product_page_hide_second_variation_form')),
+				// 	'options'=>array('1'=>' '),
+				// 	'is_id_as_name'=>true,
+				// 	'class'=>array(),	
+				// 	'visible_info'=>array( 'label'=>'If enabled the variation selection table for second category\'s products will be hidden if default variations are set',
+				// 		'type'=>'visible_info',
+				// 		'class'=>array('fluid', 'small'),
+				// 		'size_class'=>array('sixteen','wide'),
+				// 	),	
+				// ), 		
+				// 'tiny_features_category_swatches_type_settings'=>array(
+				// 				'label'=>eowbc_lang('Category Swatches Type Settings'),
+				// 				'type'=>'devider',
+				// 				'class'=>array('dividing', 'ui', 'vertical', 'segment'),
+				// ),
+				// 'product_page_hide_second_variation_form_02'=>array(
+				// 	'label'=>'Hide second category\'s variation menu',
+				// 	'type'=>'checkbox',
+				// 	'sanitize'=>'sanitize_text_field',
+				// 	'value'=>array(wbc()->options->get_option('tiny_features','product_page_hide_second_variation_form')),
+				// 	'options'=>array('1'=>' '),
+				// 	'is_id_as_name'=>true,
+				// 	'class'=>array(),
+				// 	'visible_info'=>array( 'label'=>'If enabled the variation selection table for second category\'s products will be hidden if default variations are set',
+				// 		'type'=>'visible_info',
+				// 		'class'=>array('fluid', 'small'),
+				// 		'size_class'=>array('sixteen','wide'),
+				// 	),	
+				// ), 				
+				// 'tiny_features_category_loop_box_hover_settings'=>array(
+				// 				'label'=>eowbc_lang('Category Loop Box Hover Settings'),
+				// 				'type'=>'devider',
+				// 				'class'=>array('dividing', 'ui', 'vertical', 'segment'),
+				// ),
+				// 'product_page_hide_second_variation_form_03'=>array(
+				// 	'label'=>'Hide second category\'s variation menu',
+				// 	'type'=>'checkbox',
+				// 	'sanitize'=>'sanitize_text_field',
+				// 	'value'=>array(wbc()->options->get_option('tiny_features','product_page_hide_second_variation_form')),
+				// 	'options'=>array('1'=>' '),
+				// 	'is_id_as_name'=>true,
+				// 	'class'=>array(),	
+				// 	'visible_info'=>array( 'label'=>'If enabled the variation selection table for second category\'s products will be hidden if default variations are set',
+				// 		'type'=>'visible_info',
+				// 		'class'=>array('fluid', 'small'),
+				// 		'size_class'=>array('sixteen','wide'),
+				// 	),	
+				// ), 
+
+				// 'tiny_features_item_page'=>array(
+				// 				'label'=>eowbc_lang('Item Page'),
+				// 				'type'=>'devider',
+				// 				'class'=>array('dividing', 'ui', 'vertical', 'segment'),
+				// ),
+				// 'product_page_hide_second_variation_form_04'=>array(
+				// 	'label'=>'Hide second category\'s variation menu',
+				// 	'type'=>'checkbox',
+				// 	'sanitize'=>'sanitize_text_field',
+				// 	'value'=>array(wbc()->options->get_option('tiny_features','product_page_hide_second_variation_form')),
+				// 	'options'=>array('1'=>' '),
+				// 	'is_id_as_name'=>true,
+				// 	'class'=>array(),
+				// 	'visible_info'=>array( 'label'=>'If enabled the variation selection table for second category\'s products will be hidden if default variations are set',
+				// 		'type'=>'visible_info',
+				// 		'class'=>array('fluid', 'small'),
+				// 		'size_class'=>array('sixteen','wide'),
+				// 	),	
+				// ), 				
+				// 'tiny_features_item_general_settings'=>array(
+				// 				'label'=>eowbc_lang('Item General Settings'),
+				// 				'type'=>'devider',
+				// 				'class'=>array('dividing', 'ui', 'vertical', 'segment'),
+				// ),
+				// 'product_page_hide_second_variation_form_05'=>array(
+				// 	'label'=>'Hide second category\'s variation menu',
+				// 	'type'=>'checkbox',
+				// 	'sanitize'=>'sanitize_text_field',
+				// 	'value'=>array(wbc()->options->get_option('tiny_features','product_page_hide_second_variation_form')),
+				// 	'options'=>array('1'=>' '),
+				// 	'is_id_as_name'=>true,
+				// 	'class'=>array(),
+				// 	'visible_info'=>array( 'label'=>'If enabled the variation selection table for second category\'s products will be hidden if default variations are set',
+				// 		'type'=>'visible_info',
+				// 		'class'=>array('fluid', 'small'),
+				// 		'size_class'=>array('sixteen','wide'),
+				// 	),	
+				// ), 				
+				// 'tiny_features_item_slider_and_zoom_settings'=>array(
+				// 				'label'=>eowbc_lang('Slider And Zoom Settings'),
+				// 				'type'=>'devider',
+				// 				'class'=>array('dividing', 'ui', 'vertical', 'segment'),
+				// ),	
+				// 'product_page_hide_second_variation_form_06'=>array(
+				// 	'label'=>'Hide second category\'s variation menu',
+				// 	'type'=>'checkbox',
+				// 	'sanitize'=>'sanitize_text_field',
+				// 	'value'=>array(wbc()->options->get_option('tiny_features','product_page_hide_second_variation_form')),
+				// 	'options'=>array('1'=>' '),
+				// 	'is_id_as_name'=>true,
+				// 	'class'=>array(),
+				// 	'visible_info'=>array( 'label'=>'If enabled the variation selection table for second category\'s products will be hidden if default variations are set',
+				// 		'type'=>'visible_info',
+				// 		'class'=>array('fluid', 'small'),
+				// 		'size_class'=>array('sixteen','wide'),
+				// 	),	
+				// ), 	
+				// //--- end ---
 				'tiny_features_option_ui_save'=>array(
 							'label'=>'Save',
 							'type'=>'button',		
 							'class'=>array('primary'),
 							'attr'=>array("data-action='save'")				
-				)
+				),
+				
 			)
 		),
 	'tiny_features_specification_view'=>array(

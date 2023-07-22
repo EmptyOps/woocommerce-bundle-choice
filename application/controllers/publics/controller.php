@@ -46,13 +46,6 @@ class Controller extends \eo\wbc\controllers\Controller{
 
         $template_path = wbc()->load->template_path($args); 
 
-        if( wbc()->sanitize->get('is_test') == 2 ){
-
-            wbc_pr('sp_localize_key_dump');
-            wbc_pr($args['data']['sp_localize_key']);
-            wbc_pr($args['data']['sp_localize_data']);
-        }
-
         if(!empty($args['data']['sp_localize_key']) && !empty($args['data']['sp_localize_data'])) {
 
             // ACTIVE_TODO right now we are simply reliying on the load instantly option available within the wbc load library layer but in future when we merge with the upgraded QCed branch wich is launched on the wp org at that time we need to refactore and upgrade the code here to make it work with the stadard wp enquescript and localize funtion so that our updates are not paused becouse of this load instantly script tag uses. and this is of course by any means we need to do it when we merge this branch for launch in wp org and so on. and as per the standard we also need to do this. -- to a && -- to h  
