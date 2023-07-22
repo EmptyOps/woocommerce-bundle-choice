@@ -2021,8 +2021,8 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
             // do your magic here...
          }); */
         
-        // console.log("swatches on_change_listener after if");
-        // console.log(_this.$base_element);
+        console.log("swatches on_change_listener after if");
+        console.log(_this.$base_element);
 
         _this.$base_element.off('woocommerce_variation_has_changed');
         _this.$base_element.on('woocommerce_variation_has_changed', function (event) {
@@ -3640,6 +3640,8 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
         _this./*#*/variation_change_listener_private(type);
  
         _this./*#*/reset_variation_listener_private(type);
+
+        _this./*#*/swatches_more_click_listener_private(type);
  
     }
  
@@ -3774,6 +3776,21 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
            }
 
            _this./*#*/on_variation_change_private(event, variation);
+         
+        });
+ 
+    }
+
+    /*#*/swatches_more_click_listener_private(type) {
+
+        var _this = this;
+        console.log('gim [swatches_more_click_listener_private]');
+        console.log(_this./*#*/$variations_form_private.find('.spui-wbc-swatches-variable-item-more'));
+
+        jQuery(_this./*#*/$variations_form_private.find('.spui-wbc-swatches-variable-item-more')).on('click', function () {
+
+            console.log('gim [swatches_more_click_listener_private] click');
+           _this./*#*/on_swatches_more_click_private(type,this);
          
         });
  
@@ -4042,6 +4059,15 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
      
     }
  
+    /*#*/on_swatches_more_click_private(type,element) {
+
+        console.log('gim [on_swatches_more_click_private]');
+        
+        var _this = this;
+
+        _this.swatches_more_click_private(type,element);
+    }
+
     /*#*/slider_thumb_click_private(type,element){
 
         // console.log("gim [slider_thumb_click]");
@@ -4283,6 +4309,15 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
         _this./*#*/child_obj_private = child_obj;
 
 
+    }
+
+    /*#*/swatches_more_click_private(type,element) {
+
+        console.log('gim [swatches_more_click_private]');
+        
+        var _this = this;
+
+        window.location.href = _this./*#*/get_loop_box_anchor_private().attr('href');
     }
 
     get_configs() {
