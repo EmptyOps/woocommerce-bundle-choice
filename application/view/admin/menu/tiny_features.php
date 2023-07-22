@@ -424,21 +424,6 @@ $form['data'] = array(
 					'class'=>array('field', 'styled'),
 					'label'=>'<span class="ui large text">Archive / Shop</span>',
 				),
-				// -- wbc()->options->get_option('tiny_features','tiny_features_enable_only_for_categories') == 'tiny_features_enable_only_for_categories' ? array('done'):array('not done') 
-				'tiny_features_unlock_swatches_switch'=>array(
-					'label'=>'Unlock swatches for the shop/category page',
-					'type'=>'checkbox',
-					'sanitize'=>'sanitize_text_field',
-					'value'=>array(wbc()->options->get_option('tiny_features','tiny_features_unlock_swatches_switch')),
-					'options'=>array('1'=>' '),
-					'is_id_as_name'=>true,
-					'class'=>array(),
-					'visible_info'=>array( 'label'=>'Simply request to enable this feature with some CSS confirmation',
-						'type'=>'visible_info',
-						'class'=>array('fluid', 'small'),
-						'size_class'=>array('sixteen','wide'),
-					),	
-				), 
 				'tiny_features_option_ui_loop_box_hover_media_index'=>array(
 					'label'=>wbc()->config->product_variations_configs()['is_gallery_images_type_based_template'] == 1 ? eowbc_lang('Loop box media type to show on hover') : eowbc_lang('Loop box hover media index'),
 					'type'=>wbc()->config->product_variations_configs()['is_gallery_images_type_based_template'] == 1 ? 'select' : 'number',

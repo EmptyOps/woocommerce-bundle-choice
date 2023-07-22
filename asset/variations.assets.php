@@ -1632,8 +1632,8 @@ $bg_hover_color = wbc()->options->get_option('tiny_features',$spui_is_product_ca
 		$('.variable-item').on('click',function(){
 			var target_selector = $('#'+$(this).data('id'));
 			target_selector.val($(this).data('value'));
-			$(this).parent().find('.selected').removeClass('selected');
-			$(this).addClass('selected');
+			// $(this).parent().find('.selected').removeClass('selected');
+			// $(this).addClass('selected');
 			jQuery(".variations_form" ).trigger('check_variations');
 			$(target_selector).trigger('change');
 		});

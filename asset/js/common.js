@@ -1895,9 +1895,10 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
               if (data.attribute_value === data.selected) {
                 
                 console.log("process_attribute_template selected in if if product id="+ _this./*#*/data_private.product_id +" type="+ type);
-                console.log(inner_element);
 
                 jQuery(inner_element).addClass('selected');
+                console.log(jQuery(inner_element).attr('class'));
+                console.log(inner_element);
                 
                 // console.log("process_attribute_template after selected in if if");
 
@@ -2189,9 +2190,15 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
             console.log('vs [on_change_listener] 1');
             console.log(element);
 
-          _this./*#*/process_attribute_template_private(type, element, 'change', true);  
+            // NOTE: since now we are trying to move towards the micro services like architecture, with the attempts like below loop so eventually this very on_change_listener_private function call should also be refactored and instead of monolithic structure of calling it for all the types and maintaing entire monolitihic chain we should simply call it maybe once only. 
+            // _this./*#*/process_attribute_template_private(type, element, 'change', true);  
+            _this.$base_element.find('ul.variable-items-wrapper').each(function (i, element_inner) {
+                
+                var type_inner = jQuery(element_inner).data('type');
 
-          _this./*#*/on_change_private(type, element, event);
+                _this./*#*/process_attribute_template_private(type_inner, element_inner, 'change', true);  
+            });
+            _this./*#*/on_change_private(type, element, event);
 
         });
 
