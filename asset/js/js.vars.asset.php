@@ -4210,6 +4210,6 @@ console.log('[js.vars.asset wp_footer]');\n" .
 //     	});
    </script>    
   <?php      
-}, PHP_INT_MAX);
+}/*, PHP_INT_MAX*/);
 
 ?>
