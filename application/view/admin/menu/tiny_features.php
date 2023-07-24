@@ -424,7 +424,7 @@ $form['data'] = array(
 					'class'=>array('field', 'styled'),
 					'label'=>'<span class="ui large text">Archive / Shop</span>',
 				),
-				// -- wbc()->options->get_option('tiny_features','tiny_features_enable_only_for_categories') == 'tiny_features_enable_only_for_categories' ? array('done'):array('not done') 
+				// -- wbc()->options->get_option('tiny_features','tiny_features_unlock_swatches_switch') == 'tiny_features_unlock_swatches_switch' ? array('done'):array('not done') 
 				'tiny_features_unlock_swatches_switch'=>array(
 					'label'=>'Unlock swatches for the shop/category page',
 					'type'=>'checkbox',
