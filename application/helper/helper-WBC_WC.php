@@ -499,6 +499,41 @@ class WBC_WC {
 
     }
 
+    public function get_single_product_top_cat_name(){
+
+        if ( is_product() ) {
+            
+            global $post;
+
+            // $terms = wc_get_product_terms( $post->ID, 'product_cat', array( 'orderby' => 'parent', 'order' => 'DESC' ) );
+            $terms = wc_get_product_terms( $post->ID, 'product_cat', array( 'orderby' => 'term_id', 'order' => 'ASC' ) );
+
+            if ( ! empty( $terms ) ) {
+                $main_term = $terms[0];
+                // $ancestors = get_ancestors( $main_term->term_id, 'product_cat' );
+                // if ( ! empty( $ancestors ) ) {
+                //     $ancestors = array_reverse( $ancestors );
+                //     // first element in $ancestors has the root category ID
+                //     // get root category object
+                //     $root_cat = get_term( $ancestors[0], 'product_cat' );
+                // }
+                // else {
+                //     // root category would be $main_term if no ancestors exist
+                // }
+
+                if(!empty($main_term)) {
+
+                    return $main_term->name;
+                }
+            }
+            else {
+                // no category assigned to the product
+            }
+        }
+
+        return null;
+    }
+
     public function get_productCats($parent_slug = '', $format = '', $sp_eid_type_value = 'prod_cat', $is_return_data_only = false){
         
         $parent = '';
