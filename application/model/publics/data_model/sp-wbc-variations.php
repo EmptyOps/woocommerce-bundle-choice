@@ -723,11 +723,16 @@ class SP_WBC_Variations extends SP_Variations {
 					
 				} elseif ( strpos( $key, 'sp_variations_video_url' ) !== false ) {
 
-					array_push($gallery_images,array('type'=>'video_url','value'=>$value,'key'=>$key));
+					if (!empty($value)) {
+						
+						array_push($gallery_images,array('type'=>'video_url','value'=>$value,'key'=>$key));
+					}
 
 				} elseif ( strpos( $key, 'sp_variations_video' ) !== false ) {
 
-					array_push($gallery_images,array('type'=>'video','value'=>$value,'key'=>$key));
+					if (!empty($value)) {
+						array_push($gallery_images,array('type'=>'video','value'=>$value,'key'=>$key));
+					}
 
 				} else {
 

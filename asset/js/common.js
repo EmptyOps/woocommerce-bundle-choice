@@ -152,7 +152,6 @@ if(window.document.splugins.common.is_item_page || window.document.splugins.comm
      !isNaN(parseFloat(str)); // ...and ensure strings of whitespace fail
  }
 
-
  var images = [];
  window.document.splugins.common.preload_images = function(src) {
     
@@ -162,6 +161,7 @@ if(window.document.splugins.common.is_item_page || window.document.splugins.comm
     // for (var i = 0; i < arguments.length; i++) {
         var image/*s[i]*/ = new Image();
         image/*s[i]*/.src = /*preload.arguments[i]*/src;
+
     // }
     
     images.push(image);
@@ -1578,6 +1578,7 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
         console.log('process_attribute_data selects', data.selects)
         console.log('process_attribute_data disabled_selects', data.disabled_selects)
         data.in_stocks = splugins._.difference(data.selects, data.disabled_selects);
+        console.log('data.in_stocks', data.in_stocks)
 
         // console.log('out of stock', out_of_stock_selects)
         // console.log('in stock', in_stocks)
@@ -1844,6 +1845,8 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
         // }
         var object = _this./*#*/compatability_private('attribute_options', {'element':element, 'data':data});
         data = object.data;
+        console.log('vs [process_attribute_template] data');
+        console.log(data);
 
         data = _this./*#*/process_attribute_data_private(type, element, data, mode);
         
@@ -3200,15 +3203,20 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
                 
                  // console.log(_this./*#*/configs_private.types);
 
+                // ACTIVE_TODO temp. this is temparary but if we can confirm it as meture structure than lets make it final and remove active_todo temp.-- to a -- to h
+                //     ACTIVE_TODO Before validating the structure to be mature or not there is a consern that this null type of item which is actually product default thumb, so the concern is that it is not part of the prime data layer of variations. While taking this dicesion we would like to go throgh the flow and notes of the simple type implimentation on our whole php data layer and js layer. -- to h -- to a
+                if(window.document.splugins.common.is_empty(type_inner)) {
+                   type_inner = 'image'; 
+                }
                  if (window.document.splugins.common._o(_this./*#*/configs_private.types, type_inner)) {
                     
                     console.log("gim [process_images] if innner loop if");
                     // console.log("gallery_images process_images inner if");
 
                     // _this./*#*/process_images_inner_private(type_inner, element);    
-                    SP_WBC_Variations_Gallery_Images.prototype.process_images_inner_private.call(_this,type_inner, element);    
-
-                  } else {
+                    SP_WBC_Variations_Gallery_Images.prototype.process_images_inner_private.call(_this,type_inner, element);   
+                
+                } else {
                         // console.log("gim [process_images] if innner loop else");
 
                         //     ACTIVE_TODO_OC_START
