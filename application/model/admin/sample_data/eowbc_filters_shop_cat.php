@@ -27,7 +27,6 @@ class Eowbc_Filters_Shop_Cat extends Eowbc_Sample_Data {
 		$this->number_of_step = 3;
 		$this->data_template = \eo\wbc\model\admin\sample_data\data_templates\Filters_Shop_Cat_Data_Template::instance();
 		$this->tab_key_prefix='sc_';
-
 		$this->form_defination=\eo\wbc\controllers\admin\menu\page\Shop_Category_Filter::instance()->get_form_definition();
 
 		add_action('eowbc_automation_post_sample_filters',array($this,'save_configuration'),10,2);

@@ -432,13 +432,46 @@ $form['data'] = array(
 					'value'=>array(wbc()->options->get_option('tiny_features','tiny_features_unlock_swatches_switch')),
 					'options'=>array('1'=>' '),
 					'is_id_as_name'=>true,
-					'class'=>array(),
+					'class'=>array(''),
 					'visible_info'=>array( 'label'=>'Simply request to enable this feature with some CSS confirmation',
 						'type'=>'visible_info',
-						'class'=>array('fluid', 'small'),
+						'class'=>array('fluid', 'small','hidden'),
 						'size_class'=>array('sixteen','wide'),
 					),	
 				), 
+				'tiny_features_unlock_swatches_link'=>array(
+					'label'=>'Click here for Unlock Swatches For The Shop/Category Page',
+					'type'=>'link',
+					'attr'=>array("href=''"),
+					'class'=>array('secondary'),
+					// 'visible_info'=>array( 'label'=>'Please visit at '.site_url(get_option('woocommerce_permalinks')['category_base'].'eo_diamond_shape_cat/'),
+					// 	'type'=>'visible_info',
+					// 	'class'=>array('fluid', 'small'),
+					// 	'size_class'=>array('sixteen','wide'),
+					// ),	
+				),
+				'tiny_features_unlock_swatches_whatsapp_link'=>array(
+					'label'=>'Click here for Contact Through WhatsApp',
+					'type'=>'link',
+					'attr'=>array("href='https://api.whatsapp.com/send/?phone=918347408752&text=I%20want%20to%20unlock%20the%20variation%20swatches%20for%20the%20shop%2Fcategory%20%20page.%20The%20woo%20choice%20plugin%20is%20already%20installed%20on%20my%20WordPress%20admin%20panel%20and%20I%20am%20sending%20this%20msg%20to%20unlock%20this%20feature.&type=phone_number&app_absent=0'"),
+					'class'=>array('secondary'),
+					// 'visible_info'=>array( 'label'=>'Please visit at '.site_url(get_option('woocommerce_permalinks')['category_base'].'eo_diamond_shape_cat/'),
+					// 	'type'=>'visible_info',
+					// 	'class'=>array('fluid', 'small'),
+					// 	'size_class'=>array('sixteen','wide'),
+					// ),	
+				),
+				'tiny_features_unlock_swatches_other_link'=>array(
+					'label'=>'Click here for Contact Through Other option',
+					'type'=>'link',
+					'attr'=>array("href='".admin_url('admin.php?page=eowbc&eo_wbc_view_auto_jewel=1&f=filters_shop_cat')."'"),
+					'class'=>array('secondary'),
+					// 'visible_info'=>array( 'label'=>'Please visit at '.site_url(get_option('woocommerce_permalinks')['category_base'].'eo_diamond_shape_cat/'),
+					// 	'type'=>'visible_info',
+					// 	'class'=>array('fluid', 'small'),
+					// 	'size_class'=>array('sixteen','wide'),
+					// ),	
+				),
 				'tiny_features_option_ui_loop_box_hover_media_index'=>array(
 					'label'=>wbc()->config->product_variations_configs()['is_gallery_images_type_based_template'] == 1 ? eowbc_lang('Loop box media type to show on hover') : eowbc_lang('Loop box hover media index'),
 					'type'=>wbc()->config->product_variations_configs()['is_gallery_images_type_based_template'] == 1 ? 'select' : 'number',
@@ -1281,6 +1314,16 @@ if(empty($bonus_features['spec_view_item_page'])) {
 }
 
 wbc()->load->model('admin\form-builder');
+
+$disabled = array();
+if(wbc()->options->get_option('tiny_features','tiny_features_unlock_swatches_switch') == 1) {
+	// array_merge(array1)
+	$disabled = array('');
+}else{
+
+	$disabled = array('disabled');
+}
+
 eo\wbc\model\admin\Form_Builder::instance()->build($form);
 wbc()->load->asset('js','admin/tiny-feature/shortcode-filter');
 wbc()->load->asset('js','admin/tiny-feature/shop-cat');
