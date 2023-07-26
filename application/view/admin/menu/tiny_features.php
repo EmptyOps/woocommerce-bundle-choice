@@ -4,6 +4,17 @@ defined( 'ABSPATH' ) || exit;
 
 wbc()->load->model('category-attribute');
 
+
+$disabled_class = array();
+if(wbc()->options->get_option('tiny_features','tiny_features_unlock_swatches_shop_page') == 1) {
+	// array_merge(array1)
+	$disabled_class = array();
+}else{
+
+	$disabled_class = array('disabled');
+}
+
+
 $form = array();
 
 $filter_table = array();
@@ -425,14 +436,14 @@ $form['data'] = array(
 					'label'=>'<span class="ui large text">Archive / Shop</span>',
 				),
 				// -- wbc()->options->get_option('tiny_features','tiny_features_unlock_swatches_switch') == 'tiny_features_unlock_swatches_switch' ? array('done'):array('not done') 
-				'tiny_features_unlock_swatches_switch'=>array(
+				'tiny_features_unlock_swatches_shop_page'=>array(
 					'label'=>'Unlock swatches for the shop/category page',
 					'type'=>'checkbox',
 					'sanitize'=>'sanitize_text_field',
-					'value'=>array(wbc()->options->get_option('tiny_features','tiny_features_unlock_swatches_switch')),
+					'value'=>array(wbc()->options->get_option('tiny_features','tiny_features_unlock_swatches_shop_page')),
 					'options'=>array('1'=>' '),
 					'is_id_as_name'=>true,
-					'class'=>array(''),
+					'class'=>array('hidden'),
 					'visible_info'=>array( 'label'=>'Simply request to enable this feature with some CSS confirmation',
 						'type'=>'visible_info',
 						'class'=>array('fluid', 'small','hidden'),
@@ -478,7 +489,7 @@ $form['data'] = array(
 					'value'=>wbc()->options->get_option('tiny_features','tiny_features_option_ui_loop_box_hover_media_index',wbc()->config->product_variations_configs()['is_gallery_images_type_based_template'] == 1 ? 'video' :  '2'),
 					'options'=>wbc()->config->product_variations_configs()['is_gallery_images_type_based_template'] == 1 ? apply_filters('sp_variations_loop_box_hover_media_type',array('image'=>'Image','video'=>'Video')) : array(),
 					'sanitize'=>'sanitize_text_field',
-					'class'=>array('fluid'),			
+					'class'=>array_merge( array('fluid'), $disabled_class),			
 					'size_class'=>array('eight','wide'/*,'required'*/),
 					'inline'=>false,
 
@@ -496,7 +507,7 @@ $form['data'] = array(
 					'value'=>array(wbc()->options->get_option('tiny_features','shop_page_hide_first_variation_form')),
 					'options'=>array('1'=>' '),
 					'is_id_as_name'=>true,
-					'class'=>array(),
+					'class'=>array_merge( array(), $disabled_class),
 					'visible_info'=>array( 'label'=>'If enabled the variation selection table for first category\'s products will be hidden if default variations are set',
 						'type'=>'visible_info',
 						'class'=>array('fluid', 'small'),
@@ -510,7 +521,7 @@ $form['data'] = array(
 					'value'=>array(wbc()->options->get_option('tiny_features','shop_page_hide_second_variation_form')),
 					'options'=>array('1'=>' '),
 					'is_id_as_name'=>true,
-					'class'=>array(),
+					'class'=>array_merge( array(), $disabled_class),
 					'visible_info'=>array( 'label'=>'If enabled the variation selection table for second category\'s products will be hidden if default variations are set',
 						'type'=>'visible_info',
 						'class'=>array('fluid', 'small'),
@@ -522,7 +533,7 @@ $form['data'] = array(
 					'type'=>'text',
 					'value'=>wbc()->options->get_option('tiny_features','tiny_features_shop_page_option_ui_option_dimention','2em'),
 					'sanitize'=>'sanitize_text_field',
-					'class'=>array('fluid'),	
+					'class'=>array_merge( array('fluid'), $disabled_class),	
 					'size_class'=>array('eight','wide','required'),
 					'inline'=>false,
 
@@ -537,7 +548,7 @@ $form['data'] = array(
 					'type'=>'color',
 					'value'=>wbc()->options->get_option('tiny_features','tiny_features_shop_page_option_ui_border_color','#ECECEC'),
 					'sanitize'=>'sanitize_hex_color',
-					'class'=>array('fluid'),				
+					'class'=>array_merge( array('fluid'), $disabled_class),				
 					'size_class'=>array('eight','wide','required'),
 					'inline'=>false,
 
@@ -552,7 +563,7 @@ $form['data'] = array(
 					'type'=>'text',
 					'value'=>wbc()->options->get_option('tiny_features','tiny_features_shop_page_option_ui_border_width','2px'),
 					'sanitize'=>'sanitize_text_field',
-					'class'=>array('fluid'),			
+					'class'=>array_merge( array('fluid'), $disabled_class),			
 					'size_class'=>array('eight','wide','required'),
 					'inline'=>false,
 
@@ -567,7 +578,7 @@ $form['data'] = array(
 					'type'=>'color',
 					'value'=>wbc()->options->get_option('tiny_features','tiny_features_shop_page_option_ui_border_color_hover','#3D3D3D'),
 					'sanitize'=>'sanitize_hex_color',
-					'class'=>array('fluid'),				
+					'class'=>array_merge( array('fluid'), $disabled_class),				
 					'size_class'=>array('eight','wide','required'),
 					'inline'=>false,
 
@@ -582,7 +593,7 @@ $form['data'] = array(
 					'type'=>'text',
 					'value'=>wbc()->options->get_option('tiny_features','tiny_features_shop_page_option_ui_border_width_hover','2px'),
 					'sanitize'=>'sanitize_text_field',
-					'class'=>array('fluid'),
+					'class'=>array_merge( array('fluid'), $disabled_class),
 					'size_class'=>array('eight','wide','required'),
 					'inline'=>false,
 
@@ -597,7 +608,7 @@ $form['data'] = array(
 					'type'=>'text',
 					'value'=>wbc()->options->get_option('tiny_features','tiny_features_shop_page_option_ui_border_radius','1px'),
 					'sanitize'=>'sanitize_text_field',
-					'class'=>array('fluid'),	
+					'class'=>array_merge( array('fluid'), $disabled_class),	
 					'size_class'=>array('eight','wide','required'),
 					'inline'=>false,
 
@@ -612,7 +623,7 @@ $form['data'] = array(
 					'type'=>'color',
 					'value'=>wbc()->options->get_option('tiny_features','tiny_features_shop_page_option_ui_font_color','#DBDBDB'),
 					'sanitize'=>'sanitize_hex_color',
-					'class'=>array('fluid'),
+					'class'=>array_merge( array('fluid'), $disabled_class),
 					'size_class'=>array('eight','wide','required'),
 					'inline'=>false,
 
@@ -627,7 +638,7 @@ $form['data'] = array(
 					'type'=>'color',
 					'value'=>wbc()->options->get_option('tiny_features','tiny_features_shop_page_option_ui_font_color_hover','#AA7D7D'),
 					'sanitize'=>'sanitize_hex_color',
-					'class'=>array('fluid'),
+					'class'=>array_merge( array('fluid'), $disabled_class),
 					'size_class'=>array('eight','wide','required'),
 					'inline'=>false,
 
@@ -642,7 +653,7 @@ $form['data'] = array(
 					'type'=>'color',
 					'value'=>wbc()->options->get_option('tiny_features','tiny_features_shop_page_option_ui_bg_color','#ffffff'),
 					'sanitize'=>'sanitize_hex_color',
-					'class'=>array('fluid'),
+					'class'=>array_merge( array('fluid'), $disabled_class),
 					'size_class'=>array('eight','wide','required'),
 					'inline'=>false,
 
@@ -657,7 +668,7 @@ $form['data'] = array(
 					'type'=>'color',
 					'value'=>wbc()->options->get_option('tiny_features','tiny_features_shop_page_option_ui_bg_color_hover','#DCC7C7'),
 					'sanitize'=>'sanitize_hex_color',
-					'class'=>array('fluid'),
+					'class'=>array_merge( array('fluid'), $disabled_class),
 					'size_class'=>array('eight','wide','required'),
 					'inline'=>false,
 
@@ -1314,15 +1325,6 @@ if(empty($bonus_features['spec_view_item_page'])) {
 }
 
 wbc()->load->model('admin\form-builder');
-
-$disabled = array();
-if(wbc()->options->get_option('tiny_features','tiny_features_unlock_swatches_switch') == 1) {
-	// array_merge(array1)
-	$disabled = array('');
-}else{
-
-	$disabled = array('disabled');
-}
 
 eo\wbc\model\admin\Form_Builder::instance()->build($form);
 wbc()->load->asset('js','admin/tiny-feature/shortcode-filter');
