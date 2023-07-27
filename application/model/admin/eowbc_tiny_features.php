@@ -27,7 +27,6 @@ class Tiny_Features extends Eowbc_Model {
 	}
 
 	public function render_ui($form_definition, $args = null) {
-
 		if (!empty($args['page_section'])) {
 			$form = array();
 

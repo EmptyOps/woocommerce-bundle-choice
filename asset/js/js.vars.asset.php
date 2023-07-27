@@ -87,7 +87,7 @@ if(false) {
 
 		?>
 
-    	window.document.splugins.common.current_theme_key = '<?php echo wbc()->common->current_theme_key(); ?>';
+    window.document.splugins.common.current_theme_key = '<?php echo wbc()->common->current_theme_key(); ?>';
 
 		window.document.splugins.common.is_shop_page = <?php echo ((is_shop()) ? "true" : "false");?>; 
 
@@ -185,10 +185,6 @@ if(false) {
 	}
 
 },( !is_admin() ? 999 : 5) );
-
-add_action('wp_footer',function(){ 
-
-});
 
 add_action('wp_footer',function(){  
 	
@@ -2196,13 +2192,7 @@ console.log('[js.vars.asset wp_footer]');\n" .
   "        });\n" .
   "\n" .
   "      });\n";
-	wbc()->load->add_inline_script('',$inline_scriptq,'common');
-	// add_action('wp_enqueue_scripts',function(){
-
-
-	// 	wp_add_inline_script ('jquery',$inline_script);
-
-	// });      
+	wbc()->load->add_inline_script('',$inline_scriptq,'common');    
    ?>
    <script>
 // 		console.log('[js.vars.asset wp_footer]');
@@ -4210,6 +4200,6 @@ console.log('[js.vars.asset wp_footer]');\n" .
 //     	});
    </script>    
   <?php      
-}/*, PHP_INT_MAX*/);
+}/*, PHP_INT_MAX*//*-- aa ashish comment karu se jo uncomment hoy to upper ni string javascript work nathi karti @a*/);
 
 ?>

@@ -293,6 +293,12 @@ class Form_Builder implements Builder {
 
 	public function process_property_group(array $form_element, string $id) {
 		
+		if(isset($form_element['label_class'])){
+			$form_element['label_class'] = $this->process_property($form_element['label_class']);
+		} else {
+			$form_element['label_class'] ='';
+		}
+		
 		if(isset($form_element['class'])){
 			$form_element['class'] = $this->process_property($form_element['class']);
 		} else {

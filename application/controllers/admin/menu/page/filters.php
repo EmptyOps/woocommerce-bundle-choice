@@ -68,7 +68,6 @@ if ( ! class_exists( 'Filters' ) ) {
 	    }
 
 		public static function get_form_definition( $is_add_sample_values = false ) {
-			
 			wbc()->load->model('admin/form-builder');
 			wbc()->load->model('category-attribute');
 			$inventory_type = wbc()->options->get_option('setting_status_setting_status_setting','inventory_type','');			

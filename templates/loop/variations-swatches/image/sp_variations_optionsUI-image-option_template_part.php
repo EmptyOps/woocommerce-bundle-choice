@@ -35,7 +35,7 @@ $template = array(
                 array(
                     'type' => 'img',
                     'class' => 'spui_variable_item_image img-fluid',
-                    'src' => esc_url( $variable_item_data['image_url'] ),
+                    'src' => esc_url( $variable_item_data['options_loop_image'][$slug_or_option]/*$variable_item_data['image_url']*/ ),
                     'attr' => array( 'aria-hidden' => 'true', 'alt' => esc_attr( $term->name ) ),
                 ),
             ),

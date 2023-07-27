@@ -4,6 +4,20 @@ defined( 'ABSPATH' ) || exit;
 
 wbc()->load->model('category-attribute');
 
+
+$disabled_class = array();
+$label_class = array();
+if(wbc()->options->get_option('tiny_features','tiny_features_unlock_swatches_shop_page') == 1) {
+	// array_merge(array1)
+	$disabled_class = array();
+	$label_class = array();
+}else{
+
+	$disabled_class = array('disabled');
+	$label_class = array('ui','grey','text');
+}
+
+
 $form = array();
 
 $filter_table = array();
@@ -424,29 +438,65 @@ $form['data'] = array(
 					'class'=>array('field', 'styled'),
 					'label'=>'<span class="ui large text">Archive / Shop</span>',
 				),
-				// -- wbc()->options->get_option('tiny_features','tiny_features_enable_only_for_categories') == 'tiny_features_enable_only_for_categories' ? array('done'):array('not done') 
-				'tiny_features_unlock_swatches_switch'=>array(
-					'label'=>'Unlock swatches for the shop/category page',
+				// -- wbc()->options->get_option('tiny_features','tiny_features_unlock_swatches_switch') == 'tiny_features_unlock_swatches_switch' ? array('done'):array('not done') 
+				'tiny_features_unlock_swatches_shop_page'=>array(
+					/*'label'=>'Unlock swatches for the shop/category page',*/
 					'type'=>'checkbox',
 					'sanitize'=>'sanitize_text_field',
-					'value'=>array(wbc()->options->get_option('tiny_features','tiny_features_unlock_swatches_switch')),
+					'value'=>array(wbc()->options->get_option('tiny_features','tiny_features_unlock_swatches_shop_page')),
 					'options'=>array('1'=>' '),
 					'is_id_as_name'=>true,
-					'class'=>array(),
+					'class'=>array(''),
+					'attr'=>array('style="display: none !important;"'),
 					'visible_info'=>array( 'label'=>'Simply request to enable this feature with some CSS confirmation',
 						'type'=>'visible_info',
-						'class'=>array('fluid', 'small'),
+						'class'=>array('fluid', 'small','hidden'),
 						'size_class'=>array('sixteen','wide'),
 					),	
 				), 
+				'tiny_features_unlock_swatches_link'=>array(
+					'label'=>'Click here for Unlock Swatches For The Shop/Category Page',
+					'type'=>'text',
+					'class'=>array('secondary', 'hidden'),
+					'attr'=>array('style="display: none !important;"'),					
+					// 'visible_info'=>array( 'label'=>'Please visit at '.site_url(get_option('woocommerce_permalinks')['category_base'].'eo_diamond_shape_cat/'),
+					// 	'type'=>'visible_info',
+					// 	'class'=>array('fluid', 'small'),
+					// 	'size_class'=>array('sixteen','wide'),
+					// ),	
+				),
+				'tiny_features_unlock_swatches_whatsapp_link'=>array(
+					'label'=>'Click here for Contact Through WhatsApp',
+					'type'=>'link',
+					'attr'=>array("href='https://api.whatsapp.com/send/?phone=918347408752&text=I%20want%20to%20unlock%20the%20variation%20swatches%20for%20the%20shop%2Fcategory%20%20page.%20The%20woo%20choice%20plugin%20is%20already%20installed%20on%20my%20WordPress%20admin%20panel%20and%20I%20am%20sending%20this%20msg%20to%20unlock%20this%20feature.&type=phone_number&app_absent=0'", "target='blank'"),
+					'class'=>array('secondary'),
+					// 'visible_info'=>array( 'label'=>'Please visit at '.site_url(get_option('woocommerce_permalinks')['category_base'].'eo_diamond_shape_cat/'),
+					// 	'type'=>'visible_info',
+					// 	'class'=>array('fluid', 'small'),
+					// 	'size_class'=>array('sixteen','wide'),
+					// ),	
+				),
+				'tiny_features_unlock_swatches_other_link'=>array(
+					'label'=>'Click here for Contact Through Other option',
+					'type'=>'link',
+					'attr'=>array("href='https://sphereplugins.com/contact-us/'", "target='blank'"),
+					'class'=>array('secondary'),
+					// 'visible_info'=>array( 'label'=>'Please visit at '.site_url(get_option('woocommerce_permalinks')['category_base'].'eo_diamond_shape_cat/'),
+					// 	'type'=>'visible_info',
+					// 	'class'=>array('fluid', 'small'),
+					// 	'size_class'=>array('sixteen','wide'),
+					// ),	
+				),
 				'tiny_features_option_ui_loop_box_hover_media_index'=>array(
 					'label'=>wbc()->config->product_variations_configs()['is_gallery_images_type_based_template'] == 1 ? eowbc_lang('Loop box media type to show on hover') : eowbc_lang('Loop box hover media index'),
+					'label_class'=>array_merge( array(), $label_class),
 					'type'=>wbc()->config->product_variations_configs()['is_gallery_images_type_based_template'] == 1 ? 'select' : 'number',
 					'value'=>wbc()->options->get_option('tiny_features','tiny_features_option_ui_loop_box_hover_media_index',wbc()->config->product_variations_configs()['is_gallery_images_type_based_template'] == 1 ? 'video' :  '2'),
 					'options'=>wbc()->config->product_variations_configs()['is_gallery_images_type_based_template'] == 1 ? apply_filters('sp_variations_loop_box_hover_media_type',array('image'=>'Image','video'=>'Video')) : array(),
 					'sanitize'=>'sanitize_text_field',
-					'class'=>array('fluid'),			
+					'class'=>array_merge( array('fluid'), $disabled_class),
 					'size_class'=>array('eight','wide'/*,'required'*/),
+					'attr'=>array(),					
 					'inline'=>false,
 
 					'visible_info'=>array( 'label'=>wbc()->config->product_variations_configs()['is_gallery_images_type_based_template'] == 1 ? eowbc_lang('Set here the type of media to show on hover. For example you may like to show video or image on hover, leave it blank to disable the hover feature.') : eowbc_lang('Set here the index of thumb image or media to show on hover. For example you may like to show video on hover so set index as per your gallery images thumbnails display order.'),
@@ -458,12 +508,14 @@ $form['data'] = array(
 				),						
 				'shop_page_hide_first_variation_form'=>array(
 					'label'=>'Hide first category\'s variation menu',
+					'label_class'=>array_merge( array(), $label_class),
 					'type'=>'checkbox',
 					'sanitize'=>'sanitize_text_field',
 					'value'=>array(wbc()->options->get_option('tiny_features','shop_page_hide_first_variation_form')),
 					'options'=>array('1'=>' '),
 					'is_id_as_name'=>true,
 					'class'=>array(),
+					'attr'=>array_merge( array(), $disabled_class),
 					'visible_info'=>array( 'label'=>'If enabled the variation selection table for first category\'s products will be hidden if default variations are set',
 						'type'=>'visible_info',
 						'class'=>array('fluid', 'small'),
@@ -472,12 +524,14 @@ $form['data'] = array(
 				), 
 				'shop_page_hide_second_variation_form'=>array(
 					'label'=>'Hide second category\'s variation menu',
+					'label_class'=>array_merge( array(), $label_class),
 					'type'=>'checkbox',
 					'sanitize'=>'sanitize_text_field',
 					'value'=>array(wbc()->options->get_option('tiny_features','shop_page_hide_second_variation_form')),
 					'options'=>array('1'=>' '),
 					'is_id_as_name'=>true,
 					'class'=>array(),
+					'attr'=>array_merge( array(), $disabled_class),
 					'visible_info'=>array( 'label'=>'If enabled the variation selection table for second category\'s products will be hidden if default variations are set',
 						'type'=>'visible_info',
 						'class'=>array('fluid', 'small'),
@@ -486,13 +540,14 @@ $form['data'] = array(
 				), 
 				'tiny_features_shop_page_option_ui_option_dimention'=>array(
 					'label'=>eowbc_lang('Swatches Box Dimention'),
+					'label_class'=>array_merge( array(), $label_class),
 					'type'=>'text',
 					'value'=>wbc()->options->get_option('tiny_features','tiny_features_shop_page_option_ui_option_dimention','2em'),
 					'sanitize'=>'sanitize_text_field',
-					'class'=>array('fluid'),	
+					'class'=>array('fluid'),
 					'size_class'=>array('eight','wide','required'),
 					'inline'=>false,
-
+					'attr'=>array_merge( array(), $disabled_class),
 					'visible_info'=>array( 'label'=>eowbc_lang('The height and width of the Swatches box.<strong>(prepend px,em,rem as measurement)</strong>'),
 						'type'=>'visible_info',
 						'class'=>array('small','fluid'),
@@ -501,13 +556,14 @@ $form['data'] = array(
 				),				
 				'tiny_features_shop_page_option_ui_border_color'=>array(
 					'label'=>eowbc_lang('Swatches Border Color'),
+					'label_class'=>array_merge( array(), $label_class),
 					'type'=>'color',
 					'value'=>wbc()->options->get_option('tiny_features','tiny_features_shop_page_option_ui_border_color','#ECECEC'),
 					'sanitize'=>'sanitize_hex_color',
-					'class'=>array('fluid'),				
+					'class'=>array('fluid'),
 					'size_class'=>array('eight','wide','required'),
 					'inline'=>false,
-
+					'attr'=>array_merge( array(), $disabled_class),
 					'visible_info'=>array( 'label'=>eowbc_lang('<br/>The color of the Swatches border'),
 						'type'=>'visible_info',
 						'class'=>array('small','fluid'),
@@ -516,11 +572,13 @@ $form['data'] = array(
 				),
 				'tiny_features_shop_page_option_ui_border_width'=>array(
 					'label'=>eowbc_lang('Swatches Border width'),
+					'label_class'=>array_merge( array(), $label_class),
 					'type'=>'text',
 					'value'=>wbc()->options->get_option('tiny_features','tiny_features_shop_page_option_ui_border_width','2px'),
 					'sanitize'=>'sanitize_text_field',
-					'class'=>array('fluid'),			
+					'class'=>array('fluid'),
 					'size_class'=>array('eight','wide','required'),
+					'attr'=>array_merge( array(), $disabled_class),					
 					'inline'=>false,
 
 					'visible_info'=>array( 'label'=>eowbc_lang('The border width of the Swatches border.<strong>(prepend px,em,rem as measurement)</strong>'),
@@ -531,11 +589,13 @@ $form['data'] = array(
 				),
 				'tiny_features_shop_page_option_ui_border_color_hover'=>array(
 					'label'=>eowbc_lang('Swatches Border Color on Hover -- Not work(selectore issue)'),
+					'label_class'=>array_merge( array(), $label_class),
 					'type'=>'color',
 					'value'=>wbc()->options->get_option('tiny_features','tiny_features_shop_page_option_ui_border_color_hover','#3D3D3D'),
 					'sanitize'=>'sanitize_hex_color',
-					'class'=>array('fluid'),				
+					'class'=>array('fluid'),
 					'size_class'=>array('eight','wide','required'),
+					'attr'=>array_merge( array(), $disabled_class),					
 					'inline'=>false,
 
 					'visible_info'=>array( 'label'=>eowbc_lang('<br/>The color of the Swatches border on hover.'),
@@ -546,11 +606,13 @@ $form['data'] = array(
 				),
 				'tiny_features_shop_page_option_ui_border_width_hover'=>array(
 					'label'=>eowbc_lang('Swatches Border width on Hover'),
+					'label_class'=>array_merge( array(), $label_class),
 					'type'=>'text',
 					'value'=>wbc()->options->get_option('tiny_features','tiny_features_shop_page_option_ui_border_width_hover','2px'),
 					'sanitize'=>'sanitize_text_field',
 					'class'=>array('fluid'),
 					'size_class'=>array('eight','wide','required'),
+					'attr'=>array_merge( array(), $disabled_class),					
 					'inline'=>false,
 
 					'visible_info'=>array( 'label'=>eowbc_lang('The border width of the Swatches border on hover.<strong>(prepend px,em,rem as measurement)</strong>'),
@@ -561,11 +623,13 @@ $form['data'] = array(
 				),
 				'tiny_features_shop_page_option_ui_border_radius'=>array(
 					'label'=>eowbc_lang('Swatches Border Radius'),
+					'label_class'=>array_merge( array(), $label_class),
 					'type'=>'text',
 					'value'=>wbc()->options->get_option('tiny_features','tiny_features_shop_page_option_ui_border_radius','1px'),
 					'sanitize'=>'sanitize_text_field',
-					'class'=>array('fluid'),	
+					'class'=>array('fluid'),
 					'size_class'=>array('eight','wide','required'),
+					'attr'=>array_merge( array(), $disabled_class),					
 					'inline'=>false,
 
 					'visible_info'=>array( 'label'=>eowbc_lang('The border radius of the Swatches border.<strong>(prepend px,em,rem as measurement)</strong>'),
@@ -576,11 +640,13 @@ $form['data'] = array(
 				),						
 				'tiny_features_shop_page_option_ui_font_color'=>array(
 					'label'=>eowbc_lang('Swatches Font Color -- Not work(variation file css override)'),
+					'label_class'=>array_merge( array(), $label_class),
 					'type'=>'color',
 					'value'=>wbc()->options->get_option('tiny_features','tiny_features_shop_page_option_ui_font_color','#DBDBDB'),
 					'sanitize'=>'sanitize_hex_color',
 					'class'=>array('fluid'),
 					'size_class'=>array('eight','wide','required'),
+					'attr'=>array_merge( array(), $disabled_class),					
 					'inline'=>false,
 
 					'visible_info'=>array( 'label'=>eowbc_lang('<br/>The color of the Swatches text.'),
@@ -591,11 +657,13 @@ $form['data'] = array(
 				),
 				'tiny_features_shop_page_option_ui_font_color_hover'=>array(
 					'label'=>eowbc_lang('Swatches Font Color on Hover'),
+					'label_class'=>array_merge( array(), $label_class),
 					'type'=>'color',
 					'value'=>wbc()->options->get_option('tiny_features','tiny_features_shop_page_option_ui_font_color_hover','#AA7D7D'),
 					'sanitize'=>'sanitize_hex_color',
 					'class'=>array('fluid'),
 					'size_class'=>array('eight','wide','required'),
+					'attr'=>array_merge( array(), $disabled_class),					
 					'inline'=>false,
 
 					'visible_info'=>array( 'label'=>eowbc_lang('<br/>The color of the Swatches text on hover.'),
@@ -606,11 +674,13 @@ $form['data'] = array(
 				),
 				'tiny_features_shop_page_option_ui_bg_color'=>array(
 					'label'=>eowbc_lang('Swatches Background Color -- Not work(variation file css override)'),
+					'label_class'=>array_merge( array(), $label_class),
 					'type'=>'color',
 					'value'=>wbc()->options->get_option('tiny_features','tiny_features_shop_page_option_ui_bg_color','#ffffff'),
 					'sanitize'=>'sanitize_hex_color',
 					'class'=>array('fluid'),
 					'size_class'=>array('eight','wide','required'),
+					'attr'=>array_merge( array(), $disabled_class),					
 					'inline'=>false,
 
 					'visible_info'=>array( 'label'=>eowbc_lang('<br/>The color of the Swatches background.'),
@@ -621,11 +691,13 @@ $form['data'] = array(
 				),
 				'tiny_features_shop_page_option_ui_bg_color_hover'=>array(
 					'label'=>eowbc_lang('Swatches Background Color on Hover'),
+					'label_class'=>array_merge( array(), $label_class),
 					'type'=>'color',
 					'value'=>wbc()->options->get_option('tiny_features','tiny_features_shop_page_option_ui_bg_color_hover','#DCC7C7'),
 					'sanitize'=>'sanitize_hex_color',
 					'class'=>array('fluid'),
 					'size_class'=>array('eight','wide','required'),
+					'attr'=>array_merge(array(), $disabled_class),					
 					'inline'=>false,
 
 					'visible_info'=>array( 'label'=>eowbc_lang('<br/>The color of the Swatches background on hover.'),
@@ -1281,7 +1353,15 @@ if(empty($bonus_features['spec_view_item_page'])) {
 }
 
 wbc()->load->model('admin\form-builder');
+
 eo\wbc\model\admin\Form_Builder::instance()->build($form);
 wbc()->load->asset('js','admin/tiny-feature/shortcode-filter');
 wbc()->load->asset('js','admin/tiny-feature/shop-cat');
 wbc()->load->asset('js','admin/tiny-feature/specification');
+?>
+
+<script type="text/javascript">
+
+	jQuery('[for="tiny_features_unlock_swatches_shop_page_1"]').css('display','none');
+
+</script>	
