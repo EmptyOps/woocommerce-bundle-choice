@@ -6,12 +6,15 @@ wbc()->load->model('category-attribute');
 
 
 $disabled_class = array();
+$label_class = array();
 if(wbc()->options->get_option('tiny_features','tiny_features_unlock_swatches_shop_page') == 1) {
 	// array_merge(array1)
 	$disabled_class = array();
+	$label_class = array();
 }else{
 
 	$disabled_class = array('disabled');
+	$label_class = array('ui','grey','text');
 }
 
 
@@ -486,6 +489,7 @@ $form['data'] = array(
 				),
 				'tiny_features_option_ui_loop_box_hover_media_index'=>array(
 					'label'=>wbc()->config->product_variations_configs()['is_gallery_images_type_based_template'] == 1 ? eowbc_lang('Loop box media type to show on hover') : eowbc_lang('Loop box hover media index'),
+					'label_class'=>array_merge( array(), $label_class),
 					'type'=>wbc()->config->product_variations_configs()['is_gallery_images_type_based_template'] == 1 ? 'select' : 'number',
 					'value'=>wbc()->options->get_option('tiny_features','tiny_features_option_ui_loop_box_hover_media_index',wbc()->config->product_variations_configs()['is_gallery_images_type_based_template'] == 1 ? 'video' :  '2'),
 					'options'=>wbc()->config->product_variations_configs()['is_gallery_images_type_based_template'] == 1 ? apply_filters('sp_variations_loop_box_hover_media_type',array('image'=>'Image','video'=>'Video')) : array(),
@@ -504,6 +508,7 @@ $form['data'] = array(
 				),						
 				'shop_page_hide_first_variation_form'=>array(
 					'label'=>'Hide first category\'s variation menu',
+					'label_class'=>array_merge( array(), $label_class),
 					'type'=>'checkbox',
 					'sanitize'=>'sanitize_text_field',
 					'value'=>array(wbc()->options->get_option('tiny_features','shop_page_hide_first_variation_form')),
@@ -519,6 +524,7 @@ $form['data'] = array(
 				), 
 				'shop_page_hide_second_variation_form'=>array(
 					'label'=>'Hide second category\'s variation menu',
+					'label_class'=>array_merge( array(), $label_class),
 					'type'=>'checkbox',
 					'sanitize'=>'sanitize_text_field',
 					'value'=>array(wbc()->options->get_option('tiny_features','shop_page_hide_second_variation_form')),
@@ -534,6 +540,7 @@ $form['data'] = array(
 				), 
 				'tiny_features_shop_page_option_ui_option_dimention'=>array(
 					'label'=>eowbc_lang('Swatches Box Dimention'),
+					'label_class'=>array_merge( array(), $label_class),
 					'type'=>'text',
 					'value'=>wbc()->options->get_option('tiny_features','tiny_features_shop_page_option_ui_option_dimention','2em'),
 					'sanitize'=>'sanitize_text_field',
@@ -549,6 +556,7 @@ $form['data'] = array(
 				),				
 				'tiny_features_shop_page_option_ui_border_color'=>array(
 					'label'=>eowbc_lang('Swatches Border Color'),
+					'label_class'=>array_merge( array(), $label_class),
 					'type'=>'color',
 					'value'=>wbc()->options->get_option('tiny_features','tiny_features_shop_page_option_ui_border_color','#ECECEC'),
 					'sanitize'=>'sanitize_hex_color',
@@ -564,6 +572,7 @@ $form['data'] = array(
 				),
 				'tiny_features_shop_page_option_ui_border_width'=>array(
 					'label'=>eowbc_lang('Swatches Border width'),
+					'label_class'=>array_merge( array(), $label_class),
 					'type'=>'text',
 					'value'=>wbc()->options->get_option('tiny_features','tiny_features_shop_page_option_ui_border_width','2px'),
 					'sanitize'=>'sanitize_text_field',
@@ -580,6 +589,7 @@ $form['data'] = array(
 				),
 				'tiny_features_shop_page_option_ui_border_color_hover'=>array(
 					'label'=>eowbc_lang('Swatches Border Color on Hover -- Not work(selectore issue)'),
+					'label_class'=>array_merge( array(), $label_class),
 					'type'=>'color',
 					'value'=>wbc()->options->get_option('tiny_features','tiny_features_shop_page_option_ui_border_color_hover','#3D3D3D'),
 					'sanitize'=>'sanitize_hex_color',
@@ -596,6 +606,7 @@ $form['data'] = array(
 				),
 				'tiny_features_shop_page_option_ui_border_width_hover'=>array(
 					'label'=>eowbc_lang('Swatches Border width on Hover'),
+					'label_class'=>array_merge( array(), $label_class),
 					'type'=>'text',
 					'value'=>wbc()->options->get_option('tiny_features','tiny_features_shop_page_option_ui_border_width_hover','2px'),
 					'sanitize'=>'sanitize_text_field',
@@ -612,6 +623,7 @@ $form['data'] = array(
 				),
 				'tiny_features_shop_page_option_ui_border_radius'=>array(
 					'label'=>eowbc_lang('Swatches Border Radius'),
+					'label_class'=>array_merge( array(), $label_class),
 					'type'=>'text',
 					'value'=>wbc()->options->get_option('tiny_features','tiny_features_shop_page_option_ui_border_radius','1px'),
 					'sanitize'=>'sanitize_text_field',
@@ -628,6 +640,7 @@ $form['data'] = array(
 				),						
 				'tiny_features_shop_page_option_ui_font_color'=>array(
 					'label'=>eowbc_lang('Swatches Font Color -- Not work(variation file css override)'),
+					'label_class'=>array_merge( array(), $label_class),
 					'type'=>'color',
 					'value'=>wbc()->options->get_option('tiny_features','tiny_features_shop_page_option_ui_font_color','#DBDBDB'),
 					'sanitize'=>'sanitize_hex_color',
@@ -644,6 +657,7 @@ $form['data'] = array(
 				),
 				'tiny_features_shop_page_option_ui_font_color_hover'=>array(
 					'label'=>eowbc_lang('Swatches Font Color on Hover'),
+					'label_class'=>array_merge( array(), $label_class),
 					'type'=>'color',
 					'value'=>wbc()->options->get_option('tiny_features','tiny_features_shop_page_option_ui_font_color_hover','#AA7D7D'),
 					'sanitize'=>'sanitize_hex_color',
@@ -660,6 +674,7 @@ $form['data'] = array(
 				),
 				'tiny_features_shop_page_option_ui_bg_color'=>array(
 					'label'=>eowbc_lang('Swatches Background Color -- Not work(variation file css override)'),
+					'label_class'=>array_merge( array(), $label_class),
 					'type'=>'color',
 					'value'=>wbc()->options->get_option('tiny_features','tiny_features_shop_page_option_ui_bg_color','#ffffff'),
 					'sanitize'=>'sanitize_hex_color',
@@ -676,6 +691,7 @@ $form['data'] = array(
 				),
 				'tiny_features_shop_page_option_ui_bg_color_hover'=>array(
 					'label'=>eowbc_lang('Swatches Background Color on Hover'),
+					'label_class'=>array_merge( array(), $label_class),
 					'type'=>'color',
 					'value'=>wbc()->options->get_option('tiny_features','tiny_features_shop_page_option_ui_bg_color_hover','#DCC7C7'),
 					'sanitize'=>'sanitize_hex_color',

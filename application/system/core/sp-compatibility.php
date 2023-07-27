@@ -106,6 +106,134 @@ class SP_Compatibility {
 	        }
 
 	        return $args['hook_key'];
+
+	 	}elseif($page_section == 'gallery_zoom_container_width') {
+	 	
+	 		$current_theme_key = wbc()->common->current_theme_key();
+
+	 		if ($current_theme_key == 'themes___oxygen') {
+	        	
+	        	return '50%';
+
+	        }elseif ($current_theme_key == 'Other_theme') {
+
+	        	return '48%';
+
+	        }elseif ($current_theme_key == 'Other_theme') {
+
+	        	return '45%';
+
+	        }elseif ($current_theme_key == 'Other_theme') {
+
+	        	return '45%';
+
+	        }elseif ($current_theme_key == 'Other_theme') {
+
+	        	return '45%';
+
+	        }elseif ($current_theme_key == 'Other_theme') {
+
+	        	return '45%';
+
+	        }elseif ($current_theme_key == 'Other_theme') {
+
+	        	return '45%';
+
+	        }elseif ($current_theme_key == 'Other_theme') {
+
+	        	return '45%';
+
+	        }elseif ($current_theme_key == 'Other_theme') {
+
+	        	return '45%';
+
+	        }elseif ($current_theme_key == 'Other_theme') {
+
+	        	return '45%';
+
+	        }elseif ($current_theme_key == 'Other_theme') {
+
+	        	return '45%';
+
+	        }elseif ($current_theme_key == 'Other_theme') {
+
+	        	return '45%';
+
+	        }elseif ($current_theme_key == 'Other_theme') {
+
+	        	return '45%';
+
+	        }elseif ($current_theme_key == 'Other_theme') {
+
+	        	return '45%';
+
+	        }elseif ($current_theme_key == 'Other_theme') {
+
+	        	return '45%';
+
+	        }elseif ($current_theme_key == 'Other_theme') {
+
+	        	return '45%';
+
+	        }elseif ($current_theme_key == 'Other_theme') {
+
+	        	return '45%';
+
+	        }elseif ($current_theme_key == 'Other_theme') {
+
+	        	return '45%';
+
+	        }elseif ($current_theme_key == 'Other_theme') {
+
+	        	return '45%';
+
+	        }elseif ($current_theme_key == 'Other_theme') {
+
+	        	return '45%';
+
+	        }elseif ($current_theme_key == 'Other_theme') {
+
+	        	return '45%';
+
+	        }elseif ($current_theme_key == 'Other_theme') {
+
+	        	return '45%';
+
+	        }elseif ($current_theme_key == 'Other_theme') {
+
+	        	return '45%';
+
+	        }elseif ($current_theme_key == 'Other_theme') {
+
+	        	return '45%';
+
+	        }elseif ($current_theme_key == 'Other_theme') {
+
+	        	return '45%';
+
+	        }elseif ($current_theme_key == 'Other_theme') {
+
+	        	return '45%';
+
+	        }elseif ($current_theme_key == 'Other_theme') {
+
+	        	return '45%';
+
+	        }elseif ($current_theme_key == 'Other_theme') {
+
+	        	return '45%';
+
+	        }elseif ($current_theme_key == 'Other_theme') {
+
+	        	return '45%';
+
+	        }elseif ($current_theme_key == 'Other_theme') {
+
+	        	return '45%';
+
+	        }
+
+	        return $args['default_width'];
 	 	}
 	}
 

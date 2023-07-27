@@ -28,7 +28,7 @@ if(!empty($id) /*and !empty($label)*/){
 	
 			if(!empty($label))
 			{
-	    		wbc()->load->template('component/form/input_label',array('id'=>$id,'label'=>$label)); 
+	    		wbc()->load->template('component/form/input_label',array('id'=>$id,'label'=>$label,'label_class'=>$label_class)); 
 			}
 			?>
 			
