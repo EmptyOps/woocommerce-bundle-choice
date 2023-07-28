@@ -1090,10 +1090,11 @@ class Product {
                         
             if(!empty($terms) and is_array($terms)){
                 $terms =array_filter(array_map(function($map) use(&$terms,&$map_column,&$product_code,&$product_in){
-                    
+
                     if(array_intersect($terms,$map[$map_column])){
-                        if($map_column == 0) return $map[1];
-                        else return $map[0];
+                        
+                        if($map_column == 0) return array($map[1], $map['second_filter_query_type']);
+                        else return array($map[0], $map['first_filter_query_type']);
                     } elseif(in_array( $product_code, $map[$map_column] )) {                    
                         if($map_column == 0){
                             $product_in = array_merge( $product_in, $map[1] );
@@ -1111,8 +1112,13 @@ class Product {
 
         $category=array();//array to hold category slugs
         $taxonomy=array();//array to hold taxonomy slugs
+        $taxonomy_related_data=array();
         if(!is_wp_error($terms) and !empty($terms) and is_array($terms)) {
             array_walk($terms,function($term) use(&$category,&$taxonomy){
+                
+                $filter_query_type = $term[1];
+                $term = $term[0];
+
                 $_term_ = null;
                 if(is_array($term)) {
                     foreach ($term as $_term_) {
@@ -1126,6 +1132,8 @@ class Product {
                             } elseif( substr($_taxonomy_,0,3) =='pa_' ) {
 
                                 $taxonomy[substr($_term_->taxonomy,3)][] = $_term_->slug;
+
+                                $taxonomy_related_data[substr($_term_->taxonomy,3)]['filter_query_type'] = $filter_query_type;
                             }
                         }
                     }
@@ -1141,6 +1149,8 @@ class Product {
                         } elseif( substr($_taxonomy_,0,3) =='pa_' ) {
                             
                             $taxonomy[substr($_term_->taxonomy,3)][] = $_term_->slug;
+
+                            $taxonomy_related_data[substr($_term_->taxonomy,3)]['filter_query_type'] = $filter_query_type;
                         }
                     }
                 }
@@ -1200,10 +1210,19 @@ class Product {
             $_attribute_param_str = "";
 
             foreach ($taxonomy as  $_tax => $_tems) {
+
                 // $filter_query["query_type_{$_tax}"] = $attr_pref;
                 // $filter_query["filter_{$_tax}"] = implode($glue,array_unique(array_filter($_tems)));
                 $_attribute_param_str .= "pa_" . $_tax . ",";
-                $filter_query["checklist_pa_{$_tax}"] = implode($glue,array_unique(array_filter($_tems)));
+
+                if($taxonomy_related_data[$_tax]['filter_query_type'] == 'options') {
+
+                    $filter_query["checklist_pa_{$_tax}"] = implode($glue,array_unique(array_filter($_tems)));
+                } else {
+
+                    $filter_query["min_pa_{$_tax}"] = $_tems[0];
+                    $filter_query["max_pa_{$_tax}"] = $_tems[1];
+                }
             }
 
             $filter_query["_attribute"] = rtrim($_attribute_param_str, ',');
@@ -1218,7 +1237,8 @@ class Product {
             $product_in = array_map(function($product_in){ return substr($product_in,4); },$product_in);
 
             $link.='products_in='.implode(',',$product_in).'&';
-        }             
+        }      
+
         return $link;
     }
 
