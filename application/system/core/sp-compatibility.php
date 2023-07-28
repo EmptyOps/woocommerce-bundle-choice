@@ -111,9 +111,9 @@ class SP_Compatibility {
 	 	
 	 		$current_theme_key = wbc()->common->current_theme_key();
 
-	 		if ($current_theme_key == 'themes___oxygen') {
+	 		if ($current_theme_key == 'themes___astra') {
 	        	
-	        	return '50%';
+	        	return '54%';
 
 	        }elseif ($current_theme_key == 'Other_theme') {
 

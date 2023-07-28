@@ -6,8 +6,8 @@
 
     /*tejas_22_07_2022 it for new QC upgrades so it is permenent*/
     .Product_Left_Wrapper_Plugin_Images {
-        max-width: 58%;  /*---Change---*/
-        min-width: 58%;  /*---Change---*/
+        max-width:<?php echo $asset_param['sp_variation_gallery']['gallery_zoom_container_width']; ?>;  /*---Change---*/
+        min-width:<?php echo $asset_param['sp_variation_gallery']['gallery_zoom_container_width']; ?>;  /*---Change---*/
         float: left;
         clear: left;
     }

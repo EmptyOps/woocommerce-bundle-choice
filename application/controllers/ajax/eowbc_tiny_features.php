@@ -107,6 +107,8 @@ if(wp_verify_nonce(wbc()->sanitize->post('_wpnonce'),'eowbc_tiny_features')){
 
 	wbc()->options->update_option('tiny_features','tiny_features_enable_only_for_categories', (empty(wbc()->sanitize->post('tiny_features_enable_only_for_categories'))?'':wbc()->sanitize->post('tiny_features_enable_only_for_categories')));
 
+	wbc()->options->update_option('tiny_features','tiny_features_gallery_width', (empty(wbc()->sanitize->post('tiny_features_gallery_width'))?'':wbc()->sanitize->post('tiny_features_gallery_width')));
+
 	//$res['msg'] = "Updated successfully!";
 	//wbc()->options->update_option('configuration','config_category',1);
 	//wbc()->options->update_option('configuration','config_map',1);

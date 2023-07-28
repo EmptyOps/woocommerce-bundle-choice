@@ -87,13 +87,33 @@ class SP_Model_Gallery_Slider extends Eowbc_Base_Model_Publics {
 
 		});
 
-		$this->load_asset();
+		$this->load_asset( array('asset_param'=>$this->prepare_load_asset_data()) );
 
 	}
 
-	public function load_asset(){
+	public function prepare_load_asset_data( $args = array() ) {
 
-		wbc()->load->asset( 'asset.php', constant( strtoupper( 'EOWBC_ASSET_DIR' ) ).'variations/gallery-slider.assets.php' );
+		$data = array();
+		
+		$data['sp_variation_gallery'] = array();
+
+		$data['sp_variation_gallery']['gallery_zoom_container_width'] = \eo\wbc\model\SP_WBC_Compatibility::instance()->single_product_render_compatability('gallery_zoom_container_width',array('default_width'=>'58%'));
+		
+		// ACTIVE_TODO_OC_START
+		// -- jo user admin mathi value set kare to tene priority malvi joye and jo default value set kari ne save karave to avoid thavu joye(aa if confirm karvani se) @a 154.12 
+		// ACTIVE_TODO_OC_END
+		if(wbc()->options->get_option('tiny_features','tiny_features_gallery_width') != $data['sp_variation_gallery']['gallery_zoom_container_width']){
+
+			$data['sp_variation_gallery']['gallery_zoom_container_width'] = wbc()->options->get_option('tiny_features','tiny_features_gallery_width');
+		}
+
+		return $data;
+	}
+
+	public function load_asset( $args=array() ){
+
+		// wbc()->load->asset( 'asset.php', constant( strtoupper( 'EOWBC_ASSET_DIR' ) ).'variations/gallery-slider.assets.php' );
+		wbc()->load->asset( 'asset.php', constant( strtoupper( 'EOWBC_ASSET_DIR' ) ).'variations/gallery-slider.assets.php', isset($args['asset_param']) ? array('asset_param'=>$args['asset_param']) : array() );
 	}
 
 	public function init_core(){

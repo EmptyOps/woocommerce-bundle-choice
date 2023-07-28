@@ -875,7 +875,8 @@ class SP_Model_Single_Product extends SP_Single_Product {
 				}				
 			}
 
-			$this->load_asset();
+			// $this->load_asset();
+			$this->load_asset( array('asset_param'=>$this->prepare_load_asset_data()) );
 
 		});
 	
@@ -927,14 +928,22 @@ class SP_Model_Single_Product extends SP_Single_Product {
 
 	}
 
-	public function load_asset(){
+	public function prepare_load_asset_data( $args = array() ) {
 
-		add_action( 'wp_footer' /*'wp_enqueue_scripts'*/ ,function(){
+		$data = array();
+			
+		return $data;
+	}
+
+	public function load_asset( $args=array() ){
+
+		add_action( 'wp_footer' /*'wp_enqueue_scripts'*/ ,function() use($args) {
 			
 			wbc()->load->asset('css','fomantic/semantic.min');
 			wbc()->load->asset('js','fomantic/semantic.min',array('jquery'));
 
-			wbc()->load->asset( 'asset.php', constant( 'EOWBC_ASSET_DIR' ).'variations.assets.php');
+			// wbc()->load->asset( 'asset.php', constant( 'EOWBC_ASSET_DIR' ).'variations.assets.php');
+			wbc()->load->asset( 'asset.php', constant( 'EOWBC_ASSET_DIR' ).'variations.assets.php', isset($args['asset_param']) ? array('asset_param'=>$args['asset_param']) : array() );
 		}, 1049);	
 
 	}

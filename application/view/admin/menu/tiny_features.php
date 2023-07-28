@@ -748,6 +748,31 @@ $form['data'] = array(
 					'type'=>'accordian',
 					'section_type'=>'end'
 				),
+				'tiny_features_gallery_options'=>array(
+					'label'=>'Gallery Options',
+					'type'=>'devider',
+					// 'class'=>array('fluid'),
+					// 'size_class'=>array('eight','wide')
+				),
+				'tiny_features_gallery_width'=>array(
+					'label'=>eowbc_lang('Gallery Width'),
+					'label_class'=>array_merge( array(), $label_class),
+					'type'=>'text',
+					'right_labeled'=>eowbc_lang('%'),
+					'right_labeled_class'=>array(''),
+					'value'=>wbc()->options->get_option('tiny_features','tiny_features_gallery_width','58%'),
+					'sanitize'=>'sanitize_text_field',
+					'class'=>array('fluid'),
+					'size_class'=>array('eight','wide','required'),
+					'attr'=>array_merge( array(), $disabled_class),					
+					'inline'=>false,
+
+					'visible_info'=>array( 'label'=>eowbc_lang('Slider Gallery Width in %. Default value is: 50. Limit: 10-100.'),
+						'type'=>'visible_info',
+						'class'=>array('small'),
+						// 'size_class'=>array('sixteen','wide'),
+					)
+				),					
 				// //--- start @a ---
 				// 'tiny_features_variation_swatches_admin_settings_and_configrations'=>array(
 				// 				'label'=>eowbc_lang('Variation Swatches Admin Settings And Configrations'),

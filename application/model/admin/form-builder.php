@@ -299,6 +299,18 @@ class Form_Builder implements Builder {
 			$form_element['label_class'] ='';
 		}
 		
+		if(isset($form_element['left_labeled_class'])){
+			$form_element['left_labeled_class'] = $this->process_property($form_element['left_labeled_class']);
+		} else {
+			$form_element['left_labeled_class'] ='';
+		}
+
+		if(isset($form_element['right_labeled_class'])){
+			$form_element['right_labeled_class'] = $this->process_property($form_element['right_labeled_class']);
+		} else {
+			$form_element['right_labeled_class'] ='';
+		}
+						
 		if(isset($form_element['class'])){
 			$form_element['class'] = $this->process_property($form_element['class']);
 		} else {
