@@ -70,6 +70,9 @@ if( empty($mode) || ( $mode != "setup_wizard" && $mode != "plain" ) ) {
             <div class='ui compact segment'>
               <a style='cursor:pointer;' href='http://sphereplugins.com/contact-us' target='_blank'><i class='comment alternate icon'></i>&nbsp;Feature requests/ideas &amp; feedback</a>
             </div>
+            <div class='ui compact segment'>
+              <a style='cursor:pointer;' href='http://sphereplugins.com/contact-us' target='_blank'><i class='hands helping icon'></i>Variation Swatches Documentation</a>
+            </div>
           </div>"></i> 
         <style type="text/css">
           .eowbc_help_context{

@@ -1387,6 +1387,255 @@ wbc()->load->asset('js','admin/tiny-feature/specification');
 
 <script type="text/javascript">
 
+jQuery(document).ready(function(){
+
 	jQuery('[for="tiny_features_unlock_swatches_shop_page_1"]').css('display','none');
+
+	var options_ui_video_section = '<style>'+
+	'    .spui-admin-custum-container {'+
+	'		float: left;'+
+	'		width: 100%;'+
+	'		display: -webkit-box;'+
+	'		display: -ms-flexbox;'+
+	'		display: flex;'+
+	'		-webkit-box-orient: horizontal;'+
+	'		-webkit-box-direction: normal;'+
+	'		    -ms-flex-flow: row wrap;'+
+	'		        flex-flow: row wrap;'+
+	'	}'+
+	''+
+	''+
+	''+
+	'	.spui-admin-custum-container-left-section {'+
+	'        -webkit-box-flex: 1;'+
+	'            -ms-flex: 1 0 calc(100% - 296px);'+
+	'                flex: 1 0 calc(100% - 296px);'+
+	'        max-width: calc(100% - 296px);'+
+	'        width: 100%;'+
+	'        margin-right: 20px;'+
+	'		padding: 20px 50px;'+
+	'		background: #fff;'+
+	'		border-radius: 10px;'+
+	'		margin-top: 20px;'+
+	'		-webkit-box-shadow: 0 4px 28px rgb(0 0 0 / 12%);'+
+	'		        box-shadow: 0 4px 28px rgb(0 0 0 / 12%);'+
+	'    }'+
+	''+
+	''+
+	'    .spui-admin-custum-container-rigth-section {'+
+	'        display: inline-block;'+
+	'        -webkit-box-flex: 1;'+
+	'            -ms-flex: 1 0 276px;'+
+	'                flex: 1 0 276px;'+
+	'        width: 30%;'+
+	'        margin-top: 1rem;'+
+	'        float: left;'+
+	'    }'+
+	'    [data-tab="tiny_features_item_page_option"]{'+
+	'    	display: inline-block;'+
+	'    	width: 60%;'+
+	'    	float: left;'+
+	'    }'+
+	'	.spui-admin-swatch-var-widget-wrap {'+
+	'		width: 100%;'+
+	'		float: left;'+
+	'	}'+
+	''+
+	''+
+	'    .spui-admin-swatch-var-widget {'+
+	'        padding: 10px;'+
+	'        background: #5858581c;'+
+	'        border-radius: 10px;'+
+	'        -webkit-box-shadow: 0 4px 26px rgba(0, 0, 0, 0.08);'+
+	'                box-shadow: 0 4px 26px rgba(0, 0, 0, 0.08);'+
+	'        margin-bottom: 20px;'+
+	'		width: 100%;'+
+	'		float: left;'+
+	'	}'+
+	''+
+	'	.spui-admin-swat-video-frame {'+
+	'		width: 100%;'+
+	'		float: left;'+
+	'		padding: 14px 0;'+
+	'	}'+
+	'	.spui-admin-swat-video-frame iframe {'+
+	'		width: 100%;'+
+	'	}'+
+	''+
+	'	.spui-swatch-video-title{'+
+	'		margin-bottom: 10px;'+
+	'		font-size: 1.28571429rem;'+
+	'		line-height: 1.28571429em;'+
+	'		font-weight: 700;'+
+	'    	padding: 0;'+
+	'		display: block;'+
+	'		width: 100%;'+
+	'    	float: left;'+
+	'	}'+
+	''+
+	'	.spui-admin-swatch-var-addon-wrap{'+
+	'		float: left;'+
+	'		width: 100%;'+
+	'	}'+
+	''+
+	'	.spui-admin-swatch-var-addon{'+
+	'		float: left;'+
+	'		width: 100%;'+
+	'		text-align: center;'+
+	'		padding: 10px;'+
+	'		border: 1px solid #EBECED;'+
+	'		border-top: 0 none;'+
+	'		margin-bottom: 15px;'+
+	'	}'+
+	''+
+	'	.spui-admin-swatch-var-widget-title {'+
+	'    	text-align: center;'+
+	'	}'+
+	''+
+	'	a.spui-swatch-addon-link{'+
+	'		color: #2271B1;'+
+	'		display: block;'+
+	'	}'+
+	''+
+	'	.spui-swatch-addon-link h2{'+
+	'		font-size: 1.71428571rem;'+
+	'		color: black;'+
+	'    	line-height: 1.5;'+
+	'		margin-bottom: 0;'+
+	'		margin-top: 0;'+
+	'		font-weight: 700;'+
+	'    	padding: 0;'+
+	'		display: block;'+
+	'	}'+
+	''+
+	'	.spui-admin-swatch-var-addon p{'+
+	'		font-size: 13px;'+
+	'		margin: 0 0 1em;'+
+	'    	line-height: 1.4285em;'+
+	'		display: block;'+
+	'		float: left;'+
+	'		width: 100%;'+
+	'		'+
+	'	}'+
+	''+
+	'	.spui-admin-swatch-submit-link{'+
+	'		display: block;'+
+	'		padding: 15px 5px;'+
+	'		background: #424242;'+
+	'		color: #fff;'+
+	'		text-decoration: none;'+
+	'		margin-top: 25px;'+
+	'		border-radius: 5px;'+
+	'		width: 100%;'+
+	'		float: left;'+
+	'	}'+
+	'	a.spui-admin-swatch-submit-link.spui-admin-update-clicks:hover {'+
+	'	    color: black;'+
+	'	    text-decoration: none;'+
+	'	    background: transparent;'+
+	'	    border: 1px solid;'+
+	'	}'+
+	''+
+	'	p.spui-admin-swatch-var-description {'+
+	'	    float: left;'+
+	'	    padding-top: 15px;'+
+	'	}'+
+	''+
+	'	@media(max-width:960px){'+
+	'		body .spui-admin-custum-container-left-section{'+
+	'			-webkit-box-flex: 1 !important;'+
+	'			    -ms-flex: 1 1 100% !important;'+
+	'			        flex: 1 1 100% !important;'+
+	'			max-width: 100%  !important;'+
+	'		}'+
+	'		body .spui-admin-custum-container-rigth-section {'+
+	'			-webkit-box-flex: 1 !important;'+
+	'			    -ms-flex: 1 1 100% !important;'+
+	'			        flex: 1 1 100% !important;'+
+	'			max-width: 100%  !important;'+
+	'		}'+
+	'	}'+
+	''+
+	''+
+	'    </style>'+
+	''+
+	'<div class="spui-admin-custum-container-rigth-section">'+
+	'    <div class="spui-admin-swatch-var-widget-wrap">'+
+	'<!--         <div class="spui-admin-swatch-var-widget">'+
+	'            <h3 class="spui-swatch-video-title">Getting Started</h3>'+
+	'            <div class="spui-admin-swat-video-frame">'+
+	'                <iframe'+
+	'                    src="https://www.youtube.com/embed/1qGusf9IfFY"'+
+	'                    title="YouTube video player"'+
+	'                    frameborder="0"'+
+	'                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"'+
+	'                    allowfullscreen=""'+
+	'                ></iframe>'+
+	'            </div>'+
+	'            <p class="spui-admin-swatch-var-description">'+
+	'                Whether that is on a user role basis, minimum order amount, per product category or even within a date range.'+
+	'            </p>'+
+	'        </div> -->'+
+	'        <div class="spui-admin-swatch-var-widget">'+
+	'            <h3 class="spui-swatch-video-title spui-admin-swatch-var-widget-title">Getting Started</h3>'+
+	'            <!---BoxContent-->'+
+	'            <div class="spui-admin-swatch-var-addon-wrap">'+
+	'                <div class="spui-admin-swatch-var-addon">'+
+	'                    <a href="#" class="spui-swatch-addon-link"> <h2>Documentation</h2> </a>'+
+	'                    <div class="spui-admin-swat-video-frame">'+
+	'                        <iframe'+
+	'                            src="https://www.youtube.com/embed/1qGusf9IfFY"'+
+	'                            title="YouTube video player"'+
+	'                            frameborder="0"'+
+	'                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"'+
+	'                            allowfullscreen=""'+
+	'                        ></iframe>'+
+	'                    </div>'+
+	'                    <p>Get started by spending some time with the '+
+	'                    	<a target="_blank" href="https://sphereplugins.com/docs/woo-choice-plugin/getting-started/installation-and-setup-wizard/">documentation.</a>'+
+	'                    </p>'+
+	'                    <a href="#" class="spui-admin-swatch-submit-link spui-admin-update-clicks"> Get It now </a>'+
+	'                </div>'+
+	'                <!---Box_Two-->'+
+	'                <div class="spui-admin-swatch-var-addon">'+
+	'                    <a href="#" class="spui-swatch-addon-link"> <h2>Facing issue?</h2> </a>'+
+	'                    <div class="spui-admin-swat-video-frame">'+
+	'                        <iframe'+
+	'                            src="https://www.youtube.com/embed/1qGusf9IfFY"'+
+	'                            title="YouTube video player"'+
+	'                            frameborder="0"'+
+	'                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"'+
+	'                            allowfullscreen=""'+
+	'                        ></iframe>'+
+	'                    </div>'+
+	'                    <p>Stuck with something? <a target="_blank" href="https://sphereplugins.com/contact-us/">Please open a ticket.</a> For emergency case join our live chat.</p>'+
+	'                    <a href="#" class="spui-admin-swatch-submit-link spui-admin-update-clicks"> Get It now </a>'+
+	'                </div>'+
+	'                <div class="spui-admin-swatch-var-addon">'+
+	'                    <a href="#" class="spui-swatch-addon-link"> <h2>Love Our Plugin?</h2> </a>'+
+	'                    <div class="spui-admin-swat-video-frame">'+
+	'                        <iframe'+
+	'                            src="https://www.youtube.com/embed/1qGusf9IfFY"'+
+	'                            title="YouTube video player"'+
+	'                            frameborder="0"'+
+	'                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"'+
+	'                            allowfullscreen=""'+
+	'                        ></iframe>'+
+	'                    </div>'+
+	'                    <p>Thank you for choosing Variation Gallery for WooCommerce. If you have found our plugin useful and makes you smile, <a target="_blank" href="https://wordpress.org/support/plugin/woo-bundle-choice/reviews/?rate=5#new-post">please consider giving us a 5-star rating.</a> It will help us to grow.</p>'+
+	'                    <a href="#" class="spui-admin-swatch-submit-link spui-admin-update-clicks"> Get It now </a>'+
+	'                </div>'+
+	'            </div>'+
+	'	        <!-- <a target="_blank" href="#">Variation Swatches Documentation</a> -->'+
+	'        </div>'+
+	'    </div>'+
+	'</div>'+
+	''+
+	''+
+	'<div class="clear_both" style="clear: both;"></div>';
+		
+
+	jQuery('#eowbc_tiny_features').append(options_ui_video_section);
+});
 
 </script>	
