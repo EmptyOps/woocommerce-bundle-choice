@@ -223,12 +223,12 @@ class Product {
             //return __('Add This To Cart','woo-bundle-choice');
         });
 
-        add_filter('woocommerce_get_script_data',function($data,$handle){
-            if($handle == 'wc-add-to-cart-variation'){
-                return false;
-            }
-            return $data;
-        },10,2);
+        // add_filter('woocommerce_get_script_data',function($data,$handle){
+        //     if($handle == 'wc-add-to-cart-variation'){
+        //         return false;
+        //     }
+        //     return $data;
+        // },10,2);
         
         add_action('wp_head',function(){
             wp_dequeue_script('wc-add-to-cart-variation');

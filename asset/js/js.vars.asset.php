@@ -1187,6 +1187,8 @@ add_action('wp_footer',function(){
 						};
 
 						$(function() {
+							console.log('A_OFF show_variation wc_add_to_cart_variation_params');
+							console.log(wc_add_to_cart_variation_params);
 							if ( typeof wc_add_to_cart_variation_params !== 'undefined' ) {
 								$( '.variations_form' ).each( function() {
 									// console.log('A_OFF show_variation [load] loop');
