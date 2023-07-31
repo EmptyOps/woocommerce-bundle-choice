@@ -2462,18 +2462,21 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
     	console.log('filters [input_type_button_click]');
     	console.log(element);
-		
+
+		var filter_target;
+
 		// <?php if($filter_type==1): ?>
-		if(_this.sub_configs.filter_type==1) {
+		// if(_this.sub_configs.filter_type==1) {
+		if(jQuery(/*this*/element).attr('data-filter-type')==1) {
 			
 			// let filter_target = jQuery('form#<?php echo $this->filter_prefix; ?>eo_wbc_filter [name="_attribute"]');
-			let filter_target = jQuery('form#'+ _this.sub_configs.filter_prefix +'eo_wbc_filter [name="_attribute"]');
+			filter_target = jQuery('form#'+ _this.sub_configs.filter_prefix +'eo_wbc_filter [name="_attribute"]');
 		}
 		// <?php else: ?>
 		else {
 
 			// let filter_target = jQuery('form#<?php echo $this->filter_prefix; ?>eo_wbc_filter [name="_category"]');
-			let filter_target = jQuery('form#'+ _this.sub_configs.filter_prefix +'eo_wbc_filter [name="_category"]');
+			filter_target = jQuery('form#'+ _this.sub_configs.filter_prefix +'eo_wbc_filter [name="_category"]');
 		}
 		// <?php endif;?>
 		
