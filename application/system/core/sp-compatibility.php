@@ -239,6 +239,26 @@ class SP_Compatibility {
 
 	        	return '52%';
 
+	        }elseif ($current_theme_key == 'themes___colormag') {
+
+	        	return '47%';
+
+	        }elseif ($current_theme_key == 'themes___twentysixteen') {
+
+	        	return '53%';
+
+	        }elseif ($current_theme_key == 'themes___twentyseventeen') {
+
+	        	return '52%';
+
+	        }elseif ($current_theme_key == 'themes___twentynineteen') {
+
+	        	return '52%';
+
+	        }elseif ($current_theme_key == 'themes___customizr') {
+
+	        	return '52%';
+
 	        }
 
 	        return $args['default_width'];
