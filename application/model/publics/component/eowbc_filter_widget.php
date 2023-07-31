@@ -1555,6 +1555,12 @@ class EOWBC_Filter_Widget {
 		}
 		if(empty($filter)) return false;
 
+		if( wbc()->sanitize->get('is_test') == 2 ) {
+
+			wbc_pr("filter['slug']---------1");
+			wbc_pr($filter['slug']);
+		}
+
 		array_push($this->__filters,array(
 										"type"=>"hidden",
 										"name"=>"checklist_".$filter['slug'],
@@ -1611,6 +1617,10 @@ class EOWBC_Filter_Widget {
 		$filter=$this->range_steps($id,$title,$filter_type,$__prefix,$item);
 		if(!empty($filter['force_title'])){
 			$title = $filter['title'];
+		}
+		if( wbc()->sanitize->get('is_test') == 2 ) {
+			wbc_pr("input_button filter['slug']");
+			wbc_pr($filter);
 		}
 
 		/* to be commented in parag*/
@@ -2726,8 +2736,7 @@ class EOWBC_Filter_Widget {
 		if( wbc()->sanitize->get('is_test') == 1 ){
 		
 			wbc_pr("get_widget_f_eo_wbc_object");
-		}	
-
+		}
 		do_action('eowbc_before_filter_widget');
 
 		$this->_category = apply_filters('eowbc_filter_widget_category',$this->eo_wbc_get_category());
@@ -2764,6 +2773,11 @@ class EOWBC_Filter_Widget {
 			}	
 		}
 
+		if( wbc()->sanitize->get('is_test') == 2 ) {
+			wbc_pr("get_widget filter['slug']");
+			wbc_pr($filter['slug']);
+		}
+
 		if(!empty($filter) and is_array($filter)) {
 			foreach($filter as $filter_key=>$filter_value) {
 				$filter[$filter_key][$prefix.'_fconfig_filter'] = str_replace('pa_','',$filter[$filter_key][$prefix.'_fconfig_filter']);
@@ -2772,7 +2786,12 @@ class EOWBC_Filter_Widget {
 
 		$filter =  apply_filters( 'eowbc_filter_widget_filters',$filter,$prefix);
 		$is_cleanup = apply_filters( 'eowbc_filter_widget_is_reset_cleanup',1);
-		
+
+
+		if( wbc()->sanitize->get('is_test') == 2 ) {
+			wbc_pr("get_widget filter['slug'] 1");
+			wbc_pr($filter);
+		}	
 
 		if($is_cleanup and !empty($filter) and is_array($filter)) {
 			$new_filters = array();
@@ -2786,6 +2805,10 @@ class EOWBC_Filter_Widget {
 			$filter = $new_filters;
 		}
 
+		if( wbc()->sanitize->get('is_test') == 2 ) {
+			wbc_pr("get_widget filter['slug'] 2");
+			wbc_pr($filter);
+		}		
 		//Hidden input filter lists.
 		$this->__filters=array();
 		$this->__prefix = $prefix;
@@ -2832,8 +2855,15 @@ class EOWBC_Filter_Widget {
 		
 		$filter =  apply_filters( 'eowbc_filter_widget_filters_post_clean',$filter,$prefix);
 		$this->__filters__=$filter;
+		if( wbc()->sanitize->get('is_test') == 2 ) {
+			wbc_pr("get_widget filter['slug'] 3");
+			wbc_pr($filter);
+		}	
 		$filter =  apply_filters( 'eowbc_filter_widget_filters',$filter,$prefix);
-
+		if( wbc()->sanitize->get('is_test') == 2 ) {
+			wbc_pr("get_widget filter['slug'] 4");
+			wbc_pr($filter);
+		}	
 		
 
 		foreach ($filter as $key => $item) {
@@ -3108,6 +3138,13 @@ class EOWBC_Filter_Widget {
 		$filters_sub_confings['filter_setting_slider_max_lblsize'] = (int)wbc()->options->get_option('filters_'.$filter_prefix.'filter_setting','filter_setting_slider_max_lblsize',6);
 		$filters_sub_confings['filter_prefix'] = $this->filter_prefix;	
 		$filters_sub_confings['filter_slug'] = $filter['slug'];
+
+		if( wbc()->sanitize->get('is_test') == 2 ) {
+
+			wbc_pr("filter['slug']---------");
+			wbc_pr($filter['slug']);
+		}
+		
 		$filters_sub_confings['filter_type'] = $filter_type;
 		// $filters_sub_confings['term_slug'] = $term->slug;
 

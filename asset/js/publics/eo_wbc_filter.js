@@ -1680,11 +1680,16 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
     var input_type_button_click_listener = function() {
 
+    	console.log('filters [input_type_button_click_listener]');
+    	console.log('[data-filter-slug="'+ _this.sub_configs.filter_slug +'"]');
+    	console.log(jQuery('[data-filter-slug="'+ _this.sub_configs.filter_slug +'"]'));
+
     	// --- aa code woo-bundle-choice/application/model/publics/component/eowbc_filter_widget.php input_button(); mathi move karyo se @a ---
     	// --- start ---
 		// $('[data-filter-slug="<?php echo $filter['slug']; ?>"]').on('click',function(event){
 		jQuery('[data-filter-slug="'+ _this.sub_configs.filter_slug +'"]').on('click',function(event){
     		
+    		console.log('filters [input_type_button_click_listener] 01');
     		on_input_type_button_click(event, this);
 
 		});
@@ -1758,6 +1763,8 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
     var on_input_type_button_click = function(event, element) {
 
+    	console.log('filters [on_input_type_button_click]');
+    	
     	input_type_button_click(event, element);
     };
 
@@ -2453,6 +2460,9 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
     var input_type_button_click = function(event, element) {
 
+    	console.log('filters [input_type_button_click]');
+    	console.log(element);
+		
 		// <?php if($filter_type==1): ?>
 		if(_this.sub_configs.filter_type==1) {
 			
