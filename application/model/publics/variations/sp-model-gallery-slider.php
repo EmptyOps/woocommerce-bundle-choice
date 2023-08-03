@@ -101,8 +101,9 @@ class SP_Model_Gallery_Slider extends Eowbc_Base_Model_Publics {
 		
 		// ACTIVE_TODO_OC_START
 		// -- jo user admin mathi value set kare to tene priority malvi joye and jo default value set kari ne save karave to avoid thavu joye(aa if confirm karvani se) @a 154.12 
+		// -- jo 0% input karse to default value set thay jase tenu pan impliment kari didhu se
 		// ACTIVE_TODO_OC_END
-		if(wbc()->options->get_option('tiny_features','tiny_features_gallery_width') != $data['sp_variation_gallery']['gallery_zoom_container_width']){
+		if(wbc()->options->get_option('tiny_features','tiny_features_gallery_width') != $data['sp_variation_gallery']['gallery_zoom_container_width'] && wbc()->options->get_option('tiny_features','tiny_features_gallery_width') != '0%'){
 
 			$data['sp_variation_gallery']['gallery_zoom_container_width'] = wbc()->options->get_option('tiny_features','tiny_features_gallery_width');
 		}

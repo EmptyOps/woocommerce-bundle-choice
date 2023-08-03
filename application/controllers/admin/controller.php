@@ -192,7 +192,7 @@ class Controller extends \eo\wbc\controllers\Controller {
 									'type'=>'accordian',
 									'section_type'=>'end'
 								),
-							),
+							)
 						);
 					}
 				}

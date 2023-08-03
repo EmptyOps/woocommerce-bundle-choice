@@ -1577,6 +1577,9 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
 
         console.log('process_attribute_data selects', data.selects)
         console.log('process_attribute_data disabled_selects', data.disabled_selects)
+        console.log('process_attribute_data out_of_stock_selects1', data.out_of_stock)
+        console.log('process_attribute_data out_of_stock_selects', data.out_of_stock_selects)
+        
         data.in_stocks = splugins._.difference(data.selects, data.disabled_selects);
 
         // console.log('out of stock', out_of_stock_selects)
@@ -1584,6 +1587,8 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
 
         data.available = splugins._.difference(data.in_stocks, data.out_of_stock_selects);
 
+        console.log('______data');
+        console.log(data);    
         return data;
 
     }
@@ -1846,7 +1851,9 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
         data = object.data;
 
         data = _this./*#*/process_attribute_data_private(type, element, data, mode);
-        
+        console.log('out_of_stock______data');
+        console.log(data);        
+
         inner_list.each(function (index, inner_element ) {
 
             // console.log("inner element in loop");
@@ -1919,7 +1926,15 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
 
             // Out of Stock
 
+            console.log('out_of_stock______');
+            console.log(data.available.length);
+            console.log(data);
+            console.log(data.attribute_value);
+            console.log(splugins._.includes(data.out_of_stock_selects, data.attribute_value));
+            console.log(_this./*#*/configs_private.options.clickable_out_of_stock);
+
             if (data.available.length > 0 && splugins._.includes(data.out_of_stock_selects, data.attribute_value) && _this./*#*/configs_private.options.clickable_out_of_stock) {
+                console.log('out_of_stock______1');
               $(data.inner_element).removeClass('disabled').addClass('out-of-stock');
             }
         });

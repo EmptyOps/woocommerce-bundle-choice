@@ -195,8 +195,26 @@ $form['data'] = array(
 					'type'=>'accordian',
 					'section_type'=>'start',
 					'class'=>array('field', 'styled'),
-					'label'=>'<span class="ui large text">Styling</span>',
+					'label'=>'<span class="ui large text">Global Settings</span>',
 				),
+				'tiny_features_disabled_attribute_style'=>array(
+					'label'=>eowbc_lang('Disabled Attribute style'),
+					'type'=>'select',
+					'value'=>wbc()->options->get_option('tiny_features','tiny_features_disabled_attribute_style','blur_with_cross'),
+					'options'=>array('blur_with_cross'=>'Blur with cross','blur_without_cross'=>'Blur without cross','hide'=>'Hide'),
+					'sanitize'=>'sanitize_text_field',
+					'class'=>array('fluid'),
+					'size_class'=>array('eight','wide'/*,'required'*/),
+					'attr'=>array(),					
+					'inline'=>false,
+
+					'visible_info'=>array( 'label'=>eowbc_lang(''),
+						'type'=>'visible_info',
+						'class'=>array('small','fluid'),
+						// 'size_class'=>array('sixteen','wide'),
+					),
+					'attr'=>array("min='0',max='10'")					
+				),		
 				'tiny_features_styling_tab_end'=>array(
 					'type'=>'accordian',
 					'section_type'=>'end'
@@ -455,7 +473,7 @@ $form['data'] = array(
 					),	
 				), 
 				'tiny_features_unlock_swatches_link'=>array(
-					'label'=>'Click here for Unlock Swatches For The Shop/Category Page',
+					'label'=>'Click here to Unlock Swatches For The Shop/Category Page',
 					'type'=>'text',
 					'class'=>array('secondary', 'hidden'),
 					'attr'=>array('style="display: none !important;"'),					
@@ -466,7 +484,7 @@ $form['data'] = array(
 					// ),	
 				),
 				'tiny_features_unlock_swatches_whatsapp_link'=>array(
-					'label'=>'Click here for Contact Through WhatsApp',
+					'label'=>'Click here to Contact Through WhatsApp',
 					'type'=>'link',
 					'attr'=>array("href='https://api.whatsapp.com/send/?phone=918347408752&text=I%20want%20to%20unlock%20the%20variation%20swatches%20for%20the%20shop%2Fcategory%20%20page.%20The%20woo%20choice%20plugin%20is%20already%20installed%20on%20my%20WordPress%20admin%20panel%20and%20I%20am%20sending%20this%20msg%20to%20unlock%20this%20feature.&type=phone_number&app_absent=0'", "target='blank'"),
 					'class'=>array('secondary'),
@@ -477,7 +495,7 @@ $form['data'] = array(
 					// ),	
 				),
 				'tiny_features_unlock_swatches_other_link'=>array(
-					'label'=>'Click here for Contact Through Other option',
+					'label'=>'Click here to Contact Through Other option',
 					'type'=>'link',
 					'attr'=>array("href='https://sphereplugins.com/contact-us/'", "target='blank'"),
 					'class'=>array('secondary'),

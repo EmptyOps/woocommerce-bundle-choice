@@ -82,6 +82,66 @@ if( is_product() ) {
             --spui-selected-item-box-shadow:#000;
         }
 
+       <?php if(wbc()->options->get_option('tiny_features','tiny_features_disabled_attribute_style') == 'blur_with_cross'){ ?>
+       .spui-wbc-swatches-variable-item.disabled .variable-item-span{
+   		opacity: .8;
+	}	
+	.spui-wbc-swatches-variable-item.disabled .variable-item-span::before {
+		position: absolute;
+		content: " " !important;
+		width: 100%;
+		height: 1px;
+		background: #FF0000 !important;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		top: 50%;
+		visibility: visible;
+		opacity: 1;
+		border: 0;
+		margin: 0 !important;
+		padding: 0 !important;
+		min-width: auto;
+		-webkit-transform-origin: center;
+		transform-origin: center;
+		z-index: 0;
+		pointer-events: none;
+		cursor: not-allowed;
+		transform: rotate(45deg);
+	}
+
+	.spui-wbc-swatches-variable-item.disabled .variable-item-span::after {
+		position: absolute;
+		content: " " !important;
+		width: 100%;
+		height: 1px;
+		background: #FF0000 !important;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		top: 50%;
+		visibility: visible;
+		opacity: 1;
+		border: 0;
+		margin: 0 !important;
+		padding: 0 !important;
+		min-width: auto;
+		-webkit-transform-origin: center;
+		transform-origin: center;
+		z-index: 0;
+		pointer-events: none;
+		cursor: not-allowed;
+		transform: rotate(-45deg);
+	}
+       <?php }elseif(wbc()->options->get_option('tiny_features','tiny_features_disabled_attribute_style') == 'blur_without_cross'){ ?>
+	.spui-wbc-swatches-variable-item.disabled .variable-item-span{
+   		opacity: .3;
+	}
+       <?php }elseif(wbc()->options->get_option('tiny_features','tiny_features_disabled_attribute_style') == 'hide'){ ?>
+	.spui-wbc-swatches-variable-item.disabled{
+		display: none;
+	}
+       <?php } ?>
 
 	.spui-wbc-swatches-variable-items-wrapper-button li.variable-item {
 /*	    margin: 4px !important;*/
