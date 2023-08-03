@@ -324,7 +324,7 @@ if(!class_exists('WBC_Loader')) {
 			}elseif($is_inner_hook){
 				// -- aa proper work nathi kartu
 				wp_register_script( $handle, '');
-			}
+			} 
 
         	wp_enqueue_script( $handle );
 			wp_add_inline_script( $handle, $inline_script);
