@@ -576,8 +576,7 @@ class WBC_WC {
             } elseif( $format == 'detailed_dropdown' ) {
                 $option_list.='<div class="item" data-value="'.$base->term_id.'" data-sp_eid="'.$separator.'prod_cat'.$separator.$base->term_id.'">'.str_replace("'","\'",$base->name).'</div>'.$this->get_productCats($base->slug, $format, $sp_eid_type_value);
             } elseif( $format == 'detailed' || $format == 'detailed_slug') {
-                $option_list[$base->term_id] = array('label'=> $format = 'detailed_slug' ? str_replace("'","\'",$base->name).'('.$base->slug.')' : str_replace("'","\'",$base->name), 'attr'=>' data-sp_eid="'.$separator.$sp_eid_type_value.$separator.$base->term_id.$separator.'" ', $format);
-
+                $option_list[$base->term_id] = array('label'=> ( $format == 'detailed_slug' ? str_replace("'","\'",$base->name).'('.$base->slug.')' : str_replace("'","\'",$base->name) ), 'attr'=>' data-sp_eid="'.$separator.$sp_eid_type_value.$separator.$base->term_id.$separator.'" ', $format);
 
                 $option_list = array_replace($option_list, self::get_productCats($base->slug, $format, $sp_eid_type_value)); //array_merge($option_list, self::get_productCats($base->slug, $format));
 
