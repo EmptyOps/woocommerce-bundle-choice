@@ -1,6 +1,6 @@
 <?php if(isset($rate)): ?>
 
-<ul>
+<ul <?php echo (!empty($style) ? 'style="'.$style.'"':''); ?>>
 	<?php for($i=1;$i<=5;$i++): ?>
 	<li>
 		<a href="#">
