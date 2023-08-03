@@ -316,8 +316,7 @@ if(!class_exists('WBC_Loader')) {
 		}
 
 		public function add_inline_script($handle,$inline_script,$handle_key='',$is_inner_hook=false,$is_prefix_handle=true) {
-			// wbc_pr('rrrrrrrrrrrrr');
-			// wbc_pr($is_inner_hook);
+
 			if(empty($handle) && !empty($handle_key)) {
 
 				$handle = ( $is_prefix_handle ? "sp_wbc_" : "" ) . str_replace(' ','-',str_replace('/','-',$handle_key));						

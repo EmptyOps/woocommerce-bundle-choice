@@ -94,7 +94,7 @@ class SP_WBC_Variations extends SP_Variations {
 				// ACTIVE_TODO_OC_START
 				// ACTIVE_TODO temp. below value is temparary and may be we simply need to keep it to 30 which is less than default of woo which is 50. 
 				// ACTIVE_TODO_OC_END
-				// $int = 100;
+				$int = 100;
 
 				return $int;
 
@@ -1286,6 +1286,7 @@ class SP_WBC_Variations extends SP_Variations {
 		$data = self::prepare_variable_item_wrapper_data($data,$args);
 
 		// TODO OPTIMIZATION in future if it seems worth it then we can prevent above layers from preparing unnecessary options and then we can simply skip array slice from below.
+			// NOTE: above optimisation is no more possible since now we can not do array_slice since we need all swatches options on dom so that javascript layer can function and so now all the swatches option are rendered but the additional swatches option beyond limit are made hidden.
 		$data['woo_dropdown_attribute_html_data']['args']['actual_total_options'] = null;
 		
 		global $woocommerce_loop;
@@ -1306,17 +1307,40 @@ class SP_WBC_Variations extends SP_Variations {
 
 				if(isset($data['woo_dropdown_attribute_html_data']['terms'])){
 
-					$data['woo_dropdown_attribute_html_data']['terms'] = array_slice( $data['woo_dropdown_attribute_html_data']['terms'], 0, $data['woo_dropdown_attribute_html_data']['args']['sp_variations_swatches_cat_display_limit'] );
+					// $data['woo_dropdown_attribute_html_data']['terms'] = array_slice( $data['woo_dropdown_attribute_html_data']['terms'], 0, $data['woo_dropdown_attribute_html_data']['args']['sp_variations_swatches_cat_display_limit'] );
+					$counter = -1;
+					foreach ( $data['woo_dropdown_attribute_html_data']['terms'] as $index => $term ) {
+						if ( in_array( $term->slug, $data['woo_dropdown_attribute_html_data']['options'], true ) ) {
+							$counter++;
+							if($counter >= $data['woo_dropdown_attribute_html_data']['args']['sp_variations_swatches_cat_display_limit']){
+
+									$data['woo_dropdown_attribute_html_data']['options_loop_class'][$term->slug] .= ' hide '; 
+									// wbc_pr('woo_dropdown_attribute_html_data options_loop_class');
+									// wbc_pr($data['woo_dropdown_attribute_html_data']['args']['sp_variations_swatches_cat_display_limit']);
+							}
+						}
+					}
 				}
 
 				if(isset($data['woo_dropdown_attribute_html_data']['options'])){
 
-					$data['woo_dropdown_attribute_html_data']['options'] = array_slice( $data['woo_dropdown_attribute_html_data']['options'], 0, $data['woo_dropdown_attribute_html_data']['args']['sp_variations_swatches_cat_display_limit'] );
+					// $data['woo_dropdown_attribute_html_data']['options'] = array_slice( $data['woo_dropdown_attribute_html_data']['options'], 0, $data['woo_dropdown_attribute_html_data']['args']['sp_variations_swatches_cat_display_limit'] );
+					$counter = -1;
+					foreach ( $data['woo_dropdown_attribute_html_data']['options'] as $option ) {
+						$counter++;
+						if($counter >= $data['woo_dropdown_attribute_html_data']['args']['sp_variations_swatches_cat_display_limit']){
+
+							$data['woo_dropdown_attribute_html_data']['options_loop_class'][$option] .= ' hide '; 
+						}
+					}
 				}
 
 				if(isset($data['variable_item_data']['terms'])){
 
-					$data['variable_item_data']['terms'] = array_slice( $data['variable_item_data']['terms'], 0, $data['woo_dropdown_attribute_html_data']['args']['sp_variations_swatches_cat_display_limit'] );
+					// $data['variable_item_data']['terms'] = array_slice( $data['variable_item_data']['terms'], 0, $data['woo_dropdown_attribute_html_data']['args']['sp_variations_swatches_cat_display_limit'] );
+					// foreach ( $data['variable_item_data']['terms'] as $term ) {
+						// $data['variable_item_data']['options_loop_class'][$term->slug] .= 'hide '; 
+					// }
 				}
 			}
 		}
