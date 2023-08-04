@@ -89,6 +89,13 @@ class Preview {
         },100);
 
         add_action('wp_footer',function(){
+            $inline_script = 
+            var text = "jQuery(document).ready(function($){\n" .
+  "                        jQuery('.special.cards .image').dimmer({ on: 'hover' });\n" .
+  "           });\n"
+             ;
+            wbc()->load->add_inline_script( '', $inline_script, 'common' );
+            if(false) {
             ?>
                 <script>
                     jQuery(document).ready(function($){
@@ -96,6 +103,7 @@ class Preview {
                     });
                 </script>
             <?php
+            }
         },100);  
 
         add_action( 'wp_head',function(){           

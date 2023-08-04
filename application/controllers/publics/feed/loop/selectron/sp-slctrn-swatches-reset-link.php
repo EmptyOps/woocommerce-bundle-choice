@@ -50,9 +50,18 @@ class SP_SLCTRN_Swatches_Reset_Link extends \sp\selectron\controller\publics\con
 		}
 
 		add_action('wp_head',function() use($selector,$delay){
+			$selector = $selector;
+			$inline_script = "
+			window.document.splugins = window.document.splugins || {}; 
+			window.document.splugins.tableview = window.document.splugins.tableview || {};
+			window.document.splugins.tableview.table_container = ".$selector.";
+			"
+			wbc()->load->add_inline_script( '', $inline_script,'common' );
+			if(false) {
 			?>
 			<script type="text/javascript">window.document.splugins = window.document.splugins || {}; window.document.splugins.tableview = window.document.splugins.tableview || {}; window.document.splugins.tableview.table_container = '<?php echo $selector; ?>' </script>
 			<?php
+			}
 		});
 	}
 }

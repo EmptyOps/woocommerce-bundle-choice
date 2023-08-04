@@ -640,7 +640,53 @@ class Options extends \eo\wbc\controllers\publics\Controller {
 		        			color: <?php _e($font_hover_color); ?>;	
 		        		}
 		        	</style>
-		        	<!-- -- script no code 643 to 689 remove karyo and tenu backup woo-bundle-choice/bkp/application/controllers/publics/options.php file ma se @kirtan -->
+		        	<script>
+		        		jQuery(document).ready(function($){
+		        			jQuery(".dropdown").dropdown().on('change',function(){
+		        				var target_selector =  $('#'+$(this).find('input[type="hidden"]').data('id'));
+		        				target_selector.val($(this).find('input[type="hidden"]').val());
+		        				/*$(this).parent().find('.selected').removeClass('selected');
+		        				$(this).addClass('selected');*/
+		        				jQuery(".variations_form" ).trigger('check_variations');
+		        				$(target_selector).trigger('change');
+		        			});
+		        			if($('table.variations tbody>tr').length>0){
+		        				$('table.variations').addClass('ui raised segment');	
+		        			}
+		        			
+		        			$('#wbc_variation_toggle').on('click',function(){
+		        				if($(this).find('.icon').hasClass('rotate-up')) {
+		        					$(this).find('.icon').removeClass('rotate-up');
+		        					$(this).find('.icon').addClass('rotate-down');
+		        					$('table.variations').slideToggle("slow");
+		        				} else {
+		        					$(this).find('.icon').removeClass('rotate-down');
+		        					$(this).find('.icon').addClass('rotate-up');
+		        					$('table.variations').slideToggle("slow");
+		        				}        				
+		        			});
+
+		        			<?php if(empty($init_toggle)): ?>
+		        				$('#wbc_variation_toggle').trigger('click');
+		        			<?php endif; ?>
+
+		        			--	below two click events would be implemented in the core variations js module, in that case it will be remove here 
+		        			$('.variable-item').on('click',function(){
+		        				var target_selector = $('#'+$(this).data('id'));
+		        				target_selector.val($(this).data('value'));
+		        				$(this).parent().find('.selected').removeClass('selected');
+		        				$(this).addClass('selected');
+		        				jQuery(".variations_form" ).trigger('check_variations');
+		        				$(target_selector).trigger('change');
+		        			});
+
+		        			jQuery(".variations_form").on('click', '.reset_variations'/*'woocommerce_variation_select_change'*//*'reset'*/,function(){
+		        				jQuery('.variable-items-wrapper .selected').removeClass('selected');
+		        				jQuery('.variable-items-wrapper .dropdown').dropdown('restore defaults');
+		        			});
+		        			
+		        		});
+		        	</script>
 				<?php
 				echo ob_get_clean();
 				
@@ -662,7 +708,9 @@ class Options extends \eo\wbc\controllers\publics\Controller {
 						wbc()->load->asset('js','fomantic/semantic.min',array('jquery'));
 						ob_start();
 						?>	
-						<!-- -- script no code 711 to 713 remove karyo and tenu backup woo-bundle-choice/bkp/application/controllers/publics/options.php file ma se @kirtan -->
+							<script>
+								jQuery(".variations_form").before('<span id="wbc_variation_toggle" class="ui raised segment"><?php _e($toggle_text); ?><i class="caret up icon" style="text-align: center;line-height: 1em;"></i></span>');	
+							</script>
 						<?php
 						echo ob_get_clean();
 					}				

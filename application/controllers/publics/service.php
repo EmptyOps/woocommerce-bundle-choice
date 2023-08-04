@@ -253,6 +253,22 @@ class Service {
 	public function enque_asset() {		
 		add_action( 'wp_enqueue_scripts',function(){
             ob_start();
+
+            $ajaxurl = admin_url('admin-ajax.php');
+            $cat_url = get_option("siteurl")."/index.php/".wbc()->wc->wc_permalink('category_base')."/";
+            $shop_url = get_option("siteurl")."/index.php/shop/";    
+
+            $inline_script = "
+            filter_obj = Object();
+            filter_obj.ajaxurl =".$ajaxurl .";
+            filter_obj.cat_url =". $cat_url .";          
+            filter_obj.shop_url = ". $shop_url .";         
+            filter_obj.not_required_all_select = true;            
+            ";
+            wbc()->load->add_inline_script( '', $inline_script, 'common' );
+
+
+            if(false) {
             ?>
             <script type="text/javascript">
                 filter_obj = Object();
@@ -261,7 +277,7 @@ class Service {
                 filter_obj.shop_url = '<?php echo get_option("siteurl")."/index.php/shop/"; ?>';         
                 filter_obj.not_required_all_select = true;            
             </script>       
-            <?php
+            <?php }
             echo ob_get_clean();
 			wbc()->load->asset('js','shortcode-filter');		
 		}, 10, 1 );

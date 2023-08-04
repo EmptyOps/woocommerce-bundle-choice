@@ -112,6 +112,36 @@ class Product {
     public function init_safe_click() {
         add_action('woocommerce_after_add_to_cart_button',function(){
             ob_start();
+            $inline_script = 
+  " document.querySelector('.single_add_to_cart_button:not(#eo_wbc_add_to_cart)').addEventListener(\"click\",function(event) {                         \n" .
+  "                         event.preventDefault();\n" .
+  "                },false);\n" .
+  "\n" .
+  "                let sp_add_to_cart_dots = 1\n" .
+  "                let sp_add_to_cart_dots_interval = window.setInterval(function(){\n" .
+  "                    \n" .
+  "                    if(jQuery('#eo_wbc_add_to_cart,#eo_wbc_add_to_cart_preview').length>0) {                        \n" .
+  "                        window.clearInterval(sp_add_to_cart_dots_interval);\n" .
+  "                    } else {\n" .
+  "                        if(sp_add_to_cart_dots>3) {\n" .
+  "                            sp_add_to_cart_dots = 1;\n" .
+  "                        } else {\n" .
+  "                            sp_add_to_cart_dots = sp_add_to_cart_dots+1;\n" .
+  "                        }\n" .
+  "                        jQuery('.single_add_to_cart_button:not(#eo_wbc_add_to_cart,#eo_wbc_add_to_cart_preview)').text('.'.repeat(sp_add_to_cart_dots));\n" .
+  "                    }\n" .
+  "                },500);\n" .
+  "\n" .
+  "                jQuery(\".single_add_to_cart_button:not(#eo_wbc_add_to_cart)\").off('click');\n" .
+  "                jQuery(\".single_add_to_cart_button:not(#eo_wbc_add_to_cart)\").css('cursor','not-allowed !important');\n" .
+  "                \n" .
+  "                jQuery(\".single_add_to_cart_button:not(#eo_wbc_add_to_cart)\").on('click',function(e){\n" .
+  "                    e.preventDefault();\n" .
+  "                    e.stopPropagation();\n" .
+  "                });\n"
+            ;
+            wbc()->load->add_inline_script( '', $inline_script, 'common' );
+            if(false) {
             ?>
             <script type="text/javascript">
 
@@ -143,6 +173,7 @@ class Product {
                 });
             </script> 
             <?php
+            }
             echo(ob_get_clean());
         });
     }
