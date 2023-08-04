@@ -1090,10 +1090,11 @@ class Product {
                         
             if(!empty($terms) and is_array($terms)){
                 $terms =array_filter(array_map(function($map) use(&$terms,&$map_column,&$product_code,&$product_in){
-                    
+
                     if(array_intersect($terms,$map[$map_column])){
-                        if($map_column == 0) return $map[1];
-                        else return $map[0];
+                        
+                        if($map_column == 0) return array($map[1], $map['second_filter_query_type'], isset($map['1_1']) ? $map['1_1'] : null);
+                        else return array($map[0], $map['first_filter_query_type'], isset($map['0_1']) ? $map['0_1'] : null);
                     } elseif(in_array( $product_code, $map[$map_column] )) {                    
                         if($map_column == 0){
                             $product_in = array_merge( $product_in, $map[1] );
@@ -1111,11 +1112,27 @@ class Product {
 
         $category=array();//array to hold category slugs
         $taxonomy=array();//array to hold taxonomy slugs
+        $taxonomy_related_data=array();
         if(!is_wp_error($terms) and !empty($terms) and is_array($terms)) {
-            array_walk($terms,function($term) use(&$category,&$taxonomy){
+            array_walk($terms,function($term) use(&$category,&$taxonomy,&$taxonomy_related_data){
+                
+                $filter_query_type = $term[1];
+                $range = $term[2];
+                $term = $term[0];
+
+                // if( wbc()->sanitize->get('is_test') == 1 ) {
+
+                //     wbc_pr("product.php eo_wbc_category_link");
+                //     wbc_pr($filter_query_type);
+                //     wbc_pr($term);
+                // }
+                
                 $_term_ = null;
                 if(is_array($term)) {
                     foreach ($term as $_term_) {
+
+                        $term_taxonomy_id = $_term_;
+
                         $_term_ = wbc()->wc->get_term_by('term_taxonomy_id', $_term_);
                         if(!is_wp_error($_term_) and !empty($_term_)) {
                             $_taxonomy_ = $_term_->taxonomy;                            
@@ -1126,6 +1143,18 @@ class Product {
                             } elseif( substr($_taxonomy_,0,3) =='pa_' ) {
 
                                 $taxonomy[substr($_term_->taxonomy,3)][] = $_term_->slug;
+
+                                $taxonomy_related_data[substr($_term_->taxonomy,3)]['filter_query_type'] = $filter_query_type;
+
+                                if( !isset($taxonomy_related_data[substr($_term_->taxonomy,3)]['filter_range']) ) {
+
+                                    $taxonomy_related_data[substr($_term_->taxonomy,3)]['filter_range'] = array();
+                                }
+
+                                if( in_array($term_taxonomy_id, $range) ) {
+
+                                    $taxonomy_related_data[substr($_term_->taxonomy,3)]['filter_range'][] = $_term_->slug;
+                                }
                             }
                         }
                     }
@@ -1141,6 +1170,18 @@ class Product {
                         } elseif( substr($_taxonomy_,0,3) =='pa_' ) {
                             
                             $taxonomy[substr($_term_->taxonomy,3)][] = $_term_->slug;
+
+                            $taxonomy_related_data[substr($_term_->taxonomy,3)]['filter_query_type'] = $filter_query_type;
+                            
+                            if( !isset($taxonomy_related_data[substr($_term_->taxonomy,3)]['filter_range']) ) {
+
+                                $taxonomy_related_data[substr($_term_->taxonomy,3)]['filter_range'] = array();
+                            }
+
+                            if( in_array($term_taxonomy_id, $range) ) {
+
+                                $taxonomy_related_data[substr($_term_->taxonomy,3)]['filter_range'][] = $_term_->slug;
+                            }
                         }
                     }
                 }
@@ -1183,19 +1224,43 @@ class Product {
                     /*$this->first_category_slug*/;                    
         }
 
-        $link.="/?";           
+        $link.="/?";       
+
+        if(is_array($category) && !empty($category)) {              
+            $link .= '__mapped_categories='.implode( ',' , $category ).'&';
+        } 
+        
         if(is_array($taxonomy) && !empty($taxonomy)){            
-            
+
+            // TODO/NOTE: even though below changes are confirmed with all affecting layers but still if there are regression effects and especially the exist in query do not work on our sp query class than we may need to add if condition there by using the below option of the mapping pref or something such. the changes are made on 12-07-2023.             
             $filter_query=array();
             // $attr_pref=get_option('eo_wbc_map_attr_pref','or');
             $attr_pref=wbc()->options->get_option('mapping_prod_mapping_pref','prod_mapping_pref_attribute','or');
             $glue=($attr_pref === 'or' ? ',' : '+' );           
 
+            $_attribute_param_str = "";
+
             foreach ($taxonomy as  $_tax => $_tems) {
-                $filter_query["query_type_{$_tax}"] = $attr_pref;
-                $filter_query["filter_{$_tax}"] = implode($glue,array_unique(array_filter($_tems)));
+
+                // $filter_query["query_type_{$_tax}"] = $attr_pref;
+                // $filter_query["filter_{$_tax}"] = implode($glue,array_unique(array_filter($_tems)));
+                $_attribute_param_str .= "pa_" . $_tax . ",";
+
+                if($taxonomy_related_data[$_tax]['filter_query_type'] == 'options') {
+
+                    $filter_query["checklist_pa_{$_tax}"] = implode($glue,array_unique(array_filter($_tems)));
+                } else {
+
+                    $filter_query["min_pa_{$_tax}"] = $taxonomy_related_data[$_tax]['filter_range'][0];
+                    $filter_query["max_pa_{$_tax}"] = $taxonomy_related_data[$_tax]['filter_range'][1];
+                }
             }
-            $link.=http_build_query($filter_query).'&';            
+
+            $filter_query["_attribute"] = rtrim($_attribute_param_str, ',');
+
+            $filter_query["__mapped_attribute"] = rtrim($_attribute_param_str, ',');
+
+            $link.=http_build_query($filter_query).'&';               
         }    
 
         if(!empty($product_in) && is_array($product_in)) {
@@ -1203,7 +1268,15 @@ class Product {
             $product_in = array_map(function($product_in){ return substr($product_in,4); },$product_in);
 
             $link.='products_in='.implode(',',$product_in).'&';
-        }             
+        }   
+
+        // if( wbc()->sanitize->get('is_test') == 1 ) {
+
+        //     wbc_pr("product.php eo_wbc_category_link 1");
+        //     wbc_pr($link);
+        //     die();
+        // }   
+
         return $link;
     }
 

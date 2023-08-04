@@ -8,7 +8,6 @@ add_action( ( !is_admin() ? 'wp_enqueue_scripts' : 'admin_enqueue_scripts'),func
 	
 	if( wbc()->sanitize->get('is_test') == 1 ) {
 		wbc_pr('js_var_is_loaded');
-		wbc_pr(!is_admin());
 	}
 
 ?>
@@ -80,7 +79,7 @@ add_action( ( !is_admin() ? 'wp_enqueue_scripts' : 'admin_enqueue_scripts'),func
 
 		?>
 
-    window.document.splugins.common.current_theme_key = '<?php echo wbc()->common->current_theme_key(); ?>';
+    	window.document.splugins.common.current_theme_key = '<?php echo wbc()->common->current_theme_key(); ?>';
 
 		window.document.splugins.common.is_shop_page = <?php echo ((is_shop()) ? "true" : "false");?>; 
 
@@ -902,9 +901,10 @@ add_action('wp_footer',function(){
 								// Detach unattached.
 								new_attr_select.find( 'option' + option_gt_filter + ':not(.attached)' ).remove();
 
+// if(false){
 								// Finally, copy to DOM and set value.
 								current_attr_select.html( new_attr_select.html() );
-
+// }
 								current_attr_select.find( 'option' + option_gt_filter + ':not(.enabled)' ).prop( 'disabled', true );
 
 								// Choose selected value.
@@ -1187,6 +1187,8 @@ add_action('wp_footer',function(){
 						};
 
 						$(function() {
+							console.log('A_OFF show_variation wc_add_to_cart_variation_params');
+							console.log(wc_add_to_cart_variation_params);
 							if ( typeof wc_add_to_cart_variation_params !== 'undefined' ) {
 								$( '.variations_form' ).each( function() {
 									// console.log('A_OFF show_variation [load] loop');
@@ -1811,9 +1813,10 @@ add_action('wp_footer',function(){
 								// Detach unattached.
 								new_attr_select.find( 'option' + option_gt_filter + ':not(.attached)' ).remove();
 
+// if(false){
 								// Finally, copy to DOM and set value.
 								current_attr_select.html( new_attr_select.html() );
-
+// }
 								current_attr_select.find( 'option' + option_gt_filter + ':not(.enabled)' ).prop( 'disabled', true );
 
 								// Choose selected value.

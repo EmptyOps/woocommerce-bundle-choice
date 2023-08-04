@@ -94,7 +94,7 @@ class SP_WBC_Variations extends SP_Variations {
 				// ACTIVE_TODO_OC_START
 				// ACTIVE_TODO temp. below value is temparary and may be we simply need to keep it to 30 which is less than default of woo which is 50. 
 				// ACTIVE_TODO_OC_END
-				// $int = 100;
+				$int = 100;
 
 				return $int;
 
@@ -515,10 +515,16 @@ class SP_WBC_Variations extends SP_Variations {
 		$type['button']='Button';
 		$type['color']='Color';
 		$type['image']='Icon';
-		$type['image_text']='Icons with Text';
-		$type['dropdown_image']='Dropdown with Icons';
-		$type['dropdown_image_only']='Dropdown with Icons Only';
-		$type['dropdown']='Dropdown';
+		// ACTIVE_TODO_OC_START
+		// -- below swatches types are commented tempararely ans lets enable it as soon as we get chanse just as per our initial plans to provide all the seven template but as of now we have finalized only three so lets enable below four as soon as we get chanse. Or other wise lets do anyhow by the first revision -- to h && -- to a 
+		// ACTIVE_TODO_OC_END
+		if(false) {
+
+			$type['image_text']='Icons with Text';
+			$type['dropdown_image']='Dropdown with Icons';
+			$type['dropdown_image_only']='Dropdown with Icons Only';
+			$type['dropdown']='Dropdown';
+		}
 
 		if(empty($type['is_base_type_only'])){
 
@@ -1073,7 +1079,7 @@ class SP_WBC_Variations extends SP_Variations {
 
         // added on 03-07-2023
         // NOTE: as we have thought of and very well planned to support the legacy types and on that regard all the legacy layers and functions and flows, so here now we have enabled the legecy type support.
-        if(!in_array($type,self::sp_variations_swatches_supported_attribute_types())) {
+        if(!isset(self::sp_variations_swatches_supported_attribute_types()[$type])) {
 			
 			// if( wbc()->sanitize->get('is_test') == 2 ) {
 			// 	wbc_pr('sp_variations_swatches_supported_attribute_types if');
@@ -1082,6 +1088,10 @@ class SP_WBC_Variations extends SP_Variations {
 
 			// ACTIVE_TODO so far we have tested and enabled only the select type of woocommerce. But as soon as we get chance lets enable the other legacy type that woocommerce supports.
 			// 	NOTE: and for the notes the default imlimentation of the wbc sp_variations is seprate thing and is supposed to be implimented on the underneath to this layer in the else condition below, that is dedicated for the default layer of the wbc sp_variations type support. 
+					// ACTIVE_TODO temp. till the other woocommerce types are not test in enabled we have temparely set it to the default as select so that even if user select other type than also it do not create any unnassasry issue.
+        	$type = 'select';
+
+
         	if( 'select' == $type ) {
 	
 				$data = array();			
@@ -1281,6 +1291,7 @@ class SP_WBC_Variations extends SP_Variations {
 		$data = self::prepare_variable_item_wrapper_data($data,$args);
 
 		// TODO OPTIMIZATION in future if it seems worth it then we can prevent above layers from preparing unnecessary options and then we can simply skip array slice from below.
+			// NOTE: above optimisation is no more possible since now we can not do array_slice since we need all swatches options on dom so that javascript layer can function and so now all the swatches option are rendered but the additional swatches option beyond limit are made hidden.
 		$data['woo_dropdown_attribute_html_data']['args']['actual_total_options'] = null;
 		
 		global $woocommerce_loop;
@@ -1301,17 +1312,40 @@ class SP_WBC_Variations extends SP_Variations {
 
 				if(isset($data['woo_dropdown_attribute_html_data']['terms'])){
 
-					$data['woo_dropdown_attribute_html_data']['terms'] = array_slice( $data['woo_dropdown_attribute_html_data']['terms'], 0, $data['woo_dropdown_attribute_html_data']['args']['sp_variations_swatches_cat_display_limit'] );
+					// $data['woo_dropdown_attribute_html_data']['terms'] = array_slice( $data['woo_dropdown_attribute_html_data']['terms'], 0, $data['woo_dropdown_attribute_html_data']['args']['sp_variations_swatches_cat_display_limit'] );
+					$counter = -1;
+					foreach ( $data['woo_dropdown_attribute_html_data']['terms'] as $index => $term ) {
+						if ( in_array( $term->slug, $data['woo_dropdown_attribute_html_data']['options'], true ) ) {
+							$counter++;
+							if($counter >= $data['woo_dropdown_attribute_html_data']['args']['sp_variations_swatches_cat_display_limit']){
+
+									$data['woo_dropdown_attribute_html_data']['options_loop_class'][$term->slug] .= ' hide '; 
+									// wbc_pr('woo_dropdown_attribute_html_data options_loop_class');
+									// wbc_pr($data['woo_dropdown_attribute_html_data']['args']['sp_variations_swatches_cat_display_limit']);
+							}
+						}
+					}
 				}
 
 				if(isset($data['woo_dropdown_attribute_html_data']['options'])){
 
-					$data['woo_dropdown_attribute_html_data']['options'] = array_slice( $data['woo_dropdown_attribute_html_data']['options'], 0, $data['woo_dropdown_attribute_html_data']['args']['sp_variations_swatches_cat_display_limit'] );
+					// $data['woo_dropdown_attribute_html_data']['options'] = array_slice( $data['woo_dropdown_attribute_html_data']['options'], 0, $data['woo_dropdown_attribute_html_data']['args']['sp_variations_swatches_cat_display_limit'] );
+					$counter = -1;
+					foreach ( $data['woo_dropdown_attribute_html_data']['options'] as $option ) {
+						$counter++;
+						if($counter >= $data['woo_dropdown_attribute_html_data']['args']['sp_variations_swatches_cat_display_limit']){
+
+							$data['woo_dropdown_attribute_html_data']['options_loop_class'][$option] .= ' hide '; 
+						}
+					}
 				}
 
 				if(isset($data['variable_item_data']['terms'])){
 
-					$data['variable_item_data']['terms'] = array_slice( $data['variable_item_data']['terms'], 0, $data['woo_dropdown_attribute_html_data']['args']['sp_variations_swatches_cat_display_limit'] );
+					// $data['variable_item_data']['terms'] = array_slice( $data['variable_item_data']['terms'], 0, $data['woo_dropdown_attribute_html_data']['args']['sp_variations_swatches_cat_display_limit'] );
+					// foreach ( $data['variable_item_data']['terms'] as $term ) {
+						// $data['variable_item_data']['options_loop_class'][$term->slug] .= 'hide '; 
+					// }
 				}
 			}
 		}
@@ -1649,7 +1683,7 @@ class SP_WBC_Variations extends SP_Variations {
 							  <div class="menu">',esc_attr( $attribute ),esc_attr( $attribute ),esc_attr( $attribute ),$selected_item);*/
 				}
 				//-------------------
-				
+
 				//below moved section should be moved to template part, which would be common amongst non dropdown types. so need to move in a common template part file(and create one if not yet there), and from this file also load dropdown types, which are skipped here but we can manage in some if/else conddition below -- to b done
 				//------- m have this additional
 				//--- move to woo-bundle-choice/templates/single-product/variations-swatches/sp_variations_optionsUI-common-option_template_part.php ma
@@ -1748,9 +1782,9 @@ class SP_WBC_Variations extends SP_Variations {
 						ACTIVE_TODO_OC_END*/
 							$data['variable_item_data']['options_loop_type'][$term->slug] = isset( $data['variable_item_data']['assigned'][ $term->slug ] ) ? $data['variable_item_data']['assigned'][ $term->slug ]['type'] : $data['woo_dropdown_attribute_html_data']['type'];
 
-							if ( ! isset( $data['variable_item_data']['assigned'][ $term->slug ] ) || empty( $data['variable_item_data']['assigned'][ $term->slug ]['image_id'] ) ) {
-								$data['variable_item_data']['options_loop_type'][$term->slug] = 'button';
-							}
+							// if ( ! isset( $data['variable_item_data']['assigned'][ $term->slug ] ) || empty( $data['variable_item_data']['assigned'][ $term->slug ]['image_id'] ) ) {
+							// 	$data['variable_item_data']['options_loop_type'][$term->slug] = 'button';
+							// }
 						/*ACTIVE_TODO_OC_START
 						-------
 
@@ -1759,25 +1793,40 @@ class SP_WBC_Variations extends SP_Variations {
 						--	and same for the many commented templates in the switch case statement below -- to b 
 						ACTIVE_TODO_OC_END*/
 
+								if( wbc()->sanitize->get('is_test') == 3 ) {
+									wbc_pr('lloooopppp');
+								}
+
 						switch ( $data['variable_item_data']['options_loop_type'][$term->slug] ):
 							case 'color':
 
-								$data['variable_item_data']['options_loop_color'][$term->slug]['color'] = sanitize_hex_color( wvs_get_product_attribute_color( $term ) );
+								// $data['variable_item_data']['options_loop_color'][$term->slug]['color'] = sanitize_hex_color( wvs_get_product_attribute_color( $term ) );
 								// $data  .= sprintf( '<span class="variable-item-span variable-item-span-%s" style="background-color:%s;"></span>', esc_attr( $data['variable_item_data']['options_loop_type'][$term->slug] ), esc_attr( $color ) );
-
+								if( wbc()->sanitize->get('is_test') == 3 ) {
+									wbc_pr('colorrrrrrrrr');
+								}
 								$data['variable_item_data']['options_loop_color'][$term->slug]['color'] = sanitize_hex_color( get_term_meta( $term->term_id, 'wbc_color', true ) );
 
 								break;
 
 							case 'image':
+								if( wbc()->sanitize->get('is_test') == 3 ) {
+									wbc_pr('imageeeeeee');
+								}
 								/*ACTIVE_TODO_OC_START
 								--------- a etlu wvs_default_variable_item alg che
 								ACTIVE_TODO_OC_END*/
-									$data['variable_item_data']['options_loop_attachment_id'][$term->slug] = $data['variable_item_data']['assigned'][ $term->slug ]['image_id'];
-									$data['variable_item_data']['options_loop_image_size'][$term->slug]    = sanitize_text_field( woo_variation_swatches()->get_option( 'attribute_image_size' ) );
+									// $data['variable_item_data']['options_loop_attachment_id'][$term->slug] = $data['variable_item_data']['assigned'][ $term->slug ]['image_id'];
+									// $data['variable_item_data']['options_loop_image_size'][$term->slug]    = sanitize_text_field( woo_variation_swatches()->get_option( 'attribute_image_size' ) );
 								//-------
-								$data['variable_item_data']['options_loop_attachment_id'][$term->slug] = apply_filters( 'wvs_product_global_attribute_image_id', absint( wvs_get_product_attribute_image( $term ) ), $term, $data['woo_dropdown_attribute_html_data']['args'] );
-								$data['variable_item_data']['options_loop_image_size'][$term->slug]    = woo_variation_swatches()->get_option( 'attribute_image_size' );
+								// ACTIVE_TODO_OC_START
+								// --we need to also provide setting to ensure that global attribute image is available if the user had not set the specific image for something such so we need to take care of such setting and configration and provide them accordingly on applicable layers on the admin panel and so on. lets do this may be in the next milestone  -- to a && -- to h
+								// ACTIVE_TODO_OC_END
+								// $data['variable_item_data']['options_loop_attachment_id'][$term->slug] = '';//apply_filters( 'wvs_product_global_attribute_image_id', absint( wvs_get_product_attribute_image( $term ) ), $term, $data['woo_dropdown_attribute_html_data']['args'] );
+								// ACTIVE_TODO_OC_START
+								// -- we need to hadle the loop image size as per the admin options we provide -- to a && -- to h
+								// ACTIVE_TODO_OC_END 
+								// $data['variable_item_data']['options_loop_image_size'][$term->slug]    = woo_variation_swatches()->get_option( 'attribute_image_size' );
 								/*ACTIVE_TODO_OC_START
 								-- ACTIVE_TODO hier manage size width etc image properties
 								ACTIVE_TODO_OC_END*/
@@ -1789,6 +1838,9 @@ class SP_WBC_Variations extends SP_Variations {
 
 
 							case 'button':
+								if( wbc()->sanitize->get('is_test') == 3 ) {
+									wbc_pr('buttonnnnnnnnnnnn');
+								}
 								// $data .= sprintf( '<span class="variable-item-span variable-item-span-%s">%s</span>', esc_attr( $data['variable_item_data']['options_loop_type'][$term->slug] ), $data['variable_item_data']['options_loop_option'][$term->slug] );
 								break;
 
@@ -1865,7 +1917,7 @@ class SP_WBC_Variations extends SP_Variations {
 							$data['variable_item_data']['options_loop_tooltip_html_attr'][$option] .= ! empty( $data['variable_item_data']['options_loop_tooltip'][$option] ) ? ' tabindex="2"' : '';
 						}
 
-						$data['variable_item_data']['options_loop_type'][$option] = isset( $data['variable_item_data']['assigned'][ $data['variable_item_data']['options_loop_option'][$option] ] ) ? $data['variable_item_data']['assigned'][ $data['variable_item_data']['options_loop_option'][$option] ]['type'] : $data['variable_item_data']['options_loop_type'][$option];
+						$data['variable_item_data']['options_loop_type'][$option] = isset( $data['variable_item_data']['assigned'][ $data['variable_item_data']['options_loop_option'][$option] ] ) ? $data['variable_item_data']['assigned'][ $data['variable_item_data']['options_loop_option'][$option] ]['type'] : $data['woo_dropdown_attribute_html_data']['type']/*$data['variable_item_data']['options_loop_type'][$option]*/;
 
 						if( wbc()->sanitize->get('is_test') == 1 ) {
 							wbc_pr("SP_WBC_Variations 111");
@@ -1873,9 +1925,9 @@ class SP_WBC_Variations extends SP_Variations {
 							// wbc_pr($data['variable_item_data']['options_loop_option'][$option]['option']);
 						}
 
-						if ( !is_array($data['variable_item_data']['assigned']) || ! isset( $data['variable_item_data']['assigned'][ $data['variable_item_data']['options_loop_option'][$option]['option'] ] ) || empty( $data['variable_item_data']['assigned'][ $data['variable_item_data']['options_loop_option'][$option] ]['image_id'] ) ) {
-							$data['variable_item_data']['options_loop_type'][$option] = 'button';
-						}
+						// if ( !is_array($data['variable_item_data']['assigned']) || ! isset( $data['variable_item_data']['assigned'][ $data['variable_item_data']['options_loop_option'][$option]['option'] ] ) || empty( $data['variable_item_data']['assigned'][ $data['variable_item_data']['options_loop_option'][$option] ]['image_id'] ) ) {
+						// 	$data['variable_item_data']['options_loop_type'][$option] = 'button';
+						// }
 
 						/*ACTIVE_TODO_OC_START
 						so instead of below templates our tempaltes will be above ones but take note of unique flow or data that we may like to apply -- to b 

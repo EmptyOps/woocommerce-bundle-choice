@@ -82,6 +82,66 @@ if( is_product() ) {
             --spui-selected-item-box-shadow:#000;
         }
 
+       <?php if(wbc()->options->get_option('tiny_features','tiny_features_disabled_attribute_style') == 'blur_with_cross'){ ?>
+       .spui-wbc-swatches-variable-item.disabled .variable-item-span{
+   		opacity: .8;
+	}	
+	.spui-wbc-swatches-variable-item.disabled .variable-item-span::before {
+		position: absolute;
+		content: " " !important;
+		width: 100%;
+		height: 1px;
+		background: #FF0000 !important;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		top: 50%;
+		visibility: visible;
+		opacity: 1;
+		border: 0;
+		margin: 0 !important;
+		padding: 0 !important;
+		min-width: auto;
+		-webkit-transform-origin: center;
+		transform-origin: center;
+		z-index: 0;
+		pointer-events: none;
+		cursor: not-allowed;
+		transform: rotate(45deg);
+	}
+
+	.spui-wbc-swatches-variable-item.disabled .variable-item-span::after {
+		position: absolute;
+		content: " " !important;
+		width: 100%;
+		height: 1px;
+		background: #FF0000 !important;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		top: 50%;
+		visibility: visible;
+		opacity: 1;
+		border: 0;
+		margin: 0 !important;
+		padding: 0 !important;
+		min-width: auto;
+		-webkit-transform-origin: center;
+		transform-origin: center;
+		z-index: 0;
+		pointer-events: none;
+		cursor: not-allowed;
+		transform: rotate(-45deg);
+	}
+       <?php }elseif(wbc()->options->get_option('tiny_features','tiny_features_disabled_attribute_style') == 'blur_without_cross'){ ?>
+	.spui-wbc-swatches-variable-item.disabled .variable-item-span{
+   		opacity: .3;
+	}
+       <?php }elseif(wbc()->options->get_option('tiny_features','tiny_features_disabled_attribute_style') == 'hide'){ ?>
+	.spui-wbc-swatches-variable-item.disabled{
+		display: none;
+	}
+       <?php } ?>
 
 	.spui-wbc-swatches-variable-items-wrapper-button li.variable-item {
 /*	    margin: 4px !important;*/
@@ -1390,6 +1450,7 @@ jQuery( document ).ready(function() {
             }
         /*---Filter-tabEnd---*/  
 </style>
+
 <?php 
 
 $spui_is_product = false;
@@ -1631,8 +1692,8 @@ $bg_hover_color = wbc()->options->get_option('tiny_features',$spui_is_product_ca
 		$('.variable-item').on('click',function(){
 			var target_selector = $('#'+$(this).data('id'));
 			target_selector.val($(this).data('value'));
-			$(this).parent().find('.selected').removeClass('selected');
-			$(this).addClass('selected');
+			// $(this).parent().find('.selected').removeClass('selected');
+			// $(this).addClass('selected');
 			jQuery(".variations_form" ).trigger('check_variations');
 			$(target_selector).trigger('change');
 		});
@@ -1647,6 +1708,41 @@ $bg_hover_color = wbc()->options->get_option('tiny_features',$spui_is_product_ca
 <?php
 // echo ob_get_clean();
 
+// ACTIVE_TODO_OC_START
+// ACTIVE_TODO as of now we have implimented this support for the mapping based conditions here but in future if there is better place than we shoud move it over there -- to h
+// 	ACTIVE_TODO as weel as once we have the varations swatches beta update available we may lite to use the disable and hide flow of that version. Especialy the disable flow this much needed for providing apropriate and perfect user experiance -- to h
+// ACTIVE_TODO_OC_END
+
+
+if(is_product()) {
+
+	// $_attribute_perams = explode(',', \eo\wbc\model\SP_WBC_Router::get_query_params('_attribute', 'REQUEST') );	
+	$_attribute_perams = explode(',', wbc()->sanitize->get('__mapped_attribute') );	
+
+	// wbc_pr('__attribute_perams');
+	// wbc_pr($_attribute_perams);
+
+	foreach($_attribute_perams as $_attribute_slug) {
+		
+		// NOTE: so far no need to check if checklist is empty so true or condition is added for now. 
+		if(true || !empty( wbc()->sanitize->get('checklist_'.$_attribute_slug) )) {
+			?> 
+			<style type="text/css">
+
+				label[for = <?php echo $_attribute_slug ?>] {
+				    display: none;
+				}
+
+				body form table.variations tbody td .spui-wbc-swatches-variable-items-wrapper-<?php echo $_attribute_slug ?>{
+					display: none !important;
+				}
+			</style>
+
+			<?php
+		}
+	}
+
+}
 
 
 ?>

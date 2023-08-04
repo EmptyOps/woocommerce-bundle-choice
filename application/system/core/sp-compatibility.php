@@ -106,6 +106,162 @@ class SP_Compatibility {
 	        }
 
 	        return $args['hook_key'];
+
+	 	}elseif($page_section == 'gallery_zoom_container_width') {
+	 	
+	 		$current_theme_key = wbc()->common->current_theme_key();
+
+	 		if ($current_theme_key == 'themes___astra') {
+	        	
+	        	return '54%';
+
+	        }elseif ($current_theme_key == 'themes___blossom-shop') {
+
+	        	return '52%';
+
+	        }elseif ($current_theme_key == 'themes___bosa') {
+
+	        	return '48%';
+
+	        }elseif ($current_theme_key == 'themes___bosa-storefront') {
+
+	        	return '48%';
+
+	        }elseif ($current_theme_key == 'themes___botiga') {
+
+	        	return '50%';
+
+	        }elseif ($current_theme_key == 'themes___ecommerce-solution') {
+
+	        	return '52%';
+
+	        }elseif ($current_theme_key == 'themes___enwoo') {
+
+	        	return '52%';
+
+	        }elseif ($current_theme_key == 'themes___generatepress') {
+
+	        	return '52%';
+
+	        }elseif ($current_theme_key == 'themes___hello-elementor') {
+
+	        	return '52%';
+
+	        }elseif ($current_theme_key == 'themes___hestia') {
+
+	        	return '45%';
+
+	        }elseif ($current_theme_key == 'themes___jewelry-store') {
+
+	        	return '52%';
+
+	        }elseif ($current_theme_key == 'themes___kadence') {
+
+	        	return '52%';
+
+	        }elseif ($current_theme_key == 'themes___laventa') {
+
+	        	return '45%';
+
+	        }elseif ($current_theme_key == 'themes___neve') {
+
+	        	return '48%';
+
+	        }elseif ($current_theme_key == 'themes___oceanwp') {
+
+	        	return '56%';
+
+	        }elseif ($current_theme_key == 'themes___open-shop') {
+
+	        	return '52%';
+
+	        }elseif ($current_theme_key == 'themes___qi') {
+
+	        	return '58%';
+
+	        }elseif ($current_theme_key == 'themes___rife-free') {
+
+	        	return '50%';
+
+	        }elseif ($current_theme_key == 'themes___shoper') {
+
+	        	return '52%';
+
+	        }elseif ($current_theme_key == 'themes___shopper-shop') {
+
+	        	return '52%';
+
+	        }elseif ($current_theme_key == 'themes___shoppingcart') {
+
+	        	return '52%';
+
+	        }elseif ($current_theme_key == 'themes___storefront') {
+
+	        	return '43%';
+
+	        }elseif ($current_theme_key == 'themes___storeship') {
+
+	        	return '51%';
+
+	        }elseif ($current_theme_key == 'themes___sydney') {
+
+	        	return '52%';
+
+	        }elseif ($current_theme_key == 'themes___th-shop-mania') {
+
+	        	return '47%';
+
+	        }elseif ($current_theme_key == 'themes___twentytwenty') {
+
+	        	return '52%';
+
+	        }elseif ($current_theme_key == 'themes___twentytwentyone') {
+
+	        	return '52%';
+
+	        }elseif ($current_theme_key == 'themes___twentytwentythree') {
+
+	        	return '52%';
+
+	        }elseif ($current_theme_key == 'themes___twentytwentytwo') {
+
+	        	return '52%';
+
+	        }elseif ($current_theme_key == 'themes___vogue') {
+
+	        	return '52%';
+
+	        }elseif ($current_theme_key == 'themes___vw-ecommerce-store') {
+
+	        	return '52%';
+
+	        }elseif ($current_theme_key == 'themes___zakra') {
+
+	        	return '52%';
+
+	        }elseif ($current_theme_key == 'themes___colormag') {
+
+	        	return '47%';
+
+	        }elseif ($current_theme_key == 'themes___twentysixteen') {
+
+	        	return '53%';
+
+	        }elseif ($current_theme_key == 'themes___twentyseventeen') {
+
+	        	return '52%';
+
+	        }elseif ($current_theme_key == 'themes___twentynineteen') {
+
+	        	return '52%';
+
+	        }elseif ($current_theme_key == 'themes___customizr') {
+
+	        	return '52%';
+
+	        }
+
+	        return $args['default_width'];
 	 	}
 	}
 

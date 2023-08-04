@@ -28,7 +28,7 @@ if(!empty($id) /*and !empty($label)*/){
 	
 			if(!empty($label))
 			{
-	    		wbc()->load->template('component/form/input_label',array('id'=>$id,'label'=>$label)); 
+	    		wbc()->load->template('component/form/input_label',array('id'=>$id,'label'=>$label,'label_class'=>$label_class)); 
 			}
 			?>
 			
@@ -43,7 +43,7 @@ if(!empty($id) /*and !empty($label)*/){
 	    		<?php foreach ($options as $checkbox_key => $checkbox_value) : ?>
 	    			<div class="field">
 				    	<div class="ui <?php echo $style_classes;?> checkbox <?php echo !empty($class)?$class:''; ?>">
-				        	<input type="checkbox" name="<?php echo (!empty($is_id_as_name) && $is_id_as_name) ? $id : $checkbox_key;?>" id="<?php echo (!empty($is_id_as_name) && $is_id_as_name) ? $id."_".$checkbox_key : $checkbox_key;?>" <?php echo (!empty($value) and ( ( is_array($value) && in_array($checkbox_key,$value) ) || ( !is_array($value) && $checkbox_key==$value ) ) ) ? 'checked="checked"':''; ?> value="<?php echo $checkbox_key; ?>" <?php echo isset($options_attrs[$checkbox_key]) ? sanitize_text_field(implode( ' ', $options_attrs[$checkbox_key] )) : ""; ?>>
+				        	<input type="checkbox" name="<?php echo (!empty($is_id_as_name) && $is_id_as_name) ? $id : $checkbox_key;?>" id="<?php echo (!empty($is_id_as_name) && $is_id_as_name) ? $id."_".$checkbox_key : $checkbox_key;?>" <?php echo (!empty($value) and ( ( is_array($value) && in_array($checkbox_key,$value) ) || ( !is_array($value) && $checkbox_key==$value ) ) ) ? 'checked="checked"':''; ?> value="<?php echo $checkbox_key; ?>" <?php echo isset($options_attrs[$checkbox_key]) ? sanitize_text_field(implode( ' ', $options_attrs[$checkbox_key] )) : ""; ?> <?php echo !empty($attr)?$attr:''; ?>>
 				        	<?php 
 				        	if( !empty($checkbox_value) ) {?>
 				        		<label for="<?php echo (!empty($is_id_as_name) && $is_id_as_name) ? $id."_".$checkbox_key : $checkbox_key; ?>"><?php echo $checkbox_value; ?></label><?php 
