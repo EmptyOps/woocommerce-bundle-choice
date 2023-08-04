@@ -349,11 +349,15 @@ class SP_Model_Single_Product extends SP_Single_Product {
 						wbc()->load->asset('css','fomantic/semantic.min');
 						wbc()->load->asset('js','fomantic/semantic.min',array('jquery'));
 						ob_start();
+						 $inline_script = 
+						"jQuery(\".variations_form\").before('<span id=\"wbc_variation_toggle\" class=\"ui raised segment\"><?php _e($toggle_text); ?><i class=\"caret up icon\" style=\"text-align: center;line-height: 1em;\"></i></span>');  \n"
+						wbc()->load->add_inline_script( '', $inline_script, 'common' );
+						if(false){
 						?>	
 							<script>
 								jQuery(".variations_form").before('<span id="wbc_variation_toggle" class="ui raised segment"><?php _e($toggle_text); ?><i class="caret up icon" style="text-align: center;line-height: 1em;"></i></span>');	
 							</script>
-						<?php
+						<?php }
 						echo ob_get_clean();
 					}				
 				}

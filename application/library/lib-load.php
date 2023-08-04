@@ -53,7 +53,7 @@ if(!class_exists('WBC_Loader')) {
 					
 						wbc_pr('bootstrap case constant is '. $constant);
 					}
-
+					
 					if (false) {
 						?>
 						<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -291,7 +291,13 @@ if(!class_exists('WBC_Loader')) {
 						// NOTE: and since this is about dump to browser so loading sequance hooks and the output buffer should be kept in mind. 
 					if( !empty($localize_var) && !empty($localize_var_val) ) {
 					//echo "load_localize_data inner if";
-										
+
+						$localize_var_val = json_encode($localize_var_val);
+						$inline_script = 'var '.$localize_var. ' = JSON.parse('. $localize_var_val .')'; 
+
+						wbc()->load->add_inline_script( '', $inline_script, 'common' );
+
+						if(false) {				
 						?>
 						<script>
 							var <?php echo $localize_var; ?> = JSON.parse('<?php echo json_encode($localize_var_val); ?>');
@@ -302,12 +308,18 @@ if(!class_exists('WBC_Loader')) {
 					// echo "localize_data inner else";
 					// wbc_pr('load_param');
 					// wbc_pr($param);
+						$peram = json_encode($peram);
+						$inline_script = 'var '.$peram.'= JSON.peram('. $peram .')';
+
+
+						wbc()->load->add_inline_script( '', $inline_script, 'common' );
+						if(false){
 						?>
 						<script>
 							var <?php echo array_keys($param)[0]; ?> = JSON.parse('<?php echo json_encode($param[array_keys($param)[0]]); ?>');
 						</script>
 						<?php
-					
+						}
 					}
 					break;				
 				default:				
