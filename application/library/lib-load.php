@@ -314,34 +314,6 @@ if(!class_exists('WBC_Loader')) {
 					break;
 			}			
 		}
-
-		public function add_inline_script($handle,$inline_script,$handle_key='',$is_inner_hook=false,$is_prefix_handle=true) {
-
-			if(empty($handle) && !empty($handle_key)) {
-
-				$handle = ( $is_prefix_handle ? "sp_wbc_" : "" ) . str_replace(' ','-',str_replace('/','-',$handle_key));						
-				wp_register_script( $handle, '');
-			}elseif($is_inner_hook){
-				// -- aa proper work nathi kartu
-				wp_register_script( $handle, '');
-			}
-
-        	wp_enqueue_script( $handle );
-			wp_add_inline_script( $handle, $inline_script);
-	
-		}
-
-		public function get_inline_script_tag($javascript,$attributes = array()) {
-
-			echo wp_get_inline_script_tag( $javascript, $attributes);
-		
-		}
-
-		public function get_script_tag($attributes) {
-
-			echo wp_get_script_tag( $attributes );
-		
-		}
 		
 		public function template_key_option($args){
 
