@@ -22,8 +22,8 @@ if(!empty($tab_contents) || is_array($tab_contents)) {
 
 		if(array_key_exists('content',$tab_content) and array_key_exists('active',$tab_content) and array_key_exists('slug',$tab_content) and !empty($tab_content['active']) ) { ?>
 
-		  	<div class="ui bottom attached <?php if($tab_content['active']) echo 'active'; ?> tab segment" data-tab="<?php echo $tab_content['slug']; ?>">
-		  		<?php echo $tab_content['content']; ?>		  
+		  	<div class="ui bottom attached <?php if($tab_content['active']) echo 'active'; ?> tab segment" data-tab="<?php echo esc_attr($tab_content['slug'])/*$tab_content['slug']*/; ?>">
+		  		<?php echo esc_attr($tab_content['content'])/*$tab_content['content']*/; ?>		  
 		  	</div>
 		<?php }
 	}

@@ -29,13 +29,13 @@ box-shadow: none;">
 	  
 	  <form method="post">
 	    <?php wp_nonce_field('eo_wbc_auto_jewel'); ?>
-	    <input type="hidden" name="step" value="<?php echo $_step+1; ?>">
+	    <input type="hidden" name="step" value="<?php echo esc_attr($_step+1)/*$_step+1*/; ?>">
 	    <div>
-	      <h1><strong>Sample Data for <?php echo $feature_title;?></strong></h1>
-	      <p>You are at step <?php echo $_step; ?> of <?php echo $number_of_step; ?> steps.</p>
+	      <h1><strong>Sample Data for <?php echo esc_html($feature_title)/*$feature_title*/;?></strong></h1>
+	      <p>You are at step <?php echo esc_html($_step)/*$_step*/; ?> of <?php echo esc_html($number_of_step)/*$number_of_step*/; ?> steps.</p>
 	      <?php if(!empty($help_info[$_step])) {
 	      	?>
-	      		<p><strong><?php echo $help_info[$_step]; ?></strong></p>
+	      		<p><strong><?php echo esc_html($help_info[$_step])/*$help_info[$_step]*/; ?></strong></p>
 	      	<?php 
 	      }
 	      ?>
@@ -46,11 +46,11 @@ box-shadow: none;">
 	              <?php if( /*!empty(wbc()->sanitize->post('step')) && wbc()->sanitize->post('step')*/$_step==3):?>
 	                <th>
 	                  <h3>Sample Products</h3>
-	                  <p>Sample products will be added for <?php echo $feature_title;?>.</p>
+	                  <p>Sample products will be added for <?php echo esc_html($feature_title)/*$feature_title*/;?>.</p>
 	                </th>
 	              </tr>
 	              <tr>
-	                <td>Total <?php echo $sample_data_obj->get_model()->get_product_size();?> products will be created.</td>
+	                <td>Total <?php echo esc_html($sample_data_obj->get_model()->get_product_size())/*$sample_data_obj->get_model()->get_product_size()*/;?> products will be created.</td>
 	              <!-- Attributes Installation -->
 	              <?php elseif($_step==2):?>
 	                <th>
@@ -58,14 +58,14 @@ box-shadow: none;">
 	                </th>
 	              </tr>
 	              <tr>
-	                <td>Total <?php echo $sample_data_obj->get_model()->get_attributes_size();?> attributes will be created.</td>
+	                <td>Total <?php echo esc_html($sample_data_obj->get_model()->get_attributes_size())/*$sample_data_obj->get_model()->get_attributes_size()*/;?> attributes will be created.</td>
 	              </tr>
 	              <tr>
 	                <td>                    
 	                  <?php foreach ($_atttriutes as $index=>$_attr): ?>             <tr>                                            
 	                    <span>                                                     
-	                    <input type="checkbox" name="attr_<?php echo $index; ?>" id="<?php _e($_attr['slug']); ?>" value="<?php _e($_attr['slug']) ?>" checked="checked" disabled="disabled"></span>
-	                    <span><input type="text" name="attr_value_<?php echo $index; ?>" placeholder="<?php _e($_attr['label']) ?>" value="<?php _e($_attr['label']); ?>"></span></tr>
+	                    <input type="checkbox" name="attr_<?php echo esc_attr($index)/*$index*/; ?>" id="<?php _e($_attr['slug']); ?>" value="<?php _e($_attr['slug']) ?>" checked="checked" disabled="disabled"></span>
+	                    <span><input type="text" name="attr_value_<?php echo esc_attr($index)/*$index*/; ?>" placeholder="<?php _e($_attr['label']) ?>" value="<?php _e($_attr['label']); ?>"></span></tr>
 	                    <!--<label for="<?php _e($_attr['slug']); ?>"><?php _e($_attr['label']); ?></label>-->
 	                    <br/><br/>                        
 	                  <?php endforeach;?>                      
@@ -77,14 +77,14 @@ box-shadow: none;">
 	                </th>
 	              </tr>
 	              <tr>
-	                <td>Total <?php echo $sample_data_obj->get_model()->get_categories_size();?> categories will be created. (Note: Since there are sub categories to above main categories the actual count is higher.<?php echo ($feature_key == 'pair_maker' ? ' Later you can simply remove these categories but right now its neccessary to accurately present the sample data demo.' : '');?>)</td>
+	                <td>Total <?php echo esc_html($sample_data_obj->get_model()->get_categories_size())/*$sample_data_obj->get_model()->get_categories_size()*/;?> categories will be created. (Note: Since there are sub categories to above main categories the actual count is higher.<?php echo esc_attr(($feature_key == 'pair_maker' ? ' Later you can simply remove these categories but right now its neccessary to accurately present the sample data demo.' : ''))/*($feature_key == 'pair_maker' ? ' Later you can simply remove these categories but right now its neccessary to accurately present the sample data demo.' : '')*/;?>)</td>
 	              </tr>
 	              <tr>
 	                <td>                    
 	                  <?php foreach ($_category as $index=>$_cat): ?>  <tr>                                            
-	                    <span><input type="checkbox" name="cat_<?php echo $index; ?>" id="<?php _e($_cat['name']); ?>" value="<?php _e($_cat['slug']) ?>" checked="checked" disabled="disabled"></span>
+	                    <span><input type="checkbox" name="cat_<?php echo esc_attr($index)/*$index*/; ?>" id="<?php _e($_cat['name']); ?>" value="<?php _e($_cat['slug']) ?>" checked="checked" disabled="disabled"></span>
 	                    <!--<label for="<?php //_e($_cat['name']); ?>"><?php //_e($_cat['name']); ?></label> -->    
-	                    <span><input type="text" name="cat_value_<?php echo $index; ?>" placeholder="<?php _e($_cat['name']) ?>" value="<?php _e($_cat['name']); ?>"></span></tr>
+	                    <span><input type="text" name="cat_value_<?php echo esc_attr($index)/*$index*/; ?>" placeholder="<?php _e($_cat['name']) ?>" value="<?php _e($_cat['name']); ?>"></span></tr>
 	                    <br/></br>
 	                  <?php endforeach;?>                      
 	                </td>
@@ -154,7 +154,7 @@ box-shadow: none;">
 
 			            },
 			            success:function(result,status,xhr){
-			                window.location.href="<?php echo($next_url); ?>";
+			                window.location.href="<?php echo esc_attr(($next_url))/*($next_url)*/; ?>";
 	                		return false;
 			            },
 			            error:function(xhr,status,error){
@@ -188,7 +188,7 @@ box-shadow: none;">
 
 			            },
 			            success:function(result,status,xhr){
-			                window.location.href="<?php echo($next_url); ?>";
+			                window.location.href="<?php echo esc_attr(($next_url))/*($next_url)*/; ?>";
 	                		return false;
 			            },
 			            error:function(xhr,status,error){
@@ -266,12 +266,12 @@ box-shadow: none;">
 	                	process_flag = 'cat';
 	                	btn_label = 'Categories';
 	                	main_categories_size = <?php echo sizeof($_category);?>;
-	                	cat_value = <?php echo $sample_data_obj->get_model()->get_categories_size();?>;
+	                	cat_value = <?php echo esc_attr($sample_data_obj->get_model()->get_categories_size())/*$sample_data_obj->get_model()->get_categories_size()*/;?>;
 	                	btn_total = cat_value;
 	                } else if(attr_value>0){
 	                	process_flag = 'attr';
 	                	btn_label = 'Attributes';
-	                	attr_value = <?php echo $sample_data_obj->get_model()->get_attributes_size();?>;
+	                	attr_value = <?php echo esc_attr($sample_data_obj->get_model()->get_attributes_size())/*$sample_data_obj->get_model()->get_attributes_size()*/;?>;
 	                	btn_total = attr_value;
 	                }
 

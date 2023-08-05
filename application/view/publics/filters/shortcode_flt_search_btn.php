@@ -13,7 +13,7 @@
 
 	<script type="text/javascript">		
 
-		var is_shortcode_filter = <?php echo $is_shortcode_filter ? 'true' : 'false';?>;
+		var is_shortcode_filter = <?php echo esc_attr($is_shortcode_filter ? 'true' : 'false')/*$is_shortcode_filter ? 'true' : 'false'*/;?>;
 		var shortflt_filter_setting__redirect_url = <?php echo "'".wbc()->options->get_option('shortflt_filter_setting','redirect_url',get_permalink( function_exists('wc_get_page_id') ? wc_get_page_id('shop') : woocommerce_get_page_id('shop') ) )."'";?>;
 
 		function override_flt_change_function() {

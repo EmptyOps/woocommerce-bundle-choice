@@ -69,7 +69,7 @@ if(
 				<?php endif; ?>
 
 				<?php if(!empty(wbc()->options->get_option('filters_'.$filter_ui->filter_prefix.'filter_setting','filter_setting_btnfilter_now'))): ?>
-					<div class="ui button" id="apply_filter" style="position: absolute;right: 1em;top:1em;border-radius: 0;" onclick="jQuery.fn.eo_wbc_filter_change(false,'form#<?php echo $filter_ui->filter_prefix; ?>eo_wbc_filter','',{'this':this,'event':new Event('click',this)});"> <?php spext_lang("Apply Filters", 'woo-bundle-choice') ?> </div>
+					<div class="ui button" id="apply_filter" style="position: absolute;right: 1em;top:1em;border-radius: 0;" onclick="jQuery.fn.eo_wbc_filter_change(false,'form#<?php echo esc_attr($filter_ui->filter_prefix)/*$filter_ui->filter_prefix*/; ?>eo_wbc_filter','',{'this':this,'event':new Event('click',this)});"> <?php spext_lang("Apply Filters", 'woo-bundle-choice') ?> </div>
 				<?php endif; ?>
 			</div>
 		</div>

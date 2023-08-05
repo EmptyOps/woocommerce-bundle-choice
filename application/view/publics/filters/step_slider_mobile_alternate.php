@@ -5,23 +5,23 @@
 */
 
 ?>			
-<div class="ui four wide column toggle_sticky_mob_filter <?php echo $advance?'advance_filter_mob':'' ?>" style="<?php echo $advance?'display: none;':'' ?>" data-target="#sticky_mob_filter_<?php echo $filter['slug'] ?>" data-tab-group="<?php _e($tab_set); ?>">
-	<div class="title"><div class="ui segment"><?php echo($filter['title']); ?></div></div>
+<div class="ui four wide column toggle_sticky_mob_filter <?php echo esc_html($advance?'advance_filter_mob':'')/*$advance?'advance_filter_mob':''*/ ?>" style="<?php echo esc_html($advance?'display: none;':'')/*$advance?'display: none;':''*/ ?>" data-target="#sticky_mob_filter_<?php echo esc_attr($filter['slug'])/*$filter['slug']*/ ?>" data-tab-group="<?php _e($tab_set); ?>">
+	<div class="title"><div class="ui segment"><?php echo esc_attr(($filter['title']))/*($filter['title'])*/; ?></div></div>
 </div>
-<div class="bottom_filter_segment hidden ui segment" id="sticky_mob_filter_<?php echo $filter['slug'] ?>">
+<div class="bottom_filter_segment hidden ui segment" id="sticky_mob_filter_<?php echo esc_attr($filter['slug'])/*$filter['slug']*/ ?>">
 	<div class="ui equal width grid">
-		<div class="column close_sticky_mob_filter" data-target="#sticky_mob_filter_<?php echo $filter['slug'] ?>">
+		<div class="column close_sticky_mob_filter" data-target="#sticky_mob_filter_<?php echo esc_attr($filter['slug'])/*$filter['slug']*/ ?>">
 			<i class="ui icon times" style="cursor: pointer;"></i>&nbsp; <?php spext_lang("Close", 'woo-bundle-choice') ?>
 		</div>
 		<div class="column"></div>
 		<div class="column"></div>
-		<div class="column" style="text-align: right;" onclick="reset_slider(event,'<?php echo $filter['slug'] ?>',0,<?php echo count(array_filter($items_slug)); ?>)">						
+		<div class="column" style="text-align: right;" onclick="reset_slider(event,'<?php echo esc_attr($filter['slug'])/*$filter['slug']*/ ?>',0,<?php echo count(array_filter($items_slug)); ?>)">						
 			<i class="ui icon redo" style="cursor: pointer;"></i>&nbsp;<?php spext_lang("Reset", 'woo-bundle-choice') ?>
 		</div>
 	</div>					
 	<br/>
 	<div class="ui title">
-		<strong><?php echo($filter['title']); ?></strong><?php if(!empty($help)): ?>&nbsp;<i class="question circle outline icon" data-help="<?php echo $help; ?>"></i><?php endif; ?>
+		<strong><?php echo esc_attr(($filter['title']))/*($filter['title'])*/; ?></strong><?php if(!empty($help)): ?>&nbsp;<i class="question circle outline icon" data-help="<?php echo esc_attr($help)/*$help;*/; ?>"></i><?php endif; ?>
 	</div><br/>
-	<div data-label_max_size="<?php echo $label_max_size ?>" data-min="0" data-max="<?php echo count(array_filter($items_slug))-1; ?>" class="ui labeled ticked range slider wbc" data-label_adjust="<?php echo $reset_label; ?>" id="text_slider_<?php echo $filter['slug'] ?>" data-slug="<?php echo $filter['slug'] ?>" data-labels="<?php echo(implode(",", $items_name)); ?>" data-slugs="<?php echo(implode(",", $items_slug)); ?>" style="bottom: -12.5%;" data-reset="reset_slider(new Event('click'),'<?php echo $filter['slug'] ?>',0,<?php echo count(array_filter($items_slug)); ?>)" data-reset="reset_slider(new Event(''),'<?php echo $filter['slug'] ?>',0,<?php echo count(array_filter($items_slug)); ?>)"></div>
+	<div data-label_max_size="<?php echo esc_attr($label_max_size)/*$label_max_size*/ ?>" data-min="0" data-max="<?php echo count(array_filter($items_slug))-1; ?>" class="ui labeled ticked range slider wbc" data-label_adjust="<?php echo esc_attr($reset_label)/*$reset_label*/; ?>" id="text_slider_<?php echo esc_attr($filter['slug'])/*$filter['slug']*/ ?>" data-slug="<?php echo esc_attr($filter['slug'])/*$filter['slug']*/ ?>" data-labels="<?php echo(implode(",", $items_name)); ?>" data-slugs="<?php echo(implode(",", $items_slug)); ?>" style="bottom: -12.5%;" data-reset="reset_slider(new Event('click'),'<?php echo esc_attr($filter['slug'])/*$filter['slug']*/ ?>',0,<?php echo count(array_filter($items_slug)); ?>)" data-reset="reset_slider(new Event(''),'<?php echo esc_attr($filter['slug'])/*$filter['slug']*/ ?>',0,<?php echo count(array_filter($items_slug)); ?>)"></div>
 </div>

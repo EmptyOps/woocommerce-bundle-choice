@@ -68,5 +68,5 @@ if(isset($_GET['FIRST']) and isset($_GET['SECOND'])) {
                     });
                 }); 
             </script>";
-    echo $html;
+    echo esc_attr($html)/*$html*/;
 }

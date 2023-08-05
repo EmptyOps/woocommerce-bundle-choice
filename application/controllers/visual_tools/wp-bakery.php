@@ -71,8 +71,8 @@ class WP_Bakery extends \WPBakeryShortCode {
 	    ob_start();
 	    ?>
 	    <div>
-	    	<h3><?php echo $header; ?></h3>
-	    	<button><?php echo $atts['first_label']; ?></button> | <button><?php echo $atts['second_label']; ?></button>
+	    	<h3><?php echo esc_html( $header )/*$header*/; ?></h3>
+	    	<button><?php echo esc_html( $atts['first_label'] ) /*$atts['first_label']*/; ?></button> | <button><?php echo esc_html( $atts['second_label'] ) /*$atts['second_label']*/; ?></button>
 	    </div>
 	    <?php
 	    return ob_get_clean();

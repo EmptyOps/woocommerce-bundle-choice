@@ -79,7 +79,7 @@ class Category_Meta {
 			<?php endif; ?>					
 				<div>
 					<input type="hidden" name="wbc_attachment" id="wbc_attachment">
-					<img src="<?php echo $image_src; ?>" width="100" height="100" id="wbc_thumb_img"/>
+					<img src="<?php echo esc_attr( $image_src )/*$image_src*/; ?>" width="100" height="100" id="wbc_thumb_img"/>
 				</div>
 				<br/>				
 				<div>					

@@ -13,19 +13,19 @@ box-shadow: none;">
 	</div>
 	
 	<div class="ui ordered fluid steps">
-      	<div class=" <?php echo $step == 1 ? 'active':( $step > 1 ? 'completed':''); ?> step">		        	
+      	<div class=" <?php echo esc_attr($step == 1 ? 'active':( $step > 1 ? 'completed':''))/*$step == 1 ? 'active':( $step > 1 ? 'completed':'')*/; ?> step">		        	
         	<div class="content">
           		<div class="title">Inventory</div>
           		<div class="description">Choose inventory</div>
         	</div>
       	</div>
-      	<div class="<?php echo $step == 2 ? 'active':( $step > 2 ? 'completed':''); ?> step">
+      	<div class="<?php echo esc_attr($step == 2 ? 'active':( $step > 2 ? 'completed':''))/*$step == 2 ? 'active':( $step > 2 ? 'completed':'')*/; ?> step">
 	        <div class="content">
 		        <div class="title">Features</div>
           		<div class="description">Choose Features to be enabled</div>
         	</div>
       	</div>
-      	<div class="<?php echo $step == 3 ? 'active':( $step > 3 ? 'completed':''); ?> step">			        
+      	<div class="<?php echo esc_attr($step == 3 ? 'active':( $step > 3 ? 'completed':''))/*$step == 3 ? 'active':( $step > 3 ? 'completed':'')*/; ?> step">			        
 	        <div class="content">
 		        <div class="title">Sample Data</div>
           		<div class="description">Add sample products and Complete</div>
@@ -37,7 +37,7 @@ box-shadow: none;">
 		<?php wp_nonce_field('eo_wbc_setup'); ?>
 		<input type="hidden" name="page" value="<?php echo 'eowbc'/*'eo-wbc-init'*/; ?>"/>
 		<input type="hidden" name="wbc_setup" value="<?php echo '1'; ?>"/>
-		<input type="hidden" name="step" value="<?php echo $step+1; ?>">
+		<input type="hidden" name="step" value="<?php echo esc_attr($step+1)/*$step+1*/; ?>">
 
 <?php 
 	if( !empty($template) ){

@@ -1,5 +1,5 @@
 <?php $ride_id = uniqid() ?>
-<div <?php echo (!empty($id)? "id='${id}'" : "") ?> class="carousel slide <?php echo (!empty($class) ? implode(' ',$class) : "") ?>" data-ride="<?php echo $ride_id ?>" <?php echo (!empty($style) ? 'style="'.$style.'"':''); ?>>
+<div <?php echo (!empty($id)? "id='${id}'" : "") ?> class="carousel slide <?php echo (!empty($class) ? implode(' ',$class) : "") ?>" data-ride="<?php echo esc_attr($ride_id)/*$ride_id*/ ?>" <?php echo (!empty($style) ? 'style="'.$style.'"':''); ?>>
   <div class="carousel-inner">
 
   	<?php 

@@ -17,11 +17,11 @@
 		foreach ($row as $index => $column) {			
      		//start tag
 	     	if(isset($column['is_header']) && $column['is_header'] == 1) { ?>
-	     		<th <?php echo !empty($column['colspan']) ? 'colspan="'.$column['colspan'].'"' : '';?> class="<?php echo !empty($column['align']) ? $column['align'] : 'center';?> aligned header <?php echo !empty($column['class']) ? $column['class'] : '';?> <?php echo !empty($column['disabled']) ? 'disabled' : '';?>">
+	     		<th <?php echo !empty($column['colspan']) ? 'colspan="'.esc_html($column['colspan'])/*$column['colspan']*/.'"' : '';?> class="<?php echo !empty($column['align']) ? esc_html($column['align'])/*$column['align']*/ : 'center';?> aligned header <?php echo !empty($column['class']) ? esc_html($column['class'])/*$column['class']*/ : '';?> <?php echo !empty($column['disabled']) ? 'disabled' : '';?>">
 	     	<?php 
 	     	}
 	     	else { ?>
-	     		<td <?php echo !empty($column['colspan']) ? 'colspan="'.$column['colspan'].'"' : '';?> class="<?php echo !empty($column['align']) ? $column['align'] : 'center';?> aligned <?php echo !empty($column['class']) ? $column['class'] : '';?> <?php echo !empty($column['disabled']) ? 'disabled' : '';?>">
+	     		<td <?php echo !empty($column['colspan']) ? 'colspan="'.esc_html($column['colspan'])/*$column['colspan']*/.'"' : '';?> class="<?php echo !empty($column['align']) ? esc_html($column['align'])/*$column['align']*/ : 'center';?> aligned <?php echo !empty($column['class']) ? esc_html($column['class'])/*$column['class']*/ : '';?> <?php echo !empty($column['disabled']) ? 'disabled' : '';?>">
 
 	     			<?php 
 	     			if(!empty($column['link']) and isset($column['edit_id'])){
@@ -37,7 +37,7 @@
 				wbc()->load->template('component/form/input_checkbox',$column["checkbox"]); 
  			}
  			else{
-				echo $column["val"]; 
+				echo esc_html($column["val"])/*$column["val"]*/; 
  			}
 
 			//end tag

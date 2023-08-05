@@ -6,7 +6,7 @@
 
 if(!empty($id) and !empty($label)){
 	?>	
-	<button <?php echo !empty($attr)?$attr:''; ?> id="<?php echo $id; ?>" name="<?php echo $id; ?>" class="ui button <?php echo !empty($class)?$class:''; ?>"><?php echo !empty($label)?$label:''; ?></button>
+	<button <?php echo !empty($attr)? esc_attr($attr)/*$attr*/:''; ?> id="<?php echo esc_attr($id)/*$id*/; ?>" name="<?php echo esc_html($id)/*$id*/; ?>" class="ui button <?php echo !empty($class)? esc_attr($class)/*$class*/:''; ?>"><?php echo esc_html(!empty($label)? esc_attr($label)/*$label*/:'')/*!empty($label)?$label:''*/; ?></button>
 	<?php
 	if (isset($visible_info))
 	{

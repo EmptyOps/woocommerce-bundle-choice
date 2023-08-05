@@ -29,7 +29,7 @@ if( empty($mode) || ( $mode != "setup_wizard" && $mode != "plain" ) ) {
               $desc = "Thank you for installing ".constant($singleton_functionUpper.'_NAME')."! ";
             }
           ?>
-          <div class="sub header" style="font-style: italic;"><?php echo $desc; ?></div>  
+          <div class="sub header" style="font-style: italic;"><?php echo esc_attr($desc)/*$desc*/; ?></div>  
              
       </div> 
     </h2>

@@ -143,7 +143,7 @@ class Term_Meta {
 					</th>
 					<td>
 				<?php endif; ?>				
-				<input name="wbc_color" id="wbc_color" type="color" class="wbc_color"  style="width: 94%;" value='<?php echo ($is_edit?get_term_meta( $term->term_id,'wbc_color',true):''); ?>'>	
+				<input name="wbc_color" id="wbc_color" type="color" class="wbc_color"  style="width: 94%;" value='<?php echo esc_attr($is_edit?get_term_meta( $term->term_id,'wbc_color',true):'')/*($is_edit?get_term_meta( $term->term_id,'wbc_color',true):'')*/; ?>'>	
 				<p>Choose a color to be shown as option on variation form.</p>
 				<?php if($is_edit): ?>
 					</td>
@@ -188,8 +188,8 @@ class Term_Meta {
 					<td>
 			<?php endif; ?>					
 				<div>
-					<input type="hidden" name="wbc_attachment" value="<?php echo $image_src; ?>" id="wbc_attachment">
-					<img src="<?php echo $image_src; ?>" width="100" height="100" id="wbc_thumb_img"/>
+					<input type="hidden" name="wbc_attachment" value="<?php echo esc_attr( $image_src )/*$image_src*/; ?>" id="wbc_attachment">
+					<img src="<?php echo esc_attr( $image_src )/*$image_src*/; ?>" width="100" height="100" id="wbc_thumb_img"/>
 				</div>
 				<br/>				
 				<div>					
@@ -357,7 +357,7 @@ class Term_Meta {
 				
 				<div>
 					<input type="hidden" name="wbc_attachment_thumb" id="wbc_attachment_thumb">
-					<img src="<?php echo $woocommerce->plugin_url() . '/assets/images/placeholder.png' ?>" width="60" height="60" id="wbc_attachment_thumb_img"/>
+					<img src="<?php echo esc_attr( $woocommerce->plugin_url() ) /*$woocommerce->plugin_url()*/ . '/assets/images/placeholder.png' ?>" width="60" height="60" id="wbc_attachment_thumb_img"/>
 				</div>				
 				<div>					
 					<button type="submit" class="wbc_attachment_thumb_button button">
@@ -581,7 +581,7 @@ class Term_Meta {
 					<label for="tag-slug">Display Limit(Loopbox)</label>				
 				</th>
 				<td>
-					<input name="sp_variations_swatches_cat_display_limit" id="sp_variations_swatches_cat_display_limit" type="number" class="sp_variations_swatches_cat_display_limit"  style="width: 94%;" value='<?php echo $display_limit; ?>'>	
+					<input name="sp_variations_swatches_cat_display_limit" id="sp_variations_swatches_cat_display_limit" type="number" class="sp_variations_swatches_cat_display_limit"  style="width: 94%;" value='<?php echo esc_attr( $display_limit )/*$display_limit*/; ?>'>	
 					<p>Limit number of swatches options to display on shop/category page Loopbox.</p>
 				</td>
 			</div>
@@ -634,7 +634,8 @@ class Term_Meta {
 					<label for="tag-slug">Show on shop page(Loopbox)</label>				
 				</th>
 				<td>
-					<input name="sp_variations_swatches_show_on_shop_page" id="sp_variations_swatches_show_on_shop_page" type="checkbox" class="sp_variations_swatches_show_on_shop_page"  style="width: 94%;" value='1'<?php echo ($show_on_shop_page == 1?'checked':''); ?>>	
+					<input name="sp_variations_swatches_show_on_shop_page" id="sp_variations_swatches_show_on_shop_page" type="checkbox" class="sp_variations_swatches_show_on_shop_page"  style="width: 94%;" value='1'<?php echo 
+					esc_attr($show_on_shop_page == 1?'checked':'')/*($show_on_shop_page == 1?'checked':'')*/; ?>>	
 					<p>Show swatches options for this attribute on shop/category page Loopbox.</p>
 				</td>
 			</div>

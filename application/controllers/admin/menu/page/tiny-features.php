@@ -104,7 +104,7 @@ if ( ! class_exists( 'Tiny_features' ) ) {
 
 					?>
 
-						<div class="spui_custum_row sp_variations" data-variation_id="<?php echo $variation_id ; ?>" data-product_id = "<?php ?>">
+						<div class="spui_custum_row sp_variations" data-variation_id="<?php echo esc_attr( $variation_id ) /*$variation_id */; ?>" data-product_id = "<?php ?>">
 					        <div class="form-row form-row-first spui_custum_assets">
 					              <div class="spui_form_row_title">
 					                  <h5><?php echo eowbc_lang("Gallery Image", 'woo-bundle-choice') ?></h5>

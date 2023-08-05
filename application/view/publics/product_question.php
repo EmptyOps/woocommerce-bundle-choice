@@ -1,4 +1,4 @@
-<div type="submit" name="eowbc-askq" id="eowbc-askq" value="<?php echo $product_id; ?>" class="ui inverted primary button" style="margin-left: 1em;">Question?</div>
+<div type="submit" name="eowbc-askq" id="eowbc-askq" value="<?php echo esc_attr($product_id)/*$product_id*/; ?>" class="ui inverted primary button" style="margin-left: 1em;">Question?</div>
 
 
 <div class="ui tiny modal" id="eowbc-askq-modal" data-modal-name="eowbc-askq-modal">  	

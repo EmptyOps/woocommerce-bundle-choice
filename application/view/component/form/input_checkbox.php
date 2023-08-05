@@ -42,11 +42,11 @@ if(!empty($id) /*and !empty($label)*/){
 				?>			
 	    		<?php foreach ($options as $checkbox_key => $checkbox_value) : ?>
 	    			<div class="field">
-				    	<div class="ui <?php echo $style_classes;?> checkbox <?php echo !empty($class)?$class:''; ?>">
-				        	<input type="checkbox" name="<?php echo (!empty($is_id_as_name) && $is_id_as_name) ? $id : $checkbox_key;?>" id="<?php echo (!empty($is_id_as_name) && $is_id_as_name) ? $id."_".$checkbox_key : $checkbox_key;?>" <?php echo (!empty($value) and ( ( is_array($value) && in_array($checkbox_key,$value) ) || ( !is_array($value) && $checkbox_key==$value ) ) ) ? 'checked="checked"':''; ?> value="<?php echo $checkbox_key; ?>" <?php echo isset($options_attrs[$checkbox_key]) ? sanitize_text_field(implode( ' ', $options_attrs[$checkbox_key] )) : ""; ?>>
+				    	<div class="ui <?php echo esc_attr($style_classes)/*$style_classes*/;?> checkbox <?php echo !empty($class)? esc_attr($class)/*$class*/:''; ?>">
+				        	<input type="checkbox" name="<?php echo (!empty($is_id_as_name) && $is_id_as_name) ? esc_attr($id)/*$id*/ : esc_attr($checkbox_key)/*$checkbox_key*/;?>" id="<?php echo (!empty($is_id_as_name) && $is_id_as_name) ? esc_attr($id)/*$id*/."_".esc_attr($checkbox_key)/*$checkbox_key*/ : esc_attr($checkbox_key)/*$checkbox_key*/;?>" <?php echo (!empty($value) and ( ( is_array($value) && in_array($checkbox_key,$value) ) || ( !is_array($value) && esc_attr($checkbox_key==$value)/*$checkbox_key==$value*/ ) ) ) ? 'checked="checked"':''; ?> value="<?php echo esc_attr($checkbox_key)/*$checkbox_key*/; ?>" <?php echo isset($options_attrs[$checkbox_key]) ? sanitize_text_field(implode( ' ', $options_attrs[$checkbox_key] )) : ""; ?>>
 				        	<?php 
 				        	if( !empty($checkbox_value) ) {?>
-				        		<label for="<?php echo (!empty($is_id_as_name) && $is_id_as_name) ? $id."_".$checkbox_key : $checkbox_key; ?>"><?php echo $checkbox_value; ?></label><?php 
+				        		<label for="<?php echo (!empty($is_id_as_name) && esc_attr($is_id_as_name)/*$is_id_as_name*/) ? esc_attr($id)/*$id*/."_".esc_attr($checkbox_key)/*$checkbox_key*/ : esc_attr($checkbox_key)/*$checkbox_key*/; ?>"><?php echo esc_attr($checkbox_value)/*$checkbox_value*/; ?></label><?php 
 				        	}
 							?>
 				      	</div>
@@ -64,8 +64,8 @@ if(!empty($id) /*and !empty($label)*/){
 
 			<?php else:  ?>
 				<div class="field">
-			    	<div class="ui toggle checkbox <?php echo !empty($class)?$class:''; ?>">
-			        	<input type="checkbox" name="<?php echo (!empty($id)? $id :'');?>" id="<?php echo (!empty($id)) ? $id:''; ?>" <?php echo (!empty($value)) ? 'checked="checked"':''; ?> value="1">			        	
+			    	<div class="ui toggle checkbox <?php echo !empty($class)? esc_attr($class)/*$class*/:''; ?>">
+			        	<input type="checkbox" name="<?php echo (!empty($id)? esc_attr($id)/*$id*/ :'');?>" id="<?php echo (!empty($id)) ? esc_attr($id)/*$id*/:''; ?>" <?php echo (!empty($value)) ? 'checked="checked"':''; ?> value="1">			        	
 			      	</div>
 				</div>
 			<?php endif; ?>
@@ -89,9 +89,9 @@ if(!empty($id) /*and !empty($label)*/){
 	elseif ( $where == "in_table" ) {
 		if(!empty($options) and is_array($options)): 
 			foreach ($options as $checkbox_key => $checkbox_value) : ?>
-				<div class="ui fitted checkbox <?php echo !empty($class)?$class:''; ?>">
-				  <input type="checkbox" name="<?php echo $checkbox_key; ?>" id="<?php echo $checkbox_key; ?>" <?php echo (!empty($value) and in_array($checkbox_key,$value)) ? 'checked="checked"':''; ?> <?php echo isset($options_attrs[$checkbox_key]) ? sanitize_text_field(implode( ' ', $options_attrs[$checkbox_key] )) : ""; ?> value="<?php echo $checkbox_key; ?>">
-				  <label><?php echo $checkbox_value; ?></label>
+				<div class="ui fitted checkbox <?php echo !empty($class)? esc_attr($class)/*$class*/:''; ?>">
+				  <input type="checkbox" name="<?php echo esc_attr($checkbox_key)/*$checkbox_key*/; ?>" id="<?php echo esc_attr($checkbox_key)/*$checkbox_key*/; ?>" <?php echo (!empty($value) and in_array($checkbox_key,$value)) ? 'checked="checked"':''; ?> <?php echo isset($options_attrs[$checkbox_key]) ? sanitize_text_field(implode( ' ', $options_attrs[$checkbox_key] )) : ""; ?> value="<?php echo esc_attr($checkbox_key)/*$checkbox_key*/; ?>">
+				  <label><?php echo esc_html($checkbox_value)/*$checkbox_value*/; ?></label>
 				</div>		
 			<?php endforeach; ?>
 		<?php endif; ?>

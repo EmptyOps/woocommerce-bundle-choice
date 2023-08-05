@@ -42,7 +42,7 @@ class View_Order {
             ?>
                 <script type="text/javascript">
                 jQuery(document).ready(function(){
-                    jQuery('table.shop_table.order_details>tbody').html('<?php echo $this->get_sets($sets); ?>');
+                    jQuery('table.shop_table.order_details>tbody').html('<?php echo esc_attr($this->get_sets($sets))/*$this->get_sets($sets)*/; ?>');
                 });    
             </script>
             <?php

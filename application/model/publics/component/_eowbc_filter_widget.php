@@ -1530,19 +1530,19 @@ class EOWBC_Filter_Widget {
 		?>
 		<script type="text/javascript">
 			jQuery(document).ready(function($){
-				$('[data-filter-slug="<?php echo $filter['slug']; ?>"]').on('click',function(event){
+				$('[data-filter-slug="<?php echo esc_attr($filter['slug'])/*$filter['slug']*/; ?>"]').on('click',function(event){
 
 					<?php if($filter_type==1): ?>
-						let filter_target = jQuery('form#<?php echo $this->filter_prefix; ?>eo_wbc_filter [name="_attribute"]');
+						let filter_target = jQuery('form#<?php echo esc_attr($this->filter_prefix)/*$this->filter_prefix*/; ?>eo_wbc_filter [name="_attribute"]');
 					<?php else: ?>
-						let filter_target = jQuery('form#<?php echo $this->filter_prefix; ?>eo_wbc_filter [name="_category"]');
+						let filter_target = jQuery('form#<?php echo esc_attr($this->filter_prefix)/*$this->filter_prefix*/; ?>eo_wbc_filter [name="_category"]');
 					<?php endif;?>
 					
 					let filter_name = jQuery(this).attr('data-filter-slug');
 
 					if($(this).hasClass('eo_wbc_button_selected')){
 						$(this).removeClass('eo_wbc_button_selected');
-						let old_val = $("form#<?php echo $this->filter_prefix; ?>eo_wbc_filter  #checklist_<?php echo $filter['slug']; ?>").val();
+						let old_val = $("form#<?php echo esc_attr($this->filter_prefix)/*$this->filter_prefix*/; ?>eo_wbc_filter  #checklist_<?php echo esc_attr($filter['slug'])/*$filter['slug']*/; ?>").val();
 						old_val = old_val.split(',');
 						if(old_val.indexOf($(this).data('slug'))!=-1){
 							let _slug = $(this).data('slug');
@@ -1550,22 +1550,22 @@ class EOWBC_Filter_Widget {
 								return item==_slug?false:true;
 							});
 							new_val = old_val.join();
-							$("form#<?php echo $this->filter_prefix; ?>eo_wbc_filter  #checklist_<?php echo $filter['slug']; ?>").val(new_val);
+							$("form#<?php echo esc_attr($this->filter_prefix)/* $this->filter_prefix*/; ?>eo_wbc_filter  #checklist_<?php echo esc_attr( $filter['slug'])/* $filter['slug']*/; ?>").val(new_val);
 						}
 
 					} else {
 						$(this).addClass('eo_wbc_button_selected');
-						let old_val = $("form#<?php echo $this->filter_prefix; ?>eo_wbc_filter  #checklist_<?php echo $filter['slug']; ?>").val();
+						let old_val = $("form#<?php echo esc_attr($this->filter_prefix)/*$this->filter_prefix*/; ?>eo_wbc_filter  #checklist_<?php echo esc_attr( $filter['slug'])/* $filter['slug']*/; ?>").val();
 						old_val = old_val.split(',');
 						if(old_val.indexOf($(this).data('slug'))==-1){
 							let _slug = $(this).data('slug');
 							old_val.push(_slug);
 							new_val = old_val.join();
-							$("form#<?php echo $this->filter_prefix; ?>eo_wbc_filter  #checklist_<?php echo $filter['slug']; ?>").val(new_val);
+							$("form#<?php echo esc_attr($this->filter_prefix)/* $this->filter_prefix*/; ?>eo_wbc_filter  #checklist_<?php echo $filter['slug']; ?>").val(new_val);
 						}
 					}
 
-					if(filter_target.val().includes(filter_name) && $("form#<?php echo $this->filter_prefix; ?>eo_wbc_filter  #checklist_<?php echo $filter['slug']; ?>").val().length==0) {
+					if(filter_target.val().includes(filter_name) && $("form#<?php echo esc_attr($this->filter_prefix)/*$this->filter_prefix*/; ?>eo_wbc_filter  #checklist_<?php echo esc_attr($filter['slug'])/*$filter['slug']*/; ?>").val().length==0) {
 						filter_target.val(filter_target.val().replace(','+filter_name,''));
 					} else { if((!filter_target.val().includes(filter_name)) && $("form#<?php echo $this->filter_prefix; ?>eo_wbc_filter #checklist_<?php echo $filter['slug']; ?>").val().length) {
 						filter_target.val(filter_target.val()+','+filter_name);	
@@ -1575,8 +1575,8 @@ class EOWBC_Filter_Widget {
 
 						//////// 27-05-2022 - @drashti /////////
 						--add to be confirmed--
-						window.document.splugins.wbc.filters.core.eo_wbc_filter_change_wrapper(false,'form#<?php echo $this->filter_prefix; ?>eo_wbc_filter','',{'this':this,'event':event);
-						jQuery.fn.eo_wbc_filter_change(false,'form#<?php echo $this->filter_prefix; ?>eo_wbc_filter','',{'this':this,'event':event});
+						window.document.splugins.wbc.filters.core.eo_wbc_filter_change_wrapper(false,'form#<?php echo esc_attr($this->filter_prefix)/*$this->filter_prefix*/; ?>eo_wbc_filter','',{'this':this,'event':event);
+						jQuery.fn.eo_wbc_filter_change(false,'form#<?php echo esc_attr($this->filter_prefix)/*$this->filter_prefix*/; ?>eo_wbc_filter','',{'this':this,'event':event});
 						////////////////////////////////////////
 
 					<?php endif; ?>
@@ -1847,7 +1847,7 @@ class EOWBC_Filter_Widget {
 
 		?>
 		<div data-tab-group="">
-			<select style="width: 100%;" name="<?php echo $type==0?'cat_filter_'.$slug:'dropdown_'.$slug; ?>" id="dropdown_<?php echo $slug; ?>" data-slug="<?php echo $slug; ?>" data-role="dropdown" data-input="dropdown" data-filter-id="<?php echo $id; ?>" data-type="<?php echo $type; ?>" >
+			<select style="width: 100%;" name="<?php echo esc_attr($type==0?'cat_filter_'.$slug:'dropdown_'.$slug)/*$type==0?'cat_filter_'.$slug:'dropdown_'.$slug*/; ?>" id="dropdown_<?php echo esc_attr($slug)/*$slug*/; ?>" data-slug="<?php echo esc_attr($slug)/*$slug*/; ?>" data-role="dropdown" data-input="dropdown" data-filter-id="<?php echo $id; ?>" data-type="<?php echo $type; ?>" >
 
 				<option selected="selected" value=""><?php echo $opt_title; ?></option>
 				<?php foreach ($list_items as $name => $slug) : ?>

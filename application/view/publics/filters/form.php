@@ -135,11 +135,11 @@ if(empty($_per_page)){
 	<!-- Created with Wordpress plugin - WooCommerce Product bundle choice -->
 	<!--WooCommerce Product Bundle Choice filter form-->
 
-	<form method="GET" name="<?php echo $filter_ui->filter_prefix; ?>eo_wbc_filter" id="<?php echo $filter_ui->filter_prefix; ?>eo_wbc_filter" style="clear: both;">
+	<form method="GET" name="<?php echo esc_attr($filter_ui->filter_prefix)/*$filter_ui->filter_prefix*/; ?>eo_wbc_filter" id="<?php echo esc_attr($filter_ui->filter_prefix)/*$filter_ui->filter_prefix*/; ?>eo_wbc_filter" style="clear: both;">
 		<?php do_action('eowbc_pre_filter_form'); ?>
 		<input type="hidden" name="eo_wbc_filter" value="1" />	
 		<input type="hidden" name="paged" value="1" />
-		<input type="hidden" name="eo_wbc_page" size="<?php echo $_per_page; ?>" />	
+		<input type="hidden" name="eo_wbc_page" size="<?php echo esc_attr($_per_page)/*$_per_page*/; ?>" />	
 		<input type="hidden" name="last_paged" value="1" />
 		<?php if(apply_filters('eowbc_show_filter_actions_field',true)): ?>
 		<input type="hidden" name="action" value="eo_wbc_filter"/>
@@ -197,7 +197,7 @@ if(empty($_per_page)){
 					}
 
 					?>
-						<input type="<?php echo $__filter['type'] ?>" name="<?php echo $__filter['name'] ?>" id="<?php echo $__filter['id'] ?>" class="<?php echo $__filter['class'] ?>" value="<?php echo $__filter['value'] ?>" <?php echo (isset($__filter['data-edit'])?'data-edit="'.$__filter['data-edit'].'"':'') ?>/>
+						<input type="<?php echo esc_attr($__filter['type'])/*$__filter['type']*/ ?>" name="<?php echo esc_attr($__filter['name'])/*$__filter['name']*/ ?>" id="<?php echo esc_attr($__filter['id'])/*$__filter['id']*/ ?>" class="<?php echo esc_attr($__filter['class'])/*$__filter['class']*/ ?>" value="<?php echo esc_attr($__filter['value'])/*$__filter['value']*/ ?>" <?php echo (isset($__filter['data-edit'])?'data-edit="'.esc_attr($__filter['data-edit'])/*$__filter['data-edit']*/.'"':'') ?>/>
 					<?php
 				}
 			}
