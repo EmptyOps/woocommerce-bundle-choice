@@ -411,7 +411,32 @@ if ( ! class_exists( 'Extensions_Setup_Wizard' ) ) {
 			?>
 						  	</form>
 						</div>
+						
 						<script src="<?php echo constant('EOWBC_ASSET_URL').'js/fomantic/semantic.min.js'; ?>"></script>
+						<?php
+						 
+							wbc()->load->get_script_tag(array('src'=>constant('EOWBC_ASSET_URL').'js/fomantic/semantic.min.js'));
+						?>
+
+						<?php
+
+						$inline_script = 
+  "jQuery(document).ready(function(){\n" .
+  "                jQuery('.ui.dropdown').dropdown();\n" .
+  "                jQuery('[name=\"eo_wbc_inventory_type\"]').parent().dropdown('set selected','<?php echo get_option('eo_wbc_inventory_type',''); ?>');    \n" .
+  "                jQuery('.ui.checkbox').checkbox();\n" .
+  "\n" .
+  "                jQuery(\"#create_product\").on('click',function(e){\n" .
+  "                  console.log('preventDefault');\n" .
+  "                  e.preventDefault();\n" .
+  "                  e.stopPropagation();\n" .
+  "                  window.location.href = \"<?php echo admin_url(\"admin.php?page=eowbc&eo_wbc_view_auto_jewel=1\"); ?>\";\n" .
+  "                });\n" .
+  "              });\n"
+						wbc()->load->add_inline_script( '', $inline_script, 'common' );
+
+						if(false){
+						?>
 
 						<script>
 							jQuery(document).ready(function(){
@@ -427,6 +452,7 @@ if ( ! class_exists( 'Extensions_Setup_Wizard' ) ) {
 								});
 							});
 						</script>
+						}
 		        	</body>
 		        </html>
 	        <?php

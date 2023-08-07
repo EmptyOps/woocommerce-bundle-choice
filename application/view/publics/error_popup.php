@@ -7,6 +7,15 @@
 // TODO here should not load instantly and follow the wp standard by using hook as well as setting last param to false to our load asset function. 
 // add_action( 'wp_enqueue_scripts',function(){ 
 
+$inline_script = 
+  "if( typeof(jQuery.fn.accordion) === 'function' ) {\n" .
+  "    jQuery.fn.ui_accordion = jQuery.fn.accordion;\n" .
+  "    jQuery.fn.ui_modal = jQuery.fn.modal;\n" .
+  "    jQuery.fn.ui_slider = jQuery.fn.slider;\n" .
+  "  }\n"
+wbc()->load->add_inline_script( '', $inline_script, 'common' );
+
+if(false){
 ?>
 <script type="text/javascript">
   if( typeof(jQuery.fn.accordion) === 'function' ) {
@@ -15,7 +24,7 @@
     jQuery.fn.ui_slider = jQuery.fn.slider;
   }
 </script>
-<?php
+<?php }
 
   global $wp_customize;
   if(empty($wp_customize)){
@@ -26,6 +35,20 @@
   wbc()->load->asset('js','publics/buttons', array(), "", true);
   wp_enqueue_script('jquery-ui-core');
 // },50);
+
+$inline_script = 
+
+  "if( typeof(jQuery.fn.ui_accordion) === 'function' ) {\n" .
+  "    jQuery.fn.accordion = jQuery.fn.ui_accordion;\n" .
+  "    jQuery.fn.modal = jQuery.fn.ui_modal;\n" .
+  "    jQuery.fn.slider = jQuery.fn.ui_slider;\n" .
+  "  }\n"
+
+wbc()->load->add_inline_script( '', $inline_script, 'common' );
+
+
+
+if(false){
 ?>
 <script type="text/javascript">
   if( typeof(jQuery.fn.ui_accordion) === 'function' ) {
@@ -34,6 +57,7 @@
     jQuery.fn.slider = jQuery.fn.ui_slider;
   }
 </script>
+}
 <!-- Created with Wordpress plugin - WooCommerce Product bundle choice -->
 <div class="ui modal align center tiny centered">
 <div class="ui header">              

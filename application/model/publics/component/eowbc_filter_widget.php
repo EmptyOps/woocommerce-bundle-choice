@@ -2527,7 +2527,52 @@ class EOWBC_Filter_Widget {
 		endif;
 
 		$inline_script = 
-		
+
+  "jQuery(document).ready(function($){\n" .
+  "        console.log('EO_WBC_FILTER_UI_ICON_TERM_SLUG');\n" .
+  "        console.log(EO_WBC_FILTER_UI_ICON_TERM_SLUG);\n" .
+  "        EO_WBC_FILTER_UI_ICON_TERM_SLUG.push(\"<?php echo $term->slug; ?>\");\n" .
+  "\n"
+  "if(\"<?php echo $term->slug; ?>\") {\n"
+  "            var icon_filter_type = \"<?php echo $type; ?>\";\n" .
+
+  "            var filter_list= undefined;\n" .
+
+  "            if(icon_filter_type == 1) {\n" .
+
+  "        
+
+  "              filter_list = jQuery('form#<?php echo $this->filter_prefix; ?>eo_wbc_filter [name=\"checklist_'+\"<?php echo $term->slug; ?>\"+'\"]');\n" .
+
+  "            } else {\n" .
+
+  "              filter_list = jQuery('form#<?php echo $this->filter_prefix; ?>eo_wbc_filter [name=\"cat_filter_'+\"<?php echo $term->slug; ?>\"+'\"]');\n" .
+
+  "            }\n" .
+
+  "\n" .
+
+  "            if(jQuery(filter_list).attr('data-edit')=='1') {\n" .
+
+  "              jQuery(filter_list).val(\"\");\n" .
+
+  "\n" .
+
+  "              jQuery(\"form#<?php echo $this->filter_prefix; ?>eo_wbc_filter .eo_wbc_filter_icon_select\").each(function(index,element){\n" .
+
+  "                jQuery(element).removeClass(\"eo_wbc_filter_icon_select\");\n" .
+
+  "              });\n" .
+
+  "            }        \n" .
+
+  "          });\n" .
+
+  "        }        \n" .
+
+  "      });\n"
+
+
 		wbc()->load->add_inline_script( '', $inline_script, 'common' );
 
 		if(false){
@@ -2852,13 +2897,19 @@ class EOWBC_Filter_Widget {
 						'wbc_is_mobile_by_page_sections' => /*1*/(wbc_is_mobile_by_page_sections('cat_shop_page') ? 0 : 1),
     				);
 
+		$inline_script = 
+		
+		wbc()->load->add_inline_script( '', $inline_script, 'common' );
+
+
+		if(false){
 		?>
 		<script>
 			// console.log('eo_wbc_object');
 			var eo_wbc_object = JSON.parse('<?php echo json_encode($data); ?>');
 			// console.log(eo_wbc_object);
 		</script>
-		<?php
+		<?php }
 		// 29-09-2022 @h  @s 
 		// wbc()->load->asset('js','publics/eo_wbc_filter',array('jquery'));	
 		$this->load_asset();
