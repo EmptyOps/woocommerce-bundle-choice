@@ -271,12 +271,12 @@ $form['data'] = array(
 					'type'=>'accordian',
 					'section_type'=>'start',
 					'class'=>array('field', 'styled'),
-					'label'=>'<span class="ui large text">Global Settings</span>',
+					'label'=>'<span class="ui large text">Global Styling And Settings</span>',
 				),
-				'tiny_features_disabled_attribute_style'=>array(
-					'label'=>eowbc_lang('Disabled Attribute style'),
+				'tiny_features_disabled_unavailable_variation'=>array(
+					'label'=>eowbc_lang('Behavior for Unavailable Variation'),
 					'type'=>'select',
-					'value'=>wbc()->options->get_option('tiny_features','tiny_features_disabled_attribute_style','blur_with_cross'),
+					'value'=>wbc()->options->get_option('tiny_features','tiny_features_disabled_unavailable_variation'),
 					'options'=>array('blur_with_cross'=>'Blur with cross','blur_without_cross'=>'Blur without cross','hide'=>'Hide'),
 					'sanitize'=>'sanitize_text_field',
 					'class'=>array('fluid'),
@@ -290,7 +290,41 @@ $form['data'] = array(
 						// 'size_class'=>array('sixteen','wide'),
 					),
 					'attr'=>array("min='0',max='10'")					
+				),	
+				'tiny_features_disabled_attribute_style'=>array(
+					'label'=>eowbc_lang('Behavior for Out of Stock Variation'),
+					'type'=>'select',
+					'value'=>wbc()->options->get_option('tiny_features','tiny_features_disabled_attribute_style','blur_with_cross'),
+					'options'=>array('blur_with_cross'=>'Blur with cross','blur_without_cross'=>'Blur without cross','hide'=>'Hide'),
+					'sanitize'=>'sanitize_text_field',
+					'class'=>array('fluid'),
+					'size_class'=>array('eight','wide'/*,'required'*/),
+					'attr'=>array(),					
+					'inline'=>false,
+
+					'visible_info'=>array( 'label'=>eowbc_lang('Disabled attribute will be hide / blur.</br>
+										Note: Disable ajax threshold doesn\'t apply this feature.'),
+						'type'=>'visible_info',
+						'class'=>array('small','fluid'),
+						// 'size_class'=>array('sixteen','wide'),
+					),
+					'attr'=>array("min='0',max='10'")					
 				),		
+				'tiny_features_ajax_variation_threshold'=>array(
+					'label'=>eowbc_lang('Ajax Variation Threshold'),
+					'type'=>'text',
+					'value'=>wbc()->options->get_option('tiny_features','tiny_features_ajax_variation_threshold',30),
+					'sanitize'=>'sanitize_text_field',
+					'class'=>array('fluid'),						
+					'size_class'=>array('eight','wide'),
+					'inline'=>false,
+
+					'visible_info'=>array( 'label'=>eowbc_lang('By default, if the no. of product variations is less than 30, the product availability check is through JavaScript. If greater than 30, the ajax method is used. This field can control the threshold value of 30.'),
+						'type'=>'visible_info',
+						'class'=>array('small','fluid'),
+						// 'size_class'=>array('sixteen','wide'),
+					)
+				),				
 				'tiny_features_styling_tab_end'=>array(
 					'type'=>'accordian',
 					'section_type'=>'end'
