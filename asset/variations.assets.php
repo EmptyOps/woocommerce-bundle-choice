@@ -801,10 +801,17 @@ if( is_product() ) {
 } 
 
 if(is_shop() || is_product_category()) {
+
+$inline_script = 
+var text = "console.log('is_shop_css');\n"
+wbc()->load->add_inline_script( '', $inline_script, 'common' );
+
+if(false){	
 ?>
 <script>
 console.log('is_shop_css');
 </script>
+}
 	<!--Color-->
 	<style>
 		:root{
@@ -1595,6 +1602,40 @@ $bg_hover_color = wbc()->options->get_option('tiny_features',$spui_is_product_ca
 		color: <?php _e($font_hover_color); ?>;	
 	}
 </style>
+
+<?php
+
+$inline_script = 
+  "  jQuery(document).ready(function($){\n" .
+  "    jQuery(\".dropdown\").dropdown().on('change',function(){\n" .
+  "      var target_selector =  $('#'+$(this).find('input[type=\"hidden\"]').data('id'));\n" .
+  "      target_selector.val($(this).find('input[type=\"hidden\"]').val());\n" .
+  "      /*$(this).parent().find('.selected').removeClass('selected');\n" .
+  "      $(this).addClass('selected');*/\n" .
+  "      jQuery(\".variations_form\" ).trigger('check_variations');\n" .
+  "      $(target_selector).trigger('change');\n" .
+  "    });\n" .
+  "    if($('table.variations tbody>tr').length>0){\n" .
+  "      $('table.variations').addClass('ui raised segment');  \n" .
+  "    }\n" .
+  "    \n" .
+  "    $('#wbc_variation_toggle').on('click',function(){\n" .
+  "      if($(this).find('.icon').hasClass('rotate-up')) {\n" .
+  "        $(this).find('.icon').removeClass('rotate-up');\n" .
+  "        $(this).find('.icon').addClass('rotate-down');\n" .
+  "        $('table.variations').slideToggle(\"slow\");\n" .
+  "      } else {\n" .
+  "        $(this).find('.icon').removeClass('rotate-down');\n" .
+  "        $(this).find('.icon').addClass('rotate-up');\n" .
+  "        $('table.variations').slideToggle(\"slow\");\n" .
+  "      }                \n" .
+  "    });\n"
+
+  
+wbc()->load->add_inline_script( '', $inline_script, 'common' );
+
+if(false){
+?>
 <script>
 	jQuery(document).ready(function($){
 		jQuery(".dropdown").dropdown().on('change',function(){
@@ -1644,7 +1685,7 @@ $bg_hover_color = wbc()->options->get_option('tiny_features',$spui_is_product_ca
 		
 	});
 </script>
-<?php
+<?php }
 // echo ob_get_clean();
 
 

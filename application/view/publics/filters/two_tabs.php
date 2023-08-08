@@ -45,6 +45,19 @@ if( true or in_array( wbc()->common->get_category('category',null,array(wbc()->o
       	<!-- <a class="center item <?php /*echo isset($_GET[$second_tab_id])?'active':'' */?>" data-category="<?php  /*_e($second_tab_category);*/  ?>" style="margin-left: 0px !important;" data-tab="filter_setting_advance_second_tabs" data-tab-name="<?php  /*_e($second_tab_id);*/  ?>" data-tab-altname="<?php  /*_e($first_tab_id);*/ ?>">
         <?php  /*_e($second_tab_label);*/ ?> 
       	</a>-->
+        <?php
+
+        $inline_script = 
+           "  jQuery(document).ready(function($){\n"
+           "window.document.splugins.events.api.subscribeObserver('filter_sets', 'wbc', 'filter_set_click_before_loop',function(event, stat_object, notification_response){\n" .
+          "\n" .
+          "console.log('filter_set_click_before_loop subscribeObserver default');\n" .
+          "\n" .
+          "notification_response(stat_object);\n"
+        wbc()->load->add_inline_script( '', $inline_script, 'common' );
+
+        if(false){
+        ?>
       	<script type="text/javascript">
             // --- aa code woo-bundle-choice/asset/js/publics/03_06__eo_wbc_filter.js filter_set_click() ma move karyo se @a ---
             // --- start ---
@@ -145,6 +158,7 @@ if( true or in_array( wbc()->common->get_category('category',null,array(wbc()->o
             });
              // --- end ---
     	</script>
+    }
         <style>
             .tax-product_cat .eo-wbc-container.filters .ui.menu {
                 -ms-flex-wrap: wrap;
