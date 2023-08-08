@@ -62,9 +62,9 @@ class Filter
 	//  Enable non table based filter that loads whole page at front :)
 	//////////////////////////////////////////////////////////////////////////////////////////////////
 	public function filter() {			
-		
+
 		do_action('sp_eo_wbc_filter_process');
 		
-		(new SP_Model_Query())->prepare_query();						
+		(new SP_Model_Query())->prepare_query();
 	}	
 }

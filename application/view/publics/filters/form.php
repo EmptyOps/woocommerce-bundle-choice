@@ -210,6 +210,16 @@ if(empty($_per_page)){
 	<script type="text/javascript">		
 
 		jQuery(document).ready(function($){			
+
+			// ACTIVE_TODO/NOTE: Below section is a patch fix pulled from dev branch into QCed branch on 08-08-2023. and in dev branch it might be applied during the end of 2021 or in beginning quarter of the 2022. we have kept it commented for now but in future during upgrades or bug fixing if we find it considerable then enable it. 
+			// jQuery.fn.jui_accordion = jQuery.fn.accordion;
+			// jQuery.fn.jui_slider = jQuery.fn.slider;
+			// jQuery.fn.jui_checkbox = jQuery.fn.checkbox;
+			// jQuery.fn.accordion = jQuery.fn.ui_accordion;
+			// jQuery.fn.slider = jQuery.fn.ui_slider;
+			// jQuery.fn.checkbox = jQuery.fn.ui_checkbox;
+			// window.eo=new Object();
+
 			
 			window.document.splugins = window.document.splugins || {};
 			window.document.splugins.ui = window.document.splugins.ui || {};
@@ -583,11 +593,16 @@ if(empty($_per_page)){
 			// window.document.splugins.wbc.filters.api.checkbox_change_event(event);
 			
 			/*----------------------------------------------------*/
-			/*----------------------------------------------------*/
+			/*----------------------------------------------------*/			
+			jQuery.fn.ui_accordion = jQuery.fn.accordion;
+			jQuery.fn.ui_slider = jQuery.fn.slider;
+			jQuery.fn.ui_checkbox = jQuery.fn.checkbox;
 
-		});
-
-
+			// ACTIVE_TODO/NOTE: Below section is a patch fix pulled from dev branch into QCed branch on 08-08-2023. and in dev branch it might be applied during the end of 2021 or in beginning quarter of the 2022. we have kept it commented for now but in future during upgrades or bug fixing if we find it considerable then enable it. 
+			// jQuery.fn.accordion = jQuery.fn.jui_accordion;
+			// jQuery.fn.slider = jQuery.fn.jui_slider;
+			// jQuery.fn.checkbox = jQuery.fn.jui_checkbox;
+		});			
 	</script> 
 
 	<?php endif; ?>

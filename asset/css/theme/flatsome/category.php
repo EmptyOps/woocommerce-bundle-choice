@@ -1,3 +1,9 @@
+
+<?php 
+	add_filter('eowbc_filter_sidebars_widgets',function(){
+		return false;
+	});
+?>
 <style type="text/css">
 body p.name.product-title.woocommerce-loop-product__title{
 	visibility: hidden;
@@ -9,6 +15,7 @@ body p.name.product-title.woocommerce-loop-product__title{
 .row.category-page-row>.col.large-9{
 	max-width:100% !important;
 	min-width:100% !important;
+
 }
 /*PATIA -- product pagee ++ checkout page*/
 /*.image-tools.bottom.left a i {
@@ -97,6 +104,23 @@ float: left;
 
 */
 
+.mfp-container:before {
+    content: '';    
+    height: max-content !important;
+}
 
+@media only screen and (max-width:768px ){
+	.header-full-width .container{
+		max-height: 2rem !important;
+	}
+}
+.cart #eo_wbc_add_to_cart {
+	margin-bottom: 0rem;
+}
+.image-tools.bottom.left .zoom-button {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
 
 </style>

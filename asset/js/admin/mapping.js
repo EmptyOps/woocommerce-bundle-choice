@@ -9,26 +9,28 @@ jQuery(document).ready(function($){
     $('#range_first_1').on('change',function(e){
         e.preventDefault();
         e.stopPropagation();
-
+        jQuery('.range_section').transition('show');
         hide_show_range(this, true);                
     });
 
     $('#range_second_1').on('change',function(e){
         e.preventDefault();
         e.stopPropagation();
-
+        jQuery('.range_section').transition('show');
         hide_show_range(this, false);                
     });
 
     function hide_show_range(changed_obj, is_first) {
         if( jQuery(changed_obj).is(":checked") ) {
             jQuery('.range_section').removeAttr('style');
-            jQuery('.range_section').parent().transition('show'); 
+            jQuery('.range_section').transition('show'); 
             if( is_first ) {
                 jQuery('#eo_wbc_first_category_range').parent().transition('show');
+                jQuery('#eo_wbc_first_category_range').parent().parent().parent().transition('show')
             }
             else {
                 jQuery('#eo_wbc_second_category_range').parent().transition('show');
+                jQuery('#eo_wbc_second_category_range').parent().parent().parent().transition('hide')
             }
         }
         else {
@@ -37,16 +39,20 @@ jQuery(document).ready(function($){
                 jQuery('.range_section').transition('hide'); 
                 jQuery('.range_section').css('display', 'none');
                 jQuery('#eo_wbc_first_category_range').parent().transition('hide');
+                //jQuery('#eo_wbc_first_category_range').parent().parent().parent().transition('hide');
                 jQuery('#eo_wbc_second_category_range').parent().transition('hide');
+                //jQuery('#eo_wbc_second_category_range').parent().parent().parent().transition('hide');
             }
             else {
                 console.log("remove one");
                 
                 if( is_first ) {
                     jQuery('#eo_wbc_first_category_range').parent().transition('hide');
+                    //jQuery('#eo_wbc_first_category_range').parent().parent().parent().transition('hide');
                 }
                 else {
                     jQuery('#eo_wbc_second_category_range').parent().transition('hide');
+                    //jQuery('#eo_wbc_second_category_range').parent().parent().parent().transition('hide');
                 }
             }
         }
@@ -84,7 +90,5 @@ jQuery(document).ready(function($){
     $('.ui.fluid.selection.dropdown .menu').on('click keyup','[data-search-product]',function(){
         $('[data-search-product]').remove();
     });
-
-
 });
 

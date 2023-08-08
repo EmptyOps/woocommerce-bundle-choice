@@ -565,6 +565,12 @@ class EOWBC_Breadcrumb
             $product_id = $product_id->get_id();
         }
         
+        if(!empty($product_id)){
+            $product_id = intval($product_id);
+        } else{
+            $product_id = null;
+        }
+
         return wbc()->common->get_category('product',$product_id,array(self::$first_slug,self::$second_slug));
 
 

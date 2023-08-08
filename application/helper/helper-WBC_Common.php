@@ -14,11 +14,9 @@ class WBC_Common {
 	}
 
 	public function get_category($page='product',int $post_id = null,array $in_category=array(), $is_apply_compatibility=false){
-
 		// ACTIVE_TODO just for the notes that, almost all the logic of this function seems to be deeply implemented for the proper working of the different premium pair builders supported by the earring pendant builder extension, so let keep that in mind while we are getting into the refactoring of those earring pendant builder and other related extensions of category page and item page set 
-
 		// ACTIVE_TODO currently with new upgraded flows we are just using the old category structure, but that need to be revisted and revised deeply while taking in to considerations different facts that as per the old method we are just using the same root diamond category for all apis(for old system if it was about the natural and lab diamond coming from same api like vdb then it was implicit as there was only one API instance being created for fetching any kind of feed from the one particular API but now with the new system that is not true as to fetch different category/feeds the different API instances are created), there are data mapping fields for the lab and gemstone category which we are not sure how much depended on in the old system, there are search layers which works in the old system with this mix of root category, lab category and so on but not sure how this search layers take care of it so just need to revisit that flow make it in sync with data funnel flows of the new updrade from bottom up. -- to h HIGH PRIORITY --	even in old system it works with the two different APIs csv-ftp/csv-ftp-2 being set with two diff categories diamond & lab diamond and it works but that is because there is no category check on the front end category page layers of these two class and so it comes with the side effect that any search event would be excuted twice means for each class and returns results and some how on frontend either the wrong results would be shown or no product found result would be shown on the inactive tab but since that was hidden so that went unnoticed I guess. -- anyway for now we are also temporarily setting the diamond category as main category in both APIs, it is other way around of what is done in older system but it will let the APIs feed layer to be accessed and in this case also it will be two search event and the other will not be noticed on inactive tab but we must fix it asap within 2-3 days otherwise it is massive performance overhead and slowdown the response by a second or so. 
-		// 	ACTIVE_TODO and at this point not sure how the default search means without any search filters applied would behave for the sub categories like lab category which route from the filter set tab -> _current_category (_GET) + _category (_GET) -> search filters prepare query -> query execution layers, so this is high priority -- to h HIGH PRIORITY -- when the filter set tab is selected that belongs to some other sub category like the lab category then the filter js layer will pass the _current_category and especially the _category field accordingly and that will take care of it. 
+		// 	ACTIVE_TODO and at this point not sure how the default search means without any search filters applied would behave for the sub categories like lab category which route from the filter set tab -> current_category (GET) + category (GET) -> search filters prepare query -> query execution layers, so this is high priority -- to h HIGH PRIORITY -- when the filter set tab is selected that belongs to some other sub category like the lab category then the filter js layer will pass the current_category and especially the category field accordingly and that will take care of it. 
 		// 		ACTIVE_TODO and since it is business logic of the application layer, it should not be in the wc helper but think about it if this common helper is right place for it or if it should be moved to some appropriate module -- it seems that the appropriate layer it would be the routing module. so let me work on the definition of the module and then you create the initial prorotype of the class and move such functions there, but yeah we can not change calls system wide so from this common function that rounting functions called -- to s or to d HIGH PRIORITY 
 		$in_category = apply_filters('eoowbc_helper_common_get_category_in_category',$in_category);		
 		$page = apply_filters('eoowbc_helper_common_get_category_page',$page);
@@ -27,36 +25,28 @@ class WBC_Common {
 		if($page == 'category' ) {
 			
 			global $wp_query;
-
 			$qo_term_id = null;
 			$qo_term_slug = null;
 			if(empty($wp_query->get_queried_object()) or !property_exists($wp_query->get_queried_object(),'term_id')) {
 				
 				if($is_apply_compatibility) {
-
 					// NOTE: here this is actualy the ultimate sort to get the category id, but off cource we will need to add whenever required the specific compatibility patches like based on elementor or wpml conditions above this patche in hirarchical if structure to ensure that plateform specific issues like of wpml or elementor is handeled matuarly and using standard api.
 					
 					$c_res = \eo\wbc\model\SP_WBC_Compatibility::instance()->router_compatability('current_page_category_id');
-
 					if(empty($c_res)) {
 					
 						return false;
 					}
 					// $term = wbc()->wc->get_term_by( 'id', $c_res['term_id'], 'product_cat' );
-
 					$qo_term_id = $c_res['term_id'];
 					$qo_term_slug = $c_res['slug'];
-
 				} else {
-
 					return false;
 				}
 			} else {
-
 				$qo_term_id = $wp_query->get_queried_object()->term_id;
 				$qo_term_slug = $wp_query->get_queried_object()->slug;
 			}
-
 			if(!empty($in_category) and is_array($in_category)) {
 				$term_slug=array_map(array(wbc()->wp,"cat_id2slug"),get_ancestors($qo_term_id/*$wp_query->get_queried_object()->term_id*/, 'product_cat'));				
 				$term_slug[]=$qo_term_slug/*$wp_query->get_queried_object()->slug*/;					
@@ -66,6 +56,38 @@ class WBC_Common {
 					$return_category = $matches[0];
 				} else {
 					$return_category = $qo_term_slug/*$wp_query->get_queried_object()->slug*/;
+					// ACTIVE_TODO/NOTE: Below section is a patch fix pulled from dev branch into QCed branch on 08-08-2023. and in dev branch it might be applied during the end of 2021 or in beginning quarter of the 2022. we have kept it commented for not but in future during upgrades or bug fixing if we find it considerable then enable it. 
+					// $query_cat = array();
+					// $cat_list = array_filter(explode(',',$wp_query->query['product_cat']));
+					// $final_cat_list = array();
+					// if(!empty($cat_list) and is_array($cat_list)) {
+					// 	foreach ($cat_list as $cat_list_item) {
+					// 		$final_cat_list = array_merge($final_cat_list, array_filter(explode('+',$cat_list_item)));
+					// 	}
+					// }
+					// $query_cat = array();					
+					// if(!empty($final_cat_list) and is_array($final_cat_list)){
+					// 	foreach ($final_cat_list as $cat_slug) {
+					// 		$cat_term = get_term_by('slug',$cat_slug,'product_cat');
+					// 		if(!empty($cat_term) and !is_wp_error($cat_term)){
+					// 			$query_cat = array_merge($query_cat,array_map(array(wbc()->wp,"cat_id2slug"),get_ancestors($cat_term->term_id, 'product_cat'))); 			
+					// 		}
+					// 	}
+					// }					
+										
+					// if(!empty($query_cat) and is_array($query_cat)){
+					// 	$matches = array_intersect($in_category,$query_cat);	
+					
+					// 	if(!empty($matches) and is_array($matches)){
+					// 		$matches = array_values($matches);					
+					// 		$return_category = $matches[0];
+					// 	} else {
+					// 		$return_category = $wp_query->get_queried_object()->slug;		
+					// 	}
+					// } else {
+					// 	$return_category = $wp_query->get_queried_object()->slug;
+					// }
+					
 				}
 			} else {
 				$return_category = $qo_term_slug/*$wp_query->get_queried_object()->slug*/;	
@@ -76,7 +98,6 @@ class WBC_Common {
 		} else {
 			$return_category = false;
 		}		
-
 		$return_category = apply_filters('eoowbc_helper_common_get_category_return_category',$return_category);
 		return $return_category;
 	}

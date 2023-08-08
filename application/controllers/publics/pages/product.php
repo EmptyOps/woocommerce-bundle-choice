@@ -472,6 +472,23 @@ class Product {
                 wbc()->load->template('publics/features/specification_view');            
             });
             remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_output_product_data_tabs', 10 );
+        } else {
+            add_filter( 'woocommerce_display_product_attributes',function($fields,$product){
+                
+
+                $certificate_link = get_post_meta($product->get_id(),'_certificate_link', true ); /*$product->get_meta('_certificate_link',true);*/
+                //var_dump($certificate_link);
+                
+                if(!empty($certificate_link)){
+
+                    $fields['_certificate_link'] = array(
+                        'label'=>'Certificate',
+                        'value'=>"<a href='${certificate_link}' target='_blank'>".__('link','woo-bundle-choice')."</a>"
+                    );                
+                }
+                
+                return $fields;
+            },10,2);
         }
     }
 
@@ -730,7 +747,25 @@ class Product {
                     <?php if(!empty(wbc()->options->get_option('appearance_product_page','product_page_add_to_basket',''))) :?>
                         
                         window.wbc_atb_submin_form = function(){
-                            jQuery('form.cart').attr('action',document.location.href);
+                            let url = document.location.href;                            
+                            let add_to_cart_id = false;
+                            <?php if( $product->is_type('variable') ) { ?>
+                                add_to_cart_id =jQuery("[name='variation_id']").val();
+                            <?php } else { ?>
+                                add_to_cart_id = '<?php echo $product->get_id(); ?>';
+                            <?php } ?>
+
+                            if(url.includes('/?')) {
+                                url+='&add-to-cart='+add_to_cart_id;
+                            } else if(url.endsWith('/')) {
+                                url+='?add-to-cart='+add_to_cart_id;
+                            } else {
+                                url+='/?add-to-cart='+add_to_cart_id;
+                            }
+
+                            /*window.location.href = url;*/
+
+                            jQuery('form.cart').attr('action',url);
                             jQuery('form.cart').submit();
                         }
 

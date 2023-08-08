@@ -119,7 +119,7 @@ class EOWBC_Filter_Widget {
 		?>
 		<!--Primary filter button that will only be visible on desktop/tablet-->
 		<!-- This widget is created with Wordpress plugin - WooCommerce Product bundle choice -->
-		<div id="loading" style="z-index: -999;height: 100%; width: 100%; position: fixed; top: 0;<?php (wbc()->options->get_option('appearance_filters','appearance_filters_loader') OR apply_filters('eowbc_filter_widget_loader',false))?_e('display:none !important;'):'';?>"></div>	
+		<div id="loading" style="z-index: -999;height: 0px; width: 0px; position: fixed; top: 0;<?php (wbc()->options->get_option('appearance_filters','appearance_filters_loader') OR apply_filters('eowbc_filter_widget_loader',false))?_e('display:none !important;'):'';?>"></div>	
 		    							
 		<?php 
 			if(/*wp_is_mobile()*/ wbc_is_mobile_by_page_sections('cat_shop_page')) {
@@ -191,8 +191,17 @@ class EOWBC_Filter_Widget {
 		$site_url=site_url();
 
 		wp_enqueue_script('jquery');	
+
 		//wp_dequeue_script('jquery-ui-core');
 		//wp_deregister_script('jquery-ui-core');
+
+		// ACTIVE_TODO/NOTE: Below section is a patch fix pulled from dev branch into QCed branch on 08-08-2023. and in dev branch it might be applied during the end of 2021 or in beginning quarter of the 2022. we have kept it commented for now but in future during upgrades or bug fixing if we find it considerable then enable it. 
+		// wp_add_inline_script('fomantic-semantic.min','jQuery.fn.ui_accordion = jQuery.fn.accordion;
+		// 		jQuery.fn.ui_slider = jQuery.fn.slider;
+		// 		jQuery.fn.ui_checkbox = jQuery.fn.checkbox;');
+		// /*wp_dequeue_script('jquery-ui-core');
+		// wp_deregister_script('jquery-ui-core');*/
+
 		
 		add_action( 'wp_footer',function(){
 
@@ -204,7 +213,7 @@ class EOWBC_Filter_Widget {
 			}
 
 			$fg_color=wbc()->session->get('EO_WBC_BG_COLOR',$default_color);			
-
+			
 			$active_color=wbc()->options->get_option('appearance_breadcrumb','breadcrumb_backcolor_active',$fg_color); //get_option('eo_wbc_active_breadcrumb_color',$fg_color);
 			//wp-head here....
 			echo "<style>
@@ -224,10 +233,18 @@ class EOWBC_Filter_Widget {
 						text-align: center !important;
 					}
 
-					.wbc-button-input.eo_wbc_button_selected,.wbc-button-input:hover{
+					.wbc-button-input.eo_wbc_button_selected {
 						border-top:2px solid ".wbc()->options->get_option('appearance_filters','slider_nodes_backcolor_active',$active_color)." !important;
 						border-bottom:2px solid ".wbc()->options->get_option('appearance_filters','slider_nodes_backcolor_active',$active_color)." !important;
 					}
+
+					@media only screen and (min-width: 768px) {
+						.wbc-button-input:hover {
+						    border-top:2px solid ".wbc()->options->get_option('appearance_filters','slider_nodes_backcolor_active',$active_color)." !important;
+							border-bottom:2px solid ".wbc()->options->get_option('appearance_filters','slider_nodes_backcolor_active',$active_color)." !important;
+						}
+					}
+
 
 					.bottom_filter_segment .ui.equal.width.grid .column{
 						display:block;
@@ -266,6 +283,8 @@ class EOWBC_Filter_Widget {
 					}	
 					.loading{												
 						background-image:url(".constant('EOWBC_ASSET_URL')."icon/spinner.gif);
+						height: 100%; 
+						width: 100%;
 						background-color: rgba(255,255,255, 0.6);				    	
 						background-position: center center;
 						background-repeat: no-repeat;	    				    
@@ -947,7 +966,14 @@ class EOWBC_Filter_Widget {
 			}
 
 	        $site_url = esc_url(get_term_link( $current_category,'product_cat'));
-	        
+
+	        // ACTIVE_TODO_OC_START
+	        // -- Below if condition came when we pulled the dev branch into dev_QCed(and dev_QCed is copy of ui_QCed_ashish) so if it is considrable then we need to take it into considration. However we must note that below url override is most likly conflicting with the two tabs(filter sets) layer that we ran becose for those layers assemsion was made that ajax fired on switching tabs will call the main category url of tab and not the sub category. But with below if logic it might be sub category url that will be called.
+	        // ACTIVE_TODO_OC_END
+	        // if(isset($_REQUEST['CAT_LINK'])){
+			// 	 $site_url = str_replace($current_category,wbc()->sanitize->get('CAT_LINK'),$site_url) ;
+			// }
+
 	      	if(strpos($site_url, '?')!==false){
 	          	$site_url.='&';
 	      	} else {
@@ -2212,11 +2238,15 @@ class EOWBC_Filter_Widget {
 			}
 			$term_list = $filter['list'];
 		} else{
-
-			$term = wbc()->wc->get_term_by('term_taxonomy_id',apply_filters( 'wpml_object_id',$id,'category', FALSE, 'en'),'product_cat');
-
-			$term_list = wbc()->wc->get_terms(apply_filters( 'wpml_object_id',$term->term_id,'category', FALSE, 'en'),'menu_order');
 									
+			// ACTIVE_TODO_OC_START
+	        // -- Below two lines came when we pulled the dev branch into dev_QCed(and dev_QCed is copy of ui_QCed_ashish) so if it is considrable then we need to take it into considration. While the two lines underneath it are of QCed branch. 
+	        // ACTIVE_TODO_OC_END
+			// $term = get_term_by('id',$id,'product_cat');
+			// $term_list = get_terms('product_cat', array('hide_empty' => 0, 'orderby' => 'menu_order', 'parent'=>$id));
+			$term = wbc()->wc->get_term_by('term_taxonomy_id',apply_filters( 'wpml_object_id',$id,'category', FALSE, 'en'),'product_cat');
+			$term_list = wbc()->wc->get_terms(apply_filters( 'wpml_object_id',$term->term_id,'category', FALSE, 'en'),'menu_order');
+
 			if(!empty($item[$__prefix."_fconfig_elements"])){
 				$filter_in_list = explode(',',$item[$__prefix."_fconfig_elements"]);
 
@@ -2900,7 +2930,7 @@ class EOWBC_Filter_Widget {
 		?>
 		<!--Primary filter button that will only be visible on desktop/tablet-->
 		<!-- This widget is created with Wordpress plugin - WooCommerce Product bundle choice -->
-		<div id="loading" style="z-index: -999; height: 100%; width: 100%; position: fixed; top: 0;<?php (wbc()->options->get_option('appearance_filters','appearance_filters_loader') OR apply_filters('eowbc_filter_widget_loader',false))?_e('display:none !important;'):'';?>"></div>
+		<div id="loading" style="z-index: -999; height: 0px; width: 0px; position: fixed; top: 0;<?php (wbc()->options->get_option('appearance_filters','appearance_filters_loader') OR apply_filters('eowbc_filter_widget_loader',false))?_e('display:none !important;'):'';?>"></div>
 		
 		<script type="text/javascript">
 			jQuery(document).ready(function(){
