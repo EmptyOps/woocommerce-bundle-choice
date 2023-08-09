@@ -259,12 +259,14 @@ class SP_WBC_Variations extends SP_Variations {
 
 		if($type == 'video_url') {
 
+			$tiny_features_product_page_video_icon = wbc()->options->get_option('tiny_features','tiny_features_product_page_video_icon');
+			$tiny_features_product_page_video_icon_url = !empty($tiny_features_product_page_video_icon) ?  wp_get_attachment_url($tiny_features_product_page_video_icon) : esc_url( 'https://icons-for-free.com/download-icon-play+icon-1320167992475058341_64.ico' );
 			// ACTIVE_TODO we need to provide default video play icon for slider thumb -- to s & -- to h
 			// 	--  and then also provide option on admin to change this icon -- to s & -- to h
 			// 		--  however this need to be done from those form images loop where root data is prepared. and also check if there related comments related to this task somewhere else -- to h 
 			// ACTIVE_TODO temp.
-			$props['src']   = esc_url( 'https://icons-for-free.com/download-icon-play+icon-1320167992475058341_64.ico' );
-			$props['gallery_thumbnail_src']   = esc_url( 'https://icons-for-free.com/download-icon-play+icon-1320167992475058341_64.ico' );
+			$props['src']   = $tiny_features_product_page_video_icon_url;
+			$props['gallery_thumbnail_src']   = $tiny_features_product_page_video_icon_url;
 			// $props['gallery_thumbnail_src_w']   = esc_attr( 100 );
 			// $props['gallery_thumbnail_src_h']   = esc_attr( 100 );
 
@@ -515,10 +517,16 @@ class SP_WBC_Variations extends SP_Variations {
 		$type['button']='Button';
 		$type['color']='Color';
 		$type['image']='Icon';
-		$type['image_text']='Icons with Text';
-		$type['dropdown_image']='Dropdown with Icons';
-		$type['dropdown_image_only']='Dropdown with Icons Only';
-		$type['dropdown']='Dropdown';
+		// ACTIVE_TODO_OC_START
+		// -- as soon as the get chance for the max to max milestonlets enable this template and after running and testing it once
+		// ACTIVE_TODO_OC_END
+		if(false) {
+
+			$type['image_text']='Icons with Text';
+			$type['dropdown_image']='Dropdown with Icons';
+			$type['dropdown_image_only']='Dropdown with Icons Only';
+			$type['dropdown']='Dropdown';
+		}
 
 		if(empty($type['is_base_type_only'])){
 
@@ -579,6 +587,7 @@ class SP_WBC_Variations extends SP_Variations {
 
 		/*ACTIVE_TODO_OC_START
 		ACTIVE_TODO we must do it by second revision right now we are not supporting the variation id or query paramas of _attributs and checklist and so on to load selected variation based dom and its images. but we must do by second revision or before that as soon as the seo reports and so on requires that or something else requires it.
+			NOTE: the variation_id support is now added in the get_default_variation_id function as that seem to be more suitabe layer for that. 
 		ACTIVE_TODO_OC_END*/
 		// $default_attributes = \eo\wbc\system\core\SP_Router::get_query_params_formated('attr', $input_method, 'key_value');
 
@@ -591,6 +600,13 @@ class SP_WBC_Variations extends SP_Variations {
 	}
 
 	public static function get_default_variation_id($product, $attributes){
+
+		// NOTE: right now we have added the variation id support in url get perameter in below if condition but if we find better placeholder for this layer than we can move out of this function.
+		$variation_id = wbc()->sanitize->get('variation_id');
+		if(!empty($variation_id)) {
+
+			return $variation_id;
+		}
 
 		if ( is_numeric( $product ) ) {
 			$product = wc_get_product( $product );
@@ -1268,6 +1284,7 @@ class SP_WBC_Variations extends SP_Variations {
 		$data = self::prepare_variable_item_wrapper_data($data,$args);
 
 		// TODO OPTIMIZATION in future if it seems worth it then we can prevent above layers from preparing unnecessary options and then we can simply skip array slice from below.
+			// NOTE: above optimisation is no more possible since now we can not do array_slice since we need all swatches options on dom so that javascript layer can function and so now all the swatches option are rendered but the additional swatches option beyond limit are made hidden.
 		$data['woo_dropdown_attribute_html_data']['args']['actual_total_options'] = null;
 		
 		global $woocommerce_loop;
@@ -1288,17 +1305,40 @@ class SP_WBC_Variations extends SP_Variations {
 
 				if(isset($data['woo_dropdown_attribute_html_data']['terms'])){
 
-					$data['woo_dropdown_attribute_html_data']['terms'] = array_slice( $data['woo_dropdown_attribute_html_data']['terms'], 0, $data['woo_dropdown_attribute_html_data']['args']['sp_variations_swatches_cat_display_limit'] );
+					// $data['woo_dropdown_attribute_html_data']['terms'] = array_slice( $data['woo_dropdown_attribute_html_data']['terms'], 0, $data['woo_dropdown_attribute_html_data']['args']['sp_variations_swatches_cat_display_limit'] );
+					$counter = -1;
+					foreach ( $data['woo_dropdown_attribute_html_data']['terms'] as $index => $term ) {
+						if ( in_array( $term->slug, $data['woo_dropdown_attribute_html_data']['options'], true ) ) {
+							$counter++;
+							if($counter >= $data['woo_dropdown_attribute_html_data']['args']['sp_variations_swatches_cat_display_limit']){
+
+									$data['woo_dropdown_attribute_html_data']['options_loop_class'][$term->slug] .= ' hide '; 
+									// wbc_pr('woo_dropdown_attribute_html_data options_loop_class');
+									// wbc_pr($data['woo_dropdown_attribute_html_data']['args']['sp_variations_swatches_cat_display_limit']);
+							}
+						}
+					}
 				}
 
 				if(isset($data['woo_dropdown_attribute_html_data']['options'])){
 
-					$data['woo_dropdown_attribute_html_data']['options'] = array_slice( $data['woo_dropdown_attribute_html_data']['options'], 0, $data['woo_dropdown_attribute_html_data']['args']['sp_variations_swatches_cat_display_limit'] );
+					// $data['woo_dropdown_attribute_html_data']['options'] = array_slice( $data['woo_dropdown_attribute_html_data']['options'], 0, $data['woo_dropdown_attribute_html_data']['args']['sp_variations_swatches_cat_display_limit'] );
+					$counter = -1;
+					foreach ( $data['woo_dropdown_attribute_html_data']['options'] as $option ) {
+						$counter++;
+						if($counter >= $data['woo_dropdown_attribute_html_data']['args']['sp_variations_swatches_cat_display_limit']){
+
+							$data['woo_dropdown_attribute_html_data']['options_loop_class'][$option] .= ' hide '; 
+						}
+					}
 				}
 
 				if(isset($data['variable_item_data']['terms'])){
 
-					$data['variable_item_data']['terms'] = array_slice( $data['variable_item_data']['terms'], 0, $data['woo_dropdown_attribute_html_data']['args']['sp_variations_swatches_cat_display_limit'] );
+					// $data['variable_item_data']['terms'] = array_slice( $data['variable_item_data']['terms'], 0, $data['woo_dropdown_attribute_html_data']['args']['sp_variations_swatches_cat_display_limit'] );
+					// foreach ( $data['variable_item_data']['terms'] as $term ) {
+						// $data['variable_item_data']['options_loop_class'][$term->slug] .= 'hide '; 
+					// }
 				}
 			}
 		}

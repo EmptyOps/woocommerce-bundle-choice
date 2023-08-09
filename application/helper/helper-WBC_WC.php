@@ -499,6 +499,41 @@ class WBC_WC {
 
     }
 
+    public function get_single_product_top_cat_name(){
+
+        if ( is_product() ) {
+            
+            global $post;
+
+            // $terms = wc_get_product_terms( $post->ID, 'product_cat', array( 'orderby' => 'parent', 'order' => 'DESC' ) );
+            $terms = wc_get_product_terms( $post->ID, 'product_cat', array( 'orderby' => 'term_id', 'order' => 'ASC' ) );
+
+            if ( ! empty( $terms ) ) {
+                $main_term = $terms[0];
+                // $ancestors = get_ancestors( $main_term->term_id, 'product_cat' );
+                // if ( ! empty( $ancestors ) ) {
+                //     $ancestors = array_reverse( $ancestors );
+                //     // first element in $ancestors has the root category ID
+                //     // get root category object
+                //     $root_cat = get_term( $ancestors[0], 'product_cat' );
+                // }
+                // else {
+                //     // root category would be $main_term if no ancestors exist
+                // }
+
+                if(!empty($main_term)) {
+
+                    return $main_term->name;
+                }
+            }
+            else {
+                // no category assigned to the product
+            }
+        }
+
+        return null;
+    }
+
     public function get_productCats($parent_slug = '', $format = '', $sp_eid_type_value = 'prod_cat', $is_return_data_only = false){
         
         $parent = '';
@@ -523,7 +558,7 @@ class WBC_WC {
             $option_list=array();    
         } elseif( $format == 'detailed_dropdown' ) {
             $option_list='';    
-        } elseif( $format == 'detailed' || 'detailed_slug') {
+        } elseif( $format == 'detailed' || $format == 'detailed_slug') {
             $option_list=array();
         } elseif( $format == 'id_and_title' ) {
             $option_list=array();
@@ -540,9 +575,8 @@ class WBC_WC {
                 $option_list[$base->term_id] = $base->slug;
             } elseif( $format == 'detailed_dropdown' ) {
                 $option_list.='<div class="item" data-value="'.$base->term_id.'" data-sp_eid="'.$separator.'prod_cat'.$separator.$base->term_id.'">'.str_replace("'","\'",$base->name).'</div>'.$this->get_productCats($base->slug, $format, $sp_eid_type_value);
-            } elseif( $format == 'detailed' || 'detailed_slug') {
-                $option_list[$base->term_id] = array('label'=> $format = 'detailed_slug' ? str_replace("'","\'",$base->name).'('.$base->slug.')' : str_replace("'","\'",$base->name), 'attr'=>' data-sp_eid="'.$separator.$sp_eid_type_value.$separator.$base->term_id.$separator.'" ', $format);
-
+            } elseif( $format == 'detailed' || $format == 'detailed_slug') {
+                $option_list[$base->term_id] = array('label'=> ( $format == 'detailed_slug' ? str_replace("'","\'",$base->name).'('.$base->slug.')' : str_replace("'","\'",$base->name) ), 'attr'=>' data-sp_eid="'.$separator.$sp_eid_type_value.$separator.$base->term_id.$separator.'" ', $format);
 
                 $option_list = array_replace($option_list, self::get_productCats($base->slug, $format, $sp_eid_type_value)); //array_merge($option_list, self::get_productCats($base->slug, $format));
 

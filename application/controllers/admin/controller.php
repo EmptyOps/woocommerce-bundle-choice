@@ -127,13 +127,14 @@ class Controller extends \eo\wbc\controllers\Controller {
 			'header'=>array('text','color','back_color','font_family','font_size','visibility'),
 			'sub_header'=>array('text','color','back_color','font_family','font_size','visibility'),
 			'checkbox'=>array('checkbox'),
-			'text'=>array('text','visibility'),
+			'text'=>array('text','color','font_size','visibility'),
+			'no_text'=>array('color','font_size','visibility'),
 			'image'=>array('height','width','image','visibility'),
 			'img'=>array('height','width','image','visibility'),
 			'button'=>array('text','color','back_color','font_family','font_size','radius','visibility'),
 			'container'=>array('height','width','margin_left','margin_right','visibility'),
 			'wc_attribute_field'=>array('attribute','checkbox','text','visibility'),
-			'a'=>array(/*'href',*/'url','text','visibility'),
+			'a'=>array(/*'href',*/'url','text','color','font_size','visibility'),
 			'td'=>array('text','color','back_color','font_family','font_size','visibility'),
 		);
 
@@ -349,6 +350,10 @@ class Controller extends \eo\wbc\controllers\Controller {
 				}
 			}
 		}
+
+		//echo "<pre>";
+		//print_r($controls);
+		//echo "</pre>";
 
 		return $controls;
 	}
