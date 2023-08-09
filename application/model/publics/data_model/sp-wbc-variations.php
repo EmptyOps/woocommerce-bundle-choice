@@ -259,12 +259,14 @@ class SP_WBC_Variations extends SP_Variations {
 
 		if($type == 'video_url') {
 
+			$tiny_features_product_page_video_icon = wbc()->options->get_option('tiny_features','tiny_features_product_page_video_icon');
+			$tiny_features_product_page_video_icon_url = !empty($tiny_features_product_page_video_icon) ?  wp_get_attachment_url($tiny_features_product_page_video_icon) : esc_url( 'https://icons-for-free.com/download-icon-play+icon-1320167992475058341_64.ico' );
 			// ACTIVE_TODO we need to provide default video play icon for slider thumb -- to s & -- to h
 			// 	--  and then also provide option on admin to change this icon -- to s & -- to h
 			// 		--  however this need to be done from those form images loop where root data is prepared. and also check if there related comments related to this task somewhere else -- to h 
 			// ACTIVE_TODO temp.
-			$props['src']   = esc_url( 'https://icons-for-free.com/download-icon-play+icon-1320167992475058341_64.ico' );
-			$props['gallery_thumbnail_src']   = esc_url( 'https://icons-for-free.com/download-icon-play+icon-1320167992475058341_64.ico' );
+			$props['src']   = $tiny_features_product_page_video_icon_url;
+			$props['gallery_thumbnail_src']   = $tiny_features_product_page_video_icon_url;
 			// $props['gallery_thumbnail_src_w']   = esc_attr( 100 );
 			// $props['gallery_thumbnail_src_h']   = esc_attr( 100 );
 

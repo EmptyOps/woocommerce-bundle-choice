@@ -119,8 +119,8 @@ class Product {
                          event.preventDefault();
                 },false);
 
-                let sp_add_to_cart_dots = 1
-                let sp_add_to_cart_dots_interval = window.setInterval(function(){
+                var sp_add_to_cart_dots = 1
+                var sp_add_to_cart_dots_interval = window.setInterval(function(){
                     
                     if(jQuery('#eo_wbc_add_to_cart,#eo_wbc_add_to_cart_preview').length>0) {                        
                         window.clearInterval(sp_add_to_cart_dots_interval);

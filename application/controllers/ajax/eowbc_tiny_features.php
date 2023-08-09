@@ -75,6 +75,8 @@ if(wp_verify_nonce(wbc()->sanitize->post('_wpnonce'),'eowbc_tiny_features')){
 	wbc()->options->update_option('tiny_features','tiny_features_option_ui_loop_box_hover_media_index',(empty(wbc()->sanitize->post('tiny_features_option_ui_loop_box_hover_media_index'))?'2':wbc()->sanitize->post('tiny_features_option_ui_loop_box_hover_media_index')));
 
 	wbc()->options->update_option('tiny_features','tiny_features_specification_meta_keys',(empty(wbc()->sanitize->post('tiny_features_specification_meta_keys'))?'':wbc()->sanitize->post('tiny_features_specification_meta_keys')));
+	
+	wbc()->options->update_option('tiny_features','tiny_features_product_page_video_icon',(empty(wbc()->sanitize->post('tiny_features_product_page_video_icon'))?'':wbc()->sanitize->post('tiny_features_product_page_video_icon')));
 
 
 
