@@ -330,6 +330,65 @@ $form['data'] = array(
 					'section_type'=>'end'
 				),
 
+				'tiny_features_video_tab_start'=>array(
+					'type'=>'accordian',
+					'section_type'=>'start',
+					'class'=>array('field', 'styled'),
+					'label'=>'<span class="ui large text">Video</span>',
+				),
+				'tiny_features_video_auto_play'=>array(
+					'label'=>eowbc_lang('Video Auto Play?'),
+					'type'=>'checkbox',
+					'value'=>array(wbc()->options->get_option('tiny_features','tiny_features_video_auto_play')),
+					'sanitize'=>'sanitize_text_field',
+					'options'=>array('tiny_features_video_auto_play'=>'Auto Play'),
+					'class'=>array('fluid'),						
+					// 'size_class'=>array('eight','wide'),
+					'inline'=>false,
+
+					'visible_info'=>array( 'label'=>eowbc_lang('Enables to set the video auto play.'),
+						'type'=>'visible_info',
+						'class'=>array('small'),
+						// 'size_class'=>array('sixteen','wide'),
+					),
+				),
+				'tiny_features_video_mute'=>array(
+					'label'=>eowbc_lang('Video Muted?'),
+					'type'=>'checkbox',
+					'value'=>array(wbc()->options->get_option('tiny_features','tiny_features_video_mute')),
+					'sanitize'=>'sanitize_text_field',
+					'options'=>array('tiny_features_video_mute'=>'Mute'),
+					'class'=>array('fluid'),						
+					// 'size_class'=>array('eight','wide'),
+					'inline'=>false,
+
+					'visible_info'=>array( 'label'=>eowbc_lang('Enables to set the video mute.'),
+						'type'=>'visible_info',
+						'class'=>array('small'),
+						// 'size_class'=>array('sixteen','wide'),
+					),
+				),
+				'tiny_features_video_loop'=>array(
+					'label'=>eowbc_lang('Start Video Loop?'),
+					'type'=>'checkbox',
+					'value'=>array(wbc()->options->get_option('tiny_features','tiny_features_video_loop')),
+					'sanitize'=>'sanitize_text_field',
+					'options'=>array('tiny_features_video_loop'=>'Loop'),
+					'class'=>array('fluid'),						
+					// 'size_class'=>array('eight','wide'),
+					'inline'=>false,
+
+					'visible_info'=>array( 'label'=>eowbc_lang('Enables to set the video continues play.'),
+						'type'=>'visible_info',
+						'class'=>array('small'),
+						// 'size_class'=>array('sixteen','wide'),
+					),
+				),													
+				'tiny_features_video_tab_end'=>array(
+					'type'=>'accordian',
+					'section_type'=>'end'
+				),
+				
 				'tiny_features_product_page_tab_start'=>array(
 					'type'=>'accordian',
 					'section_type'=>'start',

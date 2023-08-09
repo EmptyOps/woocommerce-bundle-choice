@@ -112,6 +112,10 @@ if(wp_verify_nonce(wbc()->sanitize->post('_wpnonce'),'eowbc_tiny_features')){
 	wbc()->options->update_option('tiny_features','tiny_features_disabled_attribute_style', (empty(wbc()->sanitize->post('tiny_features_disabled_attribute_style'))?'':wbc()->sanitize->post('tiny_features_disabled_attribute_style')));
 	
 	wbc()->options->update_option('tiny_features','tiny_features_ajax_variation_threshold', (empty(wbc()->sanitize->post('tiny_features_ajax_variation_threshold'))?'':wbc()->sanitize->post('tiny_features_ajax_variation_threshold')));
+	
+	wbc()->options->update_option('tiny_features','tiny_features_video_auto_play', (empty(wbc()->sanitize->post('tiny_features_video_auto_play'))?'':wbc()->sanitize->post('tiny_features_video_auto_play')));
+	wbc()->options->update_option('tiny_features','tiny_features_video_mute', (empty(wbc()->sanitize->post('tiny_features_video_mute'))?'':wbc()->sanitize->post('tiny_features_video_mute')));
+	wbc()->options->update_option('tiny_features','tiny_features_video_loop', (empty(wbc()->sanitize->post('tiny_features_video_loop'))?'':wbc()->sanitize->post('tiny_features_video_loop')));
 
 	//$res['msg'] = "Updated successfully!";
 	//wbc()->options->update_option('configuration','config_category',1);
@@ -125,3 +129,5 @@ else {
  
 // echo json_encode($res);
 wbc()->rest->response($res);
+
+?>
