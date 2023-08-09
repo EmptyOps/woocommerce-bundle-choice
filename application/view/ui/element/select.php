@@ -1,4 +1,4 @@
-<select class="form-control<?php echo (!empty($class) ? ' '.$class.'':''); ?>" <?php echo (!empty($id) ? 'id="'.$id.'"':''); ?> <?php echo (!empty($name) ? 'name="'.$name.'"':''); ?> <?php echo (!empty($attr)? $attr: ''); ?> >
+<select class="form-control<?php echo (!empty($class) ? ' '.$class.'':''); ?>" <?php echo (!empty($id) ? 'id="'.$id.'"':''); ?> <?php echo (!empty($name) ? 'name="'.$name.'"':''); ?> <?php echo (!empty($attr)? $attr: ''); ?> <?php echo (!empty($style) ? 'style="'.$style.'"':''); ?> >
 
 	<?php if(!empty($option)){ ?>
 

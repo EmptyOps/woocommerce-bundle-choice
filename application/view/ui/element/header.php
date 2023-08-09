@@ -1,5 +1,5 @@
 <?php if(!empty($tag)): ?>
-<<?php echo $tag; ?> <?php echo (!empty($class) ? 'class="'.$class.'"':''); ?> <?php echo (!empty($id) ? 'id="'.$id.'"':''); ?> <?php echo (!empty($attr)? $attr: ''); ?> <?php echo (!empty($src) ? 'src="'.$src.'"':''); /*addad on 06-07-2022 @hiren and @bhavesh */ ?>>
+<<?php echo $tag; ?> <?php echo (!empty($class) ? 'class="'.$class.'"':''); ?> <?php echo (!empty($id) ? 'id="'.$id.'"':''); ?> <?php echo (!empty($attr)? $attr: ''); ?> <?php echo (!empty($src) ? 'src="'.$src.'"':''); /*addad on 06-07-2022 @hiren and @bhavesh */ ?> <?php echo (!empty($style) ? 'style="'.$style.'"':''); ?>>
 	<?php echo isset($preHTML)?$preHTML:''; ?>	
 	<?php
 		if(!empty($child) and !empty($builder)) {
