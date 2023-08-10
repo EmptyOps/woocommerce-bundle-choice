@@ -22,16 +22,14 @@ if(empty($image['extra_params_org']['type']) || $image['extra_params_org']['type
     if ( $image['extra_params_org']['type'] == 'video' or $image['extra_params_org']['type'] == 'video_url' ) {
         if ( true or $image['extra_params_org']['type'] == 'video' and isset( $image['extra_params_org']['embed_type'] ) && $image['extra_params_org']['embed_type'] === 'iframe' ) {
                 
-            $image_video_src = $image['video_src'].'?mute=1'.(wbc()->options->get_option('tiny_features','tiny_features_video_auto_play') == 'tiny_features_video_auto_play' ? '&autoplay=1&loop=1' : '');    
-
             $template = array(
                 'type' => 'div',
                 'class' => array('spui_iframes_video_container',esc_attr( $image['class'] ), 'img-item', 'img-item-'.$image['extra_params_org']['type'], 'img-item-'.$image['extra_params_org']['type'].'-'.wbc()->common->current_theme_key() ),
                 'child' => array(
                     array(
                         'type' => 'iframe',
-                        'src' => $image_video_src/*$image['video_src']*/,
-                        'attr' => array( 'width' => '454', 'height' => '454', 'frameborder' => '0', 'webkitallowfullscreen' => '', 'mozallowfullscreen' => '', 'allowfullscreen' => '' ),
+                        'src' => $image['image_video_src']/*$image['video_src']*/,
+                        'attr' => array( 'width' => '454', 'height' => '454', 'frameborder' => '0', 'webkitallowfullscreen' => '', 'mozallowfullscreen' => '', 'allowfullscreen' => '','allow' => 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture' ),
                     ),
                 ),
             );

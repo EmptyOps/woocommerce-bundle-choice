@@ -287,6 +287,21 @@ class SP_WBC_Variations extends SP_Variations {
 
 		if($type == 'video_url') {
 
+			if(true or isset( $props['extra_params_org']['embed_type'] ) && $props['extra_params_org']['embed_type'] === 'iframe' ){
+
+	            $video_url = $attachment_id;
+	            $url_trime = explode("?",$video_url)[0];
+	            $url_trime_split = explode("/",$url_trime);
+	            $playlist = end($url_trime_split);
+
+	            $props['image_video_src'] = esc_url( $attachment_id ).
+	                '?&playlist='.$playlist.
+	                (wbc()->options->get_option('tiny_features','tiny_features_video_mute') == 'tiny_features_video_mute' ? '&mute=1' : '').
+	                (wbc()->options->get_option('tiny_features','tiny_features_video_auto_play') == 'tiny_features_video_auto_play' ? '&autoplay=1' : '').
+	                (wbc()->options->get_option('tiny_features','tiny_features_video_loop') == 'tiny_features_video_loop' ? '&loop=1' : '')
+	                ;  
+			}
+
 			$props['video_src']   = esc_url( $attachment_id );
 			return $props;
 
