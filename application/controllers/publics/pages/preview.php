@@ -90,7 +90,7 @@ class Preview {
 
         add_action('wp_footer',function(){
             $inline_script = 
-            var text = "jQuery(document).ready(function($){\n" .
+            "jQuery(document).ready(function($){\n" .
   "                        jQuery('.special.cards .image').dimmer({ on: 'hover' });\n" .
   "           });\n"
              ;

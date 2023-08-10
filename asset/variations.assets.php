@@ -803,7 +803,7 @@ if( is_product() ) {
 if(is_shop() || is_product_category()) {
 
 $inline_script = 
-var text = "console.log('is_shop_css');\n"
+"console.log('is_shop_css');\n";
 wbc()->load->add_inline_script( '', $inline_script, 'common' );
 
 if(false){	
@@ -811,8 +811,9 @@ if(false){
 <script>
 console.log('is_shop_css');
 </script>
+<?php
 }
-	<!--Color-->
+?>	<!--Color-->
 	<style>
 		:root{
 	            --spui-color-position:center;

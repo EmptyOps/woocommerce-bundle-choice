@@ -2896,9 +2896,9 @@ class EOWBC_Filter_Widget {
 						// ACTIVE_TODO_OC_END
 						'wbc_is_mobile_by_page_sections' => /*1*/(wbc_is_mobile_by_page_sections('cat_shop_page') ? 0 : 1),
     				);
-
+		$json_encode_parse = json_encode($data);
 		$inline_script = 
-		
+		"var eo_wbc_object = JSON.parse('".$json_encode_parse."');\n";
 		wbc()->load->add_inline_script( '', $inline_script, 'common' );
 
 

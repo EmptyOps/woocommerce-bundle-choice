@@ -274,6 +274,9 @@ class Product {
                     display: none;
                 }
             </style>
+            <?php
+
+            ?>
             <script type="text/javascript">
                 jQuery(".single_add_to_cart_button.button.alt").ready(function(){
 
@@ -620,6 +623,16 @@ class Product {
             add_action('wp_footer',function(){
                 ?>
                 <!-- WBC{ WooCommerce Product Bundle Choice wiget STARTS. } -->
+                <?php
+                $page_category__ = $this->page_category;
+                $inline_script = 
+
+              "jQuery(document).ready(function(){\n" .
+              "                        jQuery('form.cart').prepend(\"<input type='hidden' name='eo_wbc_target' value='".$page_category__."'/><input type='hidden' name='eo_wbc_product_id' value='<?php global $post; echo $post->ID; ?>'/>\");\n" .
+              "                    });\n"
+                            wbc()->load->add_inline_script( '', $inline_script, 'common' );
+                if(false){            
+                ?>
                 <script>
                     jQuery(document).ready(function(){
                         jQuery('form.cart').prepend("<input type='hidden' name='eo_wbc_target' value='<?php echo $this->page_category; ?>'/><input type='hidden' name='eo_wbc_product_id' value='<?php global $post; echo $post->ID; ?>'/>");
@@ -627,6 +640,7 @@ class Product {
                 </script>
                 <!-- WBC{ WooCommerce Product Bundle Choice wiget ENDS. } -->
                 <?php
+                }
             });
         }       
     }

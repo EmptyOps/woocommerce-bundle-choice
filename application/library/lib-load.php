@@ -308,8 +308,9 @@ if(!class_exists('WBC_Loader')) {
 					// echo "localize_data inner else";
 					// wbc_pr('load_param');
 					// wbc_pr($param);
-						$peram = json_encode($peram);
-						$inline_script = 'var '.$peram.'= JSON.peram('. $peram .')';
+						$array_keys_peram = array_keys($param)[0];
+						$json_encode_peram = json_encode($param[array_keys($param)[0]];
+						$inline_script = 'var '.$array_keys_peram.'= JSON.peram('.$json_encode_peram.')';
 
 
 						wbc()->load->add_inline_script( '', $inline_script, 'common' );

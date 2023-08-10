@@ -36,7 +36,7 @@
 <?php
 
 $inline_script = 
-var text = "jQuery(document).ready(function(){\n" .
+ "jQuery(document).ready(function(){\n" .
   "        if (typeof(jQuery.fn.popup)==='function') {\n" .
   "            jQuery('.step.completed.second_mobile').popup({\n" .
   "                popup : jQuery('.ui.popup.second_mobile'),\n" .
@@ -46,7 +46,7 @@ var text = "jQuery(document).ready(function(){\n" .
   "                inline: true\n" .
   "            });\n" .
   "        }\n" .
-  "    });\n"
+  "    });\n" ;
 wbc()->load->add_inline_script( '', $inline_script, 'common' );
 
 if(false){

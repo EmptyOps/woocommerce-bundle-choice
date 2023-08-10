@@ -525,7 +525,7 @@ if( !is_ajax() ) {
   "            eowbc_toast_common('warning','Warning: It is recommended that you add sample data and then select and save your desired template. So that alternate widget templates can setup preview filters and make your work easy to set up them later. If the sample data is not available no preview filters can be set and you will need to add filters manually.<br><br>Also note that your existing filters will be disabled, you can enable them later at anytime by using bulk activate action.',20000);\n" .
   "                      \n" .
   "          });\n" .
-  "        });\n"
+  "        });\n";
 	    wbc()->load->add_inline_script( '', $inline_script, 'common' );
 
 		if(false) {
@@ -544,12 +544,12 @@ if( !is_ajax() ) {
 	else {
 		ob_start();
 		$inline_script = 
-		var text = "jQuery(document).ready(function($){\n" .
+  "jQuery(document).ready(function($){\n" .
   "          $(\"[name='first_category_altr_filt_widgts'],[name='second_category_altr_filt_widgts']\").on('change',function(){\n" .
   "            eowbc_toast_common('warning','Note that your existing filters will be disabled, and the new sample filters will be added. You can enable your existing filters later at anytime by using bulk activate action.',10000);\n" .
   "                      \n" .
   "          });\n" .
-  "        });\n"
+  "        });\n";
 		wbc()->load->add_inline_script( '', $inline_script, 'common' );
 		if(false) {
 		?>

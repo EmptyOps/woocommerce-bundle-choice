@@ -38,10 +38,12 @@ class View_Order {
             $query='select * from `'.$wpdb->prefix.'eo_wbc_order_maps` where order_id='.$order_id;
             $sets=$wpdb->get_row($query,'ARRAY_A');
             $sets=(json_decode($sets['order_map']));
-            //wbc()->common->pr($sets); 
+            //wbc()->common->pr($sets);
+
+            $get_sets_sets =  $this->get_sets($sets);
             $inline_script = 
             "jQuery(document).ready(function(){\n" .
-  "                    jQuery('table.shop_table.order_details>tbody').html('<?php echo $this->get_sets($sets); ?>');\n"
+  "                    jQuery('table.shop_table.order_details>tbody').html('$get_sets_sets');\n"
             wbc()->load->add_inline_script( '', $inline_script, 'common' );
             if(false) {           
             ?>

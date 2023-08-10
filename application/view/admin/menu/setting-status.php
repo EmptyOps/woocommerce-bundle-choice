@@ -4,11 +4,18 @@ defined( 'ABSPATH' ) || exit;
 //related to log module
 if(isset($_GET) && isset($_GET['action']) && wbc()->sanitize->get('action')=='clear' && !empty(wbc()->sanitize->get('ref')) ) {
 	\EOWBC_Error_Handler::clean_send();
+	$sanitize_sanitize = wbc()->sanitize->get('ref');
+	$inline_script = 
+	"window.location.href='".$sanitize_sanitize."';\n";
+	wbc()->load->add_inline_script( '', $inline_script, 'common' );
+
+	if(false){
 	?>
 		<script>
 			window.location.href='<?php echo wbc()->sanitize->get('ref'); ?>';
 		</script>
 	<?php
+	}
 }
 
 // if(isset($_GET) && isset($_GET['action']) && $_GET['action']=='report'){
@@ -54,7 +61,7 @@ if (false && function_exists('wp_enqueue_code_editor')): ?>
   "            setTimeout(function() {\n" .
   "              $('#eo_wbc_view_error').trigger('click');\n" .
   "            }, 3000);\n" .
-  "        });\n"
+  "        });\n";
    	wbc()->load->add_inline_script( '', $inline_script, 'common' );
 	if(false){
 	?>

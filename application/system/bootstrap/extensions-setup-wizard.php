@@ -432,7 +432,7 @@ if ( ! class_exists( 'Extensions_Setup_Wizard' ) ) {
   "                  e.stopPropagation();\n" .
   "                  window.location.href = \"<?php echo admin_url(\"admin.php?page=eowbc&eo_wbc_view_auto_jewel=1\"); ?>\";\n" .
   "                });\n" .
-  "              });\n"
+  "              });\n";
 						wbc()->load->add_inline_script( '', $inline_script, 'common' );
 
 						if(false){

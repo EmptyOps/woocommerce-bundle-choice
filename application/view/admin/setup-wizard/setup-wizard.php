@@ -72,9 +72,9 @@ $inline_script =
   "      e.stopPropagation();\n" .
   "      window.location.href = jQuery(this).data('link');\n" .
   "    });\n" .
-  "  });\n"
+  "  });\n";
 wbc()->load->add_inline_script( '', $inline_script, 'common' );
-
+if(false){
 ?>
 
 <script>
@@ -93,3 +93,4 @@ wbc()->load->add_inline_script( '', $inline_script, 'common' );
 		});
 	});
 </script>
+}
