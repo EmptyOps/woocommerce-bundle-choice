@@ -17,6 +17,16 @@ if(wbc()->options->get_option('tiny_features','tiny_features_unlock_swatches_sho
 	$label_class = array('ui','grey','text');
 }
 
+$wbc_vsp_active = apply_filters('wbc_vsp_active','');
+
+if($wbc_vsp_active) {
+	$wbc_vsp_option_class = array();
+	$wbc_vsp_option_attr = array();
+}else{
+	$wbc_vsp_option_class = array('lock');
+	$wbc_vsp_option_attr = array('disabled');
+}
+
 
 $form = array();
 
@@ -369,12 +379,14 @@ $form['data'] = array(
 					),
 				),
 				'tiny_features_video_loop'=>array(
-					'label'=>eowbc_lang('Start Video Loop?'),
+					'label'=>eowbc_lang('Start Video Loop? Pro'),
+					'label_class'=>array_merge( array(), $wbc_vsp_option_class),
 					'type'=>'checkbox',
 					'value'=>array(wbc()->options->get_option('tiny_features','tiny_features_video_loop')),
 					'sanitize'=>'sanitize_text_field',
 					'options'=>array('tiny_features_video_loop'=>'Loop'),
-					'class'=>array('fluid'),						
+					'class'=>array('fluid'),
+					'attr'=>array_merge( array(), $wbc_vsp_option_attr),						
 					// 'size_class'=>array('eight','wide'),
 					'inline'=>false,
 

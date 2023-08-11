@@ -287,7 +287,7 @@ class SP_WBC_Variations extends SP_Variations {
 
 		if($type == 'video_url') {
 
-			if(true or isset( $props['extra_params_org']['embed_type'] ) && $props['extra_params_org']['embed_type'] === 'iframe' ){
+			if(/*true or*/ isset( $props['extra_params_org']['embed_type'] ) && $props['extra_params_org']['embed_type'] === 'iframe' ){
 
 	            $video_url = $attachment_id;
 	            $url_trime = explode("?",$video_url)[0];
@@ -298,7 +298,7 @@ class SP_WBC_Variations extends SP_Variations {
 	                '?&playlist='.$playlist.
 	                (wbc()->options->get_option('tiny_features','tiny_features_video_mute') == 'tiny_features_video_mute' ? '&mute=1' : '').
 	                (wbc()->options->get_option('tiny_features','tiny_features_video_auto_play') == 'tiny_features_video_auto_play' ? '&autoplay=1' : '').
-	                (wbc()->options->get_option('tiny_features','tiny_features_video_loop') == 'tiny_features_video_loop' ? '&loop=1' : '')
+	                apply_filters('wbc_vsp_video_loop_option','', 'youtube_url')
 	                ;  
 			}
 
