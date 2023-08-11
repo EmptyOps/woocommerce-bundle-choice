@@ -44,7 +44,7 @@ $inline_script =
   "        jQuery('[data-clickable_breadcrumb]').on('click',function(){\n" .
   "            window.location.href = jQuery(this).data('clickable_breadcrumb'); \n" .
   "        });\n" .
-  "    }); \n"
+  "    }); \n";
 wbc()->load->add_inline_script( '', $inline_script, 'common' );
 
 if(false){
@@ -65,5 +65,4 @@ if(false){
         });
     }); 
 </script>
-}
 <?php } ?>

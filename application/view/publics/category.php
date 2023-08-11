@@ -93,6 +93,14 @@
                     ?>
                     <br/>
                     <div style="display:block;clear:both;width: 100% !important"></div>
+                    <?php
+                    $woocommerce_result_count = ($total_text);
+                    $inline_script = 
+                    "jQuery(document).ready(function($){\n" .
+  "                            $('.woocommerce-result-count').html('".$woocommerce_result_count."')\n" .
+  "                        });\n";
+                    wbc()->load->add_inline_script( '', $inline_script, 'common' );
+                    ?>
                     <script type="text/javascript">                        
                         jQuery(document).ready(function($){
                             $('.woocommerce-result-count').html('<?php _e($total_text); ?>')
@@ -231,7 +239,7 @@ var text = "$ = jQuery;\n" .
   "\n" .
   "        // \n" .
   "        wbc_attach_card_views();\n" .
-  "    });\n"
+  "    });\n";
 wbc()->load->add_inline_script( '', $inline_script, 'common' );
 if(false){
 ?>
@@ -261,7 +269,9 @@ if(false){
         wbc_attach_card_views();
     });
 </script>
-}                    
+<?php
+}
+?>                    
 <style type="text/css">
     .products{
         display: block !important;

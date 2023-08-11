@@ -63,13 +63,13 @@ if(!empty($attributes) and is_array($attributes)){
         }		
 	}
 }
-
+$str_replace_str_replace = str_replace('"','\"',str_replace("'","\'",json_encode($_childs)));
 $inline_script = 
 
-  "var text = \"jQuery(window).load(function() {\\n\" +\n" .
+  "\"jQuery(window).load(function() {\\n\" +\n" .
   "  \"    $ = jQuery;\\n\" +\n" .
   "  \"    \\n\" +\n" .
-  "  \"    _childs = JSON.parse('<?php echo str_replace('\\\"','\\\\\\\"',str_replace(\\\"'\\\",\\\"\\\\'\\\",json_encode($_childs))); ?>');\\n\" +\n" .
+  "  \"    _childs = JSON.parse('".$str_replace_str_replace."');\\n\" +\n" .
   "  \"    jQuery(\\\".ui.dropdown:has(#d_fconfig_filter)\\\").dropdown({\\n\" +\n" .
   "  \"      onChange:function() {\\n\" +\n" .
   "  \"        let filter_field = $(this).dropdown('get value');\\n\" +\n" .
@@ -123,7 +123,7 @@ $inline_script =
   "  \"        }\\n\" +\n" .
   "  \"      \\n\" +\n" .
   "  \"      });\\n\" +\n" .
-  "  \"  });  \\n\"\n"
+  "  \"  });  \\n\"\n";
 
 wbc()->load->add_inline_script( '', $inline_script, 'common' );
 

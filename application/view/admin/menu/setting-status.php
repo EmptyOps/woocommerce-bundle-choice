@@ -53,9 +53,10 @@ wbc()->load->asset('js','admin/setting_status');
 	//set false to not use it because textarea text are not visible until user do not click on it once however if it is inside the first loading tab it becomes visible but now its in secnd tab. enable it when there a fix available. 
 if (false && function_exists('wp_enqueue_code_editor')): ?>
 	<?php
+	$wp_enqueue_code_editor_json_encode = json_encode(array('codeEditor' =>wp_enqueue_code_editor(array('type' => 'text'))));
 	$inline_script = 
   "jQuery(document).ready(function($) {     \n" .
-  "            var errors=<?php echo json_encode(array('codeEditor' =>wp_enqueue_code_editor(array('type' => 'text')))); ?>                              \n" .
+  "            var errors= '".$wp_enqueue_code_editor_json_encode."';\n" .
   "            wp.codeEditor.initialize($('#eo_wbc_view_error'), errors); \n" .
   "\n" .
   "            setTimeout(function() {\n" .

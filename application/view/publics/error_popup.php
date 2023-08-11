@@ -12,7 +12,7 @@ $inline_script =
   "    jQuery.fn.ui_accordion = jQuery.fn.accordion;\n" .
   "    jQuery.fn.ui_modal = jQuery.fn.modal;\n" .
   "    jQuery.fn.ui_slider = jQuery.fn.slider;\n" .
-  "  }\n"
+  "  }\n";
 wbc()->load->add_inline_script( '', $inline_script, 'common' );
 
 if(false){
@@ -42,7 +42,7 @@ $inline_script =
   "    jQuery.fn.accordion = jQuery.fn.ui_accordion;\n" .
   "    jQuery.fn.modal = jQuery.fn.ui_modal;\n" .
   "    jQuery.fn.slider = jQuery.fn.ui_slider;\n" .
-  "  }\n"
+  "  }\n";
 
 wbc()->load->add_inline_script( '', $inline_script, 'common' );
 
@@ -57,7 +57,9 @@ if(false){
     jQuery.fn.slider = jQuery.fn.ui_slider;
   }
 </script>
+<?php
 }
+?>
 <!-- Created with Wordpress plugin - WooCommerce Product bundle choice -->
 <div class="ui modal align center tiny centered">
 <div class="ui header">              

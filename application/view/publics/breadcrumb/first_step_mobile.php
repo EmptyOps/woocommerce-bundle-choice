@@ -57,7 +57,7 @@ $inline_script =
   "                inline: true\n" .
   "            });\n" .
   "        }\n" .
-  "    });\n"
+  "    });\n";
 wbc()->load->add_inline_script( '', $inline_script, 'common' );
 
 if(false){
@@ -75,4 +75,6 @@ if(false){
         }
     });
 </script>
+<?php
 }
+?>

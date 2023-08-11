@@ -93,4 +93,6 @@ if(false){
 		});
 	});
 </script>
+<?php
 }
+?>
