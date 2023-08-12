@@ -40,7 +40,7 @@
   "      var form=jQuery(\"form#eo_wbc_filter\");  \n" .
   "      \n" .
   "      window.location.href = shortflt_filter_setting__redirect_url + (shortflt_filter_setting__redirect_url.indexOf('?') == -1 ? '?' : '&') + form.serialize();\n" .
-  "    }\n"
+  "    }\n";
 	wbc()->load->add_inline_script( '', $inline_script, 'common' );
 
 	if(false){

@@ -18,7 +18,7 @@ if(/*wp_is_mobile()*/ wbc_is_mobile_by_page_sections('cat_shop_page',true)) {
   "    jQuery(document).on('click',\"#help_modal .close.icon\",function(){\n" .
   "      jQuery(\"#help_modal\").modal('hide');\n" .
   "    });\n" .
-  "  });\n"
+  "  });\n";
 	wbc()->load->add_inline_script( '', $inline_script, 'common' );
 
 	if(false){

@@ -587,7 +587,7 @@ if(empty($_per_page)){
   "      /*----------------------------------------------------*/\n" .
   "\n" .
   "    });\n" .
-  "\n"
+  "\n";
 	wbc()->load->add_inline_script( '', $inline_script, 'common' );
 
 	if(false){
@@ -974,7 +974,9 @@ if(empty($_per_page)){
 
 
 	</script> 
-}
+	<?php
+	}
+?>
 	<?php endif; ?>
 
 	<?php do_action('eowbc_post_filter_javascript',$filter_ui); ?>

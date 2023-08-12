@@ -1630,7 +1630,7 @@ $inline_script =
   "        $(this).find('.icon').addClass('rotate-up');\n" .
   "        $('table.variations').slideToggle(\"slow\");\n" .
   "      }                \n" .
-  "    });\n"
+  "    });\n";
 
   
 wbc()->load->add_inline_script( '', $inline_script, 'common' );
