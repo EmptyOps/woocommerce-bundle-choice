@@ -91,9 +91,9 @@ class Preview {
         add_action('wp_footer',function(){
             $inline_script = 
             "jQuery(document).ready(function($){\n" .
-  "                        jQuery('.special.cards .image').dimmer({ on: 'hover' });\n" .
-  "           });\n"
-             ;
+            "   jQuery('.special.cards .image').dimmer({ on: 'hover' });\n" .
+            "});\n"
+            ;
             wbc()->load->add_inline_script( '', $inline_script, 'common' );
             if(false) {
             ?>

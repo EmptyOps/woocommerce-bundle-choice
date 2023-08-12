@@ -94,12 +94,13 @@
                     <br/>
                     <div style="display:block;clear:both;width: 100% !important"></div>
                     <?php
-                    $woocommerce_result_count = ($total_text);
+                    $woocommerce_result_count = _e($total_text);
                     $inline_script = 
                     "jQuery(document).ready(function($){\n" .
-  "                            $('.woocommerce-result-count').html('".$woocommerce_result_count."')\n" .
-  "                        });\n";
+                    " $('.woocommerce-result-count').html('".$woocommerce_result_count."')\n" .
+                    "});\n";
                     wbc()->load->add_inline_script( '', $inline_script, 'common' );
+                    if(false){
                     ?>
                     <script type="text/javascript">                        
                         jQuery(document).ready(function($){
@@ -107,6 +108,7 @@
                         });
                     </script>
                     <?php
+                    }
                 }
 
                 $prev_product_id = wbc()->sanitize->get('FIRST') | wbc()->sanitize->get('SECOND');
@@ -216,30 +218,30 @@
 <!-- Created with Wordpress plugin - WooCommerce Product bundle choice -->
 <?php
 $inline_script = 
-var text = "$ = jQuery;\n" .
-  "\n" .
-  "    // supposed to be used inside wo_wbc_filter.js\n" .
-  "    var is_card_view_rendered = true;\n" .
-  "\n" .
-  "    /**\n" .
-  "     * \n" .
-  "     */\n" .
-  "    function wbc_attach_card_views() { \n" .
-  "        jQuery(\".products,.product-listing,.row-inner>.col-lg-9:eq(0)\").html(jQuery(\".eo_wbc_hidden_data\").html());\n" .
-  "        jQuery('.special.cards .image').dimmer({on:'hover',duration:{ show : 0, hide : 0 }});\n" .
-  "        jQuery('.button[data-link]').on('click',function(e){\n" .
-  "            e.preventDefault();\n" .
-  "            e.stopPropagation();\n" .
-  "            window.location.href=$(this).attr('data-link');\n" .
-  "        });\n" .
-  "    }\n" .
-  "\n" .
-  "    jQuery(document).ready(function($){\n" .
-  "        //code moved to a function wbc_attach_card_views above so that it can be called after ajax search\n" .
-  "\n" .
-  "        // \n" .
-  "        wbc_attach_card_views();\n" .
-  "    });\n";
+"$ = jQuery;\n" .
+"\n" .
+"    // supposed to be used inside wo_wbc_filter.js\n" .
+"    var is_card_view_rendered = true;\n" .
+"\n" .
+"    /**\n" .
+"     * \n" .
+"     */\n" .
+"    function wbc_attach_card_views() { \n" .
+"        jQuery(\".products,.product-listing,.row-inner>.col-lg-9:eq(0)\").html(jQuery(\".eo_wbc_hidden_data\").html());\n" .
+"        jQuery('.special.cards .image').dimmer({on:'hover',duration:{ show : 0, hide : 0 }});\n" .
+"        jQuery('.button[data-link]').on('click',function(e){\n" .
+"            e.preventDefault();\n" .
+"            e.stopPropagation();\n" .
+"            window.location.href=$(this).attr('data-link');\n" .
+"        });\n" .
+"    }\n" .
+"\n" .
+"    jQuery(document).ready(function($){\n" .
+"        //code moved to a function wbc_attach_card_views above so that it can be called after ajax search\n" .
+"\n" .
+"        // \n" .
+"        wbc_attach_card_views();\n" .
+"    });\n";
 wbc()->load->add_inline_script( '', $inline_script, 'common' );
 if(false){
 ?>

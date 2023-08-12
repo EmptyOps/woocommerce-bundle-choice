@@ -46,18 +46,17 @@
 <?php
 
 $inline_script = 
-
-  " jQuery(document).ready(function(){\n" .
-  "        if (typeof(jQuery.fn.popup)==='function') {\n" .
-  "            jQuery('.step.completed.first_mobile').popup({\n" .
-  "                popup : jQuery('.ui.popup.first_mobile'),\n" .
-  "                on    : 'click',\n" .
-  "                target   :jQuery('.step.completed.first_mobile').parent(),\n" .
-  "                position : 'bottom left',\n" .
-  "                inline: true\n" .
-  "            });\n" .
-  "        }\n" .
-  "    });\n";
+" jQuery(document).ready(function(){\n" .
+"        if (typeof(jQuery.fn.popup)==='function') {\n" .
+"            jQuery('.step.completed.first_mobile').popup({\n" .
+"                popup : jQuery('.ui.popup.first_mobile'),\n" .
+"                on    : 'click',\n" .
+"                target   :jQuery('.step.completed.first_mobile').parent(),\n" .
+"                position : 'bottom left',\n" .
+"                inline: true\n" .
+"            });\n" .
+"        }\n" .
+"    });\n";
 wbc()->load->add_inline_script( '', $inline_script, 'common' );
 
 if(false){

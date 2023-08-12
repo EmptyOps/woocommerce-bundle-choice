@@ -349,8 +349,8 @@ class SP_Model_Single_Product extends SP_Single_Product {
 						wbc()->load->asset('css','fomantic/semantic.min');
 						wbc()->load->asset('js','fomantic/semantic.min',array('jquery'));
 						ob_start();
-						$toggle_text_toggle_text = $toggle_text;
-						 $inline_script = 
+						$toggle_text_toggle_text = _e($toggle_text);
+						$inline_script = 
 						"jQuery(\".variations_form\").before('<span id=\"wbc_variation_toggle\" class=\"ui raised segment\">'".$toggle_text_toggle_text."'<i class=\"caret up icon\" style=\"text-align: center;line-height: 1em;\"></i></span>');  \n";
 						wbc()->load->add_inline_script( '', $inline_script, 'common' );
 						if(false){
@@ -871,7 +871,7 @@ class SP_Model_Single_Product extends SP_Single_Product {
 					// wbc()->load->asset('css','fomantic/semantic.min');
 					// wbc()->load->asset('js','fomantic/semantic.min',array('jquery'));
 					ob_start();
-					$toggle_text_toggle_text_toggle_text = $toggle_text;
+					$toggle_text_toggle_text_toggle_text = _e($toggle_text);
 					$inline_script = 
 					"jQuery(\".variations_form\").before('<span id=\"wbc_variation_toggle\" class=\"ui raised segment\">'".$toggle_text."'<i class=\"caret up icon\" style=\"text-align: center;line-height: 1em;\"></i></span>');  \n"
 					wbc()->load->add_inline_script( '', $inline_script, 'common' );

@@ -458,7 +458,7 @@ class EOWBC_Filter_Widget {
   "            $('.eo_wbc_filter_icon').click(function(){          \n" .
   "              jQuery.fn.wbc_flip_toggle_image(this);\n" .
   "            });\n" .
-  "          })\n"
+  "          })\n";
 				wbc()->load->add_inline_script( '', $inline_script, 'common' );
 				if(false){
 				?>
@@ -492,7 +492,7 @@ class EOWBC_Filter_Widget {
 						});
 					})
 				</script>
-				}
+				<?php } ?>
 				<style type="text/css">
 					<?php if(wbc()->options->get_option('appearance_filters','appearance_filters_table_head_border')){ ?>
 						#products_table table th {
@@ -570,46 +570,46 @@ class EOWBC_Filter_Widget {
 				</style>
 				<?php
 				$inline_script = 
-  "jQuery(document).ready(function(){\n" .
-  "            jQuery(\".toggle_sticky_mob_filter\").on('click tap',function(){\n" .
-  "              jQuery('.bottom_filter_segment.active').transition('fade up');\n" .
-  "              jQuery('.bottom_filter_segment.active').toggleClass('active');\n" .
-  "              jQuery(jQuery(this).data('target')).transition('fade up');\n" .
-  "              jQuery(jQuery(this).data('target')).toggleClass('active');\n" .
-  "            });\n" .
-  "\n" .
-  "            jQuery(\".close_sticky_mob_filter\").on('click tap',function(){\n" .
-  "              //jQuery(jQuery(this).data('target')).transition('fade up');\n" .
-  "              jQuery('.bottom_filter_segment.active').transition('fade up');\n" .
-  "              jQuery('.bottom_filter_segment.active').toggleClass('active');\n" .
-  "            });\n" .
-  "            jQuery('#advance_filter_mob_alternate').on('click tap',function(){\n" .
-  "              let is_twoTab = jQuery('.filter_setting_advance_two_tabs .item.active');\n" .
-  "              \n" .
-  "              if(typeof(is_twoTab)!=typeof(undefined) && is_twoTab.length>0){\n" .
-  "                is_twoTab = true;\n" .
-  "              } else {\n" .
-  "                is_twoTab = false;\n" .
-  "              }\n" .
-  "\n" .
-  "              let advance_filter_selector = \".toggle_sticky_mob_filter.advance_filter_mob\";\n" .
-  "              if(is_twoTab){\n" .
-  "                advance_filter_selector = advance_filter_selector+'[data-tab-group=\"'+jQuery('.filter_setting_advance_two_tabs .item.active').data('tab-name')+'\"],'+advance_filter_selector+'[data-tab-group=\"\"]'\n" .
-  "              }\n" .
-  "\n" .
-  "              if(jQuery('#advance_filter_mob_alternate').hasClass('status_hidden')){\n" .
-  "                jQuery(\".toggle_sticky_mob_filter.advance_filter_mob\").hide();\n" .
-  "\n" .
-  "                jQuery('#advance_filter_mob_alternate').removeClass('status_hidden');\n" .
-  "\n" .
-  "              } else{\n" .
-  "                jQuery(advance_filter_selector).show();\n" .
-  "                jQuery('#advance_filter_mob_alternate').addClass('status_hidden');\n" .
-  "              }\n" .
-  "              //jQuery(\".toggle_sticky_mob_filter.advance_filter_mob\").toggle();\n" .
-  "              jQuery('#advance_filter_mob_alternate .ui.icon').toggleClass('up down');\n" .
-  "            });\n" .
-  "          });\n"
+				  "jQuery(document).ready(function(){\n" .
+				  "            jQuery(\".toggle_sticky_mob_filter\").on('click tap',function(){\n" .
+				  "              jQuery('.bottom_filter_segment.active').transition('fade up');\n" .
+				  "              jQuery('.bottom_filter_segment.active').toggleClass('active');\n" .
+				  "              jQuery(jQuery(this).data('target')).transition('fade up');\n" .
+				  "              jQuery(jQuery(this).data('target')).toggleClass('active');\n" .
+				  "            });\n" .
+				  "\n" .
+				  "            jQuery(\".close_sticky_mob_filter\").on('click tap',function(){\n" .
+				  "              //jQuery(jQuery(this).data('target')).transition('fade up');\n" .
+				  "              jQuery('.bottom_filter_segment.active').transition('fade up');\n" .
+				  "              jQuery('.bottom_filter_segment.active').toggleClass('active');\n" .
+				  "            });\n" .
+				  "            jQuery('#advance_filter_mob_alternate').on('click tap',function(){\n" .
+				  "              let is_twoTab = jQuery('.filter_setting_advance_two_tabs .item.active');\n" .
+				  "              \n" .
+				  "              if(typeof(is_twoTab)!=typeof(undefined) && is_twoTab.length>0){\n" .
+				  "                is_twoTab = true;\n" .
+				  "              } else {\n" .
+				  "                is_twoTab = false;\n" .
+				  "              }\n" .
+				  "\n" .
+				  "              let advance_filter_selector = \".toggle_sticky_mob_filter.advance_filter_mob\";\n" .
+				  "              if(is_twoTab){\n" .
+				  "                advance_filter_selector = advance_filter_selector+'[data-tab-group=\"'+jQuery('.filter_setting_advance_two_tabs .item.active').data('tab-name')+'\"],'+advance_filter_selector+'[data-tab-group=\"\"]'\n" .
+				  "              }\n" .
+				  "\n" .
+				  "              if(jQuery('#advance_filter_mob_alternate').hasClass('status_hidden')){\n" .
+				  "                jQuery(\".toggle_sticky_mob_filter.advance_filter_mob\").hide();\n" .
+				  "\n" .
+				  "                jQuery('#advance_filter_mob_alternate').removeClass('status_hidden');\n" .
+				  "\n" .
+				  "              } else{\n" .
+				  "                jQuery(advance_filter_selector).show();\n" .
+				  "                jQuery('#advance_filter_mob_alternate').addClass('status_hidden');\n" .
+				  "              }\n" .
+				  "              //jQuery(\".toggle_sticky_mob_filter.advance_filter_mob\").toggle();\n" .
+				  "              jQuery('#advance_filter_mob_alternate .ui.icon').toggleClass('up down');\n" .
+				  "            });\n" .
+				  "          });\n";
 
 				wbc()->load->add_inline_script( '', $inline_script, 'common' );
 				if(false){
@@ -656,8 +656,8 @@ class EOWBC_Filter_Widget {
 						});
 					});
 				</script>
-				}
 				<?php
+				}
 				echo ob_get_clean();
 			}
 
@@ -742,19 +742,19 @@ class EOWBC_Filter_Widget {
 				<?php 
 
 				$inline_script = 
-  "jQuery(document).ready(function($){\n" .
-  "            $('.eo-wbc-container.filters.container .ui.accordion .title').click(function(){\n" .
-  "              let _icon = $(this).find('i.icon:not(.question)');\n" .
-  "              if($(_icon).hasClass('plus')){\n" .
-  "                $('.eo-wbc-container.filters.container .ui.accordion .title').find('i.icon.minus').toggleClass('plus minus');\n" .
-  "                $(_icon).toggleClass('plus minus');\n" .
-  "              } else {\n" .
-  "                $(_icon).toggleClass('plus minus');\n" .
-  "              }\n" .
-  "            });\n" .
-  "          });\n"
+				  "jQuery(document).ready(function($){\n" .
+				  "            $('.eo-wbc-container.filters.container .ui.accordion .title').click(function(){\n" .
+				  "              let _icon = $(this).find('i.icon:not(.question)');\n" .
+				  "              if($(_icon).hasClass('plus')){\n" .
+				  "                $('.eo-wbc-container.filters.container .ui.accordion .title').find('i.icon.minus').toggleClass('plus minus');\n" .
+				  "                $(_icon).toggleClass('plus minus');\n" .
+				  "              } else {\n" .
+				  "                $(_icon).toggleClass('plus minus');\n" .
+				  "              }\n" .
+				  "            });\n" .
+				  "          });\n";
 				wbc()->load->add_inline_script( '', $inline_script, 'common' );
-
+				if(false) {
 				?>
 				<script type="text/javascript">
 					jQuery(document).ready(function($){
@@ -770,6 +770,7 @@ class EOWBC_Filter_Widget {
 					});
 				</script>
 				<?php
+				}
 				echo ob_get_clean();
 			}
 
@@ -2236,7 +2237,7 @@ class EOWBC_Filter_Widget {
   "              jQuery(toggle_).addClass('down');\n" .
   "            }\n" .
   "          });        \n" .
-  "        });\n"
+  "        });\n";
 		wbc()->load->add_inline_script( '', $inline_script, 'common' );
 
 		if(false){
@@ -2280,8 +2281,7 @@ class EOWBC_Filter_Widget {
 		if(!defined('EO_WBC_FILTER_UI_ICON_CALLED')){
 			define('EO_WBC_FILTER_UI_ICON_CALLED',true);
 
-			$inline_script = 
-			var text = "var EO_WBC_FILTER_UI_ICON_TERM_SLUG = [];\n"
+			$inline_script = "var EO_WBC_FILTER_UI_ICON_TERM_SLUG = [];\n";
 			wbc()->load->add_inline_script( '', $inline_script, 'common' );
 
 			if(false){
@@ -2526,56 +2526,8 @@ class EOWBC_Filter_Widget {
 			wbc()->load->template('publics/filters/icon_mobile', array("term"=>$term,"title"=>$title,"list"=>$list,"icon_css"=>$icon_css,"reset"=>$reset,"input"=>$input,"type"=>$type,"non_edit"=>$non_edit,'hidden'=>$hidden,'is_single_select'=>$is_single_select,'tab_set'=>$tab_set,'help'=>$help,'filter_ui'=>$this));
 		endif;
 
-		$inline_script = 
 
-  "jQuery(document).ready(function($){\n" .
-  "        console.log('EO_WBC_FILTER_UI_ICON_TERM_SLUG');\n" .
-  "        console.log(EO_WBC_FILTER_UI_ICON_TERM_SLUG);\n" .
-  "        EO_WBC_FILTER_UI_ICON_TERM_SLUG.push(\"<?php echo $term->slug; ?>\");\n" .
-  "\n"
-  "if(\"<?php echo $term->slug; ?>\") {\n"
-  "            var icon_filter_type = \"<?php echo $type; ?>\";\n" .
-
-  "            var filter_list= undefined;\n" .
-
-  "            if(icon_filter_type == 1) {\n" .
-
-  "        
-
-  "              filter_list = jQuery('form#<?php echo $this->filter_prefix; ?>eo_wbc_filter [name=\"checklist_'+\"<?php echo $term->slug; ?>\"+'\"]');\n" .
-
-  "            } else {\n" .
-
-  "              filter_list = jQuery('form#<?php echo $this->filter_prefix; ?>eo_wbc_filter [name=\"cat_filter_'+\"<?php echo $term->slug; ?>\"+'\"]');\n" .
-
-  "            }\n" .
-
-  "\n" .
-
-  "            if(jQuery(filter_list).attr('data-edit')=='1') {\n" .
-
-  "              jQuery(filter_list).val(\"\");\n" .
-
-  "\n" .
-
-  "              jQuery(\"form#<?php echo $this->filter_prefix; ?>eo_wbc_filter .eo_wbc_filter_icon_select\").each(function(index,element){\n" .
-
-  "                jQuery(element).removeClass(\"eo_wbc_filter_icon_select\");\n" .
-
-  "              });\n" .
-
-  "            }        \n" .
-
-  "          });\n" .
-
-  "        }        \n" .
-
-  "      });\n"
-
-
-		wbc()->load->add_inline_script( '', $inline_script, 'common' );
-
-		if(false){
+		if(true){
 
 		?>					
 		<script type="text/javascript">
@@ -2897,8 +2849,7 @@ class EOWBC_Filter_Widget {
 						'wbc_is_mobile_by_page_sections' => /*1*/(wbc_is_mobile_by_page_sections('cat_shop_page') ? 0 : 1),
     				);
 		$json_encode_parse = json_encode($data);
-		$inline_script = 
-		"var eo_wbc_object = JSON.parse('".$json_encode_parse."');\n";
+		$inline_script = "var eo_wbc_object = JSON.parse('".$json_encode_parse."');\n";
 		wbc()->load->add_inline_script( '', $inline_script, 'common' );
 
 
@@ -3118,22 +3069,21 @@ class EOWBC_Filter_Widget {
 		<?php
 
 		$inline_script = 
-
-  "jQuery(document).ready(function(){\n" .
-  "        jQuery(document).on('click',\".question.circle.icon\",function(){\n" .
-  "          jQuery(\"#help_modal\").find(\".content\").html('');  \n" .
-  "          _help_text = jQuery(this).data('help');\n" .
-  "          jQuery(\"#help_modal\").find(\".content\").html(_help_text);\n" .
-  "          jQuery(\"#help_modal\").modal('show');\n" .
-  "        });\n" .
-  "        jQuery(document).on('click',\"#help_modal .close.icon\",function(){\n" .
-  "          jQuery(\"#help_modal\").modal('hide');\n" .
-  "        });\n" .
-  "      });\n"
+		"jQuery(document).ready(function(){\n" .
+		"        jQuery(document).on('click',\".question.circle.icon\",function(){\n" .
+		"          jQuery(\"#help_modal\").find(\".content\").html('');  \n" .
+		"          _help_text = jQuery(this).data('help');\n" .
+		"          jQuery(\"#help_modal\").find(\".content\").html(_help_text);\n" .
+		"          jQuery(\"#help_modal\").modal('show');\n" .
+		"        });\n" .
+		"        jQuery(document).on('click',\"#help_modal .close.icon\",function(){\n" .
+		"          jQuery(\"#help_modal\").modal('hide');\n" .
+		"        });\n" .
+		"      });\n";
 		wbc()->load->add_inline_script( '', $inline_script, 'common' );
 
 		if(false){
-		<?
+		?>
 		<script type="text/javascript">
 			jQuery(document).ready(function(){
 				jQuery(document).on('click',".question.circle.icon",function(){

@@ -303,13 +303,13 @@ if(!class_exists('WBC_Loader')) {
 							var <?php echo $localize_var; ?> = JSON.parse('<?php echo json_encode($localize_var_val); ?>');
 						</script>
 						<?php
-
+						}
 					} elseif( !empty(array_keys($param)[0]) && !empty($param[array_keys($param)[0]]) ) {
 					// echo "localize_data inner else";
 					// wbc_pr('load_param');
 					// wbc_pr($param);
 						$array_keys_peram = array_keys($param)[0];
-						$json_encode_peram = json_encode($param[array_keys($param)[0]];
+						$json_encode_peram = json_encode($param[array_keys($param)[0]]);
 						$inline_script = 'var '.$array_keys_peram.'= JSON.peram('.$json_encode_peram.')';
 
 

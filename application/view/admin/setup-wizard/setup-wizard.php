@@ -59,20 +59,20 @@ box-shadow: none;">
 <?php
 $setting_status_setting_status_setting = wbc()->options->get_option('setting_status_setting_status_setting','inventory_type', '');
 $inline_script = 
-  "jQuery(document).ready(function(){\n" .
-  "    jQuery('.ui.dropdown').dropdown();\n" .
-  "\n" .
-  "    jQuery('[name=\"eo_wbc_inventory_type\"]').parent().dropdown('set selected','".$setting_status_setting_status_setting."';    \n" .
-  "\n" .
-  "    jQuery('.ui.checkbox').checkbox();\n" .
-  "\n" .
-  "    jQuery(\"#create_product\").on('click',function(e){\n" .
-  "      console.log('preventDefault');\n" .
-  "      e.preventDefault();\n" .
-  "      e.stopPropagation();\n" .
-  "      window.location.href = jQuery(this).data('link');\n" .
-  "    });\n" .
-  "  });\n";
+"jQuery(document).ready(function(){\n" .
+"    jQuery('.ui.dropdown').dropdown();\n" .
+"\n" .
+"    jQuery('[name=\"eo_wbc_inventory_type\"]').parent().dropdown('set selected','".$setting_status_setting_status_setting."';    \n" .
+"\n" .
+"    jQuery('.ui.checkbox').checkbox();\n" .
+"\n" .
+"    jQuery(\"#create_product\").on('click',function(e){\n" .
+"      console.log('preventDefault');\n" .
+"      e.preventDefault();\n" .
+"      e.stopPropagation();\n" .
+"      window.location.href = jQuery(this).data('link');\n" .
+"    });\n" .
+"  });\n";
 wbc()->load->add_inline_script( '', $inline_script, 'common' );
 if(false){
 ?>
