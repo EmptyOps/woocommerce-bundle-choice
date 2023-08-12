@@ -416,21 +416,21 @@ class Setup_Wizard {
 					?>
 					
 					<?php
-				  $get_option_get_option = ('eo_wbc_inventory_type','');
-				  $admin_url_admin_url = admin_url("admin.php?page=eowbc&eo_wbc_view_auto_jewel=1");	
-				  $inline_script = 
-				  "jQuery(document).ready(function(){\n" .
-				  "              jQuery('.ui.dropdown').dropdown();\n" .
-				  "              jQuery('[name=\"eo_wbc_inventory_type\"]').parent().dropdown('set selected','".$get_option_get_option."';    \n" .
-				  "              jQuery('.ui.checkbox').checkbox();\n" .
-				  "\n" .
-				  "              jQuery(\"#create_product\").on('click',function(e){\n" .
-				  "                console.log('preventDefault');\n" .
-				  "                e.preventDefault();\n" .
-				  "                e.stopPropagation();\n" .
-				  "                window.location.href = '".$admin_url_admin_url."';\n" .
-				  "              });\n" .
-				  "            });\n";
+					$get_option_get_option = get_option('eo_wbc_inventory_type','');
+					$admin_url_admin_url = admin_url("admin.php?page=eowbc&eo_wbc_view_auto_jewel=1");	
+					$inline_script = 
+					"jQuery(document).ready(function(){\n" .
+					"              jQuery('.ui.dropdown').dropdown();\n" .
+					"              jQuery('[name=\"eo_wbc_inventory_type\"]').parent().dropdown('set selected','".$get_option_get_option."';    \n" .
+					"              jQuery('.ui.checkbox').checkbox();\n" .
+					"\n" .
+					"              jQuery(\"#create_product\").on('click',function(e){\n" .
+					"                console.log('preventDefault');\n" .
+					"                e.preventDefault();\n" .
+					"                e.stopPropagation();\n" .
+					"                window.location.href = '".$admin_url_admin_url."';\n" .
+					"              });\n" .
+					"            });\n";
 					wbc()->load->add_inline_script( '', $inline_script, 'common' );
 					if(false){
 					?>

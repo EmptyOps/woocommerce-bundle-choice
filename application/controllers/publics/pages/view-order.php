@@ -43,7 +43,8 @@ class View_Order {
             $get_sets_sets =  $this->get_sets($sets);
             $inline_script = 
             "jQuery(document).ready(function(){\n" .
-  "                    jQuery('table.shop_table.order_details>tbody').html('$get_sets_sets');\n"
+            "   jQuery('table.shop_table.order_details>tbody').html('$get_sets_sets');\n".
+            "});";
             wbc()->load->add_inline_script( '', $inline_script, 'common' );
             if(false) {           
             ?>

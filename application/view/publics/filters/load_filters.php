@@ -7,18 +7,17 @@ if(/*wp_is_mobile()*/ wbc_is_mobile_by_page_sections('cat_shop_page',true)) {
 	<?php
 
 	$inline_script =
-	 
-  "jQuery(document).ready(function(){\n" .
-  "    jQuery(document).on('click',\".question.circle.icon\",function(){\n" .
-  "      jQuery(\"#help_modal\").find(\".content\").html('');  \n" .
-  "      _help_text = jQuery(this).data('help');\n" .
-  "      jQuery(\"#help_modal\").find(\".content\").html(_help_text);\n" .
-  "      jQuery(\"#help_modal\").modal('show');\n" .
-  "    });\n" .
-  "    jQuery(document).on('click',\"#help_modal .close.icon\",function(){\n" .
-  "      jQuery(\"#help_modal\").modal('hide');\n" .
-  "    });\n" .
-  "  });\n"
+	"jQuery(document).ready(function(){\n" .
+	"    jQuery(document).on('click',\".question.circle.icon\",function(){\n" .
+	"      jQuery(\"#help_modal\").find(\".content\").html('');  \n" .
+	"      _help_text = jQuery(this).data('help');\n" .
+	"      jQuery(\"#help_modal\").find(\".content\").html(_help_text);\n" .
+	"      jQuery(\"#help_modal\").modal('show');\n" .
+	"    });\n" .
+	"    jQuery(document).on('click',\"#help_modal .close.icon\",function(){\n" .
+	"      jQuery(\"#help_modal\").modal('hide');\n" .
+	"    });\n" .
+	"  });\n";
 	wbc()->load->add_inline_script( '', $inline_script, 'common' );
 
 	if(false){

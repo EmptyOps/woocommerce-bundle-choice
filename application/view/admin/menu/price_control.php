@@ -410,11 +410,11 @@ if( $jpc_str ) {
 $eo_wbc_jpc_attributes_values = json_encode(eo_wbc_jpc_attributes_values());
 $jpc_data_jpc_data = json_encode( $jpc_data );
 $inline_script = 
-  "window.eo_wbc=new Object();\n" .
-  "\n" .
-  "  window.eo_wbc.attributes=JSON.parse('".$eo_wbc_jpc_attributes_values."');\n" .
-  "\n" .
-  "    window.eo_wbc.jpc_data=JSON.parse('".$jpc_data_jpc_data."');\n";
+"window.eo_wbc=new Object();\n" .
+"\n" .
+"  window.eo_wbc.attributes=JSON.parse('".$eo_wbc_jpc_attributes_values."');\n" .
+"\n" .
+"    window.eo_wbc.jpc_data=JSON.parse('".$jpc_data_jpc_data."');\n";
   
 wbc()->load->add_inline_script( '', $inline_script, 'common' );
 if(false){

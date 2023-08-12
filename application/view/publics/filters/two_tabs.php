@@ -48,12 +48,14 @@ if( true or in_array( wbc()->common->get_category('category',null,array(wbc()->o
         <?php
 
         $inline_script = 
-           "  jQuery(document).ready(function($){\n"
-           "window.document.splugins.events.api.subscribeObserver('filter_sets', 'wbc', 'filter_set_click_before_loop',function(event, stat_object, notification_response){\n" .
-          "\n" .
-          "console.log('filter_set_click_before_loop subscribeObserver default');\n" .
-          "\n" .
-          "notification_response(stat_object);\n"
+        "jQuery(document).ready(function($){\n" .
+        "window.document.splugins.events.api.subscribeObserver('filter_sets', 'wbc', 'filter_set_click_before_loop',function(event, stat_object, notification_response){       \n" .
+        "\n" .
+        "  console.log('filter_set_click_before_loop subscribeObserver default');            \n" .
+        "\n" .
+        "  notification_response(stat_object);\n" .
+        "});\n" .
+        "});  \n";
         wbc()->load->add_inline_script( '', $inline_script, 'common' );
 
         if(false){
@@ -158,7 +160,7 @@ if( true or in_array( wbc()->common->get_category('category',null,array(wbc()->o
             });
              // --- end ---
     	</script>
-    }
+        <?php } ?>
         <style>
             .tax-product_cat .eo-wbc-container.filters .ui.menu {
                 -ms-flex-wrap: wrap;

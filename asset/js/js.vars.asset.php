@@ -10,11 +10,12 @@ add_action( ( !is_admin() ? 'wp_enqueue_scripts' : 'admin_enqueue_scripts'),func
 		wbc_pr('js_var_is_loaded');
 	}
 	
+	$window_document_splugins_admin = true;
 	$inline_script = "
 	//	define namespaces 
 	window.document.splugins = window.document.splugins || {};
 	window.document.splugins.common = window.document.splugins.common || {};
-	window.document.splugins.admin = true;";
+	window.document.splugins.admin = ".$window_document_splugins_admin.";";
 	wbc()->load->add_inline_script( '', $inline_script,'common' );
 
 	
@@ -189,8 +190,8 @@ if(false) {
 
 add_action('wp_footer',function(){  
 	
-	$inline_scriptq = "
-console.log('[js.vars.asset wp_footer]');\n" .
+	$inline_script = 
+	"console.log('[js.vars.asset wp_footer]');\n" .
   "      console.log(\"js.vras.asset outer ready event\");\n" .
   "      \n" .
   "      jQuery(document).ready(function() {\n" .
@@ -2193,7 +2194,7 @@ console.log('[js.vars.asset wp_footer]');\n" .
   "        });\n" .
   "\n" .
   "      });\n";
-	wbc()->load->add_inline_script('',$inline_scriptq,'common');   
+	wbc()->load->add_inline_script('',$inline_script,'common');   
 	// script if false
 	if(false){ 
    ?>
@@ -2918,10 +2919,8 @@ console.log('[js.vars.asset wp_footer]');\n" .
 								// Detach unattached.
 								new_attr_select.find( 'option' + option_gt_filter + ':not(.attached)' ).remove();
 
-// if(false){
 								// Finally, copy to DOM and set value.
 								current_attr_select.html( new_attr_select.html() );
-// }
 								current_attr_select.find( 'option' + option_gt_filter + ':not(.enabled)' ).prop( 'disabled', true );
 
 								// Choose selected value.
@@ -3830,10 +3829,8 @@ console.log('[js.vars.asset wp_footer]');\n" .
 								// Detach unattached.
 								new_attr_select.find( 'option' + option_gt_filter + ':not(.attached)' ).remove();
 
-// if(false){
 								// Finally, copy to DOM and set value.
 								current_attr_select.html( new_attr_select.html() );
-// }
 								current_attr_select.find( 'option' + option_gt_filter + ':not(.enabled)' ).prop( 'disabled', true );
 
 								// Choose selected value.

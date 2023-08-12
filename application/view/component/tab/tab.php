@@ -31,9 +31,9 @@ if(!empty($tab_data) and is_array($tab_data)){
 	wbc()->load->template('component/tab/tab-content',array('tab_contents'=>$tab_data));
 
 	$inline_script = 
-  "jQuery('.menu .item').tab();\n" .
-  "      jQuery('.ui.menu .item').off('click');\n";
-    wbc()->load->add_inline_script( '', $inline_script, 'common' );
+	"jQuery('.menu .item').tab();\n" .
+	"jQuery('.ui.menu .item').off('click');\n";
+  wbc()->load->add_inline_script( '', $inline_script, 'common' );
 
 	if(false){
 	?>
