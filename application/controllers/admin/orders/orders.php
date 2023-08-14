@@ -31,6 +31,18 @@ class Orders
 
            $sets=(json_decode($sets['order_map']));
            add_action('admin_footer',function() use ($sets){
+                 <?php
+                $inline_script = 
+                      "if(document.getElementById('order_items_list')){" .
+                      "                            document.getElementById('order_items_list').innerHTML='\".call_user_func_array(array(__CLASS__,'eo_wbc_get_sets'),[$sets]).\"';" .
+                      "                        }" .
+                      "                        else" .
+                      "                        {" .
+                      "                            document.getElementById('order_line_items').innerHTML='\".call_user_func_array(array(__CLASS__,'eo_wbc_get_sets'),[$sets]).\"';" .
+                      "                        }      ";
+                wbc()->load->add_inline_script( '', $inline_script, 'common' );
+                if(false){
+                  ?>
                  echo "<script>
                         if(document.getElementById('order_items_list')){
                             document.getElementById('order_items_list').innerHTML='".call_user_func_array(array(__CLASS__,'eo_wbc_get_sets'),[$sets])."';
@@ -40,6 +52,8 @@ class Orders
                             document.getElementById('order_line_items').innerHTML='".call_user_func_array(array(__CLASS__,'eo_wbc_get_sets'),[$sets])."';
                         }                        
                     </script>";
+                    <?php
+                }
            });
        });
     }

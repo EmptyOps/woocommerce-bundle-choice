@@ -7,7 +7,26 @@ add_action( 'wp_enqueue_scripts' ,function(){
 		wbc()->load->asset('css','variations/gallery_images/external-plugins/xzoom/xzoom',array(),"",false,true);
 
 		wbc()->load->asset('js','variations/gallery_images/external-plugins/xzoom/xzoom',array(),"",true,true);
+		$inline_script = 
+			  "(function ($) {\n" .
+			  "          // jQuery(document).ready(function() {\n" .
+			  "          document.addEventListener(\"DOMContentLoaded\", function() {         \n" .
+			  "              jQuery('.xzoom3, .xzoom-gallery3').xzoom({position: 'lens', lensShape: 'circle', sourceClass: 'xzoom-hidden'});\n" .
+			  "              jQuery('.xzoom-gallery3').on('click mouseenter mousemove mouseleave',function(){\n" .
+			  "\n" .
+			  "                  jQuery('.xzoom-gallery3.xactive').removeClass('xactive');\n" .
+			  "                  jQuery(this).addClass('xactive');\n" .
+			  "              });\n" .
+			  "\n" .
+			  "          });\n" .
+			  "      })(jQuery);\n";
+
+		wbc()->load->add_inline_script( '', $inline_script, 'common' );
+
+		if (false) {
+	
 		?>
+
 		<script type="text/javascript">
 			(function ($) {
 			    // jQuery(document).ready(function() {
@@ -22,13 +41,153 @@ add_action( 'wp_enqueue_scripts' ,function(){
 			    });
 			})(jQuery);
 		</script>
-		<?php
+		<?php }
 
 	} else { 
 
 		// ---- a code /themes/purple_theme/woocommerce/content-single-product.php no che 
 		// -- zoom no
+		 $inline_script = 
+		  "// jQuery(document).ready(function(){\n" .
+		  "       document.addEventListener(\"DOMContentLoaded\", function() { \n" .
+		  "         // ACTIVE_TODO_OC_START\n" .
+		  "         // // ---- error event ma sem che\n" .
+		  "         // ACTIVE_TODO_OC_END\n" .
+		  "              // ACTIVETODO enable below code if requared\n" .
+		  "            // //jQuery(\".small-img\").hover(function(){\n" .
+		  "            // jQuery(\".small-img\").click(function(){\n" .
+		  "            //     jQuery(\".big-img\").attr('src',jQuery(this).attr('src'));\n" .
+		  "            // });\n" .
+		  "\n" .
+		  "          var zoom_init_function = function(){\n" .
+		  "            \n" .
+		  "                console.log(\" zoom asset init_function \");\n" .
+		  "\n" .
+		  "              jQuery(\".big-img\").imagezoomsl({\n" .
+		  "                  /*zoomrange:[3,3],\n" .
+		  "                  disablewheel: true,\n" .
+		  "                  scrollspeedanimate: 10,\n" .
+		  "                  loopspeedanimate: 5,\n" .
+		  "                  cursorshadeborder: \"1px solid black\",\n" .
+		  "                  magnifiereffectanimate: \"slideIn\",\n" .
+		  "                  magnifiersize: [640, 480],*/\n" .
+		  "                  /*disablewheel: true,\n" .
+		  "                zoomstart: 3,\n" .
+		  "                zoomrange: [3,3],\n" .
+		  "                magnifiersize: [502, 502],\n" .
+		  "                cursorshadeborder: \"1px solid black\",*/\n" .
+		  "                disablewheel: true,\n" .
+		  "                zoomstart: 2,\n" .
+		  "                zoomrange: [2,2],\n" .
+		  "                innerzoom: true,\n" .
+		  "                magnifierborder: \"none\",\n" .
+		  "                     /*magnifiersize: [502, 502],\n" .
+		  "                     cursorshadeborder: \"1px solid black\",*/\n" .
+		  "                /*disablewheel: true,\n" .
+		  "                    zoomstart: 3,\n" .
+		  "                    zoomrange: [3,3],\n" .
+		  "                    magnifiersize: [502, 502],\n" .
+		  "                    cursorshadeborder: \"1px solid black\",*/\n" .
+		  "            });\n" .
+		  "              \n" .
+		  "          };  \n" .
+		  "\n" .
+		  "          var bind_listeners = function(){\n" .
+		  "\n" .
+		  "            console.log(\" zoom asset bind_listeners \");\n" .
+		  "\n" .
+		  "                window.document.splugins.wbc.variations.gallery_images.sp_slzm.api.init_listener('imagezoomsl', function(event, stat_object, notification_response){\n" .
+		  "\n" .
+		  "                  console.log(\" zoom asset init_listener \");\n" .
+		  "                    \n" .
+		  "                    zoom_init_function();\n" .
+		  "\n" .
+		  "                });\n" .
+		  "                window.document.splugins.wbc.variations.gallery_images.sp_slzm.api.refresh_listener('imagezoomsl' ,function(event, stat_object, notification_response){\n" .
+		  "\n" .
+		  "                  console.log(\" zoom asset refresh_listener \");\n" .
+		  "\n" .
+		  "                    zoom_init_function();\n" .
+		  "\n" .
+		  "                });\n" .
+		  "\n" .
+		  "          };\n" .
+		  "\n" .
+		  "      //       if(typeof(jQuery.fn.imagezoomsl)!=='function'){\n" .
+		  "        //   let script = document.createElement('script');\n" .
+		  "          // script.src = \"<?php /*echo constant( strtoupper( 'EOWBC_ASSET_URL' ) ).'js/variations/gallery_images/external-plugins/zoomsl/zoomsl.min.js';*/ ?>\";\n" .
+		  "        //   document.head.append(script);\n" .
+		  "\n" .
+		  "       //        window.setTimeout(function(){\n" .
+		  "\n" .
+		  "     //               bind_listeners();\n" .
+		  "\n" .
+		  "       //        },2000);  \n" .
+		  "\n" .
+		  "        // } else {\n" .
+		  "\n" .
+		  "        //     bind_listeners();\n" .
+		  "        // }\n" .
+		  "\n" .
+		  "        console.log(\" gallery zoom asset DOMContentLoaded\");\n" .
+		  "\n" .
+		  "        // document.addEventListener(\"DOMContentLoaded\", function() { \n" .
+		  "        // jQuery( window ).on('load', function() {\n" .
+		  "\n" .
+		  "          console.log(\" zoom asset DOMContentLoaded\");\n" .
+		  "\n" .
+		  "          if(typeof(jQuery.fn.imagezoomsl)!=='function'){\n" .
+		  "            \n" .
+		  "            console.log(\" zoom asset DOMContentLoaded\");\n" .
+		  "            \n" .
+		  "            let script = document.createElement('script');\n" .
+		  "            script.src = \"<?php echo constant( strtoupper( 'EOWBC_ASSET_URL' ) ).'js/variations/gallery_images/external-plugins/zoomsl/zoomsl.min.js'; ?>\";\n" .
+		  "            document.head.append(script);\n" .
+		  "\n" .
+		  "                window.setTimeout(function(){\n" .
+		  "\n" .
+		  "              console.log(\" zoom asset DOMContentLoaded timeout if\");\n" .
+		  "\n" .
+		  "                     bind_listeners();\n" .
+		  "\n" .
+		  "                },1000);  \n" .
+		  "\n" .
+		  "          } else {\n" .
+		  "\n" .
+		  "              window.setTimeout(function(){\n" .
+		  "\n" .
+		  "              console.log(\" zoom asset DOMContentLoaded timeout else\");\n" .
+		  "\n" .
+		  "                     bind_listeners();\n" .
+		  "\n" .
+		  "                },1000);  \n" .
+		  "          }\n" .
+		  "        // });\n" .
+		  "\n" .
+		  "        // ACTIVE_TODO we can use error event only for page loading context but after that we need to cancle them othrewising thay keep firing on any errors. \n" .
+		  "            window.addEventListener('error', function(e){\n" .
+		  "\n" .
+		  "                   // ACTIVETODO enable below code if requared\n" .
+		  "              // // jQuery(\".small-img\").hover(function(){\n" .
+		  "              // jQuery(\".small-img\").click(function(){\n" .
+		  "              //     jQuery(\".big-img\").attr('src',jQuery(this).attr('src'));\n" .
+		  "              // });\n" .
+		  "\n" .
+		  "              window.setTimeout(function(){\n" .
+		  "\n" .
+		  "                  console.log(\" zoom asset addEventListener error \");\n" .
+		  "\n" .
+		  "                   bind_listeners();\n" .
+		  "\n" .
+		  "              },1000);  \n" .
+		  "           \n" .
+		  "          });\n" .
+		  "\n" .
+		  "        });\n";
+				
+				wbc()->load->add_inline_script( '', $inline_script, 'common' );
 
+				if (false) {
 	?> 
 		<script>
 		 	// jQuery(document).ready(function(){
@@ -172,6 +331,7 @@ add_action( 'wp_enqueue_scripts' ,function(){
 
 		<!-- ---- a code /themes/purple_theme/woocommerce/content-single-product.php no che  -->
 		<?php
+			}
 		if(empty($url) && defined('PRODUCT_360_DIR')){ ?>
 			<style type="text/css">
 				/*===Desktop_img====*/

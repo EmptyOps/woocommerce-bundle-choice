@@ -340,7 +340,8 @@ class Category {
                             $html.="</div>";    
                         $html.="</div>";                
                     $html.='</div>';                                    
-                $html.='</div><script> jQuery(document).ready(function($){ $(".ui.button").on("click",function(){ window.location.href=$(this).attr("href"); }); }); </script>';
+                $html.='</div>
+                <script> jQuery(document).ready(function($){ $(".ui.button").on("click",function(){ window.location.href=$(this).attr("href"); }); }); </script>';
                 echo($html);            
             }, 9 );
         }

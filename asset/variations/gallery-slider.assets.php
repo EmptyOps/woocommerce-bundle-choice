@@ -234,6 +234,115 @@
 add_action( 'wp_enqueue_scripts' ,function(){
     wbc()->load->asset('css','variations/gallery_images/external-plugins/splide/splide-core.min',array(),"",false,true);
     wbc()->load->asset('js','variations/gallery_images/external-plugins/splide/splide.min',array(),"",true,true);
+    $inline_script = 
+          "var splide_init_function = function(){\n" .
+          "\n" .
+          "            console.log(\"slider asset init_function\");\n" .
+          "\n" .
+          "            var splide = new Splide( '#slider1'/* '.splide_slider_container'*/, {\n" .
+          "                direction   : 'ttb',\n" .
+          "                 wheel       : true,\n" .
+          "                 releaseWheel: true,\n" .
+          "                height     : '30rem',\n" .
+          "                pagination: false,\n" .
+          "                 perPage: 5,\n" .
+          "                gap: '10px',\n" .
+          "                cover:false,\n" .
+          "                  type   : 'slide',\n" .
+          "                 updateOnMove: true,\n" .
+          "                  arrows:true,\n" .
+          "                slider:true,\n" .
+          "                perMove     : 1,\n" .
+          "                rewind      : true,\n" .
+          "                isNavigation: true,\n" .
+          "                drag:true,\n" .
+          "                dragMinThreshold: {\n" .
+          "                    mouse: 4,\n" .
+          "                    touch: 10,\n" .
+          "                },\n" .
+          "            } );\n" .
+          "            splide.mount();\n" .
+          "        };\n" .
+          "\n" .
+          "        /*document.addEventListener(\"DOMContentLoaded\", function(event) {\n" .
+          "            \n" .
+          "            window.document.splugins.wbc.variations.gallery_images.sp_slzm.api.init_listener(function(){\n" .
+          "\n" .
+          "                init_function();\n" .
+          "            });\n" .
+          "            window.document.splugins.wbc.variations.gallery_images.sp_slzm.api.refresh_listener(function(){\n" .
+          "\n" .
+          "                init_function();\n" .
+          "            });\n" .
+          "\n" .
+          "        } );*/\n" .
+          "\n" .
+          "        // jQuery( window ).on('load', function() {\n" .
+          "        document.addEventListener(\"DOMContentLoaded\", function() { \n" .
+          "\n" .
+          "            // ACTIVE_TODO below timeout function is temporary. remove it when the loading sequence is fixed. \n" .
+          "            window.setTimeout(function(){\n" .
+          "\n" .
+          "                // ACTIVE_TODO temp.\n" .
+          "                // return false;\n" .
+          "\n" .
+          "                console.log(\"asset slider addEventListener\");\n" .
+          "\n" .
+          "                window.document.splugins.wbc.variations.gallery_images.sp_slzm.api.init_listener('splide',function(event, stat_object, notification_response){\n" .
+          "\n" .
+          "                    console.log(\"asset slider init_listener\");\n" .
+          "\n" .
+          "                    splide_init_function();\n" .
+          "                });\n" .
+          "                window.document.splugins.wbc.variations.gallery_images.sp_slzm.api.refresh_listener('splide',function(event, stat_object, notification_response){\n" .
+          "\n" .
+          "                    console.log(\"asset slider refresh_listener\");\n" .
+          "\n" .
+          "                    splide_init_function();\n" .
+          "                });\n" .
+          "\n" .
+          "            },1000);    \n" .
+          "\n" .
+          "        });\n" .
+          "\n" .
+          "        // document.addEventListener(\"DOMContentLoaded\", function() { \n" .
+          "\n" .
+          "            // ACTIVETODO enable below code if requared\n" .
+          "            // //slider\n" .
+          "            // jQuery(\".small-img\").click(function(){\n" .
+          "            //     jQuery(\".big-img\").attr('src',jQuery(this).attr('src'));\n" .
+          "            // });\n" .
+          "\n" .
+          "\n" .
+          "             //-- seme che uper lode karli che\n" .
+          "            /*var splide = new Splide( '#slider1', {\n" .
+          "                direction   : 'ttb',\n" .
+          "                 wheel       : true,\n" .
+          "                 releaseWheel: true,\n" .
+          "                height     : '30rem',\n" .
+          "                pagination: false,\n" .
+          "                 perPage: 5,\n" .
+          "                gap: '10px',\n" .
+          "                cover:false,\n" .
+          "                 type   : 'loop',\n" .
+          "                 updateOnMove: true,\n" .
+          "                  arrows:true,\n" .
+          "                slider:true,\n" .
+          "                perMove     : 1,\n" .
+          "                rewind      : true,\n" .
+          "                isNavigation: true,\n" .
+          "                drag:true,\n" .
+          "                dragMinThreshold: {\n" .
+          "                    mouse: 4,\n" .
+          "                    touch: 10,\n" .
+          "                },\n" .
+          "            } );\n" .
+          "            splide.mount();*/\n" .
+          "        // });\n" ;
+
+            wbc()->load->add_inline_script( '', $inline_script, 'common' );
+
+    if (false) {
     ?>
     <!-- <script type="text/javascript">
         var splide = new Splide( '#slider1', {
@@ -262,6 +371,7 @@ add_action( 'wp_enqueue_scripts' ,function(){
     </script> -->
 
     <!-- -- a tejas che api che -->
+
     <script type="text/javascript">
 
         var splide_init_function = function(){
@@ -370,5 +480,6 @@ add_action( 'wp_enqueue_scripts' ,function(){
         // });
     </script>
 <?php
+    }
 },1049);
 ?>

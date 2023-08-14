@@ -276,6 +276,38 @@ class Product {
             </style>
             <?php
 
+            $inline_script = 
+                  " jQuery(\".single_add_to_cart_button.button.alt\").ready(function(){\n" .
+                  "\n" .
+                  "                    jQuery('form.cart').prepend(\"<input type='hidden' name='eo_wbc_add_to_cart_preview' value='1'/>\");\n" .
+                  "                    \n" .
+                  "                    jQuery(\".single_add_to_cart_button.button.alt:not(.disabled):eq(0)\").replaceWith(\n" .
+                  "                         \"<button href='#' id='eo_wbc_add_to_cart_preview' class='single_add_to_cart_button button alt'><?php _e('Add To Cart','woo-bundle-choice') ?></button>\"\n" .
+                  "                    );\n" .
+                  "\n" .
+                  "                    jQuery(document).on('click','#eo_wbc_add_to_cart_preview',function() {\n"
+                   wbc()->load->add_inline_script( '', $inline_script, 'common' );
+                    global $post;
+                            $url = get_permalink($post->ID);    
+
+                            $get_link = wbc()->common->http_query(array('EO_WBC'=>1,'BEGIN'=>wbc()->sanitize->get('BEGIN'),'STEP'=>3,'FIRST'=>wbc()->sanitize->get('FIRST'),'SECOND'=>wbc()->sanitize->get('SECOND'),'eo_wbc_add_to_cart_preview'=>'1','WBC_PREVIEW'=>'1'));
+
+                            if(strpos($url,'?') ===false ) {
+                                $url = $url."?".$get_link;
+                            } else {
+                                $url = $url."&".$get_link;
+                            }
+                   $url_url = $url;         
+                   $inline_script =              
+                  "window.location.href = '".$url_url."';\n" .
+                  "                        return false;\n" .
+                  "                    });\n" .
+                  "\n" .
+                  "                    // jQuery(\"table.variations\").remove();\n" .
+                  "                });\n"        ;
+
+            wbc()->load->add_inline_script( '', $inline_script, 'common' );
+            if(false){
             ?>
             <script type="text/javascript">
                 jQuery(".single_add_to_cart_button.button.alt").ready(function(){
@@ -307,6 +339,7 @@ class Product {
                 });
             </script>
             <?php
+            }
         });
 
         
@@ -625,11 +658,12 @@ class Product {
                 <!-- WBC{ WooCommerce Product Bundle Choice wiget STARTS. } -->
                 <?php
                 $page_category__ = $this->page_category;
+                $post_post = global $post; echo $post->ID;
                 $inline_script = 
 
               "jQuery(document).ready(function(){\n" .
-              "                        jQuery('form.cart').prepend(\"<input type='hidden' name='eo_wbc_target' value='".$page_category__."'/><input type='hidden' name='eo_wbc_product_id' value='<?php global $post; echo $post->ID; ?>'/>\");\n" .
-              "                    });\n"
+              "                        jQuery('form.cart').prepend(\"<input type='hidden' name='eo_wbc_target' value='".$page_category__."'/><input type='hidden' name='eo_wbc_product_id' value='".$post_post."'/>\");\n" .
+              "                    });\n";
                             wbc()->load->add_inline_script( '', $inline_script, 'common' );
                 if(false){            
                 ?>
@@ -768,6 +802,7 @@ class Product {
 
             ?>
             <!-- Created with Wordpress plugin - WooCommerce Product bundle choice -->
+            
             <script type="text/javascript">
                 jQuery(".single_add_to_cart_button.button.alt").ready(function(){
                     jQuery('form.cart').prepend("<input type='hidden' name='eo_wbc_target' value='<?php echo $this->page_category; ?>'/><input type='hidden' name='eo_wbc_product_id' value='<?php global $post; echo $post->ID; ?>'/>");
