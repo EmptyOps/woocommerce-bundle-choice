@@ -5,7 +5,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=hi000
 Requires at least: 3.5
 Tested up to: 6.1.1
 Requires PHP: 5.6
-Stable tag: 1.0.21
+Stable tag: 1.0.22
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 Contributors: ajayemptyops,bhaveshdesai,shraddharaiyani,CmdrMahesh,hi0001234d
