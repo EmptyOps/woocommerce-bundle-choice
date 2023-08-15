@@ -37,27 +37,13 @@ if(empty($image['extra_params_org']['type']) || $image['extra_params_org']['type
 
         if ( /*false and */$image['extra_params_org']['type'] == 'video' and isset( $image['extra_params_org']['embed_type'] ) && $image['extra_params_org']['embed_type'] === 'video' ) {
             
-            $video_attr = array('preload'=>'auto', 'controlsList'=>'nodownload'/*,'poster'=>'http://localhost/demo/wp-content/uploads/2023/02/giphy-1.gif'*/);
-            
-            if(wbc()->options->get_option('tiny_features','tiny_features_video_auto_play') == 'tiny_features_video_auto_play') {
-                $video_attr = array_merge($video_attr, array('autoplay'=>''));
-            }
-
-            if(wbc()->options->get_option('tiny_features','tiny_features_video_mute') == 'tiny_features_video_mute') {
-                $video_attr = array_merge($video_attr, array('muted' => ''));
-            }
-            
-            if(wbc()->options->get_option('tiny_features','tiny_features_video_loop') == 'tiny_features_video_loop') {
-                $video_attr = apply_filters('wbc_vsp_video_loop_option',$video_attr, 'video_url');
-            }
-            
             $template = array(
                 'type' => 'div',
                 'class' => array('spui_video_container',esc_attr( $image['class'] ), 'img-item', 'img-item-'.$image['extra_params_org']['type'], 'img-item-'.$image['extra_params_org']['type'].'-'.wbc()->common->current_theme_key() ),
                 'child' => array(
                     array(
                         'type' => 'video',
-                        'attr' => $video_attr,
+                        'attr' => $image['video_attr'],
                         'preHTML'=>'Your browser does not support the video tag.',
                         'child' => array(
                             array(

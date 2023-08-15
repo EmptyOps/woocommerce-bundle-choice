@@ -249,6 +249,11 @@ class Form_Builder implements Builder {
 
 			ob_start();
 			
+			if( isset($form_element['spui_version']) && $form_element['spui_version'] >= 1.0 ) {
+				?><div class="ui <?php echo (!empty($form_element["main_element_class"])) ? $form_element["main_element_class"] :'black'; ?> segment visible">
+				<?php
+			}
+
 			if( (!isset($form_element['prev_inline']) || !$form_element['prev_inline']) && $form_element['type']!='devider' && $form_element['type']!='hidden' ){
 				?><div class="<?php echo isset($form_element["inline_class"]) ? $this->process_property($form_element["inline_class"]) : ""; ?> <?php echo (isset($form_element["inline"]) && $form_element["inline"]) ? "inline" : ""; ?> fields"><?php
 			}
@@ -257,6 +262,11 @@ class Form_Builder implements Builder {
 
 			if( (!isset($form_element['next_inline']) || !$form_element['next_inline']) && $form_element['type']!='devider' && $form_element['type']!='hidden' ){
 				?></div><?php
+			}
+
+			if( isset($form_element['spui_version']) && $form_element['spui_version'] >= 1.0 ) {
+				?></div> 
+				<?php
 			}
 
 			// if($form_element['type']=='devider'){
@@ -292,7 +302,13 @@ class Form_Builder implements Builder {
 	}	
 
 	public function process_property_group(array $form_element, string $id) {
-		
+
+		if(isset($form_element['main_element_class'])){
+			$form_element['main_element_class'] = $this->process_property($form_element['main_element_class']);
+		} else {
+			$form_element['main_element_class'] ='';
+		}
+
 		if(isset($form_element['label_class'])){
 			$form_element['label_class'] = $this->process_property($form_element['label_class']);
 		} else {

@@ -302,6 +302,24 @@ class SP_WBC_Variations extends SP_Variations {
 	                ;  
 			}
 
+			if ( /*false and */$props['extra_params_org']['type'] == 'video' and isset( $props['extra_params_org']['embed_type'] ) && $props['extra_params_org']['embed_type'] === 'video' ) {
+
+	            $props['video_attr'] = array('preload'=>'auto', 'controlsList'=>'nodownload'/*,'poster'=>'http://localhost/demo/wp-content/uploads/2023/02/giphy-1.gif'*/);
+	            
+	            if(wbc()->options->get_option('tiny_features','tiny_features_video_auto_play') == 'tiny_features_video_auto_play') {
+	                $props['video_attr'] = array_merge($props['video_attr'], array('autoplay'=>''));
+	            }
+
+	            if(wbc()->options->get_option('tiny_features','tiny_features_video_mute') == 'tiny_features_video_mute') {
+	                $props['video_attr'] = array_merge($props['video_attr'], array('muted' => ''));
+	            }
+	            
+	            if(wbc()->options->get_option('tiny_features','tiny_features_video_loop') == 'tiny_features_video_loop') {
+	                $props['video_attr'] = apply_filters('wbc_vsp_video_loop_option',$props['video_attr'], 'video_url');
+	            }
+
+			}
+
 			$props['video_src']   = esc_url( $attachment_id );
 			return $props;
 
