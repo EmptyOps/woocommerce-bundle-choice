@@ -249,13 +249,14 @@ class Form_Builder implements Builder {
 
 			ob_start();
 			
+			// A segment can be colored -- semantic ui 
 			if( isset($form_element['spui_version']) && $form_element['spui_version'] >= 1.0 ) {
-				?><div class="ui <?php echo (!empty($form_element["main_element_class"])) ? $form_element["main_element_class"] :'black'; ?> segment visible">
+				?><div class="ui <?php echo (!empty($form_element["container_class"])) ? $form_element["container_class"] :'black'; ?> segment visible">
 				<?php
 			}
 
 			if( (!isset($form_element['prev_inline']) || !$form_element['prev_inline']) && $form_element['type']!='devider' && $form_element['type']!='hidden' ){
-				?><div class="<?php echo isset($form_element["inline_class"]) ? $this->process_property($form_element["inline_class"]) : ""; ?> <?php echo (isset($form_element["inline"]) && $form_element["inline"]) ? "inline" : ""; ?> fields"><?php
+				?><div class="<?php echo isset($form_element["inline_class"]) ? $this->process_property($form_element["inline_class"]) : ""; ?><?php echo (isset($form_element["inline"]) && $form_element["inline"]) ? "inline" : ""; ?> fields <?php echo $form_element["is_disabled"] ? 'disabled' : ''; ?>"><?php
 			}
 
 			wbc()->load->template('component/form/input_'.$form_element['type'],$form_element);
@@ -303,10 +304,10 @@ class Form_Builder implements Builder {
 
 	public function process_property_group(array $form_element, string $id) {
 
-		if(isset($form_element['main_element_class'])){
-			$form_element['main_element_class'] = $this->process_property($form_element['main_element_class']);
+		if(isset($form_element['container_class'])){
+			$form_element['container_class'] = $this->process_property($form_element['container_class']);
 		} else {
-			$form_element['main_element_class'] ='';
+			$form_element['container_class'] ='';
 		}
 
 		if(isset($form_element['label_class'])){

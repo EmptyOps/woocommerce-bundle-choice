@@ -30,7 +30,7 @@ if(!empty($id) /*and !empty($label)*/){
 				} 
 		}
 		?>	  	
-				<input type="text" <?php echo !empty($attr)?$attr:''; ?> id="<?php echo $id; ?>" name="<?php echo $id; ?>" class="ui input <?php echo !empty($class)?$class:''; ?>" placeholder="<?php echo !empty($placeholder)?$placeholder:''; ?>" value="<?php echo isset($value)?$value:''; ?>">
+				<input type="text" <?php echo !empty($attr)?$attr:''; ?> id="<?php echo $id; ?>" name="<?php echo $id; ?>" class="ui input <?php echo !empty($class)?$class:''; ?>" placeholder="<?php echo !empty($placeholder)?$placeholder:''; ?>" value="<?php echo isset($value)?$value:''; ?>" <?php echo $is_disabled ? 'disabled' : '' ; ?> >
 		<?php
 		if(!empty($left_labeled) || !empty($right_labeled)) {		
 		?>	
