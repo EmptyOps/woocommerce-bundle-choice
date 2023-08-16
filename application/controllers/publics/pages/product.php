@@ -800,9 +800,75 @@ class Product {
             $product = wbc()->wc->eo_wbc_get_product($post->ID);
             if(!empty($product) and !is_wp_error($product) and  $product->is_in_stock()) {
 
+            $eo_wbc_target_eo_wbc_target = $this->page_category;    
+            $eo_wbc_product_id_eo_wbc_product_id = global $post; echo $post->ID;   
+            $inline_script = 
+          "jQuery(\".single_add_to_cart_button.button.alt\").ready(function(){\n" .
+          "                    jQuery('form.cart').prepend(\"<input type='hidden' name='eo_wbc_target' value='".$eo_wbc_target_eo_wbc_target."'/><input type='hidden' name='eo_wbc_product_id' value='".$eo_wbc_product_id_eo_wbc_product_id."'/>\");\n";
+            wbc()->load->add_inline_script( '', $inline_script, 'common' );
+
+            if(!empty(wbc()->options->get_option('appearance_product_page','product_page_add_to_basket',''))) :
+
+
+
+
+            $eo_wbc_add_to_cart_eo_wbc_add_to_cart = $btn_text; 
+            $wbc_atb_submin_form_wbc_atb_submin_form = wbc()->options->get_option('appearance_product_page','product_page_add_to_basket','');  
+            $inline_script = ;
+              " window.wbc_atb_submin_form = function(){\n" .
+              "                            jQuery('form.cart').attr('action',document.location.href);\n" .
+              "                            jQuery('form.cart').submit();\n" .
+              "                        }\n" .
+              "\n" .
+              "                        jQuery(\".single_add_to_cart_button.alt:not(.disabled):eq(0)\").replaceWith('<div class=\\\"ui buttons\\\">'+\n" .
+              "                                '<div class=\\\"ui button\\\" href=\\\"#\\\" id=\\\"eo_wbc_add_to_cart\\\">".$eo_wbc_add_to_cart_eo_wbc_add_to_cart."</div>'+\n" .
+              "                                    '<div class=\\\"ui floating dropdown icon button\\\" style=\\\"width: fit-content;min-width: unset; max-width: unset;\\\">'+\n" .
+              "                                        '<i class=\\\"dropdown icon\\\"></i>'+\n" .
+              "                                        '<div class=\\\"menu\\\">'+\n" .
+              "                                            '<div class=\\\"item\\\" onClick=\\\"window.wbc_atb_submin_form();\\\">".$wbc_atb_submin_form_wbc_atb_submin_form."</div>'+                                    \n" .
+              "                                        '</div>'+\n" .
+              "                                    '</div>'+\n" .
+              "                                '</div>'+\n" .
+              "                            '</div>');\n" .
+              "                        jQuery(\".dropdown\").dropdown();\n" .
+              "\n";
+            wbc()->load->add_inline_script( '', $inline_script, 'common' );
+
+            else:
+            $btn_text_btn_text = $btn_text;   
+            $inline_script = ;
+              " jQuery(\".single_add_to_cart_button.button.alt:not(.disabled):eq(0)\").replaceWith(\n" .
+              "                         \"<button href='#' id='eo_wbc_add_to_cart' class='single_add_to_cart_button button alt'>\"\n" .
+              "                         +".$btn_text_btn_text;."\n" .
+              "                         +\"</button>\"\n" .
+              "                        );\n";
+                        wbc()->load->add_inline_script( '', $inline_script, 'common' );
+
+            endif;
+
+
+            $inline_script = ' });';
+
+            wbc()->load->add_inline_script( '', $inline_script, 'common' );
+
+            $step = wbc()->sanitize->get('STEP');
+
+                if( $step == 2 && wbc()->common->is_product_under_category($product,wbc()->options->get_option('configuration','second_name')) && $product->is_type( 'variable' ) ) {
+            $inline_script = 
+            
+              "window.document.splugins = window.document.splugins || {};\n" .
+              "                    window.document.splugins.common = window.document.splugins.common || {};\n" .
+              "                    \n" .
+              "                    window.document.splugins.common.is_handle_variation_id_pair_builder_step_2 = true;\n" .
+              "\n";
+                        wbc()->load->add_inline_script( '', $inline_script, 'common' );
+
+
+            if(false){
+
             ?>
             <!-- Created with Wordpress plugin - WooCommerce Product bundle choice -->
-            
+
             <script type="text/javascript">
                 jQuery(".single_add_to_cart_button.button.alt").ready(function(){
                     jQuery('form.cart').prepend("<input type='hidden' name='eo_wbc_target' value='<?php echo $this->page_category; ?>'/><input type='hidden' name='eo_wbc_product_id' value='<?php global $post; echo $post->ID; ?>'/>");

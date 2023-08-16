@@ -2528,7 +2528,46 @@ class EOWBC_Filter_Widget {
 
 
 		if(true){
+		$EO_WBC_FILTER_UI_ICON_TERM_SLUG = $term->slug;	
+		$inline_script =
+			  "jQuery(document).ready(function($){\n" .
+			  "        console.log('EO_WBC_FILTER_UI_ICON_TERM_SLUG');\n" .
+			  "        console.log(EO_WBC_FILTER_UI_ICON_TERM_SLUG);\n" .
+			  "        EO_WBC_FILTER_UI_ICON_TERM_SLUG.push(".$EO_WBC_FILTER_UI_ICON_TERM_SLUG.");\n";
 
+		wbc()->load->add_inline_script( '', $inline_script, 'common' );
+
+		if("<?php echo $term->slug; ?>") {
+
+		$icon_filter_type_icon_filter_type = $type;
+		$filter_prefix_filter_prefix = $this->filter_prefix;
+		$slug_slug = $term->slug;
+		$inline_script = 
+			  "jQuery(\".eo_wbc_srch_btn:eq(2)\").on('reset',function(){  \n" .
+			  "            var icon_filter_type =".$icon_filter_type_icon_filter_type.";\n" .
+			  "            var filter_list= undefined;\n" .
+			  "            if(icon_filter_type == 1) {\n" .
+			  "              /*filter_list = jQuery('[name=\"checklist_'+__data_filter_slug+'\"]');*/\n" .
+			  "              filter_list = jQuery('form#".$filter_prefix_filter_prefix."eo_wbc_filter [name=\"checklist_'+".$slug_slug."+'\"]');\n" .
+			  "            } else {\n" .
+			  "              /*filter_list = jQuery('[name=\"cat_filter_'+__data_filter_slug+'\"]');*/\n" .
+			  "              filter_list = jQuery('form#".$filter_prefix_filter_prefix."eo_wbc_filter [name=\"cat_filter_'+".$slug_slug."+'\"]');\n" .
+			  "            }\n" .
+			  "\n" .
+			  "            if(jQuery(filter_list).attr('data-edit')=='1') {\n" .
+			  "              jQuery(filter_list).val(\"\");\n" .
+			  "\n" .
+			  "              jQuery(\"form#".$filter_prefix_filter_prefix."eo_wbc_filter .eo_wbc_filter_icon_select\").each(function(index,element){\n" .
+			  "                jQuery(element).removeClass(\"eo_wbc_filter_icon_select\");\n" .
+			  "              });\n" .
+			  "            }        \n" .
+			  "          });\n" .
+			  "        }        \n" .
+			  "      });\n";
+		wbc()->load->add_inline_script( '', $inline_script, 'common' );
+
+
+		if(false){
 		?>					
 		<script type="text/javascript">
 			jQuery(document).ready(function($){
@@ -2650,6 +2689,7 @@ class EOWBC_Filter_Widget {
 				}				
 			});
 		</script>
+	<?php }
 		<?php }
 		do_action('eowbc_after_icon_filter_widget',$this,$__prefix,$item);
 
