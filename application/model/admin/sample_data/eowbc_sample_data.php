@@ -172,7 +172,60 @@ class Eowbc_Sample_Data {
 
 			if(!empty(wbc()->sanitize->post('step'))){
 			  if(wbc()->sanitize->post('step')==3) {
-			  	
+			  	$eo_wbc_max_products = ($this->get_product_size());
+			  	$admin_url_admin_url = (admin_url('admin.php?page=eowbc'));
+			  	$wp_create_nonce = wp_create_nonce('sample_data_jewelry');
+			  	$feature_key = ($feature_key);
+			  	$admin_ajax_php = admin_url( 'admin-ajax.php' );
+			  	$inline_script =
+					  " jQuery(document).ready(function($) {            \n" .
+					  "\n" .
+					  "              var eo_wbc_max_products=".$eo_wbc_max_products.";            \n" .
+					  "              function eo_wbc_add_products(index){\n" .
+					  "\n" .
+					  "                  if(index>=eo_wbc_max_products){\n" .
+					  "                      \n" .
+					  "                      window.location.href=".$admin_url_admin_url.";\n" .
+					  "                      return false;\n" .
+					  "                  }\n" .
+					  "\n" .
+					  "                  jQuery(\".button.button-primary.button-hero.action.disabled\").val(\"Adding \"+(index+1)+\" of \"+eo_wbc_max_products+\" products\");\n" .
+					  "\n" .
+					  "                  var data = {\n" .
+					  "                      //'action': 'eo_wbc_add_products',\n" .
+					  "                      '_wpnonce': ".$wp_create_nonce.",\n" .
+					  "                      'action':'eowbc_ajax',\n" .
+					  "                      'resolver':'".$feature_key."',\n" .
+					  "                      'product_index':index \n" .
+					  "                  };\n" .
+					  "\n" .
+					  "                  jQuery.post('".$admin_ajax_php."', data, function(response) {\n" .
+					  "                    var resjson = jQuery.parseJSON(response);\n" .
+					  "                      if( typeof(resjson[\"type\"]) != undefined && resjson[\"type\"] == \"success\" ){\n" .
+					  "                        eo_wbc_add_products(++index);                    \n" .
+					  "                      } else {\n" .
+					  "                        var type = (typeof(resjson[\"type\"]) != undefined ? resjson[\"type\"] : 'error');\n" .
+					  "                        var msg = (typeof(resjson[\"msg\"]) != undefined && resjson[\"msg\"] != \"\" ? resjson[\"msg\"] : `Failed! Please check Logs page for for more details.`);\n" .
+					  "                          eowbc_toast_common( type, msg );\n" .
+					  "                      }  \n" .
+					  "                  });                \n" .
+					  "              }   \n" .
+					  "              \n" .
+					  "              $(\".button.button-primary.button-hero.action\").on('click',function(e){\n" .
+					  "                  e.stopPropagation();\n" .
+					  "                  e.preventDefault();\n" .
+					  "                  if(!$(this).hasClass('disabled')) {\n" .
+					  "                      $(\".button.button-hero.action:not(.disabled)\").toggleClass('disabled');\n" .
+					  "                      eo_wbc_add_products(0);\n" .
+					  "                      //eo_wbc_add_products(119);\n" .
+					  "                  }                \n" .
+					  "                  return false;\n" .
+					  "              });\n" .
+					  "\n" .
+					  "          });\n";
+				wbc()->load->add_inline_script( '', $inline_script, 'common' );
+
+			  	if(false) {
 			    ?>
 			    <script type="text/javascript" >
 			    jQuery(document).ready(function($) {            
@@ -221,6 +274,7 @@ class Eowbc_Sample_Data {
 
 			    });
 			    </script> <?php
+				}
 			  }      
 			    $_step=wbc()->sanitize->post('step');
 			} else {

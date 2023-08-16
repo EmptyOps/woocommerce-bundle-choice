@@ -233,7 +233,15 @@ if ( ! class_exists( 'Extensions_Setup_Wizard' ) ) {
 			            <meta name="viewport" content="width=device-width" />
 			            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 			            <title><?php esc_html_e( 'WooCommerce Product Bundle Choice &rsaquo; Setup Wizard', 'woocommerce' ); ?></title>
+			            <?php
+			            wbc()->load->get_script_tag(array(
+			             'src'  => esc_url('https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js'),
+			            ));
+			            if(false){
+			            ?>
 			            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+			        	<?php }
+			        	?>
 			            <link rel="stylesheet" type="text/css" href="<?php echo constant('EOWBC_ASSET_URL').'css/fomantic/semantic.min.css'; ?>">
 			        </head>
 			        <body>
@@ -411,10 +419,16 @@ if ( ! class_exists( 'Extensions_Setup_Wizard' ) ) {
 			?>
 						  	</form>
 						</div>
+						<?php
+						 wbc()->load->get_script_tag(array(
+			             'src'  => esc_url('https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js'),
+			            ));
+			            if(false){
+			            ?>
 						
 						<script src="<?php echo constant('EOWBC_ASSET_URL').'js/fomantic/semantic.min.js'; ?>"></script>
 						<?php
-						 
+						 }
 							wbc()->load->get_script_tag(array('src'=>constant('EOWBC_ASSET_URL').'js/fomantic/semantic.min.js'));
 						?>
 
