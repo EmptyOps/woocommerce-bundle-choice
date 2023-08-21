@@ -1656,6 +1656,74 @@ $bg_hover_color = wbc()->options->get_option('tiny_features',$spui_is_product_ca
 		color: <?php _e($font_hover_color); ?>;	
 	}
 </style>
+<?php 
+
+if(wbc()->wc->is_shop_or_category()) {
+
+	// -- aa only woo-bundle na 10 demo se tena mate patch se jema ring builder and show option swatches enable hase tyare category page ma quintity and select option na button sivay badhu hide thay jase 154.23
+	// themes___botiga
+	// themes___rife-free
+	// themes___hello-elementor
+	// themes___neve
+	// themes___oceanwp
+	// themes___astra
+	// themes___storefront
+	// themes___customify
+	if($asset_param['is_ring_builder_enabled'] && $asset_param['is_show_options_ui_enabled']) {
+		echo $asset_param['archive_loop_swatches_css_patch'];
+	}
+
+	// -- jyare ring builder ni switch on hoy tyare aa file load j nathi thati te hirenbhai ne jovu padse 154.23
+	// themes___zakra
+	// themes___astra
+	// themes___blossom-shop
+	// themes___bosa
+	// themes___bosa-storefront
+	// themes___botiga
+	// themes___customify
+	// themes___ecommerce-solution
+	// themes___enwoo
+	// themes___estore
+	// themes___generatepress
+	// themes___hello-elementor
+	// themes___hestia
+	// themes___jewelry-store
+	// themes___kadence
+	// themes___laventa
+	// themes___neve
+	// themes___oceanwp
+	// themes___open-shop
+	// themes___qi
+	// themes___rife-free
+	// themes___shoper
+	// themes___shopper-shop
+	// themes___shoppingcart
+	// themes___storefront
+	// themes___storeship
+	// themes___sydney
+	// themes___th-shop-mania
+	// themes___twentytwenty
+	// themes___twentytwentyone
+	// themes___twentytwentythree
+	// themes___twentytwentytwo
+	// themes___vogue
+	// themes___vw-ecommerce-store 
+	// themes___woostify
+	if(!$asset_param['is_ring_builder_enabled'] && $asset_param['is_show_options_ui_enabled']) {
+	?>
+		<style type="text/css">
+/*			-- aa css ring builder disable and show option ui switch enable hoy tyare select valu button category page ma none thay jase*/
+			.product_type_variable.add_to_cart_button {
+			    display: none !important;
+			}
+		</style>
+	<?php
+	}
+
+} 
+
+?>
+
 <script>
 	jQuery(document).ready(function($){
 		jQuery(".dropdown").dropdown().on('change',function(){

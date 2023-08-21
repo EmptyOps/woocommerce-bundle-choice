@@ -200,7 +200,8 @@ class SP_Model_Feed extends SP_Feed {
 				}				
 			}
 
-			$this->load_asset();
+			// $this->load_asset();
+			$this->load_asset( array('asset_param'=>$this->prepare_load_asset_data()) );			
 
 		});
 
@@ -245,14 +246,27 @@ class SP_Model_Feed extends SP_Feed {
 
 	}
 
-	public function load_asset(){
+	public function prepare_load_asset_data( $args = array() ) {
 
-		add_action( 'wp_footer'/*'wp_enqueue_scripts'*/ ,function(){
+		$data = array();
+
+		$features = unserialize(wbc()->options->get_option('setting_status_setting_status_setting','features',serialize(array())));
+		$data['is_ring_builder_enabled'] = !empty($features['ring_builder']) ? true : false ;
+		$data['is_show_options_ui_enabled'] = !empty(wbc()->options->get_option('appearance_product_page','show_options_ui_in_pair_builder')) ? true : false ;
+		$data['archive_loop_swatches_css_patch'] = \eo\wbc\model\SP_WBC_Compatibility::instance()->feed_loopbox_variations_container_compatability('archive_loop_swatches_css_patch');
+			
+		return $data;
+	}
+
+	public function load_asset( $args=array() ){
+
+		add_action( 'wp_footer'/*'wp_enqueue_scripts'*/ ,function() use($args) {
 			
 			wbc()->load->asset('css','fomantic/semantic.min');
 			wbc()->load->asset('js','fomantic/semantic.min',array('jquery'));
 
-			wbc()->load->asset( 'asset.php', constant( 'EOWBC_ASSET_DIR' ).'variations.assets.php');
+			// wbc()->load->asset( 'asset.php', constant( 'EOWBC_ASSET_DIR' ).'variations.assets.php');
+			wbc()->load->asset( 'asset.php', constant( 'EOWBC_ASSET_DIR' ).'variations.assets.php', isset($args['asset_param']) ? array('asset_param'=>$args['asset_param']) : array() );
 		}, 1049);	
 
 	}
