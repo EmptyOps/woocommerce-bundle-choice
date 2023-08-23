@@ -99,13 +99,19 @@ class SP_Model_Gallery_Slider extends Eowbc_Base_Model_Publics {
 
 		$data['sp_variation_gallery']['gallery_zoom_container_width'] = \eo\wbc\model\SP_WBC_Compatibility::instance()->single_product_render_compatability('gallery_zoom_container_width',array('default_width'=>'58%'));
 		
+		// -- aa if condition atle mari se jyare user "%" karta bhuli jay am nam value pass kari dey to pan work kare % append karavi didho se -- @a
+		$tiny_features_gallery_width = wbc()->options->get_option('tiny_features','tiny_features_gallery_width');
+		if( !empty($tiny_features_gallery_width) && !str_contains($tiny_features_gallery_width, '%') ) {
+			$tiny_features_gallery_width .= '%';
+		}
+
 		// ACTIVE_TODO_OC_START
 		// -- jo user admin mathi value set kare to tene priority malvi joye and jo default value set kari ne save karave to avoid thavu joye(aa if confirm karvani se) @a 154.12 
-		// -- jo 0% input karse to default value set thay jase tenu pan impliment kari didhu se
+		// -- first condition jyare value 0 enter kare tyare value default value save thay jase tevi cndition banavi se && ama secound condition se te same atyare je value save hase te value fari thi save nay karave tena mate se @a--
 		// ACTIVE_TODO_OC_END
-		if(wbc()->options->get_option('tiny_features','tiny_features_gallery_width') != $data['sp_variation_gallery']['gallery_zoom_container_width'] && wbc()->options->get_option('tiny_features','tiny_features_gallery_width') != '0%'){
+		if( ( !empty($tiny_features_gallery_width) && $tiny_features_gallery_width != '0%' ) && $tiny_features_gallery_width != $data['sp_variation_gallery']['gallery_zoom_container_width'] ){
 
-			$data['sp_variation_gallery']['gallery_zoom_container_width'] = wbc()->options->get_option('tiny_features','tiny_features_gallery_width');
+			$data['sp_variation_gallery']['gallery_zoom_container_width'] = $tiny_features_gallery_width;
 		}
 
 		return $data;

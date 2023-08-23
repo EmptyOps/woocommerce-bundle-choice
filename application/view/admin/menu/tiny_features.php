@@ -681,11 +681,11 @@ $form['data'] = array(
 					'value'=>wbc()->options->get_option('tiny_features','tiny_features_gallery_width','58%'),
 					'sanitize'=>'sanitize_text_field',
 					'class'=>array('fluid'),
-					'size_class'=>array('eight','wide','required'),
+					'size_class'=>array('eight','wide'),
 					'attr'=>array(),					
 					'inline'=>false,
 
-					'visible_info'=>array( 'label'=>eowbc_lang('Slider Gallery Width in %. Default value is: 50. Limit: 10-100.'),
+					'visible_info'=>array( 'label'=>eowbc_lang('Slider Gallery Width in %. Default value is: '.\eo\wbc\model\SP_WBC_Compatibility::instance()->single_product_render_compatability('gallery_zoom_container_width',array('default_width'=>'58%')).'. Limit: 10-100.'),
 						'type'=>'visible_info',
 						'class'=>array('medium'),
 						// 'size_class'=>array('sixteen','wide'),
