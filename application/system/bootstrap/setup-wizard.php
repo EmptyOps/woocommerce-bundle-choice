@@ -222,18 +222,7 @@ class Setup_Wizard {
 		            <meta name="viewport" content="width=device-width" />
 		            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		            <title><?php esc_html_e( 'WooCommerce Product Bundle Choice &rsaquo; Setup Wizard', 'woocommerce' ); ?></title>
-		            <!-- ACTIVE_TODO_OC_START
-    				-- Now load this jquery library from this path or URL 
-					  	-- so let's simply enqueue it when than enqueue example is ready -- to h && -- to bk
-						    -- Since the version is going to be changed so all the frontend javascript jquery functionality needs to be tested in detail -- to h && -- to bk -- to a
-						    	-- including everything and the admin side also need to be tested in detail, since the setup wizard is affected due to version change so that needs to be tested in detail -- to h && -- to bk  && -- to a
-					ACTIVE_TODO_OC_END -->	    	
-		            <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> -->
-		            <?php 
-			            // add_action('wp_enqueue_scripts', function(){
-						// 	wp_enqueue_script( 'jquery' );
-						// });
-		            ?>		            
+		            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>		            
 		            <link rel="stylesheet" type="text/css" href="<?php echo constant('EOWBC_ASSET_URL').'css/fomantic/semantic.min.css'; ?>">
 		        </head>
 		        <body>
