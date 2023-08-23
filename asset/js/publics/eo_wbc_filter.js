@@ -3768,7 +3768,7 @@ if( typeof(eo_wbc_object) != 'undefined'){
 				      console.log('filter filter_set_click');
 				      console.log(_this.configs.filter_setting_alternate_mobile);
 				      // <?php if(wp_is_mobile() and !wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile')): ?>
-				      if((window.document.splugins.common.is_mobile) && !(_this.configs.filter_setting_alternate_mobile)){
+				      if( (eo_wbc_object.wbc_is_mobile_by_page_sections == 1) && (window.document.splugins.common.is_mobile) && !(_this.configs.filter_setting_alternate_mobile)){
 
 				      	console.log('filter filter_set_click 1');
 				      	console.log(element);
@@ -3786,7 +3786,7 @@ if( typeof(eo_wbc_object) != 'undefined'){
 				      }
 
 				      // <?php if(wp_is_mobile() and wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile')): ?>
-				      if((window.document.splugins.common.is_mobile) && (_this.configs.filter_setting_alternate_mobile)){
+				      if( (eo_wbc_object.wbc_is_mobile_by_page_sections == 1) && (window.document.splugins.common.is_mobile) && (_this.configs.filter_setting_alternate_mobile)){
 
 				      	console.log('filter filter_set_click 2');
 				      	console.log(element);
