@@ -106,18 +106,7 @@ if(!class_exists('WBC_Loader')) {
 
 			// if(isset($param[0]) && ($param[0]=='jquery' || $param[0]=='jQuery')) {
 			if(in_array('jquery', $param) || in_array('jQuery', $param)) {
-				/*ACTIVE_TODO_OC_START
-				-- Now load this jquery library from this path or URL 
-				  	-- so let's simply enqueue it when than enqueue example is ready -- to h && -- to bk
-					    -- Since the version is going to be changed so all the frontend javascript jquery functionality needs to be tested in detail -- to h && -- to bk -- to a
-					    	-- including everything and the admin side also need to be tested in detail, since the setup wizard is affected due to version change so that needs to be tested in detail -- to h && -- to bk  && -- to a
-				     	-- all since the version change is affecting all the admin side layer enter admin panel and need to be tested -- to h && -- to bk  && -- to a
-				ACTIVE_TODO_OC_END*/     	
-				// echo '<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>';
-				// -- aa jquery no wp_enqueue_scripts script no call kadhi nakhvano avse and extention mathi call karavyo se tena mate alag thi code mukvano avse -- to a
-				// add_action('wp_enqueue_scripts', function(){
-				// 	wp_enqueue_script( 'jquery' );
-				// });
+				echo '<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>';
 			}
 			
 			if(in_array('underscore', $param)) {
