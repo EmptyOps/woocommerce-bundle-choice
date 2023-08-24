@@ -45,15 +45,13 @@ class SP_SLCTRN_Swatches_Cart_Form extends \sp\selectron\controller\publics\cont
 
 		add_action('wp_head',function() use($selector,$delay){
 
-			$selector_selector = $selector;
-			$inline_script = "
-			window.document.splugins = window.document.splugins || {}; 
-			window.document.splugins.tableview = window.document.splugins.tableview || {};
-			window.document.splugins.tableview.table_container = ".$selector_selector.";
-			";
+			$table_container = $selector;
 
-
-			wbc()->load->add_inline_script( '', $inline_script,'common' );
+			$inline_script =
+			    "window.document.splugins = window.document.splugins || {};\n" .
+			    "window.document.splugins.tableview = window.document.splugins.tableview || {};\n" .
+			    "window.document.splugins.tableview.table_container = '".$table_container."';\n";
+			wbc()->load->add_inline_script('', $inline_script, 'common');
 
 			if(false) {
 			?>

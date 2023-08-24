@@ -40,15 +40,15 @@ class View_Order {
             $sets=(json_decode($sets['order_map']));
             //wbc()->common->pr($sets);
 
-            $get_sets_sets =  $this->get_sets($sets);
-            $inline_script = 
-            "jQuery(document).ready(function(){\n" .
-            "   jQuery('table.shop_table.order_details>tbody').html('$get_sets_sets');\n".
-            "});";
-            wbc()->load->add_inline_script( '', $inline_script, 'common' );
+            $inline_script =
+                "jQuery(document).ready(function(){\n" .
+                "    jQuery('table.shop_table.order_details>tbody').html('" . $this->get_sets($sets) . "');\n" .
+                "});\n";
+            wbc()->load->add_inline_script('', $inline_script, 'common');
+
             if(false) {           
             ?>
-                <script type="text/javascript">
+            <script type="text/javascript">
                 jQuery(document).ready(function(){
                     jQuery('table.shop_table.order_details>tbody').html('<?php echo $this->get_sets($sets); ?>');
                 });    

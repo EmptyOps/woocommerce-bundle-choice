@@ -390,25 +390,24 @@ class Term_Meta {
 				</div>
 				<?php
 				$inline_script =
-							"jQuery(document).on(\"click\",\".wbc_attachment_thumb_button\",function(){\n" .
-				  "            wp_media = wp.media({\n" .
-				  "              title: 'Term Thumb Image',\n" .
-				  "              button: {\n" .
-				  "                text: 'Choose Image'\n" .
-				  "              },\n" .
-				  "              multiple: false\n" .
-				  "            })\n" .
-				  "            .on('select', function() {\n" .
-				  "\n" .
-				  "              var attachment = wp_media.state().get('selection').first().toJSON();\n" .
-				  "              jQuery('#wbc_attachment_thumb_img').attr('src', attachment.url);\n" .
-				  "              jQuery('#wbc_attachment_thumb').val( attachment.url);\n" .
-				  "            })\n" .
-				  "            .open();\n" .
-				  "            return false;\n" .
-				  "          });    \n"; 
-	
-				wbc()->load->add_inline_script( '', $inline_script, 'common' );
+				    "jQuery(document).on(\"click\",\".wbc_attachment_thumb_button\",function(){\n" .
+				    "    wp_media = wp.media({\n" .
+				    "        title: 'Term Thumb Image',\n" .
+				    "        button: {\n" .
+				    "            text: 'Choose Image'\n" .
+				    "        },\n" .
+				    "        multiple: false\n" .
+				    "    })\n" .
+				    "    .on('select', function() {\n" .
+				    "        var attachment = wp_media.state().get('selection').first().toJSON();\n" .
+				    "        jQuery('#wbc_attachment_thumb_img').attr('src', attachment.url);\n" .
+				    "        jQuery('#wbc_attachment_thumb').val( attachment.url);\n" .
+				    "    })\n" .
+				    "    .open();\n" .
+				    "    return false;\n" .
+				    "});\n";
+				wbc()->load->add_inline_script('', $inline_script, 'common');
+
 				if(false) {
 				?>
 				<script type="text/javascript">					
