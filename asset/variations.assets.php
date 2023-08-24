@@ -1257,7 +1257,54 @@ console.log('is_shop_css');
 	
 <?php	
 }
+
+if(is_product() && !has_action('woocommerce_before_variations_form')) {
+}
+if(empty($init_toggle)):
+$init_toggle_init_toggle = if(empty($init_toggle));
+endif;
+$inline_script = 
+ "    " .
+    "   jQuery(document).ready(function($){" .
+    "       // ACTIVE_TODO below sections might be of use so keeping it on for now, but we must double confirm like legacy woo js layers provide full dropdown template supports. but i think still sementic specific matters need to be managed because we are using sementic templates." .
+    "           // ACTIVE_TODO_OC_START" .
+    "           // do we need to disable the blow change event implimention -- to h" .
+    "           //      eithere way blowo class would be loading only when the dropdown template of simentic is used on item page -- to h" .
+    "           // ACTIVE_TODO_OC_END   " .
+    "       jQuery(\".dropdown\").dropdown().on('change',function(){" .
+    "           var target_selector =  $('#'+$(this).find('input[type=\"hidden\"]').data('id'));" .
+    "           target_selector.val($(this).find('input[type=\"hidden\"]').val());" .
+    "           /*$(this).parent().find('.selected').removeClass('selected');" .
+    "           $(this).addClass('selected');*/" .
+    "           jQuery(\".variations_form\" ).trigger('check_variations');" .
+    "           $(target_selector).trigger('change');" .
+    "       });" .
+    "" .
+    "" .
+    "       // ACTIVE_TODO we shoud simply put this class on the perticuler template html dom and coment the code below -- to h & -- to s" .
+    "           // for now lats comment the code but after confirming with t -- to t" .
+    "       if($('table.variations tbody>tr').length>0){" .
+    "           $('table.variations').addClass('ui raised segment');    " .
+    "       }" .
+    "       " .
+    "       $('#wbc_variation_toggle').on('click',function(){" .
+    "           if($(this).find('.icon').hasClass('rotate-up')) {" .
+    "               $(this).find('.icon').removeClass('rotate-up');" .
+    "               $(this).find('.icon').addClass('rotate-down');" .
+    "               $('table.variations').slideToggle(\"slow\");" .
+    "           } else {" .
+    "               $(this).find('.icon').removeClass('rotate-down');" .
+    "               $(this).find('.icon').addClass('rotate-up');" .
+    "               $('table.variations').slideToggle(\"slow\");" .
+    "           }                       " .
+    "       });" .
+    "";
+    "$('#wbc_variation_toggle').trigger('click');\n"; 
+wbc()->load->add_inline_script( '', $inline_script, 'common' );
+    
+if(false){
 ?>
+
 
 <script>
 	<?php 
@@ -1322,6 +1369,9 @@ console.log('is_shop_css');
 		
 	});
 </script>
+<?php
+	}
+?>
 
 <!-- /*---TOOLTIP--- @tejas*/
 /*----JS----*/ -->
@@ -1605,7 +1655,7 @@ $bg_hover_color = wbc()->options->get_option('tiny_features',$spui_is_product_ca
 </style>
 
 <?php
-
+$$init_toggle = if(empty($init_toggle)):
 $inline_script = 
   "  jQuery(document).ready(function($){\n" .
   "    jQuery(\".dropdown\").dropdown().on('change',function(){\n" .
@@ -1631,7 +1681,7 @@ $inline_script =
   "        $('table.variations').slideToggle(\"slow\");\n" .
   "      }                \n" .
   "    });\n";
-
+  "$('#wbc_variation_toggle').trigger('click');\n"
   
 wbc()->load->add_inline_script( '', $inline_script, 'common' );
 
