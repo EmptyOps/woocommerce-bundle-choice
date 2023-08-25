@@ -433,33 +433,37 @@ class EOWBC_Filter_Widget {
 					</style>
 					<?php
 				}
-				$inline_script = 
-  "jQuery(document).ready(function($){      \n" .
-  "\n" .
-  "            jQuery.fn.wbc_flip_toggle_image=function(element){\n" .
-  "              let img = jQuery(element).find('img');            \n" .
-  "              if(jQuery(element).hasClass('eo_wbc_filter_icon_select')) {\n" .
-  "                let toggle_src = jQuery(img).attr('data-toggleimgsrc');\n" .
-  "                if((typeof(toggle_src)!==typeof(undefined)) && toggle_src.trim()!==''){\n" .
-  "                  console.log(toggle_src);\n" .
-  "                  jQuery(element).addClass('toggled_image');\n" .
-  "                  jQuery(img).attr('src',toggle_src);\n" .
-  "                }      \n" .
-  "              } else {\n" .
-  "                let img_src = jQuery(img).attr('data-imgsrc');\n" .
-  "                if((typeof(img_src)!==typeof(undefined)) && img_src.trim()!==''){\n" .
-  "                  console.log(img_src);\n" .
-  "                  jQuery(element).removeClass('toggled_image');\n" .
-  "                  jQuery(img).attr('src',img_src); \n" .
-  "                }\n" .
-  "              }\n" .
-  "            }\n" .
-  "\n" .
-  "            $('.eo_wbc_filter_icon').click(function(){          \n" .
-  "              jQuery.fn.wbc_flip_toggle_image(this);\n" .
-  "            });\n" .
-  "          })\n";
-				wbc()->load->add_inline_script( '', $inline_script, 'common' );
+							
+				$inline_script =
+				    "// console.log('filter_widgets');\n" .
+				    "\n" .
+				    "jQuery(document).ready(function($){\n" .
+				    "\n" .
+				    "    jQuery.fn.wbc_flip_toggle_image=function(element){\n" .
+				    "        let img = jQuery(element).find('img');\n" .
+				    "        if(jQuery(element).hasClass('eo_wbc_filter_icon_select')) {\n" .
+				    "            let toggle_src = jQuery(img).attr('data-toggleimgsrc');\n" .
+				    "            if((typeof(toggle_src)!==typeof(undefined)) && toggle_src.trim()!==''){\n" .
+				    "                console.log(toggle_src);\n" .
+				    "                jQuery(element).addClass('toggled_image');\n" .
+				    "                jQuery(img).attr('src',toggle_src);\n" .
+				    "            }\n" .
+				    "        } else {\n" .
+				    "            let img_src = jQuery(img).attr('data-imgsrc');\n" .
+				    "            if((typeof(img_src)!==typeof(undefined)) && img_src.trim()!==''){\n" .
+				    "                console.log(img_src);\n" .
+				    "                jQuery(element).removeClass('toggled_image');\n" .
+				    "                jQuery(img).attr('src',img_src); \n" .
+				    "            }\n" .
+				    "        }\n" .
+				    "    }\n" .
+				    "\n" .
+				    "    $('.eo_wbc_filter_icon').click(function(){\n" .
+				    "        jQuery.fn.wbc_flip_toggle_image(this);\n" .
+				    "    });\n" .
+				    "})\n";
+				wbc()->load->add_inline_script('', $inline_script, 'common');
+
 				if(false){
 				?>
 				<script type="text/javascript">
@@ -569,49 +573,48 @@ class EOWBC_Filter_Widget {
 					
 				</style>
 				<?php
-				$inline_script = 
-				  "jQuery(document).ready(function(){\n" .
-				  "            jQuery(\".toggle_sticky_mob_filter\").on('click tap',function(){\n" .
-				  "              jQuery('.bottom_filter_segment.active').transition('fade up');\n" .
-				  "              jQuery('.bottom_filter_segment.active').toggleClass('active');\n" .
-				  "              jQuery(jQuery(this).data('target')).transition('fade up');\n" .
-				  "              jQuery(jQuery(this).data('target')).toggleClass('active');\n" .
-				  "            });\n" .
-				  "\n" .
-				  "            jQuery(\".close_sticky_mob_filter\").on('click tap',function(){\n" .
-				  "              //jQuery(jQuery(this).data('target')).transition('fade up');\n" .
-				  "              jQuery('.bottom_filter_segment.active').transition('fade up');\n" .
-				  "              jQuery('.bottom_filter_segment.active').toggleClass('active');\n" .
-				  "            });\n" .
-				  "            jQuery('#advance_filter_mob_alternate').on('click tap',function(){\n" .
-				  "              let is_twoTab = jQuery('.filter_setting_advance_two_tabs .item.active');\n" .
-				  "              \n" .
-				  "              if(typeof(is_twoTab)!=typeof(undefined) && is_twoTab.length>0){\n" .
-				  "                is_twoTab = true;\n" .
-				  "              } else {\n" .
-				  "                is_twoTab = false;\n" .
-				  "              }\n" .
-				  "\n" .
-				  "              let advance_filter_selector = \".toggle_sticky_mob_filter.advance_filter_mob\";\n" .
-				  "              if(is_twoTab){\n" .
-				  "                advance_filter_selector = advance_filter_selector+'[data-tab-group=\"'+jQuery('.filter_setting_advance_two_tabs .item.active').data('tab-name')+'\"],'+advance_filter_selector+'[data-tab-group=\"\"]'\n" .
-				  "              }\n" .
-				  "\n" .
-				  "              if(jQuery('#advance_filter_mob_alternate').hasClass('status_hidden')){\n" .
-				  "                jQuery(\".toggle_sticky_mob_filter.advance_filter_mob\").hide();\n" .
-				  "\n" .
-				  "                jQuery('#advance_filter_mob_alternate').removeClass('status_hidden');\n" .
-				  "\n" .
-				  "              } else{\n" .
-				  "                jQuery(advance_filter_selector).show();\n" .
-				  "                jQuery('#advance_filter_mob_alternate').addClass('status_hidden');\n" .
-				  "              }\n" .
-				  "              //jQuery(\".toggle_sticky_mob_filter.advance_filter_mob\").toggle();\n" .
-				  "              jQuery('#advance_filter_mob_alternate .ui.icon').toggleClass('up down');\n" .
-				  "            });\n" .
-				  "          });\n";
+								
+				$inline_script =
+				    "jQuery(document).ready(function(){\n" .
+				    "    jQuery(\".toggle_sticky_mob_filter\").on('click tap',function(){\n" .
+				    "        jQuery('.bottom_filter_segment.active').transition('fade up');\n" .
+				    "        jQuery('.bottom_filter_segment.active').toggleClass('active');\n" .
+				    "        jQuery(jQuery(this).data('target')).transition('fade up');\n" .
+				    "        jQuery(jQuery(this).data('target')).toggleClass('active');\n" .
+				    "    });\n" .
+				    "\n" .
+				    "    jQuery(\".close_sticky_mob_filter\").on('click tap',function(){\n" .
+				    "        //jQuery(jQuery(this).data('target')).transition('fade up');\n" .
+				    "        jQuery('.bottom_filter_segment.active').transition('fade up');\n" .
+				    "        jQuery('.bottom_filter_segment.active').toggleClass('active');\n" .
+				    "    });\n" .
+				    "    jQuery('#advance_filter_mob_alternate').on('click tap',function(){\n" .
+				    "        let is_twoTab = jQuery('.filter_setting_advance_two_tabs .item.active');\n" .
+				    "        \n" .
+				    "        if(typeof(is_twoTab)!=typeof(undefined) && is_twoTab.length>0){\n" .
+				    "            is_twoTab = true;\n" .
+				    "        } else {\n" .
+				    "            is_twoTab = false;\n" .
+				    "        }\n" .
+				    "\n" .
+				    "        let advance_filter_selector = \".toggle_sticky_mob_filter.advance_filter_mob\";\n" .
+				    "        if(is_twoTab){\n" .
+				    "            advance_filter_selector = advance_filter_selector+'[data-tab-group=\"'+jQuery('.filter_setting_advance_two_tabs .item.active').data('tab-name')+'\"],'+advance_filter_selector+'[data-tab-group=\"\"]'\n" .
+				    "        }\n" .
+				    "\n" .
+				    "        if(jQuery('#advance_filter_mob_alternate').hasClass('status_hidden')){\n" .
+				    "            jQuery(\".toggle_sticky_mob_filter.advance_filter_mob\").hide();\n" .
+				    "            jQuery('#advance_filter_mob_alternate').removeClass('status_hidden');\n" .
+				    "        } else{\n" .
+				    "            jQuery(advance_filter_selector).show();\n" .
+				    "            jQuery('#advance_filter_mob_alternate').addClass('status_hidden');\n" .
+				    "        }\n" .
+				    "        //jQuery(\".toggle_sticky_mob_filter.advance_filter_mob\").toggle();\n" .
+				    "        jQuery('#advance_filter_mob_alternate .ui.icon').toggleClass('up down');\n" .
+				    "    });\n" .
+				    "});\n";
+				wbc()->load->add_inline_script('', $inline_script, 'common');
 
-				wbc()->load->add_inline_script( '', $inline_script, 'common' );
 				if(false){
 				?>
 				<script>
@@ -741,19 +744,20 @@ class EOWBC_Filter_Widget {
 				</style>
 				<?php 
 
-				$inline_script = 
-				  "jQuery(document).ready(function($){\n" .
-				  "            $('.eo-wbc-container.filters.container .ui.accordion .title').click(function(){\n" .
-				  "              let _icon = $(this).find('i.icon:not(.question)');\n" .
-				  "              if($(_icon).hasClass('plus')){\n" .
-				  "                $('.eo-wbc-container.filters.container .ui.accordion .title').find('i.icon.minus').toggleClass('plus minus');\n" .
-				  "                $(_icon).toggleClass('plus minus');\n" .
-				  "              } else {\n" .
-				  "                $(_icon).toggleClass('plus minus');\n" .
-				  "              }\n" .
-				  "            });\n" .
-				  "          });\n";
-				wbc()->load->add_inline_script( '', $inline_script, 'common' );
+				$inline_script =
+				    "jQuery(document).ready(function($){\n" .
+				    "    $('.eo-wbc-container.filters.container .ui.accordion .title').click(function(){\n" .
+				    "        let _icon = $(this).find('i.icon:not(.question)');\n" .
+				    "        if($(_icon).hasClass('plus')){\n" .
+				    "            $('.eo-wbc-container.filters.container .ui.accordion .title').find('i.icon.minus').toggleClass('plus minus');\n" .
+				    "            $(_icon).toggleClass('plus minus');\n" .
+				    "        } else {\n" .
+				    "            $(_icon).toggleClass('plus minus');\n" .
+				    "        }\n" .
+				    "    });\n" .
+				    "});\n";
+				wbc()->load->add_inline_script('', $inline_script, 'common');
+
 				if(false) {
 				?>
 				<script type="text/javascript">
@@ -2221,24 +2225,24 @@ class EOWBC_Filter_Widget {
 			?></div><?php			
 		}
 
-		$inline_script = 
-  "jQuery(document).ready(function(){  \n" .
-  "          jQuery(\".dropdown\").dropdown({\n" .
-  "            keepOnScreen:true,\n" .
-  "            on:'hover',\n" .
-  "            onShow:function(){\n" .
-  "              toggle_ = jQuery(this).find('.icon');\n" .
-  "              jQuery(toggle_).removeClass('down');\n" .
-  "              jQuery(toggle_).addClass('up');\n" .
-  "            },\n" .
-  "            onHide:function(){\n" .
-  "              toggle_ = jQuery(this).find('.icon');\n" .
-  "              jQuery(toggle_).removeClass('up');\n" .
-  "              jQuery(toggle_).addClass('down');\n" .
-  "            }\n" .
-  "          });        \n" .
-  "        });\n";
-		wbc()->load->add_inline_script( '', $inline_script, 'common' );
+		$inline_script =
+		    "jQuery(document).ready(function(){\n" .
+		    "    jQuery(\".dropdown\").dropdown({\n" .
+		    "        keepOnScreen:true,\n" .
+		    "        on:'hover',\n" .
+		    "        onShow:function(){\n" .
+		    "            toggle_ = jQuery(this).find('.icon');\n" .
+		    "            jQuery(toggle_).removeClass('down');\n" .
+		    "            jQuery(toggle_).addClass('up');\n" .
+		    "        },\n" .
+		    "        onHide:function(){\n" .
+		    "            toggle_ = jQuery(this).find('.icon');\n" .
+		    "            jQuery(toggle_).removeClass('up');\n" .
+		    "            jQuery(toggle_).addClass('down');\n" .
+		    "        }\n" .
+		    "    });\n" .
+		    "});\n";
+		wbc()->load->add_inline_script('', $inline_script, 'common');
 
 		if(false){
 		?>
@@ -2281,8 +2285,12 @@ class EOWBC_Filter_Widget {
 		if(!defined('EO_WBC_FILTER_UI_ICON_CALLED')){
 			define('EO_WBC_FILTER_UI_ICON_CALLED',true);
 
-			$inline_script = "var EO_WBC_FILTER_UI_ICON_TERM_SLUG = [];\n";
-			wbc()->load->add_inline_script( '', $inline_script, 'common' );
+			$inline_script =
+			    "var EO_WBC_FILTER_UI_ICON_TERM_SLUG = [];\n" .
+			    "\n" .
+			    "// console.log('EO_WBC_FILTER_UI_ICON_TERM_SLUG empty');\n" .
+			    "// console.log(EO_WBC_FILTER_UI_ICON_TERM_SLUG);\n";
+			wbc()->load->add_inline_script('', $inline_script, 'common');
 
 			if(false){
 			?>
@@ -2528,44 +2536,112 @@ class EOWBC_Filter_Widget {
 
 
 		if(true){
-		$EO_WBC_FILTER_UI_ICON_TERM_SLUG = $term->slug;	
+	
 		$inline_script =
-			  "jQuery(document).ready(function($){\n" .
-			  "        console.log('EO_WBC_FILTER_UI_ICON_TERM_SLUG');\n" .
-			  "        console.log(EO_WBC_FILTER_UI_ICON_TERM_SLUG);\n" .
-			  "        EO_WBC_FILTER_UI_ICON_TERM_SLUG.push(".$EO_WBC_FILTER_UI_ICON_TERM_SLUG.");\n";
-
-		wbc()->load->add_inline_script( '', $inline_script, 'common' );
-
-		if("<?php echo $term->slug; ?>") {
-
-		$icon_filter_type_icon_filter_type = $type;
-		$filter_prefix_filter_prefix = $this->filter_prefix;
-		$slug_slug = $term->slug;
-		$inline_script = 
-			  "jQuery(\".eo_wbc_srch_btn:eq(2)\").on('reset',function(){  \n" .
-			  "            var icon_filter_type =".$icon_filter_type_icon_filter_type.";\n" .
-			  "            var filter_list= undefined;\n" .
-			  "            if(icon_filter_type == 1) {\n" .
-			  "              /*filter_list = jQuery('[name=\"checklist_'+__data_filter_slug+'\"]');*/\n" .
-			  "              filter_list = jQuery('form#".$filter_prefix_filter_prefix."eo_wbc_filter [name=\"checklist_'+".$slug_slug."+'\"]');\n" .
-			  "            } else {\n" .
-			  "              /*filter_list = jQuery('[name=\"cat_filter_'+__data_filter_slug+'\"]');*/\n" .
-			  "              filter_list = jQuery('form#".$filter_prefix_filter_prefix."eo_wbc_filter [name=\"cat_filter_'+".$slug_slug."+'\"]');\n" .
-			  "            }\n" .
-			  "\n" .
-			  "            if(jQuery(filter_list).attr('data-edit')=='1') {\n" .
-			  "              jQuery(filter_list).val(\"\");\n" .
-			  "\n" .
-			  "              jQuery(\"form#".$filter_prefix_filter_prefix."eo_wbc_filter .eo_wbc_filter_icon_select\").each(function(index,element){\n" .
-			  "                jQuery(element).removeClass(\"eo_wbc_filter_icon_select\");\n" .
-			  "              });\n" .
-			  "            }        \n" .
-			  "          });\n" .
-			  "        }        \n" .
-			  "      });\n";
-		wbc()->load->add_inline_script( '', $inline_script, 'common' );
-
+		    "jQuery(document).ready(function($){\n" .
+		    "    console.log('EO_WBC_FILTER_UI_ICON_TERM_SLUG');\n" .
+		    "    console.log(EO_WBC_FILTER_UI_ICON_TERM_SLUG);\n" .
+		    "    EO_WBC_FILTER_UI_ICON_TERM_SLUG.push(\"$term->slug\");\n" .
+		    "\n" .
+		    "    /*__data_filter_slug=\"$term->slug\";*/\n" .
+		    "    /*if(__data_filter_slug){*/\n" .
+		    "    if(\"$term->slug\") {\n" .
+		    "        // --- aa code woo-bundle-choice/asset/js/publics/eo_wbc_filter.js input_type_icon_click() ma move karyo se ---\n" .
+		    "        // --- start ---\n" .
+		    "        // //TO BE FIXED LATER.\n" .
+		    "        // /*jQuery('[data-filter=\"'+__data_filter_slug+'\"]:not(.none_editable)').off();\n" .
+		    "        let filter_container = jQuery('form#{$this->filter_prefix}eo_wbc_filter').parents().has('[data-filter=\"$term->slug\"]').get(0);\n" .
+		    "\n" .
+		    "        jQuery(filter_container).find('[data-filter=\"\"$term->slug\"\"]:not(.none_editable)').off();\n" .
+		    "\n" .
+		    "        jQuery(filter_container).find('[data-filter=\"$term->slug\"]:not(.none_editable)').on('click',function(e){\n" .
+		    "            event = e;\n" .
+		    "\n" .
+		    "            e.stopPropagation();\n" .
+		    "            e.preventDefault();\n" .
+		    "\n" .
+		    "            var icon_filter_type = jQuery(this).attr('data-type');\n" .
+		    "            var filter_name = jQuery(this).attr('data-filter');\n" .
+		    "\n" .
+		    "            var filter_list= undefined;\n" .
+		    "            var filter_target = undefined;\n" .
+		    "\n" .
+		    "            if(icon_filter_type == 1) {\n" .
+		    "                /*filter_list = jQuery('[name=\"checklist_\"+__data_filter_slug+'"]');*/\n" .
+		    "                filter_list = jQuery('form#{$this->filter_prefix}eo_wbc_filter [name=\"checklist_$term->slug\"]');\n" .
+		    "                filter_target = jQuery('form#{$this->filter_prefix}eo_wbc_filter [name=\"_attribute\"]');\n" .
+		    "            } else {\n" .
+		    "                /*filter_list = jQuery('[name=\"cat_filter_\"+__data_filter_slug+'"]');*/\n" .
+		    "                filter_list = jQuery('form#{$this->filter_prefix}eo_wbc_filter [name=\"cat_filter_$term->slug\"]');\n" .
+		    "                filter_target = jQuery('form#{$this->filter_prefix}eo_wbc_filter [name=\"_category\"]');\n" .
+		    "            }\n" .
+		    "\n" .
+		    "            let is_single_select = jQuery(this).data('single_select');\n" .
+		    "            if(typeof(is_single_select) !== typeof(undefined) && is_single_select==1){\n" .
+		    "                jQuery('form#{$this->filter_prefix}eo_wbc_filter [data-filter=\"$term->slug\"]:not(.none_editable)').removeClass('eo_wbc_filter_icon_select');\n" .
+		    "                let toggleable_selections = jQuery('form#{$this->filter_prefix}eo_wbc_filter .toggled_image[data-filter=\"$term->slug\"]:not(.none_editable)');\n" .
+		    "                if(typeof(toggleable_selections)!==typeof(undefined) && toggleable_selections.length>0){\n" .
+		    "                    jQuery.fn.wbc_flip_toggle_image(toggleable_selections[0]);\n" .
+		    "                }\n" .
+		    "                filter_list.val(jQuery(this).attr(\"data-slug\"));\n" .
+		    "            } else {\n" .
+		    "                if(filter_list.val().includes(jQuery(this).attr('data-slug'))){\n" .
+		    "                    let filter_list_items = filter_list.val().split(',');\n" .
+		    "                    let this_slug = jQuery(this).attr('data-slug').trim();\n" .
+		    "                    if(filter_list_items.includes(this_slug)) {\n" .
+		    "                        filter_list_items.splice(filter_list_items.indexOf(this_slug),1);\n" .
+		    "                    }\n" .
+		    "                    filter_list.val( filter_list_items.join(',') );\n" .
+		    "                }\n" .
+		    "                else {\n" .
+		    "                    filter_list.val(filter_list.val()+','+jQuery(this).attr(\"data-slug\"));\n" .
+		    "                }\n" .
+		    "            }\n" .
+		    "\n" .
+		    "            if(filter_target.val().includes(filter_name) && filter_list.val().length==0) {\n" .
+		    "                filter_target.val(filter_target.val().replace(','+filter_name,''));\n" .
+		    "            } else { if((!filter_target.val().includes(filter_name)) && filter_list.val().length) {\n" .
+		    "                filter_target.val(filter_target.val()+','+filter_name);\n" .
+		    "            } }\n" .
+		    "\n" .
+		    "            var icon_val=jQuery(filter_list).val();\n" .
+		    "            jQuery(filter_list).val(icon_val.substr(0,icon_val.length));\n" .
+		    "\n" .
+		    "            jQuery(this).toggleClass('eo_wbc_filter_icon_select');\n" .
+		    "            $('[name=\"paged\"]').val('1');\n" .
+		    "\n" .
+		    "            //////// 27-05-2022 - @drashti /////////\n" .
+		    "            // --add to be confirmed--\n" .
+		    "            window.document.splugins.wbc.filters.api.eo_wbc_filter_change_wrapper(false,'form#{$this->filter_prefix}eo_wbc_filter','',{'this':this,'event':event});\n" .
+		    "            ////////////////////////////////////////\n" .
+		    "\n" .
+		    "        });\n" .
+		    "        // --- end ---\n" .
+		    "\n" .
+		    "        // window.document.splugins.wbc.filters.api.input_type_icon_click();\n" .
+		    "\n" .
+		    "        jQuery(\".eo_wbc_srch_btn:eq(2)\").on('reset',function(){\n" .
+		    "            var icon_filter_type = \"$type\";\n" .
+		    "            var filter_list= undefined;\n" .
+		    "            if(icon_filter_type == 1) {\n" .
+		    "                /*filter_list = jQuery('[name=\"checklist_\"+__data_filter_slug+'"]');*/\n" .
+		    "                filter_list = jQuery('form#{$this->filter_prefix}eo_wbc_filter [name=\"checklist_$term->slug\"]');\n" .
+		    "            } else {\n" .
+		    "                /*filter_list = jQuery('[name=\"cat_filter_\"+__data_filter_slug+'"]');*/\n" .
+		    "                filter_list = jQuery('form#{$this->filter_prefix}eo_wbc_filter [name=\"cat_filter_$term->slug\"]');\n" .
+		    "            }\n" .
+		    "\n" .
+		    "            if(jQuery(filter_list).attr('data-edit')=='1') {\n" .
+		    "                jQuery(filter_list).val(\"\");\n" .
+		    "\n" .
+		    "                jQuery(\"form#{$this->filter_prefix}eo_wbc_filter .eo_wbc_filter_icon_select\").each(function(index,element){\n" .
+		    "                    jQuery(element).removeClass(\"eo_wbc_filter_icon_select\");\n" .
+		    "                });\n" .
+		    "            }\n" .
+		    "        });\n" .
+		    "    }\n" .
+		    "});\n";
+		wbc()->load->add_inline_script('', $inline_script, 'common');
 
 		if(false){
 		?>					
@@ -2888,10 +2964,12 @@ class EOWBC_Filter_Widget {
 						// ACTIVE_TODO_OC_END
 						'wbc_is_mobile_by_page_sections' => /*1*/(wbc_is_mobile_by_page_sections('cat_shop_page') ? 0 : 1),
     				);
-		$json_encode_parse = json_encode($data);
-		$inline_script = "var eo_wbc_object = JSON.parse('".$json_encode_parse."');\n";
-		wbc()->load->add_inline_script( '', $inline_script, 'common' );
-
+		
+		$inline_script =
+		    "// console.log('eo_wbc_object');\n" .
+		    "var eo_wbc_object = JSON.parse('" . json_encode($data) . "');\n" .
+		    "// console.log(eo_wbc_object);\n";
+		wbc()->load->add_inline_script('', $inline_script, 'common');
 
 		if(false){
 		?>
@@ -3108,19 +3186,19 @@ class EOWBC_Filter_Widget {
 		<div id="loading" style="z-index: -999; height: 100%; width: 100%; position: fixed; top: 0;<?php (wbc()->options->get_option('appearance_filters','appearance_filters_loader') OR apply_filters('eowbc_filter_widget_loader',false))?_e('display:none !important;'):'';?>"></div>
 		<?php
 
-		$inline_script = 
-		"jQuery(document).ready(function(){\n" .
-		"        jQuery(document).on('click',\".question.circle.icon\",function(){\n" .
-		"          jQuery(\"#help_modal\").find(\".content\").html('');  \n" .
-		"          _help_text = jQuery(this).data('help');\n" .
-		"          jQuery(\"#help_modal\").find(\".content\").html(_help_text);\n" .
-		"          jQuery(\"#help_modal\").modal('show');\n" .
-		"        });\n" .
-		"        jQuery(document).on('click',\"#help_modal .close.icon\",function(){\n" .
-		"          jQuery(\"#help_modal\").modal('hide');\n" .
-		"        });\n" .
-		"      });\n";
-		wbc()->load->add_inline_script( '', $inline_script, 'common' );
+		$inline_script =
+		    "jQuery(document).ready(function(){
+		        jQuery(document).on('click',\".question.circle.icon\",function(){
+		            jQuery(\"#help_modal\").find(\".content\").html('');\n" .
+		            "    _help_text = jQuery(this).data('help');
+		            jQuery(\"#help_modal\").find(\".content\").html(_help_text);
+		            jQuery(\"#help_modal\").modal('show');
+		        });
+		        jQuery(document).on('click',\"#help_modal .close.icon\",function(){
+		            jQuery(\"#help_modal\").modal('hide');
+		        });
+		    });";
+		wbc()->load->add_inline_script('', $inline_script, 'common');
 
 		if(false){
 		?>

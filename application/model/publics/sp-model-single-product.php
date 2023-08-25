@@ -280,6 +280,59 @@ class SP_Model_Single_Product extends SP_Single_Product {
 		        			color: <?php _e($font_hover_color); ?> !important;	
 		        		}
 		        	</style>
+		        	<?php
+
+					$inline_script =
+					    "jQuery(document).ready(function($){\n" .
+					    "    jQuery(\".dropdown\").dropdown().on('change',function(){\n" .
+					    "        var target_selector =  $('#'+$(this).find('input[type=\"hidden\"]').data('id'));\n" .
+					    "        target_selector.val($(this).find('input[type=\"hidden\"]').val());\n" .
+					    "        /*$(this).parent().find('.selected').removeClass('selected');\n" .
+					    "        $(this).addClass('selected');*/\n" .
+					    "        jQuery(\".variations_form\" ).trigger('check_variations');\n" .
+					    "        $(target_selector).trigger('change');\n" .
+					    "    });\n" .
+					    "    if($('table.variations tbody>tr').length>0){\n" .
+					    "        $('table.variations').addClass('ui raised segment');\n" .
+					    "    }\n" .
+					    "    \n" .
+					    "    $('#wbc_variation_toggle').on('click',function(){\n" .
+					    "        if($(this).find('.icon').hasClass('rotate-up')) {\n" .
+					    "            $(this).find('.icon').removeClass('rotate-up');\n" .
+					    "            $(this).find('.icon').addClass('rotate-down');\n" .
+					    "            $('table.variations').slideToggle(\"slow\");\n" .
+					    "        } else {\n" .
+					    "            $(this).find('.icon').removeClass('rotate-down');\n" .
+					    "            $(this).find('.icon').addClass('rotate-up');\n" .
+					    "            $('table.variations').slideToggle(\"slow\");\n" .
+					    "        }        	\n" .
+					    "    });\n" .
+					    "\n" .
+					    "    <?php if(empty(\$init_toggle)): ?>\n" .
+					    "        $('#wbc_variation_toggle').trigger('click');\n" .
+					    "    <?php endif; ?>\n" .
+					    "\n" .
+					    "    // ACTIVE_TODO_OC_START\n" .
+					    "    // --	below two click events would be implemented in the core variations js module, in that case it will be remove here\n" .
+					    "    // ACTIVE_TODO_OC_END \n" .
+					    "    $('.variable-item').on('click',function(){\n" .
+					    "        var target_selector = $('#'+$(this).data('id'));\n" .
+					    "        target_selector.val($(this).data('value'));\n" .
+					    "        $(this).parent().find('.selected').removeClass('selected');\n" .
+					    "        $(this).addClass('selected');\n" .
+					    "        jQuery(\".variations_form\" ).trigger('check_variations');\n" .
+					    "        $(target_selector).trigger('change');\n" .
+					    "    });\n" .
+					    "\n" .
+					    "    jQuery(\".variations_form\").on('click', '.reset_variations'/*'woocommerce_variation_select_change'*//*'reset'*/,function(){\n" .
+					    "        jQuery('.variable-items-wrapper .selected').removeClass('selected');\n" .
+					    "        jQuery('.variable-items-wrapper .dropdown').dropdown('restore defaults');\n" .
+					    "    });\n" .
+					    "});\n";
+					wbc()->load->add_inline_script('', $inline_script, 'common');
+
+		        	if(false) {
+		        		?>
 		        	<script>
 		        		jQuery(document).ready(function($){
 		        			jQuery(".dropdown").dropdown().on('change',function(){
@@ -329,7 +382,8 @@ class SP_Model_Single_Product extends SP_Single_Product {
 		        			
 		        		});
 		        	</script>
-				<?php
+
+				<?php }
 				echo ob_get_clean();
 				
 				if(!empty($toggle_status)){	
@@ -349,10 +403,11 @@ class SP_Model_Single_Product extends SP_Single_Product {
 						wbc()->load->asset('css','fomantic/semantic.min');
 						wbc()->load->asset('js','fomantic/semantic.min',array('jquery'));
 						ob_start();
-						$toggle_text_toggle_text = _e($toggle_text);
-						$inline_script = 
-						"jQuery(\".variations_form\").before('<span id=\"wbc_variation_toggle\" class=\"ui raised segment\">'".$toggle_text_toggle_text."'<i class=\"caret up icon\" style=\"text-align: center;line-height: 1em;\"></i></span>');  \n";
-						wbc()->load->add_inline_script( '', $inline_script, 'common' );
+
+						$inline_script =
+						    "jQuery(\".variations_form\").before('<span id=\"wbc_variation_toggle\" class=\"ui raised segment\"><?php _e(\$toggle_text); ?><i class=\"caret up icon\" style=\"text-align: center;line-height: 1em;\"></i></span>');\n";
+						wbc()->load->add_inline_script('', $inline_script, 'common');
+
 						if(false){
 						?>	
 							<script>
@@ -871,10 +926,11 @@ class SP_Model_Single_Product extends SP_Single_Product {
 					// wbc()->load->asset('css','fomantic/semantic.min');
 					// wbc()->load->asset('js','fomantic/semantic.min',array('jquery'));
 					ob_start();
-					$toggle_text_toggle_text_toggle_text = _e($toggle_text);
-					$inline_script = 
-					"jQuery(\".variations_form\").before('<span id=\"wbc_variation_toggle\" class=\"ui raised segment\">'".$toggle_text."'<i class=\"caret up icon\" style=\"text-align: center;line-height: 1em;\"></i></span>');  \n"
-					wbc()->load->add_inline_script( '', $inline_script, 'common' );
+
+					$inline_script =
+					    "jQuery(\".variations_form\").before('<span id=\"wbc_variation_toggle\" class=\"ui raised segment\"><?php _e(\$toggle_text); ?><i class=\"caret up icon\" style=\"text-align: center;line-height: 1em;\"></i></span>');\n";
+					wbc()->load->add_inline_script('', $inline_script, 'common');
+
 					if(false){
 					?>	
 						<script>
