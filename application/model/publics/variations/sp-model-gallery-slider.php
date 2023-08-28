@@ -108,6 +108,7 @@ class SP_Model_Gallery_Slider extends Eowbc_Base_Model_Publics {
 		// ACTIVE_TODO_OC_START
 		// -- jo user admin mathi value set kare to tene priority malvi joye and jo default value set kari ne save karave to avoid thavu joye(aa if confirm karvani se) @a 154.12 
 		// -- first condition jyare value 0 enter kare tyare value default value save thay jase tevi cndition banavi se && ama secound condition se te same atyare je value save hase te value fari thi save nay karave tena mate se @a--
+		// -- jyare theme change kare atyare jo input ma value hase to default theme value hase te set nay thay and 0 kari ne save karavyu hase to theme vise frontend ma value change thase @a--
 		// ACTIVE_TODO_OC_END
 		if( ( !empty($tiny_features_gallery_width) && $tiny_features_gallery_width != '0%' ) && $tiny_features_gallery_width != $data['sp_variation_gallery']['gallery_zoom_container_width'] ){
 

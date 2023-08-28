@@ -163,6 +163,10 @@ class SP_Compatibility {
 
 	        	return '50%';
 
+	        }elseif ($current_theme_key == 'themes___Divi') {
+
+	        	return '52%';
+
 	        }elseif ($current_theme_key == 'themes___ecommerce-solution') {
 
 	        	return '52%';
@@ -253,11 +257,11 @@ class SP_Compatibility {
 
 	        }elseif ($current_theme_key == 'themes___twentytwentythree') {
 
-	        	return '52%';
+	        	return '100%';
 
 	        }elseif ($current_theme_key == 'themes___twentytwentytwo') {
 
-	        	return '52%';
+	        	return '100%';
 
 	        }elseif ($current_theme_key == 'themes___vogue') {
 
