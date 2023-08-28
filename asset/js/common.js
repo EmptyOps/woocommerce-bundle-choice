@@ -1796,10 +1796,12 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
         // --  and as mentioned above this object will always be passed from all .each loops under element, so use that element inside the process_attribute_template -- to s done
         ACTIVE_TODO_OC_END*/
 
-        console.log('data.select creat');
+        console.log('data element');
         console.log(element);
 
-        data.select = jQuery(element).siblings('select.woo-variation-raw-select');
+        // -- data.select 28-08-2023 @a
+        // data.select = jQuery(element).siblings('select.woo-variation-raw-select');
+        data.select = jQuery(element).parent().find('select.woo-variation-raw-select');
         data.selected = '';
         data.options = data.select.find('option');
         data.disabled = data.select.find('option:disabled');
@@ -1807,6 +1809,8 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
         data.current = data.select.find('option:selected');
         data.eq = data.select.find('option').eq(1);
 
+        console.log('data.select select');
+        console.log(data.select);
         // console.log("select and disable log");
         // console.log(data.options);
         // console.log(data.disabled);
