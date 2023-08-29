@@ -38,7 +38,7 @@ if(wp_verify_nonce(wbc()->sanitize->post('_wpnonce'),'eowbc_tiny_features_filter
             foreach ($filter_data as $key=>$item) {
                 if ($item['name']==$filter_name) {
                     $res = array( "type"=>"warning", "msg"=>"Filter Already Exists." );                    
-                    echo json_encode($res);
+                    echo esc_html(json_encode($res));
                     wp_die();
                 }
             }
