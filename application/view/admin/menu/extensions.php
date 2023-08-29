@@ -178,39 +178,33 @@ $this_plugin = '';
 						<?php endif; ?>
 
 						  <div class="addons-banner-block-item">
-							<div class="addons-banner-block-item-icon">
-								<img class="addons-img" style="height: inherit;" src="
-								<?php foreach($product->images as $images) {
-				  					echo $images->src;
-				  					break;
-				  				} ?>" />
-							</div>
-							<div class="addons-banner-block-item-content">
-								<h3 style="align-self: center;"><?php echo $product->name; ?></h3>
-								<div style="overflow: hidden;text-overflow: ellipsis;">
-								<?php 
-									// if( strpos($product->short_description, '<span>') !== FALSE ) {
-										$findSome = get_string_between($product->short_description, '<span>', '</span>');
-										echo $findSome; 
-									// }
-									// else {
-									// 	$my_string = $product->short_description;
-									// 	echo implode(' ', array_slice(explode(' ', $my_string), 0, 25))."\n";
-									// }
-								?>
-								</div>
-								<div>
-									<a class="addons-button addons-button-solid" target="_blank" href="<?php echo $product->permalink; ?>" style="margin-left:0 !important;">
-										<?php if(!empty($product->price)){
-										    echo "Buy Now ($".$product->price.")";
-										  }else {
-										  	 echo "Get free access";
-										  }
-										?>	
-									</a>							
-								</div>
-							</div>
-					      </div> 
+						    <div class="addons-banner-block-item-icon">
+						        <img class="addons-img" style="height: inherit;" src="<?php foreach($product->images as $images) {
+						            echo esc_url($images->src);
+						            break;
+						        } ?>" />
+						    </div>
+						    <div class="addons-banner-block-item-content">
+						        <h3 style="align-self: center;"><?php echo esc_html($product->name); ?></h3>
+						        <div style="overflow: hidden;text-overflow: ellipsis;">
+						        <?php 
+						            $findSome = esc_html(get_string_between($product->short_description, '<span>', '</span>'));
+						            echo $findSome; 
+						        ?>
+						        </div>
+						        <div>
+						            <a class="addons-button addons-button-solid" target="_blank" href="<?php echo esc_url($product->permalink); ?>" style="margin-left:0 !important;">
+						                <?php if(!empty($product->price)){
+						                    echo "Buy Now ($".esc_html($product->price)/*$product->price*/.")";
+						                }else {
+						                    echo "Get free access";
+						                }
+						                ?>
+						            </a>							
+						        </div>
+						    </div>
+						  </div>
+
 			 			<?php if($count % 3 == 2): ?>
 						  </div>
 					    <?php endif; 
@@ -249,25 +243,24 @@ $this_plugin = '';
 						<?php endif; ?>
 						  
 						  <div class="addons-banner-block-item">
-							<div class="addons-banner-block-item-icon">
-								<img class="addons-img" style="height: inherit;" src="
-								<?php foreach($product->images as $images) {
-				  					echo $images->src;
-				  					break;
-				  				} ?>" />
-							</div>
-							<div class="addons-banner-block-item-content">
-								<h3 style="align-self: center;"><?php echo $product->name; ?></h3>
-								<div style="overflow: hidden;text-overflow: ellipsis;">
-								<?php $findSome = get_string_between($product->short_description, '<span>', '</span>');
-									echo $findSome; 
-								?>
-								</div>
-								<div>
-									<a class="addons-button addons-button-solid" target="_blank" href="<?php echo $product->permalink; ?>" style="margin-left:0 !important;">Download Now</a>							
-								</div>
-							</div>
-					      </div>
+							    <div class="addons-banner-block-item-icon">
+							        <img class="addons-img" style="height: inherit;" src="<?php foreach($product->images as $images) {
+							            echo esc_url($images->src);
+							            break;
+							        } ?>" />
+							    </div>
+							    <div class="addons-banner-block-item-content">
+							        <h3 style="align-self: center;"><?php echo esc_html($product->name); ?></h3>
+							        <div style="overflow: hidden;text-overflow: ellipsis;">
+							        <?php $findSome = get_string_between($product->short_description, '<span>', '</span>');
+							            echo esc_html($findSome); 
+							        ?>
+							        </div>
+							        <div>
+							            <a class="addons-button addons-button-solid" target="_blank" href="<?php echo esc_url($product->permalink); ?>" style="margin-left:0 !important;">Download Now</a>							
+							        </div>
+							    </div>
+						  </div>
 
 			 			<?php if($count % 3 == 2): ?>
 						  </div>
@@ -287,10 +280,9 @@ $this_plugin = '';
 		else {
 			?>
 				<div class="addons-banner-block">
-
-					<p><?php echo $error_message;?></p>
-
+				    <p><?php echo esc_html($error_message);?></p>
 				</div>
+
 			<?php
 		}
 		?>

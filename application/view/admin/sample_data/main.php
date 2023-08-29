@@ -9,14 +9,16 @@ if(!empty(wbc()->sanitize->get('step'))){
 }
 
 ?>
+
 <div class="ui segment container" style="height: 100%;margin-bottom: 0px; border: none !important;
 box-shadow: none;">
- 	<div class="ui icon header" style="width: 100%;">
-		<img src="<?php echo constant('EOWBC_ICON_SVG'); ?>" style = 'max-width: 100;max-height: auto;'/>
-		<br/>
-		<p><?php echo constant('EOWBC_NAME'); ?></p>
-		<hr/>
-	</div>
+		
+			<div class="ui icon header" style="width: 100%;">
+			    <img src="<?php echo esc_url(constant('EOWBC_ICON_SVG')); ?>" style='max-width: 100; max-height: auto;'/>
+			    <br/>
+			    <p><?php echo esc_html(constant('EOWBC_NAME')); ?></p>
+			    <hr/>
+			</div>
 
 	<div class="wrap woocommerce">
 	  <h1></h1>
@@ -61,15 +63,20 @@ box-shadow: none;">
 	                <td>Total <?php echo esc_html($sample_data_obj->get_model()->get_attributes_size())/*$sample_data_obj->get_model()->get_attributes_size()*/;?> attributes will be created.</td>
 	              </tr>
 	              <tr>
-	                <td>                    
-	                  <?php foreach ($_atttriutes as $index=>$_attr): ?>             <tr>                                            
-	                    <span>                                                     
-	                    <input type="checkbox" name="attr_<?php echo esc_attr($index)/*$index*/; ?>" id="<?php _e($_attr['slug']); ?>" value="<?php _e($_attr['slug']) ?>" checked="checked" disabled="disabled"></span>
-	                    <span><input type="text" name="attr_value_<?php echo esc_attr($index)/*$index*/; ?>" placeholder="<?php _e($_attr['label']) ?>" value="<?php _e($_attr['label']); ?>"></span></tr>
-	                    <!--<label for="<?php _e($_attr['slug']); ?>"><?php _e($_attr['label']); ?></label>-->
-	                    <br/><br/>                        
-	                  <?php endforeach;?>                      
-	                </td>
+	              	<?p
+ 						<td>
+						    <?php foreach ($_atttriutes as $index=>$_attr): ?>             
+						        <tr>                                            
+						            <span>                                                     
+						                <input type="checkbox" name="attr_<?php echo esc_attr($index)/*$index*/; ?>" id="<?php esc_attr_e($_attr['slug']); ?>" value="<?php esc_attr_e($_attr['slug']) ?>" checked="checked" disabled="disabled">
+						            </span>
+						            <span><input type="text" name="attr_value_<?php echo esc_attr($index)/*$index*/; ?>" placeholder="<?php esc_attr_e($_attr['label']) ?>" value="<?php esc_attr_e($_attr['label']); ?>"></span>
+						        </tr>
+						        <!--<label for="<?php esc_attr_e($_attr['slug']); ?>"><?php esc_html_e($_attr['label']); ?></label>-->
+						        <br/><br/>                        
+						    <?php endforeach;?>                      
+						</td>
+
 	              <!-- Category Installation -->
 	              <?php else:?>
 	                <th>
@@ -80,13 +87,16 @@ box-shadow: none;">
 	                <td>Total <?php echo esc_html($sample_data_obj->get_model()->get_categories_size())/*$sample_data_obj->get_model()->get_categories_size()*/;?> categories will be created. (Note: Since there are sub categories to above main categories the actual count is higher.<?php echo esc_attr(($feature_key == 'pair_maker' ? ' Later you can simply remove these categories but right now its neccessary to accurately present the sample data demo.' : ''))/*($feature_key == 'pair_maker' ? ' Later you can simply remove these categories but right now its neccessary to accurately present the sample data demo.' : '')*/;?>)</td>
 	              </tr>
 	              <tr>
-	                <td>                    
-	                  <?php foreach ($_category as $index=>$_cat): ?>  <tr>                                            
-	                    <span><input type="checkbox" name="cat_<?php echo esc_attr($index)/*$index*/; ?>" id="<?php _e($_cat['name']); ?>" value="<?php _e($_cat['slug']) ?>" checked="checked" disabled="disabled"></span>
-	                    <!--<label for="<?php //_e($_cat['name']); ?>"><?php //_e($_cat['name']); ?></label> -->    
-	                    <span><input type="text" name="cat_value_<?php echo esc_attr($index)/*$index*/; ?>" placeholder="<?php _e($_cat['name']) ?>" value="<?php _e($_cat['name']); ?>"></span></tr>
-	                    <br/></br>
-	                  <?php endforeach;?>                      
+	                <td> 
+	               	<?php foreach ($_category as $index=>$_cat): ?>  
+					    <tr>                                            
+					        <span><input type="checkbox" name="cat_<?php echo esc_attr($index)/*$index*/; ?>" id="<?php esc_attr_e($_cat['name']); ?>" value="<?php esc_attr_e($_cat['slug']) ?>" checked="checked" disabled="disabled"></span>
+					        <!--<label for="<?php //esc_attr_e($_cat['name']); ?>"><?php //esc_html_e($_cat['name']); ?></label> -->    
+					        <span><input type="text" name="cat_value_<?php echo esc_attr($index)/*$index*/; ?>" placeholder="<?php esc_attr_e($_cat['name']) ?>" value="<?php esc_attr_e($_cat['name']); ?>"></span>
+					    </tr>
+					    <br/></br>
+					<?php endforeach;?>
+
 	                </td>
 	              <?php endif; ?>
 	            </tr>
@@ -98,8 +108,9 @@ box-shadow: none;">
 	                <input type="submit" name="save" value="<?php printf(__("Create sample %1s","woo-bundle-choice"),$_steps[$_step-1]); ?>"  class="button button-primary button-hero action ui button secondary">
 	              </td>
 	              <td>
-	                <a href="#" class="button button-hero action ui button secondary inverted" onclick="if(!jQuery(this).hasClass('disabled')){ window.location.href='<?php echo admin_url('admin.php?page=eowbc'); ?>'; }">Cancel</a>
-	              </td>
+					    <a href="#" class="button button-hero action ui button secondary inverted" onclick="if(!jQuery(this).hasClass('disabled')){ window.location.href='<?php echo esc_url(admin_url('admin.php?page=eowbc')); ?>'; }">Cancel</a>
+				  </td>
+
 	            </tr>
 	          </tfoot>
 	        </table>

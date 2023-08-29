@@ -17,21 +17,21 @@ if( empty($mode) || ( $mode != "setup_wizard" && $mode != "plain" ) ) {
 <div class="ui basic segment">
   <div class="ui aligned grid" style="margin-top:1em;">
     <h2 class="ui header left aligned left floated ">   
-    	<img class="ui avatar image" src="<?php echo constant('EOWBC_ICON_SVG'); ?>" / style="margin-top: 0px !important"> 
-      <div class="content" style="height: 2em;"><?php echo !isset($SP_Extension) ? constant('EOWBC_NAME') : constant($singleton_functionUpper.'_NAME') ; ?>
+        <img class="ui avatar image" src="<?php echo esc_attr(constant('EOWBC_ICON_SVG'))/*constant('EOWBC_ICON_SVG')*/; ?>" / style="margin-top: 0px !important"> 
+        <div class="content" style="height: 2em;"><?php echo !isset($SP_Extension) ? esc_html(constant('EOWBC_NAME')) : esc_html(constant($singleton_functionUpper.'_NAME')) ; ?>
 
-          <?php 
-            $desc = "";
-            if( !isset($SP_Extension) ) {
-              $desc = "Thank you for installing ".constant('EOWBC_NAME')."! ".eowbc_lang("Product bundling as per user's choice.");
-            }
-            else {
-              $desc = "Thank you for installing ".constant($singleton_functionUpper.'_NAME')."! ";
-            }
-          ?>
-          <div class="sub header" style="font-style: italic;"><?php echo esc_attr($desc)/*$desc*/; ?></div>  
-             
-      </div> 
+            <?php 
+                $desc = "";
+                if( !isset($SP_Extension) ) {
+                    $desc = "Thank you for installing ".constant('EOWBC_NAME')."! ".eowbc_lang("Product bundling as per user's choice.");
+                }
+                else {
+                    $desc = "Thank you for installing ".constant($singleton_functionUpper.'_NAME')."! ";
+                }
+            ?>
+            <div class="sub header" style="font-style: italic;"><?php echo esc_html($desc)/*$desc*/; ?></div>  
+
+        </div> 
     </h2>
     <i class="right floated question circle outline eo_help icon eowbc_help_context" data-html="
           <div class='ui basic segments'>
@@ -57,7 +57,7 @@ if( empty($mode) || ( $mode != "setup_wizard" && $mode != "plain" ) ) {
                   if( is_array($config) && sizeof($config) > 0 ) {
             ?>
                     <div class='ui compact segment'>
-                      <a style='cursor:pointer;' href='<?php echo admin_url('admin.php?page='.$plugin_slug.'---theme-adaption');?>'><i class='hands helping icon'></i>&nbsp;Theme Adaption Check</a>
+                        <a style='cursor:pointer;' href='<?php echo esc_url(admin_url('admin.php?page='.$plugin_slug.'---theme-adaption'))/*admin_url('admin.php?page='.$plugin_slug.'---theme-adaption')*/; ?>'><i class='hands helping icon'></i>&nbsp;Theme Adaption Check</a>
                     </div>
             <?php 
                   }
@@ -94,7 +94,8 @@ if( empty($mode) || ( $mode != "setup_wizard" && $mode != "plain" ) ) {
         $setup_wizard_status = wbc()->options->get_option('_system','setup_wizard_run', false);
         if( empty($setup_wizard_status) ) {
           
-          echo ('<h4 class="ui dividing header">Attention!</h4><p><span class="ui red text"><strong>It seems that you have not completed the setup wizard, <a class="ui link" href="'.admin_url('admin.php?page=eowbc&wbc_setup=1').'">we recommend that you visit it.</a></strong><span></p>');            
+         echo ('<h4 class="ui dividing header">Attention!</h4><p><span class="ui red text"><strong>It seems that you have not completed the setup wizard, <a class="ui link" href="'.esc_url(admin_url('admin.php?page=eowbc&wbc_setup=1'))/*admin_url('admin.php?page=eowbc&wbc_setup=1')*/.'">we recommend that you visit it.</a></strong><span></p>');
+           
         }
 }
 else {
@@ -105,7 +106,7 @@ else {
             <head>
                 <meta name="viewport" content="width=device-width" />
                 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-                <title><?php echo constant('EOWBC_NAME'); ?></title>
+                <title><?php echo esc_html(constant('EOWBC_NAME'))/*constant('EOWBC_NAME')*/; ?></title>
             </head>
             <body>
         <!-- END header -->
