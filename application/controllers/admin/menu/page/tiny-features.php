@@ -104,57 +104,54 @@ if ( ! class_exists( 'Tiny_features' ) ) {
 
 					?>
 
-						<div class="spui_custum_row sp_variations" data-variation_id="<?php echo esc_attr( $variation_id ) /*$variation_id */; ?>" data-product_id = "<?php ?>">
-					        <div class="form-row form-row-first spui_custum_assets">
-					              <div class="spui_form_row_title">
-					                  <h5><?php echo eowbc_lang("Gallery Image", 'woo-bundle-choice') ?></h5>
-					              </div>
-					              <div class="spui_form_asset_container upload_image asset_section_one">
-					                <a href="#" class="upload_image_button tips">
-					                  <img src="http://localhost/fresh/wp-content/plugins/woocommerce/assets/images/placeholder.png">
-					                  <input type="hidden" name="upload_image_id[0]" class="upload_image_id" value="0">        
-					                </a>
-					                <div class="spui_asset_upload_cta">
-					                     <a href="#" class="btn">+</a>   
-					                </div>
-					              </div>  
-					        </div>
-					    
-					        <div class="form-row form-row-first upload_image spui_form_second_row">
-					            <div class="spui_form_row_title">
-					                  <h5> <?php echo eowbc_lang("Video &amp; Custum Field", 'woo-bundle-choice') ?></h5>
-					            </div>
-					            <div class="spui_custum_video_container">
-					                <div class="spui_video_links">
-					                    <a href="#" class="btn">
-					                        <img src="https://cdn-icons.flaticon.com/png/512/797/premium/797592.png?token=exp=1653727260~hmac=c2ce871afdfde03d00785cbf295ff801" class="img-fluid">
-					                    </a>
-					                    <p> <?php echo eowbc_lang("video", 'woo-bundle-choice') ?></p>
-					                </div>
-					    
-					                <div class="spui_video_input_field">
-					                    <input type="text" class="short wc_input_decimal" style="" name="variable_weight[0]" id="variable_weight0" value="" placeholder="">
-					                    <p> <?php echo eowbc_lang("video url", 'woo-bundle-choice') ?></p>
-					                </div> 
-					                <div class="spui_form_asset_container upload_image asset_section_two">
-					                    <a href="#" class="upload_image_button tips">
-					                    <img src="http://localhost/fresh/wp-content/plugins/woocommerce/assets/images/placeholder.png">
-					                    <input type="hidden" name="upload_image_id[0]" class="upload_image_id" value="0">        
-					                    </a>
-					                    <div class="spui_asset_upload_cta">
-					                        <a href="#" class="btn">+</a>   
-					                    </div>
-					                    <div class="asset_content">
-					                        <p> <?php echo eowbc_lang("images", 'woo-bundle-choice') ?></p>
-					                    </div>
-					                </div>
-					    
-					       
-					            </div>
-					        </div>
-					        
-					    </div>
+						<div class="spui_custum_row sp_variations" data-variation_id="<?php echo esc_attr($variation_id); ?>" data-product_id="<?php ?>">
+							<div class="form-row form-row-first spui_custum_assets">
+								<div class="spui_form_row_title">
+									<h5><?php echo esc_html(eowbc_lang("Gallery Image", 'woo-bundle-choice')); ?></h5>
+								</div>
+								<div class="spui_form_asset_container upload_image asset_section_one">
+									<a href="#" class="upload_image_button tips">
+										<img src="http://localhost/fresh/wp-content/plugins/woocommerce/assets/images/placeholder.png">
+										<input type="hidden" name="upload_image_id[0]" class="upload_image_id" value="0">        
+									</a>
+									<div class="spui_asset_upload_cta">
+										<a href="#" class="btn">+</a>   
+									</div>
+								</div>  
+							</div>
 
+							<div class="form-row form-row-first upload_image spui_form_second_row">
+								<div class="spui_form_row_title">
+									<h5><?php echo esc_html(eowbc_lang("Video &amp; Custom Field", 'woo-bundle-choice')); ?></h5>
+								</div>
+								<div class="spui_custum_video_container">
+									<div class="spui_video_links">
+										<a href="#" class="btn">
+											<img src="https://cdn-icons.flaticon.com/png/512/797/premium/797592.png?token=exp=1653727260~hmac=c2ce871afdfde03d00785cbf295ff801" class="img-fluid">
+										</a>
+										<p><?php echo esc_html(eowbc_lang("video", 'woo-bundle-choice')); ?></p>
+									</div>
+
+									<div class="spui_video_input_field">
+										<input type="text" class="short wc_input_decimal" style="" name="variable_weight[0]" id="variable_weight0" value="" placeholder="">
+										<p><?php echo esc_html(eowbc_lang("video url", 'woo-bundle-choice')); ?></p>
+									</div> 
+
+									<div class="spui_form_asset_container upload_image asset_section_two">
+										<a href="#" class="upload_image_button tips">
+											<img src="http://localhost/fresh/wp-content/plugins/woocommerce/assets/images/placeholder.png">
+											<input type="hidden" name="upload_image_id[0]" class="upload_image_id" value="0">        
+										</a>
+										<div class="spui_asset_upload_cta">
+											<a href="#" class="btn">+</a>   
+										</div>
+										<div class="asset_content">
+											<p><?php echo esc_html(eowbc_lang("images", 'woo-bundle-choice')); ?></p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
 
 
 						<div data-product_variation_id="<?php echo esc_attr( $variation_id ) ?>" class="form-row form-row-full woo-variation-gallery-wrapper">

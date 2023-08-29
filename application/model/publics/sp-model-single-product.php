@@ -330,20 +330,19 @@ class SP_Model_Single_Product extends SP_Single_Product {
 		        		});
 		        	</script>
 				<?php
-				echo ob_get_clean();
-				
-				if(!empty($toggle_status)){	
-					if(has_action('woocommerce_before_variations_form')){
-						add_action( 'woocommerce_before_variations_form',function( ) use($toggle_text){
-							wbc()->load->asset('css','fomantic/semantic.min');
-							wbc()->load->asset('js','fomantic/semantic.min',array('jquery'));
-							ob_start();
-							?>
+				echo esc_html( ob_get_clean() );
+
+				if ( ! empty( $toggle_status ) ) {
+				    if ( has_action( 'woocommerce_before_variations_form' ) ) {
+				        add_action( 'woocommerce_before_variations_form', function () use ( $toggle_text ) {
+				            wbc()->load->asset( 'css', 'fomantic/semantic.min' );
+				            wbc()->load->asset( 'js', 'fomantic/semantic.min', array( 'jquery' ) );
+				            ob_start();
 								<span id="wbc_variation_toggle" class="ui raised segment">
 									<?php _e($toggle_text); ?><i class="caret up icon" style="text-align: center;line-height: 1em;"></i>						
 								</span>
 							<?php
-							echo ob_get_clean();
+							echo esc_html( ob_get_clean() );
 						}, 10, 1 );	
 					} else {
 						wbc()->load->asset('css','fomantic/semantic.min');
@@ -354,7 +353,7 @@ class SP_Model_Single_Product extends SP_Single_Product {
 								jQuery(".variations_form").before('<span id="wbc_variation_toggle" class="ui raised segment"><?php _e($toggle_text); ?><i class="caret up icon" style="text-align: center;line-height: 1em;"></i></span>');	
 							</script>
 						<?php
-						echo ob_get_clean();
+						echo esc_html( ob_get_clean() );
 					}				
 				}
 			});
@@ -847,8 +846,8 @@ class SP_Model_Single_Product extends SP_Single_Product {
 	        		});
 	        	</script> -->
 			<?php
-			echo ob_get_clean();
-			
+			echo esc_html( ob_get_clean() );
+
 			if(!empty($toggle_status)){	
 				if(has_action('woocommerce_before_variations_form')){
 					add_action( 'woocommerce_before_variations_form',function( ) use($toggle_text){
@@ -860,7 +859,7 @@ class SP_Model_Single_Product extends SP_Single_Product {
 								<?php _e($toggle_text); ?><i class="caret up icon" style="text-align: center;line-height: 1em;"></i>						
 							</span>
 						<?php
-						echo ob_get_clean();
+						echo esc_html( ob_get_clean() );
 					}, 10, 1 );	
 				} elseif(false) {
 					// wbc()->load->asset('css','fomantic/semantic.min');
@@ -871,7 +870,7 @@ class SP_Model_Single_Product extends SP_Single_Product {
 							jQuery(".variations_form").before('<span id="wbc_variation_toggle" class="ui raised segment"><?php _e($toggle_text); ?><i class="caret up icon" style="text-align: center;line-height: 1em;"></i></span>');	
 						</script>
 					<?php
-					echo ob_get_clean();
+					echo esc_html( ob_get_clean() );
 				}				
 			}
 
@@ -1291,29 +1290,30 @@ class SP_Model_Single_Product extends SP_Single_Product {
 		<?php do_action( 'woo_variation_product_gallery_start', $product ); ?>
 			<div data-product_id="<?php echo esc_attr( $product_id ) ?>" data-variation_id="<?php echo esc_attr( $default_variation_id ) ?>" style="<?php echo esc_attr( woo_variation_gallery()->get_inline_style( $inline_style ) ) ?>" class="<?php echo esc_attr( implode( ' ', array_map( 'sanitize_html_class', array_unique( $wrapper_classes ) ) ) ); ?>">
 				<div class="loading-gallery woo-variation-gallery-wrapper woo-variation-gallery-thumbnail-position-<?php echo esc_attr( $gallery_thumbnail_position ) ?>-<?php echo esc_attr( $gallery_thumbnail_position_small_device ) ?> woo-variation-gallery-product-type-<?php echo esc_attr( $product_type ) ?>">
-
-					<div class="woo-variation-gallery-container preload-style-<?php echo trim( woo_variation_gallery()->get_option( 'preload_style', 'blur', 'woo_variation_gallery_preload_style' ) ) ?>">
+					<div class="woo-variation-gallery-container preload-style-<?php echo esc_attr( trim( woo_variation_gallery()->get_option( 'preload_style', 'blur', 'woo_variation_gallery_preload_style' ) ) ); ?>">
 
 						<div class="woo-variation-gallery-slider-wrapper">
 
 							<?php if ( $has_post_thumbnail && ( 'yes' === woo_variation_gallery()->get_option( 'lightbox', 'yes', 'woo_variation_gallery_lightbox' ) ) ): ?>
-								<a href="#" class="woo-variation-gallery-trigger woo-variation-gallery-trigger-position-<?php echo woo_variation_gallery()->get_option( 'zoom_position', 'top-right', 'woo_variation_gallery_zoom_position' ) ?>">
+								<a href="#" class="woo-variation-gallery-trigger woo-variation-gallery-trigger-position-<?php echo esc_attr( woo_variation_gallery()->get_option( 'zoom_position', 'top-right', 'woo_variation_gallery_zoom_position' ) ); ?>">
 									<span class="dashicons dashicons-search"></span>
 								</a>
 							<?php endif; ?>
-
-							<div class="woo-variation-gallery-slider" data-slick='<?php echo wc_esc_json( wp_json_encode( $gallery_slider_js_options ) ); // WPCS: XSS ok. ?>'>
+							<div class="woo-variation-gallery-slider" data-slick='<?php echo esc_attr( wc_esc_json( wp_json_encode( $gallery_slider_js_options ) ) ); ?>'>
 								<?php
-								// Main  Image
+								// Main Image
 								if ( $has_post_thumbnail ) {
 									echo apply_filters( 'woocommerce_single_product_image_thumbnail_html', woo_variation_gallery()->get_frontend()->get_gallery_image_html( $product, $post_thumbnail_id, array(
 										'is_main_thumbnail'  => true,
 										'has_only_thumbnail' => $only_has_post_thumbnail
 									) ), $post_thumbnail_id );
 								} else {
-									echo sprintf( '<div class="wvg-gallery-image wvg-gallery-image-placeholder"><div><div class="wvg-single-gallery-image-container"><img src="%s" alt="%s" class="wp-post-image" /></div></div></div>', esc_url( wc_placeholder_img_src() ), esc_html__( 'Awaiting product image', 'woocommerce' ) );
+									echo sprintf(
+										'<div class="wvg-gallery-image wvg-gallery-image-placeholder"><div><div class="wvg-single-gallery-image-container"><img src="%s" alt="%s" class="wp-post-image" /></div></div></div>',
+										esc_url( wc_placeholder_img_src() ),
+										esc_html__( 'Awaiting product image', 'woocommerce' )
+									);
 								}
-
 
 								// Gallery Image
 								if ( $has_gallery_thumbnail ) {
