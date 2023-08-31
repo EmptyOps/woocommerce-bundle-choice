@@ -213,11 +213,15 @@ $form['data'] = array(
 					'section_type'=>'start',
 					'class'=>array('field', 'styled'),
 					'label'=>'<span class="ui large text">General</span>',
-				),					
+				),		
+				// ACTIVE_TODO_OC_START
+				// ACTIVE_TODO when we enable the other for free templates at that time we need to consider enabling this switch . — to a && — to h			
+					// -- ane display karvu hoy to 'container_class'=>array('black','hide') ma class apya se te remove kari desu atle display thay jase
+				// ACTIVE_TODO_OC_END
 				'tiny_features_dropdown_icon_only'=>array(
 					'label'=>eowbc_lang('Display Icon Only on Dropdown?'),
 					'spui_version'=>1.0,
-					'container_class'=>array(''),					
+					'container_class'=>array('black','hide'),						
 					'type'=>'checkbox',
 					'value'=>array(wbc()->options->get_option('tiny_features','tiny_features_dropdown_icon_only')),
 					'sanitize'=>'sanitize_text_field',

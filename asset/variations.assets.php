@@ -1655,6 +1655,11 @@ $bg_hover_color = wbc()->options->get_option('tiny_features',$spui_is_product_ca
 		background-color: <?php _e($bg_hover_color); ?>;
 		color: <?php _e($font_hover_color); ?>;	
 	}
+
+	/*-- loader background img ashish added this css 31-08-2023 --*/
+	.sp-variations-gallery-images-zoom-loader{
+		background: transparent url('<?php constant('EOWBC_ASSET_URL').'/img/spinner.png' ?>') center no-repeat;
+	}
 </style>
 <?php 
 
