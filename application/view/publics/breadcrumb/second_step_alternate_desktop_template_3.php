@@ -5,10 +5,10 @@
 */
 
 ?>
-<div class="<?php echo esc_attr((($step==$order)?'active ':(($step>$order)?'completed ':(!empty(\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$clickable_breadcrumb)?'':'disabled'))))/*(($step==$order)?'active ':(($step>$order)?'completed ':(!empty(\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$clickable_breadcrumb)?'':'disabled')))*/; ?> step" >
+<div class="<?php echo esc_attr(($step == $order) ? 'active ' : (($step > $order) ? 'completed ' : (!empty(\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$clickable_breadcrumb) ? '' : 'disabled'))); ?> step">
     <div class="ui equal width grid" style="width: 100%;margin-top: -1em !important;">
         <div class="ui grid">
-            <div class="column eowbc_breadcrumb_font"><?php echo esc_attr($order)/*$order*/; ?></div>
+            <div class="column eowbc_breadcrumb_font"><?php echo esc_attr($order)?></div>
             <div class="column" style="text-align: left;">
                 <div class="description eowbc_breadcrumb_font" <?php _e((!empty(\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$clickable_breadcrumb) and !empty(\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$second_url))?'data-clickable_breadcrumb="'.\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$second_url.'"':''); ?>><?php _e(wbc()->options->get_option('appearance_breadcrumb','appearance_breadcrumb_choose_prefix_text',__('Choose a','woo-bundle-choice'),true,true)); ?></div>
                 <div class="title eowbc_breadcrumb_font"><?php _e($second_name) ?></div>

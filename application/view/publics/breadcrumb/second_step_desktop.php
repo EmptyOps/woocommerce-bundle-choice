@@ -6,13 +6,13 @@
 $model_images = \eo\wbc\model\Images::instance();
 
 ?>
-<div class="<?php echo esc_attr((($step==$order)?'active ':(($step>$order)?'completed ':(!empty(\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$clickable_breadcrumb)?'':'disabled'))))/*(($step==$order)?'active ':(($step>$order)?'completed ':(!empty(\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$clickable_breadcrumb)?'':'disabled')))*/; ?> step spui-semantic-step" >
+<<div class="<?php echo esc_attr(($step==$order)?'active ':(($step>$order)?'completed ':(!empty(\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$clickable_breadcrumb)?'':'disabled'))); ?> step spui-semantic-step" >
     <div class="ui equal width grid" style="width: 100%;margin-top: -1em !important;">
         <div class="ui grid" style="width: fit-content !important;">
-            <div class="column eowbc_breadcrumb_font"><?php echo esc_attr($order)/*$order*/; ?></div>
+            <div class="column eowbc_breadcrumb_font"><?php echo esc_html($order); ?></div>
             <div class="column" style="text-align: left;">
                 <div class="description eowbc_breadcrumb_font" <?php _e((!empty(\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$clickable_breadcrumb) and !empty(\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$second_url))?'data-clickable_breadcrumb="'.\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$second_url.'"':''); ?>><?php _e(wbc()->options->get_option('appearance_breadcrumb','appearance_breadcrumb_choose_prefix_text',__('Choose a','woo-bundle-choice'),true,true)); ?></div>
-                <div class="title eowbc_breadcrumb_font"><?php _e($second_name) ?></div>
+                <div class="title eowbc_breadcrumb_font"><?php esc_html_e($second_name) ?></div>
             </div>
         </div>
         <?php if(empty($second)):?>
@@ -22,7 +22,7 @@ $model_images = \eo\wbc\model\Images::instance();
         </div>
         <?php else: ?>                
             <div class="column  product_image_section" style="padding-top: 0px;padding-bottom: 0px;">
-                <img src="<?php echo esc_attr($model_images->id2url($second->get_image_id()))/*$model_images->id2url($second->get_image_id())*/; ?>">
+                <img src="<?php echo esc_html($model_images->id2url($second->get_image_id()))/*$model_images->id2url($second->get_image_id())*/; ?>">
             </div>
             <div class="column eowbc_breadcrumb_font" style="font-size: x-small;">
                 <?php _e(wc_price(apply_filters('eowbc_breadcrumb_second_price',$second->get_price(),$second))); ?>

@@ -841,8 +841,7 @@ class EOWBC_Filter_Widget {
 					</style>
 					<?php
 				}
-
-				echo ob_get_clean();
+				echo esc_html( ob_get_clean() );
 			}
 
 			if(wbc()->options->get_option('filters_filter_setting','filter_setting_alternate_slider_ui', false )){
@@ -2411,11 +2410,11 @@ class EOWBC_Filter_Widget {
 			jQuery(document).ready(function($){
 				console.log('EO_WBC_FILTER_UI_ICON_TERM_SLUG');
 				console.log(EO_WBC_FILTER_UI_ICON_TERM_SLUG);
-				EO_WBC_FILTER_UI_ICON_TERM_SLUG.push("<?php echo esc_attr($term->slug)/*$term->slug*/; ?>");
+				EO_WBC_FILTER_UI_ICON_TERM_SLUG.push("<?php echo $term->slug; ?>");
 
 				/*__data_filter_slug="<?php echo $term->slug; ?>";*/
 				/*if(__data_filter_slug){*/
-				if("<?php echo esc_attr($term->slug)/*$term->slug*/; ?>") {
+				if("<?php echo $term->slug; ?>") {
 					// --- aa code woo-bundle-choice/asset/js/publics/eo_wbc_filter.js input_type_icon_click() ma move karyo se ---
 					// --- start ---
 					// //TO BE FIXED LATER.

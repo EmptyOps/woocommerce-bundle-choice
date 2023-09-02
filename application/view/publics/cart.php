@@ -12,9 +12,9 @@
         <td data-title="Thumbnail">
             <div class="ui two equal width column grid">
                 <div class="row">
-                    <span class="column ui small image"><?php echo esc_attr($first->get_image('thumbnail'))/*$first->get_image('thumbnail')*/; ?></span>
+                    <span class="column ui small image"><?php echo esc_html($first->get_image('thumbnail')); ?></span>
                     <?php if($cart['SECOND']):?>                        
-                        <span class="column ui small image"><?php echo esc_attr($second->get_image('thumbnail'))/*$second->get_image('thumbnail')*/; ?></span>
+                        <span class="column ui small image"><?php echo esc_html($second->get_image('thumbnail')); ?></span>
                     <?php endif; ?>
                 </div>
             </div>

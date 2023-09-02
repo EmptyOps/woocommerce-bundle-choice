@@ -18,11 +18,11 @@ if(!empty($product_data)):
                 <td style="border-top: 1px solid #dddddd;
 border-left: none !important;
 border-right: none !important;
-border-bottom: none !important;"><?php echo esc_html($data[0])/*$data[0]*/; ?> :</td>
+border-bottom: none !important;"><?php echo esc_html($data[0]); ?> :</td>
                 <td style="border-top: 1px solid #dddddd;
 border-left: none !important;
 border-right: none !important;
-border-bottom: none !important;"><?php echo esc_html($data[1])/*$data[1]*/; ?></td>    
+border-bottom: none !important;"><?php echo esc_html($data[1]); ?></td>    
             </tr>                            
         <?php endforeach;?>
       </tbody>

@@ -45,10 +45,10 @@ class Eowbc_Filters extends Eowbc_Model {
 					//wbc()->common->pr($form_definition, false, false);
 					// wbc()->common->var_dump('table data for key '.$key);
 					//wbc()->common->pr($filter_data, false, false);
-							if(wbc()->sanitize->get('is_test') == 1) {
-					        	wbc()->common->pr($filter_data);
-					        	echo "data save";
-					        }
+							if (wbc()->sanitize->get('is_test') == 1) {
+    							wbc()->common->pr(esc_html($filter_data));
+    							echo esc_html("data save");
+							}
 					$body = array();
 
 					// TODO had just put the empty array check but we should found in what cases the option is set to empty/null etc. which is not expected and possible behaviour

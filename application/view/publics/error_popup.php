@@ -37,7 +37,7 @@
 <!-- Created with Wordpress plugin - WooCommerce Product bundle choice -->
 <div class="ui modal align center tiny centered">
 <div class="ui header">              
-  <h4>There is an error on <strong><?php echo constant('EOWBC_NAME'); ?></strong></h4>
+  <h4>There is an error on <strong><?php echo esc_html(constant('EOWBC_NAME')); ?></strong></h4>
 </div>
 <div class="content">
   <h5 id="error_popup_title"></h5>
