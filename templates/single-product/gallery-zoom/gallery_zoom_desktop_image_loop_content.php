@@ -43,7 +43,7 @@ if(empty($image['extra_params_org']['type']) || $image['extra_params_org']['type
                 'child' => array(
                     array(
                         'type' => 'video',
-                        'attr' => $image['video_attr'],
+                        'attr' => array_merge($image['video_attr'],array('poster'=>constant('EOWBC_ASSET_URL').'img/spinner.gif')),
                         'preHTML'=>'Your browser does not support the video tag.',
                         'child' => array(
                             array(

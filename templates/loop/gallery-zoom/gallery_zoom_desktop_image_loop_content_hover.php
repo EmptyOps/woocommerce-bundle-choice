@@ -14,7 +14,7 @@ if(empty($image['extra_params_org']['type']) || $image['extra_params_org']['type
         'class' => 'spui_thumbnail_shop_asset '.$image['class'],
         'child' => array(
             'type' => 'image',
-            'class' => array('img-fluid','big-img',esc_attr( $image['class'] ) ),
+            'class' => array('img-fluid','big-img',esc_attr( $image['class'] ), 'sp-variations-gallery-images-zoom-loader' ),
             'src' => $image['src'],
             'attr' => array( /*'loading' => 'lazy',*/ 'width' => esc_attr( $image['src_w'] ), 'height' => esc_attr( $image['src_h'] ), 'alt' => esc_attr( $image['alt'] ), 'title' => esc_attr( $image['title'] ), 'data-caption' => esc_attr( $image['caption'] ), 'data-src' => $image['full_src'], 'data-large_image' => $image['full_src'], 'data-large_image_width' => esc_attr( $image['full_src_w'] ), 'data-large_image_height' => esc_attr( $image['full_src_h'] ), 'srcset' => esc_attr( $image['srcset'] ), 'sizes' => esc_attr( $image['sizes'] ) ),
             'preHTML'=>$image['extra_params'],
@@ -50,7 +50,7 @@ if(empty($image['extra_params_org']['type']) || $image['extra_params_org']['type
                 'child' => array(
                     array(
                         'type' => 'video',
-                        'attr' => array('controlsList'=>'nodownload','autoplay'=>'','muted'=>'','poster'=>'http://localhost/demo/wp-content/uploads/2023/02/giphy-1.gif' ),
+                        'attr' => array('controlsList'=>'nodownload','autoplay'=>'','muted'=>'','poster'=>constant('EOWBC_ASSET_URL').'img/spinner.gif' ),
                         'preHTML'=>'Your browser does not support the video tag.',
                         'child' => array(
                             array(
