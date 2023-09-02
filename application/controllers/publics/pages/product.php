@@ -265,7 +265,7 @@ class Product {
                                 $url = $url."&".$get_link;
                             }
                         ?>
-                        window.location.href = '<?php echo esc_attr( $url )/*$url*/; ?>';
+                        window.location.href = '<?php echo esc_url($url); ?>';
                         return false;
                     });
 
@@ -632,9 +632,9 @@ class Product {
             if(!empty($_GET) && !empty(wbc()->sanitize->get('STEP')) && !empty(wbc()->sanitize->get('BEGIN'))) {
                 wbc()->load->model('publics/component/eowbc_breadcrumb'); 
                 echo \eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_add_breadcrumb(
-                                                wbc()->sanitize->get('STEP'),
-                                                wbc()->sanitize->get('BEGIN')
-                                            ).'<br/><br/>';
+                    wbc()->sanitize->get('STEP'),
+                    wbc()->sanitize->get('BEGIN')
+                ).'<br/><br/>';
             }
         }, 15 );
     }

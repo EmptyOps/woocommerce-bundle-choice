@@ -2,9 +2,9 @@
 	//Semantic UI : fields
 ?>
 
-<div class="field <?php !empty($class) ? _e($class) : ''; ?>" id="<?php !empty($id) ? _e($id) : ''; ?>" <?php echo (!empty($style) ? 'style="'.$style.'"':''); ?>>
+<div class="field <?php echo (!empty($class) ? esc_attr($class) : ''); ?>" id="<?php echo (!empty($id) ? esc_attr($id) : ''); ?>" <?php echo (!empty($style) ? 'style="'.esc_attr($style).'"' : ''); ?>>
 	<?php 
-		if(!empty($builder) and !empty($child)){
+		if(!empty($builder) && !empty($child)){
 			$builder->build($child, $option_key, $process_form, null, $ui_definition);
 		}
 	?>

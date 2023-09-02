@@ -157,9 +157,10 @@ if(!class_exists('WBC_Loader')) {
 						$_path = constant('EOWBC_ASSET_URL').'css'.'/'.$path.'.css';
 					}
 
-					if($load_instantly) {
-						echo '<link rel="stylesheet" type="text/css" href="'.$_path.'">';
+					if ($load_instantly) {
+					    echo '<link rel="stylesheet" type="text/css" href="' . esc_url($_path) . '">';
 					}
+
 					else {
 						if(empty($version)) {
 							wp_register_style($_handle, $_path);	
