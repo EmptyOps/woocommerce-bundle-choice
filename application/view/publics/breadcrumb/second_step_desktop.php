@@ -18,18 +18,18 @@ $model_images = \eo\wbc\model\Images::instance();
         <?php if(empty($second)):?>
         <div class="column ">&nbsp;</div>
         <div class="column" <?php echo empty($second_icon)?'style="visibility: hidden;"':""; ?>>
-            <img src="<?php echo esc_html($second_icon)/*$second_icon*/; ?>" class="ui mini image">
+            <img src="<?php echo esc_url($second_icon); ?>" class="ui mini image">
         </div>
         <?php else: ?>                
             <div class="column  product_image_section" style="padding-top: 0px;padding-bottom: 0px;">
-                <img src="<?php echo esc_html($model_images->id2url($second->get_image_id()))/*$model_images->id2url($second->get_image_id())*/; ?>">
+                <img src="<?php echo esc_url($model_images->id2url($second->get_image_id())); ?>">
             </div>
             <div class="column eowbc_breadcrumb_font" style="font-size: x-small;">
                 <?php _e(wc_price(apply_filters('eowbc_breadcrumb_second_price',$second->get_price(),$second))); ?>
                 <br/>
                 <!-- <u><a href="<?php //echo (!empty(wbc()->sanitize->get('SECOND'))?eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_breadcrumb_view_url(wbc()->sanitize->get('SECOND'),$order):'#'); ?>">View</a></u>&nbsp;|&nbsp;<u><a href="<?php // echo (!empty(wbc()->sanitize->get('SECOND'))?eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_breadcrumb_change_url($order,wbc()->sanitize->get('SECOND')):'#'); ?>"><?php //_e(wbc()->options->get_option('appearance_breadcrumb','appearance_breadcrumb_change_action_text','Change',true,true)); ?></a></u> -->
 
-                <u><a href="<?php $url = \eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_breadcrumb_view_url($second->get_id(),$order,$second); echo !empty($url) ? esc_attr($url)/*$url*/ : "#" ;      
+                <u><a href="<?php $url = \eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_breadcrumb_view_url($second->get_id(),$order,$second); echo !empty($url) ? esc_url($url): "#" ;      
                 //echo \eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_breadcrumb_view_url($second->get_id(),$order); //(!empty(wbc()->sanitize->get('SECOND'))?eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_breadcrumb_view_url(wbc()->sanitize->get('SECOND'),$order):'#'); ?>"><?php echo spext_lang("View", 'woo-bundle-choice'); ?></a></u>&nbsp;|&nbsp;<u><a href="<?php echo \eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_breadcrumb_change_url($order,$second->get_id());//(!empty(wbc()->sanitize->get('SECOND'))?eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_breadcrumb_change_url($order,wbc()->sanitize->get('SECOND')):'#'); ?>"><?php _e(wbc()->options->get_option('appearance_breadcrumb','appearance_breadcrumb_change_action_text','Change',true,true)); ?></a></u>
 
             </div>                

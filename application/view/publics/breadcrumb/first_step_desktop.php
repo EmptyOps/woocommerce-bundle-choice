@@ -78,11 +78,11 @@ $model_images = \eo\wbc\model\Images::instance();
         <?php if(empty($first)):?>
         <div class="column ">&nbsp;</div>
         <div class="column" <?php echo empty($first_icon)?'style="visibility: hidden;"':""; ?>>
-            <img src="<?php echo esc_html($first_icon)/*$first_icon*/; ?>" class="ui mini image">
+            <img src="<?php echo esc_url($first_icon)/*$first_icon*/; ?>" class="ui mini image">
         </div>
         <?php else: ?>
         <div class="column  product_image_section" style="padding-top: 0px;padding-bottom: 0px;">
-            <img src="<?php echo esc_attr($model_images->id2url($first->get_image_id()))/*$model_images->id2url($first->get_image_id())*/; ?>">
+            <img src="<?php echo esc_url($model_images->id2url($first->get_image_id()))/*$model_images->id2url($first->get_image_id())*/; ?>">
         </div>
         <div class="column eowbc_breadcrumb_font" style="font-size: x-small;">
             <?php _e(wc_price(apply_filters('eowbc_breadcrumb_first_price',$first->get_price(),$first))); ?>

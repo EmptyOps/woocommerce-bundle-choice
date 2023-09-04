@@ -1,5 +1,5 @@
 <li class="<?php echo (!empty($class) ? esc_attr($class) : ''); ?>" <?php echo (!empty($id) ? 'id="' . esc_attr($id) . '"' : ''); ?> <?php echo (!empty($attr) ? $attr : ''); ?> <?php echo (!empty($style) ? 'style="' . esc_attr($style) . '"' : ''); ?> >
-	<?php echo isset($preHTML) ? $preHTML : ''; ?>
+	<?php echo isset($preHTML) ? $postHTML : ''; ?>
 	<?php
 		if (!empty($child) and !empty($builder)) {
 			$builder->build($child, $option_key, $process_form, null, $ui_definition);

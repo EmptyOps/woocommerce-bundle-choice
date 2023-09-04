@@ -353,7 +353,7 @@ class Term_Meta {
 		<div class="form-field" style="overflow:visible;">
 			
 			<div id="swatch-photo">
-				<label><?php _e('Thumb Image', 'woo-bundle-choice'); ?></label>
+				<label><?php esp_html_e('Thumb Image', 'woo-bundle-choice'); ?></label>
 				
 				<div>
 					<input type="hidden" name="wbc_attachment_thumb" id="wbc_attachment_thumb">
@@ -362,7 +362,7 @@ class Term_Meta {
 
 				<div>					
 					<button type="submit" class="wbc_attachment_thumb_button button">
-						<?php _e('Add/Edit image', 'woo-bundle-choice'); ?>						
+						<?php esp_html__e('Add/Edit image', 'woo-bundle-choice'); ?>						
 					</button>					
 				</div>
 				
@@ -408,17 +408,17 @@ class Term_Meta {
 		?>		
 		<tr class="form-field" style="overflow:visible;">			
 			<th scope="row" valign="top">
-				<label><?php _e('Image', 'woo-bundle-choice'); ?></label>
+				<label><?php esc_html_e('Image', 'woo-bundle-choice'); ?></label>
 			</th>			
 			<td>
 				<div>
 					<input type="hidden" name="wbc_attachment_thumb" id="wbc_attachment_thumb" value="<?php _e($src); ?>">
-					<img src="<?php _e($src); ?>" width="60" height="60" id="wbc_attachment_thumb_img"/>
+					<img src="<?php esc_url_e($src); ?>" width="60" height="60" id="wbc_attachment_thumb_img"/>
 				</div>
 					
 				<div>					
 					<button type="submit" class="wbc_attachment_thumb_button button">
-						<?php _e('Add/Edit image', 'woo-bundle-choice'); ?>						
+						<?php esc_html_e('Add/Edit image', 'woo-bundle-choice'); ?>						
 					</button>				
 				</div>
 				
