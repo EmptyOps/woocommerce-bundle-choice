@@ -1299,7 +1299,7 @@ class SP_Model_Single_Product extends SP_Single_Product {
 									<span class="dashicons dashicons-search"></span>
 								</a>
 							<?php endif; ?>
-							<div class="woo-variation-gallery-slider" data-slick='<?php echo esc_attr( wc_esc_json( wp_json_encode( $gallery_slider_js_options ) ) ); ?>'>
+							<div class="woo-variation-gallery-slider" data-slick='<?php echo  wc_esc_json( wp_json_encode( $gallery_slider_js_options ) ); ?>'>
 								<?php
 								// Main Image
 								if ( $has_post_thumbnail ) {

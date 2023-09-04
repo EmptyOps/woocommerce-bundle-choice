@@ -47,7 +47,7 @@ class Eowbc_Filters extends Eowbc_Model {
 					//wbc()->common->pr($filter_data, false, false);
 							if (wbc()->sanitize->get('is_test') == 1) {
     							wbc()->common->pr(esc_html($filter_data));
-    							echo esc_html("data save");
+    							echo "data save";
 							}
 					$body = array();
 

@@ -841,7 +841,7 @@ class EOWBC_Filter_Widget {
 					</style>
 					<?php
 				}
-				echo esc_html( ob_get_clean() );
+				echo ob_get_clean();
 			}
 
 			if(wbc()->options->get_option('filters_filter_setting','filter_setting_alternate_slider_ui', false )){
@@ -1998,13 +1998,13 @@ class EOWBC_Filter_Widget {
 
 		?>
 		<div data-tab-group="">
-			<select style="width: 100%;" name="<?php echo esc_attr($type==0?'cat_filter_'.$slug:'dropdown_'.$slug)/*$type==0?'cat_filter_'.$slug:'dropdown_'.$slug*/; ?>" id="dropdown_<?php echo esc_attr($slug)/*$slug*/; ?>" data-slug="<?php echo esc_attr($slug)/*$slug*/; ?>" data-role="dropdown" data-input="dropdown" data-filter-id="<?php echo esc_attr($id)/*$id*/; ?>" data-type="<?php echo esc_attr($type)/*$type*/; ?>" >
+		    <select style="width: 100%;" name="<?php echo esc_attr($type == 0 ? 'cat_filter_' . $slug : 'dropdown_' . $slug); ?>" id="dropdown_<?php echo esc_attr($slug); ?>" data-slug="<?php echo esc_attr($slug); ?>" data-role="dropdown" data-input="dropdown" data-filter-id="<?php echo esc_attr($id); ?>" data-type="<?php echo esc_attr($type); ?>">
 
-				<option selected="selected" value=""><?php echo esc_html($opt_title)/*$opt_title*/; ?></option>
-				<?php foreach ($list_items as $name => $slug) : ?>
-					<option value="<?php echo esc_html($slug)/*$slug*/; ?>"><?php echo esc_html($name)/*$name*/; ?></option>
-				<?php endforeach;?>
-			</select>						
+		        <option selected="selected" value=""><?php echo esc_html($opt_title); ?></option>
+		        <?php foreach ($list_items as $name => $slug) : ?>
+		            <option value="<?php echo esc_attr($slug); ?>"><?php echo esc_html($name); ?></option>
+		        <?php endforeach; ?>
+		    </select>
 		</div>
 		<?php
 	}
@@ -2035,7 +2035,7 @@ class EOWBC_Filter_Widget {
 				?>				
 				
 				<a class="ui dropdown item">
-					<?php echo esc_attr($term->name)/*$term->name*/; ?>
+					<?php echo esc_html($term->name); ?>
 					&nbsp;<i class="chevron down icon"></i>
 					<div class="menu">
 						<div class="item" style="width: max-content !important;min-width: 33vw;display: table-cell;">
