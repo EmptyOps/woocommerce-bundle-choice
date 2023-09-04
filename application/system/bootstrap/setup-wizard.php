@@ -151,7 +151,7 @@ class Setup_Wizard {
 		// $this->footer();
 		$this->load_page( $this->step, $this->form, $feature_option ,$bonus_features);
 
-		echo esc_html(ob_get_clean());
+		echo ob_get_clean();
         exit();
 	}
 
@@ -247,8 +247,8 @@ class Setup_Wizard {
 				        <?php $this->navigation(); ?>
 				        <form method="GET">
 				            <?php wp_nonce_field('eo_wbc_setup'); ?>
-				            <input type="hidden" name="page" value="<?php echo esc_attr('eowbc'); ?>"/>
-				            <input type="hidden" name="wbc_setup" value="<?php echo esc_attr('1'); ?>"/>
+				            <input type="hidden" name="page" value="<?php echo 'eowbc'; ?>"/>
+				            <input type="hidden" name="wbc_setup" value="<?php echo '1'; ?>"/>
 				            <input type="hidden" name="step" value="<?php echo esc_attr($this->step + 1); ?>">
 
 		<?php
