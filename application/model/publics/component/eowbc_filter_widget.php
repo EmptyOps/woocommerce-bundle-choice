@@ -2505,20 +2505,20 @@ class EOWBC_Filter_Widget {
 					// window.document.splugins.wbc.filters.api.input_type_icon_click();
 
 					jQuery(".eo_wbc_srch_btn:eq(2)").on('reset',function(){	
-						var icon_filter_type = "<?php echo esc_attr($type)/*$type*/; ?>";
+						var icon_filter_type = "<?php echo $type; ?>";
 						var filter_list= undefined;
 						if(icon_filter_type == 1) {
 							/*filter_list = jQuery('[name="checklist_'+__data_filter_slug+'"]');*/
-							filter_list = jQuery('form#<?php echo esc_attr($this->filter_prefix)/*$this->filter_prefix*/; ?>eo_wbc_filter [name="checklist_'+"<?php echo esc_attr($term->slug)/*$term->slug*/; ?>"+'"]');
+							filter_list = jQuery('form#<?php echo $this->filter_prefix; ?>eo_wbc_filter [name="checklist_'+"<?php echo $term->slug; ?>"+'"]');
 						} else {
 							/*filter_list = jQuery('[name="cat_filter_'+__data_filter_slug+'"]');*/
-							filter_list = jQuery('form#<?php echo esc_attr($this->filter_prefix)/*$this->filter_prefix*/; ?>eo_wbc_filter [name="cat_filter_'+"<?php echo esc_attr($term->slug)/*$term->slug*/; ?>"+'"]');
+							filter_list = jQuery('form#<?php echo $this->filter_prefix; ?>eo_wbc_filter [name="cat_filter_'+"<?php echo $term->slug; ?>"+'"]');
 						}
 
 						if(jQuery(filter_list).attr('data-edit')=='1') {
 							jQuery(filter_list).val("");
 
-							jQuery("form#<?php echo esc_attr($this->filter_prefix)/*$this->filter_prefix*/; ?>eo_wbc_filter .eo_wbc_filter_icon_select").each(function(index,element){
+							jQuery("form#<?php echo $this->filter_prefix; ?>eo_wbc_filter .eo_wbc_filter_icon_select").each(function(index,element){
 								jQuery(element).removeClass("eo_wbc_filter_icon_select");
 							});
 						}				

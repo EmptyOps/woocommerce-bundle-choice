@@ -48,7 +48,7 @@
 </div>
 <div class="actions">
   	<div class="ui large red cancel button">Close</div>
-  	<div class="ui large primary view_log button" href="<?php echo admin_url('admin.php?page=eowbc-setting-status&atol=setting_status_log') ?>">View and Send error report</div>              
+  	<div class="ui large primary view_log button" href="<?php echo esc_url(admin_url('admin.php?page=eowbc-setting-status&atol=setting_status_log')) ?>">View and Send error report</div>              
   	<div class="ui large secondary approve ok button" style="margin-top: 1em !important;">Send an error report now!</div>
 </div>
 </div>

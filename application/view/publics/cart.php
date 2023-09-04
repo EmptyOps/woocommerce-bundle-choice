@@ -7,7 +7,7 @@
 ?>
     <tr>
         <td data-title="">
-            <a href="?EO_WBC=1&EO_WBC_REMOVE=<?php echo esc_attr($index)/*$index*/;?>" class="remove" aria-label="Remove this item" >&times;</a>                                    
+            <a href="?EO_WBC=1&EO_WBC_REMOVE=<?php echo esc_url($index);?>" class="remove" aria-label="Remove this item" >&times;</a>                                    
         </td>
         <td data-title="Thumbnail">
             <div class="ui two equal width column grid">

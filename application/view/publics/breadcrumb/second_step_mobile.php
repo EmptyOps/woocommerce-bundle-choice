@@ -6,19 +6,19 @@
 
 ?>
 <div class="step <?php echo esc_attr((($step==$order)?'active ':(($step>$order)?'completed ':(!empty(\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$clickable_breadcrumb)?'':'disabled')))); ?> second_mobile" >
-    <div class="content eowbc_breadcrumb_font" <?php _e((!empty(\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$clickable_breadcrumb) and !empty(\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$second_url))?'data-clickable_breadcrumb="'.\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$second_url.'"':''); ?>><?php echo esc_attr(\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$second_name); ?></div>
+    <div class="content eowbc_breadcrumb_font" <?php _e((!empty(\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$clickable_breadcrumb) and !empty(\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$second_url))?'data-clickable_breadcrumb="'.esc_url(\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$second_url).'"':''); ?>><?php echo esc_html(\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$second_name); ?></div>
     <div class="ui flowing popup bottom right transition hidden second_mobile" style="width: 80%;">
         <div class="ui grid">
             <div class="six wide column eowbc_breadcrumb_font" style="width: 80px;height: auto;margin: auto;">
                 <?php if(!empty(\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$second)) : ?>
-                <?php echo esc_attr(\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$second->get_image()); ?>
+                <?php echo esc_html(\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$second->get_image()); ?>
                 <?php endif; ?>
             </div>
             <div class="ten wide column">
                 <div class="ui header eowbc_breadcrumb_font">
                     <?php if(!empty(\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$second)) : ?>
                     
-                    <?php _e(wc_price(apply_filters('eowbc_breadcrumb_second_price',\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$second->get_price(),\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$second))); ?>
+                    <?php esc_html_e(wc_price(apply_filters('eowbc_breadcrumb_second_price',\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$second->get_price(),\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$second))); ?>
                     <?php endif; ?>
                 </div>
                 <br/> 

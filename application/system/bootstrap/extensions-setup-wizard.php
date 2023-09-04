@@ -247,8 +247,8 @@ if ( ! class_exists( 'Extensions_Setup_Wizard' ) ) {
 							<?php $this->navigation(); ?>
 							<form method="GET">
 								<?php wp_nonce_field('eo_wbc_setup'); ?>
-								<input type="hidden" name="page" value="<?php echo esc_attr('eowbc'); ?>"/>
-								<input type="hidden" name="wbc_setup" value="<?php echo esc_attr('1'); ?>"/>
+								<input type="hidden" name="page" value="<?php echo 'eowbc'; ?>"/>
+								<input type="hidden" name="wbc_setup" value="<?php echo '1'; ?>"/>
 								<input type="hidden" name="step" value="<?php echo esc_attr($this->step + 1); ?>">
 			<?php
 		} 
@@ -257,19 +257,19 @@ if ( ! class_exists( 'Extensions_Setup_Wizard' ) ) {
 			return false;	//this templates are no longer used
 			?>
 				<div class="ui ordered fluid steps">
-			      	<div class=" <?php echo $this->step == 1 ? 'active':( $this->step > 1 ? 'completed':''); ?> step">		        	
+			      	<div class=" <?php echo esc_attr($this->step == 1 ? 'active':( $this->step > 1 ? 'completed':'')); ?> step">		        	
 			        	<div class="content">
 			          		<div class="title">Inventory</div>
 			          		<div class="description">Choose inventory</div>
 			        	</div>
 			      	</div>
-			      	<div class="<?php echo $this->step == 2 ? 'active':( $this->step > 2 ? 'completed':''); ?> step">
+			      	<div class="<?php echo esc_attr($this->step == 2 ? 'active':( $this->step > 2 ? 'completed':'')); ?> step">
 				        <div class="content">
 					        <div class="title">Features</div>
 			          		<div class="description">Choose Features to be enabled</div>
 			        	</div>
 			      	</div>
-			      	<div class="<?php echo $this->step == 3 ? 'active':( $this->step > 3 ? 'completed':''); ?> step">			        
+			      	<div class="<?php echo esc_attr($this->step == 3 ? 'active':( $this->step > 3 ? 'completed':'')); ?> step">			        
 				        <div class="content">
 					        <div class="title">Finalize</div>
 			          		<div class="description">Add sample products and Complete</div>
@@ -396,7 +396,7 @@ if ( ! class_exists( 'Extensions_Setup_Wizard' ) ) {
 								<div class="ui inverted green button" id="create_product">Add sample and Finish</div>	
 							</div>
 							<div class="field">
-							    <u><a href="<?php echo esc_url(admin_url('admin.php?page=eowbc')); ?>"><?php esc_html_e('Skip and finish', 'your-text-domain'); ?></a></u>
+							    <u><a href="<?php echo esc_url(admin_url('admin.php?page=eowbc')); ?>">Skip and finish</a></u>
 							</div>
 						</div>
 					</div>

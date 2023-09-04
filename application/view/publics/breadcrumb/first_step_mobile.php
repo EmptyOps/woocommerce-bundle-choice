@@ -28,15 +28,15 @@
             <div class="ten wide column">
                 <div class="ui header eowbc_breadcrumb_font">
                     <?php if(!empty(\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$first)) : ?>
-                    <?php _e(wc_price( apply_filters('eowbc_breadcrumb_first_price',\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$first->get_price(),\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$first))); ?>
+                    <?php esc_html_e(wc_price( apply_filters('eowbc_breadcrumb_first_price',\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$first->get_price(),\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$first))); ?>
                     <?php endif; ?>
                 </div>
                 <br/>
                 <div class="ui equal width grid eowbc_breadcrumb_font">                            
-                    <u><a href="<?php echo !empty(wbc()->sanitize->get('FIRST')) ? \eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_breadcrumb_view_url(wbc()->sanitize->get('FIRST'),esc_attr($order)/*$order*/):'#'; ?>">View</a>
+                    <u><a href="<?php echo !empty(wbc()->sanitize->get('FIRST')) ? esc_url(\eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_breadcrumb_view_url(wbc()->sanitize->get('FIRST'),$order)):'#'); ?>">View</a>
                     </u>
                     <u>
-                        <a href="<?php echo !empty(wbc()->sanitize->get('FIRST'))?\eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_breadcrumb_change_url(esc_attr($order)/*$order*/,wbc()->sanitize->get('FIRST')):'#'; ?>"><?php _e(wbc()->options->get_option('appearance_breadcrumb','appearance_breadcrumb_change_action_text','Change',true,true)); ?></a>
+                        <a href="<?php echo !empty(wbc()->sanitize->get('FIRST'))? esc_url(\eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_breadcrumb_change_url($order,wbc()->sanitize->get('FIRST'))):'#'; ?>"><?php esc_html_e(wbc()->options->get_option('appearance_breadcrumb','appearance_breadcrumb_change_action_text','Change',true,true)); ?></a>
                     </u>
                 </div>  
             </div>                
