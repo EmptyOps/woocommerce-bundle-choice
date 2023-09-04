@@ -104,20 +104,20 @@ if(!function_exists('eo_wbc_buttons_css')){
 <!-- Created with Wordpress plugin - WooCommerce Product bundle choice -->
 <div id="wbc_" class="eo_wbc_container" <?php echo (isset($is_embed_using_js) && $is_embed_using_js) ? 'style="display: none !important;"' : '';?>>
 	<h2 class="ui center aligned header" style="text-align: center !important;">
-		<?php _e($heading); ?>
+		<?php esc_html_e($heading); ?>
 	</h2>
 	<div class="ui grid center aligned container">
 		<div class="ui buttons large row stackable" style="display: inline-block;display: inline-flex;">
-			<button class="ui button primary column wbc_wid_btns" href="<?php echo esc_html($first_url)/*$first_url*/ .'EO_WBC=1&BEGIN='.$first_slug.'&STEP=1&FIRST=&SECOND='; ?>" onclick="window.location.href=jQuery(this).attr('href');">
-				<?php echo esc_html($button_text.$first_name)/*$button_text.$first_name*/; ?>
+			<button class="ui button primary column wbc_wid_btns" href="<?php echo esc_url($first_url).'EO_WBC=1&BEGIN='.$first_slug.'&STEP=1&FIRST=&SECOND='; ?>" onclick="window.location.href=jQuery(this).attr('href');">
+				<?php echo esc_html($button_text.$first_name); ?>
 			</button>
 
 			<div class="or" style="margin: auto;"></div>
 
 
-			<button class="ui button primary column wbc_wid_btns" href="<?php echo esc_html($second_url)/*$second_url*/ .'EO_WBC=1&BEGIN='.$second_slug.'&STEP=1&FIRST=&SECOND='; ?>" onclick="window.location.href=jQuery(this).attr('href');">
-				<?php echo esc_html($button_text.$second_name)/*$button_text.$second_name*/; ?>
-			</button>
+			<button class="ui button primary column wbc_wid_btns" href="<?php echo esc_url($second_url .'EO_WBC=1&BEGIN='.$second_slug.'&STEP=1&FIRST=&SECOND='); ?>" onclick="window.location.href=jQuery(this).attr('href');">
+                <?php echo esc_html($button_text.$second_name); ?>
+            </button>
 		</div>
 	</div>
 	<style>.ui.grid{margin-left: auto;margin-right: auto;} @media only screen and (max-width: 768px){ .eo-wbc-container .ui.buttons .button{ border-radius: 0 !important; } }</style>

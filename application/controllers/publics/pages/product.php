@@ -265,7 +265,7 @@ class Product {
                                 $url = $url."&".$get_link;
                             }
                         ?>
-                        window.location.href = '<?php echo esc_attr( $url )/*$url*/; ?>';
+                        window.location.href = '<?php echo $url; ?>';
                         return false;
                     });
 
@@ -591,7 +591,7 @@ class Product {
                 <!-- WBC{ WooCommerce Product Bundle Choice wiget STARTS. } -->
                 <script>
                     jQuery(document).ready(function(){
-                        jQuery('form.cart').prepend("<input type='hidden' name='eo_wbc_target' value='<?php echo esc_attr($this->page_category)/*$this->page_category*/; ?>'/><input type='hidden' name='eo_wbc_product_id' value='<?php global $post; echo esc_attr($post->ID)/*$post->ID*/; ?>'/>");
+                        jQuery('form.cart').prepend("<input type='hidden' name='eo_wbc_target' value='<?php echo $this->page_category; ?>'/><input type='hidden' name='eo_wbc_product_id' value='<?php global $post; echo $post->ID; ?>'/>");
                     });
                 </script>
                 <!-- WBC{ WooCommerce Product Bundle Choice wiget ENDS. } -->
@@ -632,9 +632,9 @@ class Product {
             if(!empty($_GET) && !empty(wbc()->sanitize->get('STEP')) && !empty(wbc()->sanitize->get('BEGIN'))) {
                 wbc()->load->model('publics/component/eowbc_breadcrumb'); 
                 echo \eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_add_breadcrumb(
-                                                wbc()->sanitize->get('STEP'),
-                                                wbc()->sanitize->get('BEGIN')
-                                            ).'<br/><br/>';
+                    wbc()->sanitize->get('STEP'),
+                    wbc()->sanitize->get('BEGIN')
+                ).'<br/><br/>';
             }
         }, 15 );
     }
@@ -725,7 +725,7 @@ class Product {
             <!-- Created with Wordpress plugin - WooCommerce Product bundle choice -->
             <script type="text/javascript">
                 jQuery(".single_add_to_cart_button.button.alt").ready(function(){
-                    jQuery('form.cart').prepend("<input type='hidden' name='eo_wbc_target' value='<?php echo esc_attr($this->page_category)/*$this->page_category*/; ?>'/><input type='hidden' name='eo_wbc_product_id' value='<?php global $post; echo esc_attr($post->ID)/*$post->ID*/; ?>'/>");
+                    jQuery('form.cart').prepend("<input type='hidden' name='eo_wbc_target' value='<?php echo $this->page_category; ?>'/><input type='hidden' name='eo_wbc_product_id' value='<?php global $post; echo $post->ID; ?>'/>");
                     
                     <?php if(!empty(wbc()->options->get_option('appearance_product_page','product_page_add_to_basket',''))) :?>
                         
@@ -735,7 +735,7 @@ class Product {
                         }
 
                         jQuery(".single_add_to_cart_button.alt:not(.disabled):eq(0)").replaceWith('<div class=\"ui buttons\">'+
-                                '<div class=\"ui button\" href=\"#\" id=\"eo_wbc_add_to_cart\"><?php echo esc_html($btn_text)/*$btn_text;*/; ?></div>'+
+                                '<div class=\"ui button\" href=\"#\" id=\"eo_wbc_add_to_cart\"><?php echo $btn_text; ?></div>'+
                                     '<div class=\"ui floating dropdown icon button\" style=\"width: fit-content;min-width: unset; max-width: unset;\">'+
                                         '<i class=\"dropdown icon\"></i>'+
                                         '<div class=\"menu\">'+
@@ -750,7 +750,7 @@ class Product {
 
                         jQuery(".single_add_to_cart_button.button.alt:not(.disabled):eq(0)").replaceWith(
                          "<button href='#' id='eo_wbc_add_to_cart' class='single_add_to_cart_button button alt'>"
-                         +"<?php echo esc_html($btn_text)/*$btn_text*/; ?>"
+                         +"<?php echo $btn_text; ?>"
                          +"</button>"
                         );
                     <?php endif; ?>

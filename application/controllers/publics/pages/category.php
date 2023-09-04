@@ -236,7 +236,7 @@ class Category {
         add_action('woocommerce_before_shop_loop', function(){
 
             wbc()->load->model('publics/component/eowbc_breadcrumb');       
-            echo esc_html(\eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_add_breadcrumb(wbc()->sanitize->get('STEP'), wbc()->sanitize->get('BEGIN'))).'<br/><br/>';
+            echo \eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_add_breadcrumb(wbc()->sanitize->get('STEP'), wbc()->sanitize->get('BEGIN')).'<br/><br/>';
         }, 0);
     }
 

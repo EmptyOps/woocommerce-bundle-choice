@@ -1,7 +1,7 @@
-<div class="sub header <?php !empty($class)? _e($class) : ''; ?>" style="<?php !empty($style) ? _e($style) : ''; ?>">
-	<?php !empty($label)? _e($label) : ''; ?>
+<div class="sub header <?php echo (!empty($class) ? esc_attr($class) : ''); ?>" style="<?php echo (!empty($style) ? esc_attr($style) : ''); ?>">
+	<?php echo (!empty($label) ? esc_html($label) : ''); ?>
 	<?php 
-		if(!empty($builder) and !empty($child)){
+		if (!empty($builder) && !empty($child)) {
 			$builder->build($child, $option_key, $process_form, null, $ui_definition);
 		}
 	?>	

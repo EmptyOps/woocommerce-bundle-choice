@@ -234,23 +234,23 @@ class Setup_Wizard {
 						// 	wp_enqueue_script( 'jquery' );
 						// });
 		            ?>		            
-		            <link rel="stylesheet" type="text/css" href="<?php echo constant('EOWBC_ASSET_URL').'css/fomantic/semantic.min.css'; ?>">
-		        </head>
-		        <body>
-		        	<div class="ui segment container" style="height: 100%;margin-bottom: 0px; border: none !important;
-    box-shadow: none;">
-					 	<div class="ui icon header" style="width: 100%;">
-							<img src="<?php echo constant('EO_WBC_PLUGIN_ICO_BIG'); ?>" style = 'max-width: 100;max-height: auto;'/>
-							<br/>
-							<p>WooCommerce Product Bundle Choice</p>
-							<hr/>
-						</div>
-						<?php $this->navigation(); ?>
-						<form method="GET">
-							<?php wp_nonce_field('eo_wbc_setup'); ?>
-							<input type="hidden" name="page" value="<?php echo 'eowbc'; ?>"/>
-							<input type="hidden" name="wbc_setup" value="<?php echo '1'; ?>"/>
-							<input type="hidden" name="step" value="<?php echo $this->step+1; ?>">
+		            <link rel="stylesheet" type="text/css" href="<?php echo esc_url(constant('EOWBC_ASSET_URL') . 'css/fomantic/semantic.min.css'); ?>">
+				</head>
+				<body>
+    				<div class="ui segment container" style="height: 100%; margin-bottom: 0px; border: none !important; box-shadow: none;">
+       					<div class="ui icon header" style="width: 100%;">
+				            <img src="<?php echo esc_url(constant('EO_WBC_PLUGIN_ICO_BIG')); ?>" style="max-width: 100; max-height: auto;"/>
+				            <br/>
+				            <p><?php esc_html_e('WooCommerce Product Bundle Choice', 'your-text-domain'); ?></p>
+			           	    <hr/>
+				        </div>
+				        <?php $this->navigation(); ?>
+				        <form method="GET">
+				            <?php wp_nonce_field('eo_wbc_setup'); ?>
+				            <input type="hidden" name="page" value="<?php echo 'eowbc'; ?>"/>
+				            <input type="hidden" name="wbc_setup" value="<?php echo '1'; ?>"/>
+				            <input type="hidden" name="step" value="<?php echo esc_attr($this->step + 1); ?>">
+
 		<?php
 	} 
 
@@ -284,30 +284,30 @@ class Setup_Wizard {
 		?>
 			<input type="hidden" name="action" value="basic_config">
 			<div class="ui form segment">
-			  	<div class="inline fields">
-			    	<label><?php _e('Inventory Type','woo-bundle-choice'); ?></label>
-			    	<div class="field">
-			      		<div class="ui selection dropdown">
-						  	<input type="hidden" name="eo_wbc_inventory_type">
-						  	<i class="dropdown icon"></i>
-						  	<div class="default text"><?php _e('Inventory Type','woo-bundle-choice'); ?></div>
-						  	<div class="menu">
-							    <div class="item" data-value="jewelryfgdfgfg"><?php _e('Jewelry','woo-bundle-choice'); ?></div>
-							    <div class="item" data-value="clothing"><?php _e('Clothing','woo-bundle-choice'); ?></div>
-							    <div class="item" data-value="home_decor"><?php _e('Home Decor','woo-bundle-choice'); ?></div>
-							    <div class="item" data-value="others"><?php _e('Others','woo-bundle-choice'); ?></div>
-						  	</div>
-						</div>
-			    	</div>			    			    	
-			  	</div>
-			  	<br/>
-			  	<div class="inline fields">			  		
-			  		<div class="field">
-			  			<button class="ui inverted primary button" type="submit">Submit</button>
-			  		</div>
-			  	</div>
-			</div>
-		
+    			<div class="inline fields">
+        			<label><?php esc_html_e('Inventory Type', 'woo-bundle-choice'); ?></label>
+        			<div class="field">
+           				 <div class="ui selection dropdown">
+			                <input type="hidden" name="eo_wbc_inventory_type">
+			                <i class="dropdown icon"></i>
+			                <div class="default text"><?php esc_html_e('Inventory Type', 'woo-bundle-choice'); ?></div>
+			                <div class="menu">
+			                    <div class="item" data-value="jewelry"><?php esc_html_e('Jewelry', 'woo-bundle-choice'); ?></div>
+			                    <div class="item" data-value="clothing"><?php esc_html_e('Clothing', 'woo-bundle-choice'); ?></div>
+			                    <div class="item" data-value="home_decor"><?php esc_html_e('Home Decor', 'woo-bundle-choice'); ?></div>
+			                    <div class="item" data-value="others"><?php esc_html_e('Others', 'woo-bundle-choice'); ?></div>
+			                </div>
+			            </div>
+			        </div>
+			    </div>
+		    <br/>
+		    <div class="inline fields">
+		        <div class="field">
+		            <button class="ui inverted primary button" type="submit"><?php esc_html_e('Submit', 'woo-bundle-choice'); ?></button>
+		        </div>
+		    </div>
+		</div>
+
 		<?php
 	}
 
@@ -397,7 +397,7 @@ class Setup_Wizard {
 							<div class="ui inverted green button" id="create_product">Add sample and Finish</div>	
 						</div>
 						<div class="field">
-			  				<u><a href="<?php echo admin_url('admin.php?page=eowbc'); ?>">Skip and finish</a></u>
+			  				<u><a href="<?php echo esc_url(admin_url('admin.php?page=eowbc')); ?>">Skip and finish</a></u>
 			  			</div>
 					</div>
 				</div>

@@ -841,7 +841,6 @@ class EOWBC_Filter_Widget {
 					</style>
 					<?php
 				}
-
 				echo ob_get_clean();
 			}
 
@@ -1999,13 +1998,13 @@ class EOWBC_Filter_Widget {
 
 		?>
 		<div data-tab-group="">
-			<select style="width: 100%;" name="<?php echo esc_attr($type==0?'cat_filter_'.$slug:'dropdown_'.$slug)/*$type==0?'cat_filter_'.$slug:'dropdown_'.$slug*/; ?>" id="dropdown_<?php echo esc_attr($slug)/*$slug*/; ?>" data-slug="<?php echo esc_attr($slug)/*$slug*/; ?>" data-role="dropdown" data-input="dropdown" data-filter-id="<?php echo esc_attr($id)/*$id*/; ?>" data-type="<?php echo esc_attr($type)/*$type*/; ?>" >
+		    <select style="width: 100%;" name="<?php echo esc_attr($type == 0 ? 'cat_filter_' . $slug : 'dropdown_' . $slug); ?>" id="dropdown_<?php echo esc_attr($slug); ?>" data-slug="<?php echo esc_attr($slug); ?>" data-role="dropdown" data-input="dropdown" data-filter-id="<?php echo esc_attr($id); ?>" data-type="<?php echo esc_attr($type); ?>">
 
-				<option selected="selected" value=""><?php echo esc_html($opt_title)/*$opt_title*/; ?></option>
-				<?php foreach ($list_items as $name => $slug) : ?>
-					<option value="<?php echo esc_html($slug)/*$slug*/; ?>"><?php echo esc_html($name)/*$name*/; ?></option>
-				<?php endforeach;?>
-			</select>						
+		        <option selected="selected" value=""><?php echo esc_html($opt_title); ?></option>
+		        <?php foreach ($list_items as $name => $slug) : ?>
+		            <option value="<?php echo esc_attr($slug); ?>"><?php echo esc_html($name); ?></option>
+		        <?php endforeach; ?>
+		    </select>
 		</div>
 		<?php
 	}
@@ -2036,7 +2035,7 @@ class EOWBC_Filter_Widget {
 				?>				
 				
 				<a class="ui dropdown item">
-					<?php echo esc_attr($term->name)/*$term->name*/; ?>
+					<?php echo esc_html($term->name); ?>
 					&nbsp;<i class="chevron down icon"></i>
 					<div class="menu">
 						<div class="item" style="width: max-content !important;min-width: 33vw;display: table-cell;">
@@ -2411,11 +2410,11 @@ class EOWBC_Filter_Widget {
 			jQuery(document).ready(function($){
 				console.log('EO_WBC_FILTER_UI_ICON_TERM_SLUG');
 				console.log(EO_WBC_FILTER_UI_ICON_TERM_SLUG);
-				EO_WBC_FILTER_UI_ICON_TERM_SLUG.push("<?php echo esc_attr($term->slug)/*$term->slug*/; ?>");
+				EO_WBC_FILTER_UI_ICON_TERM_SLUG.push("<?php echo $term->slug; ?>");
 
 				/*__data_filter_slug="<?php echo $term->slug; ?>";*/
 				/*if(__data_filter_slug){*/
-				if("<?php echo esc_attr($term->slug)/*$term->slug*/; ?>") {
+				if("<?php echo $term->slug; ?>") {
 					// --- aa code woo-bundle-choice/asset/js/publics/eo_wbc_filter.js input_type_icon_click() ma move karyo se ---
 					// --- start ---
 					// //TO BE FIXED LATER.
@@ -2506,20 +2505,20 @@ class EOWBC_Filter_Widget {
 					// window.document.splugins.wbc.filters.api.input_type_icon_click();
 
 					jQuery(".eo_wbc_srch_btn:eq(2)").on('reset',function(){	
-						var icon_filter_type = "<?php echo esc_attr($type)/*$type*/; ?>";
+						var icon_filter_type = "<?php echo $type; ?>";
 						var filter_list= undefined;
 						if(icon_filter_type == 1) {
 							/*filter_list = jQuery('[name="checklist_'+__data_filter_slug+'"]');*/
-							filter_list = jQuery('form#<?php echo esc_attr($this->filter_prefix)/*$this->filter_prefix*/; ?>eo_wbc_filter [name="checklist_'+"<?php echo esc_attr($term->slug)/*$term->slug*/; ?>"+'"]');
+							filter_list = jQuery('form#<?php echo $this->filter_prefix; ?>eo_wbc_filter [name="checklist_'+"<?php echo $term->slug; ?>"+'"]');
 						} else {
 							/*filter_list = jQuery('[name="cat_filter_'+__data_filter_slug+'"]');*/
-							filter_list = jQuery('form#<?php echo esc_attr($this->filter_prefix)/*$this->filter_prefix*/; ?>eo_wbc_filter [name="cat_filter_'+"<?php echo esc_attr($term->slug)/*$term->slug*/; ?>"+'"]');
+							filter_list = jQuery('form#<?php echo $this->filter_prefix; ?>eo_wbc_filter [name="cat_filter_'+"<?php echo $term->slug; ?>"+'"]');
 						}
 
 						if(jQuery(filter_list).attr('data-edit')=='1') {
 							jQuery(filter_list).val("");
 
-							jQuery("form#<?php echo esc_attr($this->filter_prefix)/*$this->filter_prefix*/; ?>eo_wbc_filter .eo_wbc_filter_icon_select").each(function(index,element){
+							jQuery("form#<?php echo $this->filter_prefix; ?>eo_wbc_filter .eo_wbc_filter_icon_select").each(function(index,element){
 								jQuery(element).removeClass("eo_wbc_filter_icon_select");
 							});
 						}				

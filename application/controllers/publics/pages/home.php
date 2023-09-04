@@ -101,8 +101,8 @@ class Home {
 
           // }
 
-          echo esc_attr( $this->eo_wbc_buttons() )/*$this->eo_wbc_buttons()*//*.$this->eo_wbc_buttons_css().$this->eo_wbc_code()*/;           
-
+          echo esc_html($this->eo_wbc_buttons())/*.$this->eo_wbc_buttons_css().$this->eo_wbc_code()*/;
+           
         },100);
     }
 

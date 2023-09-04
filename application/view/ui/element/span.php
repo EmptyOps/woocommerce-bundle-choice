@@ -1,9 +1,9 @@
-<span <?php echo (!empty($class) ? 'class="'.esc_attr($class)/*$class*/.'"':''); ?> <?php echo (!empty($id) ? 'id="'.esc_attr($id)/*$id*/.'"':''); ?> <?php echo (!empty($attr)? esc_attr($attr)/*$attr*/: ''); ?> <?php echo (!empty($name) ? 'name="'.esc_attr($name)/*$name*/.'"':''); ?> <?php echo (!empty($style) ? 'style="'.$style.'"':''); ?>>
-	<?php echo (!empty($preHTML)?esc_html($preHTML)/*$preHTML*/:''); ?>
+<span <?php echo (!empty($class) ? 'class="' . esc_attr($class) . '"' : ''); ?> <?php echo (!empty($id) ? 'id="' . esc_attr($id) . '"' : ''); ?> <?php echo (!empty($attr) ? $attr : ''); ?> <?php echo (!empty($name) ? 'name="' . esc_attr($name) . '"' : ''); ?> <?php echo (!empty($style) ? 'style="' . esc_attr($style) . '"' : ''); ?>>
+	<?php echo (!empty($preHTML) ? $preHTML : ''); ?>
 	<?php
-		if(!empty($child) and !empty($builder)) {
+		if (!empty($child) && !empty($builder)) {
 			$builder->build($child, $option_key, $process_form, null, $ui_definition);
 		}
 	?>
-	<?php echo (!empty($postHTML)?esc_html($postHTML)/*$postHTML*/:''); ?>	
+	<?php echo (!empty($postHTML) ? $postHTML : ''); ?>	
 </span>

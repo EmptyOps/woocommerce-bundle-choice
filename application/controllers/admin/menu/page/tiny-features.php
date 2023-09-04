@@ -174,7 +174,7 @@ if ( ! class_exists( 'Tiny_features' ) ) {
 										</ul>
 									</div>
 									<div class="add-woo-variation-gallery-image-wrapper hide-if-no-js">
-										<a href="#" data-product_variation_loop="<?php echo absint( $loop ) ?>" data-product_variation_id="<?php echo esc_attr( $variation_id ) ?>" class="button-primary add-woo-variation-gallery-image"><?php esc_html_e( 'Add Variation Gallery Image', 'woo-variation-gallery' ) ?></a>
+										<a href="#" data-product_variation_loop="<?php echo esc_attr(absint( $loop )) ?>" data-product_variation_id="<?php echo esc_attr( $variation_id ) ?>" class="button-primary add-woo-variation-gallery-image"><?php esc_html_e( 'Add Variation Gallery Image', 'woo-variation-gallery' ) ?></a>
 										<?php if ( ! woo_variation_gallery()->is_pro() ): ?>
 											<a target="_blank" href="<?php echo esc_url( woo_variation_gallery()->get_backend()->get_pro_link() ) ?>" style="display: none" class="button woo-variation-gallery-pro-button"><?php esc_html_e( 'Upgrade to pro to add more images and videos', 'woo-variation-gallery' ) ?></a>
 										<?php endif; ?>

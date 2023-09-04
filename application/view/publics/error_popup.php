@@ -37,7 +37,7 @@
 <!-- Created with Wordpress plugin - WooCommerce Product bundle choice -->
 <div class="ui modal align center tiny centered">
 <div class="ui header">              
-  <h4>There is an error on <strong><?php echo constant('EOWBC_NAME'); ?></strong></h4>
+  <h4>There is an error on <strong><?php echo esc_html(constant('EOWBC_NAME')); ?></strong></h4>
 </div>
 <div class="content">
   <h5 id="error_popup_title"></h5>
@@ -48,7 +48,7 @@
 </div>
 <div class="actions">
   	<div class="ui large red cancel button">Close</div>
-  	<div class="ui large primary view_log button" href="<?php echo admin_url('admin.php?page=eowbc-setting-status&atol=setting_status_log') ?>">View and Send error report</div>              
+  	<div class="ui large primary view_log button" href="<?php echo esc_url(admin_url('admin.php?page=eowbc-setting-status&atol=setting_status_log')) ?>">View and Send error report</div>              
   	<div class="ui large secondary approve ok button" style="margin-top: 1em !important;">Send an error report now!</div>
 </div>
 </div>
