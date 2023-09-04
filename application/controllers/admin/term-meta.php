@@ -192,10 +192,10 @@ class Term_Meta {
 					<img src="<?php echo esc_url($image_src); ?>" width="100" height="100" id="wbc_thumb_img"/>
 				</div>
 				<br/>				
-				<div>					
+				<div>
 					<button class="ui button wbc_thumb_button button" style="padding: 0.6em;">
-						<?php _e('Choose Image', 'woo-bundle-choice'); ?>						
-					</button>					
+						<?php esc_html_e('Choose Image', 'woo-bundle-choice'); ?>						
+					</button>
 				</div>
 				
 				<script type="text/javascript">					
