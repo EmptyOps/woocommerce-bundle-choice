@@ -179,7 +179,8 @@ $this_plugin = '';
 
 						  <div class="addons-banner-block-item">
 						    <div class="addons-banner-block-item-icon">
-						        <img class="addons-img" style="height: inherit;" src="<?php foreach($product->images as $images) {
+						        <img class="addons-img" style="height: inherit;" src="
+						        <?php foreach($product->images as $images) {
 						            echo esc_url($images->src);
 						            break;
 						        } ?>" />

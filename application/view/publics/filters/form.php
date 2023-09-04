@@ -135,76 +135,66 @@ if(empty($_per_page)){
 	<!-- Created with Wordpress plugin - WooCommerce Product bundle choice -->
 	<!--WooCommerce Product Bundle Choice filter form-->
 
-	<form method="GET" name="<?php echo esc_attr($filter_ui->filter_prefix)/*$filter_ui->filter_prefix*/; ?>eo_wbc_filter" id="<?php echo esc_attr($filter_ui->filter_prefix)/*$filter_ui->filter_prefix*/; ?>eo_wbc_filter" style="clear: both;">
-		<?php do_action('eowbc_pre_filter_form'); ?>
-		<input type="hidden" name="eo_wbc_filter" value="1" />	
-		<input type="hidden" name="paged" value="1" />
-		<input type="hidden" name="eo_wbc_page" size="<?php echo esc_attr($_per_page)/*$_per_page*/; ?>" />	
-		<input type="hidden" name="last_paged" value="1" />
-		<?php if(apply_filters('eowbc_show_filter_actions_field',true)): ?>
-		<input type="hidden" name="action" value="eo_wbc_filter"/>
-		<?php endif; ?>
+	<form method="GET" name="<?php echo esc_attr($filter_ui->filter_prefix); ?>eo_wbc_filter" id="<?php echo esc_attr($filter_ui->filter_prefix); ?>eo_wbc_filter" style="clear: both;">
+	    <?php do_action('eowbc_pre_filter_form'); ?>
+	    <input type="hidden" name="eo_wbc_filter" value="1" />
+	    <input type="hidden" name="paged" value="1" />
+	    <input type="hidden" name="eo_wbc_page" size="<?php echo esc_attr($_per_page); ?>" />
+	    <input type="hidden" name="last_paged" value="1" />
+	    <?php if (apply_filters('eowbc_show_filter_actions_field', true)) : ?>
+	        <input type="hidden" name="action" value="eo_wbc_filter" />
+	    <?php endif; ?>
 
-		<input type="hidden" name="_current_category" value="<?php echo (!empty(wbc()->sanitize->get('CAT_LINK'))? \eo\wbc\model\SP_WBC_Router::instance()->set_query_params_formatted( 'to_form_field', 
-														                array('prod_cat'), 
-														                \eo\wbc\model\SP_WBC_Router::instance()->get_query_params_formatted('url_and_form_field_raw',
-															                array('prod_cat'),
-															                'REQUEST',
-															                null))/*wbc()->sanitize->get('CAT_LINK')*/:$current_category); ?>" />
+	    <input type="hidden" name="_current_category" value="<?php echo !empty(wbc()->sanitize->get('CAT_LINK')) ? esc_attr(\eo\wbc\model\SP_WBC_Router::instance()->set_query_params_formatted('to_form_field', array('prod_cat'), \eo\wbc\model\SP_WBC_Router::instance()->get_query_params_formatted('url_and_form_field_raw', array('prod_cat'), 'REQUEST', null))/*wbc()->sanitize->get('CAT_LINK')*/ : esc_attr($current_category); ?>" />
 
-		<input type="hidden" name="_category_query" id="eo_wbc_cat_query" 
-			value="<?php echo (!empty(wbc()->sanitize->get('CAT_LINK'))? \eo\wbc\model\SP_WBC_Router::instance()->set_query_params_formatted( 'to_form_field', 
-							                array('prod_cat'), 
-							                \eo\wbc\model\SP_WBC_Router::instance()->get_query_params_formatted('url_and_form_field_raw',
-								                array('prod_cat'),
-								                'REQUEST',
-								                null))/*wbc()->sanitize->get('CAT_LINK')*/:''/*$current_category*/); ?>" />
-			
-		<input type="hidden" name="_category" value="<?php echo implode(',',$thisObj->___category) ?>"/>
-		
-		<input type="hidden" name="cat_filter__two_tabs" value=""/>
-		<?php do_action('eo_wbc_additional_form_field',$filter_ui); ?>
-					
-		<?php if(isset($_GET['products_in']) AND !empty(wbc()->sanitize->get('products_in')) ): ?>
-			<input type="hidden" name="products_in" value="<?php echo wbc()->sanitize->get('products_in') ?>" />			
-		<?php endif; ?>
+	    <input type="hidden" name="_category_query" id="eo_wbc_cat_query" value="<?php echo !empty(wbc()->sanitize->get('CAT_LINK')) ? esc_attr(\eo\wbc\model\SP_WBC_Router::instance()->set_query_params_formatted('to_form_field', array('prod_cat'), \eo\wbc\model\SP_WBC_Router::instance()->get_query_params_formatted('url_and_form_field_raw', array('prod_cat'), 'REQUEST', null))/*wbc()->sanitize->get('CAT_LINK')*/ : ''; /*$current_category*/ ?>" />
 
-		<?php
-			$queried_attributes = array();		
-			if(!empty($thisObj->__filters)){	
+	    <input type="hidden" name="_category" value="<?php echo esc_attr(implode(',', $thisObj->___category)); ?>" />
 
-				/* This block shall be removed as its purpose is to remove duplicates as we do not know the cause of multiple instence. */
-				$serialized_filter = array_map(function($e){
-					return serialize($e);
-				},$thisObj->__filters);
+	    <input type="hidden" name="cat_filter__two_tabs" value="" />
+	    <?php do_action('eo_wbc_additional_form_field', $filter_ui); ?>
 
-				$serialized_filter = array_unique($serialized_filter);
+	    <?php if (isset($_GET['products_in']) && !empty(wbc()->sanitize->get('products_in'))) : ?>
+	        <input type="hidden" name="products_in" value="<?php echo esc_attr(wbc()->sanitize->get('products_in')); ?>" />
+	    <?php endif; ?>
 
-				$thisObj->__filters = array_map(function($e){
-					return unserialize($e);
-				},$serialized_filter);				
-				/* To be removed block ends. */
+	    <?php
+	    $queried_attributes = array();
+	    if (!empty($thisObj->__filters)) {
 
-				$thisObj->__filters = apply_filters('sp_wbc_pre_filter_form_attribute',$thisObj->__filters);
+	        /* This block shall be removed as its purpose is to remove duplicates as we do not know the cause of multiple instances. */
+	        $serialized_filter = array_map(function ($e) {
+	            return serialize($e);
+	        }, $thisObj->__filters);
 
-				foreach ($thisObj->__filters as $__filter) {						
+	        $serialized_filter = array_unique($serialized_filter);
 
-					if(!empty($_REQUEST[ $__filter['id'] ])) {
-						
-						$queried_attributes[str_replace(['min_','max_'],'',$__filter['id'])] = str_replace(['min_','max_'],'',$__filter['id']);
+	        $thisObj->__filters = array_map(function ($e) {
+	            return unserialize($e);
+	        }, $serialized_filter);
+	        /* To be removed block ends. */
 
-						$__filter['value'] = sanitize_text_field($_REQUEST[ $__filter['id'] ]);
-					}
+	        $thisObj->__filters = apply_filters('sp_wbc_pre_filter_form_attribute', $thisObj->__filters);
 
-					?>
-						<input type="<?php echo esc_attr($__filter['type'])/*$__filter['type']*/ ?>" name="<?php echo esc_attr($__filter['name'])/*$__filter['name']*/ ?>" id="<?php echo esc_attr($__filter['id'])/*$__filter['id']*/ ?>" class="<?php echo esc_attr($__filter['class'])/*$__filter['class']*/ ?>" value="<?php echo esc_attr($__filter['value'])/*$__filter['value']*/ ?>" <?php echo (isset($__filter['data-edit'])?'data-edit="'.esc_attr($__filter['data-edit'])/*$__filter['data-edit']*/.'"':'') ?>/>
-					<?php
-				}
-			}
-		?>
+	        foreach ($thisObj->__filters as $__filter) {
 
-		<input type="hidden" name="_attribute" id="eo_wbc_attr_query" value="<?php echo implode(',',$queried_attributes); ?>" />
+	            if (!empty($_REQUEST[$__filter['id']])) {
+
+	                $queried_attributes[str_replace(['min_', 'max_'], '', $__filter['id'])] = str_replace(['min_', 'max_'], '', $__filter['id']);
+
+	                $__filter['value'] = sanitize_text_field($_REQUEST[$__filter['id']]);
+	            }
+
+	            ?>
+	            <input type="<?php echo esc_attr($__filter['type']); ?>" name="<?php echo esc_attr($__filter['name']); ?>" id="<?php echo esc_attr($__filter['id']); ?>" class="<?php echo esc_attr($__filter['class']); ?>" value="<?php echo esc_attr($__filter['value']); ?>" <?php echo (isset($__filter['data-edit']) ? 'data-edit="' . esc_attr($__filter['data-edit']) . '"' : ''); ?>/>
+	        <?php
+	    }
+	}
+	?>
+
+	<input type="hidden" name="_attribute" id="eo_wbc_attr_query" value="<?php echo esc_attr(implode(',', $queried_attributes)); ?>" />
 	</form>
+
 	<br/><br/>
 	<?php if(apply_filters('eowbc_enque_filter_js',call_user_func('__return_true'))): ?>
 	<script type="text/javascript">		

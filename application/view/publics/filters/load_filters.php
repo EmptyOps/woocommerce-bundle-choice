@@ -30,7 +30,7 @@ if(/*wp_is_mobile()*/ wbc_is_mobile_by_page_sections('cat_shop_page',true)) {
 			?>
 			<div class="ui grid centered container" id="advance_filter_mob_alternate_container">
 				<div class="row" style="padding: 0px;">
-					<div class="ui button primary" id="advance_filter_mob_alternate" style="border-radius: 0 0 0 0;width: 100vw !important; display: block !important; position: absolute;"><?php spext_lang('Advance Filter','woo-bundle-choice'); ?>&nbsp;<i class="ui icon angle double down"></i></div>
+					<div class="ui button primary" id="advance_filter_mob_alternate" style="border-radius: 0 0 0 0;width: 100vw !important; display: block !important; position: absolute;"><?php esc_html(spext_lang('Advance Filter','woo-bundle-choice')); ?>&nbsp;<i class="ui icon angle double down"></i></div>
 				</div>
 			</div>
 			<?php
@@ -38,7 +38,7 @@ if(/*wp_is_mobile()*/ wbc_is_mobile_by_page_sections('cat_shop_page',true)) {
 			?>
 			<div class="ui grid centered container" id="advance_filter_mob_alternate_container">
 				<div class="row" style="padding: 0px;">
-					<div class="ui button primary" id="advance_filter_mob_alternate" style="border-radius: 0 0 0 0;width: fit-content !important;"><?php spext_lang('Advance Filter','woo-bundle-choice'); ?>&nbsp;<i class="ui icon angle double down"></i></div>
+					<div class="ui button primary" id="advance_filter_mob_alternate" style="border-radius: 0; width: fit-content !important;"><?php esc_html(spext_lang('Advance Filter', 'woo-bundle-choice')); ?>&nbsp;<i class="ui icon angle double down"></i></div>
 				</div>
 			</div>
 			<?php
@@ -53,7 +53,7 @@ if(/*wp_is_mobile()*/ wbc_is_mobile_by_page_sections('cat_shop_page',true)) {
 				?>
 				<div class="ui grid container centered" style="margin:auto !important">
 					<div class="row">
-						<div class="ui button primary fluid" id="primary_filter" style="border-radius: 0 0 0 0;margin-right: 0;"><?php spext_lang('Filters','woo-bundle-choice'); ?>&nbsp;&nbsp;<i class="ui icon angle up"></i></div>
+						<div class="ui button primary fluid" id="primary_filter" style="border-radius: 0; margin-right: 0;"><?php esc_html(spext_lang('Filters', 'woo-bundle-choice')); ?>&nbsp;&nbsp;<i class="ui icon angle up"></i></div>
 					</div>
 				</div>
 				<?php
@@ -73,8 +73,7 @@ if(/*wp_is_mobile()*/ wbc_is_mobile_by_page_sections('cat_shop_page',true)) {
 						
 						foreach ($non_adv_ordered_filter as $naof_key => $noaf_filter) {
 																
-							if(!$icon_filter_shown and isset($noaf_filter['type']) and $noaf_filter['type']==0 and isset($noaf_filter['label']) and in_array($noaf_filter['label'],array(spext_lang('Shape','woo-choice-plugin'),spext_lang('Ring Style','woo-choice-plugin'),spext_lang('Style','woo-choice-plugin'),spext_lang('Metal','woo-choice-plugin'))) and isset($noaf_filter['input']) and in_array($noaf_filter['input'],array('icon_text','icon'))) {
-								
+							if (!$icon_filter_shown && isset($noaf_filter['type']) && $noaf_filter['type'] == 0 && isset($noaf_filter['label']) && in_array($noaf_filter['label'], array(esc_html(spext_lang('Shape', 'woo-choice-plugin')),esc_html(spext_lang('Ring Style', 'woo-choice-plugin')),esc_html(spext_lang('Style', 'woo-choice-plugin')),esc_html(spext_lang('Metal', 'woo-choice-plugin')))) && isset($noaf_filter['input']) && in_array($noaf_filter['input'], array('icon_text', 'icon'))) {						
 								$noaf_filter['desktop']=0;
 								$noaf_filter['outer_container']=true;
 								$filter_ui->eo_wbc_filter_ui_icon($filter_ui->__prefix,$noaf_filter);
@@ -98,7 +97,7 @@ if(/*wp_is_mobile()*/ wbc_is_mobile_by_page_sections('cat_shop_page',true)) {
 
 				<div class="" style="padding-left: 1em;">
 					<?php if(!empty($non_adv_ordered_filter)): ?>
-					<div class="ui button primary circular" id="primary_filter" style="margin-right: 0;width: max-content !important;"><?php spext_lang('Filters','woo-bundle-choice'); ?>&nbsp;&nbsp;<i class="ui icon chevron up"></i></div>
+					    <div class="ui button primary circular" id="primary_filter" style="margin-right: 0; width: max-content !important;"><?php esc_html(spext_lang('Filters', 'woo-bundle-choice')); ?>&nbsp;&nbsp;<i class="ui icon chevron up"></i></div>
 					<?php endif; ?>
 					<span class="reset_all_filters mobile_2 mobile_2_hidden" style="float: right; margin-top: 0.5em;">X Reset All</span>
 				</div>
@@ -117,11 +116,11 @@ if(/*wp_is_mobile()*/ wbc_is_mobile_by_page_sections('cat_shop_page',true)) {
 			?>
 			<div class="ui grid centered">
 				<div class="row" id="advance_filter">
-					<div class="ui button primary advance_filter" style="padding-left: 1em;padding-right: 1em;border-radius: 0 0 0 0;width: 100vw !important; display: block !important; position: absolute;text-align: left;"><?php spext_lang('Advanced Filters','woo-bundle-choice'); ?>&nbsp;<i class="ui icon chevron right" style="position: absolute;right:1em;"></i>
+					<div class="ui button primary advance_filter" style="padding-left: 1em; padding-right: 1em; border-radius: 0; width: 100vw !important; display: block !important; position: absolute; text-align: left;"><?php esc_html(spext_lang('Advanced Filters', 'woo-bundle-choice')); ?>&nbsp;<i class="ui icon chevron right" style="position: absolute; right: 1em;"></i>
 					</div>
 					<?php if(!empty(wbc()->options->get_option('filters_'.$filter_ui->filter_prefix.'filter_setting','filter_setting_btnfilter_now'))): ?>
 					
-						<div class="ui button" id="apply_filter" style="position: absolute;right: 1em;top:1em;border-radius: 0;" onclick="jQuery.fn.eo_wbc_filter_change(false,'form#<?php echo esc_attr($filter_ui->filter_prefix)/*$filter_ui->filter_prefix*/; ?>eo_wbc_filter','',{'this':this,'event':new Event('click',this)});"> <?php spext_lang('Apply Filters','woo-bundle-choice'); ?></div>
+						<div class="ui button" id="apply_filter" style="position: absolute;right: 1em;top:1em;border-radius: 0;" onclick="jQuery.fn.eo_wbc_filter_change(false,'form#<?php echo esc_attr($filter_ui->filter_prefix); ?>eo_wbc_filter','',{'this':this,'event':new Event('click',this)});"><?php esc_html(spext_lang('Apply Filters','woo-bundle-choice')); ?></div>
 					<?php endif;  ?>
 				</div>
 			</div>					
@@ -134,7 +133,7 @@ if(/*wp_is_mobile()*/ wbc_is_mobile_by_page_sections('cat_shop_page',true)) {
 					</div>
 					<?php if(!empty(wbc()->options->get_option('filters_'.$filter_ui->filter_prefix.'filter_setting','filter_setting_btnfilter_now'))): ?>
 					
-					<div class="ui button" id="apply_filter" style="position: absolute;right: 1em;top:1em;border-radius: 0;" onclick="jQuery.fn.eo_wbc_filter_change(false,'form#<?php echo esc_attr($filter_ui->filter_prefix)/*$filter_ui->filter_prefix*/; ?>eo_wbc_filter','',{'this':this,'event':new Event('click',this)});"><?php spext_lang('Apply Filters','woo-bundle-choice'); ?></div>
+					<div class="ui button" id="apply_filter" style="position: absolute;right: 1em;top:1em;border-radius: 0;" onclick="jQuery.fn.eo_wbc_filter_change(false,'form#<?php echo esc_attr($filter_ui->filter_prefix); ?>eo_wbc_filter','',{'this':this,'event':new Event('click',this)});"><?php esc_html(spext_lang('Apply Filters','woo-bundle-choice')); ?></div>
 				<?php endif;  ?>
 				</div>
 			</div>
@@ -144,7 +143,8 @@ if(/*wp_is_mobile()*/ wbc_is_mobile_by_page_sections('cat_shop_page',true)) {
 		 if(!empty(wbc()->options->get_option('filters_'.$filter_ui->filter_prefix.'filter_setting','filter_setting_btnfilter_now'))): ?>
 			<div class="ui grid centered">
 				<div class="row" id="advance_filter">
-					<div class="ui button" id="apply_filter" style="position: absolute;right: 1em;top:1em;border-radius: 0;" onclick="jQuery.fn.eo_wbc_filter_change(false,'form#<?php echo esc_attr($filter_ui->filter_prefix)/*$filter_ui->filter_prefix*/; ?>eo_wbc_filter','',{'this':this,'event':new Event('click',this)});"><?php spext_lang('Apply Filters','woo-bundle-choice'); ?></div>
+					<div class="ui button" id="apply_filter" style="position: absolute;right: 1em;top:1em;border-radius: 0;" onclick="jQuery.fn.eo_wbc_filter_change(false,'form#<?php echo esc_attr($filter_ui->filter_prefix); ?>eo_wbc_filter','',{'this':this,'event':new Event('click',this)});"><?php esc_html(spext_lang('Apply Filters','woo-bundle-choice')); ?></div>
+
 					</div>
 			</div>
 				<?php endif;  

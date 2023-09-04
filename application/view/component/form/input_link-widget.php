@@ -6,7 +6,8 @@
 
 if(!empty($id) and !empty($label)){
 	?>	
-	<div class="<?php echo !empty($size_class)?esc_attr($size_class)/*$size_class*/:''; ?> field">
+	<div class="<?php echo !empty($size_class) ? esc_attr($size_class) : ''; ?> field">
+
 		<?php wbc()->load->template('component/form/input_label',array('id'=>$id,'label'=>$label)); ?>
 		<?php
 		if (isset($info_icon))
@@ -17,7 +18,7 @@ if(!empty($id) and !empty($label)){
 		if(!empty($options) and is_array($options)) {
 			foreach ($options as $option_name => $option_link) {
 				?>
-					<a <?php echo !empty($attr)?esc_attr($attr)/*$attr*/:''; ?> id="<?php echo sanitize_title($option_name); ?>" name="<?php echo sanitize_title($option_name); ?>" class="ui button <?php echo !empty($class)?esc_attr($class)/*$class*/:''; ?>" href="<?php echo esc_html($option_link)/*$option_link*/; ?>" ><?php echo esc_html($option_name)/*$option_name*/; ?></a>
+					<a <?php echo !empty($attr) ? $attr : ''; ?> id="<?php echo esc_attr(sanitize_title($option_name)); ?>" name="<?php echo esc_attr(sanitize_title($option_name)); ?>" class="ui button <?php echo !empty($class) ? esc_attr($class) : ''; ?>" href="<?php echo esc_url($option_link); ?>"><?php echo esc_html($option_name); ?></a>
 				<?php
 			}
 		}

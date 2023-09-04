@@ -1,1 +1,1 @@
-<i class="ui icon <?php !empty($class)? _e($class) : ''; ?>" style="<?php !empty($style) ? _e($style) : ''; ?>"></i>
+<i class="ui icon <?php !empty($class) ? esc_attr_e($class) : ''; ?>" style="<?php !empty($style) ? esc_attr_e($style) : ''; ?>"></i>

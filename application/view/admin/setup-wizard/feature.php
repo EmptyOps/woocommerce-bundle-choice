@@ -14,15 +14,16 @@
 						    <div class="field">
 						        <div class="ui toggle checkbox">
 						            <input type="checkbox" tabindex="0" class="hidden" name="ring_builder" id="ring_builder" value="1" <?php echo array_key_exists('ring_builder', esc_attr($feature_option)) ? 'checked="checked"' : ''; ?>>
-						            <label><?php esc_html_e('Ring Builder'); ?></label>
+						            <label>Ring Builder</label>
 						        </div>
 						    </div>
-						<?php endif; ?>
- 
+					<?php endif; ?>
+
+ 					<?php if(wbc()->sanitize->get('eo_wbc_inventory_type') == 'clothing'): ?>
 					<div class="field">
 					    <div class="ui toggle checkbox">
 					        <input type="checkbox" tabindex="0" class="hidden" name="pair_maker" value="1" <?php echo array_key_exists('pair_maker', esc_attr($feature_option)) ? 'checked="checked"' : ''; ?>>
-					        <label><?php esc_html_e('Pair Maker'); ?></label>
+					        <label>Pair Makers</label>
 					    </div>
 					</div>
 					<?php endif; ?>
@@ -34,17 +35,16 @@
 					    <div class="field">
 					        <div class="ui toggle checkbox">
 					            <input type="checkbox" tabindex="0" class="hidden" name="rapnet_api" value="1" <?php echo array_key_exists('rapnet_api', esc_attr($feature_option)) ? 'checked="checked"' : ''; ?>>
-					            <label><?php esc_html_e('Rapnet', 'woo-bundle-choice'); ?> (<?php printf('<a href="%s" target="_blank">%s</a>', esc_url('https://sphereplugins.com/product/woocommerce-rapnet-integration-extension/'), esc_html__('extension')); ?>)</label>
+					           <label>Rapnet (You will need paid <a href="https://sphereplugins.com/product/woocommerce-rapnet-integration-extension/" target="_blank">extension</a>)</label>
 					        </div>
 					    </div>
 
 					    <div class="field">
 					        <div class="ui toggle checkbox">
 					            <input type="checkbox" tabindex="0" class="hidden" name="glowstar_api" value="1" <?php echo array_key_exists('glowstar_api', esc_attr($feature_option)) ? 'checked="checked"' : ''; ?>>
-					            <label><?php esc_html_e('GlowStart Diamond API', 'woo-bundle-choice'); ?> (<?php printf(__('API service is free, but you will need paid <a href="%s" target="_blank">extension</a>'), esc_url('https://sphereplugins.com/product/diamond-api-integration/')); ?>)</label>
+					            <label>GlowStart Diamond API (API service is free, but you will need paid <a href="https://sphereplugins.com/product/diamond-api-integration/" target="_blank">extension</a>)</label>
 					        </div>
 					    </div>
-
 					<?php 
 					endif; 
 					?>

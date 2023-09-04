@@ -16,13 +16,13 @@ if(!empty($form_html) and !empty($id) /*and !empty($title)*/){
 	}
 	?>
 	<div class="ui vertical padded segment">
-		<div class="ui form <?php !empty($class)?$class:''; ?>">
-			<form id="<?php echo esc_html($id)/*$id*/; ?>" name="<?php echo esc_html($id)/*$id*/; ?>" method="<?php echo empty($method)?'': esc_html($method)/*$method*/; ?>" <?php echo !empty($attr)? esc_attr($attr)/*$attr*/:'';?>>	  			
-				<?php wp_nonce_field($id, '_wpnonce'); ?>
+		<div class="ui form <?php !empty($class) ? esc_attr($class) : ''; ?>">
+			<form id="<?php echo esc_attr($id); ?>" name="<?php echo esc_attr($id); ?>" method="<?php echo empty($method) ? '' : esc_attr($method); ?>" <?php echo !empty($attr) ? $attr : ''; ?>>
+				<?php wp_nonce_field(esc_attr($id), '_wpnonce'); ?>
 				<input type="hidden" name="action" value="<?php echo 'eowbc_ajax'; ?>">
-				<input type="hidden" name="resolver" value="<?php echo esc_attr($id)/*$id*/; ?>">
-	  			<?php echo esc_attr($form_html)/*$form_html*/; ?>
-  			</form>
+				<input type="hidden" name="resolver" value="<?php echo esc_attr($id); ?>">
+				<?php echo esc_attr($form_html); ?>
+			</form>
 		</div>
 	</div>
 	<?php

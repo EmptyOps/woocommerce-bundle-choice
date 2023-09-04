@@ -10,7 +10,7 @@
 
 //TODO use helper function here to check if var is non empty array
 if(!empty($id) /*&& !empty($head) && !empty($body) && is_array($head) && is_array($body)*/ ) { ?>
-<table id="<?php echo esc_attr($id)/*$id*/; ?>" class="ui celled structured table <?php echo !empty($class)?esc_html($class)/*$class*/:''; ?>" <?php echo !empty($attr)?esc_html($attr)/*$attr*/:''; ?>>
+<table id="<?php echo esc_attr($id); ?>" class="ui celled structured table <?php echo !empty($class) ? esc_attr($class) : ''; ?>" <?php echo !empty($attr) ? $attr : ''; ?>>
 
 	<?php 
 	if(!empty($head)){

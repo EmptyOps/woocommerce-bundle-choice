@@ -11,12 +11,12 @@ if(!empty($section_type)){
 		case 'start':
 			if(!empty($label)){
 				?></div>
-				<div class="ui accordion <?php echo !empty($class)? esc_attr($class)/*$class*/:''; ?>">
-					<div class="title <?php echo !empty($class)? esc_attr($class)/*$class*/:''; ?>">
+				<div class="ui accordion <?php echo !empty($class) ? esc_attr($class) : ''; ?>">
+					<div class="title <?php echo !empty($class)? esc_attr($class):''; ?>">
 				    	<i class="icon dropdown"></i>
-				    	<?php _e($label,'woo-bundle-choice'); ?>
+				    	<?php esc_html_e($label, 'woo-bundle-choice'); ?>
 					</div>
-					<div class="content <?php echo !empty($class)? esc_attr($class)/*$class*/:''; ?>">
+					<div class="content <?php echo !empty($class)? esc_attr($class):''; ?>">
 					<div><?php	
 			}		
 			break;

@@ -12,7 +12,7 @@ if(!empty($menu_title)/*($title)*/ || !empty($slug) || !empty($active))
 {
 	?>
 	
-		<a class="<?php if($active) echo 'active'; ?> item" data-tab="<?php echo esc_attr($slug)/*$slug*/; ?>" href="<?php _e(admin_url('admin.php?page='.$slug)); ?>"> <?php echo esc_attr($menu_title)/*$menu_title*//*$title*/; ?></a>
+		<a class="<?php if($active) echo 'active'; ?> item" data-tab="<?php echo esc_attr($slug); ?>" href="<?php echo esc_url(admin_url('admin.php?page='.$slug)); ?>"> <?php echo esc_html($menu_title)/*$title*/; ?></a>
 
 	<?php
  }

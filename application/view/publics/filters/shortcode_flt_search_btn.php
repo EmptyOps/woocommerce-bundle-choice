@@ -7,7 +7,7 @@
 ?>
 	<div class="ui grid centered">
 		<div class="">
-			<button id="shortcode_flt_search_btn" name="shortcode_flt_search_btn" class="ui button" onclick="search_btn_click();"> <?php spext_lang("Search", 'woo-bundle-choice') ?></button>	
+			<button id="shortcode_flt_search_btn" name="shortcode_flt_search_btn" class="ui button" onclick="search_btn_click();"><?php esc_html(spext_lang("Search", 'woo-bundle-choice')); ?></button>
 		</div>
 	</div>
 

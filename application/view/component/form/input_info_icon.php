@@ -3,5 +3,6 @@
 *	template to show small visible info text 
 */
 if(!empty($text)){
-	?> <i class="exclamation circle icon" data-content="<?php echo !empty($text)?esc_attr($text)/*$text*/:''; ?>" data-variation="very wide"></i> <?php
+	?> <i class="exclamation circle icon" data-content="<?php echo !empty($text) ? esc_attr($text) : ''; ?>" data-variation="very wide"></i>
+ <?php
 }
