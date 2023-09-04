@@ -1173,7 +1173,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 				}
 
 			}
-        } 
+        }
 
         console.log('jet-filters-pagination 1');
         console.log(section);
@@ -1692,7 +1692,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		// --- end ---
 
     };
-    
+
     // --- move to filter_set module @a ---
   //   var on_filter_set_click_listener = function(){
 
@@ -1761,7 +1761,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
     	input_type_button_click(event, element);
     };
-
+	    
     var reset_click = function(form_selector) {
 
     };
@@ -2713,7 +2713,20 @@ if( typeof(eo_wbc_object) != 'undefined'){
 
 			on_click_listener(event);
 
+	        sort_order_private();
+
 		};
+
+	    var get_sort_dropdown_container_private = function() {
+
+	    	return compatability('sort_dropdown_container',{container:jQuery('select[name="orderby"]:eq(0)'),is_return_string_selector:false},null,null).container;
+	    }
+
+	    var sort_order_private = function(type) {
+			
+			// process_events
+	        orderby_change_listener_private();
+	    }
 
 		var get_pagination_html_private = function(){
 			
@@ -2843,12 +2856,28 @@ if( typeof(eo_wbc_object) != 'undefined'){
 
 		};
 
+	    var orderby_change_listener_private = function(type) {
+
+			var selector = get_sort_dropdown_container_private();
+	        
+	        jQuery(selector).on('change',function() {
+
+		    	on_orderby_change_private(type,this);
+
+	        });
+	    }
+
 	    var on_click = function(event,element){
 
 			// NOTE : it will internally implement all flows related to pagination link click event
 
 			click(event,element);
 
+	    };
+
+	    var on_orderby_change_private = function(type,element) {
+
+	    	orderby_change_private(type,element);
 	    };
 
 	    var click = function(event,element){
@@ -2891,6 +2920,14 @@ if( typeof(eo_wbc_object) != 'undefined'){
 
 	    };
 
+	    var orderby_change_private = function(type,element) {
+
+	    	jQuery('.wbc-filters-sorting-fields').val('');
+
+			window.document.splugins.wbc.filters.api.eo_wbc_filter_change_wrapper(false, 'form#'+/*_this.$base_pagination_container*/jQuery(element).parents().has('[id$="eo_wbc_filter"]').find('[id$="eo_wbc_filter"]').attr('id') );
+	    
+	    };
+
 	    var compatability = function(section, object, expected_result, form_selector){
 
 	        if(section == 'pagination'){
@@ -2917,7 +2954,32 @@ if( typeof(eo_wbc_object) != 'undefined'){
 		        	object += ',.nasa-paginations-warp';
 	        	}
 
-	        }
+	        }else if(section == 'sort_dropdown_container'){
+
+				if(object.container.length<=0) {
+					
+					-- aya 10 theme demo ma selectore jovana se alaga alag ave se k same ave se
+					object.container = jQuery(".jet-filters-pagination a,.woocommerce-pagination .jet-filters-pagination__link,.pagination .jet-filters-pagination__link,.jet-filters-pagination .jet-filters-pagination__link");
+					
+					if(object.container.length<=0){
+
+			    		-- example if to set selectore spesific to theme 
+						ACTIVE_TODO temp remove below return false when we impliment below if 
+						if(false) {
+
+						}
+					}
+				}
+
+		    }else if(section == 'sort_dropdown_selectore'){
+
+		    	ACTIVE_TODO temp. remove below return false the this layer is implimented becose this is not implimented yet -- to a && -- to h
+		    	return false;
+				if(object.container.length<=0) {
+			
+					object.container = jQuery(".jet-filters-pagination a,.woocommerce-pagination .jet-filters-pagination__link,.pagination .jet-filters-pagination__link,.jet-filters-pagination .jet-filters-pagination__link");
+				}
+		    } 
 
 	        return object;
 	    };
@@ -2979,7 +3041,12 @@ if( typeof(eo_wbc_object) != 'undefined'){
 
 				reset_private();
 
-			}
+			},
+
+			get_sort_dropdown_container: function() {
+
+				get_sort_dropdown_container_private();
+			},				
 
 		};
 
