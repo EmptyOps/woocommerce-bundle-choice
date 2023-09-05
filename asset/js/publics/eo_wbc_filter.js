@@ -440,18 +440,10 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
 				}
 				
-				/*ACTIVE_TODO_QC_START
-				--	orderby field might needed to be moved to tableview if tha logic and functionality of below field is for tableview only. -- to h
-				ACTIVE_TODO_QC_END*/
 				if(jQuery("select[name='orderby']").length>0){
 				
-					form_data.orderby=jQuery("select[name='orderby']:eq(0)").val();
-				}
-
-				// NOTE: this if is duplicate of above and still we can not confirm if it was intentional or not so just kept it till we can not confirm accuratly.
-				if(jQuery("select[name='orderby']").length>0){
-				
-					form_data.orderby=jQuery("select[name='orderby']:eq(0)").val();
+					// form_data.orderby=jQuery("select[name='orderby']:eq(0)").val();
+					form_data.orderby = window.document.splugins.wbc.pagination.api.get_sort_dropdown_container().val();
 				}
 
 				// if(type == slick_table) {
@@ -471,12 +463,10 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 					form_data+='&eo_wbc_page='+jQuery('[name="eo_wbc_page"]').val();
 				}
 				
-				/*ACTIVE_TODO_QC_START
-				--	orderby field might needed to be moved to tableview if tha logic and functionality of below field is for tableview only. -- to h
-				ACTIVE_TODO_QC_END*/
 				if(jQuery("select[name='orderby']").length>0){
 				
-					form_data+='&orderby='+jQuery("select[name='orderby']:eq(0)").val();
+					// form_data+='&orderby='+jQuery("select[name='orderby']:eq(0)").val();
+					form_data+='&orderby='+window.document.splugins.wbc.pagination.api.get_sort_dropdown_container().val();
 				}
 
 				// if(type == 'template1' || type == 'template2') {
@@ -2719,6 +2709,7 @@ if( typeof(eo_wbc_object) != 'undefined'){
 
 	    var get_sort_dropdown_container_private = function() {
 
+	    	// -- 10 demo ma aa selector same j hato
 	    	return compatability('sort_dropdown_container',{container:jQuery('select[name="orderby"]:eq(0)'),is_return_string_selector:false},null,null).container;
 	    }
 
@@ -2959,7 +2950,8 @@ if( typeof(eo_wbc_object) != 'undefined'){
 				if(object.container.length<=0) {
 					
 					-- aya 10 theme demo ma selectore jovana se alaga alag ave se k same ave se
-					object.container = jQuery(".jet-filters-pagination a,.woocommerce-pagination .jet-filters-pagination__link,.pagination .jet-filters-pagination__link,.jet-filters-pagination .jet-filters-pagination__link");
+					-- badhi theme ma selectore same j se @a
+					object.container = jQuery("");
 					
 					if(object.container.length<=0){
 
@@ -2977,7 +2969,7 @@ if( typeof(eo_wbc_object) != 'undefined'){
 		    	return false;
 				if(object.container.length<=0) {
 			
-					object.container = jQuery(".jet-filters-pagination a,.woocommerce-pagination .jet-filters-pagination__link,.pagination .jet-filters-pagination__link,.jet-filters-pagination .jet-filters-pagination__link");
+					object.container = jQuery("");
 				}
 		    } 
 
