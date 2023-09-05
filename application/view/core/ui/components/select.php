@@ -2,7 +2,7 @@
 	//Semantic UI : fields
 ?>
 
-<div class="ui selection dropdown <?php echo !empty($class) ? esc_attr($class) : ''; ?>" <?php !empty($id) ? 'id="'.esc_attr_e($id.'_dropdown').'"' : ''; ?> <?php !empty($attr) ? esc_attr_e($attr) : ''; ?>>
+<div class="ui selection dropdown <?php echo !empty($class) ? esc_attr($class) : ''; ?>" <?php !empty($id) ? 'id="'.esc_attr_e($id.'_dropdown').'"' : ''; ?> <?php !empty($attr) ? _e($attr) : ''; ?>>
   	<input type="hidden" <?php !empty($id) ? 'id="'.esc_attr_e($id).'"' : ''; ?> <?php !empty($name) ? 'name="'.esc_attr_e($name).'"' : ''; ?> value="<?php !empty($value) ? esc_attr_e($value) : ''; ?>">
   	<i class="dropdown icon"></i>		
   	<div class="default text"></div>		  	

@@ -1,4 +1,4 @@
-<div class="title" data-tab-group="<?php esc_attr_es($tab_set); ?>">
+<div class="title" data-tab-group="<?php esc_attr_e($tab_set); ?>">
     <i class="dropdown icon"></i>
     <?php echo esc_html($term->name); ?>
 </div>
