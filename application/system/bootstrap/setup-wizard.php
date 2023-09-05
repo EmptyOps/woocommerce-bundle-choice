@@ -318,7 +318,7 @@ class Setup_Wizard {
 			<div class="ui form segment">
 			  	<div class="grouped fields">
 
-			    	<label><?php _e('Choose features','woo-bundle-choice'); ?></label>
+			    	<label><?php esc_html_e('Choose features','woo-bundle-choice'); ?></label>
 
 			    	<?php if(wbc()->sanitize->get('eo_wbc_inventory_type') == 'jewelry'): ?>	
 		      		<div class="field">

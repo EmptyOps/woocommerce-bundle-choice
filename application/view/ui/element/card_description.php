@@ -1,3 +1,3 @@
-<div class="description <?php echo !empty($class) ? esc_attr($class) : ''; ?>" id="<?php echo !empty($id) ? esc_attr($id) : ''; ?>" style="<?php echo !empty($style) ? esc_attr($style) : ''; ?>">
-	<?php echo !empty($label) ? esc_html($label) : ''; ?>
+<div class="description <?php !empty($class) ? esc_attr_e($class) : ''; ?>" id="<?php !empty($id) ? esc_attr_e($id) : ''; ?>" style="<?php !empty($style) ? esc_attr_e($style) : ''; ?>">
+	<?php !empty($label) ? esc_html_e($label) : ''; ?>
 </div>
