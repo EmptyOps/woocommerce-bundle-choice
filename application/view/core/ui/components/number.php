@@ -11,7 +11,7 @@
     style="<?php !empty($style) ? esc_attr_e($style) : ''; ?>"
     <?php isset($min) ? 'min="'.esc_attr($min).'" ' : ''; ?>
     <?php isset($max) ? 'max="'.esc_attr($max).'" ' : ''; ?>	
-    <?php isset($attr) ? esc_attr($attr) : ''; ?>	
+    <?php isset($attr) ? _($attr) : ''; ?>	
 />
 
 <?php endif; ?>

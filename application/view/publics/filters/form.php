@@ -145,7 +145,7 @@ if(empty($_per_page)){
 	        <input type="hidden" name="action" value="eo_wbc_filter" />
 	    <?php endif; ?>
 
-	    <input type="hidden" name="_current_category" value="<?php echo !empty(wbc()->sanitize->get('CAT_LINK')) ? esc_attr(\eo\wbc\model\SP_WBC_Router::instance()->set_query_params_formatted('to_form_field', array('prod_cat'), \eo\wbc\model\SP_WBC_Router::instance()->get_query_params_formatted('url_and_form_field_raw', array('prod_cat'), 'REQUEST', null))/*wbc()->sanitize->get('CAT_LINK')*/ : esc_attr($current_category); ?>" />
+	    <input type="hidden" name="_current_category" value="<?php echo !empty(wbc()->sanitize->get('CAT_LINK')) ? )esc_attr(\eo\wbc\model\SP_WBC_Router::instance()->set_query_params_formatted('to_form_field', array('prod_cat'), \eo\wbc\model\SP_WBC_Router::instance()->get_query_params_formatted('url_and_form_field_raw', array('prod_cat'), 'REQUEST', null)))/*wbc()->sanitize->get('CAT_LINK')*/ : esc_attr($current_category); ?>" />
 
 	    <input type="hidden" name="_category_query" id="eo_wbc_cat_query" value="<?php echo !empty(wbc()->sanitize->get('CAT_LINK')) ? esc_attr(\eo\wbc\model\SP_WBC_Router::instance()->set_query_params_formatted('to_form_field', array('prod_cat'), \eo\wbc\model\SP_WBC_Router::instance()->get_query_params_formatted('url_and_form_field_raw', array('prod_cat'), 'REQUEST', null))/*wbc()->sanitize->get('CAT_LINK')*/ : ''; /*$current_category*/ ?>" />
 
