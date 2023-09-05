@@ -6,5 +6,5 @@
 			$builder->build($child,$option_key,$process_form);
 		}
 	?>	
-</<?php _e($header); ?>>
+</<?php esc_attr_e($header); ?>>
 <?php endif; ?>

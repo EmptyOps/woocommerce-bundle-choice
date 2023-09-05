@@ -21,7 +21,7 @@ if(!empty($form_html) and !empty($id) /*and !empty($title)*/){
 				<?php wp_nonce_field(esc_attr($id), '_wpnonce'); ?>
 				<input type="hidden" name="action" value="<?php echo 'eowbc_ajax'; ?>">
 				<input type="hidden" name="resolver" value="<?php echo esc_attr($id); ?>">
-				<?php echo esc_attr($form_html); ?>
+				<?php echo esc_html($form_html); ?>
 			</form>
 		</div>
 	</div>
