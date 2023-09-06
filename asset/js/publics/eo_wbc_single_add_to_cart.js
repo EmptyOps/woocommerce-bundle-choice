@@ -4,13 +4,15 @@ jQuery(document).ready(function(){
 		e.stopPropagation();
 		e.preventDefault();
 
+		console.log(eo_wbc_object);
+		console.log("LOG2 : "+eo_wbc_object.url);
 		if( typeof(window.document.splugins.common.is_handle_variation_id_pair_builder_step_2) != 'undefined' && !window.document.splugins.common.is_empty(window.document.splugins.common.is_handle_variation_id_pair_builder_step_2) ){
 
 			var variation_id_input = jQuery('.variation_id').val();
             window.eo_wbc_object.url = window.document.splugins.common.updateURLParameter(window.eo_wbc_object.url,'variation_id',variation_id_input);
 		}
 		
-		//console.log("LOG : "+eo_wbc_object.url+'&CART='+window.btoa(form_2_json(jQuery('form.cart'))));
+		console.log("LOG : "+eo_wbc_object.url+'&CART='+window.btoa(form_2_json(jQuery('form.cart'))));
 		window.location.href =eo_wbc_object.url+'&CART='+window.btoa(form_2_json(jQuery('form.cart')));		    			    
 		
 	});

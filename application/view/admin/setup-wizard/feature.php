@@ -197,7 +197,7 @@
 
                 <div class="ui sizer vertical segment">
                   
-                  <div class="ui huge header">You Selected Below Feture </div>
+                  <div class="ui huge header">You Selected Below Feature </div>
                   
                   <div class="ui divider"></div>
                   <div class="ui large header">
@@ -205,11 +205,11 @@
                   <?php 
                      
                     if($_GET['select_option'] == 'bn-rbald'){
-                        echo 'Ring Builder & Loos Diamond Search Page';
+                        echo 'Ring Builder & Loose Diamond Search Page';
                     }else if($_GET['select_option'] == 'bn-vs'){
                         echo 'Variation Swatches';
                     }else if($_GET['select_option'] == 'bn-ajdf'){
-                        echo 'All Jewelry And Diamond Fetures';
+                        echo 'All Jewelry And Diamond Features';
                     }
                   ?>
 

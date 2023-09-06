@@ -358,7 +358,7 @@ $form['data'] = array(
 					)
 				),
 				'product_page_hide_first_variation_form'=>array(
-					'label'=>'Hide first category\'s variation menu',
+					'label'=>'Hide the first category\'s variation menu',
 					'type'=>'checkbox',
 					'sanitize'=>'sanitize_text_field',
 					'value'=>array(wbc()->options->get_option('tiny_features','product_page_hide_first_variation_form')),

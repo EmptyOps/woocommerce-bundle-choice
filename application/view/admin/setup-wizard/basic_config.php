@@ -122,7 +122,7 @@
                             </div>
                             <div class="content">
                                 <a class="header"
-                                    >ring builder & loos diamond search page</a
+                                    >Ring builder & Loose diamond search page</a
                                 >
                                 <div class="meta">
                                     <span class="date"
@@ -150,10 +150,10 @@
                                 </div>
                             </div>
                             <div class="content">
-                                <a class="header">variation swatches</a>
+                                <a class="header">Variation Swatches</a>
                                 <div class="meta">
                                     <span class="date"
-                                        >free swatches on shop page and free video swatches
+                                        >Free swatches on shop page and free video swatches
                                         on product page</span
                                     >
                                 </div>
@@ -182,7 +182,7 @@
                                 </div>
                             </div>
                             <div class="content">
-                                <a class="header">all jewelry and diamond fetures </a>
+                                <a class="header">All jewelry and diamond features </a>
                                 <div class="meta">
                                     <span class="date"
                                         >Lorem Ipsum is simply dummy text of the printing
@@ -232,7 +232,7 @@
                                         <div class="ui slider checkbox">
                                             <input type="radio" class="check_value" name="throughput" data-value_name="home_decor" data-select_option="bn-gt"/>
                                             <label>Gaidance tool(Home Decore)</label>
-                                            <span class="ui grey text small description">It is a perfect tool for home decore and so
+                                            <span class="ui grey text small description">It is a perfect tool for home decor and so 
                                                 on categories.</span>
                                         </div>
                                     </div>

@@ -243,7 +243,7 @@ $form['data'] = array(
 					'class'=>array('secondary')	
 				),
 				'config_automation_visible_info'=>array(
-					'label'=>eowbc_lang('We recommend that you try sample data if you have not yet, in addition to providing the preview of how plugin look like on frontend of your website, sample data & configurations will also serve as boilerplate template for configuring the plugin.'),
+					'label'=>eowbc_lang('We recommend that you try sample data if you have not yet, In addition to providing a preview of how the plugin looks like on frontend of your website, sample data & configurations will also serve as a boilerplate template for configuring the plugin.'),
 					'type'=>'visible_info',
 					'class'=>array('fluid', 'medium'),
 					'size_class'=>array('sixteen','wide'),
@@ -315,8 +315,8 @@ $form['data'] = array(
 					'attr'=>array(),					
 					'inline'=>false,
 
-					'visible_info'=>array( 'label'=>eowbc_lang('Disabled attribute will be hide / blur.</br>
-										Note: Disable ajax threshold doesn\'t apply this feature.'),
+					'visible_info'=>array( 'label'=>eowbc_lang('Disabled attributes will be hidden/blurred.</br>
+										Note: Disable Ajax threshold doesn\'t apply this feature.'),
 						'type'=>'visible_info',
 						'class'=>array('medium','fluid'),
 						// 'size_class'=>array('sixteen','wide'),
@@ -334,7 +334,7 @@ $form['data'] = array(
 					'size_class'=>array('eight','wide'),
 					'inline'=>false,
 
-					'visible_info'=>array( 'label'=>eowbc_lang('By default, if the no. of product variations is less than 30, the product availability check is through JavaScript. If greater than 30, the ajax method is used. This field can control the threshold value of 30.'),
+					'visible_info'=>array( 'label'=>eowbc_lang('By default, if the number of product variations is less than 30, the product availability check is through JavaScript. If greater than 30, the Ajax method is used. This field can control the threshold value of 30.'),
 						'type'=>'visible_info',
 						'class'=>array('medium','fluid'),
 						// 'size_class'=>array('sixteen','wide'),
@@ -402,7 +402,7 @@ $form['data'] = array(
 					// 'size_class'=>array('eight','wide'),
 					'inline'=>false,
 
-					'visible_info'=>array( 'label'=>eowbc_lang('Enables to set the video continues play.'),
+					'visible_info'=>array( 'label'=>eowbc_lang('Enables the video to continue playing.'),
 						'type'=>'visible_info',
 						'class'=>array('medium'),
 						// 'size_class'=>array('sixteen','wide'),
@@ -426,7 +426,7 @@ $form['data'] = array(
 					'container_class'=>array(''),						
 					'value'=>array(wbc()->options->get_option('tiny_features','tiny_features_option_ui_toggle_init_status')),
 					'sanitize'=>'sanitize_text_field',
-					'options'=>array('tiny_features_option_ui_toggle_init_status'=>'Variation Form Visiblity'),
+					'options'=>array('tiny_features_option_ui_toggle_init_status'=>'Variation Form Visibility'),
 					'class'=>array('fluid'),						
 					// 'size_class'=>array('eight','wide'),
 					'inline'=>false,
@@ -438,7 +438,7 @@ $form['data'] = array(
 					),
 				),	
 				'tiny_features_hide_sku_category_product_page'=>array(
-					'label'=>eowbc_lang('Hide SKU,Categories sections?'),
+					'label'=>eowbc_lang('Hide SKU, Categories sections?'),
 					'type'=>'checkbox',
 					'spui_version'=>1.0,
 					'container_class'=>array(''),						
@@ -450,7 +450,7 @@ $form['data'] = array(
 					'inline'=>false,					
 				),								
 				'product_page_hide_first_variation_form'=>array(
-					'label'=>'Hide first category\'s variation menu',
+					'label'=>'Hide the first category\'s variation menu',
 					'type'=>'checkbox',
 					'spui_version'=>1.0,
 					'container_class'=>array(''),						
@@ -459,14 +459,14 @@ $form['data'] = array(
 					'options'=>array('1'=>' '),
 					'is_id_as_name'=>true,
 					'class'=>array(),
-					'visible_info'=>array( 'label'=>'If enabled the variation selection table for first category\'s products will be hidden if default variations are set',
+					'visible_info'=>array( 'label'=>'If enabled the variation selection table for the first category\'s products will be hidden if default variations are set',
 						'type'=>'visible_info',
 						'class'=>array('fluid', 'medium'),
 						'size_class'=>array('sixteen','wide'),
 					),	
 				), 
 				'product_page_hide_second_variation_form'=>array(
-					'label'=>'Hide second category\'s variation menu',
+					'label'=>'Hide the second category\'s variation menu',
 					'type'=>'checkbox',
 					'spui_version'=>1.0,
 					'container_class'=>array(''),						
@@ -475,7 +475,7 @@ $form['data'] = array(
 					'options'=>array('1'=>' '),
 					'is_id_as_name'=>true,
 					'class'=>array(),
-					'visible_info'=>array( 'label'=>'If enabled the variation selection table for second category\'s products will be hidden if default variations are set',
+					'visible_info'=>array( 'label'=>'If enabled the variation selection table for the second category\'s products will be hidden if default variations are set',
 						'type'=>'visible_info',
 						'class'=>array('fluid', 'medium'),
 						'size_class'=>array('sixteen','wide'),
@@ -499,7 +499,7 @@ $form['data'] = array(
 					)
 				),
 				'tiny_features_option_ui_option_dimention'=>array(
-					'label'=>eowbc_lang('Swatches Box Dimention'),
+					'label'=>eowbc_lang('Swatches Box Dimension'),
 					'type'=>'text',
 					'spui_version'=>1.0,
 					'container_class'=>array(''),						
@@ -509,7 +509,7 @@ $form['data'] = array(
 					'size_class'=>array('eight','wide','required'),
 					'inline'=>false,
 
-					'visible_info'=>array( 'label'=>eowbc_lang('The height and width of the option\'s box.<strong>(prepend px,em,rem as measurement)</strong>'),
+					'visible_info'=>array( 'label'=>eowbc_lang('The height and width of the option\'s box.<strong>(prepend px, em, rem as measurement)</strong>'),
 						'type'=>'visible_info',
 						'class'=>array('medium','fluid'),
 						// 'size_class'=>array('sixteen','wide'),
@@ -543,7 +543,7 @@ $form['data'] = array(
 					'size_class'=>array('eight','wide','required'),
 					'inline'=>false,
 
-					'visible_info'=>array( 'label'=>eowbc_lang('The border width of the Swatches border.<strong>(prepend px,em,rem as measurement)</strong>'),
+					'visible_info'=>array( 'label'=>eowbc_lang('The border width of the Swatches border.<strong>(prepend px, em, rem as measurement)</strong>'),
 						'type'=>'visible_info',
 						'class'=>array('medium','fluid'),
 						// 'size_class'=>array('sixteen','wide'),
@@ -577,7 +577,7 @@ $form['data'] = array(
 					'size_class'=>array('eight','wide','required'),
 					'inline'=>false,
 
-					'visible_info'=>array( 'label'=>eowbc_lang('The border width of the Swatches border on hover.<strong>(prepend px,em,rem as measurement)</strong>'),
+					'visible_info'=>array( 'label'=>eowbc_lang('The border width of the Swatches border on hover.<strong>(prepend px, em, rem as measurement)</strong>'),
 						'type'=>'visible_info',
 						'class'=>array('medium'),
 						// 'size_class'=>array('sixteen','wide'),
@@ -594,7 +594,7 @@ $form['data'] = array(
 					'size_class'=>array('eight','wide','required'),
 					'inline'=>false,
 
-					'visible_info'=>array( 'label'=>eowbc_lang('The border radius of the Swatches border.<strong>(prepend px,em,rem as measurement)</strong>'),
+					'visible_info'=>array( 'label'=>eowbc_lang('The border radius of the Swatches border.<strong>(prepend px, em, rem as measurement)</strong>'),
 						'type'=>'visible_info',
 						'class'=>array('medium'),
 						// 'size_class'=>array('sixteen','wide'),
@@ -689,7 +689,7 @@ $form['data'] = array(
 					'attr'=>array(),					
 					'inline'=>false,
 
-					'visible_info'=>array( 'label'=>eowbc_lang('Slider Gallery Width in %. Default value is: '.\eo\wbc\model\SP_WBC_Compatibility::instance()->single_product_render_compatability('gallery_zoom_container_width',array('default_width'=>'58%')).'. Limit: 10-100.'),
+					'visible_info'=>array( 'label'=>eowbc_lang('Slider Gallery Width in %. The default value is '.\eo\wbc\model\SP_WBC_Compatibility::instance()->single_product_render_compatability('gallery_zoom_container_width',array('default_width'=>'58%')).'. Limit: 10-100.'),
 						'type'=>'visible_info',
 						'class'=>array('medium'),
 						// 'size_class'=>array('sixteen','wide'),
@@ -784,7 +784,7 @@ $form['data'] = array(
 					'attr'=>array(),					
 					'inline'=>false,
 
-					'visible_info'=>array( 'label'=>wbc()->config->product_variations_configs()['is_gallery_images_type_based_template'] == 1 ? eowbc_lang('Set here the type of media to show on hover. For example you may like to show video or image on hover, leave it blank to disable the hover feature.') : eowbc_lang('Set here the index of thumb image or media to show on hover. For example you may like to show video on hover so set index as per your gallery images thumbnails display order.'),
+					'visible_info'=>array( 'label'=>wbc()->config->product_variations_configs()['is_gallery_images_type_based_template'] == 1 ? eowbc_lang('Set here the type of media to show on hover. For example, you may like to show a video or image on hover and leave it blank to disable the hover feature.') : eowbc_lang('Set here the index of thumb image or media to show on hover. For example you may like to show video on hover so set index as per your gallery images thumbnails display order.'),
 						'type'=>'visible_info',
 						'class'=>array('medium','fluid'),
 						// 'size_class'=>array('sixteen','wide'),
@@ -792,7 +792,7 @@ $form['data'] = array(
 					'attr'=>array("min='0',max='10'")					
 				),						
 				'shop_page_hide_first_variation_form'=>array(
-					'label'=>'Hide first category\'s variation menu',
+					'label'=>'Hide the first category\'s variation menu',
 					'label_class'=>array_merge( array(), $shop_tab_label_class),					
 					'type'=>'checkbox',
 					'spui_version'=>1.0,
@@ -804,14 +804,14 @@ $form['data'] = array(
 					'class'=>array(),
 					'attr'=>array(),
 					'is_disabled'=>$shop_tab_is_disabled,					
-					'visible_info'=>array( 'label'=>'If enabled the variation selection table for first category\'s products will be hidden if default variations are set',
+					'visible_info'=>array( 'label'=>'If enabled the variation selection table for the first category\'s products will be hidden if default variations are set',
 						'type'=>'visible_info',
 						'class'=>array('fluid', 'medium'),
 						'size_class'=>array('sixteen','wide'),
 					),	
 				), 
 				'shop_page_hide_second_variation_form'=>array(
-					'label'=>'Hide second category\'s variation menu',
+					'label'=>'Hide the second category\'s variation menu',
 					'label_class'=>array_merge( array(), $shop_tab_label_class),					
 					'type'=>'checkbox',
 					'spui_version'=>1.0,
@@ -823,14 +823,14 @@ $form['data'] = array(
 					'class'=>array(),
 					'attr'=>array(),
 					'is_disabled'=>$shop_tab_is_disabled,					
-					'visible_info'=>array( 'label'=>'If enabled the variation selection table for second category\'s products will be hidden if default variations are set',
+					'visible_info'=>array( 'label'=>'If enabled the variation selection table for the second category\'s products will be hidden if default variations are set',
 						'type'=>'visible_info',
 						'class'=>array('fluid', 'medium'),
 						'size_class'=>array('sixteen','wide'),
 					),	
 				), 
 				'tiny_features_shop_page_option_ui_option_dimention'=>array(
-					'label'=>eowbc_lang('Swatches Box Dimention'),
+					'label'=>eowbc_lang('Swatches Box Dimension'),
 					'label_class'=>array_merge( array(), $shop_tab_label_class),					
 					'type'=>'text',
 					'spui_version'=>1.0,
@@ -842,7 +842,7 @@ $form['data'] = array(
 					'inline'=>false,
 					'attr'=>array(),
 					'is_disabled'=>$shop_tab_is_disabled,					
-					'visible_info'=>array( 'label'=>eowbc_lang('The height and width of the Swatches box.<strong>(prepend px,em,rem as measurement)</strong>'),
+					'visible_info'=>array( 'label'=>eowbc_lang('The height and width of the Swatches box.<strong>(prepend px, em, rem as measurement)</strong>'),
 						'type'=>'visible_info',
 						'class'=>array('medium','fluid'),
 						// 'size_class'=>array('sixteen','wide'),
@@ -881,14 +881,14 @@ $form['data'] = array(
 					'is_disabled'=>$shop_tab_is_disabled,										
 					'inline'=>false,
 
-					'visible_info'=>array( 'label'=>eowbc_lang('The border width of the Swatches border.<strong>(prepend px,em,rem as measurement)</strong>'),
+					'visible_info'=>array( 'label'=>eowbc_lang('The border width of the Swatches border.<strong>(prepend px, em, rem as measurement)</strong>'),
 						'type'=>'visible_info',
 						'class'=>array('medium','fluid'),
 						// 'size_class'=>array('sixteen','wide'),
 					)
 				),
 				'tiny_features_shop_page_option_ui_border_color_hover'=>array(
-					'label'=>eowbc_lang('Swatches Border Color on Hover -- Not work(selectore issue)'),
+					'label'=>eowbc_lang('Swatches Border Color on Hover -- Not work(selector issue)'),
 					'label_class'=>array_merge( array(), $shop_tab_label_class),					
 					'type'=>'color',
 					'spui_version'=>1.0,
@@ -921,7 +921,7 @@ $form['data'] = array(
 					'is_disabled'=>$shop_tab_is_disabled,										
 					'inline'=>false,
 
-					'visible_info'=>array( 'label'=>eowbc_lang('The border width of the Swatches border on hover.<strong>(prepend px,em,rem as measurement)</strong>'),
+					'visible_info'=>array( 'label'=>eowbc_lang('The border width of the Swatches border on hover.<strong>(prepend px, em, rem as measurement)</strong>'),
 						'type'=>'visible_info',
 						'class'=>array('medium'),
 						// 'size_class'=>array('sixteen','wide'),
@@ -941,14 +941,14 @@ $form['data'] = array(
 					'is_disabled'=>$shop_tab_is_disabled,										
 					'inline'=>false,
 
-					'visible_info'=>array( 'label'=>eowbc_lang('The border radius of the Swatches border.<strong>(prepend px,em,rem as measurement)</strong>'),
+					'visible_info'=>array( 'label'=>eowbc_lang('The border radius of the Swatches border.<strong>(prepend px, em, rem as measurement)</strong>'),
 						'type'=>'visible_info',
 						'class'=>array('medium'),
 						// 'size_class'=>array('sixteen','wide'),
 					)
 				),						
 				'tiny_features_shop_page_option_ui_font_color'=>array(
-					'label'=>eowbc_lang('Swatches Font Color -- Not work(variation file css override)'),
+					'label'=>eowbc_lang('Swatches Font Color -- Not work(variation file CSS override)'),
 					'label_class'=>array_merge( array(), $shop_tab_label_class),					
 					'type'=>'color',
 					'spui_version'=>1.0,
@@ -988,7 +988,7 @@ $form['data'] = array(
 					)
 				),
 				'tiny_features_shop_page_option_ui_bg_color'=>array(
-					'label'=>eowbc_lang('Swatches Background Color -- Not work(variation file css override)'),
+					'label'=>eowbc_lang('Swatches Background Color -- Not work(variation file CSS override)'),
 					'label_class'=>array_merge( array(), $shop_tab_label_class),					
 					'type'=>'color',
 					'spui_version'=>1.0,
