@@ -2713,10 +2713,10 @@ if( typeof(eo_wbc_object) != 'undefined'){
 	    	return compatability('sort_dropdown_container',{container:jQuery('select[name="orderby"]:eq(0)'),is_return_string_selector:false},null,null).container;
 	    }
 
-	    var sort_order_private = function(type) {
+	    var sort_order_private = function() {
 			
 			// process_events
-	        orderby_change_listener_private();
+	        orderby_change_listener(null);
 	    }
 
 		var get_pagination_html_private = function(){
@@ -2847,13 +2847,13 @@ if( typeof(eo_wbc_object) != 'undefined'){
 
 		};
 
-	    var orderby_change_listener_private = function(type) {
+	    var orderby_change_listener = function(type) {
 
 			var selector = get_sort_dropdown_container_private();
 	        
 	        jQuery(selector).on('change',function() {
 
-		    	on_orderby_change_private(type,this);
+		    	on_orderby_change(type,this);
 
 	        });
 	    }
@@ -2866,9 +2866,9 @@ if( typeof(eo_wbc_object) != 'undefined'){
 
 	    };
 
-	    var on_orderby_change_private = function(type,element) {
+	    var on_orderby_change = function(type,element) {
 
-	    	orderby_change_private(type,element);
+	    	orderby_change(type,element);
 	    };
 
 	    var click = function(event,element){
@@ -2911,7 +2911,7 @@ if( typeof(eo_wbc_object) != 'undefined'){
 
 	    };
 
-	    var orderby_change_private = function(type,element) {
+	    var orderby_change = function(type,element) {
 
 	    	jQuery('.wbc-filters-sorting-fields').val('');
 
@@ -3040,7 +3040,7 @@ if( typeof(eo_wbc_object) != 'undefined'){
 
 			get_sort_dropdown_container: function() {
 
-				get_sort_dropdown_container_private();
+				return get_sort_dropdown_container_private();
 			},				
 
 		};
