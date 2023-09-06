@@ -2715,6 +2715,8 @@ if( typeof(eo_wbc_object) != 'undefined'){
 
 	    var sort_order_private = function() {
 			
+			console.log('pagination [sort_order_private]');
+			
 			// process_events
 	        orderby_change_listener(null);
 	    }
@@ -2848,10 +2850,14 @@ if( typeof(eo_wbc_object) != 'undefined'){
 		};
 
 	    var orderby_change_listener = function(type) {
+			
+			console.log('pagination [orderby_change_listener]');
 
 			var selector = get_sort_dropdown_container_private();
 	        
 	        jQuery(selector).on('change',function() {
+
+				console.log('pagination [orderby_change_listener] 01');
 
 		    	on_orderby_change(type,this);
 
@@ -2913,6 +2919,8 @@ if( typeof(eo_wbc_object) != 'undefined'){
 
 	    var orderby_change = function(type,element) {
 
+			console.log('pagination [orderby_change]');
+
 	    	jQuery('.wbc-filters-sorting-fields').val('');
 
 			window.document.splugins.wbc.filters.api.eo_wbc_filter_change_wrapper(false, 'form#'+/*_this.$base_pagination_container*/jQuery(element).parents().has('[id$="eo_wbc_filter"]').find('[id$="eo_wbc_filter"]').attr('id') );
@@ -2920,6 +2928,8 @@ if( typeof(eo_wbc_object) != 'undefined'){
 	    };
 
 	    var compatability = function(section, object, expected_result, form_selector){
+
+			console.log('pagination [compatability]');
 
 	        if(section == 'pagination'){
 
@@ -2957,7 +2967,7 @@ if( typeof(eo_wbc_object) != 'undefined'){
 					if(object.container.length<=0){
 
 			    		// example if to set selector specific to theme 
-						ACTIVE_TODO temp. remove below return false when we impliment below if 
+						// ACTIVE_TODO temp. remove below return false when we impliment below if 
 						if(false && window.document.splugins.common.current_theme_key == 'themes___elessi-theme-child') {
 
 							object.container = jQuery('.nasa-pagination .page-numbers .page-numbers');
