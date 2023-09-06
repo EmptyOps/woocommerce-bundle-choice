@@ -2949,24 +2949,27 @@ if( typeof(eo_wbc_object) != 'undefined'){
 
 				if(object.container.length<=0) {
 					
-					-- aya 10 theme demo ma selectore jovana se alaga alag ave se k same ave se
-					-- badhi theme ma selectore same j se @a
-					object.container = jQuery("");
+					// ACTIVE_TODO here as mentioned in below there is no need of the patch so far as per our checks in the 10 themes, but whenever required simplu uncommonent below jQuery("") and the selector in there according to the patch. and mark it as todo if nothing comes up by third revision. 
+						// -- aya 10 theme demo ma selectore jovana se alaga alag ave se k same ave se done
+						// -- badhi theme ma selectore same j se @a done
+					// object.container = jQuery("");
 					
 					if(object.container.length<=0){
 
-			    		-- example if to set selectore spesific to theme 
-						ACTIVE_TODO temp remove below return false when we impliment below if 
-						if(false) {
+			    		// example if to set selector specific to theme 
+						ACTIVE_TODO temp. remove below return false when we impliment below if 
+						if(false && window.document.splugins.common.current_theme_key == 'themes___elessi-theme-child') {
 
+							object.container = jQuery('.nasa-pagination .page-numbers .page-numbers');
 						}
 					}
 				}
 
-		    }else if(section == 'sort_dropdown_selectore'){
+		    }else if(section == 'sort_dropdown_selector'){
 
-		    	ACTIVE_TODO temp. remove below return false the this layer is implimented becose this is not implimented yet -- to a && -- to h
+		    	// ACTIVE_TODO temp. remove below return false when this layer is implimented becose this is not implimented yet -- to a && -- to h
 		    	return false;
+		    	
 				if(object.container.length<=0) {
 			
 					object.container = jQuery("");
