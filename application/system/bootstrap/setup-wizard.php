@@ -241,7 +241,7 @@ class Setup_Wizard {
        					<div class="ui icon header" style="width: 100%;">
 				            <img src="<?php echo esc_url(constant('EO_WBC_PLUGIN_ICO_BIG')); ?>" style="max-width: 100; max-height: auto;"/>
 				            <br/>
-				            <p><?php esc_html_e('WooCommerce Product Bundle Choice', 'your-text-domain'); ?></p>
+				            <p>WooCommerce Product Bundle Choice</p>
 			           	    <hr/>
 				        </div>
 				        <?php $this->navigation(); ?>
@@ -303,7 +303,7 @@ class Setup_Wizard {
 		    <br/>
 		    <div class="inline fields">
 		        <div class="field">
-		            <button class="ui inverted primary button" type="submit"><?php esc_html_e('Submit', 'woo-bundle-choice'); ?></button>
+		            <button class="ui inverted primary button" type="submit">Submit</button>
 		        </div>
 		    </div>
 		</div>

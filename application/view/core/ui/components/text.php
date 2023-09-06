@@ -10,6 +10,8 @@
 	placeholder="<?php !empty($placeholder) ? esc_attr_e($placeholder) : ''; ?>" 
 	class="<?php !empty($class) ? esc_attr_e($class) : ''; ?>" 
 	style="<?php !empty($style) ? esc_attr_e($style) : ''; ?>"
+	<?php isset($required)?'required="required"' : ''; ?>
+
 />
 
 <?php endif; ?>

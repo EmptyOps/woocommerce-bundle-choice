@@ -1,5 +1,5 @@
-<div class="sub header <?php echo (!empty($class) ? esc_attr($class) : ''); ?>" style="<?php echo (!empty($style) ? esc_attr($style) : ''); ?>">
-	<?php echo (!empty($label) ? esc_html($label) : ''); ?>
+<div class="sub header <?php (!empty($class) ? esc_attr_e($class) : ''); ?>" style="<?php (!empty($style) ? esc_attr_e($style) : ''); ?>">
+	<?php (!empty($label) ? esc_html_e($label) : ''); ?>
 	<?php 
 		if (!empty($builder) && !empty($child)) {
 			$builder->build($child, $option_key, $process_form, null, $ui_definition);
