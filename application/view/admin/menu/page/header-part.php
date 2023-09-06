@@ -17,7 +17,7 @@ if( empty($mode) || ( $mode != "setup_wizard" && $mode != "plain" ) ) {
 <div class="ui basic segment">
   <div class="ui aligned grid" style="margin-top:1em;">
     <h2 class="ui header left aligned left floated ">   
-        <img class="ui avatar image" src="<?php echo esc_attr(constant('EOWBC_ICON_SVG'))/*constant('EOWBC_ICON_SVG')*/; ?>" / style="margin-top: 0px !important"> 
+        <img class="ui avatar image" src="<?php echo esc_url(constant('EOWBC_ICON_SVG'))/*constant('EOWBC_ICON_SVG')*/; ?>" / style="margin-top: 0px !important"> 
         <div class="content" style="height: 2em;"><?php echo !isset($SP_Extension) ? esc_html(constant('EOWBC_NAME')) : esc_html(constant($singleton_functionUpper.'_NAME')) ; ?>
 
             <?php 
