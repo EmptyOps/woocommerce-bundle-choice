@@ -2923,6 +2923,9 @@ if( typeof(eo_wbc_object) != 'undefined'){
 
 	    	jQuery('.wbc-filters-sorting-fields').val('');
 
+	    	// reset
+			window.document.splugins.wbc.pagination.api.set_page_number( 1 );
+
 			window.document.splugins.wbc.filters.api.eo_wbc_filter_change_wrapper(false, 'form#'+/*_this.$base_pagination_container*/jQuery(element).parents().has('[id$="eo_wbc_filter"]').find('[id$="eo_wbc_filter"]').attr('id') );
 	    
 	    };
