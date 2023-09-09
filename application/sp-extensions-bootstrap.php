@@ -51,6 +51,10 @@ class SP_Extensions_Bootstrap {
 			$this->migrate();
 		}, 999 );
 
+	if( wbc()->sanitize->get('is_test') == 1 ) {
+
+		wbc_pr("SP_Extensions_Bootstrap run1");	 
+	}
 		//TODO implement below hooks for extensions when necessary
 		// add_filter( 'widget_text', 'do_shortcode' );
 		// add_action('created_term', array(\eo\wbc\controllers\admin\Term_Meta::instance(),'save_terms'), 10, 3);
@@ -80,12 +84,20 @@ class SP_Extensions_Bootstrap {
 
 		if((function_exists('is_ajax') and is_ajax()) or defined('WP_AJAX')) {
 			
+			if( wbc()->sanitize->get('is_test') == 1 ) {
+
+				wbc_pr("SP_Extensions_Bootstrap run2");	 
+			}
 			//TODO implement below hooks for extensions when necessary
 			// add_action( "wp_ajax_nopriv_eowbc_ajax",array($this,'ajax'),10);
 			// add_action( "wp_ajax_eowbc_ajax",array($this,'ajax'),10);
 
 		} else {	
 			
+			if( wbc()->sanitize->get('is_test') == 1 ) {
+
+				wbc_pr("SP_Extensions_Bootstrap run3");	 
+			}
 			// system core
 			$this->system_core();
 

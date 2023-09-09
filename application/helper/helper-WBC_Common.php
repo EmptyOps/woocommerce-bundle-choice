@@ -1160,7 +1160,9 @@ class WBC_Common {
 	
 		return $countries_list;
 	}
+
 }
+
 
 function wbc_pr($ar, $force_debug = false, $die = false) {
 		
