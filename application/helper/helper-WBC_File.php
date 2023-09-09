@@ -326,6 +326,33 @@ class WBC_File {
 		return mkdir( $dirpath );
 	}
 
+	public function dir_first_file($dirpath, $file_extension='csv') {
+
+		// Get the list of files and directories in the directory
+		$fileList = scandir($dirpath);
+
+		// Filter out directories and get the first file
+		$firstFilePath = null;
+
+		foreach ($fileList as $file) {
+
+	    	$filePath = $dirpath . $this->directory_separator() . $file;
+
+	    	if (is_file($filePath)) {
+
+		        if( $this->extension_from_path($filePath) == $file_extension ) {
+
+		        	$firstFilePath = $filePath;
+
+			        break; // Stop the loop after finding the first file
+		        }	
+		    }
+		}
+
+		return $firstFilePath;
+			
+	}
+
 	// /**
 	//  * copy file: wrapper function
 	//  */
