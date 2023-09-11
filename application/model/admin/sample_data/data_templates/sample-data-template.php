@@ -23,15 +23,16 @@ class Sample_Data_Template {
 
 	protected $asset_folder = null;
 
-	private function __construct() {
+    private function __construct() {
 
-  }
+    }
 
   public function get_products() {
 		
-		$_img_url=constant('EOWBC_ASSET_URL').'img/sample_data/'.$this->asset_folder.'/';	//EO_WBC_PLUGIN_DIR.'EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/';
-		$this->gallay_img = $_img_url. 'Products/';
-		return array(
+	$_img_url=constant('EOWBC_ASSET_URL').'img/sample_data/'.$this->asset_folder.'/';	//EO_WBC_PLUGIN_DIR.'EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/';
+	$this->gallay_img = $_img_url. 'Products/';
+ 
+	return array(
         array(
           'title'=>'Setting #8800950587',
           'thumb'=>$_img_url.'Products/w-r-2.jpg',
@@ -14731,28 +14732,28 @@ class Sample_Data_Template {
     );  	
 	}
 
-  public function get_attributes() {
-    return array();
-  }
+    public function get_attributes() {
+        return array();
+    }
 
-  public function get_categories() {
-    return array();
-  }
+    public function get_categories() {
+        return array();
+    }
 
-  public function get_maps() {
-    return array();
-  }
+    public function get_maps() {
+        return array();
+    }
 
-  public function get_filters($__cat__, $__att__) {
-    return array();
-  }
+    public function get_filters($__cat__, $__att__) {
+        return array();
+    }
 
-  public function set_configs_after_categories($catat_category) {
-    
-  }
+    public function set_configs_after_categories($catat_category) {
 
-  public function set_configs_after_attributes() {
-    
-  }
+    }
+
+    public function set_configs_after_attributes() {
+
+    }
 
 }
