@@ -1670,7 +1670,7 @@ if(is_product()) {
 			<style type="text/css">
 
 				label[for = <?php echo $_attribute_slug ?>] {
-				    display: none;
+				    display: none !important;
 				}
 
 				body form table.variations tbody td .spui-wbc-swatches-variable-items-wrapper-<?php echo $_attribute_slug ?>{
