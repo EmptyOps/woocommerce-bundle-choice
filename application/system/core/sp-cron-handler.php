@@ -37,6 +37,11 @@ class SP_Cron_Handler {
 
 	public function init(){
 
+		if( wbc()->sanitize->get('is_test') == 1 ) {
+
+			wbc_pr("SP_Cron_Handler init2");	 
+		}
+
 		$is_debug_cron = false;	//	TODO	make it dynamic from admin, however, showing this much complexity to our entire free plugin community is not a good idea so may be we should keep it on most advanced settings tab or that server based settings tab that we planned for the entire product line of free plugins and premium extensions 
 		if( $is_debug_cron ){ \EOWBC_Error_Handler::log('Call recived: '.gmdate('H:i')); }
 
