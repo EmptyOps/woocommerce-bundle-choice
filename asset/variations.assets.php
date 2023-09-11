@@ -1595,6 +1595,11 @@ $bg_hover_color = wbc()->options->get_option('tiny_features',$spui_is_product_ca
 		background-color: <?php _e($bg_hover_color); ?>;
 		color: <?php _e($font_hover_color); ?>;	
 	}
+	
+/*	added 11-09-2023 @a*/
+	.hide{
+		display: none !important;
+	}
 </style>
 <script>
 	jQuery(document).ready(function($){
