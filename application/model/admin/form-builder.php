@@ -54,8 +54,8 @@ class Form_Builder implements Builder {
 							}
 						}
 
-						$tab_menu.='<a class="item '.(!$active?'active':'').'" data-tab="'.$tab_slug.'" '.(isset($tab_data['attr'])?$this->process_property($tab_data['attr']):'').'>'.$tab_data['label'].'</a>';
-						$tab_segment.='<div class="ui tab '.(!$active?'active':'').'" data-tab="'.$tab_slug.'">';
+						$tab_menu.='<a class="item '.(!$active?'active':'').'" data-tab="'.esc_attr($tab_slug).'" '.(isset($tab_data['attr'])?$this->process_property($tab_data['attr']):'').'>'.esc_html($tab_data['label']).'</a>';
+						$tab_segment.='<div class="ui tab '.(!$active?'active':'').'" data-tab="'.esc_attr($tab_slug).'">';
 						if(!$active){ $active = true; }
 						if(!empty($tab_data['form']) and is_array($tab_data['form'])){
 

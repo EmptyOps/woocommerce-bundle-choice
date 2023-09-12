@@ -192,7 +192,7 @@ class Eowbc_Sample_Data {
 			                //'action': 'eo_wbc_add_products',
 			                '_wpnonce': '<?php echo wp_create_nonce('sample_data_jewelry');?>',
 			                'action':'eowbc_ajax',
-			                'resolver':'sample_data/<?php _e($feature_key); ?>',
+			                'resolver':'sample_data/<?php esc_html_e($feature_key); ?>',
 			                'product_index':index 
 			            };
 
