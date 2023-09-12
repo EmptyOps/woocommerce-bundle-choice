@@ -5,7 +5,7 @@
 */
 
 ?>			
-<div class="ui four wide column toggle_sticky_mob_filter <?php echo esc_attr($advance?'advance_filter_mob':''); ?>" style="<?php echo esc_attr($advance?'display: none;':'').esc_attr($hidden?'display:none;':''); ?>" data-target="#sticky_mob_filter_<?php echo esc_attr($term->slug); ?>" data-tab-group="<?php esc_attr_e($tab_set); ?>">
+<div class="ui four wide column toggle_sticky_mob_filter <?php echo ($advance?'advance_filter_mob':''); ?>" style="<?php echo ($advance?'display: none;':'').($hidden?'display:none;':''); ?>" data-target="#sticky_mob_filter_<?php echo esc_attr($term->slug); ?>" data-tab-group="<?php esc_attr_e($tab_set); ?>">
 	<div class="title"><div class="ui segment"><?php echo esc_html($title); ?></div></div>
 </div>
 <div class="bottom_filter_segment hidden ui segment" id="sticky_mob_filter_<?php echo esc_attr($term->slug); ?>" data-filter-slug="<?php echo esc_attr($term->slug); ?>">
@@ -35,7 +35,7 @@
 			    data-type="<?php echo esc_attr($type); ?>"
 			    data-reset="reset_single_icon(new Event(''), '[data-slug=\'<?php echo esc_attr($filter_icon['slug']); ?>\']')">
 			    <div>
-			        <img src='<?php echo esc_url($filter_icon['mark'] ? $filter_icon['select_icon'] : $filter_icon['icon']); ?>'data-imgsrc="<?php echo esc_url($filter_icon['icon']); ?>"	data-toggleimgsrc="<?php echo esc_url($filter_icon['select_icon']); ?>"style="<?php echo esc_attr($icon_css); ?>" />
+			        <img src='<?php echo esc_url($filter_icon['mark'] ? $filter_icon['select_icon'] : $filter_icon['icon']); ?>'data-imgsrc="<?php echo esc_url($filter_icon['icon']); ?>"	data-toggleimgsrc="<?php echo esc_url($filter_icon['select_icon']); ?>" style="<?php esc_attr_e($icon_css); ?>" />
 			    </div>
 			    <?php if ($input == 'icon_text'): ?>
 			        <div><?php echo esc_html($filter_icon['name']); ?></div>

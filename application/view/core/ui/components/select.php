@@ -19,7 +19,7 @@
 	    			}
 	    			else {
 	    			?>
-					<div class="item" <?php echo !empty($item["attr"]) ? esc_attr($item["attr"]) : ""; ?> data-value="<?php echo esc_attr($key); ?>"><?php echo esc_html($item["label"]); ?></div> <?php
+					<div class="item" <?php echo !empty($item["attr"]) ? $item["attr"] : ""; ?> data-value="<?php echo esc_attr($key); ?>"><?php echo esc_html($item["label"]); ?></div> <?php
 	    			}
 	    		}
 	    		?>

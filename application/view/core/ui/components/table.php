@@ -1,4 +1,4 @@
-<table class="ui <?php !empty($class) ? esc_attr_e($class) : ''; ?> table" id="<?php !empty($id) ? esc_attr_e($id) : ''; ?>" style="<?php !empty($style) ? esc_attr_e($style) : '';
+<table class="ui <?php !empty($class) ? esc_attr_e($class) : ''; ?> table" id="<?php !empty($id) ? esc_attr_e($id) : ''; ?>" style="<?php !empty($style) ? esc_attr_e($style) : '';?>">
 	<?php 
 	    if(!empty($builder) and !empty($child)){
 	      $builder->build($child,$option_key,$process_form);

@@ -182,7 +182,7 @@ class Term_Meta {
 			<?php if($is_edit): ?>
 				<th scope="row" valign="top">
 			<?php endif; ?>
-				<label><?php _e('Image', 'woo-bundle-choice'); ?></label>
+				<label><?php ecs_html_e('Image', 'woo-bundle-choice'); ?></label>
 			<?php if($is_edit): ?>
 					</th>
 					<td>
@@ -412,7 +412,7 @@ class Term_Meta {
 			</th>			
 			<td>
 				<div>
-					<input type="hidden" name="wbc_attachment_thumb" id="wbc_attachment_thumb" value="<?php _e($src); ?>">
+					<input type="hidden" name="wbc_attachment_thumb" id="wbc_attachment_thumb" value="<?php esc_attr_e($src); ?>">
 					<img src="<?php esc_url_e($src); ?>" width="60" height="60" id="wbc_attachment_thumb_img"/>
 				</div>
 					

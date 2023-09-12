@@ -36,7 +36,7 @@
                 <div><?php /*_e(get_woocommerce_currency().wc_price($second->get_price()));*/ ?><?php esc_html_e(wc_price(apply_filters('eowbc_breadcrumb_second_price',$second->get_price(),$second))); ?></div>
                 
                 <div>
-                    <u><a href="<?php echo esc_url($view_url); ?>"><?php esc_html_e(spext_lang("View", 'woo-bundle-choice')); ?></a></u>&nbsp;|&nbsp;<u><a href="<?php echo esc_url($remove_url); ?>" data-remove-url="<?php echo esc_url($remove_url); ?>"><?php esc_html_e(wbc()->options->get_option('appearance_breadcrumb', 'appearance_breadcrumb_change_action_text', 'Change', true, true)); ?></a></u></div>
+                    <u><a href="<?php echo esc_url($view_url); ?>"><?php esc_htmlw(spext_lang("View", 'woo-bundle-choice')); ?></a></u>&nbsp;|&nbsp;<u><a href="<?php echo esc_url($remove_url); ?>" data-remove-url="<?php echo esc_url($remove_url); ?>"><?php esc_html_e(wbc()->options->get_option('appearance_breadcrumb', 'appearance_breadcrumb_change_action_text', 'Change', true, true)); ?></a></u></div>
             <?php } endif; ?>                    
         </div>                
         <div class="column">

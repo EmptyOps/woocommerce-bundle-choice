@@ -856,7 +856,7 @@ class SP_Model_Single_Product extends SP_Single_Product {
 						ob_start();
 						?>
 							<span id="wbc_variation_toggle" class="ui raised segment">
-								<?php _e($toggle_text); ?><i class="caret up icon" style="text-align: center;line-height: 1em;"></i>						
+								<?php esc_html_e($toggle_text); ?><i class="caret up icon" style="text-align: center;line-height: 1em;"></i>						
 							</span>
 						<?php
 						echo ob_get_clean();
@@ -1311,7 +1311,7 @@ class SP_Model_Single_Product extends SP_Single_Product {
 									echo sprintf(
 										'<div class="wvg-gallery-image wvg-gallery-image-placeholder"><div><div class="wvg-single-gallery-image-container"><img src="%s" alt="%s" class="wp-post-image" /></div></div></div>',
 										esc_url( wc_placeholder_img_src() ),
-										esc_html__( 'Awaiting product image', 'woocommerce' )
+										/*esc_html__*/esc_attr__( 'Awaiting product image', 'woocommerce' )
 									);
 								}
 

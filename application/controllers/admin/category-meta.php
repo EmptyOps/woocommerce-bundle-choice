@@ -72,7 +72,7 @@ class Category_Meta {
 			<?php if($is_edit): ?>
 				<th scope="row" valign="top">
 			<?php endif; ?>
-				<label><?php _e('Filter Selected Image', 'woo-bundle-choice'); ?></label>
+				<label><?php esc_html_e('Filter Selected Image', 'woo-bundle-choice'); ?></label>
 			<?php if($is_edit): ?>
 					</th>
 					<td>
@@ -86,7 +86,7 @@ class Category_Meta {
 				<br/>				
 				<div>					
 					<button class="ui button wbc_thumb_button button" style="padding: 0.6em;">
-						<?php _e('Choose Image', 'woo-bundle-choice'); ?>						
+						<?php esc_html_e('Choose Image', 'woo-bundle-choice'); ?>						
 					</button>					
 				</div>
 				
