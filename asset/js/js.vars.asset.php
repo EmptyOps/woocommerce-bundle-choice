@@ -80,6 +80,8 @@ add_action( ( !is_admin() ? 'wp_enqueue_scripts' : 'admin_enqueue_scripts'),func
 		?>
 
     	window.document.splugins.common.current_theme_key = '<?php echo wbc()->common->current_theme_key(); ?>';
+    	
+    	window.document.splugins.common.ajax_url = '<?php echo admin_url('admin-ajax.php'); ?>';
 
 		window.document.splugins.common.is_shop_page = <?php echo ((is_shop()) ? "true" : "false");?>; 
 
