@@ -249,7 +249,7 @@ class Product {
                     jQuery('form.cart').prepend("<input type='hidden' name='eo_wbc_add_to_cart_preview' value='1'/>");
                     
                     jQuery(".single_add_to_cart_button.button.alt:not(.disabled):eq(0)").replaceWith(
-                         "<button href='#' id='eo_wbc_add_to_cart_preview' class='single_add_to_cart_button button alt'><?php _e('Add To Cart','woo-bundle-choice') ?></button>"
+                         "<button href='#' id='eo_wbc_add_to_cart_preview' class='single_add_to_cart_button button alt'><?php esc_html_e('Add To Cart','woo-bundle-choice') ?></button>"
                     );
 
                     jQuery(document).on('click','#eo_wbc_add_to_cart_preview',function() {
@@ -565,7 +565,7 @@ class Product {
 
                 add_action('woocommerce_after_add_to_cart_button',function(){                
                     // echo "<button href='#' id='eo_wbc_add_to_cart' class='single_add_to_cart_button button alt make_pair btn btn-default'>".get_option('eo_wbc_pair_text',__('Add to pair','woo-bundle-choice'))."</button>";
-                    echo "<button href='#' id='eo_wbc_add_to_cart' class='single_add_to_cart_button button alt make_pair btn btn-default'>".wbc()->options->get_option('configuration','label_make_pair',__('Add to pair','woo-bundle-choice'))."</button>";
+                    echo "<button href='#' id='eo_wbc_add_to_cart' class='single_add_to_cart_button button alt make_pair btn btn-default'>".esc_html(wbc()->options->get_option('configuration','label_make_pair',__('Add to pair','woo-bundle-choice')))."</button>";
                 });
             }
             //Add css to the head
@@ -591,7 +591,7 @@ class Product {
                 <!-- WBC{ WooCommerce Product Bundle Choice wiget STARTS. } -->
                 <script>
                     jQuery(document).ready(function(){
-                        jQuery('form.cart').prepend("<input type='hidden' name='eo_wbc_target' value='<?php echo $this->page_category; ?>'/><input type='hidden' name='eo_wbc_product_id' value='<?php global $post; echo $post->ID; ?>'/>");
+                        jQuery('form.cart').prepend("<input type='hidden' name='eo_wbc_target' value='<?php echo esc_attr($this->page_category); ?>'/><input type='hidden' name='eo_wbc_product_id' value='<?php global $post; echo esc_attr($post->ID); ?>'/>");
                     });
                 </script>
                 <!-- WBC{ WooCommerce Product Bundle Choice wiget ENDS. } -->
@@ -725,7 +725,7 @@ class Product {
             <!-- Created with Wordpress plugin - WooCommerce Product bundle choice -->
             <script type="text/javascript">
                 jQuery(".single_add_to_cart_button.button.alt").ready(function(){
-                    jQuery('form.cart').prepend("<input type='hidden' name='eo_wbc_target' value='<?php echo $this->page_category; ?>'/><input type='hidden' name='eo_wbc_product_id' value='<?php global $post; echo $post->ID; ?>'/>");
+                    jQuery('form.cart').prepend("<input type='hidden' name='eo_wbc_target' value='<?php echo esc_attr($this->page_category); ?>'/><input type='hidden' name='eo_wbc_product_id' value='<?php global $post; echo esc_attr($post->ID); ?>'/>");
                     
                     <?php if(!empty(wbc()->options->get_option('appearance_product_page','product_page_add_to_basket',''))) :?>
                         
@@ -735,11 +735,11 @@ class Product {
                         }
 
                         jQuery(".single_add_to_cart_button.alt:not(.disabled):eq(0)").replaceWith('<div class=\"ui buttons\">'+
-                                '<div class=\"ui button\" href=\"#\" id=\"eo_wbc_add_to_cart\"><?php echo $btn_text; ?></div>'+
+                                '<div class=\"ui button\" href=\"#\" id=\"eo_wbc_add_to_cart\"><?php echo esc_html($btn_text); ?></div>'+
                                     '<div class=\"ui floating dropdown icon button\" style=\"width: fit-content;min-width: unset; max-width: unset;\">'+
                                         '<i class=\"dropdown icon\"></i>'+
                                         '<div class=\"menu\">'+
-                                            '<div class=\"item\" onClick=\"window.wbc_atb_submin_form();\"><?php echo wbc()->options->get_option('appearance_product_page','product_page_add_to_basket','');?></div>'+                                    
+                                            '<div class=\"item\" onClick=\"window.wbc_atb_submin_form();\"><?php echo esc_html(wbc()->options->get_option('appearance_product_page','product_page_add_to_basket',''));?></div>'+                                    
                                         '</div>'+
                                     '</div>'+
                                 '</div>'+
@@ -750,7 +750,7 @@ class Product {
 
                         jQuery(".single_add_to_cart_button.button.alt:not(.disabled):eq(0)").replaceWith(
                          "<button href='#' id='eo_wbc_add_to_cart' class='single_add_to_cart_button button alt'>"
-                         +"<?php echo $btn_text; ?>"
+                         +"<?php echo esc_html($btn_text); ?>"
                          +"</button>"
                         );
                     <?php endif; ?>

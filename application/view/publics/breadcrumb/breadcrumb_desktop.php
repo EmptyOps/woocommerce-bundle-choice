@@ -24,9 +24,22 @@ if(isset($_GET['FIRST']) and isset($_GET['SECOND'])) {
             }
         }
         
-            $html.='<div data-href="'.( (empty(wbc()->sanitize->get('EO_CHANGE')) XOR empty(wbc()->sanitize->get('EO_VIEW')) ) && !empty(wbc()->sanitize->get('FIRST')) && !empty(wbc()->sanitize->get('SECOND'))?get_bloginfo('url').'/index.php'
-                .wbc()->options->get_option('configuration','review_page')/*get_option('eo_wbc_review_page')*/
-                .'?'.wbc()->common->http_query(array('EO_WBC'=>1,'BEGIN'=>wbc()->sanitize->get('BEGIN'),'STEP'=>3,'FIRST'=>wbc()->sanitize->get('FIRST'),'SECOND'=>wbc()->sanitize->get('SECOND'))):'#' ).'" class="'.(($step==3)?'active ':((!(empty($breadcrumb_ui::$first) and empty($breadcrumb_ui::$second)))?'completed ':(!empty(\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$clickable_breadcrumb)?'':'disabled'))).' step spui-semantic-step" onclick="window.location.href=jQuery(this).data(\'href\');">';
+
+            $html .= '<div data-href="' . (
+                (empty(wbc()->sanitize->get('EO_CHANGE')) XOR empty(wbc()->sanitize->get('EO_VIEW'))) &&
+                !empty(wbc()->sanitize->get('FIRST')) &&
+                !empty(wbc()->sanitize->get('SECOND'))
+                    ? esc_url(get_bloginfo('url') . '/index.php' . wbc()->options->get_option('configuration', 'review_page') /*get_option('eo_wbc_review_page')*/
+                        . '?' . wbc()->common->http_query(array(
+                            'EO_WBC' => 1,
+                            'BEGIN' => wbc()->sanitize->get('BEGIN'),
+                            'STEP' => 3,
+                            'FIRST' => wbc()->sanitize->get('FIRST'),
+                            'SECOND' => wbc()->sanitize->get('SECOND')
+                        )))
+                    : '#'
+            ) . '" class="' . esc_attr((($step == 3) ? 'active ' : ((!empty($breadcrumb_ui::$first) || !empty($breadcrumb_ui::$second)) ? 'completed ' : (!empty(\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$clickable_breadcrumb) ? '' : 'disabled')))) . ' step spui-semantic-step" onclick="window.location.href=jQuery(this).data(\'href\');">';
+
                     ob_start();
                     $template = wbc()->options->get_option('configuration','config_alternate_breadcrumb','default');
                     if(wbc()->options->get_option('configuration','config_alternate_breadcrumb','default')=='template_2') {                            

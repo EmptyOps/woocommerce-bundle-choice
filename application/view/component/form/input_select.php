@@ -14,7 +14,7 @@ if(!empty($id) /*and !empty($label)*/){
 			wbc()->load->template('component/form/input_label',array('id'=>$id,'label'=>$label)); 
 		}
 		?>
-		<div class="ui selection dropdown <?php echo !empty($class) ? esc_attr($class) : ''; ?>" id="<?php echo esc_attr($id); ?>_dropdown_div" <?php esc_attr_e(!empty($field_attr) ? implode(' ', $field_attr) : ''); ?>>
+		<div class="ui selection dropdown <?php echo !empty($class) ? esc_attr($class) : ''; ?>" id="<?php echo esc_attr($id); ?>_dropdown_div" <?php _e(!empty($field_attr) ? implode(' ', $field_attr) : ''); ?>>
 			<input type="hidden" id="<?php echo esc_attr($id); ?>" name="<?php echo esc_attr($id); ?>" value="<?php echo esc_attr($value); ?>">
 			<i class="dropdown icon"></i>
 			<div class="default text"></div>

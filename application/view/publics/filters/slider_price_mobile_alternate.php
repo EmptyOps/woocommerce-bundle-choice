@@ -5,7 +5,7 @@
 */
 
 ?>			
-<div class="ui four wide column toggle_sticky_mob_filter" style="<?php echo esc_attr($advance?'display: none;':'') ?>" data-target="#sticky_mob_filter_price">
+<div class="ui four wide column toggle_sticky_mob_filter" style="<?php echo ($advance?'display: none;':'') ?>" data-target="#sticky_mob_filter_price">
 	<div class="title"><div class="ui segment"><?php esc_html(spext_lang("Price", 'woo-bundle-choice')) ?></div></div>
 </div>
 <div class="bottom_filter_segment hidden ui segment" id="sticky_mob_filter_price">

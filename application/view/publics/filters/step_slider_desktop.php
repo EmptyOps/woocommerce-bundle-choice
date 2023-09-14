@@ -16,7 +16,7 @@
 		        <?php endif; ?>
 		    </p>
 
-		    <div data-label_max_size="<?php echo esc_attr($label_max_size) ?>" data-min="0" data-max="<?php echo esc_attr(count(array_filter($items_slug)))-1; ?>" class="ui labeled ticked range slider wbc" data-label_adjust="<?php echo esc_attr($reset_label); ?>" id="text_slider_<?php echo esc_attr($filter['slug']) ?>" data-slug="<?php echo esc_attr($filter['slug']) ?>" data-labels="<?php echo esc_attr(implode(",", $items_name)); ?>" data-slugs="<?php echo esc_attr(implode(",", $items_slug)); ?>" style="bottom: -12.5%;" data-reset="reset_slider(new Event('click'),'<?php echo esc_attr($filter['slug']) ?>',0,<?php echo esc_attr(count(array_filter($items_slug))); ?>)"></div>
+		    <div data-label_max_size="<?php echo esc_attr($label_max_size) ?>" data-min="0" data-max="<?php echo esc_attr(count(array_filter($items_slug))-1); ?>" class="ui labeled ticked range slider wbc" data-label_adjust="<?php echo esc_attr($reset_label); ?>" id="text_slider_<?php echo esc_attr($filter['slug']) ?>" data-slug="<?php echo esc_attr($filter['slug']) ?>" data-labels="<?php echo esc_attr(implode(",", $items_name)); ?>" data-slugs="<?php echo esc_attr(implode(",", $items_slug)); ?>" style="bottom: -12.5%;" data-reset="reset_slider(new Event('click'),'<?php echo esc_attr($filter['slug']) ?>',0,<?php echo esc_attr(count(array_filter($items_slug))); ?>)"></div>
 		</div>
 		<?php
 	
