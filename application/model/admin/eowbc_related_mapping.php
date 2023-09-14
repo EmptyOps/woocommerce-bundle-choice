@@ -89,13 +89,13 @@ class Eowbc_Related_Mapping /*extends Eowbc_Model*/ {
 
 									$val1 = wbc()->common->dropdownSelectedvalueText($tab["form"]["first_term_range"], $rv["first_term_range"]);
 
-									$row[] = array( 'val' =>  "Range from <strong>".(!is_array($val)?$val:$val["label"])."</strong> to <strong>".(!is_array($val1)?$val1:$val1["label"])."</strong>" ,'link'=>1,'edit_id'=>$rk);
+									$row[] = array( 'val' =>  "Range from <strong>".esc_html(!is_array($val)?$val:$val["label"])."</strong> to <strong>".esc_html(!is_array($val1)?$val1:$val1["label"])."</strong>" ,'link'=>1,'edit_id'=>$rk);
 								}	
 							}
 							else if( $rvk == "second_term" ) {
 								if($rv["first_term_set_all"]){
 									
-									$row[] = array( 'val' => "Upper Bound:<strong>".($rv['second_term_upper_limit'])."</strong><br/>Lower Bound:<strong>".($rv['second_term_down_limit'])."</strong>" );
+									$row[] = array( 'val' => "Upper Bound:<strong>".esc_html($rv['second_term_upper_limit'])."</strong><br/>Lower Bound:<strong>".esc_html($rv['second_term_down_limit'])."</strong>" );
 									
 								}
 								/*if( strpos($rvv, 'pid_')==0 ){
@@ -111,7 +111,7 @@ class Eowbc_Related_Mapping /*extends Eowbc_Model*/ {
 								else {
 									$val = wbc()->common->dropdownSelectedvalueText($tab["form"][$rvk], $rvv);
 									$val1 = wbc()->common->dropdownSelectedvalueText($tab["form"]["second_term_range"], $rv["second_term_range"]);
-									$row[] = array( 'val' => "Range from <strong>".(!is_array($val)?$val:$val["label"])."</strong> to <strong>".(!is_array($val1)?$val1:$val1["label"])."</strong>" );
+									$row[] = array( 'val' => "Range from <strong>".esc_html(!is_array($val)?$val:$val["label"])."</strong> to <strong>".esc_html(!is_array($val1)?$val1:$val1["label"])."</strong>" );
 								}	
 							}
 							else {

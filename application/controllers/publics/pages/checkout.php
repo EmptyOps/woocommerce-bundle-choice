@@ -57,7 +57,8 @@ class Checkout {
         add_filter('woocommerce_cart_item_name',function($name, $cart_item, $cart_item_key ){            
 
             if(!empty($cart_item['datas'])){
-               return $cart_item['datas']['FIRST']->get_name().'<strong class="product-quantity">'.sprintf( '&nbsp;&times;&nbsp;%s', $cart_item['quantity'] ).'</strong><br/><span style="color:red;">+</span><br/>'.$cart_item['datas']['SECOND']->get_name().'<strong class="product-quantity">'.sprintf( '&nbsp;&times;&nbsp;%s', $cart_item['quantities']['SECOND']).'</strong>';
+               // return $cart_item['datas']['FIRST']->get_name().'<strong class="product-quantity">'.sprintf( '&nbsp;&times;&nbsp;%s', $cart_item['quantity'] ).'</strong><br/><span style="color:red;">+</span><br/>'.$cart_item['datas']['SECOND']->get_name().'<strong class="product-quantity">'.sprintf( '&nbsp;&times;&nbsp;%s', $cart_item['quantities']['SECOND']).'</strong>';
+               return esc_html($cart_item['datas']['FIRST']->get_name()).'<strong class="product-quantity">'.sprintf( '&nbsp;&times;&nbsp;%s', esc_html($cart_item['quantity']) ).'</strong><br/><span style="color:red;">+</span><br/>'.esc_html($cart_item['datas']['SECOND']->get_name()).'<strong class="product-quantity">'.sprintf( '&nbsp;&times;&nbsp;%s', esc_html($cart_item['quantities']['SECOND'])).'</strong>';
             } else {
                 return $name;
             }
@@ -193,14 +194,14 @@ class Checkout {
 
             $price=0;            
             $html="<!-- Created with Wordpress plugin - WooCommerce Product bundle choice --><tr><td><div><strong>".
-                __(wbc()->wc->eo_wbc_get_product($map['FIRST'][0])->get_title().($map['FIRST'][2]  ? "&nbsp; -&nbsp;".implode(',',wbc()->wc->eo_wbc_get_product_variation_attributes($map['FIRST'][2],$map['FIRST']['variation'])):''))."</strong>&nbsp;X&nbsp;{$map["FIRST"][1]}</div>";
+                __(wbc()->wc->eo_wbc_get_product($map['FIRST'][0])->get_title().($map['FIRST'][2]  ? "&nbsp; -&nbsp;".esc_html(implode(',',wbc()->wc->eo_wbc_get_product_variation_attributes($map['FIRST'][2],$map['FIRST']['variation']))):''))."</strong>&nbsp;X&nbsp;{$map["FIRST"][1]}</div>";
 
                 $product=wbc()->wc->eo_wbc_get_product($map['FIRST'][2]?$map['FIRST'][2]:$map['FIRST'][0]);
                 $price+=$product->get_price()*$map["FIRST"][1];
             if($map["SECOND"])
             {
                 $html.="<strong style=\'color: red;\'>+</strong><div><strong>".
-                    __(wbc()->wc->eo_wbc_get_product($map['SECOND'][0])->get_title().($map['SECOND'][2]  ? "&nbsp; -&nbsp;".implode(',',wbc()->wc->eo_wbc_get_product_variation_attributes($map['SECOND'][2],$map['SECOND']['variation'])):''))."</strong>&nbsp;X&nbsp;{$map["SECOND"][1]}</div></td>";
+                    __(wbc()->wc->eo_wbc_get_product($map['SECOND'][0])->get_title().($map['SECOND'][2]  ? "&nbsp; -&nbsp;".esc_html(implode(',',wbc()->wc->eo_wbc_get_product_variation_attributes($map['SECOND'][2],$map['SECOND']['variation']))):''))."</strong>&nbsp;X&nbsp;{$map["SECOND"][1]}</div></td>";
                     $product=wbc()->wc->eo_wbc_get_product($map['SECOND'][2]?$map['SECOND'][2]:$map['SECOND'][0]);
                     $price+=$product->get_price()*$map["SECOND"][1];
             }

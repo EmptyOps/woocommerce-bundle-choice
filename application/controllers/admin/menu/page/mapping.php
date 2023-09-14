@@ -187,7 +187,7 @@ if ( ! class_exists( 'Mapping' ) ) {
 								// 'size_class'=>array('eight','wide'),
 								'prev_inline'=>true,
 								'inline'=>true,
-								'attr'=>array('data-tab_key="map_creation_modification"', 'data-bulk_table_id="'.$table["id"].'"', 'data-action="bulk"' )
+								'attr'=>array('data-tab_key="map_creation_modification"', 'data-bulk_table_id="'.esc_attr($table["id"]).'"', 'data-action="bulk"' )
 							),
 							'list'=>array_merge( $table , array(
 								'type'=>'table' )

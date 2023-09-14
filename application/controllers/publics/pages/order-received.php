@@ -154,10 +154,12 @@ class Order_Received extends \WC_Order_Item_Product {
                 
                 $product_permalink = ( $is_visible ? $SECOND->get_permalink( $item ) : '' );
 
-                 return $name .' <strong class="product-quantity">' . sprintf( '&times;&nbsp;%s', $qty_display ) . '</strong>'
-
-                 ."<div style='color:red;font-weight: bolder;' class='eowbc add_product plus'>+</div>".( $product_permalink ? sprintf( '<a href="%s">%s</a>', $product_permalink, $SECOND->get_name() ) : $SECOND->get_name() ).
-                 ' <strong class="product-quantity">' . sprintf( '&times;&nbsp;%s', $second_qty_display ) . '</strong>';
+                 // return $name .' <strong class="product-quantity">' . sprintf( '&times;&nbsp;%s', $qty_display ) . '</strong>'
+                 // ."<div style='color:red;font-weight: bolder;' class='eowbc add_product plus'>+</div>".( $product_permalink ? sprintf( '<a href="%s">%s</a>', $product_permalink, $SECOND->get_name() ) : $SECOND->get_name() ).
+                 // ' <strong class="product-quantity">' . sprintf( '&times;&nbsp;%s', $second_qty_display ) . '</strong>';
+                 return $name .' <strong class="product-quantity">' . sprintf( '&times;&nbsp;%s', esc_html($qty_display) ) . '</strong>'
+                 ."<div style='color:red;font-weight: bolder;' class='eowbc add_product plus'>+</div>".( $product_permalink ? sprintf( '<a href="%s">%s</a>', esc_url($product_permalink), esc_html($SECOND->get_name()) ) : esc_html($SECOND->get_name()) ).
+                 ' <strong class="product-quantity">' . sprintf( '&times;&nbsp;%s', esc_html($second_qty_display) ) . '</strong>';
 
             } else {
                 return $name;

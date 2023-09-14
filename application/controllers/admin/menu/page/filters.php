@@ -34,7 +34,7 @@ if ( ! class_exists( 'Filters' ) ) {
 	        foreach ($map_base as $base) {
 	        	
 	            // $category_option_list.= "<option data-type='0' data-slug='{$base->slug}' value='".$base->term_id."'>".$prefix.$base->name."</option>".eo_wbc_prime_category_($base->slug,' --');
-	            $opts_arr[$base->term_taxonomy_id] = array( 'label'=>$prefix.$base->name, 'attr'=>' data-type="0" data-slug="'.$base->slug.'" ' );
+	            $opts_arr[$base->term_taxonomy_id] = array( 'label'=>$prefix.$base->name, 'attr'=>' data-type="0" data-slug="'.esc_attr($base->slug).'" ' );
 		        $opts_arr = \eo\wbc\controllers\admin\menu\page\Filters::eo_wbc_prime_category_($base->slug,'--',$opts_arr);
 
 	        }
@@ -48,7 +48,7 @@ if ( ! class_exists( 'Filters' ) ) {
 	        // $attributes="";        
 	        foreach (wc_get_attribute_taxonomies() as $item) {                     
 	        	// $attributes .= "<option data-type='1' data-slug='{$item->attribute_name}' value='{$item->attribute_id}'>{$item->attribute_label}</option>";  
-	        	$opts_arr['pa_'.$item->attribute_id] = array( 'label'=>$item->attribute_label, 'attr'=>' data-type="1" data-slug="'.$item->attribute_name.'" ' );          
+	        	$opts_arr['pa_'.$item->attribute_id] = array( 'label'=>$item->attribute_label, 'attr'=>' data-type="1" data-slug="'.esc_attr($item->attribute_name).'" ' );          
 	        }
 	        // return $attributes;
 	        return $opts_arr;
@@ -730,7 +730,7 @@ if ( ! class_exists( 'Filters' ) ) {
 								// 'size_class'=>array('eight','wide'),
 								'prev_inline'=>true,
 								'inline'=>true,
-								'attr'=>array('data-tab_key="d_fconfig"', 'data-bulk_table_id="'.$table["id"].'"', 'data-action="bulk"' )
+								'attr'=>array('data-tab_key="d_fconfig"', 'data-bulk_table_id="'.esc_attr($table["id"]).'"', 'data-action="bulk"' )
 							),
 							'list'=>array_merge( $table , array(
 								'type'=>'table' )
@@ -1080,7 +1080,7 @@ if ( ! class_exists( 'Filters' ) ) {
 								// 'size_class'=>array('eight','wide'),
 								'prev_inline'=>true,
 								'inline'=>true,
-								'attr'=>array('data-tab_key="s_fconfig"', 'data-bulk_table_id="'.$sett_table["id"].'"', 'data-action="bulk"' )
+								'attr'=>array('data-tab_key="s_fconfig"', 'data-bulk_table_id="'.esc_attr($sett_table["id"]).'"', 'data-action="bulk"' )
 							),
 							'list'=>array_merge( $sett_table, array(
 								'type'=>'table' )
@@ -1430,7 +1430,7 @@ if ( ! class_exists( 'Filters' ) ) {
 								// 'size_class'=>array('eight','wide'),
 								'prev_inline'=>true,
 								'inline'=>true,
-								'attr'=>array('data-tab_key="filter_set"', 'data-bulk_table_id="'.$filter_set_table["id"].'"', 'data-action="bulk"' )
+								'attr'=>array('data-tab_key="filter_set"', 'data-bulk_table_id="'.esc_attr($filter_set_table["id"]).'"', 'data-action="bulk"' )
 							),
 							'list'=>array_merge( $filter_set_table, array(
 								'type'=>'table' )

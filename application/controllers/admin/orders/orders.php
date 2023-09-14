@@ -88,20 +88,20 @@ class Orders
        }
        $row.="</td>".
            "<td style=\"vertical-align: middle;\">".
-           "<p>".get_woocommerce_currency_symbol(get_option('woocommerce_currency')).get_post_meta($set[0][2]?$set[0][2]:$set[0][0],'_price',TRUE)."</p>";
+           "<p>".get_woocommerce_currency_symbol(get_option('woocommerce_currency')).esc_html(get_post_meta($set[0][2]?$set[0][2]:$set[0][0],'_price',TRUE))."</p>";
        
        $price+=get_post_meta($set[0][2]?$set[0][2]:$set[0][0],'_price',TRUE)*$set[0][1];
        
        if($set[1]){            
-           $row.="<p>".get_woocommerce_currency_symbol(get_option('woocommerce_currency')).get_post_meta($set[1][2]?$set[1][2]:$set[1][0],'_price',TRUE)."</p>";
+           $row.="<p>".get_woocommerce_currency_symbol(get_option('woocommerce_currency')).esc_html(get_post_meta($set[1][2]?$set[1][2]:$set[1][0],'_price',TRUE))."</p>";
             
            $price+=get_post_meta($set[1][2]?$set[1][2]:$set[1][0],'_price',TRUE)*$set[1][1];
        }
        $row.="</td>".
            "<td style=\"vertical-align: middle;\" >".
-           "<h5>{$set[0][1]}</h5>";
+           "<h5>".esc_html($set[0][1])."</h5>";
        if($set[1]){
-           $row.="<h5>{$set[1][1]}</h5>";
+           $row.="<h5>".esc_html($set[1][1])."</h5>";
        }
            $row.="</td>".
            "<td style=\"min-width:40px;text-align:right;vertical-align: middle;\">".
