@@ -215,6 +215,14 @@ if(window.document.splugins.common.is_item_page || window.document.splugins.comm
     return baseURL + "?" + newAdditionalURL + rows_txt;
  } 
 
+ window.document.splugins.common.get_device_visible_screen_height_width = function() {
+    
+    return {
+        width: jQuery(window).width(),
+        height: jQuery(window).height(),  
+    };
+ } 
+
  window.document.splugins.common.load_script_url = function(url,is_show_loading,callback) {
  
     var s = document.createElement('script');

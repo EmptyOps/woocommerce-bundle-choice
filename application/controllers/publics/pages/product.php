@@ -1185,7 +1185,7 @@ class Product {
                             }
 
                             if( is_array($range) && in_array($term_taxonomy_id, $range) ) {
-                            
+
                                 $taxonomy_related_data[substr($_term_->taxonomy,3)]['filter_range'][] = $_term_->slug;
                             }
                         }
