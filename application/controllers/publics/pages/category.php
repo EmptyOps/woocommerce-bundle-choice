@@ -312,26 +312,26 @@ class Category {
                                 $html.="<h1 style='font-size:10vw;color:#767676;'>Ooops!</h1>";
                             $html.="</div>";
                             $html.="<div class='ui row' style='padding-bottom:0px'>";
-                                $html.='<span class="ui inverted text">' . __( 'No products were found matching your selection.', 'woocommerce' ) .'<span>';
+                                $html.='<span class="ui inverted text">' . esc_html__( 'No products were found matching your selection.', 'woocommerce' ) .'<span>';
                             $html.="</div>";    
                             $html.="<div class='ui row'  style='padding-bottom:3rem !important'>";   
                                 // TODO here isn't it better if i's simple javascript back in history - hiren                         
-                                $html.='<button href="'.$this->eo_wbc_prev_url().'" class="ui inverted secondary single_add_to_cart_button button alt">Go back</button>&nbsp;&nbsp;';
-                                $html.='<button href="'.((empty(wbc()->sanitize->get('FIRST')) XOR empty(wbc()->sanitize->get('SECOND')))?strtok(get_permalink((empty(wbc()->sanitize->get('FIRST'))?wbc()->sanitize->get('SECOND'):wbc()->sanitize->get('FIRST'))),'?'):'').'" class="ui grey button single_add_to_cart_button alt">Continue buying single item</button>&nbsp;&nbsp;';
+                                $html.='<button href="'.esc_url($this->eo_wbc_prev_url()).'" class="ui inverted secondary single_add_to_cart_button button alt">Go back</button>&nbsp;&nbsp;';
+                                $html.='<button href="'.esc_url(((empty(wbc()->sanitize->get('FIRST')) XOR empty(wbc()->sanitize->get('SECOND')))?strtok(get_permalink((empty(wbc()->sanitize->get('FIRST'))?wbc()->sanitize->get('SECOND'):wbc()->sanitize->get('FIRST'))),'?'):'')).'" class="ui grey button single_add_to_cart_button alt">Continue buying single item</button>&nbsp;&nbsp;';
                             $html.="</div>";    
                                                         
                             if(current_user_can('manage_options')){
                                 //Manage the mapping section
                                 $html.="<div class='ui row' style='padding-bottom:0rem !important'>";
-                                    $html.='<a href="'.admin_url('admin.php?page=eowbc-mapping').'"><span class="ui text primary">As admin of this site please create a product mapping to fix this problem.</span></a>';
+                                    $html.='<a href="'.esc_url(admin_url('admin.php?page=eowbc-mapping')).'"><span class="ui text primary">As admin of this site please create a product mapping to fix this problem.</span></a>';
                                 $html.="</div>";    
 
                                 $html.="<div class='ui row' style='padding-bottom:0rem !important'>";
-                                    $html.='Adequate mapping(s) needs to be added in the '.constant('EOWBC_NAME').' for Pair Builder to work properly.';
+                                    $html.='Adequate mapping(s) needs to be added in the '.esc_html(constant('EOWBC_NAME')).' for Pair Builder to work properly.';
                                 $html.="</div>";                                                    
                             } else {                            
                                 $html.="<div class='ui row' style='padding-bottom:0rem !important'>";
-                                    $html.='<a href="'.site_url('/?wbc_report=1').'">Report to admin to help them fix this problem.</a>&nbsp;&nbsp;';
+                                    $html.='<a href="'.esc_url(site_url('/?wbc_report=1')).'">Report to admin to help them fix this problem.</a>&nbsp;&nbsp;';
                                 $html.="</div>";                                                    
                             }
                             

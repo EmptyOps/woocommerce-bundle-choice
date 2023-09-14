@@ -308,7 +308,7 @@ class Term_Meta {
 	        if(empty($color)) {
 	        	$color = '#ffffff';			
 	        }			
-			$columns .= '<div style="height:48px;width:48px;background-color: '.$color.';"></div>';
+			$columns .= '<div style="height:48px;width:48px;background-color: '.esc_attr($color).';"></div>';
 
 		} elseif (in_array($column,array('image','image_text','dropdown_image','dropdown_image_only'))) {
 			$src='';
@@ -341,7 +341,7 @@ class Term_Meta {
         if (empty($limit)) {
         	$limit = wbc()->config->product_variations_configs()['sp_variations_swatches_cat_display_limit'];			
         }			
-		$columns .= '<div '.$limit.' ></div>';
+		$columns .= '<div '.esc_attr($limit).' ></div>';
 
 		return $columns;
 	}

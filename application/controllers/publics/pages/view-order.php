@@ -80,33 +80,34 @@ class View_Order {
           }
         
         $price=0;
-        $row="<!-- Created with Wordpress plugin - WooCommerce Product bundle choice --><tr>".
-            "<td class=\'eo_wbc_row\'>".
-              "<span class=\'eo_wbc_column-1\'>".
-                  wbc()->wc->eo_wbc_get_product($set[0][0])->get_image("thumbnail")."&nbsp;&nbsp;<p>".
-                  wbc()->wc->eo_wbc_get_product($set[0][0])->get_title().
-                  ($set[0][2]  ? "<br/>&nbsp; -&nbsp;".
-                    implode(',',wbc()->wc->eo_wbc_get_product_variation_attributes($set[0][2],(array)$set[0]['variation'])):'').
-                  "&nbsp;X&nbsp;{$set[0][1]}</p>";
-                    $price+=get_post_meta($set[0][2]?$set[0][2]:$set[0][0],'_price',TRUE)*$set[0][1];
-                              
-        if($set[1]){
-           $row.="</span><span class=\'eo_wbc_column-2\'>".
-                wbc()->wc->eo_wbc_get_product($set[1][0])->get_image("thumbnail").
-                "&nbsp;&nbsp;<p>".
-                wbc()->wc->eo_wbc_get_product($set[1][0])->get_title().
-                ($set[1][2]  ? "<br/>&nbsp; -&nbsp;".
-                  implode(',',wbc()->wc->eo_wbc_get_product_variation_attributes($set[1][2],(array)$set[1]['variation'])):'').
-                "&nbsp;X&nbsp;{$set[1][1]}</p>";
-            $price+=get_post_meta($set[1][2]?$set[1][2]:$set[1][0],'_price',TRUE)*$set[1][1];
+
+        $row = "<!-- Created with WordPress plugin - WooCommerce Product bundle choice --><tr>".
+           "<td class='eo_wbc_row'>".
+           "<span class='eo_wbc_column-1'>".
+               esc_html(wbc()->wc->eo_wbc_get_product($set[0][0])->get_image("thumbnail"))."&nbsp;&nbsp;<p>".
+               esc_html(wbc()->wc->eo_wbc_get_product($set[0][0])->get_title()).
+               esc_html(($set[0][2]  ? "<br/>&nbsp; -&nbsp;".
+                    implode(',',wbc()->wc->eo_wbc_get_product_variation_attributes($set[0][2],(array)$set[0]['variation'])):'')).
+               "&nbsp;X&nbsp;{$set[0][1]}</p>";
+            $price += get_post_meta($set[0][2] ? $set[0][2] : $set[0][0], '_price', true) * $set[0][1];
+
+        if ($set[1]) {
+           $row .= "</span><span class='eo_wbc_column-2'>".
+                   esc_html(wbc()->wc->eo_wbc_get_product($set[1][0])->get_image("thumbnail")).
+                   "&nbsp;&nbsp;<p>".
+                   esc_html(wbc()->wc->eo_wbc_get_product($set[1][0])->get_title()).
+                   esc_html(($set[1][2]  ? "<br/>&nbsp; -&nbsp;".
+                    implode(',',wbc()->wc->eo_wbc_get_product_variation_attributes($set[1][2],(array)$set[1]['variation'])):'')).
+                   "&nbsp;X&nbsp;{$set[1][1]}</p>";
+           $price += get_post_meta($set[1][2] ? $set[1][2] : $set[1][0], '_price', true) * $set[1][1];
         }
-        
-        $row.="</span>".
-            "</td>".
-              "<td style=\"min-width:auto;\">".
-                "<p>".__(wc_price($price),'woo-bundle-choice')."</p>".
-              "</td>".
-            "</tr>";
+
+        $row .= "</span>".
+                "</td>".
+                "<td style=\"min-width:auto;\">".
+                "<p>".esc_html(wc_price($price, 'woo-bundle-choice'))."</p>".
+                "</td>".
+                "</tr>";
 
         return $row;
     }

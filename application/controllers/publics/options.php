@@ -291,9 +291,12 @@ class Options extends \eo\wbc\controllers\publics\Controller {
 			$css_classes = array("{$type}-variable-wrapper");
 			$ribbon_color = get_term_meta( $attribute_object->attribute_id,'wbc_ribbon_color',true);
 
-			
+			// $data = sprintf( '<div class="ui segment">
+	  		//     <span class="ui ribbon label" style="background-color:%s;border-color:%s;color:white;">%s</span><span><ul class="ui mini images variable-items-wrapper %s" data-attribute_name="%s">%s</ul></span></div>',$ribbon_color,$ribbon_color,$attribute_object->attribute_label,trim( implode( ' ', array_unique( $css_classes ) ) ), esc_attr( wc_variation_attribute_name( $attribute ) ), $contents );
 			$data = sprintf( '<div class="ui segment">
-	  		    <span class="ui ribbon label" style="background-color:%s;border-color:%s;color:white;">%s</span><span><ul class="ui mini images variable-items-wrapper %s" data-attribute_name="%s">%s</ul></span></div>',$ribbon_color,$ribbon_color,$attribute_object->attribute_label,trim( implode( ' ', array_unique( $css_classes ) ) ), esc_attr( wc_variation_attribute_name( $attribute ) ), $contents );
+			   <span class="ui ribbon label" style="background-color:%s;border-color:%s;color:white;">%s</span><span><ul class="ui mini images variable-items-wrapper %s" data-attribute_name="%s">%s</ul></span></div>',
+			   esc_attr($ribbon_color), esc_attr($ribbon_color), esc_html($attribute_object->attribute_label), esc_attr(trim(implode(' ', array_unique($css_classes)))), esc_attr(wc_variation_attribute_name($attribute)), esc_html($contents) );
+
 		}
 		return apply_filters( 'wvs_variable_items_wrapper', $data, $contents, $type, $args, $saved_attribute );
 	}
@@ -422,14 +425,14 @@ class Options extends \eo\wbc\controllers\publics\Controller {
 					
 					foreach ( $terms as $term ) {
 						if ( in_array( $term->slug, $options ) ) {
-							echo '<option value="' . esc_attr( $term->slug ) . '" ' . selected( sanitize_title( $args[ 'selected' ] ), $term->slug, false ) . '>' . apply_filters( 'woocommerce_variation_option_name', $term->name ) . '</option>';
+							echo '<option value="' . esc_attr( $term->slug ) . '" ' . esc_attr(selected( sanitize_title( $args[ 'selected' ] ), $term->slug, false )) . '>' . apply_filters( 'woocommerce_variation_option_name', $term->name ) . '</option>';
 						}
 					}
 				} else {
 					foreach ( $options as $option ) {
 						// This handles < 2.4.0 bw compatibility where text attributes were not sanitized.
 						$selected = sanitize_title( $args[ 'selected' ] ) === $args[ 'selected' ] ? selected( $args[ 'selected' ], sanitize_title( $option ), false ) : selected( $args[ 'selected' ], $option, false );
-						echo '<option value="' . esc_attr( $option ) . '" ' . $selected . '>' . esc_html( apply_filters( 'woocommerce_variation_option_name', $option ) ) . '</option>';
+						echo '<option value="' . esc_attr( $option ) . '" ' . esc_attr($selected) . '>' . esc_html( apply_filters( 'woocommerce_variation_option_name', $option ) ) . '</option>';
 					}
 				}
 			}
@@ -698,7 +701,7 @@ class Options extends \eo\wbc\controllers\publics\Controller {
 							ob_start();
 							?>
 								<span id="wbc_variation_toggle" class="ui raised segment">
-									<?php _e($toggle_text); ?><i class="caret up icon" style="text-align: center;line-height: 1em;"></i>						
+									<?php esc_html_e($toggle_text); ?><i class="caret up icon" style="text-align: center;line-height: 1em;"></i>						
 								</span>
 							<?php
 							echo ob_get_clean();

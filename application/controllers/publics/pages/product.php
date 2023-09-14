@@ -171,7 +171,7 @@ class Product {
 
             if(!empty($second) and !empty($first) and ($id === $second_parent->get_id()) ) {                
                 //return $first->get_title()." <br/> ".$second->get_title();
-                return "<span class='wcp_preview_first_product_title'>".$first->get_title()." - ".wc_price($first->get_price())."</span><br/><span class='wcp_preview_second_product_title'>".$second->get_title()." - ". wc_price($second->get_price()).'</span>';
+                return "<span class='wcp_preview_first_product_title'>".esc_html($first->get_title())." - ".wc_price($first->get_price())."</span><br/><span class='wcp_preview_second_product_title'>".esc_html($second->get_title())." - ". wc_price($second->get_price()).'</span>';
             } else {
                 return $title;
             }
@@ -565,7 +565,7 @@ class Product {
 
                 add_action('woocommerce_after_add_to_cart_button',function(){                
                     // echo "<button href='#' id='eo_wbc_add_to_cart' class='single_add_to_cart_button button alt make_pair btn btn-default'>".get_option('eo_wbc_pair_text',__('Add to pair','woo-bundle-choice'))."</button>";
-                    echo "<button href='#' id='eo_wbc_add_to_cart' class='single_add_to_cart_button button alt make_pair btn btn-default'>".wbc()->options->get_option('configuration','label_make_pair',__('Add to pair','woo-bundle-choice'))."</button>";
+                    echo "<button href='#' id='eo_wbc_add_to_cart' class='single_add_to_cart_button button alt make_pair btn btn-default'>".esc_html(wbc()->options->get_option('configuration','label_make_pair',__('Add to pair','woo-bundle-choice')))."</button>";
                 });
             }
             //Add css to the head

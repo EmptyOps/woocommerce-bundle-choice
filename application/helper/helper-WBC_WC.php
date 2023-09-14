@@ -106,7 +106,7 @@ class WBC_WC {
                 $term_link = get_term_link( $term, $taxonomy ); 
                 if ( is_wp_error( $term_link ) ) $term_link = '';
 
-                $terms_html[] = '<a href="' . esc_url( $term_link ) . '" rel="tag" class="' . $term->slug . '">' . $term->name . '</a>';
+                $terms_html[] = '<a href="' . esc_url( $term_link ) . '" rel="tag" class="' . esc_attr($term->slug) . '">' . esc_html($term->name) . '</a>';
             }
         }
 
@@ -127,7 +127,7 @@ class WBC_WC {
 
         } else {
             
-            return '<span class="subcategories-category-id-' . $id . '">' . implode( ', ', $terms_html ) . '</span>';
+            return '<span class="subcategories-category-id-' . esc_attr($id) . '">' . esc_html(implode( ', ', $terms_html )) . '</span>';
         }
     }
 
@@ -574,9 +574,9 @@ class WBC_WC {
 
                 $option_list[$base->term_id] = $base->slug;
             } elseif( $format == 'detailed_dropdown' ) {
-                $option_list.='<div class="item" data-value="'.$base->term_id.'" data-sp_eid="'.$separator.'prod_cat'.$separator.$base->term_id.'">'.str_replace("'","\'",$base->name).'</div>'.$this->get_productCats($base->slug, $format, $sp_eid_type_value);
+                $option_list.='<div class="item" data-value="'. esc_attr($base->term_id) .'" data-sp_eid="'. esc_attr($separator) .'prod_cat'.esc_attr($separator).esc_attr($base->term_id).'">'.esc_html(str_replace("'","\'",$base->name)).'</div>'.$this->get_productCats($base->slug, $format, $sp_eid_type_value);
             } elseif( $format == 'detailed' || $format == 'detailed_slug') {
-                $option_list[$base->term_id] = array('label'=> ( $format == 'detailed_slug' ? str_replace("'","\'",$base->name).'('.$base->slug.')' : str_replace("'","\'",$base->name) ), 'attr'=>' data-sp_eid="'.$separator.$sp_eid_type_value.$separator.$base->term_id.$separator.'" ', $format);
+                $option_list[$base->term_id] = array('label'=> esc_html(( $format == 'detailed_slug' ? str_replace("'","\'",$base->name).'('.$base->slug.')' : str_replace("'","\'",$base->name) )), 'attr'=>' data-sp_eid="'.esc_attr($separator).esc_attr($sp_eid_type_value).esc_attr($separator).esc_attr($base->term_id).esc_attr($separator).'" ', $format);
 
                 $option_list = array_replace($option_list, self::get_productCats($base->slug, $format, $sp_eid_type_value)); //array_merge($option_list, self::get_productCats($base->slug, $format));
 
@@ -591,7 +591,12 @@ class WBC_WC {
                     $option_list[$base->term_id] = array('label'=>/*str_replace("'","\'",*/$base->name/*)*/, 'slug'=>$base->slug, 'sp_eid'=>$separator.$sp_eid_type_value.$separator.$base->term_id, 'parent_slug'=>$base->slug, 'parent_sp_eid'=>$separator.$sp_eid_type_value.$separator.$base->term_id);
                 } else {
 
-                    $option_list[$base->term_id] = array('attr'=>' data-sp_eid="'.$separator.$sp_eid_type_value.$separator.$base->term_id.'" ', 'label'=>str_replace("'","\'",$base->name), 'slug'=>$base->slug);
+                    $option_list[$base->term_id] = array(
+                        'attr' => ' data-sp_eid="' . esc_attr($separator) . esc_attr($sp_eid_type_value) . esc_attr($separator) . esc_attr($base->term_id) . '" ',
+                        'label' => esc_html(str_replace("'", "\'", $base->name)),
+                        'slug' => $base->slug
+                    );
+
                 }
 
                 $option_list = array_replace($option_list, self::get_productCats($base->slug, $format, $sp_eid_type_value,$is_return_data_only)); //array_merge($option_list, self::get_productCats($base->slug, $format));
@@ -614,7 +619,7 @@ class WBC_WC {
 
             $option_list=array();    
         } elseif( $format == 'detailed_dropdown' ) {
-            $option_list='<div class="divider"></div><div class="header">'.__('Attributes','diamond-api-integrator').'</div>';
+            $option_list='<div class="divider"></div><div class="header">'.esc_html__('Attributes','diamond-api-integrator').'</div>';
         } elseif( $format == 'detailed' ) {
             $option_list=array();
         } elseif( $format == 'detailed_vattr' ) {
@@ -636,18 +641,26 @@ class WBC_WC {
                     $option_list[$attribute->attribute_id] = 'pa_'.$attribute->attribute_name.'';
                 } elseif( $format == 'detailed_dropdown' ) {
 
-                    $option_list.='<div class="item" data-value="pa_'.$attribute->attribute_name.'" data-sp_eid="'.$separator.'attr'.$separator.$attribute->attribute_id.'">'.$attribute->attribute_label.'</div>';
+                    $option_list .= '<div class="item" data-value="pa_' . esc_attr($attribute->attribute_name) . '" data-sp_eid="' . esc_attr($separator) . 'attr' . esc_attr($separator) . esc_attr($attribute->attribute_id) . '">' . esc_html($attribute->attribute_label) . '</div>';
 
                 } elseif( $format == 'detailed' ) {
 
-                    $option_list['pa_'.$attribute->attribute_name] = array('label'=>$attribute->attribute_label, 'attr'=>'data-sp_eid="'.$separator.'attr'.$separator.$attribute->attribute_id.$separator.'" ', $format);  
+                    $option_list['pa_' . $attribute->attribute_name] = array(
+                        'label' => esc_html($attribute->attribute_label),
+                        'attr' => 'data-sp_eid="' . esc_attr($separator) . 'attr' . esc_attr($separator) . esc_attr($attribute->attribute_id) . esc_attr($separator) . '" ',
+                        $format
+                    ); 
 
                 } elseif( $format == 'detailed_vattr' ) {
 
                     // temp comment (run on api demo) @s
                     // $option_list['pa_'.$attribute->attribute_name] = array('label'=>$attribute->attribute_label, 'attr'=>'data-sp_eid="'.$separator.'attr'.$separator.$attribute->attribute_id.'" ', $format);  
 
-                    $option_list['pa_'.$attribute->attribute_name] = array('label'=>$attribute->attribute_label.'(use for variations)', 'attr'=>'data-sp_eid="'.$separator.'attr'.$separator.$attribute->attribute_id.$separator.'vattr'.$separator.'" ', $format);  
+                    $option_list['pa_' . $attribute->attribute_name] = array(
+                        'label' => esc_html($attribute->attribute_label . '(use for variations)'),
+                        'attr' => 'data-sp_eid="' . esc_attr($separator) . 'attr' . esc_attr($separator) . esc_attr($attribute->attribute_id) . esc_attr($separator) . 'vattr' . esc_attr($separator) . '" ',
+                        $format
+                    );  
 
                 } elseif( $format == 'id_and_title' ) {
                     $option_list[$attribute->attribute_id] = $attribute->attribute_label;
@@ -670,7 +683,11 @@ class WBC_WC {
 
                         } else {
 
-                            $option_list[$term->term_taxonomy_id] = array('attr'=>'data-sp_eid="'.$separator.'attr_opt'.$separator./*$attribute->attribute_id*/$term->term_taxonomy_id.$separator.$separator.$term->term_id.$separator.'" ', 'label'=>$term->name, 'slug'=>$term->slug);  
+                            $option_list[$term->term_taxonomy_id] = array(
+                                'attr' => 'data-sp_eid="' . esc_attr($separator) . 'attr_opt' . esc_attr($separator) . /*$attribute->attribute_id*/ esc_attr($term->term_taxonomy_id) . esc_attr($separator) . esc_attr($separator) . esc_attr($term->term_id) . esc_attr($separator) . '" ',
+                                'label' => esc_html($term->name),
+                                'slug' => $term->slug
+                            );
                         }
                     }
                 } elseif( $format == 'detailed_sp_eid' ) {
@@ -699,7 +716,11 @@ class WBC_WC {
                 // $taxonomies.="<div class='item' data-value='".$term->term_taxonomy_id."'>".$term->name."</div>";   
                 // commented and changed on 31-01-2023
                 // $opts_arr[$term->term_taxonomy_id] = array( 'label'=>$term->name , 'attr'=>'data-sp_eid="'.$separator.'attr'.$separator.$term->term_taxonomy_id.' " ');  
-                $opts_arr[$term->term_taxonomy_id] = array( 'label'=>$term->name , 'attr'=>'data-sp_eid="'.$separator.'attr'.$separator.$term->term_taxonomy_id.$separator.'" ');  
+                $opts_arr[$term->term_taxonomy_id] = array(
+                    'label' => esc_html($term->name),
+                    'attr' => 'data-sp_eid="' . esc_attr($separator) . 'attr' . esc_attr($separator) . esc_attr($term->term_taxonomy_id) . esc_attr($separator) . '" '
+                );
+
             }
         }
         // return $taxonomies;
@@ -728,7 +749,7 @@ class WBC_WC {
             }
 
 
-            $opts_arr[$base->term_id] = array( 'label'=>$prefix.$base->name.$parent_name, 'attr'=>' data-sp_eid="'.$separator.'prod_cat'.$separator.$base->term_id.' " ', );
+            $opts_arr[$base->term_id] = array( 'label'=>$prefix.$base->name.$parent_name, 'attr'=>' data-sp_eid="'.esc_attr($separator.'prod_cat'.$separator.$base->term_id).' " ', );
             $opts_arr = self::instance()->eo_wbc_prime_category($base->slug, $prefix.'-',$opts_arr);
         }
 
