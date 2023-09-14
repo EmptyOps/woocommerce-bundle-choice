@@ -56,7 +56,7 @@ class Eowbc_Theme_Adaption extends Eowbc_Model {
 							// 	);
 
 							$row[] = array( 'val' => $rk );
-							$row[] = array( 'val' =>  "<a href=\"".wbc()->common->site_url($rv['test_slug'], 'thadc=1&test_sec_key='.$rk)."\" target=\"_blank\">Check</a>" /*,'link'=>1,'edit_id'=>$rk*/ );
+							$row[] = array('val' => "<a href=\"" . esc_url(wbc()->common->site_url($rv['test_slug'], 'thadc=1&test_sec_key=' . $rk)) . "\" target=\"_blank\">Check</a>" /*,'link'=>1,'edit_id'=>$rk*/ );
 							$row[] = array( 'val' => 'Failing' );
 
 							$body[] = $row;
@@ -142,7 +142,7 @@ class Eowbc_Theme_Adaption extends Eowbc_Model {
 									else {									
 										$val = wbc()->common->dropdownSelectedvalueText($tab["form"][$rvk], $rvv);
 										$val1 = wbc()->common->dropdownSelectedvalueText($tab["form"]["eo_wbc_first_category_range"], $rv["eo_wbc_first_category_range"]);
-										$row[] = array( 'val' =>  "Range from <strong>".(!is_array($val)?$val:$val["label"])."</strong> to <strong>".(!is_array($val1)?$val1:$val1["label"])."</strong>" ,'link'=>1,'edit_id'=>$rk);
+										$row[] = array( 'val' =>  "Range from <strong>".esc_html(!is_array($val)?$val:$val["label"])."</strong> to <strong>".esc_html(!is_array($val1)?$val1:$val1["label"])."</strong>" ,'link'=>1,'edit_id'=>$rk);
 									}	
 								}
 								else if( $rvk == "eo_wbc_second_category" ) {
@@ -159,7 +159,7 @@ class Eowbc_Theme_Adaption extends Eowbc_Model {
 									else {
 										$val = wbc()->common->dropdownSelectedvalueText($tab["form"][$rvk], $rvv);
 										$val1 = wbc()->common->dropdownSelectedvalueText($tab["form"]["eo_wbc_second_category_range"], $rv["eo_wbc_second_category_range"]);
-										$row[] = array( 'val' => "Range from <strong>".(!is_array($val)?$val:$val["label"])."</strong> to <strong>".(!is_array($val1)?$val1:$val1["label"])."</strong>" );
+										$row[] = array( 'val' => "Range from <strong>".esc_html(!is_array($val)?$val:$val["label"])."</strong> to <strong>".esc_html(!is_array($val1)?$val1:$val1["label"])."</strong>" );
 									}	
 								}
 								else {
