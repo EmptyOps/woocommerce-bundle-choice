@@ -43,7 +43,8 @@ if(empty($image['extra_params_org']['type']) || $image['extra_params_org']['type
                 'child' => array(
                     array(
                         'type' => 'video',
-                        'attr' => array('preload'=>'auto', 'controlsList'=>'nodownload','autoplay'=>'','muted' => '','loop' => ''),
+
+                        'attr' => array('preload'=>'auto', 'controlsList'=>'nodownload','autoplay'=>'','muted' => '','loop' => ''/*,'poster'=>'http://localhost/demo/wp-content/uploads/2023/02/giphy-1.gif'*/),
                         'preHTML'=>'Your browser does not support the video tag.',
                         'child' => array(
                             array(

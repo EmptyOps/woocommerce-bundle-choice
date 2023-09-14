@@ -1795,7 +1795,9 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
         console.log('data.select creat');
         console.log(element);
 
-        data.select = jQuery(element).siblings('select.woo-variation-raw-select');
+        // -- data.select 28-08-2023 @a
+        // data.select = jQuery(element).siblings('select.woo-variation-raw-select');
+        data.select = jQuery(element).parent().find('select.woo-variation-raw-select');
         data.selected = '';
         data.options = data.select.find('option');
         data.disabled = data.select.find('option:disabled');
@@ -1898,9 +1900,10 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
               if (data.attribute_value === data.selected) {
                 
                 console.log("process_attribute_template selected in if if product id="+ _this./*#*/data_private.product_id +" type="+ type);
-                console.log(inner_element);
 
                 jQuery(inner_element).addClass('selected');
+                console.log(jQuery(inner_element).attr('class'));
+                console.log(inner_element);
                 
                 // console.log("process_attribute_template after selected in if if");
 
@@ -2024,8 +2027,8 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
             // do your magic here...
          }); */
         
-        // console.log("swatches on_change_listener after if");
-        // console.log(_this.$base_element);
+        console.log("swatches on_change_listener after if");
+        console.log(_this.$base_element);
 
         _this.$base_element.off('woocommerce_variation_has_changed');
         _this.$base_element.on('woocommerce_variation_has_changed', function (event) {
@@ -2192,9 +2195,15 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
             console.log('vs [on_change_listener] 1');
             console.log(element);
 
-          _this./*#*/process_attribute_template_private(type, element, 'change', true);  
+            // NOTE: since now we are trying to move towards the micro services like architecture, with the attempts like below loop so eventually this very on_change_listener_private function call should also be refactored and instead of monolithic structure of calling it for all the types and maintaing entire monolitihic chain we should simply call it maybe once only. 
+            // _this./*#*/process_attribute_template_private(type, element, 'change', true);  
+            _this.$base_element.find('ul.variable-items-wrapper').each(function (i, element_inner) {
+                
+                var type_inner = jQuery(element_inner).data('type');
 
-          _this./*#*/on_change_private(type, element, event);
+                _this./*#*/process_attribute_template_private(type_inner, element_inner, 'change', true);  
+            });
+            _this./*#*/on_change_private(type, element, event);
 
         });
 
@@ -2987,8 +2996,7 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
             _this./*#*/data_private.product_variations = _this./*#*/$variations_form_private.data('product_simple') || [];      
         }
 
-        console.log("gim [preprocess] _this./*#*/data_private.product_variations");
-        console.log(_this./*#*/data_private.product_variations);
+        _this./*#*/data_private.is_ajax_variation =  _this./*#*/data_private.product_variations.length < 1;
 
         // _this.#$additional_container/*base_element*/.addClass('spui-wbc-gallery_images-loaded');
         _this./*#*/$base_container_private.addClass('spui-wbc-gallery_images-loaded');
@@ -3149,20 +3157,30 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
          // console.log( data.product_variations ); 
 
         data.types = [];
-        jQuery( data.product_variations ).each(function (i, variation) {
+        if(!_this./*#*/data_private.is_ajax_variation) {
 
-           // -- variation_gallery_images -> gallery_images data
+            jQuery( data.product_variations ).each(function (i, variation) {
 
-          jQuery(variation.variation_gallery_images).each(function (index,image) {
-           
-            // -- data.types -> gallery_images types(images,video,360)
+               // -- variation_gallery_images -> gallery_images data
 
-            data.types.push(image.extra_params_org.type);
-          });
+              jQuery(variation.variation_gallery_images).each(function (index,image) {
+               
+                // -- data.types -> gallery_images types(images,video,360)
 
-          return false;
-        });
-        
+                data.types.push(image.extra_params_org.type);
+              });
+
+              return false;
+            });
+            
+        }else{
+            
+            // ACTIVE_TODO Temp Below if is temporary and as soon as we refectory the loading sequence for something such to ensure that we have the types available here even for the ajax variation are enabled than at that time just remove the below hardcoded section and use something like in above if.
+            data.types.push('image');
+            data.types.push('video');
+        }
+
+
         return data;
     
     }
@@ -3643,6 +3661,8 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
         _this./*#*/variation_change_listener_private(type);
  
         _this./*#*/reset_variation_listener_private(type);
+
+        _this./*#*/swatches_more_click_listener_private(type);
  
     }
  
@@ -3763,6 +3783,10 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
         console.log(_this./*#*/$variations_form_private);
 
         _this./*#*/$variations_form_private.on('show_variation', function (event, variation) {
+            
+            console.log("gim [variation_change_listener] show_variation");
+            // console.log(_this.#$variations_form);
+            console.log(variation);
 
            // -- aya only is_category_page ni if condition mari se 02-11-2022 @a --
            if(window.document.splugins.common.is_category_page) {
@@ -3777,6 +3801,21 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
            }
 
            _this./*#*/on_variation_change_private(event, variation);
+         
+        });
+ 
+    }
+
+    /*#*/swatches_more_click_listener_private(type) {
+
+        var _this = this;
+        console.log('gim [swatches_more_click_listener_private]');
+        console.log(_this./*#*/$variations_form_private.find('.spui-wbc-swatches-variable-item-more'));
+
+        jQuery(_this./*#*/$variations_form_private.find('.spui-wbc-swatches-variable-item-more')).on('click', function () {
+
+            console.log('gim [swatches_more_click_listener_private] click');
+           _this./*#*/on_swatches_more_click_private(type,this);
          
         });
  
@@ -3807,6 +3846,9 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
 
         url = url +'?variation_id='+ variation.variation_id;
 
+        console.log('create_variation_url_private_11');
+        console.log(url);
+
         // ACTIVE_TODO as soon as required we need to enabled url support if applicable for simple type product 
         //     ACTIVE_TODO very soon we should also use here the php layer router class Query perams function layer instant of directly using hard coded_attr_checklist etc formate  
         var attributeSlug_global = '';
@@ -3821,6 +3863,9 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
         url = window.document.splugins.common.updateURLParameter(url, '_attribute', attributeSlug_global);
         
         _this./*#*/$zoom_container_private.data('sp_variation_url',url);
+        
+        console.log('create_variation_url_private_22');
+        console.log(url);
 
         return url;
     
@@ -4045,6 +4090,15 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
      
     }
  
+    /*#*/on_swatches_more_click_private(type,element) {
+
+        console.log('gim [on_swatches_more_click_private]');
+        
+        var _this = this;
+
+        _this.swatches_more_click_private(type,element);
+    }
+
     /*#*/slider_thumb_click_private(type,element){
 
         // console.log("gim [slider_thumb_click]");
@@ -4286,6 +4340,15 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
         _this./*#*/child_obj_private = child_obj;
 
 
+    }
+
+    /*#*/swatches_more_click_private(type,element) {
+
+        console.log('gim [swatches_more_click_private]');
+        
+        var _this = this;
+
+        window.location.href = _this./*#*/get_loop_box_anchor_private().attr('href');
     }
 
     get_configs() {
@@ -4919,6 +4982,7 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
             jQuery(images).each(function (index_inner,image) {
                 
                 console.log('gim_feed zoom_area_hover_in each_loop');
+
                 console.log(image.extra_params_org.type);
 
                 image.index = index_inner;

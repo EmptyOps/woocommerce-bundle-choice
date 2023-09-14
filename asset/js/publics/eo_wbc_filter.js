@@ -1661,6 +1661,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
 					jQuery(filter_container).find('[data-filter="'+"<?php echo $term->slug; ?>"+'"]:not(.none_editable)').off();
 					// jQuery(filter_container).find('[data-filter="'+"<?php echo $term->slug; ?>"+'"]:not(.none_editable)').on('click',function(e){
+					console.log('input_type_icon_click_listener() 011');
 					console.log(filter_container);
 					console.log('[data-filter="'+ term_slug +'"]');
 					jQuery(filter_container).find('[data-filter="'+ term_slug +'"]:not(.none_editable)').on('click',function(e){
@@ -2684,6 +2685,8 @@ if( typeof(eo_wbc_object) != 'undefined'){
 
 	window.document.splugins.wbc.pagination.core = function( configs ) {
 
+		console.log('[pagination]');
+
 	    var _this = this; 
 
 		_this.configs = jQuery.extend({}, {}/*default configs*/, configs);	
@@ -2692,7 +2695,7 @@ if( typeof(eo_wbc_object) != 'undefined'){
 
 		var init_private = function(event) {
 
-			console.log('pagination_init');
+			console.log('pagination [init_private]');
 			// ACTIVE_TODO whenever in future if required  to run compatibility check during run time means after the base container selectore is defined than we can call compatibility layers additionaly from here 
 	    	var base_container_selector_callback = null;
 			var stat_object = window.document.splugins.events.api.apply_all_observer_filters( 'pagination', 'base_container_selector',{type:_this.$base_container},base_container_selector_callback);  
@@ -2718,8 +2721,12 @@ if( typeof(eo_wbc_object) != 'undefined'){
 
 		var set_pagination_html_private = function(data){
 			
+
+			console.log('pagination [set_pagination_html_private]');
+
 			console.log('set_pagination_html_private()');
 			console.log('.woocommerce-pagination,.pagination'+compatability('pagination_link_selector',null,null));
+
 			// -- aa function mathi code pagination sub module na module ma move thase ane baki no jo applicable hoy to aa module ma rese. Pan aa point execute karvi te pela niche point confirm karvano rese. -- to a & -- to h INVALID 
 			/*ACTIVE_TODO_OC_START
 				-- need to confirm ke aa call diamond api mathi j ave se ne ane te jo no male to ani calling sycuance hirenbhai sathe confirm karvi. -- to a
@@ -2730,8 +2737,6 @@ if( typeof(eo_wbc_object) != 'undefined'){
 			ACTIVE_TODO_OC_END*/
 			if(jQuery('.woocommerce-pagination,.pagination'+compatability('pagination_link_selector',null,null),jQuery(data)).html()!==undefined) {
 
-				console.log('set_pagination_html_private() if');
-
 				if(jQuery('.woocommerce-pagination,.pagination'+compatability('pagination_link_selector',null,null)).length>0){
 
 					console.log('set_pagination_html_private() if if');
@@ -2740,8 +2745,6 @@ if( typeof(eo_wbc_object) != 'undefined'){
 
 					jQuery(".woocommerce-pagination,.pagination"+compatability('pagination_link_selector',null,null)).html(jQuery('.woocommerce-pagination,.pagination'+compatability('pagination_link_selector',null,null),jQuery(data)).html());
 				} else {
-
-					console.log('set_pagination_html_private() if else');
 
 					/*ACTIVE_TODO_OC_START
 					@d once all the pagination related layers brought to this function, we need to check if the below incomplete implementation is completely implemented anywhere in our repo -- to d 
@@ -2769,8 +2772,8 @@ if( typeof(eo_wbc_object) != 'undefined'){
 		}
 		
 		var on_click_listener = function(e){
-			
-			console.log('pagination on_click_listener()');
+
+			console.log('pagination [on_click_listener]');
 
 			/*ACTIVE_TODO_OC_START
 			NOTE : it will bind to all kind of such on_click events of pagination, it will be private but it may broadcast notification with a callback which js layers of like tableview and so on can call when they recieve their own click event or they can simply call below on_click function". so it is private function.
@@ -2873,6 +2876,7 @@ if( typeof(eo_wbc_object) != 'undefined'){
 				}	
 			}		
 			else {
+
 				console.log('pagination click else');
 				// jQuery("[name='paged']").val(jQuery(this).text());
 				window.document.splugins.wbc.pagination.api.set_page_number( window.document.splugins.wbc.pagination.api.get_page_number(jQuery(element)));
@@ -3764,7 +3768,7 @@ if( typeof(eo_wbc_object) != 'undefined'){
 				      console.log('filter filter_set_click');
 				      console.log(_this.configs.filter_setting_alternate_mobile);
 				      // <?php if(wp_is_mobile() and !wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile')): ?>
-				      if((window.document.splugins.common.is_mobile) && !(_this.configs.filter_setting_alternate_mobile)){
+				      if( (eo_wbc_object.wbc_is_mobile_by_page_sections == 1) && (window.document.splugins.common.is_mobile) && !(_this.configs.filter_setting_alternate_mobile)){
 
 				      	console.log('filter filter_set_click 1');
 				      	console.log(element);
@@ -3782,7 +3786,7 @@ if( typeof(eo_wbc_object) != 'undefined'){
 				      }
 
 				      // <?php if(wp_is_mobile() and wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile')): ?>
-				      if((window.document.splugins.common.is_mobile) && (_this.configs.filter_setting_alternate_mobile)){
+				      if( (eo_wbc_object.wbc_is_mobile_by_page_sections == 1) && (window.document.splugins.common.is_mobile) && (_this.configs.filter_setting_alternate_mobile)){
 
 				      	console.log('filter filter_set_click 2');
 				      	console.log(element);

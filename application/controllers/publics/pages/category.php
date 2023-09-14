@@ -400,6 +400,11 @@ class Category {
             )
         );
 
+        if(!empty(wbc()->sanitize->get('__mapped_attribute'))) {
+            
+            $external_url = $external_url."&__mapped_attribute=".wbc()->sanitize->get('__mapped_attribute');            
+        }
+        
         if(strpos($url,'?')!==false) {
             return $url."&".$external_url;
         } else {
