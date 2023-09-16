@@ -1255,7 +1255,7 @@ console.log('is_shop_css');
 	<?php 
 	if(is_product() && !has_action('woocommerce_before_variations_form')) {
 	?>
-		// jQuery(".variations_form").before('<span id="wbc_variation_toggle" class="ui raised segment"><?php _e($toggle_text); ?><i class="caret up icon" style="text-align: center;line-height: 1em;"></i></span>');	
+		// jQuery(".variations_form").before('<span id="wbc_variation_toggle" class="ui raised segment"><?php //_e($toggle_text); ?><i class="caret up icon" style="text-align: center;line-height: 1em;"></i></span>');	
 
 	<?php } ?>
 	
