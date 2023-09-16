@@ -1255,7 +1255,7 @@ console.log('is_shop_css');
 	<?php 
 	if(is_product() && !has_action('woocommerce_before_variations_form')) {
 	?>
-		// jQuery(".variations_form").before('<span id="wbc_variation_toggle" class="ui raised segment"><?php _e($toggle_text); ?><i class="caret up icon" style="text-align: center;line-height: 1em;"></i></span>');	
+		// jQuery(".variations_form").before('<span id="wbc_variation_toggle" class="ui raised segment"><?php //_e($toggle_text); ?><i class="caret up icon" style="text-align: center;line-height: 1em;"></i></span>');	
 
 	<?php } ?>
 	
@@ -1594,6 +1594,11 @@ $bg_hover_color = wbc()->options->get_option('tiny_features',$spui_is_product_ca
 	.ui .button-variable-item:hover{
 		background-color: <?php _e($bg_hover_color); ?>;
 		color: <?php _e($font_hover_color); ?>;	
+	}
+	
+/*	added 11-09-2023 @a*/
+	.hide{
+		display: none !important;
 	}
 </style>
 <script>

@@ -863,8 +863,12 @@ class Product {
                     return $url;
                 }
                 
-                return header("Location: {$url}");
-                wp_die();
+                // changed on 08-09-2023
+                // return header("Location: {$url}");
+                // wp_die();
+                header("Location: {$url}");
+                echo '<script type="text/javascript"> window.location.href = "'. $url .'"; </script>';
+                return;
                 //wp_safe_redirect($url ,301 );               
             } else {
                 
