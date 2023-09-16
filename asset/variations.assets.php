@@ -1678,7 +1678,7 @@ if(is_product()) {
 				    display: none !important;
 				}
 
-				body form table.variations tbody td .spui-wbc-swatches-variable-items-wrapper-<?php echo $_attribute_slug ?>{
+				body form table.variations tbody td ul.spui-wbc-swatches-variable-items-wrapper-<?php echo $_attribute_slug ?>{
 					display: none !important;
 				}
 			</style>
