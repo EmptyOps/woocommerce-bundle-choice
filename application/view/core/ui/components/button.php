@@ -8,5 +8,5 @@
 	name="<?php !empty($name) ? esc_attr_e($name) : ''; ?>"
 	style="<?php !empty($style) ? esc_attr_e($style) : ''; ?>"
 >
-	<?php echo esc_html($label); ?>		
+	<?php esc_html_e($label); ?>		
 </div>
