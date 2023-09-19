@@ -94,7 +94,8 @@ class SP_WBC_Variations extends SP_Variations {
 				// ACTIVE_TODO_OC_START
 				// ACTIVE_TODO temp. below value is temparary and may be we simply need to keep it to 30 which is less than default of woo which is 50. 
 				// ACTIVE_TODO_OC_END
-				$int = 100;
+				// $int = 100;
+				$int = 200;
 
 				return $int;
 
