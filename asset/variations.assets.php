@@ -83,10 +83,10 @@ if( is_product() ) {
         }
 
        <?php if(wbc()->options->get_option('tiny_features','tiny_features_disabled_attribute_style') == 'blur_with_cross'){ ?>
-       .spui-wbc-swatches-variable-item.disabled .variable-item-span{
+       .spui-wbc-swatches-variable-item.disabled{
    		opacity: .8;
 	}	
-	.spui-wbc-swatches-variable-item.disabled .variable-item-span::before {
+	.spui-wbc-swatches-variable-item.disabled::before {
 		position: absolute;
 		content: " " !important;
 		width: 100%;
@@ -108,9 +108,10 @@ if( is_product() ) {
 		pointer-events: none;
 		cursor: not-allowed;
 		transform: rotate(45deg);
+		z-index: 1;
 	}
 
-	.spui-wbc-swatches-variable-item.disabled .variable-item-span::after {
+	.spui-wbc-swatches-variable-item.disabled::after {
 		position: absolute;
 		content: " " !important;
 		width: 100%;
@@ -132,9 +133,10 @@ if( is_product() ) {
 		pointer-events: none;
 		cursor: not-allowed;
 		transform: rotate(-45deg);
+		z-index: 1;
 	}
        <?php }elseif(wbc()->options->get_option('tiny_features','tiny_features_disabled_attribute_style') == 'blur_without_cross'){ ?>
-	.spui-wbc-swatches-variable-item.disabled .variable-item-span{
+	.spui-wbc-swatches-variable-item.disabled{
    		opacity: .3;
 	}
        <?php }elseif(wbc()->options->get_option('tiny_features','tiny_features_disabled_attribute_style') == 'hide'){ ?>

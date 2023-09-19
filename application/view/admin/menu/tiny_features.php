@@ -8,7 +8,7 @@ wbc()->load->model('category-attribute');
 $shop_tab_is_disabled = false;
 $shop_tab_label_class = array();
 $shop_tab_container_class = array();
-if(wbc()->options->get_option('tiny_features','tiny_features_unlock_swatches_shop_page') != 1) {
+if(wbc()->options->get_option('tiny_features','tiny_features_unlock_swatches_shop_page') != 'tiny_features_unlock_swatches_shop_page') {
 	$shop_tab_is_disabled = true;
 	$shop_tab_label_class = array('lock');
 	$shop_tab_container_class = array('grey');
@@ -714,7 +714,7 @@ $form['data'] = array(
 					'container_class'=>array('black','hide'),											
 					'sanitize'=>'sanitize_text_field',
 					'value'=>array(wbc()->options->get_option('tiny_features','tiny_features_unlock_swatches_shop_page')),
-					'options'=>array('1'=>' '),
+					'options'=>array('tiny_features_unlock_swatches_shop_page'=>' '),
 					'is_id_as_name'=>true,
 					'class'=>array(''),
 					'attr'=>array(''),
@@ -744,7 +744,7 @@ $form['data'] = array(
 				'tiny_features_unlock_swatches_whatsapp_link'=>array(
 					'label'=>'Click here to Contact Through WhatsApp',
 					'type'=>'link',					
-					'attr'=>array("href='https://api.whatsapp.com/send/?phone=918347408752&text=I%20want%20to%20unlock%20the%20variation%20swatches%20for%20the%20shop%2Fcategory%20%20page.%20The%20woo%20choice%20plugin%20is%20already%20installed%20on%20my%20WordPress%20admin%20panel%20and%20I%20am%20sending%20this%20msg%20to%20unlock%20this%20feature.&type=phone_number&app_absent=0'", "target='blank'"),
+					'attr'=>array("href='https://api.whatsapp.com/send/?phone=918347408752&text=I%20want%20to%20unlock%20the%20variation%20swatches%20for%20the%20shop%2Fcategory%20%20pages.%20The%20BUNDLOICE%28formerly+Woo+Choice+Plugin%29%20is%20already%20installed%20on%20my%20WordPress%20admin%20panel%20and%20I%20am%20sending%20this%20message%20to%20unlock%20this%20feature.&type=phone_number&app_absent=0'", "target='blank'"),
 					'class'=>array('secondary'),
 					// 'visible_info'=>array( 'label'=>'Please visit at '.site_url(get_option('woocommerce_permalinks')['category_base'].'eo_diamond_shape_cat/'),
 					// 	'type'=>'visible_info',
@@ -1692,6 +1692,9 @@ wbc()->load->asset('js','admin/tiny-feature/specification');
 
 jQuery(document).ready(function(){
 
+	// -- niche no js code pro feture na lock mate no se
+	jQuery('.lock').append('<i class="fa-solid fa-lock" style="color: #ff0000; padding-left: 6px;"></i>');
+
 	// -- aa bounus feture na side bar nu html se, aa html akhu string ma pass karelu se pasi append karelu se karnke nakar form buider ma aa html banavu pade atle - ani html file 154.1 na task ma se @a
 	var options_ui_video_section = '<style>'+
 	'    .spui-admin-custum-container {'+
@@ -1938,11 +1941,6 @@ jQuery(document).ready(function(){
 		
 
 	jQuery('#eowbc_tiny_features').append(options_ui_video_section);
-
-
-	// -- niche no js code pro feture na lock mate no se
-	jQuery('.lock').append('<i class="fa-solid fa-lock" style="color: #ff0000; padding-left: 6px;"></i>');
-
 
 });
 
