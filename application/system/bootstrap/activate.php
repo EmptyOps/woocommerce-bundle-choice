@@ -124,6 +124,7 @@ class Activate {
             
             if( !isset(get_page_by_path('design-your-own-ring')->ID) ) {
 
+
             	$post_content='<div class="ui inverted segment" style="margin: auto; !important">
 	                            <div class="ui active inverted fluid placeholder" style="margin: auto; !important">
 	                                 <div class="rectangular">
