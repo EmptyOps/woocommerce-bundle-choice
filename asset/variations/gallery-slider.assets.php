@@ -181,14 +181,14 @@
                     overflow-x: scroll;
                     overflow-y: hidden;
                     white-space: nowrap;
-                    display: inline-block;
+                    display: block;
         }
             ul.sp-variations-gallery-images-slider-loop.splide_slider_container-loop.exzoom_img_ul.splide__list::-webkit-scrollbar {
                 display: none ;
         } 
     
             body div#slider1 .splide__list li {
-            display: inline-block !important;
+            display: inline-flex; !important;
             width: 20% !important;
             
         }
