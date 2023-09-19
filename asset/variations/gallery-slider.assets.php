@@ -190,7 +190,7 @@
             body div#slider1 .splide__list li {
             display: inline-block !important;
             width: 20% !important;
-            margin: 0 3 !important;
+            
         }
 
 
