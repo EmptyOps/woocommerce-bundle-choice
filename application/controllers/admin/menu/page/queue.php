@@ -121,7 +121,7 @@ if ( ! class_exists( 'Queue' ) ) {
 						'sp_queue_reset_link___'.$sbkey=>array(
 							'label'=>'Reset',
 							'type'=>'link',
-							'attr'=>array("href='".admin_url('admin.php?page='.$plugin_slug.'---sp-queue&reset=1&sbkey='.$sbkey)."'"),
+							'attr'=>array("href='".esc_url(admin_url('admin.php?page='.$plugin_slug.'---sp-queue&reset=1&sbkey='.$sbkey))."'"),
 							'class'=>array('secondary'),
 						),
 						'visible_info'=>array( 'label'=>'Click above link to reset the queue. After reset it will sync again from the beginning.',
@@ -133,7 +133,7 @@ if ( ! class_exists( 'Queue' ) ) {
 						'sp_queue_flush_and_reset_link___'.$sbkey=>array(
 							'label'=>'Flush and Reset',
 							'type'=>'link',
-							'attr'=>array("href='javascript:void(0);'", " onclick='window.document.splugins.common.confirm_and_redirect( \"Are sure you to delete all synced data? Please confirm. Note that depending on the storage option and the api inventory size it may take sometime for this process to finish.\", \"".admin_url('admin.php?page='.$plugin_slug.'---sp-queue&reset=1&sbkey='.$sbkey.'&hsulf=1')."\" )' "),	
+							'attr'=>array("href='javascript:void(0);'", " onclick='window.document.splugins.common.confirm_and_redirect( \"Are sure you to delete all synced data? Please confirm. Note that depending on the storage option and the api inventory size it may take sometime for this process to finish.\", \"".esc_url(admin_url('admin.php?page='.$plugin_slug.'---sp-queue&reset=1&sbkey='.$sbkey.'&hsulf=1'))."\" )' "),	
 							'class'=>array('secondary'),
 						),
 						'visible_info_flush_and_reset'=>array( 'label'=>'Click above link to flush existing synced data and reset the queue. Be sure that you understand the outcomes of flushing all synced data since it will make your website frontend feed empty till the sync process do not catch up again. You may not need to do it normally except if there are any exceptional scenarios.',
@@ -163,7 +163,7 @@ if ( ! class_exists( 'Queue' ) ) {
 						'sp_queue_flush_everything_link___'.$sbkey=>array(
 							'label'=>'Flush Everything',
 							'type'=>'link',
-							'attr'=>array("href='javascript:void(0);'", " onclick='window.document.splugins.common.confirm_and_redirect( \"Are sure you to delete all synced data created by this plugin? Please confirm. Note that depending on the storage option and the api inventory size it may take sometime for this process to finish.\", \"".admin_url('admin.php?page='.$plugin_slug.'---sp-queue&reset=1&sbkey='.$sbkey.'&hsulf=1&hsulf_dt=1')."\" )' "),	
+							'attr'=>array("href='javascript:void(0);'", " onclick='window.document.splugins.common.confirm_and_redirect( \"Are sure you to delete all synced data created by this plugin? Please confirm. Note that depending on the storage option and the api inventory size it may take sometime for this process to finish.\", \"".esc_url(admin_url('admin.php?page='.$plugin_slug.'---sp-queue&reset=1&sbkey='.$sbkey.'&hsulf=1&hsulf_dt=1'))."\" )' "),	
 							'class'=>array('secondary'),
 						),
 						'visible_info_flush_everything'=>array( 'label'=>'Click above link to flush all synced data(it will flush all APIs data. so ACTIVE_TODO to move it to general tab so need to add general tab) created by this plugin. Be sure that you understand the outcomes of flushing all synced data(created by this plugin) since it will make your website frontend feed empty till the sync process do not catch up again. You may not need to do it normally except if there are any exceptional scenarios. <strong></strong>',
@@ -176,7 +176,7 @@ if ( ! class_exists( 'Queue' ) ) {
 							'label'=>'Save',
 							'type'=>'button',		
 							'class'=>array('secondary'),
-							'attr'=>array("data-action='save'",'data-tab_key="queue___'.$sbkey.'"')	
+							'attr'=>array("data-action='save'",'data-tab_key="queue___'.esc_attr($sbkey).'"')	
 						)
 					)
 				);

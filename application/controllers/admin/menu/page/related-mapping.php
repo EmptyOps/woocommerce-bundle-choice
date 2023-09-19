@@ -107,7 +107,7 @@ if ( ! class_exists( 'Related_Mapping' ) ) {
 							'class'=>array('secondary'),
 							//'size_class'=>array('eight','wide'),
 							'inline'=>false,
-							'attr'=>array('data-tab_key="'.$prefix.'_preference"', 'data-action="save"'),
+							'attr'=>array('data-tab_key="'.esc_attr($prefix).'_preference"', 'data-action="save"'),
 						)
 					)
 				),							
@@ -134,7 +134,7 @@ if ( ! class_exists( 'Related_Mapping' ) ) {
 								// 'size_class'=>array('eight','wide'),
 								'prev_inline'=>true,
 								'inline'=>true,
-								'attr'=>array('data-tab_key="'.$prefix.'_map_master"', 'data-bulk_table_id="'.$table["id"].'"', 'data-action="bulk"' )
+								'attr'=>array('data-tab_key="'.esc_attr($prefix).'_map_master"', 'data-bulk_table_id="'.esc_attr($table["id"]).'"', 'data-action="bulk"' )
 							),
 							'list'=>array_merge( $table , array(
 								'type'=>'table' )
@@ -333,7 +333,7 @@ if ( ! class_exists( 'Related_Mapping' ) ) {
 								'class'=>array('secondary'),
 								//'size_class'=>array('eight','wide'),
 								'inline'=>false,
-								'attr'=>array('data-tab_key="'.$prefix.'_map_master"', 'data-action="save"'),
+								'attr'=>array('data-tab_key="'.esc_attr($prefix).'_map_master"', 'data-action="save"'),
 							)
 						)
 					),

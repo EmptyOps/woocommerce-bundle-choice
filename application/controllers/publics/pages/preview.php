@@ -328,19 +328,19 @@ class Preview {
                           '<div class="ui dimmer inverted transition hidden">'.
                             '<div class="content">'.
                                 '<div class="center">'.
-                                    '<a class="ui button primary" href="'.\eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_breadcrumb_change_url((!empty(wbc()->sanitize->get('BEGIN')) && wbc()->sanitize->get('BEGIN')==wbc()->options->get_option('configuration','first_slug')/*get_option('eo_wbc_first_slug')*/ ? 1 : 2),(empty($set['FIRST'][2])?$set['FIRST'][0]:$set['FIRST'][2])).'" >Change</a>'.
+                                    '<a class="ui button primary" href="'.esc_url(\eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_breadcrumb_change_url((!empty(wbc()->sanitize->get('BEGIN')) && wbc()->sanitize->get('BEGIN')==wbc()->options->get_option('configuration','first_slug')/*get_option('eo_wbc_first_slug')*/ ? 1 : 2),(empty($set['FIRST'][2])?$set['FIRST'][0]:$set['FIRST'][2]))).'" >Change</a>'.
                                 '</div>'.
                             '</div>'.
-                          '</div>'.$first->get_image('full').
+                          '</div>'.esc_html($first->get_image('full')).
                           '</div>'.
                         '<div class="content">'.
-                            '<div class="header">'.($first->get_title()).'</div>'.
-                            '<div class="meta">'.__($set['FIRST'][2]?"<br/>".implode('<br/>',wbc()->wc->eo_wbc_get_product_variation_attributes($set['FIRST'][2],$set['FIRST']['variation'])):'').
+                            '<div class="header">'.esc_html($first->get_title()).'</div>'.
+                            '<div class="meta">'.esc_html__($set['FIRST'][2]?"<br/>".implode('<br/>',wbc()->wc->eo_wbc_get_product_variation_attributes($set['FIRST'][2],$set['FIRST']['variation'])):'').
                             '</div>'.
                         '</div>'.
                         '<div class="extra content">'.
                             '<div class="header description">'.
-                                (wc_price($first->get_price())."&nbsp;X&nbsp;".$set['FIRST'][1]).
+                                (wc_price($first->get_price())."&nbsp;X&nbsp;".esc_html($set['FIRST'][1])).
                             '</div>'.
                         '</div>'.
                     '</div>'.
@@ -349,27 +349,27 @@ class Preview {
                           '<div class="ui dimmer inverted transition hidden">'.
                             '<div class="content">'.
                                 '<div class="center">'.
-                                    '<a class="ui button primary" href="'.\eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_breadcrumb_change_url((!empty(wbc()->sanitize->get('BEGIN')) && wbc()->sanitize->get('BEGIN')==wbc()->options->get_option('configuration','first_slug')/*get_option('eo_wbc_first_slug')*/ ? 2 : 1),(empty($set['SECOND'][2])?$set['SECOND'][0]:$set['SECOND'][2])).'">Change</a>'.        
+                                    '<a class="ui button primary" href="'.esc_url(\eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_breadcrumb_change_url((!empty(wbc()->sanitize->get('BEGIN')) && wbc()->sanitize->get('BEGIN')==wbc()->options->get_option('configuration','first_slug')/*get_option('eo_wbc_first_slug')*/ ? 2 : 1),(empty($set['SECOND'][2])?$set['SECOND'][0]:$set['SECOND'][2]))).'">Change</a>'.        
                                 '</div>'.
                             '</div>'.
                           '</div>'.
-                          $second->get_image('full').
+                          esc_html($second->get_image('full')).
                         '</div>'.
                         '<div class="content">'.
-                            '<div class="header">'.__($second->get_title()).'</div>'.
-                            '<div class="meta">'.__($set['SECOND'][2]?"<br/>".implode('<br/>',wbc()->wc->eo_wbc_get_product_variation_attributes($set['SECOND'][2],$set['SECOND']['variation'])):'').
+                            '<div class="header">'.esc_html__($second->get_title()).'</div>'.
+                            '<div class="meta">'.esc_html__($set['SECOND'][2]?"<br/>".implode('<br/>',wbc()->wc->eo_wbc_get_product_variation_attributes($set['SECOND'][2],$set['SECOND']['variation'])):'').
                             '</div>'.
                         '</div>'.
                         '<div class="extra content">'.
                             '<div class="header description">'.
-                                (wc_price($second->get_price())."&nbsp;X&nbsp;".$set['SECOND'][1]).
+                                (wc_price($second->get_price())."&nbsp;X&nbsp;".esc_html($set['SECOND'][1])).
                             '</div>'.
                         '</div>'.
                     '</div>'.
                 '</div>'.
                 '<div class="ui row" style="display:table !important;margin:auto;margin-bottom: 2em !important;"><form name="preview_add_to_cart" id="preview_add_to_cart" action="" method="post" class="woocommerce" style="float:right;margin-top: 1.5em;display:grid !important;">'.
                     '<input type="hidden" name="add_to_cart" value=1>'.
-                    '<button id="preview_add_to_cart_button" class="ui button right floated aligned" style="width: fit-content;margin: auto;background-color:'.wbc()->options->get_option('appearance_breadcrumb','breadcrumb_backcolor_active',wbc()->session->get('EO_WBC_BG_COLOR',FALSE))/*get_option('eo_wbc_active_breadcrumb_color',wbc()->session->get('EO_WBC_BG_COLOR',FALSE))*/.'">'.__('Add This To Cart','woo-bundle-choice').
+                    '<button id="preview_add_to_cart_button" class="ui button right floated aligned" style="width: fit-content;margin: auto;background-color:'.esc_attr(wbc()->options->get_option('appearance_breadcrumb','breadcrumb_backcolor_active',wbc()->session->get('EO_WBC_BG_COLOR',FALSE)))/*get_option('eo_wbc_active_breadcrumb_color',wbc()->session->get('EO_WBC_BG_COLOR',FALSE))*/.'">'.esc_html__('Add This To Cart','woo-bundle-choice').
                     '</button><script>jQuery(document).ready(function(){ jQuery("#preview_add_to_cart_button").on("click",function(){ jQuery("#preview_add_to_cart").get(0).submit(); }); })</script>'.
                 '</form></div>';                
                 add_filter('the_content',function() use($content){

@@ -308,7 +308,7 @@ class Term_Meta {
 	        if(empty($color)) {
 	        	$color = '#ffffff';			
 	        }			
-			$columns .= '<div style="height:48px;width:48px;background-color: '.$color.';"></div>';
+			$columns .= '<div style="height:48px;width:48px;background-color: '.esc_attr($color).';"></div>';
 
 		} elseif (in_array($column,array('image','image_text','dropdown_image','dropdown_image_only'))) {
 			$src='';
@@ -341,7 +341,7 @@ class Term_Meta {
         if (empty($limit)) {
         	$limit = wbc()->config->product_variations_configs()['sp_variations_swatches_cat_display_limit'];			
         }			
-		$columns .= '<div '.$limit.' ></div>';
+		$columns .= '<div '.esc_attr($limit).' ></div>';
 
 		return $columns;
 	}
@@ -412,8 +412,8 @@ class Term_Meta {
 			</th>			
 			<td>
 				<div>
-					<input type="hidden" name="wbc_attachment_thumb" id="wbc_attachment_thumb" value="<?php esc_attr_e($src); ?>">
-					<img src="<?php esc_url_e($src); ?>" width="60" height="60" id="wbc_attachment_thumb_img"/>
+					<input type="hidden" name="wbc_attachment_thumb" id="wbc_attachment_thumb" value="<?php _e(esc_url($src)); ?>">
+					<img src="<?php _e(esc_url($src)); ?>" width="60" height="60" id="wbc_attachment_thumb_img"/>
 				</div>
 					
 				<div>					
@@ -635,7 +635,7 @@ class Term_Meta {
 					<label for="tag-slug">Show on shop page(Loopbox)</label>				
 				</th>
 				<td>
-					<input name="sp_variations_swatches_show_on_shop_page" id="sp_variations_swatches_show_on_shop_page" type="checkbox" class="sp_variations_swatches_show_on_shop_page" style="width: 94%;" value="1"<?php echo esc_attr($show_on_shop_page == 1 ? ' checked' : ''); ?>>
+					<input name="sp_variations_swatches_show_on_shop_page" id="sp_variations_swatches_show_on_shop_page" type="checkbox" class="sp_variations_swatches_show_on_shop_page" style="width: 94%;" value="1"<?php echo ($show_on_shop_page == 1 ? ' checked' : ''); ?>>
 					<p>Show swatches options for this attribute on shop/category page Loopbox.</p>
 				</td>
 			</div>

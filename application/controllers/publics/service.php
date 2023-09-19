@@ -34,7 +34,7 @@ class Service {
 
                 $product_attributes[ 'attribute__certificate_link' ] = array(
                     'label' => 'Certificate',
-                    'value' => "<a href='${_certificate_link}' target='_blank'>".__('Click here','woo-bundle-choice')."</a>",
+                    'value' => "<a href='${_certificate_link}' target='_blank'>".esc_html__('Click here','woo-bundle-choice')."</a>",
                 );
             }
 

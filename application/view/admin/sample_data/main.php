@@ -120,8 +120,8 @@ box-shadow: none;">
 	}
 
 	$_GET['step'] = wbc()->sanitize->get('step')+1;
-	$next_url = admin_url('admin.php?'.http_build_query($_GET));
-	
+ 	$next_url = admin_url('admin.php?'.http_build_query($_GET));
+
 	?>
 	<script type="text/javascript" >
 	    jQuery(document).ready(function($) {            

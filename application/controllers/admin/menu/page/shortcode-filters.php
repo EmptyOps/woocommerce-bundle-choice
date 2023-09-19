@@ -88,7 +88,7 @@ if ( ! class_exists( 'Shortcode_Filters' ) ) {
 				foreach ($form_definition as $form_key => $form_value) {
 					
 					$form_definition['shortflt_'.$form_key] = $form_value;
-					$form_definition['shortflt_'.$form_key]['attr'] = array('data-clean_tab_key="'.$form_key.'"');
+					$form_definition['shortflt_'.$form_key]['attr'] = array('data-clean_tab_key="'.esc_attr($form_key).'"');
 
 					if(!empty($form_value['form']) and is_array($form_value)){
 						foreach ($form_value['form'] as $frm_key => $frm_value) {

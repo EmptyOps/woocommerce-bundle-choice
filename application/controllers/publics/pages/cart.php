@@ -367,9 +367,15 @@ class Cart {
 
         add_filter('woocommerce_cart_item_remove_link',function($link,$cart_item_key
                                 ){
+            // return sprintf(
+            //                 '<a href="?EO_WBC=1&amp;EO_WBC_REMOVE=%s" class="remove" aria-label="%s">&times;</a>',$cart_item_key,
+            //                 esc_html__( 'Remove this item', 'woocommerce' ));
             return sprintf(
-                            '<a href="?EO_WBC=1&amp;EO_WBC_REMOVE=%s" class="remove" aria-label="%s">&times;</a>',$cart_item_key,
-                            esc_html__( 'Remove this item', 'woocommerce' ));
+                            '<a href="?EO_WBC=1&amp;EO_WBC_REMOVE=%s" class="remove" aria-label="%s">&times;</a>',
+                            esc_attr($cart_item_key),
+                            esc_html__( 'Remove this item', 'woocommerce' )
+                        );
+
 
         },10,2);
 

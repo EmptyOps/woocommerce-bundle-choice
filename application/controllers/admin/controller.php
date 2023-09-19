@@ -178,22 +178,24 @@ class Controller extends \eo\wbc\controllers\Controller {
 					$form_part = $this->generate_form(/*$publics_form*/$ui_definition['controls'], $control_key, true);
 
 					if (!empty($form_part)) {
-						
+
 						$form = array_merge(
-							$form,
-							array($singleton_function.'_'.$control_key.'_'.$ps_key.'_accordian_start'=>array(
-									'type'=>'accordian',
-									'section_type'=>'start',
-									'class'=>array('field', 'styled'),
-									'label'=>'<span class="ui large text">'.$ps_title.'</span>',
-								),
-							),
-							$form_part,
-							array($singleton_function.'_'.$control_key.'_'.$ps_key.'_accordian_end'=>array(
-									'type'=>'accordian',
-									'section_type'=>'end'
-								),
-							),
+						    $form,
+						    array(
+						        $singleton_function . '_' . $control_key . '_' . $ps_key . '_accordian_start' => array(
+						            'type' => 'accordian',
+						            'section_type' => 'start',
+						            'class' => array('field', 'styled'),
+						            'label' => '<span class="ui large text">' . esc_html($ps_title) . '</span>',
+						        ),
+						    ),
+						    $form_part,
+						    array(
+						        $singleton_function . '_' . $control_key . '_' . $ps_key . '_accordian_end' => array(
+						            'type' => 'accordian',
+						            'section_type' => 'end',
+						        ),
+						    )
 						);
 					}
 				}
@@ -208,7 +210,7 @@ class Controller extends \eo\wbc\controllers\Controller {
 					'label'=>'Save',
 					'type'=>'button',		
 					'class'=>array('primary'),
-					'attr'=>array("data-action='save'",'data-tab_key="'.$tab_key.'"')	
+					'attr'=>array("data-action='save'",'data-tab_key="'.esc_attr($tab_key).'"')	
 				);
 
 				$form_definition[$tab_key] = array('label'=>trim($page_title_prefix.' '.$control_title),'form'=>$form);		
