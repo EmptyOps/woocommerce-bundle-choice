@@ -378,7 +378,11 @@ class Eowbc_Sample_Data {
 							'sale_price' => $variation['price']
 						)
 					);
-					$var_->set_attributes($variation['terms']);							
+					$var_->set_attributes($variation['terms']);	
+
+					// $img_id=$this->add_image_gallary($variation['thumb']);
+					// $var_->set_post_thumbnail( $variation['id'],$img_id );
+											
 					$var_->save();
 				}				
 			}	

@@ -2086,6 +2086,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 				}
 				console.log('slider_change_event loop onChange');
 				console.log(jQuery(this/*element*/));
+				console.log(value);
 				if(
 					(
 						(jQuery(this/*element*/).data('prev_val_min')!=min && jQuery(this/*element*/).data('prev_val_min')!=undefined)
