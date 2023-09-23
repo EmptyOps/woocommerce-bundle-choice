@@ -2254,9 +2254,9 @@ class EOWBC_Filter_Widget {
 			$term_list = $filter['list'];
 		} else{
 
-			$term = wbc()->wc->get_term_by('term_taxonomy_id',apply_filters( 'wpml_object_id',$id,'category', FALSE, 'en'),'product_cat');
+			$term = wbc()->wc->get_term_by('term_taxonomy_id',apply_filters( 'wpml_object_id',$id,'category', TRUE/*FALSE the FALSE commented and TRUE is added on 14-09-2023, it is to ensure that original is used if the translation is missing*/, 'en'),'product_cat');
 
-			$term_list = wbc()->wc->get_terms(apply_filters( 'wpml_object_id',$term->term_id,'category', FALSE, 'en'),'menu_order');
+			$term_list = wbc()->wc->get_terms(apply_filters( 'wpml_object_id',$term->term_id,'category', TRUE/*FALSE the FALSE commented and TRUE is added on 14-09-2023, it is to ensure that original is used if the translation is missing*/, 'en'),'menu_order');
 									
 			if(!empty($item[$__prefix."_fconfig_elements"])){
 				$filter_in_list = explode(',',$item[$__prefix."_fconfig_elements"]);
