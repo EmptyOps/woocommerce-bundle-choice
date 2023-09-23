@@ -189,7 +189,8 @@
     
             body div#slider1 .splide__list li {
             display: inline-flex; !important;
-            width: 20% !important;
+            width: 25% !important;
+            margin: 0 3px;
             
         }
 
