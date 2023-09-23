@@ -61,7 +61,7 @@ class Category {
 
                 wbc()->theme->load('css','category');
                 wbc()->theme->load('js','category');
-            
+                
                 SP_Model_Feed::instance()->init();
 
                 if(
