@@ -273,8 +273,8 @@ if(!class_exists('SP_Plugin_Index_Class') ) {
 			add_filter('plugin_action_links_'. plugin_basename( $this->getFILE() ),function($links){
 			    
 			    $links[] = '<a href="' .
-			        admin_url( 'admin.php?page='.$this->SP_Extension->admin_page_slug() ) .
-			        '">' . __('Admin Panel',$this->SP_Extension->extension_slug())  . '</a>';
+			        esc_url(admin_url( 'admin.php?page='.$this->SP_Extension->admin_page_slug() )) .
+			        '">' .esc_html__('Admin Panel',$this->SP_Extension->extension_slug())  . '</a>';
 			        return $links;
 			},30);
 			if(file_exists(plugin_dir_path( $this->getFILE() ).'vendor/autoload.php'))
