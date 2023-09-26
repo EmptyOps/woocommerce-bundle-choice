@@ -33,7 +33,352 @@ class Sample_Data_Template {
 	$this->gallay_img = $_img_url. 'Products/';
  
 	return array(
+
         array(
+            'title'=>'11 sample Setting #8800950587',
+            'thumb'=>$_img_url.'Products/w-r-2.jpg',
+            'images'=>array('w-r-3.jpg','w-r-1.jpg'),
+            'content'=>'',
+            'sku'=>'SET-8800950587-sample',
+            'regular_price'=>'',
+            'sale_price'=>'',
+            'price'=>'',
+            'type'=>'variable', //simple | variable
+            'category'=>array('eo_setting_shape_cat','eo_setting_round_shape_cat','eo_setting_oval_shape_cat','eo_setting_cushion_shape_cat','eo_setting_pear_shape_cat','eo_setting_princess_shape_cat','eo_setting_emerald_shape_cat','eo_setting_marquise_shape_cat','eo_setting_asscher_shape_cat','eo_setting_radiant_shape_cat','eo_setting_heart_shape_cat','eo_ring_style_cat','eo_ring_halo_cat','eo_ring_pave_cat','eo_ring_solitaire_cat','eo_ring_trilogy_cat'),
+            'attribute'=>array(
+                'pa_eo_metal_attr'=>array(
+                    'name'=>'pa_eo_metal_attr',
+                    'value'=>'14K Yellow Gold|14K White Gold|14K Rose Gold',
+                    'position'=>0,
+                    'is_visible'=>1,
+                    'is_variation'=>1,
+                    'is_taxonomy'=>1
+                ),
+                'pa_eo_size_attr'=>array(
+                    'name'=>'pa_eo_size_attr',
+                    'value'=>'4.0',
+                    'position'=>1,
+                    'is_visible'=>1,
+                    'is_variation'=>1,
+                    'is_taxonomy'=>1
+                ),
+                'pa_eo_shape_attr'=>array(
+                    'name'=>'pa_eo_shape_attr',
+                    'value'=>'Round|Oval|Cushion|Pear|Princess|Emerald|Marquise|Asscher|Radiant|Heart',
+                    'position'=>1,
+                    'is_visible'=>1,
+                    'is_variation'=>1,
+                    'is_taxonomy'=>1
+                ),
+                'pa_side_stone_type'=>array(
+                    'name'=>'pa_side_stone_type',
+                    'value'=>'NATURAL DIAMOND',
+                    'position'=>1,
+                    'is_visible'=>1,
+                    'is_variation'=>0,
+                    'is_taxonomy'=>1
+                ),
+                'pa_side_stone_number'=>array(
+                    'name'=>'pa_side_stone_number',
+                    'value'=>'13',
+                    'position'=>1,
+                    'is_visible'=>1,
+                    'is_variation'=>0,
+                    'is_taxonomy'=>1
+                ),
+                'pa_side_stone_carat'=>array(
+                    'name'=>'pa_side_stone_carat',
+                    'value'=>'0.3',
+                    'position'=>1,
+                    'is_visible'=>1,
+                    'is_variation'=>0,
+                    'is_taxonomy'=>1
+                ),
+                'pa_side_stone_color'=>array(
+                    'name'=>'pa_side_stone_color',
+                    'value'=>'F/G',
+                    'position'=>1,
+                    'is_visible'=>1,
+                    'is_variation'=>0,
+                    'is_taxonomy'=>1
+                ),
+                'pa_side_stone_clarity'=>array(
+                    'name'=>'pa_side_stone_clarity',
+                    'value'=>'VS1',
+                    'position'=>1,
+                    'is_visible'=>1,
+                    'is_variation'=>0,
+                    'is_taxonomy'=>1
+                )
+            ),
+            'variation'=>array(
+                array(
+                    'thumb'=>$_img_url.'Products/w-r-2.jpg',
+                    'regular_price'=>'500',
+                    'price'=>'250',
+                    'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'4.0','pa_eo_shape_attr'=>'Round')
+                ),
+                array(
+                    'thumb'=>$_img_url.'Products/w-r-2.jpg',
+                    'regular_price'=>'600',
+                    'price'=>'550',
+                    'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'4.0','pa_eo_shape_attr'=>'Oval')
+                ),
+                array(
+                    'regular_price'=>'700',
+                    'price'=>'650',
+                    'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'4.0','pa_eo_shape_attr'=>'Cushion')
+                ),
+                array(
+                    'regular_price'=>'800',
+                    'price'=>'750',
+                    'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'4.0','pa_eo_shape_attr'=>'Pear')
+                ),
+                array(
+                    'regular_price'=>'900',
+                    'price'=>'850',
+                    'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'4.0','pa_eo_shape_attr'=>'Princess')
+                ),
+                array(
+                    'regular_price'=>'1000',
+                    'price'=>'950',
+                    'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'4.0','pa_eo_shape_attr'=>'Emerald')
+                ),
+                array(
+                    'regular_price'=>'1100',
+                    'price'=>'1050',
+                    'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'4.0','pa_eo_shape_attr'=>'Marquise')
+                ),
+                array(
+                    'regular_price'=>'1200',
+                    'price'=>'1150',
+                    'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'4.0','pa_eo_shape_attr'=>'Asscher')
+                ),
+                array(
+                    'regular_price'=>'1300',
+                    'price'=>'1250',
+                    'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'4.0','pa_eo_shape_attr'=>'Radiant')
+                ),
+                array(
+                    'regular_price'=>'1400',
+                    'price'=>'1350',
+                    'terms'=>array('pa_eo_metal_attr'=>'14K Rose Gold','pa_eo_size_attr'=>'4.0','pa_eo_shape_attr'=>'Heart')
+                ),
+
+
+                array(
+                    'regular_price'=>'1500',
+                    'price'=>'1450',
+                    'terms'=>array('pa_eo_metal_attr'=>'14K White Gold','pa_eo_size_attr'=>'4.0','pa_eo_shape_attr'=>'Round')
+                ),
+                array(
+                    'regular_price'=>'1600',
+                    'price'=>'1550',
+                    'terms'=>array('pa_eo_metal_attr'=>'14K White Gold','pa_eo_size_attr'=>'4.0','pa_eo_shape_attr'=>'Oval')
+                ),
+                array(
+                    'regular_price'=>'1700',
+                    'price'=>'1650',
+                    'terms'=>array('pa_eo_metal_attr'=>'14K White Gold','pa_eo_size_attr'=>'4.0','pa_eo_shape_attr'=>'Cushion')
+                ),
+                array(
+                    'regular_price'=>'1800',
+                    'price'=>'1750',
+                    'terms'=>array('pa_eo_metal_attr'=>'14K White Gold','pa_eo_size_attr'=>'4.0','pa_eo_shape_attr'=>'Pear')
+                ),
+                array(
+                    'regular_price'=>'1900',
+                    'price'=>'1850',
+                    'terms'=>array('pa_eo_metal_attr'=>'14K White Gold','pa_eo_size_attr'=>'4.0','pa_eo_shape_attr'=>'Princess')
+                ),
+                array(
+                    'regular_price'=>'2000',
+                    'price'=>'1950',
+                    'terms'=>array('pa_eo_metal_attr'=>'14K White Gold','pa_eo_size_attr'=>'4.0','pa_eo_shape_attr'=>'Emerald')
+                ),
+                array(
+                    'regular_price'=>'2100',
+                    'price'=>'2050',
+                    'terms'=>array('pa_eo_metal_attr'=>'14K White Gold','pa_eo_size_attr'=>'4.0','pa_eo_shape_attr'=>'Marquise')
+                ),
+                array(
+                    'regular_price'=>'2200',
+                    'price'=>'2150',
+                    'terms'=>array('pa_eo_metal_attr'=>'14K White Gold','pa_eo_size_attr'=>'4.0','pa_eo_shape_attr'=>'Asscher')
+                ),
+                array(
+                    'regular_price'=>'2300',
+                    'price'=>'2250',
+                    'terms'=>array('pa_eo_metal_attr'=>'14K White Gold','pa_eo_size_attr'=>'4.0','pa_eo_shape_attr'=>'Radiant')
+                ),
+                array(
+                    'regular_price'=>'2400',
+                    'price'=>'2350',
+                    'terms'=>array('pa_eo_metal_attr'=>'14K White Gold','pa_eo_size_attr'=>'4.0','pa_eo_shape_attr'=>'Heart')
+                ),
+
+
+
+
+                array(
+                    'regular_price'=>'2500',
+                    'price'=>'2450',
+                    'terms'=>array('pa_eo_metal_attr'=>'14K Yellow Gold','pa_eo_size_attr'=>'4.0','pa_eo_shape_attr'=>'Round')
+                ),
+                array(
+                    'regular_price'=>'2600',
+                    'price'=>'2550',
+                    'terms'=>array('pa_eo_metal_attr'=>'14K Yellow Gold','pa_eo_size_attr'=>'4.0','pa_eo_shape_attr'=>'Oval')
+                ),
+                array(
+                    'regular_price'=>'2700',
+                    'price'=>'2650',
+                    'terms'=>array('pa_eo_metal_attr'=>'14K Yellow Gold','pa_eo_size_attr'=>'4.0','pa_eo_shape_attr'=>'Cushion')
+                ),
+                array(
+                    'regular_price'=>'2800',
+                    'price'=>'2750',
+                    'terms'=>array('pa_eo_metal_attr'=>'14K Yellow Gold','pa_eo_size_attr'=>'4.0','pa_eo_shape_attr'=>'Pear')
+                ),
+                array(
+                    'regular_price'=>'2900',
+                    'price'=>'2850',
+                    'terms'=>array('pa_eo_metal_attr'=>'14K Yellow Gold','pa_eo_size_attr'=>'4.0','pa_eo_shape_attr'=>'Princess')
+                ),
+                array(
+                    'regular_price'=>'3000',
+                    'price'=>'2950',
+                    'terms'=>array('pa_eo_metal_attr'=>'14K Yellow Gold','pa_eo_size_attr'=>'4.0','pa_eo_shape_attr'=>'Emerald')
+                ),
+                array(
+                    'regular_price'=>'3100',
+                    'price'=>'3050',
+                    'terms'=>array('pa_eo_metal_attr'=>'14K Yellow Gold','pa_eo_size_attr'=>'4.0','pa_eo_shape_attr'=>'Marquise')
+                ),
+                array(
+                    'regular_price'=>'3200',
+                    'price'=>'3150',
+                    'terms'=>array('pa_eo_metal_attr'=>'14K Yellow Gold','pa_eo_size_attr'=>'4.0','pa_eo_shape_attr'=>'Asscher')
+                ),
+                array(
+                    'regular_price'=>'3300',
+                    'price'=>'3250',
+                    'terms'=>array('pa_eo_metal_attr'=>'14K Yellow Gold','pa_eo_size_attr'=>'4.0','pa_eo_shape_attr'=>'Radiant')
+                ),
+                array(
+                    'regular_price'=>'3400',
+                    'price'=>'3350',
+                    'terms'=>array('pa_eo_metal_attr'=>'14K Yellow Gold','pa_eo_size_attr'=>'4.0','pa_eo_shape_attr'=>'Heart')
+                ),
+            )            
+        ),
+        array(
+            'title'=>'11 sample Diamond #89302496',
+            'thumb'=>$_img_url.'Products/Round-4.jpg',
+            'images'=>array('Round-5.jpg','Round-1.jpg'),
+            'content'=>'',
+            'sku'=>'DIA-89302496-sample',
+            'regular_price'=>'98561',
+            'sale_price'=>'85461',
+            'price'=>'',
+            'sp_variations'=>$_img_url.'Products/Round-4.jpg',
+            'type'=>'simple', //simple | variable
+            'category'=>array('eo_diamond_shape_cat','eo_diamond_round_shape_cat','eo_diamond_oval_shape_cat','eo_diamond_cushion_shape_cat','eo_diamond_pear_shape_cat','eo_diamond_princess_shape_cat','eo_diamond_emerald_shape_cat','eo_diamond_asscher_shape_cat','eo_diamond_marquise_shape_cat','eo_diamond_heart_shape_cat','eo_diamond_radiant_shape_cat'),
+            'attribute'=>array(
+                'pa_eo_carat_attr'=>array(
+                    'name'=>'pa_eo_carat_attr',
+                    'value'=>'1.5',
+                    'position'=>0,
+                    'is_visible'=>1,
+                    'is_variation'=>1,
+                    'is_taxonomy'=>1
+                ),
+                'pa_eo_clarity_attr'=>array(
+                    'name'=>'pa_eo_clarity_attr',
+                    'value'=>'IF',
+                    'position'=>1,
+                    'is_visible'=>1,
+                    'is_variation'=>1,
+                    'is_taxonomy'=>1
+                ),
+                'pa_eo_colour_attr'=>array(
+                    'name'=>'pa_eo_colour_attr',
+                    'value'=>'F',
+                    'position'=>2,
+                    'is_visible'=>1,
+                    'is_variation'=>1,
+                    'is_taxonomy'=>1
+                ),
+                'pa_eo_depth_attr'=>array(
+                    'name'=>'pa_eo_depth_attr',
+                    'value'=>'78',
+                    'position'=>1,
+                    'is_visible'=>1,
+                    'is_variation'=>1,
+                    'is_taxonomy'=>1
+                ),
+                'pa_eo_fluorescence_attr'=>array(
+                    'name'=>'pa_eo_fluorescence_attr',
+                    'value'=>'Slight',
+                    'position'=>1,
+                    'is_visible'=>1,
+                    'is_variation'=>1,
+                    'is_taxonomy'=>1
+                ),
+                'pa_eo_grading_report_attr'=>array(
+                    'name'=>'pa_eo_grading_report_attr',
+                    'value'=>'IGI',
+                    'position'=>1,
+                    'is_visible'=>1,
+                    'is_variation'=>1,
+                    'is_taxonomy'=>1
+                ),        
+                'pa_eo_size_attr'=>array(
+                    'name'=>'pa_eo_size_attr',
+                    'value'=>'4.0',
+                    'position'=>3,
+                    'is_visible'=>1,
+                    'is_variation'=>1,
+                    'is_taxonomy'=>1
+                ),
+                'pa_eo_symmertry_attr'=>array(
+                    'name'=>'pa_eo_symmertry_attr',
+                    'value'=>'Fair',
+                    'position'=>3,
+                    'is_visible'=>1,
+                    'is_variation'=>1,
+                    'is_taxonomy'=>1
+                ),
+                'pa_eo_table_attr'=>array(
+                    'name'=>'pa_eo_table_attr',
+                    'value'=>'56',
+                    'position'=>3,
+                    'is_visible'=>1,
+                    'is_variation'=>1,
+                    'is_taxonomy'=>1
+                ),
+                'pa_eo_origin_attr'=>array(
+                    'name'=>'pa_eo_origin_attr',
+                    'value'=>'Aikhal',
+                    'position'=>3,
+                    'is_visible'=>1,
+                    'is_variation'=>1,
+                    'is_taxonomy'=>1
+                ),
+                'pa_eo_cut_attr'=>array(
+                    'name'=>'pa_eo_cut_attr',
+                    'value'=>'Poor',
+                    'position'=>3,
+                    'is_visible'=>1,
+                    'is_variation'=>1,
+                    'is_taxonomy'=>1
+                )       
+            ),       
+        ),
+
+
+
+        /*array(
           'title'=>'Setting #8800950587',
           'thumb'=>$_img_url.'Products/w-r-2.jpg',
           'images'=>array('w-r-3.jpg','w-r-1.jpg'),
@@ -14728,7 +15073,7 @@ class Sample_Data_Template {
                             'terms'=>array('pa_eo_carat_attr'=>'1-2','pa_eo_clarity_attr'=>'vs2','pa_eo_colour_attr'=>'e','pa_eo_depth_attr'=>'48','pa_eo_fluorescence_attr'=>'slight','pa_eo_grading_report_attr'=>'gia','pa_eo_size_attr'=>'0-2','pa_eo_symmertry_attr'=>'good','pa_eo_table_attr'=>'75','pa_eo_origin_attr'=>'mir','pa_eo_cut_attr'=>'very-good')
                           )
                    )
-        )     
+        )*/     
     );  	
 	}
 

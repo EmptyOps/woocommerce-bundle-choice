@@ -155,7 +155,7 @@ class WooCommerce_Bundle_Choice_Bootstrap {
 				}
 
 			}
-			ACTIVE_TODO temp. this is temporary only till the standard Ajax layer is not implemented and once it is implemented that will be followed to implement Ajax. So it is somewhat like the other Ajax if layers implemented above which are for the UI builder supported actions and so this layer also need to be upgraded as per the standard Ajax that is hosted for the different layers so this layer also follows the same structure when the Ajax is hosted for the different layer like this for the extensions and so on — to h
+			// ACTIVE_TODO temp. this is temporary only till the standard Ajax layer is not implemented and once it is implemented that will be followed to implement Ajax. So it is somewhat like the other Ajax if layers implemented above which are for the UI builder supported actions and so this layer also need to be upgraded as per the standard Ajax that is hosted for the different layers so this layer also follows the same structure when the Ajax is hosted for the different layer like this for the extensions and so on — to h
 			else if( wbc()->sanitize->post('resolver') == 'sp_p360g_aj_properties' ) {
 				
 				require_once constant( strtoupper( sp_p360g()->SP_Extension()->singleton_function() ).'_DIRECTORY' ).'application/controllers/ajax/sp_p360g_properties_aj_resolver.php';
