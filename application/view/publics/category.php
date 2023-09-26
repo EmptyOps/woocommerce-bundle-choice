@@ -78,15 +78,15 @@
                     $total_text = '';
                     // phpcs:disable WordPress.Security
                     if ( 1 === intval( $args['total'] ) ) {
-                        _e( 'Showing the single result', 'woocommerce' );
+                        esc_html_e( 'Showing the single result', 'woocommerce' );
                     } elseif ( $args['total'] <= $args['per_page'] || -1 === $args['per_page'] ) {
                         /* translators: %d: total results */
-                        $total_text = sprintf( _n( 'Showing all %d result', 'Showing all %d results', esc_html($args['total']), 'woocommerce' ), esc_html($args['total']) );
+                        $total_text = sprintf( _n( 'Showing all %d result', 'Showing all %d results', ($args['total']), 'woocommerce' ), ($args['total']) );
                     } else {
                         $first = ( $args['per_page'] * $args['current'] ) - $args['per_page'] + 1;
                         $last  = min( $args['total'], $args['per_page'] * $args['current'] );
                         /* translators: 1: first result 2: last result 3: total results */
-                        $total_text = sprintf( _nx( 'Showing %1$d&ndash;%2$d of %3$d result', 'Showing %1$d&ndash;%2$d of %3$d results', esc_html($args['total']), 'with first and last result', 'woocommerce' ), esc_html($first), esc_html($last), esc_html($args['total']) );
+                        $total_text = sprintf( _nx( 'Showing %1$d&ndash;%2$d of %3$d result', 'Showing %1$d&ndash;%2$d of %3$d results', ($args['total']), 'with first and last result', 'woocommerce' ), ($first), ($last), ($args['total']) );
                     }
                     // phpcs:enable WordPress.Security
                     

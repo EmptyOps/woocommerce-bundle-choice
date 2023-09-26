@@ -25,6 +25,6 @@
         </div>
     </div>
     <div class="column" <?php echo empty(wp_get_attachment_url(wbc()->options->get_option('configuration','preview_icon')/*get_option('eo_wbc_collection_icon')*/))?'style="visibility: hidden;"':''; ?>>
-        <img src="<?php echo esc_attr($preview_icon/*get_option('eo_wbc_collection_icon')*/); ?>" class="ui mini image" style="<?php echo empty($preview_icon)?'visibility: hidden;':''; ?>"/>
+        <img src="<?php echo esc_url($preview_icon/*get_option('eo_wbc_collection_icon')*/); ?>" class="ui mini image" style="<?php echo empty($preview_icon)?'visibility: hidden;':''; ?>"/>
     </div>                            
 </div>                      

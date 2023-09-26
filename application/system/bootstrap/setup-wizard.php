@@ -292,7 +292,7 @@ class Setup_Wizard {
 			                <i class="dropdown icon"></i>
 			                <div class="default text"><?php esc_html_e('Inventory Type', 'woo-bundle-choice'); ?></div>
 			                <div class="menu">
-			                    <div class="item" data-value="jewelry"><?php esc_html_e('Jewelry', 'woo-bundle-choice'); ?></div>
+			                    <div class="item" data-value="jewelryfgdfgfg"><?php esc_html_e('Jewelry', 'woo-bundle-choice'); ?></div>
 			                    <div class="item" data-value="clothing"><?php esc_html_e('Clothing', 'woo-bundle-choice'); ?></div>
 			                    <div class="item" data-value="home_decor"><?php esc_html_e('Home Decor', 'woo-bundle-choice'); ?></div>
 			                    <div class="item" data-value="others"><?php esc_html_e('Others', 'woo-bundle-choice'); ?></div>

@@ -81,5 +81,5 @@ if(isset($_GET['FIRST']) and isset($_GET['SECOND'])) {
                     });
                 }); 
             </script>";
-    echo esc_html($html);
+    echo $html;
 }

@@ -13,11 +13,11 @@
     }  else {
         if($begin==$breadcrumb_ui::$first_slug/*get_option('eo_wbc_first_slug')*/) {
 
-        $breadcrumb_ui::eo_wbc_breadcumb_first_html_mobile($step,1).$breadcrumb_ui::eo_wbc_breadcumb_second_html_mobile($step,2);
+            $breadcrumb_ui::eo_wbc_breadcumb_first_html_mobile($step,1).$breadcrumb_ui::eo_wbc_breadcumb_second_html_mobile($step,2);
 
         } elseif ($begin==$breadcrumb_ui::$second_slug/*get_option('eo_wbc_second_slug')*/)  {
 
-        $breadcrumb_ui::eo_wbc_breadcumb_second_html_mobile($step,1).$breadcrumb_ui::eo_wbc_breadcumb_first_html_mobile($step,2);
+            $breadcrumb_ui::eo_wbc_breadcumb_second_html_mobile($step,1).$breadcrumb_ui::eo_wbc_breadcumb_first_html_mobile($step,2);
         }
     }
     ?>          
