@@ -295,32 +295,32 @@ add_action( 'wp_enqueue_scripts' ,function(){
             is_splide_initiated = true;
 
             console.log("slider asset init_function");
-            setTimeout(function(argument) {
+            // setTimeout(function(argument) {
                 
-                var splide = new Splide( '#slider1'/* '.splide_slider_container'*/, {
-                    direction       : 'ttb',
-                    wheel           : true,
-                    // releaseWheel    : true,
-                    height          : '30rem',
-                    pagination      : false,
-                    perPage         : 5,
-                    gap             : '10px',
-                    cover           : false,
-                    type            : 'loop',
-                    // updateOnMove    : true,
-                    arrows          : true,
-                    // slider          : true,
-                    perMove         : 1,
-                    rewind          : true,
-                    isNavigation    : true,
-                    drag            : false,
-                    // dragMinThreshold: {
-                    //     mouse: 4,
-                    //     touch: 10,
-                    // },
-                } );
-                splide.mount();
-            },1000);
+            //     var splide = new Splide( '#slider1'/* '.splide_slider_container'*/, {
+            //         direction       : 'ttb',
+            //         wheel           : true,
+            //         // releaseWheel    : true,
+            //         height          : '30rem',
+            //         pagination      : false,
+            //         perPage         : 5,
+            //         gap             : '10px',
+            //         cover           : false,
+            //         type            : 'loop',
+            //         // updateOnMove    : true,
+            //         arrows          : true,
+            //         // slider          : true,
+            //         perMove         : 1,
+            //         rewind          : true,
+            //         isNavigation    : true,
+            //         drag            : false,
+            //         // dragMinThreshold: {
+            //         //     mouse: 4,
+            //         //     touch: 10,
+            //         // },
+            //     } );
+            //     splide.mount();
+            // },1000);
         };
 
         /*document.addEventListener("DOMContentLoaded", function(event) {
