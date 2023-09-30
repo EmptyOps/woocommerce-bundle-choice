@@ -42,6 +42,9 @@ add_action( 'wp_enqueue_scripts' ,function(){
 		        //     jQuery(".big-img").attr('src',jQuery(this).attr('src'));
 		        // });
 
+		    	// ACTIVE_TODO temp. remove it when we need to enable zoom, added on 30-09-2023
+		    	return false;
+		    	
 			    var zoom_init_function = function(){
 			    	
 	            	console.log(" zoom asset init_function ");
