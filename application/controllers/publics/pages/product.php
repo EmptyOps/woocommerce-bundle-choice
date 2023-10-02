@@ -2,7 +2,8 @@
 namespace eo\wbc\controllers\publics\pages;
 defined( 'ABSPATH' ) || exit;
 
-class Product {
+
+class Product extends \eo\wbc\system\core\publics\Eowbc_Base_Model_Publics {
 
     private static $_instance = null;
 
@@ -646,12 +647,16 @@ class Product {
         $redirect_url = $this->eo_wbc_product_route();
         wbc()->theme->load('css','product');
         wbc()->theme->load('js','product');
-        /*Hide sidebar and make content area full width.*/
-        if(apply_filters('eowbc_filter_sidebars_widgets',true)){
-            /*add_filter( 'sidebars_widgets',function($sidebars_widgets ) {
-                return array( false );
-            });    */
-        }
+
+        // chenged on 30-09-2023
+        // /*Hide sidebar and make content area full width.*/
+        // if(apply_filters('eowbc_filter_sidebars_widgets',true)){
+        //     /*add_filter( 'sidebars_widgets',function($sidebars_widgets ) {
+        //         return array( false );
+        //     });    */
+        // }
+        parent::instance()->sidebars_widgets();
+
         
         ob_start();        
         ?>
