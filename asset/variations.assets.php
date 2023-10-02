@@ -1600,6 +1600,22 @@ $bg_hover_color = wbc()->options->get_option('tiny_features',$spui_is_product_ca
 	.hide{
 		display: none !important;
 	}
+
+	.variable-items-wrapper .variable-item {
+   		 width: auto !important;
+    		height: auto !important;
+	}
+	.spui_engagment_product_change_color ul li {
+	    transform: translateY(11em) !important;
+	}
+	body .spui_button_widget li.spui_button_variable_item.selected {
+	    box-shadow: none !important;
+	    -webkit-box-shadow:none !important;
+	}
+	.spui_button_widget li.spui_button_variable_item:hover{
+		 box-shadow: none !important;
+	    -webkit-box-shadow:none !important;	
+	}
 </style>
 <script>
 	jQuery(document).ready(function($){
