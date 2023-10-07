@@ -1677,6 +1677,7 @@ if(wbc()->wc->is_shop_or_category()) {
 	// themes___storefront
 	// themes___customify
 	if($asset_param['is_ring_builder_enabled'] && $asset_param['is_show_options_ui_enabled']) {
+
 		echo $asset_param['archive_loop_swatches_css_patch'];
 	}
 

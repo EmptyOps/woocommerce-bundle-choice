@@ -60,6 +60,8 @@ class SP_Compatibility {
 
  	public function feed_loopbox_variations_container_compatability( $page_section, $args = array() ){
 
+		$current_theme_key = wbc()->common->current_theme_key();
+		
 		if($page_section == 'archive_loop_swatches_css_patch') {
  			$archive_loop_swatches_css_patch = ' 
 	 			<style type="text/css">	 					
@@ -70,6 +72,7 @@ class SP_Compatibility {
 					    display: none !important;
 					}
 			';
+
 
 	 		if($current_theme_key == 'themes___astra') {
 	 			
@@ -84,6 +87,73 @@ class SP_Compatibility {
 	 			$archive_loop_swatches_css_patch .= '	 					
 	 				.wc-product__part.wc-product__add_to_cart .product_type_variable.add_to_cart_button {
 					    display: none !important;
+					}
+				'; 
+	 		}elseif($current_theme_key == 'themes___colormag') {
+	 			
+	 			$archive_loop_swatches_css_patch .= '	 					
+	 				.woocommerce-loop-product__title {
+					    display: inline-block;
+					}
+				'; 
+	 		}elseif($current_theme_key == 'themes___estore') {
+	 			
+	 			$archive_loop_swatches_css_patch .= '	 					
+	 				body, html {
+					    height: auto !important;
+					}
+					figure.products-img {
+					    display: none;
+					}
+				'; 
+	 		}elseif($current_theme_key == 'themes___shoper') {
+	 			
+	 			$archive_loop_swatches_css_patch .= '	 					
+	 				.product-image figure.hover_hide {
+					    display: none;
+					}
+				'; 
+	 		}elseif($current_theme_key == 'themes___shopper-shop') {
+	 			
+	 			$archive_loop_swatches_css_patch .= '	 					
+	 				.product-image figure.hover_hide {
+					    display: none;
+					}
+				'; 
+	 		}elseif($current_theme_key == 'themes___storeship') {
+	 			
+	 			$archive_loop_swatches_css_patch .= '	 					
+	 				.woocommerce ul.products li.product:hover a.woocommerce-LoopProduct-link::after {
+					    opacity: 0;
+					    z-index: -1;
+					}
+				'; 
+	 		}elseif($current_theme_key == 'themes___hestia') {
+	 			
+	 			$archive_loop_swatches_css_patch .= '	 					
+					.card-image {
+					    display: none !important;
+					}
+				'; 
+	 		}elseif($current_theme_key == 'themes___kadence') {
+	 			
+	 			$archive_loop_swatches_css_patch .= '	 					
+					.products .product .product-details {
+					    clear: both;
+					}
+				'; 
+	 		}elseif($current_theme_key == 'themes___bosa') {
+	 			
+	 			$archive_loop_swatches_css_patch .= '	 					
+					.product-inner-contents {
+					    clear: both;
+					}
+				'; 
+	 		}elseif($current_theme_key == 'themes___bosa-storefront') {
+	 			
+	 			$archive_loop_swatches_css_patch .= '	 					
+					.product-inner-contents {
+					    clear: both;
 					}
 				'; 
 	 		}
