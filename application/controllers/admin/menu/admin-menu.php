@@ -163,11 +163,18 @@ if ( ! class_exists( 'Admin_Menu' ) ) {
 				unset($submenu[7]);
 			}
 
+			do not show extentions tab for variation swatches, means if only variation swatches feature enabled and all others are disabled then do not show the extantions tab.
+			if( empty($features['ring_builder']) and empty($features['pair_maker']) and empty($features['guidance_tool']) and empty($bonus_features['price_control']) and empty($bonus_features['spec_view_item_page']) and empty($bonus_features['filters_shortcode']) and empty($bonus_features['filters_shop_cat']) ) {
+
+				unset($submenu[10]);
+				// -- unset Theme Adaption tab, but still need to confirm once if this is intended -- to h
+				unset($submenu[111]);
+			}
+
 			// // -- $_GET se tya url avse pasi condition check thase @a 154 and 154.2--
-			// if(!empty($_GET['select_option']) && $_GET['select_option'] == 'bn-vs'){
-			// 	unset($submenu[10]);
-			// 	unset($submenu[11]);
-			// }
+			if(!empty($_GET['select_option']) && $_GET['select_option'] == 'bn-vs'){
+				
+			}
 
 			$menu['submenu'] = $submenu;
 			return $menu;

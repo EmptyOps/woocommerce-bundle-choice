@@ -3967,7 +3967,7 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
 
             }                
         }
-
+        
         console.log("gim [get_loop_box_anchor_private] _this.$finalAnchor");
         console.log(_this.$finalAnchor);
 
