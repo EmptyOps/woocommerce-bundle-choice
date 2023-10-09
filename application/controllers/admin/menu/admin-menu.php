@@ -163,7 +163,7 @@ if ( ! class_exists( 'Admin_Menu' ) ) {
 				unset($submenu[7]);
 			}
 
-			do not show extentions tab for variation swatches, means if only variation swatches feature enabled and all others are disabled then do not show the extantions tab.
+			// do not show extentions tab for variation swatches, means if only variation swatches feature enabled and all others are disabled then do not show the extantions tab.
 			if( empty($features['ring_builder']) and empty($features['pair_maker']) and empty($features['guidance_tool']) and empty($bonus_features['price_control']) and empty($bonus_features['spec_view_item_page']) and empty($bonus_features['filters_shortcode']) and empty($bonus_features['filters_shop_cat']) ) {
 
 				unset($submenu[10]);
