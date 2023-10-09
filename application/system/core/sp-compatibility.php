@@ -88,6 +88,9 @@ class SP_Compatibility {
 	 				.wc-product__part.wc-product__add_to_cart .product_type_variable.add_to_cart_button {
 					    display: none !important;
 					}
+					.attachment-woocommerce_thumbnail.size-woocommerce_thumbnail {
+					    display: none !important;
+					}
 				'; 
 	 		}elseif($current_theme_key == 'themes___colormag') {
 	 			
