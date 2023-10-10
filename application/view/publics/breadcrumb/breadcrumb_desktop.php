@@ -66,20 +66,44 @@ if(isset($_GET['FIRST']) and isset($_GET['SECOND'])) {
     if(wbc()->options->get_option('appearance_breadcrumb','showhide_icons','0')/*get_option('eo_wbc_show_hide_breadcrumb_icon','0')*/==='1'){
         $html.="<style>.eo-wbc-container>.ui.ordered.steps .step:before{content:''}</style>";
     } 
-    $html.="<script>
-                jQuery(document).ready(function(){ jQuery('.onclick_redirect').on('click',function(){ 
-                        var _step = jQuery(this);
-                        var _rem_url = jQuery(_step).find('[data-remove-url]');
-                        if(_rem_url.length>0) { 
-                            window.location.href=jQuery(_rem_url[0]).data('remove-url');
-                        } else { 
-                            window.location.href = jQuery(_step).data('begin'); 
-                        }
-                    });
-                    jQuery('[data-clickable_breadcrumb]').on('click',function(){
-                        window.location.href = jQuery(this).data('clickable_breadcrumb'); 
-                    });
-                }); 
-            </script>";
     echo $html;
+    if (false) {
+    
+        $html.="<script>
+                    jQuery(document).ready(function(){ jQuery('.onclick_redirect').on('click',function(){ 
+                            var _step = jQuery(this);
+                            var _rem_url = jQuery(_step).find('[data-remove-url]');
+                            if(_rem_url.length>0) { 
+                                window.location.href=jQuery(_rem_url[0]).data('remove-url');
+                            } else { 
+                                window.location.href = jQuery(_step).data('begin'); 
+                            }
+                        });
+                        jQuery('[data-clickable_breadcrumb]').on('click',function(){
+                            window.location.href = jQuery(this).data('clickable_breadcrumb'); 
+                        });
+                    }); 
+                </script>";
+        echo $html;
+    }
+        $inline_script =
+            '<script>' .
+            '    jQuery(document).ready(function(){' .
+            '        jQuery(\'.onclick_redirect\').on(\'click\',function(){' .
+            '            var _step = jQuery(this);' .
+            '            var _rem_url = jQuery(_step).find(\'[data-remove-url]\');' .
+            '            if (_rem_url.length > 0) {' .
+            '                window.location.href = jQuery(_rem_url[0]).data(\'remove-url\');' .
+            '            } else {' .
+            '                window.location.href = jQuery(_step).data(\'begin\');' .
+            '            }' .
+            '        });' .
+            '        jQuery(\'[data-clickable_breadcrumb]\').on(\'click\',function(){' .
+            '            window.location.href = jQuery(this).data(\'clickable_breadcrumb\');' .
+            '        });' .
+            '    });' .
+            '</script>';
+
+        wbc()->load->add_inline_script('', $inline_script, 'common');
+
 }

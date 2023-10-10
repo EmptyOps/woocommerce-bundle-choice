@@ -11,7 +11,7 @@ if(in_array($variable_item_data['options_loop_type'][$term->slug],array('dropdow
           <input type="hidden" name="attribute_%s" data-attribute_name="attribute_%s" data-id="%s">
           <i class="dropdown icon"></i>
           <div class="default text">%s</div>
-          <div class="menu">',esc_attr( $variable_item_data['attribute'] ),esc_attr( $variable_item_data['attribute'] ),esc_attr( $variable_item_data['attribute'] ),$variable_item_data['selected_item']);
+          <div class="menu">',esc_attr( $variable_item_data['attribute'] ),esc_attr( $variable_item_data['attribute'] ),esc_attr( $variable_item_data['attribute'] ),esc_html($variable_item_data['selected_item']));
 
     if (!empty($template_data['template_key_actual'])) {
 

@@ -196,7 +196,9 @@ if(empty($_per_page)){
 	</form>
 
 	<br/><br/>
-	<?php if(apply_filters('eowbc_enque_filter_js',call_user_func('__return_true'))): ?>
+	<?php if(apply_filters('eowbc_enque_filter_js',call_user_func('__return_true'))):
+	if (false) {
+		?>
 	<script type="text/javascript">		
 
 		jQuery(document).ready(function($){			
@@ -580,6 +582,85 @@ if(empty($_per_page)){
 
 	</script> 
 
-	<?php endif; ?>
+	<?php }
+		$inline_script =
+		    "jQuery(document).ready(function(\$){\n" .
+		    "\n" .
+		    "    window.document.splugins = window.document.splugins || {};\n" .
+		    "    window.document.splugins.ui = window.document.splugins.ui || {};\n" .
+		    "    window.document.splugins.ui.slider = window.document.splugins.ui.slider || jQuery.fn.slider;\n" .
+		    "\n" .
+		    "    // --- move this code in woo-bundle-choice/asset/js/publics/eo_wbc_filter.js window.document.splugins.wbc.filters.api.slider_change_event_listener(); ---\n" .
+		    "    // --- start ---\n" .
+		    "    // window.eo=new Object();\n" .
+		    "    // //Slider creation function\n" .
+		    "    // window.eo.slider=function(selector){\n" .
+		    "    //     jQuery(selector).each(function(i,e){\n" .
+		    "    //         // Remaining JavaScript code for slider creation...\n" .
+		    "    //     });\n" .
+		    "    // };\n" .
+		    "    // --- end ---\n" .
+		    "\n" .
+		    "    // window.document.splugins.wbc.filters.api.slider_change_event(selector);\n" .
+		    "\n" .
+		    "    var primary_filter=jQuery(\".eo-wbc-container.filters .ui.segment:not(.secondary)\");\n" .
+		    "    var primary_computer_only=jQuery(primary_filter).find(\".computer.tablet.only\");\n" .
+		    "    var primary_mobile_only=jQuery(primary_filter).find(\".mobile.only\");\n" .
+		    "\n" .
+		    "    // var secondary_filter=jQuery(\".eo-wbc-container.filters .ui.segment.secondary\");\n" .
+		    "    var secondary_filter=\".eo-wbc-container.filters .ui.segment.secondary\";\n" .
+		    "    var secondary_computer_only=jQuery(secondary_filter).find(\".computer.tablet.only\");\n" .
+		    "    var secondary_mobile_only=jQuery(secondary_filter).find(\".mobile.only\");\n" .
+		    "\n" .
+		    "    if( typeof(jQuery.fn.accordion) ==='function' ){\n" .
+		    "        jQuery('.ui.accordion').accordion();\n" .
+		    "    }\n" .
+		    "\n" .
+		    "    // window.eo.slider(jQuery('.eo-wbc-container.filters').find('.ui.slider'));\n" .
+		    "\n" .
+		    "    /* Activate initiation of sliders at secondary segments. */\n" .
+		    "    if(jQuery(secondary_computer_only).css('display')!='none'){\n" .
+		    "        jQuery(\"#advance_filter\").on('click',function(){\n" .
+		    "            jQuery(\"#advance_filter\").find('.ui.icon').toggleClass('up down');\n" .
+		    "            jQuery(secondary_filter+\":eq(0)\").transition('slide down');\n" .
+		    "        }).trigger('click');\n" .
+		    "    } else if(jQuery(secondary_mobile_only).css('display')!='none') {\n" .
+		    "        jQuery(\"#advance_filter\").on('click',function(){\n" .
+		    "            jQuery(this).find('.ui.icon').toggleClass('up down');\n" .
+		    "            jQuery(secondary_filter).transition('fly right');\n" .
+		    "        }).trigger('click');\n" .
+		    "    }\n" .
+		    "\n" .
+		    "    if(jQuery(\"#primary_filter\").parent().parent().css('display')!='none'){\n" .
+		    "        jQuery(\"#primary_filter\").click(function(e){\n" .
+		    "            e.preventDefault();\n" .
+		    "            e.stopPropagation();\n" .
+		    "            jQuery(\"#primary_filter\").find('.ui.icon').toggleClass(\"down up\");\n" .
+		    "            jQuery('.eo-wbc-container.filters,#advance_filter').transition('fade');\n" .
+		    "        }).trigger('click');\n" .
+		    "    }\n" .
+		    "\n" .
+		    "    /*----------------------------------------------------*/\n" .
+		    "    /*----------------------------------------------------*/\n" .
+		    "\n" .
+		    "    // --- move this code in woo-bundle-choice/asset/js/publics/eo_wbc_filter.js window.document.splugins.wbc.filters.api.slider_change_event_listener(); ---\n" .
+		    "    // --- start ---\n" .
+		    "    // if( typeof(jQuery.fn.checkbox) ==='function' ) {\n" .
+		    "    //     jQuery('.checkbox').checkbox({onChange:function(event){\n" .
+		    "    //         // Remaining JavaScript code for checkbox change event...\n" .
+		    "    //     }});\n" .
+		    "    // }\n" .
+		    "    // --- end ---\n" .
+		    "\n" .
+		    "    // window.document.splugins.wbc.filters.api.checkbox_change_event(event);\n" .
+		    "\n" .
+		    "    /*----------------------------------------------------*/\n" .
+		    "    /*----------------------------------------------------*/\n" .
+		    "\n" .
+		    "});\n";
+
+		wbc()->load->add_inline_script('', $inline_script, 'common');
+
+	endif; ?>
 
 	<?php do_action('eowbc_post_filter_javascript',$filter_ui); ?>

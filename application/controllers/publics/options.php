@@ -425,7 +425,7 @@ class Options extends \eo\wbc\controllers\publics\Controller {
 					
 					foreach ( $terms as $term ) {
 						if ( in_array( $term->slug, $options ) ) {
-							echo '<option value="' . esc_attr( $term->slug ) . '" ' . esc_attr(selected( sanitize_title( $args[ 'selected' ] ), $term->slug, false )) . '>' . apply_filters( 'woocommerce_variation_option_name', $term->name ) . '</option>';
+							echo '<option value="' . esc_attr( $term->slug ) . '" ' . esc_attr(selected( sanitize_title( $args[ 'selected' ] ), $term->slug, false )) . '>' . esc_html(apply_filters( 'woocommerce_variation_option_name', $term->name )) . '</option>';
 						}
 					}
 				} else {

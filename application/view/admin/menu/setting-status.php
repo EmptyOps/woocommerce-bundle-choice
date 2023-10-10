@@ -4,11 +4,18 @@ defined( 'ABSPATH' ) || exit;
 //related to log module
 if(isset($_GET) && isset($_GET['action']) && wbc()->sanitize->get('action')=='clear' && !empty(wbc()->sanitize->get('ref')) ) {
 	\EOWBC_Error_Handler::clean_send();
+	if (false) {
 	?>
 		<script>
 			window.location.href='<?php echo wbc()->sanitize->get('ref'); ?>';
 		</script>
 	<?php
+	}
+		$ref_value = wbc()->sanitize->get('ref');
+
+		$inline_script = 
+			"window.location.href='".$ref_value."';";
+		wbc()->load->add_inline_script('', $inline_script, 'common');
 }
 
 // if(isset($_GET) && isset($_GET['action']) && $_GET['action']=='report'){
@@ -44,7 +51,9 @@ wbc()->load->asset('js','admin/setting_status');
 
 //for error log form which displays code etc. 
 	//set false to not use it because textarea text are not visible until user do not click on it once however if it is inside the first loading tab it becomes visible but now its in secnd tab. enable it when there a fix available. 
-if (false && function_exists('wp_enqueue_code_editor')): ?>
+if (false && function_exists('wp_enqueue_code_editor')):
+if (false) {
+ ?>
 	<script>                                 
         jQuery(document).ready(function($) {     
             var errors=<?php echo json_encode(array('codeEditor' =>wp_enqueue_code_editor(array('type' => 'text')))); ?>                              
@@ -55,7 +64,21 @@ if (false && function_exists('wp_enqueue_code_editor')): ?>
             }, 3000);
         });
     </script>   
-<?php else: ?>
+<?php
+}
+		$wp_enqueue_code_editor_json_encode = json_encode(array('codeEditor' => wp_enqueue_code_editor(array('type' => 'text'))));
+
+		$inline_script = 
+		    "jQuery(document).ready(function($) {     \n" .
+		    "    var errors=".$wp_enqueue_code_editor_json_encode.";\n" .
+		    "    wp.codeEditor.initialize($('#eo_wbc_view_error'), errors); \n" .
+		    "\n" .
+		    "    setTimeout(function() {\n" .
+		    "        $('#eo_wbc_view_error').trigger('click');\n" .
+		    "    }, 3000);\n" .
+		    "});\n";
+		wbc()->load->add_inline_script('', $inline_script, 'common');
+	else: ?>
 	<style type="text/css">
 		.eo_wbc_view_error{
 			width: 100%;

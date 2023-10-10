@@ -4,6 +4,9 @@ if(/*wp_is_mobile()*/ wbc_is_mobile_by_page_sections('cat_shop_page',true)) {
 	<div id="help_modal" class="ui small modal"><i class="close icon" style="top: 0;right: 0;color: #000;" onclick='jQuery("#help_modal").modal("hide")'></i><div class="header"></div>
 	<div class="content"></div>
 	</div>
+	<?php
+		if(false){
+		?>
 	<script type="text/javascript">
 	jQuery(document).ready(function(){
 		jQuery(document).on('click',".question.circle.icon",function(){
@@ -17,7 +20,22 @@ if(/*wp_is_mobile()*/ wbc_is_mobile_by_page_sections('cat_shop_page',true)) {
 		});
 	});
 	</script>
-	<?php
+	<?php }
+	$inline_script =
+	    "jQuery(document).ready(function(){\n" .
+	    "    jQuery(document).on('click', \".question.circle.icon\", function(){\n" .
+	    "        jQuery(\"#help_modal\").find(\".content\").html('');\n" .
+	    "        _help_text = jQuery(this).data('help');\n" .
+	    "        jQuery(\"#help_modal\").find(\".content\").html(_help_text);\n" .
+	    "        jQuery(\"#help_modal\").modal('show');\n" .
+	    "    });\n" .
+	    "    jQuery(document).on('click', \"#help_modal .close.icon\", function(){\n" .
+	    "        jQuery(\"#help_modal\").modal('hide');\n" .
+	    "    });\n" .
+	    "});\n";
+
+	wbc()->load->add_inline_script('', $inline_script, 'common');
+
 	if(wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile',false)=='mobile_1'){
 
 		?>
