@@ -285,34 +285,44 @@ add_action( 'wp_enqueue_scripts' ,function(){
     <!-- -- a tejas che api che -->
     <script type="text/javascript">
 
+        var is_splide_initiated = false;
+
         var splide_init_function = function(){
 
-            console.log("slider asset init_function");
+            if(is_splide_initiated){
+                return;
+            }
+            is_splide_initiated = true;
 
-            var splide = new Splide( '#slider1'/* '.splide_slider_container'*/, {
-                direction   : 'ttb',
-                 wheel       : true,
-                 releaseWheel: true,
-                height     : '30rem',
-                pagination: false,
-                 perPage: 5,
-                gap: '10px',
-                cover:false,
-                  type   : 'slide',
-                 updateOnMove: true,
-                  arrows:true,
-                slider:true,
-                perMove     : 1,
-                rewind      : true,
-                isNavigation: true,
-                drag:true,
-                dragMinThreshold: {
-                    mouse: 4,
-                    touch: 10,
-                },
-            } );
-            splide.mount();
+            console.log("slider asset init_function");
+            // setTimeout(function(argument) {
+                
+            //     var splide = new Splide( '#slider1'/* '.splide_slider_container'*/, {
+            //         direction       : 'ttb',
+            //         wheel           : true,
+            //         // releaseWheel    : true,
+            //         height          : '30rem',
+            //         pagination      : false,
+            //         perPage         : 5,
+            //         gap             : '10px',
+            //         cover           : false,
+            //         type            : 'loop',
+            //         // updateOnMove    : true,
+            //         arrows          : true,
+            //         // slider          : true,
+            //         perMove         : 1,
+            //         rewind          : true,
+            //         isNavigation    : true,
+            //         drag            : false,
+            //         // dragMinThreshold: {
+            //         //     mouse: 4,
+            //         //     touch: 10,
+            //         // },
+            //     } );
+            //     splide.mount();
+            // },1000);
         };
+
 
         /*document.addEventListener("DOMContentLoaded", function(event) {
             
