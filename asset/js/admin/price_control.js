@@ -38,7 +38,7 @@ jQuery(document).ready(function(jQuery){
 
                 jQuery('[name="jpc_field_type"]').val(jQuery(elem).data('type'));
             }
-            if(jQuery(elem).data('type')==1 || jQuery(elem).data('rule_type')=='custom_numaric_range'){
+            if(jQuery(elem).data('type')==1 || jQuery(elem).data('rule_type')=='custom_numeric_range'){
                 // jQuery('#select_values_label_label_div').transition('show');
                 // jQuery('#jpc_compare_dropdown_div').transition('show');
                 jQuery('.jpc_rule_fields').parent().transition('show');
