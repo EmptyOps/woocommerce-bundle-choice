@@ -103,11 +103,11 @@ jQuery(document).ready(function(jQuery){
 
             if(jQuery('[name="jpc_field_type"]').val()=='custom_numeric_range'){
 
-                jQuery("#"+drop_id).addClass('additions search');  
+                jQuery("#"+drop_id).addClass('additions');  
             }
             else {
 
-                jQuery("#"+drop_id).removeClass('additions search');
+                jQuery("#"+drop_id).removeClass('additions');
             }
                        
             if(i==1){
