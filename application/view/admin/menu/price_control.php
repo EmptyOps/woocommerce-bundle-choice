@@ -96,7 +96,7 @@ $form['data'] = array(
 						'sanitize'=>'sanitize_text_field',
 						'attr'=>array(' onchange="window.document.splugins.common.admin.form_builder.api.set_sp_eid( \'#'.$field_key.'_dropdown_div\', \''.$field_key_sp_eid.'\' )" '),
 						//'options'=>eo_wbc_jpc_list_attributes( eo_wbc_jpc_list_categories() ),
-						'options'=>apply_filters('wbc_price_control_field_options', eo_wbc_jpc_list_attributes( eo_wbc_jpc_list_categories() ),
+						'options'=>apply_filters('wbc_price_control_field_options', eo_wbc_jpc_list_attributes( eo_wbc_jpc_list_categories() )),
 						'class'=>array('fluid'),
 						'size_class'=>array('eight','wide'),
 						'inline'=>false,

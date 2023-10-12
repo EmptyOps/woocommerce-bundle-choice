@@ -101,7 +101,7 @@ jQuery(document).ready(function(jQuery){
                 }); 
             }
 
-            if(jQuery('[name="jpc_field_type"]').val()=='custom_numaric_range'){
+            if(jQuery('[name="jpc_field_type"]').val()=='custom_numeric_range'){
 
                 jQuery("#"+drop_id).addClass('additions search');  
             }
