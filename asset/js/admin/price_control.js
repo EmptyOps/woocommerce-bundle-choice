@@ -30,8 +30,15 @@ jQuery(document).ready(function(jQuery){
 
             jQuery('[name="jpc_field_name"]').val(label);
             jQuery('[name="jpc_field_value"]').val(valueLcl);
-            jQuery('[name="jpc_field_type"]').val(jQuery(elem).data('type'));
-            if(jQuery(elem).data('type')==1){
+            
+            if(!window.document.splugins.common.is_empty(jQuery(elem).data('rule_type'))){
+
+                jQuery('[name="jpc_field_type"]').val(jQuery(elem).data('rule_type'));    
+            } else {
+
+                jQuery('[name="jpc_field_type"]').val(jQuery(elem).data('type'));
+            }
+            if(jQuery(elem).data('type')==1 || jQuery(elem).data('rule_type')=='custom_numaric_range'){
                 // jQuery('#select_values_label_label_div').transition('show');
                 // jQuery('#jpc_compare_dropdown_div').transition('show');
                 jQuery('.jpc_rule_fields').parent().transition('show');
@@ -84,14 +91,25 @@ jQuery(document).ready(function(jQuery){
             drop_id = jpc_values_drop_id_tmpl.replace("{i}", ""+i);
             target=jQuery("#"+drop_id+" .menu");
             jQuery(target).html('');
-            jQuery(window.eo_wbc.attributes[value]).each(function(k,v){
-                for (var key in window.eo_wbc.attributes[value]) {
-                    if (v.hasOwnProperty(key)) {
-                        jQuery(target).append('<div class="item" data-value="'+key+'">'+v[key]+'</div>');
+            if(jQuery('[name="jpc_field_type"]').val()==1){
+                jQuery(window.eo_wbc.attributes[value]).each(function(k,v){
+                    for (var key in window.eo_wbc.attributes[value]) {
+                        if (v.hasOwnProperty(key)) {
+                            jQuery(target).append('<div class="item" data-value="'+key+'">'+v[key]+'</div>');
+                        }
                     }
-                }
-            });            
+                }); 
+            }
 
+            if(jQuery('[name="jpc_field_type"]').val()=='custom_numaric_range'){
+
+                jQuery("#"+drop_id).addClass('additions search');  
+            }
+            else {
+
+                jQuery("#"+drop_id).removeClass('additions search');
+            }
+                       
             if(i==1){
                 jQuery("#"+drop_id).dropdown({ onChange:function(val,lab,ele){
                     jQuery('[name="jpc_values_name_1"]').val(lab);
