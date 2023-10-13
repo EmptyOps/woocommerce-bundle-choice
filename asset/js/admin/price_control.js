@@ -18,7 +18,7 @@ jQuery(document).ready(function(jQuery){
     jQuery('.jpc_rules_table').transition('hide');
     jQuery('.jpc_price_ctl_table').transition('hide');
     jQuery("#jpc_save_price_ctl").transition('hide');
-
+    console.log('good');
     jQuery('#jpc_field_dropdown_div').dropdown({
         onChange:function(valueLcl,label,elem){
 
@@ -33,11 +33,14 @@ jQuery(document).ready(function(jQuery){
             
             if(!window.document.splugins.common.is_empty(jQuery(elem).data('rule_type'))){
 
-                jQuery('[name="jpc_field_type"]').val(jQuery(elem).data('rule_type'));    
+                jQuery('[name="jpc_field_type"]').val(jQuery(elem).data('rule_type'));
+                console.log('price_control onChange if');    
             } else {
 
                 jQuery('[name="jpc_field_type"]').val(jQuery(elem).data('type'));
+                console.log('price_control onChange else');
             }
+            console.log(jQuery('[name="jpc_field_type"]').val());
             if(jQuery(elem).data('type')==1 || jQuery(elem).data('rule_type')=='custom_numeric_range'){
                 // jQuery('#select_values_label_label_div').transition('show');
                 // jQuery('#jpc_compare_dropdown_div').transition('show');
@@ -103,11 +106,11 @@ jQuery(document).ready(function(jQuery){
 
             if(jQuery('[name="jpc_field_type"]').val()=='custom_numeric_range'){
 
-                jQuery("#"+drop_id).addClass('additions');  
+                jQuery("#"+drop_id).addClass('additions search');  
             }
             else {
 
-                jQuery("#"+drop_id).removeClass('additions');
+                jQuery("#"+drop_id).removeClass('additions search');
             }
                        
             if(i==1){
@@ -145,7 +148,7 @@ jQuery(document).ready(function(jQuery){
 
                 for(l=0;l<e.length-1;l++){
 
-                    if(e[l]['field_type']=='1'){
+                    if(e[l]['field_type']=='1' || e[l]['field_type']=='custom_numeric_range'){
                         rows_data+=e[l]['field_name']+': '+e[l]['value_name']+'<br/>';
                     }else{
                         rows_data+='['+e[l]['field_name']+']<br/>';
@@ -257,7 +260,7 @@ jQuery(document).ready(function(jQuery){
 
             row_obj.push(row_obj_data);
 
-            if(jQuery(data[1]).data('value')=='1'){
+            if(jQuery(data[1]).data('value')=='1' || jQuery(data[1]).data('value')=='custom_numeric_range'){
                 rows_data+=jQuery(data[0]).text()+': '+jQuery(data[3]).text()+'<br/>';
             }else{
                 rows_data+='['+jQuery(data[0]).text()+']<br/>';
@@ -334,7 +337,7 @@ function eowbc_pc_add_rule_btn_click() {
         }
     }
     
-    jQuery("#jpc_rules_table tbody").append('<tr> <td class="left aligned" data-value="'+_field_value+'" data-jpc_field_sp_eid="'+jpc_field_sp_eid+'">'+_field_name+'</td><td class="left aligned" data-value="'+_field_type+'">'+(_field_type=='1'?'Attribute':'Category')+'</td><td class="center aligned" data-value="'+_compare_value+'">'+_compare_name+'</td><td class="center aligned" data-value_1="'+_value_value_1+'" data-value_2="'+_value_value_2+'">'+_value_name_1+(_value_name_2?'-'+_value_name_2:'')+'</td></tr>')
+    jQuery("#jpc_rules_table tbody").append('<tr> <td class="left aligned" data-value="'+_field_value+'" data-jpc_field_sp_eid="'+jpc_field_sp_eid+'">'+_field_name+'</td><td class="left aligned" data-value="'+_field_type+'">'+(_field_type=='1'?'Attribute':(_field_type=='custom_numeric_range'?'Price Rule':'Category'))+'</td><td class="center aligned" data-value="'+_compare_value+'">'+_compare_name+'</td><td class="center aligned" data-value_1="'+_value_value_1+'" data-value_2="'+_value_value_2+'">'+_value_name_1+(_value_name_2?'-'+_value_name_2:'')+'</td></tr>')
     //jQuery("#jpc_rules_table").parent().transition('show');
     jQuery('.jpc_rules_table').transition('show');
 
