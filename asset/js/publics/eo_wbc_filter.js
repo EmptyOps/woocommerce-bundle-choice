@@ -1598,7 +1598,23 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 			on_slider_change_event(selector, this);
 		};
 		// --- end ---
-    	window.document.splugins.wbc.filters.filter_field.slider(jQuery('.eo-wbc-container.filters').find('.ui.slider'));
+
+		if (window.document.splugins.common.current_theme_key != 'themes___purple_theme') {
+		    window.document.splugins.wbc.filters.filter_field.slider(
+		        jQuery('.eo-wbc-container.filters').find('.ui.slider')
+		    );
+		} else {
+		    // added on 18-09-2023
+		    setTimeout(function () {
+		        console.log('filters [slider_change_event_listener] 1');
+		        console.log(jQuery('.Top_Daimond_Btn_Content').find('.irs-hidden-input'));
+
+		        window.document.splugins.wbc.filters.filter_field.slider(
+		            jQuery('.Top_Daimond_Btn_Content').find('.irs-hidden-input')
+		        );
+		    }, 2000);
+		}
+
     };
 
     var checkbox_change_event_listener = function(){
@@ -2068,7 +2084,9 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 					_min=0;
 					_max=_labels.length-1;
 				}
-
+				console.log('slider_change_event loop onChange');
+				console.log(jQuery(this/*element*/));
+				console.log(value);
 				if(
 					(
 						(jQuery(this/*element*/).data('prev_val_min')!=min && jQuery(this/*element*/).data('prev_val_min')!=undefined)
@@ -2159,36 +2177,49 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 				_params.autoAdjustLabels=false;	
 			}					
 			
+			jQuery(jQuery(e).attr('data-bind-min')).change(function() {				    
+
+				common_slider_change_event(e);
+			});
+
+			jQuery(jQuery(e).attr('data-bind-max')).change(function() {				    
+
+				common_slider_change_event(e);
+			});
+
 			jQuery("input.text_slider_"+jQuery(e).attr('data-slug')).change(function() {				    
-				
-				//jQuery("#text_slider_"+jQuery(e).attr('data-slug')).slider("set rangeValue",jQuery("[name=min_"+jQuery(e).attr('data-slug')+"]").val(),jQuery("[name=max_"+jQuery(e).attr('data-slug')+"]").val());
 
-				let prefix = jQuery(e).attr('data-prefix');
-				let postfix = jQuery(e).attr('data-postfix');
-				
-				let min_value = jQuery("[name='text_min_"+jQuery(e).attr('data-slug')+"']").val();
-				
-				let max_value = jQuery("[name='text_max_"+jQuery(e).attr('data-slug')+"']").val();
-				
-				if(prefix!=='' && typeof(prefix)!==typeof(undefined) && prefix.hasOwnProperty('length')){
-					if(min_value.includes(prefix)){
-						min_value = min_value.slice(prefix.length);	
-					}							
-					if(max_value.includes(prefix)){
-						max_value = max_value.slice(prefix.length);
-					}
-				}
+				// -- move to common_slider_change_event()
+				// //jQuery("#text_slider_"+jQuery(e).attr('data-slug')).slider("set rangeValue",jQuery("[name=min_"+jQuery(e).attr('data-slug')+"]").val(),jQuery("[name=max_"+jQuery(e).attr('data-slug')+"]").val());
 
-				if(postfix!=='' && typeof(postfix)!==typeof(undefined) && postfix.hasOwnProperty('length')){
-					if(min_value.includes(postfix)){
-						min_value = min_value.slice(0,-1*postfix.length);
-					}
-					if(min_value.includes(postfix)){
-						max_value = max_value.slice(0,-1*postfix.length);
-					}
-				}
+				// let prefix = jQuery(e).attr('data-prefix');
+				// let postfix = jQuery(e).attr('data-postfix');
 				
-				jQuery("#text_slider_"+jQuery(e).attr('data-slug')).slider("set rangeValue",min_value,max_value);
+				// let min_value = jQuery("[name='text_min_"+jQuery(e).attr('data-slug')+"']").val();
+				
+				// let max_value = jQuery("[name='text_max_"+jQuery(e).attr('data-slug')+"']").val();
+				
+				// if(prefix!=='' && typeof(prefix)!==typeof(undefined) && prefix.hasOwnProperty('length')){
+				// 	if(min_value.includes(prefix)){
+				// 		min_value = min_value.slice(prefix.length);	
+				// 	}							
+				// 	if(max_value.includes(prefix)){
+				// 		max_value = max_value.slice(prefix.length);
+				// 	}
+				// }
+
+				// if(postfix!=='' && typeof(postfix)!==typeof(undefined) && postfix.hasOwnProperty('length')){
+				// 	if(min_value.includes(postfix)){
+				// 		min_value = min_value.slice(0,-1*postfix.length);
+				// 	}
+				// 	if(min_value.includes(postfix)){
+				// 		max_value = max_value.slice(0,-1*postfix.length);
+				// 	}
+				// }
+
+				// jQuery("#text_slider_"+jQuery(e).attr('data-slug')).slider("set rangeValue",min_value,max_value);
+
+				common_slider_change_event(e);
 			});
 
 			let ui_slider = jQuery.fn.slider;
@@ -2204,7 +2235,10 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 				
 				console.log('if jQuery(e).slider(_params) call');
 
-				jQuery(e).slider(_params);
+				// purple theme mate aa permenent alag if se tenu slider alag ave se atle. So aa permanant if condition se and koi temp. temparary if nathi.
+				if(window.document.splugins.common.current_theme_key != 'themes___purple_theme') {
+					jQuery(e).slider(_params);
+				}
 			}else{
 				
 				console.log('else temp_patch_slider_change_event_child call');
@@ -2227,6 +2261,50 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		}
 
     };
+
+    var common_slider_change_event = function(e) {
+
+		console.log('slider_change_event loop 1 change');
+		console.log("input.text_slider_"+jQuery(e).attr('data-slug'));
+		//jQuery("#text_slider_"+jQuery(e).attr('data-slug')).slider("set rangeValue",jQuery("[name=min_"+jQuery(e).attr('data-slug')+"]").val(),jQuery("[name=max_"+jQuery(e).attr('data-slug')+"]").val());
+
+		let prefix = jQuery(e).attr('data-prefix');
+		let postfix = jQuery(e).attr('data-postfix');
+		
+		let min_value = jQuery("[name='text_min_"+jQuery(e).attr('data-slug')+"']").val();
+		
+		let max_value = jQuery("[name='text_max_"+jQuery(e).attr('data-slug')+"']").val();
+		
+		if(prefix!=='' && typeof(prefix)!==typeof(undefined) && prefix.hasOwnProperty('length')){
+			if(min_value.includes(prefix)){
+				min_value = min_value.slice(prefix.length);	
+			}							
+			if(max_value.includes(prefix)){
+				max_value = max_value.slice(prefix.length);
+			}
+		}
+
+		if(postfix!=='' && typeof(postfix)!==typeof(undefined) && postfix.hasOwnProperty('length')){
+			if(min_value.includes(postfix)){
+				min_value = min_value.slice(0,-1*postfix.length);
+			}
+			if(min_value.includes(postfix)){
+				max_value = max_value.slice(0,-1*postfix.length);
+			}
+		}
+
+		if(window.document.splugins.common.current_theme_key != 'themes___purple_theme') {
+
+			jQuery("#text_slider_"+jQuery(e).attr('data-slug')).slider("set rangeValue",min_value,max_value);
+		}else{
+			
+			var sliderData = jQuery(e).data("ionRangeSlider").result;
+			
+			jQuery(e).data("ionRangeSlider").options.onFinish(sliderData);
+
+		}
+
+    }
 
 	// ACTIVE_TODO temp. added on 30-11-2022. remove as soon as the standerd fix is ready. 
     var temp_patch_slider_change_event_child = function(slider) {
@@ -3902,7 +3980,10 @@ if( typeof(eo_wbc_object) != 'undefined'){
 		    }
 
 			console.log("filter_sets filter_set_click 55");
-
+			
+			// reset
+			window.document.splugins.wbc.pagination.api.set_page_number( 1 );
+		    
 		    // window.document.splugins.wbc.filters.core.eo_wbc_filter_change_wrapper(false,'form#<?php echo $filter_ui->filter_prefix; ?>eo_wbc_filter','',{'this':this,'event':event});
 		    window.document.splugins.wbc.filters.api.eo_wbc_filter_change_wrapper(false,'form#'+_this.configs.filter_prefix +'eo_wbc_filter','',{'this':element/*this*/,'event':event});
 

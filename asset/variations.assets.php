@@ -1255,7 +1255,7 @@ console.log('is_shop_css');
 	<?php 
 	if(is_product() && !has_action('woocommerce_before_variations_form')) {
 	?>
-		// jQuery(".variations_form").before('<span id="wbc_variation_toggle" class="ui raised segment"><?php _e($toggle_text); ?><i class="caret up icon" style="text-align: center;line-height: 1em;"></i></span>');	
+		// jQuery(".variations_form").before('<span id="wbc_variation_toggle" class="ui raised segment"><?php //_e($toggle_text); ?><i class="caret up icon" style="text-align: center;line-height: 1em;"></i></span>');	
 
 	<?php } ?>
 	
@@ -1678,7 +1678,7 @@ if(is_product()) {
 				    display: none !important;
 				}
 
-				body form table.variations tbody td .spui-wbc-swatches-variable-items-wrapper-<?php echo $_attribute_slug ?>{
+				body form table.variations tbody td ul.spui-wbc-swatches-variable-items-wrapper-<?php echo $_attribute_slug ?>{
 					display: none !important;
 				}
 			</style>
