@@ -217,9 +217,18 @@ if(window.document.splugins.common.is_item_page || window.document.splugins.comm
 
  window.document.splugins.common.get_device_visible_screen_height_width = function() {
     
+    // Visible Height
+    var visibleHeight = window.innerHeight || document.documentElement.clientHeight;
+
+    // Visible Width
+    var visibleWidth = window.innerWidth || document.documentElement.clientWidth;  
+    
     return {
-        width: jQuery(window).width(),
-        height: jQuery(window).height(),  
+        // width: jQuery(window).width(),
+        // height: jQuery(window).height(),
+        width: visibleWidth,
+        height: visibleHeight,
+
     };
  } 
 
