@@ -33,6 +33,7 @@
         <div class="content"><?php echo esc_html($breadcrumb_ui::$preview_name/*get_option('eo_wbc_collection_title','Preview')*/); ?></div>
     </div>
 </div>
+<?php if(false){ ?>
 <script>
     jQuery(document).ready(function(){ 
         /*jQuery('.onclick_redirect').on('click',function(){ 
@@ -50,4 +51,22 @@
     }); 
 </script>
 
-<?php } ?>
+<?php } 
+$inline_script = 
+"jQuery(document).ready(function(){\n" .
+"    /*jQuery('.onclick_redirect').on('click',function(){\n" .
+"        var _step = jQuery(this);\n" .
+"        var _rem_url = jQuery(_step).find('[data-remove-url]');\n" .
+"        if(_rem_url.length>0) {\n" .
+"            window.location.href=jQuery(_rem_url[0]).data('remove-url');\n" .
+"        } else {\n" .
+"            window.location.href = jQuery(_step).data('begin');\n" .
+"        }\n" .
+"    });*/\n" .
+"    jQuery('[data-clickable_breadcrumb]').on('click',function(){\n" .
+"        window.location.href = jQuery(this).data('clickable_breadcrumb');\n" .
+"    });\n" .
+"});";
+wbc()->load->add_inline_script('', $inline_script, 'common');
+    }
+?>

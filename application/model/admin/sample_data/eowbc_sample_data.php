@@ -172,7 +172,7 @@ class Eowbc_Sample_Data {
 
 			if(!empty(wbc()->sanitize->post('step'))){
 			  if(wbc()->sanitize->post('step')==3) {
-
+			  	if(false){
 			    ?>
 			    <script type="text/javascript" >
 			    jQuery(document).ready(function($) {            
@@ -221,6 +221,8 @@ class Eowbc_Sample_Data {
 
 			    });
 			    </script> <?php
+				}
+				
 			  }      
 			    $_step=wbc()->sanitize->post('step');
 			} else {
