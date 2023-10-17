@@ -144,6 +144,21 @@ if(window.document.splugins.common.is_item_page || window.document.splugins.comm
     return (val == undefined || val == null || val.length <= 0) ? true : false;
  }
 
+ window.document.splugins.common.find_get_parameter = function(parameterName) {
+    
+    var result = null,
+        tmp = [];
+    location.search
+        .substr(1)
+        .split("&")
+        .forEach(function (item) {
+            tmp = item.split("=");
+            if (tmp[0] === parameterName) result = decodeURIComponent(tmp[1]);
+        });
+
+    return result;
+ }
+
  // reference: https://stackoverflow.com/a/175787
  window.document.splugins.common.isNumeric = function(str) {
     
