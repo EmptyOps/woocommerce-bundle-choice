@@ -4,7 +4,7 @@ namespace eo\wbc\controllers\admin\menu\page;
 defined( 'ABSPATH' ) || exit;
 
 if ( ! class_exists( 'Appearance' ) ) {
-	class Appearance {
+	class Appearance extends \eo\wbc\controllers\admin\Controller{
 
 		private static $_instance;
 		public static function instance() {
@@ -634,8 +634,8 @@ if ( ! class_exists( 'Appearance' ) ) {
 						)
 					)
 				)
-				
 			);
+			$form_definition = self::instance()->generate_form_wrapper($form_definition, 'wbc', 'fp', 'Category Page', array('oops_section'=>'Ooops Section'), \eo\wbc\model\publics\SP_Model_Feed::instance());
 
 			if($is_add_sample_values) {
 				//loop through form tabs and set (random) sample values for each field  
