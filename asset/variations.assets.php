@@ -1443,6 +1443,28 @@ $bg_hover_color = wbc()->options->get_option('tiny_features',$spui_is_product_ca
 
 // ob_start();
 ?>
+
+<!-- advance options icon up down 19-10-23 -->
+<style>
+	.sp-advance {
+    		transform: rotate(-180deg) !important;
+		padding-bottom:7px !important;   
+	}
+	.sp-advance-collapse{
+   		transform: rotate(0deg) !important;
+		padding-bottom:3px !important;   
+	}
+</style>
+<script>
+	jQuery(document).ready(function(){
+		jQuery('span').on("click", function (event) {
+	   jQuery('.material-icons').toggleClass('sp-advance');
+	   jQuery('.material-icons').toggleClass('sp-advance-collapse');
+	});
+	});
+</script>
+
+
 <style type="text/css">
 	/*.ui.mini.images .variable-item.image{
 		width: auto;						
