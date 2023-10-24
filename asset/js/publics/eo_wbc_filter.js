@@ -2311,7 +2311,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		
     	console.log('filters [temp_patch_slider_change_event_child]');
 
-		jQuery.getScript("https://demo.woochoiceplugin.com/hify-store/wp-content/plugins/woo-bundle-choice/asset/js/fomantic/semantic.min.js?ver=5.0.10", function(data, status, jqxhr) {
+		jQuery.getScript(window.document.splugins.common.site_url+'/wp-content/plugins/woo-bundle-choice/asset/js/fomantic/semantic.min.js?ver=5.0.10', function(data, status, jqxhr) {
 	
 	    	for (let i = 0; i < slider.element.length; i++) {
 

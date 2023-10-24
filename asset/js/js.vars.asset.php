@@ -43,6 +43,8 @@ add_action( ( !is_admin() ? 'wp_enqueue_scripts' : 'admin_enqueue_scripts'),func
     	
     	window.document.splugins.common.ajax_url = '<?php echo admin_url('admin-ajax.php'); ?>';
 
+    	window.document.splugins.common.site_url = '<?php echo wbc_site_url(); ?>';
+
 		window.document.splugins.common.is_shop_page = <?php echo ((is_shop()) ? "true" : "false");?>; 
 
 		window.document.splugins.common.is_category_page = <?php echo ((is_product_category()) ? "true" : "false");?>; 
