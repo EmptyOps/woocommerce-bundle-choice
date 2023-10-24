@@ -14,7 +14,7 @@ if(!empty($section_type)){
 				<div class="ui accordion <?php echo !empty($class) ? esc_attr($class) : ''; ?>">
 					<div class="title <?php echo !empty($class)? esc_attr($class):''; ?>">
 				    	<i class="icon dropdown"></i>
-				    	<?php esc_html_e($label, 'woo-bundle-choice'); ?>
+				    	<?php _e($label, 'woo-bundle-choice'); ?>
 					</div>
 					<div class="content <?php echo !empty($class)? esc_attr($class):''; ?>">
 					<div><?php	
