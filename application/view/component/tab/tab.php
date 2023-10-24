@@ -35,13 +35,14 @@ if(!empty($tab_data) and is_array($tab_data)){
 			jQuery('.menu .item').tab();
 			jQuery('.ui.menu .item').off('click');
 		</script>
-	<?php  ?> }
+	<?php 
+	} 
 		$inline_script =
 		    "jQuery('.menu .item').tab();\n" .
 		    "jQuery('.ui.menu .item').off('click');\n";
 
 		wbc()->load->add_inline_script('', $inline_script, 'common');
-		?>	
+	?> 
 		<style>
 			.ui.bottom.attached.tab.segment.active{
 				min-height: 75vh;

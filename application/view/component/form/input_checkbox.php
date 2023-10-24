@@ -48,6 +48,7 @@ if(!empty($id) /*and !empty($label)*/){
 							if (!empty($checkbox_value)) { ?>
 								<label for="<?php echo esc_attr((!empty($is_id_as_name) && $is_id_as_name) ? $id."_".$checkbox_key : $checkbox_key); ?>"><?php echo esc_html($checkbox_value); ?></label>
 
+							<?php
 							}
 							?>
 						</div>
