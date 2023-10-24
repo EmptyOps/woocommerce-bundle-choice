@@ -292,23 +292,35 @@ if(!class_exists('WBC_Loader')) {
 						// NOTE: and since this is about dump to browser so loading sequance hooks and the output buffer should be kept in mind. 
 					if( !empty($localize_var) && !empty($localize_var_val) ) {
 					//echo "load_localize_data inner if";
-										
+
+						$inline_script =
+						    "var " . $localize_var . " = JSON.parse('" . json_encode($localize_var_val) . "');\n";
+						wbc()->load->add_inline_script('', $inline_script, 'common');
+
+						if(false) {				
 						?>
 						<script>
 							var <?php echo $localize_var; ?> = JSON.parse('<?php echo json_encode($localize_var_val); ?>');
 						</script>
 						<?php
-
+						}
 					} elseif( !empty(array_keys($param)[0]) && !empty($param[array_keys($param)[0]]) ) {
 					// echo "localize_data inner else";
 					// wbc_pr('load_param');
 					// wbc_pr($param);
+						
+						$param_keys = array_keys($param);
+						$inline_script =
+						    "var " . $param_keys[0] . " = JSON.parse('" . json_encode($param[$param_keys[0]]) . "');\n";
+						wbc()->load->add_inline_script('', $inline_script, 'common');
+
+						if(false){
 						?>
 						<script>
 							var <?php echo array_keys($param)[0]; ?> = JSON.parse('<?php echo json_encode($param[array_keys($param)[0]]); ?>');
 						</script>
 						<?php
-					
+						}
 					}
 					break;				
 				default:				

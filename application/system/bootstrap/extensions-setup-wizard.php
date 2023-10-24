@@ -233,7 +233,15 @@ if ( ! class_exists( 'Extensions_Setup_Wizard' ) ) {
 			            <meta name="viewport" content="width=device-width" />
 			            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 			            <title><?php esc_html_e( 'WooCommerce Product Bundle Choice &rsaquo; Setup Wizard', 'woocommerce' ); ?></title>
+			            <?php
+			            wbc()->load->get_script_tag(array(
+			             'src'  => esc_url('https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js'),
+			            ));
+			            if(false){
+			            ?>
 			            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+			        	<?php }
+			        	?>
 			           <link rel="stylesheet" type="text/css" href="<?php echo esc_url(constant('EOWBC_ASSET_URL') . 'css/fomantic/semantic.min.css'); ?>">
 			        </head>
 			        <body>
@@ -410,7 +418,39 @@ if ( ! class_exists( 'Extensions_Setup_Wizard' ) ) {
 			?>
 						  	</form>
 						</div>
+						<?php
+						 wbc()->load->get_script_tag(array(
+			             'src'  => esc_url('https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js'),
+			            ));
+			            if(false){
+			            ?>
+						
 						<script src="<?php echo constant('EOWBC_ASSET_URL').'js/fomantic/semantic.min.js'; ?>"></script>
+						<?php
+						 }
+							wbc()->load->get_script_tag(array('src'=>constant('EOWBC_ASSET_URL').'js/fomantic/semantic.min.js'));
+						?>
+
+						<?php
+						$get_option_get_option = ('eo_wbc_inventory_type','');
+				  		$admin_url_admin_url = admin_url("admin.php?page=eowbc&eo_wbc_view_auto_jewel=1");	
+						$inline_script = 
+						  "jQuery(document).ready(function(){\n" .
+						  "                jQuery('.ui.dropdown').dropdown();\n" .
+						  "                jQuery('[name=\"eo_wbc_inventory_type\"]').parent().dropdown('set selected','".$get_option_get_option."';    \n" .
+						  "                jQuery('.ui.checkbox').checkbox();\n" .
+						  "\n" .
+						  "                jQuery(\"#create_product\").on('click',function(e){\n" .
+						  "                  console.log('preventDefault');\n" .
+						  "                  e.preventDefault();\n" .
+						  "                  e.stopPropagation();\n" .
+						  "                  window.location.href = '".$admin_url_admin_url."';\n" .
+						  "                });\n" .
+						  "              });\n";
+						wbc()->load->add_inline_script( '', $inline_script, 'common' );
+
+						if(false){
+						?>
 
 						<script>
 							jQuery(document).ready(function(){
@@ -426,6 +466,7 @@ if ( ! class_exists( 'Extensions_Setup_Wizard' ) ) {
 								});
 							});
 						</script>
+						}
 		        	</body>
 		        </html>
 	        <?php
