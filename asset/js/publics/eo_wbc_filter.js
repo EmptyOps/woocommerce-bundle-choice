@@ -1646,7 +1646,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
     var input_type_icon_click_listener = function() {
 
     	console.log('filters [input_type_icon_click_listener]');
-    	console.log(EO_WBC_FILTER_UI_ICON_TERM_SLUG);
+    	// console.log(EO_WBC_FILTER_UI_ICON_TERM_SLUG);
 
     	if(typeof(EO_WBC_FILTER_UI_ICON_TERM_SLUG) != typeof(undefined) && !window.document.splugins.common.is_empty(EO_WBC_FILTER_UI_ICON_TERM_SLUG)) {
     		
