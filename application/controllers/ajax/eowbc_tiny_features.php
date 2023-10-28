@@ -8,6 +8,20 @@ $res = array( "type"=>"success", "msg"=>"Updated successfully!" );
 
 if(wp_verify_nonce(wbc()->sanitize->post('_wpnonce'),'eowbc_tiny_features')){
 
+	wbc()->options->update_option('tiny_features','tiny_features_disable_swatches_plugin_stylesheet',(empty(wbc()->sanitize->post('tiny_features_disable_swatches_plugin_stylesheet'))?'':wbc()->sanitize->post('tiny_features_disable_swatches_plugin_stylesheet')));
+	
+	wbc()->options->update_option('tiny_features','tiny_features_clear_on_reselect',(empty(wbc()->sanitize->post('tiny_features_clear_on_reselect'))?'':wbc()->sanitize->post('tiny_features_clear_on_reselect')));
+
+	wbc()->options->update_option('tiny_features','tiny_features_show_selected_attribute',(empty(wbc()->sanitize->post('tiny_features_show_selected_attribute'))?'':wbc()->sanitize->post('tiny_features_show_selected_attribute')));
+
+	wbc()->options->update_option('tiny_features','tiny_features_variation_label_separator',(empty(wbc()->sanitize->post('tiny_features_variation_label_separator'))?'':wbc()->sanitize->post('tiny_features_variation_label_separator')));
+
+	wbc()->options->update_option('tiny_features','tiny_features_option_enable_tooltip',(empty(wbc()->sanitize->post('tiny_features_option_enable_tooltip'))?'':wbc()->sanitize->post('tiny_features_option_enable_tooltip')));
+
+	wbc()->options->update_option('tiny_features','tiny_features_shape_style',(empty(wbc()->sanitize->post('tiny_features_shape_style'))?'':wbc()->sanitize->post('tiny_features_shape_style')));
+
+	wbc()->options->update_option('tiny_features','tiny_features_option_dropdowns_to_button',(empty(wbc()->sanitize->post('tiny_features_option_dropdowns_to_button'))?'':wbc()->sanitize->post('tiny_features_option_dropdowns_to_button')));
+
 	wbc()->options->update_option('tiny_features','shop_cat_filter_location_shop',(empty(wbc()->sanitize->post('shop_cat_filter_location_shop'))?'':wbc()->sanitize->post('shop_cat_filter_location_shop')));
 	
 	wbc()->options->update_option('tiny_features','tiny_features_dropdown_icon_only',(empty(wbc()->sanitize->post('tiny_features_dropdown_icon_only'))?'':wbc()->sanitize->post('tiny_features_dropdown_icon_only')));
