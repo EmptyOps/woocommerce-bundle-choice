@@ -519,6 +519,7 @@ if( is_product() ) {
 	table.variations.ui.raised.segment .ui.mini.images .variable-item.image .variable-item-span-button {
 	    padding: 0 5px;
 	}	
+	
 </style>
 
 <style type="text/css">
@@ -929,11 +930,31 @@ console.log('is_shop_css');
             list-style-type: none;
         }
 
+/*        -->> Ooops! error mate ul ni csss 30-10-2023 Nayan*/
+        .ui.grid.centered {
+    		margin: auto;
+	}
+	.single_add_to_cart_button.button {
+   	 	margin-bottom: 5px;
+	}
+	.ui.row {
+    		justify-content: center;
+	}
+	span.ui.inverted.text {
+    		margin-bottom: 10px;
+	}
+	@media(max-width:480px){
+	span.ui.inverted.text {
+    		margin-left: 30px;
+	}	
+	}
+
 		/*form.variations_form table.variations tbody td select {
 		    display: none !important;
 		}*/
 
 	</style>
+
 
 	<!--button-->
 	<style>
@@ -1639,6 +1660,24 @@ $bg_hover_color = wbc()->options->get_option('tiny_features',$spui_is_product_ca
 	    -webkit-box-shadow:none !important;	
 	}
 </style>
+
+<?php
+if(wbc()->common->current_theme_key() != 'themes___purple_theme'){
+?>
+	<style type="text/css">
+		a.ui.inverted.secondary.single_add_to_cart_button.button.alt {
+    			width: 100%;
+    			text-align: center;
+    			margin-bottom: 5px;
+		}
+		a.ui.grey.button.single_add_to_cart_button.alt {
+    			width: 100%;
+   			text-align: center;
+		}
+	</style>
+<?php
+}
+?>
 <script>
 	jQuery(document).ready(function($){
 		jQuery(".dropdown").dropdown().on('change',function(){
