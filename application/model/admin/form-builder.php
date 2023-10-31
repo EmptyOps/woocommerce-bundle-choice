@@ -886,7 +886,7 @@ class Form_Builder implements Builder {
 				'label'=>eowbc_lang('+'),
 				'type'=>'link',
 				'class'=>array('button', 'secondary'),
-				'attr'=>array('href="javascript:void(0);"', "onclick='window.document.splugins.common.admin.form_builder.api.das_add( \"".$field_id."\", \"".$plus_button_id."\", \"wp\" ); return false;'", 'data-das_fields=\''.json_encode($das_fields_details_for_export).'\'')
+				'attr'=>array('href="javascript:void(0);"', "onclick='window.document.splugins.common.admin.form_builder.api.das_add( \"".esc_attr($field_id)."\", \"".esc_attr($plus_button_id)."\", \"wp\" ); return false;'", 'data-das_fields=\''.json_encode($das_fields_details_for_export).'\'')
 
 			);
 

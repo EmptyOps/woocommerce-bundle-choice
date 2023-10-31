@@ -576,7 +576,7 @@ class WBC_WC {
             } elseif( $format == 'detailed_dropdown' ) {
                 $option_list.='<div class="item" data-value="'. esc_attr($base->term_id) .'" data-sp_eid="'. esc_attr($separator) .'prod_cat'.esc_attr($separator).esc_attr($base->term_id).'">'.esc_html(str_replace("'","\'",$base->name)).'</div>'.$this->get_productCats($base->slug, $format, $sp_eid_type_value);
             } elseif( $format == 'detailed' || $format == 'detailed_slug') {
-                $option_list[$base->term_id] = array('label'=> esc_html(( $format == 'detailed_slug' ? str_replace("'","\'",$base->name).'('.$base->slug.')' : str_replace("'","\'",$base->name) )), 'attr'=>' data-sp_eid="'.esc_attr($separator).esc_attr($sp_eid_type_value).esc_attr($separator).esc_attr($base->term_id).esc_attr($separator).'" ', $format);
+                $option_list[$base->term_id] = array('label'=> (( $format == 'detailed_slug' ? str_replace("'","\'",$base->name).'('.$base->slug.')' : str_replace("'","\'",$base->name) )), 'attr'=>' data-sp_eid="'.esc_attr($separator).esc_attr($sp_eid_type_value).esc_attr($separator).esc_attr($base->term_id).esc_attr($separator).'" ', $format);
 
                 $option_list = array_replace($option_list, self::get_productCats($base->slug, $format, $sp_eid_type_value)); //array_merge($option_list, self::get_productCats($base->slug, $format));
 
@@ -593,7 +593,7 @@ class WBC_WC {
 
                     $option_list[$base->term_id] = array(
                         'attr' => ' data-sp_eid="' . esc_attr($separator) . esc_attr($sp_eid_type_value) . esc_attr($separator) . esc_attr($base->term_id) . '" ',
-                        'label' => esc_html(str_replace("'", "\'", $base->name)),
+                        'label' => (str_replace("'", "\'", $base->name)),
                         'slug' => $base->slug
                     );
 
@@ -646,8 +646,8 @@ class WBC_WC {
                 } elseif( $format == 'detailed' ) {
 
                     $option_list['pa_' . $attribute->attribute_name] = array(
-                        'label' => esc_html($attribute->attribute_label),
-                        'attr' => 'data-sp_eid="' . esc_attr($separator) . 'attr' . esc_attr($separator) . esc_attr($attribute->attribute_id) . esc_attr($separator) . '" ',
+                        'label' => ($attribute->attribute_label),
+                        'attr' => 'data-sp_eid="' . esc_attr(($separator) . 'attr' . ($separator) . ($attribute->attribute_id) . ($separator)) . '" ',
                         $format
                     ); 
 
@@ -657,8 +657,8 @@ class WBC_WC {
                     // $option_list['pa_'.$attribute->attribute_name] = array('label'=>$attribute->attribute_label, 'attr'=>'data-sp_eid="'.$separator.'attr'.$separator.$attribute->attribute_id.'" ', $format);  
 
                     $option_list['pa_' . $attribute->attribute_name] = array(
-                        'label' => esc_html($attribute->attribute_label . '(use for variations)'),
-                        'attr' => 'data-sp_eid="' . esc_attr($separator) . 'attr' . esc_attr($separator) . esc_attr($attribute->attribute_id) . esc_attr($separator) . 'vattr' . esc_attr($separator) . '" ',
+                        'label' => ($attribute->attribute_label . '(use for variations)'),
+                        'attr' => 'data-sp_eid="' . esc_attr(($separator) . 'attr' . ($separator) . ($attribute->attribute_id) . ($separator) . 'vattr' . ($separator)) . '" ',
                         $format
                     );  
 
@@ -684,8 +684,8 @@ class WBC_WC {
                         } else {
 
                             $option_list[$term->term_taxonomy_id] = array(
-                                'attr' => 'data-sp_eid="' . esc_attr($separator) . 'attr_opt' . esc_attr($separator) . /*$attribute->attribute_id*/ esc_attr($term->term_taxonomy_id) . esc_attr($separator) . esc_attr($separator) . esc_attr($term->term_id) . esc_attr($separator) . '" ',
-                                'label' => esc_html($term->name),
+                                'attr' => 'data-sp_eid="' . esc_attr(($separator) . 'attr_opt' . ($separator) . /*$attribute->attribute_id*/ ($term->term_taxonomy_id) . ($separator) . ($separator) . ($term->term_id) . ($separator)) . '" ',
+                                'label' => ($term->name),
                                 'slug' => $term->slug
                             );
                         }
@@ -717,8 +717,8 @@ class WBC_WC {
                 // commented and changed on 31-01-2023
                 // $opts_arr[$term->term_taxonomy_id] = array( 'label'=>$term->name , 'attr'=>'data-sp_eid="'.$separator.'attr'.$separator.$term->term_taxonomy_id.' " ');  
                 $opts_arr[$term->term_taxonomy_id] = array(
-                    'label' => esc_html($term->name),
-                    'attr' => 'data-sp_eid="' . esc_attr($separator) . 'attr' . esc_attr($separator) . esc_attr($term->term_taxonomy_id) . esc_attr($separator) . '" '
+                    'label' => ($term->name),
+                    'attr' => 'data-sp_eid="' . esc_attr(($separator) . 'attr' . ($separator) . ($term->term_taxonomy_id) . ($separator)) . '" '
                 );
 
             }

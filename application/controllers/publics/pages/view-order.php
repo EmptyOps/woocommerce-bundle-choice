@@ -84,7 +84,7 @@ class View_Order {
         $row = "<!-- Created with WordPress plugin - WooCommerce Product bundle choice --><tr>".
            "<td class='eo_wbc_row'>".
            "<span class='eo_wbc_column-1'>".
-               esc_html(wbc()->wc->eo_wbc_get_product($set[0][0])->get_image("thumbnail"))."&nbsp;&nbsp;<p>".
+               (wbc()->wc->eo_wbc_get_product($set[0][0])->get_image("thumbnail"))."&nbsp;&nbsp;<p>".
                esc_html(wbc()->wc->eo_wbc_get_product($set[0][0])->get_title()).
                esc_html(($set[0][2]  ? "<br/>&nbsp; -&nbsp;".
                     implode(',',wbc()->wc->eo_wbc_get_product_variation_attributes($set[0][2],(array)$set[0]['variation'])):'')).
@@ -93,7 +93,7 @@ class View_Order {
 
         if ($set[1]) {
            $row .= "</span><span class='eo_wbc_column-2'>".
-                   esc_html(wbc()->wc->eo_wbc_get_product($set[1][0])->get_image("thumbnail")).
+                   (wbc()->wc->eo_wbc_get_product($set[1][0])->get_image("thumbnail")).
                    "&nbsp;&nbsp;<p>".
                    esc_html(wbc()->wc->eo_wbc_get_product($set[1][0])->get_title()).
                    esc_html(($set[1][2]  ? "<br/>&nbsp; -&nbsp;".
@@ -105,7 +105,7 @@ class View_Order {
         $row .= "</span>".
                 "</td>".
                 "<td style=\"min-width:auto;\">".
-                "<p>".esc_html(wc_price($price, 'woo-bundle-choice'))."</p>".
+                "<p>".(wc_price($price, 'woo-bundle-choice'))."</p>".
                 "</td>".
                 "</tr>";
 
