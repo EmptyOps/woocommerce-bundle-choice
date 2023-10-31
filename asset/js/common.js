@@ -1820,7 +1820,7 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
             // ACTIVE_TODO -- then once template ready then implaemnt on php side and do the needful on js layers -- to s
        /* data.*/var inner_list = jQuery(element).find('li:not(.spui-wbc-swatches-variable-item-more)');
             // ACTIVE_TODO however note that, for this once t gives conclusion our final implementation will follow -- to t 
-        data.reselect_clear = jQuery(element).hasClass('reselect-clear');
+        data.reselect_clear = (_this./*#*/configs_private.options.tiny_features_clear_on_reselect == 'tiny_features_clear_on_reselect' ? true : false); // jQuery(element).hasClass('reselect-clear');
 
         // data.mouse_event_name = 'click'; // 'touchstart click';
         _this./*#*/configs_private.mouse_event_name = ( window.document.splugins.common._o( _this./*#*/configs_private, 'mouse_event_name') ? _this./*#*/configs_private.mouse_event_name : 'click'  ); // 'touchstart click';
@@ -2629,6 +2629,7 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
 
             if (is_selected_selctor == true) {
 
+                // -- may be apda ma aa delete arva no se OR rename karva no se
                 jQuery(element_inner).trigger('wvs-unselected-item', [value, select, _this.$element]);
 
             } else {

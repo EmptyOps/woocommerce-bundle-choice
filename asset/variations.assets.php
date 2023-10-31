@@ -5,6 +5,8 @@
 
 <!-- /*tejas_22_07_2022 it for new QC upgrades so it is permenent*/ -->
 <?php
+if($asset_param['disable_swatches_plugin_stylesheet'] != 'tiny_features_disable_swatches_plugin_stylesheet') {
+
 if( is_product() ) {
 ?>
 <style type="text/css">
@@ -1311,6 +1313,7 @@ console.log('is_shop_css');
 	
 <?php	
 }
+}
 ?>
 
 <script>
@@ -1385,6 +1388,9 @@ jQuery( document ).ready(function() {
 });
 </script> -->
 <!-- /*----CSS---*/ -->
+<?php 
+if($asset_param['disable_swatches_plugin_stylesheet'] != 'tiny_features_disable_swatches_plugin_stylesheet') {
+?>
 <style type="text/css">
 	:root{
         --spui_tooltip_bg:#8224e3;
@@ -1454,6 +1460,7 @@ jQuery( document ).ready(function() {
 </style>
 
 <?php 
+}
 
 $spui_is_product = false;
 
@@ -1504,6 +1511,7 @@ $bg_color = wbc()->options->get_option('tiny_features',$spui_is_product_category
 $bg_hover_color = wbc()->options->get_option('tiny_features',$spui_is_product_category ? 'tiny_features_shop_page_option_ui_bg_color_hover':'tiny_features_option_ui_bg_color_hover','#DCC7C7');
 
 // ob_start();
+if($asset_param['disable_swatches_plugin_stylesheet'] != 'tiny_features_disable_swatches_plugin_stylesheet') {
 ?>
 <style type="text/css">
 	/*.ui.mini.images .variable-item.image{
@@ -1729,7 +1737,7 @@ if(wbc()->wc->is_shop_or_category()) {
 	}
 
 } 
-
+}
 ?>
 
 <script>
@@ -1789,6 +1797,7 @@ if(wbc()->wc->is_shop_or_category()) {
 // 	ACTIVE_TODO as weel as once we have the varations swatches beta update available we may lite to use the disable and hide flow of that version. Especialy the disable flow this much needed for providing apropriate and perfect user experiance -- to h
 // ACTIVE_TODO_OC_END
 
+if($asset_param['disable_swatches_plugin_stylesheet'] != 'tiny_features_disable_swatches_plugin_stylesheet') {
 
 if(is_product()) {
 
@@ -1820,6 +1829,6 @@ if(is_product()) {
 
 }
 
-
+}
 ?>
 

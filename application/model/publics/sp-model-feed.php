@@ -254,7 +254,9 @@ class SP_Model_Feed extends SP_Feed {
 		$data['is_ring_builder_enabled'] = !empty($features['ring_builder']) ? true : false ;
 		$data['is_show_options_ui_enabled'] = !empty(wbc()->options->get_option('appearance_product_page','show_options_ui_in_pair_builder')) ? true : false ;
 		$data['archive_loop_swatches_css_patch'] = \eo\wbc\model\SP_WBC_Compatibility::instance()->feed_loopbox_variations_container_compatability('archive_loop_swatches_css_patch');
-			
+		
+		$data['disable_swatches_plugin_stylesheet'] = wbc()->options->get_option('tiny_features','tiny_features_disable_swatches_plugin_stylesheet');	
+
 		return $data;
 	}
 

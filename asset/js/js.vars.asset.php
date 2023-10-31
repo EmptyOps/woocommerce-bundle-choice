@@ -108,12 +108,17 @@ add_action( ( !is_admin() ? 'wp_enqueue_scripts' : 'admin_enqueue_scripts'),func
 		$swatches_configs = array();
 		$gallery_images_configs = array();
 
+		$tiny_features = unserialize(wbc()->options->get_option_group('tiny_features',"a:0:{}"));	
+
 		$swatches_configs['attribute_types']            = \eo\wbc\model\publics\data_model\SP_WBC_Variations::instance()->sp_variations_swatches_supported_attribute_types(array('is_base_type_only'=>true));
 		$swatches_configs['product_variations_configs'] = wbc()->config->product_variations_configs();
 
 	// ACTIVE_TODO admin options need to b loaded from variations.assets.php where b have already prepare all options -- to s 
-		$swatches_configs['options'] = array('show_variation_label' => false, 'clickable_out_of_stock' => false);	
+			// -- most probebly this ACTIVE_TODO is now invalid and we need to mark it invalid -- to h && -- to a
+		$swatches_configs['options'] = array('show_variation_label' => false, 'clickable_out_of_stock' => false);
 		
+		$swatches_configs['options']['tiny_features_clear_on_reselect'] = $tiny_features['tiny_features_clear_on_reselect'];
+
 		$gallery_images_configs['types'] 					  = \eo\wbc\model\publics\data_model\SP_WBC_Variations::instance()->sp_variations_gallery_images_supported_types(array('is_base_type_only'=>true));
 		$gallery_images_configs['product_variations_configs'] = wbc()->config->product_variations_configs();
 		

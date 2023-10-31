@@ -932,6 +932,8 @@ class SP_Model_Single_Product extends SP_Single_Product {
 
 		$data = array();
 			
+		$data['disable_swatches_plugin_stylesheet'] = wbc()->options->get_option('tiny_features','tiny_features_disable_swatches_plugin_stylesheet');
+
 		return $data;
 	}
 

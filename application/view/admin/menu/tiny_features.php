@@ -380,7 +380,6 @@ $form['data'] = array(
 					'size_class'=>array('eight','wide'/*,'required'*/),
 					'inline'=>false,	
 				),
-
 				'tiny_features_option_dropdowns_to_button'=>array(
 					'label'=>eowbc_lang('Dropdowns to Button'),
 					'spui_version'=>1.0,
