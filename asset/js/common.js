@@ -1349,28 +1349,6 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
         ACTIVE_TODO_OC_END*/
 
         /*ACTIVE_TODO_OC_START
-        ----SELECTED FLOW 
-        this would be determined based on admin options settings, and we may already have that admin options settings and if not then we need to add that -- to h and -- to s 
-            --  and the options object should be loaded from the variations.assets.php file, and that is already recieving many admin options related to apprearance from the model. all this options or required options should be passed to this js module under configs parameter but admin settings options should reside under key options within the configs object. -- to h and -- to s 
-            --  and view with shape was already supporting this selected item label, so need to manage this asap. and atleast we can first execute this point so that shape extension does function as expected -- to h 
-                --  we still first need to see all flows of the plugins we were exploring so look for keywords like selected, and I will see the snaps -- to s 
-                    --  then will need to finalize our flow and heirachical structure -- to h. lets confim below flow with the flow of plugins we were exploring have  
-                        --  I think the layers that would be involved in the heirachical structure would be 
-                            --  configs from admin 
-                                --  and applicable section conditions here 
-                            --  templates from php layers 
-                                --  and applicable template function calls from here 
-                                    --  and updating templates with applicable data on variation change and so on events, but mainly it will be variation change event 
-        // // Append Selected Item Template
-        // if (woo_variation_swatches_options.show_variation_label) {
-        //   this.$element.find('.variations .label').each(function (index, el) {
-        //     $(el).append(_this2.selected_item_template);
-        //   });
-        // }
-        ACTIVE_TODO_OC_END*/
-
-
-        /*ACTIVE_TODO_OC_START
         heirachical classes 
             --  add three level classes in our swatches templates -- to s 
                     --  inlcuding in extensions -- to s 
@@ -1600,12 +1578,20 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
         var _this = this; 
 
         if( window.document.splugins.common.is_item_page ) {
+
+            console.log('vs [process_attribute_types] show_variation_label');
+            console.log(_this./*#*/configs_private.options.show_variation_label);
+
             // Append Selected Item Template
             if (_this./*#*/configs_private.options.show_variation_label) { 
-                // ACTIVE_TODO t need to provide details -- to t & to s
-                this.$element.find('.variations .label').each(function (index, el) {
-                $(el).append(_this2.selected_item_template);
-              });
+                
+                // ACTIVE_TODO t need to provide details -- to t & to s done
+                _this.$base_element.find('.variations .label').each(function (index, el) {
+
+                    // ACTIVE_TODO when required than we need to impliment this template from php layer so that we can provide apperiance and so on support as well as we can ensure standard templating. Solets do it max by first revision. -- to h && -- to a
+                    // $(el).append(_this2.selected_item_template);
+                    jQuery(el).append('<span class="woo-selected-variation-item-name" data-default=""></span>');
+                });
             }
         }
 
@@ -1832,6 +1818,7 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
         data.disabled_selects = [];
         data.out_of_stock_selects = [];
 
+        var $selected_variation_item;
         // page condition 
         if( window.document.splugins.common.is_item_page ){
 
@@ -2612,7 +2599,8 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
 
             if (is_selected_selctor == true) {
              
-                value = jQuery(element_inner).val();
+                // value = jQuery(element_inner).val();
+                value = '';
             } else {
 
                 value = jQuery(element_inner).data('value');

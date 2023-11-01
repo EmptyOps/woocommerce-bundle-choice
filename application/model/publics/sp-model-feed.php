@@ -118,6 +118,8 @@ class SP_Model_Feed extends SP_Feed {
 
 			$classes[] = 'wbc-sp-variations-gallery_images';
 			$classes[] = sprintf( 'wbc-sp-variations-gallery_images-theme-%s', wbc()->common->current_theme_key() );
+			$classes[] = sprintf( 'spui-vs-%s', wbc()->common->current_theme_key() );
+			$classes[] = 'spui-vs-show-variation-label';
 
 			if ( is_rtl() ) {
 				$classes[] = 'wbc-sp-variations-gallery_images-rtl';
@@ -131,7 +133,9 @@ class SP_Model_Feed extends SP_Feed {
 
 			$classes[] = 'wbc-sp-variations-gallery_images-post';
 			$classes[] = sprintf( 'wbc-sp-variations-gallery_images-post-theme-%s', wbc()->common->current_theme_key() );
-
+			$classes[] = sprintf( 'spui-vs-%s', wbc()->common->current_theme_key() );
+			$classes[] = 'spui-vs-show-variation-label';
+			
 			if ( is_rtl() ) {
 				$classes[] = 'wbc-sp-variations-gallery_images-post-rtl';
 			}
