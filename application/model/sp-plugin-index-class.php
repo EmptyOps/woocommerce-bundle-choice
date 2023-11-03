@@ -276,6 +276,11 @@ if(!class_exists('SP_Plugin_Index_Class') ) {
 			        esc_url(admin_url( 'admin.php?page='.$this->SP_Extension->admin_page_slug() )) .
 			        '">' . esc_html__('Admin Panel',$this->SP_Extension->extension_slug())  . '</a>';
 			        return $links;
+
+
+
+
+			        
 			},30);
 			if(file_exists(plugin_dir_path( $this->getFILE() ).'vendor/autoload.php'))
 			{
