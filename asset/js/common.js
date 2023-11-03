@@ -289,6 +289,10 @@ ACTIVE_TODO_OC_END*/
  
  //  Feed 
  window.document.splugins.Feed = window.document.splugins.Feed || {};
+
+ //  single product 
+ window.document.splugins.single_product = window.document.splugins.single_product || {};
+
  
  
  
@@ -5252,4 +5256,14 @@ if(window.document.splugins.common.is_category_page) {
         // },2000);
     });
 
+}
+
+//NOTE: some business logic related common functions. we may like to move it to some other place if ever required. 
+if(window.document.splugins.common.is_item_page) {
+
+    window.document.splugins.single_product.wbc_atb_submin_form = function() {
+
+        jQuery('form.cart').attr('action',document.location.href);
+        jQuery('form.cart').submit();
+    }
 }

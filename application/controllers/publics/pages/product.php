@@ -732,8 +732,9 @@ class Product {
                     <?php if(!empty(wbc()->options->get_option('appearance_product_page','product_page_add_to_basket',''))) :?>
                         
                         window.wbc_atb_submin_form = function(){
-                            jQuery('form.cart').attr('action',document.location.href);
-                            jQuery('form.cart').submit();
+                            // jQuery('form.cart').attr('action',document.location.href);
+                            // jQuery('form.cart').submit();
+                            window.document.splugins.single_product.wbc_atb_submin_form();
                         }
 
                         jQuery(".single_add_to_cart_button.alt:not(.disabled):eq(0)").replaceWith('<div class=\"ui buttons\">'+
