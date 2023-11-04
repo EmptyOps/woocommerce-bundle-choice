@@ -59,26 +59,44 @@ class Preview {
         $button_radius = wbc()->options->get_option('appearance_wid_btns','button_radius','');
         $button_hovercolor = wbc()->options->get_option('appearance_wid_btns','button_hovercolor','');
     
-       
-        ob_start();        
-        ?>
-        <style type="text/css">
-            .woocommerce .content-area ,#content,#primary,#main,.content,.primary,.main{
-                  width: 100% !important;
-             }
-             .woocommerce .widget-area {
-                  display: none !important;
-             }
-             .ui.button{
-                <?php _e($button_backcolor_active?'background-color:'.$button_backcolor_active.' !important;':''); ?>
-                <?php _e($button_textcolor?'color:'.$button_textcolor.' !important;':''); ?>
-                <?php _e($eo_wbc_home_btn_border_color?'border-color:'.$eo_wbc_home_btn_border_color.' !important;':''); ?>
-                <?php _e($button_radius?'border-radius:'.$button_radius.' !important;':''); ?>
-            }
+        if(false){
 
-        </style>
-        <?php
-        echo ob_get_clean();
+            ob_start();        
+            ?>
+            <style type="text/css">
+                .woocommerce .content-area ,#content,#primary,#main,.content,.primary,.main{
+                      width: 100% !important;
+                 }
+                 .woocommerce .widget-area {
+                      display: none !important;
+                 }
+                 .ui.button{
+                    <?php _e($button_backcolor_active?'background-color:'.$button_backcolor_active.' !important;':''); ?>
+                    <?php _e($button_textcolor?'color:'.$button_textcolor.' !important;':''); ?>
+                    <?php _e($eo_wbc_home_btn_border_color?'border-color:'.$eo_wbc_home_btn_border_color.' !important;':''); ?>
+                    <?php _e($button_radius?'border-radius:'.$button_radius.' !important;':''); ?>
+                }
+
+            </style>
+            <?php
+            echo ob_get_clean();
+        }
+        $custom_css = "
+            .woocommerce .content-area, #content, #primary, #main, .content, .primary, .main {
+                width: 100% !important;
+            }
+            .woocommerce .widget-area {
+                display: none !important;
+            }
+            .ui.button {
+                " . __($button_backcolor_active ? 'background-color:' . $button_backcolor_active . ' !important;' : '') . "
+                " . __($button_textcolor ? 'color:' . $button_textcolor . ' !important;' : '') . "
+                " . __($eo_wbc_home_btn_border_color ? 'border-color:' . $eo_wbc_home_btn_border_color . ' !important;' : '') . "
+                " . __($button_radius ? 'border-radius:' . $button_radius . ' !important;' : '') . "
+            }
+        ";
+        wbc()->load->add_inline_style('', $custom_css,'common');
+
         add_action( 'wp_enqueue_scripts',function(){ 
             // wp_register_style('eo_wbc_ui_css',EOWBC_ASSET_URL.'css/fomantic/semantic.min.css');
             // wp_enqueue_style( 'eo_wbc_ui_css');

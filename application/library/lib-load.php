@@ -158,6 +158,7 @@ if(!class_exists('WBC_Loader')) {
 					}
 
 					if ($load_instantly) {
+						// ACTIVE_TODO aya woo-bundle and other extention na call ave se atle style tag mate wordpress nu function call karva nu avse tenu upgrade karva nu avse -- to a 04-11-2023 
 					    echo '<link rel="stylesheet" type="text/css" href="' . esc_url($_path) . '">';
 					}
 
@@ -255,6 +256,7 @@ if(!class_exists('WBC_Loader')) {
 					$_path = ( isset($data['ASSET_DIR']) ? $data['ASSET_DIR'].$path : $path );	
 
 					if(isset($param[0]) && ($param[0]=='jquery' || $param[0]=='jQuery')) {
+						// ACTIVE_TODO aya woo-bundle ni extention no call nathi avto biji extention no call ave se atle script tag mate wordpress nu function call karva nu avse tenu upgrade karva nu avse -- to a 04-11-2023 
 						echo '<script src="https://ajax.googleapis.com/ajax/libs/jquery/'.(!empty($version)?$version:"3.4.1").'/jquery.min.js"></script>';
 						unset($param[0]);
 					}
@@ -355,6 +357,28 @@ if(!class_exists('WBC_Loader')) {
 
 			echo wp_get_script_tag( $attributes );
 		
+		}		
+
+		public function add_inline_style($handle,$custom_css,$handle_key='',$is_inner_hook=false,$is_prefix_handle=true) {
+
+			if(empty($handle) && !empty($handle_key)) {
+
+				$handle = ( $is_prefix_handle ? "sp_wbc_" : "" ) . str_replace(' ','-',str_replace('/','-',$handle_key));						
+				wp_register_style( $handle, '');
+			}elseif($is_inner_hook){
+				
+				wp_register_style( $handle, '');
+			}
+
+        	wp_enqueue_style( $handle );
+			wp_add_inline_style( $handle, $custom_css);			
+	
+		}
+
+		public function enqueue_style($handle,$src,$deps = array(),$ver = false,$media = 'all') {
+
+		    wp_enqueue_style($handle, $src, $deps, $ver, $media);
+					
 		}
 		
 		public function template_key_option($args){
