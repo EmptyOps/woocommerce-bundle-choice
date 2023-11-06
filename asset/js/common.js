@@ -1782,7 +1782,7 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
         // --  and as mentioned above this object will always be passed from all .each loops under element, so use that element inside the process_attribute_template -- to s done
         ACTIVE_TODO_OC_END*/
 
-        console.log('data element');
+        console.log('vs [process_attribute_template] element');
         console.log(element);
 
         // -- data.select 28-08-2023 @a
@@ -1795,7 +1795,7 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
         data.current = data.select.find('option:selected');
         data.eq = data.select.find('option').eq(1);
 
-        console.log('data.select select');
+        console.log('vs [process_attribute_template] select');
         console.log(data.select);
         // console.log("select and disable log");
         // console.log(data.options);
@@ -1818,12 +1818,12 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
         data.disabled_selects = [];
         data.out_of_stock_selects = [];
 
-        var $selected_variation_item;
+        var $selected_variation_item = null;
         // page condition 
         if( window.document.splugins.common.is_item_page ){
 
             if (_this./*#*/configs_private.options.show_variation_label ) {
-                // ACTIVE_TODO need to manage selector and we need to do it after the selected template task in template secion above is covered 
+                
                 $selected_variation_item = jQuery(element).parent().prev().find('.woo-selected-variation-item-name');
             }
         }
@@ -1842,8 +1842,12 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
         data = object.data;
 
         data = _this./*#*/process_attribute_data_private(type, element, data, mode);
-        console.log('out_of_stock______data');
-        console.log(data);        
+        
+        console.log('vs [process_attribute_template] data');
+        console.log(data);
+
+        console.log('vs [process_attribute_template] inner_list');
+        console.log(inner_list);        
 
         inner_list.each(function (index, inner_element ) {
 
@@ -1906,7 +1910,10 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
                 if( window.document.splugins.common.is_item_page ){
 
                     if (_this./*#*/configs_private.options.show_variation_label ) {
-                        $selected_variation_item.text(woo_variation_swatches_options.variation_label_separator + ' ' + data.attribute_title);
+                        
+                        if (!window.document.splugins.common.is_empty($selected_variation_item)) {
+                            $selected_variation_item.text(woo_variation_swatches_options.variation_label_separator + ' ' + data.attribute_title);
+                        }
                     }
                 }
 

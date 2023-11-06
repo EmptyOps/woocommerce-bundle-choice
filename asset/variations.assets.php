@@ -143,7 +143,7 @@ if( is_product() ) {
 	}
        <?php }elseif(wbc()->options->get_option('tiny_features','tiny_features_disabled_attribute_style') == 'hide'){ ?>
 	.spui-wbc-swatches-variable-item.disabled{
-		display: none;
+		display: none !important;
 	}
        <?php } ?>
 
