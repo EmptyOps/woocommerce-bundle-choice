@@ -466,7 +466,14 @@ $form['data'] = array(
 						'class'=>array('medium','fluid'),
 						// 'size_class'=>array('sixteen','wide'),
 					)
-				),				
+				),			
+				'tiny_features_tooltip'=>array(
+					'label'=>'Tooltip',
+					'type'=>'devider',
+					// 'class'=>array('fluid'),
+					// 'size_class'=>array('eight','wide')
+				),
+
 				'tiny_features_styling_tab_end'=>array(
 					'type'=>'accordian',
 					'section_type'=>'end'
