@@ -499,6 +499,9 @@ class Term_Meta {
 		
 		add_action( 'woocommerce_after_edit_attribute_fields',array($this,'edit_taxonomy_form_feild_2'), 10, 1 );
 		add_action( 'woocommerce_after_add_attribute_fields',array($this,'add_taxonomy_form_feild_1'), 10, 1 );
+
+		add_action( 'woocommerce_after_edit_attribute_fields',array($this,'edit_taxonomy_form_feild_3'), 10, 1 );
+		add_action( 'woocommerce_after_add_attribute_fields',array($this,'add_taxonomy_form_feild_3'), 10, 1 );
 	}
 
 	public function add_taxonomy_form() {
@@ -651,6 +654,69 @@ class Term_Meta {
 		}
 
 	}
+
+
+	public function add_taxonomy_form_feild_3() {
+		ob_start();
+		?>
+			<div class="form-field">
+				<label for="sp_variations_swatches_shape_style">Shape Style</label>
+				<select name="sp_variations_swatches_shape_style" id="sp_variations_swatches_shape_style" class="sp_variations_swatches_shape_style">
+					<option value="select" selected="selected">Select</option>
+					<option value="squared">Squared</option>
+					<option value="rounded">Rounded</option>
+					<option value="circle">Circle</option>
+					<option value="none">None</option>
+				</select>
+				<p class="description">This controls which shape style used by default.</p>
+			</div>			
+		<?php
+		echo ob_get_clean();
+	}
+
+	public function edit_taxonomy_form_feild_3() {	
+		
+		if(empty(wbc()->sanitize->get('edit'))) return;
+		
+		$taxonomy_id = wbc()->sanitize->get('edit');
+		/*wbc()->load->model('category-attribute');
+		eo\wbc\model\Category_Attribute::instance()->get_attribute($taxonomy_id);*/
+		
+		ob_start();
+		?>
+			<?php 
+				$shap_style_val = get_term_meta( $taxonomy_id ,'sp_variations_swatches_shape_style',true);
+				if (empty($shap_style_val)) {
+					$shap_style_val = 'select';
+				}			
+			?>		
+			<div class="form-field">
+				<label for="sp_variations_swatches_shape_style">Shape Style</label>
+				<select name="sp_variations_swatches_shape_style" id="sp_variations_swatches_shape_style" class="sp_variations_swatches_shape_style">
+					<option value="select">Select</option>
+					<option value="squared">Squared</option>
+					<option value="rounded">Rounded</option>
+					<option value="circle">Circle</option>
+					<option value="none">None</option>
+				</select>
+				<p class="description">This controls which shape style used by default.</p>
+			</div>
+			<script type="text/javascript">
+				jQuery('select.sp_variations_swatches_shape_style').val('<?php echo $shap_style_val; ?>');
+			</script>			
+		<?php
+		echo ob_get_clean();
+	}
+
+	public function save_taxonomy_form_feild_3($id, $data) {
+		
+		if(!empty(wbc()->sanitize->post('sp_variations_swatches_shape_style'))) {
+			update_term_meta($id,'sp_variations_swatches_shape_style',wbc()->sanitize->post('sp_variations_swatches_shape_style'));
+		}else{
+			update_term_meta($id,'sp_variations_swatches_shape_style',-1);
+		}
+
+	}	
 }
 
 
