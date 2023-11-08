@@ -787,9 +787,9 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 										$form[$safe_form_key]['attr'] = array('style'=>esc_attr($css));
 									} else {
 										if(empty($form[$safe_form_key]['attr']['style'])) {
-											$form[$safe_form_key]['attr']['style'] = $css;
+											$form[$safe_form_key]['attr']['style'] = esc_attr($css);
 										} else {
-											$form[$safe_form_key]['attr']['style'].=$css;	
+											$form[$safe_form_key]['attr']['style'].=esc_attr($css);	
 										}									
 									}
 								}
@@ -904,9 +904,9 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 									$form[$safe_form_key]['attr'] = array('style'=>esc_attr($css));
 								} else {
 									if(empty($form[$safe_form_key]['attr']['style'])) {
-										$form[$safe_form_key]['attr']['style'] = $css;
+										$form[$safe_form_key]['attr']['style'] = esc_attr($css);
 									} else {
-										$form[$safe_form_key]['attr']['style'].=$css;	
+										$form[$safe_form_key]['attr']['style'].=esc_attr($css);	
 									}									
 								}							
 							}
