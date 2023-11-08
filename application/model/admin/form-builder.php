@@ -251,7 +251,7 @@ class Form_Builder implements Builder {
 			
 			// A segment can be colored -- semantic ui 
 			if( isset($form_element['spui_version']) && $form_element['spui_version'] >= 1.0 ) {
-				?><div class="ui <?php echo (!empty($form_element["container_class"])) ? $form_element["container_class"] :'black'; ?> segment visible">
+				?><div class="ui <?php echo (!empty($form_element["container_class"])) ? $form_element["container_class"] : 'black'; ?> segment visible">
 				<?php
 			}
 
