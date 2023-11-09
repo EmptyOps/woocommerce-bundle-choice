@@ -491,6 +491,9 @@ class Term_Meta {
 			return $type;
 		}, 10, 1 );
 
+		add_action( 'woocommerce_after_edit_attribute_fields',array($this,'edit_taxonomy_form_feild_3'), 10, 1 );
+		add_action( 'woocommerce_after_add_attribute_fields',array($this,'add_taxonomy_form_feild_3'), 10, 1 );
+
 		add_action( 'woocommerce_after_edit_attribute_fields',array($this,'edit_taxonomy_form'), 10, 1 );
 		add_action( 'woocommerce_after_add_attribute_fields',array($this,'add_taxonomy_form'), 10, 1 );
 
@@ -500,8 +503,6 @@ class Term_Meta {
 		add_action( 'woocommerce_after_edit_attribute_fields',array($this,'edit_taxonomy_form_feild_2'), 10, 1 );
 		add_action( 'woocommerce_after_add_attribute_fields',array($this,'add_taxonomy_form_feild_1'), 10, 1 );
 
-		add_action( 'woocommerce_after_edit_attribute_fields',array($this,'edit_taxonomy_form_feild_3'), 10, 1 );
-		add_action( 'woocommerce_after_add_attribute_fields',array($this,'add_taxonomy_form_feild_3'), 10, 1 );
 	}
 
 	public function add_taxonomy_form() {
@@ -668,7 +669,6 @@ class Term_Meta {
 					<option value="circle">Circle</option>
 					<option value="none">None</option>
 				</select>
-				<p class="description">This controls which shape style used by default.</p>
 			</div>			
 		<?php
 		echo ob_get_clean();
@@ -690,31 +690,32 @@ class Term_Meta {
 					$shap_style_val = 'select';
 				}			
 			?>		
-			<div class="form-field">
-				<label for="sp_variations_swatches_shape_style">Shape Style</label>
-				<select name="sp_variations_swatches_shape_style" id="sp_variations_swatches_shape_style" class="sp_variations_swatches_shape_style">
-					<option value="select">Select</option>
-					<option value="squared">Squared</option>
-					<option value="rounded">Rounded</option>
-					<option value="circle">Circle</option>
-					<option value="none">None</option>
-				</select>
-				<p class="description">This controls which shape style used by default.</p>
-			</div>
-			<script type="text/javascript">
-				jQuery('select.sp_variations_swatches_shape_style').val('<?php echo $shap_style_val; ?>');
-			</script>			
+			<tr class="form-field">				
+				<th scope="row" valign="top">				
+					<label for="sp_variations_swatches_shape_style">Shape Style</label>				
+				</th>
+				<td>
+					<select name="sp_variations_swatches_shape_style" id="sp_variations_swatches_shape_style" class="sp_variations_swatches_shape_style">
+						<option value="select">Select</option>
+						<option value="squared">Squared</option>
+						<option value="rounded">Rounded</option>
+						<option value="circle">Circle</option>
+						<option value="none">None</option>
+					</select>
+					<script type="text/javascript">
+						jQuery('select.sp_variations_swatches_shape_style').val('<?php echo $shap_style_val; ?>');
+					</script>			
+				</td>
+			</tr>
 		<?php
 		echo ob_get_clean();
 	}
 
 	public function save_taxonomy_form_feild_3($id, $data) {
-		
+
 		if(!empty(wbc()->sanitize->post('sp_variations_swatches_shape_style'))) {
 			update_term_meta($id,'sp_variations_swatches_shape_style',wbc()->sanitize->post('sp_variations_swatches_shape_style'));
-		}else{
-			update_term_meta($id,'sp_variations_swatches_shape_style',-1);
-		}
+		}			
 
 	}	
 }

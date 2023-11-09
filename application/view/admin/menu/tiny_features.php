@@ -369,10 +369,9 @@ $form['data'] = array(
 					'type'=>'select',					
 					'value'=> wbc()->options->get_option('tiny_features','tiny_features_shape_style'/*,'#DCC7C7'*/),
 					'sanitize'=>'sanitize_text_field',
-					'options'=> array('rounded'=>'Rounded','squared'=>'Squared'),
-					'class'=>array('fluid'),
-					'visible_info'=>array( 
-						'label'=>eowbc_lang('This controls which shape style used by default.'),
+					'class'=>array('fluid','hide'),
+
+					'visible_info'=>array( 'label'=>eowbc_lang( "Which swatch shape you want to set? Default is Round shape. For changing shape settings go to woocommerce attributes edit page -> add/edit woocommerce attribute -> shape style dropdown field"),
 						'type'=>'visible_info',
 						'class'=>array('medium','fluid'),
 						// 'size_class'=>array('sixteen','wide'),
@@ -473,7 +472,57 @@ $form['data'] = array(
 					// 'class'=>array('fluid'),
 					// 'size_class'=>array('eight','wide')
 				),
+				'tiny_features_tooltip_background_color'=>array(
+					'label'=>eowbc_lang('Tooltip background color'),
+					'type'=>'color',
+					'spui_version'=>1.0,
+					'container_class'=>array(''),						
+					'value'=>wbc()->options->get_option('tiny_features','tiny_features_tooltip_background_color','#ECECEC'),
+					'sanitize'=>'sanitize_hex_color',
+					'class'=>array('fluid'),				
+					'size_class'=>array('eight','wide'),
+					'inline'=>false,
 
+					'visible_info'=>array( 'label'=>eowbc_lang('<br/>Choose color for tooltip background.'),
+						'type'=>'visible_info',
+						'class'=>array('medium','fluid'),
+						// 'size_class'=>array('sixteen','wide'),
+					)
+				),
+				'tiny_features_tooltip_font_color'=>array(
+					'label'=>eowbc_lang('Tooltip font color'),
+					'type'=>'color',
+					'spui_version'=>1.0,
+					'container_class'=>array(''),						
+					'value'=>wbc()->options->get_option('tiny_features','tiny_features_tooltip_font_color','#ECECEC'),
+					'sanitize'=>'sanitize_hex_color',
+					'class'=>array('fluid'),				
+					'size_class'=>array('eight','wide'),
+					'inline'=>false,
+
+					'visible_info'=>array( 'label'=>eowbc_lang('<br/>Choose color for tooltip font.'),
+						'type'=>'visible_info',
+						'class'=>array('medium','fluid'),
+						// 'size_class'=>array('sixteen','wide'),
+					)
+				),
+				'tiny_features_option_tooltip_font_size'=>array(
+					'label'=>eowbc_lang('Tooltip font size'),
+					'type'=>'text',
+					'spui_version'=>1.0,
+					'container_class'=>array(''),						
+					'value'=>wbc()->options->get_option('tiny_features','tiny_features_option_tooltip_font_size','12px'),
+					'sanitize'=>'sanitize_text_field',
+					'class'=>array('fluid'),	
+					'size_class'=>array('eight','wide'),
+					'inline'=>false,
+
+					'visible_info'=>array( 'label'=>eowbc_lang('Set tooltip font size.<strong>(Default: 12px)</strong>'),
+						'type'=>'visible_info',
+						'class'=>array('medium'),
+						// 'size_class'=>array('sixteen','wide'),
+					)
+				),
 				'tiny_features_styling_tab_end'=>array(
 					'type'=>'accordian',
 					'section_type'=>'end'

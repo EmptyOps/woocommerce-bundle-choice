@@ -1115,6 +1115,23 @@ class SP_WBC_Variations extends SP_Variations {
         	$type = 'select';
         }
 
+        if('select' == $type) {
+
+        	if(wbc()->options->get_option('tiny_features','tiny_features_option_dropdowns_to_button') == 'tiny_features_option_dropdowns_to_button') {
+
+        		$type = 'button'; 
+        	}
+
+        	/*ACTIVE_TODO_OC_START
+				ACTIVE_TODO need to implement the default implementation for convert dropdown to image very soon. this will be a pro feature. we can give some part of it free but maybe that is not necessary. 
+
+
+
+				ACTIVE_TODO we may very soon like to do the logic of using variation image as the option image and something such 
+					--	and this point is related default settings planned above, means the convert dropdown to image feature 
+			ACTIVE_TODO_OC_END*/
+        }
+
         // added on 03-07-2023
         // NOTE: as we have thought of and very well planned to support the legacy types and on that regard all the legacy layers and functions and flows, so here now we have enabled the legecy type support.
         if(!isset(self::sp_variations_swatches_supported_attribute_types()[$type])) {
@@ -1207,93 +1224,6 @@ class SP_WBC_Variations extends SP_Variations {
 			if ( \eo\wbc\model\publics\data_model\SP_WBC_Variations::wc_product_has_attribute_type( $type, $args['hook_callback_args']['hook_args']['attribute'] ) ) {
 
 				$data = self::prepare_swatches_data_by_attribute_type($data,$args);
-
-			} else{
-				/*ACTIVE_TODO_OC_START
-				ACTIVE_TODO need to implement the default implementation very soon. 
-
-
-
-				ACTIVE_TODO we may very soon like to do the logic of using variation image as the option image and something such 
-					--	and this point is related default settings planned above, means the default_image_type_attribute 
-				ACTIVE_TODO_OC_END*/
-				// if ( $default_image_type_attribute === '__max' ) {
-
-				// 	$attribute_counts = array();
-				// 	foreach ( $attributes as $attr_key => $attr_values ) {
-				// 		$attribute_counts[ $attr_key ] = count( $attr_values );
-				// 	}
-
-				// 	$max_attribute_count = max( $attribute_counts );
-				// 	$attribute_key       = array_search( $max_attribute_count, $attribute_counts );
-
-				// } elseif ( $default_image_type_attribute === '__min' ) {
-				// 	$attribute_counts = array();
-				// 	foreach ( $attributes as $attr_key => $attr_values ) {
-				// 		$attribute_counts[ $attr_key ] = count( $attr_values );
-				// 	}
-				// 	$min_attribute_count = min( $attribute_counts );
-				// 	$attribute_key       = array_search( $min_attribute_count, $attribute_counts );
-
-				// } elseif ( $default_image_type_attribute === '__first' ) {
-				// 	$attribute_keys = array_keys( $attributes );
-				// 	$attribute_key  = current( $attribute_keys );
-				// } else {
-				// 	$attribute_key = $default_image_type_attribute;
-				// }
-
-				// $selected_attribute_name = wc_variation_attribute_name( $attribute_key );
-
-
-				// $default_attribute_keys = array_keys( $attributes );
-				// $default_attribute_key  = current( $default_attribute_keys );
-				// $default_attribute_name = wc_variation_attribute_name( $default_attribute_key );
-
-				// $current_attribute      = $args['hook_callback_args']['hook_args']['attribute'];
-				// $current_attribute_name = wc_variation_attribute_name( $current_attribute );
-
-
-				// if ( $is_default_to_image ) {
-
-				// 	$assigned = array();
-
-				// 	foreach ( $variations as $variation_key => $variation ) {
-
-				// 		$attribute_name = isset( $variation['attributes'][ $selected_attribute_name ] ) ? $selected_attribute_name : $default_attribute_name;
-
-				// 		$attribute_value = esc_html( $variation['attributes'][ $attribute_name ] );
-
-				// 		$assigned[ $attribute_name ][ $attribute_value ] = array(
-				// 			'image_id'     => $variation['image_id'],
-				// 			'variation_id' => $variation['variation_id'],
-				// 			'type'         => ( empty( $variation['image_id'] ) ? 'button' : 'image' ),
-				// 		);
-				// 	}
-
-				// 	$type     = ( empty( $assigned[ $current_attribute_name ] ) ? 'button' : 'image' );
-				// 	$assigned = ( isset( $assigned[ $current_attribute_name ] ) ? $assigned[ $current_attribute_name ] : array() );
-
-				// 	if ( $type === 'button' && ! $is_default_to_button ) {
-				// 		$type = 'select';
-				// 	}
-
-				// 	wvs_default_image_variation_attribute_options(
-				// 		apply_filters(
-				// 			'wvs_variation_attribute_options_args', wp_parse_args(
-				// 				$args['hook_callback_args']['hook_args'], array(
-				// 					'options'    => $args['hook_callback_args']['hook_args']['options'],
-				// 					'attribute'  => $args['hook_callback_args']['hook_args']['attribute'],
-				// 					'product'    => $product,
-				// 					'selected'   => $args['hook_callback_args']['hook_args']['selected'],
-				// 					'assigned'   => $assigned,
-				// 					'type'       => $type,
-				// 					'is_archive' => ( isset( $args['hook_callback_args']['hook_args']['is_archive'] ) && $args['hook_callback_args']['hook_args']['is_archive'] )
-				// 				)
-				// 			)
-				// 		)
-				// 	);
-
-				// }
 
 			}
 
