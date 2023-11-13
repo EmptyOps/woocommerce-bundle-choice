@@ -42,37 +42,72 @@ add_action( 'wp_enqueue_scripts' ,function(){
 		        //     jQuery(".big-img").attr('src',jQuery(this).attr('src'));
 		        // });
 
+		    	// ACTIVE_TODO temp. remove it when we need to enable zoom, added on 30-09-2023
+		    	return false;
+		    	
 			    var zoom_init_function = function(){
 			    	
 	            	console.log(" zoom asset init_function ");
 
-			        jQuery(".big-img").imagezoomsl({
-			            /*zoomrange:[3,3],
-			            disablewheel: true,
-			            scrollspeedanimate: 10,
-			            loopspeedanimate: 5,
-			            cursorshadeborder: "1px solid black",
-			            magnifiereffectanimate: "slideIn",
-			            magnifiersize: [640, 480],*/
-			            /*disablewheel: true,
-				        zoomstart: 3,
-				        zoomrange: [3,3],
-				        magnifiersize: [502, 502],
-				        cursorshadeborder: "1px solid black",*/
-				        disablewheel: true,
-				        zoomstart: 2,
-				        zoomrange: [2,2],
-				        innerzoom: true,
-				        magnifierborder: "none",
-   			            /*magnifiersize: [502, 502],
-   			            cursorshadeborder: "1px solid black",*/
-				        /*disablewheel: true,
-		                zoomstart: 3,
-		                zoomrange: [3,3],
-		                magnifiersize: [502, 502],
-		                cursorshadeborder: "1px solid black",*/
-				    });
-			        
+	            	// -- aa backup commented rakhelu se @a 21-09-2023
+			        // jQuery(".big-img").imagezoomsl({
+			        //     /*zoomrange:[3,3],
+			        //     disablewheel: true,
+			        //     scrollspeedanimate: 10,
+			        //     loopspeedanimate: 5,
+			        //     cursorshadeborder: "1px solid black",
+			        //     magnifiereffectanimate: "slideIn",
+			        //     magnifiersize: [640, 480],*/
+			        //     /*disablewheel: true,
+				    //     zoomstart: 3,
+				    //     zoomrange: [3,3],
+				    //     magnifiersize: [502, 502],
+				    //     cursorshadeborder: "1px solid black",*/
+				    //     disablewheel: true,
+				    //     zoomstart: 2,
+				    //     zoomrange: [2,2],
+				    //     innerzoom: true,
+				    //     magnifierborder: "none",
+   			        //     /*magnifiersize: [502, 502],
+   			        //     cursorshadeborder: "1px solid black",*/
+				    //     /*disablewheel: true,
+		            //     zoomstart: 3,
+		            //     zoomrange: [3,3],
+		            //     magnifiersize: [502, 502],
+		            //     cursorshadeborder: "1px solid black",*/
+				    // });
+					
+					// -- aa setTimeout @a mukelo se 21-09-2023			        
+	            	setTimeout(function (argument) {
+	            		
+				        jQuery(".big-img").imagezoomsl({
+				            /*zoomrange:[3,3],
+				            disablewheel: true,
+				            scrollspeedanimate: 10,
+				            loopspeedanimate: 5,
+				            cursorshadeborder: "1px solid black",
+				            magnifiereffectanimate: "slideIn",
+				            magnifiersize: [640, 480],*/
+				            disablewheel: true,
+					        zoomstart: 3,
+					        zoomrange: [3,3],
+					        magnifiersize: [502, 502],
+					        cursorshadeborder: "1px solid black",
+					        /*disablewheel: true,
+					        zoomstart: 2,
+					        zoomrange: [2,2],
+					        innerzoom: true,
+					        magnifierborder: "none",*/
+	   			            /*magnifiersize: [502, 502],
+	   			            cursorshadeborder: "1px solid black",*/
+					        /*disablewheel: true,
+			                zoomstart: 3,
+			                zoomrange: [3,3],
+			                magnifiersize: [502, 502],
+			                cursorshadeborder: "1px solid black",*/
+					    });
+	            	},1000);
+
 			    };  
 
 			    var bind_listeners = function(){

@@ -144,6 +144,21 @@ if(window.document.splugins.common.is_item_page || window.document.splugins.comm
     return (val == undefined || val == null || val.length <= 0) ? true : false;
  }
 
+ window.document.splugins.common.find_get_parameter = function(parameterName) {
+    
+    var result = null,
+        tmp = [];
+    location.search
+        .substr(1)
+        .split("&")
+        .forEach(function (item) {
+            tmp = item.split("=");
+            if (tmp[0] === parameterName) result = decodeURIComponent(tmp[1]);
+        });
+
+    return result;
+ }
+
  // reference: https://stackoverflow.com/a/175787
  window.document.splugins.common.isNumeric = function(str) {
     
@@ -151,7 +166,6 @@ if(window.document.splugins.common.is_item_page || window.document.splugins.comm
     return !isNaN(str) && // use type coercion to parse the _entirety_ of the string (`parseFloat` alone does not do this)...
      !isNaN(parseFloat(str)); // ...and ensure strings of whitespace fail
  }
-
 
  var images = [];
  window.document.splugins.common.preload_images = function(src) {
@@ -162,6 +176,7 @@ if(window.document.splugins.common.is_item_page || window.document.splugins.comm
     // for (var i = 0; i < arguments.length; i++) {
         var image/*s[i]*/ = new Image();
         image/*s[i]*/.src = /*preload.arguments[i]*/src;
+
     // }
     
     images.push(image);
@@ -1559,6 +1574,7 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
         console.log('process_attribute_data out_of_stock_selects', data.out_of_stock_selects)
         
         data.in_stocks = splugins._.difference(data.selects, data.disabled_selects);
+        console.log('data.in_stocks', data.in_stocks)
 
         // console.log('out of stock', out_of_stock_selects)
         // console.log('in stock', in_stocks)
@@ -1840,6 +1856,8 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
         // }
         var object = _this./*#*/compatability_private('attribute_options', {'element':element, 'data':data});
         data = object.data;
+        console.log('vs [process_attribute_template] data');
+        console.log(data);
 
         data = _this./*#*/process_attribute_data_private(type, element, data, mode);
         
@@ -3487,8 +3505,10 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
         _this./*#*/$zoom_container_private.removeClass('spui-wbc-gallery_images-has-product-thumbnail');
       }
 
+      console.log('gim [process_images_template] is_skip_sp_slzm');
+      console.log(_this./*#*/data_private.is_skip_sp_slzm);
       if(!_this./*#*/data_private.is_skip_sp_slzm){
-
+        console.log('gim [process_images_template] not is_skip_sp_slzm');
         splugins._.delay(function () {
             
             if (_this./*#*/data_private.is_variation_product) {
@@ -4330,12 +4350,14 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
     /*#*/sp_slzm_init_private() {
 
         var _this = this;
-
+        console.log('sp_slzm_init_private');
+        console.log(_this./*#*/data_private.is_skip_sp_slzm);
         if(!_this./*#*/data_private.is_skip_sp_slzm){
             
-            // console.log("sp_slzm_init notification");
+            console.log("sp_slzm_init notification");
 
             var sp_slzm_init_callback = null;
+
             window.document.splugins.events.api.notifyAllObservers( 'gallery_images', 'sp_slzm_init', {} , sp_slzm_init_callback, _this./*#*/$base_container_private);
         }
         
@@ -4537,7 +4559,7 @@ window.document.splugins.wbc.variations.gallery_images.sp_slzm.core = function( 
         // ACTIVE_TODO whenever slzm need to support selector based notification then at that time it should here bind subscriber for all the applicable loopbox gallery_images containers while the subscriber of this slzm listeners should pass the gallery_images container of perticular loopbox. that we need to implement whenever we needs support of selectro based notification. 
         window.document.splugins.events.api.subscribeObserver( 'gallery_images', 'sp_slzm', 'sp_slzm_init',function(event, stat_object, notification_response){
 
-            // console.log('init_listener_private 11111');
+            console.log('init_listener_private 11111');
 
             /*jQuery(_this.init_callbacks).each(function (index,callback) {
 
@@ -4547,7 +4569,7 @@ window.document.splugins.wbc.variations.gallery_images.sp_slzm.core = function( 
             });*/
             var sp_slzm_init_callback = null ;
             window.document.splugins.events.api.notifyAllObservers( 'gallery_images.sp_slzm', 'sp_slzm_init', {}, sp_slzm_init_callback );         
-        });
+        },jQuery('.variations_form,.spui-sp-variations-gallery-images-simple'));
 
     };
  
@@ -4557,7 +4579,7 @@ window.document.splugins.wbc.variations.gallery_images.sp_slzm.core = function( 
 
         window.document.splugins.events.api.subscribeObserver( 'gallery_images', 'sp_slzm', 'sp_slzm_refresh',function(event, stat_object, notification_response){
 
-            // console.log('refresh_listener_private 1.11111');
+            console.log('refresh_listener_private 1.11111');
 
             // jQuery.each(_this.refresh_callbacks, function (index,callback) {
 
@@ -4579,7 +4601,7 @@ window.document.splugins.wbc.variations.gallery_images.sp_slzm.core = function( 
 
         window.document.splugins.events.api.subscribeObserver( 'gallery_images', 'sp_slzm', 'sp_slzm_refresh_zoom',function(event, stat_object, notification_response){
 
-            // console.log('refresh_listener_private 2.11111');
+            console.log('refresh_listener_private 2.11111');
 
             /*jQuery(_this.zoom_callbacks).each(function (index,callback) {
 
@@ -4589,7 +4611,7 @@ window.document.splugins.wbc.variations.gallery_images.sp_slzm.core = function( 
             });*/
             var sp_slzm_refresh_zoom_callback = null ;
             window.document.splugins.events.api.notifyAllObservers( 'gallery_images.sp_slzm', 'sp_slzm_refresh_zoom', {}, sp_slzm_refresh_zoom_callback );         
-        });
+        },jQuery('.variations_form,.spui-sp-variations-gallery-images-simple'));
     };
 
     return {
@@ -4601,7 +4623,7 @@ window.document.splugins.wbc.variations.gallery_images.sp_slzm.core = function( 
 
         init_listener: function(subscriber_key, callback) {
 
-            // console.log("sp_slzm init_listener");
+            console.log("sp_slzm init_listener");
 
             // _this.init_callbacks.push(callback);
             window.document.splugins.events.api.subscribeObserver( 'gallery_images.sp_slzm', 'gallery_images.sp_slzm.'+subscriber_key, 'sp_slzm_init', callback );
@@ -4609,7 +4631,7 @@ window.document.splugins.wbc.variations.gallery_images.sp_slzm.core = function( 
  
         refresh_listener: function(subscriber_key, callback) {
 
-            // console.log("sp_slzm refresh_listener");
+            console.log("sp_slzm refresh_listener");
             
             // _this.refresh_callbacks.push(callback);
             window.document.splugins.events.api.subscribeObserver( 'gallery_images.sp_slzm', 'gallery_images.sp_slzm.'+subscriber_key, 'sp_slzm_refresh', callback );

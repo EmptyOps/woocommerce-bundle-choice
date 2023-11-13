@@ -2,7 +2,7 @@
 namespace eo\wbc\controllers\publics\pages;
 defined( 'ABSPATH' ) || exit;
 
-class Cart {
+class Cart extends \eo\wbc\system\core\publics\Eowbc_Base_Model_Publics {
 
     private static $_instance = null;
 
@@ -226,12 +226,14 @@ class Cart {
     {   
         wbc()->theme->load('css','cart');
         wbc()->theme->load('js','cart');
-        if(apply_filters('eowbc_filter_sidebars_widgets',true)){
-            add_filter( 'sidebars_widgets',function($sidebars_widgets ) {
-                return array( false );
-            });
-        }
 
+        // chenged on 30-09-2023
+        // if(apply_filters('eowbc_filter_sidebars_widgets',true)){
+        //     add_filter( 'sidebars_widgets',function($sidebars_widgets ) {
+        //         return array( false );
+        //     });
+        // }
+        parent::instance()->sidebars_widgets();
 
         
         // if our car is empty then return.

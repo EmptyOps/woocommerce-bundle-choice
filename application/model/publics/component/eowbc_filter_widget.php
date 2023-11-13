@@ -993,7 +993,7 @@ class EOWBC_Filter_Widget {
 			// ACTIVE_TODO temp. below is temparary js layer flag for its php counter part of the function wbc_is_mobile_by_page_sections. So as soon as php template layer is not depandent on the function wbc_is_mobile_by_page_sections than at that time set false for below flag.
 			// 	-- And as soon as the js layer depandancy on this flag is removed than delete this flag from here. 
 			// ACTIVE_TODO_OC_END
-			'wbc_is_mobile_by_page_sections' => 1,
+			'wbc_is_mobile_by_page_sections' => /*1*/(wbc_is_mobile_by_page_sections('cat_shop_page') ? 0 : 1),
 		) );
 
 		// if( wbc()->sanitize->get('is_test') == 1 ){
@@ -1653,6 +1653,12 @@ class EOWBC_Filter_Widget {
 		if(!empty($filter['force_title'])){
 			$title = $filter['title'];
 		}
+		if( wbc()->sanitize->get('is_test') == 2 ) {
+			wbc_pr("input_button filter['slug']");
+			wbc_pr($id);
+			wbc_pr($filter_type);
+			wbc_pr($filter);
+		}
 
 		/* to be commented in parag*/
 		//$filter = apply_filters('eowbc_filter_button_terms', $filter,$id,$title,$filter_type,$__prefix,$item);
@@ -1669,19 +1675,20 @@ class EOWBC_Filter_Widget {
 		if($desktop):
 			if(($item['filter_template']==apply_filters('eowbc_filter_prefix',$this->filter_prefix).'theme'/* and $this->_category==$this->second_category_slug) or ($this->first_theme=='theme' and $this->_category==$this->first_category_slug*/) or ($item['filter_template'] === 'theme' and ($this->is_shop_cat_filter or $this->is_shortcode_filter))) {
 
-				wbc()->load->template('publics/filters/theme_button_desktop', array("width_class"=>$this->get_width_class($width),"filter"=>$filter,"reset"=>$reset,'help'=>$help,'tab_set'=>$tab_set,'filter_ui'=>$this));
+				wbc()->load->template('publics/filters/theme_button_desktop', array("width_class"=>$this->get_width_class($width),"filter"=>$filter,"filter_type"=>$filter_type,"reset"=>$reset,'help'=>$help,'tab_set'=>$tab_set,'filter_ui'=>$this));
 
 			} elseif(($item['filter_template']=='sc4' and $this->_category==$this->second_category_slug) or ($item['filter_template']=='fc4' and $this->_category==$this->first_category_slug)) {
 				
-				wbc()->load->template('publics/filters/button_desktop_4', array("width_class"=>$this->get_width_class($width),"filter"=>$filter,"reset"=>$reset,'help'=>$help,'tab_set'=>$tab_set,'filter_ui'=>$this));
+				wbc()->load->template('publics/filters/button_desktop_4', array("width_class"=>$this->get_width_class($width),"filter"=>$filter,"filter_type"=>$filter_type,"reset"=>$reset,'help'=>$help,'tab_set'=>$tab_set,'filter_ui'=>$this));
 
 			} elseif ((in_array($item['filter_template'],array('sc3','sc5')) and $this->_category==$this->second_category_slug) or (in_array($item['filter_template'],array('fc3','fc5')) and $this->_category==$this->first_category_slug)) {
 				
-				wbc()->load->template('publics/filters/button_desktop_3', array("width_class"=>$this->get_width_class($width),"filter"=>$filter,"reset"=>$reset,'help'=>$help,'tab_set'=>$tab_set,'filter_ui'=>$this));
+				wbc()->load->template('publics/filters/button_desktop_3', array("width_class"=>$this->get_width_class($width),"filter"=>$filter,
+				"filter_type"=>$filter_type,"reset"=>$reset,'help'=>$help,'tab_set'=>$tab_set,'filter_ui'=>$this));
 
 			} else {
 			
-				wbc()->load->template('publics/filters/button_desktop', array("width_class"=>$this->get_width_class($width),"filter"=>$filter,"reset"=>$reset,'tab_set'=>$tab_set,'help'=>$help,'filter_ui'=>$this));
+				wbc()->load->template('publics/filters/button_desktop', array("width_class"=>$this->get_width_class($width),"filter"=>$filter,"filter_type"=>$filter_type,"reset"=>$reset,'tab_set'=>$tab_set,'help'=>$help,'filter_ui'=>$this));
 			}
 		elseif(($item['filter_template']==apply_filters('eowbc_filter_prefix',$this->filter_prefix).'theme') or ($item['filter_template'] === 'theme' and ($this->is_shop_cat_filter or $this->is_shortcode_filter))): 
 			
@@ -2254,9 +2261,9 @@ class EOWBC_Filter_Widget {
 			$term_list = $filter['list'];
 		} else{
 
-			$term = wbc()->wc->get_term_by('term_taxonomy_id',apply_filters( 'wpml_object_id',$id,'category', FALSE, 'en'),'product_cat');
+			$term = wbc()->wc->get_term_by('term_taxonomy_id',apply_filters( 'wpml_object_id',$id,'category', TRUE/*FALSE the FALSE commented and TRUE is added on 14-09-2023, it is to ensure that original is used if the translation is missing*/, 'en'),'product_cat');
 
-			$term_list = wbc()->wc->get_terms(apply_filters( 'wpml_object_id',$term->term_id,'category', FALSE, 'en'),'menu_order');
+			$term_list = wbc()->wc->get_terms(apply_filters( 'wpml_object_id',$term->term_id,'category', TRUE/*FALSE the FALSE commented and TRUE is added on 14-09-2023, it is to ensure that original is used if the translation is missing*/, 'en'),'menu_order');
 									
 			if(!empty($item[$__prefix."_fconfig_elements"])){
 				$filter_in_list = explode(',',$item[$__prefix."_fconfig_elements"]);
@@ -2748,6 +2755,11 @@ class EOWBC_Filter_Widget {
     					'btnfilter_now'=>(empty(wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','filter_setting_btnfilter_now'))?false:true),
     					'btnreset_now'=>(empty(wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','filter_setting_reset_now'))?false:true),
     					'_prefix_' => $this->filter_prefix,
+    					// ACTIVE_TODO_OC_START
+						// ACTIVE_TODO temp. below is temparary js layer flag for its php counter part of the function wbc_is_mobile_by_page_sections. So as soon as php template layer is not depandent on the function wbc_is_mobile_by_page_sections than at that time set false for below flag.
+						// 	-- And as soon as the js layer depandancy on this flag is removed than delete this flag from here. 
+						// ACTIVE_TODO_OC_END
+						'wbc_is_mobile_by_page_sections' => /*1*/(wbc_is_mobile_by_page_sections('cat_shop_page') ? 0 : 1),
     				);
 
 		?>
@@ -2768,8 +2780,7 @@ class EOWBC_Filter_Widget {
 		if( wbc()->sanitize->get('is_test') == 1 ){
 		
 			wbc_pr("get_widget_f_eo_wbc_object");
-		}	
-
+		}
 		do_action('eowbc_before_filter_widget');
 
 		$this->_category = apply_filters('eowbc_filter_widget_category',$this->eo_wbc_get_category());
@@ -2806,6 +2817,11 @@ class EOWBC_Filter_Widget {
 			}	
 		}
 
+		if( wbc()->sanitize->get('is_test') == 2 ) {
+			wbc_pr("get_widget filter['slug']");
+			wbc_pr($filter['slug']);
+		}
+
 		if(!empty($filter) and is_array($filter)) {
 			foreach($filter as $filter_key=>$filter_value) {
 				$filter[$filter_key][$prefix.'_fconfig_filter'] = str_replace('pa_','',$filter[$filter_key][$prefix.'_fconfig_filter']);
@@ -2814,7 +2830,12 @@ class EOWBC_Filter_Widget {
 
 		$filter =  apply_filters( 'eowbc_filter_widget_filters',$filter,$prefix);
 		$is_cleanup = apply_filters( 'eowbc_filter_widget_is_reset_cleanup',1);
-		
+
+
+		if( wbc()->sanitize->get('is_test') == 2 ) {
+			wbc_pr("get_widget filter['slug'] 1");
+			wbc_pr($filter);
+		}	
 
 		if($is_cleanup and !empty($filter) and is_array($filter)) {
 			$new_filters = array();
@@ -2828,6 +2849,10 @@ class EOWBC_Filter_Widget {
 			$filter = $new_filters;
 		}
 
+		if( wbc()->sanitize->get('is_test') == 2 ) {
+			wbc_pr("get_widget filter['slug'] 2");
+			wbc_pr($filter);
+		}		
 		//Hidden input filter lists.
 		$this->__filters=array();
 		$this->__prefix = $prefix;
@@ -2874,8 +2899,15 @@ class EOWBC_Filter_Widget {
 		
 		$filter =  apply_filters( 'eowbc_filter_widget_filters_post_clean',$filter,$prefix);
 		$this->__filters__=$filter;
+		if( wbc()->sanitize->get('is_test') == 2 ) {
+			wbc_pr("get_widget filter['slug'] 3");
+			wbc_pr($filter);
+		}	
 		$filter =  apply_filters( 'eowbc_filter_widget_filters',$filter,$prefix);
-
+		if( wbc()->sanitize->get('is_test') == 2 ) {
+			wbc_pr("get_widget filter['slug'] 4");
+			wbc_pr($filter);
+		}	
 		
 
 		foreach ($filter as $key => $item) {
@@ -2916,7 +2948,6 @@ class EOWBC_Filter_Widget {
 				$adv_ordered_filter[/*$item['order']*/]=$item;
 			}
 		}		
-
 
 		$order = wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','price_filter_order_'.$this->cat_name_part.'_cat',false);
 		if( !wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','hide_price_filter_'.$this->cat_name_part.'_cat',false) && !wbc()->common->nonZeroEmpty($order) ) {
@@ -3068,7 +3099,8 @@ class EOWBC_Filter_Widget {
 				// and 
 				// !empty(wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','filter_setting_advance_second_category',false))
 
-				sizeof($filter_sets_data) >= 2
+				// sizeof($filter_sets_data) >= 2
+				sizeof($filter_sets_data) >= 1
 			) {
 			
 			// --- aa code if condition ni bar muki ne loop chalavu se ---
@@ -3150,6 +3182,13 @@ class EOWBC_Filter_Widget {
 		$filters_sub_confings['filter_setting_slider_max_lblsize'] = (int)wbc()->options->get_option('filters_'.$filter_prefix.'filter_setting','filter_setting_slider_max_lblsize',6);
 		$filters_sub_confings['filter_prefix'] = $this->filter_prefix;	
 		$filters_sub_confings['filter_slug'] = $filter['slug'];
+
+		if( wbc()->sanitize->get('is_test') == 2 ) {
+
+			wbc_pr("filter['slug']---------");
+			wbc_pr($filter['slug']);
+		}
+		
 		$filters_sub_confings['filter_type'] = $filter_type;
 		// $filters_sub_confings['term_slug'] = $term->slug;
 

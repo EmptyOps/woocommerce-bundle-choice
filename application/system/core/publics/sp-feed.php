@@ -34,13 +34,9 @@ class SP_Feed extends Eowbc_Base_Model_Publics {
 	}
 
 	protected function sidebars_widgets(){
-        /*Hide sidebar and make content area full width.*/
-        if(apply_filters('eowbc_filter_sidebars_widgets',true)){
-            add_filter( 'sidebars_widgets',function($sidebars_widgets ) {
-                return array( false );
-            });
-        }                
-        /*End --Hide sidebar and make content area full width.*/
+
+        return parent::instance()->sidebars_widgets();
+
 	}
 
 	protected function add_to_cart_text(){

@@ -851,6 +851,15 @@ $form['data'] = array(
 						// 'size_class'=>array('sixteen','wide'),
 					)
 				),
+				'tiny_features_product_page_video_icon'=>array(
+					'label'=>'Video icon for product page',
+					'type'=>'icon',
+					'value'=>wbc()->options->get_option('tiny_features','tiny_features_product_page_video_icon'),
+					/*'validate'=>array('required'=>''),*/
+					'sanitize'=>'sanitize_text_field',
+					'class'=>array(),
+					'size_class'=>array('eight','wide'),
+				),	
 				'tiny_features_gallery_options'=>array(
 					'label'=>'Gallery Options',
 					'type'=>'devider',

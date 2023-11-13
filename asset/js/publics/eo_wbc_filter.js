@@ -1608,7 +1608,23 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 			on_slider_change_event(selector, this);
 		};
 		// --- end ---
-    	window.document.splugins.wbc.filters.filter_field.slider(jQuery('.eo-wbc-container.filters').find('.ui.slider'));
+
+		if (window.document.splugins.common.current_theme_key != 'themes___purple_theme') {
+		    window.document.splugins.wbc.filters.filter_field.slider(
+		        jQuery('.eo-wbc-container.filters').find('.ui.slider')
+		    );
+		} else {
+		    // added on 18-09-2023
+		    setTimeout(function () {
+		        console.log('filters [slider_change_event_listener] 1');
+		        console.log(jQuery('.Top_Daimond_Btn_Content').find('.irs-hidden-input'));
+
+		        window.document.splugins.wbc.filters.filter_field.slider(
+		            jQuery('.Top_Daimond_Btn_Content').find('.irs-hidden-input')
+		        );
+		    }, 2000);
+		}
+
     };
 
     var checkbox_change_event_listener = function(){
@@ -1681,11 +1697,16 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
     var input_type_button_click_listener = function() {
 
+    	console.log('filters [input_type_button_click_listener]');
+    	console.log('[data-filter-slug="'+ _this.sub_configs.filter_slug +'"]');
+    	console.log(jQuery('[data-filter-slug="'+ _this.sub_configs.filter_slug +'"]'));
+
     	// --- aa code woo-bundle-choice/application/model/publics/component/eowbc_filter_widget.php input_button(); mathi move karyo se @a ---
     	// --- start ---
 		// $('[data-filter-slug="<?php echo $filter['slug']; ?>"]').on('click',function(event){
 		jQuery('[data-filter-slug="'+ _this.sub_configs.filter_slug +'"]').on('click',function(event){
     		
+    		console.log('filters [input_type_button_click_listener] 01');
     		on_input_type_button_click(event, this);
 
 		});
@@ -1759,6 +1780,8 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
     var on_input_type_button_click = function(event, element) {
 
+    	console.log('filters [on_input_type_button_click]');
+    	
     	input_type_button_click(event, element);
     };
 
@@ -2078,7 +2101,9 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 					_min=0;
 					_max=_labels.length-1;
 				}
-
+				console.log('slider_change_event loop onChange');
+				console.log(jQuery(this/*element*/));
+				console.log(value);
 				if(
 					(
 						(jQuery(this/*element*/).data('prev_val_min')!=min && jQuery(this/*element*/).data('prev_val_min')!=undefined)
@@ -2169,36 +2194,49 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 				_params.autoAdjustLabels=false;	
 			}					
 			
+			jQuery(jQuery(e).attr('data-bind-min')).change(function() {				    
+
+				common_slider_change_event(e);
+			});
+
+			jQuery(jQuery(e).attr('data-bind-max')).change(function() {				    
+
+				common_slider_change_event(e);
+			});
+
 			jQuery("input.text_slider_"+jQuery(e).attr('data-slug')).change(function() {				    
-				
-				//jQuery("#text_slider_"+jQuery(e).attr('data-slug')).slider("set rangeValue",jQuery("[name=min_"+jQuery(e).attr('data-slug')+"]").val(),jQuery("[name=max_"+jQuery(e).attr('data-slug')+"]").val());
 
-				let prefix = jQuery(e).attr('data-prefix');
-				let postfix = jQuery(e).attr('data-postfix');
-				
-				let min_value = jQuery("[name='text_min_"+jQuery(e).attr('data-slug')+"']").val();
-				
-				let max_value = jQuery("[name='text_max_"+jQuery(e).attr('data-slug')+"']").val();
-				
-				if(prefix!=='' && typeof(prefix)!==typeof(undefined) && prefix.hasOwnProperty('length')){
-					if(min_value.includes(prefix)){
-						min_value = min_value.slice(prefix.length);	
-					}							
-					if(max_value.includes(prefix)){
-						max_value = max_value.slice(prefix.length);
-					}
-				}
+				// -- move to common_slider_change_event()
+				// //jQuery("#text_slider_"+jQuery(e).attr('data-slug')).slider("set rangeValue",jQuery("[name=min_"+jQuery(e).attr('data-slug')+"]").val(),jQuery("[name=max_"+jQuery(e).attr('data-slug')+"]").val());
 
-				if(postfix!=='' && typeof(postfix)!==typeof(undefined) && postfix.hasOwnProperty('length')){
-					if(min_value.includes(postfix)){
-						min_value = min_value.slice(0,-1*postfix.length);
-					}
-					if(min_value.includes(postfix)){
-						max_value = max_value.slice(0,-1*postfix.length);
-					}
-				}
+				// let prefix = jQuery(e).attr('data-prefix');
+				// let postfix = jQuery(e).attr('data-postfix');
 				
-				jQuery("#text_slider_"+jQuery(e).attr('data-slug')).slider("set rangeValue",min_value,max_value);
+				// let min_value = jQuery("[name='text_min_"+jQuery(e).attr('data-slug')+"']").val();
+				
+				// let max_value = jQuery("[name='text_max_"+jQuery(e).attr('data-slug')+"']").val();
+				
+				// if(prefix!=='' && typeof(prefix)!==typeof(undefined) && prefix.hasOwnProperty('length')){
+				// 	if(min_value.includes(prefix)){
+				// 		min_value = min_value.slice(prefix.length);	
+				// 	}							
+				// 	if(max_value.includes(prefix)){
+				// 		max_value = max_value.slice(prefix.length);
+				// 	}
+				// }
+
+				// if(postfix!=='' && typeof(postfix)!==typeof(undefined) && postfix.hasOwnProperty('length')){
+				// 	if(min_value.includes(postfix)){
+				// 		min_value = min_value.slice(0,-1*postfix.length);
+				// 	}
+				// 	if(min_value.includes(postfix)){
+				// 		max_value = max_value.slice(0,-1*postfix.length);
+				// 	}
+				// }
+
+				// jQuery("#text_slider_"+jQuery(e).attr('data-slug')).slider("set rangeValue",min_value,max_value);
+
+				common_slider_change_event(e);
 			});
 
 			let ui_slider = jQuery.fn.slider;
@@ -2214,7 +2252,10 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 				
 				console.log('if jQuery(e).slider(_params) call');
 
-				jQuery(e).slider(_params);
+				// purple theme mate aa permenent alag if se tenu slider alag ave se atle. So aa permanant if condition se and koi temp. temparary if nathi.
+				if(window.document.splugins.common.current_theme_key != 'themes___purple_theme') {
+					jQuery(e).slider(_params);
+				}
 			}else{
 				
 				console.log('else temp_patch_slider_change_event_child call');
@@ -2237,6 +2278,53 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		}
 
     };
+
+    var common_slider_change_event = function(e) {
+
+		console.log('slider_change_event loop 1 change');
+		console.log("input.text_slider_"+jQuery(e).attr('data-slug'));
+		//jQuery("#text_slider_"+jQuery(e).attr('data-slug')).slider("set rangeValue",jQuery("[name=min_"+jQuery(e).attr('data-slug')+"]").val(),jQuery("[name=max_"+jQuery(e).attr('data-slug')+"]").val());
+
+		let prefix = jQuery(e).attr('data-prefix');
+		let postfix = jQuery(e).attr('data-postfix');
+		
+		let min_value = jQuery("[name='text_min_"+jQuery(e).attr('data-slug')+"']").val();
+		
+		let max_value = jQuery("[name='text_max_"+jQuery(e).attr('data-slug')+"']").val();
+		
+		if(prefix!=='' && typeof(prefix)!==typeof(undefined) && prefix.hasOwnProperty('length')){
+			if(min_value.includes(prefix)){
+				min_value = min_value.slice(prefix.length);	
+			}							
+			if(max_value.includes(prefix)){
+				max_value = max_value.slice(prefix.length);
+			}
+		}
+
+		if(postfix!=='' && typeof(postfix)!==typeof(undefined) && postfix.hasOwnProperty('length')){
+			if(min_value.includes(postfix)){
+				min_value = min_value.slice(0,-1*postfix.length);
+			}
+			if(max_value.includes(postfix)){
+
+				// console.log('filters [common_slider_change_event] if 2 if 2');
+				
+				max_value = max_value.slice(0,-1*postfix.length);
+			}
+		}
+
+		if(window.document.splugins.common.current_theme_key != 'themes___purple_theme') {
+
+			jQuery("#text_slider_"+jQuery(e).attr('data-slug')).slider("set rangeValue",min_value,max_value);
+		}else{
+			
+			var sliderData = jQuery(e).data("ionRangeSlider").result;
+			
+			jQuery(e).data("ionRangeSlider").options.onFinish(sliderData);
+
+		}
+
+    }
 
 	// ACTIVE_TODO temp. added on 30-11-2022. remove as soon as the standerd fix is ready. 
     var temp_patch_slider_change_event_child = function(slider) {
@@ -2454,17 +2542,23 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
     var input_type_button_click = function(event, element) {
 
+    	console.log('filters [input_type_button_click]');
+    	console.log(element);
+
+		var filter_target;
+
 		// <?php if($filter_type==1): ?>
-		if(_this.sub_configs.filter_type==1) {
+		// if(_this.sub_configs.filter_type==1) {
+		if(jQuery(/*this*/element).attr('data-filter-type')==1) {
 			
 			// let filter_target = jQuery('form#<?php echo $this->filter_prefix; ?>eo_wbc_filter [name="_attribute"]');
-			let filter_target = jQuery('form#'+ _this.sub_configs.filter_prefix +'eo_wbc_filter [name="_attribute"]');
+			filter_target = jQuery('form#'+ _this.sub_configs.filter_prefix +'eo_wbc_filter [name="_attribute"]');
 		}
 		// <?php else: ?>
 		else {
 
 			// let filter_target = jQuery('form#<?php echo $this->filter_prefix; ?>eo_wbc_filter [name="_category"]');
-			let filter_target = jQuery('form#'+ _this.sub_configs.filter_prefix +'eo_wbc_filter [name="_category"]');
+			filter_target = jQuery('form#'+ _this.sub_configs.filter_prefix +'eo_wbc_filter [name="_category"]');
 		}
 		// <?php endif;?>
 		
@@ -3768,7 +3862,7 @@ if( typeof(eo_wbc_object) != 'undefined'){
 				      console.log('filter filter_set_click');
 				      console.log(_this.configs.filter_setting_alternate_mobile);
 				      // <?php if(wp_is_mobile() and !wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile')): ?>
-				      if((window.document.splugins.common.is_mobile) && !(_this.configs.filter_setting_alternate_mobile)){
+				      if( (eo_wbc_object.wbc_is_mobile_by_page_sections == 1) && (window.document.splugins.common.is_mobile) && !(_this.configs.filter_setting_alternate_mobile)){
 
 				      	console.log('filter filter_set_click 1');
 				      	console.log(element);
@@ -3786,7 +3880,7 @@ if( typeof(eo_wbc_object) != 'undefined'){
 				      }
 
 				      // <?php if(wp_is_mobile() and wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile')): ?>
-				      if((window.document.splugins.common.is_mobile) && (_this.configs.filter_setting_alternate_mobile)){
+				      if( (eo_wbc_object.wbc_is_mobile_by_page_sections == 1) && (window.document.splugins.common.is_mobile) && (_this.configs.filter_setting_alternate_mobile)){
 
 				      	console.log('filter filter_set_click 2');
 				      	console.log(element);

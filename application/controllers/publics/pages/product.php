@@ -2,7 +2,8 @@
 namespace eo\wbc\controllers\publics\pages;
 defined( 'ABSPATH' ) || exit;
 
-class Product {
+
+class Product extends \eo\wbc\system\core\publics\Eowbc_Base_Model_Publics {
 
     private static $_instance = null;
 
@@ -119,8 +120,10 @@ class Product {
                          event.preventDefault();
                 },false);
 
-                let sp_add_to_cart_dots = 1
-                let sp_add_to_cart_dots_interval = window.setInterval(function(){
+                // let sp_add_to_cart_dots = 1
+                var sp_add_to_cart_dots = 1
+                // let sp_add_to_cart_dots_interval = window.setInterval(function(){
+                var sp_add_to_cart_dots_interval = window.setInterval(function(){
                     
                     if(jQuery('#eo_wbc_add_to_cart,#eo_wbc_add_to_cart_preview').length>0) {                        
                         window.clearInterval(sp_add_to_cart_dots_interval);
@@ -223,12 +226,12 @@ class Product {
             //return __('Add This To Cart','woo-bundle-choice');
         });
 
-        add_filter('woocommerce_get_script_data',function($data,$handle){
-            if($handle == 'wc-add-to-cart-variation'){
-                return false;
-            }
-            return $data;
-        },10,2);
+        // add_filter('woocommerce_get_script_data',function($data,$handle){
+        //     if($handle == 'wc-add-to-cart-variation'){
+        //         return false;
+        //     }
+        //     return $data;
+        // },10,2);
         
         add_action('wp_head',function(){
             wp_dequeue_script('wc-add-to-cart-variation');
@@ -644,12 +647,16 @@ class Product {
         $redirect_url = $this->eo_wbc_product_route();
         wbc()->theme->load('css','product');
         wbc()->theme->load('js','product');
-        /*Hide sidebar and make content area full width.*/
-        if(apply_filters('eowbc_filter_sidebars_widgets',true)){
-            /*add_filter( 'sidebars_widgets',function($sidebars_widgets ) {
-                return array( false );
-            });    */
-        }
+
+        // chenged on 30-09-2023
+        // /*Hide sidebar and make content area full width.*/
+        // if(apply_filters('eowbc_filter_sidebars_widgets',true)){
+        //     /*add_filter( 'sidebars_widgets',function($sidebars_widgets ) {
+        //         return array( false );
+        //     });    */
+        // }
+        parent::instance()->sidebars_widgets();
+
         
         ob_start();        
         ?>
@@ -861,8 +868,12 @@ class Product {
                     return $url;
                 }
                 
-                return header("Location: {$url}");
-                wp_die();
+                // changed on 08-09-2023
+                // return header("Location: {$url}");
+                // wp_die();
+                header("Location: {$url}");
+                echo '<script type="text/javascript"> window.location.href = "'. $url .'"; </script>';
+                return;
                 //wp_safe_redirect($url ,301 );               
             } else {
                 
@@ -1151,7 +1162,7 @@ class Product {
                                     $taxonomy_related_data[substr($_term_->taxonomy,3)]['filter_range'] = array();
                                 }
 
-                                if( in_array($term_taxonomy_id, $range) ) {
+                                if( is_array($range) && in_array($term_taxonomy_id, $range) ) {
 
                                     $taxonomy_related_data[substr($_term_->taxonomy,3)]['filter_range'][] = $_term_->slug;
                                 }
@@ -1178,8 +1189,8 @@ class Product {
                                 $taxonomy_related_data[substr($_term_->taxonomy,3)]['filter_range'] = array();
                             }
 
-                            if( in_array($term_taxonomy_id, $range) ) {
-
+                            if( is_array($range) && in_array($term_taxonomy_id, $range) ) {
+                            
                                 $taxonomy_related_data[substr($_term_->taxonomy,3)]['filter_range'][] = $_term_->slug;
                             }
                         }
