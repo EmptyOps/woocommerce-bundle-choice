@@ -519,6 +519,7 @@ if( is_product() ) {
 	table.variations.ui.raised.segment .ui.mini.images .variable-item.image .variable-item-span-button {
 	    padding: 0 5px;
 	}	
+	
 </style>
 
 <style type="text/css">
@@ -929,11 +930,31 @@ console.log('is_shop_css');
             list-style-type: none;
         }
 
+/*        -->> Ooops! error mate ul ni csss 30-10-2023 Nayan*/
+        .ui.grid.centered {
+    		margin: auto;
+	}
+	.single_add_to_cart_button.button {
+   	 	margin-bottom: 5px;
+	}
+	.ui.row {
+    		justify-content: center;
+	}
+	span.ui.inverted.text {
+    		margin-bottom: 10px;
+	}
+	@media(max-width:480px){
+	span.ui.inverted.text {
+    		margin-left: 30px;
+	}	
+	}
+
 		/*form.variations_form table.variations tbody td select {
 		    display: none !important;
 		}*/
 
 	</style>
+
 
 	<!--button-->
 	<style>
@@ -1390,6 +1411,7 @@ jQuery( document ).ready(function() {
             }
         /*---Filter-tabEnd---*/  
 </style>
+
 <?php 
 
 $spui_is_product = false;
@@ -1442,6 +1464,28 @@ $bg_hover_color = wbc()->options->get_option('tiny_features',$spui_is_product_ca
 
 // ob_start();
 ?>
+
+<!-- advance options icon up down 19-10-23 -->
+<style>
+	.sp-advance {
+    		transform: rotate(-180deg) !important;
+		padding-bottom:7px !important;   
+	}
+	.sp-advance-collapse{
+   		transform: rotate(0deg) !important;
+		padding-bottom:3px !important;   
+	}
+</style>
+<script>
+	jQuery(document).ready(function(){
+		jQuery('span').on("click", function (event) {
+	   jQuery('.material-icons').toggleClass('sp-advance');
+	   jQuery('.material-icons').toggleClass('sp-advance-collapse');
+	});
+	});
+</script>
+
+
 <style type="text/css">
 	/*.ui.mini.images .variable-item.image{
 		width: auto;						
@@ -1594,7 +1638,46 @@ $bg_hover_color = wbc()->options->get_option('tiny_features',$spui_is_product_ca
 		background-color: <?php _e($bg_hover_color); ?>;
 		color: <?php _e($font_hover_color); ?>;	
 	}
+	
+/*	added 11-09-2023 @a*/
+	.hide{
+		display: none !important;
+	}
+
+	.variable-items-wrapper .variable-item {
+   		 width: auto !important;
+    		height: auto !important;
+	}
+	.spui_engagment_product_change_color ul li {
+	    transform: translateY(11em) !important;
+	}
+	body .spui_button_widget li.spui_button_variable_item.selected {
+	    box-shadow: none !important;
+	    -webkit-box-shadow:none !important;
+	}
+	.spui_button_widget li.spui_button_variable_item:hover{
+		 box-shadow: none !important;
+	    -webkit-box-shadow:none !important;	
+	}
 </style>
+
+<?php
+if(wbc()->common->current_theme_key() != 'themes___purple_theme'){
+?>
+	<style type="text/css">
+		a.ui.inverted.secondary.single_add_to_cart_button.button.alt {
+    			width: 100%;
+    			text-align: center;
+    			margin-bottom: 5px;
+		}
+		a.ui.grey.button.single_add_to_cart_button.alt {
+    			width: 100%;
+   			text-align: center;
+		}
+	</style>
+<?php
+}
+?>
 <script>
 	jQuery(document).ready(function($){
 		jQuery(".dropdown").dropdown().on('change',function(){
@@ -1631,8 +1714,8 @@ $bg_hover_color = wbc()->options->get_option('tiny_features',$spui_is_product_ca
 		$('.variable-item').on('click',function(){
 			var target_selector = $('#'+$(this).data('id'));
 			target_selector.val($(this).data('value'));
-			$(this).parent().find('.selected').removeClass('selected');
-			$(this).addClass('selected');
+			// $(this).parent().find('.selected').removeClass('selected');
+			// $(this).addClass('selected');
 			jQuery(".variations_form" ).trigger('check_variations');
 			$(target_selector).trigger('change');
 		});
@@ -1647,6 +1730,41 @@ $bg_hover_color = wbc()->options->get_option('tiny_features',$spui_is_product_ca
 <?php
 // echo ob_get_clean();
 
+// ACTIVE_TODO_OC_START
+// ACTIVE_TODO as of now we have implimented this support for the mapping based conditions here but in future if there is better place than we shoud move it over there -- to h
+// 	ACTIVE_TODO as weel as once we have the varations swatches beta update available we may lite to use the disable and hide flow of that version. Especialy the disable flow this much needed for providing apropriate and perfect user experiance -- to h
+// ACTIVE_TODO_OC_END
+
+
+if(is_product()) {
+
+	// $_attribute_perams = explode(',', \eo\wbc\model\SP_WBC_Router::get_query_params('_attribute', 'REQUEST') );	
+	$_attribute_perams = explode(',', wbc()->sanitize->get('__mapped_attribute') );	
+
+	// wbc_pr('__attribute_perams');
+	// wbc_pr($_attribute_perams);
+
+	foreach($_attribute_perams as $_attribute_slug) {
+		
+		// NOTE: so far no need to check if checklist is empty so true or condition is added for now. 
+		if(true || !empty( wbc()->sanitize->get('checklist_'.$_attribute_slug) )) {
+			?> 
+			<style type="text/css">
+
+				label[for = <?php echo $_attribute_slug ?>] {
+				    display: none !important;
+				}
+
+				body form table.variations tbody td ul.spui-wbc-swatches-variable-items-wrapper-<?php echo $_attribute_slug ?>{
+					display: none !important;
+				}
+			</style>
+
+			<?php
+		}
+	}
+
+}
 
 
 ?>

@@ -91,6 +91,8 @@ add_action( ( !is_admin() ? 'wp_enqueue_scripts' : 'admin_enqueue_scripts'),func
 		
 		window.document.splugins.common.is_tablet = <?php echo ((wbc_is_mobile()) ? "true" : "false");?>;	
 
+		window.document.splugins.common.ajax_url = '<?php echo admin_url('admin-ajax.php');?>';	
+
 	</script>
 <?php  
 		
@@ -552,6 +554,9 @@ add_action('wp_footer',function(){
 									if ( form.xhr ) {
 										form.xhr.abort();
 									}
+									console.log('A_OFF show_variation [onFindVariation] 1 if');
+									console.log(form.$form);
+									
 									form.$form.block( { message: null, overlayCSS: { background: '#fff', opacity: 0.6 } } );
 									currentAttributes.product_id  = parseInt( form.$form.data( 'product_id' ), 10 );
 									currentAttributes.custom_data = form.$form.data( 'custom_data' );
@@ -1187,8 +1192,10 @@ add_action('wp_footer',function(){
 						};
 
 						$(function() {
+
 							console.log('A_OFF show_variation wc_add_to_cart_variation_params');
 							console.log(wc_add_to_cart_variation_params);
+
 							if ( typeof wc_add_to_cart_variation_params !== 'undefined' ) {
 								$( '.variations_form' ).each( function() {
 									// console.log('A_OFF show_variation [load] loop');

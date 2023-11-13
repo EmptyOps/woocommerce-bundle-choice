@@ -421,7 +421,7 @@ $form['data'] = array(
 					'sanitize'=>'sanitize_text_field',
 					'class'=>array(),
 					'size_class'=>array('eight','wide'),
-				),					
+				),	
 				'tiny_features_product_page_tab_end'=>array(
 					'type'=>'accordian',
 					'section_type'=>'end'
