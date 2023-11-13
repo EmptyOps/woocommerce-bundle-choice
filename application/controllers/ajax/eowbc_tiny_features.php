@@ -58,6 +58,8 @@ if(wp_verify_nonce(wbc()->sanitize->post('_wpnonce'),'eowbc_tiny_features')){
 
 	wbc()->options->update_option('tiny_features','tiny_features_option_ui_toggle_status',(empty(wbc()->sanitize->post('tiny_features_option_ui_toggle_status'))?'':wbc()->sanitize->post('tiny_features_option_ui_toggle_status')));
 
+	wbc()->options->update_option('tiny_features','tiny_features_gallery_images_section',(empty(wbc()->sanitize->post('tiny_features_gallery_images_section'))?'':wbc()->sanitize->post('tiny_features_gallery_images_section')));
+	
 	wbc()->options->update_option('tiny_features','tiny_features_option_ui_toggle_init_status',(empty(wbc()->sanitize->post('tiny_features_option_ui_toggle_init_status'))?'':wbc()->sanitize->post('tiny_features_option_ui_toggle_init_status')));
 
 	wbc()->options->update_option('tiny_features','tiny_features_option_ui_toggle_text',(empty(wbc()->sanitize->post('tiny_features_option_ui_toggle_text'))?__('CUSTOMIZE THIS PRODUCT'):wbc()->sanitize->post('tiny_features_option_ui_toggle_text')));
