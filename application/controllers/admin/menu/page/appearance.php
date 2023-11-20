@@ -266,6 +266,20 @@ if ( ! class_exists( 'Appearance' ) ) {
 									'is_id_as_name'=>true,
 									'class'=>array(),
 								), 
+								'appearance_filters_price_filter_title_text'=>array(
+									'label'=>'Price Filter Title Text',
+									'type'=>'text',
+									'sanitize'=>'sanitize_text_field',
+									'value'=>'',						
+									'class'=>array(),
+								),
+								'appearance_filters_advanced_options_btn_text'=>array(
+									'label'=>'Advanced Options Button Text',
+									'type'=>'text',
+									'sanitize'=>'sanitize_text_field',
+									'value'=>'',						
+									'class'=>array(),
+								),
 							),
 							array( 
 								'filters_submit_btn'=>array(
