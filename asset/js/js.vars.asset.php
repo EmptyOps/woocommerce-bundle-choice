@@ -508,6 +508,7 @@ add_action('wp_footer',function(){
 							if ( attributes.count && attributes.count === attributes.chosenCount ) {
 								
 								console.log('A_OFF show_variation [onFindVariation] 1');
+								console.log(form);
 
 								if ( form.useAjax ) {
 									
@@ -551,6 +552,7 @@ add_action('wp_footer',function(){
 								} else {
 
 									console.log('A_OFF show_variation [onFindVariation] 1 else');
+									console.log(currentAttributes);
 
 									form.$form.trigger( 'update_variation_values' );
 
@@ -570,7 +572,11 @@ add_action('wp_footer',function(){
 										form.$form.trigger( 'reset_data' );
 										attributes.chosenCount = 0;
 
+										console.log('A_OFF show_variation [onFindVariation] 1 else else');
+										console.log(form);
+	
 										if ( ! form.loading ) {
+											console.log('A_OFF show_variation [onFindVariation] 1 else else if');
 											form.$form
 												.find( '.single_variation' )
 												.after(
@@ -693,6 +699,8 @@ add_action('wp_footer',function(){
 						VariationForm.prototype.onChange = function( event ) {
 							var form = event.data.variationForm;
 
+							console.log('A_OFF show_variation [onChange]');
+							
 							form.$form.find( 'input[name="variation_id"], input.variation_id' ).val( '' ).trigger( 'change' );
 							form.$form.find( '.wc-no-matching-variations' ).remove();
 

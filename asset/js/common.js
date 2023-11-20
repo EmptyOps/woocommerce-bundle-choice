@@ -5023,6 +5023,7 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
                 
                 console.log('gim_feed zoom_area_hover_in each_loop');
 
+                console.log(_this./*#*/$configs_private.options.tiny_features_option_ui_loop_box_hover_media_index);
                 console.log(image.extra_params_org.type);
 
                 image.index = index_inner;
