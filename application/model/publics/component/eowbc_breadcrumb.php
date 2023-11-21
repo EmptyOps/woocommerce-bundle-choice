@@ -141,8 +141,10 @@ class EOWBC_Breadcrumb
     //hiren added on 03-06-2020, as replacement to global loading of old version
     public static function eo_wbc_enque_asset() {
         // add_action( 'wp_enqueue_scripts',function(){ 
-            wbc()->load->asset('css','fomantic/semantic.min',array(),'2.8.1');
-            wbc()->load->asset('js','fomantic/semantic.min',array(),'2.8.1');
+            // wbc()->load->asset('css','fomantic/semantic.min',array(),'2.8.1');
+            // wbc()->load->asset('js','fomantic/semantic.min',array(),'2.8.1');
+            wbc()->load->built_in_asset('semantic');
+
         // },100);
             wbc()->load->template('publics/breadcrumb/css');
     }
