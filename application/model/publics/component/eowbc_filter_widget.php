@@ -2179,7 +2179,7 @@ class EOWBC_Filter_Widget {
 	}
 	
 	public function load_collapsable_desktop_price_filter() {
-		?><a class="ui dropdown item">Price&nbsp;<i class="chevron down icon"></i>
+		?><a class="ui dropdown item"><?php echo wbc()->options->get_option('appearance_filters','appearance_filters_price_filter_title_text','Price',false,true);?>&nbsp;<i class="chevron down icon"></i>
 			<div class="menu">
 				<div class="item" style="width: max-content !important;min-width: 33vw;max-width: 33vw;display: table-cell;">				
 					<?php $this->slider_price(); ?>
