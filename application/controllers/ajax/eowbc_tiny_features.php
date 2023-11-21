@@ -130,6 +130,12 @@ if(wp_verify_nonce(wbc()->sanitize->post('_wpnonce'),'eowbc_tiny_features')){
 	wbc()->options->update_option('tiny_features','tiny_features_disabled_attribute_style', (empty(wbc()->sanitize->post('tiny_features_disabled_attribute_style'))?'':wbc()->sanitize->post('tiny_features_disabled_attribute_style')));
 	
 	wbc()->options->update_option('tiny_features','tiny_features_ajax_variation_threshold', (empty(wbc()->sanitize->post('tiny_features_ajax_variation_threshold'))?'':wbc()->sanitize->post('tiny_features_ajax_variation_threshold')));
+
+	wbc()->options->update_option('tiny_features','tiny_features_tooltip_background_color', (empty(wbc()->sanitize->post('tiny_features_tooltip_background_color'))?'':wbc()->sanitize->post('tiny_features_tooltip_background_color')));
+
+	wbc()->options->update_option('tiny_features','tiny_features_tooltip_font_color', (empty(wbc()->sanitize->post('tiny_features_tooltip_font_color'))?'':wbc()->sanitize->post('tiny_features_tooltip_font_color')));
+	
+	wbc()->options->update_option('tiny_features','tiny_features_option_tooltip_font_size', (empty(wbc()->sanitize->post('tiny_features_option_tooltip_font_size'))?'':wbc()->sanitize->post('tiny_features_option_tooltip_font_size')));
 	
 	wbc()->options->update_option('tiny_features','tiny_features_video_auto_play', (empty(wbc()->sanitize->post('tiny_features_video_auto_play'))?'':wbc()->sanitize->post('tiny_features_video_auto_play')));
 	wbc()->options->update_option('tiny_features','tiny_features_video_mute', (empty(wbc()->sanitize->post('tiny_features_video_mute'))?'':wbc()->sanitize->post('tiny_features_video_mute')));

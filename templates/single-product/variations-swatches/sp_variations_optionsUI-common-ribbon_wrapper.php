@@ -47,7 +47,7 @@ $template = array(
             'child' => array(
                 array(
                     'type' =>'ul',
-                    'class' =>'', 
+                    'class' =>'spui-wbc-swatches-variable-items-wrapper-child', 
                     // 'preHTML' => $contents,
                     'child' => $variable_item_ui
                    

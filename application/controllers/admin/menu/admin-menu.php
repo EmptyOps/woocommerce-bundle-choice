@@ -167,7 +167,10 @@ if ( ! class_exists( 'Admin_Menu' ) ) {
 			if( empty($features['ring_builder']) and empty($features['pair_maker']) and empty($features['guidance_tool']) and empty($bonus_features['price_control']) and empty($bonus_features['spec_view_item_page']) and empty($bonus_features['filters_shortcode']) and empty($bonus_features['filters_shop_cat']) ) {
 
 				unset($submenu[10]);
+				
+				// ACTIVE_TODO_OC_START
 				// -- unset Theme Adaption tab, but still need to confirm once if this is intended -- to h
+				// ACTIVE_TODO_OC_END
 				unset($submenu[111]);
 			}
 
