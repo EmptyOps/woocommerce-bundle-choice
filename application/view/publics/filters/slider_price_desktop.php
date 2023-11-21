@@ -9,7 +9,7 @@
 		<p>
 			<span class="ui header"><?php echo wbc()->options->get_option('appearance_filters','appearance_filters_price_filter_title_text','Price',false,true);?> </span>				
 			<?php if($reset): ?>
-			&nbsp; <span class="ui grey text" style="cursor: pointer;" onclick="reset_price(event,'<?php echo $min; ?>','<?php echo $max; ?>')">&nbsp;<u> <?php spext_lang("reset", 'woo-bundle-choice') ?></u></span>
+			&nbsp; <span class="ui grey text" style="cursor: pointer;" onclick="reset_price(event,'<?php echo $min; ?>','<?php echo $max; ?>')">&nbsp;<u> <?php echo spext_lang("reset", 'woo-bundle-choice'); ?></u></span>
 			<?php endif; ?>
 		</p>			
 		<div class="ui tiny form">
