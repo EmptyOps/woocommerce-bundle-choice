@@ -253,8 +253,10 @@ class Category {
                 // wp_enqueue_style( 'eo_wbc_ui_css');
                 // wp_register_script('eo_wbc_ui_js',plugin_dir_url(EO_WBC_PLUGIN_FILE).'asset/js/fomantic/semantic.min.js');
                 // wp_enqueue_script( 'eo_wbc_ui_js');
-                wbc()->load->asset('css','fomantic/semantic.min');
-                wbc()->load->asset('js','fomantic/semantic.min');
+                
+                // wbc()->load->asset('css','fomantic/semantic.min');
+                // wbc()->load->asset('js','fomantic/semantic.min');
+                wbc()->load->built_in_asset('semantic');
             },100);
 
             add_action('wp_head',function(){

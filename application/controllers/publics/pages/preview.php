@@ -82,10 +82,11 @@ class Preview {
         add_action( 'wp_enqueue_scripts',function(){ 
             // wp_register_style('eo_wbc_ui_css',EOWBC_ASSET_URL.'css/fomantic/semantic.min.css');
             // wp_enqueue_style( 'eo_wbc_ui_css');
-            wbc()->load->asset('css','fomantic/semantic.min');
+            // wbc()->load->asset('css','fomantic/semantic.min');
             // wp_register_script('eo_wbc_ui_js',EOWBC_ASSET_URL.'js/fomantic/semantic.min.js');
             // wp_enqueue_script( 'eo_wbc_ui_js');
-            wbc()->load->asset('js','fomantic/semantic.min');
+            // wbc()->load->asset('js','fomantic/semantic.min');
+            wbc()->load->built_in_asset('semantic');
         },100);
 
         add_action('wp_footer',function(){

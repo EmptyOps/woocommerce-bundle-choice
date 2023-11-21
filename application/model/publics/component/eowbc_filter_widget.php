@@ -164,8 +164,9 @@ class EOWBC_Filter_Widget {
 
 	public function eo_wbc_filter_enque_asset() {
 
-		wbc()->load->asset('css','fomantic/semantic.min');
-		wbc()->load->asset('js','fomantic/semantic.min',array('jquery-ui-core'));
+		// wbc()->load->asset('css','fomantic/semantic.min');
+		// wbc()->load->asset('js','fomantic/semantic.min',array('jquery-ui-core'));
+		wbc()->load->built_in_asset('semantic');
 		wp_add_inline_script('fomantic-semantic.min','jQuery.fn.ui_accordion = jQuery.fn.accordion;
 				jQuery.fn.ui_slider = jQuery.fn.slider;
 				jQuery.fn.ui_checkbox = jQuery.fn.checkbox;');
