@@ -120,6 +120,8 @@ add_action( ( !is_admin() ? 'wp_enqueue_scripts' : 'admin_enqueue_scripts'),func
 		$swatches_configs['options'] = array('show_variation_label' => false, 'clickable_out_of_stock' => false);
 		
 		$swatches_configs['options']['tiny_features_clear_on_reselect'] = $tiny_features['tiny_features_clear_on_reselect'];
+		
+		$swatches_configs['options']['tiny_features_option_enable_tooltip'] = $tiny_features['tiny_features_option_enable_tooltip'];
 
 		$gallery_images_configs['types'] 					  = \eo\wbc\model\publics\data_model\SP_WBC_Variations::instance()->sp_variations_gallery_images_supported_types(array('is_base_type_only'=>true));
 		$gallery_images_configs['product_variations_configs'] = wbc()->config->product_variations_configs();

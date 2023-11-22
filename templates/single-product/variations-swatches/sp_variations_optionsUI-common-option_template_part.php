@@ -74,6 +74,9 @@ $template_inner = wbc()->load->template($template_sub_dir.'/'.$woo_dropdown_attr
 if(!in_array($variable_item_data['options_loop_type'][$term->slug],array('dropdown_image','dropdown_image_only','dropdown'))) {                 
     //$data .= '</li>';
 
+    $li_attr = array( 'title' => esc_html( $term->name ), 'data-title' => esc_html( $term->name ), 'data-value' => esc_attr( $term->slug ), 'role' => 'button', 'tabindex' => '0'/*, 'data-id' => $id*/,);
+    $data_spui_tooltip_attr = wbc()->options->get_option('tiny_features','tiny_features_option_enable_tooltip') == 'tiny_features_option_enable_tooltip' ? array('data-spui-tooltip' => esc_html( $term->name )) : '';
+
     $template = array(
         'type' => 'header',
         'tag' => 'li',
@@ -94,7 +97,7 @@ if(!in_array($variable_item_data['options_loop_type'][$term->slug],array('dropdo
                         ),
 
         // 'ui image middle aligned variable-item '.esc_attr( $variable_item_data['options_loop_type'][$term->slug] ).'-variable-item '.esc_attr( $variable_item_data['options_loop_type'][$term->slug] ).'-variable-item-'.esc_attr( $term->slug ).' '.esc_attr( $variable_item_data['options_loop_selected_class'][$term->slug]).' spui-wbc-swatches-variable-item-header spui-wbc-swatches-variable-item-'.$variable_item_data['options_loop_type'][$term->slug].'-header variable-item-'.wbc()->common->current_theme_key(). ' variable-item-'.esc_attr( $variable_item_data['options_loop_type'][$term->slug] ).'-'.wbc()->common->current_theme_key(),
-        'attr' => array_merge ( array( 'title' => esc_html( $term->name ), 'data-title' => esc_html( $term->name ), 'data-value' => esc_attr( $term->slug ), 'role' => 'button', 'tabindex' => '0'/*, 'data-id' => $id*/,'data-spui-tooltip' => esc_html( $term->name ) ) ),
+        'attr' => !empty($data_spui_tooltip_attr) ? array_merge ($li_attr,$data_spui_tooltip_attr) : $li_attr,
         'child' => $template_inner
     );
 }

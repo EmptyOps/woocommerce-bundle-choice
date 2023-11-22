@@ -1994,12 +1994,18 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
     
     /*#*/process_events_private(type, element){
 
+        var _this = this;
+
         // on_change_listener(type, element);    
 
         // on_click_listener(type, element);
 
         // on_keydown_listener(type, element);   
 
+        if(_this./*#*/configs_private.options.tiny_features_option_enable_tooltip == 'tiny_features_option_enable_tooltip') {
+    
+            _this.tooltip_listener_private(type, element);
+        }
     }
 
     /*#*/process_and_manage_effects_private(type, element){
@@ -2566,6 +2572,16 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
 
     }
 
+    /*#*/tooltip_listener_private(type, element) {
+        
+        var _this = this; 
+
+        jQuery('[data-spui-tooltip]').on('mouseenter', function (event) {
+            
+            _this.on_tooltip_private(type, this);
+        
+        });        
+    }
 
     /*#*/on_change_private(type, element, event, data) {
 
@@ -2604,6 +2620,12 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
             // --  events emitted by other plugins/themes which we need to take care of in case of compatiblity matters, so it can be termed as the compatiblity events 
             // ACTIVE_TODO_OC_END
 
+    /*#*/on_tooltip_private(type, element) {
+        
+        var _this = this; 
+
+        _this.tooltip_private(type, element);
+    }
 
     // -- base events - after the above events are handled by their particular function/layer, they would call below functions to do the ultimate work         
     /*#*/change_private(type, element, data) {
@@ -2711,6 +2733,62 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
             jQuery(element).trigger(_this./*#*/configs_private.mouse_event_name);
         }
     }
+
+    /*#*/tooltip_private(type, element) {
+        
+        console.log('[tooltip_private]');
+
+        var _this = this; 
+
+        var rect = element.getBoundingClientRect();
+        var tooltip = window.getComputedStyle(element, ':before');
+        var arrow = window.getComputedStyle(element, ':after');
+        var arrowHeight = parseInt(arrow.getPropertyValue('border-top-width'), 10);
+        var tooltipHeight = parseInt(tooltip.getPropertyValue('height'), 10);
+        var tooltipWidth = parseInt(tooltip.getPropertyValue('width'), 10);
+        var offset = 2;
+        var calculateTooltipPosition = tooltipHeight + arrowHeight + offset;
+        element.classList.toggle('spui-tooltip-position-bottom', rect.top < calculateTooltipPosition);
+        var width = tooltipWidth / 2;
+        var position = rect.left + rect.width / 2; // Left
+
+        var left = width - position;
+        var isLeft = width > position;
+        var computedRight = width + position;
+        var isRight = document.body.clientWidth < computedRight;
+        var right = document.body.clientWidth - computedRight;
+        element.style.setProperty('--horizontal-position', "0px");
+
+        if (isLeft) {
+            element.style.setProperty('--horizontal-position', "".concat(left + offset, "px"));
+        }
+
+        if (isRight) {
+            element.style.setProperty('--horizontal-position', "".concat(right - offset, "px"));
+        }
+
+        console.log('[data-spui-tooltip] mouseenter');
+        var all_tooltip_var_value = {
+            rect:rect,
+            tooltip:tooltip,
+            arrow:arrow,
+            arrowHeight:arrowHeight,
+            tooltipHeight:tooltipHeight,
+            tooltipWidth:tooltipWidth,
+            offset:offset,
+            calculateTooltipPosition:calculateTooltipPosition,
+            width:width,
+            position:position,
+            left:left,
+            isLeft:isLeft,
+            computedRight:computedRight,
+            isRight:isRight,
+            right:right,
+        }
+        console.log(all_tooltip_var_value);
+
+
+    }    
 
     /*#*/compatability_private(section, object, expected_result) {
        

@@ -1916,217 +1916,168 @@ if(is_product()) {
 
 <style type="text/css">
 /*	-- tooltip --*/
-	[data-spui-tooltip]
-	/*,.spui-has-image-tooltip*/ {
-		--font-size: <?php echo wbc()->options->get_option('tiny_features','tiny_features_option_tooltip_font_size'); ?>;
-		--arrow-width: 5px;
-		--arrow-distance: 10px;
-		--arrow-position: calc(var(--arrow-distance) * -1);
-		--tip-redius: 3px;
-		--tip-min-width: 100px;
-		--tip-min-height: 100px;
-		--tip-height: 30px;
-		--tip-breakpoint-start: 53vw;
-		--tip-distance: calc(var(--arrow-distance) + var(--tip-height));
-		--tip-position: calc(var(--tip-distance) * -1);
-		--image-tip-min-height: calc(var(--tip-min-height) + var(--tip-height));
-		--image-tip-max-height: calc(var(--tooltip-height) + var(--tip-height));
-		--image-tip-width-dynamic: clamp(var(--tip-min-width), var(--tip-breakpoint-start), var(--tooltip-width));
-		--image-tip-height-dynamic: clamp(var(--tip-min-height), var(--tip-breakpoint-start), var(--tooltip-height));
-		--image-tip-ratio: calc(var(--tooltip-height) / var(--tooltip-width));
-		--image-tip-position: calc(100% + var(--arrow-distance));
-		--horizontal-position: 0px;
-		--spui-tooltip-background-color:<?php echo wbc()->options->get_option('tiny_features','tiny_features_tooltip_background_color'); ?>;
-		--spui-tooltip-text-color:<?php echo wbc()->options->get_option('tiny_features','tiny_features_tooltip_font_color'); ?>;
-		position: relative;
-		cursor: pointer;
-		outline: none;
-	}
+	<?php 
+	if(wbc()->options->get_option('tiny_features','tiny_features_option_enable_tooltip') == 'tiny_features_option_enable_tooltip'){
+	?>
+		[data-spui-tooltip]
+		/*,.spui-has-image-tooltip*/ {
+			--font-size: <?php echo wbc()->options->get_option('tiny_features','tiny_features_option_tooltip_font_size'); ?>;
+			--arrow-width: 5px;
+			--arrow-distance: 10px;
+			--arrow-position: calc(var(--arrow-distance) * -1);
+			--tip-redius: 3px;
+			--tip-min-width: 100px;
+			--tip-min-height: 100px;
+			--tip-height: 30px;
+			--tip-breakpoint-start: 53vw;
+			--tip-distance: calc(var(--arrow-distance) + var(--tip-height));
+			--tip-position: calc(var(--tip-distance) * -1);
+			--image-tip-min-height: calc(var(--tip-min-height) + var(--tip-height));
+			--image-tip-max-height: calc(var(--tooltip-height) + var(--tip-height));
+			--image-tip-width-dynamic: clamp(var(--tip-min-width), var(--tip-breakpoint-start), var(--tooltip-width));
+			--image-tip-height-dynamic: clamp(var(--tip-min-height), var(--tip-breakpoint-start), var(--tooltip-height));
+			--image-tip-ratio: calc(var(--tooltip-height) / var(--tooltip-width));
+			--image-tip-position: calc(100% + var(--arrow-distance));
+			--horizontal-position: 0px;
+			--spui-tooltip-background-color:<?php echo wbc()->options->get_option('tiny_features','tiny_features_tooltip_background_color'); ?>;
+			--spui-tooltip-text-color:<?php echo wbc()->options->get_option('tiny_features','tiny_features_tooltip_font_color'); ?>;
+			position: relative;
+			cursor: pointer;
+			outline: none;
+		}
 
-	[data-spui-tooltip]:before,
-	[data-spui-tooltip]:after
-	/*,.spui-has-image-tooltip:before,
-	.spui-has-image-tooltip:after */{
-		visibility: hidden;
-		opacity: 0;
-		pointer-events: none;
-		-webkit-box-sizing: border-box;
-		       box-sizing: border-box;
-		position: absolute;
-		z-index: 999;
-		-webkit-transform: translateZ(0);
-		       transform: translateZ(0);
-		-webkit-transition: opacity 500ms ease-in-out;
-		-o-transition: opacity 500ms ease-in-out;
-		transition: opacity 500ms ease-in-out;
-		display: -webkit-box;
-		display: -ms-flexbox;
-		display: flex;
-		-webkit-box-orient: horizontal;
-		-webkit-box-direction: normal;
-		   -ms-flex-direction: row;
-		       flex-direction: row;
-		-webkit-box-pack: center;
-		   -ms-flex-pack: center;
-		       justify-content: center;
-		-webkit-box-align: center;
-		   -ms-flex-align: center;
-		       align-items: center;
-	}
+		[data-spui-tooltip]:before,
+		[data-spui-tooltip]:after
+		/*,.spui-has-image-tooltip:before,
+		.spui-has-image-tooltip:after */{
+			visibility: hidden;
+			opacity: 0;
+			pointer-events: none;
+			-webkit-box-sizing: border-box;
+			       box-sizing: border-box;
+			position: absolute;
+			z-index: 999;
+			-webkit-transform: translateZ(0);
+			       transform: translateZ(0);
+			-webkit-transition: opacity 500ms ease-in-out;
+			-o-transition: opacity 500ms ease-in-out;
+			transition: opacity 500ms ease-in-out;
+			display: -webkit-box;
+			display: -ms-flexbox;
+			display: flex;
+			-webkit-box-orient: horizontal;
+			-webkit-box-direction: normal;
+			   -ms-flex-direction: row;
+			       flex-direction: row;
+			-webkit-box-pack: center;
+			   -ms-flex-pack: center;
+			       justify-content: center;
+			-webkit-box-align: center;
+			   -ms-flex-align: center;
+			       align-items: center;
+		}
 
-	[data-spui-tooltip]:before
-	/*,.spui-has-image-tooltip:before*/ {
-		-webkit-box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.3);
-		       box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.3);
-		border-radius: var(--tip-redius);
-		background-color: var(--spui-tooltip-background-color);
-		color: var(--spui-tooltip-text-color);
-		height: var(--tip-height);
-		line-height: var(--tip-height);
-		width: -webkit-max-content;
-		width: -moz-max-content;
-		width: max-content;
-		min-width: var(--tip-min-width);
-		padding-inline: 10px;
-		-webkit-transform: translateX(var(--horizontal-position));
-		   -ms-transform: translateX(var(--horizontal-position));
-		       transform: translateX(var(--horizontal-position));
-		top: auto;
-		bottom: var(--image-tip-position);
-		font-size: var(--font-size);
-	}
+		[data-spui-tooltip]:before
+		/*,.spui-has-image-tooltip:before*/ {
+			-webkit-box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.3);
+			       box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.3);
+			border-radius: var(--tip-redius);
+			background-color: var(--spui-tooltip-background-color);
+			color: var(--spui-tooltip-text-color);
+			height: var(--tip-height);
+			line-height: var(--tip-height);
+			width: -webkit-max-content;
+			width: -moz-max-content;
+			width: max-content;
+			min-width: var(--tip-min-width);
+			padding-inline: 10px;
+			-webkit-transform: translateX(var(--horizontal-position));
+			   -ms-transform: translateX(var(--horizontal-position));
+			       transform: translateX(var(--horizontal-position));
+			top: auto;
+			bottom: var(--image-tip-position);
+			font-size: var(--font-size);
+		}
 
-	[data-spui-tooltip]:before {
-		content: attr(data-spui-tooltip);
-	}
+		[data-spui-tooltip]:before {
+			content: attr(data-spui-tooltip);
+		}
 
-	/*    .spui-has-image-tooltip:before {
-		content: attr(data-title);
-		background-image: var(--tooltip-background);
-		background-repeat: no-repeat;
-		min-width: var(--image-tip-width-dynamic);
-		height: calc(var(--image-tip-height-dynamic) + var(--tip-height));
-		background-size: contain;
-		background-position: center top;
-		display: -webkit-box;
-		display: -ms-flexbox;
-		display: flex;
-		-webkit-box-align: center;
-		   -ms-flex-align: center;
-		       align-items: center;
-		-webkit-box-orient: vertical;
-		-webkit-box-direction: normal;
-		   -ms-flex-direction: column;
-		       flex-direction: column;
-		-webkit-box-pack: end;
-		   -ms-flex-pack: end;
-		       justify-content: flex-end;
-		-ms-flex-line-pack: center;
-		   align-content: center;
-		-webkit-backface-visibility: hidden;
-		       backface-visibility: hidden;
-	}*/
+		/*    .spui-has-image-tooltip:before {
+			content: attr(data-title);
+			background-image: var(--tooltip-background);
+			background-repeat: no-repeat;
+			min-width: var(--image-tip-width-dynamic);
+			height: calc(var(--image-tip-height-dynamic) + var(--tip-height));
+			background-size: contain;
+			background-position: center top;
+			display: -webkit-box;
+			display: -ms-flexbox;
+			display: flex;
+			-webkit-box-align: center;
+			   -ms-flex-align: center;
+			       align-items: center;
+			-webkit-box-orient: vertical;
+			-webkit-box-direction: normal;
+			   -ms-flex-direction: column;
+			       flex-direction: column;
+			-webkit-box-pack: end;
+			   -ms-flex-pack: end;
+			       justify-content: flex-end;
+			-ms-flex-line-pack: center;
+			   align-content: center;
+			-webkit-backface-visibility: hidden;
+			       backface-visibility: hidden;
+		}*/
 
-	[data-spui-tooltip]:after
-	/*,.spui-has-image-tooltip:after*/ {
-		width: 0;
-		border: var(--arrow-width) solid transparent;
-		border-top-color: var(--spui-tooltip-background-color);
-		content: " ";
-		font-size: 0;
-		line-height: 0;
-		top: var(--arrow-position);
-		bottom: auto;
-	}
+		[data-spui-tooltip]:after
+		/*,.spui-has-image-tooltip:after*/ {
+			width: 0;
+			border: var(--arrow-width) solid transparent;
+			border-top-color: var(--spui-tooltip-background-color);
+			content: " ";
+			font-size: 0;
+			line-height: 0;
+			top: var(--arrow-position);
+			bottom: auto;
+		}
 
-	[data-spui-tooltip]:hover:before,
-	[data-spui-tooltip]:hover:after
-	/*,.spui-has-image-tooltip:hover:before,
-	.spui-has-image-tooltip:hover:after*/ {
-		visibility: visible;
-		opacity: 1;
-	}
+		[data-spui-tooltip]:hover:before,
+		[data-spui-tooltip]:hover:after
+		/*,.spui-has-image-tooltip:hover:before,
+		.spui-has-image-tooltip:hover:after*/ {
+			visibility: visible;
+			opacity: 1;
+		}
 
-	.spui-tooltip-position-bottom[data-spui-tooltip]:after /*,.spui-tooltip-position-bottom.spui-has-image-tooltip:after*/ {
-		border-top-color: transparent;
-		border-bottom-color: var(--spui-tooltip-background-color);
-		top: auto;
-		bottom: var(--arrow-position);
-	}
-	.spui-tooltip-position-bottom[data-spui-tooltip]:before /*,.spui-tooltip-position-bottom.spui-has-image-tooltip:before*/ {
-/*		bottom: auto;*/
-/*		top: calc(var(--tip-position) * -1);*/
-		bottom: var(--tip-position);
-	}
+		.spui-tooltip-position-bottom[data-spui-tooltip]:after /*,.spui-tooltip-position-bottom.spui-has-image-tooltip:after*/ {
+			border-top-color: transparent;
+			border-bottom-color: var(--spui-tooltip-background-color);
+			top: auto;
+			bottom: var(--arrow-position);
+		}
+		.spui-tooltip-position-bottom[data-spui-tooltip]:before /*,.spui-tooltip-position-bottom.spui-has-image-tooltip:before*/ {
+	/*		bottom: auto;*/
+	/*		top: calc(var(--tip-position) * -1);*/
+			bottom: var(--tip-position);
+		}
 
-	li.variable-item {
-		display: flex !important;
-		width: max-content !important;
-		justify-content: center;
+		li.variable-item {
+			display: flex !important;
+			width: max-content !important;
+			justify-content: center;
+		}
+		li.variable-item:not(.disabled) {
+			overflow: visible !important;
+		}	
+		.spui-wbc-swatches-variable-items-wrapper-child{
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: flex-start;
+		}
+		/* Add any additional styling as needed */
+	<?php 
 	}
-	li.variable-item:not(.disabled) {
-		overflow: visible !important;
-	}	
-	.spui-wbc-swatches-variable-items-wrapper-child{
-		display: flex;
-		flex-wrap: wrap;
-		justify-content: flex-start;
-	}
-	/* Add any additional styling as needed */
+	?>
 
 </style>
-<script>
-/*	-- tooltip --*/
-  jQuery(document).ready(function () {
-    jQuery('[data-spui-tooltip]').on('mouseenter', function (event) {
-      var element = this;
-      var rect = element.getBoundingClientRect();
-      var tooltip = window.getComputedStyle(element, ':before');
-      var arrow = window.getComputedStyle(element, ':after');
-      var arrowHeight = parseInt(arrow.getPropertyValue('border-top-width'), 10);
-      var tooltipHeight = parseInt(tooltip.getPropertyValue('height'), 10);
-      var tooltipWidth = parseInt(tooltip.getPropertyValue('width'), 10);
-      var offset = 2;
-      var calculateTooltipPosition = tooltipHeight + arrowHeight + offset;
-      element.classList.toggle('spui-tooltip-position-bottom', rect.top < calculateTooltipPosition);
-      var width = tooltipWidth / 2;
-      var position = rect.left + rect.width / 2; // Left
-
-      var left = width - position;
-      var isLeft = width > position;
-      var computedRight = width + position;
-      var isRight = document.body.clientWidth < computedRight;
-      var right = document.body.clientWidth - computedRight;
-      element.style.setProperty('--horizontal-position', "0px");
-
-      if (isLeft) {
-        element.style.setProperty('--horizontal-position', "".concat(left + offset, "px"));
-      }
-
-      if (isRight) {
-        element.style.setProperty('--horizontal-position', "".concat(right - offset, "px"));
-      }
-
-      console.log('[data-spui-tooltip] mouseenter');
-      var all_tooltip_var_value = {
-        rect:rect,
-        tooltip:tooltip,
-        arrow:arrow,
-        arrowHeight:arrowHeight,
-        tooltipHeight:tooltipHeight,
-        tooltipWidth:tooltipWidth,
-        offset:offset,
-        calculateTooltipPosition:calculateTooltipPosition,
-        width:width,
-        position:position,
-        left:left,
-        isLeft:isLeft,
-        computedRight:computedRight,
-        isRight:isRight,
-        right:right,
-      }
-      console.log(all_tooltip_var_value);
-
-    });
-  });
-</script>
