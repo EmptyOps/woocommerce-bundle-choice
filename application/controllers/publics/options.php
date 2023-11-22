@@ -783,7 +783,16 @@ class Options extends \eo\wbc\controllers\publics\Controller {
 		$ui = $this->render_woo_dropdown_attribute_html_data($data,$args);
 		// echo ">!>!>!";
 		// wbc_pr($ui); /*die();*/
+		// ACTIVE_TODO_OC_START
+        // -- aa call comment marva no se -- to a && -- to h
+		// ACTIVE_TODO_OC_END
         \sp\theme\view\ui\builder\Page_Builder::instance()->build_page_widgets($ui,'woo_dropdown_attribute_html');
+        // ACTIVE_TODO temp. below implementation need to be moved to its standard place in the particular controller when we upgrade th wbc.                 
+        $ui_definition = \eo\wbc\model\publics\SP_Model_Single_Product::instance()->ui_appearence_controls_definition(null,'woo_dropdown_attribute_html',array());
+        $ui_definition = \eo\wbc\model\publics\SP_Model_Single_Product::instance()->ui_configuration_controls_definition($ui_definition,'woo_dropdown_attribute_html',array());
+        $ui_definition = \eo\wbc\model\publics\SP_Model_Single_Product::instance()->ui_data_controls_definition($ui_definition, 'woo_dropdown_attribute_html',array());
+
+        \eo\wbc\model\SP_WBC_Ui_Builder::instance()->build($ui,'',true,null, $ui_definition);                
         //echo "<<<<<>!>!>!";
 		$html = apply_filters('sp_render_swatches_data_by_attribute_type',null,$data);
 
@@ -797,7 +806,16 @@ class Options extends \eo\wbc\controllers\publics\Controller {
 		}
 		//wbc_pr($ui); die();
 
+		// ACTIVE_TODO_OC_START
+        // -- aa call comment marva no se -- to a && -- to h
+		// ACTIVE_TODO_OC_END
 		\sp\theme\view\ui\builder\Page_Builder::instance()->build_page_widgets($ui,'swatches');
+        // ACTIVE_TODO temp. below implementation need to be moved to its standard place in the particular controller when we upgrade th wbc.                 
+        $ui_definition = \eo\wbc\model\publics\SP_Model_Single_Product::instance()->ui_appearence_controls_definition(null,'swatches',array());
+        $ui_definition = \eo\wbc\model\publics\SP_Model_Single_Product::instance()->ui_configuration_controls_definition($ui_definition,'swatches',array());
+        $ui_definition = \eo\wbc\model\publics\SP_Model_Single_Product::instance()->ui_data_controls_definition($ui_definition, 'swatches',array());
+
+        \eo\wbc\model\SP_WBC_Ui_Builder::instance()->build($ui,'',true,null, $ui_definition);   		
 	}
 
 	public function render_woo_dropdown_attribute_html_data($data,$args = array()){
@@ -844,5 +862,5 @@ class Options extends \eo\wbc\controllers\publics\Controller {
 	    /*$args['data'] = */\eo\wbc\model\publics\SP_Model_Single_Product::instance()->get_data('gallery_images_init');
 
 	}
-
+    
 }

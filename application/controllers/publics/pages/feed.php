@@ -398,7 +398,16 @@ class Feed extends \eo\wbc\controllers\publics\Controller{
 
         // put ui-builder in autoloader function in config file and then remove load model ui builder statement from everywhere -- to b
         $ui = $this->render_woo_dropdown_attribute_html_data($data,$args);
+        // ACTIVE_TODO_OC_START
+        // -- aa call comment marva no se -- to a && -- to h
+        // ACTIVE_TODO_OC_END
         $result_html .= \sp\theme\view\ui\builder\Page_Builder::instance()->build_page_widgets($ui, 'woo_dropdown_attribute_html', array(), $args['is_return_html']);
+        // ACTIVE_TODO temp. below implementation need to be moved to its standard place in the particular controller when we upgrade th wbc.                 
+        $ui_definition = \eo\wbc\model\publics\SP_Model_Feed::instance()->ui_appearence_controls_definition(null,'woo_dropdown_attribute_html',array());
+        $ui_definition = \eo\wbc\model\publics\SP_Model_Feed::instance()->ui_configuration_controls_definition($ui_definition,'woo_dropdown_attribute_html',array());
+        $ui_definition = \eo\wbc\model\publics\SP_Model_Feed::instance()->ui_data_controls_definition($ui_definition, 'woo_dropdown_attribute_html',array());
+
+        $result_html .= \eo\wbc\model\SP_WBC_Ui_Builder::instance()->build($ui,'',true,null, $ui_definition); 
 
 
         if ($data['woo_dropdown_attribute_html_data']['args']['sp_variations_swatches_show_on_shop_page'] == 1) { 
@@ -421,7 +430,16 @@ class Feed extends \eo\wbc\controllers\publics\Controller{
                 // wbc_pr($data['variable_item_ui']);
             }
 
+            // ACTIVE_TODO_OC_START
+            // -- aa call comment marva no se -- to a && -- to h
+            // ACTIVE_TODO_OC_END
             $result_html .= \sp\theme\view\ui\builder\Page_Builder::instance()->build_page_widgets($ui, 'swatches', array(), $args['is_return_html']);
+            // ACTIVE_TODO temp. below implementation need to be moved to its standard place in the particular controller when we upgrade th wbc.                 
+            $ui_definition = \eo\wbc\model\publics\SP_Model_Feed::instance()->ui_appearence_controls_definition(null,'swatches',array());
+            $ui_definition = \eo\wbc\model\publics\SP_Model_Feed::instance()->ui_configuration_controls_definition($ui_definition,'swatches',array());
+            $ui_definition = \eo\wbc\model\publics\SP_Model_Feed::instance()->ui_data_controls_definition($ui_definition, 'swatches',array());
+
+            $result_html .= \eo\wbc\model\SP_WBC_Ui_Builder::instance()->build($ui,'',true,null, $ui_definition);             
         }
 
         return $result_html;
