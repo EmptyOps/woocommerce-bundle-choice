@@ -2070,6 +2070,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 			};
 
 			_params.onChange=function(value, min, max) {	
+				console.log('_params.onChange');
 				_labels = jQuery(e).attr('data-labels');
 				__slugs = jQuery(e).attr('data-slugs');
 				
@@ -3738,7 +3739,10 @@ if( typeof(eo_wbc_object) != 'undefined'){
 
 		let ui_slider = jQuery.fn.slider;		
 		jQuery.fn.slider = window.document.splugins.ui.slider;	
-
+		console.log('eo_wbc_filter [reset_slider]');
+		console.log(selector);
+		console.log(first);
+		console.log(second);
 		jQuery(".ui.slider[data-slug='"+selector+"']").slider('set rangeValue',first,second);
 		if(jQuery("[name='_attribute']").val().includes(selector)) {					    			
 			_values=jQuery("[name='_attribute']").val().split(',')
