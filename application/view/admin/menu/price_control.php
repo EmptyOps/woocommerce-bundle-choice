@@ -406,14 +406,27 @@ if( $jpc_str ) {
 	$jpc_data = json_decode( stripslashes( unserialize( $jpc_str ) ), true );
 }
 
-//js 
+//js
+if(false){ 
 ?>
-<script type="text/javascript">
-    window.eo_wbc=new Object();
+	<script type="text/javascript">
+	    window.eo_wbc=new Object();
 
-	window.eo_wbc.attributes=JSON.parse('<?php echo json_encode(eo_wbc_jpc_attributes_values()); ?>');
+		window.eo_wbc.attributes=JSON.parse('<?php echo json_encode(eo_wbc_jpc_attributes_values()); ?>');
 
-    window.eo_wbc.jpc_data=JSON.parse('<?php echo json_encode( $jpc_data ); ?>');
-</script>
-<?php 
+	    window.eo_wbc.jpc_data=JSON.parse('<?php echo json_encode( $jpc_data ); ?>');
+	</script>
+	<?php 
+}
+$eo_wbc_attributes = JSON::parse(json_encode(eo_wbc_jpc_attributes_values()));
+$jpc_data = JSON::parse(json_encode($jpc_data));
+
+$inline_script = 
+"window.eo_wbc=new Object();\n" .
+"\n" .
+"window.eo_wbc.attributes=" . $eo_wbc_attributes . ";\n" .
+"\n" .
+"window.eo_wbc.jpc_data=" . $jpc_data . ";\n";
+
+wbc()->load->add_inline_script('', $inline_script, 'common');
 wbc()->load->asset('js','admin/price_control');	

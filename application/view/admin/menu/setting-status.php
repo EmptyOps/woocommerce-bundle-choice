@@ -4,11 +4,20 @@ defined( 'ABSPATH' ) || exit;
 //related to log module
 if(isset($_GET) && isset($_GET['action']) && wbc()->sanitize->get('action')=='clear' && !empty(wbc()->sanitize->get('ref')) ) {
 	\EOWBC_Error_Handler::clean_send();
-	?>
-		<script>
-			window.location.href='<?php echo wbc()->sanitize->get('ref'); ?>';
-		</script>
-	<?php
+	if(false){
+		?>
+			<script>
+				window.location.href='<?php echo wbc()->sanitize->get('ref'); ?>';
+			</script>
+		<?php
+	}
+		$ref_url = wbc()->sanitize->get('ref');
+
+		$inline_script = 
+		"window.location.href='" . $ref_url . "';\n";
+
+		wbc()->load->add_inline_script('', $inline_script, 'common');
+
 }
 
 // if(isset($_GET) && isset($_GET['action']) && $_GET['action']=='report'){

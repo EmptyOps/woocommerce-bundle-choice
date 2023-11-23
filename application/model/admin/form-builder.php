@@ -604,8 +604,10 @@ class Form_Builder implements Builder {
 
 		// wrap with tag as appliable as per the js_templating_lib 
 		if( self::dynamic_add_support_config()['js_templating_lib'] == 'wp' ) {
-
-			return '<script type="text/html" id="tmpl-'.$id.'">' . $in_progress_html . '</script>'; 
+			if(false){
+				return '<script type="text/html" id="tmpl-'.$id.'">' . $in_progress_html . '</script>';
+			}
+			 
 		}
 			
 	}

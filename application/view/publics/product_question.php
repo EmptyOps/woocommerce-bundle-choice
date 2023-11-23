@@ -34,7 +34,9 @@
     	<div class="ui inverted green positive button" id="eowbc_askq_save">Send</div>  
 	</div>
 </div>
-
+<?php
+if(false){	
+?>
 <script type="text/javascript">
 	jQuery(document).ready(function($){
 		if($('[data-modal-name="eowbc-askq-modal"]').length>1){
@@ -97,7 +99,72 @@
 	    });
 	});
 </script>
+<?php
+}
+$inline_script = "
+jQuery(document).ready(function($) {
+    if ($('[data-modal-name=\"eowbc-askq-modal\"]').length > 1) {
+        $('[data-modal-name=\"eowbc-askq-modal\"]:gt(0)').remove();
+    }
 
+    $('#eowbc-askq').off('click');
+    $('#eowbc-askq').click(function() {
+        $('#eowbc-askq-modal').modal('show');
+        return false;
+    });
+
+    $('#eowbc_askq_save').off('click');
+    $('#eowbc_askq_save').click(function() {
+        let fname = $('#eowbc_askq_fname').val().trim();
+        let lname = $('#eowbc_askq_lname').val().trim();
+        let email = $('#eowbc_askq_email').val().trim();
+        let phone = $('#eowbc_askq_phone').val().trim();
+        let message = $('#eowbc_askq_message').val().trim();
+
+        if (fname == '' || lname == '' || email == '' || phone == '' || message == '') {
+            alert('Please fill all required fields.');
+            return false;
+        }
+
+        form_data = {
+            'action': 'eowbc_ajax',
+            'resolver': 'eowbc_askq',
+            '_wpnonce': '" . wp_create_nonce('eowbc_askq') . "',
+            'product_id': '" . $product_id . "',
+            'eowbc_askq_fname': fname,
+            'eowbc_askq_lname': lname,
+            'eowbc_askq_email': email,
+            'eowbc_askq_phone': phone,
+            'eowbc_askq_message': message,
+        }
+        jQuery.ajax({
+            url: '" . admin_url('admin-ajax.php') . "',
+            type: 'POST',
+            data: form_data,
+            beforeSend: function(xhr) {
+
+            },
+            success: function(result, status, xhr) {
+                if (result) {
+                    alert('Your query has been sent successfully, you will hear back soon.');
+                }
+            },
+            error: function(xhr, status, error) {
+
+            },
+            complete: function(xhr, status) {
+                $('#eowbc_askq_fname').val('');
+                $('#eowbc_askq_lname').val('');
+                $('#eowbc_askq_email').val('');
+                $('#eowbc_askq_phone').val('');
+                $('#eowbc_askq_message').val('');
+            }
+        });
+    });
+});
+";
+wbc()->load->add_inline_script('', $inline_script, 'common');
+?>
 <style type="text/css">
 	/* Chrome, Safari, Edge, Opera */
 	input::-webkit-outer-spin-button,

@@ -409,7 +409,7 @@ class SP_Model_Single_Product extends SP_Single_Product {
 							</script>
 						<?php
 						}
-						$toggle_text = __('Your Toggle Text Here', 'text_domain'); // Replace 'Your Toggle Text Here' with the actual text you want to use.
+						$toggle_text = __($toggle_text); 
 
 						$inline_script = 
 							"jQuery(\".variations_form\").before('<span id=\"wbc_variation_toggle\" class=\"ui raised segment'>".esc_js($toggle_text)."<i class=\"caret up icon\" style=\"text-align: center;line-height: 1em;\"></i></span>');";
@@ -934,8 +934,11 @@ class SP_Model_Single_Product extends SP_Single_Product {
 						</script>
 					<?php
 					}
+
+					$toggle_text = esc_js(__($toggle_text));
+
 					$inline_script = 
-					    "jQuery(\".variations_form\").before('<span id=\"wbc_variation_toggle\" class=\"ui raised segment\"><?php _e(\$toggle_text); ?><i class=\"caret up icon\" style=\"text-align: center;line-height: 1em;\"></i></span>');";
+					    "jQuery(\".variations_form\").before('<span id=\"wbc_variation_toggle\" class=\"ui raised segment\">".$toggle_text."<i class=\"caret up icon\" style=\"text-align: center;line-height: 1em;\"></i></span>');";
 					wbc()->load->add_inline_script('', $inline_script, 'common');
 					echo ob_get_clean();
 				}				

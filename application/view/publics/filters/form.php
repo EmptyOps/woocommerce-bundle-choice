@@ -196,7 +196,9 @@ if(empty($_per_page)){
 	</form>
 
 	<br/><br/>
-	<?php if(apply_filters('eowbc_enque_filter_js',call_user_func('__return_true'))): ?>
+	<?php if(apply_filters('eowbc_enque_filter_js',call_user_func('__return_true'))): 
+	if(false){	
+	?>	
 	<script type="text/javascript">		
 
 		jQuery(document).ready(function($){			
@@ -579,7 +581,325 @@ if(empty($_per_page)){
 
 
 	</script> 
+	<?php
+	}
+$inline_script =
+    "jQuery(document).ready(function(\$){\n" .
+    "\n" .
+    "    window.document.splugins = window.document.splugins || {};\n" .
+    "    window.document.splugins.ui = window.document.splugins.ui || {};\n" .
+    "    window.document.splugins.ui.slider = window.document.splugins.ui.slider || jQuery.fn.slider;\n" .
+    "\n" .
+    "    // --- move this code in woo-bundle-choice/asset/js/publics/eo_wbc_filter.js window.document.splugins.wbc.filters.api.slider_change_event_listener(); ---\n" .
+    "    // --- start ---\n" .
+    "    // window.eo=new Object();\n" .
+    "    // //Slider creation function\n" .
+    "    // window.eo.slider=function(selector){\n" .
+    "    //     jQuery(selector).each(function(i,e){\n" .
+    "    //         _min = Number(jQuery(e).attr('data-min'));\n" .
+    "    //         _max = Number(jQuery(e).attr('data-max'));\n" .
+    "    //         _labels = jQuery(e).attr('data-labels');\n" .
+    "    //         _params=new Object();\n" .
+    "    //         if(_labels != undefined && _labels != false){\n" .
+    "    //             _labels=_labels.split(',');\n" .
+    "    //             _params.interpretLabel=function(value){\n" .
+    "    //                 _labels = jQuery(e).attr('data-labels');\n" .
+    "    //                 _labels=_labels.split(',');\n" .
+    "    //                 if(_labels!=undefined){\n" .
+    "    //                     let _label_value = _labels[value];\n" .
+    "    //                     let _label_max_length = parseInt(jQuery(e).data('label_max_size'));\n" .
+    "    //                     if((typeof(_label_max_length)==typeof(undefined)) || _label_max_length==\"\"){\n" .
+    "    //                         _label_max_length = <?php /*_e((int)wbc()->options->get_option('filters_'.$filter_prefix.'filter_setting','filter_setting_slider_max_lblsize',6))*/ ?>;\n" .
+    "    //                     }\n" .
+    "    //                     if(_label_value.length>_label_max_length){\n" .
+    "    //                         _label_value = _label_value.split(' ');\n" .
+    "    //                         _label_value = _label_value.map(function(_label_value_ele){\n" .
+    "    //                             return _label_value_ele[0];\n" .
+    "    //                         });\n" .
+    "    //                         _label_value = _label_value.join('');\n" .
+    "    //                     }\n" .
+    "    //                     return '<span title=\"'+_labels[value]+'\" alt=\"'+_labels[value]+'\">'+_label_value+'</span>';\n" .
+    "    //                 } else {\n" .
+    "    //                     return value;\n" .
+    "    //                 }\n" .
+    "    //             };\n" .
+    "    //             _params.step=1;\n" .
+    "    //             _params.min=0;\n" .
+    "    //             _params.max=_labels.length-1;\n" .
+    "    //             _params.start=0;\n" .
+    "    //             _params.end=_labels.length-1;\n" .
+    "    //         } else {\n" .
+    "    //             _params.min=_min;\n" .
+    "    //             _params.max=_max;\n" .
+    "    //             _params.start=_min;\n" .
+    "    //             _params.end=_max;\n" .
+    "    //             _params.smooth=true;\n" .
+    "    //             _params.step=(_max-_min)/100;\n" .
+    "    //         }\n" .
+    "    //         _params.smooth=true;\n" .
+    "    //         _params.autoAdjustLabels=true;\n" .
+    "    //         _params.decimalPlaces=4;\n" .
+    "    //         _params.onMove=function(value, min, max) {\n" .
+    "    //             __slugs = jQuery(e).attr('data-slugs');\n" .
+    "    //             if(typeof __slugs != typeof undefined && __slugs != false){\n" .
+    "    //                 //PASS\n" .
+    "    //             } else {\n" .
+    "    //                 _sep = jQuery(e).attr('data-sep');\n" .
+    "    //                 _prefix = jQuery(this).data('prefix');\n" .
+    "    //                 if(typeof(_prefix) == typeof(undefined) || _prefix=='undefined'){\n" .
+    "    //                     _prefix = '';\n" .
+    "    //                 }\n" .
+    "    //                 _postfix = jQuery(this).data('postfix');\n" .
+    "    //                 if(typeof(_postfix) == typeof(undefined) || _postfix=='undefined'){\n" .
+    "    //                     _postfix = '';\n" .
+    "    //                 }\n" .
+    "    //                 jQuery(\"input[name='text_min_\"+jQuery(e).attr('data-slug')+\"']\").val( _prefix+(_sep=='.'?Number(min).toFixed(2):(Number(min).toFixed(2)).toString().replace('.',','))+_postfix );\n" .
+    "    //                 jQuery(\"input[name='text_max_\"+jQuery(e).attr('data-slug')+\"']\").val( _prefix+(_sep=='.'?Number(max).toFixed(2):(Number(max).toFixed(2)).toString().replace('.',','))+_postfix);\n" .
+    "    //             }\n" .
+    "    //         };\n" .
+    "    //     });\n" .
+    "    // };\n" .
+    "\n" .
+    "    // --- end ---\n" .
 
+        "\n" .
+    "// _params.onChange=function(value, min, max) {\n" .
+    "    // _labels = jQuery(e).attr('data-labels');\n" .
+    "    // __slugs = jQuery(e).attr('data-slugs');\n" .
+    "    // _min = Number (jQuery(e).attr('data-min'));\n" .
+    "    // _max = Number(jQuery(e).attr('data-max'));\n" .
+    "    // _sep = jQuery(e).attr('data-sep');\n" .
+    "\n" .
+    "    // console.log(min,_min,max,_max);\n" .
+    "\n" .
+    "    // if(typeof _labels != typeof undefined && _labels != false){\n" .
+    "    //     _labels=_labels.split(',');\n" .
+    "    //     _min=0;\n" .
+    "    //     _max=_labels.length-1;\n" .
+    "    // }\n" .
+    "\n" .
+    "    // if(\n" .
+    "    //     (\n" .
+    "    //         (jQuery(this).data('prev_val_min')!=min && jQuery(this).data('prev_val_min')!=undefined)\n" .
+    "    //         ||\n" .
+    "    //         (jQuery(this).data('prev_val_max')!=max && jQuery(this).data('prev_val_max')!=undefined)\n" .
+    "    //     )\n" .
+    "    //     ||\n" .
+    "    //     ( min!=_min || max!=_max )\n" .
+    "    // ){\n" .
+    "\n" .
+    "    //     if(typeof __slugs != typeof undefined && __slugs != false){\n" .
+    "    //         jQuery(\"input[name='min_\"+jQuery(e).attr('data-slug')+\"']\").val(__slugs.split(',')[min]);\n" .
+    "    //         jQuery(\"input[name='max_\"+jQuery(e).attr('data-slug')+\"']\").val(__slugs.split(',')[max]);\n" .
+    "    //     } else {\n" .
+    "    //         jQuery(\"input[name='min_\"+jQuery(e).attr('data-slug')+\"']\").val(Number(min).toFixed(2));\n" .
+    "    //         jQuery(\"input[name='max_\"+jQuery(e).attr('data-slug')+\"']\").val(Number(max).toFixed(2));\n" .
+    "    //     }\n" .
+    "\n" .
+    "    //     if(jQuery(this).attr('data-slug')!='price'){\n" .
+    "    //         //Action of notifying filter change when changes are done.\n" .
+    "    //         if(jQuery(this).attr('data-min')==min && jQuery(this).attr('data-max')==max) {\n" .
+    "    //             if(jQuery(\"[name='_attribute']\").val().includes(jQuery(this).attr('data-slug'))) {\n" .
+    "    //                 _values=jQuery(\"[name='_attribute']\").val().split(',')\n" .
+    "    //                 _index=_values.indexOf(jQuery(this).attr('data-slug'))\n" .
+    "    //                 _values.splice(_index,1)\n" .
+    "    //                 jQuery(\"[name='_attribute']\").val(_values.join());\n" .
+    "    //             }\n" .
+    "    //         }\n" .
+    "    //         else {\n" .
+    "    //             if(! jQuery(\"[name='_attribute']\").val().includes(jQuery(this).attr('data-slug'))) {\n" .
+    "    //                 _values=jQuery(\"[name='_attribute']\").val().split(',')\n" .
+    "    //                 _values.push(jQuery(this).attr('data-slug'))\n" .
+    "    //                 jQuery(\"[name='_attribute']\").val(_values.join())\n" .
+    "    //             }\n" .
+    "    //         }\n" .
+    "    //     }\n" .
+    "    //     jQuery('[name=\"paged\"]').val('1');\n" .
+    "\n" .
+    "    //     //////// 27-05-2022 - @drashti /////////\n" .
+    "    //     // --add to be confirmed--\n" .
+    "    //     window.document.splugins.wbc.filters.api.eo_wbc_filter_change_wrapper(false,'form#<?php /*echo $filter_ui->filter_prefix;*/ ?>eo_wbc_filter','',{'this':this,'event':new Event('change',this)});\n" .
+    "    //     // jQuery.fn.eo_wbc_filter_change(false,'form#<?php /*echo $filter_ui->filter_prefix;*/ ?>eo_wbc_filter','',{'this':this,'event':new Event('change',this)});\n" .
+    "    //     ////////////////////////////////////////\n" .
+    "\n" .
+    "    //     <?php /*endif; */?>\n" .
+    "    // }\n" .
+    "    // else if( min==_min && max==_max ){\n" .
+    "    //     if(jQuery(this).attr('data-slug')!='price'){\n" .
+    "    //         //Action of notifying filter change when changes are done.\n" .
+    "    //         if(jQuery(\"[name='_attribute']\").val().includes(jQuery(this).attr('data-slug'))) {\n" .
+    "    //             _values=jQuery(\"[name='_attribute']\").val().split(',')\n" .
+    "    //             _index=_values.indexOf(jQuery(this).attr('data-slug'))\n" .
+    "    //             _values.splice(_index,1)\n" .
+    "    //             jQuery(\"[name='_attribute']\").val(_values.join());\n" .
+    "    //         }\n" .
+    "    //     }\n" .
+    "    // }\n" .
+    "    // jQuery(this).data('prev_val_min',min);\n" .
+    "    // jQuery(this).data('prev_val_max',max);\n" .
+    "    // };\n" .
+    "\n" .
+    "    // let _adjust_label = jQuery(this).data('label_adjust');\n" .
+    "\n" .
+    "    // if(_adjust_label!=1 && jQuery(this).hasClass('labeled')){\n" .
+    "    //     _params.autoAdjustLabels=false;\n" .
+    "    // }\n" .
+    "\n" .
+    "    // jQuery(\"input.text_slider_\"+jQuery(e).attr('data-slug')).change(function() {\n" .
+    "    //     //jQuery(\"#text_slider_\"+jQuery(e).attr('data-slug')).slider(\"set rangeValue\",jQuery(\"[name=min_\"+jQuery(e).attr('data-slug')+\"]\").val(),jQuery(\"[name=max_\"+jQuery(e).attr('data-slug')+\"]\").val());\n" .
+    "\n" .
+    "    //     let prefix = jQuery(e).attr('data-prefix');\n" .
+    "    //     let postfix = jQuery(e).attr('data-postfix');\n" .
+    "\n" .
+    "    //     let min_value = jQuery(\"[name='text_min_\"+jQuery(e).attr('data-slug')+\"']\").val();\n" .
+    "    //     let max_value = jQuery(\"[name='text_max_\"+jQuery(e).attr('data-slug')+\"']\").val();\n" .
+    "\n" .
+    "    //     if(prefix!=='' && typeof(prefix)!==typeof(undefined) && prefix.hasOwnProperty('length')){\n" .
+    "    //         if(min_value.includes(prefix)){\n" .
+    "    //             min_value = min_value.slice(prefix.length);    \n" .
+    "    //         }\n" .
+    "    //         if(max_value.includes(prefix)){\n" .
+    "    //             max_value = max_value.slice(prefix.length);\n" .
+    "    //         }\n" .
+    "    //     }\n" .
+    "\n" .
+    "    //     if(postfix!=='' && typeof(postfix)!==typeof(undefined) && postfix.hasOwnProperty('length')){\n" .
+    "    //         if(min_value.includes(postfix)){\n" .
+    "    //             min_value = min_value.slice(0,-1*postfix.length);\n" .
+    "    //         }\n" .
+    "    //         if(min_value.includes(postfix)){\n" .
+    "    //             max_value = max_value.slice(0,-1*postfix.length);\n" .
+    "    //         }\n" .
+    "    //     }\n" .
+    "\n" .
+    "    //     jQuery(\"#text_slider_\"+jQuery(e).attr('data-slug')).slider(\"set rangeValue\",min_value,max_value);\n" .
+    "    // });\n" .
+    "\n" .
+    "    // let ui_slider = jQuery.fn.slider;\n" .
+    "\n" .
+    "    // jQuery.fn.slider = window.document.splugins.ui.slider;\n" .
+    "    // jQuery(e).slider(_params);\n" .
+    "    // jQuery.fn.slider = ui_slider;\n" .
+    "    // });\n" .
+    "    // };\n" .
+    "// --- end ---\n" .
+    "\n" .
+    "// window.document.splugins.wbc.filters.api.slider_change_event(selector);\n" .
+    "\n" .
+
+        "\n" .
+    "    var primary_filter=jQuery(\".eo-wbc-container.filters .ui.segment:not(.secondary)\");\n" .
+    "    var primary_computer_only=jQuery(primary_filter).find(\".computer.tablet.only\");\n" .
+    "    var primary_mobile_only=jQuery(primary_filter).find(\".mobile.only\");\n" .
+    "    // var secondary_filter=jQuery(\".eo-wbc-container.filters .ui.segment.secondary\");\n" .
+    "    var secondary_filter=\".eo-wbc-container.filters .ui.segment.secondary\";\n" .
+    "    var secondary_computer_only=jQuery(secondary_filter).find(\".computer.tablet.only\");\n" .
+    "    var secondary_mobile_only=jQuery(secondary_filter).find(\".mobile.only\");\n" .
+    "    if( typeof(jQuery.fn.accordion) ==='function' ) {\n" .
+    "        jQuery('.ui.accordion').accordion();\n" .
+    "    }\n" .
+    "    // window.eo.slider(jQuery('.eo-wbc-container.filters').find('.ui.slider'));\n" .
+    "    /* Activate initiation of sliders at secondary segments. */\n" .
+    "    if(jQuery(secondary_computer_only).css('display')!='none'){\n" .
+    "        jQuery(\"#advance_filter\").on('click',function(){\n" .
+    "            jQuery(\"#advance_filter\").find('.ui.icon').toggleClass('up down');\n" .
+    "            jQuery(secondary_filter+\":eq(0)\").transition('slide down');\n" .
+    "        }).trigger('click');\n" .
+    "    } else if(jQuery(secondary_mobile_only).css('display')!='none') {\n" .
+    "        jQuery(\"#advance_filter\").on('click',function(){\n" .
+    "            jQuery(this).find('.ui.icon').toggleClass('up down');\n" .
+    "            jQuery(secondary_filter).transition('fly right');\n" .
+    "        }).trigger('click');\n" .
+    "    }\n" .
+    "    /*jQuery(secondary_filter).transition('fade');*/\n" .
+    "    if(jQuery(\"#primary_filter\").parent().parent().css('display')!='none'){\n" .
+    "        jQuery(\"#primary_filter\").click(function(e){\n" .
+    "            e.preventDefault();\n" .
+    "            e.stopPropagation();\n" .
+    "            jQuery(\"#primary_filter\").find('.ui.icon').toggleClass(\"down up\");\n" .
+    "            jQuery('.eo-wbc-container.filters,#advance_filter').transition('fade');\n" .
+    "        }).trigger('click');\n" .
+    "    }\n" .
+    "    /*----------------------------------------------------*/\n" .
+    "    /*----------------------------------------------------*/\n" .
+    "    // --- move this code in woo-bundle-choice/asset/js/publics/eo_wbc_filter.js window.document.splugins.wbc.filters.api.slider_change_event_listener(); ---\n" .
+    "    // --- start ---\n" .
+    "    // if( typeof(jQuery.fn.checkbox) ==='function' ) {\n" .
+    "    //     jQuery('.checkbox').checkbox({onChange:function(event){\n" .
+    "    //         /*__slug=jQuery(this).attr('data-filter-slug');\n" .
+    "    //         if(__slug=='' || typeof(__slug)===typeof(undefined)){\n" .
+    "    //             return true;\n" .
+    "    //         }                    \n" .
+    "    //         _values= Array();\n" .
+    "    //         jQuery('[data-filter-slug=\"'+__slug+'\"]:checked').each(function(index,item){ \n" .
+    "    //             _values.push(jQuery(item).attr('data-slug'));\n" .
+    "    //         });\n" .
+    "    //         jQuery('#checklist_'+__slug).val(_values.join());\n" .
+    "    //         if( ( jQuery('.checklist_'+__slug+':checkbox').length==jQuery('.checklist_'+__slug+':checkbox:checked').length)  || (jQuery('.checklist_'+__slug+':checkbox:checked').length==0) ) {\n" .
+    "    //             if(jQuery(\"[name='_attribute']\").val().includes(__slug)) {\n" .
+    "    //                 _values=jQuery(\"[name='_attribute']\").val().split(',')\n" .
+    "    //                 _index=_values.indexOf(__slug)                              \n" .
+    "    //                 _values.splice(_index,1)                                   \n" .
+    "    //                 jQuery(\"[name='_attribute']\").val(_values.join());\n" .
+    "    //             }\n" .
+    "    //         }\n" .
+    "    //         else {\n" .
+    "    //             if(! jQuery(\"[name='_attribute']\").val().includes(__slug)) {\n" .
+    "    //                 _values=jQuery(\"[name='_attribute']\").val().split(',')\n" .
+    "    //                 _values.push(__slug)\n" .
+    "    //                 jQuery(\"[name='_attribute']\").val(_values.join())\n" .
+    "    //             }\n" .
+    "    //         }*/\n" .
+    "    //         __slug=jQuery(this).attr('data-filter-slug');\n" .
+    "    //         if(__slug=='' || typeof(__slug)===typeof(undefined)){\n" .
+    "    //             return true;\n" .
+    "    //         }                    \n" .
+    "    //         _values= Array();\n" .
+    "    //         if(jQuery('[name=\"checklist_'+__slug+'\"]').length>0 && typeof(jQuery('[name=\"checklist_'+__slug+'\"]').val()) !== typeof(undefined)){\n" .
+    "    //             _values = jQuery('[name=\"checklist_'+__slug+'\"]').val().split(',');    \n" .
+    "    //         }               \n" .
+    "    //         if(_values.indexOf(jQuery(this).attr('data-slug'))!=-1){\n" .
+    "    //             _values=jQuery('[name=\"checklist_'+__slug+'\"]').val().split(',');\n" .
+    "    //             _index=_values.indexOf(jQuery(this).attr('data-slug'));\n" .
+    "    //             _values.splice(_index,1);                        \n" .
+    "    //             jQuery('[name=\"checklist_'+__slug+'\"]').val(_values.join());\n" .
+    "    //         } else {\n" .
+    "    //             _values=jQuery('[name=\"checklist_'+__slug+'\"]').val().split(',');\n" .
+    "    //             _values.push(jQuery(this).attr('data-slug'));\n" .
+    "    //             jQuery('[name=\"checklist_'+__slug+'\"]').val(_values.join());\n" .
+    "    //         }\n" .
+    "    //         if( ( jQuery('.checklist_'+__slug+':checkbox').length==jQuery('.checklist_'+__slug+':checkbox:checked').length)  || (jQuery('.checklist_'+__slug+':checkbox:checked').length==0) ) {\n" .
+    "    //             if(jQuery(\"[name='_attribute']\").val().includes(__slug)) {\n" .
+    "    //                 _values=jQuery(\"[name='_attribute']\").val().split(',')\n" .
+    "    //                 _index=_values.indexOf(__slug)                              \n" .
+    "    //                 _values.splice(_index,1)                                   \n" .
+    "    //                 jQuery(\"[name='_attribute']\").val(_values.join());\n" .
+    "    //             }\n" .
+    "    //         }\n" .
+    "    //         else {\n" .
+    "    //             if(! jQuery(\"[name='_attribute']\").val().includes(__slug)) {\n" .
+    "    //                 _values=jQuery(\"[name='_attribute']\").val().split(',')\n" .
+    "    //                 _values.push(__slug)\n" .
+    "    //                 jQuery(\"[name='_attribute']\").val(_values.join())\n" .
+    "    //             }\n" .
+    "    //         }\n" .
+    "    //         jQuery('[name=\"paged\"]').val('1');\n" .
+    "    //         /*if(empty(wbc()->options->get_option('filters_'.$filter_prefix.'filter_setting','filter_setting_btnfilter_now'))):*/\n" .
+    "    //         //////// 27-05-2022 - @drashti /////////\n" .
+    "    //         // --add to be confirmed--\n" .
+    "    //         window.document.splugins.wbc.filters.api.eo_wbc_filter_change_wrapper(false,'form#<?php //echo $filter_ui->filter_prefix; ?>eo_wbc_filter','',{'this':this,'event':event});\n" .
+    "    //         // jQuery.fn.eo_wbc_filter_change(false,'form#<?php //echo $filter_ui->filter_prefix; ?>eo_wbc_filter','',{'this':this,'event':event});\n" .
+    "    //         ////////////////////////////////////////\n" .
+    "    //         /*endif;*/\n" .
+    "    //     }});\n" .
+    "    // }\n" .
+    "    // --- end ---\n" .
+    "    // window.document.splugins.wbc.filters.api.checkbox_change_event(event);\n" .
+    "    /*----------------------------------------------------*/\n" .
+    "    /*----------------------------------------------------*/\n" .
+    
+    "});\n";
+wbc()->load->add_inline_script('', $inline_script, 'common');
 	<?php endif; ?>
 
 	<?php do_action('eowbc_post_filter_javascript',$filter_ui); ?>

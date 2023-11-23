@@ -956,9 +956,10 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 
 		// wrap with tag as appliable as per the js_templating_lib 
 		if( $js_templating_lib == 'wp' ) {
-
-			return '<script type="text/html" id="tmpl-'.$id.'">' . $html . '</script>'; 
-		}
+			if(false){
+				return '<script type="text/html" id="tmpl-'.$id.'">' . $html . '</script>'; 
+			}
+			
 
 	}
 

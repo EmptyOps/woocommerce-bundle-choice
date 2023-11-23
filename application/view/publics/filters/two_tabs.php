@@ -46,6 +46,10 @@ if( true or in_array( wbc()->common->get_category('category',null,array(wbc()->o
       	<!-- <a class="center item <?php /*echo isset($_GET[$second_tab_id])?'active':'' */?>" data-category="<?php  /*_e($second_tab_category);*/  ?>" style="margin-left: 0px !important;" data-tab="filter_setting_advance_second_tabs" data-tab-name="<?php  /*_e($second_tab_id);*/  ?>" data-tab-altname="<?php  /*_e($first_tab_id);*/ ?>">
         <?php  /*_e($second_tab_label);*/ ?> 
       	</a>-->
+        <?php 
+        if(false)
+        { 
+        ?>
       	<script type="text/javascript">
             // --- aa code woo-bundle-choice/asset/js/publics/03_06__eo_wbc_filter.js filter_set_click() ma move karyo se @a ---
             // --- start ---
@@ -146,6 +150,99 @@ if( true or in_array( wbc()->common->get_category('category',null,array(wbc()->o
             });
              // --- end ---
     	</script>
+        <?php
+        }
+        $inline_script = 
+            "jQuery(document).ready(function(\$){\n" .
+            "\n" .
+            "    // $('.filter_setting_advance_two_tabs .item').on('click',function(event){\n" .
+            "\n" .
+            "    /*let _category = \$('[name=\"_category\"]').val();\n" .
+            "    _category = _category.split(',');\n" .
+            "    if(_category.indexOf('_two_tabs')==-1){\n" .
+            "      _category.push('_two_tabs');\n" .
+            "      \$('[name=\"_category\"]').val(_category.join(','));\n" .
+            "    }\n" .
+            "\n" .
+            "    \$('[name=\"cat_filter__two_tabs\"]').val(\$(this).data('category'));\n" .
+            "\n" .
+            "    // jQuery('[name=\"_current_category\"]').val(jQuery(this).data('category'));\n" .
+            "    // jQuery('[name=\"_category\"]').val(jQuery(this).data('category'));\n" .
+            "\n" .
+            "    //cat_filter__two_tabs\n" .
+            "    // $('.filter_setting_advance_two_tabs .item').removeClass('active');\n" .
+            "    // \$(this).addClass('active');\n" .
+            "\n" .
+            "    // let group_id = \$(this).data('tab-name');\n" .
+            "    // let display_style = 'inline-block';\n" .
+            "    <?php /*if(wp_is_mobile() and !wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile')):*/ ?>\n" .
+            "    <?php /*if(wp_is_mobile() and !\$two_tabs_confings['filter_setting_alternate_mobile']):*/ ?>\n" .
+            "    //   display_style='block';\n" .
+            "    <?php /*endif;*/ ?>\n" .
+            "    // \$('#[data-tab-group=\"'+group_id+'\"]:not(.toggle_sticky_mob_filter.advance_filter_mob)').not('[data-tab-group]:has([data-switch_filter_type-alternate])').css('display',display_style);\n" .
+            "\n" .
+            "    // let group_id_alt = \$(this).data('tab-altname');\n" .
+            "    // \$('#[data-tab-group=\"'+group_id_alt+'\"]').css('display','none');\n" .
+            "\n" .
+            "    // \$('#[data-tab-group=\"'+group_id_alt+'\"]').each(function(){\n" .
+            "    //   let reset_script = \$(this).find('[data-reset]').data('reset');\n" .
+            "    //   if(typeof(reset_script)!==typeof(undefined) && reset_script!=''){\n" .
+            "    //     eval(reset_script);\n" .
+            "    //   }\n" .
+            "\n" .
+            "    <?php /*if(wp_is_mobile() and !wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile')):*/ ?>\n" .
+            "    //     if(\$(this).hasClass('active')){\n" .
+            "    //       \$(this).trigger('click');\n" .
+            "    //     }\n" .
+            "    //     reset_script = \$(this).next().find('[data-reset]').data('reset');\n" .
+            "    //     if(typeof(reset_script)!==typeof(undefined) && reset_script!=''){\n" .
+            "    //       eval(reset_script);\n" .
+            "    //     }\n" .
+            "    <?php /*endif;*/ ?>\n" .
+            "\n" .
+            "    <?php /*if(wp_is_mobile() and wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile')):*/ ?>\n" .
+            "    //     if(\$(this).hasClass('active')){\n" .
+            "    //       \$(this).trigger('click');\n" .
+            "    //     }\n" .
+            "    //     reset_script = \$(this).next().find('[data-reset]').data('reset');\n" .
+            "    //     if(typeof(reset_script)!==typeof(undefined) && reset_script!=''){\n" .
+            "    //       eval(reset_script);\n" .
+            "    //     }\n" .
+            "\n" .
+            "    //     jQuery('.close_sticky_mob_filter').trigger('click');\n" .
+            "\n" .
+            "    <?php /*endif;*/ ?>\n" .
+            "\n" .
+            "    // });\n" .
+            "\n" .
+            "    <?php /*if(wp_is_mobile() and wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile')):*/ ?>\n" .
+            "    //   \$('#advance_filter_mob_alternate').removeClass('status_hidden');\n" .
+            "    //   \$(\".toggle_sticky_mob_filter.advance_filter_mob[data-tab-group='\"+\$(this).data('tab-altname')+\"'],.toggle_sticky_mob_filter.advance_filter_mob[data-tab-group='']\").hide();\n" .
+            "    <?php /*endif;*/ ?>\n" .
+            "\n" .
+            "    //////// 27-05-2022 - @drashti /////////\n" .
+            "    // --add to be confirmed--\n" .
+            "    // -- jo uniq hoy to subscribe mate call back nu emplent karvanu rese -- to a\n" .
+            "    // window.document.splugins.wbc.filters.core.eo_wbc_filter_change_wrapper(false,'form#<?php /*echo $filter_ui->filter_prefix;*/ ?>eo_wbc_filter','',{'this':this,'event':event});\n" .
+            "    // --- aa code woo-bundle-choice/asset/js/publics/03_06__eo_wbc_filter.js filter_set_click() ma move karyo se @a ---\n" .
+            "    // --- start ---       \n" .
+            "    // jQuery.fn.eo_wbc_filter_change(false,'form#<?php /*echo $filter_ui->filter_prefix;*/ ?>eo_wbc_filter','',{'this':this,'event':event});\n" .
+            "    // --- end ---\n" .
+            "    ////////////////////////////////////////\n" .
+            "    // });\n" .
+            "    window.document.splugins.events.api.subscribeObserver('filter_sets', 'wbc', 'filter_set_click_before_loop',function(event, stat_object, notification_response){\n" .
+            "\n" .
+            "        console.log('filter_set_click_before_loop subscribeObserver default');\n" .
+            "\n" .
+            "        notification_response(stat_object);\n" .
+            "\n" .
+            "    });    \n" .
+            "    //jQuery('[data-tab=\"filter_setting_advance_first_tabs\"]').trigger('click');\n" .
+            "    // jQuery('.filter_setting_advance_two_tabs .item.active').click();\n" .
+            "});\n";
+            wbc()->load->add_inline_script('', $inline_script, 'common');
+        ?>
+
         <style>
             .tax-product_cat .eo-wbc-container.filters .ui.menu {
                 -ms-flex-wrap: wrap;

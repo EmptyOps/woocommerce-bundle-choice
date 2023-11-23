@@ -93,13 +93,21 @@
                     ?>
                     <br/>
                     <div style="display:block;clear:both;width: 100% !important"></div>
+                    <?php
+                    if(false){
+                    ?>   
                     <script type="text/javascript">                        
                         jQuery(document).ready(function($){
                             $('.woocommerce-result-count').html('<?php _e($total_text); ?>')
                         });
                     </script>
                     <?php
-                }
+                    }
+                    $inline_script = "jQuery(document).ready(function(\$) {
+                    \$('.woocommerce-result-count').html('" . $total_text . "');
+                    });";
+                    wbc()->load->add_inline_script('', $inline_script, 'common');
+                }   
 
                 $prev_product_id = wbc()->sanitize->get('FIRST') | wbc()->sanitize->get('SECOND');
                 $prev_product=wbc()->wc->eo_wbc_get_product($prev_product_id);
@@ -202,6 +210,9 @@
     </div>
 </div>
 <!-- Created with Wordpress plugin - WooCommerce Product bundle choice -->
+<?php
+if(false){
+?>    
 <script>
     $ = jQuery;
 
@@ -227,7 +238,35 @@
         // 
         wbc_attach_card_views();
     });
-</script>                    
+</script>
+<?php
+}
+$inline_script = "$ = jQuery;
+
+// supposed to be used inside wo_wbc_filter.js
+var is_card_view_rendered = true;
+
+/**
+ * 
+ */
+function wbc_attach_card_views() { 
+    jQuery(\".products,.product-listing,.row-inner>.col-lg-9:eq(0)\").html(jQuery(\".eo_wbc_hidden_data\").html());
+    jQuery('.special.cards .image').dimmer({on:'hover',duration:{ show : 0, hide : 0 }});
+    jQuery('.button[data-link]').on('click',function(e){
+        e.preventDefault();
+        e.stopPropagation();
+        window.location.href=$(this).attr('data-link');
+    });
+}
+
+jQuery(document).ready(function($){
+    //code moved to a function wbc_attach_card_views above so that it can be called after ajax search
+
+    // 
+    wbc_attach_card_views();
+});";
+wbc()->load->add_inline_script('', $inline_script, 'common');  
+?>                  
 <style type="text/css">
     .products{
         display: block !important;
