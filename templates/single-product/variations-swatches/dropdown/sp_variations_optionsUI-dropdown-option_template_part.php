@@ -17,5 +17,5 @@ $template = array(
     'type' => 'div',
     'class' => 'item',
     'attr' => array( 'data-value' => esc_attr( $variable_item_data['options_loop_type'][$slug_or_option] ) ),
-    'preHTML' => esc_attr( $term->name ),
+    'preHTML' => esc_html( $term->name ),
 );

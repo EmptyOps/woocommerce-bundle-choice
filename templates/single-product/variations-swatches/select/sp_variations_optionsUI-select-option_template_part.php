@@ -33,7 +33,7 @@ if(wbc()->options->get_option('tiny_features','tiny_features_dropdown_icon_only'
 			    'src' => esc_url( $variable_item_data['image_url'] ),
 			),
 	    ),
-	    'postHTML' => esc_attr( $term->name ),
+	    'postHTML' => esc_html( $term->name ),
 	);
 } else {
 	if(!empty($variable_item_data['image_url'])){
@@ -48,13 +48,13 @@ if(wbc()->options->get_option('tiny_features','tiny_features_dropdown_icon_only'
 				    'src' => esc_url( $variable_item_data['image_url'] ),
 				),
 		    ),
-		    'postHTML'=> esc_attr( $term->name ),
+		    'postHTML'=> esc_html( $term->name ),
 		);
 	} else {
 		$template = array(
 		    'type' => 'div',
 		    'class' => 'item',
-		    'preHTML' => $term->name,
+		    'preHTML' => esc_html($term->name),
 		    'attr' => array( 'data-value' => esc_attr( $variable_item_data['options_loop_type'][$slug_or_option] ) ),
 		);
 	}

@@ -23,7 +23,7 @@ $template = array(
         array(
             'type' => 'label',
             'preHTML' => esc_html( $term->name ),
-            'attr' => array( 'for' => uniqid($variable_item_data['options_loop_type'][$slug_or_option])),
+            'attr' => array( 'for' => esc_attr(uniqid($variable_item_data['options_loop_type'][$slug_or_option]))),
         )
     )
 );

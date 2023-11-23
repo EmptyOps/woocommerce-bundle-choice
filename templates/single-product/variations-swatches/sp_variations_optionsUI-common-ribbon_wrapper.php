@@ -33,7 +33,7 @@ $template = array(
                     'spui-wbc-swatches-variable-items-wrapper-'.esc_attr($woo_dropdown_attribute_html_data['type']),
                     esc_attr($woo_dropdown_attribute_html_data['type'])."-variable-wrapper"
                 ), 
-    'attr' => array( 'data-attribute_name' => esc_attr( wc_variation_attribute_name( $attribute ) ),'data-attribute_values' =>wc_esc_json( wp_json_encode( array_values( $woo_dropdown_attribute_html_data['options'] ) ) ), 'data-type'=>$woo_dropdown_attribute_html_data['type']),
+    'attr' => array( 'data-attribute_name' => esc_attr( wc_variation_attribute_name( $attribute ) ),'data-attribute_values' =>wc_esc_json( wp_json_encode( array_values( $woo_dropdown_attribute_html_data['options'] ) ) ), 'data-type' => esc_attr($woo_dropdown_attribute_html_data['type'])),
     'child' => array(
         array(
             'type' => 'span',
