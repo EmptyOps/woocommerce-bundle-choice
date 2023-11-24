@@ -440,10 +440,18 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
 				}
 				
+				/*ACTIVE_TODO_QC_START
+				--	orderby field might needed to be moved to tableview if tha logic and functionality of below field is for tableview only. -- to h
+				ACTIVE_TODO_QC_END*/
 				if(jQuery("select[name='orderby']").length>0){
 				
-					// form_data.orderby=jQuery("select[name='orderby']:eq(0)").val();
-					form_data.orderby = window.document.splugins.wbc.pagination.api.get_sort_dropdown_container().val();
+					form_data.orderby=jQuery("select[name='orderby']:eq(0)").val();
+				}
+
+				// NOTE: this if is duplicate of above and still we can not confirm if it was intentional or not so just kept it till we can not confirm accuratly.
+				if(jQuery("select[name='orderby']").length>0){
+				
+					form_data.orderby=jQuery("select[name='orderby']:eq(0)").val();
 				}
 
 				// if(type == slick_table) {
@@ -463,10 +471,12 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 					form_data+='&eo_wbc_page='+jQuery('[name="eo_wbc_page"]').val();
 				}
 				
+				/*ACTIVE_TODO_QC_START
+				--	orderby field might needed to be moved to tableview if tha logic and functionality of below field is for tableview only. -- to h
+				ACTIVE_TODO_QC_END*/
 				if(jQuery("select[name='orderby']").length>0){
 				
-					// form_data+='&orderby='+jQuery("select[name='orderby']:eq(0)").val();
-					form_data+='&orderby='+window.document.splugins.wbc.pagination.api.get_sort_dropdown_container().val();
+					form_data+='&orderby='+jQuery("select[name='orderby']:eq(0)").val();
 				}
 
 				// if(type == 'template1' || type == 'template2') {
@@ -1163,7 +1173,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 				}
 
 			}
-        }
+        } 
 
         console.log('jet-filters-pagination 1');
         console.log(section);
@@ -1646,7 +1656,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
     var input_type_icon_click_listener = function() {
 
     	console.log('filters [input_type_icon_click_listener]');
-    	// console.log(EO_WBC_FILTER_UI_ICON_TERM_SLUG);
+    	console.log(EO_WBC_FILTER_UI_ICON_TERM_SLUG);
 
     	if(typeof(EO_WBC_FILTER_UI_ICON_TERM_SLUG) != typeof(undefined) && !window.document.splugins.common.is_empty(EO_WBC_FILTER_UI_ICON_TERM_SLUG)) {
     		
@@ -1687,18 +1697,23 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
     var input_type_button_click_listener = function() {
 
+    	console.log('filters [input_type_button_click_listener]');
+    	console.log('[data-filter-slug="'+ _this.sub_configs.filter_slug +'"]');
+    	console.log(jQuery('[data-filter-slug="'+ _this.sub_configs.filter_slug +'"]'));
+
     	// --- aa code woo-bundle-choice/application/model/publics/component/eowbc_filter_widget.php input_button(); mathi move karyo se @a ---
     	// --- start ---
 		// $('[data-filter-slug="<?php echo $filter['slug']; ?>"]').on('click',function(event){
 		jQuery('[data-filter-slug="'+ _this.sub_configs.filter_slug +'"]').on('click',function(event){
     		
+    		console.log('filters [input_type_button_click_listener] 01');
     		on_input_type_button_click(event, this);
 
 		});
 		// --- end ---
 
     };
-
+    
     // --- move to filter_set module @a ---
   //   var on_filter_set_click_listener = function(){
 
@@ -1765,9 +1780,11 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
     var on_input_type_button_click = function(event, element) {
 
+    	console.log('filters [on_input_type_button_click]');
+    	
     	input_type_button_click(event, element);
     };
-	    
+
     var reset_click = function(form_selector) {
 
     };
@@ -2070,7 +2087,6 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 			};
 
 			_params.onChange=function(value, min, max) {	
-				console.log('_params.onChange');
 				_labels = jQuery(e).attr('data-labels');
 				__slugs = jQuery(e).attr('data-slugs');
 				
@@ -2232,7 +2248,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 			console.log(_params);
 			
 			// ACTIVE_TODO temp. added on 30-11-2022. remove as soon as the standerd fix is ready. 
-			if(window.document.splugins.common.current_theme_key != 'themes___alpha-store-pro-child' && window.document.splugins.common.current_theme_key != 'themes___maia-child' && window.document.splugins.common.current_theme_key != 'themes___moonte-child' && window.document.splugins.common.current_theme_key != 'themes___frank-jewelry-store' && window.document.splugins.common.current_theme_key != 'themes___merchandiser-child'){		
+			if(window.document.splugins.common.current_theme_key != 'themes___alpha-store-pro-child' && window.document.splugins.common.current_theme_key != 'themes___maia-child' && window.document.splugins.common.current_theme_key != 'themes___moonte-child' && window.document.splugins.common.current_theme_key != 'themes___frank-jewelry-store'){		
 				
 				console.log('if jQuery(e).slider(_params) call');
 
@@ -2254,7 +2270,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		});
 	
 		// ACTIVE_TODO temp. added on 30-11-2022. remove as soon as the standerd fix is ready. 
-		if(window.document.splugins.common.current_theme_key == 'themes___alpha-store-pro-child' || window.document.splugins.common.current_theme_key == 'themes___maia-child' || window.document.splugins.common.current_theme_key == 'themes___moonte-child' || window.document.splugins.common.current_theme_key == 'themes___frank-jewelry-store' || window.document.splugins.common.current_theme_key == 'themes___merchandiser-child') {
+		if(window.document.splugins.common.current_theme_key == 'themes___alpha-store-pro-child' || window.document.splugins.common.current_theme_key == 'themes___maia-child' || window.document.splugins.common.current_theme_key == 'themes___moonte-child' || window.document.splugins.common.current_theme_key == 'themes___frank-jewelry-store') {
 			
 			console.log('if temp_patch_slider_change_event_child call');
 
@@ -2289,7 +2305,10 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 			if(min_value.includes(postfix)){
 				min_value = min_value.slice(0,-1*postfix.length);
 			}
-			if(min_value.includes(postfix)){
+			if(max_value.includes(postfix)){
+
+				// console.log('filters [common_slider_change_event] if 2 if 2');
+				
 				max_value = max_value.slice(0,-1*postfix.length);
 			}
 		}
@@ -2312,7 +2331,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		
     	console.log('filters [temp_patch_slider_change_event_child]');
 
-		jQuery.getScript(window.document.splugins.common.site_url+'/wp-content/plugins/woo-bundle-choice/asset/js/fomantic/semantic.min.js?ver=5.0.10', function(data, status, jqxhr) {
+		jQuery.getScript("https://demo.woochoiceplugin.com/hify-store/wp-content/plugins/woo-bundle-choice/asset/js/fomantic/semantic.min.js?ver=5.0.10", function(data, status, jqxhr) {
 	
 	    	for (let i = 0; i < slider.element.length; i++) {
 
@@ -2523,17 +2542,23 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
     var input_type_button_click = function(event, element) {
 
+    	console.log('filters [input_type_button_click]');
+    	console.log(element);
+
+		var filter_target;
+
 		// <?php if($filter_type==1): ?>
-		if(_this.sub_configs.filter_type==1) {
+		// if(_this.sub_configs.filter_type==1) {
+		if(jQuery(/*this*/element).attr('data-filter-type')==1) {
 			
 			// let filter_target = jQuery('form#<?php echo $this->filter_prefix; ?>eo_wbc_filter [name="_attribute"]');
-			let filter_target = jQuery('form#'+ _this.sub_configs.filter_prefix +'eo_wbc_filter [name="_attribute"]');
+			filter_target = jQuery('form#'+ _this.sub_configs.filter_prefix +'eo_wbc_filter [name="_attribute"]');
 		}
 		// <?php else: ?>
 		else {
 
 			// let filter_target = jQuery('form#<?php echo $this->filter_prefix; ?>eo_wbc_filter [name="_category"]');
-			let filter_target = jQuery('form#'+ _this.sub_configs.filter_prefix +'eo_wbc_filter [name="_category"]');
+			filter_target = jQuery('form#'+ _this.sub_configs.filter_prefix +'eo_wbc_filter [name="_category"]');
 		}
 		// <?php endif;?>
 		
@@ -2782,23 +2807,7 @@ if( typeof(eo_wbc_object) != 'undefined'){
 
 			on_click_listener(event);
 
-	        sort_order_private();
-
 		};
-
-	    var get_sort_dropdown_container_private = function() {
-
-	    	// -- 10 demo ma aa selector same j hato
-	    	return compatability('sort_dropdown_container',{container:jQuery('select[name="orderby"]:eq(0)'),is_return_string_selector:false},null,null).container;
-	    }
-
-	    var sort_order_private = function() {
-			
-			console.log('pagination [sort_order_private]');
-			
-			// process_events
-	        orderby_change_listener(null);
-	    }
 
 		var get_pagination_html_private = function(){
 			
@@ -2928,32 +2937,12 @@ if( typeof(eo_wbc_object) != 'undefined'){
 
 		};
 
-	    var orderby_change_listener = function(type) {
-			
-			console.log('pagination [orderby_change_listener]');
-
-			var selector = get_sort_dropdown_container_private();
-	        
-	        jQuery(selector).on('change',function() {
-
-				console.log('pagination [orderby_change_listener] 01');
-
-		    	on_orderby_change(type,this);
-
-	        });
-	    }
-
 	    var on_click = function(event,element){
 
 			// NOTE : it will internally implement all flows related to pagination link click event
 
 			click(event,element);
 
-	    };
-
-	    var on_orderby_change = function(type,element) {
-
-	    	orderby_change(type,element);
 	    };
 
 	    var click = function(event,element){
@@ -2996,22 +2985,7 @@ if( typeof(eo_wbc_object) != 'undefined'){
 
 	    };
 
-	    var orderby_change = function(type,element) {
-
-			console.log('pagination [orderby_change]');
-
-	    	jQuery('.wbc-filters-sorting-fields').val('');
-
-	    	// reset
-			window.document.splugins.wbc.pagination.api.set_page_number( 1 );
-
-			window.document.splugins.wbc.filters.api.eo_wbc_filter_change_wrapper(false, 'form#'+/*_this.$base_pagination_container*/jQuery(element).parents().has('[id$="eo_wbc_filter"]').find('[id$="eo_wbc_filter"]').attr('id') );
-	    
-	    };
-
 	    var compatability = function(section, object, expected_result, form_selector){
-
-			console.log('pagination [compatability]');
 
 	        if(section == 'pagination'){
 
@@ -3037,36 +3011,7 @@ if( typeof(eo_wbc_object) != 'undefined'){
 		        	object += ',.nasa-paginations-warp';
 	        	}
 
-	        }else if(section == 'sort_dropdown_container'){
-
-				if(object.container.length<=0) {
-					
-					// ACTIVE_TODO here as mentioned in below there is no need of the patch so far as per our checks in the 10 themes, but whenever required simplu uncommonent below jQuery("") and the selector in there according to the patch. and mark it as todo if nothing comes up by third revision. 
-						// -- aya 10 theme demo ma selectore jovana se alaga alag ave se k same ave se done
-						// -- badhi theme ma selectore same j se @a done
-					// object.container = jQuery("");
-					
-					if(object.container.length<=0){
-
-			    		// example if to set selector specific to theme 
-						// ACTIVE_TODO temp. remove below return false when we impliment below if 
-						if(false && window.document.splugins.common.current_theme_key == 'themes___elessi-theme-child') {
-
-							object.container = jQuery('.nasa-pagination .page-numbers .page-numbers');
-						}
-					}
-				}
-
-		    }else if(section == 'sort_dropdown_selector'){
-
-		    	// ACTIVE_TODO temp. remove below return false when this layer is implimented becose this is not implimented yet -- to a && -- to h
-		    	return false;
-		    	
-				if(object.container.length<=0) {
-			
-					object.container = jQuery("");
-				}
-		    } 
+	        }
 
 	        return object;
 	    };
@@ -3128,12 +3073,7 @@ if( typeof(eo_wbc_object) != 'undefined'){
 
 				reset_private();
 
-			},
-
-			get_sort_dropdown_container: function() {
-
-				return get_sort_dropdown_container_private();
-			},				
+			}
 
 		};
 
@@ -3739,10 +3679,7 @@ if( typeof(eo_wbc_object) != 'undefined'){
 
 		let ui_slider = jQuery.fn.slider;		
 		jQuery.fn.slider = window.document.splugins.ui.slider;	
-		console.log('eo_wbc_filter [reset_slider]');
-		console.log(selector);
-		console.log(first);
-		console.log(second);
+
 		jQuery(".ui.slider[data-slug='"+selector+"']").slider('set rangeValue',first,second);
 		if(jQuery("[name='_attribute']").val().includes(selector)) {					    			
 			_values=jQuery("[name='_attribute']").val().split(',')
@@ -3984,10 +3921,7 @@ if( typeof(eo_wbc_object) != 'undefined'){
 		    }
 
 			console.log("filter_sets filter_set_click 55");
-			
-			// reset
-			window.document.splugins.wbc.pagination.api.set_page_number( 1 );
-		    
+
 		    // window.document.splugins.wbc.filters.core.eo_wbc_filter_change_wrapper(false,'form#<?php echo $filter_ui->filter_prefix; ?>eo_wbc_filter','',{'this':this,'event':event});
 		    window.document.splugins.wbc.filters.api.eo_wbc_filter_change_wrapper(false,'form#'+_this.configs.filter_prefix +'eo_wbc_filter','',{'this':element/*this*/,'event':event});
 
