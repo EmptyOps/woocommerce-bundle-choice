@@ -96,11 +96,8 @@ class SP_WBC_Variations extends SP_Variations {
 				// ACTIVE_TODO_OC_END
 				// $int = 100;
 
-				if(wbc()->options->get_option('tiny_features','tiny_features_ajax_variation_threshold') != ''){
-
-					$int = wbc()->options->get_option('tiny_features','tiny_features_ajax_variation_threshold');
-				}
-
+				$int = wbc()->options->get_option('tiny_features','tiny_features_ajax_variation_threshold');
+				
 				return $int;
 
 			}, 8, 1/*2*/);

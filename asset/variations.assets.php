@@ -84,7 +84,10 @@ if( is_product() ) {
             --spui-selected-item-box-shadow:#000;
         }
 
-       <?php if(wbc()->options->get_option('tiny_features','tiny_features_disabled_attribute_style') == 'blur_with_cross'){ ?>
+       <?php 
+       if(wbc()->options->get_option('tiny_features','tiny_features_disabled_attribute_style') == 'blur_with_cross'){ 
+       	$tiny_features_cross_color = wbc()->options->get_option('tiny_features','tiny_features_cross_color','#ff0000');
+       ?>
 	       .spui-wbc-swatches-variable-item.disabled{
 	   		opacity: .8;
 		}	
@@ -93,7 +96,7 @@ if( is_product() ) {
 			content: " " !important;
 			width: 100%;
 			height: 1px;
-			background: #FF0000 !important;
+			background: <?php echo $tiny_features_cross_color; ?> !important;
 			left: 0;
 			right: 0;
 			bottom: 0;
@@ -118,7 +121,7 @@ if( is_product() ) {
 			content: " " !important;
 			width: 100%;
 			height: 1px;
-			background: #FF0000 !important;
+			background: <?php echo $tiny_features_cross_color; ?> !important;
 			left: 0;
 			right: 0;
 			bottom: 0;

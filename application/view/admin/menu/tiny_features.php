@@ -421,7 +421,7 @@ $form['data'] = array(
 					'attr'=>array(),					
 					'inline'=>false,
 
-					'visible_info'=>array( 'label'=>eowbc_lang(''),
+					'visible_info'=>array( 'label'=>eowbc_lang('Note: Disable Ajax threshold doesn\'t apply this feature.'),
 						'type'=>'visible_info',
 						'class'=>array('medium','fluid'),
 						// 'size_class'=>array('sixteen','wide'),
@@ -449,6 +449,23 @@ $form['data'] = array(
 					),
 					'attr'=>array("min='0',max='10'")					
 				),		
+				'tiny_features_cross_color'=>array(
+					'label'=>eowbc_lang('Cross Color'),
+					'type'=>'color',
+					'spui_version'=>1.0,
+					'container_class'=>array(''),						
+					'value'=>wbc()->options->get_option('tiny_features','tiny_features_cross_color','#ff0000'),
+					'sanitize'=>'sanitize_hex_color',
+					'class'=>array('fluid'),				
+					'size_class'=>array('eight','wide'),
+					'inline'=>false,
+
+					'visible_info'=>array( 'label'=>eowbc_lang('<br/>Choose color for cross sign.'),
+						'type'=>'visible_info',
+						'class'=>array('medium','fluid'),
+						// 'size_class'=>array('sixteen','wide'),
+					)
+				),				
 				'tiny_features_ajax_variation_threshold'=>array(
 					'label'=>eowbc_lang('Ajax Variation Threshold'),
 					'type'=>'text',
