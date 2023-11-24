@@ -108,6 +108,18 @@ class Eowbc_Sample_Data {
 			header("Location: ".admin_url('admin.php?page=eowbc-tiny-features')); 
 			exit; 
 		}
+		
+		--- start ---
+		-- aa code redirect mate mukva no hato jya thi juna version ma redirect thatu hoy tya, but juna version ma upper no code malyo se tema already if condition se to aa niche ni if ne tena bhegi adjust karva ni se -- to h && -- to a
+			-- may be upper ni if thodak deffernt logic mate se so we need to think what needed to be done now
+		$features = unserialize(wbc()->options->get_option('setting_status_setting_status_setting','features',serialize(array())));
+		$bonus_features = unserialize(wbc()->options->get_option('setting_status_setting_status_setting','bonus_features',serialize(array())));
+
+		if( empty($features['ring_builder']) and empty($features['pair_maker']) and empty($features['guidance_tool']) and empty($bonus_features['price_control']) and empty($bonus_features['spec_view_item_page']) and empty($bonus_features['filters_shortcode']) and empty($bonus_features['filters_shop_cat']) ) {
+			header("Location: ".admin_url('admin.php?page=eowbc-tiny-features'));
+		}
+		--- end ---
+		
 		if(!empty($_POST)) {			
 			
 			if(isset($_POST['_wpnonce']) && wp_verify_nonce(wbc()->sanitize->post('_wpnonce'),'eo_wbc_auto_jewel')) {
