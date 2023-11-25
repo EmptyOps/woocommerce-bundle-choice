@@ -1147,6 +1147,11 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 				        	console.log("compatability inner else if inner if inner if themes patch dello");
 
 							selector_string_local = '.radiantthemes-shop';
+						}else if(window.document.splugins.common.current_theme_key == 'themes___goldish-child') {
+
+				        	console.log("compatability inner else if inner if inner if themes patch dello");
+
+							selector_string_local = '.products,.c-product-grid__wrap';
 						}
 
 						if(object.is_return_string_selector) {
