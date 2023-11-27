@@ -17,12 +17,12 @@ if(wbc()->options->get_option('tiny_features','tiny_features_unlock_swatches_sho
 // swatches pro extention 
 $wbc_vsp_active = function_exists('wbc_vsp');
 $wbc_vsp_is_disabled = false;
-$wbc_vsp_option_label_class = array();
+// $wbc_vsp_option_label_class = array();
 $wbc_vsp_option_container_class = array();
 if(!$wbc_vsp_active) {
 	$wbc_vsp_is_disabled = true;
-	$wbc_vsp_option_label_class = array('lock');
-	$wbc_vsp_option_container_class = array('grey');
+	// $wbc_vsp_option_label_class = array('lock');
+	$wbc_vsp_option_container_class = array('grey','lock');
 }
 
 $form = array();
@@ -588,10 +588,13 @@ $form['data'] = array(
 					),
 				),
 				'tiny_features_video_loop'=>array(
-					'label'=>eowbc_lang('Start Video Loop? Pro'),
-					'label_class'=>array_merge( array(), $wbc_vsp_option_label_class),
+					'label'=>eowbc_lang('Start Video Loop?'),
+					// 'label_class'=>array_merge( array(), $wbc_vsp_option_label_class),
 					'type'=>'checkbox',
 					'spui_version'=>1.0,
+					'side_icon_class'=>array('lock','red','lock_icon'),
+					'side_label_text'=>'PRO',
+					'side_label_class'=>array('green','pro_label','hide','right'),
 					'container_class'=>array_merge( array(), $wbc_vsp_option_container_class),						
 					'value'=>array(wbc()->options->get_option('tiny_features','tiny_features_video_loop')),
 					'sanitize'=>'sanitize_text_field',
@@ -1920,7 +1923,12 @@ wbc()->load->asset('js','admin/tiny-feature/specification');
 jQuery(document).ready(function(){
 
 	// -- niche no js code pro feture na lock mate no se
-	jQuery('.lock').append('<i class="fa-solid fa-lock" style="color: #ff0000; padding-left: 6px;"></i>');
+	// jQuery('.lock').append('<i class="fa-solid fa-lock" style="color: #ff0000; padding-left: 6px;"></i>');
+	
+	if(jQuery('.pro_label').parent('.lock').length == 0) {
+		jQuery('.lock_icon').parent().addClass('hide');
+		jQuery('.pro_label').removeClass('hide');
+	}
 
 	// -- aa bounus feture na side bar nu html se, aa html akhu string ma pass karelu se pasi append karelu se karnke nakar form buider ma aa html banavu pade atle - ani html file 154.1 na task ma se @a
 	var options_ui_video_section = '<style>'+

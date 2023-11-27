@@ -251,8 +251,24 @@ class Form_Builder implements Builder {
 			
 			// A segment can be colored -- semantic ui 
 			if( isset($form_element['spui_version']) && $form_element['spui_version'] >= 1.0 ) {
-				?><div class="ui <?php echo (!empty($form_element["container_class"])) ? $form_element["container_class"] : 'black'; ?> segment visible">
+				?>
+				<div class="ui <?php echo (!empty($form_element["container_class"])) ? $form_element["container_class"] : 'black'; ?> segment visible">
+					
+				<?php 
+				if (isset($form_element['side_label_text'])) {
+				?>
+					<a class="ui <?php echo (!empty($form_element["side_label_class"])) ? $form_element["side_label_class"] : ''; ?> ribbon label"> <?php echo $form_element['side_label_text']; ?></a>
 				<?php
+				} 
+
+				if ( isset($form_element['side_icon_class']) && !empty($form_element["side_icon_class"])) {
+				?>
+					<a class="ui right corner label">
+				        <i class="<?php echo $form_element['side_icon_class']; ?> icon"></i>
+					</a>
+				<?php
+				} 
+
 			}
 
 			if( (!isset($form_element['prev_inline']) || !$form_element['prev_inline']) && $form_element['type']!='devider' && $form_element['type']!='hidden' ){
@@ -303,6 +319,18 @@ class Form_Builder implements Builder {
 	}	
 
 	public function process_property_group(array $form_element, string $id) {
+
+		if(isset($form_element['side_icon_class'])){
+			$form_element['side_icon_class'] = $this->process_property($form_element['side_icon_class']);
+		} else {
+			$form_element['side_icon_class'] ='';
+		}
+
+		if(isset($form_element['side_label_class'])){
+			$form_element['side_label_class'] = $this->process_property($form_element['side_label_class']);
+		} else {
+			$form_element['side_label_class'] ='';
+		}
 
 		if(isset($form_element['container_class'])){
 			$form_element['container_class'] = $this->process_property($form_element['container_class']);
