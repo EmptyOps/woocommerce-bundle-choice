@@ -133,10 +133,30 @@ class Eowbc_Model {
 									if(( $fk == 'sp_variations_gallery_images________' || $fk == 'sp_variations_gallery_images____________1____' || $fk == 'sp_variations_gallery_images____{{id}}____' ) && is_array($args['data_raw'][$dm_based_field]) ){
 
 										$form_definition[$key]["form"][$fk]["value"] = $args['data_raw'][$dm_based_field][0];
-									}else{
+
+									} elseif(( $fk == 'sp_variations_gallery_images________' || $fk == 'sp_variations_gallery_images____________1____' || $fk == 'sp_variations_gallery_images____{{id}}____' ) && is_string($args['data_raw'][$dm_based_field]) && strpos($args['data_raw'][$dm_based_field], "|") !== FALSE){
+
+										$separator = wbc()->config->separator();
+
+										$tmp_fields_array = explode("|",$args['data_raw'][$dm_based_field]);
+
+										foreach ($tmp_fields_array as $tfa_key => $tfa_value) {
+
+											$tmp_fk = 'sp_variations_gallery_images'.$separator.$args['id'].$separator.$separator.($tfa_key+1).$separator; 
+
+											if(!is_array($form_definition[$key]["form"][$tmp_fk])) {
+
+												$form_definition[$key]["form"][$tmp_fk] = array();
+											}
+
+											$form_definition[$key]["form"][$tmp_fk]["value"] = $tfa_value;
+										}
+
+								    } else {
 
 										$form_definition[$key]["form"][$fk]["value"] = $args['data_raw'][$dm_based_field];
 									}
+
 								} else {
 
 									$form_definition[$key]["form"][$fk]["value"] = '';
