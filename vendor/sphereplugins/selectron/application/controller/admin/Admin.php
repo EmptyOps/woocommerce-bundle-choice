@@ -181,7 +181,7 @@ class Admin {
 				'label'=>eowbc_lang('Save'),
 				'type'=>'button',
 				'class'=>array('primary'),							
-				'attr'=>array("data-action='save'",'data-tab_key="'.$key.'"'),
+				'attr'=>array("data-action='save'",'data-tab_key="'.esc_attr($key).'"'),
 				'inline'=>false
 			);
 
