@@ -93,13 +93,21 @@
                     ?>
                     <br/>
                     <div style="display:block;clear:both;width: 100% !important"></div>
+                    <?php
+                    if(false){
+                    ?>   
                     <script type="text/javascript">                        
                         jQuery(document).ready(function($){
                             $('.woocommerce-result-count').html('<?php _e($total_text); ?>')
                         });
                     </script>
                     <?php
-                }
+                    }
+                    $inline_script = "jQuery(document).ready(function(\$) {
+                    \$('.woocommerce-result-count').html('" . $total_text . "');
+                    });";
+                    wbc()->load->add_inline_script('', $inline_script, 'common');
+                }   
 
                 $prev_product_id = wbc()->sanitize->get('FIRST') | wbc()->sanitize->get('SECOND');
                 $prev_product=wbc()->wc->eo_wbc_get_product($prev_product_id);

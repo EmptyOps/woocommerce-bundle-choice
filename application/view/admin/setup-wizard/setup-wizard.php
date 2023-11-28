@@ -55,6 +55,7 @@ box-shadow: none;">
 
   	</form>
 </div>
+
 <?php 
 	if (false) {
  ?>
@@ -74,21 +75,24 @@ box-shadow: none;">
 		});
 	});
 </script>
+<?php
+	}
+	$inventory_type = wbc()->options->get_option('setting_status_setting_status_setting', 'inventory_type', '');
+	$inline_script = 
+		"jQuery(document).ready(function(){\n" .
+		"    jQuery('.ui.dropdown').dropdown();\n" .
+		"\n" .
+		"    jQuery('[name=\"eo_wbc_inventory_type\"]').parent().dropdown('set selected', '" . $inventory_type . "');\n" .
+		"\n" .
+		"    jQuery('.ui.checkbox').checkbox();\n" .
+		"\n" .
+		"    jQuery(\"#create_product\").on('click',function(e){\n" .
+		"        console.log('preventDefault');\n" .
+		"        e.preventDefault();\n" .
+		"        e.stopPropagation();\n" .
+		"        window.location.href = jQuery(this).data('link');/*"<?php //echo admin_url(\"admin.php?page=eowbc&eo_wbc_view_auto_jewel=1&f=\"); */;\n" .
+		"    });\n" .
+		"});";
 
-<?php }
-		$inline_script =
-		    "jQuery(document).ready(function(){\n" .
-		    "    jQuery('.ui.dropdown').dropdown();\n" .
-		    "\n" .
-		    "    jQuery('[name=\"eo_wbc_inventory_type\"]').parent().dropdown('set selected','" . wbc()->options->get_option('setting_status_setting_status_setting', 'inventory_type', '') . "');    \n" .
-		    "\n" .
-		    "    jQuery('.ui.checkbox').checkbox();\n" .
-		    "\n" .
-		    "    jQuery(\"#create_product\").on('click',function(e){\n" .
-		    "        console.log('preventDefault');\n" .
-		    "        e.preventDefault();\n" .
-		    "        e.stopPropagation();\n" .
-		    "        window.location.href = jQuery(this).data('link');/*\"" . admin_url("admin.php?page=eowbc&eo_wbc_view_auto_jewel=1&f=") . "\"*/;\n" .
-		    "    });\n" .
-		    "});\n";
-		wbc()->load->add_inline_script('', $inline_script, 'common');
+	wbc()->load->add_inline_script('', $inline_script, 'common');
+

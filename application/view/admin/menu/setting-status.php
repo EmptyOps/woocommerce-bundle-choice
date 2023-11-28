@@ -51,9 +51,9 @@ wbc()->load->asset('js','admin/setting_status');
 
 //for error log form which displays code etc. 
 	//set false to not use it because textarea text are not visible until user do not click on it once however if it is inside the first loading tab it becomes visible but now its in secnd tab. enable it when there a fix available. 
-if (false && function_exists('wp_enqueue_code_editor')):
+if (false && function_exists('wp_enqueue_code_editor')): 
 if (false) {
- ?>
+?>	
 	<script>                                 
         jQuery(document).ready(function($) {     
             var errors=<?php echo json_encode(array('codeEditor' =>wp_enqueue_code_editor(array('type' => 'text')))); ?>                              
@@ -63,9 +63,10 @@ if (false) {
             	$('#eo_wbc_view_error').trigger('click');
             }, 3000);
         });
-    </script>   
-<?php
-}
+
+    </script>  
+	<?php
+	}
 		$wp_enqueue_code_editor_json_encode = json_encode(array('codeEditor' => wp_enqueue_code_editor(array('type' => 'text'))));
 
 		$inline_script = 

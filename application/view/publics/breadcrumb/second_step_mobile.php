@@ -61,3 +61,4 @@ $inline_script =
     "});\n";
 
 wbc()->load->add_inline_script('', $inline_script, 'common');
+

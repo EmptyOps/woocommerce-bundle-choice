@@ -28,6 +28,7 @@ class Admin {
 		*/
 
 		add_action('admin_footer',function(){
+			if(false){
 			?>
 			<script type="text/javascript">
 				jQuery(document).ready(function(){
@@ -60,6 +61,34 @@ class Admin {
 				});
 			</script>
 			<?php
+			}
+			$inline_script = "
+				jQuery(document).ready(function() {
+				    jQuery('.required.field[class*=\"_container_render_method\"] .ui.radio').on('change', function() {
+				        let parent = jQuery(this).closest('.required.field[class*=\"_container_render_method\"]').parent();
+				        if (jQuery(this).find('input:radio').val() === 'query_selector') {
+				            jQuery(parent).next().css('display', 'none');
+				            jQuery(parent).next().next().css('display', 'none');
+				            jQuery(parent).next().next().next().css('display', 'none');
+
+				            jQuery(parent).next().next().next().next().css('display', 'block');
+				            jQuery(parent).next().next().next().next().next().css('display', 'block');
+				        } else {
+				            jQuery(parent).next().css('display', 'block');
+				            jQuery(parent).next().next().css('display', 'block');
+				            jQuery(parent).next().next().next().css('display', 'block');
+
+				            jQuery(parent).next().next().next().next().css('display', 'none');
+				            jQuery(parent).next().next().next().next().next().css('display', 'none');
+				        }
+				    });
+				});
+
+				jQuery(window).on('load', function() {
+				    jQuery('.required.field[class*=\"_container_render_method\"] :radio:checked').trigger('change');
+				});
+				";
+				wbc()->load->add_inline_script('', $inline_script, 'common');
 		});
 
 		if(!empty($key) and !empty($section)) {
