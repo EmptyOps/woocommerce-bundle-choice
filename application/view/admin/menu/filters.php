@@ -63,7 +63,8 @@ if(!empty($attributes) and is_array($attributes)){
         }		
 	}
 }
-if(false){
+
+if (false) {
 ?>
 <script type="text/javascript">
 	jQuery(window).load(function() {
@@ -98,6 +99,7 @@ if(false){
 		});
 
 		jQuery(".ui.dropdown:has(#s_fconfig_filter)").dropdown({
+
 				onChange:function() {
 					let filter_field = $(this).dropdown('get value');
 					if(filter_field!==''){
@@ -115,69 +117,72 @@ if(false){
 							jQuery.each(_child_data,function(index,item) {
 							    html+='<div class="item" data-value="'+index+'">'+item+'</div>';
 							});
-							jQuery(".ui.dropdown:has(#s_fconfig_elements)").find(".menu").html(html);
+							jQuery(".ui.dropdown:has(#d_fconfig_elements)").find(".menu").html(html);
 						}
 					} else {
-						jQuery(".ui.dropdown:has(#s_fconfig_elements)").find(".menu").html("");
+						jQuery(".ui.dropdown:has(#d_fconfig_elements)").find(".menu").html("");
 					}
 				}
 			
 			});
 	});	
 </script>
-<?php
+<?php 
 }
-$inline_script =
-    "jQuery(window).load(function() {\n" .
-    "    \$ = jQuery;\n" .
-    "\n" .
-    "    _childs = JSON.parse('" . str_replace('"', '\"', str_replace("'", "\'", json_encode($_childs))) . "');\n" .
-    "    jQuery(\".ui.dropdown:has(#d_fconfig_filter)\").dropdown({\n" .
-    "        onChange:function() {\n" .
-    "            let filter_field = \$(this).dropdown('get value');\n" .
-    "            if(filter_field !== ''){\n" .
-    "                if(_childs.hasOwnProperty(filter_field) || _childs.hasOwnProperty('pa_'+filter_field)) {\n" .
-    "                    let _child_data = false;\n" .
-    "                    if(_childs.hasOwnProperty(filter_field)){\n" .
-    "                        _child_data = _childs[filter_field];\n" .
-    "                    } else if(_childs.hasOwnProperty('pa_'+filter_field)) {\n" .
-    "                        _child_data = _childs['pa_'+filter_field];\n" .
-    "                    }\n" .
-    "                    let html = '';\n" .
-    "                    jQuery.each(_child_data,function(index,item) {\n" .
-    "                        html += '<div class=\"item\" data-value=\"' + index + '\">' + item + '</div>';\n" .
-    "                    });\n" .
-    "                    jQuery(\".ui.dropdown:has(#d_fconfig_elements)\").find(\".menu\").html(html);\n" .
-    "                }\n" .
-    "            } else {\n" .
-    "                jQuery(\".ui.dropdown:has(#d_fconfig_elements)\").find(\".menu\").html(\"\");\n" .
-    "            }\n" .
-    "        }\n" .
-    "    });\n" .
-    "\n" .
-    "    jQuery(\".ui.dropdown:has(#s_fconfig_filter)\").dropdown({\n" .
-    "        onChange:function() {\n" .
-    "            let filter_field = \$(this).dropdown('get value');\n" .
-    "            if(filter_field !== ''){\n" .
-    "                if(_childs.hasOwnProperty(filter_field) || _childs.hasOwnProperty('pa_'+filter_field)) {\n" .
-    "                    let _child_data = false;\n" .
-    "                    if(_childs.hasOwnProperty(filter_field)){\n" .
-    "                        _child_data = _childs[filter_field];\n" .
-    "                    } else if(_childs.hasOwnProperty('pa_'+filter_field)) {\n" .
-    "                        _child_data = _childs['pa_'+filter_field];\n" .
-    "                    }\n" .
-    "                    let html = '';\n" .
-    "                    jQuery.each(_child_data,function(index,item) {\n" .
-    "                        html += '<div class=\"item\" data-value=\"' + index + '\">' + item + '</div>';\n" .
-    "                    });\n" .
-    "                    jQuery(\".ui.dropdown:has(#s_fconfig_elements)\").find(\".menu\").html(html);\n" .
-    "                }\n" .
-    "            } else {\n" .
-    "                jQuery(\".ui.dropdown:has(#s_fconfig_elements)\").find(\".menu\").html(\"\");\n" .
-    "            }\n" .
-    "        }\n" .
-    "    });\n" .
-    "});\n";
-wbc()->load->add_inline_script('', $inline_script, 'common');
+$_childs_json_encoded = json_encode($_childs);
+$_childs_json_escaped = str_replace('"', '\"', str_replace("'", "\'", $_childs_json_encoded));
 
+$inline_script = 
+	"jQuery(window).load(function() {\n" .
+	"    \$ = jQuery;\n" .
+	"\n" .
+	"    _childs = JSON.parse('".$_childs_json_escaped."');\n" .
+	"    jQuery(\".ui.dropdown:has(#d_fconfig_filter)\").dropdown({\n" .
+	"        onChange:function() {\n" .
+	"            let filter_field = \$(this).dropdown('get value');\n" .
+	"            if(filter_field !== '') {\n" .
+	"                if(_childs.hasOwnProperty(filter_field) || _childs.hasOwnProperty('pa_'+filter_field)) {\n" .
+	"                    let _child_data = false ;\n" .
+	"                    if(_childs.hasOwnProperty(filter_field)) {\n" .
+	"                        _child_data = _childs[filter_field];\n" .
+	"                    } else if(_childs.hasOwnProperty('pa_'+filter_field)) {\n" .
+	"                        _child_data = _childs['pa_'+filter_field];\n" .
+	"                    }\n" .
+	"                    let html = '';\n" .
+	"                    jQuery.each(_child_data, function(index, item) {\n" .
+	"                        html += '<div class=\"item\" data-value=\"'+index+'\">'+item+'</div>';\n" .
+	"                    });\n" .
+	"                    jQuery(\".ui.dropdown:has(#d_fconfig_elements)\").find(\".menu\").html(html);\n" .
+	"                }\n" .
+	"            } else {\n" .
+	"                jQuery(\".ui.dropdown:has(#d_fconfig_elements)\").find(\".menu\").html(\"\");\n" .
+	"            }\n" .
+	"        }\n" .
+	"    });\n" .
+	"\n" .
+	"    jQuery(\".ui.dropdown:has(#s_fconfig_filter)\").dropdown({\n" .
+	"        onChange:function() {\n" .
+	"            let filter_field = \$(this).dropdown('get value');\n" .
+	"            if(filter_field !== '') {\n" .
+	"                if(_childs.hasOwnProperty(filter_field) || _childs.hasOwnProperty('pa_'+filter_field)) {\n" .
+	"                    let _child_data = false ;\n" .
+	"                    if(_childs.hasOwnProperty(filter_field)) {\n" .
+	"                        _child_data = _childs[filter_field];\n" .
+	"                    } else if(_childs.hasOwnProperty('pa_'+filter_field)) {\n" .
+	"                        _child_data = _childs['pa_'+filter_field];\n" .
+	"                    }\n" .
+	"                    let html = '';\n" .
+	"                    jQuery.each(_child_data, function(index, item) {\n" .
+	"                        html += '<div class=\"item\" data-value=\"'+index+'\">'+item+'</div>';\n" .
+	"                    });\n" .
+	"                    jQuery(\".ui.dropdown:has(#s_fconfig_elements)\").find(\".menu\").html(html);\n" .
+	"                }\n" .
+	"            } else {\n" .
+	"                jQuery(\".ui.dropdown:has(#s_fconfig_elements)\").find(\".menu\").html(\"\");\n" .
+	"            }\n" .
+	"        }\n" .
+	"    });\n" .
+	"});";
+wbc()->load->add_inline_script('', $inline_script, 'common');
+?>
 

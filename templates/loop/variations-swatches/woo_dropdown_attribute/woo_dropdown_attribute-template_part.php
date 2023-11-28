@@ -65,5 +65,3 @@ $template = array(
     // -- aa temp mukelu se @a
     // 'class' => array('attached','enabled'),
 );
-
-	

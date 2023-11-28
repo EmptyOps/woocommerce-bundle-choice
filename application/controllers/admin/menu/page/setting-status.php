@@ -155,8 +155,8 @@ class Setting_status {
 							'clear_log_and_return'=>array(
 								'label'=>eowbc_lang('Clear Log and Return'),
 								'type'=>'link',
-								'attr'=>array("href='".admin_url('admin.php?page=eowbc-setting-status&action=clear&ref='.
-								esc_url((empty($_SERVER['HTTP_REFERER'])? admin_url('admin.php?page=eowbc-setting-status'):$_SERVER['HTTP_REFERER'])))."'"),
+								'attr'=>array("href='".esc_url(admin_url('admin.php?page=eowbc-setting-status&action=clear&ref='.
+								(empty($_SERVER['HTTP_REFERER'])? admin_url('admin.php?page=eowbc-setting-status'):$_SERVER['HTTP_REFERER'])))."'"),
 								'class'=>array(/*'secondary','hidden'*/)	
 							)
 						)

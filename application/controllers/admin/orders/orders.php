@@ -82,9 +82,9 @@ class Orders
        }
        $row.="</td>".
            "<td style=\"vertical-align: middle;\">".
-           "<h5>".wbc()->wc->eo_wbc_get_product( empty($set[0][2])?$set[0][0]:$set[0][2])->get_title().($set[0][2]  ? "<br/>&nbsp; -".implode(',',wbc()->wc->eo_wbc_get_product_variation_attributes($set[0][2],(array)$set[0]['variation'])):'')."</h5>";
+           "<h5>".esc_html(wbc()->wc->eo_wbc_get_product( empty($set[0][2])?$set[0][0]:$set[0][2])->get_title()).($set[0][2]  ? "<br/>&nbsp; -".esc_html(implode(',',wbc()->wc->eo_wbc_get_product_variation_attributes($set[0][2],(array)$set[0]['variation']))):'')."</h5>";
        if($set[1]){
-           $row.="<h5>".wbc()->wc->eo_wbc_get_product( empty($set[1][2])?$set[1][0]:$set[1][2] )->get_title().($set[1][2]  ? "<br/>&nbsp; -".implode(',',wbc()->wc->eo_wbc_get_product_variation_attributes($set[1][2],(array)$set[1]['variation'])):'')."</h5>";
+           $row.="<h5>".esc_html(wbc()->wc->eo_wbc_get_product( empty($set[1][2])?$set[1][0]:$set[1][2] )->get_title()).($set[1][2]  ? "<br/>&nbsp; -".esc_html(implode(',',wbc()->wc->eo_wbc_get_product_variation_attributes($set[1][2],(array)$set[1]['variation']))):'')."</h5>";
        }
        $row.="</td>".
            "<td style=\"vertical-align: middle;\">".

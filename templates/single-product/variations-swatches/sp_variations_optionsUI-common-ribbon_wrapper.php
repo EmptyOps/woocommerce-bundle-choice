@@ -30,16 +30,16 @@ $template = array(
                     'variable-items-wrapper',
                     /*trim( implode( ' ', array_unique( $css_classes ) ) ),*/
                     'spui-wbc-swatches-variable-items-wrapper',
-                    'spui-wbc-swatches-variable-items-wrapper-'.$woo_dropdown_attribute_html_data['type'],
-                    $woo_dropdown_attribute_html_data['type']."-variable-wrapper"
+                    'spui-wbc-swatches-variable-items-wrapper-'.esc_attr($woo_dropdown_attribute_html_data['type']),
+                    esc_attr($woo_dropdown_attribute_html_data['type'])."-variable-wrapper"
                 ), 
     'attr' => array( 'data-attribute_name' => esc_attr( wc_variation_attribute_name( $attribute ) ),'data-attribute_values' =>wc_esc_json( wp_json_encode( array_values( $woo_dropdown_attribute_html_data['options'] ) ) ), 'data-type'=>$woo_dropdown_attribute_html_data['type']),
     'child' => array(
         array(
             'type' => 'span',
             'class' => 'ui ribbon label',
-            'preHTML' => $attribute_object->attribute_label,
-            'attr' => array( 'style' => 'background-color:'.$ribbon_color.';border-color:'.$ribbon_color.';color:white;' ),
+            'preHTML' => esc_html($attribute_object->attribute_label),
+            'attr' => array( 'style' => esc_attr('background-color:'.$ribbon_color.';border-color:'.$ribbon_color.';color:white;') ),
         ),
         array(
             'type' => 'span',

@@ -78,15 +78,15 @@
                     $total_text = '';
                     // phpcs:disable WordPress.Security
                     if ( 1 === intval( $args['total'] ) ) {
-                        _e( 'Showing the single result', 'woocommerce' );
+                        esc_html_e( 'Showing the single result', 'woocommerce' );
                     } elseif ( $args['total'] <= $args['per_page'] || -1 === $args['per_page'] ) {
                         /* translators: %d: total results */
-                        $total_text = sprintf( _n( 'Showing all %d result', 'Showing all %d results', esc_html($args['total']), 'woocommerce' ), esc_html($args['total']) );
+                        $total_text = sprintf( _n( 'Showing all %d result', 'Showing all %d results', ($args['total']), 'woocommerce' ), ($args['total']) );
                     } else {
                         $first = ( $args['per_page'] * $args['current'] ) - $args['per_page'] + 1;
                         $last  = min( $args['total'], $args['per_page'] * $args['current'] );
                         /* translators: 1: first result 2: last result 3: total results */
-                        $total_text = sprintf( _nx( 'Showing %1$d&ndash;%2$d of %3$d result', 'Showing %1$d&ndash;%2$d of %3$d results', esc_html($args['total']), 'with first and last result', 'woocommerce' ), esc_html($first), esc_html($last), esc_html($args['total']) );
+                        $total_text = sprintf( _nx( 'Showing %1$d&ndash;%2$d of %3$d result', 'Showing %1$d&ndash;%2$d of %3$d results', ($args['total']), 'with first and last result', 'woocommerce' ), ($first), ($last), ($args['total']) );
                     }
                     // phpcs:enable WordPress.Security
                     
@@ -211,8 +211,8 @@
 </div>
 <!-- Created with Wordpress plugin - WooCommerce Product bundle choice -->
 <?php
-if(false){
-?>    
+if (false) {
+?>
 <script>
     $ = jQuery;
 
@@ -241,32 +241,33 @@ if(false){
 </script>
 <?php
 }
-$inline_script = "$ = jQuery;
+    $inline_script =
+        '<script>' .
+        '    $ = jQuery;' .
+        '    // supposed to be used inside wo_wbc_filter.js' .
+        '    var is_card_view_rendered = true;' .
+        '    /**' .
+        '     * ' .
+        '     */' .
+        '    function wbc_attach_card_views() {' .
+        '        jQuery(".products,.product-listing,.row-inner>.col-lg-9:eq(0)").html(jQuery(".eo_wbc_hidden_data").html());' .
+        '        jQuery(\'.special.cards .image\').dimmer({on:\'hover\',duration:{ show : 0, hide : 0 }});' .
+        '        jQuery(\'.button[data-link]\').on(\'click\',function(e){' .
+        '            e.preventDefault();' .
+        '            e.stopPropagation();' .
+        '            window.location.href=$(this).attr(\'data-link\');' .
+        '        });' .
+        '    }' .
+        '    jQuery(document).ready(function($){' .
+        '        //code moved to a function wbc_attach_card_views above so that it can be called after ajax search' .
+        '        wbc_attach_card_views();' .
+        '    });' .
+        '</script>';
 
-// supposed to be used inside wo_wbc_filter.js
-var is_card_view_rendered = true;
+    // Assuming wbc() is the object/method to add inline script
+    wbc()->load->add_inline_script('', $inline_script, 'common');
 
-/**
- * 
- */
-function wbc_attach_card_views() { 
-    jQuery(\".products,.product-listing,.row-inner>.col-lg-9:eq(0)\").html(jQuery(\".eo_wbc_hidden_data\").html());
-    jQuery('.special.cards .image').dimmer({on:'hover',duration:{ show : 0, hide : 0 }});
-    jQuery('.button[data-link]').on('click',function(e){
-        e.preventDefault();
-        e.stopPropagation();
-        window.location.href=$(this).attr('data-link');
-    });
-}
-
-jQuery(document).ready(function($){
-    //code moved to a function wbc_attach_card_views above so that it can be called after ajax search
-
-    // 
-    wbc_attach_card_views();
-});";
-wbc()->load->add_inline_script('', $inline_script, 'common');  
-?>                  
+?>                   
 <style type="text/css">
     .products{
         display: block !important;

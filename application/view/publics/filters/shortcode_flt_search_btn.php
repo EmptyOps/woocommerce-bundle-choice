@@ -11,8 +11,9 @@
 		</div>
 	</div>
 	<?php
-	if(false){
-	?>		
+		if (false) {
+		?>
+
 	<script type="text/javascript">		
 
 		var is_shortcode_filter = <?php echo ($is_shortcode_filter ? 'true' : 'false');?>;
@@ -42,34 +43,35 @@
 			window.location.href = shortflt_filter_setting__redirect_url + (shortflt_filter_setting__redirect_url.indexOf('?') == -1 ? '?' : '&') + form.serialize();
 		}
 	</script>
-	<?php
-	}
-	$is_shortcode_filter_is_shortcode_filter = $is_shortcode_filter ? 'true' : 'false';
-	$shortflt_filter_setting = wbc()->options->get_option('shortflt_filter_setting','redirect_url',get_permalink( function_exists('wc_get_page_id') ? wc_get_page_id('shop') : woocommerce_get_page_id('shop') ) );
-	$inline_script = 
-	"var is_shortcode_filter = " . $is_shortcode_filter_is_shortcode_filter . ";\n" .
-	"var shortflt_filter_setting__redirect_url = '" . $shortflt_filter_setting . "';\n" .
-	"\n" .
-	"function override_flt_change_function() {\n" .
-	"    //////// 27-05-2022 - @drashti /////////\n" .
-	"    // --add to be confirmed--\n" .
-	"    // window.document.splugins.wbc.filters.core.eo_wbc_filter_change_wrapper();\n" .
-	"    if (typeof(jQuery.fn.eo_wbc_filter_change) != 'undefined' && jQuery.fn.eo_wbc_filter_change != undefined) {\n" .
-	"        // ACTIVE_TODO we need to manage this when we upgrade shortcode filter for QCed version.\n" .
-	"        jQuery.fn.eo_wbc_filter_change = function(init_call = false) {\n" .
-	"            // do nothing on change\n" .
-	"            return;\n" .
-	"        }\n" .
-	"    } else {\n" .
-	"        setTimeout(override_flt_change_function, 500);\n" .
-	"    }\n" .
-	"    ////////////////////////////////////////\n" .
-	"}\n" .
-	"override_flt_change_function();\n" .
-	"\n" .
-	"function search_btn_click() {\n" .
-	"    var form = jQuery('form#eo_wbc_filter');\n" .
-	"    \n" .
-	"    window.location.href = shortflt_filter_setting__redirect_url + (shortflt_filter_setting__redirect_url.indexOf('?') == -1 ? '?' : '&') + form.serialize();\n" .
-	"}\n";
+	<?php }
+	$is_shortcode_filter_boolean = ($is_shortcode_filter ? 'true' : 'false');
+	$redirect_url = wbc()->options->get_option('shortflt_filter_setting', 'redirect_url', get_permalink(function_exists('wc_get_page_id') ? wc_get_page_id('shop') : woocommerce_get_page_id('shop')));
+
+	$inline_script =
+	    "var is_shortcode_filter = " . $is_shortcode_filter_boolean . ";\n" .
+	    "var shortflt_filter_setting__redirect_url = '" . $redirect_url . "';\n" .
+	    "\n" .
+	    "function override_flt_change_function() {\n" .
+	    "    // 27-05-2022 - @drashti\n" .
+	    "    // Add to be confirmed\n" .
+	    "    // window.document.splugins.wbc.filters.core.eo_wbc_filter_change_wrapper();\n" .
+	    "    if (typeof(jQuery.fn.eo_wbc_filter_change) != 'undefined' && jQuery.fn.eo_wbc_filter_change != undefined) {\n" .
+	    "        // ACTIVE_TODO we need to manage this when we upgrade shortcode filter for QCed version.\n" .
+	    "        jQuery.fn.eo_wbc_filter_change = function(init_call = false) {\n" .
+	    "            // do nothing on change\n" .
+	    "            return;\n" .
+	    "        }\n" .
+	    "    }\n" .
+	    "    else {\n" .
+	    "        setTimeout(override_flt_change_function, 500);\n" .
+	    "    }\n" .
+	    "}\n" .
+	    "override_flt_change_function();\n" .
+	    "\n" .
+	    "function search_btn_click() {\n" .
+	    "    var form = jQuery('form#eo_wbc_filter');\n" .
+	    "    window.location.href = shortflt_filter_setting__redirect_url + (shortflt_filter_setting__redirect_url.indexOf('?') == -1 ? '?' : '&') + form.serialize();\n" .
+	    "}\n";
+
 	wbc()->load->add_inline_script('', $inline_script, 'common');
+	

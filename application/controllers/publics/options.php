@@ -425,7 +425,7 @@ class Options extends \eo\wbc\controllers\publics\Controller {
 					
 					foreach ( $terms as $term ) {
 						if ( in_array( $term->slug, $options ) ) {
-							echo '<option value="' . esc_attr( $term->slug ) . '" ' . esc_attr(selected( sanitize_title( $args[ 'selected' ] ), $term->slug, false )) . '>' . apply_filters( 'woocommerce_variation_option_name', $term->name ) . '</option>';
+							echo '<option value="' . esc_attr( $term->slug ) . '" ' . esc_attr(selected( sanitize_title( $args[ 'selected' ] ), $term->slug, false )) . '>' . esc_html(apply_filters( 'woocommerce_variation_option_name', $term->name )) . '</option>';
 						}
 					}
 				} else {
@@ -712,7 +712,7 @@ class Options extends \eo\wbc\controllers\publics\Controller {
 						ob_start();
 						?>	
 							<script>
-								jQuery(".variations_form").before('<span id="wbc_variation_toggle" class="ui raised segment"><?php _e($toggle_text); ?><i class="caret up icon" style="text-align: center;line-height: 1em;"></i></span>');	
+								jQuery(".variations_form").before('<span id="wbc_variation_toggle" class="ui raised segment"><?php esc_html_e($toggle_text); ?><i class="caret up icon" style="text-align: center;line-height: 1em;"></i></span>');	
 							</script>
 						<?php
 						echo ob_get_clean();

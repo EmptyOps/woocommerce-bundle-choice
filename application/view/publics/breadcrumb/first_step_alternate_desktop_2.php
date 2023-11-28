@@ -31,7 +31,7 @@
                     $image = $woocommerce->plugin_url() . '/assets/images/placeholder.png';
                 }
             ?>
-                <img src='<?php esc_url_e($image); ?>' class='ui mini image' />
+                <img src='<?php _e(esc_url($image)); ?>' class='ui mini image' />
             <?php } ?>
         </div>
     </div>

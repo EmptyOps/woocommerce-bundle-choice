@@ -96,7 +96,7 @@ if ( ! class_exists( 'Configuration' ) ) {
 											'config_automation_link'=>array(
 												'label'=>'Click here for automated configuration and setup',
 												'type'=>'link',
-												'attr'=>array("href='".esc_url(admin_url('admin.php?page=eowbc&eo_wbc_view_auto_jewel=1&f='.$active_feature).)"'"),
+												'attr'=>array("href='".esc_url(admin_url('admin.php?page=eowbc&eo_wbc_view_auto_jewel=1&f='.$active_feature))."'"),
 												'class'=>array('secondary')	
 											),
 

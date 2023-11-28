@@ -6,7 +6,8 @@
 // Load assets first to avoid zaping effect. 
 // TODO here should not load instantly and follow the wp standard by using hook as well as setting last param to false to our load asset function. 
 // add_action( 'wp_enqueue_scripts',function(){ 
-if(false){
+
+if (false) {
 ?>
 <script type="text/javascript">
   if( typeof(jQuery.fn.accordion) === 'function' ) {
@@ -15,14 +16,17 @@ if(false){
     jQuery.fn.ui_slider = jQuery.fn.slider;
   }
 </script>
-<?php
+<?php 
 }
-  $inline_script = "if( typeof(jQuery.fn.accordion) === 'function' ) {
-    jQuery.fn.ui_accordion = jQuery.fn.accordion;
-    jQuery.fn.ui_modal = jQuery.fn.modal;
-    jQuery.fn.ui_slider = jQuery.fn.slider;
-  }";
-wbc()->load->add_inline_script('', $inline_script, 'common'); 
+  $inline_script =
+      "if (typeof(jQuery.fn.accordion) === 'function') {\n" .
+      "    jQuery.fn.ui_accordion = jQuery.fn.accordion;\n" .
+      "    jQuery.fn.ui_modal = jQuery.fn.modal;\n" .
+      "    jQuery.fn.ui_slider = jQuery.fn.slider;\n" .
+      "}\n";
+
+  wbc()->load->add_inline_script('', $inline_script, 'common');
+
   global $wp_customize;
   if(empty($wp_customize)){
     //wbc()->load->asset('css','fomantic/semantic.min', array(), "", true);
@@ -32,7 +36,7 @@ wbc()->load->add_inline_script('', $inline_script, 'common');
   wbc()->load->asset('js','publics/buttons', array(), "", true);
   wp_enqueue_script('jquery-ui-core');
 // },50);
-if(false){
+if (false) {
 ?>
 <script type="text/javascript">
   if( typeof(jQuery.fn.ui_accordion) === 'function' ) {
@@ -42,14 +46,17 @@ if(false){
   }
 </script>
 <?php
-  }
-  $inline_script = "if( typeof(jQuery.fn.ui_accordion) === 'function' ) {
-    jQuery.fn.accordion = jQuery.fn.ui_accordion;
-    jQuery.fn.modal = jQuery.fn.ui_modal;
-    jQuery.fn.slider = jQuery.fn.ui_slider;
-}";
+}
+$inline_script =
+    "if (typeof(jQuery.fn.ui_accordion) === 'function') {\n" .
+    "    jQuery.fn.accordion = jQuery.fn.ui_accordion;\n" .
+    "    jQuery.fn.modal = jQuery.fn.ui_modal;\n" .
+    "    jQuery.fn.slider = jQuery.fn.ui_slider;\n" .
+    "}\n";
+
 wbc()->load->add_inline_script('', $inline_script, 'common');
 ?>
+
 <!-- Created with Wordpress plugin - WooCommerce Product bundle choice -->
 <div class="ui modal align center tiny centered">
 <div class="ui header">              
@@ -78,7 +85,7 @@ wbc()->load->add_inline_script('', $inline_script, 'common');
 }
 </style>
 <?php
-if(false){
+if (false) {
 ?>
 <script>
 var eo_wbc_outer_container=undefined;
@@ -262,3 +269,5 @@ function eo_wbc_error_popup(type, msg) {
 }
 ";
 wbc()->load->add_inline_script('', $inline_script, 'common'); 
+?>
+
