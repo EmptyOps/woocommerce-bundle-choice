@@ -113,7 +113,12 @@ if(!class_exists('WBC_Loader')) {
 					    	-- including everything and the admin side also need to be tested in detail, since the setup wizard is affected due to version change so that needs to be tested in detail -- to h && -- to bk  && -- to a
 				     	-- all since the version change is affecting all the admin side layer enter admin panel and need to be tested -- to h && -- to bk  && -- to a
 				ACTIVE_TODO_OC_END*/     	
-				// echo '<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>';
+				if(false){
+					echo '<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>';
+				}
+	            wbc()->load->get_script_tag(array(
+	             'src'  => esc_url('https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js'),
+	            ));								
 				// -- aa jquery no wp_enqueue_scripts script no call kadhi nakhvano avse and extention mathi call karavyo se tena mate alag thi code mukvano avse -- to a
 				// add_action('wp_enqueue_scripts', function(){
 				// 	wp_enqueue_script( 'jquery' );
@@ -160,6 +165,12 @@ if(!class_exists('WBC_Loader')) {
 					if ($load_instantly) {
 						// ACTIVE_TODO aya woo-bundle and other extention na call ave se atle style tag mate wordpress nu function call karva nu avse tenu upgrade karva nu avse -- to a 04-11-2023 
 					    echo '<link rel="stylesheet" type="text/css" href="' . esc_url($_path) . '">';
+						
+					    // wbc()->load->enqueue_style('common', esc_url($_path));
+						// add_action('wp_enqueue_scripts', function () {
+						//     wp_enqueue_style('main-style', esc_url($_path));
+						// });
+
 					}
 
 					else {

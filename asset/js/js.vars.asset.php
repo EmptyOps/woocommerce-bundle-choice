@@ -179,6 +179,7 @@ add_action( ( !is_admin() ? 'wp_enqueue_scripts' : 'admin_enqueue_scripts'),func
 
 
 add_action('wp_footer',function(){               
+	
    ?>
    <script>
 		console.log('[js.vars.asset wp_footer]');
