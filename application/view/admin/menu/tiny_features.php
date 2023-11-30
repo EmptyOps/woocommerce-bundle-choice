@@ -1916,7 +1916,18 @@ wbc()->load->asset('js','admin/tiny-feature/specification');
 	.hide{
 		display: none !important;
 	}
-
+/*	.ui.toggle.checkbox input:checked~label:before {
+	    background-color: #2185d0!important;
+	}*/
+	.ui.toggle.checkbox label:before {
+	    background: rgb(0 0 0 / 20%) !important;
+	}
+	.ui.toggle.checkbox input:checked~label:after {
+	    box-shadow: 0 1px 2px 0 rgb(34 36 38 / 50%), 0 0 0 1px rgb(34 36 38 / 50%) inset !important;
+	}	
+	.ui.toggle.checkbox label:after {
+	    box-shadow: 0 1px 2px 0 rgba(34,36,38,.50),0 0 0 1px rgba(34,36,38,.50) inset !important;
+	}
 </style>
 <script type="text/javascript">
 

@@ -28,7 +28,7 @@ if(empty($image['extra_params_org']['type']) || $image['extra_params_org']['type
                 'child' => array(
                     array(
                         'type' => 'iframe',
-                        'src' => $image['image_video_src']/*$image['video_src']*/,
+                        'src' => $image['video_src'],
                         'attr' => array( 'width' => '454', 'height' => '454', 'frameborder' => '0', 'webkitallowfullscreen' => '', 'mozallowfullscreen' => '', 'allowfullscreen' => '','allow' => 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture' ),
                     ),
                 ),

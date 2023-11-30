@@ -286,21 +286,6 @@ class SP_WBC_Variations extends SP_Variations {
 
 		if($type == 'video_url') {
 
-			if(/*true or*/ isset( $props['extra_params_org']['embed_type'] ) && $props['extra_params_org']['embed_type'] === 'iframe' ){
-
-	            $video_url = $attachment_id;
-	            $url_trime = explode("?",$video_url)[0];
-	            $url_trime_split = explode("/",$url_trime);
-	            $playlist = end($url_trime_split);
-
-	            $props['image_video_src'] = esc_url( $attachment_id ).
-	                '?&playlist='.$playlist.
-	                (wbc()->options->get_option('tiny_features','tiny_features_video_mute') == 'tiny_features_video_mute' ? '&mute=1' : '').
-	                (wbc()->options->get_option('tiny_features','tiny_features_video_auto_play') == 'tiny_features_video_auto_play' ? '&autoplay=1' : '').
-	                apply_filters('wbc_vsp_video_loop_option','', 'youtube_url')
-	                ;  
-			}
-
 			if ( /*false and */$props['extra_params_org']['type'] == 'video' and isset( $props['extra_params_org']['embed_type'] ) && $props['extra_params_org']['embed_type'] === 'video' ) {
 
 	            $props['video_attr'] = array('preload'=>'auto', 'controlsList'=>'nodownload'/*,'poster'=>'http://localhost/demo/wp-content/uploads/2023/02/giphy-1.gif'*/);
@@ -313,13 +298,29 @@ class SP_WBC_Variations extends SP_Variations {
 	                $props['video_attr'] = array_merge($props['video_attr'], array('muted' => ''));
 	            }
 	            
-	            if(wbc()->options->get_option('tiny_features','tiny_features_video_loop') == 'tiny_features_video_loop') {
-	                $props['video_attr'] = apply_filters('wbc_vsp_video_loop_option',$props['video_attr'], 'video_url');
-	            }
+                $props['video_attr'] = apply_filters('wbc_vsp_video_attrs',$props['video_attr']);
 
 			}
 
 			$props['video_src']   = esc_url( $attachment_id );
+
+			if(strpos($props['video_src'],'youtube.com') !== FALSE){
+	           
+	            $video_url = $attachment_id;
+	            $url_trime = explode("?",$video_url)[0];
+	            $url_trime_split = explode("/",$url_trime);
+	            $playlist = end($url_trime_split);
+
+	            $props['video_src'] = esc_url( $attachment_id ).
+	                '?&playlist='.$playlist.
+	                (wbc()->options->get_option('tiny_features','tiny_features_video_mute') == 'tiny_features_video_mute' ? '&mute=1' : '').
+	                (wbc()->options->get_option('tiny_features','tiny_features_video_auto_play') == 'tiny_features_video_auto_play' ? '&autoplay=1' : '')
+	                ;  
+			}
+			
+			$props['video_src'] .= apply_filters('wbc_vsp_video_url_extra_perams','');
+		
+
 			return $props;
 
 		}
