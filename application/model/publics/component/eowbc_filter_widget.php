@@ -2956,10 +2956,10 @@ class EOWBC_Filter_Widget {
 					jQuery("#help_modal").find(".content").html('');	
 					_help_text = jQuery(this).data('help');
 					jQuery("#help_modal").find(".content").html(_help_text);
-					jQuery("#help_modal").modal('show');
+					jQuery("#help_modal").semanticModal('show');
 				});
 				jQuery(document).on('click',"#help_modal .close.icon",function(){
-					jQuery("#help_modal").modal('hide');
+					jQuery("#help_modal").semanticModal('hide');
 				});
 			});
 		</script>
