@@ -111,8 +111,11 @@ else {
         <!-- END header -->
 
       <?php 
-      wbc()->load->asset('css','fomantic/semantic.min',array(),'2.8.1',true);
-      wbc()->load->asset('js','fomantic/semantic.min',array('jquery'),'2.8.1',true);
+      // -- commented on 01-12-2023 @a
+      // wbc()->load->asset('css','fomantic/semantic.min',array(),'2.8.1',true);
+      // wbc()->load->asset('js','fomantic/semantic.min',array('jquery'),'2.8.1',true);
+      wbc()->load->asset('js','',array('jquery'),'',true);
+      wbc()->load->built_in_asset('direct_load_semantic');
     }
 }
 

@@ -66,16 +66,24 @@ if(!class_exists('WBC_Loader')) {
 					wbc()->load->asset('css','https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css',array(),"",true,true,null,null,false,true,null,true);
 					wbc()->load->asset('js','https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js', wbc()->common->current_theme_key() != "themes___purple_theme" ? array():array('jquery'),"",true,true,null,null,false,true,null,true);
 					wbc()->load->asset('js','https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js',wbc()->common->current_theme_key() != "themes___purple_theme" ? array():array('jquery'),"",true,true,null,null,false,true,null,true);	
-					break;		
+					break;
+				case 'direct_load_semantic':		
+		            // wbc()->load->enqueue_style('fomantic-semantic.min',constant('EOWBC_ASSET_URL').'css/fomantic/semantic.min.css');					
+		            echo '<link rel="stylesheet" type="text/css" href="'.constant('EOWBC_ASSET_URL').'css/fomantic/semantic.min.css'.'">';	            
+		            wbc()->load->get_script_tag(array(
+		             'src'  => constant('EOWBC_ASSET_URL').'js/fomantic/semantic.min.js',
+		            ));		            
+					break;							
 				case 'semantic':
+
 					//ACTIVE_TODO update code below to use wbc()->load->asset function call insted of below dairact wp api call.
 					add_action( 'wp_enqueue_scripts',function() { 
-		        	
-		            wp_register_style('fomantic-semantic.min',constant('EOWBC_ASSET_URL').'css/fomantic/semantic.min.css');
-		            wp_enqueue_style( 'fomantic-semantic.min');
-		            wp_register_script('fomantic-semantic.min',constant('EOWBC_ASSET_URL').'js/fomantic/semantic.min.js',array('jquery'),false);    
-		            wp_enqueue_script( 'fomantic-semantic.min');        
-		        },100);	
+			        	
+			            wp_register_style('fomantic-semantic.min',constant('EOWBC_ASSET_URL').'css/fomantic/semantic.min.css');
+			            wp_enqueue_style( 'fomantic-semantic.min');
+			            wp_register_script('fomantic-semantic.min',constant('EOWBC_ASSET_URL').'js/fomantic/semantic.min.js',array('jquery'),false);    
+			            wp_enqueue_script( 'fomantic-semantic.min');        
+		        	},100);	
 					break;
 
 				case 'react':
@@ -163,14 +171,10 @@ if(!class_exists('WBC_Loader')) {
 					}
 
 					if ($load_instantly) {
+
 						// ACTIVE_TODO aya woo-bundle and other extention na call ave se atle style tag mate wordpress nu function call karva nu avse tenu upgrade karva nu avse -- to a 04-11-2023 
 					    echo '<link rel="stylesheet" type="text/css" href="' . esc_url($_path) . '">';
 						
-					    // wbc()->load->enqueue_style('common', esc_url($_path));
-						// add_action('wp_enqueue_scripts', function () {
-						//     wp_enqueue_style('main-style', esc_url($_path));
-						// });
-
 					}
 
 					else {
