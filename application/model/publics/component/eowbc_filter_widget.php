@@ -3074,7 +3074,8 @@ class EOWBC_Filter_Widget {
 				// and 
 				// !empty(wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','filter_setting_advance_second_category',false))
 
-				sizeof($filter_sets_data) >= 2
+				// sizeof($filter_sets_data) >= 2
+				sizeof($filter_sets_data) >= 1
 			) {
 			
 			// --- aa code if condition ni bar muki ne loop chalavu se ---

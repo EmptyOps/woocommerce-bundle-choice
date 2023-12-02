@@ -2294,7 +2294,10 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 			if(min_value.includes(postfix)){
 				min_value = min_value.slice(0,-1*postfix.length);
 			}
-			if(min_value.includes(postfix)){
+			if(max_value.includes(postfix)){
+
+				// console.log('filters [common_slider_change_event] if 2 if 2');
+				
 				max_value = max_value.slice(0,-1*postfix.length);
 			}
 		}

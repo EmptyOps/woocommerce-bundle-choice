@@ -519,6 +519,7 @@ if( is_product() ) {
 	table.variations.ui.raised.segment .ui.mini.images .variable-item.image .variable-item-span-button {
 	    padding: 0 5px;
 	}	
+	
 </style>
 
 <style type="text/css">
@@ -929,11 +930,31 @@ console.log('is_shop_css');
             list-style-type: none;
         }
 
+/*        -->> Ooops! error mate ul ni csss 30-10-2023 Nayan*/
+        .ui.grid.centered {
+    		margin: auto;
+	}
+	.single_add_to_cart_button.button {
+   	 	margin-bottom: 5px;
+	}
+	.ui.row {
+    		justify-content: center;
+	}
+	span.ui.inverted.text {
+    		margin-bottom: 10px;
+	}
+	@media(max-width:480px){
+	span.ui.inverted.text {
+    		margin-left: 30px;
+	}	
+	}
+
 		/*form.variations_form table.variations tbody td select {
 		    display: none !important;
 		}*/
 
 	</style>
+
 
 	<!--button-->
 	<style>
@@ -1443,6 +1464,28 @@ $bg_hover_color = wbc()->options->get_option('tiny_features',$spui_is_product_ca
 
 // ob_start();
 ?>
+
+<!-- advance options icon up down 19-10-23 -->
+<style>
+	.sp-advance {
+    		transform: rotate(-180deg) !important;
+		padding-bottom:7px !important;   
+	}
+	.sp-advance-collapse{
+   		transform: rotate(0deg) !important;
+		padding-bottom:3px !important;   
+	}
+</style>
+<script>
+	jQuery(document).ready(function(){
+		jQuery('span').on("click", function (event) {
+	   jQuery('.material-icons').toggleClass('sp-advance');
+	   jQuery('.material-icons').toggleClass('sp-advance-collapse');
+	});
+	});
+</script>
+
+
 <style type="text/css">
 	/*.ui.mini.images .variable-item.image{
 		width: auto;						
@@ -1600,7 +1643,41 @@ $bg_hover_color = wbc()->options->get_option('tiny_features',$spui_is_product_ca
 	.hide{
 		display: none !important;
 	}
+
+	.variable-items-wrapper .variable-item {
+   		 width: auto !important;
+    		height: auto !important;
+	}
+	.spui_engagment_product_change_color ul li {
+	    transform: translateY(11em) !important;
+	}
+	body .spui_button_widget li.spui_button_variable_item.selected {
+	    box-shadow: none !important;
+	    -webkit-box-shadow:none !important;
+	}
+	.spui_button_widget li.spui_button_variable_item:hover{
+		 box-shadow: none !important;
+	    -webkit-box-shadow:none !important;	
+	}
 </style>
+
+<?php
+if(wbc()->common->current_theme_key() != 'themes___purple_theme'){
+?>
+	<style type="text/css">
+		a.ui.inverted.secondary.single_add_to_cart_button.button.alt {
+    			width: 100%;
+    			text-align: center;
+    			margin-bottom: 5px;
+		}
+		a.ui.grey.button.single_add_to_cart_button.alt {
+    			width: 100%;
+   			text-align: center;
+		}
+	</style>
+<?php
+}
+?>
 <script>
 	jQuery(document).ready(function($){
 		jQuery(".dropdown").dropdown().on('change',function(){

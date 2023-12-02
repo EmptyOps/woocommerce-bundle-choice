@@ -153,7 +153,7 @@ class WooCommerce_Bundle_Choice_Bootstrap {
 
 					require_once constant( strtoupper( sp_baa()->SP_Extension()->singleton_function() ).'_DIRECTORY' ).'application/library/shared/submodule/sp_ssm_themes/application/controllers/ajax/ui-builder-build-data-controls-type-resolver.php';
 				}
-
+				
 			} else {
 
 				require_once constant('EOWBC_DIRECTORY').'application/controllers/ajax/common_email_handler.php';
