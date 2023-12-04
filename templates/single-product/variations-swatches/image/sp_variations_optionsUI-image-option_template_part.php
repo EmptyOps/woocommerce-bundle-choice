@@ -13,6 +13,7 @@
 $slug_or_option = is_object($term) ? $term->slug : $term;
 $template = array(
     'type' => 'img',
+    'class' => $woo_dropdown_attribute_html_data['class'].' '.$woo_dropdown_attribute_html_data['options_loop_class'][$slug_or_option],
     'src' => esc_url( $variable_item_data['options_loop_image'][$slug_or_option]/*$variable_item_data['image_url']*/ ),
     'attr' => array( 'alt' => esc_attr( $term->name ), 'width' => '40', 'height' => '40' ),
 );
