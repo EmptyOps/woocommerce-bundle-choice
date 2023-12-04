@@ -1161,6 +1161,29 @@ class WBC_Common {
 		return $countries_list;
 	}
 
+	public function get_url_part($variation_id) {
+
+	    $variation_data = new WC_Product_Variation($variation_id);
+
+	    $attributes = $variation_data->get_variation_attributes();
+
+	    $link_parts = array();
+	    $attribute_keys = array();
+
+	    foreach ($attributes as $attribute_name_v => $attribute_value) {
+	        $attribute_name = str_replace('attribute_', '', $attribute_name_v);
+	        $attribute_keys[] = $attribute_name;
+	        $link_parts[] = 'checklist_'.$attribute_name.'='.$attribute_value;
+	    }
+
+	    $attribute_keys_value = implode(',', $attribute_keys);
+	    $link_parts[] = "_attribute=,$attribute_keys_value";
+
+	    $link_part = implode('&', $link_parts);
+
+	    return $link_part;
+	}
+
 }
 
 
@@ -1299,5 +1322,11 @@ function wbc_is_mobile_by_page_sections($key = null, $is_other_theme = false) {
 function wbc_placeholder_img_src() {
 
 	return wbc()->common->placeholder_img_src();
+
+}
+
+function wbc_get_url_part($variation_id) {
+
+	return wbc()->common->get_url_part($variation_id);
 
 }

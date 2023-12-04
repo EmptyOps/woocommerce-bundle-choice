@@ -333,6 +333,7 @@ add_action('wp_footer',function(){
 			window.setTimeout(function(){
 				/*global wc_add_to_cart_variation_params */
 				;(function ( $, window, document, undefined ) {
+						console.log('--A_OFF show_variation--');
 
 						/**
 						 * VariationForm class which handles variation forms and attributes.
@@ -998,7 +999,7 @@ add_action('wp_footer',function(){
 						$.fn.wc_variation_form = function() {
 							
 							console.log('A_OFF show_variation [wc_variation_form]');
-							// console.log(this);
+							console.log(this);
 
 							new VariationForm( this );
 							return this;
@@ -1163,6 +1164,8 @@ add_action('wp_footer',function(){
 						};
 
 						$(function() {
+							// console.log('A_OFF wc_add_to_cart_variation_params');
+							// console.log(wc_add_to_cart_variation_params);
 							if ( typeof wc_add_to_cart_variation_params !== 'undefined' ) {
 								$( '.variations_form' ).each( function() {
 									// console.log('A_OFF show_variation [load] loop');
@@ -1254,6 +1257,7 @@ add_action('wp_footer',function(){
 					window.setTimeout(function(){
 					/*global wc_add_to_cart_variation_params */
 					;(function ( $, window, document, undefined ) {
+						console.log('--A_ON show_variation--');
 						/**
 						 * VariationForm class which handles variation forms and attributes.
 						 */
@@ -1908,7 +1912,7 @@ add_action('wp_footer',function(){
 						$.fn.wc_variation_form = function() {
 							
 							console.log('A_ON show_variation [wc_variation_form]');
-							// console.log(this);
+							console.log(this);
 
 							new VariationForm( this );
 							return this;
@@ -2073,6 +2077,8 @@ add_action('wp_footer',function(){
 						};
 
 						$(function() {
+							// console.log('A_ON wc_add_to_cart_variation_params');
+							// console.log(wc_add_to_cart_variation_params);
 							if ( typeof wc_add_to_cart_variation_params !== 'undefined' ) {
 								$( '.variations_form' ).each( function() {
 									// console.log('A_ON show_variation [load] loop');
