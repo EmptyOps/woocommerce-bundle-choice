@@ -2243,7 +2243,8 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
 				// purple theme mate aa permenent alag if se tenu slider alag ave se atle. So aa permanant if condition se and koi temp. temparary if nathi.
 				if(window.document.splugins.common.current_theme_key != 'themes___purple_theme') {
-					jQuery(e).slider(_params);
+					// jQuery(e).slider(_params);
+					jQuery(e).semanticSlider(_params);
 				}
 			}else{
 				
@@ -2301,7 +2302,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
 		if(window.document.splugins.common.current_theme_key != 'themes___purple_theme') {
 
-			jQuery("#text_slider_"+jQuery(e).attr('data-slug')).slider("set rangeValue",min_value,max_value);
+			jQuery("#text_slider_"+jQuery(e).attr('data-slug')).semanticSlider("set rangeValue",min_value,max_value);
 		}else{
 			
 			var sliderData = jQuery(e).data("ionRangeSlider").result;
@@ -2322,7 +2323,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 	    	for (let i = 0; i < slider.element.length; i++) {
 
 				console.log(slider.params[i]);	
-				jQuery(slider.element[i]).slider(slider.params[i]);
+				jQuery(slider.element[i]).semanticSlider(slider.params[i]);
 			}	
 
 		});
@@ -3748,7 +3749,7 @@ if( typeof(eo_wbc_object) != 'undefined'){
 		console.log(selector);
 		console.log(first);
 		console.log(second);
-		jQuery(".ui.slider[data-slug='"+selector+"']").slider('set rangeValue',first,second);
+		jQuery(".ui.slider[data-slug='"+selector+"']").semanticSlider('set rangeValue',first,second);
 		if(jQuery("[name='_attribute']").val().includes(selector)) {					    			
 			_values=jQuery("[name='_attribute']").val().split(',')
 			_index=_values.indexOf(selector)
@@ -3763,7 +3764,7 @@ if( typeof(eo_wbc_object) != 'undefined'){
 	function reset_price(e,min,max) {
 		e.preventDefault();
 		e.stopPropagation()
-		jQuery(".ui.slider[data-slug='price']").slider('set rangeValue',min,max);
+		jQuery(".ui.slider[data-slug='price']").semanticSlider('set rangeValue',min,max);
 		return false;	
 	}
 
