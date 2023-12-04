@@ -35,30 +35,7 @@ class SP_Feed extends Eowbc_Base_Model_Publics {
 
 	protected function sidebars_widgets(){
 
-        // /*Hide sidebar and make content area full width.*/
-        // if(apply_filters('eowbc_filter_sidebars_widgets',true)){
-        //     add_filter( 'sidebars_widgets',function($sidebars_widgets ) {
-        //         return array( false );
-        //     });
-        // }                
-        // /*End --Hide sidebar and make content area full width.*/
-
-        $enable_side_bar_widget = array();
-        $enable_side_bar_widget['enable_side_bar_widget'] = true;
-
-        $enable_side_bar_widget = unserialize(wbc()->options->get_option('setting_status_advanced_config','enable_side_bar_widget',/*'a:0:{}'*/serialize($enable_side_bar_widget)));
-
-        /*Hide sidebar and make content area full width.*/
-        if(empty($enable_side_bar_widget['enable_side_bar_widget'])) {
-        	
-            if(apply_filters('eowbc_filter_sidebars_widgets',true)){
-
-                add_filter( 'sidebars_widgets',function($sidebars_widgets ) {
-                    return array( false );
-                });
-            }    
-        }            
-        /*End --Hide sidebar and make content area full width.*/
+        return parent::instance()->sidebars_widgets();
 
 	}
 

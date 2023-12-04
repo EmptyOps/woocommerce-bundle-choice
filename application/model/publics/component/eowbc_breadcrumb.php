@@ -115,6 +115,7 @@ class EOWBC_Breadcrumb
         //hiren added on 03-06-2020, as replacement to global loading of old version
         self::eo_wbc_enque_asset();
 
+        // ACTIVE_TODO the action hook wbc_before_breadcrumb_widget_core added in category class is stadard now soo below hook might be unnassasary and since it is duplicate so after confirming the depandancy in all extentions and moving it to hook wbc_before_breadcrumb_widget_core lets comment below hook. Lets do it by second revision. -- to h && -- to a
         do_action('wbc_before_breadcrumb_widget');
 
         /**
@@ -133,6 +134,7 @@ class EOWBC_Breadcrumb
             /*return*/$return_value = self::eo_wbc_breadcrumb_desktop($step,$begin);
         }
 
+        // ACTIVE_TODO the action hook wbc_after_breadcrumb_widget_core added in category class is stadard now soo below hook might be unnassasary and since it is duplicate so after confirming the depandancy in all extentions and moving it to hook wbc_after_breadcrumb_widget_core lets comment below hook. Lets do it by second revision. -- to h && -- to a
         do_action('wbc_after_breadcrumb_widget');
 
         return $return_value;
