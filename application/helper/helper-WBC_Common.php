@@ -1161,23 +1161,33 @@ class WBC_Common {
 		return $countries_list;
 	}
 
-	public function get_url_part($variation_id) {
+	public function get_variation_url_part($variation_id,$attributes) {
 
-	    $variation_data = new WC_Product_Variation($variation_id);
-
-	    $attributes = $variation_data->get_variation_attributes();
-
-	    $link_parts = array();
-	    $attribute_keys = array();
-
-	    foreach ($attributes as $attribute_name_v => $attribute_value) {
-	        $attribute_name = str_replace('attribute_', '', $attribute_name_v);
-	        $attribute_keys[] = $attribute_name;
-	        $link_parts[] = 'checklist_'.$attribute_name.'='.$attribute_value;
+	    if(!empty($variation_id) && empty($attributes)){
+	    
+	    	$variation_data = new WC_Product_Variation($variation_id);	
+			
+			if(!empty($variation_data)){
+			
+			    $attributes = $variation_data->get_variation_attributes();
+			}    
 	    }
 
-	    $attribute_keys_value = implode(',', $attribute_keys);
-	    $link_parts[] = "_attribute=,$attribute_keys_value";
+	    $link_parts = array();
+	   	
+	   	if(!empty($attributes)){
+	   		
+		    $attribute_keys = array();
+
+		    foreach ($attributes as $attribute_name_v => $attribute_value) {
+		        $attribute_name = str_replace('attribute_', '', $attribute_name_v);
+		        $attribute_keys[] = $attribute_name;
+		        $link_parts[] = 'checklist_'.$attribute_name.'='.$attribute_value;
+		    }
+
+		    $attribute_keys_value = implode(',', $attribute_keys);
+		    $link_parts[] = "_attribute=,$attribute_keys_value";
+	   	}
 
 	    $link_part = implode('&', $link_parts);
 
@@ -1325,8 +1335,8 @@ function wbc_placeholder_img_src() {
 
 }
 
-function wbc_get_url_part($variation_id) {
+function wbc_get_variation_url_part($variation_id,$attributes=array()) {
 
-	return wbc()->common->get_url_part($variation_id);
+	return wbc()->common->get_variation_url_part($variation_id,$attributes);
 
 }

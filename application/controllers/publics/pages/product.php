@@ -1028,10 +1028,10 @@ class Product extends \eo\wbc\system\core\publics\Eowbc_Base_Model_Publics {
 
                     if(strpos($url,'?')===false) {
                         // $url = $url.'?variation_id='.$eo_wbc_sets['SECOND'][2];
-                        $url = $url.'?'.wbc_get_url_part($eo_wbc_sets['SECOND'][2]);
+                        $url = $url.'?'.wbc_get_variation_url_part($eo_wbc_sets['SECOND'][2],$eo_wbc_sets['SECOND']['variation']);
                     } else {
                         // $url = $url.'&variation_id='.$eo_wbc_sets['SECOND'][2];
-                        $url = $url.'&'.wbc_get_url_part($eo_wbc_sets['SECOND'][2]);
+                        $url = $url.'&'.wbc_get_variation_url_part($eo_wbc_sets['SECOND'][2],$eo_wbc_sets['SECOND']['variation']);
                     }
                 }
             }
