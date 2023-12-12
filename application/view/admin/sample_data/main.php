@@ -296,157 +296,166 @@ box-shadow: none;">
 	</script> 
 	<?php 
 	} 
-		$main_categories_size = sizeof($_category);
-		$cat_value = $sample_data_obj->get_model()->get_categories_size();
-		$attr_value = $sample_data_obj->get_model()->get_attributes_size();
+	$main_categories_size = sizeof($_category);
+	$cat_value = $sample_data_obj->get_model()->get_categories_size();
+	$attr_value = $sample_data_obj->get_model()->get_attributes_size();
+	$wp_create_nonce_sample_data_jewelry = wp_create_nonce('sample_data_jewelry');
+	$apply_filters_eowbc_catattr_sample_data_resolver_path = apply_filters('eowbc_catattr_sample_data_resolver_path', '');
 
-		$inline_script =
-		    "jQuery(document).ready(function(\$) {            \n" .
-		    "    let cat_value = 0;\n" .
-		    "    let attr_value = 0;\n" .
-		    "    let process_flag = '';\n" .
-		    "    let btn_label = '';\n" .
-		    "    let btn_total = 0;\n" .
-		    "    let main_categories_size = " . $main_categories_size . ";\n" .
-		    "    \n" .
-		    "    function eowbc_add_catat(index){\n" .
-		    "        if(process_flag=='cat' && index>=cat_value){\n" .
-		    "            var msg = 'There is some error while finishing the category creation process, please contact Sphere Plugins Support for a quick fix on this if the problem persist.';\n" .
-		    "            \n" .
-		    "            var data = {	\n" .
-		    "                '_wpnonce': '" . wp_create_nonce('sample_data_jewelry') . "',\n" .
-		    "                'action':'eowbc_ajax',\n" .
-		    "                'resolver':'sample_data/catattr',\n" .
-		    "                'resolver_path':'" . apply_filters('eowbc_catattr_sample_data_resolver_path', '') . "', \n" .
-		    "                'feature_key':'" . $feature_key . "',\n" .
-		    "                'type':'after_cat_created',\n" .
-		    "            };\n" .
-		    "            jQuery.ajax({\n" .
-		    "                url:eowbc_object.admin_url,\n" .
-		    "                type: 'POST',\n" .
-		    "                data: data,\n" .
-		    "                beforeSend:function(xhr){\n" .
-		    "                },\n" .
-		    "                success:function(result,status,xhr){\n" .
-		    "                    window.location.href='" . $next_url . "';\n" .
-		    "                    return false;\n" .
-		    "                },\n" .
-		    "                error:function(xhr,status,error){\n" .
-		    "                    eowbc_toast_common( 'error', msg );\n" .
-		    "                    return false;\n" .
-		    "                },\n" .
-		    "                complete:function(xhr,status){\n" .
-		    "                    return false;\n" .
-		    "                }\n" .
-		    "            });\t\n" .
-		    "            return false;\n" .
-		    "        } else if(process_flag=='attr' && index>=attr_value) {\n" .
-		    "            var msg = 'There is some error while finishing the attribute creation process, please contact Sphere Plugins Support for a quick fix on this if the problem persist.';\n" .
-		    "            \n" .
-		    "            var data = {	\n" .
-		    "                '_wpnonce': '" . wp_create_nonce('sample_data_jewelry') . "',\n" .
-		    "                'action':'eowbc_ajax',\n" .
-		    "                'resolver':'sample_data/catattr',\n" .
-		    "                'resolver_path':'" . apply_filters('eowbc_catattr_sample_data_resolver_path', '') . "',\n" .
-		    "                'feature_key':'" . $feature_key . "',\n" .
-		    "                'type':'after_attr_created',\n" .
-		    "            };\n" .
-		    "            jQuery.ajax({\n" .
-		    "                url:eowbc_object.admin_url,\n" .
-		    "                type: 'POST',\n" .
-		    "                data: data,\n" .
-		    "                beforeSend:function(xhr){\n" .
-		    "                },\n" .
-		    "                success:function(result,status,xhr){\n" .
-		    "                    window.location.href='" . $next_url . "';\n" .
-		    "                    return false;\n" .
-		    "                },\n" .
-		    "                error:function(xhr,status,error){\n" .
-		    "                    eowbc_toast_common( 'error', msg );\n" .
-		    "                    return false;\n" .
-		    "                },\n" .
-		    "                complete:function(xhr,status){\n" .
-		    "                    return false;\n" .
-		    "                }\n" .
-		    "            });\n" .
-		    "            return false;\n" .
-		    "        }\n" .
-		    "        \n" .
-		    "        jQuery(\".button.button-primary.button-hero.action.disabled\").val(\"Adding \"+(index+1)+\" of \"+btn_total+\" \"+btn_label);\n" .
-		    "        \n" .
-		    "        let label = '';\n" .
-		    "        let value = '';\n" .
-		    "        let field_name = jQuery(\"[name^='\"+process_flag+\"_\"+index+\"']:checkbox:checked\");\n" .
-		    "        let field_label = jQuery(\"[name^='\"+process_flag+\"_value_\"+index+\"']:not([value=''])\");\n" .
-		    "        \n" .
-		    "        if(field_name.length>0 && field_label.length>0 && jQuery(field_label[0]).val().trim()!=''){\n" .
-		    "            value = jQuery(field_name[0]).val();\n" .
-		    "            label = jQuery(field_label[0]).val();\n" .
-		    "        } \n" .
-		    "        else {\n" .
-		    "            // do not skip. If the name is not provided default will be used since we are going to disable checkboxes which means we will add all the cats and attributes presented.\n" .
-		    "            //eowbc_add_catat(index+1);\n" .
-		    "        }\n" .
-		    "        \n" .
-		    "        var data = {	\n" .
-		    "            '_wpnonce': '" . wp_create_nonce('sample_data_jewelry') . "',\n" .
-		    "            'action':'eowbc_ajax',\n" .
-		    "            'resolver':'sample_data/catattr',\n" .
-		    "            'resolver_path':'" . apply_filters('eowbc_catattr_sample_data_resolver_path', '') . "',\n" .
-		    "            'feature_key':'" . $feature_key . "',\n" .
-		    "            'label':label,\n" .
-		    "            'value':value,\n" .
-		    "            'index':index,\n" .
-		    "            'type':process_flag,\n" .
-		    "        };\n" .
-		    "        \n" .
-		    "        if( process_flag == 'cat' ) {\n" .
-		    "            // pass all main categories so that name can be read, since there are child also involved its hard to maintain index otherwise\n" .
-		    "            for (var mci = 0; mci < main_categories_size; mci++) {\n" .
-		    "                data['cat_value_'+mci] = jQuery(\"[name='cat_value_\"+mci+\"']\").val();\n" .
-		    "            }\n" .
-		    "        }\n" .
-		    "        \n" .
-		    "        jQuery.post('" . admin_url('admin-ajax.php') . "', data, function(response) {\n" .
-		    "            var resjson = jQuery.parseJSON(response);\n" .
-		    "            if( typeof(resjson[\"type\"]) != undefined && resjson[\"type\"] == \"success\" ){\n" .
-		    "                eowbc_add_catat(++index);                    \n" .
-		    "            } else {\n" .
-		    "                var type = (typeof(resjson[\"type\"]) != undefined ? resjson[\"type\"] : 'error');\n" .
-		    "                var msg = (typeof(resjson[\"msg\"]) != undefined && resjson[\"msg\"] != \"\" ? resjson[\"msg\"] : `Failed! Please check Logs page for for more details.`);\n" .
-		    "                eowbc_toast_common( type, msg );\n" .
-		    "            }  \n" .
-		    "        });\n" .
-		    "    }   \n" .
-		    "    \n" .
-		    "    \$(\".button.button-primary.button-hero.action\").on('click',function(e){\n" .
-		    "        e.stopPropagation();\n" .
-		    "        e.preventDefault();\n" .
-		    "        if(!\$(this).hasClass('disabled')) {\n" .
-		    "            \$(\".button.button-hero.action:not(.disabled)\").toggleClass('disabled');\n" .
-		    "            \n" .
-		    "            cat_value = jQuery(\"[name^='cat_']:checkbox:checked\").length;\n" .
-		    "            attr_value = jQuery(\"[name^='attr_']:checkbox:checked\").length;\n" .
-		    "            \n" .
-		    "            if(cat_value>0){\n" .
-		    "                process_flag = 'cat';\n" .
-		    "                btn_label = 'Categories';\n" .
-		    "                main_categories_size = " . $main_categories_size . ";\n" .
-		    "                cat_value = " . $cat_value . ";\n" .
-		    "                btn_total = cat_value;\n" .
-		    "            } else if(attr_value>0){\n" .
-		    "                process_flag = 'attr';\n" .
-		    "                btn_label = 'Attributes';\n" .
-		    "                attr_value = " . $attr_value . ";\n" .
-		    "                btn_total = attr_value;\n" .
-		    "            }\n" .
-		    "            \n" .
-		    "            eowbc_add_catat(0);\n" .
-		    "        }                \n" .
-		    "        return false;\n" .
-		    "    });\n" .
-		    "});\n";
-		wbc()->load->add_inline_script('', $inline_script, 'common');
+	$inline_script =
+	    "jQuery(document).ready(function(\$) {            \n" .
+	    "    \n" .
+	    "    \n" .
+	    "    let cat_value = 0;\n" .
+	    "    let attr_value = 0;\n" .
+	    "    let process_flag = '';\n" .
+	    "    \n" .
+	    "    let btn_label = '';\n" .
+	    "    let btn_total = 0;\n" .
+	    "    \n" .
+	    "    let main_categories_size = 0;\n" .
+	    "    \n" .
+	    "    \n" .
+	    "    function eowbc_add_catat(index){\n" .
+	    "    \n" .
+	    "        if(process_flag=='cat' && index>=cat_value){\n" .
+	    "            var msg = 'There is some error while finishing the category creation process, please contact Sphere Plugins Support for a quick fix on this if the problem persist.';\n" .
+	    "            \n" .
+	    "            //step 2 redirect;\n" .
+	    "            var data = {	\n" .
+	    "                '_wpnonce': '" . $wp_create_nonce_sample_data_jewelry . "',\n" .
+	    "                'action':'eowbc_ajax',\n" .
+	    "                'resolver':'sample_data/catattr',\n" .
+	    "                'resolver_path':'" . $apply_filters_eowbc_catattr_sample_data_resolver_path . "', \n" .
+	    "                'feature_key':'" . $feature_key . "',\n" .
+	    "                'type':'after_cat_created',\n" .
+	    "            };\n" .
+	    "            jQuery.ajax({\n" .
+	    "                url:eowbc_object.admin_url,\n" .
+	    "                type: 'POST',\n" .
+	    "                data: data,\n" .
+	    "                beforeSend:function(xhr){\n" .
+	    "                },\n" .
+	    "                success:function(result,status,xhr){\n" .
+	    "                    window.location.href='" . $next_url . "';\n" .
+	    "                    return false;\n" .
+	    "                },\n" .
+	    "                error:function(xhr,status,error){\n" .
+	    "                    eowbc_toast_common( 'error', msg );\n" .
+	    "                    return false;\n" .
+	    "                },\n" .
+	    "                complete:function(xhr,status){\n" .
+	    "                    return false;\n" .
+	    "                }\n" .
+	    "            });\t\n" .
+	    "            return false;\n" .
+	    "        } else if(process_flag=='attr' && index>=attr_value) {\n" .
+	    "            var msg = 'There is some error while finishing the attribute creation process, please contact Sphere Plugins Support for a quick fix on this if the problem persist.';\n" .
+	    "            \n" .
+	    "            var data = {	\n" .
+	    "                '_wpnonce': '" . $apply_filters_eowbc_catattr_sample_data_resolver_path . "',\n" .
+	    "                'action':'eowbc_ajax',\n" .
+	    "                'resolver':'sample_data/catattr',\n" .
+	    "                'resolver_path':'" . $apply_filters_eowbc_catattr_sample_data_resolver_path . "',\n" .
+	    "                'feature_key':'" . $feature_key . "',\n" .
+	    "                'type':'after_attr_created',\n" .
+	    "            };\n" .
+	    "            jQuery.ajax({\n" .
+	    "                url:eowbc_object.admin_url,\n" .
+	    "                type: 'POST',\n" .
+	    "                data: data,\n" .
+	    "                beforeSend:function(xhr){\n" .
+	    "                },\n" .
+	    "                success:function(result,status,xhr){\n" .
+	    "                    window.location.href='" . $next_url . "';\n" .
+	    "                    return false;\n" .
+	    "                },\n" .
+	    "                error:function(xhr,status,error){\n" .
+	    "                    eowbc_toast_common( 'error', msg );\n" .
+	    "                    return false;\n" .
+	    "                },\n" .
+	    "                complete:function(xhr,status){\n" .
+	    "                    return false;\n" .
+	    "                }\n" .
+	    "            });\n" .
+	    "            return false;\n" .
+	    "        }\n" .
+	    "        \n" .
+	    "        jQuery(\".button.button-primary.button-hero.action.disabled\").val(\"Adding \"+(index+1)+\" of \"+btn_total+\" \"+btn_label);\n" .
+	    "        \n" .
+	    "        let label = '';\n" .
+	    "        let value = '';\n" .
+	    "        let field_name = jQuery(\"[name^='\"+process_flag+\"_\"+index+\"']:checkbox:checked\");\n" .
+	    "        let field_label = jQuery(\"[name^='\"+process_flag+\"_value_\"+index+\"']:not([value=''])\");\n" .
+	    "        \n" .
+	    "        if(field_name.length>0 && field_label.length>0 && jQuery(field_label[0]).val().trim()!=''){\n" .
+	    "            value = jQuery(field_name[0]).val();\n" .
+	    "            label = jQuery(field_label[0]).val();\n" .
+	    "        } \n" .
+	    "        else {\n" .
+	    "            // do not skip. If the name is not provided default will be used since we are going to disable checkboxes which means we will add all the cats and attributes presented.\n" .
+	    "            //eowbc_add_catat(index+1);\n" .
+	    "        }\n" .
+	    "        \n" .
+	    "        var data = {	\n" .
+	    "            '_wpnonce': '" . wp_create_nonce('sample_data_jewelry') . "',\n" .
+	    "            'action':'eowbc_ajax',\n" .
+	    "            'resolver':'sample_data/catattr',\n" .
+	    "            'resolver_path':'" . apply_filters('eowbc_catattr_sample_data_resolver_path', '') . "',\n" .
+	    "            'feature_key':'" . $feature_key . "',\n" .
+	    "            'label':label,\n" .
+	    "            'value':value,\n" .
+	    "            'index':index,\n" .
+	    "            'type':process_flag,\n" .
+	    "        };\n" .
+	    "        \n" .
+	    "        if( process_flag == 'cat' ) {\n" .
+	    "            // pass all main categories so that name can be read, since there are child also involved its hard to maintain index otherwise\n" .
+	    "            for (var mci = 0; mci < main_categories_size; mci++) {\n" .
+	    "                data['cat_value_'+mci] = jQuery(\"[name='cat_value_\"+mci+\"']\").val();\n" .
+	    "            }\n" .
+	    "        }\n" .
+	    "        \n" .
+	    "        jQuery.post('" . admin_url('admin-ajax.php') . "', data, function(response) {\n" .
+	    "            var resjson = jQuery.parseJSON(response);\n" .
+	    "            if( typeof(resjson[\"type\"]) != undefined && resjson[\"type\"] == \"success\" ){\n" .
+	    "                eowbc_add_catat(++index);                    \n" .
+	    "            } else {\n" .
+	    "                var type = (typeof(resjson[\"type\"]) != undefined ? resjson[\"type\"] : 'error');\n" .
+	    "                var msg = (typeof(resjson[\"msg\"]) != undefined && resjson[\"msg\"] != \"\" ? resjson[\"msg\"] : `Failed! Please check Logs page for for more details.`);\n" .
+	    "                eowbc_toast_common( type, msg );\n" .
+	    "            }  \n" .
+	    "        });\n" .
+	    "    }   \n" .
+	    "    \n" .
+	    "    \$(\".button.button-primary.button-hero.action\").on('click',function(e){\n" .
+	    "        e.stopPropagation();\n" .
+	    "        e.preventDefault();\n" .
+	    "        if(!\$(this).hasClass('disabled')) {\n" .
+	    "            \$(\".button.button-hero.action:not(.disabled)\").toggleClass('disabled');\n" .
+	    "            \n" .
+	    "            cat_value = jQuery(\"[name^='cat_']:checkbox:checked\").length;\n" .
+	    "            attr_value = jQuery(\"[name^='attr_']:checkbox:checked\").length;\n" .
+	    "            \n" .
+	    "            if(cat_value>0){\n" .
+	    "                process_flag = 'cat';\n" .
+	    "                btn_label = 'Categories';\n" .
+	    "                main_categories_size = " . $main_categories_size . ";\n" .
+	    "                cat_value = " . $cat_value . ";\n" .
+	    "                btn_total = cat_value;\n" .
+	    "            } else if(attr_value>0){\n" .
+	    "                process_flag = 'attr';\n" .
+	    "                btn_label = 'Attributes';\n" .
+	    "                attr_value = " . $attr_value . ";\n" .
+	    "                btn_total = attr_value;\n" .
+	    "            }\n" .
+	    "            \n" .
+	    "            eowbc_add_catat(0);\n" .
+	    "        }                \n" .
+	    "        return false;\n" .
+	    "    });\n" .
+	    "});\n";
+	wbc()->load->add_inline_script('', $inline_script, 'common');
 
 } elseif($_step==3) { 
 	if (false) {
