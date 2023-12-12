@@ -69,7 +69,8 @@ if(!class_exists('WBC_Loader')) {
 					break;
 				case 'direct_load_semantic':		
 		            // wbc()->load->enqueue_style('fomantic-semantic.min',constant('EOWBC_ASSET_URL').'css/fomantic/semantic.min.css');					
-		            echo '<link rel="stylesheet" type="text/css" href="'.constant('EOWBC_ASSET_URL').'css/fomantic/semantic.min.css'.'">';	            
+		            echo '<link rel="stylesheet" type="text/css" href="'.constant('EOWBC_ASSET_URL').'css/fomantic/semantic.min.css'.'">';
+
 		            wbc()->load->get_script_tag(array(
 		             'src'  => constant('EOWBC_ASSET_URL').'js/fomantic/semantic.min.js',
 		            ));		            
