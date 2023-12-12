@@ -100,7 +100,7 @@ class SP_WBC_Compatibility extends SP_Compatibility {
 
 	public function loop_render_compatability($page_section,$args = array()){
 
-		parent::loop_render_compatability($page_section,$args);
+		return parent::loop_render_compatability($page_section,$args);
 
 		// NOTE: nothing so far here but here the frontend templaet and js/css layer Compatibility would come 
 

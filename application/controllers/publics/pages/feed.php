@@ -178,18 +178,42 @@ class Feed extends \eo\wbc\controllers\publics\Controller{
             remove_action( 'woocommerce_before_shop_loop_item_title', 'woocommerce_template_loop_product_thumbnail', 10 );
             \eo\wbc\model\SP_WBC_Compatibility::instance()->loop_render_compatability('before_shop_loop_item_loop_thumbnail_action', $args);
             
-            add_action( 'woocommerce_before_shop_loop_item_title', function() use($page_section,$args) {
-                
-                global $product;
-                
-                // if( wbc()->sanitize->get('is_test') == 1 ) {
-                //     wbc_pr('Feed selectron');
-                //     wbc_pr($product);
-                // }
-                do_action( 'sp_wbc_woo_template_loop_product_thumbnail', $product, null);
+            $compatability_args = array();
+            $compatability_args['hook_key'] = 'woocommerce_before_shop_loop_item_title';
+            $compatability_args['hook_type'] = 'action';
+            $compatability_args['hook_priority'] = 15;
+            $compatability_args = \eo\wbc\model\SP_WBC_Compatibility::instance()->loop_render_compatability('before_shop_loop_item_loop_thumbnail_hook_key', $compatability_args);
+            
+            if($compatability_args['hook_type'] == 'action'){
+
+                add_action( $compatability_args['hook_key'], function() use($page_section,$args) {
+                    
+                    global $product;
+                    
+                    // if( wbc()->sanitize->get('is_test') == 1 ) {
+                    //     wbc_pr('Feed selectron');
+                    //     wbc_pr($product);
+                    // }
+                    do_action( 'sp_wbc_woo_template_loop_product_thumbnail', $product, null);
 
 
-            }, 15 );
+                }, $compatability_args['hook_priority'] );
+            }else{
+
+                add_filter( $compatability_args['hook_key'], function($html) use($page_section,$args) {
+                    
+                    global $product;
+                    
+                    ob_start(); 
+                    
+                    do_action( 'sp_wbc_woo_template_loop_product_thumbnail', $product, null);
+                    
+                    $html .= ob_get_clean();
+
+                    return $html;
+
+                }, $compatability_args['hook_priority'] );
+            }
 
             add_action('sp_wbc_woo_template_loop_product_thumbnail', function($product, $extra_args) use($page_section,$args) {  
 

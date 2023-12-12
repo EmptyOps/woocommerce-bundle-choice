@@ -196,7 +196,19 @@ class SP_Compatibility {
 		  //       remove_action('flatsome_woocommerce_shop_loop_images', 'woocommerce_template_loop_product_thumbnail', 10);
 	            
 		 	// }
-		 }
+		}elseif($page_section == 'before_shop_loop_item_loop_thumbnail_hook_key') {
+	 	
+	 		$current_theme_key = wbc()->common->current_theme_key();
+
+	 		if($current_theme_key == 'themes___jewelry-store'){
+
+		 		$args['hook_key'] = 'post_thumbnail_html';
+		 		$args['hook_type'] = 'filter';
+		 		$args['hook_priority'] = 10;
+		 	} 
+	
+			return $args;
+		}
  	}
 
 	public function single_product_render_compatability( $page_section, $args = array() ) {
