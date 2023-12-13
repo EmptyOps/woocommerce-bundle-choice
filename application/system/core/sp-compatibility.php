@@ -91,6 +91,9 @@ class SP_Compatibility {
 					.attachment-woocommerce_thumbnail.size-woocommerce_thumbnail {
 					    display: none !important;
 					}
+					.woocommerce-placeholder:not(.spui-post-image){	
+					    display: none !important;
+					}
 				'; 
 	 		}elseif($current_theme_key == 'themes___colormag') {
 	 			
@@ -112,15 +115,21 @@ class SP_Compatibility {
 	 		}elseif($current_theme_key == 'themes___shoper') {
 	 			
 	 			$archive_loop_swatches_css_patch .= '	 					
-	 				.product-image figure.hover_hide {
-					    display: none;
+	 				.product-image figure .size-woocommerce_thumbnail {
+					    display: none !important;
+					}
+					figure .woocommerce-placeholder {
+					    display: none !important;
 					}
 				'; 
 	 		}elseif($current_theme_key == 'themes___shopper-shop') {
 	 			
 	 			$archive_loop_swatches_css_patch .= '	 					
-	 				.product-image figure.hover_hide {
-					    display: none;
+	 				.product-image figure .size-woocommerce_thumbnail {
+					    display: none !important;
+					}
+					figure .woocommerce-placeholder {
+					    display: none !important;
 					}
 				'; 
 	 		}elseif($current_theme_key == 'themes___storeship') {
