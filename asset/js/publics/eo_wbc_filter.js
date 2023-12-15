@@ -3114,7 +3114,7 @@ if( typeof(eo_wbc_object) != 'undefined'){
 				}			
 				console.log(jQuery(selector));
 				
-				if(jQuery(selector).html().indexOf('&nbsp') >= 0 ){
+				if(jQuery(selector).html().indexOf('&nbsp;') >= 0 ){
 					
 					console.log('get_page_number in nbsp available');
 					
