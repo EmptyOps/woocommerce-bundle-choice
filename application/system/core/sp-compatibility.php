@@ -94,6 +94,12 @@ class SP_Compatibility {
 					.woocommerce-placeholder:not(.spui-post-image){	
 					    display: none !important;
 					}
+					.attachment-shop_catalog{
+					    display: none !important;
+					}
+					.product-has-gallery>.wc-product-inner:hover img {
+					    opacity: 1;
+					}
 				'; 
 	 		}elseif($current_theme_key == 'themes___colormag') {
 	 			
@@ -168,7 +174,48 @@ class SP_Compatibility {
 					    clear: both;
 					}
 				'; 
-	 		}
+	 		}elseif($current_theme_key == 'themes___oceanwp') {
+	 			
+	 			$archive_loop_swatches_css_patch .= '	 					
+					li.image-wrap {
+					    display: none;
+					}
+				'; 
+	 		}elseif($current_theme_key == 'themes___jewelry-store') {
+	 			
+	 			$archive_loop_swatches_css_patch .= '	 					
+					.attachment-post-thumbnail {
+					    display: none !important;
+					}
+					img.product_single_effect_img {
+					    display: none !important;
+					}					
+				'; 
+	 		}elseif ($current_theme_key == 'themes___twentytwentytwo') {
+
+	 			$archive_loop_swatches_css_patch .= '	 
+					.wc-block-components-product-image.wc-block-grid__product-image {
+					    display: none;
+					}	 								
+					.has-medium-font-size {
+					    font-size: var(--wp--preset--font-size--medium) !important;
+					    clear: both;
+					}				
+				'; 
+
+	        }elseif ($current_theme_key == 'themes___twentytwentythree') {
+
+	 			$archive_loop_swatches_css_patch .= '	 
+					.wc-block-components-product-image.wc-block-grid__product-image {
+					    display: none;
+					}	 								
+					.has-medium-font-size {
+					    font-size: var(--wp--preset--font-size--medium) !important;
+					    clear: both;
+					}				
+				'; 
+
+	        }
 
 	 		$archive_loop_swatches_css_patch .= '</style>';
 
@@ -256,6 +303,10 @@ class SP_Compatibility {
 	        }elseif ($current_theme_key == 'themes___botiga') {
 
 	        	return '50%';
+
+	        }elseif ($current_theme_key == 'themes___customify') {
+
+	        	return '100%';
 
 	        }elseif ($current_theme_key == 'themes___Divi') {
 
