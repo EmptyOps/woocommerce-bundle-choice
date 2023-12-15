@@ -2969,6 +2969,7 @@ if( typeof(eo_wbc_object) != 'undefined'){
 	    	
 	    	console.log('pagination_click');
 	    	console.log(_this.$base_pagination_container);
+	    	console.log(element);
 
 	    	/*ACTIVE_TODO_OC_START
 	    	-- event var aya sudhi pogadvano se -- to a
@@ -2981,10 +2982,12 @@ if( typeof(eo_wbc_object) != 'undefined'){
 				
 				console.log('pagination click if');
 				if(/*_this.$base_pagination_container*/jQuery(element).hasClass("next")){
+					console.log(window.document.splugins.wbc.pagination.api.get_page_number());
 					// jQuery("[name='paged']").val(parseInt(jQuery(".page-numbers.current").text())+1);
 					window.document.splugins.wbc.pagination.api.set_page_number( window.document.splugins.wbc.pagination.api.get_page_number()+1 );
 				}
 				if(/*_this.$base_pagination_container*/jQuery(element).hasClass("prev")){
+					console.log(window.document.splugins.wbc.pagination.api.get_page_number());
 					// jQuery("[name='paged']").val(parseInt(jQuery(".page-numbers.current").text())-1);
 					window.document.splugins.wbc.pagination.api.set_page_number( window.document.splugins.wbc.pagination.api.get_page_number()-1 );
 				}	
@@ -2992,6 +2995,8 @@ if( typeof(eo_wbc_object) != 'undefined'){
 			else {
 
 				console.log('pagination click else');
+				console.log(jQuery(element));
+				console.log(window.document.splugins.wbc.pagination.api.get_page_number(jQuery(element)));
 				// jQuery("[name='paged']").val(jQuery(this).text());
 				window.document.splugins.wbc.pagination.api.set_page_number( window.document.splugins.wbc.pagination.api.get_page_number(jQuery(element)));
 			}		
@@ -3107,9 +3112,19 @@ if( typeof(eo_wbc_object) != 'undefined'){
 						
 					selector = ".page-numbers.current";
 				}			
+				console.log(jQuery(selector));
+				
+				if(jQuery(selector).html().indexOf('&nbsp') >= 0 ){
+					
+					console.log('get_page_number in nbsp available');
+					
+					return parseInt(jQuery(selector).html().replace(',','').replace(/\&nbsp;/g, ''));
+				}else{
 
-				return parseInt(jQuery(selector).text().replace(',',''));
+					console.log('get_page_number in nbsp not available');
 
+					return parseInt(jQuery(selector).text().replace(',',''));
+				}
 			},
 
 			set_page_number: function(page_number) {
@@ -3118,6 +3133,9 @@ if( typeof(eo_wbc_object) != 'undefined'){
 
 					reset_private();
 				}
+
+				console.log('[set_page_number] page_number');
+				console.log(page_number);
 
 				jQuery("[name='paged']").val(page_number);
 
