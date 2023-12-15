@@ -301,6 +301,7 @@ box-shadow: none;">
 	$attr_value = $sample_data_obj->get_model()->get_attributes_size();
 	$wp_create_nonce_sample_data_jewelry = wp_create_nonce('sample_data_jewelry');
 	$apply_filters_eowbc_catattr_sample_data_resolver_path = apply_filters('eowbc_catattr_sample_data_resolver_path', '');
+	$feature_key = __($feature_key);
 
 	$inline_script =
 	    "jQuery(document).ready(function(\$) {            \n" .
@@ -334,7 +335,7 @@ box-shadow: none;">
 	    "                url:eowbc_object.admin_url,\n" .
 	    "                type: 'POST',\n" .
 	    "                data: data,\n" .
-	    "                beforeSend:function(xhr){\n" .
+	    "                beforeSend:function(xhr){\n\n" .
 	    "                },\n" .
 	    "                success:function(result,status,xhr){\n" .
 	    "                    window.location.href='" . $next_url . "';\n" .
@@ -345,6 +346,7 @@ box-shadow: none;">
 	    "                    return false;\n" .
 	    "                },\n" .
 	    "                complete:function(xhr,status){\n" .
+	    "						//window.location.href=\"" . $next_url . "\";	//commented since can't allow redirect on error etc.\n" .
 	    "                    return false;\n" .
 	    "                }\n" .
 	    "            });\t\n" .
@@ -352,8 +354,10 @@ box-shadow: none;">
 	    "        } else if(process_flag=='attr' && index>=attr_value) {\n" .
 	    "            var msg = 'There is some error while finishing the attribute creation process, please contact Sphere Plugins Support for a quick fix on this if the problem persist.';\n" .
 	    "            \n" .
+	    "            //step 3 redirect;\n" .
 	    "            var data = {	\n" .
-	    "                '_wpnonce': '" . $apply_filters_eowbc_catattr_sample_data_resolver_path . "',\n" .
+	    "            \n" .
+	    "                '_wpnonce': '" . $wp_create_nonce_sample_data_jewelry . "',\n" .
 	    "                'action':'eowbc_ajax',\n" .
 	    "                'resolver':'sample_data/catattr',\n" .
 	    "                'resolver_path':'" . $apply_filters_eowbc_catattr_sample_data_resolver_path . "',\n" .
