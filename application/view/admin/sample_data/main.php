@@ -302,6 +302,7 @@ box-shadow: none;">
 	$wp_create_nonce_sample_data_jewelry = wp_create_nonce('sample_data_jewelry');
 	$apply_filters_eowbc_catattr_sample_data_resolver_path = apply_filters('eowbc_catattr_sample_data_resolver_path', '');
 	$feature_key = __($feature_key);
+	$admin_url = admin_url('admin-ajax.php');
 
 	$inline_script =
 	    "jQuery(document).ready(function(\$) {            \n" .
@@ -402,15 +403,15 @@ box-shadow: none;">
 	    "        }\n" .
 	    "        \n" .
 	    "        var data = {	\n" .
-	    "            '_wpnonce': '" . wp_create_nonce('sample_data_jewelry') . "',\n" .
+	    "            '_wpnonce': '" . $wp_create_nonce_sample_data_jewelry . "',\n" .
 	    "            'action':'eowbc_ajax',\n" .
 	    "            'resolver':'sample_data/catattr',\n" .
-	    "            'resolver_path':'" . apply_filters('eowbc_catattr_sample_data_resolver_path', '') . "',\n" .
+	    "            'resolver_path':'" . $apply_filters_eowbc_catattr_sample_data_resolver_path . "',\n" .
 	    "            'feature_key':'" . $feature_key . "',\n" .
 	    "            'label':label,\n" .
 	    "            'value':value,\n" .
 	    "            'index':index,\n" .
-	    "            'type':process_flag,\n" .
+	    "            'type':process_flag,\n\n" .
 	    "        };\n" .
 	    "        \n" .
 	    "        if( process_flag == 'cat' ) {\n" .
@@ -420,7 +421,7 @@ box-shadow: none;">
 	    "            }\n" .
 	    "        }\n" .
 	    "        \n" .
-	    "        jQuery.post('" . admin_url('admin-ajax.php') . "', data, function(response) {\n" .
+	    "        jQuery.post('" . $admin_url . "', data, function(response) {\n" .
 	    "            var resjson = jQuery.parseJSON(response);\n" .
 	    "            if( typeof(resjson[\"type\"]) != undefined && resjson[\"type\"] == \"success\" ){\n" .
 	    "                eowbc_add_catat(++index);                    \n" .
@@ -454,7 +455,14 @@ box-shadow: none;">
 	    "                btn_total = attr_value;\n" .
 	    "            }\n" .
 	    "            \n" .
+	    "            //let cat_value = jQuery(\"[name^='cat_value_']:not([value=''])\");\n" .
+	    "            //let cat = jQuery(\"[name^='cat_']:checkbox:checked\");\n" .
+	    "            \n" .
+	    "            //let attr_value = jQuery(\"[name^='attr_value_']:not([value=''])\");\n" .
+	    "            //let attr = jQuery(\"[name^='attr_']:checkbox:checked\");\n" .
+	    "            \n" .
 	    "            eowbc_add_catat(0);\n" .
+	    "            //eo_wbc_add_products(119);\n" .
 	    "        }                \n" .
 	    "        return false;\n" .
 	    "    });\n" .
