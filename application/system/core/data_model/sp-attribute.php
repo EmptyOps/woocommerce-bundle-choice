@@ -1,6 +1,7 @@
 <?php
 /*
 *	SP Attribute class 
+NOTE: This class will be counted janral cod related to CRUD operations and so on functions. so it means that if there is extension specific code then that need to be implemented in that specific extension class within extended from this class only, that is necessary to ensure that wbc free layer has only reliant and neat code. and devnandi extension specific classes thar my be sum aksapson lick dapii extshone has its specific different classes for handling the crowd oppressions and factor logic related to category, attribute and product and so on, and that exshapshon is assumed to be capt separate allows wish mins that dapi code will never be merged or sinked in any way with the class hierarchy and its layers.
 */
 
 namespace eo\wbc\system\core\data_model;
@@ -25,16 +26,36 @@ class SP_Attribute extends SP_Entity {
 		throw new Exception("Default construct method is not supported. Use class function createFromArray etc. to create product or its object.", 1);
 	}
 
+	public static function is_attribute_exist( $slug, $extra_args ) {
+
+		throw new Exception("not implemented yet.", 1);
+	}
+
+	public static function get_attribute_id( $slug, $extra_args ) {
+		
+		throw new Exception("not implemented yet.", 1);
+	}
+
 	public static function createFromJson(){
-		throw new Exception("Set method is not supposed to be supported for this property, rely on construct method to set this property.", 1);
+		throw new Exception("not implemented yet.", 1);
 	}
 
 	public static function createFromSerialized(){
-		throw new Exception("Set method is not supposed to be supported for this property, rely on construct method to set this property.", 1);
+		throw new Exception("not implemented yet.", 1);
 	}
 
 	public static function createFromArray($data_array){
-		throw new Exception("Set method is not supposed to be supported for this property, rely on construct method to set this property.", 1);
+
+		throw new Exception("not implemented yet.", 1);
+
+		self::create();
+	}
+
+	protected static function create() {
+		// TODO bind to the sample data sample attribute creation flow(and that should also be adhering to and following the data layer structure defs) where there is either attribute factory or entire function(s) to do so 
+
+		//	TODO and extensions which needs attribute factory related operations are also supposed to rely on this class for such operations 
+
 	}
 
 	public function set_platform_key(){

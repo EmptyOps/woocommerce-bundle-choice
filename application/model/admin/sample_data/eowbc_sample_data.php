@@ -266,6 +266,9 @@ class Eowbc_Sample_Data {
 		$product=$this->data_template->get_products()[$index];
 
 		if(!empty($product['sku']) and !empty(wc_get_product_id_by_sku($product['sku'])) ) {
+
+			\eo\wbc\model\data_model\SP_WBC_Product::createFromArray(null,null,array($product));
+
 			return $res;
 		}
 		
