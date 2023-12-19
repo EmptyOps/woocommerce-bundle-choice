@@ -215,6 +215,17 @@ class SP_Compatibility {
 					}				
 				'; 
 
+	        }elseif ($current_theme_key == 'themes___th-shop-mania') {
+
+	 			$archive_loop_swatches_css_patch .= '	 
+					.thunk-product-content {
+					    display: none;
+					}	
+					.th-shop-mania-quantity {
+					    display: none;
+					}
+				'; 
+
 	        }
 
 	 		$archive_loop_swatches_css_patch .= '</style>';
@@ -330,7 +341,8 @@ class SP_Compatibility {
 
 	        }elseif ($current_theme_key == 'themes___hestia') {
 
-	        	return '45%';
+	        	// return '45%';
+	        	return '100%';
 
 	        }elseif ($current_theme_key == 'themes___jewelry-store') {
 
