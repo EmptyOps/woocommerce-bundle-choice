@@ -280,6 +280,8 @@ class SP_Compatibility {
 
 	public function single_product_render_compatability( $page_section, $args = array() ) {
 
+		$current_theme_key = wbc()->common->current_theme_key();
+
 		if($page_section == 'woocommerce_after_add_to_cart_button') {
 	 	
 	 		$current_theme_key = wbc()->common->current_theme_key();
@@ -455,8 +457,26 @@ class SP_Compatibility {
 	        }
 
 	        return $args['default_width'];
-	 	}
+	 	}elseif($page_section == 'product_page_css_patch') {
 
+ 			$product_page_css_patch = ' 
+	 			<style type="text/css">	 					
+			';
+
+	 		if($current_theme_key == 'themes___estore') {
+	 			
+	 			$product_page_css_patch .= '
+	 				body, html {
+					    height: auto !important;
+					}
+				';
+
+	 		}
+
+	 		$product_page_css_patch .= '</style>';
+
+	 		return $product_page_css_patch;
+	 	}
 	}
 
  	public function woo_product_images_template_compatability($page_section,$args = array()){

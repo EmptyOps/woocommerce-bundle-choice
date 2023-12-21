@@ -1804,7 +1804,12 @@ if(wbc()->wc->is_shop_or_category()) {
 	}
 
 } 
+if(is_product()) {
+	echo $asset_param['product_page_css_patch'];
 }
+
+}
+
 ?>
 
 <?php
