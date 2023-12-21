@@ -472,104 +472,105 @@ box-shadow: none;">
 } elseif($_step==3) { 
 	if (false) {
 	?>
-    <script type="text/javascript" >
-	    jQuery(document).ready(function($) {            
+	    <script type="text/javascript" >
+		    jQuery(document).ready(function($) {            
 
-	        var eo_wbc_max_products=<?php /*_e(0)*/echo($sample_data_obj->get_model()->get_product_size()); ?>;            
-	        function eo_wbc_add_products(index){
+		        var eo_wbc_max_products=<?php /*_e(0)*/echo($sample_data_obj->get_model()->get_product_size()); ?>;            
+		        function eo_wbc_add_products(index){
 
-	            if(index>=eo_wbc_max_products){
-	                
-	                window.location.href="<?php echo(admin_url('admin.php?page=eowbc')); ?>";
-	                return false;
-	            }
+		            if(index>=eo_wbc_max_products){
+		                
+		                window.location.href="<?php echo(admin_url('admin.php?page=eowbc')); ?>";
+		                return false;
+		            }
 
-	            jQuery(".button.button-primary.button-hero.action.disabled").val("Adding "+(index+1)+" of "+eo_wbc_max_products+" products");
+		            jQuery(".button.button-primary.button-hero.action.disabled").val("Adding "+(index+1)+" of "+eo_wbc_max_products+" products");
 
-	            var data = {
-	                //'action': 'eo_wbc_add_products',
-	                '_wpnonce': '<?php echo wp_create_nonce('sample_data_jewelry');?>',
-	                'action':'eowbc_ajax',
-	                'resolver':'sample_data/<?php _e($feature_key); ?>',
-	                'resolver_path':'<?php echo apply_filters('eowbc_product_sample_data_resolver_path',''); ?>', 
-	                'product_index':index 
-	            };
+		            var data = {
+		                //'action': 'eo_wbc_add_products',
+		                '_wpnonce': '<?php echo wp_create_nonce('sample_data_jewelry');?>',
+		                'action':'eowbc_ajax',
+		                'resolver':'sample_data/<?php _e($feature_key); ?>',
+		                'resolver_path':'<?php echo apply_filters('eowbc_product_sample_data_resolver_path',''); ?>', 
+		                'product_index':index 
+		            };
 
-	            jQuery.post('<?php echo admin_url( 'admin-ajax.php'); ?>', data, function(response) {
-	            	var resjson = jQuery.parseJSON(response);
-	                if( typeof(resjson["type"]) != undefined && resjson["type"] == "success" ){
-		                eo_wbc_add_products(++index);                    
-	                } else {
-	                	var type = (typeof(resjson["type"]) != undefined ? resjson["type"] : 'error');
-	                	var msg = (typeof(resjson["msg"]) != undefined && resjson["msg"] != "" ? resjson["msg"] : `Failed! Please check Logs page for for more details.`);
-	                    eowbc_toast_common( type, msg );
-	                }  
-	            });                
-	        }   
-	        
-	        $(".button.button-primary.button-hero.action").on('click',function(e){
-	            e.stopPropagation();
-	            e.preventDefault();
-	            if(!$(this).hasClass('disabled')) {
-	                $(".button.button-hero.action:not(.disabled)").toggleClass('disabled');
-	                eo_wbc_add_products(0);
-	                //eo_wbc_add_products(119);
-	            }                
-	            return false;
-	        });
+		            jQuery.post('<?php echo admin_url( 'admin-ajax.php'); ?>', data, function(response) {
+		            	var resjson = jQuery.parseJSON(response);
+		                if( typeof(resjson["type"]) != undefined && resjson["type"] == "success" ){
+			                eo_wbc_add_products(++index);                    
+		                } else {
+		                	var type = (typeof(resjson["type"]) != undefined ? resjson["type"] : 'error');
+		                	var msg = (typeof(resjson["msg"]) != undefined && resjson["msg"] != "" ? resjson["msg"] : `Failed! Please check Logs page for for more details.`);
+		                    eowbc_toast_common( type, msg );
+		                }  
+		            });                
+		        }   
+		        
+		        $(".button.button-primary.button-hero.action").on('click',function(e){
+		            e.stopPropagation();
+		            e.preventDefault();
+		            if(!$(this).hasClass('disabled')) {
+		                $(".button.button-hero.action:not(.disabled)").toggleClass('disabled');
+		                eo_wbc_add_products(0);
+		                //eo_wbc_add_products(119);
+		            }                
+		            return false;
+		        });
 
-	    });
-	</script>
-	<?php } 
-		$eo_wbc_max_products = $sample_data_obj->get_model()->get_product_size();
+		    });
+		</script>
+	<?php 
+	} 
+	$eo_wbc_max_products = $sample_data_obj->get_model()->get_product_size();
 
-		$inline_script = 
-			"jQuery(document).ready(function(\$) {            \n" .
-			"\n" .
-			"    var eo_wbc_max_products=" . $eo_wbc_max_products . ";\n" .
-			"    function eo_wbc_add_products(index){\n" .
-			"\n" .
-			"        if(index>=eo_wbc_max_products){\n" .
-			"            \n" .
-			"            window.location.href=\"" . admin_url('admin.php?page=eowbc') . "\";\n" .
-			"            return false;\n" .
-			"        }\n" .
-			"\n" .
-			"        jQuery(\".button.button-primary.button-hero.action.disabled\").val(\"Adding \"+(index+1)+\" of \"+eo_wbc_max_products+\" products\");\n" .
-			"\n" .
-			"        var data = {\n" .
-			"            //'action': 'eo_wbc_add_products',\n" .
-			"            '_wpnonce': '" . wp_create_nonce('sample_data_jewelry') . "',\n" .
-			"            'action':'eowbc_ajax',\n" .
-			"            'resolver':'sample_data/" . $feature_key . "',\n" .
-			"            'resolver_path':'" . apply_filters('eowbc_product_sample_data_resolver_path','') . "', \n" .
-			"            'product_index':index \n" .
-			"        };\n" .
-			"\n" .
-			"        jQuery.post('" . admin_url('admin-ajax.php') . "', data, function(response) {\n" .
-			"            var resjson = jQuery.parseJSON(response);\n" .
-			"            if( typeof(resjson[\"type\"]) != undefined && resjson[\"type\"] == \"success\" ){\n" .
-			"                eo_wbc_add_products(++index);                    \n" .
-			"            } else {\n" .
-			"                var type = (typeof(resjson[\"type\"]) != undefined ? resjson[\"type\"] : 'error');\n" .
-			"                var msg = (typeof(resjson[\"msg\"]) != undefined && resjson[\"msg\"] != \"\" ? resjson[\"msg\"] : `Failed! Please check Logs page for for more details.`);\n" .
-			"                eowbc_toast_common( type, msg );\n" .
-			"            }  \n" .
-			"        });                \n" .
-			"    }   \n" .
-			"    \n" .
-			"    \$(\".button.button-primary.button-hero.action\").on('click',function(e){\n" .
-			"        e.stopPropagation();\n" .
-			"        e.preventDefault();\n" .
-			"        if(!\$(this).hasClass('disabled')) {\n" .
-			"            \$(\".button.button-hero.action:not(.disabled)\").toggleClass('disabled');\n" .
-			"            eo_wbc_add_products(0);\n" .
-			"            //eo_wbc_add_products(119);\n" .
-			"        }                \n" .
-			"        return false;\n" .
-			"    });\n" .
-			"\n" .
-			"});";
-			wbc()->load->add_inline_script('', $inline_script, 'common');
-?>
+	$inline_script = 
+		"jQuery(document).ready(function(\$) {            \n" .
+		"\n" .
+		"    var eo_wbc_max_products=" . $eo_wbc_max_products . ";\n" .
+		"    function eo_wbc_add_products(index){\n" .
+		"\n" .
+		"        if(index>=eo_wbc_max_products){\n" .
+		"            \n" .
+		"            window.location.href=\"" . admin_url('admin.php?page=eowbc') . "\";\n" .
+		"            return false;\n" .
+		"        }\n" .
+		"\n" .
+		"        jQuery(\".button.button-primary.button-hero.action.disabled\").val(\"Adding \"+(index+1)+\" of \"+eo_wbc_max_products+\" products\");\n" .
+		"\n" .
+		"        var data = {\n" .
+		"            //'action': 'eo_wbc_add_products',\n" .
+		"            '_wpnonce': '" . wp_create_nonce('sample_data_jewelry') . "',\n" .
+		"            'action':'eowbc_ajax',\n" .
+		"            'resolver':'sample_data/" . $feature_key . "',\n" .
+		"            'resolver_path':'" . apply_filters('eowbc_product_sample_data_resolver_path','') . "', \n" .
+		"            'product_index':index \n" .
+		"        };\n" .
+		"\n" .
+		"        jQuery.post('" . admin_url('admin-ajax.php') . "', data, function(response) {\n" .
+		"            var resjson = jQuery.parseJSON(response);\n" .
+		"            if( typeof(resjson[\"type\"]) != undefined && resjson[\"type\"] == \"success\" ){\n" .
+		"                eo_wbc_add_products(++index);                    \n" .
+		"            } else {\n" .
+		"                var type = (typeof(resjson[\"type\"]) != undefined ? resjson[\"type\"] : 'error');\n" .
+		"                var msg = (typeof(resjson[\"msg\"]) != undefined && resjson[\"msg\"] != \"\" ? resjson[\"msg\"] : `Failed! Please check Logs page for for more details.`);\n" .
+		"                eowbc_toast_common( type, msg );\n" .
+		"            }  \n" .
+		"        });                \n" .
+		"    }   \n" .
+		"    \n" .
+		"    \$(\".button.button-primary.button-hero.action\").on('click',function(e){\n" .
+		"        e.stopPropagation();\n" .
+		"        e.preventDefault();\n" .
+		"        if(!\$(this).hasClass('disabled')) {\n" .
+		"            \$(\".button.button-hero.action:not(.disabled)\").toggleClass('disabled');\n" .
+		"            eo_wbc_add_products(0);\n" .
+		"            //eo_wbc_add_products(119);\n" .
+		"        }                \n" .
+		"        return false;\n" .
+		"    });\n" .
+		"\n" .
+		"});";
+		wbc()->load->add_inline_script('', $inline_script, 'common');
+	?>
 <?php //EO_WBC_Head_Banner::get_footer_line(); ?>
