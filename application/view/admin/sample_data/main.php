@@ -523,6 +523,8 @@ box-shadow: none;">
 	<?php 
 	} 
 	$eo_wbc_max_products = $sample_data_obj->get_model()->get_product_size();
+	$feature_key = __($feature_key);
+	$apply_filters_eowbc_product_sample_data_resolver_path = apply_filters('eowbc_product_sample_data_resolver_path','');
 
 	$inline_script = 
 		"jQuery(document).ready(function(\$) {            \n" .
@@ -532,7 +534,7 @@ box-shadow: none;">
 		"\n" .
 		"        if(index>=eo_wbc_max_products){\n" .
 		"            \n" .
-		"            window.location.href=\"" . admin_url('admin.php?page=eowbc') . "\";\n" .
+		"            window.location.href=\"" . $admin_url . "\";\n" .
 		"            return false;\n" .
 		"        }\n" .
 		"\n" .
@@ -540,14 +542,14 @@ box-shadow: none;">
 		"\n" .
 		"        var data = {\n" .
 		"            //'action': 'eo_wbc_add_products',\n" .
-		"            '_wpnonce': '" . wp_create_nonce('sample_data_jewelry') . "',\n" .
+		"            '_wpnonce': '" . $wp_create_nonce_sample_data_jewelry . "',\n" .
 		"            'action':'eowbc_ajax',\n" .
 		"            'resolver':'sample_data/" . $feature_key . "',\n" .
-		"            'resolver_path':'" . apply_filters('eowbc_product_sample_data_resolver_path','') . "', \n" .
+		"            'resolver_path':'" . $apply_filters_eowbc_product_sample_data_resolver_path . "', \n" .
 		"            'product_index':index \n" .
 		"        };\n" .
 		"\n" .
-		"        jQuery.post('" . admin_url('admin-ajax.php') . "', data, function(response) {\n" .
+		"        jQuery.post('" . $admin_url . "', data, function(response) {\n" .
 		"            var resjson = jQuery.parseJSON(response);\n" .
 		"            if( typeof(resjson[\"type\"]) != undefined && resjson[\"type\"] == \"success\" ){\n" .
 		"                eo_wbc_add_products(++index);                    \n" .

@@ -332,8 +332,8 @@ class SP_Model_Single_Product extends SP_Single_Product {
 		        			
 		        		});
 		        	</script>
-				<?php
-				}
+					<?php
+					}
 					$inline_script = 
 					    "jQuery(document).ready(function($){\n" .
 					    "    jQuery(\".dropdown\").dropdown().on('change',function(){\n" .
