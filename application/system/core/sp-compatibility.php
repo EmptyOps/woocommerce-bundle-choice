@@ -454,6 +454,8 @@ class SP_Compatibility {
 
 	        	return '52%';
 
+	        }elseif ($current_theme_key == 'themes___estore') {
+	        	return '52%';
 	        }
 
 	        return $args['default_width'];
