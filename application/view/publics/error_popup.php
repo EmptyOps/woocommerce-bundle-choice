@@ -9,23 +9,23 @@
 
 if (false) {
 ?>
-<script type="text/javascript">
-  if( typeof(jQuery.fn.accordion) === 'function' ) {
-    jQuery.fn.ui_accordion = jQuery.fn.accordion;
-    jQuery.fn.ui_modal = jQuery.fn.modal;
-    jQuery.fn.ui_slider = jQuery.fn.slider;
-  }
-</script>
+    <script type="text/javascript">
+      if( typeof(jQuery.fn.accordion) === 'function' ) {
+        jQuery.fn.ui_accordion = jQuery.fn.accordion;
+        jQuery.fn.ui_modal = jQuery.fn.modal;
+        jQuery.fn.ui_slider = jQuery.fn.slider;
+      }
+    </script>
 <?php 
 }
-  $inline_script =
-      "if (typeof(jQuery.fn.accordion) === 'function') {\n" .
-      "    jQuery.fn.ui_accordion = jQuery.fn.accordion;\n" .
-      "    jQuery.fn.ui_modal = jQuery.fn.modal;\n" .
-      "    jQuery.fn.ui_slider = jQuery.fn.slider;\n" .
-      "}\n";
+$inline_script =
+  "if (typeof(jQuery.fn.accordion) === 'function') {\n" .
+  "    jQuery.fn.ui_accordion = jQuery.fn.accordion;\n" .
+  "    jQuery.fn.ui_modal = jQuery.fn.modal;\n" .
+  "    jQuery.fn.ui_slider = jQuery.fn.slider;\n" .
+  "}\n";
 
-  wbc()->load->add_inline_script('', $inline_script, 'common');
+wbc()->load->add_inline_script('', $inline_script, 'common');
 
   global $wp_customize;
   if(empty($wp_customize)){
@@ -38,13 +38,13 @@ if (false) {
 // },50);
 if (false) {
 ?>
-<script type="text/javascript">
-  if( typeof(jQuery.fn.ui_accordion) === 'function' ) {
-    jQuery.fn.accordion = jQuery.fn.ui_accordion;
-    jQuery.fn.modal = jQuery.fn.ui_modal;
-    jQuery.fn.slider = jQuery.fn.ui_slider;
-  }
-</script>
+    <script type="text/javascript">
+      if( typeof(jQuery.fn.ui_accordion) === 'function' ) {
+        jQuery.fn.accordion = jQuery.fn.ui_accordion;
+        jQuery.fn.modal = jQuery.fn.ui_modal;
+        jQuery.fn.slider = jQuery.fn.ui_slider;
+      }
+    </script>
 <?php
 }
 $inline_script =
@@ -170,104 +170,86 @@ function eo_wbc_error_popup(type,msg) {
 }
 </script>
 <?php
- } 
-$inline_script = "
-jQuery.send_error = 0;
-
-jQuery(document).ready(function($) {
-    $('.ui.modal').find('.cancel').on('click', function() {
-        jQuery('.ui.modal').modal('hide');
-    });
-
-    $('.ui.modal').find('.approve').on('click', function() {
-        if (!jQuery.send_error) {
-            jQuery.send_error = 1;
-            $(this).text('Sending error report...');
-
-            jQuery.post('" . site_url('/wp-admin/admin-ajax.php') . "', {
-                resolver: 'eowbc_send_error_report',
-                _wpnonce: jQuery(jQuery('input[name=\"eowbc_send_error_report_wpnonce\"]')[0]).val(),
-                action: 'eowbc_ajax',
-                saved_tab_key: 'setting_status_log',
-                is_sent_from_front_end: 1
-            }, function(data) {
-                if (data) {
-                    $('.ui.modal').find('.actions').html('<div class=\"ui large green inverted button error_sent\">Ok</div>');
-                    $('.ui.modal .content').html('<h5>Thank you for sending error report, Sphere Plugins Support Team will soon get in touch with you. It generally takes 12 hours.</h5>');
-                    jQuery.send_error = 0;
-                } else {
-                    $('.ui.modal').find('.approve').text('Resend an error report now!');
-                    jQuery.send_error = 0;
-                }
-            });
-        }
-    });
-
-    jQuery('.ui.modal').on('click', '.error_sent', function() {
-        jQuery('.ui.modal').modal('hide');
-    });
-
-    jQuery('.ui.modal').on('click', '.view_log', function() {
-        document.location.href = jQuery(this).attr('href');
-        jQuery('.ui.modal').modal('hide');
-        return false;
-    });
-});
-
-function eo_wbc_error_popup(type, msg) {
-    console.log('eo_wbc_error_popup called...');
-
-    eo_wbc_outer_containers = undefined;
-
-    //here we shall show some kind of popup for non-admin users as well, since some users might be testing frontend on different browsers or in incognito, etc.
-    <?php if (current_user_can('manage_options') && empty(wbc()->sanitize->get('eo_wbc_button_testing'))): ?>
-        //set the title/message in the error popup
-        jQuery('#error_popup_title').html(msg);
-
-        //log the error in the background
-        jQuery.post('" . site_url('/wp-admin/admin-ajax.php') . "', {
-            resolver: 'eo_wbc_throw_error',
-            _wpnonce: jQuery(jQuery('input[name=\"eo_wbc_throw_error_wpnonce\"]')[0]).val(),
-            action: 'eowbc_ajax',
-            page: document.location.href,
-            type: type,
-            msg: msg
-        });
-
-        //show a user popup with options to send an error report or cancel 
-        // jQuery('.ui.modal').modal('show');
-        jQuery('.ui.modal').modal({
-            onApprove: function() {
-                // ... //Validate here, or pass validation to somewhere else
-                return false; //Return false as to not close the modal dialog on the approve click when we have to show something else after that.
-            }
-        }).modal('show');
-    <?php endif; ?>
-
-    //below testing service is not implemented yet for buttons and not implemented in general as well  
-    if (<?php echo empty(wbc()->sanitize->get('eo_wbc_button_testing')) ? 0 : 1 ?> && <?php echo current_user_can('manage_options') ? 1 : 0 ?>) {
-        var btn_test_service_status = 0;
-
-        if (eo_wbc_outer_container != undefined && eo_wbc_outer_containers != undefined && eo_wbc_outer_containers.length > 0) {
-            if (eo_wbc_outer_containers.length == 1) {
-                btn_test_service_status = 1;
-            } else {
-                btn_test_service_status = 2;
-            }
-        }
-
-        jQuery.post('" . site_url('/wp-admin/admin-ajax.php') . "', {
-            action: 'set_btn_test_service_status',
-            btn_status: btn_test_service_status,
-            security: '" . wp_create_nonce('eowbc_set_btn_status') . "'
-        }, function(data) {
-            if (Number(data) == 1) {
-                window.close(this);
-            }
-        });
-    }
-}
-";
-wbc()->load->add_inline_script('', $inline_script, 'common'); 
+} 
+$inline_script = 
+    "var eo_wbc_outer_container=undefined;\n" .
+    "jQuery.send_error=0;\n" .
+    "\n" .
+    "jQuery(document).ready(function($){\n" .
+    "\n" .
+    "  $(\".ui.modal\").find(\".cancel\").on('click',function(){\n" .
+    "    jQuery('.ui.modal').modal('hide');\n" .
+    "  });\n" .
+    "\n" .
+    "  $(\".ui.modal\").find(\".approve\").on('click',function(){\n" .
+    "    if(!jQuery.send_error){\n" .
+    "      jQuery.send_error=1;\n" .
+    "      $(this).text(\"Sending error report...\");\n" .
+    "      \n" .
+    "      jQuery.post('<?php echo site_url('/wp-admin/admin-ajax.php');?>',{resolver:'eowbc_send_error_report', _wpnonce:jQuery( jQuery('input[name=\"eowbc_send_error_report_wpnonce\"]')[0] ).val(), action: 'eowbc_ajax', saved_tab_key: 'setting_status_log',is_sent_from_front_end: 1},function(data){                   \n" .
+    "        if(data){ \n" .
+    "          jQuery(\".ui.modal\").find(\".actions\").html('<div class=\"ui large green inverted button error_sent\">Ok</div>');                    \n" .
+    "          jQuery(\".ui.modal .content\").html(\"<h5>Thank you for sending error report, Sphere Plugins Support Team will soon get in touch with you. It generally takes 12 hours.</h5>\");\n" .
+    "          jQuery.send_error=0;\n" .
+    "        } else {\n" .
+    "          $(\".ui.modal\").find(\".approve\").text(\"Resend an error report now!\");\n" .
+    "          jQuery.send_error=0;\n" .
+    "        } \n" .
+    "      });                \n" .
+    "    }\n" .
+    "  });\n" .
+    "\n" .
+    "  jQuery(\".ui.modal\").on(\"click\",\".error_sent\",function(){\n" .
+    "    jQuery('.ui.modal').modal('hide');\n" .
+    "  });\n" .
+    "\n" .
+    "  jQuery(\".ui.modal\").on(\"click\",\".view_log\",function(){\n" .
+    "    document.location.href=jQuery(this).attr('href');\n" .
+    "    jQuery('.ui.modal').modal('hide');\n" .
+    "    return false;\n" .
+    "  });\n" .
+    "  \n" .
+    "});\n" .
+    "\n" .
+    "function eo_wbc_error_popup(type,msg) {\n" .
+    "  console.log(\"eo_wbc_error_popup called...\");\n" .
+    "\n" .
+    "\teo_wbc_outer_containers=undefined;\n" .
+    "\n" .
+    "\t//here we shall show some kind of popup for non-admin users as well, since some users might be testing frontend on diff browser or in incognito etc.\n" .
+    "  <?php if(current_user_can('manage_options') && empty(wbc()->sanitize->get('eo_wbc_button_testing'))): ?>\n" .
+    "    //set the title/message in error popup\n" .
+    "    jQuery('#error_popup_title').html(msg);\n" .
+    "\n" .
+    "    //log the error in background\n" .
+    "    jQuery.post('<?php echo site_url('/wp-admin/admin-ajax.php');?>',{resolver:'eo_wbc_throw_error', _wpnonce:jQuery( jQuery('input[name=\"eo_wbc_throw_error_wpnonce\"]')[0] ).val(), action: 'eowbc_ajax',page:document.location.href,type:type,msg:msg});\n" .
+    "\n" .
+    "    //show user popup with options to send error report or cancel \n" .
+    "    // jQuery('.ui.modal').modal('show');\n" .
+    "    jQuery('.ui.modal').modal({\n" .
+    "      onApprove : function() {\n" .
+    "        // ... //Validate here, or pass validation to somewhere else\n" .
+    "        return false; //Return false as to not close modal dialog on approve click when we have to show something else after that.\n" .
+    "      }\n" .
+    "    }).modal('show');\n" .
+    "  <?php endif; ?>                  \n" .
+    "\n" .
+    "\t//below testing service is not implemented yet for buttons and not implemented in general as well  \n" .
+    "  \tif(<?php echo empty(wbc()->sanitize->get('eo_wbc_button_testing'))?0:1 ?> && <?php echo current_user_can('manage_options')?1:0 ?>){\n" .
+    "\n" .
+    "    var btn_test_service_status=0;\n" .
+    "\n" .
+    "    if(eo_wbc_outer_container!=undefined && eo_wbc_outer_containers!=undefined && eo_wbc_outer_containers.length>0){\n" .
+    "      \n" .
+    "      if (eo_wbc_outer_containers.length==1) {\n" .
+    "        btn_test_service_status=1;\n" .
+    "      } else {\n" .
+    "        btn_test_service_status=2;\n" .
+    "      }\n" .
+    "    } \n" .
+    "\n" .
+    "    jQuery.post('<?php echo site_url('/wp-admin/admin-ajax.php');?>',{action:'set_btn_test_service_status',btn_status:btn_test_service_status,security:'<?php echo wp_create_nonce('eowbc_set_btn_status'); ?>'},function(data){ if(Number(data)==1){  window.close(this); } });\n" .
+    "  }\n" .
+    "}\n";
+wbc()->load->add_inline_script( '', $inline_script, 'common' );
 ?>
-

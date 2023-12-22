@@ -52,7 +52,8 @@ if (false) {
         });
     }); 
 </script>
-<?php } 
+<?php
+} 
 $inline_script = 
 "jQuery(document).ready(function(){\n" .
 "    /*jQuery('.onclick_redirect').on('click',function(){\n" .
@@ -69,6 +70,6 @@ $inline_script =
 "    });\n" .
 "});";
 wbc()->load->add_inline_script('', $inline_script, 'common');
-    }
+        }
 ?>
 
