@@ -114,13 +114,13 @@ class Eowbc_Model {
 								
 							}
 							
-							// if(wbc()->sanitize->get('is_test') == 1) {
+							if(wbc()->sanitize->get('is_test') == 1) {
 								
-							// 	wbc_pr('eowbc_model_dm_based_field');
-							// 	wbc_pr($args['data_raw']);
-							// 	wbc_pr($fk);
-							// 	wbc_pr($dm_based_field);
-							// }
+								wbc_pr('eowbc_model_dm_based_field');
+								wbc_pr($args['data_raw']);
+								wbc_pr($fk);
+								wbc_pr($dm_based_field);
+							}
 
 							//$form_definition[$key]["form"][$fk]["value"] = ( isset($save_as_data['post_meta'][$fk]) ? $save_as_data['post_meta'][$fk] : ( isset($form_definition[$key]["form"][$fk]["value"]) ? $form_definition[$key]["form"][$fk]["value"] :'' ) );
 							if ( !empty( $dm_based_field ) ) {
@@ -134,23 +134,44 @@ class Eowbc_Model {
 
 										$form_definition[$key]["form"][$fk]["value"] = $args['data_raw'][$dm_based_field][0];
 
-									} elseif(( $fk == 'sp_variations_gallery_images________' || $fk == 'sp_variations_gallery_images____________1____' || $fk == 'sp_variations_gallery_images____{{id}}____' ) && is_string($args['data_raw'][$dm_based_field]) && strpos($args['data_raw'][$dm_based_field], "|") !== FALSE){
+									} elseif(( $fk == 'sp_variations_gallery_images________' || $fk == 'sp_variations_gallery_images____________1____' || $fk == 'sp_variations_gallery_images____{{id}}____' || $fk == 'sp_variations_gallery_images_2____{{id}}____' || $fk == 'sp_variations_gallery_images_3____{{id}}____' || $fk == 'sp_variations_gallery_images_4____{{id}}____'  ) && is_string($args['data_raw'][$dm_based_field]) && strpos($args['data_raw'][$dm_based_field], "|") !== FALSE){
 
 										$separator = wbc()->config->separator();
 
 										$tmp_fields_array = explode("|",$args['data_raw'][$dm_based_field]);
 
+										if(wbc()->sanitize->get('is_test') == 1) {
+											
+											wbc_pr('eowbc_model_dm_based_field 1111');
+											wbc_pr($tmp_fields_array);
+										}
+
+										$tmp_cntr = 0;
 										foreach ($tmp_fields_array as $tfa_key => $tfa_value) {
 
-											$tmp_fk = 'sp_variations_gallery_images'.$separator.$args['id'].$separator.$separator.($tfa_key+1).$separator; 
+											$tmp_cntr++;
+
+											$tmp_fk = 'sp_variations_gallery_images'.( $tmp_cntr > 1 ? '_'.$tmp_cntr : '' ).$separator.$args['id'].$separator/*.$separator.($tfa_key+1).$separator*/; 
 
 											if(!is_array($form_definition[$key]["form"][$tmp_fk])) {
 
 												$form_definition[$key]["form"][$tmp_fk] = array();
 											}
 
+											$form_definition[$key]["form"][$tmp_fk]["type"] = "icon";
 											$form_definition[$key]["form"][$tmp_fk]["value"] = $tfa_value;
+											$form_definition[$key]["form"][$tmp_fk]["save_as"] = "post_meta";
 										}
+
+										if(wbc()->sanitize->get('is_test') == 1) {
+											
+											wbc_pr('eowbc_model_dm_based_field 2222');
+											wbc_pr($form_definition[$key]["form"]);
+										}
+
+										// ACTIVE_TODO temp. this is temp only till maybe till the diamond meta have this implemenation to select on admin. -- to h 
+										$form_definition[$key]["form"]['meta_lw_chart_pro____{{id}}____']["value"] = 0;
+										$form_definition[$key]["form"]['meta_td_chart_pro____{{id}}____']["value"] = 0;
 
 								    } else {
 

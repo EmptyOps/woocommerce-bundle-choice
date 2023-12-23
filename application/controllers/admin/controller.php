@@ -192,8 +192,8 @@ class Controller extends \eo\wbc\controllers\Controller {
 							array($singleton_function.'_'.$control_key.'_'.$ps_key.'_accordian_end'=>array(
 									'type'=>'accordian',
 									'section_type'=>'end'
-								),
-							),
+								)
+							)
 						);
 					}
 				}
