@@ -1599,7 +1599,9 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
             console.log(_this./*#*/configs_private.options.show_variation_label);
 
             // Append Selected Item Template
-            if (_this./*#*/configs_private.options.show_variation_label) { 
+            // if (_this./*#*/configs_private.options.show_variation_label) {
+            if (_this./*#*/configs_private.options.tiny_features_clear_on_reselect && _this./*#*/configs_private.options.tiny_features_show_selected_attribute && _this./*#*/configs_private.options.tiny_features_variation_label_separator ) { 
+
                 
                 // ACTIVE_TODO t need to provide details -- to t & to s done
                 _this.$base_element.find('.variations .label').each(function (index, el) {
@@ -1838,7 +1840,9 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
         // page condition 
         if( window.document.splugins.common.is_item_page ){
 
-            if (_this./*#*/configs_private.options.show_variation_label ) {
+            // if (_this./*#*/configs_private.options.show_variation_label ) {
+            if (_this./*#*/configs_private.options.tiny_features_clear_on_reselect && _this./*#*/configs_private.options.tiny_features_show_selected_attribute && _this./*#*/configs_private.options.tiny_features_variation_label_separator ) {
+
                 
                 $selected_variation_item = jQuery(element).parent().prev().find('.woo-selected-variation-item-name');
             }
@@ -1927,7 +1931,9 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
                 // page condition 
                 if( window.document.splugins.common.is_item_page ){
 
-                    if (_this./*#*/configs_private.options.show_variation_label ) {
+                    // if (_this./*#*/configs_private.options.show_variation_label ) {
+                    if (_this./*#*/configs_private.options.tiny_features_clear_on_reselect && _this./*#*/configs_private.options.tiny_features_show_selected_attribute && _this./*#*/configs_private.options.tiny_features_variation_label_separator ) {
+
                         
                         if (!window.document.splugins.common.is_empty($selected_variation_item)) {
                             $selected_variation_item.text(woo_variation_swatches_options.variation_label_separator + ' ' + data.attribute_title);
