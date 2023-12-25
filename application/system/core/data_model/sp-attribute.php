@@ -48,13 +48,134 @@ class SP_Attribute extends SP_Entity {
 
 		throw new Exception("not implemented yet.", 1);
 
-		self::create();
+		foreach($data_array as $data_key->$data){
+
+			self::create($data);
+		
+		}
+
 	}
 
-	protected static function create() {
+	protected static function create($data) {
+
 		// TODO bind to the sample data sample attribute creation flow(and that should also be adhering to and following the data layer structure defs) where there is either attribute factory or entire function(s) to do so 
 
 		//	TODO and extensions which needs attribute factory related operations are also supposed to rely on this class for such operations 
+	    				        
+
+		if(!isset($data['label']) && !isset($data['terms'])) return;
+		//adding post data to store data in posts
+		$attribute_data = array(
+	        'name'   => wp_unslash($data['label']),
+	        'slug'    => empty($data['slug']) ? wc_sanitize_taxonomy_name(wp_unslash($data['label'])) : $data['slug'],
+	        'type'    => (empty($data['type'])?'select':$data['type']),
+	        'order_by' => 'menu_order',
+	        'has_archives'  => 1, // Enable archives ==> true (or 1)
+	    );		
+
+		$id = wbc()->wc->eo_wbc_create_attribute( $attribute_data );
+		// @mahesh - added to store the ribbon color from sample data
+		if(!empty($id) and !is_wp_error($id) and !empty($data['ribbon_color'])) {
+			update_term_meta($id,'wbc_ribbon_color',$data['ribbon_color']);
+		}
+		
+		if( ! taxonomy_exists('pa_'.$attribute_data['slug']) ){	
+			register_taxonomy(
+                'pa_'.$attribute_data['slug'],
+                array( 'product', 'product_variation' ),
+                array(
+                    'hierarchical' => false,
+                    'label' => ucfirst($attribute_data['slug']),
+                    'query_var' => true,
+                    'rewrite' => array( 'slug' => sanitize_title($attribute_data['slug'])),
+                )
+            );		 
+        }
+
+		/*if( ! taxonomy_exists('pa_'.$data['slug']) ){						            		    			
+            register_taxonomy(
+                'pa_'.$data['slug'],
+               	array( 'product','product_variation' )			                
+            );
+        }*/ 				
+
+		if(empty($data['range'])){
+    		
+    		foreach ($data['terms'] as $term_index=>$term)  {	
+
+				if( ! term_exists( $term['slug'], 'pa_'.$attribute_data['slug']) ) {
+
+					$attr_term_id = wp_insert_term( $term['slug'],'pa_'.$attribute_data['slug'],array('slug' => sanitize_title($term['slug'])) ); 
+					
+					if(!empty($attr_term_id) and !is_wp_error($attr_term_id)) {
+
+    					$_attr_term_id = null;
+    					if(is_array($attr_term_id)) {
+
+    						$_attr_term_id=isset($attr_term_id['term_id']) ? $attr_term_id['term_id'] : null;
+
+    						if(!empty($_attr_term_id)) {
+
+    							if(!empty($term['thumb'])){
+									$thumb_id=0;
+									-- function helper ma banavi ne call karvanu che. -- to h & -- to b
+		    						$thumb_id=$this->add_image_gallary($data['thumb'][$term_index]);
+		    						update_term_meta( $_attr_term_id, 'pa_'.$attribute_data['slug'].'_attachment', wp_get_attachment_url( $thumb_id ) );
+    								update_term_meta( $_attr_term_id, sanitize_title($term['slug']).'_attachment', wp_get_attachment_url( $thumb_id ) );
+		    					}
+
+		    					if (!wbc_isEmptyArr($data['terms_order'])) {
+
+		    						update_term_meta($_attr_term_id, 'order', $data['terms_order'][$term_index]);
+		    					
+			    					// wbc_pr(get_term_meta($_attr_term_id,'order'));
+			    					// die();
+		    					}
+		    			?192.9.21 baki che
+    							if(!empty($data['type']) and !empty($data['terms_meta']) and is_array($data['terms_meta'])){
+
+    								switch ($data['type']) {
+    									case 'color':
+    									
+    										function_exists( 'update_term_meta' ) ? update_term_meta( $_attr_term_id,'wbc_color',$data['terms_meta'][$term_index]) : update_metadata( 'woocommerce_term', $_attr_term_id,'wbc_color',$data['terms_meta'][$term_index]);
+    										break;
+    										
+    									case 'image':				
+    									case 'image_text':	
+    									case 'dropdown_image':
+    									case 'dropdown_image_only':	
+
+    										\\ throw new Exception("not implemented yet.", 1);
+
+	    									$wbc_attachment_id = $this->add_image_gallary($data['terms_meta'][$term_index]);
+
+	    									$wbc_attachment_src =wp_get_attachment_url( $wbc_attachment_id );
+	    									function_exists( 'update_term_meta' ) ? update_term_meta( $_attr_term_id,'wbc_attachment',$wbc_attachment_src) : update_metadata( 'woocommerce_term', $_attr_term_id,'wbc_attachment',$wbc_attachment_src);
+
+    										break;
+    								}
+    							}
+    						}		    						
+    					}
+					}		    								    			
+	    		}
+	    	}
+    	} else {
+    		
+    		if(!empty($data['terms']['min']['value']) && !empty($data['terms']['max']['value'])) {
+    			
+    			for($i=(float)$data['terms']['min']['value'];$i<=(int)$data['terms']['max']['value'];$i=round($i+0.1,1)){
+    				
+    				if( ! term_exists( $i, 'pa_'.$attribute_data['slug']) ){					    					
+    					
+						wp_insert_term( $i, 'pa_'.$attribute_data['slug'],array('slug' => sanitize_title($i))); 
+					}
+    			}
+    		}			    		
+    	}	    					    	
+	
+	   	return $data;
+
 
 	}
 

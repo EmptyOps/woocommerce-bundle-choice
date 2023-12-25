@@ -816,7 +816,19 @@ class Eowbc_Sample_Data {
 		
 	    if(!empty($args) AND is_array($args)){
 	    	
-	    	foreach ($args as $index=>$attribute) {		    				        
+	    	foreach ($args as $index=>$attribute) {	
+
+	    		$id = wbc()->wc->slug_to_id( 'attr', $slug? );
+
+	    		if (!empty($id)) {
+
+	    			\eo\wbc\model\data_model\SP_WBC_Attribute::createFromArray(array($attribute));
+
+	    			continue;
+
+	    			$id = wbc()->wc->eo_wbc_create_attribute( $data );
+
+	    		}
 
 	    		if(!isset($attribute['label']) && !isset($attribute['terms'])) return;
 	    		//adding post data to store data in posts
@@ -828,7 +840,15 @@ class Eowbc_Sample_Data {
 			        'has_archives'  => 1, // Enable archives ==> true (or 1)
 			    );		
 
-	    		$id = wbc()->wc->eo_wbc_create_attribute( $data );
+	    		$id = wbc()->wc->slug_to_id( 'attr', $slug? );
+
+	    		if (empty($id)) {
+
+
+	    			$id = wbc()->wc->eo_wbc_create_attribute( $data );
+
+	    		}
+
 	    		// @mahesh - added to store the ribbon color from sample data
 	    		if(!empty($id) and !is_wp_error($id) and !empty($attribute['ribbon_color'])) {
 	    			update_term_meta($id,'wbc_ribbon_color',$attribute['ribbon_color']);
@@ -1175,7 +1195,15 @@ class Eowbc_Sample_Data {
 	*/
 	function get_product_size() {
 
-		return count($this->data_template->get_products());
+		if (!empty(wbc()->sanitize->get('product_limit'))) {
+
+			return count(array_slice($this->data_template->get_products(), 0, intval(wbc()->sanitize->get('product_limit'))));
+
+		} else {
+
+			return count($this->data_template->get_products());
+		}
+
 	}
 
 	/**
