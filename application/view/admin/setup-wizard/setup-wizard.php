@@ -58,23 +58,23 @@ box-shadow: none;">
 
 <?php 
 	if (false) {
- ?>
-<script>
-	jQuery(document).ready(function(){
-		jQuery('.ui.dropdown').dropdown();
+?>
+		<script>
+			jQuery(document).ready(function(){
+				jQuery('.ui.dropdown').dropdown();
 
-		jQuery('[name="eo_wbc_inventory_type"]').parent().dropdown('set selected','<?php echo wbc()->options->get_option('setting_status_setting_status_setting','inventory_type', ''); ?>');    
+				jQuery('[name="eo_wbc_inventory_type"]').parent().dropdown('set selected','<?php echo wbc()->options->get_option('setting_status_setting_status_setting','inventory_type', ''); ?>');    
 
-		jQuery('.ui.checkbox').checkbox();
+				jQuery('.ui.checkbox').checkbox();
 
-		jQuery("#create_product").on('click',function(e){
-			console.log('preventDefault');
-			e.preventDefault();
-			e.stopPropagation();
-			window.location.href = jQuery(this).data('link');/*"<?php //echo admin_url("admin.php?page=eowbc&eo_wbc_view_auto_jewel=1&f="); ?>"*/;
-		});
-	});
-</script>
+				jQuery("#create_product").on('click',function(e){
+					console.log('preventDefault');
+					e.preventDefault();
+					e.stopPropagation();
+					window.location.href = jQuery(this).data('link');/*"<?php //echo admin_url("admin.php?page=eowbc&eo_wbc_view_auto_jewel=1&f="); ?>"*/;
+				});
+			});
+		</script>
 <?php
 	}
 	$inventory_type = wbc()->options->get_option('setting_status_setting_status_setting', 'inventory_type', '');
