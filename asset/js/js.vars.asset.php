@@ -121,6 +121,11 @@ add_action( ( !is_admin() ? 'wp_enqueue_scripts' : 'admin_enqueue_scripts'),func
 		
 		$swatches_configs['options']['tiny_features_clear_on_reselect'] = $tiny_features['tiny_features_clear_on_reselect'];
 		
+		$swatches_configs['options']['tiny_features_show_selected_attribute'] = $tiny_features['tiny_features_show_selected_attribute'];
+
+		$swatches_configs['options']['tiny_features_variation_label_separator'] = $tiny_features['tiny_features_variation_label_separator'];
+
+		
 		$swatches_configs['options']['tiny_features_option_enable_tooltip'] = $tiny_features['tiny_features_option_enable_tooltip'];
 
 		$gallery_images_configs['types'] 					  = \eo\wbc\model\publics\data_model\SP_WBC_Variations::instance()->sp_variations_gallery_images_supported_types(array('is_base_type_only'=>true));
