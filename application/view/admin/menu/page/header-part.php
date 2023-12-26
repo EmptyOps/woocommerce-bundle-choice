@@ -106,6 +106,11 @@ else {
                 <meta name="viewport" content="width=device-width" />
                 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
                 <title><?php echo esc_html(constant('EOWBC_NAME'))/*constant('EOWBC_NAME')*/; ?></title>
+                <style type="text/css">
+                  div#wpwrap {
+                      display: none;
+                  }                  
+                </style>
             </head>
             <body>
         <!-- END header -->
@@ -114,8 +119,9 @@ else {
       // -- commented on 01-12-2023 @a
       // wbc()->load->asset('css','fomantic/semantic.min',array(),'2.8.1',true);
       // wbc()->load->asset('js','fomantic/semantic.min',array('jquery'),'2.8.1',true);
-      wbc()->load->asset('js','',array('jquery'),'',true);
-      wbc()->load->built_in_asset('direct_load_semantic');
+      // wbc()->load->asset('js','',array('jquery'),'',true);
+      // wbc()->load->built_in_asset('direct_load_semantic');
+      wbc()->load->built_in_asset('semantic');
     }
 }
 

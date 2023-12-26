@@ -152,7 +152,9 @@ class Setup_Wizard {
 		$this->load_page( $this->step, $this->form, $feature_option ,$bonus_features);
 
 		echo ob_get_clean();
-        exit();
+		// ACTIVETODO temp. this is highly temporary that we are desabling the setup wizard full screen experience. So lets enable it as soon as we get chance or at least by the next measure update of the WBC — to a && — to h
+		// 	-- As off now while implimanting above temparary patch we have hide wp header and footrer and so on using css. So atleast it seems that it is some what similar experiance
+        // exit();
 	}
 
 	public function action() {
@@ -439,5 +441,7 @@ class Setup_Wizard {
 }
 
 add_action('admin_init',function(){
+	// ACTIVETODO temp. this is highly temporary that we are desabling the setup wizard full screen experience. So lets enable it as soon as we get chance or at least by the next measure update of the WBC — to a && — to h
+	// 	-- As off now while implimanting above temparary patch we have hide wp header and footrer and so on using css. So atleast it seems that it is some what similar experiance	
 	Setup_Wizard::instance()->init();
 });
