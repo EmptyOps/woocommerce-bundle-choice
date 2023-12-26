@@ -416,11 +416,13 @@ class SP_Compatibility {
 
 	        }elseif ($current_theme_key == 'themes___twentytwentythree') {
 
-	        	return '100%';
+	        	// -- get woo vala e default width j rakhi se aa theme mate koi width set nathi kari @a 23-12-2023
+	        	// return '100%';
 
 	        }elseif ($current_theme_key == 'themes___twentytwentytwo') {
 
-	        	return '100%';
+	        	// -- get woo vala e default width j rakhi se aa theme mate koi width set nathi kari @a 23-12-2023
+	        	// return '100%';
 
 	        }elseif ($current_theme_key == 'themes___vogue') {
 

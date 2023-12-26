@@ -1713,19 +1713,19 @@ if($asset_param['disable_swatches_plugin_stylesheet'] != 'tiny_features_disable_
 	}
 
 	/*-- loader background img ashish added this css 31-08-2023 --*/
-	.sp-variations-gallery-images-zoom-loader{
+/*	.sp-variations-gallery-images-zoom-loader{
 		background: transparent url('<?php echo constant('EOWBC_ASSET_URL').'img/spinner.gif'; ?>') center no-repeat;
-	}
+	}*/
 
 /*	added 11-09-2023 @a*/
 	.hide{
 		display: none !important;
 	}
 
-	.variable-items-wrapper .variable-item {
+	./*variable-items-wrapper .variable-item {
    		 width: auto !important;
     		height: auto !important;
-	}
+	}*/
 	.spui_engagment_product_change_color ul li {
 	    transform: translateY(11em) !important;
 	}
@@ -2087,5 +2087,41 @@ if(is_product()) {
 	<?php 
 	}
 	?>
+
+</style>
+<style type="text/css">
+
+/*-- button, icon and color template item page and caegory page ma design ok ave tena mate ni css banavani se, 186.22 ma jovanu hatu k stylink ok ave se to eno task se aa @a --*/
+/*-- this task is paused on 26-12-2023 @a --*/
+/*--- start ---*/
+/*-- For icon template category page --*/
+/*ul.spui_single_product_color_icon_variable_items{
+    display: flex !important;
+    flex-wrap: nowrap;
+    padding: 0;	
+}
+ul.spui_single_product_color_icon_variable_items li.spui_color_icon_variable_item .spui_color_icon_variable_item_contents .spui_variable_item_image{
+	max-height: 100%;
+}*/
+
+/*-- For color template category page --*/
+/*.spui_single_product_color_variable_items{
+    display: flex !important;
+    flex-wrap: nowrap;
+    padding: 0;	
+}
+.spui_single_product_color_variable_items .spui_color_variable_item{
+	max-width: 2em; /*aa dynamic karva ni se property @a*/
+}*/
+
+/*-- For color template product page --*/
+/*body ul.spui-wbc-swatches-variable-items-wrapper-child li.color-variable-item {
+    padding: 0 !important;
+}
+body ul.spui-wbc-swatches-variable-items-wrapper-child li.color-variable-item .variable-item {
+    height: 100% !important;
+    width: 100% !important;
+}*/
+/*--- end ---*/
 
 </style>
