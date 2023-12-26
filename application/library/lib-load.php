@@ -67,6 +67,7 @@ if(!class_exists('WBC_Loader')) {
 					wbc()->load->asset('js','https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js', wbc()->common->current_theme_key() != "themes___purple_theme" ? array():array('jquery'),"",true,true,null,null,false,true,null,true);
 					wbc()->load->asset('js','https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js',wbc()->common->current_theme_key() != "themes___purple_theme" ? array():array('jquery'),"",true,true,null,null,false,true,null,true);	
 					break;
+
 				// case 'direct_load_semantic':		
 		        //     // wbc()->load->enqueue_style('fomantic-semantic.min',constant('EOWBC_ASSET_URL').'css/fomantic/semantic.min.css');					
 		        //     // echo '<link rel="stylesheet" type="text/css" href="'.constant('EOWBC_ASSET_URL').'css/fomantic/semantic.min.css'.'">';	            
@@ -74,6 +75,7 @@ if(!class_exists('WBC_Loader')) {
 		        //      'src'  => constant('EOWBC_ASSET_URL').'js/fomantic/semantic.min.js',
 		        //     ));		            
 				// 	break;							
+
 				case 'semantic':
 
 					//ACTIVE_TODO update code below to use wbc()->load->asset function call insted of below dairact wp api call.
