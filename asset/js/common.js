@@ -144,6 +144,21 @@ if(window.document.splugins.common.is_item_page || window.document.splugins.comm
     return (val == undefined || val == null || val.length <= 0) ? true : false;
  }
 
+ window.document.splugins.common.find_get_parameter = function(parameterName) {
+    
+    var result = null,
+        tmp = [];
+    location.search
+        .substr(1)
+        .split("&")
+        .forEach(function (item) {
+            tmp = item.split("=");
+            if (tmp[0] === parameterName) result = decodeURIComponent(tmp[1]);
+        });
+
+    return result;
+ }
+
  // reference: https://stackoverflow.com/a/175787
  window.document.splugins.common.isNumeric = function(str) {
     
@@ -217,9 +232,18 @@ if(window.document.splugins.common.is_item_page || window.document.splugins.comm
 
  window.document.splugins.common.get_device_visible_screen_height_width = function() {
     
+    // Visible Height
+    var visibleHeight = window.innerHeight || document.documentElement.clientHeight;
+
+    // Visible Width
+    var visibleWidth = window.innerWidth || document.documentElement.clientWidth;  
+    
     return {
-        width: jQuery(window).width(),
-        height: jQuery(window).height(),  
+        // width: jQuery(window).width(),
+        // height: jQuery(window).height(),
+        width: visibleWidth,
+        height: visibleHeight,
+
     };
  } 
 
@@ -265,6 +289,10 @@ ACTIVE_TODO_OC_END*/
  
  //  Feed 
  window.document.splugins.Feed = window.document.splugins.Feed || {};
+
+ //  single product 
+ window.document.splugins.single_product = window.document.splugins.single_product || {};
+
  
  
  
@@ -4995,6 +5023,7 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
                 
                 console.log('gim_feed zoom_area_hover_in each_loop');
 
+                console.log(_this./*#*/$configs_private.options.tiny_features_option_ui_loop_box_hover_media_index);
                 console.log(image.extra_params_org.type);
 
                 image.index = index_inner;
@@ -5228,4 +5257,14 @@ if(window.document.splugins.common.is_category_page) {
         // },2000);
     });
 
+}
+
+//NOTE: some business logic related common functions. we may like to move it to some other place if ever required. 
+if(window.document.splugins.common.is_item_page) {
+
+    window.document.splugins.single_product.wbc_atb_submin_form = function() {
+
+        jQuery('form.cart').attr('action',document.location.href);
+        jQuery('form.cart').submit();
+    }
 }

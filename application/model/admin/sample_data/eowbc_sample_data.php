@@ -108,6 +108,7 @@ class Eowbc_Sample_Data {
 			header("Location: ".admin_url('admin.php?page=eowbc-tiny-features')); 
 			exit; 
 		}
+
 		if(!empty($_POST)) {			
 			
 			if(isset($_POST['_wpnonce']) && wp_verify_nonce(wbc()->sanitize->post('_wpnonce'),'eo_wbc_auto_jewel')) {

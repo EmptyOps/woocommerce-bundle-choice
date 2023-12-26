@@ -2,7 +2,7 @@
 namespace eo\wbc\controllers\publics\pages;
 defined( 'ABSPATH' ) || exit;
 
-class Preview {
+class Preview extends \eo\wbc\system\core\publics\Eowbc_Base_Model_Publics {
 
     private static $_instance = null;
 
@@ -47,12 +47,16 @@ class Preview {
     {
         wbc()->theme->load('css','review');
         wbc()->theme->load('js','review');
-        /*Hide sidebar and make content area full width.*/
-        if(apply_filters('eowbc_filter_sidebars_widgets',true)){
-            add_filter( 'sidebars_widgets',function($sidebars_widgets ) {
-                return array( false );
-            });
-        }
+
+        // chenged on 30-09-2023
+        // /*Hide sidebar and make content area full width.*/
+        // if(apply_filters('eowbc_filter_sidebars_widgets',true)){
+        //     add_filter( 'sidebars_widgets',function($sidebars_widgets ) {
+        //         return array( false );
+        //     });
+        // }
+        parent::instance()->sidebars_widgets();
+        
         $button_backcolor_active = wbc()->options->get_option('appearance_wid_btns','button_backcolor_active','');
         $button_textcolor = wbc()->options->get_option('appearance_wid_btns','button_textcolor','#ffffff');
         $eo_wbc_home_btn_border_color = false;  //dropped this field. wbc()->options->get_option('appearance_wid_btns','button_backcolor_active','');
@@ -82,10 +86,11 @@ class Preview {
         add_action( 'wp_enqueue_scripts',function(){ 
             // wp_register_style('eo_wbc_ui_css',EOWBC_ASSET_URL.'css/fomantic/semantic.min.css');
             // wp_enqueue_style( 'eo_wbc_ui_css');
-            wbc()->load->asset('css','fomantic/semantic.min');
+            // wbc()->load->asset('css','fomantic/semantic.min');
             // wp_register_script('eo_wbc_ui_js',EOWBC_ASSET_URL.'js/fomantic/semantic.min.js');
             // wp_enqueue_script( 'eo_wbc_ui_js');
-            wbc()->load->asset('js','fomantic/semantic.min');
+            // wbc()->load->asset('js','fomantic/semantic.min');
+            wbc()->load->built_in_asset('semantic');
         },100);
 
         add_action('wp_footer',function(){

@@ -1147,6 +1147,11 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 				        	console.log("compatability inner else if inner if inner if themes patch dello");
 
 							selector_string_local = '.radiantthemes-shop';
+						}else if(window.document.splugins.common.current_theme_key == 'themes___goldish-child') {
+
+				        	console.log("compatability inner else if inner if inner if themes patch dello");
+
+							selector_string_local = '.products,.c-product-grid__wrap';
 						}
 
 						if(object.is_return_string_selector) {
@@ -1646,7 +1651,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
     var input_type_icon_click_listener = function() {
 
     	console.log('filters [input_type_icon_click_listener]');
-    	console.log(EO_WBC_FILTER_UI_ICON_TERM_SLUG);
+    	// console.log(EO_WBC_FILTER_UI_ICON_TERM_SLUG);
 
     	if(typeof(EO_WBC_FILTER_UI_ICON_TERM_SLUG) != typeof(undefined) && !window.document.splugins.common.is_empty(EO_WBC_FILTER_UI_ICON_TERM_SLUG)) {
     		
@@ -2070,6 +2075,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 			};
 
 			_params.onChange=function(value, min, max) {	
+				console.log('_params.onChange');
 				_labels = jQuery(e).attr('data-labels');
 				__slugs = jQuery(e).attr('data-slugs');
 				
@@ -2231,13 +2237,14 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 			console.log(_params);
 			
 			// ACTIVE_TODO temp. added on 30-11-2022. remove as soon as the standerd fix is ready. 
-			if(window.document.splugins.common.current_theme_key != 'themes___alpha-store-pro-child' && window.document.splugins.common.current_theme_key != 'themes___maia-child' && window.document.splugins.common.current_theme_key != 'themes___moonte-child' && window.document.splugins.common.current_theme_key != 'themes___frank-jewelry-store'){		
+			if(window.document.splugins.common.current_theme_key != 'themes___alpha-store-pro-child' && window.document.splugins.common.current_theme_key != 'themes___maia-child' && window.document.splugins.common.current_theme_key != 'themes___moonte-child' && window.document.splugins.common.current_theme_key != 'themes___frank-jewelry-store' && window.document.splugins.common.current_theme_key != 'themes___merchandiser-child'){		
 				
 				console.log('if jQuery(e).slider(_params) call');
 
 				// purple theme mate aa permenent alag if se tenu slider alag ave se atle. So aa permanant if condition se and koi temp. temparary if nathi.
 				if(window.document.splugins.common.current_theme_key != 'themes___purple_theme') {
-					jQuery(e).slider(_params);
+					// jQuery(e).slider(_params);
+					jQuery(e).semanticSlider(_params);
 				}
 			}else{
 				
@@ -2253,7 +2260,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		});
 	
 		// ACTIVE_TODO temp. added on 30-11-2022. remove as soon as the standerd fix is ready. 
-		if(window.document.splugins.common.current_theme_key == 'themes___alpha-store-pro-child' || window.document.splugins.common.current_theme_key == 'themes___maia-child' || window.document.splugins.common.current_theme_key == 'themes___moonte-child' || window.document.splugins.common.current_theme_key == 'themes___frank-jewelry-store') {
+		if(window.document.splugins.common.current_theme_key == 'themes___alpha-store-pro-child' || window.document.splugins.common.current_theme_key == 'themes___maia-child' || window.document.splugins.common.current_theme_key == 'themes___moonte-child' || window.document.splugins.common.current_theme_key == 'themes___frank-jewelry-store' || window.document.splugins.common.current_theme_key == 'themes___merchandiser-child') {
 			
 			console.log('if temp_patch_slider_change_event_child call');
 
@@ -2288,14 +2295,17 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 			if(min_value.includes(postfix)){
 				min_value = min_value.slice(0,-1*postfix.length);
 			}
-			if(min_value.includes(postfix)){
+			if(max_value.includes(postfix)){
+
+				// console.log('filters [common_slider_change_event] if 2 if 2');
+				
 				max_value = max_value.slice(0,-1*postfix.length);
 			}
 		}
 
 		if(window.document.splugins.common.current_theme_key != 'themes___purple_theme') {
 
-			jQuery("#text_slider_"+jQuery(e).attr('data-slug')).slider("set rangeValue",min_value,max_value);
+			jQuery("#text_slider_"+jQuery(e).attr('data-slug')).semanticSlider("set rangeValue",min_value,max_value);
 		}else{
 			
 			var sliderData = jQuery(e).data("ionRangeSlider").result;
@@ -2311,12 +2321,12 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		
     	console.log('filters [temp_patch_slider_change_event_child]');
 
-		jQuery.getScript("https://demo.woochoiceplugin.com/hify-store/wp-content/plugins/woo-bundle-choice/asset/js/fomantic/semantic.min.js?ver=5.0.10", function(data, status, jqxhr) {
+		jQuery.getScript(window.document.splugins.common.site_url+'/wp-content/plugins/woo-bundle-choice/asset/js/fomantic/semantic.min.js?ver=5.0.10', function(data, status, jqxhr) {
 	
 	    	for (let i = 0; i < slider.element.length; i++) {
 
 				console.log(slider.params[i]);	
-				jQuery(slider.element[i]).slider(slider.params[i]);
+				jQuery(slider.element[i]).semanticSlider(slider.params[i]);
 			}	
 
 		});
@@ -2959,6 +2969,7 @@ if( typeof(eo_wbc_object) != 'undefined'){
 	    	
 	    	console.log('pagination_click');
 	    	console.log(_this.$base_pagination_container);
+	    	console.log(element);
 
 	    	/*ACTIVE_TODO_OC_START
 	    	-- event var aya sudhi pogadvano se -- to a
@@ -2971,10 +2982,12 @@ if( typeof(eo_wbc_object) != 'undefined'){
 				
 				console.log('pagination click if');
 				if(/*_this.$base_pagination_container*/jQuery(element).hasClass("next")){
+					console.log(window.document.splugins.wbc.pagination.api.get_page_number());
 					// jQuery("[name='paged']").val(parseInt(jQuery(".page-numbers.current").text())+1);
 					window.document.splugins.wbc.pagination.api.set_page_number( window.document.splugins.wbc.pagination.api.get_page_number()+1 );
 				}
 				if(/*_this.$base_pagination_container*/jQuery(element).hasClass("prev")){
+					console.log(window.document.splugins.wbc.pagination.api.get_page_number());
 					// jQuery("[name='paged']").val(parseInt(jQuery(".page-numbers.current").text())-1);
 					window.document.splugins.wbc.pagination.api.set_page_number( window.document.splugins.wbc.pagination.api.get_page_number()-1 );
 				}	
@@ -2982,6 +2995,8 @@ if( typeof(eo_wbc_object) != 'undefined'){
 			else {
 
 				console.log('pagination click else');
+				console.log(jQuery(element));
+				console.log(window.document.splugins.wbc.pagination.api.get_page_number(jQuery(element)));
 				// jQuery("[name='paged']").val(jQuery(this).text());
 				window.document.splugins.wbc.pagination.api.set_page_number( window.document.splugins.wbc.pagination.api.get_page_number(jQuery(element)));
 			}		
@@ -3097,9 +3112,19 @@ if( typeof(eo_wbc_object) != 'undefined'){
 						
 					selector = ".page-numbers.current";
 				}			
+				console.log(jQuery(selector));
+				
+				if(jQuery(selector).html().indexOf('&nbsp;') >= 0 ){
+					
+					console.log('get_page_number in nbsp available');
+					
+					return parseInt(jQuery(selector).html().replace(',','').replace(/\&nbsp;/g, ''));
+				}else{
 
-				return parseInt(jQuery(selector).text().replace(',',''));
+					console.log('get_page_number in nbsp not available');
 
+					return parseInt(jQuery(selector).text().replace(',',''));
+				}
 			},
 
 			set_page_number: function(page_number) {
@@ -3108,6 +3133,9 @@ if( typeof(eo_wbc_object) != 'undefined'){
 
 					reset_private();
 				}
+
+				console.log('[set_page_number] page_number');
+				console.log(page_number);
 
 				jQuery("[name='paged']").val(page_number);
 
@@ -3738,8 +3766,11 @@ if( typeof(eo_wbc_object) != 'undefined'){
 
 		let ui_slider = jQuery.fn.slider;		
 		jQuery.fn.slider = window.document.splugins.ui.slider;	
-
-		jQuery(".ui.slider[data-slug='"+selector+"']").slider('set rangeValue',first,second);
+		console.log('eo_wbc_filter [reset_slider]');
+		console.log(selector);
+		console.log(first);
+		console.log(second);
+		jQuery(".ui.slider[data-slug='"+selector+"']").semanticSlider('set rangeValue',first,second);
 		if(jQuery("[name='_attribute']").val().includes(selector)) {					    			
 			_values=jQuery("[name='_attribute']").val().split(',')
 			_index=_values.indexOf(selector)
@@ -3754,7 +3785,7 @@ if( typeof(eo_wbc_object) != 'undefined'){
 	function reset_price(e,min,max) {
 		e.preventDefault();
 		e.stopPropagation()
-		jQuery(".ui.slider[data-slug='price']").slider('set rangeValue',min,max);
+		jQuery(".ui.slider[data-slug='price']").semanticSlider('set rangeValue',min,max);
 		return false;	
 	}
 

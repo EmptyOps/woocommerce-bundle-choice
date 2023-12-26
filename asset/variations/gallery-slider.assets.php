@@ -284,6 +284,8 @@ add_action( 'wp_enqueue_scripts' ,function(){
 
     <!-- -- a tejas che api che -->
     <script type="text/javascript">
+        
+        var is_splide_initiated = false;
 
         var is_splide_initiated = false;
 

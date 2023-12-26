@@ -69,13 +69,14 @@ if(!class_exists('WBC_Loader')) {
 					break;		
 				case 'semantic':
 					//ACTIVE_TODO update code below to use wbc()->load->asset function call insted of below dairact wp api call.
-					add_action( 'wp_enqueue_scripts',function() { 
-		        	
-		            wp_register_style('fomantic-semantic.min',constant('EOWBC_ASSET_URL').'css/fomantic/semantic.min.css');
-		            wp_enqueue_style( 'fomantic-semantic.min');
-		            wp_register_script('fomantic-semantic.min',constant('EOWBC_ASSET_URL').'js/fomantic/semantic.min.js',array('jquery'),false);    
-		            wp_enqueue_script( 'fomantic-semantic.min');        
-		        },100);	
+					// -- aa hook comment karyo se jyare me asset na funation mathi sematic no call lagto hato tyare built_in_asset no maryo tyare comment karyu se @a 20-11-2023
+					// add_action( 'wp_enqueue_scripts',function() { 
+			        	
+			            wp_register_style('fomantic-semantic.min',constant('EOWBC_ASSET_URL').'css/fomantic/semantic.min.css');
+			            wp_enqueue_style( 'fomantic-semantic.min');
+			            wp_register_script('fomantic-semantic.min',constant('EOWBC_ASSET_URL').'js/fomantic/semantic.min.js',array('jquery'),false);    
+			            wp_enqueue_script( 'fomantic-semantic.min');        
+		       		// },100);	
 					break;
 
 				case 'react':

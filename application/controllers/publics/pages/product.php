@@ -2,7 +2,8 @@
 namespace eo\wbc\controllers\publics\pages;
 defined( 'ABSPATH' ) || exit;
 
-class Product {
+
+class Product extends \eo\wbc\system\core\publics\Eowbc_Base_Model_Publics {
 
     private static $_instance = null;
 
@@ -267,7 +268,22 @@ class Product {
                                 $url = $url."&".$get_link;
                             }
                         ?>
-                        window.location.href = '<?php echo $url; ?>';
+                        
+                        
+                        var url = '<?php echo $url; ?>';
+                        
+                        if(!window.document.splugins.common.is_empty(jQuery('#eo_wbc_add_to_cart_preview').data('url_extra_callback'))){
+
+                            url = window[jQuery('#eo_wbc_add_to_cart_preview').data('url_extra_callback')](url);
+                        }
+
+                        if (!window.document.splugins.common.is_empty(url)) {
+                            
+                            // console.log('ddddddddddd');
+                            // console.log(url);
+                            window.location.href = url;
+                        }
+
                         return false;
                     });
 
@@ -362,7 +378,10 @@ class Product {
             //adding set to the woocommerce cart
             $cart_details=wbc()->session->get('EO_WBC_SETS');
            
-           
+            // ACTIVE_TODO aa temporary patch chhe jyare woo-bundle-choice upgrade thai tyre a ppom no patch nai rey and woocomersh no built in support ena thij ppom ne eva plugin work kerva joye, evu upgrade nu implementation thavu joye, pashi a problem mate apdey patch handel kervano nai ave. -- to h
+                // ACTIVE_TODO and below hook is also temporary so remove it as sun as this patch is removed as menshened above. -- to h 
+            do_action('sp_ppom_patch_temp_hook_before_add_to_cart',$cart_details);
+
             if(!empty($cart_details['FIRST']) && !empty($cart_details['SECOND'])){
                 $FIRT_CART_ID=wc()->cart->add_to_cart(
                                 $cart_details['FIRST'][0],
@@ -646,12 +665,16 @@ class Product {
         $redirect_url = $this->eo_wbc_product_route();
         wbc()->theme->load('css','product');
         wbc()->theme->load('js','product');
-        /*Hide sidebar and make content area full width.*/
-        if(apply_filters('eowbc_filter_sidebars_widgets',true)){
-            /*add_filter( 'sidebars_widgets',function($sidebars_widgets ) {
-                return array( false );
-            });    */
-        }
+
+        // chenged on 30-09-2023
+        // /*Hide sidebar and make content area full width.*/
+        // if(apply_filters('eowbc_filter_sidebars_widgets',true)){
+        //     /*add_filter( 'sidebars_widgets',function($sidebars_widgets ) {
+        //         return array( false );
+        //     });    */
+        // }
+        parent::instance()->sidebars_widgets();
+
         
         ob_start();        
         ?>
@@ -732,8 +755,9 @@ class Product {
                     <?php if(!empty(wbc()->options->get_option('appearance_product_page','product_page_add_to_basket',''))) :?>
                         
                         window.wbc_atb_submin_form = function(){
-                            jQuery('form.cart').attr('action',document.location.href);
-                            jQuery('form.cart').submit();
+                            // jQuery('form.cart').attr('action',document.location.href);
+                            // jQuery('form.cart').submit();
+                            window.document.splugins.single_product.wbc_atb_submin_form();
                         }
 
                         jQuery(".single_add_to_cart_button.alt:not(.disabled):eq(0)").replaceWith('<div class=\"ui buttons\">'+
@@ -1003,9 +1027,11 @@ class Product {
                 if( isset($eo_wbc_sets['SECOND'][2]) ) {
 
                     if(strpos($url,'?')===false) {
-                        $url = $url.'?variation_id='.$eo_wbc_sets['SECOND'][2];
+                        // $url = $url.'?variation_id='.$eo_wbc_sets['SECOND'][2];
+                        $url = $url.'?'.wbc_get_variation_url_part($eo_wbc_sets['SECOND'][2],$eo_wbc_sets['SECOND']['variation']);
                     } else {
-                        $url = $url.'&variation_id='.$eo_wbc_sets['SECOND'][2];
+                        // $url = $url.'&variation_id='.$eo_wbc_sets['SECOND'][2];
+                        $url = $url.'&'.wbc_get_variation_url_part($eo_wbc_sets['SECOND'][2],$eo_wbc_sets['SECOND']['variation']);
                     }
                 }
             }

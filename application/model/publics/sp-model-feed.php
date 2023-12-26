@@ -450,4 +450,188 @@ class SP_Model_Feed extends SP_Feed {
 		return $data;
 	}
 
+	public function ui_appearence_controls_definition($ui_definition, $page_section, $args = array()){
+
+        if ($ui_definition === null) {
+          
+            $ui_definition = array();
+
+            $ui_definition['controls'] = array();
+
+        }
+
+        $ids = null;
+        if ('oops_section' === $page_section) {
+            
+            $ids = array('wbc_fp_oops_appointment_optitle','wbc_fp_oops_appointment_no_products','wbc_fp_oops_appointment_go_back','wbc_fp_oops_appointment_continue_single','wbc_fp_oops_appointment_mapping_text','wbc_fp_oops_appointment_mapping_adequate_text','wbc_fp_oops_appointment_report_admin');
+        }
+
+        if (empty($ids)) {
+            
+            return $ui_definition;
+        }
+
+        foreach($ids as $id_key){
+
+            if ('wbc_fp_oops_appointment_optitle' === $id_key) {
+
+                if (!isset($ui_definition['controls'][$id_key])) {
+                   
+                   $ui_definition['controls'][$id_key] = array();
+
+                }
+
+                $ui_definition['controls'][$id_key]['appearence_controls'] = array('Ooops Title',array(),array('type'=>'text','control_key'=>'appearance_wbc_fp_appearence_controls','id_key'=>'wbc_fp_oops_appointment_optitle'));
+            
+            } else if ('wbc_fp_oops_appointment_no_products' === $id_key) {
+
+                if (!isset($ui_definition['controls'][$id_key])) {
+                   
+                   $ui_definition['controls'][$id_key] = array();
+
+                }
+
+                $ui_definition['controls'][$id_key]['appearence_controls'] = array('No products were found matching your selection',array(),array('type'=>'text','control_key'=>'appearance_wbc_fp_appearence_controls','id_key'=>'wbc_fp_oops_appointment_no_products'));
+            
+            } else if ('wbc_fp_oops_appointment_go_back' === $id_key) {
+
+                if (!isset($ui_definition['controls'][$id_key])) {
+                   
+                   $ui_definition['controls'][$id_key] = array();
+
+                }
+
+                $ui_definition['controls'][$id_key]['appearence_controls'] = array('Go Back Title & link',array(),array('type'=>'a','control_key'=>'appearance_wbc_fp_appearence_controls','id_key'=>'wbc_fp_oops_appointment_go_back'));
+            
+            } else if ('wbc_fp_oops_appointment_continue_single' === $id_key) {
+
+                if (!isset($ui_definition['controls'][$id_key])) {
+                   
+                   $ui_definition['controls'][$id_key] = array();
+
+                }
+
+                $ui_definition['controls'][$id_key]['appearence_controls'] = array('Continue buying single item Title & link',array(),array('type'=>'a','control_key'=>'appearance_wbc_fp_appearence_controls','id_key'=>'wbc_fp_oops_appointment_continue_single'));
+            
+            } else if ('wbc_fp_oops_appointment_mapping_text' === $id_key) {
+
+                if (!isset($ui_definition['controls'][$id_key])) {
+                   
+                   $ui_definition['controls'][$id_key] = array();
+
+                }
+
+                $ui_definition['controls'][$id_key]['appearence_controls'] = array('As admin of this site please create a product mapping to fix this problem text',array(),array('type'=>'text','control_key'=>'appearance_wbc_fp_appearence_controls','id_key'=>'wbc_fp_oops_appointment_mapping_text'));
+            
+            } else if ('wbc_fp_oops_appointment_mapping_adequate_text' === $id_key) {
+
+                if (!isset($ui_definition['controls'][$id_key])) {
+                   
+                   $ui_definition['controls'][$id_key] = array();
+
+                }
+
+                $ui_definition['controls'][$id_key]['appearence_controls'] = array('Adequate mapping(s) needs to be added in... text',array(),array('type'=>'text','control_key'=>'appearance_wbc_fp_appearence_controls','id_key'=>'wbc_fp_oops_appointment_mapping_adequate_text'));
+            
+            } else if ('wbc_fp_oops_appointment_report_admin' === $id_key) {
+
+                if (!isset($ui_definition['controls'][$id_key])) {
+                   
+                   $ui_definition['controls'][$id_key] = array();
+
+                }
+
+                $ui_definition['controls'][$id_key]['appearence_controls'] = array('Report to admin to help them fix this problem title & text',array(),array('type'=>'a','control_key'=>'appearance_wbc_fp_appearence_controls','id_key'=>'wbc_fp_oops_appointment_report_admin'));
+            
+            }
+        }
+      
+        return $ui_definition;
+
+    }
+
+    public function ui_configuration_controls_definition($ui_definition, $page_section, $args = array()){
+
+        if ($ui_definition === null) {
+          
+            $ui_definition = array();
+
+            $ui_definition['controls'] = array();
+
+        }
+
+        $ids = null;
+        if ('example_page_section' === $page_section) {
+            
+            $ids = array(''/*'example_id'*/);
+
+        }
+
+        if (empty($ids)) {
+            
+            return $ui_definition;
+        }
+        
+        foreach($ids as $id_key){
+
+            if ('example_id' === $id_key) {
+
+                if (!isset($ui_definition['controls'][$id_key])) {
+                   
+                   $ui_definition['controls'][$id_key] = array();
+
+                }
+                
+                $ui_definition['controls'][$id_key]['configuration_controls'] = array();
+            
+            }
+
+
+        }
+
+        return $ui_definition;
+
+    }
+
+    public function ui_data_controls_definition($ui_definition, /*$ui*/$page_section, $args = array()){
+
+        if ($ui_definition === null) {
+          
+            $ui_definition = array();
+
+            $ui_definition['controls'] = array();
+
+        }
+
+        $ids = null;
+        if ('example_page_section' === $page_section) {
+            
+            $ids = array(''/*'example_id'*/);
+
+        }
+
+        if (empty($ids)) {
+            
+            return $ui_definition;
+        }
+
+        foreach($ids as $id_key){
+
+            if ('example_id' === $id_key) {
+
+                if (!isset($ui_definition['controls'][$id_key])) {
+                   
+                   $ui_definition['controls'][$id_key] = array();
+
+                }
+                
+                $ui_definition['controls'][$id_key]['data_controls'] = array();
+                
+            }
+        }
+
+        return $ui_definition;
+
+    }
+
 }

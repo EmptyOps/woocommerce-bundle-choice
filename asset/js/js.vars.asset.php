@@ -14,46 +14,6 @@ add_action( ( !is_admin() ? 'wp_enqueue_scripts' : 'admin_enqueue_scripts'),func
 
 	<script type="text/javascript">
 	
-		// var log = console.log;
-		// console.log = function () {
-			
-		// 	var base_log = null;
-		// 	// window.temp = arguments[0];
-
-		// 	if(typeof arguments[0] == 'string'){
-
-		// 		var conditions = [arguments[0].indexOf('] ') >= 0,
-		// 			arguments[0].indexOf('gim_feed [') >= 0,
-		// 			arguments[0].indexOf('gim [') >= 0,
-		// 			arguments[0].indexOf('vs [') >= 0,
-		// 			arguments[0].indexOf('A_OFF') >= 0,
-		// 			arguments[0].indexOf('A_ON') >= 0				
-		// 			];
-
-		// 		for (let i = 0; i < conditions.length; i++) {
-		// 			var condition = false;
-		// 			if(conditions[i]){
-		// 				condition = true;
-		// 				break;
-		// 			}
-		// 		};
-		// 	}
-
-		// 	if(condition){
-
-		// 		base_log = false;
-		// 	}else{
-		// 		base_log = true;
-
-		// 	}
-
-		// 	if(base_log){
-
-		//     log.apply(console, arguments);
-		// 	}
-
-		// }
-
 		//	define namespaces 
 		window.document.splugins = window.document.splugins || {};
 		window.document.splugins.common = window.document.splugins.common || {};
@@ -81,6 +41,8 @@ add_action( ( !is_admin() ? 'wp_enqueue_scripts' : 'admin_enqueue_scripts'),func
 
     	window.document.splugins.common.current_theme_key = '<?php echo wbc()->common->current_theme_key(); ?>';
     	
+    	window.document.splugins.common.site_url = '<?php echo wbc_site_url(); ?>';
+
     	window.document.splugins.common.ajax_url = '<?php echo admin_url('admin-ajax.php'); ?>';
 
 		window.document.splugins.common.is_shop_page = <?php echo ((is_shop()) ? "true" : "false");?>; 
@@ -92,6 +54,8 @@ add_action( ( !is_admin() ? 'wp_enqueue_scripts' : 'admin_enqueue_scripts'),func
 		window.document.splugins.common.is_mobile = <?php echo ((wbc_is_mobile()) ? "true" : "false");?>;
 		
 		window.document.splugins.common.is_tablet = <?php echo ((wbc_is_mobile()) ? "true" : "false");?>;	
+
+		window.document.splugins.common.ajax_url = '<?php echo admin_url('admin-ajax.php');?>';	
 
 	</script>
 <?php  
@@ -369,6 +333,7 @@ add_action('wp_footer',function(){
 			window.setTimeout(function(){
 				/*global wc_add_to_cart_variation_params */
 				;(function ( $, window, document, undefined ) {
+						console.log('--A_OFF show_variation--');
 
 						/**
 						 * VariationForm class which handles variation forms and attributes.
@@ -546,6 +511,7 @@ add_action('wp_footer',function(){
 							if ( attributes.count && attributes.count === attributes.chosenCount ) {
 								
 								console.log('A_OFF show_variation [onFindVariation] 1');
+								console.log(form);
 
 								if ( form.useAjax ) {
 									
@@ -589,6 +555,7 @@ add_action('wp_footer',function(){
 								} else {
 
 									console.log('A_OFF show_variation [onFindVariation] 1 else');
+									console.log(currentAttributes);
 
 									form.$form.trigger( 'update_variation_values' );
 
@@ -608,7 +575,11 @@ add_action('wp_footer',function(){
 										form.$form.trigger( 'reset_data' );
 										attributes.chosenCount = 0;
 
+										console.log('A_OFF show_variation [onFindVariation] 1 else else');
+										console.log(form);
+	
 										if ( ! form.loading ) {
+											console.log('A_OFF show_variation [onFindVariation] 1 else else if');
 											form.$form
 												.find( '.single_variation' )
 												.after(
@@ -731,6 +702,8 @@ add_action('wp_footer',function(){
 						VariationForm.prototype.onChange = function( event ) {
 							var form = event.data.variationForm;
 
+							console.log('A_OFF show_variation [onChange]');
+							
 							form.$form.find( 'input[name="variation_id"], input.variation_id' ).val( '' ).trigger( 'change' );
 							form.$form.find( '.wc-no-matching-variations' ).remove();
 
@@ -1026,7 +999,7 @@ add_action('wp_footer',function(){
 						$.fn.wc_variation_form = function() {
 							
 							console.log('A_OFF show_variation [wc_variation_form]');
-							// console.log(this);
+							console.log(this);
 
 							new VariationForm( this );
 							return this;
@@ -1191,6 +1164,8 @@ add_action('wp_footer',function(){
 						};
 
 						$(function() {
+							// console.log('A_OFF wc_add_to_cart_variation_params');
+							// console.log(wc_add_to_cart_variation_params);
 							if ( typeof wc_add_to_cart_variation_params !== 'undefined' ) {
 								$( '.variations_form' ).each( function() {
 									// console.log('A_OFF show_variation [load] loop');
@@ -1282,6 +1257,7 @@ add_action('wp_footer',function(){
 					window.setTimeout(function(){
 					/*global wc_add_to_cart_variation_params */
 					;(function ( $, window, document, undefined ) {
+						console.log('--A_ON show_variation--');
 						/**
 						 * VariationForm class which handles variation forms and attributes.
 						 */
@@ -1936,7 +1912,7 @@ add_action('wp_footer',function(){
 						$.fn.wc_variation_form = function() {
 							
 							console.log('A_ON show_variation [wc_variation_form]');
-							// console.log(this);
+							console.log(this);
 
 							new VariationForm( this );
 							return this;
@@ -2101,6 +2077,8 @@ add_action('wp_footer',function(){
 						};
 
 						$(function() {
+							// console.log('A_ON wc_add_to_cart_variation_params');
+							// console.log(wc_add_to_cart_variation_params);
 							if ( typeof wc_add_to_cart_variation_params !== 'undefined' ) {
 								$( '.variations_form' ).each( function() {
 									// console.log('A_ON show_variation [load] loop');

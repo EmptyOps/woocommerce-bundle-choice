@@ -66,8 +66,9 @@ class SP_Model_Checkout extends SP_Checkout {
 
 		add_action( 'wp_footer'/*'wp_enqueue_scripts'*/ ,function(){
 			
-			wbc()->load->asset('css','fomantic/semantic.min');
-			wbc()->load->asset('js','fomantic/semantic.min',array('jquery'));
+			// wbc()->load->asset('css','fomantic/semantic.min');
+			// wbc()->load->asset('js','fomantic/semantic.min',array('jquery'));
+			wbc()->load->built_in_asset('semantic');
 
 			wbc()->load->asset( 'asset.php', constant( 'EOWBC_ASSET_DIR' ).'variations.assets.php');
 		}, 1049);	

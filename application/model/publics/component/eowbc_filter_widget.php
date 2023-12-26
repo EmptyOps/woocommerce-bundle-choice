@@ -164,8 +164,9 @@ class EOWBC_Filter_Widget {
 
 	public function eo_wbc_filter_enque_asset() {
 
-		wbc()->load->asset('css','fomantic/semantic.min');
-		wbc()->load->asset('js','fomantic/semantic.min',array('jquery-ui-core'));
+		// wbc()->load->asset('css','fomantic/semantic.min');
+		// wbc()->load->asset('js','fomantic/semantic.min',array('jquery-ui-core'));
+		wbc()->load->built_in_asset('semantic');
 		wp_add_inline_script('fomantic-semantic.min','jQuery.fn.ui_accordion = jQuery.fn.accordion;
 				jQuery.fn.ui_slider = jQuery.fn.slider;
 				jQuery.fn.ui_checkbox = jQuery.fn.checkbox;');
@@ -2178,7 +2179,7 @@ class EOWBC_Filter_Widget {
 	}
 	
 	public function load_collapsable_desktop_price_filter() {
-		?><a class="ui dropdown item">Price&nbsp;<i class="chevron down icon"></i>
+		?><a class="ui dropdown item"><?php echo wbc()->options->get_option('appearance_filters','appearance_filters_price_filter_title_text','Price',false,true);?>&nbsp;<i class="chevron down icon"></i>
 			<div class="menu">
 				<div class="item" style="width: max-content !important;min-width: 33vw;max-width: 33vw;display: table-cell;">				
 					<?php $this->slider_price(); ?>
@@ -2955,10 +2956,10 @@ class EOWBC_Filter_Widget {
 					jQuery("#help_modal").find(".content").html('');	
 					_help_text = jQuery(this).data('help');
 					jQuery("#help_modal").find(".content").html(_help_text);
-					jQuery("#help_modal").modal('show');
+					jQuery("#help_modal").semanticModal('show');
 				});
 				jQuery(document).on('click',"#help_modal .close.icon",function(){
-					jQuery("#help_modal").modal('hide');
+					jQuery("#help_modal").semanticModal('hide');
 				});
 			});
 		</script>
@@ -3073,7 +3074,8 @@ class EOWBC_Filter_Widget {
 				// and 
 				// !empty(wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','filter_setting_advance_second_category',false))
 
-				sizeof($filter_sets_data) >= 2
+				// sizeof($filter_sets_data) >= 2
+				sizeof($filter_sets_data) >= 1
 			) {
 			
 			// --- aa code if condition ni bar muki ne loop chalavu se ---
