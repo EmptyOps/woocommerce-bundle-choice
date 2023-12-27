@@ -351,6 +351,12 @@ if(!class_exists('SP_Plugin_Index_Class') ) {
 
 						$namespace_class = '\\'.str_replace('_','\\\\',$this->SP_Extension->singleton_function()).'\\model\\admin\\sample_data\\' . $class;
 
+						if( class_exists($namespace_class) ) {
+
+							return $namespace_class;
+							
+						}
+
 					}
 					return $class_file;
 				});
