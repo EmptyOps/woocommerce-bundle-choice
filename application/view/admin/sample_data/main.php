@@ -113,7 +113,6 @@ box-shadow: none;">
 	</div>
 
 </div>
-
 <?php if(empty(wbc()->sanitize->get('step')) or (!empty(wbc()->sanitize->get('step')) and wbc()->sanitize->get('step')!=3 )) { 
 	if(empty(wbc()->sanitize->get('step'))){
 		$_GET['step']=1;
@@ -444,7 +443,7 @@ box-shadow: none;">
 		    "        return false;\n" .
 		    "    });\n" .
 		    "});\n";
-		wbc()->load->add_inline_script('', $inline_script, 'common');
+		wbc()->load->add_inline_script('', $inline_script, 'common-admin');
 
 } elseif($_step==3) { 
 	if (false) {
@@ -515,7 +514,7 @@ box-shadow: none;">
 		    "        var data = {\n" .
 		    "            '_wpnonce': '" . wp_create_nonce('sample_data_jewelry') . "',\n" .
 		    "            'action':'eowbc_ajax',\n" .
-		    "            'resolver':'sample_data/<?php _e($feature_key); ?>',\n" .
+		    "            'resolver':'sample_data/".$feature_key."',\n" .
 		    "            'resolver_path':'" . apply_filters('eowbc_product_sample_data_resolver_path', '') . "', \n" .
 		    "            'product_index':index \n" .
 		    "        };\n" .
@@ -542,6 +541,6 @@ box-shadow: none;">
 		    "        return false;\n" .
 		    "    });\n" .
 		    "});\n";
-		wbc()->load->add_inline_script('', $inline_script, 'common');
+		wbc()->load->add_inline_script('', $inline_script, 'common-admin');
 } ?>
 <?php //EO_WBC_Head_Banner::get_footer_line(); ?>
