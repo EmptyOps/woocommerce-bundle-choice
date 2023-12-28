@@ -352,7 +352,7 @@ if(!class_exists('WBC_Loader')) {
 			// wbc_pr($is_inner_hook);
 			if(empty($handle) && !empty($handle_key)) {
 
-				$handle = ( $is_prefix_handle ? "sp_wbc_" : "" ) . str_replace(' ','-',str_replace('/','-',$handle_key));						
+				$handle = ( $is_prefix_handle ? "sp_wbc_" : "" ) . str_replace(' ','-',str_replace('/','-',$handle_key)) . "_inline";						
 				wp_register_script( $handle, '');
 			}elseif($is_inner_hook){
 				// -- aa proper work nathi kartu
