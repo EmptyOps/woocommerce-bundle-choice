@@ -442,6 +442,7 @@ class EOWBC_Filter_Widget {
 					jQuery(document).ready(function($){			
 
 						jQuery.fn.wbc_flip_toggle_image=function(element){
+    						console.log('eo_wbc_filter_icon_select --');
 							let img = jQuery(element).find('img');						
 							if(jQuery(element).hasClass('eo_wbc_filter_icon_select')) {
 								let toggle_src = jQuery(img).attr('data-toggleimgsrc');
@@ -459,10 +460,11 @@ class EOWBC_Filter_Widget {
 								}
 							}
 						}
-
-						$('.eo_wbc_filter_icon').click(function(){					
-							jQuery.fn.wbc_flip_toggle_image(this);
-						});
+						
+						// ACTIVE_TODO/NOTE below function of toggle image function is moved inside the layers of eo wbc filter js file to fix the issue that it was not working from here since the selected class was not added when it is called from here. so during the upgrade take note of this refactoring. 
+						// $('.eo_wbc_filter_icon').click(function(){					
+						// 	jQuery.fn.wbc_flip_toggle_image(this);
+						// });
 					})
 				</script>
 				<style type="text/css">
