@@ -2514,7 +2514,9 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		jQuery(/*this*/element).toggleClass('eo_wbc_filter_icon_select');
 		// jQuery('.eo_wbc_filter_icon').click(function(){					
 			// ACTIVE_TODO/NOTE below function of toggle image function is moved from the layers of wbc filter widget class to fix the issue that it was not working from there since the selected class was not added when it is called from there. so during the upgrade take note of this refactoring. -- to a && -- to h
-			jQuery.fn.wbc_flip_toggle_image(this);
+			if (typeof jQuery.fn.wbc_flip_toggle_image === 'function') {
+				jQuery.fn.wbc_flip_toggle_image(this);
+			}
 		// });		
 			
 		jQuery('[name="paged"]').val('1');
