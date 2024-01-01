@@ -331,8 +331,8 @@ if(!class_exists('WBC_Loader')) {
 						$param_keys = array_keys($param);
 						$inline_script =
 						    "var " . $param_keys[0] . " = JSON.parse('" . json_encode($param[$param_keys[0]]) . "');\n";
-						wbc()->load->add_inline_script('', $inline_script, 'common');
-
+						// wbc()->load->add_inline_script('', $inline_script, 'common');
+						wbc()->load->get_inline_script_tag($inline_script);
 						if(false){
 						?>
 						<script>
