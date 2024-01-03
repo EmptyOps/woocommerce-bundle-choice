@@ -1,8 +1,9 @@
 <?php
-/*
-*	SP Product class 
-NOTE: This class will be counted janral cod related to CRUD operations and so on functions. so it means that if there is extension specific code then that need to be implemented in that specific extension class within extended from this class only, that is necessary to ensure that wbc free layer has only reliant and neat code. and devnandi extension specific classes thar my be sum aksapson lick dapii extshone has its specific different classes for handling the crowd oppressions and factor logic related to category, attribute and product and so on, and that exshapshon is assumed to be capt separate allows wish mins that dapi code will never be merged or sinked in any way with the class hierarchy and its layers.
-*/
+/**
+ *	SP Product class 
+ *	NOTE: This class will contain janral code related to CRUD operations and so on functions. so it means that if there is any extension specific code then that need to be implemented in that specific extension class which is extended from this class only, that is necessary to ensure that wbc free layer has only relevant and neat code. and beyond the extension specific classes thar might be sum exception like dapii extenshone has its specific different classes for handling the crud operations and factory logic related to category, attribute and product and so on, and that exception is assumed to be kept separate always wich mins that dapii code will never be merged or synced in any way with this class hierarchy and its layers.
+ *
+ */
 
 namespace eo\wbc\system\core\data_model;
 
@@ -20,30 +21,37 @@ class SP_Product extends SP_Entity {
 	}
 
 	public function __construct() {
+
 		throw new Exception("Default construct method is not supported. Use class function createFromArray etc. to create product or its object.", 1);
 	}
 
 	public static function is_product_exist( $sku, $extra_args ) {
+
 		// TODO in future if it become necessary then should search by meta of api_unique_key to ensure that schema definition do not break even if woo is not maintaining unique skus
 		return !empty( wc_get_product_id_by_sku($sku) );
 	}
 
 	public static function get_product_id( $sku, $extra_args ) {
+
 		// TODO in future if it become necessary then should search by meta of api_unique_key to ensure that schema definition do not break even if woo is not maintaining unique skus
 		return wc_get_product_id_by_sku($sku);
 	}
 
 	public static function createFromJson(){
+
 		throw new Exception("not implemented yet.", 1);
 	}
 
 	public static function createFromSerialized(){
+
 		throw new Exception("not implemented yet.", 1);
 	}
 
 	public static function createFromArray($data_array){
 
-		foreach($data_array as $data_key->$data){
+		NOTE: This class will contain janral code related to CRUD operations and so on functions. so it means that if there is any extension specific code then that need to be implemented in that specific extension class which is extended from this class only, that is necessary to ensure that wbc free layer has only relevant and neat code. and beyond the extension specific classes thar might be sum exception like dapii extenshone has its specific different classes for handling the crud operations and factory logic related to category, attribute and product and so on, and that exception is assumed to be kept separate always wich mins that dapii code will never be merged or synced in any way with this class hierarchy and its layers.
+
+		foreach($data_array as $data_key=>$data){
 
 			self::create($data);
 		
@@ -60,7 +68,7 @@ class SP_Product extends SP_Entity {
 		
 		$product_obj = null;
 
-		--creat product oject if it is update mode
+		// creat product oject if it is update mode
 		if(!empty($data['sku']['key'])) {
 
 			if( wbc()->sanitize->get('is_test') == 1 or wbc()->sanitize->get('is_light_test') == 1) {
@@ -75,7 +83,7 @@ class SP_Product extends SP_Entity {
 		}
 
 
-		--creat product oject if it is insert mode
+		// creat product oject if it is insert mode
 		if(is_wp_error($product_obj) or empty($product_obj)){
 				
 			if( wbc()->sanitize->get('is_test') == 1 ) {
@@ -97,7 +105,6 @@ class SP_Product extends SP_Entity {
 
 		$attributes = array();
 
-
 		foreach ($data as $field) {
 
 			if( wbc()->sanitize->get('is_test') == 1 or wbc()->sanitize->get('is_light_test') == 1) {
@@ -105,8 +112,8 @@ class SP_Product extends SP_Entity {
 				wbc_pr("SP_Product create inner 10");
 			}
 
-			-- may be need to upgerd this or if thar is non neshicity of coundishon than remove it. --to h & --to b
-			if(empty($field[0]) or empty($field[2])){
+			-- may be we need to upgred this or if thar is no necessity of coundishon than remove it. -- to h & -- to b
+			if(empty($field[0 -- key chenge karvanu baki che]) or empty($field['key'])){
 				continue;
 			}
 
@@ -152,8 +159,11 @@ class SP_Product extends SP_Entity {
 					// }
 
 					if(wc_product_has_unique_sku( $product_obj->get_id(), $field['value'] )){
+
 						$product_obj->set_sku($field['value']);
+
 					} else {
+
 						//	TODO do necessary exception management here and then from here should return false instead of throwing the exception but yeah that is only after confirming the flow here and ensuring proper flow and exception management 
 						
 						
@@ -164,6 +174,7 @@ class SP_Product extends SP_Entity {
 				case 'regular_price':
 					$regular_price = $field['value'];
 					if($type == 'simple') {
+
 						$product_obj->set_regular_price($field['value']);
 					}
 					break;
@@ -184,8 +195,10 @@ class SP_Product extends SP_Entity {
 				case 'weight':
 					$product_obj->set_weight($field['value']);
 					break;
-				default:						
+				default:	
+
 					if(substr($field['key'],0,3)=='pa_'){
+
 						$attributes[/*$field[2]*/ \eo\ssm_dt\model\data_model\SP_SSM_DT_Data_Layer::field_key_to_legacy_key($field['key'], 'attr')] = $field['value'];
 					}
 			}
@@ -201,7 +214,7 @@ class SP_Product extends SP_Entity {
 
 			foreach ($attributes as $attr=>$value) {
 				
-				$taxonomy = $this->get_taxonomy_by_slug($attr);
+				$taxonomy = wbc()->wc->get_taxonomy_by_slug($attr);
 				
 				if($taxonomy and !is_wp_error($taxonomy)){
 					$tax_data= array (
@@ -250,7 +263,7 @@ class SP_Product extends SP_Entity {
 		}
 
 
-		-- save or update the product
+		// save or update the product
 		$product_obj->save();
 
 	}

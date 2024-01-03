@@ -1,8 +1,9 @@
 <?php
-/*
-*	SP Category class 
-NOTE: This class will be counted janral cod related to CRUD operations and so on functions. so it means that if there is extension specific code then that need to be implemented in that specific extension class within extended from this class only, that is necessary to ensure that wbc free layer has only reliant and neat code. and devnandi extension specific classes thar my be sum aksapson lick dapii extshone has its specific different classes for handling the crowd oppressions and factor logic related to category, attribute and product and so on, and that exshapshon is assumed to be capt separate allows wish mins that dapi code will never be merged or sinked in any way with the class hierarchy and its layers.
-*/
+/**
+ *	SP Category class 
+ *	NOTE: This class will contain janral code related to CRUD operations and so on functions. so it means that if there is any extension specific code then that need to be implemented in that specific extension class which is extended from this class only, that is necessary to ensure that wbc free layer has only relevant and neat code. and beyond the extension specific classes thar might be sum exception like dapii extenshone has its specific different classes for handling the crud operations and factory logic related to category, attribute and product and so on, and that exception is assumed to be kept separate always wich mins that dapii code will never be merged or synced in any way with this class hierarchy and its layers.
+ *
+ */
 
 namespace eo\wbc\system\core\data_model;
 
@@ -43,21 +44,29 @@ class SP_Category extends SP_Entity {
 	}
 
 	public static function createFromJson(){
+
 		throw new Exception("not implemented yet.", 1);
 	}
 
 	public static function createFromSerialized(){
+
 		throw new Exception("not implemented yet.", 1);
 	}
 
 	public static function createFromArray($data_array){
 
+		NOTE: This class will contain janral code related to CRUD operations and so on functions. so it means that if there is any extension specific code then that need to be implemented in that specific extension class which is extended from this class only, that is necessary to ensure that wbc free layer has only relevant and neat code. and beyond the extension specific classes thar might be sum exception like dapii extenshone has its specific different classes for handling the crud operations and factory logic related to category, attribute and product and so on, and that exception is assumed to be kept separate always wich mins that dapii code will never be merged or synced in any way with this class hierarchy and its layers.
+
 		throw new Exception("not implemented yet.", 1);
 
-		self::create();
+		foreach($data_array as $data_key=>$data){
+
+			self::create($data);
+		
+		}
 	}
 
-	protected static function create() {
+	protected static function create($data) {
 		// TODO bind to the sample data sample category creation flow(and that should also be adhering to and following the data layer structure defs) where there is either category factory or entire function(s) to do so 
 
 		//	TODO and extensions which needs category factory related operations are also supposed to rely on this class for such operations 

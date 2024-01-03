@@ -287,7 +287,7 @@ if(!class_exists('SP_Plugin_Index_Class') ) {
 				require_once plugin_dir_path( $this->getFILE() ).'vendor/autoload.php';	
 			}
 			//TODO create a common base for sample data wizard process, just in upcoming days and then transfor below extension specific code to common means all epb mentions will be replaced. but yeah keep some sample data adding code which is in tm ui repo to be there only
-				NOTE:: as of now on 2-12-23, the to hooks below are upgraded. However another point that are necessary as per above todo needs to be done get.
+				NOTE:: as of now on 2-12-23, the to hooks below are upgraded. However another points that are necessary as per above todo needed to be done yet.
 			//if( false ) {
 				add_action( 'wbc_auto_sample_class',function() {		
 					if(!empty(wbc()->sanitize->get(/*'eo_wbc_view_auto_jewel'*/'sp_ext_auto')) and !empty(wbc()->sanitize->get('f'))) {
