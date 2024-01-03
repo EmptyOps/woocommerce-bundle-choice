@@ -420,6 +420,7 @@ class EOWBC_Filter_Widget {
 
 				ob_start();
 				if ((in_array(wbc()->options->get_option('filters_altr_filt_widgts','second_category_altr_filt_widgts') ,array('sc3','sc5')) and $this->_category==$this->second_category_slug) or (in_array(wbc()->options->get_option('filters_altr_filt_widgts','first_category_altr_filt_widgts'),array('fc3','fc5')) and $this->_category==$this->first_category_slug)) {
+					if(false){
 					?>
 					<style type="text/css">
 						/*.ui.labeled.ticked.slider>.labels .label:after {
@@ -434,6 +435,22 @@ class EOWBC_Filter_Widget {
 						}*/
 					</style>
 					<?php
+					}
+					$custom_css = "
+					    /*.ui.labeled.ticked.slider>.labels .label:after {
+					        height: 6px !important;
+					        width: 3px !important;
+					        top: -61.5% !important;
+					        background: #ffffff !important;
+					    }
+					    .ui.labeled.slider>.labels .label {
+					        -webkit-transform: translate(-50%,100%) !important;
+					        transform: translate(-50%,100%) !important;
+					    }*/
+					";
+
+					wbc()->load->add_inline_style('', $custom_css, 'common');
+
 				}
 				if(false){
 				?>
@@ -515,6 +532,7 @@ class EOWBC_Filter_Widget {
 				<?php
 			if(wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile',false)=='mobile_1' and /*wp_is_mobile()*/ wbc_is_mobile_by_page_sections('cat_shop_page')){
 				ob_start();
+				if(false){
 				?>
 				<style type="text/css">
 					/*.ui.labeled.ticked.range.slider .label:first-child span{
@@ -574,6 +592,65 @@ class EOWBC_Filter_Widget {
 					
 				</style>
 				<?php
+				}
+				$custom_css = "
+				    /*.ui.labeled.ticked.range.slider .label:first-child span {
+				        position: absolute;
+				        transform: translate(-50%, -100%);
+				        white-space: break-spaces;
+				    }*/
+				    .eo-wbc-container .toggle_sticky_mob_filter {
+				        margin: 0px;					
+				        text-align: center;
+				        padding: 1px !important;
+				        cursor: pointer;
+				        max-height: 6em;
+				    }
+				    .eo-wbc-container .toggle_sticky_mob_filter .segment {
+				        border: 1px solid grey !important;
+				        padding-left: 1px !important;
+				        padding-right: 1px !important;
+				    }
+				    .advance_filter_mob {
+				        display:none;
+				    }
+				    #advance_filter_mob_alternate_container {
+				        width: 96% !important;
+				        border-top: 0px solid grey !important;
+				    }
+				    /*.eo-wbc-container .ui.steps .ui.equal.width.grid {
+				        padding-top: 1rem;
+				        padding-bottom: 1rem;
+				    }*/
+
+				    @media only screen and (max-width: 767.98px) {
+				        .ui.container:not(.fluid) {
+				            margin: auto !important;					
+				        }
+				        .ui.grid.container {
+				            width:100% !important;
+				        }
+				    }	
+
+				    .bottom_filter_segment {
+				        position: fixed !important;
+				        z-index: 99999;
+				        bottom: -1em;
+				        width: 100vw;
+				        width: -webkit-fill-available;
+				        width: -moz-available;;
+				        left: 0;
+				        margin-bottom: 1em !important;
+				        -webkit-backface-visibility: hidden;
+				        display: none;
+				    }			
+				    .bottom_filter_segment .ui.tiny.form .field {
+				        width: -moz-fit-content !important;
+				        width: max-content !important;
+				    }	
+				";
+
+				wbc()->load->add_inline_style('', $custom_css, 'common');
 				if(false){ 
 				?>
 				<script>
@@ -668,6 +745,7 @@ class EOWBC_Filter_Widget {
 
 			if(wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile',false)=='mobile_2' and /*wp_is_mobile()*/ wbc_is_mobile_by_page_sections('cat_shop_page')){
 				ob_start();
+				if(false){
 				?>
 				<style type="text/css">
 
@@ -745,6 +823,83 @@ class EOWBC_Filter_Widget {
 					}
 				</style>
 				<?php
+				}
+				$custom_css = "
+					@media screen and (max-width: 412px) {
+					span[title=\"Very Strong\"][alt=\"Very Strong\"]/*
+					.ui.labeled.slider>.labels .label*/{						
+					    max-width: fit-content;
+					    top: -1.5em;
+					    left: -1em;
+					    position: inherit;
+					    line-height: 1;
+					    white-space: break-spaces;
+					}
+					.ui.tabular.menu .item {
+					    font-size: 0.7em !important;
+					}
+					}
+					#products_table th {
+					font-size: 0.8em !important;
+					}
+
+					.mobile_2_hidden {
+					visibility: hidden !important;
+					}
+					i.icon.question.circle:before {
+					font-size: 1em !important;
+					}
+					.ui.segments.transition .ui.accordion .title, .eo-wbc-container.filters .ui.header {
+					text-transform: uppercase;
+					}
+					.ui.segments.transition {
+					width: 101vw;
+					margin: 1em -0.5em 0 !important;
+					left: 0;
+					right: 0;
+					}
+					.ui.button.advance_filter.transition {
+					margin-left: 0;
+					margin-right: 0;
+					}
+					.ui.eo_wbc_page {
+					margin-top: 2em !important;
+					}
+					/* Hide scrollbar for Chrome, Safari and Opera */
+					.scrollable_image_filters::-webkit-scrollbar {
+					display: none;
+					}
+					/* Hide scrollbar for IE, Edge and Firefox */
+					.scrollable_image_filters {
+					-ms-overflow-style: none;  /* IE and Edge */
+					scrollbar-width: none;  /* Firefox */
+					}
+					i.icon.plus:before {
+					content: \"+\" !important;
+					}
+					i.icon.minus:before {
+					content: \"-\" !important;
+					}
+					.ui.accordion i.icon:before {
+					font-size: 1.5em;
+					}
+					.eo-wbc-container.filters .ui.styled.accordion .title, .eo-wbc-container.filters .ui.header, #primary_filter, #advance_filter {    
+					font-weight: lighter;
+					}
+					.eo-wbc-container.filters.container {
+					position: relative;
+					left: -7vw;
+					min-width: 102.1vw !important;
+					}    
+					.eo-wbc-container.filters.container:after {
+					content: '';
+					clear: both;
+					display: block !important;
+					position: relative !important;
+					}
+				";
+
+				wbc()->load->add_inline_style('', $custom_css, 'common');
 				if(false){ 
 				?>
 				<script type="text/javascript">
@@ -793,6 +948,7 @@ class EOWBC_Filter_Widget {
 					 {
 
 				ob_start();
+				if(false){
 				?>
 					<style type="text/css">
 
@@ -867,7 +1023,106 @@ class EOWBC_Filter_Widget {
 						}
 					</style>
 				<?php
+				{
+					$custom_css = "
+					    #help_modal .close:before{
+					        content: 'Close  X  ';
+					        white-space: pre;
+					        font-family:'Avenir Next' !important;
+					    }
+
+					    .eo-wbc-container>.ui.steps .step:not(:first-child):before{
+					        border-left: 1em solid #d2d2d2 !important;
+					    }
+					    .eo-wbc-container.filters.container.ui.form, .eo-wbc-container.filters.container.ui.form .ui.header {
+					        font-family: <?php echo wbc()->options->get_option('appearance_filters', 'header_font', 'ZapfHumanist601BT-Roman'); ?> !important;
+					    }
+					    .eo-wbc-container.filters.container.ui.form .ui.header {
+					        font-size: 1em;
+					    }
+					    .ui.labeled.ticked.range.slider .labels {
+					        height: 0px;
+					        top: unset;
+					        bottom: -10%;
+					        font-size: 12px;
+					    }
+					    .ui.labeled.ticked.range.slider .labels .label::after {
+					        top: unset;
+					        bottom: 100%;
+					    }
+					    .ui.segment:not(.bottom_filter_segment) .eo_wbc_filter_icon:hover:not(.none_editable) {
+					        border-bottom: 0px !important;
+					    }
+					    .eo-wbc-container.filters.container.ui.form .ui.segments {
+					        border: none !important;
+					    }
+
+					    .ui.segment:not(.bottom_filter_segment) .eo_wbc_filter_icon_select,
+					    .ui.segment:not(.bottom_filter_segment) .eo_wbc_filter_icon:hover:not(.none_editable) {
+					        border-bottom: 0px !important;
+					    }
+					    .eo-wbc-container.filters.container.ui.form .field:last-child {
+					        margin-bottom: -1.4em;
+					    }
+
+					    .eo-wbc-container.filters.container.ui.form .field:last-child(:nth-of-type(even)) {
+					        position: absolute;
+					        right: 0;
+					    }
+
+					    .eo_wbc_filter_icon_select div,
+					    .ui.segment:not(.bottom_filter_segment) .eo_wbc_filter_icon:hover:not(.none_editable) div {
+					        visibility: unset !important;
+					    }
+					    .eo-wbc-container.filters.container.ui.form .ui.header {
+					        font-size: 0.8em;
+					        text-transform: uppercase;
+					    }
+					    .eo-wbc-container .wide.column:not(.toggle_sticky_mob_filter) {
+					        display: inline-flex !important;
+					    }
+					    .ui.labeled.ticked.range.slider {
+					        padding-top: 0px !important;
+					    }
+					    .eo-wbc-container .wide.column>.wide.field.text_slider {
+					        margin-top: 0.7em;
+					        margin-bottom: auto;
+					    }
+					    .eo_wbc_filter_icon {
+					        margin-top: 0px !important;
+					    }
+					    .icon_header {
+					        margin-top: 0.5em !important;
+					        margin-bottom: auto !important;
+					    }
+					    .eo-wbc-container.filters>.segments>.ui.segment {
+					        padding-bottom: 0em !important;
+					    }
+
+					    .eo-wbc-container.filters.ui.form .three.wide.field:nth-child(even) {
+					        text-align: right !important;
+					    }
+
+					    .eo-wbc-container.filters.container.ui.form>.ui.segments>.ui.segment>.ui.grid.container>.wide.column:nth-of-type(even) {
+					        text-align: right;
+					    }
+					    .eo-wbc-container.filters.container.ui.form>.ui.segments>.ui.segment>.ui.grid.container>.wide.column:nth-of-type(even)>.wide.field.twelve {
+					        position: absolute;
+					        right: 0;
+					        text-align: left !important;
+					    }
+					    #help_modal {
+					        border-radius: 0 !important;
+					        font-family: Avenir !important;
+					    }
+					    #help_modal .header {
+					        border-bottom: none !important;
+					    }
+					";
+
+					wbc()->load->add_inline_style('', $custom_css, 'common');
 				if(!wp_is_mobile()){
+					if(false){
 					?>
 					<style type="text/css">
 
@@ -937,8 +1192,88 @@ class EOWBC_Filter_Widget {
 					}
 
 
-					</style>
+					</style>	
 					<?php
+					}
+					$custom_css = "
+					    .eo-wbc-container.filters>.segments>.ui.segment{
+					        padding-bottom: 2em !important;
+					    }
+
+					    #help_modal .close:before{
+					        content: 'Close  X  ';
+					        white-space: pre;
+					        font-family:'Avenir Next' !important;
+					    }
+
+					    .eo-wbc-container.filters.container.ui.form .field:last-child{
+					        margin-bottom: 0em !important;
+					    }
+
+					    .ui.container:not(.fluid){
+					        width: 100% !important;
+					        margin: 0px !important;
+					    }
+
+					    #products_table{
+					        margin: 0px !important;
+					    }
+
+					    #eo_wbc_filter_table th{
+					        text-align: center;
+					    }
+
+					    .eo-wbc-container .wide.column>.wide.field.text_slider{
+					        margin-top: 0.4em !important;
+					    }
+
+					    .eo-wbc-container{
+					        padding: 0 !important;
+					    }
+
+					    i.icon.question.circle{
+					        margin-left: 0.25em;
+					    }
+
+					    .eo-wbc-container.filters.container.ui.form>.ui.segments>.ui.segment>.ui.grid.container>.wide.column:nth-of-type(odd){
+					        padding-left: 0px !important;
+					    }
+
+					    .eo-wbc-container.filters.container.ui.form>.ui.segments,
+					    .eo-wbc-container.filters.container.ui.form>.ui.segments>.ui.segment{
+					        box-shadow: none !important;
+					    }
+
+					    #reset_filter{
+					        left: 1em !important;
+					    }
+
+					    .ui.labeled.ticked.range.slider.wbc ul.labels{
+					        z-index: 9999;
+					    }
+
+					    .ui.labeled.ticked.range.slider .labels .label::after{
+					        top: -1.6em !important;
+					        width: 2px;
+					        height: 1.55em;
+					        background-color: transparent !important;
+					    }
+
+					    .ui.labeled.ticked.range.slider .labels{
+					        bottom: -20% !important;
+					    }
+
+					    .eo-wbc-container.filters>.segments>.ui.segment{
+					        padding-left: 0 !important;
+					        padding-right: 0 !important;
+					    }
+
+					    .container.filters>.segments>.ui.segment .wide.column{
+					        padding-right: 0px !important;
+					    }
+					";
+
+					wbc()->load->add_inline_style('', $custom_css, 'common');
 				}
 				echo ob_get_clean();
 			}
@@ -946,6 +1281,7 @@ class EOWBC_Filter_Widget {
 			if(wbc()->options->get_option('filters_filter_setting','filter_setting_alternate_slider_ui', false )){
 
 				ob_start();
+				if(false){
 				?>
 					<style type="text/css">
 
@@ -976,6 +1312,37 @@ class EOWBC_Filter_Widget {
 
 					</style>
 				<?php
+				}
+				$custom_css = "
+				    .ui.labeled.ticked.range.slider .labels .label::after{
+				        top: -1em !important;
+				        width: 2px;
+				        height: 1.55em;
+				        background-color: transparent !important;
+				    }
+
+				    .ui.labeled.ticked.range.slider .labels{
+				        bottom: -20% !important;
+				    }
+
+				    .ui.labeled.ticked.slider>.labels .label:after{
+				        height: 6px !important;
+				        width: 3px !important;
+				        top: -6px !important;
+				        background: #ffffff !important;
+				    }
+
+				    .ui.slider .inner {
+				        z-index: 0 !important;
+				    }
+
+				    /*.ui.labeled.slider>.labels .label{
+				        -webkit-transform: translate(-50%,70%) !important;
+				        transform: translate(-50%,70%) !important;
+				    }*/
+				";
+
+				wbc()->load->add_inline_style('', $custom_css, 'common');
 				echo ob_get_clean();
 			}	
 
