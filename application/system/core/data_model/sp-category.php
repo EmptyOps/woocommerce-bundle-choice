@@ -1,7 +1,7 @@
 <?php
 /**
  *	SP Category class 
- *	NOTE: This class will contain janral code related to CRUD operations and so on functions. so it means that if there is any extension specific code then that need to be implemented in that specific extension class which is extended from this class only, that is necessary to ensure that wbc free layer has only relevant and neat code. and beyond the extension specific classes thar might be sum exception like dapii extenshone has its specific different classes for handling the crud operations and factory logic related to category, attribute and product and so on, and that exception is assumed to be kept separate always wich mins that dapii code will never be merged or synced in any way with this class hierarchy and its layers.
+ *	NOTE: This class hierarchy of this clasees will contain janral code related to CRUD operations and so on functions. so it means that if there is any extension specific code then that need to be implemented in that specific extension class which is extended from this class only, that is necessary to ensure that wbc free layer has only relevant and neat code. and beyond the extension specific classes thar might be sum exception like dapii extenshone has its specific different classes for handling the crud operations and factory logic related to category, attribute and product and so on, and that exception is assumed to be kept separate always wich mins that dapii code will never be merged or synced in any way with this class hierarchy and its layers.
  *
  */
 
@@ -23,15 +23,15 @@ class SP_Category extends SP_Entity {
 		throw new Exception("Sorry, singleton instance method not supported for this class. Always use construct method to create object.", 1);
 	}
 
-	public function __construct( $platform_key, $platform_name ) {
+	public function __construct( $platform_key, $platform_name, $category_slug, $category_title ) {
 
 		$this->platform_key = $platform_key;
 		$this->platform_name = $platform_name;
 	}
 
-	public function __construct() {
+	/*public function __construct() {
 		throw new Exception("Sorry, only construct method with platform_key etc parameters is supported, so pass platform_key etc parameters as parameters to construct method. Default construct method is not supported.", 1);
-	}
+	}*/
 
 	public static function is_category_exist( $slug, $extra_args ) {
 
@@ -53,9 +53,9 @@ class SP_Category extends SP_Entity {
 		throw new Exception("not implemented yet.", 1);
 	}
 
-	public static function createFromArray($data_array){
+	public static function createFromArray( $platform_key, $platform_name, $data_array ){
 
-		NOTE: This class will contain janral code related to CRUD operations and so on functions. so it means that if there is any extension specific code then that need to be implemented in that specific extension class which is extended from this class only, that is necessary to ensure that wbc free layer has only relevant and neat code. and beyond the extension specific classes thar might be sum exception like dapii extenshone has its specific different classes for handling the crud operations and factory logic related to category, attribute and product and so on, and that exception is assumed to be kept separate always wich mins that dapii code will never be merged or synced in any way with this class hierarchy and its layers.
+		NOTE: This class hierarchy of this clasees will contain janral code related to CRUD operations and so on functions. so it means that if there is any extension specific code then that need to be implemented in that specific extension class which is extended from this class only, that is necessary to ensure that wbc free layer has only relevant and neat code. and beyond the extension specific classes thar might be sum exception like dapii extenshone has its specific different classes for handling the crud operations and factory logic related to category, attribute and product and so on, and that exception is assumed to be kept separate always wich mins that dapii code will never be merged or synced in any way with this class hierarchy and its layers.
 
 		throw new Exception("not implemented yet.", 1);
 
