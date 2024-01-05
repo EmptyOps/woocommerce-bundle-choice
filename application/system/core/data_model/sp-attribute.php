@@ -69,6 +69,7 @@ class SP_Attribute extends SP_Entity {
 	    				        
 
 		if(!isset($data['label']) && !isset($data['terms'])) return;
+
 		//adding post data to store data in posts
 		$attribute_data = array(
 	        'name'   => wp_unslash($data['label']),
@@ -78,7 +79,14 @@ class SP_Attribute extends SP_Entity {
 	        'has_archives'  => 1, // Enable archives ==> true (or 1)
 	    );		
 
-		$id = wbc()->wc->eo_wbc_create_attribute( $attribute_data );
+		$id = wbc()->wc->slug_to_id( 'attr', $attribute_data['slug'] );
+
+		if (empty($id)) {
+
+			$id = wbc()->wc->eo_wbc_create_attribute( $attribute_data );
+
+		}
+
 		// @mahesh - added to store the ribbon color from sample data
 		if(!empty($id) and !is_wp_error($id) and !empty($data['ribbon_color'])) {
 			update_term_meta($id,'wbc_ribbon_color',$data['ribbon_color']);
@@ -108,9 +116,9 @@ class SP_Attribute extends SP_Entity {
     		
     		foreach ($data['terms'] as $term_index=>$term)  {	
 
-				if( ! term_exists( $term['slug'], 'pa_'.$attribute_data['slug']) ) {
+				if( ! term_exists( $term['label'], 'pa_'.$attribute_data['slug']) ) {
 
-					$attr_term_id = wp_insert_term( $term['slug'],'pa_'.$attribute_data['slug'],array('slug' => sanitize_title($term['slug'])) ); 
+					$attr_term_id = wp_insert_term( $term['label'],'pa_'.$attribute_data['slug'],array('slug' => sanitize_title($term['label'])) ); 
 					
 					if(!empty($attr_term_id) and !is_wp_error($attr_term_id)) {
 
@@ -124,9 +132,9 @@ class SP_Attribute extends SP_Entity {
     							if(!empty($term['thumb'])){
 									$thumb_id=0;
 									-- function helper ma banavi ne call karvanu che. -- to h & -- to b
-		    						$thumb_id=$this->add_image_gallary($data['thumb'][$term_index]);
+		    						$thumb_id=$this->add_image_gallary($term['thumb']);
 		    						update_term_meta( $_attr_term_id, 'pa_'.$attribute_data['slug'].'_attachment', wp_get_attachment_url( $thumb_id ) );
-    								update_term_meta( $_attr_term_id, sanitize_title($term['slug']).'_attachment', wp_get_attachment_url( $thumb_id ) );
+    								update_term_meta( $_attr_term_id, sanitize_title($term['label']).'_attachment', wp_get_attachment_url( $thumb_id ) );
 		    					}
 
 		    					if (!wbc_isEmptyArr($data['terms_order'])) {
@@ -136,13 +144,13 @@ class SP_Attribute extends SP_Entity {
 			    					// wbc_pr(get_term_meta($_attr_term_id,'order'));
 			    					// die();
 		    					}
-		    			?192.9.21 baki che
-    							if(!empty($data['type']) and !empty($data['terms_meta']) and is_array($data['terms_meta'])){
+
+    							if(!empty($data['type']) and !empty($term['terms_meta']) and is_array($term['terms_meta'])){
 
     								switch ($data['type']) {
     									case 'color':
     									
-    										function_exists( 'update_term_meta' ) ? update_term_meta( $_attr_term_id,'wbc_color',$data['terms_meta'][$term_index]) : update_metadata( 'woocommerce_term', $_attr_term_id,'wbc_color',$data['terms_meta'][$term_index]);
+    										function_exists( 'update_term_meta' ) ? update_term_meta( $_attr_term_id,'wbc_color',$term['terms_meta']['color_code']) : update_metadata( 'woocommerce_term', $_attr_term_id,'wbc_color',$term['terms_meta']['color_code']);
     										break;
     										
     									case 'image':				
@@ -150,9 +158,9 @@ class SP_Attribute extends SP_Entity {
     									case 'dropdown_image':
     									case 'dropdown_image_only':	
 
-    										\\ throw new Exception("not implemented yet.", 1);
+    										throw new \Exception("not implemented yet.", 1);
 
-	    									$wbc_attachment_id = $this->add_image_gallary($data['terms_meta'][$term_index]);
+	    									$wbc_attachment_id = $this->add_image_gallary($term['terms_meta']['image']);
 
 	    									$wbc_attachment_src =wp_get_attachment_url( $wbc_attachment_id );
 	    									function_exists( 'update_term_meta' ) ? update_term_meta( $_attr_term_id,'wbc_attachment',$wbc_attachment_src) : update_metadata( 'woocommerce_term', $_attr_term_id,'wbc_attachment',$wbc_attachment_src);
@@ -179,7 +187,7 @@ class SP_Attribute extends SP_Entity {
     		}			    		
     	}	    					    	
 	
-	   	return $data;
+	   	return $id; //$data;
 
 
 	}

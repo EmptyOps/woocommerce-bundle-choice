@@ -818,15 +818,13 @@ class Eowbc_Sample_Data {
 	    	
 	    	foreach ($args as $index=>$attribute) {	
 
-	    		$id = wbc()->wc->slug_to_id( 'attr', $slug? );
+	    		$id = wbc()->wc->slug_to_id( 'attr', $attribute['slug'] );
 
 	    		if (!empty($id)) {
 
 	    			\eo\wbc\model\data_model\SP_WBC_Attribute::createFromArray(array($attribute));
 
 	    			continue;
-
-	    			$id = wbc()->wc->eo_wbc_create_attribute( $data );
 
 	    		}
 
@@ -840,14 +838,7 @@ class Eowbc_Sample_Data {
 			        'has_archives'  => 1, // Enable archives ==> true (or 1)
 			    );		
 
-	    		$id = wbc()->wc->slug_to_id( 'attr', $slug? );
-
-	    		if (empty($id)) {
-
-
-	    			$id = wbc()->wc->eo_wbc_create_attribute( $data );
-
-	    		}
+	    		$id = wbc()->wc->eo_wbc_create_attribute( $data );
 
 	    		// @mahesh - added to store the ribbon color from sample data
 	    		if(!empty($id) and !is_wp_error($id) and !empty($attribute['ribbon_color'])) {
