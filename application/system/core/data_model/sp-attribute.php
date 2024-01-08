@@ -51,8 +51,6 @@ class SP_Attribute extends SP_Entity {
 
 		NOTE: This class hierarchy of these clasees will contain janral code related to CRUD operations and so on functions. so it means that if there is any extension specific code then that need to be implemented in that specific extension class which is extended from this class only, that is necessary to ensure that wbc free layer has only relevant and neat code. and beyond the extension specific classes thar might be sum exception like dapii extenshone has its specific different classes for handling the crud operations and factory logic related to category, attribute and product and so on, and that exception is assumed to be kept separate always wich mins that dapii code will never be merged or synced in any way with this class hierarchy and its layers.
 
-		throw new Exception("not implemented yet.", 1);
-
 		foreach($data_array as $data_key=>$data){
 
 			self::create($data);
@@ -137,9 +135,9 @@ class SP_Attribute extends SP_Entity {
     								update_term_meta( $_attr_term_id, sanitize_title($term['label']).'_attachment', wp_get_attachment_url( $thumb_id ) );
 		    					}
 
-		    					if (!wbc_isEmptyArr($data['terms_order'])) {
+		    					if (!wbc_isEmptyArr(/*$data['terms_order'])*/$trem['terms_order']) {
 
-		    						update_term_meta($_attr_term_id, 'order', $data['terms_order'][$term_index]);
+		    						update_term_meta($_attr_term_id, 'order', /*$data['terms_order'][$term_index]*/$trem['terms_order']);
 		    					
 			    					// wbc_pr(get_term_meta($_attr_term_id,'order'));
 			    					// die();

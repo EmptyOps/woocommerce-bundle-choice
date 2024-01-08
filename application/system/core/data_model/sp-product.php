@@ -112,8 +112,8 @@ class SP_Product extends SP_Entity {
 				wbc_pr("SP_Product create inner 10");
 			}
 
-			-- may be we need to upgred this or if thar is no necessity of coundishon than remove it. -- to h & -- to b
-			if(empty($field[0 -- key chenge karvanu baki che]) or empty($field['key'])){
+			// -- may be we need to upgred this or if thar is no necessity of coundishon than remove it. -- to h & -- to b(done)
+			if(/*empty($field[0 -- key chenge karvanu baki che]) or*/ empty($field['key'])){
 				continue;
 			}
 
@@ -265,6 +265,8 @@ class SP_Product extends SP_Entity {
 
 		// save or update the product
 		$product_obj->save();
+
+		return $product_obj->get_id();
 
 	}
 
