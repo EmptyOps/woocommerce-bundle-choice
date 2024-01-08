@@ -594,7 +594,7 @@ if(empty($_per_page)){
 		    "\n" .
 		    "    // --- move this code in woo-bundle-choice/asset/js/publics/eo_wbc_filter.js window.document.splugins.wbc.filters.api.slider_change_event_listener(); ---\n" .
 		    "    // --- start ---\n" .
-		    "    // window.eo=new Object();\n" .
+		    "    // window.eo=new Object();\n\n" .
 		    "    // //Slider creation function\n" .
 		    "    // window.eo.slider=function(selector){\n" .
 		    "    //     jQuery(selector).each(function(i,e){\n" .
@@ -605,13 +605,13 @@ if(empty($_per_page)){
 		    "\n" .
 		    "    // window.document.splugins.wbc.filters.api.slider_change_event(selector);\n" .
 		    "\n" .
-		    "    var primary_filter=jQuery(\".eo-wbc-container.filters .ui.segment:not(.secondary)\");\n" .
-		    "    var primary_computer_only=jQuery(primary_filter).find(\".computer.tablet.only\");\n" .
+		    "    var primary_filter=jQuery(\".eo-wbc-container.filters .ui.segment:not(.secondary)\");\n\n" .
+		    "    var primary_computer_only=jQuery(primary_filter).find(\".computer.tablet.only\");\n\n" .
 		    "    var primary_mobile_only=jQuery(primary_filter).find(\".mobile.only\");\n" .
 		    "\n" .
 		    "    // var secondary_filter=jQuery(\".eo-wbc-container.filters .ui.segment.secondary\");\n" .
-		    "    var secondary_filter=\".eo-wbc-container.filters .ui.segment.secondary\";\n" .
-		    "    var secondary_computer_only=jQuery(secondary_filter).find(\".computer.tablet.only\");\n" .
+		    "    var secondary_filter=\".eo-wbc-container.filters .ui.segment.secondary\";\n\n" .
+		    "    var secondary_computer_only=jQuery(secondary_filter).find(\".computer.tablet.only\");\n\n" .
 		    "    var secondary_mobile_only=jQuery(secondary_filter).find(\".mobile.only\");\n" .
 		    "\n" .
 		    "    if( typeof(jQuery.fn.accordion) ==='function' ){\n" .
@@ -621,19 +621,20 @@ if(empty($_per_page)){
 		    "    // window.eo.slider(jQuery('.eo-wbc-container.filters').find('.ui.slider'));\n" .
 		    "\n" .
 		    "    /* Activate initiation of sliders at secondary segments. */\n" .
-		    "    if(jQuery(secondary_computer_only).css('display')!='none'){\n" .
+		    "    if(jQuery(secondary_computer_only).css('display')!='none'){\n\n" .
 		    "        jQuery(\"#advance_filter\").on('click',function(){\n" .
 		    "            jQuery(\"#advance_filter\").find('.ui.icon').toggleClass('up down');\n" .
 		    "            jQuery(secondary_filter+\":eq(0)\").transition('slide down');\n" .
-		    "        }).trigger('click');\n" .
-		    "    } else if(jQuery(secondary_mobile_only).css('display')!='none') {\n" .
+		    "        }).trigger('click');\n\n" .
+		    "    } else if(jQuery(secondary_mobile_only).css('display')!='none') {\n\n" .
 		    "        jQuery(\"#advance_filter\").on('click',function(){\n" .
 		    "            jQuery(this).find('.ui.icon').toggleClass('up down');\n" .
 		    "            jQuery(secondary_filter).transition('fly right');\n" .
 		    "        }).trigger('click');\n" .
 		    "    }\n" .
 		    "\n" .
-		    "    if(jQuery(\"#primary_filter\").parent().parent().css('display')!='none'){\n" .
+		    "	/*jQuery(secondary_filter).transition('fade');*/\n\n" .
+		    "    if(jQuery(\"#primary_filter\").parent().parent().css('display')!='none'){\n\n" .
 		    "        jQuery(\"#primary_filter\").click(function(e){\n" .
 		    "            e.preventDefault();\n" .
 		    "            e.stopPropagation();\n" .

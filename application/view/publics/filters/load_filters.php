@@ -5,8 +5,8 @@ if(/*wp_is_mobile()*/ wbc_is_mobile_by_page_sections('cat_shop_page',true)) {
 	<div class="content"></div>
 	</div>
 	<?php
-		if(false){
-		?>
+	if(false) {
+	?>
 	<script type="text/javascript">
 	jQuery(document).ready(function(){
 		jQuery(document).on('click',".question.circle.icon",function(){
@@ -20,7 +20,8 @@ if(/*wp_is_mobile()*/ wbc_is_mobile_by_page_sections('cat_shop_page',true)) {
 		});
 	});
 	</script>
-	<?php }
+	<?php 
+	}
 	$inline_script =
 	    "jQuery(document).ready(function(){\n" .
 	    "    jQuery(document).on('click', \".question.circle.icon\", function(){\n" .
