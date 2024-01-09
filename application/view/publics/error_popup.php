@@ -171,28 +171,40 @@ function eo_wbc_error_popup(type,msg) {
 </script>
 <?php
 } 
+$site_url_admin_ajax = site_url('/wp-admin/admin-ajax.php');
+$empty_eo_wbc_button_testing = empty(wbc()->sanitize->get('eo_wbc_button_testing'))?0:1;
+$current_user_can_manage_options = current_user_can('manage_options')?1:0;
+$wp_create_nonce_eowbc_set_btn_status = wp_create_nonce('eowbc_set_btn_status');
+
+$is_current_user_can_manage_options = false;
+if(current_user_can('manage_options') && empty(wbc()->sanitize->get('eo_wbc_button_testing'))) {
+
+  $is_current_user_can_manage_options = true;
+
+}
+
 $inline_script = 
     "var eo_wbc_outer_container=undefined;\n" .
     "jQuery.send_error=0;\n" .
     "\n" .
-    "jQuery(document).ready(function($){\n" .
+    "jQuery(document).ready(function(\$){\n" .
     "\n" .
-    "  $(\".ui.modal\").find(\".cancel\").on('click',function(){\n" .
+    "  \$(\".ui.modal\").find(\".cancel\").on('click',function(){\n" .
     "    jQuery('.ui.modal').modal('hide');\n" .
     "  });\n" .
     "\n" .
-    "  $(\".ui.modal\").find(\".approve\").on('click',function(){\n" .
+    "  \$(\".ui.modal\").find(\".approve\").on('click',function(){\n" .
     "    if(!jQuery.send_error){\n" .
     "      jQuery.send_error=1;\n" .
-    "      $(this).text(\"Sending error report...\");\n" .
+    "      \$(this).text(\"Sending error report...\");\n" .
     "      \n" .
-    "      jQuery.post('<?php echo site_url('/wp-admin/admin-ajax.php');?>',{resolver:'eowbc_send_error_report', _wpnonce:jQuery( jQuery('input[name=\"eowbc_send_error_report_wpnonce\"]')[0] ).val(), action: 'eowbc_ajax', saved_tab_key: 'setting_status_log',is_sent_from_front_end: 1},function(data){                   \n" .
+    "      jQuery.post('".$site_url_admin_ajax."',{resolver:'eowbc_send_error_report', _wpnonce:jQuery( jQuery('input[name=\"eowbc_send_error_report_wpnonce\"]')[0] ).val(), action: 'eowbc_ajax', saved_tab_key: 'setting_status_log',is_sent_from_front_end: 1},function(data){                   \n" .
     "        if(data){ \n" .
     "          jQuery(\".ui.modal\").find(\".actions\").html('<div class=\"ui large green inverted button error_sent\">Ok</div>');                    \n" .
     "          jQuery(\".ui.modal .content\").html(\"<h5>Thank you for sending error report, Sphere Plugins Support Team will soon get in touch with you. It generally takes 12 hours.</h5>\");\n" .
     "          jQuery.send_error=0;\n" .
     "        } else {\n" .
-    "          $(\".ui.modal\").find(\".approve\").text(\"Resend an error report now!\");\n" .
+    "          \$(\".ui.modal\").find(\".approve\").text(\"Resend an error report now!\");\n" .
     "          jQuery.send_error=0;\n" .
     "        } \n" .
     "      });                \n" .
@@ -217,12 +229,27 @@ $inline_script =
     "\teo_wbc_outer_containers=undefined;\n" .
     "\n" .
     "\t//here we shall show some kind of popup for non-admin users as well, since some users might be testing frontend on diff browser or in incognito etc.\n" .
-    "  <?php if(current_user_can('manage_options') && empty(wbc()->sanitize->get('eo_wbc_button_testing'))): ?>\n" .
+    "  ".($is_current_user_can_manage_options == true ? "
     "    //set the title/message in error popup\n" .
     "    jQuery('#error_popup_title').html(msg);\n" .
     "\n" .
     "    //log the error in background\n" .
-    "    jQuery.post('<?php echo site_url('/wp-admin/admin-ajax.php');?>',{resolver:'eo_wbc_throw_error', _wpnonce:jQuery( jQuery('input[name=\"eo_wbc_throw_error_wpnonce\"]')[0] ).val(), action: 'eowbc_ajax',page:document.location.href,type:type,msg:msg});\n" .
+    "    jQuery.post('".$site_url_admin_ajax."',{resolver:'eo_wbc_throw_error', _wpnonce:jQuery( jQuery('input[name=\"eo_wbc_throw_error_wpnonce\"]')[0] ).val(), action: 'eowbc_ajax',page:document.location.href,type:type,msg:msg});\n" .
+    "\n" .
+    "    //show user popup with options to send error report or cancel \n" .
+    "    // jQuery('.ui.modal').modal('show');\n" .
+    "    jQuery('.ui.modal').modal({\n" .
+    "      onApprove : function() {\n" .
+    "        // ... //Validate here, or pass validation to somewhere else\n" .
+    "        return false; //Return false as to not close modal dialog on approve click when we have to show something else after that.\n" .
+    "      }\n" .
+    "    }).modal('show');\n" .
+      " : "")."\n" .
+    "    //set the title/message in error popup\n" .
+    "    jQuery('#error_popup_title').html(msg);\n" .
+    "\n" .
+    "    //log the error in background\n" .
+    "    jQuery.post('".$site_url_admin_ajax."',{resolver:'eo_wbc_throw_error', _wpnonce:jQuery( jQuery('input[name=\"eo_wbc_throw_error_wpnonce\"]')[0] ).val(), action: 'eowbc_ajax',page:document.location.href,type:type,msg:msg});\n" .
     "\n" .
     "    //show user popup with options to send error report or cancel \n" .
     "    // jQuery('.ui.modal').modal('show');\n" .
@@ -235,7 +262,7 @@ $inline_script =
     "  <?php endif; ?>                  \n" .
     "\n" .
     "\t//below testing service is not implemented yet for buttons and not implemented in general as well  \n" .
-    "  \tif(<?php echo empty(wbc()->sanitize->get('eo_wbc_button_testing'))?0:1 ?> && <?php echo current_user_can('manage_options')?1:0 ?>){\n" .
+    "  \tif(".$empty_eo_wbc_button_testing." && ".$current_user_can_manage_options."){\n" .
     "\n" .
     "    var btn_test_service_status=0;\n" .
     "\n" .
@@ -248,7 +275,7 @@ $inline_script =
     "      }\n" .
     "    } \n" .
     "\n" .
-    "    jQuery.post('<?php echo site_url('/wp-admin/admin-ajax.php');?>',{action:'set_btn_test_service_status',btn_status:btn_test_service_status,security:'<?php echo wp_create_nonce('eowbc_set_btn_status'); ?>'},function(data){ if(Number(data)==1){  window.close(this); } });\n" .
+    "    jQuery.post('".$site_url_admin_ajax."',{action:'set_btn_test_service_status',btn_status:btn_test_service_status,security:'".$wp_create_nonce_eowbc_set_btn_status."'},function(data){ if(Number(data)==1){  window.close(this); } });\n" .
     "  }\n" .
     "}\n";
 wbc()->load->add_inline_script( '', $inline_script, 'common' );
