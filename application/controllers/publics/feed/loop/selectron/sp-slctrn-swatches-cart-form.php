@@ -44,9 +44,18 @@ class SP_SLCTRN_Swatches_Cart_Form extends \sp\selectron\controller\publics\cont
 		}
 
 		add_action('wp_head',function() use($selector,$delay){
+		if(false){	
 			?>
 			<script type="text/javascript">window.document.splugins = window.document.splugins || {}; window.document.splugins.tableview = window.document.splugins.tableview || {}; window.document.splugins.tableview.table_container = '<?php echo $selector; ?>' </script>
 			<?php
+		}
+		$selector = "your_selector_value"; // Replace this with your actual selector value
+		$inline_script =
+		    "window.document.splugins = window.document.splugins || {};\n" .
+		    "window.document.splugins.tableview = window.document.splugins.tableview || {};\n" .
+		    "window.document.splugins.tableview.table_container = '".$selector."';\n";
+		wbc()->load->add_inline_script('', $inline_script, 'common');
+
 		});
 	}
 }
