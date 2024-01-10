@@ -112,6 +112,7 @@ class Product {
     public function init_safe_click() {
         add_action('woocommerce_after_add_to_cart_button',function(){
             ob_start();
+        if(false){    
             ?>
             <script type="text/javascript">
 
@@ -143,6 +144,35 @@ class Product {
                 });
             </script> 
             <?php
+        } 
+            $inline_script = 
+                "document.querySelector('.single_add_to_cart_button:not(#eo_wbc_add_to_cart)').addEventListener(\"click\",function(event) { \n" .
+                "    event.preventDefault();\n" .
+                "},false);\n" .
+                "\n" .
+                "let sp_add_to_cart_dots = 1\n" .
+                "let sp_add_to_cart_dots_interval = window.setInterval(function(){\n" .
+                "    \n" .
+                "    if(jQuery('#eo_wbc_add_to_cart,#eo_wbc_add_to_cart_preview').length>0) {    \n" .
+                "        window.clearInterval(sp_add_to_cart_dots_interval);\n" .
+                "    } else {\n" .
+                "        if(sp_add_to_cart_dots>3) {\n" .
+                "            sp_add_to_cart_dots = 1;\n" .
+                "        } else {\n" .
+                "            sp_add_to_cart_dots = sp_add_to_cart_dots+1;\n" .
+                "        }\n" .
+                "        jQuery('.single_add_to_cart_button:not(#eo_wbc_add_to_cart,#eo_wbc_add_to_cart_preview)').text('.'.repeat(sp_add_to_cart_dots));\n" .
+                "    }\n" .
+                "},500);\n" .
+                "\n" .
+                "jQuery(\".single_add_to_cart_button:not(#eo_wbc_add_to_cart)\").off('click');\n" .
+                "jQuery(\".single_add_to_cart_button:not(#eo_wbc_add_to_cart)\").css('cursor','not-allowed !important');\n" .
+                "\n" .
+                "jQuery(\".single_add_to_cart_button:not(#eo_wbc_add_to_cart)\").on('click',function(e){\n" .
+                "    e.preventDefault();\n" .
+                "    e.stopPropagation();\n" .
+                "});\n";
+            wbc()->load->add_inline_script( '', $inline_script, 'common' );  
             echo(ob_get_clean());
         });
     }
@@ -243,36 +273,70 @@ class Product {
                     display: none;
                 }
             </style>
-            <script type="text/javascript">
-                jQuery(".single_add_to_cart_button.button.alt").ready(function(){
+            <?php 
+            if(false){
+            ?>
+                <script type="text/javascript">
+                    jQuery(".single_add_to_cart_button.button.alt").ready(function(){
 
-                    jQuery('form.cart').prepend("<input type='hidden' name='eo_wbc_add_to_cart_preview' value='1'/>");
-                    
-                    jQuery(".single_add_to_cart_button.button.alt:not(.disabled):eq(0)").replaceWith(
-                         "<button href='#' id='eo_wbc_add_to_cart_preview' class='single_add_to_cart_button button alt'><?php esc_html_e('Add To Cart','woo-bundle-choice') ?></button>"
-                    );
+                        jQuery('form.cart').prepend("<input type='hidden' name='eo_wbc_add_to_cart_preview' value='1'/>");
+                        
+                        jQuery(".single_add_to_cart_button.button.alt:not(.disabled):eq(0)").replaceWith(
+                             "<button href='#' id='eo_wbc_add_to_cart_preview' class='single_add_to_cart_button button alt'><?php esc_html_e('Add To Cart','woo-bundle-choice') ?></button>"
+                        );
 
-                    jQuery(document).on('click','#eo_wbc_add_to_cart_preview',function() {
-                        <?php
-                            global $post;
-                            $url = get_permalink($post->ID);    
+                        jQuery(document).on('click','#eo_wbc_add_to_cart_preview',function() {
+                            <?php
+                                global $post;
+                                $url = get_permalink($post->ID);    
 
-                            $get_link = wbc()->common->http_query(array('EO_WBC'=>1,'BEGIN'=>wbc()->sanitize->get('BEGIN'),'STEP'=>3,'FIRST'=>wbc()->sanitize->get('FIRST'),'SECOND'=>wbc()->sanitize->get('SECOND'),'eo_wbc_add_to_cart_preview'=>'1','WBC_PREVIEW'=>'1'));
+                                $get_link = wbc()->common->http_query(array('EO_WBC'=>1,'BEGIN'=>wbc()->sanitize->get('BEGIN'),'STEP'=>3,'FIRST'=>wbc()->sanitize->get('FIRST'),'SECOND'=>wbc()->sanitize->get('SECOND'),'eo_wbc_add_to_cart_preview'=>'1','WBC_PREVIEW'=>'1'));
 
-                            if(strpos($url,'?') ===false ) {
-                                $url = $url."?".$get_link;
-                            } else {
-                                $url = $url."&".$get_link;
-                            }
-                        ?>
-                        window.location.href = '<?php echo $url; ?>';
-                        return false;
+                                if(strpos($url,'?') ===false ) {
+                                    $url = $url."?".$get_link;
+                                } else {
+                                    $url = $url."&".$get_link;
+                                }
+                            ?>
+                            window.location.href = '<?php echo $url; ?>';
+                            return false;
+                        });
+
+                        // jQuery("table.variations").remove();
                     });
-
-                    // jQuery("table.variations").remove();
-                });
-            </script>
+                </script>
             <?php
+            }
+            $inline_script = 
+                "jQuery(\".single_add_to_cart_button.button.alt\").ready(function(){\n" .
+                "\n" .
+                "    jQuery('form.cart').prepend(\"<input type='hidden' name='eo_wbc_add_to_cart_preview' value='1'/>\");\n" .
+                "    \n" .
+                "    jQuery(\".single_add_to_cart_button.button.alt:not(.disabled):eq(0)\").replaceWith(\n" .
+                "        \"<button href='#' id='eo_wbc_add_to_cart_preview' class='single_add_to_cart_button button alt'>".esc_html_e('Add To Cart','woo-bundle-choice')."</button>\"\n" .
+                "    );\n" .
+                "\n" .
+                "    jQuery(document).on('click','#eo_wbc_add_to_cart_preview',function() {\n" .
+                "        <?php\n" .
+                "            global \$post;\n" .
+                "            \$url = get_permalink(\$post->ID);\n" .
+                "\n" .
+                "            \$get_link = wbc()->common->http_query(array('EO_WBC'=>1,'BEGIN'=>wbc()->sanitize->get('BEGIN'),'STEP'=>3,'FIRST'=>wbc()->sanitize->get('FIRST'),'SECOND'=>wbc()->sanitize->get('SECOND'),'eo_wbc_add_to_cart_preview'=>'1','WBC_PREVIEW'=>'1'));\n" .
+                "\n" .
+                "            if(strpos(\$url,'?') ===false ) {\n" .
+                "                \$url = \$url.\"?\".\$get_link;\n" .
+                "            } else {\n" .
+                "                \$url = \$url.\"&\".\$get_link;\n" .
+                "            }\n" .
+                "        ?>\n" .
+                "        window.location.href = '<?php echo \$url; ?>';\n" .
+                "        return false;\n" .
+                "    });\n" .
+                "\n" .
+                "    // jQuery(\"table.variations\").remove();\n" .
+                "});\n";
+            wbc()->load->add_inline_script( '', $inline_script, 'common' );
+
         });
 
         
@@ -602,15 +666,22 @@ class Product {
             });
             //Add Js to the footer.
             add_action('wp_footer',function(){
-                ?>
-                <!-- WBC{ WooCommerce Product Bundle Choice wiget STARTS. } -->
-                <script>
-                    jQuery(document).ready(function(){
-                        jQuery('form.cart').prepend("<input type='hidden' name='eo_wbc_target' value='<?php echo esc_attr($this->page_category); ?>'/><input type='hidden' name='eo_wbc_product_id' value='<?php global $post; echo esc_attr($post->ID); ?>'/>");
-                    });
-                </script>
-                <!-- WBC{ WooCommerce Product Bundle Choice wiget ENDS. } -->
-                <?php
+                if(false){
+                    ?>
+                    <!-- WBC{ WooCommerce Product Bundle Choice wiget STARTS. } -->
+                    <script>
+                        jQuery(document).ready(function(){
+                            jQuery('form.cart').prepend("<input type='hidden' name='eo_wbc_target' value='<?php echo esc_attr($this->page_category); ?>'/><input type='hidden' name='eo_wbc_product_id' value='<?php global $post; echo esc_attr($post->ID); ?>'/>");
+                        });
+                    </script>
+                    <!-- WBC{ WooCommerce Product Bundle Choice wiget ENDS. } -->
+                    <?php
+                }
+                $inline_script = 
+                    "jQuery(document).ready(function(){\n" .
+                    "    jQuery('form.cart').prepend(\"<input type='hidden' name='eo_wbc_target' value='".esc_attr($this->page_category)."'/><input type='hidden' name='eo_wbc_product_id' value='".esc_attr($post->ID)."'/>\");\n" .
+                    "});\n";
+                wbc()->load->add_inline_script('', $inline_script, 'common');
             });
         }       
     }
@@ -750,6 +821,7 @@ class Product {
 
             ?>
             <!-- Created with Wordpress plugin - WooCommerce Product bundle choice -->
+            
             <script type="text/javascript">
                 jQuery(".single_add_to_cart_button.button.alt").ready(function(){
                     jQuery('form.cart').prepend("<input type='hidden' name='eo_wbc_target' value='<?php echo esc_attr($this->page_category); ?>'/><input type='hidden' name='eo_wbc_product_id' value='<?php global $post; echo esc_attr($post->ID); ?>'/>");

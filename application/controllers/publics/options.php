@@ -802,55 +802,100 @@ class Options extends \eo\wbc\controllers\publics\Controller {
 					";
 
 					wbc()->load->add_inline_style('', $custom_css, 'common');
-		        	?>
-		        	<script>
-		        		jQuery(document).ready(function($){
-		        			jQuery(".dropdown").dropdown().on('change',function(){
-		        				var target_selector =  $('#'+$(this).find('input[type="hidden"]').data('id'));
-		        				target_selector.val($(this).find('input[type="hidden"]').val());
-		        				/*$(this).parent().find('.selected').removeClass('selected');
-		        				$(this).addClass('selected');*/
-		        				jQuery(".variations_form" ).trigger('check_variations');
-		        				$(target_selector).trigger('change');
-		        			});
-		        			if($('table.variations tbody>tr').length>0){
-		        				$('table.variations').addClass('ui raised segment');	
-		        			}
-		        			
-		        			$('#wbc_variation_toggle').on('click',function(){
-		        				if($(this).find('.icon').hasClass('rotate-up')) {
-		        					$(this).find('.icon').removeClass('rotate-up');
-		        					$(this).find('.icon').addClass('rotate-down');
-		        					$('table.variations').slideToggle("slow");
-		        				} else {
-		        					$(this).find('.icon').removeClass('rotate-down');
-		        					$(this).find('.icon').addClass('rotate-up');
-		        					$('table.variations').slideToggle("slow");
-		        				}        				
-		        			});
+					if(false){
+			        	?>
+			        	<script>
+			        		jQuery(document).ready(function($){
+			        			jQuery(".dropdown").dropdown().on('change',function(){
+			        				var target_selector =  $('#'+$(this).find('input[type="hidden"]').data('id'));
+			        				target_selector.val($(this).find('input[type="hidden"]').val());
+			        				/*$(this).parent().find('.selected').removeClass('selected');
+			        				$(this).addClass('selected');*/
+			        				jQuery(".variations_form" ).trigger('check_variations');
+			        				$(target_selector).trigger('change');
+			        			});
+			        			if($('table.variations tbody>tr').length>0){
+			        				$('table.variations').addClass('ui raised segment');	
+			        			}
+			        			
+			        			$('#wbc_variation_toggle').on('click',function(){
+			        				if($(this).find('.icon').hasClass('rotate-up')) {
+			        					$(this).find('.icon').removeClass('rotate-up');
+			        					$(this).find('.icon').addClass('rotate-down');
+			        					$('table.variations').slideToggle("slow");
+			        				} else {
+			        					$(this).find('.icon').removeClass('rotate-down');
+			        					$(this).find('.icon').addClass('rotate-up');
+			        					$('table.variations').slideToggle("slow");
+			        				}        				
+			        			});
 
-		        			<?php if(empty($init_toggle)): ?>
-		        				$('#wbc_variation_toggle').trigger('click');
-		        			<?php endif; ?>
+			        			<?php if(empty($init_toggle)): ?>
+			        				$('#wbc_variation_toggle').trigger('click');
+			        			<?php endif; ?>
 
-		        			--	below two click events would be implemented in the core variations js module, in that case it will be remove here 
-		        			$('.variable-item').on('click',function(){
-		        				var target_selector = $('#'+$(this).data('id'));
-		        				target_selector.val($(this).data('value'));
-		        				$(this).parent().find('.selected').removeClass('selected');
-		        				$(this).addClass('selected');
-		        				jQuery(".variations_form" ).trigger('check_variations');
-		        				$(target_selector).trigger('change');
-		        			});
+			        			--	below two click events would be implemented in the core variations js module, in that case it will be remove here 
+			        			$('.variable-item').on('click',function(){
+			        				var target_selector = $('#'+$(this).data('id'));
+			        				target_selector.val($(this).data('value'));
+			        				$(this).parent().find('.selected').removeClass('selected');
+			        				$(this).addClass('selected');
+			        				jQuery(".variations_form" ).trigger('check_variations');
+			        				$(target_selector).trigger('change');
+			        			});
 
-		        			jQuery(".variations_form").on('click', '.reset_variations'/*'woocommerce_variation_select_change'*//*'reset'*/,function(){
-		        				jQuery('.variable-items-wrapper .selected').removeClass('selected');
-		        				jQuery('.variable-items-wrapper .dropdown').dropdown('restore defaults');
-		        			});
-		        			
-		        		});
-		        	</script>
+			        			jQuery(".variations_form").on('click', '.reset_variations'/*'woocommerce_variation_select_change'*//*'reset'*/,function(){
+			        				jQuery('.variable-items-wrapper .selected').removeClass('selected');
+			        				jQuery('.variable-items-wrapper .dropdown').dropdown('restore defaults');
+			        			});
+			        			
+			        		});
+			        	</script>
 				<?php
+					}
+
+					$inline_script = 
+						"jQuery(document).ready(function($){\n" .
+						"    jQuery(\".dropdown\").dropdown().on('change',function(){\n" .
+						"        var target_selector =  $('#'+$(this).find('input[type=\"hidden\"]').data('id'));\n" .
+						"        target_selector.val($(this).find('input[type=\"hidden\"]').val());\n" .
+						"        /*$(this).parent().find('.selected').removeClass('selected');\n" .
+						"        $(this).addClass('selected');*/\n" .
+						"        jQuery(\".variations_form\" ).trigger('check_variations');\n" .
+						"        $(target_selector).trigger('change');\n" .
+						"    });\n" .
+						"    if($('table.variations tbody>tr').length>0){\n" .
+						"        $('table.variations').addClass('ui raised segment');\n" .
+						"    }\n" .
+						"    $('#wbc_variation_toggle').on('click',function(){\n" .
+						"        if($(this).find('.icon').hasClass('rotate-up')) {\n" .
+						"            $(this).find('.icon').removeClass('rotate-up');\n" .
+						"            $(this).find('.icon').addClass('rotate-down');\n" .
+						"            $('table.variations').slideToggle(\"slow\");\n" .
+						"        } else {\n" .
+						"            $(this).find('.icon').removeClass('rotate-down');\n" .
+						"            $(this).find('.icon').addClass('rotate-up');\n" .
+						"            $('table.variations').slideToggle(\"slow\");\n" .
+						"        }        \n" .
+						"    });\n" .
+						"    <?php if(empty(\$init_toggle)): ?>\n" .
+						"        $('#wbc_variation_toggle').trigger('click');\n" .
+						"    <?php endif; ?>\n" .
+						"    --    below two click events would be implemented in the core variations js module, in that case it will be remove here \n" .
+						"    $('.variable-item').on('click',function(){\n" .
+						"        var target_selector = $('#'+$(this).data('id'));\n" .
+						"        target_selector.val($(this).data('value'));\n" .
+						"        $(this).parent().find('.selected').removeClass('selected');\n" .
+						"        $(this).addClass('selected');\n" .
+						"        jQuery(\".variations_form\" ).trigger('check_variations');\n" .
+						"        $(target_selector).trigger('change');\n" .
+						"    });\n" .
+						"    jQuery(\".variations_form\").on('click', '.reset_variations'/*'woocommerce_variation_select_change'*//*'reset'*/,function(){\n" .
+						"        jQuery('.variable-items-wrapper .selected').removeClass('selected');\n" .
+						"        jQuery('.variable-items-wrapper .dropdown').dropdown('restore defaults');\n" .
+						"    });\n" .
+						"});\n";
+					wbc()->load->add_inline_script( '', $inline_script, 'common' );				
 				echo ob_get_clean();
 				
 				if(!empty($toggle_status)){	
@@ -870,11 +915,17 @@ class Options extends \eo\wbc\controllers\publics\Controller {
 						wbc()->load->asset('css','fomantic/semantic.min');
 						wbc()->load->asset('js','fomantic/semantic.min',array('jquery'));
 						ob_start();
-						?>	
-							<script>
-								jQuery(".variations_form").before('<span id="wbc_variation_toggle" class="ui raised segment"><?php esc_html_e($toggle_text); ?><i class="caret up icon" style="text-align: center;line-height: 1em;"></i></span>');	
-							</script>
-						<?php
+						if(false){
+							?>	
+								<script>
+									jQuery(".variations_form").before('<span id="wbc_variation_toggle" class="ui raised segment"><?php esc_html_e($toggle_text); ?><i class="caret up icon" style="text-align: center;line-height: 1em;"></i></span>');	
+								</script>
+							<?php
+						}
+						$toggle_text = esc_html_e($toggle_text);
+						$inline_script = 
+							"jQuery(\".variations_form\").before('<span id=\"wbc_variation_toggle\" class=\"ui raised segment\">".$toggle_text."<i class=\"caret up icon\" style=\"text-align: center;line-height: 1em;\"></i></span>');\n";
+						wbc()->load->add_inline_script( '', $inline_script, 'common' );
 						echo ob_get_clean();
 					}				
 				}

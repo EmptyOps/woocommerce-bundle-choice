@@ -106,13 +106,20 @@ class Preview {
         },100);
 
         add_action('wp_footer',function(){
-            ?>
-                <script>
-                    jQuery(document).ready(function($){
-                        jQuery('.special.cards .image').dimmer({ on: 'hover' });
-                    });
-                </script>
-            <?php
+            if(false){
+                ?>
+                    <script>
+                        jQuery(document).ready(function($){
+                            jQuery('.special.cards .image').dimmer({ on: 'hover' });
+                        });
+                    </script>
+                <?php
+            }
+            $inline_script =
+                "jQuery(document).ready(function(\$){\n" .
+                "    jQuery('.special.cards .image').dimmer({ on: 'hover' });\n" .
+                "});\n";
+            wbc()->load->add_inline_script('', $inline_script, 'common');    
         },100);  
 
         add_action( 'wp_head',function(){           

@@ -197,27 +197,51 @@ class Term_Meta {
 						<?php esc_html_e('Choose Image', 'woo-bundle-choice'); ?>						
 					</button>
 				</div>
-				
-				<script type="text/javascript">					
+				<?php
+				 if(false){ 
+				?>
+					<script type="text/javascript">					
 
-					jQuery(document).on("click",".wbc_thumb_button",function(){
-						wp_media = wp.media({
-							title: 'Term Image',
-							button: {
-								text: 'Choose Image'
-							},
-							multiple: false
-						})
-						.on('select', function() {
+						jQuery(document).on("click",".wbc_thumb_button",function(){
+							wp_media = wp.media({
+								title: 'Term Image',
+								button: {
+									text: 'Choose Image'
+								},
+								multiple: false
+							})
+							.on('select', function() {
 
-							var attachment = wp_media.state().get('selection').first().toJSON();
-							jQuery('#wbc_thumb_img').attr('src', attachment.url);
-							jQuery('#wbc_attachment').val( attachment.url);
-						})
-						.open();
-						return false;
-					});				
-				</script>
+								var attachment = wp_media.state().get('selection').first().toJSON();
+								jQuery('#wbc_thumb_img').attr('src', attachment.url);
+								jQuery('#wbc_attachment').val( attachment.url);
+							})
+							.open();
+							return false;
+						});				
+					</script>
+				<?php	
+				}
+				$inline_script =
+				    "jQuery(document).on(\"click\",\".wbc_thumb_button\",function(){\n" .
+				    "    wp_media = wp.media({\n" .
+				    "        title: 'Term Image',\n" .
+				    "        button: {\n" .
+				    "            text: 'Choose Image'\n" .
+				    "        },\n" .
+				    "        multiple: false\n" .
+				    "    })\n" .
+				    "    .on('select', function() {\n" .
+				    "        var attachment = wp_media.state().get('selection').first().toJSON();\n" .
+				    "        jQuery('#wbc_thumb_img').attr('src', attachment.url);\n" .
+				    "        jQuery('#wbc_attachment').val( attachment.url);\n" .
+				    "    })\n" .
+				    "    .open();\n" .
+				    "    return false;\n" .
+				    "});\n";
+				wbc()->load->add_inline_script('', $inline_script, 'common');
+				?>
+
 				<div class="clear"></div>
 			<?php if($is_edit): ?>
 				</td>
@@ -365,7 +389,9 @@ class Term_Meta {
 						<?php esp_html__e('Add/Edit image', 'woo-bundle-choice'); ?>						
 					</button>					
 				</div>
-				
+				<?php 
+				if(false){
+				?>
 				<script type="text/javascript">					
 
 					jQuery(document).on("click",".wbc_attachment_thumb_button",function(){
@@ -386,6 +412,26 @@ class Term_Meta {
 						return false;
 					});				
 				</script>
+				<?php } 
+				$inline_script =
+				    "jQuery(document).on(\"click\",\".wbc_attachment_thumb_button\",function(){\n" .
+				    "    wp_media = wp.media({\n" .
+				    "        title: 'Term Thumb Image',\n" .
+				    "        button: {\n" .
+				    "            text: 'Choose Image'\n" .
+				    "        },\n" .
+				    "        multiple: false\n" .
+				    "    })\n" .
+				    "    .on('select', function() {\n" .
+				    "        var attachment = wp_media.state().get('selection').first().toJSON();\n" .
+				    "        jQuery('#wbc_attachment_thumb_img').attr('src', attachment.url);\n" .
+				    "        jQuery('#wbc_attachment_thumb').val( attachment.url);\n" .
+				    "    })\n" .
+				    "    .open();\n" .
+				    "    return false;\n" .
+				    "});\n";
+				wbc()->load->add_inline_script('', $inline_script, 'common');	
+				?>
 				<div class="clear"></div>
 			</div>
 		</div>		
@@ -421,7 +467,9 @@ class Term_Meta {
 						<?php esc_html_e('Add/Edit image', 'woo-bundle-choice'); ?>						
 					</button>				
 				</div>
-				
+				<?php 
+				if(false){
+				?>	
 				<script type="text/javascript">	
 					jQuery(document).on("click",".wbc_attachment_thumb_button",function(){
 						wp_media = wp.media({
@@ -441,6 +489,27 @@ class Term_Meta {
 						return false;
 					});		
 				</script>
+				<?php
+				{
+				$inline_script =
+				    "jQuery(document).on(\"click\",\".wbc_attachment_thumb_button\",function(){\n" .
+				    "    wp_media = wp.media({\n" .
+				    "        title: 'Term Thumb Image',\n" .
+				    "        button: {\n" .
+				    "            text: 'Choose Image'\n" .
+				    "        },\n" .
+				    "        multiple: false\n" .
+				    "    })\n" .
+				    "    .on('select', function() {\n" .
+				    "        var attachment = wp_media.state().get('selection').first().toJSON();\n" .
+				    "        jQuery('#wbc_attachment_thumb_img').attr('src', attachment.url);\n" .
+				    "        jQuery('#wbc_attachment_thumb').val( attachment.url);\n" .
+				    "    })\n" .
+				    "    .open();\n" .
+				    "    return false;\n" .
+				    "});\n";
+				wbc()->load->add_inline_script('', $inline_script, 'common');	
+				?>	
 				<div class="clear"></div>
 			</td>
 		</tr>
