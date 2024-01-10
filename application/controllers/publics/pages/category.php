@@ -258,6 +258,7 @@ class Category {
             },100);
 
             add_action('wp_head',function(){
+                if(false){
                 ?>                
                     <style type="text/css">
                         .woocommerce-products-header__title page-title{
@@ -284,6 +285,33 @@ class Category {
                         }
                     </style>                    
                 <?php
+                }
+                $custom_css = "
+                    .woocommerce-products-header__title page-title{
+                        display: none;
+                    }
+                    .woocommerce .content-area ,#content,#primary,#main,.content,.primary,.main{
+                        width: 100% !important;
+                    }
+                    .woocommerce .widget-area {
+                        display: none !important;
+                    }
+                    .tax-product_cat .thb-shop-title {
+                        display: none;
+                    }
+                    .products{
+                        display: none !important;
+                    }                        
+                    .ui.card>.image>img, .ui.cards>.card>.image>img{
+                        width: 50%;
+                    }
+                    .products .ui.grid>[class*='five wide'].column{
+                        margin-left: 0 !important;
+                    }
+                ";
+
+                wbc()->load->add_inline_style('', $custom_css, 'common');
+
             });
 
             add_action('wp_footer',function(){

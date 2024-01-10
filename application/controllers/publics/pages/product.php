@@ -570,6 +570,7 @@ class Product {
             }
             //Add css to the head
             add_Action('wp_head',function(){
+                if(false){
                 ?>
                     <style>
                         
@@ -584,6 +585,20 @@ class Product {
                         }
                     </style>
                 <?php
+                }
+                $custom_css = "
+                    @media only screen and (max-width: 678px){
+                        .make_pair{
+                            margin: auto !important;
+                        }
+                    }
+
+                    .make_pair{
+                        margin-left: 5px !important;
+                    }
+                ";
+
+                wbc()->load->add_inline_style('', $custom_css, 'common');
             });
             //Add Js to the footer.
             add_action('wp_footer',function(){
@@ -651,7 +666,8 @@ class Product {
             });    */
         }
         
-        ob_start();        
+        ob_start();
+        if(false){        
         ?>
         <style type="text/css">
             .woocommerce .content-area ,#content,#primary,#main,.content,.primary,.main{
@@ -662,6 +678,17 @@ class Product {
              }
         </style>
         <?php
+        {
+        $custom_css = "
+            .woocommerce .content-area ,#content,#primary,#main,.content,.primary,.main{
+                width: 100% !important;
+            }
+            .woocommerce .widget-area {
+                display: none !important;
+            }
+        ";
+
+        wbc()->load->add_inline_style('', $custom_css, 'common');
         echo ob_get_clean();
         
         //Registering Scripts : JavaScript
