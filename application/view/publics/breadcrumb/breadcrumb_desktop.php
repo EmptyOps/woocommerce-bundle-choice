@@ -85,25 +85,24 @@ if(isset($_GET['FIRST']) and isset($_GET['SECOND'])) {
                     }); 
                 </script>";
         echo $html;
-    }
+    <?php
+    } 
     $inline_script =
-        '<script>' .
-        '    jQuery(document).ready(function(){' .
-        '        jQuery(\'.onclick_redirect\').on(\'click\',function(){' .
-        '            var _step = jQuery(this);' .
-        '            var _rem_url = jQuery(_step).find(\'[data-remove-url]\');' .
-        '            if (_rem_url.length > 0) {' .
-        '                window.location.href = jQuery(_rem_url[0]).data(\'remove-url\');' .
-        '            } else {' .
-        '                window.location.href = jQuery(_step).data(\'begin\');' .
-        '            }' .
-        '        });' .
-        '        jQuery(\'[data-clickable_breadcrumb]\').on(\'click\',function(){' .
-        '            window.location.href = jQuery(this).data(\'clickable_breadcrumb\');' .
-        '        });' .
-        '    });' .
-        '</script>';
+        "jQuery(document).ready(function(){ jQuery('.onclick_redirect').on('click',function(){ \n" .
+        "        var _step = jQuery(this);\n" .
+        "        var _rem_url = jQuery(_step).find('[data-remove-url]');\n" .
+        "        if(_rem_url.length>0) { \n" .
+        "            window.location.href=jQuery(_rem_url[0]).data('remove-url');\n" .
+        "        } else { \n" .
+        "            window.location.href = jQuery(_step).data('begin'); \n" .
+        "        }\n" .
+        "    });\n" .
+        "    jQuery('[data-clickable_breadcrumb]').on('click',function(){\n" .
+        "        window.location.href = jQuery(this).data('clickable_breadcrumb'); \n" .
+        "    });\n" .
+        "}); \n";
 
+    // Adding the inline script to WordPress using wbc()->load->add_inline_script
     wbc()->load->add_inline_script('', $inline_script, 'common');
 
 }
