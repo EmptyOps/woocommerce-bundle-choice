@@ -195,12 +195,18 @@ class SP_Product extends SP_Entity {
 				case 'weight':
 					$product_obj->set_weight($field['value']);
 					break;
-				default:	
-
+				case 'attribute':
 					if(substr($field['key'],0,3)=='pa_'){
 
 						$attributes[/*$field[2]*/ \eo\ssm_dt\model\data_model\SP_SSM_DT_Data_Layer::field_key_to_legacy_key($field['key'], 'attr')] = $field['value'];
 					}
+					break;
+				default:	
+					break;
+					// if(substr($field['key'],0,3)=='pa_'){
+
+					// 	$attributes[/*$field[2]*/ \eo\ssm_dt\model\data_model\SP_SSM_DT_Data_Layer::field_key_to_legacy_key($field['key'], 'attr')] = $field['value'];
+					// }
 			}
 		}
 
