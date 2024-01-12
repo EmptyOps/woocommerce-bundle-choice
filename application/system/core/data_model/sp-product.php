@@ -266,7 +266,77 @@ class SP_Product extends SP_Entity {
 		// save or update the product
 		$product_obj->save();
 
-		return $product_obj->get_id();
+		$product_id = $product_obj->get_id();
+
+
+		$parent_id = $product_id;
+		if(!empty($data['variation'])){
+
+			foreach ($data['variation'] as $var_index => $variation) {						
+
+				if(!empty($variation['terms'])){					 
+					foreach($variation['terms'] as $taxonomy=>$term_array){
+							
+						if( ! taxonomy_exists($taxonomy) ){						            
+				            register_taxonomy(
+				                $taxonomy,
+				               'product_variation',
+				                array(
+				                    'hierarchical' => false,
+				                    'label' => ucfirst( substr($taxonomy,3)),
+				                    'query_var' => true,
+				                    'rewrite' => array( 'slug' => sanitize_title(substr($taxonomy ,3) ) ), // The base slug
+				                )
+				            );
+				        }
+						
+						$tax_term = term_exists( $term_array['label'], $taxonomy );
+						if ( ! $tax_term ) {								
+							$tax_term = wp_insert_term( $term_array['label'], $taxonomy );								
+						} 
+						if(!empty($tax_term) and !is_wp_error($tax_term)){
+	    					$term_slug = wbc()->wc->get_term_by('term_taxonomy_id',$tax_term['term_taxonomy_id'],$taxonomy);
+	    					if(!empty($term_slug->slug) and !is_wp_error($term_slug)) {
+	    						$variation['terms'][$taxonomy] = $term_slug->slug;	    					
+	    					}
+	    				}
+    				}
+    				
+    				$var_ = new \WC_Product_Variation();
+					$var_->set_props(
+						array(
+							'parent_id'     => $parent_id,							
+							'regular_price' => $variation['regular_price'],
+							'sale_price' => $variation['price']
+						)
+					);
+					$var_->set_attributes($variation['terms']);	
+
+					// $img_id=$this->add_image_gallary($variation['thumb']);
+					// $var_->set_post_thumbnail( $variation['id'],$img_id );
+					
+					ACTIVE_TODO_OC_START
+					ACTIVE_TODO for any extension if the required to update variation and at that time if its required that thes flow is not adapting to updating the variation then we need to find the applicable variation based on the variation attributes that is sam that above and then just update variation instead of the attribute new variation object above. and even if nothing sache thum sub then also lest du it by first revision or second revision. -- to h & -- to b
+					ACTIVE_TODO_OC_END
+					$var_->save();
+				}				
+			}	
+
+			// $_product = wc_get_product($parent_id);
+			$product_obj->set_default_attributes($data['variation'][0]['terms']);					
+			$product_obj->save();
+
+		} elseif (!empty($data['regular_price'])) {
+			update_post_meta( $parent_id, '_regular_price',$data['regular_price'] );
+			update_post_meta( $parent_id, '_price', $data['sale_price']);						
+			update_post_meta( $parent_id, '_sales_price', $data['price']);
+			update_post_meta( $parent_id, '_sale_price', $data['sale_price']);				
+			update_post_meta( $parent_id, '_manage_stock','no' );	
+
+			ACTIVE_TODO in below for statement thar are defrant price of woocomers. and so far as per as an we are using regular_price and sales_price so we need to bring and clarity on what other fields the woocommerce as a use is for. as well as we need to bring and clarity on aware sample data files as well as for example below we are simple to be sport sale_price as well so we need to check if that has in otherwise we need to stop using that in the aver sample data array format as well. that is better for bringing simple sim it a sinklunijeshon in the data and woocommerce flos. -- to h & -- to b		
+		}
+
+		return $product_id;
 
 	}
 
