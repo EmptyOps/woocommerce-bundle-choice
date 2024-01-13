@@ -322,7 +322,7 @@ class SP_Product extends SP_Entity {
 					// $var_->set_post_thumbnail( $variation['id'],$img_id );
 					
 					ACTIVE_TODO_OC_START
-					ACTIVE_TODO for any extension if the required to update variation and at that time if its required that thes flow is not adapting to updating the variation then we need to find the applicable variation based on the variation attributes that is sam that above and then just update variation instead of the attribute new variation object above. and even if nothing sache thum sub then also lest du it by first revision or second revision. -- to h & -- to b
+					ACTIVE_TODO for any extensions if we required to update variation and at that time if it is required that these flow is not adapting to update the variation then we need to find the applicable variation based on the variation attributes that is set above and then just update variation instead of the creating new variation object above. and even if nothing such thing comes up then also lets do it by first revision or second revision. -- to h & -- to b
 					ACTIVE_TODO_OC_END
 					$var_->save();
 				}				
@@ -333,13 +333,13 @@ class SP_Product extends SP_Entity {
 			$product_obj->save();
 
 		} elseif (!empty($data['regular_price'])) {
+
+			ACTIVE_TODO in below update_post_meta call statements thar are defrant price set in the woocommerce. and so far as per as i know we are using regular_price and sales_price so we need to bring some clarity on what other fields the woocommerce is using for. as well as we need to bring some clarity on our sample data fields as well for example below we seem to be supporting sale_price as well so we need to check if that has any us_e otherwise we need to stop using that in our sample data array format as well. that is better for bringing simplicity and synchronization in the data and woocommerce flows. -- to h & -- to b		
 			update_post_meta( $parent_id, '_regular_price',$data['regular_price'] );
 			update_post_meta( $parent_id, '_price', $data['sale_price']);						
 			update_post_meta( $parent_id, '_sales_price', $data['price']);
 			update_post_meta( $parent_id, '_sale_price', $data['sale_price']);				
 			update_post_meta( $parent_id, '_manage_stock','no' );	
-
-			ACTIVE_TODO in below for statement thar are defrant price of woocomers. and so far as per as an we are using regular_price and sales_price so we need to bring and clarity on what other fields the woocommerce as a use is for. as well as we need to bring and clarity on aware sample data files as well as for example below we are simple to be sport sale_price as well so we need to check if that has in otherwise we need to stop using that in the aver sample data array format as well. that is better for bringing simple sim it a sinklunijeshon in the data and woocommerce flos. -- to h & -- to b		
 		}
 
 		return $product_id;
