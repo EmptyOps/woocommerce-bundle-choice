@@ -53,7 +53,7 @@ class SP_Category extends SP_Entity {
 		throw new Exception("not implemented yet.", 1);
 	}
 
-	public static function createFromArray( $platform_key, $platform_name, $data_array ){
+	public static function createFromArray( $platform_key, $platform_name, $data_array, $args = array() ){
 
 		NOTE: This class hierarchy of these clasees will contain janral code related to CRUD operations and so on functions. so it means that if there is any extension specific code then that need to be implemented in that specific extension class which is extended from this class only, that is necessary to ensure that wbc free layer has only relevant and neat code. and beyond the extension specific classes thar might be sum exception like dapii extenshone has its specific different classes for handling the crud operations and factory logic related to category, attribute and product and so on, and that exception is assumed to be kept separate always wich mins that dapii code will never be merged or synced in any way with this class hierarchy and its layers.
 
@@ -66,10 +66,15 @@ class SP_Category extends SP_Entity {
 		}
 	}
 
-	protected static function create($data) {
+	protected static function create($data, $args = array()) {
 		// TODO bind to the sample data sample category creation flow(and that should also be adhering to and following the data layer structure defs) where there is either category factory or entire function(s) to do so 
 
 		//	TODO and extensions which needs category factory related operations are also supposed to rely on this class for such operations 
+
+		if ($args[--ahi empty valo fleg check karavano se pelo]) {
+
+			ahi old_to_new formet valu function transform_holder_formet_to_new_formet aeva name nu function call karvanu se
+		}
 
 	}
 
