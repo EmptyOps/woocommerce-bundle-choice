@@ -63,4 +63,29 @@ class SP_Entity {
 		return $this->platform_name;
 	}
 
+	public static function transform_older_formet_to_new_formet($data, $args = array()){
+
+		$res = array("type" => "success", "msg" => "", "data_new_formet" = "");
+		// $data_new_formet = array();
+
+        $separator = wbc()->config->separator();
+
+		foreach($data as $data_key => $data_value){
+			if (isset($data[$data as $data_key.$separator.'new_formet'])) {
+
+				$res['data_new_formet'][$data_key] = $data[$data as $data_key.$separator.'new_formet'];
+			} else {
+
+				$res = array("type" => "error");
+				$res = array("msg" => "the new formet values is not found for the key " . $data_key . "/n<br>");
+
+				return $res;
+ 
+			}
+			return $res;
+		}
+
+	}
+
+
 }

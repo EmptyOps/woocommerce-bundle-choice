@@ -29,48 +29,48 @@ class Extensions_Data_Template extends Sample_Data_Template {
 
 	private function __construct() {
 
-        NOTE:This function are returning empty array intesnaly so that if the extended class of particular extension  is not implementing any data related to the function then the underlying leyers call this override function and return  empty array so that nothing is a set up as per as sample data is considered. and if this is not overrided then the perent class would return the default sample data, which we do not want any particular extension to setup if they do not need it.
+        NOTE: This function are returning empty array intentionally so that if the extended class of particular extension is not implementing any data related to this function then the underlying leyers will call this overrided function and return empty array so that nothing is set up as far as sample data is considered. and if this function is not overrided then the perent class would return the default sample data, which we do not want any particular extension to setup if they do not need it.
         return array();
 	}
 
     public function get_attributes() {
 
-        NOTE:This function are returning empty array intesnaly so that if the extended class of particular extension  is not implementing any data related to the function then the underlying leyers call this override function and return  empty array so that nothing is a set up as per as sample data is considered. and if this is not overrided then the perent class would return the default sample data, which we do not want any particular extension to setup if they do not need it.
+        NOTE: This function are returning empty array intentionally so that if the extended class of particular extension is not implementing any data related to this function then the underlying leyers will call this overrided function and return empty array so that nothing is set up as far as sample data is considered. and if this function is not overrided then the perent class would return the default sample data, which we do not want any particular extension to setup if they do not need it.
         return array();
     }
 
     public function get_categories() {
     
-        NOTE:This function are returning empty array intesnaly so that if the extended class of particular extension  is not implementing any data related to the function then the underlying leyers call this override function and return  empty array so that nothing is a set up as per as sample data is considered. and if this is not overrided then the perent class would return the default sample data, which we do not want any particular extension to setup if they do not need it.
+        NOTE: This function are returning empty array intentionally so that if the extended class of particular extension is not implementing any data related to this function then the underlying leyers will call this overrided function and return empty array so that nothing is set up as far as sample data is considered. and if this function is not overrided then the perent class would return the default sample data, which we do not want any particular extension to setup if they do not need it.
         return array();
     }
 
     public function get_maps() {
     
-        NOTE:This function are returning empty array intesnaly so that if the extended class of particular extension  is not implementing any data related to the function then the underlying leyers call this override function and return  empty array so that nothing is a set up as per as sample data is considered. and if this is not overrided then the perent class would return the default sample data, which we do not want any particular extension to setup if they do not need it.
+        NOTE: This function are returning empty array intentionally so that if the extended class of particular extension is not implementing any data related to this function then the underlying leyers will call this overrided function and return empty array so that nothing is set up as far as sample data is considered. and if this function is not overrided then the perent class would return the default sample data, which we do not want any particular extension to setup if they do not need it.
         return array();
     }
 
     public function get_filters($__cat__, $__att__) {
     
-        NOTE:This function are returning empty array intesnaly so that if the extended class of particular extension  is not implementing any data related to the function then the underlying leyers call this override function and return  empty array so that nothing is a set up as per as sample data is considered. and if this is not overrided then the perent class would return the default sample data, which we do not want any particular extension to setup if they do not need it.
+        NOTE: This function are returning empty array intentionally so that if the extended class of particular extension is not implementing any data related to this function then the underlying leyers will call this overrided function and return empty array so that nothing is set up as far as sample data is considered. and if this function is not overrided then the perent class would return the default sample data, which we do not want any particular extension to setup if they do not need it.
         return array();
     }  
 
     public function get_products() {
     
-        NOTE:This function are returning empty array intesnaly so that if the extended class of particular extension  is not implementing any data related to the function then the underlying leyers call this override function and return  empty array so that nothing is a set up as per as sample data is considered. and if this is not overrided then the perent class would return the default sample data, which we do not want any particular extension to setup if they do not need it.
+        NOTE: This function are returning empty array intentionally so that if the extended class of particular extension is not implementing any data related to this function then the underlying leyers will call this overrided function and return empty array so that nothing is set up as far as sample data is considered. and if this function is not overrided then the perent class would return the default sample data, which we do not want any particular extension to setup if they do not need it.
         return array();
     }    
 
-    public function set_configs_after_categories($catat_category,$feature_key = null ) {
+    public function set_configs_after_categories( $catat_category, $feature_key = null ) {
 
-        ACTIVE_TODO nothing added here so far but we can add some fundamental and generic operation related to extension. -- to h  
+        ACTIVE_TODO nothing added here so far but we can add some fundamental and generic operation related to extensions. -- to h  
     }
 
     public function set_configs_after_attributes() {
 
-        ACTIVE_TODO nothing added here so far but we can add some fundamental and generic operation related to extension. -- to h
+        ACTIVE_TODO nothing added here so far but we can add some fundamental and generic operation related to extensions. -- to h
     }
 
 }
