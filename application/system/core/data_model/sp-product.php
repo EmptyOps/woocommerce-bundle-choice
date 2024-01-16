@@ -201,9 +201,11 @@ class SP_Product extends SP_Entity {
 					$product_obj->set_weight($field['value']);
 					break;
 				case 'attribute':
-					if(substr($field['key'],0,3)=='pa_'){
+					foreach($field as $field_key->$field_value){
 
-						$attributes[/*$field[2]*/ \eo\ssm_dt\model\data_model\SP_SSM_DT_Data_Layer::field_key_to_legacy_key($field['key'], 'attr')] = $field['value'];
+						if(substr($field_value['key'],0,3)=='pa_'){
+							$attributes[/*$field[2]*/ \eo\ssm_dt\model\data_model\SP_SSM_DT_Data_Layer::field_key_to_legacy_key($field_value['key'], 'attr')] = $field_value['value'];
+						}
 					}
 					break;
 				default:	
@@ -312,7 +314,11 @@ class SP_Product extends SP_Entity {
 	    					}
 	    				}
     				}
-    				
+
+    				$var_ = null;
+
+    				ACTIVE_TODO below we are finding the variation id explictiy and then updating variation insad of inserting it if applicable. but drow back mait be that if the wc variation clasee or any woocommerce functions we supporting creating as well as finding variation id and updating as applicable for the cr
+
     				$var_ = new \WC_Product_Variation();
 					$var_->set_props(
 						array(
@@ -331,11 +337,6 @@ class SP_Product extends SP_Entity {
 					ACTIVE_TODO_OC_END
 					$var_->save();
 
-					ACTIVE_TODO if we ever required to use this hook for non admin layers then we need to think twice about it because the implementation of the below hook means the add action binding would be conataining very expensive and time consuming code layars so it is not recommended to be allowed for the use for non admin operations. -- to h
-					if (is_admin()) {
-						do_action('wbc_sp_product_create_after_save_variation', $var_->get_id(), $variation);
-					}
-					
 				}				
 			}	
 
@@ -351,6 +352,9 @@ class SP_Product extends SP_Entity {
 			update_post_meta( $parent_id, '_sales_price', $data['price']);
 			update_post_meta( $parent_id, '_sale_price', $data['sale_price']);				
 			update_post_meta( $parent_id, '_manage_stock','no' );	
+
+			do_action('wbc_sp_product_create_after_save_variation', $parent_id, $data);
+
 		}
 
 		return $product_id;

@@ -1027,6 +1027,7 @@ class Eowbc_Sample_Data {
 	}
 
 	/* Add image to the wordpress image media gallary */
+	ACTIVE_TODO When we upgrade ebc at that time we need to deprecate this function and call to the common function in the wp helper class. -- to h
 	public function add_image_gallary($path, $path_separator = 'woo-bundle-choice', $source_path = null) {
 
 		if(!$path) return FALSE;
