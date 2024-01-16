@@ -65,10 +65,21 @@ class SP_Attribute extends SP_Entity {
 
 		//	TODO and extensions which needs attribute factory related operations are also supposed to rely on this class for such operations 
 	    				        
+		if (empty($args[is_do_not_transform_older_to_new_formet])) {
 
-		if ($args[--ahi empty valo fleg check karavano se pelo]) {
+			ahi old_to_new formet valu function transform_older_formet_to_new_formet aeva name nu function call karvanu se
 
-			ahi old_to_new formet valu function transform_holder_formet_to_new_formet aeva name nu function call karvanu se
+			parent::transform_older_formet_to_new_formet($data, $args);
+			return $res;
+
+			if ($res['type' == 'success']) {
+		
+				$data = $res['data_new_formet'];
+			} else {
+
+				-- we need to mange the error hendling mens the value that is retan from the here shuold be so on as error messeg to the user interface on admin and so on -- to h && -- to harshil
+				return $res;
+			}
 		}
 
 		if(!isset($data['label']) && !isset($data['terms'])) return;
@@ -140,9 +151,9 @@ class SP_Attribute extends SP_Entity {
     								update_term_meta( $_attr_term_id, sanitize_title($term['label']).'_attachment', wp_get_attachment_url( $thumb_id ) );
 		    					}
 
-		    					if (!wbc_isEmptyArr(/*$data['terms_order'])*/$trem['terms_order']) {
+		    					if (!wbc_isEmptyArr(/*$data['terms_order'])*/$term['terms_order']) {
 
-		    						update_term_meta($_attr_term_id, 'order', /*$data['terms_order'][$term_index]*/$trem['terms_order']);
+		    						update_term_meta($_attr_term_id, 'order', /*$data['terms_order'][$term_index]*/$term['terms_order']);
 		    					
 			    					// wbc_pr(get_term_meta($_attr_term_id,'order'));
 			    					// die();

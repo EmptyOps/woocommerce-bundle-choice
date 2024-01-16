@@ -71,9 +71,21 @@ class SP_Category extends SP_Entity {
 
 		//	TODO and extensions which needs category factory related operations are also supposed to rely on this class for such operations 
 
-		if ($args[--ahi empty valo fleg check karavano se pelo]) {
+		if (empty($args[is_do_not_transform_older_to_new_formet])) {
 
-			ahi old_to_new formet valu function transform_holder_formet_to_new_formet aeva name nu function call karvanu se
+			ahi old_to_new formet valu function transform_older_formet_to_new_formet aeva name nu function call karvanu se
+
+			parent::transform_older_formet_to_new_formet($data, $args);
+			return $res;
+
+			if ($res['type' == 'success']) {
+		
+				$data = $res['data_new_formet'];
+			} else {
+
+				-- we need to mange the error hendling mens the value that is retan from the here shuold be so on as erroe messeg to the user interface on admin and so on -- to h && -- to harshil
+				return $res;
+			}
 		}
 
 	}
