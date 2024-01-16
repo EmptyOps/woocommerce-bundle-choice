@@ -53,7 +53,7 @@ class SP_Product extends SP_Entity {
 
 		foreach($data_array as $data_key=>$data){
 
-			self::create($data,$args);
+			self::create($data, $args);
 		
 		}
 
@@ -65,19 +65,19 @@ class SP_Product extends SP_Entity {
 
 		//	TODO and extensions which needs product factory related operations are also supposed to rely on this class for such operations 
 
-		if (empty($args[is_do_not_transform_older_to_new_formet])) {
+		if (empty($args['is_do_not_transform_older_to_new_format'])) {
 
-			ahi old_to_new formet valu function transform_older_formet_to_new_formet aeva name nu function call karvanu se
-
-			parent::transform_older_formet_to_new_formet($data, $args);
-			return $res;
+			$res = parent::transform_older_format_to_new_format($data, $args);
 
 			if ($res['type' == 'success']) {
 		
-				$data = $res['data_new_formet'];
+				$data = $res['data_new_format'];
 			} else {
 
-				-- we need to mange the error hendling mens the value that is retan from the here shuold be so on as erroe messeg to the user interface on admin and so on -- to h && -- to harshil
+				ACTIVE_TODO_OC_START
+				-- we need to mange the error hendling mens the value that is retan from the here shuold be shown as error messeg to the user interface on admin and so on -- to h && -- to harshil
+					--	here as soon as we get chance we need to show this errors on the user interface pages of the admin sample_data and so that debugging become easeir -- to h && to harshil
+				ACTIVE_TODO_OC_END
 				return $res;
 			}
 		}
