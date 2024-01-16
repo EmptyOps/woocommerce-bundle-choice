@@ -80,6 +80,7 @@ class SP_Product extends SP_Entity {
 				ACTIVE_TODO_OC_END
 				return $res;
 			}
+
 		}
 
 		$product_obj = null;
@@ -212,7 +213,7 @@ class SP_Product extends SP_Entity {
 					$product_obj->set_weight($field['value']);
 					break;
 				case 'attribute':
-					foreach($field as $field_key->$field_value){
+					foreach($field as $field_key=>$field_value){
 
 						if(substr($field_value['key'],0,3)=='pa_'){
 							$attributes[/*$field[2]*/ \eo\ssm_dt\model\data_model\SP_SSM_DT_Data_Layer::field_key_to_legacy_key($field_value['key'], 'attr')] = $field_value['value'];
@@ -221,7 +222,10 @@ class SP_Product extends SP_Entity {
 					break;
 				default:	
 					break;
+					// if(substr($field['key'],0,3)=='pa_'){
 
+					// 	$attributes[/*$field[2]*/ \eo\ssm_dt\model\data_model\SP_SSM_DT_Data_Layer::field_key_to_legacy_key($field['key'], 'attr')] = $field['value'];
+					// }
 			}
 		}
 
@@ -289,6 +293,14 @@ class SP_Product extends SP_Entity {
 
 		$product_id = $product_obj->get_id();
 
+		if (!empty($data['thumb'])) {
+			
+			$img_id=wbc()->wp->add_image_gallary($data['thumb']);
+
+			if($img_id){	
+				set_post_thumbnail( $product_id,$img_id );
+			}
+		}
 
 		$parent_id = $product_id;
 		if(!empty($data['variation'])){
@@ -325,9 +337,19 @@ class SP_Product extends SP_Entity {
 
     				$var_ = null;
 
-    				ACTIVE_TODO below we are finding the variation id explictiy and then updating variation insad of inserting it if applicable. but drow back mait be that if the wc variation clasee or any woocommerce functions we supporting creating as well as finding variation id and updating as applicable for the cr
+    				ACTIVE_TODO Below we are finding the variation id explicitly and then updateing variation instead of inserting it if applicable. but drow back might be that if the wc variation classes or any woocommerce functions we supporting creating as well as finding variation id and updating as applicable for the creation/updation of the variation then we may like to use it. this is the may be cuvit nessori for the frontend opreshon because if we need to use this a function for cantend then applicity finding variation id lick below mite be post costly and excepting. so lest trai lest do as sun as we need it or me be next by first or second revision. -- to h 
+    				$var_id = \eo\wbc\model\publics\data_model\SP_WBC_Variations::get_default_variation_id($product_obj,$variation['terms']);
 
-    				$var_ = new \WC_Product_Variation();
+    				if (!empty($var_id)) {
+
+    					$var_ = new \WC_Product_Variation();
+
+    				} else {
+
+    					$var_ = new \WC_Product_Variation();
+
+    				}
+
 					$var_->set_props(
 						array(
 							'parent_id'     => $parent_id,							
@@ -345,6 +367,8 @@ class SP_Product extends SP_Entity {
 					ACTIVE_TODO_OC_END
 					$var_->save();
 
+					do_action('wbc_sp_product_create_after_save_variation', $var_->get_id(), $variation);
+
 				}				
 			}	
 
@@ -361,6 +385,7 @@ class SP_Product extends SP_Entity {
 			update_post_meta( $parent_id, '_sale_price', $data['sale_price']);				
 			update_post_meta( $parent_id, '_manage_stock','no' );	
 
+			NOTE: this is simple type leyar but we are reusing variation hook here also jast like sp_variation leyers. 
 			do_action('wbc_sp_product_create_after_save_variation', $parent_id, $data);
 
 		}

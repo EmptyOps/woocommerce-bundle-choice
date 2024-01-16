@@ -146,7 +146,7 @@ class SP_Attribute extends SP_Entity {
     							if(!empty($term['thumb'])){
 									$thumb_id=0;
 									-- function helper ma banavi ne call karvanu che. -- to h & -- to b
-		    						$thumb_id=wbc()->wp->add_image_gallary($term['thumb']);
+		    						$thumb_id = wbc()->wp->add_image_gallary($term['thumb']);
 		    						update_term_meta( $_attr_term_id, 'pa_'.$attribute_data['slug'].'_attachment', wp_get_attachment_url( $thumb_id ) );
     								update_term_meta( $_attr_term_id, sanitize_title($term['label']).'_attachment', wp_get_attachment_url( $thumb_id ) );
 		    					}
