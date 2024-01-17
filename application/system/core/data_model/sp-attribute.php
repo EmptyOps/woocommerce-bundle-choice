@@ -82,13 +82,13 @@ class SP_Attribute extends SP_Entity {
 			}
 		}
 
-		if(!isset($data['label']) && !isset($data['terms'])) return;
+		if(!isset($data['label']['value']) && !isset($data['terms']['value'])) return;
 
 		//adding post data to store data in posts
 		$attribute_data = array(
-	        'name'   => wp_unslash($data['label']),
-	        'slug'    => empty($data['slug']) ? wc_sanitize_taxonomy_name(wp_unslash($data['label'])) : $data['slug'],
-	        'type'    => (empty($data['type'])?'select':$data['type']),
+	        'name'   => wp_unslash($data['label']['value']),
+	        'slug'    => empty($data['slug']['value']) ? wc_sanitize_taxonomy_name(wp_unslash($data['label']['value'])) : $data['slug']['value'],
+	        'type'    => (empty($data['type']['value'])?'select':$data['type']['value']),
 	        'order_by' => 'menu_order',
 	        'has_archives'  => 1, // Enable archives ==> true (or 1)
 	    );		
@@ -102,8 +102,8 @@ class SP_Attribute extends SP_Entity {
 		}
 
 		// @mahesh - added to store the ribbon color from sample data
-		if(!empty($id) and !is_wp_error($id) and !empty($data['ribbon_color'])) {
-			update_term_meta($id,'wbc_ribbon_color',$data['ribbon_color']);
+		if(!empty($id) and !is_wp_error($id) and !empty($data['ribbon_color']['value'])) {
+			update_term_meta($id,'wbc_ribbon_color',$data['ribbon_color']['value']);
 		}
 		
 		if( ! taxonomy_exists('pa_'.$attribute_data['slug']) ){	
@@ -126,9 +126,9 @@ class SP_Attribute extends SP_Entity {
             );
         }*/ 				
 
-		if(empty($data['range'])){
+		if(empty($data['range']['value'])){
     		
-    		foreach ($data['terms'] as $term_index=>$term)  {	
+    		foreach ($data['terms']['value'] as $term_index=>$term)  {	
 
 				if( ! term_exists( $term['label'], 'pa_'.$attribute_data['slug']) ) {
 
@@ -159,9 +159,9 @@ class SP_Attribute extends SP_Entity {
 			    					// die();
 		    					}
 
-    							if(!empty($data['type']) and !empty($term['terms_meta']) and is_array($term['terms_meta'])){
+    							if(!empty($data['type']['value']) and !empty($term['terms_meta']) and is_array($term['terms_meta'])){
 
-    								switch ($data['type']) {
+    								switch ($data['type']['value']) {
     									case 'color':
     									
     										function_exists( 'update_term_meta' ) ? update_term_meta( $_attr_term_id,'wbc_color',$term['terms_meta']['color_code']) : update_metadata( 'woocommerce_term', $_attr_term_id,'wbc_color',$term['terms_meta']['color_code']);

@@ -86,14 +86,14 @@ class SP_Product extends SP_Entity {
 		$product_obj = null;
 
 		// creat product oject if it is update mode
-		if(!empty($data['sku']['key'])) {
+		if(!empty($data['sku']['value'])) {
 
 			if( wbc()->sanitize->get('is_test') == 1 or wbc()->sanitize->get('is_light_test') == 1) {
 	
 				wbc_pr("SP_Product create inner if 6");
 			}
 
-			$product_id = wc_get_product_id_by_sku(trim($data['sku']['key']));
+			$product_id = wc_get_product_id_by_sku(trim($data['sku']['value']));
 
 			$product_obj = wc_get_product($product_id);
 
@@ -108,7 +108,7 @@ class SP_Product extends SP_Entity {
 				wbc_pr("SP_Product create if 9.111111");
 			}
 
-			if($data['type']['key'] == 'simple') {
+			if($data['type']['value'] == 'simple') {
 
 				$product_obj = new WC_Product_Simple();
 			} else {
@@ -221,11 +221,11 @@ class SP_Product extends SP_Entity {
 			}
 		}
 
-		if (!empty($data['category'])) {
+		if (!empty($data['category']['value'])) {
 
 			$cat_ids = array();
 
-			foreach($data['category'] as $cat_key=>$cat_slug){
+			foreach($data['category']['value'] as $cat_key=>$cat_slug){
 
 				$cat_ids[$cat_key] = wbc()->wc->slug_to_id('prod_cat', $cat_slug);
 			}
@@ -239,9 +239,10 @@ class SP_Product extends SP_Entity {
 
 		$product_id = $product_obj->get_id();
 
-		if (!empty($data['thumb'])) {
+
+		if (!empty($data['thumb']['value'])) {
 			
-			$img_id=wbc()->wp->add_image_gallary($data['thumb']);
+			$img_id=wbc()->wp->add_image_gallary($data['thumb']['value']);
 
 			if($img_id){	
 				set_post_thumbnail( $product_id,$img_id );
@@ -249,10 +250,10 @@ class SP_Product extends SP_Entity {
 		}
 
 		ACTIVE_TODO In future whenever any extension or plugin required the image to be passed from the directory path means the directory path need to be supported at that time we need to add support for it. otherwise mark it as todo by third revision if no such requirement comes up. -- to h
-		if(!empty($data['images']) and is_array($data['images'])){
+		if(!empty($data['images']['value']) and is_array($data['images']['value'])){
 
 			$imgs = array();
-			foreach ($data['images'] as $img) {
+			foreach ($data['images']['value'] as $img) {
 				$imgid = wbc()->wp->add_image_gallary($this->data_template->gallay_img.$img);
 				if(!empty($imgid)){
 					array_push( $imgs, $imgid);	
@@ -263,14 +264,14 @@ class SP_Product extends SP_Entity {
 		}
 
 
-		if(!empty($data['attribute'])){
+		if(!empty($data['attribute']['value'])){
 
 			$attributes = array();
 
-			foreach ($data['attribute'] as $_tax => $_val_term) {
+			foreach ($data['attribute']['value'] as $_tax => $_val_attribute_data) {
 
 				//$_val = explode('|',$_val['value']);
-				$_val = $_val_term['value'];
+				$_val = $_val_attribute_data['value'];
 				
 				if(is_array($_val) and !empty($_val)){
 					
@@ -293,7 +294,7 @@ class SP_Product extends SP_Entity {
 				}
 				
 				//$data['attribute'][$_tax]['value'] = implode('|',$_val);	
-				$attributes[$_tax] = $_val_term;	
+				$attributes[$_tax] = $_val_attribute_data;	
 				$attributes[$_tax]['value'] = implode('|',$_val);	
 			}	
 
@@ -307,9 +308,9 @@ class SP_Product extends SP_Entity {
 
 
 		$parent_id = $product_id;
-		if(!empty($data['variation'])){
+		if(!empty($data['variation']['value'])){
 
-			foreach ($data['variation'] as $var_index => $variation) {						
+			foreach ($data['variation']['value'] as $var_index => $variation) {						
 
 				if(!empty($variation['terms'])){					 
 					foreach($variation['terms'] as $taxonomy=>$term_array){
@@ -388,13 +389,13 @@ class SP_Product extends SP_Entity {
 			$product_obj->set_default_attributes($data['variation'][0]['terms']);					
 			$product_obj->save();
 
-		} elseif (!empty($data['regular_price'])) {
+		} elseif (!empty($data['regular_price']['value'])) {
 
 			ACTIVE_TODO in below update_post_meta call statements thar are defrant price set in the woocommerce. and so far as per as i know we are using regular_price and sales_price so we need to bring some clarity on what other fields the woocommerce is using for. as well as we need to bring some clarity on our sample data fields as well for example below we seem to be supporting sale_price as well so we need to check if that has any us_e otherwise we need to stop using that in our sample data array format as well. that is better for bringing simplicity and synchronization in the data and woocommerce flows. -- to h & -- to b		
-			update_post_meta( $parent_id, '_regular_price',$data['regular_price'] );
-			update_post_meta( $parent_id, '_price', $data['sale_price']);						
-			update_post_meta( $parent_id, '_sales_price', $data['price']);
-			update_post_meta( $parent_id, '_sale_price', $data['sale_price']);				
+			update_post_meta( $parent_id, '_regular_price',$data['regular_price']['value'] );
+			update_post_meta( $parent_id, '_price', $data['sale_price']['value']);						
+			update_post_meta( $parent_id, '_sales_price', $data['price']['value']);
+			update_post_meta( $parent_id, '_sale_price', $data['sale_price']['value']);				
 			update_post_meta( $parent_id, '_manage_stock','no' );	
 
 			NOTE: this is simple type leyar but we are reusing variation hook here also jast like sp_variation leyers. 
