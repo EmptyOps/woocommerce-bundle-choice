@@ -96,7 +96,7 @@ class SP_Product extends SP_Entity {
 				wbc_pr("SP_Product create if 9.111111");
 			}
 
-			if($type == 'simple') {
+			if($data['type']['key'] == 'simple') {
 
 				$product_obj = new WC_Product_Simple();
 			} else {
@@ -132,7 +132,7 @@ class SP_Product extends SP_Entity {
 			// }
 			
 			switch ($field['key']) {
-				case 'name':
+				case 'title'/*'name'*/:
 					$product_obj->set_name($field['value']);
 					break;					
 				case 'short_desc':	//	added support for short desc on 06-03-2022 -- hiren
@@ -145,7 +145,7 @@ class SP_Product extends SP_Entity {
 					
 					$product_obj->set_short_description( sanitize_text_field($field['value']) );
 					break;
-				case 'long_desc':
+				case 'content'/*'long_desc'*/:
 					
 					// if( wbc()->sanitize->get('is_test') == 1 ) {
 
@@ -200,14 +200,6 @@ class SP_Product extends SP_Entity {
 				case 'weight':
 					$product_obj->set_weight($field['value']);
 					break;
-				case 'attribute':
-					foreach($field as $field_key=>$field_value){
-
-						if(substr($field_value['key'],0,3)=='pa_'){
-							$attributes[/*$field[2]*/ \eo\ssm_dt\model\data_model\SP_SSM_DT_Data_Layer::field_key_to_legacy_key($field_value['key'], 'attr')] = $field_value['value'];
-						}
-					}
-					break;
 				default:	
 					break;
 					// if(substr($field['key'],0,3)=='pa_'){
@@ -217,62 +209,16 @@ class SP_Product extends SP_Entity {
 			}
 		}
 
+		if (!empty($data['category'])) {
 
-		if(!empty($attributes)){
+			$cat_ids = array();
 
-			$__attributes = array();
-			///////////////// 01-03-2022  -- @shraddha //////////////
-			$__variation_data = array();
-			///////////////// 01-03-2022  -- @shraddha //////////////
+			foreach($data['category'] as $cat_key=>$cat_slug){
 
-			foreach ($attributes as $attr=>$value) {
-				
-				$taxonomy = wbc()->wc->get_taxonomy_by_slug($attr);
-				
-				if($taxonomy and !is_wp_error($taxonomy)){
-					$tax_data= array (
-								'attribute_name'     => $taxonomy->name,
-								'attribute_taxonomy' => $taxonomy->slug,
-								'attribute_id'       => $taxonomy->id,
-								'term_ids'           => array(),
-							);
-					
-					$term = get_term_by('name',$value,$taxonomy->slug);
-
-					if(is_wp_error($term) or empty($term)){
-
-						$term = term_exists( $value, $taxonomy->slug );
-					}
-
-					if(is_wp_error($term) or empty($term)){
-
-						$term = wp_insert_term( $value, $taxonomy->slug );
-					}
-
-					$term = (array)$term;
-
-					if(!isset($tax_data['term_ids'])){
-						$tax_data['term_ids'] = array();
-					}
-
-					if(!is_wp_error($term) and isset($term['term_id'])) {
-						$tax_data['term_ids'][] = $term['term_id'];
-					}
-
-					$_attribute      = new WC_Product_Attribute();
-
-					$_attribute->set_id( $tax_data['attribute_id'] );
-					$_attribute->set_name( $tax_data['attribute_taxonomy'] );
-					$_attribute->set_options( $tax_data['term_ids'] );
-					$_attribute->set_position( 1 );
-					$_attribute->set_visible( true );
-					$_attribute->set_variation( false );
-
-					$__attributes[] = $_attribute;						
-				}
+				$cat_ids[$cat_key] = wbc()->wc->slug_to_id('prod_cat', $cat_slug);
 			}
 
-			$product_obj->set_attributes( $__attributes );			
+			$product_obj->set_category_ids($cat_ids);
 		}
 
 
@@ -289,6 +235,64 @@ class SP_Product extends SP_Entity {
 				set_post_thumbnail( $product_id,$img_id );
 			}
 		}
+
+		ACTIVE_TODO In future whenever any extension or plugin required the image to be passed from the directory path means the directory path need to be supported at that time we need to add support for it. otherwise mark it as todo by third revision if no such requirement comes up. -- to h
+		if(!empty($data['images']) and is_array($data['images'])){
+
+			$imgs = array();
+			foreach ($data['images'] as $img) {
+				$imgid = wbc()->wp->add_image_gallary($this->data_template->gallay_img.$img);
+				if(!empty($imgid)){
+					array_push( $imgs, $imgid);	
+				}					
+			}
+
+			update_post_meta($product_id,"_product_image_gallery",implode(',', $imgs));
+		}
+
+
+		if(!empty($data['attribute'])){
+
+			$attributes = array();
+
+			foreach ($data['attribute'] as $_tax => $_val_term) {
+
+				//$_val = explode('|',$_val['value']);
+				$_val = $_val_term['value'];
+				
+				if(is_array($_val) and !empty($_val)){
+					
+					foreach ($_val as $key => $value) {
+						
+						$tax_term = term_exists( $value['value'], $_tax );
+						if ( ! $tax_term ) {								
+							$tax_term = wp_insert_term( $value['value'], $_tax );								
+						}
+
+						if(!empty($tax_term) and !is_wp_error($tax_term)){
+							$term_slug = wbc()->wc->get_term_by('term_taxonomy_id',$tax_term['term_taxonomy_id'],$_tax);	
+							if(!empty($term_slug->slug) and !is_wp_error($term_slug)) {
+								$_val[$key] = $term_slug->slug;
+							}
+						}
+
+					}						
+					
+				}
+				
+				//$data['attribute'][$_tax]['value'] = implode('|',$_val);	
+				$attributes[$_tax] = $_val_term;	
+				$attributes[$_tax]['value'] = implode('|',$_val);	
+			}	
+
+			update_post_meta( $product_id, '_product_attributes', $attributes );
+
+			foreach ($attributes as $attr_index => $attribute) {
+				wp_set_object_terms( $product_id, explode('|',$attribute['value']) , $attr_index );					
+			}
+
+		}
+
 
 		$parent_id = $product_id;
 		if(!empty($data['variation'])){
@@ -325,12 +329,20 @@ class SP_Product extends SP_Entity {
 
     				$var_ = null;
 
-    				ACTIVE_TODO Below we are finding the variation id explicitly and then updateing variation instead of inserting it if applicable. but drow back might be that if the wc variation classes or any woocommerce functions we supporting creating as well as finding variation id and updating as applicable for the creation/updation of the variation then we may like to use it. this is the may be cuvit nessori for the frontend opreshon because if we need to use this a function for cantend then applicity finding variation id lick below mite be post costly and excepting. so lest trai lest do as sun as we need it or me be next by first or second revision. -- to h 
+    				ACTIVE_TODO Below we are finding the variation id explicitly and then updateing variation instead of inserting it if applicable. but the draw back might be that if the wc variation classes or any woocommerce functions are supporting mins creating as well as finding variation id and updating as applicable for the creation/updation of the variation then we may like to use it. this is maybe quite necessory for the frontend opreshons because if we need to use this function for frontend then explicitly finding variation id like below might be costly and expensive. so lets try to do this as sun as we need it or may be max by first or second revision. -- to h 
     				$var_id = \eo\wbc\model\publics\data_model\SP_WBC_Variations::get_default_variation_id($product_obj,$variation['terms']);
 
     				if (!empty($var_id)) {
 
-    					$var_ = new \WC_Product_Variation();
+    					// Create a WC_Product_Variation object
+						$variation = wc_get_product($var_id);
+
+						if (is_a($variation, 'WC_Product_Variation')) {
+
+						    die('variation ID '.$variation->get_id().' and actual id '.$var_id);
+						} else {
+						    die('Invalid variation ID');
+						}
 
     				} else {
 
