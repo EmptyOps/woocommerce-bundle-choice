@@ -103,9 +103,10 @@
                     </script>
                     <?php
                     }
-                    $inline_script = "jQuery(document).ready(function(\$) {
-                    \$('.woocommerce-result-count').html('" . $total_text . "');
-                    });";
+                    $total_text = __($total_text);
+                    $inline_script = "jQuery(document).ready(function(\$) { \n".
+                    "\$('.woocommerce-result-count').html('" . $total_text . "');\n".
+                    "});";
                     wbc()->load->add_inline_script('', $inline_script, 'common');
                 }   
 

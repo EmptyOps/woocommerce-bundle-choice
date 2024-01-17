@@ -66,11 +66,12 @@
 	    "    else {\n" .
 	    "        setTimeout(override_flt_change_function, 500);\n" .
 	    "    }\n" .
+	    "	//////////////////////////////////////// \n".
 	    "}\n" .
 	    "override_flt_change_function();\n" .
 	    "\n" .
 	    "function search_btn_click() {\n" .
-	    "    var form = jQuery('form#eo_wbc_filter');\n" .
+	    "    var form = jQuery('form#eo_wbc_filter');\n\n" .
 	    "    window.location.href = shortflt_filter_setting__redirect_url + (shortflt_filter_setting__redirect_url.indexOf('?') == -1 ? '?' : '&') + form.serialize();\n" .
 	    "}\n";
 

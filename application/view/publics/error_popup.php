@@ -229,37 +229,29 @@ $inline_script =
     "\teo_wbc_outer_containers=undefined;\n" .
     "\n" .
     "\t//here we shall show some kind of popup for non-admin users as well, since some users might be testing frontend on diff browser or in incognito etc.\n" .
-    "  ".($is_current_user_can_manage_options == true ? "
-    "    //set the title/message in error popup\n" .
-    "    jQuery('#error_popup_title').html(msg);\n" .
-    "\n" .
-    "    //log the error in background\n" .
-    "    jQuery.post('".$site_url_admin_ajax."',{resolver:'eo_wbc_throw_error', _wpnonce:jQuery( jQuery('input[name=\"eo_wbc_throw_error_wpnonce\"]')[0] ).val(), action: 'eowbc_ajax',page:document.location.href,type:type,msg:msg});\n" .
-    "\n" .
-    "    //show user popup with options to send error report or cancel \n" .
-    "    // jQuery('.ui.modal').modal('show');\n" .
-    "    jQuery('.ui.modal').modal({\n" .
-    "      onApprove : function() {\n" .
-    "        // ... //Validate here, or pass validation to somewhere else\n" .
-    "        return false; //Return false as to not close modal dialog on approve click when we have to show something else after that.\n" .
-    "      }\n" .
-    "    }).modal('show');\n" .
-      " : "")."\n" .
-    "    //set the title/message in error popup\n" .
-    "    jQuery('#error_popup_title').html(msg);\n" .
-    "\n" .
-    "    //log the error in background\n" .
-    "    jQuery.post('".$site_url_admin_ajax."',{resolver:'eo_wbc_throw_error', _wpnonce:jQuery( jQuery('input[name=\"eo_wbc_throw_error_wpnonce\"]')[0] ).val(), action: 'eowbc_ajax',page:document.location.href,type:type,msg:msg});\n" .
-    "\n" .
-    "    //show user popup with options to send error report or cancel \n" .
-    "    // jQuery('.ui.modal').modal('show');\n" .
-    "    jQuery('.ui.modal').modal({\n" .
-    "      onApprove : function() {\n" .
-    "        // ... //Validate here, or pass validation to somewhere else\n" .
-    "        return false; //Return false as to not close modal dialog on approve click when we have to show something else after that.\n" .
-    "      }\n" .
-    "    }).modal('show');\n" .
-    "  <?php endif; ?>                  \n" .
+    
+    "  " .
+        (
+          $is_current_user_can_manage_options == true 
+          ? 
+            "    //set the title/message in error popup\n" .
+            "    jQuery('#error_popup_title').html(msg);\n" .
+            "\n" .
+            "    //log the error in background\n" .
+            "    jQuery.post('".$site_url_admin_ajax."',{resolver:'eo_wbc_throw_error', _wpnonce:jQuery( jQuery('input[name=\"eo_wbc_throw_error_wpnonce\"]')[0] ).val(), action: 'eowbc_ajax',page:document.location.href,type:type,msg:msg});\n" .
+            "\n" .
+            "    //show user popup with options to send error report or cancel \n" .
+            "    // jQuery('.ui.modal').modal('show');\n" .
+            "    jQuery('.ui.modal').modal({\n" .
+            "      onApprove : function() {\n" .
+            "        // ... //Validate here, or pass validation to somewhere else\n" .
+            "        return false; //Return false as to not close modal dialog on approve click when we have to show something else after that.\n" .
+            "      }\n" .
+            "    }).modal('show');\n" 
+          :
+            ""
+        ) . 
+
     "\n" .
     "\t//below testing service is not implemented yet for buttons and not implemented in general as well  \n" .
     "  \tif(".$empty_eo_wbc_button_testing." && ".$current_user_can_manage_options."){\n" .
