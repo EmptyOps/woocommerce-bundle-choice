@@ -214,10 +214,6 @@ class SP_Product extends SP_Entity {
 					break;
 				default:	
 					break;
-					// if(substr($field['key'],0,3)=='pa_'){
-
-					// 	$attributes[/*$field[2]*/ \eo\ssm_dt\model\data_model\SP_SSM_DT_Data_Layer::field_key_to_legacy_key($field['key'], 'attr')] = $field['value'];
-					// }
 			}
 		}
 
@@ -367,13 +363,23 @@ class SP_Product extends SP_Entity {
 
     				}
 
-					$var_->set_props(
-						array(
-							'parent_id'     => $parent_id,							
-							'regular_price' => $variation['regular_price'],
-							'sale_price' => $variation['price']
-						)
+    				$props_data = array(
+						'parent_id'     => $parent_id,							
+						//'regular_price' => $variation['regular_price'],
+						//'sale_price' => $variation['price']
 					);
+
+    				if (!empty($variation['regular_price'])) {
+    					
+    					$props_data['regular_price'] = $variation['regular_price'];
+    				}
+
+    				if (!empty($variation['price'])) {
+    					
+    					$props_data['sale_price'] = $variation['price'];
+    				}
+
+					$var_->set_props($props_data);
 					$var_->set_attributes($variation_terms[$var_index]);	
 
 					// $img_id=$this->add_image_gallary($variation['thumb']);
