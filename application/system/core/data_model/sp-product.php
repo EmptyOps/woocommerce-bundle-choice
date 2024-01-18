@@ -293,6 +293,7 @@ class SP_Product extends SP_Entity {
 					
 				}
 				
+				-- formet conform karvanu che
 				//$data['attribute'][$_tax]['value'] = implode('|',$_val);	
 				$attributes[$_tax] = $_val_attribute_data;	
 				$attributes[$_tax]['value'] = implode('|',$_val);	
@@ -348,11 +349,11 @@ class SP_Product extends SP_Entity {
     				if (!empty($var_id)) {
 
     					// Create a WC_Product_Variation object
-						$variation = wc_get_product($var_id);
+						$var_ = wc_get_product($var_id);
 
-						if (is_a($variation, 'WC_Product_Variation')) {
+						if (is_a($var_, 'WC_Product_Variation')) {
 
-						    die('variation ID '.$variation->get_id().' and actual id '.$var_id);
+						    die('variation ID '.$var_->get_id().' and actual id '.$var_id);
 						} else {
 						    die('Invalid variation ID');
 						}
@@ -370,6 +371,7 @@ class SP_Product extends SP_Entity {
 							'sale_price' => $variation['price']
 						)
 					);
+					-- upar banvvine var use karvano che
 					$var_->set_attributes($variation['terms']);	
 
 					// $img_id=$this->add_image_gallary($variation['thumb']);
@@ -386,6 +388,7 @@ class SP_Product extends SP_Entity {
 			}	
 
 			// $_product = wc_get_product($parent_id);
+			-- upar banvvine var use karvano che
 			$product_obj->set_default_attributes($data['variation'][0]['terms']);					
 			$product_obj->save();
 
