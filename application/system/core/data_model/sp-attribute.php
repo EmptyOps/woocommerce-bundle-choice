@@ -69,7 +69,7 @@ class SP_Attribute extends SP_Entity {
 
 			$res = parent::transform_older_format_to_new_format($data, $args);
 
-			if ($res['type' == 'success']) {
+			if ($res['type'] == 'success') {
 		
 				$data = $res['data_new_format'];
 			} else {
@@ -127,66 +127,69 @@ class SP_Attribute extends SP_Entity {
         }*/ 				
 
 		if(empty($data['range'])){
-    		
-    		foreach ($data['terms'] as $term_index=>$term)  {	
 
-				if( ! term_exists( $term['label'], 'pa_'.$attribute_data['slug']) ) {
+			if(!empty($data['terms'])){
 
-					$attr_term_id = wp_insert_term( $term['label'],'pa_'.$attribute_data['slug'],array('slug' => sanitize_title($term['label'])) ); 
-					
-					if(!empty($attr_term_id) and !is_wp_error($attr_term_id)) {
+	    		foreach ($data['terms'] as $term_index=>$term)  {	
 
-    					$_attr_term_id = null;
-    					if(is_array($attr_term_id)) {
+					if( ! term_exists( $term['label'], 'pa_'.$attribute_data['slug']) ) {
 
-    						$_attr_term_id=isset($attr_term_id['term_id']) ? $attr_term_id['term_id'] : null;
+						$attr_term_id = wp_insert_term( $term['label'],'pa_'.$attribute_data['slug'],array('slug' => sanitize_title($term['label'])) ); 
+						
+						if(!empty($attr_term_id) and !is_wp_error($attr_term_id)) {
 
-    						if(!empty($_attr_term_id)) {
+	    					$_attr_term_id = null;
+	    					if(is_array($attr_term_id)) {
 
-    							if(!empty($term['thumb'])){
-									$thumb_id=0;
-									-- function helper ma banavi ne call karvanu che. -- to h & -- to b
-		    						$thumb_id = wbc()->wp->add_image_gallary($term['thumb']);
-		    						update_term_meta( $_attr_term_id, 'pa_'.$attribute_data['slug'].'_attachment', wp_get_attachment_url( $thumb_id ) );
-    								update_term_meta( $_attr_term_id, sanitize_title($term['label']).'_attachment', wp_get_attachment_url( $thumb_id ) );
-		    					}
+	    						$_attr_term_id=isset($attr_term_id['term_id']) ? $attr_term_id['term_id'] : null;
 
-		    					if (!wbc_isEmptyArr(/*$data['terms_order'])*/$term['terms_order']) {
+	    						if(!empty($_attr_term_id)) {
 
-		    						update_term_meta($_attr_term_id, 'order', /*$data['terms_order'][$term_index]*/$term['terms_order']);
-		    					
-			    					// wbc_pr(get_term_meta($_attr_term_id,'order'));
-			    					// die();
-		    					}
+	    							if(!empty($term['thumb'])){
+										$thumb_id=0;
+										-- function helper ma banavi ne call karvanu che. -- to h & -- to b
+			    						$thumb_id = wbc()->wp->add_image_gallary($term['thumb']);
+			    						update_term_meta( $_attr_term_id, 'pa_'.$attribute_data['slug'].'_attachment', wp_get_attachment_url( $thumb_id ) );
+	    								update_term_meta( $_attr_term_id, sanitize_title($term['label']).'_attachment', wp_get_attachment_url( $thumb_id ) );
+			    					}
 
-    							if(!empty($data['type']) and !empty($term['terms_meta']) and is_array($term['terms_meta'])){
+			    					if (!wbc_isEmptyArr(/*$data['terms_order'])*/$term['terms_order']) {
 
-    								switch ($data['type']) {
-    									case 'color':
-    									
-    										function_exists( 'update_term_meta' ) ? update_term_meta( $_attr_term_id,'wbc_color',$term['terms_meta']['color_code']) : update_metadata( 'woocommerce_term', $_attr_term_id,'wbc_color',$term['terms_meta']['color_code']);
-    										break;
-    										
-    									case 'image':				
-    									case 'image_text':	
-    									case 'dropdown_image':
-    									case 'dropdown_image_only':	
+			    						update_term_meta($_attr_term_id, 'order', /*$data['terms_order'][$term_index]*/$term['terms_order']);
+			    					
+				    					// wbc_pr(get_term_meta($_attr_term_id,'order'));
+				    					// die();
+			    					}
 
-    										throw new \Exception("not implemented yet.", 1);
+	    							if(!empty($data['type']) and !empty($term['terms_meta']) and is_array($term['terms_meta'])){
 
-	    									$wbc_attachment_id = $this->add_image_gallary($term['terms_meta']['image']);
+	    								switch ($data['type']) {
+	    									case 'color':
+	    									
+	    										function_exists( 'update_term_meta' ) ? update_term_meta( $_attr_term_id,'wbc_color',$term['terms_meta']['color_code']) : update_metadata( 'woocommerce_term', $_attr_term_id,'wbc_color',$term['terms_meta']['color_code']);
+	    										break;
+	    										
+	    									case 'image':				
+	    									case 'image_text':	
+	    									case 'dropdown_image':
+	    									case 'dropdown_image_only':	
 
-	    									$wbc_attachment_src =wp_get_attachment_url( $wbc_attachment_id );
-	    									function_exists( 'update_term_meta' ) ? update_term_meta( $_attr_term_id,'wbc_attachment',$wbc_attachment_src) : update_metadata( 'woocommerce_term', $_attr_term_id,'wbc_attachment',$wbc_attachment_src);
+	    										throw new \Exception("not implemented yet.", 1);
 
-    										break;
-    								}
-    							}
-    						}		    						
-    					}
-					}		    								    			
-	    		}
-	    	}
+		    									$wbc_attachment_id = $this->add_image_gallary($term['terms_meta']['image']);
+
+		    									$wbc_attachment_src =wp_get_attachment_url( $wbc_attachment_id );
+		    									function_exists( 'update_term_meta' ) ? update_term_meta( $_attr_term_id,'wbc_attachment',$wbc_attachment_src) : update_metadata( 'woocommerce_term', $_attr_term_id,'wbc_attachment',$wbc_attachment_src);
+
+	    										break;
+	    								}
+	    							}
+	    						}		    						
+	    					}
+						}		    								    			
+		    		}
+		    	}
+			}
     	} else {
     		
     		if(!empty($data['terms']['min']['value']) && !empty($data['terms']['max']['value'])) {

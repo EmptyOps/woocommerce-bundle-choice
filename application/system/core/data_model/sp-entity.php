@@ -76,7 +76,7 @@ class SP_Entity {
 				$res['data_new_format'][$data_key] = $data[$data_key.$separator.'new_format'];
 			} else {
 
-				if (strpos($data_key, 'new_format') === FALSE) {
+				if (strpos($data_key, $separator.'new_format') === FALSE) {
 
 					if (!is_array($data_value) && !is_object($data_value)) {
 
