@@ -293,7 +293,6 @@ class SP_Product extends SP_Entity {
 					
 				}
 				
-				-- formet conform karvanu che
 				//$data['attribute'][$_tax]['value'] = implode('|',$_val);	
 				$attributes[$_tax] = $_val_attribute_data;	
 				$attributes[$_tax]['value'] = implode('|',$_val);	
@@ -311,7 +310,11 @@ class SP_Product extends SP_Entity {
 		$parent_id = $product_id;
 		if(!empty($data['variation']['value'])){
 
-			foreach ($data['variation']['value'] as $var_index => $variation) {						
+			$variation_terms = array();
+
+			foreach ($data['variation']['value'] as $var_index => $variation) {		
+
+				$variation_terms[$var_index] = array();
 
 				if(!empty($variation['terms'])){					 
 					foreach($variation['terms'] as $taxonomy=>$term_array){
@@ -336,7 +339,7 @@ class SP_Product extends SP_Entity {
 						if(!empty($tax_term) and !is_wp_error($tax_term)){
 	    					$term_slug = wbc()->wc->get_term_by('term_taxonomy_id',$tax_term['term_taxonomy_id'],$taxonomy);
 	    					if(!empty($term_slug->slug) and !is_wp_error($term_slug)) {
-	    						$variation['terms'][$taxonomy] = $term_slug->slug;	    					
+	    						$variation_terms[$var_index][$taxonomy] = $term_slug->slug;	    					
 	    					}
 	    				}
     				}
@@ -344,7 +347,7 @@ class SP_Product extends SP_Entity {
     				$var_ = null;
 
     				ACTIVE_TODO Below we are finding the variation id explicitly and then updateing variation instead of inserting it if applicable. but the draw back might be that if the wc variation classes or any woocommerce functions are supporting mins creating as well as finding variation id and updating as applicable for the creation/updation of the variation then we may like to use it. this is maybe quite necessory for the frontend opreshons because if we need to use this function for frontend then explicitly finding variation id like below might be costly and expensive. so lets try to do this as sun as we need it or may be max by first or second revision. -- to h 
-    				$var_id = \eo\wbc\model\publics\data_model\SP_WBC_Variations::get_default_variation_id($product_obj,$variation['terms']);
+    				$var_id = \eo\wbc\model\publics\data_model\SP_WBC_Variations::get_default_variation_id($product_obj,$variation_terms[$var_index]);
 
     				if (!empty($var_id)) {
 
@@ -371,8 +374,7 @@ class SP_Product extends SP_Entity {
 							'sale_price' => $variation['price']
 						)
 					);
-					-- upar banvvine var use karvano che
-					$var_->set_attributes($variation['terms']);	
+					$var_->set_attributes($variation_terms[$var_index]);	
 
 					// $img_id=$this->add_image_gallary($variation['thumb']);
 					// $var_->set_post_thumbnail( $variation['id'],$img_id );
@@ -388,8 +390,7 @@ class SP_Product extends SP_Entity {
 			}	
 
 			// $_product = wc_get_product($parent_id);
-			-- upar banvvine var use karvano che
-			$product_obj->set_default_attributes($data['variation'][0]['terms']);					
+			$product_obj->set_default_attributes($variation_terms[0]['terms']);					
 			$product_obj->save();
 
 		} elseif (!empty($data['regular_price']['value'])) {
