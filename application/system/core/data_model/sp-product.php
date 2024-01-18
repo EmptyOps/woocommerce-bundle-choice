@@ -69,7 +69,7 @@ class SP_Product extends SP_Entity {
 
 			$res = parent::transform_older_format_to_new_format($data, $args);
 
-			if ($res['type' == 'success']) {
+			if ($res['type'] == 'success') {
 		
 				$data = $res['data_new_format'];
 			} else {
