@@ -55,7 +55,7 @@ class SP_Category extends SP_Entity {
 
 	public static function createFromArray( $platform_key, $platform_name, $data_array, $args = array() ){
 
-		NOTE: This class hierarchy of these clasees will contain janral code related to CRUD operations and so on functions. so it means that if there is any extension specific code then that need to be implemented in that specific extension class which is extended from this class only, that is necessary to ensure that wbc free layer has only relevant and neat code. and beyond the extension specific classes thar might be sum exception like dapii extenshone has its specific different classes for handling the crud operations and factory logic related to category, attribute and product and so on, and that exception is assumed to be kept separate always wich mins that dapii code will never be merged or synced in any way with this class hierarchy and its layers.
+		// NOTE: This class hierarchy of these clasees will contain janral code related to CRUD operations and so on functions. so it means that if there is any extension specific code then that need to be implemented in that specific extension class which is extended from this class only, that is necessary to ensure that wbc free layer has only relevant and neat code. and beyond the extension specific classes thar might be sum exception like dapii extenshone has its specific different classes for handling the crud operations and factory logic related to category, attribute and product and so on, and that exception is assumed to be kept separate always wich mins that dapii code will never be merged or synced in any way with this class hierarchy and its layers.
 
 		throw new Exception("not implemented yet.", 1);
 
@@ -80,10 +80,10 @@ class SP_Category extends SP_Entity {
 				$data = $res['data_new_format'];
 			} else {
 
-				ACTIVE_TODO_OC_START
-				-- we need to mange the error hendling mens the value that is retan from the here shuold be shown as error messeg to the user interface on admin and so on -- to h && -- to harshil
-					--	here as soon as we get chance we need to show this errors on the user interface pages of the admin sample_data and so that debugging become easeir -- to h && to harshil
-				ACTIVE_TODO_OC_END
+				// ACTIVE_TODO_OC_START
+				// -- we need to mange the error hendling mens the value that is retan from the here shuold be shown as error messeg to the user interface on admin and so on -- to h && -- to harshil
+				// 	--	here as soon as we get chance we need to show this errors on the user interface pages of the admin sample_data and so that debugging become easeir -- to h && to harshil
+				// ACTIVE_TODO_OC_END
 				return $res;
 			}
 		}

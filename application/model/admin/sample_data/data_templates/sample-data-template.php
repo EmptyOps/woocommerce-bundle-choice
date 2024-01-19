@@ -19,7 +19,8 @@ class Sample_Data_Template {
         }
 
         return self::$_instance;
-
+    }
+    
     protected $asset_folder = null;
 
     private function __construct() {

@@ -287,7 +287,7 @@ if(!class_exists('SP_Plugin_Index_Class') ) {
 				require_once plugin_dir_path( $this->getFILE() ).'vendor/autoload.php';	
 			}
 			//TODO create a common base for sample data wizard process, just in upcoming days and then transfor below extension specific code to common means all epb mentions will be replaced. but yeah keep some sample data adding code which is in tm ui repo to be there only
-				NOTE: as of now on 2-12-23, the two hooks below are upgraded. However another points that are necessary as per above todo needed to be done yet.
+				// NOTE: as of now on 2-12-23, the two hooks below are upgraded. However another points that are necessary as per above todo needed to be done yet.
 			//if( false ) {
 				add_action( 'wbc_auto_sample_class',function() {		
 					if(!empty(wbc()->sanitize->get(/*'eo_wbc_view_auto_jewel'*/'sp_ext_auto')) and !empty(wbc()->sanitize->get('f'))) {
@@ -301,7 +301,7 @@ if(!class_exists('SP_Plugin_Index_Class') ) {
 
 						} else {
 
-							ACTIVE_TODO temp. this if condition is for extesions which have controllers package name without s. it is temporary and when we fix the package names in all extensions(especially in the first 11 of 21 extensions because the later 10 of 21 extensions have folder package names properly fixed) then at that time need to remove this extra if layer. -- to h 
+							// ACTIVE_TODO temp. this if condition is for extesions which have controllers package name without s. it is temporary and when we fix the package names in all extensions(especially in the first 11 of 21 extensions because the later 10 of 21 extensions have folder package names properly fixed) then at that time need to remove this extra if layer. -- to h 
 							//$class = str_replace(' ','_',ucwords(str_replace('_', ' ', wbc()->sanitize->get('f'))));
 							$namespace_class = '\\'.$this->SP_Extension->singleton_function().'\\controller\\admin\\sample_data\\' . $class;
 
@@ -320,7 +320,7 @@ if(!class_exists('SP_Plugin_Index_Class') ) {
 
 								} else {
 
-									ACTIVE_TODO temp. this if condition is for extesions which have controllers package name without s. it is temporary and when we fix the package names in all extensions(especially in the first 11 of 21 extensions because the later 10 of 21 extensions have folder package names properly fixed) then at that time need to remove this extra if layer. -- to h 
+									// ACTIVE_TODO temp. this if condition is for extesions which have controllers package name without s. it is temporary and when we fix the package names in all extensions(especially in the first 11 of 21 extensions because the later 10 of 21 extensions have folder package names properly fixed) then at that time need to remove this extra if layer. -- to h 
 									//$class = str_replace(' ','_',ucwords(str_replace('_', ' ', wbc()->sanitize->get('f'))));
 									$namespace_class = '\\'.str_replace('_','\\\\',$this->SP_Extension->singleton_function()).'\\controller\\admin\\sample_data\\' . $class;
 

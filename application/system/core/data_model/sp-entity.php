@@ -31,11 +31,11 @@ class SP_Entity {
 		throw new Exception("Not supported yet", 1);
 	}
 
-	public static function createFromArray($data_array){
+	public static function createFromArray($platform_key, $platform_name, $data_array, $args = array()){
 		throw new Exception("Not supported yet", 1);
 	}
 
-	protected static function create(){
+	protected static function create($data, $args = array()){
 		throw new Exception("Not supported yet", 1);
 	}
 

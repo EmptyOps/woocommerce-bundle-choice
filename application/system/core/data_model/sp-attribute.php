@@ -49,7 +49,7 @@ class SP_Attribute extends SP_Entity {
 
 	public static function createFromArray( $platform_key, $platform_name, $data_array, $args = array() ){
 
-		NOTE: This class hierarchy of these clasees will contain janral code related to CRUD operations and so on functions. so it means that if there is any extension specific code then that need to be implemented in that specific extension class which is extended from this class only, that is necessary to ensure that wbc free layer has only relevant and neat code. and beyond the extension specific classes thar might be sum exception like dapii extenshone has its specific different classes for handling the crud operations and factory logic related to category, attribute and product and so on, and that exception is assumed to be kept separate always wich mins that dapii code will never be merged or synced in any way with this class hierarchy and its layers.
+		// NOTE: This class hierarchy of these clasees will contain janral code related to CRUD operations and so on functions. so it means that if there is any extension specific code then that need to be implemented in that specific extension class which is extended from this class only, that is necessary to ensure that wbc free layer has only relevant and neat code. and beyond the extension specific classes thar might be sum exception like dapii extenshone has its specific different classes for handling the crud operations and factory logic related to category, attribute and product and so on, and that exception is assumed to be kept separate always wich mins that dapii code will never be merged or synced in any way with this class hierarchy and its layers.
 
 		foreach($data_array as $data_key=>$data){
 
@@ -74,10 +74,10 @@ class SP_Attribute extends SP_Entity {
 				$data = $res['data_new_format'];
 			} else {
 
-				ACTIVE_TODO_OC_START
-				-- we need to mange the error hendling mens the value that is retan from the here shuold be shown as error messeg to the user interface on admin and so on -- to h && -- to harshil
-					--	here as soon as we get chance we need to show this errors on the user interface pages of the admin sample_data and so that debugging become easeir -- to h && to harshil
-				ACTIVE_TODO_OC_END
+				// ACTIVE_TODO_OC_START
+				// -- we need to mange the error hendling mens the value that is retan from the here shuold be shown as error messeg to the user interface on admin and so on -- to h && -- to harshil
+				// 	--	here as soon as we get chance we need to show this errors on the user interface pages of the admin sample_data and so that debugging become easeir -- to h && to harshil
+				// ACTIVE_TODO_OC_END
 				return $res;
 			}
 		}
@@ -147,13 +147,12 @@ class SP_Attribute extends SP_Entity {
 
 	    							if(!empty($term['thumb'])){
 										$thumb_id=0;
-										-- function helper ma banavi ne call karvanu che. -- to h & -- to b
 			    						$thumb_id = wbc()->wp->add_image_gallary($term['thumb']);
 			    						update_term_meta( $_attr_term_id, 'pa_'.$attribute_data['slug'].'_attachment', wp_get_attachment_url( $thumb_id ) );
 	    								update_term_meta( $_attr_term_id, sanitize_title($term['label']).'_attachment', wp_get_attachment_url( $thumb_id ) );
 			    					}
 
-			    					if (!wbc_isEmptyArr(/*$data['terms_order'])*/$term['terms_order']) {
+			    					if (!wbc_isEmptyArr(/*$data['terms_order'])*/$term['terms_order'])) {
 
 			    						update_term_meta($_attr_term_id, 'order', /*$data['terms_order'][$term_index]*/$term['terms_order']);
 			    					
