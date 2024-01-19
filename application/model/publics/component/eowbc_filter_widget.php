@@ -169,8 +169,8 @@ class EOWBC_Filter_Widget {
 		wp_add_inline_script('fomantic-semantic.min','jQuery.fn.ui_accordion = jQuery.fn.accordion;
 				jQuery.fn.ui_slider = jQuery.fn.slider;
 				jQuery.fn.ui_checkbox = jQuery.fn.checkbox;');
-		if(false){
-			add_action('wp_footer',function(){
+		add_action('wp_footer',function(){
+			if(false){
 				?>
 				<script type="text/javascript">
 					/*jQuery.fn.ui_accordion = jQuery.fn.accordion;
@@ -178,8 +178,8 @@ class EOWBC_Filter_Widget {
 					jQuery.fn.ui_checkbox = jQuery.fn.checkbox;*/
 				</script>
 				<?php
-			},99);
-		}
+			}
+		},99);
 
 		// 29-09-2022 @h  @s 
 		// wbc()->load->asset('js','publics/eo_wbc_filter');
