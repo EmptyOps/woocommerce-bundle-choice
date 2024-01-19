@@ -144,7 +144,8 @@ class SP_Product extends SP_Entity {
 			// }
 			
 			switch ($field['key']) {
-				case 'title'/*'name'*/:
+				case 'name':
+				case 'title':
 					$product_obj->set_name($field['value']);
 					break;					
 				case 'short_desc':	//	added support for short desc on 06-03-2022 -- hiren
@@ -157,7 +158,8 @@ class SP_Product extends SP_Entity {
 					
 					$product_obj->set_short_description( sanitize_text_field($field['value']) );
 					break;
-				case 'content'/*'long_desc'*/:
+				case 'long_desc':
+				case 'content':
 					
 					// if( wbc()->sanitize->get('is_test') == 1 ) {
 
