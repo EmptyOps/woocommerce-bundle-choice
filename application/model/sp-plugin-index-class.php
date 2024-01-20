@@ -294,29 +294,44 @@ if(!class_exists('SP_Plugin_Index_Class') ) {
 
 						$class = str_replace(' ','_',ucwords(str_replace('_', ' ', wbc()->sanitize->get('f'))));
 						$namespace_class = '\\'.$this->SP_Extension->singleton_function().'\\controllers\\admin\\sample_data\\' . $class;
+						$namespace_class_1 = '\\eo'.$namespace_class;
 						
 						if( class_exists($namespace_class) ) {
 
 							$namespace_class::instance()->init();	
+
+						} elseif( class_exists($namespace_class_1) ) {
+
+							$namespace_class_1::instance()->init();	
 
 						} else {
 
 							// ACTIVE_TODO temp. this if condition is for extesions which have controllers package name without s. it is temporary and when we fix the package names in all extensions(especially in the first 11 of 21 extensions because the later 10 of 21 extensions have folder package names properly fixed) then at that time need to remove this extra if layer. -- to h 
 							//$class = str_replace(' ','_',ucwords(str_replace('_', ' ', wbc()->sanitize->get('f'))));
 							$namespace_class = '\\'.$this->SP_Extension->singleton_function().'\\controller\\admin\\sample_data\\' . $class;
+							$namespace_class_1 = '\\eo'.$namespace_class;
 
 							if( class_exists($namespace_class) ) {
 
 								$namespace_class::instance()->init();	
 
+							} elseif( class_exists($namespace_class_1) ) {
+
+								$namespace_class_1::instance()->init();	
+
 							} else {
 
 								//$class = str_replace(' ','_',ucwords(str_replace('_', ' ', wbc()->sanitize->get('f'))));
 								$namespace_class = '\\'.str_replace('_','\\\\',$this->SP_Extension->singleton_function()).'\\controllers\\admin\\sample_data\\' . $class;
+								$namespace_class_1 = '\\eo'.$namespace_class;
 
 								if( class_exists($namespace_class) ) {
 
 									$namespace_class::instance()->init();	
+
+								} elseif( class_exists($namespace_class_1) ) {
+
+									$namespace_class_1::instance()->init();	
 
 								} else {
 
@@ -340,22 +355,32 @@ if(!class_exists('SP_Plugin_Index_Class') ) {
 					$class = str_replace(' ','_',ucwords(str_replace('_', ' ', wbc()->sanitize->post('feature_key'))));
 
 					$namespace_class = '\\'.$this->SP_Extension->singleton_function().'\\model\\admin\\sample_data\\' . $class;
+					$namespace_class_1 = '\\eo'.$namespace_class;
 					
 					if( class_exists($namespace_class) ) {
 
 						return $namespace_class;
+						
+					} elseif( class_exists($namespace_class_1) ) {
+
+						return $namespace_class_1;
 						
 					} else {
 
 						//$class = str_replace(' ','_',ucwords(str_replace('_', ' ', wbc()->sanitize->post('feature_key'))));
 
 						$namespace_class = '\\'.str_replace('_','\\\\',$this->SP_Extension->singleton_function()).'\\model\\admin\\sample_data\\' . $class;
+						$namespace_class_1 = '\\eo'.$namespace_class;
 
 						if( class_exists($namespace_class) ) {
 
 							return $namespace_class;
 							
-						}
+						} elseif( class_exists($namespace_class_1) ) {
+
+							return $namespace_class_1;
+							
+						} 
 
 					}
 					return $class_file;
