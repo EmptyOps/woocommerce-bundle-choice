@@ -131,10 +131,20 @@ box-shadow: none;">
 
 	    	let main_categories_size = 0;
 
+	    	let current_step = <?php echo intval(wbc()->sanitize->get('step'))-1/*since above it is incrementing the step perameter of $_GET globaly so we need to minius with 1 */; ?>;
+	    	let is_sp_ext_auto = <?php echo ( !empty(wbc()->sanitize->get('sp_ext_auto')) ? "true" : "false" ); ?>; 
 
 	        function eowbc_add_catat(index){
 
+	            console.log("main.php eowbc_add_catat");
+	            console.log(index);
+	            console.log(cat_value);
+	            console.log(process_flag);
+
 	            if(process_flag=='cat' && index>=cat_value){
+
+	            	console.log("main.php eowbc_add_catat if");
+
 	            	var msg = 'There is some error while finishing the category creation process, please contact Sphere Plugins Support for a quick fix on this if the problem persist.';
 
 	                //step 2 redirect;
@@ -262,18 +272,20 @@ box-shadow: none;">
 	                cat_value = jQuery("[name^='cat_']:checkbox:checked").length;
 	                attr_value = jQuery("[name^='attr_']:checkbox:checked").length;
 
-	                if(cat_value>0){
+	                if(cat_value>0 || (is_sp_ext_auto && current_step == 1)){
 	                	process_flag = 'cat';
 	                	btn_label = 'Categories';
 	                	main_categories_size = <?php echo sizeof($_category);?>;
 	                	cat_value = <?php echo $sample_data_obj->get_model()->get_categories_size();?>;
 	                	btn_total = cat_value;
-	                } else if(attr_value>0){
+	                } else if(attr_value>0 || (is_sp_ext_auto && current_step == 2)){
 	                	process_flag = 'attr';
 	                	btn_label = 'Attributes';
 	                	attr_value = <?php echo $sample_data_obj->get_model()->get_attributes_size();?>;
 	                	btn_total = attr_value;
 	                }
+
+	                console.log(cat_value);
 
 	                //let cat_value = jQuery("[name^='cat_value_']:not([value=''])");
 			    	//let cat = jQuery("[name^='cat_']:checkbox:checked");

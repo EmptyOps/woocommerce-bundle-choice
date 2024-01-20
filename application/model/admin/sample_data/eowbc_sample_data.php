@@ -822,7 +822,7 @@ class Eowbc_Sample_Data {
 
 	    		if (!empty($id)) {
 
-	    			\eo\wbc\model\data_model\SP_WBC_Attribute::createFromArray(array($attribute));
+	    			\eo\wbc\model\data_model\SP_WBC_Attribute::createFromArray(null, null, array($attribute));
 
 	    			continue;
 
