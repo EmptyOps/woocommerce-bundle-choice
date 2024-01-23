@@ -353,11 +353,15 @@ class SP_Product extends SP_Entity {
     					// Create a WC_Product_Variation object
 						$var_ = wc_get_product($var_id);
 
-						if (is_a($var_, 'WC_Product_Variation')) {
+						if (wbc()->wc->is_variation_object($var_)/*is_a($var_, 'WC_Product_Variation')*/) {
 
-						    die('variation ID '.$var_->get_id().' and actual id '.$var_id);
+						    // die('variation ID '.$var_->get_id().' and actual id '.$var_id);
+						    // nothing to do
 						} else {
-						    die('Invalid variation ID');
+
+							// it is unexpected behaviour so set null so that it crash the code. we can handle this svenario in a better way if required. 
+						    // die('Invalid variation ID');
+						    $var_ = null;
 						}
 
     				} else {

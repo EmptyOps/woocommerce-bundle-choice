@@ -136,14 +136,14 @@ box-shadow: none;">
 
 	        function eowbc_add_catat(index){
 
-	            console.log("main.php eowbc_add_catat");
-	            console.log(index);
-	            console.log(cat_value);
-	            console.log(process_flag);
+	            // console.log("main.php eowbc_add_catat");
+	            // console.log(index);
+	            // console.log(cat_value);
+	            // console.log(process_flag);
 
 	            if(process_flag=='cat' && index>=cat_value){
 
-	            	console.log("main.php eowbc_add_catat if");
+	            	// console.log("main.php eowbc_add_catat if");
 
 	            	var msg = 'There is some error while finishing the category creation process, please contact Sphere Plugins Support for a quick fix on this if the problem persist.';
 
@@ -285,7 +285,7 @@ box-shadow: none;">
 	                	btn_total = attr_value;
 	                }
 
-	                console.log(cat_value);
+	                // console.log(cat_value);
 
 	                //let cat_value = jQuery("[name^='cat_value_']:not([value=''])");
 			    	//let cat = jQuery("[name^='cat_']:checkbox:checked");
@@ -303,16 +303,23 @@ box-shadow: none;">
 	</script> <?php 
 } elseif($_step==3) { ?>
     <script type="text/javascript" >
-	    jQuery(document).ready(function($) {            
+        console.log("main.php ready above");
+	    jQuery(document).ready(function($) { 
+        console.log("main.php ready");
+
 
 	        var eo_wbc_max_products=<?php /*_e(0)*/echo($sample_data_obj->get_model()->get_product_size()); ?>;            
 	        function eo_wbc_add_products(index){
+
+	            console.log("main.php eo_wbc_add_products");
 
 	            if(index>=eo_wbc_max_products){
 	                
 	                window.location.href="<?php echo(admin_url('admin.php?page=eowbc')); ?>";
 	                return false;
 	            }
+
+	            console.log("main.php after if eo_wbc_add_products");
 
 	            jQuery(".button.button-primary.button-hero.action.disabled").val("Adding "+(index+1)+" of "+eo_wbc_max_products+" products");
 
@@ -338,9 +345,15 @@ box-shadow: none;">
 	        }   
 	        
 	        $(".button.button-primary.button-hero.action").on('click',function(e){
+
+	            console.log("main.php button.button-primary.button-hero.action click");
+
 	            e.stopPropagation();
 	            e.preventDefault();
 	            if(!$(this).hasClass('disabled')) {
+	            
+	            	console.log("main.php button.button-primary.button-hero.action disabled");
+
 	                $(".button.button-hero.action:not(.disabled)").toggleClass('disabled');
 	                eo_wbc_add_products(0);
 	                //eo_wbc_add_products(119);
