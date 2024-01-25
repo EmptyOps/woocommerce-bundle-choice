@@ -23,5 +23,5 @@
 	    </div>
 	  </div>	  
 	</div>			
-	<div class="ui range slider text_slider wbc" id="text_slider_price" data-min="<?php echo $min; ?>" data-max="<?php echo $max; ?>" data-slug="price" data-sep="<?php _e($seprator); ?>" data-reset="reset_price(new Event('click'),'<?php echo $min; ?>','<?php echo $max; ?>')" data-prefix="<?php _e($prefix); ?>" data-postfix="<?php _e($postfix); ?>"></div>
+	<div class="ui range slider text_slider wbc" id="text_slider_price" data-range-start=<?php echo $query_list['range_start'] ? $query_list['range_start'] : $min ;  ?> data-range-end=<?php echo $query_list['range_end'] ? $query_list['range_end'] : $max ; ?> data-min="<?php echo $min; ?>" data-max="<?php echo $max; ?>" data-slug="price" data-sep="<?php _e($seprator); ?>" data-reset="reset_price(new Event('click'),'<?php echo $min; ?>','<?php echo $max; ?>')" data-prefix="<?php _e($prefix); ?>" data-postfix="<?php _e($postfix); ?>"></div>
 </div>

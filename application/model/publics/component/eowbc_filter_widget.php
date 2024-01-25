@@ -1305,7 +1305,8 @@ class EOWBC_Filter_Widget {
 		$width = $column_width;
 		$reset =  !empty($reset);		
 		$help=(!empty(${$__prefix.'_fconfig_add_help'})?${$__prefix.'_fconfig_add_help_text'}:'');		
-		
+		$query_list = array();		
+
 		$prefix='';
 		if(!empty($text_slider_prefix)){
 			$prefix = $text_slider_prefix;
@@ -1362,6 +1363,27 @@ class EOWBC_Filter_Widget {
 			}
 		}
 
+		if(!empty(wbc()->sanitize->get('_attribute'))) {
+			// -- need to plan flow for this -- to h
+				// NOTE: since we are just continuing with older flow of m so nothing to here as of now, but if required than we need to manage     
+			$attribute_list = \eo\wbc\model\SP_WBC_Router::instance()->set_query_params_formatted( 'to_filter_field', 
+										                array('prod_cat'), 
+										                \eo\wbc\model\SP_WBC_Router::instance()->get_query_params_formatted('url_and_filter_form',
+																		                array('attr'),
+																		                'REQUEST',
+																		                null))/*wbc()->sanitize->get('CAT_LINK')*/;
+
+			/*$query_list = explode('|', str_replace('' wbc()->sanitize->get('CAT_LINK') );*/
+
+		}
+
+		$is_available_attribute = in_array($filter['slug'],$attribute_list);
+		// $query_paramas_options = \eo\wbc\model\SP_WBC_Router::instance()->get_query_params_formatted('url_and_filter_form', array('attr_options', $term->slug) , 'REQUEST', null);
+
+		if($is_available_attribute){
+			$query_list = \eo\wbc\model\SP_WBC_Router::instance()->set_query_params_formatted( 'to_filter_field',array('text_filter'), $filter['slug']);
+		}
+
 		if($desktop):
 
 		if(($item['filter_template']==apply_filters('eowbc_filter_prefix',$this->filter_prefix).'theme'/* and $this->_category==$this->second_category_slug) or ($this->first_theme=='theme' and $this->_category==$this->first_category_slug*/) or ($item['filter_template'] === 'theme' and ($this->is_shop_cat_filter or $this->is_shortcode_filter))) {
@@ -1370,7 +1392,7 @@ class EOWBC_Filter_Widget {
 			} elseif(($item['filter_template']=='sc4' and $this->_category==$this->first_category_slug) or ($item['filter_template']=='fc4' and $this->_category==$this->first_category_slug)) {
 				wbc()->load->template('publics/filters/text_slider_desktop_4', array("width_class"=>$this->get_width_class($width),"filter"=>$filter,"reset"=>$reset,"non_edit"=>$non_edit,'prefix'=>$prefix,'postfix'=>$postfix,'help'=>$help,'tab_set'=>$tab_set,'filter_ui'=>$this));
 			} elseif ((in_array($item['filter_template'],array('sc3','sc5')) and $this->_category==$this->second_category_slug) or (in_array($item['filter_template'],array('fc3','fc5')) and $this->_category==$this->first_category_slug)) {
-				wbc()->load->template('publics/filters/text_slider_desktop_3', array("width_class"=>$this->get_width_class($width),"filter"=>$filter,"reset"=>$reset,"non_edit"=>$non_edit,'prefix'=>$prefix,'postfix'=>$postfix,'help'=>$help,'tab_set'=>$tab_set,'filter_ui'=>$this));
+				wbc()->load->template('publics/filters/text_slider_desktop_3', array("width_class"=>$this->get_width_class($width),"filter"=>$filter,"reset"=>$reset,"non_edit"=>$non_edit,'prefix'=>$prefix,'postfix'=>$postfix,'help'=>$help,'tab_set'=>$tab_set,'filter_ui'=>$this,'query_list'=>$query_list));
 			} else {
 				wbc()->load->template('publics/filters/text_slider_desktop', array("width_class"=>$this->get_width_class($width),"filter"=>$filter,"reset"=>$reset,"non_edit"=>$non_edit,'prefix'=>$prefix,'postfix'=>$postfix,'tab_set'=>$tab_set,'help'=>$help,'filter_ui'=>$this)); 
 			}			
@@ -1483,7 +1505,8 @@ class EOWBC_Filter_Widget {
 		$reset =  !empty($reset);
 		$reset_label = (empty($item[$__prefix.'_fconfig_non_auto_adjust'])?true:false);
 		$help=(!empty(${$__prefix.'_fconfig_add_help'})?${$__prefix.'_fconfig_add_help_text'}:'');		
-		
+		$query_list = array();
+
 		if(!empty($text_slider_prefix)){
 			$prefix = $text_slider_prefix;
 		} elseif (!empty(${$__prefix.'_fconfig_prefix'})) {
@@ -1532,6 +1555,28 @@ class EOWBC_Filter_Widget {
 									"class"=>"step_slider_".$filter['slug'],
 									"value"=>$items_slug[count($items_slug)-1],
 								));	
+		
+		if(!empty(wbc()->sanitize->get('_attribute'))) {
+			// -- need to plan flow for this -- to h
+				// NOTE: since we are just continuing with older flow of m so nothing to here as of now, but if required than we need to manage     
+			$attribute_list = \eo\wbc\model\SP_WBC_Router::instance()->set_query_params_formatted( 'to_filter_field', 
+										                array('prod_cat'), 
+										                \eo\wbc\model\SP_WBC_Router::instance()->get_query_params_formatted('url_and_filter_form',
+																		                array('attr'),
+																		                'REQUEST',
+																		                null))/*wbc()->sanitize->get('CAT_LINK')*/;
+
+			/*$query_list = explode('|', str_replace('' wbc()->sanitize->get('CAT_LINK') );*/
+
+		}
+
+		$is_available_attribute = in_array($filter['slug'],$attribute_list);
+		// $query_paramas_options = \eo\wbc\model\SP_WBC_Router::instance()->get_query_params_formatted('url_and_filter_form', array('attr_options', $term->slug) , 'REQUEST', null);
+
+		if($is_available_attribute){
+			$query_list = \eo\wbc\model\SP_WBC_Router::instance()->set_query_params_formatted( 'to_filter_field',array('text_filter'), $filter['slug']);
+		}
+
 		if($desktop):
 			if(($item['filter_template']==apply_filters('eowbc_filter_prefix',$this->filter_prefix).'theme'/* and $this->_category==$this->second_category_slug) or ($this->first_theme=='theme' and $this->_category==$this->first_category_slug*/) or ($item['filter_template'] === 'theme' and ($this->is_shop_cat_filter or $this->is_shortcode_filter))) {
 
@@ -1540,7 +1585,7 @@ class EOWBC_Filter_Widget {
 			} elseif(($item['filter_template']=='sc4' and $this->_category==$this->second_category_slug) or ($item['filter_template']=='fc4' and $this->_category==$this->first_category_slug)) {
 				wbc()->load->template('publics/filters/step_slider_desktop_4', array("width_class"=>$this->get_width_class($width),"reset"=>$reset,"non_edit"=>$non_edit,"filter"=>$filter,"items_slug"=>$items_slug,"items_name"=>$items_name,'help'=>$help,'reset_label'=>$reset_label,'tab_set'=>$tab_set,'label_max_size'=>$label_max_size,'filter_ui'=>$this)); 
 			} elseif ((in_array($item['filter_template'],array('sc3','sc5')) and $this->_category==$this->second_category_slug) or (in_array($item['filter_template'],array('fc3','fc5')) and $this->_category==$this->first_category_slug)) {
-				wbc()->load->template('publics/filters/step_slider_desktop_3', array("width_class"=>$this->get_width_class($width),"reset"=>$reset,"non_edit"=>$non_edit,"filter"=>$filter,"items_slug"=>$items_slug,"items_name"=>$items_name,'help'=>$help,'reset_label'=>$reset_label,'tab_set'=>$tab_set,'label_max_size'=>$label_max_size,'filter_ui'=>$this)); 
+				wbc()->load->template('publics/filters/step_slider_desktop_3', array("width_class"=>$this->get_width_class($width),"reset"=>$reset,"non_edit"=>$non_edit,"filter"=>$filter,"items_slug"=>$items_slug,"items_name"=>$items_name,'help'=>$help,'reset_label'=>$reset_label,'tab_set'=>$tab_set,'label_max_size'=>$label_max_size,'filter_ui'=>$this,'query_list'=>$query_list)); 
 
 			} else {
 
@@ -1780,7 +1825,8 @@ class EOWBC_Filter_Widget {
 		$alternet_slider = '';
 
 		$category = $this->_category;
-		
+		$query_list = array();		
+
 		if(
 			($this->first_category_slug === $category and wbc()->options->get_option('appearance_filters','appearance_filters_alternate_price_filter_first',false)) 
 			or 
@@ -1816,6 +1862,20 @@ class EOWBC_Filter_Widget {
 								));
 		$seprator = wbc()->options->get_option('filters_filter_setting','filter_setting_numeric_slider_seperator','.');
 		
+		if(!empty(wbc()->sanitize->get('min_price')) || !empty(wbc()->sanitize->get('max_price'))) {
+			// -- need to plan flow for this -- to h
+				// NOTE: since we are just continuing with older flow of m so nothing to here as of now, but if required than we need to manage     
+			$query_list = \eo\wbc\model\SP_WBC_Router::instance()->set_query_params_formatted( 'to_filter_field', 
+										                array('price_range'), 
+										                \eo\wbc\model\SP_WBC_Router::instance()->get_query_params_formatted('url_and_filter_form',
+																		                array('price_range'),
+																		                'REQUEST',
+																		                null))/*wbc()->sanitize->get('CAT_LINK')*/;
+		}
+
+		// $mark = in_array($term_item->slug,$query_list);
+		// $query_paramas_options = \eo\wbc\model\SP_WBC_Router::instance()->get_query_params_formatted('url_and_filter_form', array('attr_options', $term->slug) , 'REQUEST', null);
+
 		if($desktop):
 			/*===bhavesh@emptyops.com comment foe price filter===*/
 			if(/*($this->second_theme=='theme_dropdown' and $this->_category==$this->second_category_slug) or ($this->first_theme=='theme_dropdown' and $this->_category==$this->first_category_slug)*/ (in_array(apply_filters('eowbc_filter_prefix',$this->filter_prefix).'theme_dropdown',array_column($this->__filters__,'filter_template')) !== false ) or (in_array('theme_dropdown',array_column($this->__filters__,'filter_template')) !==false)) {
@@ -1829,7 +1889,7 @@ class EOWBC_Filter_Widget {
 			} elseif((wbc()->options->get_option('filters_altr_filt_widgts','second_category_altr_filt_widgts')=='sc4' and $this->_category==$this->second_category_slug) or (wbc()->options->get_option('filters_altr_filt_widgts','first_category_altr_filt_widgts')=='fc4' and $this->_category==$this->first_category_slug)) {
 				wbc()->load->template('publics/filters/slider_price_desktop_4'.$alternet_slider, array("width_class"=>$this->get_width_class($width),"min"=>$min,"max"=>$max,"reset"=>$reset,'help'=>$help,'seprator'=>$seprator,'prefix'=>$curr_prefix,'postfix'=>$curr_postfix,'filter_ui'=>$this)); 
 			} elseif ((in_array(wbc()->options->get_option('filters_altr_filt_widgts','second_category_altr_filt_widgts'),array('sc3','sc5')) and $this->_category==$this->second_category_slug) or (in_array(wbc()->options->get_option('filters_altr_filt_widgts','first_category_altr_filt_widgts'),array('fc3','fc5')) and $this->_category==$this->first_category_slug)) {
-				wbc()->load->template('publics/filters/slider_price_desktop_3'.$alternet_slider, array("width_class"=>$this->get_width_class($width),"min"=>$min,"max"=>$max,"reset"=>$reset,'help'=>$help,'seprator'=>$seprator,'prefix'=>$curr_prefix,'postfix'=>$curr_postfix,'filter_ui'=>$this)); 
+				wbc()->load->template('publics/filters/slider_price_desktop_3'.$alternet_slider, array("width_class"=>$this->get_width_class($width),"min"=>$min,"max"=>$max,"reset"=>$reset,'help'=>$help,'seprator'=>$seprator,'prefix'=>$curr_prefix,'postfix'=>$curr_postfix,'filter_ui'=>$this,'query_list'=>$query_list)); 
 			}  else {
 
 				wbc()->load->template('publics/filters/slider_price_desktop'.$alternet_slider, array("width_class"=>$this->get_width_class($width),"min"=>$min,"max"=>$max,"reset"=>$reset,'seprator'=>$seprator,'prefix'=>$curr_prefix,'postfix'=>$curr_postfix,'help'=>$help,'filter_ui'=>$this)); 
