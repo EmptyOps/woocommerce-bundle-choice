@@ -152,6 +152,8 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		// NOTE: now almost all other page load level flag set logic is disabled and initialy the flag is set at page load time only from here. 
 		set_enable_filter_private(true);	
 
+		slider_init();
+
     };
 
     var process_events = function(){
@@ -163,8 +165,6 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		on_change_listener();
 
 		slider_change_event_listener();
-
-		text_slider_init_listener();
 		
 		checkbox_change_event_listener();
 
@@ -1525,6 +1525,39 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
     };
 
+    var slider_init = function(){
+
+    	$slider_element = jQuery('.ui.range.slider');
+    
+		for (var i = $slider_element.length - 1; i >= 0; i--) {
+	    	
+	    	min = jQuery($slider_element[i]).data('range-start');
+	    	max = jQuery($slider_element[i]).data('range-end');    			
+
+    		if(!window.document.splugins.common.is_empty(min) && !window.document.splugins.common.is_empty(max)){
+
+	    		element = $slider_element[i];
+
+				_p_sep = jQuery(element).attr('data-sep');
+				_p_prefix = jQuery(element).data('prefix');
+				if(typeof(_p_prefix) == typeof(undefined) || _p_prefix=='undefined'){
+					_p_prefix = '';
+				}
+
+				_p_postfix = jQuery(element).data('postfix');
+				if(typeof(_p_postfix) == typeof(undefined) || _p_postfix=='undefined'){
+					_p_postfix = '';
+				}
+
+		    	jQuery("input[name='text_min_"+jQuery(element).attr('data-slug')+"']").val( _p_prefix+(_p_sep=='.'?Number(min).toFixed(2):(Number(min).toFixed(2)).toString().replace('.',','))+_p_postfix );
+		    	jQuery("input[name='text_max_"+jQuery(element).attr('data-slug')+"']").val( _p_prefix+(_p_sep=='.'?Number(max).toFixed(2):(Number(max).toFixed(2)).toString().replace('.',','))+_p_postfix);
+
+		    	jQuery(element).semanticSlider("set rangeValue",min,max);    			
+    		}
+		}
+
+    };
+
     var on_reset_click_listener = function(form_selector){
 
 	    /*ACTIVE_TODO_OC_START
@@ -1620,29 +1653,6 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		            jQuery('.Top_Daimond_Btn_Content').find('.irs-hidden-input')
 		        );
 		    }, 2000);
-		}
-
-    };
-
-    var text_slider_init_listener = function(){
-    	
-    	console.log('filters [text_slider_init_listener]');
-
-    	$price_element = jQuery('.ui.range.slider');
-    
-		for (var i = $price_element.length - 1; i >= 0; i--) {
-	    	
-	    	min = jQuery($price_element[i]).data('range-start');
-	    	max = jQuery($price_element[i]).data('range-end');    			
-			console.log('filters [text_slider_init_listener] 1');
-			console.log($price_element[i]);
-    		if(!window.document.splugins.common.is_empty(min) && !window.document.splugins.common.is_empty(max)){
-    			console.log('filters [text_slider_init_listener] 2');
-    			console.log(min);
-    			console.log(max);
-    			console.log($price_element[i]);
-	    		on_text_slider_init(jQuery($price_element[i]),min,max);
-    		}
 		}
 
     };
@@ -1779,13 +1789,6 @@ window.document.splugins.wbc.filters.core = function( configs ) {
     	console.log('filters [on_slider_change_event]');
 
     	slider_change_event(selector, element);
-    };
-
-    var on_text_slider_init = function(element,min,max){
-    	
-    	console.log('filters [on_text_slider_init]');
-
-    	text_slider_init(element,min,max);
     };
 
     var on_checkbox_change_event = function(event, element){
@@ -2364,25 +2367,6 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		});
 
     };
-    
-    var text_slider_init = function(element,min,max){
-
-		_p_sep = jQuery(element).attr('data-sep');
-		_p_prefix = jQuery(element).data('prefix');
-		if(typeof(_p_prefix) == typeof(undefined) || _p_prefix=='undefined'){
-			_p_prefix = '';
-		}
-
-		_p_postfix = jQuery(element).data('postfix');
-		if(typeof(_p_postfix) == typeof(undefined) || _p_postfix=='undefined'){
-			_p_postfix = '';
-		}
-
-    	jQuery("input[name='text_min_"+jQuery(element).attr('data-slug')+"']").val( _p_prefix+(_p_sep=='.'?Number(min).toFixed(2):(Number(min).toFixed(2)).toString().replace('.',','))+_p_postfix );
-    	jQuery("input[name='text_max_"+jQuery(element).attr('data-slug')+"']").val( _p_prefix+(_p_sep=='.'?Number(max).toFixed(2):(Number(max).toFixed(2)).toString().replace('.',','))+_p_postfix);
-
-    	jQuery(element).semanticSlider("set rangeValue",min,max);    	
-    }
 
     var checkbox_change_event = function(event, element){
 
