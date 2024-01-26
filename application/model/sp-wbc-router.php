@@ -77,15 +77,6 @@ class SP_WBC_Router extends SP_Router {
                 // -- need to finalize -- to h
                     // NOTE: since we are just continuing with older flow of m so nothing to here as of now, but if required than we need to manage     
                 return $val;
-            }elseif($key[0] == 'text_filter'){
-
-                // NOTE: here we are simply returning but if required to controll logic then the standerd approch is to call the above set_query_params function    
-                // -- need to finalize -- to h
-                    // NOTE: since we are just continuing with older flow of m so nothing to here as of now, but if required than we need to manage     
-                return array(
-                    'range_start'=>self::get_query_params('min_'.$val, $input_method),
-                    'range_end'=>self::get_query_params('max_'.$val, $input_method),
-                );
             }
         }else{
 
@@ -103,6 +94,12 @@ class SP_WBC_Router extends SP_Router {
             } elseif( $key[0] == 'attr_options' ) {
 
                 return explode(',', self::get_query_params('checklist_'.$key[1], $input_method) );
+            } elseif( $key[0] == 'min_max_attr_options' ) {
+
+                return array(
+                    'range_start'=>self::get_query_params('min_'.$key[1], $input_method),
+                    'range_end'=>self::get_query_params('max_'.$key[1], $input_method),
+                );
             } elseif( $key[0] == 'price_range' ) {
                 
                 return array(
