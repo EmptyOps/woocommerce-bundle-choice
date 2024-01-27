@@ -11117,7 +11117,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
     );  
     }
 
-    public function set_configs_after_categories($catat_category) {
+    public function set_configs_after_categories($catat_category, $feature_key = 'pair_maker') {
 
         // set dynamic variables here for the parent class 
 
