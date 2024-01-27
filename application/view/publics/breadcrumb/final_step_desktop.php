@@ -19,7 +19,7 @@
             if(!empty($first) and !empty($second)){
                 $first_price = $first->get_price() * ( !empty($set['FIRST'][1]) ? $set['FIRST'][1]:$tmp_set['FIRST'][1] );
                 $second_price = $second->get_price() * ( !empty($set['SECOND'][1]) ? $set['SECOND'][1]:$tmp_set['SECOND'][1] );
-                esc_html_e(wc_price( apply_filters( 'eowbc_breadcrumb_final_price',$first_price + $second_price,$first,$second) ));
+                /*esc_html*/_e(wc_price( apply_filters( 'eowbc_breadcrumb_final_price',$first_price + $second_price,$first,$second) ));
             }
         ?>
         </div>

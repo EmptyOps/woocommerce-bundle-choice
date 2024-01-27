@@ -25,7 +25,7 @@ $model_images = \eo\wbc\model\Images::instance();
                 <img src="<?php echo esc_url($model_images->id2url($second->get_image_id())); ?>">
             </div>
             <div class="column eowbc_breadcrumb_font" style="font-size: x-small;">
-                <?php esc_html_e(wc_price(apply_filters('eowbc_breadcrumb_second_price',$second->get_price(),$second))); ?>
+                <?php /*esc_html*/_e(wc_price(apply_filters('eowbc_breadcrumb_second_price',$second->get_price(),$second))); ?>
                 <br/>
                 <!-- <u><a href="<?php //echo (!empty(wbc()->sanitize->get('SECOND'))?eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_breadcrumb_view_url(wbc()->sanitize->get('SECOND'),$order):'#'); ?>">View</a></u>&nbsp;|&nbsp;<u><a href="<?php // echo (!empty(wbc()->sanitize->get('SECOND'))?eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_breadcrumb_change_url($order,wbc()->sanitize->get('SECOND')):'#'); ?>"><?php //_e(wbc()->options->get_option('appearance_breadcrumb','appearance_breadcrumb_change_action_text','Change',true,true)); ?></a></u> -->
 
