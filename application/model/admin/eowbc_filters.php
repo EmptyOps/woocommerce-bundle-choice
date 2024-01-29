@@ -558,7 +558,7 @@ if( !is_ajax() ) {
 		$inline_script = 
 		"jQuery(document).ready(function(\$){\n" .
 		"    \$(\"[name='first_category_altr_filt_widgts'],[name='second_category_altr_filt_widgts']\").on('change',function(){\n" .
-		"        eowbc_toast_common('warning','Note that your existing filters will be disabled, and the new sample filters will be added. You can enable your existing filters later at anytime by using bulk activate action.',10000);\n" .
+		"        eowbc_toast_common('warning','Note that your existing filters will be disabled, and the new sample filters will be added. You can enable your existing filters later at anytime by using bulk activate action.',10000);\n\n" .
 		"    });\n" .
 		"});\n";
 		wbc()->load->add_inline_script( '', $inline_script, 'common' );
