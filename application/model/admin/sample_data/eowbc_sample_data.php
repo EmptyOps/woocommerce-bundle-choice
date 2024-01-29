@@ -171,59 +171,59 @@ class Eowbc_Sample_Data {
 			}
 
 			if(!empty(wbc()->sanitize->post('step'))){
-			  if(wbc()->sanitize->post('step')==3) {
-			  	if(false){
-			    ?>
-			    <script type="text/javascript" >
-			    jQuery(document).ready(function($) {            
+			  	if(wbc()->sanitize->post('step')==3) {
+				  	if(false){
+				    ?>
+				    <script type="text/javascript" >
+				    jQuery(document).ready(function($) {            
 
-			        var eo_wbc_max_products=<?php echo($this->get_product_size()); ?>;            
-			        function eo_wbc_add_products(index){
+				        var eo_wbc_max_products=<?php echo($this->get_product_size()); ?>;            
+				        function eo_wbc_add_products(index){
 
-			            if(index>=eo_wbc_max_products){
-			                
-			                window.location.href="<?php echo(admin_url('admin.php?page=eowbc')); ?>";
-			                return false;
-			            }
+				            if(index>=eo_wbc_max_products){
+				                
+				                window.location.href="<?php echo(admin_url('admin.php?page=eowbc')); ?>";
+				                return false;
+				            }
 
-			            jQuery(".button.button-primary.button-hero.action.disabled").val("Adding "+(index+1)+" of "+eo_wbc_max_products+" products");
+				            jQuery(".button.button-primary.button-hero.action.disabled").val("Adding "+(index+1)+" of "+eo_wbc_max_products+" products");
 
-			            var data = {
-			                //'action': 'eo_wbc_add_products',
-			                '_wpnonce': '<?php echo wp_create_nonce('sample_data_jewelry');?>',
-			                'action':'eowbc_ajax',
-			                'resolver':'sample_data/<?php _e($feature_key); ?>',
-			                'product_index':index 
-			            };
+				            var data = {
+				                //'action': 'eo_wbc_add_products',
+				                '_wpnonce': '<?php echo wp_create_nonce('sample_data_jewelry');?>',
+				                'action':'eowbc_ajax',
+				                'resolver':'sample_data/<?php _e($feature_key); ?>',
+				                'product_index':index 
+				            };
 
-			            jQuery.post('<?php echo admin_url( 'admin-ajax.php' ); ?>', data, function(response) {
-			            	var resjson = jQuery.parseJSON(response);
-			                if( typeof(resjson["type"]) != undefined && resjson["type"] == "success" ){
-				                eo_wbc_add_products(++index);                    
-			                } else {
-			                	var type = (typeof(resjson["type"]) != undefined ? resjson["type"] : 'error');
-			                	var msg = (typeof(resjson["msg"]) != undefined && resjson["msg"] != "" ? resjson["msg"] : `Failed! Please check Logs page for for more details.`);
-			                    eowbc_toast_common( type, msg );
-			                }  
-			            });                
-			        }   
-			        
-			        $(".button.button-primary.button-hero.action").on('click',function(e){
-			            e.stopPropagation();
-			            e.preventDefault();
-			            if(!$(this).hasClass('disabled')) {
-			                $(".button.button-hero.action:not(.disabled)").toggleClass('disabled');
-			                eo_wbc_add_products(0);
-			                //eo_wbc_add_products(119);
-			            }                
-			            return false;
-			        });
+				            jQuery.post('<?php echo admin_url( 'admin-ajax.php' ); ?>', data, function(response) {
+				            	var resjson = jQuery.parseJSON(response);
+				                if( typeof(resjson["type"]) != undefined && resjson["type"] == "success" ){
+					                eo_wbc_add_products(++index);                    
+				                } else {
+				                	var type = (typeof(resjson["type"]) != undefined ? resjson["type"] : 'error');
+				                	var msg = (typeof(resjson["msg"]) != undefined && resjson["msg"] != "" ? resjson["msg"] : `Failed! Please check Logs page for for more details.`);
+				                    eowbc_toast_common( type, msg );
+				                }  
+				            });                
+				        }   
+				        
+				        $(".button.button-primary.button-hero.action").on('click',function(e){
+				            e.stopPropagation();
+				            e.preventDefault();
+				            if(!$(this).hasClass('disabled')) {
+				                $(".button.button-hero.action:not(.disabled)").toggleClass('disabled');
+				                eo_wbc_add_products(0);
+				                //eo_wbc_add_products(119);
+				            }                
+				            return false;
+				        });
 
-			    });
-			    </script> 
-			    <?php
-				}
-				$is_shortcode_filter_is_shortcode_filter = $this->get_product_size();
+				    });
+				    </script> 
+				    <?php
+					}
+					$is_shortcode_filter_is_shortcode_filter = $this->get_product_size();
 					$inline_script = "
 					jQuery(document).ready(function($) {
 					    var eo_wbc_max_products = " . $is_shortcode_filter_is_shortcode_filter . ";
@@ -269,7 +269,7 @@ class Eowbc_Sample_Data {
 					";
 					wbc()->load->add_inline_script('', $inline_script, 'common');
 				
-			  }      
+			  	}      
 			    $_step=wbc()->sanitize->post('step');
 			} else {
 			    $_step=1;

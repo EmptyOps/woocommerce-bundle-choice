@@ -49,7 +49,7 @@ class SP_SLCTRN_Swatches_Cart_Form extends \sp\selectron\controller\publics\cont
 			<script type="text/javascript">window.document.splugins = window.document.splugins || {}; window.document.splugins.tableview = window.document.splugins.tableview || {}; window.document.splugins.tableview.table_container = '<?php echo $selector; ?>' </script>
 			<?php
 		}
-		$selector = "your_selector_value"; // Replace this with your actual selector value
+		//$selector = "your_selector_value"; // aa chet gpt ye aapelu chhe Replace this with your actual selector value
 		$inline_script =
 		    "window.document.splugins = window.document.splugins || {};\n" .
 		    "window.document.splugins.tableview = window.document.splugins.tableview || {};\n" .
