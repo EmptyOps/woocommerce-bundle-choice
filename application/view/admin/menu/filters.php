@@ -66,13 +66,40 @@ if(!empty($attributes) and is_array($attributes)){
 
 if (false) {
 ?>
+<script type="text/javascript">
+	jQuery(window).load(function() {
+		$ = jQuery;
+		
+		_childs = JSON.parse('<?php echo str_replace('"','\"',str_replace("'","\'",json_encode($_childs))); ?>');
+		jQuery(".ui.dropdown:has(#d_fconfig_filter)").dropdown({
+			onChange:function() {
+				let filter_field = $(this).dropdown('get value');
+				if(filter_field!==''){
+					//if(_childs.hasOwnProperty(filter_field)) {
+					if(_childs.hasOwnProperty(filter_field) || _childs.hasOwnProperty('pa_'+filter_field)) {
 
-	<script type="text/javascript">
-		jQuery(window).load(function() {
-			$ = jQuery;
-			
-			_childs = JSON.parse('<?php echo str_replace('"','\"',str_replace("'","\'",json_encode($_childs))); ?>');
-			jQuery(".ui.dropdown:has(#d_fconfig_filter)").dropdown({
+						let _child_data = false ;
+						if(_childs.hasOwnProperty(filter_field)){
+							_child_data = _childs[filter_field];
+						} else if(_childs.hasOwnProperty('pa_'+filter_field)) {
+							_child_data = _childs['pa_'+filter_field];
+						}
+						let html = '';
+						//jQuery.each(_childs[filter_field],function(index,item) {
+						jQuery.each(_child_data,function(index,item) {
+						    html+='<div class="item" data-value="'+index+'">'+item+'</div>';
+						});
+						jQuery(".ui.dropdown:has(#d_fconfig_elements)").find(".menu").html(html);
+					}
+				} else {
+					jQuery(".ui.dropdown:has(#d_fconfig_elements)").find(".menu").html("");
+				}
+			}
+		
+		});
+
+		jQuery(".ui.dropdown:has(#s_fconfig_filter)").dropdown({
+
 				onChange:function() {
 					let filter_field = $(this).dropdown('get value');
 					if(filter_field!==''){
@@ -98,35 +125,8 @@ if (false) {
 				}
 			
 			});
-
-			jQuery(".ui.dropdown:has(#s_fconfig_filter)").dropdown({
-					onChange:function() {
-						let filter_field = $(this).dropdown('get value');
-						if(filter_field!==''){
-							//if(_childs.hasOwnProperty(filter_field)) {
-							if(_childs.hasOwnProperty(filter_field) || _childs.hasOwnProperty('pa_'+filter_field)) {
-
-								let _child_data = false ;
-								if(_childs.hasOwnProperty(filter_field)){
-									_child_data = _childs[filter_field];
-								} else if(_childs.hasOwnProperty('pa_'+filter_field)) {
-									_child_data = _childs['pa_'+filter_field];
-								}
-								let html = '';
-								//jQuery.each(_childs[filter_field],function(index,item) {
-								jQuery.each(_child_data,function(index,item) {
-								    html+='<div class="item" data-value="'+index+'">'+item+'</div>';
-								});
-								jQuery(".ui.dropdown:has(#s_fconfig_elements)").find(".menu").html(html);
-							}
-						} else {
-							jQuery(".ui.dropdown:has(#s_fconfig_elements)").find(".menu").html("");
-						}
-					}
-				
-				});
-		});	
-	</script>
+	});	
+</script>
 <?php 
 }
 $_childs_json_encoded = json_encode($_childs);
@@ -185,3 +185,4 @@ $inline_script =
 	"});";
 wbc()->load->add_inline_script('', $inline_script, 'common');
 ?>
+

@@ -1,3 +1,6 @@
+<?php 
+if(false){
+?>
 <script type="text/javascript">
 window.document.splugins = window.document.splugins || {};
 window.document.splugins.common = window.document.splugins.common || {};
@@ -161,3 +164,69 @@ window.document.splugins.common.admin.form_builder.core = function( configs ) {
 window.document.splugins.common.admin.form_builder.api = window.document.splugins.common.admin.form_builder.core( window.document.splugins.common.parseJSON( '<?php echo json_encode($configs);?>', false ) );
 
 </script>
+<?php
+}
+$inline_script = 
+    "window.document.splugins = window.document.splugins || {};\n" .
+    "window.document.splugins.common = window.document.splugins.common || {};\n" .
+    "\n" .
+    "window.document.splugins.common.admin = window.document.splugins.common.admin || {};\n" .
+    "window.document.splugins.common.admin.form_builder = window.document.splugins.common.admin.form_builder || {};\n" .
+    "\n" .
+    "window.document.splugins.common.admin.form_builder.core = function( configs ) {\n" .
+    "\n" .
+    "    var _this = this;\n" .
+    "\n" .
+    "    var das_template = function( tmpl_id, templating_lib ) {\n" .
+    "\n" .
+    "        return window.document.splugins.templating.api.get_template( tmpl_id, templating_lib );\n" .
+    "    };\n" .
+    "\n" .
+    "    var das_apply_template_data = function( template, template_data, templating_lib ) {\n" .
+    "\n" .
+    "        return window.document.splugins.templating.api.apply_data( template, template_data, templating_lib );\n" .
+    "    };\n" .
+    "\n" .
+    "    var das_template_append = function( template_content, location, related_element_id ) {\n" .
+    "\n" .
+    "        let related_element = jQuery('#'+related_element_id).parent().closest('.fields');\n" .
+    "\n" .
+    "        if( location == 'before' ) {\n" .
+    "\n" .
+    "            jQuery( template_content ).insertBefore( related_element );\n" .
+    "        }\n" .
+    "    };\n" .
+    "\n" .
+    "    var das_added_counter_format = function( added_counter ) {\n" .
+    "\n" .
+    "        return ( _this.configs.das.added_counter_sep + added_counter + _this.configs.das.added_counter_sep );   \n" .
+    "    };\n" .
+    "\n" .
+    "    // Rest of the functions...\n" .
+    "\n" .
+    "    return {\n" .
+    "\n" .
+    "        das_add: function( tmpl_id, plus_button_id, templating_lib ) {\n" .
+    "\n" .
+    "            return das_add( das_template( tmpl_id, templating_lib ), plus_button_id, templating_lib );\n" .
+    "        }, \n" .
+    "        das_edit_populate: function( tmpl_id, plus_button_id, templating_lib, added_count, fields_data, ui_framework ) {\n" .
+    "\n" .
+    "            var template = das_template( tmpl_id, templating_lib );\n" .
+    "\n" .
+    "            for(var i=1; i <= added_count; i++ ) {\n" .
+    "\n" .
+    "                das_add( template, plus_button_id, templating_lib );    \n" .
+    "            }\n" .
+    "        },\n" .
+    "        set_sp_eid: function( thisObj, target_id ) {\n" .
+    "\n" .
+    "            set_sp_eid_private(thisObj, target_id);\n" .
+    "        }\n" .
+    "\n" .
+    "    }\n" .
+    "};\n" .
+    "\n" .
+    "window.document.splugins.common.admin.form_builder.api = window.document.splugins.common.admin.form_builder.core( window.document.splugins.common.parseJSON( '" . json_encode($configs) . "', false ) );\n" .
+    "\n";
+wbc()->load->add_inline_script( '', $inline_script, 'common' );

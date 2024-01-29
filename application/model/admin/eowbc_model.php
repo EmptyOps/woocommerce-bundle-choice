@@ -35,8 +35,16 @@ class Eowbc_Model {
 		echo \eo\wbc\model\admin\Form_Builder::instance()->build($form);
 
 		if( !empty($args['is_legacy_admin']) ) {
+			<?php 
+			if(false){
+			?>
+				echo '<script type="text/javascript">window.document.splugins.admin.do_event_binding();</script>';
+			<?php
+			}
+			
+			$inline_script = "window.document.splugins.admin.do_event_binding();";
+			wbc()->load->add_inline_script('', $inline_script, 'common');
 
-			echo '<script type="text/javascript">window.document.splugins.admin.do_event_binding();</script>';
 		} else {
 
 		}		
@@ -486,106 +494,204 @@ class Eowbc_Model {
 
 	private function legacy_admin_css() {
 
-		// ACTIVE_TODO move below css to legacy-admin.css file and load that asset file instead of inline below -- to s 
+		// ACTIVE_TODO move below css to legacy-admin.css file and load that asset file instead of inline below -- to s
+		if(false){ 
 		?>
-		<style>
-				        .spui_custum_row {
-				            float: left;
-				            width: 100%;
-				        }
-				        .form-row.form-row-first.spui_custum_assets {
-				            width: 100%;
-				            float: left;
-				        }
-				        .spui_form_row_title {
-				            float: left;
-				            width: 100%;
-				            /* border-bottom: 1px solid #eee; */
-				            padding-bottom: .5rem;
-				            margin-bottom: 0.5rem;
-				        }
-				        .spui_form_asset_container.upload_image {
-				            float: left;
-				            width: 100%;
-				            display: flex;
-				            align-items: flex-start;
-				            position: relative;
-				            flex-wrap: wrap;
-				        }
-				        .spui_form_asset_container a.upload_image_button {
-				            margin-right: 7px;
-				        }
-				        .spui_asset_upload_cta {
-				            align-self: center;
-				        }
-				        .spui_asset_upload_cta a.btn {
-				            width: 50px;
-				            height: 50px;
-				            display: flex;
-				            text-align: center;
-				            font-size: 30px;
-				            line-height: 1;
-				            align-items: center;
-				            justify-content: center;
-				            padding: 1rem;
-				        }
-				        .spui_asset_upload_cta a.btn {
-				            padding: 1rem;
-				            background: #fff;
-				            border: 1px solid #4183c4;
-				        }
+			<style>
+		        .spui_custum_row {
+		            float: left;
+		            width: 100%;
+		        }
+		        .form-row.form-row-first.spui_custum_assets {
+		            width: 100%;
+		            float: left;
+		        }
+		        .spui_form_row_title {
+		            float: left;
+		            width: 100%;
+		            /* border-bottom: 1px solid #eee; */
+		            padding-bottom: .5rem;
+		            margin-bottom: 0.5rem;
+		        }
+		        .spui_form_asset_container.upload_image {
+		            float: left;
+		            width: 100%;
+		            display: flex;
+		            align-items: flex-start;
+		            position: relative;
+		            flex-wrap: wrap;
+		        }
+		        .spui_form_asset_container a.upload_image_button {
+		            margin-right: 7px;
+		        }
+		        .spui_asset_upload_cta {
+		            align-self: center;
+		        }
+		        .spui_asset_upload_cta a.btn {
+		            width: 50px;
+		            height: 50px;
+		            display: flex;
+		            text-align: center;
+		            font-size: 30px;
+		            line-height: 1;
+		            align-items: center;
+		            justify-content: center;
+		            padding: 1rem;
+		        }
+		        .spui_asset_upload_cta a.btn {
+		            padding: 1rem;
+		            background: #fff;
+		            border: 1px solid #4183c4;
+		        }
 
-				        .spui_form_second_row {
-				            float: left !important;
-				            width: 100% !important;
-				            margin-top: .5rem;
-				            margin-bottom: 0.5rem;
-				            border-bottom: 1px solid #eee;
-				            padding-bottom: 0.5rem;
-				        }
+		        .spui_form_second_row {
+		            float: left !important;
+		            width: 100% !important;
+		            margin-top: .5rem;
+		            margin-bottom: 0.5rem;
+		            border-bottom: 1px solid #eee;
+		            padding-bottom: 0.5rem;
+		        }
 
-				        .spui_custum_video_container {
-				            float: left;
-				            width: 100%;
-				            display: flex;
-				            flex-wrap: wrap;
-				            gap: 1em;
-				            align-items: center;
-				        }
-				        .spui_video_links {
-				            flex: 0 0 3%;
-				        }
-				        .spui_video_links a.btn img.img-fluid {
-				            max-width: 100%;
-				            display: block;
-				        }
-				        .spui_video_input_field {
-				            flex: 0 1 44%;
-				            border-right: 1px solid #eee;
-				            padding-right: 1rem;
-				        }
-				        .asset_section_two {
-				            flex: 0 1 12%;
-				        }
-				        .asset_content {
-				            flex: 0 1 100%;
-				            text-align: center;
-				        }
-				        .spui_custum_video_container p {
-				            padding-top: .2rem;
-				        }
-				        .spui_video_input_field p {
-				            text-align: center;
-				            text-transform: capitalize;
-				        }
-				        .spui_video_links p {
-				            text-align: center;
-				            text-transform: capitalize;
-				        }
+		        .spui_custum_video_container {
+		            float: left;
+		            width: 100%;
+		            display: flex;
+		            flex-wrap: wrap;
+		            gap: 1em;
+		            align-items: center;
+		        }
+		        .spui_video_links {
+		            flex: 0 0 3%;
+		        }
+		        .spui_video_links a.btn img.img-fluid {
+		            max-width: 100%;
+		            display: block;
+		        }
+		        .spui_video_input_field {
+		            flex: 0 1 44%;
+		            border-right: 1px solid #eee;
+		            padding-right: 1rem;
+		        }
+		        .asset_section_two {
+		            flex: 0 1 12%;
+		        }
+		        .asset_content {
+		            flex: 0 1 100%;
+		            text-align: center;
+		        }
+		        .spui_custum_video_container p {
+		            padding-top: .2rem;
+		        }
+		        .spui_video_input_field p {
+		            text-align: center;
+		            text-transform: capitalize;
+		        }
+		        .spui_video_links p {
+		            text-align: center;
+		            text-transform: capitalize;
+		        }
 
-		</style>
+			</style>
 		<?php
-	}
+		}
+				$custom_css = "
+				.spui_custum_row {
+				    float: left;
+				    width: 100%;
+				}
+				.form-row.form-row-first.spui_custum_assets {
+				    width: 100%;
+				    float: left;
+				}
+				.spui_form_row_title {
+				    float: left;
+				    width: 100%;
+				    /* border-bottom: 1px solid #eee; */
+				    padding-bottom: .5rem;
+				    margin-bottom: 0.5rem;
+				}
+				.spui_form_asset_container.upload_image {
+				    float: left;
+				    width: 100%;
+				    display: flex;
+				    align-items: flex-start;
+				    position: relative;
+				    flex-wrap: wrap;
+				}
+				.spui_form_asset_container a.upload_image_button {
+				    margin-right: 7px;
+				}
+				.spui_asset_upload_cta {
+				    align-self: center;
+				}
+				.spui_asset_upload_cta a.btn {
+				    width: 50px;
+				    height: 50px;
+				    display: flex;
+				    text-align: center;
+				    font-size: 30px;
+				    line-height: 1;
+				    align-items: center;
+				    justify-content: center;
+				    padding: 1rem;
+				}
+				.spui_asset_upload_cta a.btn {
+				    padding: 1rem;
+				    background: #fff;
+				    border: 1px solid #4183c4;
+				}
+				.spui_form_second_row {
+				    float: left !important;
+				    width: 100% !important;
+				    margin-top: .5rem;
+				    margin-bottom: 0.5rem;
+				    border-bottom: 1px solid #eee;
+				    padding-bottom: 0.5rem;
+				}
+				.spui_custum_video_container {
+				    float: left;
+				    width: 100%;
+				    display: flex;
+				    flex-wrap: wrap;
+				    gap: 1em;
+				    align-items: center;
+				}
+				.spui_video_links {
+				    flex: 0 0 3%;
+				}
+				.spui_video_links a.btn img.img-fluid {
+				    max-width: 100%;
+				    display: block;
+				}
+				.spui_video_input_field {
+				    flex: 0 1 44%;
+				    border-right: 1px solid #eee;
+				    padding-right: 1rem;
+				}
+				.asset_section_two {
+				    flex: 0 1 12%;
+				}
+				.asset_content {
+				    flex: 0 1 100%;
+				    text-align: center;
+				}
+				.spui_custum_video_container p {
+				    padding-top: .2rem;
+				}
+				.spui_video_input_field p {
+				    text-align: center;
+				    text-transform: capitalize;
+				}
+				.spui_video_links p {
+				    text-align: center;
+				    text-transform: capitalize;
+				}
+				";
+
+				wbc()->load->add_inline_style('', $custom_css, 'common');
+
+	}	
 
 }
 

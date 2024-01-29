@@ -312,34 +312,43 @@ if(!class_exists('WBC_Loader')) {
 					if( !empty($localize_var) && !empty($localize_var_val) ) {
 					//echo "load_localize_data inner if";
 
-						$inline_script =
-						    "var " . $localize_var . " = JSON.parse('" . json_encode($localize_var_val) . "');\n";
+						if(false){				
+							?>
+							<script>
+								var <?php echo $localize_var; ?> = JSON.parse('<?php echo json_encode($localize_var_val); ?>');
+							</script>
+							<?php
+						}
+							
+						$localize_var = $localize_var; // Replace with the actual variable value.
+						$localize_var_val = $localize_var_val; // Replace with the actual variable value.
+
+						$inline_script = "
+						        var $localize_var = JSON.parse('" . json_encode($localize_var_val) . "');
+						";
 						wbc()->load->add_inline_script('', $inline_script, 'common');
 
-						if(false) {				
-						?>
-						<script>
-							var <?php echo $localize_var; ?> = JSON.parse('<?php echo json_encode($localize_var_val); ?>');
-						</script>
-						<?php
-						}
 					} elseif( !empty(array_keys($param)[0]) && !empty($param[array_keys($param)[0]]) ) {
 					// echo "localize_data inner else";
 					// wbc_pr('load_param');
 					// wbc_pr($param);
-						
-						$param_keys = array_keys($param);
-						$inline_script =
-						    "var " . $param_keys[0] . " = JSON.parse('" . json_encode($param[$param_keys[0]]) . "');\n";
-						// wbc()->load->add_inline_script('', $inline_script, 'common');
-						wbc()->load->get_inline_script_tag($inline_script);
+
 						if(false){
-						?>
-						<script>
-							var <?php echo array_keys($param)[0]; ?> = JSON.parse('<?php echo json_encode($param[array_keys($param)[0]]); ?>');
-						</script>
-						<?php
+							?>
+							<script>
+								var <?php echo array_keys($param)[0]; ?> = JSON.parse('<?php echo json_encode($param[array_keys($param)[0]]); ?>');
+							</script>
+							<?php
 						}
+					
+						$param_key = array_keys($param)[0];
+						$param_value = $param[$param_key];
+
+						$inline_script = "
+						        var $param_key = JSON.parse('" . json_encode($param_value) . "');
+						";
+						wbc()->load->add_inline_script('', $inline_script, 'common');		
+					
 					}
 					break;				
 				default:				

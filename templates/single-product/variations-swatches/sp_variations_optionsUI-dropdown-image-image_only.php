@@ -53,7 +53,7 @@ if(in_array($variable_item_data['options_loop_type'][$term->slug],array('dropdow
             array(
                 'type' => 'div',
                 'class' => 'default text',
-                'preHTML' => $variable_item_data['selected_item'],
+                'preHTML' => esc_html($variable_item_data['selected_item']),
             ),
             array(
                 'type' => 'div',

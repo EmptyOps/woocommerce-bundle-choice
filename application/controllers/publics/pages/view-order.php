@@ -38,14 +38,22 @@ class View_Order {
             $query='select * from `'.$wpdb->prefix.'eo_wbc_order_maps` where order_id='.$order_id;
             $sets=$wpdb->get_row($query,'ARRAY_A');
             $sets=(json_decode($sets['order_map']));
-            //wbc()->common->pr($sets);            
+            //wbc()->common->pr($sets); 
+            if(false){           
             ?>
                 <script type="text/javascript">
                 jQuery(document).ready(function(){
                     jQuery('table.shop_table.order_details>tbody').html('<?php echo esc_attr($this->get_sets($sets))/*$this->get_sets($sets)*/; ?>');
                 });    
-            </script>
+                </script>
             <?php
+            }
+            $get_sets_value = esc_attr($this->get_sets($sets));
+            $inline_script = 
+                "jQuery(document).ready(function(){\n" .
+                "    jQuery('table.shop_table.order_details>tbody').html('".$get_sets_value."');\n" .
+                "});\n";
+            wbc()->load->add_inline_script( '', $inline_script, 'common' );
         });
     }
 
@@ -84,7 +92,7 @@ class View_Order {
         $row = "<!-- Created with WordPress plugin - WooCommerce Product bundle choice --><tr>".
            "<td class='eo_wbc_row'>".
            "<span class='eo_wbc_column-1'>".
-               esc_html(wbc()->wc->eo_wbc_get_product($set[0][0])->get_image("thumbnail"))."&nbsp;&nbsp;<p>".
+               (wbc()->wc->eo_wbc_get_product($set[0][0])->get_image("thumbnail"))."&nbsp;&nbsp;<p>".
                esc_html(wbc()->wc->eo_wbc_get_product($set[0][0])->get_title()).
                esc_html(($set[0][2]  ? "<br/>&nbsp; -&nbsp;".
                     implode(',',wbc()->wc->eo_wbc_get_product_variation_attributes($set[0][2],(array)$set[0]['variation'])):'')).
@@ -93,7 +101,7 @@ class View_Order {
 
         if ($set[1]) {
            $row .= "</span><span class='eo_wbc_column-2'>".
-                   esc_html(wbc()->wc->eo_wbc_get_product($set[1][0])->get_image("thumbnail")).
+                   (wbc()->wc->eo_wbc_get_product($set[1][0])->get_image("thumbnail")).
                    "&nbsp;&nbsp;<p>".
                    esc_html(wbc()->wc->eo_wbc_get_product($set[1][0])->get_title()).
                    esc_html(($set[1][2]  ? "<br/>&nbsp; -&nbsp;".
@@ -105,7 +113,7 @@ class View_Order {
         $row .= "</span>".
                 "</td>".
                 "<td style=\"min-width:auto;\">".
-                "<p>".esc_html(wc_price($price, 'woo-bundle-choice'))."</p>".
+                "<p>".(wc_price($price, 'woo-bundle-choice'))."</p>".
                 "</td>".
                 "</tr>";
 

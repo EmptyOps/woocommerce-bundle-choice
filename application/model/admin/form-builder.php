@@ -604,8 +604,10 @@ class Form_Builder implements Builder {
 
 		// wrap with tag as appliable as per the js_templating_lib 
 		if( self::dynamic_add_support_config()['js_templating_lib'] == 'wp' ) {
-
-			return '<script type="text/html" id="tmpl-'.$id.'">' . $in_progress_html . '</script>'; 
+			if(false){
+				return '<script type="text/html" id="tmpl-'.$id.'">' . $in_progress_html . '</script>';
+			}
+			 
 		}
 			
 	}
@@ -886,7 +888,7 @@ class Form_Builder implements Builder {
 				'label'=>eowbc_lang('+'),
 				'type'=>'link',
 				'class'=>array('button', 'secondary'),
-				'attr'=>array('href="javascript:void(0);"', "onclick='window.document.splugins.common.admin.form_builder.api.das_add( \"".$field_id."\", \"".$plus_button_id."\", \"wp\" ); return false;'", 'data-das_fields=\''.json_encode($das_fields_details_for_export).'\'')
+				'attr'=>array('href="javascript:void(0);"', "onclick='window.document.splugins.common.admin.form_builder.api.das_add( \"".esc_attr($field_id)."\", \"".esc_attr($plus_button_id)."\", \"wp\" ); return false;'", 'data-das_fields=\''.json_encode($das_fields_details_for_export).'\'')
 
 			);
 

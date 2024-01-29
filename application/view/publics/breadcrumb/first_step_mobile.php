@@ -45,22 +45,22 @@
 </div>
 <?php  
 if (false) {
-
 ?>
-<script>
-    jQuery(document).ready(function(){
-        if (typeof(jQuery.fn.popup)==='function') {
-            jQuery('.step.completed.first_mobile').popup({
-                popup : jQuery('.ui.popup.first_mobile'),
-                on    : 'click',
-                target   :jQuery('.step.completed.first_mobile').parent(),
-                position : 'bottom left',
-                inline: true
-            });
-        }
-    });
-</script>
-<?php }
+    <script>
+        jQuery(document).ready(function(){
+            if (typeof(jQuery.fn.popup)==='function') {
+                jQuery('.step.completed.first_mobile').popup({
+                    popup : jQuery('.ui.popup.first_mobile'),
+                    on    : 'click',
+                    target   :jQuery('.step.completed.first_mobile').parent(),
+                    position : 'bottom left',
+                    inline: true
+                });
+            }
+        });
+    </script>
+<?php 
+}
 $inline_script =
     "jQuery(document).ready(function(){\n" .
     "    if (typeof(jQuery.fn.popup)==='function') {\n" .
@@ -75,3 +75,4 @@ $inline_script =
     "});\n";
 
 wbc()->load->add_inline_script('', $inline_script, 'common');
+

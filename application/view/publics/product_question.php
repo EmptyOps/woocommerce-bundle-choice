@@ -34,7 +34,9 @@
     	<div class="ui inverted green positive button" id="eowbc_askq_save">Send</div>  
 	</div>
 </div>
-
+<?php
+if(false) {	
+?>
 <script type="text/javascript">
 	jQuery(document).ready(function($){
 		if($('[data-modal-name="eowbc-askq-modal"]').length>1){
@@ -97,6 +99,69 @@
 	    });
 	});
 </script>
+<?php
+}
+$inline_script = 
+"jQuery(document).ready(function($){\n" .
+"    if($('[data-modal-name=\"eowbc-askq-modal\"]').length>1){\n" .
+"        $('[data-modal-name=\"eowbc-askq-modal\"]:gt(0)').remove();    \n" .
+"    }\n" .
+"    \n" .
+"    $('#eowbc-askq').off('click');\n" .
+"    $('#eowbc-askq').click(function(){\n" .
+"        $('#eowbc-askq-modal').modal('show');\n" .
+"        return false;\n" .
+"    });\n" .
+"    \n" .
+"    $(\"#eowbc_askq_save\").off('click');\n" .
+"    $(\"#eowbc_askq_save\").click(function(){\n" .
+"        let fname = $('#eowbc_askq_fname').val().trim();\n" .
+"        let lname = $('#eowbc_askq_lname').val().trim();\n" .
+"        let email = $('#eowbc_askq_email').val().trim();\n" .
+"        let phone = $('#eowbc_askq_phone').val().trim();\n" .
+"        let message = $('#eowbc_askq_message').val().trim();\n" .
+"        \n" .
+"        if(fname=='' || lname=='' || email=='' || phone=='' || message==''){\n" .
+"            alert('Please fill all required fields.');\n" .
+"            return false;\n" .
+"        }\n" .
+"        \n" .
+"        form_data = {\n" .
+"            'action':'eowbc_ajax',\n" .
+"            'resolver':'eowbc_askq',\n" .
+"            '_wpnonce':'<?php _e(wp_create_nonce('eowbc_askq')) ?>',\n" .
+"            'product_id': '<?php _e($product_id); ?>',\n" .
+"            'eowbc_askq_fname':fname,\n" .
+"            'eowbc_askq_lname':lname,\n" .
+"            'eowbc_askq_email':email,\n" .
+"            'eowbc_askq_phone':phone,\n" .
+"            'eowbc_askq_message':message,\n" .
+"        }\n" .
+"        jQuery.ajax({\n" .
+"            url:'<?php _e(admin_url('admin-ajax.php')); ?>',\n" .
+"            type: 'POST',\n" .
+"            data: form_data,\n" .
+"            beforeSend:function(xhr){\n" .
+"            },\n" .
+"            success:function(result,status,xhr){\n" .
+"                if(result){\n" .
+"                    alert('Your query has been sent successfully, you will hear back soon.');\n" .
+"                }\n" .
+"            },\n" .
+"            error:function(xhr,status,error){\n" .
+"            },\n" .
+"            complete:function(xhr,status){\n" .
+"                $('#eowbc_askq_fname').val('');\n" .
+"                $('#eowbc_askq_lname').val('');\n" .
+"                $('#eowbc_askq_email').val('');\n" .
+"                $('#eowbc_askq_phone').val('');\n" .
+"                $('#eowbc_askq_message').val('');\n" .
+"            }\n" .
+"        });    \n" .
+"    });\n" .
+"});\n";
+wbc()->load->add_inline_script( '', $inline_script, 'common' );
+?>
 
 <style type="text/css">
 	/* Chrome, Safari, Edge, Opera */

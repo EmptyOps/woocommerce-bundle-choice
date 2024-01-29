@@ -89,7 +89,9 @@ class Category_Meta {
 						<?php esc_html_e('Choose Image', 'woo-bundle-choice'); ?>						
 					</button>					
 				</div>
-				
+				<?php 
+				if(false){
+				?>	
 				<script type="text/javascript">					
 
 					jQuery(document).on("click",".wbc_thumb_button",function(){
@@ -110,6 +112,27 @@ class Category_Meta {
 						return false;
 					});				
 				</script>
+				<?php
+				}
+				$inline_script =
+				    "jQuery(document).on(\"click\",\".wbc_thumb_button\",function(){\n" .
+				    "    wp_media = wp.media({\n" .
+				    "        title: 'Filter Selected Image',\n" .
+				    "        button: {\n" .
+				    "            text: 'Choose Image'\n" .
+				    "        },\n" .
+				    "        multiple: false\n" .
+				    "    })\n" .
+				    "    .on('select', function() {\n" .
+				    "        var attachment = wp_media.state().get('selection').first().toJSON();\n" .
+				    "        jQuery('#wbc_thumb_img').attr('src', attachment.url);\n" .
+				    "        jQuery('#wbc_attachment').val( attachment.url);\n" .
+				    "    })\n" .
+				    "    .open();\n" .
+				    "    return false;\n" .
+				    "});\n";
+				wbc()->load->add_inline_script('', $inline_script, 'common');
+				?>		
 				<div class="clear"></div>
 			<?php if($is_edit): ?>
 				</td>

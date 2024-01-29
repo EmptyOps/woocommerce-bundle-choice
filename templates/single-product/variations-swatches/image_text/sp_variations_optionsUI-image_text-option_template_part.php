@@ -19,7 +19,7 @@ $template = array(
         ),
         array(
             'type' => 'div',
-            'preHTML' => $term->name,
+            'preHTML' => esc_html($term->name),
         )
     )
 );

@@ -32,14 +32,14 @@ if(!empty($variable_item_data['image_url'])){
                 'src' => esc_url( $variable_item_data['options_loop_image'][$slug_or_option] ),
             ),
         ),
-        'preHTML'=>esc_attr( $term->name ),
+        'preHTML'=>esc_html( $term->name ),
     );
 } else {
 
     $template = array(
         'type' => 'div',
         'class' => 'item',
-        'preHTML' => esc_attr( $term->name ),
+        'preHTML' => esc_html( $term->name ),
         'attr' => array( 'data-value' => esc_attr( $variable_item_data['options_loop_type'][$slug_or_option] ) ),
     );
 }

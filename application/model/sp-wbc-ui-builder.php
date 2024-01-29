@@ -171,7 +171,7 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 						if(is_array($attr_value)) {
 
 						    //$attribute.=" ${attr_key}=".implode(',',$attr_value);
-						    $attribute.=" ${attr_key}=\"".implode(',',$attr_value)."\" ";
+						    $attribute.=" ${attr_key}=\"".esc_attr(implode(',',$attr_value))."\" ";
 						} else {
 
 						    $attribute.=" ${attr_key}=\"${attr_value}\" ";
@@ -319,7 +319,7 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 
 					if(!empty(trim($dimensions_css)) and !empty($ui_ele['attr']) and is_array($ui_ele['attr'])) {
 
-						$ui_ele['attr'] .= " style='${dimensions_css}' ";
+						$ui_ele['attr'] .= " style='".esc_attr(${dimensions_css})."' ";
 					}
 					
 					if(is_numeric($ui_ele['src'])){
@@ -784,12 +784,12 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 								if(!empty($css)){
 									$css = implode(';',$css).';';
 									if(empty($form[$safe_form_key]['attr'])){
-										$form[$safe_form_key]['attr'] = array('style'=>$css);
+										$form[$safe_form_key]['attr'] = array('style'=>esc_attr($css));
 									} else {
 										if(empty($form[$safe_form_key]['attr']['style'])) {
-											$form[$safe_form_key]['attr']['style'] = $css;
+											$form[$safe_form_key]['attr']['style'] = esc_attr($css);
 										} else {
-											$form[$safe_form_key]['attr']['style'].=$css;	
+											$form[$safe_form_key]['attr']['style'].=esc_attr($css);	
 										}									
 									}
 								}
@@ -901,12 +901,12 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 
 								$css = implode(';',$css).';';
 								if(empty($form[$safe_form_key]['attr'])){								
-									$form[$safe_form_key]['attr'] = array('style'=>$css);
+									$form[$safe_form_key]['attr'] = array('style'=>esc_attr($css));
 								} else {
 									if(empty($form[$safe_form_key]['attr']['style'])) {
-										$form[$safe_form_key]['attr']['style'] = $css;
+										$form[$safe_form_key]['attr']['style'] = esc_attr($css);
 									} else {
-										$form[$safe_form_key]['attr']['style'].=$css;	
+										$form[$safe_form_key]['attr']['style'].=esc_attr($css);	
 									}									
 								}							
 							}
@@ -956,9 +956,10 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 
 		// wrap with tag as appliable as per the js_templating_lib 
 		if( $js_templating_lib == 'wp' ) {
-
-			return '<script type="text/html" id="tmpl-'.$id.'">' . $html . '</script>'; 
-		}
+			if(false){
+				return '<script type="text/html" id="tmpl-'.$id.'">' . $html . '</script>'; 
+			}
+			
 
 	}
 

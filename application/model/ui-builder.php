@@ -348,12 +348,12 @@ class UI_Builder implements Builder {
 								if(!empty($css)){
 									$css = implode(';',$css).';';
 									if(empty($form[$safe_form_key]['attr'])){
-										$form[$safe_form_key]['attr'] = array('style'=>$css);
+										$form[$safe_form_key]['attr'] = array('style'=>esc_attr($css));
 									} else {
 										if(empty($form[$safe_form_key]['attr']['style'])) {
-											$form[$safe_form_key]['attr']['style'] = $css;
+											$form[$safe_form_key]['attr']['style'] = esc_attr($css);
 										} else {
-											$form[$safe_form_key]['attr']['style'].=$css;	
+											$form[$safe_form_key]['attr']['style'].=esc_attr($css);	
 										}									
 									}
 								}
@@ -465,12 +465,12 @@ class UI_Builder implements Builder {
 
 								$css = implode(';',$css).';';
 								if(empty($form[$safe_form_key]['attr'])){								
-									$form[$safe_form_key]['attr'] = array('style'=>$css);
+									$form[$safe_form_key]['attr'] = array('style'=>esc_attr($css));
 								} else {
 									if(empty($form[$safe_form_key]['attr']['style'])) {
-										$form[$safe_form_key]['attr']['style'] = $css;
+										$form[$safe_form_key]['attr']['style'] = esc_attr($css);
 									} else {
-										$form[$safe_form_key]['attr']['style'].=$css;	
+										$form[$safe_form_key]['attr']['style'].=esc_attr($css);	
 									}									
 								}							
 							}

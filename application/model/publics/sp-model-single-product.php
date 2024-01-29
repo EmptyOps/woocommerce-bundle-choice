@@ -126,6 +126,7 @@ class SP_Model_Single_Product extends SP_Single_Product {
 				$bg_hover_color = wbc()->options->get_option('tiny_features','tiny_features_option_ui_bg_color_hover','#DCC7C7');
 
 				ob_start();
+				if(false){
 				?>
 					<style type="text/css">
 						.ui.mini.images .variable-item.image{
@@ -280,6 +281,158 @@ class SP_Model_Single_Product extends SP_Single_Product {
 		        			color: <?php _e($font_hover_color); ?> !important;	
 		        		}
 		        	</style>
+		        	<?php 
+		        	}
+			        	$custom_css = "
+					    .ui.mini.images .variable-item.image {
+					        width: auto;						
+					    }					
+					    .image-variable-item {
+					        border: none !important;
+					        border-bottom: 2px solid transparent !important;
+					    }
+					    body .image-variable-item.selected, .image-variable-item:hover {	        			
+					        box-shadow: none !important;        			
+					        border-bottom: 2px " . __($border_hover_color) . " solid !important;
+					    }
+					    .image_text-variable-item {
+					        border: none !important;
+					    }
+					    .image_text-variable-item:not(.selected) div {
+					        visibility: hidden;
+					    }
+					    .image_text-variable-item:hover div {
+					        visibility: visible;
+					    }
+					    .image_text-variable-item.selected, .image_text-variable-item:hover {	        			
+					        box-shadow: none !important;
+					    }
+					    .woocommerce .summary.entry-summary table.variations tr {
+					        width: auto !important;
+					    }
+					    .rotate-up {
+					        -webkit-animation: spin-up 0.3s linear ;
+					        -moz-animation: spin-up 0.3s linear ;
+					        animation: spin-up 0.3s linear ;
+					        animation-fill-mode: forwards;
+					    }
+					    @-moz-keyframes spin-up { 100% { -moz-transform: rotate(-180deg); } }
+					    @-webkit-keyframes spin-up { 100% { -webkit-transform: rotate(-180deg); } }
+					    @keyframes spin-up { 100% { -webkit-transform: rotate(-180deg); transform: rotate(-180deg); } }
+					    .rotate-down {
+					        -webkit-animation: spin-down 0.3s linear;
+					        -moz-animation: spin-down 0.3s linear;
+					        animation: spin-down 0.3s linear;
+					        animation-fill-mode: forwards;
+					    }
+					    @-moz-keyframes spin-down { 
+					        0% { -moz-transform: rotate(180deg); } 
+					        100% { -moz-transform: rotate(360deg); } 
+					    }
+					    @-webkit-keyframes spin-down { 
+					        0% { -webkit-transform: rotate(180deg); } 
+					        100% { -webkit-transform: rotate(360deg); } 
+					    }
+					    @keyframes spin-down { 
+					        0% { 
+					            -webkit-transform: rotate(180deg); 
+					            transform: rotate(180deg); 
+					        } 					
+					        100% { 
+					            -webkit-transform: rotate(360deg); 
+					            transform: rotate(360deg); 
+					        }
+					    }
+					    #wbc_variation_toggle {
+					        padding: 0.7em;
+					        margin-bottom: 0.7em;
+					        border: 1px solid #5e5c5b;
+					        display: inline-block;
+					        color: #2d2d2d;
+					        font-size: 1rem;
+					        cursor: pointer;
+					        border-radius: 1px !important;
+					    } 
+					    table.variations {
+					        padding: 5px;
+					        border: 1px solid #5e5c5b;
+					    }
+					    table.variations td {
+					        /*display: table-cell !important;*/
+					        border: none !important;
+					    }
+					    table.variations td:first-child {
+					        /*border-right: 1px solid #5e5c5b !important;*/
+					        /*text-align: center;*/
+					    }
+					    .ui.images {
+					        width: 100% !important;
+					        margin: auto !important;
+					        float: none !important;
+					    }
+					    table.variations {
+					        table-layout: auto !important;
+					        margin: inherit !important;
+					    }
+					    table.variations td.label {
+					        display: none !important;
+					    }
+					    table.variations .value {
+					        padding-left: 1rem !important;
+					    }
+					    .variable-items-wrapper {
+					        list-style: none;
+					        display: table-cell !important;	        			
+					    }
+					    .ui.red.ribbon.label {
+					        margin-bottom: 5px !important;
+					    }
+					    .variable-items-wrapper .variable-item div {
+					        margin: auto;
+					        display: block;
+					    }
+					    body .variable-items-wrapper .variable-item {        			
+					        /*display: inline-table;*/
+					        height: " . __($dimention) . " !important;
+					        width: " . __($dimention) . " !important;
+					        min-width: 35px;						
+					        text-align: center;						
+					        line-height: " . __($dimention) . " !important;	        			
+					        cursor: pointer;
+					        margin: 0.25rem;
+					        text-align: center;
+					        border: " . __($border_width) . " solid " . __($border_color) . " !important;
+					        border-radius: " . __($border_radius) . " !important;
+					        overflow: hidden;
+					    }	
+					    body .variable-items-wrapper .variable-item:hover, .variable-items-wrapper .selected {
+					        box-shadow: 0px 0px " . __($border_hover_width) . " " . __($border_hover_color) . " !important;        			
+					        border: 1px " . __($border_hover_color) . " solid !important;
+					    }
+					    ul.variable-items-wrapper {
+					        margin: 0px;
+					    }
+					    body .variable-item-color-fill, .variable-item-span {        			
+					        height: " . __($dimention) . " !important;
+					        width: 100%;
+					        line-height: " . __($dimention) . " !important;
+					    }
+					    .select2, .select3-selection {
+					        display: none !important;
+					    }
+					    body .button-variable-item {
+					        background-color: " . __($bg_color) . " !important;
+					        color: " . __($font_color) . " !important;
+					    }
+					    body .button-variable-item:hover {
+					        background-color: " . __($bg_hover_color) . " !important;
+					        color: " . __($font_hover_color) . " !important;	
+					    }
+						";
+
+						wbc()->load->add_inline_style('', $custom_css, 'common');
+		        	if(false){
+		        	?>
 		        	<script>
 		        		jQuery(document).ready(function($){
 		        			jQuery(".dropdown").dropdown().on('change',function(){
@@ -329,7 +482,58 @@ class SP_Model_Single_Product extends SP_Single_Product {
 		        			
 		        		});
 		        	</script>
-				<?php
+					<?php
+					}
+					$inline_script = 
+					    "jQuery(document).ready(function($){\n" .
+					    "    jQuery(\".dropdown\").dropdown().on('change',function(){\n" .
+					    "        var target_selector =  $('#'+$(this).find('input[type=\"hidden\"]').data('id'));\n" .
+					    "        target_selector.val($(this).find('input[type=\"hidden\"]').val());\n" .
+					    "        /*$(this).parent().find('.selected').removeClass('selected');\n" .
+					    "        $(this).addClass('selected');*/\n" .
+					    "        jQuery(\".variations_form\" ).trigger('check_variations');\n" .
+					    "        $(target_selector).trigger('change');\n" .
+					    "    });\n" .
+					    "    if($('table.variations tbody>tr').length>0){\n" .
+					    "        $('table.variations').addClass('ui raised segment');\n" .
+					    "    }\n" .
+					    "\n" .
+					    "    $('#wbc_variation_toggle').on('click',function(){\n" .
+					    "        if($(this).find('.icon').hasClass('rotate-up')) {\n" .
+					    "            $(this).find('.icon').removeClass('rotate-up');\n" .
+					    "            $(this).find('.icon').addClass('rotate-down');\n" .
+					    "            $('table.variations').slideToggle(\"slow\");\n" .
+					    "        } else {\n" .
+					    "            $(this).find('.icon').removeClass('rotate-down');\n" .
+					    "            $(this).find('.icon').addClass('rotate-up');\n" .
+					    "            $('table.variations').slideToggle(\"slow\");\n" .
+					    "        }\n" .
+					    "    });\n" .
+					    "\n" .
+					    "<?php if(empty(\$init_toggle)): ?>\n" .
+					    "    $('#wbc_variation_toggle').trigger('click');\n" .
+					    "<?php endif; ?>\n" .
+					    "\n" .
+					    "    // ACTIVE_TODO_OC_START\n" .
+					    "    // --    below two click events would be implemented in the core variations js module, in that case it will be remove here\n" .
+					    "    // ACTIVE_TODO_OC_END\n" .
+					    "    $('.variable-item').on('click',function(){\n" .
+					    "        var target_selector = $('#'+$(this).data('id'));\n" .
+					    "        target_selector.val($(this).data('value'));\n" .
+					    "        $(this).parent().find('.selected').removeClass('selected');\n" .
+					    "        $(this).addClass('selected');\n" .
+					    "        jQuery(\".variations_form\" ).trigger('check_variations');\n" .
+					    "        $(target_selector).trigger('change');\n" .
+					    "    });\n" .
+					    "\n" .
+					    "    jQuery(\".variations_form\").on('click', '.reset_variations'/*'woocommerce_variation_select_change'*//*'reset'*/,function(){\n" .
+					    "        jQuery('.variable-items-wrapper .selected').removeClass('selected');\n" .
+					    "        jQuery('.variable-items-wrapper .dropdown').dropdown('restore defaults');\n" .
+					    "    });\n" .
+					    "\n" .
+					    "});\n";
+
+					wbc()->load->add_inline_script('', $inline_script, 'common');
 				echo ob_get_clean();
 
 				if ( ! empty( $toggle_status ) ) {
@@ -349,11 +553,19 @@ class SP_Model_Single_Product extends SP_Single_Product {
 						wbc()->load->asset('css','fomantic/semantic.min');
 						wbc()->load->asset('js','fomantic/semantic.min',array('jquery'));
 						ob_start();
+						if(false){
 						?>	
 							<script>
 								jQuery(".variations_form").before('<span id="wbc_variation_toggle" class="ui raised segment"><?php esc_html_e($toggle_text); ?><i class="caret up icon" style="text-align: center;line-height: 1em;"></i></span>');	
 							</script>
 						<?php
+						}
+						$toggle_text = __($toggle_text); 
+
+						$inline_script = 
+							"jQuery(\".variations_form\").before('<span id=\"wbc_variation_toggle\" class=\"ui raised segment'>".esc_js($toggle_text)."<i class=\"caret up icon\" style=\"text-align: center;line-height: 1em;\"></i></span>');";
+							
+						wbc()->load->add_inline_script( '', $inline_script, 'common' );
 						echo ob_get_clean();
 					}				
 				}
@@ -866,11 +1078,19 @@ class SP_Model_Single_Product extends SP_Single_Product {
 					// wbc()->load->asset('css','fomantic/semantic.min');
 					// wbc()->load->asset('js','fomantic/semantic.min',array('jquery'));
 					ob_start();
+					if(false){
 					?>	
 						<script>
 							jQuery(".variations_form").before('<span id="wbc_variation_toggle" class="ui raised segment"><?php esc_html_e($toggle_text); ?><i class="caret up icon" style="text-align: center;line-height: 1em;"></i></span>');	
 						</script>
 					<?php
+					}
+
+					$toggle_text = esc_js(__($toggle_text));
+
+					$inline_script = 
+					    "jQuery(\".variations_form\").before('<span id=\"wbc_variation_toggle\" class=\"ui raised segment\">".$toggle_text."<i class=\"caret up icon\" style=\"text-align: center;line-height: 1em;\"></i></span>');";
+					wbc()->load->add_inline_script('', $inline_script, 'common');
 					echo ob_get_clean();
 				}				
 			}

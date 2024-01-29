@@ -91,14 +91,14 @@ class Checkout {
                         $product_subtotal = $row_price;
 
                         if ( ! wc_prices_include_tax() && WC()->cart->get_subtotal_tax() > 0 ) {
-                            $product_subtotal .= ' <small class="tax_label">' . WC()->countries->inc_tax_or_vat() . '</small>';
+                            $product_subtotal .= ' <small class="tax_label">' . esc_html(WC()->countries->inc_tax_or_vat()) . '</small>';
                         }
                     } else {
                         $row_price        = wc_get_price_excluding_tax($cart_item['datas']['FIRST'], array( 'qty' => $cart_item['quantities']['FIRST'] ) );
                         $product_subtotal = $row_price;
 
                         if ( wc_prices_include_tax() && WC()->cart->get_subtotal_tax() > 0 ) {
-                            $product_subtotal .= ' <small class="tax_label">' . WC()->countries->ex_tax_or_vat() . '</small>';
+                            $product_subtotal .= ' <small class="tax_label">' . esc_html(WC()->countries->ex_tax_or_vat()) . '</small>';
                         }
                     }
                 } else {
@@ -117,14 +117,14 @@ class Checkout {
                         $product_subtotal = $row_price;
 
                         if ( ! wc_prices_include_tax() && WC()->cart->get_subtotal_tax() > 0 ) {
-                            $product_subtotal .= ' <small class="tax_label">' . WC()->countries->inc_tax_or_vat() . '</small>';
+                            $product_subtotal .= ' <small class="tax_label">' . esc_html(WC()->countries->inc_tax_or_vat()) . '</small>';
                         }
                     } else {
                         $row_price        = wc_get_price_excluding_tax($cart_item['datas']['SECOND'], array( 'qty' => $cart_item['quantities']['SECOND'] ) );
                         $product_subtotal = $row_price;
 
                         if ( wc_prices_include_tax() && WC()->cart->get_subtotal_tax() > 0 ) {
-                            $product_subtotal .= ' <small class="tax_label">' . WC()->countries->ex_tax_or_vat() . '</small>';
+                            $product_subtotal .= ' <small class="tax_label">' . esc_html(WC()->countries->ex_tax_or_vat()) . '</small>';
                         }
                     }
                 } else {

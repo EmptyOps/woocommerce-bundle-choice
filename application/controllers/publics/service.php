@@ -34,7 +34,7 @@ class Service {
 
                 $product_attributes[ 'attribute__certificate_link' ] = array(
                     'label' => 'Certificate',
-                    'value' => "<a href='${_certificate_link}' target='_blank'>".esc_html__('Click here','woo-bundle-choice')."</a>",
+                    'value' => "<a href='".esc_url($_certificate_link)."' target='_blank'>".esc_html__('Click here','woo-bundle-choice')."</a>",
                 );
             }
 
@@ -253,15 +253,33 @@ class Service {
 	public function enque_asset() {		
 		add_action( 'wp_enqueue_scripts',function(){
             ob_start();
-            ?>
-            <script type="text/javascript">
-                filter_obj = Object();
-                filter_obj.ajaxurl ='<?php echo admin_url('admin-ajax.php'); ?>';
-                filter_obj.cat_url ='<?php echo get_option("siteurl")."/index.php/".wbc()->wc->wc_permalink('category_base')."/"; ?>';          
-                filter_obj.shop_url = '<?php echo get_option("siteurl")."/index.php/shop/"; ?>';         
-                filter_obj.not_required_all_select = true;            
-            </script>       
-            <?php
+            if(false){
+                ?>
+                <script type="text/javascript">
+                    filter_obj = Object();
+                    filter_obj.ajaxurl ='<?php echo admin_url('admin-ajax.php'); ?>';
+                    filter_obj.cat_url ='<?php echo get_option("siteurl")."/index.php/".wbc()->wc->wc_permalink('category_base')."/"; ?>';          
+                    filter_obj.shop_url = '<?php echo get_option("siteurl")."/index.php/shop/"; ?>';         
+                    filter_obj.not_required_all_select = true;            
+                </script>       
+                <?php
+            }
+
+            $ajaxurl = admin_url('admin-ajax.php');
+            $cat_url = get_option("siteurl") . "/index.php/" . wbc()->wc->wc_permalink('category_base') . "/";
+            $shop_url = get_option("siteurl") . "/index.php/shop/";
+            $not_required_all_select_true = "true";
+
+            $inline_script = "
+                    filter_obj = Object();
+                    filter_obj.ajaxurl = '$ajaxurl';
+                    filter_obj.cat_url = '$cat_url';          
+                    filter_obj.shop_url = '$shop_url';         
+                    filter_obj.not_required_all_select = $not_required_all_select_true;            
+
+            ";
+            wbc()->load->add_inline_script('', $inline_script, 'common');           
+
             echo ob_get_clean();
 			wbc()->load->asset('js','shortcode-filter');		
 		}, 10, 1 );
