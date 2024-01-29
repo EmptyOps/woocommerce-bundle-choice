@@ -85,7 +85,6 @@ if(isset($_GET['FIRST']) and isset($_GET['SECOND'])) {
                     }); 
                 </script>";
         echo $html;
-    <?php
     } 
     $inline_script =
         "jQuery(document).ready(function(){ jQuery('.onclick_redirect').on('click',function(){ \n" .

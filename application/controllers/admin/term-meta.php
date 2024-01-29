@@ -490,7 +490,7 @@ class Term_Meta {
 					});		
 				</script>
 				<?php
-				{
+				}
 				$inline_script =
 				    "jQuery(document).on(\"click\",\".wbc_attachment_thumb_button\",function(){\n" .
 				    "    wp_media = wp.media({\n" .

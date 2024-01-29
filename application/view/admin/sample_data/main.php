@@ -521,6 +521,7 @@ box-shadow: none;">
 		</script>
 	<?php 
 	} 
+	$admin_url = admin_url('admin-ajax.php');
 	$eo_wbc_max_products = $sample_data_obj->get_model()->get_product_size();
 	$feature_key = __($feature_key);
 	$apply_filters_eowbc_product_sample_data_resolver_path = apply_filters('eowbc_product_sample_data_resolver_path','');
@@ -574,5 +575,5 @@ box-shadow: none;">
 		"\n" .
 		"});";
 		wbc()->load->add_inline_script('', $inline_script, 'common-admin');
-	?>
+} ?>
 <?php //EO_WBC_Head_Banner::get_footer_line(); ?>
