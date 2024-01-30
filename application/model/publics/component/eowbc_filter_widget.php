@@ -508,7 +508,7 @@ class EOWBC_Filter_Widget {
 					"        }\n" .
 					"    }\n" .
 					"    \n" .
-					"    $('.eo_wbc_filter_icon').click(function(){\n" .
+					"    \$('.eo_wbc_filter_icon').click(function(){\n" .
 					"        jQuery.fn.wbc_flip_toggle_image(this);\n" .
 					"    });\n" .
 					"});\n";
@@ -918,14 +918,14 @@ class EOWBC_Filter_Widget {
 				<?php
 				}
 					$inline_script =
-					"jQuery(document).ready(function($){\n" .
-					"    $('.eo-wbc-container.filters.container .ui.accordion .title').click(function(){\n" .
-					"        let _icon = $(this).find('i.icon:not(.question)');\n" .
+					"jQuery(document).ready(function(\$){\n" .
+					"    \$('.eo-wbc-container.filters.container .ui.accordion .title').click(function(){\n" .
+					"        let _icon = \$(this).find('i.icon:not(.question)');\n" .
 					"        if($(_icon).hasClass('plus')){\n" .
-					"            $('.eo-wbc-container.filters.container .ui.accordion .title').find('i.icon.minus').toggleClass('plus minus');\n" .
-					"            $(_icon).toggleClass('plus minus');\n" .
+					"            \$('.eo-wbc-container.filters.container .ui.accordion .title').find('i.icon.minus').toggleClass('plus minus');\n" .
+					"            \$(_icon).toggleClass('plus minus');\n" .
 					"        } else {\n" .
-					"            $(_icon).toggleClass('plus minus');\n" .
+					"            \$(_icon).toggleClass('plus minus');\n" .
 					"        }\n" .
 					"    });\n" .
 					"});\n";
@@ -2958,7 +2958,7 @@ class EOWBC_Filter_Widget {
 		else:
 			wbc()->load->template('publics/filters/icon_mobile', array("term"=>$term,"title"=>$title,"list"=>$list,"icon_css"=>$icon_css,"reset"=>$reset,"input"=>$input,"type"=>$type,"non_edit"=>$non_edit,'hidden'=>$hidden,'is_single_select'=>$is_single_select,'tab_set'=>$tab_set,'help'=>$help,'filter_ui'=>$this));
 		endif;
-		if(false){
+		if(false) {
 		?>					
 		<script type="text/javascript">
 			jQuery(document).ready(function($){
@@ -3082,120 +3082,43 @@ class EOWBC_Filter_Widget {
 		</script>
 		<?php
 		}
-			$inline_script =
-			"jQuery(document).ready(function($){\n" .
-			"    console.log('EO_WBC_FILTER_UI_ICON_TERM_SLUG');\n" .
-			"    console.log(EO_WBC_FILTER_UI_ICON_TERM_SLUG);\n" .
-			"    EO_WBC_FILTER_UI_ICON_TERM_SLUG.push(\"<?php echo \$term->slug; ?>\");\n" .
-			"    \n" .
-			"    if(\"<?php echo \$term->slug; ?>\") {\n" .
-			"        /*__data_filter_slug=\"<?php echo \$term->slug; ?>\";*/\n" .
-			"        /*if(__data_filter_slug){*/\n" .
-			"        \n" .
-			"        // --- aa code woo-bundle-choice/asset/js/publics/eo_wbc_filter.js input_type_icon_click() ma move karyo se ---\n" .
-			"        // --- start ---\n" .
-			"        // //TO BE FIXED LATER.\n" .
-			"        // /*jQuery('[data-filter=\"'+__data_filter_slug+'\"]:not(.none_editable)').off();\n" .
-			"        // jQuery('[data-filter=\"'+__data_filter_slug+'\"]:not(.none_editable)').on('click',function(e){*/\n" .
-			"        let filter_container = jQuery('form#<?php echo \$this->filter_prefix; ?>eo_wbc_filter').parents().has('[data-filter=\"<?php echo \$term->slug; ?>\"]').get(0);\n" .
-			"        \n" .
-			"        jQuery(filter_container).find('[data-filter=\"' + \"<?php /*echo \$term->slug;*/ ?>\" + '\"]:not(.none_editable)').off();\n" .
-			"        \n" .
-			"        jQuery(filter_container).find('[data-filter=\"' + \"<?php /*echo \$term->slug;*/ ?>\" + '\"]:not(.none_editable)').on('click',function(e){\n" .
-			"            event = e;\n" .
-			"            \n" .
-			"            e.stopPropagation();\n" .
-			"            e.preventDefault();\n" .
-			"            \n" .
-			"            var icon_filter_type = jQuery(this).attr('data-type');\n" .
-			"            var filter_name = jQuery(this).attr('data-filter');\n" .
-			"            \n" .
-			"            var filter_list= undefined;\n" .
-			"            var filter_target = undefined;\n" .
-			"            \n" .
-			"            if(icon_filter_type == 1) {\n" .
-			"                /*filter_list = jQuery('[name=\"checklist_' + __data_filter_slug + '\"]');*/\n" .
-			"                filter_list = jQuery('form#<?php /*echo \$this->filter_prefix;*/ ?>eo_wbc_filter [name=\"checklist_\" + \"<?php /*echo \$term->slug;*/ ?>\" + '\"]');\n" .
-			"                filter_target = jQuery('form#<?php /*echo \$this->filter_prefix;*/ ?>eo_wbc_filter [name=\"_attribute\"]');\n" .
-			"            } else {\n" .
-			"                /*filter_list = jQuery('[name=\"cat_filter_' + __data_filter_slug + '\"]');*/\n" .
-			"                filter_list = jQuery('form#<?php /*echo \$this->filter_prefix;*/ ?>eo_wbc_filter [name=\"cat_filter_\" + \"<?php /*echo \$term->slug;*/ ?>\" + '\"]');\n" .
-			"                filter_target = jQuery('form#<?php /*echo \$this->filter_prefix;*/ ?>eo_wbc_filter [name=\"_category\"]');\n" .
-			"            }\n" .
-			"            \n" .
-			"            let is_single_select = jQuery(this).data('single_select');\n" .
-			"            if(typeof(is_single_select) !== typeof(undefined) && is_single_select == 1) {\n" .
-			"                jQuery('form#<?php /*echo \$this->filter_prefix;*/ ?>eo_wbc_filter [data-filter=\"' + \"<?php /*echo \$term->slug;*/ ?>\" + '\"]:not(.none_editable)').removeClass('eo_wbc_filter_icon_select');\n" .
-			"                let toggleable_selections = jQuery('form#<?php /*echo \$this->filter_prefix;*/ ?>eo_wbc_filter .toggled_image[data-filter=\"' + \"<?php /*echo \$term->slug;*/ ?>\" + '\"]:not(.none_editable)');\n" .
-			"                console.log(toggleable_selections);\n" .
-			"                if(typeof(toggleable_selections) !== typeof(undefined) && toggleable_selections.length > 0) {\n" .
-			"                    jQuery.fn.wbc_flip_toggle_image(toggleable_selections[0]);\n" .
-			"                }\n" .
-			"                filter_list.val(jQuery(this).attr(\"data-slug\"));\n" .
-			"            } else {\n" .
-			"                \n" .
-			"                if(filter_list.val().includes(jQuery(this).attr('data-slug'))){\n" .
-			"                    \n" .
-			"                    let filter_list_items = filter_list.val().split(',');\n" .
-			"                    let this_slug = jQuery(this).attr('data-slug').trim();\n" .
-			"                    \n" .
-			"                    if(filter_list_items.includes(this_slug)) {\n" .
-			"                        filter_list_items.splice(filter_list_items.indexOf(this_slug), 1);\n" .
-			"                    }\n" .
-			"                    \n" .
-			"                    filter_list.val(filter_list_items.join(','));\n" .
-			"                }\n" .
-			"                else {\n" .
-			"                    filter_list.val(filter_list.val() + ',' + jQuery(this).attr(\"data-slug\"));\n" .
-			"                }\n" .
-			"            }\n" .
-			"            \n" .
-			"            if(filter_target.val().includes(filter_name) && filter_list.val().length == 0) {\n" .
-			"                filter_target.val(filter_target.val().replace(',' + filter_name, ''));\n" .
-			"            } else {\n" .
-			"                if((!filter_target.val().includes(filter_name)) && filter_list.val().length) {\n" .
-			"                    filter_target.val(filter_target.val() + ',' + filter_name);\n" .
-			"                }\n" .
-			"            }\n" .
-			"            \n" .
-			"            var icon_val = jQuery(filter_list).val();\n" .
-			"            jQuery(filter_list).val(icon_val.substr(0, icon_val.length));\n" .
-			"            \n" .
-			"            jQuery(this).toggleClass('eo_wbc_filter_icon_select');\n" .
-			"            $('[name=\"paged\"]').val('1');\n" .
-			"            \n" .
-			"            //////// 27-05-2022 - @drashti /////////\n" .
-			"            // --add to be confirmed--\n" .
-			"            window.document.splugins.wbc.filters.api.eo_wbc_filter_change_wrapper(false, 'form#<?php /*echo \$this->filter_prefix;*/ ?>eo_wbc_filter', '', {'this': this, 'event': event});\n" .
-			"            // jQuery.fn.eo_wbc_filter_change(false, 'form#<?php /*echo \$this->filter_prefix;*/ ?>eo_wbc_filter', '', {'this': this, 'event': event});\n" .
-			"            //////////////////////////////////////////\n" .
-			"        });\n" .
-			"        // --- end ---\n" .
-			"        \n" .
-			"        // window.document.splugins.wbc.filters.api.input_type_icon_click();\n" .
-			"        \n" .
-			"        jQuery(\".eo_wbc_srch_btn:eq(2)\").on('reset', function() {\n" .
-			"            var icon_filter_type = \"<?php echo \$type; ?>\";\n" .
-			"            var filter_list= undefined;\n" .
-			"            if(icon_filter_type == 1) {\n" .
-			"                /*filter_list = jQuery('[name=\"checklist_' + __data_filter_slug + '\"]');*/\n" .
-			"                filter_list = jQuery('form#<?php /*echo \$this->filter_prefix;*/ ?>eo_wbc_filter [name=\"checklist_\" + \"<?php /*echo \$term->slug;*/ ?>\" + '\"]');\n" .
-			"            } else {\n" .
-			"                /*filter_list = jQuery('[name=\"cat_filter_' + __data_filter_slug + '\"]');*/\n" .
-			"                filter_list = jQuery('form#<?php /*echo \$this->filter_prefix;*/ ?>eo_wbc_filter [name=\"cat_filter_\" + \"<?php /*echo \$term->slug;*/ ?>\" + '\"]');\n" .
-			"            }\n" .
-			"            \n" .
-			"            if(jQuery(filter_list).attr('data-edit') == '1') {\n" .
-			"                jQuery(filter_list).val(\"\");\n" .
-			"                \n" .
-			"                jQuery(\"form#<?php echo \$this->filter_prefix; ?>eo_wbc_filter .eo_wbc_filter_icon_select\").each(function(index,element){\n" .
-			"                    jQuery(element).removeClass(\"eo_wbc_filter_icon_select\");\n" .
-			"                });\n" .
-			"            }\n" .
-			"        });\n" .
-			"    }\n" .
-			"});";
-			wbc()->load->add_inline_script('', $inline_script, 'common');
+		$term_slug = $term->slug;
+
+		$inline_script = 
+		    "jQuery(document).ready(function($){\n" .
+		    "    console.log('EO_WBC_FILTER_UI_ICON_TERM_SLUG');\n" .
+		    "    console.log(EO_WBC_FILTER_UI_ICON_TERM_SLUG);\n" .
+		    "    EO_WBC_FILTER_UI_ICON_TERM_SLUG.push(\"$term_slug\");\n" .
+		    "\n" .
+		    "    /*__data_filter_slug=\"$term_slug\";*/\n" .
+		    "    /*if(__data_filter_slug){*/\n" .
+		    "    if(\"$term_slug\") \n" .
+		    "\n" .
+		    "        // window.document.splugins.wbc.filters.api.input_type_icon_click();\n" .
+		    "\n" .
+		    "        jQuery(\".eo_wbc_srch_btn:eq(2)\").on('reset',function(){\n" .
+		    "            var icon_filter_type = \"$type\";\n" .
+		    "            var filter_list= undefined;\n" .
+		    "            if(icon_filter_type == 1) {\n" .
+		    "                /*filter_list = jQuery('[name=\"checklist_'+__data_filter_slug+'\"]');*/\n" .
+		    "                filter_list = jQuery('form#{$this->filter_prefix}eo_wbc_filter [name=\"checklist_'+'$term_slug'+'\"]');\n" .
+		    "            } else {\n" .
+		    "                /*filter_list = jQuery('[name=\"cat_filter_'+__data_filter_slug+'\"]');*/\n" .
+		    "                filter_list = jQuery('form#{$this->filter_prefix}eo_wbc_filter [name=\"cat_filter_'+'$term_slug'+'\"]');\n" .
+		    "            }\n" .
+		    "\n" .
+		    "            if(jQuery(filter_list).attr('data-edit')=='1') {\n" .
+		    "                jQuery(filter_list).val(\"\");\n" .
+		    "\n" .
+		    "                jQuery(\"form#{$this->filter_prefix}eo_wbc_filter .eo_wbc_filter_icon_select\").each(function(index,element){\n" .
+		    "                    jQuery(element).removeClass(\"eo_wbc_filter_icon_select\");\n" .
+		    "                });\n" .
+		    "            }               \n" .
+		    "        });\n" .
+		    "    }               \n" .
+		    "});\n";
+		wbc()->load->add_inline_script('', $inline_script, 'common');
+
 		do_action('eowbc_after_icon_filter_widget',$this,$__prefix,$item);
 
 		if(!empty($sitepress)) {
