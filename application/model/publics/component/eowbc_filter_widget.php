@@ -2203,59 +2203,7 @@ class EOWBC_Filter_Widget {
 		    "jQuery(document).ready(function(\$){\n" .
 		    "    // --- aa code woo-bundle-choice/asset/js/publics/eo_wbc_filter.js input_type_button_click(); ma move karyo se @a---\n" .
 		    "    // --- start ---\n" .
-		    "    // $('[data-filter-slug=\"<?php /*echo \$filter['slug']; */?>\"]').on('click',function(event){\n" .
-		    "\n" .
-		    "        <?php/* if(\$filter_type==1):*/ ?>\n" .
-		    "    //         let filter_target = jQuery('form#<?php /*echo \$this->filter_prefix; */?>eo_wbc_filter [name=\"_attribute\"]');\n" .
-		    "    //     <?php /*else:*/ ?>\n" .
-		    "    //         let filter_target = jQuery('form#<?php /*echo \$this->filter_prefix; */?>eo_wbc_filter [name=\"_category\"]');\n" .
-		    "    //     <?php /*endif;*/?>\n" .
-		    "        \n" .
-		    "    //     let filter_name = jQuery(this).attr('data-filter-slug');\n" .
-		    "\n" .
-		    "    //     if(\$(this).hasClass('eo_wbc_button_selected')){\n" .
-		    "    //         \$(this).removeClass('eo_wbc_button_selected');\n" .
-		    "    //         let old_val = \$(\"form#<?php //echo \$this->filter_prefix; ?>eo_wbc_filter  #checklist_<?php //echo \$filter['slug']; ?>\").val();\n" .
-		    "    //         old_val = old_val.split(',');\n" .
-		    "    //         if(old_val.indexOf(\$(this).data('slug'))!=-1){\n" .
-		    "    //             let _slug = \$(this).data('slug');\n" .
-		    "    //             old_val = old_val.filter(function(item){\n" .
-		    "    //                 return item==_slug?false:true;\n" .
-		    "    //             });\n" .
-		    "    //             new_val = old_val.join();\n" .
-		    "                // \$(\"form#<?php /*echo \$this->filter_prefix; ?>eo_wbc_filter  #checklist_<?php echo \$filter['slug'];*/ ?>\").val(new_val);\n" .
-		    "    //         }\n" .
-		    "\n" .
-		    "    //     } else {\n" .
-		    "    //         \$(this).addClass('eo_wbc_button_selected');\n" .
-		    "            // let old_val = \$(\"form#<?php /*echo \$this->filter_prefix; ?>eo_wbc_filter  #checklist_<?php echo \$filter['slug'];*/ ?>\").val();\n" .
-		    "    //         old_val = old_val.split(',');\n" .
-		    "    //         if(old_val.indexOf(\$(this).data('slug'))==-1){\n" .
-		    "    //             let _slug = \$(this).data('slug');\n" .
-		    "    //             old_val.push(_slug);\n" .
-		    "    //             new_val = old_val.join();\n" .
-		    "                // \$(\"form#<?php /*echo \$this->filter_prefix;*/ ?>eo_wbc_filter  #checklist_<?php /*echo \$filter['slug'];*/ ?>\").val(new_val);\n" .
-		    "    //         }\n" .
-		    "    //     }\n" .
-		    "\n" .
-		    "        // if(filter_target.val().includes(filter_name) && \$(\"form#<?php /*echo \$this->filter_prefix;*/ ?>eo_wbc_filter  #checklist_<?php /*echo \$filter['slug'];*/ ?>\").val().length==0) {\n" .
-		    "        //     filter_target.val(filter_target.val().replace(','+filter_name,''));\n" .
-		    "        // } else { if((!filter_target.val().includes(filter_name)) && \$(\"form#<?php /*echo \$this->filter_prefix;*/ ?>eo_wbc_filter #checklist_<?php /*echo \$filter['slug'];*/ ?>\").val().length) {\n" .
-		    "        //     filter_target.val(filter_target.val()+','+filter_name);    \n" .
-		    "        // } }\n" .
-		    "\n" .
-		    "        <?php /*if(empty(wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','filter_setting_btnfilter_now'))):*/ ?>\n" .
-		    "\n" .
-		    "    //         //////// 27-05-2022 - @drashti /////////\n" .
-		    "    //         // --add to be confirmed--\n" .
-		    "            // window.document.splugins.wbc.filters.api.eo_wbc_filter_change_wrapper(false,'form#<?php /*echo \$this->filter_prefix;*/ ?>eo_wbc_filter','',{'this':this,'event':event});\n" .
-		    "    //         // jQuery.fn.eo_wbc_filter_change(false,'form#<?php /*echo \$this->filter_prefix;*/ ?>eo_wbc_filter','',{'this':this,'event':event});\n" .
-		    "    //         ////////////////////////////////////////\n" .
-		    "        <?php /*endif;*/ ?>\n" .
-		    "    // });\n" .
-		    "    // --- end ---\n" .
-		    "\n" .
-		    "    // window.document.splugins.wbc.filters.api.input_type_button_click(event);\n" .
+		    "    // commented code uper if false ma or backup file ma jova malse\n" .
 		    "});\n";
     
 		wbc()->load->add_inline_script('', $inline_script, 'common');
@@ -2728,7 +2676,7 @@ class EOWBC_Filter_Widget {
 			"var EO_WBC_FILTER_UI_ICON_TERM_SLUG = [];\n" .
 			"\n" .
 			"// console.log('EO_WBC_FILTER_UI_ICON_TERM_SLUG empty');\n" .
-			"// console.log(EO_WBC_FILTER_UI_ICON_TERM_SLUG);\n";
+			"// console.log(EO_WBC_FILTER_UI_ICON_TERM_SLUG);\n\n";
 
 			wbc()->load->add_inline_script('', $inline_script, 'common');
 		}
@@ -3083,34 +3031,34 @@ class EOWBC_Filter_Widget {
 		<?php
 		}
 		$term_slug = $term->slug;
+		$this_filter_prefix = $this->filter_prefix;
 
 		$inline_script = 
-		    "jQuery(document).ready(function($){\n" .
+		    "jQuery(document).ready(function(\$){\n" .
 		    "    console.log('EO_WBC_FILTER_UI_ICON_TERM_SLUG');\n" .
 		    "    console.log(EO_WBC_FILTER_UI_ICON_TERM_SLUG);\n" .
 		    "    EO_WBC_FILTER_UI_ICON_TERM_SLUG.push(\"$term_slug\");\n" .
 		    "\n" .
-		    "    /*__data_filter_slug=\"$term_slug\";*/\n" .
-		    "    /*if(__data_filter_slug){*/\n" .
-		    "    if(\"$term_slug\") \n" .
+		    "    // commented code uper if false ma or backup file ma jova malse\n" .
+		    "    if(\"$term_slug\") { \n" .
 		    "\n" .
 		    "        // window.document.splugins.wbc.filters.api.input_type_icon_click();\n" .
 		    "\n" .
 		    "        jQuery(\".eo_wbc_srch_btn:eq(2)\").on('reset',function(){\n" .
-		    "            var icon_filter_type = \"$type\";\n" .
+		    "            var icon_filter_type = \"".$type."\";\n" .
 		    "            var filter_list= undefined;\n" .
 		    "            if(icon_filter_type == 1) {\n" .
 		    "                /*filter_list = jQuery('[name=\"checklist_'+__data_filter_slug+'\"]');*/\n" .
 		    "                filter_list = jQuery('form#{$this->filter_prefix}eo_wbc_filter [name=\"checklist_'+'$term_slug'+'\"]');\n" .
 		    "            } else {\n" .
 		    "                /*filter_list = jQuery('[name=\"cat_filter_'+__data_filter_slug+'\"]');*/\n" .
-		    "                filter_list = jQuery('form#{$this->filter_prefix}eo_wbc_filter [name=\"cat_filter_'+'$term_slug'+'\"]');\n" .
+		    "                filter_list = jQuery('form#{$this->filter_prefix}eo_wbc_filter [name=\"cat_filter_'+'".$term_slug."'+'\"]');\n" .
 		    "            }\n" .
 		    "\n" .
 		    "            if(jQuery(filter_list).attr('data-edit')=='1') {\n" .
 		    "                jQuery(filter_list).val(\"\");\n" .
 		    "\n" .
-		    "                jQuery(\"form#{$this->filter_prefix}eo_wbc_filter .eo_wbc_filter_icon_select\").each(function(index,element){\n" .
+		    "                jQuery(\"form#".$this_filter_prefix."eo_wbc_filter .eo_wbc_filter_icon_select\").each(function(index,element){\n" .
 		    "                    jQuery(element).removeClass(\"eo_wbc_filter_icon_select\");\n" .
 		    "                });\n" .
 		    "            }               \n" .
@@ -3325,9 +3273,10 @@ class EOWBC_Filter_Widget {
 		</script>
 		<?php
 		}
+		$json_encode_data = json_encode($data);
 		$inline_script =
 		"// console.log('eo_wbc_object');\n" .
-		"var eo_wbc_object = JSON.parse('<?php echo json_encode(\$data); ?>');\n" .
+		"var eo_wbc_object = JSON.parse('".$json_encode_data."');\n" .
 		"// console.log(eo_wbc_object);\n";
 
 		wbc()->load->add_inline_script('', $inline_script, 'common');
@@ -3559,14 +3508,14 @@ class EOWBC_Filter_Widget {
 		}
 			$inline_script =
 			"jQuery(document).ready(function(){\n" .
-			"    jQuery(document).on('click', '.question.circle.icon', function(){\n" .
-			"        jQuery('#help_modal').find('.content').html('');\n" .
+			"    jQuery(document).on('click', \".question.circle.icon\", function(){\n" .
+			"        jQuery(\"#help_modal\").find(\".content\").html('');\n" .
 			"        _help_text = jQuery(this).data('help');\n" .
-			"        jQuery('#help_modal').find('.content').html(_help_text);\n" .
-			"        jQuery('#help_modal').modal('show');\n" .
+			"        jQuery(\"#help_modal\").find(\".content\").html(_help_text);\n" .
+			"        jQuery(\"#help_modal\").modal('show');\n" .
 			"    });\n" .
-			"    jQuery(document).on('click', '#help_modal .close.icon', function(){\n" .
-			"        jQuery('#help_modal').modal('hide');\n" .
+			"    jQuery(document).on('click', \"#help_modal .close.icon\", function(){\n" .
+			"        jQuery(\"#help_modal\").modal('hide');\n" .
 			"    });\n" .
 			"});";
 
