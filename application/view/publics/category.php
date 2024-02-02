@@ -242,30 +242,30 @@ if (false) {
     </script>
 <?php
 }
-$inline_script =
-    '<script>' .
-    '    $ = jQuery;' .
-    '    // supposed to be used inside wo_wbc_filter.js' .
-    '    var is_card_view_rendered = true;' .
-    '    /**' .
-    '     * ' .
-    '     */' .
-    '    function wbc_attach_card_views() {' .
-    '        jQuery(".products,.product-listing,.row-inner>.col-lg-9:eq(0)").html(jQuery(".eo_wbc_hidden_data").html());' .
-    '        jQuery(\'.special.cards .image\').dimmer({on:\'hover\',duration:{ show : 0, hide : 0 }});' .
-    '        jQuery(\'.button[data-link]\').on(\'click\',function(e){' .
-    '            e.preventDefault();' .
-    '            e.stopPropagation();' .
-    '            window.location.href=$(this).attr(\'data-link\');' .
-    '        });' .
-    '    }' .
-    '    jQuery(document).ready(function($){' .
-    '        //code moved to a function wbc_attach_card_views above so that it can be called after ajax search' .
-    '        wbc_attach_card_views();' .
-    '    });' .
-    '</script>';
+$inline_script = 
+    "$ = jQuery;\n" .
+    "\n" .
+    "// supposed to be used inside wo_wbc_filter.js\n" .
+    "var is_card_view_rendered = true;\n" .
+    "\n" .
+    "/**\n" .
+    " *\n" .
+    " */\n" .
+    "function wbc_attach_card_views() { \n" .
+    "    jQuery(\".products,.product-listing,.row-inner>.col-lg-9:eq(0)\").html(jQuery(\".eo_wbc_hidden_data\").html());\n" .
+    "    jQuery('.special.cards .image').dimmer({on:'hover',duration:{ show : 0, hide : 0 }});\n" .
+    "    jQuery('.button[data-link]').on('click',function(e){\n" .
+    "        e.preventDefault();\n" .
+    "        e.stopPropagation();\n" .
+    "        window.location.href=$(this).attr('data-link');\n" .
+    "    });\n" .
+    "}\n" .
+    "\n" .
+    "jQuery(document).ready(function($){\n" .
+    "    //code moved to a function wbc_attach_card_views above so that it can be called after ajax search\n" .
+    "    wbc_attach_card_views();\n" .
+    "});\n";
 
-// Assuming wbc() is the object/method to add inline script
 wbc()->load->add_inline_script('', $inline_script, 'common');
 
 ?>                   
