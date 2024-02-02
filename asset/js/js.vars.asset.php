@@ -4053,7 +4053,9 @@ add_action('wp_footer',function(){
 
 	wbc()->load->add_inline_script( '', $inline_script, 'common' );
 
-}, PHP_INT_MAX);
+/*}, PHP_INT_MAX);*/
+// -- aya priority PHP_INT_MAX hoy to under nu add_inline_script function work notu kartu @a 02-02-2024
+}, 10);
 
 
 ?>
