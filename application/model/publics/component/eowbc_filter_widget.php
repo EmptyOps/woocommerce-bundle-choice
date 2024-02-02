@@ -3115,7 +3115,7 @@ class EOWBC_Filter_Widget {
 			"            \n" .
 			"            if(icon_filter_type == 1) {\n" .
 			"                /*filter_list = jQuery('[name=\"checklist_' + __data_filter_slug + '\"]');*/\n" .
-			"                filter_list = jQuery('form#<?php /*echo \$this->filter_prefix;*/ ?>eo_wbc_filter [name=\"checklist_\" + \"<?php /*echo \$term->slug;*/ ?>\" ]');\n" .
+			"                filter_list = jQuery('form#<?php /*echo \$this->filter_prefix;*/ ?>eo_wbc_filter [name=\"checklist_\" + \"<?php /*echo \$term->slug;*/ ?>\" + '\"]');\n" .
 			"                filter_target = jQuery('form#<?php /*echo \$this->filter_prefix;*/ ?>eo_wbc_filter [name=\"_attribute\"]');\n" .
 			"            } else {\n" .
 			"                /*filter_list = jQuery('[name=\"cat_filter_' + __data_filter_slug + '\"]');*/\n" .
