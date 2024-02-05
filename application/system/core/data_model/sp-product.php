@@ -95,7 +95,10 @@ class SP_Product extends SP_Entity {
 
 			$product_id = wc_get_product_id_by_sku(trim($data['sku']['value']));
 
-			$product_obj = wc_get_product($product_id);
+			if (!empty($product_id)) {
+				
+				$product_obj = wc_get_product($product_id);
+			}
 
 		}
 
@@ -110,10 +113,10 @@ class SP_Product extends SP_Entity {
 
 			if($data['type']['value'] == 'simple') {
 
-				$product_obj = new WC_Product_Simple();
+				$product_obj = new \WC_Product_Simple();
 			} else {
 
-				$product_obj = new WC_Product_Variable();
+				$product_obj = new \WC_Product_Variable();
 			}
 
 			$product_obj->set_stock_quantity(1);

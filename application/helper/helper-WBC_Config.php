@@ -27,7 +27,7 @@ class WBC_Config {
 		 		array( 'type'=>'file', 'path'=> constant('EOWBC_DIRECTORY')."/application/controllers/admin/legacy_admin/legacy-admin.php" ),
 
 		 		
-		 		array( 'type'=>'file', 'path'=> constant('EOWBC_DIRECTORY')."/application\model\publics\data_model\sp-wbc-attribute.php" ), 
+		 		array( 'type'=>'file', 'path'=> constant('EOWBC_DIRECTORY')."/application/model/publics/data_model/sp-wbc-attribute.php" ), 
 
 			), 
 			'frontend'=> array(
