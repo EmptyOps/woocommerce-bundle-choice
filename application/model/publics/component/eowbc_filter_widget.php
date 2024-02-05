@@ -1676,7 +1676,22 @@ class EOWBC_Filter_Widget {
 	}
 
 	public function input_button($__prefix,$item/*$id,$title,$filter_type,$desktop = 1, $width = '50',$reset = 0,$help='',$advance = 0*/) {
-	
+
+		if(!defined('EO_WBC_FILTER_INPUT_BUTTON_CALLED')){
+			define('EO_WBC_FILTER_INPUT_BUTTON_CALLED',true);
+			
+			?>
+
+			<script type="text/javascript">
+				
+				var EO_WBC_FILTER_INPUT_BUTTON_FILTER_SLUG = [];
+
+			</script>
+
+			<?php
+
+		}
+			
 		extract($item);
 		$tab_set = (!empty( $item[$__prefix.'_fconfig_set'] )?$item[$__prefix.'_fconfig_set']:'');
 		$id = $name;
@@ -1720,7 +1735,7 @@ class EOWBC_Filter_Widget {
 
 			} elseif ((in_array($item['filter_template'],array('sc3','sc5')) and $this->_category==$this->second_category_slug) or (in_array($item['filter_template'],array('fc3','fc5')) and $this->_category==$this->first_category_slug)) {
 				
-				wbc()->load->template('publics/filters/button_desktop_3', array("width_class"=>$this->get_width_class($width),"filter"=>$filter,"reset"=>$reset,'help'=>$help,'tab_set'=>$tab_set,'filter_ui'=>$this));
+				wbc()->load->template('publics/filters/button_desktop_3', array("width_class"=>$this->get_width_class($width),"filter"=>$filter,"reset"=>$reset,'help'=>$help,'tab_set'=>$tab_set,'filter_ui'=>$this,'type'=>$type));
 
 			} else {
 			
@@ -1741,11 +1756,16 @@ class EOWBC_Filter_Widget {
 			
 			wbc()->load->template('publics/filters/button_mobile', array("filter"=>$filter,"reset"=>$reset,'tab_set'=>$tab_set,'help'=>$help,'filter_ui'=>$this)); 
 		endif;
-		
-		if(false){
-		?>
+	
+		?>			
 			<script type="text/javascript">
 				jQuery(document).ready(function($){
+					
+					EO_WBC_FILTER_INPUT_BUTTON_FILTER_SLUG.push("<?php echo $filter['slug']; ?>");
+					<?php
+					if(false){
+					?>
+
 					// --- aa code woo-bundle-choice/asset/js/publics/eo_wbc_filter.js input_type_button_click(); ma move karyo se @a---
 					// --- start ---
 					// $('[data-filter-slug="<?php /*echo $filter['slug']; */?>"]').on('click',function(event){
@@ -1801,10 +1821,10 @@ class EOWBC_Filter_Widget {
 					// --- end ---
 
 					// window.document.splugins.wbc.filters.api.input_type_button_click(event);
+					<?php } ?>
 				});
 			</script>
 		<?php
-		}
 	}
 
 	public function slider_price($desktop=1,$width='50', $reset = 1,$help='',$advance = 0,$prefix='') {

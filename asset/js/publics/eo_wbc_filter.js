@@ -1732,15 +1732,32 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
     var input_type_button_click_listener = function() {
 
-    	// --- aa code woo-bundle-choice/application/model/publics/component/eowbc_filter_widget.php input_button(); mathi move karyo se @a ---
-    	// --- start ---
-		// $('[data-filter-slug="<?php echo $filter['slug']; ?>"]').on('click',function(event){
-		jQuery('[data-filter-slug="'+ _this.sub_configs.filter_slug +'"]').on('click',function(event){
-    		
-    		on_input_type_button_click(event, this);
+   		console.log('input_type_button_click_listener()');
 
-		});
-		// --- end ---
+    	if(typeof(EO_WBC_FILTER_INPUT_BUTTON_FILTER_SLUG) != typeof(undefined) && !window.document.splugins.common.is_empty(EO_WBC_FILTER_INPUT_BUTTON_FILTER_SLUG)) {
+    		
+   			console.log('input_type_button_click_listener() 01');
+	
+	        jQuery( EO_WBC_FILTER_INPUT_BUTTON_FILTER_SLUG ).each(function (i, term_slug) {
+
+		    	console.log(term_slug);
+		    	if(term_slug){
+
+			    	// --- aa code woo-bundle-choice/application/model/publics/component/eowbc_filter_widget.php input_button(); mathi move karyo se @a ---
+			    	// --- start ---
+					// $('[data-filter-slug="<?php echo $filter['slug']; ?>"]').on('click',function(event){
+					jQuery('[data-filter-slug="'+ term_slug +'"]').on('click',function(event){
+			    		
+			    		on_input_type_button_click(event, this, term_slug);
+
+					});
+					// --- end ---					
+		    	}
+
+				// --- end ---          
+	        });   
+    
+    	} 	
 
     };
     
@@ -1808,9 +1825,9 @@ window.document.splugins.wbc.filters.core = function( configs ) {
     	input_type_icon_click(e, element, term_slug);
     };
 
-    var on_input_type_button_click = function(event, element) {
+    var on_input_type_button_click = function(event, element, term_slug) {
 
-    	input_type_button_click(event, element);
+    	input_type_button_click(event, element, term_slug);
     };
 
     var reset_click = function(form_selector) {
@@ -2575,19 +2592,21 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
     };
 
-    var input_type_button_click = function(event, element) {
+    var input_type_button_click = function(event, element, term_slug) {
 
+		var button_filter_type = jQuery(/*this*/element).attr('data-type');
+		let filter_target;
 		// <?php if($filter_type==1): ?>
-		if(_this.sub_configs.filter_type==1) {
+		if(/*_this.sub_configs.filter_type*/button_filter_type==1) {
 			
 			// let filter_target = jQuery('form#<?php echo $this->filter_prefix; ?>eo_wbc_filter [name="_attribute"]');
-			let filter_target = jQuery('form#'+ _this.sub_configs.filter_prefix +'eo_wbc_filter [name="_attribute"]');
+			filter_target = jQuery('form#'+ _this.sub_configs.filter_prefix +'eo_wbc_filter [name="_attribute"]');
 		}
 		// <?php else: ?>
 		else {
 
 			// let filter_target = jQuery('form#<?php echo $this->filter_prefix; ?>eo_wbc_filter [name="_category"]');
-			let filter_target = jQuery('form#'+ _this.sub_configs.filter_prefix +'eo_wbc_filter [name="_category"]');
+			filter_target = jQuery('form#'+ _this.sub_configs.filter_prefix +'eo_wbc_filter [name="_category"]');
 		}
 		// <?php endif;?>
 		
@@ -2596,7 +2615,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		if(jQuery(/*this*/element).hasClass('eo_wbc_button_selected')){
 			jQuery(/*this*/element).removeClass('eo_wbc_button_selected');
 			// let old_val = $("form#<?php echo $this->filter_prefix; ?>eo_wbc_filter  #checklist_<?php echo $filter['slug']; ?>").val();
-			let old_val = jQuery("form#"+ _this.sub_configs.filter_prefix +"eo_wbc_filter  #checklist_" + _this.sub_configs.filter_slug).val();
+			let old_val = jQuery("form#"+ _this.sub_configs.filter_prefix +"eo_wbc_filter  #checklist_" + /*_this.sub_configs.filter_slug*/term_slug).val();
 			old_val = old_val.split(',');
 			if(old_val.indexOf(jQuery(/*this*/element).data('slug'))!=-1){
 				let _slug = jQuery(/*this*/element).data('slug');
@@ -2605,29 +2624,29 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 				});
 				new_val = old_val.join();
 				// $("form#<?php echo $this->filter_prefix; ?>eo_wbc_filter  #checklist_<?php echo $filter['slug']; ?>").val(new_val);
-				jQuery("form#"+ _this.sub_configs.filter_prefix +"eo_wbc_filter  #checklist_" + _this.sub_configs.filter_slug).val(new_val);
+				jQuery("form#"+ _this.sub_configs.filter_prefix +"eo_wbc_filter  #checklist_" + /*_this.sub_configs.filter_slug*/term_slug).val(new_val);
 			}
 
 		} else {
 			jQuery(/*this*/element).addClass('eo_wbc_button_selected');
 			// let old_val = $("form#<?php echo $this->filter_prefix; ?>eo_wbc_filter  #checklist_<?php echo $filter['slug']; ?>").val();
-			let old_val = jQuery("form#"+ _this.sub_configs.filter_prefix +"eo_wbc_filter  #checklist_" + _this.sub_configs.filter_slug).val();
+			let old_val = jQuery("form#"+ _this.sub_configs.filter_prefix +"eo_wbc_filter  #checklist_" + /*_this.sub_configs.filter_slug*/term_slug).val();
 			old_val = old_val.split(',');
 			if(old_val.indexOf(jQuery(/*this*/element).data('slug'))==-1){
 				let _slug = jQuery(/*this*/element).data('slug');
 				old_val.push(_slug);
 				new_val = old_val.join();
 				// $("form#<?php echo $this->filter_prefix; ?>eo_wbc_filter  #checklist_<?php echo $filter['slug']; ?>").val(new_val);
-				jQuery("form#"+ _this.sub_configs.filter_prefix +"eo_wbc_filter  #checklist_" + _this.sub_configs.filter_slug).val(new_val);
+				jQuery("form#"+ _this.sub_configs.filter_prefix +"eo_wbc_filter  #checklist_" + /*_this.sub_configs.filter_slug*/term_slug).val(new_val);
 			}
 		}
 
 		// if(filter_target.val().includes(filter_name) && $("form#<?php echo $this->filter_prefix; ?>eo_wbc_filter  #checklist_<?php echo $filter['slug']; ?>").val().length==0) {
-		if(filter_target.val().includes(filter_name) && jQuery("form#"+ _this.sub_configs.filter_prefix +"eo_wbc_filter  #checklist_" + _this.sub_configs.filter_slug).val().length==0) {
+		if(filter_target.val().includes(filter_name) && jQuery("form#"+ _this.sub_configs.filter_prefix +"eo_wbc_filter  #checklist_" + /*_this.sub_configs.filter_slug*/term_slug).val().length==0) {
 			filter_target.val(filter_target.val().replace(','+filter_name,''));
 
 		// } else { if((!filter_target.val().includes(filter_name)) && $("form#<?php echo $this->filter_prefix; ?>eo_wbc_filter #checklist_<?php echo $filter['slug']; ?>").val().length) {
-		} else { if((!filter_target.val().includes(filter_name)) && jQuery("form#"+ _this.sub_configs.filter_prefix +"eo_wbc_filter #checklist_" + _this.sub_configs.filter_slug).val().length) {
+		} else { if((!filter_target.val().includes(filter_name)) && jQuery("form#"+ _this.sub_configs.filter_prefix +"eo_wbc_filter #checklist_" + /*_this.sub_configs.filter_slug*/term_slug).val().length) {
 
 			filter_target.val(filter_target.val()+','+filter_name);	
 		} }	
