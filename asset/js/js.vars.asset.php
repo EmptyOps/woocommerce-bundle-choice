@@ -94,52 +94,25 @@ if(false){
 	</script>
 <?php  
 }
+	$apply_filters_sp_is_legacy_admin_page = ((apply_filters('sp_is_legacy_admin_page', true)) ? "true" : "false");
+	$wbc_common_current_theme_key = wbc()->common->current_theme_key();
+	$is_shop = ((is_shop()) ? "true" : "false");
+	$is_product_category = ((is_product_category()) ? "true" : "false");
+	$is_product = ((is_product()) ? "true" : "false");
+	$wbc_is_mobile = ((wbc_is_mobile()) ? "true" : "false");
+	$is_admin = false;
+	if( is_admin() ) {
+		$is_admin = true;
+	}
     "// var log = console.log;\n" .
-    "// console.log = function () {\n" .
-    "    \n" .
-    "//     var base_log = null;\n" .
-    "//     // window.temp = arguments[0];\n" .
-    "\n" .
-    "//     if(typeof arguments[0] == 'string'){\n" .
-    "\n" .
-    "//         var conditions = [arguments[0].indexOf('] ') >= 0,\n" .
-    "//             arguments[0].indexOf('gim_feed [') >= 0,\n" .
-    "//             arguments[0].indexOf('gim [') >= 0,\n" .
-    "//             arguments[0].indexOf('vs [') >= 0,\n" .
-    "//             arguments[0].indexOf('A_OFF') >= 0,\n" .
-    "//             arguments[0].indexOf('A_ON') >= 0                \n" .
-    "//             ];\n" .
-    "\n" .
-    "//         for (let i = 0; i < conditions.length; i++) {\n" .
-    "//             var condition = false;\n" .
-    "//             if(conditions[i]){\n" .
-    "//                 condition = true;\n" .
-    "//                 break;\n" .
-    "//             }\n" .
-    "//         };\n" .
-    "//     }\n" .
-    "\n" .
-    "//     if(condition){\n" .
-    "\n" .
-    "//         base_log = false;\n" .
-    "//     }else{\n" .
-    "//         base_log = true;\n" .
-    "\n" .
-    "//     }\n" .
-    "\n" .
-    "//     if(base_log){\n" .
-    "\n" .
-    "//     log.apply(console, arguments);\n" .
-    "//     }\n" .
-    "\n" .
-    "// }\n" .
-    "\n" .
+    "    // commented code uper if false ma or backup file ma jova malse\n" .
+
     "// define namespaces \n" .
     "window.document.splugins = window.document.splugins || {};\n" .
     "window.document.splugins.common = window.document.splugins.common || {};\n" .
     "window.document.splugins.admin = window.document.splugins.admin || {};\n" .
     "\n" .
-    "<?php \n" .
+/*    "<?php \n" .
     "\n" .
     "if( is_admin() ){\n" .
     "\n" .
@@ -147,7 +120,7 @@ if(false){
     "\n" .
     "    window.document.splugins.common.is_admin = <?php echo \"true\";?>;\n" .
     "\n" .
-    "    window.document.splugins.admin.is_legacy_admin_page = <?php echo ((apply_filters('sp_is_legacy_admin_page', true)) ? \"true\" : \"false\");?>; \n" .
+    "    window.document.splugins.admin.is_legacy_admin_page = ".$apply_filters_sp_is_legacy_admin_page."; \n" .
     "    <?php \n" .
     "} else {\n" .
     "\n" .
@@ -156,19 +129,32 @@ if(false){
     "    <?php\n" .
     "}\n" .
     "\n" .
-    "?>\n" .
+    "?>\n" .*/
+
+    " ".
+    	(
+    		$is_admin == true
+    		?
+			    "\n" .
+			    "    window.document.splugins.common.is_admin = "true";\n" .
+			    "\n" .
+			    "    window.document.splugins.admin.is_legacy_admin_page = ".$apply_filters_sp_is_legacy_admin_page."; \n" 
+		   	:
+   				"    window.document.splugins.common.is_admin = "false";\n" 	 	
+    	) .
+
     "\n" .
-    "window.document.splugins.common.current_theme_key = '<?php echo wbc()->common->current_theme_key(); ?>';\n" .
+    "window.document.splugins.common.current_theme_key = '".$wbc_common_current_theme_key."';\n" .
     "\n" .
-    "window.document.splugins.common.is_shop_page = <?php echo ((is_shop()) ? \"true\" : \"false\");?>; \n" .
+    "window.document.splugins.common.is_shop_page =  ".$is_shop."; \n" .
     "\n" .
-    "window.document.splugins.common.is_category_page = <?php echo ((is_product_category()) ? \"true\" : \"false\");?>; \n" .
+    "window.document.splugins.common.is_category_page = ".$is_product_category."; \n" .
     "\n" .
-    "window.document.splugins.common.is_item_page = <?php echo ((is_product()) ? \"true\" : \"false\");?>;\n" .
+    "window.document.splugins.common.is_item_page =  ".$is_product.";\n" .
     "\n" .
-    "window.document.splugins.common.is_mobile = <?php echo ((wbc_is_mobile()) ? \"true\" : \"false\");?>;\n" .
+    "window.document.splugins.common.is_mobile = ".$wbc_is_mobile.";\n" .
     "\n" .
-    "window.document.splugins.common.is_tablet = <?php echo ((wbc_is_mobile()) ? \"true\" : \"false\");?>; \n" .
+    "window.document.splugins.common.is_tablet = ".$wbc_is_mobile."; \n" .
     "\n";
 	wbc()->load->add_inline_script( '', $inline_script, 'common' );
 		
