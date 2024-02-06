@@ -136,11 +136,11 @@ if(false){
     		$is_admin == true
     		?
 			    "\n" .
-			    "    window.document.splugins.common.is_admin = "true";\n" .
+			    "    window.document.splugins.common.is_admin = true;\n" .
 			    "\n" .
 			    "    window.document.splugins.admin.is_legacy_admin_page = ".$apply_filters_sp_is_legacy_admin_page."; \n" 
 		   	:
-   				"    window.document.splugins.common.is_admin = "false";\n" 	 	
+   				"    window.document.splugins.common.is_admin = false;\n" 	 	
     	) .
 
     "\n" .
