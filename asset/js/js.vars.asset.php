@@ -112,24 +112,6 @@ if(false){
     "window.document.splugins.common = window.document.splugins.common || {};\n" .
     "window.document.splugins.admin = window.document.splugins.admin || {};\n" .
     "\n" .
-/*    "<?php \n" .
-    "\n" .
-    "if( is_admin() ){\n" .
-    "\n" .
-    "    ?>\n" .
-    "\n" .
-    "    window.document.splugins.common.is_admin = <?php echo \"true\";?>;\n" .
-    "\n" .
-    "    window.document.splugins.admin.is_legacy_admin_page = ".$apply_filters_sp_is_legacy_admin_page."; \n" .
-    "    <?php \n" .
-    "} else {\n" .
-    "\n" .
-    "    ?>\n" .
-    "    window.document.splugins.common.is_admin = <?php echo \"false\";?>;\n" .
-    "    <?php\n" .
-    "}\n" .
-    "\n" .
-    "?>\n" .*/
 
     " ".
     	(
@@ -2267,8 +2249,7 @@ add_action('wp_footer',function(){
 	"        console.log('[js.vars.asset wp_footer] is_category_page');\n" .
 	"        \n" .
 	"        // added on 30-06-2023\n" .
-	"        // NOTE: even though we have checked in the below script if the eo_wbc_object is not available, then it is created, but as per the structure, we need to skip execution.\n" .
-	"        // And till we do not refactor the loading of scripts and execution further, we need the below if. Ideally, we should not load this js file if the filters widget is not rendered on the particular page.\n" .
+	"        // NOTE: even though we have checked in the below script if the eo_wbc_object is not available, then it is created, but as per the structure, we need to skip execution.And till we do not refactor the loading of scripts and execution further, we need the below if. Ideally, we should not load this js file if the filters widget is not rendered on the particular page.\n" .
 	"        if (typeof(eo_wbc_object) != 'undefined') {\n" .
 	"            \n" .
 	"            window.document.splugins.wbc.pagination.api.init();\n" .
@@ -2278,8 +2259,7 @@ add_action('wp_footer',function(){
 	"        }\n" .
 	"    }\n" .
 	"\n" .
-	"    // ACTIVE_TODO we should confirm once and then disable the category condition or part below because it seems unnecessary for the category page.\n" .
-	"    // or is it necessary for the purple theme loopbox slider? or for the tableview sidebar or popup if it has jQuery slider or zoom?\n" .
+	"    // ACTIVE_TODO we should confirm once and then disable the category condition or part below because it seems unnecessary for the category page. or is it necessary for the purple theme loopbox slider? or for the tableview sidebar or popup if it has jQuery slider or zoom?\n" .
 	"    if (window.document.splugins.common.is_item_page || window.document.splugins.common.is_category_page) {\n" .
 	"\n" .
 	"        // window.setTimeout(function(){\n" .
