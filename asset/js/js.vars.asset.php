@@ -2305,27 +2305,16 @@ add_action('wp_footer',function(){
 	"\n" .
 	"        // window.setTimeout(function(){\n" .
 	"\n" .
-	"        // window.document.splugins.wbc.variations.gallery_images.feed_page.api.init();\n" .
+	"        // window.document.splugins.wbc.variations.gallery_images.feed_page.api.init();\n\n" .
 	"        var base_container_loop_feed_page = jQuery((window.document.splugins.common._o(common_configs.gallery_images_configs, 'base_container_loop_selector') ? common_configs.gallery_images_configs.base_container_loop_selector : '.variations_form'));\n" .
 	"        console.log('[js.vars.asset wp_footer] gim_feed variations');\n" .
 	"        console.log(base_container_loop_feed_page);\n" .
 	"        \n" .
 	"        jQuery(base_container_loop_feed_page).sp_wbc_variations_gallery_images_feed_page();\n" .
 	"        // ACTIVE_TODO_OC_START\n" .
-	"        // ACTIVE_TODO Below ajax complete will have a serious issue when the other ajax invokes this function means other than the eowbc js ajax call.\n" .
-	"        // So we need to simply bind on the success on render HTML notification simply the eowbs filter HTML notification and remove the ajax complete dependency from here\n" .
-	"        // and when that notification is fired inside the subscribe function here we can simply init the required modules.\n" .
-	"        // ya so simply put all the code that is the ajaxComplete function into the subscribe function of our notification module. -- to h\n" .
-	"        //  -- But still it not be inuf because the notification has a base container means host diffidency and that cannot be used here because of the uncertainly of that container\n" .
-	"        // and even if firing that global notification that is also lead to the same issue for which the base_container based on notifications are created.\n" .
-	"        // So we simply need to we simplify the filter module calling synchronization and make sure that for the fundamental filter search calls to that main function of filter wrapper or something such of the web, ajax is a being\n" .
-	"        // we need to make sure that the fundamental filter event there is only one selector of the container that is used. means we need to differentiate this search call of the category page from other search calls that may be happening from the diamond quiz popup, and other such things.\n" .
-	"        // And then we can simply use that container selector here -- to h\n" .
-	"        //  --    now after a while to fix some unwanted ajax-related bug the index of based URL condition is added below, but obviously that is not the intended standard fix\n" .
-	"        // since it will prevent some ajax events which we want to let them go inside but they will not be with below condition.\n" .
-	"        // So now we need a reliable fix to this whole ajaxComplete problem.\n" .
-	"        // Actually, we should simply rely on the ajaxComplete which we have inside a particular jQuery plugin of ours like sp_wbc_variations_swatches or sp_wbc_variations_gallery_images have that.\n" .
-	"        // and most probably the community standard must be that otherwise we need to do research on that and figure out the appropriate standard architecture implementation.\n" .
+	"        // ACTIVE_TODO Below ajax complete will have a serious issue when the other ajax invokes this function means other than the eowbc js ajax call. So we need to simply bind on the success on render HTML notification simply the eowbs filter HTML notification and remove the ajax complete dependency from here and when that notification is fired inside the subscribe function here we can simply init the required modules. ya so simply put all the code that is the ajaxComplete function into the subscribe function of our notification module. -- to h\n" .
+	"        //  -- But still it not be inuf because the notification has a base container means host diffidency and that cannot be used here because of the uncertainly of that container and even if firing that global notification that is also lead to the same issue for which the base_container based on notifications are created. So we simply need to we simplify the filter module calling synchronization and make sure that for the fundamental filter search calls to that main function of filter wrapper or something such of the web, ajax is a being we need to make sure that the fundamental filter event there is only one selector of the container that is used. means we need to differentiate this search call of the category page from other search calls that may be happening from the diamond quiz popup, and other such things. And then we can simply use that container selector here -- to h\n" .
+	"        //  --    now after a while to fix some unwanted ajax-related bug the index of based URL condition is added below, but obviously that is not the intended standard fix since it will prevent some ajax events which we want to let them go inside but they will not be with below condition. So now we need a reliable fix to this whole ajaxComplete problem. Actually, we should simply rely on the ajaxComplete which we have inside a particular jQuery plugin of ours like sp_wbc_variations_swatches or sp_wbc_variations_gallery_images have that. and most probably the community standard must be that otherwise we need to do research on that and figure out the appropriate standard architecture implementation.\n" .
 	"        // ACTIVE_TODO_OC_END\n" .
 	"        \n" .
 	"        jQuery(document).ajaxComplete(function (event, request, settings) {\n" .
@@ -2338,28 +2327,17 @@ add_action('wp_footer',function(){
 	"                console.log(jQuery(base_container_loop_feed_page));\n" .
 	"                \n" .
 	"                jQuery(base_container_loop_feed_page).sp_wbc_variations_gallery_images_feed_page();   \n" .
-	"            }\n" .
+	"            }\n\n\n" .
 	"        });\n" .
 	"\n" .
 	"        // console.log('[js.vars.asset wp_footer] gim_feed simple');\n" .
 	"        var base_container_loop_simple_feed_page = jQuery((window.document.splugins.common._o(common_configs.gallery_images_configs, 'base_container_loop_selector_simple') ? common_configs.gallery_images_configs.base_container_loop_selector_simple : null /*ACTIVE_TODO_OC_START need to update here the base_container_selectore ACTIVE_TODO_OC_END*/));\n" .
-	"        var loop_simple_feed_page_options = ['product_type' => 'simple'];\n" .
+	"        var loop_simple_feed_page_options = {product_type:'simple'};\n" .
 	"        jQuery(base_container_loop_simple_feed_page).sp_wbc_variations_gallery_images_feed_page(loop_simple_feed_page_options);\n" .
 	"        // ACTIVE_TODO_OC_START\n" .
-	"        // ACTIVE_TODO Below ajax complete will have a serious issue when the other ajax invokes this function means other than the eowbc js ajax call.\n" .
-	"        // So we need to simply bind on the success on render HTML notification simply the eowbs filter HTML notification and remove the ajax complete dependency from here\n" .
-	"        // and when that notification is fired inside the subscribe function here we can simply init the required modules.\n" .
-	"        // ya so simply put all the code that is the ajaxComplete function into the subscribe function of our notification module. -- to h\n" .
-	"        //  -- But still it not be inuf because the notification has a base container means host diffidency and that cannot be used here because of the uncertainly of that container\n" .
-	"        // and even if firing that global notification that is also lead to the same issue for which the base_container based on notifications are created.\n" .
-	"        // So we simply need to we simplify the filter module calling synchronization and make sure that for the fundamental filter search calls to that main function of filter wrapper or something such of the web, ajax is a being\n" .
-	"        // we need to make sure that the fundamental filter event there is only one selector of the container that is used. means we need to differentiate this search call of the category page from other search calls that may be happening from the diamond quiz popup, and other such things.\n" .
-	"        // And then we can simply use that container selector here -- to h\n" .
-	"        //  --    now after a while to fix some unwanted ajax-related bug the index of based URL condition is added below, but obviously that is not the intended standard fix\n" .
-	"        // since it will prevent some ajax events which we want to let them go inside but they will not be with below condition.\n" .
-	"        // So now we need a reliable fix to this whole ajaxComplete problem.\n" .
-	"        // Actually, we should simply rely on the ajaxComplete which we have inside a particular jQuery plugin of ours like sp_wbc_variations_swatches or sp_wbc_variations_gallery_images have that.\n" .
-	"        // and most probably the community standard must be that otherwise we need to do research on that and figure out the appropriate standard architecture implementation.\n" .
+	"        // ACTIVE_TODO Below ajax complete will have a serious issue when the other ajax invokes this function means other than the eowbc js ajax call. So we need to simply bind on the success on render HTML notification simply the eowbs filter HTML notification and remove the ajax complete dependency from here and when that notification is fired inside the subscribe function here we can simply init the required modules. ya so simply put all the code that is the ajaxComplete function into the subscribe function of our notification module. -- to h\n" .
+	"        //  -- But still it not be inuf because the notification has a base container means host diffidency and that cannot be used here because of the uncertainly of that container and even if firing that global notification that is also lead to the same issue for which the base_container based on notifications are created. So we simply need to we simplify the filter module calling synchronization and make sure that for the fundamental filter search calls to that main function of filter wrapper or something such of the web, ajax is a being we need to make sure that the fundamental filter event there is only one selector of the container that is used. means we need to differentiate this search call of the category page from other search calls that may be happening from the diamond quiz popup, and other such things. And then we can simply use that container selector here -- to h\n" .
+	"        //  --    now after a while to fix some unwanted ajax-related bug the index of based URL condition is added below, but obviously that is not the intended standard fix since it will prevent some ajax events which we want to let them go inside but they will not be with below condition. So now we need a reliable fix to this whole ajaxComplete problem. Actually, we should simply rely on the ajaxComplete which we have inside a particular jQuery plugin of ours like sp_wbc_variations_swatches or sp_wbc_variations_gallery_images have that. and most probably the community standard must be that otherwise we need to do research on that and figure out the appropriate standard architecture implementation.\n" .
 	"        // ACTIVE_TODO_OC_END\n" .
 	"        \n" .
 	"        jQuery(document).ajaxComplete(function (event, request, settings) {\n" .
@@ -2379,7 +2357,7 @@ add_action('wp_footer',function(){
 	"            }\n" .
 	"        });\n" .
 	"        \n" .
-	"        // },2000);\n" .
+	"        // },2000);\n\n" .
 	"    }\n" .
 	"\n" .
 
@@ -2402,7 +2380,7 @@ add_action('wp_footer',function(){
 	"        \n" .
 	"        // console.log('[js.vars.asset wp_footer] vs_feed');\n" .
 	"        \n" .
-	"        // window.setTimeout(function(){\n" .
+	"        // window.setTimeout(function(){\n\n" .
 	"        // window.document.splugins.wbc.variations.swatches.feed_page.api.init();\n" .
 	"        base_container_loop_feed_page = jQuery((window.document.splugins.common._o(common_configs.swatches_config, 'base_container_loop_selector') ? common_configs.swatches_config.base_container_loop_selector : '.variations_form'));\n" .
 	"        jQuery(base_container_loop_feed_page).sp_wbc_variations_swatches_feed_page();\n" .
