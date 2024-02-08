@@ -3328,6 +3328,7 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
         if (!_this./*#*/data_private.is_variation_product) {
 
             console.log("gim [process_images] if2");
+            console.log(_this./*#*/data_private);
 
             _this./*#*/data_private.current_variation = _this./*#*/data_private.product_variations[0];
             
