@@ -5,18 +5,37 @@
 */
 
 ?>
- <style type="text/css">
-     .ui.container.unstackable.steps .step:after{
-        display: none !important;        
-     }
+<?php 
+    if(false) {
+?>
+        <style type="text/css">
+             .ui.container.unstackable.steps .step:after{
+                display: none !important;        
+            }
 
-    .ui.container.unstackable.steps .step{
-        padding: 2vw;        
-        text-align: center !important;
+            .ui.container.unstackable.steps .step{
+                padding: 2vw;        
+                text-align: center !important;
+            }
+
+        </style>
+<?php
+    }
+    $custom_css = "
+    .ui.container.unstackable.steps .step:after {
+        display: none !important;
     }
 
- </style>
- <div class="step <?php echo esc_attr((($step==$order)?'active ':(($step>$order)?'completed ':(!empty(\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$clickable_breadcrumb)?'':'disabled') ))); ?> first_mobile" >
+    .ui.container.unstackable.steps .step {
+        padding: 2vw;
+        text-align: center !important;
+    }
+    ";
+    wbc()->load->add_inline_style('', $custom_css,'common');    
+?>
+
+
+<div class="step <?php echo esc_attr((($step==$order)?'active ':(($step>$order)?'completed ':(!empty(\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$clickable_breadcrumb)?'':'disabled') ))); ?> first_mobile" >
     <div class="content eowbc_breadcrumb_font" <?php _e((!empty(\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$clickable_breadcrumb) and !empty(\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$first_url))?'data-clickable_breadcrumb="'.esc_url(\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$first_url).'"':''); ?>><?php echo esc_html(\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$first_name); ?></div>                          
     <div class="ui flowing popup bottom right transition hidden first_mobile" style="width:80%;">
         <div class="ui grid">
