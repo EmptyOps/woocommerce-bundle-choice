@@ -2645,6 +2645,32 @@ add_action('wp_footer',function(){
 	"        \$template_html = \$template_html.replace( '/*]]>*/', '' );\n" .
 	"        form.\$singleVariation.html( \$template_html );\n" .
 	"        form.\$form.find( 'input[name=\"variation_id\"], input.variation_id' ).val( variation.variation_id ).trigger( 'change' );\n" .
+
+    "// Hide or show qty input\n" .
+    "if ( variation.is_sold_individually === 'yes' ) {\n" .
+    "    \$qty.find( 'input.qty' ).val( '1' ).attr( 'min', '1' ).attr( 'max', '' ).trigger( 'change' );\n" .
+    "    \$qty.hide();\n" .
+    "} else {\n" .
+    "\n" .
+    "    var \$qty_input = \$qty.find( 'input.qty' ),\n" .
+    "        qty_val    = parseFloat( \$qty_input.val() );\n" .
+    "\n" .
+    "    if ( isNaN( qty_val ) ) {\n" .
+    "        qty_val = variation.min_qty;\n" .
+    "    } else {\n" .
+    "        qty_val = qty_val > parseFloat( variation.max_qty ) ? variation.max_qty : qty_val;\n" .
+    "        qty_val = qty_val < parseFloat( variation.min_qty ) ? variation.min_qty : qty_val;\n" .
+    "    }\n" .
+    "\n" .
+    "    \$qty_input.attr( 'min', variation.min_qty ).attr( 'max', variation.max_qty ).val( qty_val ).trigger( 'change' );\n" .
+    "    \$qty.show();\n" .
+    "}\n" .
+    "\n" .
+    "// Enable or disable the add to cart button\n" .
+    "if ( ! variation.is_purchasable || ! variation.is_in_stock || ! variation.variation_is_visible ) {\n" .
+    "    purchasable = false;\n" .
+    "}\n";
+
 	"        if ( form.\$singleVariation.text().trim() ) {\n" .
 	"            form.\$singleVariation.slideDown( 200 ).trigger( 'show_variation', [ variation, purchasable ] );\n" .
 	"        } else {\n" .
@@ -2666,8 +2692,8 @@ add_action('wp_footer',function(){
 	"        form.\$form.trigger( 'woocommerce_variation_has_changed' );\n" .
 	"    };\n" .
 	"    VariationForm.prototype.addSlashes = function( string ) {\n" .
-	"        string = string.replace( /'/g, '\\\\'' );\n" .
-	"        string = string.replace( /\"/g, '\\\\\"' );\n" .
+	"        string = string.replace( /'/g, '\\\\\\'' );\n" .
+	"        string = string.replace( /\"/g, '\\\\\\\"' );\n" .
 	"        return string;\n" .
 	"    };\n" .
 	"    VariationForm.prototype.onUpdateAttributes = function( event ) {\n" .
@@ -2743,8 +2769,6 @@ add_action('wp_footer',function(){
 	"                    });\n" .
 	"                }\n" .
 	"            }\n" .
-	"        });\n" .
-	"    };\n" .
 
 	"    if ( attached_options_count > 0 && selected_attr_val && selected_attr_val_valid && ( 'no' === show_option_none ) ) {\n" .
 	"        new_attr_select.find( 'option:first' ).remove();\n" .
@@ -2768,7 +2792,7 @@ add_action('wp_footer',function(){
 	"    });\n" .
 	"    // Custom event for when variations have been updated.\n" .
 	"    form.\$form.trigger( 'woocommerce_update_variation_values' );\n" .
-	"});\n" .
+	"};\n" .
 	"VariationForm.prototype.getChosenAttributes = function() {\n" .
 	"    var data   = {};\n" .
 	"    var count  = 0;\n" .
@@ -2825,27 +2849,27 @@ add_action('wp_footer',function(){
 	"        this.\$resetVariations.css( 'visibility', 'hidden' );\n" .
 	"    }\n" .
 	"};\n" .
-	"$.fn.wc_variation_form = function() {\n" .
+	"\$.fn.wc_variation_form = function() {\n" .
 	"    console.log('A_OFF show_variation [wc_variation_form]');\n" .
 	"    new VariationForm( this );\n" .
 	"    return this;\n" .
 	"};\n" .
-	"$.fn.wc_set_content = function( content ) {\n" .
+	"\$.fn.wc_set_content = function( content ) {\n" .
 	"    if ( undefined === this.attr( 'data-o_content' ) ) {\n" .
 	"        this.attr( 'data-o_content', this.text() );\n" .
 	"    }\n" .
 	"    this.text( content );\n" .
 	"};\n" .
-	"$.fn.wc_reset_content = function() {\n" .
+	"\$.fn.wc_reset_content = function() {\n" .
 	"    if ( undefined !== this.attr( 'data-o_content' ) ) {\n" .
 	"        this.text( this.attr( 'data-o_content' ) );\n" .
 	"    }\n" .
-
+	"};\n";
 	"\n" .
     "    /**\n" .
     "     * Stores a default attribute for an element so it can be reset later\n" .
     "     */\n" .
-    "    $.fn.wc_set_variation_attr = function( attr, value ) {\n" .
+    "    \$.fn.wc_set_variation_attr = function( attr, value ) {\n" .
     "        if ( undefined === this.attr( 'data-o_' + attr ) ) {\n" .
     "            this.attr( 'data-o_' + attr, ( ! this.attr( attr ) ) ? '' : this.attr( attr ) );\n" .
     "        }\n" .
@@ -2859,7 +2883,7 @@ add_action('wp_footer',function(){
     "    /**\n" .
     "     * Reset a default attribute for an element so it can be reset later\n" .
     "     */\n" .
-    "    $.fn.wc_reset_variation_attr = function( attr ) {\n" .
+    "    \$.fn.wc_reset_variation_attr = function( attr ) {\n" .
     "        if ( undefined !== this.attr( 'data-o_' + attr ) ) {\n" .
     "            this.attr( attr, this.attr( 'data-o_' + attr ) );\n" .
     "        }\n" .
@@ -2868,7 +2892,7 @@ add_action('wp_footer',function(){
     "    /**\n" .
     "     * Reset the slide position if the variation has a different image than the current one\n" .
     "     */\n" .
-    "    $.fn.wc_maybe_trigger_slide_position_reset = function( variation ) {\n" .
+    "    \$.fn.wc_maybe_trigger_slide_position_reset = function( variation ) {\n" .
     "        var \$form                = \$( this ),\n" .
     "            \$product             = \$form.closest( '.product' ),\n" .
     "            \$product_gallery     = \$product.find( '.images' ),\n" .
@@ -2889,7 +2913,7 @@ add_action('wp_footer',function(){
     "    /**\n" .
     "     * Sets product images for the chosen variation\n" .
     "     */\n" .
-    "    $.fn.wc_variations_image_update = function( variation ) {\n" .
+    "    \$.fn.wc_variations_image_update = function( variation ) {\n" .
     "        var \$form             = this,\n" .
     "            \$product          = \$form.closest( '.product' ),\n" .
     "            \$product_gallery  = \$product.find( '.images' ),\n" .
