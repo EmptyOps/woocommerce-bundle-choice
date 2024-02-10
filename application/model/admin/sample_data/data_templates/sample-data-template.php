@@ -5266,7 +5266,7 @@ class Sample_Data_Template {
                 'sp_variations' => $_img_url.
                 'Products/Round-4.jpg',
                 'type' => 'simple', //simple | variable
-                'category' => array('eo_diamond_shape_cat', 'eo_diamond_round_shape_cat'/*, 'eo_diamond_oval_shape_cat', 'eo_diamond_cushion_shape_cat', 'eo_diamond_pear_shape_cat', 'eo_diamond_princess_shape_cat', 'eo_diamond_emerald_shape_cat', 'eo_diamond_asscher_shape_cat', 'eo_diamond_marquise_shape_cat', 'eo_diamond_heart_shape_cat', 'eo_diamond_radiant_shape_cat'),
+                'category' => array('eo_diamond_shape_cat', 'eo_diamond_round_shape_cat'/*, 'eo_diamond_oval_shape_cat', 'eo_diamond_cushion_shape_cat', 'eo_diamond_pear_shape_cat', 'eo_diamond_princess_shape_cat', 'eo_diamond_emerald_shape_cat', 'eo_diamond_asscher_shape_cat', 'eo_diamond_marquise_shape_cat', 'eo_diamond_heart_shape_cat', 'eo_diamond_radiant_shape_cat'*/),
                 'attribute' => array(
                     'pa_eo_carat_attr' => array(
                         'name' => 'pa_eo_carat_attr',
@@ -5479,7 +5479,7 @@ class Sample_Data_Template {
                 'sale_price' => '',
                 'price' => '',
                 'type' => 'variable', //simple | variable
-                'category' => array('eo_diamond_shape_cat', 'eo_diamond_heart_shape_cat'),
+                'category' => array('eo_diamond_shape_cat', 'eo_diamond_emerald_shape_cat'),
                 'attribute' => array('pa_eo_carat_attr' => array(
                         'name' => 'pa_eo_carat_attr',
                         'value' => '2.0',
