@@ -35,11 +35,11 @@ class Eowbc_Model {
 		echo \eo\wbc\model\admin\Form_Builder::instance()->build($form);
 
 		if( !empty($args['is_legacy_admin']) ) {
-			<?php 
+
 			if(false){
-			?>
+
 				echo '<script type="text/javascript">window.document.splugins.admin.do_event_binding();</script>';
-			<?php
+
 			}
 			
 			$inline_script = "window.document.splugins.admin.do_event_binding();";
