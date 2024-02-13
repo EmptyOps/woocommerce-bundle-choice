@@ -2976,7 +2976,7 @@ add_action('wp_footer',function(){
     "    /**\n" .
     "     * Reset main image to defaults.\n" .
     "     */\n" .
-    "    $.fn.wc_variations_image_reset = function() {\n" .
+    "    \$.fn.wc_variations_image_reset = function() {\n" .
     "        var \$form             = this,\n" .
     "            \$product          = \$form.closest( '.product' ),\n" .
     "            \$product_gallery  = \$product.find( '.images' ),\n" .
@@ -3005,14 +3005,14 @@ add_action('wp_footer',function(){
     "        \$product_link.wc_reset_variation_attr( 'href' );\n" .
     "    };\n" .
     "\n" .
-    "    $(function() {\n" .
+    "    \$(function() {\n" .
     "        console.log('A_OFF show_variation wc_add_to_cart_variation_params');\n" .
     "        console.log(wc_add_to_cart_variation_params);\n" .
     "        if ( typeof wc_add_to_cart_variation_params !== 'undefined' ) {\n" .
-    "            $( '.variations_form' ).each( function() {\n" .
+    "            \$( '.variations_form' ).each( function() {\n" .
     "                // console.log('A_OFF show_variation [load] loop');\n" .
     "                // console.log(this);\n" .
-    "                $( this ).wc_variation_form();\n" .
+    "                \$( this ).wc_variation_form();\n" .
     "            });\n" .
     "        }\n" .
     "    });\n" .
@@ -3087,6 +3087,7 @@ add_action('wp_footer',function(){
 "            });\n" .
 "        };\n" .
 "    };\n\n" .
+"    })( jQuery, window, document );\n" .
 "   }, 1000);\n" .
 
  "    jQuery(document).ajaxComplete(function (event, request, settings) {\n" .
@@ -3146,6 +3147,16 @@ add_action('wp_footer',function(){
  "                    };\n" .
 
 "\n" .
+
+    "/**\n" .
+    " * Reset all fields.\n" .
+    " */\n" .
+    "VariationForm.prototype.onReset = function( event ) {\n" .
+    "    event.preventDefault();\n" .
+    "    event.data.variationForm.\$attributeFields.val( '' ).trigger( 'change' );\n" .
+    "    event.data.variationForm.\$form.trigger( 'reset_data' );\n" .
+    "};\n";
+
  "    /**\n" .
  "     * Reload variation data from the DOM.\n" .
  "     */\n" .
@@ -3270,73 +3281,73 @@ add_action('wp_footer',function(){
  "                if ( form.xhr ) {\n" .
  "                    form.xhr.abort();\n" .
  "                }\n" .
- "                form.$form.block( { message: null, overlayCSS: { background: '#fff', opacity: 0.6 } } );\n" .
- "                currentAttributes.product_id  = parseInt( form.$form.data( 'product_id' ), 10 );\n" .
- "                currentAttributes.custom_data = form.$form.data( 'custom_data' );\n" .
- "                form.xhr                      = $.ajax( {\n" .
+ "                form.\$form.block( { message: null, overlayCSS: { background: '#fff', opacity: 0.6 } } );\n" .
+ "                currentAttributes.product_id  = parseInt( form.\$form.data( 'product_id' ), 10 );\n" .
+ "                currentAttributes.custom_data = form.\$form.data( 'custom_data' );\n" .
+ "                form.xhr                      = \$.ajax( {\n" .
  "                    url: wc_add_to_cart_variation_params.wc_ajax_url.toString().replace( '%%endpoint%%', 'get_variation' ),\n" .
  "                    type: 'POST',\n" .
  "                    data: currentAttributes,\n" .
  "                    success: function( variation ) {\n" .
  "                        if ( variation ) {\n" .
- "                            form.$form.trigger( 'found_variation', [ variation ] );\n" .
+ "                            form.\$form.trigger( 'found_variation', [ variation ] );\n" .
  "                        } else {\n" .
- "                            form.$form.trigger( 'reset_data' );\n" .
+ "                            form.\$form.trigger( 'reset_data' );\n" .
  "                            attributes.chosenCount = 0;\n" .
  "\n" .
  "                            if ( ! form.loading ) {\n" .
- "                                form.$form\n" .
+ "                                form.\$form\n" .
  "                                    .find( '.single_variation' )\n" .
  "                                    .after(\n" .
  "                                        '<p class=\"wc-no-matching-variations woocommerce-info\">' +\n" .
  "                                        wc_add_to_cart_variation_params.i18n_no_matching_variations_text +\n" .
  "                                        '</p>'\n" .
  "                                    );\n" .
- "                                form.$form.find( '.wc-no-matching-variations' ).slideDown( 200 );\n" .
+ "                                form.\$form.find( '.wc-no-matching-variations' ).slideDown( 200 );\n" .
  "                            }\n" .
  "                        }\n" .
  "                    },\n" .
  "                    complete: function() {\n" .
- "                        form.$form.unblock();\n" .
+ "                        form.\$form.unblock();\n" .
  "                    }\n" .
  "                } );\n" .
  "            } else {\n" .
  "\n" .
  "                console.log('A_ON show_variation [onFindVariation] 1 else');\n" .
  "\n" .
- "                form.$form.trigger( 'update_variation_values' );\n" .
+ "                form.\$form.trigger( 'update_variation_values' );\n" .
  "\n" .
  "                var matching_variations = form.findMatchingVariations( form.variationData, currentAttributes ),\n" .
  "                    variation           = matching_variations.shift();\n" .
  "\n" .
  "                // console.log('A_ON show_variation [onFindVariation] 1 else variation');\n" .
- "                // console.log(form.$form);\n" .
+ "                // console.log(form.\$form);\n" .
  "                // console.log(variation);\n" .
  "                \n" .
  "                if ( variation ) {\n" .
  "                    \n" .
  "                    // console.log('A_ON show_variation [onFindVariation] 1 else if');\n" .
  "\n" .
- "                    form.$form.trigger( 'found_variation', [ variation ] );\n" .
+ "                    form.\$form.trigger( 'found_variation', [ variation ] );\n" .
  "                } else {\n" .
- "                    form.$form.trigger( 'reset_data' );\n" .
+ "                    form.\$form.trigger( 'reset_data' );\n" .
  "                    attributes.chosenCount = 0;\n" .
  "\n" .
  "                    if ( ! form.loading ) {\n" .
- "                        form.$form\n" .
+ "                        form.\$form\n" .
  "                            .find( '.single_variation' )\n" .
  "                            .after(\n" .
  "                                '<p class=\"wc-no-matching-variations woocommerce-info\">' +\n" .
  "                                wc_add_to_cart_variation_params.i18n_no_matching_variations_text +\n" .
  "                                '</p>'\n" .
  "                            );\n" .
- "                        form.$form.find( '.wc-no-matching-variations' ).slideDown( 200 );\n" .
+ "                        form.\$form.find( '.wc-no-matching-variations' ).slideDown( 200 );\n" .
  "                    }\n" .
  "                }\n" .
  "            }\n" .
  "        } else {\n" .
- "            form.$form.trigger( 'update_variation_values' );\n" .
- "            form.$form.trigger( 'reset_data' );\n" .
+ "            form.\$form.trigger( 'update_variation_values' );\n" .
+ "            form.\$form.trigger( 'reset_data' );\n" .
  "        }\n" .
  "\n" .
  "        // Show reset link.\n" .
@@ -3352,14 +3363,14 @@ add_action('wp_footer',function(){
  "        console.log('A_ON show_variation [onFoundVariation]');\n" .
  "\n" .
  "        var form           = event.data.variationForm,\n" .
- "            \$sku           = form.$product.find( '.product_meta' ).find( '.sku' ),\n" .
- "            \$weight        = form.$product.find(\n" .
+ "            \$sku           = form.\$product.find( '.product_meta' ).find( '.sku' ),\n" .
+ "            \$weight        = form.\$product.find(\n" .
  "                '.product_weight, .woocommerce-product-attributes-item--weight .woocommerce-product-attributes-item__value'\n" .
  "            ),\n" .
- "            \$dimensions    = form.$product.find(\n" .
+ "            \$dimensions    = form.\$product.find(\n" .
  "                '.product_dimensions, .woocommerce-product-attributes-item--dimensions .woocommerce-product-attributes-item__value'\n" .
  "            ),\n" .
- "            \$qty           = form.$singleVariationWrap.find( '.quantity' ),\n" .
+ "            \$qty           = form.\$singleVariationWrap.find( '.quantity' ),\n" .
  "            purchasable    = true,\n" .
  "            variation_id   = '',\n" .
  "            template       = false,\n" .
@@ -3379,12 +3390,12 @@ add_action('wp_footer',function(){
  "\n" .
  "        if ( variation.dimensions ) {\n" .
  "            // Decode HTML entities.\n" .
- "            \$dimensions.wc_set_content( $.parseHTML( variation.dimensions_html )[0].data );\n" .
+ "            \$dimensions.wc_set_content( \$.parseHTML( variation.dimensions_html )[0].data );\n" .
  "        } else {\n" .
  "            \$dimensions.wc_reset_content();\n" .
  "        }\n" .
  "\n" .
- "        form.$form.wc_variations_image_update( variation );\n" .
+ "        form.\$form.wc_variations_image_update( variation );\n" .
  "\n" .
  "        if ( ! variation.variation_is_visible ) {\n" .
  "            template = wp_template( 'unavailable-variation-template' );\n" .
@@ -3399,8 +3410,8 @@ add_action('wp_footer',function(){
  "        \$template_html = \$template_html.replace( '/*<![CDATA[*/', '' );\n" .
  "        \$template_html = \$template_html.replace( '/*]]>*/', '' );\n" .
  "\n" .
- "        form.$singleVariation.html( \$template_html );\n" .
- "        form.$form.find( 'input[name=\"variation_id\"], input.variation_id' ).val( variation.variation_id ).trigger( 'change' );\n" .
+ "        form.\$singleVariation.html( \$template_html );\n" .
+ "        form.\$form.find( 'input[name=\"variation_id\"], input.variation_id' ).val( variation.variation_id ).trigger( 'change' );\n" .
  "\n" .
  "        // Hide or show qty input\n" .
  "        if ( variation.is_sold_individually === 'yes' ) {\n" .
@@ -3428,15 +3439,15 @@ add_action('wp_footer',function(){
  "        }\n" .
  "\n" .
  "        // Reveal\n" .
- "        if ( form.$singleVariation.text().trim() ) {\n" .
+ "        if ( form.\$singleVariation.text().trim() ) {\n" .
  "\n" .
  "            // console.log('A_ON show_variation [onFoundVariation] if');\n" .
- "            // console.log(form.$singleVariation);\n" .
+ "            // console.log(form.\$singleVariation);\n" .
  "\n" .
- "            form.$singleVariation.slideDown( 200 ).trigger( 'show_variation', [ variation, purchasable ] );\n" .
+ "            form.\$singleVariation.slideDown( 200 ).trigger( 'show_variation', [ variation, purchasable ] );\n" .
  "        } else {\n" .
  "            // console.log('A_ON show_variation [onFoundVariation] else');\n" .
- "            form.$singleVariation.show().trigger( 'show_variation', [ variation, purchasable ] );\n" .
+ "            form.\$singleVariation.show().trigger( 'show_variation', [ variation, purchasable ] );\n" .
  "        }\n" .
  "    };\n" .
  "\n" .
@@ -3446,18 +3457,18 @@ add_action('wp_footer',function(){
  "    VariationForm.prototype.onChange = function( event ) {\n" .
  "        var form = event.data.variationForm;\n" .
  "\n" .
- "        form.$form.find( 'input[name=\"variation_id\"], input.variation_id' ).val( '' ).trigger( 'change' );\n" .
- "        form.$form.find( '.wc-no-matching-variations' ).remove();\n" .
+ "        form.\$form.find( 'input[name=\"variation_id\"], input.variation_id' ).val( '' ).trigger( 'change' );\n" .
+ "        form.\$form.find( '.wc-no-matching-variations' ).remove();\n" .
  "\n" .
  "        if ( form.useAjax ) {\n" .
- "            form.$form.trigger( 'check_variations' );\n" .
+ "            form.\$form.trigger( 'check_variations' );\n" .
  "        } else {\n" .
- "            form.$form.trigger( 'woocommerce_variation_select_change' );\n" .
- "            form.$form.trigger( 'check_variations' );\n" .
+ "            form.\$form.trigger( 'woocommerce_variation_select_change' );\n" .
+ "            form.\$form.trigger( 'check_variations' );\n" .
  "        }\n" .
  "\n" .
  "        // Custom event for when variation selection has been changed\n" .
- "        form.$form.trigger( 'woocommerce_variation_has_changed' );\n" .
+ "        form.\$form.trigger( 'woocommerce_variation_has_changed' );\n" .
  "    };\n" .
  "\n" .
  "    /**\n" .
@@ -3466,8 +3477,8 @@ add_action('wp_footer',function(){
  "     * @return {string}\n" .
  "     */\n" .
  "    VariationForm.prototype.addSlashes = function( string ) {\n" .
- "        string = string.replace( /'/g, '\\\\'' );\n" .
- "        string = string.replace( /\"/g, '\\\\\"' );\n" .
+ "        string = string.replace( /'/g, '\\\\\\'' );\n" .
+ "        string = string.replace( /\"/g, '\\\\\\\"' );\n" .
  "        return string;\n" .
  "    };\n" .
  "\n" .
@@ -3484,13 +3495,13 @@ add_action('wp_footer',function(){
  "        }\n" .
  "\n" .
  "        // Loop through selects and disable/enable options based on selections.\n" .
- "        form.$attributeFields.each( function( index, el ) {\n" .
- "            var current_attr_select     = $( el ),\n" .
+ "        form.\$attributeFields.each( function( index, el ) {\n" .
+ "            var current_attr_select     = \$( el ),\n" .
  "                current_attr_name       = current_attr_select.data( 'attribute_name' ) || current_attr_select.attr( 'name' ),\n" .
- "                show_option_none        = $( el ).data( 'show_option_none' ),\n" .
+ "                show_option_none        = \$( el ).data( 'show_option_none' ),\n" .
  "                option_gt_filter        = ':gt(0)',\n" .
  "                attached_options_count  = 0,\n" .
- "                new_attr_select         = $( '<select/>' ),\n" .
+ "                new_attr_select         = \$( '<select/>' ),\n" .
  "                selected_attr_val       = current_attr_select.val() || '',\n" .
  "                selected_attr_val_valid = true;\n" .
  "\n" .
@@ -3512,7 +3523,7 @@ add_action('wp_footer',function(){
  "\n" .
  "            // The attribute of this select field should not be taken into account when calculating its matching variations:\n" .
  "            // The constraints of this attribute are shaped by the values of the other attributes.\n" .
- "            var checkAttributes = $.extend( true, {}, currentAttributes );\n" .
+ "            var checkAttributes = \$.extend( true, {}, currentAttributes );\n" .
  "\n" .
  "            checkAttributes[ current_attr_name ] = '';\n" .
  "\n" .
@@ -3521,9 +3532,6 @@ add_action('wp_footer',function(){
  "            // console.log('A_ON show_variation [onUpdateAttributes] variations');\n" .
  "            // console.log(variations);\n" .
  "\n" .
- "        });\n" .
- "    };\n" .
-
  "\n" .
  "    // Loop through variations.\n" .
  "    for ( var num in variations ) {\n" .
@@ -3560,7 +3568,7 @@ add_action('wp_footer',function(){
  "                            // console.log('A_ON show_variation [onUpdateAttributes] loop variationAttributes loop if if if2');\n" .
  "\n" .
  "                            // Decode entities.\n" .
- "                            attr_val = $( '<div/>' ).html( attr_val ).text();\n" .
+ "                            attr_val = \$( '<div/>' ).html( attr_val ).text();\n" .
  "\n" .
  "                            // Attach to matching options by value. This is done to compare\n" .
  "                            // TEXT values rather than any HTML entities.\n" .
@@ -3646,7 +3654,7 @@ add_action('wp_footer',function(){
  "/**\n" .
  " * Custom event for when variations have been updated.\n" .
  " */\n" .
- "form.$form.trigger( 'woocommerce_update_variation_values' );\n" .
+ "form.\$form.trigger( 'woocommerce_update_variation_values' );\n" .
  "};\n" .
 
  "\n" .
