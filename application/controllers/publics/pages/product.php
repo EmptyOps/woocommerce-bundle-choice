@@ -262,13 +262,10 @@ class Product {
         
         add_action('wp_head',function(){
             wp_dequeue_script('wc-add-to-cart-variation');
-<<<<<<< HEAD
-            ob_start();
             if(false){
             ?>
-            <style> body .wcp_preview_first_product_title, body .wcp_preview_second_product_title{font-size: 1.6rem;line-height: 2.4rem;white-space: nowrap;width: 24rem;overflow: hidden;text-overflow: ellipsis;float: left;} @media only screen and (max-width: 480px) { body .wcp_preview_first_product_title, body .wcp_preview_second_product_title { font-size: 1rem !important; line-height: 2rem !important; width: inherit !important; word-break: break-word; max-width: 20rem; } } @media only screen and (max-width: 320px) { body .wcp_preview_first_product_title, body .wcp_preview_second_product_title { font-size: 1rem !important; line-height: 2rem !important; width: inherit !important; word-break: break-word; max-width: 17rem; } }</style>
-
-        <?php
+                <style> body .wcp_preview_first_product_title, body .wcp_preview_second_product_title{font-size: 1.6rem;line-height: 2.4rem;white-space: nowrap;width: 24rem;overflow: hidden;text-overflow: ellipsis;float: left;} @media only screen and (max-width: 480px) { body .wcp_preview_first_product_title, body .wcp_preview_second_product_title { font-size: 1rem !important; line-height: 2rem !important; width: inherit !important; word-break: break-word; max-width: 20rem; } } @media only screen and (max-width: 320px) { body .wcp_preview_first_product_title, body .wcp_preview_second_product_title { font-size: 1rem !important; line-height: 2rem !important; width: inherit !important; word-break: break-word; max-width: 17rem; } }</style>
+            <?php
             }
 
             $custom_css = "
@@ -305,7 +302,6 @@ class Product {
 
             wbc()->load->add_inline_style('', $custom_css, 'common');
             
-        ob_start();
         if(false){
         ?>
             <style type="text/css">table.variations{display: none;}</style>
@@ -319,97 +315,29 @@ class Product {
 
             wbc()->load->add_inline_style('', $custom_css, 'common');
 
-        ob_start();
         if(false){
         ?>
             <style type="text/css">
-                .variations_form .variations, #wbc_variation_toggle {
-                    display: none !important;
-=======
-            if(false){
-            ?>
-                <style> body .wcp_preview_first_product_title, body .wcp_preview_second_product_title{font-size: 1.6rem;line-height: 2.4rem;white-space: nowrap;width: 24rem;overflow: hidden;text-overflow: ellipsis;float: left;} @media only screen and (max-width: 480px) { body .wcp_preview_first_product_title, body .wcp_preview_second_product_title { font-size: 1rem !important; line-height: 2rem !important; width: inherit !important; word-break: break-word; max-width: 20rem; } } @media only screen and (max-width: 320px) { body .wcp_preview_first_product_title, body .wcp_preview_second_product_title { font-size: 1rem !important; line-height: 2rem !important; width: inherit !important; word-break: break-word; max-width: 17rem; } }</style>
-                <style type="text/css">table.variations{display: none;}</style>
-                <style type="text/css">
-                    .variations_form .variations, #wbc_variation_toggle {
-                        display: none !important;
-                    }
-                    .Product_Left_Wrapper_Plugin_Images .imagezoomsl_zoom_container .Zoom_Rigt-sec .small-image.corner-image.corner-toggle-image {
-                        display: none;
-                    }
-                </style>
-            <?php
-            }
-            $custom_css = "
-            body .wcp_preview_first_product_title,
-            body .wcp_preview_second_product_title {
-                font-size: 1.6rem;
-                line-height: 2.4rem;
-                white-space: nowrap;
-                width: 24rem;
-                overflow: hidden;
-                text-overflow: ellipsis;
-                float: left;
-            }
-
-            @media only screen and (max-width: 480px) {
-                body .wcp_preview_first_product_title,
-                body .wcp_preview_second_product_title {
-                    font-size: 1rem !important;
-                    line-height: 2rem !important;
-                    width: inherit !important;
-                    word-break: break-word;
-                    max-width: 20rem;
->>>>>>> 0744dacfd5990c6dca3571f59ab0e958d2872fd0
-                }
-            }
-
-            @media only screen and (max-width: 320px) {
-                body .wcp_preview_first_product_title,
-                body .wcp_preview_second_product_title {
-                    font-size: 1rem !important;
-                    line-height: 2rem !important;
-                    width: inherit !important;
-                    word-break: break-word;
-                    max-width: 17rem;
-                }
-<<<<<<< HEAD
-            </style>
-        <?php
-        }
-            $custom_css = "
                 .variations_form .variations, #wbc_variation_toggle {
                     display: none !important;
                 }
                 .Product_Left_Wrapper_Plugin_Images .imagezoomsl_zoom_container .Zoom_Rigt-sec .small-image.corner-image.corner-toggle-image {
                     display: none;
                 }
-            ";
+            </style>
+        <?php
+        }
+            
+        $custom_css = "
+        .variations_form .variations, #wbc_variation_toggle {
+            display: none !important;
+        }
+        .Product_Left_Wrapper_Plugin_Images .imagezoomsl_zoom_container .Zoom_Rigt-sec .small-image.corner-image.corner-toggle-image {
+            display: none;
+        }";
 
-            wbc()->load->add_inline_style('', $custom_css, 'common');
+        wbc()->load->add_inline_style('', $custom_css, 'common');
 
-            <?php 
-=======
-            }";
-
-            wbc()->load->add_inline_style('', $custom_css, 'common'); 
-
-            $custom_css = "
-            table.variations {
-                display: none;
-            }";
-            wbc()->load->add_inline_style('', $custom_css, 'common');
-
-            $custom_css = "
-            .variations_form .variations, #wbc_variation_toggle {
-                display: none !important;
-            }
-            .Product_Left_Wrapper_Plugin_Images .imagezoomsl_zoom_container .Zoom_Rigt-sec .small-image.corner-image.corner-toggle-image {
-                display: none;
-            }";
-
-            wbc()->load->add_inline_style('', $custom_css, 'common');
->>>>>>> 0744dacfd5990c6dca3571f59ab0e958d2872fd0
             if(false){
             ?>
                 <script type="text/javascript">
