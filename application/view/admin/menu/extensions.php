@@ -1,100 +1,216 @@
-<style type="text/css">
-	.wc_addons_wrap {
- 	   max-width: 1200px;
-	}
-	.wc_addons_wrap .addons-featured {
-	    margin: 0;
-	}
-	.wc_addons_wrap .addons-banner-block, .wc_addons_wrap .addons-wcs-banner-block {
-	    background: #fff;
-	    border: 1px solid #ddd;
-	    margin: 0 0 1em 0;
-	    padding: 2em 2em 1em;
-	}
-	.wc_addons_wrap .addons-banner-block-items {
-	    display: -webkit-box;
-	    display: -webkit-flex;
-	    display: flex;
-	    -webkit-box-orient: horizontal;
-	    -webkit-box-direction: normal;
-	    -webkit-flex-direction: row;
-	    flex-direction: row;
-	    -webkit-flex-wrap: wrap;
-	    flex-wrap: wrap;
-	    -webkit-justify-content: space-around;
-	    justify-content: space-around;
-	    margin: 0 -10px 0 -10px;
-	}
+<?php
+	if(false) {
+?>
+		<style type="text/css">
+			.wc_addons_wrap {
+		 	   max-width: 1200px;
+			}
+			.wc_addons_wrap .addons-featured {
+			    margin: 0;
+			}
+			.wc_addons_wrap .addons-banner-block, .wc_addons_wrap .addons-wcs-banner-block {
+			    background: #fff;
+			    border: 1px solid #ddd;
+			    margin: 0 0 1em 0;
+			    padding: 2em 2em 1em;
+			}
+			.wc_addons_wrap .addons-banner-block-items {
+			    display: -webkit-box;
+			    display: -webkit-flex;
+			    display: flex;
+			    -webkit-box-orient: horizontal;
+			    -webkit-box-direction: normal;
+			    -webkit-flex-direction: row;
+			    flex-direction: row;
+			    -webkit-flex-wrap: wrap;
+			    flex-wrap: wrap;
+			    -webkit-justify-content: space-around;
+			    justify-content: space-around;
+			    margin: 0 -10px 0 -10px;
+			}
 
-	.wc_addons_wrap .addons-banner-block-item:nth-child(-n+3) {
-	    display: block;
-	}
-	.wc_addons_wrap .addons-banner-block-item, .wc_addons_wrap .addons-column-block-item {
-	    display: none;
-	}
-	.wc_addons_wrap .addons-banner-block-item {
-	    border: 1px solid #e6e6e6;
-	    border-radius: 3px;
-	    -webkit-box-flex: 1;
-	    -webkit-flex: 1;
-	    flex: 1;
-	    margin: 1em;
-	    min-width: 200px;
-	    width: 30%;
-	}
-	.wc_addons_wrap .addons-banner-block-item-icon {
-	    background: #f7f7f7;
-	    height: 143px;
-	}
-	.wc_addons_wrap .addons-banner-block-item-icon, .wc_addons_wrap .addons-column-block-item-icon {
-	    -webkit-box-align: center;
-	    -webkit-align-items: center;
-	    align-items: center;
-	    display: -webkit-box;
-	    display: -webkit-flex;
-	    display: flex;
-	    -webkit-box-pack: center;
-	    -webkit-justify-content: center;
-	    justify-content: center;
-	}
-	.wc_addons_wrap .addons-banner-block-item-content {
-	    display: -webkit-box;
-	    display: -webkit-flex;
-	    display: flex;
-	    -webkit-box-orient: vertical;
-	    -webkit-box-direction: normal;
-	    -webkit-flex-direction: column;
-	    flex-direction: column;
-	    height: 300px;
-	    -webkit-box-pack: justify;
-	    -webkit-justify-content: space-between;
-	    justify-content: space-between;
-	    padding: 24px;
-	}
-	.wc_addons_wrap .addons-button-solid {
-	    background-color: #27292a;
-	    color: #fff;
-	}
-	.wc_addons_wrap .addons-button {
-	    border-radius: 3px;
-	    cursor: pointer;
-	    display: block;
-	    height: 37px;
-	    line-height: 37px;
-	    text-align: center;
-	    text-decoration: none;
-	    width: 100%;
-	    margin-left: 1em;	    
-	}
+			.wc_addons_wrap .addons-banner-block-item:nth-child(-n+3) {
+			    display: block;
+			}
+			.wc_addons_wrap .addons-banner-block-item, .wc_addons_wrap .addons-column-block-item {
+			    display: none;
+			}
+			.wc_addons_wrap .addons-banner-block-item {
+			    border: 1px solid #e6e6e6;
+			    border-radius: 3px;
+			    -webkit-box-flex: 1;
+			    -webkit-flex: 1;
+			    flex: 1;
+			    margin: 1em;
+			    min-width: 200px;
+			    width: 30%;
+			}
+			.wc_addons_wrap .addons-banner-block-item-icon {
+			    background: #f7f7f7;
+			    height: 143px;
+			}
+			.wc_addons_wrap .addons-banner-block-item-icon, .wc_addons_wrap .addons-column-block-item-icon {
+			    -webkit-box-align: center;
+			    -webkit-align-items: center;
+			    align-items: center;
+			    display: -webkit-box;
+			    display: -webkit-flex;
+			    display: flex;
+			    -webkit-box-pack: center;
+			    -webkit-justify-content: center;
+			    justify-content: center;
+			}
+			.wc_addons_wrap .addons-banner-block-item-content {
+			    display: -webkit-box;
+			    display: -webkit-flex;
+			    display: flex;
+			    -webkit-box-orient: vertical;
+			    -webkit-box-direction: normal;
+			    -webkit-flex-direction: column;
+			    flex-direction: column;
+			    height: 300px;
+			    -webkit-box-pack: justify;
+			    -webkit-justify-content: space-between;
+			    justify-content: space-between;
+			    padding: 24px;
+			}
+			.wc_addons_wrap .addons-button-solid {
+			    background-color: #27292a;
+			    color: #fff;
+			}
+			.wc_addons_wrap .addons-button {
+			    border-radius: 3px;
+			    cursor: pointer;
+			    display: block;
+			    height: 37px;
+			    line-height: 37px;
+			    text-align: center;
+			    text-decoration: none;
+			    width: 100%;
+			    margin-left: 1em;	    
+			}
 
-	.inline-buttons{
-		grid-column-gap: 1em;
-		display: grid;
-		grid-template-columns: auto auto;
-	}
-</style>
+			.inline-buttons{
+				grid-column-gap: 1em;
+				display: grid;
+				grid-template-columns: auto auto;
+			}
+		</style>
+
+	
 
 <?php 
+	} 
+
+	$custom_css = " 
+	.wc_addons_wrap {
+    	max-width: 1200px;
+	}
+
+	.wc_addons_wrap .addons-featured {
+    	margin: 0;
+	}
+
+    .wc_addons_wrap .addons-banner-block,
+    .wc_addons_wrap .addons-wcs-banner-block {
+        background: #fff;
+        border: 1px solid #ddd;
+        margin: 0 0 1em 0;
+        padding: 2em 2em 1em;
+    }
+
+    .wc_addons_wrap .addons-banner-block-items {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -webkit-flex-direction: row;
+        flex-direction: row;
+        -webkit-flex-wrap: wrap;
+        flex-wrap: wrap;
+        -webkit-justify-content: space-around;
+        justify-content: space-around;
+        margin: 0 -10px 0 -10px;
+    }
+
+    .wc_addons_wrap .addons-banner-block-item:nth-child(-n+3) {
+        display: block;
+    }
+
+    .wc_addons_wrap .addons-banner-block-item,
+    .wc_addons_wrap .addons-column-block-item {
+        display: none;
+    }
+
+    .wc_addons_wrap .addons-banner-block-item {
+        border: 1px solid #e6e6e6;
+        border-radius: 3px;
+        -webkit-box-flex: 1;
+        -webkit-flex: 1;
+        flex: 1;
+        margin: 1em;
+        min-width: 200px;
+        width: 30%;
+    }
+
+    .wc_addons_wrap .addons-banner-block-item-icon {
+        background: #f7f7f7;
+        height: 143px;
+    }
+
+    .wc_addons_wrap .addons-banner-block-item-icon,
+    .wc_addons_wrap .addons-column-block-item-icon {
+        -webkit-box-align: center;
+        -webkit-align-items: center;
+        align-items: center;
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-box-pack: center;
+        -webkit-justify-content: center;
+        justify-content: center;
+    }
+
+    .wc_addons_wrap .addons-banner-block-item-content {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -webkit-flex-direction: column;
+        flex-direction: column;
+        height: 300px;
+        -webkit-box-pack: justify;
+        -webkit-justify-content: space-between;
+        justify-content: space-between;
+        padding: 24px;
+    }
+
+    .wc_addons_wrap .addons-button-solid {
+        background-color: #27292a;
+        color: #fff;
+    }
+
+    .wc_addons_wrap .addons-button {
+        border-radius: 3px;
+        cursor: pointer;
+        display: block;
+        height: 37px;
+        line-height: 37px;
+        text-align: center;
+        text-decoration: none;
+        width: 100%;
+        margin-left: 1em;
+    }
+
+    .inline-buttons {
+        grid-column-gap: 1em;
+        display: grid;
+        grid-template-columns: auto auto;
+    }
+	";
+	wbc()->load->add_inline_style('', $custom_css,'common');	
 
 //////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////

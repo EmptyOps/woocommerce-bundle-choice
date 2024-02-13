@@ -6,23 +6,77 @@
 
 ?>  
 <!-- Created with Wordpress plugin - WooCommerce Product bundle choice -->
-<style type="text/css">
+<?php
+    if(false) {
+?>
+        <style type="text/css">
+            .cat_products{
+                border:1.3px solid #80808059;
+                border-radius: 1.5px;
+                margin:auto !important;
+                margin-bottom: 2em !important;                            
+            }
+            @media only screen and (max-width: 768px) {
+              .ui.stackable.grid>.wide.column{  
+                margin-bottom: 2em !important;
+              }
+            }
+            .ui.cards>.card {
+                width: 100%;
+            }
+            .ui.cards>.card>.image>img {
+                /*width: 100%;*/
+                width: auto;
+                margin: auto; 
+            }
+            .ui.cards>.card h5{
+                color: white !important;
+            }
+
+            .ui.special.cards .card:first-child{
+                margin-bottom: 0.75px;
+            }
+            .ui.special.cards .card:first-child,.ui.special.cards .card:first-child *:not(.button){
+                border-bottom-right-radius: 0px !important;
+                border-bottom-left-radius: 0px !important;
+            }
+            .ui.special.cards .card:last-child{
+                margin-top: 0.75px;
+            }
+            .ui.special.cards .card:last-child,.ui.special.cards .card:last-child *:not(.button){
+                border-top-left-radius: 0px !important;
+                border-top-right-radius: 0px !important;
+            }
+            .cat_products.seven.wide.column{
+                height: max-content;
+            }
+            .ui.card>.image:not(.ui)>img, .ui.cards>.card>.image:not(.ui)>img{
+                height: 250px !important;
+            }
+            .ui.dimmer .woocommerce-Price-amount.amount,.ui.dimmer  ins,.ui.dimmer  del{
+            color: white !important;
+            background-color: transparent !important;
+        }
+        </style>
+<?php
+    }
+
+    $custom_css = "
     .cat_products{
-        border:1.3px solid #80808059;
+        border: 1.3px solid #80808059;
         border-radius: 1.5px;
-        margin:auto !important;
+        margin: auto !important;
         margin-bottom: 2em !important;                            
     }
     @media only screen and (max-width: 768px) {
-      .ui.stackable.grid>.wide.column{  
-        margin-bottom: 2em !important;
-      }
+        .ui.stackable.grid>.wide.column{  
+            margin-bottom: 2em !important;
+        }
     }
     .ui.cards>.card {
         width: 100%;
     }
     .ui.cards>.card>.image>img {
-        /*width: 100%;*/
         width: auto;
         margin: auto; 
     }
@@ -44,7 +98,7 @@
         border-top-left-radius: 0px !important;
         border-top-right-radius: 0px !important;
     }
-    .cat_products.seven.wide.column{
+    .cat_products.seven.wide.column{    
         height: max-content;
     }
     .ui.card>.image:not(.ui)>img, .ui.cards>.card>.image:not(.ui)>img{
@@ -54,7 +108,12 @@
         color: white !important;
         background-color: transparent !important;
     }
-</style>                    
+    ";
+    wbc()->load->add_inline_style('', $custom_css,'common');    
+?>
+
+
+                    
 <div class="eo_wbc_hidden_data" style="display: none;">                                                
     <div class="ui grid stackable container padded">
     <?php
@@ -242,40 +301,60 @@ if (false) {
     </script>
 <?php
 }
-$inline_script =
-    '<script>' .
-    '    $ = jQuery;' .
-    '    // supposed to be used inside wo_wbc_filter.js' .
-    '    var is_card_view_rendered = true;' .
-    '    /**' .
-    '     * ' .
-    '     */' .
-    '    function wbc_attach_card_views() {' .
-    '        jQuery(".products,.product-listing,.row-inner>.col-lg-9:eq(0)").html(jQuery(".eo_wbc_hidden_data").html());' .
-    '        jQuery(\'.special.cards .image\').dimmer({on:\'hover\',duration:{ show : 0, hide : 0 }});' .
-    '        jQuery(\'.button[data-link]\').on(\'click\',function(e){' .
-    '            e.preventDefault();' .
-    '            e.stopPropagation();' .
-    '            window.location.href=$(this).attr(\'data-link\');' .
-    '        });' .
-    '    }' .
-    '    jQuery(document).ready(function($){' .
-    '        //code moved to a function wbc_attach_card_views above so that it can be called after ajax search' .
-    '        wbc_attach_card_views();' .
-    '    });' .
-    '</script>';
+$inline_script = 
+    "$ = jQuery;\n" .
+    "\n" .
+    "// supposed to be used inside wo_wbc_filter.js\n" .
+    "var is_card_view_rendered = true;\n" .
+    "\n" .
+    "/**\n" .
+    " *\n" .
+    " */\n" .
+    "function wbc_attach_card_views() { \n" .
+    "    jQuery(\".products,.product-listing,.row-inner>.col-lg-9:eq(0)\").html(jQuery(\".eo_wbc_hidden_data\").html());\n" .
+    "    jQuery('.special.cards .image').dimmer({on:'hover',duration:{ show : 0, hide : 0 }});\n" .
+    "    jQuery('.button[data-link]').on('click',function(e){\n" .
+    "        e.preventDefault();\n" .
+    "        e.stopPropagation();\n" .
+    "        window.location.href=$(this).attr('data-link');\n" .
+    "    });\n" .
+    "}\n" .
+    "\n" .
+    "jQuery(document).ready(function($){\n" .
+    "    //code moved to a function wbc_attach_card_views above so that it can be called after ajax search\n" .
+    "    wbc_attach_card_views();\n" .
+    "});\n";
 
-// Assuming wbc() is the object/method to add inline script
 wbc()->load->add_inline_script('', $inline_script, 'common');
+if(false) {
+?>      
+    <style type="text/css">
+        .products{
+            display: block !important;
+        }
 
-?>                   
-<style type="text/css">
-    .products{
-        display: block !important;
-    }
+        .product-listing{
+            display: block !important;
+        }                                                
+    </style>
+<?php
+}
 
-    .product-listing{
-        display: block !important;
-    }                                                
-</style> 
+$custom_css = "
+
+.products{
+    display: block !important;
+}
+
+.product-listing{
+    display: block !important;
+}
+
+";
+wbc()->load->add_inline_style('', $custom_css,'common');    
+
+?>
+
+
+
 <!-- Created with Wordpress plugin - WooCommerce Product bundle choice -->        
