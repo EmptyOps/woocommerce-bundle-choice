@@ -405,7 +405,7 @@ add_action('wp_footer',function(){
 
 		        // },2000);    
 
-			}
+		    }
 
 			// jQuery(base_container_swatches).check_variations();
 				jQuery('.variations_form').trigger('check_variations');
@@ -3668,10 +3668,10 @@ add_action('wp_footer',function(){
  "        var chosen = 0;\n" .
  "\n" .
  "        // console.log('A_ON show_variation [getChosenAttributes]');\n" .
- "        // console.log(this.$attributeFields);\n" .
+ "        // console.log(this.\$attributeFields);\n" .
  "        // console.log(this);\n" .
  "\n" .
- "        this.$attributeFields.each( function() {\n" .
+ "        this.\$attributeFields.each( function() {\n" .
  "            var attribute_name = \$( this ).data( 'attribute_name' ) || \$( this ).attr( 'name' );\n" .
  "            var value          = \$( this ).val() || '';\n" .
  "\n" .
@@ -3742,11 +3742,11 @@ add_action('wp_footer',function(){
  "     */\n" .
  "    VariationForm.prototype.toggleResetLink = function( on ) {\n" .
  "        if ( on ) {\n" .
- "            if ( this.$resetVariations.css( 'visibility' ) === 'hidden' ) {\n" .
- "                this.$resetVariations.css( 'visibility', 'visible' ).hide().fadeIn();\n" .
+ "            if ( this.\$resetVariations.css( 'visibility' ) === 'hidden' ) {\n" .
+ "                this.\$resetVariations.css( 'visibility', 'visible' ).hide().fadeIn();\n" .
  "            }\n" .
  "        } else {\n" .
- "            this.$resetVariations.css( 'visibility', 'hidden' );\n" .
+ "            this.\$resetVariations.css( 'visibility', 'hidden' );\n" .
  "        }\n" .
  "    };\n" .
  "\n" .
