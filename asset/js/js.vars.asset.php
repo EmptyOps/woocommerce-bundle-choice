@@ -149,7 +149,7 @@ add_action( ( !is_admin() ? 'wp_enqueue_scripts' : 'admin_enqueue_scripts'),func
 			// --  ned to make the versions dynamic of assets based on plugin, extensions and themes if there is no other versions system to maintan -- to s & -- to h
 		// ACTIVE_TODO/TODO when the variations and its child modules are moved out from the below loaded common js then at that time, also move te wc-cart variation dependancy mentioned below 
 		
-		if(!is_home()){
+		if(!is_front_page()){
 			wbc()->load->asset('js','common',array('jquery','wc-add-to-cart-variation'),"0.1.4",false,true,'common_configs',array('swatches_config'=>$swatches_configs, 'gallery_images_configs'=>$gallery_images_configs),true);
 		}
 
@@ -177,7 +177,7 @@ add_action( ( !is_admin() ? 'wp_enqueue_scripts' : 'admin_enqueue_scripts'),func
 		}
 		
 	} else {
-		if(!is_home()){
+		if(!is_front_page()){
 			wbc()->load->asset('js','common',array('jquery'),"0.1.4",false,true);
 		}
 	}
