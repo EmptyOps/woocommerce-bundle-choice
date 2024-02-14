@@ -148,8 +148,10 @@ add_action( ( !is_admin() ? 'wp_enqueue_scripts' : 'admin_enqueue_scripts'),func
 			// --  and also that only necesary and partialy build assets are loaded -- to t 
 			// --  ned to make the versions dynamic of assets based on plugin, extensions and themes if there is no other versions system to maintan -- to s & -- to h
 		// ACTIVE_TODO/TODO when the variations and its child modules are moved out from the below loaded common js then at that time, also move te wc-cart variation dependancy mentioned below 
-	
-		wbc()->load->asset('js','common',array('jquery','wc-add-to-cart-variation'),"0.1.4",false,true,'common_configs',array('swatches_config'=>$swatches_configs, 'gallery_images_configs'=>$gallery_images_configs),true);
+		
+		if(!is_home()){
+			wbc()->load->asset('js','common',array('jquery','wc-add-to-cart-variation'),"0.1.4",false,true,'common_configs',array('swatches_config'=>$swatches_configs, 'gallery_images_configs'=>$gallery_images_configs),true);
+		}
 
 		// ACTIVE_TODO temp. hold for removel and we need to remove as soon as we refactore the loading sequance of filter widget class and load asset function og that class. so it is highly temporary. and we need to fix if we face issues whwrw filter feature is not active on certain pages but still that is loading below asset then we need to prevent that also and other such issues.
 		if( is_shop() || is_product_category() ) {
@@ -175,8 +177,9 @@ add_action( ( !is_admin() ? 'wp_enqueue_scripts' : 'admin_enqueue_scripts'),func
 		}
 		
 	} else {
-
-		wbc()->load->asset('js','common',array('jquery'),"0.1.4",false,true);
+		if(!is_home()){
+			wbc()->load->asset('js','common',array('jquery'),"0.1.4",false,true);
+		}
 	}
 
 },( !is_admin() ? 999 : 5) );
