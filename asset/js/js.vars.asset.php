@@ -2669,7 +2669,7 @@ add_action('wp_footer',function(){
     "// Enable or disable the add to cart button\n" .
     "if ( ! variation.is_purchasable || ! variation.is_in_stock || ! variation.variation_is_visible ) {\n" .
     "    purchasable = false;\n" .
-    "}\n";
+    "}\n"
 
 	"        if ( form.\$singleVariation.text().trim() ) {\n" .
 	"            form.\$singleVariation.slideDown( 200 ).trigger( 'show_variation', [ variation, purchasable ] );\n" .
@@ -2864,7 +2864,7 @@ add_action('wp_footer',function(){
 	"    if ( undefined !== this.attr( 'data-o_content' ) ) {\n" .
 	"        this.text( this.attr( 'data-o_content' ) );\n" .
 	"    }\n" .
-	"};\n";
+	"};\n"
 	"\n" .
     "    /**\n" .
     "     * Stores a default attribute for an element so it can be reset later\n" .
@@ -3155,7 +3155,7 @@ add_action('wp_footer',function(){
     "    event.preventDefault();\n" .
     "    event.data.variationForm.\$attributeFields.val( '' ).trigger( 'change' );\n" .
     "    event.data.variationForm.\$form.trigger( 'reset_data' );\n" .
-    "};\n";
+    "};\n"
 
  "    /**\n" .
  "     * Reload variation data from the DOM.\n" .
@@ -4013,7 +4013,7 @@ add_action('wp_footer',function(){
  "    });\n" .
 
 
-	"});\n";
+	"});\n"
 
 	wbc()->load->add_inline_script( '', $inline_script, 'common' );
 
