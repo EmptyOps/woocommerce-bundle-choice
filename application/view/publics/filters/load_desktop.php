@@ -15,15 +15,29 @@ if(
 			<?php $filter_ui->load_collapsable_desktop($general_filters, $advance_filters); ?>
 		</div>
 	</div>
-	<style type="text/css">
-		@media(max-width:1440px){
-			.ui.dropdown>.left.menu {
-				left: auto!important;
-				right: -152px!important;
-			}		
-		}
-	</style>
 	<?php
+		if(false) {
+	?>
+			<style type="text/css">
+				@media(max-width:1440px){
+					.ui.dropdown>.left.menu {
+						left: auto!important;
+						right: -152px!important;
+					}		
+				}
+			</style> 
+	
+	<?php
+		}
+		$custom_css= "
+	    @media (max-width: 1440px) {
+	        .ui.dropdown>.left.menu {
+	            left: auto!important;
+	            right: -152px !important;
+	        }
+	    }
+		";
+	    wbc()->load->add_inline_style('', $custom_css,'common');   
 } else {
 
 	?>

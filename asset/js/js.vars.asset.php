@@ -94,81 +94,49 @@ if(false){
 	</script>
 <?php  
 }
+	$apply_filters_sp_is_legacy_admin_page = ((apply_filters('sp_is_legacy_admin_page', true)) ? "true" : "false");
+	$wbc_common_current_theme_key = wbc()->common->current_theme_key();
+	$is_shop = ((is_shop()) ? "true" : "false");
+	$is_product_category = ((is_product_category()) ? "true" : "false");
+	$is_product = ((is_product()) ? "true" : "false");
+	$wbc_is_mobile = ((wbc_is_mobile()) ? "true" : "false");
+	$is_admin = false;
+	if( is_admin() ) {
+		$is_admin = true;
+	}
     "// var log = console.log;\n" .
-    "// console.log = function () {\n" .
-    "    \n" .
-    "//     var base_log = null;\n" .
-    "//     // window.temp = arguments[0];\n" .
-    "\n" .
-    "//     if(typeof arguments[0] == 'string'){\n" .
-    "\n" .
-    "//         var conditions = [arguments[0].indexOf('] ') >= 0,\n" .
-    "//             arguments[0].indexOf('gim_feed [') >= 0,\n" .
-    "//             arguments[0].indexOf('gim [') >= 0,\n" .
-    "//             arguments[0].indexOf('vs [') >= 0,\n" .
-    "//             arguments[0].indexOf('A_OFF') >= 0,\n" .
-    "//             arguments[0].indexOf('A_ON') >= 0                \n" .
-    "//             ];\n" .
-    "\n" .
-    "//         for (let i = 0; i < conditions.length; i++) {\n" .
-    "//             var condition = false;\n" .
-    "//             if(conditions[i]){\n" .
-    "//                 condition = true;\n" .
-    "//                 break;\n" .
-    "//             }\n" .
-    "//         };\n" .
-    "//     }\n" .
-    "\n" .
-    "//     if(condition){\n" .
-    "\n" .
-    "//         base_log = false;\n" .
-    "//     }else{\n" .
-    "//         base_log = true;\n" .
-    "\n" .
-    "//     }\n" .
-    "\n" .
-    "//     if(base_log){\n" .
-    "\n" .
-    "//     log.apply(console, arguments);\n" .
-    "//     }\n" .
-    "\n" .
-    "// }\n" .
-    "\n" .
+    "    // commented code uper if false ma or backup file ma jova malse\n" .
+
     "// define namespaces \n" .
     "window.document.splugins = window.document.splugins || {};\n" .
     "window.document.splugins.common = window.document.splugins.common || {};\n" .
     "window.document.splugins.admin = window.document.splugins.admin || {};\n" .
     "\n" .
-    "<?php \n" .
+
+    " ".
+    	(
+    		$is_admin == true
+    		?
+			    "\n" .
+			    "    window.document.splugins.common.is_admin = true;\n" .
+			    "\n" .
+			    "    window.document.splugins.admin.is_legacy_admin_page = ".$apply_filters_sp_is_legacy_admin_page."; \n" 
+		   	:
+   				"    window.document.splugins.common.is_admin = false;\n" 	 	
+    	) .
+
     "\n" .
-    "if( is_admin() ){\n" .
+    "window.document.splugins.common.current_theme_key = '".$wbc_common_current_theme_key."';\n" .
     "\n" .
-    "    ?>\n" .
+    "window.document.splugins.common.is_shop_page =  ".$is_shop."; \n" .
     "\n" .
-    "    window.document.splugins.common.is_admin = <?php echo \"true\";?>;\n" .
+    "window.document.splugins.common.is_category_page = ".$is_product_category."; \n" .
     "\n" .
-    "    window.document.splugins.admin.is_legacy_admin_page = <?php echo ((apply_filters('sp_is_legacy_admin_page', true)) ? \"true\" : \"false\");?>; \n" .
-    "    <?php \n" .
-    "} else {\n" .
+    "window.document.splugins.common.is_item_page =  ".$is_product.";\n" .
     "\n" .
-    "    ?>\n" .
-    "    window.document.splugins.common.is_admin = <?php echo \"false\";?>;\n" .
-    "    <?php\n" .
-    "}\n" .
+    "window.document.splugins.common.is_mobile = ".$wbc_is_mobile.";\n" .
     "\n" .
-    "?>\n" .
-    "\n" .
-    "window.document.splugins.common.current_theme_key = '<?php echo wbc()->common->current_theme_key(); ?>';\n" .
-    "\n" .
-    "window.document.splugins.common.is_shop_page = <?php echo ((is_shop()) ? \"true\" : \"false\");?>; \n" .
-    "\n" .
-    "window.document.splugins.common.is_category_page = <?php echo ((is_product_category()) ? \"true\" : \"false\");?>; \n" .
-    "\n" .
-    "window.document.splugins.common.is_item_page = <?php echo ((is_product()) ? \"true\" : \"false\");?>;\n" .
-    "\n" .
-    "window.document.splugins.common.is_mobile = <?php echo ((wbc_is_mobile()) ? \"true\" : \"false\");?>;\n" .
-    "\n" .
-    "window.document.splugins.common.is_tablet = <?php echo ((wbc_is_mobile()) ? \"true\" : \"false\");?>; \n" .
+    "window.document.splugins.common.is_tablet = ".$wbc_is_mobile."; \n" .
     "\n";
 	wbc()->load->add_inline_script( '', $inline_script, 'common' );
 		
@@ -437,7 +405,7 @@ add_action('wp_footer',function(){
 
 		        // },2000);    
 
-			}
+		    }
 
 			// jQuery(base_container_swatches).check_variations();
 				jQuery('.variations_form').trigger('check_variations');
@@ -2281,8 +2249,7 @@ add_action('wp_footer',function(){
 	"        console.log('[js.vars.asset wp_footer] is_category_page');\n" .
 	"        \n" .
 	"        // added on 30-06-2023\n" .
-	"        // NOTE: even though we have checked in the below script if the eo_wbc_object is not available, then it is created, but as per the structure, we need to skip execution.\n" .
-	"        // And till we do not refactor the loading of scripts and execution further, we need the below if. Ideally, we should not load this js file if the filters widget is not rendered on the particular page.\n" .
+	"        // NOTE: even though we have checked in the below script if the eo_wbc_object is not available, then it is created, but as per the structure, we need to skip execution.And till we do not refactor the loading of scripts and execution further, we need the below if. Ideally, we should not load this js file if the filters widget is not rendered on the particular page.\n" .
 	"        if (typeof(eo_wbc_object) != 'undefined') {\n" .
 	"            \n" .
 	"            window.document.splugins.wbc.pagination.api.init();\n" .
@@ -2292,8 +2259,7 @@ add_action('wp_footer',function(){
 	"        }\n" .
 	"    }\n" .
 	"\n" .
-	"    // ACTIVE_TODO we should confirm once and then disable the category condition or part below because it seems unnecessary for the category page.\n" .
-	"    // or is it necessary for the purple theme loopbox slider? or for the tableview sidebar or popup if it has jQuery slider or zoom?\n" .
+	"    // ACTIVE_TODO we should confirm once and then disable the category condition or part below because it seems unnecessary for the category page. or is it necessary for the purple theme loopbox slider? or for the tableview sidebar or popup if it has jQuery slider or zoom?\n" .
 	"    if (window.document.splugins.common.is_item_page || window.document.splugins.common.is_category_page) {\n" .
 	"\n" .
 	"        // window.setTimeout(function(){\n" .
@@ -2339,27 +2305,16 @@ add_action('wp_footer',function(){
 	"\n" .
 	"        // window.setTimeout(function(){\n" .
 	"\n" .
-	"        // window.document.splugins.wbc.variations.gallery_images.feed_page.api.init();\n" .
+	"        // window.document.splugins.wbc.variations.gallery_images.feed_page.api.init();\n\n" .
 	"        var base_container_loop_feed_page = jQuery((window.document.splugins.common._o(common_configs.gallery_images_configs, 'base_container_loop_selector') ? common_configs.gallery_images_configs.base_container_loop_selector : '.variations_form'));\n" .
 	"        console.log('[js.vars.asset wp_footer] gim_feed variations');\n" .
 	"        console.log(base_container_loop_feed_page);\n" .
 	"        \n" .
 	"        jQuery(base_container_loop_feed_page).sp_wbc_variations_gallery_images_feed_page();\n" .
 	"        // ACTIVE_TODO_OC_START\n" .
-	"        // ACTIVE_TODO Below ajax complete will have a serious issue when the other ajax invokes this function means other than the eowbc js ajax call.\n" .
-	"        // So we need to simply bind on the success on render HTML notification simply the eowbs filter HTML notification and remove the ajax complete dependency from here\n" .
-	"        // and when that notification is fired inside the subscribe function here we can simply init the required modules.\n" .
-	"        // ya so simply put all the code that is the ajaxComplete function into the subscribe function of our notification module. -- to h\n" .
-	"        //  -- But still it not be inuf because the notification has a base container means host diffidency and that cannot be used here because of the uncertainly of that container\n" .
-	"        // and even if firing that global notification that is also lead to the same issue for which the base_container based on notifications are created.\n" .
-	"        // So we simply need to we simplify the filter module calling synchronization and make sure that for the fundamental filter search calls to that main function of filter wrapper or something such of the web, ajax is a being\n" .
-	"        // we need to make sure that the fundamental filter event there is only one selector of the container that is used. means we need to differentiate this search call of the category page from other search calls that may be happening from the diamond quiz popup, and other such things.\n" .
-	"        // And then we can simply use that container selector here -- to h\n" .
-	"        //  --    now after a while to fix some unwanted ajax-related bug the index of based URL condition is added below, but obviously that is not the intended standard fix\n" .
-	"        // since it will prevent some ajax events which we want to let them go inside but they will not be with below condition.\n" .
-	"        // So now we need a reliable fix to this whole ajaxComplete problem.\n" .
-	"        // Actually, we should simply rely on the ajaxComplete which we have inside a particular jQuery plugin of ours like sp_wbc_variations_swatches or sp_wbc_variations_gallery_images have that.\n" .
-	"        // and most probably the community standard must be that otherwise we need to do research on that and figure out the appropriate standard architecture implementation.\n" .
+	"        // ACTIVE_TODO Below ajax complete will have a serious issue when the other ajax invokes this function means other than the eowbc js ajax call. So we need to simply bind on the success on render HTML notification simply the eowbs filter HTML notification and remove the ajax complete dependency from here and when that notification is fired inside the subscribe function here we can simply init the required modules. ya so simply put all the code that is the ajaxComplete function into the subscribe function of our notification module. -- to h\n" .
+	"        //  -- But still it not be inuf because the notification has a base container means host diffidency and that cannot be used here because of the uncertainly of that container and even if firing that global notification that is also lead to the same issue for which the base_container based on notifications are created. So we simply need to we simplify the filter module calling synchronization and make sure that for the fundamental filter search calls to that main function of filter wrapper or something such of the web, ajax is a being we need to make sure that the fundamental filter event there is only one selector of the container that is used. means we need to differentiate this search call of the category page from other search calls that may be happening from the diamond quiz popup, and other such things. And then we can simply use that container selector here -- to h\n" .
+	"        //  --    now after a while to fix some unwanted ajax-related bug the index of based URL condition is added below, but obviously that is not the intended standard fix since it will prevent some ajax events which we want to let them go inside but they will not be with below condition. So now we need a reliable fix to this whole ajaxComplete problem. Actually, we should simply rely on the ajaxComplete which we have inside a particular jQuery plugin of ours like sp_wbc_variations_swatches or sp_wbc_variations_gallery_images have that. and most probably the community standard must be that otherwise we need to do research on that and figure out the appropriate standard architecture implementation.\n" .
 	"        // ACTIVE_TODO_OC_END\n" .
 	"        \n" .
 	"        jQuery(document).ajaxComplete(function (event, request, settings) {\n" .
@@ -2372,28 +2327,17 @@ add_action('wp_footer',function(){
 	"                console.log(jQuery(base_container_loop_feed_page));\n" .
 	"                \n" .
 	"                jQuery(base_container_loop_feed_page).sp_wbc_variations_gallery_images_feed_page();   \n" .
-	"            }\n" .
+	"            }\n\n\n" .
 	"        });\n" .
 	"\n" .
 	"        // console.log('[js.vars.asset wp_footer] gim_feed simple');\n" .
 	"        var base_container_loop_simple_feed_page = jQuery((window.document.splugins.common._o(common_configs.gallery_images_configs, 'base_container_loop_selector_simple') ? common_configs.gallery_images_configs.base_container_loop_selector_simple : null /*ACTIVE_TODO_OC_START need to update here the base_container_selectore ACTIVE_TODO_OC_END*/));\n" .
-	"        var loop_simple_feed_page_options = ['product_type' => 'simple'];\n" .
+	"        var loop_simple_feed_page_options = {product_type:'simple'};\n" .
 	"        jQuery(base_container_loop_simple_feed_page).sp_wbc_variations_gallery_images_feed_page(loop_simple_feed_page_options);\n" .
 	"        // ACTIVE_TODO_OC_START\n" .
-	"        // ACTIVE_TODO Below ajax complete will have a serious issue when the other ajax invokes this function means other than the eowbc js ajax call.\n" .
-	"        // So we need to simply bind on the success on render HTML notification simply the eowbs filter HTML notification and remove the ajax complete dependency from here\n" .
-	"        // and when that notification is fired inside the subscribe function here we can simply init the required modules.\n" .
-	"        // ya so simply put all the code that is the ajaxComplete function into the subscribe function of our notification module. -- to h\n" .
-	"        //  -- But still it not be inuf because the notification has a base container means host diffidency and that cannot be used here because of the uncertainly of that container\n" .
-	"        // and even if firing that global notification that is also lead to the same issue for which the base_container based on notifications are created.\n" .
-	"        // So we simply need to we simplify the filter module calling synchronization and make sure that for the fundamental filter search calls to that main function of filter wrapper or something such of the web, ajax is a being\n" .
-	"        // we need to make sure that the fundamental filter event there is only one selector of the container that is used. means we need to differentiate this search call of the category page from other search calls that may be happening from the diamond quiz popup, and other such things.\n" .
-	"        // And then we can simply use that container selector here -- to h\n" .
-	"        //  --    now after a while to fix some unwanted ajax-related bug the index of based URL condition is added below, but obviously that is not the intended standard fix\n" .
-	"        // since it will prevent some ajax events which we want to let them go inside but they will not be with below condition.\n" .
-	"        // So now we need a reliable fix to this whole ajaxComplete problem.\n" .
-	"        // Actually, we should simply rely on the ajaxComplete which we have inside a particular jQuery plugin of ours like sp_wbc_variations_swatches or sp_wbc_variations_gallery_images have that.\n" .
-	"        // and most probably the community standard must be that otherwise we need to do research on that and figure out the appropriate standard architecture implementation.\n" .
+	"        // ACTIVE_TODO Below ajax complete will have a serious issue when the other ajax invokes this function means other than the eowbc js ajax call. So we need to simply bind on the success on render HTML notification simply the eowbs filter HTML notification and remove the ajax complete dependency from here and when that notification is fired inside the subscribe function here we can simply init the required modules. ya so simply put all the code that is the ajaxComplete function into the subscribe function of our notification module. -- to h\n" .
+	"        //  -- But still it not be inuf because the notification has a base container means host diffidency and that cannot be used here because of the uncertainly of that container and even if firing that global notification that is also lead to the same issue for which the base_container based on notifications are created. So we simply need to we simplify the filter module calling synchronization and make sure that for the fundamental filter search calls to that main function of filter wrapper or something such of the web, ajax is a being we need to make sure that the fundamental filter event there is only one selector of the container that is used. means we need to differentiate this search call of the category page from other search calls that may be happening from the diamond quiz popup, and other such things. And then we can simply use that container selector here -- to h\n" .
+	"        //  --    now after a while to fix some unwanted ajax-related bug the index of based URL condition is added below, but obviously that is not the intended standard fix since it will prevent some ajax events which we want to let them go inside but they will not be with below condition. So now we need a reliable fix to this whole ajaxComplete problem. Actually, we should simply rely on the ajaxComplete which we have inside a particular jQuery plugin of ours like sp_wbc_variations_swatches or sp_wbc_variations_gallery_images have that. and most probably the community standard must be that otherwise we need to do research on that and figure out the appropriate standard architecture implementation.\n" .
 	"        // ACTIVE_TODO_OC_END\n" .
 	"        \n" .
 	"        jQuery(document).ajaxComplete(function (event, request, settings) {\n" .
@@ -2413,7 +2357,7 @@ add_action('wp_footer',function(){
 	"            }\n" .
 	"        });\n" .
 	"        \n" .
-	"        // },2000);\n" .
+	"        // },2000);\n\n" .
 	"    }\n" .
 	"\n" .
 
@@ -2436,28 +2380,16 @@ add_action('wp_footer',function(){
 	"        \n" .
 	"        // console.log('[js.vars.asset wp_footer] vs_feed');\n" .
 	"        \n" .
-	"        // window.setTimeout(function(){\n" .
+	"        // window.setTimeout(function(){\n\n" .
 	"        // window.document.splugins.wbc.variations.swatches.feed_page.api.init();\n" .
 	"        base_container_loop_feed_page = jQuery((window.document.splugins.common._o(common_configs.swatches_config, 'base_container_loop_selector') ? common_configs.swatches_config.base_container_loop_selector : '.variations_form'));\n" .
 	"        jQuery(base_container_loop_feed_page).sp_wbc_variations_swatches_feed_page();\n" .
 	"        // ACTIVE_TODO_OC_START\n" .
-	"        // ACTIVE_TODO Below ajax complete will have a serious issue when the other ajax invokes this function means other than the eowbc js ajax call.\n" .
-	"        // So we need to simply bind on the success on render HTML notification simply the eowbs filter HTML notification and remove the ajax complete dependency from here\n" .
-	"        // and when that notification is fired inside the subscribe function here we can simply init the required modules.\n" .
-	"        // ya so simply put all the code that is the ajaxComplete function into the subscribe function of our notification module. -- to h\n" .
-	"        //  -- But still it not be inuf because the notification has a base container means host diffidency and that cannot be used here because of the uncertainly of that container\n" .
-	"        // and even if firing that global notification that is also lead to the same issue for which the base_container based on notifications are created.\n" .
-	"        // So we simply need to we simplify the filter module calling synchronization and make sure that for the fundamental filter search calls to that main function of filter wrapper or something such of the web, ajax is a being\n" .
-	"        // we need to make sure that the fundamental filter event there is only one selector of the container that is used. means we need to differentiate this search call of the category page from other search calls that may be happening from the diamond quiz popup, and other such things.\n" .
-	"        // And then we can simply use that container selector here -- to h\n" .
-	"        //  --    now after a while to fix some unwanted ajax-related bug the index of based URL condition is added below, but obviously that is not the intended standard fix\n" .
-	"        // since it will prevent some ajax events which we want to let them go inside but they will not be with below condition.\n" .
-	"        // So now we need a reliable fix to this whole ajaxComplete problem.\n" .
-	"        // Actually, we should simply rely on the ajaxComplete which we have inside a particular jQuery plugin of ours like sp_wbc_variations_swatches or sp_wbc_variations_gallery_images have that.\n" .
-	"        // and most probably the community standard must be that otherwise we need to do research on that and figure out the appropriate standard architecture implementation.\n" .
+	"        // ACTIVE_TODO Below ajax complete will have a serious issue when the other ajax invokes this function means other than the eowbc js ajax call. So we need to simply bind on the success on render HTML notification simply the eowbs filter HTML notification and remove the ajax complete dependency from here and when that notification is fired inside the subscribe function here we can simply init the required modules. ya so simply put all the code that is the ajaxComplete function into the subscribe function of our notification module. -- to h\n" .
+	"        //  -- But still it not be inuf because the notification has a base container means host diffidency and that cannot be used here because of the uncertainly of that container and even if firing that global notification that is also lead to the same issue for which the base_container based on notifications are created. So we simply need to we simplify the filter module calling synchronization and make sure that for the fundamental filter search calls to that main function of filter wrapper or something such of the web, ajax is a being we need to make sure that the fundamental filter event there is only one selector of the container that is used. means we need to differentiate this search call of the category page from other search calls that may be happening from the diamond quiz popup, and other such things. And then we can simply use that container selector here -- to h\n" .
 	"        // ACTIVE_TODO_OC_END	 		           \n" .
-	"        jQuery(document).ajaxComplete(function (event, request, settings) {\n" .
-	"            console.log('[js.vars.asset wp_footer] vs_feed ajaxComplete');\n" .
+	"        jQuery(document).ajaxComplete(function (event, request, settings) {\n\n" .
+	"            console.log('[js.vars.asset wp_footer] vs_feed ajaxComplete');\n\n" .
 	"            // console.log('[js.vars.asset wp_footer] vs_feed ajaxComplete');\n" .
 	"            if (settings.url.indexOf('/product-category/') >= 0) {\n" .
 	"                \n" .
@@ -2467,12 +2399,12 @@ add_action('wp_footer',function(){
 	"                console.log(base_container_loop_feed_page);\n" .
 	"\n" .
 	"                jQuery(base_container_loop_feed_page).sp_wbc_variations_swatches_feed_page();\n" .
-	"            }\n" .
+	"            }\n\n" .
 	"        });\n" .
 	"        \n" .
 	"        base_container_swatches = base_container_loop_feed_page;\n" .
 	"        \n" .
-	"        // },2000);    \n" .
+	"        // },2000);    \n\n" .
 	"    }\n" .
 	"\n" .
 	"    // jQuery(base_container_swatches).check_variations();\n" .
@@ -2482,7 +2414,7 @@ add_action('wp_footer',function(){
 
 	"    window.setTimeout(function() {\n" .
 	"        /*global wc_add_to_cart_variation_params */\n" .
-	"        ;(function ( $, window, document, undefined ) {\n" .
+	"        ;(function ( \$, window, document, undefined ) {\n" .
 	"            var VariationForm = function( \$form ) {\n" .
 	"                var self = this;\n" .
 	"                console.log('A_OFF show_variation [VariationForm]');\n" .
@@ -2713,6 +2645,32 @@ add_action('wp_footer',function(){
 	"        \$template_html = \$template_html.replace( '/*]]>*/', '' );\n" .
 	"        form.\$singleVariation.html( \$template_html );\n" .
 	"        form.\$form.find( 'input[name=\"variation_id\"], input.variation_id' ).val( variation.variation_id ).trigger( 'change' );\n" .
+
+    "// Hide or show qty input\n" .
+    "if ( variation.is_sold_individually === 'yes' ) {\n" .
+    "    \$qty.find( 'input.qty' ).val( '1' ).attr( 'min', '1' ).attr( 'max', '' ).trigger( 'change' );\n" .
+    "    \$qty.hide();\n" .
+    "} else {\n" .
+    "\n" .
+    "    var \$qty_input = \$qty.find( 'input.qty' ),\n" .
+    "        qty_val    = parseFloat( \$qty_input.val() );\n" .
+    "\n" .
+    "    if ( isNaN( qty_val ) ) {\n" .
+    "        qty_val = variation.min_qty;\n" .
+    "    } else {\n" .
+    "        qty_val = qty_val > parseFloat( variation.max_qty ) ? variation.max_qty : qty_val;\n" .
+    "        qty_val = qty_val < parseFloat( variation.min_qty ) ? variation.min_qty : qty_val;\n" .
+    "    }\n" .
+    "\n" .
+    "    \$qty_input.attr( 'min', variation.min_qty ).attr( 'max', variation.max_qty ).val( qty_val ).trigger( 'change' );\n" .
+    "    \$qty.show();\n" .
+    "}\n" .
+    "\n" .
+    "// Enable or disable the add to cart button\n" .
+    "if ( ! variation.is_purchasable || ! variation.is_in_stock || ! variation.variation_is_visible ) {\n" .
+    "    purchasable = false;\n" .
+    "}\n"
+
 	"        if ( form.\$singleVariation.text().trim() ) {\n" .
 	"            form.\$singleVariation.slideDown( 200 ).trigger( 'show_variation', [ variation, purchasable ] );\n" .
 	"        } else {\n" .
@@ -2734,8 +2692,8 @@ add_action('wp_footer',function(){
 	"        form.\$form.trigger( 'woocommerce_variation_has_changed' );\n" .
 	"    };\n" .
 	"    VariationForm.prototype.addSlashes = function( string ) {\n" .
-	"        string = string.replace( /'/g, '\\\\'' );\n" .
-	"        string = string.replace( /\"/g, '\\\\\"' );\n" .
+	"        string = string.replace( /'/g, '\\\\\\'' );\n" .
+	"        string = string.replace( /\"/g, '\\\\\\\"' );\n" .
 	"        return string;\n" .
 	"    };\n" .
 	"    VariationForm.prototype.onUpdateAttributes = function( event ) {\n" .
@@ -2811,8 +2769,6 @@ add_action('wp_footer',function(){
 	"                    });\n" .
 	"                }\n" .
 	"            }\n" .
-	"        });\n" .
-	"    };\n" .
 
 	"    if ( attached_options_count > 0 && selected_attr_val && selected_attr_val_valid && ( 'no' === show_option_none ) ) {\n" .
 	"        new_attr_select.find( 'option:first' ).remove();\n" .
@@ -2836,7 +2792,7 @@ add_action('wp_footer',function(){
 	"    });\n" .
 	"    // Custom event for when variations have been updated.\n" .
 	"    form.\$form.trigger( 'woocommerce_update_variation_values' );\n" .
-	"});\n" .
+	"};\n" .
 	"VariationForm.prototype.getChosenAttributes = function() {\n" .
 	"    var data   = {};\n" .
 	"    var count  = 0;\n" .
@@ -2893,27 +2849,27 @@ add_action('wp_footer',function(){
 	"        this.\$resetVariations.css( 'visibility', 'hidden' );\n" .
 	"    }\n" .
 	"};\n" .
-	"$.fn.wc_variation_form = function() {\n" .
+	"\$.fn.wc_variation_form = function() {\n" .
 	"    console.log('A_OFF show_variation [wc_variation_form]');\n" .
 	"    new VariationForm( this );\n" .
 	"    return this;\n" .
 	"};\n" .
-	"$.fn.wc_set_content = function( content ) {\n" .
+	"\$.fn.wc_set_content = function( content ) {\n" .
 	"    if ( undefined === this.attr( 'data-o_content' ) ) {\n" .
 	"        this.attr( 'data-o_content', this.text() );\n" .
 	"    }\n" .
 	"    this.text( content );\n" .
 	"};\n" .
-	"$.fn.wc_reset_content = function() {\n" .
+	"\$.fn.wc_reset_content = function() {\n" .
 	"    if ( undefined !== this.attr( 'data-o_content' ) ) {\n" .
 	"        this.text( this.attr( 'data-o_content' ) );\n" .
 	"    }\n" .
-
+	"};\n"
 	"\n" .
     "    /**\n" .
     "     * Stores a default attribute for an element so it can be reset later\n" .
     "     */\n" .
-    "    $.fn.wc_set_variation_attr = function( attr, value ) {\n" .
+    "    \$.fn.wc_set_variation_attr = function( attr, value ) {\n" .
     "        if ( undefined === this.attr( 'data-o_' + attr ) ) {\n" .
     "            this.attr( 'data-o_' + attr, ( ! this.attr( attr ) ) ? '' : this.attr( attr ) );\n" .
     "        }\n" .
@@ -2927,7 +2883,7 @@ add_action('wp_footer',function(){
     "    /**\n" .
     "     * Reset a default attribute for an element so it can be reset later\n" .
     "     */\n" .
-    "    $.fn.wc_reset_variation_attr = function( attr ) {\n" .
+    "    \$.fn.wc_reset_variation_attr = function( attr ) {\n" .
     "        if ( undefined !== this.attr( 'data-o_' + attr ) ) {\n" .
     "            this.attr( attr, this.attr( 'data-o_' + attr ) );\n" .
     "        }\n" .
@@ -2936,7 +2892,7 @@ add_action('wp_footer',function(){
     "    /**\n" .
     "     * Reset the slide position if the variation has a different image than the current one\n" .
     "     */\n" .
-    "    $.fn.wc_maybe_trigger_slide_position_reset = function( variation ) {\n" .
+    "    \$.fn.wc_maybe_trigger_slide_position_reset = function( variation ) {\n" .
     "        var \$form                = \$( this ),\n" .
     "            \$product             = \$form.closest( '.product' ),\n" .
     "            \$product_gallery     = \$product.find( '.images' ),\n" .
@@ -2957,7 +2913,7 @@ add_action('wp_footer',function(){
     "    /**\n" .
     "     * Sets product images for the chosen variation\n" .
     "     */\n" .
-    "    $.fn.wc_variations_image_update = function( variation ) {\n" .
+    "    \$.fn.wc_variations_image_update = function( variation ) {\n" .
     "        var \$form             = this,\n" .
     "            \$product          = \$form.closest( '.product' ),\n" .
     "            \$product_gallery  = \$product.find( '.images' ),\n" .
@@ -3020,7 +2976,7 @@ add_action('wp_footer',function(){
     "    /**\n" .
     "     * Reset main image to defaults.\n" .
     "     */\n" .
-    "    $.fn.wc_variations_image_reset = function() {\n" .
+    "    \$.fn.wc_variations_image_reset = function() {\n" .
     "        var \$form             = this,\n" .
     "            \$product          = \$form.closest( '.product' ),\n" .
     "            \$product_gallery  = \$product.find( '.images' ),\n" .
@@ -3049,14 +3005,14 @@ add_action('wp_footer',function(){
     "        \$product_link.wc_reset_variation_attr( 'href' );\n" .
     "    };\n" .
     "\n" .
-    "    $(function() {\n" .
+    "    \$(function() {\n" .
     "        console.log('A_OFF show_variation wc_add_to_cart_variation_params');\n" .
     "        console.log(wc_add_to_cart_variation_params);\n" .
     "        if ( typeof wc_add_to_cart_variation_params !== 'undefined' ) {\n" .
-    "            $( '.variations_form' ).each( function() {\n" .
+    "            \$( '.variations_form' ).each( function() {\n" .
     "                // console.log('A_OFF show_variation [load] loop');\n" .
     "                // console.log(this);\n" .
-    "                $( this ).wc_variation_form();\n" .
+    "                \$( this ).wc_variation_form();\n" .
     "            });\n" .
     "        }\n" .
     "    });\n" .
@@ -3131,6 +3087,7 @@ add_action('wp_footer',function(){
 "            });\n" .
 "        };\n" .
 "    };\n\n" .
+"    })( jQuery, window, document );\n" .
 "   }, 1000);\n" .
 
  "    jQuery(document).ajaxComplete(function (event, request, settings) {\n" .
@@ -3190,6 +3147,16 @@ add_action('wp_footer',function(){
  "                    };\n" .
 
 "\n" .
+
+    "/**\n" .
+    " * Reset all fields.\n" .
+    " */\n" .
+    "VariationForm.prototype.onReset = function( event ) {\n" .
+    "    event.preventDefault();\n" .
+    "    event.data.variationForm.\$attributeFields.val( '' ).trigger( 'change' );\n" .
+    "    event.data.variationForm.\$form.trigger( 'reset_data' );\n" .
+    "};\n"
+
  "    /**\n" .
  "     * Reload variation data from the DOM.\n" .
  "     */\n" .
@@ -3314,73 +3281,73 @@ add_action('wp_footer',function(){
  "                if ( form.xhr ) {\n" .
  "                    form.xhr.abort();\n" .
  "                }\n" .
- "                form.$form.block( { message: null, overlayCSS: { background: '#fff', opacity: 0.6 } } );\n" .
- "                currentAttributes.product_id  = parseInt( form.$form.data( 'product_id' ), 10 );\n" .
- "                currentAttributes.custom_data = form.$form.data( 'custom_data' );\n" .
- "                form.xhr                      = $.ajax( {\n" .
+ "                form.\$form.block( { message: null, overlayCSS: { background: '#fff', opacity: 0.6 } } );\n" .
+ "                currentAttributes.product_id  = parseInt( form.\$form.data( 'product_id' ), 10 );\n" .
+ "                currentAttributes.custom_data = form.\$form.data( 'custom_data' );\n" .
+ "                form.xhr                      = \$.ajax( {\n" .
  "                    url: wc_add_to_cart_variation_params.wc_ajax_url.toString().replace( '%%endpoint%%', 'get_variation' ),\n" .
  "                    type: 'POST',\n" .
  "                    data: currentAttributes,\n" .
  "                    success: function( variation ) {\n" .
  "                        if ( variation ) {\n" .
- "                            form.$form.trigger( 'found_variation', [ variation ] );\n" .
+ "                            form.\$form.trigger( 'found_variation', [ variation ] );\n" .
  "                        } else {\n" .
- "                            form.$form.trigger( 'reset_data' );\n" .
+ "                            form.\$form.trigger( 'reset_data' );\n" .
  "                            attributes.chosenCount = 0;\n" .
  "\n" .
  "                            if ( ! form.loading ) {\n" .
- "                                form.$form\n" .
+ "                                form.\$form\n" .
  "                                    .find( '.single_variation' )\n" .
  "                                    .after(\n" .
  "                                        '<p class=\"wc-no-matching-variations woocommerce-info\">' +\n" .
  "                                        wc_add_to_cart_variation_params.i18n_no_matching_variations_text +\n" .
  "                                        '</p>'\n" .
  "                                    );\n" .
- "                                form.$form.find( '.wc-no-matching-variations' ).slideDown( 200 );\n" .
+ "                                form.\$form.find( '.wc-no-matching-variations' ).slideDown( 200 );\n" .
  "                            }\n" .
  "                        }\n" .
  "                    },\n" .
  "                    complete: function() {\n" .
- "                        form.$form.unblock();\n" .
+ "                        form.\$form.unblock();\n" .
  "                    }\n" .
  "                } );\n" .
  "            } else {\n" .
  "\n" .
  "                console.log('A_ON show_variation [onFindVariation] 1 else');\n" .
  "\n" .
- "                form.$form.trigger( 'update_variation_values' );\n" .
+ "                form.\$form.trigger( 'update_variation_values' );\n" .
  "\n" .
  "                var matching_variations = form.findMatchingVariations( form.variationData, currentAttributes ),\n" .
  "                    variation           = matching_variations.shift();\n" .
  "\n" .
  "                // console.log('A_ON show_variation [onFindVariation] 1 else variation');\n" .
- "                // console.log(form.$form);\n" .
+ "                // console.log(form.\$form);\n" .
  "                // console.log(variation);\n" .
  "                \n" .
  "                if ( variation ) {\n" .
  "                    \n" .
  "                    // console.log('A_ON show_variation [onFindVariation] 1 else if');\n" .
  "\n" .
- "                    form.$form.trigger( 'found_variation', [ variation ] );\n" .
+ "                    form.\$form.trigger( 'found_variation', [ variation ] );\n" .
  "                } else {\n" .
- "                    form.$form.trigger( 'reset_data' );\n" .
+ "                    form.\$form.trigger( 'reset_data' );\n" .
  "                    attributes.chosenCount = 0;\n" .
  "\n" .
  "                    if ( ! form.loading ) {\n" .
- "                        form.$form\n" .
+ "                        form.\$form\n" .
  "                            .find( '.single_variation' )\n" .
  "                            .after(\n" .
  "                                '<p class=\"wc-no-matching-variations woocommerce-info\">' +\n" .
  "                                wc_add_to_cart_variation_params.i18n_no_matching_variations_text +\n" .
  "                                '</p>'\n" .
  "                            );\n" .
- "                        form.$form.find( '.wc-no-matching-variations' ).slideDown( 200 );\n" .
+ "                        form.\$form.find( '.wc-no-matching-variations' ).slideDown( 200 );\n" .
  "                    }\n" .
  "                }\n" .
  "            }\n" .
  "        } else {\n" .
- "            form.$form.trigger( 'update_variation_values' );\n" .
- "            form.$form.trigger( 'reset_data' );\n" .
+ "            form.\$form.trigger( 'update_variation_values' );\n" .
+ "            form.\$form.trigger( 'reset_data' );\n" .
  "        }\n" .
  "\n" .
  "        // Show reset link.\n" .
@@ -3396,14 +3363,14 @@ add_action('wp_footer',function(){
  "        console.log('A_ON show_variation [onFoundVariation]');\n" .
  "\n" .
  "        var form           = event.data.variationForm,\n" .
- "            \$sku           = form.$product.find( '.product_meta' ).find( '.sku' ),\n" .
- "            \$weight        = form.$product.find(\n" .
+ "            \$sku           = form.\$product.find( '.product_meta' ).find( '.sku' ),\n" .
+ "            \$weight        = form.\$product.find(\n" .
  "                '.product_weight, .woocommerce-product-attributes-item--weight .woocommerce-product-attributes-item__value'\n" .
  "            ),\n" .
- "            \$dimensions    = form.$product.find(\n" .
+ "            \$dimensions    = form.\$product.find(\n" .
  "                '.product_dimensions, .woocommerce-product-attributes-item--dimensions .woocommerce-product-attributes-item__value'\n" .
  "            ),\n" .
- "            \$qty           = form.$singleVariationWrap.find( '.quantity' ),\n" .
+ "            \$qty           = form.\$singleVariationWrap.find( '.quantity' ),\n" .
  "            purchasable    = true,\n" .
  "            variation_id   = '',\n" .
  "            template       = false,\n" .
@@ -3423,12 +3390,12 @@ add_action('wp_footer',function(){
  "\n" .
  "        if ( variation.dimensions ) {\n" .
  "            // Decode HTML entities.\n" .
- "            \$dimensions.wc_set_content( $.parseHTML( variation.dimensions_html )[0].data );\n" .
+ "            \$dimensions.wc_set_content( \$.parseHTML( variation.dimensions_html )[0].data );\n" .
  "        } else {\n" .
  "            \$dimensions.wc_reset_content();\n" .
  "        }\n" .
  "\n" .
- "        form.$form.wc_variations_image_update( variation );\n" .
+ "        form.\$form.wc_variations_image_update( variation );\n" .
  "\n" .
  "        if ( ! variation.variation_is_visible ) {\n" .
  "            template = wp_template( 'unavailable-variation-template' );\n" .
@@ -3443,8 +3410,8 @@ add_action('wp_footer',function(){
  "        \$template_html = \$template_html.replace( '/*<![CDATA[*/', '' );\n" .
  "        \$template_html = \$template_html.replace( '/*]]>*/', '' );\n" .
  "\n" .
- "        form.$singleVariation.html( \$template_html );\n" .
- "        form.$form.find( 'input[name=\"variation_id\"], input.variation_id' ).val( variation.variation_id ).trigger( 'change' );\n" .
+ "        form.\$singleVariation.html( \$template_html );\n" .
+ "        form.\$form.find( 'input[name=\"variation_id\"], input.variation_id' ).val( variation.variation_id ).trigger( 'change' );\n" .
  "\n" .
  "        // Hide or show qty input\n" .
  "        if ( variation.is_sold_individually === 'yes' ) {\n" .
@@ -3472,15 +3439,15 @@ add_action('wp_footer',function(){
  "        }\n" .
  "\n" .
  "        // Reveal\n" .
- "        if ( form.$singleVariation.text().trim() ) {\n" .
+ "        if ( form.\$singleVariation.text().trim() ) {\n" .
  "\n" .
  "            // console.log('A_ON show_variation [onFoundVariation] if');\n" .
- "            // console.log(form.$singleVariation);\n" .
+ "            // console.log(form.\$singleVariation);\n" .
  "\n" .
- "            form.$singleVariation.slideDown( 200 ).trigger( 'show_variation', [ variation, purchasable ] );\n" .
+ "            form.\$singleVariation.slideDown( 200 ).trigger( 'show_variation', [ variation, purchasable ] );\n" .
  "        } else {\n" .
  "            // console.log('A_ON show_variation [onFoundVariation] else');\n" .
- "            form.$singleVariation.show().trigger( 'show_variation', [ variation, purchasable ] );\n" .
+ "            form.\$singleVariation.show().trigger( 'show_variation', [ variation, purchasable ] );\n" .
  "        }\n" .
  "    };\n" .
  "\n" .
@@ -3490,18 +3457,18 @@ add_action('wp_footer',function(){
  "    VariationForm.prototype.onChange = function( event ) {\n" .
  "        var form = event.data.variationForm;\n" .
  "\n" .
- "        form.$form.find( 'input[name=\"variation_id\"], input.variation_id' ).val( '' ).trigger( 'change' );\n" .
- "        form.$form.find( '.wc-no-matching-variations' ).remove();\n" .
+ "        form.\$form.find( 'input[name=\"variation_id\"], input.variation_id' ).val( '' ).trigger( 'change' );\n" .
+ "        form.\$form.find( '.wc-no-matching-variations' ).remove();\n" .
  "\n" .
  "        if ( form.useAjax ) {\n" .
- "            form.$form.trigger( 'check_variations' );\n" .
+ "            form.\$form.trigger( 'check_variations' );\n" .
  "        } else {\n" .
- "            form.$form.trigger( 'woocommerce_variation_select_change' );\n" .
- "            form.$form.trigger( 'check_variations' );\n" .
+ "            form.\$form.trigger( 'woocommerce_variation_select_change' );\n" .
+ "            form.\$form.trigger( 'check_variations' );\n" .
  "        }\n" .
  "\n" .
  "        // Custom event for when variation selection has been changed\n" .
- "        form.$form.trigger( 'woocommerce_variation_has_changed' );\n" .
+ "        form.\$form.trigger( 'woocommerce_variation_has_changed' );\n" .
  "    };\n" .
  "\n" .
  "    /**\n" .
@@ -3510,8 +3477,8 @@ add_action('wp_footer',function(){
  "     * @return {string}\n" .
  "     */\n" .
  "    VariationForm.prototype.addSlashes = function( string ) {\n" .
- "        string = string.replace( /'/g, '\\\\'' );\n" .
- "        string = string.replace( /\"/g, '\\\\\"' );\n" .
+ "        string = string.replace( /'/g, '\\\\\\'' );\n" .
+ "        string = string.replace( /\"/g, '\\\\\\\"' );\n" .
  "        return string;\n" .
  "    };\n" .
  "\n" .
@@ -3528,13 +3495,13 @@ add_action('wp_footer',function(){
  "        }\n" .
  "\n" .
  "        // Loop through selects and disable/enable options based on selections.\n" .
- "        form.$attributeFields.each( function( index, el ) {\n" .
- "            var current_attr_select     = $( el ),\n" .
+ "        form.\$attributeFields.each( function( index, el ) {\n" .
+ "            var current_attr_select     = \$( el ),\n" .
  "                current_attr_name       = current_attr_select.data( 'attribute_name' ) || current_attr_select.attr( 'name' ),\n" .
- "                show_option_none        = $( el ).data( 'show_option_none' ),\n" .
+ "                show_option_none        = \$( el ).data( 'show_option_none' ),\n" .
  "                option_gt_filter        = ':gt(0)',\n" .
  "                attached_options_count  = 0,\n" .
- "                new_attr_select         = $( '<select/>' ),\n" .
+ "                new_attr_select         = \$( '<select/>' ),\n" .
  "                selected_attr_val       = current_attr_select.val() || '',\n" .
  "                selected_attr_val_valid = true;\n" .
  "\n" .
@@ -3556,7 +3523,7 @@ add_action('wp_footer',function(){
  "\n" .
  "            // The attribute of this select field should not be taken into account when calculating its matching variations:\n" .
  "            // The constraints of this attribute are shaped by the values of the other attributes.\n" .
- "            var checkAttributes = $.extend( true, {}, currentAttributes );\n" .
+ "            var checkAttributes = \$.extend( true, {}, currentAttributes );\n" .
  "\n" .
  "            checkAttributes[ current_attr_name ] = '';\n" .
  "\n" .
@@ -3565,9 +3532,6 @@ add_action('wp_footer',function(){
  "            // console.log('A_ON show_variation [onUpdateAttributes] variations');\n" .
  "            // console.log(variations);\n" .
  "\n" .
- "        });\n" .
- "    };\n" .
-
  "\n" .
  "    // Loop through variations.\n" .
  "    for ( var num in variations ) {\n" .
@@ -3604,7 +3568,7 @@ add_action('wp_footer',function(){
  "                            // console.log('A_ON show_variation [onUpdateAttributes] loop variationAttributes loop if if if2');\n" .
  "\n" .
  "                            // Decode entities.\n" .
- "                            attr_val = $( '<div/>' ).html( attr_val ).text();\n" .
+ "                            attr_val = \$( '<div/>' ).html( attr_val ).text();\n" .
  "\n" .
  "                            // Attach to matching options by value. This is done to compare\n" .
  "                            // TEXT values rather than any HTML entities.\n" .
@@ -3690,7 +3654,7 @@ add_action('wp_footer',function(){
  "/**\n" .
  " * Custom event for when variations have been updated.\n" .
  " */\n" .
- "form.$form.trigger( 'woocommerce_update_variation_values' );\n" .
+ "form.\$form.trigger( 'woocommerce_update_variation_values' );\n" .
  "};\n" .
 
  "\n" .
@@ -3704,10 +3668,10 @@ add_action('wp_footer',function(){
  "        var chosen = 0;\n" .
  "\n" .
  "        // console.log('A_ON show_variation [getChosenAttributes]');\n" .
- "        // console.log(this.$attributeFields);\n" .
+ "        // console.log(this.\$attributeFields);\n" .
  "        // console.log(this);\n" .
  "\n" .
- "        this.$attributeFields.each( function() {\n" .
+ "        this.\$attributeFields.each( function() {\n" .
  "            var attribute_name = \$( this ).data( 'attribute_name' ) || \$( this ).attr( 'name' );\n" .
  "            var value          = \$( this ).val() || '';\n" .
  "\n" .
@@ -3778,11 +3742,11 @@ add_action('wp_footer',function(){
  "     */\n" .
  "    VariationForm.prototype.toggleResetLink = function( on ) {\n" .
  "        if ( on ) {\n" .
- "            if ( this.$resetVariations.css( 'visibility' ) === 'hidden' ) {\n" .
- "                this.$resetVariations.css( 'visibility', 'visible' ).hide().fadeIn();\n" .
+ "            if ( this.\$resetVariations.css( 'visibility' ) === 'hidden' ) {\n" .
+ "                this.\$resetVariations.css( 'visibility', 'visible' ).hide().fadeIn();\n" .
  "            }\n" .
  "        } else {\n" .
- "            this.$resetVariations.css( 'visibility', 'hidden' );\n" .
+ "            this.\$resetVariations.css( 'visibility', 'hidden' );\n" .
  "        }\n" .
  "    };\n" .
  "\n" .
@@ -4049,7 +4013,7 @@ add_action('wp_footer',function(){
  "    });\n" .
 
 
-	"});\n";
+	"});\n"
 
 	wbc()->load->add_inline_script( '', $inline_script, 'common' );
 

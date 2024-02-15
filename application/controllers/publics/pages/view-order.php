@@ -25,9 +25,45 @@ class View_Order {
     public function eo_wbc_add_css()
     {
       add_action('wp_head',function(){
-           ?>
+        if(false){
+        ?>
             <style> .eo_wbc_column-2{ width: 300px; } .eo_wbc_column-1{ width:300px; } .eo_wbc_column-2,.eo_wbc_column-1{ float: left; padding: 0px; font-size: small; padding-right: 15px; padding-bottom: 15px; box-sizing: border-box; max-width: 200px; } .eo_wbc_row::after { content: ""; clear: both; display: table; } @media screen and (max-width: 500px) { .eo_wbc_column-2,.eo_wbc_column-1{ width: 100%; } } </style>
-           <?php  
+        <?php
+        }
+           
+            $custom_css = "
+                .eo_wbc_column-2 {
+                    width: 300px;
+                }
+
+                .eo_wbc_column-1 {
+                    width: 300px;
+                }
+
+                .eo_wbc_column-2, .eo_wbc_column-1 {
+                    float: left;
+                    padding: 0px;
+                    font-size: small;
+                    padding-right: 15px;
+                    padding-bottom: 15px;
+                    box-sizing: border-box;
+                    max-width: 200px;
+                }
+
+                .eo_wbc_row::after {
+                    content: '';
+                    clear: both;
+                    display: table;
+                }
+
+                @media screen and (max-width: 500px) {
+                    .eo_wbc_column-2, .eo_wbc_column-1 {
+                        width: 100%;
+                    }
+                }
+            ";
+            wbc()->load->add_inline_style('', $custom_css, 'common');
+
         });
     }
 

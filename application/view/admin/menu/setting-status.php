@@ -80,10 +80,22 @@ $inline_script =
 wbc()->load->add_inline_script('', $inline_script, 'common');
 	
 else: ?>
-	<style type="text/css">
-		.eo_wbc_view_error{
-			width: 100%;
-			min-height: 60em;
-		}
-	</style>
-<?php endif;
+<?php 
+	if(false) {
+?>
+		<style type="text/css">
+			.eo_wbc_view_error{
+				width: 100%;
+				min-height: 60em;
+			}
+		</style>
+<?php 
+	}
+	$custom_css = "
+    .eo_wbc_view_error {
+        width: 100%;
+        min-height: 60em;
+    }
+	";
+	wbc()->load->add_inline_style('', $custom_css,'common');
+endif;

@@ -851,7 +851,7 @@ class Options extends \eo\wbc\controllers\publics\Controller {
 			        			
 			        		});
 			        	</script>
-				<?php
+					<?php
 					}
 
 					$inline_script = 

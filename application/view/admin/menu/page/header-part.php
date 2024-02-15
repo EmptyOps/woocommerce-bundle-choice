@@ -70,23 +70,44 @@ if( empty($mode) || ( $mode != "setup_wizard" && $mode != "plain" ) ) {
             <div class='ui compact segment'>
               <a style='cursor:pointer;' href='http://sphereplugins.com/contact-us' target='_blank'><i class='comment alternate icon'></i>&nbsp;Feature requests/ideas &amp; feedback</a>
             </div>
-          </div>"></i> 
-        <style type="text/css">
-          .eowbc_help_context{
-            font-size: xxx-large !important;
-            position: absolute !important;
-            right: 1em !important;
-            /*top: 1.4em !important;*/
-          }
-          @media only screen and (max-width: 678px) {
-            .eowbc_help_context{            
-              right: 0.5em !important;
-
-              /*top: 3em !important;*/
+        </div>"></i> 
+        <?php 
+            if(false) {
+        ?>
+                <style type="text/css">
+                    .eowbc_help_context{
+                        font-size: xxx-large !important;
+                        position: absolute !important;
+                        right: 1em !important;
+                        /*top: 1.4em !important;*/
+                    }
+                    @media only screen and (max-width: 678px) {
+                        .eowbc_help_context{            
+                        right: 0.5em !important;
+                        /*top: 3em !important;*/
+                        }
+                    }
+                </style>
+        <?php 
             }
-          }
-        </style>
+            $custom_css = "
+            .eowbc_help_context {
+                font-size: xxx-large !important;
+                position: absolute !important;
+                right: 1em !important;
+                /*top: 1.4em !important;*/
+            }
 
+            @media only screen and (max-width: 678px) {
+                .eowbc_help_context {
+                right: 0.5em !important;
+                /*top: 3em !important;*/
+                }
+            }
+            ";
+            wbc()->load->add_inline_style('', $custom_css,'common');
+        ?>
+        </div>      
   </div>
 </div>
 
