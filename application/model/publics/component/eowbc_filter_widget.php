@@ -488,7 +488,7 @@ class EOWBC_Filter_Widget {
 				}
 					$inline_script = 
 					"// console.log('filter_widgets');\n" .
-					"jQuery(document).ready(function($){\n" .
+					"jQuery(document).ready(function(\$){\n" .
 					"    jQuery.fn.wbc_flip_toggle_image=function(element){\n" .
 					"        let img = jQuery(element).find('img');\n" .
 					"        if(jQuery(element).hasClass('eo_wbc_filter_icon_select')) {\n" .

@@ -224,6 +224,10 @@ class Eowbc_Sample_Data {
 				    <?php
 					}
 					$eo_wbc_max_products = $this->get_product_size();
+					$admin_url_admin_eowbc = admin_url('admin.php?page=eowbc');
+					$wp_create_nonce_sample_data_jewelry = wp_create_nonce('sample_data_jewelry');
+					$__feature_key = __($feature_key);
+					$admin_url_admin_ajax = admin_url('admin-ajax.php');
 					//$feature_key = ''; // You need to define $feature_key; it wasn't provided in the JavaScript code.
 
 					$inline_script = 
@@ -234,26 +238,27 @@ class Eowbc_Sample_Data {
 					    "\n" .
 					    "        if(index>=eo_wbc_max_products){\n" .
 					    "            \n" .
-					    "            window.location.href=\"" . admin_url('admin.php?page=eowbc') . "\";\n" .
+					    "            window.location.href=\"" . $admin_url_admin_eowbc . "\";\n" .
 					    "            return false;\n" .
 					    "        }\n" .
 					    "\n" .
-					    "        \$(\".button.button-primary.button-hero.action.disabled\").val(\"Adding \"+(index+1)+\" of \"+eo_wbc_max_products+\" products\");\n" .
+					    "        jQuery(\".button.button-primary.button-hero.action.disabled\").val(\"Adding \"+(index+1)+\" of \"+eo_wbc_max_products+\" products\");\n" .
 					    "\n" .
 					    "        var data = {\n" .
-					    "            //_wpnonce: '" . wp_create_nonce('sample_data_jewelry') . "',\n" .
-					    "            action: 'eowbc_ajax',\n" .
-					    "            resolver: 'sample_data/" . $feature_key . "',\n" .
-					    "            product_index: index\n" .
+					    "			//'action': 'eo_wbc_add_products',\n".
+					    "            '_wpnonce': '" . $wp_create_nonce_sample_data_jewelry . "',\n" .
+					    "            'action': 'eowbc_ajax',\n" .
+					    "            'resolver': 'sample_data/" . $__feature_key . "',\n" .
+					    "            'product_index': index\n" .
 					    "        };\n" .
 					    "\n" .
-					    "        \$.post('" . admin_url('admin-ajax.php') . "', data, function(response) {\n" .
-					    "            var resjson = \$.parseJSON(response);\n" .
-					    "            if(typeof resjson.type !== 'undefined' && resjson.type === 'success'){\n" .
+					    "        jQuery.post('" . $admin_url_admin_ajax . "', data, function(response) {\n" .
+					    "            var resjson = jQuery.parseJSON(response);\n" .
+					    "            if(typeof resjson[\"type\"] != 'undefined' && resjson[\"type\"] == 'success'){\n" .
 					    "                eo_wbc_add_products(++index);                    \n" .
 					    "            } else {\n" .
-					    "                var type = (typeof resjson.type !== 'undefined' ? resjson.type : 'error');\n" .
-					    "                var msg = (typeof resjson.msg !== 'undefined' && resjson.msg !== '' ? resjson.msg : 'Failed! Please check Logs page for more details.');\n" .
+					    "                var type = (typeof resjson[\"type\"] != 'undefined' ? resjson[\"type\"] : 'error');\n" .
+					    "                var msg = (typeof resjson[\"msg\"] != 'undefined' && resjson[\"msg\"] != '' ? resjson[\"msg\"] : 'Failed! Please check Logs page for more details.');\n" .
 					    "                eowbc_toast_common(type, msg);\n" .
 					    "            }  \n" .
 					    "        });                \n" .
@@ -265,6 +270,7 @@ class Eowbc_Sample_Data {
 					    "        if(!\$(this).hasClass('disabled')) {\n" .
 					    "            \$(\".button.button-hero.action:not(.disabled)\").toggleClass('disabled');\n" .
 					    "            eo_wbc_add_products(0);\n" .
+					    "			//eo_wbc_add_products(119);\n".
 					    "        }                \n" .
 					    "        return false;\n" .
 					    "    });\n" .
