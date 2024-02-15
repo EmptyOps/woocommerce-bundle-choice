@@ -813,7 +813,7 @@ class Product {
              }
         </style>
         <?php
-        {
+        }
         $custom_css = "
             .woocommerce .content-area ,#content,#primary,#main,.content,.primary,.main{
                 width: 100% !important;
