@@ -172,7 +172,7 @@ class Product {
                 "    e.preventDefault();\n" .
                 "    e.stopPropagation();\n" .
                 "});\n";
-            wbc()->load->add_inline_script( '', $inline_script, 'common' );  
+            wbc()->load->add_inline_script( '', $inline_script, 'common-footer' );  
             echo(ob_get_clean());
         });
     }
