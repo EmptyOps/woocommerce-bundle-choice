@@ -151,7 +151,7 @@ $inline_script =
     "\n" .
     "    jQuery(\".ui.dropdown:has(#s_fconfig_filter)\").dropdown({\n" .
     "        onChange:function() {\n" .
-    "            let filter_field = $(this).dropdown('get value');\n" .
+    "            let filter_field = \$(this).dropdown('get value');\n" .
     "            if(filter_field!==''){\n" .
     "                //if(_childs.hasOwnProperty(filter_field)) {\n" .
     "                if(_childs.hasOwnProperty(filter_field) || _childs.hasOwnProperty('pa_'+filter_field)) {\n" .
