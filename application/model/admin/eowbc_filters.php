@@ -517,8 +517,8 @@ $setting_category = wbc()->wc->get_term_by( 'slug','eo_setting_shape_cat','produ
 
 if( !is_ajax() ) {
 	if((is_wp_error($diamond_category) or is_wp_error($setting_category) or empty($diamond_category) or empty($setting_category))) {
-		ob_start();
 		if(false){
+		ob_start();
 		?>
 			<script>
 				jQuery(document).ready(function($){
@@ -529,6 +529,7 @@ if( !is_ajax() ) {
 				});
 			</script>
 		<?php
+		echo ob_get_clean();
 		}
 		$inline_script = 
 		"jQuery(document).ready(function(\$){\n" .
@@ -539,11 +540,10 @@ if( !is_ajax() ) {
 		wbc()->load->add_inline_script( '', $inline_script, 'common' );
 
 
-		echo ob_get_clean();
 	}
 	else {
-		ob_start();
 		if(false){
+		ob_start();
 		?>
 			<script>
 				jQuery(document).ready(function($){
@@ -554,6 +554,7 @@ if( !is_ajax() ) {
 				});
 			</script>
 		<?php
+		echo ob_get_clean();
 		}
 		$inline_script = 
 		"jQuery(document).ready(function(\$){\n" .
@@ -564,6 +565,5 @@ if( !is_ajax() ) {
 		wbc()->load->add_inline_script( '', $inline_script, 'common' );
 
 
-		echo ob_get_clean();
 	}
 }

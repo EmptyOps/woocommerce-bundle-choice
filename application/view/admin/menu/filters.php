@@ -141,6 +141,7 @@ $inline_script =
 	"        onChange:function() {\n" .
 	"            let filter_field = \$(this).dropdown('get value');\n" .
 	"            if(filter_field !== '') {\n" .
+	"				//if(_childs.hasOwnProperty(filter_field)) {\n".
 	"                if(_childs.hasOwnProperty(filter_field) || _childs.hasOwnProperty('pa_'+filter_field)) {\n" .
 	"                    let _child_data = false ;\n" .
 	"                    if(_childs.hasOwnProperty(filter_field)) {\n" .
@@ -149,6 +150,7 @@ $inline_script =
 	"                        _child_data = _childs['pa_'+filter_field];\n" .
 	"                    }\n" .
 	"                    let html = '';\n" .
+	"					//jQuery.each(_childs[filter_field],function(index,item) {\n".
 	"                    jQuery.each(_child_data, function(index, item) {\n" .
 	"                        html += '<div class=\"item\" data-value=\"'+index+'\">'+item+'</div>';\n" .
 	"                    });\n" .
@@ -164,6 +166,7 @@ $inline_script =
 	"        onChange:function() {\n" .
 	"            let filter_field = \$(this).dropdown('get value');\n" .
 	"            if(filter_field !== '') {\n" .
+	"				//if(_childs.hasOwnProperty(filter_field)) {\n".
 	"                if(_childs.hasOwnProperty(filter_field) || _childs.hasOwnProperty('pa_'+filter_field)) {\n" .
 	"                    let _child_data = false ;\n" .
 	"                    if(_childs.hasOwnProperty(filter_field)) {\n" .
@@ -172,6 +175,7 @@ $inline_script =
 	"                        _child_data = _childs['pa_'+filter_field];\n" .
 	"                    }\n" .
 	"                    let html = '';\n" .
+	"					//jQuery.each(_childs[filter_field],function(index,item) {\n".
 	"                    jQuery.each(_child_data, function(index, item) {\n" .
 	"                        html += '<div class=\"item\" data-value=\"'+index+'\">'+item+'</div>';\n" .
 	"                    });\n" .
