@@ -111,40 +111,41 @@ class Product {
 
     public function init_safe_click() {
         add_action('woocommerce_after_add_to_cart_button',function(){
-            ob_start();
-        if(false){    
-            ?>
-            <script type="text/javascript">
+            if(false){  
+                ob_start();  
+                ?>
+                <script type="text/javascript">
 
-                document.querySelector('.single_add_to_cart_button:not(#eo_wbc_add_to_cart)').addEventListener("click",function(event) {                         
-                         event.preventDefault();
-                },false);
+                    document.querySelector('.single_add_to_cart_button:not(#eo_wbc_add_to_cart)').addEventListener("click",function(event) {                         
+                             event.preventDefault();
+                    },false);
 
-                let sp_add_to_cart_dots = 1
-                let sp_add_to_cart_dots_interval = window.setInterval(function(){
-                    
-                    if(jQuery('#eo_wbc_add_to_cart,#eo_wbc_add_to_cart_preview').length>0) {                        
-                        window.clearInterval(sp_add_to_cart_dots_interval);
-                    } else {
-                        if(sp_add_to_cart_dots>3) {
-                            sp_add_to_cart_dots = 1;
+                    let sp_add_to_cart_dots = 1
+                    let sp_add_to_cart_dots_interval = window.setInterval(function(){
+                        
+                        if(jQuery('#eo_wbc_add_to_cart,#eo_wbc_add_to_cart_preview').length>0) {                        
+                            window.clearInterval(sp_add_to_cart_dots_interval);
                         } else {
-                            sp_add_to_cart_dots = sp_add_to_cart_dots+1;
+                            if(sp_add_to_cart_dots>3) {
+                                sp_add_to_cart_dots = 1;
+                            } else {
+                                sp_add_to_cart_dots = sp_add_to_cart_dots+1;
+                            }
+                            jQuery('.single_add_to_cart_button:not(#eo_wbc_add_to_cart,#eo_wbc_add_to_cart_preview)').text('.'.repeat(sp_add_to_cart_dots));
                         }
-                        jQuery('.single_add_to_cart_button:not(#eo_wbc_add_to_cart,#eo_wbc_add_to_cart_preview)').text('.'.repeat(sp_add_to_cart_dots));
-                    }
-                },500);
+                    },500);
 
-                jQuery(".single_add_to_cart_button:not(#eo_wbc_add_to_cart)").off('click');
-                jQuery(".single_add_to_cart_button:not(#eo_wbc_add_to_cart)").css('cursor','not-allowed !important');
-                
-                jQuery(".single_add_to_cart_button:not(#eo_wbc_add_to_cart)").on('click',function(e){
-                    e.preventDefault();
-                    e.stopPropagation();
-                });
-            </script> 
-            <?php
-        } 
+                    jQuery(".single_add_to_cart_button:not(#eo_wbc_add_to_cart)").off('click');
+                    jQuery(".single_add_to_cart_button:not(#eo_wbc_add_to_cart)").css('cursor','not-allowed !important');
+                    
+                    jQuery(".single_add_to_cart_button:not(#eo_wbc_add_to_cart)").on('click',function(e){
+                        e.preventDefault();
+                        e.stopPropagation();
+                    });
+                </script> 
+                <?php  
+                echo(ob_get_clean());
+            } 
             $inline_script = 
                 "document.querySelector('.single_add_to_cart_button:not(#eo_wbc_add_to_cart)').addEventListener(\"click\",function(event) { \n" .
                 "    event.preventDefault();\n" .
@@ -172,8 +173,7 @@ class Product {
                 "    e.preventDefault();\n" .
                 "    e.stopPropagation();\n" .
                 "});\n";
-            wbc()->load->add_inline_script( '', $inline_script, 'common' );  
-            echo(ob_get_clean());
+            wbc()->load->add_inline_script( '', $inline_script, 'common' );
         });
     }
 
@@ -371,13 +371,14 @@ class Product {
                 </script>
             <?php
             }
+            $Add_To_Cart_woo_bundle_choice = esc_html__('Add To Cart','woo-bundle-choice');
             $inline_script = 
                 "jQuery(\".single_add_to_cart_button.button.alt\").ready(function(){\n" .
                 "\n" .
                 "    jQuery('form.cart').prepend(\"<input type='hidden' name='eo_wbc_add_to_cart_preview' value='1'/>\");\n" .
                 "    \n" .
                 "    jQuery(\".single_add_to_cart_button.button.alt:not(.disabled):eq(0)\").replaceWith(\n" .
-                "        \"<button href='#' id='eo_wbc_add_to_cart_preview' class='single_add_to_cart_button button alt'>".esc_html_e('Add To Cart','woo-bundle-choice')."</button>\"\n" .
+                "        \"<button href='#' id='eo_wbc_add_to_cart_preview' class='single_add_to_cart_button button alt'>".$Add_To_Cart_woo_bundle_choice."</button>\"\n" .
                 "    );\n" .
                 "\n" .
                 "    jQuery(document).on('click','#eo_wbc_add_to_cart_preview',function() {\n" .
