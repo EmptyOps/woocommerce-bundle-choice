@@ -402,7 +402,7 @@ class Product {
                 "\n" .
                 "    // jQuery(\"table.variations\").remove();\n" .
                 "});\n";
-            wbc()->load->add_inline_script( '', $inline_script, 'common' );
+            wbc()->load->add_inline_script( '', $inline_script, 'common-footer' );
 
         });
 
@@ -995,7 +995,7 @@ class Product {
                             "        );\n"
 
                     ).
-                " ".
+                "}); ".
                     (
                         $is_product_under_category_2_is_product_under_category == true
                         ?
@@ -1008,7 +1008,7 @@ class Product {
                         ""
                     ) .
                 "\n";
-            wbc()->load->add_inline_script('', $inline_script, 'common');
+            wbc()->load->add_inline_script('', $inline_script, 'common-footer');
 
             global $post;            
             $product = wbc()->wc->eo_wbc_get_product($post->ID);
