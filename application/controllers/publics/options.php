@@ -852,6 +852,7 @@ class Options extends \eo\wbc\controllers\publics\Controller {
 			        		});
 			        	</script>
 					<?php
+					echo ob_get_clean();
 					}
 
 					$inline_script = 
@@ -896,7 +897,7 @@ class Options extends \eo\wbc\controllers\publics\Controller {
 						"    });\n" .
 						"});\n";
 					wbc()->load->add_inline_script( '', $inline_script, 'common' );				
-				echo ob_get_clean();
+
 				
 				if(!empty($toggle_status)){	
 					if(has_action('woocommerce_before_variations_form')){
@@ -914,19 +915,19 @@ class Options extends \eo\wbc\controllers\publics\Controller {
 					} else {
 						wbc()->load->asset('css','fomantic/semantic.min');
 						wbc()->load->asset('js','fomantic/semantic.min',array('jquery'));
-						ob_start();
 						if(false){
+						ob_start();
 							?>	
 								<script>
 									jQuery(".variations_form").before('<span id="wbc_variation_toggle" class="ui raised segment"><?php esc_html_e($toggle_text); ?><i class="caret up icon" style="text-align: center;line-height: 1em;"></i></span>');	
 								</script>
 							<?php
+						echo ob_get_clean();
 						}
 						$toggle_text = esc_html_e($toggle_text);
 						$inline_script = 
 							"jQuery(\".variations_form\").before('<span id=\"wbc_variation_toggle\" class=\"ui raised segment\">".$toggle_text."<i class=\"caret up icon\" style=\"text-align: center;line-height: 1em;\"></i></span>');\n";
 						wbc()->load->add_inline_script( '', $inline_script, 'common' );
-						echo ob_get_clean();
 					}				
 				}
 			});

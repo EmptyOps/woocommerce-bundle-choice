@@ -69,12 +69,12 @@ if (false) { ?>
 $wp_enqueue_code_editor_json_encode = json_encode(array('codeEditor' => wp_enqueue_code_editor(array('type' => 'text'))));
 
 $inline_script = 
-    "jQuery(document).ready(function($) {     \n" .
+    "jQuery(document).ready(function(\$) {     \n" .
     "    var errors=".$wp_enqueue_code_editor_json_encode.";\n" .
-    "    wp.codeEditor.initialize($('#eo_wbc_view_error'), errors); \n" .
+    "    wp.codeEditor.initialize(\$('#eo_wbc_view_error'), errors); \n" .
     "\n" .
     "    setTimeout(function() {\n" .
-    "        $('#eo_wbc_view_error').trigger('click');\n" .
+    "        \$('#eo_wbc_view_error').trigger('click');\n" .
     "    }, 3000);\n" .
     "});\n";
 wbc()->load->add_inline_script('', $inline_script, 'common');

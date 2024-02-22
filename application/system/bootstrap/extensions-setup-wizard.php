@@ -428,6 +428,7 @@ if ( ! class_exists( 'Extensions_Setup_Wizard' ) ) {
 							<script src="<?php echo constant('EOWBC_ASSET_URL').'js/fomantic/semantic.min.js'; ?>"></script>
 						<?php
 						}
+
 						wbc()->load->get_script_tag(array('src'=>constant('EOWBC_ASSET_URL').'js/fomantic/semantic.min.js'));
 						if(false){
 						?>
@@ -448,17 +449,19 @@ if ( ! class_exists( 'Extensions_Setup_Wizard' ) ) {
 						<?php
 						}
 
+						$get_option_eo_wbc_inventory_type = get_option('eo_wbc_inventory_type', '');
+						$admin_url_page_eowbc_eo_wbc_view_auto_jewel = admin_url("admin.php?page=eowbc&eo_wbc_view_auto_jewel=1")
 						$inline_script =
 						    "jQuery(document).ready(function(){\n" .
 						    "    jQuery('.ui.dropdown').dropdown();\n" .
-						    "    jQuery('[name=\"eo_wbc_inventory_type\"]').parent().dropdown('set selected','" . get_option('eo_wbc_inventory_type', '') . "');\n" .
+						    "    jQuery('[name=\"eo_wbc_inventory_type\"]').parent().dropdown('set selected','" . $get_option_eo_wbc_inventory_type . "');\n" .
 						    "    jQuery('.ui.checkbox').checkbox();\n" .
 						    "\n" .
 						    "    jQuery(\"#create_product\").on('click',function(e){\n" .
 						    "        console.log('preventDefault');\n" .
 						    "        e.preventDefault();\n" .
 						    "        e.stopPropagation();\n" .
-						    "        window.location.href = \"" . admin_url("admin.php?page=eowbc&eo_wbc_view_auto_jewel=1") . "\";\n" .
+						    "        window.location.href = \"" . $admin_url_page_eowbc_eo_wbc_view_auto_jewel . "\";\n" .
 						    "    });\n" .
 						    "});\n";
 						wbc()->load->add_inline_script('', $inline_script, 'common');

@@ -488,7 +488,7 @@ class EOWBC_Filter_Widget {
 				}
 					$inline_script = 
 					"// console.log('filter_widgets');\n" .
-					"jQuery(document).ready(function($){\n" .
+					"jQuery(document).ready(function(\$){\n" .
 					"    jQuery.fn.wbc_flip_toggle_image=function(element){\n" .
 					"        let img = jQuery(element).find('img');\n" .
 					"        if(jQuery(element).hasClass('eo_wbc_filter_icon_select')) {\n" .
@@ -744,8 +744,8 @@ class EOWBC_Filter_Widget {
 			}
 
 			if(wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile',false)=='mobile_2' and /*wp_is_mobile()*/ wbc_is_mobile_by_page_sections('cat_shop_page')){
-				ob_start();
 				if(false){
+				ob_start();
 				?>
 				<style type="text/css">
 
@@ -823,6 +823,7 @@ class EOWBC_Filter_Widget {
 					}
 				</style>
 				<?php
+				echo ob_get_clean();
 				}
 				$custom_css = "
 					@media screen and (max-width: 412px) {
@@ -921,7 +922,7 @@ class EOWBC_Filter_Widget {
 					"jQuery(document).ready(function(\$){\n" .
 					"    \$('.eo-wbc-container.filters.container .ui.accordion .title').click(function(){\n" .
 					"        let _icon = \$(this).find('i.icon:not(.question)');\n" .
-					"        if($(_icon).hasClass('plus')){\n" .
+					"        if(\$(_icon).hasClass('plus')){\n" .
 					"            \$('.eo-wbc-container.filters.container .ui.accordion .title').find('i.icon.minus').toggleClass('plus minus');\n" .
 					"            \$(_icon).toggleClass('plus minus');\n" .
 					"        } else {\n" .
@@ -931,7 +932,6 @@ class EOWBC_Filter_Widget {
 					"});\n";
 
 					wbc()->load->add_inline_script('', $inline_script, 'common');
-				echo ob_get_clean();
 			}
 
 			$sc_cat = wbc()->options->get_option('filters_sc_filter_setting','shop_cat_filter_category');
@@ -3037,10 +3037,10 @@ class EOWBC_Filter_Widget {
 		    "jQuery(document).ready(function(\$){\n" .
 		    "    console.log('EO_WBC_FILTER_UI_ICON_TERM_SLUG');\n" .
 		    "    console.log(EO_WBC_FILTER_UI_ICON_TERM_SLUG);\n" .
-		    "    EO_WBC_FILTER_UI_ICON_TERM_SLUG.push(\"$term_slug\");\n" .
+		    "    EO_WBC_FILTER_UI_ICON_TERM_SLUG.push(\"".$term_slug."\");\n" .
 		    "\n" .
+		    "    if(\"".$term_slug."\") { \n" .
 		    "    // commented code uper if false ma or backup file ma jova malse\n" .
-		    "    if(\"$term_slug\") { \n" .
 		    "\n" .
 		    "        // window.document.splugins.wbc.filters.api.input_type_icon_click();\n" .
 		    "\n" .
@@ -3049,10 +3049,10 @@ class EOWBC_Filter_Widget {
 		    "            var filter_list= undefined;\n" .
 		    "            if(icon_filter_type == 1) {\n" .
 		    "                /*filter_list = jQuery('[name=\"checklist_'+__data_filter_slug+'\"]');*/\n" .
-		    "                filter_list = jQuery('form#{$this->filter_prefix}eo_wbc_filter [name=\"checklist_'+'$term_slug'+'\"]');\n" .
+		    "                filter_list = jQuery('form#".$this_filter_prefix."eo_wbc_filter [name=\"checklist_'+\"".$term_slug."\"+'\"]');\n" .
 		    "            } else {\n" .
 		    "                /*filter_list = jQuery('[name=\"cat_filter_'+__data_filter_slug+'\"]');*/\n" .
-		    "                filter_list = jQuery('form#{$this->filter_prefix}eo_wbc_filter [name=\"cat_filter_'+'".$term_slug."'+'\"]');\n" .
+		    "                filter_list = jQuery('form#".$this_filter_prefix."eo_wbc_filter [name=\"cat_filter_'+\"".$term_slug."\"+'\"]');\n" .
 		    "            }\n" .
 		    "\n" .
 		    "            if(jQuery(filter_list).attr('data-edit')=='1') {\n" .
