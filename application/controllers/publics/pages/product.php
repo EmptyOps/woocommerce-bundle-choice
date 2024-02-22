@@ -943,6 +943,7 @@ class Product {
             
             <?php 
             }
+            }
             $page_category = $this->page_category;
             $post_ID = $post->ID;
             $appearance_product_page_product_page_add_to_basket = false;
@@ -985,13 +986,13 @@ class Product {
                             "                '</div>'+\n" .
                             "            '</div>');\n" .
                             "        jQuery(\".dropdown\").dropdown();\n" .
-                            "\n" .
+                            "\n"
                         :
                             "        jQuery(\".single_add_to_cart_button.button.alt:not(.disabled):eq(0)\").replaceWith(\n" .
                             "         \"<button href='#' id='eo_wbc_add_to_cart' class='single_add_to_cart_button button alt'>\"\n" .
                             "         +\"".$__btn_text."\"\n" .
                             "         +\"</button>\"\n" .
-                            "        );\n" .
+                            "        );\n"
 
                     ).
                 " ".
@@ -1002,9 +1003,9 @@ class Product {
                         "        window.document.splugins = window.document.splugins || {};\n" .
                         "        window.document.splugins.common = window.document.splugins.common || {};\n" .
                         "        \n" .
-                        "        window.document.splugins.common.is_handle_variation_id_pair_builder_step_2 = true;\n" .   
+                        "        window.document.splugins.common.is_handle_variation_id_pair_builder_step_2 = true;\n"
                         :
-                        "".
+                        ""
                     ) .
                 "\n";
             wbc()->load->add_inline_script('', $inline_script, 'common');
