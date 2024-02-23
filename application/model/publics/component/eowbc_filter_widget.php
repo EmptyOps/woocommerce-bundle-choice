@@ -513,7 +513,7 @@ class EOWBC_Filter_Widget {
 					"    });\n" .
 					"});\n";
 
-					wbc()->load->add_inline_script('', $inline_script, 'common');
+					wbc()->load->add_inline_script('', $inline_script, 'common-footer');
 				?>
 				<style type="text/css">
 					<?php if(wbc()->options->get_option('appearance_filters','appearance_filters_table_head_border')){ ?>
@@ -2678,7 +2678,7 @@ class EOWBC_Filter_Widget {
 			"// console.log('EO_WBC_FILTER_UI_ICON_TERM_SLUG empty');\n" .
 			"// console.log(EO_WBC_FILTER_UI_ICON_TERM_SLUG);\n\n";
 
-			wbc()->load->add_inline_script('', $inline_script, 'common');
+			wbc()->load->add_inline_script('', $inline_script, 'common-footer');
 		}
 
 		global $sitepress;
@@ -3065,7 +3065,7 @@ class EOWBC_Filter_Widget {
 		    "        });\n" .
 		    "    }               \n" .
 		    "});\n";
-		wbc()->load->add_inline_script('', $inline_script, 'common');
+		wbc()->load->add_inline_script('', $inline_script, 'common-footer');
 
 		do_action('eowbc_after_icon_filter_widget',$this,$__prefix,$item);
 

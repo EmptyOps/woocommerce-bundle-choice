@@ -662,7 +662,7 @@ if(empty($_per_page)){
 		    "\n" .
 		    "});\n";
 
-		wbc()->load->add_inline_script('', $inline_script, 'common');
+		wbc()->load->add_inline_script('', $inline_script, 'common-footer');
 
 	endif; ?>
 
