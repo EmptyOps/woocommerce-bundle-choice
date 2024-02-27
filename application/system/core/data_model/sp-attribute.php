@@ -152,6 +152,24 @@ class SP_Attribute extends SP_Entity {
 	    								update_term_meta( $_attr_term_id, sanitize_title($term['label']).'_attachment', wp_get_attachment_url( $thumb_id ) );
 			    					}
 
+			    					if (!empty($term['terms_meta']['image'])) {
+
+			    						$wbc_attachment_id = wbc()->wp->add_image_gallary($term['terms_meta']['image']);
+
+    									$wbc_attachment_src =wp_get_attachment_url( $wbc_attachment_id );
+    									function_exists( 'update_term_meta' ) ? update_term_meta( $_attr_term_id,'wbc_attachment',$wbc_attachment_src) : update_metadata( 'woocommerce_term', $_attr_term_id,'wbc_attachment',$wbc_attachment_src);
+
+			    					}
+
+			    					if (!empty($term['terms_meta']['image'])) {
+
+			    						$wbc_attachment_id = wbc()->wp->add_image_gallary($term['terms_meta']['image_thumb']);
+
+    									$wbc_attachment_src =wp_get_attachment_url( $wbc_attachment_id );
+    									function_exists( 'update_term_meta' ) ? update_term_meta( $_attr_term_id,'wbc_attachment_thumb',$wbc_attachment_src) : update_metadata( 'woocommerce_term', $_attr_term_id,'wbc_attachment_thumb',$wbc_attachment_src);
+
+			    					}
+
 			    					if (!wbc_isEmptyArr(/*$data['terms_order'])*/$term['terms_order'])) {
 
 			    						update_term_meta($_attr_term_id, 'order', /*$data['terms_order'][$term_index]*/$term['terms_order']);
@@ -173,18 +191,19 @@ class SP_Attribute extends SP_Entity {
 	    									case 'dropdown_image':
 	    									case 'dropdown_image_only':
 
-	    										throw new \Exception("not implemented yet.", 1);
+	    										below code is moved abow the switch cas statement in the comen leyoe hadling the images and thumbs.
+		    									// $wbc_attachment_id = $this->add_image_gallary($term['terms_meta']['image']);
 
-		    									$wbc_attachment_id = $this->add_image_gallary($term['terms_meta']['image']);
-
-		    									$wbc_attachment_src =wp_get_attachment_url( $wbc_attachment_id );
-		    									function_exists( 'update_term_meta' ) ? update_term_meta( $_attr_term_id,'wbc_attachment',$wbc_attachment_src) : update_metadata( 'woocommerce_term', $_attr_term_id,'wbc_attachment',$wbc_attachment_src);
+		    									// $wbc_attachment_src =wp_get_attachment_url( $wbc_attachment_id );
+		    									// function_exists( 'update_term_meta' ) ? update_term_meta( $_attr_term_id,'wbc_attachment',$wbc_attachment_src) : update_metadata( 'woocommerce_term', $_attr_term_id,'wbc_attachment',$wbc_attachment_src);
 
 	    										break;
 	    								}
 	    							}
 	    						}		    						
 	    					}
+
+	    					do_action('wbc_sp_attribute_create_after_save_term', $_attr_term_id, $term);
 						}		    								    			
 		    		}
 		    	}
@@ -197,7 +216,9 @@ class SP_Attribute extends SP_Entity {
     				
     				if( ! term_exists( $i, 'pa_'.$attribute_data['slug']) ){					    					
     					
-						wp_insert_term( $i, 'pa_'.$attribute_data['slug'],array('slug' => sanitize_title($i))); 
+						wp_insert_term( $i, 'pa_'.$attribute_data['slug'],array('slug' => sanitize_title($i)));
+
+						do_action('wbc_sp_attribute_create_after_save_term', null/*hare we are not pashig the term data sins is eting is term created ato meticliy wethe the raeng so wen we suport the term array of range mins the term can be passed for the for crating the term wething the renge at that time we need to passit */, null/*hare we are not pashig the term data sins is eting is term created ato meticliy wethe the raeng so wen we suport the term array of range mins the term can be passed for the for crating the term wething the renge at that time we need to passit */); 
 					}
     			}
     		}			    		
