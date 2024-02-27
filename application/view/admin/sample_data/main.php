@@ -339,10 +339,11 @@ box-shadow: none;">
 	    "                beforeSend:function(xhr){\n\n" .
 	    "                },\n" .
 	    "                success:function(result,status,xhr){\n" .
-	    "                    window.location.href='" . $next_url . "';\n" .
+	    "                    window.location.href=\"" . $next_url . "\";\n" .
 	    "                    return false;\n" .
 	    "                },\n" .
 	    "                error:function(xhr,status,error){\n" .
+	    "					/*console.log(xhr);*/\n".
 	    "                    eowbc_toast_common( 'error', msg );\n" .
 	    "                    return false;\n" .
 	    "                },\n" .
@@ -372,10 +373,11 @@ box-shadow: none;">
 	    "                beforeSend:function(xhr){\n" .
 	    "                },\n" .
 	    "                success:function(result,status,xhr){\n" .
-	    "                    window.location.href='" . $next_url . "';\n" .
+	    "                    window.location.href=\"" . $next_url . "\";\n" .
 	    "                    return false;\n" .
 	    "                },\n" .
 	    "                error:function(xhr,status,error){\n" .
+	    "					/*console.log(xhr);*/\n".
 	    "                    eowbc_toast_common( 'error', msg );\n" .
 	    "                    return false;\n" .
 	    "                },\n" .
