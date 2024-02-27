@@ -24,7 +24,10 @@ class WBC_Config {
 		 		// array( 'type'=>'file', 'path'=> constant($singleton_functionUpper.'_DIRECTORY')."/application/model/publics/component/sp-cafjkj.php" )
 				array( 'type'=>'file', 'path'=> constant('EOWBC_DIRECTORY').'application/system/core/publics/eowbc_base_model_publics.php' ), 
 
-		 		array( 'type'=>'file', 'path'=> constant('EOWBC_DIRECTORY')."/application/controllers/admin/legacy_admin/legacy-admin.php" ), 
+		 		array( 'type'=>'file', 'path'=> constant('EOWBC_DIRECTORY')."/application/controllers/admin/legacy_admin/legacy-admin.php" ),
+
+		 		
+		 		array( 'type'=>'file', 'path'=> constant('EOWBC_DIRECTORY')."/application/model/publics/data_model/sp-wbc-attribute.php" ), 
 
 			), 
 			'frontend'=> array(

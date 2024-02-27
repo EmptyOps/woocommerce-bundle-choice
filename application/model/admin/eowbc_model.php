@@ -116,10 +116,10 @@ class Eowbc_Model {
 							
 							// if(wbc()->sanitize->get('is_test') == 1) {
 								
-							// 	wbc_pr('eowbc_model_dm_based_field');
-							// 	wbc_pr($args['data_raw']);
-							// 	wbc_pr($fk);
-							// 	wbc_pr($dm_based_field);
+								// wbc_pr('eowbc_model_dm_based_field');
+								// wbc_pr($args['data_raw']);
+								// wbc_pr($fk);
+								// wbc_pr($dm_based_field);
 							// }
 
 							//$form_definition[$key]["form"][$fk]["value"] = ( isset($save_as_data['post_meta'][$fk]) ? $save_as_data['post_meta'][$fk] : ( isset($form_definition[$key]["form"][$fk]["value"]) ? $form_definition[$key]["form"][$fk]["value"] :'' ) );
@@ -159,7 +159,7 @@ class Eowbc_Model {
 								}
 
 							}
-							
+
 							// ACTIVE_TODO/TODO implement 
 								// -- this flag is passed from /woo-bundle-choice/application/model/publics/data_model/sp-wbc-variations.php 
 							if( !empty($args['is_convert_das_to_array'])){

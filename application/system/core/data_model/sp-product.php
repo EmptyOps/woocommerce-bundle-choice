@@ -95,7 +95,10 @@ class SP_Product extends SP_Entity {
 
 			$product_id = wc_get_product_id_by_sku(trim($data['sku']['value']));
 
-			$product_obj = wc_get_product($product_id);
+			if (!empty($product_id)) {
+				
+				$product_obj = wc_get_product($product_id);
+			}
 
 		}
 
@@ -110,10 +113,10 @@ class SP_Product extends SP_Entity {
 
 			if($data['type']['value'] == 'simple') {
 
-				$product_obj = new WC_Product_Simple();
+				$product_obj = new \WC_Product_Simple();
 			} else {
 
-				$product_obj = new WC_Product_Variable();
+				$product_obj = new \WC_Product_Variable();
 			}
 
 			$product_obj->set_stock_quantity(1);
@@ -353,11 +356,15 @@ class SP_Product extends SP_Entity {
     					// Create a WC_Product_Variation object
 						$var_ = wc_get_product($var_id);
 
-						if (is_a($var_, 'WC_Product_Variation')) {
+						if (wbc()->wc->is_variation_object($var_)/*is_a($var_, 'WC_Product_Variation')*/) {
 
-						    die('variation ID '.$var_->get_id().' and actual id '.$var_id);
+						    // die('variation ID '.$var_->get_id().' and actual id '.$var_id);
+						    // nothing to do
 						} else {
-						    die('Invalid variation ID');
+
+							// it is unexpected behaviour so set null so that it crash the code. we can handle this svenario in a better way if required. 
+						    // die('Invalid variation ID');
+						    $var_ = null;
 						}
 
     				} else {

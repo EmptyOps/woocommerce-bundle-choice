@@ -253,8 +253,9 @@ class Eowbc_Sample_Data {
 	}
 	
 	public function create_product($index){
-
+		// die("Eowbc_Sample_Data create_product first log 11111111");
 		$res = array( "type"=>"success", "msg"=>"" );
+		// die("Eowbc_Sample_Data create_product second log 22222222");
 
 		global $wpdb;
 
@@ -262,17 +263,26 @@ class Eowbc_Sample_Data {
 			return array( "type"=>"error", "msg"=>"No product found at index ".$index );	//FALSE;
 		}
 
+		// die("Eowbc_Sample_Data create_product third log 33333333");
+
 		
 		$product=$this->data_template->get_products()[$index];
 
-		if(!empty($product['sku']) and !empty(wc_get_product_id_by_sku($product['sku'])) ) {
+		// die("Eowbc_Sample_Data create_product forth log 4444444");
+
+		if((!empty($product['sku']) and !empty(wc_get_product_id_by_sku($product['sku']))) ) {
+
+			// wbc_pr($product);
+			// die("Eowbc_Sample_Data: 111111122222222222222222222222222222222222222222222222222222");
 
 			\eo\wbc\model\data_model\SP_WBC_Product::createFromArray(null,null,array($product));
 
 			return $res;
 		}
+		// die("Eowbc_Sample_Data: 111111122222222222222222222222222222222222222222222222222222 IF AFTER 3333");
+
 		
-		$product_id= wp_insert_post( array(
+		$product_id = wp_insert_post( array(
 		    'post_author' => get_current_user_id(),
 		    'post_title' => $product['title'],
 		    'post_content' => $product['content'],
@@ -312,6 +322,16 @@ class Eowbc_Sample_Data {
 		}
 
 		update_post_meta( $product_id, '_product_attributes', $product['attribute'] );
+
+		// added on 03-02-2024 just for the simple type to fix the serch by sku bug
+		if(/*empty($product['variation'])*/$product['type']=='simple'){
+
+			$product_obj = wc_get_product($product_id);
+			// $product_obj->set_name($product['title']);
+			$product_obj->set_sku($product['sku']);
+			$product_obj->set_regular_price($product['regular_price']);
+			$product_obj->save();	
+		}
 
 		if(!empty($product['sku'])) {
 			update_post_meta( $product_id, '_sku', $product['sku'] );			
@@ -822,7 +842,7 @@ class Eowbc_Sample_Data {
 
 	    		if (!empty($id)) {
 
-	    			\eo\wbc\model\data_model\SP_WBC_Attribute::createFromArray(array($attribute));
+	    			\eo\wbc\model\data_model\SP_WBC_Attribute::createFromArray(null, null, array($attribute));
 
 	    			continue;
 

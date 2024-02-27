@@ -756,6 +756,7 @@ class SP_WBC_Variations extends SP_Variations {
 					$value_arr = apply_filters('sp_variations_available_variation_type', array('type'=>null,'value'=>$value,'key'=>$key), $key );
 					// echo "2222222222";	
 					// wbc_pr($value_arr);
+					
 					if( !empty($value_arr['type']) && !empty($gallery_images_types[$value_arr['type']]) ) {
 						
 						array_push($gallery_images, $value_arr);
