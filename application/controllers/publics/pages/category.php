@@ -305,7 +305,7 @@ class Category {
                     .ui.card>.image>img, .ui.cards>.card>.image>img{
                         width: 50%;
                     }
-                    .products .ui.grid>[class*='five wide'].column{
+                    .products .ui.grid>[class*=\"five wide\"].column{
                         margin-left: 0 !important;
                     }
                 ";

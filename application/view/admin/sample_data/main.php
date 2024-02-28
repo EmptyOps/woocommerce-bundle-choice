@@ -382,12 +382,13 @@ box-shadow: none;">
 	    "                    return false;\n" .
 	    "                },\n" .
 	    "                complete:function(xhr,status){\n" .
+	    "					//window.location.href=". $next_url .";	//commented since can't allow redirect on error etc.\n" .
 	    "                    return false;\n" .
 	    "                }\n" .
 	    "            });\n" .
 	    "            return false;\n" .
 	    "        }\n" .
-	    "        \n" .
+	    "        \n\n\n" .
 	    "        jQuery(\".button.button-primary.button-hero.action.disabled\").val(\"Adding \"+(index+1)+\" of \"+btn_total+\" \"+btn_label);\n" .
 	    "        \n" .
 	    "        let label = '';\n" .
@@ -467,7 +468,7 @@ box-shadow: none;">
 	    "            //eo_wbc_add_products(119);\n" .
 	    "        }                \n" .
 	    "        return false;\n" .
-	    "    });\n" .
+	    "    });\n\n" .
 	    "});\n";
 	wbc()->load->add_inline_script('', $inline_script, 'common');
 
@@ -523,7 +524,9 @@ box-shadow: none;">
 		    });
 		</script>
 	<?php 
-	} 
+	}
+	$wp_create_nonce_sample_data_jewelry = wp_create_nonce('sample_data_jewelry');
+	$admin_url = admin_url('admin.php?page=eowbc'); 
 	$eo_wbc_max_products = $sample_data_obj->get_model()->get_product_size();
 	$feature_key = __($feature_key);
 	$apply_filters_eowbc_product_sample_data_resolver_path = apply_filters('eowbc_product_sample_data_resolver_path','');
