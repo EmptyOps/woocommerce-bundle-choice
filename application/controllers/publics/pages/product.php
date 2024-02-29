@@ -329,12 +329,13 @@ class Product {
         }
             
         $custom_css = "
-        .variations_form .variations, #wbc_variation_toggle {
-            display: none !important;
-        }
-        .Product_Left_Wrapper_Plugin_Images .imagezoomsl_zoom_container .Zoom_Rigt-sec .small-image.corner-image.corner-toggle-image {
-            display: none;
-        }";
+            .variations_form .variations, #wbc_variation_toggle {
+                display: none !important;
+            }
+            .Product_Left_Wrapper_Plugin_Images .imagezoomsl_zoom_container .Zoom_Rigt-sec .small-image.corner-image.corner-toggle-image {
+                display: none;
+            }
+        ";
 
         wbc()->load->add_inline_style('', $custom_css, 'common');
 
@@ -806,8 +807,8 @@ class Product {
             });    */
         }
         
-        ob_start();
         if(false){        
+        ob_start();
         ?>
         <style type="text/css">
             .woocommerce .content-area ,#content,#primary,#main,.content,.primary,.main{
@@ -818,7 +819,8 @@ class Product {
              }
         </style>
         <?php
-        {
+        echo ob_get_clean();
+        }
         $custom_css = "
             .woocommerce .content-area ,#content,#primary,#main,.content,.primary,.main{
                 width: 100% !important;
@@ -829,7 +831,6 @@ class Product {
         ";
 
         wbc()->load->add_inline_style('', $custom_css, 'common');
-        echo ob_get_clean();
         
         //Registering Scripts : JavaScript
         add_action( 'wp_enqueue_scripts',function() use(&$redirect_url){
