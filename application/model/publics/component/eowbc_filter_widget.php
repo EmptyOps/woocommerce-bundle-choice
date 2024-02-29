@@ -1466,7 +1466,9 @@ class EOWBC_Filter_Widget {
 		// 	wbc_pr($eo_wbc_object);
 		// }
 		
-		wbc()->load->asset('localize_data','publics/eo_wbc_filter',$eo_wbc_object);
+		// -- aa code comment kari ne direct script tag ma variable load karavyo se @a 29-02-2024
+		// wbc()->load->asset('localize_data','publics/eo_wbc_filter',$eo_wbc_object);
+		wbc()->load->get_inline_script_tag("var eo_wbc_object = JSON.parse('" . json_encode($eo_wbc_object['eo_wbc_object']) . "');");
 
 
         // wbc()->load->asset('localize','publics/eo_wbc_filter',array( 'eo_wbc_object' => array(
@@ -3688,7 +3690,10 @@ class EOWBC_Filter_Widget {
 		$filter_sets_confings['filter_prefix'] = $this->filter_prefix;
 		$filter_sets_confings['filter_sets_data'] = $filter_sets_data;	
 		// wbc_pr('filter_sets_confings');
-		wbc()->load->asset('localize_data','publics/sp_filter_sets',array("filter_sets_confings" => $filter_sets_confings));
+
+		// -- aa code comment kari ne direct script tag ma variable load karavyo se @a 29-02-2024
+		// wbc()->load->asset('localize_data','publics/sp_filter_sets',array("filter_sets_confings" => $filter_sets_confings));
+		wbc()->load->get_inline_script_tag("var filter_sets_confings = JSON.parse('" . json_encode($filter_sets_confings) . "');");
 
 
 		/*echo "non_adv_ordered_filter and adv_ordered_filter dump 1";
@@ -3722,8 +3727,9 @@ class EOWBC_Filter_Widget {
 		$filters_sub_confings['filter_type'] = $filter_type;
 		// $filters_sub_confings['term_slug'] = $term->slug;
 
-		wbc()->load->asset('localize_data','filters_sub_confings',array("filters_sub_confings" => $filters_sub_confings));
-
+		// -- aa code comment kari ne direct script tag ma variable load karavyo se @a 29-02-2024
+		// wbc()->load->asset('localize_data','filters_sub_confings',array("filters_sub_confings" => $filters_sub_confings));
+		wbc()->load->get_inline_script_tag("var filters_sub_confings = JSON.parse('" . json_encode($filters_sub_confings) . "');");
 
 		wbc()->load->template('publics/filters/form', array("thisObj"=>$this,"current_category"=>$current_category,'filter_prefix'=>$this->filter_prefix,'filter_ui'=>$this)); 
 		do_action('eowbc_after_filter_widget');
