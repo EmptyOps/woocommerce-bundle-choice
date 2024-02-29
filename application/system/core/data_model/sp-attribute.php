@@ -134,7 +134,7 @@ class SP_Attribute extends SP_Entity {
 
 					if( ! term_exists( $term['label'], 'pa_'.$attribute_data['slug']) ) {
 
-						$attr_term_id = wp_insert_term( $term['label'],'pa_'.$attribute_data['slug'],array('slug' => sanitize_title($term['label'])) ); 
+						$attr_term_id = wp_insert_term( $term['label'],'pa_'.$attribute_data['slug'],array('slug' => sanitize_title($term['label']),'description'=>$term['desc']) ); 
 						
 						if(!empty($attr_term_id) and !is_wp_error($attr_term_id)) {
 
