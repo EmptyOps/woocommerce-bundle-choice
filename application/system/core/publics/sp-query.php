@@ -425,6 +425,10 @@ class SP_Query {
 	private function meta_query( $_DATA, $query, $input_method_small ) {
 
         $meta_quer_args = $query->get('meta_query');/* array('relation' => 'AND')*/;
+        // if( wbc()->sanitize->get('is_test') == 1 ) {
+		// 	wbc_pr("sp-query.php meta_query 0.1");	
+		// 	wbc_pr($meta_quer_args);		
+		// }
 
         // make the data layer dynamic here as required, as of now the data layer is static and reads only from the _REQUEST 
         //	TODO sanitize the input data here before passing to query, it is noted that so far not sanitized because sanitize function was affecting price values somehow. But maybe it couldn't be the case
