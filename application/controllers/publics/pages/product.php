@@ -858,8 +858,20 @@ class Product {
         });
           
         //Adding own ADD_TO_CART_BUTTON
-        add_action('wp_footer',function(){               
-            echo "<style>.double-gutter .tmb{ width: 50%;display: inline-flex; }</style>";         
+        add_action('wp_footer',function(){
+        if(false){
+        ob_start();            
+            echo "<style>.double-gutter .tmb{ width: 50%;display: inline-flex; }</style>";
+        }
+            $custom_css = "
+                .double-gutter .tmb {
+                    width: 50%;
+                    display: inline-flex;
+                }
+            ";
+
+            wbc()->load->add_inline_style('', $custom_css, 'common');
+
             $category = $this->eo_wbc_get_category();
             $btn_text = '';
             // if($category == get_option('eo_wbc_first_slug')){
