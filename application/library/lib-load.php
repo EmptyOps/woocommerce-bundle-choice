@@ -312,6 +312,9 @@ if(!class_exists('WBC_Loader')) {
 					if( !empty($localize_var) && !empty($localize_var_val) ) {
 					//echo "load_localize_data inner if";
 
+						$localize_var = $localize_var; // Replace with the actual variable value.
+						$localize_var_val = $localize_var_val; // Replace with the actual variable value.
+
 						if(false){				
 							?>
 							<script>
@@ -320,18 +323,17 @@ if(!class_exists('WBC_Loader')) {
 							<?php
 						}
 							
-						$localize_var = $localize_var; // Replace with the actual variable value.
-						$localize_var_val = $localize_var_val; // Replace with the actual variable value.
-
-						$inline_script = "
-						        var $localize_var = JSON.parse('" . json_encode($localize_var_val) . "');
-						";
-						wbc()->load->add_inline_script('', $inline_script, 'common');
+						$inline_script = "var ".$localize_var." = JSON.parse('" . json_encode($localize_var_val) . "');";
+						// wbc()->load->add_inline_script('', $inline_script, 'common');
+						wbc()->load->get_inline_script_tag($inline_script);
 
 					} elseif( !empty(array_keys($param)[0]) && !empty($param[array_keys($param)[0]]) ) {
 					// echo "localize_data inner else";
 					// wbc_pr('load_param');
 					// wbc_pr($param);
+
+						$param_key = array_keys($param)[0];
+						$param_value = $param[$param_key];
 
 						if(false){
 							?>
@@ -340,14 +342,10 @@ if(!class_exists('WBC_Loader')) {
 							</script>
 							<?php
 						}
-					
-						$param_key = array_keys($param)[0];
-						$param_value = $param[$param_key];
 
-						$inline_script = "
-						        var $param_key = JSON.parse('" . json_encode($param_value) . "');
-						";
-						wbc()->load->add_inline_script('', $inline_script, 'common');		
+						$inline_script = "var ".$param_key." = JSON.parse('" . json_encode($param_value) . "');";
+						// wbc()->load->add_inline_script('', $inline_script, 'common');	
+						wbc()->load->get_inline_script_tag($inline_script);							
 					
 					}
 					break;				
