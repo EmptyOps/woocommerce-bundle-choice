@@ -15309,4 +15309,51 @@ class Sample_Data_Template {
 
     }
 
+    protected static function save_entity_items( $model_class, $input_data, $args=array() ) {
+
+        $res = array( "type"=>"success", "msg"=>"" );
+
+        for($input_data as $input_data_key=>$input_data_value){
+
+            for ($input_data_value as $idv_key=>$idv_value) { 
+
+                $_POST[$idv_value];
+
+            }
+
+            - peramiter conform karva na che
+            $res_save = $model_class::instance()->save( \sp\tableview\controller\admin\Admin::get_form_definition() );
+
+            if (!empty($res_save['type'])) {
+
+                if ($res_save['type'] == 'success') {
+
+                    -- nothing to do so far
+
+                } elseif($res_save['sub_type'] == 'item_exits'){
+
+                    -- nothing to do so far
+
+                }else{
+
+                    return array("type"=>"error", "msg"=>" save prosses failed for one of the item.");
+                }
+
+            } else{
+
+                return array("type"=>"error", "msg"=>" save prosses failed for one of the item.");
+
+            }
+
+            for ($input_data_value as unset($idv_key)) { 
+
+                $_POST[$idv_value];
+
+            }
+
+        }
+
+        return $res;
+    }
+
 }
