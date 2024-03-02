@@ -230,7 +230,7 @@ if(window.document.splugins.common.is_item_page || window.document.splugins.comm
     return baseURL + "?" + newAdditionalURL + rows_txt;
  } 
 
- window.document.splugins.common.preview_page_url = function() {
+ window.document.splugins.common.get_variation_url_part = function(variation_id, base_url) {
 
     var attributes = [];        
 
@@ -247,7 +247,7 @@ if(window.document.splugins.common.is_item_page || window.document.splugins.comm
         }*/
     });
 
-    var url = window.eo_wbc_object.url;
+    var url = base_url;
 
     var attributeSlug_global = '';
     jQuery.each(attributes,function(key, val) {

@@ -8,7 +8,7 @@ jQuery(document).ready(function(){
 
 			// var variation_id_input = jQuery('.variation_id').val();
             // window.eo_wbc_object.url = window.document.splugins.common.updateURLParameter(window.eo_wbc_object.url,'variation_id',variation_id_input);
-            window.eo_wbc_object.url = window.document.splugins.common.preview_page_url();
+            window.eo_wbc_object.url = window.document.splugins.common.get_variation_url_part(null,window.eo_wbc_object.url);            
 		}
 		
 		//console.log("LOG : "+eo_wbc_object.url+'&CART='+window.btoa(form_2_json(jQuery('form.cart'))));
