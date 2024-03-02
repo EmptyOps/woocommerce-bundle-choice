@@ -859,10 +859,10 @@ class Product {
           
         //Adding own ADD_TO_CART_BUTTON
         add_action('wp_footer',function(){
-        if(false){
-        ob_start();            
-            echo "<style>.double-gutter .tmb{ width: 50%;display: inline-flex; }</style>";
-        }
+            if(false){
+                ob_start();            
+                echo "<style>.double-gutter .tmb{ width: 50%;display: inline-flex; }</style>";
+            }
             $custom_css = "
                 .double-gutter .tmb {
                     width: 50%;
@@ -1039,9 +1039,9 @@ class Product {
                 <?php
                 }
                 $custom_css = "
-                .variations_form table.variations {
-                    display: none !important;
-                }
+                    .variations_form table.variations {
+                        display: none !important;
+                    }
                 ";
                 wbc()->load->add_inline_style('', $custom_css, 'common');
                  endif ?>
