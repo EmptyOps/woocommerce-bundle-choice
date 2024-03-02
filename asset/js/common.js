@@ -230,6 +230,40 @@ if(window.document.splugins.common.is_item_page || window.document.splugins.comm
     return baseURL + "?" + newAdditionalURL + rows_txt;
  } 
 
+ window.document.splugins.common.preview_page_url = function() {
+
+    var attributes = [];        
+
+    jQuery(jQuery('.variations_form').find('table.variations select')).each(function() {
+        
+        var value = jQuery(this).val();
+        if (value) {
+            attributes.push({
+                id: jQuery(this).attr('name'),
+                value: value
+            });
+        }/* else {
+            allAttributesSet = false;
+        }*/
+    });
+
+    var url = window.eo_wbc_object.url;
+
+    var attributeSlug_global = '';
+    jQuery.each(attributes,function(key, val) {
+        
+        var attributeSlug = val.id.replace('attribute_',''); //val.id.replace('attribute_pa_','');
+        // url += '&_attribute=' + attributeSlug + '&checklist_' + attributeSlug + "=" + val.value;
+        attributeSlug_global += ',' + attributeSlug;
+        url = window.document.splugins.common.updateURLParameter(url, 'checklist_' + attributeSlug, val.value);
+    });
+
+    url = window.document.splugins.common.updateURLParameter(url, '_attribute', attributeSlug_global);
+
+    return url;
+
+ }
+
  window.document.splugins.common.get_device_visible_screen_height_width = function() {
     
     // Visible Height
