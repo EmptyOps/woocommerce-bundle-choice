@@ -607,6 +607,7 @@ class Form_Builder implements Builder {
 			if(false){
 				return '<script type="text/html" id="tmpl-'.$id.'">' . $in_progress_html . '</script>';
 			}
+			wbc()->load->get_inline_script_tag($in_progress_html,array('id'=>'tmpl-'.$id));
 			 
 		}
 			

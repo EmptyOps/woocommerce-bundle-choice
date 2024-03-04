@@ -136,14 +136,29 @@ if(!class_exists('WBC_Loader')) {
 			}
 			
 			if(in_array('underscore', $param)) {
-				echo '<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.13.3/underscore-min.js"></script>';
+				if (false) {
+					echo '<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.13.3/underscore-min.js"></script>';
+				}
+	            wbc()->load->get_script_tag(array(
+	             'src'  => esc_url('https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.13.3/underscore-min.js'),
+	            ));				
 			}
 			
 			if(in_array('wc-add-to-cart-variation', $param)) {
-				echo '<script src="'.wbc()->common->site_url(). '/wp-content/plugins/woocommerce/assets/js/frontend/add-to-cart-variation.min.js'.'"></script>';
+				if (false) {
+					echo '<script src="'.wbc()->common->site_url(). '/wp-content/plugins/woocommerce/assets/js/frontend/add-to-cart-variation.min.js'.'"></script>';
+				}
+	            wbc()->load->get_script_tag(array(
+	             'src'  => esc_url(wbc()->common->site_url(). '/wp-content/plugins/woocommerce/assets/js/frontend/add-to-cart-variation.min.js'),
+	            ));					
 			}
 
-			echo '<script src="'.$_path.'"></script>';
+			if (false) {
+				echo '<script src="'.$_path.'"></script>';
+			}
+            wbc()->load->get_script_tag(array(
+             'src'  => esc_url($_path),
+            ));				
 
 		}
 
@@ -274,7 +289,12 @@ if(!class_exists('WBC_Loader')) {
 
 					if(isset($param[0]) && ($param[0]=='jquery' || $param[0]=='jQuery')) {
 						// ACTIVE_TODO aya woo-bundle ni extention no call nathi avto biji extention no call ave se atle script tag mate wordpress nu function call karva nu avse tenu upgrade karva nu avse -- to a 04-11-2023 
-						echo '<script src="https://ajax.googleapis.com/ajax/libs/jquery/'.(!empty($version)?$version:"3.4.1").'/jquery.min.js"></script>';
+						if (false) {
+							echo '<script src="https://ajax.googleapis.com/ajax/libs/jquery/'.(!empty($version)?$version:"3.4.1").'/jquery.min.js"></script>';
+						}
+			            wbc()->load->get_script_tag(array(
+			             'src'  => esc_url('https://ajax.googleapis.com/ajax/libs/jquery/'.(!empty($version)?$version:"3.4.1").'/jquery.min.js'),
+			            ));							
 						unset($param[0]);
 					}
 
