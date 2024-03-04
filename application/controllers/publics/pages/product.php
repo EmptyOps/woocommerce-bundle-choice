@@ -247,6 +247,10 @@ class Product extends \eo\wbc\system\core\publics\Eowbc_Base_Model_Publics {
                 }
             </style>
             <script type="text/javascript">
+
+                // ACTIVE_TODO it is added on 04-03-2024. to ensure that woocommerce variable is created atleast with the empty object so that show variation is fired normally on the preview page. however during the wbc upgrade we need to make sure that fundamental add to cart button rendering does happen or maybe we can not do that but do something that is possible so that we do not need rely on a hack like below. -- to h 
+                wc_add_to_cart_variation_params = {}
+                                
                 jQuery(".single_add_to_cart_button.button.alt").ready(function(){
 
                     jQuery('form.cart').prepend("<input type='hidden' name='eo_wbc_add_to_cart_preview' value='1'/>");
