@@ -51,7 +51,7 @@ class View_Order {
                 }
 
                 .eo_wbc_row::after {
-                    content: '';
+                    content: \"\";
                     clear: both;
                     display: table;
                 }
