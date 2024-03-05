@@ -15313,11 +15313,11 @@ class Sample_Data_Template {
 
         $res = array( "type"=>"success", "msg"=>"" );
 
-        for($input_data as $input_data_key=>$input_data_value){
+        foreach($input_data as $input_data_key=>$input_data_value){
 
-            for ($input_data_value as $idv_key=>$idv_value) { 
+            foreach($input_data_value as $idv_key=>$idv_value) { 
 
-                $_POST[$idv_value];
+                $_POST[$idv_key] = $idv_value;
 
             }
 
@@ -15326,28 +15326,28 @@ class Sample_Data_Template {
 
             if (!empty($res_save['type'])) {
 
-                if ($res_save['type'] == 'success') {
+                if($res_save['type'] == 'success') {
 
                     -- nothing to do so far
 
-                } elseif($res_save['sub_type'] == 'item_exits'){
+                } elseif($res_save['sub_type'] == 'item_exist') {
 
                     -- nothing to do so far
 
-                }else{
+                } else {
 
-                    return array("type"=>"error", "msg"=>" save prosses failed for one of the item.");
+                    return array("type"=>"error", "msg"=>"Save prosses failed for one of the item.");
                 }
 
-            } else{
+            } else {
 
-                return array("type"=>"error", "msg"=>" save prosses failed for one of the item.");
+                return array("type"=>"error", "msg"=>"Save prosses failed for one of the item.");
 
             }
 
-            for ($input_data_value as unset($idv_key)) { 
+            foreach($input_data_value as $idv_key=>$idv_value) { 
 
-                $_POST[$idv_value];
+                unset($_POST[$idv_key]);
 
             }
 
