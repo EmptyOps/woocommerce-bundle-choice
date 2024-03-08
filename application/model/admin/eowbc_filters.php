@@ -379,6 +379,7 @@ class Eowbc_Filters extends Eowbc_Model {
 				            	}
 				            	else {
 					                $res["type"] = "error";
+					                $res["sub_type"] = "item_exist";
 					    			$res["msg"] = eowbc_lang('Filter already exists '.(($filter_data[$fdkey][$key_clean.'_add_enabled']==1) ? 'and enabled' : 'but is disabled, you should enable it.'));
 					                return $res;
 				            	}
