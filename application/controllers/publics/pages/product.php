@@ -173,7 +173,7 @@ class Product {
                 "    e.preventDefault();\n" .
                 "    e.stopPropagation();\n" .
                 "});\n";
-            wbc()->load->add_inline_script( '', $inline_script, 'common-footer' );  
+            wbc()->load->add_inline_script( '', $inline_script, 'sp-wbc-common-footer' );  
         });
     }
 
@@ -403,7 +403,7 @@ class Product {
                 "\n" .
                 "    // jQuery(\"table.variations\").remove();\n" .
                 "});\n";
-            wbc()->load->add_inline_script( '', $inline_script, 'common-footer' );
+            wbc()->load->add_inline_script( '', $inline_script, 'sp-wbc-common-footer' );
 
         });
 
@@ -1021,7 +1021,7 @@ class Product {
                         ""
                     ) .
                 "\n";
-            wbc()->load->add_inline_script('', $inline_script, 'common-footer');
+            wbc()->load->add_inline_script('', $inline_script, 'sp-wbc-common-footer');
 
             global $post;            
             $product = wbc()->wc->eo_wbc_get_product($post->ID);
