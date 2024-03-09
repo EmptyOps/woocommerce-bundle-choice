@@ -525,7 +525,8 @@ box-shadow: none;">
 	<?php
 	}
 	$wp_create_nonce_sample_data_jewelry = wp_create_nonce('sample_data_jewelry');
-	$admin_url = admin_url('admin.php?page=eowbc');
+	$admin_url_1 = admin_url('admin.php?page=eowbc');
+	$admin_url_2 = admin_url('admin-ajax.php');
 	$eo_wbc_max_products = $sample_data_obj->get_model()->get_product_size();
 	$feature_key = __($feature_key);
 	$apply_filters_eowbc_product_sample_data_resolver_path = apply_filters('eowbc_product_sample_data_resolver_path','');
@@ -538,7 +539,7 @@ box-shadow: none;">
 		"\n" .
 		"        if(index>=eo_wbc_max_products){\n" .
 		"            \n" .
-		"            window.location.href=\"" . $admin_url . "\";\n" .
+		"            window.location.href=\"" . $admin_url_1 . "\";\n" .
 		"            return false;\n" .
 		"        }\n" .
 		"\n" .
@@ -553,7 +554,7 @@ box-shadow: none;">
 		"            'product_index':index \n" .
 		"        };\n" .
 		"\n" .
-		"        jQuery.post('" . $admin_url . "', data, function(response) {\n" .
+		"        jQuery.post('" . $admin_url_2 . "', data, function(response) {\n" .
 		"            var resjson = jQuery.parseJSON(response);\n" .
 		"            if( typeof(resjson[\"type\"]) != undefined && resjson[\"type\"] == \"success\" ){\n" .
 		"                eo_wbc_add_products(++index);                    \n" .
