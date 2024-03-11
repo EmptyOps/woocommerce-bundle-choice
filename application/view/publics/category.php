@@ -62,52 +62,53 @@
     }
 
     $custom_css = "
-    .cat_products{
-        border: 1.3px solid #80808059;
-        border-radius: 1.5px;
-        margin: auto !important;
-        margin-bottom: 2em !important;                            
-    }
-    @media only screen and (max-width: 768px) {
-        .ui.stackable.grid>.wide.column{  
-            margin-bottom: 2em !important;
+        .cat_products{
+            border: 1.3px solid #80808059;
+            border-radius: 1.5px;
+            margin: auto !important;
+            margin-bottom: 2em !important;                            
         }
-    }
-    .ui.cards>.card {
-        width: 100%;
-    }
-    .ui.cards>.card>.image>img {
-        width: auto;
-        margin: auto; 
-    }
-    .ui.cards>.card h5{
-        color: white !important;
-    }
+        @media only screen and (max-width: 768px) {
+            .ui.stackable.grid>.wide.column{  
+                margin-bottom: 2em !important;
+            }
+        }
+        .ui.cards>.card {
+            width: 100%;
+        }
+        .ui.cards>.card>.image>img {
+            /*width: 100%;*/
+            width: auto;
+            margin: auto; 
+        }
+        .ui.cards>.card h5{
+            color: white !important;
+        }
 
-    .ui.special.cards .card:first-child{
-        margin-bottom: 0.75px;
-    }
-    .ui.special.cards .card:first-child,.ui.special.cards .card:first-child *:not(.button){
-        border-bottom-right-radius: 0px !important;
-        border-bottom-left-radius: 0px !important;
-    }
-    .ui.special.cards .card:last-child{
-        margin-top: 0.75px;
-    }
-    .ui.special.cards .card:last-child,.ui.special.cards .card:last-child *:not(.button){
-        border-top-left-radius: 0px !important;
-        border-top-right-radius: 0px !important;
-    }
-    .cat_products.seven.wide.column{    
-        height: max-content;
-    }
-    .ui.card>.image:not(.ui)>img, .ui.cards>.card>.image:not(.ui)>img{
-        height: 250px !important;
-    }
-    .ui.dimmer .woocommerce-Price-amount.amount,.ui.dimmer  ins,.ui.dimmer  del{
-        color: white !important;
-        background-color: transparent !important;
-    }
+        .ui.special.cards .card:first-child{
+            margin-bottom: 0.75px;
+        }
+        .ui.special.cards .card:first-child,.ui.special.cards .card:first-child *:not(.button){
+            border-bottom-right-radius: 0px !important;
+            border-bottom-left-radius: 0px !important;
+        }
+        .ui.special.cards .card:last-child{
+            margin-top: 0.75px;
+        }
+        .ui.special.cards .card:last-child,.ui.special.cards .card:last-child *:not(.button){
+            border-top-left-radius: 0px !important;
+            border-top-right-radius: 0px !important;
+        }
+        .cat_products.seven.wide.column{    
+            height: max-content;
+        }
+        .ui.card>.image:not(.ui)>img, .ui.cards>.card>.image:not(.ui)>img{
+            height: 250px !important;
+        }
+        .ui.dimmer .woocommerce-Price-amount.amount,.ui.dimmer  ins,.ui.dimmer  del{
+            color: white !important;
+            background-color: transparent !important;
+        }
     ";
     wbc()->load->add_inline_style('', $custom_css,'common');    
 ?>
@@ -342,13 +343,13 @@ if(false) {
 
 $custom_css = "
 
-.products{
-    display: block !important;
-}
+    .products{
+        display: block !important;
+    }
 
-.product-listing{
-    display: block !important;
-}
+    .product-listing{
+        display: block !important;
+    }
 
 ";
 wbc()->load->add_inline_style('', $custom_css,'common');    

@@ -860,7 +860,7 @@ class Product {
         //Adding own ADD_TO_CART_BUTTON
         add_action('wp_footer',function(){
             if(false){
-                ob_start();            
+                            
                 echo "<style>.double-gutter .tmb{ width: 50%;display: inline-flex; }</style>";
             }
             $custom_css = "

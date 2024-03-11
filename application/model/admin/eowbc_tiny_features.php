@@ -139,68 +139,68 @@ class Tiny_Features extends Eowbc_Model {
 		<?php
 		}
 		$custom_css = "
-	    /*Enter Your Custom Admin CSS Here*/
-	    .ui.pointing.secondary.menu {
-	        padding: 10px 20px 10px 16px!important;
-	        margin: 9px 0;
-	        border-bottom: 1px solid #eee;
-	    }
+		    /*Enter Your Custom Admin CSS Here*/
+		    .ui.pointing.secondary.menu {
+		        padding: 10px 20px 10px 16px!important;
+		        margin: 9px 0;
+		        border-bottom: 1px solid #eee;
+		    }
 
-	    .ui.pointing.secondary.menu a.item {
-	        color: #5b5b5b;
-	    }
+		    .ui.pointing.secondary.menu a.item {
+		        color: #5b5b5b;
+		    }
 
-	    h4.ui.dividing.header {
-	        color: #333;
-	        font-weight: bold;
-	        padding: 10px 20px 10px 13px!important;
-	        margin: 9px 0;
-	        border-bottom: 1px solid #eee;
-	        float: left;
-	        width: 100%;
-	    }
+		    h4.ui.dividing.header {
+		        color: #333;
+		        font-weight: bold;
+		        padding: 10px 20px 10px 13px!important;
+		        margin: 9px 0;
+		        border-bottom: 1px solid #eee;
+		        float: left;
+		        width: 100%;
+		    }
 
-	    .eight.wide.field.upload_image .ui.button.inverted.primary {
-	        margin-left: 1rem;
-	        display: flex!important;
-	    }
+		    .eight.wide.field.upload_image .ui.button.inverted.primary {
+		        margin-left: 1rem;
+		        display: flex!important;
+		    }
 
-	    .ui.tiny.image {
-	        float: left;
-	        padding-right: 10px;
-	    }
+		    .ui.tiny.image {
+		        float: left;
+		        padding-right: 10px;
+		    }
 
-	    .eight.wide.field.upload_image {
-	        display: inline-block;
-	        padding: 10px 20px 10px 13px!important;
-	    }
+		    .eight.wide.field.upload_image {
+		        display: inline-block;
+		        padding: 10px 20px 10px 13px!important;
+		    }
 
-	    .eight.wide.field.upload_image .ui.tiny.image img {
-	        display: block;
-	        max-width: 100%;
-	        max-height: 100px;
-	        object-fit: contain;
-	    }
+		    .eight.wide.field.upload_image .ui.tiny.image img {
+		        display: block;
+		        max-width: 100%;
+		        max-height: 100px;
+		        object-fit: contain;
+		    }
 
-	    .eight.wide.field.upload_image .ui.button.inverted.primary {
-	        margin-left: 1rem;
-	    }
+		    .eight.wide.field.upload_image .ui.button.inverted.primary {
+		        margin-left: 1rem;
+		    }
 
-	    .inline.fields ~ .fields {
-	        padding: 10px 20px 10px 13px!important;
-	        border-bottom: 1px solid #eee;
-	        margin: 9px 0;
-	        width: 100%;
-	        float: left;
-	    }
+		    .inline.fields ~ .fields {
+		        padding: 10px 20px 10px 13px!important;
+		        border-bottom: 1px solid #eee;
+		        margin: 9px 0;
+		        width: 100%;
+		        float: left;
+		    }
 
-	    .ui.tiny.image ~ .ui.button.inverted.primary {
-	        margin-top: 2rem;
-	    }
+		    .ui.tiny.image ~ .ui.button.inverted.primary {
+		        margin-top: 2rem;
+		    }
 
-	    p.form-field._eowbc_certificate_url_field label[for=\"_eowbc_certificate_url\"] {
-	        display: none;
-	    }
+		    p.form-field._eowbc_certificate_url_field label[for=\"_eowbc_certificate_url\"] {
+		        display: none;
+		    }
 		";
 
 		wbc()->load->add_inline_style('', $custom_css, 'common');

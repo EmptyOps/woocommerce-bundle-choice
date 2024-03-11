@@ -182,17 +182,17 @@ if( true or in_array( wbc()->common->get_category('category',null,array(wbc()->o
         <?php 
             }
             $custom_css = "
-            .tax-product_cat .eo-wbc-container.filters .ui.menu {
-                -ms-flex-wrap: wrap;
-                flex-wrap: wrap;
-                -webkit-box-pack: center;
-                -ms-flex-pack: center;
-                justify-content: center;
-            }
+                .tax-product_cat .eo-wbc-container.filters .ui.menu {
+                    -ms-flex-wrap: wrap;
+                    flex-wrap: wrap;
+                    -webkit-box-pack: center;
+                    -ms-flex-pack: center;
+                    justify-content: center;
+                }
 
-            .tax-product_cat .eo-wbc-container.filters .ui.menu a.item.center {
-                margin-left: 0 !important;
-            }
+                .tax-product_cat .eo-wbc-container.filters .ui.menu a.item.center {
+                    margin-left: 0 !important;
+                }
             ";
             wbc()->load->add_inline_style('', $custom_css,'common');    
         ?>
