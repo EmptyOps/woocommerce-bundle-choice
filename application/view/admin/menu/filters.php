@@ -187,6 +187,6 @@ $inline_script =
 	"        }\n" .
 	"    });\n" .
 	"});";
-wbc()->load->add_inline_script('', $inline_script, 'common');
+wbc()->load->add_inline_script('', $inline_script, 'common-admin');
 ?>
 

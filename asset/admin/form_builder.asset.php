@@ -229,4 +229,4 @@ $inline_script =
     "\n" .
     "window.document.splugins.common.admin.form_builder.api = window.document.splugins.common.admin.form_builder.core( window.document.splugins.common.parseJSON( '" . json_encode($configs) . "', false ) );\n" .
     "\n";
-wbc()->load->add_inline_script( '', $inline_script, 'common' );
+wbc()->load->add_inline_script( '', $inline_script, 'common-admin' );

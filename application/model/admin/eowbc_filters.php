@@ -562,7 +562,7 @@ if( !is_ajax() ) {
 		"        eowbc_toast_common('warning','Note that your existing filters will be disabled, and the new sample filters will be added. You can enable your existing filters later at anytime by using bulk activate action.',10000);\n\n" .
 		"    });\n" .
 		"});\n";
-		wbc()->load->add_inline_script( '', $inline_script, 'common' );
+		wbc()->load->add_inline_script( '', $inline_script, 'common-admin' );
 
 
 	}
