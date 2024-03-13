@@ -1233,7 +1233,7 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
 
         // Calling parent's constructor
         super(element, configs);
-
+        console.log("SP_WBC_Variations_Swatches constructor called");
         // ACTIVE_TODO_OC_START
         // ACTIVE_TODO Till the safari incompatablity issue is not solwed we needed to move below variable decleration insight constructore. As soon as this safari compatiblity issue is fixed as soon move it move this variable declearation section back to the above constuctore.  
         // ACTIVE_TODO_OC_END
@@ -2836,7 +2836,7 @@ window.document.splugins.wbc.variations.swatches = window.document.splugins.wbc.
 
 window.document.splugins.wbc.variations.swatches.core = function( configs ) {
 
-
+    // console.log("[vs] core function called");
     jQuery.fn.sp_wbc_variations_swatches = function () {
         
         console.log("[vs] module called");
