@@ -2396,7 +2396,7 @@ class EOWBC_Filter_Widget {
 					$this->slider_price();
 					continue;
 				}
-
+				wbc_pr($filters);
 				$item['advance']=$advance;
 				$item['desktop']=1;			
 				if($item['type']==0 && ($item['input']=='icon' OR $item['input']=='icon_text')) {					 
