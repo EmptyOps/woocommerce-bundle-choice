@@ -30,12 +30,12 @@ if(
 	<?php
 		}
 		$custom_css= "
-	    @media (max-width: 1440px) {
-	        .ui.dropdown>.left.menu {
-	            left: auto!important;
-	            right: -152px !important;
-	        }
-	    }
+		    @media (max-width: 1440px) {
+		        .ui.dropdown>.left.menu {
+		            left: auto!important;
+		            right: -152px !important;
+		        }
+		    }
 		";
 	    wbc()->load->add_inline_style('', $custom_css,'common');   
 } else {

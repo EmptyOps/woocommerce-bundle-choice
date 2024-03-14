@@ -67,57 +67,57 @@ $model_images = \eo\wbc\model\Images::instance();
 <?php 
     }
     $custom_css = "
-    .eo-wbc-container.container:not(.filters) .ui.grid:not(.eo_wbc_filter_icon)>* {
-        padding-left: 5px;
-        padding-right: 0px !important;
-    }
-
-    .eo-wbc-container>.ui.steps .step .column.product_image_section img {
-        margin-left: 30% !important;
-    }
-
-    .eo-wbc-container>.ui.steps .step:after {
-        border-radius: 0 0 5px 0;
-    }
-
-    .eo-wbc-container>.ui.steps {
-        box-shadow: 2px 2px 0 #efefef !important;
-    }
-
-    .eo-wbc-container>.ui.steps * {
-        margin: auto !important;
-    }
-
-    /*--------Breadcumb  @tejas 08-02-2023 responsive---------*/
-    @media only screen and (max-width: 768px) {
-        body .eo-wbc-container.spui-semantic-breadcrumb>.ui.steps .step {
-            padding-left: 2em !important;
+        .eo-wbc-container.container:not(.filters) .ui.grid:not(.eo_wbc_filter_icon)>* {
+            padding-left: 5px;
+            padding-right: 0px !important;
         }
-        body .eo-wbc-container.spui-semantic-breadcrumb>.ui.steps .step .column.product_image_section img {
-            margin-left: 0 !important;
-        }
-    }
 
-    @media only screen and (max-width: 767px) {
-        .ui.steps:not(.unstackable) .step:after {
-            display: none!important;
+        .eo-wbc-container>.ui.steps .step .column.product_image_section img {
+            margin-left: 30% !important;
         }
-        body .eo-wbc-container.spui-semantic-breadcrumb>.ui.steps .step {
-            padding-left: 1em !important;
-        }
-    }
 
-    @media only screen and (max-width: 325px) {
-        body .eo-wbc-container.spui-semantic-breadcrumb>.ui.steps .step:first-child {
-            padding-left: 0em !important;
+        .eo-wbc-container>.ui.steps .step:after {
+            border-radius: 0 0 5px 0;
         }
-        body .eo-wbc-container.spui-semantic-breadcrumb>.ui.steps .step {
-            padding-left: 0em !important;
+
+        .eo-wbc-container>.ui.steps {
+            box-shadow: 2px 2px 0 #efefef !important;
         }
-        body .eo-wbc-container.spui-semantic-breadcrumb>.ui.steps .step .column.product_image_section img {
-            margin-left: 0 !important;
+
+        .eo-wbc-container>.ui.steps * {
+            margin: auto !important;
         }
-    }
+
+        /*--------Breadcumb  @tejas 08-02-2023 responsive---------*/
+        @media only screen and (max-width: 768px) {
+            body .eo-wbc-container.spui-semantic-breadcrumb>.ui.steps .step {
+                padding-left: 2em !important;
+            }
+            body .eo-wbc-container.spui-semantic-breadcrumb>.ui.steps .step .column.product_image_section img {
+                margin-left: 0 !important;
+            }
+        }
+
+        @media only screen and (max-width: 767px) {
+            .ui.steps:not(.unstackable) .step:after {
+                display: none!important;
+            }
+            body .eo-wbc-container.spui-semantic-breadcrumb>.ui.steps .step {
+                padding-left: 1em !important;
+            }
+        }
+
+        @media only screen and (max-width: 325px) {
+            body .eo-wbc-container.spui-semantic-breadcrumb>.ui.steps .step:first-child {
+                padding-left: 0em !important;
+            }
+            body .eo-wbc-container.spui-semantic-breadcrumb>.ui.steps .step {
+                padding-left: 0em !important;
+            }
+            body .eo-wbc-container.spui-semantic-breadcrumb>.ui.steps .step .column.product_image_section img {
+                margin-left: 0% !important;
+            }
+        }
     ";
     wbc()->load->add_inline_style('', $custom_css,'common');    
 ?>
