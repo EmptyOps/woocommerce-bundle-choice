@@ -52,7 +52,10 @@ window.document.splugins.parseJSON = function(result) {
     var resjson = null;
     try{
         console.log('called splugins parseJSON');
+        // console.log(result);
         resjson = jQuery.parseJSON(result);
+        console.log('called splugins parseJSON 1');
+        console.log(resjson);
     }
     catch(e) {
         try{
