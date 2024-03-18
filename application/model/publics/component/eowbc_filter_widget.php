@@ -2396,7 +2396,6 @@ class EOWBC_Filter_Widget {
 					$this->slider_price();
 					continue;
 				}
-				wbc_pr($filters);
 				$item['advance']=$advance;
 				$item['desktop']=1;			
 				if($item['type']==0 && ($item['input']=='icon' OR $item['input']=='icon_text')) {					 
@@ -3519,7 +3518,7 @@ class EOWBC_Filter_Widget {
 			"});";
 
 			// Add the script to WordPress using wbc()->load->add_inline_script()
-			wbc()->load->add_inline_script('', $inline_script, 'common');
+			wbc()->load->add_inline_script('', $inline_script, 'sp-wbc-common-footer');
 
 		// filter_sets_data
 		// ACTIVE_TODO/TODO here our asssumption is that the $current_category is pointing to root category but if it is not true than we mange here.

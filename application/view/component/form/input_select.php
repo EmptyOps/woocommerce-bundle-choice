@@ -34,7 +34,7 @@ if(!empty($id) /*and !empty($label)*/){
 							<?php
 							} else {
 								?>
-								<div class="item" <?php echo !empty($item["attr"]) ? esc_attr($item["attr"]) : ""; ?>
+								<div class="item" <?php echo !empty($item["attr"]) ? $item["attr"] : ""; ?>
 									data-value="<?php echo esc_attr($key); ?>"><?php echo esc_html($item["label"]); ?></div>
 							<?php
 							}
