@@ -550,13 +550,14 @@ class SP_Model_Single_Product extends SP_Single_Product {
 					wbc()->load->add_inline_script('', $inline_script, 'common');
 				// echo ob_get_clean();
 
-				if ( ! empty( $toggle_status ) ) {
-				    if ( has_action( 'woocommerce_before_variations_form' ) ) {
-				        add_action( 'woocommerce_before_variations_form', function () use ( $toggle_text ) {
-				            wbc()->load->asset( 'css', 'fomantic/semantic.min' );
-				            wbc()->load->asset( 'js', 'fomantic/semantic.min', array( 'jquery' ) );
-				            ob_start();
-				            ?>
+				if(!empty($toggle_status)){	
+					if(has_action('woocommerce_before_variations_form')){
+						add_action( 'woocommerce_before_variations_form',function( ) use($toggle_text){
+							// wbc()->load->asset('css','fomantic/semantic.min');
+							// wbc()->load->asset('js','fomantic/semantic.min',array('jquery'));
+							wbc()->load->built_in_asset('semantic');
+							ob_start();
+							?>
 								<span id="wbc_variation_toggle" class="ui raised segment">
 									<?php esc_attr_e($toggle_text); ?><i class="caret up icon" style="text-align: center;line-height: 1em;"></i>						
 								</span>
@@ -564,8 +565,10 @@ class SP_Model_Single_Product extends SP_Single_Product {
 							echo ob_get_clean();
 						}, 10, 1 );	
 					} else {
-						wbc()->load->asset('css','fomantic/semantic.min');
-						wbc()->load->asset('js','fomantic/semantic.min',array('jquery'));
+
+						// wbc()->load->asset('css','fomantic/semantic.min');
+						// wbc()->load->asset('js','fomantic/semantic.min',array('jquery'));
+						wbc()->load->built_in_asset('semantic');
 						if(false){
 							ob_start();
 						?>	
@@ -1157,8 +1160,9 @@ class SP_Model_Single_Product extends SP_Single_Product {
 
 		add_action( 'wp_footer' /*'wp_enqueue_scripts'*/ ,function(){
 			
-			wbc()->load->asset('css','fomantic/semantic.min');
-			wbc()->load->asset('js','fomantic/semantic.min',array('jquery'));
+			// wbc()->load->asset('css','fomantic/semantic.min');
+			// wbc()->load->asset('js','fomantic/semantic.min',array('jquery'));
+			wbc()->load->built_in_asset('semantic');
 
 			wbc()->load->asset( 'asset.php', constant( 'EOWBC_ASSET_DIR' ).'variations.assets.php');
 		}, 1049);	

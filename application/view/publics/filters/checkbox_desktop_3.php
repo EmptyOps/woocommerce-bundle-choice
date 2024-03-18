@@ -4,7 +4,8 @@
 *	Template to show checkbox filters for desktop
 */
 ?>
-<div class="spui-semantic-slider-column <?php echo esc_attr($width_class); ?>" data-tab-group="<?php esc_attr_e($tab_set); ?>">
+
+<div class="spui-semantic-slider-column <?php echo $non_edit ? 'hide':''; ?> <?php echo esc_attr($width_class); ?>" data-tab-group="<?php esc_attr_e($tab_set); ?>">
 	<p>
 		<span class="ui header"><?php echo esc_html($filter['title']); ?></span> 
 		<?php if($help): ?>

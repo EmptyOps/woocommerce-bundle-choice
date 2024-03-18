@@ -30,8 +30,14 @@ $template = array(
                     'variable-items-wrapper',
                     /*trim( implode( ' ', array_unique( $css_classes ) ) ),*/
                     'spui-wbc-swatches-variable-items-wrapper',
+<<<<<<< HEAD
                     'spui-wbc-swatches-variable-items-wrapper-'.esc_attr($woo_dropdown_attribute_html_data['type']),
                     esc_attr($woo_dropdown_attribute_html_data['type'])."-variable-wrapper"
+=======
+                    'spui-wbc-swatches-variable-items-wrapper-'.$woo_dropdown_attribute_html_data['type'],
+                    $woo_dropdown_attribute_html_data['type']."-variable-wrapper",
+                    'spui-wbc-swatches-variable-items-wrapper-'.$woo_dropdown_attribute_html_data['args'][ 'attribute' ]
+>>>>>>> fa937341496810dc75fcd52217f7643fee9907d2
                 ), 
     'attr' => array( 'data-attribute_name' => esc_attr( wc_variation_attribute_name( $attribute ) ),'data-attribute_values' =>wc_esc_json( wp_json_encode( array_values( $woo_dropdown_attribute_html_data['options'] ) ) ), 'data-type' => esc_attr($woo_dropdown_attribute_html_data['type'])),
     'child' => array(

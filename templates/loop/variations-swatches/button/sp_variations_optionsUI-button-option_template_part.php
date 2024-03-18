@@ -23,6 +23,8 @@ $slug_or_option = is_object($term) ? $term->slug : $term;
 
 $name_or_option = is_object($term) ? $term->name : $term;
 
+// wbc_pr('woo_dropdown_attribute_html_data_options_loop_class_1');
+// wbc_pr($woo_dropdown_attribute_html_data['options_loop_class'][$slug_or_option]);
 $template = array(
     'type' => 'li',
     'class' => 'spui_button_variable_item '.$woo_dropdown_attribute_html_data['class'].' '.$woo_dropdown_attribute_html_data['options_loop_class'][$slug_or_option],

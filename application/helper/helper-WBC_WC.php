@@ -560,6 +560,8 @@ class WBC_WC {
             $option_list='';    
         } elseif( $format == 'detailed' || $format == 'detailed_slug') {
             $option_list=array();
+        } elseif( $format == 'term_taxonomy_id_with_slug_label') {
+            $option_list=array();
         } elseif( $format == 'id_and_title' ) {
             $option_list=array();
         } elseif( $format == 'opts_detailed' ) {
@@ -579,6 +581,11 @@ class WBC_WC {
                 $option_list[$base->term_id] = array('label'=> (( $format == 'detailed_slug' ? str_replace("'","\'",$base->name).'('.$base->slug.')' : str_replace("'","\'",$base->name) )), 'attr'=>' data-sp_eid="'.esc_attr($separator).esc_attr($sp_eid_type_value).esc_attr($separator).esc_attr($base->term_id).esc_attr($separator).'" ', $format);
 
                 $option_list = array_replace($option_list, self::get_productCats($base->slug, $format, $sp_eid_type_value)); //array_merge($option_list, self::get_productCats($base->slug, $format));
+
+            } elseif( $format == 'term_taxonomy_id_with_slug_label') {
+                $option_list[$base->term_taxonomy_id] = array('label'=> str_replace("'","\'",$base->name).'('.$base->slug.')', $format);
+
+                $option_list = array_replace($option_list, self::get_productCats($base->slug, $format, $sp_eid_type_value, $is_return_data_only)); //array_merge($option_list, self::get_productCats($base->slug, $format));
 
             } elseif( $format == 'id_and_title' ) {
                

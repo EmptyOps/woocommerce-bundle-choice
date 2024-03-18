@@ -2,6 +2,9 @@
 defined( 'ABSPATH' ) || exit;
 
 function eo_wbc_jpc_list_categories($slug='',$prefix='',$opts_arr=array()){
+    
+    $separator = wbc()->config->separator();
+    
     $map_base = get_categories(array(
         'exclude'=>array(1),
         'hierarchical' => 1,
@@ -16,8 +19,9 @@ function eo_wbc_jpc_list_categories($slug='',$prefix='',$opts_arr=array()){
     foreach ($map_base as $base) {
 
         // $category_option_list.="<div data-type='0' class='item' data-value='{$base->slug}'>{$prefix}{$base->name}</div>".eo_wbc_jpc_list_categories($base->slug,'--');
-        $opts_arr[$base->slug] = array( 'label'=>$prefix.$base->name, 'attr'=>'data-type="0"' );
-        $opts_arr = eo_wbc_jpc_list_categories($base->slug,'--',$opts_arr);
+        // $opts_arr[$base->slug] = array( 'label'=>$prefix.$base->name, 'attr'=>'data-type="0"' );
+        $opts_arr[$base->slug] = array( 'label'=>$prefix.$base->name, 'attr'=>'data-type="0" data-sp_eid="'.$separator.'prod_cat'.$separator.$base->term_id.$separator.'"' );
+        $opts_arr = eo_wbc_jpc_list_categories($base->slug,/*'--'*/'  ',$opts_arr);
     }
 
     // return $category_option_list;
@@ -25,10 +29,15 @@ function eo_wbc_jpc_list_categories($slug='',$prefix='',$opts_arr=array()){
 }
 
 function eo_wbc_jpc_list_attributes( $opts_arr=array() ){
+    
+    $separator = wbc()->config->separator();
+
     // $attributes="";        
     foreach (wc_get_attribute_taxonomies() as $item) {                     
         // $attributes .= "<div data-type='1' class='item' data-value='{$item->attribute_name}'>{$item->attribute_label}</div>";            
-        $opts_arr[$item->attribute_name] = array( 'label'=>$item->attribute_label, 'attr'=>'data-type="1"' );
+        // $opts_arr[$item->attribute_name] = array( 'label'=>$item->attribute_label, 'attr'=>'data-type="1"' );
+        $opts_arr[$item->attribute_name] = array( 'label'=>$item->attribute_label, 'attr'=>'data-type="1" data-sp_eid="'.$separator.'attr'.$separator.$item->attribute_id.$separator.'" ' );
+
     }
     // return $attributes;
     return $opts_arr;
@@ -53,6 +62,10 @@ function eo_wbc_jpc_attributes_values(){
     return $attr_vals;
 }
 
+	
+$field_key = 'jpc_field';
+$field_key_sp_eid = $field_key.'_sp_eid';
+
 
 $form = array();
 
@@ -71,12 +84,19 @@ $form['data'] = array(
 						'size_class'=>array('sixteen','wide'),
 						'inline'=>false,
 						), 
-					'jpc_field'=>array(
+
+					$field_key_sp_eid=>array(
+						'type'=>'hidden',
+						'sanitize'=>'sanitize_text_field',
+						), 
+					/*'jpc_field'*/$field_key=>array(
 						'label'=>eowbc_lang('Field'),
 						'type'=>'select',
 						'value'=>'0',
 						'sanitize'=>'sanitize_text_field',
-						'options'=>eo_wbc_jpc_list_attributes( eo_wbc_jpc_list_categories() ),
+						'attr'=>array(' onchange="window.document.splugins.common.admin.form_builder.api.set_sp_eid( \'#'.$field_key.'_dropdown_div\', \''.$field_key_sp_eid.'\' )" '),
+						//'options'=>eo_wbc_jpc_list_attributes( eo_wbc_jpc_list_categories() ),
+						'options'=>apply_filters('wbc_price_control_field_options', eo_wbc_jpc_list_attributes( eo_wbc_jpc_list_categories() )),
 						'class'=>array('fluid'),
 						'size_class'=>array('eight','wide'),
 						'inline'=>false,
@@ -115,6 +135,8 @@ $form['data'] = array(
 		'prev_inline'=>true,
 		'inline'=>true,
 	);
+
+
 
 	$fieldarr['next_inline'] = true;
 	$form['data']['jpc_values_drop_1_'/*.$key*/] = $fieldarr;
@@ -214,7 +236,7 @@ $form['data'] = array_merge( $form['data'], array(
 								) 
 							), 
 						'regular_price_label'=>array(
-							'label'=>eowbc_lang('Regular Price'),
+							'label'=>eowbc_lang('Regular Price(%)'),
 							'type'=>'label',
 							//'class'=>array('fluid'),
 							'size_class'=>array('three','wide','jpc_rules_table'),
@@ -224,11 +246,12 @@ $form['data'] = array_merge( $form['data'], array(
 						'regular_price'=>array(
 							//'label'=>eowbc_lang('Regular Price'),
 							'no_label' => true,
-							'placeholder'=>eowbc_lang('Regular Price'),
-							'type'=>'text',
+							'placeholder'=>eowbc_lang('Regular Price(%)'),
+							'type'=>'number',
 							'value'=>'0',
 							'sanitize'=>'sanitize_text_field',
 							'options'=>array(),
+							'attr'=>array("min='-100'"),	
 							//'class'=>array('fluid'),
 							'size_class'=>array('three','wide','jpc_rules_table'),
 							'prev_inline'=>true,
@@ -236,7 +259,7 @@ $form['data'] = array_merge( $form['data'], array(
 							'inline'=>true,
 							),
 						'sales_price_label'=>array(
-							'label'=>eowbc_lang('Sales Price'),
+							'label'=>eowbc_lang('Sales Price(%)'),
 							'type'=>'label',
 							//'class'=>array('fluid'),
 							'size_class'=>array('three','wide','jpc_rules_table'),
@@ -247,16 +270,38 @@ $form['data'] = array_merge( $form['data'], array(
 						'sales_price'=>array(
 							//'label'=>eowbc_lang('Sales Price'),
 							'no_label' => true,
-							'placeholder'=>eowbc_lang('Sales Price'),
-							'type'=>'text',
+							'placeholder'=>eowbc_lang('Sales Price(%)'),
+							'type'=>'number',
 							'value'=>'0',
 							'sanitize'=>'sanitize_text_field',
 							'options'=>array(),
+							'attr'=>array("min='-100'"),	
 							//'class'=>array('fluid'),
 							'size_class'=>array('three','wide','jpc_rules_table'),
 							'prev_inline'=>true,
 							'inline'=>true,
 							),
+
+						'pricing_method_list_devider'=>array(
+							'label'=>'',
+							'type'=>'devider',
+							'size_class'=>array('three','wide','jpc_rules_table'),
+							),
+
+						// NOTE: even though we have added the target field here but we do not have any plans to support the different targets for different sub rule of the rule so that should be well noted.
+						// 	ACTIVE_TODO and in future we maybe should simply move it with the regular and sales price fields which are added at last after a complete rule is created on admin so that will be proper data structure wise. done 
+								// ACTIVE_TODO however only the field is moved here in the form but save on the data layer is still not separated.
+						'jpc_target'=>array(
+							'label'=>eowbc_lang('Target'),
+							'type'=>'select',
+							'value'=>'',
+							'sanitize'=>'sanitize_text_field',
+							'options'=>apply_filters('wbc_price_control_target_options', array(''=>'Default')),
+							'class'=>array('fluid'),
+							'size_class'=>array('three','wide','jpc_rules_table'),
+							'inline'=>false,
+							), 						
+
 						'jpc_add_price_ctl'=>array(
 							'label'=>eowbc_lang('Save Pricing Method'),
 							'type'=>'button',

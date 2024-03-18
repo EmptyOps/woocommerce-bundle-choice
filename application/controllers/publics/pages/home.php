@@ -24,6 +24,9 @@ class Home {
 		if(isset($_GET['wbc_report']) && !empty(wbc()->sanitize->get('wbc_report'))) {
         	if(isset($_SERVER['HTTP_REFERER'])){
         		wbc()->options->set('eo_wbc_mapping_error_report',$_SERVER['HTTP_REFERER']);
+            /*ACTIVE_TODO_OC_START
+            do we need to apply get text call here
+            ACTIVE_TODO_OC_END*/
         		\EOWBC_Error_Handler::log('One user has reported mapping issue at this <a href="'.$_SERVER['HTTP_REFERER'].'" target="_blank">link</a>, please ensure you have added mapping to connect products from first to second step.',2);	
         	}
       	} 
@@ -166,7 +169,10 @@ class Home {
 
       	if(wbc()->options->get_option('configuration','buttons_page')==3 or wbc()->options->get_option('configuration','buttons_page')==1) {
 
-      		$button_render_error_msg = constant('EOWBC_NAME')." failed to display buttons on your current theme, you may send an error log or create a support ticket on the support forum.";
+          /*ACTIVE_TODO_OC_START
+      		do we need to apply get text call here
+          ACTIVE_TODO_OC_END*/
+          $button_render_error_msg = constant('EOWBC_NAME')." failed to display buttons on your current theme, you may send an error log or create a support ticket on the support forum.";
 
 			ob_start();
 			wbc()->load->template('publics/buttons', array('is_embed_using_js'=>true));

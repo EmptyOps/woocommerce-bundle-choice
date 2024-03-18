@@ -4,7 +4,7 @@ namespace eo\wbc\controllers\admin\menu\page;
 defined( 'ABSPATH' ) || exit;
 
 if ( ! class_exists( 'Appearance' ) ) {
-	class Appearance {
+	class Appearance extends \eo\wbc\controllers\admin\Controller{
 
 		private static $_instance;
 		public static function instance() {
@@ -266,6 +266,20 @@ if ( ! class_exists( 'Appearance' ) ) {
 									'is_id_as_name'=>true,
 									'class'=>array(),
 								), 
+								'appearance_filters_price_filter_title_text'=>array(
+									'label'=>'Price Filter Title Text',
+									'type'=>'text',
+									'sanitize'=>'sanitize_text_field',
+									'value'=>'',						
+									'class'=>array(),
+								),
+								'appearance_filters_advanced_options_btn_text'=>array(
+									'label'=>'Advanced Options Button Text',
+									'type'=>'text',
+									'sanitize'=>'sanitize_text_field',
+									'value'=>'',						
+									'class'=>array(),
+								),
 							),
 							array( 
 								'filters_submit_btn'=>array(
@@ -634,8 +648,8 @@ if ( ! class_exists( 'Appearance' ) ) {
 						)
 					)
 				)
-				
 			);
+			$form_definition = self::instance()->generate_form_wrapper($form_definition, 'wbc', 'fp', 'Category Page', array('oops_section'=>'Ooops Section'), \eo\wbc\model\publics\SP_Model_Feed::instance());
 
 			if($is_add_sample_values) {
 				//loop through form tabs and set (random) sample values for each field  

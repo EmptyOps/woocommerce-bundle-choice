@@ -114,14 +114,26 @@ class Cache_Manager {
 			 	
 			 	$first_part_term = wbc()->wp->get_term_by_term_taxonomy_id($first_part[0]);
 			 	if(count($first_part)>1 and !empty($first_part_term) and !is_wp_error( $first_part_term)) {			 		
-					$map[0] = $this->terms_between($first_part_term->taxonomy,$first_part[0],$first_part[1]);			 		
+					$map[0] = $this->terms_between($first_part_term->taxonomy,$first_part[0],$first_part[1]);	
+
+					if($map['first_filter_query_type'] == 'range') {
+
+						$map['0_1'] = $this->terms_between($first_part_term->taxonomy,$first_part[0],$first_part[1],$map['first_filter_query_type']);	
+					}
+
 			 	} else {
 			 		$map[0] = $first_part;
 			 	}
 
 			 	$second_part_term = wbc()->wp->get_term_by_term_taxonomy_id($second_part[0]);
 			 	if(count($second_part)>1 and !empty($second_part_term) and !is_wp_error( $second_part_term)) {			 		
-					$map[1] = $this->terms_between($second_part_term->taxonomy,$second_part[0],$second_part[1]);			 		
+					$map[1] = $this->terms_between($second_part_term->taxonomy,$second_part[0],$second_part[1]);			 	
+					
+					if($map['second_filter_query_type'] == 'range') {
+
+						$map['1_1'] = $this->terms_between($second_part_term->taxonomy,$second_part[0],$second_part[1],$map['second_filter_query_type']);	
+					}
+
 			 	} else {
 			 		$map[1] = $second_part;
 			 	}
@@ -134,7 +146,7 @@ class Cache_Manager {
 		}
 	}
 
-	private function terms_between($taxonomy, $begining_term, $end_term) { 
+	private function terms_between($taxonomy, $begining_term, $end_term, $filter_query_type=null) { 
 
 		$terms = wp_cache_get('cache_taxonomy','eo_wbc');
 		if(empty($terms[$taxonomy])){
@@ -148,7 +160,7 @@ class Cache_Manager {
 		$begining_marked_status = false;
 		$end_marked_status = false;
 
-		$terms = array_filter($terms,function($term) use(&$begining_marked_status, &$end_marked_status,&$begining_term,&$end_term){
+		$terms = array_filter($terms,function($term) use(&$begining_marked_status, &$end_marked_status,&$begining_term,&$end_term, $filter_query_type){
 			
 			if($begining_marked_status==true and $end_marked_status==true) {
 				return false;				
@@ -168,7 +180,20 @@ class Cache_Manager {
 						if($end_term == $term->term_taxonomy_id) {
 							$end_marked_status = true;
 						}
-						return true;
+
+						if($filter_query_type == 'range') {
+
+							if($end_marked_status) {
+
+								return true;
+							} else {
+
+								return false;
+							}
+						} else {
+
+							return true;
+						}
 					} else {
 						return false;
 					}

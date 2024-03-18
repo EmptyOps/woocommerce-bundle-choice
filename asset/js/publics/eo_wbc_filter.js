@@ -152,6 +152,8 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		// NOTE: now almost all other page load level flag set logic is disabled and initialy the flag is set at page load time only from here. 
 		set_enable_filter_private(true);	
 
+		slider_init();
+
     };
 
     var process_events = function(){
@@ -163,7 +165,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		on_change_listener();
 
 		slider_change_event_listener();
-
+		
 		checkbox_change_event_listener();
 
 		input_type_icon_click_listener();
@@ -440,18 +442,10 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
 				}
 				
-				/*ACTIVE_TODO_QC_START
-				--	orderby field might needed to be moved to tableview if tha logic and functionality of below field is for tableview only. -- to h
-				ACTIVE_TODO_QC_END*/
 				if(jQuery("select[name='orderby']").length>0){
 				
-					form_data.orderby=jQuery("select[name='orderby']:eq(0)").val();
-				}
-
-				// NOTE: this if is duplicate of above and still we can not confirm if it was intentional or not so just kept it till we can not confirm accuratly.
-				if(jQuery("select[name='orderby']").length>0){
-				
-					form_data.orderby=jQuery("select[name='orderby']:eq(0)").val();
+					// form_data.orderby=jQuery("select[name='orderby']:eq(0)").val();
+					form_data.orderby = window.document.splugins.wbc.pagination.api.get_sort_dropdown_container().val();
 				}
 
 				// if(type == slick_table) {
@@ -471,12 +465,10 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 					form_data+='&eo_wbc_page='+jQuery('[name="eo_wbc_page"]').val();
 				}
 				
-				/*ACTIVE_TODO_QC_START
-				--	orderby field might needed to be moved to tableview if tha logic and functionality of below field is for tableview only. -- to h
-				ACTIVE_TODO_QC_END*/
 				if(jQuery("select[name='orderby']").length>0){
 				
-					form_data+='&orderby='+jQuery("select[name='orderby']:eq(0)").val();
+					// form_data+='&orderby='+jQuery("select[name='orderby']:eq(0)").val();
+					form_data+='&orderby='+window.document.splugins.wbc.pagination.api.get_sort_dropdown_container().val();
 				}
 
 				// if(type == 'template1' || type == 'template2') {
@@ -1157,6 +1149,11 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 				        	console.log("compatability inner else if inner if inner if themes patch dello");
 
 							selector_string_local = '.radiantthemes-shop';
+						}else if(window.document.splugins.common.current_theme_key == 'themes___goldish-child') {
+
+				        	console.log("compatability inner else if inner if inner if themes patch dello");
+
+							selector_string_local = '.products,.c-product-grid__wrap';
 						}
 
 						if(object.is_return_string_selector) {
@@ -1173,7 +1170,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 				}
 
 			}
-        } 
+        }
 
         console.log('jet-filters-pagination 1');
         console.log(section);
@@ -1528,6 +1525,39 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
     };
 
+    var slider_init = function(){
+
+    	$slider_element = jQuery('.ui.range.slider');
+    
+		for (var i = $slider_element.length - 1; i >= 0; i--) {
+	    	
+	    	min = jQuery($slider_element[i]).data('range-start');
+	    	max = jQuery($slider_element[i]).data('range-end');    			
+
+    		if(!window.document.splugins.common.is_empty(min) && !window.document.splugins.common.is_empty(max)){
+
+	    		element = $slider_element[i];
+
+				_p_sep = jQuery(element).attr('data-sep');
+				_p_prefix = jQuery(element).data('prefix');
+				if(typeof(_p_prefix) == typeof(undefined) || _p_prefix=='undefined'){
+					_p_prefix = '';
+				}
+
+				_p_postfix = jQuery(element).data('postfix');
+				if(typeof(_p_postfix) == typeof(undefined) || _p_postfix=='undefined'){
+					_p_postfix = '';
+				}
+
+		    	jQuery("input[name='text_min_"+jQuery(element).attr('data-slug')+"']").val( _p_prefix+(_p_sep=='.'?Number(min).toFixed(2):(Number(min).toFixed(2)).toString().replace('.',','))+_p_postfix );
+		    	jQuery("input[name='text_max_"+jQuery(element).attr('data-slug')+"']").val( _p_prefix+(_p_sep=='.'?Number(max).toFixed(2):(Number(max).toFixed(2)).toString().replace('.',','))+_p_postfix);
+
+		    	jQuery(element).semanticSlider("set rangeValue",min,max);    			
+    		}
+		}
+
+    };
+
     var on_reset_click_listener = function(form_selector){
 
 	    /*ACTIVE_TODO_OC_START
@@ -1608,7 +1638,23 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 			on_slider_change_event(selector, this);
 		};
 		// --- end ---
-    	window.document.splugins.wbc.filters.filter_field.slider(jQuery('.eo-wbc-container.filters').find('.ui.slider'));
+
+		if (window.document.splugins.common.current_theme_key != 'themes___purple_theme') {
+		    window.document.splugins.wbc.filters.filter_field.slider(
+		        jQuery('.eo-wbc-container.filters').find('.ui.slider')
+		    );
+		} else {
+		    // added on 18-09-2023
+		    setTimeout(function () {
+		        console.log('filters [slider_change_event_listener] 1');
+		        console.log(jQuery('.Top_Daimond_Btn_Content').find('.irs-hidden-input'));
+
+		        window.document.splugins.wbc.filters.filter_field.slider(
+		            jQuery('.Top_Daimond_Btn_Content').find('.irs-hidden-input')
+		        );
+		    }, 2000);
+		}
+
     };
 
     var checkbox_change_event_listener = function(){
@@ -1640,7 +1686,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
     var input_type_icon_click_listener = function() {
 
     	console.log('filters [input_type_icon_click_listener]');
-    	console.log(EO_WBC_FILTER_UI_ICON_TERM_SLUG);
+    	// console.log(EO_WBC_FILTER_UI_ICON_TERM_SLUG);
 
     	if(typeof(EO_WBC_FILTER_UI_ICON_TERM_SLUG) != typeof(undefined) && !window.document.splugins.common.is_empty(EO_WBC_FILTER_UI_ICON_TERM_SLUG)) {
     		
@@ -1661,6 +1707,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
 					jQuery(filter_container).find('[data-filter="'+"<?php echo $term->slug; ?>"+'"]:not(.none_editable)').off();
 					// jQuery(filter_container).find('[data-filter="'+"<?php echo $term->slug; ?>"+'"]:not(.none_editable)').on('click',function(e){
+					console.log('input_type_icon_click_listener() 011');
 					console.log(filter_container);
 					console.log('[data-filter="'+ term_slug +'"]');
 					jQuery(filter_container).find('[data-filter="'+ term_slug +'"]:not(.none_editable)').on('click',function(e){
@@ -1680,6 +1727,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
     var input_type_button_click_listener = function() {
 
+<<<<<<< HEAD
     	console.log('filters [input_type_button_click_listener]');
     	console.log('[data-filter-slug="'+ _this.sub_configs.filter_slug +'"]');
     	console.log(jQuery('[data-filter-slug="'+ _this.sub_configs.filter_slug +'"]'));
@@ -1691,12 +1739,37 @@ window.document.splugins.wbc.filters.core = function( configs ) {
     		
     		console.log('filters [input_type_button_click_listener] 01');
     		on_input_type_button_click(event, this);
+=======
+   		console.log('input_type_button_click_listener()');
+>>>>>>> fa937341496810dc75fcd52217f7643fee9907d2
 
-		});
-		// --- end ---
+    	if(typeof(EO_WBC_FILTER_INPUT_BUTTON_FILTER_SLUG) != typeof(undefined) && !window.document.splugins.common.is_empty(EO_WBC_FILTER_INPUT_BUTTON_FILTER_SLUG)) {
+    		
+   			console.log('input_type_button_click_listener() 01');
+	
+	        jQuery( EO_WBC_FILTER_INPUT_BUTTON_FILTER_SLUG ).each(function (i, term_slug) {
+
+		    	console.log(term_slug);
+		    	if(term_slug){
+
+			    	// --- aa code woo-bundle-choice/application/model/publics/component/eowbc_filter_widget.php input_button(); mathi move karyo se @a ---
+			    	// --- start ---
+					// $('[data-filter-slug="<?php echo $filter['slug']; ?>"]').on('click',function(event){
+					jQuery('[data-filter-slug="'+ term_slug +'"]').on('click',function(event){
+			    		
+			    		on_input_type_button_click(event, this, term_slug);
+
+					});
+					// --- end ---					
+		    	}
+
+				// --- end ---          
+	        });   
+    
+    	} 	
 
     };
-    
+
     // --- move to filter_set module @a ---
   //   var on_filter_set_click_listener = function(){
 
@@ -1761,13 +1834,17 @@ window.document.splugins.wbc.filters.core = function( configs ) {
     	input_type_icon_click(e, element, term_slug);
     };
 
-    var on_input_type_button_click = function(event, element) {
+    var on_input_type_button_click = function(event, element, term_slug) {
 
+<<<<<<< HEAD
     	console.log('filters [on_input_type_button_click]');
     	
     	input_type_button_click(event, element);
+=======
+    	input_type_button_click(event, element, term_slug);
+>>>>>>> fa937341496810dc75fcd52217f7643fee9907d2
     };
-
+	    
     var reset_click = function(form_selector) {
 
     };
@@ -2070,6 +2147,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 			};
 
 			_params.onChange=function(value, min, max) {	
+				console.log('_params.onChange');
 				_labels = jQuery(e).attr('data-labels');
 				__slugs = jQuery(e).attr('data-slugs');
 				
@@ -2084,7 +2162,9 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 					_min=0;
 					_max=_labels.length-1;
 				}
-
+				console.log('slider_change_event loop onChange');
+				console.log(jQuery(this/*element*/));
+				console.log(value);
 				if(
 					(
 						(jQuery(this/*element*/).data('prev_val_min')!=min && jQuery(this/*element*/).data('prev_val_min')!=undefined)
@@ -2175,36 +2255,49 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 				_params.autoAdjustLabels=false;	
 			}					
 			
+			jQuery(jQuery(e).attr('data-bind-min')).change(function() {				    
+
+				common_slider_change_event(e);
+			});
+
+			jQuery(jQuery(e).attr('data-bind-max')).change(function() {				    
+
+				common_slider_change_event(e);
+			});
+
 			jQuery("input.text_slider_"+jQuery(e).attr('data-slug')).change(function() {				    
-				
-				//jQuery("#text_slider_"+jQuery(e).attr('data-slug')).slider("set rangeValue",jQuery("[name=min_"+jQuery(e).attr('data-slug')+"]").val(),jQuery("[name=max_"+jQuery(e).attr('data-slug')+"]").val());
 
-				let prefix = jQuery(e).attr('data-prefix');
-				let postfix = jQuery(e).attr('data-postfix');
-				
-				let min_value = jQuery("[name='text_min_"+jQuery(e).attr('data-slug')+"']").val();
-				
-				let max_value = jQuery("[name='text_max_"+jQuery(e).attr('data-slug')+"']").val();
-				
-				if(prefix!=='' && typeof(prefix)!==typeof(undefined) && prefix.hasOwnProperty('length')){
-					if(min_value.includes(prefix)){
-						min_value = min_value.slice(prefix.length);	
-					}							
-					if(max_value.includes(prefix)){
-						max_value = max_value.slice(prefix.length);
-					}
-				}
+				// -- move to common_slider_change_event()
+				// //jQuery("#text_slider_"+jQuery(e).attr('data-slug')).slider("set rangeValue",jQuery("[name=min_"+jQuery(e).attr('data-slug')+"]").val(),jQuery("[name=max_"+jQuery(e).attr('data-slug')+"]").val());
 
-				if(postfix!=='' && typeof(postfix)!==typeof(undefined) && postfix.hasOwnProperty('length')){
-					if(min_value.includes(postfix)){
-						min_value = min_value.slice(0,-1*postfix.length);
-					}
-					if(min_value.includes(postfix)){
-						max_value = max_value.slice(0,-1*postfix.length);
-					}
-				}
+				// let prefix = jQuery(e).attr('data-prefix');
+				// let postfix = jQuery(e).attr('data-postfix');
 				
-				jQuery("#text_slider_"+jQuery(e).attr('data-slug')).slider("set rangeValue",min_value,max_value);
+				// let min_value = jQuery("[name='text_min_"+jQuery(e).attr('data-slug')+"']").val();
+				
+				// let max_value = jQuery("[name='text_max_"+jQuery(e).attr('data-slug')+"']").val();
+				
+				// if(prefix!=='' && typeof(prefix)!==typeof(undefined) && prefix.hasOwnProperty('length')){
+				// 	if(min_value.includes(prefix)){
+				// 		min_value = min_value.slice(prefix.length);	
+				// 	}							
+				// 	if(max_value.includes(prefix)){
+				// 		max_value = max_value.slice(prefix.length);
+				// 	}
+				// }
+
+				// if(postfix!=='' && typeof(postfix)!==typeof(undefined) && postfix.hasOwnProperty('length')){
+				// 	if(min_value.includes(postfix)){
+				// 		min_value = min_value.slice(0,-1*postfix.length);
+				// 	}
+				// 	if(min_value.includes(postfix)){
+				// 		max_value = max_value.slice(0,-1*postfix.length);
+				// 	}
+				// }
+
+				// jQuery("#text_slider_"+jQuery(e).attr('data-slug')).slider("set rangeValue",min_value,max_value);
+
+				common_slider_change_event(e);
 			});
 
 			let ui_slider = jQuery.fn.slider;
@@ -2216,11 +2309,15 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 			console.log(_params);
 			
 			// ACTIVE_TODO temp. added on 30-11-2022. remove as soon as the standerd fix is ready. 
-			if(window.document.splugins.common.current_theme_key != 'themes___alpha-store-pro-child' && window.document.splugins.common.current_theme_key != 'themes___maia-child' && window.document.splugins.common.current_theme_key != 'themes___moonte-child' && window.document.splugins.common.current_theme_key != 'themes___frank-jewelry-store'){		
+			if(window.document.splugins.common.current_theme_key != 'themes___alpha-store-pro-child' && window.document.splugins.common.current_theme_key != 'themes___maia-child' && window.document.splugins.common.current_theme_key != 'themes___moonte-child' && window.document.splugins.common.current_theme_key != 'themes___frank-jewelry-store' && window.document.splugins.common.current_theme_key != 'themes___merchandiser-child'){		
 				
 				console.log('if jQuery(e).slider(_params) call');
 
-				jQuery(e).slider(_params);
+				// purple theme mate aa permenent alag if se tenu slider alag ave se atle. So aa permanant if condition se and koi temp. temparary if nathi.
+				if(window.document.splugins.common.current_theme_key != 'themes___purple_theme') {
+					// jQuery(e).slider(_params);
+					jQuery(e).semanticSlider(_params);
+				}
 			}else{
 				
 				console.log('else temp_patch_slider_change_event_child call');
@@ -2235,7 +2332,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		});
 	
 		// ACTIVE_TODO temp. added on 30-11-2022. remove as soon as the standerd fix is ready. 
-		if(window.document.splugins.common.current_theme_key == 'themes___alpha-store-pro-child' || window.document.splugins.common.current_theme_key == 'themes___maia-child' || window.document.splugins.common.current_theme_key == 'themes___moonte-child' || window.document.splugins.common.current_theme_key == 'themes___frank-jewelry-store') {
+		if(window.document.splugins.common.current_theme_key == 'themes___alpha-store-pro-child' || window.document.splugins.common.current_theme_key == 'themes___maia-child' || window.document.splugins.common.current_theme_key == 'themes___moonte-child' || window.document.splugins.common.current_theme_key == 'themes___frank-jewelry-store' || window.document.splugins.common.current_theme_key == 'themes___merchandiser-child') {
 			
 			console.log('if temp_patch_slider_change_event_child call');
 
@@ -2244,23 +2341,70 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
     };
 
+    var common_slider_change_event = function(e) {
+
+		console.log('slider_change_event loop 1 change');
+		console.log("input.text_slider_"+jQuery(e).attr('data-slug'));
+		//jQuery("#text_slider_"+jQuery(e).attr('data-slug')).slider("set rangeValue",jQuery("[name=min_"+jQuery(e).attr('data-slug')+"]").val(),jQuery("[name=max_"+jQuery(e).attr('data-slug')+"]").val());
+
+		let prefix = jQuery(e).attr('data-prefix');
+		let postfix = jQuery(e).attr('data-postfix');
+		
+		let min_value = jQuery("[name='text_min_"+jQuery(e).attr('data-slug')+"']").val();
+		
+		let max_value = jQuery("[name='text_max_"+jQuery(e).attr('data-slug')+"']").val();
+		
+		if(prefix!=='' && typeof(prefix)!==typeof(undefined) && prefix.hasOwnProperty('length')){
+			if(min_value.includes(prefix)){
+				min_value = min_value.slice(prefix.length);	
+			}							
+			if(max_value.includes(prefix)){
+				max_value = max_value.slice(prefix.length);
+			}
+		}
+
+		if(postfix!=='' && typeof(postfix)!==typeof(undefined) && postfix.hasOwnProperty('length')){
+			if(min_value.includes(postfix)){
+				min_value = min_value.slice(0,-1*postfix.length);
+			}
+			if(max_value.includes(postfix)){
+
+				// console.log('filters [common_slider_change_event] if 2 if 2');
+				
+				max_value = max_value.slice(0,-1*postfix.length);
+			}
+		}
+
+		if(window.document.splugins.common.current_theme_key != 'themes___purple_theme') {
+
+			jQuery("#text_slider_"+jQuery(e).attr('data-slug')).semanticSlider("set rangeValue",min_value,max_value);
+		}else{
+			
+			var sliderData = jQuery(e).data("ionRangeSlider").result;
+			
+			jQuery(e).data("ionRangeSlider").options.onFinish(sliderData);
+
+		}
+
+    }
+
 	// ACTIVE_TODO temp. added on 30-11-2022. remove as soon as the standerd fix is ready. 
     var temp_patch_slider_change_event_child = function(slider) {
 		
     	console.log('filters [temp_patch_slider_change_event_child]');
 
-		jQuery.getScript("https://demo.woochoiceplugin.com/hify-store/wp-content/plugins/woo-bundle-choice/asset/js/fomantic/semantic.min.js?ver=5.0.10", function(data, status, jqxhr) {
+		jQuery.getScript(window.document.splugins.common.site_url+'/wp-content/plugins/woo-bundle-choice/asset/js/fomantic/semantic.min.js?ver=5.0.10', function(data, status, jqxhr) {
 	
 	    	for (let i = 0; i < slider.element.length; i++) {
 
 				console.log(slider.params[i]);	
-				jQuery(slider.element[i]).slider(slider.params[i]);
+				jQuery(slider.element[i]).semanticSlider(slider.params[i]);
 			}	
 
 		});
 
     };
-    
+
     var checkbox_change_event = function(event, element){
 
 		/*__slug=jQuery(this).attr('data-filter-slug');
@@ -2440,6 +2584,13 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		jQuery(filter_list).val(icon_val.substr(0,icon_val.length));
 		
 		jQuery(/*this*/element).toggleClass('eo_wbc_filter_icon_select');
+		// jQuery('.eo_wbc_filter_icon').click(function(){					
+			// ACTIVE_TODO/NOTE below function of toggle image function is moved from the layers of wbc filter widget class to fix the issue that it was not working from there since the selected class was not added when it is called from there. so during the upgrade take note of this refactoring. -- to a && -- to h
+			if (typeof jQuery.fn.wbc_flip_toggle_image === 'function') {
+				jQuery.fn.wbc_flip_toggle_image(this);
+			}
+		// });		
+			
 		jQuery('[name="paged"]').val('1');
 		// <?php if(empty(wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','filter_setting_btnfilter_now'))): ?>
 		if(_this.sub_configs.filter_setting_btnfilter_now != 'filter_setting_btnfilter_now'){
@@ -2458,8 +2609,9 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
     };
 
-    var input_type_button_click = function(event, element) {
+    var input_type_button_click = function(event, element, term_slug) {
 
+<<<<<<< HEAD
     	console.log('filters [input_type_button_click]');
     	console.log(element);
 
@@ -2468,6 +2620,12 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		// <?php if($filter_type==1): ?>
 		// if(_this.sub_configs.filter_type==1) {
 		if(jQuery(/*this*/element).attr('data-filter-type')==1) {
+=======
+		var button_filter_type = jQuery(/*this*/element).attr('data-type');
+		let filter_target;
+		// <?php if($filter_type==1): ?>
+		if(/*_this.sub_configs.filter_type*/button_filter_type==1) {
+>>>>>>> fa937341496810dc75fcd52217f7643fee9907d2
 			
 			// let filter_target = jQuery('form#<?php echo $this->filter_prefix; ?>eo_wbc_filter [name="_attribute"]');
 			filter_target = jQuery('form#'+ _this.sub_configs.filter_prefix +'eo_wbc_filter [name="_attribute"]');
@@ -2485,7 +2643,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		if(jQuery(/*this*/element).hasClass('eo_wbc_button_selected')){
 			jQuery(/*this*/element).removeClass('eo_wbc_button_selected');
 			// let old_val = $("form#<?php echo $this->filter_prefix; ?>eo_wbc_filter  #checklist_<?php echo $filter['slug']; ?>").val();
-			let old_val = jQuery("form#"+ _this.sub_configs.filter_prefix +"eo_wbc_filter  #checklist_" + _this.sub_configs.filter_slug).val();
+			let old_val = jQuery("form#"+ _this.sub_configs.filter_prefix +"eo_wbc_filter  #checklist_" + /*_this.sub_configs.filter_slug*/term_slug).val();
 			old_val = old_val.split(',');
 			if(old_val.indexOf(jQuery(/*this*/element).data('slug'))!=-1){
 				let _slug = jQuery(/*this*/element).data('slug');
@@ -2494,29 +2652,29 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 				});
 				new_val = old_val.join();
 				// $("form#<?php echo $this->filter_prefix; ?>eo_wbc_filter  #checklist_<?php echo $filter['slug']; ?>").val(new_val);
-				jQuery("form#"+ _this.sub_configs.filter_prefix +"eo_wbc_filter  #checklist_" + _this.sub_configs.filter_slug).val(new_val);
+				jQuery("form#"+ _this.sub_configs.filter_prefix +"eo_wbc_filter  #checklist_" + /*_this.sub_configs.filter_slug*/term_slug).val(new_val);
 			}
 
 		} else {
 			jQuery(/*this*/element).addClass('eo_wbc_button_selected');
 			// let old_val = $("form#<?php echo $this->filter_prefix; ?>eo_wbc_filter  #checklist_<?php echo $filter['slug']; ?>").val();
-			let old_val = jQuery("form#"+ _this.sub_configs.filter_prefix +"eo_wbc_filter  #checklist_" + _this.sub_configs.filter_slug).val();
+			let old_val = jQuery("form#"+ _this.sub_configs.filter_prefix +"eo_wbc_filter  #checklist_" + /*_this.sub_configs.filter_slug*/term_slug).val();
 			old_val = old_val.split(',');
 			if(old_val.indexOf(jQuery(/*this*/element).data('slug'))==-1){
 				let _slug = jQuery(/*this*/element).data('slug');
 				old_val.push(_slug);
 				new_val = old_val.join();
 				// $("form#<?php echo $this->filter_prefix; ?>eo_wbc_filter  #checklist_<?php echo $filter['slug']; ?>").val(new_val);
-				jQuery("form#"+ _this.sub_configs.filter_prefix +"eo_wbc_filter  #checklist_" + _this.sub_configs.filter_slug).val(new_val);
+				jQuery("form#"+ _this.sub_configs.filter_prefix +"eo_wbc_filter  #checklist_" + /*_this.sub_configs.filter_slug*/term_slug).val(new_val);
 			}
 		}
 
 		// if(filter_target.val().includes(filter_name) && $("form#<?php echo $this->filter_prefix; ?>eo_wbc_filter  #checklist_<?php echo $filter['slug']; ?>").val().length==0) {
-		if(filter_target.val().includes(filter_name) && jQuery("form#"+ _this.sub_configs.filter_prefix +"eo_wbc_filter  #checklist_" + _this.sub_configs.filter_slug).val().length==0) {
+		if(filter_target.val().includes(filter_name) && jQuery("form#"+ _this.sub_configs.filter_prefix +"eo_wbc_filter  #checklist_" + /*_this.sub_configs.filter_slug*/term_slug).val().length==0) {
 			filter_target.val(filter_target.val().replace(','+filter_name,''));
 
 		// } else { if((!filter_target.val().includes(filter_name)) && $("form#<?php echo $this->filter_prefix; ?>eo_wbc_filter #checklist_<?php echo $filter['slug']; ?>").val().length) {
-		} else { if((!filter_target.val().includes(filter_name)) && jQuery("form#"+ _this.sub_configs.filter_prefix +"eo_wbc_filter #checklist_" + _this.sub_configs.filter_slug).val().length) {
+		} else { if((!filter_target.val().includes(filter_name)) && jQuery("form#"+ _this.sub_configs.filter_prefix +"eo_wbc_filter #checklist_" + /*_this.sub_configs.filter_slug*/term_slug).val().length) {
 
 			filter_target.val(filter_target.val()+','+filter_name);	
 		} }	
@@ -2725,7 +2883,23 @@ if( typeof(eo_wbc_object) != 'undefined'){
 
 			on_click_listener(event);
 
+	        sort_order_private();
+
 		};
+
+	    var get_sort_dropdown_container_private = function() {
+
+	    	// -- 10 demo ma aa selector same j hato
+	    	return compatability('sort_dropdown_container',{container:jQuery('select[name="orderby"]:eq(0)'),is_return_string_selector:false},null,null).container;
+	    }
+
+	    var sort_order_private = function() {
+			
+			console.log('pagination [sort_order_private]');
+			
+			// process_events
+	        orderby_change_listener(null);
+	    }
 
 		var get_pagination_html_private = function(){
 			
@@ -2855,6 +3029,21 @@ if( typeof(eo_wbc_object) != 'undefined'){
 
 		};
 
+	    var orderby_change_listener = function(type) {
+			
+			console.log('pagination [orderby_change_listener]');
+
+			var selector = get_sort_dropdown_container_private();
+	        
+	        jQuery(selector).on('change',function() {
+
+				console.log('pagination [orderby_change_listener] 01');
+
+		    	on_orderby_change(type,this);
+
+	        });
+	    }
+
 	    var on_click = function(event,element){
 
 			// NOTE : it will internally implement all flows related to pagination link click event
@@ -2863,10 +3052,16 @@ if( typeof(eo_wbc_object) != 'undefined'){
 
 	    };
 
+	    var on_orderby_change = function(type,element) {
+
+	    	orderby_change(type,element);
+	    };
+
 	    var click = function(event,element){
 	    	
 	    	console.log('pagination_click');
 	    	console.log(_this.$base_pagination_container);
+	    	console.log(element);
 
 	    	/*ACTIVE_TODO_OC_START
 	    	-- event var aya sudhi pogadvano se -- to a
@@ -2879,10 +3074,12 @@ if( typeof(eo_wbc_object) != 'undefined'){
 				
 				console.log('pagination click if');
 				if(/*_this.$base_pagination_container*/jQuery(element).hasClass("next")){
+					console.log(window.document.splugins.wbc.pagination.api.get_page_number());
 					// jQuery("[name='paged']").val(parseInt(jQuery(".page-numbers.current").text())+1);
 					window.document.splugins.wbc.pagination.api.set_page_number( window.document.splugins.wbc.pagination.api.get_page_number()+1 );
 				}
 				if(/*_this.$base_pagination_container*/jQuery(element).hasClass("prev")){
+					console.log(window.document.splugins.wbc.pagination.api.get_page_number());
 					// jQuery("[name='paged']").val(parseInt(jQuery(".page-numbers.current").text())-1);
 					window.document.splugins.wbc.pagination.api.set_page_number( window.document.splugins.wbc.pagination.api.get_page_number()-1 );
 				}	
@@ -2890,6 +3087,8 @@ if( typeof(eo_wbc_object) != 'undefined'){
 			else {
 
 				console.log('pagination click else');
+				console.log(jQuery(element));
+				console.log(window.document.splugins.wbc.pagination.api.get_page_number(jQuery(element)));
 				// jQuery("[name='paged']").val(jQuery(this).text());
 				window.document.splugins.wbc.pagination.api.set_page_number( window.document.splugins.wbc.pagination.api.get_page_number(jQuery(element)));
 			}		
@@ -2903,7 +3102,22 @@ if( typeof(eo_wbc_object) != 'undefined'){
 
 	    };
 
+	    var orderby_change = function(type,element) {
+
+			console.log('pagination [orderby_change]');
+
+	    	jQuery('.wbc-filters-sorting-fields').val('');
+
+	    	// reset
+			window.document.splugins.wbc.pagination.api.set_page_number( 1 );
+
+			window.document.splugins.wbc.filters.api.eo_wbc_filter_change_wrapper(false, 'form#'+/*_this.$base_pagination_container*/jQuery(element).parents().has('[id$="eo_wbc_filter"]').find('[id$="eo_wbc_filter"]').attr('id') );
+	    
+	    };
+
 	    var compatability = function(section, object, expected_result, form_selector){
+
+			console.log('pagination [compatability]');
 
 	        if(section == 'pagination'){
 
@@ -2929,7 +3143,36 @@ if( typeof(eo_wbc_object) != 'undefined'){
 		        	object += ',.nasa-paginations-warp';
 	        	}
 
-	        }
+	        }else if(section == 'sort_dropdown_container'){
+
+				if(object.container.length<=0) {
+					
+					// ACTIVE_TODO here as mentioned in below there is no need of the patch so far as per our checks in the 10 themes, but whenever required simplu uncommonent below jQuery("") and the selector in there according to the patch. and mark it as todo if nothing comes up by third revision. 
+						// -- aya 10 theme demo ma selectore jovana se alaga alag ave se k same ave se done
+						// -- badhi theme ma selectore same j se @a done
+					// object.container = jQuery("");
+					
+					if(object.container.length<=0){
+
+			    		// example if to set selector specific to theme 
+						// ACTIVE_TODO temp. remove below return false when we impliment below if 
+						if(false && window.document.splugins.common.current_theme_key == 'themes___elessi-theme-child') {
+
+							object.container = jQuery('.nasa-pagination .page-numbers .page-numbers');
+						}
+					}
+				}
+
+		    }else if(section == 'sort_dropdown_selector'){
+
+		    	// ACTIVE_TODO temp. remove below return false when this layer is implimented becose this is not implimented yet -- to a && -- to h
+		    	return false;
+		    	
+				if(object.container.length<=0) {
+			
+					object.container = jQuery("");
+				}
+		    } 
 
 	        return object;
 	    };
@@ -2961,9 +3204,19 @@ if( typeof(eo_wbc_object) != 'undefined'){
 						
 					selector = ".page-numbers.current";
 				}			
+				console.log(jQuery(selector));
+				
+				if(jQuery(selector).html().indexOf('&nbsp;') >= 0 ){
+					
+					console.log('get_page_number in nbsp available');
+					
+					return parseInt(jQuery(selector).html().replace(',','').replace(/\&nbsp;/g, ''));
+				}else{
 
-				return parseInt(jQuery(selector).text().replace(',',''));
+					console.log('get_page_number in nbsp not available');
 
+					return parseInt(jQuery(selector).text().replace(',',''));
+				}
 			},
 
 			set_page_number: function(page_number) {
@@ -2972,6 +3225,9 @@ if( typeof(eo_wbc_object) != 'undefined'){
 
 					reset_private();
 				}
+
+				console.log('[set_page_number] page_number');
+				console.log(page_number);
 
 				jQuery("[name='paged']").val(page_number);
 
@@ -2991,7 +3247,12 @@ if( typeof(eo_wbc_object) != 'undefined'){
 
 				reset_private();
 
-			}
+			},
+
+			get_sort_dropdown_container: function() {
+
+				return get_sort_dropdown_container_private();
+			},				
 
 		};
 
@@ -3597,8 +3858,11 @@ if( typeof(eo_wbc_object) != 'undefined'){
 
 		let ui_slider = jQuery.fn.slider;		
 		jQuery.fn.slider = window.document.splugins.ui.slider;	
-
-		jQuery(".ui.slider[data-slug='"+selector+"']").slider('set rangeValue',first,second);
+		console.log('eo_wbc_filter [reset_slider]');
+		console.log(selector);
+		console.log(first);
+		console.log(second);
+		jQuery(".ui.slider[data-slug='"+selector+"']").semanticSlider('set rangeValue',first,second);
 		if(jQuery("[name='_attribute']").val().includes(selector)) {					    			
 			_values=jQuery("[name='_attribute']").val().split(',')
 			_index=_values.indexOf(selector)
@@ -3613,7 +3877,7 @@ if( typeof(eo_wbc_object) != 'undefined'){
 	function reset_price(e,min,max) {
 		e.preventDefault();
 		e.stopPropagation()
-		jQuery(".ui.slider[data-slug='price']").slider('set rangeValue',min,max);
+		jQuery(".ui.slider[data-slug='price']").semanticSlider('set rangeValue',min,max);
 		return false;	
 	}
 
@@ -3780,7 +4044,7 @@ if( typeof(eo_wbc_object) != 'undefined'){
 				      console.log('filter filter_set_click');
 				      console.log(_this.configs.filter_setting_alternate_mobile);
 				      // <?php if(wp_is_mobile() and !wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile')): ?>
-				      if((window.document.splugins.common.is_mobile) && !(_this.configs.filter_setting_alternate_mobile)){
+				      if( (eo_wbc_object.wbc_is_mobile_by_page_sections == 1) && (window.document.splugins.common.is_mobile) && !(_this.configs.filter_setting_alternate_mobile)){
 
 				      	console.log('filter filter_set_click 1');
 				      	console.log(element);
@@ -3798,7 +4062,7 @@ if( typeof(eo_wbc_object) != 'undefined'){
 				      }
 
 				      // <?php if(wp_is_mobile() and wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile')): ?>
-				      if((window.document.splugins.common.is_mobile) && (_this.configs.filter_setting_alternate_mobile)){
+				      if( (eo_wbc_object.wbc_is_mobile_by_page_sections == 1) && (window.document.splugins.common.is_mobile) && (_this.configs.filter_setting_alternate_mobile)){
 
 				      	console.log('filter filter_set_click 2');
 				      	console.log(element);
@@ -3839,7 +4103,10 @@ if( typeof(eo_wbc_object) != 'undefined'){
 		    }
 
 			console.log("filter_sets filter_set_click 55");
-
+			
+			// reset
+			window.document.splugins.wbc.pagination.api.set_page_number( 1 );
+		    
 		    // window.document.splugins.wbc.filters.core.eo_wbc_filter_change_wrapper(false,'form#<?php echo $filter_ui->filter_prefix; ?>eo_wbc_filter','',{'this':this,'event':event});
 		    window.document.splugins.wbc.filters.api.eo_wbc_filter_change_wrapper(false,'form#'+_this.configs.filter_prefix +'eo_wbc_filter','',{'this':element/*this*/,'event':event});
 

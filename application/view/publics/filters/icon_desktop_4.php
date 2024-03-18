@@ -11,8 +11,13 @@
 		<?php if($help): ?>
 			&nbsp; <span class="ui grey text" style="cursor: pointer;">&nbsp;<i class="question circle outline icon" data-help="<?php esc_attr_e($help); ?>"></i></span>
 		<?php endif; ?>
+<<<<<<< HEAD
 		<?php if($reset): ?>
 			&nbsp; <span class="ui grey text" style="cursor: pointer;" onclick="reset_icon(event,'<?php echo esc_attr($term->slug); ?>')">&nbsp;<u><?php esc_html(spext_lang("reset", 'woo-bundle-choice')) ?></u></span>
+=======
+			<?php if($reset): ?>
+		&nbsp; <span class="ui grey text" style="cursor: pointer;" onclick="reset_icon(event,'<?php echo $term->slug; ?>')">&nbsp;<u> <?php echo spext_lang("reset", 'woo-bundle-choice'); ?></u></span>
+>>>>>>> fa937341496810dc75fcd52217f7643fee9907d2
 		<?php endif; ?>
 	</div>	
 

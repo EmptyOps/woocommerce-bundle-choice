@@ -5,14 +5,22 @@
 */
 
 ?>
+<<<<<<< HEAD
 	<div class="spui-semantic-slider-column <?php echo esc_attr($width_class); ?>" data-tab-group="<?php esc_attr_e($tab_set); ?>">
+=======
+	<div class="spui-semantic-slider-column <?php echo $non_edit ? 'hide':''; ?> <?php echo $width_class; ?>" data-tab-group="<?php _e($tab_set); ?>">
+>>>>>>> fa937341496810dc75fcd52217f7643fee9907d2
 		<p>
 			<span class="ui header"><?php echo esc_html($filter['title']); ?></span>
 			<?php if($help): ?>
 			&nbsp; <span class="ui grey text" style="cursor: pointer;">&nbsp;<i class="question circle outline icon" data-help="<?php esc_attr_e($help); ?>"></i></span>
 			<?php endif; ?>
 			<?php if($reset): ?>
+<<<<<<< HEAD
 			&nbsp; <span class="ui grey text" style="cursor: pointer;" onclick="reset_slider(event,'<?php echo esc_attr($filter['slug']); ?>','<?php echo esc_attr($filter['min_value']['name']); ?>','<?php echo esc_attr($filter['max_value']['name']); ?>')">&nbsp;<u><?php esc_html(spext_lang("reset", 'woo-bundle-choice')); ?></u></span>
+=======
+			&nbsp; <span class="ui grey text" style="cursor: pointer;" onclick="reset_slider(event,'<?php echo $filter['slug'] ?>','<?php echo $filter['min_value']['name']; ?>','<?php echo $filter['max_value']['name']; ?>')">&nbsp;<u><?php echo spext_lang("reset", 'woo-bundle-choice'); ?></u></span>
+>>>>>>> fa937341496810dc75fcd52217f7643fee9907d2
 			<?php endif; ?>
 		</p>
 
@@ -27,7 +35,22 @@
 				</div>
 			</div>	  
 		</div>			
+<<<<<<< HEAD
 		<div  class="ui range slider text_slider wbc" id="text_slider_<?php echo esc_attr($filter['slug']); ?>" data-min="<?php echo esc_attr($filter['min_value']['name']); ?>" data-max="<?php echo esc_attr($filter['max_value']['name']); ?>" data-slug="<?php echo esc_attr($filter['slug']); ?>" data-sep="<?php echo esc_attr($filter['seprator']); ?>" data-reset="reset_slider(new Event('click'),'<?php echo esc_attr($filter['slug']); ?>','<?php echo esc_attr($filter['min_value']['name']); ?>','<?php echo esc_attr($filter['max_value']['name']); ?>')"></div>
+=======
+		<div  class="ui range slider text_slider wbc"
+			id="text_slider_<?php echo $filter['slug'] ?>" 
+			<?php if (!empty($mark)): ?>
+				data-range-start="<?php echo $mark['range_start'] ? $mark['range_start'] : $filter['min_value']['name']; ?>" 
+				data-range-end="<?php echo $mark['range_end'] ? $mark['range_end'] : $filter['max_value']['name']; ?>" 
+			<?php endif; ?>
+			data-min="<?php echo $filter['min_value']['name']; ?>" 
+			data-max="<?php echo $filter['max_value']['name']; ?>" 
+			data-slug="<?php echo $filter['slug'] ?>" 
+			data-sep="<?php echo $filter['seprator']; ?>" 
+			data-reset="reset_slider(new Event('click'),'<?php echo $filter['slug'] ?>','<?php echo $filter['min_value']['name']; ?>','<?php echo $filter['max_value']['name']; ?>')">		
+		</div>
+>>>>>>> fa937341496810dc75fcd52217f7643fee9907d2
 	</div>
 	<?php
 	

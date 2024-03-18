@@ -61,7 +61,7 @@ class Category {
 
                 wbc()->theme->load('css','category');
                 wbc()->theme->load('js','category');
-            
+                
                 SP_Model_Feed::instance()->init();
 
                 if(
@@ -233,10 +233,15 @@ class Category {
             echo \eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_add_breadcrumb(wbc()->sanitize->get('STEP'),wbc()->sanitize->get('BEGIN')).'<br/><br/>';
         }, 120);*/
 
-        add_action('woocommerce_before_shop_loop', function(){
+        add_action( 'woocommerce_before_shop_loop' /*'woocommerce_archive_description'*/ ,function(){     
+            
+            do_action('wbc_before_breadcrumb_widget_core');
 
             wbc()->load->model('publics/component/eowbc_breadcrumb');       
-            echo \eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_add_breadcrumb(wbc()->sanitize->get('STEP'), wbc()->sanitize->get('BEGIN')).'<br/><br/>';
+            echo \eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_add_breadcrumb(wbc()->sanitize->get('STEP'),wbc()->sanitize->get('BEGIN')).'<br/><br/>';
+    
+            do_action('wbc_after_breadcrumb_widget_core');
+
         }, 0);
     }
 
@@ -253,8 +258,10 @@ class Category {
                 // wp_enqueue_style( 'eo_wbc_ui_css');
                 // wp_register_script('eo_wbc_ui_js',plugin_dir_url(EO_WBC_PLUGIN_FILE).'asset/js/fomantic/semantic.min.js');
                 // wp_enqueue_script( 'eo_wbc_ui_js');
-                wbc()->load->asset('css','fomantic/semantic.min');
-                wbc()->load->asset('js','fomantic/semantic.min');
+                
+                // wbc()->load->asset('css','fomantic/semantic.min');
+                // wbc()->load->asset('js','fomantic/semantic.min');
+                wbc()->load->built_in_asset('semantic');
             },100);
 
             add_action('wp_head',function(){
@@ -332,44 +339,206 @@ class Category {
             add_action( 'woocommerce_no_products_found', function(){
 
                 remove_action( 'woocommerce_no_products_found', 'wc_no_products_found', 10 );
-                $html='<!-- Created with Wordpress plugin - WooCommerce Product bundle choice --><br/><br/>';
-                $html.='<div class="woocommerce ui grid centered">';
-                    $html.='<div class="ui row" style="height:max-content;">';                    
-                        $html.="<div class='ui grid centered'>";
-                            $html.="<div class='ui row' style='padding-bottom:3rem !important'>";
-                                $html.="<h1 style='font-size:10vw;color:#767676;'>Ooops!</h1>";
-                            $html.="</div>";
-                            $html.="<div class='ui row' style='padding-bottom:0px'>";
-                                $html.='<span class="ui inverted text">' . esc_html__( 'No products were found matching your selection.', 'woocommerce' ) .'<span>';
-                            $html.="</div>";    
-                            $html.="<div class='ui row'  style='padding-bottom:3rem !important'>";   
-                                // TODO here isn't it better if i's simple javascript back in history - hiren                         
-                                $html.='<button href="'.esc_url($this->eo_wbc_prev_url()).'" class="ui inverted secondary single_add_to_cart_button button alt">Go back</button>&nbsp;&nbsp;';
-                                $html.='<button href="'.esc_url(((empty(wbc()->sanitize->get('FIRST')) XOR empty(wbc()->sanitize->get('SECOND')))?strtok(get_permalink((empty(wbc()->sanitize->get('FIRST'))?wbc()->sanitize->get('SECOND'):wbc()->sanitize->get('FIRST'))),'?'):'')).'" class="ui grey button single_add_to_cart_button alt">Continue buying single item</button>&nbsp;&nbsp;';
-                            $html.="</div>";    
+                //$html='<!-- Created with Wordpress plugin - WooCommerce Product bundle choice --><br/><br/>';
+                // $html.='<div class="woocommerce ui grid centered">';
+                //     $html.='<div class="ui row" style="height:max-content;">';                    
+                //         $html.="<div class='ui grid centered'>";
+                //             $html.="<div class='ui row' style='padding-bottom:3rem !important'>";
+                //                 $html.="<h1 style='font-size:10vw;color:#767676;'>"./*echo*/ __('Ooops!', 'woo-bundle-choice')."</h1>";
+                //             $html.="</div>";
+                //             $html.="<div class='ui row' style='padding-bottom:0px'>";
+                //                 $html.='<span class="ui inverted text">' . __( 'No products were found matching your selection.', 'woocommerce' ) .'<span>';
+                //             $html.="</div>";    
+                //             $html.="<div class='ui row'  style='padding-bottom:3rem !important'>";   
+                //                 // TODO here isn't it better if i's simple javascript back in history - hiren                         
+                //                 $html.='<button href="'.$this->eo_wbc_prev_url().'" class="ui inverted secondary single_add_to_cart_button button alt">'./*echo*/ __('Go back', 'woo-bundle-choice').'</button>&nbsp;&nbsp;';
+                //                 $html.='<button href="'.((empty(wbc()->sanitize->get('FIRST')) XOR empty(wbc()->sanitize->get('SECOND')))?strtok(get_permalink((empty(wbc()->sanitize->get('FIRST'))?wbc()->sanitize->get('SECOND'):wbc()->sanitize->get('FIRST'))),'?'):'').'" class="ui grey button single_add_to_cart_button alt">'. /*echo*/ __('Continue buying single item', 'woo-bundle-choice').'</button>&nbsp;&nbsp;';
+                //             $html.="</div>";    
                                                         
-                            if(current_user_can('manage_options')){
-                                //Manage the mapping section
-                                $html.="<div class='ui row' style='padding-bottom:0rem !important'>";
-                                    $html.='<a href="'.esc_url(admin_url('admin.php?page=eowbc-mapping')).'"><span class="ui text primary">As admin of this site please create a product mapping to fix this problem.</span></a>';
-                                $html.="</div>";    
+                //             if(current_user_can('manage_options')){
+                //                 //Manage the mapping section
+                //                 $html.="<div class='ui row' style='padding-bottom:0rem !important'>";
+                //                     $html.='<a href="'.admin_url('admin.php?page=eowbc-mapping').'"><span class="ui text primary">'. /*echo*/ __('As admin of this site please create a product mapping to fix this problem.', 'woo-bundle-choice').'</span></a>';
+                //                 $html.="</div>";    
 
-                                $html.="<div class='ui row' style='padding-bottom:0rem !important'>";
-                                    $html.='Adequate mapping(s) needs to be added in the '.esc_html(constant('EOWBC_NAME')).' for Pair Builder to work properly.';
-                                $html.="</div>";                                                    
-                            } else {                            
-                                $html.="<div class='ui row' style='padding-bottom:0rem !important'>";
-                                    $html.='<a href="'.esc_url(site_url('/?wbc_report=1')).'">Report to admin to help them fix this problem.</a>&nbsp;&nbsp;';
-                                $html.="</div>";                                                    
-                            }
+                //                 /*ACTIVE_TODO_OC_START
+                //                 here need to define how to manage %s and so on markers for the dynamic vars, like the dynamic var in below label -- to h & -- to s
+                //                 ACTIVE_TODO_OC_END*/
+                //                 $html.="<div class='ui row' style='padding-bottom:0rem !important'>";
+                //                     $html.='Adequate mapping(s) needs to be added in the '.constant('EOWBC_NAME').' for Pair Builder to work properly.';
+                //                 $html.="</div>";                                                    
+                //             } else {                            
+                //                 $html.="<div class='ui row' style='padding-bottom:0rem !important'>";
+                //                     $html.='<a href="'.site_url('/?wbc_report=1').'">Report to admin to help them fix this problem.</a>&nbsp;&nbsp;';
+                //                 $html.="</div>";                                                    
+                //             }
                             
-                            $html.="<div class='ui row' style='padding-bottom:5rem !important'>";    
-                                $html.="<span class='ui header'></span>";                        
-                            $html.="</div>";    
-                        $html.="</div>";                
-                    $html.='</div>';                                    
-                $html.='</div><script> jQuery(document).ready(function($){ $(".ui.button").on("click",function(){ window.location.href=$(this).attr("href"); }); }); </script>';
-                echo $html;           
+                //             $html.="<div class='ui row' style='padding-bottom:5rem !important'>";    
+                //                 $html.="<span class='ui header'></span>";                        
+                //             $html.="</div>";    
+                //         $html.="</div>";                
+                //     $html.='</div>';                                    
+                // $html.='</div><script> jQuery(document).ready(function($){ $(".ui.button").on("click",function(){ window.location.href=$(this).attr("href"); }); }); </script>';
+                // echo($html);
+
+                // ACTIVE_TODO temp. below implementation need to be moved to its standard place in the particular controller when we upgrade th wbc. 
+                
+                $Ooops = /*echo*/ __('Ooops!', 'woo-bundle-choice');
+                $no_products = __( 'No products were found matching your selection.', 'woocommerce' );
+                $go_back = $this->eo_wbc_prev_url();
+                $go_back_text = /*echo*/ __('Go back', 'woo-bundle-choice');
+                $continue_buying = ((empty(wbc()->sanitize->get('FIRST')) XOR empty(wbc()->sanitize->get('SECOND')))?strtok(get_permalink((empty(wbc()->sanitize->get('FIRST'))?wbc()->sanitize->get('SECOND'):wbc()->sanitize->get('FIRST'))),'?'):'');
+                $continue_buying_text = /*echo*/ __('Continue buying single item', 'woo-bundle-choice');
+                $mapping_text = /*echo*/ __('As admin of this site please create a product mapping to fix this problem.', 'woo-bundle-choice');
+
+                $html='<!-- Created with Wordpress plugin - WooCommerce Product bundle choice --><br/><br/>';
+                echo($html);
+                $ui = array(
+                    array(
+                        'type' => 'div',
+                        'class' => 'woocommerce ui grid centered',
+                        'child' => array(
+                            array(
+                                'type' => 'div',
+                                'class' => 'ui row',
+                                'attr' => array( 'style' => 'height:max-content;' ),
+                                'child' => array(
+                                    array(
+                                        'type' => 'div',
+                                        'class' => 'ui grid centered',
+                                        'child' => array(
+                                            array(
+                                                'type' => 'div',
+                                                'class' => 'ui row',
+                                                'attr' => array( 'style' => 'padding-bottom:3rem !important' ),
+                                                'child' => array(
+                                                    array(
+                                                        'type' => 'header',
+                                                        'tag' => 'h1',
+                                                        'attr' => array( 'style' => 'font-size:10vw;color:#767676;' ),
+                                                        'preHTML' => $Ooops,
+                                                        'id_key'=>'wbc_fp_oops_appointment_optitle',
+                                                    ),
+                                                ),
+                                            ),
+                                            array(
+                                                'type' => 'div',
+                                                'class' => 'ui row',
+                                                'attr' => array( 'style' => 'padding-bottom:0px' ),
+                                                'child' => array(
+                                                    array(
+                                                        'type' => 'span',
+                                                        'class' => 'ui inverted text',
+                                                        'preHTML' => $no_products,
+                                                        'id_key'=>'wbc_fp_oops_appointment_no_products',
+                                                    ),
+                                                ),
+                                            ),
+                                            array(
+                                                'type' => 'div',
+                                                'class' => 'ui row',
+                                                'attr' => array( 'style' => 'padding-bottom:3rem !important' ),
+                                                'child' => array(
+                                                    // TODO here isn't it better if i's simple javascript back in history - hiren 
+                                                    array(
+                                                        'type'=>'a',
+                                                        'href'=>$go_back,
+                                                        'attr'=>array('type'=>'button'),
+                                                        'class'=>'ui inverted secondary single_add_to_cart_button button alt',
+                                                        'preHTML'=>$go_back_text,
+                                                        'id_key'=>'wbc_fp_oops_appointment_go_back',
+                                                    ),
+                                                    array(
+                                                        'type'=>'a',
+                                                        'href'=>$continue_buying,
+                                                        'attr'=>array('type'=>'button'),
+                                                        'class'=>'ui grey button single_add_to_cart_button alt',
+                                                        'preHTML'=>$continue_buying_text,
+                                                        'id_key'=>'wbc_fp_oops_appointment_continue_single',
+                                                        
+                                                    ),
+                                                ),
+                                            ),
+                                            ((current_user_can('manage_options'))
+                                                ?
+                                                array(
+                                                    //Manage the mapping section
+                                                    array(
+                                                        'type' => 'div',
+                                                        'class' => 'ui row',
+                                                        'attr' => array( 'style' => 'padding-bottom:0rem !important' ),
+                                                        'child' => array(
+                                                            array(
+                                                                'type' => 'a',
+                                                                'href' => admin_url('admin.php?page=eowbc-mapping'),
+                                                                'child' => array(
+                                                                    array(
+                                                                        'type' => 'span',
+                                                                        'class' => 'ui text primary',
+                                                                        'preHTML' => $mapping_text,
+                                                                        'id_key'=>'wbc_fp_oops_appointment_mapping_text',
+                                                                    ),
+                                                                ),
+                                                            ),
+                                                        ),
+                                                    ),
+                                                    /*ACTIVE_TODO_OC_START
+                                                    here need to define how to manage %s and so on markers for the dynamic vars, like the dynamic var in below label -- to h & -- to s
+                                                    ACTIVE_TODO_OC_END*/
+                                                    array(
+                                                        'type' => 'div',
+                                                        'class' => 'ui row',
+                                                        'preHTML' => 'Adequate mapping(s) needs to be added in the '.constant('EOWBC_NAME').' for Pair Builder to work properly.',
+                                                        'attr' => array( 'style' => 'padding-bottom:0rem !important' ),
+                                                        'id_key'=>'wbc_fp_oops_appointment_mapping_adequate_text',
+
+                                                    ),
+                                                )
+                                                :
+                                                array(
+                                                    'type' => 'div',
+                                                    'class' => 'ui row',
+                                                    'attr' => array( 'style' => 'padding-bottom:0rem !important' ),
+                                                    'child' => array(
+                                                        array(
+                                                            'type' => 'a',
+                                                            'preHTML' => 'Report to admin to help them fix this problem.',
+                                                            'href' => site_url('/?wbc_report=1'),
+                                                            'id_key'=>'wbc_fp_oops_appointment_report_admin',
+
+                                                        ),
+                                                    ),
+                                                )
+                                            ),
+                                            array(
+                                                'type' => 'div',
+                                                'class' => 'ui row',
+                                                'attr' => array( 'style' => 'padding-bottom:5rem !important' ),
+                                                'child' => array(
+                                                    array(
+                                                        'type' => 'span',
+                                                        'class' => 'ui header',
+                                                    ),
+                                                ),
+                                            ),
+                                        ),
+                                    ),
+                                ),
+                            ),
+                        ),
+                    )
+                );
+
+                // ACTIVE_TODO temp. below implementation need to be moved to its standard place in the particular controller when we upgrade th wbc.                 
+                $ui_definition = \eo\wbc\model\publics\SP_Model_Feed::instance()->ui_appearence_controls_definition(null,'oops_section',array());
+                $ui_definition = \eo\wbc\model\publics\SP_Model_Feed::instance()->ui_configuration_controls_definition($ui_definition,'oops_section',array());
+                $ui_definition = \eo\wbc\model\publics\SP_Model_Feed::instance()->ui_data_controls_definition($ui_definition, 'oops_section',array());
+
+                \eo\wbc\model\SP_WBC_Ui_Builder::instance()->build($ui,'',true,null, $ui_definition);
+
+                $html2 = '<script> jQuery(document).ready(function($){ $(".ui.button").on("click",function(){ window.location.href=$(this).attr("href"); }); }); </script>';
+                echo($html2);
+
             }, 9 );
         }
     }
@@ -425,6 +594,11 @@ class Category {
             )
         );
 
+        if(!empty(wbc()->sanitize->get('__mapped_attribute'))) {
+            
+            $external_url = $external_url."&__mapped_attribute=".wbc()->sanitize->get('__mapped_attribute');            
+        }
+        
         if(strpos($url,'?')!==false) {
             return $url."&".$external_url;
         } else {

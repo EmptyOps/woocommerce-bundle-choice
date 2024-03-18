@@ -13,6 +13,11 @@ class WBC_File {
 		return self::$_instance;
 	}
 
+	public function directory_separator() {
+	
+		return DIRECTORY_SEPARATOR;	
+	}
+
 	//	NOTE: for extracting extension from filename or path only, for urls use the url function
 	public function extension_from_path($filepath) {
 	
@@ -121,14 +126,18 @@ class WBC_File {
 		return json_decode( $this->file_read( $filepath ), true );
 	}
 
-	public function save_csv($filepath, $rows, $header_row=null) {
+	public function save_csv($filepath, $rows, $header_row=null, $is_append=false) {
 		
 		// Open a file in write mode ('w')
-		$fp = fopen($filepath, 'w');
+		$fp = fopen($filepath, (empty($is_append) ? 'w' : 'a'));
 
 		// TODO if required we may need to provide support for generating header_row here
 		    
-	    fputcsv($fp, $header_row);
+	    if(!empty($header_row)) {
+
+	    	fputcsv($fp, $header_row);
+
+	    }
 
 		// Loop through file pointer and a line
 		foreach ($rows as $fields) {
@@ -288,6 +297,10 @@ class WBC_File {
 		
 	// }
 
+	public function dir_exists($dirpath) {
+		return file_exists( $dirpath );
+	}
+
 	// /**
 	//  * make dir: wrapper function
 	//  */
@@ -308,6 +321,37 @@ class WBC_File {
 	// 	else 
 	// 		return mkdir( $dir );
 	// }
+
+	public function create_dir($dirpath) {
+		return mkdir( $dirpath );
+	}
+
+	public function dir_first_file($dirpath, $file_extension='csv') {
+
+		// Get the list of files and directories in the directory
+		$fileList = scandir($dirpath);
+
+		// Filter out directories and get the first file
+		$firstFilePath = null;
+
+		foreach ($fileList as $file) {
+
+	    	$filePath = $dirpath . $this->directory_separator() . $file;
+
+	    	if (is_file($filePath)) {
+
+		        if( $this->extension_from_path($filePath) == $file_extension ) {
+
+		        	$firstFilePath = $filePath;
+
+			        break; // Stop the loop after finding the first file
+		        }	
+		    }
+		}
+
+		return $firstFilePath;
+			
+	}
 
 	// /**
 	//  * copy file: wrapper function

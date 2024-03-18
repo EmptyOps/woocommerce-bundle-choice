@@ -75,11 +75,19 @@ if(
 		<div class="ui grid centered">
 			<div class="row">
 				<?php if(!empty(wbc()->options->get_option('filters_'.$filter_ui->filter_prefix.'filter_setting','filter_setting_reset_now'))): ?>
+<<<<<<< HEAD
 					<div class="ui button reset_all_filters" id="reset_filter" style="position: absolute;left:1em;top: 1em;border-radius: 0;" > <?php esc_html(spext_lang("Reset Filters", 'woo-bundle-choice')) ?></div>
 				<?php endif; ?>
 
 				<?php if(!empty($advance_filters)): ?>
 					<div class="ui button primary" id="advance_filter" style="border-radius: 0 0 0 0;width: fit-content !important;"><?php echo esc_html(spext_lang("ADVANCED FILTERS", 'woo-bundle-choice')); ?>&nbsp;<i class="ui icon angle double up"></i></div>
+=======
+					<div class="ui button reset_all_filters" id="reset_filter" style="position: absolute;left:1em;top: 1em;border-radius: 0;" > <?php echo spext_lang("Reset Filters", 'woo-bundle-choice') ?></div>
+				<?php endif; ?>
+
+				<?php if(!empty($advance_filters)): ?>
+					<div class="ui button primary" id="advance_filter" style="border-radius: 0 0 0 0;width: fit-content !important;"> <?php echo spext_lang(wbc()->options->get_option('appearance_filters','appearance_filters_advanced_options_btn_text','ADVANCED FILTERS',false,true), 'woo-bundle-choice'); ?> &nbsp;<i class="ui icon angle double up"></i></div>
+>>>>>>> fa937341496810dc75fcd52217f7643fee9907d2
 				<?php endif; ?>
 
 				<?php if(!empty(wbc()->options->get_option('filters_'.$filter_ui->filter_prefix.'filter_setting','filter_setting_btnfilter_now'))): ?>

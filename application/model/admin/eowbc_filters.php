@@ -84,6 +84,15 @@ class Eowbc_Filters extends Eowbc_Model {
 								}							
 								else if( $rvk == $key_clean."_input_type" || $rvk == $key_clean."_filter" ) {
 									$val = wbc()->common->dropdownSelectedvalueText($tab["form"][$rvk], $rvv);
+
+									/*if (empty($val)) {
+
+										if ($rvk == $key_clean."_filter") {
+											
+											$val = wbc()->common->dropdownSelectedvalueText($tab["form"][$rvk], 'pa_'.$rvv);
+										}
+									}*/
+
 									if(!is_array($val) and empty($val)) {
 										$val = '#';
 									}

@@ -28,6 +28,8 @@ class Options extends \eo\wbc\controllers\publics\Controller {
 
     	if(self::instance()->should_load_options_view()) {
 
+            define('SP_VARIATIONS_LOADED', true);
+
            	// if( wbc()->sanitize->get('is_test') == 2 ) {wbc()->common->var_dump( "wbc options init if");}
 
 	    	$args['data'] = \eo\wbc\model\publics\SP_Model_Single_Product::instance()->get_data('swatches_init');
@@ -902,8 +904,9 @@ class Options extends \eo\wbc\controllers\publics\Controller {
 				if(!empty($toggle_status)){	
 					if(has_action('woocommerce_before_variations_form')){
 						add_action( 'woocommerce_before_variations_form',function( ) use($toggle_text){
-							wbc()->load->asset('css','fomantic/semantic.min');
-							wbc()->load->asset('js','fomantic/semantic.min',array('jquery'));
+							// wbc()->load->asset('css','fomantic/semantic.min');
+							// wbc()->load->asset('js','fomantic/semantic.min',array('jquery'));
+							wbc()->load->built_in_asset('semantic');
 							ob_start();
 							?>
 								<span id="wbc_variation_toggle" class="ui raised segment">
@@ -913,8 +916,9 @@ class Options extends \eo\wbc\controllers\publics\Controller {
 							echo ob_get_clean();
 						}, 10, 1 );	
 					} else {
-						wbc()->load->asset('css','fomantic/semantic.min');
-						wbc()->load->asset('js','fomantic/semantic.min',array('jquery'));
+						// wbc()->load->asset('css','fomantic/semantic.min');
+						// wbc()->load->asset('js','fomantic/semantic.min',array('jquery'));
+						wbc()->load->built_in_asset('semantic');
 						if(false){
 						ob_start();
 							?>	

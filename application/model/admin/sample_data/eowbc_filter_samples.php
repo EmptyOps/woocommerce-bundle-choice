@@ -73,6 +73,7 @@ class Filter_Samples {
         			}
         			 	
         			$_POST[$prefix.'_fconfig_filter']=$filter['name'];
+                    $_POST[$prefix.'_fconfig_elements']=$filter['elements'];
 	                $_POST[$prefix.'_fconfig_type']=$filter['type'];
 	                $_POST[$prefix.'_fconfig_label']=$filter['label'];
 	                $_POST[$prefix.'_fconfig_is_advanced']=$filter['advance'];
@@ -112,6 +113,7 @@ class Filter_Samples {
                     }
 
 					unset($_POST[$prefix.'_fconfig_filter']);
+                    unset($_POST[$prefix.'_fconfig_elements']);
 	                unset($_POST[$prefix.'_fconfig_type']);
 	                unset($_POST[$prefix.'_fconfig_label']);
 	                unset($_POST[$prefix.'_fconfig_is_advanced']);
@@ -137,49 +139,67 @@ class Filter_Samples {
 	}
 
 	public function fc1() {
-		$__cat__ = $this->get_category();
+        $__cat__ = $this->get_category();
         $__att__ = $this->get_attribute();
 
-		$this->filter=array();
+        $this->filter=array();
 
-		//Filters for diamond....						
-		if(!empty($__cat__['eo_diamond_shape_cat'])){
-			$this->filter['d_fconfig'][]=array(
-                    'name'=>$__cat__['eo_diamond_shape_cat'][0],
-                    'type'=>"0",
-                    'label'=>$__cat__['eo_diamond_shape_cat'][1],
-                    'advance'=>"0",
-                    'dependent'=>"0",
-                    'input'=>"icon_text",
-                    'column_width'=> "100",
-                    'order'=>"0",
-                    'template'=>'fc1',
-                    'help'=>0,
-                    'help_text'=>'',
-                    'enabled'=>1
-                );
-		}
-		if(!empty($__att__['eo_carat_attr'])){
-			$this->filter['d_fconfig'][]=array(
-                    'name'=>$__att__['eo_carat_attr'][0],
-                    'type'=>"1",
-                    'label'=>$__att__['eo_carat_attr'][1],
-                    'advance'=>"0",
-                    'dependent'=>"0",
-                    'input'=>"numeric_slider",
-                    'column_width'=> "50",
-                    'order'=>"1",
-                    'template'=>'fc1',
-                    'help'=>0,
-                    'help_text'=>'',
-                    'enabled'=>1
-                );
-		}			
-		if(!empty($__att__['eo_clarity_attr'])){
-			$this->filter['d_fconfig'][]=array(
-                'name'=>$__att__['eo_clarity_attr'][0],
+        //Filters for diamond....                       
+        if(!empty($__cat__['eo_diamond_shape_cat'])){
+            $this->filter['d_fconfig'][]=array(
+                'name'=>$__cat__['eo_diamond_shape_cat'][0],
+                'type'=>"0",
+                'label'=>$__cat__['eo_diamond_shape_cat'][1],
+                // 'elements'=>$__cat__['eo_diamond_round_shape_cat'][0],
+                'advance'=>"0",
+                'dependent'=>"0",
+                'input'=>"icon_text",
+                'column_width'=> "100",
+                'order'=>"0",
+                'template'=>'fc1',
+                'help'=>0,
+                'help_text'=>'',
+                'enabled'=>1
+            );
+        }
+        if(!empty($__cat__['eo_lab_diamond_shape_cat'])){
+            $this->filter['d_fconfig'][]=array(
+                'name'=>$__cat__['eo_lab_diamond_shape_cat'][0],
+                'type'=>"0",
+                'label'=>$__cat__['eo_lab_diamond_shape_cat'][1],
+                'advance'=>"0",
+                'dependent'=>"0",
+                'input'=>"icon_text",
+                'column_width'=> "100",
+                'order'=>"0",
+                'template'=>'fc1',
+                'help'=>0,
+                'help_text'=>'',
+                'enabled'=>1
+            );
+        }
+        if(!empty($__att__['eo_carat_attr'])){
+            $this->filter['d_fconfig'][]=array(
+                'name'=>'pa_'.$__att__['eo_carat_attr'][0],
+                'type'=>"1",
+                'label'=>$__att__['eo_carat_attr'][1],
+                'advance'=>"0",
+                'dependent'=>"0",
+                'input'=>"numeric_slider",
+                'column_width'=> "50",
+                'order'=>"1",
+                'template'=>'fc1',
+                'help'=>0,
+                'help_text'=>'',
+                'enabled'=>1
+            );
+        }           
+        if(!empty($__att__['eo_clarity_attr'])){
+            $this->filter['d_fconfig'][]=array(
+                'name'=>'pa_'.$__att__['eo_clarity_attr'][0],
                 'type'=>"1",
                 'label'=>$__att__['eo_clarity_attr'][1],
+                'elements'=>"si2,si1,vs2,vs1,vvs2,vvs1,if,fl",
                 'advance'=>"0",
                 'dependent'=>"0",
                 'input'=>"text_slider",
@@ -191,12 +211,13 @@ class Filter_Samples {
                 'enabled'=>1
 
             );
-		}
-		if(!empty($__att__['eo_colour_attr'])){
-			$this->filter['d_fconfig'][]=array(
-                'name'=>$__att__['eo_colour_attr'][0],
+        }
+        if(!empty($__att__['eo_colour_attr'])){
+            $this->filter['d_fconfig'][]=array(
+                'name'=>'pa_'.$__att__['eo_colour_attr'][0],
                 'type'=>"1",
                 'label'=>$__att__['eo_colour_attr'][1],
+                'elements'=>"d,e,f,g,h,i,j",
                 'advance'=>"0",
                 'dependent'=>"0",
                 'input'=>"text_slider",
@@ -207,12 +228,13 @@ class Filter_Samples {
                 'help_text'=>'',
                 'enabled'=>1
             );
-		}
-		if(!empty($__att__['eo_polish_attr'])){
-			$this->filter['d_fconfig'][]=array(
-                'name'=>$__att__['eo_polish_attr'][0],
+        }
+        if(!empty($__att__['eo_polish_attr'])){
+            $this->filter['d_fconfig'][]=array(
+                'name'=>'pa_'.$__att__['eo_polish_attr'][0],
                 'type'=>"1",
                 'label'=>$__att__['eo_polish_attr'][1],
+                'elements'=>"good,very-good,excellent",
                 'advance'=>"1",
                 'dependent'=>"0",
                 'input'=>"text_slider",
@@ -223,12 +245,13 @@ class Filter_Samples {
                 'help_text'=>'',
                 'enabled'=>1
             );
-		}
-		if(!empty($__att__['eo_symmertry_attr'])){
-			$this->filter['d_fconfig'][]=array(
-                'name'=>$__att__['eo_symmertry_attr'][0],
+        }
+        if(!empty($__att__['eo_symmertry_attr'])){
+            $this->filter['d_fconfig'][]=array(
+                'name'=>'pa_'.$__att__['eo_symmertry_attr'][0],
                 'type'=>"1",
                 'label'=>$__att__['eo_symmertry_attr'][1],
+                'elements'=>"good,very-good,excellent",
                 'advance'=>"1",
                 'dependent'=>"0",
                 'input'=>"text_slider",
@@ -239,12 +262,13 @@ class Filter_Samples {
                 'help_text'=>'',
                 'enabled'=>1
             );
-		}
-		if(!empty($__att__['eo_fluorescence_attr'])){
-			$this->filter['d_fconfig'][]=array(
-                'name'=>$__att__['eo_fluorescence_attr'][0],
+        }
+        if(!empty($__att__['eo_fluorescence_attr'])){
+            $this->filter['d_fconfig'][]=array(
+                'name'=>'pa_'.$__att__['eo_fluorescence_attr'][0],
                 'type'=>"1",
                 'label'=>$__att__['eo_fluorescence_attr'][1],
+                'elements'=>"very-strong,strong,medium,faint,none",
                 'advance'=>"1",
                 'dependent'=>"0",
                 'input'=>"text_slider",
@@ -255,15 +279,16 @@ class Filter_Samples {
                 'help_text'=>'',
                 'enabled'=>1
             );
-		}
-		if(!empty($__att__['eo_depth_attr'])){
-			$this->filter['d_fconfig'][]=array(
-                'name'=>$__att__['eo_depth_attr'][0],
+        }
+        if(!empty($__att__['eo_cut_attr'])){
+            $this->filter['d_fconfig'][]=array(
+                'name'=>'pa_'.$__att__['eo_cut_attr'][0],
                 'type'=>"1",
-                'label'=>$__att__['eo_depth_attr'][1],
+                'label'=>$__att__['eo_cut_attr'][1],
+                'elements'=>"fair,good,very-good,ideal,super-ideal",
                 'advance'=>"1",
                 'dependent'=>"0",
-                'input'=>"numeric_slider",
+                'input'=>"text_slider",
                 'column_width'=> "50",
                 'order'=>"7",
                 'template'=>'fc1',
@@ -271,12 +296,12 @@ class Filter_Samples {
                 'help_text'=>'',
                 'enabled'=>1
             );
-		}
-		if(!empty($__att__['eo_table_attr'])){
-			$this->filter['d_fconfig'][]=array(
-                'name'=>$__att__['eo_table_attr'][0],
+        }
+        if(!empty($__att__['eo_depth_attr'])){
+            $this->filter['d_fconfig'][]=array(
+                'name'=>'pa_'.$__att__['eo_depth_attr'][0],
                 'type'=>"1",
-                'label'=>$__att__['eo_table_attr'][1],
+                'label'=>$__att__['eo_depth_attr'][1],
                 'advance'=>"1",
                 'dependent'=>"0",
                 'input'=>"numeric_slider",
@@ -287,15 +312,15 @@ class Filter_Samples {
                 'help_text'=>'',
                 'enabled'=>1
             );
-		}
-		if(!empty($__att__['eo_grading_report_attr'])){
-			$this->filter['d_fconfig'][]=array(
-                'name'=>$__att__['eo_grading_report_attr'][0],
+        }
+        if(!empty($__att__['eo_table_attr'])){
+            $this->filter['d_fconfig'][]=array(
+                'name'=>'pa_'.$__att__['eo_table_attr'][0],
                 'type'=>"1",
-                'label'=>$__att__['eo_grading_report_attr'][1],
+                'label'=>$__att__['eo_table_attr'][1],
                 'advance'=>"1",
                 'dependent'=>"0",
-                'input'=>"checkbox",
+                'input'=>"numeric_slider",
                 'column_width'=> "50",
                 'order'=>"9",
                 'template'=>'fc1',
@@ -303,54 +328,88 @@ class Filter_Samples {
                 'help_text'=>'',
                 'enabled'=>1
             );
-		}
-		return $this->filter;
-	}
+        }
+        if(!empty($__att__['eo_grading_report_attr'])){
+            $this->filter['d_fconfig'][]=array(
+                'name'=>'pa_'.$__att__['eo_grading_report_attr'][0],
+                'type'=>"1",
+                'label'=>$__att__['eo_grading_report_attr'][1],
+                'advance'=>"1",
+                'dependent'=>"0",
+                'input'=>"checkbox",
+                'column_width'=> "50",
+                'order'=>"10",
+                'template'=>'fc1',
+                'help'=>0,
+                'help_text'=>'',
+                'enabled'=>1
+            );
+        }
+        return $this->filter;
+    }
 
 	public function fc2() {
-		$__cat__ = $this->get_category();
+        $__cat__ = $this->get_category();
         $__att__ = $this->get_attribute();
 
-		$this->filter=array();
+        $this->filter=array();
 
-		//Filters for diamond....						
-		if(!empty($__cat__['eo_diamond_shape_cat'])){
-			$this->filter['d_fconfig'][]=array(
-                    'name'=>$__cat__['eo_diamond_shape_cat'][0],
-                    'type'=>"0",
-                    'label'=>$__cat__['eo_diamond_shape_cat'][1],
-                    'advance'=>"0",
-                    'dependent'=>"0",
-                    'input'=>"icon_text",
-                    'column_width'=> "100",
-                    'order'=>"0",
-                    'template'=>'fc2',
-                    'help'=>0,
-                    'help_text'=>'',
-                    'enabled'=>1
-                );
-		}
-		if(!empty($__att__['eo_carat_attr'])){
-			$this->filter['d_fconfig'][]=array(
-                    'name'=>$__att__['eo_carat_attr'][0],
-                    'type'=>"1",
-                    'label'=>$__att__['eo_carat_attr'][1],
-                    'advance'=>"0",
-                    'dependent'=>"0",
-                    'input'=>"numeric_slider",
-                    'column_width'=> "50",
-                    'order'=>"1",
-                    'template'=>'fc2',
-                    'help'=>0,
-                    'help_text'=>'',
-                    'enabled'=>1
-                );
-		}			
-		if(!empty($__att__['eo_clarity_attr'])){
-			$this->filter['d_fconfig'][]=array(
-                'name'=>$__att__['eo_clarity_attr'][0],
+        //Filters for diamond....                       
+        if(!empty($__cat__['eo_diamond_shape_cat'])){
+            $this->filter['d_fconfig'][]=array(
+                'name'=>$__cat__['eo_diamond_shape_cat'][0],
+                'type'=>"0",
+                'label'=>$__cat__['eo_diamond_shape_cat'][1],
+                // 'elements'=>$__cat__['eo_diamond_round_shape_cat'][0],
+                'advance'=>"0",
+                'dependent'=>"0",
+                'input'=>"icon_text",
+                'column_width'=> "100",
+                'order'=>"0",
+                'template'=>'fc2',
+                'help'=>0,
+                'help_text'=>'',
+                'enabled'=>1
+            );
+        }
+        if(!empty($__cat__['eo_lab_diamond_shape_cat'])){
+            $this->filter['d_fconfig'][]=array(
+                'name'=>$__cat__['eo_lab_diamond_shape_cat'][0],
+                'type'=>"0",
+                'label'=>$__cat__['eo_lab_diamond_shape_cat'][1],
+                'advance'=>"0",
+                'dependent'=>"0",
+                'input'=>"icon_text",
+                'column_width'=> "100",
+                'order'=>"0",
+                'template'=>'fc2',
+                'help'=>0,
+                'help_text'=>'',
+                'enabled'=>1
+            );
+        }
+        if(!empty($__att__['eo_carat_attr'])){
+            $this->filter['d_fconfig'][]=array(
+                'name'=>'pa_'.$__att__['eo_carat_attr'][0],
+                'type'=>"1",
+                'label'=>$__att__['eo_carat_attr'][1],
+                'advance'=>"0",
+                'dependent'=>"0",
+                'input'=>"numeric_slider",
+                'column_width'=> "50",
+                'order'=>"1",
+                'template'=>'fc2',
+                'help'=>0,
+                'help_text'=>'',
+                'enabled'=>1
+            );
+        }           
+        if(!empty($__att__['eo_clarity_attr'])){
+            $this->filter['d_fconfig'][]=array(
+                'name'=>'pa_'.$__att__['eo_clarity_attr'][0],
                 'type'=>"1",
                 'label'=>$__att__['eo_clarity_attr'][1],
+                'elements'=>"si2,si1,vs2,vs1,vvs2,vvs1,if,fl",
                 'advance'=>"0",
                 'dependent'=>"0",
                 'input'=>"text_slider",
@@ -362,12 +421,13 @@ class Filter_Samples {
                 'enabled'=>1
 
             );
-		}
-		if(!empty($__att__['eo_colour_attr'])){
-			$this->filter['d_fconfig'][]=array(
-                'name'=>$__att__['eo_colour_attr'][0],
+        }
+        if(!empty($__att__['eo_colour_attr'])){
+            $this->filter['d_fconfig'][]=array(
+                'name'=>'pa_'.$__att__['eo_colour_attr'][0],
                 'type'=>"1",
                 'label'=>$__att__['eo_colour_attr'][1],
+                'elements'=>"d,e,f,g,h,i,j",
                 'advance'=>"0",
                 'dependent'=>"0",
                 'input'=>"text_slider",
@@ -378,12 +438,13 @@ class Filter_Samples {
                 'help_text'=>'',
                 'enabled'=>1
             );
-		}
-		if(!empty($__att__['eo_polish_attr'])){
-			$this->filter['d_fconfig'][]=array(
-                'name'=>$__att__['eo_polish_attr'][0],
+        }
+        if(!empty($__att__['eo_polish_attr'])){
+            $this->filter['d_fconfig'][]=array(
+                'name'=>'pa_'.$__att__['eo_polish_attr'][0],
                 'type'=>"1",
                 'label'=>$__att__['eo_polish_attr'][1],
+                'elements'=>"good,very-good,excellent",
                 'advance'=>"1",
                 'dependent'=>"0",
                 'input'=>"text_slider",
@@ -394,12 +455,13 @@ class Filter_Samples {
                 'help_text'=>'',
                 'enabled'=>1
             );
-		}
-		if(!empty($__att__['eo_symmertry_attr'])){
-			$this->filter['d_fconfig'][]=array(
-                'name'=>$__att__['eo_symmertry_attr'][0],
+        }
+        if(!empty($__att__['eo_symmertry_attr'])){
+            $this->filter['d_fconfig'][]=array(
+                'name'=>'pa_'.$__att__['eo_symmertry_attr'][0],
                 'type'=>"1",
                 'label'=>$__att__['eo_symmertry_attr'][1],
+                'elements'=>"good,very-good,excellent",
                 'advance'=>"1",
                 'dependent'=>"0",
                 'input'=>"text_slider",
@@ -410,12 +472,13 @@ class Filter_Samples {
                 'help_text'=>'',
                 'enabled'=>1
             );
-		}
-		if(!empty($__att__['eo_fluorescence_attr'])){
-			$this->filter['d_fconfig'][]=array(
-                'name'=>$__att__['eo_fluorescence_attr'][0],
+        }
+        if(!empty($__att__['eo_fluorescence_attr'])){
+            $this->filter['d_fconfig'][]=array(
+                'name'=>'pa_'.$__att__['eo_fluorescence_attr'][0],
                 'type'=>"1",
                 'label'=>$__att__['eo_fluorescence_attr'][1],
+                'elements'=>"very-strong,strong,medium,faint,none",
                 'advance'=>"1",
                 'dependent'=>"0",
                 'input'=>"text_slider",
@@ -426,15 +489,16 @@ class Filter_Samples {
                 'help_text'=>'',
                 'enabled'=>1
             );
-		}
-		if(!empty($__att__['eo_depth_attr'])){
-			$this->filter['d_fconfig'][]=array(
-                'name'=>$__att__['eo_depth_attr'][0],
+        }
+        if(!empty($__att__['eo_cut_attr'])){
+            $this->filter['d_fconfig'][]=array(
+                'name'=>'pa_'.$__att__['eo_cut_attr'][0],
                 'type'=>"1",
-                'label'=>$__att__['eo_depth_attr'][1],
+                'label'=>$__att__['eo_cut_attr'][1],
+                'elements'=>"fair,good,very-good,ideal,super-ideal",
                 'advance'=>"1",
                 'dependent'=>"0",
-                'input'=>"numeric_slider",
+                'input'=>"text_slider",
                 'column_width'=> "50",
                 'order'=>"7",
                 'template'=>'fc2',
@@ -442,12 +506,12 @@ class Filter_Samples {
                 'help_text'=>'',
                 'enabled'=>1
             );
-		}
-		if(!empty($__att__['eo_table_attr'])){
-			$this->filter['d_fconfig'][]=array(
-                'name'=>$__att__['eo_table_attr'][0],
+        }
+        if(!empty($__att__['eo_depth_attr'])){
+            $this->filter['d_fconfig'][]=array(
+                'name'=>'pa_'.$__att__['eo_depth_attr'][0],
                 'type'=>"1",
-                'label'=>$__att__['eo_table_attr'][1],
+                'label'=>$__att__['eo_depth_attr'][1],
                 'advance'=>"1",
                 'dependent'=>"0",
                 'input'=>"numeric_slider",
@@ -458,15 +522,15 @@ class Filter_Samples {
                 'help_text'=>'',
                 'enabled'=>1
             );
-		}
-		if(!empty($__att__['eo_grading_report_attr'])){
-			$this->filter['d_fconfig'][]=array(
-                'name'=>$__att__['eo_grading_report_attr'][0],
+        }
+        if(!empty($__att__['eo_table_attr'])){
+            $this->filter['d_fconfig'][]=array(
+                'name'=>'pa_'.$__att__['eo_table_attr'][0],
                 'type'=>"1",
-                'label'=>$__att__['eo_grading_report_attr'][1],
+                'label'=>$__att__['eo_table_attr'][1],
                 'advance'=>"1",
                 'dependent'=>"0",
-                'input'=>"checkbox",
+                'input'=>"numeric_slider",
                 'column_width'=> "50",
                 'order'=>"9",
                 'template'=>'fc2',
@@ -474,54 +538,88 @@ class Filter_Samples {
                 'help_text'=>'',
                 'enabled'=>1
             );
-		}
-		return $this->filter;
-	}
+        }
+        if(!empty($__att__['eo_grading_report_attr'])){
+            $this->filter['d_fconfig'][]=array(
+                'name'=>'pa_'.$__att__['eo_grading_report_attr'][0],
+                'type'=>"1",
+                'label'=>$__att__['eo_grading_report_attr'][1],
+                'advance'=>"1",
+                'dependent'=>"0",
+                'input'=>"checkbox",
+                'column_width'=> "50",
+                'order'=>"10",
+                'template'=>'fc2',
+                'help'=>0,
+                'help_text'=>'',
+                'enabled'=>1
+            );
+        }
+        return $this->filter;
+    }
 
 	public function fc3() {
-		$__cat__ = $this->get_category();
+        $__cat__ = $this->get_category();
         $__att__ = $this->get_attribute();
 
-		$this->filter=array();
+        $this->filter=array();
 
-		//Filters for diamond....						
-		if(!empty($__cat__['eo_diamond_shape_cat'])){
-			$this->filter['d_fconfig'][]=array(
-                    'name'=>$__cat__['eo_diamond_shape_cat'][0],
-                    'type'=>"0",
-                    'label'=>$__cat__['eo_diamond_shape_cat'][1],
-                    'advance'=>"0",
-                    'dependent'=>"0",
-                    'input'=>"icon_text",
-                    'column_width'=> "100",
-                    'order'=>"0",
-                    'template'=>'fc3',
-                    'help'=>1,
-                    'help_text'=>'Shape of the diamond',
-                    'enabled'=>1
-                );
-		}
-		if(!empty($__att__['eo_carat_attr'])){
-			$this->filter['d_fconfig'][]=array(
-                    'name'=>$__att__['eo_carat_attr'][0],
-                    'type'=>"1",
-                    'label'=>$__att__['eo_carat_attr'][1],
-                    'advance'=>"0",
-                    'dependent'=>"0",
-                    'input'=>"numeric_slider",
-                    'column_width'=> "50",
-                    'order'=>"1",
-                    'template'=>'fc3',
-                    'help'=>1,
-                    'help_text'=>'Measurment of diamond weight',
-                    'enabled'=>1
-                );
-		}			
-		if(!empty($__att__['eo_clarity_attr'])){
-			$this->filter['d_fconfig'][]=array(
-                'name'=>$__att__['eo_clarity_attr'][0],
+        //Filters for diamond....                       
+        if(!empty($__cat__['eo_diamond_shape_cat'])){
+            $this->filter['d_fconfig'][]=array(
+                'name'=>$__cat__['eo_diamond_shape_cat'][0],
+                'type'=>"0",
+                'label'=>$__cat__['eo_diamond_shape_cat'][1],
+                // 'elements'=>$__cat__['eo_diamond_round_shape_cat'][0],
+                'advance'=>"0",
+                'dependent'=>"0",
+                'input'=>"icon_text",
+                'column_width'=> "100",
+                'order'=>"0",
+                'template'=>'fc3',
+                'help'=>1,
+                'help_text'=>'Shape of the diamond',
+                'enabled'=>1
+            );
+        }
+        if(!empty($__cat__['eo_lab_diamond_shape_cat'])){
+            $this->filter['d_fconfig'][]=array(
+                'name'=>$__cat__['eo_lab_diamond_shape_cat'][0],
+                'type'=>"0",
+                'label'=>$__cat__['eo_lab_diamond_shape_cat'][1],
+                'advance'=>"0",
+                'dependent'=>"0",
+                'input'=>"icon_text",
+                'column_width'=> "100",
+                'order'=>"0",
+                'template'=>'fc3',
+                'help'=>1,
+                'help_text'=>'Shape of the lab Grown',
+                'enabled'=>1
+            );
+        }
+        if(!empty($__att__['eo_carat_attr'])){
+            $this->filter['d_fconfig'][]=array(
+                'name'=>'pa_'.$__att__['eo_carat_attr'][0],
+                'type'=>"1",
+                'label'=>$__att__['eo_carat_attr'][1],
+                'advance'=>"0",
+                'dependent'=>"0",
+                'input'=>"numeric_slider",
+                'column_width'=> "50",
+                'order'=>"1",
+                'template'=>'fc3',
+                'help'=>1,
+                'help_text'=>'Measurment of diamond weight',
+                'enabled'=>1
+            );
+        }           
+        if(!empty($__att__['eo_clarity_attr'])){
+            $this->filter['d_fconfig'][]=array(
+                'name'=>'pa_'.$__att__['eo_clarity_attr'][0],
                 'type'=>"1",
                 'label'=>$__att__['eo_clarity_attr'][1],
+                'elements'=>"si2,si1,vs2,vs1,vvs2,vvs1,if,fl",
                 'advance'=>"0",
                 'dependent'=>"0",
                 'input'=>"text_slider",
@@ -533,12 +631,13 @@ class Filter_Samples {
                 'enabled'=>1
 
             );
-		}
-		if(!empty($__att__['eo_colour_attr'])){
-			$this->filter['d_fconfig'][]=array(
-                'name'=>$__att__['eo_colour_attr'][0],
+        }
+        if(!empty($__att__['eo_colour_attr'])){
+            $this->filter['d_fconfig'][]=array(
+                'name'=>'pa_'.$__att__['eo_colour_attr'][0],
                 'type'=>"1",
                 'label'=>$__att__['eo_colour_attr'][1],
+                'elements'=>"d,e,f,g,h,i,j",
                 'advance'=>"0",
                 'dependent'=>"0",
                 'input'=>"text_slider",
@@ -549,12 +648,13 @@ class Filter_Samples {
                 'help_text'=>'Defines color of the diamond',
                 'enabled'=>1
             );
-		}
-		if(!empty($__att__['eo_polish_attr'])){
-			$this->filter['d_fconfig'][]=array(
-                'name'=>$__att__['eo_polish_attr'][0],
+        }
+        if(!empty($__att__['eo_polish_attr'])){
+            $this->filter['d_fconfig'][]=array(
+                'name'=>'pa_'.$__att__['eo_polish_attr'][0],
                 'type'=>"1",
                 'label'=>$__att__['eo_polish_attr'][1],
+                'elements'=>"good,very-good,excellent",
                 'advance'=>"1",
                 'dependent'=>"0",
                 'input'=>"text_slider",
@@ -565,12 +665,13 @@ class Filter_Samples {
                 'help_text'=>'Polish quality of the diamond',
                 'enabled'=>1
             );
-		}
-		if(!empty($__att__['eo_symmertry_attr'])){
-			$this->filter['d_fconfig'][]=array(
-                'name'=>$__att__['eo_symmertry_attr'][0],
+        }
+        if(!empty($__att__['eo_symmertry_attr'])){
+            $this->filter['d_fconfig'][]=array(
+                'name'=>'pa_'.$__att__['eo_symmertry_attr'][0],
                 'type'=>"1",
                 'label'=>$__att__['eo_symmertry_attr'][1],
+                'elements'=>"good,very-good,excellent",
                 'advance'=>"1",
                 'dependent'=>"0",
                 'input'=>"text_slider",
@@ -581,12 +682,13 @@ class Filter_Samples {
                 'help_text'=>'Symmetry of the diamond',
                 'enabled'=>1
             );
-		}
-		if(!empty($__att__['eo_fluorescence_attr'])){
-			$this->filter['d_fconfig'][]=array(
-                'name'=>$__att__['eo_fluorescence_attr'][0],
+        }
+        if(!empty($__att__['eo_fluorescence_attr'])){
+            $this->filter['d_fconfig'][]=array(
+                'name'=>'pa_'.$__att__['eo_fluorescence_attr'][0],
                 'type'=>"1",
                 'label'=>$__att__['eo_fluorescence_attr'][1],
+                'elements'=>"very-strong,strong,medium,faint,none",
                 'advance'=>"1",
                 'dependent'=>"0",
                 'input'=>"text_slider",
@@ -597,28 +699,29 @@ class Filter_Samples {
                 'help_text'=>'Fluorecence of the diamond',
                 'enabled'=>1
             );
-		}
-		if(!empty($__att__['eo_depth_attr'])){
-			$this->filter['d_fconfig'][]=array(
-                'name'=>$__att__['eo_depth_attr'][0],
+        }
+        if(!empty($__att__['eo_cut_attr'])){
+            $this->filter['d_fconfig'][]=array(
+                'name'=>'pa_'.$__att__['eo_cut_attr'][0],
                 'type'=>"1",
-                'label'=>$__att__['eo_depth_attr'][1],
+                'label'=>$__att__['eo_cut_attr'][1],
+                'elements'=>"fair,good,very-good,ideal,super-ideal",
                 'advance'=>"1",
                 'dependent'=>"0",
-                'input'=>"numeric_slider",
+                'input'=>"text_slider",
                 'column_width'=> "50",
                 'order'=>"7",
                 'template'=>'fc3',
                 'help'=>1,
-                'help_text'=>'Depth of the diamond from head',
+                'help_text'=>'Cut of the diamond',
                 'enabled'=>1
             );
-		}
-		if(!empty($__att__['eo_table_attr'])){
-			$this->filter['d_fconfig'][]=array(
-                'name'=>$__att__['eo_table_attr'][0],
+        }
+        if(!empty($__att__['eo_depth_attr'])){
+            $this->filter['d_fconfig'][]=array(
+                'name'=>'pa_'.$__att__['eo_depth_attr'][0],
                 'type'=>"1",
-                'label'=>$__att__['eo_table_attr'][1],
+                'label'=>$__att__['eo_depth_attr'][1],
                 'advance'=>"1",
                 'dependent'=>"0",
                 'input'=>"numeric_slider",
@@ -626,73 +729,107 @@ class Filter_Samples {
                 'order'=>"8",
                 'template'=>'fc3',
                 'help'=>1,
+                'help_text'=>'Depth of the diamond from head',
+                'enabled'=>1
+            );
+        }
+        if(!empty($__att__['eo_table_attr'])){
+            $this->filter['d_fconfig'][]=array(
+                'name'=>'pa_'.$__att__['eo_table_attr'][0],
+                'type'=>"1",
+                'label'=>$__att__['eo_table_attr'][1],
+                'advance'=>"1",
+                'dependent'=>"0",
+                'input'=>"numeric_slider",
+                'column_width'=> "50",
+                'order'=>"9",
+                'template'=>'fc3',
+                'help'=>1,
                 'help_text'=>'Table size of the diamond',
                 'enabled'=>1
             );
-		}
-		if(!empty($__att__['eo_grading_report_attr'])){
-			$this->filter['d_fconfig'][]=array(
-                'name'=>$__att__['eo_grading_report_attr'][0],
+        }
+        if(!empty($__att__['eo_grading_report_attr'])){
+            $this->filter['d_fconfig'][]=array(
+                'name'=>'pa_'.$__att__['eo_grading_report_attr'][0],
                 'type'=>"1",
                 'label'=>$__att__['eo_grading_report_attr'][1],
                 'advance'=>"1",
                 'dependent'=>"0",
                 'input'=>"checkbox",
                 'column_width'=> "50",
-                'order'=>"9",
+                'order'=>"10",
                 'template'=>'fc3',
                 'help'=>1,
                 'help_text'=>'Lab report created by',
                 'enabled'=>1
             );
-		}
-		return $this->filter;
-	}
+        }
+        return $this->filter;
+    }
 
 	public function fc4() {
-		$__cat__ = $this->get_category();
+        $__cat__ = $this->get_category();
         $__att__ = $this->get_attribute();
 
-		$this->filter=array();
+        $this->filter=array();
 
-		//Filters for diamond....						
-		if(!empty($__cat__['eo_diamond_shape_cat'])){
-			$this->filter['d_fconfig'][]=array(
-                    'name'=>$__cat__['eo_diamond_shape_cat'][0],
-                    'type'=>"0",
-                    'label'=>"Shape",    //$__cat__['eo_diamond_shape_cat'][1],
-                    'advance'=>"0",
-                    'dependent'=>"0",
-                    'input'=>"icon_text",
-                    'column_width'=> "50",
-                    'order'=>"0",
-                    'template'=>'fc4',
-                    'help'=>1,
-                    'help_text'=>'Shape of the diamond',
-                    'enabled'=>1
-                );
-		}
-		if(!empty($__att__['eo_carat_attr'])){
-			$this->filter['d_fconfig'][]=array(
-                    'name'=>$__att__['eo_carat_attr'][0],
-                    'type'=>"1",
-                    'label'=>$__att__['eo_carat_attr'][1],
-                    'advance'=>"0",
-                    'dependent'=>"0",
-                    'input'=>"numeric_slider",
-                    'column_width'=> "50",
-                    'order'=>"1",
-                    'template'=>'fc4',
-                    'help'=>1,
-                    'help_text'=>'Measurment of diamond weight',
-                    'enabled'=>1
-                );
-		}			
-		if(!empty($__att__['eo_clarity_attr'])){
-			$this->filter['d_fconfig'][]=array(
-                'name'=>$__att__['eo_clarity_attr'][0],
+        //Filters for diamond....                       
+        if(!empty($__cat__['eo_diamond_shape_cat'])){
+            $this->filter['d_fconfig'][]=array(
+                'name'=>$__cat__['eo_diamond_shape_cat'][0],
+                'type'=>"0",
+                'label'=>"Shape",    //$__cat__['eo_diamond_shape_cat'][1],
+                // 'elements'=>$__cat__['eo_diamond_round_shape_cat'][0],
+                'advance'=>"0",
+                'dependent'=>"0",
+                'input'=>"icon_text",
+                'column_width'=> "50",
+                'order'=>"0",
+                'template'=>'fc4',
+                'help'=>1,
+                'help_text'=>'Shape of the diamond',
+                'enabled'=>1
+            );
+        }
+        if(!empty($__cat__['eo_lab_diamond_shape_cat'])){
+            $this->filter['d_fconfig'][]=array(
+                'name'=>$__cat__['eo_lab_diamond_shape_cat'][0],
+                'type'=>"0",
+                'label'=>"Lab Grown",    //$__cat__['eo_lab_diamond_shape_cat'][1],
+                'advance'=>"0",
+                'dependent'=>"0",
+                'input'=>"icon_text",
+                'column_width'=> "50",
+                'order'=>"0",
+                'template'=>'fc4',
+                'help'=>1,
+                'help_text'=>'Shape of the Lab Grown',
+                'enabled'=>1
+            );
+        }
+        if(!empty($__att__['eo_carat_attr'])){
+            $this->filter['d_fconfig'][]=array(
+                'name'=>'pa_'.$__att__['eo_carat_attr'][0],
+                'type'=>"1",
+                'label'=>$__att__['eo_carat_attr'][1],
+                'advance'=>"0",
+                'dependent'=>"0",
+                'input'=>"numeric_slider",
+                'column_width'=> "50",
+                'order'=>"1",
+                'template'=>'fc4',
+                'help'=>1,
+                'help_text'=>'Measurment of diamond weight',
+                'enabled'=>1
+            );
+        }           
+        if(!empty($__att__['eo_clarity_attr'])){
+            $this->filter['d_fconfig'][]=array(
+                'name'=>'pa_'.$__att__['eo_clarity_attr'][0],
                 'type'=>"1",
                 'label'=>$__att__['eo_clarity_attr'][1],
+                'elements'=>"si2,si1,vs2,vs1,vvs2,vvs1,if,fl",
                 'advance'=>"0",
                 'dependent'=>"0",
                 'input'=>"text_slider",
@@ -704,12 +841,13 @@ class Filter_Samples {
                 'enabled'=>1
 
             );
-		}
-		if(!empty($__att__['eo_colour_attr'])){
-			$this->filter['d_fconfig'][]=array(
-                'name'=>$__att__['eo_colour_attr'][0],
+        }
+        if(!empty($__att__['eo_colour_attr'])){
+            $this->filter['d_fconfig'][]=array(
+                'name'=>'pa_'.$__att__['eo_colour_attr'][0],
                 'type'=>"1",
                 'label'=>$__att__['eo_colour_attr'][1],
+                'elements'=>"d,e,f,g,h,i,j",
                 'advance'=>"0",
                 'dependent'=>"0",
                 'input'=>"text_slider",
@@ -720,12 +858,13 @@ class Filter_Samples {
                 'help_text'=>'Defines color of the diamond',
                 'enabled'=>1
             );
-		}
-		if(!empty($__att__['eo_polish_attr'])){
-			$this->filter['d_fconfig'][]=array(
-                'name'=>$__att__['eo_polish_attr'][0],
+        }
+        if(!empty($__att__['eo_polish_attr'])){
+            $this->filter['d_fconfig'][]=array(
+                'name'=>'pa_'.$__att__['eo_polish_attr'][0],
                 'type'=>"1",
                 'label'=>$__att__['eo_polish_attr'][1],
+                'elements'=>"good,very-good,excellent",
                 'advance'=>"1",
                 'dependent'=>"0",
                 'input'=>"text_slider",
@@ -736,12 +875,13 @@ class Filter_Samples {
                 'help_text'=>'Polish quality of the diamond',
                 'enabled'=>1
             );
-		}
-		if(!empty($__att__['eo_symmertry_attr'])){
-			$this->filter['d_fconfig'][]=array(
-                'name'=>$__att__['eo_symmertry_attr'][0],
+        }
+        if(!empty($__att__['eo_symmertry_attr'])){
+            $this->filter['d_fconfig'][]=array(
+                'name'=>'pa_'.$__att__['eo_symmertry_attr'][0],
                 'type'=>"1",
                 'label'=>$__att__['eo_symmertry_attr'][1],
+                'elements'=>"good,very-good,excellent",
                 'advance'=>"1",
                 'dependent'=>"0",
                 'input'=>"text_slider",
@@ -752,12 +892,13 @@ class Filter_Samples {
                 'help_text'=>'Symmetry of the diamond',
                 'enabled'=>1
             );
-		}
-		if(!empty($__att__['eo_fluorescence_attr'])){
-			$this->filter['d_fconfig'][]=array(
-                'name'=>$__att__['eo_fluorescence_attr'][0],
+        }
+        if(!empty($__att__['eo_fluorescence_attr'])){
+            $this->filter['d_fconfig'][]=array(
+                'name'=>'pa_'.$__att__['eo_fluorescence_attr'][0],
                 'type'=>"1",
                 'label'=>$__att__['eo_fluorescence_attr'][1],
+                'elements'=>"very-strong,strong,medium,faint,none",
                 'advance'=>"1",
                 'dependent'=>"0",
                 'input'=>"text_slider",
@@ -768,28 +909,29 @@ class Filter_Samples {
                 'help_text'=>'Fluorecence of the diamond',
                 'enabled'=>1
             );
-		}
-		if(!empty($__att__['eo_depth_attr'])){
-			$this->filter['d_fconfig'][]=array(
-                'name'=>$__att__['eo_depth_attr'][0],
+        }
+        if(!empty($__att__['eo_cut_attr'])){
+            $this->filter['d_fconfig'][]=array(
+                'name'=>'pa_'.$__att__['eo_cut_attr'][0],
                 'type'=>"1",
-                'label'=>$__att__['eo_depth_attr'][1],
+                'label'=>$__att__['eo_cut_attr'][1],
+                'elements'=>"fair,good,very-good,ideal,super-ideal",
                 'advance'=>"1",
                 'dependent'=>"0",
-                'input'=>"numeric_slider",
+                'input'=>"text_slider",
                 'column_width'=> "50",
                 'order'=>"7",
                 'template'=>'fc4',
                 'help'=>1,
-                'help_text'=>'Depth of the diamond from head',
+                'help_text'=>'Cut of the diamond',
                 'enabled'=>1
             );
-		}
-		if(!empty($__att__['eo_table_attr'])){
-			$this->filter['d_fconfig'][]=array(
-                'name'=>$__att__['eo_table_attr'][0],
+        }
+        if(!empty($__att__['eo_depth_attr'])){
+            $this->filter['d_fconfig'][]=array(
+                'name'=>'pa_'.$__att__['eo_depth_attr'][0],
                 'type'=>"1",
-                'label'=>$__att__['eo_table_attr'][1],
+                'label'=>$__att__['eo_depth_attr'][1],
                 'advance'=>"1",
                 'dependent'=>"0",
                 'input'=>"numeric_slider",
@@ -797,28 +939,44 @@ class Filter_Samples {
                 'order'=>"8",
                 'template'=>'fc4',
                 'help'=>1,
+                'help_text'=>'Depth of the diamond from head',
+                'enabled'=>1
+            );
+        }
+        if(!empty($__att__['eo_table_attr'])){
+            $this->filter['d_fconfig'][]=array(
+                'name'=>'pa_'.$__att__['eo_table_attr'][0],
+                'type'=>"1",
+                'label'=>$__att__['eo_table_attr'][1],
+                'advance'=>"1",
+                'dependent'=>"0",
+                'input'=>"numeric_slider",
+                'column_width'=> "50",
+                'order'=>"9",
+                'template'=>'fc4',
+                'help'=>1,
                 'help_text'=>'Table size of the diamond',
                 'enabled'=>1
             );
-		}
-		if(!empty($__att__['eo_grading_report_attr'])){
-			$this->filter['d_fconfig'][]=array(
-                'name'=>$__att__['eo_grading_report_attr'][0],
+        }
+        if(!empty($__att__['eo_grading_report_attr'])){
+            $this->filter['d_fconfig'][]=array(
+                'name'=>'pa_'.$__att__['eo_grading_report_attr'][0],
                 'type'=>"1",
                 'label'=>$__att__['eo_grading_report_attr'][1],
                 'advance'=>"1",
                 'dependent'=>"0",
                 'input'=>"checkbox",
                 'column_width'=> "50",
-                'order'=>"9",
+                'order'=>"10",
                 'template'=>'fc4',
                 'help'=>1,
                 'help_text'=>'Lab report created by',
                 'enabled'=>1
             );
-		}
-		return $this->filter;
-	}
+        }
+        return $this->filter;
+    }
 
     public function fc5() {
         $__cat__ = $this->get_category();
@@ -829,41 +987,59 @@ class Filter_Samples {
         //Filters for diamond....                       
         if(!empty($__cat__['eo_diamond_shape_cat'])){
             $this->filter['d_fconfig'][]=array(
-                    'name'=>$__cat__['eo_diamond_shape_cat'][0],
-                    'type'=>"0",
-                    'label'=>$__cat__['eo_diamond_shape_cat'][1],
-                    'advance'=>"0",
-                    'dependent'=>"0",
-                    'input'=>"icon_text",
-                    'column_width'=> "31.25",
-                    'order'=>"0",
-                    'template'=>'fc3',
-                    'help'=>1,
-                    'help_text'=>'Shape of the diamond',
-                    'enabled'=>1
-                );
+                'name'=>$__cat__['eo_diamond_shape_cat'][0],
+                'type'=>"0",
+                'label'=>$__cat__['eo_diamond_shape_cat'][1],
+                // 'elements'=>$__cat__['eo_diamond_round_shape_cat'][0],
+                'advance'=>"0",
+                'dependent'=>"0",
+                'input'=>"icon_text",
+                'column_width'=> "31.25",
+                'order'=>"0",
+                'template'=>'fc3',
+                'help'=>1,
+                'help_text'=>'Shape of the diamond',
+                'enabled'=>1
+            );
+        }
+        if(!empty($__cat__['eo_lab_diamond_shape_cat'])){
+            $this->filter['d_fconfig'][]=array(
+                'name'=>$__cat__['eo_lab_diamond_shape_cat'][0],
+                'type'=>"0",
+                'label'=>$__cat__['eo_lab_diamond_shape_cat'][1],
+                'advance'=>"0",
+                'dependent'=>"0",
+                'input'=>"icon_text",
+                'column_width'=> "31.25",
+                'order'=>"0",
+                'template'=>'fc3',
+                'help'=>1,
+                'help_text'=>'Shape of the lab Grown',
+                'enabled'=>1
+            );
         }
         if(!empty($__att__['eo_carat_attr'])){
             $this->filter['d_fconfig'][]=array(
-                    'name'=>$__att__['eo_carat_attr'][0],
-                    'type'=>"1",
-                    'label'=>$__att__['eo_carat_attr'][1],
-                    'advance'=>"0",
-                    'dependent'=>"0",
-                    'input'=>"numeric_slider",
-                    'column_width'=> "37.5",
-                    'order'=>"1",
-                    'template'=>'fc3',
-                    'help'=>1,
-                    'help_text'=>'Measurment of diamond weight',
-                    'enabled'=>1
-                );
+                'name'=>'pa_'.$__att__['eo_carat_attr'][0],
+                'type'=>"1",
+                'label'=>$__att__['eo_carat_attr'][1],
+                'advance'=>"0",
+                'dependent'=>"0",
+                'input'=>"numeric_slider",
+                'column_width'=> "37.5",
+                'order'=>"1",
+                'template'=>'fc3',
+                'help'=>1,
+                'help_text'=>'Measurment of diamond weight',
+                'enabled'=>1
+            );
         }           
         if(!empty($__att__['eo_clarity_attr'])){
             $this->filter['d_fconfig'][]=array(
-                'name'=>$__att__['eo_clarity_attr'][0],
+                'name'=>'pa_'.$__att__['eo_clarity_attr'][0],
                 'type'=>"1",
                 'label'=>$__att__['eo_clarity_attr'][1],
+                'elements'=>"si2,si1,vs2,vs1,vvs2,vvs1,if,fl",
                 'advance'=>"0",
                 'dependent'=>"0",
                 'input'=>"text_slider",
@@ -878,9 +1054,10 @@ class Filter_Samples {
         }
         if(!empty($__att__['eo_colour_attr'])){
             $this->filter['d_fconfig'][]=array(
-                'name'=>$__att__['eo_colour_attr'][0],
+                'name'=>'pa_'.$__att__['eo_colour_attr'][0],
                 'type'=>"1",
                 'label'=>$__att__['eo_colour_attr'][1],
+                'elements'=>"d,e,f,g,h,i,j",
                 'advance'=>"0",
                 'dependent'=>"0",
                 'input'=>"text_slider",
@@ -894,9 +1071,10 @@ class Filter_Samples {
         }
         if(!empty($__att__['eo_polish_attr'])){
             $this->filter['d_fconfig'][]=array(
-                'name'=>$__att__['eo_polish_attr'][0],
+                'name'=>'pa_'.$__att__['eo_polish_attr'][0],
                 'type'=>"1",
                 'label'=>$__att__['eo_polish_attr'][1],
+                'elements'=>"good,very-good,excellent",
                 'advance'=>"1",
                 'dependent'=>"0",
                 'input'=>"text_slider",
@@ -910,9 +1088,10 @@ class Filter_Samples {
         }
         if(!empty($__att__['eo_symmertry_attr'])){
             $this->filter['d_fconfig'][]=array(
-                'name'=>$__att__['eo_symmertry_attr'][0],
+                'name'=>'pa_'.$__att__['eo_symmertry_attr'][0],
                 'type'=>"1",
                 'label'=>$__att__['eo_symmertry_attr'][1],
+                'elements'=>"good,very-good,excellent",
                 'advance'=>"1",
                 'dependent'=>"0",
                 'input'=>"text_slider",
@@ -926,9 +1105,10 @@ class Filter_Samples {
         }
         if(!empty($__att__['eo_fluorescence_attr'])){
             $this->filter['d_fconfig'][]=array(
-                'name'=>$__att__['eo_fluorescence_attr'][0],
+                'name'=>'pa_'.$__att__['eo_fluorescence_attr'][0],
                 'type'=>"1",
                 'label'=>$__att__['eo_fluorescence_attr'][1],
+                'elements'=>"very-strong,strong,medium,faint,none",
                 'advance'=>"1",
                 'dependent'=>"0",
                 'input'=>"text_slider",
@@ -940,16 +1120,33 @@ class Filter_Samples {
                 'enabled'=>1
             );
         }
+        if(!empty($__att__['eo_cut_attr'])){
+            $this->filter['d_fconfig'][]=array(
+                'name'=>'pa_'.$__att__['eo_cut_attr'][0],
+                'type'=>"1",
+                'label'=>$__att__['eo_cut_attr'][1],
+                'elements'=>"fair,good,very-good,ideal,super-ideal",
+                'advance'=>"1",
+                'dependent'=>"0",
+                'input'=>"text_slider",
+                'column_width'=> "31.25",
+                'order'=>"7",
+                'template'=>'fc3',
+                'help'=>1,
+                'help_text'=>'Cut of the diamond',
+                'enabled'=>1
+            );
+        }
         if(!empty($__att__['eo_depth_attr'])){
             $this->filter['d_fconfig'][]=array(
-                'name'=>$__att__['eo_depth_attr'][0],
+                'name'=>'pa_'.$__att__['eo_depth_attr'][0],
                 'type'=>"1",
                 'label'=>$__att__['eo_depth_attr'][1],
                 'advance'=>"1",
                 'dependent'=>"0",
                 'input'=>"numeric_slider",
                 'column_width'=> "31.25",
-                'order'=>"7",
+                'order'=>"8",
                 'template'=>'fc3',
                 'help'=>1,
                 'help_text'=>'Depth of the diamond from head',
@@ -958,14 +1155,14 @@ class Filter_Samples {
         }
         if(!empty($__att__['eo_table_attr'])){
             $this->filter['d_fconfig'][]=array(
-                'name'=>$__att__['eo_table_attr'][0],
+                'name'=>'pa_'.$__att__['eo_table_attr'][0],
                 'type'=>"1",
                 'label'=>$__att__['eo_table_attr'][1],
                 'advance'=>"1",
                 'dependent'=>"0",
                 'input'=>"numeric_slider",
                 'column_width'=> "37.5",
-                'order'=>"8",
+                'order'=>"9",
                 'template'=>'fc3',
                 'help'=>1,
                 'help_text'=>'Table size of the diamond',
@@ -974,14 +1171,14 @@ class Filter_Samples {
         }
         if(!empty($__att__['eo_grading_report_attr'])){
             $this->filter['d_fconfig'][]=array(
-                'name'=>$__att__['eo_grading_report_attr'][0],
+                'name'=>'pa_'.$__att__['eo_grading_report_attr'][0],
                 'type'=>"1",
                 'label'=>$__att__['eo_grading_report_attr'][1],
                 'advance'=>"1",
                 'dependent'=>"0",
                 'input'=>"checkbox",
                 'column_width'=> "31.25",
-                'order'=>"9",
+                'order'=>"10",
                 'template'=>'fc3',
                 'help'=>1,
                 'help_text'=>'Lab report created by',
@@ -992,13 +1189,14 @@ class Filter_Samples {
     }
 
 	public function sc1() {
-		$__cat__ = $this->get_category();
+        $__cat__ = $this->get_category();
         $__att__ = $this->get_attribute();
 
-		$this->filter=array();
-		//Filters for settings....
-		if(!empty($__cat__['eo_setting_shape_cat'])){
-			$this->filter['s_fconfig'][]=array(
+        $this->filter=array();
+        //Filters for settings....
+        /*commentd on 25-08-23 jayre update sampel data kary teyr*/
+        /*if(!empty($__cat__['eo_setting_shape_cat'])){
+            $this->filter['s_fconfig'][]=array(
                 'name'=>$__cat__['eo_setting_shape_cat'][0],
                 'type'=>"0",
                 'label'=>$__cat__['eo_setting_shape_cat'][1],
@@ -1012,9 +1210,26 @@ class Filter_Samples {
                 'help_text'=>'',
                 'enabled'=>1
             );
-		}
-		if(!empty($__cat__['eo_ring_style_cat'])){
-			$this->filter['s_fconfig'][]=array(
+        }*/
+        if(!empty($__att__['eo_shape_attr'])){
+            $this->filter['s_fconfig'][]=array(
+                'name'=>'pa_'.$__att__['eo_shape_attr'][0],
+                'type'=>"0",
+                'label'=>$__att__['eo_shape_attr'][1],
+                'elements'=>"round,oval,cushion,pear,princess,emerald,marquise,asscher,radiant,heart",
+                'advance'=>"0",
+                'dependent'=>"0",
+                'input'=>"icon_text",
+                'column_width'=> "100",
+                'order'=>"0",
+                'template'=>'sc1',
+                'help'=>0,
+                'help_text'=>'',
+                'enabled'=>1
+            );
+        }
+        if(!empty($__cat__['eo_ring_style_cat'])){
+            $this->filter['s_fconfig'][]=array(
                 'name'=>$__cat__['eo_ring_style_cat'][0],
                 'type'=>"0",
                 'label'=>$__cat__['eo_ring_style_cat'][1],
@@ -1028,9 +1243,10 @@ class Filter_Samples {
                 'help_text'=>'',
                 'enabled'=>1
             );
-		}
-		if(!empty($__cat__['eo_metal_cat'])){
-			$this->filter['s_fconfig'][]=array(
+        }
+        /*commentd on 25-08-23 jayre update sampel data kary teyr*/
+        /*if(!empty($__cat__['eo_metal_cat'])){
+            $this->filter['s_fconfig'][]=array(
                 'name'=>$__cat__['eo_metal_cat'][0],
                 'type'=>"0",
                 'label'=>$__cat__['eo_metal_cat'][1],
@@ -1044,10 +1260,26 @@ class Filter_Samples {
                 'help_text'=>'',
                 'enabled'=>1
             );
-		}
-		
-		return $this->filter;
-	}
+        }*/
+        if(!empty($__att__['eo_metal_attr'])){
+            $this->filter['s_fconfig'][]=array(
+                'name'=>'pa_'.$__att__['eo_metal_attr'][0],
+                'type'=>"0",
+                'label'=>$__att__['eo_metal_attr'][1],
+                'advance'=>"0",
+                'dependent'=>"0",
+                'input'=>"icon",
+                'column_width'=> "50",
+                'order'=>"2",
+                'template'=>'sc1',
+                'help'=>0,
+                'help_text'=>'',
+                'enabled'=>1
+            );
+        }
+        
+        return $this->filter;
+    }
 
 	public function sc2() {
 		$__cat__ = $this->get_category();
@@ -1055,7 +1287,8 @@ class Filter_Samples {
 
 		$this->filter=array();
 		//Filters for settings....
-		if(!empty($__cat__['eo_setting_shape_cat'])){
+        /*commentd on 25-08-23 jayre update sampel data kary teyr*/
+		/*if(!empty($__cat__['eo_setting_shape_cat'])){
 			$this->filter['s_fconfig'][]=array(
                 'name'=>$__cat__['eo_setting_shape_cat'][0],
                 'type'=>"0",
@@ -1070,7 +1303,24 @@ class Filter_Samples {
                 'help_text'=>'',
                 'enabled'=>1
             );
-		}
+		}*/
+        if(!empty($__att__['eo_shape_attr'])){
+            $this->filter['s_fconfig'][]=array(
+                'name'=>'pa_'.$__att__['eo_shape_attr'][0],
+                'type'=>"0",
+                'label'=>$__att__['eo_shape_attr'][1],
+                'elements'=>"round,oval,cushion,pear,princess,emerald,marquise,asscher,radiant,heart",
+                'advance'=>"0",
+                'dependent'=>"0",
+                'input'=>"icon_text",
+                'column_width'=> "100",
+                'order'=>"0",
+                'template'=>'sc2',
+                'help'=>0,
+                'help_text'=>'',
+                'enabled'=>1
+            );
+        }
 		if(!empty($__cat__['eo_ring_style_cat'])){
 			$this->filter['s_fconfig'][]=array(
                 'name'=>$__cat__['eo_ring_style_cat'][0],
@@ -1087,7 +1337,8 @@ class Filter_Samples {
                 'enabled'=>1
             );
 		}
-		if(!empty($__cat__['eo_metal_cat'])){
+        /*commentd on 25-08-23 jayre update sampel data kary teyr*/
+		/*if(!empty($__cat__['eo_metal_cat'])){
 			$this->filter['s_fconfig'][]=array(
                 'name'=>$__cat__['eo_metal_cat'][0],
                 'type'=>"0",
@@ -1102,7 +1353,23 @@ class Filter_Samples {
                 'help_text'=>'',
                 'enabled'=>1
             );
-		}
+		}*/
+        if(!empty($__att__['eo_metal_attr'])){
+            $this->filter['s_fconfig'][]=array(
+                'name'=>'pa_'.$__att__['eo_metal_attr'][0],
+                'type'=>"0",
+                'label'=>$__att__['eo_metal_attr'][1],
+                'advance'=>"0",
+                'dependent'=>"0",
+                'input'=>"icon",
+                'column_width'=> "50",
+                'order'=>"2",
+                'template'=>'sc2',
+                'help'=>0,
+                'help_text'=>'',
+                'enabled'=>1
+            );
+        }
 		
 		return $this->filter;	
 	}
@@ -1113,7 +1380,8 @@ class Filter_Samples {
 
 		$this->filter=array();
 		//Filters for settings....
-		if(!empty($__cat__['eo_setting_shape_cat'])){
+        /*commentd on 25-08-23 jayre update sampel data kary teyr*/
+		/*if(!empty($__cat__['eo_setting_shape_cat'])){
 			$this->filter['s_fconfig'][]=array(
                 'name'=>$__cat__['eo_setting_shape_cat'][0],
                 'type'=>"0",
@@ -1128,7 +1396,24 @@ class Filter_Samples {
                 'help_text'=>'Shape of diamond supported by the setting',
                 'enabled'=>1
             );
-		}
+		}*/
+        if(!empty($__att__['eo_shape_attr'])){
+            $this->filter['s_fconfig'][]=array(
+                'name'=>'pa_'.$__att__['eo_shape_attr'][0],
+                'type'=>"0",
+                'label'=>$__att__['eo_shape_attr'][1],
+                'elements'=>"round,oval,cushion,pear,princess,emerald,marquise,asscher,radiant,heart",
+                'advance'=>"0",
+                'dependent'=>"0",
+                'input'=>"icon_text",
+                'column_width'=> "100",
+                'order'=>"0",
+                'template'=>'sc3',
+                'help'=>1,
+                'help_text'=>'Shape of diamond supported by the setting',
+                'enabled'=>1
+            );
+        }
 		if(!empty($__cat__['eo_ring_style_cat'])){
 			$this->filter['s_fconfig'][]=array(
                 'name'=>$__cat__['eo_ring_style_cat'][0],
@@ -1145,7 +1430,8 @@ class Filter_Samples {
                 'enabled'=>1
             );
 		}
-		if(!empty($__cat__['eo_metal_cat'])){
+        /*commentd on 25-08-23 jayre update sampel data kary teyr*/
+		/*if(!empty($__cat__['eo_metal_cat'])){
 			$this->filter['s_fconfig'][]=array(
                 'name'=>$__cat__['eo_metal_cat'][0],
                 'type'=>"0",
@@ -1160,7 +1446,23 @@ class Filter_Samples {
                 'help_text'=>'Setting metal',
                 'enabled'=>1
             );
-		}
+		}*/
+        if(!empty($__att__['eo_metal_attr'])){
+            $this->filter['s_fconfig'][]=array(
+                'name'=>'pa_'.$__att__['eo_metal_attr'][0],
+                'type'=>"0",
+                'label'=>$__att__['eo_metal_attr'][1],
+                'advance'=>"0",
+                'dependent'=>"0",
+                'input'=>"icon",
+                'column_width'=> "50",
+                'order'=>"2",
+                'template'=>'sc3',
+                'help'=>1,
+                'help_text'=>'Setting metal',
+                'enabled'=>1
+            );
+        }
 		
 		return $this->filter;
 	}
@@ -1171,7 +1473,8 @@ class Filter_Samples {
 
 		$this->filter=array();
 		//Filters for settings....
-		if(!empty($__cat__['eo_setting_shape_cat'])){
+        /*commentd on 25-08-23 jayre update sampel data kary teyr*/
+		/*if(!empty($__cat__['eo_setting_shape_cat'])){
 			$this->filter['s_fconfig'][]=array(
                 'name'=>$__cat__['eo_setting_shape_cat'][0],
                 'type'=>"0",
@@ -1186,7 +1489,24 @@ class Filter_Samples {
                 'help_text'=>'Shape of diamond supported by the setting',
                 'enabled'=>1
             );
-		}
+		}*/
+        if(!empty($__att__['eo_shape_attr'])){
+            $this->filter['s_fconfig'][]=array(
+                'name'=>'pa_'.$__att__['eo_shape_attr'][0],
+                'type'=>"0",
+                'label'=>"Shape",    //$__att__['eo_shape_attr'][1],
+                'elements'=>"round,oval,cushion,pear,princess,emerald,marquise,asscher,radiant,heart",
+                'advance'=>"0",
+                'dependent'=>"0",
+                'input'=>"icon_text",
+                'column_width'=> "50",
+                'order'=>"0",
+                'template'=>'sc4',
+                'help'=>1,
+                'help_text'=>'Shape of diamond supported by the setting',
+                'enabled'=>1
+            );
+        }
 		if(!empty($__cat__['eo_ring_style_cat'])){
 			$this->filter['s_fconfig'][]=array(
                 'name'=>$__cat__['eo_ring_style_cat'][0],
@@ -1203,7 +1523,8 @@ class Filter_Samples {
                 'enabled'=>1
             );
 		}
-		if(!empty($__cat__['eo_metal_cat'])){
+        /*commentd on 25-08-23 jayre update sampel data kary teyr*/
+		/*if(!empty($__cat__['eo_metal_cat'])){
 			$this->filter['s_fconfig'][]=array(
                 'name'=>$__cat__['eo_metal_cat'][0],
                 'type'=>"0",
@@ -1218,8 +1539,24 @@ class Filter_Samples {
                 'help_text'=>'Setting metal',
                 'enabled'=>1
             );
-		}
-		
+		}*/
+		if(!empty($__att__['eo_metal_attr'])){
+            $this->filter['s_fconfig'][]=array(
+                'name'=>'pa_'.$__att__['eo_metal_attr'][0],
+                'type'=>"0",
+                'label'=>$__att__['eo_metal_attr'][1],
+                'advance'=>"0",
+                'dependent'=>"0",
+                'input'=>"icon",
+                'column_width'=> "50",
+                'order'=>"2",
+                'template'=>'sc4',
+                'help'=>1,
+                'help_text'=>'Setting metal',
+                'enabled'=>1
+            );
+        }
+
 		return $this->filter;
 	}
 
@@ -1229,11 +1566,29 @@ class Filter_Samples {
 
         $this->filter=array();
         //Filters for settings....
-        if(!empty($__cat__['eo_setting_shape_cat'])){
+        /*commentd on 25-08-23 jayre update sampel data kary teyr*/
+        /*if(!empty($__cat__['eo_setting_shape_cat'])){
             $this->filter['s_fconfig'][]=array(
                 'name'=>$__cat__['eo_setting_shape_cat'][0],
                 'type'=>"0",
                 'label'=>$__cat__['eo_setting_shape_cat'][1],
+                'advance'=>"0",
+                'dependent'=>"0",
+                'input'=>"icon_text",
+                'column_width'=> "31.25",
+                'order'=>"0",
+                'template'=>'sc3',
+                'help'=>1,
+                'help_text'=>'Shape of diamond supported by the setting',
+                'enabled'=>1
+            );
+        }*/
+        if(!empty($__att__['eo_shape_attr'])){
+            $this->filter['s_fconfig'][]=array(
+                'name'=>'pa_'.$__att__['eo_shape_attr'][0],
+                'type'=>"0",
+                'label'=>$__att__['eo_shape_attr'][1],
+                'elements'=>"round,oval,cushion,pear,princess,emerald,marquise,asscher,radiant,heart",
                 'advance'=>"0",
                 'dependent'=>"0",
                 'input'=>"icon_text",
@@ -1261,11 +1616,28 @@ class Filter_Samples {
                 'enabled'=>1
             );
         }
-        if(!empty($__cat__['eo_metal_cat'])){
+        /*commentd on 25-08-23 jayre update sampel data kary teyr*/
+        /*if(!empty($__cat__['eo_metal_cat'])){
             $this->filter['s_fconfig'][]=array(
                 'name'=>$__cat__['eo_metal_cat'][0],
                 'type'=>"0",
                 'label'=>$__cat__['eo_metal_cat'][1],
+                'advance'=>"0",
+                'dependent'=>"0",
+                'input'=>"icon",
+                'column_width'=> "31.25",
+                'order'=>"2",
+                'template'=>'sc3',
+                'help'=>1,
+                'help_text'=>'Setting metal',
+                'enabled'=>1
+            );
+        }*/
+        if(!empty($__att__['eo_metal_attr'])){
+            $this->filter['s_fconfig'][]=array(
+                'name'=>'pa_'.$__att__['eo_metal_attr'][0],
+                'type'=>"0",
+                'label'=>$__att__['eo_metal_attr'][1],
                 'advance'=>"0",
                 'dependent'=>"0",
                 'input'=>"icon",

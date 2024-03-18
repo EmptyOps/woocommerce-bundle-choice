@@ -26,8 +26,9 @@ class Product_Question {
     function eowbc_askq_button() {
         if(empty($this->button_drawn)){
             $this->button_drawn = true;
-            wbc()->load->asset('css','fomantic/semantic.min');
-            wbc()->load->asset('js','fomantic/semantic.min');
+            // wbc()->load->asset('css','fomantic/semantic.min');
+            // wbc()->load->asset('js','fomantic/semantic.min');
+            wbc()->load->built_in_asset('semantic');
             $product_id = get_the_ID();
             wbc()->load->template('publics/product_question',compact(array('product_id')));
         }

@@ -30,6 +30,8 @@ class Feed extends \eo\wbc\controllers\publics\Controller{
 
         if(self::instance()->should_load_options_view()) {
             
+            define('SP_VARIATIONS_LOADED', true);
+            
             // if( wbc()->sanitize->get('is_test') == 2 ) {
             //     wbc()->common->var_dump( "wbc feed init if");
             // }
@@ -162,7 +164,7 @@ class Feed extends \eo\wbc\controllers\publics\Controller{
             }
 
         } else{
-            \eo\wbc\controller\publics\Feed::instance()->getUI();
+            \eo\wbc\controller\publics\Feed::instance()->getUI(null);
         }
     }
 

@@ -128,6 +128,11 @@ if( !class_exists('\\eo\wbc\model\data_model\SP_WBC_Data_Layer') ) {
 
 		public static function to_column_names($map_fields, $sp_eids=null) {
 
+			if(wbc()->sanitize->get('is_test') == 1) {
+			
+				wbc_pr("SP_WBC_Data_Layer to_column_names 11");
+			}
+
 			//debug_print_backtrace();
 	    	$column_names = self::to_column_names_schema($map_fields,$sp_eids/*,$column_names*/);
 

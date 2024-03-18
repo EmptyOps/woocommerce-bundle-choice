@@ -244,20 +244,43 @@ class WBC_WP {
         return $registration_only;
     }
 
-    public function wbc_is_plugin_active( $plugin_slug ) {
+    public function wbc_is_plugin_active( $plugin_root_file_relative_path ) {
 
         // NOTE: here if for certain plugin the check is better and reliable by detecting their class then we can simply apply those if condition by checking the plugin slug and the everything else will be based on the wp api. but ya if that is ever required otherwise we can simply rely on the wp-api as long as that is available and reliable. 
-        
+
         // NOTE: we will always use plugin slug for such condition creation. or the most reliable and simpest method to check if certain plugin is active by passing their slug so we would need to create the applicable function in the wp helper.
 
-        
-        // ACTIVE_TODO implement based on  plugin slug -- to h
-        return is_plugin_active( $plugin );
+        return is_plugin_active( $plugin_root_file_relative_path );
     }
 
     public function wbc_attachment_url_to_postid( $attachment_url ) {
 
         return attachment_url_to_postid( $attachment_url );
+    }
+
+    public function get_user_role_types() {
+
+        return wp_roles()->get_names();
+    }
+
+    /** 
+     * 
+     * reference https://stackoverflow.com/a/10085775 
+     * 
+     * This method is not applicable if I have two or more roles added in a user, the reason is it only return single or first role that is being added to the user, shifted using array_shift PHP function.
+     * 
+     * 
+     * Note that $current_user always exist and by default is filled with empty attributes, so although this code looks like you'll get object access and index problems, it actually works. The returned role for a new visitor will be NULL. 
+     * 
+     */
+    public function get_current_user_role() {
+
+        global $current_user;
+
+        $user_roles = $current_user->roles;
+        $user_role = array_shift($user_roles);
+
+        return $user_role;
     }
 
     public function attachment_id_to_url($attachment_id) {

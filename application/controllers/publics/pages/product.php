@@ -2,7 +2,8 @@
 namespace eo\wbc\controllers\publics\pages;
 defined( 'ABSPATH' ) || exit;
 
-class Product {
+
+class Product extends \eo\wbc\system\core\publics\Eowbc_Base_Model_Publics {
 
     private static $_instance = null;
 
@@ -121,11 +122,14 @@ class Product {
                              event.preventDefault();
                     },false);
 
-                    let sp_add_to_cart_dots = 1
-                    let sp_add_to_cart_dots_interval = window.setInterval(function(){
+                    // let sp_add_to_cart_dots = 1
+                    var sp_add_to_cart_dots = 1
+                    // let sp_add_to_cart_dots_interval = window.setInterval(function(){
+                    var sp_add_to_cart_dots_interval = window.setInterval(function(){
                         
                         if(jQuery('#eo_wbc_add_to_cart,#eo_wbc_add_to_cart_preview').length>0) {                        
                             window.clearInterval(sp_add_to_cart_dots_interval);
+
                         } else {
                             if(sp_add_to_cart_dots>3) {
                                 sp_add_to_cart_dots = 1;
@@ -201,7 +205,7 @@ class Product {
 
             if(!empty($second) and !empty($first) and ($id === $second_parent->get_id()) ) {                
                 //return $first->get_title()." <br/> ".$second->get_title();
-                return "<span class='wcp_preview_first_product_title'>".esc_html($first->get_title())." - ".wc_price($first->get_price())."</span><br/><span class='wcp_preview_second_product_title'>".esc_html($second->get_title())." - ". wc_price($second->get_price()).'</span>';
+                return "<span class='wcp_preview_first_product_title'>".esc_html($first->get_title())." : ".wc_price($first->get_price())."</span><br/><span class='wcp_preview_second_product_title'>".esc_html($second->get_title())." : ". wc_price($second->get_price()).'</span>';
             } else {
                 return $title;
             }
@@ -217,7 +221,7 @@ class Product {
                 $second_parent_var_id = !empty($second_parent) and wbc()->wc->is_variation_object($second_parent) ? $second_parent->get_parent_id() : $second_parent->get_id();
 
                 if( $product_var_id === $second_parent_var_id ) {
-                    return wc_price( $first->get_price() + $second->get_price() );
+                    return "<span>Total Price : </span>".wc_price( $first->get_price() + $second->get_price() );
                 }
             } 
             return $price;
@@ -342,6 +346,10 @@ class Product {
             if(false){
             ?>
                 <script type="text/javascript">
+
+                    // ACTIVE_TODO it is added on 04-03-2024. to ensure that woocommerce variable is created atleast with the empty object so that show variation is fired normally on the preview page. however during the wbc upgrade we need to make sure that fundamental add to cart button rendering does happen or maybe we can not do that but do something that is possible so that we do not need rely on a hack like below. -- to h 
+                    wc_add_to_cart_variation_params = {}
+
                     jQuery(".single_add_to_cart_button.button.alt").ready(function(){
 
                         jQuery('form.cart').prepend("<input type='hidden' name='eo_wbc_add_to_cart_preview' value='1'/>");
@@ -363,11 +371,27 @@ class Product {
                                     $url = $url."&".$get_link;
                                 }
                             ?>
-                            window.location.href = '<?php echo $url; ?>';
+                            
+                            
+                            var url = '<?php echo $url; ?>';
+                            
+                            if(!window.document.splugins.common.is_empty(jQuery('#eo_wbc_add_to_cart_preview').data('url_extra_callback'))){
+
+                                url = window[jQuery('#eo_wbc_add_to_cart_preview').data('url_extra_callback')](url);
+                            }
+
+                            if (!window.document.splugins.common.is_empty(url)) {
+                                
+                                // console.log('ddddddddddd');
+                                // console.log(url);
+                                window.location.href = url;
+                            }
+
                             return false;
                         });
 
                         // jQuery("table.variations").remove();
+
                     });
                 </script>
             <?php
@@ -385,8 +409,10 @@ class Product {
             } else {
                 $url = $url."&".$get_link;
             }
-            
+
             $inline_script = 
+                "// ACTIVE_TODO it is added on 04-03-2024. to ensure that woocommerce variable is created atleast with the empty object so that show variation is fired normally on the preview page. however during the wbc upgrade we need to make sure that fundamental add to cart button rendering does happen or maybe we can not do that but do something that is possible so that we do not need rely on a hack like below. -- to h \n" .
+                "wc_add_to_cart_variation_params = {}\n" .
                 "jQuery(\".single_add_to_cart_button.button.alt\").ready(function(){\n" .
                 "\n" .
                 "    jQuery('form.cart').prepend(\"<input type='hidden' name='eo_wbc_add_to_cart_preview' value='1'/>\");\n" .
@@ -492,7 +518,10 @@ class Product {
             //adding set to the woocommerce cart
             $cart_details=wbc()->session->get('EO_WBC_SETS');
            
-           
+            // ACTIVE_TODO aa temporary patch chhe jyare woo-bundle-choice upgrade thai tyre a ppom no patch nai rey and woocomersh no built in support ena thij ppom ne eva plugin work kerva joye, evu upgrade nu implementation thavu joye, pashi a problem mate apdey patch handel kervano nai ave. -- to h
+                // ACTIVE_TODO and below hook is also temporary so remove it as sun as this patch is removed as menshened above. -- to h 
+            do_action('sp_ppom_patch_temp_hook_before_add_to_cart',$cart_details);
+
             if(!empty($cart_details['FIRST']) && !empty($cart_details['SECOND'])){
                 $FIRT_CART_ID=wc()->cart->add_to_cart(
                                 $cart_details['FIRST'][0],
@@ -800,12 +829,16 @@ class Product {
         $redirect_url = $this->eo_wbc_product_route();
         wbc()->theme->load('css','product');
         wbc()->theme->load('js','product');
-        /*Hide sidebar and make content area full width.*/
-        if(apply_filters('eowbc_filter_sidebars_widgets',true)){
-            /*add_filter( 'sidebars_widgets',function($sidebars_widgets ) {
-                return array( false );
-            });    */
-        }
+
+        // chenged on 30-09-2023
+        // /*Hide sidebar and make content area full width.*/
+        // if(apply_filters('eowbc_filter_sidebars_widgets',true)){
+        //     /*add_filter( 'sidebars_widgets',function($sidebars_widgets ) {
+        //         return array( false );
+        //     });    */
+        // }
+        parent::instance()->sidebars_widgets();
+
         
         if(false){        
         ob_start();
@@ -910,8 +943,9 @@ class Product {
                     <?php if(!empty(wbc()->options->get_option('appearance_product_page','product_page_add_to_basket',''))) :?>
                         
                         window.wbc_atb_submin_form = function(){
-                            jQuery('form.cart').attr('action',document.location.href);
-                            jQuery('form.cart').submit();
+                            // jQuery('form.cart').attr('action',document.location.href);
+                            // jQuery('form.cart').submit();
+                            window.document.splugins.single_product.wbc_atb_submin_form();
                         }
 
                         jQuery(".single_add_to_cart_button.alt:not(.disabled):eq(0)").replaceWith('<div class=\"ui buttons\">'+
@@ -1117,8 +1151,12 @@ class Product {
                     return $url;
                 }
                 
-                return header("Location: {$url}");
-                wp_die();
+                // changed on 08-09-2023
+                // return header("Location: {$url}");
+                // wp_die();
+                header("Location: {$url}");
+                echo '<script type="text/javascript"> window.location.href = "'. $url .'"; </script>';
+                return;
                 //wp_safe_redirect($url ,301 );               
             } else {
                 
@@ -1253,9 +1291,11 @@ class Product {
                 if( isset($eo_wbc_sets['SECOND'][2]) ) {
 
                     if(strpos($url,'?')===false) {
-                        $url = $url.'?variation_id='.$eo_wbc_sets['SECOND'][2];
+                        // $url = $url.'?variation_id='.$eo_wbc_sets['SECOND'][2];
+                        $url = $url.'?'.wbc_get_variation_url_part($eo_wbc_sets['SECOND'][2],$eo_wbc_sets['SECOND']['variation']);
                     } else {
-                        $url = $url.'&variation_id='.$eo_wbc_sets['SECOND'][2];
+                        // $url = $url.'&variation_id='.$eo_wbc_sets['SECOND'][2];
+                        $url = $url.'&'.wbc_get_variation_url_part($eo_wbc_sets['SECOND'][2],$eo_wbc_sets['SECOND']['variation']);
                     }
                 }
             }
@@ -1346,10 +1386,11 @@ class Product {
                         
             if(!empty($terms) and is_array($terms)){
                 $terms =array_filter(array_map(function($map) use(&$terms,&$map_column,&$product_code,&$product_in){
-                    
+
                     if(array_intersect($terms,$map[$map_column])){
-                        if($map_column == 0) return $map[1];
-                        else return $map[0];
+                        
+                        if($map_column == 0) return array($map[1], $map['second_filter_query_type'], isset($map['1_1']) ? $map['1_1'] : null);
+                        else return array($map[0], $map['first_filter_query_type'], isset($map['0_1']) ? $map['0_1'] : null);
                     } elseif(in_array( $product_code, $map[$map_column] )) {                    
                         if($map_column == 0){
                             $product_in = array_merge( $product_in, $map[1] );
@@ -1367,11 +1408,27 @@ class Product {
 
         $category=array();//array to hold category slugs
         $taxonomy=array();//array to hold taxonomy slugs
+        $taxonomy_related_data=array();
         if(!is_wp_error($terms) and !empty($terms) and is_array($terms)) {
-            array_walk($terms,function($term) use(&$category,&$taxonomy){
+            array_walk($terms,function($term) use(&$category,&$taxonomy,&$taxonomy_related_data){
+                
+                $filter_query_type = $term[1];
+                $range = $term[2];
+                $term = $term[0];
+
+                // if( wbc()->sanitize->get('is_test') == 1 ) {
+
+                //     wbc_pr("product.php eo_wbc_category_link");
+                //     wbc_pr($filter_query_type);
+                //     wbc_pr($term);
+                // }
+                
                 $_term_ = null;
                 if(is_array($term)) {
                     foreach ($term as $_term_) {
+
+                        $term_taxonomy_id = $_term_;
+
                         $_term_ = wbc()->wc->get_term_by('term_taxonomy_id', $_term_);
                         if(!is_wp_error($_term_) and !empty($_term_)) {
                             $_taxonomy_ = $_term_->taxonomy;                            
@@ -1382,6 +1439,18 @@ class Product {
                             } elseif( substr($_taxonomy_,0,3) =='pa_' ) {
 
                                 $taxonomy[substr($_term_->taxonomy,3)][] = $_term_->slug;
+
+                                $taxonomy_related_data[substr($_term_->taxonomy,3)]['filter_query_type'] = $filter_query_type;
+
+                                if( !isset($taxonomy_related_data[substr($_term_->taxonomy,3)]['filter_range']) ) {
+
+                                    $taxonomy_related_data[substr($_term_->taxonomy,3)]['filter_range'] = array();
+                                }
+
+                                if( is_array($range) && in_array($term_taxonomy_id, $range) ) {
+
+                                    $taxonomy_related_data[substr($_term_->taxonomy,3)]['filter_range'][] = $_term_->slug;
+                                }
                             }
                         }
                     }
@@ -1397,6 +1466,18 @@ class Product {
                         } elseif( substr($_taxonomy_,0,3) =='pa_' ) {
                             
                             $taxonomy[substr($_term_->taxonomy,3)][] = $_term_->slug;
+
+                            $taxonomy_related_data[substr($_term_->taxonomy,3)]['filter_query_type'] = $filter_query_type;
+                            
+                            if( !isset($taxonomy_related_data[substr($_term_->taxonomy,3)]['filter_range']) ) {
+
+                                $taxonomy_related_data[substr($_term_->taxonomy,3)]['filter_range'] = array();
+                            }
+
+                            if( is_array($range) && in_array($term_taxonomy_id, $range) ) {
+
+                                $taxonomy_related_data[substr($_term_->taxonomy,3)]['filter_range'][] = $_term_->slug;
+                            }
                         }
                     }
                 }
@@ -1439,19 +1520,43 @@ class Product {
                     /*$this->first_category_slug*/;                    
         }
 
-        $link.="/?";           
+        $link.="/?";       
+
+        if(is_array($category) && !empty($category)) {              
+            $link .= '__mapped_categories='.implode( ',' , $category ).'&';
+        } 
+        
         if(is_array($taxonomy) && !empty($taxonomy)){            
-            
+
+            // TODO/NOTE: even though below changes are confirmed with all affecting layers but still if there are regression effects and especially the exist in query do not work on our sp query class than we may need to add if condition there by using the below option of the mapping pref or something such. the changes are made on 12-07-2023.             
             $filter_query=array();
             // $attr_pref=get_option('eo_wbc_map_attr_pref','or');
             $attr_pref=wbc()->options->get_option('mapping_prod_mapping_pref','prod_mapping_pref_attribute','or');
             $glue=($attr_pref === 'or' ? ',' : '+' );           
 
+            $_attribute_param_str = "";
+
             foreach ($taxonomy as  $_tax => $_tems) {
-                $filter_query["query_type_{$_tax}"] = $attr_pref;
-                $filter_query["filter_{$_tax}"] = implode($glue,array_unique(array_filter($_tems)));
+
+                // $filter_query["query_type_{$_tax}"] = $attr_pref;
+                // $filter_query["filter_{$_tax}"] = implode($glue,array_unique(array_filter($_tems)));
+                $_attribute_param_str .= "pa_" . $_tax . ",";
+
+                if($taxonomy_related_data[$_tax]['filter_query_type'] == 'options') {
+
+                    $filter_query["checklist_pa_{$_tax}"] = implode($glue,array_unique(array_filter($_tems)));
+                } else {
+
+                    $filter_query["min_pa_{$_tax}"] = $taxonomy_related_data[$_tax]['filter_range'][0];
+                    $filter_query["max_pa_{$_tax}"] = $taxonomy_related_data[$_tax]['filter_range'][1];
+                }
             }
-            $link.=http_build_query($filter_query).'&';            
+
+            $filter_query["_attribute"] = rtrim($_attribute_param_str, ',');
+
+            $filter_query["__mapped_attribute"] = rtrim($_attribute_param_str, ',');
+
+            $link.=http_build_query($filter_query).'&';               
         }    
 
         if(!empty($product_in) && is_array($product_in)) {
@@ -1459,7 +1564,15 @@ class Product {
             $product_in = array_map(function($product_in){ return substr($product_in,4); },$product_in);
 
             $link.='products_in='.implode(',',$product_in).'&';
-        }             
+        }   
+
+        // if( wbc()->sanitize->get('is_test') == 1 ) {
+
+        //     wbc_pr("product.php eo_wbc_category_link 1");
+        //     wbc_pr($link);
+        //     die();
+        // }   
+
         return $link;
     }
 
