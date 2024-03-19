@@ -1727,21 +1727,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
     var input_type_button_click_listener = function() {
 
-<<<<<<< HEAD
-    	console.log('filters [input_type_button_click_listener]');
-    	console.log('[data-filter-slug="'+ _this.sub_configs.filter_slug +'"]');
-    	console.log(jQuery('[data-filter-slug="'+ _this.sub_configs.filter_slug +'"]'));
-
-    	// --- aa code woo-bundle-choice/application/model/publics/component/eowbc_filter_widget.php input_button(); mathi move karyo se @a ---
-    	// --- start ---
-		// $('[data-filter-slug="<?php echo $filter['slug']; ?>"]').on('click',function(event){
-		jQuery('[data-filter-slug="'+ _this.sub_configs.filter_slug +'"]').on('click',function(event){
-    		
-    		console.log('filters [input_type_button_click_listener] 01');
-    		on_input_type_button_click(event, this);
-=======
    		console.log('input_type_button_click_listener()');
->>>>>>> fa937341496810dc75fcd52217f7643fee9907d2
 
     	if(typeof(EO_WBC_FILTER_INPUT_BUTTON_FILTER_SLUG) != typeof(undefined) && !window.document.splugins.common.is_empty(EO_WBC_FILTER_INPUT_BUTTON_FILTER_SLUG)) {
     		
@@ -1836,13 +1822,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
     var on_input_type_button_click = function(event, element, term_slug) {
 
-<<<<<<< HEAD
-    	console.log('filters [on_input_type_button_click]');
-    	
-    	input_type_button_click(event, element);
-=======
     	input_type_button_click(event, element, term_slug);
->>>>>>> fa937341496810dc75fcd52217f7643fee9907d2
     };
 	    
     var reset_click = function(form_selector) {
@@ -2611,21 +2591,10 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
     var input_type_button_click = function(event, element, term_slug) {
 
-<<<<<<< HEAD
-    	console.log('filters [input_type_button_click]');
-    	console.log(element);
-
-		var filter_target;
-
-		// <?php if($filter_type==1): ?>
-		// if(_this.sub_configs.filter_type==1) {
-		if(jQuery(/*this*/element).attr('data-filter-type')==1) {
-=======
 		var button_filter_type = jQuery(/*this*/element).attr('data-type');
 		let filter_target;
 		// <?php if($filter_type==1): ?>
 		if(/*_this.sub_configs.filter_type*/button_filter_type==1) {
->>>>>>> fa937341496810dc75fcd52217f7643fee9907d2
 			
 			// let filter_target = jQuery('form#<?php echo $this->filter_prefix; ?>eo_wbc_filter [name="_attribute"]');
 			filter_target = jQuery('form#'+ _this.sub_configs.filter_prefix +'eo_wbc_filter [name="_attribute"]');

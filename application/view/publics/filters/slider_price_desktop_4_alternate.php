@@ -5,17 +5,10 @@
 */
 
 ?>
-<<<<<<< HEAD
 <div class="<?php echo esc_attr($width_class); ?>">
 	<p style="display: inline-block; margin-top: 0.25em;" class="ui three wide field num_slider">
-		<span class="ui header">Price</span><?php if($reset): ?>
-			&nbsp; <span class="ui grey text" style="cursor: pointer;" onclick="reset_price(event,'<?php echo esc_attr($min); ?>','<?php echo esc_attr($max); ?>')">&nbsp;<u><?php esc_html(spext_lang("reset", 'woo-bundle-choice')); ?></u></span>
-=======
-<div class="<?php echo $width_class; ?>">
-	<p style="display: inline-block;margin-top: 0.25em;"class="ui three wide field num_slider">
 		<span class="ui header"><?php echo wbc()->options->get_option('appearance_filters','appearance_filters_price_filter_title_text','Price',false,true);?></span><?php if($reset): ?>
-			&nbsp; <span class="ui grey text" style="cursor: pointer;" onclick="reset_price(event,'<?php echo $min; ?>','<?php echo $max; ?>')">&nbsp;<u><?php echo spext_lang("reset", 'woo-bundle-choice'); ?></u></span>
->>>>>>> fa937341496810dc75fcd52217f7643fee9907d2
+			&nbsp; <span class="ui grey text" style="cursor: pointer;" onclick="reset_price(event,'<?php echo esc_attr($min); ?>','<?php echo esc_attr($max); ?>')">&nbsp;<u><?php esc_html(spext_lang("reset", 'woo-bundle-choice')); ?></u></span>
 			<?php endif; ?>
 	</p>
 	<div style="display: inline-block;" class="field twelve ui wide">

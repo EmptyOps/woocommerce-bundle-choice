@@ -11,11 +11,7 @@
 		&nbsp; <span class="ui grey text" style="cursor: pointer;">&nbsp;<i class="question circle outline icon" data-help="<?php esc_attr_e($help); ?>"></i></span>
 		<?php endif; ?>
 		<?php if($reset): ?>
-<<<<<<< HEAD
 		&nbsp; <span class="ui grey text" style="cursor: pointer;" onclick="reset_slider(event,'<?php echo esc_attr($filter['slug']); ?>',0,<?php echo ecs_attr(count(array_filter($items_slug))); ?>)">&nbsp;<u><?php esc_html(spext_lang("reset", 'woo-bundle-choice')) ?></u></span>
-=======
-		&nbsp; <span class="ui grey text" style="cursor: pointer;" onclick="reset_slider(event,'<?php echo $filter['slug'] ?>',0,<?php echo count(array_filter($items_slug)); ?>)">&nbsp;<u><?php echo spext_lang("reset", 'woo-bundle-choice'); ?></u></span>
->>>>>>> fa937341496810dc75fcd52217f7643fee9907d2
 		<?php endif; ?>
 	</div>
 	<div style="display: inline-block;" class="field twelve ui wide">
