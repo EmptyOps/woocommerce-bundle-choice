@@ -4001,9 +4001,9 @@ add_action('wp_footer',function(){
 			 "                })( jQuery, window, document );\n" .
 			 "            },1000);\n" .
 			 "        }\n" .
-			 "    });\n" .
+			 "    });\n" 
 			:
-        	"".
+        	""
 		) .
     "\n";
 

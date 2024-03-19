@@ -2296,7 +2296,7 @@ class EOWBC_Filter_Widget {
 				});
 			</script>
 		<?php
-		}
+		
 		$inline_script = 
 		    "jQuery(document).ready(function(\$){\n" .
 		    "    // --- aa code woo-bundle-choice/asset/js/publics/eo_wbc_filter.js input_type_button_click(); ma move karyo se @a---\n" .
