@@ -2215,6 +2215,8 @@ add_action('wp_footer',function(){
    </script>
   	<?php
   	}
+<?php
+	if (defined('SP_VARIATIONS_LOADED') && SP_VARIATIONS_LOADED == true) { ?>	
   	$inline_script = 
 	"console.log('[js.vars.asset wp_footer]');\n" .
 	"// console.log(\"js.vras.asset outer ready event\");\n" .
@@ -3998,6 +4000,7 @@ add_action('wp_footer',function(){
 /*}, PHP_INT_MAX);*/
 // -- aya priority PHP_INT_MAX hoy to under nu add_inline_script function work notu kartu @a 02-02-2024
 }, 10);
-
+<?php	    	
+	} ?>
 
 ?>
