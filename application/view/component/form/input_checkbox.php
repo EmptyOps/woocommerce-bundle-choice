@@ -94,7 +94,7 @@ if(!empty($id) /*and !empty($label)*/){
 		if(!empty($options) and is_array($options)): 
 			foreach ($options as $checkbox_key => $checkbox_value) : ?>
 				<div class="ui fitted checkbox <?php echo !empty($class) ? esc_attr($class) : ''; ?>">
-					<input type="checkbox" name="<?php echo esc_attr($checkbox_key); ?>" id="<?php echo esc_attr($checkbox_key); ?>" <?php echo (!empty($value) && in_array($checkbox_key, $value)) ? 'checked="checked"' : ''; ?> <?php echo isset($options_attrs[$checkbox_key]) ? esc_attr(sanitize_text_field(implode(' ', $options_attrs[$checkbox_key]))) : ''; ?> value="<?php echo esc_attr($checkbox_key); ?>">
+					<input type="checkbox" name="<?php echo esc_attr($checkbox_key); ?>" id="<?php echo esc_attr($checkbox_key); ?>" <?php echo (!empty($value) && in_array($checkbox_key, $value)) ? 'checked="checked"' : ''; ?> <?php echo isset($options_attrs[$checkbox_key]) ? /*esc_attr(*/sanitize_text_field(implode(' ', $options_attrs[$checkbox_key]))/*)*/ : ''; ?> value="<?php echo esc_attr($checkbox_key); ?>">
 					<label><?php echo esc_html($checkbox_value); ?></label>
 				</div>
 		
