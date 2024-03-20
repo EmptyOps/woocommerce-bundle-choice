@@ -4005,7 +4005,7 @@ add_action('wp_footer',function(){
 			:
         	""
 		) .
-    "\n";
+    "\n".
 
 	"});\n";
 

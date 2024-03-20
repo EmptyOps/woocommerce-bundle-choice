@@ -3739,10 +3739,10 @@ class EOWBC_Filter_Widget {
 			"        jQuery(\"#help_modal\").find(\".content\").html('');\n" .
 			"        _help_text = jQuery(this).data('help');\n" .
 			"        jQuery(\"#help_modal\").find(\".content\").html(_help_text);\n" .
-			"        jQuery(\"#help_modal\").modal('show');\n" .
+			"        jQuery(\"#help_modal\").semanticModal('show');\n" .
 			"    });\n" .
 			"    jQuery(document).on('click', \"#help_modal .close.icon\", function(){\n" .
-			"        jQuery(\"#help_modal\").modal('hide');\n" .
+			"        jQuery(\"#help_modal\").semanticModal('hide');\n" .
 			"    });\n" .
 			"});";
 
