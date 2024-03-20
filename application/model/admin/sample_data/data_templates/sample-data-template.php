@@ -15322,7 +15322,7 @@ class Sample_Data_Template {
             }
 
             - peramiter conform karva na che
-                -- biji extension call avta hoy to bhai alg alh peramiter na setting hache to may be it is betar k je peramiter pass karvana hoy te data templat mathi  save function call tyai tyre $args argument ma or other wish adishonel peramiter a function ma add kari ne support add karvo padche for example ke save function paramiter 1234 evu kaik -- to h & -- to b
+                -- biji extension call avta hoy to ene bhi alg alg peramiter na settings hache to may be it is betar k je peramiter pass karvana hoy te data templat clas s mathi save function call tyai tyre $args argument ma or otherwise adishonel peramiter aa function ma add kari ne support add karvo padche. for example ke save function paramiter_1,paramiter_2,paramiter_3,paramiter_4 evu kaik -- to h & -- to b
             $res_save = $model_class::instance()->save( \sp\tableview\controller\admin\Admin::get_form_definition() );
 
             if (!empty($res_save['type'])) {
