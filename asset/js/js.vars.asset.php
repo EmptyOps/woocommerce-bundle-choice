@@ -9,6 +9,7 @@ add_action( ( !is_admin() ? 'wp_enqueue_scripts' : 'admin_enqueue_scripts'),func
 	if( wbc()->sanitize->get('is_test') == 1 ) {
 		wbc_pr('js_var_is_loaded');
 	}
+	
 if(false){
 ?>
 

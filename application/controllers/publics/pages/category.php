@@ -536,8 +536,13 @@ class Category {
 
                 \eo\wbc\model\SP_WBC_Ui_Builder::instance()->build($ui,'',true,null, $ui_definition);
 
-                $html2 = '<script> jQuery(document).ready(function($){ $(".ui.button").on("click",function(){ window.location.href=$(this).attr("href"); }); }); </script>';
-                echo($html2);
+                if (false) {
+                    $html2 = '<script> jQuery(document).ready(function($){ $(".ui.button").on("click",function(){ window.location.href=$(this).attr("href"); }); }); </script>';
+                    echo($html2);
+                }
+
+                $inline_script ="jQuery(document).ready(function($){ $(\".ui.button\").on(\"click\",function(){ window.location.href=$(this).attr(\"href\"); }); });";
+                wbc()->load->add_inline_script('', $inline_script, 'common');
 
             }, 9 );
         }
