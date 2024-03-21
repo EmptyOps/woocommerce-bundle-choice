@@ -22,14 +22,14 @@
 <?php
     }
     $custom_css = "
-    .ui.container.unstackable.steps .step:after {
-        display: none !important;
-    }
+        .ui.container.unstackable.steps .step:after {
+            display: none !important;
+        }
 
-    .ui.container.unstackable.steps .step {
-        padding: 2vw;
-        text-align: center !important;
-    }
+        .ui.container.unstackable.steps .step {
+            padding: 2vw;
+            text-align: center !important;
+        }
     ";
     wbc()->load->add_inline_style('', $custom_css,'common');    
 ?>

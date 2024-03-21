@@ -92,10 +92,10 @@ else: ?>
 <?php 
 	}
 	$custom_css = "
-    .eo_wbc_view_error {
-        width: 100%;
-        min-height: 60em;
-    }
+	    .eo_wbc_view_error {
+	        width: 100%;
+	        min-height: 60em;
+	    }
 	";
 	wbc()->load->add_inline_style('', $custom_css,'common');
 endif;
