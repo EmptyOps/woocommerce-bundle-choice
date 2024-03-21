@@ -960,6 +960,7 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 				return '<script type="text/html" id="tmpl-'.$id.'">' . $html . '</script>'; 
 			}
 			
+			wbc()->load->get_inline_script_tag($html,array('id'=>'tmpl-'.$id));
 
 	}
 
