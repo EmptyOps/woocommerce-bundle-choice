@@ -513,8 +513,14 @@ class UI_Builder implements Builder {
 		// wrap with tag as appliable as per the js_templating_lib 
 		if( $js_templating_lib == 'wp' ) {
 
-			return '<script type="text/html" id="tmpl-'.$id.'">' . $html . '</script>'; 
+			if(false){
+
+				return '<script type="text/html" id="tmpl-'.$id.'">' . $html . '</script>'; 
+
+			}
+			wbc()->load->get_inline_script_tag($html,array('id'=>'tmpl-'.$id));
 		}
+
 			
 	}
 
