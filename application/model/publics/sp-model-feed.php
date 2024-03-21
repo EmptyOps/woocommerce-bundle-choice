@@ -247,8 +247,11 @@ class SP_Model_Feed extends SP_Feed {
 
 	public function load_asset(){
 
+			// wbc_pr("SP_Model_Feed load_asset");
+
 		add_action( 'wp_footer'/*'wp_enqueue_scripts'*/ ,function(){
-			
+			// wbc_pr("SP_Model_Feed load_asset wp_footer");
+
 			wbc()->load->asset('css','fomantic/semantic.min');
 			wbc()->load->asset('js','fomantic/semantic.min',array('jquery'));
 

@@ -174,7 +174,7 @@ class Product extends \eo\wbc\system\core\publics\Eowbc_Base_Model_Publics {
 
             if(!empty($second) and !empty($first) and ($id === $second_parent->get_id()) ) {                
                 //return $first->get_title()." <br/> ".$second->get_title();
-                return "<span class='wcp_preview_first_product_title'>".$first->get_title()." - ".wc_price($first->get_price())."</span><br/><span class='wcp_preview_second_product_title'>".$second->get_title()." - ". wc_price($second->get_price()).'</span>';
+                return "<span class='wcp_preview_first_product_title'>".$first->get_title()." : ".wc_price($first->get_price())."</span><br/><span class='wcp_preview_second_product_title'>".$second->get_title()." : ". wc_price($second->get_price()).'</span>';
             } else {
                 return $title;
             }
@@ -190,7 +190,7 @@ class Product extends \eo\wbc\system\core\publics\Eowbc_Base_Model_Publics {
                 $second_parent_var_id = !empty($second_parent) and wbc()->wc->is_variation_object($second_parent) ? $second_parent->get_parent_id() : $second_parent->get_id();
 
                 if( $product_var_id === $second_parent_var_id ) {
-                    return wc_price( $first->get_price() + $second->get_price() );
+                    return "<span>Total Price : </span>".wc_price( $first->get_price() + $second->get_price() );
                 }
             } 
             return $price;
@@ -247,6 +247,10 @@ class Product extends \eo\wbc\system\core\publics\Eowbc_Base_Model_Publics {
                 }
             </style>
             <script type="text/javascript">
+
+                // ACTIVE_TODO it is added on 04-03-2024. to ensure that woocommerce variable is created atleast with the empty object so that show variation is fired normally on the preview page. however during the wbc upgrade we need to make sure that fundamental add to cart button rendering does happen or maybe we can not do that but do something that is possible so that we do not need rely on a hack like below. -- to h 
+                wc_add_to_cart_variation_params = {}
+                                
                 jQuery(".single_add_to_cart_button.button.alt").ready(function(){
 
                     jQuery('form.cart').prepend("<input type='hidden' name='eo_wbc_add_to_cart_preview' value='1'/>");
