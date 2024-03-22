@@ -7,6 +7,7 @@ add_action( 'wp_enqueue_scripts' ,function(){
 		wbc()->load->asset('css','variations/gallery_images/external-plugins/xzoom/xzoom',array(),"",false,true);
 
 		wbc()->load->asset('js','variations/gallery_images/external-plugins/xzoom/xzoom',array(),"",true,true);
+		if(false){
 		?>
 		<script type="text/javascript">
 			(function ($) {
@@ -23,7 +24,22 @@ add_action( 'wp_enqueue_scripts' ,function(){
 			})(jQuery);
 		</script>
 		<?php
+		}
 
+		$inline_script =
+		    "(function (\$) {\n" .
+		    "    // jQuery(document).ready(function() {\n" .
+		    "    document.addEventListener(\"DOMContentLoaded\", function() {         \n" .
+		    "        jQuery('.xzoom3, .xzoom-gallery3').xzoom({position: 'lens', lensShape: 'circle', sourceClass: 'xzoom-hidden'});\n" .
+		    "        jQuery('.xzoom-gallery3').on('click mouseenter mousemove mouseleave',function(){\n" .
+		    "            \n" .
+		    "            jQuery('.xzoom-gallery3.xactive').removeClass('xactive');\n" .
+		    "            jQuery(this).addClass('xactive');\n" .
+		    "        });\n" .
+		    "\n" .
+		    "    });\n" .
+		    "})(jQuery);";
+		wbc()->load->add_inline_script('', $inline_script, 'common');
 	} else { 
 
 		// ---- a code /themes/purple_theme/woocommerce/content-single-product.php no che 
