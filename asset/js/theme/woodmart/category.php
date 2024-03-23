@@ -18,11 +18,12 @@ if(false){
 </script>
 <?php
 }
+$get_link = _e($get_link);
 $inline_script =
     "jQuery(document).ready(function($){\n" .
     "    jQuery('.per-page-variation, .products-view-grid_list .shop-view').off('click');\n" .
     "    jQuery('.per-page-variation, .products-view-grid_list .shop-view').each(function(){\n" .
-    "        \$(this).attr('href',$(this).attr('href')+'&" . "<?php _e(\$get_link); ?>');\n" .
+    "        \$(this).attr('href',$(this).attr('href')+'&" . "$get_link');\n" .
     "    })\n" .
     "});";
 
