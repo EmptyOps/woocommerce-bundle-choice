@@ -43,7 +43,6 @@ class Orders
                     </script>";
                 }
                 $inline_script =
-                    "echo\n" .
                     "if(document.getElementById('order_items_list')){\n" .
                     "    document.getElementById('order_items_list').innerHTML='".call_user_func_array(array(__CLASS__,'eo_wbc_get_sets'),[$sets])."';\n" .
                     "}\n" .
