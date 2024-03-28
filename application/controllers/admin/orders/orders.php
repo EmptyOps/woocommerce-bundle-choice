@@ -42,13 +42,14 @@ class Orders
                         }                        
                     </script>";
                 }
+                $call_user_func_array_eo_wbc_get_sets = call_user_func_array(array(__CLASS__,'eo_wbc_get_sets'),[$sets]);
                 $inline_script =
                     "if(document.getElementById('order_items_list')){\n" .
-                    "    document.getElementById('order_items_list').innerHTML='".call_user_func_array(array(__CLASS__,'eo_wbc_get_sets'),[$sets])."';\n" .
+                    "    document.getElementById('order_items_list').innerHTML='".$call_user_func_array_eo_wbc_get_sets."';\n" .
                     "}\n" .
                     "else\n" .
                     "{\n" .
-                    "    document.getElementById('order_line_items').innerHTML='".call_user_func_array(array(__CLASS__,'eo_wbc_get_sets'),[$sets])."';\n" .
+                    "    document.getElementById('order_line_items').innerHTML='".$call_user_func_array_eo_wbc_get_sets."';\n" .
                     "}";
                 wbc()->load->add_inline_script('', $inline_script, 'common');    
            });

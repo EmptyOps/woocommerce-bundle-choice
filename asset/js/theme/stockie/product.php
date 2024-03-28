@@ -16,7 +16,7 @@ if(false){
 <?php
 }
 $inline_script =
-    "jQuery(document).ready(function($){\n" .
+    "jQuery(document).ready(function(\$){\n" .
     "    let breadcrumb = \$('div.eo-wbc-container.container').clone();\n" .
     "   \$('div.eo-wbc-container.container').remove();\n" .
     "   \$('.woo_c-product.single-product:first-of-type').prepend(breadcrumb);\n" .
