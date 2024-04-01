@@ -1612,12 +1612,17 @@ $custom_css = "
 wbc()->load->add_inline_style('', $custom_css, 'common');
 
 if(is_shop() || is_product_category()) {
+if(false){	
 ?>
 <script>
 console.log('is_shop_css');
 </script>
 	<!--Color-->
-	<?php
+<?php
+}
+$inline_script = 
+	"console.log('is_shop_css');\n" .
+wbc()->load->add_inline_script( '', $inline_script, 'common' );	
 	if(false){
 	?>
 	<style>
@@ -2392,7 +2397,7 @@ console.log('is_shop_css');
 	";
 	wbc()->load->add_inline_style('', $custom_css, 'common');
 
-
+	if(false){
 	?>
 	<style type="text/css">
 		/*---more-css---*/
@@ -2409,7 +2414,26 @@ console.log('is_shop_css');
 	        display: block !important;
 	    }
 	</style>
-
+	<?php
+	{
+	$custom_css = "
+		/*---more-css---*/
+	    .spui_swatches_more__container {
+	        width: auto !important;
+	        height: auto !important;
+	        box-shadow: none !important;
+	        border-radius: 0 !important;
+	        align-self: center !important;
+	    }
+	    .spui_swatches_more__container a{ 
+	        color: #0274be !important;
+	        text-decoration: none !important;
+	        display: block !important;
+	    }
+	";
+	wbc()->load->add_inline_style('', $custom_css, 'common');
+	if(false){		
+	?>
 	<!--LoopBox-->
 	<style type="text/css">
 		:root {
@@ -2452,8 +2476,49 @@ console.log('is_shop_css');
 
 	
 	
-<?php	
+<?php
 }
+$custom_css = "
+	:root {
+		--spui_thumbnail_shop_asset_height: 300px;
+		}
+
+		.spui_thumbnail_shop_wrap{
+	        float: left;
+	        width: 100%;
+	    }
+	    .spui_thumbnail_shop_asset{
+	        float: left;
+	        width: 100%;
+	    }
+	    .spui_thumbnail_shop_asset img{
+	        min-height: var(--spui_thumbnail_shop_asset_height);
+	        max-height: var(--spui_thumbnail_shop_asset_height);
+	        display: block;
+	        margin: auto;
+	        -o-object-fit: contain;
+	        object-fit: contain;
+	        cursor: pointer;
+	    }
+	    .spui_thumbnail_shop_video{
+	        float: left;
+	        width: 100%;
+	    }
+	    .spui_thumbnail_shop_video video{
+	        min-height: var(--spui_thumbnail_shop_asset_height);
+	        max-height: var(--spui_thumbnail_shop_asset_height);
+	        display: block;
+	        margin: auto;
+	        -o-object-fit: contain;
+	        object-fit: contain;
+	        max-width: 100%;
+	        cursor: pointer;
+	    }
+";
+wbc()->load->add_inline_style('', $custom_css, 'common');
+
+}
+
 ?>
 
 <script>
@@ -2528,6 +2593,9 @@ jQuery( document ).ready(function() {
 });
 </script> -->
 <!-- /*----CSS---*/ -->
+<?php
+if(false){
+?>
 <style type="text/css">
 	:root{
         --spui_tooltip_bg:#8224e3;
@@ -2596,6 +2664,75 @@ jQuery( document ).ready(function() {
         /*---Filter-tabEnd---*/  
 </style>
 <?php 
+}
+$custom_css = "
+	:root{
+        --spui_tooltip_bg:#8224e3;
+        --spui_tooltip_text:#fff;
+        --spui_tooltip_textsize:0.8rem;
+        --spui_tooltip_padding:.5rem 1.75rem;
+        --spui_tooltip_body:none;
+    }
+    .popover{
+    	height: auto !important;
+    }
+    .popover-header{
+        background: var(--spui_tooltip_bg) !important;
+        color: var(--spui_tooltip_text) !important;
+        font-size: var(--spui_tooltip_textsize) !important;
+        font-weight: normal;
+        padding: var(--spui_tooltip_padding) !important;
+    }
+    .popover-body{
+        display: var(--spui_tooltip_body);
+    }
+    .bs-popover-auto[x-placement^=top]>.arrow::after, .bs-popover-top>.arrow::after{
+        border-top-color:var(--spui_tooltip_bg) !important;
+    }
+
+    /*----Loader-css----*/
+    	:root{
+
+    		--spui-loader-background-color:rgba(255,255,255, 0.6);
+    	}
+
+    	.loading {
+	    /*background-image: url(https://kuyum.crewmedya.com/wp-content/plugins/woo-bundle-choice/asset/icon/spinner.gif);*/
+	    background-image:url(".constant('EOWBC_ASSET_URL')."icon/spinner.gif);
+	    background-color: var(--spui-loader-background-color) !important;
+	    background-position: center center;
+	    background-repeat: no-repeat;
+	    margin: 0;
+	    position: fixed !important;
+	    top: 0 !important;
+	    left: 0 !important;
+	    z-index: 10000 !important;
+	    width: 100vw !important;
+	    height: 100vh !important;
+	}
+	/*----Loader-cssEnd----*/
+
+	/*----Breadcum----*/
+	body .ui.grid>.column:not(.row) {
+	    padding-top: 1rem;
+	    padding-bottom: 1rem;
+	}
+	/*---Breadcum-End----*/
+	
+	/*---Filter-tab---*/
+	.tax-product_cat .eo-wbc-container.filters .ui.menu {
+                -ms-flex-wrap: wrap;
+                    flex-wrap: wrap;
+                -webkit-box-pack: center;
+                    -ms-flex-pack: center;
+                        justify-content: center;
+            }
+            .tax-product_cat .eo-wbc-container.filters .ui.menu a.item.center {
+                margin-left: 0 !important;
+            }
+        /*---Filter-tabEnd---*/  
+";
+wbc()->load->add_inline_style('', $custom_css, 'common');
 
 $spui_is_product = false;
 
@@ -2646,6 +2783,7 @@ $bg_color = wbc()->options->get_option('tiny_features',$spui_is_product_category
 $bg_hover_color = wbc()->options->get_option('tiny_features',$spui_is_product_category ? 'tiny_features_shop_page_option_ui_bg_color_hover':'tiny_features_option_ui_bg_color_hover','#DCC7C7');
 
 // ob_start();
+if(false){
 ?>
 <style type="text/css">
 	/*.ui.mini.images .variable-item.image{
@@ -2800,6 +2938,168 @@ $bg_hover_color = wbc()->options->get_option('tiny_features',$spui_is_product_ca
 		color: <?php _e($font_hover_color); ?>;	
 	}
 </style>
+<?php
+$border_hover_color_solid = __($border_hover_color);
+$dimention_dimention = __($dimention);
+$border_hover_width_hover_width = __($border_hover_width);
+$border_color_border_color = __($border_color);
+$border_radius_radius = __($border_radius);
+$border_hover_color_hover_color = __($border_hover_color);
+$custom_css = "
+	/*.ui.mini.images .variable-item.image{
+	width: auto;						
+	}*/					
+	.image-variable-item{
+		border: none !important;
+		border-bottom: 2px solid transparent !important;
+	}
+	.image-variable-item.selected,.image-variable-item:hover{	        			
+		box-shadow: none !important;        			
+		border-bottom: 2px ".$border_hover_color_solid." solid !important;
+	}
+	.image_text-variable-item{
+		border: none !important;
+	}
+	.image_text-variable-item:not(.selected) div{
+		visibility: hidden;
+	}
+
+	.image_text-variable-item:hover div{
+		visibility: visible;
+	}
+
+	.image_text-variable-item.selected,.image_text-variable-item:hover{	        			
+		box-shadow: none !important;
+	}
+	.woocommerce .summary.entry-summary table.variations tr{
+		width: auto !important;
+	}
+	.rotate-up{
+		-webkit-animation:spin-up 0.3s linear ;
+	    -moz-animation:spin-up 0.3s linear ;
+	    animation:spin-up 0.3s linear ;
+	    animation-fill-mode: forwards;
+	}
+	@-moz-keyframes spin-up { 100% { -moz-transform: rotate(-180deg); } }
+	@-webkit-keyframes spin-up { 100% { -webkit-transform: rotate(-180deg); } }
+	@keyframes spin-up { 100% { -webkit-transform: rotate(-180deg); transform:rotate(-180deg); } }
+
+	.rotate-down{
+		-webkit-animation:spin-down 0.3s linear;
+	    -moz-animation:spin-down 0.3s linear;
+	    animation:spin-down 0.3s linear;
+	    animation-fill-mode: forwards;
+	}
+
+	@-moz-keyframes spin-down { 
+		0% { -moz-transform: rotate(180deg); } 
+		100% { -moz-transform: rotate(360deg); } 
+	}
+	@-webkit-keyframes spin-down { 
+		0% { -webkit-transform: rotate(180deg); } 
+		100% { -webkit-transform: rotate(360deg); } 
+	}
+	@keyframes spin-down { 
+		0% { 
+			-webkit-transform: rotate(180deg); 
+			transform:rotate(180deg); 
+		} 					
+		100% { 
+			-webkit-transform: rotate(360deg); 
+			transform:rotate(360deg); } 
+		}
+
+	#wbc_variation_toggle
+	{
+		padding: 0.7em;
+		margin-bottom: 0.7em;
+		border:1px solid #5e5c5b;
+		display: inline-block;
+		color: #2d2d2d;
+		font-size:1rem;
+		cursor: pointer;
+		border-radius: 1px !important;
+	} 
+	table.variations{
+		padding: 5px;
+		border: 1px solid #5e5c5b;
+	}
+	table.variations td{
+		//display: table-cell !important;
+		border: none !important;
+	}
+	table.variations td:first-child{
+		/*border-right: 1px solid #5e5c5b !important;*/
+		/*text-align: center;*/
+	}
+	
+	.ui.images {
+			width: 100% !important;
+			margin: auto !important;
+			float: none !important;
+		}
+	}
+	table.variations {
+	    table-layout: auto !important;
+	    margin: inherit !important;
+	}
+	table.variations td.label{
+		display: none !important;
+	}
+	table.variations .value{
+		padding-left: 1rem !important;
+	}
+	.variable-items-wrapper{
+		list-style: none;
+		display: table-cell !important;	        			
+	}
+	.ui.red.ribbon.label{
+		margin-bottom: 5px !important;
+	}
+	.variable-items-wrapper .variable-item div{
+		margin: auto;
+		display: block;
+	}
+	.variable-items-wrapper .variable-item{        			
+		/*display: inline-table;*/
+		height: $dimention_dimention;
+		width: $dimention_dimention;
+		min-width: 35px;						
+		text-align: center;						
+		line-height: $dimention_dimention;	        			
+		cursor: pointer;
+		margin: 0.25rem;
+		text-align: center;
+		border: ".$border_hover_width_hover_width." solid ".$border_color_border_color.";
+		border-radius: $border_radius_radius;
+		overflow: hidden;
+	}	
+	.variable-items-wrapper .variable-item:hover,.variable-items-wrapper .selected{
+		box-shadow:0px 0px ".$border_hover_width_hover_width." ".$border_hover_color_hover_color.";        			
+		border: 1px ".$border_hover_color_hover_color." solid;
+	}
+	ul.variable-items-wrapper{
+		margin: 0px;
+	}
+	.variable-item-color-fill,.variable-item-span{        			
+		height: $dimention_dimention;
+		width: 100%;
+		line-height: $dimention_dimention;
+	}
+	.select2,.select3-selection{
+		display: none !important;
+	}
+	.ui .button-variable-item{
+		background-color: <?php _e($bg_color); ?>;
+		color: <?php _e($font_color); ?>;
+	}
+	.ui .button-variable-item:hover{
+		background-color: <?php _e($bg_hover_color); ?>;
+		color: <?php _e($font_hover_color); ?>;	
+	}
+";
+wbc()->load->add_inline_style('', $custom_css, 'common');	
+?>
 <script>
 	jQuery(document).ready(function($){
 		jQuery(".dropdown").dropdown().on('change',function(){
