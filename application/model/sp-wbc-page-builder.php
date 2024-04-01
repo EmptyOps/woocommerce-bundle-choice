@@ -35,7 +35,10 @@ class SP_WBC_Page_Builder extends \eo\wbc\system\core\SP_Page_Builder {
 		// ACTIVE_TODO_OC_START
 		// --we need to tac car of this wen need to do the need full here, we we impliment composeer supot weri sun after the fast run of thes ui and page builder class hierarche -- to h & to b
 		// ACTIVE_TODO_OC_END
-		$composer = \sp\theme\view\ui\Composer_Elements::instance();
+		// ACTIVE_TODO temp. below layer is moved inside the if condition while we are now calling this page builder class from the wbc layer because dependancy of the theme ui need to be removed for the wp org update version. but need to upgraded the moved layer as soon as we get chance and remove the if false. -- to h 
+		if (false) {	
+			$composer = \sp\theme\view\ui\Composer_Elements::instance();
+		}
 
 		if(!empty($ui)){
 
@@ -70,14 +73,17 @@ class SP_WBC_Page_Builder extends \eo\wbc\system\core\SP_Page_Builder {
 				// ACTIVE_TODO_OC_START
 				// --we ma need to du sumthing or the need full wen we implyment externul page builder suport weri sun after the fast or secund run -- to h & to b
 				// ACTIVE_TODO_OC_END
-				if(array_search('footer',$ui['widgets'])!==false) {					
+				// ACTIVE_TODO temp. below layer is moved inside the if condition while we are now calling this page builder class from the wbc layer because dependancy of the theme ui need to be removed for the wp org update version. but need to upgraded the moved layer as soon as we get chance and remove the if false. -- to h 
+				if (false) {					
+					if(array_search('footer',$ui['widgets'])!==false) {					
 
-					if(array_key_exists($composer->get_prefered_builders(),$composer->get_builders()) and !empty($composer->get_footer_template())) {
+						if(array_key_exists($composer->get_prefered_builders(),$composer->get_builders()) and !empty($composer->get_footer_template())) {
 
-						echo \Elementor\Plugin::instance()->frontend->get_builder_content_for_display($composer->get_footer_template(),true);
-					} else {
-						get_template_part('footer');
-					}					
+							echo \Elementor\Plugin::instance()->frontend->get_builder_content_for_display($composer->get_footer_template(),true);
+						} else {
+							get_template_part('footer');
+						}					
+					}
 				}
 			}
 		}

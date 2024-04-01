@@ -62,33 +62,39 @@ class Admin {
 			</script>
 			<?php
 			}
-			$inline_script = "
-				jQuery(document).ready(function() {
-				    jQuery('.required.field[class*=\"_container_render_method\"] .ui.radio').on('change', function() {
-				        let parent = jQuery(this).closest('.required.field[class*=\"_container_render_method\"]').parent();
-				        if (jQuery(this).find('input:radio').val() === 'query_selector') {
-				            jQuery(parent).next().css('display', 'none');
-				            jQuery(parent).next().next().css('display', 'none');
-				            jQuery(parent).next().next().next().css('display', 'none');
+			
+			$inline_script = 
+"				jQuery(document).ready(function(){\n" .
+"					jQuery('.required.field[class*=\"_container_render_method\"] .ui.radio').on('change',function(){\n" .
+"\n" .
+"						let parent = jQuery(this).closest('.required.field[class*=\"_container_render_method\"]').parent();\n" .
+"						if(jQuery(this).find('input:radio').val() === 'query_selector'){\n" .
+"							jQuery(parent).next().css('display','none');\n" .
+"							jQuery(parent).next().next().css('display','none');\n" .
+"							jQuery(parent).next().next().next().css('display','none');\n" .
+"\n" .
+"							jQuery(parent).next().next().next().next().css('display','block');\n" .
+"							jQuery(parent).next().next().next().next().next().css('display','block');\n" .
+"\n" .
+"						} else {\n" .
+"\n" .
+"							jQuery(parent).next().css('display','block');\n" .
+"							jQuery(parent).next().next().css('display','block');\n" .
+"							jQuery(parent).next().next().next().css('display','block');\n" .
+"\n" .
+"							jQuery(parent).next().next().next().next().css('display','none');\n" .
+"							jQuery(parent).next().next().next().next().next().css('display','none');\n" .
+"						}\n" .
+"\n" .
+"					});\n" .
+"				});\n" .
+"\n" .
+"				jQuery(window).on('load',function(){\n" .
+"					jQuery('.required.field[class*=\"_container_render_method\"] :radio:checked').trigger('change');\n" .
+"				});\n";
+wbc()->load->add_inline_script( '', $inline_script, 'common' );
 
-				            jQuery(parent).next().next().next().next().css('display', 'block');
-				            jQuery(parent).next().next().next().next().next().css('display', 'block');
-				        } else {
-				            jQuery(parent).next().css('display', 'block');
-				            jQuery(parent).next().next().css('display', 'block');
-				            jQuery(parent).next().next().next().css('display', 'block');
 
-				            jQuery(parent).next().next().next().next().css('display', 'none');
-				            jQuery(parent).next().next().next().next().next().css('display', 'none');
-				        }
-				    });
-				});
-
-				jQuery(window).on('load', function() {
-				    jQuery('.required.field[class*=\"_container_render_method\"] :radio:checked').trigger('change');
-				});
-				";
-				wbc()->load->add_inline_script('', $inline_script, 'common');
 		});
 
 		if(!empty($key) and !empty($section)) {

@@ -78,7 +78,9 @@ if(!function_exists('eo_wbc_buttons_css')){
 		$button_hovercolor = wbc()->options->get_option('appearance_wid_btns','button_hovercolor','');
 	  	
 	  	// return '<style>.eo-wbc-container .ui.buttons .button{'.
-	  	return 
+	  	return
+	  		if(false)
+	  		{ 
 	  		'<style>.wbc_wid_btns{'.
 				($button_backcolor_active?'background-color:'.$button_backcolor_active.' !important;':'').
 				($button_textcolor?'color:'.$button_textcolor.' !important;':'').
@@ -87,7 +89,19 @@ if(!function_exists('eo_wbc_buttons_css')){
 			'}'.
 				($button_hovercolor?'.wbc_wid_btns:hover{ background-color:'.$button_hovercolor.' !important; }':'').
 			'</style>';
+	        }
 	        
+			$custom_css = '.wbc_wid_btns{' .
+    			($button_backcolor_active ? 'background-color:' . $button_backcolor_active . ' !important;' : '') .
+    			($button_textcolor ? 'color:' . $button_textcolor . ' !important;' : '') .
+    			($eo_wbc_home_btn_border_color ? 'border-color:' . $eo_wbc_home_btn_border_color . ' !important;' : '') .
+    			($button_radius ? 'border-radius:' . $button_radius . ' !important;' : '') .
+				'}' .
+				($button_hovercolor ? '.wbc_wid_btns:hover{ background-color:' . $button_hovercolor . ' !important; }' : '');
+
+       		 wbc()->load->add_inline_style('', $custom_css,'common');
+	        
+
 	}
 }
 ?>
@@ -110,7 +124,27 @@ if(!function_exists('eo_wbc_buttons_css')){
 			</button>
 		</div>
 	</div>
+	<?php
+	if(false)
+	{
+	?>
 	<style>.ui.grid{margin-left: auto;margin-right: auto;} @media only screen and (max-width: 768px){ .eo-wbc-container .ui.buttons .button{ border-radius: 0 !important; } }</style>
+	<?php
+	}
+	
+	$custom_css = "
+	  .ui.grid {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    @media only screen and (max-width: 768px) {
+        .eo-wbc-container .ui.buttons .button {
+            border-radius: 0 !important;
+        }
+    }";
+    wbc()->load->add_inline_style('', $custom_css,'common');
+    ?>
 	<?php echo eo_wbc_buttons_css(); ?>
 	<br/><br/>
 	<?php echo eo_wbc_code(); ?>

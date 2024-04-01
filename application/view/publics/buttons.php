@@ -120,7 +120,28 @@ if(!function_exists('eo_wbc_buttons_css')){
             </button>
 		</div>
 	</div>
-	<style>.ui.grid{margin-left: auto;margin-right: auto;} @media only screen and (max-width: 768px){ .eo-wbc-container .ui.buttons .button{ border-radius: 0 !important; } }</style>
+	<?php 
+	if(false)
+	{
+	?>
+		<style>.ui.grid{margin-left: auto;margin-right: auto;} @media only screen and (max-width: 768px){ .eo-wbc-container .ui.buttons .button{ border-radius: 0 !important; } }</style>
+	<?php 
+	}
+	$custom_css = "
+	 .ui.grid {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    @media only screen and (max-width: 768px) {
+        .eo-wbc-container .ui.buttons .button {
+            border-radius: 0 !important;
+        }
+    }";
+    wbc()->load->add_inline_style('', $custom_css,'common');
+
+	?>
+
 	<?php echo eo_wbc_buttons_css(); ?>
 	<br/><br/>
 	<?php echo eo_wbc_code(); ?>

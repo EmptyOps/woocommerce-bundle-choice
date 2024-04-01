@@ -176,37 +176,69 @@ class Home {
 
 			ob_start();
 			wbc()->load->template('publics/buttons', array('is_embed_using_js'=>true));
-			$buttons = ob_get_clean(); 
-			$script = $buttons."<script>jQuery(document).ready(function($){";
+			$buttons = ob_get_clean();
+      if(false){
+       
+  			$script = $buttons."<script>jQuery(document).ready(function($){";
 
-			$btn_position_setting_text = wbc()->options->get('btn_position_setting_text','');
-			if(!empty($btn_position_setting_text)) {
-				$script.='if(jQuery("'.$btn_position_setting_text.'").length!=0){'.
-              				'jQuery("'.$btn_position_setting_text.'").append( cut_and_move_div() ); eo_wbc_buttons_bind_events();'.
-              				'} else if(jQuery("#container,#primary,.entry-content,.main,#main,.post-content,#content,.content,.container").length!=0){'.
-              					'jQuery(jQuery("#container,#primary,.entry-content,.main,#main,.post-content,#content,.content,.container")[0]).append( cut_and_move_div() ); eo_wbc_buttons_bind_events();'.
-              				'} else {'
-              					.'eo_wbc_error_popup("fatal_error","'.$button_render_error_msg.'");'/*'jQuery("body").append("'.$buttons.'");'*/.
-              				'}';
-              			
+  			$btn_position_setting_text = wbc()->options->get('btn_position_setting_text','');
+  			if(!empty($btn_position_setting_text)) {
+  				$script.='if(jQuery("'.$btn_position_setting_text.'").length!=0){'.
+                				'jQuery("'.$btn_position_setting_text.'").append( cut_and_move_div() ); eo_wbc_buttons_bind_events();'.
+                				'} else if(jQuery("#container,#primary,.entry-content,.main,#main,.post-content,#content,.content,.container").length!=0){'.
+                					'jQuery(jQuery("#container,#primary,.entry-content,.main,#main,.post-content,#content,.content,.container")[0]).append( cut_and_move_div() ); eo_wbc_buttons_bind_events();'.
+                				'} else {'
+                					.'eo_wbc_error_popup("fatal_error","'.$button_render_error_msg.'");'/*'jQuery("body").append("'.$buttons.'");'*/.
+                				'}';
+                			
+              } else {
+              	$script.='if( jQuery("#container,#primary,.entry-content,.main,#main,.post-content,#content,.content,.container").length!=0){'.
+        					'jQuery(jQuery("#container,#primary,.entry-content,.main,#main,.post-content,#content,.content,.container")[0]).append( cut_and_move_div() ); eo_wbc_buttons_bind_events();'.
+        				'} else {'
+        					.'eo_wbc_error_popup("fatal_error","'.$button_render_error_msg.'");'/*'jQuery("body").append("'.$buttons.'");'*/.
+        				'}';
+              }
+
+              $script.='function cut_and_move_div() {
+              	var buttons_div = $("#wbc_").clone(); 
+              	buttons_div.show();
+              	$("#wbc_").remove();
+              	return buttons_div;
+              }';
+
+              $script.='});</script>';
+  			// echo $script;
+  			return $script;
+      }
+      $inline_script = $buttons."jQuery(document).ready(function($){";
+
+      $btn_position_setting_text = wbc()->options->get('btn_position_setting_text','');
+      if(!empty($btn_position_setting_text)) {
+        $inline_script.='if(jQuery("'.$btn_position_setting_text.'").length!=0){'.
+                      'jQuery("'.$btn_position_setting_text.'").append( cut_and_move_div() ); eo_wbc_buttons_bind_events();'.
+                      '} else if(jQuery("#container,#primary,.entry-content,.main,#main,.post-content,#content,.content,.container").length!=0){'.
+                        'jQuery(jQuery("#container,#primary,.entry-content,.main,#main,.post-content,#content,.content,.container")[0]).append( cut_and_move_div() ); eo_wbc_buttons_bind_events();'.
+                      '} else {'
+                        .'eo_wbc_error_popup("fatal_error","'.$button_render_error_msg.'");'/*'jQuery("body").append("'.$buttons.'");'*/.
+                      '}';
+                    
             } else {
-            	$script.='if( jQuery("#container,#primary,.entry-content,.main,#main,.post-content,#content,.content,.container").length!=0){'.
-      					'jQuery(jQuery("#container,#primary,.entry-content,.main,#main,.post-content,#content,.content,.container")[0]).append( cut_and_move_div() ); eo_wbc_buttons_bind_events();'.
-      				'} else {'
-      					.'eo_wbc_error_popup("fatal_error","'.$button_render_error_msg.'");'/*'jQuery("body").append("'.$buttons.'");'*/.
-      				'}';
+              $inline_script.='if( jQuery("#container,#primary,.entry-content,.main,#main,.post-content,#content,.content,.container").length!=0){'.
+                'jQuery(jQuery("#container,#primary,.entry-content,.main,#main,.post-content,#content,.content,.container")[0]).append( cut_and_move_div() ); eo_wbc_buttons_bind_events();'.
+              '} else {'
+                .'eo_wbc_error_popup("fatal_error","'.$button_render_error_msg.'");'/*'jQuery("body").append("'.$buttons.'");'*/.
+              '}';
             }
 
-            $script.='function cut_and_move_div() {
-            	var buttons_div = $("#wbc_").clone(); 
-            	buttons_div.show();
-            	$("#wbc_").remove();
-            	return buttons_div;
+            $inline_script.='function cut_and_move_div() {
+              var buttons_div = $("#wbc_").clone(); 
+              buttons_div.show();
+              $("#wbc_").remove();
+              return buttons_div;
             }';
 
-            $script.='});</script>';
-			// echo $script;
-			return $script;
+            $inline_script.='});';
+      wbc()->load->add_inline_script('', $inline_script, 'common');
 		}
     }
 
