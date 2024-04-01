@@ -400,7 +400,9 @@ class Feed extends \eo\wbc\controllers\publics\Controller{
 
         // put ui-builder in autoloader function in config file and then remove load model ui builder statement from everywhere -- to b
         $ui = $this->render_woo_dropdown_attribute_html_data($data,$args);
-        $result_html .= \sp\theme\view\ui\builder\Page_Builder::instance()->build_page_widgets($ui, 'woo_dropdown_attribute_html', array(), $args['is_return_html']);
+        // ACTIVE_TOOD below calls to theme ui page builder class was upgraded to SP_WBC_Page_Builder class function calls so that we can remove the dependancy on the theme ui package. however there is one catch instead of calling the ui builder build function(like extensions are doing) we are calling the page builder class's build page widgets function so still need to upgrade that as requierd as well as if we face any issues related this upgrade then need to take care of it. as well as need to note carefully that the calls are upgraded but it is not yet supporting the appearance, configuration and data controls. for that the respective functions need to be created inside the respective model and then pass the ui_definition in below function call to enable support for that. so lets do it during the wbc upgrade or max by 1st or 2nd revision. -- to h 
+        // $result_html .= \sp\theme\view\ui\builder\Page_Builder::instance()->build_page_widgets($ui, 'woo_dropdown_attribute_html', array(), $args['is_return_html']);
+        $result_html .= \eo\wbc\model\SP_WBC_Page_Builder::build_page_widgets($ui, 'woo_dropdown_attribute_html', array(), $args['is_return_html']);         
 
 
         if ($data['woo_dropdown_attribute_html_data']['args']['sp_variations_swatches_show_on_shop_page'] == 1) { 
@@ -423,7 +425,9 @@ class Feed extends \eo\wbc\controllers\publics\Controller{
                 // wbc_pr($data['variable_item_ui']);
             }
 
-            $result_html .= \sp\theme\view\ui\builder\Page_Builder::instance()->build_page_widgets($ui, 'swatches', array(), $args['is_return_html']);
+            // ACTIVE_TOOD below calls to theme ui page builder class was upgraded to SP_WBC_Page_Builder class function calls so that we can remove the dependancy on the theme ui package. however there is one catch instead of calling the ui builder build function(like extensions are doing) we are calling the page builder class's build page widgets function so still need to upgrade that as requierd as well as if we face any issues related this upgrade then need to take care of it. as well as need to note carefully that the calls are upgraded but it is not yet supporting the appearance, configuration and data controls. for that the respective functions need to be created inside the respective model and then pass the ui_definition in below function call to enable support for that. so lets do it during the wbc upgrade or max by 1st or 2nd revision. -- to h 
+            // $result_html .= \sp\theme\view\ui\builder\Page_Builder::instance()->build_page_widgets($ui, 'swatches', array(), $args['is_return_html']);
+            $result_html .= \eo\wbc\model\SP_WBC_Page_Builder::build_page_widgets($ui, 'swatches', array(), $args['is_return_html']);               
         }
 
         return $result_html;

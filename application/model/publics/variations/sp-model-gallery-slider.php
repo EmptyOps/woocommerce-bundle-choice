@@ -159,7 +159,9 @@ class SP_Model_Gallery_Slider extends Eowbc_Base_Model_Publics {
 				//js template
 				$html = null;
 				$html = apply_filters('sp_slzm_slider_image_loop_js_template',$html);
-				$html = \sp\theme\view\ui\builder\Page_Builder::instance()->build_page_widgets($html,'sp_variations_gallery_images_slider_container',array(),true);
+		        // ACTIVE_TOOD below calls to theme ui page builder class was upgraded to SP_WBC_Page_Builder class function calls so that we can remove the dependancy on the theme ui package. however there is one catch instead of calling the ui builder build function(like extensions are doing) we are calling the page builder class's build page widgets function so still need to upgrade that as requierd as well as if we face any issues related this upgrade then need to take care of it. as well as need to note carefully that the calls are upgraded but it is not yet supporting the appearance, configuration and data controls. for that the respective functions need to be created inside the respective model and then pass the ui_definition in below function call to enable support for that. so lets do it during the wbc upgrade or max by 1st or 2nd revision. -- to h 
+				// $html = \sp\theme\view\ui\builder\Page_Builder::instance()->build_page_widgets($html,'sp_variations_gallery_images_slider_container',array(),true);
+		        $html = \eo\wbc\model\SP_WBC_Page_Builder::build_page_widgets($html,'sp_variations_gallery_images_slider_container',array(),true);	
 				echo \eo\wbc\model\UI_Builder::instance()->js_template_wrap('sp_slzm_slider_image_loop'.$type_template,$html,'wp');
 			}
 

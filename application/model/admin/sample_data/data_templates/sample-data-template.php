@@ -34,7 +34,7 @@ class Sample_Data_Template {
  
 	return array(
 
-        array(
+        /*array(
             'title'=>'11 sample Setting #8800950587',
             'thumb'=>$_img_url.'Products/w-r-2.jpg',
             'images'=>array('w-r-3.jpg','w-r-1.jpg'),
@@ -374,11 +374,11 @@ class Sample_Data_Template {
                     'is_taxonomy'=>1
                 )       
             ),       
-        ),
+        ),*/
 
 
 
-        /*array(
+        array(
           'title'=>'Setting #8800950587',
           'thumb'=>$_img_url.'Products/w-r-2.jpg',
           'images'=>array('w-r-3.jpg','w-r-1.jpg'),
@@ -15073,7 +15073,7 @@ class Sample_Data_Template {
                             'terms'=>array('pa_eo_carat_attr'=>'1-2','pa_eo_clarity_attr'=>'vs2','pa_eo_colour_attr'=>'e','pa_eo_depth_attr'=>'48','pa_eo_fluorescence_attr'=>'slight','pa_eo_grading_report_attr'=>'gia','pa_eo_size_attr'=>'0-2','pa_eo_symmertry_attr'=>'good','pa_eo_table_attr'=>'75','pa_eo_origin_attr'=>'mir','pa_eo_cut_attr'=>'very-good')
                           )
                    )
-        )*/     
+        )    
     );  	
 	}
 
