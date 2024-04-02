@@ -305,7 +305,7 @@ add_action( 'wp_enqueue_scripts' ,function(){
 				"console.log(\" zoom asset DOMContentLoaded\");\n" .
 				"\n" .
 				"let script = document.createElement('script');\n" .
-				"script.src = \"<?php echo constant( strtoupper( 'EOWBC_ASSET_URL' ) ).'js/variations/gallery_images/external-plugins/zoomsl/zoomsl.min.js'; ?>\";\n" .
+				"script.src = '".constant( strtoupper( 'EOWBC_ASSET_URL' ) )."js/variations/gallery_images/external-plugins/zoomsl/zoomsl.min.js';\n" .
 				"document.head.append(script);\n" .
 				"\n" .
 				"window.setTimeout(function(){\n" .

@@ -61,5 +61,5 @@ if(!empty($tab_data) and is_array($tab_data)){
 	    }
     	";
    		 wbc()->load->add_inline_style('', $custom_css,'common');
-    ?>
 }
+    ?>

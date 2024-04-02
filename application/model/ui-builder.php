@@ -518,7 +518,7 @@ class UI_Builder implements Builder {
 				return '<script type="text/html" id="tmpl-'.$id.'">' . $html . '</script>'; 
 
 			}
-			wbc()->load->get_inline_script_tag($html,array('id'=>'tmpl-'.$id));
+			wbc()->load->get_inline_script_tag($html,array('type'=>'text/html','id'=>'tmpl-'.$id));
 		}
 
 			
