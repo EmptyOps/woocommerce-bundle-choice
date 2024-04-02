@@ -17,7 +17,7 @@ if(!empty($id) /*and !empty($label)*/){
 			wbc()->load->template('component/form/input_info_icon', $info_icon);
 		}
 		?>	
-		<input type="password" <?php echo !empty($attr) ? $attr : ''; ?> id="<?php echo esc_attr($id); ?>" name="<?php echo esc_attr($id); ?>" class="ui input <?php echo !empty($class) ? esc_attr($class) : ''; ?>">	
+		<input type="password" <?php /*NOTE: we are not escaping the $attr because it may contain multiple attributes and we do not want esc_attr function to escape the double qoutes(") of the different attribute values. but anyway we understand the security requirement here so we have always escaped the attribute value with the esc_attr from wherever this $attr var is passed*/echo !empty($attr) ? $attr : ''; ?> id="<?php echo esc_attr($id); ?>" name="<?php echo esc_attr($id); ?>" class="ui input <?php echo !empty($class) ? esc_attr($class) : ''; ?>">	
 		<?php
 		if (isset($visible_info)) {
 			wbc()->load->template('component/form/input_visible_info', $visible_info);
