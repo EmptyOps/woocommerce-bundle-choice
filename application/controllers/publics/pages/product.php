@@ -341,7 +341,7 @@ class Product extends \eo\wbc\system\core\publics\Eowbc_Base_Model_Publics {
             }
         ";
 
-        wbc()->load->add_inline_style('', $custom_css, 'common');
+        wbc()->load->add_inline_style('', $custom_css, 'sp-wbc-common-footer');
 
             if(false){
             ?>

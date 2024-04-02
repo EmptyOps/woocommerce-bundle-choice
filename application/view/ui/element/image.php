@@ -18,4 +18,14 @@
 	}
 ?>
 
-<img <?php echo (!empty($class) ? 'class="' . esc_attr($class) . '"' : ''); ?> <?php echo (!empty($id) ? 'id="' . esc_attr($id) . '"' : ''); ?> <?php echo (!empty($attr) ? $attr : ''); ?> <?php echo (!empty($src) ? 'src="' . /*ACTIVE_TODO temp. temparary comented for fixing the javascript template bug*//*esc_url(*/$src/*)*/ . '"' : ''); ?> <?php echo (!empty($style) ? 'style="' . esc_attr($style) . '"' : ''); ?> />
+<img 
+	<?php echo (!empty($class) ? 'class="' . esc_attr($class) . '"' : ''); ?> 
+	<?php echo (!empty($id) ? 'id="' . esc_attr($id) . '"' : ''); ?> 
+	<?php /*NOTE: we are not escaping the $attr because it may contain multiple attributes and we do not want esc_attr function to escape the double qoutes(") of the different attribute values. but anyway we understand the security requirement here so we have always escaped the attribute value with the esc_attr from wherever this $attr var is passed*/
+	echo (!empty($attr) ? $attr : ''); ?> 
+
+	<?php /*NOTE: we are not escaping the $src var here because it contains the planceholder for the javascript template placeholders supported by the wordpress js template library under the wordpress js package window.wp*/
+	echo (!empty($src) ? 'src="' . ( (str_contains($src,'{{data.') && substr($src, -2)  == "}}") ? $src : esc_url($src) ) . '"' : ''); ?> 
+	<?php echo (!empty($style) ? 'style="' . esc_attr($style) . '"' : ''); ?> 
+/>
+
