@@ -191,7 +191,13 @@ if(empty($_per_page)){
 
 					if(!empty($_REQUEST[ $__filter['id'] ])) {
 						
-						$queried_attributes[str_replace(['min_','max_'],'',$__filter['id'])] = str_replace(['min_','max_'],'',$__filter['id']);
+						// ACTIVE_TODO/NOTE it seems that the developement of the series 13 was not compeleted here. since there was no replace logic for the checklist_ so now the if condition with replace logic inside it is added on 03-04-2024. and so when we complete the series number 13 or during 1st revision need to properly  upgrade this layer. -- to h 
+						if (str_contains($__filter['id'], 'checklist_')) {
+							$queried_attributes[str_replace(['checklist_'],'',$__filter['id'])] = str_replace(['checklist_'],'',$__filter['id']);
+						} else {
+
+							$queried_attributes[str_replace(['min_','max_'],'',$__filter['id'])] = str_replace(['min_','max_'],'',$__filter['id']);
+						}
 
 						$__filter['value'] = sanitize_text_field($_REQUEST[ $__filter['id'] ]);
 					}
