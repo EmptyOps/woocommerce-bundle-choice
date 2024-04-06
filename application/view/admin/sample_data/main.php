@@ -43,7 +43,7 @@ box-shadow: none;">
 	          <tbody>
 	            <tr valign="top">
 	              <!-- Sample Product Installation -->
-	              <?php if( /*!empty(wbc()->sanitize->post('step')) && wbc()->sanitize->post('step')*/$_step==3):?>
+	              <?php if( /*!empty(wbc()->sanitize->post('step')) && wbc()->sanitize->post('step')*/$_step==$number_of_step /*3*/):?>
 	                <th>
 	                  <h3>Sample Products</h3>
 	                  <p>Sample products will be added for <?php echo $feature_title;?>.</p>
@@ -52,7 +52,7 @@ box-shadow: none;">
 	              <tr>
 	                <td>Total <?php echo $sample_data_obj->get_model()->get_product_size();?> products will be created.</td>
 	              <!-- Attributes Installation -->
-	              <?php elseif($_step==2):?>
+	              <?php elseif($_step==$number_of_step - 1/*2*/):?>
 	                <th>
 	                  <h3>Attributes</h3>
 	                </th>
@@ -72,30 +72,64 @@ box-shadow: none;">
 	                </td>
 	              <!-- Category Installation -->
 	              <?php else:?>
-	                <th>
-	                  <h3>Category</h3>
-	                </th>
-	              </tr>
-	              <tr>
-	                <td>Total <?php echo $sample_data_obj->get_model()->get_categories_size();?> categories will be created. (Note: Since there are sub categories to above main categories the actual count is higher.<?php echo ($feature_key == 'pair_maker' ? ' Later you can simply remove these categories but right now its neccessary to accurately present the sample data demo.' : '');?>)</td>
-	              </tr>
-	              <tr>
-	                <td>                    
-	                  <?php foreach ($_category as $index=>$_cat): ?>  <tr>                                            
-	                    <span><input type="checkbox" name="cat_<?php echo $index; ?>" id="<?php _e($_cat['name']); ?>" value="<?php _e($_cat['slug']) ?>" checked="checked" disabled="disabled"></span>
-	                    <!--<label for="<?php //_e($_cat['name']); ?>"><?php //_e($_cat['name']); ?></label> -->    
-	                    <span><input type="text" name="cat_value_<?php echo $index; ?>" placeholder="<?php _e($_cat['name']) ?>" value="<?php _e($_cat['name']); ?>"></span></tr>
-	                    <br/></br>
-	                  <?php endforeach;?>                      
-	                </td>
+
+	              	<?php if($additional_initial_steps >= 1 && $_step <= $additional_initial_steps)?>
+	              		
+	              		<?php if($_step==1)?>
+	              		
+	              			<?php
+	              			
+	              			public function additional_initial_step_key($_step) {
+
+								return null;
+							}
+						?>
+	              			<?php echo $sample_data_obj->get_model()->additional_initial_step_key($_step) == 'generate_assets_keys';?>
+	              			<?php return 'generate_assets';?>
+
+	              		
+	                	
+	                	<?php endif; ?>
+
+	              	<?php else:?>
+
+		                <th>
+		                  <h3>Category</h3>
+		                </th>
+		              </tr>
+		              <tr>
+		                <td>Total <?php echo $sample_data_obj->get_model()->get_categories_size();?> categories will be created. (Note: Since there are sub categories to above main categories the actual count is higher.<?php echo ($feature_key == 'pair_maker' ? ' Later you can simply remove these categories but right now its neccessary to accurately present the sample data demo.' : '');?>)</td>
+		              </tr>
+		              <tr>
+		                <td>                    
+		                  <?php foreach ($_category as $index=>$_cat): ?>  <tr>                                            
+		                    <span><input type="checkbox" name="cat_<?php echo $index; ?>" id="<?php _e($_cat['name']); ?>" value="<?php _e($_cat['slug']) ?>" checked="checked" disabled="disabled"></span>
+		                    <!--<label for="<?php //_e($_cat['name']); ?>"><?php //_e($_cat['name']); ?></label> -->    
+		                    <span><input type="text" name="cat_value_<?php echo $index; ?>" placeholder="<?php _e($_cat['name']) ?>" value="<?php _e($_cat['name']); ?>"></span></tr>
+		                    <br/></br>
+	                  	  <?php endforeach;?>                      
+	                    </td>
+	                <?php endif; ?>
 	              <?php endif; ?>
 	            </tr>
 	          </tbody>
 	          <tfoot>
 	            <tr>
 	              <td>
-	                <?php $_steps=["catagorie(s)","attribute(s)","product(s)"]; ?>
-	                <input type="submit" name="save" value="<?php printf(__("Create sample %1s","woo-bundle-choice"),$_steps[$_step-1]); ?>"  class="button button-primary button-hero action ui button secondary">
+
+	              	<?php if($additional_initial_steps >= 1 && $_step <= $additional_initial_steps)?>
+
+	              		<?php if($_step==1)?>
+
+	              			<?php echo $sample_data_obj->get_model()->additional_initial_step_key($_step) == 'generate_assets_keys';?>
+
+	              	<?php else:?>
+
+		                <?php $_steps=["catagorie(s)","attribute(s)","product(s)"]; ?>
+		                <input type="submit" name="save" value="<?php printf(__("Generate assets Create sample %1s","woo-bundle-choice"),$_steps[$_step-1]); ?>"  class="button button-primary button-hero action ui button secondary">
+
+	                <?php endif; ?>
+
 	              </td>
 	              <td>
 	                <a href="#" class="button button-hero action ui button secondary inverted" onclick="if(!jQuery(this).hasClass('disabled')){ window.location.href='<?php echo admin_url('admin.php?page=eowbc'); ?>'; }">Cancel</a>

@@ -40,6 +40,10 @@ class Eowbc_Sample_Data {
 		return $this->data_template;
 	}
 
+	public function additional_initial_steps() {
+		return $this->0;
+	}
+
 	public function get( $form_definition ) {
 		return $form_definition;
 	}
