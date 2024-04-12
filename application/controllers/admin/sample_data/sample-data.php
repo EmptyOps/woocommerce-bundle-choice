@@ -55,6 +55,7 @@ class Sample_Data {
 
             wbc()->load->template('admin/menu/page/footer-part',array( "mode"=>"plain" ));
         };
+        
         return $callback;
     }
 

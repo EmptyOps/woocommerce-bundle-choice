@@ -41,7 +41,8 @@ class Eowbc_Sample_Data {
 	}
 
 	public function additional_initial_steps() {
-		return $this->0;
+		
+		return 0;
 	}
 
 	public function get( $form_definition ) {
@@ -364,7 +365,6 @@ class Eowbc_Sample_Data {
 		}
 
 		
-
 		$parent_id = $product_id;
 		if(!empty($product['variation'])){
 

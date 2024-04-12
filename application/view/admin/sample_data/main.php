@@ -73,17 +73,21 @@ box-shadow: none;">
 	              <!-- Category Installation -->
 	              <?php else:?>
 
-	              	<?php if($additional_initial_steps >= 1 && $_step <= $additional_initial_steps)?>
+	              	<?php if($additional_initial_steps >= 1 && $_step <= $additional_initial_steps):?>
 	              		
-	              		<?php if($_step==1)?>
+	              		<?php if($_step==1):?>
+
+	              			<?php return 'generate_assets';?>  
 
 	              			<?php
 	              			
-	              			public function additional_initial_step_key($step) {
+	              			public function additional_initial_step_key($_step) {
 
 								return null;
 							}
-						?>
+
+							?> 
+
 	              			<?php echo $sample_data_obj->get_model()->additional_initial_step_key($_step) == 'generate_assets_keys';?>
 	              			<th>
 		                  		<h3>Assets</h3>
@@ -96,7 +100,7 @@ box-shadow: none;">
 		                		<td>                    
 		                  			<!-- ACTIVE_TODO jo primary color and secondary color set ny krel hoy to red color ma error avse and error message ave se k pela primary and secondary color set kro pchi fari sample data run kravo                  -->
 	                   			 </td>
-	              			<?php return 'generate_assets';?>              		
+	              			            		
 	              		
 	              		         		
 	                	
@@ -300,7 +304,6 @@ box-shadow: none;">
 				        });	
 				        return false;            	
 		            }
-
 
 
 		            jQuery(".button.button-primary.button-hero.action.disabled").val("Adding "+(index+1)+" of "+btn_total+" "+btn_label);
