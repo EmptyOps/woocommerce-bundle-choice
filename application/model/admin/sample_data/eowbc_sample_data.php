@@ -45,6 +45,16 @@ class Eowbc_Sample_Data {
 		return 0;
 	}
 
+	public function additional_initial_step_key($step) {
+		
+		if($step==1) {
+		
+			return 'generate_assets';
+		}
+
+		return null;
+	}
+
 	public function get( $form_definition ) {
 		return $form_definition;
 	}
