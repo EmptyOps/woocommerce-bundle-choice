@@ -47,11 +47,6 @@ class Eowbc_Sample_Data {
 
 	public function additional_initial_step_key($step) {
 		
-		if($step==1) {
-		
-			return 'generate_assets';
-		}
-
 		return null;
 	}
 

@@ -75,7 +75,7 @@ box-shadow: none;">
 
 	              	<?php if($additional_initial_steps >= 1 && $_step <= $additional_initial_steps):?>
 	              		
-	              		<?php if($sample_data_obj->get_model()->additional_initial_step_key($_step) == 'generate_assets_keys'):?>
+	              		<?php if($sample_data_obj->get_model()->additional_initial_step_key($_step) == 'generate_assets'):?>
 	              				              			
 	              			<th>
 		                  		<h3>Assets</h3>
@@ -119,9 +119,11 @@ box-shadow: none;">
 
 	              	<?php if($additional_initial_steps >= 1 && $_step <= $additional_initial_steps):?>
 
-	              		<?php if($sample_data_obj->get_model()->additional_initial_step_key($_step) == 'generate_assets_keys'):?>
+	              		<?php if($sample_data_obj->get_model()->additional_initial_step_key($_step) == 'generate_assets'):?>
 
-	              			<input type="submit" name="save" value="<?php printf(__("Generate assets"),$_steps[$_step-1]); ?>"  class="button button-primary button-hero action ui button secondary">	
+	              			<input type="submit" name="save" value="<?php printf(__("Generate assets","woo-bundle-choice")); ?>"  class="button button-primary button-hero action ui button secondary">	
+
+	              		<?php endif; ?>
 
 	              	<?php else:?>
 
