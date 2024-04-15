@@ -1,12 +1,12 @@
 <?php
 /*
- *	Utilities Model SP Extension Api.
+ *	Utilities Model SP Extensions Api.
  */
 namespace eo\wbc\model\utilities;
 
 defined('ABSPATH') || exit;
 
-class SP_Extension_Api
+class SP_Extensions_Api
 {
 
 	private static $_instance = null;
@@ -33,7 +33,7 @@ class SP_Extension_Api
 	{
 
 		if (empty($extension_slug)) {
-			throw new Exception("Sorry, only construct method with SP extension api's slug etc parameters is supported, so pass SP extension api's slug etc parameters as parameters to construct method. Default construct method is not supported.", 1);
+			throw new Exception("Sorry, only construct method with SP extensions api's slug etc parameters is supported, so pass SP extensions api's slug etc parameters as parameters to construct method. Default construct method is not supported.", 1);
 		}
 
 		$this->extension_slug = $extension_slug;
@@ -87,6 +87,32 @@ class SP_Extension_Api
 	public function admin_page_template()
 	{
 		return $this->admin_page_template;
+	}
+
+	public static function call($url, $query_string, $payload = null)
+	{
+
+		self::additional_data($query_string, $payload);
+
+		$url .= (strpos($url, "?") === false) ? "?$query_string" : "$query_string";
+
+		$result = wp_remote_get($url);
+
+		--	we need to save the result of above call and then check it there is any stardered wordprees error otherwise return the result and in there is the error a return the result acodingly. -- to h
+	}
+
+	private static function additional_data(&$query_string, &$payload)
+	{
+
+		$query_string = self::active_theme_and_plugins();
+	}
+
+	private static function active_theme_and_plugins()
+	{
+
+		-- here we need to put the appropriate code for fetching the active theme and plugins. -- to h & -- to pi 
+
+
 	}
 
 }
