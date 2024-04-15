@@ -15342,7 +15342,7 @@ class Sample_Data_Template {
 
             } else {
 
-                return array("type"=>"error", "msg"=>"Save prosses failed for one of the item.");
+                return array("type"=>"error", "msg"=>"Save process failed for one of the item.");
 
             }
 
