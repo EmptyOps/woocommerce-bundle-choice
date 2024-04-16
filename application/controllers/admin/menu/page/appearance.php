@@ -7,7 +7,7 @@ if (!class_exists('Appearance')) {
 	class Appearance extends \eo\wbc\controllers\admin\Controller {
 
 		private static $_instance;
-		public static function instance(){
+		public static function instance() {
 			if (!isset(self::$_instance)) {
 				self::$_instance = new self;
 			}
@@ -681,7 +681,7 @@ if (!class_exists('Appearance')) {
 							'label' => 'Theme Primary Color',
 							'type' => 'color',
 							'sanitize' => 'sanitize_hex_color',
-							'value' => wbc()->options->get_option('appearance_filters', 'appearance_filters_bg_primary', '#ffffff', true, true),
+							'value' => wbc()->options->get_option('appearance_global', 'theme_primary_color', '#ffffff', true, true),
 							'is_id_as_name' => true,
 							'class' => array(),
 						),
@@ -689,7 +689,7 @@ if (!class_exists('Appearance')) {
 							'label' => 'Theme Secondary Color',
 							'type' => 'color',
 							'sanitize' => 'sanitize_hex_color',
-							'value' => wbc()->options->get_option('appearance_filters', 'appearance_filters_bg_primary', '#ffffff', true, true),
+							'value' => wbc()->options->get_option('appearance_global', 'theme_secondary_color', '#ffffff', true, true),
 							'is_id_as_name' => true,
 							'class' => array(),
 						)

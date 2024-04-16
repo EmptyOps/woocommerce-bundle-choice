@@ -80,14 +80,19 @@ class SP_Extensions_Api {
 
 		self::additional_data($query_string, $payload);
 
-		$url .= (str_contains($url, '?')) ? "$query_string" : "?$query_string";
+		$url .= (str_contains($url, '?') ? $query_string : "?" . $query_string);
 
 		$result = wp_remote_get($url);
 
-		--	we need to save the result of above call and then check it there is any stardered wordprees error otherwise return the result and in there is the error a return the result acodingly. -- to h
+		--	we need to check the result of above call and then check if there is any stardered wordprees error otherwise return the result and if there is the error then return the result acodingly. -- to h
 	}
 
 	private static function additional_data(&$query_string, &$payload) {
+
+		if (empty($query_string)) {
+
+			$query_string = "";
+		}
 
 		$query_string .= self::active_theme_and_plugins();
 	}
@@ -95,8 +100,6 @@ class SP_Extensions_Api {
 	private static function active_theme_and_plugins() {
 
 		-- here we need to put the appropriate code for fetching the active theme and plugins. -- to h & -- to pi 
-
-
 	}
 
 }
