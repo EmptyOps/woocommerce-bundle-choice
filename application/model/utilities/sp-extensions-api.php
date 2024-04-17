@@ -100,6 +100,51 @@ class SP_Extensions_Api {
 	private static function active_theme_and_plugins() {
 
 		-- here we need to put the appropriate code for fetching the active theme and plugins. -- to h & -- to pi 
+
+		$plugins = '';
+		$active_plugins = array();
+
+		if (function_exists('get_plugins')) {
+
+			$plugins=get_plugins();	
+
+			// Loop through each installed plugin
+			foreach ($plugins as $plugin_path => $plugin_info) {
+
+				// Check if the plugin is active
+				if (is_plugin_active($plugin_path)) {
+
+					// If active, add it to the active plugins array
+					$active_plugins[] = $plugin_info['Name'];
+				}
+
+			}
+
+		}
+
+		echo "Active Plugins:<br>";
+		foreach ($active_plugins as $active_plugin) {
+
+			echo "- $active_plugin<br>";
+		}
+
+		$theme = null;
+
+		if(function_exists('wp_get_theme')){
+
+			$theme=wp_get_theme();
+		} else {
+			
+			$theme=get_current_theme();
+		}	
+
+		$active_theme_name = $theme->get('Name');
+		$active_theme_version = $theme->get('Version');
+
+		// Output active theme information
+		echo "Active Theme Name: $active_theme_name <br>";
+		echo "Active Theme Version: $active_theme_version <br>";
+
 	}
 
 }
