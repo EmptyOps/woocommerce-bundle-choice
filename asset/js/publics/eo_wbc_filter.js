@@ -2488,8 +2488,9 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
     var input_type_icon_click = function(e, element, term_slug) {
 
-    	console.log('filters [input_type_icon_click]');
+    	console.log('filters [input_type_icon_click] 27-03-2024');
 		event = e;
+    	console.log('filters [input_type_icon_click] 222');
 		
 		e.stopPropagation();
 		e.preventDefault();
@@ -2497,11 +2498,21 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		var icon_filter_type = jQuery(/*this*/element).attr('data-type');
 		var filter_name = jQuery(/*this*/element).attr('data-filter');
 
+
+	    console.log('Icon filter type:');
+	    console.log(icon_filter_type);
+	    console.log('Filter name:');
+	    console.log(filter_name);
+
 		var filter_list= undefined;
 		var filter_target = undefined;
 		
+		console.log("icon_filter_type");
 		console.log(icon_filter_type);
 		if(icon_filter_type == 1) {
+
+			console.log("if under 11");
+
 			/*filter_list = jQuery('[name="checklist_'+__data_filter_slug+'"]');*/
 			// filter_list = jQuery('form#<?php echo $this->filter_prefix; ?>eo_wbc_filter [name="checklist_'+"<?php echo $term->slug; ?>"+'"]');
 			filter_list = jQuery('form#'+ _this.sub_configs.filter_prefix +'eo_wbc_filter [name="checklist_'+ term_slug +'"]');
@@ -2514,6 +2525,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
 			console.log(jQuery('form#'+ _this.sub_configs.filter_prefix +'eo_wbc_filter [name="_attribute"]'));
 		} else {
+			console.log("else under 1011");
 			/*filter_list = jQuery('[name="cat_filter_'+__data_filter_slug+'"]');*/
 			// filter_list = jQuery('form#<?php echo $this->filter_prefix; ?>eo_wbc_filter [name="cat_filter_'+"<?php echo $term->slug; ?>"+'"]');
 			filter_list = jQuery('form#'+ _this.sub_configs.filter_prefix +'eo_wbc_filter [name="cat_filter_'+ term_slug +'"]');
@@ -2558,10 +2570,14 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 			filter_target.val(filter_target.val().replace(','+filter_name,''));
 		} else { if((!filter_target.val().includes(filter_name)) && filter_list.val().length) {
 			filter_target.val(filter_target.val()+','+filter_name);	
-		} }					
+		} }	
+
+		console.log("eo_wbc_filter_icon_select add class thy che 11111");
 
 		var icon_val=jQuery(filter_list).val();	
 		jQuery(filter_list).val(icon_val.substr(0,icon_val.length));
+
+		console.log("eo_wbc_filter_icon_select add class thy che 2222222");
 		
 		jQuery(/*this*/element).toggleClass('eo_wbc_filter_icon_select');
 		// jQuery('.eo_wbc_filter_icon').click(function(){					
