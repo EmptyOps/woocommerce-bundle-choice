@@ -160,11 +160,12 @@ box-shadow: none;">
 		<?php if($sample_data_obj->get_model()->additional_initial_step_key($_step) == 'generate_assets'):?>
 	              		
 			<script type="text/javascript" >
+
 				jQuery(document).ready(function($) {  
 
 					var msg = 'There is some error while finishing the generate assets process, please contact Sphere Plugins Support for a quick fix on this if the problem persist.';
 
-				                //step 2 redirect;
+				    //step 2 redirect;
 		            var data = {	                
 		                '_wpnonce': '<?php echo wp_create_nonce('sample_data_jewelry');?>',
 		                'action':'eowbc_ajax',
@@ -203,6 +204,7 @@ box-shadow: none;">
 	<?php else:?>
 
 		<script type="text/javascript" >
+			
 		    jQuery(document).ready(function($) {            
 
 		    	let cat_value = 0;
