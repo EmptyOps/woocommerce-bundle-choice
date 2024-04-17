@@ -75,18 +75,18 @@ box-shadow: none;">
 
 	              	<?php if($additional_initial_steps >= 1 && $_step <= $additional_initial_steps):?>
 	              		
-	              		<?php if($sample_data_obj->get_model()->additional_initial_step_key($_step) == 'generate_assets_keys'):?>
+	              		<?php if($sample_data_obj->get_model()->additional_initial_step_key($_step) == 'generate_assets'):?>
 	              				              			
-	              			<th>
-		                  		<h3>Assets</h3>
-		                	</th>
+		              			<th>
+			                  		<h3>Assets</h3>
+			                	</th>
 		              		</tr>
 		              		<tr>
-		                		<td>Assets will be generated based on your theme color styling. For example based on your theme primary color and secondary color the asset will be generated. and if you not yet set primary color and secondary color setting we will be asked to set that below.</td>
+		                		<td>Assets will be generated based on your theme color styling. For example, based on your theme primary color and secondary color the assets will be generated. And if you have not yet set the primary color and the secondary color setting then you will be asked to set that below.</td>
 		             		</tr>
 		              		<tr>
 		                		<td>                    
-		                  			<!-- ACTIVE_TODO jo primary color and secondary color set ny krel hoy to red color ma error avse and error message ave se k pela primary and secondary color set kro pchi fari sample data run kravo      -- to h            -->
+		                  			        
 	                   			</td>
 	              			           		                	
 	                	<?php endif; ?>
@@ -119,9 +119,11 @@ box-shadow: none;">
 
 	              	<?php if($additional_initial_steps >= 1 && $_step <= $additional_initial_steps):?>
 
-	              		<?php if($sample_data_obj->get_model()->additional_initial_step_key($_step) == 'generate_assets_keys'):?>
+	              		<?php if($sample_data_obj->get_model()->additional_initial_step_key($_step) == 'generate_assets'):?>
 
-	              			<input type="submit" name="save" value="<?php printf(__("Generate assets"),$_steps[$_step-1]); ?>"  class="button button-primary button-hero action ui button secondary">	
+	              			<input type="submit" name="save" value="<?php printf(__("Generate assets","woo-bundle-choice")); ?>"  class="button button-primary button-hero action ui button secondary">	
+
+	              		<?php endif; ?>
 
 	              	<?php else:?>
 
@@ -154,44 +156,50 @@ box-shadow: none;">
 	?>
 
 	<?php if($additional_initial_steps >= 1 && $_step <= $additional_initial_steps):?>
-		<script type="text/javascript" >
-			jQuery(document).ready(function($) {  
-				var msg = 'There is some error while finishing the generate assets process, please contact Sphere Plugins Support for a quick fix on this if the problem persist.';
 
-			                //step 2 redirect;
-	            var data = {	                
-	                '_wpnonce': '<?php echo wp_create_nonce('sample_data_jewelry');?>',
-	                'action':'eowbc_ajax',
-	                'resolver':'sample_data/generate_assets',
-	                'resolver_path':'<?php echo apply_filters('eowbc_catattr_sample_data_resolver_path',''); ?>', 
-	                'feature_key':'<?php _e($feature_key); ?>',
-	                'type':'generate_assets',
-	            };
-	        	jQuery.ajax({
-		            url:eowbc_object.admin_url,
-		            type: 'POST',
-		            data: data,
-		            beforeSend:function(xhr){
+		<?php if($sample_data_obj->get_model()->additional_initial_step_key($_step) == 'generate_assets'):?>
+	              		
+			<script type="text/javascript" >
+				jQuery(document).ready(function($) {  
 
-		            },
-		            success:function(result,status,xhr){
-		                window.location.href="<?php echo($next_url); ?>";
-	            		return false;
-		            },
-		            error:function(xhr,status,error){
-		                /*console.log(xhr);*/			                
-		                eowbc_toast_common( 'error', msg );
-	            		return false;
-		            },
-		            complete:function(xhr,status){
-		           		//window.location.href="<?php echo($next_url); ?>";	//commented since can't allow redirect on error etc.
-	            		return false;     
-		            }
-		        });
-		    });
+					var msg = 'There is some error while finishing the generate assets process, please contact Sphere Plugins Support for a quick fix on this if the problem persist.';
 
-		</script>	               
-	
+				                //step 2 redirect;
+		            var data = {	                
+		                '_wpnonce': '<?php echo wp_create_nonce('sample_data_jewelry');?>',
+		                'action':'eowbc_ajax',
+		                'resolver':'sample_data/generate_assets',
+		                'resolver_path':'<?php echo apply_filters('eowbc_catattr_sample_data_resolver_path',''); ?>', 
+		                'feature_key':'<?php _e($feature_key); ?>',
+		                'type':'generate_assets',
+		            };
+
+		        	jQuery.ajax({
+			            url:eowbc_object.admin_url,
+			            type: 'POST',
+			            data: data,
+			            beforeSend:function(xhr){
+
+			            },
+			            success:function(result,status,xhr){
+			                window.location.href="<?php echo($next_url); ?>";
+		            		return false;
+			            },
+			            error:function(xhr,status,error){
+			                /*console.log(xhr);*/			                
+			                eowbc_toast_common( 'error', msg );
+		            		return false;
+			            },
+			            complete:function(xhr,status){
+			           		//window.location.href="<?php echo($next_url); ?>";	//commented since can't allow redirect on error etc.
+		            		return false;     
+			            }
+			        });
+			    });
+
+			</script>
+
+		<?php endif; ?> 
 	<?php else:?>
 
 		<script type="text/javascript" >
@@ -346,13 +354,13 @@ box-shadow: none;">
 		                cat_value = jQuery("[name^='cat_']:checkbox:checked").length;
 		                attr_value = jQuery("[name^='attr_']:checkbox:checked").length;
 
-		                if(cat_value>0 || (is_sp_ext_auto && current_step == '<?php echo ( ($additional_initial_steps+1) )?>'/*1*/)){
+		                if(cat_value>0 || (is_sp_ext_auto && current_step == <?php echo ($additional_initial_steps + 1);?>/*1*/)){
 		                	process_flag = 'cat';
 		                	btn_label = 'Categories';
 		                	main_categories_size = <?php echo sizeof($_category);?>;
 		                	cat_value = <?php echo $sample_data_obj->get_model()->get_categories_size();?>;
 		                	btn_total = cat_value;
-		                } else if(attr_value>0 || (is_sp_ext_auto && current_step == '<?php echo ( ($additional_initial_steps+2) )?>' /*2*/)){
+		                } else if(attr_value>0 || (is_sp_ext_auto && current_step == <?php echo ($additional_initial_steps + 2);?> /*2*/)){
 		                	process_flag = 'attr';
 		                	btn_label = 'Attributes';
 		                	attr_value = <?php echo $sample_data_obj->get_model()->get_attributes_size();?>;

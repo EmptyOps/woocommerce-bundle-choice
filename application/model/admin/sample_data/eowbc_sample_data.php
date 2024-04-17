@@ -47,11 +47,6 @@ class Eowbc_Sample_Data {
 
 	public function additional_initial_step_key($step) {
 		
-		if($step==1) {
-		
-			return 'generate_assets';
-		}
-
 		return null;
 	}
 
@@ -189,7 +184,8 @@ class Eowbc_Sample_Data {
 			  ///////////////////////////////////////////////////////////////////////
 			  
 			}
-			//ACTIVE_TODO NOTE: it seems that below if may not be hiting at all below if not would be converted to a positive outcome means code would not be executed ever which is inside below if. And so no more maintaining code inside below if and in furute may be we should simply remove it in wbc upgrade or max by first revision  --h and --jj.   
+			//ACTIVE_TODO NOTE: it seems that below if may not be hiting at all below if not would be converted to a positive outcome means the code would not be executed ever which is inside below if. And so we are no more maintaining the code inside below if and in furute may be we should simply remove during the wbc upgrade or max by first revision  --to h and -- to jj. 
+
 			if(!empty(wbc()->sanitize->post('step'))){
 			  if(wbc()->sanitize->post('step')==3) {
 
