@@ -2085,7 +2085,6 @@ class EOWBC_Filter_Widget {
 			"});\n";
 			wbc()->load->add_inline_script( '', $inline_script, 'common' );	
 		do_action('eowbc_after_icon_filter_widget',$this,$__prefix,$item);
-	}	
 
 	//convert category id to slug
 	public function eo_wbc_id_2_slug($id) {

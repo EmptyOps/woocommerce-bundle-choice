@@ -492,6 +492,7 @@ if(false){
 
 </style>
 <?php
+	}
 $custom_css = "
 		
 	/*----Variation_th------*/
@@ -1007,6 +1008,7 @@ if(false){
 	}	
 </style>
 <?php
+}
 $custom_css = "
 	#wbc_variation_toggle .caret {
 	    border-top: 0px dashed;
@@ -1063,6 +1065,7 @@ if(false){
 	}
 </style>
 <?php
+}
 $custom_css = "
 	table.variations tbody>tr:nth-child(odd)>td, table.variations tbody>tr:nth-child(odd)>th {
 	    background: transparent;
@@ -2518,7 +2521,7 @@ $custom_css = "
 wbc()->load->add_inline_style('', $custom_css, 'common');
 
 }
-
+if(false){
 ?>
 
 <script>
@@ -2594,6 +2597,56 @@ jQuery( document ).ready(function() {
 </script> -->
 <!-- /*----CSS---*/ -->
 <?php
+}	
+	$empty_init_toggle = false;
+	if(empty($init_toggle)){
+		$empty_init_toggle = true;
+	}
+	$inline_script =
+		"jQuery(document).ready(function($){\n" .
+		"    // ACTIVE_TODO below sections might be of use so keeping it on for now, but we must double confirm like legacy woo js layers provide full dropdown template supports. but i think still sementic specific matters need to be managed because we are using sementic templates.\n" .
+		"    // ACTIVE_TODO_OC_START\n" .
+		"    // do we need to disable the blow change event implimention -- to h\n" .
+		"    //  	eithere way blowo class would be loading only when the dropdown template of simentic is used on item page -- to h\n" .
+		"    // ACTIVE_TODO_OC_END \n" .
+		"    jQuery(\".dropdown\").dropdown().on('change',function(){\n" .
+		"        var target_selector =  $('#'+$(this).find('input[type=\"hidden\"]').data('id'));\n" .
+		"        target_selector.val($(this).find('input[type=\"hidden\"]').val());\n" .
+		"        /*$(this).parent().find('.selected').removeClass('selected');\n" .
+		"        $(this).addClass('selected');*/\n" .
+		"        jQuery(\".variations_form\" ).trigger('check_variations');\n" .
+		"        $(target_selector).trigger('change');\n" .
+		"    });\n" .
+		"\n" .
+		"    // ACTIVE_TODO we shoud simply put this class on the perticuler template html dom and coment the code below -- to h & -- to s\n" .
+		"    // for now lats comment the code but after confirming with t -- to t\n" .
+		"    if($('table.variations tbody>tr').length>0){\n" .
+		"        $('table.variations').addClass('ui raised segment');	\n" .
+		"    }\n" .
+		"    \n" .
+		"    $('#wbc_variation_toggle').on('click',function(){\n" .
+		"        if($(this).find('.icon').hasClass('rotate-up')) {\n" .
+		"            \$(this).find('.icon').removeClass('rotate-up');\n" .
+		"            \$(this).find('.icon').addClass('rotate-down');\n" .
+		"            \$('table.variations').slideToggle(\"slow\");\n" .
+		"        } else {\n" .
+		"            \$(this).find('.icon').removeClass('rotate-down');\n" .
+		"            \$(this).find('.icon').addClass('rotate-up');\n" .
+		"            \$('table.variations').slideToggle(\"slow\");\n" .
+		"        }        				\n" .
+		"    });\n" .
+	
+		" ".
+            (
+     			$empty_init_toggle == true
+     			?
+     			"\$('#wbc_variation_toggle').trigger('click');\n" .
+     			:
+                "".
+            ) .
+       	"});\n";
+
+	wbc()->load->add_inline_script( '', $inline_script, 'common' );
 if(false){
 ?>
 <style type="text/css">
@@ -3098,7 +3151,8 @@ $custom_css = "
 		color: <?php _e($font_hover_color); ?>;	
 	}
 ";
-wbc()->load->add_inline_style('', $custom_css, 'common');	
+wbc()->load->add_inline_style('', $custom_css, 'common');
+if(false){	
 ?>
 <script>
 	jQuery(document).ready(function($){
@@ -3150,9 +3204,66 @@ wbc()->load->add_inline_style('', $custom_css, 'common');
 	});
 </script>
 <?php
+}
+$empty_init_toggle_empty_init_toggle = false;
+if(empty($init_toggle)){
+	$empty_init_toggle_empty_init_toggle = true;
+}
+$inline_script = 
+"jQuery(document).ready(function($){\n" .
+"    jQuery(\".dropdown\").dropdown().on('change',function(){\n" .
+"        var target_selector =  $('#'+$(this).find('input[type=\"hidden\"]').data('id'));\n" .
+"        target_selector.val($(this).find('input[type=\"hidden\"]').val());\n" .
+"        /*$(this).parent().find('.selected').removeClass('selected');\n" .
+"        $(this).addClass('selected');*/\n" .
+"        jQuery(\".variations_form\" ).trigger('check_variations');\n" .
+"        $(target_selector).trigger('change');\n" .
+"    });\n" .
+"    if($('table.variations tbody>tr').length>0){\n" .
+"        $('table.variations').addClass('ui raised segment');	\n" .
+"    }\n" .
+"    \n" .
+"    $('#wbc_variation_toggle').on('click',function(){\n" .
+"        if($(this).find('.icon').hasClass('rotate-up')) {\n" .
+"            $(this).find('.icon').removeClass('rotate-up');\n" .
+"            $(this).find('.icon').addClass('rotate-down');\n" .
+"            $('table.variations').slideToggle(\"slow\");\n" .
+"        } else {\n" .
+"            $(this).find('.icon').removeClass('rotate-down');\n" .
+"            $(this).find('.icon').addClass('rotate-up');\n" .
+"            $('table.variations').slideToggle(\"slow\");\n" .
+"        }        				\n" .
+"    });\n" .
+"\n" .
+		" ".
+            (
+     			$empty_init_toggle_empty_init_toggle == true
+     			?
+     			"\$('#wbc_variation_toggle').trigger('click');\n" .
+     			:
+                "".
+            ) .
+"\n" .
+"    // ACTIVE_TODO_OC_START\n" .
+"    // --	below two click events would be implemented in the core variations js module, in that case it will be remove here \n" .
+"    // ACTIVE_TODO_OC_END\n" .
+"    $('.variable-item').on('click',function(){\n" .
+"        var target_selector = $('#'+$(this).data('id'));\n" .
+"        target_selector.val($(this).data('value'));\n" .
+"        $(this).parent().find('.selected').removeClass('selected');\n" .
+"        $(this).addClass('selected');\n" .
+"        jQuery(\".variations_form\" ).trigger('check_variations');\n" .
+"        $(target_selector).trigger('change');\n" .
+"    });\n" .
+"\n" .
+"    jQuery(\".variations_form\").on('click', '.reset_variations'/*'woocommerce_variation_select_change'*//*'reset'*/,function(){\n" .
+"        jQuery('.variable-items-wrapper .selected').removeClass('selected');\n" .
+"        jQuery('.variable-items-wrapper .dropdown').dropdown('restore defaults');\n" .
+"    });\n" .
+"});\n";
+wbc()->load->add_inline_script( '', $inline_script, 'common' );
+
 // echo ob_get_clean();
-
-
 
 ?>
 
