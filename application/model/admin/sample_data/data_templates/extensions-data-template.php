@@ -73,4 +73,9 @@ class Extensions_Data_Template extends \eo\wbc\model\admin\sample_data\data_temp
         // ACTIVE_TODO nothing added here so far but we can add some fundamental and generic operation related to extensions. -- to h
     }
 
+    public function generate_assets($feature_key) {
+
+        \eo\wbc\model\utilities\SP_Extensions_Api::call('','');
+        
+    }
 }

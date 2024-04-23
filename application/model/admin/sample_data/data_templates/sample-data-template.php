@@ -15361,6 +15361,7 @@ class Sample_Data_Template {
 
                 } else {
 
+
                     self::restore_original_input($original_input, $input_data_value);
 
                     return array("type"=>"error", "msg"=>"Save prosses failed for one of the item.");

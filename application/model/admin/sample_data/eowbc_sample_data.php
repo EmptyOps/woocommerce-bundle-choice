@@ -40,6 +40,16 @@ class Eowbc_Sample_Data {
 		return $this->data_template;
 	}
 
+	public function additional_initial_steps() {
+		
+		return 0;
+	}
+
+	public function additional_initial_step_key($step) {
+		
+		return null;
+	}
+
 	public function get( $form_definition ) {
 		return $form_definition;
 	}
@@ -175,6 +185,7 @@ class Eowbc_Sample_Data {
 			  
 			}
 
+			//ACTIVE_TODO/NOTE: it seems that below if may not be hiting at all means below if would not be converted to a positive outcome means the code would not be executed ever which is inside below if. And so we are no more maintaining the code inside below if and in furute may be we should simply remove during the wbc upgrade or max by the first revision  -- to h and -- to jj. 
 			if(!empty(wbc()->sanitize->post('step'))){
 			  if(wbc()->sanitize->post('step')==3) {
 
@@ -360,7 +371,6 @@ class Eowbc_Sample_Data {
 		}
 
 		
-
 		$parent_id = $product_id;
 		if(!empty($product['variation'])){
 
