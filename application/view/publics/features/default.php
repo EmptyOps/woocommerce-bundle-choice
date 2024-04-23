@@ -6,6 +6,7 @@
 if(!empty($product_data)):
   ob_start();
  ?>
+ <?php print_r($product_data_slugs) ; ?>
 <hr style="clear: both;margin-top: 0.5em;margin-bottom: 0.5em;" />
     <h4 style="text-align: center;">Specifications</h4>
 <hr style="clear: both;margin-top: 0.5em;margin-bottom: 0.5em;" />

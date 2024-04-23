@@ -1,7 +1,7 @@
 <?php 
 
 /*
-*	Specification view temlate part.
+*   Specification view temlate part.
 */
 
 
@@ -16,19 +16,28 @@
     }
     
     $product_data = array();
+    $product_data_slugs=array();
+
     $sku = $product->get_sku();
+ 
     if(!empty($sku)){
-        $product_data[]=array('SKU',$sku);    
+        $product_data[]=array('SKU',$sku);
+        $product_data_slugs[] = 'woocommerce-product-sku-slug';    
     }            
 
     if($product->has_weight()){
        $product_data[]=array('Weight',$product->get_weight());
+       $product_data_slugs[] = 'woocommerce-product-weight-slug';   
+
     }
 
     if($product->has_dimensions()){
         $product_data[]=array('Height',$product->get_height());
+        $product_data_slugs[] = 'woocommerce-product-height-slug';
         $product_data[]=array('Width',$product->get_width());
-        $product_data[]=array('Length',$product->get_length());                
+        $product_data_slugs[] = 'woocommerce-product-width-slug';
+        $product_data[]=array('Length',$product->get_length()); 
+        $product_data_slugs [] = 'woocommerce-product-length-slug';            
     }
 
     if($product->has_attributes()){
@@ -46,8 +55,11 @@
                         }
                     }
                     $product_data[]=array(wc_attribute_label($attribute->get_name()),implode(', ',$_term_list_));
-                }                        //wbc()->wc->get_term_by( 'id',,$attribute['name']);    
+                    $product_data_slugs[] = $attribute->get_name();
+                   
+                }                     //wbc()->wc->get_term_by( 'id',,$attribute['name']);    
             }
+
         }
     }
 
@@ -61,6 +73,8 @@
                 $meta_value = $product->get_meta($meta_key,true);
                 if(!empty($meta_value)){
                     $product_data[] = array($meta_key,$meta_value);
+                    $product_data_slugs[] = 'woocommerce-product-'.$meta_key.'-slug';
+
                 }
 
             }
@@ -71,9 +85,11 @@
     $certificate_link = $product->get_meta('_certificate_link',true);    
     if(!empty($certificate_link)){
         $product_data[] = array(__('Certificate','woo-bundle-choice'),"<a href='${certificate_link}' target='_blank'>".__('Click here','woo-bundle-choice')."</a>");
+        $product_data_slugs[] = 'woocommerce-product-_certificate_link-slug';
     }
 
-
+    
+    
     $product_data = apply_filters('eowbc_specification_data',$product_data,$product);
    
     if(!empty($product_data) and is_array($product_data)) {
@@ -84,16 +100,16 @@
             if('default'===$display_style){
                 if(sizeof($product_data) > 1) {
                     list($product_data_1, $product_data_2) = array_chunk($product_data, ceil(count($product_data) / 2));
-                    wbc()->load->template('publics/features/default',compact('product_data','product_data_1','product_data_2'));
+                    wbc()->load->template('publics/features/default',compact('product_data','product_data_1','product_data_2','product_data_slugs'));
                 }
                 else {
-                    wbc()->load->template('publics/features/default',compact('product_data'));
+                    wbc()->load->template('publics/features/default',compact('product_data','product_data_slugs'));
                 }
             } elseif ('template_1'===$display_style) {            
-                wbc()->load->template('publics/features/template_1',compact('product_data'));
+                wbc()->load->template('publics/features/template_1',compact('product_data','product_data_slugs'));
                 
             } elseif ('template_2'===$display_style) {
-                wbc()->load->template('publics/features/template_2',compact('product_data'));
+                wbc()->load->template('publics/features/template_2',compact('product_data','product_data_slugs'));
             }
         }
     }
