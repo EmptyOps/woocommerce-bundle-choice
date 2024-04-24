@@ -9,7 +9,7 @@ We love your input! We want to make contributing to this project as easy and tra
 
 ## We Develop with Github
 We use github to host code, to track issues and feature requests, as well as accept pull requests.
-If you do not have experience or doing it first time follow below links,
+If you do not have experience of making pull request or doing it first time follow below links:
 
 [makeapullrequest.com](https://makeapullrequest.com/) or
 [www.firsttimersonly.com](https://www.firsttimersonly.com/)
@@ -25,7 +25,7 @@ Pull requests are the best way to propose changes to the codebase (we use [Githu
 6. Make sure your code lints.
 7. Issue that pull request!
 
-If you do not have experience or doing it first time follow below links,
+If you do not have experience of making pull request or doing it first time follow below links:
 
 [makeapullrequest.com](https://makeapullrequest.com/) or
 [www.firsttimersonly.com](https://www.firsttimersonly.com/)
