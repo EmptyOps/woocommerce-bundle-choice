@@ -9,24 +9,35 @@ We love your input! We want to make contributing to this project as easy and tra
 
 ## We Develop with Github
 We use github to host code, to track issues and feature requests, as well as accept pull requests.
-If you do not have experience of making pull request or doing it first time follow below links:
-
+If you do not have experience of making pull request or if you have any question regarding pull requests then follow below links:
+[Youtube Video](https://www.youtube.com/watch?v=jRLGobWwA3Y&ab_channel=KeepOnCoding) or
 [makeapullrequest.com](https://makeapullrequest.com/) or
 [www.firsttimersonly.com](https://www.firsttimersonly.com/)
 
 ## We Use [Github Flow](https://guides.github.com/introduction/flow/index.html), So All Code Changes Happen Through Pull Requests
 Pull requests are the best way to propose changes to the codebase (we use [Github Flow](https://guides.github.com/introduction/flow/index.html)). We actively welcome your pull requests:
 
-1. Fork the repo and create your branch from `master`.
-2. If you've added code that should be tested, add tests.
-3. If you've changed APIs, update the documentation.
-4. For testing purpose Make sure that the Woo Choice Plugin is uploaded/updated.
-5. ui_QCed_bhavesh_1 branch should be uploaded.
-6. Make sure your code lints.
-7. Issue that pull request!
+1. Fork the repo and create your branch from `ui_QCed_bhavesh_pull_request`.
+2. If you've added code that should be tested, then below steps.
+2.1. Make Changes to the Plugin
+     Implement your changes in the plugin's code. This might involve bug fixes, new features, or code improvements.
+     Test your changes on a local development environment to ensure they work without errors.
+2.2  Create a ZIP File and Upload to Repository
+     Once your changes are complete and tested locally, create a ZIP file of the entire plugin folder, including all necessary files and subfolders.
+     Open the repository and ensure you are on the ui_QCed_bhavesh_1 branch.
+     Upload the ZIP file to this branch, either by replacing the existing plugin files or by adding it as a new commit.
+     Commit your changes with a clear and descriptive message explaining what changes were made.
+     Push your commit to the remote repository to ensure the changes are uploaded and visible to others.
+2.3  Test the Updated Plugin
+     After the changes have been uploaded, download and install the updated plugin ZIP file to a test environment.
+     Test the plugin to ensure it installs/updates correctly without errors.
+     Conduct various test cases, including both positive scenarios (where things should work) and negative scenarios (where errors could occur).
+     Confirm the expected outcomes for each test case to ensure the plugin is functioning as intended.
+3. Issue that pull request!
 
-If you do not have experience of making pull request or doing it first time follow below links:
+If you do not have experience of making pull request or if you have any question regarding pull requests then follow below links:
 
+[Youtube Video](https://www.youtube.com/watch?v=jRLGobWwA3Y&ab_channel=KeepOnCoding) or
 [makeapullrequest.com](https://makeapullrequest.com/) or
 [www.firsttimersonly.com](https://www.firsttimersonly.com/)
 
@@ -119,7 +130,7 @@ further defined and clarified by project maintainers.
 ### Enforcement
 
 Instances of abusive, harassing, or otherwise unacceptable behavior may be
-reported by contacting the project team at [INSERT EMAIL ADDRESS]. All
+reported by contacting the project team at [support@sphereplugins.com]. All
 complaints will be reviewed and investigated and will result in a response that
 is deemed necessary and appropriate to the circumstances. The project team is
 obligated to maintain confidentiality with regard to the reporter of an incident.
@@ -131,7 +142,7 @@ members of the project's leadership.
 
 ### Attribution
 
-This Code of Conduct is adapted from the [Contributor Covenant][homepage].
+This Code of Conduct is adapted from the [Gist Github][homepage].
 
 [homepage]: https://gist.github.com/PurpleBooth/b24679402957c63ec426
 ## License
