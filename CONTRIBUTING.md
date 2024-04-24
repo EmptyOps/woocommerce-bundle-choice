@@ -11,7 +11,8 @@ We love your input! We want to make contributing to this project as easy and tra
 We use github to host code, to track issues and feature requests, as well as accept pull requests.
 If you do not have experience of making pull request or if you have any question regarding pull requests then follow below links:
 
-[Youtube Video](https://www.youtube.com/watch?v=YTbRzhQju4c&ab_channel=PippinWilliamson) or
+[Youtube Video(with git bash)](https://www.youtube.com/watch?v=jRLGobWwA3Y) or
+[Youtube Video(direct in browser without git bash interface)](https://www.youtube.com/watch?v=YTbRzhQju4c&ab_channel=PippinWilliamson) or
 [makeapullrequest.com](https://makeapullrequest.com/) or
 [www.firsttimersonly.com](https://www.firsttimersonly.com/)
 
@@ -21,21 +22,37 @@ Pull requests are the best way to propose changes to the codebase (we use [Githu
 1. Fork the repo and create your branch from `ui_QCed_bhavesh_pull_request`.
 2. If you've added code that should be tested, then below steps.
 
-2.1. Verify that the necessary changes have been made to the Woo Choice Plugin.
+2.1. Create a ZIP File of the Plugin
+  Identify the necessary files and folders that make up your plugin. These typically include the applications, asset, languages, templates, Sphreplugins, and other files in the root directory like composer, autoload.php, index.php, licence.txt, readme.txt, uninstall.php, and Woo-bundle-choice.php.
 
-2.2  Ensure that the ui_QCed_bhavesh_1 branch is uploaded to the repository.
 
-2.3 Create a zip file containing all required files and folders for installation, if not already done.
+2.2  Install/Update the Plugin on a WordPress Site
+  If you're installing the plugin for the first time:
+  Go to the WordPress Admin Dashboard.
+  Navigate to "Plugins" and then "Add New".
+  Click on "Upload Plugin" and select the ZIP file you created.
+  Click "Install Now", then activate the plugin once the installation is complete.
+  If you're updating an existing plugin:
+  Navigate to "Plugins".
+  Find the existing plugin and deactivate it.
+  Delete the plugin (this ensures a clean update).
+  Follow the steps to install the new version from the ZIP file, then activate it.
 
-2.4 If the plugin is not already installed, install it using the zip file.
+2.3 Test the Plugin
 
-2.5 If the plugin is already installed, update it using the zip file.
+  Basic Functionality: Ensure that the plugin's core functionality works as expected. Test any specific features or changes you've made.
+  Negative Scenarios: Test edge cases and scenarios that could cause errors. For example, inputting incorrect data, using invalid inputs, or triggering unexpected conditions.
+  Positive Scenarios: Test common use cases to confirm the expected behavior. Ensure that the plugin operates smoothly with other WordPress features and plugins.
+  Outcomes Confirmation: Validate the results of your test cases. Check for errors, warnings, or unexpected behavior.
+  Logs and Debugging: If available, review the error logs or debug logs for any issues or warnings. Make sure there are no PHP errors or warnings in the error logs.
+  Compatibility Checks: Test with different themes and other common plugins to ensure compatibility.
 
 3. Issue that pull request!
 
 If you do not have experience of making pull request or if you have any question regarding pull requests then follow below links:
 
-[Youtube Video](https://www.youtube.com/watch?v=YTbRzhQju4c&ab_channel=PippinWilliamson) or
+[Youtube Video(with git bash)](https://www.youtube.com/watch?v=jRLGobWwA3Y)
+[Youtube Video(direct in browser without git bash interface)](https://www.youtube.com/watch?v=YTbRzhQju4c&ab_channel=PippinWilliamson) or
 [makeapullrequest.com](https://makeapullrequest.com/) or
 [www.firsttimersonly.com](https://www.firsttimersonly.com/)
 
