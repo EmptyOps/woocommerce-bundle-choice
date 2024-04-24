@@ -11,7 +11,7 @@ We love your input! We want to make contributing to this project as easy and tra
 We use github to host code, to track issues and feature requests, as well as accept pull requests.
 If you do not have experience of making pull request or if you have any question regarding pull requests then follow below links:
 
-[Youtube Video](https://www.youtube.com/watch?v=jRLGobWwA3Y&ab_channel=KeepOnCoding) or
+[Youtube Video](https://www.youtube.com/watch?v=YTbRzhQju4c&ab_channel=PippinWilliamson) or
 [makeapullrequest.com](https://makeapullrequest.com/) or
 [www.firsttimersonly.com](https://www.firsttimersonly.com/)
 
@@ -21,31 +21,21 @@ Pull requests are the best way to propose changes to the codebase (we use [Githu
 1. Fork the repo and create your branch from `ui_QCed_bhavesh_pull_request`.
 2. If you've added code that should be tested, then below steps.
 
-2.1. Make Changes to the Plugin
+2.1. Verify that the necessary changes have been made to the Woo Choice Plugin.
 
-  Implement your changes in the plugin's code. This might involve bug fixes, new features, or code improvements.
-  Test your changes on a local development environment to ensure they work without errors.
+2.2  Ensure that the ui_QCed_bhavesh_1 branch is uploaded to the repository.
 
-2.2  Create a ZIP File and Upload to Repository
+2.3 Create a zip file containing all required files and folders for installation, if not already done.
 
-  Once your changes are complete and tested locally, create a ZIP file of the entire plugin folder, including all necessary files and subfolders.
-  Open the repository and ensure you are on the ui_QCed_bhavesh_1 branch.
-  Upload the ZIP file to this branch, either by replacing the existing plugin files or by adding it as a new commit.
-  Commit your changes with a clear and descriptive message explaining what changes were made.
-  Push your commit to the remote repository to ensure the changes are uploaded and visible to others.
+2.4 If the plugin is not already installed, install it using the zip file.
 
-2.3  Test the Updated Plugin
+2.5 If the plugin is already installed, update it using the zip file.
 
-  After the changes have been uploaded, download and install the updated plugin ZIP file to a test environment.
-  Test the plugin to ensure it installs/updates correctly without errors.
-  Conduct various test cases, including both positive scenarios (where things should work) and negative scenarios (where errors could occur).
-  Confirm the expected outcomes for each test case to ensure the plugin is functioning as intended.
-  
 3. Issue that pull request!
 
 If you do not have experience of making pull request or if you have any question regarding pull requests then follow below links:
 
-[Youtube Video](https://www.youtube.com/watch?v=jRLGobWwA3Y&ab_channel=KeepOnCoding) or
+[Youtube Video](https://www.youtube.com/watch?v=YTbRzhQju4c&ab_channel=PippinWilliamson) or
 [makeapullrequest.com](https://makeapullrequest.com/) or
 [www.firsttimersonly.com](https://www.firsttimersonly.com/)
 
