@@ -15331,16 +15331,16 @@ class Sample_Data_Template {
             - peramiter conform karva na che
                 -- biji extension call avta hoy to ene bhi alg alg peramiter na settings hache to may be it is betar k je peramiter pass karvana hoy te data templat clas s mathi save function call tyai tyre $args argument ma or otherwise adishonel peramiter aa function ma add kari ne support add karvo padche. for example ke save function paramiter_1,paramiter_2,paramiter_3,paramiter_4 evu kaik -- to h & -- to b
             $res_save = null;
-            if(isset($save_function_arguments[3])){
+            if(isset($save_function_arguments[3])) {
 
                 $res_save = $model_class::instance()->save($save_function_arguments[0], $save_function_arguments[1], $save_function_arguments[2], $save_function_arguments[3]);
-            } elseif(isset($save_function_arguments[2])) {
+            } elseif (isset($save_function_arguments[2])) {
 
                 $res_save = $model_class::instance()->save($save_function_arguments[0], $save_function_arguments[1], $save_function_arguments[2]);
-            } elseif(isset($save_function_arguments[1])) {
+            } elseif (isset($save_function_arguments[1])) {
 
-                $res_save = $model_class::instance()->save($save_function_arguments[1], $save_function_arguments[1]);
-            } elseif(isset($save_function_arguments[0])) {
+                $res_save = $model_class::instance()->save($save_function_arguments[0], $save_function_arguments[1]);
+            } elseif (isset($save_function_arguments[0])) {
 
                 $res_save = $model_class::instance()->save($save_function_arguments[0]);
             } else {
@@ -15360,7 +15360,6 @@ class Sample_Data_Template {
                     -- nothing to do so far
 
                 } else {
-
 
                     self::restore_original_input($original_input, $input_data_value);
 
@@ -15394,7 +15393,7 @@ class Sample_Data_Template {
 
             if(isset($original_input[$idv_key])){
 
-                    $_POST[$idv_key] =  $original_input[$idv_key];  
+                $_POST[$idv_key] =  $original_input[$idv_key];  
             } else {
 
                 unset($_POST[$idv_key]);
