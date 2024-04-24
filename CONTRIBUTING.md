@@ -10,6 +10,7 @@ We love your input! We want to make contributing to this project as easy and tra
 ## We Develop with Github
 We use github to host code, to track issues and feature requests, as well as accept pull requests.
 If you do not have experience of making pull request or if you have any question regarding pull requests then follow below links:
+
 [Youtube Video](https://www.youtube.com/watch?v=jRLGobWwA3Y&ab_channel=KeepOnCoding) or
 [makeapullrequest.com](https://makeapullrequest.com/) or
 [www.firsttimersonly.com](https://www.firsttimersonly.com/)
@@ -19,15 +20,18 @@ Pull requests are the best way to propose changes to the codebase (we use [Githu
 
 1. Fork the repo and create your branch from `ui_QCed_bhavesh_pull_request`.
 2. If you've added code that should be tested, then below steps.
+
 2.1. Make Changes to the Plugin
      Implement your changes in the plugin's code. This might involve bug fixes, new features, or code improvements.
      Test your changes on a local development environment to ensure they work without errors.
+
 2.2  Create a ZIP File and Upload to Repository
      Once your changes are complete and tested locally, create a ZIP file of the entire plugin folder, including all necessary files and subfolders.
      Open the repository and ensure you are on the ui_QCed_bhavesh_1 branch.
      Upload the ZIP file to this branch, either by replacing the existing plugin files or by adding it as a new commit.
      Commit your changes with a clear and descriptive message explaining what changes were made.
      Push your commit to the remote repository to ensure the changes are uploaded and visible to others.
+     
 2.3  Test the Updated Plugin
      After the changes have been uploaded, download and install the updated plugin ZIP file to a test environment.
      Test the plugin to ensure it installs/updates correctly without errors.
