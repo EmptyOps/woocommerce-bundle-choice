@@ -22,17 +22,20 @@ Pull requests are the best way to propose changes to the codebase (we use [Githu
 2. If you've added code that should be tested, then below steps.
 
 2.1. Make Changes to the Plugin
+
      Implement your changes in the plugin's code. This might involve bug fixes, new features, or code improvements.
      Test your changes on a local development environment to ensure they work without errors.
 
 2.2  Create a ZIP File and Upload to Repository
+
      Once your changes are complete and tested locally, create a ZIP file of the entire plugin folder, including all necessary files and subfolders.
      Open the repository and ensure you are on the ui_QCed_bhavesh_1 branch.
      Upload the ZIP file to this branch, either by replacing the existing plugin files or by adding it as a new commit.
      Commit your changes with a clear and descriptive message explaining what changes were made.
      Push your commit to the remote repository to ensure the changes are uploaded and visible to others.
-     
+
 2.3  Test the Updated Plugin
+
      After the changes have been uploaded, download and install the updated plugin ZIP file to a test environment.
      Test the plugin to ensure it installs/updates correctly without errors.
      Conduct various test cases, including both positive scenarios (where things should work) and negative scenarios (where errors could occur).
