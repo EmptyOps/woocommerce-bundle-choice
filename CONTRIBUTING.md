@@ -11,8 +11,8 @@ We love your input! We want to make contributing to this project as easy and tra
 We use github to host code, to track issues and feature requests, as well as accept pull requests.
 If you do not have experience of making pull request or if you have any question regarding pull requests then follow below links:
 
-[Youtube Video(with git bash)](https://www.youtube.com/watch?v=jRLGobWwA3Y) or
-[Youtube Video(direct in browser without git bash interface)](https://www.youtube.com/watch?v=YTbRzhQju4c&ab_channel=PippinWilliamson) or
+[Youtube Video](https://www.youtube.com/watch?v=jRLGobWwA3Y)(with git bash) or
+[Youtube Video](https://www.youtube.com/watch?v=YTbRzhQju4c&ab_channel=PippinWilliamson)(simple way direlty on command line involved. make sure this is older version, Be sure to find on newer version) or
 [makeapullrequest.com](https://makeapullrequest.com/) or
 [www.firsttimersonly.com](https://www.firsttimersonly.com/)
 
