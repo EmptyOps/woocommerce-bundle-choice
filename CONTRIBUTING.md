@@ -24,7 +24,7 @@ Pull requests are the best way to propose changes to the codebase (we use [Githu
 
 - Create a ZIP File of the Plugin
 
-  Create zip file of below mentioned folders and files. In our repository you will find many folders and files but you will need only below list of folder and file to test the plugin:
+  Create zip file of below mentioned folders and files. In our repository you will find many folders and files but you will need only below list of folders and files to test the plugin:
    - applications/
    - asset/
    - languages/ 
