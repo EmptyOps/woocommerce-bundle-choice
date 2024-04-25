@@ -23,33 +23,28 @@ Pull requests are the best way to propose changes to the codebase (we use [Githu
 2. If you've added code that should be tested, then below steps.
 
 - Create a ZIP File of the Plugin
+  In our repository you will find many folder and files but you need only below list of folder and file to test the plugins:
+   - applications/
+   - asset/
+   - languages/ 
+   - templates/
+   - vendor folder/
+    - Sphreplugins/
+    - Composer/
+    - autoload.php/
+   - index.php
+   - licence.txt
+   - readme.txt
+   - unistall.php
+   - Woo-bundle-choice.php  
 
-  Identify the necessary files and folders that make up your plugin. These typically include the applications, asset, languages, templates, Sphreplugins, and other files in the root directory like composer, autoload.php, index.php, licence.txt, readme.txt, uninstall.php, and Woo-bundle-choice.php.
 
+- Install or Update the Plugin on your WordPress Site
+  You can install above zip if you have not yet installed BUNDLOICE(formerly WOO CHOICE PLUGIN). Or Otherwise you can simplly directly overright within the plugins folder the content of the above zip file plugin/woo-bundle-choice.
 
-- Install/Update the Plugin on a WordPress Site 
+- Test the Plugin functionality with necessary scenarios.
 
-  If you're installing the plugin for the first time:
-  Go to the WordPress Admin Dashboard.
-  Navigate to "Plugins" and then "Add New".
-  Click on "Upload Plugin" and select the ZIP file you created.
-  Click "Install Now", then activate the plugin once the installation is complete.
-  If you're updating an existing plugin:
-  Navigate to "Plugins".
-  Find the existing plugin and deactivate it.
-  Delete the plugin (this ensures a clean update).
-  Follow the steps to install the new version from the ZIP file, then activate it.
-
-- Test the Plugin
-
-  Basic Functionality: Ensure that the plugin's core functionality works as expected. Test any specific features or changes you've made.
-  Negative Scenarios: Test edge cases and scenarios that could cause errors. For example, inputting incorrect data, using invalid inputs, or triggering unexpected conditions.
-  Positive Scenarios: Test common use cases to confirm the expected behavior. Ensure that the plugin operates smoothly with other WordPress features and plugins.
-  Outcomes Confirmation: Validate the results of your test cases. Check for errors, warnings, or unexpected behavior.
-  Logs and Debugging: If available, review the error logs or debug logs for any issues or warnings. Make sure there are no PHP errors or warnings in the error logs.
-  Compatibility Checks: Test with different themes and other common plugins to ensure compatibility.
-
-3. Submit your pull request following the media link:
+3. Issue that pull request!
 
 If you do not have experience of making pull request or if you have any question regarding pull requests then follow below links:
 
