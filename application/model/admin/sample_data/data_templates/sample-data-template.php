@@ -15328,8 +15328,6 @@ class Sample_Data_Template {
 
             }
 
-            - peramiter conform karva na che
-                -- biji extension call avta hoy to ene bhi alg alg peramiter na settings hache to may be it is betar k je peramiter pass karvana hoy te data templat clas s mathi save function call tyai tyre $args argument ma or otherwise adishonel peramiter aa function ma add kari ne support add karvo padche. for example ke save function paramiter_1,paramiter_2,paramiter_3,paramiter_4 evu kaik -- to h & -- to b
             $res_save = null;
             if(isset($save_function_arguments[3])) {
 
@@ -15376,12 +15374,6 @@ class Sample_Data_Template {
 
             self::restore_original_input($original_input, $input_data_value);
 
-            /*foreach($input_data_value as $idv_key=>$idv_value) { 
-
-                unset($_POST[$idv_key]);
-
-            }
-*/
         }
 
         return $res;
