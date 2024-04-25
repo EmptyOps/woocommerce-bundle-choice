@@ -42,7 +42,7 @@ Pull requests are the best way to propose changes to the codebase (we use [Githu
 
 - Install or Update the Plugin on your WordPress Site
 
-  You can install or update above created zip file from the wordpress admin plugins page. Or Otherwise you can simplly directly overwrite the content of the above created zip file into the folder plugins folder wordpress-site-root/wp-content/plugins/woo-bundle-choice.
+  You can install or update above created zip file from the wordpress admin plugins page. Or Otherwise you can directly overwrite the content of the above created zip file into the folder `your-wordpress-site-root/wp-content/plugins/woo-bundle-choice`.
 
 - Test the plugin functionality with necessary scenarios.
 
