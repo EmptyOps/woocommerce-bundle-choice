@@ -19,34 +19,34 @@ If you do not have experience of making pull request or if you have any question
 ## We Use [Github Flow](https://guides.github.com/introduction/flow/index.html), So All Code Changes Happen Through Pull Requests
 Pull requests are the best way to propose changes to the codebase (we use [Github Flow](https://guides.github.com/introduction/flow/index.html)). We actively welcome your pull requests:
 
-1. Fork the repo and create your branch from `ui_QCed_bhavesh_pull_request`.
-2. If you've added code that should be tested, then follow below steps:
+- Fork the repo and create your branch from `ui_QCed_bhavesh_pull_request`.
+- If you've added code that should be tested, then follow below steps:
 
-- Create a ZIP File of the Plugin
+    - Create a ZIP File of the Plugin
 
-  Create zip file of below mentioned folders and files. In our repository you will find many folders and files but you will need only below list of folders and files to test the plugin:
-   - applications/
-   - asset/
-   - languages/ 
-   - templates/
-   - vendor/
-      - Sphreplugins/
-      - Composer/
-      - autoload.php/
-   - index.php
-   - licence.txt
-   - readme.txt
-   - unistall.php
-   - woo-bundle-choice.php  
+      Create zip file of below mentioned folders and files. In our repository you will find many folders and files but you will need only below list of folders and files to test the plugin:
+       - applications/
+       - asset/
+       - languages/ 
+       - templates/
+       - vendor/
+          - Sphreplugins/
+          - Composer/
+          - autoload.php/
+       - index.php
+       - licence.txt
+       - readme.txt
+       - unistall.php
+       - woo-bundle-choice.php  
 
 
-- Install or Update the Plugin on your WordPress Site
+    - Install or Update the Plugin on your WordPress Site
 
-  You can install or update above created zip file from the wordpress admin plugins page. Or Otherwise you can directly overwrite the content of the above created zip file into the folder `your-wordpress-site-root/wp-content/plugins/woo-bundle-choice`.
+      You can install or update above created zip file from the wordpress admin plugins page. Or Otherwise you can directly overwrite the content of the above created zip file into the folder `your-wordpress-site-root/wp-content/plugins/woo-bundle-choice`.
 
-- Test the plugin functionality with necessary scenarios.
+    - Test the plugin functionality with necessary scenarios.
 
-3. Send your pull request by following below detalis:
+- Send your pull request by following below detalis:
 
   - If you do not have experience of making pull request or if you have any question regarding pull requests then follow below links:
 
