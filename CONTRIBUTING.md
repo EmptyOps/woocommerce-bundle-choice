@@ -22,11 +22,11 @@ Pull requests are the best way to propose changes to the codebase (we use [Githu
 1. Fork the repo and create your branch from `ui_QCed_bhavesh_pull_request`.
 2. If you've added code that should be tested, then below steps.
 
-2.1. Create a ZIP File of the Plugin
+- Create a ZIP File of the Plugin
   Identify the necessary files and folders that make up your plugin. These typically include the applications, asset, languages, templates, Sphreplugins, and other files in the root directory like composer, autoload.php, index.php, licence.txt, readme.txt, uninstall.php, and Woo-bundle-choice.php.
 
 
-2.2  Install/Update the Plugin on a WordPress Site
+- Install/Update the Plugin on a WordPress Site
   If you're installing the plugin for the first time:
   Go to the WordPress Admin Dashboard.
   Navigate to "Plugins" and then "Add New".
@@ -47,7 +47,7 @@ Pull requests are the best way to propose changes to the codebase (we use [Githu
   Logs and Debugging: If available, review the error logs or debug logs for any issues or warnings. Make sure there are no PHP errors or warnings in the error logs.
   Compatibility Checks: Test with different themes and other common plugins to ensure compatibility.
 
-3. Issue that pull request!
+3. Submit your pull request following the media link:
 
 If you do not have experience of making pull request or if you have any question regarding pull requests then follow below links:
 
