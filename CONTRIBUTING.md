@@ -23,10 +23,12 @@ Pull requests are the best way to propose changes to the codebase (we use [Githu
 2. If you've added code that should be tested, then below steps.
 
 - Create a ZIP File of the Plugin
+
   Identify the necessary files and folders that make up your plugin. These typically include the applications, asset, languages, templates, Sphreplugins, and other files in the root directory like composer, autoload.php, index.php, licence.txt, readme.txt, uninstall.php, and Woo-bundle-choice.php.
 
 
-- Install/Update the Plugin on a WordPress Site
+- Install/Update the Plugin on a WordPress Site 
+
   If you're installing the plugin for the first time:
   Go to the WordPress Admin Dashboard.
   Navigate to "Plugins" and then "Add New".
@@ -38,7 +40,7 @@ Pull requests are the best way to propose changes to the codebase (we use [Githu
   Delete the plugin (this ensures a clean update).
   Follow the steps to install the new version from the ZIP file, then activate it.
 
-2.3 Test the Plugin
+- Test the Plugin
 
   Basic Functionality: Ensure that the plugin's core functionality works as expected. Test any specific features or changes you've made.
   Negative Scenarios: Test edge cases and scenarios that could cause errors. For example, inputting incorrect data, using invalid inputs, or triggering unexpected conditions.
