@@ -83,19 +83,19 @@ I'm again borrowing these from Facebook's Guidelines
 * 4 spaces for indentation rather than tabs
 * Control statement include if, for, while, switch, etc. Control statements should have one space between the control keyword and opening parenthesis, to distinguish them from function calls.
 
-    `if ((condition1) || (condition2)) {`
+    `if ((condition1) || (condition2)) {
 
-        `action1;`
+        action1;
 
-    `} elseif ((condition3) && (condition4)) {`
+    } elseif ((condition3) && (condition4)) {
 
-      `action2;`
+      action2;
 
-    `} else {`
+    } else {
 
-      `default action;`
+      default action;
 
-    `}`
+    }`
 
 * PHP keywords MUST be in lower case.
   * The PHP constants `true`, `false`, and `null` MUST be in lower case.
