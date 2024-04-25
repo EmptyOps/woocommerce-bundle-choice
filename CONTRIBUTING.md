@@ -24,12 +24,12 @@ Pull requests are the best way to propose changes to the codebase (we use [Githu
 
 - Create a ZIP File of the Plugin
 
-  In our repository you will find many folder and files but you need only below list of folder and file to test the plugins:
+  In our repository you will find many folder and files but you need only below list of folder and file to test the plugin:
    - applications/
    - asset/
    - languages/ 
    - templates/
-   - vendor folder/
+   - vendor/
       - Sphreplugins/
       - Composer/
       - autoload.php/
@@ -37,7 +37,7 @@ Pull requests are the best way to propose changes to the codebase (we use [Githu
    - licence.txt
    - readme.txt
    - unistall.php
-   - Woo-bundle-choice.php  
+   - woo-bundle-choice.php  
 
 
 - Install or Update the Plugin on your WordPress Site
