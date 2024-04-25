@@ -29,9 +29,9 @@ Pull requests are the best way to propose changes to the codebase (we use [Githu
    - languages/ 
    - templates/
    - vendor folder/
-    - Sphreplugins/
-    - Composer/
-    - autoload.php/
+      - Sphreplugins/
+      - Composer/
+      - autoload.php/
    - index.php
    - licence.txt
    - readme.txt
