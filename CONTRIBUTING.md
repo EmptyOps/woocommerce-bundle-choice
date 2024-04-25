@@ -40,6 +40,7 @@ Pull requests are the best way to propose changes to the codebase (we use [Githu
 
 
 - Install or Update the Plugin on your WordPress Site
+
   You can install above zip if you have not yet installed BUNDLOICE(formerly WOO CHOICE PLUGIN). Or Otherwise you can simplly directly overright within the plugins folder the content of the above zip file plugin/woo-bundle-choice.
 
 - Test the Plugin functionality with necessary scenarios.
