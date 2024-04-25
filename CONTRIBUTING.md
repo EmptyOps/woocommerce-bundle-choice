@@ -89,11 +89,11 @@ I'm again borrowing these from Facebook's Guidelines
 
     `} elseif ((condition3) && (condition4)) {`
 
-      action2;
+        action2;
 
     `} else {`
 
-      default action;
+        default action;
 
     `}`
 
