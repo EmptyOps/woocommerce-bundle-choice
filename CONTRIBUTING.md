@@ -23,6 +23,7 @@ Pull requests are the best way to propose changes to the codebase (we use [Githu
 2. If you've added code that should be tested, then below steps.
 
 - Create a ZIP File of the Plugin
+
   In our repository you will find many folder and files but you need only below list of folder and file to test the plugins:
    - applications/
    - asset/
