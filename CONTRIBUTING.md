@@ -50,9 +50,9 @@ Pull requests are the best way to propose changes to the codebase (we use [Githu
 
   - If you do not have experience of making pull request or if you have any question regarding pull requests then follow below links:
 
-      - [Youtube Video](https://www.youtube.com/watch?v=jRLGobWwA3Y)(with git bash) or
-      -  [Youtube Video](https://www.youtube.com/watch?v=YTbRzhQju4c&ab_channel=PippinWilliamson)(simple way direlty on github website without command line involved. But this is an older website video. So, be sure to find the right action on newer website) or
-      -  [makeapullrequest.com](https://makeapullrequest.com/) or
+      - [Youtube Video](https://www.youtube.com/watch?v=jRLGobWwA3Y)(with git bash) 
+      -  [Youtube Video](https://www.youtube.com/watch?v=YTbRzhQju4c&ab_channel=PippinWilliamson)(simple way direlty on github website without command line involved. But this is an older website video. So, be sure to find the right action on newer website) 
+      -  [makeapullrequest.com](https://makeapullrequest.com/) 
       - [www.firsttimersonly.com](https://www.firsttimersonly.com/)
 
 
