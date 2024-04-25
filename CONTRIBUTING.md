@@ -20,11 +20,11 @@ If you do not have experience of making pull request or if you have any question
 Pull requests are the best way to propose changes to the codebase (we use [Github Flow](https://guides.github.com/introduction/flow/index.html)). We actively welcome your pull requests:
 
 1. Fork the repo and create your branch from `ui_QCed_bhavesh_pull_request`.
-2. If you've added code that should be tested, then below steps.
+2. If you've added code that should be tested, then follow below steps:
 
 - Create a ZIP File of the Plugin
 
-  In our repository you will find many folder and files but you need only below list of folder and file to test the plugin:
+  Create zip file of below mentioned folders and files. In our repository you will find many folders and files but you will need only below list of folder and file to test the plugin:
    - applications/
    - asset/
    - languages/ 
@@ -42,18 +42,18 @@ Pull requests are the best way to propose changes to the codebase (we use [Githu
 
 - Install or Update the Plugin on your WordPress Site
 
-  You can install above zip if you have not yet installed BUNDLOICE(formerly WOO CHOICE PLUGIN). Or Otherwise you can simplly directly overright within the plugins folder the content of the above zip file plugin/woo-bundle-choice.
+  You can install or update above created zip file from the wordpress admin plugins page. Or Otherwise you can simplly directly overwrite the content of the above created zip file into the folder plugins folder wordpress-site-root/wp-content/plugins/woo-bundle-choice.
 
-- Test the Plugin functionality with necessary scenarios.
+- Test the plugin functionality with necessary scenarios.
 
-3. Issue that pull request!
+3. Send your pull request by following below detalis:
 
-If you do not have experience of making pull request or if you have any question regarding pull requests then follow below links:
+  - If you do not have experience of making pull request or if you have any question regarding pull requests then follow below links:
 
-[Youtube Video](https://www.youtube.com/watch?v=jRLGobWwA3Y)(with git bash) or
-[Youtube Video](https://www.youtube.com/watch?v=YTbRzhQju4c&ab_channel=PippinWilliamson)(simple way direlty on github website without command line involved. But this is an older website video. So, be sure to find the right action on newer website) or
-[makeapullrequest.com](https://makeapullrequest.com/) or
-[www.firsttimersonly.com](https://www.firsttimersonly.com/)
+      - [Youtube Video](https://www.youtube.com/watch?v=jRLGobWwA3Y)(with git bash) or
+      -  [Youtube Video](https://www.youtube.com/watch?v=YTbRzhQju4c&ab_channel=PippinWilliamson)(simple way direlty on github website without command line involved. But this is an older website video. So, be sure to find the right action on newer website) or
+      -  [makeapullrequest.com](https://makeapullrequest.com/) or
+      - [www.firsttimersonly.com](https://www.firsttimersonly.com/)
 
 
 ## Any contributions you make will be under the Respective License of this Git Hub Repository. 
