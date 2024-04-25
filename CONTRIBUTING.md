@@ -60,7 +60,7 @@ Pull requests are the best way to propose changes to the codebase (we use [Githu
 In short, when you submit code changes, your submissions are understood to be under the same License of this repository. 
 
 ## Report bugs using Github's [issues](https://github.com/EmptyOps/woocommerce-bundle-choice/issues/)
-We use GitHub issues to track public bugs. Report a bug by [opening a new issue](https://wordpress.org/support/plugin/woo-bundle-choice/); it's that easy!
+We use GitHub issues to track public bugs. Report a bug by [opening a new issue](https://github.com/EmptyOps/woocommerce-bundle-choice/issues/); it's that easy!
 
 ## Write bug reports with detail, background, and sample code
 [This is an example](http://stackoverflow.com/q/12488905/180626) of a bug report I wrote, and I think it's not a bad model. Here's [another example from Craig Hockenberry](http://www.openradar.me/11905408), an app developer whom I greatly respect.
@@ -78,11 +78,19 @@ We use GitHub issues to track public bugs. Report a bug by [opening a new issue]
 People *love* thorough bug reports. I'm not even kidding.
 
 ## Use a Consistent Coding Style
-I'm again borrowing these from [Facebook's Guidelines](https://github.com/facebook/draft-js/blob/a9316a723f9e918afde44dea68b5f9f39b7d9b00/CONTRIBUTING.md)
+I'm again borrowing these from Facebook's Guidelines
 
 * 4 spaces for indentation rather than tabs
 * Control statement include if, for, while, switch, etc. Control statements should have one space between the control keyword and opening parenthesis, to distinguish them from function calls.
+    `if ((condition1) || (condition2)) {
+        action1;
+    } elseif ((condition3) && (condition4)) {
+      action2;
+    } else {
+      default action;
+    }`
 * PHP keywords MUST be in lower case.
+  * The PHP constants `true`, `false`, and `null` MUST be in lower case.
 * There MUST be one space after and before each operator.
 
 ## Code of Conduct
