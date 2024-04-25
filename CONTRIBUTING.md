@@ -78,9 +78,8 @@ We use GitHub issues to track public bugs. Report a bug by [opening a new issue]
 People *love* thorough bug reports. I'm not even kidding.
 
 ## Use a Consistent Coding Style
-I'm again borrowing these from Facebook's Guidelines
 
-* 4 spaces for indentation rather than tabs
+* 4 spaces tab for indentation.
 * Control statement include if, for, while, switch, etc. Control statements should have one space between the control keyword and opening parenthesis, to distinguish them from function calls.
 
     `if ((condition1) || (condition2)) {`
@@ -99,7 +98,6 @@ I'm again borrowing these from Facebook's Guidelines
 
 * PHP keywords MUST be in lower case.
   * The PHP constants `true`, `false`, and `null` MUST be in lower case.
-* There MUST be one space after and before each operator.
 
 ## Code of Conduct
 
