@@ -15309,21 +15309,43 @@ class Sample_Data_Template {
 
     }
 
-    protected static function save_entity_items( $model_class, $input_data, $args=array() ) {
+    protected static function save_entity_items( $model_class, $input_data, $save_function_arguments, $args=array() ) {
 
         $res = array( "type"=>"success", "msg"=>"" );
 
         foreach($input_data as $input_data_key=>$input_data_value){
 
-            foreach($input_data_value as $idv_key=>$idv_value) { 
+            $original_input = array();
+
+            foreach($input_data_value as $idv_key=>$idv_value) {
+
+                if(isset($_POST[$idv_key])){
+
+                    $original_input[$idv_key] = $_POST[$idv_key];  
+                } 
 
                 $_POST[$idv_key] = $idv_value;
 
             }
 
-            - peramiter conform karva na che
-                -- biji extension call avta hoy to ene bhi alg alg peramiter na settings hache to may be it is betar k je peramiter pass karvana hoy te data templat clas s mathi save function call tyai tyre $args argument ma or otherwise adishonel peramiter aa function ma add kari ne support add karvo padche. for example ke save function paramiter_1,paramiter_2,paramiter_3,paramiter_4 evu kaik -- to h & -- to b
-            $res_save = $model_class::instance()->save( \sp\tableview\controller\admin\Admin::get_form_definition() );
+            $res_save = null;
+            if(isset($save_function_arguments[3])) {
+
+                $res_save = $model_class::instance()->save($save_function_arguments[0], $save_function_arguments[1], $save_function_arguments[2], $save_function_arguments[3]);
+            } elseif (isset($save_function_arguments[2])) {
+
+                $res_save = $model_class::instance()->save($save_function_arguments[0], $save_function_arguments[1], $save_function_arguments[2]);
+            } elseif (isset($save_function_arguments[1])) {
+
+                $res_save = $model_class::instance()->save($save_function_arguments[0], $save_function_arguments[1]);
+            } elseif (isset($save_function_arguments[0])) {
+
+                $res_save = $model_class::instance()->save($save_function_arguments[0]);
+            } else {
+
+                $res_save = $model_class::instance()->save();
+            }
+
 
             if (!empty($res_save['type'])) {
 
@@ -15337,24 +15359,43 @@ class Sample_Data_Template {
 
                 } else {
 
-                    return array("type"=>"error", "msg"=>"Save process failed for one of the item.");
+                    self::restore_original_input($original_input, $input_data_value);
+
+                    return array("type"=>"error", "msg"=>"Save prosses failed for one of the item.");
                 }
 
             } else {
 
-                return array("type"=>"error", "msg"=>"Save process failed for one of the item.");
+                self::restore_original_input($original_input, $input_data_value);
+
+                return array("type"=>"error", "msg"=>"Save prosses failed for one of the item.");
 
             }
 
-            foreach($input_data_value as $idv_key=>$idv_value) { 
-
-                unset($_POST[$idv_key]);
-
-            }
+            self::restore_original_input($original_input, $input_data_value);
 
         }
 
         return $res;
     }
+
+    private static function restore_original_input($original_input, $input_data_value) {
+
+        foreach($input_data_value as $idv_key=>$idv_value) {
+
+            if(isset($original_input[$idv_key])){
+
+                $_POST[$idv_key] =  $original_input[$idv_key];  
+            } else {
+
+                unset($_POST[$idv_key]);
+            } 
+
+
+        }
+
+
+    }
+
 
 }
