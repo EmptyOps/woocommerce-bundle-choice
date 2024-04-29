@@ -144,6 +144,15 @@ if(window.document.splugins.common.is_item_page || window.document.splugins.comm
     return (val == undefined || val == null || val.length <= 0) ? true : false;
  }
 
+ // window.document.splugins.common.key_to_title = function(key) {
+  
+ //    let modifiedKey = key.replace(/[-_]/g, " "); // Replace dashes and underscores with spaces
+
+ //    let result = modifiedKey.replace(/\b\w/g, c => c.toUpperCase()); // Capitalize first character of each word
+    
+ //    return result;
+ // };
+
  window.document.splugins.common.find_get_parameter = function(parameterName) {
     
     var result = null,
@@ -229,6 +238,39 @@ if(window.document.splugins.common.is_item_page || window.document.splugins.comm
     var rows_txt = temp + "" + param + "=" + paramVal;
     return baseURL + "?" + newAdditionalURL + rows_txt;
  } 
+ window.document.splugins.common.get_variation_url_part = function(variation_id, base_url) {
+
+    var attributes = [];        
+
+    jQuery(jQuery('.variations_form').find('table.variations select')).each(function() {
+        
+        var value = jQuery(this).val();
+        if (value) {
+            attributes.push({
+                id: jQuery(this).attr('name'),
+                value: value
+            });
+        }/* else {
+            allAttributesSet = false;
+        }*/
+    });
+
+    var url = base_url;
+
+    var attributeSlug_global = '';
+    jQuery.each(attributes,function(key, val) {
+        
+        var attributeSlug = val.id.replace('attribute_',''); //val.id.replace('attribute_pa_','');
+        // url += '&_attribute=' + attributeSlug + '&checklist_' + attributeSlug + "=" + val.value;
+        attributeSlug_global += ',' + attributeSlug;
+        url = window.document.splugins.common.updateURLParameter(url, 'checklist_' + attributeSlug, val.value);
+    });
+
+    url = window.document.splugins.common.updateURLParameter(url, '_attribute', attributeSlug_global);
+
+    return url;
+
+ }
 
  window.document.splugins.common.get_device_visible_screen_height_width = function() {
     
