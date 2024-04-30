@@ -6,7 +6,8 @@
 
 $res = array( "type"=>"success", "msg"=>"" );
 
-if(wp_verify_nonce(wbc()->sanitize->post('_wpnonce'),'sample_data_jewelry')){                
+if(wp_verify_nonce(wbc()->sanitize->post('_wpnonce'),'sample_data_jewelry')) { 
+
 	wbc()->load->model('admin/sample_data/eowbc_'.wbc()->sanitize->post('feature_key'));
 	$class_name = '\eo\wbc\model\admin\sample_data\Eowbc_'.
 		str_replace(' ','_',ucwords(
@@ -22,11 +23,9 @@ if(wp_verify_nonce(wbc()->sanitize->post('_wpnonce'),'sample_data_jewelry')){
 	$data_template_obj = call_user_func(array($class_name,'instance'))->get_data_template();
 	
 	$data_template_obj->generate_assets(wbc()->sanitize->post('feature_key'));
+	
+} else {
 
-	
-	
-}
-else {
 	$res["type"] = "error";
 	$res["msg"] = "Nonce validation failed";
 }
