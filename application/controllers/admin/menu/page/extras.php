@@ -4,12 +4,10 @@ namespace eo\wbc\controllers\admin\menu\page;
 defined('ABSPATH') || exit;
 
 if (!class_exists('Extras')) {
-	class Extras
-	{
+	class Extras {
 
 		private static $_instance;
-		public static function instance()
-		{
+		public static function instance() {
 			if (!isset(self::$_instance)) {
 				self::$_instance = new self;
 			}
@@ -17,110 +15,26 @@ if (!class_exists('Extras')) {
 			return self::$_instance;
 		}
 
-		private function __construct()
-		{
+		private function __construct() {
 			// no implementation.
 		}
 
-		public static function get_form_definition($is_add_sample_values = false)
-		{
+		public static function get_form_definition($is_add_sample_values = false) {
 
 			wbc()->load->model('admin/form-builder');
 
-			//Run Check list
-			$table = array();
-			$table['id'] = 'eowbc_run_check_list';
-			$table['head'] = array(
-				0 => array(
-					// 0=>array(
-					// 	'is_header' => 1, 
-					// 	'val' => '',
-					// 	'is_checkbox' => true, 
-					// 	'sanitize'=>'sanitize_text_field',
-					// 	'checkbox'=> array('id'=>'dummy','value'=>array(),'options'=>array('row0_col0_chk'=>''),'options_attrs'=>array('row0_col0_chk'=>array('data-action="bulk_select_all"', 'data-bulk_table_id="'.$table["id"].'"')),'class'=>'','where'=>'in_table')
-					// ),
-					0 => array(
-						'is_header' => 1,
-						'val' => 'Page Section',
-						'field_id' => 'eo_wbc_page_section'
-					),
-					1 => array(
-						'is_header' => 1,
-						'val' => 'Run Check',
-						'field_id' => 'eo_wbc_run_check'
-					),
-					2 => array(
-						'is_header' => 1,
-						'val' => 'Status',
-						'field_id' => 'eo_wbc_status'
-					),
-				),
-			);
-			$table['body'] = array(
-				0 => array(
-					0 => array(
-						'val' => eowbc_lang('No page sections available to check.'),
-						'colspan' => 3,
-						'class' => 'red'
-					),
-				),
-			);
-
-			//result list
-			$result_table = array();
-			$result_table['id'] = 'eowbc_result_list';
-			$result_table['head'] = array(
-				0 => array(
-					0 => array(
-						'is_header' => 1,
-						'val' => 'Page Section',
-						'field_id' => 'eo_wbc_page_section'
-					),
-					1 => array(
-						'is_header' => 1,
-						'val' => 'Required',
-						'field_id' => 'eo_wbc_required'
-					),
-					2 => array(
-						'is_header' => 1,
-						'val' => 'Key',
-						'field_id' => 'eo_wbc_key'
-					),
-					3 => array(
-						'is_header' => 1,
-						'val' => 'Type',
-						'field_id' => 'eo_wbc_type'
-					),
-					4 => array(
-						'is_header' => 1,
-						'val' => 'Tested On URL',
-						'field_id' => 'eo_wbc_testedOn_url'
-					),
-					5 => array(
-						'is_header' => 1,
-						'val' => 'Result',
-						'field_id' => 'eo_wbc_result'
-					),
-				),
-			);
-			$result_table['body'] = array(
-				0 => array(
-					0 => array(
-						'val' => eowbc_lang('No results available yet'),
-						'colspan' => 6,
-						'class' => 'red'
-					),
-				),
-			);
-
 			$form_definition = array(
 				'extras_general' => array(
-					'label' => 'General Settings',
+					'label' => 'General',
 					'form' => array(
-						'extras_run_check_section' => array(
-							'label' => 'Run Check',
+						'extras_general_section' => array(
+							'label' => 'General',
 							'type' => 'segment',
-							'desc' => 'Click on links in Run Check column next to the each Page Sections and then refresh this page to see its status'
+							'desc' => 'Nothing available hear yet'
+						),
+						'resolver_path'=>array(
+							'type'=>'hidden',
+							'value'=>constant('EOWBC_DIRECTORY').'application/controller/ajax/eowbc_extras.php',
 						),
 						'saved_tab_key' => array(
 							'type' => 'hidden',
@@ -134,25 +48,7 @@ if (!class_exists('Extras')) {
 						// 	'size_class'=>array('sixteen','wide'),
 						// 	'inline'=>false,
 						// ), 
-						'list' => array_merge(
-							$table,
-							array(
-								'type' => 'table'
-							)
-						),
 
-
-						'extras_result_section' => array(
-							'label' => 'Results',
-							'type' => 'segment',
-							'desc' => 'If the results are false for any mandatory items then you can set alternate hooks or selector if they are supported in your theme, to do so visit the Selector tab on the admin panel. And if that does not help then contact support.'
-						),
-						'resultlist' => array_merge(
-							$result_table,
-							array(
-								'type' => 'table'
-							)
-						),
 					)
 				),
 				// 'map_creation_modification'=>array(
@@ -343,9 +239,59 @@ if (!class_exists('Extras')) {
 				// 		)
 				// ),
 
+				'extras_configuration' => array(
+					'label' => 'Configuration',
+					'form' => array(
+						'extras_configuration_section' => array(
+							'label' => 'Configuration',
+							'type' => 'segment',
+							'desc' => 'Extras configuration'
+						),
+						'saved_tab_key' => array(
+							'type' => 'hidden',
+							'value' => '',
+							'sanitize' => 'sanitize_text_field',
+						),
+						'token' => array(
+							'label' => 'Token',
+							'type' => 'text',
+							'sanitize' => 'sanitize_text_field',
+							'value' => '',
+							'class' => array(),
+						),
+						'activate'=>array(
+							'label'=>'Activate',
+							'type'=>'link',
+							'attr'=>array("href='".admin_url('admin.php?page=eowbc&sp_ext_ecac=1')."'"),
+							'class'=>array('secondary')	
+						),
+						'activate_visible_info'=>array(
+							'label'=>eowbc_lang('The extensions status is currently Activate/Deactivate'),
+							'type'=>'visible_info',
+							'class'=>array('fluid', 'medium'),
+							'size_class'=>array('sixteen','wide'),
+							'inline'=>false,
+							'style'=>array('color'=>'green'),
+						),
+						// 'extras_general_tab_visible_info'=>array(
+						// 	'label'=>eowbc_lang('(Determine how the product extra should behave. For example AND means product belongs to both category/attribute A and B, OR means product belongs to either of category/attribute A or B)'),
+						// 	'type'=>'visible_info',
+						// 	'class'=>array('fluid', 'medium'),
+						// 	'size_class'=>array('sixteen','wide'),
+						// 	'inline'=>false,
+						// ), 
+						'extras_save_btn' => array(
+							'label' => eowbc_lang('Save'),
+							'type' => 'button',
+							'class' => array('secondary'),
+							//'size_class'=>array('eight','wide'),
+							'inline' => false,
+							'attr' => array('data-tab_key="extras"', 'data-action="save"'),
+						)
+					),
+				),
 			);
 
-			--	is this our satandard hook? is not then let s just remove it -- to h 
 			$form_definition = apply_filters('eowbc_admin_form_extras', $form_definition);
 
 			if ($is_add_sample_values) {
