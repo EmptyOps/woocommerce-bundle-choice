@@ -40,11 +40,11 @@ class SP_Extensions_Api {
 		$this->admin_page_template = $admin_page_template;
 	}
 
-	public function run(){
-		do_action('sp_wbc_sp_extension_api');
+	public function configuration_run(){
+		do_action('sp_wbc_extras_check');
 	}
 
-	public function check($config){
+	public function configuration_check($config){
 
 		if( empty(wbc()->sanitize->get('sp_ext_ecac')) || wbc()->sanitize->get('sp_ext_ecac') != 1 ) {
 			return;
@@ -94,7 +94,7 @@ class SP_Extensions_Api {
 						}, $item['filter_priority_1'], $item['filter_priority_2']);
 					}
 					else {
-						throw new \Exception("Eowbc_SP_Extensions_Api: The provided type ".$item['type']." is not supported yet, send request to dev team for adding support for it.", 1);
+						throw new \Exception("Eowbc_Extras_Check: The provided type ".$item['type']." is not supported yet, send request to dev team for adding support for it.", 1);
 						
 					}
 
@@ -102,11 +102,16 @@ class SP_Extensions_Api {
 			}
 			
 		}
+
+		$result = self::call($url --this perameter need to be passed from the particular extensions so based on plugin slug we need to call the single tone function and hear the plugin slug is most probably single tone function name so need to retry the api url to call from the extensions config_class config_helpaer function);
+
+		$this->configuration_update_result($result, $plugin_slug);
+
 	}
 
-	public function update_result($result, $plugin_slug, $curr_theme_key, $section_key, $required_key, $key, $item, $current_url ) {
+	public function configuration_update_result($result, $plugin_slug, $curr_theme_key, $section_key, $required_key, $key, $item, $current_url) {
 
-		$opt_grp = wbc()->options->get_option_group('thadcr_'.$plugin_slug,array());
+		$opt_grp = wbc()->options->get_option_group('ecacr_'.$plugin_slug,array());
 
 		if( !isset($opt_grp[$curr_theme_key]) ) $opt_grp[$curr_theme_key] = array();
 		if( !isset($opt_grp[$curr_theme_key][$section_key]) ) $opt_grp[$curr_theme_key][$section_key] = array();
@@ -119,7 +124,7 @@ class SP_Extensions_Api {
 		$opt_grp[$curr_theme_key][$section_key][$required_key][$key]['tested_on_url'] = $current_url;
 		$opt_grp[$curr_theme_key][$section_key][$required_key][$key]['result'] = $result;
 
-		wbc()->options->update_option_group('thadcr_'.$plugin_slug,$opt_grp);
+		wbc()->options->update_option_group('ecacr_'.$plugin_slug,$opt_grp);
 
 	}
 

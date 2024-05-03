@@ -262,7 +262,7 @@ if (!class_exists('Extras')) {
 						'activate'=>array(
 							'label'=>'Activate',
 							'type'=>'link',
-							'attr'=>array("href='".admin_url('admin.php?page=eowbc&sp_ext_ecac=1')."'"),
+							'attr'=>array("href='".admin_url('admin.php?page=extras--- &sp_ext_ecac=1')."'"),
 							'class'=>array('secondary')	
 						),
 						'activate_visible_info'=>array(
