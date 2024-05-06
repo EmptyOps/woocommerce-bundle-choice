@@ -3030,7 +3030,7 @@ if( typeof(eo_wbc_object) != 'undefined'){
 	    	orderby_change(type,element);
 	    };
 
-	    on_scroll_listener_private() {
+	    on_scroll_listener_private(event) {
 
 		    var _this = this;
 
