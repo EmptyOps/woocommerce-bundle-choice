@@ -172,6 +172,8 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
 		input_type_button_click_listener();
 
+		
+
 		// ACTIVE_TODO temp. remove this code when we clear 34.13
 		var process_events_callback = null ;
         window.document.splugins.events.api.notifyAllObservers( 'filters', 'process_events', {}, process_events_callback, null/*form_selector==null ? _this.$base_container : form_selector*/ );
@@ -1755,7 +1757,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
     	} 	
 
     };
-
+    
     // --- move to filter_set module @a ---
   //   var on_filter_set_click_listener = function(){
 
@@ -2854,6 +2856,8 @@ if( typeof(eo_wbc_object) != 'undefined'){
 
 	        sort_order_private();
 
+	        on_scroll_listener_private(event) ;
+
 		};
 
 	    var get_sort_dropdown_container_private = function() {
@@ -3025,6 +3029,67 @@ if( typeof(eo_wbc_object) != 'undefined'){
 
 	    	orderby_change(type,element);
 	    };
+
+	    on_scroll_listener_private() {
+
+		    var _this = this;
+
+		    _this./*#*/on_scroll_private();
+        
+
+	    }
+
+	    /*#*/on_slider_thumb_click_private() {
+
+	      var _this = this;
+	        
+	      _this./*#*/slider_thumb_click_private();
+
+	    }
+	    /*#*/on_scroll_private() {
+
+	      var _this = this;
+	        
+	      _this./*#*/scroll_private();
+
+	    }
+		/*#*/slider_thumb_click_private(){
+
+	    }
+
+	    /*#*/scroll_private(){
+	      
+	        var hasTriggered = false;
+	                jQuery(window).on('scroll', function() {
+	            if (hasTriggered) {
+	                return; // If the action has already been triggered, exit early
+	            }
+	                    
+	            var windowHeight = jQuery('.spui-wbc-tableview-loop-container').height();
+	            var scrollTop = jQuery(this).scrollTop();
+	            var documentHeight = jQuery(document).height();
+
+	            // Check if the user is at or near the bottom of the page
+	            var distanceFromBottom = documentHeight - (scrollTop + windowHeight);
+
+	            if (distanceFromBottom < 100) { // Trigger when within 100px of the bottom
+	                console.log('User reached the end of the page');
+	                loadMoreContent();
+
+	                // Set the flag to true so this block doesn't execute again
+	                hasTriggered = true;
+	            }
+	        });
+
+	        function loadMoreContent() {
+	            console.log('Loading more content...');
+	            // Here you could initiate an AJAX call to load additional content or any other desired action
+	             setTimeout(function() {
+	              hasTriggered = false;
+	             },1500);
+	        }      
+	      
+	    }
 
 	    var click = function(event,element){
 	    	
