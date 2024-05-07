@@ -271,7 +271,8 @@ if (!class_exists('Extras')) {
 							'class'=>array('fluid', 'medium'),
 							'size_class'=>array('sixteen','wide'),
 							'inline'=>false,
-							'style'=>array('color'=>'green'),
+							// 'style'=>array('color'=>'green'),
+							'attr'=>array('style="color:green"'),
 						),
 						// 'extras_general_tab_visible_info'=>array(
 						// 	'label'=>eowbc_lang('(Determine how the product extra should behave. For example AND means product belongs to both category/attribute A and B, OR means product belongs to either of category/attribute A or B)'),
