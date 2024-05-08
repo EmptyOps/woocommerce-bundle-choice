@@ -2854,11 +2854,10 @@ if( typeof(eo_wbc_object) != 'undefined'){
 
 			on_click_listener(event);
 
-	        sort_order_private();
-	        
 	        -- if scroll enable or not , if mukvani avse biji. biji if a avse k  undhi condition avse html ne e thy 6 evu ky krvanu ny ave khali pagination hide krvanu avse.
+	        on_scroll_listener() ;
 
-	        on_scroll_listener_private(event) ;
+	        sort_order_private();
 
 		};
 
@@ -3032,26 +3031,22 @@ if( typeof(eo_wbc_object) != 'undefined'){
 	    	orderby_change(type,element);
 	    };
 
-	    on_scroll_listener_private(event) {
+	    var on_scroll_listener = function() {
 
-		    var _this = this;
-
-		    _this./*#*/on_scroll_private();
+		    on_scroll();
         
 	    }
 
-	    on_scroll_private() {
+	    var on_scroll = function() {
 
-	      var _this = this;
-	        
-	      _this./*#*/scroll_private();
+	      	scroll();
 
 	    }
 		
-	    scroll_private(){
+	    var scroll = function(){
 	      
 	        var hasTriggered = false;
-	                jQuery(window).on('scroll', function() {
+	        jQuery(window).on('scroll', function() {
 	            if (hasTriggered) {
 	                return; // If the action has already been triggered, exit early
 	            }
@@ -3059,11 +3054,11 @@ if( typeof(eo_wbc_object) != 'undefined'){
 	            if(('.spui-wbc-tableview-loop-container'.length)) {  
 
             		var windowHeight = jQuery('.spui-wbc-tableview-loop-container').height();
-       		} else {
+       			} else {
        			
-            	var windowHeight = jQuery('ul.products').height();
+            		var windowHeight = jQuery('ul.products').height();
+       			}
 
-       		}
 	            var scrollTop = jQuery(this).scrollTop();
 	            var documentHeight = jQuery(document).height();
 
