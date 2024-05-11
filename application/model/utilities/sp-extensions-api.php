@@ -123,11 +123,21 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 		$result = wp_remote_get($url);
 
 		--	we need to check the result of above call and then check if there is any stardered wordprees error otherwise return the result and if there is the error then return the result acodingly. -- to h
+
+		if ( empty($result) ) {
+
+			throw new /Exception("There is some error in the call response.", 1);
+		} elseif ( is_wp_error($result) ) {
+
+			throw new /Exception("There is some error in the api call. error massege: " . $result->get_error_message())
+		}
+
+		return $result;
 	}
 
 	private static function additional_data(&$query_string, &$payload) {
 
-		if (empty($query_string)) {
+		if ( empty($query_string) ) {
 
 			$query_string = "";
 		}
@@ -139,10 +149,13 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
 		-- here we need to put the appropriate code for fetching the active theme and plugins. -- to h & -- to pi 
 
-		$plugins = '';
-		$active_plugins = array();
+		$query_string = '';
+		$active_plugins_slugs = array();
+		$active_plugins_version = array();
+		$active_themes_slugs = '';
+		$active_themes_version = '';
 
-		if (function_exists('get_plugins')) {
+		if ( function_exists('get_plugins') ) {
 
 			$plugins=get_plugins();	
 
@@ -153,22 +166,15 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 				if (is_plugin_active($plugin_path)) {
 
 					// If active, add it to the active plugins array
-					$active_plugins[] = $plugin_info['Name'];
+					$active_plugins_slugs[] = dirname($plugin_path);
+					$active_plugins_version[] = $plugin_info['Version'];
 				}
 
 			}
 
 		}
 
-		echo "Active Plugins:<br>";
-		foreach ($active_plugins as $active_plugin) {
-
-			echo "- $active_plugin<br>";
-		}
-
-		$theme = null;
-
-		if(function_exists('wp_get_theme')){
+		if( function_exists('wp_get_theme') ) {
 
 			$theme=wp_get_theme();
 		} else {
@@ -176,12 +182,24 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 			$theme=get_current_theme();
 		}	
 
-		$active_theme_name = $theme->get('Name');
-		$active_theme_version = $theme->get('Version');
+		$parent_themes = $theme->parent();
 
-		// Output active theme information
-		echo "Active Theme Name: $active_theme_name <br>";
-		echo "Active Theme Version: $active_theme_version <br>";
+		if ( $parent_themes ) {
+
+			$active_themes_slugs = $parent_themes->get_template(); // This will get the directory (slug) of the parent theme
+			$active_themes_version = $parent_themes->get('Version');
+		} else {
+
+			$active_themes_slugs = $theme->get_template();
+			$active_themes_version = $theme->get('Version');
+		}
+
+		$query_string .= "active_plugins_slugs=" . explode("," , $active_plugins_slugs) . "&";
+		$query_string .= "active_plugins_version=" . explode("," , $active_plugins_version) . "&";
+		$query_string .= "active_themes_slugs=" .  $active_themes_slugs . "&";
+		$query_string .= "active_themes_version=" .  $active_themes_version . "&";
+
+		return $query_string;
 
 	}
 
