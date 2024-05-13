@@ -381,7 +381,14 @@ class SP_Query {
 
 	public function tax_query_checklist_data( $input_method_small, $field ) {
 
-		return array_filter(explode(',',wbc()->sanitize->{$input_method_small}($field)));			        	
+		// if( wbc()->sanitize->get('is_test') == 1 ) {
+			
+		// 	wbc_pr("SP_Query tax_query_checklist_data");
+		// 	wbc_pr($field);
+		// }
+
+		return array_filter(explode(',',wbc()->sanitize->{$input_method_small}($field)));
+
 	}
 
 	private function range($term,$min,$max,$numeric_range=FALSE) {
