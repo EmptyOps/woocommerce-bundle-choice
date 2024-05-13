@@ -1194,6 +1194,19 @@ class WBC_Common {
 	    return $link_part;
 	}
 
+	public function array_search_partial($needle, $haystack) {
+
+	    foreach ($haystack as $key => $value) {
+
+	        if (strpos($value, $needle) !== false) {
+
+	            return $key;
+	        }
+	    }
+
+	    return false;
+	}
+
 }
 
 
