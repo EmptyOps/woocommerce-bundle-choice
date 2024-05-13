@@ -288,7 +288,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		// if(type == 'slick_table' || type == 'filter') {
 		
 			// made global 
-			var form=jQuery(form_selector);
+		var form=jQuery(form_selector);
 		// }
 
 		var form_data = null;
@@ -2811,7 +2811,12 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		input_type_button_click: function(event) {
 
 			input_type_button_click_listener(event);
-		},		
+		},
+
+		compatability: function(section, object, expected_result, form_selector){
+
+			compatability(section, object, expected_result, form_selector);
+		}		
     };
 };
 
@@ -3055,8 +3060,11 @@ if( typeof(eo_wbc_object) != 'undefined'){
 
             		var windowHeight = jQuery('.spui-wbc-tableview-loop-container').height();
        			} else {
-       			
-            		var windowHeight = jQuery('ul.products').height();
+
+       				-- compatability function ne publish krel che je confirm krvo.
+	       			var render_container = '.products:eq(0),.product-listing:eq(0),.row-inner>.col-lg-9:eq(0)';
+
+	            	var windowHeight = window.document.splugins.wbc.filters.api.compatability('render_container',{render_container:jQuery(render_container),render_container_selector:render_container, is_return_string_selector:false},1).render_container.height();           	
        			}
 
 	            var scrollTop = jQuery(this).scrollTop();
