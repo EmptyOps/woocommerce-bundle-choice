@@ -174,9 +174,11 @@ add_action('wp_footer',function(){
 	    		}
 	    			
 			}
-
+			// console.log("[vs] if upper SP_VARIATIONS_LOADED");
 <?php
 	   		if (defined('SP_VARIATIONS_LOADED') && SP_VARIATIONS_LOADED == true) { ?>
+
+	   			// console.log("[vs] SP_VARIATIONS_LOADED if undr condition chek pachi");
 
 	   			// ACTIVE_TODO we should confirm once and then disable category condition or part below because it seems unnecessary for the category page. or is it necessary for the purple theme loopbox slider? or for the tableview sidebar or popup if it has jQuery slider or zoom? 
 	    		if(window.document.splugins.common.is_item_page || window.document.splugins.common.is_category_page) {

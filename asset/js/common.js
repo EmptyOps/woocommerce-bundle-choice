@@ -230,6 +230,40 @@ if(window.document.splugins.common.is_item_page || window.document.splugins.comm
     return baseURL + "?" + newAdditionalURL + rows_txt;
  } 
 
+ window.document.splugins.common.get_variation_url_part = function(variation_id, base_url) {
+
+    var attributes = [];        
+
+    jQuery(jQuery('.variations_form').find('table.variations select')).each(function() {
+        
+        var value = jQuery(this).val();
+        if (value) {
+            attributes.push({
+                id: jQuery(this).attr('name'),
+                value: value
+            });
+        }/* else {
+            allAttributesSet = false;
+        }*/
+    });
+
+    var url = base_url;
+
+    var attributeSlug_global = '';
+    jQuery.each(attributes,function(key, val) {
+        
+        var attributeSlug = val.id.replace('attribute_',''); //val.id.replace('attribute_pa_','');
+        // url += '&_attribute=' + attributeSlug + '&checklist_' + attributeSlug + "=" + val.value;
+        attributeSlug_global += ',' + attributeSlug;
+        url = window.document.splugins.common.updateURLParameter(url, 'checklist_' + attributeSlug, val.value);
+    });
+
+    url = window.document.splugins.common.updateURLParameter(url, '_attribute', attributeSlug_global);
+
+    return url;
+
+ }
+
  window.document.splugins.common.get_device_visible_screen_height_width = function() {
     
     // Visible Height
@@ -1199,7 +1233,7 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
 
         // Calling parent's constructor
         super(element, configs);
-
+        console.log("SP_WBC_Variations_Swatches constructor called");
         // ACTIVE_TODO_OC_START
         // ACTIVE_TODO Till the safari incompatablity issue is not solwed we needed to move below variable decleration insight constructore. As soon as this safari compatiblity issue is fixed as soon move it move this variable declearation section back to the above constuctore.  
         // ACTIVE_TODO_OC_END
@@ -2802,7 +2836,7 @@ window.document.splugins.wbc.variations.swatches = window.document.splugins.wbc.
 
 window.document.splugins.wbc.variations.swatches.core = function( configs ) {
 
-
+    // console.log("[vs] core function called");
     jQuery.fn.sp_wbc_variations_swatches = function () {
         
         console.log("[vs] module called");

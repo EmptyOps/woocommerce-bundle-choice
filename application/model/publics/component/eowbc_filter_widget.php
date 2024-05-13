@@ -2402,7 +2402,19 @@ class EOWBC_Filter_Widget {
 				}			
 
 				// $mark = in_array($term_item->id,$query_list);				
-				$mark = in_array($term_item->slug,$query_paramas_options);				
+				$mark = in_array($term_item->slug,$query_paramas_options);	
+
+				// if( wbc()->sanitize->get('is_test') == 1 ) {
+				// 	wbc_pr("if ma mark ma shu ave che?");
+				// 	wbc_pr($mark);
+				// 	wbc_pr("123term_item->slug");
+				// 	wbc_pr($term_item->slug);
+				// 	wbc_pr("456query_paramas_options");
+				// 	wbc_pr($query_paramas_options);
+
+
+				// }
+			
 
 				// ACTIVE_TODO if non edit required to be supported by our new router based url attribute support than need to manage below 
 				// if($non_edit==false && in_array($term_item->id,$query_list)) {
@@ -2437,6 +2449,12 @@ class EOWBC_Filter_Widget {
 				}
 
 				$mark = in_array($term_item->slug,$query_list);
+
+				// if( wbc()->sanitize->get('is_test') == 1 ) {
+				// 	wbc_pr("else ma mark ma shu ave che?");
+				// 	wbc_pr($mark);
+
+				// }
 
 				if($non_edit==false && in_array($term_item->slug,$query_list)) {
 					$non_edit=true;						
