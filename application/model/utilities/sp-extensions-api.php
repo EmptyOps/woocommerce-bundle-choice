@@ -129,7 +129,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 			throw new /Exception("There is some error in the call response.", 1);
 		} elseif ( is_wp_error($result) ) {
 
-			throw new /Exception("There is some error in the api call. error massege: " . $result->get_error_message())
+			throw new /Exception("There is some error in the api call. error massege: " . $result->get_error_message());
 		}
 
 		return $result;
