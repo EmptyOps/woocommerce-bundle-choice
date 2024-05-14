@@ -271,7 +271,6 @@ if (!class_exists('Extras')) {
 							'class'=>array('fluid', 'medium'),
 							'size_class'=>array('sixteen','wide'),
 							'inline'=>false,
-							// 'style'=>array('color'=>'green'),
 							'attr'=>array('style="color:green"'),
 						),
 						// 'extras_general_tab_visible_info'=>array(
