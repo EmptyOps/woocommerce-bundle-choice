@@ -2030,7 +2030,17 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		console.log("set_archive_html");
 		console.log(render_container);
 		console.log(html);
-    	jQuery(render_container).html(html);
+
+		-- aa if confirm krvani che. scroll pagination na feature mate add krel che -- to h.
+       	if (jQuery(render_container).hasClass('spui-wbc-pagination-scroll')) {
+
+    		jQuery(render_container).appendTo(html);
+
+       	} else {
+
+    		jQuery(render_container).html(html);
+
+    	}
     	
     };
     
@@ -2855,12 +2865,13 @@ if( typeof(eo_wbc_object) != 'undefined'){
 						--	do the same for the other key functions below and raise notification but only if it is necessary otherwise we would skip that and only add when required. -- to s  
 			ACTIVE_TODO_OC_END*/
 			// --- move this code frome this file
+
 	        jQuery('.products,.product-listing,.row-inner>.col-lg-9:eq(0),.woocommerce-pagination,.pagination,jet-filters-pagination').css('visibility','visible');
 
 			on_click_listener(event);
 
 	        -- if scroll enable or not , if mukvani avse biji. biji if a avse k  undhi condition avse html ne e thy 6 evu ky krvanu ny ave khali pagination hide krvanu avse.
-	        on_scroll_listener() ;
+	        on_scroll_listener();
 
 	        sort_order_private();
 
@@ -3038,56 +3049,67 @@ if( typeof(eo_wbc_object) != 'undefined'){
 
 	    var on_scroll_listener = function() {
 
-		    on_scroll();
-        
+	    	var hasTriggered = false;
+	        jQuery(window).on('scroll', function() {
+	        
+		    	on_scroll(this);
+        	});
 	    }
 
-	    var on_scroll = function() {
+	    var on_scroll = function(element) {
 
 	      	scroll();
 
 	    }
 		
-	    var scroll = function(){
+	    var scroll = function(element){
 	      
-	        var hasTriggered = false;
-	        jQuery(window).on('scroll', function() {
-	            if (hasTriggered) {
-	                return; // If the action has already been triggered, exit early
-	            }
-	                    
-	            if(('.spui-wbc-tableview-loop-container'.length)) {  
+            if (hasTriggered) {
+                return; // If the action has already been triggered, exit early
+            }
+                    
+            if(jQuery('.spui-wbc-tableview-loop-container').length > 0) {  
 
-            		var windowHeight = jQuery('.spui-wbc-tableview-loop-container').height();
-       			} else {
+        		var selector = jQuery('.spui-wbc-tableview-loop-container');
+   			} else {
 
-       				-- compatability function ne publish krel che je confirm krvo.
-	       			var render_container = '.products:eq(0),.product-listing:eq(0),.row-inner>.col-lg-9:eq(0)';
+   				-- compatability function ne publish krel che je confirm krvo.
+       			var render_container = '.products:eq(0),.product-listing:eq(0),.row-inner>.col-lg-9:eq(0)';
 
-	            	var windowHeight = window.document.splugins.wbc.filters.api.compatability('render_container',{render_container:jQuery(render_container),render_container_selector:render_container, is_return_string_selector:false},1).render_container.height();           	
-       			}
+            	var selector = window.document.splugins.wbc.filters.api.compatability('render_container',{render_container:jQuery(render_container),render_container_selector:render_container, is_return_string_selector:false},1).render_container;           	
+   			}
 
-	            var scrollTop = jQuery(this).scrollTop();
-	            var documentHeight = jQuery(document).height();
+   			windowHeight = selector.height();
+            var scrollTop = jQuery(element).scrollTop();
+            var documentHeight = jQuery(document).height();
 
-	            // Check if the user is at or near the bottom of the page
-	            var distanceFromBottom = documentHeight - (scrollTop + windowHeight);
+            // Check if the user is at or near the bottom of the page
+            var distanceFromBottom = documentHeight - (scrollTop + windowHeight);
 
-	            if (distanceFromBottom < 100) { // Trigger when within 100px of the bottom
-	                console.log('User reached the end of the page');
-	                loadMoreContent();
+            if (distanceFromBottom < 100) { // Trigger when within 100px of the bottom
 
-	                // Set the flag to true so this block doesn't execute again
-	                hasTriggered = true;
-	            }
-	        });
+                console.log('User reached the end of the page');
+                if (!jQuery(selector).hasClass('spui-wbc-pagination-scroll') {
 
-	        function loadMoreContent() {
-	            console.log('Loading more content...');
-	            // Here you could initiate an AJAX call to load additional content or any other desired action
-	             setTimeout(function() {
-	              hasTriggered = false;
-	             },1500);
+                	jQuery(selector).addClass('spui-wbc-pagination-scroll');
+                }
+                loadMoreContent(selector);
+
+                // Set the flag to true so this block doesn't execute again
+                hasTriggered = true;
+            }
+        
+
+	        function loadMoreContent(selector) {
+
+	        	console.log('Loading more content...');
+
+	        	window.document.splugins.wbc.pagination.api.set_page_number( window.document.splugins.wbc.pagination.api.get_page_number()+1 );
+
+	        	window.document.splugins.wbc.filters.api.eo_wbc_filter_change_wrapper(false, 'form#'+/*_this.$base_pagination_container*/jQuery(selector).parents().has('[id$="eo_wbc_filter"]').find('[id$="eo_wbc_filter"]').attr('id'));
+
+	            hasTriggered = false;
+	          
 	        }      
 	      
 	    }
