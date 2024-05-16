@@ -978,7 +978,8 @@ class EOWBC_Filter_Widget {
 			unset($_GET['_category']);
 			unset($_REQUEST['_category']);
 		}*/
-
+		
+		
 		// ACTIVE_TODO it is temporary. and we need to clear it when we clear the eo_wbc_filter js loading. and when we clear eo_wbc_filter js loading at that time also need to drop the redundant loading of eo_wbc_filter js that is from js.vars.asset file.
 		$eo_wbc_object = array("eo_wbc_object" => array(
 			'eo_product_url'=>$product_url,
@@ -996,7 +997,9 @@ class EOWBC_Filter_Widget {
 			// ACTIVE_TODO temp. below is temparary js layer flag for its php counter part of the function wbc_is_mobile_by_page_sections. So as soon as php template layer is not depandent on the function wbc_is_mobile_by_page_sections than at that time set false for below flag.
 			// 	-- And as soon as the js layer depandancy on this flag is removed than delete this flag from here. 
 			// ACTIVE_TODO_OC_END
-			'wbc_is_mobile_by_page_sections' => /*1*/(wbc_is_mobile_by_page_sections('cat_shop_page') ? 0 : 1),
+			'wbc_is_mobile_by_page_sections' => /*1*/(wbc_is_mobile_by_page_sections('cat_shop_page') ? 0 : 1,
+			'eo_scroll_pagination'=>scroll_pagination_setting()
+		),
 		) );
 
 		// if( wbc()->sanitize->get('is_test') == 1 ){
@@ -3409,6 +3412,14 @@ class EOWBC_Filter_Widget {
 	public function get_filter_sets($filter_prefix=''){
 
 		return /*$filter_sets =*/ unserialize(wbc()->options->get_option_group('filters_'.$filter_prefix.'filter_set',"a:0:{}"));
+	}
+
+	private function scroll_pagination_setting() {
+
+		-- note: jarur pde to filter/category ma if add krvani rese.
+		
+		$first = wbc()->options->get_option('scroll_pagination','enable_scroll_pagination_first_cat','enable_scroll_pagination_first_cat');
+		$second = wbc()->options->get_option('scroll_pagination','enable_scroll_pagination_second_cat','enable_scroll_pagination_second_cat');
 	}	
 }	
 ?>
