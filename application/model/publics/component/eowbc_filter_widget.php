@@ -998,7 +998,7 @@ class EOWBC_Filter_Widget {
 			// 	-- And as soon as the js layer depandancy on this flag is removed than delete this flag from here. 
 			// ACTIVE_TODO_OC_END
 			'wbc_is_mobile_by_page_sections' => /*1*/(wbc_is_mobile_by_page_sections('cat_shop_page') ? 0 : 1,
-			'eo_scroll_pagination'=>scroll_pagination_setting()
+			'enable_scroll_pagination'=>$this->scroll_pagination_setting($this->_category),
 		),
 		) );
 
@@ -2949,6 +2949,7 @@ class EOWBC_Filter_Widget {
 						// 	-- And as soon as the js layer depandancy on this flag is removed than delete this flag from here. 
 						// ACTIVE_TODO_OC_END
 						'wbc_is_mobile_by_page_sections' => /*1*/(wbc_is_mobile_by_page_sections('cat_shop_page') ? 0 : 1),
+						'enable_scroll_pagination'=>$this->scroll_pagination_setting($this->_category),
     				);
 
 		?>
@@ -3414,12 +3415,46 @@ class EOWBC_Filter_Widget {
 		return /*$filter_sets =*/ unserialize(wbc()->options->get_option_group('filters_'.$filter_prefix.'filter_set',"a:0:{}"));
 	}
 
-	private function scroll_pagination_setting() {
+	private function scroll_pagination_setting($current_category) {
 
-		-- note: jarur pde to filter/category ma if add krvani rese.
+		-- note: jarur pde to ring buider and shop category filter uper if add krvani rese.
 		
-		$first = wbc()->options->get_option('scroll_pagination','enable_scroll_pagination_first_cat','enable_scroll_pagination_first_cat');
-		$second = wbc()->options->get_option('scroll_pagination','enable_scroll_pagination_second_cat','enable_scroll_pagination_second_cat');
+		$first = wbc()->options->get_option('filters_'.$this->filter_prefix.'scroll_pagination','enable_scroll_pagination_first_cat');
+		$second = wbc()->options->get_option('filters_'.$this->filter_prefix.'scroll_pagination','enable_scroll_pagination_second_cat');
+
+		$is_first_category = false;
+		$is_second_category = false;
+
+		if(\eo\wbc\model\SP_WBC_Router::instance()->is_first_category(null, $current_category)){
+
+			$is_first_category = true;
+
+		} elseif(\eo\wbc\model\SP_WBC_Router::instance()->is_second_category(null, $current_category)){
+
+			$is_second_category = true;
+		}
+
+		if($is_first_category) {
+
+			if(!empty($first) && $first == 'enable_scroll_pagination_first_cat') {
+
+				return 1;
+			}
+
+		} else {
+
+			if($is_second_category) {
+
+				if(!empty($second) && $second == 'enable_scroll_pagination_second_cat') {
+
+					return 1;
+				}
+			}
+
+		}
+
+		return 0;
+
 	}	
 }	
 ?>

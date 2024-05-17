@@ -2031,10 +2031,19 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		console.log(render_container);
 		console.log(html);
 
-		-- aa if confirm krvani che. scroll pagination na feature mate add krel che -- to h.
-       	if (jQuery(render_container).hasClass('spui-wbc-pagination-scroll')) {
+       	var page = window.document.splugins.wbc.pagination.api.get_page_number();
 
-    		jQuery(render_container).appendTo(html);
+		-- aa if confirm krvani che. scroll pagination na feature mate add krel che -- to h.
+       	if((jQuery('body').hasClass('spui-wbc-scroll-pagination-enable')) || (eo_wbc_object.enable_scroll_pagination == 1)) {
+
+       		if(page == 1) {
+
+       			jQuery(render_container).html(html);
+       		}
+       		else {
+
+    			jQuery(render_container).appendTo(html);
+    		}
 
        	} else {
 
@@ -2865,28 +2874,35 @@ if( typeof(eo_wbc_object) != 'undefined'){
 						--	do the same for the other key functions below and raise notification but only if it is necessary otherwise we would skip that and only add when required. -- to s  
 			ACTIVE_TODO_OC_END*/
 			// --- move this code frome this file
-			var selector_inner=jQuery('.products,.product-listing,.row-inner>.col-lg-9:eq(0),.woocommerce-pagination,.pagination,jet-filters-pagination');
+			var selector_inner = jQuery('.products,.product-listing,.row-inner>.col-lg-9:eq(0),.woocommerce-pagination,.pagination,jet-filters-pagination');
 	        jQuery(selector_inner).css('visibility','visible');
 
-			jQuery('body').addClass('spui-wbc-scroll-pagination-enable');
+			-- if scroll enable or not , if mukvani avse biji. biji if a avse k  undhi condition avse html ne e thy 6 evu ky krvanu ny ave khali pagination hide krvanu avse.
 
-	        -- if scroll enable or not , if mukvani avse biji. biji if a avse k  undhi condition avse html ne e thy 6 evu ky krvanu ny ave khali pagination hide krvanu avse.
+			
 	        if(jQuery('body').hasClass('.spui-sptv-scroll-pagination-enable')|| jQuery('body').hasClass('.spui-sptv-scroll-pagination-disable')) {
 
-	        	if(jQuery('body').hasClass('.spui-sptv-scroll-pagination-enable')){
+	        	if(jQuery('body').hasClass('.spui-sptv-scroll-pagination-enable')) {
 
-	        		//ACTIVE_TODO/NOTE as of now we are handling the pagination html on the js layer only. Means we are hiding it and avoiding the html update when the scroll pagination is enabled. But as per the standard we may like to disable even the generation of html and calling us function from backed layels and other applicable js layers with required otherwise simply mark as note. -- to h    
+	        		jQuery('body').addClass('spui-wbc-scroll-pagination-enable');
 
-	        		jQuery( selector_inner).css('visibility','hidden');
+   					//ACTIVE_TODO/NOTE as of now we are handling the pagination html on the js layer only. Means we are hiding it and avoiding the html update when the scroll pagination is enabled. But as per the standard we may like to disable even the generation of html and calling us function from backed layels and other applicable js layers with required otherwise simply mark as note. -- to h 
+	        		jQuery(selector_inner).css('visibility','hidden');
+
 	        		on_scroll_listener();
 	        	}
 	        
-	    	} else if(jQuery('body').hasClass('eo-wbc-selector add krvo')) {
+	    	} else {
 
-	    		//ACTIVE_TODO/NOTE as of now we are handling the pagination html on the js layer only. Means we are hiding it and avoiding the html update when the scroll pagination is enabled. But as per the standard we may like to disable even the generation of html and calling us function from backed layels and other applicable js layers with required otherwise simply mark as note. -- to h 
+		    	if(eo_wbc_object.enable_scroll_pagination == 1) {
 
-	    		jQuery( selector_inner).css('visibility','hidden');
-	    		on_scroll_listener();
+		    		jQuery('body').addClass('spui-wbc-scroll-pagination-enable');
+
+		    		//ACTIVE_TODO/NOTE as of now we are handling the pagination html on the js layer only. Means we are hiding it and avoiding the html update when the scroll pagination is enabled. But as per the standard we may like to disable even the generation of html and calling us function from backed layels and other applicable js layers with required otherwise simply mark as note. -- to h 
+		    		jQuery(selector_inner).css('visibility','hidden');
+
+		    		on_scroll_listener();
+	    		}
 
 	    	}
 
@@ -2914,14 +2930,22 @@ if( typeof(eo_wbc_object) != 'undefined'){
 
 		var set_pagination_html_private = function(data){
 
-			//ACTIVE_TODO/NOTE as of now we are handling the pagination html on the js layer only. Means we are hiding it and avoiding the html update when the scroll pagination is enabled. But as per the standard we may like to disable even the generation of html and calling us function from backed layels and other applicable js layers with required otherwise simply mark as note. -- to h    
+			//ACTIVE_TODO/NOTE as of now we are handling the pagination html on the js layer only. Means we are hiding it and avoiding the html update when the scroll pagination is enabled. But as per the standard we may like to disable even the generation of html and calling us function from backed layels and other applicable js layers with required otherwise simply mark as note. -- to h   
+			if(jQuery('body').hasClass('.spui-sptv-scroll-pagination-enable')|| jQuery('body').hasClass('.spui-sptv-scroll-pagination-disable')) {
 
-			if(jQuery('body').hasClass('.spui-sptv-scroll-pagination-enable') || jQuery('body').hasClass('eo-wbc-selector add krvo') ) {
+	        	if(jQuery('body').hasClass('.spui-sptv-scroll-pagination-enable')) {
 
-				jQuery( selector_inner).css('visibility','hidden');
-				return;
+	        		return;
+	        	}
+	        	        
+	    	} else {
 
-			}
+		    	if(eo_wbc_object.enable_scroll_pagination == 1) {
+
+		    		return;
+	    		}
+
+	    	}
 			console.log('pagination [set_pagination_html_private]');
 
 			console.log('set_pagination_html_private()');
