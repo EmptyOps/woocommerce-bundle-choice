@@ -1207,6 +1207,16 @@ class WBC_Common {
 	    return false;
 	}
 
+	public function explode_by_array($delim, $input) {
+
+		$unidelim = $delim[0];
+
+		$step_01 = str_replace($delim, $unidelim, $input); //Extra step to create a uniform value
+
+		return explode($unidelim, $step_01);
+		
+	}
+
 }
 
 
