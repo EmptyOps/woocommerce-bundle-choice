@@ -3441,16 +3441,12 @@ class EOWBC_Filter_Widget {
 				return 1;
 			}
 
-		} else {
+		} else if($is_second_category) {
 
-			if($is_second_category) {
+			if(!empty($second) && $second == 'enable_scroll_pagination_second_cat') {
 
-				if(!empty($second) && $second == 'enable_scroll_pagination_second_cat') {
-
-					return 1;
-				}
+				return 1;
 			}
-
 		}
 
 		return 0;

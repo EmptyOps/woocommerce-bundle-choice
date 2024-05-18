@@ -2034,7 +2034,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
        	var page = window.document.splugins.wbc.pagination.api.get_page_number();
 
 		-- aa if confirm krvani che. scroll pagination na feature mate add krel che -- to h.
-       	if((jQuery('body').hasClass('spui-wbc-scroll-pagination-enable')) || (eo_wbc_object.enable_scroll_pagination == 1)) {
+       	if(jQuery('body').hasClass('spui-wbc-scroll-pagination-enable')) {
 
        		if(page == 1) {
 
@@ -2878,8 +2878,7 @@ if( typeof(eo_wbc_object) != 'undefined'){
 	        jQuery(selector_inner).css('visibility','visible');
 
 			-- if scroll enable or not , if mukvani avse biji. biji if a avse k  undhi condition avse html ne e thy 6 evu ky krvanu ny ave khali pagination hide krvanu avse.
-
-			
+		
 	        if(jQuery('body').hasClass('.spui-sptv-scroll-pagination-enable')|| jQuery('body').hasClass('.spui-sptv-scroll-pagination-disable')) {
 
 	        	if(jQuery('body').hasClass('.spui-sptv-scroll-pagination-enable')) {
@@ -2931,21 +2930,12 @@ if( typeof(eo_wbc_object) != 'undefined'){
 		var set_pagination_html_private = function(data){
 
 			//ACTIVE_TODO/NOTE as of now we are handling the pagination html on the js layer only. Means we are hiding it and avoiding the html update when the scroll pagination is enabled. But as per the standard we may like to disable even the generation of html and calling us function from backed layels and other applicable js layers with required otherwise simply mark as note. -- to h   
-			if(jQuery('body').hasClass('.spui-sptv-scroll-pagination-enable')|| jQuery('body').hasClass('.spui-sptv-scroll-pagination-disable')) {
-
-	        	if(jQuery('body').hasClass('.spui-sptv-scroll-pagination-enable')) {
+			if(jQuery('body').hasClass('.spui-sptv-scroll-pagination-enable')){
 
 	        		return;
 	        	}
 	        	        
-	    	} else {
-
-		    	if(eo_wbc_object.enable_scroll_pagination == 1) {
-
-		    		return;
-	    		}
-
-	    	}
+	    	} 
 			console.log('pagination [set_pagination_html_private]');
 
 			console.log('set_pagination_html_private()');
@@ -3137,10 +3127,6 @@ if( typeof(eo_wbc_object) != 'undefined'){
             if (distanceFromBottom < 100) { // Trigger when within 100px of the bottom
 
                 console.log('User reached the end of the page');
-                if (!jQuery(selector).hasClass('spui-wbc-pagination-scroll') {
-
-                	jQuery(selector).addClass('spui-wbc-pagination-scroll');
-                }
                 loadMoreContent(selector);
 
                 // Set the flag to true so this block doesn't execute again
