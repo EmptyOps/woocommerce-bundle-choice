@@ -118,7 +118,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
 		self::additional_data($query_string, $payload);
 
-		$url .= (str_contains($url, '?') ? $query_string : "?" . $query_string);
+		$url .= (strpos($url, '?') ? $query_string : "?" . $query_string);
 
 		$result = wp_remote_get($url);
 
