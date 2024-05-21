@@ -1977,7 +1977,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
     };
 
-    var get_enable_filter = function() {
+    var get_enable_filter_private = function() {
 
     	return window.document.splugins.eo_wbc_object.enable_filter/*window.eo_wbc_object.enable_filter*/;
     };
@@ -2032,11 +2032,10 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		console.log(html);
 
 		-- aa code pn confirm krvano che.
-       	var page = window.document.splugins.wbc.pagination.api.get_page_number();
-
+        
        	if(jQuery('body').hasClass('spui-wbc-scroll-pagination-enabled')) {
 
-       		if(page == 1) {
+       		if(jQuery('[name="paged"]').val() =='1') {
 
        			jQuery(render_container).html(html);
        		} else {
@@ -2834,7 +2833,10 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		compatability_public: function(section, object, expected_result, form_selector){
 
 			return compatability(section, object, expected_result, form_selector);
-		}		
+		},
+		get_enable_filter:	function(){
+			get_enable_filter_private();
+		},
     };
 };
 
@@ -2875,6 +2877,8 @@ if( typeof(eo_wbc_object) != 'undefined'){
 			// --- move this code frome this file
 			var selector_inner = '.products,.product-listing,.row-inner>.col-lg-9:eq(0),.woocommerce-pagination,.pagination,jet-filters-pagination';
 	        jQuery(selector_inner).css('visibility','visible');
+
+	        on_click_listener(event);
 
 			-- if scroll enable or not , if mukvani avse biji. biji if a avse k  undhi condition avse html ne e thy 6 evu ky krvanu ny ave khali pagination hide krvanu avse.
 				--	jo tableview na pagination na setting scroll mate consider na thy to niche ni if nikli jse and khali else vdhse
@@ -3085,8 +3089,7 @@ if( typeof(eo_wbc_object) != 'undefined'){
 
 	    var on_scroll_listener = function() {
 
-	    	var hasTriggered = false;
-	        jQuery(window).on('scroll', function() {
+	    	jQuery(window).on('scroll', function() {
 	        
 		    	on_scroll(null,this);
         	});
@@ -3100,21 +3103,22 @@ if( typeof(eo_wbc_object) != 'undefined'){
 		
 	    var scroll = function(type,element){
 	      
-            if (hasTriggered) {
+            if (window.document.splugins.wbc.filters.api.get_enable_filter()) {
                 return; // If the action has already been triggered, exit early
             }
-                    
+            var selector = null;       
+            
             if(jQuery('.spui-wbc-tableview-loop-container').length > 0) {  
 
-        		var selector = jQuery('.spui-wbc-tableview-loop-container');
+        		selector = jQuery('.spui-wbc-tableview-loop-container');
    			} else {
 
        			var render_container = '.products:eq(0),.product-listing:eq(0),.row-inner>.col-lg-9:eq(0)';
 
-            	var selector = window.document.splugins.wbc.filters.api.compatability_public('render_container',{render_container:jQuery(render_container),render_container_selector:render_container, is_return_string_selector:false},1).render_container;           	
+            	selector = window.document.splugins.wbc.filters.api.compatability_public('render_container',{render_container:jQuery(render_container),render_container_selector:render_container, is_return_string_selector:false},1).render_container;           	
    			}
 
-   			windowHeight = selector.height();
+   			var windowHeight = selector.height();
             var scrollTop = jQuery(element).scrollTop();
             var documentHeight = jQuery(document).height();
 
@@ -3123,27 +3127,11 @@ if( typeof(eo_wbc_object) != 'undefined'){
 
             if (distanceFromBottom < 100) { // Trigger when within 100px of the bottom
 
-                console.log('User reached the end of the page');
-                loadMoreContent(selector);
-
-                // Set the flag to true so this block doesn't execute again
-                hasTriggered = true;
-            }
-        
-
-	        function loadMoreContent(selector) {
-
-	        	console.log('Loading more content...');
-
-	        	window.document.splugins.wbc.pagination.api.set_page_number( window.document.splugins.wbc.pagination.api.get_page_number()+1 );
+            	window.document.splugins.wbc.pagination.api.set_page_number( window.document.splugins.wbc.pagination.api.get_page_number()+1 );
 
 	        	window.document.splugins.wbc.filters.api.eo_wbc_filter_change_wrapper(false, 'form#'+/*_this.$base_pagination_container*/jQuery(selector).parents().has('[id$="eo_wbc_filter"]').find('[id$="eo_wbc_filter"]').attr('id'));
-
-	            hasTriggered = false;
-	          
-	        }      
-	      
-	    }
+            }
+        }
 
 	    var click = function(event,element){
 	    	

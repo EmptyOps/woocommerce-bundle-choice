@@ -1417,6 +1417,7 @@ if ( ! class_exists( 'Filters' ) ) {
 								'label'=>'First Category',
 								'type'=>'devider',
 							),
+						
 						'enable_scroll_pagination_first_cat'=>array(
 								'label'=>'Enable Scroll Pagination For First Category',
 								'type'=>'checkbox',
@@ -1428,6 +1429,7 @@ if ( ! class_exists( 'Filters' ) ) {
 								'size_class'=>array('eight','wide'),
 								'inline'=>true,
 								'visible_info'=>array( 
+
 										'label'=>eowbc_lang('It is critically important to note that if you are using tableview then this setting will be ignored and whatever setting is applied for the pagination on tableview admin configuration page will be followed for this first category page. So keep note of this carefully to avoid any confusion.'),
 										'type'=>'visible_info',
 										'class'=>array('small'),
