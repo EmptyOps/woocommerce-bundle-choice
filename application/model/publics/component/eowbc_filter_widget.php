@@ -3417,8 +3417,6 @@ class EOWBC_Filter_Widget {
 
 	private function scroll_pagination_setting($current_category) {
 
-		-- note: jarur pde to ring buider and shop category filter uper if add krvani rese.
-		
 		$first = wbc()->options->get_option('filters_'.$this->filter_prefix.'scroll_pagination','enable_scroll_pagination_first_cat');
 		$second = wbc()->options->get_option('filters_'.$this->filter_prefix.'scroll_pagination','enable_scroll_pagination_second_cat');
 

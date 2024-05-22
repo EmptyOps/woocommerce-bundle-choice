@@ -242,7 +242,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		}
 		console.log(init_call,window.eo_wbc_filter_change_table_view_service);
 	
-		if(/*window.eo_wbc_object.enable_filter*/get_enable_filter()===false){
+		if(/*window.eo_wbc_object.enable_filter*/get_enable_filter_private()===false){
 		
 			return false;
 		}
@@ -1986,7 +1986,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
     	console.log('filters [set_enable_filter_private]');
 
-		console.log("filter module set_enable_filter_private before_ "+get_enable_filter()); 	
+		console.log("filter module set_enable_filter_private before_ "+get_enable_filter_private()); 	
 
     	window.eo_wbc_object.enable_filter = window.eo_wbc_object.enable_filter || value;
     	window.document.splugins.eo_wbc_object.enable_filter = window.document.splugins.eo_wbc_object.enable_filter || value;
@@ -1994,7 +1994,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
     	window.eo_wbc_object.enable_filter = value;
     	window.document.splugins.eo_wbc_object.enable_filter = value;
 
-		console.log("filter module set_enable_filter_private after "+get_enable_filter()); 	
+		console.log("filter module set_enable_filter_private after "+get_enable_filter_private()); 	
     };
 
     var temp_result_clone_div = function() {
@@ -2035,7 +2035,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
         
        	if(jQuery('body').hasClass('spui-wbc-scroll-pagination-enabled')) {
 
-       		if(jQuery('[name="paged"]').val() =='1') {
+       		if(jQuery('[name="paged"]').val() == '1') {
 
        			jQuery(render_container).html(html);
        		} else {
@@ -2834,8 +2834,10 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
 			return compatability(section, object, expected_result, form_selector);
 		},
+
 		get_enable_filter:	function(){
-			get_enable_filter_private();
+
+			return get_enable_filter_private();
 		},
     };
 };
@@ -2878,8 +2880,6 @@ if( typeof(eo_wbc_object) != 'undefined'){
 			var selector_inner = '.products,.product-listing,.row-inner>.col-lg-9:eq(0),.woocommerce-pagination,.pagination,jet-filters-pagination';
 	        jQuery(selector_inner).css('visibility','visible');
 
-	        on_click_listener(event);
-
 			-- if scroll enable or not , if mukvani avse biji. biji if a avse k  undhi condition avse html ne e thy 6 evu ky krvanu ny ave khali pagination hide krvanu avse.
 				--	jo tableview na pagination na setting scroll mate consider na thy to niche ni if nikli jse and khali else vdhse
 	        if(jQuery('body').hasClass('spui-sptv-scroll-pagination-enable') || jQuery('body').hasClass('spui-sptv-scroll-pagination-disable')) {
@@ -2904,6 +2904,9 @@ if( typeof(eo_wbc_object) != 'undefined'){
 		    		jQuery(selector_inner).css('visibility','hidden');
 
 		    		on_scroll_listener();
+	    		} else {
+
+	        		on_click_listener(event);
 	    		}
 
 	    	}
@@ -3106,8 +3109,9 @@ if( typeof(eo_wbc_object) != 'undefined'){
             if (window.document.splugins.wbc.filters.api.get_enable_filter()) {
                 return; // If the action has already been triggered, exit early
             }
-            var selector = null;       
-            
+
+            var selector = null;  
+
             if(jQuery('.spui-wbc-tableview-loop-container').length > 0) {  
 
         		selector = jQuery('.spui-wbc-tableview-loop-container');

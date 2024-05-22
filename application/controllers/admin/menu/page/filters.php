@@ -1411,7 +1411,7 @@ if ( ! class_exists( 'Filters' ) ) {
 
 					'label'=>__("Scroll Pagination"),
 					'form'=>array(
-						'scroll_pagination_section'=>array('label'=>'Scroll Pagination','type'=>'segment','desc'=>'Enable or disable scroll pagination and other related settings.'
+						'scroll_pagination_section'=>array('label'=>'Scroll Pagination','type'=>'segment','desc'=>'Enable or disable scroll pagination and it\'s related settings.'
 						),
 						'scroll_pagination_first_cat'=>array(
 								'label'=>'First Category',
@@ -1428,12 +1428,6 @@ if ( ! class_exists( 'Filters' ) ) {
 								'class'=>array(),
 								'size_class'=>array('eight','wide'),
 								'inline'=>true,
-								'visible_info'=>array( 
-
-										'label'=>eowbc_lang('It is critically important to note that if you are using tableview then this setting will be ignored and whatever setting is applied for the pagination on tableview admin configuration page will be followed for this first category page. So keep note of this carefully to avoid any confusion.'),
-										'type'=>'visible_info',
-										'class'=>array('small'),
-								)
 							),
 						// ACTIVE_TODO The logic of first category and second category is not applicable for shortcode filters. So we need to make sure that on the shortcode admin page we do not show below settings of second category. As well as we need to change the lables from first category to something generic for the above fields. -- to h and -- to jj
 						'scroll_pagination_second_cat'=>array(
