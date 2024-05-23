@@ -2030,19 +2030,18 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		console.log("set_archive_html");
 		console.log(render_container);
 		console.log(html);
-
-		-- aa code pn confirm krvano che.
-        
+      
+ 		var page = window.document.splugins.wbc.pagination.api.get_page_number();
+		
        	if(jQuery('body').hasClass('spui-wbc-scroll-pagination-enabled')) {
 
-       		if(jQuery('[name="paged"]').val() == '1') {
-
+       		if(page == 1) {
+		
        			jQuery(render_container).html(html);
        		} else {
 
-    			jQuery(render_container).appendTo(html);
+	    		jQuery(render_container).find('table tbody')appendTo(html);
     		}
-
        	} else {
 
     		jQuery(render_container).html(html);
@@ -2880,36 +2879,18 @@ if( typeof(eo_wbc_object) != 'undefined'){
 			var selector_inner = '.products,.product-listing,.row-inner>.col-lg-9:eq(0),.woocommerce-pagination,.pagination,jet-filters-pagination';
 	        jQuery(selector_inner).css('visibility','visible');
 
-			-- if scroll enable or not , if mukvani avse biji. biji if a avse k  undhi condition avse html ne e thy 6 evu ky krvanu ny ave khali pagination hide krvanu avse.
-				--	jo tableview na pagination na setting scroll mate consider na thy to niche ni if nikli jse and khali else vdhse
-	        if(jQuery('body').hasClass('spui-sptv-scroll-pagination-enable') || jQuery('body').hasClass('spui-sptv-scroll-pagination-disable')) {
+	    	if(eo_wbc_object.enable_scroll_pagination == 1) {
 
-	        	if(jQuery('body').hasClass('spui-sptv-scroll-pagination-enable')) {
+	    		jQuery('body').addClass('spui-wbc-scroll-pagination-enabled');
 
-	        		jQuery('body').addClass('spui-wbc-scroll-pagination-enabled');
+	    		//ACTIVE_TODO/NOTE as of now we are handling the pagination html on the js layer only. Means we are hiding it and avoiding the html update when the scroll pagination is enabled. But as per the standard we may like to disable even the generation of html and calling such function from backend layers and other applicable js layers as required otherwise simply mark it as note. -- to h
+	    		jQuery(selector_inner).css('visibility','hidden');
 
-   					//ACTIVE_TODO/NOTE as of now we are handling the pagination html on the js layer only. Means we are hiding it and avoiding the html update when the scroll pagination is enabled. But as per the standard we may like to disable even the generation of html and calling such function from backend layers and other applicable js layers as required otherwise simply mark it as note. -- to h
-	        		jQuery(selector_inner).css('visibility','hidden');
+	    		on_scroll_listener();
+    		} else {
 
-	        		on_scroll_listener();
-	        	}
-	        
-	    	} else {
-
-		    	if(eo_wbc_object.enable_scroll_pagination == 1) {
-
-		    		jQuery('body').addClass('spui-wbc-scroll-pagination-enabled');
-
-		    		//ACTIVE_TODO/NOTE as of now we are handling the pagination html on the js layer only. Means we are hiding it and avoiding the html update when the scroll pagination is enabled. But as per the standard we may like to disable even the generation of html and calling such function from backend layers and other applicable js layers as required otherwise simply mark it as note. -- to h
-		    		jQuery(selector_inner).css('visibility','hidden');
-
-		    		on_scroll_listener();
-	    		} else {
-
-	        		on_click_listener(event);
-	    		}
-
-	    	}
+        		on_click_listener(event);
+    		}
 
 	        sort_order_private();
 
@@ -2927,6 +2908,18 @@ if( typeof(eo_wbc_object) != 'undefined'){
 			
 			// process_events
 	        orderby_change_listener(null);
+	    }
+
+	    var get_total_pages_private = function() {
+
+	    	if(typeof(sp_dapii_pagination_data) != 'undefined') {
+
+	    		return sp_dapii_pagination_data.total;
+	    	} else {
+
+	    		return jQuery('.page-numbers li:nth-last-child(2)').text();
+	    	}
+	    	
 	    }
 
 		var get_pagination_html_private = function(){
@@ -3106,12 +3099,18 @@ if( typeof(eo_wbc_object) != 'undefined'){
 		
 	    var scroll = function(type,element){
 	      
-            if (window.document.splugins.wbc.filters.api.get_enable_filter()) {
+            if(window.document.splugins.wbc.filters.api.get_enable_filter()) {
                 return; // If the action has already been triggered, exit early
+            }
+            
+            if(window.document.splugins.wbc.pagination.api.get_page_number() >= get_total_pages_private()) {
+
+            	return;
             }
 
             var selector = null;  
 
+	    	//ACTIVE_TODO/NOTE here we are using tableview container for better reliability and stability. Because tableview container would always be available when table view is available. While the other standard selector are also reliable but still there might be issue with them and that might not fixed in compatabilty layer all the time if their are fixed from the backend layer. So in such scenario it is better if we relay on tableview container whenever that is available. But if we face any issue in handling two different containers to maintain scroll detection and the whole script related to the scroll then you may need to take decision to only rely on the standard products container selector of woocommerce. So let's do it if required max by first or second revision otherwise lets mark it just as todo. -- to h and -- to jj.              
             if(jQuery('.spui-wbc-tableview-loop-container').length > 0) {  
 
         		selector = jQuery('.spui-wbc-tableview-loop-container');
@@ -3260,6 +3259,7 @@ if( typeof(eo_wbc_object) != 'undefined'){
 	    var reset_private = function(){
 
 	    };
+
 		
 		return {
 			
@@ -3279,23 +3279,30 @@ if( typeof(eo_wbc_object) != 'undefined'){
 			// },
 
 			get_page_number: function(selector = null) {
+
+				if(jQuery('body').hasClass('spui-wbc-scroll-pagination-enabled')) {
+
+   					return jQuery('[name="paged"]').val();
+
+    			} else {
 				
-				if(selector == null) {
+					if(selector == null) {
+							
+						selector = ".page-numbers.current";
+					}			
+					console.log(jQuery(selector));
+					
+					if(jQuery(selector).html().indexOf('&nbsp;') >= 0 ){
 						
-					selector = ".page-numbers.current";
-				}			
-				console.log(jQuery(selector));
-				
-				if(jQuery(selector).html().indexOf('&nbsp;') >= 0 ){
-					
-					console.log('get_page_number in nbsp available');
-					
-					return parseInt(jQuery(selector).html().replace(',','').replace(/\&nbsp;/g, ''));
-				}else{
+						console.log('get_page_number in nbsp available');
+						
+						return parseInt(jQuery(selector).html().replace(',','').replace(/\&nbsp;/g, ''));
+					}else{
 
-					console.log('get_page_number in nbsp not available');
+						console.log('get_page_number in nbsp not available');
 
-					return parseInt(jQuery(selector).text().replace(',',''));
+						return parseInt(jQuery(selector).text().replace(',',''));
+					}
 				}
 			},
 
@@ -3332,6 +3339,10 @@ if( typeof(eo_wbc_object) != 'undefined'){
 			get_sort_dropdown_container: function() {
 
 				return get_sort_dropdown_container_private();
+			},
+			get_total_pages: function() {
+
+				return get_total_pages_private();
 			},				
 
 		};
