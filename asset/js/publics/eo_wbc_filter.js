@@ -2040,7 +2040,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
        			jQuery(render_container).html(html);
        		} else {
 
-	    		jQuery(render_container).find('table tbody')appendTo(html);
+	    		jQuery(render_container).appendTo(html);
     		}
        	} else {
 
@@ -2902,24 +2902,29 @@ if( typeof(eo_wbc_object) != 'undefined'){
 	    	return compatability('sort_dropdown_container',{container:jQuery('select[name="orderby"]:eq(0)'),is_return_string_selector:false},null,null).container;
 	    }
 
+	    var get_total_pages_private = function() {
+
+	    	if(typeof(window.sp_dapii_pagination_data) != 'undefined' && !window.document.splugins.common.is_empty(window.sp_dapii_pagination_data)) {
+
+	    		return window.sp_dapii_pagination_data.total;
+
+	    	} else {
+
+	    		var total_pages_container = jQuery('.page-numbers li:nth-last-child(2)');
+
+	    		container = compatability('total_pages_container',{container:total_pages_container},1).container;
+
+	    		return container.text();
+	    	}
+	    	
+	    }
+
 	    var sort_order_private = function() {
 			
 			console.log('pagination [sort_order_private]');
 			
 			// process_events
 	        orderby_change_listener(null);
-	    }
-
-	    var get_total_pages_private = function() {
-
-	    	if(typeof(sp_dapii_pagination_data) != 'undefined') {
-
-	    		return sp_dapii_pagination_data.total;
-	    	} else {
-
-	    		return jQuery('.page-numbers li:nth-last-child(2)').text();
-	    	}
-	    	
 	    }
 
 		var get_pagination_html_private = function(){
@@ -3102,7 +3107,7 @@ if( typeof(eo_wbc_object) != 'undefined'){
             if(window.document.splugins.wbc.filters.api.get_enable_filter()) {
                 return; // If the action has already been triggered, exit early
             }
-            
+
             if(window.document.splugins.wbc.pagination.api.get_page_number() >= get_total_pages_private()) {
 
             	return;
@@ -3251,7 +3256,19 @@ if( typeof(eo_wbc_object) != 'undefined'){
 			
 					object.container = jQuery("");
 				}
-		    } 
+
+		    } else if(section == 'total_pages_container') {
+
+				if(object.pagination_container.length < expected_result) {
+					
+					// NOTE: below is an example if to create patch for specific theme  
+					if(false && window.document.splugins.common.current_theme_key == 'themes___elessi-theme-child'){
+
+						object.pagination_container = jQuery('add your selector here');	
+					
+					}
+				}
+		    }
 
 	        return object;
 	    };
@@ -3340,6 +3357,7 @@ if( typeof(eo_wbc_object) != 'undefined'){
 
 				return get_sort_dropdown_container_private();
 			},
+
 			get_total_pages: function() {
 
 				return get_total_pages_private();
