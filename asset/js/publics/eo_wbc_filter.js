@@ -3259,12 +3259,12 @@ if( typeof(eo_wbc_object) != 'undefined'){
 
 		    } else if(section == 'total_pages_container') {
 
-				if(object.pagination_container.length < expected_result) {
+				if(object.container.length < expected_result) {
 					
 					// NOTE: below is an example if to create patch for specific theme  
 					if(false && window.document.splugins.common.current_theme_key == 'themes___elessi-theme-child'){
 
-						object.pagination_container = jQuery('add your selector here');	
+						object.container = jQuery('add your selector here');	
 					
 					}
 				}
