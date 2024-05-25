@@ -150,6 +150,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
 		// allow the filter search event after all init level logic is executed
 		// NOTE: now almost all other page load level flag set logic is disabled and initialy the flag is set at page load time only from here. 
+
 		set_enable_filter_private(true);	
 
 		slider_init();
@@ -279,6 +280,8 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 	var prepare_query_data = function(init_call, form_selector) {
 
     	console.log('filters [prepare_query_data]');
+    	console.log(init_call);
+    	console.log(form_selector);
 		
 		// from 0= this file function 
 
@@ -531,7 +534,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 					}
 
 				}
-				
+				console.log('wbc filter preprare query data site url');
 				console.log(site_url);
 
 				if(site_url.includes('?')) {
@@ -544,6 +547,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 					ajax_url = site_url+'/?'+eo_wbc_object.eo_cat_query;
 				}
 
+				console.log('wbc filter prepare_query_data eo_wbc_object');
 				console.log(eo_wbc_object);	
 			}
 
@@ -825,6 +829,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 	var eo_wbc_filter_change_wrapper_private = function(init_call, form_selector, render_container, parameters) {
 
     	console.log('filters [eo_wbc_filter_change_wrapper_private]');
+    	console.log(init_call);
 
 		if( !should_search(init_call) ){
 
@@ -3090,29 +3095,44 @@ if( typeof(eo_wbc_object) != 'undefined'){
 
 	    var on_scroll_listener = function() {
 
+	        console.log('wbc pagination on_scroll_listener');
+
 	    	jQuery(window).on('scroll', function() {
-	        
+	        	
+	        	console.log('wbc pagination on_scroll_listener 1');
 		    	on_scroll(null,this);
         	});
 	    }
 
 	    var on_scroll = function(type,element) {
-
+	    	
+	    	console.log('wbc pagination on_scroll');
 	      	scroll(type,element);
 
 	    }
 		
 	    var scroll = function(type,element){
-	      
-            if(window.document.splugins.wbc.filters.api.get_enable_filter()) {
+
+	      	// console.log('wbc pagination scroll');
+
+            if(!window.document.splugins.wbc.filters.api.get_enable_filter()) {
+
+            	console.log('wbc pagination scroll get enable filter');
+            	console.log(window.document.splugins.wbc.filters.api.get_enable_filter());
                 return; // If the action has already been triggered, exit early
             }
+            
+            console.log('wbc pagination scroll outside get enable filter if');
+            console.log(window.document.splugins.wbc.filters.api.get_enable_filter());
 
             if(window.document.splugins.wbc.pagination.api.get_page_number() >= get_total_pages_private()) {
 
+            	console.log('wbc pagination scroll get last page');
+            	console.log(window.document.splugins.wbc.pagination.api.get_page_number());
+            	console.log(get_total_pages_private());
             	return;
             }
-
+            
             var selector = null;  
 
 	    	//ACTIVE_TODO/NOTE here we are using tableview container for better reliability and stability. Because tableview container would always be available when table view is available. While the other standard selector are also reliable but still there might be issue with them and that might not fixed in compatabilty layer all the time if their are fixed from the backend layer. So in such scenario it is better if we relay on tableview container whenever that is available. But if we face any issue in handling two different containers to maintain scroll detection and the whole script related to the scroll then you may need to take decision to only rely on the standard products container selector of woocommerce. So let's do it if required max by first or second revision otherwise lets mark it just as todo. -- to h and -- to jj.              
@@ -3126,6 +3146,9 @@ if( typeof(eo_wbc_object) != 'undefined'){
             	selector = window.document.splugins.wbc.filters.api.compatability_public('render_container',{render_container:jQuery(render_container),render_container_selector:render_container, is_return_string_selector:false},1).render_container;           	
    			}
 
+   			console.log('wbc pagination scroll selector');
+   			console.log(selector);
+
    			var windowHeight = selector.height();
             var scrollTop = jQuery(element).scrollTop();
             var documentHeight = jQuery(document).height();
@@ -3133,9 +3156,17 @@ if( typeof(eo_wbc_object) != 'undefined'){
             // Check if the user is at or near the bottom of the page
             var distanceFromBottom = documentHeight - (scrollTop + windowHeight);
 
+            console.log('wbc pagination scroll distanceFromBottom');
+            console.log(distanceFromBottom);
+
             if (distanceFromBottom < 100) { // Trigger when within 100px of the bottom
 
-            	window.document.splugins.wbc.pagination.api.set_page_number( window.document.splugins.wbc.pagination.api.get_page_number()+1 );
+            	// window.document.splugins.wbc.filters.api.set_enable_filter(false);
+
+            	console.log('wbc pagination scroll inside distance if');
+            	console.log(window.document.splugins.wbc.pagination.api.get_page_number());
+            	
+               	window.document.splugins.wbc.pagination.api.set_page_number(parseInt( window.document.splugins.wbc.pagination.api.get_page_number() ) + 1 );
 
 	        	window.document.splugins.wbc.filters.api.eo_wbc_filter_change_wrapper(false, 'form#'+/*_this.$base_pagination_container*/jQuery(selector).parents().has('[id$="eo_wbc_filter"]').find('[id$="eo_wbc_filter"]').attr('id'));
             }
@@ -4240,3 +4271,4 @@ if( typeof(eo_wbc_object) != 'undefined'){
 		// window.document.splugins.wbc.filter_sets.api.init(); 	
 	// });
 }
+
