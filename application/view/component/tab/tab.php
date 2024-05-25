@@ -53,12 +53,11 @@ if(!empty($tab_data) and is_array($tab_data)){
 			}
 		</style>
 	<?php
-	}
+		}
 		$custom_css = "
-
-	    .ui.bottom.attached.tab.segment.active{
-	        min-height: 75vh;
-	    }
+		    .ui.bottom.attached.tab.segment.active{
+		        min-height: 75vh;
+		    }
     	";
    		 wbc()->load->add_inline_style('', $custom_css,'common');
     ?>

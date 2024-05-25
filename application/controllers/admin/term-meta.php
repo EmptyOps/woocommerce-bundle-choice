@@ -412,7 +412,8 @@ class Term_Meta {
 						return false;
 					});				
 				</script>
-				<?php } 
+				<?php 
+				} 
 				$inline_script =
 				    "jQuery(document).on(\"click\",\".wbc_attachment_thumb_button\",function(){\n" .
 				    "    wp_media = wp.media({\n" .
@@ -500,7 +501,7 @@ class Term_Meta {
 				    "        },\n" .
 				    "        multiple: false\n" .
 				    "    })\n" .
-				    "    .on('select', function() {\n" .
+				    "    .on('select', function() {\n\n" .
 				    "        var attachment = wp_media.state().get('selection').first().toJSON();\n" .
 				    "        jQuery('#wbc_attachment_thumb_img').attr('src', attachment.url);\n" .
 				    "        jQuery('#wbc_attachment_thumb').val( attachment.url);\n" .
