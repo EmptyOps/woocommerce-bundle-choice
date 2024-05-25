@@ -418,7 +418,8 @@ class EOWBC_Filter_Widget {
 									
 					/*Modifications............................*/
 				</style>";
-				}	
+				}
+					
 				$custom_css = "
 				    .ui.labeled.ticked.range.slider .labels{
 				        font-size:".wbc()->options->get_option('appearance_filters','appearance_filters_slider_font_size','0.75em',true,true)." !important;
