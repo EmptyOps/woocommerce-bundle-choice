@@ -30,7 +30,7 @@ if (!class_exists('Extras')) {
 						'extras_general_section' => array(
 							'label' => 'General',
 							'type' => 'segment',
-							'desc' => 'Nothing available hear yet'
+							'desc' => 'Nothing available here yet'
 						),
 						'resolver_path'=>array(
 							'type'=>'hidden',
@@ -246,11 +246,6 @@ if (!class_exists('Extras')) {
 							'label' => 'Configuration',
 							'type' => 'segment',
 							'desc' => 'Extras configuration'
-						),
-						'saved_tab_key' => array(
-							'type' => 'hidden',
-							'value' => '',
-							'sanitize' => 'sanitize_text_field',
 						),
 						'token' => array(
 							'label' => 'Token',
