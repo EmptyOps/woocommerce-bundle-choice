@@ -2045,7 +2045,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
        			jQuery(render_container).html(html);
        		} else {
 
-	    		jQuery(render_container).appendTo(html);
+	    		jQuery(render_container).append(html);
     		}
        	} else {
 
@@ -2889,7 +2889,7 @@ if( typeof(eo_wbc_object) != 'undefined'){
 	    		jQuery('body').addClass('spui-wbc-scroll-pagination-enabled');
 
 	    		//ACTIVE_TODO/NOTE as of now we are handling the pagination html on the js layer only. Means we are hiding it and avoiding the html update when the scroll pagination is enabled. But as per the standard we may like to disable even the generation of html and calling such function from backend layers and other applicable js layers as required otherwise simply mark it as note. -- to h
-	    		jQuery(selector_inner).css('visibility','hidden');
+	    			jQuery(".woocommerce-pagination,.pagination"+compatability('pagination_link_selector',null,null)).css('visibility','hidden');
 
 	    		on_scroll_listener();
     		} else {
