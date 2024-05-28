@@ -89,7 +89,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 			
 		}
 
-		$result = self::call($url --this perameter need to be passed from the particular extensions so based on plugin slug we need to call the single tone function and hear the plugin slug is most probably single tone function name so need to retry the api url to call from the extensions config_class config_helpaer function);
+		$result = self::call($url --	this perameter need to be passed from the particular extensions so based on plugin slug we need to call the single tone function and hear the plugin slug is most probably single tone function name so need to retry the api url to call from the extensions config_class config_helpaer function);
 
 		$this->configuration_update_result($result, $plugin_slug);
 

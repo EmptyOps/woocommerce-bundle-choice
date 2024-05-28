@@ -281,7 +281,7 @@ if (!class_exists('Extras')) {
 							'class' => array('secondary'),
 							//'size_class'=>array('eight','wide'),
 							'inline' => false,
-							'attr' => array('data-tab_key="extras"', 'data-action="save"'),
+							'attr' => array('data-tab_key="extras_configuration"', 'data-action="save"'),
 						)
 					),
 				),
