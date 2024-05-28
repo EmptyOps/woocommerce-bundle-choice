@@ -2908,18 +2908,26 @@ if( typeof(eo_wbc_object) != 'undefined'){
 	    }
 
 	    var get_total_pages_private = function() {
+    	
+	    	console.log('wbc pagination get_total_pages_private 1');
+	    	console.log(window.sp_dapii_pagination_data);
+
 
 	    	if(typeof(window.sp_dapii_pagination_data) != 'undefined' && !window.document.splugins.common.is_empty(window.sp_dapii_pagination_data)) {
+
+	    		console.log('wbc pagination get_total_pages_private 2');
 
 	    		return window.sp_dapii_pagination_data.total;
 
 	    	} else {
 
+	    		console.log('wbc pagination get_total_pages_private 3');
+
 	    		var total_pages_container = jQuery('.page-numbers li:nth-last-child(2)');
 
 	    		container = compatability('total_pages_container',{container:total_pages_container},1).container;
-
 	    		return container.text();
+
 	    	}
 	    	
 	    }
