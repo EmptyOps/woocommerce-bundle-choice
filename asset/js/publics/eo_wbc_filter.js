@@ -2912,7 +2912,6 @@ if( typeof(eo_wbc_object) != 'undefined'){
 	    	console.log('wbc pagination get_total_pages_private 1');
 	    	console.log(window.sp_dapii_pagination_data);
 
-
 	    	if(typeof(window.sp_dapii_pagination_data) != 'undefined' && !window.document.splugins.common.is_empty(window.sp_dapii_pagination_data)) {
 
 	    		console.log('wbc pagination get_total_pages_private 2');
@@ -2926,7 +2925,8 @@ if( typeof(eo_wbc_object) != 'undefined'){
 	    		var total_pages_container = jQuery('.page-numbers li:nth-last-child(2)');
 
 	    		container = compatability('total_pages_container',{container:total_pages_container},1).container;
-	    		return container.text();
+	    		console.log(typeof(container.text()));
+	    		return parseInt(container.text().replace(',',''));
 
 	    	}
 	    	
@@ -3132,12 +3132,13 @@ if( typeof(eo_wbc_object) != 'undefined'){
             
             console.log('wbc pagination scroll outside get enable filter if');
             console.log(window.document.splugins.wbc.filters.api.get_enable_filter());
+        	console.log(window.document.splugins.wbc.pagination.api.get_page_number());
+        	console.log(get_total_pages_private());
 
             if(window.document.splugins.wbc.pagination.api.get_page_number() >= get_total_pages_private()) {
 
             	console.log('wbc pagination scroll get last page');
-            	console.log(window.document.splugins.wbc.pagination.api.get_page_number());
-            	console.log(get_total_pages_private());
+
             	return;
             }
             
@@ -3162,12 +3163,12 @@ if( typeof(eo_wbc_object) != 'undefined'){
             var documentHeight = jQuery(document).height();
 
             // Check if the user is at or near the bottom of the page
-            var distanceFromBottom = documentHeight - (scrollTop + windowHeight);
+            var distanceFromBottom = windowHeight - (scrollTop);
 
             console.log('wbc pagination scroll distanceFromBottom');
             console.log(distanceFromBottom);
 
-            if (distanceFromBottom < 100) { // Trigger when within 100px of the bottom
+            if (distanceFromBottom < 0) { // Trigger when within 100px of the bottom
 
             	// window.document.splugins.wbc.filters.api.set_enable_filter(false);
 
@@ -3177,7 +3178,8 @@ if( typeof(eo_wbc_object) != 'undefined'){
                	window.document.splugins.wbc.pagination.api.set_page_number(parseInt( window.document.splugins.wbc.pagination.api.get_page_number() ) + 1 );
 
 	        	window.document.splugins.wbc.filters.api.eo_wbc_filter_change_wrapper(false, 'form#'+/*_this.$base_pagination_container*/jQuery(selector).parents().has('[id$="eo_wbc_filter"]').find('[id$="eo_wbc_filter"]').attr('id'));
-            }
+	        }
+
         }
 
 	    var click = function(event,element){
