@@ -27,6 +27,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 	}
 
 	public function configuration_run() {
+		--	shude we rename extars check hook below to somthing like extars configrtion check or configrtion check?
 		do_action('sp_wbc_extras_check');
 	}
 
@@ -61,21 +62,21 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
 					if( $item['type'] == 'action' ) {
 
-						self::instance()->update_result(false, $plugin_slug, $curr_theme_key, $section_key, $rv, $key, $item, $current_url );
+						self::instance()->configuration_update_result(false, $plugin_slug, $curr_theme_key, $section_key, $rv, $key, $item, $current_url );
 
 						add_action($item['key'], function() use($plugin_slug, $curr_theme_key, $section_key, $rv, $key, $current_url) {
 			
-							self::instance()->update_result(true, $plugin_slug, $curr_theme_key, $section_key, $rv, $key, null, $current_url );
+							self::instance()->configuration_update_result(true, $plugin_slug, $curr_theme_key, $section_key, $rv, $key, null, $current_url );
 
 						});
 					}
 					elseif( $item['type'] == 'filter' ) {
 
-						self::instance()->update_result(false, $plugin_slug, $curr_theme_key, $section_key, $rv, $key, $item, $current_url );
+						self::instance()->configuration_update_result(false, $plugin_slug, $curr_theme_key, $section_key, $rv, $key, $item, $current_url );
 
 						add_filter($item['key'], function() use($plugin_slug, $curr_theme_key, $section_key, $rv, $key, $current_url) {
 
-							self::instance()->update_result(true, $plugin_slug, $curr_theme_key, $section_key, $rv, $key, null, $current_url );
+							self::instance()->configuration_update_result(true, $plugin_slug, $curr_theme_key, $section_key, $rv, $key, null, $current_url );
 
 						}, $item['filter_priority_1'], $item['filter_priority_2']);
 					}
