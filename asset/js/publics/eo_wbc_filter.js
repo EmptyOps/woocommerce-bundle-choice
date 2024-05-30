@@ -3160,14 +3160,16 @@ if( typeof(eo_wbc_object) != 'undefined'){
 
    			var windowHeight = selector.height();
             var scrollTop = jQuery(element).scrollTop();
-            var documentHeight = jQuery(document).height();
+            // var documentHeight = jQuery(document).height();
 
             // Check if the user is at or near the bottom of the page
+            // var distanceFromBottom = documentHeight - (scrollTop + windowHeight);
             var distanceFromBottom = windowHeight - (scrollTop);
-
+            
             console.log('wbc pagination scroll distanceFromBottom');
             console.log(distanceFromBottom);
 
+			// if (distanceFromBottom < 100) { // Trigger when within 100px of the bottom
             if (distanceFromBottom < 0) { // Trigger when within 100px of the bottom
 
             	// window.document.splugins.wbc.filters.api.set_enable_filter(false);
