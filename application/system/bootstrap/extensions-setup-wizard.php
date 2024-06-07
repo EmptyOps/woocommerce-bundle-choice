@@ -450,7 +450,7 @@ if ( ! class_exists( 'Extensions_Setup_Wizard' ) ) {
 						}
 
 						$get_option_eo_wbc_inventory_type = get_option('eo_wbc_inventory_type', '');
-						$admin_url_page_eowbc_eo_wbc_view_auto_jewel = admin_url("admin.php?page=eowbc&eo_wbc_view_auto_jewel=1")
+						$admin_url_page_eowbc_eo_wbc_view_auto_jewel = admin_url("admin.php?page=eowbc&eo_wbc_view_auto_jewel=1");
 						$inline_script =
 						    "jQuery(document).ready(function(){\n" .
 						    "    jQuery('.ui.dropdown').dropdown();\n" .

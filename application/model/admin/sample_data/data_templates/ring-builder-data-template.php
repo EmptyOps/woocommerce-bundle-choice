@@ -667,7 +667,7 @@ class Ring_Builder_Data_Template extends Pair_Builder_Data_Template {
             array(
                 ['slug','eo_diamond_princess_shape_cat','product_cat'],
                 // ['slug','eo_setting_pear_shape_cat','product_cat']
-                ['slug','pear','pa_eo_shape_attr']
+                ['slug','princess','pa_eo_shape_attr']
             ),
             array(
                 ['slug','eo_diamond_emerald_shape_cat','product_cat'],

@@ -161,7 +161,7 @@ if( true or in_array( wbc()->common->get_category('category',null,array(wbc()->o
             "    // jQuery('.filter_setting_advance_two_tabs .item.active').click();\n\n" .
             "});\n";
 
-        wbc()->load->add_inline_script('', $inline_script, 'common');
+        wbc()->load->add_inline_script('', $inline_script, 'sp-wbc-common-footer');
 
         ?>
         <?php 

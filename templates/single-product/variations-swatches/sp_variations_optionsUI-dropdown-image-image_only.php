@@ -60,5 +60,5 @@ if(in_array($variable_item_data['options_loop_type'][$term->slug],array('dropdow
                 'class' => 'menu',
             ),
         ),
-    )
+    );
 }
