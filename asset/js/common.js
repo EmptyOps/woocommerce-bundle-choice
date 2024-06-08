@@ -144,6 +144,20 @@ if(window.document.splugins.common.is_item_page || window.document.splugins.comm
     return (val == undefined || val == null || val.length <= 0) ? true : false;
  }
 
+window.document.splugins.common.key_to_title = function(key) {
+  
+   let modifiedKey = key.replace(/[-_]/g, " "); // Replace dashes and underscores with spaces
+
+   let result = modifiedKey.replace(/\b\w/g, c => c.toUpperCase()); // Capitalize first character of each word
+    
+   return result;
+
+   // var uppercaseKey = key.toUpperCase();
+    
+   // // Return the uppercase version of the string
+   // return uppercaseKey;
+};
+
  window.document.splugins.common.find_get_parameter = function(parameterName) {
     
     var result = null,
@@ -3794,13 +3808,16 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
             return false;
         }
         
-        // console.log("gim [slider_thumb_click_listener] _this./*#*/$slider_loop_container_private");
-        // console.log(_this./*#*/$slider_loop_container_private);
+        console.log("gim [slider_thumb_click_listener] _this./*#*/$slider_loop_container_private 26 april");
+        console.log(_this./*#*/$slider_loop_container_private);
 
         _this./*#*/$slider_loop_container_private.on('click', 'img', function () {
             console.log("gim [slider_thumb_click_listener] on_click");
             _this./*#*/on_slider_thumb_click_private(type,this);            
         });
+
+        console.log("gim [slider_thumb_click_listener] _this./*#*/$slider_loop_container_private 26 april on click niche");
+        console.log(_this./*#*/$slider_loop_container_private);
  
     }
  
