@@ -692,6 +692,14 @@ if (!class_exists('Appearance')) {
 							'value' => wbc()->options->get_option('appearance_global', 'theme_secondary_color', '#ffffff', true, true),
 							'is_id_as_name' => true,
 							'class' => array(),
+						),
+						'global_submit_btn' => array(
+							'label' => eowbc_lang('Save'),
+							'type' => 'button',
+							'class' => array('secondary'),
+							//'size_class'=>array('eight','wide'),
+							'inline' => false,
+							'attr' => array('data-tab_key="global"', 'data-action="save"'),
 						)
 					)
 				)

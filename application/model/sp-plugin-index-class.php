@@ -245,6 +245,37 @@ if(!class_exists('SP_Plugin_Index_Class') ) {
 			
 		}
 
+		public function extras_configuration_check() {
+
+		    // admin 
+		    if( is_admin() ) {
+		        $page_slug = wbc()->sanitize->get('page');
+		        if( strpos($page_slug, "---extras") !== FALSE ) {
+		            $curr_plugin_slug = explode("---", $page_slug)[0];
+
+		            if( $curr_plugin_slug == $this->SP_Extension->extension_slug() ) {
+
+		                add_filter('sp_wbc_extras_config', function( $plugin_slug ) {
+
+		                    if( $plugin_slug == $this->SP_Extension->extension_slug() ) {
+		                        return $this->SP_Extension->singleton_function()()->config->required_hooks_n_filters_etc();
+		                    }
+		                }, 10, 1);
+		            }
+
+		        }
+		    }
+
+		    //add action 
+		    if( !empty(wbc()->sanitize->get('sp_ext_ecac')) && wbc()->sanitize->get('sp_ext_ecac') == 1 ) {
+		        add_action('sp_wbc_extras_check',function(){
+		            wbc()->load->model('utilities/eowbc_extras_check');
+		            \eo\wbc\model\utilities\Eowbc_Extras_Check::instance()->configuration_check( $this->SP_Extension->singleton_function()()->config->required_hooks_n_filters_etc() );
+		        },20);
+		    }
+		    
+		}
+
 		public function __init( $childClassObj ) {
 
 			if( wbc()->sanitize->get('is_test') == 1 ) {
@@ -265,6 +296,8 @@ if(!class_exists('SP_Plugin_Index_Class') ) {
 				do_action( 'after_spext_init', $this->SP_Extension->extension_slug() );
 
 				$childClassObj->theme_adaption_check();
+				
+				$childClassObj->extras_configuration_check();
 
 			// });
 

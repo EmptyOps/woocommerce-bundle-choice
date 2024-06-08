@@ -78,7 +78,7 @@ class Eowbc_Base_Model {
 									
 									// Skip these fields.
 									// To override this use eowbc_ignore_fields filter.
-									if( !in_array($rvk,$table_fields) {
+									if( !in_array($rvk,$table_fields) ) {
 										continue;
 									}
 
@@ -145,7 +145,7 @@ class Eowbc_Base_Model {
 	    if(!empty($form_definition[$saved_tab_key])) {
 
 	    	$tab = $form_definition[$saved_tab_key];
-	    	$key = $saved_tab_key
+	    	$key = $saved_tab_key;
 	    
 	    	$key_clean = ((!empty($this->tab_key_prefix) and strpos($key,$this->tab_key_prefix)===0)?substr($key,strlen($this->tab_key_prefix)):$key);
 			
@@ -277,7 +277,7 @@ class Eowbc_Base_Model {
             }            
         }
 
-        wbc()->options->update_option_group( $menu_key.''_.$key, serialize($table_data) );
+        wbc()->options->update_option_group( $menu_key.'_'.$key, serialize($table_data) );
         $res["msg"] = $activate_cnt . " " . eowbc_lang('record(s) activated'); 
 
         return $res;
