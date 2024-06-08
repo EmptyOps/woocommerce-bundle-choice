@@ -123,7 +123,7 @@ class Category_Meta {
 				    "        },\n" .
 				    "        multiple: false\n" .
 				    "    })\n" .
-				    "    .on('select', function() {\n" .
+				    "    .on('select', function() {\n\n" .
 				    "        var attachment = wp_media.state().get('selection').first().toJSON();\n" .
 				    "        jQuery('#wbc_thumb_img').attr('src', attachment.url);\n" .
 				    "        jQuery('#wbc_attachment').val( attachment.url);\n" .

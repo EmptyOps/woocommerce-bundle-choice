@@ -64,19 +64,18 @@ if(isset($_GET['FIRST']) and isset($_GET['SECOND'])) {
     $html.='</div>';
 
     if(wbc()->options->get_option('appearance_breadcrumb','showhide_icons','0')/*get_option('eo_wbc_show_hide_breadcrumb_icon','0')*/==='1'){
-        if(false)
-        {
-?>
-            $html.="<style>.eo-wbc-container>.ui.ordered.steps .step:before{content:''}</style>"
-<?php 
+        if(false) {
+
+            $html.="<style>.eo-wbc-container>.ui.ordered.steps .step:before{content:''}</style>" 
         }
-        $custom_css = ".eo-wbc-container>.ui.ordered.steps .step:before
-        {
-            content: '';
-        }";
+        $custom_css = ".eo-wbc-container>.ui.ordered.steps .step:before{content: ''}";
         wbc()->load->add_inline_style('', $custom_css,'common');
     } 
+
+
     echo $html;
+
+
     if (false) {
     
         $html.="<script>

@@ -84,7 +84,7 @@ class View_Order {
                 </script>
             <?php
             }
-            $get_sets_value = esc_attr($this->get_sets($sets));
+            $get_sets_value = $this->get_sets($sets);
             $inline_script = 
                 "jQuery(document).ready(function(){\n" .
                 "    jQuery('table.shop_table.order_details>tbody').html('".$get_sets_value."');\n" .

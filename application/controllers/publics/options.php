@@ -656,7 +656,7 @@ class Options extends \eo\wbc\controllers\publics\Controller {
 					    }
 					    .image-variable-item.selected,.image-variable-item:hover{	        			
 					        box-shadow: none !important;        			
-					        border-bottom: 2px <?php _e($border_hover_color) ?> solid !important;
+					        border-bottom: 2px ". __($border_hover_color) ." solid !important;
 					    }
 					    .image_text-variable-item{
 					        border: none !important;
@@ -764,40 +764,40 @@ class Options extends \eo\wbc\controllers\publics\Controller {
 					    }
 					    .variable-items-wrapper .variable-item{        			
 					        /*display: inline-table;*/
-					        height: <?php _e($dimention); ?>;
-					        width: <?php _e($dimention); ?>;
+					        height: ".__($dimention).";
+					        width: ".__($dimention).";
 					        min-width: 35px;						
 					        text-align: center;						
-					        line-height: <?php _e($dimention); ?>;	        			
+					        line-height: ".__($dimention).";	        			
 					        cursor: pointer;
 					        margin: 0.25rem;
 					        text-align: center;
-					        border: <?php _e($border_width) ?> solid <?php _e($border_color) ?>;
-					        border-radius: <?php _e($border_radius); ?>;
+					        border: ".__($border_width)." solid ".__($border_color).";
+					        border-radius: ".__($border_radius).";
 					        overflow: hidden;
 					    }	
 					    .variable-items-wrapper .variable-item:hover,.variable-items-wrapper .selected{
-					        box-shadow:0px 0px <?php _e($border_hover_width) ?> <?php _e($border_hover_color) ?>;        			
-					        border: 1px <?php _e($border_hover_color) ?> solid;
+					        box-shadow:0px 0px ".__($border_hover_width)." ".__($border_hover_color).";        			
+					        border: 1px ".__($border_hover_color)." solid;
 					    }
 					    ul.variable-items-wrapper{
 					        margin: 0px;
 					    }
 					    .variable-item-color-fill,.variable-item-span{        			
-					        height: <?php _e($dimention); ?>;
+					        height: ".__($dimention).";
 					        width: 100%;
-					        line-height: <?php _e($dimention); ?>;
+					        line-height: ".__($dimention).";
 					    }
 					    .select2,.select3-selection{
 					        display: none !important;
 					    }
 					    .button-variable-item{
-					        background-color: <?php _e($bg_color); ?>;
-					        color: <?php _e($font_color); ?>;
+					        background-color: ".__($bg_color).";
+					        color: ".__($font_color).";
 					    }
 					    .button-variable-item:hover{
-					        background-color: <?php _e($bg_hover_color); ?>;
-					        color: <?php _e($font_hover_color); ?>;	
+					        background-color: ".__($bg_hover_color).";
+					        color: ".__($font_hover_color).";	
 					    }
 					";
 

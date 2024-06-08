@@ -60,8 +60,8 @@ class Preview {
         $button_hovercolor = wbc()->options->get_option('appearance_wid_btns','button_hovercolor','');
     
 
-        ob_start();  
         if(false){      
+        ob_start();  
         ?>
         <style type="text/css">
             .woocommerce .content-area ,#content,#primary,#main,.content,.primary,.main{
@@ -79,6 +79,7 @@ class Preview {
 
         </style>
         <?php
+        echo ob_get_clean();
         }
         $custom_css = "
             .woocommerce .content-area, #content, #primary, #main, .content, .primary, .main {
@@ -95,7 +96,6 @@ class Preview {
             }
         ";
         wbc()->load->add_inline_style('', $custom_css,'common');
-        echo ob_get_clean();
         add_action( 'wp_enqueue_scripts',function(){ 
             // wp_register_style('eo_wbc_ui_css',EOWBC_ASSET_URL.'css/fomantic/semantic.min.css');
             // wp_enqueue_style( 'eo_wbc_ui_css');
@@ -396,6 +396,7 @@ class Preview {
                     '<button id="preview_add_to_cart_button" class="ui button right floated aligned" style="width: fit-content;margin: auto;background-color:'.esc_attr(wbc()->options->get_option('appearance_breadcrumb','breadcrumb_backcolor_active',wbc()->session->get('EO_WBC_BG_COLOR',FALSE)))/*get_option('eo_wbc_active_breadcrumb_color',wbc()->session->get('EO_WBC_BG_COLOR',FALSE))*/.'">'.esc_html__('Add This To Cart','woo-bundle-choice').
                     '</button><script>jQuery(document).ready(function(){ jQuery("#preview_add_to_cart_button").on("click",function(){ jQuery("#preview_add_to_cart").get(0).submit(); }); })</script>'.
                 '</form></div>';                
+                //22-03-2024 ahiya upper scrpit mukvi 
                 add_filter('the_content',function() use($content){
                     if(!in_the_loop() || !is_singular() || !is_main_query() ) return '';
                     return $content;
