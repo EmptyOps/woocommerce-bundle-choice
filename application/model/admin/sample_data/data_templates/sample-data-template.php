@@ -1710,68 +1710,76 @@ class Sample_Data_Template {
             'is_visible' => 1,
             'is_variation' => 1,
             'is_taxonomy' => 1
-          )
+          ),
+          'pa_eo_shape_attr'=>array(
+            'name'=>'pa_eo_shape_attr',
+            'value'=>'Asscher',
+            'position'=>1,
+            'is_visible'=>1,
+            'is_variation'=>1,
+            'is_taxonomy'=>1
+          ),
         ),
         'variation' => array(
           array(
             'regular_price' => '400',
             'price' => '495',
-            'terms' => array('pa_eo_metal_attr' => '18K White Gold', 'pa_eo_size_attr' => '4.0')
+            'terms' => array('pa_eo_metal_attr' => '18K White Gold', 'pa_eo_size_attr' => '4.0', 'pa_eo_shape_attr'=>'Asscher')
           ),
           array(
             'regular_price' => '410',
             'price' => '405',
-            'terms' => array('pa_eo_metal_attr' => '18K White Gold', 'pa_eo_size_attr' => '5.0')
+            'terms' => array('pa_eo_metal_attr' => '18K White Gold', 'pa_eo_size_attr' => '5.0', 'pa_eo_shape_attr'=>'Asscher')
           ),
           array(
             'regular_price' => '420',
             'price' => '415',
-            'terms' => array('pa_eo_metal_attr' => '18K White Gold', 'pa_eo_size_attr' => '6.0')
+            'terms' => array('pa_eo_metal_attr' => '18K White Gold', 'pa_eo_size_attr' => '6.0', 'pa_eo_shape_attr'=>'Asscher')
           ),
           array(
             'regular_price' => '430',
             'price' => '425',
-            'terms' => array('pa_eo_metal_attr' => '18K White Gold', 'pa_eo_size_attr' => '7.0')
+            'terms' => array('pa_eo_metal_attr' => '18K White Gold', 'pa_eo_size_attr' => '7.0', 'pa_eo_shape_attr'=>'Asscher')
           ),
           array(
             'regular_price' => '450',
             'price' => '445',
-            'terms' => array('pa_eo_metal_attr' => '18K Rose Gold', 'pa_eo_size_attr' => '4.0')
+            'terms' => array('pa_eo_metal_attr' => '18K Rose Gold', 'pa_eo_size_attr' => '4.0', 'pa_eo_shape_attr'=>'Asscher')
           ),
           array(
             'regular_price' => '460',
             'price' => '455',
-            'terms' => array('pa_eo_metal_attr' => '18K Rose Gold', 'pa_eo_size_attr' => '5.0')
+            'terms' => array('pa_eo_metal_attr' => '18K Rose Gold', 'pa_eo_size_attr' => '5.0', 'pa_eo_shape_attr'=>'Asscher')
           ),
           array(
             'regular_price' => '470',
             'price' => '465',
-            'terms' => array('pa_eo_metal_attr' => '18K Rose Gold', 'pa_eo_size_attr' => '6.0')
+            'terms' => array('pa_eo_metal_attr' => '18K Rose Gold', 'pa_eo_size_attr' => '6.0', 'pa_eo_shape_attr'=>'Asscher')
           ),
           array(
             'regular_price' => '480',
             'price' => '475',
-            'terms' => array('pa_eo_metal_attr' => '18K Rose Gold', 'pa_eo_size_attr' => '7.0')
+            'terms' => array('pa_eo_metal_attr' => '18K Rose Gold', 'pa_eo_size_attr' => '7.0', 'pa_eo_shape_attr'=>'Asscher')
           ),
           array(
             'regular_price' => '440',
             'price' => '435',
-            'terms' => array('pa_eo_metal_attr' => '18K Yellow Gold', 'pa_eo_size_attr' => '4.0')
+            'terms' => array('pa_eo_metal_attr' => '18K Yellow Gold', 'pa_eo_size_attr' => '4.0', 'pa_eo_shape_attr'=>'Asscher')
           ),
           array(
             'regular_price' => '450',
             'price' => '445',
-            'terms' => array('pa_eo_metal_attr' => '18K Yellow Gold', 'pa_eo_size_attr' => '5.0')
+            'terms' => array('pa_eo_metal_attr' => '18K Yellow Gold', 'pa_eo_size_attr' => '5.0', 'pa_eo_shape_attr'=>'Asscher')
           ),
           array(
             'regular_price' => '460',
             'price' => '465',
-            'terms' => array('pa_eo_metal_attr' => '18K Yellow Gold', 'pa_eo_size_attr' => '6.0')
+            'terms' => array('pa_eo_metal_attr' => '18K Yellow Gold', 'pa_eo_size_attr' => '6.0', 'pa_eo_shape_attr'=>'Asscher')
           ),
           array(
             'regular_price' => '470',
             'price' => '465',
-            'terms' => array('pa_eo_metal_attr' => '18K Yellow Gold', 'pa_eo_size_attr' => '7.0')
+            'terms' => array('pa_eo_metal_attr' => '18K Yellow Gold', 'pa_eo_size_attr' => '7.0', 'pa_eo_shape_attr'=>'Asscher')
           )
         )
       ),
@@ -2262,68 +2270,76 @@ class Sample_Data_Template {
             'is_visible' => 1,
             'is_variation' => 1,
             'is_taxonomy' => 1
-          )
+          ),
+          'pa_eo_shape_attr'=>array(
+            'name'=>'pa_eo_shape_attr',
+            'value'=>'Cushion',
+            'position'=>1,
+            'is_visible'=>1,
+            'is_variation'=>1,
+            'is_taxonomy'=>1
+          ),
         ),
         'variation' => array(
           array(
             'regular_price' => '200',
             'price' => '195',
-            'terms' => array('pa_eo_metal_attr' => '14K White Gold', 'pa_eo_size_attr' => '4.0')
+            'terms' => array('pa_eo_metal_attr' => '14K White Gold', 'pa_eo_size_attr' => '4.0', 'pa_eo_shape_attr'=>'Cushion')
           ),
           array(
             'regular_price' => '210',
             'price' => '205',
-            'terms' => array('pa_eo_metal_attr' => '14K White Gold', 'pa_eo_size_attr' => '5.0')
+            'terms' => array('pa_eo_metal_attr' => '14K White Gold', 'pa_eo_size_attr' => '5.0', 'pa_eo_shape_attr'=>'Cushion')
           ),
           array(
             'regular_price' => '220',
             'price' => '215',
-            'terms' => array('pa_eo_metal_attr' => '14K White Gold', 'pa_eo_size_attr' => '6.0')
+            'terms' => array('pa_eo_metal_attr' => '14K White Gold', 'pa_eo_size_attr' => '6.0', 'pa_eo_shape_attr'=>'Cushion')
           ),
           array(
             'regular_price' => '230',
             'price' => '225',
-            'terms' => array('pa_eo_metal_attr' => '14K White Gold', 'pa_eo_size_attr' => '7.0')
+            'terms' => array('pa_eo_metal_attr' => '14K White Gold', 'pa_eo_size_attr' => '7.0', 'pa_eo_shape_attr'=>'Cushion')
           ),
           array(
             'regular_price' => '240',
             'price' => '235',
-            'terms' => array('pa_eo_metal_attr' => '14K Yellow Gold', 'pa_eo_size_attr' => '4.0')
+            'terms' => array('pa_eo_metal_attr' => '14K Yellow Gold', 'pa_eo_size_attr' => '4.0', 'pa_eo_shape_attr'=>'Cushion')
           ),
           array(
             'regular_price' => '250',
             'price' => '245',
-            'terms' => array('pa_eo_metal_attr' => '14K Yellow Gold', 'pa_eo_size_attr' => '5.0')
+            'terms' => array('pa_eo_metal_attr' => '14K Yellow Gold', 'pa_eo_size_attr' => '5.0', 'pa_eo_shape_attr'=>'Cushion')
           ),
           array(
             'regular_price' => '260',
             'price' => '265',
-            'terms' => array('pa_eo_metal_attr' => '14K Yellow Gold', 'pa_eo_size_attr' => '6.0')
+            'terms' => array('pa_eo_metal_attr' => '14K Yellow Gold', 'pa_eo_size_attr' => '6.0', 'pa_eo_shape_attr'=>'Cushion')
           ),
           array(
             'regular_price' => '270',
             'price' => '265',
-            'terms' => array('pa_eo_metal_attr' => '14K Yellow Gold', 'pa_eo_size_attr' => '7.0')
+            'terms' => array('pa_eo_metal_attr' => '14K Yellow Gold', 'pa_eo_size_attr' => '7.0', 'pa_eo_shape_attr'=>'Cushion')
           ),
           array(
             'regular_price' => '150',
             'price' => '145',
-            'terms' => array('pa_eo_metal_attr' => '14K Rose Gold', 'pa_eo_size_attr' => '4.0')
+            'terms' => array('pa_eo_metal_attr' => '14K Rose Gold', 'pa_eo_size_attr' => '4.0', 'pa_eo_shape_attr'=>'Cushion')
           ),
           array(
             'regular_price' => '160',
             'price' => '155',
-            'terms' => array('pa_eo_metal_attr' => '14K Rose Gold', 'pa_eo_size_attr' => '5.0')
+            'terms' => array('pa_eo_metal_attr' => '14K Rose Gold', 'pa_eo_size_attr' => '5.0', 'pa_eo_shape_attr'=>'Cushion')
           ),
           array(
             'regular_price' => '170',
             'price' => '165',
-            'terms' => array('pa_eo_metal_attr' => '14K Rose Gold', 'pa_eo_size_attr' => '6.0')
+            'terms' => array('pa_eo_metal_attr' => '14K Rose Gold', 'pa_eo_size_attr' => '6.0', 'pa_eo_shape_attr'=>'Cushion')
           ),
           array(
             'regular_price' => '180',
             'price' => '175',
-            'terms' => array('pa_eo_metal_attr' => '14K Rose Gold', 'pa_eo_size_attr' => '7.0')
+            'terms' => array('pa_eo_metal_attr' => '14K Rose Gold', 'pa_eo_size_attr' => '7.0', 'pa_eo_shape_attr'=>'Cushion')
           )
         )
       ),
@@ -2391,7 +2407,7 @@ class Sample_Data_Template {
         )
       ),
       array(
-        'title' => 'Setting #10000012',
+        'title' => 'Setting #100000012',
         'thumb' => $_img_url . 'Products/w-pr-2.jpg',
         'images' => array('w-pr-3.jpg', 'w-pr-1.jpg'),
         'sku' => 'SET-8800950587-37',
@@ -2537,28 +2553,36 @@ class Sample_Data_Template {
             'is_visible' => 1,
             'is_variation' => 1,
             'is_taxonomy' => 1
-          )
+          ),
+          'pa_eo_shape_attr'=>array(
+            'name'=>'pa_eo_shape_attr',
+            'value'=>'Asscher',
+            'position'=>1,
+            'is_visible'=>1,
+            'is_variation'=>1,
+            'is_taxonomy'=>1
+          ),
         ),
         'variation' => array(
           array(
             'regular_price' => '350',
             'price' => '345',
-            'terms' => array('pa_eo_metal_attr' => '14K White Gold', 'pa_eo_size_attr' => '4.0')
+            'terms' => array('pa_eo_metal_attr' => '14K White Gold', 'pa_eo_size_attr' => '4.0', 'pa_eo_shape_attr'=>'Asscher')
           ),
           array(
             'regular_price' => '360',
             'price' => '355',
-            'terms' => array('pa_eo_metal_attr' => '14K White Gold', 'pa_eo_size_attr' => '5.0')
+            'terms' => array('pa_eo_metal_attr' => '14K White Gold', 'pa_eo_size_attr' => '5.0', 'pa_eo_shape_attr'=>'Asscher')
           ),
           array(
             'regular_price' => '370',
             'price' => '365',
-            'terms' => array('pa_eo_metal_attr' => '14K White Gold', 'pa_eo_size_attr' => '6.0')
+            'terms' => array('pa_eo_metal_attr' => '14K White Gold', 'pa_eo_size_attr' => '6.0', 'pa_eo_shape_attr'=>'Asscher')
           ),
           array(
             'regular_price' => '380',
             'price' => '375',
-            'terms' => array('pa_eo_metal_attr' => '14K White Gold', 'pa_eo_size_attr' => '7.0')
+            'terms' => array('pa_eo_metal_attr' => '14K White Gold', 'pa_eo_size_attr' => '7.0', 'pa_eo_shape_attr'=>'Asscher')
           )
         )
       ),
@@ -2889,28 +2913,36 @@ class Sample_Data_Template {
             'is_visible' => 1,
             'is_variation' => 1,
             'is_taxonomy' => 1
-          )
+          ),
+          'pa_eo_shape_attr'=>array(
+            'name'=>'pa_eo_shape_attr',
+            'value'=>'Cushion',
+            'position'=>1,
+            'is_visible'=>1,
+            'is_variation'=>1,
+            'is_taxonomy'=>1
+          ),
         ),
         'variation' => array(
           array(
             'regular_price' => '440',
             'price' => '435',
-            'terms' => array('pa_eo_metal_attr' => '14K White Gold', 'pa_eo_size_attr' => '4.0')
+            'terms' => array('pa_eo_metal_attr' => '14K White Gold', 'pa_eo_size_attr' => '4.0', 'pa_eo_shape_attr'=>'Cushion')
           ),
           array(
             'regular_price' => '450',
             'price' => '445',
-            'terms' => array('pa_eo_metal_attr' => '14K White Gold', 'pa_eo_size_attr' => '5.0')
+            'terms' => array('pa_eo_metal_attr' => '14K White Gold', 'pa_eo_size_attr' => '5.0', 'pa_eo_shape_attr'=>'Cushion')
           ),
           array(
             'regular_price' => '460',
             'price' => '465',
-            'terms' => array('pa_eo_metal_attr' => '14K White Gold', 'pa_eo_size_attr' => '6.0')
+            'terms' => array('pa_eo_metal_attr' => '14K White Gold', 'pa_eo_size_attr' => '6.0', 'pa_eo_shape_attr'=>'Cushion')
           ),
           array(
             'regular_price' => '470',
             'price' => '465',
-            'terms' => array('pa_eo_metal_attr' => '14K White Gold', 'pa_eo_size_attr' => '7.0')
+            'terms' => array('pa_eo_metal_attr' => '14K White Gold', 'pa_eo_size_attr' => '7.0', 'pa_eo_shape_attr'=>'Cushion')
           )
         )
       ),
@@ -3244,68 +3276,76 @@ class Sample_Data_Template {
             'is_visible' => 1,
             'is_variation' => 1,
             'is_taxonomy' => 1
-          )
+          ),
+          'pa_eo_shape_attr'=>array(
+            'name'=>'pa_eo_shape_attr',
+            'value'=>'Asscher',
+            'position'=>1,
+            'is_visible'=>1,
+            'is_variation'=>1,
+            'is_taxonomy'=>1
+          ),
         ),
         'variation' => array(
           array(
             'regular_price' => '300',
             'price' => '295',
-            'terms' => array('pa_eo_metal_attr' => '14K White Gold', 'pa_eo_size_attr' => '4.0')
+            'terms' => array('pa_eo_metal_attr' => '14K White Gold', 'pa_eo_size_attr' => '4.0', 'pa_eo_shape_attr'=>'Asscher')
           ),
           array(
             'regular_price' => '310',
             'price' => '305',
-            'terms' => array('pa_eo_metal_attr' => '14K White Gold', 'pa_eo_size_attr' => '5.0')
+            'terms' => array('pa_eo_metal_attr' => '14K White Gold', 'pa_eo_size_attr' => '5.0', 'pa_eo_shape_attr'=>'Asscher')
           ),
           array(
             'regular_price' => '320',
             'price' => '315',
-            'terms' => array('pa_eo_metal_attr' => '14K White Gold', 'pa_eo_size_attr' => '6.0')
+            'terms' => array('pa_eo_metal_attr' => '14K White Gold', 'pa_eo_size_attr' => '6.0', 'pa_eo_shape_attr'=>'Asscher')
           ),
           array(
             'regular_price' => '330',
             'price' => '325',
-            'terms' => array('pa_eo_metal_attr' => '14K White Gold', 'pa_eo_size_attr' => '7.0')
+            'terms' => array('pa_eo_metal_attr' => '14K White Gold', 'pa_eo_size_attr' => '7.0', 'pa_eo_shape_attr'=>'Asscher')
           ),
           array(
             'regular_price' => '250',
             'price' => '245',
-            'terms' => array('pa_eo_metal_attr' => '14K Rose Gold', 'pa_eo_size_attr' => '4.0')
+            'terms' => array('pa_eo_metal_attr' => '14K Rose Gold', 'pa_eo_size_attr' => '4.0', 'pa_eo_shape_attr'=>'Asscher')
           ),
           array(
             'regular_price' => '260',
             'price' => '255',
-            'terms' => array('pa_eo_metal_attr' => '14K Rose Gold', 'pa_eo_size_attr' => '5.0')
+            'terms' => array('pa_eo_metal_attr' => '14K Rose Gold', 'pa_eo_size_attr' => '5.0', 'pa_eo_shape_attr'=>'Asscher')
           ),
           array(
             'regular_price' => '270',
             'price' => '265',
-            'terms' => array('pa_eo_metal_attr' => '14K Rose Gold', 'pa_eo_size_attr' => '6.0')
+            'terms' => array('pa_eo_metal_attr' => '14K Rose Gold', 'pa_eo_size_attr' => '6.0', 'pa_eo_shape_attr'=>'Asscher')
           ),
           array(
             'regular_price' => '280',
             'price' => '275',
-            'terms' => array('pa_eo_metal_attr' => '14K Rose Gold', 'pa_eo_size_attr' => '7.0')
+            'terms' => array('pa_eo_metal_attr' => '14K Rose Gold', 'pa_eo_size_attr' => '7.0', 'pa_eo_shape_attr'=>'Asscher')
           ),
           array(
             'regular_price' => '340',
             'price' => '335',
-            'terms' => array('pa_eo_metal_attr' => '14K Yellow Gold', 'pa_eo_size_attr' => '4.0')
+            'terms' => array('pa_eo_metal_attr' => '14K Yellow Gold', 'pa_eo_size_attr' => '4.0', 'pa_eo_shape_attr'=>'Asscher')
           ),
           array(
             'regular_price' => '350',
             'price' => '345',
-            'terms' => array('pa_eo_metal_attr' => '14K Yellow Gold', 'pa_eo_size_attr' => '5.0')
+            'terms' => array('pa_eo_metal_attr' => '14K Yellow Gold', 'pa_eo_size_attr' => '5.0', 'pa_eo_shape_attr'=>'Asscher')
           ),
           array(
             'regular_price' => '360',
             'price' => '365',
-            'terms' => array('pa_eo_metal_attr' => '14K Yellow Gold', 'pa_eo_size_attr' => '6.0')
+            'terms' => array('pa_eo_metal_attr' => '14K Yellow Gold', 'pa_eo_size_attr' => '6.0', 'pa_eo_shape_attr'=>'Asscher')
           ),
           array(
             'regular_price' => '370',
             'price' => '365',
-            'terms' => array('pa_eo_metal_attr' => '14K Yellow Gold', 'pa_eo_size_attr' => '7.0')
+            'terms' => array('pa_eo_metal_attr' => '14K Yellow Gold', 'pa_eo_size_attr' => '7.0', 'pa_eo_shape_attr'=>'Asscher')
           )
         )
       ),
@@ -3796,68 +3836,76 @@ class Sample_Data_Template {
             'is_visible' => 1,
             'is_variation' => 1,
             'is_taxonomy' => 1
-          )
+          ),
+          'pa_eo_shape_attr'=>array(
+            'name'=>'pa_eo_shape_attr',
+            'value'=>'Cushion',
+            'position'=>1,
+            'is_visible'=>1,
+            'is_variation'=>1,
+            'is_taxonomy'=>1
+          ),
         ),
         'variation' => array(
           array(
             'regular_price' => '300',
             'price' => '295',
-            'terms' => array('pa_eo_metal_attr' => '18K White Gold', 'pa_eo_size_attr' => '4.0')
+            'terms' => array('pa_eo_metal_attr' => '18K White Gold', 'pa_eo_size_attr' => '4.0', 'pa_eo_shape_attr'=>'Cushion')
           ),
           array(
             'regular_price' => '310',
             'price' => '305',
-            'terms' => array('pa_eo_metal_attr' => '18K White Gold', 'pa_eo_size_attr' => '5.0')
+            'terms' => array('pa_eo_metal_attr' => '18K White Gold', 'pa_eo_size_attr' => '5.0', 'pa_eo_shape_attr'=>'Cushion')
           ),
           array(
             'regular_price' => '320',
             'price' => '315',
-            'terms' => array('pa_eo_metal_attr' => '18K White Gold', 'pa_eo_size_attr' => '6.0')
+            'terms' => array('pa_eo_metal_attr' => '18K White Gold', 'pa_eo_size_attr' => '6.0', 'pa_eo_shape_attr'=>'Cushion')
           ),
           array(
             'regular_price' => '330',
             'price' => '325',
-            'terms' => array('pa_eo_metal_attr' => '18K White Gold', 'pa_eo_size_attr' => '7.0')
+            'terms' => array('pa_eo_metal_attr' => '18K White Gold', 'pa_eo_size_attr' => '7.0', 'pa_eo_shape_attr'=>'Cushion')
           ),
           array(
             'regular_price' => '340',
             'price' => '335',
-            'terms' => array('pa_eo_metal_attr' => '18K Yellow Gold', 'pa_eo_size_attr' => '4.0')
+            'terms' => array('pa_eo_metal_attr' => '18K Yellow Gold', 'pa_eo_size_attr' => '4.0', 'pa_eo_shape_attr'=>'Cushion')
           ),
           array(
             'regular_price' => '350',
             'price' => '345',
-            'terms' => array('pa_eo_metal_attr' => '18K Yellow Gold', 'pa_eo_size_attr' => '5.0')
+            'terms' => array('pa_eo_metal_attr' => '18K Yellow Gold', 'pa_eo_size_attr' => '5.0', 'pa_eo_shape_attr'=>'Cushion')
           ),
           array(
             'regular_price' => '360',
             'price' => '365',
-            'terms' => array('pa_eo_metal_attr' => '18K Yellow Gold', 'pa_eo_size_attr' => '6.0')
+            'terms' => array('pa_eo_metal_attr' => '18K Yellow Gold', 'pa_eo_size_attr' => '6.0', 'pa_eo_shape_attr'=>'Cushion')
           ),
           array(
             'regular_price' => '370',
             'price' => '365',
-            'terms' => array('pa_eo_metal_attr' => '18K Yellow Gold', 'pa_eo_size_attr' => '7.0')
+            'terms' => array('pa_eo_metal_attr' => '18K Yellow Gold', 'pa_eo_size_attr' => '7.0', 'pa_eo_shape_attr'=>'Cushion')
           ),
           array(
             'regular_price' => '250',
             'price' => '245',
-            'terms' => array('pa_eo_metal_attr' => '18K Rose Gold', 'pa_eo_size_attr' => '4.0')
+            'terms' => array('pa_eo_metal_attr' => '18K Rose Gold', 'pa_eo_size_attr' => '4.0', 'pa_eo_shape_attr'=>'Cushion')
           ),
           array(
             'regular_price' => '260',
             'price' => '255',
-            'terms' => array('pa_eo_metal_attr' => '18K Rose Gold', 'pa_eo_size_attr' => '5.0')
+            'terms' => array('pa_eo_metal_attr' => '18K Rose Gold', 'pa_eo_size_attr' => '5.0', 'pa_eo_shape_attr'=>'Cushion')
           ),
           array(
             'regular_price' => '270',
             'price' => '265',
-            'terms' => array('pa_eo_metal_attr' => '18K Rose Gold', 'pa_eo_size_attr' => '6.0')
+            'terms' => array('pa_eo_metal_attr' => '18K Rose Gold', 'pa_eo_size_attr' => '6.0', 'pa_eo_shape_attr'=>'Cushion')
           ),
           array(
             'regular_price' => '280',
             'price' => '275',
-            'terms' => array('pa_eo_metal_attr' => '18K Rose Gold', 'pa_eo_size_attr' => '7.0')
+            'terms' => array('pa_eo_metal_attr' => '18K Rose Gold', 'pa_eo_size_attr' => '7.0', 'pa_eo_shape_attr'=>'Cushion')
           )
         )
       ),
@@ -4191,68 +4239,76 @@ class Sample_Data_Template {
             'is_visible' => 1,
             'is_variation' => 1,
             'is_taxonomy' => 1
-          )
+          ),
+          'pa_eo_shape_attr'=>array(
+            'name'=>'pa_eo_shape_attr',
+            'value'=>'Asscher',
+            'position'=>1,
+            'is_visible'=>1,
+            'is_variation'=>1,
+            'is_taxonomy'=>1
+          ),
         ),
         'variation' => array(
           array(
             'regular_price' => '300',
             'price' => '295',
-            'terms' => array('pa_eo_metal_attr' => '14K White Gold', 'pa_eo_size_attr' => '4.0')
+            'terms' => array('pa_eo_metal_attr' => '14K White Gold', 'pa_eo_size_attr' => '4.0', 'pa_eo_shape_attr'=>'Asscher')
           ),
           array(
             'regular_price' => '310',
             'price' => '305',
-            'terms' => array('pa_eo_metal_attr' => '14K White Gold', 'pa_eo_size_attr' => '5.0')
+            'terms' => array('pa_eo_metal_attr' => '14K White Gold', 'pa_eo_size_attr' => '5.0', 'pa_eo_shape_attr'=>'Asscher')
           ),
           array(
             'regular_price' => '320',
             'price' => '315',
-            'terms' => array('pa_eo_metal_attr' => '14K White Gold', 'pa_eo_size_attr' => '6.0')
+            'terms' => array('pa_eo_metal_attr' => '14K White Gold', 'pa_eo_size_attr' => '6.0', 'pa_eo_shape_attr'=>'Asscher')
           ),
           array(
             'regular_price' => '330',
             'price' => '325',
-            'terms' => array('pa_eo_metal_attr' => '14K White Gold', 'pa_eo_size_attr' => '7.0')
+            'terms' => array('pa_eo_metal_attr' => '14K White Gold', 'pa_eo_size_attr' => '7.0', 'pa_eo_shape_attr'=>'Asscher')
           ),
           array(
             'regular_price' => '250',
             'price' => '245',
-            'terms' => array('pa_eo_metal_attr' => '14K Rose Gold', 'pa_eo_size_attr' => '4.0')
+            'terms' => array('pa_eo_metal_attr' => '14K Rose Gold', 'pa_eo_size_attr' => '4.0', 'pa_eo_shape_attr'=>'Asscher')
           ),
           array(
             'regular_price' => '260',
             'price' => '255',
-            'terms' => array('pa_eo_metal_attr' => '14K Rose Gold', 'pa_eo_size_attr' => '5.0')
+            'terms' => array('pa_eo_metal_attr' => '14K Rose Gold', 'pa_eo_size_attr' => '5.0', 'pa_eo_shape_attr'=>'Asscher')
           ),
           array(
             'regular_price' => '270',
             'price' => '265',
-            'terms' => array('pa_eo_metal_attr' => '14K Rose Gold', 'pa_eo_size_attr' => '6.0')
+            'terms' => array('pa_eo_metal_attr' => '14K Rose Gold', 'pa_eo_size_attr' => '6.0', 'pa_eo_shape_attr'=>'Asscher')
           ),
           array(
             'regular_price' => '280',
             'price' => '275',
-            'terms' => array('pa_eo_metal_attr' => '14K Rose Gold', 'pa_eo_size_attr' => '7.0')
+            'terms' => array('pa_eo_metal_attr' => '14K Rose Gold', 'pa_eo_size_attr' => '7.0', 'pa_eo_shape_attr'=>'Asscher')
           ),
           array(
             'regular_price' => '340',
             'price' => '335',
-            'terms' => array('pa_eo_metal_attr' => '14K Yellow Gold', 'pa_eo_size_attr' => '4.0')
+            'terms' => array('pa_eo_metal_attr' => '14K Yellow Gold', 'pa_eo_size_attr' => '4.0', 'pa_eo_shape_attr'=>'Asscher')
           ),
           array(
             'regular_price' => '350',
             'price' => '345',
-            'terms' => array('pa_eo_metal_attr' => '14K Yellow Gold', 'pa_eo_size_attr' => '5.0')
+            'terms' => array('pa_eo_metal_attr' => '14K Yellow Gold', 'pa_eo_size_attr' => '5.0', 'pa_eo_shape_attr'=>'Asscher')
           ),
           array(
             'regular_price' => '360',
             'price' => '365',
-            'terms' => array('pa_eo_metal_attr' => '14K Yellow Gold', 'pa_eo_size_attr' => '6.0')
+            'terms' => array('pa_eo_metal_attr' => '14K Yellow Gold', 'pa_eo_size_attr' => '6.0', 'pa_eo_shape_attr'=>'Asscher')
           ),
           array(
             'regular_price' => '370',
             'price' => '365',
-            'terms' => array('pa_eo_metal_attr' => '14K Yellow Gold', 'pa_eo_size_attr' => '7.0')
+            'terms' => array('pa_eo_metal_attr' => '14K Yellow Gold', 'pa_eo_size_attr' => '7.0', 'pa_eo_shape_attr'=>'Asscher')
           )
         )
       ),
@@ -4743,68 +4799,76 @@ class Sample_Data_Template {
             'is_visible' => 1,
             'is_variation' => 1,
             'is_taxonomy' => 1
-          )
+          ),
+          'pa_eo_shape_attr'=>array(
+            'name'=>'pa_eo_shape_attr',
+            'value'=>'Cushion',
+            'position'=>1,
+            'is_visible'=>1,
+            'is_variation'=>1,
+            'is_taxonomy'=>1
+          ),
         ),
         'variation' => array(
           array(
             'regular_price' => '300',
             'price' => '295',
-            'terms' => array('pa_eo_metal_attr' => '18K White Gold', 'pa_eo_size_attr' => '4.0')
+            'terms' => array('pa_eo_metal_attr' => '18K White Gold', 'pa_eo_size_attr' => '4.0', 'pa_eo_shape_attr'=>'Cushion')
           ),
           array(
             'regular_price' => '310',
             'price' => '305',
-            'terms' => array('pa_eo_metal_attr' => '18K White Gold', 'pa_eo_size_attr' => '5.0')
+            'terms' => array('pa_eo_metal_attr' => '18K White Gold', 'pa_eo_size_attr' => '5.0', 'pa_eo_shape_attr'=>'Cushion')
           ),
           array(
             'regular_price' => '320',
             'price' => '315',
-            'terms' => array('pa_eo_metal_attr' => '18K White Gold', 'pa_eo_size_attr' => '6.0')
+            'terms' => array('pa_eo_metal_attr' => '18K White Gold', 'pa_eo_size_attr' => '6.0', 'pa_eo_shape_attr'=>'Cushion')
           ),
           array(
             'regular_price' => '330',
             'price' => '325',
-            'terms' => array('pa_eo_metal_attr' => '18K White Gold', 'pa_eo_size_attr' => '7.0')
+            'terms' => array('pa_eo_metal_attr' => '18K White Gold', 'pa_eo_size_attr' => '7.0', 'pa_eo_shape_attr'=>'Cushion')
           ),
           array(
             'regular_price' => '340',
             'price' => '335',
-            'terms' => array('pa_eo_metal_attr' => '18K Yellow Gold', 'pa_eo_size_attr' => '4.0')
+            'terms' => array('pa_eo_metal_attr' => '18K Yellow Gold', 'pa_eo_size_attr' => '4.0', 'pa_eo_shape_attr'=>'Cushion')
           ),
           array(
             'regular_price' => '350',
             'price' => '345',
-            'terms' => array('pa_eo_metal_attr' => '18K Yellow Gold', 'pa_eo_size_attr' => '5.0')
+            'terms' => array('pa_eo_metal_attr' => '18K Yellow Gold', 'pa_eo_size_attr' => '5.0', 'pa_eo_shape_attr'=>'Cushion')
           ),
           array(
             'regular_price' => '360',
             'price' => '365',
-            'terms' => array('pa_eo_metal_attr' => '18K Yellow Gold', 'pa_eo_size_attr' => '6.0')
+            'terms' => array('pa_eo_metal_attr' => '18K Yellow Gold', 'pa_eo_size_attr' => '6.0', 'pa_eo_shape_attr'=>'Cushion')
           ),
           array(
             'regular_price' => '370',
             'price' => '365',
-            'terms' => array('pa_eo_metal_attr' => '18K Yellow Gold', 'pa_eo_size_attr' => '7.0')
+            'terms' => array('pa_eo_metal_attr' => '18K Yellow Gold', 'pa_eo_size_attr' => '7.0', 'pa_eo_shape_attr'=>'Cushion')
           ),
           array(
             'regular_price' => '250',
             'price' => '245',
-            'terms' => array('pa_eo_metal_attr' => '18K Rose Gold', 'pa_eo_size_attr' => '4.0')
+            'terms' => array('pa_eo_metal_attr' => '18K Rose Gold', 'pa_eo_size_attr' => '4.0', 'pa_eo_shape_attr'=>'Cushion')
           ),
           array(
             'regular_price' => '260',
             'price' => '255',
-            'terms' => array('pa_eo_metal_attr' => '18K Rose Gold', 'pa_eo_size_attr' => '5.0')
+            'terms' => array('pa_eo_metal_attr' => '18K Rose Gold', 'pa_eo_size_attr' => '5.0', 'pa_eo_shape_attr'=>'Cushion')
           ),
           array(
             'regular_price' => '270',
             'price' => '265',
-            'terms' => array('pa_eo_metal_attr' => '18K Rose Gold', 'pa_eo_size_attr' => '6.0')
+            'terms' => array('pa_eo_metal_attr' => '18K Rose Gold', 'pa_eo_size_attr' => '6.0', 'pa_eo_shape_attr'=>'Cushion')
           ),
           array(
             'regular_price' => '280',
             'price' => '275',
-            'terms' => array('pa_eo_metal_attr' => '18K Rose Gold', 'pa_eo_size_attr' => '7.0')
+            'terms' => array('pa_eo_metal_attr' => '18K Rose Gold', 'pa_eo_size_attr' => '7.0', 'pa_eo_shape_attr'=>'Cushion')
           )
         )
       ),
@@ -5138,68 +5202,76 @@ class Sample_Data_Template {
             'is_visible' => 1,
             'is_variation' => 1,
             'is_taxonomy' => 1
-          )
+          ),
+          'pa_eo_shape_attr'=>array(
+            'name'=>'pa_eo_shape_attr',
+            'value'=>'Asscher',
+            'position'=>1,
+            'is_visible'=>1,
+            'is_variation'=>1,
+            'is_taxonomy'=>1
+          ),
         ),
         'variation' => array(
           array(
             'regular_price' => '300',
             'price' => '295',
-            'terms' => array('pa_eo_metal_attr' => '14K White Gold', 'pa_eo_size_attr' => '4.0')
+            'terms' => array('pa_eo_metal_attr' => '14K White Gold', 'pa_eo_size_attr' => '4.0', 'pa_eo_shape_attr'=>'Asscher')
           ),
           array(
             'regular_price' => '310',
             'price' => '305',
-            'terms' => array('pa_eo_metal_attr' => '14K White Gold', 'pa_eo_size_attr' => '5.0')
+            'terms' => array('pa_eo_metal_attr' => '14K White Gold', 'pa_eo_size_attr' => '5.0', 'pa_eo_shape_attr'=>'Asscher')
           ),
           array(
             'regular_price' => '320',
             'price' => '315',
-            'terms' => array('pa_eo_metal_attr' => '14K White Gold', 'pa_eo_size_attr' => '6.0')
+            'terms' => array('pa_eo_metal_attr' => '14K White Gold', 'pa_eo_size_attr' => '6.0', 'pa_eo_shape_attr'=>'Asscher')
           ),
           array(
             'regular_price' => '330',
             'price' => '325',
-            'terms' => array('pa_eo_metal_attr' => '14K White Gold', 'pa_eo_size_attr' => '7.0')
+            'terms' => array('pa_eo_metal_attr' => '14K White Gold', 'pa_eo_size_attr' => '7.0', 'pa_eo_shape_attr'=>'Asscher')
           ),
           array(
             'regular_price' => '250',
             'price' => '245',
-            'terms' => array('pa_eo_metal_attr' => '14K Rose Gold', 'pa_eo_size_attr' => '4.0')
+            'terms' => array('pa_eo_metal_attr' => '14K Rose Gold', 'pa_eo_size_attr' => '4.0', 'pa_eo_shape_attr'=>'Asscher')
           ),
           array(
             'regular_price' => '260',
             'price' => '255',
-            'terms' => array('pa_eo_metal_attr' => '14K Rose Gold', 'pa_eo_size_attr' => '5.0')
+            'terms' => array('pa_eo_metal_attr' => '14K Rose Gold', 'pa_eo_size_attr' => '5.0', 'pa_eo_shape_attr'=>'Asscher')
           ),
           array(
             'regular_price' => '270',
             'price' => '265',
-            'terms' => array('pa_eo_metal_attr' => '14K Rose Gold', 'pa_eo_size_attr' => '6.0')
+            'terms' => array('pa_eo_metal_attr' => '14K Rose Gold', 'pa_eo_size_attr' => '6.0', 'pa_eo_shape_attr'=>'Asscher')
           ),
           array(
             'regular_price' => '280',
             'price' => '275',
-            'terms' => array('pa_eo_metal_attr' => '14K Rose Gold', 'pa_eo_size_attr' => '7.0')
+            'terms' => array('pa_eo_metal_attr' => '14K Rose Gold', 'pa_eo_size_attr' => '7.0', 'pa_eo_shape_attr'=>'Asscher')
           ),
           array(
             'regular_price' => '340',
             'price' => '335',
-            'terms' => array('pa_eo_metal_attr' => '14K Yellow Gold', 'pa_eo_size_attr' => '4.0')
+            'terms' => array('pa_eo_metal_attr' => '14K Yellow Gold', 'pa_eo_size_attr' => '4.0', 'pa_eo_shape_attr'=>'Asscher')
           ),
           array(
             'regular_price' => '350',
             'price' => '345',
-            'terms' => array('pa_eo_metal_attr' => '14K Yellow Gold', 'pa_eo_size_attr' => '5.0')
+            'terms' => array('pa_eo_metal_attr' => '14K Yellow Gold', 'pa_eo_size_attr' => '5.0', 'pa_eo_shape_attr'=>'Asscher')
           ),
           array(
             'regular_price' => '360',
             'price' => '365',
-            'terms' => array('pa_eo_metal_attr' => '14K Yellow Gold', 'pa_eo_size_attr' => '6.0')
+            'terms' => array('pa_eo_metal_attr' => '14K Yellow Gold', 'pa_eo_size_attr' => '6.0', 'pa_eo_shape_attr'=>'Asscher')
           ),
           array(
             'regular_price' => '370',
             'price' => '365',
-            'terms' => array('pa_eo_metal_attr' => '14K Yellow Gold', 'pa_eo_size_attr' => '7.0')
+            'terms' => array('pa_eo_metal_attr' => '14K Yellow Gold', 'pa_eo_size_attr' => '7.0', 'pa_eo_shape_attr'=>'Asscher')
           )
         )
       ),
@@ -5690,68 +5762,76 @@ class Sample_Data_Template {
             'is_visible' => 1,
             'is_variation' => 1,
             'is_taxonomy' => 1
-          )
+          ),
+          'pa_eo_shape_attr'=>array(
+            'name'=>'pa_eo_shape_attr',
+            'value'=>'Cushion',
+            'position'=>1,
+            'is_visible'=>1,
+            'is_variation'=>1,
+            'is_taxonomy'=>1
+          ),
         ),
         'variation' => array(
           array(
             'regular_price' => '300',
             'price' => '295',
-            'terms' => array('pa_eo_metal_attr' => '18K White Gold', 'pa_eo_size_attr' => '4.0')
+            'terms' => array('pa_eo_metal_attr' => '18K White Gold', 'pa_eo_size_attr' => '4.0', 'pa_eo_shape_attr'=>'Cushion')
           ),
           array(
             'regular_price' => '310',
             'price' => '305',
-            'terms' => array('pa_eo_metal_attr' => '18K White Gold', 'pa_eo_size_attr' => '5.0')
+            'terms' => array('pa_eo_metal_attr' => '18K White Gold', 'pa_eo_size_attr' => '5.0', 'pa_eo_shape_attr'=>'Cushion')
           ),
           array(
             'regular_price' => '320',
             'price' => '315',
-            'terms' => array('pa_eo_metal_attr' => '18K White Gold', 'pa_eo_size_attr' => '6.0')
+            'terms' => array('pa_eo_metal_attr' => '18K White Gold', 'pa_eo_size_attr' => '6.0', 'pa_eo_shape_attr'=>'Cushion')
           ),
           array(
             'regular_price' => '330',
             'price' => '325',
-            'terms' => array('pa_eo_metal_attr' => '18K White Gold', 'pa_eo_size_attr' => '7.0')
+            'terms' => array('pa_eo_metal_attr' => '18K White Gold', 'pa_eo_size_attr' => '7.0', 'pa_eo_shape_attr'=>'Cushion')
           ),
           array(
             'regular_price' => '340',
             'price' => '335',
-            'terms' => array('pa_eo_metal_attr' => '18K Yellow Gold', 'pa_eo_size_attr' => '4.0')
+            'terms' => array('pa_eo_metal_attr' => '18K Yellow Gold', 'pa_eo_size_attr' => '4.0', 'pa_eo_shape_attr'=>'Cushion')
           ),
           array(
             'regular_price' => '350',
             'price' => '345',
-            'terms' => array('pa_eo_metal_attr' => '18K Yellow Gold', 'pa_eo_size_attr' => '5.0')
+            'terms' => array('pa_eo_metal_attr' => '18K Yellow Gold', 'pa_eo_size_attr' => '5.0', 'pa_eo_shape_attr'=>'Cushion')
           ),
           array(
             'regular_price' => '360',
             'price' => '365',
-            'terms' => array('pa_eo_metal_attr' => '18K Yellow Gold', 'pa_eo_size_attr' => '6.0')
+            'terms' => array('pa_eo_metal_attr' => '18K Yellow Gold', 'pa_eo_size_attr' => '6.0', 'pa_eo_shape_attr'=>'Cushion')
           ),
           array(
             'regular_price' => '370',
             'price' => '365',
-            'terms' => array('pa_eo_metal_attr' => '18K Yellow Gold', 'pa_eo_size_attr' => '7.0')
+            'terms' => array('pa_eo_metal_attr' => '18K Yellow Gold', 'pa_eo_size_attr' => '7.0', 'pa_eo_shape_attr'=>'Cushion')
           ),
           array(
             'regular_price' => '250',
             'price' => '245',
-            'terms' => array('pa_eo_metal_attr' => '18K Rose Gold', 'pa_eo_size_attr' => '4.0')
+            'terms' => array('pa_eo_metal_attr' => '18K Rose Gold', 'pa_eo_size_attr' => '4.0', 'pa_eo_shape_attr'=>'Cushion')
           ),
           array(
             'regular_price' => '260',
             'price' => '255',
-            'terms' => array('pa_eo_metal_attr' => '18K Rose Gold', 'pa_eo_size_attr' => '5.0')
+            'terms' => array('pa_eo_metal_attr' => '18K Rose Gold', 'pa_eo_size_attr' => '5.0', 'pa_eo_shape_attr'=>'Cushion')
           ),
           array(
             'regular_price' => '270',
             'price' => '265',
-            'terms' => array('pa_eo_metal_attr' => '18K Rose Gold', 'pa_eo_size_attr' => '6.0')
+            'terms' => array('pa_eo_metal_attr' => '18K Rose Gold', 'pa_eo_size_attr' => '6.0', 'pa_eo_shape_attr'=>'Cushion')
           ),
           array(
             'regular_price' => '280',
             'price' => '275',
-            'terms' => array('pa_eo_metal_attr' => '18K Rose Gold', 'pa_eo_size_attr' => '7.0')
+            'terms' => array('pa_eo_metal_attr' => '18K Rose Gold', 'pa_eo_size_attr' => '7.0', 'pa_eo_shape_attr'=>'Cushion')
           )
         )
       ),
