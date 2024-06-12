@@ -455,6 +455,7 @@ class Product extends \eo\wbc\system\core\publics\Eowbc_Base_Model_Publics {
                         //All is good so we saved mapps to session.
                         $eo_wbc_maps[]=wbc()->session->get('EO_WBC_SETS');                            
                         wbc()->session->set('EO_WBC_MAPS',$eo_wbc_maps);
+                        // die("product class add2cart 7 jun");
                     }
                     else
                     {
@@ -479,6 +480,7 @@ class Product extends \eo\wbc\system\core\publics\Eowbc_Base_Model_Publics {
     }
 
     public function add2session_cart() {
+        // die("product class add2session_cart 7 jun ");
         $cart=base64_decode(wbc()->sanitize->get('CART'),TRUE);        
         if (!empty($cart)){
             
@@ -531,6 +533,8 @@ class Product extends \eo\wbc\system\core\publics\Eowbc_Base_Model_Publics {
                                     );
                 }
                 wbc()->session->set('EO_WBC_SETS', apply_filters('sp_wbc_add2session_cart_sets',$eo_wbc_sets,$cart));
+                // die("product class add2session_cart EO_WBC_SETS set");
+
             }
         }
     }

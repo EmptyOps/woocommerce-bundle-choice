@@ -150,6 +150,7 @@ class Category {
                 }
 
                 wbc()->session->set('EO_WBC_SETS', apply_filters('sp_wbc_add2session_cart_sets',$eo_wbc_sets,$cart));
+                // die("category add2cart EO_WBC_SETS set");
             }                        
         }
     }
