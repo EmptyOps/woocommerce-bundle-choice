@@ -13,6 +13,9 @@ class WBC_Currency {
 	}
 
 	public function to_price($amount, $rounding = array('decimals'=>2)){
+
+		$amount = apply_filters('wbc_to_price', $amount, $rounding);
+
 		// return \wc_price($amount, $rounding['decimals' => 2]);
 		return \wc_price($amount, $rounding);
 	}
