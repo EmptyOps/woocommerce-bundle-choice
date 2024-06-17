@@ -119,18 +119,17 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
 		self::additional_data($query_string, $payload);
 
-		$url .= (strpos($url, '?') ? $query_string : "?" . $query_string);
+		$url .= (strpos($url, '?') !== FALSE ? $query_string : "?" . $query_string);
 
 		$result = wp_remote_get($url);
 
 		--	we need to check the result of above call and then check if there is any stardered wordprees error otherwise return the result and if there is the error then return the result acodingly. -- to h
-
 		if ( empty($result) ) {
 
-			throw new /Exception("There is some error in the call response.", 1);
+			throw new \Exception("There is some error in the api call response.", 1);
 		} elseif ( is_wp_error($result) ) {
 
-			throw new /Exception("There is some error in the api call. error massege: " . $result->get_error_message());
+			throw new \Exception("There is some error in the api call. error massege: " . $result->get_error_message(), 1);
 		}
 
 		return $result;
@@ -148,13 +147,15 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
 	private static function active_theme_and_plugins() {
 
-		-- here we need to put the appropriate code for fetching the active theme and plugins. -- to h & -- to pi 
+		// -- here we need to put the appropriate code for fetching the active theme and plugins. -- to h & -- to pi done.
 
 		$query_string = '';
 		$active_plugins_slugs = array();
-		$active_plugins_version = array();
-		$active_themes_slugs = '';
-		$active_themes_version = '';
+		$active_plugins_versions = array();
+		$active_theme_slug = '';
+		$active_theme_version = '';
+		$active_parent_theme_slug = '';
+		$active_parent_theme_version = '';
 
 		if ( function_exists('get_plugins') ) {
 
@@ -168,7 +169,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
 					// If active, add it to the active plugins array
 					$active_plugins_slugs[] = dirname($plugin_path);
-					$active_plugins_version[] = $plugin_info['Version'];
+					$active_plugins_versions[] = $plugin_info['Version'];
 				}
 
 			}
@@ -181,27 +182,33 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 		} else {
 			
 			$theme=get_current_theme();
-		}	
+		}
+
+		$active_theme_slug = $theme->get_template();
+		$active_theme_version = $theme->get('Version');	
 
 		$parent_themes = $theme->parent();
 
 		if ( $parent_themes ) {
 
-			$active_themes_slugs = $parent_themes->get_template(); // This will get the directory (slug) of the parent theme
-			$active_themes_version = $parent_themes->get('Version');
-		} else {
+			$active_parent_theme_slug = $parent_themes->get_template(); // This will get the directory (slug) of the parent theme
+			$active_parent_theme_version = $parent_themes->get('Version');
 
-			$active_themes_slugs = $theme->get_template();
-			$active_themes_version = $theme->get('Version');
+			$query_string .= "active_parent_theme_slug=" .  $active_parent_theme_slug . "&";
+			$query_string .= "active_parent_theme_version=" .  $active_parent_theme_version . "&";
 		}
 
 		$query_string .= "active_plugins_slugs=" . explode("," , $active_plugins_slugs) . "&";
-		$query_string .= "active_plugins_version=" . explode("," , $active_plugins_version) . "&";
-		$query_string .= "active_themes_slugs=" .  $active_themes_slugs . "&";
-		$query_string .= "active_themes_version=" .  $active_themes_version . "&";
+		$query_string .= "active_plugins_versions=" . explode("," , $active_plugins_versions) . "&";
+		$query_string .= "active_theme_slug=" .  $active_theme_slug . "&";
+		$query_string .= "active_theme_version=" .  $active_theme_version . "&";
 
 		return $query_string;
 
 	}
+
+	public static function admin_hooks() {
+
+    }
 
 }
