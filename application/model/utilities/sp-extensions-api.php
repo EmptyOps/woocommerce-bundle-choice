@@ -211,4 +211,8 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
     }
 
+    private static function process_form_definition($mode, $form_definition, $args) {
+
+    }
+
 }

@@ -162,6 +162,9 @@ if(!class_exists('Woo_Bundle_Choice') ) {
 
 			// admin 
 			if( is_admin() ) {
+
+				\eo\wbc\model\data_model\SP_WBC_Product::instance()->admin_hooks();
+				
 				$page_slug = wbc()->sanitize->get('page');
 				if( strpos($page_slug, "---theme-adaption") !== FALSE ) {
 					$curr_plugin_slug = explode("---", $page_slug)[0];
