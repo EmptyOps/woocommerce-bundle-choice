@@ -209,10 +209,33 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
 	public static function admin_hooks() {
 
+		$form_definition = add_filter('wbc_form_builder_model_after_get', function($form_definition, $hooked_args){
+
+			$args = array();
+			$args['hook_callback_args'] = $hooked_args;
+			self::process_form_definition('get', $form_definition, $args);
+		}, 50, 2);
+
+		$form_definition = add_filter('wbc_form_builder_model_before_save', function($res, $form_definition, $is_auto_insert_for_template, $hooked_args){
+
+			$args = array();
+			$args['res'] = $res;
+			$args['hook_callback_args'] = $hooked_args;
+			$args['is_auto_insert_for_template'] = $is_auto_insert_for_template;
+			self::process_form_definition('save', $form_definition, $args);
+		}, 50, 4);
     }
 
     private static function process_form_definition($mode, $form_definition, $args) {
 
+    	if($mode == 'get'){
+
+    		return $form_definition;
+    	}else{
+
+    		//default mode save
+    		return $args['res'];
+    	}
     }
 
 }

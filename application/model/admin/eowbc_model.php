@@ -173,13 +173,13 @@ class Eowbc_Model {
 		    }
 		} else {
 
-			do_action('wbc_form_builder_model_before_get', $form_definition, $args);
+			$form_definition = apply_filters('wbc_form_builder_model_before_get', $form_definition, $args);
 
 			ACTIVE_TODO even the we have commented below exception but this important to note that the implementation is stil incomplete and so that we do below exception message is stil standing and open. -- to h
 
 			// throw new Exception("ACTIVE_TODO implement, implement and then have all child classes of respective admin models does call this function. -- to s. On a side note, can use this for frontend get_data layers also but it sounds likely deeply mixing the models. anyway we can atleast use the form_definition on our get_data function layers of the frontend models like single product model, and this sounds like balanced approach maybe but not sure about if it appropriate balance of cohesion and coupling between models.", 1);
 
-			do_action('wbc_form_builder_model_after_get', $form_definition, $args);
+			$form_definition = apply_filters('wbc_form_builder_model_after_get', $form_definition, $args);
 		}
 
 	    return $form_definition;
@@ -375,13 +375,17 @@ class Eowbc_Model {
 
 		} else {
 
-			do_action('wbc_form_builder_model_before_save', $form_definition, $is_auto_insert_for_template, $args);
+			$res = array();
+			$res["type"] = "success";
+		    $res["msg"] = "";
+
+			$res = apply_filters('wbc_form_builder_model_before_save', $res, $form_definition, $is_auto_insert_for_template, $args);
 
 			ACTIVE_TODO even the we have commented below exception but this important to note that the implementation is stil incomplete and so that we do below exception message is stil standing and open. -- to h
 
 			// throw new Exception("ACTIVE_TODO implement, implement and then have all child classes of respective admin models does call this function. -- to s.", 1);
 
-			do_action('wbc_form_builder_model_after_save', $form_definition, $is_auto_insert_for_template, $args);
+			$res = apply_filters('wbc_form_builder_model_after_save', $res, $form_definition, $is_auto_insert_for_template, $args);
 		}
 
         return $res;
