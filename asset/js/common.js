@@ -5297,6 +5297,16 @@ if(window.document.splugins.common.is_category_page) {
 //NOTE: some business logic related common functions. we may like to move it to some other place if ever required. 
 if(window.document.splugins.common.is_item_page) {
 
+    if(jQuery(this).hasClass('wbc-event-required-before-continue-process')) {   
+
+        window.document.splugins.events.api.notifyAllObservers
+        ( 'wbc_before_continue_button_process', 'sp_slzm_refresh',
+        {}, jQuery('body') ); 
+
+        return;  
+
+    }
+    
     window.document.splugins.single_product.wbc_atb_submin_form = function() {
 
         jQuery('form.cart').attr('action',document.location.href);
