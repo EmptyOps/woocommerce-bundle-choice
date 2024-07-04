@@ -914,13 +914,6 @@ class Product {
                             jQuery('form.cart').submit();
                         }
 
-                        if(jQuery(this).hasClass('wbc-event-required-before-continue-process')) {                                 
-                            window.document.splugins.events.api.notifyAllObservers( 'wbc_before_continue_process', 'sp_slzm_refresh', {}, jQuery('body') ); 
-
-                            return;  
-         
-                        }
-
                         jQuery(".single_add_to_cart_button.alt:not(.disabled):eq(0)").replaceWith('<div class=\"ui buttons\">'+
                                 '<div class=\"ui button\" href=\"#\" id=\"eo_wbc_add_to_cart\"><?php echo esc_html($btn_text); ?></div>'+
                                     '<div class=\"ui floating dropdown icon button\" style=\"width: fit-content;min-width: unset; max-width: unset;\">'+
