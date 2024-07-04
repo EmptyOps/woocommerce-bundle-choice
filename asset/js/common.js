@@ -5297,11 +5297,9 @@ if(window.document.splugins.common.is_category_page) {
 //NOTE: some business logic related common functions. we may like to move it to some other place if ever required. 
 if(window.document.splugins.common.is_item_page) {
 
-    if(jQuery(this).hasClass('wbc-event-required-before-continue-process')) {   
+    if(jQuery('#eo_wbc_add_to_cart').hasClass('wbc-event-required-before-continue-process')) {   
 
-        window.document.splugins.events.api.notifyAllObservers
-        ( 'wbc_before_continue_button_process', 'sp_slzm_refresh',
-        {}, jQuery('body') ); 
+        window.document.splugins.events.api.notifyAllObservers( 'wbc_before_continue_button_process', 'sp_slzm_refresh', {}, jQuery('body') ); 
 
         return;  
 
