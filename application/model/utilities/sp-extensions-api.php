@@ -216,7 +216,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 			self::process_form_definition('get', $form_definition, $args);
 		}, 50, 2);
 
-		$form_definition = add_filter('wbc_form_builder_model_before_save', function($res, $form_definition, $is_auto_insert_for_template, $hooked_args){
+		$res = add_filter('wbc_form_builder_model_before_save', function($res, $form_definition, $is_auto_insert_for_template, $hooked_args){
 
 			$args = array();
 			$args['res'] = $res;
@@ -228,133 +228,127 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
     private static function process_form_definition($mode, $form_definition, $args) {
 
-			wbc()->load->model('admin\form-builder');
+		wbc()->load->model('admin\form-builder');
 
-			$saved_tab_key = !empty(wbc()->sanitize->post("sp_frmb_saved_tab_key")) ? wbc()->sanitize->post("sp_frmb_saved_tab_key") : ( !empty( $args["sp_frmb_saved_tab_key"] ) ? $args["sp_frmb_saved_tab_key"] : "" ); 
-			$skip_fileds = array('sp_frmb_saved_tab_key');
-			
-			$save_as_data = array();	
-			$save_as_data_meta = array();	
+		$saved_tab_key = !empty(wbc()->sanitize->post("sp_frmb_saved_tab_key")) ? wbc()->sanitize->post("sp_frmb_saved_tab_key") : ( !empty( $args["sp_frmb_saved_tab_key"] ) ? $args["sp_frmb_saved_tab_key"] : "" ); 
+		$skip_fileds = array('sp_frmb_saved_tab_key');
+		
+		$save_as_data = array();	
+		$save_as_data_meta = array();	
 
-	    	//loop through form tabs and save 
-		    foreach ($form_definition as $key => $tab) {
-		    	if( $key != $saved_tab_key ) {
-		    		continue;
-		    	}
-		    	
-		    	$key_clean = ((!empty($this->tab_key_prefix) and strpos($key,$this->tab_key_prefix)===0)?substr($key,strlen($this->tab_key_prefix)):$key);
-		    	//$res['data_form'][]= $tab;
-				$is_table_save = false;	//	ACTIVE_TODO/TODO it should be passed from child maybe or make dynamic as applicable. ($key == $this->tab_key_prefix."d_fconfig" or $key == $this->tab_key_prefix."s_fconfig" or $key=='filter_set') ? true : false;
+    	//loop through form tabs and save 
+	    foreach ($form_definition as $key => $tab) {
+	    	if( $key != $saved_tab_key ) {
+	    		continue;
+	    	}
+	    	
+	    	$key_clean = ((!empty($this->tab_key_prefix) and strpos($key,$this->tab_key_prefix)===0)?substr($key,strlen($this->tab_key_prefix)):$key);
+	    	//$res['data_form'][]= $tab;
+			$is_table_save = false;	//	ACTIVE_TODO/TODO it should be passed from child maybe or make dynamic as applicable. ($key == $this->tab_key_prefix."d_fconfig" or $key == $this->tab_key_prefix."s_fconfig" or $key=='filter_set') ? true : false;
 
-				$table_data = array();
-				$tab_specific_skip_fileds = array();
+			$table_data = array();
+			$tab_specific_skip_fileds = array();
 
-		    	foreach ($tab["form"] as $fk => $fv) {
+	    	foreach ($tab["form"] as $fk => $fv) {
 
-				    //loop through form fields, read from POST/GET and save
-				    //may need to check field type here and read accordingly only
-				    //only for those for which POST is set
-					
-					/*ACTIVE_TODO_OC_START
-					ACTIVE_TODO currently we are doing isset on the isset($args['data_raw']) instead of isset($args['data_raw'][$fk]) means without checking on the $fk so if we face any issues during edit or delete or some such action then need to manage accoringly. 
-					ACTIVE_TODO_OC_END*/
-				    if( in_array($fv["type"], \eo\wbc\model\admin\Form_Builder::savable_types()) && ( ( isset($_POST[$fk]) || isset($args['data_raw']/*[$fk]*/) ) || $fv["type"]=='checkbox'  ) ) {
+			    //loop through form fields, read from POST/GET and save
+			    //may need to check field type here and read accordingly only
+			    //only for those for which POST is set
+				
+			    if( in_array($fv["type"], \eo\wbc\model\admin\Form_Builder::savable_types())) {
 
-				    	//skip fields where applicable
-						if( in_array($fk, $skip_fileds) ) {
-			    			continue;
-			    		}
+			    	//skip fields where applicable
+					if(isset($fv["eas"]) & is_array($fv["eas"]){
 
-			    		if( in_array($fk, $tab_specific_skip_fileds) ) {
-			    			continue;
-			    		}
+						$section_fildes = self::retry_section_fildes($mode, $form_definition, $fv["eas"]);
+					}
 
-						if( empty($fv['save_as']) or $fv['save_as'] == "default" ) {
+					if( empty($fv['save_as']) or $fv['save_as'] == "default" ) {
 
-							// TODO implement
+						// TODO implement
 
-				    		//save
-					    	if( $is_table_save ) {
+			    		//save
+				    	if( $is_table_save ) {
 
-					    		// ACTIVE_TODO/TODO to cover logic like below commented logic what we can do is implement maybe callback or simply the hooks mechanisam, but maybe the callbacks are simple and easy to debug and enough for such requirements. so can do callbacks like we did for some class heirarchies -- to s 
-					    		// if( $fk == "d_fconfig_ordering" || $fk == "s_fconfig_ordering" )  {
-					    			
-					    		// 	if($fk=='d_fconfig_ordering' and !empty(wbc()->sanitize->post('first_category_altr_filt_widgts'))){
-					    		// 		$table_data['filter_template'] = apply_filters('eowbc_admin_form_filters_save_d_filter_template',wbc()->sanitize->post('first_category_altr_filt_widgts'));
-					    		// 	} elseif ($fk == "s_fconfig_ordering" and !empty(wbc()->sanitize->post('second_category_altr_filt_widgts'))) {
-					    		// 		$table_data['filter_template'] = apply_filters('eowbc_admin_form_filters_save_s_filter_template',wbc()->sanitize->post('second_category_altr_filt_widgts'));
-					    		// 	}			    			
-						    	// 	$table_data[$fk] = (int)wbc()->sanitize->post($fk); 	
-					    		// }
-					    		// else {
-					    			$table_data[$fk] = ( isset($_POST[$fk]) ? wbc()->sanitize->_post($fk) : '' ); 
-					    		// }
-					    	}
-					    	else {			    		
-					    		
-					    		wbc()->options->update_option('filters_'.$key,$fk,(isset($_POST[$fk])? ( wbc()->sanitize->post($fk) ):'' ) );
-					    	}
-						} elseif( $fv['save_as'] == "post_meta" ) {
+				    		// ACTIVE_TODO/TODO to cover logic like below commented logic what we can do is implement maybe callback or simply the hooks mechanisam, but maybe the callbacks are simple and easy to debug and enough for such requirements. so can do callbacks like we did for some class heirarchies -- to s 
+				    		// if( $fk == "d_fconfig_ordering" || $fk == "s_fconfig_ordering" )  {
+				    			
+				    		// 	if($fk=='d_fconfig_ordering' and !empty(wbc()->sanitize->post('first_category_altr_filt_widgts'))){
+				    		// 		$table_data['filter_template'] = apply_filters('eowbc_admin_form_filters_save_d_filter_template',wbc()->sanitize->post('first_category_altr_filt_widgts'));
+				    		// 	} elseif ($fk == "s_fconfig_ordering" and !empty(wbc()->sanitize->post('second_category_altr_filt_widgts'))) {
+				    		// 		$table_data['filter_template'] = apply_filters('eowbc_admin_form_filters_save_s_filter_template',wbc()->sanitize->post('second_category_altr_filt_widgts'));
+				    		// 	}			    			
+					    	// 	$table_data[$fk] = (int)wbc()->sanitize->post($fk); 	
+				    		// }
+				    		// else {
+				    			$table_data[$fk] = ( isset($_POST[$fk]) ? wbc()->sanitize->_post($fk) : '' ); 
+				    		// }
+				    	}
+				    	else {			    		
+				    		
+				    		wbc()->options->update_option('filters_'.$key,$fk,(isset($_POST[$fk])? ( wbc()->sanitize->post($fk) ):'' ) );
+				    	}
+					} elseif( $fv['save_as'] == "post_meta" ) {
 
-							if( !isset($save_as_data['post_meta']) ) {
+						if( !isset($save_as_data['post_meta']) ) {
 
-								$save_as_data['post_meta'] = array();	
-							}
-
-							/*ACTIVE_TODO_OC_START
-							ACTIVE_TODO currently we are doing isset on the isset($args['data_raw']) instead of isset($args['data_raw'][$fk]) means without checking on the $fk so if we face any issues during edit or delete or some such action then need to manage accoringly. 
-							ACTIVE_TODO_OC_END*/
-							if( isset($_POST[$fk]) or isset($args['data_raw']/*[$fk]*/) ) {
-
-								$save_as_data_meta['post_meta_found'] = true;	
-							}
-
-							if(!empty($args['data_raw'])) {
-								// -- as per the flow planned/thought of we ma need only litel logzic here.
-								// 	-- may be all that we need to do is simply read from the form definition itself instad of the post in the below if --to h & -- to s.
-								// 		-- and so since data_raw will not going to passed so maybe the above not empty if condition need to be adjusted with something else -- to h & -- to s
-								// 			-- i had thougt of doing not empty condition in form_definition using $fk but since some value might be set to 0 or empty so not empty will not work and not even isset because isset maybe become true even for normal case of the else condition below.
-								// 				NOTE: it feels that we can not do anything else except the isset so in below if in the ternary operator simply the isset is assed 
-								if (true /*true or since no dependancy on the dm based field so far*/ or !empty($dm_based_field)) {
-
-									// ACTIVE_TODO here we are reading the directly passed custom data inside data_raw element, which is bad practice for security. so we should refactor this as soon as we get a chance and make sure that we either sanitize this or we use the standard input method on we like the post, get, request. but I think it is better that we simply sanitize this custom data by passing it to our sanitize library in the function which is accepting custom data.
-									$save_as_data['post_meta'][$fk] = ( isset($fv/*[$fk]*/['value']) ? $fv/*[$fk]*/['value'] : '' );
-
-								}
-
-							} else {
-								$save_as_data['post_meta'][$fk] = ( isset($_POST[$fk]) ? wbc()->sanitize->_post($fk) : '' ); 
-							}
+							$save_as_data['post_meta'] = array();	
 						}
 
+						/*ACTIVE_TODO_OC_START
+						ACTIVE_TODO currently we are doing isset on the isset($args['data_raw']) instead of isset($args['data_raw'][$fk]) means without checking on the $fk so if we face any issues during edit or delete or some such action then need to manage accoringly. 
+						ACTIVE_TODO_OC_END*/
+						if( isset($_POST[$fk]) or isset($args['data_raw']/*[$fk]*/) ) {
 
+							$save_as_data_meta['post_meta_found'] = true;	
+						}
 
-				    }
-				}
+						if(!empty($args['data_raw'])) {
+							// -- as per the flow planned/thought of we ma need only litel logzic here.
+							// 	-- may be all that we need to do is simply read from the form definition itself instad of the post in the below if --to h & -- to s.
+							// 		-- and so since data_raw will not going to passed so maybe the above not empty if condition need to be adjusted with something else -- to h & -- to s
+							// 			-- i had thougt of doing not empty condition in form_definition using $fk but since some value might be set to 0 or empty so not empty will not work and not even isset because isset maybe become true even for normal case of the else condition below.
+							// 				NOTE: it feels that we can not do anything else except the isset so in below if in the ternary operator simply the isset is assed 
+							if (true /*true or since no dependancy on the dm based field so far*/ or !empty($dm_based_field)) {
 
-				//loop through save_as_data and save 
-			    foreach ($save_as_data as $sadk => $sadv) {
+								// ACTIVE_TODO here we are reading the directly passed custom data inside data_raw element, which is bad practice for security. so we should refactor this as soon as we get a chance and make sure that we either sanitize this or we use the standard input method on we like the post, get, request. but I think it is better that we simply sanitize this custom data by passing it to our sanitize library in the function which is accepting custom data.
+								$save_as_data['post_meta'][$fk] = ( isset($fv/*[$fk]*/['value']) ? $fv/*[$fk]*/['value'] : '' );
 
-			    	// NOTE: normally for our standard admn layer there is maybe no flow of deleting record if that is not detected, and as far as I can say the delete action is available only for the table/entity based form where user can delete in bulk and so on. but here it is for storage efficiency, cleanlieness and so on the post meta are deleted and will be followed in similar manner for other similar save_as options. 
+							}
 
-			    	if( $sadk == "post_meta" ) {
-						
-						// TODO we may like to use post meta api functions like get_post_meta(used above), update_post_meta/delete_post_meta(used below) through our common wp helper 
-
-						if ( !empty( $save_as_data_meta['post_meta_found'] ) ) {
-
-							update_post_meta( $args['id'], $args['page_section'].'_data', $sadv );
 						} else {
-							delete_post_meta( $args['id'], $args['page_section'].'_data' );
+							$save_as_data['post_meta'][$fk] = ( isset($_POST[$fk]) ? wbc()->sanitize->_post($fk) : '' ); 
 						}
-			    	}
+					}
+
+
+
 			    }
+			}
 
-				if( $is_table_save ) {
+			//loop through save_as_data and save 
+		    foreach ($save_as_data as $sadk => $sadv) {
 
-				}
+		    	// NOTE: normally for our standard admn layer there is maybe no flow of deleting record if that is not detected, and as far as I can say the delete action is available only for the table/entity based form where user can delete in bulk and so on. but here it is for storage efficiency, cleanlieness and so on the post meta are deleted and will be followed in similar manner for other similar save_as options. 
 
+		    	if( $sadk == "post_meta" ) {
+					
+					// TODO we may like to use post meta api functions like get_post_meta(used above), update_post_meta/delete_post_meta(used below) through our common wp helper 
+
+					if ( !empty( $save_as_data_meta['post_meta_found'] ) ) {
+
+						update_post_meta( $args['id'], $args['page_section'].'_data', $sadv );
+					} else {
+						delete_post_meta( $args['id'], $args['page_section'].'_data' );
+					}
+		    	}
 		    }
+
+			if( $is_table_save ) {
+
+			}
+
+	    }
 
     	if($mode == 'get'){
 
@@ -366,4 +360,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
     	}
     }
 
+    private static function retry_section_fildes($mode, $form_definition, $section_property) {
+
+    }
 }
