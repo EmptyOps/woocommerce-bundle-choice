@@ -3351,17 +3351,24 @@ if( typeof(eo_wbc_object) != 'undefined'){
 						selector = ".page-numbers.current";
 					}			
 					console.log(jQuery(selector));
+
+					if(jQuery(selector).length > 0) {
 					
-					if(jQuery(selector).html().indexOf('&nbsp;') >= 0 ){
-						
-						console.log('get_page_number in nbsp available');
-						
-						return parseInt(jQuery(selector).html().replace(',','').replace(/\&nbsp;/g, ''));
-					}else{
+						if(jQuery(selector).html().indexOf('&nbsp;') >= 0 ){
+							
+							console.log('get_page_number in nbsp available');
+							
+							return parseInt(jQuery(selector).html().replace(',','').replace(/\&nbsp;/g, ''));
+							
+						} else{
 
-						console.log('get_page_number in nbsp not available');
+							console.log('get_page_number in nbsp not available');
 
-						return parseInt(jQuery(selector).text().replace(',',''));
+							return parseInt(jQuery(selector).text().replace(',',''));
+						}
+					} else {
+
+						return 1;
 					}
 				}
 			},
