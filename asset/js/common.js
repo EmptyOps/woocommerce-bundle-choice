@@ -5301,7 +5301,7 @@ if(window.document.splugins.common.is_item_page) {
 
         if(jQuery('#eo_wbc_add_to_cart').hasClass('wbc-event-required-before-continue-process')) {   
 
-            window.document.splugins.events.api.notifyAllObservers( 'wbc_continue_button', 'wbc_before_continue_button_process', {}, null /*jQuery('body') we do not need to pass this last parameter we don't have spacific container to use so that if we do not pass anything then default will be used*/ ); 
+            window.document.splugins.events.api.notifyAllObservers( 'wbc_continue_button', 'wbc_before_continue_button_process', {}, null /*,jQuery('body') we do not need to pass this last parameter since we don't have spacific container to use so that if we do not pass anything then default will be used*/ ); 
 
             return;  
 
