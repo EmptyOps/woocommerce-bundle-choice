@@ -465,6 +465,36 @@ class WBC_Common {
         return $pageURL;
     }
 
+    public function replace_or_remove_url_param($url, $param_to_replace = null, $param_new_value = null, $param_to_remove = null) {
+
+	    // Parse the URL into components
+	    $url_components = parse_url($url);
+
+	    // Parse the query string into an associative array
+	    parse_str($url_components['query'], $query_params);
+
+	    // Remove the specified parameter if $param_to_remove is provided
+	    if (!is_null($param_to_remove) && array_key_exists($param_to_remove, $query_params)) {
+
+	        unset($query_params[$param_to_remove]);
+	    }
+
+	    // Replace the parameter with the new value if $param_to_replace and $param_new_value are provided
+	    if (!is_null($param_to_replace) && !is_null($param_new_value)) {
+	    	
+	        $query_params[$param_to_replace] = $param_new_value;
+	    }
+
+	    // Rebuild the query string
+	    $new_query_string = http_build_query($query_params);
+
+	    // Reconstruct the URL with the new query string
+	    $new_url = $url_components['scheme'] . '://' . $url_components['host'] . $url_components['path'] . '?' . $new_query_string;
+
+	    // Return the new URL
+	    return $new_url;
+	}
+
 	// public function current_theme_key() {
 	// 	$stylesheet     = get_stylesheet();
 	//     $theme_root     = get_theme_root( $stylesheet );
