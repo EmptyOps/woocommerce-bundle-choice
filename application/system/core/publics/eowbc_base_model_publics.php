@@ -80,4 +80,8 @@ class Eowbc_Base_Model_Publics {
         /*End --Hide sidebar and make content area full width.*/
 	}
 
+	public static function handle_response(){
+		
+	}
+
 }

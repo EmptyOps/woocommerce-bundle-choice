@@ -258,9 +258,18 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 			    if( in_array($fv["type"], \eo\wbc\model\admin\Form_Builder::savable_types())) {
 
 			    	//skip fields where applicable
-					if(isset($fv["eas"]) & is_array($fv["eas"]){
+					if(isset($fv["eas"]) && is_array($fv["eas"]){
 
-						$section_fildes = self::retry_section_fildes($mode, $form_definition, $fv["eas"]);
+						if(){
+
+							self::section_should_mack_call($mode, $form_definition, $fv["eas"]);
+						}
+
+						if(){
+
+							$section_fildes = self::retry_section_fildes($mode, $form_definition, $fv["eas"]);
+						}
+
 					}
 
 					if( empty($fv['save_as']) or $fv['save_as'] == "default" ) {
@@ -358,6 +367,10 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
     		//default mode save
     		return $args['res'];
     	}
+    }
+
+    private static function section_should_mack_call($mode, $form_definition, $section_property) {
+
     }
 
     private static function retry_section_fildes($mode, $form_definition, $section_property) {
