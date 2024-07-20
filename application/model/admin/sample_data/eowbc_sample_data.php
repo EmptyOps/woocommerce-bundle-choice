@@ -282,7 +282,7 @@ class Eowbc_Sample_Data {
 					    "\n" .
 					    "});\n";
 
-					wbc()->load->add_inline_script( '', $inline_script, 'common' );
+					wbc()->load->add_inline_script( '', $inline_script, 'sp-wbc-common-footer' );
 				
 			  	}      
 			    $_step=wbc()->sanitize->post('step');

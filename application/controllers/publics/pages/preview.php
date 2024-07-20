@@ -124,8 +124,8 @@ class Preview extends \eo\wbc\system\core\publics\Eowbc_Base_Model_Publics {
                 "jQuery(document).ready(function(\$){\n" .
                 "    jQuery('.special.cards .image').dimmer({ on: 'hover' });\n" .
                 "});\n";
-            wbc()->load->add_inline_script('', $inline_script, 'common');    
-        },100);  
+            wbc()->load->add_inline_script('', $inline_script, 'sp-wbc-common-footer');    
+        },10);  
 
         add_action( 'wp_head',function(){           
            

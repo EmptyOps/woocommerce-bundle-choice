@@ -167,7 +167,7 @@
                     $inline_script = "jQuery(document).ready(function(\$) { \n".
                     "\$('.woocommerce-result-count').html('" . $total_text . "');\n".
                     "});";
-                    wbc()->load->add_inline_script('', $inline_script, 'common');
+                    wbc()->load->add_inline_script('', $inline_script, 'sp-wbc-common-footer');
                 }   
 
                 $prev_product_id = wbc()->sanitize->get('FIRST') | wbc()->sanitize->get('SECOND');
@@ -326,7 +326,7 @@ $inline_script =
     "    wbc_attach_card_views();\n" .
     "});\n";
 
-wbc()->load->add_inline_script('', $inline_script, 'common');
+wbc()->load->add_inline_script('', $inline_script, 'sp-wbc-common-footer');
 if(false) {
 ?>      
     <style type="text/css">

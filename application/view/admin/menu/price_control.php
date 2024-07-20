@@ -473,6 +473,6 @@ $inline_script =
     "\n" .
     "window.eo_wbc.jpc_data=JSON.parse('".$jpc_data_json_encoded."');";
 
-wbc()->load->add_inline_script('', $inline_script, 'common');
+wbc()->load->add_inline_script('', $inline_script, 'sp-wbc-common-footer');
 
 wbc()->load->asset('js','admin/price_control');	
