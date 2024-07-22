@@ -258,16 +258,23 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 			    if( in_array($fv["type"], \eo\wbc\model\admin\Form_Builder::savable_types())) {
 
 			    	//skip fields where applicable
-					if(isset($fv["eas"]) && is_array($fv["eas"]){
+					if(isset($fv["eas"]) && is_array($fv["eas"]) {
 
-						if(){
-
-							self::section_should_mack_call($mode, $form_definition, $fv["eas"]);
-						}
-
-						if(){
+						if(self::section_should_mack_call($mode, $form_definition, $fv["eas"])) {
 
 							$section_fildes = self::retry_section_fildes($mode, $form_definition, $fv["eas"]);
+
+
+							$response = self::call();
+
+							$parsed = \eo\wbc\system\core\publics\Eowbc_Base_Model_Publics::parse_response($response);
+
+							wbc_free_memory($response);
+
+
+							$is_positive = self::is_response_positive($parsed);
+
+							self::apply_response_msg($is_positive, $mode, $form_definition, $section_fildes, $parsed);
 						}
 
 					}
@@ -371,9 +378,20 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
     private static function section_should_mack_call($mode, $form_definition, $section_property) {
 
+    	return false;
     }
 
     private static function retry_section_fildes($mode, $form_definition, $section_property) {
 
+    }
+
+    private static function is_response_positive($parsed) {
+
+    	return false;
+    }
+
+    private static function apply_response_msg($is_positive, $mode, $form_definition, $section_fildes, $parsed) {
+
+    	return false;
     }
 }
