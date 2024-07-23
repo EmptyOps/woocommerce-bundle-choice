@@ -309,6 +309,26 @@ if(window.document.splugins.common.is_item_page || window.document.splugins.comm
     x.appendChild(l);
  }
 
+ window.document.splugins.common.extract_file_name = function(url) {
+    
+    const parts = url.split('/');
+    let filename = parts[parts.length - 1];
+    
+    // Check if filename contains query parameters or fragments
+    const queryIndex = filename.indexOf('?');
+    if (queryIndex !== -1) {
+        filename = filename.substring(0, queryIndex);
+    } 
+
+    const fragmentIndex = filename.indexOf('#');
+    if (fragmentIndex !== -1) {
+        filename = filename.substring(0, fragmentIndex);
+    }
+    
+    return filename;
+}
+
+
 /*ACTIVE_TODO_OC_START
 var newURL = updateURLParameter(window.location.href, 'locId', 'newLoc');
 newURL = updateURLParameter(newURL, 'resId', 'newResId');
