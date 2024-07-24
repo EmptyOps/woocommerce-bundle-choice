@@ -84,7 +84,7 @@ class Eowbc_Base_Model_Publics {
 		
 	}
 
-	public static function handle_response(){
+	public static function handle_response($mode, $parsed){
 		
 	}
 

@@ -260,7 +260,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 			    	//skip fields where applicable
 					if(isset($fv["eas"]) && is_array($fv["eas"]) {
 
-						if(self::section_should_mack_call($mode, $form_definition, $fv["eas"])) {
+						if( self::section_should_mack_call($mode, $form_definition, $fv["eas"]) ) {
 
 							$section_fildes = self::retry_section_fildes($mode, $form_definition, $fv["eas"]);
 
@@ -275,6 +275,16 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 							$is_positive = self::is_response_positive($parsed);
 
 							self::apply_response_msg($is_positive, $mode, $form_definition, $section_fildes, $parsed);
+
+							$res = null;
+							if( self::should_return($is_positive, $mode, $section_fildes, $parsed, $res) ) {
+
+								return $res;
+							}
+
+							self::apply_stat_changes_to_section($is_positive, $mode, $form_definition, $section_fildes, $parsed);
+
+							\eo\wbc\system\core\publics\Eowbc_Base_Model_Publics::handle_response($mode, $parsed);
 						}
 
 					}
@@ -392,6 +402,14 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
     private static function apply_response_msg($is_positive, $mode, $form_definition, $section_fildes, $parsed) {
 
+    }
+
+    private static function should_return($is_positive, $mode, $section_fildes, $parsed, &$res) {
+
     	return false;
+    }
+
+    private static function apply_stat_changes_to_section($is_positive, $mode, $form_definition, $section_fildes, $parsed) {
+
     }
 }
