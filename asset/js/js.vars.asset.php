@@ -765,7 +765,8 @@ add_action('wp_footer',function(){
 										selected_attr_val_valid = true;
 
 									console.log('A_OFF show_variation [onUpdateAttributes] current_attr_select');
-									console.log(current_attr_select.html());
+									console.log(current_attr_name);
+									console.log(current_attr_select.data( 'attribute_html' ));
 
 									// Reference options set at first.
 									if ( ! current_attr_select.data( 'attribute_html' ) ) {
@@ -794,6 +795,7 @@ add_action('wp_footer',function(){
 									console.log('A_OFF show_variation [onUpdateAttributes] variations');
 									console.log(variations);
 									console.log(checkAttributes);
+									console.log(new_attr_select.html());
 
 									// Loop through variations.
 									for ( var num in variations ) {

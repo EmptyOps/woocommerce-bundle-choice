@@ -1276,6 +1276,32 @@ class WBC_Common {
 	    return $objectArray;
 	}
 
+	public function find_object_by_property($array, $property, $value) {
+
+	    foreach ($array as $item) {
+
+	        // Check if the item is an object
+	        if (is_object($item)) {
+
+	            if (isset($item->$property) && $item->$property == $value) {
+
+	                return $item;
+	            }
+	        } 
+	        // Check if the item is an array
+	        else if (is_array($item)) {
+
+	            if (isset($item[$property]) && $item[$property] == $value) {
+
+	                return $item;
+	            }
+	        }
+	    }
+	    
+	    return null;
+	}
+
+
 }
 
 
