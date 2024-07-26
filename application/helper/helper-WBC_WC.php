@@ -980,6 +980,50 @@ class WBC_WC {
         return null;
     } 
 
+    public function slug_to_obj($type, $slug, $taxonomy=null) {
+
+        if($type == 'prod_cat') {
+
+            $taxonomy = 'product_cat'; 
+
+            $term = $this->get_term_by('slug',$slug,$taxonomy);
+
+            if(!empty($term) and !is_wp_error($term)) {
+                 return $term;
+            }
+            
+        } elseif($type == 'attr') {
+
+            $taxonomy = $slug; 
+
+            if( strpos($taxonomy, 'pa_') !== 0 ) {
+
+                $taxonomy   = 'pa_' . $taxonomy; 
+            }
+
+            throw new \Exception("not implemented yet", 1);
+
+            return wc_attribute_label( $taxonomy );
+            
+        } elseif($type == 'attr_opt') {
+
+            if( strpos($taxonomy, 'pa_') !== 0 ) {
+
+                $taxonomy   = 'pa_' . $taxonomy; 
+            }
+
+            $term = $this->get_term_by('slug',$slug,$taxonomy);
+
+            if(!empty($term) and !is_wp_error($term)) {
+                 return $term;
+            }
+
+        } else {
+
+        }
+
+        return null;
+    } 
 
     public function parent_category_id($category_id) {
 

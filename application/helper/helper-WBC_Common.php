@@ -556,6 +556,17 @@ class WBC_Common {
 
 	}
 
+	public function title_to_slug($title) {
+		
+	    // Convert title to lowercase
+	    $title = strtolower($title);
+	    
+	    // Replace underscores, spaces, and dots with hyphens
+	    $slug = str_replace(array('_', ' ', '.'), '-', $title);
+	    
+	    return $slug;
+	}
+
 	public function truncate($str,$limit) {
 
 		if(strlen($str) < $limit)
@@ -1245,6 +1256,24 @@ class WBC_Common {
 
 		return explode($unidelim, $step_01);
 		
+	}
+
+	public function convert_array_to_objects($array) {
+
+	    $objectArray = [];
+
+	    foreach ($array as $element) {
+
+	        $object = new stdClass();
+	        foreach ($element as $key => $value) {
+
+	            $object->$key = $value;
+	        }
+
+	        $objectArray[] = $object;
+	    }
+
+	    return $objectArray;
 	}
 
 }

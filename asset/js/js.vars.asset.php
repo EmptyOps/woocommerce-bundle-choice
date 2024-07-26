@@ -566,19 +566,21 @@ add_action('wp_footer',function(){
 
 										console.log('A_OFF show_variation [onFindVariation] 1 else');
 										console.log(currentAttributes);
+										console.log(form.variationData);
 
 										form.$form.trigger( 'update_variation_values' );
 
 										var matching_variations = form.findMatchingVariations( form.variationData, currentAttributes ),
 											variation           = matching_variations.shift();
 
-										// console.log('A_OFF show_variation [onFindVariation] 1 else variation');
-										// console.log(form.$form);
-										// console.log(variation);
+										console.log('A_OFF show_variation [onFindVariation] 1 else variation');
+										console.log(matching_variations);
+										console.log(form.$form);
+										console.log(variation);
 										
 										if ( variation ) {
 											
-											// console.log('A_OFF show_variation [onFindVariation] 1 else if');
+											console.log('A_OFF show_variation [onFindVariation] 1 else if');
 
 											form.$form.trigger( 'found_variation', [ variation ] );
 										} else {
@@ -762,6 +764,9 @@ add_action('wp_footer',function(){
 										selected_attr_val       = current_attr_select.val() || '',
 										selected_attr_val_valid = true;
 
+									console.log('A_OFF show_variation [onUpdateAttributes] current_attr_select');
+									console.log(current_attr_select.html());
+
 									// Reference options set at first.
 									if ( ! current_attr_select.data( 'attribute_html' ) ) {
 										var refSelect = current_attr_select.clone();
@@ -786,8 +791,9 @@ add_action('wp_footer',function(){
 
 									var variations = form.findMatchingVariations( form.variationData, checkAttributes );
 		
-									// console.log('A_OFF show_variation [onUpdateAttributes] variations');
-									// console.log(variations);
+									console.log('A_OFF show_variation [onUpdateAttributes] variations');
+									console.log(variations);
+									console.log(checkAttributes);
 
 									// Loop through variations.
 									for ( var num in variations ) {
@@ -1892,8 +1898,9 @@ add_action('wp_footer',function(){
 											var val1 = variation_attributes[ attr_name ];
 											var val2 = attributes[ attr_name ];
 											
-											// console.log('A_ON show_variation [isMatch] loop if');
-											// console.log(val1);
+											console.log('A_ON show_variation [isMatch] loop if');
+											console.log(val1);
+											console.log(val2);
 
 											if ( val1 !== undefined && val2 !== undefined && val1.length !== 0 && val2.length !== 0 && val1 !== val2 ) {
 												match = false;

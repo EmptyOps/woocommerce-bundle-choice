@@ -103,7 +103,10 @@ class Feed extends \eo\wbc\controllers\publics\Controller{
         if ($page_section == 'swatches') {
             if ($container_class == 'swatches') {
 
-                $args['product'] = $args['hook_callback_args']['product'];
+                // below code changed on 24-07-2024 
+                // $args['product'] = $args['hook_callback_args']['product'];
+                $args['product'] = $args['hook_callback_args']['hook_args']['product'];
+
                 $args['is_return_html'] = $args['hook_callback_args']['is_return_html'];
                 // $args['extra_args'] = $args['hook_callback_args']['extra_args'];
                 // unset($args['hook_callback_args']);
@@ -227,7 +230,12 @@ class Feed extends \eo\wbc\controllers\publics\Controller{
                 $args['hook_callback_args'] = array();
                 $args['hook_callback_args']['html'] = $html;
                 $args['hook_callback_args']['hook_args'] = $hook_args;
-                $args['hook_callback_args']['product'] = $product;
+
+
+                // below code changed on 24-07-2024 
+                // $args['hook_callback_args']['product'] = $product;
+                $args['hook_callback_args']['hook_args']['product'] = $product;
+
                 $args['hook_callback_args']['is_return_html'] = $is_return_html;
 
 

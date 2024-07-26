@@ -1898,7 +1898,7 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
         // console.log("select and disable log");
         // console.log(data.options);
         // console.log(data.disabled);
-        // console.log(data.select);
+        // console.log(data.out_of_stock);
 
         // ACTIVE_TODO we do not have any more (class woo-variation-swatches-variable-item-more) class related flow yet. but t you need to first plan the template structure -- to t
             // ACTIVE_TODO -- then once template ready then implaemnt on php side and do the needful on js layers -- to s

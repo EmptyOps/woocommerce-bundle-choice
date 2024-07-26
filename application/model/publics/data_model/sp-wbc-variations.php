@@ -1486,8 +1486,10 @@ class SP_WBC_Variations extends SP_Variations {
 			
 			$query_params = \eo\wbc\model\SP_WBC_Router::instance()->get_query_params_formatted('url_and_filter_form', array('attr'), 'REQUEST', null);
 			// wbc_pr('query_params');
-			// wbc_pr($query_params);
+			// // wbc_pr($query_params);
+			// // wbc_pr($data['woo_dropdown_attribute_html_data']['product']);
 			// wbc_pr($data['woo_dropdown_attribute_html_data']['attribute']);
+			// wbc_pr(taxonomy_exists( $data['woo_dropdown_attribute_html_data']['attribute'] ));
 
 			$data['woo_dropdown_attribute_html_data']['query_paramas_options'] = null;
 			if(in_array($data['woo_dropdown_attribute_html_data']['attribute'] , $query_params)){
