@@ -250,6 +250,11 @@ class WBC_WP {
 
         // NOTE: we will always use plugin slug for such condition creation. or the most reliable and simpest method to check if certain plugin is active by passing their slug so we would need to create the applicable function in the wp helper.
 
+        if( $plugin_root_file_relative_path == 'woocommerce-multilingual') {
+
+            $plugin_root_file_relative_path = 'woocommerce-multilingual/wpml-woocommerce.php';
+        }
+
         return is_plugin_active( $plugin_root_file_relative_path );
     }
 
