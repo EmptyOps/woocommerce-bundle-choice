@@ -5317,7 +5317,9 @@ if(window.document.splugins.common.is_category_page) {
 //NOTE: some business logic related common functions. we may like to move it to some other place if ever required. 
 if(window.document.splugins.common.is_item_page) {
     
-    window.document.splugins.single_product.wbc_atb_submin_form = function() {
+    window.document.splugins.single_product.wbc_atb_submin_form = function(is_pair_builder=true) {
+
+        console.log('common.js wbc_atb_submin_form');
 
         if(jQuery('#eo_wbc_add_to_cart').hasClass('wbc-event-required-before-continue-process')) {   
 
@@ -5327,7 +5329,11 @@ if(window.document.splugins.common.is_item_page) {
 
         }
 
-        jQuery('form.cart').attr('action',document.location.href);
+        if(is_pair_builder) {
+
+            jQuery('form.cart').attr('action',document.location.href);
+        }
+
         jQuery('form.cart').submit();
     }
 }
