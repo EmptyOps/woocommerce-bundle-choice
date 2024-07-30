@@ -360,11 +360,11 @@ class Preview extends \eo\wbc\system\core\publics\Eowbc_Base_Model_Publics {
                                     '<a class="ui button primary" href="'.esc_url(\eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_breadcrumb_change_url((!empty(wbc()->sanitize->get('BEGIN')) && wbc()->sanitize->get('BEGIN')==wbc()->options->get_option('configuration','first_slug')/*get_option('eo_wbc_first_slug')*/ ? 1 : 2),(empty($set['FIRST'][2])?$set['FIRST'][0]:$set['FIRST'][2]))).'" >Change</a>'.
                                 '</div>'.
                             '</div>'.
-                          '</div>'.esc_html($first->get_image('full')).
+                          '</div>'.($first->get_image('full')).
                           '</div>'.
                         '<div class="content">'.
                             '<div class="header">'.esc_html($first->get_title()).'</div>'.
-                            '<div class="meta">'.esc_html__($set['FIRST'][2]?"<br/>".implode('<br/>',wbc()->wc->eo_wbc_get_product_variation_attributes($set['FIRST'][2],$set['FIRST']['variation'])):'').
+                            '<div class="meta">'.($set['FIRST'][2]?"<br/>".implode('<br/>',wbc()->wc->eo_wbc_get_product_variation_attributes($set['FIRST'][2],$set['FIRST']['variation'])):'').
                             '</div>'.
                         '</div>'.
                         '<div class="extra content">'.
@@ -382,11 +382,11 @@ class Preview extends \eo\wbc\system\core\publics\Eowbc_Base_Model_Publics {
                                 '</div>'.
                             '</div>'.
                           '</div>'.
-                          esc_html($second->get_image('full')).
+                          ($second->get_image('full')).
                         '</div>'.
                         '<div class="content">'.
                             '<div class="header">'.esc_html__($second->get_title()).'</div>'.
-                            '<div class="meta">'.esc_html__($set['SECOND'][2]?"<br/>".implode('<br/>',wbc()->wc->eo_wbc_get_product_variation_attributes($set['SECOND'][2],$set['SECOND']['variation'])):'').
+                            '<div class="meta">'.($set['SECOND'][2]?"<br/>".implode('<br/>',wbc()->wc->eo_wbc_get_product_variation_attributes($set['SECOND'][2],$set['SECOND']['variation'])):'').
                             '</div>'.
                         '</div>'.
                         '<div class="extra content">'.

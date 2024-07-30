@@ -197,7 +197,7 @@
                                                 <?php } ?>
 
                                                 <h5><?php echo esc_html($curr_product->get_title()); ?></h5><br/>
-                                                <div style="text-align: center !important;">&nbsp;<?php echo esc_html($curr_product->get_price_html()); ?></div>
+                                                <div style="text-align: center !important;">&nbsp;<?php echo ($curr_product->get_price_html()); ?></div>
 
                                               </div>
                                             </div>
@@ -213,7 +213,7 @@
                                                 <div data-link="<?php echo esc_url($category_object->eo_wbc_prev_url()); ?>" class="ui inverted button">Change</div>
 
                                                 <h5><?php echo esc_html($prev_product->get_title()); ?></h5><br/>
-                                                <div style="text-align: center !important;">&nbsp;<?php echo esc_html($prev_product->get_price_html()); ?></div>
+                                                <div style="text-align: center !important;">&nbsp;<?php echo ($prev_product->get_price_html()); ?></div>
                                               </div>
                                             </div>
                                           </div>
@@ -232,7 +232,7 @@
                                               <div class="aligned align bottom">
                                                 <div data-link="<?php echo esc_url($category_object->eo_wbc_prev_url()); ?>" class="ui inverted button">Change</div>
                                                 <h5><?php echo esc_html($prev_product->get_title()); ?></h5><br/>
-                                                <div style="text-align: center !important;">&nbsp;<?php echo esc_html($prev_product->get_price_html()); ?></div>
+                                                <div style="text-align: center !important;">&nbsp;<?php echo ($prev_product->get_price_html()); ?></div>
                                               </div>
                                             </div>
                                           </div>
@@ -251,7 +251,7 @@
                                                             <div class="ui inverted button"><?php esc_html_e('Out of stock', 'woo-bundle-choice'); ?></div>
                                                         <?php } ?>
                                                         <h5><?php echo esc_html($curr_product->get_title()); ?></h5><br/>
-                                                        <div style="text-align: center !important;">&nbsp;<?php echo esc_html($curr_product->get_price_html()); ?></div>
+                                                        <div style="text-align: center !important;">&nbsp;<?php echo ($curr_product->get_price_html()); ?></div>
                                                     </div>
                                                 </div>
                                             </div>

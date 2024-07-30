@@ -94,7 +94,7 @@ class WBC_Config {
 
 	public function get_available_samples() {
 		// NOTE: Pair maker sample data is removed because of some serious concerns.
-		return array('ring_builder'/*,'pair_maker'*/,'filters_shop_cat');
+		return array('ring_builder','pair_maker','filters_shop_cat');
 	}
 
 	public function get_inventory_types() {

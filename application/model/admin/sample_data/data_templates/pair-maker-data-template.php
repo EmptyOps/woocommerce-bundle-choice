@@ -1928,6 +1928,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
     public function get_filters($__cat__, $__att__) {
         $filter = array();
         
+        //Filters for Top Wear....
         if(!empty($__cat__['wbc_top_wear_cat'])){
             $filter['d_fconfig'][]=array(
                 'name'=>$__cat__['wbc_top_wear_cat'][0],
@@ -1970,22 +1971,6 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                 'input'=>"text_slider",
                 'column_width'=> "50",
                 'order'=>"2",
-                'template'=>'fc1',
-                'help'=>0,
-                'help_text'=>'',
-                'enabled'=>1
-            );
-        }
-        if(!empty($__att__['wbc_cloth_fit_attr'])){
-            $filter['d_fconfig'][]=array(
-                'name'=>$__att__['wbc_cloth_fit_attr'][0],
-                'type'=>"1",
-                'label'=>$__att__['wbc_cloth_fit_attr'][1],
-                'advance'=>"0",
-                'dependent'=>"0",
-                'input'=>"text_slider",
-                'column_width'=> "50",
-                'order'=>"3",
                 'template'=>'fc1',
                 'help'=>0,
                 'help_text'=>'',
@@ -2056,6 +2041,40 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                 'enabled'=>1
             );
         }
+        if(!empty($__cat__['wbc_pattern_cat'])){
+            $filter['d_fconfig'][]=array(
+                'name'=>$__cat__['wbc_pattern_cat'][0],
+                'type'=>"0",
+                'label'=>$__cat__['wbc_pattern_cat'][1],
+                'advance'=>"0",
+                'dependent'=>"0",
+                'input'=>"icon_text",
+                'column_width'=> "100",
+                'order'=>"8",
+                'template'=>'fc1',
+                'help'=>0,
+                'help_text'=>'',
+                'enabled'=>1
+            );
+        }
+        if(!empty($__cat__['wbc_fabric_cat'])){
+            $filter['d_fconfig'][]=array(
+                'name'=>$__cat__['wbc_fabric_cat'][0],
+                'type'=>"0",
+                'label'=>$__cat__['wbc_fabric_cat'][1],
+                'advance'=>"0",
+                'dependent'=>"0",
+                'input'=>"button",
+                'column_width'=> "50",
+                'order'=>"9",
+                'template'=>'fc1',
+                'help'=>0,
+                'help_text'=>'',
+                'enabled'=>1
+            );
+        }
+
+        //Filters for Bottom Wear....
         if(!empty($__cat__['wbc_bottom_wear_cat'])){
             $filter['s_fconfig'][]=array(
                 'name'=>$__cat__['wbc_bottom_wear_cat'][0],
@@ -2104,32 +2123,16 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                 'enabled'=>1
             );
         }
-        if(!empty($__cat__['wbc_pattern_cat'])){
-            $filter['d_fconfig'][]=array(
-                'name'=>$__cat__['wbc_pattern_cat'][0],
-                'type'=>"0",
-                'label'=>$__cat__['wbc_pattern_cat'][1],
-                'advance'=>"0",
-                'dependent'=>"0",
-                'input'=>"icon_text",
-                'column_width'=> "100",
-                'order'=>"8",
-                'template'=>'fc1',
-                'help'=>0,
-                'help_text'=>'',
-                'enabled'=>1
-            );
-        }
-        if(!empty($__cat__['wbc_fabric_cat'])){
-            $filter['d_fconfig'][]=array(
-                'name'=>$__cat__['wbc_fabric_cat'][0],
-                'type'=>"0",
-                'label'=>$__cat__['wbc_fabric_cat'][1],
+        if(!empty($__att__['wbc_cloth_fit_attr'])){
+            $filter['s_fconfig'][]=array(
+                'name'=>$__att__['wbc_cloth_fit_attr'][0],
+                'type'=>"1",
+                'label'=>$__att__['wbc_cloth_fit_attr'][1],
                 'advance'=>"0",
                 'dependent'=>"0",
                 'input'=>"text_slider",
                 'column_width'=> "50",
-                'order'=>"9",
+                'order'=>"3",
                 'template'=>'fc1',
                 'help'=>0,
                 'help_text'=>'',

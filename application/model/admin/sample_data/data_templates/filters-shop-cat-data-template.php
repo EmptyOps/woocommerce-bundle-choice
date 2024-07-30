@@ -1142,7 +1142,7 @@ class Filters_Shop_Cat_Data_Template extends Pair_Builder_Data_Template {
         if(!empty($__att__['eo_shape_attr'])){
             $filter['d_fconfig'][]=array(
                 'name'=>$__att__['eo_shape_attr'][0],
-                'type'=>"0",
+                'type'=>"1",
                 'label'=>$__att__['eo_shape_attr'][1],
                 'elements'=>"round,oval,cushion,pear,princess,emerald,marquise,asscher,radiant,heart",
                 'advance'=>"0",
@@ -1197,7 +1197,7 @@ class Filters_Shop_Cat_Data_Template extends Pair_Builder_Data_Template {
                 'name'=>'pa_'.$__att__['eo_metal_attr'][0],
                 'type'=>"0",
                 'label'=>$__att__['eo_metal_attr'][1],
-                'advance'=>"0",
+                'advance'=>"1",
                 'dependent'=>"0",
                 'input'=>"icon",
                 'column_width'=> "50",
