@@ -162,8 +162,6 @@ if(!class_exists('Woo_Bundle_Choice') ) {
 
 			// admin 
 			if( is_admin() ) {
-
-				\eo\wbc\model\data_model\SP_WBC_Product::instance()->admin_hooks();
 				
 				$page_slug = wbc()->sanitize->get('page');
 				if( strpos($page_slug, "---theme-adaption") !== FALSE ) {
@@ -197,6 +195,11 @@ if(!class_exists('Woo_Bundle_Choice') ) {
 			ACTIVE_TODO we need to create one function or flow to call all such hooks related binding from root class init function of this class end sp_index class.
 			ACTIVE_TODO_OC_END*/
 			\eo\wbc\model\data_model\SP_WBC_Product::hooks();
+
+			if(is_admin()) {
+
+				\eo\wbc\model\data_model\SP_WBC_Product::instance()->admin_hooks();
+			}
 
 			do_action( 'before_eowbc_load' );
 			

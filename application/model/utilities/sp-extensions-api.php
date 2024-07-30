@@ -260,9 +260,9 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 			    	//skip fields where applicable
 					if(isset($fv["eas"]) && is_array($fv["eas"]) {
 
-						if( self::section_should_mack_call($mode, $form_definition, $fv["eas"]) ) {
+						if( self::section_should_make_call($mode, $form_definition, $fv["eas"]) ) {
 
-							$section_fildes = self::retry_section_fildes($mode, $form_definition, $fv["eas"]);
+							$section_fildes = self::retrieve_section_fildes($mode, $form_definition, $fv["eas"]);
 
 
 							$response = self::call();
@@ -386,12 +386,12 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
     	}
     }
 
-    private static function section_should_mack_call($mode, $form_definition, $section_property) {
+    private static function section_should_make_call($mode, $form_definition, $section_property) {
 
     	return false;
     }
 
-    private static function retry_section_fildes($mode, $form_definition, $section_property) {
+    private static function retrieve_section_fildes($mode, $form_definition, $section_property) {
 
     }
 
