@@ -1196,10 +1196,12 @@ class Eowbc_Sample_Data {
         			$_POST['range_first']='';
 	                $_POST['eo_wbc_first_category']=$first;
 	                $_POST['eo_wbc_first_category_range']='';
+	                $_POST['first_filter_query_type']='options';
 
 	                $_POST['range_second']='';
 	                $_POST['eo_wbc_second_category']=$second;
 	                $_POST['eo_wbc_second_category_range']='';
+	                $_POST['second_filter_query_type']='options';
 
                     $_POST['eo_wbc_add_discount']='0';
 
@@ -1209,9 +1211,11 @@ class Eowbc_Sample_Data {
         			unset($_POST['range_first']);
 	                unset($_POST['eo_wbc_first_category']);
 	                unset($_POST['eo_wbc_first_category_range']);
+	                unset($_POST['first_filter_query_type']);
 	                unset($_POST['range_second']);
 	                unset($_POST['eo_wbc_second_category']);
 	                unset($_POST['eo_wbc_second_category_range']);
+	                unset($_POST['second_filter_query_type']);
                     unset($_POST['eo_wbc_add_discount']);
 
 			        // update_option('eo_wbc_cat_maps',serialize($maps)); 
