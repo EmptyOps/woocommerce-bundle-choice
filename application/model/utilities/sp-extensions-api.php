@@ -209,20 +209,22 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
 	public static function admin_hooks() {
 
-		$form_definition = add_filter('wbc_form_builder_model_after_get', function($form_definition, $hooked_args){
+		add_filter('wbc_form_builder_model_after_get', function($form_definition, $hooked_args){
 
 			$args = array();
 			$args['hook_callback_args'] = $hooked_args;
-			self::process_form_definition('get', $form_definition, $args);
+
+			return self::process_form_definition('get', $form_definition, $args);
 		}, 50, 2);
 
-		$res = add_filter('wbc_form_builder_model_before_save', function($res, $form_definition, $is_auto_insert_for_template, $hooked_args){
+		add_filter('wbc_form_builder_model_before_save', function($res, $form_definition, $is_auto_insert_for_template, $hooked_args){
 
 			$args = array();
 			$args['res'] = $res;
 			$args['hook_callback_args'] = $hooked_args;
 			$args['is_auto_insert_for_template'] = $is_auto_insert_for_template;
-			self::process_form_definition('save', $form_definition, $args);
+
+			return self::process_form_definition('save', $form_definition, $args);
 		}, 50, 4);
     }
 
@@ -262,7 +264,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
 						if( self::section_should_make_call($mode, $form_definition, $fv["eas"]) ) {
 
-							$section_fildes = self::retrieve_section_fildes($mode, $form_definition, $fv["eas"]);
+							$section_fields = self::retrieve_section_fields($mode, $form_definition, $fv["eas"]);
 
 
 							$response = self::call();
@@ -274,15 +276,15 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
 							$is_positive = self::is_response_positive($parsed);
 
-							self::apply_response_msg($is_positive, $mode, $form_definition, $section_fildes, $parsed);
+							self::apply_response_msg($is_positive, $mode, $form_definition, $section_fields, $parsed);
 
 							$res = null;
-							if( self::should_return($is_positive, $mode, $section_fildes, $parsed, $res) ) {
+							if( self::should_return($is_positive, $mode, $section_fields, $parsed, $res) ) {
 
 								return $res;
 							}
 
-							self::apply_stat_changes_to_section($is_positive, $mode, $form_definition, $section_fildes, $parsed);
+							self::apply_stat_changes_to_section($is_positive, $mode, $form_definition, $section_fields, $parsed);
 
 							\eo\wbc\system\core\publics\Eowbc_Base_Model_Publics::handle_response($mode, $parsed);
 						}
@@ -391,7 +393,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
     	return false;
     }
 
-    private static function retrieve_section_fildes($mode, $form_definition, $section_property) {
+    private static function retrieve_section_fields($mode, $form_definition, $section_property) {
 
     }
 
@@ -400,16 +402,16 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
     	return false;
     }
 
-    private static function apply_response_msg($is_positive, $mode, $form_definition, $section_fildes, $parsed) {
+    private static function apply_response_msg($is_positive, $mode, $form_definition, $section_fields, $parsed) {
 
     }
 
-    private static function should_return($is_positive, $mode, $section_fildes, $parsed, &$res) {
+    private static function should_return($is_positive, $mode, $section_fields, $parsed, &$res) {
 
     	return false;
     }
 
-    private static function apply_stat_changes_to_section($is_positive, $mode, $form_definition, $section_fildes, $parsed) {
+    private static function apply_stat_changes_to_section($is_positive, $mode, $form_definition, $section_fields, $parsed) {
 
     }
 }
