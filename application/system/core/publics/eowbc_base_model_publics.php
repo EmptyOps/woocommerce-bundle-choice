@@ -86,6 +86,21 @@ class Eowbc_Base_Model_Publics {
 
 	public static function handle_response($mode, $parsed){
 		
+		NOTE: hear other applicable layers of handle response function can come or may come.
+
+		if(!empty($parsed['sf'])){
+
+			return $parsed['sf'];
+		}
+
+		foreach($parsed['sf'] as $sfk => $sfv){
+
+			if(!empty($sfv['st'])){
+
+
+			}
+		}
+		
 	}
 
 }
