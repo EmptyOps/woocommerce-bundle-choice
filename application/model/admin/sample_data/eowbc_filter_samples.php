@@ -1214,7 +1214,7 @@ class Filter_Samples {
         if(!empty($__att__['eo_shape_attr'])){
             $this->filter['s_fconfig'][]=array(
                 'name'=>'pa_'.$__att__['eo_shape_attr'][0],
-                'type'=>"0",
+                'type'=>"1",
                 'label'=>$__att__['eo_shape_attr'][1],
                 'elements'=>"round,oval,cushion,pear,princess,emerald,marquise,asscher,radiant,heart",
                 'advance'=>"0",
@@ -1264,7 +1264,7 @@ class Filter_Samples {
         if(!empty($__att__['eo_metal_attr'])){
             $this->filter['s_fconfig'][]=array(
                 'name'=>'pa_'.$__att__['eo_metal_attr'][0],
-                'type'=>"0",
+                'type'=>"1",
                 'label'=>$__att__['eo_metal_attr'][1],
                 'advance'=>"0",
                 'dependent'=>"0",
@@ -1307,7 +1307,7 @@ class Filter_Samples {
         if(!empty($__att__['eo_shape_attr'])){
             $this->filter['s_fconfig'][]=array(
                 'name'=>'pa_'.$__att__['eo_shape_attr'][0],
-                'type'=>"0",
+                'type'=>"1",
                 'label'=>$__att__['eo_shape_attr'][1],
                 'elements'=>"round,oval,cushion,pear,princess,emerald,marquise,asscher,radiant,heart",
                 'advance'=>"0",
@@ -1357,7 +1357,7 @@ class Filter_Samples {
         if(!empty($__att__['eo_metal_attr'])){
             $this->filter['s_fconfig'][]=array(
                 'name'=>'pa_'.$__att__['eo_metal_attr'][0],
-                'type'=>"0",
+                'type'=>"1",
                 'label'=>$__att__['eo_metal_attr'][1],
                 'advance'=>"0",
                 'dependent'=>"0",
@@ -1400,7 +1400,7 @@ class Filter_Samples {
         if(!empty($__att__['eo_shape_attr'])){
             $this->filter['s_fconfig'][]=array(
                 'name'=>'pa_'.$__att__['eo_shape_attr'][0],
-                'type'=>"0",
+                'type'=>"1",
                 'label'=>$__att__['eo_shape_attr'][1],
                 'elements'=>"round,oval,cushion,pear,princess,emerald,marquise,asscher,radiant,heart",
                 'advance'=>"0",
@@ -1450,7 +1450,7 @@ class Filter_Samples {
         if(!empty($__att__['eo_metal_attr'])){
             $this->filter['s_fconfig'][]=array(
                 'name'=>'pa_'.$__att__['eo_metal_attr'][0],
-                'type'=>"0",
+                'type'=>"1",
                 'label'=>$__att__['eo_metal_attr'][1],
                 'advance'=>"0",
                 'dependent'=>"0",
@@ -1493,7 +1493,7 @@ class Filter_Samples {
         if(!empty($__att__['eo_shape_attr'])){
             $this->filter['s_fconfig'][]=array(
                 'name'=>'pa_'.$__att__['eo_shape_attr'][0],
-                'type'=>"0",
+                'type'=>"1",
                 'label'=>"Shape",    //$__att__['eo_shape_attr'][1],
                 'elements'=>"round,oval,cushion,pear,princess,emerald,marquise,asscher,radiant,heart",
                 'advance'=>"0",
@@ -1543,7 +1543,7 @@ class Filter_Samples {
 		if(!empty($__att__['eo_metal_attr'])){
             $this->filter['s_fconfig'][]=array(
                 'name'=>'pa_'.$__att__['eo_metal_attr'][0],
-                'type'=>"0",
+                'type'=>"1",
                 'label'=>$__att__['eo_metal_attr'][1],
                 'advance'=>"0",
                 'dependent'=>"0",
@@ -1586,7 +1586,7 @@ class Filter_Samples {
         if(!empty($__att__['eo_shape_attr'])){
             $this->filter['s_fconfig'][]=array(
                 'name'=>'pa_'.$__att__['eo_shape_attr'][0],
-                'type'=>"0",
+                'type'=>"1",
                 'label'=>$__att__['eo_shape_attr'][1],
                 'elements'=>"round,oval,cushion,pear,princess,emerald,marquise,asscher,radiant,heart",
                 'advance'=>"0",
@@ -1636,7 +1636,7 @@ class Filter_Samples {
         if(!empty($__att__['eo_metal_attr'])){
             $this->filter['s_fconfig'][]=array(
                 'name'=>'pa_'.$__att__['eo_metal_attr'][0],
-                'type'=>"0",
+                'type'=>"1",
                 'label'=>$__att__['eo_metal_attr'][1],
                 'advance'=>"0",
                 'dependent'=>"0",

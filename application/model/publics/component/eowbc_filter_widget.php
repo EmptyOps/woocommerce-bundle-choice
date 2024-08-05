@@ -2957,7 +2957,7 @@ class EOWBC_Filter_Widget {
 		"    });\n" .
 		"});\n";
 
-		wbc()->load->add_inline_script('', $inline_script, 'common');
+		wbc()->load->add_inline_script('', $inline_script, 'sp-wbc-common-footer');
 	}
 	
 	public function load_collapsable_desktop_price_filter() {
