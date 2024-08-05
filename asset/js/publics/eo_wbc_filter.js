@@ -2608,11 +2608,20 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		// <?php endif;?>
 		
 		let filter_name = jQuery(/*this*/element).attr('data-filter-slug');
+		let checklist_param_prefix = '';
+
+		if(button_filter_type == 1) {
+
+			checklist_param_prefix = 'checklist_';
+		} else {
+
+			checklist_param_prefix = 'cat_filter_';
+		}
 
 		if(jQuery(/*this*/element).hasClass('eo_wbc_button_selected')){
 			jQuery(/*this*/element).removeClass('eo_wbc_button_selected');
 			// let old_val = $("form#<?php echo $this->filter_prefix; ?>eo_wbc_filter  #checklist_<?php echo $filter['slug']; ?>").val();
-			let old_val = jQuery("form#"+ _this.sub_configs.filter_prefix +"eo_wbc_filter  #checklist_" + /*_this.sub_configs.filter_slug*/term_slug).val();
+			let old_val = jQuery("form#"+ _this.sub_configs.filter_prefix +"eo_wbc_filter  #"+ checklist_param_prefix + /*_this.sub_configs.filter_slug*/term_slug).val();
 			old_val = old_val.split(',');
 			if(old_val.indexOf(jQuery(/*this*/element).data('slug'))!=-1){
 				let _slug = jQuery(/*this*/element).data('slug');
@@ -2621,32 +2630,32 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 				});
 				new_val = old_val.join();
 				// $("form#<?php echo $this->filter_prefix; ?>eo_wbc_filter  #checklist_<?php echo $filter['slug']; ?>").val(new_val);
-				jQuery("form#"+ _this.sub_configs.filter_prefix +"eo_wbc_filter  #checklist_" + /*_this.sub_configs.filter_slug*/term_slug).val(new_val);
+				jQuery("form#"+ _this.sub_configs.filter_prefix +"eo_wbc_filter  #"+ checklist_param_prefix + /*_this.sub_configs.filter_slug*/term_slug).val(new_val);
 			}
 
 		} else {
 			jQuery(/*this*/element).addClass('eo_wbc_button_selected');
 			// let old_val = $("form#<?php echo $this->filter_prefix; ?>eo_wbc_filter  #checklist_<?php echo $filter['slug']; ?>").val();
-			let old_val = jQuery("form#"+ _this.sub_configs.filter_prefix +"eo_wbc_filter  #checklist_" + /*_this.sub_configs.filter_slug*/term_slug).val();
+			let old_val = jQuery("form#"+ _this.sub_configs.filter_prefix +"eo_wbc_filter  #"+ checklist_param_prefix + /*_this.sub_configs.filter_slug*/term_slug).val();
 			old_val = old_val.split(',');
 			if(old_val.indexOf(jQuery(/*this*/element).data('slug'))==-1){
 				let _slug = jQuery(/*this*/element).data('slug');
 				old_val.push(_slug);
 				new_val = old_val.join();
 				// $("form#<?php echo $this->filter_prefix; ?>eo_wbc_filter  #checklist_<?php echo $filter['slug']; ?>").val(new_val);
-				jQuery("form#"+ _this.sub_configs.filter_prefix +"eo_wbc_filter  #checklist_" + /*_this.sub_configs.filter_slug*/term_slug).val(new_val);
+				jQuery("form#"+ _this.sub_configs.filter_prefix +"eo_wbc_filter  #"+ checklist_param_prefix + /*_this.sub_configs.filter_slug*/term_slug).val(new_val);
 			}
 		}
 
 		// if(filter_target.val().includes(filter_name) && $("form#<?php echo $this->filter_prefix; ?>eo_wbc_filter  #checklist_<?php echo $filter['slug']; ?>").val().length==0) {
-		if(filter_target.val().includes(filter_name) && jQuery("form#"+ _this.sub_configs.filter_prefix +"eo_wbc_filter  #checklist_" + /*_this.sub_configs.filter_slug*/term_slug).val().length==0) {
+		if(filter_target.val().includes(filter_name) && jQuery("form#"+ _this.sub_configs.filter_prefix +"eo_wbc_filter  #"+ checklist_param_prefix + /*_this.sub_configs.filter_slug*/term_slug).val().length==0) {
 			filter_target.val(filter_target.val().replace(','+filter_name,''));
 
 		// } else { if((!filter_target.val().includes(filter_name)) && $("form#<?php echo $this->filter_prefix; ?>eo_wbc_filter #checklist_<?php echo $filter['slug']; ?>").val().length) {
-		} else { if((!filter_target.val().includes(filter_name)) && jQuery("form#"+ _this.sub_configs.filter_prefix +"eo_wbc_filter #checklist_" + /*_this.sub_configs.filter_slug*/term_slug).val().length) {
+		} else { if((!filter_target.val().includes(filter_name)) && jQuery("form#"+ _this.sub_configs.filter_prefix +"eo_wbc_filter #"+ checklist_param_prefix + /*_this.sub_configs.filter_slug*/term_slug).val().length) {
 
 			filter_target.val(filter_target.val()+','+filter_name);	
-		} }	
+		} }		
 
 		// <?php if(empty(wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','filter_setting_btnfilter_now'))): ?>
 		if(_this.sub_configs.filter_setting_btnfilter_now != 'filter_setting_btnfilter_now'){

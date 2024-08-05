@@ -1947,7 +1947,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
         }
         if(!empty($__att__['wbc_cloth_colour_attr'])){
             $filter['d_fconfig'][]=array(
-                'name'=>$__att__['wbc_cloth_colour_attr'][0],
+                'name'=>'pa_'.$__att__['wbc_cloth_colour_attr'][0],
                 'type'=>"1",
                 'label'=>$__att__['wbc_cloth_colour_attr'][1],
                 'advance'=>"0",
@@ -1963,7 +1963,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
         }
         if(!empty($__att__['wbc_cloth_size_attr'])){
             $filter['d_fconfig'][]=array(
-                'name'=>$__att__['wbc_cloth_size_attr'][0],
+                'name'=>'pa_'.$__att__['wbc_cloth_size_attr'][0],
                 'type'=>"1",
                 'label'=>$__att__['wbc_cloth_size_attr'][1],
                 'advance'=>"1",
@@ -1979,7 +1979,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
         }
         if(!empty($__att__['wbc_cloth_sleeve_attr'])){
             $filter['d_fconfig'][]=array(
-                'name'=>$__att__['wbc_cloth_sleeve_attr'][0],
+                'name'=>'pa_'.$__att__['wbc_cloth_sleeve_attr'][0],
                 'type'=>"1",
                 'label'=>$__att__['wbc_cloth_sleeve_attr'][1],
                 'advance'=>"0",
@@ -1995,7 +1995,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
         }
         if(!empty($__att__['wbc_cloth_neck_attr'])){
             $filter['d_fconfig'][]=array(
-                'name'=>$__att__['wbc_cloth_neck_attr'][0],
+                'name'=>'pa_'.$__att__['wbc_cloth_neck_attr'][0],
                 'type'=>"1",
                 'label'=>$__att__['wbc_cloth_neck_attr'][1],
                 'advance'=>"1",
@@ -2011,7 +2011,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
         }
         if(!empty($__att__['wbc_cloth_occasion_attr'])){
             $filter['d_fconfig'][]=array(
-                'name'=>$__att__['wbc_cloth_occasion_attr'][0],
+                'name'=>'pa_'.$__att__['wbc_cloth_occasion_attr'][0],
                 'type'=>"1",
                 'label'=>$__att__['wbc_cloth_occasion_attr'][1],
                 'advance'=>"1",
@@ -2027,7 +2027,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
         }
         if(!empty($__att__['wbc_cloth_collar_attr'])){
             $filter['d_fconfig'][]=array(
-                'name'=>$__att__['wbc_cloth_collar_attr'][0],
+                'name'=>'pa_'.$__att__['wbc_cloth_collar_attr'][0],
                 'type'=>"1",
                 'label'=>$__att__['wbc_cloth_collar_attr'][1],
                 'advance'=>"1",
@@ -2093,7 +2093,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
         }
         if(!empty($__att__['wbc_cloth_closure_type_attr'])){
             $filter['s_fconfig'][]=array(
-                'name'=>$__att__['wbc_cloth_closure_type_attr'][0],
+                'name'=>'pa_'.$__att__['wbc_cloth_closure_type_attr'][0],
                 'type'=>"1",
                 'label'=>$__att__['wbc_cloth_closure_type_attr'][1],
                 'advance'=>"0",
@@ -2109,7 +2109,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
         }
         if(!empty($__att__['wbc_cloth_length_attr'])){
             $filter['s_fconfig'][]=array(
-                'name'=>$__att__['wbc_cloth_length_attr'][0],
+                'name'=>'pa_'.$__att__['wbc_cloth_length_attr'][0],
                 'type'=>"1",
                 'label'=>$__att__['wbc_cloth_length_attr'][1],
                 'advance'=>"0",
@@ -2125,7 +2125,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
         }
         if(!empty($__att__['wbc_cloth_fit_attr'])){
             $filter['s_fconfig'][]=array(
-                'name'=>$__att__['wbc_cloth_fit_attr'][0],
+                'name'=>'pa_'.$__att__['wbc_cloth_fit_attr'][0],
                 'type'=>"1",
                 'label'=>$__att__['wbc_cloth_fit_attr'][1],
                 'advance'=>"0",

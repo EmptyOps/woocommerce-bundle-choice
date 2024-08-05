@@ -2360,6 +2360,7 @@ class EOWBC_Filter_Widget {
 		$width = $column_width;
 		$reset =  !empty($reset);	
 		$help=(!empty(${$__prefix.'_fconfig_add_help'})?${$__prefix.'_fconfig_add_help_text'}:'');	
+		$checklist_param_prefix = '';
 		
 		if(!empty($text_slider_prefix)) {
 			$prefix = $text_slider_prefix;
@@ -2383,12 +2384,20 @@ class EOWBC_Filter_Widget {
 		
 		if(empty($filter)) return false;
 
+		if($filter_type == 1) {
+
+			$checklist_param_prefix = 'checklist_';
+		} else {
+
+			$checklist_param_prefix = 'cat_filter_';
+		}
+
 		array_push($this->__filters,array(
 										"type"=>"hidden",
-										"name"=>"checklist_".$filter['slug'],
-										"id"=>"checklist_".$filter['slug'],
+										"name"=>$checklist_param_prefix.$filter['slug'],
+										"id"=>$checklist_param_prefix.$filter['slug'],
 										"class"=>"",
-									"value"=>/*implode(',',wbc()->common->array_column($filter['list'],'slug'))*/'',
+										"value"=>/*implode(',',wbc()->common->array_column($filter['list'],'slug'))*/'',
 									));
 		if($desktop):
 			if(($item['filter_template']==apply_filters('eowbc_filter_prefix',$this->filter_prefix).'theme'/* and $this->_category==$this->second_category_slug) or ($this->first_theme=='theme' and $this->_category==$this->first_category_slug*/) or ($item['filter_template'] === 'theme' and ($this->is_shop_cat_filter or $this->is_shortcode_filter))) {

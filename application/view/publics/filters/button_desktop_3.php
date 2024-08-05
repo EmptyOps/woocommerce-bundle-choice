@@ -17,7 +17,7 @@
 		</p>
 		<div class="ui horizontal segments" data-reset="reset_button(new Event('click'),'.checklist_<?php echo esc_attr($filter['slug']); ?>')">
 			<?php foreach ($filter['list'] as $term) : ?>
-				<div class="ui segment wbc-button-input checklist_<?php echo esc_attr($filter['slug']); ?>" id='check_<?php echo esc_attr($term['slug']); ?>' data-slug="<?php echo esc_attr($term['slug']); ?>" data-filter-slug="<?php echo esc_attr($filter['slug']); ?>" data-filter-type="<?php echo esc_attr($filter_type); ?>" >
+				<div class="ui segment wbc-button-input checklist_<?php echo esc_attr($filter['slug']); ?>" id='check_<?php echo esc_attr($term['slug']); ?>' data-slug="<?php echo esc_attr($term['slug']); ?>" data-filter-slug="<?php echo esc_attr($filter['slug']); ?>" data-filter-type="<?php echo esc_attr($filter_type); ?>" data-type = "<?php echo esc_attr($type); ?>" >
 			      <span><?php echo esc_html($term['name']); ?></span>
 			    </div>			
 			<?php endforeach; ?>

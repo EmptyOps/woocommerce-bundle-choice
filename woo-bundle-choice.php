@@ -7,7 +7,7 @@
  * @package woo-bundle-choice
  *
  * @wordpress-plugin
- * Plugin Name: Woo Choice Plugin | Ring Builder | Pair Maker | Guidance Tool ui_QCed_ashish_-2
+ * Plugin Name: Woo Choice Plugin | Ring Builder | Pair Maker | Guidance Tool ui_QCed_prince
  * Plugin URI: https://wordpress.org/plugins/woo-bundle-choice/
  * Description: Product bundling as ring builder for jewelry, pair maker for clothing and guidance tool for home decor, cosmetics etc. Product bundling as per user's choice.
 <<<<<<< HEAD
