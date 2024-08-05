@@ -390,6 +390,11 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
     private static function section_should_make_call($mode, $form_definition, $section_property) {
 
+    	if('get' == $mode) {
+
+    		return true;
+    	}
+
     	return false;
     }
 
@@ -413,5 +418,10 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
     private static function apply_stat_changes_to_section($is_positive, $mode, $form_definition, $section_fields, $parsed) {
 
+    	--	most obabely form here we need to return if $mode is save but stil there might be somthing that we need to handle for the save mode but it is mostly unlikely that we have somthing to do . so simply remove the open comment after this function finalizes  -- to h to pi
+    	if('save' == $mode) {
+
+    		return $mode;
+    	}
     }
 }
