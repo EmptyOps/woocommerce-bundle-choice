@@ -85,8 +85,25 @@ box-shadow: none;">
 		                		<td>Assets will be generated based on your theme color styling. For example, based on your theme primary color and secondary color the assets will be generated. And if you have not yet set the primary color and the secondary color setting then you will be asked to set that below.</td>
 		             		</tr>
 		              		<tr>
-		                		<td>                    
-		                  			        
+		                		<td> 
+		                			<?php
+		                			$primary_color = wbc()->options->get_option('appearance_global','theme_primary_color'); 
+		                			$secondary_color = wbc()->options->get_option('appearance_global','theme_secondary_color');
+		                			?> 
+
+		                  			<?php if(empty($primary_color) || empty($secondary_color)):?> 
+
+		                  				It seems that you have not yet set the Primary Color or Secondary Color. So please go to below link and set Primary Color and Secondary Color.<br><br>
+
+		                  				After clicking below link go to the <b>Global</b> sub tab and and then look for Primary Color and Secondary Color. 
+		                  				<br>
+		                  				-- common helper function ma site url function hase e use kri ne url bnavani che
+		                  					-- error log ave ema j link ave view ni ema has tag pachal ave e levu
+		                  				<a href="/wp-admin/admin.php?page=eowbc-appearance" style="color:red; text-align: center;">Go to appearance admin page</a>
+		                  				<br><br>
+
+		                  				After you have set the Primary Color and Secondary Color then come back here again to continue the sample data process.
+		                  			<?php endif; ?>    
 	                   			</td>
 	              			           		                	
 	                	<?php endif; ?>
@@ -121,7 +138,16 @@ box-shadow: none;">
 
 	              		<?php if($sample_data_obj->get_model()->additional_initial_step_key($_step) == 'generate_assets'):?>
 
-	              			<input type="submit" name="save" value="<?php printf(__("Generate assets","woo-bundle-choice")); ?>"  class="button button-primary button-hero action ui button secondary">	
+	              			<?php
+	                			$primary_color = wbc()->options->get_option('appearance_global','theme_primary_color'); 
+	                			$secondary_color = wbc()->options->get_option('appearance_global','theme_secondary_color');
+		                	?> 
+
+		                	<?php if(!empty($primary_color) && !empty($secondary_color)):?>
+
+		                  		<input type="submit" name="save" value="<?php printf(__("Generate assets","woo-bundle-choice")); ?>"  class="button button-primary button-hero action ui button secondary">
+
+		                  	<?php endif; ?> 
 
 	              		<?php endif; ?>
 
