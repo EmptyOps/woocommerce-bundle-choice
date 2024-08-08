@@ -55,5 +55,10 @@ class SP_WBC_Product extends SP_Product {
 	    // ACTIVE_TODO_OC_END
     }
 
+    public static function admin_hooks() {
+
+    	\eo\wbc\model\utilities\SP_Extensions_Api::instance()->admin_hooks();
+    }
+
 
 }
