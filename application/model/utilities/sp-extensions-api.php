@@ -262,7 +262,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 			    	//skip fields where applicable
 					if(isset($fv["eas"]) && is_array($fv["eas"]) {
 
-						if( self::section_should_make_call($mode, $form_definition, $fv["eas"]) ) {
+						if( self::section_should_make_call($mode, $form_definition, $fv["eas"], $fk) ) {
 
 							$section_fields = self::retrieve_section_fields($mode, $form_definition, $fv["eas"]);
 
@@ -388,11 +388,19 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
     	}
     }
 
-    private static function section_should_make_call($mode, $form_definition, $section_property) {
+    private static function section_should_make_call($mode, $form_definition, $section_property, $fk) {
 
     	if('get' == $mode) {
 
     		return true;
+    	}
+
+    	if('save' == $mode) {
+
+    		if( ( empty( wbc()->options->get_option($section_property['tab_key'], $fk)) && isset( in_array($fv["type"], \eo\wbc\model\admin\Form_Builder::savable_types()) && ( isset($_POST[$fk]) || $fv["type"]=='checkbox') ) ) || ( !empty( wbc()->options->get_option($section_property['tab_key'], $fk) ) && !isset( in_array($fv["type"], \eo\wbc\model\admin\Form_Builder::savable_types()) && ( isset($_POST[$fk]) || $fv["type"]=='checkbox') ) ) ) {
+
+    			return true;
+    		}
     	}
 
     	return false;
