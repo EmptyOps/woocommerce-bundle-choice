@@ -2138,8 +2138,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                 'help_text'=>'',
                 'enabled'=>1
             );
-        }
-        
+        } 
 
         return $filter;
     }
