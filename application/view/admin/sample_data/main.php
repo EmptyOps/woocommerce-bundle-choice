@@ -93,16 +93,14 @@ box-shadow: none;">
 
 		                  			<?php if(empty($primary_color) || empty($secondary_color)):?> 
 
-		                  				It seems that you have not yet set the Primary Color or Secondary Color. So please go to below link and set Primary Color and Secondary Color.<br><br>
+		                  				It seems that you have not yet set the Primary Color or Secondary Color. So please go to below link and set the Primary Color and Secondary Color.<br><br>
 
-		                  				After clicking below link go to the <b>Global</b> sub tab and and then look for Primary Color and Secondary Color. 
+		                  				After clicking below link go to the <b>Global</b> sub tab and then look for the Primary Color and Secondary Color. 
 		                  				<br>
-		                  				-- common helper function ma site url function hase e use kri ne url bnavani che
-		                  					-- error log ave ema j link ave view ni ema has tag pachal ave e levu
-		                  				<a href="/wp-admin/admin.php?page=eowbc-appearance" style="color:red; text-align: center;">Go to appearance admin page</a>
+		                  				<a href='<?php echo wbc()->common->admin_url("admin.php?page=eowbc-appearance&atol=global"); ?>' style="color:red; text-align: center;">Go to appearance admin page</a>
 		                  				<br><br>
 
-		                  				After you have set the Primary Color and Secondary Color then come back here again to continue the sample data process.
+		                  				After you have set the Primary Color and Secondary Color then <b>come back here again</b> to continue the sample data process.
 		                  			<?php endif; ?>    
 	                   			</td>
 	              			           		                	

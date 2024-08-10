@@ -447,6 +447,11 @@ class WBC_Common {
     	return $url;
     }
 
+    public function admin_url($path=''){
+
+    	return admin_url( $path );
+    }
+
     public function current_uri(){
     	return $_SERVER['REQUEST_URI'];
     }
