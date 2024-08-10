@@ -2133,7 +2133,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                 'input'=>"text_slider",
                 'column_width'=> "50",
                 'order'=>"3",
-                'template'=>'fc1',
+                'template'=>'sc1',
                 'help'=>0,
                 'help_text'=>'',
                 'enabled'=>1
