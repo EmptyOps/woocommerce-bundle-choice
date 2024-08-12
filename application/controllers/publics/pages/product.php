@@ -774,13 +774,14 @@ class Product extends \eo\wbc\system\core\publics\Eowbc_Base_Model_Publics {
                     <!-- WBC{ WooCommerce Product Bundle Choice wiget ENDS. } -->
                     <?php
                 }
+                global $post;
                 $page_category = esc_attr($this->page_category);
                 $post_ID = esc_attr($post->ID);
                 $inline_script = 
                     "jQuery(document).ready(function(){\n" .
                     "    jQuery('form.cart').prepend(\"<input type='hidden' name='eo_wbc_target' value='".$page_category."'/><input type='hidden' name='eo_wbc_product_id' value='".$post_ID."'/>\");\n" .
                     "});\n";
-                wbc()->load->add_inline_script('', $inline_script, 'common');
+                wbc()->load->add_inline_script('', $inline_script, 'sp-wbc-common-footer');
             });
         }       
     }
