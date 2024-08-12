@@ -185,7 +185,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
         return array(
                     array(
                         'thumb' => '',
-                        'name' => 'Top wear',
+                        'name' => 'Top wear type',
                         'description' => 'Top wear category',
                         'slug' => 'wbc_top_wear_cat',
                         'child'=> 
@@ -327,7 +327,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                     ),
                     array(
                         'thumb' => '',
-                        'name' => 'Bottom wear',
+                        'name' => 'Bottom wear type',
                         'description' => 'Bottom wear category',
                         'slug' => 'wbc_bottom_wear_cat',
                         'child'=> 
