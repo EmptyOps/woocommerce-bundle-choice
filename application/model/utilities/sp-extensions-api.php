@@ -262,12 +262,25 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 			    	//skip fields where applicable
 					if(isset($fv["eas"]) && is_array($fv["eas"]) {
 
+						$fv = self::inject_onclick_attr($mode, $form_definition, $fv["eas"], $fv);
+
 						if( self::section_should_make_call($mode, $form_definition, $fv["eas"], $fk) ) {
 
-							$section_fields = self::retrieve_section_fields($mode, $form_definition, $fv["eas"]);
+							$section_fields = self::retrieve_section_fields($mode, $tab["form"], $fv["eas"], $fk);
+
+							$payload = array();
+							$payload['data'] = array();
+
+							foreach($section_fields as $sfk => $sfv){
+
+								if(in_array($sfv["type"], \eo\wbc\model\admin\Form_Builder::savable_types())){
+
+									$payload['data'][$sfk] = $sfv['value'];
+								}
+							}
 
 
-							$response = self::call();
+							$response = self::call(-- url need to be passed, , $payload);
 
 							$parsed = \eo\wbc\system\core\publics\Eowbc_Base_Model_Publics::parse_response($response);
 
@@ -388,6 +401,29 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
     	}
     }
 
+    private static function inject_onclick_attr($mode, $form_definition, $section_property, $fv) {
+
+    	if(empty($fv['attr'])){
+
+    		$fv['attr'] = array();
+    	}
+
+    	if(!is_array($fv['attr'])){
+
+    		throw new \Exception("wbc form builder : The eas filed should defined the 'attr' property in array format only. the string format is not sported.", 1); 
+    	}
+
+    	NOTE : This is done to anchor decode compatibility.
+    	if(!isset($fv['attr']['onclick'])){
+
+    		$fv['attr']['onclick'] = '';
+    	}
+
+    	$fv['attr']['onclick'] = "alert('Since you have changed the switch, after save action the api settings will be updated so you need to test the related feature on the website frontend and elsewhere as applicable. And this applies to changes made to any field of this switch section so be sure to test related feature if you have changed any field of this switch section.');" . $fv['attr']['onclick'];
+
+    	return $fv;
+    }
+
     private static function section_should_make_call($mode, $form_definition, $section_property, $fk) {
 
     	if('get' == $mode) {
@@ -406,8 +442,19 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
     	return false;
     }
 
-    private static function retrieve_section_fields($mode, $form_definition, $section_property) {
+    private static function retrieve_section_fields($mode, $tab_form, $section_property, $fk) {
 
+    	$section_fields = array();
+
+    	foreach($tab_form as $fk_inner => $fv_inner){
+
+    		if($fk == $fk_inner || (isset($fv_inner['easf']) && $fk == $fv_inner['easf'])){
+
+    			$section_fields[] = $fv_inner;
+    		}
+    	}
+
+    	return $section_fields;
     }
 
     private static function is_response_positive($parsed) {
