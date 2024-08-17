@@ -82,20 +82,28 @@ class Eowbc_Base_Model_Publics {
 
 	public static function parse_response($response){
 		
+		--	we need to check the result of above call and then check if there is any stardered wordprees error otherwise return the result and if there is the error then return the result acodingly. -- to h
+		if ( empty($result) ) {
+
+			throw new \Exception("There is some error in the api call response.", 1);
+		} elseif ( is_wp_error($result) ) {
+
+			throw new \Exception("There is some error in the api call. error massege: " . $result->get_error_message(), 1);
+		}
 	}
 
 	public static function handle_response($mode, $parsed){
 		
 		NOTE: here other applicable layers of handle response function can come or may come.
 
-		if(!empty($parsed['sf'])){
+		if( !empty($parsed['sf']) ) {
 
 			return $parsed['sf'];
 		}
 
-		foreach($parsed['sf'] as $sfk => $sfv){
+		foreach ($parsed['sf'] as $sfk => $sfv) {
 
-			if(!empty($sfv['st'])){
+			if( !empty($sfv['st']) ) {
 
 
 			}

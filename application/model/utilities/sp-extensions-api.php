@@ -27,6 +27,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 	}
 
 	public function configuration_run() {
+
 		--	shude we rename extars check hook below to somthing like extars configrtion check or configrtion check?
 		do_action('sp_wbc_extras_check');
 	}
@@ -123,16 +124,11 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
 		$result = wp_remote_get($url);
 
-		--	we need to check the result of above call and then check if there is any stardered wordprees error otherwise return the result and if there is the error then return the result acodingly. -- to h
-		if ( empty($result) ) {
+		$parsed = \eo\wbc\system\core\publics\Eowbc_Base_Model_Publics::parse_response($result);
 
-			throw new \Exception("There is some error in the api call response.", 1);
-		} elseif ( is_wp_error($result) ) {
+		wbc_free_memory($result);
 
-			throw new \Exception("There is some error in the api call. error massege: " . $result->get_error_message(), 1);
-		}
-
-		return $result;
+		return $parsed;
 	}
 
 	private static function additional_data(&$query_string, &$payload) {
@@ -157,7 +153,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 		$active_parent_theme_slug = '';
 		$active_parent_theme_version = '';
 
-		if ( function_exists('get_plugins') ) {
+		if( function_exists('get_plugins') ) {
 
 			$plugins=get_plugins();	
 
@@ -165,7 +161,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 			foreach ($plugins as $plugin_path => $plugin_info) {
 
 				// Check if the plugin is active
-				if (is_plugin_active($plugin_path)) {
+				if( is_plugin_active($plugin_path) ) {
 
 					// If active, add it to the active plugins array
 					$active_plugins_slugs[] = dirname($plugin_path);
@@ -189,7 +185,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
 		$parent_themes = $theme->parent();
 
-		if ( $parent_themes ) {
+		if( $parent_themes ) {
 
 			$active_parent_theme_slug = $parent_themes->get_template(); // This will get the directory (slug) of the parent theme
 			$active_parent_theme_version = $parent_themes->get('Version');
@@ -260,7 +256,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 			    if( in_array($fv["type"], \eo\wbc\model\admin\Form_Builder::savable_types())) {
 
 			    	//skip fields where applicable
-					if(isset($fv["eas"]) && is_array($fv["eas"]) {
+					if( isset($fv["eas"]) && is_array($fv["eas"] ) {
 
 						$fv = self::inject_onclick_attr($mode, $form_definition, $fv["eas"], $fv);
 
@@ -271,25 +267,32 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 							$payload = array();
 							$payload['data'] = array();
 
-							foreach($section_fields as $sfk => $sfv){
+							foreach ($section_fields as $sfk => $sfv) {
 
-								if(in_array($sfv["type"], \eo\wbc\model\admin\Form_Builder::savable_types())){
+								if( in_array($sfv["type"], \eo\wbc\model\admin\Form_Builder::savable_types()) ) {
 
 									$payload['data'][$sfk] = $sfv['value'];
+
+									if( $fk == $sfk ) {
+
+										if( !empty($sfv['value']) ) {
+
+											$payload['data'][$sfk] = 1;
+										} else {
+
+											$payload['data'][$sfk] = 0;
+										}
+									}
 								}
 							}
 
 
-							$response = self::call(-- url need to be passed, , $payload);
-
-							$parsed = \eo\wbc\system\core\publics\Eowbc_Base_Model_Publics::parse_response($response);
-
-							wbc_free_memory($response);
+							$response = self::call($fv["eas"]["au"] . $fv["eas"]["ep"], , $payload);
 
 
 							$is_positive = self::is_response_positive($parsed);
 
-							self::apply_response_msg($is_positive, $mode, $form_definition, $section_fields, $parsed);
+							$form_definition[$key]["form"] = self::apply_response_msg($is_positive, $mode, $tab["form"], $section_fields, $parsed);
 
 							$res = null;
 							if( self::should_return($is_positive, $mode, $section_fields, $parsed, $res) ) {
@@ -391,10 +394,10 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
 	    }
 
-    	if($mode == 'get'){
+    	if( $mode == 'get' ) {
 
     		return $form_definition;
-    	}else{
+    	} else {
 
     		//default mode save
     		return $args['res'];
@@ -403,18 +406,18 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
     private static function inject_onclick_attr($mode, $form_definition, $section_property, $fv) {
 
-    	if(empty($fv['attr'])){
+    	if( empty($fv['attr']) ) {
 
     		$fv['attr'] = array();
     	}
 
-    	if(!is_array($fv['attr'])){
+    	if( !is_array($fv['attr']) ) {
 
     		throw new \Exception("wbc form builder : The eas filed should defined the 'attr' property in array format only. the string format is not sported.", 1); 
     	}
 
     	NOTE : This is done to anchor decode compatibility.
-    	if(!isset($fv['attr']['onclick'])){
+    	if( !isset($fv['attr']['onclick']) ) {
 
     		$fv['attr']['onclick'] = '';
     	}
@@ -426,12 +429,12 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
     private static function section_should_make_call($mode, $form_definition, $section_property, $fk) {
 
-    	if('get' == $mode) {
+    	if( 'get' == $mode ) {
 
     		return true;
     	}
 
-    	if('save' == $mode) {
+    	if( 'save' == $mode ) {
 
     		if( ( empty( wbc()->options->get_option($section_property['tab_key'], $fk)) && isset( in_array($fv["type"], \eo\wbc\model\admin\Form_Builder::savable_types()) && ( isset($_POST[$fk]) || $fv["type"]=='checkbox') ) ) || ( !empty( wbc()->options->get_option($section_property['tab_key'], $fk) ) && !isset( in_array($fv["type"], \eo\wbc\model\admin\Form_Builder::savable_types()) && ( isset($_POST[$fk]) || $fv["type"]=='checkbox') ) ) ) {
 
@@ -446,9 +449,9 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
     	$section_fields = array();
 
-    	foreach($tab_form as $fk_inner => $fv_inner){
+    	foreach ($tab_form as $fk_inner => $fv_inner) {
 
-    		if($fk == $fk_inner || (isset($fv_inner['easf']) && $fk == $fv_inner['easf'])){
+    		if( $fk == $fk_inner || (isset($fv_inner['easf']) && $fk == $fv_inner['easf']) ) {
 
     			$section_fields[] = $fv_inner;
     		}
@@ -462,8 +465,9 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
     	return false;
     }
 
-    private static function apply_response_msg($is_positive, $mode, $form_definition, $section_fields, $parsed) {
+    private static function apply_response_msg($is_positive, $mode, $tab_form, $section_fields, $parsed) {
 
+    	return $tab_form;
     }
 
     private static function should_return($is_positive, $mode, $section_fields, $parsed, &$res) {
@@ -474,7 +478,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
     private static function apply_stat_changes_to_section($is_positive, $mode, $form_definition, $section_fields, $parsed) {
 
     	--	most obabely form here we need to return if $mode is save but stil there might be somthing that we need to handle for the save mode but it is mostly unlikely that we have somthing to do . so simply remove the open comment after this function finalizes  -- to h to pi
-    	if('save' == $mode) {
+    	if( 'save' == $mode ) {
 
     		return $mode;
     	}
