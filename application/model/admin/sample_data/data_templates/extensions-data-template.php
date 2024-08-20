@@ -73,9 +73,9 @@ class Extensions_Data_Template extends \eo\wbc\model\admin\sample_data\data_temp
         // ACTIVE_TODO nothing added here so far but we can add some fundamental and generic operation related to extensions. -- to h
     }
 
-    public function generate_assets($feature_key) {
+    public function generate_assets($feature_key = '', $args = array()) {
 
-        \eo\wbc\model\utilities\SP_Extensions_Api::call('','');
+        \eo\wbc\model\utilities\SP_Extensions_Api::call($args['api_setting']['host'].$api_settings['endpoint'], "ihk = ".$api_settings['ihk'], array('sp_api_sf' => 'sp_dm', 'sp_api_fc' => 'get_attributes', 'sp_api_fk' => value ma apde a fuction ma arguement add kari ne karvani avse,'sp_api_bp' => . $basic_payload,array('sp_api_fk') => $feature_key));
         
     }
 }

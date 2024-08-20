@@ -189,12 +189,12 @@ box-shadow: none;">
 
 					var msg = 'There is some error while finishing the generate assets process, please contact Sphere Plugins Support for a quick fix on this if the problem persist.';
 
-				    //step 2 redirect;
+				    //ajax for additional initial step of generate asset;
 		            var data = {	                
 		                '_wpnonce': '<?php echo wp_create_nonce('sample_data_jewelry');?>',
 		                'action':'eowbc_ajax',
 		                'resolver':'sample_data/generate_assets',
-		                'resolver_path':'<?php echo apply_filters('eowbc_catattr_sample_data_resolver_path',''); ?>', 
+		                'resolver_path':'', 
 		                'feature_key':'<?php _e($feature_key); ?>',
 		                'type':'generate_assets',
 		            };
