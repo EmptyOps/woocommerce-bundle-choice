@@ -124,7 +124,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
 		$result = wp_remote_get($url);
 
-		$parsed = \eo\wbc\system\core\publics\Eowbc_Base_Model_Publics::parse_response($result);
+		$parsed = \eo\wbc\system\core\publics\Eowbc_Base_Model_Publics::parse_response($result, 'wp_remote_get');
 
 		wbc_free_memory($result);
 
@@ -200,7 +200,6 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 		$query_string .= "active_theme_version=" .  $active_theme_version . "&";
 
 		return $query_string;
-
 	}
 
 	public static function admin_hooks() {
@@ -287,7 +286,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 							}
 
 
-							$response = self::call($fv["eas"]["au"] . $fv["eas"]["ep"], , $payload);
+							$parsed = self::call($fv["eas"]["au"] . $fv["eas"]["ep"], , $payload);
 
 
 							$is_positive = self::is_response_positive($parsed);

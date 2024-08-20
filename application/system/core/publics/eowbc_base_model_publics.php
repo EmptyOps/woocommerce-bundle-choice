@@ -80,16 +80,26 @@ class Eowbc_Base_Model_Publics {
         /*End --Hide sidebar and make content area full width.*/
 	}
 
-	public static function parse_response($response){
+	public static function parse_response($response, $method){
+
+		$res = array();
+
+		if( constant('WP_DEBUG') == true ) {
+
+			wbc_pr('Eowbc_Base_Model_Publics parse_response');
+			wbc_pr($response);
+		}
 		
 		--	we need to check the result of above call and then check if there is any stardered wordprees error otherwise return the result and if there is the error then return the result acodingly. -- to h
-		if ( empty($result) ) {
+		if( empty($result) ) {
 
 			throw new \Exception("There is some error in the api call response.", 1);
 		} elseif ( is_wp_error($result) ) {
 
 			throw new \Exception("There is some error in the api call. error massege: " . $result->get_error_message(), 1);
 		}
+
+		return $res;
 	}
 
 	public static function handle_response($mode, $parsed){
