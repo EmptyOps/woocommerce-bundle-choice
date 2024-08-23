@@ -144,20 +144,22 @@ if(window.document.splugins.common.is_item_page || window.document.splugins.comm
     return (val == undefined || val == null || val.length <= 0) ? true : false;
  }
 
- window.document.splugins.common.find_get_parameter = function(parameterName) {
-    
+ window.document.splugins.common.find_get_parameter = function(parameterName, url = null) {
     var result = null,
         tmp = [];
-    location.search
-        .substr(1)
+
+    var searchUrl = url ? url : window.location.href;
+    searchUrl
+        .substring(searchUrl.indexOf('?') + 1)
         .split("&")
-        .forEach(function (item) {
+        .forEach(function(item) {
             tmp = item.split("=");
             if (tmp[0] === parameterName) result = decodeURIComponent(tmp[1]);
         });
 
     return result;
- }
+}
+
 
  // reference: https://stackoverflow.com/a/175787
  window.document.splugins.common.isNumeric = function(str) {
@@ -3896,7 +3898,7 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
            _this./*#*/on_variation_change_private(event, variation);
          
         });
- 
+        
     }
 
     /*#*/swatches_more_click_listener_private(type) {
@@ -4067,6 +4069,8 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
     
         var variation_url = _this./*#*/create_variation_url_private(_this./*#*/get_loop_box_anchor_private(), event, variation);
         var base_url = _this./*#*/get_loop_box_anchor_private().attr('href', variation_url);
+        console.log('common js notifyAllObservers');
+        window.document.splugins.events.api.notifyAllObservers( 'gallery_images', 'loop_box_anchor_link_updated', {anchor_tag_object:_this./*#*/get_loop_box_anchor_private()}, null ); 
 
     }
 
