@@ -91,12 +91,51 @@ class Eowbc_Base_Model_Publics {
 		}
 		
 		--	we need to check the result of above call and then check if there is any stardered wordprees error otherwise return the result and if there is the error then return the result acodingly. -- to h
-		if( empty($result) ) {
+		if( empty($response) ) {
 
 			throw new \Exception("There is some error in the api call response.", 1);
-		} elseif ( is_wp_error($result) ) {
+		} elseif ( is_wp_error($response) ) {
 
-			throw new \Exception("There is some error in the api call. error massege: " . $result->get_error_message(), 1);
+			throw new \Exception("There is some error in the api call. error massege: " . $response->get_error_message(), 1);
+		}
+
+		if(isset($response['body'])) {
+
+			$response = json_decode($response['body'],true);
+		} else {
+
+			$response = '';
+		}
+
+		if (isset($response['type'])) {
+		
+			$res['type'] = $response['type'];
+			
+			if (isset($response['msg'])) {
+				
+				$res['msg'] = $response['msg'];
+			}else{
+
+				$res['msg'] = '';
+			}
+
+		}else{
+
+			$res['type'] = 'error';
+
+			if (isset($response['msg'])) {
+				
+				$res['msg'] = $response['msg'];
+			}else{
+
+				$res['msg'] = 'Empty response found.';
+			}
+		}
+
+		if (isset($response['sf'])) {
+		
+			$res['sf'] = $response['sf'];
+			
 		}
 
 		return $res;

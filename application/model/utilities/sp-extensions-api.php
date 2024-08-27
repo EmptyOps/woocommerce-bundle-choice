@@ -461,10 +461,23 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
     private static function is_response_positive($parsed) {
 
+    	if( isset($parsed['type']) && 'success' == $parsed['type'] ) {
+
+    		return true;
+    	}
+
     	return false;
     }
 
     private static function apply_response_msg($is_positive, $mode, $tab_form, $section_fields, $parsed) {
+
+    	if($is_positive){
+
+    		return ;
+    	}
+
+    	--	hear we need to prepear the $res form $parsed by creating empty array and save. -- to h & -- to pi
+    	$res = $parsed
 
     	return $tab_form;
     }
