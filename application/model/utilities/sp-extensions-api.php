@@ -469,7 +469,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
     	return false;
     }
 
-    private static function apply_response_msg($is_positive, $mode, $tab_form, $section_fields, $parsed) {
+    private static function apply_response_msg($is_positive, $mode, $tab_form, $section_fields, $parsed, $fk) {
 
     	if($is_positive){
 
@@ -478,6 +478,16 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
     	--	hear we need to prepear the $res form $parsed by creating empty array and save. -- to h & -- to pi
     	$res = $parsed
+
+    	if('save' == $mode){
+
+    		--	from hear most obabely we need to return $res and it will be not prepared by should_return function most obabely. -- to h & -- to pi
+    	}
+
+    	if('get' == $mode){
+
+    		$tab_form = self::inject_visible_info_field($mode, $tab_form, $section_property, $fv, $parsed, $fk);
+    	}
 
     	return $tab_form;
     }
@@ -494,5 +504,10 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
     		return $mode;
     	}
+    }
+
+    private static function inject_visible_info_field($mode, $tab_form, $section_property, $fv, $parsed, $fk) {
+
+    	return $tab_form;
     }
 }
