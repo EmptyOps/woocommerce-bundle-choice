@@ -508,6 +508,14 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
     private static function inject_visible_info_field($mode, $tab_form, $section_property, $fv, $parsed, $fk) {
 
+    	'visible_info' => array(
+    		'label' => eowbc_lang($parsed['msg']),
+    		'type' => 'visible_info',
+    		'class' => array('small'),
+    		// 'size_class'=>array('sixteen','wide'),
+    		'attr'=>array('style' => 'color:' . ($parsed['type'] === 'error' ? 'red;' : 'yellow;')),
+    	),
+
     	return $tab_form;
     }
 }
