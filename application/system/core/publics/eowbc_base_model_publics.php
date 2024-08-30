@@ -118,7 +118,6 @@ class Eowbc_Base_Model_Publics {
 
 				$res['msg'] = '';
 			}
-
 		}else{
 
 			$res['type'] = 'error';
@@ -134,14 +133,13 @@ class Eowbc_Base_Model_Publics {
 
 		if (isset($response['sf'])) {
 		
-			$res['sf'] = $response['sf'];
-			
+			$res['sf'] = $response['sf'];	
 		}
 
 		return $res;
 	}
 
-	public static function handle_response($mode, $parsed){
+	public static function handle_response($parsed){
 		
 		NOTE: here other applicable layers of handle response function can come or may come.
 

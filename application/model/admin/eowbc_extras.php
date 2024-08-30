@@ -120,8 +120,7 @@ class Eowbc_Extras extends Eowbc_Model
 					$table_data["id"] = wbc()->common->createUniqueId();
 					$extras_data[wbc()->sanitize->post('map_creation_modification_id')] = $table_data;
 					wbc()->options->update_option_group('extras_' . $key, serialize($extras_data));
-					//update cache
-					\Cache_Manager::getInstance()->update_map_caches();
+
 					$res["msg"] = eowbc_lang('Extras Updated Successfully');
 					return $res;
 
@@ -152,12 +151,6 @@ class Eowbc_Extras extends Eowbc_Model
 				$extras_data[$table_data["id"]] = $table_data;
 
 				wbc()->options->update_option_group('extras_' . $key, serialize($extras_data));
-
-				//update cache
-				\Cache_Manager::getInstance()->update_map_caches();
-
-				// TODO here it is better if we set it to 1 only if length of extras_data is greater than zero and otherwise set to 0 if user removes maps and so on 
-				wbc()->options->update_option('configuration', 'config_map', 1);
 
 				$res["msg"] = eowbc_lang('New Extras Added Successfully');
 			}
