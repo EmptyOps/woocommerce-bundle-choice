@@ -13,8 +13,7 @@ class Eowbc_Extras extends Eowbc_Model
 
 	private static $_instance = null;
 
-	public static function instance()
-	{
+	public static function instance() {
 		if (!isset(self::$_instance)) {
 			self::$_instance = new self;
 		}
@@ -22,13 +21,11 @@ class Eowbc_Extras extends Eowbc_Model
 		return self::$_instance;
 	}
 
-	private function __construct()
-	{
+	private function __construct() {
 
 	}
 
-	public function get($form_definition, $args = null)
-	{
+	public function get($form_definition, $args = null) {
 
 		$page_slug = wbc()->sanitize->get('page');
 		$plugin_slug = explode("---", $page_slug)[0];
@@ -41,134 +38,6 @@ class Eowbc_Extras extends Eowbc_Model
 			foreach ($tab["form"] as $fk => $fv) {
 				if ($fv["type"] == "table") {
 
-					if ($fv['id'] == 'eowbc_run_check_list') {
-
-						$body = array();
-						foreach ($extras_config['widget_sections'] as $rk => $rv) {
-
-							$row = array();
-
-							//
-							// $row[] =array(
-							// 		'is_header' => 0, 
-							// 		'val' => '',
-							// 		'is_checkbox' => true, 
-							// 		'checkbox'=> array('id'=>'','value'=>array(),'options'=>array(0=>''),'class'=>'','where'=>'in_table')
-							// 	);
-
-							$row[] = array('val' => $rk);
-							$row[] = array('val' => "<a href=\"" . wbc()->common->site_url($rv['test_slug'], 'thadc=1&test_sec_key=' . $rk) . "\" target=\"_blank\">Check</a>" /*,'link'=>1,'edit_id'=>$rk*/);
-							$row[] = array('val' => 'Failing');
-
-							$body[] = $row;
-						}
-
-					} elseif ($fv['id'] == 'eowbc_result_list') {
-
-						$theme_adcheck_result = wbc()->options->get_option_group('thadcr_' . $plugin_slug, array());
-						$body = array();
-						foreach ($theme_adcheck_result as $curr_theme_key => $sections) {
-
-							$row = array();
-							$row[] = array('val' => 'Theme => ' . $curr_theme_key, 'colspan' => 6);
-							$body[] = $row;
-
-							foreach ($sections as $section_key => $section) {
-
-								$row = array();
-								$row[] = array('val' => $section_key);
-
-								foreach ($section as $required_key => $items) {
-
-									$row_new = $row;
-									$row_new[] = array('val' => $required_key);
-									foreach ($items as $itemkey => $item) {
-
-										$row_new_new = $row_new;
-										$row_new_new[] = array('val' => $item['key']);
-										$row_new_new[] = array('val' => $item['type']);
-										$row_new_new[] = array('val' => $item['tested_on_url']);
-										$row_new_new[] = array('val' => $item['result']);
-										$body[] = $row_new_new;
-									}
-
-								}
-
-							}
-
-						}
-
-					} else {
-						// wbc()->options->update_option_group( 'extras_'.$key, serialize(array()) );
-						$extras_data = unserialize(wbc()->options->get_option_group('extras_' . $key, "a:0:{}"));
-						//wbc()->common->pr($extras_data, false, false);
-
-						$body = array();
-						foreach ($extras_data as $rk => $rv) {
-							$row = array();
-
-							//
-							$row[] = array(
-								'is_header' => 0,
-								'val' => '',
-								'is_checkbox' => true,
-								'checkbox' => array('id' => $rv["id"], 'value' => array(), 'options' => array($rv["id"] => ''), 'class' => '', 'where' => 'in_table')
-							);
-
-							// foreach ($rv as $rvk => $rvv) {
-							foreach ($form_definition[$key]["form"][$fk]["head"][0] as $ck => $cv) {
-								if (empty($cv["field_id"])) {
-									continue;
-								}
-								$rvk = $cv["field_id"];
-								$rvv = (!isset($rv[$rvk]) || wbc()->common->nonZeroEmpty($rv[$rvk])) ? "" : $rv[$rvk];
-
-								//skip the id and other applicable fields 
-								if ($rvk == "id" || $rvk == "range_first" || $rvk == "range_second" || $rvk == "eo_wbc_first_category_range" || $rvk == "eo_wbc_second_category_range") {
-									continue;
-								}
-
-								if ($rvk == "eo_wbc_first_category") {
-									if (strpos($rvv, 'pid_') === 0) {
-
-										$product = wbc()->wc->get_product((int) substr($rvv, 4));
-
-										$row[] = array('val' => ((is_wp_error($product) or empty($product)) ? '' : $product->get_name()), 'link' => 1, 'edit_id' => $rk);
-									} elseif (wbc()->common->nonZeroEmpty($rv["eo_wbc_first_category_range"]) || wbc()->common->nonZeroEmpty($rv["range_first"])) {
-
-										$val = wbc()->common->dropdownSelectedvalueText($tab["form"][$rvk], $rvv);
-										$row[] = array('val' => !is_array($val) ? $val : $val["label"], 'link' => 1, 'edit_id' => $rk);
-									} else {
-										$val = wbc()->common->dropdownSelectedvalueText($tab["form"][$rvk], $rvv);
-										$val1 = wbc()->common->dropdownSelectedvalueText($tab["form"]["eo_wbc_first_category_range"], $rv["eo_wbc_first_category_range"]);
-										$row[] = array('val' => "Range from <strong>" . (!is_array($val) ? $val : $val["label"]) . "</strong> to <strong>" . (!is_array($val1) ? $val1 : $val1["label"]) . "</strong>", 'link' => 1, 'edit_id' => $rk);
-									}
-								} else if ($rvk == "eo_wbc_second_category") {
-									if (strpos($rvv, 'pid_') === 0) {
-
-										$product = wbc()->wc->get_product((int) substr($rvv, 4));
-
-										$row[] = array('val' => ((is_wp_error($product) or empty($product)) ? '' : $product->get_name()));
-
-									} elseif (wbc()->common->nonZeroEmpty($rv["eo_wbc_second_category_range"]) || wbc()->common->nonZeroEmpty($rv["range_second"])) {
-										$val = wbc()->common->dropdownSelectedvalueText($tab["form"][$rvk], $rvv);
-										$row[] = array('val' => !is_array($val) ? $val : $val["label"]);
-									} else {
-										$val = wbc()->common->dropdownSelectedvalueText($tab["form"][$rvk], $rvv);
-										$val1 = wbc()->common->dropdownSelectedvalueText($tab["form"]["eo_wbc_second_category_range"], $rv["eo_wbc_second_category_range"]);
-										$row[] = array('val' => "Range from <strong>" . (!is_array($val) ? $val : $val["label"]) . "</strong> to <strong>" . (!is_array($val1) ? $val1 : $val1["label"]) . "</strong>");
-									}
-								} else {
-									$row[] = array('val' => $rvv);
-								}
-							}
-
-							$body[] = $row;
-						}
-
-					}
-
-					$form_definition[$key]["form"][$fk]["body"] = $body;
 				} else {
 					$form_definition[$key]["form"][$fk]["value"] = wbc()->options->get_option('extras_' . $key, $fk, isset($form_definition[$key]["form"][$fk]["value"]) ? $form_definition[$key]["form"][$fk]["value"] : '');
 				}
@@ -179,8 +48,7 @@ class Eowbc_Extras extends Eowbc_Model
 		return $form_definition;
 	}
 
-	public function save($form_definition, $is_auto_insert_for_template = false, $args = null)
-	{
+	public function save($form_definition, $is_auto_insert_for_template = false, $args = null) {
 
 		wbc()->sanitize->clean($form_definition);
 		wbc()->validate->check($form_definition);
@@ -252,8 +120,7 @@ class Eowbc_Extras extends Eowbc_Model
 					$table_data["id"] = wbc()->common->createUniqueId();
 					$extras_data[wbc()->sanitize->post('map_creation_modification_id')] = $table_data;
 					wbc()->options->update_option_group('extras_' . $key, serialize($extras_data));
-					//update cache
-					\Cache_Manager::getInstance()->update_map_caches();
+
 					$res["msg"] = eowbc_lang('Extras Updated Successfully');
 					return $res;
 
@@ -285,12 +152,6 @@ class Eowbc_Extras extends Eowbc_Model
 
 				wbc()->options->update_option_group('extras_' . $key, serialize($extras_data));
 
-				//update cache
-				\Cache_Manager::getInstance()->update_map_caches();
-
-				// TODO here it is better if we set it to 1 only if length of extras_data is greater than zero and otherwise set to 0 if user removes maps and so on 
-				wbc()->options->update_option('configuration', 'config_map', 1);
-
 				$res["msg"] = eowbc_lang('New Extras Added Successfully');
 			}
 
@@ -299,14 +160,12 @@ class Eowbc_Extras extends Eowbc_Model
 		return $res;
 	}
 
-	public function delete($ids, $saved_tab_key, $check_by_id = false)
-	{
+	public function delete($ids, $saved_tab_key, $check_by_id = false) {
 		$check_by_id = true;
 		return parent::delete($ids, 'extras_' . $saved_tab_key, $check_by_id);
 	}
 
-	public function fetch_map(&$res)
-	{
+	public function fetch_map(&$res) {
 		$map = unserialize(wbc()->options->get_option_group('extras_map_creation_modification'));
 
 		if (!empty($map[wbc()->sanitize->post('id')])) {

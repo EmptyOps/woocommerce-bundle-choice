@@ -265,7 +265,7 @@ if(!class_exists('SP_Plugin_Index_Class') ) {
 				do_action( 'after_spext_init', $this->SP_Extension->extension_slug() );
 
 				$childClassObj->theme_adaption_check();
-
+				
 			// });
 
 		}

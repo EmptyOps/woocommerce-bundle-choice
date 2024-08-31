@@ -15385,7 +15385,7 @@ class Sample_Data_Template {
 
             if(isset($original_input[$idv_key])){
 
-                $_POST[$idv_key] =  $original_input[$idv_key];  
+                $_POST[$idv_key] = $original_input[$idv_key];  
             } else {
 
                 unset($_POST[$idv_key]);

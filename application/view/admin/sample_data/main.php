@@ -85,8 +85,23 @@ box-shadow: none;">
 		                		<td>Assets will be generated based on your theme color styling. For example, based on your theme primary color and secondary color the assets will be generated. And if you have not yet set the primary color and the secondary color setting then you will be asked to set that below.</td>
 		             		</tr>
 		              		<tr>
-		                		<td>                    
-		                  			        
+		                		<td> 
+		                			<?php
+		                			$primary_color = wbc()->options->get_option('appearance_global','theme_primary_color'); 
+		                			$secondary_color = wbc()->options->get_option('appearance_global','theme_secondary_color');
+		                			?> 
+
+		                  			<?php if(empty($primary_color) || empty($secondary_color)):?> 
+
+		                  				<p style = "color:red;">It seems that you have not yet set the Primary Color or Secondary Color. So please go to below link and set the Primary Color and Secondary Color.</p><br><br>
+
+		                  				After clicking below link go to the <b>Global</b> sub tab and then look for the Primary Color and Secondary Color. 
+		                  				<br>
+		                  				<a href='<?php echo wbc()->common->admin_url("admin.php?page=eowbc-appearance&atol=global"); ?>' style = "text-align: center;">Go to appearance admin page</a>
+		                  				<br><br>
+
+		                  				After you have set the Primary Color and Secondary Color then <b>come back here again</b> to continue the sample data process.
+		                  			<?php endif; ?>    
 	                   			</td>
 	              			           		                	
 	                	<?php endif; ?>
@@ -121,7 +136,16 @@ box-shadow: none;">
 
 	              		<?php if($sample_data_obj->get_model()->additional_initial_step_key($_step) == 'generate_assets'):?>
 
-	              			<input type="submit" name="save" value="<?php printf(__("Generate assets","woo-bundle-choice")); ?>"  class="button button-primary button-hero action ui button secondary">	
+	              			<?php
+	                			$primary_color = wbc()->options->get_option('appearance_global','theme_primary_color'); 
+	                			$secondary_color = wbc()->options->get_option('appearance_global','theme_secondary_color');
+		                	?> 
+
+		                	<?php if(!empty($primary_color) && !empty($secondary_color)):?>
+
+		                  		<input type="submit" name="save" value="<?php printf(__("Generate assets","woo-bundle-choice")); ?>"  class="button button-primary button-hero action ui button secondary">
+
+		                  	<?php endif; ?> 
 
 	              		<?php endif; ?>
 
@@ -162,42 +186,61 @@ box-shadow: none;">
 			<script type="text/javascript" >
 
 				jQuery(document).ready(function($) {  
+					
+					function eo_wbc_generate_assets() {
 
-					var msg = 'There is some error while finishing the generate assets process, please contact Sphere Plugins Support for a quick fix on this if the problem persist.';
+						var msg = 'There is some error while finishing the generate assets process, please contact Sphere Plugins Support for a quick fix on this if the problem persist.';
 
-				    //step 2 redirect;
-		            var data = {	                
-		                '_wpnonce': '<?php echo wp_create_nonce('sample_data_jewelry');?>',
-		                'action':'eowbc_ajax',
-		                'resolver':'sample_data/generate_assets',
-		                'resolver_path':'<?php echo apply_filters('eowbc_catattr_sample_data_resolver_path',''); ?>', 
-		                'feature_key':'<?php _e($feature_key); ?>',
-		                'type':'generate_assets',
-		            };
+					    //ajax for additional initial step of generate assets;
+			            var data = {	                
+			                '_wpnonce': '<?php echo wp_create_nonce('sample_data_jewelry');?>',
+			                'action':'eowbc_ajax',
+			                'resolver':'sample_data/generate_assets',
+			                'resolver_path':'', 
+			                'feature_key':'<?php _e($feature_key); ?>',
+			                'type':'generate_assets',
+			            };
 
-		        	jQuery.ajax({
-			            url:eowbc_object.admin_url,
-			            type: 'POST',
-			            data: data,
-			            beforeSend:function(xhr){
+			        	jQuery.ajax({
+				            url:eowbc_object.admin_url,
+				            type: 'POST',
+				            data: data,
+				            beforeSend:function(xhr){
 
-			            },
-			            success:function(result,status,xhr){
-			                window.location.href="<?php echo($next_url); ?>";
-		            		return false;
-			            },
-			            error:function(xhr,status,error){
-			                /*console.log(xhr);*/			                
-			                eowbc_toast_common( 'error', msg );
-		            		return false;
-			            },
-			            complete:function(xhr,status){
-			           		//window.location.href="<?php echo($next_url); ?>";	//commented since can't allow redirect on error etc.
-		            		return false;     
-			            }
-			        });
+				            },
+				            success:function(result,status,xhr){
+				                window.location.href="<?php echo($next_url); ?>";
+			            		return false;
+				            },
+				            error:function(xhr,status,error){
+				                /*console.log(xhr);*/			                
+				                eowbc_toast_common( 'error', msg );
+			            		return false;
+				            },
+				            complete:function(xhr,status){
+				           		//window.location.href="<?php echo($next_url); ?>";	//commented since can't allow redirect on error etc.
+			            		return false;     
+				            }
+				        });
+
+					}
+						
+					jQuery(".button.button-primary.button-hero.action").on('click',function(e){
+
+					    console.log("main.php button.button-primary.button-hero.action click");
+
+					    e.stopPropagation();
+					    e.preventDefault();
+					    if(!jQuery(this).hasClass('disabled')) {
+					    
+					    	console.log("main.php button.button-primary.button-hero.action disabled");
+
+					        jQuery(".button.button-hero.action:not(.disabled)").toggleClass('disabled');
+					        eo_wbc_generate_assets();
+					    }                
+					    return false;
+					});
 			    });
-
 			</script>
 
 		<?php endif; ?> 
