@@ -145,9 +145,20 @@ class SP_Attribute extends SP_Entity {
 
 	    						if(!empty($_attr_term_id)) {
 
-	    							if(!empty($term['thumb'])){
+	    							if(!empty($term['thumb']) || !empty($term['terms_meta']['image_thumb'])){
+
+	    								$temp = null;
+
+	    								if (!empty($term['thumb'])) {
+	    									
+	    									$temp = $term['thumb'];
+	    								} elseif (!empty($term['terms_meta']['image_thumb'])) {
+	    									
+	    									$temp = $term['terms_meta']['image_thumb'];
+	    								}
+
 										$thumb_id=0;
-			    						$thumb_id = wbc()->wp->add_image_gallary($term['thumb']);
+			    						$thumb_id = wbc()->wp->add_image_gallary(/*$term['thumb']*/$temp);
 			    						update_term_meta( $_attr_term_id, 'pa_'.$attribute_data['slug'].'_attachment', wp_get_attachment_url( $thumb_id ) );
 	    								update_term_meta( $_attr_term_id, sanitize_title($term['label']).'_attachment', wp_get_attachment_url( $thumb_id ) );
 			    					}
@@ -161,14 +172,15 @@ class SP_Attribute extends SP_Entity {
 
 			    					}
 
-			    					if (!empty($term['terms_meta']['image_thumb'])) {
+			    					ane akhi delet karvanu kidhu che telly samye mari devi.
+			    					// if (!empty($term['terms_meta']['image_thumb'])) {
 
-			    						$wbc_attachment_id = wbc()->wp->add_image_gallary($term['terms_meta']['image_thumb']);
+			    					// 	$wbc_attachment_id = wbc()->wp->add_image_gallary($term['terms_meta']['image_thumb']);
 
-    									$wbc_attachment_src =wp_get_attachment_url( $wbc_attachment_id );
-    									function_exists( 'update_term_meta' ) ? update_term_meta( $_attr_term_id,'wbc_attachment_thumb',$wbc_attachment_src) : update_metadata( 'woocommerce_term', $_attr_term_id,'wbc_attachment_thumb',$wbc_attachment_src);
+    								// 	$wbc_attachment_src =wp_get_attachment_url( $wbc_attachment_id );
+    								// 	function_exists( 'update_term_meta' ) ? update_term_meta( $_attr_term_id,'wbc_attachment_thumb',$wbc_attachment_src) : update_metadata( 'woocommerce_term', $_attr_term_id,'wbc_attachment_thumb',$wbc_attachment_src);
 
-			    					}
+			    					// }
 
 			    					if (!wbc_isEmptyArr(/*$data['terms_order'])*/$term['terms_order'])) {
 
