@@ -82,7 +82,7 @@ class SP_Attribute extends SP_Entity {
 			}
 		}
 
-		if(!isset($data['label']['value']) && !isset($data['terms']['value'])) return;
+		if(!isset($data['label']['value']) /*&& !isset($data['terms']['value'])*/) return;
 
 		//adding post data to store data in posts
 		$attribute_data = array(
@@ -171,16 +171,6 @@ class SP_Attribute extends SP_Entity {
     									function_exists( 'update_term_meta' ) ? update_term_meta( $_attr_term_id,'wbc_attachment',$wbc_attachment_src) : update_metadata( 'woocommerce_term', $_attr_term_id,'wbc_attachment',$wbc_attachment_src);
 
 			    					}
-
-			    					ane akhi delet karvanu kidhu che telly samye mari devi.
-			    					// if (!empty($term['terms_meta']['image_thumb'])) {
-
-			    					// 	$wbc_attachment_id = wbc()->wp->add_image_gallary($term['terms_meta']['image_thumb']);
-
-    								// 	$wbc_attachment_src =wp_get_attachment_url( $wbc_attachment_id );
-    								// 	function_exists( 'update_term_meta' ) ? update_term_meta( $_attr_term_id,'wbc_attachment_thumb',$wbc_attachment_src) : update_metadata( 'woocommerce_term', $_attr_term_id,'wbc_attachment_thumb',$wbc_attachment_src);
-
-			    					// }
 
 			    					if (!wbc_isEmptyArr(/*$data['terms_order'])*/$term['terms_order'])) {
 

@@ -69,7 +69,7 @@ class Ring_Builder_Data_Template extends Pair_Builder_Data_Template {
                 'label' => 'Cut',
                 'terms' => array('Fair','Good','Very Good','Ideal','Super Ideal','Excellent','Poor'),
                 'terms_order' => array(1,2,3,4,5,6,7),
-                'description' => 'Origin attributes for diamond shape',
+                'description' => 'Cut attributes for diamond shape',
                 'slug' => 'eo_cut_attr',
                 'type'=>/*'dropdown'*/'button',
                 'ribbon_color'=>'#8245dd',
