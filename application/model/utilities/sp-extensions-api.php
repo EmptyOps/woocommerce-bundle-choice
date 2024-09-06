@@ -204,14 +204,18 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 							$form_definition[$key]["form"] = self::apply_response_msg($is_positive, $mode, $tab["form"], $section_fields, $parsed);
 
 							$res = null;
-							if( self::should_do_stat_changes($mode, $section_fields, $parsed, $res) ) {
+							if( self::should_do_stat_changes($mode, $parsed, $res) ) {
 
-								self::apply_stat_changes_to_section($mode, $form_definition, $section_fields, $parsed);
+								$form_definition[$key]["form"] = self::apply_stat_changes_to_section($mode, $tab["form"], $section_fields, $parsed, $fk);
 
 								return $res;
 							}
 
-							\eo\wbc\system\core\publics\Eowbc_Base_Model_Publics::handle_response($parsed);
+							if( self::should_handle_response($mode, $parsed, $res) ){
+
+								\eo\wbc\system\core\publics\Eowbc_Base_Model_Publics::handle_response($parsed);		
+							}
+
 						}
 
 					}
@@ -387,7 +391,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
     	}
 
     	--	hear we need to prepear the $res form $parsed by creating empty array and save. -- to h & -- to pi
-    	$res = $parsed
+    	$res = $parsed;
 
     	if( 'save' == $mode ) {
 
@@ -418,13 +422,49 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
     	return true;
     }
 
-    private static function apply_stat_changes_to_section($mode, $form_definition, $section_fields, $parsed) {
+    private static function should_handle_response($mode, $section_fields, $parsed, &$res) {
+
+    	if( 'get' == $mode && ( isset($parsed['type']) && 'error' != $parsed['type'] ) ) {
+
+    		return false;
+    	}
+
+    	if( 'save' == $mode && ( isset($parsed['type']) && 'success' != $parsed['type'] ) ) {
+
+    		return false;
+    	}
+
+    	return true;
+    }
+
+    private static function apply_stat_changes_to_section($mode, $tab_form, $section_fields, $parsed, $fk) {
+
+    	foreach ($section_fields as $sfk => $sfv) {
+
+    		if( $fk == $sfk ) {
+
+    			--	most obabely we need to make here the switch as non interactive by removeing the applicable proparty entirely or proparty attribute. 
+    		} else {
+
+    			--	hidden for hide.
+    			--	no any class for show.
+
+    			$remove_class = array_search('hidden', $tab_form['sfk']['size_class']); 
+
+    			if( isset($remove_class) && $remove_class !== false ) {
+
+    				unset($tab_form['sfk']['size_class'][$remove_class]);
+    			}
+    		}
+    	}
 
     	--	most obabely form here we need to return if $mode is save but stil there might be somthing that we need to handle for the save mode but it is mostly unlikely that we have somthing to do . so simply remove the open comment after this function finalizes  -- to h to pi
     	if( 'save' == $mode ) {
 
     		return $mode;
     	}
+
+    	return $tab_form;
     }
 
     private static function inject_visible_info_field($mode, $tab_form, $section_property, $fv, $parsed, $fk) {
