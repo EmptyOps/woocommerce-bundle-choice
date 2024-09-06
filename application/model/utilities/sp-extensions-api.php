@@ -458,7 +458,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
     		}
     	}
 
-    	--	most obabely form here we need to return if $mode is save but stil there might be somthing that we need to handle for the save mode but it is mostly unlikely that we have somthing to do . so simply remove the open comment after this function finalizes  -- to h to pi
+    	--	most obabely form here we need to return if $mode is save but stil there might be somthing that we need to handle for the save mode but it is mostly unlikely that we have somthing to do . so simply remove the open comment after this function finalizes  -- to h & -- to pi
     	if( 'save' == $mode ) {
 
     		return $mode;
