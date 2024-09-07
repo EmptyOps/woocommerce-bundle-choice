@@ -8,7 +8,7 @@ defined('ABSPATH') || exit;
 
 wbc()->load->model('publics/eowbc_base_model_publics');
 
-use eo\wbc\model\publics\Eowbc_Base_Model_Publics;
+use eo\wbc\system\core\publics\Eowbc_Base_Model_Publics;
 
 class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
