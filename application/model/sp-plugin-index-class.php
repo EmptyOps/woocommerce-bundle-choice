@@ -245,6 +245,28 @@ if(!class_exists('SP_Plugin_Index_Class') ) {
 			
 		}
 
+		public function extras_configuration_check() {
+
+		    // admin 
+		    if( is_admin() ) {
+		        $page_slug = wbc()->sanitize->get('page');
+		        if( strpos($page_slug, "---extras") !== FALSE ) {
+		            $curr_plugin_slug = explode("---", $page_slug)[0];
+
+		            if( $curr_plugin_slug == $this->SP_Extension->extension_slug() ) {
+
+		                add_filter('sp_wbc_extras_config', function( $plugin_slug ) {
+
+		                    if( $plugin_slug == $this->SP_Extension->extension_slug() ) {
+		                        return $this->SP_Extension->singleton_function()()->config->extras();
+		                    }
+		                }, 10, 1);
+		            }
+
+		        }
+		    }
+		}
+
 		public function __init( $childClassObj ) {
 
 			if( wbc()->sanitize->get('is_test') == 1 ) {
@@ -265,6 +287,8 @@ if(!class_exists('SP_Plugin_Index_Class') ) {
 				do_action( 'after_spext_init', $this->SP_Extension->extension_slug() );
 
 				$childClassObj->theme_adaption_check();
+
+				$childClassObj->extras_configuration_check();
 				
 			// });
 

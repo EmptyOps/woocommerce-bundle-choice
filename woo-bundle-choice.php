@@ -190,6 +190,29 @@ if(!class_exists('Woo_Bundle_Choice') ) {
 			
 		}
 
+		public function extras_configuration_check() {
+
+			// admin 
+			if( is_admin() ) {
+				
+				$page_slug = wbc()->sanitize->get('page');
+				if( strpos($page_slug, "---extras") !== FALSE ) {
+					$curr_plugin_slug = explode("---", $page_slug)[0];
+
+					if( $curr_plugin_slug == 'woo-bundle-choice' ) {
+
+						add_filter('sp_wbc_extras_config', function( $plugin_slug ) {
+
+							if( $plugin_slug == 'woo-bundle-choice' ) {
+								return wbc()->config->extras();
+							}
+						}, 10, 1);
+					}
+
+				}
+			}
+		}
+
 		public function init() {
 			/*ACTIVE_TODO_OC_START
 			ACTIVE_TODO we need to create one function or flow to call all such hooks related binding from root class init function of this class end sp_index class.
@@ -198,7 +221,7 @@ if(!class_exists('Woo_Bundle_Choice') ) {
 
 			if(is_admin()) {
 
-				\eo\wbc\model\data_model\SP_WBC_Product::instance()->admin_hooks();
+				\eo\wbc\model\data_model\SP_WBC_Product::admin_hooks();
 			}
 
 			do_action( 'before_eowbc_load' );
@@ -212,6 +235,8 @@ if(!class_exists('Woo_Bundle_Choice') ) {
 
 			// added on 01-01-2022
 			$this->theme_adaption_check();
+			
+			$this->extras_configuration_check();
 		}
 	}
 

@@ -249,7 +249,11 @@ if (!class_exists('Extras')) {
 				// 		)
 				// ),
 
-				'extras_configuration' => array(
+			);
+
+			if( empty($extras_config['configuration_section']['is_skip_this_section']) ) {
+
+				$form_definition['extras_configuration'] =  array(
 					'label' => 'Configuration',
 					'form' => array(
 						'extras_configuration_section' => array(
@@ -294,8 +298,8 @@ if (!class_exists('Extras')) {
 							'attr' => array('data-tab_key="extras_configuration"', 'data-action="save"'),
 						)
 					),
-				),
-			);
+				);
+			}
 
 			$form_definition = apply_filters('eowbc_admin_form_extras', $form_definition);
 
