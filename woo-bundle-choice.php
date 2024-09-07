@@ -221,7 +221,7 @@ if(!class_exists('Woo_Bundle_Choice') ) {
 
 			if(is_admin()) {
 
-				\eo\wbc\model\data_model\SP_WBC_Product::instance()->admin_hooks();
+				\eo\wbc\model\data_model\SP_WBC_Product::admin_hooks();
 			}
 
 			do_action( 'before_eowbc_load' );

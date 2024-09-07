@@ -57,7 +57,7 @@ class SP_WBC_Product extends SP_Product {
 
     public static function admin_hooks() {
 
-    	\eo\wbc\model\utilities\SP_Extensions_Api::instance()->admin_hooks();
+    	\eo\wbc\model\utilities\SP_Extensions_Api::admin_hooks();
     }
 
 

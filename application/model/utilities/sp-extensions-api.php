@@ -165,7 +165,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 			    if( in_array($fv["type"], \eo\wbc\model\admin\Form_Builder::savable_types())) {
 
 			    	//skip fields where applicable
-					if( isset($fv["eas"]) && is_array($fv["eas"] ) {
+					if( isset($fv["eas"]) && is_array($fv["eas"]) ) {
 
 						$fv = self::inject_onclick_attr($mode, $form_definition, $fv["eas"], $fv);
 
