@@ -21,6 +21,16 @@ if (!class_exists('Extras')) {
 
 		public static function get_form_definition($is_add_sample_values = false) {
 
+			$page_slug = wbc()->sanitize->get('page');
+			$plugin_slug = null;
+			$extras_config = null;
+
+			if(!empty($page_slug)){
+				
+				$plugin_slug = explode("---", $page_slug)[0];
+				$extras_config = apply_filters('sp_wbc_extras_config', $plugin_slug);
+			}
+			
 			wbc()->load->model('admin/form-builder');
 
 			$form_definition = array(
@@ -239,7 +249,11 @@ if (!class_exists('Extras')) {
 				// 		)
 				// ),
 
-				'extras_configuration' => array(
+			);
+
+			if( empty($extras_config['configuration_section']['is_skip_this_section']) ) {
+
+				$form_definition['extras_configuration'] =  array(
 					'label' => 'Configuration',
 					'form' => array(
 						'extras_configuration_section' => array(
@@ -257,7 +271,7 @@ if (!class_exists('Extras')) {
 						'activate'=>array(
 							'label'=>'Activate',
 							'type'=>'link',
-							'attr'=>array("href='".admin_url('admin.php?page=extras--- &sp_ext_ecac=1')."'"),
+							'attr'=>array("href=#"),
 							'class'=>array('secondary')	
 						),
 						'activate_visible_info'=>array(
@@ -284,8 +298,8 @@ if (!class_exists('Extras')) {
 							'attr' => array('data-tab_key="extras_configuration"', 'data-action="save"'),
 						)
 					),
-				),
-			);
+				);
+			}
 
 			$form_definition = apply_filters('eowbc_admin_form_extras', $form_definition);
 

@@ -258,22 +258,13 @@ if(!class_exists('SP_Plugin_Index_Class') ) {
 		                add_filter('sp_wbc_extras_config', function( $plugin_slug ) {
 
 		                    if( $plugin_slug == $this->SP_Extension->extension_slug() ) {
-		                        return $this->SP_Extension->singleton_function()()->config->required_hooks_n_filters_etc();
+		                        return $this->SP_Extension->singleton_function()()->config->extras();
 		                    }
 		                }, 10, 1);
 		            }
 
 		        }
 		    }
-
-		    //add action 
-		    if( !empty(wbc()->sanitize->get('sp_ext_ecac')) && wbc()->sanitize->get('sp_ext_ecac') == 1 ) {
-		        add_action('sp_wbc_extras_check',function(){
-		            wbc()->load->model('utilities/eowbc_extras_check');
-		            \eo\wbc\model\utilities\Eowbc_Extras_Check::instance()->configuration_check( $this->SP_Extension->singleton_function()()->config->required_hooks_n_filters_etc() );
-		        },20);
-		    }
-		    
 		}
 
 		public function __init( $childClassObj ) {
@@ -296,9 +287,9 @@ if(!class_exists('SP_Plugin_Index_Class') ) {
 				do_action( 'after_spext_init', $this->SP_Extension->extension_slug() );
 
 				$childClassObj->theme_adaption_check();
-				
-				$childClassObj->extras_configuration_check();
 
+				$childClassObj->extras_configuration_check();
+				
 			// });
 
 		}

@@ -184,9 +184,12 @@ box-shadow: none;">
 		<?php if($sample_data_obj->get_model()->additional_initial_step_key($_step) == 'generate_assets'):?>
 	              		
 			<script type="text/javascript" >
-				function eo_wbc_generate_assets() {
 
-					var msg = 'There is some error while finishing the generate assets process, please contact Sphere Plugins Support for a quick fix on this if the problem persist.';
+				jQuery(document).ready(function($) {  
+					
+					function eo_wbc_generate_assets() {
+
+						var msg = 'There is some error while finishing the generate assets process, please contact Sphere Plugins Support for a quick fix on this if the problem persist.';
 
 					    //ajax for additional initial step of generate assets;
 			            var data = {	                
@@ -220,9 +223,7 @@ box-shadow: none;">
 				            }
 				        });
 
-				}
-
-				jQuery(document).ready(function($) {  
+					}
 						
 					jQuery(".button.button-primary.button-hero.action").on('click',function(e){
 

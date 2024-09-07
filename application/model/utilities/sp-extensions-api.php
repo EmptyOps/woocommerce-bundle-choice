@@ -26,96 +26,6 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 		
 	}
 
-	public function configuration_run() {
-
-		--	shude we rename extars check hook below to somthing like extars configrtion check or configrtion check?
-		do_action('sp_wbc_extras_check');
-	}
-
-	public function configuration_check($config) {
-
-		if( empty(wbc()->sanitize->get('sp_ext_ecac')) || wbc()->sanitize->get('sp_ext_ecac') != 1 ) {
-			return;
-		}
-
-		$curr_theme_key = self::current_theme_key();
-
-		$test_sec_key = wbc()->sanitize->get('test_sec_key');
-
-		$plugin_slug = $config['plugin_slug'];
-		foreach ($config['widget_sections'] as $section_key => $section) {
-
-			if( $section_key != $test_sec_key ) {
-				continue;
-			}
-
-			$current_url = wbc()->common->current_url();
-
-			$required_types = array('mandatory','recommended');
-
-			foreach ($required_types as $rk => $rv) {
-
-				if( !isset($section[$rv]) ) {
-					continue;
-				}
-
-				foreach ($section[$rv] as $key => $item) {
-
-					if( $item['type'] == 'action' ) {
-
-						self::instance()->configuration_update_result(false, $plugin_slug, $curr_theme_key, $section_key, $rv, $key, $item, $current_url );
-
-						add_action($item['key'], function() use($plugin_slug, $curr_theme_key, $section_key, $rv, $key, $current_url) {
-			
-							self::instance()->configuration_update_result(true, $plugin_slug, $curr_theme_key, $section_key, $rv, $key, null, $current_url );
-
-						});
-					}
-					elseif( $item['type'] == 'filter' ) {
-
-						self::instance()->configuration_update_result(false, $plugin_slug, $curr_theme_key, $section_key, $rv, $key, $item, $current_url );
-
-						add_filter($item['key'], function() use($plugin_slug, $curr_theme_key, $section_key, $rv, $key, $current_url) {
-
-							self::instance()->configuration_update_result(true, $plugin_slug, $curr_theme_key, $section_key, $rv, $key, null, $current_url );
-
-						}, $item['filter_priority_1'], $item['filter_priority_2']);
-					}
-					else {
-						throw new \Exception("Eowbc_Extras_Check: The provided type ".$item['type']." is not supported yet, send request to dev team for adding support for it.", 1);
-						
-					}
-
-				}
-			}
-			
-		}
-
-		$result = self::call($url --	this perameter need to be passed from the particular extensions so based on plugin slug we need to call the single tone function and hear the plugin slug is most probably single tone function name so need to retry the api url to call from the extensions config_class config_helpaer function);
-
-		$this->configuration_update_result($result, $plugin_slug);
-
-	}
-
-	public function configuration_update_result($result, $plugin_slug, $curr_theme_key, $section_key, $required_key, $key, $item, $current_url) {
-
-		$opt_grp = wbc()->options->get_option_group('ecacr_'.$plugin_slug,array());
-
-		if( !isset($opt_grp[$curr_theme_key]) ) $opt_grp[$curr_theme_key] = array();
-		if( !isset($opt_grp[$curr_theme_key][$section_key]) ) $opt_grp[$curr_theme_key][$section_key] = array();
-		if( !isset($opt_grp[$curr_theme_key][$section_key][$required_key]) ) $opt_grp[$curr_theme_key][$section_key][$required_key] = array();
-
-		if( !isset($opt_grp[$curr_theme_key][$section_key][$required_key][$key]) && is_array($item) )	{
-			$opt_grp[$curr_theme_key][$section_key][$required_key][$key] = $item;
-		}
-
-		$opt_grp[$curr_theme_key][$section_key][$required_key][$key]['tested_on_url'] = $current_url;
-		$opt_grp[$curr_theme_key][$section_key][$required_key][$key]['result'] = $result;
-
-		wbc()->options->update_option_group('ecacr_'.$plugin_slug,$opt_grp);
-
-	}
-
 	public static function call($url, $query_string, $payload = null) {
 
 		self::additional_data($query_string, $payload);
@@ -261,7 +171,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
 						if( self::section_should_make_call($mode, $form_definition, $fv["eas"], $fk) ) {
 
-							$section_fields = self::retrieve_section_fields($mode, $tab["form"], $fv["eas"], $fk);
+							$section_fields = self::retrieve_section_fields($tab["form"], $fv["eas"], $fk);
 
 							$payload = array();
 							$payload['data'] = array();
@@ -294,14 +204,18 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 							$form_definition[$key]["form"] = self::apply_response_msg($is_positive, $mode, $tab["form"], $section_fields, $parsed);
 
 							$res = null;
-							if( self::should_return($is_positive, $mode, $section_fields, $parsed, $res) ) {
+							if( self::should_do_stat_changes($mode, $parsed, $res) ) {
+
+								$form_definition[$key]["form"] = self::apply_stat_changes_to_section($mode, $tab["form"], $section_fields, $parsed, $fk);
 
 								return $res;
 							}
 
-							self::apply_stat_changes_to_section($is_positive, $mode, $form_definition, $section_fields, $parsed);
+							if( self::should_handle_response($mode, $parsed, $res) ){
 
-							\eo\wbc\system\core\publics\Eowbc_Base_Model_Publics::handle_response($mode, $parsed);
+								\eo\wbc\system\core\publics\Eowbc_Base_Model_Publics::handle_response($parsed);		
+							}
+
 						}
 
 					}
@@ -444,7 +358,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
     	return false;
     }
 
-    private static function retrieve_section_fields($mode, $tab_form, $section_property, $fk) {
+    private static function retrieve_section_fields($tab_form, $section_property, $fk) {
 
     	$section_fields = array();
 
@@ -469,30 +383,104 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
     	return false;
     }
 
-    private static function apply_response_msg($is_positive, $mode, $tab_form, $section_fields, $parsed) {
+    private static function apply_response_msg($is_positive, $mode, $tab_form, $section_fields, $parsed, $fk) {
 
-    	if($is_positive){
+    	if( $is_positive ) {
 
     		return ;
     	}
 
     	--	hear we need to prepear the $res form $parsed by creating empty array and save. -- to h & -- to pi
-    	$res = $parsed
+    	$res = $parsed;
+
+    	if( 'save' == $mode ) {
+
+    		--	from hear most obabely we need to return $res and it will be not prepared by should_return function most obabely. -- to h & -- to pi
+    	}
+
+    	if( 'get' == $mode ) {
+
+    		$tab_form = self::inject_visible_info_field($mode, $tab_form, $section_property, $fv, $parsed, $fk);
+    	}
 
     	return $tab_form;
     }
 
-    private static function should_return($is_positive, $mode, $section_fields, $parsed, &$res) {
+    private static function should_do_stat_changes($mode, $section_fields, $parsed, &$res) {
 
-    	return false;
+    	if( 'get' == $mode && ( isset($parsed['type']) && 'success' != $parsed['type'] ) ) {
+
+    		return false;
+    	}
+
+    	if( 'save' == $mode ) {
+
+    		--	hear we need to diside what is need to be done.
+    		return false;
+    	}
+
+    	return true;
     }
 
-    private static function apply_stat_changes_to_section($is_positive, $mode, $form_definition, $section_fields, $parsed) {
+    private static function should_handle_response($mode, $section_fields, $parsed, &$res) {
 
-    	--	most obabely form here we need to return if $mode is save but stil there might be somthing that we need to handle for the save mode but it is mostly unlikely that we have somthing to do . so simply remove the open comment after this function finalizes  -- to h to pi
+    	if( 'get' == $mode && ( isset($parsed['type']) && 'error' != $parsed['type'] ) ) {
+
+    		return false;
+    	}
+
+    	if( 'save' == $mode && ( isset($parsed['type']) && 'success' != $parsed['type'] ) ) {
+
+    		return false;
+    	}
+
+    	return true;
+    }
+
+    private static function apply_stat_changes_to_section($mode, $tab_form, $section_fields, $parsed, $fk) {
+
+    	foreach ($section_fields as $sfk => $sfv) {
+
+    		if( $fk == $sfk ) {
+
+    			--	most obabely we need to make here the switch as non interactive by removeing the applicable proparty entirely or proparty attribute. 
+    		} else {
+
+    			--	hidden for hide.
+    			--	no any class for show.
+
+    			$remove_class = array_search('hidden', $tab_form['sfk']['size_class']); 
+
+    			if( isset($remove_class) && $remove_class !== false ) {
+
+    				unset($tab_form['sfk']['size_class'][$remove_class]);
+    			}
+    		}
+    	}
+
+    	--	most obabely form here we need to return if $mode is save but stil there might be somthing that we need to handle for the save mode but it is mostly unlikely that we have somthing to do . so simply remove the open comment after this function finalizes  -- to h & -- to pi
     	if( 'save' == $mode ) {
 
     		return $mode;
     	}
+
+    	return $tab_form;
+    }
+
+    private static function inject_visible_info_field($mode, $tab_form, $section_property, $fv, $parsed, $fk) {
+
+    	$color = $parsed['type'] === 'error' ? 'red' : 'yellow';
+
+    	$visible_info = array('visible_info' => array(
+    		'label' => eowbc_lang($parsed['msg']),
+    		'type' => 'visible_info',
+    		'class' => array('small'),
+    		// 'size_class'=>array('sixteen','wide'),
+    		'attr'=>array('style = "color:'.$color.';"'),
+    	),);
+
+    	$tab_form = wbc()->common->array_insert_before($tab_form, $fk, $fk.'_eas_visible_info', $visible_info);
+
+    	return $tab_form;
     }
 }
