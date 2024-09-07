@@ -485,7 +485,7 @@ class Term_Meta {
 		// Add additional type so we get the kind of the attribute's behaviour.
 		add_filter( 'product_attributes_type_selector',function($type){
 
-			$type = array_merge($type, \eo\wbc\model\publics\data_model\SP_WBC_Variations::instance()->sp_variations_swatches_supported_attribute_types())openssl_free_key(key_identifier);
+			$type = array_merge($type, \eo\wbc\model\publics\data_model\SP_WBC_Variations::instance()->sp_variations_swatches_supported_attribute_types());
 
 
 			return $type;
