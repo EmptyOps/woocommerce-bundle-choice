@@ -44,7 +44,7 @@ if (!class_exists('Extras')) {
 						),
 						'resolver_path'=>array(
 							'type'=>'hidden',
-							'value'=>constant('EOWBC_DIRECTORY').'application/controller/ajax/eowbc_extras.php',
+							'value'=>constant('EOWBC_DIRECTORY').'application/controllers/ajax/eowbc_extras.php',
 						),
 						'saved_tab_key' => array(
 							'type' => 'hidden',
