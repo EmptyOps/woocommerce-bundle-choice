@@ -80,6 +80,12 @@ class Eowbc_Sample_Data {
 	      	// }
 
 	        $this->data_template->set_configs_after_categories($catat_category);
+	    } else {
+
+	    	if($this->data_template instanceof \eo\wbc\model\admin\sample_data\data_templates\Extensions_Data_Template) {
+
+	    		$this->data_template->set_configs_after_categories(array());
+	    	}
 	    }
 	}
 
@@ -108,7 +114,13 @@ class Eowbc_Sample_Data {
 
 	        wbc()->options->delete($feature_key.'_created_attribute');
 	        
-	    } 
+	    } else {
+
+	    	if($this->data_template instanceof \eo\wbc\model\admin\sample_data\data_templates\Extensions_Data_Template) {
+
+	    		$this->data_template->set_configs_after_attributes();
+	    	}
+	    }
 	}
 
 	public function process_post(&$_step, $_category, $_atttriutes, $_maps, $feature_key) {
