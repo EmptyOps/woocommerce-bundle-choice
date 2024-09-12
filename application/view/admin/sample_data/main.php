@@ -151,8 +151,8 @@ box-shadow: none;">
 
 	              	<?php else:?>
 
-		                <?php $_steps=["generate assets", "catagorie(s)","attribute(s)","product(s)"]; ?>
-		                  <input type="submit" name="save" value="<?php printf(__("Create sample %1s","woo-bundle-choice"),$_steps[$_step-1]); ?>"  class="button button-primary button-hero action ui button secondary">
+		                <?php $_steps=["catagorie(s)","attribute(s)","product(s)"]; ?>
+		                  <input type="submit" name="save" value="<?php printf(__("Create sample %1s","woo-bundle-choice"),$_steps[$_step-1-$additional_initial_steps]); ?>"  class="button button-primary button-hero action ui button secondary">
 
 	                <?php endif; ?>
 
