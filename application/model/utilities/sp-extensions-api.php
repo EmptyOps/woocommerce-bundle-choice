@@ -43,7 +43,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
 	private static function additional_data(&$query_string, &$payload) {
 
-		if ( empty($query_string) ) {
+		if( empty($query_string) ) {
 
 			$query_string = "";
 		}
@@ -406,7 +406,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
     	return $tab_form;
     }
 
-    private static function should_do_stat_changes($mode, $section_fields, $parsed, &$res) {
+    private static function should_do_stat_changes($mode, $parsed, &$res) {
 
     	if( 'get' == $mode && ( isset($parsed['type']) && 'success' != $parsed['type'] ) ) {
 
@@ -422,7 +422,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
     	return true;
     }
 
-    private static function should_handle_response($mode, $section_fields, $parsed, &$res) {
+    private static function should_handle_response($mode, $parsed, &$res) {
 
     	if( 'get' == $mode && ( isset($parsed['type']) && 'error' != $parsed['type'] ) ) {
 
@@ -437,7 +437,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
     	return true;
     }
 
-    private static function apply_stat_changes_to_section($mode, $tab_form, $section_fields, $parsed, $fk) {
+    private static function apply_stat_changes_to_section($mode --	253.11.4 na recoding ma aa perameter ne remove karavnu kidhu par aa peramter use ma hovathi te remove karyu nathi., $tab_form, $section_fields, $parsed, $fk) {
 
     	foreach ($section_fields as $sfk => $sfv) {
 
@@ -447,13 +447,13 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
     		} else {
 
     			--	hidden for hide.
-    			--	no any class for show.
+    			--	show class for show.
 
-    			$remove_class = array_search('hidden', $tab_form['sfk']['size_class']); 
+    			$remove_class = array_search('hidden', $tab_form[$sfk]['size_class']); 
 
-    			if( isset($remove_class) && $remove_class !== false ) {
+    			if( isset($remove_class) && $remove_class != false ) {
 
-    				unset($tab_form['sfk']['size_class'][$remove_class]);
+    				unset($tab_form[$sfk]['size_class'][$remove_class]);
     			}
     		}
     	}
@@ -469,15 +469,16 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
     private static function inject_visible_info_field($mode, $tab_form, $section_property, $fv, $parsed, $fk) {
 
-    	$color = $parsed['type'] === 'error' ? 'red' : 'yellow';
+    	$color = $parsed['type'] === 'error' ? 'color: red;' : '';
+		$bgcolor = $parsed['type'] === 'warning' ? 'background-color: yellow;' : '';
 
-    	$visible_info = array('visible_info' => array(
-    		'label' => eowbc_lang($parsed['msg']),
-    		'type' => 'visible_info',
-    		'class' => array('small'),
-    		// 'size_class'=>array('sixteen','wide'),
-    		'attr'=>array('style = "color:'.$color.';"'),
-    	),);
+    	$visible_info = array(
+				    		'label' => eowbc_lang($parsed['msg']),
+				    		'type' => 'visible_info',
+				    		'class' => array('small'),
+				    		// 'size_class'=>array('sixteen','wide'),
+				    		'attr'=>array('style = "'.(!empty($color)?$color:$bgcolor).'"'),
+	    				);
 
     	$tab_form = wbc()->common->array_insert_before($tab_form, $fk, $fk.'_eas_visible_info', $visible_info);
 

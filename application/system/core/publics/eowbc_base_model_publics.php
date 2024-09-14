@@ -99,7 +99,7 @@ class Eowbc_Base_Model_Publics {
 			throw new \Exception("There is some error in the api call. error massege: " . $response->get_error_message(), 1);
 		}
 
-		if(isset($response['body'])) {
+		if( isset($response['body']) ) {
 
 			$response = json_decode($response['body'],true);
 		} else {
@@ -107,31 +107,31 @@ class Eowbc_Base_Model_Publics {
 			$response = '';
 		}
 
-		if (isset($response['type'])) {
+		if( isset($response['type']) ) {
 		
 			$res['type'] = $response['type'];
 			
-			if (isset($response['msg'])) {
+			if( isset($response['msg']) ) {
 				
 				$res['msg'] = $response['msg'];
-			}else{
+			} else {
 
 				$res['msg'] = '';
 			}
-		}else{
+		} else {
 
 			$res['type'] = 'error';
 
-			if (isset($response['msg'])) {
+			if( isset($response['msg']) ) {
 				
 				$res['msg'] = $response['msg'];
-			}else{
+			} else {
 
 				$res['msg'] = 'Empty response found.';
 			}
 		}
 
-		if (isset($response['sf'])) {
+		if( isset($response['sf']) ) {
 		
 			$res['sf'] = $response['sf'];	
 		}
