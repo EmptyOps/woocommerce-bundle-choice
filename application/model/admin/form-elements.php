@@ -229,7 +229,14 @@ class Form_Elements {
 		}
 
 		if(empty($options)){
-			$options = \eo\wbc\model\Category_Attribute::instance()->get_attributs();
+
+			if( !empty( $args['is_sp_eid'] ) ) {
+
+				$options = wbc()->wc->get_productAttributes('detailed_sp_eid');
+			} else {
+
+				$options = \eo\wbc\model\Category_Attribute::instance()->get_attributs();
+			}
 		}
 
 		if(empty($id)){
@@ -620,11 +627,12 @@ class Form_Elements {
 		return $this->text($key,$label,$args);
 	}
 
-	public function checkbox($key,$label,$args=array()){
+	public function visibility($key,$label,$args=array()) {
+
 		extract($args);
 
 		if(empty($info)){
-			$info = array( 'label'=>eowbc_lang("Toggle status of {$label}"),
+			$info = array( 'label'=>eowbc_lang("Sets specified visibility on ${label}"),
 				'type'=>'visible_info',
 				'class'=>array('small'),				
 			);
@@ -634,6 +642,26 @@ class Form_Elements {
 				'class'=>array('small'),				
 			);
 		}
+
+		$args['info'] = $info;
+		$args['label'] = "Hide ${label}?";
+		return $this->checkbox($key,$label,$args);
+	}
+
+	public function checkbox($key,$label,$args=array()){
+		extract($args);
+
+		if(empty($info)){
+			$info = array( 'label'=>eowbc_lang("Toggle status of {$label}"),
+				'type'=>'visible_info',
+				'class'=>array('small'),				
+			);
+		} /*else {
+			$info = array( 'label'=>$info,
+				'type'=>'visible_info',
+				'class'=>array('small'),				
+			);
+		}*/
 
 		if(!empty($args['label'])){
 			$label = $args['label'];

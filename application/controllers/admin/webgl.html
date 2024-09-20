@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3D Graphics with WebGL</title>
+  <style>
+    body { margin: 0; }
+    canvas { display: block; }
+  </style>
+</head>
+<body>
+  <canvas id="webgl-canvas"></canvas>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // Get the canvas element
+      var canvas = document.getElementById('webgl-canvas');
+
+      // Check if the browser supports WebGL
+      var gl = canvas.getContext('webgl');
+      if (!gl) {
+        console.log('WebGL not supported, falling back on experimental-webgl');
+        gl = canvas.getContext('experimental-webgl');
+      }
+
+      if (!gl) {
+        alert('Your browser does not support WebGL');
+        return;
+      }
+
+      // Define vertex shader code
+      var vsSource = `
+        attribute vec4 aVertexPosition;
+        uniform mat4 uModelViewMatrix;
+        uniform mat4 uProjectionMatrix;
+        void main(void) {
+          gl_Position = uProjectionMatrix * uModelViewMatrix * aVertexPosition;
+        }
+      `;
+
+      // Define fragment shader code
+      var fsSource = `
+        void main(void) {
+          gl_FragColor = vec4(1.0, 1.0, 1.0, 1.0);
+        }
+      `;
+
+      // Compile shaders
+      function compileShader(gl, source, type) {
+        var shader = gl.createShader(type);
+        gl.shaderSource(shader, source);
+        gl.compileShader(shader);
+
+        if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+          console.error('Shader compilation failed:', gl.getShaderInfoLog(shader));
+          gl.deleteShader(shader);
+          return null;
+        }
+
+        return shader;
+      }
+
+      var vertexShader = compileShader(gl, vsSource, gl.VERTEX_SHADER);
+      var fragmentShader = compileShader(gl, fsSource, gl.FRAGMENT_SHADER);
+
+      // Link shaders into a program
+      var shaderProgram = gl.createProgram();
+      gl.attachShader(shaderProgram, vertexShader);
+      gl.attachShader(shaderProgram, fragmentShader);
+      gl.linkProgram(shaderProgram);
+
+      if (!gl.getProgramParameter(shaderProgram, gl.LINK_STATUS)) {
+        console.error('Shader program linking failed:', gl.getProgramInfoLog(shaderProgram));
+        return;
+      }
+
+      // Define vertices for a cube
+      var vertices = new Float32Array([
+        -1.0, -1.0, -1.0,
+         1.0, -1.0, -1.0,
+         1.0,  1.0, -1.0,
+        -1.0,  1.0, -1.0,
+        -1.0, -1.0,  1.0,
+         1.0, -1.0,  1.0,
+         1.0,  1.0,  1.0,
+        -1.0,  1.0,  1.0
+      ]);
+
+      // Create buffer and put vertices in it
+      var vertexBuffer = gl.createBuffer();
+      gl.bindBuffer(gl.ARRAY_BUFFER, vertexBuffer);
+      gl.bufferData(gl.ARRAY_BUFFER, vertices, gl.STATIC_DRAW);
+
+      // Get attribute and uniform locations
+      var position = gl.getAttribLocation(shaderProgram, 'aVertexPosition');
+      var modelViewMatrix = gl.getUniformLocation(shaderProgram, 'uModelViewMatrix');
+      var projectionMatrix = gl.getUniformLocation(shaderProgram, 'uProjectionMatrix');
+
+      // Use shaders
+      gl.useProgram(shaderProgram);
+
+      // Set up the model view matrix and projection matrix
+      var modelViewMatrixValue = new Float32Array(16);
+      var projectionMatrixValue = new Float32Array(16);
+      mat4.identity(modelViewMatrixValue);
+      mat4.identity(projectionMatrixValue);
+      mat4.perspective(projectionMatrixValue, Math.PI / 4, canvas.width / canvas.height, 0.1, 100.0);
+
+      gl.uniformMatrix4fv(modelViewMatrix, false, modelViewMatrixValue);
+      gl.uniformMatrix4fv(projectionMatrix, false, projectionMatrixValue);
+
+      // Point an attribute to the currently bound VBO
+      gl.bindBuffer(gl.ARRAY_BUFFER, vertexBuffer);
+      gl.vertexAttribPointer(position, 3, gl.FLOAT, false, 0, 0);
+      gl.enableVertexAttribArray(position);
+
+      // Draw the cube
+      gl.clearColor(0.0, 0.0, 0.0, 1.0);
+      gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+      gl.enable(gl.DEPTH_TEST);
+
+      gl.viewport(0, 0, canvas.width, canvas.height);
+      gl.drawArrays(gl.TRIANGLES, 0, 6 * 2 * 3);
+    });
+  </script>
+</body>
+</html>

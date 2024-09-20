@@ -221,8 +221,13 @@ class Setup_Wizard {
 		        <head>
 		            <meta name="viewport" content="width=device-width" />
 		            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<<<<<<< HEAD
 		            <title><?php esc_html_e( 'BUNDLOICE (formerly Woo Choice Plugin) &rsaquo; Setup Wizard', 'woocommerce' ); ?></title>
 		            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+=======
+		            <title><?php esc_html_e( 'WooCommerce Product Bundle Choice &rsaquo; Setup Wizard', 'woocommerce' ); ?></title>
+		            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>	            
+>>>>>>> a1527bd840938692f336efba0fc0a73c1d6970db
 		            <link rel="stylesheet" type="text/css" href="<?php echo constant('EOWBC_ASSET_URL').'css/fomantic/semantic.min.css'; ?>">
 		        </head>
 		        <body>

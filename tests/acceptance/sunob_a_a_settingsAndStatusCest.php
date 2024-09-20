@@ -29,7 +29,7 @@ class sunob_a_a_settingsAndStatusCest extends n_f_adminSideSetupCest
             return;
         }
 
-        $this->enablingBonusFeature($I, 'opts_uis_item_page', 'eowbc-tiny-features', 'Hide SKU,Categories sections?');
+        $this->enablingBonusFeature($I, 'opts_uis_item_page', 'eowbc-tiny-features', 'Hide SKU, Categories sections?');
 
 		// TODO do other additional testing and verification here 
 

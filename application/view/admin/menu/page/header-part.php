@@ -4,32 +4,74 @@
 */
 
 if( empty($mode) || ( $mode != "setup_wizard" && $mode != "plain" ) ) { 
+
+    $singleton_function = "wbc";
+    $plugin_slug = "woo-bundle-choice";
+    if( isset($SP_Extension) ) {
+      $singleton_function = $SP_Extension->singleton_function();
+      $plugin_slug = $SP_Extension->extension_slug();
+      $singleton_functionUpper = strtoupper( $singleton_function );
+    }
+
 ?>
 <div class="ui basic segment">
   <div class="ui aligned grid" style="margin-top:1em;">
     <h2 class="ui header left aligned left floated ">   
     	<img class="ui avatar image" src="<?php echo constant('EOWBC_ICON_SVG'); ?>" / style="margin-top: 0px !important"> 
-      <div class="content" style="height: 2em;"><?php echo constant('EOWBC_NAME'); ?>
-          <div class="sub header" style="font-style: italic;">Thank you for installing <?php echo constant('EOWBC_NAME'); ?>! <?php echo eowbc_lang("Product bundling as per user's choice."); ?></div>  
+      <div class="content" style="height: 2em;"><?php echo !isset($SP_Extension) ? constant('EOWBC_NAME') : constant($singleton_functionUpper.'_NAME') ; ?>
+
+          <?php 
+            $desc = "";
+            if( !isset($SP_Extension) ) {
+              $desc = "Thank you for installing ".constant('EOWBC_NAME')."! ".eowbc_lang("Product bundling as per user's choice.");
+            }
+            else {
+              $desc = "Thank you for installing ".constant($singleton_functionUpper.'_NAME')."! ";
+            }
+          ?>
+          <div class="sub header" style="font-style: italic;"><?php echo $desc; ?></div>  
              
       </div> 
     </h2>
     <i class="right floated question circle outline eo_help icon eowbc_help_context" data-html="
           <div class='ui basic segments'>
-            <!--<div class='ui compact segment'>
-              <a style='cursor:pointer;' href='https://sphereplugins.com/woo-custom-filter-widget/docs/getting-started/' target='_blank'><i class='hands helping icon'></i>&nbsp;Documentation</a>
-            </div>
-            <div class='ui compact segment'>
+            <?php if( !isset($SP_Extension) ) { ?>
+              <div class='ui compact segment'>
+                <a style='cursor:pointer;' href='https://sphereplugins.com/docs/woo-choice-plugin/getting-started/installation-and-setup/' target='_blank'><i class='hands helping icon'></i>&nbsp;Documentation</a>
+              </div>
+            <?php } ?>
+
+            <!--            <div class='ui compact segment'>
               <a style='cursor:pointer;' href='https://sphereplugins.com/woo-custom-filter-widget/docs/shortcodes-for-filter-widgets/' target='_blank'><i class='file alternate icon'></i>&nbsp;Shortcode Docs</a>
             </div>
             <div class='ui compact segment'>
               <a style='cursor:pointer;' href='https://sphereplugins.com/woo-custom-filter-widget/docs/shop-category-page-filters/' target='_blank'><i class='file alternate icon'></i>&nbsp;Shop/Cat Filter Docs</a>
             </div> --!>
+            <?php 
+
+              if( !empty($singleton_function) )
+              {
+                if( isset($singleton_function()->config) && method_exists($singleton_function()->config, 'required_hooks_n_filters_etc') )
+                {
+                  $config = $singleton_function()->config->required_hooks_n_filters_etc();
+                  if( is_array($config) && sizeof($config) > 0 ) {
+            ?>
+                    <div class='ui compact segment'>
+                      <a style='cursor:pointer;' href='<?php echo admin_url('admin.php?page='.$plugin_slug.'---theme-adaption');?>'><i class='hands helping icon'></i>&nbsp;Theme Adaption Check</a>
+                    </div>
+            <?php 
+                  }
+                } 
+              }
+            ?>
             <div class='ui compact segment'>
               <a style='cursor:pointer;' href='https://wordpress.org/support/plugin/woo-bundle-choice/' target='_blank'><i class='hands helping icon'></i>&nbsp;Contact Support</a>
             </div>
             <div class='ui compact segment'>
               <a style='cursor:pointer;' href='http://sphereplugins.com/contact-us' target='_blank'><i class='comment alternate icon'></i>&nbsp;Feature requests/ideas &amp; feedback</a>
+            </div>
+            <div class='ui compact segment'>
+              <a style='cursor:pointer;' href='http://sphereplugins.com/contact-us' target='_blank'><i class='hands helping icon'></i>Variation Swatches Documentation</a>
             </div>
           </div>"></i> 
         <style type="text/css">

@@ -1,0 +1,761 @@
+<?php
+/**
+ *	SP Compatibility class 
+ */
+
+namespace eo\wbc\system\core;
+
+defined( 'ABSPATH' ) || exit;
+
+class SP_Compatibility {
+
+	private static $_instance = null;
+
+	public static function instance() {
+
+		if ( ! isset( self::$_instance ) ) {
+			self::$_instance = new self;
+		}
+
+		return self::$_instance;
+	}
+
+	public function __construct() {
+
+	}
+
+	public function single_product_gallery_compatability(){
+
+		// ACTIVE_TODO_OC_START
+
+		// 	jQuery(function ($) {
+		// Promise.resolve().then(function () {
+		// return _interopRequireWildcard(__webpack_require__("./src/js/WooVariationGallery.js"));
+		// }).then(function () {
+		// // For Single Product
+		// $('.woo-variation-gallery-wrapper:not(.wvg-loaded)').WooVariationGallery(); // Ajax and Variation Product
+		// $(document).on('wc_variation_form', '.variations_form', function () {
+		//   $('.woo-variation-gallery-wrapper:not(.wvg-loaded)').WooVariationGallery();
+		// }); // Support for Jetpack's Infinite Scroll,
+		// $(document.body).on('post-load', function () {
+		//   $('.woo-variation-gallery-wrapper:not(.woo-variation-gallery-product-type-variable):not(.wvg-loaded)').WooVariationGallery();
+		// }); // YITH Quickview
+		// $(document).on('qv_loader_stop', function () {
+		//   $('.woo-variation-gallery-wrapper:not(.woo-variation-gallery-product-type-variable):not(.wvg-loaded)').WooVariationGallery();
+		// }); // Elementor
+		// if (window.elementorFrontend && window.elementorFrontend.hooks) {
+		//   elementorFrontend.hooks.addAction('frontend/element_ready/woocommerce-product-images.default', function ($scope) {
+		//     $('.woo-variation-gallery-wrapper:not(.wvg-loaded)').WooVariationGallery();
+		//   });
+		// }
+		// });
+		// });
+		// ACTIVE_TODO_OC_END
+
+ 	}
+
+ 	public function single_Product_variations_form_compatability(){
+
+ 	}
+
+ 	public function feed_loopbox_variations_container_compatability( $page_section, $args = array() ){
+
+		$current_theme_key = wbc()->common->current_theme_key();
+		
+		if($page_section == 'archive_loop_swatches_css_patch') {
+ 			$archive_loop_swatches_css_patch = ' 
+	 			<style type="text/css">	 					
+					.woocommerce-variation-add-to-cart .quantity {
+					    display: none !important;
+					}
+					.woocommerce-variation-add-to-cart .single_add_to_cart_button {
+					    display: none !important;
+					}
+			';
+
+
+	 		if($current_theme_key == 'themes___astra') {
+	 			
+	 			$archive_loop_swatches_css_patch .= '
+	 				.astra-shop-summary-wrap .product_type_variable.add_to_cart_button {
+					    display: none !important;
+					}
+				';
+
+	 		}elseif($current_theme_key == 'themes___customify') {
+	 			
+	 			$archive_loop_swatches_css_patch .= '	 					
+	 				.wc-product__part.wc-product__add_to_cart .product_type_variable.add_to_cart_button {
+					    display: none !important;
+					}
+					.attachment-woocommerce_thumbnail.size-woocommerce_thumbnail {
+					    display: none !important;
+					}
+					.woocommerce-placeholder:not(.spui-post-image){	
+					    display: none !important;
+					}
+					.attachment-shop_catalog{
+					    display: none !important;
+					}
+					.product-has-gallery>.wc-product-inner:hover img {
+					    opacity: 1;
+					}
+				'; 
+	 		}elseif($current_theme_key == 'themes___colormag') {
+	 			
+	 			$archive_loop_swatches_css_patch .= '	 					
+	 				.woocommerce-loop-product__title {
+					    display: inline-block;
+					}
+				'; 
+	 		}elseif($current_theme_key == 'themes___estore') {
+	 			
+	 			$archive_loop_swatches_css_patch .= '	 					
+	 				body, html {
+					    height: auto !important;
+					}
+					figure.products-img {
+					    display: none;
+					}
+				'; 
+	 		}elseif($current_theme_key == 'themes___shoper') {
+	 			
+	 			$archive_loop_swatches_css_patch .= '	 					
+	 				.product-image figure .size-woocommerce_thumbnail {
+					    display: none !important;
+					}
+					figure .woocommerce-placeholder {
+					    display: none !important;
+					}
+				'; 
+	 		}elseif($current_theme_key == 'themes___shopper-shop') {
+	 			
+	 			$archive_loop_swatches_css_patch .= '	 					
+	 				.product-image figure .size-woocommerce_thumbnail {
+					    display: none !important;
+					}
+					figure .woocommerce-placeholder {
+					    display: none !important;
+					}
+				'; 
+	 		}elseif($current_theme_key == 'themes___storeship') {
+	 			
+	 			$archive_loop_swatches_css_patch .= '	 					
+	 				.woocommerce ul.products li.product:hover a.woocommerce-LoopProduct-link::after {
+					    opacity: 0;
+					    z-index: -1;
+					}
+				'; 
+	 		}elseif($current_theme_key == 'themes___hestia') {
+	 			
+	 			$archive_loop_swatches_css_patch .= '	 					
+					.card-image {
+					    display: none !important;
+					}
+				'; 
+	 		}elseif($current_theme_key == 'themes___kadence') {
+	 			
+	 			$archive_loop_swatches_css_patch .= '	 					
+					.products .product .product-details {
+					    clear: both;
+					}
+				'; 
+	 		}elseif($current_theme_key == 'themes___bosa') {
+	 			
+	 			$archive_loop_swatches_css_patch .= '	 					
+					.product-inner-contents {
+					    clear: both;
+					}
+				'; 
+	 		}elseif($current_theme_key == 'themes___bosa-storefront') {
+	 			
+	 			$archive_loop_swatches_css_patch .= '	 					
+					.product-inner-contents {
+					    clear: both;
+					}
+				'; 
+	 		}elseif($current_theme_key == 'themes___oceanwp') {
+	 			
+	 			$archive_loop_swatches_css_patch .= '	 					
+					li.image-wrap {
+					    display: none;
+					}
+				'; 
+	 		}elseif($current_theme_key == 'themes___jewelry-store') {
+	 			
+	 			$archive_loop_swatches_css_patch .= '	 					
+					.attachment-post-thumbnail {
+					    display: none !important;
+					}
+					img.product_single_effect_img {
+					    display: none !important;
+					}					
+				'; 
+	 		}elseif ($current_theme_key == 'themes___twentytwentytwo') {
+
+	 			$archive_loop_swatches_css_patch .= '	 
+					.wc-block-components-product-image.wc-block-grid__product-image {
+					    display: none;
+					}	 								
+					.has-medium-font-size {
+					    font-size: var(--wp--preset--font-size--medium) !important;
+					    clear: both;
+					}				
+				'; 
+
+	        }elseif ($current_theme_key == 'themes___twentytwentythree') {
+
+	 			$archive_loop_swatches_css_patch .= '	 
+					.wc-block-components-product-image.wc-block-grid__product-image {
+					    display: none;
+					}	 								
+					.has-medium-font-size {
+					    font-size: var(--wp--preset--font-size--medium) !important;
+					    clear: both;
+					}				
+				'; 
+
+	        }elseif ($current_theme_key == 'themes___th-shop-mania') {
+
+	 			$archive_loop_swatches_css_patch .= '	 
+					.thunk-product-content {
+					    display: none;
+					}	
+					.th-shop-mania-quantity {
+					    display: none;
+					}
+				'; 
+
+	        }
+
+	 		$archive_loop_swatches_css_patch .= '</style>';
+
+	 		return $archive_loop_swatches_css_patch;
+	 	}
+ 	}
+
+ 	public function feed_quickview_container_compatability($page_section,$args = array()){
+
+ 	}
+
+ 	public function loop_render_compatability($page_section,$args = array()){
+
+ 		if($page_section == 'before_shop_loop_item_loop_thumbnail_action') {
+	 	
+	 		$current_theme_key = wbc()->common->current_theme_key();
+
+	 		// themes
+	 		// NOTE: where compatibility is not causing any false positive issues then we can simply apply those extra or condition 
+	 		if($current_theme_key == 'themes___orchid' || strpos( $current_theme_key, 'orchid') !== FALSE){
+
+		 		remove_action( 'orchid_store_loop_product_thumbnail', 'woocommerce_template_loop_product_thumbnail', 10 );
+		 	
+		 	} elseif(class_exists('Flatsome_Default') /*$current_theme_key == 'themes___orchid' || strpos( $current_theme_key, 'orchid') !== FALSE*/){
+
+		 		remove_action('flatsome_woocommerce_shop_loop_images', 'woocommerce_template_loop_product_thumbnail', 10);
+		 	} 
+
+		 	// // plugins
+		 	// if(wbc()->wp->wbc_is_plugin_active('woocommerce-products-filter')) {
+
+		 		
+		  //       //flatsome theme compatibility
+		  //       remove_action('flatsome_woocommerce_shop_loop_images', 'woocommerce_template_loop_product_thumbnail', 10);
+	            
+		 	// }
+		}elseif($page_section == 'before_shop_loop_item_loop_thumbnail_hook_key') {
+	 	
+	 		$current_theme_key = wbc()->common->current_theme_key();
+
+	 		if($current_theme_key == 'themes___jewelry-store'){
+
+		 		$args['hook_key'] = 'post_thumbnail_html';
+		 		$args['hook_type'] = 'filter';
+		 		$args['hook_priority'] = 10;
+		 	} 
+	
+			return $args;
+		}
+ 	}
+
+	public function single_product_render_compatability( $page_section, $args = array() ) {
+
+		$current_theme_key = wbc()->common->current_theme_key();
+
+		if($page_section == 'woocommerce_after_add_to_cart_button') {
+	 	
+	 		$current_theme_key = wbc()->common->current_theme_key();
+
+	 		if ($current_theme_key == 'themes___purple_theme') {
+	        	
+	        	return 'woocommerce_after_add_to_cart_form';
+	        }
+
+	        return $args['hook_key'];
+
+	 	}elseif($page_section == 'gallery_zoom_container_width') {
+	 	
+	 		$current_theme_key = wbc()->common->current_theme_key();
+
+	 		if ($current_theme_key == 'themes___astra') {
+	        	
+	        	return '54%';
+
+	        }elseif ($current_theme_key == 'themes___blossom-shop') {
+
+	        	return '52%';
+
+	        }elseif ($current_theme_key == 'themes___bosa') {
+
+	        	return '48%';
+
+	        }elseif ($current_theme_key == 'themes___bosa-storefront') {
+
+	        	return '48%';
+
+	        }elseif ($current_theme_key == 'themes___botiga') {
+
+	        	return '50%';
+
+	        }elseif ($current_theme_key == 'themes___customify') {
+
+	        	return '100%';
+
+	        }elseif ($current_theme_key == 'themes___Divi') {
+
+	        	return '52%';
+
+	        }elseif ($current_theme_key == 'themes___ecommerce-solution') {
+
+	        	return '52%';
+
+	        }elseif ($current_theme_key == 'themes___enwoo') {
+
+	        	return '52%';
+
+	        }elseif ($current_theme_key == 'themes___generatepress') {
+
+	        	return '52%';
+
+	        }elseif ($current_theme_key == 'themes___hello-elementor') {
+
+	        	return '52%';
+
+	        }elseif ($current_theme_key == 'themes___hestia') {
+
+	        	// return '45%';
+	        	return '100%';
+
+	        }elseif ($current_theme_key == 'themes___jewelry-store') {
+
+	        	return '52%';
+
+	        }elseif ($current_theme_key == 'themes___kadence') {
+
+	        	return '52%';
+
+	        }elseif ($current_theme_key == 'themes___laventa') {
+
+	        	return '45%';
+
+	        }elseif ($current_theme_key == 'themes___neve') {
+
+	        	return '48%';
+
+	        }elseif ($current_theme_key == 'themes___oceanwp') {
+
+	        	return '56%';
+
+	        }elseif ($current_theme_key == 'themes___open-shop') {
+
+	        	return '52%';
+
+	        }elseif ($current_theme_key == 'themes___qi') {
+
+	        	return '58%';
+
+	        }elseif ($current_theme_key == 'themes___rife-free') {
+
+	        	return '50%';
+
+	        }elseif ($current_theme_key == 'themes___shoper') {
+
+	        	return '52%';
+
+	        }elseif ($current_theme_key == 'themes___shopper-shop') {
+
+	        	return '52%';
+
+	        }elseif ($current_theme_key == 'themes___shoppingcart') {
+
+	        	return '52%';
+
+	        }elseif ($current_theme_key == 'themes___storefront') {
+
+	        	return '43%';
+
+	        }elseif ($current_theme_key == 'themes___storeship') {
+
+	        	return '51%';
+
+	        }elseif ($current_theme_key == 'themes___sydney') {
+
+	        	return '52%';
+
+	        }elseif ($current_theme_key == 'themes___th-shop-mania') {
+
+	        	return '47%';
+
+	        }elseif ($current_theme_key == 'themes___twentytwenty') {
+
+	        	return '52%';
+
+	        }elseif ($current_theme_key == 'themes___twentytwentyone') {
+
+	        	return '52%';
+
+	        }elseif ($current_theme_key == 'themes___twentytwentythree') {
+
+	        	// -- get woo vala e default width j rakhi se aa theme mate koi width set nathi kari @a 23-12-2023
+	        	// return '100%';
+
+	        }elseif ($current_theme_key == 'themes___twentytwentytwo') {
+
+	        	// -- get woo vala e default width j rakhi se aa theme mate koi width set nathi kari @a 23-12-2023
+	        	// return '100%';
+
+	        }elseif ($current_theme_key == 'themes___vogue') {
+
+	        	return '52%';
+
+	        }elseif ($current_theme_key == 'themes___vw-ecommerce-store') {
+
+	        	return '52%';
+
+	        }elseif ($current_theme_key == 'themes___zakra') {
+
+	        	return '52%';
+
+	        }elseif ($current_theme_key == 'themes___colormag') {
+
+	        	return '47%';
+
+	        }elseif ($current_theme_key == 'themes___twentysixteen') {
+
+	        	return '53%';
+
+	        }elseif ($current_theme_key == 'themes___twentyseventeen') {
+
+	        	return '52%';
+
+	        }elseif ($current_theme_key == 'themes___twentynineteen') {
+
+	        	return '52%';
+
+	        }elseif ($current_theme_key == 'themes___customizr') {
+
+	        	return '52%';
+
+	        }elseif ($current_theme_key == 'themes___estore') {
+	        	return '52%';
+	        }
+
+	        return $args['default_width'];
+	 	}elseif($page_section == 'product_page_css_patch') {
+
+ 			$product_page_css_patch = ' 
+	 			<style type="text/css">	 					
+			';
+
+	 		if($current_theme_key == 'themes___estore') {
+	 			
+	 			$product_page_css_patch .= '
+	 				body, html {
+					    height: auto !important;
+					}
+				';
+
+	 		}
+
+	 		$product_page_css_patch .= '</style>';
+
+	 		return $product_page_css_patch;
+	 	}
+	}
+
+ 	public function woo_product_images_template_compatability($page_section,$args = array()){
+
+ 		if($page_section == 'default_render_action') {
+
+	 		$current_theme_key = wbc()->common->current_theme_key();
+
+			// ACTIVE_TODO/TODO here the two different teams may name the same name to a child theme means the alpha-store-pro-child name could be used by someone else and at that time our confirmation can not be considered valid so we may like to rectify theme detection and make it still deep. 
+	 		if($current_theme_key != "themes___alpha-store-pro-child") {
+
+				return false;
+
+			} else{
+		    
+				return true;
+
+			}
+
+		} elseif($page_section == 'product_image_get_template') {
+
+	 		$current_theme_key = wbc()->common->current_theme_key();
+
+			// ACTIVE_TODO/TODO here the two different teams may name the same name to a child theme means the alpha-store-pro-child name could be used by someone else and at that time our confirmation can not be considered valid so we may like to rectify theme detection and make it still deep. 
+	 		if($current_theme_key == "themes___corano-child") {
+
+				return 'single-product/product-image-magnifier.php';
+
+			} else{
+		    
+				return $args['default_val'];
+
+			}
+
+		} elseif($page_section == 'product_thumbnails_get_template') {
+
+	 		$current_theme_key = wbc()->common->current_theme_key();
+
+			// ACTIVE_TODO/TODO here the two different teams may name the same name to a child theme means the alpha-store-pro-child name could be used by someone else and at that time our confirmation can not be considered valid so we may like to rectify theme detection and make it still deep. 
+	 		if($current_theme_key == "themes___corano-child") {
+
+				return 'single-product/product-thumbnails-magnifier.php';
+
+			} else{
+		    
+				return $args['default_val'];
+
+			}
+
+		} elseif($page_section == 'product_image_get_template_part') {
+
+	 		$current_theme_key = wbc()->common->current_theme_key();
+
+			// ACTIVE_TODO/TODO here the two different teams may name the same name to a child theme means the alpha-store-pro-child name could be used by someone else and at that time our confirmation can not be considered valid so we may like to rectify theme detection and make it still deep. 
+	 		if($current_theme_key == "themes___corano-child") {
+
+				return 'single-product/product-image-magnifier';
+
+			} else{
+		    
+				return $args['default_val'];
+
+			}
+
+		} elseif($page_section == 'product_thumbnails_get_template_part') {
+
+	 		$current_theme_key = wbc()->common->current_theme_key();
+
+			// ACTIVE_TODO/TODO here the two different teams may name the same name to a child theme means the alpha-store-pro-child name could be used by someone else and at that time our confirmation can not be considered valid so we may like to rectify theme detection and make it still deep. 
+	 		if($current_theme_key == "themes___corano-child") {
+
+				return 'single-product/product-thumbnails-magnifier';
+
+			} else{
+		    
+				return $args['default_val'];
+
+			}
+
+		}
+
+		return false;
+ 	}
+
+ 	public function dokan(){
+
+		// ACTIVE_TODO_OC_START
+ 	// 	 $($el).closest('.woocommerce_variation').addClass('variation-needs-update');
+  //       $('button.cancel-variation-changes, button.save-variation-changes').removeAttr('disabled');
+  //       $('#variable_product_options').trigger('woocommerce_variations_input_changed'); // Dokan Support
+
+  //       $($el).closest('.dokan-product-variation-itmes').addClass('variation-needs-update');
+  //       $('.dokan-product-variation-wrapper').trigger('dokan_variations_input_changed');
+  //       $(document).trigger('woo_variation_gallery_admin_variation_changed', this);
+
+  //       ///////////////////////////////////////////////
+
+  //       // Dokan Support
+		// 	add_action( 'wp_enqueue_scripts', array( $this, 'dokan_enqueue_scripts' ) );
+
+		// 	add_action( 'wp_footer', array( $this, 'dokan_footer' ) );
+
+		// 	add_action( 'dokan_product_after_variable_attributes', array( $this, 'dokan_variable_attributes' ), 10, 3 );
+
+		// ///////////////////////////////////////////////////
+
+		// public function dokan_variable_attributes( $loop, $variation_data, $variation ) {
+		// 	if ( class_exists( 'WeDevs_Dokan' ) && current_user_can( 'dokan_edit_product' ) ) {
+		// 		woo_variation_gallery()->get_backend()->gallery_admin_html( $loop, $variation_data, $variation );
+		// 	}
+		// }
+
+		// public function dokan_enqueue_scripts() {
+		// 	if ( class_exists( 'WeDevs_Dokan' ) && current_user_can( 'dokan_edit_product' ) ) {
+		// 		woo_variation_gallery()->get_backend()->admin_enqueue_scripts();
+		// 	}
+		// }
+
+		// public function dokan_footer() {
+		// 	if ( class_exists( 'WeDevs_Dokan' ) && current_user_can( 'dokan_edit_product' ) ) {
+		// 		woo_variation_gallery()->get_backend()->admin_template_js();
+		// 	}
+		// }
+		
+		// ////////////////////////////////////////////////
+
+		// // Dokan Pro Support from 3.2.0+
+		// add_action( 'dokan_product_after_variable_attributes', 'wvg_gallery_admin_html', 10, 3 );	
+
+
+		// /////////////////////////////woo-variation-swatches plugin
+		// ////////////// hooks.php
+
+		// 		add_action( 'dokan_product_option_terms', 'dokan_support_wvs_product_option_terms', 20, 2 );
+
+
+		// if ( ! function_exists( 'dokan_support_wvs_product_option_terms' ) ) :
+		// 	function dokan_support_wvs_product_option_terms( $attribute_taxonomy, $i ) {
+		// 		// $attribute_taxonomy, $i
+		// 		// $tax, $i
+		// 		global $post, $thepostid, $product_object;
+		// 		if ( in_array( $attribute_taxonomy->attribute_type, array_keys( wvs_available_attributes_types() ) ) ) {
+
+		// 			$taxonomy = wc_attribute_taxonomy_name( $attribute_taxonomy->attribute_name );
+
+		// 			$product_id = $thepostid;
+
+		// 			if ( is_null( $thepostid ) && isset( $_POST['post_id'] ) ) {
+		// 				$product_id = absint( $_POST['post_id'] );
+		// 			}
+
+		// 			$args = array(
+		// 				'orderby'    => 'name',
+		// 				'hide_empty' => 0,
+		// 			);
+		// ACTIVE_TODO_OC_END
+
+					// ACTIVE_TODO_OC_START
+ 					if( false ): 
+					?>
+					<select multiple="multiple" style="width:100%" data-placeholder="<?php esc_attr_e( 'Select terms', 'woo-variation-swatches' ); ?>" class="dokan_attribute_values dokan-select2" name="attribute_values[<?php echo esc_attr( $i ); ?>][]">
+						<?php
+						$all_terms = get_terms( $taxonomy, apply_filters( 'dokan_product_attribute_terms', $args ) );
+						if ( $all_terms ) :
+							foreach ( $all_terms as $term ) :
+								echo '<option value="' . esc_attr( $term->slug ) . '" ' . selected( has_term( absint( $term->term_id ), $taxonomy, $product_id ), true, false ) . '>' . esc_attr( apply_filters( 'woocommerce_product_attribute_term_name', $term->name, $term ) ) . '</option>';
+							endforeach;
+						endif;
+						?>
+					</select>
+
+					<div class="dokan-pre-defined-attribute-btn-group">
+						<button class="dokan-btn dokan-btn-default plus dokan-select-all-attributes"><?php esc_html_e( 'Select all', 'woo-variation-swatches' ); ?></button>
+						<button class="dokan-btn dokan-btn-default minus dokan-select-no-attributes"><?php esc_html_e( 'Select none', 'woo-variation-swatches' ); ?></button>
+					</div>
+					<?php
+					endif;
+					// ACTIVE_TODO_OC_END 		
+
+	// ACTIVE_TODO_OC_START
+	// 			}
+	// 		}
+	// 	endif;
+	// ACTIVE_TODO_OC_END 		
+
+ 	}
+
+ 	public function IE11(){
+
+
+	// ACTIVE_TODO_OC_START
+ // 		//-------------------------------------------------------------------------------
+	// 	// Detecting IE 11 Browser
+	// 	//-------------------------------------------------------------------------------
+	// 	if ( ! function_exists( 'wvg_is_ie11' ) ):
+	// 		function wvg_is_ie11() {
+	// 			global $is_IE;
+	// 			$ua   = $_SERVER['HTTP_USER_AGENT'];
+	// 			$is11 = preg_match( "/Trident\/7.0;(.*)rv:11.0/", $ua, $match ) !== false;
+
+	// 			return $is_IE && $is11;
+	// 			//return TRUE;
+	// 		}
+	// 	endif;
+	// ACTIVE_TODO_OC_END
+ 	}
+
+ 	//////////////////////////////////////////////
+
+		//  jQuery(function ($)
+		//  {
+		//   Promise.resolve().then(function () {
+		//     return _interopRequireWildcard(__webpack_require__("./src/js/WooVariationGallery.js"));
+		//   }).then(function () {
+		//     // For Single Product
+		//     $('.woo-variation-gallery-wrapper:not(.wvg-loaded)').WooVariationGallery(); // Ajax and Variation Product
+
+		//     $(document).on('wc_variation_form', '.variations_form', function () {
+		//       $('.woo-variation-gallery-wrapper:not(.wvg-loaded)').WooVariationGallery();
+		//     }); // Support for Jetpack's Infinite Scroll,
+
+		//     $(document.body).on('post-load', function () {
+		//       $('.woo-variation-gallery-wrapper:not(.woo-variation-gallery-product-type-variable):not(.wvg-loaded)').WooVariationGallery();
+		//     }); // YITH Quickview
+
+		//     $(document).on('qv_loader_stop', function () {
+		//       $('.woo-variation-gallery-wrapper:not(.woo-variation-gallery-product-type-variable):not(.wvg-loaded)').WooVariationGallery();
+		//     }); // Elementor
+
+		//     if (window.elementorFrontend && window.elementorFrontend.hooks) {
+		//       elementorFrontend.hooks.addAction('frontend/element_ready/woocommerce-product-images.default', function ($scope) {
+		//         $('.woo-variation-gallery-wrapper:not(.wvg-loaded)').WooVariationGallery();
+		//       });
+		//     }
+		//   });
+		// });
+
+
+	// ACTIVE_TODO_OC_START
+	// 	add_action( 'wvs_global_attribute_column', function ( $column, $term_id, $taxonomy, $attribute, $fields, $available_types ) {
+	// 		if ( class_exists( 'SitePress' ) ) {
+
+	// 			global $sitepress;
+
+	// 			$keys = wp_list_pluck( $fields, 'id' );
+	// 			// $keys = array_column($fields, 'id');
+
+	// 			foreach ( $keys as $key ) {
+	// 				$value = sanitize_text_field( get_term_meta( $term_id, $key, true ) );
+	// 				// $original_element_id = $sitepress->get_original_element_id( $term_id, 'tax_' . $taxonomy );
+	// 				$trid         = $sitepress->get_element_trid( $term_id, 'tax_' . $taxonomy );
+	// 				$translations = $sitepress->get_element_translations( $trid, 'tax_' . $taxonomy );
+
+	// 				$current_lang = $sitepress->get_current_language();
+	// 				$default_lang = $sitepress->get_default_language();
+
+	// 				if ( $translations && empty( $value ) ) {
+	// 					// source_language_code
+	// 					$translation = array_values( array_filter( $translations, function ( $translation ) {
+	// 						return isset( $translation->original ) && ! empty( $translation->original );
+	// 					} ) );
+
+	// 					$translation = array_shift( $translation );
+
+	// 					if ( empty( $value ) && $translation ) {
+	// 						$original_term_id = $translation->term_id;
+	// 						$original_value   = sanitize_text_field( get_term_meta( $original_term_id, $key, true ) );
+	// 						// Copy term meta from original
+	// 						update_term_meta( $term_id, $key, $original_value );
+	// 					}
+	// 				}
+
+	// 			}
+	// 		}
+	// 	}, 10, 6 );
+	// ACTIVE_TODO_OC_END
+
+}

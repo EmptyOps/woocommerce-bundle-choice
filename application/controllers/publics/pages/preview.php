@@ -2,7 +2,7 @@
 namespace eo\wbc\controllers\publics\pages;
 defined( 'ABSPATH' ) || exit;
 
-class Preview {
+class Preview extends \eo\wbc\system\core\publics\Eowbc_Base_Model_Publics {
 
     private static $_instance = null;
 
@@ -47,12 +47,16 @@ class Preview {
     {
         wbc()->theme->load('css','review');
         wbc()->theme->load('js','review');
-        /*Hide sidebar and make content area full width.*/
-        if(apply_filters('eowbc_filter_sidebars_widgets',true)){
-            add_filter( 'sidebars_widgets',function($sidebars_widgets ) {
-                return array( false );
-            });
-        }
+
+        // chenged on 30-09-2023
+        // /*Hide sidebar and make content area full width.*/
+        // if(apply_filters('eowbc_filter_sidebars_widgets',true)){
+        //     add_filter( 'sidebars_widgets',function($sidebars_widgets ) {
+        //         return array( false );
+        //     });
+        // }
+        parent::instance()->sidebars_widgets();
+        
         $button_backcolor_active = wbc()->options->get_option('appearance_wid_btns','button_backcolor_active','');
         $button_textcolor = wbc()->options->get_option('appearance_wid_btns','button_textcolor','#ffffff');
         $eo_wbc_home_btn_border_color = false;  //dropped this field. wbc()->options->get_option('appearance_wid_btns','button_backcolor_active','');

@@ -5,12 +5,12 @@
 if(!empty($id) and !empty($label)){
 
 	if ( !isset($info_icon) && empty($class) && empty($size_class) ) {
-		?> <label for="<?php echo $id; ?>"><?php echo $label; ?></label> <?php
+		?> <label class="<?php echo !empty($label_class)?$label_class:''; ?>" for="<?php echo $id; ?>"><?php echo $label; ?></label> <?php
 	}
 	else {
 		?> 
 		<div class="<?php echo !empty($class)?$class:''; ?> <?php echo !empty($size_class)?$size_class:''; ?> field" id="<?php echo $id; ?>_label_div">
-			<label for="<?php echo $id; ?>" class="<?php $inline_class ?>"><?php echo $label; ?></label>
+			<label for="<?php echo $id; ?>" class="<?php $inline_class ?> <?php echo !empty($label_class)?$label_class:''; ?>"><?php echo $label; ?></label>
 
 			<?php
 			if (isset($info_icon))

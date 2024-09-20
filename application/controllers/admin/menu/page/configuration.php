@@ -100,7 +100,7 @@ if ( ! class_exists( 'Configuration' ) ) {
 												'class'=>array('secondary')	
 											),
 											'config_automation_visible_info'=>array(
-												'label'=>eowbc_lang('We recommend that you try sample data if you have not yet, in addition to providing the preview of how plugin look like on frontend of your website, sample data & configurations will also serve as boilerplate template for configuring the plugin.'),
+												'label'=>eowbc_lang('We recommend that you try sample data if you have not yet, In addition to providing a preview of how the plugin looks like on frontend of your website, sample data & configurations will also serve as a boilerplate template for configuring the plugin.'),
 												'type'=>'visible_info',
 												'class'=>array('fluid', 'medium'),
 												'size_class'=>array('sixteen','wide'),

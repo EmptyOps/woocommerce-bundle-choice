@@ -45,12 +45,14 @@
 </div>
 <script>
     jQuery(document).ready(function(){
-        jQuery('.step.completed.first_mobile').popup({
-            popup : jQuery('.ui.popup.first_mobile'),
-            on    : 'click',
-            target   :jQuery('.step.completed.first_mobile').parent(),
-            position : 'bottom left',
-            inline: true
-        });
+        if (typeof(jQuery.fn.popup)==='function') {
+            jQuery('.step.completed.first_mobile').popup({
+                popup : jQuery('.ui.popup.first_mobile'),
+                on    : 'click',
+                target   :jQuery('.step.completed.first_mobile').parent(),
+                position : 'bottom left',
+                inline: true
+            });
+        }
     });
 </script>

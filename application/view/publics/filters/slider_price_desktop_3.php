@@ -5,11 +5,11 @@
 */
 
 ?>
-<div class="<?php echo $width_class; ?>">
+<div class="spui-semantic-slider-column <?php echo $width_class; ?>">
 	<p>
 		<span class="ui header">Price</span>				
 		<?php if($reset): ?>
-		&nbsp; <span class="ui grey text" style="cursor: pointer;" onclick="reset_price(event,'<?php echo $min; ?>','<?php echo $max; ?>')">&nbsp;<u>reset</u></span>
+		&nbsp; <span class="ui grey text" style="cursor: pointer;" onclick="reset_price(event,'<?php echo $min; ?>','<?php echo $max; ?>')">&nbsp;<u><?php spext_lang("reset", 'woo-bundle-choice') ?></u></span>
 		<?php endif; ?>
 	</p>			
 	<div class="ui tiny form">

@@ -115,6 +115,9 @@ class EOWBC_Breadcrumb
         //hiren added on 03-06-2020, as replacement to global loading of old version
         self::eo_wbc_enque_asset();
 
+        // ACTIVE_TODO the action hook wbc_before_breadcrumb_widget_core added in category class is stadard now soo below hook might be unnassasary and since it is duplicate so after confirming the depandancy in all extentions and moving it to hook wbc_before_breadcrumb_widget_core lets comment below hook. Lets do it by second revision. -- to h && -- to a
+        do_action('wbc_before_breadcrumb_widget');
+
         /**
             CLASS: 
             -------------------------------------------------
@@ -124,11 +127,17 @@ class EOWBC_Breadcrumb
             title - set title on breadcrumb.
             description - set description on breadcrumb.
          */
-        if(wp_is_mobile()){
-            return self::eo_wbc_breadcrumb_mobile($step,$begin);
+        $return_value = null;    
+        if(/*wp_is_mobile()*/wbc_is_mobile_by_page_sections('cat_shop_page',true)){
+            /*return*/$return_value = self::eo_wbc_breadcrumb_mobile($step,$begin);
         } else {           
-            return self::eo_wbc_breadcrumb_desktop($step,$begin);
+            /*return*/$return_value = self::eo_wbc_breadcrumb_desktop($step,$begin);
         }
+
+        // ACTIVE_TODO the action hook wbc_after_breadcrumb_widget_core added in category class is stadard now soo below hook might be unnassasary and since it is duplicate so after confirming the depandancy in all extentions and moving it to hook wbc_after_breadcrumb_widget_core lets comment below hook. Lets do it by second revision. -- to h && -- to a
+        do_action('wbc_after_breadcrumb_widget');
+
+        return $return_value;
     }
 
     //hiren added on 03-06-2020, as replacement to global loading of old version
@@ -198,15 +207,15 @@ class EOWBC_Breadcrumb
         ob_start();
         $template = wbc()->options->get_option('configuration','config_alternate_breadcrumb','default');
 
-    	if($template=='theme') {
+        if($template=='theme') {
 
             wbc()->load->template('publics/breadcrumb/theme_first_step_desktop', array("step"=>$step,"order"=>$order,"first"=>self::$first,"view_url"=>(!empty(wbc()->sanitize->get('FIRST')) ? self::eo_wbc_breadcrumb_view_url(wbc()->sanitize->get('FIRST'),$order):'#'),"change_url"=>(!empty(wbc()->sanitize->get('FIRST'))?self::eo_wbc_breadcrumb_change_url($order,wbc()->sanitize->get('FIRST')):'#'),'first_icon'=>self::$first_icon,"first_name"=>self::$first_name,'first_slug'=>self::$first_slug)); 
 
 
         } elseif(wbc()->options->get_option('configuration','config_alternate_breadcrumb','default')=='template_1') {
             wbc()->load->template('publics/breadcrumb/first_step_alternate_desktop_1', array("step"=>$step,"order"=>$order,"first"=>self::$first,"view_url"=>(!empty(wbc()->sanitize->get('FIRST')) ? self::eo_wbc_breadcrumb_view_url(wbc()->sanitize->get('FIRST'),$order):'#'),"change_url"=>(!empty(wbc()->sanitize->get('FIRST'))?self::eo_wbc_breadcrumb_change_url($order,wbc()->sanitize->get('FIRST')):'#'),'first_icon'=>self::$first_icon,"first_name"=>self::$first_name,'first_slug'=>self::$first_slug)); 
-            	
-    	} elseif(wbc()->options->get_option('configuration','config_alternate_breadcrumb','default')=='template_2') {
+                
+        } elseif(wbc()->options->get_option('configuration','config_alternate_breadcrumb','default')=='template_2') {
             wbc()->load->template('publics/breadcrumb/first_step_alternate_desktop_2', array("step"=>$step,"order"=>$order,"first"=>self::$first,"view_url"=>(!empty(wbc()->sanitize->get('FIRST')) ? self::eo_wbc_breadcrumb_view_url(wbc()->sanitize->get('FIRST'),$order):'#'),"change_url"=>(!empty(wbc()->sanitize->get('FIRST'))?self::eo_wbc_breadcrumb_change_url($order,wbc()->sanitize->get('FIRST')):'#'),'first_icon'=>self::$first_icon,"first_name"=>self::$first_name,'first_slug'=>self::$first_slug)); 
                 
         } elseif($template!='default') {
@@ -214,14 +223,14 @@ class EOWBC_Breadcrumb
                 
         } else {
             wbc()->load->template('publics/breadcrumb/first_step_desktop', array("step"=>$step,"order"=>$order,"first"=>self::$first,"view_url"=>(!empty(wbc()->sanitize->get('FIRST')) ? self::eo_wbc_breadcrumb_view_url(wbc()->sanitize->get('FIRST'),$order):'#'),"change_url"=>(!empty(wbc()->sanitize->get('FIRST'))?self::eo_wbc_breadcrumb_change_url($order,wbc()->sanitize->get('FIRST')):'#'),'first_icon'=>self::$first_icon,"first_name"=>self::$first_name,'first_slug'=>self::$first_slug)); 
-            	
-    	}        
+                
+        }        
         return ob_get_clean();
     }
 
     public static function eo_wbc_breadcumb_second_html($step,$order){        
         ob_start();
-    	$template = wbc()->options->get_option('configuration','config_alternate_breadcrumb','default');
+        $template = wbc()->options->get_option('configuration','config_alternate_breadcrumb','default');
         if($template=='theme'){
 
             wbc()->load->template('publics/breadcrumb/theme_second_step_desktop', array("step"=>$step,"order"=>$order,"second"=>self::$second,"view_url"=>(!empty(wbc()->sanitize->get('SECOND'))?self::eo_wbc_breadcrumb_view_url(wbc()->sanitize->get('SECOND'),$order):'#'),"change_url"=>(!empty(wbc()->sanitize->get('SECOND'))?self::eo_wbc_breadcrumb_change_url($order,wbc()->sanitize->get('SECOND')):'#'),'second_icon'=>self::$second_icon,"second_name"=>self::$second_name,'second_slug'=>self::$second_slug));
@@ -229,7 +238,7 @@ class EOWBC_Breadcrumb
         } elseif(wbc()->options->get_option('configuration','config_alternate_breadcrumb','default')=='template_1') {
             wbc()->load->template('publics/breadcrumb/second_step_alternate_desktop_1', array("step"=>$step,"order"=>$order,"second"=>self::$second,"view_url"=>(!empty(wbc()->sanitize->get('SECOND'))?self::eo_wbc_breadcrumb_view_url(wbc()->sanitize->get('SECOND'),$order):'#'),"change_url"=>(!empty(wbc()->sanitize->get('SECOND'))?self::eo_wbc_breadcrumb_change_url($order,wbc()->sanitize->get('SECOND')):'#'),'second_icon'=>self::$second_icon,"second_name"=>self::$second_name,'second_slug'=>self::$second_slug));
 
-    	} elseif(wbc()->options->get_option('configuration','config_alternate_breadcrumb','default')=='template_2') {
+        } elseif(wbc()->options->get_option('configuration','config_alternate_breadcrumb','default')=='template_2') {
             wbc()->load->template('publics/breadcrumb/second_step_alternate_desktop_2', array("step"=>$step,"order"=>$order,"second"=>self::$second,"view_url"=>(!empty(wbc()->sanitize->get('SECOND'))?self::eo_wbc_breadcrumb_view_url(wbc()->sanitize->get('SECOND'),$order):'#'),"change_url"=>(!empty(wbc()->sanitize->get('SECOND'))?self::eo_wbc_breadcrumb_change_url($order,wbc()->sanitize->get('SECOND')):'#'),'second_icon'=>self::$second_icon,"second_name"=>self::$second_name,'second_slug'=>self::$second_slug));
 
         } elseif($template!='default') {
@@ -238,11 +247,11 @@ class EOWBC_Breadcrumb
         } else {
             
             wbc()->load->template('publics/breadcrumb/second_step_desktop', array("step"=>$step,"order"=>$order,"second"=>self::$second,"view_url"=>(!empty(wbc()->sanitize->get('SECOND'))?self::eo_wbc_breadcrumb_view_url(wbc()->sanitize->get('SECOND'),$order):'#'),"change_url"=>(!empty(wbc()->sanitize->get('SECOND'))?self::eo_wbc_breadcrumb_change_url($order,wbc()->sanitize->get('SECOND')):'#'),'second_icon'=>self::$second_icon,"second_name"=>self::$second_name,'second_slug'=>self::$second_slug));
-    	}
+        }
        return ob_get_clean();     
     }
 
-    public static function eo_wbc_breadcrumb_view_url($product_id,$order){
+    public static function eo_wbc_breadcrumb_view_url($product_id,$order,$product = null){
         //var_dump(self::eo_wbc_breadcrumb_get_category($product_id));
         
         $product_url = get_permalink($product_id);
@@ -252,15 +261,32 @@ class EOWBC_Breadcrumb
         } else {
             $product_url.='?';
         }
+        /*echo "start <br>";
+        var_dump($product);
+        echo "end <br>";
 
-        if(self::eo_wbc_breadcrumb_get_category($product_id)==self::$first_slug/*get_option('eo_wbc_first_slug')*/) {
+        var_dump(!empty($product));
+        
+        if(!empty($product)){
+            var_dump(wbc()->wc->is_variation_object($product));    
 
+            if(wbc()->wc->is_variation_object($product)){
+             var_dump(self::eo_wbc_breadcrumb_get_category($product->get_parent_id())==self::$first_slug);     
+            }
+        }*/
+
+       
+
+        if(self::eo_wbc_breadcrumb_get_category($product_id)==self::$first_slug or (!empty($product) and wbc()->wc->is_variation_object($product) and self::eo_wbc_breadcrumb_get_category($product->get_parent_id())==self::$first_slug)  /*get_option('eo_wbc_first_slug')*/) {
+
+           // echo "text 1";
             return ($product_url.wbc()->common->http_query(array('EO_WBC'=>1,'BEGIN'=>wbc()->sanitize->get('BEGIN'),'STEP'=>sanitize_text_field($order),'FIRST'=>sanitize_text_field(empty(wbc()->sanitize->get('FIRST'))?'':wbc()->sanitize->get('FIRST')),'SECOND'=>sanitize_text_field(empty(wbc()->sanitize->get('SECOND'))?'':wbc()->sanitize->get('SECOND')),'EO_VIEW'=>1)));
 
             
         }
-        elseif (self::eo_wbc_breadcrumb_get_category($product_id)==self::$second_slug/*get_option('eo_wbc_second_slug')*/) {
+        elseif (self::eo_wbc_breadcrumb_get_category($product_id)==self::$second_slug/*get_option('eo_wbc_second_slug')*/ or (!empty($product) and wbc()->wc->is_variation_object($product) and self::eo_wbc_breadcrumb_get_category($product->get_parent_id())==self::$second_slug)) {
 
+            // echo "text 2";
             return $product_url.wbc()->common->http_query(array('EO_WBC'=>1,'BEGIN'=>wbc()->sanitize->get('BEGIN'),'STEP'=>sanitize_text_field($order),'FIRST'=>sanitize_text_field(empty(wbc()->sanitize->get('FIRST'))?'':wbc()->sanitize->get('FIRST')),'SECOND'=>sanitize_text_field(empty(wbc()->sanitize->get('SECOND'))?'':wbc()->sanitize->get('SECOND')),'EO_VIEW'=>1));
         } 
     } 
@@ -521,6 +547,7 @@ class EOWBC_Breadcrumb
                 }
             }        
 
+            // ACTIVE_TODO it seems that CAT_LINK support is not added here and if it is breadcume or any other category url than we may need to add support. But i think standerd ring builder navigation management does controll categary url deply so if should not be routed to secound leval after it is captured and used from default or first leval CAT_LINK peram set in menus and so on. So we may simply need to remove this ACTIVE_TODO in 2nd revision.
             $url=get_bloginfo('url').'/index.php'.'/'.wbc()->wc->wc_permalink('category_base').'/'.$link
                         .wbc()->common->http_query(array_replace($__get,array('EO_WBC'=>1,'BEGIN'=>(@wbc()->sanitize->get('BEGIN')),'STEP'=>2,'FIRST'=>(wbc()->sanitize->get('BEGIN')==self::$first_slug? wbc()->sanitize->get('FIRST'):''),'SECOND'=>(wbc()->sanitize->get('BEGIN')==self::$second_slug?wbc()->sanitize->get('SECOND'):''),'EO_CHANGE'=>1,'CAT_LINK'=>$cat_link)));
                         

@@ -56,7 +56,7 @@ class Eowbc_Sample_Data {
 	public function after_cat_created($feature_key) {
 		
 		$category = $this->data_template->get_categories();
-		$_maps = $this->data_template->get_maps();
+		// $_maps = $this->data_template->get_maps();
 
 		if(!empty($category)){
 			      	
@@ -65,9 +65,9 @@ class Eowbc_Sample_Data {
 	        // update_option('eo_wbc_cats',serialize($catat_category)); 
 	        wbc()->options->set('eo_wbc_cats',serialize($catat_category)); 
 	      
-	      	if(!empty($_maps)){
-	        	$this->add_maps($_maps);
-	      	}
+	      	// if(!empty($_maps)){
+	        // 	$this->add_maps($_maps);
+	      	// }
 
 	        $this->data_template->set_configs_after_categories($catat_category);
 	    }
@@ -76,7 +76,8 @@ class Eowbc_Sample_Data {
 	public function after_attr_created($feature_key) {
 		
 		$attributes = $this->data_template->get_attributes();
-
+		$_maps = $this->data_template->get_maps();
+		
 		if(!empty($attributes)){
 	    
 	        //Send for creation and update returned array.
@@ -87,7 +88,10 @@ class Eowbc_Sample_Data {
 	        $this->add_filters();
 	        if(!empty(wbc()->sanitize->get('type')) and wbc()->sanitize->get('type')=='filters_automation'){
 	        	$this->add_filters_custom_filter();	
-	        }			        
+	        }
+	        if(!empty($_maps)){
+	        	$this->add_maps($_maps);
+	      	}	        
 
 	        // update_option('eo_wbc_filter_enable','1');    
 	        $this->data_template->set_configs_after_attributes();
@@ -104,6 +108,18 @@ class Eowbc_Sample_Data {
 			header("Location: ".admin_url('admin.php?page=eowbc-tiny-features')); 
 			exit; 
 		}
+		
+		--- start ---
+		-- aa code redirect mate mukva no hato jya thi juna version ma redirect thatu hoy tya, but juna version ma upper no code malyo se tema already if condition se to aa niche ni if ne tena bhegi adjust karva ni se -- to h && -- to a
+			-- may be upper ni if thodak deffernt logic mate se so we need to think what needed to be done now
+		$features = unserialize(wbc()->options->get_option('setting_status_setting_status_setting','features',serialize(array())));
+		$bonus_features = unserialize(wbc()->options->get_option('setting_status_setting_status_setting','bonus_features',serialize(array())));
+
+		if( empty($features['ring_builder']) and empty($features['pair_maker']) and empty($features['guidance_tool']) and empty($bonus_features['price_control']) and empty($bonus_features['spec_view_item_page']) and empty($bonus_features['filters_shortcode']) and empty($bonus_features['filters_shop_cat']) ) {
+			header("Location: ".admin_url('admin.php?page=eowbc-tiny-features'));
+		}
+		--- end ---
+		
 		if(!empty($_POST)) {			
 			
 			if(isset($_POST['_wpnonce']) && wp_verify_nonce(wbc()->sanitize->post('_wpnonce'),'eo_wbc_auto_jewel')) {
@@ -374,7 +390,11 @@ class Eowbc_Sample_Data {
 							'sale_price' => $variation['price']
 						)
 					);
-					$var_->set_attributes($variation['terms']);							
+					$var_->set_attributes($variation['terms']);	
+
+					// $img_id=$this->add_image_gallary($variation['thumb']);
+					// $var_->set_post_thumbnail( $variation['id'],$img_id );
+											
 					$var_->save();
 				}				
 			}	
@@ -725,6 +745,7 @@ class Eowbc_Sample_Data {
         			}
         			        			 	
         			$_POST[$prefix.'_fconfig_filter']=$filter['name'];
+        			$_POST[$prefix.'_fconfig_elements']=$filter['elements'];
 	                $_POST[$prefix.'_fconfig_type']=$filter['type'];
 	                $_POST[$prefix.'_fconfig_label']=$filter['label'];
 	                $_POST[$prefix.'_fconfig_is_advanced']=$filter['advance'];
@@ -758,6 +779,7 @@ class Eowbc_Sample_Data {
 					$res = $filter_model->save( $this->form_defination ,true);
 
 					unset($_POST[$prefix.'_fconfig_filter']);
+					unset($_POST[$prefix.'_fconfig_elements']);
 	                unset($_POST[$prefix.'_fconfig_type']);
 	                unset($_POST[$prefix.'_fconfig_label']);
 	                unset($_POST[$prefix.'_fconfig_is_advanced']);
@@ -839,7 +861,7 @@ class Eowbc_Sample_Data {
 		               	array( 'product','product_variation' )			                
 		            );
 		        }*/ 				
-					
+
 				if(empty($attribute['range'])){
 		    		
 		    		foreach ($attribute['terms'] as $term_index=>$term)  {	
@@ -862,6 +884,14 @@ class Eowbc_Sample_Data {
 				    						$thumb_id=$this->add_image_gallary($attribute['thumb'][$term_index]);
 				    						update_term_meta( $_attr_term_id, 'pa_'.$data['slug'].'_attachment', wp_get_attachment_url( $thumb_id ) );
 		    								update_term_meta( $_attr_term_id, sanitize_title($term).'_attachment', wp_get_attachment_url( $thumb_id ) );
+				    					}
+
+				    					if (!wbc_isEmptyArr($attribute['terms_order'])) {
+
+				    						update_term_meta($_attr_term_id, 'order', $attribute['terms_order'][$term_index]);
+				    					
+					    					// wbc_pr(get_term_meta($_attr_term_id,'order'));
+					    					// die();
 				    					}
 
 		    							if(!empty($attribute['type']) and !empty($attribute['terms_meta']) and is_array($attribute['terms_meta'])){
@@ -951,6 +981,15 @@ class Eowbc_Sample_Data {
 			    		}
 			    	}
 
+			    	if (isset($cat['terms_order'])) {
+
+						update_term_meta($cat_id, 'order', $cat['terms_order']);
+
+						// wbc_pr(get_term_meta($cat_id,'order'));
+						// die();	
+
+					}
+
 		    	}
 		    	elseif (is_object($id)) {
 
@@ -985,7 +1024,7 @@ class Eowbc_Sample_Data {
 	}
 
 	/* Add image to the wordpress image media gallary */
-	public function add_image_gallary($path) {
+	public function add_image_gallary($path, $path_separator = 'woo-bundle-choice', $source_path = null) {
 
 		if(!$path) return FALSE;
 
@@ -1001,16 +1040,18 @@ class Eowbc_Sample_Data {
 	      $posts=$attachment_check->get_posts();
 	      return $posts[0]->ID;
 	    }
-
+	    
+	    
 		//$file = wp_upload_bits($name, null, file_get_contents(str_replace(' ','%20',$path)));
 
 	    ///////////// 14-05-2022 -- @drashti /////////////
 
-		$file_bits = wbc()->common->file_get_contents($path);
+		$file_bits = wbc()->common->file_get_contents($path, $path_separator, $source_path);
 
 		$file = wp_upload_bits($name, null, $file_bits);
 
 	    /////////////////////////////////////////////////
+
 
 		if (!$file['error']) {
 

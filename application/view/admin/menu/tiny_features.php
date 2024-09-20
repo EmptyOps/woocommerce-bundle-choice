@@ -4,6 +4,27 @@ defined( 'ABSPATH' ) || exit;
 
 wbc()->load->model('category-attribute');
 
+// shop tab
+$shop_tab_is_disabled = false;
+$shop_tab_label_class = array();
+$shop_tab_container_class = array();
+if(wbc()->options->get_option('tiny_features','tiny_features_unlock_swatches_shop_page') != 'tiny_features_unlock_swatches_shop_page') {
+	$shop_tab_is_disabled = true;
+	$shop_tab_label_class = array('lock');
+	$shop_tab_container_class = array('grey');
+}
+
+// swatches pro extention 
+$wbc_vsp_active = function_exists('wbc_vsp');
+$wbc_vsp_is_disabled = false;
+// $wbc_vsp_option_label_class = array();
+$wbc_vsp_option_container_class = array();
+if(!$wbc_vsp_active) {
+	$wbc_vsp_is_disabled = true;
+	// $wbc_vsp_option_label_class = array('lock');
+	$wbc_vsp_option_container_class = array('grey','lock');
+}
+
 $form = array();
 
 $filter_table = array();
@@ -130,6 +151,37 @@ $shortcode_table['body'] = array(
 	),
 );
 
+// ------ aa sample data mate ni field muki ana mate var banavela se @a 154.2 -------
+wbc()->load->model('admin/form-builder');
+wbc()->load->model('category-attribute');
+
+// check it out link
+$check_it_out_link_type = 'skip';
+$check_it_out_link_label = 'Check it out!';
+$check_it_out_link = '';
+$lbl_txt = 'Congratulations! It seems that you have completed the setup process, click below link to check it out in working on your website.';
+$active_feature = \eo\wbc\controllers\admin\menu\Admin_Menu::active_pair_builder_feature();
+if( !empty($active_feature) && \eo\wbc\controllers\admin\menu\Admin_Menu::is_pair_builder_feature_all_setup() ) {
+
+	$configuration_buttons_page = wbc()->options->get_option('configuration','buttons_page',false);
+	if( $configuration_buttons_page===0 or $configuration_buttons_page==='0' ) {			
+		$check_it_out_link_type = 'link';
+		$check_it_out_link = site_url('index.php/design-your-own-ring');
+    }
+    elseif( $configuration_buttons_page==1 or $configuration_buttons_page==3 ) {			
+		$check_it_out_link_type = 'link';
+		$check_it_out_link = site_url( /*'?#wbc_' only add hashtag to url if required since the user is not setting position on home page they will find our where it is displayed so unnecessarily putting #wbc_ is not good and annoying.*/);
+    }
+    elseif( $configuration_buttons_page==2 ) {			
+		$check_it_out_link_type = 'label';
+		$check_it_out_link_label = 'You have choose to display buttons using Shortcode only, so please go to the page in which you put the Shortcode to check it.';
+		$lbl_txt = 'Congratulations! It seems that you have completed the setup process.';
+    }
+}
+
+$bonus_features = unserialize(wbc()->options->get_option('setting_status_setting_status_setting','bonus_features',serialize(array())));
+
+// ------
 
 $form['id']='eowbc_tiny_features';
 $form['title']='Tiny Features';
@@ -138,7 +190,7 @@ $form['tabs'] = true;
 $form['data'] = array(
 	
 	'tiny_features_item_page_option'=>array(
-			'label'=>'Options UI for Item Page',
+			'label'=>'Swatches UI for Item Page',
 			'form'=>array(
 				/*'tiny_features_option_ui_toggle_status'=>array(
 					'label'=>eowbc_lang('Toggle Button Enabled?'),
@@ -152,38 +204,24 @@ $form['data'] = array(
 
 					'visible_info'=>array( 'label'=>eowbc_lang('Enables the toogle buton to toggle the variation form at product page.'),
 						'type'=>'visible_info',
-						'class'=>array('small'),
+						'class'=>array('medium'),
 						// 'size_class'=>array('sixteen','wide'),
 					),
 				),	*/
-				'tiny_features_option_ui_toggle_init_status'=>array(
-					'label'=>eowbc_lang('Show variation form at initial?'),
-					'type'=>'checkbox',
-					'value'=>array(wbc()->options->get_option('tiny_features','tiny_features_option_ui_toggle_init_status')),
-					'sanitize'=>'sanitize_text_field',
-					'options'=>array('tiny_features_option_ui_toggle_init_status'=>'Variation Form Visiblity'),
-					'class'=>array('fluid'),						
-					// 'size_class'=>array('eight','wide'),
-					'inline'=>false,
-
-					'visible_info'=>array( 'label'=>eowbc_lang('Enables to set the variation form open at initial.'),
-						'type'=>'visible_info',
-						'class'=>array('small'),
-						// 'size_class'=>array('sixteen','wide'),
-					),
-				),	
-				'tiny_features_hide_sku_category_product_page'=>array(
-					'label'=>eowbc_lang('Hide SKU,Categories sections?'),
-					'type'=>'checkbox',
-					'value'=>array(wbc()->options->get_option('tiny_features','tiny_features_hide_sku_category_product_page')),
-					'sanitize'=>'sanitize_text_field',
-					'options'=>array('tiny_features_hide_sku_category_product_page'=>' '),
-					'class'=>array('fluid'),						
-					// 'size_class'=>array('eight','wide'),
-					'inline'=>false,					
-				),
+				'tiny_features_general_tab_start'=>array(
+					'type'=>'accordian',
+					'section_type'=>'start',
+					'class'=>array('field', 'styled'),
+					'label'=>'<span class="ui large text">General</span>',
+				),		
+				// ACTIVE_TODO_OC_START
+				// ACTIVE_TODO when we enable the other for free templates at that time we need to consider enabling this switch . — to a && — to h			
+					// -- ane display karvu hoy to 'container_class'=>array('black','hide') ma class apya se te remove kari desu atle display thay jase
+				// ACTIVE_TODO_OC_END
 				'tiny_features_dropdown_icon_only'=>array(
 					'label'=>eowbc_lang('Display Icon Only on Dropdown?'),
+					'spui_version'=>1.0,
+					'container_class'=>array('black','hide'),						
 					'type'=>'checkbox',
 					'value'=>array(wbc()->options->get_option('tiny_features','tiny_features_dropdown_icon_only')),
 					'sanitize'=>'sanitize_text_field',
@@ -191,10 +229,484 @@ $form['data'] = array(
 					'class'=>array('fluid'),						
 					// 'size_class'=>array('eight','wide'),
 					'inline'=>false,					
-				),					
+				),			
+				'add_sample_data'=>array(
+					'label'=>'Add Sample Data',
+					'type'=>'devider',
+					// 'class'=>array('fluid'),
+					// 'size_class'=>array('eight','wide')
+				),
+				'config_automation_link'=>array(
+					'label'=>'Click here for automated configuration and setup',
+					'type'=>'link',
+					'attr'=>array("href='".admin_url("admin.php?setup_wizard_run=1&page=eowbc&eo_wbc_view_auto_jewel=1&f=opts_uis_item_page")."'"),
+					'class'=>array('secondary')	
+				),
+				'config_automation_visible_info'=>array(
+					'label'=>eowbc_lang('We recommend that you try sample data if you have not yet, In addition to providing a preview of how the plugin looks like on frontend of your website, sample data & configurations will also serve as a boilerplate template for configuring the plugin.'),
+					'type'=>'visible_info',
+					'class'=>array('fluid', 'medium'),
+					'size_class'=>array('sixteen','wide'),
+					'inline'=>false,
+				),
+				/*'config_save_automation'=>array(
+					'label'=>'Save',
+					'type'=>'button',				
+					'class'=>array('primary'),
+					'attr'=>array("data-action='save'")
+				)*/
+				'check_it_out_status'=>array(
+					'label'=>'Setup Status',
+					'type'=>($check_it_out_link_type != 'skip' ?'devider':$check_it_out_link_type),
+					// 'class'=>array('fluid'),
+					// 'size_class'=>array('eight','wide')
+				),
+				'check_it_out_msg'=>array(
+					'label'=>$lbl_txt,
+					'type'=>($check_it_out_link_type != 'skip' ?'label':$check_it_out_link_type)
+				),
+				'check_it_out_link'=>array(
+					'label'=>$check_it_out_link_label,
+					'type'=>$check_it_out_link_type,
+					'attr'=>array("href='".$check_it_out_link."'"),
+					'class'=>array('secondary')	
+				),		
+
+				'tiny_features_disable_swatches_plugin_stylesheet'=>array(
+					'label'=>eowbc_lang('Disable Swatches Plugin Stylesheet'),
+					'spui_version'=>1.0,
+					'container_class'=>array('black'),						
+					'type'=>'checkbox',
+					'value'=>array(wbc()->options->get_option('tiny_features','tiny_features_disable_swatches_plugin_stylesheet')),
+					'sanitize'=>'sanitize_text_field',
+					'options'=>array('tiny_features_disable_swatches_plugin_stylesheet'=>' '),
+					'class'=>array('fluid'),						
+					// 'size_class'=>array('eight','wide'),
+					'inline'=>false,	
+
+					'visible_info'=>array( 'label'=>eowbc_lang('Disable Swatches Plugin Stylesheet (For applying the theme default stylesheet).'),
+						'type'=>'visible_info',
+						'class'=>array('medium'),
+						// 'size_class'=>array('sixteen','wide'),
+					),				
+				),
+				'tiny_features_clear_on_reselect'=>array(
+					'label'=>eowbc_lang('Clear On Reselect'),
+					'spui_version'=>1.0,
+					'container_class'=>array('black'),						
+					'type'=>'checkbox',
+					'value'=>array(wbc()->options->get_option('tiny_features','tiny_features_clear_on_reselect')),
+					'sanitize'=>'sanitize_text_field',
+					'options'=>array('tiny_features_clear_on_reselect'=>' '),
+					'class'=>array('fluid'),						
+					// 'size_class'=>array('eight','wide'),
+					'inline'=>false,	
+
+					'visible_info'=>array( 'label'=>eowbc_lang('Clear selected attribute on select again.'),
+						'type'=>'visible_info',
+						'class'=>array('medium'),
+						// 'size_class'=>array('sixteen','wide'),
+					),				
+				),
+				'tiny_features_show_selected_attribute'=>array(
+					'label'=>eowbc_lang('Show selected attribute'),
+					'spui_version'=>1.0,
+					'container_class'=>array('black'),						
+					'type'=>'checkbox',
+					'value'=>array(wbc()->options->get_option('tiny_features','tiny_features_show_selected_attribute')),
+					'sanitize'=>'sanitize_text_field',
+					'options'=>array('tiny_features_show_selected_attribute'=>' '),
+					'class'=>array('fluid'),						
+					// 'size_class'=>array('eight','wide'),
+					'inline'=>false,	
+
+					'visible_info'=>array( 'label'=>eowbc_lang('Show Selected Variation Name Beside Attribute Label'),
+						'type'=>'visible_info',
+						'class'=>array('medium'),
+						// 'size_class'=>array('sixteen','wide'),
+					),				
+				),
+				'tiny_features_variation_label_separator'=>array(
+					'label'=>eowbc_lang('Variation label separator'),
+					'spui_version'=>1.0,
+					'container_class'=>array('black'),						
+					'type'=>'checkbox',
+					'value'=>array(wbc()->options->get_option('tiny_features','tiny_features_variation_label_separator')),
+					'sanitize'=>'sanitize_text_field',
+					'options'=>array('tiny_features_variation_label_separator'=>' '),
+					'class'=>array('fluid'),						
+					// 'size_class'=>array('eight','wide'),
+					'inline'=>false,	
+
+					'visible_info'=>array( 'label'=>eowbc_lang('Variation label separator, default is colon ": ". You may like to make this empty if you are not showing the attribute label.'),
+						'type'=>'visible_info',
+						'class'=>array('medium'),
+						// 'size_class'=>array('sixteen','wide'),
+					),				
+				),		
+				'tiny_features_option_enable_tooltip'=>array(
+					'label'=>eowbc_lang('Enable Tooltip'),
+					'spui_version'=>1.0,
+					'container_class'=>array('black'),						
+					'type'=>'checkbox',
+					'value'=>array(wbc()->options->get_option('tiny_features','tiny_features_option_enable_tooltip')),
+					'sanitize'=>'sanitize_text_field',
+					'options'=>array('tiny_features_option_enable_tooltip'=>'Enable Tooltip'),
+					'class'=>array('fluid'),						
+					// 'size_class'=>array('eight','wide'),
+					'inline'=>false,
+
+					'visible_info'=>array( 'label'=>eowbc_lang('If enabled, attribute term name will be displayed as tooltip. Tooltip will be enabled for each product attribute.'),
+						'type'=>'visible_info',
+						'class'=>array('small'),
+						// 'size_class'=>array('sixteen','wide'),
+					),
+				),
+				'tiny_features_shape_style'=>array(
+					'label'=>eowbc_lang('Shape Style'),
+					'spui_version'=>1.0,
+					'container_class'=>array('black'),						
+					'type'=>'select',					
+					'value'=> wbc()->options->get_option('tiny_features','tiny_features_shape_style'/*,'#DCC7C7'*/),
+					'sanitize'=>'sanitize_text_field',
+					'class'=>array('fluid','hide'),
+
+					'visible_info'=>array( 'label'=>eowbc_lang( "Which swatch shape you want to set? Default is Round shape. For changing shape settings go to woocommerce attributes edit page -> add/edit woocommerce attribute -> shape style dropdown field"),
+						'type'=>'visible_info',
+						'class'=>array('medium','fluid'),
+						// 'size_class'=>array('sixteen','wide'),
+					),
+					'size_class'=>array('eight','wide'/*,'required'*/),
+					'inline'=>false,	
+				),
+				'tiny_features_option_dropdowns_to_button'=>array(
+					'label'=>eowbc_lang('Dropdowns to Button'),
+					'spui_version'=>1.0,
+					'container_class'=>array('black'),						
+					'type'=>'checkbox',
+					'value'=>array(wbc()->options->get_option('tiny_features','tiny_features_option_dropdowns_to_button')),
+					'sanitize'=>'sanitize_text_field',
+					'options'=>array('tiny_features_option_dropdowns_to_button'=>'Dropdowns to Button'),
+					'class'=>array('fluid'),						
+					// 'size_class'=>array('eight','wide'),
+					'inline'=>false,
+
+					'visible_info'=>array( 'label'=>eowbc_lang('Convert default dropdowns to button. '),
+						'type'=>'visible_info',
+						'class'=>array('small'),
+						// 'size_class'=>array('sixteen','wide'),
+					),
+				),
+				'tiny_features_general_tab_end'=>array(
+					'type'=>'accordian',
+					'section_type'=>'end'
+				),
+				
+				'tiny_features_styling_tab_start'=>array(
+					'type'=>'accordian',
+					'section_type'=>'start',
+					'class'=>array('field', 'styled'),
+					'label'=>'<span class="ui large text">Global Styling And Settings</span>',
+				),
+				'tiny_features_disabled_unavailable_variation'=>array(
+					'label'=>eowbc_lang('Behavior for Unavailable Variation'),
+					'type'=>'select',
+					'spui_version'=>1.0,
+					'container_class'=>array(''),
+					'value'=>wbc()->options->get_option('tiny_features','tiny_features_disabled_unavailable_variation'),
+					'options'=>array('blur_with_cross'=>'Blur with cross','blur_without_cross'=>'Blur without cross','hide'=>'Hide'),
+					'sanitize'=>'sanitize_text_field',
+					'class'=>array('fluid'),
+					'size_class'=>array('eight','wide'/*,'required'*/),
+					'attr'=>array(),					
+					'inline'=>false,
+
+					'visible_info'=>array( 'label'=>eowbc_lang('Note: Disable Ajax threshold doesn\'t apply this feature.'),
+						'type'=>'visible_info',
+						'class'=>array('medium','fluid'),
+						// 'size_class'=>array('sixteen','wide'),
+					),
+					'attr'=>array("min='0',max='10'")					
+				),	
+				'tiny_features_disabled_attribute_style'=>array(
+					'label'=>eowbc_lang('Behavior for Out of Stock Variation'),
+					'type'=>'select',
+					'spui_version'=>1.0,
+					'container_class'=>array(''),						
+					'value'=>wbc()->options->get_option('tiny_features','tiny_features_disabled_attribute_style','blur_with_cross'),
+					'options'=>array('blur_with_cross'=>'Blur with cross','blur_without_cross'=>'Blur without cross','hide'=>'Hide'),
+					'sanitize'=>'sanitize_text_field',
+					'class'=>array('fluid'),
+					'size_class'=>array('eight','wide'/*,'required'*/),
+					'attr'=>array(),					
+					'inline'=>false,
+
+					'visible_info'=>array( 'label'=>eowbc_lang('Disabled attributes will be hidden/blurred.</br>
+										Note: Disable Ajax threshold doesn\'t apply this feature.'),
+						'type'=>'visible_info',
+						'class'=>array('medium','fluid'),
+						// 'size_class'=>array('sixteen','wide'),
+					),
+					'attr'=>array("min='0',max='10'")					
+				),		
+				'tiny_features_cross_color'=>array(
+					'label'=>eowbc_lang('Cross Color'),
+					'type'=>'color',
+					'spui_version'=>1.0,
+					'container_class'=>array(''),						
+					'value'=>wbc()->options->get_option('tiny_features','tiny_features_cross_color','#ff0000'),
+					'sanitize'=>'sanitize_hex_color',
+					'class'=>array('fluid'),				
+					'size_class'=>array('eight','wide'),
+					'inline'=>false,
+
+					'visible_info'=>array( 'label'=>eowbc_lang('<br/>Choose color for cross sign.'),
+						'type'=>'visible_info',
+						'class'=>array('medium','fluid'),
+						// 'size_class'=>array('sixteen','wide'),
+					)
+				),				
+				'tiny_features_ajax_variation_threshold'=>array(
+					'label'=>eowbc_lang('Ajax Variation Threshold'),
+					'type'=>'text',
+					'spui_version'=>1.0,
+					'container_class'=>array(''),						
+					'value'=>wbc()->options->get_option('tiny_features','tiny_features_ajax_variation_threshold',30),
+					'sanitize'=>'sanitize_text_field',
+					'class'=>array('fluid'),						
+					'size_class'=>array('eight','wide'),
+					'inline'=>false,
+
+					'visible_info'=>array( 'label'=>eowbc_lang('By default, if the number of product variations is less than 30, the product availability check is through JavaScript. If greater than 30, the Ajax method is used. This field can control the threshold value of 30.'),
+						'type'=>'visible_info',
+						'class'=>array('medium','fluid'),
+						// 'size_class'=>array('sixteen','wide'),
+					)
+				),			
+				'tiny_features_tooltip'=>array(
+					'label'=>'Tooltip',
+					'type'=>'devider',
+					// 'class'=>array('fluid'),
+					// 'size_class'=>array('eight','wide')
+				),
+				'tiny_features_tooltip_background_color'=>array(
+					'label'=>eowbc_lang('Tooltip background color'),
+					'type'=>'color',
+					'spui_version'=>1.0,
+					'container_class'=>array(''),						
+					'value'=>wbc()->options->get_option('tiny_features','tiny_features_tooltip_background_color','#333333'),
+					'sanitize'=>'sanitize_hex_color',
+					'class'=>array('fluid'),				
+					'size_class'=>array('eight','wide'),
+					'inline'=>false,
+
+					'visible_info'=>array( 'label'=>eowbc_lang('<br/>Choose color for tooltip background.'),
+						'type'=>'visible_info',
+						'class'=>array('medium','fluid'),
+						// 'size_class'=>array('sixteen','wide'),
+					)
+				),
+				'tiny_features_tooltip_font_color'=>array(
+					'label'=>eowbc_lang('Tooltip font color'),
+					'type'=>'color',
+					'spui_version'=>1.0,
+					'container_class'=>array(''),						
+					'value'=>wbc()->options->get_option('tiny_features','tiny_features_tooltip_font_color','#FFFFFF'),
+					'sanitize'=>'sanitize_hex_color',
+					'class'=>array('fluid'),				
+					'size_class'=>array('eight','wide'),
+					'inline'=>false,
+
+					'visible_info'=>array( 'label'=>eowbc_lang('<br/>Choose color for tooltip font.'),
+						'type'=>'visible_info',
+						'class'=>array('medium','fluid'),
+						// 'size_class'=>array('sixteen','wide'),
+					)
+				),
+				'tiny_features_option_tooltip_font_size'=>array(
+					'label'=>eowbc_lang('Tooltip font size'),
+					'type'=>'text',
+					'spui_version'=>1.0,
+					'container_class'=>array(''),						
+					'value'=>wbc()->options->get_option('tiny_features','tiny_features_option_tooltip_font_size','12px'),
+					'sanitize'=>'sanitize_text_field',
+					'class'=>array('fluid'),	
+					'size_class'=>array('eight','wide'),
+					'inline'=>false,
+
+					'visible_info'=>array( 'label'=>eowbc_lang('Set tooltip font size.<strong>(Default: 12px)</strong>'),
+						'type'=>'visible_info',
+						'class'=>array('medium'),
+						// 'size_class'=>array('sixteen','wide'),
+					)
+				),
+				'tiny_features_styling_tab_end'=>array(
+					'type'=>'accordian',
+					'section_type'=>'end'
+				),
+
+				'tiny_features_video_tab_start'=>array(
+					'type'=>'accordian',
+					'section_type'=>'start',
+					'class'=>array('field', 'styled'),
+					'label'=>'<span class="ui large text">Video</span>',
+				),
+				'tiny_features_video_auto_play'=>array(
+					'label'=>eowbc_lang('Video Auto Play?'),
+					'type'=>'checkbox',
+					'spui_version'=>1.0,
+					'container_class'=>array(''),						
+					'value'=>array(wbc()->options->get_option('tiny_features','tiny_features_video_auto_play')),
+					'sanitize'=>'sanitize_text_field',
+					'options'=>array('tiny_features_video_auto_play'=>'Auto Play'),
+					'class'=>array('fluid'),						
+					// 'size_class'=>array('eight','wide'),
+					'inline'=>false,
+
+					'visible_info'=>array( 'label'=>eowbc_lang('Enables to set the video auto play.'),
+						'type'=>'visible_info',
+						'class'=>array('medium'),
+						// 'size_class'=>array('sixteen','wide'),
+					),
+				),
+				'tiny_features_video_mute'=>array(
+					'label'=>eowbc_lang('Video Muted?'),
+					'type'=>'checkbox',
+					'spui_version'=>1.0,
+					'container_class'=>array(''),						
+					'value'=>array(wbc()->options->get_option('tiny_features','tiny_features_video_mute')),
+					'sanitize'=>'sanitize_text_field',
+					'options'=>array('tiny_features_video_mute'=>'Mute'),
+					'class'=>array('fluid'),						
+					// 'size_class'=>array('eight','wide'),
+					'inline'=>false,
+
+					'visible_info'=>array( 'label'=>eowbc_lang('Enables to set the video auto play.'),
+						'type'=>'visible_info',
+						'class'=>array('medium'),
+						// 'size_class'=>array('sixteen','wide'),
+					),
+				),
+				'tiny_features_video_loop'=>array(
+					'label'=>eowbc_lang('Start Video Loop?'),
+					// 'label_class'=>array_merge( array(), $wbc_vsp_option_label_class),
+					'type'=>'checkbox',
+					'spui_version'=>1.0,
+					'side_icon_class'=>array('lock','red','lock_icon'),
+					'side_label_text'=>'PRO',
+					'side_label_class'=>array('green','pro_label','hide','right'),
+					'container_class'=>array_merge( array(), $wbc_vsp_option_container_class),						
+					'value'=>array(wbc()->options->get_option('tiny_features','tiny_features_video_loop')),
+					'sanitize'=>'sanitize_text_field',
+					'options'=>array('tiny_features_video_loop'=>'Loop'),
+					'class'=>array('fluid'),
+					'attr'=>array(),
+					'is_disabled'=>$wbc_vsp_is_disabled,						
+					// 'size_class'=>array('eight','wide'),
+					'inline'=>false,
+
+					'visible_info'=>array( 'label'=>eowbc_lang('Enables the video to continue playing.'),
+						'type'=>'visible_info',
+						'class'=>array('medium'),
+						// 'size_class'=>array('sixteen','wide'),
+					),
+				),													
+				'tiny_features_video_tab_end'=>array(
+					'type'=>'accordian',
+					'section_type'=>'end'
+				),
+				
+				'tiny_features_product_page_tab_start'=>array(
+					'type'=>'accordian',
+					'section_type'=>'start',
+					'class'=>array('field', 'styled'),
+					'label'=>'<span class="ui large text">Product Page</span>',
+				),
+				'tiny_features_gallery_images_section'=>array(
+					'label'=>eowbc_lang('Show gallery images section in product page?'),
+					'type'=>'checkbox',
+					'spui_version'=>1.0,
+					'container_class'=>array(''),						
+					'value'=>array(wbc()->options->get_option('tiny_features','tiny_features_gallery_images_section')),
+					'sanitize'=>'sanitize_text_field',
+					'options'=>array('tiny_features_gallery_images_section'=>'Show gallery images'),
+					'class'=>array('fluid'),						
+					// 'size_class'=>array('eight','wide'),
+					'inline'=>false,
+
+					'visible_info'=>array( 'label'=>eowbc_lang('Enables to show gallery images section in product page.'),
+						'type'=>'visible_info',
+						'class'=>array('medium'),
+						// 'size_class'=>array('sixteen','wide'),
+					),
+				),	
+				'tiny_features_option_ui_toggle_init_status'=>array(
+					'label'=>eowbc_lang('Show variation form at initial?'),
+					'type'=>'checkbox',
+					'spui_version'=>1.0,
+					'container_class'=>array(''),						
+					'value'=>array(wbc()->options->get_option('tiny_features','tiny_features_option_ui_toggle_init_status')),
+					'sanitize'=>'sanitize_text_field',
+					'options'=>array('tiny_features_option_ui_toggle_init_status'=>'Variation Form Visibility'),
+					'class'=>array('fluid'),						
+					// 'size_class'=>array('eight','wide'),
+					'inline'=>false,
+
+					'visible_info'=>array( 'label'=>eowbc_lang('Enables to set the variation form open at initial.'),
+						'type'=>'visible_info',
+						'class'=>array('medium'),
+						// 'size_class'=>array('sixteen','wide'),
+					),
+				),	
+				'tiny_features_hide_sku_category_product_page'=>array(
+					'label'=>eowbc_lang('Hide SKU, Categories sections?'),
+					'type'=>'checkbox',
+					'spui_version'=>1.0,
+					'container_class'=>array(''),						
+					'value'=>array(wbc()->options->get_option('tiny_features','tiny_features_hide_sku_category_product_page')),
+					'sanitize'=>'sanitize_text_field',
+					'options'=>array('tiny_features_hide_sku_category_product_page'=>' '),
+					'class'=>array('fluid'),						
+					// 'size_class'=>array('eight','wide'),
+					'inline'=>false,					
+				),								
+				'product_page_hide_first_variation_form'=>array(
+					'label'=>'Hide the first category\'s variation menu',
+					'type'=>'checkbox',
+					'spui_version'=>1.0,
+					'container_class'=>array(''),						
+					'sanitize'=>'sanitize_text_field',
+					'value'=>array(wbc()->options->get_option('tiny_features','product_page_hide_first_variation_form')),
+					'options'=>array('1'=>' '),
+					'is_id_as_name'=>true,
+					'class'=>array(),
+					'visible_info'=>array( 'label'=>'If enabled the variation selection table for the first category\'s products will be hidden if default variations are set',
+						'type'=>'visible_info',
+						'class'=>array('fluid', 'medium'),
+						'size_class'=>array('sixteen','wide'),
+					),	
+				), 
+				'product_page_hide_second_variation_form'=>array(
+					'label'=>'Hide the second category\'s variation menu',
+					'type'=>'checkbox',
+					'spui_version'=>1.0,
+					'container_class'=>array(''),						
+					'sanitize'=>'sanitize_text_field',
+					'value'=>array(wbc()->options->get_option('tiny_features','product_page_hide_second_variation_form')),
+					'options'=>array('1'=>' '),
+					'is_id_as_name'=>true,
+					'class'=>array(),
+					'visible_info'=>array( 'label'=>'If enabled the variation selection table for the second category\'s products will be hidden if default variations are set',
+						'type'=>'visible_info',
+						'class'=>array('fluid', 'medium'),
+						'size_class'=>array('sixteen','wide'),
+					),	
+				), 
 				'tiny_features_option_ui_toggle_text'=>array(
 					'label'=>eowbc_lang('Toggle Buton Text'),
 					'type'=>'text',
+					'spui_version'=>1.0,
+					'container_class'=>array(''),						
 					'value'=>wbc()->options->get_option('tiny_features','tiny_features_option_ui_toggle_text',__('CUSTOMIZE THIS PRODUCT')),
 					'sanitize'=>'sanitize_text_field',
 					'class'=>array('fluid'),						
@@ -203,194 +715,727 @@ $form['data'] = array(
 
 					'visible_info'=>array( 'label'=>eowbc_lang('Text to be shown on the toggle button.'),
 						'type'=>'visible_info',
-						'class'=>array('small','fluid'),
+						'class'=>array('medium','fluid'),
 						// 'size_class'=>array('sixteen','wide'),
 					)
 				),
 				'tiny_features_option_ui_option_dimention'=>array(
-					'label'=>eowbc_lang('Options Box Dimention'),
+					'label'=>eowbc_lang('Swatches Box Dimension'),
 					'type'=>'text',
+					'spui_version'=>1.0,
+					'container_class'=>array(''),						
 					'value'=>wbc()->options->get_option('tiny_features','tiny_features_option_ui_option_dimention','2em'),
 					'sanitize'=>'sanitize_text_field',
 					'class'=>array('fluid'),	
 					'size_class'=>array('eight','wide','required'),
 					'inline'=>false,
 
-					'visible_info'=>array( 'label'=>eowbc_lang('The height and width of the option\'s box.<strong>(prepend px,em,rem as measurement)</strong>'),
+					'visible_info'=>array( 'label'=>eowbc_lang('The height and width of the option\'s box.<strong>(prepend px, em, rem as measurement)</strong>'),
 						'type'=>'visible_info',
-						'class'=>array('small','fluid'),
+						'class'=>array('medium','fluid'),
 						// 'size_class'=>array('sixteen','wide'),
 					)
 				),
 				'tiny_features_option_ui_border_color'=>array(
-					'label'=>eowbc_lang('Options Border Color'),
+					'label'=>eowbc_lang('Swatches Border Color'),
 					'type'=>'color',
+					'spui_version'=>1.0,
+					'container_class'=>array(''),						
 					'value'=>wbc()->options->get_option('tiny_features','tiny_features_option_ui_border_color','#ECECEC'),
 					'sanitize'=>'sanitize_hex_color',
 					'class'=>array('fluid'),				
 					'size_class'=>array('eight','wide','required'),
 					'inline'=>false,
 
-					'visible_info'=>array( 'label'=>eowbc_lang('<br/>The color of the option\'s border'),
+					'visible_info'=>array( 'label'=>eowbc_lang('<br/>The color of the Swatches border'),
 						'type'=>'visible_info',
-						'class'=>array('small','fluid'),
+						'class'=>array('medium','fluid'),
 						// 'size_class'=>array('sixteen','wide'),
 					)
 				),
 				'tiny_features_option_ui_border_width'=>array(
-					'label'=>eowbc_lang('Options Border width'),
+					'label'=>eowbc_lang('Swatches Border width'),
 					'type'=>'text',
+					'spui_version'=>1.0,
+					'container_class'=>array(''),						
 					'value'=>wbc()->options->get_option('tiny_features','tiny_features_option_ui_border_width','2px'),
 					'sanitize'=>'sanitize_text_field',
 					'class'=>array('fluid'),			
 					'size_class'=>array('eight','wide','required'),
 					'inline'=>false,
 
-					'visible_info'=>array( 'label'=>eowbc_lang('The border width of the option\'s border.<strong>(prepend px,em,rem as measurement)</strong>'),
+					'visible_info'=>array( 'label'=>eowbc_lang('The border width of the Swatches border.<strong>(prepend px, em, rem as measurement)</strong>'),
 						'type'=>'visible_info',
-						'class'=>array('small','fluid'),
+						'class'=>array('medium','fluid'),
 						// 'size_class'=>array('sixteen','wide'),
 					)
 				),
 				'tiny_features_option_ui_border_color_hover'=>array(
-					'label'=>eowbc_lang('Options Border Color on Hover'),
+					'label'=>eowbc_lang('Swatches Border Color on Hover'),
 					'type'=>'color',
+					'spui_version'=>1.0,
+					'container_class'=>array(''),						
 					'value'=>wbc()->options->get_option('tiny_features','tiny_features_option_ui_border_color_hover','#3D3D3D'),
 					'sanitize'=>'sanitize_hex_color',
 					'class'=>array('fluid'),				
 					'size_class'=>array('eight','wide','required'),
 					'inline'=>false,
 
-					'visible_info'=>array( 'label'=>eowbc_lang('<br/>The color of the option\'s border on hover.'),
+					'visible_info'=>array( 'label'=>eowbc_lang('<br/>The color of the Swatches border on hover.'),
 						'type'=>'visible_info',
-						'class'=>array('small'),
+						'class'=>array('medium'),
 						// 'size_class'=>array('sixteen','wide'),
 					)
 				),
 				'tiny_features_option_ui_border_width_hover'=>array(
-					'label'=>eowbc_lang('Options Border width on Hover'),
+					'label'=>eowbc_lang('Swatches Border width on Hover'),
 					'type'=>'text',
+					'spui_version'=>1.0,
+					'container_class'=>array(''),						
 					'value'=>wbc()->options->get_option('tiny_features','tiny_features_option_ui_border_width_hover','2px'),
 					'sanitize'=>'sanitize_text_field',
 					'class'=>array('fluid'),
 					'size_class'=>array('eight','wide','required'),
 					'inline'=>false,
 
-					'visible_info'=>array( 'label'=>eowbc_lang('The border width of the option\'s border on hover.<strong>(prepend px,em,rem as measurement)</strong>'),
+					'visible_info'=>array( 'label'=>eowbc_lang('The border width of the Swatches border on hover.<strong>(prepend px, em, rem as measurement)</strong>'),
 						'type'=>'visible_info',
-						'class'=>array('small'),
+						'class'=>array('medium'),
 						// 'size_class'=>array('sixteen','wide'),
 					)
 				),
 				'tiny_features_option_ui_border_radius'=>array(
-					'label'=>eowbc_lang('Options Border Radius'),
+					'label'=>eowbc_lang('Swatches Border Radius'),
 					'type'=>'text',
+					'spui_version'=>1.0,
+					'container_class'=>array(''),						
 					'value'=>wbc()->options->get_option('tiny_features','tiny_features_option_ui_border_radius','1px'),
 					'sanitize'=>'sanitize_text_field',
 					'class'=>array('fluid'),	
 					'size_class'=>array('eight','wide','required'),
 					'inline'=>false,
 
-					'visible_info'=>array( 'label'=>eowbc_lang('The border radius of the option\'s border.<strong>(prepend px,em,rem as measurement)</strong>'),
+					'visible_info'=>array( 'label'=>eowbc_lang('The border radius of the Swatches border.<strong>(prepend px, em, rem as measurement)</strong>'),
 						'type'=>'visible_info',
-						'class'=>array('small'),
+						'class'=>array('medium'),
 						// 'size_class'=>array('sixteen','wide'),
 					)
 				),						
 				'tiny_features_option_ui_font_color'=>array(
-					'label'=>eowbc_lang('Options Font Color'),
+					'label'=>eowbc_lang('Swatches Font Color'),
 					'type'=>'color',
+					'spui_version'=>1.0,
+					'container_class'=>array(''),						
 					'value'=>wbc()->options->get_option('tiny_features','tiny_features_option_ui_font_color','#DBDBDB'),
 					'sanitize'=>'sanitize_hex_color',
 					'class'=>array('fluid'),
 					'size_class'=>array('eight','wide','required'),
 					'inline'=>false,
 
-					'visible_info'=>array( 'label'=>eowbc_lang('<br/>The color of the option\'s text.'),
+					'visible_info'=>array( 'label'=>eowbc_lang('<br/>The color of the Swatches text.'),
 						'type'=>'visible_info',
-						'class'=>array('small'),
+						'class'=>array('medium'),
 						// 'size_class'=>array('sixteen','wide'),
 					)
 				),
 				'tiny_features_option_ui_font_color_hover'=>array(
-					'label'=>eowbc_lang('Options Font Color on Hover'),
+					'label'=>eowbc_lang('Swatches Font Color on Hover'),
 					'type'=>'color',
+					'spui_version'=>1.0,
+					'container_class'=>array(''),						
 					'value'=>wbc()->options->get_option('tiny_features','tiny_features_option_ui_font_color_hover','#AA7D7D'),
 					'sanitize'=>'sanitize_hex_color',
 					'class'=>array('fluid'),
 					'size_class'=>array('eight','wide','required'),
 					'inline'=>false,
 
-					'visible_info'=>array( 'label'=>eowbc_lang('<br/>The color of the option\'s text on hover.'),
+					'visible_info'=>array( 'label'=>eowbc_lang('<br/>The color of the Swatches text on hover.'),
 						'type'=>'visible_info',
-						'class'=>array('small'),
+						'class'=>array('medium'),
 						// 'size_class'=>array('sixteen','wide'),
 					)
 				),
 				'tiny_features_option_ui_bg_color'=>array(
-					'label'=>eowbc_lang('Options Background Color'),
+					'label'=>eowbc_lang('Swatches Background Color'),
 					'type'=>'color',
+					'spui_version'=>1.0,
+					'container_class'=>array(''),						
 					'value'=>wbc()->options->get_option('tiny_features','tiny_features_option_ui_bg_color','#ffffff'),
 					'sanitize'=>'sanitize_hex_color',
 					'class'=>array('fluid'),
 					'size_class'=>array('eight','wide','required'),
 					'inline'=>false,
 
-					'visible_info'=>array( 'label'=>eowbc_lang('<br/>The color of the option\'s background.'),
+					'visible_info'=>array( 'label'=>eowbc_lang('<br/>The color of the Swatches background.'),
 						'type'=>'visible_info',
-						'class'=>array('small'),
+						'class'=>array('medium'),
 						// 'size_class'=>array('sixteen','wide'),
 					)
 				),
 				'tiny_features_option_ui_bg_color_hover'=>array(
-					'label'=>eowbc_lang('Options Background Color on Hover'),
+					'label'=>eowbc_lang('Swatches Background Color on Hover'),
 					'type'=>'color',
+					'spui_version'=>1.0,
+					'container_class'=>array(''),						
 					'value'=>wbc()->options->get_option('tiny_features','tiny_features_option_ui_bg_color_hover','#DCC7C7'),
 					'sanitize'=>'sanitize_hex_color',
 					'class'=>array('fluid'),
 					'size_class'=>array('eight','wide','required'),
 					'inline'=>false,
 
-					'visible_info'=>array( 'label'=>eowbc_lang('<br/>The color of the option\'s background on hover.'),
+					'visible_info'=>array( 'label'=>eowbc_lang('<br/>The color of the Swatches background on hover.'),
 						'type'=>'visible_info',
-						'class'=>array('small'),
+						'class'=>array('medium'),
 						// 'size_class'=>array('sixteen','wide'),
 					)
 				),
-				'product_page_hide_first_variation_form'=>array(
-					'label'=>'Hide first category\'s variation menu',
-					'type'=>'checkbox',
+				'tiny_features_product_page_video_icon'=>array(
+					'label'=>'Video icon for product page',
+					'type'=>'icon',
+					'value'=>wbc()->options->get_option('tiny_features','tiny_features_product_page_video_icon'),
+					/*'validate'=>array('required'=>''),*/
 					'sanitize'=>'sanitize_text_field',
-					'value'=>array(wbc()->options->get_option('tiny_features','product_page_hide_first_variation_form')),
-					'options'=>array('1'=>' '),
-					'is_id_as_name'=>true,
 					'class'=>array(),
-					'visible_info'=>array( 'label'=>'If enabled the variation selection table for first category\'s products will be hidden if default variations are set',
+					'size_class'=>array('eight','wide'),
+				),	
+				'tiny_features_gallery_options'=>array(
+					'label'=>'Gallery Options',
+					'type'=>'devider',
+					// 'class'=>array('fluid'),
+					// 'size_class'=>array('eight','wide')
+				),
+				'tiny_features_gallery_width'=>array(
+					'label'=>eowbc_lang('Gallery Width'),
+					'label_class'=>array(),
+					'type'=>'text',
+					'spui_version'=>1.0,
+					'container_class'=>array(),						
+					'right_labeled'=>eowbc_lang('%'),
+					'right_labeled_class'=>array(''),
+					'value'=>wbc()->options->get_option('tiny_features','tiny_features_gallery_width'),
+					'sanitize'=>'sanitize_text_field',
+					'class'=>array('fluid'),
+					'size_class'=>array('eight','wide'),
+					'attr'=>array(),					
+					'inline'=>false,
+
+					'visible_info'=>array( 'label'=>eowbc_lang('Slider Gallery Width in %. The default value is '.\eo\wbc\model\SP_WBC_Compatibility::instance()->single_product_render_compatability('gallery_zoom_container_width',array('default_width'=>'58%')).'. Limit: 10-100.'),
 						'type'=>'visible_info',
-						'class'=>array('fluid', 'small'),
+						'class'=>array('medium'),
+						// 'size_class'=>array('sixteen','wide'),
+					)
+				),					
+				'tiny_features_product_page_tab_end'=>array(
+					'type'=>'accordian',
+					'section_type'=>'end'
+				),
+
+				'tiny_features_shop_tab_start'=>array(
+					'type'=>'accordian',
+					'section_type'=>'start',
+					'class'=>array('field', 'styled'),
+					'label'=>'<span class="ui large text">Archive / Shop</span>',
+				),
+				// -- wbc()->options->get_option('tiny_features','tiny_features_unlock_swatches_switch') == 'tiny_features_unlock_swatches_switch' ? array('done'):array('not done') 
+				'tiny_features_unlock_swatches_shop_page'=>array(
+					'label'=>'Unlock swatches for the shop/category page',
+					'type'=>'checkbox',	
+					'spui_version'=>1.0,
+					'container_class'=>array('black','hide'),											
+					'sanitize'=>'sanitize_text_field',
+					'value'=>array(wbc()->options->get_option('tiny_features','tiny_features_unlock_swatches_shop_page')),
+					'options'=>array('tiny_features_unlock_swatches_shop_page'=>' '),
+					'is_id_as_name'=>true,
+					'class'=>array(''),
+					'attr'=>array(''),
+					'visible_info'=>array( 'label'=>'Simply request to enable this feature with some CSS confirmation',
+						'type'=>'visible_info',
+						'class'=>array('fluid', 'medium','hidden'),
 						'size_class'=>array('sixteen','wide'),
 					),	
 				), 
-				'product_page_hide_second_variation_form'=>array(
-					'label'=>'Hide second category\'s variation menu',
-					'type'=>'checkbox',
+				// 'tiny_features_unlock_swatches_link'=>array(
+				// 	'label'=>'Click here to Unlock Swatches For The Shop/Category Page',
+				// 	'type'=>'text',					
+				// 	'class'=>array('secondary', 'hidden'),
+				// 	'attr'=>array('style="display: none !important;"'),					
+				// 	// 'visible_info'=>array( 'label'=>'Please visit at '.site_url(get_option('woocommerce_permalinks')['category_base'].'eo_diamond_shape_cat/'),
+				// 	// 	'type'=>'visible_info',
+				// 	// 	'class'=>array('fluid', 'medium'),
+				// 	// 	'size_class'=>array('sixteen','wide'),
+				// 	// ),	
+				// ),
+				'tiny_features_unlock_swatches_label'=>array(
+					'label'=>'Click here to Unlock Swatches For The Shop/Category Page',
+					'type'=>'devider',
+					// 'class'=>array('fluid'),
+					// 'size_class'=>array('eight','wide')
+				),				
+				'tiny_features_unlock_swatches_whatsapp_link'=>array(
+					'label'=>'Click here to Contact Through WhatsApp',
+					'type'=>'link',					
+					'attr'=>array("href='https://api.whatsapp.com/send/?phone=918347408752&text=I%20want%20to%20unlock%20the%20variation%20swatches%20for%20the%20shop%2Fcategory%20%20pages.%20The%20BUNDLOICE%28formerly+Woo+Choice+Plugin%29%20is%20already%20installed%20on%20my%20WordPress%20admin%20panel%20and%20I%20am%20sending%20this%20message%20to%20unlock%20this%20feature.&type=phone_number&app_absent=0'", "target='blank'"),
+					'class'=>array('secondary'),
+					// 'visible_info'=>array( 'label'=>'Please visit at '.site_url(get_option('woocommerce_permalinks')['category_base'].'eo_diamond_shape_cat/'),
+					// 	'type'=>'visible_info',
+					// 	'class'=>array('fluid', 'medium'),
+					// 	'size_class'=>array('sixteen','wide'),
+					// ),	
+				),
+				'tiny_features_unlock_swatches_other_link'=>array(
+					'label'=>'Click here to Contact Through Other option',
+					'type'=>'link',					
+					'attr'=>array("href='https://sphereplugins.com/contact-us/'", "target='blank'"),
+					'class'=>array('secondary'),
+					// 'visible_info'=>array( 'label'=>'Please visit at '.site_url(get_option('woocommerce_permalinks')['category_base'].'eo_diamond_shape_cat/'),
+					// 	'type'=>'visible_info',
+					// 	'class'=>array('fluid', 'medium'),
+					// 	'size_class'=>array('sixteen','wide'),
+					// ),	
+				),
+				'tiny_features_shop_page_other_option_label'=>array(
+					'label'=>'Shop/Category Page Options',
+					'type'=>'devider',
+					// 'class'=>array('fluid'),
+					// 'size_class'=>array('eight','wide')
+				),					
+				'tiny_features_option_ui_loop_box_hover_media_index'=>array(
+					'label'=>wbc()->config->product_variations_configs()['is_gallery_images_type_based_template'] == 1 ? eowbc_lang('Loop box media type to show on hover') : eowbc_lang('Loop box hover media index'),
+					'label_class'=>array_merge( array(), $shop_tab_label_class),					
+					'type'=>wbc()->config->product_variations_configs()['is_gallery_images_type_based_template'] == 1 ? 'select' : 'number',
+					'spui_version'=>1.0,
+					'container_class'=>array_merge( array(), $shop_tab_container_class),						
+					'value'=>wbc()->options->get_option('tiny_features','tiny_features_option_ui_loop_box_hover_media_index',wbc()->config->product_variations_configs()['is_gallery_images_type_based_template'] == 1 ? 'video' :  '2'),
+					'options'=>wbc()->config->product_variations_configs()['is_gallery_images_type_based_template'] == 1 ? apply_filters('sp_variations_loop_box_hover_media_type',array('image'=>'Image','video'=>'Video')) : array(),
 					'sanitize'=>'sanitize_text_field',
-					'value'=>array(wbc()->options->get_option('tiny_features','product_page_hide_second_variation_form')),
+					'class'=>array('fluid'),
+					'is_disabled'=>$shop_tab_is_disabled,
+					'size_class'=>array('eight','wide'/*,'required'*/),
+					'attr'=>array(),					
+					'inline'=>false,
+
+					'visible_info'=>array( 'label'=>wbc()->config->product_variations_configs()['is_gallery_images_type_based_template'] == 1 ? eowbc_lang('Set here the type of media to show on hover. For example, you may like to show a video or image on hover and leave it blank to disable the hover feature.') : eowbc_lang('Set here the index of thumb image or media to show on hover. For example you may like to show video on hover so set index as per your gallery images thumbnails display order.'),
+						'type'=>'visible_info',
+						'class'=>array('medium','fluid'),
+						// 'size_class'=>array('sixteen','wide'),
+					),
+					'attr'=>array("min='0',max='10'")					
+				),						
+				'shop_page_hide_first_variation_form'=>array(
+					'label'=>'Hide the first category\'s variation menu',
+					'label_class'=>array_merge( array(), $shop_tab_label_class),					
+					'type'=>'checkbox',
+					'spui_version'=>1.0,
+					'container_class'=>array_merge( array(), $shop_tab_container_class),						
+					'sanitize'=>'sanitize_text_field',
+					'value'=>array(wbc()->options->get_option('tiny_features','shop_page_hide_first_variation_form')),
 					'options'=>array('1'=>' '),
 					'is_id_as_name'=>true,
 					'class'=>array(),
-					'visible_info'=>array( 'label'=>'If enabled the variation selection table for second category\'s products will be hidden if default variations are set',
+					'attr'=>array(),
+					'is_disabled'=>$shop_tab_is_disabled,					
+					'visible_info'=>array( 'label'=>'If enabled the variation selection table for the first category\'s products will be hidden if default variations are set',
 						'type'=>'visible_info',
-						'class'=>array('fluid', 'small'),
+						'class'=>array('fluid', 'medium'),
 						'size_class'=>array('sixteen','wide'),
 					),	
 				), 
+				'shop_page_hide_second_variation_form'=>array(
+					'label'=>'Hide the second category\'s variation menu',
+					'label_class'=>array_merge( array(), $shop_tab_label_class),					
+					'type'=>'checkbox',
+					'spui_version'=>1.0,
+					'container_class'=>array_merge( array(), $shop_tab_container_class),						
+					'sanitize'=>'sanitize_text_field',
+					'value'=>array(wbc()->options->get_option('tiny_features','shop_page_hide_second_variation_form')),
+					'options'=>array('1'=>' '),
+					'is_id_as_name'=>true,
+					'class'=>array(),
+					'attr'=>array(),
+					'is_disabled'=>$shop_tab_is_disabled,					
+					'visible_info'=>array( 'label'=>'If enabled the variation selection table for the second category\'s products will be hidden if default variations are set',
+						'type'=>'visible_info',
+						'class'=>array('fluid', 'medium'),
+						'size_class'=>array('sixteen','wide'),
+					),	
+				), 
+				'tiny_features_shop_page_option_ui_option_dimention'=>array(
+					'label'=>eowbc_lang('Swatches Box Dimension'),
+					'label_class'=>array_merge( array(), $shop_tab_label_class),					
+					'type'=>'text',
+					'spui_version'=>1.0,
+					'container_class'=>array_merge( array(), $shop_tab_container_class),						
+					'value'=>wbc()->options->get_option('tiny_features','tiny_features_shop_page_option_ui_option_dimention','2em'),
+					'sanitize'=>'sanitize_text_field',
+					'class'=>array('fluid'),
+					'size_class'=>array('eight','wide','required'),
+					'inline'=>false,
+					'attr'=>array(),
+					'is_disabled'=>$shop_tab_is_disabled,					
+					'visible_info'=>array( 'label'=>eowbc_lang('The height and width of the Swatches box.<strong>(prepend px, em, rem as measurement)</strong>'),
+						'type'=>'visible_info',
+						'class'=>array('medium','fluid'),
+						// 'size_class'=>array('sixteen','wide'),
+					)
+				),				
+				'tiny_features_shop_page_option_ui_border_color'=>array(
+					'label'=>eowbc_lang('Swatches Border Color'),
+					'label_class'=>array_merge( array(), $shop_tab_label_class),					
+					'type'=>'color',
+					'spui_version'=>1.0,
+					'container_class'=>array_merge( array(), $shop_tab_container_class),						
+					'value'=>wbc()->options->get_option('tiny_features','tiny_features_shop_page_option_ui_border_color','#ECECEC'),
+					'sanitize'=>'sanitize_hex_color',
+					'class'=>array('fluid'),
+					'size_class'=>array('eight','wide','required'),
+					'inline'=>false,
+					'attr'=>array(),
+					'is_disabled'=>$shop_tab_is_disabled,					
+					'visible_info'=>array( 'label'=>eowbc_lang('<br/>The color of the Swatches border'),
+						'type'=>'visible_info',
+						'class'=>array('medium','fluid'),
+						// 'size_class'=>array('sixteen','wide'),
+					)
+				),
+				'tiny_features_shop_page_option_ui_border_width'=>array(
+					'label'=>eowbc_lang('Swatches Border width'),
+					'label_class'=>array_merge( array(), $shop_tab_label_class),					
+					'type'=>'text',
+					'spui_version'=>1.0,
+					'container_class'=>array_merge( array(), $shop_tab_container_class),						
+					'value'=>wbc()->options->get_option('tiny_features','tiny_features_shop_page_option_ui_border_width','2px'),
+					'sanitize'=>'sanitize_text_field',
+					'class'=>array('fluid'),
+					'size_class'=>array('eight','wide','required'),
+					'attr'=>array(),
+					'is_disabled'=>$shop_tab_is_disabled,										
+					'inline'=>false,
+
+					'visible_info'=>array( 'label'=>eowbc_lang('The border width of the Swatches border.<strong>(prepend px, em, rem as measurement)</strong>'),
+						'type'=>'visible_info',
+						'class'=>array('medium','fluid'),
+						// 'size_class'=>array('sixteen','wide'),
+					)
+				),
+				'tiny_features_shop_page_option_ui_border_color_hover'=>array(
+					'label'=>eowbc_lang('Swatches Border Color on Hover -- Not work(selector issue)'),
+					'label_class'=>array_merge( array(), $shop_tab_label_class),					
+					'type'=>'color',
+					'spui_version'=>1.0,
+					'container_class'=>array_merge( array(), $shop_tab_container_class),						
+					'value'=>wbc()->options->get_option('tiny_features','tiny_features_shop_page_option_ui_border_color_hover','#3D3D3D'),
+					'sanitize'=>'sanitize_hex_color',
+					'class'=>array('fluid'),
+					'size_class'=>array('eight','wide','required'),
+					'attr'=>array(),
+					'is_disabled'=>$shop_tab_is_disabled,										
+					'inline'=>false,
+
+					'visible_info'=>array( 'label'=>eowbc_lang('<br/>The color of the Swatches border on hover.'),
+						'type'=>'visible_info',
+						'class'=>array('medium'),
+						// 'size_class'=>array('sixteen','wide'),
+					)
+				),
+				'tiny_features_shop_page_option_ui_border_width_hover'=>array(
+					'label'=>eowbc_lang('Swatches Border width on Hover'),
+					'label_class'=>array_merge( array(), $shop_tab_label_class),					
+					'type'=>'text',
+					'spui_version'=>1.0,
+					'container_class'=>array_merge( array(), $shop_tab_container_class),						
+					'value'=>wbc()->options->get_option('tiny_features','tiny_features_shop_page_option_ui_border_width_hover','2px'),
+					'sanitize'=>'sanitize_text_field',
+					'class'=>array('fluid'),
+					'size_class'=>array('eight','wide','required'),
+					'attr'=>array(),
+					'is_disabled'=>$shop_tab_is_disabled,										
+					'inline'=>false,
+
+					'visible_info'=>array( 'label'=>eowbc_lang('The border width of the Swatches border on hover.<strong>(prepend px, em, rem as measurement)</strong>'),
+						'type'=>'visible_info',
+						'class'=>array('medium'),
+						// 'size_class'=>array('sixteen','wide'),
+					)
+				),
+				'tiny_features_shop_page_option_ui_border_radius'=>array(
+					'label'=>eowbc_lang('Swatches Border Radius'),
+					'label_class'=>array_merge( array(), $shop_tab_label_class),					
+					'type'=>'text',
+					'spui_version'=>1.0,
+					'container_class'=>array_merge( array(), $shop_tab_container_class),						
+					'value'=>wbc()->options->get_option('tiny_features','tiny_features_shop_page_option_ui_border_radius','1px'),
+					'sanitize'=>'sanitize_text_field',
+					'class'=>array('fluid'),
+					'size_class'=>array('eight','wide','required'),
+					'attr'=>array(),
+					'is_disabled'=>$shop_tab_is_disabled,										
+					'inline'=>false,
+
+					'visible_info'=>array( 'label'=>eowbc_lang('The border radius of the Swatches border.<strong>(prepend px, em, rem as measurement)</strong>'),
+						'type'=>'visible_info',
+						'class'=>array('medium'),
+						// 'size_class'=>array('sixteen','wide'),
+					)
+				),						
+				'tiny_features_shop_page_option_ui_font_color'=>array(
+					'label'=>eowbc_lang('Swatches Font Color -- Not work(variation file CSS override)'),
+					'label_class'=>array_merge( array(), $shop_tab_label_class),					
+					'type'=>'color',
+					'spui_version'=>1.0,
+					'container_class'=>array_merge( array(), $shop_tab_container_class),						
+					'value'=>wbc()->options->get_option('tiny_features','tiny_features_shop_page_option_ui_font_color','#DBDBDB'),
+					'sanitize'=>'sanitize_hex_color',
+					'class'=>array('fluid'),
+					'size_class'=>array('eight','wide','required'),
+					'attr'=>array(),
+					'is_disabled'=>$shop_tab_is_disabled,										
+					'inline'=>false,
+
+					'visible_info'=>array( 'label'=>eowbc_lang('<br/>The color of the Swatches text.'),
+						'type'=>'visible_info',
+						'class'=>array('medium'),
+						// 'size_class'=>array('sixteen','wide'),
+					)
+				),
+				'tiny_features_shop_page_option_ui_font_color_hover'=>array(
+					'label'=>eowbc_lang('Swatches Font Color on Hover'),
+					'label_class'=>array_merge( array(), $shop_tab_label_class),					
+					'type'=>'color',
+					'spui_version'=>1.0,
+					'container_class'=>array_merge( array(), $shop_tab_container_class),						
+					'value'=>wbc()->options->get_option('tiny_features','tiny_features_shop_page_option_ui_font_color_hover','#AA7D7D'),
+					'sanitize'=>'sanitize_hex_color',
+					'class'=>array('fluid'),
+					'size_class'=>array('eight','wide','required'),
+					'attr'=>array(),
+					'is_disabled'=>$shop_tab_is_disabled,										
+					'inline'=>false,
+
+					'visible_info'=>array( 'label'=>eowbc_lang('<br/>The color of the Swatches text on hover.'),
+						'type'=>'visible_info',
+						'class'=>array('medium'),
+						// 'size_class'=>array('sixteen','wide'),
+					)
+				),
+				'tiny_features_shop_page_option_ui_bg_color'=>array(
+					'label'=>eowbc_lang('Swatches Background Color -- Not work(variation file CSS override)'),
+					'label_class'=>array_merge( array(), $shop_tab_label_class),					
+					'type'=>'color',
+					'spui_version'=>1.0,
+					'container_class'=>array_merge( array(), $shop_tab_container_class),						
+					'value'=>wbc()->options->get_option('tiny_features','tiny_features_shop_page_option_ui_bg_color','#ffffff'),
+					'sanitize'=>'sanitize_hex_color',
+					'class'=>array('fluid'),
+					'size_class'=>array('eight','wide','required'),
+					'attr'=>array(),
+					'is_disabled'=>$shop_tab_is_disabled,										
+					'inline'=>false,
+
+					'visible_info'=>array( 'label'=>eowbc_lang('<br/>The color of the Swatches background.'),
+						'type'=>'visible_info',
+						'class'=>array('medium'),
+						// 'size_class'=>array('sixteen','wide'),
+					)
+				),
+				'tiny_features_shop_page_option_ui_bg_color_hover'=>array(
+					'label'=>eowbc_lang('Swatches Background Color on Hover'),
+					'label_class'=>array_merge( array(), $shop_tab_label_class),					
+					'type'=>'color',
+					'spui_version'=>1.0,
+					'container_class'=>array_merge( array(), $shop_tab_container_class),						
+					'value'=>wbc()->options->get_option('tiny_features','tiny_features_shop_page_option_ui_bg_color_hover','#DCC7C7'),
+					'sanitize'=>'sanitize_hex_color',
+					'class'=>array('fluid'),
+					'size_class'=>array('eight','wide','required'),
+					'attr'=>array(),
+					'is_disabled'=>$shop_tab_is_disabled,										
+					'inline'=>false,
+
+					'visible_info'=>array( 'label'=>eowbc_lang('<br/>The color of the Swatches background on hover.'),
+						'type'=>'visible_info',
+						'class'=>array('medium'),
+						// 'size_class'=>array('sixteen','wide'),
+					)
+				),
+				'tiny_features_shop_tab_end'=>array(
+					'type'=>'accordian',
+					'section_type'=>'end'
+				),
+
+				'tiny_features_special_attributes_tab_start'=>array(
+					'type'=>'accordian',
+					'section_type'=>'start',
+					'class'=>array('field', 'styled'),
+					'label'=>'<span class="ui large text">Special Attributes</span>',
+				),
+				'tiny_features_special_attributes_tab_end'=>array(
+					'type'=>'accordian',
+					'section_type'=>'end'
+				),
+
+				'tiny_features_advanced_tab_start'=>array(
+					'type'=>'accordian',
+					'section_type'=>'start',
+					'class'=>array('field', 'styled'),
+					'label'=>'<span class="ui large text">Advanced</span>',
+				),
+				'tiny_features_enable_only_for_categories'=>array(
+					'label'=>eowbc_lang('Enable Only For Categories(optional)'),
+					'type'=>'select',
+					'spui_version'=>1.0,
+					'container_class'=>array(''),						
+					'value'=> wbc()->options->get_option('tiny_features','tiny_features_enable_only_for_categories'/*,'#DCC7C7'*/),
+					'sanitize'=>'sanitize_text_field',
+					'options'=> \eo\wbc\model\Category_Attribute::instance()->get_category(),
+					'class'=>array('fluid','additions','search','multiple','clearable'),
+					'visible_info'=>array( 
+						'label'=>eowbc_lang('Simply select the categories for which only you want to enable the variation swatches. Leave it blank if you want to keep it on for all categories, by default it is enabled for all categories.'),
+						'type'=>'visible_info',
+						'class'=>array('medium'),
+						'size_class'=>array('eight','wide'),
+					),
+					'size_class'=>array('three','wide'),
+					'inline'=>false,	
+				),
+				'tiny_features_advanced_tab_end'=>array(
+					'type'=>'accordian',
+					'section_type'=>'end'
+				),				
+				// //--- start @a ---
+				// 'tiny_features_variation_swatches_admin_settings_and_configrations'=>array(
+				// 				'label'=>eowbc_lang('Variation Swatches Admin Settings And Configrations'),
+				// 				'type'=>'devider',
+				// 				'class'=>array('dividing', 'ui', 'vertical', 'segment'),
+				// ),
+
+				// 'tiny_features_category_page'=>array(
+				// 				'label'=>eowbc_lang('Category Page'),
+				// 				'type'=>'devider',
+				// 				'class'=>array('dividing', 'ui', 'vertical', 'segment'),
+				// ),
+				// 'tiny_features_category_general_settings'=>array(
+				// 				'label'=>eowbc_lang('Category General Settings'),
+				// 				'type'=>'devider',
+				// 				'class'=>array('dividing', 'ui', 'vertical', 'segment'),								
+				// ),
+				// 'product_page_hide_second_variation_form_03'=>array(
+				// 	'label'=>'Hide second category\'s variation menu',
+				// 	'type'=>'checkbox',
+				// 	'sanitize'=>'sanitize_text_field',
+				// 	'value'=>array(wbc()->options->get_option('tiny_features','product_page_hide_second_variation_form')),
+				// 	'options'=>array('1'=>' '),
+				// 	'is_id_as_name'=>true,
+				// 	'class'=>array(),	
+				// 	'visible_info'=>array( 'label'=>'If enabled the variation selection table for second category\'s products will be hidden if default variations are set',
+				// 		'type'=>'visible_info',
+				// 		'class'=>array('fluid', 'medium'),
+				// 		'size_class'=>array('sixteen','wide'),
+				// 	),	
+				// ), 		
+				// 'tiny_features_category_swatches_type_settings'=>array(
+				// 				'label'=>eowbc_lang('Category Swatches Type Settings'),
+				// 				'type'=>'devider',
+				// 				'class'=>array('dividing', 'ui', 'vertical', 'segment'),
+				// ),
+				// 'product_page_hide_second_variation_form_02'=>array(
+				// 	'label'=>'Hide second category\'s variation menu',
+				// 	'type'=>'checkbox',
+				// 	'sanitize'=>'sanitize_text_field',
+				// 	'value'=>array(wbc()->options->get_option('tiny_features','product_page_hide_second_variation_form')),
+				// 	'options'=>array('1'=>' '),
+				// 	'is_id_as_name'=>true,
+				// 	'class'=>array(),
+				// 	'visible_info'=>array( 'label'=>'If enabled the variation selection table for second category\'s products will be hidden if default variations are set',
+				// 		'type'=>'visible_info',
+				// 		'class'=>array('fluid', 'medium'),
+				// 		'size_class'=>array('sixteen','wide'),
+				// 	),	
+				// ), 				
+				// 'tiny_features_category_loop_box_hover_settings'=>array(
+				// 				'label'=>eowbc_lang('Category Loop Box Hover Settings'),
+				// 				'type'=>'devider',
+				// 				'class'=>array('dividing', 'ui', 'vertical', 'segment'),
+				// ),
+				// 'product_page_hide_second_variation_form_03'=>array(
+				// 	'label'=>'Hide second category\'s variation menu',
+				// 	'type'=>'checkbox',
+				// 	'sanitize'=>'sanitize_text_field',
+				// 	'value'=>array(wbc()->options->get_option('tiny_features','product_page_hide_second_variation_form')),
+				// 	'options'=>array('1'=>' '),
+				// 	'is_id_as_name'=>true,
+				// 	'class'=>array(),	
+				// 	'visible_info'=>array( 'label'=>'If enabled the variation selection table for second category\'s products will be hidden if default variations are set',
+				// 		'type'=>'visible_info',
+				// 		'class'=>array('fluid', 'medium'),
+				// 		'size_class'=>array('sixteen','wide'),
+				// 	),	
+				// ), 
+
+				// 'tiny_features_item_page'=>array(
+				// 				'label'=>eowbc_lang('Item Page'),
+				// 				'type'=>'devider',
+				// 				'class'=>array('dividing', 'ui', 'vertical', 'segment'),
+				// ),
+				// 'product_page_hide_second_variation_form_04'=>array(
+				// 	'label'=>'Hide second category\'s variation menu',
+				// 	'type'=>'checkbox',
+				// 	'sanitize'=>'sanitize_text_field',
+				// 	'value'=>array(wbc()->options->get_option('tiny_features','product_page_hide_second_variation_form')),
+				// 	'options'=>array('1'=>' '),
+				// 	'is_id_as_name'=>true,
+				// 	'class'=>array(),
+				// 	'visible_info'=>array( 'label'=>'If enabled the variation selection table for second category\'s products will be hidden if default variations are set',
+				// 		'type'=>'visible_info',
+				// 		'class'=>array('fluid', 'medium'),
+				// 		'size_class'=>array('sixteen','wide'),
+				// 	),	
+				// ), 				
+				// 'tiny_features_item_general_settings'=>array(
+				// 				'label'=>eowbc_lang('Item General Settings'),
+				// 				'type'=>'devider',
+				// 				'class'=>array('dividing', 'ui', 'vertical', 'segment'),
+				// ),
+				// 'product_page_hide_second_variation_form_05'=>array(
+				// 	'label'=>'Hide second category\'s variation menu',
+				// 	'type'=>'checkbox',
+				// 	'sanitize'=>'sanitize_text_field',
+				// 	'value'=>array(wbc()->options->get_option('tiny_features','product_page_hide_second_variation_form')),
+				// 	'options'=>array('1'=>' '),
+				// 	'is_id_as_name'=>true,
+				// 	'class'=>array(),
+				// 	'visible_info'=>array( 'label'=>'If enabled the variation selection table for second category\'s products will be hidden if default variations are set',
+				// 		'type'=>'visible_info',
+				// 		'class'=>array('fluid', 'medium'),
+				// 		'size_class'=>array('sixteen','wide'),
+				// 	),	
+				// ), 				
+				// 'tiny_features_item_slider_and_zoom_settings'=>array(
+				// 				'label'=>eowbc_lang('Slider And Zoom Settings'),
+				// 				'type'=>'devider',
+				// 				'class'=>array('dividing', 'ui', 'vertical', 'segment'),
+				// ),	
+				// 'product_page_hide_second_variation_form_06'=>array(
+				// 	'label'=>'Hide second category\'s variation menu',
+				// 	'type'=>'checkbox',
+				// 	'sanitize'=>'sanitize_text_field',
+				// 	'value'=>array(wbc()->options->get_option('tiny_features','product_page_hide_second_variation_form')),
+				// 	'options'=>array('1'=>' '),
+				// 	'is_id_as_name'=>true,
+				// 	'class'=>array(),
+				// 	'visible_info'=>array( 'label'=>'If enabled the variation selection table for second category\'s products will be hidden if default variations are set',
+				// 		'type'=>'visible_info',
+				// 		'class'=>array('fluid', 'medium'),
+				// 		'size_class'=>array('sixteen','wide'),
+				// 	),	
+				// ), 	
+				// //--- end ---
 				'tiny_features_option_ui_save'=>array(
 							'label'=>'Save',
 							'type'=>'button',		
 							'class'=>array('primary'),
 							'attr'=>array("data-action='save'")				
-				)
+				),
+				
 			)
 		),
 	'tiny_features_specification_view'=>array(
@@ -426,7 +1471,7 @@ $form['data'] = array(
 					'inline'=>true,
 					'visible_info'=>array( 'label'=>eowbc_lang('(Please clean product description area on product page for better UI/UX.)'),
 						'type'=>'visible_info',
-						'class'=>array('small'),
+						'class'=>array('medium'),
 						// 'size_class'=>array('sixteen','wide'),
 					),											
 				),
@@ -462,7 +1507,7 @@ $form['data'] = array(
 					'size_class'=>array(),
 					'visible_info'=>array( 'label'=>eowbc_lang('Add Keys of your Additional WooCommerce Product Meta here, if you want to display them with specification view. If the meta is not found for your specified key then it will be ignored.'),
 						'type'=>'visible_info',
-						'class'=>array('small'),
+						'class'=>array('medium'),
 						// 'size_class'=>array('sixteen','wide'),
 					),
 					
@@ -493,7 +1538,7 @@ $form['data'] = array(
 	// 				'inline'=>false,
 	// 				'visible_info'=>array( 'label'=>eowbc_lang('( Select category or attribute on which this filter field should do the searching. )'),
 	// 					'type'=>'visible_info',
-	// 					'class'=>array('small'),
+	// 					'class'=>array('medium'),
 	// 				),
 	// 				'size_class'=>array('eight','wide','required'),
 	// 				/*'size_class'=>array('transition','hidden')*/
@@ -507,7 +1552,7 @@ $form['data'] = array(
 	// 				'inline'=>false,
 	// 				'visible_info'=>array( 'label'=>eowbc_lang('( Label text to display on website for this filter field. )'),
 	// 					'type'=>'visible_info',
-	// 					'class'=>array('small'),
+	// 					'class'=>array('medium'),
 	// 				),
 	// 				'size_class'=>array('required')
 	// 			),
@@ -520,7 +1565,7 @@ $form['data'] = array(
 	// 				'inline'=>false,
 	// 				'visible_info'=>array( 'label'=>eowbc_lang('( Specify unique id, useful if you want to create dependant filters please visit doc for more details. )'),
 	// 					'type'=>'visible_info',
-	// 					'class'=>array('small'),
+	// 					'class'=>array('medium'),
 	// 				),
 	// 				'size_class'=>array('required')
 	// 			),
@@ -571,7 +1616,7 @@ $form['data'] = array(
 	// 				'inline'=>false,
 	// 				'visible_info'=>array( 'label'=>eowbc_lang('( Specify on which page you want to display filter, if you select category then you will be asked to select category on which you want to display the filter. )'),
 	// 					'type'=>'visible_info',
-	// 					'class'=>array('small'),
+	// 					'class'=>array('medium'),
 	// 				),
 	// 			),
 	// 			'shop_cat_filter_category'=>array(
@@ -584,7 +1629,7 @@ $form['data'] = array(
 	// 				'inline'=>false,
 	// 				'visible_info'=>array( 'label'=>eowbc_lang('( Select category on which to show filter widget. )'),
 	// 					'type'=>'visible_info',
-	// 					'class'=>array('small'),
+	// 					'class'=>array('medium'),
 	// 				),
 	// 				'size_class'=>array('transition','hidden','required')
 	// 			),
@@ -598,7 +1643,7 @@ $form['data'] = array(
 	// 				'inline'=>false,
 	// 				'visible_info'=>array( 'label'=>eowbc_lang('( For some specific requirements you might want to display two filters on same page, the two filters function separately based on category, if you enable this option you will be asked to select dependent categories. )'),
 	// 					'type'=>'visible_info',
-	// 					'class'=>array('small'),
+	// 					'class'=>array('medium'),
 	// 				),
 	// 			),
 	// 			'shop_cat_filter_two_filter_first'=>array(
@@ -611,7 +1656,7 @@ $form['data'] = array(
 	// 				'inline'=>false,
 	// 				'visible_info'=>array( 'label'=>eowbc_lang('( The first category of the two different filters, please select the main category of which all attribute options and products you want to include in this filter\'s layout and search results. )'),
 	// 					'type'=>'visible_info',
-	// 					'class'=>array('small'),
+	// 					'class'=>array('medium'),
 	// 				),
 	// 				'size_class'=>array('transition','hidden','required')
 	// 			),
@@ -624,7 +1669,7 @@ $form['data'] = array(
 	// 				'inline'=>false,
 	// 				'visible_info'=>array( 'label'=>eowbc_lang('( The title text that is set to this filter\'s heading title. )'),
 	// 					'type'=>'visible_info',
-	// 					'class'=>array('small'),
+	// 					'class'=>array('medium'),
 	// 				),
 	// 				'size_class'=>array('transition','hidden','required')
 	// 			),
@@ -638,7 +1683,7 @@ $form['data'] = array(
 	// 				'inline'=>false,
 	// 				'visible_info'=>array( 'label'=>eowbc_lang('( The second category of the two different filters, please select the main category of which all attribute options and products you want to include in this filter\'s layout and search results.' ),
 	// 					'type'=>'visible_info',
-	// 					'class'=>array('small'),
+	// 					'class'=>array('medium'),
 	// 				),
 	// 				'size_class'=>array('transition','hidden','required')
 	// 			),
@@ -651,7 +1696,7 @@ $form['data'] = array(
 	// 				'inline'=>false,
 	// 				'visible_info'=>array( 'label'=>eowbc_lang('( The title text that is set to this filter\'s heading title. )'),
 	// 					'type'=>'visible_info',
-	// 					'class'=>array('small'),
+	// 					'class'=>array('medium'),
 	// 				),
 	// 				'size_class'=>array('transition','hidden','required')
 	// 			),
@@ -665,7 +1710,7 @@ $form['data'] = array(
 	// 				'inline'=>false,
 	// 				'visible_info'=>array( 'label'=>eowbc_lang('( Enable this option if you want to use alternate mobile UI which is quite suitable for mobile layout. )'),
 	// 					'type'=>'visible_info',
-	// 					'class'=>array('small'),
+	// 					'class'=>array('medium'),
 	// 				),
 	// 			),
 	// 			'shop_cat_filter_selected_filter'=>array(
@@ -678,7 +1723,7 @@ $form['data'] = array(
 	// 				'inline'=>false,
 	// 				'visible_info'=>array( 'label'=>eowbc_lang('( Enable this option if you want to show in a line all selected filters with an option to remove them. )'),
 	// 					'type'=>'visible_info',
-	// 					'class'=>array('small'),
+	// 					'class'=>array('medium'),
 	// 				),
 	// 			),
 	// 			'shop_cat_filter_automation'=>array(
@@ -688,7 +1733,7 @@ $form['data'] = array(
 	// 				'class'=>array('secondary'),
 	// 				'visible_info'=>array( 'label'=>eowbc_lang('<br/>( If you want to see sample filters with sample data the please click add button above, you can select what sample data you want to add in the next step and later you can remove sample data by clicking "Remove sample data" button above. After adding sample data visit this sample page to see it in action! )'),
 	// 					'type'=>'visible_info',
-	// 					'class'=>array('small'),
+	// 					'class'=>array('medium'),
 	// 				),
 	// 			),
 	// 			'shop_cat_filter_css'=>array(
@@ -700,7 +1745,7 @@ $form['data'] = array(
 	// 				'class'=>array('secondary'),
 	// 				'visible_info'=>array( 'label'=>eowbc_lang('( Specify your custom CSS for the custom styling, you can override any class of any element of the filter layout to achieve styling of your choice. )'),
 	// 					'type'=>'visible_info',
-	// 					'class'=>array('small'),
+	// 					'class'=>array('medium'),
 	// 				),
 	// 			),
 	// 			'shop_cat_filter_save'=>array(
@@ -861,7 +1906,288 @@ if(empty($bonus_features['spec_view_item_page'])) {
 }
 
 wbc()->load->model('admin\form-builder');
+
 eo\wbc\model\admin\Form_Builder::instance()->build($form);
 wbc()->load->asset('js','admin/tiny-feature/shortcode-filter');
 wbc()->load->asset('js','admin/tiny-feature/shop-cat');
 wbc()->load->asset('js','admin/tiny-feature/specification');
+?>
+<style type="text/css">
+	.hide{
+		display: none !important;
+	}
+/*	.ui.toggle.checkbox input:checked~label:before {
+	    background-color: #2185d0!important;
+	}*/
+	.ui.toggle.checkbox label:before {
+	    background: rgb(0 0 0 / 20%) !important;
+	}
+	.ui.toggle.checkbox input:checked~label:after {
+	    box-shadow: 0 1px 2px 0 rgb(34 36 38 / 50%), 0 0 0 1px rgb(34 36 38 / 50%) inset !important;
+	}	
+	.ui.toggle.checkbox label:after {
+	    box-shadow: 0 1px 2px 0 rgba(34,36,38,.50),0 0 0 1px rgba(34,36,38,.50) inset !important;
+	}
+</style>
+<script type="text/javascript">
+
+jQuery(document).ready(function(){
+
+	// -- niche no js code pro feture na lock mate no se
+	// jQuery('.lock').append('<i class="fa-solid fa-lock" style="color: #ff0000; padding-left: 6px;"></i>');
+	
+	if(jQuery('.pro_label').parent('.lock').length == 0) {
+		jQuery('.lock_icon').parent().addClass('hide');
+		jQuery('.pro_label').removeClass('hide');
+	}
+
+	// -- aa bounus feture na side bar nu html se, aa html akhu string ma pass karelu se pasi append karelu se karnke nakar form buider ma aa html banavu pade atle - ani html file 154.1 na task ma se @a
+	var options_ui_video_section = '<style>'+
+	'    .spui-admin-custum-container {'+
+	'		float: left;'+
+	'		width: 100%;'+
+	'		display: -webkit-box;'+
+	'		display: -ms-flexbox;'+
+	'		display: flex;'+
+	'		-webkit-box-orient: horizontal;'+
+	'		-webkit-box-direction: normal;'+
+	'		    -ms-flex-flow: row wrap;'+
+	'		        flex-flow: row wrap;'+
+	'	}'+
+	''+
+	''+
+	''+
+	'	.spui-admin-custum-container-left-section {'+
+	'        -webkit-box-flex: 1;'+
+	'            -ms-flex: 1 0 calc(100% - 296px);'+
+	'                flex: 1 0 calc(100% - 296px);'+
+	'        max-width: calc(100% - 296px);'+
+	'        width: 100%;'+
+	'        margin-right: 20px;'+
+	'		padding: 20px 50px;'+
+	'		background: #fff;'+
+	'		border-radius: 10px;'+
+	'		margin-top: 20px;'+
+	'		-webkit-box-shadow: 0 4px 28px rgb(0 0 0 / 12%);'+
+	'		        box-shadow: 0 4px 28px rgb(0 0 0 / 12%);'+
+	'    }'+
+	''+
+	''+
+	'    .spui-admin-custum-container-rigth-section {'+
+	'        display: inline-block;'+
+	'        -webkit-box-flex: 1;'+
+	'            -ms-flex: 1 0 276px;'+
+	'                flex: 1 0 276px;'+
+	'        width: 30%;'+
+	'        margin-top: 1rem;'+
+	'        float: left;'+
+	'    }'+
+	'    [data-tab="tiny_features_item_page_option"]{'+
+	'    	display: inline-block;'+
+	'    	width: 60%;'+
+	'    	float: left;'+
+	'    }'+
+	'	.spui-admin-swatch-var-widget-wrap {'+
+	'		width: 100%;'+
+	'		float: left;'+
+	'	}'+
+	''+
+	''+
+	'    .spui-admin-swatch-var-widget {'+
+	'        padding: 10px;'+
+	'        background: #5858581c;'+
+	'        border-radius: 10px;'+
+	'        -webkit-box-shadow: 0 4px 26px rgba(0, 0, 0, 0.08);'+
+	'                box-shadow: 0 4px 26px rgba(0, 0, 0, 0.08);'+
+	'        margin-bottom: 20px;'+
+	'		width: 100%;'+
+	'		float: left;'+
+	'	}'+
+	''+
+	'	.spui-admin-swat-video-frame {'+
+	'		width: 100%;'+
+	'		float: left;'+
+	'		padding: 14px 0;'+
+	'	}'+
+	'	.spui-admin-swat-video-frame iframe {'+
+	'		width: 100%;'+
+	'	}'+
+	''+
+	'	.spui-swatch-video-title{'+
+	'		margin-bottom: 10px;'+
+	'		font-size: 1.28571429rem;'+
+	'		line-height: 1.28571429em;'+
+	'		font-weight: 700;'+
+	'    	padding: 0;'+
+	'		display: block;'+
+	'		width: 100%;'+
+	'    	float: left;'+
+	'	}'+
+	''+
+	'	.spui-admin-swatch-var-addon-wrap{'+
+	'		float: left;'+
+	'		width: 100%;'+
+	'	}'+
+	''+
+	'	.spui-admin-swatch-var-addon{'+
+	'		float: left;'+
+	'		width: 100%;'+
+	'		text-align: center;'+
+	'		padding: 10px;'+
+	'		border: 1px solid #EBECED;'+
+	'		border-top: 0 none;'+
+	'		margin-bottom: 15px;'+
+	'	}'+
+	''+
+	'	.spui-admin-swatch-var-widget-title {'+
+	'    	text-align: center;'+
+	'	}'+
+	''+
+	'	a.spui-swatch-addon-link{'+
+	'		color: #2271B1;'+
+	'		display: block;'+
+	'	}'+
+	''+
+	'	.spui-swatch-addon-link h2{'+
+	'		font-size: 1.71428571rem;'+
+	'		color: black;'+
+	'    	line-height: 1.5;'+
+	'		margin-bottom: 0;'+
+	'		margin-top: 0;'+
+	'		font-weight: 700;'+
+	'    	padding: 0;'+
+	'		display: block;'+
+	'	}'+
+	''+
+	'	.spui-admin-swatch-var-addon p{'+
+	'		font-size: 13px;'+
+	'		margin: 0 0 1em;'+
+	'    	line-height: 1.4285em;'+
+	'		display: block;'+
+	'		float: left;'+
+	'		width: 100%;'+
+	'		'+
+	'	}'+
+	''+
+	'	.spui-admin-swatch-submit-link{'+
+	'		display: block;'+
+	'		padding: 15px 5px;'+
+	'		background: #424242;'+
+	'		color: #fff;'+
+	'		text-decoration: none;'+
+	'		margin-top: 25px;'+
+	'		border-radius: 5px;'+
+	'		width: 100%;'+
+	'		float: left;'+
+	'	}'+
+	'	a.spui-admin-swatch-submit-link.spui-admin-update-clicks:hover {'+
+	'	    color: black;'+
+	'	    text-decoration: none;'+
+	'	    background: transparent;'+
+	'	    border: 1px solid;'+
+	'	}'+
+	''+
+	'	p.spui-admin-swatch-var-description {'+
+	'	    float: left;'+
+	'	    padding-top: 15px;'+
+	'	}'+
+	''+
+	'	@media(max-width:960px){'+
+	'		body .spui-admin-custum-container-left-section{'+
+	'			-webkit-box-flex: 1 !important;'+
+	'			    -ms-flex: 1 1 100% !important;'+
+	'			        flex: 1 1 100% !important;'+
+	'			max-width: 100%  !important;'+
+	'		}'+
+	'		body .spui-admin-custum-container-rigth-section {'+
+	'			-webkit-box-flex: 1 !important;'+
+	'			    -ms-flex: 1 1 100% !important;'+
+	'			        flex: 1 1 100% !important;'+
+	'			max-width: 100%  !important;'+
+	'		}'+
+	'	}'+
+	''+
+	''+
+	'    </style>'+
+	''+
+	'<div class="spui-admin-custum-container-rigth-section">'+
+	'    <div class="spui-admin-swatch-var-widget-wrap">'+
+	'<!--         <div class="spui-admin-swatch-var-widget">'+
+	'            <h3 class="spui-swatch-video-title">Getting Started</h3>'+
+	'            <div class="spui-admin-swat-video-frame">'+
+	'                <iframe'+
+	'                    src="https://www.youtube.com/embed/X4KFZfR5JUY"'+
+	'                    title="YouTube video player"'+
+	'                    frameborder="0"'+
+	'                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"'+
+	'                    allowfullscreen=""'+
+	'                ></iframe>'+
+	'            </div>'+
+	'            <p class="spui-admin-swatch-var-description">'+
+	'                Whether that is on a user role basis, minimum order amount, per product category or even within a date range.'+
+	'            </p>'+
+	'        </div> -->'+
+	'        <div class="spui-admin-swatch-var-widget">'+
+	'            <h3 class="spui-swatch-video-title spui-admin-swatch-var-widget-title">Getting Started</h3>'+
+	'            <!---BoxContent-->'+
+	'            <div class="spui-admin-swatch-var-addon-wrap">'+
+	'                <div class="spui-admin-swatch-var-addon">'+
+	'                    <a href="#" class="spui-swatch-addon-link"> <h2>Documentation</h2> </a>'+
+	'                    <div class="spui-admin-swat-video-frame">'+
+	'                        <iframe'+
+	'                            src="https://www.youtube.com/embed/X4KFZfR5JUY"'+
+	'                            title="YouTube video player"'+
+	'                            frameborder="0"'+
+	'                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"'+
+	'                            allowfullscreen=""'+
+	'                        ></iframe>'+
+	'                    </div>'+
+	'                    <p>Get started by spending some time with the '+
+	'                    	<a target="_blank" href="https://sphereplugins.com/docs/woo-choice-plugin/getting-started/installation-and-setup-wizard/">documentation.</a>'+
+	'                    </p>'+
+	'                    <a href="#" class="spui-admin-swatch-submit-link spui-admin-update-clicks"> Get It now </a>'+
+	'                </div>'+
+	'                <!---Box_Two-->'+
+	'                <div class="spui-admin-swatch-var-addon">'+
+	'                    <a href="#" class="spui-swatch-addon-link"> <h2>Facing issue?</h2> </a>'+
+	'                    <div class="spui-admin-swat-video-frame">'+
+	'                        <iframe'+
+	'                            src="https://www.youtube.com/embed/X4KFZfR5JUY"'+
+	'                            title="YouTube video player"'+
+	'                            frameborder="0"'+
+	'                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"'+
+	'                            allowfullscreen=""'+
+	'                        ></iframe>'+
+	'                    </div>'+
+	'                    <p>Stuck with something? <a target="_blank" href="https://sphereplugins.com/contact-us/">Please open a ticket.</a> For emergency case join our live chat.</p>'+
+	'                    <a href="#" class="spui-admin-swatch-submit-link spui-admin-update-clicks"> Get It now </a>'+
+	'                </div>'+
+	'                <div class="spui-admin-swatch-var-addon">'+
+	'                    <a href="#" class="spui-swatch-addon-link"> <h2>Love Our Plugin?</h2> </a>'+
+	'                    <div class="spui-admin-swat-video-frame">'+
+	'                        <iframe'+
+	'                            src="https://www.youtube.com/embed/X4KFZfR5JUY"'+
+	'                            title="YouTube video player"'+
+	'                            frameborder="0"'+
+	'                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"'+
+	'                            allowfullscreen=""'+
+	'                        ></iframe>'+
+	'                    </div>'+
+	'                    <p>Thank you for choosing Variation Gallery for WooCommerce. If you have found our plugin useful and makes you smile, <a target="_blank" href="https://wordpress.org/support/plugin/woo-bundle-choice/reviews/?rate=5#new-post">please consider giving us a 5-star rating.</a> It will help us to grow.</p>'+
+	'                    <a href="#" class="spui-admin-swatch-submit-link spui-admin-update-clicks"> Get It now </a>'+
+	'                </div>'+
+	'            </div>'+
+	'	        <!-- <a target="_blank" href="#">Variation Swatches Documentation</a> -->'+
+	'        </div>'+
+	'    </div>'+
+	'</div>'+
+	''+
+	''+
+	'<div class="clear_both" style="clear: both;"></div>';
+		
+
+	jQuery('#eowbc_tiny_features').append(options_ui_video_section);
+
+});
+
+</script>	

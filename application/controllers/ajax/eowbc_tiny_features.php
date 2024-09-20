@@ -8,6 +8,20 @@ $res = array( "type"=>"success", "msg"=>"Updated successfully!" );
 
 if(wp_verify_nonce(wbc()->sanitize->post('_wpnonce'),'eowbc_tiny_features')){
 
+	wbc()->options->update_option('tiny_features','tiny_features_disable_swatches_plugin_stylesheet',(empty(wbc()->sanitize->post('tiny_features_disable_swatches_plugin_stylesheet'))?'':wbc()->sanitize->post('tiny_features_disable_swatches_plugin_stylesheet')));
+	
+	wbc()->options->update_option('tiny_features','tiny_features_clear_on_reselect',(empty(wbc()->sanitize->post('tiny_features_clear_on_reselect'))?'':wbc()->sanitize->post('tiny_features_clear_on_reselect')));
+
+	wbc()->options->update_option('tiny_features','tiny_features_show_selected_attribute',(empty(wbc()->sanitize->post('tiny_features_show_selected_attribute'))?'':wbc()->sanitize->post('tiny_features_show_selected_attribute')));
+
+	wbc()->options->update_option('tiny_features','tiny_features_variation_label_separator',(empty(wbc()->sanitize->post('tiny_features_variation_label_separator'))?'':wbc()->sanitize->post('tiny_features_variation_label_separator')));
+
+	wbc()->options->update_option('tiny_features','tiny_features_option_enable_tooltip',(empty(wbc()->sanitize->post('tiny_features_option_enable_tooltip'))?'':wbc()->sanitize->post('tiny_features_option_enable_tooltip')));
+
+	wbc()->options->update_option('tiny_features','tiny_features_shape_style',(empty(wbc()->sanitize->post('tiny_features_shape_style'))?'':wbc()->sanitize->post('tiny_features_shape_style')));
+
+	wbc()->options->update_option('tiny_features','tiny_features_option_dropdowns_to_button',(empty(wbc()->sanitize->post('tiny_features_option_dropdowns_to_button'))?'':wbc()->sanitize->post('tiny_features_option_dropdowns_to_button')));
+
 	wbc()->options->update_option('tiny_features','shop_cat_filter_location_shop',(empty(wbc()->sanitize->post('shop_cat_filter_location_shop'))?'':wbc()->sanitize->post('shop_cat_filter_location_shop')));
 	
 	wbc()->options->update_option('tiny_features','tiny_features_dropdown_icon_only',(empty(wbc()->sanitize->post('tiny_features_dropdown_icon_only'))?'':wbc()->sanitize->post('tiny_features_dropdown_icon_only')));
@@ -44,6 +58,8 @@ if(wp_verify_nonce(wbc()->sanitize->post('_wpnonce'),'eowbc_tiny_features')){
 
 	wbc()->options->update_option('tiny_features','tiny_features_option_ui_toggle_status',(empty(wbc()->sanitize->post('tiny_features_option_ui_toggle_status'))?'':wbc()->sanitize->post('tiny_features_option_ui_toggle_status')));
 
+	wbc()->options->update_option('tiny_features','tiny_features_gallery_images_section',(empty(wbc()->sanitize->post('tiny_features_gallery_images_section'))?'':wbc()->sanitize->post('tiny_features_gallery_images_section')));
+	
 	wbc()->options->update_option('tiny_features','tiny_features_option_ui_toggle_init_status',(empty(wbc()->sanitize->post('tiny_features_option_ui_toggle_init_status'))?'':wbc()->sanitize->post('tiny_features_option_ui_toggle_init_status')));
 
 	wbc()->options->update_option('tiny_features','tiny_features_option_ui_toggle_text',(empty(wbc()->sanitize->post('tiny_features_option_ui_toggle_text'))?__('CUSTOMIZE THIS PRODUCT'):wbc()->sanitize->post('tiny_features_option_ui_toggle_text')));
@@ -72,7 +88,60 @@ if(wp_verify_nonce(wbc()->sanitize->post('_wpnonce'),'eowbc_tiny_features')){
 
 	wbc()->options->update_option('tiny_features','product_page_hide_second_variation_form',(empty(wbc()->sanitize->post('product_page_hide_second_variation_form'))?'':1));
 
+	wbc()->options->update_option('tiny_features','tiny_features_unlock_swatches_shop_page', (empty(wbc()->sanitize->post('tiny_features_unlock_swatches_shop_page'))?'':wbc()->sanitize->post('tiny_features_unlock_swatches_shop_page')));
+	
+	wbc()->options->update_option('tiny_features','tiny_features_option_ui_loop_box_hover_media_index',(empty(wbc()->sanitize->post('tiny_features_option_ui_loop_box_hover_media_index'))?'2':wbc()->sanitize->post('tiny_features_option_ui_loop_box_hover_media_index')));
+
 	wbc()->options->update_option('tiny_features','tiny_features_specification_meta_keys',(empty(wbc()->sanitize->post('tiny_features_specification_meta_keys'))?'':wbc()->sanitize->post('tiny_features_specification_meta_keys')));
+	
+	wbc()->options->update_option('tiny_features','tiny_features_product_page_video_icon',(empty(wbc()->sanitize->post('tiny_features_product_page_video_icon'))?'':wbc()->sanitize->post('tiny_features_product_page_video_icon')));
+
+	
+	
+	wbc()->options->update_option('tiny_features','shop_page_hide_first_variation_form',(empty(wbc()->sanitize->post('shop_page_hide_first_variation_form'))?'':1));
+
+	wbc()->options->update_option('tiny_features','shop_page_hide_second_variation_form',(empty(wbc()->sanitize->post('shop_page_hide_second_variation_form'))?'':1));
+
+	wbc()->options->update_option('tiny_features','tiny_features_shop_page_option_ui_option_dimention',(empty(wbc()->sanitize->post('tiny_features_shop_page_option_ui_option_dimention'))?'2em':wbc()->sanitize->post('tiny_features_shop_page_option_ui_option_dimention')));
+
+	wbc()->options->update_option('tiny_features','tiny_features_shop_page_option_ui_border_color',(empty(wbc()->sanitize->post('tiny_features_shop_page_option_ui_border_color'))?'#ffffff':wbc()->sanitize->post('tiny_features_shop_page_option_ui_border_color')));	
+
+	wbc()->options->update_option('tiny_features','tiny_features_shop_page_option_ui_border_width',(empty(wbc()->sanitize->post('tiny_features_shop_page_option_ui_border_width'))?'1px':wbc()->sanitize->post('tiny_features_shop_page_option_ui_border_width')));
+
+	wbc()->options->update_option('tiny_features','tiny_features_shop_page_option_ui_border_color_hover',(empty(wbc()->sanitize->post('tiny_features_shop_page_option_ui_border_color_hover'))?'#ffffff':wbc()->sanitize->post('tiny_features_shop_page_option_ui_border_color_hover')));
+
+	wbc()->options->update_option('tiny_features','tiny_features_shop_page_option_ui_border_width_hover',(empty(wbc()->sanitize->post('tiny_features_shop_page_option_ui_border_width_hover'))?'1px':wbc()->sanitize->post('tiny_features_shop_page_option_ui_border_width_hover')));
+
+	wbc()->options->update_option('tiny_features','tiny_features_shop_page_option_ui_border_radius',(empty(wbc()->sanitize->post('tiny_features_shop_page_option_ui_border_radius'))?'1px':wbc()->sanitize->post('tiny_features_shop_page_option_ui_border_radius')));
+
+	wbc()->options->update_option('tiny_features','tiny_features_shop_page_option_ui_font_color',(empty(wbc()->sanitize->post('tiny_features_shop_page_option_ui_font_color'))?'#ffffff':wbc()->sanitize->post('tiny_features_shop_page_option_ui_font_color')));
+
+	wbc()->options->update_option('tiny_features','tiny_features_shop_page_option_ui_font_color_hover',(empty(wbc()->sanitize->post('tiny_features_shop_page_option_ui_font_color_hover'))?'#ffffff':wbc()->sanitize->post('tiny_features_shop_page_option_ui_font_color_hover')));
+
+	wbc()->options->update_option('tiny_features','tiny_features_shop_page_option_ui_bg_color',(empty(wbc()->sanitize->post('tiny_features_shop_page_option_ui_bg_color'))?'#ffffff':wbc()->sanitize->post('tiny_features_shop_page_option_ui_bg_color')));
+
+	wbc()->options->update_option('tiny_features','tiny_features_shop_page_option_ui_bg_color_hover',(empty(wbc()->sanitize->post('tiny_features_shop_page_option_ui_bg_color_hover'))?'#ffffff':wbc()->sanitize->post('tiny_features_shop_page_option_ui_bg_color_hover')));
+
+
+	wbc()->options->update_option('tiny_features','tiny_features_enable_only_for_categories', (empty(wbc()->sanitize->post('tiny_features_enable_only_for_categories'))?'':wbc()->sanitize->post('tiny_features_enable_only_for_categories')));
+
+	wbc()->options->update_option('tiny_features','tiny_features_gallery_width', (empty(wbc()->sanitize->post('tiny_features_gallery_width'))?'':wbc()->sanitize->post('tiny_features_gallery_width')));
+	
+	wbc()->options->update_option('tiny_features','tiny_features_disabled_attribute_style', (empty(wbc()->sanitize->post('tiny_features_disabled_attribute_style'))?'':wbc()->sanitize->post('tiny_features_disabled_attribute_style')));
+	
+	wbc()->options->update_option('tiny_features','tiny_features_cross_color', (empty(wbc()->sanitize->post('tiny_features_cross_color'))?'':wbc()->sanitize->post('tiny_features_cross_color')));
+	
+	wbc()->options->update_option('tiny_features','tiny_features_ajax_variation_threshold', (empty(wbc()->sanitize->post('tiny_features_ajax_variation_threshold'))?'':wbc()->sanitize->post('tiny_features_ajax_variation_threshold')));
+
+	wbc()->options->update_option('tiny_features','tiny_features_tooltip_background_color', (empty(wbc()->sanitize->post('tiny_features_tooltip_background_color'))?'':wbc()->sanitize->post('tiny_features_tooltip_background_color')));
+
+	wbc()->options->update_option('tiny_features','tiny_features_tooltip_font_color', (empty(wbc()->sanitize->post('tiny_features_tooltip_font_color'))?'':wbc()->sanitize->post('tiny_features_tooltip_font_color')));
+	
+	wbc()->options->update_option('tiny_features','tiny_features_option_tooltip_font_size', (empty(wbc()->sanitize->post('tiny_features_option_tooltip_font_size'))?'':wbc()->sanitize->post('tiny_features_option_tooltip_font_size')));
+	
+	wbc()->options->update_option('tiny_features','tiny_features_video_auto_play', (empty(wbc()->sanitize->post('tiny_features_video_auto_play'))?'':wbc()->sanitize->post('tiny_features_video_auto_play')));
+	wbc()->options->update_option('tiny_features','tiny_features_video_mute', (empty(wbc()->sanitize->post('tiny_features_video_mute'))?'':wbc()->sanitize->post('tiny_features_video_mute')));
+	wbc()->options->update_option('tiny_features','tiny_features_video_loop', (empty(wbc()->sanitize->post('tiny_features_video_loop'))?'':wbc()->sanitize->post('tiny_features_video_loop')));
 
 	//$res['msg'] = "Updated successfully!";
 	//wbc()->options->update_option('configuration','config_category',1);
@@ -86,3 +155,5 @@ else {
  
 // echo json_encode($res);
 wbc()->rest->response($res);
+
+?>

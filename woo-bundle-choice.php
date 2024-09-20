@@ -1,4 +1,5 @@
 <?php
+// return false;
 /**
  *
  * @link https://wordpress.org/plugins/woo-bundle-choice/
@@ -6,7 +7,11 @@
  * @package woo-bundle-choice
  *
  * @wordpress-plugin
+<<<<<<< HEAD
  * Plugin Name: BUNDLOICE (formerly Woo Choice Plugin) | Ring Builder | Loose Diamond Search Pages - Variation Swatches - Pair Maker | Guidance Tool
+=======
+ * Plugin Name: Woo Choice Plugin | Ring Builder | Pair Maker | Guidance Tool ui_QCed_ashish
+>>>>>>> a1527bd840938692f336efba0fc0a73c1d6970db
  * Plugin URI: https://wordpress.org/plugins/woo-bundle-choice/
  * Description: Product bundling as ring builder for jewelry, pair maker for clothing and guidance tool for home decor, cosmetics etc. Product bundling as per user's choice.
  * Version: 1.0.23
@@ -34,7 +39,7 @@ if(!class_exists('Woo_Bundle_Choice') ) {
 			if ( ! isset( self::$_instance ) ) {
 				self::$_instance = new self;
 			}
-
+ 
 			return self::$_instance;
 		}
 
@@ -51,6 +56,16 @@ if(!class_exists('Woo_Bundle_Choice') ) {
 			$this->load_helpers();
 			// load library.
 			$this->load_library();		
+
+			// explcit class loader. call it if the settings are defined in the config file. 
+			if( property_exists($this, 'config') && method_exists($this->config, 'explicit_class_loader_config') ) {
+
+				$singleton_functionUpper = 'WBC';
+				$explicit_class_loader_config = $this->config->explicit_class_loader_config( $singleton_functionUpper );
+
+				$this->load->explicit_class_loader( $explicit_class_loader_config );
+			}
+
 			// begin the work.
 			$this->init();
 		}
@@ -81,7 +96,7 @@ if(!class_exists('Woo_Bundle_Choice') ) {
 			*	where the tool_name should only be added to the list.
 			*/
 
-			$helpers = array('options'=>'WBC_Options','lang'=>'WBC_language','wc'=>'WBC_WC','common'=>'WBC_Common','session'=>'WBC_Session','wp'=>'WBC_WP','config'=>'WBC_Config','theme'=>'WBC_Theme');
+			$helpers = array('options'=>'WBC_Options','lang'=>'WBC_language','wc'=>'WBC_WC','common'=>'WBC_Common','session'=>'WBC_Session','wp'=>'WBC_WP','config'=>'WBC_Config','theme'=>'WBC_Theme','file'=>'WBC_File', 'currency'=>'WBC_Currency');
 
 			if(!empty($helpers)){
 
@@ -134,6 +149,8 @@ if(!class_exists('Woo_Bundle_Choice') ) {
 			defined('EOWBC_LIBRARY_DIR') || define('EOWBC_LIBRARY_DIR', constant('EOWBC_DIRECTORY').'application/library/');
 			defined('EOWBC_TEMPLATE_DIR') || define('EOWBC_TEMPLATE_DIR', constant('EOWBC_DIRECTORY').'application/view/');
 
+			defined('WBC_TEMPLATE_DIR_EXTENDED') || define('WBC_TEMPLATE_DIR_EXTENDED', constant('EOWBC_DIRECTORY').'templates/');
+
 			defined('EOWBC_LOG_DIR') || define('EOWBC_LOG_DIR', constant('EOWBC_ASSET_DIR').'logs/');
 
 			defined('EOWBC_ICON') || define('EOWBC_ICON', constant('EOWBC_ASSET_URL').'icon/mini.png');
@@ -141,7 +158,42 @@ if(!class_exists('Woo_Bundle_Choice') ) {
 			defined('EOWBC_ICON_SVG') || define('EOWBC_ICON_SVG', constant('EOWBC_ASSET_URL').'/icon/bundle_logo.svg');
 		}
 
+		public function theme_adaption_check() {
+
+			// admin 
+			if( is_admin() ) {
+				$page_slug = wbc()->sanitize->get('page');
+				if( strpos($page_slug, "---theme-adaption") !== FALSE ) {
+					$curr_plugin_slug = explode("---", $page_slug)[0];
+
+					if( $curr_plugin_slug == 'woo-bundle-choice' ) {
+
+						add_filter('sp_wbc_theme_adaption_config', function( $plugin_slug ) {
+
+							if( $plugin_slug == 'woo-bundle-choice' ) {
+								return wbc()->config->required_hooks_n_filters_etc();
+							}
+						}, 10, 1);
+					}
+
+				}
+			}
+
+			//add action 
+			if( !empty(wbc()->sanitize->get('thadc')) && wbc()->sanitize->get('thadc') == 1 ) {
+				add_action('sp_wbc_theme_adaption_check',function(){
+					wbc()->load->model('utilities/eowbc_theme_adaption_check');
+					eo\wbc\model\utilities\Eowbc_Theme_Adaption_Check::instance()->check( wbc()->config->required_hooks_n_filters_etc() );
+				});
+			}
+			
+		}
+
 		public function init() {
+			/*ACTIVE_TODO_OC_START
+			ACTIVE_TODO we need to create one function or flow to call all such hooks related binding from root class init function of this class end sp_index class.
+			ACTIVE_TODO_OC_END*/
+			\eo\wbc\model\data_model\SP_WBC_Product::hooks();
 
 			do_action( 'before_eowbc_load' );
 			
@@ -150,17 +202,29 @@ if(!class_exists('Woo_Bundle_Choice') ) {
 
 			// //TODO temp. hiren added on around 23-04-2020, to manually test activate class
 			// eo\wbc\WooCommerce_Bundle_Choice_Bootstrap::activate();						
-			do_action( 'after_eowbc_load' );			
+			do_action( 'after_eowbc_load' );
+
+			// added on 01-01-2022
+			$this->theme_adaption_check();
 		}
 	}
 
 
 	add_action( 'plugins_loaded', function() {
+		// echo "bundle choice";
+		// echo "<br>";
 		if(function_exists('wc')){
 			wbc()->construct_init();
+
+			// ACTIVE_TODO the eowbc_lang function and extension lang function are no more supposed to be used, so we need to replace call to these functions with standard gettext call functions like __, _e and so on. and in the new gettext call implementation we have used standard function like __, _e and so on and not used the eowbc_lang and so on, so lets do change the call asap in the alredy implemented gettext calls.
+			// 	ACTIVE_TODO and as soon as above is done we need to mark the eowbc_lang and extension lang and so on as deprecated. 
+			load_plugin_textdomain( 'woo-bundle-choice', false, dirname( plugin_basename(__FILE__) ) . '/languages/' );
+
+			//run base service for theme adaption check 
+			eo\wbc\model\UI_Builder::instance()->theme_adaption_check();
 		}
 		
-	},30);
+	},999);
 
 	if(!function_exists('wbc')){
 

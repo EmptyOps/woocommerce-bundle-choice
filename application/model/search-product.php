@@ -60,8 +60,12 @@ class Search_Product {
 	        $products[ $product_object->get_id() ] = rawurldecode( $formatted_name );
 	    }    
 
-	    array_walk($products,function($product,$id) use(&$products){             
-	        $products[$id]=array($product,wp_get_attachment_image_src(get_post_thumbnail_id($id),array(64,64))[0]);
+	    array_walk($products,function($product,$id) use(&$products){    
+	    	if(!empty(get_post_thumbnail_id($id))) {
+	        	$products[$id] = array($product,wp_get_attachment_image_src(get_post_thumbnail_id($id),array(64,64))[0]);
+	        } else {
+	        	$products[$id] = array($product,false);
+	        }
 	    });            
 	    
 	    wp_send_json( apply_filters( 'woocommerce_json_search_found_products', $products ) );

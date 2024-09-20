@@ -19,7 +19,7 @@ class Shop_Category_Filter extends Category {
         $this->filter_prefix ='sc_';
     }
 
-    public function init() {
+    public function init($category = '') {
 
         $shop_page_status = wbc()->options->get_option('filters_sc_filter_setting','sc_shop_cat_filter_location_shop');
 
@@ -54,7 +54,8 @@ class Shop_Category_Filter extends Category {
         // parent::instance()->is_shop_cat_filter = true;
         // parent::instance()->filter_prefix ='sc_';
 
-        add_filter('eowbc_table_view_forced',function(){
+        // add_filter('eowbc_table_view_forced',function(){
+        add_filter('sp_tv_category_enabled',function(){
             return true;
         });
         /*

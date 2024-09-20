@@ -30,7 +30,7 @@ class Eowbc_Filters extends Eowbc_Model {
 	}
 
 
-	public function get( $form_definition ) {
+	public function get( $form_definition,$args = null ) {
 		
 		//loop through form tabs and save 
 	    foreach ($form_definition as $key => $tab) {
@@ -45,7 +45,10 @@ class Eowbc_Filters extends Eowbc_Model {
 					//wbc()->common->pr($form_definition, false, false);
 					// wbc()->common->var_dump('table data for key '.$key);
 					//wbc()->common->pr($filter_data, false, false);
-
+							if(wbc()->sanitize->get('is_test') == 1) {
+					        	wbc()->common->pr($filter_data);
+					        	echo "data save";
+					        }
 					$body = array();
 
 					// TODO had just put the empty array check but we should found in what cases the option is set to empty/null etc. which is not expected and possible behaviour
@@ -81,6 +84,15 @@ class Eowbc_Filters extends Eowbc_Model {
 								}							
 								else if( $rvk == $key_clean."_input_type" || $rvk == $key_clean."_filter" ) {
 									$val = wbc()->common->dropdownSelectedvalueText($tab["form"][$rvk], $rvv);
+
+									/*if (empty($val)) {
+
+										if ($rvk == $key_clean."_filter") {
+											
+											$val = wbc()->common->dropdownSelectedvalueText($tab["form"][$rvk], 'pa_'.$rvv);
+										}
+									}*/
+
 									if(!is_array($val) and empty($val)) {
 										$val = '#';
 									}
@@ -168,7 +180,7 @@ class Eowbc_Filters extends Eowbc_Model {
 		wbc()->options->update_option('appearance_filters','slider_nodes_backcolor_active',sanitize_hex_color('#000000'));		
 	}
 
-	public function save( $form_definition, $is_auto_insert_for_template=false ) {
+	public function save( $form_definition, $is_auto_insert_for_template=false, $args = null ) {
 		
 		wbc()->sanitize->clean($form_definition);
 		wbc()->validate->check($form_definition);
@@ -289,10 +301,10 @@ class Eowbc_Filters extends Eowbc_Model {
 	    	}
 	    	$key_clean = ((!empty($this->tab_key_prefix) and strpos($key,$this->tab_key_prefix)===0)?substr($key,strlen($this->tab_key_prefix)):$key);
 	    	//$res['data_form'][]= $tab;
-			$is_table_save = ($key == $this->tab_key_prefix."d_fconfig" or $key == $this->tab_key_prefix."s_fconfig" or $key=='filter_set') ? true : false;
+			$is_table_save = ($key == $this->tab_key_prefix."d_fconfig" or $key == $this->tab_key_prefix."s_fconfig" or $key==$this->tab_key_prefix.'filter_set') ? true : false;
 
 			$table_data = array();
-			$tab_specific_skip_fileds = $is_table_save ? array('eowbc_price_control_methods_list_bulk','eowbc_price_control_sett_methods_list_bulk') : array();
+			$tab_specific_skip_fileds = $is_table_save ? array('eowbc_price_control_methods_list_bulk','eowbc_price_control_sett_methods_list_bulk', 'filter_sets_list_bulk') : array();
 
 	    	foreach ($tab["form"] as $fk => $fv) {
 
@@ -340,6 +352,11 @@ class Eowbc_Filters extends Eowbc_Model {
 
 		        	if(!empty(wbc()->sanitize->post($key_clean.'_id')) and !empty($filter_data[wbc()->sanitize->post($key_clean.'_id')])) {
 		        		$filter_data[wbc()->sanitize->post($key_clean.'_id')] = $table_data;
+
+					        // if(wbc()->sanitize->get('is_test') == 1) {
+					        // 	wbc()->common->pr($filter_data);
+					        // 	echo "data save";
+					        // }
 		        		$res["type"] = "success";
 		    			$res["msg"] = eowbc_lang('Filter updated successfully');
 		    			wbc()->options->update_option_group( 'filters_'.$key, serialize($filter_data) );

@@ -1,0 +1,1 @@
+"Everything and anything related to legacy admin should start from there so even the single call to related hooks should route from here" 

@@ -11,10 +11,10 @@ if(!empty($id) /*and !empty($label)*/){
 		<?php 
 		if( !empty($label) )
 		{
-			wbc()->load->template('component/form/input_label',array('id'=>$id,'label'=>$label)); 
+			wbc()->load->template('component/form/input_label',array('id'=>$id,'label'=>$label,'label_class'=>$label_class)); 
 		}
 		?>
-		<div class="ui selection dropdown <?php echo !empty($class)?$class:''; ?>" id="<?php echo $id; ?>_dropdown_div" <?php _e(!empty($field_attr)?implode(' ',$field_attr):''); ?>>
+		<div class="ui selection dropdown <?php echo !empty($class)?$class:''; ?> <?php echo $is_disabled ? 'disabled' : '' ; ?>" id="<?php echo $id; ?>_dropdown_div" <?php _e(!empty($field_attr)?implode(' ',$field_attr):''); ?> >
 		  	<input type="hidden" id="<?php echo $id; ?>" name="<?php echo $id; ?>" value="<?php echo $value; ?>">
 		  	<i class="dropdown icon"></i>		
 		  	<div class="default text"></div>		  	

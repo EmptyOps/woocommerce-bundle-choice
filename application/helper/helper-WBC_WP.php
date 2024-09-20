@@ -140,7 +140,7 @@ class WBC_WP {
 
 
     /* Add image to the wordpress image media gallary */
-    public function add_image_gallary($path) {
+    public function add_image_gallary($path, $path_separator = 'woo-bundle-choice', $source_path = null) {
 
         if(!$path) return FALSE;
 
@@ -157,23 +157,26 @@ class WBC_WP {
           return $posts[0]->ID;
         }
 
+
         //$file = wp_upload_bits($name, null, file_get_contents($path));
         ///////////// 14-05-2022 -- @drashti /////////////
 
-        $file_bits = wbc()->common->file_get_contents($path);
+        $file_bits = wbc()->common->file_get_contents($path, $path_separator, $source_path);
 
         $file = wp_upload_bits($name, null, $file_bits);
         
         /////////////////////////////////////////////////
+
 
         if (!$file['error']) {
 
             $type = wp_check_filetype($name, null );
 
             $attachment = array(
+                'guid' => $file['url'],
                 'post_mime_type' => $type['type'],
                 'post_parent' => null,
-                'post_title' => preg_replace('/\.[^.]+$/', '', $name),
+                'post_title' => sanitize_file_name($name),
                 'post_content' => '',
                 'post_status' => 'inherit'
             );
@@ -240,4 +243,25 @@ class WBC_WP {
 
         return $registration_only;
     }
+
+    public function wbc_is_plugin_active( $plugin_slug ) {
+
+        // NOTE: here if for certain plugin the check is better and reliable by detecting their class then we can simply apply those if condition by checking the plugin slug and the everything else will be based on the wp api. but ya if that is ever required otherwise we can simply rely on the wp-api as long as that is available and reliable. 
+        
+        // NOTE: we will always use plugin slug for such condition creation. or the most reliable and simpest method to check if certain plugin is active by passing their slug so we would need to create the applicable function in the wp helper.
+
+        
+        // ACTIVE_TODO implement based on  plugin slug -- to h
+        return is_plugin_active( $plugin );
+    }
+
+    public function wbc_attachment_url_to_postid( $attachment_url ) {
+
+        return attachment_url_to_postid( $attachment_url );
+    }
+
+    public function attachment_id_to_url($attachment_id) {
+        
+        return wp_get_attachment_url($attachment_id); 
+    } 
 }

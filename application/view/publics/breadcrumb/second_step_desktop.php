@@ -6,7 +6,7 @@
 $model_images = \eo\wbc\model\Images::instance();
 
 ?>
-<div class="<?php echo (($step==$order)?'active ':(($step>$order)?'completed ':(!empty(\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$clickable_breadcrumb)?'':'disabled'))); ?> step" >
+<div class="<?php echo (($step==$order)?'active ':(($step>$order)?'completed ':(!empty(\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$clickable_breadcrumb)?'':'disabled'))); ?> step spui-semantic-step" >
     <div class="ui equal width grid" style="width: 100%;margin-top: -1em !important;">
         <div class="ui grid" style="width: fit-content !important;">
             <div class="column eowbc_breadcrumb_font"><?php echo $order; ?></div>
@@ -29,7 +29,9 @@ $model_images = \eo\wbc\model\Images::instance();
                 <br/>
                 <!-- <u><a href="<?php //echo (!empty(wbc()->sanitize->get('SECOND'))?eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_breadcrumb_view_url(wbc()->sanitize->get('SECOND'),$order):'#'); ?>">View</a></u>&nbsp;|&nbsp;<u><a href="<?php // echo (!empty(wbc()->sanitize->get('SECOND'))?eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_breadcrumb_change_url($order,wbc()->sanitize->get('SECOND')):'#'); ?>"><?php //_e(wbc()->options->get_option('appearance_breadcrumb','appearance_breadcrumb_change_action_text','Change',true,true)); ?></a></u> -->
 
-                <u><a href="<?php echo \eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_breadcrumb_view_url($second->get_id(),$order); //(!empty(wbc()->sanitize->get('SECOND'))?eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_breadcrumb_view_url(wbc()->sanitize->get('SECOND'),$order):'#'); ?>">View</a></u>&nbsp;|&nbsp;<u><a href="<?php echo \eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_breadcrumb_change_url($order,$second->get_id())//(!empty(wbc()->sanitize->get('SECOND'))?eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_breadcrumb_change_url($order,wbc()->sanitize->get('SECOND')):'#'); ?>"><?php _e(wbc()->options->get_option('appearance_breadcrumb','appearance_breadcrumb_change_action_text','Change',true,true)); ?></a></u>
+                <u><a href="<?php $url = \eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_breadcrumb_view_url($second->get_id(),$order,$second); echo !empty($url) ? $url : "#" ;      
+                //echo \eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_breadcrumb_view_url($second->get_id(),$order); //(!empty(wbc()->sanitize->get('SECOND'))?eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_breadcrumb_view_url(wbc()->sanitize->get('SECOND'),$order):'#'); ?>"><?php echo spext_lang("View", 'woo-bundle-choice'); ?></a></u>&nbsp;|&nbsp;<u><a href="<?php echo \eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_breadcrumb_change_url($order,$second->get_id());//(!empty(wbc()->sanitize->get('SECOND'))?eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_breadcrumb_change_url($order,wbc()->sanitize->get('SECOND')):'#'); ?>"><?php _e(wbc()->options->get_option('appearance_breadcrumb','appearance_breadcrumb_change_action_text','Change',true,true)); ?></a></u>
+
             </div>                
     <?php endif; ?>            
     </div>

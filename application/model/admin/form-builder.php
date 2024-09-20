@@ -14,6 +14,8 @@ class Form_Builder implements Builder {
 
 	private static $_instance = null;
 
+	private $is_load_asset_done = null; 
+
 	public static function instance() {
 		if ( ! isset( self::$_instance ) ) {
 			self::$_instance = new self;
@@ -27,6 +29,8 @@ class Form_Builder implements Builder {
 	}
 
 	public function build(array $form){
+
+		$this->load_asset();	
 
 		if(!empty($form) and is_array($form) and !empty($form['id']) /*and !empty($form['title'])*/){
 			
@@ -54,7 +58,15 @@ class Form_Builder implements Builder {
 						$tab_segment.='<div class="ui tab '.(!$active?'active':'').'" data-tab="'.$tab_slug.'">';
 						if(!$active){ $active = true; }
 						if(!empty($tab_data['form']) and is_array($tab_data['form'])){
+
+							$dynamic_add_support_html = null;
+							$das_fields_details_for_export = null;
 							foreach ($tab_data['form'] as $id => $form_element) {
+
+								//	NOTE: the das form element version will be kept for das only while the main stream will cleaned first of everything else 
+								$das_id = $id;
+								$das_form_element = $form_element;
+								$this->das_clean_form_element($id, $form_element);	
 
 								if(!empty($form_element['type'])) {
 
@@ -70,32 +82,25 @@ class Form_Builder implements Builder {
 										continue;
 									}
 
-									$form_element = $this->process_property_group($form_element, $id);
 
-									foreach ($sub_elements as $skey => $svalue) {
-										if( isset($form_element[$svalue]) )
-										{
-											$form_element[$svalue] = $this->process_property_group($form_element[$svalue], $svalue);
-										}
-									}
+									// $form_element = $this->process_property_group($form_element, $id);
 
-									ob_start();
-									
-									if( (!isset($form_element['prev_inline']) || !$form_element['prev_inline']) && $form_element['type']!='devider' && $form_element['type']!='hidden' ){
-										?><div class="<?php echo isset($form_element["inline_class"]) ? $this->process_property($form_element["inline_class"]) : ""; ?> <?php echo (isset($form_element["inline"]) && $form_element["inline"]) ? "inline" : ""; ?> fields"><?php
-									}
-
-									wbc()->load->template('component/form/input_'.$form_element['type'],$form_element);
-
-									if( (!isset($form_element['next_inline']) || !$form_element['next_inline']) && $form_element['type']!='devider' && $form_element['type']!='hidden' ){
-										?></div><?php
-									}
-
-									// if($form_element['type']=='devider'){
-										$tab_segment.=ob_get_clean();
-									// } else {
-									// 	$tab_segment.='<div class="fields">'.ob_get_clean().'</div>';
+									// foreach ($sub_elements as $skey => $svalue) {
+									// 	if( isset($form_element[$svalue]) )
+									// 	{
+									// 		$form_element[$svalue] = $this->process_property_group($form_element[$svalue], $svalue);
+									// 	}
 									// }
+									$form_element = $this->process_property_group_wrapper($form_element, $id, $sub_elements);
+
+									//	NOTE: the das vars are also processed here with property group flows so that they can also receive support of the property group flows. and similarly if there are any other such supports required then that also should be applied here.  
+									if( $this->is_dynamic_add_in_progress($form_element, $dynamic_add_support_html) ) {
+										$das_form_element = $this->process_property_group_wrapper($das_form_element, $das_id, $sub_elements);
+									}
+
+									$tab_segment.=$this->render_template("in_tab_segment", $form_element);
+
+									$this->process_dynamic_add_support($id, $form_element, $sub_elements, $dynamic_add_support_html, $tab_segment, $das_fields_details_for_export, $das_id, $das_form_element);
 								}
 							}
 						}
@@ -219,21 +224,138 @@ class Form_Builder implements Builder {
 				}
 			}
 
-			wbc()->load->template('component/form/form',
-				array(
-					'form_html'=>$form_html,
-					'id'=>str_replace(' ','_',$form['id']),
-					'title'=>isset($form['title'])?$form['title']:'',
-					'method'=>isset($form['method'])?$form['method']:'GET',
-					'class'=>isset($form['class'])?$this->process_property($form['class']):'',
-					'attr'=>isset($form['attr'])?$this->process_property($form['attr']):''
-				)
-			);
+			if( empty($form['no_form_tag']) ) {
+
+				wbc()->load->template('component/form/form',
+					array(
+						'form_html'=>$form_html,
+						'id'=>str_replace(' ','_',$form['id']),
+						'title'=>isset($form['title'])?$form['title']:'',
+						'method'=>isset($form['method'])?$form['method']:'GET',
+						'class'=>isset($form['class'])?$this->process_property($form['class']):'',
+						'attr'=>isset($form['attr'])?$this->process_property($form['attr']):''
+					)
+				);
+			} else {
+
+				return $form_html;	
+			}
 		}
 	}
 
-	public function process_property_group(array $form_element, string $id) {
+	private function render_template(string $type, $form_element, $sub_type = null) {
+
+		if( $type == "in_tab_segment" ) {
+
+			ob_start();
+			
+			// A segment can be colored -- semantic ui 
+			if( isset($form_element['spui_version']) && $form_element['spui_version'] >= 1.0 ) {
+				?>
+				<div class="ui <?php echo (!empty($form_element["container_class"])) ? $form_element["container_class"] : 'black'; ?> segment visible">
+					
+				<?php 
+				if (isset($form_element['side_label_text'])) {
+				?>
+					<a class="ui <?php echo (!empty($form_element["side_label_class"])) ? $form_element["side_label_class"] : ''; ?> ribbon label"> <?php echo $form_element['side_label_text']; ?></a>
+				<?php
+				} 
+
+				if ( isset($form_element['side_icon_class']) && !empty($form_element["side_icon_class"])) {
+				?>
+					<a class="ui right corner label">
+				        <i class="<?php echo $form_element['side_icon_class']; ?> icon"></i>
+					</a>
+				<?php
+				} 
+
+			}
+
+			if( (!isset($form_element['prev_inline']) || !$form_element['prev_inline']) && $form_element['type']!='devider' && $form_element['type']!='hidden' ){
+				?><div class="<?php echo isset($form_element["inline_class"]) ? $this->process_property($form_element["inline_class"]) : ""; ?><?php echo (isset($form_element["inline"]) && $form_element["inline"]) ? "inline" : ""; ?> fields <?php echo $form_element["is_disabled"] ? 'disabled' : ''; ?>"><?php
+			}
+
+			wbc()->load->template('component/form/input_'.$form_element['type'],$form_element);
+
+			if( (!isset($form_element['next_inline']) || !$form_element['next_inline']) && $form_element['type']!='devider' && $form_element['type']!='hidden' ){
+				?></div><?php
+			}
+
+			if( isset($form_element['spui_version']) && $form_element['spui_version'] >= 1.0 ) {
+				?></div> 
+				<?php
+			}
+
+			// if($form_element['type']=='devider'){
+				//	$tab_segment.=ob_get_clean();
+
+					if( $sub_type == "for_js_template" or $sub_type == "for_plus_button" ) {
+
+						return ob_get_clean();	
+					} else {
+
+						// ACTIVE_TODO/TODO in future this function should recieve the flag that says if the das is in progress then only it should apply replace and avoid otherwise 
+						return str_replace("{{data.added_counter}}", "", ob_get_clean());	
+					}
+			// } else {
+			// 	$tab_segment.='<div class="fields">'.ob_get_clean().'</div>';
+			// }
+
+		}
+	}
+
+	public function process_property_group_wrapper(array $form_element, string $id, $sub_elements) {
 		
+		$form_element = $this->process_property_group($form_element, $id);
+
+		foreach ($sub_elements as $skey => $svalue) {
+			if( isset($form_element[$svalue]) )
+			{
+				$form_element[$svalue] = $this->process_property_group($form_element[$svalue], $svalue);
+			}
+		}
+
+		return $form_element;
+	}	
+
+	public function process_property_group(array $form_element, string $id) {
+
+		if(isset($form_element['side_icon_class'])){
+			$form_element['side_icon_class'] = $this->process_property($form_element['side_icon_class']);
+		} else {
+			$form_element['side_icon_class'] ='';
+		}
+
+		if(isset($form_element['side_label_class'])){
+			$form_element['side_label_class'] = $this->process_property($form_element['side_label_class']);
+		} else {
+			$form_element['side_label_class'] ='';
+		}
+
+		if(isset($form_element['container_class'])){
+			$form_element['container_class'] = $this->process_property($form_element['container_class']);
+		} else {
+			$form_element['container_class'] ='';
+		}
+
+		if(isset($form_element['label_class'])){
+			$form_element['label_class'] = $this->process_property($form_element['label_class']);
+		} else {
+			$form_element['label_class'] ='';
+		}
+		
+		if(isset($form_element['left_labeled_class'])){
+			$form_element['left_labeled_class'] = $this->process_property($form_element['left_labeled_class']);
+		} else {
+			$form_element['left_labeled_class'] ='';
+		}
+
+		if(isset($form_element['right_labeled_class'])){
+			$form_element['right_labeled_class'] = $this->process_property($form_element['right_labeled_class']);
+		} else {
+			$form_element['right_labeled_class'] ='';
+		}
+						
 		if(isset($form_element['class'])){
 			$form_element['class'] = $this->process_property($form_element['class']);
 		} else {
@@ -524,8 +646,381 @@ class Form_Builder implements Builder {
 		return $collection;
 	}
 
+
+	public static function dynamic_add_support_config() {
+
+		return array( 'js_templating_lib'=>'wp','added_counter_sep'=>wbc()->config->separator()/*."das".wbc()->config->separator()*/ );
+	}
+
+	private function das_added_counter_format($added_counter) {
+
+		//	NOTE: this format should be created and applied by this class layer and the js layer of this form module and that is why this function should be kept private only, always. 
+
+		return ( self::dynamic_add_support_config()['added_counter_sep'] . $added_counter . self::dynamic_add_support_config()['added_counter_sep'] );
+	}
+
+	private function js_template_wrap(string $id, string $in_progress_html) {
+
+		// wrap with tag as appliable as per the js_templating_lib 
+		if( self::dynamic_add_support_config()['js_templating_lib'] == 'wp' ) {
+
+			return '<script type="text/html" id="tmpl-'.$id.'">' . $in_progress_html . '</script>'; 
+		}
+			
+	}
+		
+	public function das_form_definition_support($args) {
+
+		if( wbc()->sanitize->get('is_test') == 1 ) {
+			wbc()->common->var_dump( "Form_Builder das_form_definition_support" );
+		}
+
+		if( $args["sub_action"] != "save" && empty($args['data']['id']) && empty($args['data_raw']) ) {
+
+			//	just return the default value if it do not required any processing 
+			return $args['form_definition'];	
+		}
+
+		//	NOTE: due to true condition below the non tab based forms will not be supported. and either there is no plan to support nonn tab based forms for this das support and either way there should be no plan to support the non tab based forms as they are not as per the standards 
+		if(true || !empty($form['tabs'])){
+
+			$save_as_data = array();	
+
+			foreach ($args['form_definition'] as $tab_slug => $tab_data) {
+
+				if(!empty($tab_data['form']) and is_array($tab_data['form'])){
+
+					$dynamic_add_support_html = null;
+					$dynamic_add_support_elements = null;
+
+					$newform = array();
+					foreach ($tab_data['form'] as $id => $form_element) {
+
+						//	NOTE: the das form element version will be kept for das only while the main stream will cleaned first of everything else 
+						$das_id = $id;
+						$das_form_element = $form_element;
+						$this->das_clean_form_element($id, $form_element);	
+						// if( wbc()->sanitize->get('is_test') == 1 ) {
+						// 	wbc()->common->var_dump( "Form_Builder das_form_definition_support duplicating elements for simulation das_id " . $das_id . " id " . $id );
+						// }
+
+						$newform[$id] = $form_element;
+
+						if(!empty($form_element['type'])) {
+
+							if( $form_element['type'] == "skip" ){
+								continue;
+							}
+
+							if( $form_element['type'] == "table" ){
+								continue;
+							}
+
+							//	NOTE: the das vars are also processed here with property group flows so that they can also receive support of the property group flows. and similarly if there are any other such supports required then that also should be applied here.  
+							if( $this->is_dynamic_add_in_progress($form_element, $dynamic_add_support_html) ) {
+
+								//	nothing to do here so far 
+							}
+
+							if( $this->is_dynamic_add_in_progress($form_element, $dynamic_add_support_html) ) {
+
+								if( $dynamic_add_support_html == null ) {	
+									$dynamic_add_support_html = "dummy html";
+									$dynamic_add_support_elements = array();
+								}
+
+								$dynamic_add_support_elements[$das_id] = $das_form_element;	
+							}
+
+							if( $this->is_dynamic_add_ended( $form_element ) ) {
+
+								$plus_button_id = $this->das_plus_button_id($id);
+
+								$das_counter_field_id = $this->das_counter_field_id($plus_button_id);	
+
+								$added_counter = 0;
+
+								// during post save 
+								// 	maybe everything will be handled by the form builder like detecting the added counter field post data and simulating based on that 
+								if( $args["sub_action"] == "save" ) {
+
+									$added_counter = wbc()->sanitize->post($das_counter_field_id);
+								} else if( !empty($args['data']['id'])/*as long as entity id is available means it is not mere add mode but edit mode so then just ensure that repopulate support is provided.*/ ) {
+
+									// ACTIVE_TODO/TODO in future we would like to avoid the extra get call to db, by providing what is fetched from here, back to the caller. so they do not fetch it again during actual get. however it will make sense only when reducing one call have significant difference. -- to s  
+
+									if( empty($fv['save_as']) or $fv['save_as'] == "default" ) {
+
+										// ACTIVE_TODO we will need it very soon. so implement it. -- to s. to seamlessly do it here, simply get the option group based on the base_key property that we have added to cover such requirements.  
+										// 	ACTIVE_TODO and the plan is to replace all forms of dapii and so on with das support, where the edit mode is not supported due to the dynamic form limitation which is created there. but now with help of das support we can provide dynamic form and also edit support will be built once this if condition is implemented. -- to s 
+										// 		ACTIVE_TODO however if for any form or form section of dapii or other, if the user experience is affected due to this change then we need to do the needful but we can never compromise user expereince for the reusability -- to h and -- to s 
+
+									} elseif( $fv['save_as'] == "post_meta" ) {
+
+										if( !isset($save_as_data['post_meta']) ) {
+
+											$save_as_data['post_meta'] = get_post_meta( $args['data']['id'], $tab_slug.'_data', true );	
+										}
+									}
+
+									$added_counter = isset($save_as_data['post_meta'][$das_counter_field_id]) ? $save_as_data['post_meta'][$das_counter_field_id] : $added_counter;
+									
+								} else if( !empty($args['data_raw']) ) {
+
+									$dm_based_field = null;
+
+									foreach ($args['dm']['map_fields'] as $dm_key=>$dm_value) {
+
+										if ( isset($args['dm']['sp_eids'][$dm_key]['extra_2']) and strpos($das_counter_field_id, $args['dm']['sp_eids'][$dm_key]['extra_2']) !== false ) {
+
+											if(!isset($args['cn'])) {
+
+												if(isset($args['data_raw'][$dm_key])) {
+
+													$dm_based_field = $dm_key;   
+												} else {
+
+													$dm_based_field = null;
+												}
+
+											} else {
+
+												if( isset( $args['data_raw'][ $args['cn'][$dm_key] ] ) ) {
+
+													$dm_based_field = $args['cn'][$dm_key];   
+												} else {
+
+													$dm_based_field = null;
+												}
+											}
+
+											break;
+										}
+									}
+
+									if (!empty($dm_based_field)) {
+									
+										$added_counter = ( isset($args['data_raw'][$dm_based_field]) ? ( is_array($args['data_raw'][$dm_based_field]) ? sizeof($args['data_raw'][$dm_based_field])-1 : 0 ) : $added_counter );
+									}
+								}
+
+
+
+								//	ACTIVE_TODO during filter save (edit mode)
+
+
+								if( wbc()->sanitize->get('is_test') == 1 ) {
+									wbc()->common->var_dump( "Form_Builder das_form_definition_support sub_action " . $args["sub_action"] );
+									wbc()->common->var_dump( "Form_Builder das_form_definition_support das_counter_field_id " . $das_counter_field_id );
+									wbc()->common->var_dump( "Form_Builder das_form_definition_support added_counter " . $added_counter );
+								}
+								// if( $dynamic_add_support_html == null ) {	
+								// 	$dynamic_add_support_html = "dummy html";
+								// 	$dynamic_add_support_elements = array();
+								// }
+
+								//	simulate form array here by duplicating the appliable form elements 
+								if( $added_counter >= 1 ) {
+
+									for($i=1; $i<=$added_counter; $i++) {
+
+										foreach ($dynamic_add_support_elements as $element_id => $element) {
+
+											// ACTIVE_TODO note that for repopulate form mode, the repopulation should happen from the js layers as we planned for ensuring similar flow of creating the das form fields, and that will also ensure the cleanliness and especially no additional maintaining of additional layers. 
+
+											//	repace the counter placeholder with actual counter 
+											$element_id = str_replace("{{data.added_counter}}", $this->das_added_counter_format($i), $element_id);	
+
+											// ACTIVE_TODO if required then in future we will need to replace recursiely all elements of array including the multidimensional arrays of any elements where it is appliable 										
+
+											$newform[$element_id] = $element;	
+											if( wbc()->sanitize->get('is_test') == 1 ) {
+												wbc()->common->var_dump( "Form_Builder das_form_definition_support duplicating elements for simulation element_id " . $element_id );
+												wbc()->common->pr( $newform[$element_id] );		
+											}
+										}
+
+									}
+								}
+
+								$dynamic_add_support_html = null;
+								$dynamic_add_support_elements = null;
+							}
+						}
+					}
+
+					$args['form_definition'][$tab_slug]['form'] = $newform;
+
+					// if( wbc()->sanitize->get('is_test') == 1 ) {
+
+					// 	wbc_pr("Form_Builder das_form_definition_support form_definition");
+					// 	wbc_pr($args['form_definition'][$tab_slug]['form']);
+					// }
+				}
+			}
+
+
+		} 
+
+		return $args['form_definition'];	
+	}
+
+	private function is_dynamic_add_in_progress(array $form_element, $in_progress_html) {
+
+		if( !empty($form_element['dynamic_add_support']) or !empty($form_element['dynamic_add_support_start']) or !empty($in_progress_html)/*if group is already in progress*/ ) {
+
+			return true;	
+		}
+
+	}
+
+	private function is_dynamic_add_ended(array $form_element) {
+
+		if( !empty($form_element['dynamic_add_support'])/*if only one element*/ or !empty($form_element['dynamic_add_support_end']) ) {
+
+			return true;	
+		}
+
+	}
+
+	private function das_clean_form_element(string &$field_id, array &$form_element) {
+
+		//	clean the form element for the standard flow, but yeah it will be for placeholder cleanings only. the flags related to das will still be kept as it is. 
+
+		$field_id = str_replace("{{data.added_counter}}", "", $field_id);
+
+		// ACTIVE_TODO do the form_element cleaning also, and after that we do not need to manage the cleaning in the render_template or anywhere else. just this function will take care of everything related to cleaning. 
+
+	}
+
+	private function process_dynamic_add_support(string $field_id, array $form_element, $sub_elements, &$in_progress_html, &$container_html, &$das_fields_details_for_export, $das_field_id, $das_form_element) {
+
+		if( $this->is_dynamic_add_in_progress($form_element, $in_progress_html) ) {
+
+			if( $in_progress_html == null ) {	
+				$in_progress_html = "";
+				$das_fields_details_for_export = array();
+			}
+
+
+			//	check if the added_counter placeholder is already set if not then set at last 
+			if( strpos($das_field_id, '{{data.added_counter}}') === FALSE ) {
+
+				$das_form_element['id'] = $das_field_id."{{data.added_counter}}";	
+			}
+
+			$in_progress_html.=$this->render_template("in_tab_segment", $das_form_element, "for_js_template");
+			$das_fields_details_for_export[$das_form_element['id']] = wbc()->common->array_slice_keys( $das_form_element, array('type') );
+		}
+
+		//	check if it is only one element or if group is ending, then just wrap with template tags, set in parent container html and empty the in progress html 
+		if( $this->is_dynamic_add_ended( $form_element ) ) {
+
+			$container_html.=$this->js_template_wrap($field_id, $in_progress_html);
+
+			//	add plus button. by default it will be added from here but if the button support is disabled explicitly then it will not be added from here. 
+			if( !isset($form_element['dynamic_add_support_plus_button']) or !empty($form_element['dynamic_add_support_plus_button']) ) {
+
+				$plus_button_id = $this->dynamic_add_support_plus_button( $field_id, $sub_elements, $container_html, $das_fields_details_for_export );
+
+				$this->das_plus_button_dependancies( $plus_button_id, $sub_elements, $container_html);
+			}
+
+			$in_progress_html = null;
+			$das_fields_details_for_export = null;
+		}
+
+	}
+		
+	private function das_plus_button_id(string $field_id) {
+
+		return $field_id."_plus_button";
+	}
+
+	private function dynamic_add_support_plus_button(string $field_id, $sub_elements, &$container_html, $das_fields_details_for_export) {
+
+		$plus_button_id = $this->das_plus_button_id($field_id);
+
+		$button = array(
+				'label'=>eowbc_lang('+'),
+				'type'=>'link',
+				'class'=>array('button', 'secondary'),
+				'attr'=>array('href="javascript:void(0);"', "onclick='window.document.splugins.common.admin.form_builder.api.das_add( \"".$field_id."\", \"".$plus_button_id."\", \"wp\" ); return false;'", 'data-das_fields=\''.json_encode($das_fields_details_for_export).'\'')
+
+			);
+
+		$button = $this->process_property_group_wrapper($button, $plus_button_id, $sub_elements);
+
+		$container_html.=$this->render_template("in_tab_segment", $button,  "for_plus_button");
+
+		return $plus_button_id;	
+	}
+		
+	private function das_counter_field_id(string $plus_button_id) {
+
+		return $plus_button_id."_added_count";
+	}
+		
+	private function das_plus_button_dependancies(string $plus_button_id, $sub_elements, &$container_html) {
+
+		$field = array(
+				'type'=>'hidden',
+				'value'=>'0'
+
+			);
+
+		$field = $this->process_property_group_wrapper($field, $this->das_counter_field_id($plus_button_id), $sub_elements);
+
+		$container_html.=$this->render_template("in_tab_segment", $field, "for_plus_button");
+	}
+
+		
+	private function load_asset() {
+
+		if( ! $this->is_load_asset_done ) {
+
+			$this->is_load_asset_done = true;	
+
+			// ACTIVE_TODO it is not neceesary here to use wp_enqueue_scripts since it is coming at the sequenece in loading sequenece that may be after the wp_enqueue_scripts so now we need to create one such condition maybe in the asset.php switch block in the asset function called below and then that condition will add action if required or otherwise simply load asset directly -- to s 
+				// ACTIVE_TODO and if it may help on admin the community says the hook admin_enqueue_scripts would work only -- to s 
+			// add_action( 'wp_enqueue_scripts',function(){
+
+				wbc()->load->asset( 'asset.php', constant( 'EOWBC_ASSET_DIR' ).'admin/form_builder.asset.php', array( 'configs' => array( 'das'=>$this->dynamic_add_support_config() ) ) );
+			// }, 9999);
+		}
+	}
+
 	public static function savable_types() {
 		return array("text","checkbox","color","hidden","radio","select","textarea","icon","time",'number','link','date');
+	}
+
+	public static function clean_form_properties( $form_definition, $fields_to_keep = array() ) {
+
+		// clin the entire abowe sp_variations_data form propertys as planned and keep here only key,type,value,etc...
+	    foreach ($form_definition as $key => $tab) {
+
+			foreach ($tab["form"] as $fk => $fv) {
+				if( $fv["type"] == "table" ) {
+					
+					// ACTIVE_TODO here we shoud erase all other such type like table in if above wich are not nassasary for us one this layer -- to s & -- to a
+					$form_definition[$key]["form"][$fk] = null;
+				}
+				else {
+
+					foreach($fv as $fv_key => $fv_value){
+
+						if( !in_array( $fv_key, $fields_to_keep )/*$fv_key != 'type' && $fv_key != 'value'*/ ){
+
+							unset($form_definition[$key]["form"][$fk][$fv_key]);
+
+						}						
+					}						
+				}		  
+			}
+	    }
+
+	    return $form_definition;
+
 	}
 
 }

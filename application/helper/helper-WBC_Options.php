@@ -20,7 +20,7 @@ class WBC_Options {
 		} else {
 			return $default;
 		}		
-	}
+	} 
 
 	public function update_option_group(string $option,$value) {
 
@@ -102,4 +102,14 @@ class WBC_Options {
 		return delete_option($option);
 	}
 
+}
+
+function wbc_get_option(string $option,$default = false) {
+
+	return wbc()->options->get($option, $default);
+}
+
+function wbc_update_option(string $option,$value) {
+
+	return wbc()->options->set($option, $value);
 }

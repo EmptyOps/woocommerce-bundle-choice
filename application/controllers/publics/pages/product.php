@@ -2,7 +2,8 @@
 namespace eo\wbc\controllers\publics\pages;
 defined( 'ABSPATH' ) || exit;
 
-class Product {
+
+class Product extends \eo\wbc\system\core\publics\Eowbc_Base_Model_Publics {
 
     private static $_instance = null;
 
@@ -45,28 +46,28 @@ class Product {
             }, 10, 1 );
 
 
-
             //if data available at _GET then add to out custom cart
             if(!empty(wbc()->sanitize->get('eo_wbc_add_to_cart_preview'))) {                
                 $this->add2cart();
                 $cart_url = wbc()->wc->eo_wbc_get_cart_url();
-                
+
                 do_action('sp_wbc_after_add2cart_redirect');
-                if(strpos($cart_url,'?')!==false){
+                if(strpos($cart_url,'?')!==false) {
                     $cart_url_parts = explode('?', $cart_url);
-                    $cart_url = explode('?', $cart_url)[0];
-                    
+                    $cart_url = $cart_url_parts[0];
+
                     if (!empty($cart_url_parts[1])) {
                         $url_params = false;
-                        parse_str( $cart_url_parts[1],$url_params );
+                        parse_str( $cart_url_parts[1],$url_params );                       
+
+                        $allowed_params = array('lang'=>'lang','page_id'=>'page_id');
+                        $url_params = array_intersect_key($url_params,$allowed_params);
                         
-                        if(!empty($url_params['lang'])) {
-                            $cart_url.='?lang='.$url_params['lang'];
-                        }
+                        $cart_url = site_url('?'.http_build_query($url_params));  
                     }
-                }
-                
+                }                
                 exit(wp_redirect($cart_url));
+                die();
             }
 
             if(!empty(wbc()->sanitize->get('CART'))) {
@@ -83,7 +84,7 @@ class Product {
             }
 
             $this->init_safe_click();
-
+            $this->product_options_view();        
             $this->render_preview();
         } else {
 
@@ -119,8 +120,10 @@ class Product {
                          event.preventDefault();
                 },false);
 
-                let sp_add_to_cart_dots = 1
-                let sp_add_to_cart_dots_interval = window.setInterval(function(){
+                // let sp_add_to_cart_dots = 1
+                var sp_add_to_cart_dots = 1
+                // let sp_add_to_cart_dots_interval = window.setInterval(function(){
+                var sp_add_to_cart_dots_interval = window.setInterval(function(){
                     
                     if(jQuery('#eo_wbc_add_to_cart,#eo_wbc_add_to_cart_preview').length>0) {                        
                         window.clearInterval(sp_add_to_cart_dots_interval);
@@ -179,38 +182,77 @@ class Product {
 
         add_filter('woocommerce_get_price_html',function($price,$product) use($first,$second,$first_parent,$second_parent){
             
-            //var_dump($product->get_id(), $second->get_id(),$first->get_id());
+            // var_dump($product->get_id(), $second->get_id(),$first->get_id());
 
-            if(!empty($second) and !empty($first) and ($product->get_id() === $second_parent->get_id()) ) {
-                return wc_price( $first->get_price() + $second->get_price() );
+            if(!empty($second) and !empty($first)) {   
+                
+                $product_var_id = !empty($product) and wbc()->wc->is_variation_object($product) ? $product->get_parent_id() : $product->get_id();
+                $second_parent_var_id = !empty($second_parent) and wbc()->wc->is_variation_object($second_parent) ? $second_parent->get_parent_id() : $second_parent->get_id();
+
+                if( $product_var_id === $second_parent_var_id ) {
+                    return wc_price( $first->get_price() + $second->get_price() );
+                }
             } 
             return $price;
         },10,2);
+        
+        /*add_filter('woocommerce_product_variation_get_regular_price', function($price, $product){
+            echo "<pre>";
+            print_r($price);
+            echo"<pre>";
+            return $price;
+        },10,3);
+        add_filter('woocommerce_product_variation_get_price', function($price, $product){
+            echo "22";
+
+            return $price;
+        },10,3);
+
+        // Variations (of a variable product)
+        add_filter('woocommerce_variation_prices_price', function($price, $variation, $product){
+            echo "33";
+
+            return $price;
+        },10,4);
+        add_filter('woocommerce_variation_prices_regular_price', function($price, $variation, $product){
+            echo "44";
+
+            return $price;
+        },10,4);*/
+
         //remove options
         add_filter('woocommerce_product_single_add_to_cart_text', function() {
             return '...';
             //return __('Add This To Cart','woo-bundle-choice');
         });
 
-        add_filter('woocommerce_get_script_data',function($data,$handle){
-            if($handle == 'wc-add-to-cart-variation'){
-                return false;
-            }
-            return $data;
-        },10,2);
+        // add_filter('woocommerce_get_script_data',function($data,$handle){
+        //     if($handle == 'wc-add-to-cart-variation'){
+        //         return false;
+        //     }
+        //     return $data;
+        // },10,2);
         
         add_action('wp_head',function(){
             wp_dequeue_script('wc-add-to-cart-variation');
             ?>
             <style> body .wcp_preview_first_product_title, body .wcp_preview_second_product_title{font-size: 1.6rem;line-height: 2.4rem;white-space: nowrap;width: 24rem;overflow: hidden;text-overflow: ellipsis;float: left;} @media only screen and (max-width: 480px) { body .wcp_preview_first_product_title, body .wcp_preview_second_product_title { font-size: 1rem !important; line-height: 2rem !important; width: inherit !important; word-break: break-word; max-width: 20rem; } } @media only screen and (max-width: 320px) { body .wcp_preview_first_product_title, body .wcp_preview_second_product_title { font-size: 1rem !important; line-height: 2rem !important; width: inherit !important; word-break: break-word; max-width: 17rem; } }</style>
             <style type="text/css">table.variations{display: none;}</style>
+            <style type="text/css">
+                .variations_form .variations, #wbc_variation_toggle {
+                    display: none !important;
+                }
+                .Product_Left_Wrapper_Plugin_Images .imagezoomsl_zoom_container .Zoom_Rigt-sec .small-image.corner-image.corner-toggle-image {
+                    display: none;
+                }
+            </style>
             <script type="text/javascript">
                 jQuery(".single_add_to_cart_button.button.alt").ready(function(){
 
                     jQuery('form.cart').prepend("<input type='hidden' name='eo_wbc_add_to_cart_preview' value='1'/>");
                     
                     jQuery(".single_add_to_cart_button.button.alt:not(.disabled):eq(0)").replaceWith(
-                         "<button href='#' id='eo_wbc_add_to_cart_preview' class='single_add_to_cart_button button alt'><?php _e('Add This To Cart','woo-bundle-choice') ?></button>"
+                         "<button href='#' id='eo_wbc_add_to_cart_preview' class='single_add_to_cart_button button alt'><?php _e('Add To Cart','woo-bundle-choice') ?></button>"
                     );
 
                     jQuery(document).on('click','#eo_wbc_add_to_cart_preview',function() {
@@ -230,7 +272,7 @@ class Product {
                         return false;
                     });
 
-                    jQuery("table.variations").remove();
+                    // jQuery("table.variations").remove();
                 });
             </script>
             <?php
@@ -442,7 +484,10 @@ class Product {
 
         if( ( !isset($_GET['EO_WBC']) and !empty($bonus_features['opts_uis_item_page']) )/*(!isset($_GET['EO_WBC']) and wbc()->options->get_option('tiny_features','tiny_features_option_ui_toggle_status',false))*/ or ( isset($_GET['EO_WBC']) and wbc()->options->get_option('appearance_product_page','show_options_ui_in_pair_builder',false) ) ){
 
-            \eo\wbc\controllers\publics\Options::instance()->run();        
+            //\eo\wbc\controllers\publics\Options::instance()->run();   
+            if( \eo\wbc\controllers\publics\Options::instance()->should_init() ) {
+                \eo\wbc\controllers\publics\Options::instance()->init();
+            } 
         }
     }
     
@@ -602,12 +647,16 @@ class Product {
         $redirect_url = $this->eo_wbc_product_route();
         wbc()->theme->load('css','product');
         wbc()->theme->load('js','product');
-        /*Hide sidebar and make content area full width.*/
-        if(apply_filters('eowbc_filter_sidebars_widgets',true)){
-            /*add_filter( 'sidebars_widgets',function($sidebars_widgets ) {
-                return array( false );
-            });    */
-        }
+
+        // chenged on 30-09-2023
+        // /*Hide sidebar and make content area full width.*/
+        // if(apply_filters('eowbc_filter_sidebars_widgets',true)){
+        //     /*add_filter( 'sidebars_widgets',function($sidebars_widgets ) {
+        //         return array( false );
+        //     });    */
+        // }
+        parent::instance()->sidebars_widgets();
+
         
         ob_start();        
         ?>
@@ -655,11 +704,20 @@ class Product {
             // if($category == get_option('eo_wbc_first_slug')){
             if($category == $this->first_category_slug){
                 // $btn_text = get_option('eo_wbc_add_to_cart_text_first', __('Continue', 'woo-bundle-choice'));
-                $btn_text = wbc()->options->get_option('appearance_product_page','fc_atc_button_text',__('Continue', 'woo-bundle-choice'));
+                if(!empty(wbc()->sanitize->get('STEP')) and wbc()->sanitize->get('STEP')==2) {
+                    $btn_text = wbc()->options->get_option('appearance_product_page','fc_atc_button_text_second',__('Continue', 'woo-bundle-choice'));                    
+                } else {
+
+                    $btn_text = wbc()->options->get_option('appearance_product_page','fc_atc_button_text',__('Continue', 'woo-bundle-choice'));
+                }
             // } elseif( $category == get_option('eo_wbc_second_slug') ) {
             } elseif( $category == $this->second_category_slug ) {
                 // $btn_text = get_option('eo_wbc_add_to_cart_text_second', __('Continue', 'woo-bundle-choice'));
-                $btn_text = wbc()->options->get_option('appearance_product_page','sc_atc_button_text',__('Continue', 'woo-bundle-choice'));
+                if(!empty(wbc()->sanitize->get('STEP')) and wbc()->sanitize->get('STEP')==2) {
+                    $btn_text = wbc()->options->get_option('appearance_product_page','sc_atc_button_text_second',__('Continue', 'woo-bundle-choice'));
+                } else {
+                    $btn_text = wbc()->options->get_option('appearance_product_page','sc_atc_button_text',__('Continue', 'woo-bundle-choice'));
+                }
             }
 
             if(empty($btn_text)){
@@ -704,6 +762,23 @@ class Product {
                         );
                     <?php endif; ?>
                     });
+
+
+                <?php
+                
+                $step = wbc()->sanitize->get('STEP');
+
+                if( $step == 2 && wbc()->common->is_product_under_category($product,wbc()->options->get_option('configuration','second_name')) && $product->is_type( 'variable' ) ) {
+                    ?>  
+
+                    //  define namespaces 
+                    window.document.splugins = window.document.splugins || {};
+                    window.document.splugins.common = window.document.splugins.common || {};
+                    
+                    window.document.splugins.common.is_handle_variation_id_pair_builder_step_2 = true;
+
+                    <?php 
+                }?>
             </script>
             
             <?php 
@@ -772,6 +847,7 @@ class Product {
 
                     $category_link=$this->eo_wbc_category_link();
 
+                    // ACTIVE_TODO it seems that CAT_LINK support is not added here and if it is breadcume or any other category url than we may need to add support. But i think standerd ring builder navigation management does controll categary url deply so if should not be routed to secound leval after it is captured and used from default or first leval CAT_LINK peram set in menus and so on. So we may simply need to remove this ACTIVE_TODO in 2nd revision.
                     $url=$site_url.($remove_index?'':'/index.php')."/{$category_base}/".$category_link.
                     wbc()->common->http_query(array('EO_WBC'=>1,'BEGIN'=>wbc()->sanitize->get('BEGIN'),'STEP'=>2,'FIRST'=>$post->ID,'SECOND'=>wbc()->sanitize->get('SECOND'),'CART'=>wbc()->sanitize->get('CART'),'ATT_LINK'=>implode(' ',$this->att_link),'CAT_LINK'=>substr($category_link,0,strpos($category_link,'/')))).$site_url_get;
 
@@ -779,6 +855,8 @@ class Product {
                 } elseif($category==$this->second_category_slug) {
 
                     $category_link=$this->eo_wbc_category_link();
+
+                    // ACTIVE_TODO it seems that CAT_LINK support is not added here and if it is breadcume or any other category url than we may need to add support. But i think standerd ring builder navigation management does controll categary url deply so if should not be routed to secound leval after it is captured and used from default or first leval CAT_LINK peram set in menus and so on. So we may simply need to remove this ACTIVE_TODO in 2nd revision.                    
                     $url=$site_url.($remove_index?'':'/index.php')."/{$category_base}/".$category_link
                     .wbc()->common->http_query(array('EO_WBC'=>1,'BEGIN'=>wbc()->sanitize->get('BEGIN'),'STEP'=>2,'FIRST'=>wbc()->sanitize->get('FIRST'),'SECOND'=>$post->ID,'CART'=>wbc()->sanitize->get('CART'),'ATT_LINK'=>implode(' ',$this->att_link),'CAT_LINK'=>substr($category_link,0,strpos($category_link,'/')))).$site_url_get;
                 }
@@ -789,9 +867,13 @@ class Product {
                 if($return_link) {
                     return $url;
                 }
-
-                return header("Location: {$url}");
-                wp_die();
+                
+                // changed on 08-09-2023
+                // return header("Location: {$url}");
+                // wp_die();
+                header("Location: {$url}");
+                echo '<script type="text/javascript"> window.location.href = "'. $url .'"; </script>';
+                return;
                 //wp_safe_redirect($url ,301 );               
             } else {
                 
@@ -863,29 +945,75 @@ class Product {
             }*/
             /*$setting_page_url  = */
                         
-            $preview_product_id = (empty($_GET['SECOND'])?$post->ID:$_GET['SECOND']);            
-            $setting_page_url = get_permalink($preview_product_id);
 
-            if(wbc()->sanitize->get('FIRST')==='' OR $category==$this->first_category_slug) {
+            if( empty(wbc()->options->get_option('appearance_preview_page','show_cards_view')) ) {
 
-                $url=wbc()->common->http_query(array('EO_WBC'=>1,'WBC_PREVIEW'=>1,'BEGIN'=>wbc()->sanitize->get('BEGIN'),'STEP'=>3,'FIRST'=>$post->ID,'SECOND'=>wbc()->sanitize->get('SECOND')));
+                $preview_product_id = (empty($_GET['SECOND'])?$post->ID:$_GET['SECOND']);            
+                $setting_page_url = get_permalink($preview_product_id);
 
-            } elseif (wbc()->sanitize->get('SECOND')==='' OR $category==$this->second_category_slug) {
+                if(wbc()->sanitize->get('FIRST')==='' OR $category==$this->first_category_slug) {
 
-                $url=wbc()->common->http_query(array('EO_WBC'=>1,'WBC_PREVIEW'=>1,'BEGIN'=>wbc()->sanitize->get('BEGIN'),'STEP'=>3,'FIRST'=>wbc()->sanitize->get('FIRST'),'SECOND'=>$post->ID));
+                    $url=wbc()->common->http_query(array('EO_WBC'=>1,'WBC_PREVIEW'=>1,'BEGIN'=>wbc()->sanitize->get('BEGIN'),'STEP'=>3,'FIRST'=>$post->ID,'SECOND'=>wbc()->sanitize->get('SECOND')));
+
+                } elseif (wbc()->sanitize->get('SECOND')==='' OR $category==$this->second_category_slug) {
+
+                    $url=wbc()->common->http_query(array('EO_WBC'=>1,'WBC_PREVIEW'=>1,'BEGIN'=>wbc()->sanitize->get('BEGIN'),'STEP'=>3,'FIRST'=>wbc()->sanitize->get('FIRST'),'SECOND'=>$post->ID));
+
+                } else {
+
+                    $url='';
+                }
+
+                if(!empty($url) and !empty($setting_page_url)) {
+                    if(strpos($setting_page_url,'?')===false){
+                        $url = $setting_page_url.'?'.$url;
+                    } else {
+                        $url = $setting_page_url.'&'.$url;
+                    }                
+                }
 
             } else {
 
-                $url='';
-            }
+                $review_page_url = '';
 
-            if(!empty($url) and !empty($setting_page_url)) {
-                if(strpos($setting_page_url,'?')===false){
-                    $url = $setting_page_url.'?'.$url;
+                $review_page = get_page_by_path('eo-wbc-product-review');
+                
+                if(empty($review_page) or is_wp_error($review_page)){
+                    $review_page_url = home_url('/eo-wbc-product-review/');
                 } else {
-                    $url = $setting_page_url.'&'.$url;
-                }                
+                    $review_page_url = get_permalink($review_page);
+                }           
+            
+                if(wbc()->sanitize->get('FIRST')==='' OR $category==wbc()->options->get_option('configuration','first_slug'))
+                {
+                    $url=$review_page_url
+                        .'?'.wbc()->common->http_query(array('EO_WBC'=>1,'BEGIN'=>wbc()->sanitize->get('BEGIN'),'STEP'=>3,'FIRST'=>$post->ID,'SECOND'=>wbc()->sanitize->get('SECOND')));
+                }
+                elseif (wbc()->sanitize->get('SECOND')==='' OR $category==wbc()->options->get_option('configuration','second_slug'))
+                {
+                    $url=$review_page_url
+                        .'?'.wbc()->common->http_query(array('EO_WBC'=>1,'BEGIN'=>wbc()->sanitize->get('BEGIN'),'STEP'=>3,'FIRST'=>wbc()->sanitize->get('FIRST'),'SECOND'=>$post->ID));
+                }
+                else
+                {
+                    $url='';
+                }      
             }            
+                        
+            // added on 21-06-2023
+            $eo_wbc_sets=wbc()->session->get('EO_WBC_SETS',array());
+
+            if(!empty($eo_wbc_sets)){
+
+                if( isset($eo_wbc_sets['SECOND'][2]) ) {
+
+                    if(strpos($url,'?')===false) {
+                        $url = $url.'?variation_id='.$eo_wbc_sets['SECOND'][2];
+                    } else {
+                        $url = $url.'&variation_id='.$eo_wbc_sets['SECOND'][2];
+                    }
+                }
+            }
         }  
         
         return $url;
@@ -973,10 +1101,11 @@ class Product {
                         
             if(!empty($terms) and is_array($terms)){
                 $terms =array_filter(array_map(function($map) use(&$terms,&$map_column,&$product_code,&$product_in){
-                    
+
                     if(array_intersect($terms,$map[$map_column])){
-                        if($map_column == 0) return $map[1];
-                        else return $map[0];
+                        
+                        if($map_column == 0) return array($map[1], $map['second_filter_query_type'], isset($map['1_1']) ? $map['1_1'] : null);
+                        else return array($map[0], $map['first_filter_query_type'], isset($map['0_1']) ? $map['0_1'] : null);
                     } elseif(in_array( $product_code, $map[$map_column] )) {                    
                         if($map_column == 0){
                             $product_in = array_merge( $product_in, $map[1] );
@@ -994,11 +1123,27 @@ class Product {
 
         $category=array();//array to hold category slugs
         $taxonomy=array();//array to hold taxonomy slugs
+        $taxonomy_related_data=array();
         if(!is_wp_error($terms) and !empty($terms) and is_array($terms)) {
-            array_walk($terms,function($term) use(&$category,&$taxonomy){
+            array_walk($terms,function($term) use(&$category,&$taxonomy,&$taxonomy_related_data){
+                
+                $filter_query_type = $term[1];
+                $range = $term[2];
+                $term = $term[0];
+
+                // if( wbc()->sanitize->get('is_test') == 1 ) {
+
+                //     wbc_pr("product.php eo_wbc_category_link");
+                //     wbc_pr($filter_query_type);
+                //     wbc_pr($term);
+                // }
+                
                 $_term_ = null;
                 if(is_array($term)) {
                     foreach ($term as $_term_) {
+
+                        $term_taxonomy_id = $_term_;
+
                         $_term_ = wbc()->wc->get_term_by('term_taxonomy_id', $_term_);
                         if(!is_wp_error($_term_) and !empty($_term_)) {
                             $_taxonomy_ = $_term_->taxonomy;                            
@@ -1009,6 +1154,18 @@ class Product {
                             } elseif( substr($_taxonomy_,0,3) =='pa_' ) {
 
                                 $taxonomy[substr($_term_->taxonomy,3)][] = $_term_->slug;
+
+                                $taxonomy_related_data[substr($_term_->taxonomy,3)]['filter_query_type'] = $filter_query_type;
+
+                                if( !isset($taxonomy_related_data[substr($_term_->taxonomy,3)]['filter_range']) ) {
+
+                                    $taxonomy_related_data[substr($_term_->taxonomy,3)]['filter_range'] = array();
+                                }
+
+                                if( is_array($range) && in_array($term_taxonomy_id, $range) ) {
+
+                                    $taxonomy_related_data[substr($_term_->taxonomy,3)]['filter_range'][] = $_term_->slug;
+                                }
                             }
                         }
                     }
@@ -1024,6 +1181,18 @@ class Product {
                         } elseif( substr($_taxonomy_,0,3) =='pa_' ) {
                             
                             $taxonomy[substr($_term_->taxonomy,3)][] = $_term_->slug;
+
+                            $taxonomy_related_data[substr($_term_->taxonomy,3)]['filter_query_type'] = $filter_query_type;
+                            
+                            if( !isset($taxonomy_related_data[substr($_term_->taxonomy,3)]['filter_range']) ) {
+
+                                $taxonomy_related_data[substr($_term_->taxonomy,3)]['filter_range'] = array();
+                            }
+
+                            if( is_array($range) && in_array($term_taxonomy_id, $range) ) {
+                            
+                                $taxonomy_related_data[substr($_term_->taxonomy,3)]['filter_range'][] = $_term_->slug;
+                            }
                         }
                     }
                 }
@@ -1066,19 +1235,43 @@ class Product {
                     /*$this->first_category_slug*/;                    
         }
 
-        $link.="/?";           
+        $link.="/?";       
+
+        if(is_array($category) && !empty($category)) {              
+            $link .= '__mapped_categories='.implode( ',' , $category ).'&';
+        } 
+        
         if(is_array($taxonomy) && !empty($taxonomy)){            
-            
+
+            // TODO/NOTE: even though below changes are confirmed with all affecting layers but still if there are regression effects and especially the exist in query do not work on our sp query class than we may need to add if condition there by using the below option of the mapping pref or something such. the changes are made on 12-07-2023.             
             $filter_query=array();
             // $attr_pref=get_option('eo_wbc_map_attr_pref','or');
             $attr_pref=wbc()->options->get_option('mapping_prod_mapping_pref','prod_mapping_pref_attribute','or');
             $glue=($attr_pref === 'or' ? ',' : '+' );           
 
+            $_attribute_param_str = "";
+
             foreach ($taxonomy as  $_tax => $_tems) {
-                $filter_query["query_type_{$_tax}"] = $attr_pref;
-                $filter_query["filter_{$_tax}"] = implode($glue,array_unique(array_filter($_tems)));
+
+                // $filter_query["query_type_{$_tax}"] = $attr_pref;
+                // $filter_query["filter_{$_tax}"] = implode($glue,array_unique(array_filter($_tems)));
+                $_attribute_param_str .= "pa_" . $_tax . ",";
+
+                if($taxonomy_related_data[$_tax]['filter_query_type'] == 'options') {
+
+                    $filter_query["checklist_pa_{$_tax}"] = implode($glue,array_unique(array_filter($_tems)));
+                } else {
+
+                    $filter_query["min_pa_{$_tax}"] = $taxonomy_related_data[$_tax]['filter_range'][0];
+                    $filter_query["max_pa_{$_tax}"] = $taxonomy_related_data[$_tax]['filter_range'][1];
+                }
             }
-            $link.=http_build_query($filter_query).'&';            
+
+            $filter_query["_attribute"] = rtrim($_attribute_param_str, ',');
+
+            $filter_query["__mapped_attribute"] = rtrim($_attribute_param_str, ',');
+
+            $link.=http_build_query($filter_query).'&';               
         }    
 
         if(!empty($product_in) && is_array($product_in)) {
@@ -1086,7 +1279,15 @@ class Product {
             $product_in = array_map(function($product_in){ return substr($product_in,4); },$product_in);
 
             $link.='products_in='.implode(',',$product_in).'&';
-        }             
+        }   
+
+        // if( wbc()->sanitize->get('is_test') == 1 ) {
+
+        //     wbc_pr("product.php eo_wbc_category_link 1");
+        //     wbc_pr($link);
+        //     die();
+        // }   
+
         return $link;
     }
 
