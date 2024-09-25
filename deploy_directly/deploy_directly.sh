@@ -71,7 +71,7 @@ shopt -s dotglob
 for f in "$PROJECT_ROOT"/*; do
     bname=$(basename "$f")
         
-    if [ "$bname" == "application" ] || [ "$bname" == "asset" ] || [ "$bname" == "languages" ] || [ "$bname" == "templates " ] || [ "$bname" == "index.php" ] || [ "$bname" == "README.txt" ] || [ "$bname" == "uninstall.php" ] || [ "$bname" == "LICENSE" ] || [ "$bname" == "LICENSE.txt" ] || [ "$bname" == "woo-bundle-choice.php" ]; 
+    if [ "$bname" == "application" ] || [ "$bname" == "asset" ] || [ "$bname" == "languages" ] || [ "$bname" == "templates" ] || [ "$bname" == "index.php" ] || [ "$bname" == "README.txt" ] || [ "$bname" == "uninstall.php" ] || [ "$bname" == "LICENSE" ] || [ "$bname" == "LICENSE.txt" ] || [ "$bname" == "woo-bundle-choice.php" ]; 
     then
         tmp="nothing to do"
     else 
