@@ -143,6 +143,7 @@ class Eowbc_Base_Model_Publics {
 		
 		NOTE: here other applicable layers of handle response function can come or may come.
 
+		-- most obebly nicheni condition not empty nai pan empty hovi joia.	-- to h
 		if( !empty($parsed['sf']) ) {
 
 			return $parsed['sf'];
