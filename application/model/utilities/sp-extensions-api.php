@@ -326,7 +326,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
     	if( !is_array($fv['attr']) ) {
 
-    		throw new \Exception("wbc form builder : The eas filed should defined the 'attr' property in array format only. the string format is not sported.", 1); 
+    		throw new \Exception("WBC Form Builder: The eas filed should defined the 'attr' property in array format only. Other type format is not supported.", 1); 
     	}
 
     	NOTE : This is done to anchor decode compatibility.
@@ -349,7 +349,21 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
     	if( 'save' == $mode ) {
 
-    		if( ( empty( wbc()->options->get_option($section_property['tab_key'], $fk)) && isset( in_array($fv["type"], \eo\wbc\model\admin\Form_Builder::savable_types()) && ( isset($_POST[$fk]) || $fv["type"]=='checkbox') ) ) || ( !empty( wbc()->options->get_option($section_property['tab_key'], $fk) ) && !isset( in_array($fv["type"], \eo\wbc\model\admin\Form_Builder::savable_types()) && ( isset($_POST[$fk]) || $fv["type"]=='checkbox') ) ) ) {
+    		if( 
+    			( 
+    				empty( wbc()->options->get_option($section_property['tab_key'], $fk) ) 
+    				&& 
+    				isset( in_array($fv["type"], \eo\wbc\model\admin\Form_Builder::savable_types()) 
+    					&& ( isset($_POST[$fk]) || $fv["type"]=='checkbox') ) 
+    			) 
+    			|| 
+    			( 
+    				!empty( wbc()->options->get_option($section_property['tab_key'], $fk) ) 
+    				&& 
+    				!isset( in_array($fv["type"], \eo\wbc\model\admin\Form_Builder::savable_types()) 
+    					&& ( isset($_POST[$fk]) || $fv["type"]=='checkbox') ) 
+    			) 
+    		) {
 
     			return true;
     		}
