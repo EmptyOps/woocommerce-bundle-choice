@@ -326,16 +326,17 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
     	if( !is_array($fv['attr']) ) {
 
-    		throw new \Exception("WBC Form Builder: The eas filed should defined the 'attr' property in array format only. Other type format is not supported.", 1); 
+    		throw new \Exception("WBC Form Builder: The eas field should define the 'attr' property in array format only. Other type format is not supported.", 1); 
     	}
 
-    	NOTE : This is done to anchor decode compatibility.
+    	NOTE : This is done to ensure backward compatibility.
     	if( !isset($fv['attr']['onclick']) ) {
 
     		$fv['attr']['onclick'] = '';
     	}
 
-    	$fv['attr']['onclick'] = "alert('Since you have changed the switch, after save action the api settings will be updated so you need to test the related feature on the website frontend and elsewhere as applicable. And this applies to changes made to any field of this switch section so be sure to test related feature if you have changed any field of this switch section.');" . $fv['attr']['onclick'];
+    	--	nichena msg ma last ma "if you have changed any field of this switch section." text che ene chenge kari ne "when you change any field of this switch section.".	-- to h
+    	$fv['attr']['onclick'] = "alert('Since you have changed the switch, after save action, the api settings will be updated so you need to test the related feature on the website frontend and elsewhere as applicable. And this applies to changes made to any field of this switch section so be sure to test related feature if you have changed any field of this switch section.');" . $fv['attr']['onclick'];
 
     	return $fv;
     }
@@ -349,19 +350,22 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
     	if( 'save' == $mode ) {
 
+    		--	below if is not finlize yet.
+    		--	may be we have covered hear only the checkbox type filds but not other so need to conferm about that. -- to h
+    			--	$fv need to be add as argument in this function. -- to h & -- to pi
     		if( 
     			( 
     				empty( wbc()->options->get_option($section_property['tab_key'], $fk) ) 
     				&& 
-    				isset( in_array($fv["type"], \eo\wbc\model\admin\Form_Builder::savable_types()) 
+    				( in_array($fv["type"], \eo\wbc\model\admin\Form_Builder::savable_types()) 
     					&& ( isset($_POST[$fk]) || $fv["type"]=='checkbox') ) 
     			) 
     			|| 
     			( 
     				!empty( wbc()->options->get_option($section_property['tab_key'], $fk) ) 
     				&& 
-    				!isset( in_array($fv["type"], \eo\wbc\model\admin\Form_Builder::savable_types()) 
-    					&& ( isset($_POST[$fk]) || $fv["type"]=='checkbox') ) 
+    				( in_array($fv["type"], \eo\wbc\model\admin\Form_Builder::savable_types()) 
+    					&& ( !isset($_POST[$fk]) || $fv["type"]=='checkbox') ) 
     			) 
     		) {
 
