@@ -3,7 +3,7 @@ Contributors: emptyopssphere
 Tags: woocommerce,product bundle,product bundles,woocommerce product bundles,bundles,bundle,woo,woocommerce product bundle,design your own,buy in pair
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=hi0001234d1gmail.com&item_name=+Favorite+Woo+Choice+Plugin++Download+Woo+Choice+Plugin+Donation¤cy_code=USD&source=url
 Requires at least: 3.5
-Tested up to: 5.8
+Tested up to: 6.6.2
 Requires PHP: 5.6
 Stable tag: 1.0.8
 License: GPLv3 or later
