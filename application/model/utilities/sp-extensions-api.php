@@ -145,7 +145,8 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
     	//loop through form tabs and save 
 	    foreach ($form_definition as $key => $tab) {
-	    	if( $key != $saved_tab_key ) {
+
+	    	if( 'save' == $mode && $key != $saved_tab_key ) {
 	    		continue;
 	    	}
 	    	
@@ -154,7 +155,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 			$is_table_save = false;	//	ACTIVE_TODO/TODO it should be passed from child maybe or make dynamic as applicable. ($key == $this->tab_key_prefix."d_fconfig" or $key == $this->tab_key_prefix."s_fconfig" or $key=='filter_set') ? true : false;
 
 			$table_data = array();
-			$tab_specific_skip_fileds = array();
+			$tab_specific_skip_fileds = array();	ACTIVE_TODO/TODO it will spported only if the hook pass it and so it is avelabal hear in this process_form_definition function in $args varabal. means when the process_form_definition function called hear from the hooks fier in this class from abow admin_hooks function.
 
 	    	foreach ($tab["form"] as $fk => $fv) {
 
@@ -163,6 +164,11 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 			    //only for those for which POST is set
 				
 			    if( in_array($fv["type"], \eo\wbc\model\admin\Form_Builder::savable_types())) {
+
+			    	//skip fields where applicable
+					if( 'save' == $mode && in_array($fk, $skip_fileds) ) {
+		    			continue;
+		    		}
 
 			    	//skip fields where applicable
 					if( isset($fv["eas"]) && is_array($fv["eas"]) ) {

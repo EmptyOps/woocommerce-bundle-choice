@@ -96,7 +96,13 @@ class Eowbc_Base_Model_Publics {
 			throw new \Exception("There is some error in the api call response.", 1);
 		} elseif ( is_wp_error($response) ) {
 
-			throw new \Exception("There is some error in the api call. error massege: " . $response->get_error_message(), 1);
+			if( is_object($response) && method_exists($response, 'get_error_message') ){
+
+				throw new \Exception("There is some error in the api call. error massege: " . $response->get_error_message(), 1);
+			} else {
+
+				throw new \Exception("There is some error in the api call response.", 1);
+			}
 		}
 
 		if( isset($response['body']) ) {
