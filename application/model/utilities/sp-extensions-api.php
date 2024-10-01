@@ -158,10 +158,6 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
 	    	foreach ($tab["form"] as $fk => $fv) {
 
-			    //loop through form fields, read from POST/GET and save
-			    //may need to check field type here and read accordingly only
-			    //only for those for which POST is set
-				
 			    if( in_array($fv["type"], \eo\wbc\model\admin\Form_Builder::savable_types())) {
 
 			    	//skip fields where applicable
