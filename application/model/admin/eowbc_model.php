@@ -374,6 +374,11 @@ class Eowbc_Model {
 
 		} else {
 
+			if( !isset($args['sp_frmb_saved_tab_key']) ) {
+
+				$args['sp_frmb_saved_tab_key'] = !empty(wbc()->sanitize->post("saved_tab_key")) ? wbc()->sanitize->post("saved_tab_key") : "" ;
+			}
+
 			$res = array();
 			$res["type"] = "success";
 		    $res["msg"] = "";

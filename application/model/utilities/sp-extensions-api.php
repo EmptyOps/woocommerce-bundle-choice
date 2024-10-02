@@ -137,7 +137,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
 		wbc()->load->model('admin\form-builder');
 
-		$saved_tab_key = !empty(wbc()->sanitize->post("sp_frmb_saved_tab_key")) ? wbc()->sanitize->post("sp_frmb_saved_tab_key") : ( !empty( $args["sp_frmb_saved_tab_key"] ) ? $args["sp_frmb_saved_tab_key"] : "" ); 
+		$saved_tab_key = !empty( $args["hook_callback_args"]["sp_frmb_saved_tab_key"] ) ? $args["hook_callback_args"]["sp_frmb_saved_tab_key"] : ""; 
 		$skip_fileds = array('sp_frmb_saved_tab_key');
 		
 		$save_as_data = array();	
