@@ -407,15 +407,15 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
     	if( $is_positive ) {
 
-    		return ;
+    		return;
     	}
 
-    	--	hear we need to prepear the $res form $parsed by creating empty array and save. -- to h & -- to pi
+    	--	hear we need to prepare the $res form $parsed by creating empty array and save. -- to h & -- to pi
     	$res = $parsed;
 
     	if( 'save' == $mode ) {
 
-    		--	from hear most obabely we need to return $res and it will be not prepared by should_return function most obabely. -- to h & -- to pi
+    		--	from hear most probabely we need to return $res and it will be not prepared by should_return function most probabely. -- to h & -- to pi
     	}
 
     	if( 'get' == $mode ) {
