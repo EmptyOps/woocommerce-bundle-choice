@@ -203,7 +203,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
 							$is_positive = self::is_response_positive($parsed);
 
-							$form_definition[$key]["form"] = self::apply_response_msg($is_positive, $mode, $tab["form"], $section_fields, $parsed);
+							$form_definition[$key]["form"] = self::apply_response_msg($is_positive, $mode, $tab["form"], $section_fields, $parsed, $fk);
 
 							$res = null;
 							if( self::should_do_stat_changes($mode, $parsed, $res) ) {
