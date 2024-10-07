@@ -500,6 +500,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 				    		'attr'=>array('style = "'.(!empty($color)?$color:$bgcolor).'"'),
 	    				);
 
+    	--	ahi may be after add karavnu avse so me to add just a argument spport inside below function.	-- to h &-- to pi
     	$tab_form = wbc()->common->array_insert_before($tab_form, $fk, $fk.'_eas_visible_info', $visible_info);
 
     	return $tab_form;
