@@ -5260,8 +5260,8 @@ class Sample_Data_Template {
                 'images' => array('Round-5.jpg', 'Round-1.jpg'),
                 'content' => '',
                 'sku' => 'DIA-89302496-1',
-                'regular_price' => '98561',
-                'sale_price' => '85461',
+                'regular_price' => '99',
+                'sale_price' => '1',
                 'price' => '',
                 'sp_variations' => $_img_url.
                 'Products/Round-4.jpg',
