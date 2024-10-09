@@ -213,7 +213,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 								return $res;
 							}
 
-							if( self::should_handle_response($mode, $parsed, $res) ){
+							if( self::should_handle_response($mode, $parsed, $res) ) {
 
 								\eo\wbc\system\core\publics\Eowbc_Base_Model_Publics::handle_response($parsed);		
 							}
@@ -320,6 +320,8 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
     }
 
     private static function inject_onclick_attr($mode, $form_definition, $section_property, $fv) {
+
+    	--	'get' == $mode ni if maravani jaroor ahi che.	-- to h & -- to pi
 
     	if( empty($fv['attr']) ) {
 
@@ -463,18 +465,35 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
     		if( $fk == $sfk ) {
 
-    			--	most obabely we need to make here the switch as non interactive by removeing the applicable proparty entirely or proparty attribute. 
+    			--	most probabely we need to make here the switch as non interactive by removeing the applicable proparty entirely or proparty attribute. 
     		} else {
 
-    			--	hidden for hide.
-    			--	show class for show.
+    			$string_class = null;
+    			$remove_class_index = null;
+    			
+    			//	in semantic hidden class for hide.
+    			//	in semantic show class for show.
+    			if( is_array($tab_form[$sfk]['size_class']) ) {
+				    
+				    $remove_class_index = array_search('hidden', $tab_form[$sfk]['size_class']);
+				} else {
+				    
+				    $string_class = explode(' ', $tab_form[$sfk]['size_class']);
+				    
+				    $remove_class_index = array_search('hidden', $string_class); 
+				}
 
-    			$remove_class = array_search('hidden', $tab_form[$sfk]['size_class']); 
-
-    			if( isset($remove_class) && $remove_class != false ) {
-
-    				unset($tab_form[$sfk]['size_class'][$remove_class]);
-    			}
+				if( isset($remove_class_index) && $remove_class_index !== false ) {
+				    
+				    if( is_array($tab_form[$sfk]['size_class']) ) {
+				        
+				        unset($tab_form[$sfk]['size_class'][$remove_class_index]);
+				    } else {
+				        
+				        unset($string_class[$remove_class_index]);
+				        $tab_form[$sfk]['size_class'] = implode(' ', $string_class); 
+				    }
+				}
     		}
     	}
 
