@@ -137,9 +137,9 @@ class Eowbc_Base_Model_Publics {
 			}
 		}
 
-		if( isset($response['sf']) ) {
+		if( isset($response['response_data']) ) {
 		
-			$res['sf'] = $response['sf'];	
+			$res['response_data'] = $response['response_data'];	
 		}
 
 		return $res;
@@ -149,20 +149,30 @@ class Eowbc_Base_Model_Publics {
 		
 		NOTE: here other applicable layers of handle response function can come or may come.
 
+		--	nicheni if and comment delet karavani che but ek var confirm karavanu che k koi bija sinario aplicabal hoy to.
 		-- most probebly nicheni condition not empty nai pan empty hovi joia.	-- to h
-		if( !empty($parsed['sf']) ) {
+		if( !empty($parsed['response_data']['sf']) ) {
 
-			return $parsed['sf'];
+			return $parsed['response_data']['sf'];
 		}
 
-		foreach ($parsed['sf'] as $sfk => $sfv) {
+		if( isset($parsed['response_data']['sf']) ) {
+			
+			foreach ($parsed['response_data']['sf'] as $sfk => $sfv) {
 
-			if( !empty($sfv['st']) ) {
+				if( !empty($sfv['st']) ) {
 
 
+				}
 			}
 		}
 		
+		if( isset($parsed['response_data']['data']) ) {
+
+			return $parsed['response_data']['data'];
+		}
+
+		return null;
 	}
 
 }

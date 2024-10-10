@@ -169,9 +169,11 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 			    	//skip fields where applicable
 					if( isset($fv["eas"]) && is_array($fv["eas"]) ) {
 
-						$fv = self::inject_onclick_attr($mode, $form_definition, $fv["eas"], $fv);
+						$tab["form"][$fk] = self::inject_onclick_attr($mode, $form_definition, $fv["eas"], $fv);
 
 						if( self::section_should_make_call($mode, $form_definition, $fv["eas"], $fk) ) {
+
+							$form_definition[$key]["form"] = $tab["form"];
 
 							$section_fields = self::retrieve_section_fields($tab["form"], $fv["eas"], $fk);
 
@@ -203,12 +205,12 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
 							$is_positive = self::is_response_positive($parsed);
 
-							$form_definition[$key]["form"] = self::apply_response_msg($is_positive, $mode, $tab["form"], $section_fields, $parsed, $fk);
+							$tab["form"] = self::apply_response_msg($is_positive, $mode, $tab["form"], $section_fields, $parsed, $fk);
 
 							$res = null;
 							if( self::should_do_stat_changes($mode, $parsed, $res) ) {
 
-								$form_definition[$key]["form"] = self::apply_stat_changes_to_section($mode, $tab["form"], $section_fields, $parsed, $fk);
+								$tab["form"] = self::apply_stat_changes_to_section($mode, $tab["form"], $section_fields, $parsed, $fk);
 
 								return $res;
 							}
