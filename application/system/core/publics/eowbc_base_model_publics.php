@@ -149,7 +149,7 @@ class Eowbc_Base_Model_Publics {
 		
 		NOTE: here other applicable layers of handle response function can come or may come.
 
-		--	nicheni if and comment delet karavani che but ek var confirm karavanu che k koi bija sinario aplicabal hoy to.
+		--	nicheni if and comment delete karavani che but ek var confirm karavanu che k koi bija sinario applicable hoy to.
 		-- most probebly nicheni condition not empty nai pan empty hovi joia.	-- to h
 		if( !empty($parsed['response_data']['sf']) ) {
 

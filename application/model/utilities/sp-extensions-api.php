@@ -155,11 +155,11 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 			$is_table_save = false;	//	ACTIVE_TODO/TODO it should be passed from child maybe or make dynamic as applicable. ($key == $this->tab_key_prefix."d_fconfig" or $key == $this->tab_key_prefix."s_fconfig" or $key=='filter_set') ? true : false;
 
 			$table_data = array();
-			$tab_specific_skip_fileds = array();	ACTIVE_TODO/TODO it will spported only if the hook pass it and so it is avelabal hear in this process_form_definition function in $args varabal. means when the process_form_definition function called hear from the hooks fier in this class from abow admin_hooks function.
+			$tab_specific_skip_fileds = array();	ACTIVE_TODO/TODO it will spported only if the hook pass it and so it is available hear in this process_form_definition function in $args variable. means when the process_form_definition function called hear from the hooks fire in this class from abow admin_hooks function.
 
 	    	foreach ($tab["form"] as $fk => $fv) {
 
-			    if( in_array($fv["type"], \eo\wbc\model\admin\Form_Builder::savable_types())) {
+			    if( in_array($fv["type"], \eo\wbc\model\admin\Form_Builder::savable_types()) ) {
 
 			    	//skip fields where applicable
 					if( 'save' == $mode && in_array($fk, $skip_fileds) ) {
@@ -171,11 +171,11 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
 						$tab["form"][$fk] = self::inject_onclick_attr($mode, $form_definition, $fv["eas"], $fv);
 
-						if( self::section_should_make_call($mode, $form_definition, $fv["eas"], $fk) ) {
+						$section_fields = self::retrieve_section_fields($tab["form"], $fv["eas"], $fk);
+
+						if( self::section_should_make_call($mode, $form_definition, $fv["eas"], $fk, $section_fields) ) {
 
 							$form_definition[$key]["form"] = $tab["form"];
-
-							$section_fields = self::retrieve_section_fields($tab["form"], $fv["eas"], $fk);
 
 							$payload = array();
 							$payload['data'] = array();
@@ -200,7 +200,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 							}
 
 
-							$parsed = self::call($fv["eas"]["au"] . $fv["eas"]["ep"], , $payload);
+							$parsed = self::call($fv["eas"]["au"] . $fv["eas"]["ep"], "ihk=".$fv["eas"]["ihk"], $payload);
 
 
 							$is_positive = self::is_response_positive($parsed);
@@ -347,7 +347,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
     	return $fv;
     }
 
-    private static function section_should_make_call($mode, $form_definition, $section_property, $fk) {
+    private static function section_should_make_call($mode, $form_definition, $section_property, $fk, $section_fields) {
 
     	if( 'get' == $mode ) {
 
@@ -390,7 +390,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
     		if( $fk == $fk_inner || (isset($fv_inner['easf']) && $fk == $fv_inner['easf']) ) {
 
-    			$section_fields[] = $fv_inner;
+    			$section_fields[$fk_inner] = $fv_inner;
     		}
     	}
 
@@ -510,15 +510,17 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
     private static function inject_visible_info_field($mode, $tab_form, $section_property, $fv, $parsed, $fk) {
 
-    	$color = $parsed['type'] === 'error' ? 'color: red;' : '';
-		$bgcolor = $parsed['type'] === 'warning' ? 'background-color: yellow;' : '';
+    	$style = null;
+
+    	$style .= $parsed['type'] === 'error' ? 'color: red;' : '';
+		$style .= $parsed['type'] === 'warning' ? 'background-color: yellow;' : '';
 
     	$visible_info = array(
 				    		'label' => eowbc_lang($parsed['msg']),
 				    		'type' => 'visible_info',
 				    		'class' => array('small'),
 				    		// 'size_class'=>array('sixteen','wide'),
-				    		'attr'=>array('style = "'.(!empty($color)?$color:$bgcolor).'"'),
+				    		'attr'=>array('style = "'.$style.'"'),
 	    				);
 
     	--	ahi may be after add karavnu avse so me to add just a argument spport inside below function.	-- to h &-- to pi
