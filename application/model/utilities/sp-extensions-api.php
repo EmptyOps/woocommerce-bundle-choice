@@ -26,7 +26,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 		
 	}
 
-	public static function call($url, $query_string, $payload = null) {
+	public static function call($url, $query_string, $payload = null, $throw_types = array('error')) {
 
 		self::additional_data($query_string, $payload);
 
@@ -200,7 +200,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 							}
 
 
-							$parsed = self::call($fv["eas"]["au"] . $fv["eas"]["ep"], "ihk=".$fv["eas"]["ihk"], $payload);
+							$parsed = self::call($fv["eas"]["au"] . $fv["eas"]["ep"], "ihk=".$fv["eas"]["ihk"], $payload, array());
 
 
 							$is_positive = self::is_response_positive($parsed);
@@ -217,98 +217,12 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
 							if( self::should_handle_response($mode, $parsed, $res) ) {
 
-								\eo\wbc\system\core\publics\Eowbc_Base_Model_Publics::handle_response($parsed);		
+								\eo\wbc\system\core\publics\Eowbc_Base_Model_Publics::handle_response($parsed, array());		
 							}
-
-						}
-
-					}
-
-					if( empty($fv['save_as']) or $fv['save_as'] == "default" ) {
-
-						// TODO implement
-
-			    		//save
-				    	if( $is_table_save ) {
-
-				    		// ACTIVE_TODO/TODO to cover logic like below commented logic what we can do is implement maybe callback or simply the hooks mechanisam, but maybe the callbacks are simple and easy to debug and enough for such requirements. so can do callbacks like we did for some class heirarchies -- to s 
-				    		// if( $fk == "d_fconfig_ordering" || $fk == "s_fconfig_ordering" )  {
-				    			
-				    		// 	if($fk=='d_fconfig_ordering' and !empty(wbc()->sanitize->post('first_category_altr_filt_widgts'))){
-				    		// 		$table_data['filter_template'] = apply_filters('eowbc_admin_form_filters_save_d_filter_template',wbc()->sanitize->post('first_category_altr_filt_widgts'));
-				    		// 	} elseif ($fk == "s_fconfig_ordering" and !empty(wbc()->sanitize->post('second_category_altr_filt_widgts'))) {
-				    		// 		$table_data['filter_template'] = apply_filters('eowbc_admin_form_filters_save_s_filter_template',wbc()->sanitize->post('second_category_altr_filt_widgts'));
-				    		// 	}			    			
-					    	// 	$table_data[$fk] = (int)wbc()->sanitize->post($fk); 	
-				    		// }
-				    		// else {
-				    			$table_data[$fk] = ( isset($_POST[$fk]) ? wbc()->sanitize->_post($fk) : '' ); 
-				    		// }
-				    	}
-				    	else {			    		
-				    		
-				    		wbc()->options->update_option('filters_'.$key,$fk,(isset($_POST[$fk])? ( wbc()->sanitize->post($fk) ):'' ) );
-				    	}
-					} elseif( $fv['save_as'] == "post_meta" ) {
-
-						if( !isset($save_as_data['post_meta']) ) {
-
-							$save_as_data['post_meta'] = array();	
-						}
-
-						/*ACTIVE_TODO_OC_START
-						ACTIVE_TODO currently we are doing isset on the isset($args['data_raw']) instead of isset($args['data_raw'][$fk]) means without checking on the $fk so if we face any issues during edit or delete or some such action then need to manage accoringly. 
-						ACTIVE_TODO_OC_END*/
-						if( isset($_POST[$fk]) or isset($args['data_raw']/*[$fk]*/) ) {
-
-							$save_as_data_meta['post_meta_found'] = true;	
-						}
-
-						if(!empty($args['data_raw'])) {
-							// -- as per the flow planned/thought of we ma need only litel logzic here.
-							// 	-- may be all that we need to do is simply read from the form definition itself instad of the post in the below if --to h & -- to s.
-							// 		-- and so since data_raw will not going to passed so maybe the above not empty if condition need to be adjusted with something else -- to h & -- to s
-							// 			-- i had thougt of doing not empty condition in form_definition using $fk but since some value might be set to 0 or empty so not empty will not work and not even isset because isset maybe become true even for normal case of the else condition below.
-							// 				NOTE: it feels that we can not do anything else except the isset so in below if in the ternary operator simply the isset is assed 
-							if (true /*true or since no dependancy on the dm based field so far*/ or !empty($dm_based_field)) {
-
-								// ACTIVE_TODO here we are reading the directly passed custom data inside data_raw element, which is bad practice for security. so we should refactor this as soon as we get a chance and make sure that we either sanitize this or we use the standard input method on we like the post, get, request. but I think it is better that we simply sanitize this custom data by passing it to our sanitize library in the function which is accepting custom data.
-								$save_as_data['post_meta'][$fk] = ( isset($fv/*[$fk]*/['value']) ? $fv/*[$fk]*/['value'] : '' );
-
-							}
-
-						} else {
-							$save_as_data['post_meta'][$fk] = ( isset($_POST[$fk]) ? wbc()->sanitize->_post($fk) : '' ); 
 						}
 					}
-
-
-
 			    }
 			}
-
-			//loop through save_as_data and save 
-		    foreach ($save_as_data as $sadk => $sadv) {
-
-		    	// NOTE: normally for our standard admn layer there is maybe no flow of deleting record if that is not detected, and as far as I can say the delete action is available only for the table/entity based form where user can delete in bulk and so on. but here it is for storage efficiency, cleanlieness and so on the post meta are deleted and will be followed in similar manner for other similar save_as options. 
-
-		    	if( $sadk == "post_meta" ) {
-					
-					// TODO we may like to use post meta api functions like get_post_meta(used above), update_post_meta/delete_post_meta(used below) through our common wp helper 
-
-					if ( !empty( $save_as_data_meta['post_meta_found'] ) ) {
-
-						update_post_meta( $args['id'], $args['page_section'].'_data', $sadv );
-					} else {
-						delete_post_meta( $args['id'], $args['page_section'].'_data' );
-					}
-		    	}
-		    }
-
-			if( $is_table_save ) {
-
-			}
-
 	    }
 
     	if( $mode == 'get' ) {
@@ -399,7 +313,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
     private static function is_response_positive($parsed) {
 
-    	if( isset($parsed['type']) && 'success' == $parsed['type'] ) {
+    	if( isset($parsed['type']) && ( 'success' == $parsed['type'] && ( 'success' == $parsed['sub_type'] || 'warning' == $parsed['sub_type'] ) ) ) {
 
     		return true;
     	}

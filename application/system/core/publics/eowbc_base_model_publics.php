@@ -145,9 +145,14 @@ class Eowbc_Base_Model_Publics {
 		return $res;
 	}
 
-	public static function handle_response($parsed){
+	public static function handle_response($parsed, $throw_types = array('error')){
 		
 		NOTE: here other applicable layers of handle response function can come or may come.
+
+		if ( in_array($parsed['type'], $throw_types) ) {
+
+			throw new \Exception($parsed['type'].": ".$parsed['msg'], 1);
+		}
 
 		--	nicheni if and comment delete karavani che but ek var confirm karavanu che k koi bija sinario applicable hoy to.
 		-- most probebly nicheni condition not empty nai pan empty hovi joia.	-- to h
