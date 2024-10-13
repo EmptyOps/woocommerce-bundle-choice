@@ -105,9 +105,15 @@ class Eowbc_Base_Model_Publics {
 			}
 		}
 
-		if( isset($response['body']) ) {
+		if( 'wp_remote_get' == $method ) {
 
-			$response = json_decode($response['body'],true);
+			if( isset($response['body']) ) {
+
+				$response = json_decode($response['body'],true);
+			} else {
+
+				$response = '';
+			}
 		} else {
 
 			$response = '';
@@ -134,6 +140,30 @@ class Eowbc_Base_Model_Publics {
 			} else {
 
 				$res['msg'] = 'Empty response found.';
+			}
+		}
+
+		if( isset($response['sub_type']) ) {
+		
+			$res['sub_type'] = $response['sub_type'];
+			
+			if( isset($response['sub_msg']) ) {
+				
+				$res['sub_msg'] = $response['sub_msg'];
+			} else {
+
+				$res['sub_msg'] = '';
+			}
+		} else {
+
+			$res['sub_type'] = 'error';
+
+			if( isset($response['sub_msg']) ) {
+				
+				$res['sub_msg'] = $response['sub_msg'];
+			} else {
+
+				$res['sub_msg'] = 'Empty response found.';
 			}
 		}
 

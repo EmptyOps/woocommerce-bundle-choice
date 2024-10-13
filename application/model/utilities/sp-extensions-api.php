@@ -313,7 +313,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
     private static function is_response_positive($parsed) {
 
-    	if( isset($parsed['type']) && ( 'success' == $parsed['type'] && ( 'success' == $parsed['sub_type'] || 'warning' == $parsed['sub_type'] ) ) ) {
+    	if( isset($parsed['type']) && ('success' == $parsed['type'] && ('success' == $parsed['sub_type'] || 'warning' == $parsed['sub_type'])) ) {
 
     		return true;
     	}
@@ -328,17 +328,29 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
     		return;
     	}
 
-    	--	hear we need to prepare the $res form $parsed by creating empty array and save. -- to h & -- to pi
-    	$res = $parsed;
+    	--	hear we need to prepare the $res form $parsed by creating empty array and save. -- to h & -- to pi 	done.
+    	// $res = $parsed;
 
     	if( 'save' == $mode ) {
 
     		--	from hear most probabely we need to return $res and it will be not prepared by should_return function most probabely. -- to h & -- to pi
+    		NOTE: hear we need to set in $res the type != success. but we have set all the standard proparty like type, sub_type and so on to ensuer that if it have required on underlayen layers then teke and directly use it and type != success condition is not nessesry so that is not applyed and type is set for the all scenario. 
+    		$res = array('type' => $parsed['type'], 'msg' => $parsed['msg'], 'sub_type' => $parsed['sub_type'], 'sub_msg' => $parsed['sub_msg']);
     	}
 
     	if( 'get' == $mode ) {
 
-    		$tab_form = self::inject_visible_info_field($mode, $tab_form, $section_property, $fv, $parsed, $fk);
+    		$msg = null;
+
+    		if( 'success' !== $parsed['type'] ) {
+
+    			$msg = $parsed['msg'];
+    		} else {
+
+    			$msg = $parsed['sub_msg'];
+    		}
+
+    		$tab_form = self::inject_visible_info_field($mode, $tab_form, $section_fields, $parsed, $fk, $msg);
     	}
 
     	return $tab_form;
@@ -346,7 +358,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
     private static function should_do_stat_changes($mode, $parsed, &$res) {
 
-    	if( 'get' == $mode && ( isset($parsed['type']) && 'success' != $parsed['type'] ) ) {
+    	if( 'get' == $mode && ( isset($parsed['type']) && !('success' == $parsed['sub_type'] || 'warning' == $parsed['sub_type']) ) ) {
 
     		return false;
     	}
@@ -362,7 +374,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
     private static function should_handle_response($mode, $parsed, &$res) {
 
-    	if( 'get' == $mode && ( isset($parsed['type']) && 'error' != $parsed['type'] ) ) {
+    	if( 'get' == $mode && ( isset($parsed['type']) && ('success' == $parsed['sub_type'] || 'warning' == $parsed['sub_type']) ) ) {
 
     		return false;
     	}
@@ -422,7 +434,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
     	return $tab_form;
     }
 
-    private static function inject_visible_info_field($mode, $tab_form, $section_property, $fv, $parsed, $fk) {
+    private static function inject_visible_info_field($mode, $tab_form, $section_fields, $parsed, $fk, $msg) {
 
     	$style = null;
 
@@ -430,15 +442,15 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 		$style .= $parsed['type'] === 'warning' ? 'background-color: yellow;' : '';
 
     	$visible_info = array(
-				    		'label' => eowbc_lang($parsed['msg']),
+				    		'label' => eowbc_lang($msg),
 				    		'type' => 'visible_info',
 				    		'class' => array('small'),
 				    		// 'size_class'=>array('sixteen','wide'),
 				    		'attr'=>array('style = "'.$style.'"'),
 	    				);
 
-    	--	ahi may be after add karavnu avse so me to add just a argument spport inside below function.	-- to h &-- to pi
-    	$tab_form = wbc()->common->array_insert_before($tab_form, $fk, $fk.'_eas_visible_info', $visible_info);
+    	--	ahi may be after add karavnu avse so me to add just a argument spport inside below function.	-- to h & -- to pi
+    	$tab_form = wbc()->common->array_insert_before($tab_form, $fk, $fk.'_eas_visible_info', $visible_info, true);
 
     	return $tab_form;
     }
