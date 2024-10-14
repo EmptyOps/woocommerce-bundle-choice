@@ -96,66 +96,118 @@ class Eowbc_Base_Model_Publics {
 			throw new \Exception("There is some error in the api call response.", 1);
 		} elseif ( is_wp_error($response) ) {
 
-			throw new \Exception("There is some error in the api call. error massege: " . $response->get_error_message(), 1);
+			if( is_object($response) && method_exists($response, 'get_error_message') ){
+
+				throw new \Exception("There is some error in the api call. error massege: " . $response->get_error_message(), 1);
+			} else {
+
+				throw new \Exception("There is some error in the api call response.", 1);
+			}
 		}
 
-		if(isset($response['body'])) {
+		if( 'wp_remote_get' == $method ) {
 
-			$response = json_decode($response['body'],true);
+			if( isset($response['body']) ) {
+
+				$response = json_decode($response['body'],true);
+			} else {
+
+				$response = '';
+			}
 		} else {
 
 			$response = '';
 		}
 
-		if (isset($response['type'])) {
+		if( isset($response['type']) ) {
 		
 			$res['type'] = $response['type'];
 			
-			if (isset($response['msg'])) {
+			if( isset($response['msg']) ) {
 				
 				$res['msg'] = $response['msg'];
-			}else{
+			} else {
 
 				$res['msg'] = '';
 			}
-		}else{
+		} else {
 
 			$res['type'] = 'error';
 
-			if (isset($response['msg'])) {
+			if( isset($response['msg']) ) {
 				
 				$res['msg'] = $response['msg'];
-			}else{
+			} else {
 
 				$res['msg'] = 'Empty response found.';
 			}
 		}
 
-		if (isset($response['sf'])) {
+		if( isset($response['sub_type']) ) {
 		
-			$res['sf'] = $response['sf'];	
+			$res['sub_type'] = $response['sub_type'];
+			
+			if( isset($response['sub_msg']) ) {
+				
+				$res['sub_msg'] = $response['sub_msg'];
+			} else {
+
+				$res['sub_msg'] = '';
+			}
+		} else {
+
+			$res['sub_type'] = 'error';
+
+			if( isset($response['sub_msg']) ) {
+				
+				$res['sub_msg'] = $response['sub_msg'];
+			} else {
+
+				$res['sub_msg'] = 'Empty response found.';
+			}
+		}
+
+		if( isset($response['response_data']) ) {
+		
+			$res['response_data'] = $response['response_data'];	
 		}
 
 		return $res;
 	}
 
-	public static function handle_response($parsed){
+	public static function handle_response($parsed, $throw_types = array('error')){
 		
 		NOTE: here other applicable layers of handle response function can come or may come.
 
-		if( !empty($parsed['sf']) ) {
+		if ( in_array($parsed['type'], $throw_types) ) {
 
-			return $parsed['sf'];
+			throw new \Exception($parsed['type'].": ".$parsed['msg'], 1);
 		}
 
-		foreach ($parsed['sf'] as $sfk => $sfv) {
+		--	nicheni if and comment delete karavani che but ek var confirm karavanu che k koi bija sinario applicable hoy to.
+		-- most probebly nicheni condition not empty nai pan empty hovi joia.	-- to h
+		if( !empty($parsed['response_data']['sf']) ) {
 
-			if( !empty($sfv['st']) ) {
+			return $parsed['response_data']['sf'];
+		}
+
+		if( isset($parsed['response_data']['sf']) ) {
+			
+			foreach ($parsed['response_data']['sf'] as $sfk => $sfv) {
+
+				if( !empty($sfv['st']) ) {
 
 
+				}
 			}
 		}
 		
+		if( isset($parsed['response_data']['data']) ) {
+
+			return $parsed['response_data']['data'];
+		}
+
+		return null;
 	}
 
 }

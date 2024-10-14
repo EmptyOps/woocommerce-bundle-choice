@@ -67,7 +67,7 @@ class Eowbc_Extras extends Eowbc_Model
 				continue;
 			}
 
-			$is_table_save = $key != "prod_extras_pref" ? true : false;
+			$is_table_save = $key == "put_here_sub_tab_key_of_table_entity" ? true : false;
 			$table_data = array();
 			$tab_specific_skip_fileds = $is_table_save ? array('eowbc_price_control_methods_list_bulk') : array();
 

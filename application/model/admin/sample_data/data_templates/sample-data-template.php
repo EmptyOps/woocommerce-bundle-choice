@@ -15351,11 +15351,11 @@ class Sample_Data_Template {
 
                 if($res_save['type'] == 'success') {
 
-                    -- nothing to do so far
+                     // nothing to do so far
 
                 } elseif($res_save['sub_type'] == 'item_exist') {
 
-                    -- nothing to do so far
+                     // nothing to do so far
 
                 } else {
 

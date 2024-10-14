@@ -86,12 +86,12 @@ if (!class_exists('Extensions_Admin_Menu')) {
 
 					$config = $this->SP_Extension->singleton_function()()->config->extras();
 
-					--	here may be we need to use isset function based if condition instead of sizeof function condition below. bessicly weneed to check if the particular section element is present in the array. -- to h and -- to pi 
-					if (is_array($config) && sizeof($config) > 0) {
+					// --	here may be we need to use isset function based if condition instead of sizeof function condition below. bessicly weneed to check if the particular section element is present in the array. -- to h and -- to pi  done entire if is commented 
+					// if (is_array($config) && sizeof($config) > 0) {
 
 						$submenu[] = $this->define_extras_menu();
 
-					}
+					// }
 				}
 			}
 

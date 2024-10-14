@@ -8,7 +8,7 @@ defined('ABSPATH') || exit;
 
 wbc()->load->model('publics/eowbc_base_model_publics');
 
-use eo\wbc\model\publics\Eowbc_Base_Model_Publics;
+use eo\wbc\system\core\publics\Eowbc_Base_Model_Publics;
 
 class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
@@ -26,7 +26,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 		
 	}
 
-	public static function call($url, $query_string, $payload = null) {
+	public static function call($url, $query_string, $payload = null, $throw_types = array('error')) {
 
 		self::additional_data($query_string, $payload);
 
@@ -43,7 +43,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
 	private static function additional_data(&$query_string, &$payload) {
 
-		if ( empty($query_string) ) {
+		if( empty($query_string) ) {
 
 			$query_string = "";
 		}
@@ -137,7 +137,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
 		wbc()->load->model('admin\form-builder');
 
-		$saved_tab_key = !empty(wbc()->sanitize->post("sp_frmb_saved_tab_key")) ? wbc()->sanitize->post("sp_frmb_saved_tab_key") : ( !empty( $args["sp_frmb_saved_tab_key"] ) ? $args["sp_frmb_saved_tab_key"] : "" ); 
+		$saved_tab_key = !empty( $args["hook_callback_args"]["sp_frmb_saved_tab_key"] ) ? $args["hook_callback_args"]["sp_frmb_saved_tab_key"] : ""; 
 		$skip_fileds = array('sp_frmb_saved_tab_key');
 		
 		$save_as_data = array();	
@@ -145,7 +145,8 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
     	//loop through form tabs and save 
 	    foreach ($form_definition as $key => $tab) {
-	    	if( $key != $saved_tab_key ) {
+
+	    	if( 'save' == $mode && $key != $saved_tab_key ) {
 	    		continue;
 	    	}
 	    	
@@ -154,24 +155,27 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 			$is_table_save = false;	//	ACTIVE_TODO/TODO it should be passed from child maybe or make dynamic as applicable. ($key == $this->tab_key_prefix."d_fconfig" or $key == $this->tab_key_prefix."s_fconfig" or $key=='filter_set') ? true : false;
 
 			$table_data = array();
-			$tab_specific_skip_fileds = array();
+			$tab_specific_skip_fileds = array();	ACTIVE_TODO/TODO it will spported only if the hook pass it and so it is available hear in this process_form_definition function in $args variable. means when the process_form_definition function called hear from the hooks fire in this class from abow admin_hooks function.
 
 	    	foreach ($tab["form"] as $fk => $fv) {
 
-			    //loop through form fields, read from POST/GET and save
-			    //may need to check field type here and read accordingly only
-			    //only for those for which POST is set
-				
-			    if( in_array($fv["type"], \eo\wbc\model\admin\Form_Builder::savable_types())) {
+			    if( in_array($fv["type"], \eo\wbc\model\admin\Form_Builder::savable_types()) ) {
+
+			    	//skip fields where applicable
+					if( 'save' == $mode && in_array($fk, $skip_fileds) ) {
+		    			continue;
+		    		}
 
 			    	//skip fields where applicable
 					if( isset($fv["eas"]) && is_array($fv["eas"]) ) {
 
-						$fv = self::inject_onclick_attr($mode, $form_definition, $fv["eas"], $fv);
+						$tab["form"][$fk] = self::inject_onclick_attr($mode, $form_definition, $fv["eas"], $fv);
 
-						if( self::section_should_make_call($mode, $form_definition, $fv["eas"], $fk) ) {
+						$section_fields = self::retrieve_section_fields($tab["form"], $fv["eas"], $fk);
 
-							$section_fields = self::retrieve_section_fields($tab["form"], $fv["eas"], $fk);
+						if( self::section_should_make_call($mode, $form_definition, $fv["eas"], $fk, $section_fields) ) {
+
+							$form_definition[$key]["form"] = $tab["form"];
 
 							$payload = array();
 							$payload['data'] = array();
@@ -196,115 +200,29 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 							}
 
 
-							$parsed = self::call($fv["eas"]["au"] . $fv["eas"]["ep"], , $payload);
+							$parsed = self::call($fv["eas"]["au"] . $fv["eas"]["ep"], "ihk=".$fv["eas"]["ihk"], $payload, array());
 
 
 							$is_positive = self::is_response_positive($parsed);
 
-							$form_definition[$key]["form"] = self::apply_response_msg($is_positive, $mode, $tab["form"], $section_fields, $parsed);
+							$tab["form"] = self::apply_response_msg($is_positive, $mode, $tab["form"], $section_fields, $parsed, $fk);
 
 							$res = null;
 							if( self::should_do_stat_changes($mode, $parsed, $res) ) {
 
-								$form_definition[$key]["form"] = self::apply_stat_changes_to_section($mode, $tab["form"], $section_fields, $parsed, $fk);
+								$tab["form"] = self::apply_stat_changes_to_section($mode, $tab["form"], $section_fields, $parsed, $fk);
 
 								return $res;
 							}
 
-							if( self::should_handle_response($mode, $parsed, $res) ){
+							if( self::should_handle_response($mode, $parsed, $res) ) {
 
-								\eo\wbc\system\core\publics\Eowbc_Base_Model_Publics::handle_response($parsed);		
+								\eo\wbc\system\core\publics\Eowbc_Base_Model_Publics::handle_response($parsed, array());		
 							}
-
-						}
-
-					}
-
-					if( empty($fv['save_as']) or $fv['save_as'] == "default" ) {
-
-						// TODO implement
-
-			    		//save
-				    	if( $is_table_save ) {
-
-				    		// ACTIVE_TODO/TODO to cover logic like below commented logic what we can do is implement maybe callback or simply the hooks mechanisam, but maybe the callbacks are simple and easy to debug and enough for such requirements. so can do callbacks like we did for some class heirarchies -- to s 
-				    		// if( $fk == "d_fconfig_ordering" || $fk == "s_fconfig_ordering" )  {
-				    			
-				    		// 	if($fk=='d_fconfig_ordering' and !empty(wbc()->sanitize->post('first_category_altr_filt_widgts'))){
-				    		// 		$table_data['filter_template'] = apply_filters('eowbc_admin_form_filters_save_d_filter_template',wbc()->sanitize->post('first_category_altr_filt_widgts'));
-				    		// 	} elseif ($fk == "s_fconfig_ordering" and !empty(wbc()->sanitize->post('second_category_altr_filt_widgts'))) {
-				    		// 		$table_data['filter_template'] = apply_filters('eowbc_admin_form_filters_save_s_filter_template',wbc()->sanitize->post('second_category_altr_filt_widgts'));
-				    		// 	}			    			
-					    	// 	$table_data[$fk] = (int)wbc()->sanitize->post($fk); 	
-				    		// }
-				    		// else {
-				    			$table_data[$fk] = ( isset($_POST[$fk]) ? wbc()->sanitize->_post($fk) : '' ); 
-				    		// }
-				    	}
-				    	else {			    		
-				    		
-				    		wbc()->options->update_option('filters_'.$key,$fk,(isset($_POST[$fk])? ( wbc()->sanitize->post($fk) ):'' ) );
-				    	}
-					} elseif( $fv['save_as'] == "post_meta" ) {
-
-						if( !isset($save_as_data['post_meta']) ) {
-
-							$save_as_data['post_meta'] = array();	
-						}
-
-						/*ACTIVE_TODO_OC_START
-						ACTIVE_TODO currently we are doing isset on the isset($args['data_raw']) instead of isset($args['data_raw'][$fk]) means without checking on the $fk so if we face any issues during edit or delete or some such action then need to manage accoringly. 
-						ACTIVE_TODO_OC_END*/
-						if( isset($_POST[$fk]) or isset($args['data_raw']/*[$fk]*/) ) {
-
-							$save_as_data_meta['post_meta_found'] = true;	
-						}
-
-						if(!empty($args['data_raw'])) {
-							// -- as per the flow planned/thought of we ma need only litel logzic here.
-							// 	-- may be all that we need to do is simply read from the form definition itself instad of the post in the below if --to h & -- to s.
-							// 		-- and so since data_raw will not going to passed so maybe the above not empty if condition need to be adjusted with something else -- to h & -- to s
-							// 			-- i had thougt of doing not empty condition in form_definition using $fk but since some value might be set to 0 or empty so not empty will not work and not even isset because isset maybe become true even for normal case of the else condition below.
-							// 				NOTE: it feels that we can not do anything else except the isset so in below if in the ternary operator simply the isset is assed 
-							if (true /*true or since no dependancy on the dm based field so far*/ or !empty($dm_based_field)) {
-
-								// ACTIVE_TODO here we are reading the directly passed custom data inside data_raw element, which is bad practice for security. so we should refactor this as soon as we get a chance and make sure that we either sanitize this or we use the standard input method on we like the post, get, request. but I think it is better that we simply sanitize this custom data by passing it to our sanitize library in the function which is accepting custom data.
-								$save_as_data['post_meta'][$fk] = ( isset($fv/*[$fk]*/['value']) ? $fv/*[$fk]*/['value'] : '' );
-
-							}
-
-						} else {
-							$save_as_data['post_meta'][$fk] = ( isset($_POST[$fk]) ? wbc()->sanitize->_post($fk) : '' ); 
 						}
 					}
-
-
-
 			    }
 			}
-
-			//loop through save_as_data and save 
-		    foreach ($save_as_data as $sadk => $sadv) {
-
-		    	// NOTE: normally for our standard admn layer there is maybe no flow of deleting record if that is not detected, and as far as I can say the delete action is available only for the table/entity based form where user can delete in bulk and so on. but here it is for storage efficiency, cleanlieness and so on the post meta are deleted and will be followed in similar manner for other similar save_as options. 
-
-		    	if( $sadk == "post_meta" ) {
-					
-					// TODO we may like to use post meta api functions like get_post_meta(used above), update_post_meta/delete_post_meta(used below) through our common wp helper 
-
-					if ( !empty( $save_as_data_meta['post_meta_found'] ) ) {
-
-						update_post_meta( $args['id'], $args['page_section'].'_data', $sadv );
-					} else {
-						delete_post_meta( $args['id'], $args['page_section'].'_data' );
-					}
-		    	}
-		    }
-
-			if( $is_table_save ) {
-
-			}
-
 	    }
 
     	if( $mode == 'get' ) {
@@ -319,6 +237,8 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
     private static function inject_onclick_attr($mode, $form_definition, $section_property, $fv) {
 
+    	--	'get' == $mode ni if maravani jaroor ahi che.	-- to h & -- to pi
+
     	if( empty($fv['attr']) ) {
 
     		$fv['attr'] = array();
@@ -326,21 +246,22 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
     	if( !is_array($fv['attr']) ) {
 
-    		throw new \Exception("wbc form builder : The eas filed should defined the 'attr' property in array format only. the string format is not sported.", 1); 
+    		throw new \Exception("WBC Form Builder: The eas field should define the 'attr' property in array format only. Other type format is not supported.", 1); 
     	}
 
-    	NOTE : This is done to anchor decode compatibility.
+    	NOTE : This is done to ensure backward compatibility.
     	if( !isset($fv['attr']['onclick']) ) {
 
     		$fv['attr']['onclick'] = '';
     	}
 
-    	$fv['attr']['onclick'] = "alert('Since you have changed the switch, after save action the api settings will be updated so you need to test the related feature on the website frontend and elsewhere as applicable. And this applies to changes made to any field of this switch section so be sure to test related feature if you have changed any field of this switch section.');" . $fv['attr']['onclick'];
+    	--	nichena msg ma last ma "if you have changed any field of this switch section." text che ene chenge kari ne "when you change any field of this switch section.".	-- to h
+    	$fv['attr']['onclick'] = "alert('Important! Since you have changed the switch, after save action, the api settings will be updated so you need to test the related feature on the website frontend and elsewhere as applicable. And this applies to changes made to any field of this switch section so be sure to test related feature if you have changed any field of this switch section.');" . $fv['attr']['onclick'];
 
     	return $fv;
     }
 
-    private static function section_should_make_call($mode, $form_definition, $section_property, $fk) {
+    private static function section_should_make_call($mode, $form_definition, $section_property, $fk, $section_fields) {
 
     	if( 'get' == $mode ) {
 
@@ -349,7 +270,24 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
     	if( 'save' == $mode ) {
 
-    		if( ( empty( wbc()->options->get_option($section_property['tab_key'], $fk)) && isset( in_array($fv["type"], \eo\wbc\model\admin\Form_Builder::savable_types()) && ( isset($_POST[$fk]) || $fv["type"]=='checkbox') ) ) || ( !empty( wbc()->options->get_option($section_property['tab_key'], $fk) ) && !isset( in_array($fv["type"], \eo\wbc\model\admin\Form_Builder::savable_types()) && ( isset($_POST[$fk]) || $fv["type"]=='checkbox') ) ) ) {
+    		--	below if is not finlize yet.
+    		--	may be we have covered hear only the checkbox type filds but not other so need to conferm about that. -- to h
+    			--	$fv need to be add as argument in this function. -- to h & -- to pi
+    		if( 
+    			( 
+    				empty( wbc()->options->get_option($section_property['tab_key'], $fk) ) 
+    				&& 
+    				( in_array($fv["type"], \eo\wbc\model\admin\Form_Builder::savable_types()) 
+    					&& ( isset($_POST[$fk]) || $fv["type"]=='checkbox') ) 
+    			) 
+    			|| 
+    			( 
+    				!empty( wbc()->options->get_option($section_property['tab_key'], $fk) ) 
+    				&& 
+    				( in_array($fv["type"], \eo\wbc\model\admin\Form_Builder::savable_types()) 
+    					&& ( !isset($_POST[$fk]) || $fv["type"]=='checkbox') ) 
+    			) 
+    		) {
 
     			return true;
     		}
@@ -366,7 +304,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
     		if( $fk == $fk_inner || (isset($fv_inner['easf']) && $fk == $fv_inner['easf']) ) {
 
-    			$section_fields[] = $fv_inner;
+    			$section_fields[$fk_inner] = $fv_inner;
     		}
     	}
 
@@ -375,7 +313,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
     private static function is_response_positive($parsed) {
 
-    	if( isset($parsed['type']) && 'success' == $parsed['type'] ) {
+    	if( isset($parsed['type']) && ('success' == $parsed['type'] && ('success' == $parsed['sub_type'] || 'warning' == $parsed['sub_type'])) ) {
 
     		return true;
     	}
@@ -387,28 +325,40 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
     	if( $is_positive ) {
 
-    		return ;
+    		return;
     	}
 
-    	--	hear we need to prepear the $res form $parsed by creating empty array and save. -- to h & -- to pi
-    	$res = $parsed;
+    	--	hear we need to prepare the $res form $parsed by creating empty array and save. -- to h & -- to pi 	done.
+    	// $res = $parsed;
 
     	if( 'save' == $mode ) {
 
-    		--	from hear most obabely we need to return $res and it will be not prepared by should_return function most obabely. -- to h & -- to pi
+    		--	from hear most probabely we need to return $res and it will be not prepared by should_return function most probabely. -- to h & -- to pi
+    		NOTE: hear we need to set in $res the type != success. but we have set all the standard proparty like type, sub_type and so on to ensuer that if it have required on underlayen layers then teke and directly use it and type != success condition is not nessesry so that is not applyed and type is set for the all scenario. 
+    		$res = array('type' => $parsed['type'], 'msg' => $parsed['msg'], 'sub_type' => $parsed['sub_type'], 'sub_msg' => $parsed['sub_msg']);
     	}
 
     	if( 'get' == $mode ) {
 
-    		$tab_form = self::inject_visible_info_field($mode, $tab_form, $section_property, $fv, $parsed, $fk);
+    		$msg = null;
+
+    		if( 'success' !== $parsed['type'] ) {
+
+    			$msg = $parsed['msg'];
+    		} else {
+
+    			$msg = $parsed['sub_msg'];
+    		}
+
+    		$tab_form = self::inject_visible_info_field($mode, $tab_form, $section_fields, $parsed, $fk, $msg);
     	}
 
     	return $tab_form;
     }
 
-    private static function should_do_stat_changes($mode, $section_fields, $parsed, &$res) {
+    private static function should_do_stat_changes($mode, $parsed, &$res) {
 
-    	if( 'get' == $mode && ( isset($parsed['type']) && 'success' != $parsed['type'] ) ) {
+    	if( 'get' == $mode && ( isset($parsed['type']) && !('success' == $parsed['sub_type'] || 'warning' == $parsed['sub_type']) ) ) {
 
     		return false;
     	}
@@ -422,9 +372,9 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
     	return true;
     }
 
-    private static function should_handle_response($mode, $section_fields, $parsed, &$res) {
+    private static function should_handle_response($mode, $parsed, &$res) {
 
-    	if( 'get' == $mode && ( isset($parsed['type']) && 'error' != $parsed['type'] ) ) {
+    	if( 'get' == $mode && ( isset($parsed['type']) && ('success' == $parsed['sub_type'] || 'warning' == $parsed['sub_type']) ) ) {
 
     		return false;
     	}
@@ -437,49 +387,70 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
     	return true;
     }
 
-    private static function apply_stat_changes_to_section($mode, $tab_form, $section_fields, $parsed, $fk) {
+    private static function apply_stat_changes_to_section($mode --	253.11.4 na recoding ma aa perameter ne remove karavnu kidhu par aa peramter use ma hovathi te remove karyu nathi., $tab_form, $section_fields, $parsed, $fk) {
 
     	foreach ($section_fields as $sfk => $sfv) {
 
     		if( $fk == $sfk ) {
 
-    			--	most obabely we need to make here the switch as non interactive by removeing the applicable proparty entirely or proparty attribute. 
+    			--	most probabely we need to make here the switch as non interactive by removeing the applicable proparty entirely or proparty attribute. 
     		} else {
 
-    			--	hidden for hide.
-    			--	no any class for show.
+    			$string_class = null;
+    			$remove_class_index = null;
+    			
+    			//	in semantic hidden class for hide.
+    			//	in semantic show class for show.
+    			if( is_array($tab_form[$sfk]['size_class']) ) {
+				    
+				    $remove_class_index = array_search('hidden', $tab_form[$sfk]['size_class']);
+				} else {
+				    
+				    $string_class = explode(' ', $tab_form[$sfk]['size_class']);
+				    
+				    $remove_class_index = array_search('hidden', $string_class); 
+				}
 
-    			$remove_class = array_search('hidden', $tab_form['sfk']['size_class']); 
-
-    			if( isset($remove_class) && $remove_class !== false ) {
-
-    				unset($tab_form['sfk']['size_class'][$remove_class]);
-    			}
+				if( isset($remove_class_index) && $remove_class_index !== false ) {
+				    
+				    if( is_array($tab_form[$sfk]['size_class']) ) {
+				        
+				        unset($tab_form[$sfk]['size_class'][$remove_class_index]);
+				    } else {
+				        
+				        unset($string_class[$remove_class_index]);
+				        $tab_form[$sfk]['size_class'] = implode(' ', $string_class); 
+				    }
+				}
     		}
     	}
 
-    	--	most obabely form here we need to return if $mode is save but stil there might be somthing that we need to handle for the save mode but it is mostly unlikely that we have somthing to do . so simply remove the open comment after this function finalizes  -- to h & -- to pi
+    	--	most probabely from here we need to return if $mode is save but stil there might be somthing that we need to handle for the save mode but it is mostly unlikely that we have somthing to do . so simply remove the open comment after this function finalizes  -- to h & -- to pi
     	if( 'save' == $mode ) {
 
-    		return $mode;
+    		return $mode;	--	most probabely record pramane aya return karavano intent khali return karavano hase $mode nai.
     	}
 
     	return $tab_form;
     }
 
-    private static function inject_visible_info_field($mode, $tab_form, $section_property, $fv, $parsed, $fk) {
+    private static function inject_visible_info_field($mode, $tab_form, $section_fields, $parsed, $fk, $msg) {
 
-    	$color = $parsed['type'] === 'error' ? 'red' : 'yellow';
+    	$style = null;
 
-    	$visible_info = array('visible_info' => array(
-    		'label' => eowbc_lang($parsed['msg']),
-    		'type' => 'visible_info',
-    		'class' => array('small'),
-    		// 'size_class'=>array('sixteen','wide'),
-    		'attr'=>array('style = "color:'.$color.';"'),
-    	),);
+    	$style .= $parsed['type'] === 'error' ? 'color: red;' : '';
+		$style .= $parsed['type'] === 'warning' ? 'background-color: yellow;' : '';
 
-    	$tab_form = wbc()->common->array_insert_before($tab_form, $fk, $fk.'_eas_visible_info', $visible_info);
+    	$visible_info = array(
+				    		'label' => eowbc_lang($msg),
+				    		'type' => 'visible_info',
+				    		'class' => array('small'),
+				    		// 'size_class'=>array('sixteen','wide'),
+				    		'attr'=>array('style = "'.$style.'"'),
+	    				);
+
+    	--	ahi may be after add karavnu avse so me to add just a argument spport inside below function.	-- to h & -- to pi
+    	$tab_form = wbc()->common->array_insert_before($tab_form, $fk, $fk.'_eas_visible_info', $visible_info, true);
 
     	return $tab_form;
     }
