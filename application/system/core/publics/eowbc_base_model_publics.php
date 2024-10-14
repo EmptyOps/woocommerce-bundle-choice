@@ -197,7 +197,16 @@ class Eowbc_Base_Model_Publics {
 
 				if( !empty($sfv['st']) ) {
 
+					if( 'image' == $sfv['st'] ) {
 
+						wbc_file_write( $sfv['p'], $sfv['value'] );
+					} else {
+
+						--	may be hear we need to add support for unknown if required by simply saving the option.
+					}
+				} else {
+
+					wbc()->options->update_option( $sfv['--	need to add the proprty key hear.'], $sfv['value'] );
 				}
 			}
 		}

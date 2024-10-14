@@ -203,19 +203,20 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 							$parsed = self::call($fv["eas"]["au"] . $fv["eas"]["ep"], "ihk=".$fv["eas"]["ihk"], $payload, array());
 
 
-							$is_positive = self::is_response_positive($parsed);
+							$is_apply_response_msg = self::is_apply_response_msg($parsed, $fv["eas"]);
 
-							$tab["form"] = self::apply_response_msg($is_positive, $mode, $tab["form"], $section_fields, $parsed, $fk);
+							$res = $args['res'];
 
-							$res = null;
-							if( self::should_do_stat_changes($mode, $parsed, $res) ) {
+							$tab["form"] = self::apply_response_msg($is_apply_response_msg, $mode, $tab["form"], $section_fields, $parsed, $fk, $res);
+
+							$args['res'] = $res;
+
+							if( self::should_do_stat_changes($mode, $parsed) ) {
 
 								$tab["form"] = self::apply_stat_changes_to_section($mode, $tab["form"], $section_fields, $parsed, $fk);
-
-								return $res;
 							}
 
-							if( self::should_handle_response($mode, $parsed, $res) ) {
+							if( self::should_handle_response($mode, $parsed) ) {
 
 								\eo\wbc\system\core\publics\Eowbc_Base_Model_Publics::handle_response($parsed, array());		
 							}
@@ -237,7 +238,10 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
     private static function inject_onclick_attr($mode, $form_definition, $section_property, $fv) {
 
-    	--	'get' == $mode ni if maravani jaroor ahi che.	-- to h & -- to pi
+    	if( 'save' == $mode ) {
+
+    		return $fv;
+    	}
 
     	if( empty($fv['attr']) ) {
 
@@ -311,9 +315,24 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
     	return $section_fields;
     }
 
-    private static function is_response_positive($parsed) {
+    private static function is_apply_response_msg($parsed, $section_property) {
 
-    	if( isset($parsed['type']) && ('success' == $parsed['type'] && ('success' == $parsed['sub_type'] || 'warning' == $parsed['sub_type'])) ) {
+    	if( isset($parsed['type'])
+    	 && 
+    	 !(
+    	 	'success' == $parsed['type'] 
+    	 	&& 
+    	 	(
+    	 		'success' == $parsed['sub_type'] 
+    	 		&& 
+    	 		!( 
+    	 			isset($section_property['dap']) 
+    	 			&& 
+    	 			$section_property['dap'] 
+    	 		)
+    	 	)
+    	 ) 
+    	) {
 
     		return true;
     	}
@@ -321,9 +340,9 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
     	return false;
     }
 
-    private static function apply_response_msg($is_positive, $mode, $tab_form, $section_fields, $parsed, $fk) {
+    private static function apply_response_msg($is_apply_response_msg, $mode, $tab_form, $section_fields, $parsed, $fk, &$res) {
 
-    	if( $is_positive ) {
+    	if( !$is_apply_response_msg ) {
 
     		return;
     	}
@@ -356,7 +375,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
     	return $tab_form;
     }
 
-    private static function should_do_stat_changes($mode, $parsed, &$res) {
+    private static function should_do_stat_changes($mode, $parsed) {
 
     	if( 'get' == $mode && ( isset($parsed['type']) && !('success' == $parsed['sub_type'] || 'warning' == $parsed['sub_type']) ) ) {
 
@@ -365,14 +384,13 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
     	if( 'save' == $mode ) {
 
-    		--	hear we need to diside what is need to be done.
     		return false;
     	}
 
     	return true;
     }
 
-    private static function should_handle_response($mode, $parsed, &$res) {
+    private static function should_handle_response($mode, $parsed) {
 
     	if( 'get' == $mode && ( isset($parsed['type']) && ('success' == $parsed['sub_type'] || 'warning' == $parsed['sub_type']) ) ) {
 
@@ -387,7 +405,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
     	return true;
     }
 
-    private static function apply_stat_changes_to_section($mode --	253.11.4 na recoding ma aa perameter ne remove karavnu kidhu par aa peramter use ma hovathi te remove karyu nathi., $tab_form, $section_fields, $parsed, $fk) {
+    private static function apply_stat_changes_to_section($mode, $tab_form, $section_fields, $parsed, $fk) {
 
     	foreach ($section_fields as $sfk => $sfv) {
 
@@ -425,12 +443,6 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
     		}
     	}
 
-    	--	most probabely from here we need to return if $mode is save but stil there might be somthing that we need to handle for the save mode but it is mostly unlikely that we have somthing to do . so simply remove the open comment after this function finalizes  -- to h & -- to pi
-    	if( 'save' == $mode ) {
-
-    		return $mode;	--	most probabely record pramane aya return karavano intent khali return karavano hase $mode nai.
-    	}
-
     	return $tab_form;
     }
 
@@ -438,8 +450,11 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
     	$style = null;
 
-    	$style .= $parsed['type'] === 'error' ? 'color: red;' : '';
-		$style .= $parsed['type'] === 'warning' ? 'background-color: yellow;' : '';
+    	$type = $parsed['type'] != 'success' ? $parsed['type'] : $parsed['sub_type'];
+
+    	$style .= $type === 'error' ? 'color: red;' : '';
+		$style .= $type === 'warning' ? 'background-color: yellow;' : '';
+		$style .= $type === 'success' ? 'color: green;' : '';
 
     	$visible_info = array(
 				    		'label' => eowbc_lang($msg),

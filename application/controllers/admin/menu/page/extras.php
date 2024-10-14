@@ -276,6 +276,7 @@ if (!class_exists('Extras')) {
 							'options' => array('1' => ' '),
 							'is_id_as_name' => true,
 							'class' => array(),	
+							'esa' => array('ihk' => null, 'ep' => '', 'au' => '', 'dap' => true),
 						),
 						'extras_save_btn' => array(
 							'label' => eowbc_lang('Save'),
