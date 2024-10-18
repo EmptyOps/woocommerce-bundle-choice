@@ -199,10 +199,10 @@ class Eowbc_Base_Model_Publics {
 
 					if( 'image' == $sfv['st'] ) {
 
-						wbc_file_write( $sfv['p'], $sfv['value'] );
+						wbc()->file->file_write( $sfv['p'], $sfv['value'] );
 					} else {
 
-						--	may be hear we need to add support for unknown if required by simply saving the option.
+						--	may be hear we need to add support for unknown if required by simply save in the option.
 					}
 				} else {
 
