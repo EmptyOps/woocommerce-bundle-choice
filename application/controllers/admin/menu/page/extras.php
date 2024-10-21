@@ -270,25 +270,14 @@ if (!class_exists('Extras')) {
 						),
 						'activate'=>array(
 							'label'=>'Activate',
-							'type'=>'link',
-							'attr'=>array("href=#"),
-							'class'=>array('secondary')	
+							'type' => 'checkbox',
+							'sanitize' => 'sanitize_text_field',
+							'value' => '',
+							'options' => array('1' => ' '),
+							'is_id_as_name' => true,
+							'class' => array(),	
+							'esa' => array('ihk' => null, 'ep' => '', 'au' => '', 'dap' => true),
 						),
-						'activate_visible_info'=>array(
-							'label'=>eowbc_lang('The extensions status is currently Activate/Deactivate'),
-							'type'=>'visible_info',
-							'class'=>array('fluid', 'medium'),
-							'size_class'=>array('sixteen','wide'),
-							'inline'=>false,
-							'attr'=>array('style="color:green"'),
-						),
-						// 'extras_general_tab_visible_info'=>array(
-						// 	'label'=>eowbc_lang('(Determine how the product extra should behave. For example AND means product belongs to both category/attribute A and B, OR means product belongs to either of category/attribute A or B)'),
-						// 	'type'=>'visible_info',
-						// 	'class'=>array('fluid', 'medium'),
-						// 	'size_class'=>array('sixteen','wide'),
-						// 	'inline'=>false,
-						// ), 
 						'extras_save_btn' => array(
 							'label' => eowbc_lang('Save'),
 							'type' => 'button',
