@@ -44,7 +44,7 @@ try {
     );
 
 } catch (Exception $e) {
-	
+
     // Generic Exception class, to catch any other PHP errors
     $res = array(
         "type" => "error",

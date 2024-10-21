@@ -85,7 +85,7 @@ try {
 		elseif(wbc()->sanitize->post('type')=='after_cat_created') {
 	        $res_temp = call_user_func(array($class_name,'instance'))->after_cat_created(wbc()->sanitize->post('feature_key'));
 
-	        if(is_array($res_temp) && $res_temp) {
+	        if(is_array($res_temp)) {
 
 	        	$res = $res_temp;
 	        }
@@ -93,7 +93,7 @@ try {
 		elseif(wbc()->sanitize->post('type')=='after_attr_created') {
 			$res_temp = call_user_func(array($class_name,'instance'))->after_attr_created(wbc()->sanitize->post('feature_key'));
 
-			if(is_array($res_temp) && $res_temp) {
+			if(is_array($res_temp)) {
 
 	        	$res = $res_temp;
 	        }
@@ -104,6 +104,7 @@ try {
 	}
 
 } catch (\Throwable $e) {
+
     // Check if the exception has a message method and get the message, otherwise create a generic error message
     if (method_exists($e, 'getMessage')) {
         $errorMessage = $e->getMessage();
@@ -114,14 +115,15 @@ try {
     // Store the error details in the $res array
     $res = array(
         "type" => "error",
-        "msg"  => !empty($errorMessage) ? $errorMessage : "There is some error in this sample data PHP process for the feature 'Category/attribute'."
+        "msg"  => !empty($errorMessage) ? $errorMessage : "There is some error in this sample data PHP process for the feature 'Category/Attribute'."
     );
 
 } catch (Exception $e) {
+
     // Generic Exception class, to catch any other PHP errors
     $res = array(
         "type" => "error",
-        "msg"  => $e->getMessage() ?: "There is some error in this sample data PHP process for the feature 'Category/attribute'."
+        "msg"  => $e->getMessage() ?: "There is some error in this sample data PHP process for the feature 'Category/Attribute'."
     );
 
 }

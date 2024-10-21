@@ -29,6 +29,7 @@ try {
 		$res["msg"] = "Nonce validation failed";
 	}
 } catch (\Throwable $e) {
+
     // Check if the exception has a message method and get the message, otherwise create a generic error message
     if (method_exists($e, 'getMessage')) {
         $errorMessage = $e->getMessage();
@@ -39,14 +40,15 @@ try {
     // Store the error details in the $res array
     $res = array(
         "type" => "error",
-        "msg"  => !empty($errorMessage) ? $errorMessage : "There is some error in this sample data PHP process for the feature 'Category/Shop/Filter'."
+        "msg"  => !empty($errorMessage) ? $errorMessage : "There is some error in this sample data PHP process for the feature 'Shop/Category Filters'."
     );
 
 } catch (Exception $e) {
+
     // Generic Exception class, to catch any other PHP errors
     $res = array(
         "type" => "error",
-        "msg"  => $e->getMessage() ?: "There is some error in this sample data PHP process for the feature 'Category/Shop/Filter'."
+        "msg"  => $e->getMessage() ?: "There is some error in this sample data PHP process for the feature 'Shop/Category Filters'."
     );
 
 }
