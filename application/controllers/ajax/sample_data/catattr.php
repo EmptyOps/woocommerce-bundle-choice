@@ -87,7 +87,10 @@ try {
 
 	        if(is_array($res_temp)) {
 
-	        	$res = $res_temp;
+	        	if(isset($res_temp['type']) && isset($res_temp['msg'])) {
+
+	        		$res = $res_temp;
+	        	}
 	        }
 		} 
 		elseif(wbc()->sanitize->post('type')=='after_attr_created') {
@@ -95,7 +98,10 @@ try {
 
 			if(is_array($res_temp)) {
 
-	        	$res = $res_temp;
+	        	if(isset($res_temp['type']) && isset($res_temp['msg'])) {
+
+	        		$res = $res_temp;
+	        	}
 	        }
 		} 	
 	} else {
@@ -109,13 +115,13 @@ try {
     if (method_exists($e, 'getMessage')) {
         $errorMessage = $e->getMessage();
     } else {
-        $errorMessage = "An unknown error occurred.";
+        $errorMessage = "There is some error in this sample data PHP process for the feature 'Category/Attribute'.";
     }
     
     // Store the error details in the $res array
     $res = array(
         "type" => "error",
-        "msg"  => !empty($errorMessage) ? $errorMessage : "There is some error in this sample data PHP process for the feature 'Category/Attribute'."
+        "msg"  => $errorMessage
     );
 
 } catch (Exception $e) {

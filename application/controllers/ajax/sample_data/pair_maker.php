@@ -33,13 +33,13 @@ try {
     if (method_exists($e, 'getMessage')) {
         $errorMessage = $e->getMessage();
     } else {
-        $errorMessage = "An unknown error occurred.";
+        $errorMessage = "There is some error in this sample data PHP process for the feature 'Pair Maker'.";
     }
     
     // Store the error details in the $res array
     $res = array(
         "type" => "error",
-        "msg"  => !empty($errorMessage) ? $errorMessage : "There is some error in this sample data PHP process for the feature 'Pair Maker'."
+        "msg"  => $errorMessage
     );
 
 } catch (Exception $e) {
