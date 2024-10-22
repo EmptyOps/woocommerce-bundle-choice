@@ -184,13 +184,6 @@ class Eowbc_Base_Model_Publics {
 			throw new \Exception($parsed['type'].": ".$parsed['msg'], 1);
 		}
 
-		--	nicheni if and comment delete karavani che but ek var confirm karavanu che k koi bija sinario applicable hoy to.
-		-- most probebly nicheni condition not empty nai pan empty hovi joia.	-- to h
-		if( !empty($parsed['response_data']['sf']) ) {
-
-			return $parsed['response_data']['sf'];
-		}
-
 		if( isset($parsed['response_data']['sf']) ) {
 			
 			foreach ($parsed['response_data']['sf'] as $sfk => $sfv) {

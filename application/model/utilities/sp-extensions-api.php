@@ -176,8 +176,6 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
 						if( self::section_should_make_call($mode, $form_definition, $fv["eas"], $fk, $section_fields) ) {
 
-							$form_definition[$key]["form"] = $tab["form"];
-
 							$payload = array();
 							$payload['data'] = array();
 
@@ -222,6 +220,9 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 								\eo\wbc\system\core\publics\Eowbc_Base_Model_Publics::handle_response($parsed, array());		
 							}
 						}
+
+						$form_definition[$key]["form"] = $tab["form"];
+						
 					}
 			    }
 			}
