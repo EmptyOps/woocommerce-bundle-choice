@@ -95,6 +95,32 @@ if(!class_exists('WBC_Loader')) {
 					wbc()->load->asset('css', constant('EOWBC_ASSET_URL') . 'css/rangeslider/ion.rangeSlider.min.css',array(),"",true,true,null,null,false,true,null,true);
 					wbc()->load->asset('js', constant('EOWBC_ASSET_URL') . 'js/rangeslider/ion.rangeSlider.min.js', wbc()->common->current_theme_key() != "themes___purple_theme" ? array():array('jquery'),"",true,true,null,null,false,true,null,true);
 					break;
+				case 'wc_price':
+		        	
+		        	if( wbc()->sanitize->get('is_test') == 1 ) {
+    				
+						wbc_pr('wc_price case constant is '. $constant);
+    				}
+		        	
+		        	add_action( 'wp_enqueue_scripts', function() {
+
+		        	    // Enqueue the external script wc_price.js
+		        	    wp_enqueue_script( 'wc-price-js', defined( 'EOWBC_ASSET_URL' ) . 'js/woocommerce-price/wc_price.js', array( 'jquery' ), '1.0', false );
+
+		        	    // Prepare WooCommerce settings to pass to JavaScript
+		        	    $wc_store_object = array(
+		        	        'currency_symbol' => html_entity_decode( get_woocommerce_currency_symbol( get_woocommerce_currency() ), ENT_QUOTES, 'UTF-8' ),
+		        	        'currency_position' => get_option( 'woocommerce_currency_pos', true ),
+		        	        'decimal_separator' => wc_get_price_decimal_separator(),
+		        	        'currency_format_trim_zeros' => wc_get_price_thousand_separator(),
+		        	        'currency_format_num_decimals' => wc_get_price_decimals(),
+		        	        'price_format' => get_woocommerce_price_format(),
+		        	    );
+
+		        	    // Add inline script with the WooCommerce settings
+		        	    wp_add_inline_script( 'wc-price-js', 'var wc_settings_args = ' . wp_json_encode( $wc_store_object ) . ';' );
+		        	});
+					break;
 				default:				
 					break;
 			}			
