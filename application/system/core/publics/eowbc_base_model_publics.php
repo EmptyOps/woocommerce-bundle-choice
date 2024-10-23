@@ -96,9 +96,9 @@ class Eowbc_Base_Model_Publics {
 			throw new \Exception("There is some error in the api call response.", 1);
 		} elseif ( is_wp_error($response) ) {
 
-			if( is_object($response) && method_exists($response, 'get_error_message') ){
+			if( is_object($response) && method_exists($response, 'get_error_message') ) {
 
-				throw new \Exception("There is some error in the api call. error massege: " . $response->get_error_message(), 1);
+				throw new \Exception("There is some error in the api call. Error massege: " . $response->get_error_message(), 1);
 			} else {
 
 				throw new \Exception("There is some error in the api call response.", 1);
@@ -184,13 +184,6 @@ class Eowbc_Base_Model_Publics {
 			throw new \Exception($parsed['type'].": ".$parsed['msg'], 1);
 		}
 
-		--	nicheni if and comment delete karavani che but ek var confirm karavanu che k koi bija sinario applicable hoy to.
-		-- most probebly nicheni condition not empty nai pan empty hovi joia.	-- to h
-		if( !empty($parsed['response_data']['sf']) ) {
-
-			return $parsed['response_data']['sf'];
-		}
-
 		if( isset($parsed['response_data']['sf']) ) {
 			
 			foreach ($parsed['response_data']['sf'] as $sfk => $sfv) {
@@ -199,10 +192,10 @@ class Eowbc_Base_Model_Publics {
 
 					if( 'image' == $sfv['st'] ) {
 
-						wbc_file_write( $sfv['p'], $sfv['value'] );
+						wbc()->file->file_write( $sfv['p'], $sfv['value'] );
 					} else {
 
-						--	may be hear we need to add support for unknown if required by simply saving the option.
+						--	may be hear we need to add support for unknown if required by simply save in the option.
 					}
 				} else {
 

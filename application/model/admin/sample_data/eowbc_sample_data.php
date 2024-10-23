@@ -79,12 +79,12 @@ class Eowbc_Sample_Data {
 	        // 	$this->add_maps($_maps);
 	      	// }
 
-	        $this->data_template->set_configs_after_categories($catat_category);
+	        return $this->data_template->set_configs_after_categories($catat_category);
 	    } else {
 
 	    	if($this->data_template instanceof \eo\wbc\model\admin\sample_data\data_templates\Extensions_Data_Template) {
 
-	    		$this->data_template->set_configs_after_categories(array());
+	    		return $this->data_template->set_configs_after_categories(array());
 	    	}
 	    }
 	}
@@ -110,15 +110,17 @@ class Eowbc_Sample_Data {
 	      	}	        
 
 	        // update_option('eo_wbc_filter_enable','1');    
-	        $this->data_template->set_configs_after_attributes();
+	        $res = $this->data_template->set_configs_after_attributes();
 
 	        wbc()->options->delete($feature_key.'_created_attribute');
+
+	        return $res;
 	        
 	    } else {
 
 	    	if($this->data_template instanceof \eo\wbc\model\admin\sample_data\data_templates\Extensions_Data_Template) {
 
-	    		$this->data_template->set_configs_after_attributes();
+	    		return $this->data_template->set_configs_after_attributes();
 	    	}
 	    }
 	}

@@ -149,13 +149,14 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 	    	if( 'save' == $mode && $key != $saved_tab_key ) {
 	    		continue;
 	    	}
-	    	
+
+	    	--	nicheno key_clean variable comment karavo padashe kem k tene variable dipendency che so jaroor no hoy to comment. -- to h & -- to pi	
 	    	$key_clean = ((!empty($this->tab_key_prefix) and strpos($key,$this->tab_key_prefix)===0)?substr($key,strlen($this->tab_key_prefix)):$key);
 	    	//$res['data_form'][]= $tab;
 			$is_table_save = false;	//	ACTIVE_TODO/TODO it should be passed from child maybe or make dynamic as applicable. ($key == $this->tab_key_prefix."d_fconfig" or $key == $this->tab_key_prefix."s_fconfig" or $key=='filter_set') ? true : false;
 
 			$table_data = array();
-			$tab_specific_skip_fileds = array();	ACTIVE_TODO/TODO it will spported only if the hook pass it and so it is available hear in this process_form_definition function in $args variable. means when the process_form_definition function called hear from the hooks fire in this class from abow admin_hooks function.
+			$tab_specific_skip_fileds = array();	ACTIVE_TODO/TODO it will be spported only if the hook pass it and so it is available here in this process_form_definition function in $args variable. means when the process_form_definition function called here from the hooks bound in this class from abow admin_hooks function.
 
 	    	foreach ($tab["form"] as $fk => $fv) {
 
@@ -174,8 +175,6 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 						$section_fields = self::retrieve_section_fields($tab["form"], $fv["eas"], $fk);
 
 						if( self::section_should_make_call($mode, $form_definition, $fv["eas"], $fk, $section_fields) ) {
-
-							$form_definition[$key]["form"] = $tab["form"];
 
 							$payload = array();
 							$payload['data'] = array();
@@ -221,6 +220,9 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 								\eo\wbc\system\core\publics\Eowbc_Base_Model_Publics::handle_response($parsed, array());		
 							}
 						}
+
+						$form_definition[$key]["form"] = $tab["form"];
+						
 					}
 			    }
 			}
