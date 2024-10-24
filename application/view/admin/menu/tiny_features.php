@@ -4,6 +4,41 @@ defined( 'ABSPATH' ) || exit;
 
 wbc()->load->model('category-attribute');
 
+// swatches pro extention 
+$wbc_vsp_active = function_exists('wbc_vsp');
+$wbc_vsp_is_disabled = false;
+// $wbc_vsp_option_label_class = array();
+--	ahiya empty array $ var aa wbc_vsp_hide_show_swatches_field name thi banvo.
+$wbc_vsp_option_container_class = array();
+if(!$wbc_vsp_active) {
+	$wbc_vsp_is_disabled = true;
+	// $wbc_vsp_option_label_class = array('lock');
+	$wbc_vsp_hide_show_swatches_field = array(
+		'enable_for_product_page_addon' => array(
+			'label'=>'Enable For Product Page (Addon)',
+			'type'=>'checkbox',
+			'sanitize'=>'sanitize_text_field',
+			'value'=>array(),
+			'options'=>array('enable_for_product_page_addon'=>' '),
+			'class'=>array(),
+			'size_class'=>array('eight','wide'),
+			'inline'=>true,
+			'eas'=>array('ihk' => self::tv_for_product_page_backend_settings['ihk'], 'au' => self::tv_for_product_page_backend_settings['host'], 'ep'  =>self::tv_for_product_page_backend_settings['endpoint']),
+		),
+		'show_on_button_click' => array(
+			'label'=>'Show On Button Click',
+			'type'=>'checkbox',
+			'sanitize'=>'sanitize_text_field',
+			'value'=>array('show_on_button_click'),
+			'options'=>array('show_on_button_click'=>' '),
+			'class'=>array(),
+			'size_class'=>array('eight','wide'),
+			'inline'=>true,
+			'easf'=>array('enable_for_product_page_addon'),
+		),
+	);
+}
+
 $form = array();
 
 $filter_table = array();
@@ -666,6 +701,7 @@ $form['data'] = array(
 					'size_class'=>array('three','wide'),
 					'inline'=>false,	
 				),
+				$wbc_vsp_hide_show_swatches_field = array(),
 				'tiny_features_advanced_tab_end'=>array(
 					'type'=>'accordian',
 					'section_type'=>'end'

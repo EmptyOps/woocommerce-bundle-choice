@@ -89,9 +89,24 @@ box-shadow: none;">
 		                			<?php
 		                			$primary_color = wbc()->options->get_option('appearance_global','theme_primary_color'); 
 		                			$secondary_color = wbc()->options->get_option('appearance_global','theme_secondary_color');
+
+									$primary_color_shade_light_90 = wbc()->options->get_option('appearance_global','theme_primary_color_shade_light_90'); 
+		                			$secondary_color_shade_light_90 = wbc()->options->get_option('appearance_global','theme_secondary_color_shade_light_90');
+
+									$primary_color_shade_light_80 = wbc()->options->get_option('appearance_global','theme_primary_color_shade_light_80'); 
+		                			$secondary_color_shade_light_80 = wbc()->options->get_option('appearance_global','theme_secondary_color_shade_light_80');
+
+									$primary_color_shade_light_60 = wbc()->options->get_option('appearance_global','theme_primary_color_shade_light_60'); 
+		                			$secondary_color_shade_light_60 = wbc()->options->get_option('appearance_global','theme_secondary_color_shade_light_60');
+
+									$primary_color_shade_light_50 = wbc()->options->get_option('appearance_global','theme_primary_color_shade_light_50'); 
+		                			$secondary_color_shade_light_50 = wbc()->options->get_option('appearance_global','theme_secondary_color_shade_light_50');
+									
+									$primary_color_shade_light_40 = wbc()->options->get_option('appearance_global','theme_primary_color_shade_light_40'); 
+		                			$secondary_color_shade_light_40 = wbc()->options->get_option('appearance_global','theme_secondary_color_shade_light_40');
 		                			?> 
 
-		                  			<?php if(empty($primary_color) || empty($secondary_color)):?> 
+		                  			<?php if(empty($primary_color) || empty($secondary_color) || empty($primary_color_shade_light_90) || empty($secondary_color_shade_light_90) || empty($primary_color_shade_light_80) || empty($secondary_color_shade_light_80) || empty($primary_color_shade_light_60) || empty($secondary_color_shade_light_60) || empty($primary_color_shade_light_50) || empty($secondary_color_shade_light_50) || empty($primary_color_shade_light_40) || empty($secondary_color_shade_light_40)):?> 
 
 		                  				<p style = "color:red;">It seems that you have not yet set the Primary Color or Secondary Color. So please go to below link and set the Primary Color and Secondary Color.</p><br><br>
 
@@ -136,12 +151,27 @@ box-shadow: none;">
 
 	              		<?php if($sample_data_obj->get_model()->additional_initial_step_key($_step) == 'generate_assets'):?>
 
-	              			<?php
-	                			$primary_color = wbc()->options->get_option('appearance_global','theme_primary_color'); 
-	                			$secondary_color = wbc()->options->get_option('appearance_global','theme_secondary_color');
-		                	?> 
+							<?php
+							$primary_color = wbc()->options->get_option('appearance_global','theme_primary_color'); 
+							$secondary_color = wbc()->options->get_option('appearance_global','theme_secondary_color');
 
-		                	<?php if(!empty($primary_color) && !empty($secondary_color)):?>
+							$primary_color_shade_light_90 = wbc()->options->get_option('appearance_global','theme_primary_color_shade_light_90'); 
+							$secondary_color_shade_light_90 = wbc()->options->get_option('appearance_global','theme_secondary_color_shade_light_90');
+
+							$primary_color_shade_light_80 = wbc()->options->get_option('appearance_global','theme_primary_color_shade_light_80'); 
+							$secondary_color_shade_light_80 = wbc()->options->get_option('appearance_global','theme_secondary_color_shade_light_80');
+
+							$primary_color_shade_light_60 = wbc()->options->get_option('appearance_global','theme_primary_color_shade_light_60'); 
+							$secondary_color_shade_light_60 = wbc()->options->get_option('appearance_global','theme_secondary_color_shade_light_60');
+
+							$primary_color_shade_light_50 = wbc()->options->get_option('appearance_global','theme_primary_color_shade_light_50'); 
+							$secondary_color_shade_light_50 = wbc()->options->get_option('appearance_global','theme_secondary_color_shade_light_50');
+							
+							$primary_color_shade_light_40 = wbc()->options->get_option('appearance_global','theme_primary_color_shade_light_40'); 
+							$secondary_color_shade_light_40 = wbc()->options->get_option('appearance_global','theme_secondary_color_shade_light_40');
+							?>  
+
+		                	<?php if(!empty($primary_color) && !empty($secondary_color) && !empty($primary_color_shade_light_90) && !empty($secondary_color_shade_light_90) && !empty($primary_color_shade_light_80) && !empty($secondary_color_shade_light_80) && !empty($primary_color_shade_light_60) && !empty($secondary_color_shade_light_60) && !empty($primary_color_shade_light_50) && !empty($secondary_color_shade_light_50) && !empty($primary_color_shade_light_40) && !empty($secondary_color_shade_light_40)):?>
 
 		                  		<input type="submit" name="save" value="<?php printf(__("Generate assets","woo-bundle-choice")); ?>"  class="button button-primary button-hero action ui button secondary">
 
