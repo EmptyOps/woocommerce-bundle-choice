@@ -53,7 +53,9 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
 			if( is_string($api_settings) ) {
 
-				parse_str($api_settings, $query_string);
+				$api_settings_temp = null;
+				parse_str($api_settings, $api_settings_temp);
+				$api_settings = $api_settings_temp;
 			}
 		}
 
@@ -394,22 +396,22 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
     private static function is_apply_response_msg($parsed, $section_property) {
 
-    	if( isset($parsed['type'])
-    	 && 
-    	 !(
-    	 	'success' == $parsed['type'] 
+    	if( 
+			isset($parsed['type'])
     	 	&& 
-    	 	(
-    	 		'success' == $parsed['sub_type'] 
-    	 		&& 
-    	 		!( 
-    	 			isset($section_property['dap']) 
-    	 			&& 
-    	 			$section_property['dap'] 
-    	 		)
-    	 	)
-    	 ) 
-    	) {
+			!(
+				'success' == $parsed['type'] 
+				&& 
+				(
+					'success' == $parsed['sub_type'] 
+					&& 
+					!( 
+						isset($section_property['dap']) 
+						&& 
+						$section_property['dap'] 
+					)
+				)
+			) ) {
 
     		return true;
     	}
@@ -454,7 +456,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
     private static function should_do_stat_changes($mode, $parsed) {
 
-    	if( 'get' == $mode && ( isset($parsed['type']) && !('success' == $parsed['sub_type'] || 'warning' == $parsed['sub_type']) ) ) {
+    	if( 'get' == $mode && ( isset($parsed['type']) && !( 'success' == $parsed['type'] && ('success' == $parsed['sub_type'] || 'warning' == $parsed['sub_type']) ) ) ) {
 
     		return false;
     	}
@@ -469,7 +471,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
     private static function should_handle_response($mode, $parsed) {
 
-    	if( 'get' == $mode && ( isset($parsed['type']) && ('success' == $parsed['sub_type'] || 'warning' == $parsed['sub_type']) ) ) {
+    	if( 'get' == $mode && ( isset($parsed['type']) && ( 'success' == $parsed['type'] && ('success' == $parsed['sub_type'] || 'warning' == $parsed['sub_type']) ) ) ) {
 
     		return false;
     	}
