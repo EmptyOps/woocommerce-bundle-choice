@@ -23,7 +23,7 @@ if(!$wbc_vsp_active) {
 			'class'=>array(),
 			'size_class'=>array('eight','wide'),
 			'inline'=>true,
-			'eas'=>array('ihk' => self::tv_for_product_page_backend_settings['ihk'], 'au' => self::tv_for_product_page_backend_settings['host'], 'ep'  =>self::tv_for_product_page_backend_settings['endpoint']),
+			'eas'=>array('ihk' => self::tv_for_product_page_backend_settings['ihk'], 'au' => self::tv_for_product_page_backend_settings['host'], 'ep'  =>self::tv_for_product_page_backend_settings['endpoint'], 'tab_key' => 'tiny_features'),
 		),
 		'show_on_button_click' => array(
 			'label'=>'Show On Button Click',

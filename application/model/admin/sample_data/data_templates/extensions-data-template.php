@@ -75,7 +75,7 @@ class Extensions_Data_Template extends \eo\wbc\model\admin\sample_data\data_temp
 
     public function generate_assets($feature_key, $args = array()) {
 
-        $parsed = \eo\wbc\model\utilities\SP_Extensions_Api::call($args['api_setting']['host'].$args['api_setting']['endpoint'], "ihk=".$args['api_setting']['ihk'], array('sp_api_sf' => 'sp_dm' -- aa may be rakhvanu che to $args ma 4 extension class mathi pass krvanu avse and ahi pchi dynamic krvu or may be ani jarur nthi since we are passing feature key from here, 'sp_api_fk' => $feature_key));
+        $parsed = \eo\wbc\model\utilities\SP_Extensions_Api::call($args['api_setting']['host'].$args['api_setting']['endpoint'], "ihk=".$args['api_setting']['ihk'], array('sp_api_sf' => $args['api_setting']['sp_api_sf'], 'sp_api_fk' => $feature_key));
 
         if ('error' == $parsed['sub_type']) {
 
