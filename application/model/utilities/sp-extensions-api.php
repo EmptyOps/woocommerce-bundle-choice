@@ -26,15 +26,59 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 		
 	}
 
-	public static function call($url, $query_string, $payload = null, $throw_types = array('error')) {
+	private static function apply_input_by_method(&$url, &$post_fields, $api_settings, $payload, $args) {
 
-		self::additional_data($query_string, $payload);
+		if( 'wp_remote_get' == $args['method'] ) {
 
-		$url .= (strpos($url, '?') !== FALSE ? $query_string : "?" . $query_string);
+			$query_string = array_merge($api_settings, $payload);
 
-		$result = wp_remote_get($url);
+			// Build the query string
+			$query_string = http_build_query($query_string);
 
-		$parsed = \eo\wbc\system\core\publics\Eowbc_Base_Model_Publics::parse_response($result, 'wp_remote_get');
+			$url .= (strpos($url, '?') !== FALSE ? $query_string : "?" . $query_string);
+		} elseif( 'wp_remote_post' == $args['method'] ) {
+
+			ACTIVE_TODO aa array merge opretion karu che pan a haji wp_remote_post ma jeva post perameter sport kare che post mate k data mate na perameter e vaise confirm karavanu and test karavanu baki che.	--	to hi & --	to pi
+			$post_fields = array_merge($api_settings, $payload);
+		}
+	}
+
+	public static function call($url, $api_settings, $payload = null, $throw_types = array('error'), $args = array()) {
+
+		self::additional_data($api_settings, $payload);
+
+		$url .= (strpos($url, '?') !== FALSE ? $api_settings : "?" . $api_settings);
+
+		if( !is_array($api_settings) ) {
+
+			if( is_string($api_settings) ) {
+
+				$api_settings_temp = null;
+				parse_str($api_settings, $api_settings_temp);
+				$api_settings = $api_settings_temp;
+			}
+		}
+
+		if( !isset($args['method']) ) {
+
+			$args['method'] = "wp_remote_get";
+		}
+
+		$post_fields = null;
+
+		self::apply_input_by_method($url, $post_fields, $api_settings, $payload, $args);
+
+		$result = null;
+
+		if( 'wp_remote_get' == $args['method'] ) {
+
+			$result = wp_remote_get($url);
+		} elseif( 'wp_remote_post' == $args['method'] ) {
+
+			$result = wp_remote_post($url, $post_fields);
+		}
+
+		$parsed = \eo\wbc\system\core\publics\Eowbc_Base_Model_Publics::parse_response($result, $args['method']);
 
 		wbc_free_memory($result);
 
@@ -48,7 +92,40 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 			$query_string = "";
 		}
 
+		if( !isset($payload['fctr']) ) {
+
+			$payload['fctr'] = array();
+		}
+
 		$query_string .= self::active_theme_and_plugins();
+
+		if( !is_array($payload) ) {
+			
+			$payload = array();
+		}
+
+		if( !isset($payload['sp_api_bpfa']) ) {
+
+			$payload['sp_api_bpfa'] = array();
+		}
+
+		$payload['sp_api_bpfa']['pc'] = wbc()->options->get_option('appearance_global','theme_primary_color');
+		$payload['sp_api_bpfa']['sc'] = wbc()->options->get_option('appearance_global','theme_secondary_color');
+
+		$payload['sp_api_bpfa']['pcs90'] = wbc()->options->get_option('appearance_global','theme_primary_color_shade_light_90');
+		$payload['sp_api_bpfa']['scs90'] = wbc()->options->get_option('appearance_global','theme_secondary_color_shade_light_90');
+
+		$payload['sp_api_bpfa']['pcs80'] = wbc()->options->get_option('appearance_global','theme_primary_color_shade_light_80');
+		$payload['sp_api_bpfa']['scs80'] = wbc()->options->get_option('appearance_global','theme_secondary_color_shade_light_80');
+
+		$payload['sp_api_bpfa']['pcs60'] = wbc()->options->get_option('appearance_global','theme_primary_color_shade_light_60');
+		$payload['sp_api_bpfa']['scs60'] = wbc()->options->get_option('appearance_global','theme_secondary_color_shade_light_60');
+
+		$payload['sp_api_bpfa']['pcs50'] = wbc()->options->get_option('appearance_global','theme_primary_color_shade_light_50');
+		$payload['sp_api_bpfa']['scs50'] = wbc()->options->get_option('appearance_global','theme_secondary_color_shade_light_50');
+
+		$payload['sp_api_bpfa']['pcs40'] = wbc()->options->get_option('appearance_global','theme_primary_color_shade_light_40');
+		$payload['sp_api_bpfa']['scs40'] = wbc()->options->get_option('appearance_global','theme_secondary_color_shade_light_40');
 	}
 
 	private static function active_theme_and_plugins() {
@@ -319,22 +396,22 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
     private static function is_apply_response_msg($parsed, $section_property) {
 
-    	if( isset($parsed['type'])
-    	 && 
-    	 !(
-    	 	'success' == $parsed['type'] 
+    	if( 
+			isset($parsed['type'])
     	 	&& 
-    	 	(
-    	 		'success' == $parsed['sub_type'] 
-    	 		&& 
-    	 		!( 
-    	 			isset($section_property['dap']) 
-    	 			&& 
-    	 			$section_property['dap'] 
-    	 		)
-    	 	)
-    	 ) 
-    	) {
+			!(
+				'success' == $parsed['type'] 
+				&& 
+				(
+					'success' == $parsed['sub_type'] 
+					&& 
+					!( 
+						isset($section_property['dap']) 
+						&& 
+						$section_property['dap'] 
+					)
+				)
+			) ) {
 
     		return true;
     	}
@@ -379,7 +456,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
     private static function should_do_stat_changes($mode, $parsed) {
 
-    	if( 'get' == $mode && ( isset($parsed['type']) && !('success' == $parsed['sub_type'] || 'warning' == $parsed['sub_type']) ) ) {
+    	if( 'get' == $mode && ( isset($parsed['type']) && !( 'success' == $parsed['type'] && ('success' == $parsed['sub_type'] || 'warning' == $parsed['sub_type']) ) ) ) {
 
     		return false;
     	}
@@ -394,7 +471,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
     private static function should_handle_response($mode, $parsed) {
 
-    	if( 'get' == $mode && ( isset($parsed['type']) && ('success' == $parsed['sub_type'] || 'warning' == $parsed['sub_type']) ) ) {
+    	if( 'get' == $mode && ( isset($parsed['type']) && ( 'success' == $parsed['type'] && ('success' == $parsed['sub_type'] || 'warning' == $parsed['sub_type']) ) ) ) {
 
     		return false;
     	}

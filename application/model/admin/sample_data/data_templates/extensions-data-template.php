@@ -33,13 +33,13 @@ class Extensions_Data_Template extends \eo\wbc\model\admin\sample_data\data_temp
         return array();
 	}
 
-    public function get_attributes() {
+    public function get_attributes($feature_key = null/*ACTIVE_TODO The null value set here is temporary, and the actual value should be set as and when required.*/, $args = '') {
 
         // NOTE: This function are returning empty array intentionally so that if the extended class of particular extension is not implementing any data related to this function then the underlying leyers will call this overrided function and return empty array so that nothing is set up as far as sample data is considered. and if this function is not overrided then the perent class would return the default sample data, which we do not want any particular extension to setup if they do not need it.
         return array();
     }
 
-    public function get_categories() {
+    public function get_categories($feature_key = null/*ACTIVE_TODO The null value set here is temporary, and the actual value should be set as and when required.*/, $args = '') {
     
         // NOTE: This function are returning empty array intentionally so that if the extended class of particular extension is not implementing any data related to this function then the underlying leyers will call this overrided function and return empty array so that nothing is set up as far as sample data is considered. and if this function is not overrided then the perent class would return the default sample data, which we do not want any particular extension to setup if they do not need it.
         return array();
@@ -57,7 +57,7 @@ class Extensions_Data_Template extends \eo\wbc\model\admin\sample_data\data_temp
         return array();
     }  
 
-    public function get_products() {
+    public function get_products($feature_key = null/*ACTIVE_TODO The null value set here is temporary, and the actual value should be set as and when required.*/, $args = '') {
     
         // NOTE: This function are returning empty array intentionally so that if the extended class of particular extension is not implementing any data related to this function then the underlying leyers will call this overrided function and return empty array so that nothing is set up as far as sample data is considered. and if this function is not overrided then the perent class would return the default sample data, which we do not want any particular extension to setup if they do not need it.
         return array();

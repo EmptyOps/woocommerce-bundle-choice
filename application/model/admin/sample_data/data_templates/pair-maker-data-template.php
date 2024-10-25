@@ -26,7 +26,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
         $this->asset_folder = 'pair_maker';
     }
 
-    public function get_attributes() {
+    public function get_attributes($feature_key = null/*ACTIVE_TODO The null value set here is temporary, and the actual value should be set as and when required.*/, $args = '') {
         $_img_url= constant('EOWBC_ASSET_URL').'img/sample_data/'.$this->asset_folder.'/attributes/'; 
         $_alphabets_img_url= constant('EOWBC_ASSET_URL').'img/sample_data/'.$this->asset_folder.'/alphabets/'; 
         return array(
@@ -128,7 +128,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
                   ); 
     }
 
-    public function get_categories() {
+    public function get_categories($feature_key = null/*ACTIVE_TODO The null value set here is temporary, and the actual value should be set as and when required.*/, $args = '') {
         $_img_url= constant('EOWBC_ASSET_URL').'img/sample_data/'.$this->asset_folder.'/category/';    // EO_WBC_PLUGIN_DIR.'EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/';
         $_alphabets_img_url= constant('EOWBC_ASSET_URL').'img/sample_data/'.$this->asset_folder.'/alphabets/';
 
@@ -2091,7 +2091,7 @@ class Pair_Maker_Data_Template extends Pair_Builder_Data_Template {
         return $filter;
     }
 
-    public function get_products() {
+    public function get_products($feature_key = null/*ACTIVE_TODO The null value set here is temporary, and the actual value should be set as and when required.*/, $args = '') {
         
         $_img_url=constant('EOWBC_ASSET_URL').'img/sample_data/'.$this->asset_folder.'/';   //EO_WBC_PLUGIN_DIR.'EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/';
 
