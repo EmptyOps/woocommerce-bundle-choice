@@ -6,6 +6,17 @@
 
 $res = array( "type"=>"success", "msg"=>"Updated successfully!" );
 
+$is_do_not_call_Tiny_Features_View_lode_view = true;
+$is_auto_insert_for_template = null;
+$args = null;
+require_once constant('EOWBC_TEMPLATE_DIR').'admin/menu/tiny_features.php';
+
+$temp_res = \eo\wbc\model\admin\Eowbc_Model::instance()->save(self::get_form_definition(), $is_auto_insert_for_template, $args);
+if(!empty($temp_res['type']) && $temp_res['type'] != "success"){
+
+	return $temp_res;
+}
+
 if(wp_verify_nonce(wbc()->sanitize->post('_wpnonce'),'eowbc_tiny_features')){
 
 	wbc()->options->update_option('tiny_features','shop_cat_filter_location_shop',(empty(wbc()->sanitize->post('shop_cat_filter_location_shop'))?'':wbc()->sanitize->post('shop_cat_filter_location_shop')));

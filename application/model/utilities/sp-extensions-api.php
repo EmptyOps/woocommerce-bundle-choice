@@ -260,7 +260,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
 								if( in_array($sfv["type"], \eo\wbc\model\admin\Form_Builder::savable_types()) ) {
 
-									$payload['data'][$sfk] = $sfv['value'];
+									$payload['data'][$sfk] = self::field_value_for_payload($mode, $fk, $sfk, $sfv);
 
 									if( $fk == $sfk ) {
 
@@ -269,7 +269,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 											$payload['data'][$sfk] = 1;
 										} else {
 
-											$payload['data'][$sfk] = 0;
+											$payload['data'][$sfk] = /* 0 */-1;
 										}
 									}
 								}
@@ -353,27 +353,39 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
     	if( 'save' == $mode ) {
 
-    		--	below if is not finlize yet.
-    		--	may be we have covered hear only the checkbox type filds but not other so need to conferm about that. -- to h
-    			--	$fv need to be add as argument in this function. -- to h & -- to pi
-    		if( 
-    			( 
-    				empty( wbc()->options->get_option($section_property['tab_key'], $fk) ) 
-    				&& 
-    				( in_array($fv["type"], \eo\wbc\model\admin\Form_Builder::savable_types()) 
-    					&& ( isset($_POST[$fk]) || $fv["type"]=='checkbox') ) 
-    			) 
-    			|| 
-    			( 
-    				!empty( wbc()->options->get_option($section_property['tab_key'], $fk) ) 
-    				&& 
-    				( in_array($fv["type"], \eo\wbc\model\admin\Form_Builder::savable_types()) 
-    					&& ( !isset($_POST[$fk]) || $fv["type"]=='checkbox') ) 
-    			) 
-    		) {
+			foreach ($section_fields as $sfk => $sfv) {
 
-    			return true;
-    		}
+				if( $fk == $sfk || $sfv['type'] == checkbox ) {
+
+					--	below if is not finlize yet.
+					--	may be we have covered hear only the checkbox type filds but not other so need to conferm about that. -- to h
+						--	$fv need to be add as argument in this function. -- to h & -- to pi
+					if( 
+						( 
+							empty( wbc()->options->get_option($section_property['tab_key'], /* $fk */$sfk) ) 
+							&& 
+							( in_array(/* $fv */$sfv["type"], \eo\wbc\model\admin\Form_Builder::savable_types()) 
+								&& ( isset($_POST[/* $fk */$sfk]) || /* $fv */$sfv["type"]=='checkbox') ) 
+						) 
+						|| 
+						( 
+							!empty( wbc()->options->get_option($section_property['tab_key'], /* $fk */$sfk) ) 
+							&& 
+							( in_array(/* $fv */$sfv["type"], \eo\wbc\model\admin\Form_Builder::savable_types()) 
+								&& ( !isset($_POST[/* $fk */$sfk]) || /* $fv */$sfv["type"]=='checkbox') ) 
+						) 
+					) {
+
+						return true;
+					}
+				} else {
+
+					if( wbc()->options->get_option($section_property['tab_key'], /* $fk */$sfk) != wbc()->sanitize->post($sfk) ) {
+
+						return true;
+					}
+				}
+			}
     	}
 
     	return false;
@@ -394,24 +406,28 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
     	return $section_fields;
     }
 
+	private static function field_value_for_payload($mode, $fk , $sfk, $sfv) {
+
+		NOTE: niche else ma $_POST chenge karavanu 267.70.1 recoding ma avayu che.
+		$value = ($mode == 'get' ? $sfv['value'] : wbc()->sanitize->post($sfk));
+
+		if( $fk == $sfk || $sfv["type"]=='checkbox' ) {
+
+			if( !empty($value) ) {
+
+				$value = 1;
+			} else {
+
+				$value = /* 0 */-1;
+			}
+		}
+
+		return $value;
+    }
+
     private static function is_apply_response_msg($parsed, $section_property) {
 
-    	if( 
-			isset($parsed['type'])
-    	 	&& 
-			!(
-				'success' == $parsed['type'] 
-				&& 
-				(
-					'success' == $parsed['sub_type'] 
-					&& 
-					!( 
-						isset($section_property['dap']) 
-						&& 
-						$section_property['dap'] 
-					)
-				)
-			) ) {
+    	if( isset($parsed['type']) && !( 'success' == $parsed['type'] && ('success' == $parsed['sub_type'] && !( isset($section_property['dap']) && $section_property['dap'] ) ) ) ) {
 
     		return true;
     	}
