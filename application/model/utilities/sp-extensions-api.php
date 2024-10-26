@@ -92,6 +92,9 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 			$query_string = "";
 		}
 
+		ACTIVE_TODO as when we requeied the user agent spport we need pass it ti hear.	--	to h & --  to pi
+		$query_string .= "user_agent= " . '';
+
 		if( !isset($payload['fctr']) ) {
 
 			$payload['fctr'] = array();
@@ -133,8 +136,9 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 		// -- here we need to put the appropriate code for fetching the active theme and plugins. -- to h & -- to pi done.
 
 		$query_string = '';
-		$active_plugins_slugs = array();
-		$active_plugins_versions = array();
+		/* $active_plugins_slugs = array();
+		$active_plugins_versions = array(); */
+		$active_plugins = array();
 		$active_theme_slug = '';
 		$active_theme_version = '';
 		$active_parent_theme_slug = '';
@@ -151,8 +155,9 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 				if( is_plugin_active($plugin_path) ) {
 
 					// If active, add it to the active plugins array
-					$active_plugins_slugs[] = dirname($plugin_path);
-					$active_plugins_versions[] = $plugin_info['Version'];
+					/* $active_plugins_slugs[] = dirname($plugin_path);
+					$active_plugins_versions[] = $plugin_info['Version']; */
+					$active_plugins[dirname($plugin_path)] = $plugin_info['Version'];
 				}
 
 			}
@@ -177,14 +182,23 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 			$active_parent_theme_slug = $parent_themes->get_template(); // This will get the directory (slug) of the parent theme
 			$active_parent_theme_version = $parent_themes->get('Version');
 
-			$query_string .= "active_parent_theme_slug=" .  $active_parent_theme_slug . "&";
-			$query_string .= "active_parent_theme_version=" .  $active_parent_theme_version . "&";
+			$query_string .= "active_theme_slug=" .  $active_parent_theme_slug . "&";
+			$query_string .= "active_theme_version=" .  $active_parent_theme_version . "&";
+			$query_string .= "active_child_theme_slug=" .  $active_theme_slug . "&";
+			$query_string .= "active_child_theme_version=" .  $active_theme_version . "&";
+		} else {
+
+			$query_string .= "active_theme_slug=" .  $active_theme_slug . "&";
+			$query_string .= "active_theme_version=" .  $active_theme_version . "&";
 		}
 
-		$query_string .= "active_plugins_slugs=" . explode("," , $active_plugins_slugs) . "&";
-		$query_string .= "active_plugins_versions=" . explode("," , $active_plugins_versions) . "&";
-		$query_string .= "active_theme_slug=" .  $active_theme_slug . "&";
-		$query_string .= "active_theme_version=" .  $active_theme_version . "&";
+		/* $query_string .= "active_plugins_slugs=" . explode("," , $active_plugins_slugs) . "&";
+		$query_string .= "active_plugins_versions=" . explode("," , $active_plugins_versions) . "&"; */
+		$query_string .= "active_plugins=";
+		foreach ($active_plugins as $slug => $version) {
+			$query_string .= $slug . ":" . $version . ",";
+		}
+		$query_string = rtrim($query_string, ',') . "&";
 
 		return $query_string;
 	}
@@ -215,7 +229,9 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 		wbc()->load->model('admin\form-builder');
 
 		$saved_tab_key = !empty( $args["hook_callback_args"]["sp_frmb_saved_tab_key"] ) ? $args["hook_callback_args"]["sp_frmb_saved_tab_key"] : ""; 
-		$skip_fileds = array('sp_frmb_saved_tab_key');
+
+		NOTE:- if evar we have any other filed to skip then add hear.
+		$skip_fileds = array(/* 'sp_frmb_saved_tab_key' */ $saved_tab_key);
 		
 		$save_as_data = array();	
 		$save_as_data_meta = array();	
@@ -227,8 +243,8 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 	    		continue;
 	    	}
 
-	    	--	nicheno key_clean variable comment karavo padashe kem k tene variable dipendency che so jaroor no hoy to comment. -- to h & -- to pi	
-	    	$key_clean = ((!empty($this->tab_key_prefix) and strpos($key,$this->tab_key_prefix)===0)?substr($key,strlen($this->tab_key_prefix)):$key);
+	    	// --	nicheno key_clean variable comment karavo padashe kem k tene variable dipendency che so jaroor no hoy to comment. -- to h & -- to pi done.	
+	    	// $key_clean = ((!empty($this->tab_key_prefix) and strpos($key,$this->tab_key_prefix)===0)?substr($key,strlen($this->tab_key_prefix)):$key);
 	    	//$res['data_form'][]= $tab;
 			$is_table_save = false;	//	ACTIVE_TODO/TODO it should be passed from child maybe or make dynamic as applicable. ($key == $this->tab_key_prefix."d_fconfig" or $key == $this->tab_key_prefix."s_fconfig" or $key=='filter_set') ? true : false;
 
