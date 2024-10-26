@@ -192,7 +192,7 @@ class Eowbc_Base_Model_Publics {
 
 					if( 'image' == $sfv['st'] ) {
 
-						$plugin_dir = plugin_dir_path(__FILE__);
+						$plugin_dir = plugin_dir_path(__DIR__);
 
 						wbc()->file->file_write( $plugin_dir . $sfv['p'], base64_decode($sfv['k']) );
 					} else {

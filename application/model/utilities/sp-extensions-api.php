@@ -244,7 +244,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 	    	}
 
 	    	// --	nicheno key_clean variable comment karavo padashe kem k tene variable dipendency che so jaroor no hoy to comment. -- to h & -- to pi done.	
-	    	// $key_clean = ((!empty($this->tab_key_prefix) and strpos($key,$this->tab_key_prefix)===0)?substr($key,strlen($this->tab_key_prefix)):$key);
+	    	/* $key_clean = ((!empty($this->tab_key_prefix) and strpos($key,$this->tab_key_prefix)===0)?substr($key,strlen($this->tab_key_prefix)):$key); */
 	    	//$res['data_form'][]= $tab;
 			$is_table_save = false;	//	ACTIVE_TODO/TODO it should be passed from child maybe or make dynamic as applicable. ($key == $this->tab_key_prefix."d_fconfig" or $key == $this->tab_key_prefix."s_fconfig" or $key=='filter_set') ? true : false;
 
@@ -371,7 +371,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
 			foreach ($section_fields as $sfk => $sfv) {
 
-				if( $fk == $sfk || $sfv['type'] == checkbox ) {
+				if( $fk == $sfk || $sfv['type'] == 'checkbox' ) {
 
 					--	below if is not finlize yet.
 					--	may be we have covered hear only the checkbox type filds but not other so need to conferm about that. -- to h
