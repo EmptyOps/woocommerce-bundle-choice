@@ -4,46 +4,10 @@ defined( 'ABSPATH' ) || exit;
 
 wbc()->load->model('category-attribute');
 
-<<<<<<< HEAD
-// swatches pro extention 
-$wbc_vsp_active = function_exists('wbc_vsp');
-$wbc_vsp_is_disabled = false;
-// $wbc_vsp_option_label_class = array();
---	ahiya empty array $ var aa wbc_vsp_hide_show_swatches_field name thi banvo.
-$wbc_vsp_option_container_class = array();
-if(!$wbc_vsp_active) {
-	$wbc_vsp_is_disabled = true;
-	// $wbc_vsp_option_label_class = array('lock');
-	$wbc_vsp_hide_show_swatches_field = array(
-		'enable_for_product_page_addon' => array(
-			'label'=>'Enable For Product Page (Addon)',
-			'type'=>'checkbox',
-			'sanitize'=>'sanitize_text_field',
-			'value'=>array(),
-			'options'=>array('enable_for_product_page_addon'=>' '),
-			'class'=>array(),
-			'size_class'=>array('eight','wide'),
-			'inline'=>true,
-			'eas'=>array('ihk' => self::tv_for_product_page_backend_settings['ihk'], 'au' => self::tv_for_product_page_backend_settings['host'], 'ep'  =>self::tv_for_product_page_backend_settings['endpoint'], 'tab_key' => 'tiny_features'),
-		),
-		'show_on_button_click' => array(
-			'label'=>'Show On Button Click',
-			'type'=>'checkbox',
-			'sanitize'=>'sanitize_text_field',
-			'value'=>array('show_on_button_click'),
-			'options'=>array('show_on_button_click'=>' '),
-			'class'=>array(),
-			'size_class'=>array('eight','wide'),
-			'inline'=>true,
-			'easf'=>array('enable_for_product_page_addon'),
-		),
-	);
-}
-=======
-ACTIVE_TODO/TEMP aa class temperory Bhavesh_2 branch na sampaldata update vakhate banavo che ane jyare tiny feature akhu modul update thay tyare and tenu model, view and conttrolar propar bane tyare aa class ne remove kari devo and stander view file ma jevu arcituctur che tevu kari nakahavu.    --  to h
+ACTIVE_TODO/TEMP aa class temperory Bhavesh_2 branch na sampaldata update vakhate banavo che ane jyare tiny feature akhu module update thay tyare and tenu model, view and conttrolar propar bane tyare aa class ne remove kari devo and stander view file ma jevu arcituctur che tevu kari nakahavu.    --  to h
 class Tiny_Features_View {
->>>>>>> e24781069 (commit@prince - 25/10/2024)
 
+    ACTIVE_TODO/TEMP a koi stander get_form_definition nu function nathi menas ama apada j get_form_definition function na stander che te moojab nathi mate jyare upgrade karia tyare simply amathi code ne refactor karavano avse.     -- to h.
 	public static function get_form_definition() {
 
         $form_definition = array(
