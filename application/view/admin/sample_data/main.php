@@ -238,12 +238,16 @@ box-shadow: none;">
 				            beforeSend:function(xhr){
 
 				            },
-				            success:function(result,status,xhr){				            	
-			            		var resjson = jQuery.parseJSON(result);
+				            success:function(result,status,xhr){
+
+			            		// var resjson = jQuery.parseJSON(result);
+			            		var resjson = window.document.splugins.common.parseJSON(result);
 				                if( typeof(resjson["type"]) != undefined && resjson["type"] == "success" ){
+
 					                window.location.href="<?php echo($next_url); ?>";
 			            			return false;                    
 				                } else {
+
 				                	var type = (typeof(resjson["type"]) != undefined ? resjson["type"] : 'error');
 				                	var msg = (typeof(resjson["msg"]) != undefined && resjson["msg"] != "" ? resjson["msg"] : `Failed! Please check Logs page for for more details.`);
 				                    eowbc_toast_common( type, msg );
@@ -329,11 +333,15 @@ box-shadow: none;">
 
 				            },
 				            success:function(result,status,xhr){
-		                		var resjson = jQuery.parseJSON(result);
+
+		                		// var resjson = jQuery.parseJSON(result);
+		                		var resjson = window.document.splugins.common.parseJSON(result);
 				                if( typeof(resjson["type"]) != undefined && resjson["type"] == "success" ){
+
 					                window.location.href="<?php echo($next_url); ?>";
 		                			return false;                    
 				                } else {
+
 				                	var type = (typeof(resjson["type"]) != undefined ? resjson["type"] : 'error');
 				                	var msg = (typeof(resjson["msg"]) != undefined && resjson["msg"] != "" ? resjson["msg"] : `Failed! Please check Logs page for for more details.`);
 				                    eowbc_toast_common( type, msg );
@@ -370,11 +378,15 @@ box-shadow: none;">
 
 				            },
 				            success:function(result,status,xhr){
-		                		var resjson = jQuery.parseJSON(result);
+
+		                		// var resjson = jQuery.parseJSON(result);
+		                		var resjson = window.document.splugins.common.parseJSON(result);
 				                if( typeof(resjson["type"]) != undefined && resjson["type"] == "success" ){
+
 					                window.location.href="<?php echo($next_url); ?>";
 		                			return false;                   
 				                } else {
+
 				                	var type = (typeof(resjson["type"]) != undefined ? resjson["type"] : 'error');
 				                	var msg = (typeof(resjson["msg"]) != undefined && resjson["msg"] != "" ? resjson["msg"] : `Failed! Please check Logs page for for more details.`);
 				                    eowbc_toast_common( type, msg );
