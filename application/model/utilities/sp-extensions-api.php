@@ -230,7 +230,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
 		$saved_tab_key = !empty( $args["hook_callback_args"]["sp_frmb_saved_tab_key"] ) ? $args["hook_callback_args"]["sp_frmb_saved_tab_key"] : ""; 
 
-		NOTE:- if evar we have any other filed to skip then add hear.
+		NOTE: if evar we have any other filed to skip then add hear.
 		$skip_fileds = array(/* 'sp_frmb_saved_tab_key' */ $saved_tab_key);
 		
 		$save_as_data = array();	
@@ -458,8 +458,8 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
     		return;
     	}
 
-    	--	hear we need to prepare the $res form $parsed by creating empty array and save. -- to h & -- to pi 	done.
-    	// $res = $parsed;
+    	// --	hear we need to prepare the $res form $parsed by creating empty array and so on. -- to h & -- to pi 	done.
+    	/* $res = $parsed; */
 
     	if( 'save' == $mode ) {
 
