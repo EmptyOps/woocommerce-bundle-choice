@@ -4,37 +4,43 @@ defined( 'ABSPATH' ) || exit;
 
 wbc()->load->model('category-attribute');
 
+ACTIVE TODO jyare ashish_1 ma merge thay tyare eni advanced tab ma mukvanu avshe ane chelle move kari didhu hase.
+ACTIVE TODO jyare ashish_1 ma merge thay tyare ahiyaa variable banavva ni jaroor nathi. already ahiyaa banela j hase to khaali if j ahiyaa avshe.
 // swatches pro extention 
 $wbc_vsp_active = function_exists('wbc_vsp');
 $wbc_vsp_is_disabled = false;
 // $wbc_vsp_option_label_class = array();
 --	ahiya empty array $ var aa wbc_vsp_hide_show_swatches_field name thi banvo.
-$wbc_vsp_option_container_class = array();
+$wbc_vsp_hide_show_swatches_field = array();
 if(!$wbc_vsp_active) {
 	$wbc_vsp_is_disabled = true;
 	// $wbc_vsp_option_label_class = array('lock');
 	$wbc_vsp_hide_show_swatches_field = array(
-		'enable_for_product_page_addon' => array(
-			'label'=>'Enable For Product Page (Addon)',
+		// 'enable_for_product_page_addon' => array(
+		'hide_show_dependent_attribute_swatches_addon' => array(
+			// 'label'=>'Enable For Product Page (Addon)',
+			'label'=>'Hide/Show Dependent Attribute Swatches (Addon)',
 			'type'=>'checkbox',
 			'sanitize'=>'sanitize_text_field',
 			'value'=>array(),
-			'options'=>array('enable_for_product_page_addon'=>' '),
+			'options'=>array('hide_show_dependent_attribute_swatches_addon'=>' '),
 			'class'=>array(),
 			'size_class'=>array('eight','wide'),
 			'inline'=>true,
 			'eas'=>array('ihk' => self::tv_for_product_page_backend_settings['ihk'], 'au' => self::tv_for_product_page_backend_settings['host'], 'ep'  =>self::tv_for_product_page_backend_settings['endpoint']),
 		),
-		'show_on_button_click' => array(
-			'label'=>'Show On Button Click',
+		// 'show_on_button_click' => array(
+		'enable_for_product_page' => array(
+			// 'label'=>'Show On Button Click',
+			'label'=>'Enable For Product Page',
 			'type'=>'checkbox',
 			'sanitize'=>'sanitize_text_field',
-			'value'=>array('show_on_button_click'),
-			'options'=>array('show_on_button_click'=>' '),
+			'value'=>array('enable_for_product_page'),
+			'options'=>array('enable_for_product_page'=>' '),
 			'class'=>array(),
 			'size_class'=>array('eight','wide'),
 			'inline'=>true,
-			'easf'=>array('enable_for_product_page_addon'),
+			'easf'=>array('hide_show_dependent_attribute_swatches_addon'),
 		),
 	);
 }
