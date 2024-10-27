@@ -563,9 +563,9 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
     	$type = $parsed['type'] != 'success' ? $parsed['type'] : $parsed['sub_type'];
 
-    	$style .= $type === 'error' ? 'color: red;' : '';
-		$style .= $type === 'warning' ? 'background-color: yellow;' : '';
-		$style .= $type === 'success' ? 'color: green;' : '';
+    	$style .= $type == 'error' ? 'color: red;' : '';
+		$style .= $type == 'warning' ? 'background-color: yellow;' : '';
+		$style .= $type == 'success' ? 'color: green;' : '';
 
     	$visible_info = array(
 				    		'label' => eowbc_lang($msg),
