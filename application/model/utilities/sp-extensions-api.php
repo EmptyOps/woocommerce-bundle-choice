@@ -92,6 +92,9 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 			$query_string = "";
 		}
 
+		ACTIVE_TODO as when we requeied the user agent spport we need pass it ti hear.	--	to h & --  to pi
+		$query_string .= "user_agent= " . '';
+
 		if( !isset($payload['fctr']) ) {
 
 			$payload['fctr'] = array();
@@ -133,8 +136,9 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 		// -- here we need to put the appropriate code for fetching the active theme and plugins. -- to h & -- to pi done.
 
 		$query_string = '';
-		$active_plugins_slugs = array();
-		$active_plugins_versions = array();
+		/* $active_plugins_slugs = array();
+		$active_plugins_versions = array(); */
+		$active_plugins = array();
 		$active_theme_slug = '';
 		$active_theme_version = '';
 		$active_parent_theme_slug = '';
@@ -151,8 +155,9 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 				if( is_plugin_active($plugin_path) ) {
 
 					// If active, add it to the active plugins array
-					$active_plugins_slugs[] = dirname($plugin_path);
-					$active_plugins_versions[] = $plugin_info['Version'];
+					/* $active_plugins_slugs[] = dirname($plugin_path);
+					$active_plugins_versions[] = $plugin_info['Version']; */
+					$active_plugins[dirname($plugin_path)] = $plugin_info['Version'];
 				}
 
 			}
@@ -177,14 +182,23 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 			$active_parent_theme_slug = $parent_themes->get_template(); // This will get the directory (slug) of the parent theme
 			$active_parent_theme_version = $parent_themes->get('Version');
 
-			$query_string .= "active_parent_theme_slug=" .  $active_parent_theme_slug . "&";
-			$query_string .= "active_parent_theme_version=" .  $active_parent_theme_version . "&";
+			$query_string .= "active_theme_slug=" .  $active_parent_theme_slug . "&";
+			$query_string .= "active_theme_version=" .  $active_parent_theme_version . "&";
+			$query_string .= "active_child_theme_slug=" .  $active_theme_slug . "&";
+			$query_string .= "active_child_theme_version=" .  $active_theme_version . "&";
+		} else {
+
+			$query_string .= "active_theme_slug=" .  $active_theme_slug . "&";
+			$query_string .= "active_theme_version=" .  $active_theme_version . "&";
 		}
 
-		$query_string .= "active_plugins_slugs=" . explode("," , $active_plugins_slugs) . "&";
-		$query_string .= "active_plugins_versions=" . explode("," , $active_plugins_versions) . "&";
-		$query_string .= "active_theme_slug=" .  $active_theme_slug . "&";
-		$query_string .= "active_theme_version=" .  $active_theme_version . "&";
+		/* $query_string .= "active_plugins_slugs=" . explode("," , $active_plugins_slugs) . "&";
+		$query_string .= "active_plugins_versions=" . explode("," , $active_plugins_versions) . "&"; */
+		$query_string .= "active_plugins=";
+		foreach ($active_plugins as $slug => $version) {
+			$query_string .= $slug . ":" . $version . ",";
+		}
+		$query_string = rtrim($query_string, ',') . "&";
 
 		return $query_string;
 	}
@@ -215,7 +229,9 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 		wbc()->load->model('admin\form-builder');
 
 		$saved_tab_key = !empty( $args["hook_callback_args"]["sp_frmb_saved_tab_key"] ) ? $args["hook_callback_args"]["sp_frmb_saved_tab_key"] : ""; 
-		$skip_fileds = array('sp_frmb_saved_tab_key');
+
+		NOTE:- if evar we have any other filed to skip then add hear.
+		$skip_fileds = array(/* 'sp_frmb_saved_tab_key' */ $saved_tab_key);
 		
 		$save_as_data = array();	
 		$save_as_data_meta = array();	
@@ -227,8 +243,8 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 	    		continue;
 	    	}
 
-	    	--	nicheno key_clean variable comment karavo padashe kem k tene variable dipendency che so jaroor no hoy to comment. -- to h & -- to pi	
-	    	$key_clean = ((!empty($this->tab_key_prefix) and strpos($key,$this->tab_key_prefix)===0)?substr($key,strlen($this->tab_key_prefix)):$key);
+	    	// --	nicheno key_clean variable comment karavo padashe kem k tene variable dipendency che so jaroor no hoy to comment. -- to h & -- to pi done.	
+	    	/* $key_clean = ((!empty($this->tab_key_prefix) and strpos($key,$this->tab_key_prefix)===0)?substr($key,strlen($this->tab_key_prefix)):$key); */
 	    	//$res['data_form'][]= $tab;
 			$is_table_save = false;	//	ACTIVE_TODO/TODO it should be passed from child maybe or make dynamic as applicable. ($key == $this->tab_key_prefix."d_fconfig" or $key == $this->tab_key_prefix."s_fconfig" or $key=='filter_set') ? true : false;
 
@@ -260,7 +276,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
 								if( in_array($sfv["type"], \eo\wbc\model\admin\Form_Builder::savable_types()) ) {
 
-									$payload['data'][$sfk] = $sfv['value'];
+									$payload['data'][$sfk] = self::field_value_for_payload($mode, $fk, $sfk, $sfv);
 
 									if( $fk == $sfk ) {
 
@@ -269,7 +285,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 											$payload['data'][$sfk] = 1;
 										} else {
 
-											$payload['data'][$sfk] = 0;
+											$payload['data'][$sfk] = /* 0 */-1;
 										}
 									}
 								}
@@ -353,27 +369,39 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
     	if( 'save' == $mode ) {
 
-    		--	below if is not finlize yet.
-    		--	may be we have covered hear only the checkbox type filds but not other so need to conferm about that. -- to h
-    			--	$fv need to be add as argument in this function. -- to h & -- to pi
-    		if( 
-    			( 
-    				empty( wbc()->options->get_option($section_property['tab_key'], $fk) ) 
-    				&& 
-    				( in_array($fv["type"], \eo\wbc\model\admin\Form_Builder::savable_types()) 
-    					&& ( isset($_POST[$fk]) || $fv["type"]=='checkbox') ) 
-    			) 
-    			|| 
-    			( 
-    				!empty( wbc()->options->get_option($section_property['tab_key'], $fk) ) 
-    				&& 
-    				( in_array($fv["type"], \eo\wbc\model\admin\Form_Builder::savable_types()) 
-    					&& ( !isset($_POST[$fk]) || $fv["type"]=='checkbox') ) 
-    			) 
-    		) {
+			foreach ($section_fields as $sfk => $sfv) {
 
-    			return true;
-    		}
+				if( $fk == $sfk || $sfv['type'] == 'checkbox' ) {
+
+					--	below if is not finlize yet.
+					--	may be we have covered hear only the checkbox type filds but not other so need to conferm about that. -- to h
+						--	$fv need to be add as argument in this function. -- to h & -- to pi
+					if( 
+						( 
+							empty( wbc()->options->get_option($section_property['tab_key'], /* $fk */$sfk) ) 
+							&& 
+							( in_array(/* $fv */$sfv["type"], \eo\wbc\model\admin\Form_Builder::savable_types()) 
+								&& ( isset($_POST[/* $fk */$sfk]) || /* $fv */$sfv["type"]=='checkbox') ) 
+						) 
+						|| 
+						( 
+							!empty( wbc()->options->get_option($section_property['tab_key'], /* $fk */$sfk) ) 
+							&& 
+							( in_array(/* $fv */$sfv["type"], \eo\wbc\model\admin\Form_Builder::savable_types()) 
+								&& ( !isset($_POST[/* $fk */$sfk]) || /* $fv */$sfv["type"]=='checkbox') ) 
+						) 
+					) {
+
+						return true;
+					}
+				} else {
+
+					if( wbc()->options->get_option($section_property['tab_key'], /* $fk */$sfk) != wbc()->sanitize->post($sfk) ) {
+
+						return true;
+					}
+				}
+			}
     	}
 
     	return false;
@@ -394,24 +422,28 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
     	return $section_fields;
     }
 
+	private static function field_value_for_payload($mode, $fk , $sfk, $sfv) {
+
+		NOTE: niche else ma $_POST chenge karavanu 267.70.1 recoding ma avayu che.
+		$value = ($mode == 'get' ? $sfv['value'] : wbc()->sanitize->post($sfk));
+
+		if( $fk == $sfk || $sfv["type"]=='checkbox' ) {
+
+			if( !empty($value) ) {
+
+				$value = 1;
+			} else {
+
+				$value = /* 0 */-1;
+			}
+		}
+
+		return $value;
+    }
+
     private static function is_apply_response_msg($parsed, $section_property) {
 
-    	if( 
-			isset($parsed['type'])
-    	 	&& 
-			!(
-				'success' == $parsed['type'] 
-				&& 
-				(
-					'success' == $parsed['sub_type'] 
-					&& 
-					!( 
-						isset($section_property['dap']) 
-						&& 
-						$section_property['dap'] 
-					)
-				)
-			) ) {
+    	if( isset($parsed['type']) && !( 'success' == $parsed['type'] && ('success' == $parsed['sub_type'] && !( isset($section_property['dap']) && $section_property['dap'] ) ) ) ) {
 
     		return true;
     	}
@@ -432,7 +464,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
     	if( 'save' == $mode ) {
 
     		--	from hear most probabely we need to return $res and it will be not prepared by should_return function most probabely. -- to h & -- to pi
-    		NOTE: hear we need to set in $res the type != success. but we have set all the standard proparty like type, sub_type and so on to ensuer that if it have required on underlayen layers then teke and directly use it and type != success condition is not nessesry so that is not applyed and type is set for the all scenario. 
+    		NOTE: here we need to set in $res the type != success. but we have set all the standard proparty like type, sub_type and so on to ensure that if it have required on underlying layers then they can directly use it. and type != success condition is not nessesry so that is not applyed and type is set for the all scenarios. 
     		$res = array('type' => $parsed['type'], 'msg' => $parsed['msg'], 'sub_type' => $parsed['sub_type'], 'sub_msg' => $parsed['sub_msg']);
     	}
 
@@ -440,7 +472,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
     		$msg = null;
 
-    		if( 'success' !== $parsed['type'] ) {
+    		if( 'success' != $parsed['type'] ) {
 
     			$msg = $parsed['msg'];
     		} else {

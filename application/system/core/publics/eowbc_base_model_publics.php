@@ -192,14 +192,16 @@ class Eowbc_Base_Model_Publics {
 
 					if( 'image' == $sfv['st'] ) {
 
-						wbc()->file->file_write( $sfv['p'], $sfv['value'] );
+						$plugin_dir = plugin_dir_path(__DIR__);
+
+						wbc()->file->file_write( $plugin_dir . $sfv['p'], base64_decode($sfv['k']) );
 					} else {
 
-						--	may be hear we need to add support for unknown if required by simply save in the option.
+						wbc()->options->update_option( $sfv['p'], $sfv['k'] );
 					}
 				} else {
 
-					wbc()->options->update_option( $sfv['--	need to add the proprty key hear.'], $sfv['value'] );
+					wbc()->options->update_option( $sfv['k'], $sfv['value'] );
 				}
 			}
 		}

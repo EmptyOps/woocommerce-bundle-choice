@@ -681,7 +681,7 @@ if (!class_exists('Appearance')) {
 							'label' => 'Theme Primary Color',
 							'type' => 'color',
 							'sanitize' => 'sanitize_hex_color',
-							'value' => wbc()->options->get_option('appearance_global', 'theme_primary_color', '#ffffff', true, true),
+							'value' => wbc()->options->get_option('appearance_global', 'theme_primary_color', '#000000', true, true),
 							'is_id_as_name' => true,
 							'class' => array(),
 						),
@@ -703,7 +703,7 @@ if (!class_exists('Appearance')) {
 							'label' => 'Theme Primary Color Shade Light 90%',
 							'type' => 'color',
 							'sanitize' => 'sanitize_hex_color',
-							'value' => wbc()->options->get_option('appearance_global', 'theme_primary_color_shade_light_90', '#ffffff', true, true),
+							'value' => wbc()->options->get_option('appearance_global', 'theme_primary_color_shade_light_90', '#212529', true, true),
 							'is_id_as_name' => true,
 							'class' => array(),
 							'visible_info' => array(
@@ -717,7 +717,7 @@ if (!class_exists('Appearance')) {
 							'label' => 'Theme Secondary Color Shade Light 90%',
 							'type' => 'color',
 							'sanitize' => 'sanitize_hex_color',
-							'value' => wbc()->options->get_option('appearance_global', 'theme_secondary_color_shade_light_90', '#ffffff', true, true),
+							'value' => wbc()->options->get_option('appearance_global', 'theme_secondary_color_shade_light_90', '#f9f9f9', true, true),
 							'is_id_as_name' => true,
 							'class' => array(),
 							'visible_info' => array(
@@ -731,7 +731,7 @@ if (!class_exists('Appearance')) {
 							'label' => 'Theme Primary Color Shade Light 80%',
 							'type' => 'color',
 							'sanitize' => 'sanitize_hex_color',
-							'value' => wbc()->options->get_option('appearance_global', 'theme_primary_color_shade_light_80', '#ffffff', true, true),
+							'value' => wbc()->options->get_option('appearance_global', 'theme_primary_color_shade_light_80', '#333', true, true),
 							'is_id_as_name' => true,
 							'class' => array(),
 							'visible_info' => array(
@@ -745,7 +745,7 @@ if (!class_exists('Appearance')) {
 							'label' => 'Theme Secondary Color Shade Light 80%',
 							'type' => 'color',
 							'sanitize' => 'sanitize_hex_color',
-							'value' => wbc()->options->get_option('appearance_global', 'theme_secondary_color_shade_light_80', '#ffffff', true, true),
+							'value' => wbc()->options->get_option('appearance_global', 'theme_secondary_color_shade_light_80', '#787878', true, true),
 							'is_id_as_name' => true,
 							'class' => array(),
 							'visible_info' => array(
@@ -759,7 +759,7 @@ if (!class_exists('Appearance')) {
 							'label' => 'Theme Primary Color Shade Light 60%',
 							'type' => 'color',
 							'sanitize' => 'sanitize_hex_color',
-							'value' => wbc()->options->get_option('appearance_global', 'theme_primary_color_shade_light_60', '#ffffff', true, true),
+							'value' => wbc()->options->get_option('appearance_global', 'theme_primary_color_shade_light_60', '#495057', true, true),
 							'is_id_as_name' => true,
 							'class' => array(),
 							'visible_info' => array(
@@ -773,7 +773,7 @@ if (!class_exists('Appearance')) {
 							'label' => 'Theme Secondary Color Shade Light 60%',
 							'type' => 'color',
 							'sanitize' => 'sanitize_hex_color',
-							'value' => wbc()->options->get_option('appearance_global', 'theme_secondary_color_shade_light_60', '#ffffff', true, true),
+							'value' => wbc()->options->get_option('appearance_global', 'theme_secondary_color_shade_light_60', '#cccccc', true, true),
 							'is_id_as_name' => true,
 							'class' => array(),
 							'visible_info' => array(
@@ -787,7 +787,7 @@ if (!class_exists('Appearance')) {
 							'label' => 'Theme Primary Color Shade Light 50%',
 							'type' => 'color',
 							'sanitize' => 'sanitize_hex_color',
-							'value' => wbc()->options->get_option('appearance_global', 'theme_primary_color_shade_light_50', '#ffffff', true, true),
+							'value' => wbc()->options->get_option('appearance_global', 'theme_primary_color_shade_light_50', '#766a6a', true, true),
 							'is_id_as_name' => true,
 							'class' => array(),
 							'visible_info' => array(
@@ -801,7 +801,7 @@ if (!class_exists('Appearance')) {
 							'label' => 'Theme Secondary Color Shade Light 50%',
 							'type' => 'color',
 							'sanitize' => 'sanitize_hex_color',
-							'value' => wbc()->options->get_option('appearance_global', 'theme_secondary_color_shade_light_50', '#ffffff', true, true),
+							'value' => wbc()->options->get_option('appearance_global', 'theme_secondary_color_shade_light_50', '#a7a7a7', true, true),
 							'is_id_as_name' => true,
 							'class' => array(),
 							'visible_info' => array(
@@ -815,7 +815,7 @@ if (!class_exists('Appearance')) {
 							'label' => 'Theme Primary Color Shade Light 40%',
 							'type' => 'color',
 							'sanitize' => 'sanitize_hex_color',
-							'value' => wbc()->options->get_option('appearance_global', 'theme_primary_color_shade_light_40', '#ffffff', true, true),
+							'value' => wbc()->options->get_option('appearance_global', 'theme_primary_color_shade_light_40', '#575252', true, true),
 							'is_id_as_name' => true,
 							'class' => array(),
 							'visible_info' => array(
@@ -829,7 +829,7 @@ if (!class_exists('Appearance')) {
 							'label' => 'Theme Secondary Color Shade Light 40%',
 							'type' => 'color',
 							'sanitize' => 'sanitize_hex_color',
-							'value' => wbc()->options->get_option('appearance_global', 'theme_secondary_color_shade_light_40', '#ffffff', true, true),
+							'value' => wbc()->options->get_option('appearance_global', 'theme_secondary_color_shade_light_40', '#cecece', true, true),
 							'is_id_as_name' => true,
 							'class' => array(),
 							'visible_info' => array(
