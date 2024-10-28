@@ -93,7 +93,12 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 		}
 
 		ACTIVE_TODO as when we requeied the user agent spport we need pass it ti hear.	--	to h & --  to pi
-		$query_string .= "user_agent= " . '';
+		$query_string .= "user_agent=" . '';
+
+		if( !is_array($payload) ) {
+			
+			$payload = array();
+		}
 
 		if( !isset($payload['fctr']) ) {
 
@@ -101,11 +106,6 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 		}
 
 		$query_string .= self::active_theme_and_plugins();
-
-		if( !is_array($payload) ) {
-			
-			$payload = array();
-		}
 
 		if( !isset($payload['sp_api_bpfa']) ) {
 
@@ -270,22 +270,22 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 						if( self::section_should_make_call($mode, $form_definition, $fv["eas"], $fk, $section_fields) ) {
 
 							$payload = array();
-							$payload['data'] = array();
+							$payload['fctr'] = array();
 
 							foreach ($section_fields as $sfk => $sfv) {
 
 								if( in_array($sfv["type"], \eo\wbc\model\admin\Form_Builder::savable_types()) ) {
 
-									$payload['data'][$sfk] = self::field_value_for_payload($mode, $fk, $sfk, $sfv);
+									$payload['fctr'][$sfk] = self::field_value_for_payload($mode, $fk, $sfk, $sfv);
 
 									if( $fk == $sfk ) {
 
 										if( !empty($sfv['value']) ) {
 
-											$payload['data'][$sfk] = 1;
+											$payload['fctr'][$sfk] = 1;
 										} else {
 
-											$payload['data'][$sfk] = /* 0 */-1;
+											$payload['fctr'][$sfk] = /* 0 */-1;
 										}
 									}
 								}
@@ -463,7 +463,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
     	if( 'save' == $mode ) {
 
-    		--	from hear most probabely we need to return $res and it will be not prepared by should_return function most probabely. -- to h & -- to pi
+    		--	from hear most probabely we need to return $res and it will be not prepared by should_return function most probabely. -- to h & -- to pi	done.
     		NOTE: here we need to set in $res the type != success. but we have set all the standard proparty like type, sub_type and so on to ensure that if it have required on underlying layers then they can directly use it. and type != success condition is not nessesry so that is not applyed and type is set for the all scenarios. 
     		$res = array('type' => $parsed['type'], 'msg' => $parsed['msg'], 'sub_type' => $parsed['sub_type'], 'sub_msg' => $parsed['sub_msg']);
     	}
@@ -575,7 +575,6 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 				    		'attr'=>array('style = "'.$style.'"'),
 	    				);
 
-    	--	ahi may be after add karavnu avse so me to add just a argument spport inside below function.	-- to h & -- to pi
     	$tab_form = wbc()->common->array_insert_before($tab_form, $fk, $fk.'_eas_visible_info', $visible_info, true);
 
     	return $tab_form;

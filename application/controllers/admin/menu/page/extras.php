@@ -268,15 +268,16 @@ if (!class_exists('Extras')) {
 							'value' => '',
 							'class' => array(),
 						),
+						--	aa switch na setting tabal view ma enabal on cetegory page switch sathe compare karavu.
 						'activate'=>array(
 							'label'=>'Activate',
 							'type' => 'checkbox',
 							'sanitize' => 'sanitize_text_field',
 							'value' => '',
-							'options' => array('1' => ' '),
+							'options' => array('activate' => ' '),
 							'is_id_as_name' => true,
 							'class' => array(),	
-							'esa' => array('ihk' => null, 'ep' => '', 'au' => '', 'dap' => true),
+							'eas' => array('ihk' => null --	value need to be passed here extras config mathi avase., 'ep' => ''--	value need to be passed here extras config mathi avase., 'au' => ''--	value need to be passed here extras config mathi avase., 'dap' => true),
 						),
 						'extras_save_btn' => array(
 							'label' => eowbc_lang('Save'),
