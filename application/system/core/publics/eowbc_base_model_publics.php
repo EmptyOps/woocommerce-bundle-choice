@@ -197,11 +197,11 @@ class Eowbc_Base_Model_Publics {
 						wbc()->file->file_write( $plugin_dir . $sfv['p'], base64_decode($sfv['k']) );
 					} else {
 
-						wbc()->options->update_option( $sfv['p'], $sfv['k'] );
+						wbc()->options->set( $sfv['p'], $sfv['k'] );
 					}
 				} else {
 
-					wbc()->options->update_option( $sfv['k'], $sfv['value'] );
+					wbc()->options->set( $sfv['k'], $sfv['value'] );
 				}
 			}
 		}
