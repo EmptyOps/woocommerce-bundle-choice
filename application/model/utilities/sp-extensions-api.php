@@ -47,7 +47,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
 		self::additional_data($api_settings, $payload);
 
-		$url .= (strpos($url, '?') !== FALSE ? $api_settings : "?" . $api_settings);
+		// $url .= (strpos($url, '?') !== FALSE ? $api_settings : "?" . $api_settings);
 
 		if( !is_array($api_settings) ) {
 
