@@ -269,15 +269,20 @@ if (!class_exists('Extras')) {
 							'class' => array(),
 						),
 						--	aa switch na setting tabal view ma enabal on cetegory page switch sathe compare karavu.
-						'activate'=>array(
-							'label'=>'Activate',
+						'activate' => array(
+							'label' => 'Activate',
 							'type' => 'checkbox',
 							'sanitize' => 'sanitize_text_field',
-							'value' => '',
+							'value' => array(),
 							'options' => array('activate' => ' '),
-							'is_id_as_name' => true,
-							'class' => array(),	
+							'class' => array(),
+							'size_class' => array('eight','wide'),
+							'inline' => true,
 							'eas' => array('ihk' => null --	value need to be passed here extras config mathi avase., 'ep' => ''--	value need to be passed here extras config mathi avase., 'au' => ''--	value need to be passed here extras config mathi avase., 'dap' => true),
+						),
+						'activate_main_fk' => array(
+							'type' => 'hidden',
+							'value' => 'activate',
 						),
 						'extras_save_btn' => array(
 							'label' => eowbc_lang('Save'),
