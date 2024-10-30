@@ -38,7 +38,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 			$url .= (strpos($url, '?') !== FALSE ? $query_string : "?" . $query_string);
 		} elseif( 'wp_remote_post' == $args['method'] ) {
 
-			ACTIVE_TODO aa array merge opretion karu che pan a haji wp_remote_post ma jeva post perameter sport kare che post mate k data mate na perameter e vaise confirm karavanu and test karavanu baki che.	--	to hi & --	to pi
+			// ACTIVE_TODO aa array merge opretion karu che pan a haji wp_remote_post ma jeva post perameter support kare che post mate k data mate na perameter e wise confirm karavanu and test karavanu baki che.	--	to hi & --	to pi
 			$post_fields = array_merge($api_settings, $payload);
 		}
 	}
@@ -75,6 +75,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 			$result = wp_remote_get($url);
 		} elseif( 'wp_remote_post' == $args['method'] ) {
 
+			// ACTIVE_TODO niche no wp_remote_post call ne documetion joi ne confirm karavanu baki che. and post_fields variabla che e function apply_input_by_method ma format thay che.
 			$result = wp_remote_post($url, $post_fields);
 		}
 
