@@ -540,7 +540,6 @@ class Tiny_Features_View {
                         'size_class'=>array('three','wide'),
                         'inline'=>false,	
                     ),
-                    $wbc_vsp_hide_show_swatches_field = array(),
                     'tiny_features_advanced_tab_end'=>array(
                         'type'=>'accordian',
                         'section_type'=>'end'
@@ -766,12 +765,13 @@ class Tiny_Features_View {
             ),
         );
 
-        $form_definition = apply_filters('eowbc_admin_form_tiny_features',$form_definition);
-
         return $form_definition;
     }
 
 	public static function lode_view() {
+
+		ACTIVE TODO jyare ashish_1 ma merge thay tyare eni advanced tab ma mukvanu avshe ane chelle move kari didhu hase.
+		ACTIVE TODO jyare ashish_1 ma merge thay tyare ahiyaa variable banavva ni jaroor nathi. already ahiyaa banela j hase to khaali if j ahiyaa avshe.
 
 		$form = array();
 
