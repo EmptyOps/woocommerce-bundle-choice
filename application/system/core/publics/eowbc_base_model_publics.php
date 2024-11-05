@@ -188,20 +188,35 @@ class Eowbc_Base_Model_Publics {
 			
 			foreach ($parsed['response_data']['sf'] as $sfk => $sfv) {
 
+				$allowes_types = array("jpg", "jpeg", "png", "gif", "bmp", "tiff", "webp", "svg", "heif", "heic", "raw", "cr2", "nef", "orf", "sr2", "psd", "ai", "eps", "pdf");
+
 				if( !empty($sfv['st']) ) {
 
 					if( 'image' == $sfv['st'] ) {
 
 						$plugin_dir = plugin_dir_path(__DIR__);
 
-						wbc()->file->file_write( $plugin_dir . $sfv['p'], base64_decode($sfv['k']) );
+						if( in_array( strtolower( wbc()->file->extension_from_path( $plugin_dir . $sfv['p'] ) ), $allowes_types) ) {
+
+							if( !empty($sfv['k']) ) {
+
+								wbc()->file->file_write( $plugin_dir . $sfv['p'], base64_decode($sfv['k']) );
+							} else {
+
+								if( wbc()->file->file_exists( $plugin_dir . $sfv['p'] ) ) {
+
+									wbc()->file->delete_file( $plugin_dir . $sfv['p'] );
+								}
+							}
+						}
+
 					} else {
 
-						wbc()->options->update_option( $sfv['p'], $sfv['k'] );
+						wbc()->options->set( $sfv['p'], $sfv['k'] );
 					}
 				} else {
 
-					wbc()->options->update_option( $sfv['k'], $sfv['value'] );
+					wbc()->options->set( $sfv['k'], $sfv['value'] );
 				}
 			}
 		}

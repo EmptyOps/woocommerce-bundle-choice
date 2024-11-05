@@ -119,6 +119,32 @@ if(wp_verify_nonce(wbc()->sanitize->post('_wpnonce'),'eowbc_tiny_features')){
 
 	wbc()->options->update_option('tiny_features','tiny_features_enable_only_for_categories', (empty(wbc()->sanitize->post('tiny_features_enable_only_for_categories'))?'':wbc()->sanitize->post('tiny_features_enable_only_for_categories')));
 
+	$skip_fileds = array();
+
+	foreach ($form_definition as $key => $tab) {
+
+		if( $key != $saved_tab_key ) {
+			continue;
+		}
+
+		foreach ($tab["form"] as $fk => $fv) {
+
+			if( in_array($fv["type"], \eo\wbc\model\admin\Form_Builder::savable_types()) ) {
+
+				//skip fields where applicable
+				if( in_array($fk, $skip_fileds) ) {
+					continue;
+				}
+
+				ACTIVE_TODO/TEMP nicheni if and flag che te jya sudhi tiny_features nu mvc and sarkha standard paramane fari upgrade na thay tya sudhi temperory rakhavanu che.	-- to h & -- to pi.
+				if( isset($fv["is_upgrade_version_field_saved_till_standard_upgrade"]) ) {
+
+					wbc()->options->update_option($key, $fk, $fv['value']);
+				}
+			}
+		}
+	}
+
 	//$res['msg'] = "Updated successfully!";
 	//wbc()->options->update_option('configuration','config_category',1);
 	//wbc()->options->update_option('configuration','config_map',1);

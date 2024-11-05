@@ -38,7 +38,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 			$url .= (strpos($url, '?') !== FALSE ? $query_string : "?" . $query_string);
 		} elseif( 'wp_remote_post' == $args['method'] ) {
 
-			ACTIVE_TODO aa array merge opretion karu che pan a haji wp_remote_post ma jeva post perameter sport kare che post mate k data mate na perameter e vaise confirm karavanu and test karavanu baki che.	--	to hi & --	to pi
+			// ACTIVE_TODO aa array merge opretion karu che pan a haji wp_remote_post ma jeva post perameter support kare che post mate k data mate na perameter e wise confirm karavanu and test karavanu baki che.	--	to hi & --	to pi
 			$post_fields = array_merge($api_settings, $payload);
 		}
 	}
@@ -47,7 +47,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
 		self::additional_data($api_settings, $payload);
 
-		$url .= (strpos($url, '?') !== FALSE ? $api_settings : "?" . $api_settings);
+		// $url .= (strpos($url, '?') !== FALSE ? $api_settings : "?" . $api_settings);
 
 		if( !is_array($api_settings) ) {
 
@@ -75,6 +75,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 			$result = wp_remote_get($url);
 		} elseif( 'wp_remote_post' == $args['method'] ) {
 
+			// ACTIVE_TODO niche no wp_remote_post call ne documetion joi ne confirm karavanu baki che. and post_fields variabla che e function apply_input_by_method ma format thay che.
 			$result = wp_remote_post($url, $post_fields);
 		}
 
@@ -93,7 +94,12 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 		}
 
 		ACTIVE_TODO as when we requeied the user agent spport we need pass it ti hear.	--	to h & --  to pi
-		$query_string .= "user_agent= " . '';
+		$query_string .= "user_agent=" . '';
+
+		if( !is_array($payload) ) {
+			
+			$payload = array();
+		}
 
 		if( !isset($payload['fctr']) ) {
 
@@ -101,11 +107,6 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 		}
 
 		$query_string .= self::active_theme_and_plugins();
-
-		if( !is_array($payload) ) {
-			
-			$payload = array();
-		}
 
 		if( !isset($payload['sp_api_bpfa']) ) {
 
@@ -230,7 +231,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
 		$saved_tab_key = !empty( $args["hook_callback_args"]["sp_frmb_saved_tab_key"] ) ? $args["hook_callback_args"]["sp_frmb_saved_tab_key"] : ""; 
 
-		NOTE:- if evar we have any other filed to skip then add hear.
+		NOTE: if evar we have any other filed to skip then add hear.
 		$skip_fileds = array(/* 'sp_frmb_saved_tab_key' */ $saved_tab_key);
 		
 		$save_as_data = array();	
@@ -270,22 +271,22 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 						if( self::section_should_make_call($mode, $form_definition, $fv["eas"], $fk, $section_fields) ) {
 
 							$payload = array();
-							$payload['data'] = array();
+							$payload['fctr'] = array();
 
 							foreach ($section_fields as $sfk => $sfv) {
 
 								if( in_array($sfv["type"], \eo\wbc\model\admin\Form_Builder::savable_types()) ) {
 
-									$payload['data'][$sfk] = self::field_value_for_payload($mode, $fk, $sfk, $sfv);
+									$payload['fctr'][$sfk] = self::field_value_for_payload($mode, $fk, $sfk, $sfv);
 
 									if( $fk == $sfk ) {
 
 										if( !empty($sfv['value']) ) {
 
-											$payload['data'][$sfk] = 1;
+											$payload['fctr'][$sfk] = 1;
 										} else {
 
-											$payload['data'][$sfk] = /* 0 */-1;
+											$payload['fctr'][$sfk] = /* 0 */-1;
 										}
 									}
 								}
@@ -458,12 +459,12 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
     		return;
     	}
 
-    	--	hear we need to prepare the $res form $parsed by creating empty array and save. -- to h & -- to pi 	done.
-    	// $res = $parsed;
+    	// --	hear we need to prepare the $res form $parsed by creating empty array and so on. -- to h & -- to pi 	done.
+    	/* $res = $parsed; */
 
     	if( 'save' == $mode ) {
 
-    		--	from hear most probabely we need to return $res and it will be not prepared by should_return function most probabely. -- to h & -- to pi
+    		--	from hear most probabely we need to return $res and it will be not prepared by should_return function most probabely. -- to h & -- to pi	done.
     		NOTE: here we need to set in $res the type != success. but we have set all the standard proparty like type, sub_type and so on to ensure that if it have required on underlying layers then they can directly use it. and type != success condition is not nessesry so that is not applyed and type is set for the all scenarios. 
     		$res = array('type' => $parsed['type'], 'msg' => $parsed['msg'], 'sub_type' => $parsed['sub_type'], 'sub_msg' => $parsed['sub_msg']);
     	}
@@ -563,9 +564,9 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
     	$type = $parsed['type'] != 'success' ? $parsed['type'] : $parsed['sub_type'];
 
-    	$style .= $type === 'error' ? 'color: red;' : '';
-		$style .= $type === 'warning' ? 'background-color: yellow;' : '';
-		$style .= $type === 'success' ? 'color: green;' : '';
+    	$style .= $type == 'error' ? 'color: red;' : '';
+		$style .= $type == 'warning' ? 'background-color: yellow;' : '';
+		$style .= $type == 'success' ? 'color: green;' : '';
 
     	$visible_info = array(
 				    		'label' => eowbc_lang($msg),
@@ -575,7 +576,6 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 				    		'attr'=>array('style = "'.$style.'"'),
 	    				);
 
-    	--	ahi may be after add karavnu avse so me to add just a argument spport inside below function.	-- to h & -- to pi
     	$tab_form = wbc()->common->array_insert_before($tab_form, $fk, $fk.'_eas_visible_info', $visible_info, true);
 
     	return $tab_form;
