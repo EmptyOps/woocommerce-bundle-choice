@@ -105,7 +105,7 @@ if(!class_exists('WBC_Loader')) {
 		        	add_action( 'wp_enqueue_scripts', function() {
 
 		        	    // Enqueue the external script wc_price.js
-		        	    wp_enqueue_script( 'wc-price-js', defined( 'EOWBC_ASSET_URL' ) . 'js/woocommerce-price/wc_price.js', array( 'jquery' ), '1.0', false );
+		        	    wp_enqueue_script( 'wc-price-js', constant( 'EOWBC_ASSET_URL' ) . 'js/woocommerce-price/wc_price.js', array( 'jquery' ), '1.0', false );
 
 		        	    // Prepare WooCommerce settings to pass to JavaScript
 		        	    $wc_store_object = array(
