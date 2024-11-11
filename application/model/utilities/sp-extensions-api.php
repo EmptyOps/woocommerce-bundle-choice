@@ -279,7 +279,8 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
 									$payload['fctr'][$sfk] = self::field_value_for_payload($mode, $fk, $sfk, $sfv);
 
-									if( $fk == $sfk ) {
+									--	niche ni if delete karava ni te agal recoding ma avase.	--	to pi
+									if( $fk == $sfk || $sfv['type'] == 'checkbox' ) {
 
 										if( !empty($sfv['value']) ) {
 
@@ -423,12 +424,11 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
     	return $section_fields;
     }
 
-	private static function field_value_for_payload($mode, $fk , $sfk, $sfv) {
+	private static function field_value_for_payload($mode, $fk, $sfk, $sfv) {
 
-		NOTE: niche else ma $_POST chenge karavanu 267.70.1 recoding ma avayu che.
 		$value = ($mode == 'get' ? $sfv['value'] : wbc()->sanitize->post($sfk));
 
-		if( $fk == $sfk || $sfv["type"]=='checkbox' ) {
+		if( $fk == $sfk || $sfv["type"] == 'checkbox' ) {
 
 			if( !empty($value) ) {
 

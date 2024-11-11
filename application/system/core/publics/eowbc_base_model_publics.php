@@ -194,6 +194,7 @@ class Eowbc_Base_Model_Publics {
 
 					if( 'image' == $sfv['st'] ) {
 
+						--	267.75.2 ma janavu che te moojab plugin sudhinoj path ave te rite nicheno varibala update karavo.and pachi chatgtp pase slash nu karavavu and tena mate constant no use karavavanu kevu.	-- to pi
 						$plugin_dir = plugin_dir_path(__DIR__);
 
 						if( in_array( strtolower( wbc()->file->extension_from_path( $plugin_dir . $sfv['p'] ) ), $allowes_types) ) {
