@@ -197,7 +197,7 @@ class Eowbc_Filters extends Eowbc_Model {
 
 			// ACTIVE_TODO eventually this models get and save functions needs to be upgraded and then none or minimum code will remain here as well as the below call to parent function might needed to be moved a little up or down  within this function but yeah call to parent function will definitely stay here in this model function. -- to h 
 			$temp_res = parent::save($form_definition, $is_auto_insert_for_template, $args);
-			if(!empty($temp_res['type']) && $temp_res['type'] != "success"){
+			if(empty($temp_res['type']) || $temp_res['type'] != "success"){
 	
 				return $temp_res;
 			}

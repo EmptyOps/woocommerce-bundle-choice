@@ -283,6 +283,8 @@ if (!class_exists('Extras')) {
 						'activate_main_fk' => array(
 							'type' => 'hidden',
 							'value' => 'activate',
+							--	underscort and singlatone function appen karavanu avse te nichena fild ma pan karavu.
+							'easf' => 'activate',
 						),
 						'extras_save_btn' => array(
 							'label' => eowbc_lang('Save'),

@@ -13,7 +13,7 @@ ACTIVE_TODO/TEMP aa view lode karavo che te temperory Bhavesh_2 branch na sampal
 require_once constant('EOWBC_TEMPLATE_DIR').'admin/menu/tiny_features.php';
 
 $temp_res = \eo\wbc\model\admin\Eowbc_Model::instance()->save(self::get_form_definition(), $is_auto_insert_for_template, $args);
-if(!empty($temp_res['type']) && $temp_res['type'] != "success"){
+if(empty($temp_res['type']) || $temp_res['type'] != "success"){
 
 	return $temp_res;
 }

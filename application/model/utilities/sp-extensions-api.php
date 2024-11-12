@@ -35,7 +35,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 			// Build the query string
 			$query_string = http_build_query($query_string);
 
-			$url .= (strpos($url, '?') !== FALSE ? $query_string : "?" . $query_string);
+			$url .= (strpos($url, '?') !== FALSE ? '&' . $query_string : "?" . $query_string);
 		} elseif( 'wp_remote_post' == $args['method'] ) {
 
 			// ACTIVE_TODO aa array merge opretion karu che pan a haji wp_remote_post ma jeva post perameter support kare che post mate k data mate na perameter e wise confirm karavanu and test karavanu baki che.	--	to hi & --	to pi
@@ -91,10 +91,13 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 		if( empty($query_string) ) {
 
 			$query_string = "";
+		} else {
+
+			$query_string .= '&';
 		}
 
-		ACTIVE_TODO as when we requeied the user agent spport we need pass it ti hear.	--	to h & --  to pi
-		$query_string .= "user_agent=" . '';
+		ACTIVE_TODO as and when we required the user agent support we need to pass it from here.	--	to h & --  to pi
+		$query_string .= "user_agent=" . '' . '&';
 
 		if( !is_array($payload) ) {
 			
@@ -107,6 +110,12 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 		}
 
 		$query_string .= self::active_theme_and_plugins();
+
+		$query_string_temp = null;
+
+		parse_str($query_string, $query_string_temp);
+
+		$payload['fctr'] = array_merge($payload['fctr'], $query_string_temp);
 
 		if( !isset($payload['sp_api_bpfa']) ) {
 
@@ -183,6 +192,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 			$active_parent_theme_slug = $parent_themes->get_template(); // This will get the directory (slug) of the parent theme
 			$active_parent_theme_version = $parent_themes->get('Version');
 
+			--	active_child_theme_slug no available hoy to ano spport may be mp pase add karavavo padase.	-- to h
 			$query_string .= "active_theme_slug=" .  $active_parent_theme_slug . "&";
 			$query_string .= "active_theme_version=" .  $active_parent_theme_version . "&";
 			$query_string .= "active_child_theme_slug=" .  $active_theme_slug . "&";
@@ -195,11 +205,9 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
 		/* $query_string .= "active_plugins_slugs=" . explode("," , $active_plugins_slugs) . "&";
 		$query_string .= "active_plugins_versions=" . explode("," , $active_plugins_versions) . "&"; */
-		$query_string .= "active_plugins=";
 		foreach ($active_plugins as $slug => $version) {
-			$query_string .= $slug . ":" . $version . ",";
+			$query_string .= $slug . "=" . $version . "&";
 		}
-		$query_string = rtrim($query_string, ',') . "&";
 
 		return $query_string;
 	}
@@ -231,7 +239,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
 		$saved_tab_key = !empty( $args["hook_callback_args"]["sp_frmb_saved_tab_key"] ) ? $args["hook_callback_args"]["sp_frmb_saved_tab_key"] : ""; 
 
-		NOTE: if evar we have any other filed to skip then add hear.
+		NOTE: if ever we have any other field to skip then add here.
 		$skip_fileds = array(/* 'sp_frmb_saved_tab_key' */ $saved_tab_key);
 		
 		$save_as_data = array();	
@@ -245,7 +253,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 	    	}
 
 	    	// --	nicheno key_clean variable comment karavo padashe kem k tene variable dipendency che so jaroor no hoy to comment. -- to h & -- to pi done.	
-	    	/* $key_clean = ((!empty($this->tab_key_prefix) and strpos($key,$this->tab_key_prefix)===0)?substr($key,strlen($this->tab_key_prefix)):$key); */
+	    	// $key_clean = ((!empty($this->tab_key_prefix) and strpos($key,$this->tab_key_prefix)===0)?substr($key,strlen($this->tab_key_prefix)):$key); 
 	    	//$res['data_form'][]= $tab;
 			$is_table_save = false;	//	ACTIVE_TODO/TODO it should be passed from child maybe or make dynamic as applicable. ($key == $this->tab_key_prefix."d_fconfig" or $key == $this->tab_key_prefix."s_fconfig" or $key=='filter_set') ? true : false;
 
@@ -280,16 +288,6 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 									$payload['fctr'][$sfk] = self::field_value_for_payload($mode, $fk, $sfk, $sfv);
 
 									--	niche ni if delete karava ni te agal recoding ma avase.	--	to pi
-									if( $fk == $sfk || $sfv['type'] == 'checkbox' ) {
-
-										if( !empty($sfv['value']) ) {
-
-											$payload['fctr'][$sfk] = 1;
-										} else {
-
-											$payload['fctr'][$sfk] = /* 0 */-1;
-										}
-									}
 								}
 							}
 
@@ -460,12 +458,12 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
     	}
 
     	// --	hear we need to prepare the $res form $parsed by creating empty array and so on. -- to h & -- to pi 	done.
-    	/* $res = $parsed; */
+    	// $res = $parsed;
 
     	if( 'save' == $mode ) {
 
-    		--	from hear most probabely we need to return $res and it will be not prepared by should_return function most probabely. -- to h & -- to pi	done.
-    		NOTE: here we need to set in $res the type != success. but we have set all the standard proparty like type, sub_type and so on to ensure that if it have required on underlying layers then they can directly use it. and type != success condition is not nessesry so that is not applyed and type is set for the all scenarios. 
+    		// --	from hear most probabely we need to return $res and it will be not prepared by should_return function most probabely. -- to h & -- to pi	done.
+    		// NOTE: here we need to set in $res the type != success. but we have set all the standard proparty like type, sub_type and so on to ensure that if it have required on underlying layers then they can directly use it. and type != success condition is not nessesry so that is not applyed and type is set for the all scenarios. 
     		$res = array('type' => $parsed['type'], 'msg' => $parsed['msg'], 'sub_type' => $parsed['sub_type'], 'sub_msg' => $parsed['sub_msg']);
     	}
 
@@ -523,7 +521,9 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
     		if( $fk == $sfk ) {
 
+				ACTIVE_TODO_OC_START
     			--	most probabely we need to make here the switch as non interactive by removeing the applicable proparty entirely or proparty attribute. 
+				ACTIVE_TODO_OC_END
     		} else {
 
     			$string_class = null;
