@@ -91,7 +91,7 @@ class Eowbc_Base_Model_Publics {
 		}
 		
 		// ACTIVE_TODO_OC_START
-		// --	seens now the error handling is spported specifically based on throw_types and so on and it is handled in the handle_response function so no need of below if elseif structure here. as well as the isset conditions below the json_decode statement at last in this function are handling and managing to create the type and msg and so on field accordingly. but at least what we need to do is if the response is a standard wordpress error then need to capture the msg and set it in the msg field while set the error value in the type file.	-- to h & -- to pi  
+		// --	seens now the error handling is supported specifically based on throw_types and so on and it is handled in the handle_response function so no need of below if elseif structure here. as well as the isset conditions below the json_decode statement at last in this function are handling and managing to create the type and msg and so on field accordingly. but at least what we need to do is if the response is a standard wordpress error then need to capture the msg and set it in the msg field while set the error value in the type field.	-- to h & -- to pi  
 		// if( empty($response) ) {
 
 		// 	throw new \Exception("There is some error in the api call response.", 1);
@@ -197,7 +197,7 @@ class Eowbc_Base_Model_Publics {
 					if( 'image' == $sfv['st'] ) {
 
 						--	267.75.2 ma janavu che te moojab plugin sudhinoj path ave te rite nicheno varibala update karavo.and pachi chatgtp pase slash nu karavavu and tena mate constant no use karavavanu kevu.constance thi serach kari ne jovu k wordpress nu koi avo constance che je arite plugin no path provude kare che k nai.	-- to pi
-						$plugin_dir = plugin_dir_path(__DIR__);
+						$plugin_dir = WP_PLUGIN_DIR . '/';
 
 						if( in_array( strtolower( wbc()->file->extension_from_path( $plugin_dir . $sfv['p'] ) ), $allowed_types) ) {
 

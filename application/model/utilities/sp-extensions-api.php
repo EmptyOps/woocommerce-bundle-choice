@@ -109,13 +109,13 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 			$payload['fctr'] = array();
 		}
 
-		$query_string .= self::active_theme_and_plugins();
+		$query_string_temp .= self::active_theme_and_plugins();
 
-		$query_string_temp = null;
+		$query_string = null;
 
-		parse_str($query_string, $query_string_temp);
+		parse_str($query_string_temp, $query_string);
 
-		$payload['fctr'] = array_merge($payload['fctr'], $query_string_temp);
+		$payload['fctr'] = array_merge($payload['fctr'], $query_string);
 
 		if( !isset($payload['sp_api_bpfa']) ) {
 

@@ -681,7 +681,8 @@ if (!class_exists('Appearance')) {
 							'label' => 'Theme Primary Color',
 							'type' => 'color',
 							'sanitize' => 'sanitize_hex_color',
-							'value' => wbc()->options->get_option('appearance_global', 'theme_primary_color', '#000000', true, true),
+							// NOTE: ama j default colour value set kari che te user expiriance mate che, jo user a ama koi chenge k set nai karu hoy to default value functionality ma considar nai thay means jo user a ama koi chenge k set nai karu hoy to a error apse. means e frontend ma or bije kai use nai thay means aa khali display mate che.
+							'value' => wbc()->options->get_option('appearance_global', 'theme_primary_color', '#000000', false, true),
 							'is_id_as_name' => true,
 							'class' => array(),
 						),
@@ -689,7 +690,8 @@ if (!class_exists('Appearance')) {
 							'label' => 'Theme Secondary Color',
 							'type' => 'color',
 							'sanitize' => 'sanitize_hex_color',
-							'value' => wbc()->options->get_option('appearance_global', 'theme_secondary_color', '#ffffff', true, true),
+							// NOTE: ama j default colour value set kari che te user expiriance mate che, jo user a ama koi chenge k set nai karu hoy to default value functionality ma considar nai thay means jo user a ama koi chenge k set nai karu hoy to a error apse. means e frontend ma or bije kai use nai thay means aa khali display mate che.
+							'value' => wbc()->options->get_option('appearance_global', 'theme_secondary_color', '#ffffff', false, true),
 							'is_id_as_name' => true,
 							'class' => array(),
 							'visible_info' => array(
@@ -700,10 +702,11 @@ if (!class_exists('Appearance')) {
 							),
 						),
 						'theme_primary_color_shade_light_90' => array(
-							'label' => 'Theme Primary Color Shade Light 90%',
+							'label' => 'Theme Primary Color Shade 90%',
 							'type' => 'color',
 							'sanitize' => 'sanitize_hex_color',
-							'value' => wbc()->options->get_option('appearance_global', 'theme_primary_color_shade_light_90', '#212529', true, true),
+							// NOTE: ama j default colour value set kari che te user expiriance mate che, jo user a ama koi chenge k set nai karu hoy to default value functionality ma considar nai thay means jo user a ama koi chenge k set nai karu hoy to a error apse. means e frontend ma or bije kai use nai thay means aa khali display mate che.
+							'value' => wbc()->options->get_option('appearance_global', 'theme_primary_color_shade_light_90', '#212529', false, true),
 							'is_id_as_name' => true,
 							'class' => array(),
 							'visible_info' => array(
@@ -714,10 +717,11 @@ if (!class_exists('Appearance')) {
 							),
 						),
 						'theme_secondary_color_shade_light_90' => array(
-							'label' => 'Theme Secondary Color Shade Light 90%',
+							'label' => 'Theme Secondary Color Shade 90%',
 							'type' => 'color',
 							'sanitize' => 'sanitize_hex_color',
-							'value' => wbc()->options->get_option('appearance_global', 'theme_secondary_color_shade_light_90', '#f9f9f9', true, true),
+							// NOTE: ama j default colour value set kari che te user expiriance mate che, jo user a ama koi chenge k set nai karu hoy to default value functionality ma considar nai thay means jo user a ama koi chenge k set nai karu hoy to a error apse. means e frontend ma or bije kai use nai thay means aa khali display mate che.
+							'value' => wbc()->options->get_option('appearance_global', 'theme_secondary_color_shade_light_90', '#f9f9f9', false, true),
 							'is_id_as_name' => true,
 							'class' => array(),
 							'visible_info' => array(
@@ -728,10 +732,11 @@ if (!class_exists('Appearance')) {
 							),
 						),
 						'theme_primary_color_shade_light_80' => array(
-							'label' => 'Theme Primary Color Shade Light 80%',
+							'label' => 'Theme Primary Color Shade 80%',
 							'type' => 'color',
 							'sanitize' => 'sanitize_hex_color',
-							'value' => wbc()->options->get_option('appearance_global', 'theme_primary_color_shade_light_80', '#333', true, true),
+							// NOTE: ama j default colour value set kari che te user expiriance mate che, jo user a ama koi chenge k set nai karu hoy to default value functionality ma considar nai thay means jo user a ama koi chenge k set nai karu hoy to a error apse. means e frontend ma or bije kai use nai thay means aa khali display mate che.
+							'value' => wbc()->options->get_option('appearance_global', 'theme_primary_color_shade_light_80', '#333', false, true),
 							'is_id_as_name' => true,
 							'class' => array(),
 							'visible_info' => array(
@@ -742,10 +747,11 @@ if (!class_exists('Appearance')) {
 							),
 						),
 						'theme_secondary_color_shade_light_80' => array(
-							'label' => 'Theme Secondary Color Shade Light 80%',
+							'label' => 'Theme Secondary Color Shade 80%',
 							'type' => 'color',
 							'sanitize' => 'sanitize_hex_color',
-							'value' => wbc()->options->get_option('appearance_global', 'theme_secondary_color_shade_light_80', '#787878', true, true),
+							// NOTE: ama j default colour value set kari che te user expiriance mate che, jo user a ama koi chenge k set nai karu hoy to default value functionality ma considar nai thay means jo user a ama koi chenge k set nai karu hoy to a error apse. means e frontend ma or bije kai use nai thay means aa khali display mate che.
+							'value' => wbc()->options->get_option('appearance_global', 'theme_secondary_color_shade_light_80', '#787878', false, true),
 							'is_id_as_name' => true,
 							'class' => array(),
 							'visible_info' => array(
@@ -756,10 +762,11 @@ if (!class_exists('Appearance')) {
 							),
 						),
 						'theme_primary_color_shade_light_60' => array(
-							'label' => 'Theme Primary Color Shade Light 60%',
+							'label' => 'Theme Primary Color Shade 60%',
 							'type' => 'color',
 							'sanitize' => 'sanitize_hex_color',
-							'value' => wbc()->options->get_option('appearance_global', 'theme_primary_color_shade_light_60', '#495057', true, true),
+							// NOTE: ama j default colour value set kari che te user expiriance mate che, jo user a ama koi chenge k set nai karu hoy to default value functionality ma considar nai thay means jo user a ama koi chenge k set nai karu hoy to a error apse. means e frontend ma or bije kai use nai thay means aa khali display mate che.
+							'value' => wbc()->options->get_option('appearance_global', 'theme_primary_color_shade_light_60', '#495057', false, true),
 							'is_id_as_name' => true,
 							'class' => array(),
 							'visible_info' => array(
@@ -770,10 +777,11 @@ if (!class_exists('Appearance')) {
 							),
 						),
 						'theme_secondary_color_shade_light_60' => array(
-							'label' => 'Theme Secondary Color Shade Light 60%',
+							'label' => 'Theme Secondary Color Shade 60%',
 							'type' => 'color',
 							'sanitize' => 'sanitize_hex_color',
-							'value' => wbc()->options->get_option('appearance_global', 'theme_secondary_color_shade_light_60', '#cccccc', true, true),
+							// NOTE: ama j default colour value set kari che te user expiriance mate che, jo user a ama koi chenge k set nai karu hoy to default value functionality ma considar nai thay means jo user a ama koi chenge k set nai karu hoy to a error apse. means e frontend ma or bije kai use nai thay means aa khali display mate che.
+							'value' => wbc()->options->get_option('appearance_global', 'theme_secondary_color_shade_light_60', '#cccccc', false, true),
 							'is_id_as_name' => true,
 							'class' => array(),
 							'visible_info' => array(
@@ -784,10 +792,11 @@ if (!class_exists('Appearance')) {
 							),
 						),
 						'theme_primary_color_shade_light_50' => array(
-							'label' => 'Theme Primary Color Shade Light 50%',
+							'label' => 'Theme Primary Color Shade 50%',
 							'type' => 'color',
 							'sanitize' => 'sanitize_hex_color',
-							'value' => wbc()->options->get_option('appearance_global', 'theme_primary_color_shade_light_50', '#766a6a', true, true),
+							// NOTE: ama j default colour value set kari che te user expiriance mate che, jo user a ama koi chenge k set nai karu hoy to default value functionality ma considar nai thay means jo user a ama koi chenge k set nai karu hoy to a error apse. means e frontend ma or bije kai use nai thay means aa khali display mate che.
+							'value' => wbc()->options->get_option('appearance_global', 'theme_primary_color_shade_light_50', '#766a6a', false, true),
 							'is_id_as_name' => true,
 							'class' => array(),
 							'visible_info' => array(
@@ -798,10 +807,11 @@ if (!class_exists('Appearance')) {
 							),
 						),
 						'theme_secondary_color_shade_light_50' => array(
-							'label' => 'Theme Secondary Color Shade Light 50%',
+							'label' => 'Theme Secondary Color Shade 50%',
 							'type' => 'color',
 							'sanitize' => 'sanitize_hex_color',
-							'value' => wbc()->options->get_option('appearance_global', 'theme_secondary_color_shade_light_50', '#a7a7a7', true, true),
+							// NOTE: ama j default colour value set kari che te user expiriance mate che, jo user a ama koi chenge k set nai karu hoy to default value functionality ma considar nai thay means jo user a ama koi chenge k set nai karu hoy to a error apse. means e frontend ma or bije kai use nai thay means aa khali display mate che.
+							'value' => wbc()->options->get_option('appearance_global', 'theme_secondary_color_shade_light_50', '#a7a7a7', false, true),
 							'is_id_as_name' => true,
 							'class' => array(),
 							'visible_info' => array(
@@ -812,10 +822,11 @@ if (!class_exists('Appearance')) {
 							),
 						),
 						'theme_primary_color_shade_light_40' => array(
-							'label' => 'Theme Primary Color Shade Light 40%',
+							'label' => 'Theme Primary Color Shade 40%',
 							'type' => 'color',
 							'sanitize' => 'sanitize_hex_color',
-							'value' => wbc()->options->get_option('appearance_global', 'theme_primary_color_shade_light_40', '#575252', true, true),
+							// NOTE: ama j default colour value set kari che te user expiriance mate che, jo user a ama koi chenge k set nai karu hoy to default value functionality ma considar nai thay means jo user a ama koi chenge k set nai karu hoy to a error apse. means e frontend ma or bije kai use nai thay means aa khali display mate che.
+							'value' => wbc()->options->get_option('appearance_global', 'theme_primary_color_shade_light_40', '#575252', false, true),
 							'is_id_as_name' => true,
 							'class' => array(),
 							'visible_info' => array(
@@ -826,10 +837,11 @@ if (!class_exists('Appearance')) {
 							),
 						),
 						'theme_secondary_color_shade_light_40' => array(
-							'label' => 'Theme Secondary Color Shade Light 40%',
+							'label' => 'Theme Secondary Color Shade 40%',
 							'type' => 'color',
 							'sanitize' => 'sanitize_hex_color',
-							'value' => wbc()->options->get_option('appearance_global', 'theme_secondary_color_shade_light_40', '#cecece', true, true),
+							// NOTE: ama j default colour value set kari che te user expiriance mate che, jo user a ama koi chenge k set nai karu hoy to default value functionality ma considar nai thay means jo user a ama koi chenge k set nai karu hoy to a error apse. means e frontend ma or bije kai use nai thay means aa khali display mate che.
+							'value' => wbc()->options->get_option('appearance_global', 'theme_secondary_color_shade_light_40', '#cecece', false, true),
 							'is_id_as_name' => true,
 							'class' => array(),
 							'visible_info' => array(

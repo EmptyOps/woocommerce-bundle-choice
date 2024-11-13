@@ -269,7 +269,7 @@ if (!class_exists('Extras')) {
 							'class' => array(),
 						),
 						--	aa switch na setting tabal view ma enabal on cetegory page switch sathe compare karavu.
-						'activate' => array(
+						'activate_' . $extras_config['singleton_function'] => array(
 							'label' => 'Activate',
 							'type' => 'checkbox',
 							'sanitize' => 'sanitize_text_field',
@@ -278,13 +278,13 @@ if (!class_exists('Extras')) {
 							'class' => array(),
 							'size_class' => array('eight','wide'),
 							'inline' => true,
-							'eas' => array('ihk' => null --	value need to be passed here extras config mathi avase., 'ep' => ''--	value need to be passed here extras config mathi avase., 'au' => ''--	value need to be passed here extras config mathi avase., 'dap' => true),
+							'eas' => array('ihk' => $extras_config['ihk'], 'ep' => $extras_config['endpoint'], 'au' => $extras_config['host'], 'dap' => true),
 						),
-						'activate_main_fk' => array(
+						'activate_' . $extras_config['singleton_function'] . '_main_fk' => array(
 							'type' => 'hidden',
-							'value' => 'activate',
+							'value' => 'activate_' . $extras_config['singleton_function'],
 							--	underscort and singlatone function appen karavanu avse te nichena fild ma pan karavu.
-							'easf' => 'activate',
+							'easf' => 'activate_' . $extras_config['singleton_function'],
 						),
 						'extras_save_btn' => array(
 							'label' => eowbc_lang('Save'),
