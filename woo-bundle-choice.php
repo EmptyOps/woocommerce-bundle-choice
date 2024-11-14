@@ -201,12 +201,14 @@ if(!class_exists('Woo_Bundle_Choice') ) {
 
 					if( $curr_plugin_slug == 'woo-bundle-choice' ) {
 
-						add_filter('sp_wbc_extras_config', function( $plugin_slug ) {
+						add_filter('sp_wbc_extras_config', function( $filter_var, $plugin_slug ) {
 
 							if( $plugin_slug == 'woo-bundle-choice' ) {
 								return wbc()->config->extras();
 							}
-						}, 10, 1);
+
+							return $filter_var;
+						}, 10, 2);
 					}
 
 				}

@@ -29,7 +29,7 @@ class Eowbc_Extras extends Eowbc_Model
 
 		$page_slug = wbc()->sanitize->get('page');
 		$plugin_slug = explode("---", $page_slug)[0];
-		$extras_config = apply_filters('sp_wbc_extras_config', $plugin_slug);
+		$extras_config = apply_filters('sp_wbc_extras_config', array(), $plugin_slug);
 
 		//loop through form tabs and save 
 		foreach ($form_definition as $key => $tab) {

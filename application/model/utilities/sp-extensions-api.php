@@ -96,6 +96,8 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 			$query_string .= '&';
 		}
 
+		$query_string .= "token=" . wbc()->options->get_option('extras_extras_configuration','token') . '&';
+
 		ACTIVE_TODO as and when we required the user agent support we need to pass it from here.	--	to h & --  to pi
 		$query_string .= "user_agent=" . '' . '&';
 
@@ -109,13 +111,13 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 			$payload['fctr'] = array();
 		}
 
-		$query_string_temp .= self::active_theme_and_plugins();
+		$query_string_temp = self::active_theme_and_plugins();
 
-		$query_string = null;
+		$query_string_temp_1 = null;
 
-		parse_str($query_string_temp, $query_string);
+		parse_str($query_string_temp, $query_string_temp_1);
 
-		$payload['fctr'] = array_merge($payload['fctr'], $query_string);
+		$payload['fctr'] = array_merge($payload['fctr'], $query_string_temp_1);
 
 		if( !isset($payload['sp_api_bpfa']) ) {
 
@@ -146,8 +148,8 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 		// -- here we need to put the appropriate code for fetching the active theme and plugins. -- to h & -- to pi done.
 
 		$query_string = '';
-		/* $active_plugins_slugs = array();
-		$active_plugins_versions = array(); */
+		// $active_plugins_slugs = array();
+		// $active_plugins_versions = array();
 		$active_plugins = array();
 		$active_theme_slug = '';
 		$active_theme_version = '';
@@ -165,8 +167,8 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 				if( is_plugin_active($plugin_path) ) {
 
 					// If active, add it to the active plugins array
-					/* $active_plugins_slugs[] = dirname($plugin_path);
-					$active_plugins_versions[] = $plugin_info['Version']; */
+					// $active_plugins_slugs[] = dirname($plugin_path);
+					// $active_plugins_versions[] = $plugin_info['Version'];
 					$active_plugins[dirname($plugin_path)] = $plugin_info['Version'];
 				}
 
@@ -203,8 +205,8 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 			$query_string .= "active_theme_version=" .  $active_theme_version . "&";
 		}
 
-		/* $query_string .= "active_plugins_slugs=" . explode("," , $active_plugins_slugs) . "&";
-		$query_string .= "active_plugins_versions=" . explode("," , $active_plugins_versions) . "&"; */
+		// $query_string .= "active_plugins_slugs=" . explode("," , $active_plugins_slugs) . "&";
+		// $query_string .= "active_plugins_versions=" . explode("," , $active_plugins_versions) . "&";
 		foreach ($active_plugins as $slug => $version) {
 			$query_string .= $slug . "=" . $version . "&";
 		}
@@ -287,7 +289,6 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
 									$payload['fctr'][$sfk] = self::field_value_for_payload($mode, $fk, $sfk, $sfv);
 
-									--	niche ni if delete karava ni te agal recoding ma avase.	--	to pi
 								}
 							}
 
