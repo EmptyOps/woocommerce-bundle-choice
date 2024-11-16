@@ -710,7 +710,7 @@ if (!class_exists('Appearance')) {
 							'is_id_as_name' => true,
 							'class' => array(),
 							'visible_info' => array(
-								'label' => 'If your theme means web site layout do not have the primary color shade then simply select a light color shade of the primary color.',
+								'label' => 'If your theme means web site layout do not have the necessary shade for this field then simply select an appropriate light color shade of the Primary Color.',
 								'type' => 'visible_info',
 								'class' => array('fluid', 'small'),
 								'size_class' => array('sixteen', 'wide'),
@@ -725,7 +725,7 @@ if (!class_exists('Appearance')) {
 							'is_id_as_name' => true,
 							'class' => array(),
 							'visible_info' => array(
-								'label' => 'If your theme means web site layout do not have the secondary color shade then simply select a light color shade of the secondary color.',
+								'label' => 'If your theme means web site layout do not have the necessary shade for this field then simply select an appropriate light color shade of the Secondary Color.',
 								'type' => 'visible_info',
 								'class' => array('fluid', 'small'),
 								'size_class' => array('sixteen', 'wide'),
@@ -740,7 +740,7 @@ if (!class_exists('Appearance')) {
 							'is_id_as_name' => true,
 							'class' => array(),
 							'visible_info' => array(
-								'label' => 'If your theme means web site layout do not have the primary color shade then simply select a light color shade of the primary color.',
+								'label' => 'If your theme means web site layout do not have the necessary shade for this field then simply select an appropriate light color shade of the Primary Color.',
 								'type' => 'visible_info',
 								'class' => array('fluid', 'small'),
 								'size_class' => array('sixteen', 'wide'),
@@ -755,7 +755,7 @@ if (!class_exists('Appearance')) {
 							'is_id_as_name' => true,
 							'class' => array(),
 							'visible_info' => array(
-								'label' => 'If your theme means web site layout do not have the secondary color shade then simply select a light color shade of the secondary color.',
+								'label' => 'If your theme means web site layout do not have the necessary shade for this field then simply select an appropriate light color shade of the Secondary Color.',
 								'type' => 'visible_info',
 								'class' => array('fluid', 'small'),
 								'size_class' => array('sixteen', 'wide'),
@@ -770,7 +770,7 @@ if (!class_exists('Appearance')) {
 							'is_id_as_name' => true,
 							'class' => array(),
 							'visible_info' => array(
-								'label' => 'If your theme means web site layout do not have the primary color shade then simply select a light color shade of the primary color.',
+								'label' => 'If your theme means web site layout do not have the necessary shade for this field then simply select an appropriate light color shade of the Primary Color.',
 								'type' => 'visible_info',
 								'class' => array('fluid', 'small'),
 								'size_class' => array('sixteen', 'wide'),
@@ -785,7 +785,7 @@ if (!class_exists('Appearance')) {
 							'is_id_as_name' => true,
 							'class' => array(),
 							'visible_info' => array(
-								'label' => 'If your theme means web site layout do not have the secondary color shade then simply select a light color shade of the secondary color.',
+								'label' => 'If your theme means web site layout do not have the necessary shade for this field then simply select an appropriate light color shade of the Secondary Color.',
 								'type' => 'visible_info',
 								'class' => array('fluid', 'small'),
 								'size_class' => array('sixteen', 'wide'),
@@ -800,7 +800,7 @@ if (!class_exists('Appearance')) {
 							'is_id_as_name' => true,
 							'class' => array(),
 							'visible_info' => array(
-								'label' => 'If your theme means web site layout do not have the primary color shade then simply select a light color shade of the primary color.',
+								'label' => 'If your theme means web site layout do not have the necessary shade for this field then simply select an appropriate light color shade of the Primary Color.',
 								'type' => 'visible_info',
 								'class' => array('fluid', 'small'),
 								'size_class' => array('sixteen', 'wide'),
@@ -815,7 +815,7 @@ if (!class_exists('Appearance')) {
 							'is_id_as_name' => true,
 							'class' => array(),
 							'visible_info' => array(
-								'label' => 'If your theme means web site layout do not have the secondary color shade then simply select a light color shade of the secondary color.',
+								'label' => 'If your theme means web site layout do not have the necessary shade for this field then simply select an appropriate light color shade of the Secondary Color.',
 								'type' => 'visible_info',
 								'class' => array('fluid', 'small'),
 								'size_class' => array('sixteen', 'wide'),
@@ -830,7 +830,7 @@ if (!class_exists('Appearance')) {
 							'is_id_as_name' => true,
 							'class' => array(),
 							'visible_info' => array(
-								'label' => 'If your theme means web site layout do not have the primary color shade then simply select a light color shade of the primary color.',
+								'label' => 'If your theme means web site layout do not have the necessary shade for this field then simply select an appropriate light color shade of the Primary Color.',
 								'type' => 'visible_info',
 								'class' => array('fluid', 'small'),
 								'size_class' => array('sixteen', 'wide'),
@@ -845,7 +845,7 @@ if (!class_exists('Appearance')) {
 							'is_id_as_name' => true,
 							'class' => array(),
 							'visible_info' => array(
-								'label' => 'If your theme means web site layout do not have the secondary color shade then simply select a light color shade of the secondary color.',
+								'label' => 'If your theme means web site layout do not have the necessary shade for this field then simply select an appropriate light color shade of the Secondary Color.',
 								'type' => 'visible_info',
 								'class' => array('fluid', 'small'),
 								'size_class' => array('sixteen', 'wide'),

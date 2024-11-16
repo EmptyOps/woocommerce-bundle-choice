@@ -108,14 +108,14 @@ box-shadow: none;">
 
 		                  			<?php if(empty($primary_color) || empty($secondary_color) || empty($primary_color_shade_light_90) || empty($secondary_color_shade_light_90) || empty($primary_color_shade_light_80) || empty($secondary_color_shade_light_80) || empty($primary_color_shade_light_60) || empty($secondary_color_shade_light_60) || empty($primary_color_shade_light_50) || empty($secondary_color_shade_light_50) || empty($primary_color_shade_light_40) || empty($secondary_color_shade_light_40)):?> 
 
-		                  				<p style = "color:red;">It seems that you have not yet set the Primary Color or Secondary Color. So please go to below link and set the Primary Color and Secondary Color.</p><br><br>
+		                  				<p style = "color:red;">It seems that you have not yet set the Primary Color or Secondary Color or it's Shades. So please go to below link and set the Primary Color and Secondary Color and it's Shades.</p><br><br>
 
-		                  				After clicking below link go to the <b>Global</b> sub tab and then look for the Primary Color and Secondary Color. 
+		                  				After clicking below link go to the <b>Global</b> sub tab and then look for the Primary Color and Secondary Color and it's Shades. 
 		                  				<br>
 		                  				<a href='<?php echo wbc()->common->admin_url("admin.php?page=eowbc-appearance&atol=global"); ?>' style = "text-align: center;">Go to appearance admin page</a>
 		                  				<br><br>
 
-		                  				After you have set the Primary Color and Secondary Color then <b>come back here again</b> to continue the sample data process.
+		                  				After you have set the Primary Color and Secondary Color and it's Shades then <b>come back here again</b> to continue the sample data process.
 		                  			<?php endif; ?>    
 	                   			</td>
 	              			           		                	
