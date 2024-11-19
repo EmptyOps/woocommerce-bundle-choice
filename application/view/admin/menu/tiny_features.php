@@ -764,6 +764,8 @@ class Tiny_Features_View {
                 )									
             ),
         );
+        
+        $form_definition = apply_filters('eowbc_admin_form_tiny_features',$form_definition);
 
         return $form_definition;
     }
