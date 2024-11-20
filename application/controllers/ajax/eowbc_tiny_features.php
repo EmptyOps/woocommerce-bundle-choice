@@ -136,10 +136,12 @@ if(wp_verify_nonce(wbc()->sanitize->post('_wpnonce'),'eowbc_tiny_features')){
 					continue;
 				}
 
-				ACTIVE_TODO/TEMP nicheni if and flag che te jya sudhi tiny_features nu mvc and sarkha standard paramane fari upgrade na thay tya sudhi temperory rakhavanu che.	-- to h & -- to pi.
-				if( isset($fv["is_upgrade_version_field_saved_till_standard_upgrade"]) ) {
+				ACTIVE_TODO temp. nicheni if che te jya sudhi tiny_features nu mvc architecture sarkha standard paramane fari upgrade na thay tya sudhi temperory rakhavanu che.	-- to h & -- to pi.
+				if( isset($fv["is_upgrade_version_field_save_till_standard_upgrade"]) ) {
 
-					wbc()->options->update_option($key, $fk, $fv['value']);
+					--	ama post matho most probably value read karavanu avse.
+						267.79.3 done karavanu kevanu che aa point pate pachi.
+					wbc()->options->update_option($key, $fk, /* $fv['value'] */ wbc()->sanitize->post($fk));
 				}
 			}
 		}
