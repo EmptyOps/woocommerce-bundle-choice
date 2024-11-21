@@ -374,23 +374,10 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
 				if( $fk == $sfk || $sfv['type'] == 'checkbox' ) {
 
-					--	below if is not finlize yet.
-					--	may be we have covered hear only the checkbox type filds but not other so need to conferm about that. -- to h
-						--	$fv need to be add as argument in this function. -- to h & -- to pi
 					if( 
-						( 
-							empty( wbc()->options->get_option($section_property['tab_key'], /* $fk */$sfk) ) 
-							&& 
-							( in_array(/* $fv */$sfv["type"], \eo\wbc\model\admin\Form_Builder::savable_types()) 
-								&& ( isset($_POST[/* $fk */$sfk]) || /* $fv */$sfv["type"]=='checkbox') ) 
-						) 
+						( empty( wbc()->options->get_option($section_property['tab_key'], /* $fk */$sfk) ) && isset($_POST[/* $fk */$sfk]) ) 
 						|| 
-						( 
-							!empty( wbc()->options->get_option($section_property['tab_key'], /* $fk */$sfk) ) 
-							&& 
-							( in_array(/* $fv */$sfv["type"], \eo\wbc\model\admin\Form_Builder::savable_types()) 
-								&& ( !isset($_POST[/* $fk */$sfk]) || /* $fv */$sfv["type"]=='checkbox') ) 
-						) 
+						( !empty( wbc()->options->get_option($section_property['tab_key'], /* $fk */$sfk) ) && !isset($_POST[/* $fk */$sfk]) ) 
 					) {
 
 						return true;
