@@ -98,7 +98,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
 		$query_string .= "token=" . wbc()->options->get_option('extras_extras_configuration','token') . '&';
 
-		ACTIVE_TODO as and when we required the user agent support we need to pass it from here.	--	to h & --  to pi
+		// ACTIVE_TODO as and when we required the user agent support we need to pass it from here.	--	to h & --  to pi
 		$query_string .= "user_agent=" . '' . '&';
 
 		if( !is_array($payload) ) {
@@ -241,7 +241,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
 		$saved_tab_key = !empty( $args["hook_callback_args"]["sp_frmb_saved_tab_key"] ) ? $args["hook_callback_args"]["sp_frmb_saved_tab_key"] : ""; 
 
-		NOTE: if ever we have any other field to skip then add here.
+		// NOTE: if ever we have any other field to skip then add here.
 		$skip_fileds = array(/* 'sp_frmb_saved_tab_key' */ $saved_tab_key);
 		
 		$save_as_data = array();	
@@ -260,7 +260,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 			$is_table_save = false;	//	ACTIVE_TODO/TODO it should be passed from child maybe or make dynamic as applicable. ($key == $this->tab_key_prefix."d_fconfig" or $key == $this->tab_key_prefix."s_fconfig" or $key=='filter_set') ? true : false;
 
 			$table_data = array();
-			$tab_specific_skip_fileds = array();	ACTIVE_TODO/TODO it will be spported only if the hook pass it and so it is available here in this process_form_definition function in $args variable. means when the process_form_definition function called here from the hooks bound in this class from abow admin_hooks function.
+			$tab_specific_skip_fileds = array();	//ACTIVE_TODO/TODO it will be spported only if the hook pass it and so it is available here in this process_form_definition function in $args variable. means when the process_form_definition function called here from the hooks bound in this class from abow admin_hooks function.
 
 	    	foreach ($tab["form"] as $fk => $fv) {
 
@@ -349,14 +349,13 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
     		throw new \Exception("WBC Form Builder: The eas field should define the 'attr' property in array format only. Other type format is not supported.", 1); 
     	}
 
-    	NOTE : This is done to ensure backward compatibility.
+    	// NOTE : This is done to ensure backward compatibility.
     	if( !isset($fv['attr']['onclick']) ) {
 
     		$fv['attr']['onclick'] = '';
     	}
 
-    	--	nichena msg ma last ma "if you have changed any field of this switch section." text che ene chenge kari ne "when you change any field of this switch section.".	-- to h
-    	$fv['attr']['onclick'] = "alert('Important! Since you have changed the switch, after save action, the api settings will be updated so you need to test the related feature on the website frontend and elsewhere as applicable. And this applies to changes made to any field of this switch section so be sure to test related feature if you have changed any field of this switch section.');" . $fv['attr']['onclick'];
+    	$fv['attr']['onclick'] = "alert('Important! Since you have changed the switch, after save action, the api settings will be updated so you need to test the related feature on the website frontend and elsewhere as applicable. And this applies to changes made to any field of this switch section so be sure to test related feature when you change any field of this switch section.');" . $fv['attr']['onclick'];
 
     	return $fv;
     }
@@ -509,9 +508,9 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
     		if( $fk == $sfk ) {
 
-				ACTIVE_TODO_OC_START
-    			--	most probabely we need to make here the switch as non interactive by removeing the applicable proparty entirely or proparty attribute. 
-				ACTIVE_TODO_OC_END
+				// ACTIVE_TODO_OC_START
+    			// --	most probabely we need to make here the switch as non interactive by removeing the applicable proparty entirely or proparty attribute. 
+				// ACTIVE_TODO_OC_END
     		} else {
 
     			$string_class = null;
