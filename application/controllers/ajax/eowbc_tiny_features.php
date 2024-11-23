@@ -141,7 +141,7 @@ if(wp_verify_nonce(wbc()->sanitize->post('_wpnonce'),'eowbc_tiny_features')){
 
 					--	ama post matho most probably value read karavanu avse.
 						267.79.3 done karavanu kevanu che aa point pate pachi.
-					wbc()->options->update_option($key, $fk, /* $fv['value'] */ wbc()->sanitize->post($fk));
+					wbc()->options->update_option(/* $key */'tiny_features', $fk, /* $fv['value'] */ wbc()->sanitize->post($fk));
 				}
 			}
 		}
