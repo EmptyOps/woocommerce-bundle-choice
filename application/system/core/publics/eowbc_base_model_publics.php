@@ -196,8 +196,7 @@ class Eowbc_Base_Model_Publics {
 
 					if( 'image' == $sfv['st'] ) {
 
-						--	267.75.2 ma janavu che te moojab plugin sudhinoj path ave te rite nicheno varibala update karavo.and pachi chatgtp pase slash nu karavavu and tena mate constant no use karavavanu kevu.constance thi serach kari ne jovu k wordpress nu koi avo constance che je arite plugin no path provude kare che k nai.	-- to pi
-						$plugin_dir = WP_PLUGIN_DIR . '/';
+						$plugin_dir = trailingslashit(WP_PLUGIN_DIR);
 
 						if( in_array( strtolower( wbc()->file->extension_from_path( $plugin_dir . $sfv['p'] ) ), $allowed_types) ) {
 
