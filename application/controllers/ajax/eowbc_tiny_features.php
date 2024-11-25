@@ -13,7 +13,7 @@ ACTIVE_TODO/TEMP aa view lode karavo che te temperory Bhavesh_2 branch na sampal
 require_once constant('EOWBC_TEMPLATE_DIR').'admin/menu/tiny_features.php';
 
 $temp_res = \eo\wbc\model\admin\Eowbc_Model::instance()->save(self::get_form_definition(), $is_auto_insert_for_template, $args);
-if(!empty($temp_res['type']) && $temp_res['type'] != "success"){
+if(empty($temp_res['type']) || $temp_res['type'] != "success"){
 
 	return $temp_res;
 }
@@ -136,10 +136,12 @@ if(wp_verify_nonce(wbc()->sanitize->post('_wpnonce'),'eowbc_tiny_features')){
 					continue;
 				}
 
-				ACTIVE_TODO/TEMP nicheni if and flag che te jya sudhi tiny_features nu mvc and sarkha standard paramane fari upgrade na thay tya sudhi temperory rakhavanu che.	-- to h & -- to pi.
-				if( isset($fv["is_upgrade_version_field_saved_till_standard_upgrade"]) ) {
+				ACTIVE_TODO temp. nicheni if che te jya sudhi tiny_features nu mvc architecture sarkha standard paramane fari upgrade na thay tya sudhi temperory rakhavanu che.	-- to h & -- to pi.
+				if( isset($fv["is_upgrade_version_field_save_till_standard_upgrade"]) ) {
 
-					wbc()->options->update_option($key, $fk, $fv['value']);
+					--	ama post matho most probably value read karavanu avse.
+						267.79.3 done karavanu kevanu che aa point pate pachi.
+					wbc()->options->update_option(/* $key */'tiny_features', $fk, /* $fv['value'] */ wbc()->sanitize->post($fk));
 				}
 			}
 		}

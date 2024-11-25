@@ -255,12 +255,14 @@ if(!class_exists('SP_Plugin_Index_Class') ) {
 
 		            if( $curr_plugin_slug == $this->SP_Extension->extension_slug() ) {
 
-		                add_filter('sp_wbc_extras_config', function( $plugin_slug ) {
+		                add_filter('sp_wbc_extras_config', function( $filter_var, $plugin_slug ) {
 
 		                    if( $plugin_slug == $this->SP_Extension->extension_slug() ) {
 		                        return $this->SP_Extension->singleton_function()()->config->extras();
 		                    }
-		                }, 10, 1);
+
+							return $filter_var;
+		                }, 10, 2);
 		            }
 
 		        }

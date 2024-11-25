@@ -28,7 +28,7 @@ if (!class_exists('Extras')) {
 			if(!empty($page_slug)){
 				
 				$plugin_slug = explode("---", $page_slug)[0];
-				$extras_config = apply_filters('sp_wbc_extras_config', $plugin_slug);
+				$extras_config = apply_filters('sp_wbc_extras_config', array(), $plugin_slug);
 			}
 			
 			wbc()->load->model('admin/form-builder');
@@ -268,15 +268,29 @@ if (!class_exists('Extras')) {
 							'value' => '',
 							'class' => array(),
 						),
-						'activate'=>array(
-							'label'=>'Activate',
+						--	aa switch na setting tabal view ma enabal on cetegory page switch sathe compare karavu.
+						'activate_' . $extras_config['configuration_section']['singleton_function'] => array(
+							'label' => 'Activate',
 							'type' => 'checkbox',
 							'sanitize' => 'sanitize_text_field',
-							'value' => '',
-							'options' => array('1' => ' '),
-							'is_id_as_name' => true,
-							'class' => array(),	
-							'esa' => array('ihk' => null, 'ep' => '', 'au' => '', 'dap' => true),
+							'value' => array(),
+							'options' => array('activate' => ' '),
+							'class' => array(),
+							'size_class' => array('eight','wide'),
+							'inline' => true,
+							'eas' => array('ihk' => $extras_config['configuration_section']['ihk'], 'ep' => $extras_config['configuration_section']['endpoint'], 'au' => $extras_config['configuration_section']['host'], 'dap' => true),
+						),
+						'activate_' . $extras_config['configuration_section']['singleton_function'] . '_main_fk' => array(
+							'type' => 'hidden',
+							'value' => 'activate_' . $extras_config['configuration_section']['singleton_function'],
+							--	underscort and singlatone function appen karavanu avse te nichena fild ma pan karavu.
+							'easf' => 'activate_' . $extras_config['configuration_section']['singleton_function'],
+						),
+						'activate_' . $extras_config['configuration_section']['singleton_function'] . '_extension' => array(
+							'type' => 'hidden',
+							'value' => $extras_config['configuration_section']['singleton_function'],
+							--	underscort and singlatone function appen karavanu avse te nichena fild ma pan karavu.
+							'easf' => 'activate_' . $extras_config['configuration_section']['singleton_function'],
 						),
 						'extras_save_btn' => array(
 							'label' => eowbc_lang('Save'),
