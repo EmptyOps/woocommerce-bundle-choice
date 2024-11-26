@@ -1,5 +1,7 @@
 <?php
 
+namespace eo\wbc\view\admin\menu;
+
 defined( 'ABSPATH' ) || exit;
 
 wbc()->load->model('category-attribute');
@@ -770,7 +772,7 @@ class Tiny_Features_View {
         return $form_definition;
     }
 
-	public static function lode_view() {
+	public static function load_view() {
 
 		ACTIVE TODO jyare ashish_1 ma merge thay tyare eni advanced tab ma mukvanu avshe ane chelle move kari didhu hase.
 		ACTIVE TODO jyare ashish_1 ma merge thay tyare ahiyaa variable banavva ni jaroor nathi. already ahiyaa banela j hase to khaali if j ahiyaa avshe.
@@ -932,5 +934,5 @@ class Tiny_Features_View {
 
 if( empty($is_do_not_call_Tiny_Features_View_lode_view) ) {
     
-    Tiny_Features_View::lode_view();
+    Tiny_Features_View::load_view();
 }

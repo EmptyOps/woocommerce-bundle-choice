@@ -12,7 +12,7 @@ $args = null;
 ACTIVE_TODO/TEMP aa view lode karavo che te temperory Bhavesh_2 branch na sampaldata update vakhate banavo che ane jyare tiny feature akhu module update thay tyare and tenu model, view and conttrolar propar bane tyare aa view lode karavu che te remove kari devo and stander view file ma jevu arcituctur che tevu kari nakahavu.    --  to h
 require_once constant('EOWBC_TEMPLATE_DIR').'admin/menu/tiny_features.php';
 
-$temp_res = \eo\wbc\model\admin\Eowbc_Model::instance()->save(self::get_form_definition(), $is_auto_insert_for_template, $args);
+$temp_res = \eo\wbc\model\admin\Eowbc_Model::instance()->save(\eo\wbc\view\admin\menu\Tiny_Features_View::get_form_definition(), $is_auto_insert_for_template, $args);
 if(empty($temp_res['type']) || $temp_res['type'] != "success"){
 
 	return $temp_res;
@@ -121,6 +121,7 @@ if(wp_verify_nonce(wbc()->sanitize->post('_wpnonce'),'eowbc_tiny_features')){
 
 	$skip_fileds = array();
 
+	ACTIVE_TODO temp. nichenu loop che te jya sudhi tiny_features nu mvc architecture sarkha standard paramane fari upgrade na thay tya sudhi temperory rakhavanu che.	-- to h & -- to pi.
 	foreach ($form_definition as $key => $tab) {
 
 		if( $key != $saved_tab_key ) {
