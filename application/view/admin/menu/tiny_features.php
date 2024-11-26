@@ -932,7 +932,7 @@ class Tiny_Features_View {
 	}
 }
 
-if( empty($is_do_not_call_Tiny_Features_View_lode_view) ) {
+if( empty($is_do_not_call_Tiny_Features_View_load_view) ) {
     
     Tiny_Features_View::load_view();
 }

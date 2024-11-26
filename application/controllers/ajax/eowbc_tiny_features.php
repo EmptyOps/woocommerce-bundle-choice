@@ -6,7 +6,7 @@
 
 $res = array( "type"=>"success", "msg"=>"Updated successfully!" );
 
-$is_do_not_call_Tiny_Features_View_lode_view = true;
+$is_do_not_call_Tiny_Features_View_load_view = true;
 $is_auto_insert_for_template = null;
 $args = null;
 ACTIVE_TODO/TEMP aa view lode karavo che te temperory Bhavesh_2 branch na sampaldata update vakhate banavo che ane jyare tiny feature akhu module update thay tyare and tenu model, view and conttrolar propar bane tyare aa view lode karavu che te remove kari devo and stander view file ma jevu arcituctur che tevu kari nakahavu.    --  to h
