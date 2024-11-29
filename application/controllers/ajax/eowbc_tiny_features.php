@@ -124,9 +124,9 @@ if(wp_verify_nonce(wbc()->sanitize->post('_wpnonce'),'eowbc_tiny_features')){
 	ACTIVE_TODO temp. nichenu loop che te jya sudhi tiny_features nu mvc architecture sarkha standard paramane fari upgrade na thay tya sudhi temperory rakhavanu che.	-- to h & -- to pi.
 	foreach ($form_definition as $key => $tab) {
 
-		if( $key != $saved_tab_key ) {
-			continue;
-		}
+		// if( $key != $saved_tab_key ) {
+		// 	continue;
+		// }
 
 		foreach ($tab["form"] as $fk => $fv) {
 
@@ -138,7 +138,7 @@ if(wp_verify_nonce(wbc()->sanitize->post('_wpnonce'),'eowbc_tiny_features')){
 				}
 
 				ACTIVE_TODO temp. nicheni if che te jya sudhi tiny_features nu mvc architecture sarkha standard paramane fari upgrade na thay tya sudhi temperory rakhavanu che.	-- to h & -- to pi.
-				if( isset($fv["is_upgrade_version_field_save_till_standard_upgrade"]) ) {
+				if( !empty($fv["is_upgrade_version_field_save_till_standard_upgrade"]) ) {
 
 					--	ama post matho most probably value read karavanu avse.
 						267.79.3 done karavanu kevanu che aa point pate pachi.

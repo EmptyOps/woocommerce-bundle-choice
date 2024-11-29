@@ -774,9 +774,6 @@ class Tiny_Features_View {
 
 	public static function load_view() {
 
-		ACTIVE TODO jyare ashish_1 ma merge thay tyare eni advanced tab ma mukvanu avshe ane chelle move kari didhu hase.
-		ACTIVE TODO jyare ashish_1 ma merge thay tyare ahiyaa variable banavva ni jaroor nathi. already ahiyaa banela j hase to khaali if j ahiyaa avshe.
-
 		$form = array();
 
 		$filter_table = array();

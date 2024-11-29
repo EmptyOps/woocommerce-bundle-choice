@@ -28,6 +28,8 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
 	private static function apply_input_by_method(&$url, &$post_fields, $api_settings, $payload, $args) {
 
+		$payload = array('payload' => base64_encode( json_encode($payload) ));
+		
 		if( 'wp_remote_get' == $args['method'] ) {
 
 			$query_string = array_merge($api_settings, $payload);
