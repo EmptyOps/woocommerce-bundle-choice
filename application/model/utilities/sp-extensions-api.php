@@ -98,9 +98,6 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
 		$query_string .= "token=" . wbc()->options->get_option('extras_extras_configuration','token') . '&';
 
-		// ACTIVE_TODO as and when we required the user agent support we need to pass it from here.	--	to h & --  to pi
-		$query_string .= "user_agent=" . '' . '&';
-
 		if( !is_array($payload) ) {
 			
 			$payload = array();
@@ -110,6 +107,9 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
 			$payload['fctr'] = array();
 		}
+
+		// ACTIVE_TODO as and when we required the user agent support we need to pass it from here.	--	to h & --  to pi
+		$payload['fctr']['user_agent'] = '';
 
 		$query_string_temp = self::active_theme_and_plugins();
 
