@@ -922,7 +922,7 @@ class Tiny_Features_View {
         $form['data'] = \eo\wbc\model\admin\Eowbc_Model::instance()->get( $form['data'], $args );
 
 		wbc()->load->model('admin\form-builder');
-		eo\wbc\model\admin\Form_Builder::instance()->build($form);
+		\eo\wbc\model\admin\Form_Builder::instance()->build($form);
 		wbc()->load->asset('js','admin/tiny-feature/shortcode-filter');
 		wbc()->load->asset('js','admin/tiny-feature/shop-cat');
 		wbc()->load->asset('js','admin/tiny-feature/specification');
