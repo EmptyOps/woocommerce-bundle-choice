@@ -268,7 +268,6 @@ if (!class_exists('Extras')) {
 							'value' => '',
 							'class' => array(),
 						),
-						--	aa switch na setting tabal view ma enabal on cetegory page switch sathe compare karavu.
 						'activate_' . $extras_config['configuration_section']['singleton_function'] => array(
 							'label' => 'Activate',
 							'type' => 'checkbox',
@@ -283,13 +282,11 @@ if (!class_exists('Extras')) {
 						'activate_' . $extras_config['configuration_section']['singleton_function'] . '_main_fk' => array(
 							'type' => 'hidden',
 							'value' => 'activate_' . $extras_config['configuration_section']['singleton_function'],
-							--	underscort and singlatone function appen karavanu avse te nichena fild ma pan karavu.
 							'easf' => 'activate_' . $extras_config['configuration_section']['singleton_function'],
 						),
 						'activate_' . $extras_config['configuration_section']['singleton_function'] . '_extension' => array(
 							'type' => 'hidden',
 							'value' => $extras_config['configuration_section']['singleton_function'],
-							--	underscort and singlatone function appen karavanu avse te nichena fild ma pan karavu.
 							'easf' => 'activate_' . $extras_config['configuration_section']['singleton_function'],
 						),
 						'extras_save_btn' => array(
