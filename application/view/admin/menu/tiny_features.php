@@ -6,10 +6,10 @@ defined( 'ABSPATH' ) || exit;
 
 wbc()->load->model('category-attribute');
 
-ACTIVE_TODO/TEMP aa class temperory Bhavesh_2 branch na sampaldata update vakhate banavo che ane jyare tiny feature akhu module update thay tyare and tenu model, view and conttrolar propar bane tyare aa class ne remove kari devo and stander view file ma jevu arcituctur che tevu kari nakahavu.    --  to h
+// ACTIVE_TODO TEMP. aa class temperory Bhavesh_2 branch na sampaldata update vakhate banavo che ane jyare tiny feature akhu module update thay tyare and tenu model, view and conttrolar propar bane tyare aa class ne remove kari devo and stander view file ma jevu arcituctur che tevu kari nakahavu.    --  to h
 class Tiny_Features_View {
 
-    ACTIVE_TODO/TEMP a koi stander get_form_definition nu function nathi means ama apada j get_form_definition function na stander che te moojab nathi mate jyare upgrade karia tyare simply amathi code ne refactor karavano avse.     -- to h.
+    // ACTIVE_TODO TEMP. a koi stander get_form_definition nu function nathi means ama apada j get_form_definition function na stander che te moojab nathi mate jyare upgrade karia tyare simply amathi code ne refactor karavano avse. means especially function defination and so on standerd arcituctur pramane refector karavan thase.       -- to h.
 	public static function get_form_definition() {
 
         $form_definition = array(
