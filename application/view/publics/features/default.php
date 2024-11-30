@@ -14,13 +14,13 @@ if(!empty($product_data)):
         <?php if(!empty($product_data_1) and is_array($product_data_1)):?>
         <div class="eight wide column">
             <table class="ui single line unstackable table" style="border: none;">  
-              <tbody>                            
+              <tbody>                    
                 <?php foreach ($product_data_1 as $data): ?> 
-                    <tr>
+                    <tr class="product-data-<?php echo strtolower( str_replace( ' ', '_', $data[0] ) ); ?>">
                         <td style="border-top: 1px solid #dddddd;
         border-left: none !important;
         border-right: none !important;
-        border-bottom: none !important;"><?php echo $data[0]; ?> :</td>
+        border-bottom: none !important;"><?php echo $data[0] ; ?> :</td>
                         <td style="border-top: 1px solid #dddddd;
         border-left: none !important;
         border-right: none !important;
@@ -36,7 +36,7 @@ if(!empty($product_data)):
             <table class="ui single line unstackable table" style="border: none;">  
               <tbody>                            
                 <?php foreach ($product_data_2 as $data): ?> 
-                    <tr>
+                    <tr class="product-data-<?php echo strtolower( str_replace( ' ', '_', $data[0] ) ); ?>">
                         <td style="border-top: 1px solid #dddddd;
         border-left: none !important;
         border-right: none !important;
