@@ -677,7 +677,7 @@ if (!class_exists('Appearance')) {
 				'global' => array(
 					'label' => 'Global',
 					'form' => array(
-						'appearence_global_section' => array('label' => 'Appearence of Global', 'type' => 'segment', 'desc' => 'It is important to note that any color settings you change here will be applied whenever you run sample data processes or any UI-related processes.'),
+						'appearence_global_section' => array('label' => 'Global Appearence', 'type' => 'segment', 'desc' => 'It is important to note that any color settings you change here will be applied whenever you run sample data processes or any UI-related processes.'),
 						'theme_primary_color' => array(
 							'label' => 'Theme Primary Color',
 							'type' => 'color',

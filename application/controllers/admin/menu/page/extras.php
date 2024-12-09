@@ -273,11 +273,11 @@ if (!class_exists('Extras')) {
 							'type' => 'checkbox',
 							'sanitize' => 'sanitize_text_field',
 							'value' => array(),
-							'options' => array('activate' => ' '),
+							'options' => array('activate_' . $extras_config['configuration_section']['singleton_function'] => ' '),
 							'class' => array(),
 							'size_class' => array('eight','wide'),
 							'inline' => true,
-							'eas' => array('ihk' => $extras_config['configuration_section']['ihk'], 'ep' => $extras_config['configuration_section']['endpoint'], 'au' => $extras_config['configuration_section']['host'], 'dap' => true),
+							'eas' => array('ihk' => $extras_config['configuration_section']['ihk'], 'ep' => $extras_config['configuration_section']['endpoint'], 'au' => $extras_config['configuration_section']['host'], 'dap' => true, 'tab_key' => 'extras_extras_configuration'),
 						),
 						'activate_' . $extras_config['configuration_section']['singleton_function'] . '_main_fk' => array(
 							'type' => 'hidden',
