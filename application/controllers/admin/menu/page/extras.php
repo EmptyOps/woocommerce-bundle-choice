@@ -25,6 +25,12 @@ if (!class_exists('Extras')) {
 			$plugin_slug = null;
 			$extras_config = null;
 
+			if(empty($page_slug)){
+
+				$page_slug = wbc()->sanitize->request('wbc_dynamic_page');
+
+			}
+
 			if(!empty($page_slug)){
 				
 				$plugin_slug = explode("---", $page_slug)[0];
@@ -41,6 +47,10 @@ if (!class_exists('Extras')) {
 							'label' => 'General',
 							'type' => 'segment',
 							'desc' => 'Nothing available here yet'
+						),
+						'wbc_dynamic_page'=>array(
+							'type'=>'hidden',
+							'value'=>$page_slug,
 						),
 						'resolver_path'=>array(
 							'type'=>'hidden',

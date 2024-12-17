@@ -196,7 +196,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 			$active_parent_theme_slug = $parent_themes->get_template(); // This will get the directory (slug) of the parent theme
 			$active_parent_theme_version = $parent_themes->get('Version');
 
-			--	active_child_theme_slug no available hoy to ano spport may be mp pase add karavavo padase.	-- to h
+			// --	active_child_theme_slug no available hoy to ano spport may be mp pase add karavavo padase.	-- to h done
 			$query_string .= "active_theme_slug=" .  $active_parent_theme_slug . "&";
 			$query_string .= "active_theme_version=" .  $active_parent_theme_version . "&";
 			$query_string .= "active_child_theme_slug=" .  $active_theme_slug . "&";
@@ -205,6 +205,11 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
 			$query_string .= "active_theme_slug=" .  $active_theme_slug . "&";
 			$query_string .= "active_theme_version=" .  $active_theme_version . "&";
+
+			// --	active_child_theme_slug no available hoy to ano spport may be mp pase add karavavo padase.	-- to h done
+				// NOTE: below two line of code added for abow point on 17-12-2024
+			$query_string .= "active_child_theme_slug=&";
+			$query_string .= "active_child_theme_version=&";
 		}
 
 		// $query_string .= "active_plugins_slugs=" . explode("," , $active_plugins_slugs) . "&";
