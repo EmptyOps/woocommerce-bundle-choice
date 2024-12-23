@@ -91,7 +91,7 @@ class Eowbc_Base_Model_Publics {
 		}
 		
 		// ACTIVE_TODO_OC_START
-		// --	seence now the error handling is supported specifically based on throw_types and so on and it is handled in the handle_response function so no need of below if elseif structure here. as well as the isset conditions below the json_decode statement at last in this function are handling and managing to create the type and msg and so on field accordingly. but at least what we need to do is if the response is a standard wordpress error then need to capture the msg and set it in the msg field while set the error value in the type field.	-- to h & -- to pi  
+		// --	seence now the error handling is supported specifically based on throw_types and so on and it is handled in the handle_response function so no need of below if elseif structure here. as well as the isset conditions below the json_decode statement at last in this function are handling and managing to create the type and msg and so on field accordingly. but at least what we need to do is if the response is a standard wordpress error then need to capture the msg and set it in the msg field while set the error value in the type field.	-- to h & -- to pi  done.
 		// if( empty($response) ) {
 
 		// 	throw new \Exception("There is some error in the api call response.", 1);
@@ -105,6 +105,31 @@ class Eowbc_Base_Model_Publics {
 		// 		throw new \Exception("There is some error in the api call response.", 1);
 		// 	}
 		// }
+		// --	During initial testing we have created below if code based on abowe point(means the point abowe the if else code abowe) but still need to confirem if it covered all kind of sinarios and as per standered and so on.	-- to h
+		/* if( empty($response) ) {
+
+			$response['body'] = json_encode( array(
+				'type' => 'error',
+				'msg' => 'Empty response found on initial check.',
+			));
+		} else */if ( is_wp_error($response) ) {
+
+			if( is_object($response) && method_exists($response, 'get_error_message') ) {
+
+				$response = array( 'body' => json_encode(array(
+					'type' => 'error',
+					'msg' => "error_message: " . $response->get_error_message() . " error_data: " . $response->get_error_data(),
+				)));
+				
+			} else {
+
+				$response = array();
+				$response['body'] = json_encode( array(
+					'type' => 'error',
+					'msg' => 'There is some error in the api call response.',
+				));
+			}
+		}
 		// ACTIVE_TODO_OC_END
 
 		if( 'wp_remote_get' == $method ) {
@@ -179,7 +204,7 @@ class Eowbc_Base_Model_Publics {
 
 	public static function handle_response($parsed, $throw_types = array('error')){
 		
-		NOTE: here other applicable layers of handle response function can come or may come.
+		// NOTE: here other applicable layers of handle response function can come or may come.
 
 		if ( in_array($parsed['type'], $throw_types) ) {
 
@@ -196,8 +221,7 @@ class Eowbc_Base_Model_Publics {
 
 					if( 'image' == $sfv['st'] ) {
 
-						--	267.75.2 ma janavu che te moojab plugin sudhinoj path ave te rite nicheno varibala update karavo.and pachi chatgtp pase slash nu karavavu and tena mate constant no use karavavanu kevu.constance thi serach kari ne jovu k wordpress nu koi avo constance che je arite plugin no path provude kare che k nai.	-- to pi
-						$plugin_dir = WP_PLUGIN_DIR . '/';
+						$plugin_dir = trailingslashit(WP_PLUGIN_DIR);
 
 						if( in_array( strtolower( wbc()->file->extension_from_path( $plugin_dir . $sfv['p'] ) ), $allowed_types) ) {
 

@@ -28,6 +28,13 @@ class Eowbc_Extras extends Eowbc_Model
 	public function get($form_definition, $args = null) {
 
 		$page_slug = wbc()->sanitize->get('page');
+
+		if(empty($page_slug)){
+
+			$page_slug = wbc()->sanitize->request('wbc_dynamic_page');
+
+		}
+
 		$plugin_slug = explode("---", $page_slug)[0];
 		$extras_config = apply_filters('sp_wbc_extras_config', array(), $plugin_slug);
 
@@ -45,6 +52,9 @@ class Eowbc_Extras extends Eowbc_Model
 			}
 		}
 
+	    // ACTIVE_TODO eventually this models get and save functions needs to be upgraded and then none or minimum code will remain here as well as the below call to parent function might needed to be moved a little up or down  within this function but yeah call to parent function will definitely stay here in this model function. -- to h
+	    $form_definition = parent::get($form_definition, $args);
+	    
 		return $form_definition;
 	}
 
@@ -55,6 +65,13 @@ class Eowbc_Extras extends Eowbc_Model
 		$res = array();
 		$res["type"] = "success";
 		$res["msg"] = "";
+
+		// ACTIVE_TODO eventually this models get and save functions needs to be upgraded and then none or minimum code will remain here as well as the below call to parent function might needed to be moved a little up or down  within this function but yeah call to parent function will definitely stay here in this model function. -- to h 
+    	$temp_res = parent::save($form_definition, $is_auto_insert_for_template, $args);
+    	if(empty($temp_res['type']) || $temp_res['type'] != "success"){
+
+    		return $temp_res;
+    	}
 
 		wbc()->load->model('admin\form-builder');
 

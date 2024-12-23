@@ -1,13 +1,15 @@
 <?php
 
+namespace eo\wbc\view\admin\menu;
+
 defined( 'ABSPATH' ) || exit;
 
 wbc()->load->model('category-attribute');
 
-ACTIVE_TODO/TEMP aa class temperory Bhavesh_2 branch na sampaldata update vakhate banavo che ane jyare tiny feature akhu module update thay tyare and tenu model, view and conttrolar propar bane tyare aa class ne remove kari devo and stander view file ma jevu arcituctur che tevu kari nakahavu.    --  to h
+// ACTIVE_TODO TEMP. aa class temperory Bhavesh_2 branch na sampaldata update vakhate banavo che ane jyare tiny feature akhu module update thay tyare and tenu model, view and conttrolar propar bane tyare aa class ne remove kari devo and stander view file ma jevu arcituctur che tevu kari nakahavu.    --  to h
 class Tiny_Features_View {
 
-    ACTIVE_TODO/TEMP a koi stander get_form_definition nu function nathi menas ama apada j get_form_definition function na stander che te moojab nathi mate jyare upgrade karia tyare simply amathi code ne refactor karavano avse.     -- to h.
+    // ACTIVE_TODO TEMP. a koi stander get_form_definition nu function nathi means ama apada j get_form_definition function na stander che te moojab nathi mate jyare upgrade karia tyare simply amathi code ne refactor karavano avse. means especially function defination and so on standerd arcituctur pramane refector karavan thase.       -- to h.
 	public static function get_form_definition() {
 
         $form_definition = array(
@@ -764,14 +766,13 @@ class Tiny_Features_View {
                 )									
             ),
         );
+        
+        $form_definition = apply_filters('eowbc_admin_form_tiny_features',$form_definition);
 
         return $form_definition;
     }
 
-	public static function lode_view() {
-
-		ACTIVE TODO jyare ashish_1 ma merge thay tyare eni advanced tab ma mukvanu avshe ane chelle move kari didhu hase.
-		ACTIVE TODO jyare ashish_1 ma merge thay tyare ahiyaa variable banavva ni jaroor nathi. already ahiyaa banela j hase to khaali if j ahiyaa avshe.
+	public static function load_view() {
 
 		$form = array();
 
@@ -917,10 +918,11 @@ class Tiny_Features_View {
 
         $args = null;
 
+        // added on 28-11-2024.
         $form['data'] = \eo\wbc\model\admin\Eowbc_Model::instance()->get( $form['data'], $args );
 
 		wbc()->load->model('admin\form-builder');
-		eo\wbc\model\admin\Form_Builder::instance()->build($form);
+		\eo\wbc\model\admin\Form_Builder::instance()->build($form);
 		wbc()->load->asset('js','admin/tiny-feature/shortcode-filter');
 		wbc()->load->asset('js','admin/tiny-feature/shop-cat');
 		wbc()->load->asset('js','admin/tiny-feature/specification');
@@ -928,7 +930,7 @@ class Tiny_Features_View {
 	}
 }
 
-if( empty($is_do_not_call_Tiny_Features_View_lode_view) ) {
+if( empty($is_do_not_call_Tiny_Features_View_load_view) ) {
     
-    Tiny_Features_View::lode_view();
+    Tiny_Features_View::load_view();
 }

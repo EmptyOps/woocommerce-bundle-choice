@@ -137,7 +137,7 @@ class Eowbc_Filters extends Eowbc_Model {
 			}
 	    }
 
-		ACTIVE_TODO below if and inside override call shoud be mendetery for all but during the sampal data upgrade it was called only for the necessary call of child layers but during wbc QCed upgrade it shouls be made mendetory, as per stardered but we need think about it.	-- to h & -- to pi
+		// ACTIVE_TODO below if and inside override call shoud be mendetery for all but during the sampal data upgrade it was called only for the necessary call of child layers but during wbc QCed upgrade it shouls be made mendetory, as per stardered but we need think about it.	-- to h & -- to pi
 		if( !empty($args['is_call_parent_override_function']) ) {
 
 			// ACTIVE_TODO eventually this models get and save functions needs to be upgraded and then none or minimum code will remain here as well as the below call to parent function might needed to be moved a little up or down  within this function but yeah call to parent function will definitely stay here in this model function. -- to h
@@ -192,7 +192,7 @@ class Eowbc_Filters extends Eowbc_Model {
 		wbc()->sanitize->clean($form_definition);
 		wbc()->validate->check($form_definition);
 
-		ACTIVE_TODO below if and inside override call shoud be mendetery for all but during the sampal data upgrade it was called only for the necessary call of child layers but during wbc QCed upgrade it shouls be made mendetory, as per stardered but we need think about it.	-- to h & -- to pi
+		// ACTIVE_TODO below if and inside override call shoud be mendetery for all but during the sampal data upgrade it was called only for the necessary call of child layers but during wbc QCed upgrade it shouls be made mendetory, as per stardered but we need think about it.	-- to h & -- to pi
 		if( !empty($args['is_call_parent_override_function']) ) {
 
 			// ACTIVE_TODO eventually this models get and save functions needs to be upgraded and then none or minimum code will remain here as well as the below call to parent function might needed to be moved a little up or down  within this function but yeah call to parent function will definitely stay here in this model function. -- to h 

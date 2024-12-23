@@ -25,6 +25,12 @@ if (!class_exists('Extras')) {
 			$plugin_slug = null;
 			$extras_config = null;
 
+			if(empty($page_slug)){
+
+				$page_slug = wbc()->sanitize->request('wbc_dynamic_page');
+
+			}
+
 			if(!empty($page_slug)){
 				
 				$plugin_slug = explode("---", $page_slug)[0];
@@ -41,6 +47,10 @@ if (!class_exists('Extras')) {
 							'label' => 'General',
 							'type' => 'segment',
 							'desc' => 'Nothing available here yet'
+						),
+						'wbc_dynamic_page'=>array(
+							'type'=>'hidden',
+							'value'=>$page_slug,
 						),
 						'resolver_path'=>array(
 							'type'=>'hidden',
@@ -268,28 +278,25 @@ if (!class_exists('Extras')) {
 							'value' => '',
 							'class' => array(),
 						),
-						--	aa switch na setting tabal view ma enabal on cetegory page switch sathe compare karavu.
 						'activate_' . $extras_config['configuration_section']['singleton_function'] => array(
 							'label' => 'Activate',
 							'type' => 'checkbox',
 							'sanitize' => 'sanitize_text_field',
 							'value' => array(),
-							'options' => array('activate' => ' '),
+							'options' => array('activate_' . $extras_config['configuration_section']['singleton_function'] => ' '),
 							'class' => array(),
 							'size_class' => array('eight','wide'),
 							'inline' => true,
-							'eas' => array('ihk' => $extras_config['configuration_section']['ihk'], 'ep' => $extras_config['configuration_section']['endpoint'], 'au' => $extras_config['configuration_section']['host'], 'dap' => true),
+							'eas' => array('ihk' => $extras_config['configuration_section']['ihk'], 'ep' => $extras_config['configuration_section']['endpoint'], 'au' => $extras_config['configuration_section']['host'], 'dap' => true, 'tab_key' => 'extras_extras_configuration'),
 						),
 						'activate_' . $extras_config['configuration_section']['singleton_function'] . '_main_fk' => array(
 							'type' => 'hidden',
 							'value' => 'activate_' . $extras_config['configuration_section']['singleton_function'],
-							--	underscort and singlatone function appen karavanu avse te nichena fild ma pan karavu.
 							'easf' => 'activate_' . $extras_config['configuration_section']['singleton_function'],
 						),
 						'activate_' . $extras_config['configuration_section']['singleton_function'] . '_extension' => array(
 							'type' => 'hidden',
 							'value' => $extras_config['configuration_section']['singleton_function'],
-							--	underscort and singlatone function appen karavanu avse te nichena fild ma pan karavu.
 							'easf' => 'activate_' . $extras_config['configuration_section']['singleton_function'],
 						),
 						'extras_save_btn' => array(

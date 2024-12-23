@@ -250,6 +250,13 @@ if(!class_exists('SP_Plugin_Index_Class') ) {
 		    // admin 
 		    if( is_admin() ) {
 		        $page_slug = wbc()->sanitize->get('page');
+
+				if(empty($page_slug)){
+
+					$page_slug = wbc()->sanitize->request('wbc_dynamic_page');
+
+				}
+				
 		        if( strpos($page_slug, "---extras") !== FALSE ) {
 		            $curr_plugin_slug = explode("---", $page_slug)[0];
 

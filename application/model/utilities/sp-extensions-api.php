@@ -28,6 +28,8 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
 	private static function apply_input_by_method(&$url, &$post_fields, $api_settings, $payload, $args) {
 
+		$payload = array('payload' => base64_encode( json_encode($payload) ));
+		
 		if( 'wp_remote_get' == $args['method'] ) {
 
 			$query_string = array_merge($api_settings, $payload);
@@ -98,9 +100,6 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
 		$query_string .= "token=" . wbc()->options->get_option('extras_extras_configuration','token') . '&';
 
-		ACTIVE_TODO as and when we required the user agent support we need to pass it from here.	--	to h & --  to pi
-		$query_string .= "user_agent=" . '' . '&';
-
 		if( !is_array($payload) ) {
 			
 			$payload = array();
@@ -110,6 +109,9 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
 			$payload['fctr'] = array();
 		}
+
+		// ACTIVE_TODO as and when we required the user agent support we need to pass it from here.	--	to h & --  to pi
+		$payload['fctr']['user_agent'] = '';
 
 		$query_string_temp = self::active_theme_and_plugins();
 
@@ -194,7 +196,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 			$active_parent_theme_slug = $parent_themes->get_template(); // This will get the directory (slug) of the parent theme
 			$active_parent_theme_version = $parent_themes->get('Version');
 
-			--	active_child_theme_slug no available hoy to ano spport may be mp pase add karavavo padase.	-- to h
+			// --	active_child_theme_slug no available hoy to ano spport may be mp pase add karavavo padase.	-- to h done
 			$query_string .= "active_theme_slug=" .  $active_parent_theme_slug . "&";
 			$query_string .= "active_theme_version=" .  $active_parent_theme_version . "&";
 			$query_string .= "active_child_theme_slug=" .  $active_theme_slug . "&";
@@ -203,6 +205,11 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
 			$query_string .= "active_theme_slug=" .  $active_theme_slug . "&";
 			$query_string .= "active_theme_version=" .  $active_theme_version . "&";
+
+			// --	active_child_theme_slug no available hoy to ano spport may be mp pase add karavavo padase.	-- to h done
+				// NOTE: below two line of code added for abow point on 17-12-2024
+			$query_string .= "active_child_theme_slug=&";
+			$query_string .= "active_child_theme_version=&";
 		}
 
 		// $query_string .= "active_plugins_slugs=" . explode("," , $active_plugins_slugs) . "&";
@@ -241,7 +248,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
 		$saved_tab_key = !empty( $args["hook_callback_args"]["sp_frmb_saved_tab_key"] ) ? $args["hook_callback_args"]["sp_frmb_saved_tab_key"] : ""; 
 
-		NOTE: if ever we have any other field to skip then add here.
+		// NOTE: if ever we have any other field to skip then add here.
 		$skip_fileds = array(/* 'sp_frmb_saved_tab_key' */ $saved_tab_key);
 		
 		$save_as_data = array();	
@@ -260,7 +267,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 			$is_table_save = false;	//	ACTIVE_TODO/TODO it should be passed from child maybe or make dynamic as applicable. ($key == $this->tab_key_prefix."d_fconfig" or $key == $this->tab_key_prefix."s_fconfig" or $key=='filter_set') ? true : false;
 
 			$table_data = array();
-			$tab_specific_skip_fileds = array();	ACTIVE_TODO/TODO it will be spported only if the hook pass it and so it is available here in this process_form_definition function in $args variable. means when the process_form_definition function called here from the hooks bound in this class from abow admin_hooks function.
+			$tab_specific_skip_fileds = array();	//ACTIVE_TODO/TODO it will be spported only if the hook pass it and so it is available here in this process_form_definition function in $args variable. means when the process_form_definition function called here from the hooks bound in this class from abow admin_hooks function.
 
 	    	foreach ($tab["form"] as $fk => $fv) {
 
@@ -349,14 +356,13 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
     		throw new \Exception("WBC Form Builder: The eas field should define the 'attr' property in array format only. Other type format is not supported.", 1); 
     	}
 
-    	NOTE : This is done to ensure backward compatibility.
+    	// NOTE : This is done to ensure backward compatibility.
     	if( !isset($fv['attr']['onclick']) ) {
 
     		$fv['attr']['onclick'] = '';
     	}
 
-    	--	nichena msg ma last ma "if you have changed any field of this switch section." text che ene chenge kari ne "when you change any field of this switch section.".	-- to h
-    	$fv['attr']['onclick'] = "alert('Important! Since you have changed the switch, after save action, the api settings will be updated so you need to test the related feature on the website frontend and elsewhere as applicable. And this applies to changes made to any field of this switch section so be sure to test related feature if you have changed any field of this switch section.');" . $fv['attr']['onclick'];
+    	$fv['attr']['onclick'] = "alert('Important! Since you have changed the switch, after save action, the api settings will be updated so you need to test the related feature on the website frontend and elsewhere as applicable. And this applies to changes made to any field of this switch section so be sure to test related feature when you change any field of this switch section.');" . $fv['attr']['onclick'];
 
     	return $fv;
     }
@@ -374,23 +380,10 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
 				if( $fk == $sfk || $sfv['type'] == 'checkbox' ) {
 
-					--	below if is not finlize yet.
-					--	may be we have covered hear only the checkbox type filds but not other so need to conferm about that. -- to h
-						--	$fv need to be add as argument in this function. -- to h & -- to pi
 					if( 
-						( 
-							empty( wbc()->options->get_option($section_property['tab_key'], /* $fk */$sfk) ) 
-							&& 
-							( in_array(/* $fv */$sfv["type"], \eo\wbc\model\admin\Form_Builder::savable_types()) 
-								&& ( isset($_POST[/* $fk */$sfk]) || /* $fv */$sfv["type"]=='checkbox') ) 
-						) 
+						( empty( wbc()->options->get_option($section_property['tab_key'], /* $fk */$sfk) ) && isset($_POST[/* $fk */$sfk]) ) 
 						|| 
-						( 
-							!empty( wbc()->options->get_option($section_property['tab_key'], /* $fk */$sfk) ) 
-							&& 
-							( in_array(/* $fv */$sfv["type"], \eo\wbc\model\admin\Form_Builder::savable_types()) 
-								&& ( !isset($_POST[/* $fk */$sfk]) || /* $fv */$sfv["type"]=='checkbox') ) 
-						) 
+						( !empty( wbc()->options->get_option($section_property['tab_key'], /* $fk */$sfk) ) && !isset($_POST[/* $fk */$sfk]) ) 
 					) {
 
 						return true;
@@ -522,9 +515,9 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
     		if( $fk == $sfk ) {
 
-				ACTIVE_TODO_OC_START
-    			--	most probabely we need to make here the switch as non interactive by removeing the applicable proparty entirely or proparty attribute. 
-				ACTIVE_TODO_OC_END
+				// ACTIVE_TODO_OC_START
+    			// --	most probabely we need to make here the switch as non interactive by removeing the applicable proparty entirely or proparty attribute. 
+				// ACTIVE_TODO_OC_END
     		} else {
 
     			$string_class = null;

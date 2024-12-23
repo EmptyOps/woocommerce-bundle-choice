@@ -6,13 +6,13 @@
 
 $res = array( "type"=>"success", "msg"=>"Updated successfully!" );
 
-$is_do_not_call_Tiny_Features_View_lode_view = true;
+$is_do_not_call_Tiny_Features_View_load_view = true;
 $is_auto_insert_for_template = null;
 $args = null;
 ACTIVE_TODO/TEMP aa view lode karavo che te temperory Bhavesh_2 branch na sampaldata update vakhate banavo che ane jyare tiny feature akhu module update thay tyare and tenu model, view and conttrolar propar bane tyare aa view lode karavu che te remove kari devo and stander view file ma jevu arcituctur che tevu kari nakahavu.    --  to h
 require_once constant('EOWBC_TEMPLATE_DIR').'admin/menu/tiny_features.php';
 
-$temp_res = \eo\wbc\model\admin\Eowbc_Model::instance()->save(self::get_form_definition(), $is_auto_insert_for_template, $args);
+$temp_res = \eo\wbc\model\admin\Eowbc_Model::instance()->save(\eo\wbc\view\admin\menu\Tiny_Features_View::get_form_definition(), $is_auto_insert_for_template, $args);
 if(empty($temp_res['type']) || $temp_res['type'] != "success"){
 
 	return $temp_res;
@@ -121,11 +121,12 @@ if(wp_verify_nonce(wbc()->sanitize->post('_wpnonce'),'eowbc_tiny_features')){
 
 	$skip_fileds = array();
 
+	ACTIVE_TODO temp. nichenu loop che te jya sudhi tiny_features nu mvc architecture sarkha standard paramane fari upgrade na thay tya sudhi temperory rakhavanu che.	-- to h & -- to pi.
 	foreach ($form_definition as $key => $tab) {
 
-		if( $key != $saved_tab_key ) {
-			continue;
-		}
+		// if( $key != $saved_tab_key ) {
+		// 	continue;
+		// }
 
 		foreach ($tab["form"] as $fk => $fv) {
 
@@ -136,10 +137,12 @@ if(wp_verify_nonce(wbc()->sanitize->post('_wpnonce'),'eowbc_tiny_features')){
 					continue;
 				}
 
-				ACTIVE_TODO/TEMP nicheni if and flag che te jya sudhi tiny_features nu mvc and sarkha standard paramane fari upgrade na thay tya sudhi temperory rakhavanu che.	-- to h & -- to pi.
-				if( isset($fv["is_upgrade_version_field_saved_till_standard_upgrade"]) ) {
+				ACTIVE_TODO temp. nicheni if che te jya sudhi tiny_features nu mvc architecture sarkha standard paramane fari upgrade na thay tya sudhi temperory rakhavanu che.	-- to h & -- to pi.
+				if( !empty($fv["is_upgrade_version_field_save_till_standard_upgrade"]) ) {
 
-					wbc()->options->update_option($key, $fk, $fv['value']);
+					--	ama post matho most probably value read karavanu avse.
+						267.79.3 done karavanu kevanu che aa point pate pachi.
+					wbc()->options->update_option(/* $key */'tiny_features', $fk, /* $fv['value'] */ wbc()->sanitize->post($fk));
 				}
 			}
 		}

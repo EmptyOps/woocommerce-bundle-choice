@@ -677,6 +677,7 @@ if (!class_exists('Appearance')) {
 				'global' => array(
 					'label' => 'Global',
 					'form' => array(
+						'appearence_global_section' => array('label' => 'Global Appearence', 'type' => 'segment', 'desc' => 'It is important to note that any color settings you change here will be applied whenever you run sample data processes or any UI-related processes.'),
 						'theme_primary_color' => array(
 							'label' => 'Theme Primary Color',
 							'type' => 'color',
@@ -695,7 +696,7 @@ if (!class_exists('Appearance')) {
 							'is_id_as_name' => true,
 							'class' => array(),
 							'visible_info' => array(
-								'label' => 'If your theme means web site layout do not have the secondary color then simply pick a contrast color to the primary color.',
+								'label' => 'If your theme means web site layout do not have the secondary color then simply pick a contrast color to the primary color.(<strong>NOTE: The color shades specified here are for reference only and are not applied to the UI widgets by default. If you wish to apply these colors, you must manually update each field. Ensure that all fields are properly configured to reflect the desired colors in our plugin widgets.</strong>)',
 								'type' => 'visible_info',
 								'class' => array('fluid', 'small'),
 								'size_class' => array('sixteen', 'wide'),
@@ -710,7 +711,7 @@ if (!class_exists('Appearance')) {
 							'is_id_as_name' => true,
 							'class' => array(),
 							'visible_info' => array(
-								'label' => 'If your theme means web site layout do not have the necessary shade for this field then simply select an appropriate light color shade of the Primary Color.',
+								'label' => 'If your theme means web site layout do not have the necessary shade for this field then simply select an appropriate light color shade of the Primary Color.(<strong>NOTE: The color shades specified here are for reference only and are not applied to the UI widgets by default. If you wish to apply these colors, you must manually update each field. Ensure that all fields are properly configured to reflect the desired colors in our plugin widgets.</strong>)',
 								'type' => 'visible_info',
 								'class' => array('fluid', 'small'),
 								'size_class' => array('sixteen', 'wide'),
@@ -725,7 +726,7 @@ if (!class_exists('Appearance')) {
 							'is_id_as_name' => true,
 							'class' => array(),
 							'visible_info' => array(
-								'label' => 'If your theme means web site layout do not have the necessary shade for this field then simply select an appropriate light color shade of the Secondary Color.',
+								'label' => 'If your theme means web site layout do not have the necessary shade for this field then simply select an appropriate light color shade of the Secondary Color.(<strong>NOTE: The color shades specified here are for reference only and are not applied to the UI widgets by default. If you wish to apply these colors, you must manually update each field. Ensure that all fields are properly configured to reflect the desired colors in our plugin widgets.</strong>)',
 								'type' => 'visible_info',
 								'class' => array('fluid', 'small'),
 								'size_class' => array('sixteen', 'wide'),
@@ -740,7 +741,7 @@ if (!class_exists('Appearance')) {
 							'is_id_as_name' => true,
 							'class' => array(),
 							'visible_info' => array(
-								'label' => 'If your theme means web site layout do not have the necessary shade for this field then simply select an appropriate light color shade of the Primary Color.',
+								'label' => 'If your theme means web site layout do not have the necessary shade for this field then simply select an appropriate light color shade of the Primary Color.(<strong>NOTE: The color shades specified here are for reference only and are not applied to the UI widgets by default. If you wish to apply these colors, you must manually update each field. Ensure that all fields are properly configured to reflect the desired colors in our plugin widgets.</strong>)',
 								'type' => 'visible_info',
 								'class' => array('fluid', 'small'),
 								'size_class' => array('sixteen', 'wide'),
@@ -755,7 +756,7 @@ if (!class_exists('Appearance')) {
 							'is_id_as_name' => true,
 							'class' => array(),
 							'visible_info' => array(
-								'label' => 'If your theme means web site layout do not have the necessary shade for this field then simply select an appropriate light color shade of the Secondary Color.',
+								'label' => 'If your theme means web site layout do not have the necessary shade for this field then simply select an appropriate light color shade of the Secondary Color.(<strong>NOTE: The color shades specified here are for reference only and are not applied to the UI widgets by default. If you wish to apply these colors, you must manually update each field. Ensure that all fields are properly configured to reflect the desired colors in our plugin widgets.</strong>)',
 								'type' => 'visible_info',
 								'class' => array('fluid', 'small'),
 								'size_class' => array('sixteen', 'wide'),
@@ -770,7 +771,7 @@ if (!class_exists('Appearance')) {
 							'is_id_as_name' => true,
 							'class' => array(),
 							'visible_info' => array(
-								'label' => 'If your theme means web site layout do not have the necessary shade for this field then simply select an appropriate light color shade of the Primary Color.',
+								'label' => 'If your theme means web site layout do not have the necessary shade for this field then simply select an appropriate light color shade of the Primary Color.(<strong>NOTE: The color shades specified here are for reference only and are not applied to the UI widgets by default. If you wish to apply these colors, you must manually update each field. Ensure that all fields are properly configured to reflect the desired colors in our plugin widgets.</strong>)',
 								'type' => 'visible_info',
 								'class' => array('fluid', 'small'),
 								'size_class' => array('sixteen', 'wide'),
@@ -785,7 +786,7 @@ if (!class_exists('Appearance')) {
 							'is_id_as_name' => true,
 							'class' => array(),
 							'visible_info' => array(
-								'label' => 'If your theme means web site layout do not have the necessary shade for this field then simply select an appropriate light color shade of the Secondary Color.',
+								'label' => 'If your theme means web site layout do not have the necessary shade for this field then simply select an appropriate light color shade of the Secondary Color.(<strong>NOTE: The color shades specified here are for reference only and are not applied to the UI widgets by default. If you wish to apply these colors, you must manually update each field. Ensure that all fields are properly configured to reflect the desired colors in our plugin widgets.</strong>)',
 								'type' => 'visible_info',
 								'class' => array('fluid', 'small'),
 								'size_class' => array('sixteen', 'wide'),
@@ -800,7 +801,7 @@ if (!class_exists('Appearance')) {
 							'is_id_as_name' => true,
 							'class' => array(),
 							'visible_info' => array(
-								'label' => 'If your theme means web site layout do not have the necessary shade for this field then simply select an appropriate light color shade of the Primary Color.',
+								'label' => 'If your theme means web site layout do not have the necessary shade for this field then simply select an appropriate light color shade of the Primary Color.(<strong>NOTE: The color shades specified here are for reference only and are not applied to the UI widgets by default. If you wish to apply these colors, you must manually update each field. Ensure that all fields are properly configured to reflect the desired colors in our plugin widgets.</strong>)',
 								'type' => 'visible_info',
 								'class' => array('fluid', 'small'),
 								'size_class' => array('sixteen', 'wide'),
@@ -815,7 +816,7 @@ if (!class_exists('Appearance')) {
 							'is_id_as_name' => true,
 							'class' => array(),
 							'visible_info' => array(
-								'label' => 'If your theme means web site layout do not have the necessary shade for this field then simply select an appropriate light color shade of the Secondary Color.',
+								'label' => 'If your theme means web site layout do not have the necessary shade for this field then simply select an appropriate light color shade of the Secondary Color.(<strong>NOTE: The color shades specified here are for reference only and are not applied to the UI widgets by default. If you wish to apply these colors, you must manually update each field. Ensure that all fields are properly configured to reflect the desired colors in our plugin widgets.</strong>)',
 								'type' => 'visible_info',
 								'class' => array('fluid', 'small'),
 								'size_class' => array('sixteen', 'wide'),
@@ -830,7 +831,7 @@ if (!class_exists('Appearance')) {
 							'is_id_as_name' => true,
 							'class' => array(),
 							'visible_info' => array(
-								'label' => 'If your theme means web site layout do not have the necessary shade for this field then simply select an appropriate light color shade of the Primary Color.',
+								'label' => 'If your theme means web site layout do not have the necessary shade for this field then simply select an appropriate light color shade of the Primary Color.(<strong>NOTE: The color shades specified here are for reference only and are not applied to the UI widgets by default. If you wish to apply these colors, you must manually update each field. Ensure that all fields are properly configured to reflect the desired colors in our plugin widgets.</strong>)',
 								'type' => 'visible_info',
 								'class' => array('fluid', 'small'),
 								'size_class' => array('sixteen', 'wide'),
@@ -845,7 +846,7 @@ if (!class_exists('Appearance')) {
 							'is_id_as_name' => true,
 							'class' => array(),
 							'visible_info' => array(
-								'label' => 'If your theme means web site layout do not have the necessary shade for this field then simply select an appropriate light color shade of the Secondary Color.',
+								'label' => 'If your theme means web site layout do not have the necessary shade for this field then simply select an appropriate light color shade of the Secondary Color.(<strong>NOTE: The color shades specified here are for reference only and are not applied to the UI widgets by default. If you wish to apply these colors, you must manually update each field. Ensure that all fields are properly configured to reflect the desired colors in our plugin widgets.</strong>)',
 								'type' => 'visible_info',
 								'class' => array('fluid', 'small'),
 								'size_class' => array('sixteen', 'wide'),
