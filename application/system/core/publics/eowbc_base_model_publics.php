@@ -130,8 +130,9 @@ class Eowbc_Base_Model_Publics {
 				));
 			}
 		}
-		// ACTIVE_TODO_OC_END
 
+		
+		// ACTIVE_TODO_OC_END
 		if( 'wp_remote_get' == $method ) {
 
 			if( isset($response['body']) ) {
@@ -146,6 +147,8 @@ class Eowbc_Base_Model_Publics {
 			$response = '';
 		}
 
+		// wbc_pr($response);
+		// die('parse_response after if else');
 		if( isset($response['type']) ) {
 		
 			$res['type'] = $response['type'];

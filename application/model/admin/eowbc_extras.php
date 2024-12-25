@@ -59,7 +59,7 @@ class Eowbc_Extras extends Eowbc_Model
 	}
 
 	public function save($form_definition, $is_auto_insert_for_template = false, $args = null) {
-
+		
 		wbc()->sanitize->clean($form_definition);
 		wbc()->validate->check($form_definition);
 		$res = array();

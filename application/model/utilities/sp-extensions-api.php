@@ -49,6 +49,10 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
 		self::additional_data($api_settings, $payload);
 
+		// wbc_pr($api_settings);
+		// wbc_pr($payload);
+		// wbc_pr('call function payload log');
+
 		// $url .= (strpos($url, '?') !== FALSE ? $api_settings : "?" . $api_settings);
 
 		if( !is_array($api_settings) ) {
@@ -70,6 +74,8 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
 		self::apply_input_by_method($url, $post_fields, $api_settings, $payload, $args);
 
+		// wbc_pr($url);
+		// die('call function after apply_input_by_method');
 		$result = null;
 
 		if( 'wp_remote_get' == $args['method'] ) {
@@ -81,9 +87,15 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 			$result = wp_remote_post($url, $post_fields);
 		}
 
+		// wbc_pr($result);
+		// die('call function after if else');
 		$parsed = \eo\wbc\system\core\publics\Eowbc_Base_Model_Publics::parse_response($result, $args['method']);
 
+		// wbc_pr($parsed);
+		// die('call function to call parse_response');
 		wbc_free_memory($result);
+		// wbc_pr($result);
+		// die('wbc_free_memory call');
 
 		return $parsed;
 	}
@@ -143,6 +155,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
 		$payload['sp_api_bpfa']['pcs40'] = wbc()->options->get_option('appearance_global','theme_primary_color_shade_light_40');
 		$payload['sp_api_bpfa']['scs40'] = wbc()->options->get_option('appearance_global','theme_secondary_color_shade_light_40');
+
 	}
 
 	private static function active_theme_and_plugins() {
@@ -280,13 +293,13 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
 			    	//skip fields where applicable
 					if( isset($fv["eas"]) && is_array($fv["eas"]) ) {
-
+						
 						$tab["form"][$fk] = self::inject_onclick_attr($mode, $form_definition, $fv["eas"], $fv);
 
 						$section_fields = self::retrieve_section_fields($tab["form"], $fv["eas"], $fk);
-
+						
 						if( self::section_should_make_call($mode, $form_definition, $fv["eas"], $fk, $section_fields) ) {
-
+							
 							$payload = array();
 							$payload['fctr'] = array();
 
@@ -299,9 +312,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 								}
 							}
 
-
 							$parsed = self::call($fv["eas"]["au"] . $fv["eas"]["ep"], "ihk=".$fv["eas"]["ihk"], $payload, array());
-
 
 							$is_apply_response_msg = self::is_apply_response_msg($parsed, $fv["eas"]);
 
@@ -311,13 +322,22 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
 							$args['res'] = $res;
 
+							// die('befor should_do_stat_changes if');
+
 							if( self::should_do_stat_changes($mode, $parsed) ) {
 
+								// die('inside should_do_stat_changes if');
+
 								$tab["form"] = self::apply_stat_changes_to_section($mode, $tab["form"], $section_fields, $parsed, $fk);
+
 							}
 
+							// wbc_pr($mode);
+							// wbc_pr($parsed);
+							// die('should_handle_response parsed');
 							if( self::should_handle_response($mode, $parsed) ) {
 
+								// die('inside should_handle_response if');
 								\eo\wbc\system\core\publics\Eowbc_Base_Model_Publics::handle_response($parsed, array());		
 							}
 						}
