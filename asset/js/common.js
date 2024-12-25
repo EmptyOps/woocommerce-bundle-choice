@@ -1326,13 +1326,13 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
             jQuery( _this./*#*/$base_container_private /*'.variations_form:not(.spui-wbc-swatches-loaded)'*/).each(function () {
 
                 console.log('vs [init_private] ajaxComplete');
-                console.log(jQuery(this));
-                console.log(jQuery(this).attr('class'));
+                // console.log(jQuery(this));
+                // console.log(jQuery(this).attr('class'));
                 if( !( jQuery(this).hasClass('spui-wbc-swatches-loaded') ) ){
                     
                     console.log('vs [init_private] ajaxComplete 1');
-                    console.log(this);
-                    jQuery(this).wc_variation_form();
+                    // console.log(this);
+                    // jQuery(this).wc_variation_form();
                 }
             });
           }, 1000);
@@ -1627,7 +1627,7 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
     /*#*/process_attribute_data_private(type, element, data, mode = null) {
 
         console.log('vs [process_attribute_data]');
-        console.log(data.options);
+        // console.log(data.options);
 
         data.options.each(function () {
             if (jQuery(this).val() !== '') {
