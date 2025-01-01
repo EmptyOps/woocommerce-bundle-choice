@@ -47,6 +47,8 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
 	public static function call($url, $api_settings, $payload = null, $throw_types = array('error'), $args = array()) {
 
+		// wbc_pr('call function call');
+
 		self::additional_data($api_settings, $payload);
 
 		// wbc_pr($api_settings);
@@ -80,7 +82,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
 		if( 'wp_remote_get' == $args['method'] ) {
 
-			$result = wp_remote_get($url);
+			$result = wp_remote_get($url, array('timeout' => 36));
 		} elseif( 'wp_remote_post' == $args['method'] ) {
 
 			// ACTIVE_TODO niche no wp_remote_post call ne documetion joi ne confirm karavanu baki che. and post_fields variabla che e function apply_input_by_method ma format thay che.
@@ -156,6 +158,8 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 		$payload['sp_api_bpfa']['pcs40'] = wbc()->options->get_option('appearance_global','theme_primary_color_shade_light_40');
 		$payload['sp_api_bpfa']['scs40'] = wbc()->options->get_option('appearance_global','theme_secondary_color_shade_light_40');
 
+		// wbc_pr( $payload );
+		// die('additional_data last');
 	}
 
 	private static function active_theme_and_plugins() {
@@ -589,9 +593,9 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 				    		// 'size_class'=>array('sixteen','wide'),
 				    		'attr'=>array('style = "'.$style.'"'),
 	    				);
-
+    	// wbc_pr($visible_info);
     	$tab_form = wbc()->common->array_insert_before($tab_form, $fk, $fk.'_eas_visible_info', $visible_info, true);
-
+    	// wbc_pr($tab_form);
     	return $tab_form;
     }
 }
