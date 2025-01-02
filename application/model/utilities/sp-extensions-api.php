@@ -74,8 +74,8 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
 		self::apply_input_by_method($url, $post_fields, $api_settings, $payload, $args);
 
-		// wbc_pr($url);
-		// die('call function after apply_input_by_method');
+		wbc_pr('call function after apply_input_by_method 11111');
+		wbc_pr($url);
 		$result = null;
 
 		if( 'wp_remote_get' == $args['method'] ) {
@@ -87,8 +87,8 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 			$result = wp_remote_post($url, $post_fields);
 		}
 
-		// wbc_pr($result);
-		// die('call function after if else');
+		wbc_pr($result);
+		die('call function after if else');
 		$parsed = \eo\wbc\system\core\publics\Eowbc_Base_Model_Publics::parse_response($result, $args['method']);
 
 		// wbc_pr($parsed);
