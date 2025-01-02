@@ -76,6 +76,12 @@ class Extensions_Data_Template extends \eo\wbc\model\admin\sample_data\data_temp
     public function generate_assets($feature_key, $args = array()) {
 
         $parsed = \eo\wbc\model\utilities\SP_Extensions_Api::call($args['api_setting']['host'].$args['api_setting']['endpoint'], "ihk=".$args['api_setting']['ihk'], array('sp_api_sf' => $args['api_setting']['sp_api_sf'], 'sp_api_fk' => $feature_key));
+        // wbc_pr('generate_assets 11');
+        // wbc_pr($args['api_setting']['host']);
+        // wbc_pr($args['api_setting']['sp_api_sf']);
+        
+        // wbc_pr($parsed);
+        // die('generate_assets 2222');
 
         if ('error' == $parsed['sub_type']) {
 
