@@ -86,11 +86,11 @@ class Eowbc_Base_Model_Publics {
 		// die('parse_response');
 		$res = array();
 
-		if( constant('WP_DEBUG') == true ) {
+		// if( constant('WP_DEBUG') == true ) {
 
-			wbc_pr('Eowbc_Base_Model_Publics parse_response');
-			wbc_pr($response);
-		}
+		// 	wbc_pr('Eowbc_Base_Model_Publics parse_response');
+		// 	wbc_pr($response);
+		// }
 		
 		// ACTIVE_TODO_OC_START
 		// --	seence now the error handling is supported specifically based on throw_types and so on and it is handled in the handle_response function so no need of below if elseif structure here. as well as the isset conditions below the json_decode statement at last in this function are handling and managing to create the type and msg and so on field accordingly. but at least what we need to do is if the response is a standard wordpress error then need to capture the msg and set it in the msg field while set the error value in the type field.	-- to h & -- to pi  done.
