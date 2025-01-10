@@ -207,7 +207,8 @@ class Eowbc_Sample_Data {
 			    <script type="text/javascript" >
 			    jQuery(document).ready(function($) {            
 
-			        var eo_wbc_max_products=<?php echo($this->get_product_size()); ?>;            
+			        var eo_wbc_max_products=<?php echo($this->get_product_size()); ?>;   
+			            console.log("Max products:", eo_wbc_max_products); // DEBUGGING POINT 2         
 			        function eo_wbc_add_products(index){
 
 			            if(index>=eo_wbc_max_products){
