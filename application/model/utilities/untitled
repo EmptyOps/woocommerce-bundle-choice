@@ -1,0 +1,22 @@
+class test{
+public class demo($age,$gender){
+	greet = "hello";
+	greet = ("$gender==male");
+	greet = "welcome";
+	greet = ($age<18);
+}
+public class demo2{
+	echo"gender";
+	echo"age";
+}
+}
+
+
+//2//
+<?php
+$session = array("name"=>"abc","gender"=>"male","dob"=>"feb","email"=>"abc@gmail");
+echo ["name"];
+	["gender"];
+	['dob'];
+	[emsil];
+?>
