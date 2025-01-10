@@ -47,13 +47,13 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
 	public static function call($url, $api_settings, $payload = null, $throw_types = array('error'), $args = array()) {
 
-		// wbc_pr('call function call');
+		// die('call function call');
 
 		self::additional_data($api_settings, $payload);
 
 		// wbc_pr($api_settings);
 		// wbc_pr($payload);
-		// wbc_pr('call function payload log');
+		// die('call function payload log');
 
 		// $url .= (strpos($url, '?') !== FALSE ? $api_settings : "?" . $api_settings);
 
@@ -76,6 +76,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
 		self::apply_input_by_method($url, $post_fields, $api_settings, $payload, $args);
 
+
 		wbc_pr($url);
 		die('call function after apply_input_by_method');
 		$result = null;
@@ -93,6 +94,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 		// die('call function after if else');
 		$parsed = \eo\wbc\system\core\publics\Eowbc_Base_Model_Publics::parse_response($result, $args['method']);
 
+		// wbc_pr($result);
 		// wbc_pr($parsed);
 		// die('call function to call parse_response');
 		wbc_free_memory($result);
@@ -472,7 +474,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
     	if( !$is_apply_response_msg ) {
 
-    		return;
+    		return $tab_form;
     	}
 
     	// --	hear we need to prepare the $res form $parsed by creating empty array and so on. -- to h & -- to pi 	done.
