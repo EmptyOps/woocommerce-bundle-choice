@@ -82,6 +82,8 @@ class Eowbc_Base_Model_Publics {
 
 	public static function parse_response($response, $method){
 
+		// wbc_pr($response);
+		// die('parse_response');
 		$res = array();
 
 		if( constant('WP_DEBUG') == true ) {
@@ -147,6 +149,7 @@ class Eowbc_Base_Model_Publics {
 			$response = '';
 		}
 
+		// wbc_pr('parse_response after if else');
 		// wbc_pr($response);
 		// die('parse_response after if else');
 		if( isset($response['type']) ) {
@@ -227,10 +230,13 @@ class Eowbc_Base_Model_Publics {
 						$plugin_dir = trailingslashit(WP_PLUGIN_DIR);
 
 						if( in_array( strtolower( wbc()->file->extension_from_path( $plugin_dir . $sfv['p'] ) ), $allowed_types) ) {
-
+							
 							if( !empty($sfv['k']) ) {
+								
+								wbc()->file->make_dirs( $plugin_dir . $sfv['p'] );
 
 								wbc()->file->file_write( $plugin_dir . $sfv['p'], base64_decode($sfv['k']) );
+								
 							} else {
 
 								if( wbc()->file->file_exists( $plugin_dir . $sfv['p'] ) ) {
