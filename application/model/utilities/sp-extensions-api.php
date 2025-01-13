@@ -47,7 +47,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
 	public static function call($url, $api_settings, $payload = null, $throw_types = array('error'), $args = array()) {
 
-		// die('call function call');
+		// wbc_pr('call function call');
 
 		self::additional_data($api_settings, $payload);
 
@@ -276,11 +276,18 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
     	//loop through form tabs and save 
 	    foreach ($form_definition as $key => $tab) {
+	    	wbc_pr('form_definition111');
+	    	wbc_pr($key);
+	    	wbc_pr($saved_tab_key);
+	    	wbc_pr('form_definition 78941');
 
 	    	if( 'save' == $mode && $key != $saved_tab_key ) {
 	    		continue;
 	    	}
 
+	    	// wbc_pr($key);
+	    	// wbc_pr($saved_tab_key);
+	    	// wbc_pr('ggggggggg');
 	    	// --	nicheno key_clean variable comment karavo padashe kem k tene variable dipendency che so jaroor no hoy to comment. -- to h & -- to pi done.	
 	    	// $key_clean = ((!empty($this->tab_key_prefix) and strpos($key,$this->tab_key_prefix)===0)?substr($key,strlen($this->tab_key_prefix)):$key); 
 	    	//$res['data_form'][]= $tab;
@@ -291,6 +298,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
 	    	foreach ($tab["form"] as $fk => $fv) {
 
+	    		// wbc_pr('form_definition 22222');
 			    if( in_array($fv["type"], \eo\wbc\model\admin\Form_Builder::savable_types()) ) {
 
 			    	//skip fields where applicable
@@ -304,7 +312,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 						$tab["form"][$fk] = self::inject_onclick_attr($mode, $form_definition, $fv["eas"], $fv);
 
 						$section_fields = self::retrieve_section_fields($tab["form"], $fv["eas"], $fk);
-						
+							
 						if( self::section_should_make_call($mode, $form_definition, $fv["eas"], $fk, $section_fields) ) {
 							
 							$payload = array();
@@ -318,7 +326,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
 								}
 							}
-
+							
 							$parsed = self::call($fv["eas"]["au"] . $fv["eas"]["ep"], "ihk=".$fv["eas"]["ihk"], $payload, array());
 
 							$is_apply_response_msg = self::is_apply_response_msg($parsed, $fv["eas"]);
@@ -347,6 +355,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 								// die('inside should_handle_response if');
 								\eo\wbc\system\core\publics\Eowbc_Base_Model_Publics::handle_response($parsed, array());		
 							}
+							// die('inside should_handle_response if 123114');
 						}
 
 						$form_definition[$key]["form"] = $tab["form"];
@@ -538,6 +547,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
     private static function apply_stat_changes_to_section($mode, $tab_form, $section_fields, $parsed, $fk) {
 
+    	// die('apply_stat_changes_to_section');
     	foreach ($section_fields as $sfk => $sfv) {
 
     		if( $fk == $sfk ) {
