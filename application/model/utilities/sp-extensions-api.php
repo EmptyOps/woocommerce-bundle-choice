@@ -76,10 +76,9 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
 		self::apply_input_by_method($url, $post_fields, $api_settings, $payload, $args);
 
-		// wbc_pr('call function after apply_input_by_method 11111');
+
 		// wbc_pr($url);
-		// die('call function url log');	
-			
+		// die('call function after apply_input_by_method');
 		$result = null;
 
 		if( 'wp_remote_get' == $args['method'] ) {
