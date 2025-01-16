@@ -275,10 +275,10 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
     	//loop through form tabs and save 
 	    foreach ($form_definition as $key => $tab) {
-	    	wbc_pr('form_definition111');
-	    	wbc_pr($key);
-	    	wbc_pr($saved_tab_key);
-	    	wbc_pr('form_definition 78941');
+	    	// wbc_pr('form_definition111');
+	    	// wbc_pr($key);
+	    	// wbc_pr($saved_tab_key);
+	    	// wbc_pr('form_definition 78941');
 
 	    	if( 'save' == $mode && $key != $saved_tab_key ) {
 	    		continue;
