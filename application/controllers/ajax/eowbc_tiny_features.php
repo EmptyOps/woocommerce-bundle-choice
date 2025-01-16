@@ -12,6 +12,9 @@ $args = null;
 // ACTIVE_TODO/TEMP aa view lode karavo che te temperory Bhavesh_2 branch na sampaldata update vakhate banavo che ane jyare tiny feature akhu module update thay tyare and tenu model, view and conttrolar propar bane tyare aa view lode karavu che te remove kari devo and stander view file ma jevu arcituctur che tevu kari nakahavu.    --  to h
 require_once constant('EOWBC_TEMPLATE_DIR').'admin/menu/tiny_features.php';
 
+$args = array();
+$args['sp_frmb_saved_tab_key'] = 'tiny_features_item_page_option';
+
 $temp_res = \eo\wbc\model\admin\Eowbc_Model::instance()->save(\eo\wbc\view\admin\menu\Tiny_Features_View::get_form_definition(), $is_auto_insert_for_template, $args);
 if(empty($temp_res['type']) || $temp_res['type'] != "success"){
 
