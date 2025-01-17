@@ -44,7 +44,7 @@ class SP_Model_Feed extends SP_Feed {
 	}
 
 	public function render_ui($ui) {
-		
+
 		$this->render_variations_ui();
 	}
 
@@ -246,7 +246,7 @@ class SP_Model_Feed extends SP_Feed {
 	}
 
 	public function load_asset(){
-
+		
 		add_action( 'wp_footer'/*'wp_enqueue_scripts'*/ ,function(){
 			
 			wbc()->load->asset('css','fomantic/semantic.min');
