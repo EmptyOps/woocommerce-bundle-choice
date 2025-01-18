@@ -319,7 +319,7 @@ class Product extends \eo\wbc\system\core\publics\Eowbc_Base_Model_Publics {
         // Final add to cart call.
         if( wbc()->sanitize->request('is_test') == 1 ) {
             wbc_pr("add2cart ma EO_WBC_SETS". date('d/m/Y') ."add2cart function niche");
-            // die("add2cart function niche 111111");
+            die("add2cart function niche 111111");
         }
         $eo_wbc_sets=wbc()->session->get('EO_WBC_SETS',NULL);
         $eo_wbc_maps=wbc()->session->get('EO_WBC_MAPS',array());
@@ -401,7 +401,7 @@ class Product extends \eo\wbc\system\core\publics\Eowbc_Base_Model_Publics {
             if( wbc()->sanitize->request('is_test') == 1 ) {
                 wbc_pr("product.php add cart details ". date('d/m/Y') ." hook pela");
                 wbc_pr($cart_details);
-                // die(" is test under product.php cart_details niche");
+                die(" is test under product.php cart_details niche");
             }
            
             // ACTIVE_TODO aa temporary patch chhe jyare woo-bundle-choice upgrade thai tyre a ppom no patch nai rey and woocomersh no built in support ena thij ppom ne eva plugin work kerva joye, evu upgrade nu implementation thavu joye, pashi a problem mate apdey patch handel kervano nai ave. -- to h
@@ -411,7 +411,7 @@ class Product extends \eo\wbc\system\core\publics\Eowbc_Base_Model_Publics {
             if( wbc()->sanitize->request('is_test') == 1 ) {
                 wbc_pr("product.php add cart details ". date('d/m/Y') ." hook pachi");
                 wbc_pr($cart_details);
-                // die(" product.php cart_details hook niche");
+                die(" product.php cart_details hook niche");
             }
 
             if(!empty($cart_details['FIRST']) && !empty($cart_details['SECOND'])){
@@ -419,7 +419,7 @@ class Product extends \eo\wbc\system\core\publics\Eowbc_Base_Model_Publics {
                 if( wbc()->sanitize->request('is_test') == 1 ) {
                     wbc_pr("product.php add cart details ". date('d/m/Y') ."FIRT_CART_ID");
                     wbc_pr($FIRT_CART_ID);
-                    // die(" product.php cart_details hook niche main if niche");
+                    die(" product.php cart_details hook niche main if niche");
                 } 
 
                 $FIRT_CART_ID=wc()->cart->add_to_cart(
@@ -431,7 +431,7 @@ class Product extends \eo\wbc\system\core\publics\Eowbc_Base_Model_Publics {
                 if( wbc()->sanitize->request('is_test') == 1 ) {
                     wbc_pr("product.php add cart details ". date('d/m/Y') ."FIRT_CART_ID");
                     wbc_pr($FIRT_CART_ID);
-                    // die(" product.php cart_details hook niche FIRT_CART_ID : " . $FIRT_CART_ID);
+                    die(" product.php cart_details hook niche FIRT_CART_ID : " . $FIRT_CART_ID);
                 }      
 
                 
@@ -446,7 +446,7 @@ class Product extends \eo\wbc\system\core\publics\Eowbc_Base_Model_Publics {
                     if( wbc()->sanitize->request('is_test') == 1 ) {
                         wbc_pr("product.php add cart details ". date('d/m/Y') ."FIRT_CART_ID");
                         wbc_pr($FIRT_CART_ID);
-                        // die(" product.php cart_details hook niche SECOND_CART_ID");
+                        die(" product.php cart_details hook niche SECOND_CART_ID");
                     } 
 
                     
@@ -455,7 +455,7 @@ class Product extends \eo\wbc\system\core\publics\Eowbc_Base_Model_Publics {
                         //All is good so we saved mapps to session.
                         $eo_wbc_maps[]=wbc()->session->get('EO_WBC_SETS');                            
                         wbc()->session->set('EO_WBC_MAPS',$eo_wbc_maps);
-                        // die("product class add2cart 7 jun");
+                        die("product class add2cart 7 jun");
                     }
                     else
                     {
@@ -533,7 +533,7 @@ class Product extends \eo\wbc\system\core\publics\Eowbc_Base_Model_Publics {
                                     );
                 }
                 wbc()->session->set('EO_WBC_SETS', apply_filters('sp_wbc_add2session_cart_sets',$eo_wbc_sets,$cart));
-                // die("product class add2session_cart EO_WBC_SETS set");
+                die("product class add2session_cart EO_WBC_SETS set");
 
             }
         }
