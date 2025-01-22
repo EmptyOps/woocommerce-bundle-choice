@@ -204,7 +204,7 @@ class Eowbc_Base_Model_Publics {
 		
 			$res['response_data'] = $response['response_data'];	
 		}
-		
+
 		return $res;
 	}
 
