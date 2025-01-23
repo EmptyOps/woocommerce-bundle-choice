@@ -131,6 +131,15 @@ if ( ! class_exists( 'Configuration' ) ) {
 												'attr'=>array("href='".$check_it_out_link."'"),
 												'class'=>array('secondary')	
 											)
+											'enable_make_pair'=>array(
+											'label'=>'Enabled?',
+											'type'=>'checkbox',
+											'value'=>'',
+											'sanitize'=>'sanitize_text_field',
+											'options'=>array('1'=>'Enable Nice URLs.'),
+											'is_id_as_name'=>true,
+											'class'=>array()
+											),
 										)							
 							),
 						'config_buttons_conf'=>array(
