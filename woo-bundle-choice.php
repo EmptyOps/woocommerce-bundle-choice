@@ -22,7 +22,7 @@
  * Text Domain: woo-bundle-choice
  * Domain Path: /languages
  */
-
+  
 // If this file is called directly, abort.
 if (!defined('ABSPATH')) exit;
 
