@@ -132,13 +132,14 @@ if ( ! class_exists( 'Configuration' ) ) {
 												'class'=>array('secondary')	
 											)
 											'enable_make_pair'=>array(
-											'label'=>'Enabled?',
+											'label'=>'Enable Nice URLs?',
 											'type'=>'checkbox',
-											'value'=>'',
+											'value'=>array(),
 											'sanitize'=>'sanitize_text_field',
-											'options'=>array('1'=>'Enable Nice URLs.'),
+											'options'=>array('enable_make_pair'=>' '),
 											'is_id_as_name'=>true,
-											'class'=>array()
+											'class'=>array(),
+											'inline'=>true,
 											),
 										)							
 							),
