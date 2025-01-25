@@ -13,6 +13,19 @@ class WBC_Common {
 		return self::$_instance;
 	}
 
+	public function is_nice_urls_enabled() {
+		//277.8 no fuction chh
+	}
+
+	//227.7 na function chh
+	public function beautify_url_data() {
+		
+	}
+
+	public function debeautify_url_data() {
+
+	}
+
 	public function get_category($page='product',int $post_id = null,array $in_category=array(), $is_apply_compatibility=false){
 
 		// ACTIVE_TODO just for the notes that, almost all the logic of this function seems to be deeply implemented for the proper working of the different premium pair builders supported by the earring pendant builder extension, so let keep that in mind while we are getting into the refactoring of those earring pendant builder and other related extensions of category page and item page set 
