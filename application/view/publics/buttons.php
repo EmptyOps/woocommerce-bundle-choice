@@ -108,14 +108,14 @@ if(!function_exists('eo_wbc_buttons_css')){
 	</h2>
 	<div class="ui grid center aligned container">
 		<div class="ui buttons large row stackable" style="display: inline-block;display: inline-flex;">
-			<button class="ui button primary column wbc_wid_btns" href="<?php echo $first_url .'EO_WBC=1&BEGIN='.$first_slug.'&STEP=1&FIRST=&SECOND='; ?>" onclick="window.location.href=jQuery(this).attr('href');">
+			<button class="ui button primary column wbc_wid_btns" href="<?php echo /*$first_url .'EO_WBC=1&BEGIN='.$first_slug.'&STEP=1&FIRST=&SECOND='*/wbc()->common->beautify_url_data($first_url .'EO_WBC=1&BEGIN='.$first_slug.'&STEP=1&FIRST=&SECOND='); ?>" onclick="window.location.href=jQuery(this).attr('href');">
 				<?php echo $button_text.$first_name; ?>
 			</button>
 
 			<div class="or" style="margin: auto;"></div>
 
 
-			<button class="ui button primary column wbc_wid_btns" href="<?php echo $second_url .'EO_WBC=1&BEGIN='.$second_slug.'&STEP=1&FIRST=&SECOND='; ?>" onclick="window.location.href=jQuery(this).attr('href');">
+			<button class="ui button primary column wbc_wid_btns" href="<?php echo /*$second_url .'EO_WBC=1&BEGIN='.$second_slug.'&STEP=1&FIRST=&SECOND='*/wbc()->common->beautify_url_data($second_url .'EO_WBC=1&BEGIN='.$second_slug.'&STEP=1&FIRST=&SECOND='); ?>" onclick="window.location.href=jQuery(this).attr('href');">
 				<?php echo $button_text.$second_name; ?>
 			</button>
 		</div>

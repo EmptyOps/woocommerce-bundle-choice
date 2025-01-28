@@ -22,7 +22,7 @@ class Preview extends \eo\wbc\system\core\publics\Eowbc_Base_Model_Publics {
 
         if(empty(wbc()->sanitize->get('FIRST')) || empty(wbc()->sanitize->get('SECOND')))
         {            
-            exit(wp_redirect(wbc()->wc->eo_wbc_get_cart_url()));
+            exit(wp_redirect(/*wbc()->wc->eo_wbc_get_cart_url()*/wbc()->common->beautify_url_data(wbc()->wc->eo_wbc_get_cart_url())));
             return;
         } 
 
@@ -36,7 +36,7 @@ class Preview extends \eo\wbc\system\core\publics\Eowbc_Base_Model_Publics {
                 $cart_url = explode('?', $cart_url)[0];
             }
             
-            exit(wp_redirect($cart_url));
+            exit(wp_redirect(/*$cart_url*/wbc()->common->beautify_url_data($cart_url)));
         }     
         
         $this->eo_wbc_render();    //Page Review cart data
@@ -333,7 +333,7 @@ class Preview extends \eo\wbc\system\core\publics\Eowbc_Base_Model_Publics {
                           '<div class="ui dimmer inverted transition hidden">'.
                             '<div class="content">'.
                                 '<div class="center">'.
-                                    '<a class="ui button primary" href="'.\eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_breadcrumb_change_url((!empty(wbc()->sanitize->get('BEGIN')) && wbc()->sanitize->get('BEGIN')==wbc()->options->get_option('configuration','first_slug')/*get_option('eo_wbc_first_slug')*/ ? 1 : 2),(empty($set['FIRST'][2])?$set['FIRST'][0]:$set['FIRST'][2])).'" >Change</a>'.
+                                    '<a class="ui button primary" href="'./*\eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_breadcrumb_change_url((!empty(wbc()->sanitize->get('BEGIN')) && wbc()->sanitize->get('BEGIN')==wbc()->options->get_option('configuration','first_slug')*//*get_option('eo_wbc_first_slug')*/ /*? 1 : 2),(empty($set['FIRST'][2])?$set['FIRST'][0]:$set['FIRST'][2]))*/wbc()->common->beautify_url_data(\eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_breadcrumb_change_url((!empty(wbc()->sanitize->get('BEGIN')) && wbc()->sanitize->get('BEGIN')==wbc()->options->get_option('configuration','first_slug')/*get_option('eo_wbc_first_slug')*/ ? 1 : 2),(empty($set['FIRST'][2])?$set['FIRST'][0]:$set['FIRST'][2]))).'" >Change</a>'.
                                 '</div>'.
                             '</div>'.
                           '</div>'.$first->get_image('full').
@@ -354,7 +354,7 @@ class Preview extends \eo\wbc\system\core\publics\Eowbc_Base_Model_Publics {
                           '<div class="ui dimmer inverted transition hidden">'.
                             '<div class="content">'.
                                 '<div class="center">'.
-                                    '<a class="ui button primary" href="'.\eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_breadcrumb_change_url((!empty(wbc()->sanitize->get('BEGIN')) && wbc()->sanitize->get('BEGIN')==wbc()->options->get_option('configuration','first_slug')/*get_option('eo_wbc_first_slug')*/ ? 2 : 1),(empty($set['SECOND'][2])?$set['SECOND'][0]:$set['SECOND'][2])).'">Change</a>'.        
+                                    '<a class="ui button primary" href="'./*\eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_breadcrumb_change_url((!empty(wbc()->sanitize->get('BEGIN')) && wbc()->sanitize->get('BEGIN')==wbc()->options->get_option('configuration','first_slug')*//*get_option('eo_wbc_first_slug')*/ /*? 2 : 1),(empty($set['SECOND'][2])?$set['SECOND'][0]:$set['SECOND'][2]))*/wbc()->common->beautify_url_data(\eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_breadcrumb_change_url((!empty(wbc()->sanitize->get('BEGIN')) && wbc()->sanitize->get('BEGIN')==wbc()->options->get_option('configuration','first_slug')/*get_option('eo_wbc_first_slug')*/ ? 2 : 1),(empty($set['SECOND'][2])?$set['SECOND'][0]:$set['SECOND'][2]))).'">Change</a>'.        
                                 '</div>'.
                             '</div>'.
                           '</div>'.
@@ -386,7 +386,7 @@ class Preview extends \eo\wbc\system\core\publics\Eowbc_Base_Model_Publics {
                 //ob_flush();
                 //ob_end_clean();
                 //exit(var_dump(wbc()->wc->eo_wbc_get_cart_url()));
-                exit(wp_redirect(wbc()->wc->eo_wbc_get_cart_url()));
+                exit(wp_redirect(/*wbc()->wc->eo_wbc_get_cart_url()*/wbc()->common->beautify_url_data(wbc()->wc->eo_wbc_get_cart_url())));
             }
         /*});          */
 

@@ -66,7 +66,7 @@ class Product extends \eo\wbc\system\core\publics\Eowbc_Base_Model_Publics {
                         $cart_url = site_url('?'.http_build_query($url_params));  
                     }
                 }                
-                exit(wp_redirect($cart_url));
+                exit(wp_redirect(/*$cart_url*/wbc()->common->beautify_url_data($cart_url)));
                 die();
             }
 
@@ -281,7 +281,7 @@ class Product extends \eo\wbc\system\core\publics\Eowbc_Base_Model_Publics {
                             
                             // console.log('ddddddddddd');
                             // console.log(url);
-                            window.location.href = url;
+                            window.location.href = /*url*/ wbc()->common->beautify_url_data(url);
                         }
 
                         return false;
@@ -890,6 +890,7 @@ class Product extends \eo\wbc\system\core\publics\Eowbc_Base_Model_Publics {
                 // changed on 08-09-2023
                 // return header("Location: {$url}");
                 // wp_die();
+                $url = wbc()->common->beautify_url_data($url);
                 header("Location: {$url}");
                 echo '<script type="text/javascript"> window.location.href = "'. $url .'"; </script>';
                 return;
