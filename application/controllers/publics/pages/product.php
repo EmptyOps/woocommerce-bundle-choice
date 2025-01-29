@@ -281,7 +281,7 @@ class Product extends \eo\wbc\system\core\publics\Eowbc_Base_Model_Publics {
                             
                             // console.log('ddddddddddd');
                             // console.log(url);
-                            window.location.href = /*url*/ wbc()->common->beautify_url_data(url);
+                            window.location.href = /*url*/wbc()->common->beautify_url_data(url);
                         }
 
                         return false;

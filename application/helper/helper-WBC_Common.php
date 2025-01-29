@@ -82,7 +82,7 @@ class WBC_Common {
 
 	function debeautify_url_data($wbcid = null) {
 	    // Retrieve wbcid from argument or $_GET
-	    if ($wbcid === null) {
+	    if ($wbcid == null) {
 	        $wbcid = isset($_GET['wbcid']) ? filter_var($_GET['wbcid'], FILTER_SANITIZE_NUMBER_INT) : null;
 	    }
 
