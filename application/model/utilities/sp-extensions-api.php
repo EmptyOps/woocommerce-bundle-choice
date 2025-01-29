@@ -151,8 +151,8 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 		$payload['sp_api_bpfa']['pcs80'] = wbc()->options->get_option('appearance_global','theme_primary_color_shade_light_80');
 		$payload['sp_api_bpfa']['scs80'] = wbc()->options->get_option('appearance_global','theme_secondary_color_shade_light_80');
 
-		$payload['sp_api_bpfa']['pcs70'] = wbc()->options->get_option('appearance_global','theme_primary_color_shade_light_70');
-		$payload['sp_api_bpfa']['scs70'] = wbc()->options->get_option('appearance_global','theme_secondary_color_shade_light_70');
+		// $payload['sp_api_bpfa']['pcs70'] = wbc()->options->get_option('appearance_global','theme_primary_color_shade_light_70');
+		// $payload['sp_api_bpfa']['scs70'] = wbc()->options->get_option('appearance_global','theme_secondary_color_shade_light_70');
 
 		$payload['sp_api_bpfa']['pcs60'] = wbc()->options->get_option('appearance_global','theme_primary_color_shade_light_60');
 		$payload['sp_api_bpfa']['scs60'] = wbc()->options->get_option('appearance_global','theme_secondary_color_shade_light_60');
@@ -163,8 +163,17 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 		$payload['sp_api_bpfa']['pcs40'] = wbc()->options->get_option('appearance_global','theme_primary_color_shade_light_40');
 		$payload['sp_api_bpfa']['scs40'] = wbc()->options->get_option('appearance_global','theme_secondary_color_shade_light_40');
 
+		// $payload['sp_api_bpfa']['pcs20'] = wbc()->options->get_option('appearance_global','theme_primary_color_shade_light_20');
+		// $payload['sp_api_bpfa']['scs20'] = wbc()->options->get_option('appearance_global','theme_secondary_color_shade_light_20');
+
+		$payload['sp_api_bpfa']['pcs95'] = wbc()->options->get_option('appearance_global','theme_primary_color_shade_light_95');
+		$payload['sp_api_bpfa']['pcs85'] = wbc()->options->get_option('appearance_global','theme_primary_color_shade_light_85');
+		$payload['sp_api_bpfa']['pcs75'] = wbc()->options->get_option('appearance_global','theme_primary_color_shade_light_75');
+		$payload['sp_api_bpfa']['pcs70'] = wbc()->options->get_option('appearance_global','theme_primary_color_shade_light_70');
+		$payload['sp_api_bpfa']['pcs30'] = wbc()->options->get_option('appearance_global','theme_primary_color_shade_light_30');
 		$payload['sp_api_bpfa']['pcs20'] = wbc()->options->get_option('appearance_global','theme_primary_color_shade_light_20');
-		$payload['sp_api_bpfa']['scs20'] = wbc()->options->get_option('appearance_global','theme_secondary_color_shade_light_20');
+		$payload['sp_api_bpfa']['pcs10'] = wbc()->options->get_option('appearance_global','theme_primary_color_shade_light_10');
+
 
 		// wbc_pr( $payload );
 		// die('additional_data last');

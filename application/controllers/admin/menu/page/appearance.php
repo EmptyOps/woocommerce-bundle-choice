@@ -707,7 +707,7 @@ if (!class_exists('Appearance')) {
 							'type' => 'color',
 							'sanitize' => 'sanitize_hex_color',
 							// NOTE: ama j default colour value set kari che te user expiriance mate che, jo user a ama koi chenge k set nai karu hoy to default value functionality ma considar nai thay means jo user a ama koi chenge k set nai karu hoy to a error apse. means e frontend ma or bije kai use nai thay means aa khali display mate che.
-							'value' => wbc()->options->get_option('appearance_global', 'theme_primary_color_shade_light_90', '#212529', false, true),
+							'value' => wbc()->options->get_option('appearance_global', 'theme_primary_color_shade_light_90', '#333333', false, true),
 							'is_id_as_name' => true,
 							'class' => array(),
 							'visible_info' => array(
@@ -737,7 +737,7 @@ if (!class_exists('Appearance')) {
 							'type' => 'color',
 							'sanitize' => 'sanitize_hex_color',
 							// NOTE: ama j default colour value set kari che te user expiriance mate che, jo user a ama koi chenge k set nai karu hoy to default value functionality ma considar nai thay means jo user a ama koi chenge k set nai karu hoy to a error apse. means e frontend ma or bije kai use nai thay means aa khali display mate che.
-							'value' => wbc()->options->get_option('appearance_global', 'theme_primary_color_shade_light_80', '#333', false, true),
+							'value' => wbc()->options->get_option('appearance_global', 'theme_primary_color_shade_light_80', '#525252', false, true),
 							'is_id_as_name' => true,
 							'class' => array(),
 							'visible_info' => array(
@@ -762,42 +762,42 @@ if (!class_exists('Appearance')) {
 								'size_class' => array('sixteen', 'wide'),
 							),
 						),
-						'theme_primary_color_shade_light_70' => array(
-							'label' => 'Theme Primary Color Shade 70%',
-							'type' => 'color',
-							'sanitize' => 'sanitize_hex_color',
-							// NOTE: ama j default colour value set kari che te user expiriance mate che, jo user a ama koi chenge k set nai karu hoy to default value functionality ma considar nai thay means jo user a ama koi chenge k set nai karu hoy to a error apse. means e frontend ma or bije kai use nai thay means aa khali display mate che.
-							'value' => wbc()->options->get_option('appearance_global', 'theme_primary_color_shade_light_70', '#666666', false, true),
-							'is_id_as_name' => true,
-							'class' => array(),
-							'visible_info' => array(
-								'label' => 'If your theme means web site layout do not have the necessary shade for this field then simply select an appropriate light color shade of the Primary Color.(<strong>NOTE: The color shades specified here are for reference only and are not applied to the UI widgets by default. If you wish to apply these colors, you must manually update each field. Ensure that all fields are properly configured to reflect the desired colors in our plugin widgets.</strong>)',
-								'type' => 'visible_info',
-								'class' => array('fluid', 'small'),
-								'size_class' => array('sixteen', 'wide'),
-							),
-						),
-						'theme_secondary_color_shade_light_70' => array(
-							'label' => 'Theme Secondary Color Shade 70%',
-							'type' => 'color',
-							'sanitize' => 'sanitize_hex_color',
-							// NOTE: ama j default colour value set kari che te user expiriance mate che, jo user a ama koi chenge k set nai karu hoy to default value functionality ma considar nai thay means jo user a ama koi chenge k set nai karu hoy to a error apse. means e frontend ma or bije kai use nai thay means aa khali display mate che.
-							'value' => wbc()->options->get_option('appearance_global', 'theme_secondary_color_shade_light_70', '#dcd7ca', false, true),
-							'is_id_as_name' => true,
-							'class' => array(),
-							'visible_info' => array(
-								'label' => 'If your theme means web site layout do not have the necessary shade for this field then simply select an appropriate light color shade of the Secondary Color.(<strong>NOTE: The color shades specified here are for reference only and are not applied to the UI widgets by default. If you wish to apply these colors, you must manually update each field. Ensure that all fields are properly configured to reflect the desired colors in our plugin widgets.</strong>)',
-								'type' => 'visible_info',
-								'class' => array('fluid', 'small'),
-								'size_class' => array('sixteen', 'wide'),
-							),
-						),
+						// 'theme_primary_color_shade_light_70' => array(
+						// 	'label' => 'Theme Primary Color Shade 70%',
+						// 	'type' => 'color',
+						// 	'sanitize' => 'sanitize_hex_color',
+						// 	// NOTE: ama j default colour value set kari che te user expiriance mate che, jo user a ama koi chenge k set nai karu hoy to default value functionality ma considar nai thay means jo user a ama koi chenge k set nai karu hoy to a error apse. means e frontend ma or bije kai use nai thay means aa khali display mate che.
+						// 	'value' => wbc()->options->get_option('appearance_global', 'theme_primary_color_shade_light_70', '#666666', false, true),
+						// 	'is_id_as_name' => true,
+						// 	'class' => array(),
+						// 	'visible_info' => array(
+						// 		'label' => 'If your theme means web site layout do not have the necessary shade for this field then simply select an appropriate light color shade of the Primary Color.(<strong>NOTE: The color shades specified here are for reference only and are not applied to the UI widgets by default. If you wish to apply these colors, you must manually update each field. Ensure that all fields are properly configured to reflect the desired colors in our plugin widgets.</strong>)',
+						// 		'type' => 'visible_info',
+						// 		'class' => array('fluid', 'small'),
+						// 		'size_class' => array('sixteen', 'wide'),
+						// 	),
+						// ),
+						// 'theme_secondary_color_shade_light_70' => array(
+						// 	'label' => 'Theme Secondary Color Shade 70%',
+						// 	'type' => 'color',
+						// 	'sanitize' => 'sanitize_hex_color',
+						// 	// NOTE: ama j default colour value set kari che te user expiriance mate che, jo user a ama koi chenge k set nai karu hoy to default value functionality ma considar nai thay means jo user a ama koi chenge k set nai karu hoy to a error apse. means e frontend ma or bije kai use nai thay means aa khali display mate che.
+						// 	'value' => wbc()->options->get_option('appearance_global', 'theme_secondary_color_shade_light_70', '#dcd7ca', false, true),
+						// 	'is_id_as_name' => true,
+						// 	'class' => array(),
+						// 	'visible_info' => array(
+						// 		'label' => 'If your theme means web site layout do not have the necessary shade for this field then simply select an appropriate light color shade of the Secondary Color.(<strong>NOTE: The color shades specified here are for reference only and are not applied to the UI widgets by default. If you wish to apply these colors, you must manually update each field. Ensure that all fields are properly configured to reflect the desired colors in our plugin widgets.</strong>)',
+						// 		'type' => 'visible_info',
+						// 		'class' => array('fluid', 'small'),
+						// 		'size_class' => array('sixteen', 'wide'),
+						// 	),
+						// ),
 						'theme_primary_color_shade_light_60' => array(
 							'label' => 'Theme Primary Color Shade 60%',
 							'type' => 'color',
 							'sanitize' => 'sanitize_hex_color',
 							// NOTE: ama j default colour value set kari che te user expiriance mate che, jo user a ama koi chenge k set nai karu hoy to default value functionality ma considar nai thay means jo user a ama koi chenge k set nai karu hoy to a error apse. means e frontend ma or bije kai use nai thay means aa khali display mate che.
-							'value' => wbc()->options->get_option('appearance_global', 'theme_primary_color_shade_light_60', '#495057', false, true),
+							'value' => wbc()->options->get_option('appearance_global', 'theme_primary_color_shade_light_60', '#666666', false, true),
 							'is_id_as_name' => true,
 							'class' => array(),
 							'visible_info' => array(
@@ -827,7 +827,7 @@ if (!class_exists('Appearance')) {
 							'type' => 'color',
 							'sanitize' => 'sanitize_hex_color',
 							// NOTE: ama j default colour value set kari che te user expiriance mate che, jo user a ama koi chenge k set nai karu hoy to default value functionality ma considar nai thay means jo user a ama koi chenge k set nai karu hoy to a error apse. means e frontend ma or bije kai use nai thay means aa khali display mate che.
-							'value' => wbc()->options->get_option('appearance_global', 'theme_primary_color_shade_light_50', '#766a6a', false, true),
+							'value' => wbc()->options->get_option('appearance_global', 'theme_primary_color_shade_light_50', '#7a7a7a', false, true),
 							'is_id_as_name' => true,
 							'class' => array(),
 							'visible_info' => array(
@@ -857,7 +857,7 @@ if (!class_exists('Appearance')) {
 							'type' => 'color',
 							'sanitize' => 'sanitize_hex_color',
 							// NOTE: ama j default colour value set kari che te user expiriance mate che, jo user a ama koi chenge k set nai karu hoy to default value functionality ma considar nai thay means jo user a ama koi chenge k set nai karu hoy to a error apse. means e frontend ma or bije kai use nai thay means aa khali display mate che.
-							'value' => wbc()->options->get_option('appearance_global', 'theme_primary_color_shade_light_40', '#575252', false, true),
+							'value' => wbc()->options->get_option('appearance_global', 'theme_primary_color_shade_light_40', '#929290', false, true),
 							'is_id_as_name' => true,
 							'class' => array(),
 							'visible_info' => array(
@@ -882,12 +882,42 @@ if (!class_exists('Appearance')) {
 								'size_class' => array('sixteen', 'wide'),
 							),
 						),
-						'theme_primary_color_shade_light_20' => array(
-							'label' => 'Theme Primary Color Shade 20%',
+						// 'theme_primary_color_shade_light_20' => array(
+						// 	'label' => 'Theme Primary Color Shade 20%',
+						// 	'type' => 'color',
+						// 	'sanitize' => 'sanitize_hex_color',
+						// 	// NOTE: ama j default colour value set kari che te user expiriance mate che, jo user a ama koi chenge k set nai karu hoy to default value functionality ma considar nai thay means jo user a ama koi chenge k set nai karu hoy to a error apse. means e frontend ma or bije kai use nai thay means aa khali display mate che.
+						// 	'value' => wbc()->options->get_option('appearance_global', 'theme_primary_color_shade_light_20', '#929290', false, true),
+						// 	'is_id_as_name' => true,
+						// 	'class' => array(),
+						// 	'visible_info' => array(
+						// 		'label' => 'If your theme means web site layout do not have the necessary shade for this field then simply select an appropriate light color shade of the Primary Color.(<strong>NOTE: The color shades specified here are for reference only and are not applied to the UI widgets by default. If you wish to apply these colors, you must manually update each field. Ensure that all fields are properly configured to reflect the desired colors in our plugin widgets.</strong>)',
+						// 		'type' => 'visible_info',
+						// 		'class' => array('fluid', 'small'),
+						// 		'size_class' => array('sixteen', 'wide'),
+						// 	),
+						// ),
+						// 'theme_secondary_color_shade_light_20' => array(
+						// 	'label' => 'Theme Secondary Color Shade 20%',
+						// 	'type' => 'color',
+						// 	'sanitize' => 'sanitize_hex_color',
+						// 	// NOTE: ama j default colour value set kari che te user expiriance mate che, jo user a ama koi chenge k set nai karu hoy to default value functionality ma considar nai thay means jo user a ama koi chenge k set nai karu hoy to a error apse. means e frontend ma or bije kai use nai thay means aa khali display mate che.
+						// 	'value' => wbc()->options->get_option('appearance_global', 'theme_secondary_color_shade_light_20', '#f5f5f5', false, true),
+						// 	'is_id_as_name' => true,
+						// 	'class' => array(),
+						// 	'visible_info' => array(
+						// 		'label' => 'If your theme means web site layout do not have the necessary shade for this field then simply select an appropriate light color shade of the Secondary Color.(<strong>NOTE: The color shades specified here are for reference only and are not applied to the UI widgets by default. If you wish to apply these colors, you must manually update each field. Ensure that all fields are properly configured to reflect the desired colors in our plugin widgets.</strong>)',
+						// 		'type' => 'visible_info',
+						// 		'class' => array('fluid', 'small'),
+						// 		'size_class' => array('sixteen', 'wide'),
+						// 	),
+						// ),
+						'theme_primary_color_shade_light_95' => array(
+							'label' => 'Theme Primary Color Shade 95%',
 							'type' => 'color',
 							'sanitize' => 'sanitize_hex_color',
 							// NOTE: ama j default colour value set kari che te user expiriance mate che, jo user a ama koi chenge k set nai karu hoy to default value functionality ma considar nai thay means jo user a ama koi chenge k set nai karu hoy to a error apse. means e frontend ma or bije kai use nai thay means aa khali display mate che.
-							'value' => wbc()->options->get_option('appearance_global', 'theme_primary_color_shade_light_20', '#929290', false, true),
+							'value' => wbc()->options->get_option('appearance_global', 'theme_primary_color_shade_light_95', '#212529', false, true),
 							'is_id_as_name' => true,
 							'class' => array(),
 							'visible_info' => array(
@@ -897,16 +927,91 @@ if (!class_exists('Appearance')) {
 								'size_class' => array('sixteen', 'wide'),
 							),
 						),
-						'theme_secondary_color_shade_light_20' => array(
-							'label' => 'Theme Secondary Color Shade 20%',
+						'theme_primary_color_shade_light_85' => array(
+							'label' => 'Theme Primary Color Shade 85%',
 							'type' => 'color',
 							'sanitize' => 'sanitize_hex_color',
 							// NOTE: ama j default colour value set kari che te user expiriance mate che, jo user a ama koi chenge k set nai karu hoy to default value functionality ma considar nai thay means jo user a ama koi chenge k set nai karu hoy to a error apse. means e frontend ma or bije kai use nai thay means aa khali display mate che.
-							'value' => wbc()->options->get_option('appearance_global', 'theme_secondary_color_shade_light_20', '#f5f5f5', false, true),
+							'value' => wbc()->options->get_option('appearance_global', 'theme_primary_color_shade_light_85', '#495057', false, true),
 							'is_id_as_name' => true,
 							'class' => array(),
 							'visible_info' => array(
-								'label' => 'If your theme means web site layout do not have the necessary shade for this field then simply select an appropriate light color shade of the Secondary Color.(<strong>NOTE: The color shades specified here are for reference only and are not applied to the UI widgets by default. If you wish to apply these colors, you must manually update each field. Ensure that all fields are properly configured to reflect the desired colors in our plugin widgets.</strong>)',
+								'label' => 'If your theme means web site layout do not have the necessary shade for this field then simply select an appropriate light color shade of the Primary Color.(<strong>NOTE: The color shades specified here are for reference only and are not applied to the UI widgets by default. If you wish to apply these colors, you must manually update each field. Ensure that all fields are properly configured to reflect the desired colors in our plugin widgets.</strong>)',
+								'type' => 'visible_info',
+								'class' => array('fluid', 'small'),
+								'size_class' => array('sixteen', 'wide'),
+							),
+						),
+						'theme_primary_color_shade_light_75' => array(
+							'label' => 'Theme Primary Color Shade 75%',
+							'type' => 'color',
+							'sanitize' => 'sanitize_hex_color',
+							// NOTE: ama j default colour value set kari che te user expiriance mate che, jo user a ama koi chenge k set nai karu hoy to default value functionality ma considar nai thay means jo user a ama koi chenge k set nai karu hoy to a error apse. means e frontend ma or bije kai use nai thay means aa khali display mate che.
+							'value' => wbc()->options->get_option('appearance_global', 'theme_primary_color_shade_light_75', '#575252', false, true),
+							'is_id_as_name' => true,
+							'class' => array(),
+							'visible_info' => array(
+								'label' => 'If your theme means web site layout do not have the necessary shade for this field then simply select an appropriate light color shade of the Primary Color.(<strong>NOTE: The color shades specified here are for reference only and are not applied to the UI widgets by default. If you wish to apply these colors, you must manually update each field. Ensure that all fields are properly configured to reflect the desired colors in our plugin widgets.</strong>)',
+								'type' => 'visible_info',
+								'class' => array('fluid', 'small'),
+								'size_class' => array('sixteen', 'wide'),
+							),
+						),
+						'theme_primary_color_shade_light_70' => array(
+							'label' => 'Theme Primary Color Shade 70%',
+							'type' => 'color',
+							'sanitize' => 'sanitize_hex_color',
+							// NOTE: ama j default colour value set kari che te user expiriance mate che, jo user a ama koi chenge k set nai karu hoy to default value functionality ma considar nai thay means jo user a ama koi chenge k set nai karu hoy to a error apse. means e frontend ma or bije kai use nai thay means aa khali display mate che.
+							'value' => wbc()->options->get_option('appearance_global', 'theme_primary_color_shade_light_70', '#766a6a', false, true),
+							'is_id_as_name' => true,
+							'class' => array(),
+							'visible_info' => array(
+								'label' => 'If your theme means web site layout do not have the necessary shade for this field then simply select an appropriate light color shade of the Primary Color.(<strong>NOTE: The color shades specified here are for reference only and are not applied to the UI widgets by default. If you wish to apply these colors, you must manually update each field. Ensure that all fields are properly configured to reflect the desired colors in our plugin widgets.</strong>)',
+								'type' => 'visible_info',
+								'class' => array('fluid', 'small'),
+								'size_class' => array('sixteen', 'wide'),
+							),
+						),
+						'theme_primary_color_shade_light_30' => array(
+							'label' => 'Theme Primary Color Shade 30%',
+							'type' => 'color',
+							'sanitize' => 'sanitize_hex_color',
+							// NOTE: ama j default colour value set kari che te user expiriance mate che, jo user a ama koi chenge k set nai karu hoy to default value functionality ma considar nai thay means jo user a ama koi chenge k set nai karu hoy to a error apse. means e frontend ma or bije kai use nai thay means aa khali display mate che.
+							'value' => wbc()->options->get_option('appearance_global', 'theme_primary_color_shade_light_30', '#d9d1f4', false, true),
+							'is_id_as_name' => true,
+							'class' => array(),
+							'visible_info' => array(
+								'label' => 'If your theme means web site layout do not have the necessary shade for this field then simply select an appropriate light color shade of the Primary Color.(<strong>NOTE: The color shades specified here are for reference only and are not applied to the UI widgets by default. If you wish to apply these colors, you must manually update each field. Ensure that all fields are properly configured to reflect the desired colors in our plugin widgets.</strong>)',
+								'type' => 'visible_info',
+								'class' => array('fluid', 'small'),
+								'size_class' => array('sixteen', 'wide'),
+							),
+						),
+						'theme_primary_color_shade_light_20' => array(
+							'label' => 'Theme Primary Color Shade 20%',
+							'type' => 'color',
+							'sanitize' => 'sanitize_hex_color',
+							// NOTE: ama j default colour value set kari che te user expiriance mate che, jo user a ama koi chenge k set nai karu hoy to default value functionality ma considar nai thay means jo user a ama koi chenge k set nai karu hoy to a error apse. means e frontend ma or bije kai use nai thay means aa khali display mate che.
+							'value' => wbc()->options->get_option('appearance_global', 'theme_primary_color_shade_light_20', '#e1e1e1', false, true),
+							'is_id_as_name' => true,
+							'class' => array(),
+							'visible_info' => array(
+								'label' => 'If your theme means web site layout do not have the necessary shade for this field then simply select an appropriate light color shade of the Primary Color.(<strong>NOTE: The color shades specified here are for reference only and are not applied to the UI widgets by default. If you wish to apply these colors, you must manually update each field. Ensure that all fields are properly configured to reflect the desired colors in our plugin widgets.</strong>)',
+								'type' => 'visible_info',
+								'class' => array('fluid', 'small'),
+								'size_class' => array('sixteen', 'wide'),
+							),
+						),
+						'theme_primary_color_shade_light_10' => array(
+							'label' => 'Theme Primary Color Shade 10%',
+							'type' => 'color',
+							'sanitize' => 'sanitize_hex_color',
+							// NOTE: ama j default colour value set kari che te user expiriance mate che, jo user a ama koi chenge k set nai karu hoy to default value functionality ma considar nai thay means jo user a ama koi chenge k set nai karu hoy to a error apse. means e frontend ma or bije kai use nai thay means aa khali display mate che.
+							'value' => wbc()->options->get_option('appearance_global', 'theme_primary_color_shade_light_10', '#efefef', false, true),
+							'is_id_as_name' => true,
+							'class' => array(),
+							'visible_info' => array(
+								'label' => 'If your theme means web site layout do not have the necessary shade for this field then simply select an appropriate light color shade of the Primary Color.(<strong>NOTE: The color shades specified here are for reference only and are not applied to the UI widgets by default. If you wish to apply these colors, you must manually update each field. Ensure that all fields are properly configured to reflect the desired colors in our plugin widgets.</strong>)',
 								'type' => 'visible_info',
 								'class' => array('fluid', 'small'),
 								'size_class' => array('sixteen', 'wide'),

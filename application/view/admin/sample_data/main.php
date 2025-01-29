@@ -96,8 +96,8 @@ box-shadow: none;">
 									$primary_color_shade_light_80 = wbc()->options->get_option('appearance_global','theme_primary_color_shade_light_80'); 
 		                			$secondary_color_shade_light_80 = wbc()->options->get_option('appearance_global','theme_secondary_color_shade_light_80');
 
-		                			$primary_color_shade_light_70 = wbc()->options->get_option('appearance_global','theme_primary_color_shade_light_70'); 
-		                			$secondary_color_shade_light_70 = wbc()->options->get_option('appearance_global','theme_secondary_color_shade_light_70');
+		                			// $primary_color_shade_light_70 = wbc()->options->get_option('appearance_global','theme_primary_color_shade_light_70'); 
+		                			// $secondary_color_shade_light_70 = wbc()->options->get_option('appearance_global','theme_secondary_color_shade_light_70');
 
 									$primary_color_shade_light_60 = wbc()->options->get_option('appearance_global','theme_primary_color_shade_light_60'); 
 		                			$secondary_color_shade_light_60 = wbc()->options->get_option('appearance_global','theme_secondary_color_shade_light_60');
@@ -108,11 +108,19 @@ box-shadow: none;">
 									$primary_color_shade_light_40 = wbc()->options->get_option('appearance_global','theme_primary_color_shade_light_40'); 
 		                			$secondary_color_shade_light_40 = wbc()->options->get_option('appearance_global','theme_secondary_color_shade_light_40');
 
-		                			$primary_color_shade_light_20 = wbc()->options->get_option('appearance_global','theme_primary_color_shade_light_20'); 
-		                			$secondary_color_shade_light_20 = wbc()->options->get_option('appearance_global','theme_secondary_color_shade_light_20');
+		                			// $primary_color_shade_light_20 = wbc()->options->get_option('appearance_global','theme_primary_color_shade_light_20'); 
+		                			// $secondary_color_shade_light_20 = wbc()->options->get_option('appearance_global','theme_secondary_color_shade_light_20');
+
+		                			$primary_color_shade_light_95 = wbc()->options->get_option('appearance_global','theme_primary_color_shade_light_95');
+		                			$primary_color_shade_light_85 = wbc()->options->get_option('appearance_global','theme_primary_color_shade_light_85');
+		                			$primary_color_shade_light_75 = wbc()->options->get_option('appearance_global','theme_primary_color_shade_light_75');
+		                			$primary_color_shade_light_70 = wbc()->options->get_option('appearance_global','theme_primary_color_shade_light_70');
+		                			$primary_color_shade_light_30 = wbc()->options->get_option('appearance_global','theme_primary_color_shade_light_30');
+		                			$primary_color_shade_light_20 = wbc()->options->get_option('appearance_global','theme_primary_color_shade_light_20');
+		                			$primary_color_shade_light_10 = wbc()->options->get_option('appearance_global','theme_primary_color_shade_light_10');
 		                			?> 
 
-		                  			<?php if(empty($primary_color) || empty($secondary_color) || empty($primary_color_shade_light_90) || empty($secondary_color_shade_light_90) || empty($primary_color_shade_light_80) || empty($secondary_color_shade_light_80)  || empty($primary_color_shade_light_70) || empty($secondary_color_shade_light_70) || empty($primary_color_shade_light_60) || empty($secondary_color_shade_light_60) || empty($primary_color_shade_light_50) || empty($secondary_color_shade_light_50) || empty($primary_color_shade_light_40) || empty($secondary_color_shade_light_40) || empty($primary_color_shade_light_20) || empty($secondary_color_shade_light_20)):?> 
+		                  			<?php if(empty($primary_color) || empty($secondary_color) || empty($primary_color_shade_light_90) || empty($secondary_color_shade_light_90) || empty($primary_color_shade_light_80) || empty($secondary_color_shade_light_80)/* || 	empty($primary_color_shade_light_70) || empty($secondary_color_shade_light_70) */|| empty($primary_color_shade_light_60) || empty($secondary_color_shade_light_60) || empty($primary_color_shade_light_50) || empty($secondary_color_shade_light_50) || empty($primary_color_shade_light_40) || empty($secondary_color_shade_light_40)/* || empty($primary_color_shade_light_20) || empty($secondary_color_shade_light_20)*/ || empty($primary_color_shade_light_95) || empty($primary_color_shade_light_85) || empty($primary_color_shade_light_75) || empty($primary_color_shade_light_70) || empty($primary_color_shade_light_30) || empty($primary_color_shade_light_20) || empty($primary_color_shade_light_10)):?> 
 
 		                  				<p style = "color:red;">It seems that you have not yet set the Primary Color or Secondary Color or it's Shades. So please go to below link and set the Primary Color and Secondary Color and it's Shades.</p><br><br>
 
@@ -167,8 +175,8 @@ box-shadow: none;">
 							$primary_color_shade_light_80 = wbc()->options->get_option('appearance_global','theme_primary_color_shade_light_80'); 
 							$secondary_color_shade_light_80 = wbc()->options->get_option('appearance_global','theme_secondary_color_shade_light_80');
 
-							$primary_color_shade_light_70 = wbc()->options->get_option('appearance_global','theme_primary_color_shade_light_70'); 
-							$secondary_color_shade_light_70 = wbc()->options->get_option('appearance_global','theme_secondary_color_shade_light_70');
+							// $primary_color_shade_light_70 = wbc()->options->get_option('appearance_global','theme_primary_color_shade_light_70'); 
+							// $secondary_color_shade_light_70 = wbc()->options->get_option('appearance_global','theme_secondary_color_shade_light_70');
 
 							$primary_color_shade_light_60 = wbc()->options->get_option('appearance_global','theme_primary_color_shade_light_60'); 
 							$secondary_color_shade_light_60 = wbc()->options->get_option('appearance_global','theme_secondary_color_shade_light_60');
@@ -179,11 +187,19 @@ box-shadow: none;">
 							$primary_color_shade_light_40 = wbc()->options->get_option('appearance_global','theme_primary_color_shade_light_40'); 
 							$secondary_color_shade_light_40 = wbc()->options->get_option('appearance_global','theme_secondary_color_shade_light_40');
 
-							$primary_color_shade_light_20 = wbc()->options->get_option('appearance_global','theme_primary_color_shade_light_20'); 
-							$secondary_color_shade_light_20 = wbc()->options->get_option('appearance_global','theme_secondary_color_shade_light_20');
+							// $primary_color_shade_light_20 = wbc()->options->get_option('appearance_global','theme_primary_color_shade_light_20'); 
+							// $secondary_color_shade_light_20 = wbc()->options->get_option('appearance_global','theme_secondary_color_shade_light_20');
+
+							$primary_color_shade_light_95 = wbc()->options->get_option('appearance_global','theme_primary_color_shade_light_95'); 
+							$primary_color_shade_light_85 = wbc()->options->get_option('appearance_global','theme_primary_color_shade_light_85');
+							$primary_color_shade_light_75 = wbc()->options->get_option('appearance_global','theme_primary_color_shade_light_75');
+							$primary_color_shade_light_70 = wbc()->options->get_option('appearance_global','theme_primary_color_shade_light_70');
+							$primary_color_shade_light_30 = wbc()->options->get_option('appearance_global','theme_primary_color_shade_light_30');
+							$primary_color_shade_light_20 = wbc()->options->get_option('appearance_global','theme_primary_color_shade_light_20');
+							$primary_color_shade_light_10 = wbc()->options->get_option('appearance_global','theme_primary_color_shade_light_10');
 							?>  
 
-		                	<?php if(!empty($primary_color) && !empty($secondary_color) && !empty($primary_color_shade_light_90) && !empty($secondary_color_shade_light_90) && !empty($primary_color_shade_light_80) && !empty($secondary_color_shade_light_80) && !empty($primary_color_shade_light_70) && !empty($secondary_color_shade_light_70) && !empty($primary_color_shade_light_60) && !empty($secondary_color_shade_light_60) && !empty($primary_color_shade_light_50) && !empty($secondary_color_shade_light_50) && !empty($primary_color_shade_light_40) && !empty($secondary_color_shade_light_40) && !empty($primary_color_shade_light_20) && !empty($secondary_color_shade_light_20)):?>
+		                	<?php if(!empty($primary_color) && !empty($secondary_color) && !empty($primary_color_shade_light_90) && !empty($secondary_color_shade_light_90) && !empty($primary_color_shade_light_80) && !empty($secondary_color_shade_light_80)/* && !empty($primary_color_shade_light_70) && !empty($secondary_color_shade_light_70) */&& !empty($primary_color_shade_light_60) && !empty($secondary_color_shade_light_60) && !empty($primary_color_shade_light_50) && !empty($secondary_color_shade_light_50) && !empty($primary_color_shade_light_40) && !empty($secondary_color_shade_light_40)/* && !empty($primary_color_shade_light_20) && !empty($secondary_color_shade_light_20)*/ && !empty($primary_color_shade_light_95) && !empty($primary_color_shade_light_85) && !empty($primary_color_shade_light_75) && !empty($primary_color_shade_light_70) && !empty($primary_color_shade_light_30) && !empty($primary_color_shade_light_20) && !empty($primary_color_shade_light_10)):?>
 
 		                  		<input type="submit" name="save" value="<?php printf(__("Generate assets","woo-bundle-choice")); ?>"  class="button button-primary button-hero action ui button secondary">
 
