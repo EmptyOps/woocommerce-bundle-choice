@@ -1714,7 +1714,8 @@ class EOWBC_Filter_Widget {
 		if(!empty(wbc()->sanitize->get('BEGIN')) and !empty(wbc()->sanitize->get('STEP')) and isset($_GET['FIRST']) and isset($_GET['SECOND'])) {
 
 
-			$__get = $_GET;
+			/*$__get = $_GET;*/
+			$__get = wbc()->sanitize->_read_global_sanitized('get');
 			if(isset($__get['EO_WBC'])) {
 				unset($__get['EO_WBC']);
 			}

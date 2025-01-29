@@ -1,6 +1,7 @@
 <?php add_action('wp_footer' ,function(){
 
-$get_link = $_GET;
+// $get_link = $_GET;
+$get_link = wbc()->sanitize->_read_global_sanitized('get');	
 unset($get_link['per_row']);
 unset($get_link['shop_view']);
 unset($get_link['per_page']);

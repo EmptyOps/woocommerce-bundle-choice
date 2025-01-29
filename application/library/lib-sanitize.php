@@ -167,5 +167,167 @@ if(!class_exists('WBC_Sanitize')) {
 			}
 			return true;
 		}
+
+	    // Public function to read and sanitize global input
+	    public static function _read_global_sanitized($source){
+	        // Determine the source ($_GET, $_POST, $_REQUEST)
+	        $global_input = [];
+	        switch (strtolower($source)) {
+	            case 'get':
+	                $global_input = $_GET;
+	                break;
+	            case 'post':
+	                $global_input = $_POST;
+	                break;
+	            case 'request':
+	                $global_input = $_REQUEST;
+	                break;
+	            default:
+	                return []; // Return empty array for invalid source
+        	}
+
+	        // Get the predefined list of parameters
+	        $parameters = self::parameters_list();
+	        $sanitized_result = [];
+
+	        // Loop through global inputs and sanitize
+	        foreach ($parameters as $param) {
+	            if (isset($global_input[$param])) {
+	                $sanitized_result[$param] = filter_var($global_input[$param], FILTER_SANITIZE_STRING);
+	            }
+        	}
+
+        	return $sanitized_result;
+    	}
+
+	    // Private function to return predefined list of parameters
+		private static function parameters_list(){
+	        // This function correctly returns a predefined list of parameters.
+	        return array(
+	            'EO_WBC',
+	            'BEGIN',
+	            'STEP',
+	            'FIRST',
+	            'SECOND',
+	            '_category',
+	            'eo_wbc_filter',
+	            'CAT_LINK',
+	            'cat_filter_cat_link',
+	            '_current_category',
+	            'eo_wbc_view_auto_jewel',
+	            'EO_WBC_REMOVE',
+	            'empty_cart',
+	            'wbc_report',
+	            'CART',
+	            '$get_field',
+	            'step',
+	            'action',
+	            'EO_WBC_CODE',
+	            '$filter_sets_val[\'filter_set_two_tabs_first\']',
+	            'products_in',
+	            '$tab_data["first_tab_id"]',
+	            'wbc_attachment',
+	            'wbc_color',
+	            'wbc_attachment_thumb',
+	            '_category',
+	            '_attribute',
+	            '_wpnonce',
+	            'page',
+	            'type',
+	            'msg',
+	            'sub_action',
+	            'eo_wbc_jpc_form_data',
+	            'shop_cat_filter_add_order',
+	            'shop_cat_filter_add_reset_link',
+	            'slug',
+	            'cat_value_$catind',
+	            'cart',
+	            '$fk',
+	            '$post_field',
+	            '$key',
+	            'action',
+	            '$icon_keys[$i]',
+	            'pair_maker',
+	            'guidance_tool',
+	            'ring_builder',
+	            'rapnet_api', 
+	            'glowstar_api', 
+	            'jbdiamond_api', 
+	            'srk_api', 
+	            'saved_tab_key',
+	            '$prefix._fconfig_filter',
+	            '$prefix._fconfig_type',
+	            '$prefix._fconfig_label',
+	            '$prefix._fconfig_is_advanced',
+	            '$prefix._fconfig_dependent',
+	            '$prefix._fconfig_input_type',
+	            '$prefix._fconfig_column_width',
+	            'filter_template', 
+	            '$prefix._fconfig_ordering',
+	            '$prefix._fconfig_icon_size',
+	            '$prefix._fconfig_icon_label_size',
+	            '$prefix._fconfig_add_reset_link',
+	            '$prefix._fconfig_add_help',
+	            '$prefix._fconfig_add_help_text',
+	            '$prefix._fconfig_add_enabled',
+	            '_wpnonce',
+	            'first_category_altr_filt_widgts',
+	            'second_category_altr_filt_widgts',
+	            '$prefix._fconfig_set',
+	            '$prefix._fconfig_filter',
+	            '$prefix._fconfig_elements',
+	            '$prefix._fconfig_type',
+	            '$prefix._fconfig_label',
+	            '$prefix._fconfig_is_advanced',
+	            '$prefix._fconfig_dependent',
+	            '$prefix._fconfig_input_type',
+	            '$prefix._fconfig_column_width',
+	            'filter_template',
+	            '$prefix._fconfig_icon_label_size',
+	            '$prefix._fconfig_add_reset_link',
+	            '$prefix._fconfig_add_help',
+	            '$prefix._fconfig_add_help_text',
+	            '$prefix._fconfig_add_enabled',
+	            'filter_category',
+	            '$prefix._fconfig_set',
+	            'first_category_altr_filt_widgts',
+	            'second_category_altr_filt_widgts',
+	            'filter_template',
+	            'first_category_altr_filt_widgts',
+	            '$prefix._fconfig_add_help',
+	            '$prefix._fconfig_add_help_text',
+	            '$prefix._fconfig_add_enabled',
+	            'range_first',
+	            'eo_wbc_first_category',
+	            'eo_wbc_first_category_range',
+	            'first_filter_query_type',
+	            'range_second',
+	            'eo_wbc_second_category',
+	            'eo_wbc_second_category_range',
+	            'second_filter_query_type',
+	            'eo_wbc_add_discount',
+	            'range_first',
+	            'eo_wbc_first_category',
+	            'eo_wbc_first_category_range',
+	            'first_filter_query_type',
+	            'range_second',
+	            'eo_wbc_second_category',
+	            'eo_wbc_second_category_range',
+	            'second_filter_query_type',
+	            'eo_wbc_add_discount',
+	            'is_sent_from_front_end',
+	            'plugin',
+	            '_category',
+	            'cat_filter_cat_link',
+	            '$_first_tab_key',
+	            '_current_category',
+	            '$post_field',
+	            '$request_field',
+	            '$selected_key',
+	            'min_price',
+	            'max_price',
+	            '$__filter[\'id\']'
+	        );
+    	}
 	}
 }
