@@ -131,16 +131,16 @@ if ( ! class_exists( 'Configuration' ) ) {
 												'attr'=>array("href='".$check_it_out_link."'"),
 												'class'=>array('secondary')	
 											)
-											'enable_make_pair'=>array(
-											'label'=>'Enable Nice URLs?',
-											'type'=>'checkbox',
-											'value'=>array(),
-											'sanitize'=>'sanitize_text_field',
-											'options'=>array('enable_make_pair'=>' '),
-											'is_id_as_name'=>true,
-											'class'=>array(),
-											'inline'=>true,
-											),
+											'enable_nice_urls' => array(
+											    'label' => 'Enable Nice URLs?',
+											    'type' => 'checkbox',
+											    'sanitize' => 'sanitize_text_field',
+											    'value' => array(),
+											    'options' => array('enable_nice_urls' => ' '),
+											    'class' => array(),
+											    'size_class' => array('eight', 'wide'),
+											    'inline' => true,
+										    ),
 										)							
 							),
 						'config_buttons_conf'=>array(

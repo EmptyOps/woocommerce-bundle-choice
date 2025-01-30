@@ -13,92 +13,7 @@ class WBC_Common {
 		return self::$_instance;
 	}
 
-	public function is_nice_urls_enabled() {
-
-	    $switch_value = get_option('enable_make_pair'); 
-	    return ($switch_value == 'on') ? true : false;
-	}
-
-	function is_nice_urls_enabled() {
-	    return wbc()->common->get_option('enable_make_pair') =='on';
-	}
-
-
-	/**
-	 * NOTE: now any extension that affects the ring builder url should depend on these two beautify and debeautify functions to ensure that they also support nice urls. and to check if the nice urls are enabled in admin settings you can all the function "wbc_is_nice_urls_enabled". and note that we have no hook structure for this since this nice url feature is actually a override and when in future the wbc is refactored deeply for making the urls nicer and clean as per the general standards then wbc core layers itself will not use such url so no need to override then. but now for doing simple overrides these simple functions are provided. and all extensions affecting the wbc URLs which are made nicer by the WBC then those urls must be maintained nicely by the underlying extensions.
-	 *
-	 */
-	function beautify_url_data($url, $is_query_string = false) {
-	    // Parse query string from the URL
-	    if ($is_query_string) {
-	        parse_str($url, $queryParams);
-	    } else {
-	        $parsedUrl = parse_url($url);
-	        parse_str($parsedUrl['query'] ?? '', $queryParams);
-	    }
-
-	    // Remove the 'wbcid' parameter if it exists
-    	unset($queryParams['wbcid']);
-
-	    // Sort url array
-	    ksort($queryParams);
-
-	    // recovert query string
-	    $sortedQueryString = http_build_query($queryParams);
-
-	    // Generate a hash using SHA-256
-	    $hash = hash('sha256', $sortedQueryString);
-
-	    session_start();
-	    // Initialize session storage if not already set
-	    if (!isset($_SESSION['wbc_nu_hash'])) {
-	        $_SESSION['wbc_nu_hash'] = [];
-	    }
-
-	    if (!isset($_SESSION['wbc_nu_data'])) {
-	        $_SESSION['wbc_nu_data'] = [];
-	    }
-
-	    // Check if hash already exists
-	    if (isset($_SESSION['wbc_nu_hash'][$hash])) {
-	        $wbcid = $_SESSION['wbc_nu_hash'][$hash];
-	    } else {
-	        // Generate a new wbcid
-	        $wbcid = count($_SESSION['wbc_nu_data']) + 1;
-	        
-	        // Store the hash and query parameters
-	        $_SESSION['wbc_nu_hash'][$hash] = $wbcid;
-	        $_SESSION['wbc_nu_data'][$wbcid] = $queryParams;
-	    }
-
-	    // Construct the updated URL with the wbcid parameter
-	    if ($is_query_string) {
-	        return "?wbcid={$wbcid}";
-	    } else {
-	        $baseUrl = strtok($url, '?');
-	        return "{$baseUrl}?wbcid={$wbcid}";
-	    }
-	}
-
-	function debeautify_url_data($wbcid = null) {
-	    // Retrieve wbcid from argument or $_GET
-	    if ($wbcid == null) {
-	        $wbcid = isset($_GET['wbcid']) ? filter_var($_GET['wbcid'], FILTER_SANITIZE_NUMBER_INT) : null;
-	    }
-
-	    session_start();
-	    if (!$wbcid || !isset($_SESSION['wbc_nu_data'][$wbcid])) {
-	        return null; // Return null if wbcid is invalid or not found
-	    }
-
-	    // Retrieve original query parameters
-	    $originalParams = $_SESSION['wbc_nu_data'][$wbcid];
-
-	    // Merge into $_GET
-	    $_GET = array_merge($_GET, $originalParams);
-
-	    return $originalParams; // Return original parameters for additional use if needed
-	}
+	
 
 	public function get_category($page='product',int $post_id = null,array $in_category=array(), $is_apply_compatibility=false){
 
@@ -1258,8 +1173,110 @@ class WBC_Common {
 		return $countries_list;
 	}
 
+	public function is_nice_urls_enabled() {
+
+	    $switch_value = get_option('enable_nice_url'); 
+	    return ($switch_value == 'on') ? true : false;
+	}
+
+
+	/**
+	 * NOTE: now any extension that affects the ring builder url should depend on these two beautify and debeautify functions to ensure that they also support nice urls. and to check if the nice urls are enabled in admin settings you can all the function "wbc_is_nice_urls_enabled". and note that we have no hook structure for this since this nice url feature is actually a override and when in future the wbc is refactored deeply for making the urls nicer and clean as per the general standards then wbc core layers itself will not use such url so no need to override then. but now for doing simple overrides these simple functions are provided. and all extensions affecting the wbc URLs which are made nicer by the WBC then those urls must be maintained nicely by the underlying extensions.
+	 *
+	 */
+	public function beautify_url_data($url, $is_query_string = false) {
+
+	    // Parse query string from the URL
+	    if ($is_query_string) {
+
+	        parse_str($url, $queryParams);
+	    } else {
+
+	        $parsedUrl = parse_url($url);
+	        parse_str($parsedUrl['query'] ?? '', $queryParams);
+	    }
+
+	    // Remove the 'wbcid' parameter if it exists
+    	unset($queryParams['wbcid']);
+
+	    // Sort url array
+	    ksort($queryParams);
+
+	    // recovert query string
+	    $sortedQueryString = http_build_query($queryParams);
+
+	    // Generate a hash using SHA-256
+	    $hash = hash('sha256', $sortedQueryString);
+
+	    session_start();
+	    // Initialize session storage if not already set
+	    if (!isset($_SESSION['wbc_nu_hash'])) {
+
+	        $_SESSION['wbc_nu_hash'] = [];
+	    }
+
+	    if (!isset($_SESSION['wbc_nu_data'])) {
+
+	        $_SESSION['wbc_nu_data'] = [];
+	    }
+
+	    // Check if hash already exists
+	    if (isset($_SESSION['wbc_nu_hash'][$hash])) {
+
+	        $wbcid = $_SESSION['wbc_nu_hash'][$hash];
+	    } else {
+
+	        // Generate a new wbcid
+	        $wbcid = count($_SESSION['wbc_nu_data']) + 1;
+	        
+	        // Store the hash and query parameters
+	        $_SESSION['wbc_nu_hash'][$hash] = $wbcid;
+	        $_SESSION['wbc_nu_data'][$wbcid] = $queryParams;
+	    }
+
+	    // Construct the updated URL with the wbcid parameter
+	    if ($is_query_string) {
+
+	        return "?wbcid={$wbcid}";
+	    } else {
+
+	        $baseUrl = strtok($url, '?');
+
+	        return "{$baseUrl}?wbcid={$wbcid}";
+	    }
+	}
+
+	public function debeautify_url_data($wbcid = null) {
+
+	    // Retrieve wbcid from argument or $_GET
+	    if ($wbcid == null) {
+
+	        $wbcid = isset($_GET['wbcid']) ? filter_var($_GET['wbcid'], FILTER_SANITIZE_NUMBER_INT) : null;
+	    }
+
+	    session_start();
+	    if (!$wbcid || !isset($_SESSION['wbc_nu_data'][$wbcid])) {
+
+	        return null; // Return null if wbcid is invalid or not found
+	    }
+
+	    // Retrieve original query parameters
+	    $originalParams = $_SESSION['wbc_nu_data'][$wbcid];
+
+	    // Merge into $_GET
+	    $_GET = array_merge($_GET, $originalParams);
+
+	    --	nech nu return maybe delete marva nu chh.
+	    return $originalParams; // Return original parameters for additional use if needed
+	}
+
 }
 
+function wbc_is_nice_urls_enabled() {
+
+    return wbc()->common->get_option('enable_nice_url');
+	
+}
 
 function wbc_pr($ar, $force_debug = false, $die = false) {
 		
