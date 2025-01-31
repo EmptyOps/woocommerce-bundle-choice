@@ -1175,11 +1175,10 @@ class WBC_Common {
 
 	public function is_nice_urls_enabled() {
 
-	    $switch_value = get_option('enable_nice_url'); 
+	    $switch_value = get_option('enable_make_pair'); 
 	    return ($switch_value == 'on') ? true : false;
 	}
-
-
+		
 	/**
 	 * NOTE: now any extension that affects the ring builder url should depend on these two beautify and debeautify functions to ensure that they also support nice urls. and to check if the nice urls are enabled in admin settings you can all the function "wbc_is_nice_urls_enabled". and note that we have no hook structure for this since this nice url feature is actually a override and when in future the wbc is refactored deeply for making the urls nicer and clean as per the general standards then wbc core layers itself will not use such url so no need to override then. but now for doing simple overrides these simple functions are provided. and all extensions affecting the wbc URLs which are made nicer by the WBC then those urls must be maintained nicely by the underlying extensions.
 	 *
@@ -1212,7 +1211,7 @@ class WBC_Common {
 	    // Initialize session storage if not already set
 	    if (!isset($_SESSION['wbc_nu_hash'])) {
 
-	        $_SESSION['wbc_nu_hash'] = [];
+	        $_SESSION['wbc_nu_hash'] = array();
 	    }
 
 	    if (!isset($_SESSION['wbc_nu_data'])) {

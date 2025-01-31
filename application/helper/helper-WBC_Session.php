@@ -52,4 +52,26 @@ class WBC_Session {
 	    }
 	    return false;
 	}
+
+	// New function to store data using WP Session API
+	public function store(string $key, $value) {
+
+		if (!empty($key)) {
+
+			return WP_Session::set($key, $value);
+		}
+
+		return false;
+	}
+
+	// New function to fetch data using WP Session API
+	public function fetch(string $key, $default = false) {
+
+		if (!empty($key)) {
+
+			return WP_Session::get($key, $default);
+		}
+		
+		return $default;
+	}
 }

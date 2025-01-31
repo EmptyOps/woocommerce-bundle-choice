@@ -141,6 +141,12 @@ if ( ! class_exists( 'Configuration' ) ) {
 											    'size_class' => array('eight', 'wide'),
 											    'inline' => true,
 										    ),
+										    'config_automation_save_btn'=>array(
+												'label'=>'Save',
+												'type'=>'button',		
+												'class'=>array('secondary'),
+												'attr'=>array("data-action='save'",'data-tab_key="config_automation"')	
+											)
 										)							
 							),
 						'config_buttons_conf'=>array(
