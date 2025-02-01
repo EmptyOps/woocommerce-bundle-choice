@@ -1175,8 +1175,13 @@ class WBC_Common {
 
 	public function is_nice_urls_enabled() {
 
-	    $switch_value = get_option('enable_make_pair'); 
-	    return ($switch_value == 'on') ? true : false;
+		if(wbc()->options->get_option('config_configuration','enable_nice_urls') == 'enable_nice_urls') {
+
+			return true;
+			
+		}
+
+	    return false;
 	}
 		
 	/**
@@ -1184,6 +1189,11 @@ class WBC_Common {
 	 *
 	 */
 	public function beautify_url_data($url, $is_query_string = false) {
+
+		$queryParams = null;
+		$parsedUrl = null;
+		$sortedQueryString = null;
+		$hash = null;
 
 	    // Parse query string from the URL
 	    if ($is_query_string) {
@@ -1207,30 +1217,42 @@ class WBC_Common {
 	    // Generate a hash using SHA-256
 	    $hash = hash('sha256', $sortedQueryString);
 
-	    session_start();
-	    // Initialize session storage if not already set
-	    if (!isset($_SESSION['wbc_nu_hash'])) {
+	    $wbc_nu_hash = null;
 
-	        $_SESSION['wbc_nu_hash'] = array();
+	    // Initialize session storage if not already set
+	    if (!wbc()->session->isset_key('wbc_nu_hash')) {
+
+	        $wbc_nu_hash = array();
+	    } else {
+
+	    	$wbc_nu_hash = wbc()->session->fetch('wbc_nu_hash');
 	    }
 
-	    if (!isset($_SESSION['wbc_nu_data'])) {
+	    $wbc_nu_data = null;
 
-	        $_SESSION['wbc_nu_data'] = [];
+	    if (!wbc()->session->isset_key('wbc_nu_data')) {
+
+	        $wbc_nu_data = array();
+	    } else {
+
+	    	$wbc_nu_data = wbc()->session->fetch('wbc_nu_data');
 	    }
 
 	    // Check if hash already exists
-	    if (isset($_SESSION['wbc_nu_hash'][$hash])) {
+	    if (isset($wbc_nu_hash[$hash])) {
 
-	        $wbcid = $_SESSION['wbc_nu_hash'][$hash];
+	        $wbcid = $wbc_nu_hash[$hash];
 	    } else {
 
 	        // Generate a new wbcid
-	        $wbcid = count($_SESSION['wbc_nu_data']) + 1;
+	        $wbcid = count($wbc_nu_data) + 1;
 	        
 	        // Store the hash and query parameters
-	        $_SESSION['wbc_nu_hash'][$hash] = $wbcid;
-	        $_SESSION['wbc_nu_data'][$wbcid] = $queryParams;
+	        $wbc_nu_hash[$hash] = $wbcid;
+	        $wbc_nu_data[$wbcid] = $queryParams;
+
+	        wbc()->session->store('wbc_nu_hash',$wbc_nu_hash);
+	        wbc()->session->store('wbc_nu_data',$wbc_nu_data);
 	    }
 
 	    // Construct the updated URL with the wbcid parameter
@@ -1245,22 +1267,29 @@ class WBC_Common {
 	    }
 	}
 
+	/**
+	 * NOTE: now any extension that affects the ring builder url should depend on these two beautify and debeautify functions to ensure that they also support nice urls. and to check if the nice urls are enabled in admin settings you can all the function "wbc_is_nice_urls_enabled". and note that we have no hook structure for this since this nice url feature is actually a override and when in future the wbc is refactored deeply for making the urls nicer and clean as per the general standards then wbc core layers itself will not use such url so no need to override then. but now for doing simple overrides these simple functions are provided. and all extensions affecting the wbc URLs which are made nicer by the WBC then those urls must be maintained nicely by the underlying extensions.
+	 *
+	 */
 	public function debeautify_url_data($wbcid = null) {
+
+		$originalParams = null;
 
 	    // Retrieve wbcid from argument or $_GET
 	    if ($wbcid == null) {
 
-	        $wbcid = isset($_GET['wbcid']) ? filter_var($_GET['wbcid'], FILTER_SANITIZE_NUMBER_INT) : null;
+	        $wbcid = isset($_GET['wbcid']) ? wbc()->sanitize->get('wbcid') : null;
 	    }
 
-	    session_start();
-	    if (!$wbcid || !isset($_SESSION['wbc_nu_data'][$wbcid])) {
+	    $wbc_nu_data = wbc()->session->fetch('wbc_nu_data',array());
+
+	    if (!$wbcid || !isset($wbc_nu_data[$wbcid])) {
 
 	        return null; // Return null if wbcid is invalid or not found
 	    }
 
 	    // Retrieve original query parameters
-	    $originalParams = $_SESSION['wbc_nu_data'][$wbcid];
+	    $originalParams = $wbc_nu_data[$wbcid];
 
 	    // Merge into $_GET
 	    $_GET = array_merge($_GET, $originalParams);
@@ -1269,12 +1298,6 @@ class WBC_Common {
 	    return $originalParams; // Return original parameters for additional use if needed
 	}
 
-}
-
-function wbc_is_nice_urls_enabled() {
-
-    return wbc()->common->get_option('enable_nice_url');
-	
 }
 
 function wbc_pr($ar, $force_debug = false, $die = false) {
@@ -1407,6 +1430,12 @@ function wbc_is_mobile_by_page_sections($key = null, $is_other_theme = false) {
 
 	return wbc()->common->is_mobile_by_page_sections($key,$is_other_theme);
 
+}
+
+function wbc_is_nice_urls_enabled() {
+
+    return wbc()->common->is_nice_urls_enabled();
+	
 }
 
 function wbc_placeholder_img_src() {

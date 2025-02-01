@@ -131,6 +131,14 @@ if ( ! class_exists( 'Configuration' ) ) {
 												'attr'=>array("href='".$check_it_out_link."'"),
 												'class'=>array('secondary')	
 											)
+										)							
+							),
+						'config_configuration'=>array(
+							
+								'label'=>'Configuration',
+								'form'=>array(
+											'config_configuration_section'=>array('label'=>'Configuration','type'=>'segment','desc'=>"General Configuration"
+											),
 											'enable_nice_urls' => array(
 											    'label' => 'Enable Nice URLs?',
 											    'type' => 'checkbox',
@@ -141,13 +149,13 @@ if ( ! class_exists( 'Configuration' ) ) {
 											    'size_class' => array('eight', 'wide'),
 											    'inline' => true,
 										    ),
-										    'config_automation_save_btn'=>array(
+										    'config_configuration_save_btn'=>array(
 												'label'=>'Save',
 												'type'=>'button',		
 												'class'=>array('secondary'),
-												'attr'=>array("data-action='save'",'data-tab_key="config_automation"')	
+												'attr'=>array("data-action='save'",'data-tab_key="config_configuration"')	
 											)
-										)							
+									)			
 							),
 						'config_buttons_conf'=>array(
 								'label'=>'Buttons',

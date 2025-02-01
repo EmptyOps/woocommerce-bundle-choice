@@ -74,4 +74,14 @@ class WBC_Session {
 		
 		return $default;
 	}
+
+	public function isset_key(string $key) {
+
+		if (!empty($key)) {
+			
+	        return WP_Session::has($key);
+	    }
+
+	    return false;
+	}
 }
