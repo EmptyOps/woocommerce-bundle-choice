@@ -1192,16 +1192,16 @@ class WBC_Common {
 	 */
 	public function beautify_url_data($url, $is_query_string = false) {
 
+		// Call is_nice_urls_enabled() from wbc()->common at the top
+	    if (!wbc()->common->is_nice_urls_enabled()) {
+
+	        return $url; // If nice URLs are disabled, return the original URL
+	    }
+
 		$queryParams = null;
 		$parsedUrl = null;
 		$sortedQueryString = null;
 		$hash = null;
-
-		// Call is_nice_urls_enabled() from wbc()->common at the top
-	    if (!wbc()->common->is_nice_urls_enabled()) {
-	    	
-	        return $url; // If nice URLs are disabled, return the original URL
-	    }
 
 	    // Parse query string from the URL
 	    if ($is_query_string) {
@@ -1266,7 +1266,8 @@ class WBC_Common {
 	    // Construct the updated URL with the wbcid parameter
 	    if ($is_query_string) {
 
-	        return "?wbcid={$wbcid}";
+	        // return "?wbcid={$wbcid}";
+	        return "wbcid={$wbcid}";
 	    } else {
 
 	        $baseUrl = strtok($url, '?');
@@ -1281,12 +1282,12 @@ class WBC_Common {
 	 */
 	public function debeautify_url_data($wbcid = null) {
 
-		$originalParams = null;
-
 		if (!wbc()->common->is_nice_urls_enabled()) {
 
-	        return $url; // If nice URLs are disabled, return the original URL
+	        return; 
 	    }
+
+		$originalParams = null;
 
 	    // Retrieve wbcid from argument or $_GET
 	    if ($wbcid == null) {
@@ -1298,7 +1299,7 @@ class WBC_Common {
 
 	    if (!$wbcid || !isset($wbc_nu_data[$wbcid])) {
 
-	        return null; // Return null if wbcid is invalid or not found
+	        return; // Return if wbcid is invalid or not found
 	    }
 
 	    // Retrieve original query parameters
@@ -1307,8 +1308,6 @@ class WBC_Common {
 	    // Merge into $_GET
 	    $_GET = array_merge($_GET, $originalParams);
 
-	    --	nech nu return maybe delete marva nu chh.
-	    return $originalParams; // Return original parameters for additional use if needed
 	}
 
 }
