@@ -1175,13 +1175,15 @@ class WBC_Common {
 
 	public function is_nice_urls_enabled() {
 
-		if(wbc()->options->get_option('config_configuration','enable_nice_urls') == 'enable_nice_urls') {
+		// Check if the constant is already defined
+	    if (!defined('WBC_IS_NICE_URLS')) {
+	        // Read from the database and set the constant
+	        $is_enabled = (wbc()->options->get_option('config_configuration', 'enable_nice_urls') == 'enable_nice_urls');
+	        define('WBC_IS_NICE_URLS', $is_enabled);
+	    }
 
-			return true;
-			
-		}
-
-	    return false;
+	    // Return the constant value
+	    return WBC_IS_NICE_URLS;
 	}
 		
 	/**
@@ -1194,6 +1196,12 @@ class WBC_Common {
 		$parsedUrl = null;
 		$sortedQueryString = null;
 		$hash = null;
+
+		// Call is_nice_urls_enabled() from wbc()->common at the top
+	    if (!wbc()->common->is_nice_urls_enabled()) {
+	    	
+	        return $url; // If nice URLs are disabled, return the original URL
+	    }
 
 	    // Parse query string from the URL
 	    if ($is_query_string) {
@@ -1274,6 +1282,11 @@ class WBC_Common {
 	public function debeautify_url_data($wbcid = null) {
 
 		$originalParams = null;
+
+		if (!wbc()->common->is_nice_urls_enabled()) {
+
+	        return $url; // If nice URLs are disabled, return the original URL
+	    }
 
 	    // Retrieve wbcid from argument or $_GET
 	    if ($wbcid == null) {
