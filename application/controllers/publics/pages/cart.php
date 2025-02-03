@@ -81,7 +81,9 @@ class Cart extends \eo\wbc\system\core\publics\Eowbc_Base_Model_Publics {
         wbc()->session->set('EO_WBC_MAPS',NULL);
         wbc()->session->set('EO_WBC_CART',NULL);
         WC()->cart->empty_cart();
-        exit(wp_redirect(/*wbc()->wc->eo_wbc_get_cart_url()*/wbc()->common->beautify_url_data(wbc()->wc->eo_wbc_get_cart_url())));
+
+        // exit(wp_redirect(/*wbc()->wc->eo_wbc_get_cart_url()*/wbc()->common->beautify_url_data(wbc()->wc->eo_wbc_get_cart_url())));
+        exit(wp_redirect(wbc()->wc->eo_wbc_get_cart_url()));
     }
     
     public function eo_wbc_add_css()
