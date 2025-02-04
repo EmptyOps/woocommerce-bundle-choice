@@ -22,7 +22,10 @@
                     $remove_url = !empty(wbc()->sanitize->get('FIRST'))?eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_breadcrumb_change_url($order,wbc()->sanitize->get('FIRST')):'#';                            
                     if(empty($remove_url) or $remove_url=='#'){
                         $remove_url = !empty(wbc()->sanitize->get('FIRST'))?eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_breadcrumb_change_url($order,sanitize_text_field($first)):'#';
-                    }                            
+                    }           
+
+
+                                     
                 if(empty($view_url) or $view_url=='#'){
                     ?>
                         <div class="description eowbc_breadcrumb_font"> <?php spext_lang("Choose a", 'woo-bundle-choice') ?></div>
