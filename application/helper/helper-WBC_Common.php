@@ -1193,7 +1193,7 @@ class WBC_Common {
 	public function beautify_url_data($url, $is_query_string = false) {
 
 		// Call is_nice_urls_enabled() from wbc()->common at the top
-	    if (!this->is_nice_urls_enabled()) {
+	    if (!$this->is_nice_urls_enabled()) {
 
 	        return $url; // If nice URLs are disabled, return the original URL
 	    }
@@ -1282,7 +1282,7 @@ class WBC_Common {
 	 */
 	public function debeautify_url_data($wbcid = null) {
 
-		if (!this->is_nice_urls_enabled()) {
+		if (!$this->is_nice_urls_enabled()) {
 
 	        return; 
 	    }

@@ -22,7 +22,8 @@ class Preview extends \eo\wbc\system\core\publics\Eowbc_Base_Model_Publics {
 
         if(empty(wbc()->sanitize->get('FIRST')) || empty(wbc()->sanitize->get('SECOND')))
         {            
-            exit(wp_redirect(/*wbc()->wc->eo_wbc_get_cart_url()*/wbc()->common->beautify_url_data(wbc()->wc->eo_wbc_get_cart_url())));
+            // exit(wp_redirect(/*wbc()->wc->eo_wbc_get_cart_url()*/wbc()->common->beautify_url_data(wbc()->wc->eo_wbc_get_cart_url())));
+            exit(wp_redirect(wbc()->wc->eo_wbc_get_cart_url()));
             return;
         } 
 
