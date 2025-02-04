@@ -66,7 +66,8 @@ class Product extends \eo\wbc\system\core\publics\Eowbc_Base_Model_Publics {
                         $cart_url = site_url('?'.http_build_query($url_params));  
                     }
                 }                
-                exit(wp_redirect(/*$cart_url*/wbc()->common->beautify_url_data($cart_url)));
+                // exit(wp_redirect(/*$cart_url*/wbc()->common->beautify_url_data($cart_url)));
+                exit(wp_redirect($cart_url));
                 die();
             }
 

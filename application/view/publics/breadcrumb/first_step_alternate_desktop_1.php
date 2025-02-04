@@ -24,7 +24,7 @@
                         $remove_url = !empty(wbc()->sanitize->get('FIRST'))?eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_breadcrumb_change_url($order,sanitize_text_field($first)):'#';
                     }           
 
-
+                    $remove_url = wbc()->common->beautify_url_data($remove_url);
                                      
                 if(empty($view_url) or $view_url=='#'){
                     ?>
@@ -36,8 +36,7 @@
                     ?>
                 <div class="description eowbc_breadcrumb_font"><?php _e($first_name); ?></div>
                 <div><?php /*_e(get_woocommerce_currency().wc_price($first->get_price()));*/ ?><?php _e(wc_price(apply_filters('eowbc_breadcrumb_first_price',$first->get_price(),$first))); ?></div>
-                
-                <div><u><a href="<?php echo /*$view_url*/wbc()->common->beautify_url_data($view_url); ?>"> <?php spext_lang("View", 'woo-bundle-choice') ?></a></u>&nbsp;|&nbsp;<u><a href="<?php echo /*$remove_url*/wbc()->common->beautify_url_data($remove_url); ?>" data-remove-url="<?php echo /*$remove_url*/wbc()->common->beautify_url_data($remove_url); ?>"><?php _e(wbc()->options->get_option('appearance_breadcrumb','appearance_breadcrumb_change_action_text','Change',true,true)); ?></a></u></div>
+                <div><u><a href="<?php echo /*$view_url*/wbc()->common->beautify_url_data($view_url); ?>"> <?php spext_lang("View", 'woo-bundle-choice') ?></a></u>&nbsp;|&nbsp;<u><a href="<?php echo $remove_url; ?>" data-remove-url="<?php echo $remove_url; ?>"><?php _e(wbc()->options->get_option('appearance_breadcrumb','appearance_breadcrumb_change_action_text','Change',true,true)); ?></a></u></div>
             <?php } endif; ?>                    
         </div>                
         <div class="column">

@@ -37,7 +37,8 @@ class Preview extends \eo\wbc\system\core\publics\Eowbc_Base_Model_Publics {
                 $cart_url = explode('?', $cart_url)[0];
             }
             
-            exit(wp_redirect(/*$cart_url*/wbc()->common->beautify_url_data($cart_url)));
+            // exit(wp_redirect(/*$cart_url*/wbc()->common->beautify_url_data($cart_url)));
+            exit(wp_redirect($cart_url));
         }     
         
         $this->eo_wbc_render();    //Page Review cart data
@@ -387,7 +388,8 @@ class Preview extends \eo\wbc\system\core\publics\Eowbc_Base_Model_Publics {
                 //ob_flush();
                 //ob_end_clean();
                 //exit(var_dump(wbc()->wc->eo_wbc_get_cart_url()));
-                exit(wp_redirect(/*wbc()->wc->eo_wbc_get_cart_url()*/wbc()->common->beautify_url_data(wbc()->wc->eo_wbc_get_cart_url())));
+                // exit(wp_redirect(/*wbc()->wc->eo_wbc_get_cart_url()*/wbc()->common->beautify_url_data(wbc()->wc->eo_wbc_get_cart_url())));
+                exit(wp_redirect(wbc()->wc->eo_wbc_get_cart_url()));
             }
         /*});          */
 
