@@ -21,7 +21,8 @@ class Preview extends \eo\wbc\system\core\publics\Eowbc_Base_Model_Publics {
         if (empty(wbc()->sanitize->get('EO_WBC'))) return true;
 
         if(empty(wbc()->sanitize->get('FIRST')) || empty(wbc()->sanitize->get('SECOND')))
-        {            
+        {     
+            NOTE: aapde aahi intansnaly url buetify nathi kari kam ke cart feature woo commerce nu chh to a tema get peramiter support kare chh jam ke remove cart url ma.to tema problem no aave tena mate. And anyway aapde ring bulider fetucer, earring pendant bulider jeva apda fetucer matej nice url support kari sakiye.
             // exit(wp_redirect(/*wbc()->wc->eo_wbc_get_cart_url()*/wbc()->common->beautify_url_data(wbc()->wc->eo_wbc_get_cart_url())));
             exit(wp_redirect(wbc()->wc->eo_wbc_get_cart_url()));
             return;
@@ -37,6 +38,7 @@ class Preview extends \eo\wbc\system\core\publics\Eowbc_Base_Model_Publics {
                 $cart_url = explode('?', $cart_url)[0];
             }
             
+            NOTE: aapde aahi intansnaly url buetify nathi kari kam ke cart feature woo commerce nu chh to a tema get peramiter support kare chh jam ke remove cart url ma.to tema problem no aave tena mate. And anyway aapde ring bulider fetucer, earring pendant bulider jeva apda fetucer matej nice url support kari sakiye.
             // exit(wp_redirect(/*$cart_url*/wbc()->common->beautify_url_data($cart_url)));
             exit(wp_redirect($cart_url));
         }     
@@ -388,6 +390,8 @@ class Preview extends \eo\wbc\system\core\publics\Eowbc_Base_Model_Publics {
                 //ob_flush();
                 //ob_end_clean();
                 //exit(var_dump(wbc()->wc->eo_wbc_get_cart_url()));
+                
+                NOTE: aapde aahi intansnaly url buetify nathi kari kam ke cart feature woo commerce nu chh to a tema get peramiter support kare chh jam ke remove cart url ma.to tema problem no aave tena mate. And anyway aapde ring bulider fetucer, earring pendant bulider jeva apda fetucer matej nice url support kari sakiye.
                 // exit(wp_redirect(/*wbc()->wc->eo_wbc_get_cart_url()*/wbc()->common->beautify_url_data(wbc()->wc->eo_wbc_get_cart_url())));
                 exit(wp_redirect(wbc()->wc->eo_wbc_get_cart_url()));
             }
