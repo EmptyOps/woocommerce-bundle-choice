@@ -142,7 +142,7 @@
                                             <div class="content">
                                               <div class="bottom">
                                               
-                                              <div data-link="<?php echo $category_object->eo_wbc_prev_url(); ?>" class="ui inverted button">Change</div>
+                                              <div data-link="<?php echo /*$category_object->eo_wbc_prev_url()*/wbc()->common->beautify_url_data($category_object->eo_wbc_prev_url()); ?>" class="ui inverted button">Change</div>
 
                                                 <h5><?php echo $prev_product->get_title();?></h5><br/>
                                                 <div style="text-align: center !important;">&nbsp;<?php echo $prev_product->get_price_html(); ?></div>
@@ -163,7 +163,7 @@
                                             <div class="content">
                                               <div class="aligned align bottom">
                                                 
-                                                <div data-link="<?php echo $category_object->eo_wbc_prev_url(); ?>" class="ui inverted button">Change</div>
+                                                <div data-link="<?php echo /*$category_object->eo_wbc_prev_url()*/wbc()->common->beautify_url_data($category_object->eo_wbc_prev_url()); ?>" class="ui inverted button">Change</div>
 
                                                 <h5><?php echo $prev_product->get_title(); ?></h5><br/>
                                                 <div style="text-align: center !important;">&nbsp;<?php echo $prev_product->get_price_html(); ?></div>

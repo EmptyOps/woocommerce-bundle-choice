@@ -11,7 +11,7 @@
         <div class="ui column left aligned eowbc_breadcrumb_font"><?php echo $order; ?></div>
         <div class="ui column left aligned eowbc_breadcrumb_font">
             <?php if(empty($first)){ ?>
-                <div class="title eowbc_breadcrumb_font" <?php _e((!empty(\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$clickable_breadcrumb) and !empty(\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$first_url))?'data-clickable_breadcrumb="'.\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$first_url.'"':''); ?>><?php _e(wbc()->options->get_option('appearance_breadcrumb','appearance_breadcrumb_choose_prefix_text',__('Choose a','woo-bundle-choice'),true,true)); ?> <?php _e($first_name); ?></div>
+                <div class="title eowbc_breadcrumb_font" <?php _e((!empty(\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$clickable_breadcrumb) and !empty(\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$first_url))?'data-clickable_breadcrumb="'./*\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$first_url*/wbc()->common->beautify_url_data(\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$first_url).'"':''); ?>><?php _e(wbc()->options->get_option('appearance_breadcrumb','appearance_breadcrumb_choose_prefix_text',__('Choose a','woo-bundle-choice'),true,true)); ?> <?php _e($first_name); ?></div>
             <?php } else { ?>
                 <div class="title eowbc_breadcrumb_font"><?php _e($first_name); ?></div>
                 <div class="description eowbc_breadcrumb_font"><?php _e(/*$first->get_name()*/$first->get_title()); ?> - <?php _e(wc_price(apply_filters('eowbc_breadcrumb_first_price',$first->get_price(),$first))); ?></div>

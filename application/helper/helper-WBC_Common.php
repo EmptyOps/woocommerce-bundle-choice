@@ -1177,6 +1177,7 @@ class WBC_Common {
 
 		// Check if the constant is already defined
 	    if (!defined('WBC_IS_NICE_URLS')) {
+
 	        // Read from the database and set the constant
 	        $is_enabled = (wbc()->options->get_option('config_configuration', 'enable_nice_urls') == 'enable_nice_urls');
 	        define('WBC_IS_NICE_URLS', $is_enabled);
@@ -1211,7 +1212,10 @@ class WBC_Common {
 
 	        $parsedUrl = parse_url($url);
 	        // parse_str($parsedUrl['query'] ?? '', $queryParams);
-	        $queryParams = isset($parsedUrl['query']) ? parse_str($parsedUrl['query'], $queryParams) : null;
+	        if (isset($parsedUrl['query'])) {
+
+	        	parse_str($parsedUrl['query'], $queryParams)
+	        }
 	    }
 
 	    // Remove the 'wbcid' parameter if it exists
