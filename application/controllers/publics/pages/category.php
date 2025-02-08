@@ -357,7 +357,7 @@ class Category {
                 
                 $Ooops = /*echo*/ __('Ooops!', 'woo-bundle-choice');
                 $no_products = __( 'No products were found matching your selection.', 'woocommerce' );
-                $go_back = $this->eo_wbc_prev_url();
+                $go_back = /*$this->eo_wbc_prev_url()*/wbc()->common->beautify_url_data($this->eo_wbc_prev_url());
                 $go_back_text = /*echo*/ __('Go back', 'woo-bundle-choice');
                 $continue_buying = ((empty(wbc()->sanitize->get('FIRST')) XOR empty(wbc()->sanitize->get('SECOND')))?strtok(get_permalink((empty(wbc()->sanitize->get('FIRST'))?wbc()->sanitize->get('SECOND'):wbc()->sanitize->get('FIRST'))),'?'):'');
                 $continue_buying_text = /*echo*/ __('Continue buying single item', 'woo-bundle-choice');

@@ -273,7 +273,7 @@ class Product extends \eo\wbc\system\core\publics\Eowbc_Base_Model_Publics {
                         ?>
                         
                         
-                        var url = '<?php echo $url; ?>';
+                        var url = '<?php echo wbc()->common->beautify_url_data($url); ?>';
                         
                         if(!window.document.splugins.common.is_empty(jQuery('#eo_wbc_add_to_cart_preview').data('url_extra_callback'))){
 
@@ -284,7 +284,7 @@ class Product extends \eo\wbc\system\core\publics\Eowbc_Base_Model_Publics {
                             
                             // console.log('ddddddddddd');
                             // console.log(url);
-                            window.location.href = /*url*/wbc()->common->beautify_url_data(url);
+                            window.location.href = url;
                         }
 
                         return false;
