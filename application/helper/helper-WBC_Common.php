@@ -1219,7 +1219,16 @@ class WBC_Common {
 	    }
 
 	    // Remove the 'wbcid' parameter if it exists
-    	unset($queryParams['wbcid']);
+    	if (isset($queryParams['wbcid'])) {
+
+    		unset($queryParams['wbcid']);
+    	}
+
+    	if (sizeof($queryParams) <= 0) {
+
+    		return $url;
+    	}
+
 
 	    // Sort url array
 	    ksort($queryParams);
@@ -1302,9 +1311,12 @@ class WBC_Common {
 
 	    $wbc_nu_data = wbc()->session->fetch('wbc_nu_data',array());
 
-	    if (!$wbcid || !isset($wbc_nu_data[$wbcid])) {
+	    if (!$wbcid) {
 
 	        return; // Return if wbcid is invalid or not found
+	    } elseif (!isset($wbc_nu_data[$wbcid])) {
+
+	    	throw new \Exception("There are some issues with the Nice URL feature. Please contact the Sphere Plugins technical support team.", 1);
 	    }
 
 	    // Retrieve original query parameters
