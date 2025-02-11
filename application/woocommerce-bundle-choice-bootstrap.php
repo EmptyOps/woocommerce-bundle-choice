@@ -37,8 +37,7 @@ class WooCommerce_Bundle_Choice_Bootstrap {
 
 	public function run() {
 		
-	--	aehi aapde note add karvani che je aapde safe lode old version ma use thay chh tevu or biju koi architecure concider kar vanu rashe jo arly layer ma min aa layer ni agl fiucher ma kyarey get no use aave to. tena mate 
-	
+	// ACTIVE_TODO aehi je aapde safe lode old version ma use thay chh tevu or biju koi architecure concider kar vanu rashe jo arly layer ma min aa layer ni agl fiucher ma kyarey get no use aave to. tena mate -- to h
 	wbc()->common->debeautify_url_data();
 
 		add_action( 'init', function() {

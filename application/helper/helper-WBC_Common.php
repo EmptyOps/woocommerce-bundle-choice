@@ -1214,7 +1214,7 @@ class WBC_Common {
 	        // parse_str($parsedUrl['query'] ?? '', $queryParams);
 	        if (isset($parsedUrl['query'])) {
 
-	        	parse_str($parsedUrl['query'], $queryParams)
+	        	parse_str($parsedUrl['query'], $queryParams);
 	        }
 	    }
 
@@ -1267,7 +1267,22 @@ class WBC_Common {
 	    } else {
 
 	        // Generate a new wbcid
-	        $wbcid = count($wbc_nu_data) + 1;
+	        // $wbcid = count($wbc_nu_data) + 1;
+	        $retryCount = 0;
+			$maxRetries = 3;	//10; // Define maximum retries
+			do {
+
+			    if ($retryCount > $maxRetries) {
+
+			        throw new \Exception('There are some issues with the Nice URL feature for Generating ID. Please contact the Sphere Plugins technical support team.', 1);
+			    }
+
+			    $minValue = random_int(1, 99999);
+			    $maxValue = ($minValue > 75000) ? random_int(75000, 999999) : 99999;
+			    $wbcid = random_int($minValue, $maxValue);
+
+			    $retryCount++;
+			} while (in_array($wbcid, $wbc_nu_hash));
 	        
 	        // Store the hash and query parameters
 	        $wbc_nu_hash[$hash] = $wbcid;
@@ -1308,6 +1323,14 @@ class WBC_Common {
 
 	        $wbcid = isset($_GET['wbcid']) ? wbc()->sanitize->get('wbcid') : null;
 	    }
+
+	    $wbc_nu_hash = wbc()->session->fetch('wbc_nu_hash',array());
+
+	    // Check for duplicate values
+		if (count($wbc_nu_hash) !== count(array_unique($wbc_nu_hash))) {
+
+		    throw new \Exception("There are some issues with id in the Nice URL feature. Please contact the Sphere Plugins technical support team.", 1);
+		}
 
 	    $wbc_nu_data = wbc()->session->fetch('wbc_nu_data',array());
 

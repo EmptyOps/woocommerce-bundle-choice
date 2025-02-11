@@ -180,7 +180,7 @@
                                               <div class="aligned align bottom">
                                                 <?php if($curr_product->is_in_stock()){ ?>
 
-                                                <div data-link="<?php echo $category_object->eo_wbc_product_url(get_permalink($_post->ID)); ?>" class="ui inverted button"><?php echo (empty(get_option('eo_wbc_add_to_cart_text'))?__('View and Continue','woo-bundle-choice'):get_option('eo_wbc_add_to_cart_text')) ;?></div>
+                                                <div data-link="<?php echo /*$category_object->eo_wbc_product_url(get_permalink($_post->ID))*/wbc()->common->beautify_url_data($category_object->eo_wbc_product_url(get_permalink($_post->ID))); ?>" class="ui inverted button"><?php echo (empty(get_option('eo_wbc_add_to_cart_text'))?__('View and Continue','woo-bundle-choice'):get_option('eo_wbc_add_to_cart_text')) ;?></div>
                                                  <?php } else { ?>
                                                     <div class="ui inverted button"><?php _e('Out of stock','woo-bundle-choice'); ?>
                                                     </div>
