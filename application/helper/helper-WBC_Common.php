@@ -1179,8 +1179,9 @@ class WBC_Common {
 	    if (!defined('WBC_IS_NICE_URLS')) {
 
 	        // Read from the database and set the constant
-	        $is_enabled = (wbc()->options->get_option('config_configuration', 'enable_nice_urls') == 'enable_nice_urls');
+	        $is_enabled = (wbc()->options->get_option('configuration', 'enable_nice_urls') == 'enable_nice_urls');
 	        define('WBC_IS_NICE_URLS', $is_enabled);
+
 	    }
 
 	    // Return the constant value

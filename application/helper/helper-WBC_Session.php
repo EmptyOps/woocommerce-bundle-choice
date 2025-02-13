@@ -58,8 +58,14 @@ class WBC_Session {
 
 		if (!empty($key)) {
 
-			return WP_Session::set($key, $value);
-		}
+		    // Start session if not already started
+		    if (session_status() === PHP_SESSION_NONE) {
+		        session_start();
+		    }
+
+		    $_SESSION[$key] = $value;
+		    return true;
+	    }
 
 		return false;
 	}
@@ -69,8 +75,15 @@ class WBC_Session {
 
 		if (!empty($key)) {
 
-			return WP_Session::get($key, $default);
-		}
+	        // Start session if not already started
+	        if (session_status() === PHP_SESSION_NONE) {
+
+	            session_start();
+	        }
+
+	        return isset($_SESSION[$key]) ? $_SESSION[$key] : $default;
+	    }
+
 		
 		return $default;
 	}
@@ -79,7 +92,13 @@ class WBC_Session {
 
 		if (!empty($key)) {
 			
-	        return WP_Session::has($key);
+	        // Start session if not already started
+	        if (session_status() === PHP_SESSION_NONE) {
+
+	            session_start();
+	        }
+
+	        return isset($_SESSION[$key]);
 	    }
 
 	    return false;
