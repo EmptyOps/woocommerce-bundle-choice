@@ -67,7 +67,7 @@ class Product extends \eo\wbc\system\core\publics\Eowbc_Base_Model_Publics {
                     }
                 }         
 
-                NOTE: aapde aahi intansnaly url buetify nathi kari kam ke cart feature woo commerce nu chh to a tema get peramiter support kare chh jam ke remove cart url ma.to tema problem no aave tena mate. And anyway aapde ring bulider fetucer, earring pendant bulider jeva apda fetucer matej nice url support kari sakiye.       
+                // NOTE: aapde aahi intansnaly url buetify nathi kari kam ke cart feature woo commerce nu chh to a tema get peramiter support kare chh jam ke remove cart url ma.to tema problem no aave tena mate. And anyway aapde ring bulider fetucer, earring pendant bulider jeva apda fetucer matej nice url support kari sakiye.       
                 // exit(wp_redirect(/*$cart_url*/wbc()->common->beautify_url_data($cart_url)));
                 exit(wp_redirect($cart_url));
                 die();
