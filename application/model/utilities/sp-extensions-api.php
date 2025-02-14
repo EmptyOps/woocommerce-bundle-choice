@@ -71,7 +71,8 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
 			$args['method'] = "wp_remote_get";
 		}
-
+		// wbc_pr($api_settings);
+		// die('call function after apply_input_by_method');
 		$post_fields = null;
 
 		self::apply_input_by_method($url, $post_fields, $api_settings, $payload, $args);
@@ -277,7 +278,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
     }
 
     private static function process_form_definition($mode, $form_definition, $args) {
-
+    	// die('process_form_definition start');
 		wbc()->load->model('admin\form-builder');
 
 		$saved_tab_key = !empty( $args["hook_callback_args"]["sp_frmb_saved_tab_key"] ) ? $args["hook_callback_args"]["sp_frmb_saved_tab_key"] : ""; 
@@ -322,12 +323,14 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
 			    	//skip fields where applicable
 					if( isset($fv["eas"]) && is_array($fv["eas"]) ) {
-						
+						// wbc_pr('eas if in');
 						$tab["form"][$fk] = self::inject_onclick_attr($mode, $form_definition, $fv["eas"], $fv);
 
 						$section_fields = self::retrieve_section_fields($tab["form"], $fv["eas"], $fk);
-							
+						// wbc_pr('section_should_make_call');	
 						if( self::section_should_make_call($mode, $form_definition, $fv["eas"], $fk, $section_fields) ) {
+
+							// wbc_pr('section_should_make_call in');	
 							
 							$payload = array();
 							$payload['fctr'] = array();
@@ -335,13 +338,18 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 							foreach ($section_fields as $sfk => $sfv) {
 
 								if( in_array($sfv["type"], \eo\wbc\model\admin\Form_Builder::savable_types()) ) {
-
+									
 									$payload['fctr'][$sfk] = self::field_value_for_payload($mode, $fk, $sfk, $sfv);
 
 								}
 							}
-							
+
+							// wbc_pr( $payload );
+							// die('process_form_definition 1111');
 							$parsed = self::call($fv["eas"]["au"] . $fv["eas"]["ep"], "ihk=".$fv["eas"]["ihk"], $payload, array());
+
+							// wbc_pr($parsed);
+							// die('parsed');
 
 							$is_apply_response_msg = self::is_apply_response_msg($parsed, $fv["eas"]);
 
@@ -351,22 +359,26 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
 							$args['res'] = $res;
 
-							// die('befor should_do_stat_changes if');
+							// wbc_pr('befor should_do_stat_changes if');
 
 							if( self::should_do_stat_changes($mode, $parsed) ) {
 
-								// die('inside should_do_stat_changes if');
+								// wbc_pr('inside should_do_stat_changes if');
 
 								$tab["form"] = self::apply_stat_changes_to_section($mode, $tab["form"], $section_fields, $parsed, $fk);
+								// wbc_pr($tab["form"]);
+								// die('aaaaaaaaaa');
+
 
 							}
 
+							// wbc_pr('should_handle_response 1111111');
 							// wbc_pr($mode);
 							// wbc_pr($parsed);
 							// die('should_handle_response parsed');
 							if( self::should_handle_response($mode, $parsed) ) {
 
-								// die('inside should_handle_response if');
+								//('inside should_handle_response if');
 								\eo\wbc\system\core\publics\Eowbc_Base_Model_Publics::handle_response($parsed, array());		
 							}
 							// die('inside should_handle_response if 123114');
@@ -378,12 +390,12 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 			    }
 			}
 	    }
-
+	    // die('mode 111');
     	if( $mode == 'get' ) {
-
+    		// die('mode222');
     		return $form_definition;
     	} else {
-
+    		// die('mode3333');
     		//default mode save
     		return $args['res'];
     	}
@@ -545,7 +557,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
     }
 
     private static function should_handle_response($mode, $parsed) {
-
+    	// die('should_handle_response 1542');
     	if( 'get' == $mode && ( isset($parsed['type']) && ( 'success' == $parsed['type'] && ('success' == $parsed['sub_type'] || 'warning' == $parsed['sub_type']) ) ) ) {
 
     		return false;
@@ -571,6 +583,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 				// ACTIVE_TODO_OC_END
     		} else {
 
+    			// die('apply_stat_changes_to_section else');
     			$string_class = null;
     			$remove_class_index = null;
     			
@@ -599,7 +612,8 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 				}
     		}
     	}
-
+    	// wbc_pr($tab_form);
+		// die('tab frommmmmmmm');
     	return $tab_form;
     }
 

@@ -735,7 +735,7 @@ ACTIVE_TODO_OC_END*/
         
 
          // template_data = {gallery_thumbnail_src:'http://54.162.191.228/staging/wp-content/uploads/2022/07/r-a-2-100x100.jpg'};
-         // console.log("template");
+         // console.log("template 12512");
          // console.log(template);
          // console.log("template_data");
          // console.log(template_data);
