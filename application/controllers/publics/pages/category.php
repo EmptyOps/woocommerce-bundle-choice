@@ -359,7 +359,7 @@ class Category {
                 $no_products = __( 'No products were found matching your selection.', 'woocommerce' );
                 $go_back = /*$this->eo_wbc_prev_url()*/wbc()->common->beautify_url_data($this->eo_wbc_prev_url());
                 $go_back_text = /*echo*/ __('Go back', 'woo-bundle-choice');
-                $continue_buying = ((empty(wbc()->sanitize->get('FIRST')) XOR empty(wbc()->sanitize->get('SECOND')))?strtok(get_permalink((empty(wbc()->sanitize->get('FIRST'))?wbc()->sanitize->get('SECOND'):wbc()->sanitize->get('FIRST'))),'?'):'');
+                $continue_buying = ((empty(wbc()->sanitize->get('FIRST')) XOR empty(wbc()->sanitize->get('SECOND')))?/*strtok(get_permalink((empty(wbc()->sanitize->get('FIRST'))?wbc()->sanitize->get('SECOND'):wbc()->sanitize->get('FIRST'))),'?')*/wbc()->common->beautify_url_data(strtok(get_permalink((empty(wbc()->sanitize->get('FIRST'))?wbc()->sanitize->get('SECOND'):wbc()->sanitize->get('FIRST'))),'?')):'');
                 $continue_buying_text = /*echo*/ __('Continue buying single item', 'woo-bundle-choice');
                 $mapping_text = /*echo*/ __('As admin of this site please create a product mapping to fix this problem.', 'woo-bundle-choice');
 
@@ -572,9 +572,9 @@ class Category {
         }
         
         if(strpos($url,'?')!==false) {
-            return $url."&".$external_url;
+            return wbc()->common->beautify_url_data($url."&".$external_url);
         } else {
-            return $url.'?'.$external_url;
+            return wbc()->common->beautify_url_data($url.'?'.$external_url);
         }
     }
 

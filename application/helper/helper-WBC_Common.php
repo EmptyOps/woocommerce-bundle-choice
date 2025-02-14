@@ -1225,7 +1225,7 @@ class WBC_Common {
     		unset($queryParams['wbcid']);
     	}
 
-    	if (sizeof($queryParams) <= 0) {
+    	if (!is_array($queryParams) or sizeof($queryParams) <= 0) {
 
     		return $url;
     	}

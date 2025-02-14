@@ -53,6 +53,67 @@ class SP_WBC_Product extends SP_Product {
 	    // 	-- if we create hooks funciton then we need ot add two add_filter hook with the key "wbc_pair_builder_first_cat_title", "wbc_pair_builder_second_cat_title" -- to h & -- to s
 	    // 		-- and then need to make sure that above add_filter hook does return the title of the first and second category and when we do this we need to make sure that we set the priority default 10 here and for the earring pendant builder we set the priority to some higher level so let simply set it to 50 for the earring pendant builder -- to h & -- to s
 	    // ACTIVE_TODO_OC_END
+
+		// ACTIVE_TODO nice no code nice url mate che but ring bulder fucher nice url aa hook vager work kar che to atyare aane comment maro che. but bija fucher mate nice url sporrt add kari ye tyare aani jarur pade to chalu kar vanu.
+	    // if(wbc_is_nice_urls_enabled()) {
+
+		// 	add_filter('post_type_link', function ($permalink, $post) {
+
+		// 		wbc_pr("SP_WBC_Product hooks post_type_link");
+		// 	    if (wbc()->sanitize->get('EO_WBC') == 1 && $post->post_type === 'product') {
+
+		// 	    	wbc_pr("SP_WBC_Product hooks post_type_link if ".$permalink." ");
+		// 	    	wbc_pr("SP_WBC_Product hooks post_type_link if 1 ".wbc()->common->beautify_url_data($permalink));
+		// 			// Generate the default WooCommerce product URL
+    	// 			// return wbc()->common->beautify_url_data(get_permalink($post->ID));
+    	// 			return wbc()->common->beautify_url_data($permalink);
+		// 	    }
+
+		// 	    return $permalink;
+		// 	}, 10, 2);
+
+		// 	add_filter('get_the_permalink', function ($url, $post) {
+
+		// 		wbc_pr("SP_WBC_Product hooks get_the_permalink");
+		// 	    if (wbc()->sanitize->get('EO_WBC') == 1 && isset($post->post_type) && $post->post_type === 'product') {
+
+		// 	    	wbc_pr("SP_WBC_Product hooks get_the_permalink if");
+		// 	        $url = wbc()->common->beautify_url_data(add_query_arg('custom_param', 'value', $url));
+		// 	    }
+
+		// 	    return $url;
+		// 	}, 10, 2);
+
+			
+		// 	add_filter('woocommerce_get_permalink', function ($url, $product) {
+
+		// 		wbc_pr("SP_WBC_Product hooks woocommerce_get_permalink");
+		// 	    // Custom logic for product URLs
+		// 	    if (wbc()->sanitize->get('EO_WBC') == 1 && get_post_type($product->get_id()) === 'product') {
+
+		// 	    	wbc_pr("SP_WBC_Product hooks woocommerce_get_permalink if");
+		// 	        // $url = add_query_arg('product_id', $product->get_id(), $url);
+		// 	        $url = wbc()->common->beautify_url_data(add_query_arg('product_id', $product->get_id(), get_permalink($product->get_id())));
+		// 	    }
+
+		// 	    return $url;
+		// 	}, 10, 2);
+
+			
+		// 	add_filter('woocommerce_product_get_permalink', function ($permalink, $product) {
+
+		// 		wbc_pr("SP_WBC_Product hooks woocommerce_product_get_permalink");
+		// 		if (wbc()->sanitize->get('EO_WBC') == 1 ) {
+
+		// 	    	wbc_pr("SP_WBC_Product hooks woocommerce_product_get_permalink if");
+		// 		    // Add query parameters or modify the URL
+		// 		    return wbc()->common->beautify_url_data(add_query_arg('custom_param', 'value', $permalink));
+		// 		}
+
+		// 		return $permalink;
+		// 	}, 10, 2);
+
+		// }
     }
 
     public static function admin_hooks() {

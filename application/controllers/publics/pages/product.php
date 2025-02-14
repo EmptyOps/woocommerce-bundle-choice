@@ -932,9 +932,7 @@ class Product extends \eo\wbc\system\core\publics\Eowbc_Base_Model_Publics {
                     $url = $url.'&'.$get_link;
                 }                
             }            
-        }
-        
-        elseif(wbc()->sanitize->get('STEP')==2) {   
+        } elseif(wbc()->sanitize->get('STEP')==2) {   
             
             /*$review_page_url = '';
 
@@ -1039,7 +1037,8 @@ class Product extends \eo\wbc\system\core\publics\Eowbc_Base_Model_Publics {
             }
         }  
         
-        return $url;
+        // return $url;
+        return wbc()->common->beautify_url_data($url);
     }
     
     /**
