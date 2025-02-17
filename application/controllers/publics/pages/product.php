@@ -533,7 +533,7 @@ class Product extends \eo\wbc\system\core\publics\Eowbc_Base_Model_Publics {
                                     );
                 }
                 wbc()->session->set('EO_WBC_SETS', apply_filters('sp_wbc_add2session_cart_sets',$eo_wbc_sets,$cart));
-                die("product class add2session_cart EO_WBC_SETS set");
+                // die("product class add2session_cart EO_WBC_SETS set");
 
             }
         }

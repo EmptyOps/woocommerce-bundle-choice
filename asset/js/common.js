@@ -1881,7 +1881,8 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
 
         // -- data.select 28-08-2023 @a
         // data.select = jQuery(element).siblings('select.woo-variation-raw-select');
-        data.select = jQuery(element).parent().find('select.woo-variation-raw-select');
+        // data.select = jQuery(element).parent().find('select.woo-variation-raw-select');
+        data.select = jQuery(element).parent().closest('td').find('select');
         data.selected = '';
         data.options = data.select.find('option');
         data.disabled = data.select.find('option:disabled');
