@@ -103,6 +103,14 @@ class SP_Compatibility {
 	 		if ($current_theme_key == 'themes___purple_theme') {
 	        	
 	        	return 'woocommerce_after_add_to_cart_form';
+	        } elseif ($current_theme_key == 'themes___woodmart') {
+	        	
+	        	return 'woocommerce_after_add_to_cart_form';
+
+	        } else {
+
+	        	// ACTIVE_TODO Maybe else Badhi Theme Ma Work Karse Jo no kare to Navi elseif banavi.
+	        	return 'woocommerce_after_add_to_cart_form';
 	        }
 
 	        return $args['hook_key'];
