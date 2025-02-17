@@ -4904,11 +4904,11 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
 
         console.log(super.get_zoom_container());
 
-        super.get_zoom_container().on('click',function() {
+        super.get_zoom_container().on('click',function(e) {
 
             console.log('gim_feed [zoom_area_click_listener] on_click');
 
-            _this./*#*/on_zoom_area_click_private();
+            _this./*#*/on_zoom_area_click_private(type, e);
 
         })
 
@@ -4999,11 +4999,11 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
     
     }
 
-    /*#*/on_zoom_area_click_private(type) {
+    /*#*/on_zoom_area_click_private(type, e) {
 
         var _this = this; 
 
-        _this./*#*/zoom_area_click_private();
+        _this./*#*/zoom_area_click_private(type, e);
     }
 
     /*#*/zoom_area_hover_in_private(type) {
@@ -5173,7 +5173,7 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
                 
     }  
 
-    /*#*/zoom_area_click_private(type) {
+    /*#*/zoom_area_click_private(type, e) {
 
         // console.log('gim_feed [zoom_area_click]');
 
@@ -5185,7 +5185,16 @@ class SP_WBC_Variations_Gallery_Images_Feed_Page extends SP_WBC_Variations_Galle
         
         if(!window.document.splugins.common.is_empty(sp_anchor_url)) {
             
-            window.location.href = sp_anchor_url;
+            if (window.document.splugins.common.is_nice_urls_enabled) {
+
+                e.stopPropagation();
+                e.preventDefault();
+
+                window.document.splugins.common.beautify_url_data(sp_anchor_url);
+            } else {
+
+                window.location.href = sp_anchor_url;
+            }
         }
 
         // _this/*#*/compatability_private('zoom_area_click');
@@ -5309,4 +5318,109 @@ if(window.document.splugins.common.is_item_page) {
         jQuery('form.cart').attr('action',document.location.href);
         jQuery('form.cart').submit();
     }
+}
+
+// Function to create and attach the loader HTML and CSS
+window.document.splugins.common.attach_loader = function() {
+
+    console.log("common.js attach_loader");
+    // Create the loader HTML
+    var loaderHTML = `
+        <div id="wbc_loading" class="wbc_loading"></div>
+    `;
+    document.body.insertAdjacentHTML('beforeend', loaderHTML);
+
+    // Add CSS for the loader dynamically
+    var style = document.createElement('style');
+    style.innerHTML = `
+        .wbc_loading {
+            display: block !important;
+            background-image: url(/wp-content/plugins/woo-bundle-choice/asset/icon/spinner.gif);
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: 50px 50px; /* Adjust the spinner size */
+            height: 100%;
+            width: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 9999; /* Ensure the loader appears above everything else */
+        }
+    `;
+    document.head.appendChild(style);
+}
+
+// Function to show the loader
+window.document.splugins.common.show_loader = function() {
+
+    // Check if the loader already exists in the DOM
+    if (document.querySelectorAll('#wbc_loading').length <= 0) {
+
+        console.log('sp_dapii if under show_loader');
+
+        // If not, create and attach the loader
+        window.document.splugins.common.attach_loader();
+    }
+
+    // console.log('sp_dapii show_loader');
+    // Show the loader by adding the 'loading' class
+    jQuery("#wbc_loading").addClass('wbc_loading');
+}
+
+// Function to hide the loader
+window.document.splugins.common.hide_loader = function() {
+
+    // console.log('sp_dapii hide_loader');
+    // Hide the loader by removing the 'loading' class
+    jQuery("#wbc_loading").removeClass('wbc_loading');
+}
+
+// AJAX Call to Beautify URL and Redirect
+window.document.splugins.common.beautify_url_data = function(originalUrl) {
+
+    // console.log("common.js beautify_url_data enter");
+
+    window.document.splugins.common.show_loader();
+
+    // Construct beautify request with action
+    jQuery.ajax({
+        url: window.document.splugins.common.ajax_url, // API endpoint for beautifying URL
+        type: 'POST',
+        data: {
+            action: 'wbc_beautify_url_data', // Add action to the request
+            url: originalUrl
+        },
+        success: function (response) {
+
+            window.document.splugins.common.hide_loader();
+
+            var res =  window.document.splugins.common.parseJSON(response);
+            // console.log("success:", res);
+
+            if (res && typeof res.type != 'undefined' && res.type == 'success') {
+
+               // Redirect to beautified URL
+                window.location.href = res.beautified_url;
+                
+            } else if (res && typeof res.type != 'undefined' && typeof res.msg != 'undefined') {
+
+                console.log("Error occurred:", res.msg);
+                alert(res.type + ": " + res.msg); // Display error message
+            } else {
+                
+                console.log("Response type is undefined or unexpected");
+                alert("Beautify Url Data Error: response type is undefined or unexpected");
+            }
+
+        },
+        error: function (xhr, status, error) {
+
+            window.document.splugins.common.hide_loader();
+
+            // Log the error in the console
+            console.error("Error beautifying URL:", error);
+            // Display error alert
+            alert("Beautify Url Data Error: " + error);
+        }
+    });
 }

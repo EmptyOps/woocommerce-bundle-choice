@@ -1192,7 +1192,7 @@ class WBC_Common {
 	 * NOTE: now any extension that affects the ring builder url should depend on these two beautify and debeautify functions to ensure that they also support nice urls. and to check if the nice urls are enabled in admin settings you can call the function "wbc_is_nice_urls_enabled". and note that we have no hook structure for this since this nice url feature is actually a override and when in future the wbc is refactored deeply for making the urls nicer and clean as per the general standards then wbc core layers itself will not use such url so no need to override then. but now for doing simple overrides these simple functions are provided. and all extensions affecting the wbc URLs which are made nicer by the WBC then those urls must be maintained nicely by the underlying extensions. 
 	 *
 	 */
-	public function beautify_url_data($url, $is_query_string = false) {
+	public function beautify_url_data($url, $is_query_string = false, $is_do_merge = false) {
 
 		// Call is_nice_urls_enabled() from wbc()->common at the top
 	    if (!$this->is_nice_urls_enabled()) {
@@ -1219,8 +1219,15 @@ class WBC_Common {
 	        }
 	    }
 
+	    $wbcid_merge = null;
+
 	    // Remove the 'wbcid' parameter if it exists
     	if (isset($queryParams['wbcid'])) {
+
+    		if ($is_do_merge) {
+
+    			$wbcid_merge = $queryParams['wbcid'];
+    		}
 
     		unset($queryParams['wbcid']);
     	}
@@ -1230,15 +1237,6 @@ class WBC_Common {
     		return $url;
     	}
 
-
-	    // Sort url array
-	    ksort($queryParams);
-
-	    // recovert query string
-	    $sortedQueryString = http_build_query($queryParams);
-
-	    // Generate a hash using SHA-256
-	    $hash = hash('sha256', $sortedQueryString);
 
 	    $wbc_nu_hash = null;
 
@@ -1260,6 +1258,25 @@ class WBC_Common {
 
 	    	$wbc_nu_data = wbc()->session->fetch('wbc_nu_data');
 	    }
+
+
+		// $wbcid check karo ane jo male to $wbc_nu_data maathi te index extract karo
+		if ($wbcid_merge && isset($wbc_nu_data[$wbcid_merge])) {
+	    
+		    // Array ne merge karo
+		    $queryParams = array_merge($wbc_nu_data[$wbcid_merge], $queryParams);
+
+    	}
+
+	    // Sort url array
+	    ksort($queryParams);
+
+	    // recovert query string
+	    $sortedQueryString = http_build_query($queryParams);
+
+	    // Generate a hash using SHA-256
+	    $hash = hash('sha256', $sortedQueryString);
+
 
 	    // Check if hash already exists
 	    if (isset($wbc_nu_hash[$hash])) {
@@ -1323,6 +1340,35 @@ class WBC_Common {
 	    if ($wbcid == null) {
 
 	        $wbcid = isset($_GET['wbcid']) ? wbc()->sanitize->get('wbcid') : null;
+
+	        unset($_GET['wbcid']);
+
+
+			// Check if wbcid is present in the URL
+			if ($wbcid === 'sd' or $wbcid === 'ss') {
+
+			    // Handle wbcid = 'sd'
+			    if ($wbcid === 'sd') {
+			        // Query string for wbcid = sd
+			        $query_string = "EO_WBC=1&BEGIN=eo_diamond_shape_cat&STEP=1&FIRST&SECOND";
+			    } 
+			    // Handle wbcid = 'ss'
+			    elseif ($wbcid === 'ss') {
+			        // Query string for wbcid = ss
+			        $query_string = "EO_WBC=1&BEGIN=eo_setting_shape_cat&STEP=1&FIRST&SECOND";
+			    }
+
+			    // If a query string is set, parse it and merge with $_GET
+			    if (isset($query_string)) {
+
+			        parse_str($query_string, $parsed_params);
+
+			        $_GET = array_merge($_GET, $parsed_params);
+			    }
+
+			    return;
+			}
+
 	    }
 
 	    $wbc_nu_hash = wbc()->session->fetch('wbc_nu_hash',array());

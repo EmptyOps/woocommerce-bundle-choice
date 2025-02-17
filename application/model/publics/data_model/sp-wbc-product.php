@@ -114,6 +114,16 @@ class SP_WBC_Product extends SP_Product {
 		// 	}, 10, 2);
 
 		// }
+
+		add_action('wp_ajax_wbc_beautify_url_data', function() {
+
+            self::beautify_url_data_ajax(); 
+        });
+
+        add_action('wp_ajax_nopriv_wbc_beautify_url_data', function() {
+
+            self::beautify_url_data_ajax(); 
+        });
     }
 
     public static function admin_hooks() {
@@ -121,5 +131,30 @@ class SP_WBC_Product extends SP_Product {
     	\eo\wbc\model\utilities\SP_Extensions_Api::admin_hooks();
     }
 
+    private static function beautify_url_data_ajax() {
 
+    	$original_url = wbc()->sanitize->post('url');
+
+	    // Check if URL is provided
+	    if (!empty($original_url)) {
+
+	        $original_url = wbc()->common->beautify_url_data($original_url, false, true);
+
+	        $response = array(
+                'type' => 'success',
+                'msg'  => 'URL successfully beautified.',
+                'beautified_url' => $original_url
+            );
+
+		} else {
+
+	        // Prepare error response for missing URL
+	        $response = array(
+	            'type' => 'error',
+	            'msg'  => 'No URL provided.'
+	        );
+    	}
+
+    	wbc()->rest->response($response, 200, true);
+    }
 }

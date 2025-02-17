@@ -10,9 +10,14 @@ jQuery(document).ready(function(){
             window.eo_wbc_object.url = window.document.splugins.common.updateURLParameter(window.eo_wbc_object.url,'variation_id',variation_id_input);
 		}
 		
-		//console.log("LOG : "+eo_wbc_object.url+'&CART='+window.btoa(form_2_json(jQuery('form.cart'))));
-		window.location.href =eo_wbc_object.url+'&CART='+window.btoa(form_2_json(jQuery('form.cart')));		    			    
-		
+		if (window.document.splugins.common.is_nice_urls_enabled) {
+
+			window.document.splugins.common.beautify_url_data(eo_wbc_object.url+'&CART='+window.btoa(form_2_json(jQuery('form.cart'))));
+		} else {
+
+			//console.log("LOG : "+eo_wbc_object.url+'&CART='+window.btoa(form_2_json(jQuery('form.cart'))));
+			window.location.href =eo_wbc_object.url+'&CART='+window.btoa(form_2_json(jQuery('form.cart')));		    			    
+		}
 	});
 });
 
