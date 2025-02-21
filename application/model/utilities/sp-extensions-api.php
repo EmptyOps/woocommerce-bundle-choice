@@ -363,7 +363,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
 							if( self::should_do_stat_changes($mode, $parsed) ) {
 
-								// wbc_pr('inside should_do_stat_changes if');
+								// die('inside should_do_stat_changes if');
 
 								$tab["form"] = self::apply_stat_changes_to_section($mode, $tab["form"], $section_fields, $parsed, $fk);
 								// wbc_pr($tab["form"]);
@@ -378,7 +378,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 							// die('should_handle_response parsed');
 							if( self::should_handle_response($mode, $parsed) ) {
 
-								//('inside should_handle_response if');
+								// die('inside should_handle_response if');
 								\eo\wbc\system\core\publics\Eowbc_Base_Model_Publics::handle_response($parsed, array());		
 							}
 							// die('inside should_handle_response if 123114');
@@ -557,6 +557,8 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
     }
 
     private static function should_handle_response($mode, $parsed) {
+    	// wbc_pr($mode);
+    	// wbc_pr($parsed);
     	// die('should_handle_response 1542');
     	if( 'get' == $mode && ( isset($parsed['type']) && ( 'success' == $parsed['type'] && ('success' == $parsed['sub_type'] || 'warning' == $parsed['sub_type']) ) ) ) {
 
