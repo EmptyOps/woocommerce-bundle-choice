@@ -1345,17 +1345,21 @@ class WBC_Common {
 
 
 			// Check if wbcid is present in the URL
-			if ($wbcid === 'sd' or $wbcid === 'ss') {
+			if ($wbcid === 'sd' or $wbcid === 'ss' or $wbcid === 'ss-brilliant') {
 
 			    // Handle wbcid = 'sd'
 			    if ($wbcid === 'sd') {
+			    	
 			        // Query string for wbcid = sd
 			        $query_string = "EO_WBC=1&BEGIN=eo_diamond_shape_cat&STEP=1&FIRST&SECOND";
-			    } 
-			    // Handle wbcid = 'ss'
-			    elseif ($wbcid === 'ss') {
+			    } elseif ($wbcid === 'ss') { // Handle wbcid = 'ss'
+
 			        // Query string for wbcid = ss
 			        $query_string = "EO_WBC=1&BEGIN=eo_setting_shape_cat&STEP=1&FIRST&SECOND";
+			    } elseif ($wbcid === 'ss-brilliant') {
+
+			    	// Query string for wbcid = ss-brilliant
+			    	$query_string = "EO_WBC=1&BEGIN=eo_diamond_shape_cat_&STEP=1&FIRST&SECOND&CAT_LINK=eo_diamond_brilliant_shape_cat";
 			    }
 
 			    // If a query string is set, parse it and merge with $_GET
