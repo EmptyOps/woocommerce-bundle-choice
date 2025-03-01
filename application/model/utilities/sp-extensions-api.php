@@ -289,7 +289,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 		$save_as_data = array();	
 		$save_as_data_meta = array();	
 
-    	//loop through form tabs and save 
+    	//loop through form tabs and save 	    
 	    foreach ($form_definition as $key => $tab) {
 	    	// wbc_pr('form_definition111');
 	    	// wbc_pr($key);
@@ -360,15 +360,14 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 							$args['res'] = $res;
 
 							// wbc_pr('befor should_do_stat_changes if');
-
+							// wbc_pr($tab["form"]);
+							// wbc_pr('aaaaaaaaaa');
 							if( self::should_do_stat_changes($mode, $parsed) ) {
 
 								// die('inside should_do_stat_changes if');
 
 								$tab["form"] = self::apply_stat_changes_to_section($mode, $tab["form"], $section_fields, $parsed, $fk);
 								// wbc_pr($tab["form"]);
-								// die('aaaaaaaaaa');
-
 
 							}
 
@@ -391,6 +390,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 			}
 	    }
 	    // die('mode 111');
+	    // wbc_pr($form_definition);
     	if( $mode == 'get' ) {
     		// die('mode222');
     		return $form_definition;
