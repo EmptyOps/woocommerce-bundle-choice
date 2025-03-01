@@ -1345,7 +1345,7 @@ class WBC_Common {
 
 
 			// Check if wbcid is present in the URL
-			if ($wbcid === 'sd' or $wbcid === 'ss' or $wbcid === 'sd-round' or $wbcid === 'sd-oval' or $wbcid === 'sd-cushion' or $wbcid === 'sd-pear' or $wbcid === 'sd-princess' or $wbcid === 'sd-emerald' or $wbcid === 'sd-marquise' or $wbcid === 'sd-asscher' or $wbcid === 'sd-radiant' or $wbcid === 'sd-heart' or $wbcid === 'sd-brilliant') {
+			if ($wbcid === 'sd' or $wbcid === 'ss' or $wbcid === 'sd-round' or $wbcid === 'sd-oval' or $wbcid === 'sd-cushion' or $wbcid === 'sd-pear' or $wbcid === 'sd-princess' or $wbcid === 'sd-emerald' or $wbcid === 'sd-marquise' or $wbcid === 'sd-asscher' or $wbcid === 'sd-radiant' or $wbcid === 'sd-heart' or $wbcid === 'bd-brilliant' or $wbcid === 'bd-oval' or $wbcid === 'bd-cushion' or $wbcid === 'bd-tropfen' or $wbcid === 'bd-prinzess' or $wbcid === 'bd-emerald' or $wbcid === 'bd-marquise' or $wbcid === 'bd-asscher' or $wbcid === 'bd-radiant' or $wbcid === 'bd-herz' or $wbcid === 'ss-round' or $wbcid === 'ss-oval' or $wbcid === 'ss-cushion' or $wbcid === 'ss-pear' or $wbcid === 'ss-princess' or $wbcid === 'ss-emeral' or $wbcid === 'ss-marquise' or $wbcid === 'ss-heart' or $wbcid === 'ss-asscher' or $wbcid === 'ld-brilliant' or $wbcid === 'ld-oval' or $wbcid === 'ld-cushion' or $wbcid === 'ld-tropfen' or $wbcid === 'ld-prinzess' or $wbcid === 'ld-emerald' or $wbcid === 'ld-marquise' or $wbcid === 'ld-asscher' or $wbcid === 'ld-radiant' or $wbcid === 'ld-herz') {
 
 			    // Handle wbcid = 'sd'
 			    if ($wbcid === 'sd') {
@@ -1358,49 +1358,161 @@ class WBC_Common {
 			        $query_string = "EO_WBC=1&BEGIN=eo_setting_shape_cat&STEP=1&FIRST&SECOND";
 			    } elseif ($wbcid === 'sd-round') {
 
-			    	// Query string for wbcid = ss-round
+			    	// Query string for wbcid = sd-round
 			    	$query_string = "EO_WBC=1&BEGIN=eo_diamond_shape_cat_&STEP=1&FIRST&SECOND&CAT_LINK=eo_diamond_round_shape_cat";
 			    } elseif ($wbcid === 'sd-oval') {
 
-			    	// Query string for wbcid = ss-oval
+			    	// Query string for wbcid = sd-oval
 			    	$query_string = "EO_WBC=1&BEGIN=eo_diamond_shape_cat_&STEP=1&FIRST&SECOND&CAT_LINK=eo_diamond_oval_shape_cat";
 			    } elseif ($wbcid === 'sd-cushion') {
 
-			    	// Query string for wbcid = ss-cushion
+			    	// Query string for wbcid = sd-cushion
 			    	$query_string = "EO_WBC=1&BEGIN=eo_diamond_shape_cat_&STEP=1&FIRST&SECOND&CAT_LINK=eo_diamond_cushion_shape_cat";
 			    } elseif ($wbcid === 'sd-pear') {
 
-			    	// Query string for wbcid = ss-pear
+			    	// Query string for wbcid = sd-pear
 			    	$query_string = "EO_WBC=1&BEGIN=eo_diamond_shape_cat_&STEP=1&FIRST&SECOND&CAT_LINK=eo_diamond_pear_shape_cat";
 			    } elseif ($wbcid === 'sd-princess') {
 
-			    	// Query string for wbcid = ss-princess
+			    	// Query string for wbcid = sd-princess
 			    	$query_string = "EO_WBC=1&BEGIN=eo_diamond_shape_cat_&STEP=1&FIRST&SECOND&CAT_LINK=eo_diamond_princess_shape_cat";
 			    } elseif ($wbcid === 'sd-emerald') {
 
-			    	// Query string for wbcid = ss-emerald
+			    	// Query string for wbcid = sd-emerald
 			    	$query_string = "EO_WBC=1&BEGIN=eo_diamond_shape_cat_&STEP=1&FIRST&SECOND&CAT_LINK=eo_diamond_emerald_shape_cat";
 			    } elseif ($wbcid === 'sd-marquise') {
 
-			    	// Query string for wbcid = ss-marquise
+			    	// Query string for wbcid = sd-marquise
 			    	$query_string = "EO_WBC=1&BEGIN=eo_diamond_shape_cat_&STEP=1&FIRST&SECOND&CAT_LINK=eo_diamond_marquise_shape_cat";
 			    } elseif ($wbcid === 'sd-asscher') {
 
-			    	// Query string for wbcid = ss-asscher
+			    	// Query string for wbcid = sd-asscher
 			    	$query_string = "EO_WBC=1&BEGIN=eo_diamond_shape_cat_&STEP=1&FIRST&SECOND&CAT_LINK=eo_diamond_asscher_shape_cat";
 			    } elseif ($wbcid === 'sd-radiant') {
 
-			    	// Query string for wbcid = ss-radiant
+			    	// Query string for wbcid = sd-radiant
 			    	$query_string = "EO_WBC=1&BEGIN=eo_diamond_shape_cat_&STEP=1&FIRST&SECOND&CAT_LINK=eo_diamond_radiant_shape_cat";
 			    } elseif ($wbcid === 'sd-heart') {
 
-			    	// Query string for wbcid = ss-heart
+			    	// Query string for wbcid = sd-heart
 			    	$query_string = "EO_WBC=1&BEGIN=eo_diamond_shape_cat_&STEP=1&FIRST&SECOND&CAT_LINK=eo_diamond_heart_shape_cat";
-			    } elseif ($wbcid === 'sd-brilliant') {
+			    } elseif ($wbcid === 'bd-brilliant') {
 
-			    	// Query string for wbcid = ss-brilliant
+			    	// Query string for wbcid = bd-brilliant
 			    	$query_string = "EO_WBC=1&BEGIN=diamanten&STEP=1&FIRST&SECOND&CAT_LINK=form-brilliant";
-			    } 
+			    } elseif ($wbcid === 'bd-oval') {
+
+			    	// Query string for wbcid = bd-oval
+			    	$query_string ="EO_WBC=1&BEGIN=diamanten&STEP=1&FIRST&SECOND&CAT_LINK=form-oval";
+			    } elseif ($wbcid === 'bd-cushion') {
+
+			    	// Query string for wbcid = bd-cushion
+			    	$query_string = "EO_WBC=1&BEGIN=diamanten&STEP=1&FIRST&SECOND&CAT_LINK=eo_diamond_cushion_shape_cat";
+			    } elseif ($wbcid === 'bd-tropfen') {
+
+			    	// Query string for wbcid = bd-tropfen
+			    	$query_string = "EO_WBC=1&BEGIN=diamanten&STEP=1&FIRST&SECOND&CAT_LINK=form-tropfen";
+			    } elseif ($wbcid === 'bd-prinzess') {
+
+			    	// Query string for wbcid = bd-prinzess
+			    	$query_string = "EO_WBC=1&BEGIN=diamanten&STEP=1&FIRST&SECOND&CAT_LINK=form-prinzess";
+			    } elseif ($wbcid === 'bd-emerald') {
+
+			    	// Query string for wbcid = bd-emerald
+			    	$query_string = "EO_WBC=1&BEGIN=diamanten&STEP=1&FIRST&SECOND&CAT_LINK=form-emerald";
+			    } elseif ($wbcid === 'bd-marquise') {
+
+			    	// Query string for wbcid = bd-marquise
+			    	$query_string = "EO_WBC=1&BEGIN=diamanten&STEP=1&FIRST&SECOND&CAT_LINK=form-marquise";
+			    } elseif ($wbcid === 'bd-asscher') {
+
+			    	// Query string for wbcid = bd-asscher
+			    	$query_string = "EO_WBC=1&BEGIN=diamanten&STEP=1&FIRST&SECOND&CAT_LINK=form-asscher";
+			    } elseif ($wbcid === 'bd-radiant') {
+
+			    	// Query string for wbcid = bd-radiant
+			    	$query_string = "EO_WBC=1&BEGIN=diamanten&STEP=1&FIRST&SECOND&CAT_LINK=form-radiant";
+			    } elseif ($wbcid === 'bd-herz') {
+
+			    	// Query string for wbcid = bd-herz
+			    	$query_string = "EO_WBC=1&BEGIN=diamanten&STEP=1&FIRST&SECOND&CAT_LINK=form-herz";
+			    } elseif ($wbcid === 'ss-round') {
+
+			    	// Query string for wbcid = ss-round
+			    	$query_string = "EO_WBC=1&BEGIN=ringe-modelle&STEP=1&FIRST&SECOND&_attribute=,pa_eo_shape_attr&checklist_pa_eo_shape_attr=round";
+			    } elseif ($wbcid === 'ss-oval') {
+
+			    	// Query string for wbcid = ss-oval
+			    	$query_string = "EO_WBC=1&BEGIN=ringe-modelle&STEP=1&FIRST&SECOND&_attribute=,pa_eo_shape_attr&checklist_pa_eo_shape_attr=oval";
+			    } elseif ($wbcid === 'ss-cushion') {
+
+			    	// Query string for wbcid = ss-cushion
+			    	$query_string = "EO_WBC=1&BEGIN=ringe-modelle&STEP=1&FIRST&SECOND&_attribute=,pa_eo_shape_attr&checklist_pa_eo_shape_attr=cushion";
+			    } elseif ($wbcid === 'ss-pear') {
+
+			    	// Query string for wbcid = ss-pear
+			    	$query_string = "EO_WBC=1&BEGIN=ringe-modelle&STEP=1&FIRST&SECOND&_attribute=,pa_eo_shape_attr&checklist_pa_eo_shape_attr=pear";
+			    } elseif ($wbcid === 'ss-princess') {
+
+			    	// Query string for wbcid = ss-princess
+			    	$query_string = "EO_WBC=1&BEGIN=ringe-modelle&STEP=1&FIRST&SECOND&_attribute=,pa_eo_shape_attr&checklist_pa_eo_shape_attr=princess";
+			    } elseif ($wbcid === 'ss-emeral') {
+
+			    	// Query string for wbcid = emeral
+			    	$query_string = "EO_WBC=1&BEGIN=ringe-modelle&STEP=1&FIRST&SECOND&_attribute=,pa_eo_shape_attr&checklist_pa_eo_shape_attr=emeral";
+			    } elseif ($wbcid === 'ss-marquise') {
+
+			    	// Query string for wbcid = marquise
+			    	$query_string = "EO_WBC=1&BEGIN=ringe-modelle&STEP=1&FIRST&SECOND&_attribute=,pa_eo_shape_attr&checklist_pa_eo_shape_attr=marquise";
+			    } elseif ($wbcid === 'ss-heart') {
+
+			    	// Query string for wbcid = ss-heart
+			    	$query_string = "EO_WBC=1&BEGIN=ringe-modelle&STEP=1&FIRST&SECOND&_attribute=,pa_eo_shape_attr&checklist_pa_eo_shape_attr=heart";
+			    } elseif ($wbcid === 'ss-asscher') {
+
+			    	// Query string for wbcid = ss-asscher
+			    	$query_string = "EO_WBC=1&BEGIN=ringe-modelle&STEP=1&FIRST&SECOND&_attribute=,pa_eo_shape_attr&checklist_pa_eo_shape_attr=asscher";
+			    } elseif ($wbcid === 'ld-brilliant') {
+
+			    	// Query string for wbcid = ld-brilliant
+			    	$query_string = "CAT_LINK=form-brilliant";
+			    } elseif ($wbcid === 'ld-oval') {
+
+			    	// Query string for wbcid = ld-oval
+			    	$query_string = "CAT_LINK=form-oval";
+			    } elseif ($wbcid === 'ld-cushion') {
+
+			    	// Query string for wbcid = ld-cushion
+			    	$query_string = "CAT_LINK=eo_diamond_cushion_shape_cat";
+			    } elseif ($wbcid === 'ld-tropfen') {
+
+			    	// Query string for wbcid = ld-tropfen
+			    	$query_string = "CAT_LINK=form-tropfen";
+			    } elseif ($wbcid === 'ld-prinzess') {
+
+			    	// Query string for wbcid = ld-prinzess
+			    	$query_string = "CAT_LINK=form-prinzess";
+			    } elseif ($wbcid === 'ld-emerald') {
+
+			    	// Query string for wbcid = ld-emerald
+			    	$query_string = "CAT_LINK=form-emerald";
+			    } elseif ($wbcid === 'ld-marquise') {
+
+			    	// Query string for wbcid = ld-marquise
+			    	$query_string = "CAT_LINK=form-marquise";
+			    } elseif ($wbcid === 'ld-asscher') {
+
+			    	// Query string for wbcid = ld-asscher
+			    	$query_string = "CAT_LINK=form-asscher";
+			    } elseif ($wbcid === 'ld-radiant') {
+
+			    	// Query string for wbcid = ld-radiant
+			    	$query_string = "CAT_LINK=form-radiant";
+			    } elseif ($wbcid === 'ld-herz') {
+
+			    	// Query string for wbcid = ld-herz
+			    	$query_string = "CAT_LINK=form-herz";
+			    }
 
 			    // If a query string is set, parse it and merge with $_GET
 			    if (isset($query_string)) {
