@@ -1345,7 +1345,7 @@ class WBC_Common {
 
 
 			// Check if wbcid is present in the URL
-			if ($wbcid === 'sd' or $wbcid === 'ss' or $wbcid === 'sd-round' or $wbcid === 'sd-oval' or $wbcid === 'sd-cushion' or $wbcid === 'sd-pear' or $wbcid === 'sd-princess' or $wbcid === 'sd-emerald' or $wbcid === 'sd-marquise' or $wbcid === 'sd-asscher' or $wbcid === 'sd-radiant' or $wbcid === 'sd-heart' or $wbcid === 'bd-brilliant' or $wbcid === 'bd-oval' or $wbcid === 'bd-cushion' or $wbcid === 'bd-tropfen' or $wbcid === 'bd-prinzess' or $wbcid === 'bd-emerald' or $wbcid === 'bd-marquise' or $wbcid === 'bd-asscher' or $wbcid === 'bd-radiant' or $wbcid === 'bd-herz' or $wbcid === 'ss-round' or $wbcid === 'ss-oval' or $wbcid === 'ss-cushion' or $wbcid === 'ss-pear' or $wbcid === 'ss-princess' or $wbcid === 'ss-emeral' or $wbcid === 'ss-marquise' or $wbcid === 'ss-heart' or $wbcid === 'ss-asscher' or $wbcid === 'ld-brilliant' or $wbcid === 'ld-oval' or $wbcid === 'ld-cushion' or $wbcid === 'ld-tropfen' or $wbcid === 'ld-prinzess' or $wbcid === 'ld-emerald' or $wbcid === 'ld-marquise' or $wbcid === 'ld-asscher' or $wbcid === 'ld-radiant' or $wbcid === 'ld-herz') {
+			if ($wbcid === 'sd' or $wbcid === 'ss' or $wbcid === 'sd-round' or $wbcid === 'sd-oval' or $wbcid === 'sd-cushion' or $wbcid === 'sd-pear' or $wbcid === 'sd-princess' or $wbcid === 'sd-emerald' or $wbcid === 'sd-marquise' or $wbcid === 'sd-asscher' or $wbcid === 'sd-radiant' or $wbcid === 'sd-heart' or $wbcid === 'bd-brilliant' or $wbcid === 'bd-oval' or $wbcid === 'bd-cushion' or $wbcid === 'bd-tropfen' or $wbcid === 'bd-prinzess' or $wbcid === 'bd-emerald' or $wbcid === 'bd-marquise' or $wbcid === 'bd-asscher' or $wbcid === 'bd-radiant' or $wbcid === 'bd-herz' or $wbcid === 'ss-round' or $wbcid === 'ss-oval' or $wbcid === 'ss-cushion' or $wbcid === 'ss-pear' or $wbcid === 'ss-princess' or $wbcid === 'ss-emeral' or $wbcid === 'ss-marquise' or $wbcid === 'ss-heart' or $wbcid === 'ss-asscher' or $wbcid === 'ldg-brilliant' or $wbcid === 'ldg-oval' or $wbcid === 'ldg-cushion' or $wbcid === 'ldg-tropfen' or $wbcid === 'ldg-prinzess' or $wbcid === 'ldg-emerald' or $wbcid === 'ldg-marquise' or $wbcid === 'ldg-asscher' or $wbcid === 'ldg-radiant' or $wbcid === 'ldg-herz' or $wbcid === 'ldg-octagonal' or $wbcid === 'ldg-hexagonal' or $wbcid === 'ldg-andere' or $wbcid === 'ldg-square' or $wbcid === 'ldg-triangular') {
 
 			    // Handle wbcid = 'sd'
 			    if ($wbcid === 'sd') {
@@ -1396,7 +1396,7 @@ class WBC_Common {
 
 			    	// Query string for wbcid = sd-heart
 			    	$query_string = "EO_WBC=1&BEGIN=eo_diamond_shape_cat_&STEP=1&FIRST&SECOND&CAT_LINK=eo_diamond_heart_shape_cat";
-			    } elseif ($wbcid === 'bd-brilliant') {
+			    } elseif ($wbcid === 'bd-brilliant') {	//aa german langvage mate na url che
 
 			    	// Query string for wbcid = bd-brilliant
 			    	$query_string = "EO_WBC=1&BEGIN=diamanten&STEP=1&FIRST&SECOND&CAT_LINK=form-brilliant";
@@ -1472,46 +1472,66 @@ class WBC_Common {
 
 			    	// Query string for wbcid = ss-asscher
 			    	$query_string = "EO_WBC=1&BEGIN=ringe-modelle&STEP=1&FIRST&SECOND&_attribute=,pa_eo_shape_attr&checklist_pa_eo_shape_attr=asscher";
-			    } elseif ($wbcid === 'ld-brilliant') {
+			    } elseif ($wbcid === 'ldg-brilliant') {
 
-			    	// Query string for wbcid = ld-brilliant
+			    	// Query string for wbcid = ldg-brilliant
 			    	$query_string = "CAT_LINK=form-brilliant";
-			    } elseif ($wbcid === 'ld-oval') {
+			    } elseif ($wbcid === 'ldg-oval') {
 
-			    	// Query string for wbcid = ld-oval
+			    	// Query string for wbcid = ldg-oval
 			    	$query_string = "CAT_LINK=form-oval";
-			    } elseif ($wbcid === 'ld-cushion') {
+			    } elseif ($wbcid === 'ldg-cushion') {
 
-			    	// Query string for wbcid = ld-cushion
+			    	// Query string for wbcid = ldg-cushion
 			    	$query_string = "CAT_LINK=eo_diamond_cushion_shape_cat";
-			    } elseif ($wbcid === 'ld-tropfen') {
+			    } elseif ($wbcid === 'ldg-tropfen') {
 
-			    	// Query string for wbcid = ld-tropfen
+			    	// Query string for wbcid = ldg-tropfen
 			    	$query_string = "CAT_LINK=form-tropfen";
-			    } elseif ($wbcid === 'ld-prinzess') {
+			    } elseif ($wbcid === 'ldg-prinzess') {
 
-			    	// Query string for wbcid = ld-prinzess
+			    	// Query string for wbcid = ldg-prinzess
 			    	$query_string = "CAT_LINK=form-prinzess";
-			    } elseif ($wbcid === 'ld-emerald') {
+			    } elseif ($wbcid === 'ldg-emerald') {
 
-			    	// Query string for wbcid = ld-emerald
+			    	// Query string for wbcid = ldg-emerald
 			    	$query_string = "CAT_LINK=form-emerald";
-			    } elseif ($wbcid === 'ld-marquise') {
+			    } elseif ($wbcid === 'ldg-marquise') {
 
-			    	// Query string for wbcid = ld-marquise
+			    	// Query string for wbcid = ldg-marquise
 			    	$query_string = "CAT_LINK=form-marquise";
-			    } elseif ($wbcid === 'ld-asscher') {
+			    } elseif ($wbcid === 'ldg-asscher') {
 
-			    	// Query string for wbcid = ld-asscher
+			    	// Query string for wbcid = ldg-asscher
 			    	$query_string = "CAT_LINK=form-asscher";
-			    } elseif ($wbcid === 'ld-radiant') {
+			    } elseif ($wbcid === 'ldg-radiant') {
 
-			    	// Query string for wbcid = ld-radiant
+			    	// Query string for wbcid = ldg-radiant
 			    	$query_string = "CAT_LINK=form-radiant";
-			    } elseif ($wbcid === 'ld-herz') {
+			    } elseif ($wbcid === 'ldg-herz') {
 
-			    	// Query string for wbcid = ld-herz
+			    	// Query string for wbcid = ldg-herz
 			    	$query_string = "CAT_LINK=form-herz";
+			    } elseif ($wbcid === 'ldg-octagonal') {
+
+			    	// Query string for wbcid = ldg-octagonal
+			    	$query_string = "CAT_LINK=eo_gemstones_octagonal_shape_cat&67c0122117b5f=1";
+			    } elseif ($wbcid === 'ldg-hexagonal') {
+
+			    	// Query string for wbcid = ldg-hexagonal
+			    	$query_string = "CAT_LINK=hexagonal&67c0122117b5f=1";
+			    } elseif ($wbcid === 'ldg-andere') {
+
+			    	// Query string for wbcid = ldg-andere
+			    	$query_string = "CAT_LINK=andere&67c0122117b5f=1";
+			    } elseif ($wbcid === 'ldg-square') {
+
+			    	// Query string for wbcid = ldg-square
+			    	$query_string = "CAT_LINK=eo_gemstones_square_shape_cat&67c0122117b5f=1";
+			    } elseif ($wbcid === 'ldg-triangular') {
+
+			    	// Query string for wbcid = ldg-triangular
+			    	$query_string = "CAT_LINK=eo_gemstones_triangular_shape_cat&67c0122117b5f=1";
 			    }
 
 			    // If a query string is set, parse it and merge with $_GET
