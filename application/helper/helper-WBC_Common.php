@@ -667,7 +667,7 @@ class WBC_Common {
 	           'Afghanistan' => __('Afghanistan', 'woo-bundle-choice'),
 	           'Aland Islands' => __('Aland Islands', 'woo-bundle-choice'),
 	           'Albania' => __('Albania', 'woo-bundle-choice'),
-	           'Algeria' => __('Albania', 'woo-bundle-choice'),
+	           'Alggeria' => __('Albania', 'woo-bundle-choice'),
 	           'American Samoa' => __('American Samoa', 'woo-bundle-choice'),
 	           'Andorra' => __('Andorra', 'woo-bundle-choice'),
 	           'Angola' => __('Angola', 'woo-bundle-choice'),
@@ -686,7 +686,7 @@ class WBC_Common {
 	           'Barbados' => __('Barbados', 'woo-bundle-choice'),
 	           'Belarus' => __('Belarus', 'woo-bundle-choice'),
 	           'Belau' => __('Belau', 'woo-bundle-choice'),
-	           'Belgium' => __('Belgium', 'woo-bundle-choice'),
+	           'Belggium' => __('Belggium', 'woo-bundle-choice'),
 	           'Beoptionze' => __('Beoptionze', 'woo-bundle-choice'),
 	           'Benin' => __('Benin', 'woo-bundle-choice'),
 	           'Bermuda' => __('Bermuda', 'woo-bundle-choice'),
@@ -699,7 +699,7 @@ class WBC_Common {
 	           'Brazil' => __('Brazil', 'woo-bundle-choice'),
 	           'British Indian Ocean Territory' => __('British Indian Ocean Territory', 'woo-bundle-choice'),
 	           'Brunei' => __('Brunei', 'woo-bundle-choice'),
-	           'Bulgaria' => __('Bulgaria', 'woo-bundle-choice'),
+	           'Bulggaria' => __('Bulggaria', 'woo-bundle-choice'),
 	           'Burkina Faso' => __('Burkina Faso', 'woo-bundle-choice'),
 	           'Burundi' => __('Burundi', 'woo-bundle-choice'),
 	           'Cambodia' => __('Cambodia', 'woo-bundle-choice'),
@@ -920,7 +920,7 @@ class WBC_Common {
 			$countries_list = array(''=>__('-- Please Select --', 'woo-bundle-choice'),
 				'AF'	=>	__('Afghanistan', 'woo-bundle-choice'),
 				'AL'	=>	__('Albania', 'woo-bundle-choice'),
-				'DZ'	=>	__('Algeria', 'woo-bundle-choice'),
+				'DZ'	=>	__('Alggeria', 'woo-bundle-choice'),
 				'AS'	=>	__('American Samoa', 'woo-bundle-choice'),
 				'AD'	=>	__('Andorra', 'woo-bundle-choice'),
 				'AO'	=>	__('Angola', 'woo-bundle-choice'),
@@ -938,7 +938,7 @@ class WBC_Common {
 				'BD'	=>	__('Bangladesh', 'woo-bundle-choice'),
 				'BB'	=>	__('Barbados', 'woo-bundle-choice'),
 				'BY'	=>	__('Belarus', 'woo-bundle-choice'),
-				'BE'	=>	__('Belgium', 'woo-bundle-choice'),
+				'BE'	=>	__('Belggium', 'woo-bundle-choice'),
 				'BZ'	=>	__('Belize', 'woo-bundle-choice'),
 				'BJ'	=>	__('Benin', 'woo-bundle-choice'),
 				'BM'	=>	__('Bermuda', 'woo-bundle-choice'),
@@ -951,7 +951,7 @@ class WBC_Common {
 				'BR'	=>	__('Brazil', 'woo-bundle-choice'),
 				'IO'	=>	__('British Indian Ocean Territory (the)', 'woo-bundle-choice'),
 				'BN'	=>	__('Brunei Darussalam', 'woo-bundle-choice'),
-				'BG'	=>	__('Bulgaria', 'woo-bundle-choice'),
+				'BG'	=>	__('Bulggaria', 'woo-bundle-choice'),
 				'BF'	=>	__('Burkina Faso', 'woo-bundle-choice'),
 				'BI'	=>	__('Burundi', 'woo-bundle-choice'),
 				'CV'	=>	__('Cabo Verde', 'woo-bundle-choice'),
@@ -1343,9 +1343,8 @@ class WBC_Common {
 
 	        unset($_GET['wbcid']);
 
-
 			// Check if wbcid is present in the URL
-			if ($wbcid === 'sd' or $wbcid === 'ss' or $wbcid === 'sd-round' or $wbcid === 'sd-oval' or $wbcid === 'sd-cushion' or $wbcid === 'sd-pear' or $wbcid === 'sd-princess' or $wbcid === 'sd-emerald' or $wbcid === 'sd-marquise' or $wbcid === 'sd-asscher' or $wbcid === 'sd-radiant' or $wbcid === 'sd-heart' or $wbcid === 'bd-brilliant' or $wbcid === 'bd-oval' or $wbcid === 'bd-cushion' or $wbcid === 'bd-tropfen' or $wbcid === 'bd-prinzess' or $wbcid === 'bd-emerald' or $wbcid === 'bd-marquise' or $wbcid === 'bd-asscher' or $wbcid === 'bd-radiant' or $wbcid === 'bd-herz' or $wbcid === 'ss-round' or $wbcid === 'ss-oval' or $wbcid === 'ss-cushion' or $wbcid === 'ss-pear' or $wbcid === 'ss-princess' or $wbcid === 'ss-emeral' or $wbcid === 'ss-marquise' or $wbcid === 'ss-heart' or $wbcid === 'ss-asscher' or $wbcid === 'ldg-brilliant' or $wbcid === 'ldg-oval' or $wbcid === 'ldg-cushion' or $wbcid === 'ldg-tropfen' or $wbcid === 'ldg-prinzess' or $wbcid === 'ldg-emerald' or $wbcid === 'ldg-marquise' or $wbcid === 'ldg-asscher' or $wbcid === 'ldg-radiant' or $wbcid === 'ldg-herz' or $wbcid === 'ldg-octagonal' or $wbcid === 'ldg-hexagonal' or $wbcid === 'ldg-andere' or $wbcid === 'ldg-square' or $wbcid === 'ldg-triangular') {
+			if ($wbcid === 'sd' or $wbcid === 'ss' or $wbcid === 'sd-round' or $wbcid === 'sd-oval' or $wbcid === 'sd-cushion' or $wbcid === 'sd-pear' or $wbcid === 'sd-princess' or $wbcid === 'sd-emerald' or $wbcid === 'sd-marquise' or $wbcid === 'sd-asscher' or $wbcid === 'sd-radiant' or $wbcid === 'sd-heart' or $wbcid === 'bd-brilliant' or $wbcid === 'bd-oval' or $wbcid === 'bd-cushion' or $wbcid === 'bd-tropfen' or $wbcid === 'bd-prinzess' or $wbcid === 'bd-emerald' or $wbcid === 'bd-marquise' or $wbcid === 'bd-asscher' or $wbcid === 'bd-radiant' or $wbcid === 'bd-herz' or $wbcid === 'ss-round' or $wbcid === 'ss-oval' or $wbcid === 'ss-cushion' or $wbcid === 'ss-pear' or $wbcid === 'ss-princess' or $wbcid === 'ss-emeral' or $wbcid === 'ss-marquise' or $wbcid === 'ss-heart' or $wbcid === 'ss-asscher' or $wbcid === 'ldg-brilliant' or $wbcid === 'ldg-oval' or $wbcid === 'ldg-cushion' or $wbcid === 'ldg-tropfen' or $wbcid === 'ldg-prinzess' or $wbcid === 'ldg-emerald' or $wbcid === 'ldg-marquise' or $wbcid === 'ldg-asscher' or $wbcid === 'ldg-radiant' or $wbcid === 'ldg-herz' or $wbcid === 'lg-octagonal' or $wbcid === 'lg-hexagonal' or $wbcid === 'lg-andere' or $wbcid === 'lg-square' or $wbcid === 'lg-triangular' or $wbcid === 'lg-brilliant' or $wbcid === 'lg-asscher' or $wbcid === 'lg-emerald' or $wbcid === 'lg-herz' or $wbcid === 'lg-kissen' or $wbcid === 'lg-marquise' or $wbcid === 'lg-oval' or $wbcid === 'lg-prinzess' or $wbcid === 'lg-radiant' or $wbcid === 'lg-tropfen' or $wbcid === 'sdg' or $wbcid === 'sldg' or $wbcid === 'sfdg' or $wbcid === 'sedg' or $wbcid === 'seg') {
 
 			    // Handle wbcid = 'sd'
 			    if ($wbcid === 'sd') {
@@ -1472,7 +1471,7 @@ class WBC_Common {
 
 			    	// Query string for wbcid = ss-asscher
 			    	$query_string = "EO_WBC=1&BEGIN=ringe-modelle&STEP=1&FIRST&SECOND&_attribute=,pa_eo_shape_attr&checklist_pa_eo_shape_attr=asscher";
-			    } elseif ($wbcid === 'ldg-brilliant') {
+			    } elseif ($wbcid === 'ldg-brilliant') {	//aa german langvage mate na url che
 
 			    	// Query string for wbcid = ldg-brilliant
 			    	$query_string = "CAT_LINK=form-brilliant";
@@ -1512,26 +1511,86 @@ class WBC_Common {
 
 			    	// Query string for wbcid = ldg-herz
 			    	$query_string = "CAT_LINK=form-herz";
-			    } elseif ($wbcid === 'ldg-octagonal') {
+			    } elseif ($wbcid === 'lg-octagonal') {
 
-			    	// Query string for wbcid = ldg-octagonal
+			    	// Query string for wbcid = lg-octagonal
 			    	$query_string = "CAT_LINK=eo_gemstones_octagonal_shape_cat&67c0122117b5f=1";
-			    } elseif ($wbcid === 'ldg-hexagonal') {
+			    } elseif ($wbcid === 'lg-hexagonal') {
 
-			    	// Query string for wbcid = ldg-hexagonal
+			    	// Query string for wbcid = lg-hexagonal
 			    	$query_string = "CAT_LINK=hexagonal&67c0122117b5f=1";
-			    } elseif ($wbcid === 'ldg-andere') {
+			    } elseif ($wbcid === 'lg-andere') {
 
-			    	// Query string for wbcid = ldg-andere
+			    	// Query string for wbcid = lg-andere
 			    	$query_string = "CAT_LINK=andere&67c0122117b5f=1";
-			    } elseif ($wbcid === 'ldg-square') {
+			    } elseif ($wbcid === 'lg-square') {
 
-			    	// Query string for wbcid = ldg-square
+			    	// Query string for wbcid = lg-square
 			    	$query_string = "CAT_LINK=eo_gemstones_square_shape_cat&67c0122117b5f=1";
-			    } elseif ($wbcid === 'ldg-triangular') {
+			    } elseif ($wbcid === 'lg-triangular') {
 
-			    	// Query string for wbcid = ldg-triangular
+			    	// Query string for wbcid = lg-triangular
 			    	$query_string = "CAT_LINK=eo_gemstones_triangular_shape_cat&67c0122117b5f=1";
+			    } elseif ($wbcid === 'lg-brilliant') {
+
+			    	// Query string for wbcid = lg-brilliant
+			    	$query_string = "CAT_LINK=brilliant&67c0122117b5f=1";
+			    } elseif ($wbcid === 'lg-asscher') {
+
+			    	// Query string for wbcid = lg-asscher
+			    	$query_string = "CAT_LINK=asscher&67c0122117b5f=1";
+			    } elseif ($wbcid === 'lg-emerald') {
+
+			    	// Query string for wbcid = lg-emerald
+			    	$query_string = "CAT_LINK=emerald&67c0122117b5f=1";
+			    } elseif ($wbcid === 'lg-herz') {
+
+			    	// Query string for wbcid = lg-herz
+			    	$query_string = "CAT_LINK=herz&67c0122117b5f=1";
+			    } elseif ($wbcid === 'lg-kissen') {
+
+			    	// Query string for wbcid = lg-
+			    	$query_string = "CAT_LINK=kissen&67c0122117b5f=1";
+			    } elseif ($wbcid === 'lg-marquise') {
+
+			    	// Query string for wbcid = lg-marquise
+			    	$query_string = "CAT_LINK=marquise&67c0122117b5f=1";
+			    } elseif ($wbcid === 'lg-oval') {
+
+			    	// Query string for wbcid = lg-oval
+			    	$query_string = "CAT_LINK=oval&67c0122117b5f=1";
+			    } elseif ($wbcid === 'lg-prinzess') {
+
+			    	// Query string for wbcid = lg-prinzess
+			    	$query_string = "CAT_LINK=prinzess&67c0122117b5f=1";
+			    } elseif ($wbcid === 'lg-radiant') {
+
+			    	// Query string for wbcid = lg-radiant
+			    	$query_string = "CAT_LINK=eo_gemstones_radiant_shape_cat&67c0122117b5f=1";
+			    } elseif ($wbcid === 'lg-tropfen') {
+
+			    	// Query string for wbcid = lg-tropfen
+			    	$query_string = "CAT_LINK=tropfen&67c0122117b5f=1";
+			    } elseif ($wbcid === 'sdg') {	//aa german langvage mate na url che (main manu ne che)
+
+			    	// Query string for wbcid =sdg 
+			    	$query_string = "EO_WBC=1&BEGIN=diamanten&STEP=1&FIRST&SECOND";
+			    } elseif ($wbcid === 'sldg') {
+
+			    	// Query string for wbcid = sldg
+			    	$query_string = "EO_WBC=1&BEGIN=diamanten&STEP=1&FIRST&SECOND&6085412e4cc9b=1";
+			    } elseif ($wbcid === 'sfdg') {
+
+			    	// Query string for wbcid = sfdg 
+			    	$query_string = "EO_WBC=1&BEGIN=diamanten&STEP=1&FIRST&SECOND&67ac391e31929=1";
+			    } elseif ($wbcid === 'sedg') {
+
+			    	// Query string for wbcid = sedg
+			    	$query_string = "EO_WBC=1&BEGIN=diamanten&STEP=1&FIRST&SECOND&67ac38e9c17be=1";
+			    } elseif ($wbcid === 'seg') {
+
+			    	// Query string for wbcid = seg
+			    	$query_string = "EO_WBC=1&BEGIN=ringe-modelle&STEP=1&FIRST&SECOND";
 			    }
 
 			    // If a query string is set, parse it and merge with $_GET
