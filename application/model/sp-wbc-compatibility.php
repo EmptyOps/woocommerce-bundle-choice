@@ -39,8 +39,7 @@ class SP_WBC_Compatibility extends SP_Compatibility {
 
 		if(!empty($_GET['EO_WBC'])) {
 			add_filter('WPML_filter_link',function($url, $lang_info){
-				/*$__get = $_GET;*/
-				$__get = wbc()->sanitize->_read_global_sanitized('get');
+				$__get = /*$_GET*/wbc()->sanitize->_read_global_sanitized('get');
 				unset($__get['lang']);
 				$query_url=http_build_query($__get);
 				if(strpos($url,'/?')!==false) {

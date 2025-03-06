@@ -21,10 +21,10 @@ class SP_Model_Query extends SP_Query {
 
 		    add_filter('pre_get_posts',function($query ) use($input_method, $additional_data) {		    		
 		    	if( $input_method == 'GET' ) {
-	    	    	$_GET = apply_filters('filter_widget_ajax_pre_get',$_GET);		        	
+	    	    	$_GET = apply_filters('filter_widget_ajax_pre_get',/*$_GET*/wbc()->sanitize->_read_global_sanitized('get'));		        	
 		    	}
 		    	else if( $input_method == 'POST' ) {
-	    	    	$_POST = apply_filters('filter_widget_ajax_pre_get',$_POST);		        	
+	    	    	$_POST = apply_filters('filter_widget_ajax_pre_get',/*$_POST*/wbc()->sanitize->_read_global_sanitized('post'));		        	
 		    	}
 
 				if( wbc()->sanitize->get('is_test') == 1 ) {
