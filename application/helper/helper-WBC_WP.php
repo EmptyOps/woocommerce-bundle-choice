@@ -249,8 +249,15 @@ class WBC_WP {
         // NOTE: here if for certain plugin the check is better and reliable by detecting their class then we can simply apply those if condition by checking the plugin slug and the everything else will be based on the wp api. but ya if that is ever required otherwise we can simply rely on the wp-api as long as that is available and reliable. 
 
         // NOTE: we will always use plugin slug for such condition creation. or the most reliable and simpest method to check if certain plugin is active by passing their slug so we would need to create the applicable function in the wp helper.
+        
+        if( $plugin_root_file_relative_path == 'woo-multi-currency' ) {
 
-        return is_plugin_active( $plugin_root_file_relative_path );
+            return class_exists('WOOMULTI_CURRENCY_Data');
+
+        } else {
+
+            return is_plugin_active( $plugin_root_file_relative_path );
+        }
     }
 
     public function wbc_attachment_url_to_postid( $attachment_url ) {

@@ -144,14 +144,19 @@ if(window.document.splugins.common.is_item_page || window.document.splugins.comm
     return (val == undefined || val == null || val.length <= 0) ? true : false;
  }
 
- // window.document.splugins.common.key_to_title = function(key) {
+window.document.splugins.common.key_to_title = function(key) {
   
- //    let modifiedKey = key.replace(/[-_]/g, " "); // Replace dashes and underscores with spaces
+   let modifiedKey = key.replace(/[-_]/g, " "); // Replace dashes and underscores with spaces
 
- //    let result = modifiedKey.replace(/\b\w/g, c => c.toUpperCase()); // Capitalize first character of each word
+   let result = modifiedKey.replace(/\b\w/g, c => c.toUpperCase()); // Capitalize first character of each word
     
- //    return result;
- // };
+   return result;
+
+   // var uppercaseKey = key.toUpperCase();
+    
+   // // Return the uppercase version of the string
+   // return uppercaseKey;
+};
 
  window.document.splugins.common.find_get_parameter = function(parameterName) {
     
@@ -238,6 +243,40 @@ if(window.document.splugins.common.is_item_page || window.document.splugins.comm
     var rows_txt = temp + "" + param + "=" + paramVal;
     return baseURL + "?" + newAdditionalURL + rows_txt;
  } 
+ window.document.splugins.common.get_variation_url_part = function(variation_id, base_url) {
+
+    var attributes = [];        
+
+    jQuery(jQuery('.variations_form').find('table.variations select')).each(function() {
+        
+        var value = jQuery(this).val();
+        if (value) {
+            attributes.push({
+                id: jQuery(this).attr('name'),
+                value: value
+            });
+        }/* else {
+            allAttributesSet = false;
+        }*/
+    });
+
+    var url = base_url;
+
+    var attributeSlug_global = '';
+    jQuery.each(attributes,function(key, val) {
+        
+        var attributeSlug = val.id.replace('attribute_',''); //val.id.replace('attribute_pa_','');
+        // url += '&_attribute=' + attributeSlug + '&checklist_' + attributeSlug + "=" + val.value;
+        attributeSlug_global += ',' + attributeSlug;
+        url = window.document.splugins.common.updateURLParameter(url, 'checklist_' + attributeSlug, val.value);
+    });
+
+    url = window.document.splugins.common.updateURLParameter(url, '_attribute', attributeSlug_global);
+
+    return url;
+
+ }
+
  window.document.splugins.common.get_variation_url_part = function(variation_id, base_url) {
 
     var attributes = [];        
@@ -1241,7 +1280,7 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
 
         // Calling parent's constructor
         super(element, configs);
-
+        console.log("SP_WBC_Variations_Swatches constructor called");
         // ACTIVE_TODO_OC_START
         // ACTIVE_TODO Till the safari incompatablity issue is not solwed we needed to move below variable decleration insight constructore. As soon as this safari compatiblity issue is fixed as soon move it move this variable declearation section back to the above constuctore.  
         // ACTIVE_TODO_OC_END
@@ -1875,7 +1914,8 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
 
         // -- data.select 28-08-2023 @a
         // data.select = jQuery(element).siblings('select.woo-variation-raw-select');
-        data.select = jQuery(element).parent().find('select.woo-variation-raw-select');
+        // data.select = jQuery(element).parent().find('select.woo-variation-raw-select');
+        data.select = jQuery(element).parent().closest('td').find('select');
         data.selected = '';
         data.options = data.select.find('option');
         data.disabled = data.select.find('option:disabled');
@@ -2844,7 +2884,7 @@ window.document.splugins.wbc.variations.swatches = window.document.splugins.wbc.
 
 window.document.splugins.wbc.variations.swatches.core = function( configs ) {
 
-
+    // console.log("[vs] core function called");
     jQuery.fn.sp_wbc_variations_swatches = function () {
         
         console.log("[vs] module called");
@@ -3370,6 +3410,7 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
         if (!_this./*#*/data_private.is_variation_product) {
 
             console.log("gim [process_images] if2");
+            console.log(_this./*#*/data_private);
 
             _this./*#*/data_private.current_variation = _this./*#*/data_private.product_variations[0];
             
@@ -3801,13 +3842,16 @@ class SP_WBC_Variations_Gallery_Images extends SP_WBC_Variations {
             return false;
         }
         
-        // console.log("gim [slider_thumb_click_listener] _this./*#*/$slider_loop_container_private");
-        // console.log(_this./*#*/$slider_loop_container_private);
+        console.log("gim [slider_thumb_click_listener] _this./*#*/$slider_loop_container_private 26 april");
+        console.log(_this./*#*/$slider_loop_container_private);
 
         _this./*#*/$slider_loop_container_private.on('click', 'img', function () {
             console.log("gim [slider_thumb_click_listener] on_click");
             _this./*#*/on_slider_thumb_click_private(type,this);            
         });
+
+        console.log("gim [slider_thumb_click_listener] _this./*#*/$slider_loop_container_private 26 april on click niche");
+        console.log(_this./*#*/$slider_loop_container_private);
  
     }
  
