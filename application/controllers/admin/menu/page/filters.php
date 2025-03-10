@@ -1406,6 +1406,56 @@ if ( ! class_exists( 'Filters' ) ) {
 							)
 						)
 					),
+
+				'scroll_pagination'=>array(
+
+					'label'=>__("Scroll Pagination"),
+					'form'=>array(
+						'scroll_pagination_section'=>array('label'=>'Scroll Pagination','type'=>'segment','desc'=>'Enable or disable scroll pagination and it\'s related settings.'
+						),
+						'scroll_pagination_first_cat'=>array(
+								'label'=>'First Category',
+								'type'=>'devider',
+							),
+						
+						'enable_scroll_pagination_first_cat'=>array(
+								'label'=>'Enable Scroll Pagination For First Category',
+								'type'=>'checkbox',
+								'sanitize'=>'sanitize_text_field',
+								'value'=>'',
+								'options'=>array('enable_scroll_pagination_first_cat'=>' '),
+								// 'is_id_as_name'=>true,
+								'class'=>array(),
+								'size_class'=>array('eight','wide'),
+								'inline'=>true,
+							),
+						// ACTIVE_TODO The logic of first category and second category is not applicable for shortcode filters. So we need to make sure that on the shortcode admin page we do not show below settings of second category. As well as we need to change the lables from first category to something generic for the above fields. -- to h and -- to jj
+						'scroll_pagination_second_cat'=>array(
+								'label'=>'Second Category',
+								'type'=>'devider',
+							),
+						'enable_scroll_pagination_second_cat'=>array(
+								'label'=>'Enable Scroll Pagination For Second Category',
+								'type'=>'checkbox',
+								'sanitize'=>'sanitize_text_field',
+								'value'=>'',
+								'options'=>array('enable_scroll_pagination_second_cat'=>' '),
+								// 'is_id_as_name'=>true,
+								'class'=>array(),
+								'size_class'=>array('eight','wide'),
+								'inline'=>true,
+							),
+						'scroll_pagination_submit_btn'=>array(
+								'label'=>eowbc_lang('Save'),
+								'type'=>'button',
+								'class'=>array('secondary'),
+								'inline'=>false,
+								'attr'=>array('data-tab_key="scroll_pagination"', 'data-action="save"'),
+							)
+					)
+				),	
+
+
 				'filter_set'=>array(
 
 						'label'=>__("Filter Sets",'woo-bundle-choice'),

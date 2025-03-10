@@ -442,6 +442,7 @@ class EOWBC_Filter_Widget {
 					jQuery(document).ready(function($){			
 
 						jQuery.fn.wbc_flip_toggle_image=function(element){
+    						console.log('eo_wbc_filter_icon_select --');
 							let img = jQuery(element).find('img');						
 							if(jQuery(element).hasClass('eo_wbc_filter_icon_select')) {
 								let toggle_src = jQuery(img).attr('data-toggleimgsrc');
@@ -459,10 +460,11 @@ class EOWBC_Filter_Widget {
 								}
 							}
 						}
-
-						$('.eo_wbc_filter_icon').click(function(){					
-							jQuery.fn.wbc_flip_toggle_image(this);
-						});
+						
+						// ACTIVE_TODO/NOTE below function of toggle image function is moved inside the layers of eo wbc filter js file to fix the issue that it was not working from here since the selected class was not added when it is called from here. so during the upgrade take note of this refactoring. 
+						// $('.eo_wbc_filter_icon').click(function(){					
+						// 	jQuery.fn.wbc_flip_toggle_image(this);
+						// });
 					})
 				</script>
 				<style type="text/css">
@@ -976,7 +978,8 @@ class EOWBC_Filter_Widget {
 			unset($_GET['_category']);
 			unset($_REQUEST['_category']);
 		}*/
-
+		
+		
 		// ACTIVE_TODO it is temporary. and we need to clear it when we clear the eo_wbc_filter js loading. and when we clear eo_wbc_filter js loading at that time also need to drop the redundant loading of eo_wbc_filter js that is from js.vars.asset file.
 		$eo_wbc_object = array("eo_wbc_object" => array(
 			'eo_product_url'=>$product_url,
@@ -995,7 +998,9 @@ class EOWBC_Filter_Widget {
 			// 	-- And as soon as the js layer depandancy on this flag is removed than delete this flag from here. 
 			// ACTIVE_TODO_OC_END
 			'wbc_is_mobile_by_page_sections' => /*1*/(wbc_is_mobile_by_page_sections('cat_shop_page') ? 0 : 1),
-		) );
+			'enable_scroll_pagination'=>$this->scroll_pagination_setting($this->_category),
+		),
+		);
 
 		// if( wbc()->sanitize->get('is_test') == 1 ){
 		// 	wbc_pr('eo_wbc_object1');
@@ -1304,7 +1309,8 @@ class EOWBC_Filter_Widget {
 		$width = $column_width;
 		$reset =  !empty($reset);		
 		$help=(!empty(${$__prefix.'_fconfig_add_help'})?${$__prefix.'_fconfig_add_help_text'}:'');		
-		
+		$query_list = array();		
+
 		$prefix='';
 		if(!empty($text_slider_prefix)){
 			$prefix = $text_slider_prefix;
@@ -1361,6 +1367,25 @@ class EOWBC_Filter_Widget {
 			}
 		}
 
+		/*-------------*/
+		// if(!empty(wbc()->sanitize->get('ATT_LINK'))) {
+		// 	$query_list = array_filter(explode('|',str_replace([' ','+',','],'|',wbc()->sanitize->get('ATT_LINK'))));
+
+		// 	/*$query_list = explode(' ',wbc()->sanitize->get('ATT_LINK'));*/
+
+		// }
+
+		$query_params = \eo\wbc\model\SP_WBC_Router::instance()->get_query_params_formatted('url_and_filter_form', array('attr'), 'REQUEST', null);
+		$query_paramas_options = [];
+		if(in_array($filter['slug'] , $query_params)){
+
+			$query_paramas_options = \eo\wbc\model\SP_WBC_Router::instance()->get_query_params_formatted('url_and_filter_form', array('min_max_attr_options', $filter['slug']) , 'REQUEST', null);
+		}			
+
+		// $mark = in_array($term_item->id,$query_list);				
+		$mark = $query_paramas_options;				
+		/*--------------------------*/
+
 		if($desktop):
 
 		if(($item['filter_template']==apply_filters('eowbc_filter_prefix',$this->filter_prefix).'theme'/* and $this->_category==$this->second_category_slug) or ($this->first_theme=='theme' and $this->_category==$this->first_category_slug*/) or ($item['filter_template'] === 'theme' and ($this->is_shop_cat_filter or $this->is_shortcode_filter))) {
@@ -1369,7 +1394,7 @@ class EOWBC_Filter_Widget {
 			} elseif(($item['filter_template']=='sc4' and $this->_category==$this->first_category_slug) or ($item['filter_template']=='fc4' and $this->_category==$this->first_category_slug)) {
 				wbc()->load->template('publics/filters/text_slider_desktop_4', array("width_class"=>$this->get_width_class($width),"filter"=>$filter,"reset"=>$reset,"non_edit"=>$non_edit,'prefix'=>$prefix,'postfix'=>$postfix,'help'=>$help,'tab_set'=>$tab_set,'filter_ui'=>$this));
 			} elseif ((in_array($item['filter_template'],array('sc3','sc5')) and $this->_category==$this->second_category_slug) or (in_array($item['filter_template'],array('fc3','fc5')) and $this->_category==$this->first_category_slug)) {
-				wbc()->load->template('publics/filters/text_slider_desktop_3', array("width_class"=>$this->get_width_class($width),"filter"=>$filter,"reset"=>$reset,"non_edit"=>$non_edit,'prefix'=>$prefix,'postfix'=>$postfix,'help'=>$help,'tab_set'=>$tab_set,'filter_ui'=>$this));
+				wbc()->load->template('publics/filters/text_slider_desktop_3', array("width_class"=>$this->get_width_class($width),"filter"=>$filter,"reset"=>$reset,"non_edit"=>$non_edit,'prefix'=>$prefix,'postfix'=>$postfix,'help'=>$help,'tab_set'=>$tab_set,'filter_ui'=>$this,'mark'=>$mark));
 			} else {
 				wbc()->load->template('publics/filters/text_slider_desktop', array("width_class"=>$this->get_width_class($width),"filter"=>$filter,"reset"=>$reset,"non_edit"=>$non_edit,'prefix'=>$prefix,'postfix'=>$postfix,'tab_set'=>$tab_set,'help'=>$help,'filter_ui'=>$this)); 
 			}			
@@ -1482,7 +1507,8 @@ class EOWBC_Filter_Widget {
 		$reset =  !empty($reset);
 		$reset_label = (empty($item[$__prefix.'_fconfig_non_auto_adjust'])?true:false);
 		$help=(!empty(${$__prefix.'_fconfig_add_help'})?${$__prefix.'_fconfig_add_help_text'}:'');		
-		
+		$query_list = array();
+
 		if(!empty($text_slider_prefix)){
 			$prefix = $text_slider_prefix;
 		} elseif (!empty(${$__prefix.'_fconfig_prefix'})) {
@@ -1531,6 +1557,26 @@ class EOWBC_Filter_Widget {
 									"class"=>"step_slider_".$filter['slug'],
 									"value"=>$items_slug[count($items_slug)-1],
 								));	
+		
+		/*-------------*/
+		// if(!empty(wbc()->sanitize->get('ATT_LINK'))) {
+		// 	$query_list = array_filter(explode('|',str_replace([' ','+',','],'|',wbc()->sanitize->get('ATT_LINK'))));
+
+		// 	/*$query_list = explode(' ',wbc()->sanitize->get('ATT_LINK'));*/
+
+		// }
+
+		$query_params = \eo\wbc\model\SP_WBC_Router::instance()->get_query_params_formatted('url_and_filter_form', array('attr'), 'REQUEST', null);
+		$query_paramas_options = [];
+		if(in_array($filter['slug'] , $query_params)){
+
+			$query_paramas_options = \eo\wbc\model\SP_WBC_Router::instance()->get_query_params_formatted('url_and_filter_form', array('min_max_attr_options', $filter['slug']) , 'REQUEST', null);
+		}			
+
+		// $mark = in_array($term_item->id,$query_list);				
+		$mark = $query_paramas_options;				
+		/*--------------------------*/		
+
 		if($desktop):
 			if(($item['filter_template']==apply_filters('eowbc_filter_prefix',$this->filter_prefix).'theme'/* and $this->_category==$this->second_category_slug) or ($this->first_theme=='theme' and $this->_category==$this->first_category_slug*/) or ($item['filter_template'] === 'theme' and ($this->is_shop_cat_filter or $this->is_shortcode_filter))) {
 
@@ -1539,7 +1585,7 @@ class EOWBC_Filter_Widget {
 			} elseif(($item['filter_template']=='sc4' and $this->_category==$this->second_category_slug) or ($item['filter_template']=='fc4' and $this->_category==$this->first_category_slug)) {
 				wbc()->load->template('publics/filters/step_slider_desktop_4', array("width_class"=>$this->get_width_class($width),"reset"=>$reset,"non_edit"=>$non_edit,"filter"=>$filter,"items_slug"=>$items_slug,"items_name"=>$items_name,'help'=>$help,'reset_label'=>$reset_label,'tab_set'=>$tab_set,'label_max_size'=>$label_max_size,'filter_ui'=>$this)); 
 			} elseif ((in_array($item['filter_template'],array('sc3','sc5')) and $this->_category==$this->second_category_slug) or (in_array($item['filter_template'],array('fc3','fc5')) and $this->_category==$this->first_category_slug)) {
-				wbc()->load->template('publics/filters/step_slider_desktop_3', array("width_class"=>$this->get_width_class($width),"reset"=>$reset,"non_edit"=>$non_edit,"filter"=>$filter,"items_slug"=>$items_slug,"items_name"=>$items_name,'help'=>$help,'reset_label'=>$reset_label,'tab_set'=>$tab_set,'label_max_size'=>$label_max_size,'filter_ui'=>$this)); 
+				wbc()->load->template('publics/filters/step_slider_desktop_3', array("width_class"=>$this->get_width_class($width),"reset"=>$reset,"non_edit"=>$non_edit,"filter"=>$filter,"items_slug"=>$items_slug,"items_name"=>$items_name,'help'=>$help,'reset_label'=>$reset_label,'tab_set'=>$tab_set,'label_max_size'=>$label_max_size,'filter_ui'=>$this,'mark'=>$mark)); 
 
 			} else {
 
@@ -1634,7 +1680,22 @@ class EOWBC_Filter_Widget {
 	}
 
 	public function input_button($__prefix,$item/*$id,$title,$filter_type,$desktop = 1, $width = '50',$reset = 0,$help='',$advance = 0*/) {
-	
+
+		if(!defined('EO_WBC_FILTER_INPUT_BUTTON_CALLED')){
+			define('EO_WBC_FILTER_INPUT_BUTTON_CALLED',true);
+			
+			?>
+
+			<script type="text/javascript">
+				
+				var EO_WBC_FILTER_INPUT_BUTTON_FILTER_SLUG = [];
+
+			</script>
+
+			<?php
+
+		}
+			
 		extract($item);
 		$tab_set = (!empty( $item[$__prefix.'_fconfig_set'] )?$item[$__prefix.'_fconfig_set']:'');
 		$id = $name;
@@ -1678,7 +1739,7 @@ class EOWBC_Filter_Widget {
 
 			} elseif ((in_array($item['filter_template'],array('sc3','sc5')) and $this->_category==$this->second_category_slug) or (in_array($item['filter_template'],array('fc3','fc5')) and $this->_category==$this->first_category_slug)) {
 				
-				wbc()->load->template('publics/filters/button_desktop_3', array("width_class"=>$this->get_width_class($width),"filter"=>$filter,"reset"=>$reset,'help'=>$help,'tab_set'=>$tab_set,'filter_ui'=>$this));
+				wbc()->load->template('publics/filters/button_desktop_3', array("width_class"=>$this->get_width_class($width),"filter"=>$filter,"reset"=>$reset,'help'=>$help,'tab_set'=>$tab_set,'filter_ui'=>$this,'type'=>$type));
 
 			} else {
 			
@@ -1699,11 +1760,16 @@ class EOWBC_Filter_Widget {
 			
 			wbc()->load->template('publics/filters/button_mobile', array("filter"=>$filter,"reset"=>$reset,'tab_set'=>$tab_set,'help'=>$help,'filter_ui'=>$this)); 
 		endif;
-		
-		if(false){
-		?>
+	
+		?>			
 			<script type="text/javascript">
 				jQuery(document).ready(function($){
+					
+					EO_WBC_FILTER_INPUT_BUTTON_FILTER_SLUG.push("<?php echo $filter['slug']; ?>");
+					<?php
+					if(false){
+					?>
+
 					// --- aa code woo-bundle-choice/asset/js/publics/eo_wbc_filter.js input_type_button_click(); ma move karyo se @a---
 					// --- start ---
 					// $('[data-filter-slug="<?php /*echo $filter['slug']; */?>"]').on('click',function(event){
@@ -1759,27 +1825,39 @@ class EOWBC_Filter_Widget {
 					// --- end ---
 
 					// window.document.splugins.wbc.filters.api.input_type_button_click(event);
+					<?php } ?>
 				});
 			</script>
 		<?php
-		}
 	}
-
+	
 	public function slider_price($desktop=1,$width='50', $reset = 1,$help='',$advance = 0,$prefix='') {
 
 		$width = str_replace('%','',wbc()->options->get_option('filters_filter_setting','filter_setting_price_filter_width',$width));
 
-		$prices = $this->get_filtered_price();
+		// if( wbc()->sanitize->get('is_test') == 1 ) {
+						
+		// 	wbc_pr("eowbc_filter_widget slider_price 1st price");
+		// 	var_dump($prices);
+		// }
+		
+		$prices = $this->get_filtered_price($this->_category);
 		$min    = floor( $prices->min_price );
 		$max    = ceil( $prices->max_price );
 
+		// if( wbc()->sanitize->get('is_test') == 1 ) {
+						
+		// 	wbc_pr("eowbc_filter_widget slider_price 2st price");
+		// 	var_dump($prices);
+		// }
 		
 		$curr_prefix = wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','price_filter_prefix');
 
 		$alternet_slider = '';
 
 		$category = $this->_category;
-		
+		$query_list = array();		
+
 		if(
 			($this->first_category_slug === $category and wbc()->options->get_option('appearance_filters','appearance_filters_alternate_price_filter_first',false)) 
 			or 
@@ -1815,6 +1893,20 @@ class EOWBC_Filter_Widget {
 								));
 		$seprator = wbc()->options->get_option('filters_filter_setting','filter_setting_numeric_slider_seperator','.');
 		
+		if(!empty(wbc()->sanitize->get('min_price')) || !empty(wbc()->sanitize->get('max_price'))) {
+			// -- need to plan flow for this -- to h
+				// NOTE: since we are just continuing with older flow of m so nothing to here as of now, but if required than we need to manage     
+			$query_list = \eo\wbc\model\SP_WBC_Router::instance()->set_query_params_formatted( 'to_filter_field', 
+										                array('price_range'), 
+										                \eo\wbc\model\SP_WBC_Router::instance()->get_query_params_formatted('url_and_filter_form',
+																		                array('price_range'),
+																		                'REQUEST',
+																		                null))/*wbc()->sanitize->get('CAT_LINK')*/;
+		}
+		
+		$mark = $query_list;
+		// $query_paramas_options = \eo\wbc\model\SP_WBC_Router::instance()->get_query_params_formatted('url_and_filter_form', array('attr_options', $term->slug) , 'REQUEST', null);
+
 		if($desktop):
 			/*===bhavesh@emptyops.com comment foe price filter===*/
 			if(/*($this->second_theme=='theme_dropdown' and $this->_category==$this->second_category_slug) or ($this->first_theme=='theme_dropdown' and $this->_category==$this->first_category_slug)*/ (in_array(apply_filters('eowbc_filter_prefix',$this->filter_prefix).'theme_dropdown',array_column($this->__filters__,'filter_template')) !== false ) or (in_array('theme_dropdown',array_column($this->__filters__,'filter_template')) !==false)) {
@@ -1828,7 +1920,7 @@ class EOWBC_Filter_Widget {
 			} elseif((wbc()->options->get_option('filters_altr_filt_widgts','second_category_altr_filt_widgts')=='sc4' and $this->_category==$this->second_category_slug) or (wbc()->options->get_option('filters_altr_filt_widgts','first_category_altr_filt_widgts')=='fc4' and $this->_category==$this->first_category_slug)) {
 				wbc()->load->template('publics/filters/slider_price_desktop_4'.$alternet_slider, array("width_class"=>$this->get_width_class($width),"min"=>$min,"max"=>$max,"reset"=>$reset,'help'=>$help,'seprator'=>$seprator,'prefix'=>$curr_prefix,'postfix'=>$curr_postfix,'filter_ui'=>$this)); 
 			} elseif ((in_array(wbc()->options->get_option('filters_altr_filt_widgts','second_category_altr_filt_widgts'),array('sc3','sc5')) and $this->_category==$this->second_category_slug) or (in_array(wbc()->options->get_option('filters_altr_filt_widgts','first_category_altr_filt_widgts'),array('fc3','fc5')) and $this->_category==$this->first_category_slug)) {
-				wbc()->load->template('publics/filters/slider_price_desktop_3'.$alternet_slider, array("width_class"=>$this->get_width_class($width),"min"=>$min,"max"=>$max,"reset"=>$reset,'help'=>$help,'seprator'=>$seprator,'prefix'=>$curr_prefix,'postfix'=>$curr_postfix,'filter_ui'=>$this)); 
+				wbc()->load->template('publics/filters/slider_price_desktop_3'.$alternet_slider, array("width_class"=>$this->get_width_class($width),"min"=>$min,"max"=>$max,"reset"=>$reset,'help'=>$help,'seprator'=>$seprator,'prefix'=>$curr_prefix,'postfix'=>$curr_postfix,'filter_ui'=>$this,'mark'=>$mark)); 
 			}  else {
 
 				wbc()->load->template('publics/filters/slider_price_desktop'.$alternet_slider, array("width_class"=>$this->get_width_class($width),"min"=>$min,"max"=>$max,"reset"=>$reset,'seprator'=>$seprator,'prefix'=>$curr_prefix,'postfix'=>$curr_postfix,'help'=>$help,'filter_ui'=>$this)); 
@@ -2659,60 +2751,163 @@ class EOWBC_Filter_Widget {
     }
 
     //get min and max price.
-	protected function get_filtered_price() {
-		global $wpdb;
+	// protected function get_filtered_price() {
+	// 	global $wpdb;
 
-		$args = array();
+	// 	$args = array();
 
-		if(property_exists(wc()->query,'query_vars')){
-			$args       = wc()->query->query_vars;
-		}
+	// 	if(property_exists(wc()->query,'query_vars')){
+	// 		$args       = wc()->query->query_vars;
+	// 	}
 
-		$args       = wc()->query->query_vars;
-		$tax_query  = isset( $args['tax_query'] ) ? $args['tax_query'] : array();
-		$meta_query = isset( $args['meta_query'] ) ? $args['meta_query'] : array();
+	// 	$args       = wc()->query->query_vars;
+	// 	$tax_query  = isset( $args['tax_query'] ) ? $args['tax_query'] : array();
+	// 	$meta_query = isset( $args['meta_query'] ) ? $args['meta_query'] : array();
 
-		if ( ! is_post_type_archive('product') && ! empty( $args['taxonomy'] ) && ! empty( $args['term'] ) ) {
-			$tax_query[] = array(
-				'taxonomy' => $args['taxonomy'],
-				'terms'    => array( $args['term'] ),
-				'field'    => 'slug',
-			);
-		}
+	// 	if ( ! is_post_type_archive('product') && ! empty( $args['taxonomy'] ) && ! empty( $args['term'] ) ) {
+	// 		$tax_query[] = array(
+	// 			'taxonomy' => $args['taxonomy'],
+	// 			'terms'    => array( $args['term'] ),
+	// 			'field'    => 'slug',
+	// 		);
+	// 	}
 
-		foreach ( $meta_query + $tax_query as $key => $query ) {
-			if ( ! empty( $query['price_filter'] ) || ! empty( $query['rating_filter'] ) ) {
-				unset( $meta_query[ $key ] );
-			}
-		}
+	// 	foreach ( $meta_query + $tax_query as $key => $query ) {
+	// 		if ( ! empty( $query['price_filter'] ) || ! empty( $query['rating_filter'] ) ) {
+	// 			unset( $meta_query[ $key ] );
+	// 		}
+	// 	}
 
-		$meta_query = new \WP_Meta_Query( $meta_query );
-		$tax_query  = new \WP_Tax_Query( $tax_query );
+	// 	$meta_query = new \WP_Meta_Query( $meta_query );
+	// 	$tax_query  = new \WP_Tax_Query( $tax_query );
 
-		$meta_query_sql = $meta_query->get_sql( 'post', $wpdb->posts, 'ID' );
-		$tax_query_sql  = $tax_query->get_sql( $wpdb->posts, 'ID' );
+	// 	$meta_query_sql = $meta_query->get_sql( 'post', $wpdb->posts, 'ID' );
+	// 	$tax_query_sql  = $tax_query->get_sql( $wpdb->posts, 'ID' );
 
-		$sql  = "SELECT min( FLOOR( price_meta.meta_value ) ) as min_price, max( CEILING( price_meta.meta_value ) ) as max_price FROM {$wpdb->posts} ";
-		$sql .= " LEFT JOIN {$wpdb->postmeta} as price_meta ON {$wpdb->posts}.ID = price_meta.post_id " . $tax_query_sql['join'] . $meta_query_sql['join'];
-		$sql .= " 	WHERE {$wpdb->posts}.post_type IN ('" . implode( "','", array_map( 'esc_sql', apply_filters( 'woocommerce_price_filter_post_type', array( 'product' ) ) ) ) . "')
-			AND {$wpdb->posts}.post_status = 'publish'
-			AND price_meta.meta_key IN ('" . implode( "','", array_map( 'esc_sql', apply_filters( 'woocommerce_price_filter_meta_keys', array( '_price' ) ) ) ) . "')
-			AND price_meta.meta_value > '' ";
-		$sql .= $tax_query_sql['where'] . $meta_query_sql['where'];
+	// 	$sql  = "SELECT min( FLOOR( price_meta.meta_value ) ) as min_price, max( CEILING( price_meta.meta_value ) ) as max_price FROM {$wpdb->posts} ";
+	// 	$sql .= " LEFT JOIN {$wpdb->postmeta} as price_meta ON {$wpdb->posts}.ID = price_meta.post_id " . $tax_query_sql['join'] . $meta_query_sql['join'];
+	// 	$sql .= " 	WHERE {$wpdb->posts}.post_type IN ('" . implode( "','", array_map( 'esc_sql', apply_filters( 'woocommerce_price_filter_post_type', array( 'product' ) ) ) ) . "')
+	// 		AND {$wpdb->posts}.post_status = 'publish'
+	// 		AND price_meta.meta_key IN ('" . implode( "','", array_map( 'esc_sql', apply_filters( 'woocommerce_price_filter_meta_keys', array( '_price' ) ) ) ) . "')
+	// 		AND price_meta.meta_value > '' ";
+	// 	$sql .= $tax_query_sql['where'] . $meta_query_sql['where'];
 
-		$search = @\WC_Query::get_main_search_query_sql();
+	// 	$search = @\WC_Query::get_main_search_query_sql();
 
-		if ( $search ) {
-			$sql .= ' AND ' . $search;
-		}
+	// 	if ( $search ) {
+	// 		$sql .= ' AND ' . $search;
+	// 	}
 
-		$sql = apply_filters( 'woocommerce_price_filter_sql', $sql, $meta_query_sql, $tax_query_sql );
+	// 	$sql = apply_filters( 'woocommerce_price_filter_sql', $sql, $meta_query_sql, $tax_query_sql );
 
-		$sql = apply_filters( 'eowbc_woocommerce_price_filter_sql', $sql, $meta_query_sql, $tax_query_sql );
+	// 	$sql = apply_filters( 'eowbc_woocommerce_price_filter_sql', $sql, $meta_query_sql, $tax_query_sql );
 
 
 
-		return $wpdb->get_row( $sql ); // WPCS: unprepared SQL ok.
+	// 	return $wpdb->get_row( $sql ); // WPCS: unprepared SQL ok.
+	// }
+	protected function get_filtered_price($category_slug = null) {
+	    if (!empty($category_slug)) {
+	        global $wpdb;
+
+	        $tax_query = array(
+	            array(
+	                'taxonomy' => 'product_cat',
+	                'field' => 'slug',
+	                'terms' => $category_slug,
+	            )
+	        );
+
+	        $meta_query = array(
+	            array(
+	                'key' => '_price',
+	                'value' => '',
+	                'compare' => '>',
+	            )
+	        );
+
+	        $meta_query = new \WP_Meta_Query($meta_query);
+	        $tax_query = new \WP_Tax_Query($tax_query);
+
+	        $meta_query_sql = $meta_query->get_sql('post', $wpdb->posts, 'ID');
+	        $tax_query_sql = $tax_query->get_sql($wpdb->posts, 'ID');
+
+	        $sql  = "SELECT MIN( FLOOR( price_meta.meta_value ) ) AS min_price, MAX( CEILING( price_meta.meta_value ) ) AS max_price FROM {$wpdb->posts} ";
+	        $sql .= "LEFT JOIN {$wpdb->postmeta} AS price_meta ON {$wpdb->posts}.ID = price_meta.post_id " . $tax_query_sql['join'] . $meta_query_sql['join'];
+	        $sql .= " WHERE {$wpdb->posts}.post_type = 'product'
+	            AND {$wpdb->posts}.post_status = 'publish'
+	            AND price_meta.meta_key = '_price'
+	            AND price_meta.meta_value > '' ";
+	        $sql .= $tax_query_sql['where'] . $meta_query_sql['where'];
+
+	        $search = @\WC_Query::get_main_search_query_sql();
+
+	        if ($search) {
+	            $sql .= ' AND ' . $search;
+	        }
+
+	        $sql = apply_filters('woocommerce_price_filter_sql', $sql, $meta_query_sql, $tax_query_sql);
+	        $sql = apply_filters('eowbc_woocommerce_price_filter_sql', $sql, $meta_query_sql, $tax_query_sql);
+
+	        return $wpdb->get_row($sql); // WPCS: unprepared SQL ok.
+
+	    } else {
+	        
+	        global $wpdb;
+
+	        $args = array();
+
+	        if(property_exists(wc()->query,'query_vars')){
+	            $args       = wc()->query->query_vars;
+	        }
+
+	        $args       = wc()->query->query_vars;
+	        $tax_query  = isset( $args['tax_query'] ) ? $args['tax_query'] : array();
+	        $meta_query = isset( $args['meta_query'] ) ? $args['meta_query'] : array();
+
+	        if ( ! is_post_type_archive('product') && ! empty( $args['taxonomy'] ) && ! empty( $args['term'] ) ) {
+	            $tax_query[] = array(
+	                'taxonomy' => $args['taxonomy'],
+	                'terms'    => array( $args['term'] ),
+	                'field'    => 'slug',
+	            );
+	        }
+
+	        foreach ( $meta_query + $tax_query as $key => $query ) {
+	            if ( ! empty( $query['price_filter'] ) || ! empty( $query['rating_filter'] ) ) {
+	                unset( $meta_query[ $key ] );
+	            }
+	        }
+
+	        $meta_query = new \WP_Meta_Query( $meta_query );
+	        $tax_query  = new \WP_Tax_Query( $tax_query );
+
+	        $meta_query_sql = $meta_query->get_sql( 'post', $wpdb->posts, 'ID' );
+	        $tax_query_sql  = $tax_query->get_sql( $wpdb->posts, 'ID' );
+
+	        $sql  = "SELECT min( FLOOR( price_meta.meta_value ) ) as min_price, max( CEILING( price_meta.meta_value ) ) as max_price FROM {$wpdb->posts} ";
+	        $sql .= " LEFT JOIN {$wpdb->postmeta} as price_meta ON {$wpdb->posts}.ID = price_meta.post_id " . $tax_query_sql['join'] . $meta_query_sql['join'];
+	        $sql .= "   WHERE {$wpdb->posts}.post_type IN ('" . implode( "','", array_map( 'esc_sql', apply_filters( 'woocommerce_price_filter_post_type', array( 'product' ) ) ) ) . "')
+	            AND {$wpdb->posts}.post_status = 'publish'
+	            AND price_meta.meta_key IN ('" . implode( "','", array_map( 'esc_sql', apply_filters( 'woocommerce_price_filter_meta_keys', array( '_price' ) ) ) ) . "')
+	            AND price_meta.meta_value > '' ";
+	        $sql .= $tax_query_sql['where'] . $meta_query_sql['where'];
+
+	        $search = @\WC_Query::get_main_search_query_sql();
+
+	        if ( $search ) {
+	            $sql .= ' AND ' . $search;
+	        }
+
+	        $sql = apply_filters( 'woocommerce_price_filter_sql', $sql, $meta_query_sql, $tax_query_sql );
+
+	        $sql = apply_filters( 'eowbc_woocommerce_price_filter_sql', $sql, $meta_query_sql, $tax_query_sql );
+
+
+
+	        return $wpdb->get_row( $sql ); // WPCS: unprepared SQL ok.
+	    }
+	    
 	}
 
 	public function localize_script(){
@@ -2754,6 +2949,7 @@ class EOWBC_Filter_Widget {
 						// 	-- And as soon as the js layer depandancy on this flag is removed than delete this flag from here. 
 						// ACTIVE_TODO_OC_END
 						'wbc_is_mobile_by_page_sections' => /*1*/(wbc_is_mobile_by_page_sections('cat_shop_page') ? 0 : 1),
+						'enable_scroll_pagination'=>$this->scroll_pagination_setting($this->_category),
     				);
 
 		?>
@@ -3217,6 +3413,42 @@ class EOWBC_Filter_Widget {
 	public function get_filter_sets($filter_prefix=''){
 
 		return /*$filter_sets =*/ unserialize(wbc()->options->get_option_group('filters_'.$filter_prefix.'filter_set',"a:0:{}"));
+	}
+
+	private function scroll_pagination_setting($current_category) {
+
+		$first = wbc()->options->get_option('filters_'.$this->filter_prefix.'scroll_pagination','enable_scroll_pagination_first_cat');
+		$second = wbc()->options->get_option('filters_'.$this->filter_prefix.'scroll_pagination','enable_scroll_pagination_second_cat');
+
+		$is_first_category = false;
+		$is_second_category = false;
+
+		if(\eo\wbc\model\SP_WBC_Router::instance()->is_first_category(null, $current_category)){
+
+			$is_first_category = true;
+
+		} elseif(\eo\wbc\model\SP_WBC_Router::instance()->is_second_category(null, $current_category)){
+
+			$is_second_category = true;
+		}
+
+		if($is_first_category) {
+
+			if(!empty($first) && $first == 'enable_scroll_pagination_first_cat') {
+
+				return 1;
+			}
+
+		} else if($is_second_category) {
+
+			if(!empty($second) && $second == 'enable_scroll_pagination_second_cat') {
+
+				return 1;
+			}
+		}
+
+		return 0;
+
 	}	
 }	
 ?>
