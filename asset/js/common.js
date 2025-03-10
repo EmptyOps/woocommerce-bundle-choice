@@ -144,14 +144,44 @@ if(window.document.splugins.common.is_item_page || window.document.splugins.comm
     return (val == undefined || val == null || val.length <= 0) ? true : false;
  }
 
- // window.document.splugins.common.key_to_title = function(key) {
-  
- //    let modifiedKey = key.replace(/[-_]/g, " "); // Replace dashes and underscores with spaces
+window.document.splugins.common.is_empty = function (val) {
 
- //    let result = modifiedKey.replace(/\b\w/g, c => c.toUpperCase()); // Capitalize first character of each word
-    
- //    return result;
- // };
+    return (val == undefined || val == null || val.length <= 0) ? true : false;
+}
+
+window.document.splugins.common.is_potential_numeric_string = function (input) {
+    // Replace spaces and dots with empty strings to attempt a numeric conversion
+
+    let modifiedInput = input.replace(/[. ]/g, "");
+
+    // Check if the modified input is a valid numeric value
+    if (!isNaN(modifiedInput)) {
+
+        return true;
+    }
+
+    // If not valid, return false
+    return false;
+};
+
+window.document.splugins.common.key_to_title = function (key) {
+
+    let modifiedKey = key.replace(/[-_]/g, " "); // Replace dashes and underscores with spaces
+
+    let result = modifiedKey.replace(/\b\w/g, c => c.toUpperCase()); // Capitalize first character of each word
+
+    return result;
+
+    // var uppercaseKey = key.toUpperCase();
+
+    // // Return the uppercase version of the string
+    // return uppercaseKey;
+};
+
+window.document.splugins.common.key_to_number = function (key) {
+    // Replace dashes and underscores with periods
+    return key.replace(/[-_]/g, ".");
+};
 
  window.document.splugins.common.find_get_parameter = function(parameterName) {
     
