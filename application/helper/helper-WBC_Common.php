@@ -535,6 +535,31 @@ class WBC_Common {
 	        return array_intersect_key($array, array_fill_keys($keys, '1'));
 	    }
 	}
+	
+	public function array_slice_keys_second_dimension($array, $keys = null) {
+	    if (empty($keys)) {
+	        return $array;
+	    }
+	    if (!is_array($keys)) {
+	        $keys = array($keys);
+	    }
+	    if (!is_array($array)) {
+	        return array();
+	    }
+
+	    $result = array();
+
+	    foreach ($array as $key => $subArray) {
+	        if (is_array($subArray)) {
+	            $result[$key] = array_intersect_key($subArray, array_fill_keys($keys, '1'));
+	        } else {
+	            $result[$key] = $subArray;
+	        }
+	    }
+
+	    return $result;
+	}
+
 
 	public function special_characters() {
 

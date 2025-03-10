@@ -164,7 +164,10 @@ class Cart extends \eo\wbc\system\core\publics\Eowbc_Base_Model_Publics {
                 );
             }
         }
+        //ahiya privew page par thi add to cart kariye tyre ave che
+        // die("cart class EO_WBC_MAPS set hook upper");
         wbc()->session->set('EO_WBC_MAPS',apply_filters('eowbc_cart_render_maps',$eo_wbc_maps));
+        // die("cart class EO_WBC_MAPS set");
     }
 
     public function process_cart($maps){
@@ -255,6 +258,11 @@ class Cart extends \eo\wbc\system\core\publics\Eowbc_Base_Model_Publics {
         $cart_actual_content = false;
         add_action('woocommerce_before_cart',function() use (&$cart_actual_content,&$maps){
             $cart_actual_content = WC()->cart->get_cart_contents();
+
+            // added on 10/06/2024
+            // ACTIVE_TODO temp. belowe is a temperory logic to supoort the data requierment of ppom patch. so we need to remove it when ever we get a standerd solution to cover ppom patch data requierment.
+            wbc()->session->set('EO_WBC_CART_ACTUAL_CONTENT',wbc()->common->array_slice_keys_second_dimension($cart_actual_content, array('ppom', 'product_id', 'variation_id','sp_ppom_patch_data')));
+
             WC()->cart->set_cart_contents($maps);
         });
         
