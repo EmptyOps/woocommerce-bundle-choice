@@ -3,6 +3,8 @@ defined( 'ABSPATH' ) || exit;
 
 class WBC_Common {
 
+	//test for the this branch
+
 	private static $_instance = null;
 
 	public static function instance() {
