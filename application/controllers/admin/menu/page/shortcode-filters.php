@@ -27,6 +27,7 @@ if ( ! class_exists( 'Shortcode_Filters' ) ) {
 
 			unset($form_definition['s_fconfig']);
 			unset($form_definition['filter_set']);
+			unset($form_definition['scroll_pagination']);
 			
 			if(isset($form_definition['d_fconfig']['form']['d_fconfig_builder'])) {
 				unset($form_definition['d_fconfig']['form']['d_fconfig_builder']);

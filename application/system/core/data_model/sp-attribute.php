@@ -290,4 +290,10 @@ class SP_Attribute extends SP_Entity {
 			
 		return $attribute_taxonomy;
 	}
+
+	public static function get_terms($attribute_slug){
+
+		return get_terms( array('taxonomy' => $attribute_slug, 'hide_empty' => false) );
+
+	}		
 }

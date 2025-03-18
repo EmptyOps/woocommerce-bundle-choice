@@ -17,7 +17,7 @@
 	
 	<div class="ui horizontal segments" data-reset="reset_button(new Event('click'),'.checklist_<?php echo $filter['slug'] ?>')">
 		<?php foreach ($filter['list'] as $term) : ?>
-			<div class="ui segment wbc-button-input checklist_<?php echo $filter['slug'] ?>" id='check_<?php echo $term['slug']; ?>' data-slug="<?php echo $term['slug']; ?>" data-filter-slug="<?php echo $filter['slug']; ?>" >
+			<div class="ui segment wbc-button-input checklist_<?php echo $filter['slug'] ?>" id='check_<?php echo $term['slug']; ?>' data-slug="<?php echo $term['slug']; ?>" data-filter-slug="<?php echo $filter['slug']; ?>"  data-type="<?php echo $type; ?>" >
 		      <span><?php echo $term['name']; ?></span>
 		    </div>			
 		<?php endforeach; ?>

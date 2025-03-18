@@ -517,6 +517,31 @@ class WBC_Common {
 	        return array_intersect_key($array, array_fill_keys($keys, '1'));
 	    }
 	}
+	
+	public function array_slice_keys_second_dimension($array, $keys = null) {
+	    if (empty($keys)) {
+	        return $array;
+	    }
+	    if (!is_array($keys)) {
+	        $keys = array($keys);
+	    }
+	    if (!is_array($array)) {
+	        return array();
+	    }
+
+	    $result = array();
+
+	    foreach ($array as $key => $subArray) {
+	        if (is_array($subArray)) {
+	            $result[$key] = array_intersect_key($subArray, array_fill_keys($keys, '1'));
+	        } else {
+	            $result[$key] = $subArray;
+	        }
+	    }
+
+	    return $result;
+	}
+
 
 	public function special_characters() {
 
@@ -1173,6 +1198,40 @@ class WBC_Common {
 		return $countries_list;
 	}
 
+
+	public function get_variation_url_part($variation_id, $attributes) {
+
+	    if(!empty($variation_id) && empty($attributes)){
+	    
+	    	$variation_data = new WC_Product_Variation($variation_id);	
+			
+			if(!empty($variation_data)){
+			
+			    $attributes = $variation_data->get_variation_attributes();
+			}    
+	    }
+
+	    $link_parts = array();
+	   	
+	   	if(!empty($attributes)){
+	   		
+		    $attribute_keys = array();
+
+		    foreach ($attributes as $attribute_name_v => $attribute_value) {
+		        $attribute_name = str_replace('attribute_', '', $attribute_name_v);
+		        $attribute_keys[] = $attribute_name;
+		        $link_parts[] = 'checklist_'.$attribute_name.'='.$attribute_value;
+		    }
+
+		    $attribute_keys_value = implode(',', $attribute_keys);
+		    $link_parts[] = "_attribute=,$attribute_keys_value";
+	   	}
+
+	    $link_part = implode('&', $link_parts);
+
+	    return $link_part;
+	}
+
 	public function is_nice_urls_enabled() {
 
 		// Check if the constant is already defined
@@ -1775,5 +1834,11 @@ function wbc_is_nice_urls_enabled() {
 function wbc_placeholder_img_src() {
 
 	return wbc()->common->placeholder_img_src();
+
+}
+
+function wbc_get_variation_url_part($variation_id,$attributes=array()) {
+
+	return wbc()->common->get_variation_url_part($variation_id,$attributes);
 
 }

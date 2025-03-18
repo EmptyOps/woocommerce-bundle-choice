@@ -103,6 +103,14 @@ class SP_Compatibility {
 	 		if ($current_theme_key == 'themes___purple_theme') {
 	        	
 	        	return 'woocommerce_after_add_to_cart_form';
+	        } elseif ($current_theme_key == 'themes___woodmart') {
+	        	
+	        	return 'woocommerce_after_add_to_cart_form';
+
+	        } else {
+
+	        	// ACTIVE_TODO Maybe else Badhi Theme Ma Work Karse Jo no kare to Navi elseif banavi.
+	        	return 'woocommerce_after_add_to_cart_form';
 	        }
 
 	        return $args['hook_key'];
@@ -115,9 +123,12 @@ class SP_Compatibility {
 
 	 		$current_theme_key = wbc()->common->current_theme_key();
 
-			// ACTIVE_TODO/TODO here the two different teams may name the same name to a child theme means the alpha-store-pro-child name could be used by someone else and at that time our confirmation can not be considered valid so we may like to rectify theme detection and make it still deep. 
-	 		if($current_theme_key != "themes___alpha-store-pro-child") {
-
+			// ACTIVE_TODO/TODO here the two different teams may name the same name to a child theme means the alpha-store-pro-child name could be used by someone else and at that time our confirmation can not be considered valid so we may like to rectify theme detection and make it still deep.
+			if(
+	 			$current_theme_key != "themes___alpha-store-pro-child"
+	 			&& 
+	 			$current_theme_key != "themes___astra"
+	 		) { 
 				return false;
 
 			} else{

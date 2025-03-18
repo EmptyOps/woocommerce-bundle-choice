@@ -214,6 +214,7 @@ class Preview extends \eo\wbc\system\core\publics\Eowbc_Base_Model_Publics {
                         //All is good so we saved mapps to session.
                         $eo_wbc_maps[]=wbc()->session->get('EO_WBC_SETS');                            
                         wbc()->session->set('EO_WBC_MAPS',$eo_wbc_maps);
+                        die("preview class eo_wbc_add_this_to_cart");
                     }
                     else
                     {

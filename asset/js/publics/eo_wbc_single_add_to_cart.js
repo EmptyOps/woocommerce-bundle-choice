@@ -6,8 +6,9 @@ jQuery(document).ready(function(){
 
 		if( typeof(window.document.splugins.common.is_handle_variation_id_pair_builder_step_2) != 'undefined' && !window.document.splugins.common.is_empty(window.document.splugins.common.is_handle_variation_id_pair_builder_step_2) ){
 
-			var variation_id_input = jQuery('.variation_id').val();
-            window.eo_wbc_object.url = window.document.splugins.common.updateURLParameter(window.eo_wbc_object.url,'variation_id',variation_id_input);
+			// var variation_id_input = jQuery('.variation_id').val();
+            // window.eo_wbc_object.url = window.document.splugins.common.updateURLParameter(window.eo_wbc_object.url,'variation_id',variation_id_input);
+            window.eo_wbc_object.url = window.document.splugins.common.get_variation_url_part(null,window.eo_wbc_object.url);            
 		}
 		
 		if (window.document.splugins.common.is_nice_urls_enabled) {
