@@ -111,7 +111,6 @@ class Eowbc_Sample_Data {
 
 	        // update_option('eo_wbc_filter_enable','1');    
 	        $res = $this->data_template->set_configs_after_attributes();
-
 	        wbc()->options->delete($feature_key.'_created_attribute');
 
 	        return $res;
@@ -858,11 +857,11 @@ class Eowbc_Sample_Data {
 	}
 
 	function create_attribute( $args ){
-		
-	    if(!empty($args) AND is_array($args)){
-	    	
-	    	foreach ($args as $index=>$attribute) {	
 
+	    if(!empty($args) AND is_array($args)){
+
+	    	foreach ($args as $index=>$attribute) {	
+	    		
 	    		$id = wbc()->wc->slug_to_id( 'attr', $attribute['slug'] );
 
 	    		if (!empty($id)) {
@@ -984,6 +983,7 @@ class Eowbc_Sample_Data {
 		    	}	    					    	
 	    		$args[$index]['id']=$id;
 	    	}
+
 	    	return $args;
 	    }	    
 	}

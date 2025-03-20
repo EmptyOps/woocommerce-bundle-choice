@@ -91,7 +91,7 @@ class SP_Attribute extends SP_Entity {
 	        'type'    => (empty($data['type']['value'])?'select':$data['type']['value']),
 	        'order_by' => 'menu_order',
 	        'has_archives'  => 1, // Enable archives ==> true (or 1)
-	    );		
+	    );
 
 		$id = wbc()->wc->slug_to_id( 'attr', $attribute_data['slug'] );
 
@@ -225,7 +225,7 @@ class SP_Attribute extends SP_Entity {
     			}
     		}			    		
     	}	    					    	
-	
+		
 	   	return $id; //$data;
 
 
