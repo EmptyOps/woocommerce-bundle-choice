@@ -144,18 +144,38 @@ if(window.document.splugins.common.is_item_page || window.document.splugins.comm
     return (val == undefined || val == null || val.length <= 0) ? true : false;
  }
 
-window.document.splugins.common.key_to_title = function(key) {
-  
-   let modifiedKey = key.replace(/[-_]/g, " "); // Replace dashes and underscores with spaces
+window.document.splugins.common.is_potential_numeric_string = function (input) {
+    // Replace dashes, underscores and dots with empty strings to attempt a numeric conversion
 
-   let result = modifiedKey.replace(/\b\w/g, c => c.toUpperCase()); // Capitalize first character of each word
-    
-   return result;
+    let modifiedInput = input.replace(/[.-_]/g, "");
 
-   // var uppercaseKey = key.toUpperCase();
-    
-   // // Return the uppercase version of the string
-   // return uppercaseKey;
+    // Check if the modified input is a valid numeric value
+    if (!isNaN(modifiedInput)) {
+
+        return true;
+    }
+
+    // If not valid, return false
+    return false;
+};
+
+window.document.splugins.common.key_to_title = function (key) {
+
+    let modifiedKey = key.replace(/[-_]/g, " "); // Replace dashes and underscores with spaces
+
+    let result = modifiedKey.replace(/\b\w/g, c => c.toUpperCase()); // Capitalize first character of each word
+
+    return result;
+
+    // var uppercaseKey = key.toUpperCase();
+
+    // // Return the uppercase version of the string
+    // return uppercaseKey;
+};
+
+window.document.splugins.common.key_to_number = function (key) {
+    //Here we are replacing dashes and underscores with periods. So it is important that we do not consider white spaces as part of the key. In the future, if we want to support it, we should provide a separate flag in this function so that collaborators can specify whether they want to consider white spaces.
+    return key.replace(/[-_]/g, ".");
 };
 
  window.document.splugins.common.find_get_parameter = function(parameterName) {
