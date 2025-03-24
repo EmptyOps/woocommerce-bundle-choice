@@ -921,6 +921,9 @@ class Tiny_Features_View {
         // added on 28-11-2024.
         $form['data'] = \eo\wbc\model\admin\Eowbc_Model::instance()->get( $form['data'], $args );
 
+
+        \eo\wbc\model\admin\Eowbc_Model::instance()->admin_css();
+        
 		wbc()->load->model('admin\form-builder');
 		\eo\wbc\model\admin\Form_Builder::instance()->build($form);
 		wbc()->load->asset('js','admin/tiny-feature/shortcode-filter');

@@ -611,5 +611,15 @@ class Eowbc_Model {
 		<?php
 	}
 
+	public function admin_css() {
+
+		// ACTIVE_TODO move below css to admin.css file and load that asset file instead of inline below -- to kg 
+		?>
+		<style>				        
+
+		</style>
+		<?php
+	}
+
 }
 

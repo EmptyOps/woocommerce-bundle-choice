@@ -204,12 +204,13 @@ class Eowbc_Base_Model_Publics {
 		
 			$res['response_data'] = $response['response_data'];	
 		}
-
+		// wbc_pr($res);
+		// die('resssssss');
 		return $res;
 	}
 
 	public static function handle_response($parsed, $throw_types = array('error')){
-		
+		// die('handle_response in');
 		// NOTE: here other applicable layers of handle response function can come or may come.
 
 		if ( in_array($parsed['type'], $throw_types) ) {
