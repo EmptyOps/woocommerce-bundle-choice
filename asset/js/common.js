@@ -144,20 +144,44 @@ if(window.document.splugins.common.is_item_page || window.document.splugins.comm
     return (val == undefined || val == null || val.length <= 0) ? true : false;
  }
 
-window.document.splugins.common.is_potential_numeric_string = function (input) {
-    // Replace dashes, underscores and dots with empty strings to attempt a numeric conversion
+// window.document.splugins.common.is_potential_numeric_string = function (input) {
+//     // Replace dashes, underscores and dots with empty strings to attempt a numeric conversion
 
-    let modifiedInput = input.replace(/[.-_]/g, "");
+//     let modifiedInput = input.replace(/[.-_]/g, "");
 
-    // Check if the modified input is a valid numeric value
-    if (!isNaN(modifiedInput)) {
+//     // Check if the modified input is a valid numeric value
+//     if (!isNaN(modifiedInput)) {
 
-        return true;
-    }
+//         return true;
+//     }
 
-    // If not valid, return false
-    return false;
-};
+//     // If not valid, return false
+//     return false;
+// };
+/**
+ * Function to check if a list of strings contains potential numeric values.
+ * example
+ * // Usage
+ * Array of strings input
+ * let result2 = processNumericStrings(["1-00-ct", "abc-123", "45.6"]);
+ * // Output: ["100", "123", "456"]
+ */
+window.document.splugins.common.is_potential_numeric_string = function (input) {     
+    // Replace dashes, underscores and dots with empty strings to attempt a numeric conversion     
+    let modifiedInput = input.replace(/[.-_]/g, "");      
+    
+    // Additional step to handle arguments with unwanted text (replace unwanted text) 
+    modifiedInput = modifiedInput.replace(/[^0-9]/g, ""); // Added line to remove all non-numeric characters
+    
+    // Check if the modified input is a valid numeric value     
+    if (!isNaN(modifiedInput)) {          
+        return true;     
+    }      
+    
+    // If not valid, return false     
+    return false; 
+};  
+
 
 window.document.splugins.common.key_to_title = function (key) {
 
