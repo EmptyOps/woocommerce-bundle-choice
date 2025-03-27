@@ -166,20 +166,26 @@ if(window.document.splugins.common.is_item_page || window.document.splugins.comm
  * let result2 = processNumericStrings(["1-00-ct", "abc-123", "45.6"]);
  * // Output: ["100", "123", "456"]
  */
-window.document.splugins.common.is_potential_numeric_string = function (input) {     
-    // Replace dashes, underscores and dots with empty strings to attempt a numeric conversion     
-    let modifiedInput = input.replace(/[.-_]/g, "");      
-    
-    // Additional step to handle arguments with unwanted text (replace unwanted text) 
-    modifiedInput = modifiedInput.replace(/[^0-9]/g, ""); // Added line to remove all non-numeric characters
-    
-    // Check if the modified input is a valid numeric value     
-    if (!isNaN(modifiedInput)) {          
-        return true;     
-    }      
-    
-    // If not valid, return false     
-    return false; 
+window.document.splugins.common.is_potential_numeric_string = function (input, skipStrings) {
+    // Normalize skipStrings to an array, even if it’s a single string or undefined
+    const skipArray = Array.isArray(skipStrings)
+        ? skipStrings
+        : skipStrings
+        ? [skipStrings]
+        : [];
+
+    // Helper function to check if a string is numeric after modification
+    function isNumericAfterModification(str) {
+        let modifiedInput = str.replace(/[.-_]/g, ""); // Replace unwanted characters
+        return !isNaN(modifiedInput); // Check if numeric
+    }
+
+    // Process the input array
+    for (let skipString of skipArray) {
+        input = input.replace(skipString, ""); // Replace all occurrences
+    }
+
+    return isNumericAfterModification(input); // Return if the processed input is numeric
 };  
 
 
@@ -197,9 +203,21 @@ window.document.splugins.common.key_to_title = function (key) {
     // return uppercaseKey;
 };
 
-window.document.splugins.common.key_to_number = function (key) {
+// window.document.splugins.common.key_to_number = function (key) {
     
+//     //ACTIVE_TODO Here we are replacing dashes and underscores with periods. So it is important that we do not consider white spaces as part of the key. In the future, if we want to support it, we should provide a separate flag in this function so that collaborators can specify whether they want to consider white spaces.
+//     return key.replace(/[-_]/g, ".");
+// };
+window.document.splugins.common.key_to_number = function (key, replacements = {}) {
     //ACTIVE_TODO Here we are replacing dashes and underscores with periods. So it is important that we do not consider white spaces as part of the key. In the future, if we want to support it, we should provide a separate flag in this function so that collaborators can specify whether they want to consider white spaces.
+    if (typeof replacements === "object" && replacements !== null && Object.keys(replacements).length > 0) {
+        // Loop through each replacement key-value pair
+        for (const [find, replace] of Object.entries(replacements)) {
+            key = key.split(find).join(replace); // Replace all occurrences without RegExp
+        }
+    }
+
+    // Replace dashes and underscores with periods
     return key.replace(/[-_]/g, ".");
 };
 
