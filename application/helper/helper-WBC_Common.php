@@ -1403,7 +1403,7 @@ class WBC_Common {
 	        unset($_GET['wbcid']);
 
 			// Check if wbcid is present in the URL
-			if ($wbcid === 'sd' or $wbcid === 'ss' or $wbcid === 'sd-round' or $wbcid === 'sd-oval' or $wbcid === 'sd-cushion' or $wbcid === 'sd-pear' or $wbcid === 'sd-princess' or $wbcid === 'sd-emerald' or $wbcid === 'sd-marquise' or $wbcid === 'sd-asscher' or $wbcid === 'sd-radiant' or $wbcid === 'sd-heart' or $wbcid === 'bd-brilliant' or $wbcid === 'bd-oval' or $wbcid === 'bd-cushion' or $wbcid === 'bd-tropfen' or $wbcid === 'bd-prinzess' or $wbcid === 'bd-emerald' or $wbcid === 'bd-marquise' or $wbcid === 'bd-asscher' or $wbcid === 'bd-radiant' or $wbcid === 'bd-herz' or $wbcid === 'ss-round' or $wbcid === 'ss-oval' or $wbcid === 'ss-cushion' or $wbcid === 'ss-pear' or $wbcid === 'ss-princess' or $wbcid === 'ss-emeral' or $wbcid === 'ss-marquise' or $wbcid === 'ss-heart' or $wbcid === 'ss-asscher' or $wbcid === 'ldg-brilliant' or $wbcid === 'ldg-oval' or $wbcid === 'ldg-cushion' or $wbcid === 'ldg-tropfen' or $wbcid === 'ldg-prinzess' or $wbcid === 'ldg-emerald' or $wbcid === 'ldg-marquise' or $wbcid === 'ldg-asscher' or $wbcid === 'ldg-radiant' or $wbcid === 'ldg-herz' or $wbcid === 'lg-octagonal' or $wbcid === 'lg-hexagonal' or $wbcid === 'lg-andere' or $wbcid === 'lg-square' or $wbcid === 'lg-triangular' or $wbcid === 'lg-brilliant' or $wbcid === 'lg-asscher' or $wbcid === 'lg-emerald' or $wbcid === 'lg-herz' or $wbcid === 'lg-kissen' or $wbcid === 'lg-marquise' or $wbcid === 'lg-oval' or $wbcid === 'lg-prinzess' or $wbcid === 'lg-radiant' or $wbcid === 'lg-tropfen' or $wbcid === 'sdg' or $wbcid === 'sldg' or $wbcid === 'sfdg' or $wbcid === 'sedg' or $wbcid === 'seg') {
+			if ($wbcid === 'sd' or $wbcid === 'ss' or $wbcid === 'sd-round' or $wbcid === 'sd-oval' or $wbcid === 'sd-cushion' or $wbcid === 'sd-pear' or $wbcid === 'sd-princess' or $wbcid === 'sd-emerald' or $wbcid === 'sd-marquise' or $wbcid === 'sd-asscher' or $wbcid === 'sd-radiant' or $wbcid === 'sd-heart' or $wbcid === 'bd-brilliant' or $wbcid === 'bd-oval' or $wbcid === 'bd-cushion' or $wbcid === 'bd-tropfen' or $wbcid === 'bd-prinzess' or $wbcid === 'bd-emerald' or $wbcid === 'bd-marquise' or $wbcid === 'bd-asscher' or $wbcid === 'bd-radiant' or $wbcid === 'bd-herz' or $wbcid === 'ss-round' or $wbcid === 'ss-oval' or $wbcid === 'ss-cushion' or $wbcid === 'ss-pear' or $wbcid === 'ss-princess' or $wbcid === 'ss-emeral' or $wbcid === 'ss-marquise' or $wbcid === 'ss-heart' or $wbcid === 'ss-asscher' or $wbcid === 'ldg-brilliant' or $wbcid === 'ldg-oval' or $wbcid === 'ldg-cushion' or $wbcid === 'ldg-tropfen' or $wbcid === 'ldg-prinzess' or $wbcid === 'ldg-emerald' or $wbcid === 'ldg-marquise' or $wbcid === 'ldg-asscher' or $wbcid === 'ldg-radiant' or $wbcid === 'ldg-herz' or $wbcid === 'lg-octagonal' or $wbcid === 'lg-hexagonal' or $wbcid === 'lg-andere' or $wbcid === 'lg-square' or $wbcid === 'lg-triangular' or $wbcid === 'lg-brilliant' or $wbcid === 'lg-asscher' or $wbcid === 'lg-emerald' or $wbcid === 'lg-herz' or $wbcid === 'lg-kissen' or $wbcid === 'lg-marquise' or $wbcid === 'lg-oval' or $wbcid === 'lg-prinzess' or $wbcid === 'lg-radiant' or $wbcid === 'lg-tropfen' or $wbcid === 'sdg' or $wbcid === 'sldg' or $wbcid === 'sfdg' or $wbcid === 'sedg' or $wbcid === 'seg' or $wbcid === 'ss-diamond' or $wbcid === 'sd-diamond' or $wbcid === 'sld-diamond' or $wbcid === 'ss-radiant-diamond' or $wbcid === 'ss-round-diamond' or $wbcid === 'ss-cushion-diamond' or $wbcid === 'ss-princess-diamond' or $wbcid === 'ss-marquise-diamond' or $wbcid === 'ss-asscher-diamond' or $wbcid === 'ss-oval-diamond' or $wbcid === 'ss-pear-diamond' or $wbcid === 'ss-emeral-diamond' or $wbcid === 'ss-heart-diamond') {
 
 			    // Handle wbcid = 'sd'
 			    if ($wbcid === 'sd') {
@@ -1650,8 +1650,66 @@ class WBC_Common {
 
 			    	// Query string for wbcid = seg
 			    	$query_string = "EO_WBC=1&BEGIN=ringe-modelle&STEP=1&FIRST&SECOND";
-			    }
+			    }elseif ($wbcid === 'ss-diamond') {
+			    	// User specific slug  (for dlp) 
+			    	// ACTIVE_TODO temp. this is highly temporary becouse we are not supposed to add code settings for user spicfic things. And so we will soon add support for specifying user specific nice url at that time need to remove it from here. We need to do it as soon as we get chance. -- to h and -- to bha
 
+
+			    	// Query string for wbcid = ss
+			    	$query_string = "EO_WBC=1&BEGIN=eo_setting_shape_cat&STEP=1&FIRST&SECOND";
+			    }elseif ($wbcid === 'sd-diamond') {
+			    	
+			    	// Query string for wbcid =sd-diamond 
+			    	$query_string = "orderby=price&EO_WBC=1&BEGIN=eo_diamond_shape_cat&STEP=1&FIRST&SECOND";
+			    }elseif ($wbcid === 'sld-diamond') {
+			    	
+			    	// Query string for wbcid = sld-diamond
+			    	$query_string = "orderby=price&EO_WBC=1&BEGIN=eo_diamond_shape_cat&STEP=1&FIRST&SECOND&6085412e4cc9b=1";
+			    }elseif ($wbcid === 'ss-round-diamond') {
+			    	
+			    	// Query string for wbcid = ss-round-diamond
+			    	$query_string = "EO_WBC=1&BEGIN=eo_setting_shape_cat&STEP=1&FIRST&SECOND&_attribute=%2Cpa_diamond-shape&checklist_pa_diamond-shape=round";
+			    }elseif ($wbcid === 'ss-cushion-diamond') {
+			    	
+			    	// Query string for wbcid = ss-cushion-diamond
+			    	$query_string = "EO_WBC=1&BEGIN=eo_setting_shape_cat&STEP=1&FIRST&SECOND&_attribute=%2Cpa_diamond-shape&checklist_pa_diamond-shape=cushion";
+			    }elseif ($wbcid === 'ss-princess-diamond') {
+			    	
+			    	// Query string for wbcid = ss-princess-diamond
+			    	$query_string = "EO_WBC=1&BEGIN=eo_setting_shape_cat&STEP=1&FIRST&SECOND&_attribute=%2Cpa_diamond-shape&checklist_pa_diamond-shape=princess";
+			    }elseif ($wbcid === 'ss-marquise-diamond') {
+			    	
+			    	// Query string for wbcid = ss-marquise-diamond
+			    	$query_string = "EO_WBC=1&BEGIN=eo_setting_shape_cat&STEP=1&FIRST&SECOND&_attribute=%2Cpa_diamond-shape&checklist_pa_diamond-shape=marquise";
+			    }elseif ($wbcid === 'ss-asscher-diamond') {
+			    	
+			    	// Query string for wbcid = ss-asscher-diamond
+			    	$query_string = "EO_WBC=1&BEGIN=eo_setting_shape_cat&STEP=1&FIRST&SECOND&_attribute=%2Cpa_diamond-shape&checklist_pa_diamond-shape=asscher";
+			    }elseif ($wbcid === 'ss-oval-diamond') {
+			    	
+			    	// Query string for wbcid = ss-oval-diamond
+			    	$query_string = "EO_WBC=1&BEGIN=eo_setting_shape_cat&STEP=1&FIRST&SECOND&_attribute=%2Cpa_diamond-shape&checklist_pa_diamond-shape=oval";
+			    }elseif ($wbcid === 'ss-pear-diamond') {
+			    	
+			    	// Query string for wbcid = ss-pear-diamond
+			    	$query_string = "EO_WBC=1&BEGIN=eo_setting_shape_cat&STEP=1&FIRST&SECOND&_attribute=%2Cpa_diamond-shape&checklist_pa_diamond-shape=pear";
+			    }elseif ($wbcid === 'ss-emeral-diamond') {
+			    	
+			    	// Query string for wbcid = ss-emeral-diamond
+			    	$query_string = "EO_WBC=1&BEGIN=eo_setting_shape_cat&STEP=1&FIRST&SECOND&_attribute=%2Cpa_diamond-shape&checklist_pa_diamond-shape=emerald";
+			    }elseif ($wbcid === 'ss-radiant-diamond') {
+			    	
+			    	// Query string for wbcid = ss-radiant-diamond
+			    	$query_string = "EO_WBC=1&BEGIN=eo_setting_shape_cat&STEP=1&FIRST&SECOND&_attribute=%2Cpa_diamond-shape&checklist_pa_diamond-shape=radiant";
+			    }elseif ($wbcid === 'ss-heart-diamond') {
+			    	
+			    	// Query string for wbcid = ss-heart-diamond
+			    	$query_string = "EO_WBC=1&BEGIN=eo_setting_shape_cat&STEP=1&FIRST&SECOND&_attribute=%2Cpa_diamond-shape&checklist_pa_diamond-shape=heart";
+			    }elseif ($wbcid === 'ss-emerald-diamond') {
+			    	
+			    	// Query string for wbcid = ss-emerald-diamond
+			    	$query_string = "EO_WBC=1&BEGIN=eo_setting_shape_cat&STEP=1&FIRST&SECOND&_attribute=%2Cpa_diamond-shape&checklist_pa_diamond-shape=emerald";
+			    }
 			    // If a query string is set, parse it and merge with $_GET
 			    if (isset($query_string)) {
 

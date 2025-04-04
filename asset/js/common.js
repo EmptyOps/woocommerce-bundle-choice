@@ -145,48 +145,48 @@ window.document.splugins.common.is_empty = function (val) {
     return (val == undefined || val == null || val.length <= 0) ? true : false;
 }
 
-console.log("common.js 148");
+// console.log("common.js 148");
 window.document.splugins.common.is_potential_numeric_string = function (input, skipStrings) {
-    console.log("is_potential_numeric_string 15000000");
-    console.log("input", input);
+    // console.log("is_potential_numeric_string 150");
+    // console.log("input", input);
     // Normalize skipStrings to an array, even if it’s a single string or undefined
     const skipArray = Array.isArray(skipStrings)
         ? skipStrings
         : skipStrings
         ? [skipStrings]
         : [];
-    console.log("Normalized skip array:", skipArray);
+    // console.log("Normalized skip array:", skipArray);
 
     // Helper function to check if a string is numeric after modification
     function isNumericAfterModification(str) {
-        let modifiedInput = str.replace(/[.-_]/g, ""); // Replace unwanted characters
-        console.log("Is modified input numeric?", modifiedInput);
+        let modifiedInput = str.replace(/[-._]/g, ""); // Replace unwanted characters
+        // console.log("Is modified input numeric?", modifiedInput);
         return !isNaN(modifiedInput); // Check if numeric
     }
 
     // Process the input array
     for (let skipString of skipArray) {
         input = input.replace(skipString, ""); // Replace all occurrences
-        console.log("Input after replacing skip string:", input);
+        // console.log("Input after replacing skip string:", input);
     }
-
+    // console.log("input value", input);
     var result = isNumericAfterModification(input);
-    console.log("last ma je output aave te", result);
+    // console.log("last ma je output aave te", result);
     return result; // Return if the processed input is numeric
 };  
 
 
 window.document.splugins.common.key_to_title = function (key) {
 
-    console.log("key_to_title key values 180");
-    console.log(key);
+    // console.log("key_to_title key values 180");
+    // console.log(key);
 
     let modifiedKey = key.replace(/[-_]/g, " "); // Replace dashes and underscores with spaces
 
     let result = modifiedKey.replace(/\b\w/g, c => c.toUpperCase()); // Capitalize first character of each word
 
-    console.log("result");
-    console.log(result);
+    // console.log("result");
+    // console.log(result);
 
     return result;
 
@@ -202,21 +202,21 @@ window.document.splugins.common.key_to_title = function (key) {
 //     return key.replace(/[-_]/g, ".");
 // };
 window.document.splugins.common.key_to_number = function (key, replacements = {}) {
-    //ACTIVE_TODO Here we are replacing dashes and underscores with periods. So it is important that we do not consider white spaces as part of the key. In the future, if we want to support it, we should provide a separate flag in this function so that collaborators can specify whether they want to consider white spaces.
-    console.log("key_to_number");
-    console.log(key);
-    console.log(replacements);
+    ACTIVE_TODO Here we are replacing dashes and underscores with periods. So it is important that we do not consider white spaces as part of the key. In the future, if we want to support it, we should provide a separate flag in this function so that collaborators can specify whether they want to consider white spaces.
+    // console.log("key_to_number");
+    // console.log(key);
+    // console.log(replacements);
     if (typeof replacements === "object" && replacements !== null && Object.keys(replacements).length > 0) {
         // Loop through each replacement key-value pair
         for (const [find, replace] of Object.entries(replacements)) {
             key = key.split(find).join(replace); // Replace all occurrences without RegExp
         }
-        console.log(key);
+        // console.log(key);
     }
 
     var result = key.replace(/[-_]/g, ".");
-    console.log("result 217");
-    console.log(result);
+    // console.log("result 217");
+    // console.log(result);
     // Replace dashes and underscores with periods
     return result;
 };    
