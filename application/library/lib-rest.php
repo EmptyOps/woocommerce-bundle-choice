@@ -18,8 +18,14 @@ if(!class_exists('WBC_REST')) {
 			
 		}
 
-		public function response($res, $response_http_code=200){
+		public function response($res, $response_http_code=200, $is_exit = false){
+
 			echo json_encode($res);
+			
+			if ($is_exit) {
+
+				exit();
+			} 
 		}
 
 	}

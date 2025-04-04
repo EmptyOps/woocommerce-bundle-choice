@@ -29,6 +29,36 @@ class WBC_File {
 	}
 
 	/**
+	 * Creates directories recursively for a given path.
+	 *
+	 * @param string $path The directory or file path.
+	 * @return bool True if the directories were created or already exist, False on failure.
+	 */
+	public function make_dirs($path)
+	{
+		
+	    // Extract directory path from file path, if the path contains a file name.
+	    if (strpos(basename($path), '.') !== false) {
+	        $directory = dirname($path);
+	    } else {
+	        $directory = $path;
+	    }
+
+	    // Check if the directory already exists.
+	    if (is_dir($directory)) {
+	        return true;
+	    }
+
+	    // Attempt to create the directory recursively.
+	    if (mkdir($directory, 0777, true)) {
+	        return true;
+	    }
+
+	    // Return false if the directory could not be created.
+	    return false;
+	}
+
+	/**
 	 *
 	 */
 	public function file_write( $filepath, $content )

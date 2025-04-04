@@ -21,8 +21,20 @@ if(!empty($id) /*and !empty($label)*/){
 
 	?>	
 		<?php 
-		if($style != "normal_without_parent_div") { ?>
-			<div class="field">
+		if($style != "normal_without_parent_div") { 
+
+			// ACTIVE_TODO Keep this fix until the size class switch, CSS, and inline grouping issue is resolved in admin. -- to h && -- to gk
+		    if (!empty($size_class)) {
+		        
+		        $classes = explode(' ', $size_class);
+		        
+		        $size_class = implode(' ', array_filter($classes, function($class) {
+		            return trim($class) === 'hidden';
+		        }));
+		    }
+
+		?>
+			<div class="<?php echo !empty($size_class)?$size_class:''; ?> field">
 		<?php 
 		}
 	

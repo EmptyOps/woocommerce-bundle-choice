@@ -6,6 +6,22 @@
 
 $res = array( "type"=>"success", "msg"=>"Updated successfully!" );
 
+$is_do_not_call_Tiny_Features_View_load_view = true;
+$is_auto_insert_for_template = null;
+$args = null;
+// ACTIVE_TODO/TEMP aa view lode karavo che te temperory Bhavesh_2 branch na sampaldata update vakhate banavo che ane jyare tiny feature akhu module update thay tyare and tenu model, view and conttrolar propar bane tyare aa view lode karavu che te remove kari devo and stander view file ma jevu arcituctur che tevu kari nakahavu.    --  to h
+require_once constant('EOWBC_TEMPLATE_DIR').'admin/menu/tiny_features.php';
+
+$args = array();
+$args['sp_frmb_saved_tab_key'] = 'tiny_features_item_page_option';
+
+$form_definition = \eo\wbc\view\admin\menu\Tiny_Features_View::get_form_definition();
+$temp_res = \eo\wbc\model\admin\Eowbc_Model::instance()->save($form_definition, $is_auto_insert_for_template, $args);
+if(empty($temp_res['type']) || $temp_res['type'] != "success"){
+
+	return $temp_res;
+}
+
 if(wp_verify_nonce(wbc()->sanitize->post('_wpnonce'),'eowbc_tiny_features')){
 
 	wbc()->options->update_option('tiny_features','shop_cat_filter_location_shop',(empty(wbc()->sanitize->post('shop_cat_filter_location_shop'))?'':wbc()->sanitize->post('shop_cat_filter_location_shop')));
@@ -106,6 +122,33 @@ if(wp_verify_nonce(wbc()->sanitize->post('_wpnonce'),'eowbc_tiny_features')){
 
 
 	wbc()->options->update_option('tiny_features','tiny_features_enable_only_for_categories', (empty(wbc()->sanitize->post('tiny_features_enable_only_for_categories'))?'':wbc()->sanitize->post('tiny_features_enable_only_for_categories')));
+
+	// ACTIVE_TODO temp. nichenu loop che te jya sudhi tiny_features nu mvc architecture sarkha standard paramane fari upgrade na thay tya sudhi temperory rakhavanu che.	-- to h & -- to pi.
+	$skip_fileds = array();
+	foreach ($form_definition as $key => $tab) {
+
+		// if( $key != $saved_tab_key ) {
+		// 	continue;
+		// }
+
+		foreach ($tab["form"] as $fk => $fv) {
+
+			if( in_array($fv["type"], \eo\wbc\model\admin\Form_Builder::savable_types()) ) {
+
+				//skip fields where applicable
+				if( in_array($fk, $skip_fileds) ) {
+
+					continue;
+				}
+
+				// ACTIVE_TODO temp. nicheni if che te jya sudhi tiny_features nu mvc architecture sarkha standard paramane fari upgrade na thay tya sudhi temperory rakhavanu che.	-- to h & -- to pi.
+				if( !empty($fv["is_upgrade_version_field_save_till_standard_upgrade"]) ) {
+					
+					wbc()->options->update_option(/* $key */$args['sp_frmb_saved_tab_key'], $fk, /* $fv['value'] */ wbc()->sanitize->post($fk));
+				}
+			}
+		}
+	}
 
 	//$res['msg'] = "Updated successfully!";
 	//wbc()->options->update_option('configuration','config_category',1);

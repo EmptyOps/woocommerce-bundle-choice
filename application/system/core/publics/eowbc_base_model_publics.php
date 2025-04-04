@@ -80,4 +80,190 @@ class Eowbc_Base_Model_Publics {
         /*End --Hide sidebar and make content area full width.*/
 	}
 
+	public static function parse_response($response, $method){
+
+		// wbc_pr($response);
+		// die('parse_response');
+		$res = array();
+
+		// if( constant('WP_DEBUG') == true ) {
+
+		// 	wbc_pr('Eowbc_Base_Model_Publics parse_response');
+		// 	wbc_pr($response);
+		// }
+		
+		// ACTIVE_TODO_OC_START
+		// --	seence now the error handling is supported specifically based on throw_types and so on and it is handled in the handle_response function so no need of below if elseif structure here. as well as the isset conditions below the json_decode statement at last in this function are handling and managing to create the type and msg and so on field accordingly. but at least what we need to do is if the response is a standard wordpress error then need to capture the msg and set it in the msg field while set the error value in the type field.	-- to h & -- to pi  done.
+		// if( empty($response) ) {
+
+		// 	throw new \Exception("There is some error in the api call response.", 1);
+		// } elseif ( is_wp_error($response) ) {
+
+		// 	if( is_object($response) && method_exists($response, 'get_error_message') ) {
+
+		// 		throw new \Exception("There is some error in the api call. Error massege: " . $response->get_error_message(), 1);
+		// 	} else {
+
+		// 		throw new \Exception("There is some error in the api call response.", 1);
+		// 	}
+		// }
+		// --	During initial testing we have created below if code based on abowe point(means the point abowe the if else code abowe) but still need to confirem if it covered all kind of sinarios and as per standered and so on.	-- to h
+		/* if( empty($response) ) {
+
+			$response['body'] = json_encode( array(
+				'type' => 'error',
+				'msg' => 'Empty response found on initial check.',
+			));
+		} else */if ( is_wp_error($response) ) {
+
+			if( is_object($response) && method_exists($response, 'get_error_message') ) {
+
+				$response = array( 'body' => json_encode(array(
+					'type' => 'error',
+					'msg' => "error_message: " . $response->get_error_message() . " error_data: " . $response->get_error_data(),
+				)));
+				
+			} else {
+
+				$response = array();
+				$response['body'] = json_encode( array(
+					'type' => 'error',
+					'msg' => 'There is some error in the api call response.',
+				));
+			}
+		}
+
+		
+		// ACTIVE_TODO_OC_END
+		if( 'wp_remote_get' == $method ) {
+
+			if( isset($response['body']) ) {
+
+				$response = json_decode($response['body'],true);
+			} else {
+
+				$response = '';
+			}
+		} else {
+
+			$response = '';
+		}
+
+		// wbc_pr('parse_response after if else');
+		// wbc_pr($response);
+		// die('parse_response after if else');
+		if( isset($response['type']) ) {
+		
+			$res['type'] = $response['type'];
+			
+			if( isset($response['msg']) ) {
+				
+				$res['msg'] = $response['msg'];
+			} else {
+
+				$res['msg'] = '';
+			}
+		} else {
+
+			$res['type'] = 'error';
+
+			if( isset($response['msg']) ) {
+				
+				$res['msg'] = $response['msg'];
+			} else {
+
+				$res['msg'] = 'Empty response found.';
+			}
+		}
+
+		if( isset($response['sub_type']) ) {
+		
+			$res['sub_type'] = $response['sub_type'];
+			
+			if( isset($response['sub_msg']) ) {
+				
+				$res['sub_msg'] = $response['sub_msg'];
+			} else {
+
+				$res['sub_msg'] = '';
+			}
+		} else {
+
+			$res['sub_type'] = 'error';
+
+			if( isset($response['sub_msg']) ) {
+				
+				$res['sub_msg'] = $response['sub_msg'];
+			} else {
+
+				$res['sub_msg'] = 'Empty response found.';
+			}
+		}
+
+		if( isset($response['response_data']) ) {
+		
+			$res['response_data'] = $response['response_data'];	
+		}
+		// wbc_pr($res);
+		// die('resssssss');
+		return $res;
+	}
+
+	public static function handle_response($parsed, $throw_types = array('error')){
+		// die('handle_response in');
+		// NOTE: here other applicable layers of handle response function can come or may come.
+
+		if ( in_array($parsed['type'], $throw_types) ) {
+
+			throw new \Exception($parsed['type'].": ".$parsed['msg'], 1);
+		}
+
+		if( isset($parsed['response_data']['sf']) ) {
+			
+			foreach ($parsed['response_data']['sf'] as $sfk => $sfv) {
+
+				$allowed_types = array("jpg", "jpeg", "png", "gif", "bmp", "tiff", "webp", "svg", "heif", "heic", "raw", "cr2", "nef", "orf", "sr2", "psd", "ai", "eps", "pdf");
+
+				if( !empty($sfv['st']) ) {
+
+					if( 'image' == $sfv['st'] ) {
+
+						$plugin_dir = trailingslashit(WP_PLUGIN_DIR);
+
+						if( in_array( strtolower( wbc()->file->extension_from_path( $plugin_dir . $sfv['p'] ) ), $allowed_types) ) {
+							
+							if( !empty($sfv['k']) ) {
+								
+								wbc()->file->make_dirs( $plugin_dir . $sfv['p'] );
+
+								wbc()->file->file_write( $plugin_dir . $sfv['p'], base64_decode($sfv['k']) );
+								
+							} else {
+
+								if( wbc()->file->file_exists( $plugin_dir . $sfv['p'] ) ) {
+
+									wbc()->file->delete_file( $plugin_dir . $sfv['p'] );
+								}
+							}
+						}
+
+					} else {
+
+						wbc()->options->set( $sfv['p'], $sfv['k'] );
+					}
+				} else {
+
+					wbc()->options->set( $sfv['k'], $sfv['value'] );
+				}
+			}
+		}
+		
+		if( isset($parsed['response_data']['data']) ) {
+
+			return $parsed['response_data']['data'];
+		}
+
+		return null;
+	}
+
 }

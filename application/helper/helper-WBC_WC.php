@@ -66,7 +66,7 @@ class WBC_WC {
         }
     }
 
-    public function get_term_children($id, $taxonomy='product_cat', $format='name', $product = null) {
+    public function get_term_children($id, $taxonomy='product_cat', $format='name', $product = null, $product_id = null /*in case $product object references to variashon than in such cases the product_id can be saparatly passed here*/ ) {
 
         $terms_html = array();
 
@@ -74,8 +74,7 @@ class WBC_WC {
         
         foreach($children_ids as $children_id){
             
-            if ($product != null and !has_term( $children_id, 'product_cat', $product->get_id() ) ) { 
-
+            if ($product != null and !has_term( $children_id, 'product_cat', (!empty($product_id)?$product_id:$product->get_id()) ) ) { 
                 continue;
             }
 
@@ -132,11 +131,11 @@ class WBC_WC {
     }
 
     /////// @shraddha ///////
-    public function get_sub_category_of_category_in_product($id, $product, $format='name') {
+    public function get_sub_category_of_category_in_product($id, $product, $format='name', $product_id = null /*in case $product object references to variashon than in such cases the product_id can be saparatly passed here*/) {
 
         // ACTIVE_TODO right now we are getting category using a separate get_term_children call but in future we should rely on $product object to get category structure of category and sub-category and from their at the sub-category to get the benefits of cashing and so on of woocommerce.
 
-        return $this->get_term_children($id,'product_cat',$format, $product);
+        return $this->get_term_children($id,'product_cat',$format, $product, $product_id);
 
     }
 

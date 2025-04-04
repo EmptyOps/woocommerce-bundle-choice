@@ -114,13 +114,13 @@ class Eowbc_Model {
 								
 							}
 							
-							if(wbc()->sanitize->get('is_test') == 1) {
+							// if(wbc()->sanitize->get('is_test') == 1) {
 								
-								wbc_pr('eowbc_model_dm_based_field');
-								wbc_pr($args['data_raw']);
-								wbc_pr($fk);
-								wbc_pr($dm_based_field);
-							}
+								// wbc_pr('eowbc_model_dm_based_field');
+								// wbc_pr($args['data_raw']);
+								// wbc_pr($fk);
+								// wbc_pr($dm_based_field);
+							// }
 
 							//$form_definition[$key]["form"][$fk]["value"] = ( isset($save_as_data['post_meta'][$fk]) ? $save_as_data['post_meta'][$fk] : ( isset($form_definition[$key]["form"][$fk]["value"]) ? $form_definition[$key]["form"][$fk]["value"] :'' ) );
 							if ( !empty( $dm_based_field ) ) {
@@ -200,7 +200,7 @@ class Eowbc_Model {
 								}
 
 							}
-							
+
 							// ACTIVE_TODO/TODO implement 
 								// -- this flag is passed from /woo-bundle-choice/application/model/publics/data_model/sp-wbc-variations.php 
 							if( !empty($args['is_convert_das_to_array'])){
@@ -214,7 +214,12 @@ class Eowbc_Model {
 		    }
 		} else {
 
-			throw new Exception("ACTIVE_TODO implement, implement and then have all child classes of respective admin models does call this function. -- to s. On a side note, can use this for frontend get_data layers also but it sounds likely deeply mixing the models. anyway we can atleast use the form_definition on our get_data function layers of the frontend models like single product model, and this sounds like balanced approach maybe but not sure about if it appropriate balance of cohesion and coupling between models.", 1);
+			$form_definition = apply_filters('wbc_form_builder_model_before_get', $form_definition, $args);
+
+			// ACTIVE_TODO even though we have commented below exception but it is important to note that the implementation is stil incomplete and so below exception message is stil standing and open. -- to h
+			// throw new Exception("ACTIVE_TODO implement, implement and then have all child classes of respective admin models does call this function. -- to s. On a side note, can use this for frontend get_data layers also but it sounds likely deeply mixing the models. anyway we can atleast use the form_definition on our get_data function layers of the frontend models like single product model, and this sounds like balanced approach maybe but not sure about if it appropriate balance of cohesion and coupling between models.", 1);
+
+			$form_definition = apply_filters('wbc_form_builder_model_after_get', $form_definition, $args);
 		}
 
 	    return $form_definition;
@@ -244,7 +249,7 @@ class Eowbc_Model {
 			$save_as_data = array();	
 			$save_as_data_meta = array();	
 
-	    //loop through form tabs and save 
+	    	//loop through form tabs and save 
 		    foreach ($form_definition as $key => $tab) {
 		    	if( $key != $saved_tab_key ) {
 		    		continue;
@@ -410,7 +415,26 @@ class Eowbc_Model {
 
 		} else {
 
-			throw new Exception("ACTIVE_TODO implement, implement and then have all child classes of respective admin models does call this function. -- to s.", 1);
+			if( !is_array($args) ) {
+
+				$args = array();
+			}
+
+			if( !isset($args['sp_frmb_saved_tab_key']) ) {
+
+				$args['sp_frmb_saved_tab_key'] = !empty(wbc()->sanitize->post("saved_tab_key")) ? wbc()->sanitize->post("saved_tab_key") : "" ;
+			}
+
+			$res = array();
+			$res["type"] = "success";
+		    $res["msg"] = "";
+
+			$res = apply_filters('wbc_form_builder_model_before_save', $res, $form_definition, $is_auto_insert_for_template, $args);
+
+			// ACTIVE_TODO even though we have commented below exception but it is important to note that the implementation is stil incomplete and so below exception message is stil standing and open. -- to h
+			// throw new Exception("ACTIVE_TODO implement, implement and then have all child classes of respective admin models does call this function. -- to s.", 1);
+
+			$res = apply_filters('wbc_form_builder_model_after_save', $res, $form_definition, $is_auto_insert_for_template, $args);
 		}
 
         return $res;
@@ -623,6 +647,16 @@ class Eowbc_Model {
 				            text-align: center;
 				            text-transform: capitalize;
 				        }
+
+		</style>
+		<?php
+	}
+
+	public function admin_css() {
+
+		// ACTIVE_TODO move below css to admin.css file and load that asset file instead of inline below -- to kg 
+		?>
+		<style>				        
 
 		</style>
 		<?php

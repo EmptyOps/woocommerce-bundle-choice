@@ -38,8 +38,7 @@ if(!class_exists('SP_Plugin_Index_Class') ) {
 			//do nothing, construct_init will be called from plugins_loaded hook
 		}
 
-		public function construct_init($childClassObj) {			
-
+		public function construct_init($childClassObj) {
 			// define constant before our work bwgins.
 			$this->define_constants();
 
@@ -246,6 +245,37 @@ if(!class_exists('SP_Plugin_Index_Class') ) {
 			
 		}
 
+		public function extras_configuration_check() {
+
+		    // admin 
+		    if( is_admin() ) {
+		        $page_slug = wbc()->sanitize->get('page');
+
+				if(empty($page_slug)){
+
+					$page_slug = wbc()->sanitize->request('wbc_dynamic_page');
+
+				}
+				
+		        if( strpos($page_slug, "---extras") !== FALSE ) {
+		            $curr_plugin_slug = explode("---", $page_slug)[0];
+
+		            if( $curr_plugin_slug == $this->SP_Extension->extension_slug() ) {
+
+		                add_filter('sp_wbc_extras_config', function( $filter_var, $plugin_slug ) {
+
+		                    if( $plugin_slug == $this->SP_Extension->extension_slug() ) {
+		                        return $this->SP_Extension->singleton_function()()->config->extras();
+		                    }
+
+							return $filter_var;
+		                }, 10, 2);
+		            }
+
+		        }
+		    }
+		}
+
 		public function __init( $childClassObj ) {
 
 			if( wbc()->sanitize->get('is_test') == 1 ) {
@@ -267,6 +297,8 @@ if(!class_exists('SP_Plugin_Index_Class') ) {
 
 				$childClassObj->theme_adaption_check();
 
+				$childClassObj->extras_configuration_check();
+				
 			// });
 
 		}
@@ -287,34 +319,110 @@ if(!class_exists('SP_Plugin_Index_Class') ) {
 				require_once plugin_dir_path( $this->getFILE() ).'vendor/autoload.php';	
 			}
 			//TODO create a common base for sample data wizard process, just in upcoming days and then transfor below extension specific code to common means all epb mentions will be replaced. but yeah keep some sample data adding code which is in tm ui repo to be there only
-			if( false ) {
-				// require_once plugin_dir_path( $this->getFILE() ).'vendor/autoload.php';	
-				add_action( 'wbc_auto_sample_class',function() {		
-					if(!empty(wbc()->sanitize->get('eo_wbc_view_auto_jewel')) and !empty(wbc()->sanitize->get('f'))) {
-						
-						
+				// NOTE: as of now on 2-12-23, the two hooks below are upgraded. However another points that are necessary as per above todo needed to be done yet.
+			//if( false ) {
+				add_action( 'wbc_auto_sample_class',function() {
 
-						$class = str_replace(' ','_',ucwords(str_replace('_', ' ', wbc()->sanitize->get('f'))));
-						$namespace_class = '\\sp\\epb\\controller\\admin\\sample_data\\' . $class;
-						
-						if( class_exists($namespace_class) ) {
-							$namespace_class::instance()->init();	
-						}
-					}		
-				});	
+					add_action( 'init', function() {
+
+						if(!empty(wbc()->sanitize->get(/*'eo_wbc_view_auto_jewel'*/'sp_ext_auto')) and !empty(wbc()->sanitize->get('f'))) {
+
+							$class = str_replace(' ','_',ucwords(str_replace('_', ' ', wbc()->sanitize->get('f'))));
+							$namespace_class = '\\'.$this->SP_Extension->singleton_function().'\\controllers\\admin\\sample_data\\' . $class;
+							$namespace_class_1 = '\\eo'.$namespace_class;
+							
+							if( class_exists($namespace_class) ) {
+
+								$namespace_class::instance()->init();	
+
+							} elseif( class_exists($namespace_class_1) ) {
+
+								$namespace_class_1::instance()->init();	
+
+							} else {
+
+								// ACTIVE_TODO temp. this if condition is for extesions which have controllers package name without s. it is temporary and when we fix the package names in all extensions(especially in the first 11 of 21 extensions because the later 10 of 21 extensions have folder package names properly fixed) then at that time need to remove this extra if layer. -- to h 
+								//$class = str_replace(' ','_',ucwords(str_replace('_', ' ', wbc()->sanitize->get('f'))));
+								$namespace_class = '\\'.$this->SP_Extension->singleton_function().'\\controller\\admin\\sample_data\\' . $class;
+								$namespace_class_1 = '\\eo'.$namespace_class;
+
+								if( class_exists($namespace_class) ) {
+
+									$namespace_class::instance()->init();	
+
+								} elseif( class_exists($namespace_class_1) ) {
+
+									$namespace_class_1::instance()->init();	
+
+								} else {
+
+									//$class = str_replace(' ','_',ucwords(str_replace('_', ' ', wbc()->sanitize->get('f'))));
+									$namespace_class = '\\'.str_replace('_','\\\\',$this->SP_Extension->singleton_function()).'\\controllers\\admin\\sample_data\\' . $class;
+									$namespace_class_1 = '\\eo'.$namespace_class;
+
+									if( class_exists($namespace_class) ) {
+
+										$namespace_class::instance()->init();	
+
+									} elseif( class_exists($namespace_class_1) ) {
+
+										$namespace_class_1::instance()->init();	
+
+									} else {
+
+										// ACTIVE_TODO temp. this if condition is for extesions which have controllers package name without s. it is temporary and when we fix the package names in all extensions(especially in the first 11 of 21 extensions because the later 10 of 21 extensions have folder package names properly fixed) then at that time need to remove this extra if layer. -- to h 
+										//$class = str_replace(' ','_',ucwords(str_replace('_', ' ', wbc()->sanitize->get('f'))));
+										$namespace_class = '\\'.str_replace('_','\\\\',$this->SP_Extension->singleton_function()).'\\controller\\admin\\sample_data\\' . $class;
+
+										if( class_exists($namespace_class) ) {
+
+											$namespace_class::instance()->init();	
+
+										}
+									}
+								}
+							}
+						}		
+					}, 10 );
+
+				});
 
 				add_filter('wbc_auto_sample_class_ajax',function($class_file){
-					
+		
 					$class = str_replace(' ','_',ucwords(str_replace('_', ' ', wbc()->sanitize->post('feature_key'))));
 
-					$namespace_class = '\\sp\\epb\\model\\admin\\sample_data\\' . $class;
+					$namespace_class = '\\'.$this->SP_Extension->singleton_function().'\\model\\admin\\sample_data\\' . $class;
+					$namespace_class_1 = '\\eo'.$namespace_class;
 					
 					if( class_exists($namespace_class) ) {
+
 						return $namespace_class;
+						
+					} elseif( class_exists($namespace_class_1) ) {
+
+						return $namespace_class_1;
+						
+					} else {
+
+						//$class = str_replace(' ','_',ucwords(str_replace('_', ' ', wbc()->sanitize->post('feature_key'))));
+
+						$namespace_class = '\\'.str_replace('_','\\\\',$this->SP_Extension->singleton_function()).'\\model\\admin\\sample_data\\' . $class;
+						$namespace_class_1 = '\\eo'.$namespace_class;
+
+						if( class_exists($namespace_class) ) {
+
+							return $namespace_class;
+							
+						} elseif( class_exists($namespace_class_1) ) {
+
+							return $namespace_class_1;
+							
+						} 
+
 					}
 					return $class_file;
 				});
-			}
+			//}
 
 			// ACTIVE_TODO temp. remove below temp when we finalize the implementation of the activate, deactivate and uninstall callback. and lets do it as soon as we get the chance, as this is critical for occasional maintainance, especially gathering user feedbacks or running campaigns on activate actions, user experience and so on. maybe lets do it in 2nd or 3rd even if there is no demand in particular. -- to h 
 			if( false ) {

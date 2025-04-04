@@ -40,6 +40,16 @@ class Eowbc_Sample_Data {
 		return $this->data_template;
 	}
 
+	public function additional_initial_steps() {
+		
+		return 0;
+	}
+
+	public function additional_initial_step_key($step) {
+		
+		return null;
+	}
+
 	public function get( $form_definition ) {
 		return $form_definition;
 	}
@@ -69,7 +79,13 @@ class Eowbc_Sample_Data {
 	        // 	$this->add_maps($_maps);
 	      	// }
 
-	        $this->data_template->set_configs_after_categories($catat_category);
+	        return $this->data_template->set_configs_after_categories($catat_category);
+	    } else {
+
+	    	if($this->data_template instanceof \eo\wbc\model\admin\sample_data\data_templates\Extensions_Data_Template) {
+
+	    		return $this->data_template->set_configs_after_categories(array());
+	    	}
 	    }
 	}
 
@@ -94,11 +110,18 @@ class Eowbc_Sample_Data {
 	      	}	        
 
 	        // update_option('eo_wbc_filter_enable','1');    
-	        $this->data_template->set_configs_after_attributes();
-
+	        $res = $this->data_template->set_configs_after_attributes();
 	        wbc()->options->delete($feature_key.'_created_attribute');
+
+	        return $res;
 	        
-	    } 
+	    } else {
+
+	    	if($this->data_template instanceof \eo\wbc\model\admin\sample_data\data_templates\Extensions_Data_Template) {
+
+	    		return $this->data_template->set_configs_after_attributes();
+	    	}
+	    }
 	}
 
 	public function process_post(&$_step, $_category, $_atttriutes, $_maps, $feature_key) {
@@ -175,6 +198,7 @@ class Eowbc_Sample_Data {
 			  
 			}
 
+			//ACTIVE_TODO/NOTE: it seems that below if may not be hiting at all means below if would not be converted to a positive outcome means the code would not be executed ever which is inside below if. And so we are no more maintaining the code inside below if and in furute may be we should simply remove during the wbc upgrade or max by the first revision  -- to h and -- to jj. 
 			if(!empty(wbc()->sanitize->post('step'))){
 			  if(wbc()->sanitize->post('step')==3) {
 
@@ -182,7 +206,8 @@ class Eowbc_Sample_Data {
 			    <script type="text/javascript" >
 			    jQuery(document).ready(function($) {            
 
-			        var eo_wbc_max_products=<?php echo($this->get_product_size()); ?>;            
+			        var eo_wbc_max_products=<?php echo($this->get_product_size()); ?>;   
+			            console.log("Max products:", eo_wbc_max_products); // DEBUGGING POINT 2         
 			        function eo_wbc_add_products(index){
 
 			            if(index>=eo_wbc_max_products){
@@ -253,8 +278,9 @@ class Eowbc_Sample_Data {
 	}
 	
 	public function create_product($index){
-
+		// die("Eowbc_Sample_Data create_product first log 11111111");
 		$res = array( "type"=>"success", "msg"=>"" );
+		// die("Eowbc_Sample_Data create_product second log 22222222");
 
 		global $wpdb;
 
@@ -262,14 +288,26 @@ class Eowbc_Sample_Data {
 			return array( "type"=>"error", "msg"=>"No product found at index ".$index );	//FALSE;
 		}
 
+		// die("Eowbc_Sample_Data create_product third log 33333333");
+
 		
 		$product=$this->data_template->get_products()[$index];
 
-		if(!empty($product['sku']) and !empty(wc_get_product_id_by_sku($product['sku'])) ) {
+		// die("Eowbc_Sample_Data create_product forth log 4444444");
+
+		if((!empty($product['sku']) and !empty(wc_get_product_id_by_sku($product['sku']))) ) {
+
+			// wbc_pr($product);
+			// die("Eowbc_Sample_Data: 111111122222222222222222222222222222222222222222222222222222");
+
+			\eo\wbc\model\data_model\SP_WBC_Product::createFromArray(null,null,array($product));
+
 			return $res;
 		}
+		// die("Eowbc_Sample_Data: 111111122222222222222222222222222222222222222222222222222222 IF AFTER 3333");
+
 		
-		$product_id= wp_insert_post( array(
+		$product_id = wp_insert_post( array(
 		    'post_author' => get_current_user_id(),
 		    'post_title' => $product['title'],
 		    'post_content' => $product['content'],
@@ -310,6 +348,16 @@ class Eowbc_Sample_Data {
 
 		update_post_meta( $product_id, '_product_attributes', $product['attribute'] );
 
+		// added on 03-02-2024 just for the simple type to fix the serch by sku bug
+		if(/*empty($product['variation'])*/$product['type']=='simple'){
+
+			$product_obj = wc_get_product($product_id);
+			// $product_obj->set_name($product['title']);
+			$product_obj->set_sku($product['sku']);
+			$product_obj->set_regular_price($product['regular_price']);
+			$product_obj->save();	
+		}
+
 		if(!empty($product['sku'])) {
 			update_post_meta( $product_id, '_sku', $product['sku'] );			
 		}
@@ -337,7 +385,6 @@ class Eowbc_Sample_Data {
 		}
 
 		
-
 		$parent_id = $product_id;
 		if(!empty($product['variation'])){
 
@@ -810,10 +857,20 @@ class Eowbc_Sample_Data {
 	}
 
 	function create_attribute( $args ){
-		
+
 	    if(!empty($args) AND is_array($args)){
-	    	
-	    	foreach ($args as $index=>$attribute) {		    				        
+
+	    	foreach ($args as $index=>$attribute) {	
+	    		
+	    		$id = wbc()->wc->slug_to_id( 'attr', $attribute['slug'] );
+
+	    		if (!empty($id)) {
+
+	    			\eo\wbc\model\data_model\SP_WBC_Attribute::createFromArray(null, null, array($attribute));
+
+	    			continue;
+
+	    		}
 
 	    		if(!isset($attribute['label']) && !isset($attribute['terms'])) return;
 	    		//adding post data to store data in posts
@@ -826,6 +883,7 @@ class Eowbc_Sample_Data {
 			    );		
 
 	    		$id = wbc()->wc->eo_wbc_create_attribute( $data );
+
 	    		// @mahesh - added to store the ribbon color from sample data
 	    		if(!empty($id) and !is_wp_error($id) and !empty($attribute['ribbon_color'])) {
 	    			update_term_meta($id,'wbc_ribbon_color',$attribute['ribbon_color']);
@@ -925,6 +983,7 @@ class Eowbc_Sample_Data {
 		    	}	    					    	
 	    		$args[$index]['id']=$id;
 	    	}
+
 	    	return $args;
 	    }	    
 	}
@@ -1014,6 +1073,8 @@ class Eowbc_Sample_Data {
 
 	/* Add image to the wordpress image media gallary */
 	public function add_image_gallary($path, $path_separator = 'woo-bundle-choice', $source_path = null) {
+		
+		// ACTIVE_TODO When we upgrade wbc at that time we need to deprecate this function and call to the common function in the wp helper class. -- to h
 
 		if(!$path) return FALSE;
 
@@ -1172,7 +1233,15 @@ class Eowbc_Sample_Data {
 	*/
 	function get_product_size() {
 
-		return count($this->data_template->get_products());
+		if (!empty(wbc()->sanitize->get('product_limit'))) {
+
+			return count(array_slice($this->data_template->get_products(), 0, intval(wbc()->sanitize->get('product_limit'))));
+
+		} else {
+
+			return count($this->data_template->get_products());
+		}
+
 	}
 
 	/**
