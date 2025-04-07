@@ -93,7 +93,10 @@ class SP_Model_Gallery_Slider extends Eowbc_Base_Model_Publics {
 
 	public function load_asset(){
 
-		wbc()->load->asset( 'asset.php', constant( strtoupper( 'EOWBC_ASSET_DIR' ) ).'variations/gallery-slider.assets.php' );
+		add_action('wp_head',function(){
+
+			wbc()->load->asset( 'asset.php', constant( strtoupper( 'EOWBC_ASSET_DIR' ) ).'variations/gallery-slider.assets.php' );	
+		}, 1049);
 	}
 
 	public function init_core(){
