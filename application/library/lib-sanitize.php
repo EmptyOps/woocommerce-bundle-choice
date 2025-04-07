@@ -206,6 +206,7 @@ if(!class_exists('WBC_Sanitize')) {
 
                    $sanitized_value = filter_var($global_input[$param], FILTER_SANITIZE_STRING);
 
+                   --	aa niche ni if and upar ni if chale tem nathi. global input nu loop chalavine ditect karavu pade but te bhi efficient solushan nathi. 
                    // Detect if the parameter name contains dynamic elements
                    if (strpos($param, '$') !== false || strpos($param, '[') !== false || strpos($param, ']') !== false) {
 
@@ -285,33 +286,33 @@ if(!class_exists('WBC_Sanitize')) {
 		            'max_price',
 		        ),
 		        'dynamic' => array(
-		            '$get_field',
-		            '$filter_sets_val[\'filter_set_two_tabs_first\']',
-		            '$tab_data["first_tab_id"]',
-		            '$fk',
-		            '$post_field',
-		            '$key',
-		            '$icon_keys[$i]',
-		            $prefix.'_fconfig_filter',
-		            $prefix.'_fconfig_type',
-		            $prefix.'_fconfig_label',
-		            $prefix.'_fconfig_is_advanced',
-		            $prefix.'_fconfig_dependent',
-		            $prefix.'_fconfig_input_type',
-		            $prefix.'_fconfig_column_width',
-		            $prefix.'_fconfig_ordering',
-		            $prefix.'_fconfig_icon_size',
-		            $prefix.'_fconfig_icon_label_size',
-		            $prefix.'_fconfig_add_reset_link',
-		            $prefix.'_fconfig_add_help',
-		            $prefix.'_fconfig_add_help_text',
-		            $prefix.'_fconfig_add_enabled',
-		            $prefix.'_fconfig_set',
-		            $prefix.'_fconfig_elements',
-		            '$_first_tab_key',
-		            '$request_field',
-		            '$selected_key',
-		            '$__filter[\'id\']'
+		            /*$get_field.*/'',
+		            /*$filter_sets_val[\'filter_set_two_tabs_first\'].*/'',
+		            /*$tab_data["first_tab_id"].*/'',
+		            /*$fk.*/'',
+		            /*$post_field.*/'',
+		            /*$key.*/'',
+		            /*$icon_keys[$i].*/'',
+		            /*$prefix.*/'_fconfig_filter',
+		            /*$prefix.*/'_fconfig_type',
+		            /*$prefix.*/'_fconfig_label',
+		            /*$prefix.*/'_fconfig_is_advanced',
+		            /*$prefix.*/'_fconfig_dependent',
+		            /*$prefix.*/'_fconfig_input_type',
+		            /*$prefix.*/'_fconfig_column_width',
+		            /*$prefix.*/'_fconfig_ordering',
+		            /*$prefix.*/'_fconfig_icon_size',
+		            /*$prefix.*/'_fconfig_icon_label_size',
+		            /*$prefix.*/'_fconfig_add_reset_link',
+		            /*$prefix.*/'_fconfig_add_help',
+		            /*$prefix.*/'_fconfig_add_help_text',
+		            /*$prefix.*/'_fconfig_add_enabled',
+		            /*$prefix.*/'_fconfig_set',
+		            /*$prefix.*/'_fconfig_elements',
+		            /*$_first_tab_key.*/'',
+		            /*$request_field.*/'',
+		            /*$selected_key.*/'',
+		            /*$__filter[\'id\'].*/''
 		        )
 		    );
 		}
