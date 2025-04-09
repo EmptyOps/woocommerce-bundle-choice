@@ -57,10 +57,6 @@ class SP_Model_Gallery_Slider extends Eowbc_Base_Model_Publics {
 
 		add_filter('sp_slzm_slider_image_loop_js_template',function($html){
 
-
-			// added on 07-04-2025 This support has been added for the new template
-			$image['src'] = '{{data.src}}';
-
 			$image['gallery_thumbnail_src'] = '{{data.gallery_thumbnail_src}}';
 			$image['gallery_thumbnail_class'] = '{{data.gallery_thumbnail_class}}';
 			$image['gallery_thumbnail_src_w'] = '{{data.gallery_thumbnail_src_w}}';
