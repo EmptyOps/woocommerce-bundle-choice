@@ -124,6 +124,8 @@ class SP_WBC_Product extends SP_Product {
 
             self::beautify_url_data_ajax(); 
         });
+
+        \eo\wbc\model\utilities\SP_Extensions_Api::hooks();
     }
 
     public static function admin_hooks() {

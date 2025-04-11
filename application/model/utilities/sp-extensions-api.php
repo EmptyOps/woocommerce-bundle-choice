@@ -277,6 +277,15 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 		}, 50, 4);
     }
 
+	public static function hooks() {
+
+		ACTIVE_TODO/TODO if ever we face any problems for this webhook code then we can simply move it from here to applicable submodule and so on from where also the extensions could be able to access it. the problems that might be of concern are secutiry problems, performance concern(least likely) or some other such things. -- to h
+		add_action('rest_api_init', function() {
+
+		    self::sp_wbc_webhook_register_route();
+		});
+    }
+
     private static function process_form_definition($mode, $form_definition, $args) {
     	// die('process_form_definition start');
 		wbc()->load->model('admin\form-builder');
@@ -640,5 +649,46 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
     	$tab_form = wbc()->common->array_insert_before($tab_form, $fk, $fk.'_eas_visible_info', $visible_info, true);
     	// wbc_pr($tab_form);
     	return $tab_form;
+    }
+
+    private static function sp_wbc_webhook_register_route() {
+
+        register_rest_route('sp-wbc-webhook/v1', '/receive', array(
+            'methods'  => 'POST',
+            'callback' => function($request) {
+
+                return self::sp_wbc_webhook_listener($request);
+            },
+            'permission_callback' => '__return_true'
+        ));
+    }
+
+    private static function sp_wbc_webhook_listener(WP_REST_Request $request) {
+
+        // Step 1: Get API key from request headers
+        $headers = $request->get_headers();
+        $api_key = isset($headers['api-key']) ? $headers['api-key'][0] : '';
+
+        // Step 2: Validate API key using activate/deactivate token
+        $valid_api_key = get_option('extra_sub_tab_token');
+        if (!$api_key || $api_key !== $valid_api_key) {
+
+            return new WP_REST_Response([
+                'type' => 'error',
+                'msg'  => 'Unauthorized: Invalid API Key'
+            ], 403);
+        }
+
+        // Step 3: Get JSON input
+        $data = $request->get_json_params();
+
+        // Step 4: Call filter hook
+        $response = apply_filters('sp_wbc_webhook_process', array(
+            'type' => 'success',
+            'msg'  => 'Webhook processed successfully'
+        ), $data);
+
+        // Step 5: Return the filtered response
+        return rest_ensure_response($response);
     }
 }
