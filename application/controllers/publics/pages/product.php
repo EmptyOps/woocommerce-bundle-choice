@@ -113,43 +113,7 @@ class Product extends \eo\wbc\system\core\publics\Eowbc_Base_Model_Publics {
     public function init_safe_click() {
         add_action('woocommerce_after_add_to_cart_button',function(){
 
-            if(false){  
-                ob_start();  
-                ?>
-                <script type="text/javascript">
-
-                    document.querySelector('.single_add_to_cart_button:not(#eo_wbc_add_to_cart)').addEventListener("click",function(event) {                         
-                             event.preventDefault();
-                    },false);
-
-                    // let sp_add_to_cart_dots = 1
-                    var sp_add_to_cart_dots = 1
-                    // let sp_add_to_cart_dots_interval = window.setInterval(function(){
-                    var sp_add_to_cart_dots_interval = window.setInterval(function(){
-                        
-                        if(jQuery('#eo_wbc_add_to_cart,#eo_wbc_add_to_cart_preview').length>0) {                        
-                            window.clearInterval(sp_add_to_cart_dots_interval);
-
-                        } else {
-                            if(sp_add_to_cart_dots>3) {
-                                sp_add_to_cart_dots = 1;
-                            } else {
-                                sp_add_to_cart_dots = sp_add_to_cart_dots+1;
-                            }
-                            jQuery('.single_add_to_cart_button:not(#eo_wbc_add_to_cart,#eo_wbc_add_to_cart_preview)').text('.'.repeat(sp_add_to_cart_dots));
-                        }
-                    },500);
-                    jQuery(".single_add_to_cart_button:not(#eo_wbc_add_to_cart)").off('click');
-                    jQuery(".single_add_to_cart_button:not(#eo_wbc_add_to_cart)").css('cursor','not-allowed !important');
-                    
-                    jQuery(".single_add_to_cart_button:not(#eo_wbc_add_to_cart)").on('click',function(e){
-                        e.preventDefault();
-                        e.stopPropagation();
-                    });
-                </script> 
-                <?php  
-                echo(ob_get_clean());
-            } 
+            // NOTE:From here, we have removed the original code inside the if (false) block. So, whenever there is a need to view the original or any other code for readability purposes, simply take the script below, put it in a new .js file in Sublime Text, and view it in readable format.Apart from that, we had removed the original code, and in some scenarios, that original code might have contained PHP variables like XYZ. Those would have been removed as well.And of course, even if the removed code from the if (false) block is not relevant to the current version, it might be required during future milestone tasks, so for this purpose, refer to the branch named "ui_QCed_ashish_-2" and check the commit dated 07-04-2025 for looking at the original code.
             $inline_script = 
                 "document.querySelector('.single_add_to_cart_button:not(#eo_wbc_add_to_cart)').addEventListener(\"click\",function(event) { \n" .
                 "    event.preventDefault();\n" .
@@ -266,12 +230,7 @@ class Product extends \eo\wbc\system\core\publics\Eowbc_Base_Model_Publics {
         
         add_action('wp_head',function(){
             wp_dequeue_script('wc-add-to-cart-variation');
-            if(false){
-            ?>
-                <style> body .wcp_preview_first_product_title, body .wcp_preview_second_product_title{font-size: 1.6rem;line-height: 2.4rem;white-space: nowrap;width: 24rem;overflow: hidden;text-overflow: ellipsis;float: left;} @media only screen and (max-width: 480px) { body .wcp_preview_first_product_title, body .wcp_preview_second_product_title { font-size: 1rem !important; line-height: 2rem !important; width: inherit !important; word-break: break-word; max-width: 20rem; } } @media only screen and (max-width: 320px) { body .wcp_preview_first_product_title, body .wcp_preview_second_product_title { font-size: 1rem !important; line-height: 2rem !important; width: inherit !important; word-break: break-word; max-width: 17rem; } }</style>
-            <?php
-            }
-
+            //NOTE:From here, we have removed the original code inside the if (false) block.So, whenever there is a need to view the original or any other code for readability purposes, simply take the css below, put it in a new .css file in Sublime Text,and view it in readable format.Apart from that, we had removed the original code, and in some scenarios,that original code might have contained PHP variables like XYZ. Those would have been removed as well. And of course, even if the removed code from the if (false) block is not relevant to the current version,it might be required during future milestone tasks, so for this purpose,refer to the branch named "ui_QCed_ashish_-2" and check the commit dated 07-04-2025 for looking at the original code.
             $custom_css = "
                 body .wcp_preview_first_product_title, body .wcp_preview_second_product_title {
                     font-size: 1.6rem;
@@ -306,11 +265,7 @@ class Product extends \eo\wbc\system\core\publics\Eowbc_Base_Model_Publics {
 
             wbc()->load->add_inline_style('', $custom_css, 'common');
             
-        if(false){
-        ?>
-            <style type="text/css">table.variations{display: none;}</style>
-        <?php
-        }
+            //NOTE:From here, we have removed the original code inside the if (false) block.So, whenever there is a need to view the original or any other code for readability purposes, simply take the css below, put it in a new .css file in Sublime Text,and view it in readable format.Apart from that, we had removed the original code, and in some scenarios,that original code might have contained PHP variables like XYZ. Those would have been removed as well. And of course, even if the removed code from the if (false) block is not relevant to the current version,it might be required during future milestone tasks, so for this purpose,refer to the branch named "ui_QCed_ashish_-2" and check the commit dated 07-04-2025 for looking at the original code.
             $custom_css = "
                 table.variations {
                 display: none;
@@ -319,18 +274,7 @@ class Product extends \eo\wbc\system\core\publics\Eowbc_Base_Model_Publics {
 
             wbc()->load->add_inline_style('', $custom_css, 'common');
 
-        if(false){
-        ?>
-            <style type="text/css">
-                .variations_form .variations, #wbc_variation_toggle {
-                    display: none !important;
-                }
-                .Product_Left_Wrapper_Plugin_Images .imagezoomsl_zoom_container .Zoom_Rigt-sec .small-image.corner-image.corner-toggle-image {
-                    display: none;
-                }
-            </style>
-        <?php
-        }
+        //NOTE:From here, we have removed the original code inside the if (false) block.So, whenever there is a need to view the original or any other code for readability purposes, simply take the css below, put it in a new .css file in Sublime Text,and view it in readable format.Apart from that, we had removed the original code, and in some scenarios,that original code might have contained PHP variables like XYZ. Those would have been removed as well. And of course, even if the removed code from the if (false) block is not relevant to the current version,it might be required during future milestone tasks, so for this purpose,refer to the branch named "ui_QCed_ashish_-2" and check the commit dated 07-04-2025 for looking at the original code.
             
         $custom_css = "
             .variations_form .variations, #wbc_variation_toggle {
@@ -343,59 +287,6 @@ class Product extends \eo\wbc\system\core\publics\Eowbc_Base_Model_Publics {
 
         wbc()->load->add_inline_style('', $custom_css, 'sp-wbc-common-footer');
 
-            if(false){
-            ?>
-                <script type="text/javascript">
-
-                    // ACTIVE_TODO it is added on 04-03-2024. to ensure that woocommerce variable is created atleast with the empty object so that show variation is fired normally on the preview page. however during the wbc upgrade we need to make sure that fundamental add to cart button rendering does happen or maybe we can not do that but do something that is possible so that we do not need rely on a hack like below. -- to h 
-                    wc_add_to_cart_variation_params = {}
-
-                    jQuery(".single_add_to_cart_button.button.alt").ready(function(){
-
-                        jQuery('form.cart').prepend("<input type='hidden' name='eo_wbc_add_to_cart_preview' value='1'/>");
-                        
-                        jQuery(".single_add_to_cart_button.button.alt:not(.disabled):eq(0)").replaceWith(
-                             "<button href='#' id='eo_wbc_add_to_cart_preview' class='single_add_to_cart_button button alt'><?php esc_html_e('Add To Cart','woo-bundle-choice') ?></button>"
-                        );
-
-                        jQuery(document).on('click','#eo_wbc_add_to_cart_preview',function() {
-                            <?php
-                                global $post;
-                                $url = get_permalink($post->ID);    
-
-                                $get_link = wbc()->common->http_query(array('EO_WBC'=>1,'BEGIN'=>wbc()->sanitize->get('BEGIN'),'STEP'=>3,'FIRST'=>wbc()->sanitize->get('FIRST'),'SECOND'=>wbc()->sanitize->get('SECOND'),'eo_wbc_add_to_cart_preview'=>'1','WBC_PREVIEW'=>'1'));
-
-                                if(strpos($url,'?') ===false ) {
-                                    $url = $url."?".$get_link;
-                                } else {
-                                    $url = $url."&".$get_link;
-                                }
-                            ?>
-                            
-                            
-                            var url = '<?php echo $url; ?>';
-                            
-                            if(!window.document.splugins.common.is_empty(jQuery('#eo_wbc_add_to_cart_preview').data('url_extra_callback'))){
-
-                                url = window[jQuery('#eo_wbc_add_to_cart_preview').data('url_extra_callback')](url);
-                            }
-
-                            if (!window.document.splugins.common.is_empty(url)) {
-                                
-                                // console.log('ddddddddddd');
-                                // console.log(url);
-                                window.location.href = url;
-                            }
-
-                            return false;
-                        });
-
-                        // jQuery("table.variations").remove();
-
-                    });
-                </script>
-            <?php
-            }
 
             $Add_To_Cart_woo_bundle_choice = esc_html__('Add To Cart','woo-bundle-choice');
 
@@ -410,6 +301,7 @@ class Product extends \eo\wbc\system\core\publics\Eowbc_Base_Model_Publics {
                 $url = $url."&".$get_link;
             }
 
+            // NOTE:From here, we have removed the original code inside the if (false) block. So, whenever there is a need to view the original or any other code for readability purposes, simply take the script below, put it in a new .js file in Sublime Text, and view it in readable format.Apart from that, we had removed the original code, and in some scenarios, that original code might have contained PHP variables like XYZ. Those would have been removed as well.And of course, even if the removed code from the if (false) block is not relevant to the current version, it might be required during future milestone tasks, so for this purpose, refer to the branch named "ui_QCed_ashish_-2" and check the commit dated 07-04-2025 for looking at the original code.
             $inline_script = 
                 "// ACTIVE_TODO it is added on 04-03-2024. to ensure that woocommerce variable is created atleast with the empty object so that show variation is fired normally on the preview page. however during the wbc upgrade we need to make sure that fundamental add to cart button rendering does happen or maybe we can not do that but do something that is possible so that we do not need rely on a hack like below. -- to h \n" .
                 "wc_add_to_cart_variation_params = {}\n" .
@@ -731,22 +623,7 @@ class Product extends \eo\wbc\system\core\publics\Eowbc_Base_Model_Publics {
             }
             //Add css to the head
             add_Action('wp_head',function(){
-                if(false){
-                ?>
-                    <style>
-                        
-                        @media only screen and (max-width: 678px){
-                            .make_pair{
-                                margin: auto !important;
-                            }
-                        }
-
-                        .make_pair{
-                            margin-left: 5px !important;
-                        }
-                    </style>
-                <?php
-                }
+                //NOTE:From here, we have removed the original code inside the if (false) block.So, whenever there is a need to view the original or any other code for readability purposes, simply take the css below, put it in a new .css file in Sublime Text,and view it in readable format.Apart from that, we had removed the original code, and in some scenarios,that original code might have contained PHP variables like XYZ. Those would have been removed as well. And of course, even if the removed code from the if (false) block is not relevant to the current version,it might be required during future milestone tasks, so for this purpose,refer to the branch named "ui_QCed_ashish_-2" and check the commit dated 07-04-2025 for looking at the original code.
                 $custom_css = "
                     @media only screen and (max-width: 678px){
                         .make_pair{
@@ -763,20 +640,11 @@ class Product extends \eo\wbc\system\core\publics\Eowbc_Base_Model_Publics {
             });
             //Add Js to the footer.
             add_action('wp_footer',function(){
-                if(false){
-                    ?>
-                    <!-- WBC{ WooCommerce Product Bundle Choice wiget STARTS. } -->
-                    <script>
-                        jQuery(document).ready(function(){
-                            jQuery('form.cart').prepend("<input type='hidden' name='eo_wbc_target' value='<?php echo esc_attr($this->page_category); ?>'/><input type='hidden' name='eo_wbc_product_id' value='<?php global $post; echo esc_attr($post->ID); ?>'/>");
-                        });
-                    </script>
-                    <!-- WBC{ WooCommerce Product Bundle Choice wiget ENDS. } -->
-                    <?php
-                }
+
                 global $post;
                 $page_category = esc_attr($this->page_category);
                 $post_ID = esc_attr($post->ID);
+                // NOTE:From here, we have removed the original code inside the if (false) block. So, whenever there is a need to view the original or any other code for readability purposes, simply take the script below, put it in a new .js file in Sublime Text, and view it in readable format.Apart from that, we had removed the original code, and in some scenarios, that original code might have contained PHP variables like XYZ. Those would have been removed as well.And of course, even if the removed code from the if (false) block is not relevant to the current version, it might be required during future milestone tasks, so for this purpose, refer to the branch named "ui_QCed_ashish_-2" and check the commit dated 07-04-2025 for looking at the original code.
                 $inline_script = 
                     "jQuery(document).ready(function(){\n" .
                     "    jQuery('form.cart').prepend(\"<input type='hidden' name='eo_wbc_target' value='".$page_category."'/><input type='hidden' name='eo_wbc_product_id' value='".$post_ID."'/>\");\n" .
@@ -841,20 +709,7 @@ class Product extends \eo\wbc\system\core\publics\Eowbc_Base_Model_Publics {
         parent::instance()->sidebars_widgets();
 
         
-        if(false){        
-        ob_start();
-        ?>
-        <style type="text/css">
-            .woocommerce .content-area ,#content,#primary,#main,.content,.primary,.main{
-                  width: 100% !important;
-             }
-             .woocommerce .widget-area {
-                  display: none !important;
-             }
-        </style>
-        <?php
-        echo ob_get_clean();
-        }
+        //NOTE:From here, we have removed the original code inside the if (false) block.So, whenever there is a need to view the original or any other code for readability purposes, simply take the css below, put it in a new .css file in Sublime Text,and view it in readable format.Apart from that, we had removed the original code, and in some scenarios,that original code might have contained PHP variables like XYZ. Those would have been removed as well. And of course, even if the removed code from the if (false) block is not relevant to the current version,it might be required during future milestone tasks, so for this purpose,refer to the branch named "ui_QCed_ashish_-2" and check the commit dated 07-04-2025 for looking at the original code.
         $custom_css = "
             .woocommerce .content-area ,#content,#primary,#main,.content,.primary,.main{
                 width: 100% !important;
@@ -934,63 +789,7 @@ class Product extends \eo\wbc\system\core\publics\Eowbc_Base_Model_Publics {
             global $post;            
             $product = wbc()->wc->eo_wbc_get_product($post->ID);
             if(!empty($product) and !is_wp_error($product) and  $product->is_in_stock()) {
-            if(false){    
-            ?>
-            <!-- Created with Wordpress plugin - WooCommerce Product bundle choice -->
-            <script type="text/javascript">
-                jQuery(".single_add_to_cart_button.button.alt").ready(function(){
-                    jQuery('form.cart').prepend("<input type='hidden' name='eo_wbc_target' value='<?php echo esc_attr($this->page_category); ?>'/><input type='hidden' name='eo_wbc_product_id' value='<?php global $post; echo esc_attr($post->ID); ?>'/>");
-                    
-                    <?php if(!empty(wbc()->options->get_option('appearance_product_page','product_page_add_to_basket',''))) :?>
-                        
-                        window.wbc_atb_submin_form = function(){
-                            // jQuery('form.cart').attr('action',document.location.href);
-                            // jQuery('form.cart').submit();
-                            window.document.splugins.single_product.wbc_atb_submin_form();
-                        }
 
-                        jQuery(".single_add_to_cart_button.alt:not(.disabled):eq(0)").replaceWith('<div class=\"ui buttons\">'+
-                                '<div class=\"ui button\" href=\"#\" id=\"eo_wbc_add_to_cart\"><?php echo esc_html($btn_text); ?></div>'+
-                                    '<div class=\"ui floating dropdown icon button\" style=\"width: fit-content;min-width: unset; max-width: unset;\">'+
-                                        '<i class=\"dropdown icon\"></i>'+
-                                        '<div class=\"menu\">'+
-                                            '<div class=\"item\" onClick=\"window.wbc_atb_submin_form();\"><?php echo esc_html(wbc()->options->get_option('appearance_product_page','product_page_add_to_basket',''));?></div>'+                                    
-                                        '</div>'+
-                                    '</div>'+
-                                '</div>'+
-                            '</div>');
-                        jQuery(".dropdown").dropdown();
-
-                    <?php else: ?>
-
-                        jQuery(".single_add_to_cart_button.button.alt:not(.disabled):eq(0)").replaceWith(
-                         "<button href='#' id='eo_wbc_add_to_cart' class='single_add_to_cart_button button alt'>"
-                         +"<?php echo esc_html($btn_text); ?>"
-                         +"</button>"
-                        );
-                    <?php endif; ?>
-                    });
-
-
-                <?php
-                
-                $step = wbc()->sanitize->get('STEP');
-
-                if( $step == 2 && wbc()->common->is_product_under_category($product,wbc()->options->get_option('configuration','second_name')) && $product->is_type( 'variable' ) ) {
-                    ?>  
-
-                    //  define namespaces 
-                    window.document.splugins = window.document.splugins || {};
-                    window.document.splugins.common = window.document.splugins.common || {};
-                    
-                    window.document.splugins.common.is_handle_variation_id_pair_builder_step_2 = true;
-
-                    <?php 
-                }?>
-            </script>
-            
-            <?php 
-            }
             }
             $page_category = $this->page_category;
             $post_ID = $post->ID;
@@ -1010,6 +809,8 @@ class Product extends \eo\wbc\system\core\publics\Eowbc_Base_Model_Publics {
 
             $__btn_text = esc_html($btn_text);
             $__appearance_product_page = esc_html(wbc()->options->get_option('appearance_product_page','product_page_add_to_basket','')); 
+
+            // NOTE:From here, we have removed the original code inside the if (false) block. So, whenever there is a need to view the original or any other code for readability purposes, simply take the script below, put it in a new .js file in Sublime Text, and view it in readable format.Apart from that, we had removed the original code, and in some scenarios, that original code might have contained PHP variables like XYZ. Those would have been removed as well.And of course, even if the removed code from the if (false) block is not relevant to the current version, it might be required during future milestone tasks, so for this purpose, refer to the branch named "ui_QCed_ashish_-2" and check the commit dated 07-04-2025 for looking at the original code.
             $inline_script =
                 "jQuery(\".single_add_to_cart_button.button.alt\").ready(function(){\n" .
                 "    jQuery('form.cart').prepend(\"<input type='hidden' name='eo_wbc_target' value='".$page_category."'/><input type='hidden' name='eo_wbc_product_id' value='".$post_ID."'/>\");\n" .
@@ -1065,15 +866,7 @@ class Product extends \eo\wbc\system\core\publics\Eowbc_Base_Model_Publics {
                 if(
                     (wbc()->options->get_option('tiny_features','product_page_hide_first_variation_form',false) and $category == $this->first_category_slug) or wbc()->options->get_option('tiny_features','product_page_hide_second_variation_form',false) and $category == $this->second_category_slug
                 ):
-                if(false){ 
-                ?>
-                    <style>
-                        .variations_form table.variations{
-                            display:none !important;
-                        }
-                    </style>
-                <?php
-                }
+                //NOTE:From here, we have removed the original code inside the if (false) block.So, whenever there is a need to view the original or any other code for readability purposes, simply take the css below, put it in a new .css file in Sublime Text,and view it in readable format.Apart from that, we had removed the original code, and in some scenarios,that original code might have contained PHP variables like XYZ. Those would have been removed as well. And of course, even if the removed code from the if (false) block is not relevant to the current version,it might be required during future milestone tasks, so for this purpose,refer to the branch named "ui_QCed_ashish_-2" and check the commit dated 07-04-2025 for looking at the original code.
                 $custom_css = "
                     .variations_form table.variations {
                         display: none !important;

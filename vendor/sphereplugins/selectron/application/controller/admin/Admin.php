@@ -28,41 +28,8 @@ class Admin {
 		*/
 
 		add_action('admin_footer',function(){
-			if(false){
-			?>
-			<script type="text/javascript">
-				jQuery(document).ready(function(){
-					jQuery('.required.field[class*="_container_render_method"] .ui.radio').on('change',function(){
 
-						let parent = jQuery(this).closest('.required.field[class*="_container_render_method"]').parent();
-						if(jQuery(this).find('input:radio').val() === 'query_selector'){
-							jQuery(parent).next().css('display','none');
-							jQuery(parent).next().next().css('display','none');
-							jQuery(parent).next().next().next().css('display','none');
-
-							jQuery(parent).next().next().next().next().css('display','block');
-							jQuery(parent).next().next().next().next().next().css('display','block');
-
-						} else {
-
-							jQuery(parent).next().css('display','block');
-							jQuery(parent).next().next().css('display','block');
-							jQuery(parent).next().next().next().css('display','block');
-
-							jQuery(parent).next().next().next().next().css('display','none');
-							jQuery(parent).next().next().next().next().next().css('display','none');
-						}
-
-					});
-				});
-
-				jQuery(window).on('load',function(){
-					jQuery('.required.field[class*="_container_render_method"] :radio:checked').trigger('change')
-				});
-			</script>
-			<?php
-			}
-			
+			// NOTE:From here, we have removed the original code inside the if (false) block. So, whenever there is a need to view the original or any other code for readability purposes, simply take the script below, put it in a new .js file in Sublime Text, and view it in readable format.Apart from that, we had removed the original code, and in some scenarios, that original code might have contained PHP variables like XYZ. Those would have been removed as well.And of course, even if the removed code from the if (false) block is not relevant to the current version, it might be required during future milestone tasks, so for this purpose, refer to the branch named "ui_QCed_ashish_-2" and check the commit dated 07-04-2025 for looking at the original code.			
 			$inline_script = 
 "				jQuery(document).ready(function(){\n" .
 "					jQuery('.required.field[class*=\"_container_render_method\"] .ui.radio').on('change',function(){\n" .

@@ -29,15 +29,8 @@ if(!empty($tab_data) and is_array($tab_data)){
 
 	wbc()->load->template('component/tab/tab-head',array('tabs'=>$tab_data));
 	wbc()->load->template('component/tab/tab-content',array('tab_contents'=>$tab_data));
-	if (false) {
-	?>
-		<script type="text/javascript">
-			jQuery('.menu .item').tab();
-			jQuery('.ui.menu .item').off('click');
-		</script>
 
-	<?php 
-	}
+	// NOTE:From here, we have removed the original code inside the if (false) block. So, whenever there is a need to view the original or any other code for readability purposes, simply take the script below, put it in a new .js file in Sublime Text, and view it in readable format.Apart from that, we had removed the original code, and in some scenarios, that original code might have contained PHP variables like XYZ. Those would have been removed as well.And of course, even if the removed code from the if (false) block is not relevant to the current version, it might be required during future milestone tasks, so for this purpose, refer to the branch named "ui_QCed_ashish_-2" and check the commit dated 07-04-2025 for looking at the original code.
 	$inline_script = 
 		"jQuery('.menu .item').tab();\n" .
 		"jQuery('.ui.menu .item').off('click');";
@@ -45,15 +38,8 @@ if(!empty($tab_data) and is_array($tab_data)){
 	wbc()->load->add_inline_script('', $inline_script, 'common-admin');
 	?>	
 	<?php 
-        if(false) {
-    ?>
-		<style>
-			.ui.bottom.attached.tab.segment.active{
-				min-height: 75vh;
-			}
-		</style>
-	<?php
-	}
+	
+        //NOTE:From here, we have removed the original code inside the if (false) block.So, whenever there is a need to view the original or any other code for readability purposes, simply take the css below, put it in a new .css file in Sublime Text,and view it in readable format.Apart from that, we had removed the original code, and in some scenarios,that original code might have contained PHP variables like XYZ. Those would have been removed as well. And of course, even if the removed code from the if (false) block is not relevant to the current version,it might be required during future milestone tasks, so for this purpose,refer to the branch named "ui_QCed_ashish_-2" and check the commit dated 07-04-2025 for looking at the original code.
 		$custom_css = "
 
 	    .ui.bottom.attached.tab.segment.active{

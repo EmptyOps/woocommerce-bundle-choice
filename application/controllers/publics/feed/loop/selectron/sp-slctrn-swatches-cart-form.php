@@ -44,11 +44,7 @@ class SP_SLCTRN_Swatches_Cart_Form extends \sp\selectron\controller\publics\cont
 		}
 
 		add_action('wp_head',function() use($selector,$delay){
-		if(false){	
-			?>
-			<script type="text/javascript">window.document.splugins = window.document.splugins || {}; window.document.splugins.tableview = window.document.splugins.tableview || {}; window.document.splugins.tableview.table_container = '<?php echo $selector; ?>' </script>
-			<?php
-		}
+		// NOTE:From here, we have removed the original code inside the if (false) block. So, whenever there is a need to view the original or any other code for readability purposes, simply take the script below, put it in a new .js file in Sublime Text, and view it in readable format.Apart from that, we had removed the original code, and in some scenarios, that original code might have contained PHP variables like XYZ. Those would have been removed as well.And of course, even if the removed code from the if (false) block is not relevant to the current version, it might be required during future milestone tasks, so for this purpose, refer to the branch named "ui_QCed_ashish_-2" and check the commit dated 07-04-2025 for looking at the original code.
 		//$selector = "your_selector_value"; // aa chet gpt ye aapelu chhe Replace this with your actual selector value
 		$inline_script =
 		    "window.document.splugins = window.document.splugins || {};\n" .

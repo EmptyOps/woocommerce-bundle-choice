@@ -5,23 +5,7 @@ if(/*wp_is_mobile()*/ wbc_is_mobile_by_page_sections('cat_shop_page',true)) {
 	<div class="content"></div>
 	</div>
 	<?php
-	if(false) {
-	?>
-	<script type="text/javascript">
-	jQuery(document).ready(function(){
-		jQuery(document).on('click',".question.circle.icon",function(){
-			jQuery("#help_modal").find(".content").html('');	
-			_help_text = jQuery(this).data('help');
-			jQuery("#help_modal").find(".content").html(_help_text);
-			jQuery("#help_modal").modal('show');
-		});
-		jQuery(document).on('click',"#help_modal .close.icon",function(){
-			jQuery("#help_modal").modal('hide');
-		});
-	});
-	</script>
-	<?php 
-	}
+	// NOTE:From here, we have removed the original code inside the if (false) block. So, whenever there is a need to view the original or any other code for readability purposes, simply take the script below, put it in a new .js file in Sublime Text, and view it in readable format.Apart from that, we had removed the original code, and in some scenarios, that original code might have contained PHP variables like XYZ. Those would have been removed as well.And of course, even if the removed code from the if (false) block is not relevant to the current version, it might be required during future milestone tasks, so for this purpose, refer to the branch named "ui_QCed_ashish_-2" and check the commit dated 07-04-2025 for looking at the original code.
 	$inline_script =
 	    "jQuery(document).ready(function(){\n" .
 	    "    jQuery(document).on('click', \".question.circle.icon\", function(){\n" .

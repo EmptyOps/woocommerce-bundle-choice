@@ -64,12 +64,8 @@ if(isset($_GET['FIRST']) and isset($_GET['SECOND'])) {
     $html.='</div>';
 
     if(wbc()->options->get_option('appearance_breadcrumb','showhide_icons','0')/*get_option('eo_wbc_show_hide_breadcrumb_icon','0')*/==='1'){
-        if(false)
-        {
-?>
-            $html.="<style>.eo-wbc-container>.ui.ordered.steps .step:before{content:''}</style>"
-<?php 
-        }
+        
+        //NOTE:From here, we have removed the original code inside the if (false) block.So, whenever there is a need to view the original or any other code for readability purposes, simply take the css below, put it in a new .css file in Sublime Text,and view it in readable format.Apart from that, we had removed the original code, and in some scenarios,that original code might have contained PHP variables like XYZ. Those would have been removed as well. And of course, even if the removed code from the if (false) block is not relevant to the current version,it might be required during future milestone tasks, so for this purpose,refer to the branch named "ui_QCed_ashish_-2" and check the commit dated 07-04-2025 for looking at the original code.
         $custom_css = ".eo-wbc-container>.ui.ordered.steps .step:before
         {
             content: '';
@@ -77,25 +73,7 @@ if(isset($_GET['FIRST']) and isset($_GET['SECOND'])) {
         wbc()->load->add_inline_style('', $custom_css,'common');
     } 
     echo $html;
-    if (false) {
-    
-        $html.="<script>
-                    jQuery(document).ready(function(){ jQuery('.onclick_redirect').on('click',function(){ 
-                            var _step = jQuery(this);
-                            var _rem_url = jQuery(_step).find('[data-remove-url]');
-                            if(_rem_url.length>0) { 
-                                window.location.href=jQuery(_rem_url[0]).data('remove-url');
-                            } else { 
-                                window.location.href = jQuery(_step).data('begin'); 
-                            }
-                        });
-                        jQuery('[data-clickable_breadcrumb]').on('click',function(){
-                            window.location.href = jQuery(this).data('clickable_breadcrumb'); 
-                        });
-                    }); 
-                </script>";
-        echo $html;
-    } 
+    // NOTE:From here, we have removed the original code inside the if (false) block. So, whenever there is a need to view the original or any other code for readability purposes, simply take the script below, put it in a new .js file in Sublime Text, and view it in readable format.Apart from that, we had removed the original code, and in some scenarios, that original code might have contained PHP variables like XYZ. Those would have been removed as well.And of course, even if the removed code from the if (false) block is not relevant to the current version, it might be required during future milestone tasks, so for this purpose, refer to the branch named "ui_QCed_ashish_-2" and check the commit dated 07-04-2025 for looking at the original code. 
     $inline_script =
         "jQuery(document).ready(function(){ jQuery('.onclick_redirect').on('click',function(){ \n" .
         "        var _step = jQuery(this);\n" .

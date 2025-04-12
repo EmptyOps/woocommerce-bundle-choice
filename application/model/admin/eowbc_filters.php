@@ -526,20 +526,8 @@ $setting_category = wbc()->wc->get_term_by( 'slug','eo_setting_shape_cat','produ
 
 if( !is_ajax() ) {
 	if((is_wp_error($diamond_category) or is_wp_error($setting_category) or empty($diamond_category) or empty($setting_category))) {
-		if(false){
-		ob_start();
-		?>
-			<script>
-				jQuery(document).ready(function($){
-					$("[name='first_category_altr_filt_widgts'],[name='second_category_altr_filt_widgts']").on('change',function(){
-						eowbc_toast_common('warning','Warning: It is recommended that you add sample data and then select and save your desired template. So that alternate widget templates can setup preview filters and make your work easy to set up them later. If the sample data is not available no preview filters can be set and you will need to add filters manually.<br><br>Also note that your existing filters will be disabled, you can enable them later at anytime by using bulk activate action.',20000);
-	                    
-					});
-				});
-			</script>
-		<?php
-		echo ob_get_clean();
-		}
+		
+		// NOTE:From here, we have removed the original code inside the if (false) block. So, whenever there is a need to view the original or any other code for readability purposes, simply take the script below, put it in a new .js file in Sublime Text, and view it in readable format.Apart from that, we had removed the original code, and in some scenarios, that original code might have contained PHP variables like XYZ. Those would have been removed as well.And of course, even if the removed code from the if (false) block is not relevant to the current version, it might be required during future milestone tasks, so for this purpose, refer to the branch named "ui_QCed_ashish_-2" and check the commit dated 07-04-2025 for looking at the original code.
 		$inline_script = 
 		"jQuery(document).ready(function(\$){\n" .
 		"    \$(\"[name='first_category_altr_filt_widgts'],[name='second_category_altr_filt_widgts']\").on('change',function(){\n" .
@@ -551,20 +539,7 @@ if( !is_ajax() ) {
 
 	}
 	else {
-		if(false){
-		ob_start();
-		?>
-			<script>
-				jQuery(document).ready(function($){
-					$("[name='first_category_altr_filt_widgts'],[name='second_category_altr_filt_widgts']").on('change',function(){
-						eowbc_toast_common('warning','Note that your existing filters will be disabled, and the new sample filters will be added. You can enable your existing filters later at anytime by using bulk activate action.',10000);
-	                    
-					});
-				});
-			</script>
-		<?php
-		echo ob_get_clean();
-		}
+		// NOTE:From here, we have removed the original code inside the if (false) block. So, whenever there is a need to view the original or any other code for readability purposes, simply take the script below, put it in a new .js file in Sublime Text, and view it in readable format.Apart from that, we had removed the original code, and in some scenarios, that original code might have contained PHP variables like XYZ. Those would have been removed as well.And of course, even if the removed code from the if (false) block is not relevant to the current version, it might be required during future milestone tasks, so for this purpose, refer to the branch named "ui_QCed_ashish_-2" and check the commit dated 07-04-2025 for looking at the original code.
 		$inline_script = 
 		"jQuery(document).ready(function(\$){\n" .
 		"    \$(\"[name='first_category_altr_filt_widgts'],[name='second_category_altr_filt_widgts']\").on('change',function(){\n" .

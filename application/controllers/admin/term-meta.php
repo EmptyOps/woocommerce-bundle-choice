@@ -198,30 +198,7 @@ class Term_Meta {
 					</button>
 				</div>
 				<?php
-				 if(false){ 
-				?>
-					<script type="text/javascript">					
-
-						jQuery(document).on("click",".wbc_thumb_button",function(){
-							wp_media = wp.media({
-								title: 'Term Image',
-								button: {
-									text: 'Choose Image'
-								},
-								multiple: false
-							})
-							.on('select', function() {
-
-								var attachment = wp_media.state().get('selection').first().toJSON();
-								jQuery('#wbc_thumb_img').attr('src', attachment.url);
-								jQuery('#wbc_attachment').val( attachment.url);
-							})
-							.open();
-							return false;
-						});				
-					</script>
-				<?php	
-				}
+				 // NOTE:From here, we have removed the original code inside the if (false) block. So, whenever there is a need to view the original or any other code for readability purposes, simply take the script below, put it in a new .js file in Sublime Text, and view it in readable format.Apart from that, we had removed the original code, and in some scenarios, that original code might have contained PHP variables like XYZ. Those would have been removed as well.And of course, even if the removed code from the if (false) block is not relevant to the current version, it might be required during future milestone tasks, so for this purpose, refer to the branch named "ui_QCed_ashish_-2" and check the commit dated 07-04-2025 for looking at the original code.
 				$inline_script =
 				    "jQuery(document).on(\"click\",\".wbc_thumb_button\",function(){\n" .
 				    "    wp_media = wp.media({\n" .
@@ -390,29 +367,7 @@ class Term_Meta {
 					</button>					
 				</div>
 				<?php 
-				if(false){
-				?>
-				<script type="text/javascript">					
-
-					jQuery(document).on("click",".wbc_attachment_thumb_button",function(){
-						wp_media = wp.media({
-							title: 'Term Thumb Image',
-							button: {
-								text: 'Choose Image'
-							},
-							multiple: false
-						})
-						.on('select', function() {
-
-							var attachment = wp_media.state().get('selection').first().toJSON();
-							jQuery('#wbc_attachment_thumb_img').attr('src', attachment.url);
-							jQuery('#wbc_attachment_thumb').val( attachment.url);
-						})
-						.open();
-						return false;
-					});				
-				</script>
-				<?php } 
+				// NOTE:From here, we have removed the original code inside the if (false) block. So, whenever there is a need to view the original or any other code for readability purposes, simply take the script below, put it in a new .js file in Sublime Text, and view it in readable format.Apart from that, we had removed the original code, and in some scenarios, that original code might have contained PHP variables like XYZ. Those would have been removed as well.And of course, even if the removed code from the if (false) block is not relevant to the current version, it might be required during future milestone tasks, so for this purpose, refer to the branch named "ui_QCed_ashish_-2" and check the commit dated 07-04-2025 for looking at the original code.
 				$inline_script =
 				    "jQuery(document).on(\"click\",\".wbc_attachment_thumb_button\",function(){\n" .
 				    "    wp_media = wp.media({\n" .
@@ -468,29 +423,7 @@ class Term_Meta {
 					</button>				
 				</div>
 				<?php 
-				if(false){
-				?>	
-				<script type="text/javascript">	
-					jQuery(document).on("click",".wbc_attachment_thumb_button",function(){
-						wp_media = wp.media({
-							title: 'Term Thumb Image',
-							button: {
-								text: 'Choose Image'
-							},
-							multiple: false
-						})
-						.on('select', function() {
-
-							var attachment = wp_media.state().get('selection').first().toJSON();
-							jQuery('#wbc_attachment_thumb_img').attr('src', attachment.url);
-							jQuery('#wbc_attachment_thumb').val( attachment.url);
-						})
-						.open();
-						return false;
-					});		
-				</script>
-				<?php
-				}
+				// NOTE:From here, we have removed the original code inside the if (false) block. So, whenever there is a need to view the original or any other code for readability purposes, simply take the script below, put it in a new .js file in Sublime Text, and view it in readable format.Apart from that, we had removed the original code, and in some scenarios, that original code might have contained PHP variables like XYZ. Those would have been removed as well.And of course, even if the removed code from the if (false) block is not relevant to the current version, it might be required during future milestone tasks, so for this purpose, refer to the branch named "ui_QCed_ashish_-2" and check the commit dated 07-04-2025 for looking at the original code.
 				$inline_script =
 				    "jQuery(document).on(\"click\",\".wbc_attachment_thumb_button\",function(){\n" .
 				    "    wp_media = wp.media({\n" .

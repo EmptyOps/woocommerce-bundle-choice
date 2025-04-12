@@ -8,64 +8,8 @@ $model_images = \eo\wbc\model\Images::instance();
 
 ?>
 <?php
-    if(false) {
-?>
-        <style type="text/css">
-            .eo-wbc-container.container:not(.filters) .ui.grid:not(.eo_wbc_filter_icon)>* {
-                padding-left: 5px; 
-                padding-right: 0px !important;
-            }
-            
-            .eo-wbc-container>.ui.steps .step .column.product_image_section img{
-                margin-left: 30% !important;
-            }
 
-            .eo-wbc-container>.ui.steps .step:after {
-                border-radius: 0 0 5px 0;
-            }
-
-            .eo-wbc-container>.ui.steps {
-                box-shadow: 2px 2px 0 #efefef !important;        
-            }
-            
-            .eo-wbc-container>.ui.steps *{
-                margin: auto !important;
-            }    
-
-            /*--------Breadcumb  @tejas 08-02-2023 responsive---------*/
-            @media only screen and (max-width: 768px){
-                body .eo-wbc-container.spui-semantic-breadcrumb>.ui.steps .step {
-                    padding-left: 2em !important;
-                }
-                body .eo-wbc-container.spui-semantic-breadcrumb>.ui.steps .step .column.product_image_section img {
-                    margin-left: 0 !important;
-                }
-            }
-
-            @media only screen and (max-width: 767px){
-                .ui.steps:not(.unstackable) .step:after{
-                    display: none!important;
-                }
-                body .eo-wbc-container.spui-semantic-breadcrumb>.ui.steps .step {
-                    padding-left: 1em !important;
-                }
-            }
-
-
-            @media only screen and (max-width: 325px){
-                body .eo-wbc-container.spui-semantic-breadcrumb>.ui.steps .step:first-child {
-                    padding-left: 0em !important;
-                }
-                body .eo-wbc-container.spui-semantic-breadcrumb>.ui.steps .step {
-                    padding-left: 0em !important;
-                }
-                body .eo-wbc-container.spui-semantic-breadcrumb>.ui.steps .step .column.product_image_section img {
-                    margin-left: 0% !important;
-                }
-            }
-        </style>
-<?php 
-    }
+    //NOTE:From here, we have removed the original code inside the if (false) block.So, whenever there is a need to view the original or any other code for readability purposes, simply take the css below, put it in a new .css file in Sublime Text,and view it in readable format.Apart from that, we had removed the original code, and in some scenarios,that original code might have contained PHP variables like XYZ. Those would have been removed as well. And of course, even if the removed code from the if (false) block is not relevant to the current version,it might be required during future milestone tasks, so for this purpose,refer to the branch named "ui_QCed_ashish_-2" and check the commit dated 07-04-2025 for looking at the original code.
     $custom_css = "
         .eo-wbc-container.container:not(.filters) .ui.grid:not(.eo_wbc_filter_icon)>* {
             padding-left: 5px;

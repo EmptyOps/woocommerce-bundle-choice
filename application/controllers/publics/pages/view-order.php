@@ -25,11 +25,7 @@ class View_Order {
     public function eo_wbc_add_css()
     {
       add_action('wp_head',function(){
-        if(false){
-        ?>
-            <style> .eo_wbc_column-2{ width: 300px; } .eo_wbc_column-1{ width:300px; } .eo_wbc_column-2,.eo_wbc_column-1{ float: left; padding: 0px; font-size: small; padding-right: 15px; padding-bottom: 15px; box-sizing: border-box; max-width: 200px; } .eo_wbc_row::after { content: ""; clear: both; display: table; } @media screen and (max-width: 500px) { .eo_wbc_column-2,.eo_wbc_column-1{ width: 100%; } } </style>
-        <?php
-        }
+        //NOTE:From here, we have removed the original code inside the if (false) block.So, whenever there is a need to view the original or any other code for readability purposes, simply take the css below, put it in a new .css file in Sublime Text,and view it in readable format.Apart from that, we had removed the original code, and in some scenarios,that original code might have contained PHP variables like XYZ. Those would have been removed as well. And of course, even if the removed code from the if (false) block is not relevant to the current version,it might be required during future milestone tasks, so for this purpose,refer to the branch named "ui_QCed_ashish_-2" and check the commit dated 07-04-2025 for looking at the original code.
            
             $custom_css = "
                 .eo_wbc_column-2 {
@@ -75,16 +71,9 @@ class View_Order {
             $sets=$wpdb->get_row($query,'ARRAY_A');
             $sets=(json_decode($sets['order_map']));
             //wbc()->common->pr($sets); 
-            if(false){           
-            ?>
-                <script type="text/javascript">
-                jQuery(document).ready(function(){
-                    jQuery('table.shop_table.order_details>tbody').html('<?php echo esc_attr($this->get_sets($sets))/*$this->get_sets($sets)*/; ?>');
-                });    
-                </script>
-            <?php
-            }
+            
             $get_sets_value = esc_attr($this->get_sets($sets));
+            // NOTE:From here, we have removed the original code inside the if (false) block. So, whenever there is a need to view the original or any other code for readability purposes, simply take the script below, put it in a new .js file in Sublime Text, and view it in readable format.Apart from that, we had removed the original code, and in some scenarios, that original code might have contained PHP variables like XYZ. Those would have been removed as well.And of course, even if the removed code from the if (false) block is not relevant to the current version, it might be required during future milestone tasks, so for this purpose, refer to the branch named "ui_QCed_ashish_-2" and check the commit dated 07-04-2025 for looking at the original code.
             $inline_script = 
                 "jQuery(document).ready(function(){\n" .
                 "    jQuery('table.shop_table.order_details>tbody').html('".$get_sets_value."');\n" .

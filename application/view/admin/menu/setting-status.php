@@ -4,13 +4,7 @@ defined( 'ABSPATH' ) || exit;
 //related to log module
 if(isset($_GET) && isset($_GET['action']) && wbc()->sanitize->get('action')=='clear' && !empty(wbc()->sanitize->get('ref')) ) {
 	\EOWBC_Error_Handler::clean_send();
-	if (false) {
-	?>
-		<script>
-			window.location.href='<?php echo wbc()->sanitize->get('ref'); ?>';
-		</script>
-	<?php
-	}
+	// NOTE:From here, we have removed the original code inside the if (false) block. So, whenever there is a need to view the original or any other code for readability purposes, simply take the script below, put it in a new .js file in Sublime Text, and view it in readable format.Apart from that, we had removed the original code, and in some scenarios, that original code might have contained PHP variables like XYZ. Those would have been removed as well.And of course, even if the removed code from the if (false) block is not relevant to the current version, it might be required during future milestone tasks, so for this purpose, refer to the branch named "ui_QCed_ashish_-2" and check the commit dated 07-04-2025 for looking at the original code.
 	$ref_value = wbc()->sanitize->get('ref');
 
 	$inline_script = 
@@ -52,22 +46,9 @@ wbc()->load->asset('js','admin/setting_status');
 //for error log form which displays code etc. 
 	//set false to not use it because textarea text are not visible until user do not click on it once however if it is inside the first loading tab it becomes visible but now its in secnd tab. enable it when there a fix available. 
 if (false && function_exists('wp_enqueue_code_editor')): 
-if (false) { ?>	
-	<script>                                 
-        jQuery(document).ready(function($) {     
-            var errors=<?php echo json_encode(array('codeEditor' =>wp_enqueue_code_editor(array('type' => 'text')))); ?>                              
-            wp.codeEditor.initialize($('#eo_wbc_view_error'), errors); 
-
-            setTimeout(function() {
-            	$('#eo_wbc_view_error').trigger('click');
-            }, 3000);
-        });
-
-    </script>  
-<?php
-}
 $wp_enqueue_code_editor_json_encode = json_encode(array('codeEditor' => wp_enqueue_code_editor(array('type' => 'text'))));
 
+// NOTE:From here, we have removed the original code inside the if (false) block. So, whenever there is a need to view the original or any other code for readability purposes, simply take the script below, put it in a new .js file in Sublime Text, and view it in readable format.Apart from that, we had removed the original code, and in some scenarios, that original code might have contained PHP variables like XYZ. Those would have been removed as well.And of course, even if the removed code from the if (false) block is not relevant to the current version, it might be required during future milestone tasks, so for this purpose, refer to the branch named "ui_QCed_ashish_-2" and check the commit dated 07-04-2025 for looking at the original code.
 $inline_script = 
     "jQuery(document).ready(function(\$) {     \n" .
     "    var errors=".$wp_enqueue_code_editor_json_encode.";\n" .
@@ -81,16 +62,7 @@ wbc()->load->add_inline_script('', $inline_script, 'common');
 	
 else: ?>
 <?php 
-	if(false) {
-?>
-		<style type="text/css">
-			.eo_wbc_view_error{
-				width: 100%;
-				min-height: 60em;
-			}
-		</style>
-<?php 
-	}
+	//NOTE:From here, we have removed the original code inside the if (false) block.So, whenever there is a need to view the original or any other code for readability purposes, simply take the css below, put it in a new .css file in Sublime Text,and view it in readable format.Apart from that, we had removed the original code, and in some scenarios,that original code might have contained PHP variables like XYZ. Those would have been removed as well. And of course, even if the removed code from the if (false) block is not relevant to the current version,it might be required during future milestone tasks, so for this purpose,refer to the branch named "ui_QCed_ashish_-2" and check the commit dated 07-04-2025 for looking at the original code.
 	$custom_css = "
 	    .eo_wbc_view_error {
 	        width: 100%;

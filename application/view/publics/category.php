@@ -7,60 +7,8 @@
 ?>  
 <!-- Created with Wordpress plugin - WooCommerce Product bundle choice -->
 <?php
-    if(false) {
-?>
-        <style type="text/css">
-            .cat_products{
-                border:1.3px solid #80808059;
-                border-radius: 1.5px;
-                margin:auto !important;
-                margin-bottom: 2em !important;                            
-            }
-            @media only screen and (max-width: 768px) {
-              .ui.stackable.grid>.wide.column{  
-                margin-bottom: 2em !important;
-              }
-            }
-            .ui.cards>.card {
-                width: 100%;
-            }
-            .ui.cards>.card>.image>img {
-                /*width: 100%;*/
-                width: auto;
-                margin: auto; 
-            }
-            .ui.cards>.card h5{
-                color: white !important;
-            }
 
-            .ui.special.cards .card:first-child{
-                margin-bottom: 0.75px;
-            }
-            .ui.special.cards .card:first-child,.ui.special.cards .card:first-child *:not(.button){
-                border-bottom-right-radius: 0px !important;
-                border-bottom-left-radius: 0px !important;
-            }
-            .ui.special.cards .card:last-child{
-                margin-top: 0.75px;
-            }
-            .ui.special.cards .card:last-child,.ui.special.cards .card:last-child *:not(.button){
-                border-top-left-radius: 0px !important;
-                border-top-right-radius: 0px !important;
-            }
-            .cat_products.seven.wide.column{
-                height: max-content;
-            }
-            .ui.card>.image:not(.ui)>img, .ui.cards>.card>.image:not(.ui)>img{
-                height: 250px !important;
-            }
-            .ui.dimmer .woocommerce-Price-amount.amount,.ui.dimmer  ins,.ui.dimmer  del{
-            color: white !important;
-            background-color: transparent !important;
-        }
-        </style>
-<?php
-    }
-
+    //NOTE:From here, we have removed the original code inside the if (false) block.So, whenever there is a need to view the original or any other code for readability purposes, simply take the css below, put it in a new .css file in Sublime Text,and view it in readable format.Apart from that, we had removed the original code, and in some scenarios,that original code might have contained PHP variables like XYZ. Those would have been removed as well. And of course, even if the removed code from the if (false) block is not relevant to the current version,it might be required during future milestone tasks, so for this purpose,refer to the branch named "ui_QCed_ashish_-2" and check the commit dated 07-04-2025 for looking at the original code.
     $custom_css = "
         .cat_products{
             border: 1.3px solid #80808059;
@@ -154,15 +102,8 @@
                     <br/>
                     <div style="display:block;clear:both;width: 100% !important"></div>
                     <?php
-                    if(false) {
-                    ?>   
-                    <script type="text/javascript">                        
-                        jQuery(document).ready(function($){
-                            $('.woocommerce-result-count').html('<?php _e($total_text); ?>')
-                        });
-                    </script>
-                    <?php
-                    }
+
+                    // NOTE:From here, we have removed the original code inside the if (false) block. So, whenever there is a need to view the original or any other code for readability purposes, simply take the script below, put it in a new .js file in Sublime Text, and view it in readable format.Apart from that, we had removed the original code, and in some scenarios, that original code might have contained PHP variables like XYZ. Those would have been removed as well.And of course, even if the removed code from the if (false) block is not relevant to the current version, it might be required during future milestone tasks, so for this purpose, refer to the branch named "ui_QCed_ashish_-2" and check the commit dated 07-04-2025 for looking at the original code.
                     $total_text = __($total_text);
                     $inline_script = "jQuery(document).ready(function(\$) { \n".
                     "\$('.woocommerce-result-count').html('" . $total_text . "');\n".
@@ -272,36 +213,7 @@
 </div>
 <!-- Created with Wordpress plugin - WooCommerce Product bundle choice -->
 <?php
-if (false) {
-?>
-    <script>
-        $ = jQuery;
-
-        // supposed to be used inside wo_wbc_filter.js
-        var is_card_view_rendered = true;
-
-        /**
-         * 
-         */
-        function wbc_attach_card_views() { 
-            jQuery(".products,.product-listing,.row-inner>.col-lg-9:eq(0)").html(jQuery(".eo_wbc_hidden_data").html());
-            jQuery('.special.cards .image').dimmer({on:'hover',duration:{ show : 0, hide : 0 }});
-            jQuery('.button[data-link]').on('click',function(e){
-                e.preventDefault();
-                e.stopPropagation();
-                window.location.href=$(this).attr('data-link');
-            });
-        }
-
-        jQuery(document).ready(function($){
-            //code moved to a function wbc_attach_card_views above so that it can be called after ajax search
-
-            // 
-            wbc_attach_card_views();
-        });
-    </script>
-<?php
-}
+// NOTE:From here, we have removed the original code inside the if (false) block. So, whenever there is a need to view the original or any other code for readability purposes, simply take the script below, put it in a new .js file in Sublime Text, and view it in readable format.Apart from that, we had removed the original code, and in some scenarios, that original code might have contained PHP variables like XYZ. Those would have been removed as well.And of course, even if the removed code from the if (false) block is not relevant to the current version, it might be required during future milestone tasks, so for this purpose, refer to the branch named "ui_QCed_ashish_-2" and check the commit dated 07-04-2025 for looking at the original code.
 $inline_script = 
     "$ = jQuery;\n" .
     "\n" .
@@ -327,20 +239,8 @@ $inline_script =
     "});\n";
 
 wbc()->load->add_inline_script('', $inline_script, 'sp-wbc-common-footer');
-if(false) {
-?>      
-    <style type="text/css">
-        .products{
-            display: block !important;
-        }
 
-        .product-listing{
-            display: block !important;
-        }                                                
-    </style>
-<?php
-}
-
+//NOTE:From here, we have removed the original code inside the if (false) block.So, whenever there is a need to view the original or any other code for readability purposes, simply take the css below, put it in a new .css file in Sublime Text,and view it in readable format.Apart from that, we had removed the original code, and in some scenarios,that original code might have contained PHP variables like XYZ. Those would have been removed as well. And of course, even if the removed code from the if (false) block is not relevant to the current version,it might be required during future milestone tasks, so for this purpose,refer to the branch named "ui_QCed_ashish_-2" and check the commit dated 07-04-2025 for looking at the original code.
 $custom_css = "
 
     .products{

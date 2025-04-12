@@ -177,39 +177,8 @@ class Home {
 			ob_start();
 			wbc()->load->template('publics/buttons', array('is_embed_using_js'=>true));
 			$buttons = ob_get_clean();
-      if(false){
-       
-  			$script = $buttons."<script>jQuery(document).ready(function($){";
-
-  			$btn_position_setting_text = wbc()->options->get('btn_position_setting_text','');
-  			if(!empty($btn_position_setting_text)) {
-  				$script.='if(jQuery("'.$btn_position_setting_text.'").length!=0){'.
-                				'jQuery("'.$btn_position_setting_text.'").append( cut_and_move_div() ); eo_wbc_buttons_bind_events();'.
-                				'} else if(jQuery("#container,#primary,.entry-content,.main,#main,.post-content,#content,.content,.container").length!=0){'.
-                					'jQuery(jQuery("#container,#primary,.entry-content,.main,#main,.post-content,#content,.content,.container")[0]).append( cut_and_move_div() ); eo_wbc_buttons_bind_events();'.
-                				'} else {'
-                					.'eo_wbc_error_popup("fatal_error","'.$button_render_error_msg.'");'/*'jQuery("body").append("'.$buttons.'");'*/.
-                				'}';
-                			
-              } else {
-              	$script.='if( jQuery("#container,#primary,.entry-content,.main,#main,.post-content,#content,.content,.container").length!=0){'.
-        					'jQuery(jQuery("#container,#primary,.entry-content,.main,#main,.post-content,#content,.content,.container")[0]).append( cut_and_move_div() ); eo_wbc_buttons_bind_events();'.
-        				'} else {'
-        					.'eo_wbc_error_popup("fatal_error","'.$button_render_error_msg.'");'/*'jQuery("body").append("'.$buttons.'");'*/.
-        				'}';
-              }
-
-              $script.='function cut_and_move_div() {
-              	var buttons_div = $("#wbc_").clone(); 
-              	buttons_div.show();
-              	$("#wbc_").remove();
-              	return buttons_div;
-              }';
-
-              $script.='});</script>';
-  			// echo $script;
-  			return $script;
-      }
+      
+      // NOTE:From here, we have removed the original code inside the if (false) block. So, whenever there is a need to view the original or any other code for readability purposes, simply take the script below, put it in a new .js file in Sublime Text, and view it in readable format.Apart from that, we had removed the original code, and in some scenarios, that original code might have contained PHP variables like XYZ. Those would have been removed as well.And of course, even if the removed code from the if (false) block is not relevant to the current version, it might be required during future milestone tasks, so for this purpose, refer to the branch named "ui_QCed_ashish_-2" and check the commit dated 07-04-2025 for looking at the original code.
       $inline_script = $buttons."jQuery(document).ready(function($){";
 
       $btn_position_setting_text = wbc()->options->get('btn_position_setting_text','');

@@ -64,73 +64,9 @@ if(!empty($attributes) and is_array($attributes)){
 	}
 }
 
-if (false) {
-?>
-<script type="text/javascript">
-	jQuery(window).load(function() {
-		$ = jQuery;
-		
-		_childs = JSON.parse('<?php echo str_replace('"','\"',str_replace("'","\'",json_encode($_childs))); ?>');
-		jQuery(".ui.dropdown:has(#d_fconfig_filter)").dropdown({
-			onChange:function() {
-				let filter_field = $(this).dropdown('get value');
-				if(filter_field!==''){
-					//if(_childs.hasOwnProperty(filter_field)) {
-					if(_childs.hasOwnProperty(filter_field) || _childs.hasOwnProperty('pa_'+filter_field)) {
-
-						let _child_data = false ;
-						if(_childs.hasOwnProperty(filter_field)){
-							_child_data = _childs[filter_field];
-						} else if(_childs.hasOwnProperty('pa_'+filter_field)) {
-							_child_data = _childs['pa_'+filter_field];
-						}
-						let html = '';
-						//jQuery.each(_childs[filter_field],function(index,item) {
-						jQuery.each(_child_data,function(index,item) {
-						    html+='<div class="item" data-value="'+index+'">'+item+'</div>';
-						});
-						jQuery(".ui.dropdown:has(#d_fconfig_elements)").find(".menu").html(html);
-					}
-				} else {
-					jQuery(".ui.dropdown:has(#d_fconfig_elements)").find(".menu").html("");
-				}
-			}
-		
-		});
-
-		jQuery(".ui.dropdown:has(#s_fconfig_filter)").dropdown({
-
-				onChange:function() {
-					let filter_field = $(this).dropdown('get value');
-					if(filter_field!==''){
-						//if(_childs.hasOwnProperty(filter_field)) {
-						if(_childs.hasOwnProperty(filter_field) || _childs.hasOwnProperty('pa_'+filter_field)) {
-
-							let _child_data = false ;
-							if(_childs.hasOwnProperty(filter_field)){
-								_child_data = _childs[filter_field];
-							} else if(_childs.hasOwnProperty('pa_'+filter_field)) {
-								_child_data = _childs['pa_'+filter_field];
-							}
-							let html = '';
-							//jQuery.each(_childs[filter_field],function(index,item) {
-							jQuery.each(_child_data,function(index,item) {
-							    html+='<div class="item" data-value="'+index+'">'+item+'</div>';
-							});
-							jQuery(".ui.dropdown:has(#d_fconfig_elements)").find(".menu").html(html);
-						}
-					} else {
-						jQuery(".ui.dropdown:has(#d_fconfig_elements)").find(".menu").html("");
-					}
-				}
-			
-			});
-	});	
-</script>
-<?php 
-}
 $_childs_json_encoded = json_encode($_childs);
 $_childs_json_escaped = str_replace('"', '\"', str_replace("'", "\'", $_childs_json_encoded));
+// NOTE:From here, we have removed the original code inside the if (false) block. So, whenever there is a need to view the original or any other code for readability purposes, simply take the script below, put it in a new .js file in Sublime Text, and view it in readable format.Apart from that, we had removed the original code, and in some scenarios, that original code might have contained PHP variables like XYZ. Those would have been removed as well.And of course, even if the removed code from the if (false) block is not relevant to the current version, it might be required during future milestone tasks, so for this purpose, refer to the branch named "ui_QCed_ashish_-2" and check the commit dated 07-04-2025 for looking at the original code.
 
 $inline_script = 
 	"jQuery(window).load(function() {\n" .

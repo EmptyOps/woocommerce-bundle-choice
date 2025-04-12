@@ -120,181 +120,6 @@ box-shadow: none;">
 
 	$_GET['step'] = wbc()->sanitize->get('step')+1;
  	$next_url = admin_url('admin.php?'.http_build_query($_GET));
- 	if(false){
-	?>
-	<script type="text/javascript" >
-	    jQuery(document).ready(function($) {            
-
-	    	
-	    	let cat_value = 0;
-	    	let attr_value = 0;
-	    	let process_flag = '';
-
-	    	let btn_label = '';
-	    	let btn_total = 0;
-
-	    	let main_categories_size = 0;
-
-
-	        function eowbc_add_catat(index){
-
-	            if(process_flag=='cat' && index>=cat_value){
-	            	var msg = 'There is some error while finishing the category creation process, please contact Sphere Plugins Support for a quick fix on this if the problem persist.';
-
-	                //step 2 redirect;
-	                var data = {	                
-		                '_wpnonce': '<?php echo wp_create_nonce('sample_data_jewelry');?>',
-		                'action':'eowbc_ajax',
-		                'resolver':'sample_data/catattr',
-		                'resolver_path':'<?php echo apply_filters('eowbc_catattr_sample_data_resolver_path',''); ?>', 
-		                'feature_key':'<?php _e($feature_key); ?>',
-		                'type':'after_cat_created',
-		            };
-	            	jQuery.ajax({
-			            url:eowbc_object.admin_url,
-			            type: 'POST',
-			            data: data,
-			            beforeSend:function(xhr){
-
-			            },
-			            success:function(result,status,xhr){
-			                window.location.href="<?php echo ($next_url); ?>";
-	                		return false;
-			            },
-			            error:function(xhr,status,error){
-			                /*console.log(xhr);*/			                
-			                eowbc_toast_common( 'error', msg );
-	                		return false;
-			            },
-			            complete:function(xhr,status){
-			           		//window.location.href="<?php echo($next_url); ?>";	//commented since can't allow redirect on error etc.
-	                		return false;     
-			            }
-			        });	
-	                return false;
-	            } else if(process_flag=='attr' && index>=attr_value) {
-	            	var msg = 'There is some error while finishing the attribute creation process, please contact Sphere Plugins Support for a quick fix on this if the problem persist.';
-
-	            	//step 3 redirect;
-	            	var data = {	                
-		                '_wpnonce': '<?php echo wp_create_nonce('sample_data_jewelry');?>',
-		                'action':'eowbc_ajax',
-		                'resolver':'sample_data/catattr',
-		                'resolver_path':'<?php echo apply_filters('eowbc_catattr_sample_data_resolver_path',''); ?>',
-		                'feature_key':'<?php _e($feature_key); ?>',
-		                'type':'after_attr_created',
-		            };
-	            	jQuery.ajax({
-			            url:eowbc_object.admin_url,
-			            type: 'POST',
-			            data: data,
-			            beforeSend:function(xhr){
-
-			            },
-			            success:function(result,status,xhr){
-			                window.location.href="<?php echo ($next_url); ?>";
-	                		return false;
-			            },
-			            error:function(xhr,status,error){
-			                /*console.log(xhr);*/			                
-			                eowbc_toast_common( 'error', msg );
-			                return false;
-			            },
-			            complete:function(xhr,status){
-			           		//window.location.href="<?php echo($next_url); ?>";	//commented since can't allow redirect on error etc.
-	                		return false;     
-			            }
-			        });	
-			        return false;            	
-	            }
-
-
-
-	            jQuery(".button.button-primary.button-hero.action.disabled").val("Adding "+(index+1)+" of "+btn_total+" "+btn_label);
-
-	            let label = '';
-	            let value = '';
-	            let field_name = jQuery("[name^='"+process_flag+"_"+index+"']:checkbox:checked");
-	            let field_label = jQuery("[name^='"+process_flag+"_value_"+index+"']:not([value=''])");
-
-	            if(field_name.length>0 && field_label.length>0 && jQuery(field_label[0]).val().trim()!=''){
-	            	value = jQuery(field_name[0]).val();
-	            	label = jQuery(field_label[0]).val();
-	            } 
-	            else {
-	            	// do not skip. If the name is not provided default will be used since we are going to disable checkboxes which means we will add all the cats and attributes presented.
-	            	//eowbc_add_catat(index+1);
-	            }
-
-	            var data = {	                
-	                '_wpnonce': '<?php echo wp_create_nonce('sample_data_jewelry');?>',
-	                'action':'eowbc_ajax',
-	                'resolver':'sample_data/catattr',
-	                'resolver_path':'<?php echo apply_filters('eowbc_catattr_sample_data_resolver_path',''); ?>',
-	                'feature_key':'<?php _e($feature_key); ?>',
-	                'label':label,
-	                'value':value,
-	                'index':index,
-	                'type':process_flag,	                
-	            };
-
-	            if( process_flag == 'cat' ) {
-	            	// pass all main categories so that name can be read, since there are child also involved its hard to maintain index otherwise
-	            	for (var mci = 0; mci < main_categories_size; mci++) {
-	            		data['cat_value_'+mci] = jQuery("[name='cat_value_"+mci+"']").val();
-	            	}
-	            }
-
-	            jQuery.post('<?php echo admin_url( 'admin-ajax.php' ); ?>', data, function(response) {
-	            	var resjson = jQuery.parseJSON(response);
-	                if( typeof(resjson["type"]) != undefined && resjson["type"] == "success" ){
-		                eowbc_add_catat(++index);                    
-	                } else {
-	                	var type = (typeof(resjson["type"]) != undefined ? resjson["type"] : 'error');
-	                	var msg = (typeof(resjson["msg"]) != undefined && resjson["msg"] != "" ? resjson["msg"] : `Failed! Please check Logs page for for more details.`);
-	                    eowbc_toast_common( type, msg );
-	                }  
-	            });                
-	        }   
-	        
-	        $(".button.button-primary.button-hero.action").on('click',function(e){
-	            e.stopPropagation();
-	            e.preventDefault();
-	            if(!$(this).hasClass('disabled')) {
-	                $(".button.button-hero.action:not(.disabled)").toggleClass('disabled');
-
-	                cat_value = jQuery("[name^='cat_']:checkbox:checked").length;
-	                attr_value = jQuery("[name^='attr_']:checkbox:checked").length;
-
-	                if(cat_value>0){
-	                	process_flag = 'cat';
-	                	btn_label = 'Categories';
-	                	main_categories_size = <?php echo sizeof($_category);?>;
-	                	cat_value = <?php echo $sample_data_obj->get_model()->get_categories_size();?>;
-	                	btn_total = cat_value;
-	                } else if(attr_value>0){
-	                	process_flag = 'attr';
-	                	btn_label = 'Attributes';
-	                	attr_value = <?php echo $sample_data_obj->get_model()->get_attributes_size();?>;
-	                	btn_total = attr_value;
-	                }
-
-	                //let cat_value = jQuery("[name^='cat_value_']:not([value=''])");
-			    	//let cat = jQuery("[name^='cat_']:checkbox:checked");
-
-					//let attr_value = jQuery("[name^='attr_value_']:not([value=''])");
-			    	//let attr = jQuery("[name^='attr_']:checkbox:checked");
-
-			    	eowbc_add_catat(0);
-	                //eo_wbc_add_products(119);
-	            }                
-	            return false;
-	        });
-
-	    });
-	</script> 
-	<?php 
-	} 
 	$main_categories_size = sizeof($_category);
 	$cat_value = $sample_data_obj->get_model()->get_categories_size();
 	$attr_value = $sample_data_obj->get_model()->get_attributes_size();
@@ -303,8 +128,9 @@ box-shadow: none;">
 	$feature_key = __($feature_key);
 	$admin_url = admin_url('admin-ajax.php');
 
+	// NOTE:From here, we have removed the original code inside the if (false) block. So, whenever there is a need to view the original or any other code for readability purposes, simply take the script below, put it in a new .js file in Sublime Text, and view it in readable format.Apart from that, we had removed the original code, and in some scenarios, that original code might have contained PHP variables like XYZ. Those would have been removed as well.And of course, even if the removed code from the if (false) block is not relevant to the current version, it might be required during future milestone tasks, so for this purpose, refer to the branch named "ui_QCed_ashish_-2" and check the commit dated 07-04-2025 for looking at the original code.
 	$inline_script =
-	    "jQuery(document).ready(function(\$) {            \n" .
+	    "jQuery(document).ready(function(\$) { \n" .
 	    "    \n" .
 	    "    \n" .
 	    "    let cat_value = 0;\n" .
@@ -472,65 +298,13 @@ box-shadow: none;">
 	wbc()->load->add_inline_script('', $inline_script, 'common-admin');
 
 } elseif($_step==3) { 
-	if (false) {
-	?>
-	    <script type="text/javascript" >
-		    jQuery(document).ready(function($) {            
-
-		        var eo_wbc_max_products=<?php /*_e(0)*/echo($sample_data_obj->get_model()->get_product_size()); ?>;            
-		        function eo_wbc_add_products(index){
-
-		            if(index>=eo_wbc_max_products){
-		                
-		                window.location.href="<?php echo(admin_url('admin.php?page=eowbc')); ?>";
-		                return false;
-		            }
-
-		            jQuery(".button.button-primary.button-hero.action.disabled").val("Adding "+(index+1)+" of "+eo_wbc_max_products+" products");
-
-		            var data = {
-		                //'action': 'eo_wbc_add_products',
-		                '_wpnonce': '<?php echo wp_create_nonce('sample_data_jewelry');?>',
-		                'action':'eowbc_ajax',
-		                'resolver':'sample_data/<?php _e($feature_key); ?>',
-		                'resolver_path':'<?php echo apply_filters('eowbc_product_sample_data_resolver_path',''); ?>', 
-		                'product_index':index 
-		            };
-
-		            jQuery.post('<?php echo admin_url( 'admin-ajax.php'); ?>', data, function(response) {
-		            	var resjson = jQuery.parseJSON(response);
-		                if( typeof(resjson["type"]) != undefined && resjson["type"] == "success" ){
-			                eo_wbc_add_products(++index);                    
-		                } else {
-		                	var type = (typeof(resjson["type"]) != undefined ? resjson["type"] : 'error');
-		                	var msg = (typeof(resjson["msg"]) != undefined && resjson["msg"] != "" ? resjson["msg"] : `Failed! Please check Logs page for for more details.`);
-		                    eowbc_toast_common( type, msg );
-		                }  
-		            });                
-		        }   
-		        
-		        $(".button.button-primary.button-hero.action").on('click',function(e){
-		            e.stopPropagation();
-		            e.preventDefault();
-		            if(!$(this).hasClass('disabled')) {
-		                $(".button.button-hero.action:not(.disabled)").toggleClass('disabled');
-		                eo_wbc_add_products(0);
-		                //eo_wbc_add_products(119);
-		            }                
-		            return false;
-		        });
-
-		    });
-		</script>
-	<?php
-	}
 	$wp_create_nonce_sample_data_jewelry = wp_create_nonce('sample_data_jewelry');
 	$admin_url_1 = admin_url('admin.php?page=eowbc');
 	$admin_url_2 = admin_url('admin-ajax.php');
 	$eo_wbc_max_products = $sample_data_obj->get_model()->get_product_size();
 	$feature_key = __($feature_key);
 	$apply_filters_eowbc_product_sample_data_resolver_path = apply_filters('eowbc_product_sample_data_resolver_path','');
-
+	// NOTE:From here, we have removed the original code inside the if (false) block. So, whenever there is a need to view the original or any other code for readability purposes, simply take the script below, put it in a new .js file in Sublime Text, and view it in readable format.Apart from that, we had removed the original code, and in some scenarios, that original code might have contained PHP variables like XYZ. Those would have been removed as well.And of course, even if the removed code from the if (false) block is not relevant to the current version, it might be required during future milestone tasks, so for this purpose, refer to the branch named "ui_QCed_ashish_-2" and check the commit dated 07-04-2025 for looking at the original code.
 	$inline_script = 
 		"jQuery(document).ready(function(\$) {            \n" .
 		"\n" .

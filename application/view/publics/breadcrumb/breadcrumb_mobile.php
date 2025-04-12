@@ -34,26 +34,7 @@
     </div>
 </div>
 <?php 
-if (false) { 
-?>
-<script>
-    jQuery(document).ready(function(){ 
-        /*jQuery('.onclick_redirect').on('click',function(){ 
-            var _step = jQuery(this);
-            var _rem_url = jQuery(_step).find('[data-remove-url]');
-            if(_rem_url.length>0) { 
-                window.location.href=jQuery(_rem_url[0]).data('remove-url');
-            } else { 
-                window.location.href = jQuery(_step).data('begin'); 
-            }
-        });*/
-        jQuery('[data-clickable_breadcrumb]').on('click',function(){
-            window.location.href = jQuery(this).data('clickable_breadcrumb'); 
-        });
-    }); 
-</script>
-<?php
-} 
+// NOTE:From here, we have removed the original code inside the if (false) block. So, whenever there is a need to view the original or any other code for readability purposes, simply take the script below, put it in a new .js file in Sublime Text, and view it in readable format.Apart from that, we had removed the original code, and in some scenarios, that original code might have contained PHP variables like XYZ. Those would have been removed as well.And of course, even if the removed code from the if (false) block is not relevant to the current version, it might be required during future milestone tasks, so for this purpose, refer to the branch named "ui_QCed_ashish_-2" and check the commit dated 07-04-2025 for looking at the original code.
 $inline_script = 
 "jQuery(document).ready(function(){\n" .
 "    /*jQuery('.onclick_redirect').on('click',function(){\n" .

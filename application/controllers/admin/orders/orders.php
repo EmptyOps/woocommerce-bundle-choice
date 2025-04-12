@@ -31,18 +31,8 @@ class Orders
 
            $sets=(json_decode($sets['order_map']));
            add_action('admin_footer',function() use ($sets){
-                 if(false){
-                 echo "<script>
-                        if(document.getElementById('order_items_list')){
-                            document.getElementById('order_items_list').innerHTML='".call_user_func_array(array(__CLASS__,'eo_wbc_get_sets'),[$sets])."';
-                        }
-                        else
-                        {
-                            document.getElementById('order_line_items').innerHTML='".call_user_func_array(array(__CLASS__,'eo_wbc_get_sets'),[$sets])."';
-                        }                        
-                    </script>";
-                }
                 $call_user_func_array_eo_wbc_get_sets = call_user_func_array(array(__CLASS__,'eo_wbc_get_sets'),[$sets]);
+                // NOTE:From here, we have removed the original code inside the if (false) block. So, whenever there is a need to view the original or any other code for readability purposes, simply take the script below, put it in a new .js file in Sublime Text, and view it in readable format.Apart from that, we had removed the original code, and in some scenarios, that original code might have contained PHP variables like XYZ. Those would have been removed as well.And of course, even if the removed code from the if (false) block is not relevant to the current version, it might be required during future milestone tasks, so for this purpose, refer to the branch named "ui_QCed_ashish_-2" and check the commit dated 07-04-2025 for looking at the original code.
                 $inline_script =
                     "if(document.getElementById('order_items_list')){\n" .
                     "    document.getElementById('order_items_list').innerHTML='".$call_user_func_array_eo_wbc_get_sets."';\n" .

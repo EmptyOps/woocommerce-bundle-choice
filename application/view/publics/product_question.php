@@ -35,75 +35,11 @@
 	</div>
 </div>
 <?php
-if(false) {	
-?>
-<script type="text/javascript">
-	jQuery(document).ready(function($){
-		if($('[data-modal-name="eowbc-askq-modal"]').length>1){
-			$('[data-modal-name="eowbc-askq-modal"]:gt(0)').remove();	
-		}
-		
-		$('#eowbc-askq').off('click');
-		$('#eowbc-askq').click(function(){
-			$('#eowbc-askq-modal').modal('show');
-			return false;
-		});
-
-		$("#eowbc_askq_save").off('click');
-		$("#eowbc_askq_save").click(function(){
-			let fname = $('#eowbc_askq_fname').val().trim();
-			let lname = $('#eowbc_askq_lname').val().trim();
-			let email = $('#eowbc_askq_email').val().trim();
-			let phone = $('#eowbc_askq_phone').val().trim();
-			let message = $('#eowbc_askq_message').val().trim();
-
-			if(fname=='' || lname=='' || email=='' || phone=='' || message==''){
-				alert('Please fill all required fields.');
-				return false;
-			}
-
-			form_data = {
-				'action':'eowbc_ajax',
-				'resolver':'eowbc_askq',
-				'_wpnonce':'<?php _e(wp_create_nonce('eowbc_askq')) ?>',
-				'product_id': '<?php _e($product_id); ?>',
-				'eowbc_askq_fname':fname,
-				'eowbc_askq_lname':lname,
-				'eowbc_askq_email':email,
-				'eowbc_askq_phone':phone,
-				'eowbc_askq_message':message,
-			}
-			jQuery.ajax({
-	            url:'<?php _e(admin_url('admin-ajax.php')); ?>',
-	            type: 'POST',
-	            data: form_data,
-	            beforeSend:function(xhr){
-
-	            },
-	            success:function(result,status,xhr){
-	               if(result){
-	               		alert('Your query has been sent successfully, you will hear back soon.');
-	               }
-	            },
-	            error:function(xhr,status,error){
-	               
-	            },
-	            complete:function(xhr,status){
-	               	$('#eowbc_askq_fname').val('');
-					$('#eowbc_askq_lname').val('');
-					$('#eowbc_askq_email').val('');
-					$('#eowbc_askq_phone').val('');
-					$('#eowbc_askq_message').val('');
-	            }
-	        });		        
-	    });
-	});
-</script>
-<?php
-}
 $wp_create_nonce_eowbc_askq = __(wp_create_nonce('eowbc_askq'));
 $__product_id = __($product_id);
 $admin_url_admin_ajax = __(admin_url('admin-ajax.php'));
+
+// NOTE:From here, we have removed the original code inside the if (false) block. So, whenever there is a need to view the original or any other code for readability purposes, simply take the script below, put it in a new .js file in Sublime Text, and view it in readable format.Apart from that, we had removed the original code, and in some scenarios, that original code might have contained PHP variables like XYZ. Those would have been removed as well.And of course, even if the removed code from the if (false) block is not relevant to the current version, it might be required during future milestone tasks, so for this purpose, refer to the branch named "ui_QCed_ashish_-2" and check the commit dated 07-04-2025 for looking at the original code.
 $inline_script = 
 "jQuery(document).ready(function(\$){\n" .
 "    if(\$('[data-modal-name=\"eowbc-askq-modal\"]').length>1){\n" .

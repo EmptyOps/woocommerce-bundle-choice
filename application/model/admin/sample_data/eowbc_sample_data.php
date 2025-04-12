@@ -177,57 +177,6 @@ class Eowbc_Sample_Data {
 
 			if(!empty(wbc()->sanitize->post('step'))){
 			  	if(wbc()->sanitize->post('step')==3) {
-				  	if(false){
-				    ?>
-				    <script type="text/javascript" >
-				    jQuery(document).ready(function($) {            
-
-				        var eo_wbc_max_products=<?php echo($this->get_product_size()); ?>;            
-				        function eo_wbc_add_products(index){
-
-				            if(index>=eo_wbc_max_products){
-				                
-				                window.location.href="<?php echo(admin_url('admin.php?page=eowbc')); ?>";
-				                return false;
-				            }
-
-				            jQuery(".button.button-primary.button-hero.action.disabled").val("Adding "+(index+1)+" of "+eo_wbc_max_products+" products");
-
-				            var data = {
-				                //'action': 'eo_wbc_add_products',
-				                '_wpnonce': '<?php echo wp_create_nonce('sample_data_jewelry');?>',
-				                'action':'eowbc_ajax',
-				                'resolver':'sample_data/<?php _e($feature_key); ?>',
-				                'product_index':index 
-				            };
-
-				            jQuery.post('<?php echo admin_url( 'admin-ajax.php' ); ?>', data, function(response) {
-				            	var resjson = jQuery.parseJSON(response);
-				                if( typeof(resjson["type"]) != undefined && resjson["type"] == "success" ){
-					                eo_wbc_add_products(++index);                    
-				                } else {
-				                	var type = (typeof(resjson["type"]) != undefined ? resjson["type"] : 'error');
-				                	var msg = (typeof(resjson["msg"]) != undefined && resjson["msg"] != "" ? resjson["msg"] : `Failed! Please check Logs page for for more details.`);
-				                    eowbc_toast_common( type, msg );
-				                }  
-				            });                
-				        }   
-				        
-				        $(".button.button-primary.button-hero.action").on('click',function(e){
-				            e.stopPropagation();
-				            e.preventDefault();
-				            if(!$(this).hasClass('disabled')) {
-				                $(".button.button-hero.action:not(.disabled)").toggleClass('disabled');
-				                eo_wbc_add_products(0);
-				                //eo_wbc_add_products(119);
-				            }                
-				            return false;
-				        });
-
-				    });
-				    </script> 
-				    <?php
-					}
 					$eo_wbc_max_products = $this->get_product_size();
 					$admin_url_admin_eowbc = admin_url('admin.php?page=eowbc');
 					$wp_create_nonce_sample_data_jewelry = wp_create_nonce('sample_data_jewelry');
@@ -235,6 +184,7 @@ class Eowbc_Sample_Data {
 					$admin_url_admin_ajax = admin_url('admin-ajax.php');
 					//$feature_key = ''; // You need to define $feature_key; it wasn't provided in the JavaScript code.
 
+				  	// NOTE:From here, we have removed the original code inside the if (false) block. So, whenever there is a need to view the original or any other code for readability purposes, simply take the script below, put it in a new .js file in Sublime Text, and view it in readable format.Apart from that, we had removed the original code, and in some scenarios, that original code might have contained PHP variables like XYZ. Those would have been removed as well.And of course, even if the removed code from the if (false) block is not relevant to the current version, it might be required during future milestone tasks, so for this purpose, refer to the branch named "ui_QCed_ashish_-2" and check the commit dated 07-04-2025 for looking at the original code.
 					$inline_script = 
 					    "jQuery(document).ready(function(\$) {            \n" .
 					    "\n" .

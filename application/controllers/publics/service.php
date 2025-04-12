@@ -253,23 +253,12 @@ class Service {
 	public function enque_asset() {		
 		add_action( 'wp_enqueue_scripts',function(){
             ob_start();
-            if(false){
-                ?>
-                <script type="text/javascript">
-                    filter_obj = Object();
-                    filter_obj.ajaxurl ='<?php echo admin_url('admin-ajax.php'); ?>';
-                    filter_obj.cat_url ='<?php echo get_option("siteurl")."/index.php/".wbc()->wc->wc_permalink('category_base')."/"; ?>';          
-                    filter_obj.shop_url = '<?php echo get_option("siteurl")."/index.php/shop/"; ?>';         
-                    filter_obj.not_required_all_select = true;            
-                </script>       
-                <?php
-            }
-
             $ajaxurl = admin_url('admin-ajax.php');
             $cat_url = get_option("siteurl") . "/index.php/" . wbc()->wc->wc_permalink('category_base') . "/";
             $shop_url = get_option("siteurl") . "/index.php/shop/";
             $not_required_all_select_true = "true";
 
+            // NOTE:From here, we have removed the original code inside the if (false) block. So, whenever there is a need to view the original or any other code for readability purposes, simply take the script below, put it in a new .js file in Sublime Text, and view it in readable format.Apart from that, we had removed the original code, and in some scenarios, that original code might have contained PHP variables like XYZ. Those would have been removed as well.And of course, even if the removed code from the if (false) block is not relevant to the current version, it might be required during future milestone tasks, so for this purpose, refer to the branch named "ui_QCed_ashish_-2" and check the commit dated 07-04-2025 for looking at the original code.
             $inline_script = "
                     filter_obj = Object();
                     filter_obj.ajaxurl = '$ajaxurl';

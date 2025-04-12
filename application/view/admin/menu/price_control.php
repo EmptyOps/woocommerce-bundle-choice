@@ -452,20 +452,10 @@ if( $jpc_str ) {
 }
 
 //js 
-if (false) {
-?>
-	<script type="text/javascript">
-	    window.eo_wbc=new Object();
-
-		window.eo_wbc.attributes=JSON.parse('<?php echo json_encode(eo_wbc_jpc_attributes_values()); ?>');
-
-	    window.eo_wbc.jpc_data=JSON.parse('<?php echo json_encode( $jpc_data ); ?>');
-	</script>
-<?php 
-}
 $eo_wbc_attributes_values_json_encoded = json_encode(eo_wbc_jpc_attributes_values());
 $jpc_data_json_encoded = json_encode($jpc_data);
 
+// NOTE:From here, we have removed the original code inside the if (false) block. So, whenever there is a need to view the original or any other code for readability purposes, simply take the script below, put it in a new .js file in Sublime Text, and view it in readable format.Apart from that, we had removed the original code, and in some scenarios, that original code might have contained PHP variables like XYZ. Those would have been removed as well.And of course, even if the removed code from the if (false) block is not relevant to the current version, it might be required during future milestone tasks, so for this purpose, refer to the branch named "ui_QCed_ashish_-2" and check the commit dated 07-04-2025 for looking at the original code.
 $inline_script = 
     "window.eo_wbc=new Object();\n" .
     "\n" .
