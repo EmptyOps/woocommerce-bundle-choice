@@ -124,6 +124,20 @@ class SP_WBC_Product extends SP_Product {
 
             self::beautify_url_data_ajax(); 
         });
+
+       	add_filter('body_class', function($classes) {
+
+    	    if (isset($_GET['EO_WBC']) && sanitize_text_field($_GET['EO_WBC'] == '1')) {
+
+    	    	// general class
+    	        $classes[] = 'wbc-pair-builder';
+
+    	        // TODO specific class like wbc-ring-builder or wbc-pair-maker etc. so need to add necesssari  condision below when required
+    	        $classes[] = 'wbc-ring-builder';
+    	    }
+    	    
+    	    return $classes;
+    	});
     }
 
     public static function admin_hooks() {
