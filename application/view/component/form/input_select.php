@@ -7,7 +7,7 @@
 //wbc()->common->pr($options,$force_debug = false,$die = false);
 if(!empty($id) /*and !empty($label)*/){
 	?>	
-	<div class="<?php echo esc_attr(!empty($size_class)?$size_class:''); ?> field" <?php /*NOTE: we are not escaping the $attr because it may contain multiple attributes and we do not want esc_attr function to escape the double qoutes(") of the different attribute values. but anyway we understand the security requirement here so we have always escaped the attribute value with the esc_attr from wherever this $attr var is passed*/echo !empty($attr)?$attr:''; ?>>
+	<div class="<?php echo esc_attr(!empty($size_class)?$size_class:''); ?> field" <?php /*phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- we are not escaping the $attr because it may contain multiple attributes and we do not want esc_attr function to escape the double qoutes(") of the different attribute values. but anyway we understand the security requirement here so we have always escaped the attribute value with the esc_attr from wherever this $attr var is passed*/echo !empty($attr)?$attr:''; ?>>
 		<?php 
 		if( !empty($label) )
 		{

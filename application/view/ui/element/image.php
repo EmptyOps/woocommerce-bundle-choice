@@ -21,7 +21,7 @@
 <img 
 	<?php echo (!empty($class) ? 'class="' . esc_attr($class) . '"' : ''); ?> 
 	<?php echo (!empty($id) ? 'id="' . esc_attr($id) . '"' : ''); ?> 
-	<?php /*NOTE: we are not escaping the $attr because it may contain multiple attributes and we do not want esc_attr function to escape the double qoutes(") of the different attribute values. but anyway we understand the security requirement here so we have always escaped the attribute value with the esc_attr from wherever this $attr var is passed*/
+	<?php /*phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- we are not escaping the $attr because it may contain multiple attributes and we do not want esc_attr function to escape the double qoutes(") of the different attribute values. but anyway we understand the security requirement here so we have always escaped the attribute value with the esc_attr from wherever this $attr var is passed*/
 	echo (!empty($attr) ? $attr : ''); ?> 
 
 	<?php // echo (!empty($src) ? 'src="' . ( (str_contains($src,'{{data.') && substr($src, -2)  == "}}") ? $src : esc_url($src) ) . '"' : ''); 

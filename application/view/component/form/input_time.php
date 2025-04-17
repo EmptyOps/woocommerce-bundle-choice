@@ -18,7 +18,7 @@ if(!empty($id) /*and !empty($label)*/){
 			wbc()->load->template('component/form/input_info_icon',$info_icon); 
 		}
 		?>	
-		<input type="time" <?php /*NOTE: we are not escaping the $attr because it may contain multiple attributes and we do not want esc_attr function to escape the double qoutes(") of the different attribute values. but anyway we understand the security requirement here so we have always escaped the attribute value with the esc_attr from wherever this $attr var is passed*/echo !empty($attr)?$attr:''; ?> id="<?php echo esc_attr($id); ?>" name="<?php echo esc_attr($id); ?>" class="ui input <?php echo esc_attr(!empty($class)?$class:''); ?>" placeholder="<?php echo esc_attr(!empty($placeholder)?$placeholder:''); ?>" value="<?php echo isset($value)?esc_attr($value):''; ?>">
+		<input type="time" <?php /*phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- we are not escaping the $attr because it may contain multiple attributes and we do not want esc_attr function to escape the double qoutes(") of the different attribute values. but anyway we understand the security requirement here so we have always escaped the attribute value with the esc_attr from wherever this $attr var is passed*/echo !empty($attr)?$attr:''; ?> id="<?php echo esc_attr($id); ?>" name="<?php echo esc_attr($id); ?>" class="ui input <?php echo esc_attr(!empty($class)?$class:''); ?>" placeholder="<?php echo esc_attr(!empty($placeholder)?$placeholder:''); ?>" value="<?php echo isset($value)?esc_attr($value):''; ?>">
 
 		<?php
 		if (isset($visible_info))

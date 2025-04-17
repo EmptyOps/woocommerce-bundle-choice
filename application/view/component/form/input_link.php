@@ -6,7 +6,7 @@
 
 if(!empty($attr) and is_string($attr) and strpos($attr,'href')!==false and !empty($id)) {
 	?>
-	<a <?php echo /*NOTE: we are not escaping the $attr because it may contain multiple attributes and we do not want esc_attr function to escape the double qoutes(") of the different attribute values. but anyway we understand the security requirement here so we have always escaped the attribute value with the esc_attr from wherever this $attr var is passed*/!empty($attr) ? $attr : ''; ?> id="<?php echo esc_attr($id); ?>" name="<?php echo esc_attr($id); ?>" class="ui <?php echo !empty($class) ? esc_attr($class) : ''; ?>"><?php echo !empty($label) ? esc_html($label) : ''; ?></a>
+	<a <?php echo /*phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- we are not escaping the $attr because it may contain multiple attributes and we do not want esc_attr function to escape the double qoutes(") of the different attribute values. but anyway we understand the security requirement here so we have always escaped the attribute value with the esc_attr from wherever this $attr var is passed*/!empty($attr) ? $attr : ''; ?> id="<?php echo esc_attr($id); ?>" name="<?php echo esc_attr($id); ?>" class="ui <?php echo !empty($class) ? esc_attr($class) : ''; ?>"><?php echo !empty($label) ? esc_html($label) : ''; ?></a>
 
 	<?php
 
@@ -24,7 +24,7 @@ if(!empty($attr) and is_string($attr) and strpos($attr,'href')!==false and !empt
 			wbc()->load->template('component/form/input_info_icon', $info_icon);
 		}
 		?>	
-		<input type="text" <?php /*NOTE: we are not escaping the $attr because it may contain multiple attributes and we do not want esc_attr function to escape the double qoutes(") of the different attribute values. but anyway we understand the security requirement here so we have always escaped the attribute value with the esc_attr from wherever this $attr var is passed*/echo !empty($attr) ? $attr : ''; ?> id="<?php echo esc_attr($id); ?>" name="<?php echo esc_attr($id); ?>" class="ui input <?php echo !empty($class) ? esc_attr($class) : ''; ?>" placeholder="<?php echo !empty($placeholder) ? esc_attr($placeholder) : ''; ?>" value="<?php echo isset($value) ? esc_attr($value) : ''; ?>">	
+		<input type="text" <?php /*phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- we are not escaping the $attr because it may contain multiple attributes and we do not want esc_attr function to escape the double qoutes(") of the different attribute values. but anyway we understand the security requirement here so we have always escaped the attribute value with the esc_attr from wherever this $attr var is passed*/echo !empty($attr) ? $attr : ''; ?> id="<?php echo esc_attr($id); ?>" name="<?php echo esc_attr($id); ?>" class="ui input <?php echo !empty($class) ? esc_attr($class) : ''; ?>" placeholder="<?php echo !empty($placeholder) ? esc_attr($placeholder) : ''; ?>" value="<?php echo isset($value) ? esc_attr($value) : ''; ?>">	
 		<?php
 		if (isset($visible_info))
 		{
