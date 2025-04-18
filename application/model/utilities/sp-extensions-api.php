@@ -665,6 +665,15 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
     private static function sp_wbc_webhook_listener(WP_REST_Request $request) {
 
+    	-- yeh niche vala code function ke top mein add kar do 
+	    // Step 0: Rate limit check
+	    $rate_limit_response = self::sp_wbc_webhook_rate_limiter();
+	    if ($rate_limit_response instanceof WP_REST_Response) {
+
+	        // NOTE: we are intentionally not loggin this response in our log file. because it is counter inituitive to whole idea of avoiding overloading of server because logging to file may also create problems if there are many calls coming. 
+	        return $rate_limit_response;
+	    }
+
         // Step 1: Get API key from request headers
         $headers = $request->get_headers();
         $api_key = isset($headers['api-key']) ? $headers['api-key'][0] : '';
@@ -673,14 +682,27 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
         $valid_api_key = get_option('extra_sub_tab_token');
         if (!$api_key || $api_key !== $valid_api_key) {
 
-            return new WP_REST_Response([
+            $response = new WP_REST_Response([
                 'type' => 'error',
                 'msg'  => 'Unauthorized: Invalid API Key'
             ], 403);
+
+            -- yeh code add karo
+            self::sp_wbc_webhook_log('auth_failed', [
+                'headers'  => $headers,
+                'api_key'  => $api_key,
+                'expected' => $valid_api_key,
+                'response' => $response->get_data()
+            ]);
+
+            -- yeh code modify hua hain 
+            return $response;
         }
 
         // Step 3: Get JSON input
         $data = $request->get_json_params();
+
+        self::sp_wbc_webhook_log('received_data', $data);
 
         // Step 4: Call filter hook
         $response = apply_filters('sp_wbc_webhook_process', array(
@@ -688,7 +710,58 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
             'msg'  => 'Webhook processed successfully'
         ), $data);
 
+        self::sp_wbc_webhook_log('response_data', $response);
+
         // Step 5: Return the filtered response
         return rest_ensure_response($response);
+    }
+
+    /**
+     * Logging function to help with debugging webhook events
+     */
+    private static function sp_wbc_webhook_log($tag, $log_data) {
+
+        if (!is_string($log_data)) {
+            $log_data = json_encode($log_data);
+        }
+
+        $log_entry = date('Y-m-d H:i:s') . " [$tag] " . $log_data . "\n";
+        $log_file_path = WP_CONTENT_DIR . '/sp-wbc-webhook.log';
+
+        // Recommended way for file writing in WordPress
+        if (function_exists('error_log')) {
+            error_log($log_entry, 3, $log_file_path);
+        }
+    }
+
+    /**
+     * Check karta hai ki is minute me already webhook call hua ya nahi.
+     * Agar hua ho to request ko ignore kar deta hai.
+     *
+     * NOTE: even thought it seem like unnecessary complexity and not the kind of thing we should do in initial version but it is necessary to ensure that any kind of errors by webhook providers or anything in that regard does not bombard and thus overload the user servers.
+     * 
+     * 
+     */
+    private static function sp_wbc_webhook_rate_limiter() { 
+
+        if (defined('WP_DEBUG') && WP_DEBUG == true) {
+
+            return false; // debug mode ON hai to limit check apply nahi hoga
+        }
+
+        $key = 'sp_wbc_webhook_called';
+        if (get_transient($key)) {
+
+            // NOTE: we are intentionally not loggin this response in our log file. because it is counter inituitive to whole idea of avoiding overloading of server because logging to file may also create problems if there are many calls coming. 
+            return new WP_REST_Response([
+                'type' => 'warning',
+                'msg'  => 'Too many webhook requests, ignored.'
+            ]);
+        }
+
+        // NOTE: for the simplicity and effectiveness of this idea of, minute/time based limiting of webhook processing, we must set transient means entry here instead of at last after entire process completes or any such other layers. it is because sometimes it may happen that it never is reaching to last layers due to some other code issues and there could be many such things so we should keep it here always means at very initial layers like this. 
+        set_transient($key, true, 60); // default 60 sec change to 30 if want to allow two per minute and change to 20 if want to allow 3 calls per minute
+
+        return false;
     }
 }
