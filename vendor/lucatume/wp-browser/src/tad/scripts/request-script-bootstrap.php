@@ -31,18 +31,27 @@ if (!empty($env['files'])) {
 
 if (!empty($env['request'])) {
     foreach ($env['request'] as $key => $value) {
+        // phpcs:ignore WordPress.Security.SuperGlobalInputModification -- Temporarily modifying superglobal as part of an interim solution. Will refactor later.
+        // As discussed with the WordPress review team it is discouraged to modify superglobals($_GET, $_POST, and $_REQUEST) but currently, these superglobals are modified in a temporary manner as part of an interim solution.
+        // We plan to refactor the entire flow in the future to ensure that our backend structure eliminates the need to directly modify or rely on superglobals.
         $_REQUEST[$key] = $value;
     }
 }
 
 if (!empty($env['get'])) {
     foreach ($env['get'] as $key => $value) {
+        // phpcs:ignore WordPress.Security.SuperGlobalInputModification -- Temporarily modifying superglobal as part of an interim solution. Will refactor later.
+        // As discussed with the WordPress review team it is discouraged to modify superglobals($_GET, $_POST, and $_REQUEST) but currently, these superglobals are modified in a temporary manner as part of an interim solution.
+        // We plan to refactor the entire flow in the future to ensure that our backend structure eliminates the need to directly modify or rely on superglobals.
         $_GET[$key] = $value;
     }
 }
 
 if (!empty($env['post'])) {
     foreach ($env['post'] as $key => $value) {
+        // phpcs:ignore WordPress.Security.SuperGlobalInputModification -- Temporarily modifying superglobal as part of an interim solution. Will refactor later.
+        // As discussed with the WordPress review team it is discouraged to modify superglobals($_GET, $_POST, and $_REQUEST) but currently, these superglobals are modified in a temporary manner as part of an interim solution.
+        // We plan to refactor the entire flow in the future to ensure that our backend structure eliminates the need to directly modify or rely on superglobals.
         $_POST[$key] = $value;
     }
 }

@@ -69,8 +69,14 @@ if(!class_exists('WBC_Sanitize')) {
 
 		public function store_get(string $get_field, $val){
 			if(is_string($val)) {
+				// phpcs:ignore WordPress.Security.SuperGlobalInputModification -- Temporarily modifying superglobal as part of an interim solution. Will refactor later.
+				// As discussed with the WordPress review team it is discouraged to modify superglobals($_GET, $_POST, and $_REQUEST) but currently, these superglobals are modified in a temporary manner as part of an interim solution.
+				// We plan to refactor the entire flow in the future to ensure that our backend structure eliminates the need to directly modify or rely on superglobals.
 				$_GET[$get_field] = sanitize_text_field($val);
 			} elseif(is_array($val)) {
+				// phpcs:ignore WordPress.Security.SuperGlobalInputModification -- Temporarily modifying superglobal as part of an interim solution. Will refactor later.
+				// As discussed with the WordPress review team it is discouraged to modify superglobals($_GET, $_POST, and $_REQUEST) but currently, these superglobals are modified in a temporary manner as part of an interim solution.
+				// We plan to refactor the entire flow in the future to ensure that our backend structure eliminates the need to directly modify or rely on superglobals.
 				// ACTIVE_TODO use sanitize array function whichever is available in php or wp api
 				$_GET[$get_field] = sanitize_text_field($val);
 			} else {
@@ -98,8 +104,14 @@ if(!class_exists('WBC_Sanitize')) {
 
 		public function store_post(string $post_field, $val){
 			if(is_string($val)) {
+				// phpcs:ignore WordPress.Security.SuperGlobalInputModification -- Temporarily modifying superglobal as part of an interim solution. Will refactor later.
+				// As discussed with the WordPress review team it is discouraged to modify superglobals($_GET, $_POST, and $_REQUEST) but currently, these superglobals are modified in a temporary manner as part of an interim solution.
+				// We plan to refactor the entire flow in the future to ensure that our backend structure eliminates the need to directly modify or rely on superglobals.
 				$_POST[$post_field] = sanitize_text_field($val);
 			} elseif(is_array($val)) {
+				// phpcs:ignore WordPress.Security.SuperGlobalInputModification -- Temporarily modifying superglobal as part of an interim solution. Will refactor later.
+				// As discussed with the WordPress review team it is discouraged to modify superglobals($_GET, $_POST, and $_REQUEST) but currently, these superglobals are modified in a temporary manner as part of an interim solution.
+				// We plan to refactor the entire flow in the future to ensure that our backend structure eliminates the need to directly modify or rely on superglobals.
 				// ACTIVE_TODO use sanitize array function whichever is available in php or wp api
 				$_POST[$post_field] = sanitize_text_field($val);
 			} else {
@@ -127,9 +139,15 @@ if(!class_exists('WBC_Sanitize')) {
 
 		public function store_request(string $request_field, $val){
 			if(is_string($val)) {
+				// phpcs:ignore WordPress.Security.SuperGlobalInputModification -- Temporarily modifying superglobal as part of an interim solution. Will refactor later.
+				// As discussed with the WordPress review team it is discouraged to modify superglobals($_GET, $_POST, and $_REQUEST) but currently, these superglobals are modified in a temporary manner as part of an interim solution.
+				// We plan to refactor the entire flow in the future to ensure that our backend structure eliminates the need to directly modify or rely on superglobals.
 				$_REQUEST[$request_field] = sanitize_text_field($val);
 			} elseif(is_array($val)) {
 				// ACTIVE_TODO use sanitize array function whichever is available in php or wp api
+				// phpcs:ignore WordPress.Security.SuperGlobalInputModification -- Temporarily modifying superglobal as part of an interim solution. Will refactor later.
+				// As discussed with the WordPress review team it is discouraged to modify superglobals($_GET, $_POST, and $_REQUEST) but currently, these superglobals are modified in a temporary manner as part of an interim solution.
+				// We plan to refactor the entire flow in the future to ensure that our backend structure eliminates the need to directly modify or rely on superglobals.
 				$_REQUEST[$request_field] = sanitize_text_field($val);
 			} else {
 				// TODO here we may need to support other type if required

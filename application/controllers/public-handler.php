@@ -118,6 +118,9 @@ class Public_Handler {
         	// @since 1.0.0 
         	// prior to 1.0.0 old url was supported
         	if(!empty(wbc()->sanitize->get('EO_WBC')) and isset($_GET['BEGIN']) and isset($_GET['STEP']) and !isset($_GET['FIRST']) and !isset($_GET['SECOND'])){
+        		// phpcs:ignore WordPress.Security.SuperGlobalInputModification -- Temporarily modifying superglobal as part of an interim solution. Will refactor later.
+        		// As discussed with the WordPress review team it is discouraged to modify superglobals($_GET, $_POST, and $_REQUEST) but currently, these superglobals are modified in a temporary manner as part of an interim solution.
+        		// We plan to refactor the entire flow in the future to ensure that our backend structure eliminates the need to directly modify or rely on superglobals.
         		$_GET['FIRST']='';
         		$_GET['SECOND']='';
         	}
@@ -128,9 +131,15 @@ class Public_Handler {
 	        	/*add_action('template_redirect',function(){
 	        		if (is_product_category()) {*/
 			        	if(isset($_GET['EO_WBC']) and !empty($_GET['EO_WBC']) and empty($_GET['_category'])) {
+			        		// phpcs:ignore WordPress.Security.SuperGlobalInputModification -- Temporarily modifying superglobal as part of an interim solution. Will refactor later.
+			        		// As discussed with the WordPress review team it is discouraged to modify superglobals($_GET, $_POST, and $_REQUEST) but currently, these superglobals are modified in a temporary manner as part of an interim solution.
+			        		// We plan to refactor the entire flow in the future to ensure that our backend structure eliminates the need to directly modify or rely on superglobals.
 				            // on load filter
 				            $_GET['eo_wbc_filter']=1;
-				            if(!empty($_GET['CAT_LINK'])){			            
+				            if(!empty($_GET['CAT_LINK'])){	
+				            	// phpcs:ignore WordPress.Security.SuperGlobalInputModification -- Temporarily modifying superglobal as part of an interim solution. Will refactor later.
+				            	// As discussed with the WordPress review team it is discouraged to modify superglobals($_GET, $_POST, and $_REQUEST) but currently, these superglobals are modified in a temporary manner as part of an interim solution.
+				            	// We plan to refactor the entire flow in the future to ensure that our backend structure eliminates the need to directly modify or rely on superglobals.		            
 				                $_GET['_category']='cat_link';
 				                $_REQUEST['_category']='cat_link';
 				                $_GET['cat_filter_cat_link']= \eo\wbc\model\SP_WBC_Router::instance()->set_query_params_formatted( 'to_form_field', 
@@ -184,13 +193,22 @@ class Public_Handler {
 						            		
 						            		$_current_category_object = wbc()->wc->get_term_by('term_id',$_current_category_id,'product_cat');
 						            		if(!empty($_current_category_object) and !is_wp_error($_current_category_object)) {
+						            			// phpcs:ignore WordPress.Security.SuperGlobalInputModification -- Temporarily modifying superglobal as part of an interim solution. Will refactor later.
+						            			// As discussed with the WordPress review team it is discouraged to modify superglobals($_GET, $_POST, and $_REQUEST) but currently, these superglobals are modified in a temporary manner as part of an interim solution.
+						            			// We plan to refactor the entire flow in the future to ensure that our backend structure eliminates the need to directly modify or rely on superglobals.
 							            		$_GET['_current_category'] = $_current_category_object->slug;
 							                	$_REQUEST['_current_category']= $_current_category_object->slug;
 
 							                	if(!empty($_GET['_category'])){
+							                		// phpcs:ignore WordPress.Security.SuperGlobalInputModification -- Temporarily modifying superglobal as part of an interim solution. Will refactor later.
+							                		// As discussed with the WordPress review team it is discouraged to modify superglobals($_GET, $_POST, and $_REQUEST) but currently, these superglobals are modified in a temporary manner as part of an interim solution.
+							                		// We plan to refactor the entire flow in the future to ensure that our backend structure eliminates the need to directly modify or rely on superglobals.
 							                		$_GET['_category'] .= ','.$_current_category_object->slug;
 							                		$_REQUEST['_category'] .= ','.$_current_category_object->slug;
 							                	} else {
+							                		// phpcs:ignore WordPress.Security.SuperGlobalInputModification -- Temporarily modifying superglobal as part of an interim solution. Will refactor later.
+							                		// As discussed with the WordPress review team it is discouraged to modify superglobals($_GET, $_POST, and $_REQUEST) but currently, these superglobals are modified in a temporary manner as part of an interim solution.
+							                		// We plan to refactor the entire flow in the future to ensure that our backend structure eliminates the need to directly modify or rely on superglobals.
 							                		$_GET['_category'] = $_current_category_object->slug;
 							                		$_REQUEST['_category'] = $_current_category_object->slug;
 							                	}

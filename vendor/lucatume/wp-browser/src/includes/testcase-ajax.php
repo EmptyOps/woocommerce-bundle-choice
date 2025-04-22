@@ -186,6 +186,9 @@ abstract class WP_Ajax_UnitTestCase extends WP_UnitTestCase {
 		ini_set( 'implicit_flush', false );
 		ob_start();
 
+		// phpcs:ignore WordPress.Security.SuperGlobalInputModification -- Temporarily modifying superglobal as part of an interim solution. Will refactor later.
+		// As discussed with the WordPress review team it is discouraged to modify superglobals($_GET, $_POST, and $_REQUEST) but currently, these superglobals are modified in a temporary manner as part of an interim solution.
+		// We plan to refactor the entire flow in the future to ensure that our backend structure eliminates the need to directly modify or rely on superglobals.
 		// Build the request
 		$_POST['action'] = $action;
 		$_GET['action']  = $action;

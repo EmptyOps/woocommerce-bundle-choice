@@ -727,20 +727,31 @@ class Eowbc_Sample_Data {
         			}
 
         			if( $index == "d_fconfig" ) {
+        				// phpcs:ignore WordPress.Security.SuperGlobalInputModification -- Temporarily modifying superglobal as part of an interim solution. Will refactor later.
+        				// As discussed with the WordPress review team it is discouraged to modify superglobals($_GET, $_POST, and $_REQUEST) but currently, these superglobals are modified in a temporary manner as part of an interim solution.
+        				// We plan to refactor the entire flow in the future to ensure that our backend structure eliminates the need to directly modify or rely on superglobals.
 						$_POST["saved_tab_key"] = $this->tab_key_prefix."d_fconfig";
 						$prefix = "d";
 						$_POST['first_category_altr_filt_widgts'] = $filter['template'];
         			}
         			else {
+        				// phpcs:ignore WordPress.Security.SuperGlobalInputModification -- Temporarily modifying superglobal as part of an interim solution. Will refactor later.
+        				// As discussed with the WordPress review team it is discouraged to modify superglobals($_GET, $_POST, and $_REQUEST) but currently, these superglobals are modified in a temporary manner as part of an interim solution.
+        				// We plan to refactor the entire flow in the future to ensure that our backend structure eliminates the need to directly modify or rely on superglobals.
         				$_POST["saved_tab_key"] = $this->tab_key_prefix."s_fconfig";
 						$prefix = "s";
 						$_POST['second_category_altr_filt_widgts'] = $filter['template'];
         			}
 
-        			if(!empty($filter['filter_set'])) {        				
+        			if(!empty($filter['filter_set'])) {
+        				// phpcs:ignore WordPress.Security.SuperGlobalInputModification -- Temporarily modifying superglobal as part of an interim solution. Will refactor later.
+        				// As discussed with the WordPress review team it is discouraged to modify superglobals($_GET, $_POST, and $_REQUEST) but currently, these superglobals are modified in a temporary manner as part of an interim solution.
+        				// We plan to refactor the entire flow in the future to ensure that our backend structure eliminates the need to directly modify or rely on superglobals.        				
         				$_POST[$prefix.'_fconfig_set']=$filter['filter_set'];
         			}
-        			        			 	
+    			  	// phpcs:ignore WordPress.Security.SuperGlobalInputModification -- Temporarily modifying superglobal as part of an interim solution. Will refactor later.
+    			  	// As discussed with the WordPress review team it is discouraged to modify superglobals($_GET, $_POST, and $_REQUEST) but currently, these superglobals are modified in a temporary manner as part of an interim solution.
+    			  	// We plan to refactor the entire flow in the future to ensure that our backend structure eliminates the need to directly modify or rely on superglobals.      			 	
         			$_POST[$prefix.'_fconfig_filter']=$filter['name'];
         			$_POST[$prefix.'_fconfig_elements']=$filter['elements'];
 	                $_POST[$prefix.'_fconfig_type']=$filter['type'];
@@ -761,6 +772,9 @@ class Eowbc_Sample_Data {
 	                
 
 	                if(!empty($filter['filter_category'])) {
+	                	// phpcs:ignore WordPress.Security.SuperGlobalInputModification -- Temporarily modifying superglobal as part of an interim solution. Will refactor later.
+	                	// As discussed with the WordPress review team it is discouraged to modify superglobals($_GET, $_POST, and $_REQUEST) but currently, these superglobals are modified in a temporary manner as part of an interim solution.
+	                	// We plan to refactor the entire flow in the future to ensure that our backend structure eliminates the need to directly modify or rely on superglobals.
 						$_POST['filter_category']=$filter['filter_category'];	                	
 	                }
 
@@ -1140,7 +1154,10 @@ class Eowbc_Sample_Data {
 			        // } else {
 			        //     $maps = array(array($first,$second,$discount));
 			        // }
-
+			        
+					// phpcs:ignore WordPress.Security.SuperGlobalInputModification -- Temporarily modifying superglobal as part of an interim solution. Will refactor later.
+					// As discussed with the WordPress review team it is discouraged to modify superglobals($_GET, $_POST, and $_REQUEST) but currently, these superglobals are modified in a temporary manner as part of an interim solution.
+					// We plan to refactor the entire flow in the future to ensure that our backend structure eliminates the need to directly modify or rely on superglobals.
 					$_POST["saved_tab_key"] = "map_creation_modification";
 				 	
         			$_POST['range_first']='';

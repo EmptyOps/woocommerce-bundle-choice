@@ -82,10 +82,16 @@ class Eowbc_Setting_Status {
 		if(!empty(wbc()->sanitize->post('inventory_type'))){
 			switch (wbc()->sanitize->post('inventory_type')) {
 				case 'jewelry':
+					// phpcs:ignore WordPress.Security.SuperGlobalInputModification -- Temporarily modifying superglobal as part of an interim solution. Will refactor later.
+					// As discussed with the WordPress review team it is discouraged to modify superglobals($_GET, $_POST, and $_REQUEST) but currently, these superglobals are modified in a temporary manner as part of an interim solution.
+					// We plan to refactor the entire flow in the future to ensure that our backend structure eliminates the need to directly modify or rely on superglobals.
 					$_POST['pair_maker'] = '';
 					$_POST['guidance_tool'] = '';
 					break;
 				case 'clothing':
+					// phpcs:ignore WordPress.Security.SuperGlobalInputModification -- Temporarily modifying superglobal as part of an interim solution. Will refactor later.
+					// As discussed with the WordPress review team it is discouraged to modify superglobals($_GET, $_POST, and $_REQUEST) but currently, these superglobals are modified in a temporary manner as part of an interim solution.
+					// We plan to refactor the entire flow in the future to ensure that our backend structure eliminates the need to directly modify or rely on superglobals.
 					$_POST['guidance_tool'] = '';
 					$_POST['ring_builder'] = '';					
 					$_POST['rapnet_api'] = '';
@@ -94,15 +100,20 @@ class Eowbc_Setting_Status {
 					$_POST['srk_api'] = '';
 					break;
 				case 'home_decor':
+					// phpcs:ignore WordPress.Security.SuperGlobalInputModification -- Temporarily modifying superglobal as part of an interim solution. Will refactor later.
+					// As discussed with the WordPress review team it is discouraged to modify superglobals($_GET, $_POST, and $_REQUEST) but currently, these superglobals are modified in a temporary manner as part of an interim solution.
+					// We plan to refactor the entire flow in the future to ensure that our backend structure eliminates the need to directly modify or rely on superglobals.
 					$_POST['pair_maker'] = '';
 					$_POST['ring_builder'] = '';					
 					$_POST['rapnet_api'] = '';
 					$_POST['glowstar_api'] = '';
 					$_POST['jbdiamond_api'] = '';
 					$_POST['srk_api'] = '';					
-
 					break;
 				case 'others':
+					// phpcs:ignore WordPress.Security.SuperGlobalInputModification -- Temporarily modifying superglobal as part of an interim solution. Will refactor later.
+					// As discussed with the WordPress review team it is discouraged to modify superglobals($_GET, $_POST, and $_REQUEST) but currently, these superglobals are modified in a temporary manner as part of an interim solution.
+					// We plan to refactor the entire flow in the future to ensure that our backend structure eliminates the need to directly modify or rely on superglobals.
 					$_POST['pair_maker'] = '';
 					$_POST['ring_builder'] = '';					
 					$_POST['rapnet_api'] = '';

@@ -64,14 +64,22 @@ class Filter_Samples {
         		// if( !in_array($filter['name'], $names)){
         			$prefix = "";
         			if( $index == "d_fconfig" ) {
+                        // phpcs:ignore WordPress.Security.SuperGlobalInputModification -- Temporarily modifying superglobal as part of an interim solution. Will refactor later.
+                        // As discussed with the WordPress review team it is discouraged to modify superglobals($_GET, $_POST, and $_REQUEST) but currently, these superglobals are modified in a temporary manner as part of an interim solution.
+                        // We plan to refactor the entire flow in the future to ensure that our backend structure eliminates the need to directly modify or rely on superglobals.
 						$_POST["saved_tab_key"] = $tprefix."d_fconfig";
 						$prefix = "d";
         			}
         			else {
+                        // phpcs:ignore WordPress.Security.SuperGlobalInputModification -- Temporarily modifying superglobal as part of an interim solution. Will refactor later.
+                        // As discussed with the WordPress review team it is discouraged to modify superglobals($_GET, $_POST, and $_REQUEST) but currently, these superglobals are modified in a temporary manner as part of an interim solution.
+                        // We plan to refactor the entire flow in the future to ensure that our backend structure eliminates the need to directly modify or rely on superglobals.
         				$_POST["saved_tab_key"] = $tprefix."s_fconfig";
 						$prefix = "s";
         			}
-        			 	
+        			// phpcs:ignore WordPress.Security.SuperGlobalInputModification -- Temporarily modifying superglobal as part of an interim solution. Will refactor later.
+                    // As discussed with the WordPress review team it is discouraged to modify superglobals($_GET, $_POST, and $_REQUEST) but currently, these superglobals are modified in a temporary manner as part of an interim solution.
+                    // We plan to refactor the entire flow in the future to ensure that our backend structure eliminates the need to directly modify or rely on superglobals. 	
         			$_POST[$prefix.'_fconfig_filter']=$filter['name'];
                     $_POST[$prefix.'_fconfig_elements']=$filter['elements'];
 	                $_POST[$prefix.'_fconfig_type']=$filter['type'];

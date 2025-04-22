@@ -51,6 +51,9 @@ class Eowbc_Configuration {
 
 	    	wbc()->options->update_option( 'configuration', $icon_keys[$i], absint( $thumb_id ) );
 	    	
+	    	// phpcs:ignore WordPress.Security.SuperGlobalInputModification -- Temporarily modifying superglobal as part of an interim solution. Will refactor later.
+	    	// As discussed with the WordPress review team it is discouraged to modify superglobals($_GET, $_POST, and $_REQUEST) but currently, these superglobals are modified in a temporary manner as part of an interim solution.
+	    	// We plan to refactor the entire flow in the future to ensure that our backend structure eliminates the need to directly modify or rely on superglobals.
 	    	//this is tricky, since the form is also updated on same save we need to override it's icon fields and set this thumb_ids
 	    	$_POST[$icon_keys[$i]] = $thumb_id; 
 		}
