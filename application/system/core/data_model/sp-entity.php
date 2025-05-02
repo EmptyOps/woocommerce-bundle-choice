@@ -97,5 +97,9 @@ class SP_Entity {
 		return $res;
 	}
 
+	public static function supported_platforms() {
+	       return array('wp'); // Future me Shopify, Magento yahan add honge
+   	}
+
 
 }

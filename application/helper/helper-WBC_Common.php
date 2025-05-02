@@ -1801,6 +1801,20 @@ class WBC_Common {
 
 	}
 
+	public function get_current_platform() {
+
+	    ACTIVE_TODO right now we are just relying on the sp ntity supported platform function but if and when required we can rely on the pre-planned factory classes like sp-attribute, sp-category, sp-product which extends from the sp-entity class. 
+
+	    -- nichena na get mathi read pehla, aapde jem asana ma point add karo che tem admin settings ma thi pehla read karvanu aavshe 
+	    $platform_key = isset($_GET['wbcpk']) ? $_GET['wbcpk'] : 'wp';
+	    
+	    // SP_Entity ka supported_platforms() function call karke check karna hai
+	    $supported_platforms = SP_Entity::supported_platforms();
+	    
+	    NOTE: and then it should check key against the SP_Entity supported platform function that returns array. and so this function should return the key only if it is specified in supported platform array. and if not supported then default to wp? well for now we did the default to wp. 
+	    return in_array($platform_key, $supported_platforms) ? $platform_key : 'wp';
+	}
+
 }
 
 function wbc_pr($ar, $force_debug = false, $die = false) {
@@ -1952,3 +1966,9 @@ function wbc_get_variation_url_part($variation_id,$attributes=array()) {
 	return wbc()->common->get_variation_url_part($variation_id,$attributes);
 
 }
+
+function wbc_get_current_platform() {
+
+	return wbc()->common->get_current_platform();
+
+}	
