@@ -76,6 +76,7 @@ class WooCommerce_Bundle_Choice_Bootstrap {
     	$this->visual_composer();
 
 		if((function_exists('is_ajax') and is_ajax()) or defined('WP_AJAX')) {
+			
 
 			//	legacy admin process need to be initiated during ajax also, so that its applicable modules can bind with the legacy admin side hooks of wp, woo and other plugins 
 				// ACTIVE_TODO but yeah need to impement flow that only those admin process which has something to do with particular ajax action does only executed and not others 
@@ -84,7 +85,8 @@ class WooCommerce_Bundle_Choice_Bootstrap {
 			add_action( "wp_ajax_nopriv_eowbc_ajax",array($this,'ajax'),10);
 			add_action( "wp_ajax_eowbc_ajax",array($this,'ajax'),10);
 
-		} else {			
+		} else {
+		
 			// system core
 			$this->system_core();
 

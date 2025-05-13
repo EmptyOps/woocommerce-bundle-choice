@@ -212,7 +212,9 @@ class Public_Handler {
 
 
         	add_action('template_redirect',function(){
-
+        		
+        		— SP_WBC_PSFAR possible to skip for ajax ring builder
+        		global $wp_query;
         		self::instance()->enable_session();        		
         		if(is_front_page()) {
 				    \eo\wbc\controllers\publics\pages\Home::instance()->init();
@@ -224,7 +226,8 @@ class Public_Handler {
 			    		\eo\wbc\controllers\publics\pages\Feed::instance()->init();
 			    	}
 
-			    } elseif (is_product_category()) {
+			    — SP_WBC_PSFAR possible to skip for ajax ring builder	
+			    } elseif (is_product_category() || ( defined('SP_WBC_ARBU') && constant('SP_WBC_ARBU') === true && method_exists($wp_query, 'get_queried_object') && !empty($wp_query->get_queried_object()->term_id) )) {
 			        \eo\wbc\controllers\publics\pages\Category::instance()->init();
 
 			        if(\eo\wbc\controllers\publics\pages\Feed::should_init()) {

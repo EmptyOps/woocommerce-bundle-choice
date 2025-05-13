@@ -614,8 +614,11 @@ class Category {
         else {
             return null;
         }
-        global $wp_query;        
-        
+        global $wp_query;  
+
+        wbc_pr($wp_query->get_queried_object()->term_id);
+        wbc_pr($wp_query->get_queried_object()->slug);
+
         //get list of slug which are ancestors of current page item's category
         $term_slug=array_map(array('self',"eo_wbc_id_2_slug"),get_ancestors($wp_query->get_queried_object()->term_id, 'product_cat'));
 

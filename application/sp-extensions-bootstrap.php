@@ -45,7 +45,7 @@ class SP_Extensions_Bootstrap {
 	}
 
 	public function run() {
-
+		
 		add_action( 'init', function() {
 			
 			$this->migrate();

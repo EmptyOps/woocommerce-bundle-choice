@@ -306,14 +306,26 @@ if(!class_exists('SP_Plugin_Index_Class') ) {
 		public function plugin_load_process( SP_Extension $SP_Extension ) {
 			$this->SP_Extension = $SP_Extension; 
 
-			//Add Admin Panel Link adjecent to Plugin Name in WP Admin's Plugin Page
-			add_filter('plugin_action_links_'. plugin_basename( $this->getFILE() ),function($links){
+			if( !defined('SP_WBC_ARB_EAS_ON') || constant('SP_WBC_ARB_EAS_ON') === true ) {
+				//Add Admin Panel Link adjecent to Plugin Name in WP Admin's Plugin Page
+				add_filter('plugin_action_links_'. plugin_basename( $this->getFILE() ),function($links){
+				    
+				    $links[] = '<a href="' .
+				        admin_url( 'admin.php?page='.$this->SP_Extension->admin_page_slug() ) .
+				        '">' . __('Admin Panel',$this->SP_Extension->extension_slug())  . '</a>';
+				        return $links;
+				},30);
+			}
+			
+			— SP_WBC_PSFAR possible to skip for ajax ring builder
+			// //Add Admin Panel Link adjecent to Plugin Name in WP Admin's Plugin Page
+			// add_filter('plugin_action_links_'. plugin_basename( $this->getFILE() ),function($links){
 			    
-			    $links[] = '<a href="' .
-			        admin_url( 'admin.php?page='.$this->SP_Extension->admin_page_slug() ) .
-			        '">' . __('Admin Panel',$this->SP_Extension->extension_slug())  . '</a>';
-			        return $links;
-			},30);
+			//     $links[] = '<a href="' .
+			//         admin_url( 'admin.php?page='.$this->SP_Extension->admin_page_slug() ) .
+			//         '">' . __('Admin Panel',$this->SP_Extension->extension_slug())  . '</a>';
+			//         return $links;
+			// },30);
 			if(file_exists(plugin_dir_path( $this->getFILE() ).'vendor/autoload.php'))
 			{
 				require_once plugin_dir_path( $this->getFILE() ).'vendor/autoload.php';	
