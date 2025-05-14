@@ -211,54 +211,103 @@ class Public_Handler {
 			});
 
 
-        	add_action('template_redirect',function(){
-        		
-        		— SP_WBC_PSFAR possible to skip for ajax ring builder
-        		global $wp_query;
-        		self::instance()->enable_session();        		
-        		if(is_front_page()) {
-				    \eo\wbc\controllers\publics\pages\Home::instance()->init();
+        	// add_action('template_redirect',function(){
 
-				} elseif(is_shop()) {
-			    	\eo\wbc\controllers\publics\pages\Shop::instance()->init();
+        	// 	— SP_WBC_PSFAR possible to skip for ajax ring builder
+        	// 	global $wp_query;
+        	// 	self::instance()->enable_session();        		
+        	// 	if(is_front_page()) {
+			// 	    \eo\wbc\controllers\publics\pages\Home::instance()->init();
 
-			    	if(\eo\wbc\controllers\publics\pages\Feed::should_init()) {
-			    		\eo\wbc\controllers\publics\pages\Feed::instance()->init();
-			    	}
+			// 	} elseif(is_shop()) {
+			//     	\eo\wbc\controllers\publics\pages\Shop::instance()->init();
 
-			    — SP_WBC_PSFAR possible to skip for ajax ring builder	
-			    } elseif (is_product_category() || ( defined('SP_WBC_ARBU') && constant('SP_WBC_ARBU') === true && method_exists($wp_query, 'get_queried_object') && !empty($wp_query->get_queried_object()->term_id) )) {
-			        \eo\wbc\controllers\publics\pages\Category::instance()->init();
+			//     	if(\eo\wbc\controllers\publics\pages\Feed::should_init()) {
+			//     		\eo\wbc\controllers\publics\pages\Feed::instance()->init();
+			//     	}
 
-			        if(\eo\wbc\controllers\publics\pages\Feed::should_init()) {
-			    		\eo\wbc\controllers\publics\pages\Feed::instance()->init();
-			    	}
+			//     — SP_WBC_PSFAR possible to skip for ajax ring builder	
+			//     } elseif (is_product_category() || ( defined('SP_WBC_ARBU') && constant('SP_WBC_ARBU') === true && method_exists($wp_query, 'get_queried_object') && !empty($wp_query->get_queried_object()->term_id) )) {
+			//         \eo\wbc\controllers\publics\pages\Category::instance()->init();
 
-			    } elseif(is_product()) {
+			//         if(\eo\wbc\controllers\publics\pages\Feed::should_init()) {
+			//     		\eo\wbc\controllers\publics\pages\Feed::instance()->init();
+			//     	}
 
-			    	\eo\wbc\controllers\publics\pages\Product::instance()->init();
+			//     } elseif(is_product()) {
 
-			    } elseif(is_page(__('Product Review','woo-bundle-choice'))) {
-					\eo\wbc\controllers\publics\pages\Preview::instance()->init();        
+			//     	\eo\wbc\controllers\publics\pages\Product::instance()->init();
+
+			//     } elseif(is_page(__('Product Review','woo-bundle-choice'))) {
+			// 		\eo\wbc\controllers\publics\pages\Preview::instance()->init();        
 					
-			    } elseif(is_cart()) {
-			    	\eo\wbc\controllers\publics\pages\Cart::instance()->init();
+			//     } elseif(is_cart()) {
+			//     	\eo\wbc\controllers\publics\pages\Cart::instance()->init();
 			    
-			    } elseif (is_checkout() && !is_order_received_page()) {
-			    	\eo\wbc\controllers\publics\pages\Checkout::instance()->init();	
+			//     } elseif (is_checkout() && !is_order_received_page()) {
+			//     	\eo\wbc\controllers\publics\pages\Checkout::instance()->init();	
 
-			    } elseif (is_order_received_page()) {
+			//     } elseif (is_order_received_page()) {
 			    	
-					\eo\wbc\controllers\publics\pages\Order_Received::instance()->init();	    
+			// 		\eo\wbc\controllers\publics\pages\Order_Received::instance()->init();	    
 
-			    } elseif (wbc()->wc->is_wc_endpoint_url('view-order')) {
+			//     } elseif (wbc()->wc->is_wc_endpoint_url('view-order')) {
 			    	
-					\eo\wbc\controllers\publics\pages\View_Order::instance()->init();
+			// 		\eo\wbc\controllers\publics\pages\View_Order::instance()->init();
 
-			    }
-        	},20);        	
+			//     }
+        	// },20); 
+			— SP_WBC_PSFAR possible to skip for ajax ring builder
+			add_action('init',function(){
+
+				self::testing();
+			},20);       	
         }
 		do_action( 'after_public_process_request' );
+	}
+	— SP_WBC_PSFAR possible to skip for ajax ring builder
+	private static function testing() {
+
+		global $wp_query;
+        self::instance()->enable_session(); 
+
+        if (is_front_page()) {
+            \eo\wbc\controllers\publics\pages\Home::instance()->init();
+
+        } elseif (is_shop()) {
+            \eo\wbc\controllers\publics\pages\Shop::instance()->init();
+
+            if (\eo\wbc\controllers\publics\pages\Feed::should_init()) {
+                \eo\wbc\controllers\publics\pages\Feed::instance()->init();
+            }
+
+        } elseif (is_product_category() || (defined('SP_WBC_ARBU') && constant('SP_WBC_ARBU') === true && method_exists($wp_query, 'get_queried_object') && !empty($wp_query->get_queried_object()->term_id))) {
+
+        	wbc_pr('testing in Public_Handler');
+            \eo\wbc\controllers\publics\pages\Category::instance()->init();
+    
+            if (\eo\wbc\controllers\publics\pages\Feed::should_init()) {
+                \eo\wbc\controllers\publics\pages\Feed::instance()->init();
+            }
+
+        } elseif (is_product()) {
+            \eo\wbc\controllers\publics\pages\Product::instance()->init();
+
+        } elseif (is_page(__('Product Review', 'woo-bundle-choice'))) {
+            \eo\wbc\controllers\publics\pages\Preview::instance()->init();        
+
+        } elseif (is_cart()) {
+            \eo\wbc\controllers\publics\pages\Cart::instance()->init();
+
+        } elseif (is_checkout() && !is_order_received_page()) {
+            \eo\wbc\controllers\publics\pages\Checkout::instance()->init();    
+
+        } elseif (is_order_received_page()) {
+            \eo\wbc\controllers\publics\pages\Order_Received::instance()->init();        
+
+        } elseif (wbc()->wc->is_wc_endpoint_url('view-order')) {
+            \eo\wbc\controllers\publics\pages\View_Order::instance()->init();
+        }
 	}
 
 	public function enable_session() {
