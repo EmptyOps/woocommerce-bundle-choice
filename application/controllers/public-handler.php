@@ -212,8 +212,6 @@ class Public_Handler {
 
 
         	// add_action('template_redirect',function(){
-
-        	// 	— SP_WBC_PSFAR possible to skip for ajax ring builder
         	// 	global $wp_query;
         	// 	self::instance()->enable_session();        		
         	// 	if(is_front_page()) {
@@ -226,7 +224,6 @@ class Public_Handler {
 			//     		\eo\wbc\controllers\publics\pages\Feed::instance()->init();
 			//     	}
 
-			//     — SP_WBC_PSFAR possible to skip for ajax ring builder	
 			//     } elseif (is_product_category() || ( defined('SP_WBC_ARBU') && constant('SP_WBC_ARBU') === true && method_exists($wp_query, 'get_queried_object') && !empty($wp_query->get_queried_object()->term_id) )) {
 			//         \eo\wbc\controllers\publics\pages\Category::instance()->init();
 
@@ -256,12 +253,12 @@ class Public_Handler {
 			// 		\eo\wbc\controllers\publics\pages\View_Order::instance()->init();
 
 			//     }
-        	// },20); 
-			— SP_WBC_PSFAR possible to skip for ajax ring builder
-			add_action('init',function(){
+        	// },20);
+        	— SP_WBC_PSFAR possible to skip for ajax ring builder
+        	add_action('init',function(){
 
-				self::testing();
-			},20);       	
+        		self::testing();
+        	},20);        	
         }
 		do_action( 'after_public_process_request' );
 	}
@@ -275,11 +272,22 @@ class Public_Handler {
             \eo\wbc\controllers\publics\pages\Home::instance()->init();
 
         } elseif (is_shop()) {
-            \eo\wbc\controllers\publics\pages\Shop::instance()->init();
+        	// — SP_WBC_PSFAR possible to skip for ajax ring builder
 
-            if (\eo\wbc\controllers\publics\pages\Feed::should_init()) {
-                \eo\wbc\controllers\publics\pages\Feed::instance()->init();
-            }
+        	if( !defined('SP_WBC_ARB_EAS_ON') || constant('SP_WBC_ARB_EAS_ON') === true ) {
+        		
+        		\eo\wbc\controllers\publics\pages\Shop::instance()->init();
+
+	            if (\eo\wbc\controllers\publics\pages\Feed::should_init()) {
+	                \eo\wbc\controllers\publics\pages\Feed::instance()->init();
+	            }
+        	}
+
+            // \eo\wbc\controllers\publics\pages\Shop::instance()->init();
+
+            // if (\eo\wbc\controllers\publics\pages\Feed::should_init()) {
+            //     \eo\wbc\controllers\publics\pages\Feed::instance()->init();
+            // }
 
         } elseif (is_product_category() || (defined('SP_WBC_ARBU') && constant('SP_WBC_ARBU') === true && method_exists($wp_query, 'get_queried_object') && !empty($wp_query->get_queried_object()->term_id))) {
 
@@ -309,7 +317,6 @@ class Public_Handler {
             \eo\wbc\controllers\publics\pages\View_Order::instance()->init();
         }
 	}
-
 	public function enable_session() {
 		/*
 		*	Enable session at user request to save data between each page navigation.
