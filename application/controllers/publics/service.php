@@ -20,7 +20,11 @@ class Service {
 
 	public function run() {		
 
-		$this->add_shortcode();
+        // — SP_WBC_PSFAR possible to skip for ajax ring builder
+		if( !defined('SP_WBC_ARB_EAS_ON') || constant('SP_WBC_ARB_EAS_ON') === true ) {
+            
+            $this->add_shortcode();
+        }
 
         $this->discount_service();
 	}
@@ -42,7 +46,12 @@ class Service {
 
         },20,2);
 
-        add_action('woocommerce_checkout_update_order_review',array(\eo\wbc\controllers\publics\pages\Checkout::instance(),'update_order_review'));
+        // — SP_WBC_PSFAR possible to skip for ajax ring builder
+        if( !defined('SP_WBC_ARB_EAS_ON') || constant('SP_WBC_ARB_EAS_ON') === true ) {
+            
+            add_action('woocommerce_checkout_update_order_review',array(\eo\wbc\controllers\publics\pages\Checkout::instance(),'update_order_review'));
+        }
+
 
         add_action( 'woocommerce_update_cart_action_cart_updated',function() {
            if(is_array($_POST['cart']) and !empty($_POST['cart'])) {
