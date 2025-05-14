@@ -1269,6 +1269,13 @@ class SP_Model_Single_Product extends SP_Single_Product {
 			)
 		);
 		\sp\theme\view\ui\builder\Page_Builder::instance()->build_page_widgets($ui,'sp_variations_gallery_images_container');
+
+		$ui_definition = null;
+
+		-- Is code main class namespace ko WBC ke naye Page Builder class ke hisaab se change karna hoga. to simply class file find karne ke liye class name "SP_WBC_Page_Builder" use karo. 
+		        \name\space\SP_WBC_Page_Builder::instance()->build_page_widgets($ui,'sp_variations_gallery_images_container',array(),false, $ui_definition); 
+
+		        
 		//wbc_pr( $ui );	die();
 
 		//////////////// end core

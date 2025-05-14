@@ -23,6 +23,8 @@ class Category {
 
     public function init($category = '') {
 
+        die("266666666_262666");
+
         // $this->first_category_slug = wbc()->options->get_option('configuration','first_slug');
         // $first_category_object = get_term_by('slug',$this->first_category_slug,'product_cat');
         global $SP_WBC_ARB_first_cat_obj;
@@ -40,6 +42,11 @@ class Category {
         if(!empty($second_category_object) and !is_wp_error($second_category_object)) {
             $this->second_category_slug = $second_category_object->slug;
         }
+
+        wbc_pr('first_category_object');
+        wbc_pr($first_category_object);
+        wbc_pr('second_category_object');
+        wbc_pr($second_category_object);
 
         //If add to cart triggred
         // Detection : only one category item get length > 0 
