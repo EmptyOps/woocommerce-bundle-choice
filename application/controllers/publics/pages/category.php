@@ -23,14 +23,20 @@ class Category {
 
     public function init($category = '') {
 
-        $this->first_category_slug = wbc()->options->get_option('configuration','first_slug');
-        $first_category_object = get_term_by('slug',$this->first_category_slug,'product_cat');
+        // $this->first_category_slug = wbc()->options->get_option('configuration','first_slug');
+        // $first_category_object = get_term_by('slug',$this->first_category_slug,'product_cat');
+        global $SP_WBC_ARB_first_cat_obj;
+        $first_category_object = $SP_WBC_ARB_first_cat_obj;
+
         if(!empty($first_category_object) and !is_wp_error($first_category_object)) {
             $this->first_category_slug = $first_category_object->slug;
         }
 
-        $this->second_category_slug = wbc()->options->get_option('configuration','second_slug');
-        $second_category_object = get_term_by('slug',$this->second_category_slug,'product_cat');
+        // $this->second_category_slug = wbc()->options->get_option('configuration','second_slug');
+        // $second_category_object = get_term_by('slug',$this->second_category_slug,'product_cat');
+        global $SP_WBC_ARB_second_cat_obj;
+        $second_category_object = $SP_WBC_ARB_second_cat_obj;
+        
         if(!empty($second_category_object) and !is_wp_error($second_category_object)) {
             $this->second_category_slug = $second_category_object->slug;
         }
