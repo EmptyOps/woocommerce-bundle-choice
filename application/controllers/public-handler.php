@@ -74,12 +74,30 @@ class Public_Handler {
 		wbc()->options->update_option('configuration','config_map',1);*/
 		add_action('template_redirect',function(){
 
-			$bonus_features = array_filter(unserialize(wbc()->options->get_option('setting_status_setting_status_setting','bonus_features',serialize(array()))));
-			if(!empty($bonus_features['filters_shop_cat']) and ( is_shop() || is_product_category()) and empty(wbc()->sanitize->get('EO_WBC'))) {
+			// — SP_WBC_PSFAR possible to skip for ajax ring builder
 
+			if( !defined('SP_WBC_ARB_EAS_ON') || constant('SP_WBC_ARB_EAS_ON') === true ) {
 
-			    \eo\wbc\controllers\publics\pages\Shop_Category_Filter::instance()->init();
+            	$bonus_features = array_filter(unserialize(wbc()->options->get_option('setting_status_setting_status_setting','bonus_features',serialize(array()))));
+				if(!empty($bonus_features['filters_shop_cat']) and ( is_shop() || is_product_category()) and empty(wbc()->sanitize->get('EO_WBC'))) {
+
+				    \eo\wbc\controllers\publics\pages\Shop_Category_Filter::instance()->init();
+
+				}
 			}
+
+			// $bonus_features = array_filter(unserialize(wbc()->options->get_option('setting_status_setting_status_setting','bonus_features',serialize(array()))));
+
+			// if(!empty($bonus_features['filters_shop_cat']) and ( is_shop() || is_product_category()) and empty(wbc()->sanitize->get('EO_WBC'))) {
+
+
+
+
+
+			//     \eo\wbc\controllers\publics\pages\Shop_Category_Filter::instance()->init();
+
+			// }
+
 
 			if(is_product() and !empty(wbc()->sanitize->get('eowbc_askq'))) {
 
@@ -212,6 +230,7 @@ class Public_Handler {
 
 
         	// add_action('template_redirect',function(){
+        	// 	— SP_WBC_PSFAR possible to skip for ajax ring builder
         	// 	global $wp_query;
         	// 	self::instance()->enable_session();        		
         	// 	if(is_front_page()) {
