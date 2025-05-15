@@ -663,7 +663,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
         ));
     }
 
-    private static function sp_wbc_webhook_listener(WP_REST_Request $request) {
+    private static function sp_wbc_webhook_listener(\WP_REST_Request $request) {
 
     	-- yeh niche vala code function ke top mein add kar do 
 	    // Step 0: Rate limit check
