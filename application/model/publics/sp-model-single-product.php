@@ -1268,7 +1268,18 @@ class SP_Model_Single_Product extends SP_Single_Product {
 				),
 			)
 		);
-		\sp\theme\view\ui\builder\Page_Builder::instance()->build_page_widgets($ui,'sp_variations_gallery_images_container');
+		if( !defined('SP_WBC_ARB_EAS_ON') || constant('SP_WBC_ARB_EAS_ON') === true ) {
+
+			\sp\theme\view\ui\builder\Page_Builder::instance()->build_page_widgets($ui,'sp_variations_gallery_images_container');
+		}
+
+		// sp\theme\view\ui\builder\Page_Builder::instance()->build_page_widgets($ui,'sp_variations_gallery_images_container');
+
+		— SP_WBC_PSFAR possible to skip for ajax ring builder 
+		$ui_definition = null;
+
+        \eo\wbc\model\SP_WBC_Page_Builder::instance()->build_page_widgets($ui,'sp_variations_gallery_images_container',array(),false, $ui_definition);
+
 		//wbc_pr( $ui );	die();
 
 		//////////////// end core
