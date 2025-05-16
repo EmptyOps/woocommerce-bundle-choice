@@ -240,11 +240,22 @@ class Public_Handler {
 			        \eo\wbc\controllers\publics\pages\Home::instance()->init();
 
 			    } elseif (is_shop()) {
-			        \eo\wbc\controllers\publics\pages\Shop::instance()->init();
 
-			        if (\eo\wbc\controllers\publics\pages\Feed::should_init()) {
-			            \eo\wbc\controllers\publics\pages\Feed::instance()->init();
-			        }
+			    	— SP_WBC_PSFAR possible to skip for ajax ring builder
+
+			    	if( !defined('SP_WBC_ARB_EAS_ON') || constant('SP_WBC_ARB_EAS_ON') === true ) {
+			            \eo\wbc\controllers\publics\pages\Shop::instance()->init();
+
+				        if (\eo\wbc\controllers\publics\pages\Feed::should_init()) {
+				            \eo\wbc\controllers\publics\pages\Feed::instance()->init();
+				        }
+					}
+			    	
+			        // \eo\wbc\controllers\publics\pages\Shop::instance()->init();
+
+			        // if (\eo\wbc\controllers\publics\pages\Feed::should_init()) {
+			        //     \eo\wbc\controllers\publics\pages\Feed::instance()->init();
+			        // }
 
 			     — SP_WBC_PSFAR possible to skip for ajax ring builder
 			    } elseif (is_product_category() || (defined('SP_WBC_ARBU') && constant('SP_WBC_ARBU') === true && method_exists($wp_query, 'get_queried_object') && !empty($wp_query->get_queried_object()->term_id))) {
