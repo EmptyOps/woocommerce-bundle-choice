@@ -665,12 +665,11 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
     private static function sp_wbc_webhook_listener(\WP_REST_Request $request) {
 
-    	-- yeh niche vala code function ke top mein add kar do 
 	    // Step 0: Rate limit check
 	    $rate_limit_response = self::sp_wbc_webhook_rate_limiter();
 	    if ($rate_limit_response instanceof WP_REST_Response) {
 
-	        // NOTE: we are intentionally not loggin this response in our log file. because it is counter inituitive to whole idea of avoiding overloading of server because logging to file may also create problems if there are many calls coming. 
+	        // NOTE: we are intentionally not logging this response in our log file. because it is counter inituitive to whole idea of avoiding overloading of server because logging to file may also create problems if there are many calls coming. 
 	        return $rate_limit_response;
 	    }
 
@@ -687,7 +686,6 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
                 'msg'  => 'Unauthorized: Invalid API Key'
             ], 403);
 
-            -- yeh code add karo
             self::sp_wbc_webhook_log('auth_failed', [
                 'headers'  => $headers,
                 'api_key'  => $api_key,
@@ -695,7 +693,6 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
                 'response' => $response->get_data()
             ]);
 
-            -- yeh code modify hua hain 
             return $response;
         }
 
@@ -752,7 +749,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
         $key = 'sp_wbc_webhook_called';
         if (get_transient($key)) {
 
-            // NOTE: we are intentionally not loggin this response in our log file. because it is counter inituitive to whole idea of avoiding overloading of server because logging to file may also create problems if there are many calls coming. 
+            // NOTE: we are intentionally not logging this response in our log file. because it is counter inituitive to whole idea of avoiding overloading of server because logging to file may also create problems if there are many calls coming. 
             return new WP_REST_Response([
                 'type' => 'warning',
                 'msg'  => 'Too many webhook requests, ignored.'
