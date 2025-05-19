@@ -1403,7 +1403,7 @@ class WBC_Common {
 	        unset($_GET['wbcid']);
 
 			// Check if wbcid is present in the URL
-			if ($wbcid === 'sd' or $wbcid === 'ss' or $wbcid === 'sd-round' or $wbcid === 'sd-oval' or $wbcid === 'sd-cushion' or $wbcid === 'sd-pear' or $wbcid === 'sd-princess' or $wbcid === 'sd-emerald' or $wbcid === 'sd-marquise' or $wbcid === 'sd-asscher' or $wbcid === 'sd-radiant' or $wbcid === 'sd-heart' or $wbcid === 'bd-brilliant' or $wbcid === 'bd-oval' or $wbcid === 'bd-cushion' or $wbcid === 'bd-tropfen' or $wbcid === 'bd-prinzess' or $wbcid === 'bd-emerald' or $wbcid === 'bd-marquise' or $wbcid === 'bd-asscher' or $wbcid === 'bd-radiant' or $wbcid === 'bd-herz' or $wbcid === 'ss-round' or $wbcid === 'ss-oval' or $wbcid === 'ss-cushion' or $wbcid === 'ss-pear' or $wbcid === 'ss-princess' or $wbcid === 'ss-emeral' or $wbcid === 'ss-marquise' or $wbcid === 'ss-heart' or $wbcid === 'ss-asscher' or $wbcid === 'ldg-brilliant' or $wbcid === 'ldg-oval' or $wbcid === 'ldg-cushion' or $wbcid === 'ldg-tropfen' or $wbcid === 'ldg-prinzess' or $wbcid === 'ldg-emerald' or $wbcid === 'ldg-marquise' or $wbcid === 'ldg-asscher' or $wbcid === 'ldg-radiant' or $wbcid === 'ldg-herz' or $wbcid === 'lg-octagonal' or $wbcid === 'lg-hexagonal' or $wbcid === 'lg-andere' or $wbcid === 'lg-square' or $wbcid === 'lg-triangular' or $wbcid === 'lg-brilliant' or $wbcid === 'lg-asscher' or $wbcid === 'lg-emerald' or $wbcid === 'lg-herz' or $wbcid === 'lg-kissen' or $wbcid === 'lg-marquise' or $wbcid === 'lg-oval' or $wbcid === 'lg-prinzess' or $wbcid === 'lg-radiant' or $wbcid === 'lg-tropfen' or $wbcid === 'sdg' or $wbcid === 'sldg' or $wbcid === 'sfdg' or $wbcid === 'sedg' or $wbcid === 'seg' or $wbcid === 'ss-ring' or $wbcid === 'sd-diamond' or $wbcid === 'sld-diamond' or $wbcid === 'ss-radiant-diamond' or $wbcid === 'ss-round-diamond' or $wbcid === 'ss-cushion-diamond' or $wbcid === 'ss-princess-diamond' or $wbcid === 'ss-marquise-diamond' or $wbcid === 'ss-asscher-diamond' or $wbcid === 'ss-oval-diamond' or $wbcid === 'ss-pear-diamond' or $wbcid === 'ss-emerald-diamond' or $wbcid === 'ss-heart-diamond' or $wbcid === 'ss-solitaire-ring' or $wbcid === 'ss-vintage-ring' or $wbcid === 'ss-trilogy-ring' or $wbcid === 'ss-pave-ring' or $wbcid === 'ss-stone-ring' or $wbcid === 'ss-halo-ring' or $wbcid === 'ss-14k-yellow-gold-ring' or $wbcid === 'ss-14k-rose-gold-ring' or $wbcid === 'ss-14k-white-gold-ring' or $wbcid === 'ss-platinum-ring' or $wbcid === 'ss-18k-yellow-gold-ring' or $wbcid === 'ss-18k-rose-gold-ring' or $wbcid === 'ss-18k-white-gold-ring') {
+			if ($wbcid === 'sd' or $wbcid === 'ss' or $wbcid === 'sd-round' or $wbcid === 'sd-oval' or $wbcid === 'sd-cushion' or $wbcid === 'sd-pear' or $wbcid === 'sd-princess' or $wbcid === 'sd-emerald' or $wbcid === 'sd-marquise' or $wbcid === 'sd-asscher' or $wbcid === 'sd-radiant' or $wbcid === 'sd-heart' or $wbcid === 'bd-brilliant' or $wbcid === 'bd-oval' or $wbcid === 'bd-cushion' or $wbcid === 'bd-tropfen' or $wbcid === 'bd-prinzess' or $wbcid === 'bd-emerald' or $wbcid === 'bd-marquise' or $wbcid === 'bd-asscher' or $wbcid === 'bd-radiant' or $wbcid === 'bd-herz' or $wbcid === 'ss-round' or $wbcid === 'ss-oval' or $wbcid === 'ss-cushion' or $wbcid === 'ss-pear' or $wbcid === 'ss-princess' or $wbcid === 'ss-emeral' or $wbcid === 'ss-marquise' or $wbcid === 'ss-heart' or $wbcid === 'ss-asscher' or $wbcid === 'ldg-brilliant' or $wbcid === 'ldg-oval' or $wbcid === 'ldg-cushion' or $wbcid === 'ldg-tropfen' or $wbcid === 'ldg-prinzess' or $wbcid === 'ldg-emerald' or $wbcid === 'ldg-marquise' or $wbcid === 'ldg-asscher' or $wbcid === 'ldg-radiant' or $wbcid === 'ldg-herz' or $wbcid === 'lg-octagonal' or $wbcid === 'lg-hexagonal' or $wbcid === 'lg-andere' or $wbcid === 'lg-square' or $wbcid === 'lg-triangular' or $wbcid === 'lg-brilliant' or $wbcid === 'lg-asscher' or $wbcid === 'lg-emerald' or $wbcid === 'lg-herz' or $wbcid === 'lg-kissen' or $wbcid === 'lg-marquise' or $wbcid === 'lg-oval' or $wbcid === 'lg-prinzess' or $wbcid === 'lg-radiant' or $wbcid === 'lg-tropfen' or $wbcid === 'sdg' or $wbcid === 'sldg' or $wbcid === 'sfdg' or $wbcid === 'sedg' or $wbcid === 'seg' or $wbcid === 'ss-ring' or $wbcid === 'sd-diamond' or $wbcid === 'sld-diamond' or $wbcid === 'ss-radiant-diamond' or $wbcid === 'ss-round-diamond' or $wbcid === 'ss-cushion-diamond' or $wbcid === 'ss-princess-diamond' or $wbcid === 'ss-marquise-diamond' or $wbcid === 'ss-asscher-diamond' or $wbcid === 'ss-oval-diamond' or $wbcid === 'ss-pear-diamond' or $wbcid === 'ss-emerald-diamond' or $wbcid === 'ss-heart-diamond' or $wbcid === 'ss-solitaire-ring' or $wbcid === 'ss-vintage-ring' or $wbcid === 'ss-trilogy-ring' or $wbcid === 'ss-pave-ring' or $wbcid === 'ss-stone-ring' or $wbcid === 'ss-halo-ring' or $wbcid === 'ss-14k-yellow-gold-ring' or $wbcid === 'ss-14k-rose-gold-ring' or $wbcid === 'ss-14k-white-gold-ring' or $wbcid === 'ss-platinum-ring' or $wbcid === 'ss-18k-yellow-gold-ring' or $wbcid === 'ss-18k-rose-gold-ring' or $wbcid === 'ss-18k-white-gold-ring' or $wbcid === 'lg-round-diamond' or $wbcid === 'lg-cushion-diamond' or $wbcid === 'lg-emerald-diamond' or $wbcid === 'lg-radiant-diamond' or $wbcid === 'lg-marquise-diamond' or $wbcid === 'lg-oval-diamond' or $wbcid === 'lg-pear-diamond' or $wbcid === 'lg-princess-diamond' or $wbcid === 'lg-asscher-diamond' or $wbcid === 'lg-heart-diamond' or $wbcid === 'order-by-prize' or $wbcid === 'lab-grown-diamond') {
 
 			    // Handle wbcid = 'sd'
 			    if ($wbcid === 'sd') {
@@ -1608,7 +1608,7 @@ class WBC_Common {
 			    	$query_string = "CAT_LINK=herz&67c0122117b5f=1";
 			    } elseif ($wbcid === 'lg-kissen') {
 
-			    	// Query string for wbcid = lg-
+			    	// Query string for wbcid = lg-kissen
 			    	$query_string = "CAT_LINK=kissen&67c0122117b5f=1";
 			    } elseif ($wbcid === 'lg-marquise') {
 
@@ -1761,6 +1761,54 @@ class WBC_Common {
 			    	
 			    	// Query string for wbcid = ss-18k-white-gold-ring
 			    	$query_string = "EO_WBC=1&BEGIN=eo_setting_shape_cat&STEP=1&FIRST&SECOND&_attribute=%2Cpa_eo_metal_attr&checklist_pa_eo_metal_attr=18k-white-gold";
+			    }elseif ($wbcid === 'lg-round-diamond') {
+			    	
+			    	// Query string for wbcid = lg-round-diamond
+			    	$query_string = "orderby=price&CAT_LINK=eo_diamond_round_shape_cat";
+			    }elseif ($wbcid === 'lg-cushion-diamond') {
+			    	
+			    	// Query string for wbcid = lg-cushion-diamond
+			    	$query_string = "orderby=price&CAT_LINK=eo_diamond_cushion_shape_cat";
+			    }elseif ($wbcid === 'lg-emerald-diamond') {
+			    	
+			    	// Query string for wbcid = lg-emerald-diamond
+			    	$query_string = "orderby=price&CAT_LINK=eo_diamond_emerald_shape_cat";
+			    }elseif ($wbcid === 'lg-radiant-diamond') {
+			    	
+			    	// Query string for wbcid = lg-radiant-diamond
+			    	$query_string = "orderby=price&CAT_LINK=eo_diamond_radiant_shape_cat";
+			    }elseif ($wbcid === 'lg-marquise-diamond') {
+			    	
+			    	// Query string for wbcid = lg-marquise-diamond
+			    	$query_string = "orderby=price&CAT_LINK=eo_diamond_marquise_shape_cat";
+			    }elseif ($wbcid === 'lg-oval-diamond') {
+			    	
+			    	// Query string for wbcid = lg-oval-diamond
+			    	$query_string = "price&CAT_LINK=eo_diamond_oval_shape_cat";
+			    }elseif ($wbcid === 'lg-pear-diamond') {
+			    	
+			    	// Query string for wbcid = lg-pear-diamond
+			    	$query_string = "orderby=price&CAT_LINK=eo_diamond_pear_shape_cat";
+			    }elseif ($wbcid === 'lg-princess-diamond') {
+			    	
+			    	// Query string for wbcid = lg-princess-diamond
+			    	$query_string = "orderby=price&CAT_LINK=eo_diamond_princess_shape_cat";
+			    }elseif ($wbcid === 'lg-asscher-diamond') {
+			    	
+			    	// Query string for wbcid = lg-asscher-diamond
+			    	$query_string = "orderby=price&CAT_LINK=eo_diamond_asscher_shape_cat";
+			    }elseif ($wbcid === 'lg-heart-diamond') {
+			    	
+			    	// Query string for wbcid = lg-heart-diamond
+			    	$query_string = "orderby=price&CAT_LINK=eo_diamond_heart_shape_cat";
+			    }elseif ($wbcid === 'order-by-prize') {
+			    	
+			    	// Query string for wbcid = order-by-prize
+			    	$query_string = "orderby=price";
+			    }elseif ($wbcid === 'lab-grown-diamond') {
+			    	
+			    	// Query string for wbcid = lab-grown-diamond
+			    	$query_string = "orderby=price&67ea75b4b5a53=1";
 			    }
 			    // If a query string is set, parse it and merge with $_GET
 			    if (isset($query_string)) {

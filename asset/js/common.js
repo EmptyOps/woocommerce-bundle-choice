@@ -202,7 +202,7 @@ window.document.splugins.common.key_to_title = function (key) {
 //     return key.replace(/[-_]/g, ".");
 // };
 window.document.splugins.common.key_to_number = function (key, replacements = {}) {
-    ACTIVE_TODO Here we are replacing dashes and underscores with periods. So it is important that we do not consider white spaces as part of the key. In the future, if we want to support it, we should provide a separate flag in this function so that collaborators can specify whether they want to consider white spaces.
+    // ACTIVE_TODO Here we are replacing dashes and underscores with periods. So it is important that we do not consider white spaces as part of the key. In the future, if we want to support it, we should provide a separate flag in this function so that collaborators can specify whether they want to consider white spaces.
     // console.log("key_to_number");
     // console.log(key);
     // console.log(replacements);
