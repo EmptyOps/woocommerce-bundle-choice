@@ -685,7 +685,47 @@ class EOWBC_Filter_Widget {
 
 			$sc_cat = wbc()->options->get_option('filters_sc_filter_setting','shop_cat_filter_category');
 			if(!empty($sc_cat)){
-				$sc_cat = wbc()->wc->get_term_by('term_id',$sc_cat,'product_cat');	
+				if( !defined('SP_WBC_ARBU') || constant('SP_WBC_ARBU') !== true ) {
+					
+					$sc_cat = wbc()->wc->get_term_by('term_id',$sc_cat,'product_cat');	
+				} else {
+
+					global $SP_WBC_ARB_first_cat_obj;
+					global $SP_WBC_ARB_second_cat_obj;
+					global $wp_query;
+
+					$matched_sc_cat_obj = null;
+
+					if (!empty($SP_WBC_ARB_first_cat_obj) && is_object($SP_WBC_ARB_first_cat_obj)) {
+					    if ($sc_cat == $SP_WBC_ARB_first_cat_obj->term_id) {
+					        $matched_sc_cat_obj = $SP_WBC_ARB_first_cat_obj;
+					    }
+					}
+
+					if (empty($matched_sc_cat_obj) && !empty($SP_WBC_ARB_second_cat_obj) && is_object($SP_WBC_ARB_second_cat_obj)) {
+					    if ($sc_cat == $SP_WBC_ARB_second_cat_obj->term_id) {
+					        $matched_sc_cat_obj = $SP_WBC_ARB_second_cat_obj;
+					    }
+					}
+
+					if (
+					    empty($matched_sc_cat_obj) &&
+					    isset($wp_query->queried_object) &&
+					    is_object($wp_query->queried_object)
+					) {
+					    if ($sc_cat == $wp_query->queried_object->term_id) {
+					        $matched_sc_cat_obj = $wp_query->queried_object;
+					    }
+					}
+
+					if (!empty($matched_sc_cat_obj)) {
+					    $sc_cat = $matched_sc_cat_obj;
+					} else {
+					    $sc_cat = wbc()->wc->get_term_by('term_id', $sc_cat, 'product_cat');
+					}
+
+				}
+
 				if(!is_wp_error($sc_cat) and !empty($sc_cat)){
 					$sc_cat = $sc_cat->slug;	
 				}
