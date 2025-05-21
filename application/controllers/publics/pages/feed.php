@@ -400,7 +400,16 @@ class Feed extends \eo\wbc\controllers\publics\Controller{
 
         // put ui-builder in autoloader function in config file and then remove load model ui builder statement from everywhere -- to b
         $ui = $this->render_woo_dropdown_attribute_html_data($data,$args);
-        $result_html .= \sp\theme\view\ui\builder\Page_Builder::instance()->build_page_widgets($ui, 'woo_dropdown_attribute_html', array(), $args['is_return_html']);
+
+        if( !defined('SP_WBC_ARB_EAS_ON') || constant('SP_WBC_ARB_EAS_ON') === true ) {
+
+            $result_html .= \sp\theme\view\ui\builder\Page_Builder::instance()->build_page_widgets($ui, 'woo_dropdown_attribute_html', array(), $args['is_return_html']);
+        }
+
+        — SP_WBC_PSFAR possible to skip for ajax ring builder 
+        $ui_definition = null;
+
+         $result_html .= \eo\wbc\model\SP_WBC_Page_Builder::instance()->build_page_widgets($ui,'woo_dropdown_attribute_html',array(),$args['is_return_html'], $ui_definition);
 
 
         if ($data['woo_dropdown_attribute_html_data']['args']['sp_variations_swatches_show_on_shop_page'] == 1) { 
@@ -423,7 +432,15 @@ class Feed extends \eo\wbc\controllers\publics\Controller{
                 // wbc_pr($data['variable_item_ui']);
             }
 
-            $result_html .= \sp\theme\view\ui\builder\Page_Builder::instance()->build_page_widgets($ui, 'swatches', array(), $args['is_return_html']);
+            if( !defined('SP_WBC_ARB_EAS_ON') || constant('SP_WBC_ARB_EAS_ON') === true ) {
+
+                $result_html .= \sp\theme\view\ui\builder\Page_Builder::instance()->build_page_widgets($ui, 'swatches', array(), $args['is_return_html']);
+            }
+
+            — SP_WBC_PSFAR possible to skip for ajax ring builder 
+            $ui_definition = null;
+
+            $result_html .= \eo\wbc\model\SP_WBC_Page_Builder::instance()->build_page_widgets($ui,'swatches',array(),$args['is_return_html'], $ui_definition);
         }
 
         return $result_html;

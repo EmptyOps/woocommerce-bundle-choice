@@ -794,7 +794,16 @@ class Options extends \eo\wbc\controllers\publics\Controller {
 		$ui = $this->render_woo_dropdown_attribute_html_data($data,$args);
 		// echo ">!>!>!";
 		// wbc_pr($ui); /*die();*/
-        \sp\theme\view\ui\builder\Page_Builder::instance()->build_page_widgets($ui,'woo_dropdown_attribute_html');
+		if( !defined('SP_WBC_ARB_EAS_ON') || constant('SP_WBC_ARB_EAS_ON') === true ) {
+
+        	\sp\theme\view\ui\builder\Page_Builder::instance()->build_page_widgets($ui,'woo_dropdown_attribute_html');
+    	}
+
+    	— SP_WBC_PSFAR possible to skip for ajax ring builder 
+		$ui_definition = null;
+
+        \eo\wbc\model\SP_WBC_Page_Builder::instance()->build_page_widgets($ui,'woo_dropdown_attribute_html',array(),false, $ui_definition);
+
         //echo "<<<<<>!>!>!";
 		$html = apply_filters('sp_render_swatches_data_by_attribute_type',null,$data);
 
@@ -808,7 +817,16 @@ class Options extends \eo\wbc\controllers\publics\Controller {
 		}
 		//wbc_pr($ui); die();
 
-		\sp\theme\view\ui\builder\Page_Builder::instance()->build_page_widgets($ui,'swatches');
+		if( !defined('SP_WBC_ARB_EAS_ON') || constant('SP_WBC_ARB_EAS_ON') === true ) {
+
+			\sp\theme\view\ui\builder\Page_Builder::instance()->build_page_widgets($ui,'swatches');
+		}
+		
+    	— SP_WBC_PSFAR possible to skip for ajax ring builder 
+		$ui_definition = null;
+
+        \eo\wbc\model\SP_WBC_Page_Builder::instance()->build_page_widgets($ui,'swatches',array(),false, $ui_definition);
+
 	}
 
 	public function render_woo_dropdown_attribute_html_data($data,$args = array()){
