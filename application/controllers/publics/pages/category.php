@@ -23,30 +23,43 @@ class Category {
 
     public function init($category = '') {
 
-        die("266666666_262666");
+        // die("266666666_262666");
 
-        // $this->first_category_slug = wbc()->options->get_option('configuration','first_slug');
-        // $first_category_object = get_term_by('slug',$this->first_category_slug,'product_cat');
-        global $SP_WBC_ARB_first_cat_obj;
-        $first_category_object = $SP_WBC_ARB_first_cat_obj;
+        if( !defined('SP_WBC_ARBU') || constant('SP_WBC_ARBU') !== true ) {
 
-        if(!empty($first_category_object) and !is_wp_error($first_category_object)) {
-            $this->first_category_slug = $first_category_object->slug;
+            $this->first_category_slug = wbc()->options->get_option('configuration','first_slug');
+            $first_category_object = get_term_by('slug', $this->first_category_slug, 'product_cat');
+
+            if (!empty($first_category_object) && !is_wp_error($first_category_object)) {
+                $this->first_category_slug = $first_category_object->slug;
+            }
+        } else {
+            
+            global $SP_WBC_ARB_first_cat_obj;
+            $first_category_object = $SP_WBC_ARB_first_cat_obj;
+
+            if (!empty($first_category_object) && !is_wp_error($first_category_object)) {
+                $this->first_category_slug = $first_category_object->slug;
+            }
         }
 
-        // $this->second_category_slug = wbc()->options->get_option('configuration','second_slug');
-        // $second_category_object = get_term_by('slug',$this->second_category_slug,'product_cat');
-        global $SP_WBC_ARB_second_cat_obj;
-        $second_category_object = $SP_WBC_ARB_second_cat_obj;
-        
-        if(!empty($second_category_object) and !is_wp_error($second_category_object)) {
-            $this->second_category_slug = $second_category_object->slug;
-        }
+        if( !defined('SP_WBC_ARBU') || constant('SP_WBC_ARBU') !== true ) {
 
-        wbc_pr('first_category_object');
-        wbc_pr($first_category_object);
-        wbc_pr('second_category_object');
-        wbc_pr($second_category_object);
+            $this->second_category_slug = wbc()->options->get_option('configuration','second_slug');
+            $second_category_object = get_term_by('slug', $this->second_category_slug, 'product_cat');
+
+            if (!empty($second_category_object) && !is_wp_error($second_category_object)) {
+                $this->second_category_slug = $second_category_object->slug;
+            }
+        } else {
+
+            global $SP_WBC_ARB_second_cat_obj;
+            $second_category_object = $SP_WBC_ARB_second_cat_obj;
+
+            if (!empty($second_category_object) && !is_wp_error($second_category_object)) {
+                $this->second_category_slug = $second_category_object->slug;
+            }
+        }
 
         //If add to cart triggred
         // Detection : only one category item get length > 0 
@@ -77,17 +90,18 @@ class Category {
                 
                 SP_Model_Feed::instance()->init();
 
+                $selected_filter_config = wbc()->options->get_option_group('filters_d_fconfig', FALSE);
                 if(
                      // ($this->eo_wbc_get_category()==get_option('eo_wbc_first_slug') && get_option('eo_wbc_add_filter_first',FALSE) )
                      // OR 
                      // ($this->eo_wbc_get_category()==get_option('eo_wbc_second_slug') && get_option('eo_wbc_add_filter_second',FALSE) )
-                     (($this->eo_wbc_get_category()==$this->first_category_slug && wbc()->options->get_option_group('filters_d_fconfig',FALSE) )
+                     (($this->eo_wbc_get_category()==$this->first_category_slug && $selected_filter_config )
                      OR 
                      ($this->eo_wbc_get_category()==$this->second_category_slug && wbc()->options->get_option_group('filters_s_fconfig',FALSE) ))
                      or $this->is_shop_cat_filter===true or $this->is_shortcode_filter
                 ){
 
-                    if($this->eo_wbc_get_category()==$this->first_category_slug && wbc()->options->get_option_group('filters_d_fconfig',FALSE)) {
+                    if($this->eo_wbc_get_category()==$this->first_category_slug && $selected_filter_config) {
                         SP_Model_Feed::instance()->add_to_cart_text();
                     }
                     if( wbc()->sanitize->get('is_test') == 1 ){
@@ -605,18 +619,35 @@ class Category {
     {   
         
         if(empty($this->first_category_slug)) {
-            $this->first_category_slug = wbc()->options->get_option('configuration','first_slug');
-            $first_category_object = get_term_by('slug',$this->first_category_slug,'product_cat');
-            if(!empty($first_category_object) and !is_wp_error($first_category_object)) {
+
+            if( !defined('SP_WBC_ARBU') || constant('SP_WBC_ARBU') !== true ) {
+
+                $this->first_category_slug = wbc()->options->get_option('configuration','first_slug');
+                $first_category_object = get_term_by('slug', $this->first_category_slug, 'product_cat');
+            } else {
+
+                global $SP_WBC_ARB_first_cat_obj;
+                $first_category_object = $SP_WBC_ARB_first_cat_obj;
+
+            }
+            if (!empty($first_category_object) && !is_wp_error($first_category_object)) {
                 $this->first_category_slug = $first_category_object->slug;
             }
+
         }
 
-
         if(empty($this->second_category_slug)) {
-            $this->second_category_slug = wbc()->options->get_option('configuration','second_slug');
-            $second_category_object = get_term_by('slug',$this->second_category_slug,'product_cat');
-            if(!empty($second_category_object) and !is_wp_error($second_category_object)) {
+            
+            if( !defined('SP_WBC_ARBU') || constant('SP_WBC_ARBU') !== true ) {
+
+                $this->second_category_slug = wbc()->options->get_option('configuration','second_slug');
+                $second_category_object = get_term_by('slug', $this->second_category_slug, 'product_cat');
+            } else {
+
+                global $SP_WBC_ARB_second_cat_obj;
+                $second_category_object = $SP_WBC_ARB_second_cat_obj;
+            }
+            if (!empty($second_category_object) && !is_wp_error($second_category_object)) {
                 $this->second_category_slug = $second_category_object->slug;
             }
         }

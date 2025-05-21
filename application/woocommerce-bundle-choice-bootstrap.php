@@ -75,7 +75,7 @@ class WooCommerce_Bundle_Choice_Bootstrap {
     	// call in builder tools
     	$this->visual_composer();
 
-		if((function_exists('is_ajax') and is_ajax()) or defined('WP_AJAX')) {
+		if(false && (function_exists('is_ajax') and is_ajax()) or defined('WP_AJAX')) {
 			
 
 			//	legacy admin process need to be initiated during ajax also, so that its applicable modules can bind with the legacy admin side hooks of wp, woo and other plugins 

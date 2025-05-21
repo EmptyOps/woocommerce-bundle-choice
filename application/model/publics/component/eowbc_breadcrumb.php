@@ -37,13 +37,34 @@ class EOWBC_Breadcrumb
         wbc()->load->model('images');
         $model_images = \eo\wbc\model\Images::instance();
 
-        $first_name = $model_category_attribute->get_single_category(wbc()->options->get_option('configuration','first_name'));
+        if( !defined('SP_WBC_ARBU') || constant('SP_WBC_ARBU') !== true ) {
+
+            $first_name = $model_category_attribute->get_single_category(wbc()->options->get_option('configuration','first_name'));
+
+        } else {
+
+            global $SP_WBC_ARB_first_cat_obj;
+            $first_name = $SP_WBC_ARB_first_cat_obj;
+
+        }
+
         if(!is_wp_error($first_name) and !empty($first_name)){
             self::$first_name = apply_filters('eowbc_breadcrumb_first_name',$first_name->name);
             self::$first_slug = apply_filters('eowbc_breadcrumb_first_slug',$first_name->slug);
         }
 
+        if( !defined('SP_WBC_ARBU') || constant('SP_WBC_ARBU') !== true ) {
+
         $second_name = $model_category_attribute->get_single_category(wbc()->options->get_option('configuration','second_name'));
+            }
+
+        } else {
+
+            global $SP_WBC_ARB_second_cat_obj;
+            $second_name = $SP_WBC_ARB_second_cat_obj;
+
+        }
+
         if(!is_wp_error($second_name) and !empty($second_name)){
             self::$second_name = apply_filters('eowbc_breadcrumb_second_name',$second_name->name);
             self::$second_slug = apply_filters('eowbc_breadcrumb_second_slug',$second_name->slug);
