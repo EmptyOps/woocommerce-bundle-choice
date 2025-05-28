@@ -4,43 +4,11 @@
 
  <?php 
 
-// ---- a code /themes/purple_theme/woocommerce/content-single-product.php no che 
-// --- Splide_Slider
-
-
-
- // enqueue common assets 
 add_action( 'wp_enqueue_scripts' ,function(){
     wbc()->load->asset('css','variations/gallery_images/external-plugins/splide/splide-core.min',array(),"",false,true);
     wbc()->load->asset('js','variations/gallery_images/external-plugins/splide/splide.min',array(),"",true,true);
     ?>
-    <!-- <script type="text/javascript">
-        var splide = new Splide( '#slider1', {
-            direction   : 'ttb',
-             wheel       : true,
-             releaseWheel: true,
-            height     : '30rem',
-            pagination: false,
-             perPage: 5,
-            gap: '10px',
-            cover:false,
-             type   : 'loop',
-             updateOnMove: true,
-              arrows:true,
-            slider:true,
-            perMove     : 1,
-            rewind      : true,
-            isNavigation: true,
-            drag:true,
-            dragMinThreshold: {
-                mouse: 4,
-                touch: 10,
-            },
-        } );
-        splide.mount();
-    </script> -->
 
-    <!-- -- a tejas che api che -->
     <script type="text/javascript">
         
        var is_splide_initiated=!1,splide_init_function=(is_splide_initiated=!1,function(){is_splide_initiated||(is_splide_initiated=!0,console.log("slider asset init_function"))});document.addEventListener("DOMContentLoaded",(function(){window.setTimeout((function(){console.log("asset slider addEventListener"),window.document.splugins.wbc.variations.gallery_images.sp_slzm.api.init_listener("splide",(function(i,e,n){console.log("asset slider init_listener"),splide_init_function()})),window.document.splugins.wbc.variations.gallery_images.sp_slzm.api.refresh_listener("splide",(function(i,e,n){console.log("asset slider refresh_listener"),splide_init_function()}))}),1e3)}));

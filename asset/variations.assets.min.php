@@ -1,12 +1,7 @@
 
 <?php
-// --- a code /woo-bundle-choice/application/model/publics/sp-model-single-product.php no che
-?>
-
-<?php
 if (defined('SP_VARIATIONS_LOADED') && SP_VARIATIONS_LOADED == true) { ?>
 
-	<!-- /*tejas_22_07_2022 it for new QC upgrades so it is permenent*/ -->
 	<?php
 	if( is_product() ) {
 	?>
@@ -136,14 +131,7 @@ if (defined('SP_VARIATIONS_LOADED') && SP_VARIATIONS_LOADED == true) { ?>
 } 
 ?>
 
-<!-- /*---TOOLTIP--- @tejas*/
-/*----JS----*/ -->
-<!-- <script type="text/javascript">
-jQuery( document ).ready(function() {
-    jQuery('[data-toggle="popover"]').popover(); 
-});
-</script> -->
-<!-- /*----CSS---*/ -->
+
 <style type="text/css">
 	:root{--spui_tooltip_bg:#8224e3;--spui_tooltip_text:#fff;--spui_tooltip_textsize:0.8rem;--spui_tooltip_padding:.5rem 1.75rem;--spui_tooltip_body:none;--spui-loader-background-color:rgba(255,255,255, 0.6)}.popover{height:auto!important}.popover-header{background:var(--spui_tooltip_bg)!important;color:var(--spui_tooltip_text)!important;font-size:var(--spui_tooltip_textsize)!important;font-weight:400;padding:var(--spui_tooltip_padding)!important}.popover-body{display:var(--spui_tooltip_body)}.bs-popover-auto[x-placement^=top]>.arrow::after,.bs-popover-top>.arrow::after{border-top-color:var(--spui_tooltip_bg)!important}.loading{background-image:url(".constant('EOWBC_ASSET_URL')."icon/spinner.gif);background-color:var(--spui-loader-background-color)!important;background-position:center center;background-repeat:no-repeat;margin:0;position:fixed!important;top:0!important;left:0!important;z-index:10000!important;width:100vw!important;height:100vh!important}body .ui.grid>.column:not(.row){padding-top:1rem;padding-bottom:1rem}.tax-product_cat .eo-wbc-container.filters .ui.menu{-ms-flex-wrap:wrap;flex-wrap:wrap;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center}.tax-product_cat .eo-wbc-container.filters .ui.menu a.item.center{margin-left:0!important}
 </style>
@@ -156,28 +144,17 @@ if( is_product_category() ) {
 	$spui_is_product_category = true;
 }
 	
-/*ACTIVE_TODO_OC_START
---	check below two files and check if there is any optionsUI related flow there -- to b 
-ACTIVE_TODO_OC_END*/
 wbc()->theme->load('css','product');
 	wbc()->theme->load('js','product');
 
 	if (defined('SP_VARIATIONS_LOADED') && SP_VARIATIONS_LOADED == true) {
 		// Toggle Button
 		$toggle_status = true;
-		//wbc()->options->get_option('tiny_features','tiny_features_option_ui_toggle_status',true);
 
-		/*ACTIVE_TODO_OC_START
-		--	and by default the expand collapse should be disabled, and when that is disabled nothing related to that will be loaded on frontend -- to b. if required ask t to take care of html css js etc -- to t 
-		ACTIVE_TODO_OC_END*/
 		$init_toggle = wbc()->options->get_option('tiny_features','tiny_features_product_page_option_ui_toggle_init_status');			
 
 		$toggle_text = wbc()->options->get_option('tiny_features','tiny_features_product_page_option_ui_toggle_text',__('CUSTOMIZE THIS PRODUCT'));
-		/*ACTIVE_TODO_OC_START
-		--	have t update defaults to a general kind of theme -- to t. current style is so catchy and dark and need to have grayish like general theme that works mostly if not updated. 
-		ACTIVE_TODO_OC_END*/
-		// Variation item non-hovered
-		// $dimention = wbc()->options->get_option('tiny_features',$spui_is_product ? 'tiny_features_product_page_option_ui_option_dimention' : 'tiny_features_shop_page_option_ui_option_dimention','2em');
+
 		$dimention = wbc()->options->get_option('tiny_features',$spui_is_product_category ? 'tiny_features_shop_page_option_ui_option_dimention':'tiny_features_option_ui_option_dimention','2em');
 
 		$border_color = wbc()->options->get_option('tiny_features',$spui_is_product_category ? 'tiny_features_shop_page_option_ui_border_color':'tiny_features_option_ui_border_color','#ECECEC');
@@ -294,18 +271,12 @@ if (defined('SP_VARIATIONS_LOADED') && SP_VARIATIONS_LOADED == true) { ?>
 
 if (defined('SP_VARIATIONS_LOADED') && SP_VARIATIONS_LOADED == true) { 
 
-	// ACTIVE_TODO_OC_START
-	// ACTIVE_TODO as of now we have implimented this support for the mapping based conditions here but in future if there is better place than we shoud move it over there -- to h
-	// 	ACTIVE_TODO as weel as once we have the varations swatches beta update available we may lite to use the disable and hide flow of that version. Especialy the disable flow this much needed for providing apropriate and perfect user experiance -- to h
-	// ACTIVE_TODO_OC_END
+
 
 	if(is_product()) {
 
-		// $_attribute_perams = explode(',', \eo\wbc\model\SP_WBC_Router::get_query_params('_attribute', 'REQUEST') );	
 		$_attribute_perams = explode(',', wbc()->sanitize->get('__mapped_attribute') );	
 
-		// wbc_pr('__attribute_perams');
-		// wbc_pr($_attribute_perams);
 
 		foreach($_attribute_perams as $_attribute_slug) {
 			
