@@ -1,4 +1,3 @@
-
 <?php
 // --- a code /woo-bundle-choice/application/model/publics/sp-model-single-product.php no che
 ?>
@@ -1801,4 +1800,3 @@ if (defined('SP_VARIATIONS_LOADED') && SP_VARIATIONS_LOADED == true) {
 }
 
 ?>
-
