@@ -275,6 +275,16 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
 			return self::process_form_definition('save', $form_definition, $args);
 		}, 50, 4);
+
+		add_filter('sp_wbc_admin_subtab_before_new_entry_add_or_update', function($res, $form_definition, $is_auto_insert_for_template, $hooked_args){
+
+			$args = array();
+			$args['res'] = $res;
+			$args['hook_callback_args'] = $hooked_args;
+			$args['is_auto_insert_for_template'] = $is_auto_insert_for_template;
+
+			return self::process_form_definition('entry_save_process', $form_definition, $args);
+		}, 50, 4);
     }
 
 	public static function hooks() {
@@ -305,7 +315,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 	    	// wbc_pr($saved_tab_key);
 	    	// wbc_pr('form_definition 78941');
 
-	    	if( 'save' == $mode && $key != $saved_tab_key ) {
+	    	if( ('save' == $mode || 'entry_save_process' == $mode)&& $key != $saved_tab_key ) {
 	    		continue;
 	    	}
 
@@ -326,7 +336,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 			    if( in_array($fv["type"], \eo\wbc\model\admin\Form_Builder::savable_types()) ) {
 
 			    	//skip fields where applicable
-					if( 'save' == $mode && in_array($fk, $skip_fileds) ) {
+					if( ('save' == $mode || 'entry_save_process' == $mode) && in_array($fk, $skip_fileds) ) {
 		    			continue;
 		    		}
 
@@ -412,7 +422,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
     private static function inject_onclick_attr($mode, $form_definition, $section_property, $fv) {
 
-    	if( 'save' == $mode ) {
+    	if( 'save' == $mode || 'entry_save_process' == $mode) {
 
     		return $fv;
     	}
@@ -440,12 +450,12 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
     private static function section_should_make_call($mode, $form_definition, $section_property, $fk, $section_fields) {
 
-    	if( 'get' == $mode ) {
+    	if( 'get' == $mode && ( empty($section_property['type']) || 'default' == $section_property['type'] )) {
 
     		return true;
     	}
 
-    	if( 'save' == $mode ) {
+    	if( 'save' == $mode && ( empty($section_property['type']) || 'default' == $section_property['type'] )) {
 
 			foreach ($section_fields as $sfk => $sfv) {
 
@@ -468,6 +478,11 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 				}
 			}
     	}
+
+        if( 'entry_save_process' == $mode && ( !empty($section_property['type']) && 'entry_save_process' == $section_property['type'] ) ) {
+
+    		return true; 
+        }
 
     	return false;
     }
@@ -525,7 +540,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
     	// --	hear we need to prepare the $res form $parsed by creating empty array and so on. -- to h & -- to pi 	done.
     	// $res = $parsed;
 
-    	if( 'save' == $mode ) {
+    	if( 'save' == $mode || 'entry_save_process' == $mode ) {
 
     		// --	from hear most probabely we need to return $res and it will be not prepared by should_return function most probabely. -- to h & -- to pi	done.
     		// NOTE: here we need to set in $res the type != success. but we have set all the standard proparty like type, sub_type and so on to ensure that if it have required on underlying layers then they can directly use it. and type != success condition is not nessesry so that is not applyed and type is set for the all scenarios. 
@@ -557,7 +572,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
     		return false;
     	}
 
-    	if( 'save' == $mode ) {
+    	if( 'save' == $mode || 'entry_save_process' == $mode ) {
 
     		return false;
     	}
@@ -574,7 +589,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
     		return false;
     	}
 
-    	if( 'save' == $mode && ( isset($parsed['type']) && 'success' != $parsed['type'] ) ) {
+    	if( ('save' == $mode || 'entry_save_process' == $mode) && ( isset($parsed['type']) && 'success' != $parsed['type'] ) ) {
 
     		return false;
     	}

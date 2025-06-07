@@ -399,6 +399,18 @@ class Eowbc_Model {
         return $res;
 	}
 
+	protected static function before_new_entry_add_or_update( &$res, $form_definition, $is_auto_insert_for_template = false, $args = array() ) { 
+
+	    $res = apply_filters('sp_wbc_admin_subtab_before_new_entry_add_or_update', $res, $form_definition, $is_auto_insert_for_template, $args);
+
+	    if ( empty($res['type']) || $res['type'] != 'success' ) {
+
+	        return false;
+	    }
+
+	    return true;
+	}
+
 	public function delete( $ids, $key/*,$by_key=false*/, $check_by_id=false ) {
 
 		// ACTIVE_TODO implement, implement and then have all child classes of respective admin models does call this function. -- to s.
