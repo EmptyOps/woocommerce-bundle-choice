@@ -5,7 +5,7 @@ namespace eo\wbc\controllers;
 defined( 'ABSPATH' ) || exit;
 
 class Public_Handler {
-
+	
 	private static $_instance = null;
 
 	public static function instance() {
@@ -26,7 +26,6 @@ class Public_Handler {
 		*	root method to process all the frontend requests.
 		*/		
 		do_action( 'before_public_process_request' );
-
 
 		if(!empty($_GET['EO_WBC'])) {
 			add_filter('WPML_filter_link',function($url, $lang_info){

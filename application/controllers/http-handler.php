@@ -24,8 +24,7 @@ class Http_Handler {
 	}
 
 	public static function process(){
-
-		do_action( 'before_process_request', array(self::instance(),'preprocess_request') );		
+		do_action('before_process_request', array(self::instance(),'preprocess_request') );		
 
 		if(is_admin()){
 
@@ -35,6 +34,8 @@ class Http_Handler {
 			// call up request method here.
 			do_action( 'wbc_after_process_admin_request' );
 		} else {
+			
+			// wbc_pr('process Http_Handler');
 			do_action( 'wbc_before_process_public_request' );			
 			// Process as public request.			
 			Public_Handler::process();

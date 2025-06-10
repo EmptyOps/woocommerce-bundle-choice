@@ -63,14 +63,14 @@ class SP_Attribute extends SP_Entity {
 
 		// TODO bind to the sample data sample attribute creation flow(and that should also be adhering to and following the data layer structure defs) where there is either attribute factory or entire function(s) to do so 
 
-		//	TODO and extensions which needs attribute factory related operations are also supposed to rely on this class for such operations 
-	    				        
+		//	TODO and extensions which needs attribute factory related operations are also supposed to rely on this class for such operations
+
 		if (empty($args['is_do_not_transform_older_to_new_format'])) {
 
 			$res = parent::transform_older_format_to_new_format($data, $args);
 
 			if ($res['type'] == 'success') {
-		
+				
 				$data = $res['data_new_format'];
 			} else {
 
@@ -81,6 +81,9 @@ class SP_Attribute extends SP_Entity {
 				return $res;
 			}
 		}
+
+		// wbc_pr($data);
+	    // wbc_pr('eo_Clarity_attr');
 
 		if(!isset($data['label']['value']) /*&& !isset($data['terms']['value'])*/) return;
 
@@ -103,6 +106,7 @@ class SP_Attribute extends SP_Entity {
 
 		// @mahesh - added to store the ribbon color from sample data
 		if(!empty($id) and !is_wp_error($id) and !empty($data['ribbon_color']['value'])) {
+
 			update_term_meta($id,'wbc_ribbon_color',$data['ribbon_color']['value']);
 		}
 		
@@ -124,23 +128,39 @@ class SP_Attribute extends SP_Entity {
                 'pa_'.$data['slug'],
                	array( 'product','product_variation' )			                
             );
-        }*/ 				
+        }*/
 
 		if(empty($data['range']['value'])){
-    		
-			if(!empty($data['terms']['value'])){
 
-	    		foreach ($data['terms']['value'] as $term_index=>$term)  {		
+			// if($data['slug']['value'] == 'eo_lenght_attr'){
+			// wbc_pr($data);
+			// 	wbc_pr($data['slug']['value']);
+			// 	wbc_pr($data['range']['value']);
+			// 	wbc_pr($data['terms']['value']);
+			// 	die('eeeeeeeeeee');
+			// }
 
+			if(!empty($data['terms']/*['value']*/)){
+				// wbc_pr($data['terms']);
+				// wbc_pr('aaaaaaaaaaaa');
+				// wbc_pr($data['terms']['value']);
+
+	    		foreach ($data['terms']/*['value']*/ as $term_index=>$term)  {
+
+				// wbc_pr('bbbbbbbbbb');
+				// wbc_pr($term['label']);
+				// wbc_pr('pa_'.$attribute_data['slug']);
+				// wbc_pr('ffffffffff');
 					if( ! term_exists( $term['label'], 'pa_'.$attribute_data['slug']) ) {
-
+						// wbc_pr('cccccccccccc');
+						// die('wwwwwwwww');
 						$attr_term_id = wp_insert_term( $term['label'],'pa_'.$attribute_data['slug'],array('slug' => sanitize_title($term['label']),'description'=>$term['desc']) ); 
 						
 						if(!empty($attr_term_id) and !is_wp_error($attr_term_id)) {
-
+							// wbc_pr('ddddddddddddd');
 	    					$_attr_term_id = null;
 	    					if(is_array($attr_term_id)) {
-
+	    						// wbc_pr('eeeeeeeeeeee');
 	    						$_attr_term_id=isset($attr_term_id['term_id']) ? $attr_term_id['term_id'] : null;
 
 	    						if(!empty($_attr_term_id)) {
@@ -213,7 +233,7 @@ class SP_Attribute extends SP_Entity {
     	} else {
     		
     		if(!empty($data['terms']['min']['value']) && !empty($data['terms']['max']['value'])) {
-    			
+    			// wbc_pr('aaaaaaaaaaa');
     			for($i=(float)$data['terms']['min']['value'];$i<=(int)$data['terms']['max']['value'];$i=round($i+0.1,1)){
     				
     				if( ! term_exists( $i, 'pa_'.$attribute_data['slug']) ){					    					

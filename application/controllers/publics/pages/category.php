@@ -45,6 +45,7 @@ class Category {
 
         //if Current-Category is either belongs to FIRST OR SECOND Category then initiate application                
         if(
+
             ((($this->eo_wbc_get_category()== $this->first_category_slug //get_option('eo_wbc_first_slug') 
               OR
             $this->eo_wbc_get_category()== $this->second_category_slug)) and !empty(wbc()->sanitize->get('EO_WBC')) ) or $this->is_shop_cat_filter===true or $this->is_shortcode_filter //get_option('eo_wbc_second_slug')
@@ -589,7 +590,8 @@ class Category {
      * @return string
      */
     public function eo_wbc_get_category()
-    {   
+    {
+    wbc_pr('eo_wbc_get_category 594');   
         
         if(empty($this->first_category_slug)) {
             $this->first_category_slug = wbc()->options->get_option('configuration','first_slug');
@@ -608,14 +610,17 @@ class Category {
             }
         }
 
-        if( !($this->is_shop_cat_filter && is_shop())/*when the is_shop_cat_filter flag is on and it is shop page then it generates warnings on below statement so excluded that as category is unnecessary by any means in that case.*/ ) {
-            return wbc()->common->get_category('category',null,array($this->first_category_slug,$this->second_category_slug));
-        }
-        else {
-            return null;
-        }
-        global $wp_query;        
-        
+        // if( !($this->is_shop_cat_filter && is_shop())/*when the is_shop_cat_filter flag is on and it is shop page then it generates warnings on below statement so excluded that as category is unnecessary by any means in that case.*/ ) {
+        //     return wbc()->common->get_category('category',null,array($this->first_category_slug,$this->second_category_slug));
+        // }
+        // else {
+
+        //     return null;
+        // }
+        global $wp_query; 
+
+         // wbc_pr($wp_query->get_queried_object()->term_id);
+        // wbc_pr($wp_query->get_queried_object()->slug);
         //get list of slug which are ancestors of current page item's category
         $term_slug=array_map(array('self',"eo_wbc_id_2_slug"),get_ancestors($wp_query->get_queried_object()->term_id, 'product_cat'));
 

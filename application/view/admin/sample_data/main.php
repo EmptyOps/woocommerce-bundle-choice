@@ -89,16 +89,19 @@ box-shadow: none;">
 		                			<?php
 		                			$primary_color = wbc()->options->get_option('appearance_global','theme_primary_color'); 
 		                			$secondary_color = wbc()->options->get_option('appearance_global','theme_secondary_color');
-
+		                			$primary_color_shade_light_95 = wbc()->options->get_option('appearance_global','theme_primary_color_shade_light_95');
+		                			
 									$primary_color_shade_light_90 = wbc()->options->get_option('appearance_global','theme_primary_color_shade_light_90'); 
 		                			$secondary_color_shade_light_90 = wbc()->options->get_option('appearance_global','theme_secondary_color_shade_light_90');
-
+		                			$primary_color_shade_light_85 = wbc()->options->get_option('appearance_global','theme_primary_color_shade_light_85');
+		                			
 									$primary_color_shade_light_80 = wbc()->options->get_option('appearance_global','theme_primary_color_shade_light_80'); 
 		                			$secondary_color_shade_light_80 = wbc()->options->get_option('appearance_global','theme_secondary_color_shade_light_80');
-
+		                			$primary_color_shade_light_75 = wbc()->options->get_option('appearance_global','theme_primary_color_shade_light_75');
+		                			
 		                			// $primary_color_shade_light_70 = wbc()->options->get_option('appearance_global','theme_primary_color_shade_light_70'); 
 		                			// $secondary_color_shade_light_70 = wbc()->options->get_option('appearance_global','theme_secondary_color_shade_light_70');
-
+		                			$primary_color_shade_light_70 = wbc()->options->get_option('appearance_global','theme_primary_color_shade_light_70');
 									$primary_color_shade_light_60 = wbc()->options->get_option('appearance_global','theme_primary_color_shade_light_60'); 
 		                			$secondary_color_shade_light_60 = wbc()->options->get_option('appearance_global','theme_secondary_color_shade_light_60');
 
@@ -110,11 +113,6 @@ box-shadow: none;">
 
 		                			// $primary_color_shade_light_20 = wbc()->options->get_option('appearance_global','theme_primary_color_shade_light_20'); 
 		                			// $secondary_color_shade_light_20 = wbc()->options->get_option('appearance_global','theme_secondary_color_shade_light_20');
-
-		                			$primary_color_shade_light_95 = wbc()->options->get_option('appearance_global','theme_primary_color_shade_light_95');
-		                			$primary_color_shade_light_85 = wbc()->options->get_option('appearance_global','theme_primary_color_shade_light_85');
-		                			$primary_color_shade_light_75 = wbc()->options->get_option('appearance_global','theme_primary_color_shade_light_75');
-		                			$primary_color_shade_light_70 = wbc()->options->get_option('appearance_global','theme_primary_color_shade_light_70');
 		                			$primary_color_shade_light_30 = wbc()->options->get_option('appearance_global','theme_primary_color_shade_light_30');
 		                			$primary_color_shade_light_20 = wbc()->options->get_option('appearance_global','theme_primary_color_shade_light_20');
 		                			$primary_color_shade_light_10 = wbc()->options->get_option('appearance_global','theme_primary_color_shade_light_10');
