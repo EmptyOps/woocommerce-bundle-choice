@@ -285,6 +285,14 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
 			return self::process_form_definition('entry_save_process', $form_definition, $args);
 		}, 50, 4);
+
+		add_filter('wbc_form_builder_model_after_get', function($form_definition, $hooked_args){
+
+			$args = array();
+			$args['hook_callback_args'] = $hooked_args;
+
+			return self::process_form_definition_rf('get', $form_definition, $args);
+		}, 40, 2);
     }
 
 	public static function hooks() {
@@ -420,6 +428,89 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
     	}
     }
 
+    private static function process_form_definition_rf($mode, $form_definition, $args) {
+    	// die('process_form_definition start');
+		wbc()->load->model('admin\form-builder');
+
+		$saved_tab_key = !empty( $args["hook_callback_args"]["sp_frmb_saved_tab_key"] ) ? $args["hook_callback_args"]["sp_frmb_saved_tab_key"] : ""; 
+
+		// NOTE: if ever we have any other field to skip then add here.
+		$skip_fileds = array(/* 'sp_frmb_saved_tab_key' */ $saved_tab_key);
+		
+		$save_as_data = array();	
+		$save_as_data_meta = array();	
+
+    	//loop through form tabs and save 	    
+	    foreach ($form_definition as $key => $tab) {
+	    	// wbc_pr('form_definition111');
+	    	// wbc_pr($key);
+	    	// wbc_pr($saved_tab_key);
+	    	// wbc_pr('form_definition 78941');
+
+	    	if( ('save' == $mode || 'entry_save_process' == $mode)&& $key != $saved_tab_key ) {
+	    		continue;
+	    	}
+
+	    	// wbc_pr($key);
+	    	// wbc_pr($saved_tab_key);
+	    	// wbc_pr('ggggggggg');
+	    	// --	nicheno key_clean variable comment karavo padashe kem k tene variable dipendency che so jaroor no hoy to comment. -- to h & -- to pi done.	
+	    	// $key_clean = ((!empty($this->tab_key_prefix) and strpos($key,$this->tab_key_prefix)===0)?substr($key,strlen($this->tab_key_prefix)):$key); 
+	    	//$res['data_form'][]= $tab;
+			$is_table_save = false;	//	ACTIVE_TODO/TODO it should be passed from child maybe or make dynamic as applicable. ($key == $this->tab_key_prefix."d_fconfig" or $key == $this->tab_key_prefix."s_fconfig" or $key=='filter_set') ? true : false;
+
+			$table_data = array();
+			$tab_specific_skip_fileds = array();	//ACTIVE_TODO/TODO it will be spported only if the hook pass it and so it is available here in this process_form_definition function in $args variable. means when the process_form_definition function called here from the hooks bound in this class from abow admin_hooks function.
+
+	    	foreach ($tab["form"] as $fk => $fv) {
+
+	    		// wbc_pr('form_definition 22222');
+			    if( in_array($fv["type"], \eo\wbc\model\admin\Form_Builder::savable_types()) ) {
+
+			    	//skip fields where applicable
+					if( ('save' == $mode || 'entry_save_process' == $mode) && in_array($fk, $skip_fileds) ) {
+		    			continue;
+		    		}
+
+			    	//skip fields where applicable
+					if( isset($fv["eas_rf"]) && is_array($fv["eas_rf"]) ) {
+						// wbc_pr('eas if in');
+						// wbc_pr('section_should_make_call');	
+						if( self::section_should_process($mode, $form_definition, $fv["eas"], $fk) ) {
+
+							// wbc_pr('section_should_make_call in');	
+							// wbc_pr( $payload );
+							// die('process_form_definition 1111');
+							// wbc_pr($parsed);
+							// die('parsed');
+
+							$is_apply_response_msg = self::is_apply_hidden_filed($parsed, $fv["eas_rf"]);
+
+							$res = $args['res'];
+
+							$tab["form"] = self::apply_response_msg($is_apply_response_msg, $mode, $tab["form"], $fk, $res);
+
+							$args['res'] = $res;
+						}
+
+						$form_definition[$key]["form"] = $tab["form"];
+						
+					}
+			    }
+			}
+	    }
+	    // die('mode 111');
+	    // wbc_pr($form_definition);
+    	if( $mode == 'get' ) {
+    		// die('mode222');
+    		return $form_definition;
+    	} else {
+    		// die('mode3333');
+    		//default mode save
+    		return $args['res'];
+    	}
+    }
+
     private static function inject_onclick_attr($mode, $form_definition, $section_property, $fv) {
 
     	if( 'save' == $mode || 'entry_save_process' == $mode) {
@@ -487,6 +578,17 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
     	return false;
     }
 
+    private static function section_should_process($mode, $form_definition, $section_property, $fk) {
+
+    	if( 'get' == $mode /*&& ( empty($section_property['type']) || 'default' == $section_property['type'] )*/) {
+
+    		return true;
+    	} else{
+
+    		return false;
+    	}
+    }
+
     private static function retrieve_section_fields($tab_form, $section_property, $fk) {
 
     	$section_fields = array();
@@ -530,7 +632,52 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
     	return false;
     }
 
+    private static function is_apply_hidden_filed($parsed, $section_property) {
+
+    	if( isset($parsed['type']) && !( 'success' == $parsed['type'] && ('success' == $parsed['sub_type'] && !( isset($section_property['dap']) && $section_property['dap'] ) ) ) ) {
+
+    		return true;
+    	}
+
+    	return false;
+    }
+
     private static function apply_response_msg($is_apply_response_msg, $mode, $tab_form, $section_fields, $parsed, $fk, &$res) {
+
+    	if( !$is_apply_response_msg ) {
+
+    		return $tab_form;
+    	}
+
+    	// --	hear we need to prepare the $res form $parsed by creating empty array and so on. -- to h & -- to pi 	done.
+    	// $res = $parsed;
+
+    	if( 'save' == $mode || 'entry_save_process' == $mode ) {
+
+    		// --	from hear most probabely we need to return $res and it will be not prepared by should_return function most probabely. -- to h & -- to pi	done.
+    		// NOTE: here we need to set in $res the type != success. but we have set all the standard proparty like type, sub_type and so on to ensure that if it have required on underlying layers then they can directly use it. and type != success condition is not nessesry so that is not applyed and type is set for the all scenarios. 
+    		$res = array('type' => $parsed['type'], 'msg' => $parsed['msg'], 'sub_type' => $parsed['sub_type'], 'sub_msg' => $parsed['sub_msg']);
+    	}
+
+    	if( 'get' == $mode ) {
+
+    		$msg = null;
+
+    		if( 'success' != $parsed['type'] ) {
+
+    			$msg = $parsed['msg'];
+    		} else {
+
+    			$msg = $parsed['sub_msg'];
+    		}
+
+    		$tab_form = self::inject_visible_info_field($mode, $tab_form, $section_fields, $parsed, $fk, $msg);
+    	}
+
+    	return $tab_form;
+    }
+
+    private static function apply_hidden_filed($is_apply_response_msg, $mode, $tab_form, $fk, &$res) {
 
     	if( !$is_apply_response_msg ) {
 
