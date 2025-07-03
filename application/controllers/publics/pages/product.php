@@ -748,10 +748,6 @@ class Product extends \eo\wbc\system\core\publics\Eowbc_Base_Model_Publics {
           
         //Adding own ADD_TO_CART_BUTTON
         add_action('wp_footer',function(){
-            if(false){
-                            
-                echo "<style>.double-gutter .tmb{ width: 50%;display: inline-flex; }</style>";
-            }
             $custom_css = "
                 .double-gutter .tmb {
                     width: 50%;

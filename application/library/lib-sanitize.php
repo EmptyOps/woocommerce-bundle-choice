@@ -85,8 +85,18 @@ if(!class_exists('WBC_Sanitize')) {
 			}
 		}
 
+		// ACTIVE_TODO this should be deprecated soon, and if there is requirement of using the input without sanitize then check for the standard process there must be something in php or in wp api 
 		public function _get(string $get_field){
-			// ACTIVE_TODO this should be deprecated soon, and if there is requirement of using the input without sanitize then check for the standard process there must be something in php or in wp api 
+
+			// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Intentionally accessing raw GET data as part of an interim utility function.
+			/**
+			 * As discussed, directly accessing $_GET without nonce verification or sanitization
+			 * is discouraged in WordPress coding standards. However, this function was planned
+			 * to retrieve GET parameters in raw form when needed.
+			 * 
+			 * Currently, this function is not in use anywhere in the plugin. 
+			 * We plan to deprecate or refactor it in future to follow secure input handling practices.
+			*/
 			if(isset($_GET[$get_field])) {
 				return ($_GET[$get_field]);
 			} else {
@@ -121,9 +131,13 @@ if(!class_exists('WBC_Sanitize')) {
 		}
 
 		public function _post(string $post_field){
+			
 			// ACTIVE_TODO this should be deprecated soon, and if there is requirement of using the input without sanitize then check for the standard process there must be something in php or in wp api 
 			if(isset($_POST[$post_field])) {
-				return $_POST[$post_field];
+
+				// changed below code on 05-05-2025
+				// return $_POST[$post_field];
+				return wp_kses_post($_POST[$post_field]);
 			} else {
 				return false;
 			}
@@ -215,26 +229,21 @@ if(!class_exists('WBC_Sanitize')) {
 
 	            if (isset($global_input[$param])) {
 
-	                $global_input[$param] = filter_var($global_input[$param], FILTER_SANITIZE_STRING);
+	                $global_input[$param] = sanitize_text_field($global_input[$param]);
 	            }
 	        }
 
 	        // Loop through global inputs and sanitize
 	        foreach ($parameters['dynamic'] as $param) {
 
-               	if (isset($global_input[$param])) {
+               	foreach ($global_input as $key => $value) {
 
-                   $sanitized_value = filter_var($global_input[$param], FILTER_SANITIZE_STRING);
-
-                   --	aa niche ni if and upar ni if chale tem nathi. global input nu loop chalavine ditect karavu pade but te bhi efficient solushan nathi. 
-                   // Detect if the parameter name contains dynamic elements
-                   if (strpos($param, '$') !== false || strpos($param, '[') !== false || strpos($param, ']') !== false) {
-
-                       $param .= " /* Dynamic variable identified */";
-                   }
-
-                   $global_input[$param] = $sanitized_value;
-               	}
+                   	// Check if parameter part exists inside the key
+                   	if (strpos($key, $param) !== false) {
+                   		
+                       $global_input[$key] = sanitize_text_field($value);
+                   	}
+               	}	
             }
 
    			return $global_input;

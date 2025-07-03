@@ -423,11 +423,10 @@ class EOWBC_Filter_Widget {
 					";
 
 					wbc()->load->add_inline_style('', $custom_css, 'common');
-
+					echo ob_get_clean();
 				}
 				// NOTE:From here, we have removed the original code inside the if (false) block. So, whenever there is a need to view the original or any other code for readability purposes, simply take the script below, put it in a new .js file in Sublime Text, and view it in readable format.Apart from that, we had removed the original code, and in some scenarios, that original code might have contained PHP variables like XYZ. Those would have been removed as well.And of course, even if the removed code from the if (false) block is not relevant to the current version, it might be required during future milestone tasks, so for this purpose, refer to the branch named "ui_QCed_ashish_-2" and check the commit dated 07-04-2025 for looking at the original code.
-				<?php 
-				}
+				
 					$inline_script = 
 					"// console.log('filter_widgets');\n" .
 					"jQuery(document).ready(function(\$){\n" .
@@ -686,9 +685,7 @@ class EOWBC_Filter_Widget {
 			}
 			
 			if((wbc()->options->get_option('filters_altr_filt_widgts','second_category_altr_filt_widgts')=='sc4' and $this->_category==$this->second_category_slug) or (wbc()->options->get_option('filters_altr_filt_widgts','first_category_altr_filt_widgts')=='fc4' and $this->_category==$this->first_category_slug) or ( wbc()->options->get_option('filters_sc_altr_filt_widgts','first_category_altr_filt_widgts')=='sc4' 
-					and $this->_category==$sc_cat) )
-
-					 {
+					and $this->_category==$sc_cat) ){
 
 				ob_start();
 					//NOTE:From here, we have removed the original code inside the if (false) block.So, whenever there is a need to view the original or any other code for readability purposes, simply take the css below, put it in a new .css file in Sublime Text,and view it in readable format.Apart from that, we had removed the original code, and in some scenarios,that original code might have contained PHP variables like XYZ. Those would have been removed as well. And of course, even if the removed code from the if (false) block is not relevant to the current version,it might be required during future milestone tasks, so for this purpose,refer to the branch named "ui_QCed_ashish_-2" and check the commit dated 07-04-2025 for looking at the original code.
@@ -934,7 +931,7 @@ class EOWBC_Filter_Widget {
 				echo "<style>.ui.slider .inner .track-fill, .ui.slider .inner .thumb,#advance_filter{background-color: #3e9f8e !important }</style>";
 			}*/
 
-        }, 10 );
+        },10);
 	
         // wp_register_script('eo_wbc_filter_js',plugins_url('asset/js/eo_wbc_filter.js',__FILE__),array('jquery'));
 		// wbc()->load->asset('js','publics/eo_wbc_filter',array('jquery'));
