@@ -366,7 +366,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
 								if( in_array($sfv["type"], \eo\wbc\model\admin\Form_Builder::savable_types()) ) {
 									
-									$payload['fctr'][$sfk] = self::field_value_for_payload($mode, $fk, $sfk, $sfv);
+									$payload['fctr'][$sfk] = self::field_value_for_payload($mode, $fk, $sfk, $sfv, $args);
 
 								}
 							}
@@ -476,15 +476,9 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 					if( isset($fv["eas_rf"]) && is_array($fv["eas_rf"]) ) {
 						// wbc_pr('eas if in');
 						// wbc_pr('section_should_make_call');	
-						if( self::section_should_process($mode, $form_definition, $fv["eas"], $fk) ) {
+						if( self::section_should_process($mode, $form_definition, $fv["eas_rf"], $fk) ) {
 
-							// wbc_pr('section_should_make_call in');	
-							// wbc_pr( $payload );
-							// die('process_form_definition 1111');
-							// wbc_pr($parsed);
-							// die('parsed');
-
-							$is_apply_response_msg = self::is_apply_hidden_filed($parsed, $fv["eas_rf"]);
+							$is_apply_hidden_filed = self::is_apply_hidden_filed($parsed, $fv["eas_rf"]);
 
 							$res = $args['res'];
 
@@ -580,7 +574,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
     private static function section_should_process($mode, $form_definition, $section_property, $fk) {
 
-    	if( 'get' == $mode /*&& ( empty($section_property['type']) || 'default' == $section_property['type'] )*/) {
+    	if( 'get' == $mode ) {
 
     		return true;
     	} else{
@@ -604,7 +598,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
     	return $section_fields;
     }
 
-	private static function field_value_for_payload($mode, $fk, $sfk, $sfv) {
+	private static function field_value_for_payload($mode, $fk, $sfk, $sfv, $args) {
 
 		$value = ($mode == 'get' ? $sfv['value'] : wbc()->sanitize->post($sfk));
 
@@ -616,6 +610,14 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 			} else {
 
 				$value = /* 0 */-1;
+			}
+		}
+
+		if( 'entry_save_process' == $mode  ) {
+
+			if( isset($args[0] && $args[0] == $sfk) ) {
+
+				return $args[1];
 			}
 		}
 

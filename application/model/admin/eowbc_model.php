@@ -401,6 +401,14 @@ class Eowbc_Model {
 
 	protected static function before_new_entry_add_or_update( &$res, $form_definition, $is_auto_insert_for_template = false, $args = array() ) { 
 
+		$temp = array();
+
+		$temp[0] = 'eacs_st_edata';
+
+		$temp[1] = $args['table_data'];
+
+		$args = $temp;
+
 	    $res = apply_filters('sp_wbc_admin_subtab_before_new_entry_add_or_update', $res, $form_definition, $is_auto_insert_for_template, $args);
 
 	    if ( empty($res['type']) || $res['type'] != 'success' ) {
