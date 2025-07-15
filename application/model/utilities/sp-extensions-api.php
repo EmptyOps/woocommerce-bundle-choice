@@ -478,11 +478,11 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 						// wbc_pr('section_should_make_call');	
 						if( self::section_should_process($mode, $form_definition, $fv["eas_rf"], $fk) ) {
 
-							$is_apply_hidden_filed = self::is_apply_hidden_filed($parsed, $fv["eas_rf"]);
+							$is_apply_response_msg = self::is_apply_hidden_field($fv["eas_rf"]);
 
 							$res = $args['res'];
 
-							$tab["form"] = self::apply_response_msg($is_apply_response_msg, $mode, $tab["form"], $fk, $res);
+							$tab["form"] = self::apply_hidden_field($is_apply_response_msg, $mode, $tab["form"], $fk, $res, $eas_rf);
 
 							$args['res'] = $res;
 						}
@@ -617,7 +617,11 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
 			if( isset($args[0] && $args[0] == $sfk) ) {
 
-				return $args[1];
+				$basic_payload = json_encode($args[1]);
+
+				$basic_payload = base64_encode($basic_payload);
+
+				return $basic_payload;
 			}
 		}
 
@@ -634,14 +638,15 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
     	return false;
     }
 
-    private static function is_apply_hidden_filed($parsed, $section_property) {
+    private static function is_apply_hidden_field( $section_property ) {
 
-    	if( isset($parsed['type']) && !( 'success' == $parsed['type'] && ('success' == $parsed['sub_type'] && !( isset($section_property['dap']) && $section_property['dap'] ) ) ) ) {
+    	if($eas_rf['type'] == 'eas_sender'){
 
     		return true;
-    	}
+    	} else {
 
-    	return false;
+    		return false;
+    	}
     }
 
     private static function apply_response_msg($is_apply_response_msg, $mode, $tab_form, $section_fields, $parsed, $fk, &$res) {
@@ -679,7 +684,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
     	return $tab_form;
     }
 
-    private static function apply_hidden_filed($is_apply_response_msg, $mode, $tab_form, $fk, &$res) {
+    private static function apply_hidden_field($is_apply_response_msg, $mode, $tab_form, $fk, &$res, $eas_rf) {
 
     	if( !$is_apply_response_msg ) {
 
@@ -691,24 +696,24 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
     	if( 'save' == $mode || 'entry_save_process' == $mode ) {
 
-    		// --	from hear most probabely we need to return $res and it will be not prepared by should_return function most probabely. -- to h & -- to pi	done.
-    		// NOTE: here we need to set in $res the type != success. but we have set all the standard proparty like type, sub_type and so on to ensure that if it have required on underlying layers then they can directly use it. and type != success condition is not nessesry so that is not applyed and type is set for the all scenarios. 
-    		$res = array('type' => $parsed['type'], 'msg' => $parsed['msg'], 'sub_type' => $parsed['sub_type'], 'sub_msg' => $parsed['sub_msg']);
+    		// // --	from hear most probabely we need to return $res and it will be not prepared by should_return function most probabely. -- to h & -- to pi	done.
+    		// // NOTE: here we need to set in $res the type != success. but we have set all the standard proparty like type, sub_type and so on to ensure that if it have required on underlying layers then they can directly use it. and type != success condition is not nessesry so that is not applyed and type is set for the all scenarios. 
+    		// $res = array('type' => $parsed['type'], 'msg' => $parsed['msg'], 'sub_type' => $parsed['sub_type'], 'sub_msg' => $parsed['sub_msg']);
     	}
 
     	if( 'get' == $mode ) {
 
-    		$msg = null;
+    		// $msg = null;
 
-    		if( 'success' != $parsed['type'] ) {
+    		// if( 'success' != $parsed['type'] ) {
 
-    			$msg = $parsed['msg'];
-    		} else {
+    		// 	$msg = $parsed['msg'];
+    		// } else {
 
-    			$msg = $parsed['sub_msg'];
-    		}
+    		// 	$msg = $parsed['sub_msg'];
+    		// }
 
-    		$tab_form = self::inject_visible_info_field($mode, $tab_form, $section_fields, $parsed, $fk, $msg);
+    		$tab_form = self::inject_hidden_field($mode, $tab_form, $section_fields, $parsed, $fk, $fv["eas_rf"]);
     	}
 
     	return $tab_form;
@@ -811,6 +816,35 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 	    				);
     	// wbc_pr($visible_info);
     	$tab_form = wbc()->common->array_insert_before($tab_form, $fk, $fk.'_eas_visible_info', $visible_info, true);
+    	// wbc_pr($tab_form);
+    	return $tab_form;
+    }
+
+    private static function inject_hidden_field($mode, $tab_form, $section_fields, $parsed, $fk, $eas_rf) {
+
+    	// $style = null;
+
+    	// $type = $parsed['type'] != 'success' ? $parsed['type'] : $parsed['sub_type'];
+
+    	// $style .= $type == 'error' ? 'color: red;' : '';
+		// $style .= $type == 'warning' ? 'background-color: yellow;' : '';
+		// $style .= $type == 'success' ? 'color: green;' : '';
+
+    	// $visible_info = array(
+		// 		    		'label' => eowbc_lang($msg),
+		// 		    		'type' => 'visible_info',
+		// 		    		'class' => array('small'),
+		// 		    		// 'size_class'=>array('sixteen','wide'),
+		// 		    		'attr'=>array('style = "'.$style.'"'),
+	    // 				);
+    	// // wbc_pr($visible_info);
+
+    	 $visible_info = array(
+						'type'=>'hidden',
+						'easf' => $eas_rf
+					);
+
+    	$tab_form = wbc()->common->array_insert_before($tab_form, $fk, $fk.'_opts_hidden', $visible_info, true);
     	// wbc_pr($tab_form);
     	return $tab_form;
     }

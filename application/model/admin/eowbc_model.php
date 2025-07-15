@@ -416,6 +416,10 @@ class Eowbc_Model {
 	        return false;
 	    }
 
+	    self::process_form_definition_rf_asave('entry_save_process',$form_definition,$args['subtab_key'],$args['table_data'],$args);
+
+	    $res['table_data'] = $args['table_data'];
+
 	    return true;
 	}
 
@@ -640,6 +644,140 @@ class Eowbc_Model {
 		</style>
 		<?php
 	}
+
+    private static function process_form_definition_rf_asave($mode, $form_definition, $subtab_key, &$table_data, $args) {
+    	// die('process_form_definition start');
+		wbc()->load->model('admin\form-builder');
+
+		$saved_tab_key = !empty( $args["hook_callback_args"]["sp_frmb_saved_tab_key"] ) ? $args["hook_callback_args"]["sp_frmb_saved_tab_key"] : ""; 
+
+		// NOTE: if ever we have any other field to skip then add here.
+		$skip_fileds = array(/* 'sp_frmb_saved_tab_key' */ $saved_tab_key);
+		
+		$save_as_data = array();	
+		$save_as_data_meta = array();	
+
+    	//loop through form tabs and save 	    
+	    foreach ($form_definition as $key => $tab) {
+	    	// wbc_pr('form_definition111');
+	    	// wbc_pr($key);
+	    	// wbc_pr($saved_tab_key);
+	    	// wbc_pr('form_definition 78941');
+
+	    	if( ('save' == $mode || 'entry_save_process' == $mode)&& $key != $saved_tab_key ) {
+	    		continue;
+	    	}
+
+	    	// wbc_pr($key);
+	    	// wbc_pr($saved_tab_key);
+	    	// wbc_pr('ggggggggg');
+	    	// --	nicheno key_clean variable comment karavo padashe kem k tene variable dipendency che so jaroor no hoy to comment. -- to h & -- to pi done.	
+	    	// $key_clean = ((!empty($this->tab_key_prefix) and strpos($key,$this->tab_key_prefix)===0)?substr($key,strlen($this->tab_key_prefix)):$key); 
+	    	//$res['data_form'][]= $tab;
+			$is_table_save = false;	//	ACTIVE_TODO/TODO it should be passed from child maybe or make dynamic as applicable. ($key == $this->tab_key_prefix."d_fconfig" or $key == $this->tab_key_prefix."s_fconfig" or $key=='filter_set') ? true : false;
+
+			$table_data = array();
+			$tab_specific_skip_fileds = array();	//ACTIVE_TODO/TODO it will be spported only if the hook pass it and so it is available here in this process_form_definition function in $args variable. means when the process_form_definition function called here from the hooks bound in this class from abow admin_hooks function.
+
+	    	foreach ($tab["form"] as $fk => $fv) {
+
+	    		// wbc_pr('form_definition 22222');
+			    if( in_array($fv["type"], \eo\wbc\model\admin\Form_Builder::savable_types()) ) {
+
+			    	//skip fields where applicable
+					if( ('save' == $mode || 'entry_save_process' == $mode) && in_array($fk, $skip_fileds) ) {
+		    			continue;
+		    		}
+
+			    	//skip fields where applicable
+					if( isset($fv["eas_rf"]) && is_array($fv["eas_rf"]) ) {
+						// wbc_pr('eas if in');
+						// wbc_pr('section_should_make_call');	
+						if( self::section_should_process($mode, $form_definition, $fv["eas_rf"], $fk) ) {
+
+							$is_apply_response_msg = self::is_apply_hidden_field($fv["eas_rf"]);
+
+							$res = $args['res'];
+
+							$tab["form"] = self::apply_hidden_field($is_apply_response_msg, $mode, $tab["form"], $fk, $res, $eas_rf);
+
+							$args['res'] = $res;
+						}
+
+						$form_definition[$key]["form"] = $tab["form"];
+						
+					}
+			    }
+			}
+	    }
+	    // die('mode 111');
+	    // wbc_pr($form_definition);
+    	if( $mode == 'get' ) {
+    		// die('mode222');
+    		return $form_definition;
+    	} else {
+    		// die('mode3333');
+    		//default mode save
+    		return $args['res'];
+    	}
+    }
+
+    private static function section_should_process_asave($mode, $form_definition, $section_property, $fk) {
+
+    	if( 'get' == $mode ) {
+
+    		return true;
+    	} else{
+
+    		return false;
+    	}
+    }
+
+    private static function is_empty_hidden_field_asave( $section_property ) {
+
+    	if($eas_rf['type'] == 'eas_sender'){
+
+    		return true;
+    	} else {
+
+    		return false;
+    	}
+    }
+
+    private static function empty_hidden_field_asave($is_apply_response_msg, $mode, $tab_form, $fk, &$res, $eas_rf) {
+
+    	if( !$is_apply_response_msg ) {
+
+    		return $tab_form;
+    	}
+
+    	// --	hear we need to prepare the $res form $parsed by creating empty array and so on. -- to h & -- to pi 	done.
+    	// $res = $parsed;
+
+    	if( 'save' == $mode || 'entry_save_process' == $mode ) {
+
+    		// // --	from hear most probabely we need to return $res and it will be not prepared by should_return function most probabely. -- to h & -- to pi	done.
+    		// // NOTE: here we need to set in $res the type != success. but we have set all the standard proparty like type, sub_type and so on to ensure that if it have required on underlying layers then they can directly use it. and type != success condition is not nessesry so that is not applyed and type is set for the all scenarios. 
+    		// $res = array('type' => $parsed['type'], 'msg' => $parsed['msg'], 'sub_type' => $parsed['sub_type'], 'sub_msg' => $parsed['sub_msg']);
+    	}
+
+    	if( 'get' == $mode ) {
+
+    		// $msg = null;
+
+    		// if( 'success' != $parsed['type'] ) {
+
+    		// 	$msg = $parsed['msg'];
+    		// } else {
+
+    		// 	$msg = $parsed['sub_msg'];
+    		// }
+
+    		$tab_form = self::inject_hidden_field($mode, $tab_form, $section_fields, $parsed, $fk, $fv["eas_rf"]);
+    	}
+
+    	return $tab_form;
+    }
 
 }
 
