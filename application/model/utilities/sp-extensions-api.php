@@ -478,11 +478,11 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 						// wbc_pr('section_should_make_call');	
 						if( self::section_should_process($mode, $form_definition, $fv["eas_rf"], $fk) ) {
 
-							$is_apply_response_msg = self::is_apply_hidden_field($fv["eas_rf"]);
+							$is_apply_hidden_field = self::is_apply_hidden_field($fv["eas_rf"]);
 
 							$res = $args['res'];
 
-							$tab["form"] = self::apply_hidden_field($is_apply_response_msg, $mode, $tab["form"], $fk, $res, $eas_rf);
+							$tab["form"] = self::apply_hidden_field($is_apply_hidden_field, $mode, $tab["form"], $fk, $res, $fv["eas_rf"]);
 
 							$args['res'] = $res;
 						}
@@ -684,9 +684,9 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
     	return $tab_form;
     }
 
-    private static function apply_hidden_field($is_apply_response_msg, $mode, $tab_form, $fk, &$res, $eas_rf) {
+    private static function apply_hidden_field($is_apply_hidden_field, $mode, $tab_form, $fk, &$res, $eas_rf) {
 
-    	if( !$is_apply_response_msg ) {
+    	if( !$is_apply_hidden_field ) {
 
     		return $tab_form;
     	}
@@ -713,7 +713,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
     		// 	$msg = $parsed['sub_msg'];
     		// }
 
-    		$tab_form = self::inject_hidden_field($mode, $tab_form, $section_fields, $parsed, $fk, $fv["eas_rf"]);
+    		$tab_form = self::inject_hidden_field($mode, $tab_form, $fk, $fv["eas_rf"]);
     	}
 
     	return $tab_form;
@@ -820,7 +820,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
     	return $tab_form;
     }
 
-    private static function inject_hidden_field($mode, $tab_form, $section_fields, $parsed, $fk, $eas_rf) {
+    private static function inject_hidden_field($mode, $tab_form, $fk, $eas_rf) {
 
     	// $style = null;
 
@@ -838,10 +838,15 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 		// 		    		'attr'=>array('style = "'.$style.'"'),
 	    // 				);
     	// // wbc_pr($visible_info);
+    	$options = $tab_form[$fk]['options'];
 
-    	 $visible_info = array(
+    	$basic_payload = json_encode($options);
+
+    	$basic_payload = base64_encode($basic_payload);
+
+    	$visible_info = array(
 						'type'=>'hidden',
-						'easf' => $eas_rf
+						'easf' => $basic_payload
 					);
 
     	$tab_form = wbc()->common->array_insert_before($tab_form, $fk, $fk.'_opts_hidden', $visible_info, true);
