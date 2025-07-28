@@ -960,7 +960,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
         }
 
         // NOTE: for the simplicity and effectiveness of this idea of, minute/time based limiting of webhook processing, we must set transient means entry here instead of at last after entire process completes or any such other layers. it is because sometimes it may happen that it never is reaching to last layers due to some other code issues and there could be many such things so we should keep it here always means at very initial layers like this. 
-        set_transient($key, true, 60); // default 60 sec change to 30 if want to allow two per minute and change to 20 if want to allow 3 calls per minute
+        set_transient($key, true, /*60*/ 30); // default 60 sec change to 30 if want to allow two per minute and change to 20 if want to allow 3 calls per minute
 
         return false;
     }

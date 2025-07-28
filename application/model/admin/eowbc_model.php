@@ -693,13 +693,13 @@ class Eowbc_Model {
 					if( isset($fv["eas_rf"]) && is_array($fv["eas_rf"]) ) {
 						// wbc_pr('eas if in');
 						// wbc_pr('section_should_make_call');	
-						if( self::section_should_process($mode, $form_definition, $fv["eas_rf"], $fk) ) {
+						if( self::section_should_process_asave($mode, $form_definition, $fv["eas_rf"], $fk) ) {
 
-							$is_apply_response_msg = self::is_apply_hidden_field($fv["eas_rf"]);
+							$is_empty_hidden_field_asave = self::is_empty_hidden_field_asave($fv["eas_rf"]);
 
 							$res = $args['res'];
 
-							$tab["form"] = self::apply_hidden_field($is_apply_response_msg, $mode, $tab["form"], $fk, $res, $eas_rf);
+							$tab["form"] = self::empty_hidden_field_asave($is_empty_hidden_field_asave, $mode, $tab["form"], $fk, $res, $eas_rf);
 
 							$args['res'] = $res;
 						}
@@ -744,9 +744,9 @@ class Eowbc_Model {
     	}
     }
 
-    private static function empty_hidden_field_asave($is_apply_response_msg, $mode, $tab_form, $fk, &$res, $eas_rf) {
+    private static function empty_hidden_field_asave($is_empty_hidden_field_asave, $mode, $tab_form, $fk, &$res, $eas_rf) {
 
-    	if( !$is_apply_response_msg ) {
+    	if( !$is_empty_hidden_field_asave ) {
 
     		return $tab_form;
     	}
