@@ -242,7 +242,6 @@ class Public_Handler {
 			    } elseif (is_shop()) {
 
 			    	— SP_WBC_PSFAR possible to skip for ajax ring builder
-
 			    	if( !defined('SP_WBC_ARB_EAS_ON') || constant('SP_WBC_ARB_EAS_ON') === true ) {
 			            \eo\wbc\controllers\publics\pages\Shop::instance()->init();
 
