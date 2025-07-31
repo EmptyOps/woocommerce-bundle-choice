@@ -49,8 +49,8 @@ class Http_Handler {
 	
 	// NOTE: note that it is loading the ultimate common asset from based on the precondition that above function and so this function also is called only when it is not the ajax call process and also that this process is being called once only. but still if in future if we feel that we should move this asset loading to a more appropriate layer and if there is any layer that is more suitable then will move there. 	
 	private function load_asset() {
-
-		wbc()->load->asset( 'asset.php', constant( 'EOWBC_ASSET_DIR' ).'js/js.vars.asset.php' );
+		$file_suffix = (WBC_SCRIPT_DEBUG) ? '' : '.min';
+		wbc()->load->asset( 'asset.php', constant( 'EOWBC_ASSET_DIR' ).'js/js.vars.asset'.$file_suffix.'.php' );
 	}
 
 }
