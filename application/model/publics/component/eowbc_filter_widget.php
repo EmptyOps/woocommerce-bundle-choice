@@ -1665,7 +1665,7 @@ class EOWBC_Filter_Widget {
 
 				wbc()->load->template('publics/filters/theme_checkbox_desktop',array("width_class"=>$this->get_width_class($width),"filter"=>$filter,"reset"=>$reset,"non_edit"=>$non_edit,'help'=>$help,'tab_set'=>$tab_set,'filter_ui'=>$this));
 
-			} if(($item['filter_template']==apply_filters('eowbc_filter_prefix',$this->filter_prefix).'theme_dropdown') or ($item['filter_template'] === 'theme_dropdown' and ($this->is_shop_cat_filter or $this->is_shortcode_filter))) {
+			}elseif(($item['filter_template']==apply_filters('eowbc_filter_prefix',$this->filter_prefix).'theme_dropdown') or ($item['filter_template'] === 'theme_dropdown' and ($this->is_shop_cat_filter or $this->is_shortcode_filter))) {
 
 				wbc()->load->template('publics/filters/theme_dropdown_checkbox_desktop', array("width_class"=>$this->get_width_class($width),"filter"=>$filter,"reset"=>$reset,"non_edit"=>$non_edit,'help'=>$help,'tab_set'=>$tab_set,'filter_ui'=>$this));
 				
@@ -1748,7 +1748,7 @@ class EOWBC_Filter_Widget {
 
 			} elseif(($item['filter_template']==apply_filters('eowbc_filter_prefix',$this->filter_prefix).'theme_dropdown') or ($item['filter_template'] === 'theme_dropdown' and ($this->is_shop_cat_filter or $this->is_shortcode_filter))) {
 
-				wbc()->load->template('publics/filters/theme_dropdown_button_desktop', array("width_class"=>$this->get_width_class($width),"filter"=>$filter,"reset"=>$reset,'help'=>$help,'tab_set'=>$tab_set,'filter_ui'=>$this));
+				wbc()->load->template('publics/filters/theme_dropdown_button_desktop', array("width_class"=>$this->get_width_class($width),"filter"=>$filter,"reset"=>$reset,'help'=>$help,'tab_set'=>$tab_set,'filter_ui'=>$this,'type'=>$type));
 
 			} elseif(($item['filter_template']=='sc4' and $this->_category==$this->second_category_slug) or ($item['filter_template']=='fc4' and $this->_category==$this->first_category_slug)) {
 				
