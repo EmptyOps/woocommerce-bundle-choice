@@ -99,8 +99,8 @@ class SP_Model_Gallery_Zoom extends Eowbc_Base_Model_Publics {
 	}
 
 	public function load_asset(){
-
-		wbc()->load->asset( 'asset.php', constant( strtoupper( 'EOWBC_ASSET_DIR' ) ).'variations/gallery-zoom.assets.php' );
+		$file_suffix = (WBC_SCRIPT_DEBUG) ? '' : '.min';
+		wbc()->load->asset( 'asset.php', constant( strtoupper( 'EOWBC_ASSET_DIR' ) ).'variations/gallery-zoom.assets'.$file_suffix.'.php' );
 	}
 
 	public function init_core(){

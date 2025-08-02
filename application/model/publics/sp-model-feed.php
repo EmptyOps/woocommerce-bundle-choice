@@ -250,11 +250,14 @@ class SP_Model_Feed extends SP_Feed {
 		// wbc_pr("SP_Model_Feed load_asset");
 		add_action( 'wp_footer'/*'wp_enqueue_scripts'*/ ,function(){
 			// wbc_pr("SP_Model_Feed load_asset wp_footer");
+			$file_suffix = (WBC_SCRIPT_DEBUG) ? '' : '.min';
+			wbc()->load->asset('css','fomantic/semantic'.$file_suffix);
 
-			wbc()->load->asset('css','fomantic/semantic.min');
-			wbc()->load->asset('js','fomantic/semantic.min',array('jquery'));
+			$file_suffix = (WBC_SCRIPT_DEBUG) ? '' : '.min';
+			wbc()->load->asset('js','fomantic/semantic'.$file_suffix,array('jquery'));
 
-			wbc()->load->asset( 'asset.php', constant( 'EOWBC_ASSET_DIR' ).'variations.assets.php');
+			$file_suffix = (WBC_SCRIPT_DEBUG) ? '' : '.min';
+			wbc()->load->asset( 'asset.php', constant( 'EOWBC_ASSET_DIR' ).'variations.assets'.$file_suffix.'.php');
 		}, 1049);	
 
 	}

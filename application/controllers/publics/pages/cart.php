@@ -95,7 +95,7 @@ class Cart extends \eo\wbc\system\core\publics\Eowbc_Base_Model_Publics {
             // wp_register_script('eo_wbc_cart_js',plugins_url('/js/eo_wbc_cart.js',__FILE__));
             // wp_enqueue_script('eo_wbc_cart_js');
             $file_suffix = (WBC_SCRIPT_DEBUG) ? '' : '.min';
-            wbc()->load->asset('js','publics/eo_wbc_cart'.$file_suffix.,array('jquery'));
+            wbc()->load->asset('js','publics/eo_wbc_cart'.$file_suffix,array('jquery'));
         });
     }
     

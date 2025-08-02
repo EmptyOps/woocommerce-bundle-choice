@@ -273,7 +273,7 @@ class Service {
             <?php
             echo ob_get_clean();
             $file_suffix = (WBC_SCRIPT_DEBUG) ? '' : '.min';
-			wbc()->load->asset('js','shortcode-filter'.$file_suffix.);		
+			wbc()->load->asset('js','shortcode-filter'.$file_suffix);		
 		}, 10, 1 );
 		
 	}

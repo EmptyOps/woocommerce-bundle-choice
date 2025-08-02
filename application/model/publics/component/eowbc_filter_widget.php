@@ -1172,8 +1172,8 @@ class EOWBC_Filter_Widget {
 		if(!empty($args['filter_assets_php'])){
 			
 			add_action( ( !is_admin() ? 'wp_footer'/*'wp_enqueue_scripts'*/ : 'admin_enqueue_scripts') ,function(){
-
-				wbc()->load->asset( 'asset.php', constant( 'EOWBC_ASSET_DIR' ).'js/filter.assets.php' );
+				$file_suffix = (WBC_SCRIPT_DEBUG) ? '' : '.min';
+				wbc()->load->asset( 'asset.php', constant( 'EOWBC_ASSET_DIR' ).'js/filter.assets'.$file_suffix.'.php' );
 				
 			}, 1049);	
 
@@ -1181,8 +1181,8 @@ class EOWBC_Filter_Widget {
 
 			// NOTE: below hook is currently not working and the js is loading from js vars file
 			add_action( ( !is_admin() ? 'wp_enqueue_scripts' : 'admin_enqueue_scripts') ,function(){
-
-				wbc()->load->asset('js', 'publics/eo_wbc_filter', array('jquery'), "", false, true, null, null, true);
+				$file_suffix = (WBC_SCRIPT_DEBUG) ? '' : '.min';
+				wbc()->load->asset('js', 'publics/eo_wbc_filter'.$file_suffix, array('jquery'), "", false, true, null, null, true);
 				
 			}, 1049);
 

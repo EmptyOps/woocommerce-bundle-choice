@@ -2,10 +2,10 @@
 add_action( 'wp_enqueue_scripts' ,function(){
 
 	if (false and wbc_is_mobile()) {
-
-		wbc()->load->asset('css','variations/gallery_images/external-plugins/xzoom/xzoom',array(),"",false,true);
-
-		wbc()->load->asset('js','variations/gallery_images/external-plugins/xzoom/xzoom',array(),"",true,true);
+		$file_suffix = (WBC_SCRIPT_DEBUG) ? '' : '.min';
+		wbc()->load->asset('css','variations/gallery_images/external-plugins/xzoom/xzoom'.$file_suffix,array(),"",false,true);
+		$file_suffix = (WBC_SCRIPT_DEBUG) ? '' : '.min';
+		wbc()->load->asset('js','variations/gallery_images/external-plugins/xzoom/xzoom'.$file_suffix,array(),"",true,true);
 		?>
 		<script type="text/javascript">
 			jQuery,document.addEventListener("DOMContentLoaded",(function(){jQuery(".xzoom3, .xzoom-gallery3").xzoom({position:"lens",lensShape:"circle",sourceClass:"xzoom-hidden"}),jQuery(".xzoom-gallery3").on("click mouseenter mousemove mouseleave",(function(){jQuery(".xzoom-gallery3.xactive").removeClass("xactive"),jQuery(this).addClass("xactive")}))}));

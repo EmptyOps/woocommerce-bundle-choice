@@ -735,8 +735,7 @@ class Options extends \eo\wbc\controllers\publics\Controller {
 						add_action( 'woocommerce_before_variations_form',function( ) use($toggle_text){
 							// wbc()->load->asset('css','fomantic/semantic.min');
 							// wbc()->load->asset('js','fomantic/semantic.min',array('jquery'));
-							$file_suffix = (WBC_SCRIPT_DEBUG) ? '' : '.min';
-							wbc()->load->built_in_asset('semantic'.$file_suffix.);
+							wbc()->load->built_in_asset('semantic');
 							ob_start();
 							?>
 								<span id="wbc_variation_toggle" class="ui raised segment">
@@ -748,8 +747,7 @@ class Options extends \eo\wbc\controllers\publics\Controller {
 					} else {
 						// wbc()->load->asset('css','fomantic/semantic.min');
 						// wbc()->load->asset('js','fomantic/semantic.min',array('jquery'));
-						$file_suffix = (WBC_SCRIPT_DEBUG) ? '' : '.min';
-						wbc()->load->built_in_asset('semantic'.$file_suffix.);
+						wbc()->load->built_in_asset('semantic');
 						ob_start();
 						?>	
 							<script>
