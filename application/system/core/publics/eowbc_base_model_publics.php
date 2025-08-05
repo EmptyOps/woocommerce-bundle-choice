@@ -209,7 +209,7 @@ class Eowbc_Base_Model_Publics {
 		return $res;
 	}
 
-	public static function handle_response($parsed, $throw_types = array('error')){
+	public static function handle_response($parsed, $throw_types = array('error'), $args = array()){
 		// die('handle_response in');
 		// NOTE: here other applicable layers of handle response function can come or may come.
 

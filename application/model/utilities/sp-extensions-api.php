@@ -405,7 +405,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 							if( self::should_handle_response($mode, $parsed) ) {
 
 								// die('inside should_handle_response if');
-								\eo\wbc\system\core\publics\Eowbc_Base_Model_Publics::handle_response($parsed, array());		
+								\eo\wbc\system\core\publics\Eowbc_Base_Model_Publics::handle_response($parsed, array(), array($args['hook_callback_args'][2]));		
 							}
 							// die('inside should_handle_response if 123114');
 						}
@@ -640,7 +640,8 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
     private static function is_apply_hidden_field( $section_property ) {
 
-    	if($eas_rf['type'] == 'eas_sender'){
+    	// if($eas_rf['type'] == 'eas_sender'){
+    	if($section_property['type'] == 'eas_sender'){
 
     		return true;
     	} else {
@@ -844,12 +845,12 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
     	$basic_payload = base64_encode($basic_payload);
 
-    	$visible_info = array(
+    	$table_data = array(
 						'type'=>'hidden',
 						'easf' => $basic_payload
 					);
 
-    	$tab_form = wbc()->common->array_insert_before($tab_form, $fk, $fk.'_opts_hidden', $visible_info, true);
+    	$tab_form = wbc()->common->array_insert_before($tab_form, $fk, $fk.'_opts_hidden', $table_data, true);
     	// wbc_pr($tab_form);
     	return $tab_form;
     }
