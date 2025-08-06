@@ -260,6 +260,26 @@ class Eowbc_Base_Model_Publics {
 		
 		if( isset($parsed['response_data']['data']) ) {
 
+			if( isset($parsed['response_data']['data']['kstb']) ) {
+
+				foreach($parsed['response_data']['data']['kstb'] as $kstb_k => $kstb_v){
+
+					if($args[0] != base64_decode($kstb_k)){
+
+						throw new \Exception("The operation failed at the handle_response function at st loop layer",1);
+					}
+
+					$st_data = unserialize(wbc()->options->get_option_group($args[0],"a:0:{}"));
+
+					foreach($kstb_v as $kstb_k_k => $kstb_v_v){
+	
+						$st_data[$kstb_k_k] = $kstb_v_v;
+					}
+
+				}
+
+			}	
+
 			return $parsed['response_data']['data'];
 		}
 
