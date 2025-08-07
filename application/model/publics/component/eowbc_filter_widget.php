@@ -1762,7 +1762,7 @@ class EOWBC_Filter_Widget {
 			
 				wbc()->load->template('publics/filters/button_desktop', array("width_class"=>$this->get_width_class($width),"filter"=>$filter,"reset"=>$reset,'tab_set'=>$tab_set,'help'=>$help,'filter_ui'=>$this));
 			}
-		elseif(($item['filter_template']==apply_filters('eowbc_filter_prefix',$this->filter_prefix).'theme') or ($item['filter_template'] === 'theme' and ($this->is_shop_cat_filter or $this->is_shortcode_filter))): 
+		elseif(apply_filters('eowbc_load_them_filters',false)): 
 			
 			wbc()->load->template('publics/filters/theme_button_mobile', array("width_class"=>$this->get_width_class($width),"filter"=>$filter,"reset"=>$reset,'help'=>$help,'tab_set'=>$tab_set,'filter_ui'=>$this));
 
@@ -2080,6 +2080,7 @@ class EOWBC_Filter_Widget {
 					//$this->input_step_slider($this->__prefix,$item/*$item['name'],$item['label'],$item['type'],1,$item['column_width'],$reset=!empty($item['reset'])*/);		
 				//}
 				elseif($item['type']==0 || $item['type']==1 || $item['type']=='two_tabs' ) {
+					// echo ($item['type']);
 					switch ($item['input']) {
 						case 'icon':
 						case 'icon_text':												
@@ -2101,6 +2102,7 @@ class EOWBC_Filter_Widget {
 							$this->toggle_column($this->__prefix,$item);
 							break;
 						case 'two_tabs':
+							// die("2104");
 							$this->two_tabs($this->__prefix,$item);
 							break;
 						default:
@@ -2116,6 +2118,7 @@ class EOWBC_Filter_Widget {
 	}
 
 	public function two_tabs($prefix,$item){
+		// die("2119000");
 		$item['filter_ui'] = $this;
 		if(($this->first_theme==apply_filters('eowbc_filter_prefix',$this->filter_prefix).'theme'/*$this->second_theme=='theme'*//* and $this->_category==$this->second_category_slug) or ($this->first_theme=='theme' and $this->_category==$this->first_category_slug*/) or $this->first_theme === 'theme') {
 			// var_dump('two_tabs() filter_widgets');
@@ -2128,6 +2131,18 @@ class EOWBC_Filter_Widget {
 		} else {
 			wbc()->load->template('publics/filters/two_tabs',$item);
 		}
+
+		// if(($this->first_theme==apply_filters('eowbc_filter_prefix',$this->filter_prefix).'theme_dropdown') or $this->first_theme === 'theme_dropdown') {
+		// 	// var_dump('two_tabs() filter_widgets');
+		// 	if(/*wp_is_mobile()*/ wbc_is_mobile_by_page_sections('cat_shop_page')){
+		// 		wbc()->load->template('publics/filters/theme_two_tabs_mobile',$item);
+		// 	} else {
+		// 		wbc()->load->template('publics/filters/theme_two_tabs',$item);
+		// 	}
+				
+		// } else {
+		// 	wbc()->load->template('publics/filters/two_tabs',$item);
+		// }
 	}
 
 	//Generate dropdown based filter option;
