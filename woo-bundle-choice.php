@@ -7,7 +7,7 @@
  * @package woo-bundle-choice
  *
  * @wordpress-plugin
- * Plugin Name: Woo Choice Plugin | Ring Builder | Pair Maker | Guidance Tool ui_QCed_bhavesh_1
+ * Plugin Name: Woo Choice Plugin | Ring Builder | Pair Maker | Guidance Tool ui_QCed_bhavesh_2
  * Plugin URI: https://wordpress.org/plugins/woo-bundle-choice/
  * Description: Product bundling as ring builder for jewelry, pair maker for clothing and guidance tool for home decor, cosmetics etc. Product bundling as per user's choice.
  * Version: 1.1.0
@@ -158,6 +158,7 @@ if(!class_exists('Woo_Bundle_Choice') ) {
 
 			// admin 
 			if( is_admin() ) {
+				
 				$page_slug = wbc()->sanitize->get('page');
 				if( strpos($page_slug, "---theme-adaption") !== FALSE ) {
 					$curr_plugin_slug = explode("---", $page_slug)[0];
@@ -185,11 +186,41 @@ if(!class_exists('Woo_Bundle_Choice') ) {
 			
 		}
 
+		public function extras_configuration_check() {
+
+			// admin 
+			if( is_admin() ) {
+				
+				$page_slug = wbc()->sanitize->get('page');
+				if( strpos($page_slug, "---extras") !== FALSE ) {
+					$curr_plugin_slug = explode("---", $page_slug)[0];
+
+					if( $curr_plugin_slug == 'woo-bundle-choice' ) {
+
+						add_filter('sp_wbc_extras_config', function( $filter_var, $plugin_slug ) {
+
+							if( $plugin_slug == 'woo-bundle-choice' ) {
+								return wbc()->config->extras();
+							}
+
+							return $filter_var;
+						}, 10, 2);
+					}
+
+				}
+			}
+		}
+
 		public function init() {
 			/*ACTIVE_TODO_OC_START
 			ACTIVE_TODO we need to create one function or flow to call all such hooks related binding from root class init function of this class end sp_index class.
 			ACTIVE_TODO_OC_END*/
 			\eo\wbc\model\data_model\SP_WBC_Product::hooks();
+
+			if(is_admin()) {
+
+				\eo\wbc\model\data_model\SP_WBC_Product::admin_hooks();
+			}
 
 			do_action( 'before_eowbc_load' );
 			
@@ -202,6 +233,8 @@ if(!class_exists('Woo_Bundle_Choice') ) {
 
 			// added on 01-01-2022
 			$this->theme_adaption_check();
+			
+			$this->extras_configuration_check();
 		}
 	}
 

@@ -1,7 +1,9 @@
 <?php
-/*
-*	SP Category class 
-*/
+/**
+ *	SP Category class 
+ *	NOTE: This class hierarchy of these clasees will contain janral code related to CRUD operations and so on functions. so it means that if there is any extension specific code then that need to be implemented in that specific extension class which is extended from this class only, that is necessary to ensure that wbc free layer has only relevant and neat code. and beyond the extension specific classes thar might be sum exception like dapii extenshone has its specific different classes for handling the crud operations and factory logic related to category, attribute and product and so on, and that exception is assumed to be kept separate always wich mins that dapii code will never be merged or synced in any way with this class hierarchy and its layers.
+ *
+ */
 
 namespace eo\wbc\system\core\data_model;
 
@@ -21,26 +23,70 @@ class SP_Category extends SP_Entity {
 		throw new Exception("Sorry, singleton instance method not supported for this class. Always use construct method to create object.", 1);
 	}
 
-	public function __construct( $platform_key, $platform_name ) {
+	public function __construct( $platform_key, $platform_name, $category_slug, $category_title ) {
 
 		$this->platform_key = $platform_key;
 		$this->platform_name = $platform_name;
 	}
 
-	public function __construct() {
+	/*public function __construct() {
 		throw new Exception("Sorry, only construct method with platform_key etc parameters is supported, so pass platform_key etc parameters as parameters to construct method. Default construct method is not supported.", 1);
+	}*/
+
+	public static function is_category_exist( $slug, $extra_args ) {
+
+		throw new Exception("not implemented yet.", 1);
+	}
+
+	public static function get_category_id( $slug, $extra_args ) {
+
+		throw new Exception("not implemented yet.", 1);
 	}
 
 	public static function createFromJson(){
-		throw new Exception("Set method is not supposed to be supported for this property, rely on construct method to set this property.", 1);
+
+		throw new Exception("not implemented yet.", 1);
 	}
 
 	public static function createFromSerialized(){
-		throw new Exception("Set method is not supposed to be supported for this property, rely on construct method to set this property.", 1);
+
+		throw new Exception("not implemented yet.", 1);
 	}
 
-	public static function createFromArray(){
-		throw new Exception("Set method is not supposed to be supported for this property, rely on construct method to set this property.", 1);
+	public static function createFromArray( $platform_key, $platform_name, $data_array, $args = array() ){
+
+		// NOTE: This class hierarchy of these clasees will contain janral code related to CRUD operations and so on functions. so it means that if there is any extension specific code then that need to be implemented in that specific extension class which is extended from this class only, that is necessary to ensure that wbc free layer has only relevant and neat code. and beyond the extension specific classes thar might be sum exception like dapii extenshone has its specific different classes for handling the crud operations and factory logic related to category, attribute and product and so on, and that exception is assumed to be kept separate always wich mins that dapii code will never be merged or synced in any way with this class hierarchy and its layers.
+
+		throw new Exception("not implemented yet.", 1);
+
+		foreach($data_array as $data_key=>$data){
+
+			self::create($data, $args);
+		
+		}
+	}
+
+	protected static function create($data, $args = array()) {
+		// TODO bind to the sample data sample category creation flow(and that should also be adhering to and following the data layer structure defs) where there is either category factory or entire function(s) to do so 
+
+		//	TODO and extensions which needs category factory related operations are also supposed to rely on this class for such operations 
+
+		if (empty($args['is_do_not_transform_older_to_new_format'])) {
+
+			$res = parent::transform_older_format_to_new_format($data, $args);
+
+			if ($res['type'] == 'success') {
+		
+				$data = $res['data_new_format'];
+			} else {
+
+				// ACTIVE_TODO_OC_START
+				// -- we need to mange the error hendling mens the value that is retan from the here shuold be shown as error messeg to the user interface on admin and so on -- to h && -- to harshil
+				// 	--	here as soon as we get chance we need to show this errors on the user interface pages of the admin sample_data and so that debugging become easeir -- to h && to harshil
+				// ACTIVE_TODO_OC_END
+				return $res;
+			}
+		}
 	}
 
 	public function set_platform_key(){

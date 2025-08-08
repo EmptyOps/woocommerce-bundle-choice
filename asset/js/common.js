@@ -306,6 +306,39 @@ window.document.splugins.common.key_to_number = function (key, replacements = {}
     var rows_txt = temp + "" + param + "=" + paramVal;
     return baseURL + "?" + newAdditionalURL + rows_txt;
  } 
+ window.document.splugins.common.get_variation_url_part = function(variation_id, base_url) {
+
+    var attributes = [];        
+
+    jQuery(jQuery('.variations_form').find('table.variations select')).each(function() {
+        
+        var value = jQuery(this).val();
+        if (value) {
+            attributes.push({
+                id: jQuery(this).attr('name'),
+                value: value
+            });
+        }/* else {
+            allAttributesSet = false;
+        }*/
+    });
+
+    var url = base_url;
+
+    var attributeSlug_global = '';
+    jQuery.each(attributes,function(key, val) {
+        
+        var attributeSlug = val.id.replace('attribute_',''); //val.id.replace('attribute_pa_','');
+        // url += '&_attribute=' + attributeSlug + '&checklist_' + attributeSlug + "=" + val.value;
+        attributeSlug_global += ',' + attributeSlug;
+        url = window.document.splugins.common.updateURLParameter(url, 'checklist_' + attributeSlug, val.value);
+    });
+
+    url = window.document.splugins.common.updateURLParameter(url, '_attribute', attributeSlug_global);
+
+    return url;
+
+ }
 
  window.document.splugins.common.get_variation_url_part = function(variation_id, base_url) {
 
@@ -804,7 +837,7 @@ ACTIVE_TODO_OC_END*/
         
 
          // template_data = {gallery_thumbnail_src:'http://54.162.191.228/staging/wp-content/uploads/2022/07/r-a-2-100x100.jpg'};
-         // console.log("template");
+         // console.log("template 12512");
          // console.log(template);
          // console.log("template_data");
          // console.log(template_data);
@@ -1395,13 +1428,13 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
             jQuery( _this./*#*/$base_container_private /*'.variations_form:not(.spui-wbc-swatches-loaded)'*/).each(function () {
 
                 console.log('vs [init_private] ajaxComplete');
-                console.log(jQuery(this));
-                console.log(jQuery(this).attr('class'));
+                // console.log(jQuery(this));
+                // console.log(jQuery(this).attr('class'));
                 if( !( jQuery(this).hasClass('spui-wbc-swatches-loaded') ) ){
                     
                     console.log('vs [init_private] ajaxComplete 1');
-                    console.log(this);
-                    jQuery(this).wc_variation_form();
+                    // console.log(this);
+                    // jQuery(this).wc_variation_form();
                 }
             });
           }, 1000);
@@ -1696,7 +1729,7 @@ class SP_WBC_Variations_Swatches extends SP_WBC_Variations {
     /*#*/process_attribute_data_private(type, element, data, mode = null) {
 
         console.log('vs [process_attribute_data]');
-        console.log(data.options);
+        // console.log(data.options);
 
         data.options.each(function () {
             if (jQuery(this).val() !== '') {

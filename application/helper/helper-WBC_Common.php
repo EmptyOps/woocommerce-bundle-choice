@@ -136,14 +136,19 @@ class WBC_Common {
 		}
 	}
 
-	public function array_insert_before( $array,$before_key,$key,$value ){
+	public function array_insert_before( $array,$before_key,$key,$value,$is_after = false ){
 		if(is_array($array) and !empty($array)){
 			$new_array = array();
 			foreach ($array as $array_key => $array_value) {
-				if($array_key==$before_key){
+				if(!$is_after && $array_key==$before_key){
 					$new_array[$key] = $value;
 				}
 				$new_array[$array_key] = $array_value;
+
+				if( $is_after && $array_key == $before_key ) {
+
+	                $new_array[$key] = $value; 
+	            }
 			}
 			return $new_array;
 		} else {
@@ -445,6 +450,11 @@ class WBC_Common {
     		}
     	}
     	return $url;
+    }
+
+    public function admin_url($path=''){
+
+    	return admin_url( $path );
     }
 
     public function current_uri(){

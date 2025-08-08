@@ -19,7 +19,7 @@ class Service {
 	}
 
 	public function run() {		
-
+        
 		$this->add_shortcode();
 
         $this->discount_service();

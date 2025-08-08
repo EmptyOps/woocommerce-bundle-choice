@@ -38,11 +38,11 @@ class SP_Variations extends SP_Product {
 		return wc_get_product_id_by_sku($sku);
 	}
 
-	public static function createFromArray($data_array){
+	public static function createFromArray($platform_key, $platform_name, $data_array, $args = array()){
 		$this->create();
 	}
 
-	protected static function create() {
+	protected static function create($data, $args = array()) {
 		// TODO bind to the sample data sample product creation flow(and that should also be adhering to and following the data layer structure defs) where there is either product factory or entire function(s) to do so 
 
 		//	TODO and extensions which needs product factory related operations are also supposed to rely on this class for such operations 

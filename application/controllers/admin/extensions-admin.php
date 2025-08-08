@@ -53,8 +53,8 @@ class Extensions_Admin extends Admin {
 		// }
 		
 		// TODO implement sample data automation flow as per the parameters of the extensions sample data automation class and so on 		
-		if(false && !empty(wbc()->sanitize->get('page')) and wbc()->sanitize->get('page')=='eowbc' and ( (!empty(wbc()->sanitize->get('eo_wbc_view_auto_jewel')) and wbc()->sanitize->get('eo_wbc_view_auto_jewel') == 1) or (!empty(wbc()->sanitize->get('eo_wbc_view_auto_textile')) and wbc()->sanitize->get('eo_wbc_view_auto_textile') == 1) ) ){        	
-        	if( isset($_GET['eo_wbc_view_auto_jewel']) && wbc()->sanitize->get('eo_wbc_view_auto_jewel') == 1 ) {
+		if(false && !empty(wbc()->sanitize->get('page')) and wbc()->sanitize->get('page')=='eowbc' and ( (!empty(wbc()->sanitize->get('eo_wbc_view_auto_jewel')) and wbc()->sanitize->get('eo_wbc_view_auto_jewel') == 1) or (!empty(wbc()->sanitize->get('eo_wbc_view_auto_textile')) and wbc()->sanitize->get('eo_wbc_view_auto_textile') == 1) or (!empty(wbc()->sanitize->get('sp_ext_auto')) and wbc()->sanitize->get('sp_ext_auto') == 1) ) ){        	
+        	if( (isset($_GET['eo_wbc_view_auto_jewel']) && wbc()->sanitize->get('eo_wbc_view_auto_jewel') == 1 ) or (isset($_GET['sp_ext_auto']) && wbc()->sanitize->get('sp_ext_auto') == 1 )) {
 
         		//	perform initial task
 				self::instance()->init();

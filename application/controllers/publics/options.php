@@ -61,12 +61,19 @@ class Options extends \eo\wbc\controllers\publics\Controller {
 
 			$ids = null;
             
+            // global $post;
             global $post;
+            
+            // Check if global post is not null
+            if (empty($post)) {
+                return false; // If $post is null, exit the function
+            }
+
 	        $pid = $post->ID;
 
 	        if(!empty($pid)) {
 	            $product = wbc()->wc->eo_wbc_get_product($pid); 
-	            
+
 	            if(!empty($product) and !is_wp_error($product)){
 
 	                $ids = $product->get_category_ids();

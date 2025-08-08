@@ -31,11 +31,11 @@ class SP_Entity {
 		throw new Exception("Not supported yet", 1);
 	}
 
-	public static function createFromArray($data_array){
+	public static function createFromArray($platform_key, $platform_name, $data_array, $args = array()){
 		throw new Exception("Not supported yet", 1);
 	}
 
-	protected static function create(){
+	protected static function create($data, $args = array()){
 		throw new Exception("Not supported yet", 1);
 	}
 
@@ -62,5 +62,40 @@ class SP_Entity {
 	public function platform_name(){
 		return $this->platform_name;
 	}
+
+	public static function transform_older_format_to_new_format($data, $args = array()){
+
+		$res = array("type" => "success", "msg" => "", "data_new_format" => array());
+
+        $separator = wbc()->config->separator();
+
+		foreach($data as $data_key => $data_value) {
+
+			if (isset($data[$data_key.$separator.'new_format'])) {
+
+				$res['data_new_format'][$data_key] = $data[$data_key.$separator.'new_format'];
+			} else {
+
+				if (strpos($data_key, $separator.'new_format') === FALSE) {
+
+					if (!is_array($data_value) && !is_object($data_value)) {
+
+						$res['data_new_format'][$data_key] = array('key'=>$data_key, 'value'=>$data_value);
+					} else {
+
+						$res["type"] = "error";
+						$res["msg"] = "The new format value is not found for the key " . $data_key . "\n<br>";
+
+						return $res;
+					}
+
+				}
+ 
+			}
+		}
+
+		return $res;
+	}
+
 
 }

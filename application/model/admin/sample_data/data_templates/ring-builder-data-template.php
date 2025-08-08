@@ -26,7 +26,7 @@ class Ring_Builder_Data_Template extends Pair_Builder_Data_Template {
         $this->asset_folder = 'jewelry';
     }
 
-    public function get_attributes() {
+    public function get_attributes($feature_key = null/*ACTIVE_TODO The null value set here is temporary, and the actual value should be set as and when required.*/, $args = null) {
         $_img_url= constant('EOWBC_ASSET_URL').'img/sample_data/'.$this->asset_folder.'/';
         return array(
             array(
@@ -69,7 +69,7 @@ class Ring_Builder_Data_Template extends Pair_Builder_Data_Template {
                 'label' => 'Cut',
                 'terms' => array('Fair','Good','Very Good','Ideal','Super Ideal','Excellent','Poor'),
                 'terms_order' => array(1,2,3,4,5,6,7),
-                'description' => 'Origin attributes for diamond shape',
+                'description' => 'Cut attributes for diamond shape',
                 'slug' => 'eo_cut_attr',
                 'type'=>/*'dropdown'*/'button',
                 'ribbon_color'=>'#8245dd',
@@ -282,7 +282,7 @@ class Ring_Builder_Data_Template extends Pair_Builder_Data_Template {
         ); 
     }
 
-    public function get_categories() {
+    public function get_categories($feature_key = null/*ACTIVE_TODO The null value set here is temporary, and the actual value should be set as and when required.*/, $args = null) {
         $_img_url= constant('EOWBC_ASSET_URL').'img/sample_data/'.$this->asset_folder.'/';    // EO_WBC_PLUGIN_DIR.'EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/';
         
         return array(

@@ -21,7 +21,7 @@ if(!class_exists('WBC_Loader')) {
 
 		// ACTIVE_TODO we mostly confirmed that built in asset function ned to be createad, we had some older points noted some wher retlated to simantic loding and as of now allso keeping in mind thei ui builder -- to h and -- to b
 		// 	-- ACTIVE_TODO the main idea for above function is to allways ensure commun handler key for given biltin asset -- to h and -- to b
-		public function built_in_asset($asset_group) {
+		public function built_in_asset($asset_group, $args = null) {
 			
 			/*if(!apply_filters('wbc_load_asset_filter',true,$asset_group,$path,$deps,$version,$load_instantly)) {
 				return true;
@@ -95,6 +95,68 @@ if(!class_exists('WBC_Loader')) {
 					wbc()->load->asset('css', constant('EOWBC_ASSET_URL') . 'css/rangeslider/ion.rangeSlider.min.css',array(),"",true,true,null,null,false,true,null,true);
 					wbc()->load->asset('js', constant('EOWBC_ASSET_URL') . 'js/rangeslider/ion.rangeSlider.min.js', wbc()->common->current_theme_key() != "themes___purple_theme" ? array():array('jquery'),"",true,true,null,null,false,true,null,true);
 					break;
+				case 'wc_price':
+		        	
+		        	if( wbc()->sanitize->get('is_test') == 1 ) {
+    				
+						wbc_pr('wc_price case constant is '. $constant);
+    				}
+		        	
+		        	add_action( 'wp_enqueue_scripts', function() {
+
+		        	    // Enqueue the external script wc_price.js
+		        	    wp_enqueue_script( 'wc-price-js', constant( 'EOWBC_ASSET_URL' ) . 'js/woocommerce-price/wc_price.js', array( 'jquery' ), '1.0', false );
+
+		        	    // Prepare WooCommerce settings to pass to JavaScript
+		        	    $wc_store_object = array(
+		        	        'currency_symbol' => html_entity_decode( get_woocommerce_currency_symbol( get_woocommerce_currency() ), ENT_QUOTES, 'UTF-8' ),
+		        	        'currency_position' => get_option( 'woocommerce_currency_pos', true ),
+		        	        'decimal_separator' => wc_get_price_decimal_separator(),
+		        	        'currency_format_trim_zeros' => wc_get_price_thousand_separator(),
+		        	        'currency_format_num_decimals' => wc_get_price_decimals(),
+		        	        'price_format' => get_woocommerce_price_format(),
+		        	    );
+
+		        	    // Add inline script with the WooCommerce settings
+		        	    wp_add_inline_script( 'wc-price-js', 'var wc_settings_args = ' . wp_json_encode( $wc_store_object ) . ';' );
+		        	});
+					break;
+				case 'cat_page_curr_root_cat':
+
+				    add_action( 'wp_enqueue_scripts', function() use($args) {
+
+				        // Initialize the WooCommerce settings object as an empty array
+				        $cat_page_curr_root_cat_data = isset($args['localize_data']) ? $args['localize_data'] : array();
+
+				        // Fetch the option values once and store them in the array
+				        $first_slug = wbc()->options->get_option( 'configuration', 'first_slug' );
+				        $second_slug = wbc()->options->get_option( 'configuration', 'second_slug' );
+
+				        // Store these values in the array for later use
+				        $cat_page_curr_root_cat_data['first_category_slug'] = $first_slug;
+				        $cat_page_curr_root_cat_data['second_category_slug'] = $second_slug;
+
+				        // ACTIVE_TODO ultimately we should relay on those category detection hooks and so on as per the standard architecture planned for wbc and everything else during the earring pendant builder upgrade. -- to h
+				        if ( wbc()->common->get_category( 'category', null, array( $first_slug ) ) === $first_slug ) {
+
+				            // If the slug matches the first_slug, add it to the cat_page_curr_root_cat_data
+				            $cat_page_curr_root_cat_data['slug'] = $first_slug;
+				            $cat_page_curr_root_cat_data['curr_root_cat_number'] = 1;
+
+				        } else if ( wbc()->common->get_category( 'category', null, array( $second_slug ) ) === $second_slug ) {
+
+				            // If the slug matches the second_slug, add it to the cat_page_curr_root_cat_data
+				            $cat_page_curr_root_cat_data['slug'] = $second_slug;
+				            $cat_page_curr_root_cat_data['curr_root_cat_number'] = 2;
+				        }
+
+				        // Add inline script
+				        wp_register_script( 'dummy_handle_cat_page_curr_root_cat', null );
+				        wp_enqueue_script( 'dummy_handle_cat_page_curr_root_cat' );
+				        wp_add_inline_script( 'dummy_handle_cat_page_curr_root_cat', 'var cat_page_curr_root_cat_data = ' . wp_json_encode( $cat_page_curr_root_cat_data ) . ';' );
+				    });
+				    break;
+
 				default:				
 					break;
 			}			
