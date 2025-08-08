@@ -591,7 +591,7 @@ class Category {
      */
     public function eo_wbc_get_category()
     {
-    wbc_pr('eo_wbc_get_category 594');   
+     
         
         if(empty($this->first_category_slug)) {
             $this->first_category_slug = wbc()->options->get_option('configuration','first_slug');
