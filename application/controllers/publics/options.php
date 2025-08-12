@@ -495,7 +495,7 @@ class Options extends \eo\wbc\controllers\publics\Controller {
 				$bg_hover_color = wbc()->options->get_option('tiny_features','tiny_features_option_ui_bg_color_hover','#DCC7C7');
 
 				ob_start();
-				if(WBC_SCRIPT_DEBUG == ture){
+				if(WBC_SCRIPT_DEBUG == false){
 				?>    
 				    <style type="text/css">
 				        .ui.mini.images .variable-item.image{
@@ -660,7 +660,7 @@ class Options extends \eo\wbc\controllers\publics\Controller {
 				    </style>
 				<?php
 				}
-				if(WBC_SCRIPT_DEBUG == ture){
+				if(WBC_SCRIPT_DEBUG == false){
 				?>    
 				    <script>
 				        jQuery(document).ready(function($){

@@ -1,5 +1,5 @@
 <?php
-if(WBC_SCRIPT_DEBUG == ture){
+if(WBC_SCRIPT_DEBUG == false){
 ?>    
     <style type="text/css">
         .products>li{

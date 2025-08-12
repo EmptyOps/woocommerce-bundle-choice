@@ -129,7 +129,7 @@ class Product extends \eo\wbc\system\core\publics\Eowbc_Base_Model_Publics {
     public function init_safe_click() {
         add_action('woocommerce_after_add_to_cart_button',function(){
             ob_start();
-            if(WBC_SCRIPT_DEBUG == ture){
+            if(WBC_SCRIPT_DEBUG == true){
             ?>    
                 <script type="text/javascript">
 
@@ -262,7 +262,7 @@ class Product extends \eo\wbc\system\core\publics\Eowbc_Base_Model_Publics {
         
         add_action('wp_head',function(){
             wp_dequeue_script('wc-add-to-cart-variation');
-            if(WBC_SCRIPT_DEBUG == ture){
+            if(WBC_SCRIPT_DEBUG == false){
             ?>    
                 <style> body .wcp_preview_first_product_title, body .wcp_preview_second_product_title{font-size: 1.6rem;line-height: 2.4rem;white-space: nowrap;width: 24rem;overflow: hidden;text-overflow: ellipsis;float: left;} @media only screen and (max-width: 480px) { body .wcp_preview_first_product_title, body .wcp_preview_second_product_title { font-size: 1rem !important; line-height: 2rem !important; width: inherit !important; word-break: break-word; max-width: 20rem; } } @media only screen and (max-width: 320px) { body .wcp_preview_first_product_title, body .wcp_preview_second_product_title { font-size: 1rem !important; line-height: 2rem !important; width: inherit !important; word-break: break-word; max-width: 17rem; } }</style>
             <?php
@@ -275,7 +275,7 @@ class Product extends \eo\wbc\system\core\publics\Eowbc_Base_Model_Publics {
             ?>
             <style type="text/css">table.variations{display: none;}</style>
             <?php
-            if(WBC_SCRIPT_DEBUG == true){
+            if(WBC_SCRIPT_DEBUG == false){
             ?>    
                 <style type="text/css">
                     .variations_form .variations, #wbc_variation_toggle {
@@ -626,10 +626,10 @@ class Product extends \eo\wbc\system\core\publics\Eowbc_Base_Model_Publics {
 
         if( ( !isset($_GET['EO_WBC']) and !empty($bonus_features['opts_uis_item_page']) )/*(!isset($_GET['EO_WBC']) and wbc()->options->get_option('tiny_features','tiny_features_option_ui_toggle_status',false))*/ or ( isset($_GET['EO_WBC']) and wbc()->options->get_option('appearance_product_page','show_options_ui_in_pair_builder',false) ) ){
 
-            //\eo\wbc\controllers\publics\Options::instance()->run();   
-            if( \eo\wbc\controllers\publics\Options::instance()->should_init() ) {
-                \eo\wbc\controllers\publics\Options::instance()->init();
-            } 
+                //\eo\wbc\controllers\publics\Options::instance()->run();   
+                if( \eo\wbc\controllers\publics\Options::instance()->should_init() ) {
+                    \eo\wbc\controllers\publics\Options::instance()->init();
+                } 
         }
     }
     
@@ -822,26 +822,16 @@ class Product extends \eo\wbc\system\core\publics\Eowbc_Base_Model_Publics {
 
         
         ob_start();  
-        if(WBC_SCRIPT_DEBUG == ture){
-        ?>    
-            <style type="text/css">
-                .woocommerce .content-area ,#content,#primary,#main,.content,.primary,.main{
-                      width: 100% !important;
-                 }
-                 .woocommerce .widget-area {
-                      display: none !important;
-                 }
-            </style>
-
-        <?php
-        }else{
         ?>
-            <style type="text/css">
-                #content,#main,#primary,.content,.main,.primary,.woocommerce .content-area{width:100%!important}.woocommerce .widget-area{display:none!important}
-            </style>
-            
+        <style type="text/css">
+            .woocommerce .content-area ,#content,#primary,#main,.content,.primary,.main{
+                  width: 100% !important;
+             }
+             .woocommerce .widget-area {
+                  display: none !important;
+             }
+        </style>
         <?php
-        }
         echo ob_get_clean();
         
         //Registering Scripts : JavaScript
@@ -1014,25 +1004,14 @@ class Product extends \eo\wbc\system\core\publics\Eowbc_Base_Model_Publics {
                     
                 if(
                     (wbc()->options->get_option('tiny_features','product_page_hide_first_variation_form',false) and $category == $this->first_category_slug) or wbc()->options->get_option('tiny_features','product_page_hide_second_variation_form',false) and $category == $this->second_category_slug
-                ):
-                if(WBC_SCRIPT_DEBUG == ture){
-                ?>    
-                    <style>
-                        .variations_form table.variations{
-                            display:none !important;
-                        }
-                    </style>
-
-                <?php
-                }else{
-                ?>
-                    
-                    <style>
-                        .variations_form table.variations{display:none!important}
-                    </style>
-                <?php
-                }
-                endif   
+                ): ?>
+                <style>
+                    .variations_form table.variations{
+                        display:none !important;
+                    }
+                </style>
+                <?php endif ?>
+               <?php  
             }
             
        });

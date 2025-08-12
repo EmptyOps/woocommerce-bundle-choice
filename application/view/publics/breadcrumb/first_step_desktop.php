@@ -6,7 +6,7 @@
 
 $model_images = \eo\wbc\model\Images::instance();
 
-if(WBC_SCRIPT_DEBUG == ture){
+if(WBC_SCRIPT_DEBUG == false){
 ?>    
     <style type="text/css">
         .eo-wbc-container.container:not(.filters) .ui.grid:not(.eo_wbc_filter_icon)>* {

@@ -4,7 +4,7 @@
 *   Template to show category page
 */
 
-if(WBC_SCRIPT_DEBUG == ture){
+if(WBC_SCRIPT_DEBUG == false){
 ?>    
     <style type="text/css">
         .cat_products{
@@ -218,7 +218,7 @@ if(WBC_SCRIPT_DEBUG == ture){
 </div>
 <!-- Created with Wordpress plugin - WooCommerce Product bundle choice -->
 <?php
-if(WBC_SCRIPT_DEBUG == ture){
+if(WBC_SCRIPT_DEBUG == false){
 ?>    
     <script>
         $ = jQuery;
@@ -256,7 +256,7 @@ if(WBC_SCRIPT_DEBUG == ture){
     
 <?php
 }
-if(WBC_SCRIPT_DEBUG == ture){
+if(WBC_SCRIPT_DEBUG == false){
 ?>    
     <style type="text/css">
         .products{

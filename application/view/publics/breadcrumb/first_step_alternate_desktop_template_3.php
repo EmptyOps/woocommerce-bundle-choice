@@ -4,7 +4,7 @@
 *	Template to show breadcrumb first step for desktop
 */
 
-if(WBC_SCRIPT_DEBUG == ture){
+if(WBC_SCRIPT_DEBUG == false){
 ?>    
     <style type="text/css">
         .eo-wbc-container.container .ui.grid>* {

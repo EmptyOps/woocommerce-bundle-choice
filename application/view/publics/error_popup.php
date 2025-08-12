@@ -65,7 +65,7 @@
 }
 </style>
 <?php
-if(WBC_SCRIPT_DEBUG == true){
+if(WBC_SCRIPT_DEBUG == false){
 ?>    
     <script>
       var eo_wbc_outer_container=undefined;

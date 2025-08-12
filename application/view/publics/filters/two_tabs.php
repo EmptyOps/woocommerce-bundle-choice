@@ -158,7 +158,7 @@ if( true or in_array( wbc()->common->get_category('category',null,array(wbc()->o
             
         <?php
         }
-        if(WBC_SCRIPT_DEBUG == ture){
+        if(WBC_SCRIPT_DEBUG == false){
         ?>    
             <style>
             .tax-product_cat .eo-wbc-container.filters .ui.menu {

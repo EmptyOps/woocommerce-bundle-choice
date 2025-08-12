@@ -36,7 +36,7 @@
 </div>
 
 <?php
-if(WBC_SCRIPT_DEBUG == true){
+if(WBC_SCRIPT_DEBUG == false){
 ?>    
     <script type="text/javascript">
         jQuery(document).ready(function($){
@@ -143,7 +143,7 @@ if(WBC_SCRIPT_DEBUG == true){
     
 <?php
 }
-if(WBC_SCRIPT_DEBUG == ture){
+if(WBC_SCRIPT_DEBUG == false){
 ?>    
     <style type="text/css">
         /* Chrome, Safari, Edge, Opera */

@@ -403,7 +403,7 @@ class Setup_Wizard {
 					<script src="<?php echo constant('EOWBC_ASSET_URL').'js/fomantic/semantic.min.js'; ?>"></script>
 
 					<?php
-					if(WBC_SCRIPT_DEBUG == true){
+					if(WBC_SCRIPT_DEBUG == false){
 					?>    
 					    <script>
 					        jQuery(document).ready(function(){

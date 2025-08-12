@@ -1,5 +1,5 @@
 <?php
-if(WBC_SCRIPT_DEBUG == ture){
+if(WBC_SCRIPT_DEBUG == false){
 ?>    
     <style type="text/css">
         body p.name.product-title.woocommerce-loop-product__title{

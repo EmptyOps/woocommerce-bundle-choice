@@ -34,7 +34,7 @@
     </div>                          
 </div>
 <?php
-if(WBC_SCRIPT_DEBUG == true){
+if(WBC_SCRIPT_DEBUG == false){
 ?>    
     <script>
     jQuery(document).ready(function(){
