@@ -4,11 +4,25 @@
 	// 	wp_enqueue_script( 'jquery' );
 	// });
 ?>
-<script>
-	jQuery(document).ready(function($){
-		let breadcrumb = $('div.eo-wbc-container.container').clone();
-		$('div.eo-wbc-container.container').remove();
-		$('.woo_c-product.single-product:first-of-type').prepend(breadcrumb);
-		$('div.eo-wbc-container.container').css('display','block');
-	});
-</script>
+<?php
+if(WBC_SCRIPT_DEBUG == false){
+?>    
+    <script>
+        jQuery(document).ready(function($){
+            let breadcrumb = $('div.eo-wbc-container.container').clone();
+            $('div.eo-wbc-container.container').remove();
+            $('.woo_c-product.single-product:first-of-type').prepend(breadcrumb);
+            $('div.eo-wbc-container.container').css('display','block');
+        });
+    </script>
+
+<?php
+}else{
+?>
+    <script>
+        jQuery(document).ready((function(e){let o=e("div.eo-wbc-container.container").clone();e("div.eo-wbc-container.container").remove(),e(".woo_c-product.single-product:first-of-type").prepend(o),e("div.eo-wbc-container.container").css("display","block")}));
+    </script>
+    
+<?php
+}
+?>

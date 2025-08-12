@@ -402,20 +402,42 @@ class Setup_Wizard {
 					</div>
 					<script src="<?php echo constant('EOWBC_ASSET_URL').'js/fomantic/semantic.min.js'; ?>"></script>
 
-					<script>
-						jQuery(document).ready(function(){
-							jQuery('.ui.dropdown').dropdown();
-							jQuery('[name="eo_wbc_inventory_type"]').parent().dropdown('set selected','<?php echo get_option('eo_wbc_inventory_type',''); ?>');    
-							jQuery('.ui.checkbox').checkbox();
+					<?php
+					if(WBC_SCRIPT_DEBUG == true){
+					?>    
+					    <script>
+					        jQuery(document).ready(function(){
+					            jQuery('.ui.dropdown').dropdown();
+					            jQuery('[name="eo_wbc_inventory_type"]').parent().dropdown('set selected','<?php echo get_option('eo_wbc_inventory_type',''); ?>');    
+					            jQuery('.ui.checkbox').checkbox();
 
-							jQuery("#create_product").on('click',function(e){
-								console.log('preventDefault');
-								e.preventDefault();
-								e.stopPropagation();
-								window.location.href = "<?php echo admin_url("admin.php?page=eowbc&eo_wbc_view_auto_jewel=1"); ?>";
-							});
-						});
-					</script>
+					            jQuery("#create_product").on('click',function(e){
+					                console.log('preventDefault');
+					                e.preventDefault();
+					                e.stopPropagation();
+					                window.location.href = "<?php echo admin_url("admin.php?page=eowbc&eo_wbc_view_auto_jewel=1"); ?>";
+					            });
+					        });
+					    </script>
+
+					<?php
+					}else{
+					?>
+					    <script>
+					        jQuery(document).ready(function(){
+					            jQuery(".ui.dropdown").dropdown(),jQuery(".ui.checkbox").checkbox();
+					            jQuery('[name="eo_wbc_inventory_type"]').parent().dropdown('set selected','<?php echo get_option('eo_wbc_inventory_type',''); ?>');    
+
+					            jQuery("#create_product").on('click',function(e){
+					                e.preventDefault(),e.stopPropagation();
+					                window.location.href = "<?php echo admin_url("admin.php?page=eowbc&eo_wbc_view_auto_jewel=1"); ?>";
+					            });
+					        });
+					    </script>
+					    
+					<?php
+					}
+					?>
 	        	</body>
 	        </html>
         <?php

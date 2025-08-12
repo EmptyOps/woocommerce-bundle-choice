@@ -4,18 +4,31 @@
 *	Template to show breadcrumb first step for mobile
 */
 
+if(WBC_SCRIPT_DEBUG == ture){
+?>    
+    <style type="text/css">
+         .ui.container.unstackable.steps .step:after{
+            display: none !important;        
+         }
+
+        .ui.container.unstackable.steps .step{
+            padding: 2vw;        
+            text-align: center !important;
+        }
+
+    </style>
+
+<?php
+}else{
 ?>
- <style type="text/css">
-     .ui.container.unstackable.steps .step:after{
-        display: none !important;        
-     }
+    
+    <style type="text/css">
+        .ui.container.unstackable.steps .step:after{display:none!important}.ui.container.unstackable.steps .step{padding:2vw;text-align:center!important}
 
-    .ui.container.unstackable.steps .step{
-        padding: 2vw;        
-        text-align: center !important;
-    }
-
- </style>
+    </style>
+<?php
+}
+?>
  <div class="step <?php echo (($step==$order)?'active ':(($step>$order)?'completed ':(!empty(\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$clickable_breadcrumb)?'':'disabled') )); ?> first_mobile" >
     <div class="content eowbc_breadcrumb_font" <?php _e((!empty(\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$clickable_breadcrumb) and !empty(\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$first_url))?'data-clickable_breadcrumb="'./*\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$first_url*/wbc()->common->beautify_url_data(\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$first_url).'"':''); ?>><?php echo \eo\wbc\model\publics\component\EOWBC_Breadcrumb::$first_name; ?></div>                          
     <div class="ui flowing popup bottom right transition hidden first_mobile" style="width:80%;">
@@ -43,16 +56,30 @@
         </div>
     </div> 
 </div>
-<script>
-    jQuery(document).ready(function(){
-        if (typeof(jQuery.fn.popup)==='function') {
-            jQuery('.step.completed.first_mobile').popup({
-                popup : jQuery('.ui.popup.first_mobile'),
-                on    : 'click',
-                target   :jQuery('.step.completed.first_mobile').parent(),
-                position : 'bottom left',
-                inline: true
-            });
-        }
-    });
-</script>
+<?php
+if(WBC_SCRIPT_DEBUG == true){
+?>    
+    <script>
+        jQuery(document).ready(function(){
+            if (typeof(jQuery.fn.popup)==='function') {
+                jQuery('.step.completed.first_mobile').popup({
+                    popup : jQuery('.ui.popup.first_mobile'),
+                    on    : 'click',
+                    target   :jQuery('.step.completed.first_mobile').parent(),
+                    position : 'bottom left',
+                    inline: true
+                });
+            }
+        });
+    </script>
+
+<?php
+}else{
+?>
+   <script>
+        jQuery(document).ready((function(){"function"==typeof jQuery.fn.popup&&jQuery(".step.completed.first_mobile").popup({popup:jQuery(".ui.popup.first_mobile"),on:"click",target:jQuery(".step.completed.first_mobile").parent(),position:"bottom left",inline:!0})}));
+    </script> 
+    
+<?php
+}
+?>

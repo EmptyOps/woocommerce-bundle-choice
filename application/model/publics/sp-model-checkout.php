@@ -70,7 +70,8 @@ class SP_Model_Checkout extends SP_Checkout {
 			// wbc()->load->asset('js','fomantic/semantic.min',array('jquery'));
 			wbc()->load->built_in_asset('semantic');
 
-			wbc()->load->asset( 'asset.php', constant( 'EOWBC_ASSET_DIR' ).'variations.assets.php');
+			$file_suffix = (WBC_SCRIPT_DEBUG) ? '' : '.min';
+			wbc()->load->asset( 'asset.php', constant( 'EOWBC_ASSET_DIR' ).'variations.assets'.$file_suffix.'.php');
 		}, 1049);	
 
 	}

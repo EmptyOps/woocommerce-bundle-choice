@@ -2,10 +2,10 @@
 add_action( 'wp_enqueue_scripts' ,function(){
 
 	if (false and wbc_is_mobile()) {
-
-		wbc()->load->asset('css','variations/gallery_images/external-plugins/xzoom/xzoom',array(),"",false,true);
-
-		wbc()->load->asset('js','variations/gallery_images/external-plugins/xzoom/xzoom',array(),"",true,true);
+		$file_suffix = (WBC_SCRIPT_DEBUG) ? '' : '.min';
+		wbc()->load->asset('css','variations/gallery_images/external-plugins/xzoom/xzoom'.$file_suffix,array(),"",false,true);
+		$file_suffix = (WBC_SCRIPT_DEBUG) ? '' : '.min';
+		wbc()->load->asset('js','variations/gallery_images/external-plugins/xzoom/xzoom'.$file_suffix,array(),"",true,true);
 		?>
 		<script type="text/javascript">
 			jQuery,document.addEventListener("DOMContentLoaded",(function(){jQuery(".xzoom3, .xzoom-gallery3").xzoom({position:"lens",lensShape:"circle",sourceClass:"xzoom-hidden"}),jQuery(".xzoom-gallery3").on("click mouseenter mousemove mouseleave",(function(){jQuery(".xzoom-gallery3.xactive").removeClass("xactive"),jQuery(this).addClass("xactive")}))}));
@@ -27,77 +27,17 @@ add_action( 'wp_enqueue_scripts' ,function(){
 			    	return false;
 
 	            			        
-	            	setTimeout(function (argument) {
-	            		
-				        jQuery(".big-img").imagezoomsl({
-				            
-				            disablewheel: true,
-					        zoomstart: 3,
-					        zoomrange: [3,3],
-					        magnifiersize: [502, 502],
-					        cursorshadeborder: "1px solid black",
-					       
-					    });
-	            	},1000);
+	            	setTimeout((function(e){jQuery(".big-img").imagezoomsl({disablewheel:!0,zoomstart:3,zoomrange:[3,3],magnifiersize:[502,502],cursorshadeborder:"1px solid black"})}),1e3);
 
 			    };  
 
-			    var bind_listeners = function(){
-
-
-		            window.document.splugins.wbc.variations.gallery_images.sp_slzm.api.init_listener('imagezoomsl', function(event, stat_object, notification_response){
-
-		                
-		                zoom_init_function();
-
-		            });
-		            window.document.splugins.wbc.variations.gallery_images.sp_slzm.api.refresh_listener('imagezoomsl' ,function(event, stat_object, notification_response){
-
-
-		                zoom_init_function();
-
-		            });
-
-			    };
+			    var bind_listeners=function(){window.document.splugins.wbc.variations.gallery_images.sp_slzm.api.init_listener("imagezoomsl",(function(i,n,o){zoom_init_function()})),window.document.splugins.wbc.variations.gallery_images.sp_slzm.api.refresh_listener("imagezoomsl",(function(i,n,o){zoom_init_function()}))};
 
 		
 
-					if(typeof(jQuery.fn.imagezoomsl)!=='function'){
-						
-						
-						let script = document.createElement('script');
-						script.src = "<?php echo constant( strtoupper( 'EOWBC_ASSET_URL' ) ).'js/variations/gallery_images/external-plugins/zoomsl/zoomsl.min.js'; ?>";
-						document.head.append(script);
+					if("function"!=typeof jQuery.fn.imagezoomsl){let e=document.createElement("script");e.src="<?php echo constant( strtoupper( 'EOWBC_ASSET_URL' ) ).'js/variations/gallery_images/external-plugins/zoomsl/zoomsl.min.js'; ?>",document.head.append(e),window.setTimeout((function(){bind_listeners()}),1e3)}else window.setTimeout((function(){bind_listeners()}),1e3);
 
-				        window.setTimeout(function(){
-
-
-		       			    bind_listeners();
-
-				        },1000);	
-
-					} else {
-
-					    window.setTimeout(function(){
-
-
-		       			    bind_listeners();
-
-				        },1000);	
-					}
-
-		        window.addEventListener('error', function(e){
-
-
-			        window.setTimeout(function(){
-
-
-	       			    bind_listeners();
-
-			        },1000);	
-			     
-			    });
-
+		        window.addEventListener("error",(function(n){window.setTimeout((function(){bind_listeners()}),1e3)}));
 		    });
 		</script>
 

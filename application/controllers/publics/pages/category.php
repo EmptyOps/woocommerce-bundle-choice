@@ -293,7 +293,8 @@ class Category {
             },100);
 
             add_action('wp_head',function(){
-                ?>                
+                if(WBC_SCRIPT_DEBUG == ture){
+                ?>    
                     <style type="text/css">
                         .woocommerce-products-header__title page-title{
                             display: none;
@@ -317,8 +318,18 @@ class Category {
                         .products .ui.grid>[class*="five wide"].column{
                             margin-left: 0 !important;
                         }
-                    </style>                    
+                    </style>
+
                 <?php
+                }else{
+                ?>
+                    <style type="text/css">
+                        .tax-product_cat .thb-shop-title,.woocommerce-products-header__title page-title{display:none}#content,#main,#primary,.content,.main,.primary,.woocommerce .content-area{width:100%!important}.products,.woocommerce .widget-area{display:none!important}.ui.card>.image>img,.ui.cards>.card>.image>img{width:50%}.products .ui.grid>[class*="five wide"].column{margin-left:0!important}
+                    </style>
+
+                    
+                <?php
+                }
             });
 
             add_action('wp_footer',function(){

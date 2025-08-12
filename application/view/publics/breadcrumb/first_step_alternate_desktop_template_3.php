@@ -4,28 +4,41 @@
 *	Template to show breadcrumb first step for desktop
 */
 
+if(WBC_SCRIPT_DEBUG == ture){
+?>    
+    <style type="text/css">
+        .eo-wbc-container.container .ui.grid>* {
+             padding-left: 5px; 
+             padding-right: 0px !important;
+        }
+
+        .eo-wbc-container>.ui.steps .step .column.product_image_section img{
+            margin-left: 30% !important;
+        }
+
+        .eo-wbc-container>.ui.steps .step:after {
+            height: 3.5em !important;
+            width: 3.5em !important;
+        }
+
+        /*.eo-wbc-container.container .ui.steps {
+            border: 1px solid lightgray;
+            box-shadow: 2px 2px 0 #efefef;
+            padding: 4px;
+        }*/
+    </style>
+
+<?php
+}else{
 ?>
-<style type="text/css">
-    .eo-wbc-container.container .ui.grid>* {
-         padding-left: 5px; 
-         padding-right: 0px !important;
-    }
+    <style type="text/css">
+        .eo-wbc-container.container .ui.grid>*{padding-left:5px;padding-right:0!important}.eo-wbc-container>.ui.steps .step .column.product_image_section img{margin-left:30%!important}.eo-wbc-container>.ui.steps .step:after{height:3.5em!important;width:3.5em!important}
+    </style>
 
-    .eo-wbc-container>.ui.steps .step .column.product_image_section img{
-        margin-left: 30% !important;
-    }
-
-    .eo-wbc-container>.ui.steps .step:after {
-        height: 3.5em !important;
-        width: 3.5em !important;
-    }
-
-    /*.eo-wbc-container.container .ui.steps {
-        border: 1px solid lightgray;
-        box-shadow: 2px 2px 0 #efefef;
-        padding: 4px;
-    }*/
-</style>
+    
+<?php
+}
+?>
 <div class="step <?php echo (($step==$order)?'active ':(($step>$order)?'completed ':(!empty(\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$clickable_breadcrumb)?'':'disabled'))); ?>" style="" >            
     <div class="ui equal width grid" style="width: 100%;margin-top: -1em !important;">
         <div class="ui grid">

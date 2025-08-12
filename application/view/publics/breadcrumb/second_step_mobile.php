@@ -33,7 +33,10 @@
         </div>
     </div>                          
 </div>
-<script>
+<?php
+if(WBC_SCRIPT_DEBUG == true){
+?>    
+    <script>
     jQuery(document).ready(function(){
         if (typeof(jQuery.fn.popup)==='function') {
             jQuery('.step.completed.second_mobile').popup({
@@ -46,3 +49,14 @@
         }
     });
 </script>
+
+<?php
+}else{
+?>
+   <script>
+        jQuery(document).ready((function(){"function"==typeof jQuery.fn.popup&&jQuery(".step.completed.second_mobile").popup({popup:jQuery(".ui.popup.second_mobile"),on:"click",target:jQuery(".step.completed.second_mobile").parent(),position:"bottom left",inline:!0})}));
+    </script>
+    
+<?php
+}
+?>

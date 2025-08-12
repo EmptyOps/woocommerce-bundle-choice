@@ -54,10 +54,14 @@ if(function_exists('wc') && !empty(wc()->session)){
 // Load assets first to avoid zaping effect. 
 // TODO here should not load instantly and follow the wp standard by using hook as well as setting last param to false to our load asset function. 
 // add_action( 'wp_enqueue_scripts',function(){ 
-	wbc()->load->asset('css','fomantic/semantic.min', array(), "", true);
-	wbc()->load->asset('css','publics/buttons', array(), "", true);
-	wbc()->load->asset('js','fomantic/semantic.min', array(), "", true);
-	wbc()->load->asset('js','publics/buttons', array(), "", true);
+	$file_suffix = (WBC_SCRIPT_DEBUG) ? '' : '.min';
+	wbc()->load->asset('css','fomantic/semantic'.$file_suffix, array(), "", true);
+	$file_suffix = (WBC_SCRIPT_DEBUG) ? '' : '.min';
+	wbc()->load->asset('css','publics/buttons'.$file_suffix, array(), "", true);
+	$file_suffix = (WBC_SCRIPT_DEBUG) ? '' : '.min';
+	wbc()->load->asset('js','fomantic/semantic'.$file_suffix, array(), "", true);
+	$file_suffix = (WBC_SCRIPT_DEBUG) ? '' : '.min';
+	wbc()->load->asset('js','publics/buttons'.$file_suffix, array(), "", true);
 // },50);
 
 //moved from the home class of older version 
