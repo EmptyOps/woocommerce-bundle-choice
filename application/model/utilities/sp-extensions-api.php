@@ -323,7 +323,8 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 	    	// wbc_pr($saved_tab_key);
 	    	// wbc_pr('form_definition 78941');
 
-	    	if( ('save' == $mode || 'entry_save_process' == $mode)&& $key != $saved_tab_key ) {
+	    	// if( 'save' == $mode && $key != $saved_tab_key ) {
+	    	if( ('save' == $mode || 'entry_save_process' == $mode) && $key != $saved_tab_key ) {
 	    		continue;
 	    	}
 
@@ -344,6 +345,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 			    if( in_array($fv["type"], \eo\wbc\model\admin\Form_Builder::savable_types()) ) {
 
 			    	//skip fields where applicable
+			    	// if( 'save' == $mode && in_array($fk, $skip_fileds) ) {
 					if( ('save' == $mode || 'entry_save_process' == $mode) && in_array($fk, $skip_fileds) ) {
 		    			continue;
 		    		}
@@ -507,7 +509,8 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
     private static function inject_onclick_attr($mode, $form_definition, $section_property, $fv) {
 
-    	if( 'save' == $mode || 'entry_save_process' == $mode) {
+    	// if( 'save' == $mode ) {
+    	if( 'save' == $mode || 'entry_save_process' == $mode ) {
 
     		return $fv;
     	}
@@ -535,11 +538,13 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
     private static function section_should_make_call($mode, $form_definition, $section_property, $fk, $section_fields) {
 
+    	// if( 'get' == $mode ) {
     	if( 'get' == $mode && ( empty($section_property['type']) || 'default' == $section_property['type'] )) {
 
     		return true;
     	}
 
+    	// if( 'save' == $mode ) {
     	if( 'save' == $mode && ( empty($section_property['type']) || 'default' == $section_property['type'] )) {
 
 			foreach ($section_fields as $sfk => $sfv) {
@@ -660,6 +665,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
     	// --	hear we need to prepare the $res form $parsed by creating empty array and so on. -- to h & -- to pi 	done.
     	// $res = $parsed;
 
+    	// if( 'save' == $mode ) {
     	if( 'save' == $mode || 'entry_save_process' == $mode ) {
 
     		// --	from hear most probabely we need to return $res and it will be not prepared by should_return function most probabely. -- to h & -- to pi	done.
@@ -727,6 +733,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
     		return false;
     	}
 
+    	// if( 'save' == $mode ) {
     	if( 'save' == $mode || 'entry_save_process' == $mode ) {
 
     		return false;
@@ -744,7 +751,8 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
     		return false;
     	}
 
-    	if( ('save' == $mode || 'entry_save_process' == $mode) && ( isset($parsed['type']) && 'success' != $parsed['type'] ) ) {
+    	// if( 'save' == $mode && ( isset($parsed['type']) && 'success' != $parsed['type'] ) ) {
+    	if( ( 'save' == $mode || 'entry_save_process' == $mode ) && ( isset($parsed['type']) && 'success' != $parsed['type'] ) ) {
 
     		return false;
     	}

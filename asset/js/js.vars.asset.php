@@ -61,7 +61,9 @@ add_action( ( !is_admin() ? 'wp_enqueue_scripts' : 'admin_enqueue_scripts'),func
 
 		// window.document.splugins.common.ajax_url = '<?php echo admin_url('admin-ajax.php');?>';	
 		
-		window.document.splugins.common.is_pair_builder = <?php echo ((wbc()->sanitize->get('EO_WBC') == 1) ? "true" : "false");?>;	
+		window.document.splugins.common.is_pair_builder = <?php echo ((wbc()->sanitize->get('EO_WBC') == 1) ? "true" : "false");?>;
+
+		window.document.splugins.common.refresh_token = '<?php echo (empty(wbc_get_option()) ? '' : );?>';	
 
 	</script>
 <?php  

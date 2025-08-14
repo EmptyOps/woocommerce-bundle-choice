@@ -781,5 +781,39 @@ class Eowbc_Model {
     	return $tab_form;
     }
 
+    private static function inject_hidden_field($mode, $tab_form, $fk, $eas_rf) {
+
+    	// $style = null;
+
+    	// $type = $parsed['type'] != 'success' ? $parsed['type'] : $parsed['sub_type'];
+
+    	// $style .= $type == 'error' ? 'color: red;' : '';
+		// $style .= $type == 'warning' ? 'background-color: yellow;' : '';
+		// $style .= $type == 'success' ? 'color: green;' : '';
+
+    	// $visible_info = array(
+		// 		    		'label' => eowbc_lang($msg),
+		// 		    		'type' => 'visible_info',
+		// 		    		'class' => array('small'),
+		// 		    		// 'size_class'=>array('sixteen','wide'),
+		// 		    		'attr'=>array('style = "'.$style.'"'),
+	    // 				);
+    	// // wbc_pr($visible_info);
+    	$options = $tab_form[$fk]['options'];
+
+    	$basic_payload = json_encode($options);
+
+    	$basic_payload = base64_encode($basic_payload);
+
+    	$table_data = array(
+						'type'=>'hidden',
+						'easf' => $basic_payload
+					);
+
+    	$tab_form = wbc()->common->array_insert_before($tab_form, $fk, $fk.'_opts_hidden', $table_data, true);
+    	// wbc_pr($tab_form);
+    	return $tab_form;
+    }
+
 }
 
