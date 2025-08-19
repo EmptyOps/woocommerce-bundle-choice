@@ -407,7 +407,10 @@ class Eowbc_Model {
 
 		$temp[2] = $args['subtab_key'];
 
-		$temp[1] = $args['table_data'];
+		$temp[1] = $args['table_data']; 
+
+		// added on 19-08-2025 by hiren 
+		$temp['sp_frmb_saved_tab_key'] = !empty(wbc()->sanitize->post("saved_tab_key")) ? wbc()->sanitize->post("saved_tab_key") : "" ; 
 
 		$args = $temp;
 
