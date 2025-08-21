@@ -539,13 +539,13 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
     private static function section_should_make_call($mode, $form_definition, $section_property, $fk, $section_fields) {
 
     	// if( 'get' == $mode ) {
-    	if( 'get' == $mode && ( empty($section_property['type']) || 'default' == $section_property['type'] )) {
+    	if( 'get' == $mode && ( empty($section_property['type']) || 'default' == $section_property['type'] ) ) {
 
     		return true;
     	}
 
     	// if( 'save' == $mode ) {
-    	if( 'save' == $mode && ( empty($section_property['type']) || 'default' == $section_property['type'] )) {
+    	if( 'save' == $mode && ( empty($section_property['type']) || 'default' == $section_property['type'] ) ) {
 
 			foreach ($section_fields as $sfk => $sfv) {
 
