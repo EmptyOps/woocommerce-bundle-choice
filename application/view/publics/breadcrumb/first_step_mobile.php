@@ -4,7 +4,7 @@
 *	Template to show breadcrumb first step for mobile
 */
 
-if(WBC_SCRIPT_DEBUG == false){
+if(WBC_SCRIPT_DEBUG == true){
 ?>    
     <style type="text/css">
          .ui.container.unstackable.steps .step:after{
@@ -57,7 +57,7 @@ if(WBC_SCRIPT_DEBUG == false){
     </div> 
 </div>
 <?php
-if(WBC_SCRIPT_DEBUG == false){
+if(WBC_SCRIPT_DEBUG == true){
 ?>    
     <script>
         jQuery(document).ready(function(){

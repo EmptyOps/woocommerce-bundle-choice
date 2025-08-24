@@ -293,7 +293,7 @@ class Category {
             },100);
 
             add_action('wp_head',function(){
-                if(WBC_SCRIPT_DEBUG == false){
+                if(WBC_SCRIPT_DEBUG == true){
                 ?>    
                     <style type="text/css">
                         .woocommerce-products-header__title page-title{

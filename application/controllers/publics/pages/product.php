@@ -262,7 +262,7 @@ class Product extends \eo\wbc\system\core\publics\Eowbc_Base_Model_Publics {
         
         add_action('wp_head',function(){
             wp_dequeue_script('wc-add-to-cart-variation');
-            if(WBC_SCRIPT_DEBUG == false){
+            if(WBC_SCRIPT_DEBUG == true){
             ?>    
                 <style> body .wcp_preview_first_product_title, body .wcp_preview_second_product_title{font-size: 1.6rem;line-height: 2.4rem;white-space: nowrap;width: 24rem;overflow: hidden;text-overflow: ellipsis;float: left;} @media only screen and (max-width: 480px) { body .wcp_preview_first_product_title, body .wcp_preview_second_product_title { font-size: 1rem !important; line-height: 2rem !important; width: inherit !important; word-break: break-word; max-width: 20rem; } } @media only screen and (max-width: 320px) { body .wcp_preview_first_product_title, body .wcp_preview_second_product_title { font-size: 1rem !important; line-height: 2rem !important; width: inherit !important; word-break: break-word; max-width: 17rem; } }</style>
             <?php
@@ -275,7 +275,7 @@ class Product extends \eo\wbc\system\core\publics\Eowbc_Base_Model_Publics {
             ?>
             <style type="text/css">table.variations{display: none;}</style>
             <?php
-            if(WBC_SCRIPT_DEBUG == false){
+            if(WBC_SCRIPT_DEBUG == true){
             ?>    
                 <style type="text/css">
                     .variations_form .variations, #wbc_variation_toggle {
@@ -893,7 +893,7 @@ class Product extends \eo\wbc\system\core\publics\Eowbc_Base_Model_Publics {
             $product = wbc()->wc->eo_wbc_get_product($post->ID);
             if(!empty($product) and !is_wp_error($product) and  $product->is_in_stock()) {
 
-                if(WBC_SCRIPT_DEBUG == false){
+                if(WBC_SCRIPT_DEBUG == true){
                 ?>    
                     <script type="text/javascript">
                         jQuery(".single_add_to_cart_button.button.alt").ready(function(){

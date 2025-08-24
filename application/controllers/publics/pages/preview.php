@@ -69,7 +69,7 @@ class Preview extends \eo\wbc\system\core\publics\Eowbc_Base_Model_Publics {
     
        
         ob_start();  
-        if(WBC_SCRIPT_DEBUG == false){
+        if(WBC_SCRIPT_DEBUG == true){
         ?>    
             <style type="text/css">
                 .woocommerce .content-area ,#content,#primary,#main,.content,.primary,.main{

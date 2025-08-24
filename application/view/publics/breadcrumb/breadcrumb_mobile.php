@@ -29,7 +29,7 @@
     </div>
 </div>
 <?php
-if(WBC_SCRIPT_DEBUG == false){
+if(WBC_SCRIPT_DEBUG == true){
 ?>    
     <script>
         jQuery(document).ready(function(){ 

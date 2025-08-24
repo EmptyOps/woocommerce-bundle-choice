@@ -209,7 +209,7 @@ class EOWBC_Filter_Widget {
 			$active_color=wbc()->options->get_option('appearance_breadcrumb','breadcrumb_backcolor_active',$fg_color); //get_option('eo_wbc_active_breadcrumb_color',$fg_color);
 			//wp-head here....
 			echo "<?php
-					if(WBC_SCRIPT_DEBUG == false){
+					if(WBC_SCRIPT_DEBUG == true){
 					?>    
 					    <style>
 					        .ui.labeled.ticked.range.slider .labels{
@@ -450,7 +450,7 @@ class EOWBC_Filter_Widget {
 				}
 				?>
 				<?php
-				if(WBC_SCRIPT_DEBUG == false){
+				if(WBC_SCRIPT_DEBUG == true){
 				?>    
 				    <script type="text/javascript">
 
@@ -516,7 +516,7 @@ class EOWBC_Filter_Widget {
 				ob_start();
 				?>
 					<?php
-					if(WBC_SCRIPT_DEBUG == false){
+					if(WBC_SCRIPT_DEBUG == true){
 					?>    
 					    <style type="text/css">
 					        /*.ui.labeled.ticked.range.slider .label:first-child span{
@@ -587,7 +587,7 @@ class EOWBC_Filter_Widget {
 					}
 					?>
 					<?php
-					if(WBC_SCRIPT_DEBUG == false){
+					if(WBC_SCRIPT_DEBUG == true){
 					?>    
 					    <script>
 					        jQuery(document).ready(function(){
@@ -650,7 +650,7 @@ class EOWBC_Filter_Widget {
 				ob_start();
 				?>
 					<?php
-					if(WBC_SCRIPT_DEBUG == false){
+					if(WBC_SCRIPT_DEBUG == true){
 					?>    
 					    <style type="text/css">
 
@@ -740,7 +740,7 @@ class EOWBC_Filter_Widget {
 					}
 					?>
 					<?php
-					if(WBC_SCRIPT_DEBUG == false){
+					if(WBC_SCRIPT_DEBUG == true){
 					?>    
 					    <script type="text/javascript">
 					        jQuery(document).ready(function($){
@@ -786,7 +786,7 @@ class EOWBC_Filter_Widget {
 				ob_start();
 				?>
 					<?php
-					if(WBC_SCRIPT_DEBUG == false){
+					if(WBC_SCRIPT_DEBUG == true){
 					?>    
 					    <style type="text/css">
 
@@ -877,7 +877,7 @@ class EOWBC_Filter_Widget {
 				if(!wp_is_mobile()){
 					?>
 						<?php
-						if(WBC_SCRIPT_DEBUG == false){
+						if(WBC_SCRIPT_DEBUG == true){
 						?>    
 						    <style type="text/css">
 
@@ -974,7 +974,7 @@ class EOWBC_Filter_Widget {
 				ob_start();
 				?>
 					<?php
-					if(WBC_SCRIPT_DEBUG == false){
+					if(WBC_SCRIPT_DEBUG == true){
 					?>    
 					    <style type="text/css">
 
@@ -2386,7 +2386,7 @@ class EOWBC_Filter_Widget {
 		}
 		?>
 		<?php
-		if(WBC_SCRIPT_DEBUG == false){
+		if(WBC_SCRIPT_DEBUG == true){
 		?>    
 		    <script type="text/javascript">
 		        jQuery(document).ready(function(){  
@@ -2681,7 +2681,7 @@ class EOWBC_Filter_Widget {
 		endif;
 		?>					
 		<?php
-		if(WBC_SCRIPT_DEBUG == false){
+		if(WBC_SCRIPT_DEBUG == true){
 		?>    
 		    <script type="text/javascript">
 		        jQuery(document).ready(function($){
@@ -3339,7 +3339,7 @@ class EOWBC_Filter_Widget {
 		<div id="loading" style="z-index: -999; height: 100%; width: 100%; position: fixed; top: 0;<?php (wbc()->options->get_option('appearance_filters','appearance_filters_loader') OR apply_filters('eowbc_filter_widget_loader',false))?_e('display:none !important;'):'';?>"></div>
 		
 		<?php
-		if(WBC_SCRIPT_DEBUG == false){
+		if(WBC_SCRIPT_DEBUG == true){
 		?>    
 		    <script type="text/javascript">
 		        jQuery(document).ready(function(){

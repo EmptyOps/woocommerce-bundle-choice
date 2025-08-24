@@ -54,7 +54,7 @@ if(isset($_GET['FIRST']) and isset($_GET['SECOND'])) {
     if(wbc()->options->get_option('appearance_breadcrumb','showhide_icons','0')/*get_option('eo_wbc_show_hide_breadcrumb_icon','0')*/==='1'){
         $html.="<style>.eo-wbc-container>.ui.ordered.steps .step:before{content:''}</style>";
     } 
-    if (WBC_SCRIPT_DEBUG == false) {
+    if (WBC_SCRIPT_DEBUG == true) {
         $html .= '<script>
             jQuery(document).ready(function(){ 
                 jQuery(".onclick_redirect").on("click", function(){ 

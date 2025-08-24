@@ -5,7 +5,7 @@ if(/*wp_is_mobile()*/ wbc_is_mobile_by_page_sections('cat_shop_page',true)) {
 	<div class="content"></div>
 	</div>
 	<?php
-	if(WBC_SCRIPT_DEBUG == false){
+	if(WBC_SCRIPT_DEBUG == true){
 	?>    
 	    <script type="text/javascript">
 	        jQuery(document).ready(function(){

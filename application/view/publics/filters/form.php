@@ -214,7 +214,7 @@ if(empty($_per_page)){
 	<br/><br/>
 	<?php if(apply_filters('eowbc_enque_filter_js',call_user_func('__return_true'))): ?>
 	<?php
-	if(WBC_SCRIPT_DEBUG == false){
+	if(WBC_SCRIPT_DEBUG == true){
 	?>    
 	    <script type="text/javascript">     
 

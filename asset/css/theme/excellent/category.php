@@ -1,5 +1,5 @@
 <?php
-if(WBC_SCRIPT_DEBUG == false){
+if(WBC_SCRIPT_DEBUG == true){
 ?>    
     <style type="text/css">
         #primary{

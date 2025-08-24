@@ -46,7 +46,7 @@ if( true or in_array( wbc()->common->get_category('category',null,array(wbc()->o
         <?php  /*_e($second_tab_label);*/ ?> 
       	</a>-->
       	<?php
-        if(WBC_SCRIPT_DEBUG == false){
+        if(WBC_SCRIPT_DEBUG == true){
         ?>    
             <script type="text/javascript">
                 // --- aa code woo-bundle-choice/asset/js/publics/03_06__eo_wbc_filter.js filter_set_click() ma move karyo se @a ---
@@ -158,7 +158,7 @@ if( true or in_array( wbc()->common->get_category('category',null,array(wbc()->o
             
         <?php
         }
-        if(WBC_SCRIPT_DEBUG == false){
+        if(WBC_SCRIPT_DEBUG == true){
         ?>    
             <style>
             .tax-product_cat .eo-wbc-container.filters .ui.menu {
