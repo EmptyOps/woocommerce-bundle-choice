@@ -407,6 +407,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 							if( self::should_handle_response($mode, $parsed) ) {
 
 								// die('inside should_handle_response if');
+								// \eo\wbc\system\core\publics\Eowbc_Base_Model_Publics::handle_response($parsed, array());	
 								\eo\wbc\system\core\publics\Eowbc_Base_Model_Publics::handle_response($parsed, array(), array($args['hook_callback_args'][2]));		
 							}
 							// die('inside should_handle_response if 123114');
@@ -620,7 +621,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
 		if( 'entry_save_process' == $mode  ) {
 
-			if( isset($args[0] && $args[0] == $sfk) ) {
+			if( isset($args[0]) && $args[0] == $sfk ) {
 
 				$basic_payload = json_encode($args[1]);
 

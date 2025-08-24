@@ -403,6 +403,7 @@ class Eowbc_Model {
 
 		$temp = array();
 
+		// $temp[0] = 'eacs_st_edata';
 		$temp[0] = 'eacs_st_edata_'.$args['subtab_key']; 
 
 		$temp[2] = $args['subtab_key'];
