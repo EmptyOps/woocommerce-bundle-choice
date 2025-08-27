@@ -73,9 +73,11 @@ if(!class_exists('WBC_Loader')) {
 					// add_action( 'wp_enqueue_scripts',function() { 
 			        	
 			            wp_register_style('fomantic-semantic.min',constant('EOWBC_ASSET_URL').'css/fomantic/semantic.min.css');
-			            wp_enqueue_style( 'fomantic-semantic.min');
-			            wp_register_script('fomantic-semantic.min',constant('EOWBC_ASSET_URL').'js/fomantic/semantic.min.js',array('jquery'),false);    
-			            wp_enqueue_script( 'fomantic-semantic.min');        
+			            $file_suffix = (WBC_SCRIPT_DEBUG) ? '' : '.min';
+			            wp_enqueue_style( 'fomantic-semantic'.$file_suffix);
+			            wp_register_script('fomantic-semantic.min',constant('EOWBC_ASSET_URL').'js/fomantic/semantic.min.js',array('jquery'),false);  
+			            $file_suffix = (WBC_SCRIPT_DEBUG) ? '' : '.min';  
+			            wp_enqueue_script( 'fomantic-semantic'.$file_suffix);        
 		       		// },100);	
 					break;
 
@@ -107,7 +109,8 @@ if(!class_exists('WBC_Loader')) {
 		        	add_action( 'wp_enqueue_scripts', function() {
 
 		        	    // Enqueue the external script wc_price.js
-		        	    wp_enqueue_script( 'wc-price-js', constant( 'EOWBC_ASSET_URL' ) . 'js/woocommerce-price/wc_price.js', array( 'jquery' ), '1.0', false );
+		        	    $file_suffix = (WBC_SCRIPT_DEBUG) ? '' : '.min';
+		        	    wp_enqueue_script( 'wc-price-js', constant( 'EOWBC_ASSET_URL' ) . 'js/woocommerce-price/wc_price'.$file_suffix.'.js', array( 'jquery' ), '1.0', false );
 
 		        	    // Prepare WooCommerce settings to pass to JavaScript
 		        	    $wc_store_object = array(
