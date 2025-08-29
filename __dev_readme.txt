@@ -12,7 +12,7 @@ License URI: http://www.gnu.org/licenses/gpl-3.0.html
 Product bundling as ring builder for jewelry, pair maker for clothing and guidance tool for home decor, cosmetics etc.
 
 == Description ==
-WooCommerce Product Bundle Choice – also known as WBC -- helps you to create exciting functionalities and experience on your website with the help of any one of the following modules:
+BUNDLOICE (formerly Woo Choice Plugin) – also known as WBC -- helps you to create exciting functionalities and experience on your website with the help of any one of the following modules:
 
 1. Ring Builder
 2. Pair Maker
@@ -135,7 +135,7 @@ If you are interested in our plugin, click [here](https://www.woo-product-bundle
 
 = Compatibility with other plugins/Officially tested plugins =
 
-We have tested WooCommerce Product Bundle Choice with Wordpress 3.5 to 5.4 and WooCommerce 2.0 to 4.0.1 and our plugin is technically compatible with all the other plugins.
+We have tested BUNDLOICE (formerly Woo Choice Plugin) with Wordpress 3.5 to 5.4 and WooCommerce 2.0 to 4.0.1 and our plugin is technically compatible with all the other plugins.
 
 = Live Demo  =
 Now that you know how this plugin works, is there any reason to not use it? Do you want to see the live demo?
@@ -147,11 +147,11 @@ Below you can check demos for different inventories:
 
 = Documentation =
 
-* WooCommerce Product Bundle Choice full documentation is available [here](https://www.woo-product-bundle.sphere.emptyops.com/documentation-2/).
+* BUNDLOICE (formerly Woo Choice Plugin) full documentation is available [here](https://www.woo-product-bundle.sphere.emptyops.com/documentation-2/).
 
 = FOR SUPPORT, SUGGESTIONS, FEATURE REQUEST AND BUG REPORTING =
 
-If you have suggestions about how to improve WooCommerce Product Bundle Choice, you can write to us, so we can enhance our WooCommerce Product Bundle Choice plugin.
+If you have suggestions about how to improve BUNDLOICE (formerly Woo Choice Plugin), you can write to us, so we can enhance our BUNDLOICE (formerly Woo Choice Plugin) plugin.
 
 == Installation ==
 **1. Installation** 
@@ -193,7 +193,7 @@ This plugin will be useful for selling any physical items like electronics, clot
 Yes, it is compatible with all themes but if it doesn't you can report a bug here.
 
 = How this product bundling is different than other product bundling? =
-In other plugins the user can only select bundles created by admin so he has no choice, while in WooCommerce Product Bundle Choice, the user can make his own bundle of two or more products of his choice.
+In other plugins the user can only select bundles created by admin so he has no choice, while in BUNDLOICE (formerly Woo Choice Plugin), the user can make his own bundle of two or more products of his choice.
 
 = How to add shortcode in sidebar or anywhere? =
 Please follow our instruction
@@ -215,7 +215,7 @@ Yes, it is.
 == Screenshots ==
 1. On home page, widget set using placement option.
 2. On category page, widget set using short code option. 
-3. Configure Woocommerce Bundle Choice Plugin by selecting two main product category.
+3. Configure BUNDLOICE (formerly Woo Choice Plugin) Plugin by selecting two main product category.
 4. Creating a map is the process of binding links between product sub-categories, which will eventually let user combine products based on these category mappings.
 5. Home page after plugin fully configured.
 

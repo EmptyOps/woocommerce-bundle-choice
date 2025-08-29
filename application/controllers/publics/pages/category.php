@@ -312,7 +312,7 @@ class Category {
             add_action( 'woocommerce_no_products_found', function(){
 
                 remove_action( 'woocommerce_no_products_found', 'wc_no_products_found', 10 );
-                //$html='<!-- Created with Wordpress plugin - WooCommerce Product bundle choice --><br/><br/>';
+                //$html='<!-- Created with Wordpress plugin - BUNDLOICE (formerly Woo Choice Plugin) --><br/><br/>';
                 // $html.='<div class="woocommerce ui grid centered">';
                 //     $html.='<div class="ui row" style="height:max-content;">';                    
                 //         $html.="<div class='ui grid centered'>";
@@ -326,8 +326,7 @@ class Category {
                 //                 // TODO here isn't it better if i's simple javascript back in history - hiren                         
                 //                 $html.='<button href="'.$this->eo_wbc_prev_url().'" class="ui inverted secondary single_add_to_cart_button button alt">'./*echo*/ __('Go back', 'woo-bundle-choice').'</button>&nbsp;&nbsp;';
                 //                 $html.='<button href="'.((empty(wbc()->sanitize->get('FIRST')) XOR empty(wbc()->sanitize->get('SECOND')))?strtok(get_permalink((empty(wbc()->sanitize->get('FIRST'))?wbc()->sanitize->get('SECOND'):wbc()->sanitize->get('FIRST'))),'?'):'').'" class="ui grey button single_add_to_cart_button alt">'. /*echo*/ __('Continue buying single item', 'woo-bundle-choice').'</button>&nbsp;&nbsp;';
-                //             $html.="</div>";    
-                                                        
+                //             $html.="</div>";                                                            
                 //             if(current_user_can('manage_options')){
                 //                 //Manage the mapping section
                 //                 $html.="<div class='ui row' style='padding-bottom:0rem !important'>";

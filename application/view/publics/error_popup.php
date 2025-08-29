@@ -36,17 +36,8 @@ wbc()->load->add_inline_script('', $inline_script, 'common');
   wbc()->load->asset('js','publics/buttons', array(), "", true);
   wp_enqueue_script('jquery-ui-core');
 // },50);
-if (false) {
-?>
-    <script type="text/javascript">
-      if( typeof(jQuery.fn.ui_accordion) === 'function' ) {
-        jQuery.fn.accordion = jQuery.fn.ui_accordion;
-        jQuery.fn.modal = jQuery.fn.ui_modal;
-        jQuery.fn.slider = jQuery.fn.ui_slider;
-      }
-    </script>
-<?php
-}
+
+// NOTE:From here, we have removed the original code inside the if (false) block. So, whenever there is a need to view the original or any other code for readability purposes, simply take the script below, put it in a new .js file in Sublime Text, and view it in readable format.Apart from that, we had removed the original code, and in some scenarios, that original code might have contained PHP variables like XYZ. Those would have been removed as well.And of course, even if the removed code from the if (false) block is not relevant to the current version, it might be required during future milestone tasks, so for this purpose, refer to the branch named "ui_QCed_ashish_-2" and check the commit dated 07-04-2025 for looking at the original code
 $inline_script =
     "if (typeof(jQuery.fn.ui_accordion) === 'function') {\n" .
     "    jQuery.fn.accordion = jQuery.fn.ui_accordion;\n" .
@@ -56,8 +47,7 @@ $inline_script =
 
 wbc()->load->add_inline_script('', $inline_script, 'common');
 ?>
-
-<!-- Created with Wordpress plugin - WooCommerce Product bundle choice -->
+<!-- Created with Wordpress plugin - BUNDLOICE (formerly Woo Choice Plugin) -->
 <div class="ui modal align center tiny centered">
 <div class="ui header">              
   <h4>There is an error on <strong><?php echo esc_html(constant('EOWBC_NAME')); ?></strong></h4>

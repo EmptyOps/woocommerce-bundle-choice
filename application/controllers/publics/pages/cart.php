@@ -396,7 +396,7 @@ class Cart extends \eo\wbc\system\core\publics\Eowbc_Base_Model_Publics {
         /*add_action('woocommerce_before_cart_contents',function(){
             $this->eo_wbc_cart_service();
             ?>
-                <!-- Created with Wordpress plugin - WooCommerce Product bundle choice -->
+                <!-- Created with Wordpress plugin - BUNDLOICE (formerly Woo Choice Plugin) -->
                 <style>
                     tr.cart_item
                     {

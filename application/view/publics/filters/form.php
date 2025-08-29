@@ -132,8 +132,8 @@ if(empty($_per_page)){
 
 ?>	
 		
-	<!-- Created with Wordpress plugin - WooCommerce Product bundle choice -->
-	<!--WooCommerce Product Bundle Choice filter form-->
+	<!-- Created with Wordpress plugin - BUNDLOICE (formerly Woo Choice Plugin) -->
+	<!--BUNDLOICE (formerly Woo Choice Plugin) filter form-->
 
 	<form method="GET" name="<?php echo esc_attr($filter_ui->filter_prefix); ?>eo_wbc_filter" id="<?php echo esc_attr($filter_ui->filter_prefix); ?>eo_wbc_filter" style="clear: both;">
 	    <?php do_action('eowbc_pre_filter_form'); ?>

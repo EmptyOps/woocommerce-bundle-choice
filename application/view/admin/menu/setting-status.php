@@ -17,7 +17,7 @@ if(isset($_GET) && isset($_GET['action']) && wbc()->sanitize->get('action')=='cl
 // 	add_action('admin_notices',function (){
 // 		/* translators: %1s: <strong> tag */
 // 		/* translators: %2s: </strong> tag */                
-//         echo "<div class='notice notice-success is-dismissible'><p>".sprintf(__( '%1$s Woo Bundle Choice %2$s have successfully submited error report, Sphere Plugins team will soon get in touch with you.', "woo-bundle-choice" ),"<strong>","</strong>")."</p></div>";
+//         echo "<div class='notice notice-success is-dismissible'><p>".sprintf(__( '%1$s BUNDLOICE (formerly Woo Choice Plugin) %2$s have successfully submited error report, Sphere Plugins team will soon get in touch with you.', "woo-bundle-choice" ),"<strong>","</strong>")."</p></div>";
 //     },15);
 // }
 

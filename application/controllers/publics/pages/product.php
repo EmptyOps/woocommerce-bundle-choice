@@ -650,6 +650,7 @@ class Product extends \eo\wbc\system\core\publics\Eowbc_Base_Model_Publics {
                     "    jQuery('form.cart').prepend(\"<input type='hidden' name='eo_wbc_target' value='".$page_category."'/><input type='hidden' name='eo_wbc_product_id' value='".$post_ID."'/>\");\n" .
                     "});\n";
                 wbc()->load->add_inline_script('', $inline_script, 'sp-wbc-common-footer');
+
             });
         }       
     }
@@ -786,75 +787,75 @@ class Product extends \eo\wbc\system\core\publics\Eowbc_Base_Model_Publics {
             $product = wbc()->wc->eo_wbc_get_product($post->ID);
             if(!empty($product) and !is_wp_error($product) and  $product->is_in_stock()) {
 
+                $page_category = $this->page_category;
+                $post_ID = $post->ID;
+                $appearance_product_page_product_page_add_to_basket = false;
+                if(!empty(wbc()->options->get_option('appearance_product_page','product_page_add_to_basket',''))){
+
+                    $appearance_product_page_product_page_add_to_basket = true;
+                }
+
+                $step = wbc()->sanitize->get('STEP');
+
+                $is_product_under_category_2_is_product_under_category = false;
+                if( $step == 2 && wbc()->common->is_product_under_category($product,wbc()->options->get_option('configuration','second_name')) && $product->is_type( 'variable' ) ) {
+
+                    $is_product_under_category_2_is_product_under_category = true;
+                }
+
+                $__btn_text = esc_html($btn_text);
+                $__appearance_product_page = esc_html(wbc()->options->get_option('appearance_product_page','product_page_add_to_basket','')); 
+
+                // NOTE:From here, we have removed the original code inside the if (false) block. So, whenever there is a need to view the original or any other code for readability purposes, simply take the script below, put it in a new .js file in Sublime Text, and view it in readable format.Apart from that, we had removed the original code, and in some scenarios, that original code might have contained PHP variables like XYZ. Those would have been removed as well.And of course, even if the removed code from the if (false) block is not relevant to the current version, it might be required during future milestone tasks, so for this purpose, refer to the branch named "ui_QCed_ashish_-2" and check the commit dated 07-04-2025 for looking at the original code.
+                $inline_script =
+                    "jQuery(\".single_add_to_cart_button.button.alt\").ready(function(){\n" .
+                    "    jQuery('form.cart').prepend(\"<input type='hidden' name='eo_wbc_target' value='".$page_category."'/><input type='hidden' name='eo_wbc_product_id' value='".$post_ID."'/>\");\n" .
+                    "\n" .
+                    " ".
+                        (
+                            $appearance_product_page_product_page_add_to_basket == true
+                            ?
+                                "window.wbc_atb_submin_form = function(){\n" .
+                                "jQuery('form.cart').attr('action',document.location.href);\n" .
+                                "jQuery('form.cart').submit();\n" .
+                                "        }\n" .
+                                "\n" .
+                                "        jQuery(\".single_add_to_cart_button.alt:not(.disabled):eq(0)\").replaceWith('<div class=\\\"ui buttons\\\">'+\n" .
+                                "                '<div class=\\\"ui button\\\" href=\\\"#\\\" id=\\\"eo_wbc_add_to_cart\\\">".$__btn_text."</div>'+\n" .
+                                "                    '<div class=\\\"ui floating dropdown icon button\\\" style=\\\"width: fit-content;min-width: unset; max-width: unset;\\\">'+\n" .
+                                "                        '<i class=\\\"dropdown icon\\\"></i>'+\n" .
+                                "                        '<div class=\\\"menu\\\">'+\n" .
+                                "                            '<div class=\\\"item\\\" onClick=\\\"window.wbc_atb_submin_form();\\\">".$__appearance_product_page."</div>'+                                    \n" .
+                                "                        '</div>'+\n" .
+                                "                    '</div>'+\n" .
+                                "                '</div>'+\n" .
+                                "            '</div>');\n" .
+                                "        jQuery(\".dropdown\").dropdown();\n" .
+                                "\n"
+                            :
+                                "        jQuery(\".single_add_to_cart_button.button.alt:not(.disabled):eq(0)\").replaceWith(\n" .
+                                "         \"<button href='#' id='eo_wbc_add_to_cart' class='single_add_to_cart_button button alt'>\"\n" .
+                                "         +\"".$__btn_text."\"\n" .
+                                "         +\"</button>\"\n" .
+                                "        );\n"
+
+                        ).
+                    "}); ".
+                        (
+                            $is_product_under_category_2_is_product_under_category == true
+                            ?
+                            "         //  define namespaces \n" .
+                            "        window.document.splugins = window.document.splugins || {};\n" .
+                            "        window.document.splugins.common = window.document.splugins.common || {};\n" .
+                            "        \n" .
+                            "        window.document.splugins.common.is_handle_variation_id_pair_builder_step_2 = true;\n"
+                            :
+                            ""
+                        ) .
+                    "\n";
+                wbc()->load->add_inline_script('', $inline_script, 'sp-wbc-common-footer');
+
             }
-            $page_category = $this->page_category;
-            $post_ID = $post->ID;
-            $appearance_product_page_product_page_add_to_basket = false;
-            if(!empty(wbc()->options->get_option('appearance_product_page','product_page_add_to_basket',''))){
-
-                $appearance_product_page_product_page_add_to_basket = true;
-            }
-
-            $step = wbc()->sanitize->get('STEP');
-
-            $is_product_under_category_2_is_product_under_category = false;
-            if( $step == 2 && wbc()->common->is_product_under_category($product,wbc()->options->get_option('configuration','second_name')) && $product->is_type( 'variable' ) ) {
-
-                $is_product_under_category_2_is_product_under_category = true;
-            }
-
-            $__btn_text = esc_html($btn_text);
-            $__appearance_product_page = esc_html(wbc()->options->get_option('appearance_product_page','product_page_add_to_basket','')); 
-
-            // NOTE:From here, we have removed the original code inside the if (false) block. So, whenever there is a need to view the original or any other code for readability purposes, simply take the script below, put it in a new .js file in Sublime Text, and view it in readable format.Apart from that, we had removed the original code, and in some scenarios, that original code might have contained PHP variables like XYZ. Those would have been removed as well.And of course, even if the removed code from the if (false) block is not relevant to the current version, it might be required during future milestone tasks, so for this purpose, refer to the branch named "ui_QCed_ashish_-2" and check the commit dated 07-04-2025 for looking at the original code.
-            $inline_script =
-                "jQuery(\".single_add_to_cart_button.button.alt\").ready(function(){\n" .
-                "    jQuery('form.cart').prepend(\"<input type='hidden' name='eo_wbc_target' value='".$page_category."'/><input type='hidden' name='eo_wbc_product_id' value='".$post_ID."'/>\");\n" .
-                "\n" .
-                " ".
-                    (
-                        $appearance_product_page_product_page_add_to_basket == true
-                        ?
-                            "window.wbc_atb_submin_form = function(){\n" .
-                            "jQuery('form.cart').attr('action',document.location.href);\n" .
-                            "jQuery('form.cart').submit();\n" .
-                            "        }\n" .
-                            "\n" .
-                            "        jQuery(\".single_add_to_cart_button.alt:not(.disabled):eq(0)\").replaceWith('<div class=\\\"ui buttons\\\">'+\n" .
-                            "                '<div class=\\\"ui button\\\" href=\\\"#\\\" id=\\\"eo_wbc_add_to_cart\\\">".$__btn_text."</div>'+\n" .
-                            "                    '<div class=\\\"ui floating dropdown icon button\\\" style=\\\"width: fit-content;min-width: unset; max-width: unset;\\\">'+\n" .
-                            "                        '<i class=\\\"dropdown icon\\\"></i>'+\n" .
-                            "                        '<div class=\\\"menu\\\">'+\n" .
-                            "                            '<div class=\\\"item\\\" onClick=\\\"window.wbc_atb_submin_form();\\\">".$__appearance_product_page."</div>'+                                    \n" .
-                            "                        '</div>'+\n" .
-                            "                    '</div>'+\n" .
-                            "                '</div>'+\n" .
-                            "            '</div>');\n" .
-                            "        jQuery(\".dropdown\").dropdown();\n" .
-                            "\n"
-                        :
-                            "        jQuery(\".single_add_to_cart_button.button.alt:not(.disabled):eq(0)\").replaceWith(\n" .
-                            "         \"<button href='#' id='eo_wbc_add_to_cart' class='single_add_to_cart_button button alt'>\"\n" .
-                            "         +\"".$__btn_text."\"\n" .
-                            "         +\"</button>\"\n" .
-                            "        );\n"
-
-                    ).
-                "}); ".
-                    (
-                        $is_product_under_category_2_is_product_under_category == true
-                        ?
-                        "         //  define namespaces \n" .
-                        "        window.document.splugins = window.document.splugins || {};\n" .
-                        "        window.document.splugins.common = window.document.splugins.common || {};\n" .
-                        "        \n" .
-                        "        window.document.splugins.common.is_handle_variation_id_pair_builder_step_2 = true;\n"
-                        :
-                        ""
-                    ) .
-                "\n";
-            wbc()->load->add_inline_script('', $inline_script, 'sp-wbc-common-footer');
-
             global $post;            
             $product = wbc()->wc->eo_wbc_get_product($post->ID);
             if( $product->is_type('variable') and !empty($product->get_default_attributes())) {

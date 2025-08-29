@@ -3,11 +3,7 @@
 /*
 *	Template to show category page
 */
-
-?>  
-<!-- Created with Wordpress plugin - WooCommerce Product bundle choice -->
-<?php
-
+<!-- Created with Wordpress plugin - BUNDLOICE (formerly Woo Choice Plugin) -->
     //NOTE:From here, we have removed the original code inside the if (false) block.So, whenever there is a need to view the original or any other code for readability purposes, simply take the css below, put it in a new .css file in Sublime Text,and view it in readable format.Apart from that, we had removed the original code, and in some scenarios,that original code might have contained PHP variables like XYZ. Those would have been removed as well. And of course, even if the removed code from the if (false) block is not relevant to the current version,it might be required during future milestone tasks, so for this purpose,refer to the branch named "ui_QCed_ashish_-2" and check the commit dated 07-04-2025 for looking at the original code.
     $custom_css = "
         .cat_products{
@@ -121,7 +117,7 @@
                     if(!empty($prev_product && $curr_product)) {
                         //create a card layout within containers
                         ?>         
-                        <!-- Created with Wordpress plugin - WooCommerce Product bundle choice -->                             
+                        <!-- Created with Wordpress plugin - BUNDLOICE (formerly Woo Choice Plugin) -->                             
                         <div class="cat_products five wide column">
                             <?php if( (wbc()->options->get_option('configuration','pair_maker_upper_card',1)/*get_option('eo_wbc_pair_upper_card',1)*/==1 && $category_object->eo_wbc_get_category()==wbc()->options->get_option('configuration','first_slug')/*get_option('eo_wbc_first_slug')*/) OR (wbc()->options->get_option('configuration','pair_maker_upper_card',1)/*get_option('eo_wbc_pair_upper_card',1)*/==2 && $category_object->eo_wbc_get_category()==wbc()->options->get_option('configuration','second_slug')/*get_option('eo_wbc_second_slug')*/)): ?>  
                                 <div class="ui special cards centered">
@@ -202,7 +198,7 @@
                                 </div>                                                   
                             <?php endif;?>
                         </div>
-                        <!-- Created with Wordpress plugin - WooCommerce Product bundle choice -->
+                        <!-- Created with Wordpress plugin - BUNDLOICE (formerly Woo Choice Plugin) -->
                         <?php
                     }
                 }
@@ -211,7 +207,7 @@
     ?>                              
     </div>
 </div>
-<!-- Created with Wordpress plugin - WooCommerce Product bundle choice -->
+<!-- Created with Wordpress plugin - BUNDLOICE (formerly Woo Choice Plugin) -->
 <?php
 // NOTE:From here, we have removed the original code inside the if (false) block. So, whenever there is a need to view the original or any other code for readability purposes, simply take the script below, put it in a new .js file in Sublime Text, and view it in readable format.Apart from that, we had removed the original code, and in some scenarios, that original code might have contained PHP variables like XYZ. Those would have been removed as well.And of course, even if the removed code from the if (false) block is not relevant to the current version, it might be required during future milestone tasks, so for this purpose, refer to the branch named "ui_QCed_ashish_-2" and check the commit dated 07-04-2025 for looking at the original code.
 $inline_script = 
@@ -258,4 +254,4 @@ wbc()->load->add_inline_style('', $custom_css,'common');
 
 
 
-<!-- Created with Wordpress plugin - WooCommerce Product bundle choice -->        
+<!-- Created with Wordpress plugin - BUNDLOICE (formerly Woo Choice Plugin) -->        

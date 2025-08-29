@@ -152,7 +152,7 @@ class Checkout {
             
         //Add cutomization on load....
        /* add_action('wp_footer',function(){
-            echo "<!-- Created with Wordpress plugin - WooCommerce Product bundle choice --><script>
+            echo "<!-- Created with Wordpress plugin - BUNDLOICE (formerly Woo Choice Plugin) --><script>
                 jQuery(document).ready(function(){
                     jQuery('.cart_item').remove();
                     jQuery('table.shop_table>tbody').append('".$this->eo_wbc_render()."');
@@ -193,7 +193,7 @@ class Checkout {
             }
 
             $price=0;            
-            $html="<!-- Created with Wordpress plugin - WooCommerce Product bundle choice --><tr><td><div><strong>".
+            $html="<!-- Created with Wordpress plugin - BUNDLOICE (formerly Woo Choice Plugin) --><tr><td><div><strong>".
                 __(wbc()->wc->eo_wbc_get_product($map['FIRST'][0])->get_title().($map['FIRST'][2]  ? "&nbsp; -&nbsp;".esc_html(implode(',',wbc()->wc->eo_wbc_get_product_variation_attributes($map['FIRST'][2],$map['FIRST']['variation']))):''))."</strong>&nbsp;X&nbsp;{$map["FIRST"][1]}</div>";
 
                 $product=wbc()->wc->eo_wbc_get_product($map['FIRST'][2]?$map['FIRST'][2]:$map['FIRST'][0]);

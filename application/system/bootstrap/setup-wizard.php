@@ -75,7 +75,7 @@ class Setup_Wizard {
 
 		$position = empty($menu['position'])?66:$menu['position'];
 
-		// add_menu_page( eowbc_lang('Woo Choice Plugin Setup'),eowbc_lang('Woo Choice Plugin Setup'),'manage_options','eo-wbc-init',$callback,$this->get_icon_url(),$position );   
+		// add_menu_page( eowbc_lang('BUNDLOICE (formerly Woo Choice Plugin) Setup'),eowbc_lang('Woo Choice Plugin Setup'),'manage_options','eo-wbc-init',$callback,$this->get_icon_url(),$position );   
 
 		return true;
 	}
@@ -223,7 +223,7 @@ class Setup_Wizard {
 		        <head>
 		            <meta name="viewport" content="width=device-width" />
 		            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		            <title><?php esc_html_e( 'WooCommerce Product Bundle Choice &rsaquo; Setup Wizard', 'woocommerce' ); ?></title>
+		            <title><?php esc_html_e( 'BUNDLOICE (formerly Woo Choice Plugin) &rsaquo; Setup Wizard', 'woocommerce' ); ?></title>
 		            <!-- ACTIVE_TODO_OC_START
     				-- Now load this jquery library from this path or URL 
 					  	-- so let's simply enqueue it when than enqueue example is ready -- to h && -- to bk
@@ -247,7 +247,7 @@ class Setup_Wizard {
        					<div class="ui icon header" style="width: 100%;">
 				            <img src="<?php echo esc_url(constant('EO_WBC_PLUGIN_ICO_BIG')); ?>" style="max-width: 100; max-height: auto;"/>
 				            <br/>
-				            <p>WooCommerce Product Bundle Choice</p>
+				            <p>BUNDLOICE (formerly Woo Choice Plugin)</p>
 			           	    <hr/>
 				        </div>
 				        <?php $this->navigation(); ?>
@@ -256,7 +256,6 @@ class Setup_Wizard {
 				            <input type="hidden" name="page" value="<?php echo 'eowbc'; ?>"/>
 				            <input type="hidden" name="wbc_setup" value="<?php echo '1'; ?>"/>
 				            <input type="hidden" name="step" value="<?php echo esc_attr($this->step + 1); ?>">
-
 		<?php
 	} 
 

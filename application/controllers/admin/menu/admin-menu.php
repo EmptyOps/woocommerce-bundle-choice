@@ -22,7 +22,7 @@ if ( ! class_exists( 'Admin_Menu' ) ) {
 		public function get_menu(){
 			$menu = array(
 				'title'=>eowbc_lang('Home').' - '.constant('EOWBC_NAME'),
-				'menu_title'=>constant('EOWBC_NAME'),	//eowbc_lang('WooCommerce Bundle Choice'),
+				'menu_title'=>constant('EOWBC_NAME'),	//eowbc_lang('BUNDLOICE (formerly Woo Choice Plugin)'),
 				'capability'=>'manage_options',
 				'slug'=>'eowbc',
 				'template'=>'admin/menu/home',
@@ -34,8 +34,8 @@ if ( ! class_exists( 'Admin_Menu' ) ) {
 
 						array(
 							'parent_slug'=>null,
-							'title'=>eowbc_lang('Setup').' '.constant('EOWBC_NAME'),	//eowbc_lang('Setup WooCommerce Product Bundle Choice'),
-							'menu_title'=>eowbc_lang('Setup WooCommerce Product Bundle Choice'),
+							'title'=>eowbc_lang('Setup').' '.constant('EOWBC_NAME'),	//eowbc_lang('Setup BUNDLOICE (formerly Woo Choice Plugin)'),
+							'menu_title'=>eowbc_lang('Setup BUNDLOICE (formerly Woo Choice Plugin)'),
 							'capability'=>'manage_options',
 							'slug'=>'eowbc-install',
 							'template'=>'admin/init-install',							
@@ -43,8 +43,8 @@ if ( ! class_exists( 'Admin_Menu' ) ) {
 						),
 						array(
 							'parent_slug'=>'eowbc',
-							'title'=>eowbc_lang('General').' - '.constant('EOWBC_NAME'),	//eowbc_lang('General - Woo Choice Plugin'),
-							'menu_title'=>eowbc_lang('General'),	//eowbc_lang('General - Woo Choice Plugin'),
+							'title'=>eowbc_lang('General').' - '.constant('EOWBC_NAME'),	//eowbc_lang('General - BUNDLOICE (formerly Woo Choice Plugin)'),
+							'menu_title'=>eowbc_lang('General'),	//eowbc_lang('General - BUNDLOICE (formerly Woo Choice Plugin)'),
 							'capability'=>'manage_options',
 							'slug'=>'eowbc-configuration',
 							'template'=>'admin/menu/configuration',

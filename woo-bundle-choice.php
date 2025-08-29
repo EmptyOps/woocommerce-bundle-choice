@@ -7,16 +7,12 @@
  * @package woo-bundle-choice
  *
  * @wordpress-plugin
- * Plugin Name: Woo Choice Plugin | Ring Builder | Pair Maker | Guidance Tool ui_QCed_ashish_-2
+ * Plugin Name: BUNDLOICE (formerly Woo Choice Plugin) | Ring Builder | Loose Diamond Search Pages - Variation Swatches - Pair Maker | Guidance Tool
  * Plugin URI: https://wordpress.org/plugins/woo-bundle-choice/
  * Description: Product bundling as ring builder for jewelry, pair maker for clothing and guidance tool for home decor, cosmetics etc. Product bundling as per user's choice.
-<<<<<<< HEAD
- * Version: 1.0.8
-=======
- * Version: 1.1.0
->>>>>>> 00a1bba96d9ad9ef8de11cfff3242f4bba316362
- * Author: emptyopssphere
- * Author URI: https://profiles.wordpress.org/emptyopssphere
+ * Version: 1.0.23
+ * Author: Sphere Plugins
+ * Author URI: https://sphereplugins.com/
  * License: GPLv3+
  * License URI: http://www.gnu.org/licenses/gpl-3.0.txt
  * Text Domain: woo-bundle-choice
