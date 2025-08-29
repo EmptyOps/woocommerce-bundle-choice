@@ -386,7 +386,7 @@ class Setup_Wizard {
 			  	</div>
 			</div>
 		
-		<?php
+		<?php 
 	}
 
 	public function finalize() {		
