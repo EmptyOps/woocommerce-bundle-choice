@@ -302,6 +302,11 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
 		    self::sp_wbc_webhook_register_route();
 		});
+
+		add_filter('sp_wbc_webhook_process', function($status, $data, $webhook_source) {
+
+		    return self::handle_refresh_token_type($status, $data, '', '', $webhook_source);
+		}, 10, 3);
     }
 
     private static function process_form_definition($mode, $form_definition, $args) {
@@ -890,23 +895,37 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
         $headers = $request->get_headers();
         $api_key = isset($headers['api-key']) ? $headers['api-key'][0] : '';
 
+        -- aa webhook source no support haju api-server side add karvano che. 
+        $webhook_source = isset($headers['webhook-source']) ? $headers['webhook-source'][0] : '';
+
         // Step 2: Validate API key using activate/deactivate token
-        $valid_api_key = get_option('extra_sub_tab_token');
+        // $valid_api_key = get_option('extra_sub_tab_token');
+        $valid_api_key = wbc()->sanitize->get_option('extras_configuration','token');
+
         if (!$api_key || $api_key !== $valid_api_key) {
 
-            $response = new WP_REST_Response([
-                'type' => 'error',
-                'msg'  => 'Unauthorized: Invalid API Key'
-            ], 403);
+        	ACTIVE_TODO note that this is not yet the final standard architecture for resolution of that multiple servers support for ext api layers
+        	$valid_api_key = apply_filters('sp_wbc_webhook_api_key', $valid_api_key, $webhook_source);
 
-            self::sp_wbc_webhook_log('auth_failed', [
-                'headers'  => $headers,
-                'api_key'  => $api_key,
-                'expected' => $valid_api_key,
-                'response' => $response->get_data()
-            ]);
+        	if( $api_key && $api_key !=== $valid_api_key ){
 
-            return $response;
+        		// Nothing to do
+        	} else {
+
+	            $response = new WP_REST_Response([
+	                'type' => 'error',
+	                'msg'  => 'Unauthorized: Invalid API Key'
+	            ], 403);
+
+	            self::sp_wbc_webhook_log('auth_failed', [
+	                'headers'  => $headers,
+	                'api_key'  => $api_key,
+	                'expected' => $valid_api_key,
+	                'response' => $response->get_data()
+	            ]);
+
+	            return $response;
+	        }
         }
 
         // Step 3: Get JSON input
@@ -918,7 +937,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
         $response = apply_filters('sp_wbc_webhook_process', array(
             'type' => 'success',
             'msg'  => 'Webhook processed successfully'
-        ), $data);
+        ), $data, $webhook_source);
 
         self::sp_wbc_webhook_log('response_data', $response);
 
@@ -974,4 +993,46 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
         return false;
     }
+
+    private static function handle_refresh_token_type($status, $data, $subtab_key = null, $field_key = null, $webhook_source) {
+
+	    // Check if webhook_type is refresh_token
+	    if ( isset( $data['webhook_type'] ) && $data['webhook_type'] === 'refresh_token' ) {
+	        
+	        // Value from webhook payload
+	        $new_token = isset( $data['refresh_token'] ) ? $data['refresh_token'] : null;
+
+	        ACTIVE_TODO note that this is not yet the final standard architecture for resolution of that multiple servers support for ext api layers -- to h
+	        $save_filed_key = apply_filters( 'sp_wbc_webhook_refresh_token_save_key', array('subtab_key' => $subtab_key,'field_key'  => $field_key,), $webhook_source );
+
+	        $saved = false;
+
+	        if ( !empty( $save_filed_key['field_key'] ) && empty( $save_filed_key['subtab_key'] ) ) {
+
+	            $saved = wbc_set_options( $save_filed_key['field_key'], $new_token );
+
+	        } elseif ( !empty( $save_filed_key['subtab_key'] ) && !empty( $save_filed_key['field_key'] ) ) {
+
+	            $saved = wbc()->options->update_option( $save_filed_key['subtab_key'], $save_filed_key['field_key'], $new_token );
+	        }
+
+	        // Check saving result
+	        if ($saved) {
+
+	            return array(
+	                'type' => 'success',
+	                'msg'  => 'Refresh token processed & saved successfully'
+	            );
+	        } else {
+
+	            return array(
+	                'type' => 'error',
+	                'msg'  => 'Failed to save refresh token'
+	            );
+	        }
+	    }
+
+	    // If not refresh_token type → return original status unchanged
+	    return $status;
+	}
 }
