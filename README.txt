@@ -5,7 +5,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=hi000
 Requires at least: 3.5
 Tested up to: 6.8.1
 Requires PHP: 5.6
-Stable tag: 1.0.23
+Stable tag: 1.0.24
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 Contributors: ajayemptyops,bhaveshdesai,shraddharaiyani,CmdrMahesh,hi0001234d
@@ -311,7 +311,7 @@ Yes, it is.
 8. Once the home page position for button is configured, the home page would look something like this.
 
 == Changelog ==
-= 1.0.23 (August 30,2025) =
+= 1.0.24 (August 30,2025) =
   ** Fix: Resolved the plugin name validation issue to comply with WordPress.org naming rules. **
   ** Security & Standards: Implemented necessary best practices — added input sanitization & output escaping. **
 = 1.0.21 (March 28,2023) =
