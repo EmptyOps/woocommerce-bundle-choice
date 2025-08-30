@@ -311,7 +311,9 @@ Yes, it is.
 8. Once the home page position for button is configured, the home page would look something like this.
 
 == Changelog ==
-
+= 1.0.23 (August 30,2025) =
+  ** Fix: Resolved the plugin name validation issue to comply with WordPress.org naming rules. **
+  ** Security & Standards: Implemented necessary best practices — added input sanitization & output escaping. **
 = 1.0.21 (March 28,2023) =
   ** This update is tested with the latest version of WordPress(version 6.1.1) and WooCommerce (version 7.5.1). ** 
   ** Woo Choice Plugin from now on will be called BUNDLOICE. This update contains changes related to the name change of our plugin. **
