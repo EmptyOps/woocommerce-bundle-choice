@@ -25,7 +25,7 @@ if [[ "$yn" != "YES_UPDATED" ]]; then
 fi
 
 
-read -p "Please enter WordPress.org password" WP_ORG_PASSWORD
+read -p "Please enter WordPress.org SVN password from profile settings" WP_ORG_PASSWORD
 if [[ -z "$WP_ORG_PASSWORD" ]]; then
     echo "WordPress.org password not set"
     exit 1
@@ -44,6 +44,15 @@ PLUGIN_BUILDS_PATH="$PROJECT_ROOT/build"
 PLUGIN_BUILD_CONFIG_PATH="$PROJECT_ROOT/build-cfg"
 VERSION=$(php -f "$PLUGIN_BUILD_CONFIG_PATH/utils/version.php")
 
+# Debug output to avoid surprises
+echo "Version detected: '$VERSION'"
+
+if [[ -z "$VERSION" ]]; then
+    echo "ERROR: Version not set. Aborting!"
+    exit 1
+fi
+
+
 # Check if the tag exists for the version we are building
 TAG=$(svn ls "https://plugins.svn.wordpress.org/$PLUGIN/tags/$VERSION")
 error=$?
@@ -52,6 +61,9 @@ error=$?
 #     echo "Tag already exists for version $VERSION, aborting deployment"
 #     exit 1
 # fi
+if [ $error -ne 0 ]; then
+    echo "INFO: Tag $VERSION does not exist yet. This is normal for a new release."
+fi
   
 cd "$PLUGIN_BUILDS_PATH"
 # Remove any file so we start from scratch

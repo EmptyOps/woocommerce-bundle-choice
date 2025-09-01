@@ -29,10 +29,11 @@ if ( ! class_exists( 'Extensions_Activate' ) ) {
 			return self::$_instance;
 		}
 
-		private function __construct() {			
-			throw new Exception("Sorry, only construct method with SP_Extension class object are supported, so pass SP_Extension object as parameter to construct method. Default construct method is not supported.", 1);
-		}
+		// private function __construct() {			
+		// 	throw new Exception("Sorry, only construct method with SP_Extension class object are supported, so pass SP_Extension object as parameter to construct method. Default construct method is not supported.", 1);
+		// }
 
+		// NOTE: only construct method with SP_Extension class object are supported, so pass SP_Extension object as parameter to construct method. Default construct method is not supported.
 		private function __construct( SP_Extension $SP_Extension ) {			
 			$this->SP_Extension = $SP_Extension;
 		}

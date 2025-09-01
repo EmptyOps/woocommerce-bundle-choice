@@ -5,8 +5,8 @@
  *  TODO publish actions in this class and process appliable logic from extension child class of this class, whenever necessary. 
  */
 
-namespace \eo\wbc\system\bootstrap;
-use \eo\wbc\helper\EOWBC_Options; 
+namespace eo\wbc\system\bootstrap;
+use eo\wbc\helper\EOWBC_Options; 
 
 defined( 'ABSPATH' ) || exit;
 
@@ -29,10 +29,11 @@ if ( ! class_exists( 'Extensions_Uninstall' ) ) {
 			return self::$_instance;
 		}
 
-		private function __construct() {			
-			throw new Exception("Sorry, only construct method with SP_Extension class object are supported, so pass SP_Extension object as parameter to construct method. Default construct method is not supported.", 1);
-		}
+		// private function __construct() {			
+		// 	throw new Exception("Sorry, only construct method with SP_Extension class object are supported, so pass SP_Extension object as parameter to construct method. Default construct method is not supported.", 1);
+		// }
 
+		// NOTE: only construct method with SP_Extension class object are supported, so pass SP_Extension object as parameter to construct method. Default construct method is not supported.
 		private function __construct( SP_Extension $SP_Extension ) {			
 			$this->SP_Extension = $SP_Extension;
 		}
