@@ -99,18 +99,18 @@ jQuery(document).ready(function($){
 				}
 			});		
 		}		
-		console.log(site_url);
-		console.log(filter_obj.not_required_all_select);
+		//console.log(site_url);
+		//console.log(filter_obj.not_required_all_select);
 		if(filter_obj.not_required_all_select){
 			change_stat = true;
 		}
-		console.log(change_stat);
-		console.log(_root);
+		//console.log(change_stat);
+		//console.log(_root);
 
 		if(change_stat){
 			jQuery(_root).find(".woo-custome-filter-redirect").attr('href',site_url);
 			jQuery(_root).find(".woo-custome-filter-redirect").attr('data-href',site_url);
-			console.log(jQuery(_root).find(".woo-custome-filter-redirect").attr('href'));
+			//console.log(jQuery(_root).find(".woo-custome-filter-redirect").attr('href'));
 		} else {
 			jQuery(_root).find(".woo-custome-filter-redirect").attr('href','#');
 			jQuery(_root).find(".woo-custome-filter-redirect").attr('data-href','#');

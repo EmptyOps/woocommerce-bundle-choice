@@ -131,12 +131,12 @@ jQuery(function(){
 				|| 
 				(!form_button.hasOwnProperty('length') || form_button.length<1)
 			){				
-				console.log('no field found.');
+				//console.log('no field found.');
 				return false;
 			}
 			
 			if( this.validate(form_fields)===true ){
-				console.log('sending ajax');				
+				//console.log('sending ajax');				
 				let _data = jQuery(form_fields).serialize();
 				jQuery.ajax({
 					url: sp_urls.ajax_url,

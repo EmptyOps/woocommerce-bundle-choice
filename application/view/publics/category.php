@@ -1,60 +1,71 @@
 <?php
 
 /*
-*	Template to show category page
+*   Template to show category page
 */
 
-?>  
-<!-- Created with Wordpress plugin - WooCommerce Product bundle choice -->
-<style type="text/css">
-    .cat_products{
-        border:1.3px solid #80808059;
-        border-radius: 1.5px;
-        margin:auto !important;
-        margin-bottom: 2em !important;                            
-    }
-    @media only screen and (max-width: 768px) {
-      .ui.stackable.grid>.wide.column{  
-        margin-bottom: 2em !important;
-      }
-    }
-    .ui.cards>.card {
-        width: 100%;
-    }
-    .ui.cards>.card>.image>img {
-        /*width: 100%;*/
-        width: auto;
-        margin: auto; 
-    }
-    .ui.cards>.card h5{
-        color: white !important;
-    }
+if(WBC_SCRIPT_DEBUG == true){
+?>    
+    <style type="text/css">
+        .cat_products{
+            border:1.3px solid #80808059;
+            border-radius: 1.5px;
+            margin:auto !important;
+            margin-bottom: 2em !important;                            
+        }
+        @media only screen and (max-width: 768px) {
+          .ui.stackable.grid>.wide.column{  
+            margin-bottom: 2em !important;
+          }
+        }
+        .ui.cards>.card {
+            width: 100%;
+        }
+        .ui.cards>.card>.image>img {
+            /*width: 100%;*/
+            width: auto;
+            margin: auto; 
+        }
+        .ui.cards>.card h5{
+            color: white !important;
+        }
 
-    .ui.special.cards .card:first-child{
-        margin-bottom: 0.75px;
-    }
-    .ui.special.cards .card:first-child,.ui.special.cards .card:first-child *:not(.button){
-        border-bottom-right-radius: 0px !important;
-        border-bottom-left-radius: 0px !important;
-    }
-    .ui.special.cards .card:last-child{
-        margin-top: 0.75px;
-    }
-    .ui.special.cards .card:last-child,.ui.special.cards .card:last-child *:not(.button){
-        border-top-left-radius: 0px !important;
-        border-top-right-radius: 0px !important;
-    }
-    .cat_products.seven.wide.column{
-        height: max-content;
-    }
-    .ui.card>.image:not(.ui)>img, .ui.cards>.card>.image:not(.ui)>img{
-        height: 250px !important;
-    }
-    .ui.dimmer .woocommerce-Price-amount.amount,.ui.dimmer  ins,.ui.dimmer  del{
-        color: white !important;
-        background-color: transparent !important;
-    }
-</style>                    
+        .ui.special.cards .card:first-child{
+            margin-bottom: 0.75px;
+        }
+        .ui.special.cards .card:first-child,.ui.special.cards .card:first-child *:not(.button){
+            border-bottom-right-radius: 0px !important;
+            border-bottom-left-radius: 0px !important;
+        }
+        .ui.special.cards .card:last-child{
+            margin-top: 0.75px;
+        }
+        .ui.special.cards .card:last-child,.ui.special.cards .card:last-child *:not(.button){
+            border-top-left-radius: 0px !important;
+            border-top-right-radius: 0px !important;
+        }
+        .cat_products.seven.wide.column{
+            height: max-content;
+        }
+        .ui.card>.image:not(.ui)>img, .ui.cards>.card>.image:not(.ui)>img{
+            height: 250px !important;
+        }
+        .ui.dimmer .woocommerce-Price-amount.amount,.ui.dimmer  ins,.ui.dimmer  del{
+            color: white !important;
+            background-color: transparent !important;
+        }
+</style> 
+
+<?php
+}else{
+?>
+     <style type="text/css">
+        .cat_products{border:1.3px solid hsla(0,0%,50.2%,.34901960784313724);border-radius:1.5px;margin:auto auto 2em!important}@media only screen and (max-width:768px){.ui.stackable.grid>.wide.column{margin-bottom:2em!important}}.ui.cards>.card{width:100%}.ui.cards>.card>.image>img{width:auto;margin:auto}.ui.cards>.card h5{color:#fff!important}.ui.special.cards .card:first-child{margin-bottom:.75px}.ui.special.cards .card:first-child,.ui.special.cards .card:first-child :not(.button){border-bottom-right-radius:0!important;border-bottom-left-radius:0!important}.ui.special.cards .card:last-child{margin-top:.75px}.ui.special.cards .card:last-child,.ui.special.cards .card:last-child :not(.button){border-top-left-radius:0!important;border-top-right-radius:0!important}.cat_products.seven.wide.column{height:max-content}.ui.card>.image:not(.ui)>img,.ui.cards>.card>.image:not(.ui)>img{height:250px!important}.ui.dimmer .woocommerce-Price-amount.amount,.ui.dimmer del,.ui.dimmer ins{color:#fff!important;background-color:transparent!important}
+    </style> 
+    
+<?php
+}
+?>                   
 <div class="eo_wbc_hidden_data" style="display: none;">                                                
     <div class="ui grid stackable container padded">
     <?php
@@ -206,39 +217,65 @@
     </div>
 </div>
 <!-- Created with Wordpress plugin - WooCommerce Product bundle choice -->
-<script>
-    $ = jQuery;
+<?php
+if(WBC_SCRIPT_DEBUG == true){
+?>    
+    <script>
+        $ = jQuery;
 
-    // supposed to be used inside wo_wbc_filter.js
-    var is_card_view_rendered = true;
+        // supposed to be used inside wo_wbc_filter.js
+        var is_card_view_rendered = true;
 
-    /**
-     * 
-     */
-    function wbc_attach_card_views() { 
-        jQuery(".products,.product-listing,.row-inner>.col-lg-9:eq(0)").html(jQuery(".eo_wbc_hidden_data").html());
-        jQuery('.special.cards .image').dimmer({on:'hover',duration:{ show : 0, hide : 0 }});
-        jQuery('.button[data-link]').on('click',function(e){
-            e.preventDefault();
-            e.stopPropagation();
-            window.location.href=$(this).attr('data-link');
+        /**
+         * 
+         */
+        function wbc_attach_card_views() { 
+            jQuery(".products,.product-listing,.row-inner>.col-lg-9:eq(0)").html(jQuery(".eo_wbc_hidden_data").html());
+            jQuery('.special.cards .image').dimmer({on:'hover',duration:{ show : 0, hide : 0 }});
+            jQuery('.button[data-link]').on('click',function(e){
+                e.preventDefault();
+                e.stopPropagation();
+                window.location.href=$(this).attr('data-link');
+            });
+        }
+
+        jQuery(document).ready(function($){
+            //code moved to a function wbc_attach_card_views above so that it can be called after ajax search
+
+            // 
+            wbc_attach_card_views();
         });
-    }
+    </script>  
 
-    jQuery(document).ready(function($){
-        //code moved to a function wbc_attach_card_views above so that it can be called after ajax search
+<?php
+}else{
+?>
+    <script>
+       $=jQuery;var is_card_view_rendered=!0;function wbc_attach_card_views(){jQuery(".products,.product-listing,.row-inner>.col-lg-9:eq(0)").html(jQuery(".eo_wbc_hidden_data").html()),jQuery(".special.cards .image").dimmer({on:"hover",duration:{show:0,hide:0}}),jQuery(".button[data-link]").on("click",(function(e){e.preventDefault(),e.stopPropagation(),window.location.href=$(this).attr("data-link")}))}jQuery(document).ready((function(e){wbc_attach_card_views()}));
+    </script>
+    
+<?php
+}
+if(WBC_SCRIPT_DEBUG == true){
+?>    
+    <style type="text/css">
+        .products{
+            display: block !important;
+        }
 
-        // 
-        wbc_attach_card_views();
-    });
-</script>                    
-<style type="text/css">
-    .products{
-        display: block !important;
-    }
+        .product-listing{
+            display: block !important;
+        }                                                
+    </style> 
 
-    .product-listing{
-        display: block !important;
-    }                                                
-</style> 
+<?php
+}else{
+?>
+    
+    <style type="text/css">
+        .product-listing,.products{display:block!important}                                               
+    </style>   
+<?php
+}
+?>
 <!-- Created with Wordpress plugin - WooCommerce Product bundle choice -->        

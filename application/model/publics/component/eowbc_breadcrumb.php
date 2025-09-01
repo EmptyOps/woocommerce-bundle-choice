@@ -58,7 +58,7 @@ class EOWBC_Breadcrumb
         if( !defined('SP_WBC_ARBU') || constant('SP_WBC_ARBU') !== true ) {
 
         $second_name = $model_category_attribute->get_single_category(wbc()->options->get_option('configuration','second_name'));
-            }
+
 
         } else {
 

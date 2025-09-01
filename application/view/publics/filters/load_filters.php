@@ -4,19 +4,33 @@ if(/*wp_is_mobile()*/ wbc_is_mobile_by_page_sections('cat_shop_page',true)) {
 	<div id="help_modal" class="ui small modal"><i class="close icon" style="top: 0;right: 0;color: #000;" onclick='jQuery("#help_modal").modal("hide")'></i><div class="header"></div>
 	<div class="content"></div>
 	</div>
-	<script type="text/javascript">
-	jQuery(document).ready(function(){
-		jQuery(document).on('click',".question.circle.icon",function(){
-			jQuery("#help_modal").find(".content").html('');	
-			_help_text = jQuery(this).data('help');
-			jQuery("#help_modal").find(".content").html(_help_text);
-			jQuery("#help_modal").modal('show');
-		});
-		jQuery(document).on('click',"#help_modal .close.icon",function(){
-			jQuery("#help_modal").modal('hide');
-		});
-	});
-	</script>
+	<?php
+	if(WBC_SCRIPT_DEBUG == true){
+	?>    
+	    <script type="text/javascript">
+	        jQuery(document).ready(function(){
+	            jQuery(document).on('click',".question.circle.icon",function(){
+	                jQuery("#help_modal").find(".content").html('');    
+	                _help_text = jQuery(this).data('help');
+	                jQuery("#help_modal").find(".content").html(_help_text);
+	                jQuery("#help_modal").modal('show');
+	            });
+	            jQuery(document).on('click',"#help_modal .close.icon",function(){
+	                jQuery("#help_modal").modal('hide');
+	            });
+	        });
+	    </script>
+
+	<?php
+	}else{
+	?>
+	    <script type="text/javascript">
+	        jQuery(document).ready((function(){jQuery(document).on("click",".question.circle.icon",(function(){jQuery("#help_modal").find(".content").html(""),_help_text=jQuery(this).data("help"),jQuery("#help_modal").find(".content").html(_help_text),jQuery("#help_modal").modal("show")})),jQuery(document).on("click","#help_modal .close.icon",(function(){jQuery("#help_modal").modal("hide")}))}));
+	    </script>
+	    
+	<?php
+	}
+	?>
 	<?php
 	if(wbc()->options->get_option('filters_altr_filt_widgts','filter_setting_alternate_mobile',false)=='mobile_1'){
 

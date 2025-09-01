@@ -253,8 +253,10 @@
 
  // enqueue common assets 
 add_action( 'wp_enqueue_scripts' ,function(){
-    wbc()->load->asset('css','variations/gallery_images/external-plugins/splide/splide-core.min',array(),"",false,true);
-    wbc()->load->asset('js','variations/gallery_images/external-plugins/splide/splide.min',array(),"",true,true);
+    $file_suffix = (WBC_SCRIPT_DEBUG) ? '' : '.min';
+    wbc()->load->asset('css','variations/gallery_images/external-plugins/splide/splide-core'.$file_suffix,array(),"",false,true);
+    $file_suffix = (WBC_SCRIPT_DEBUG) ? '' : '.min';
+    wbc()->load->asset('js','variations/gallery_images/external-plugins/splide/splide'.$file_suffix,array(),"",true,true);
     ?>
     <!-- <script type="text/javascript">
         var splide = new Splide( '#slider1', {
