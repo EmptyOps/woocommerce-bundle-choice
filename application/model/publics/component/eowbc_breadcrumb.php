@@ -37,6 +37,7 @@ class EOWBC_Breadcrumb
         wbc()->load->model('images');
         $model_images = \eo\wbc\model\Images::instance();
 
+        — SP_WBC_PSFAR possible to skip for ajax ring builder
         if( !defined('SP_WBC_ARBU') || constant('SP_WBC_ARBU') !== true ) {
 
             $first_name = $model_category_attribute->get_single_category(wbc()->options->get_option('configuration','first_name'));
@@ -53,6 +54,7 @@ class EOWBC_Breadcrumb
             self::$first_slug = apply_filters('eowbc_breadcrumb_first_slug',$first_name->slug);
         }
 
+        — SP_WBC_PSFAR possible to skip for ajax ring builder
         if( !defined('SP_WBC_ARBU') || constant('SP_WBC_ARBU') !== true ) {
 
         $second_name = $model_category_attribute->get_single_category(wbc()->options->get_option('configuration','second_name'));

@@ -836,15 +836,62 @@ class WBC_WC {
             $url_array = explode('/',$url_array[0]); 
             $retVal = !empty($url_array[5]) ? $url_array[5] : $url_array[4] ;
             // /*$idObj*/$wp_category = get_category_by_slug($retVal); 
-            // $wp_category = get_term_by( 'slug', $retVal, 'product_cat' ); 
-            $wp_category = wbc()->wc->get_term_by( 'slug', $retVal, 'product_cat' ); 
+            // $wp_category = get_term_by( 'slug', $retVal, 'product_cat' );
+
+            if( !defined('SP_WBC_ARBU') || constant('SP_WBC_ARBU') !== true ) { 
+
+                $wp_category = wbc()->wc->get_term_by( 'slug', $retVal, 'product_cat' );
+            } else {
+
+
+                global $SP_WBC_ARB_first_cat_obj, $SP_WBC_ARB_second_cat_obj, $wp_query;
+
+                $wp_category = null;
+
+                if (isset($SP_WBC_ARB_first_cat_obj) && $SP_WBC_ARB_first_cat_obj->slug === $retVal) {
+
+                    $wp_category = $SP_WBC_ARB_first_cat_obj;
+                } elseif (isset($SP_WBC_ARB_second_cat_obj) && $SP_WBC_ARB_second_cat_obj->slug === $retVal) {
+
+                    $wp_category = $SP_WBC_ARB_second_cat_obj;
+                } elseif (isset($wp_query->queried_object) && isset($wp_query->queried_object->slug) && $wp_query->queried_object->slug === $retVal) {
+
+                    $wp_category = $wp_query->queried_object;
+                } else {
+                    
+                    $wp_category = wbc()->wc->get_term_by('slug', $retVal, 'product_cat');
+                }
+            } 
+
             // echo /*$idObj*/$wp_category->name
 
         } elseif($is_based_on_category_title) {
 
-            $cur_cat = get_cat_ID( single_cat_title("",false) ); //get the cat id
-            /*$category*/$wp_category = &get_category($cur_cat);
-            // /*$category*/$wp_category->slug; //get cat slug
+            if( !defined('SP_WBC_ARBU') || constant('SP_WBC_ARBU') !== true ) {
+
+                $cur_cat = get_cat_ID( single_cat_title("",false) ); //get the cat id
+                /*$category*/$wp_category = &get_category($cur_cat);
+                // /*$category*/$wp_category->slug; //get cat slug
+            } else {
+
+                global $SP_WBC_ARB_first_cat_obj, $SP_WBC_ARB_second_cat_obj, $wp_query;
+
+                $wp_category = null;
+                $cat_title = single_cat_title("", false);
+
+                if (isset($SP_WBC_ARB_first_cat_obj) && $SP_WBC_ARB_first_cat_obj->name === $cat_title) {
+                    $wp_category = $SP_WBC_ARB_first_cat_obj;
+                } elseif (isset($SP_WBC_ARB_second_cat_obj) && $SP_WBC_ARB_second_cat_obj->name === $cat_title) {
+                    $wp_category = $SP_WBC_ARB_second_cat_obj;
+                } elseif (isset($wp_query->queried_object) && isset($wp_query->queried_object->name) && $wp_query->queried_object->name === $cat_title) {
+                    $wp_category = $wp_query->queried_object;
+                } else {
+                    $cur_cat = get_cat_ID($cat_title);
+                    ahiya upeer juno code che aema refrence use kari che to puchi levu telly vakhate.
+                    $wp_category = get_category($cur_cat);
+                }
+            }
+
         }
 
         if($result_format == 'id') {

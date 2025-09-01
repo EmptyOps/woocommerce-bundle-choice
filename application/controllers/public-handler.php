@@ -79,7 +79,10 @@ class Public_Handler {
 			if( !defined('SP_WBC_ARB_EAS_ON') || constant('SP_WBC_ARB_EAS_ON') === true ) {
 
             	$bonus_features = array_filter(unserialize(wbc()->options->get_option('setting_status_setting_status_setting','bonus_features',serialize(array()))));
-				if(!empty($bonus_features['filters_shop_cat']) and ( is_shop() || is_product_category()) and empty(wbc()->sanitize->get('EO_WBC'))) {
+
+            	// added by harshil kirtan 279 task
+            	global $wp_query
+				if(!empty($bonus_features['filters_shop_cat']) and ( is_shop() || is_product_category()) || ( defined('SP_WBC_ARBU') && constant('SP_WBC_ARBU') === true && method_exists($wp_query, 'get_queried_object') && !empty($wp_query->get_queried_object()->term_id) ) and empty(wbc()->sanitize->get('EO_WBC'))) {
 
 				    \eo\wbc\controllers\publics\pages\Shop_Category_Filter::instance()->init();
 
@@ -199,8 +202,31 @@ class Public_Handler {
 						            	}*/
 
 						            	if(!empty($_current_category_id)) {
+
+						            		— SP_WBC_PSFAR possible to skip for ajax ring builder
+						            		if( !defined('SP_WBC_ARBU') || constant('SP_WBC_ARBU') !== true ) {
 						            		
-						            		$_current_category_object = wbc()->wc->get_term_by('term_id',$_current_category_id,'product_cat');
+							            		$_current_category_object = wbc()->wc->get_term_by('term_id',$_current_category_id,'product_cat');
+							            	} else {
+
+							            		global $SP_WBC_ARB_first_cat_obj, $SP_WBC_ARB_second_cat_obj, $wp_query;
+
+							            		$_current_category_object = null;
+
+							            		if (isset($SP_WBC_ARB_first_cat_obj) && $SP_WBC_ARB_first_cat_obj->term_id === $_current_category_id) {
+							            		    
+							            		    $_current_category_object = $SP_WBC_ARB_first_cat_obj;
+							            		} elseif (isset($SP_WBC_ARB_second_cat_obj) && $SP_WBC_ARB_second_cat_obj->term_id === $_current_category_id) {
+							            		    
+							            		    $_current_category_object = $SP_WBC_ARB_second_cat_obj;
+							            		} elseif (isset($wp_query->queried_object) && isset($wp_query->queried_object->term_id) && $wp_query->queried_object->term_id === $_current_category_id) {
+							            		    
+							            		    $_current_category_object = $wp_query->queried_object;
+							            		} else {
+												    $_current_category_object = wbc()->wc->get_term_by('term_id', $_current_category_id, 'product_cat');
+												}
+							            	}
+
 						            		if(!empty($_current_category_object) and !is_wp_error($_current_category_object)) {
 							            		$_GET['_current_category'] = $_current_category_object->slug;
 							                	$_REQUEST['_current_category']= $_current_category_object->slug;

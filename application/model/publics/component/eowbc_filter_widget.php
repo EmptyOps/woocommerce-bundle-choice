@@ -685,6 +685,8 @@ class EOWBC_Filter_Widget {
 
 			$sc_cat = wbc()->options->get_option('filters_sc_filter_setting','shop_cat_filter_category');
 			if(!empty($sc_cat)){
+
+				— SP_WBC_PSFAR possible to skip for ajax ring builder
 				if( !defined('SP_WBC_ARBU') || constant('SP_WBC_ARBU') !== true ) {
 					
 					$sc_cat = wbc()->wc->get_term_by('term_id',$sc_cat,'product_cat');	
@@ -721,7 +723,34 @@ class EOWBC_Filter_Widget {
 					if (!empty($matched_sc_cat_obj)) {
 					    $sc_cat = $matched_sc_cat_obj;
 					} else {
-					    $sc_cat = wbc()->wc->get_term_by('term_id', $sc_cat, 'product_cat');
+
+						— SP_WBC_PSFAR possible to skip for ajax ring builder
+						if( !defined('SP_WBC_ARBU') || constant('SP_WBC_ARBU') !== true ) {
+
+					    	$sc_cat = wbc()->wc->get_term_by('term_id', $sc_cat, 'product_cat');
+			    		} else {
+			    			
+					    	global $SP_WBC_ARB_first_cat_obj, $SP_WBC_ARB_second_cat_obj, $wp_query;
+
+					    	if (!empty($sc_cat)) {
+					    	    $matched_obj = null;
+
+					    	    if (isset($SP_WBC_ARB_first_cat_obj) && $SP_WBC_ARB_first_cat_obj->term_id === $sc_cat) {
+					    	        $matched_obj = $SP_WBC_ARB_first_cat_obj;
+					    	    } elseif (isset($SP_WBC_ARB_second_cat_obj) && $SP_WBC_ARB_second_cat_obj->term_id === $sc_cat) {
+					    	        $matched_obj = $SP_WBC_ARB_second_cat_obj;
+					    	    } elseif (isset($wp_query->queried_object) && isset($wp_query->queried_object->term_id) && $wp_query->queried_object->term_id === $sc_cat) {
+					    	        $matched_obj = $wp_query->queried_object;
+					    	    } else {
+					    	        $matched_obj = wbc()->wc->get_term_by('term_id', $sc_cat, 'product_cat');
+					    	    }
+
+					    	    if (!empty($matched_obj) && !is_wp_error($matched_obj)) {
+					    	        $sc_cat = $matched_obj->slug;
+					    	    }
+					    	}
+			    		}
+
 					}
 
 				}
@@ -2026,8 +2055,30 @@ class EOWBC_Filter_Widget {
 			$item['desktop']=0;
 			if($item['type']==0 && ($item['input']=='icon' OR $item['input']=='icon_text')) {
 				
-				$this->eo_wbc_filter_ui_icon($this->__prefix,$item/*$item['name'],$item['label'],$item['type'],$item['input'],0,$item['column_width'],(isset($item['icon_size'])?$item['icon_size']:false),(isset($item['font_size'])?$item['font_size']:false),0,(isset($item['child_label'])?$item['child_label']:false),(isset($item['popup'])?$item['popup']:false),$advance*/);								
-				$term = @wbc()->wc->get_term_by('id',$item['name'],'product_cat');
+				$this->eo_wbc_filter_ui_icon($this->__prefix,$item/*$item['name'],$item['label'],$item['type'],$item['input'],0,$item['column_width'],(isset($item['icon_size'])?$item['icon_size']:false),(isset($item['font_size'])?$item['font_size']:false),0,(isset($item['child_label'])?$item['child_label']:false),(isset($item['popup'])?$item['popup']:false),$advance*/);
+
+				— SP_WBC_PSFAR possible to skip for ajax ring builder			
+				if( !defined('SP_WBC_ARBU') || constant('SP_WBC_ARBU') !== true ) {
+
+					$term = @wbc()->wc->get_term_by('id',$item['name'],'product_cat');
+				} else {
+
+					global $SP_WBC_ARB_first_cat_obj, $SP_WBC_ARB_second_cat_obj, $wp_query;
+
+					$term = null;
+					$maybe_id = $item['name'];
+
+					if (isset($SP_WBC_ARB_first_cat_obj) && $SP_WBC_ARB_first_cat_obj->term_id === $maybe_id) {
+					    $term = $SP_WBC_ARB_first_cat_obj;
+					} elseif (isset($SP_WBC_ARB_second_cat_obj) && $SP_WBC_ARB_second_cat_obj->term_id === $maybe_id) {
+					    $term = $SP_WBC_ARB_second_cat_obj;
+					} elseif (isset($wp_query->queried_object) && isset($wp_query->queried_object->term_id) && $wp_query->queried_object->term_id === $maybe_id) {
+					    $term = $wp_query->queried_object;
+					} else {
+					    $term = wbc()->wc->get_term_by('id', $maybe_id, 'product_cat');
+					}
+				}
+
 				if(!empty($term) and !is_wp_error($term)){
 					$this->___category[]=$term->slug;	
 				}				
@@ -2958,7 +3009,30 @@ class EOWBC_Filter_Widget {
 		/*if( !$this->is_shortcode_filter && !$this->is_shop_cat_filter ) {*/
 
 			$current_category = $this->_category;
-			$current_category = get_term_by('slug',$current_category,'product_cat');
+
+			— SP_WBC_PSFAR possible to skip for ajax ring builder
+			if( !defined('SP_WBC_ARBU') || constant('SP_WBC_ARBU') !== true ) {
+
+				$current_category = get_term_by('slug',$current_category,'product_cat');
+			} else {
+
+
+				global $SP_WBC_ARB_first_cat_obj, $SP_WBC_ARB_second_cat_obj, $wp_query;
+
+				$maybe_slug = $current_category;
+				$current_category = null;
+
+				if (isset($SP_WBC_ARB_first_cat_obj) && $SP_WBC_ARB_first_cat_obj->slug === $maybe_slug) {
+				    $current_category = $SP_WBC_ARB_first_cat_obj;
+				} elseif (isset($SP_WBC_ARB_second_cat_obj) && $SP_WBC_ARB_second_cat_obj->slug === $maybe_slug) {
+				    $current_category = $SP_WBC_ARB_second_cat_obj;
+				} elseif (isset($wp_query->queried_object) && isset($wp_query->queried_object->slug) && $wp_query->queried_object->slug === $maybe_slug) {
+				    $current_category = $wp_query->queried_object;
+				} else {
+				    $current_category = get_term_by('slug', $maybe_slug, 'product_cat');
+				}
+			}
+
 
 	        $site_url = esc_url(get_term_link( $current_category,'product_cat'));
 	        
@@ -3260,8 +3334,26 @@ class EOWBC_Filter_Widget {
 
 			$filter_sets_first = ( (empty($filter_sets[$filter_sets_first_tab]) or empty($filter_sets[$filter_sets_first_tab]['filter_set_name'])) ? $filter_sets_first_tab : $filter_sets[$filter_sets_first_tab]['filter_set_name'] );
 
+			— SP_WBC_PSFAR possible to skip for ajax ring builder
+			if( !defined('SP_WBC_ARBU') || constant('SP_WBC_ARBU') !== true ) {
 
-			$first_sets_category = wbc()->wc->get_term_by('term_taxonomy_id',/*wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','filter_setting_advance_first_category',false)*/$filter_sets[$filter_sets_first_tab]['filter_set_category'],'product_cat');
+				$first_sets_category = wbc()->wc->get_term_by('term_taxonomy_id',/*wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','filter_setting_advance_first_category',false)*/$filter_sets[$filter_sets_first_tab]['filter_set_category'],'product_cat');
+			} else {
+
+
+				global $SP_WBC_ARB_first_cat_obj, $SP_WBC_ARB_second_cat_obj;
+				$filter_val = $filter_sets[$filter_sets_first_tab]['filter_set_category'];
+				$first_sets_category = null;
+
+				if (isset($SP_WBC_ARB_first_cat_obj) && $SP_WBC_ARB_first_cat_obj->term_taxonomy_id === $filter_val) {
+				    $first_sets_category = $SP_WBC_ARB_first_cat_obj;
+				} elseif (isset($SP_WBC_ARB_second_cat_obj) && $SP_WBC_ARB_second_cat_obj->term_taxonomy_id === $filter_val) {
+				    $first_sets_category = $SP_WBC_ARB_second_cat_obj;
+				} else {
+				    $first_sets_category = wbc()->wc->get_term_by('term_taxonomy_id', $filter_val, 'product_cat');
+				}
+			}
+
 			if(!empty($first_sets_category) and !is_wp_error($first_sets_category)){
 				$first_sets_category = $first_sets_category->slug;
 			}
@@ -3415,17 +3507,42 @@ class EOWBC_Filter_Widget {
 			wbc_pr("init_f_eo_wbc_object");
 		}
 
-		$this->first_category_slug = wbc()->options->get_option('configuration','first_slug');
-        $first_category_object = get_term_by('slug',$this->first_category_slug,'product_cat');
-        if(!empty($first_category_object) and !is_wp_error($first_category_object)) {
-            $this->first_category_slug = $first_category_object->slug;
-        }
+		— SP_WBC_PSFAR possible to skip for ajax ring builder
+		if( !defined('SP_WBC_ARBU') || constant('SP_WBC_ARBU') !== true ) {
 
-        $this->second_category_slug = wbc()->options->get_option('configuration','second_slug');
-        $second_category_object = get_term_by('slug',$this->second_category_slug,'product_cat');
-        if(!empty($second_category_object) and !is_wp_error($second_category_object)) {
-            $this->second_category_slug = $second_category_object->slug;
-        }
+			$this->first_category_slug = wbc()->options->get_option('configuration','first_slug');
+	        $first_category_object = get_term_by('slug',$this->first_category_slug,'product_cat');
+	        if(!empty($first_category_object) and !is_wp_error($first_category_object)) {
+	            $this->first_category_slug = $first_category_object->slug;
+	        }
+
+       	} else {
+
+       		global $SP_WBC_ARB_first_cat_obj;
+            $first_category_object = $SP_WBC_ARB_first_cat_obj;
+
+            if(!empty($first_category_object) and !is_wp_error($first_category_object)) {
+	            $this->first_category_slug = $first_category_object->slug;
+	        }
+       	}
+
+       	— SP_WBC_PSFAR possible to skip for ajax ring builder
+       	if( !defined('SP_WBC_ARBU') || constant('SP_WBC_ARBU') !== true ) {
+
+	        $this->second_category_slug = wbc()->options->get_option('configuration','second_slug');
+	        $second_category_object = get_term_by('slug',$this->second_category_slug,'product_cat');
+	        if(!empty($second_category_object) and !is_wp_error($second_category_object)) {
+	            $this->second_category_slug = $second_category_object->slug;
+	        }
+	    } else {
+
+	    	global $SP_WBC_ARB_second_cat_obj;
+
+	    	$second_category_object = $SP_WBC_ARB_second_cat_obj;
+	    	if(!empty($second_category_object) and !is_wp_error($second_category_object)) {
+	            $this->second_category_slug = $second_category_object->slug;
+	        }
+	    }
 
 		$this->is_shop_cat_filter = $is_shop_cat_filter;
 		$this->is_shortcode_filter = $is_shortcode_filter;

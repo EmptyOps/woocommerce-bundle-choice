@@ -211,8 +211,39 @@ class SP_Query {
 
             if(!empty(wbc()->sanitize->{$input_method_small}('_current_category')) and !empty($tax_query) ) {
             	// remove the default query if the tax query is available
+                — SP_WBC_PSFAR possible to skip for ajax ring builder
+                if( !defined('SP_WBC_ARBU') || constant('SP_WBC_ARBU') !== true ) {
 
-				$_current_category_term = wbc()->wc->get_term_by('slug',$this->tax_query_data($input_method_small, '_current_category')[0],'product_cat');             	
+				    $_current_category_term = wbc()->wc->get_term_by('slug',$this->tax_query_data($input_method_small, '_current_category')[0],'product_cat');
+
+                } else {
+
+
+                    global $SP_WBC_ARB_first_cat_obj, $SP_WBC_ARB_second_cat_obj, $wp_query;
+
+                    $maybe_slug = $this->tax_query_data($input_method_small, '_current_category')[0];
+
+                    $matched_obj = null;
+
+                    if (isset($SP_WBC_ARB_first_cat_obj) && $SP_WBC_ARB_first_cat_obj->slug === $maybe_slug) {
+
+                        $matched_obj = $SP_WBC_ARB_first_cat_obj;
+                    } elseif (isset($SP_WBC_ARB_second_cat_obj) && $SP_WBC_ARB_second_cat_obj->slug === $maybe_slug) {
+
+                        $matched_obj = $SP_WBC_ARB_second_cat_obj;
+                    } elseif (isset($wp_query->queried_object) && isset($wp_query->queried_object->slug) && $wp_query->queried_object->slug === $maybe_slug) {
+
+                        $matched_obj = $wp_query->queried_object;
+                    }
+
+                    if ($matched_obj) {
+                        $_current_category_term = $matched_obj;
+                    } else {
+                        $_current_category_term = get_term_by('slug', $maybe_slug, 'product_cat');
+                    }
+                } 
+
+           	
 				if(!empty($_current_category_term) and !is_wp_error($_current_category_term) and property_exists($_current_category_term,'term_id')){
 					
 					$_current_category_term_id = $_current_category_term->term_id;

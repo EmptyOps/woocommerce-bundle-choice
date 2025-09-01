@@ -24,41 +24,36 @@ class Category {
     public function init($category = '') {
 
         // die("266666666_262666");
-
+        — SP_WBC_PSFAR possible to skip for ajax ring builder
         if( !defined('SP_WBC_ARBU') || constant('SP_WBC_ARBU') !== true ) {
 
             $this->first_category_slug = wbc()->options->get_option('configuration','first_slug');
             $first_category_object = get_term_by('slug', $this->first_category_slug, 'product_cat');
 
-            if (!empty($first_category_object) && !is_wp_error($first_category_object)) {
-                $this->first_category_slug = $first_category_object->slug;
-            }
         } else {
             
             global $SP_WBC_ARB_first_cat_obj;
             $first_category_object = $SP_WBC_ARB_first_cat_obj;
-
-            if (!empty($first_category_object) && !is_wp_error($first_category_object)) {
-                $this->first_category_slug = $first_category_object->slug;
-            }
         }
 
+        if (!empty($first_category_object) && !is_wp_error($first_category_object)) {
+            $this->first_category_slug = $first_category_object->slug;
+        }
+
+        — SP_WBC_PSFAR possible to skip for ajax ring builder
         if( !defined('SP_WBC_ARBU') || constant('SP_WBC_ARBU') !== true ) {
 
             $this->second_category_slug = wbc()->options->get_option('configuration','second_slug');
             $second_category_object = get_term_by('slug', $this->second_category_slug, 'product_cat');
 
-            if (!empty($second_category_object) && !is_wp_error($second_category_object)) {
-                $this->second_category_slug = $second_category_object->slug;
-            }
         } else {
 
             global $SP_WBC_ARB_second_cat_obj;
             $second_category_object = $SP_WBC_ARB_second_cat_obj;
+        }
 
-            if (!empty($second_category_object) && !is_wp_error($second_category_object)) {
-                $this->second_category_slug = $second_category_object->slug;
-            }
+        if (!empty($second_category_object) && !is_wp_error($second_category_object)) {
+            $this->second_category_slug = $second_category_object->slug;
         }
 
         //If add to cart triggred
@@ -140,7 +135,32 @@ class Category {
                 $eo_wbc_sets = array();
                 //if product belongs to first target;
                 if( !empty($cart['eo_wbc_target']) ) {
-                    $eo_wbc_target = get_term_by('slug',$cart['eo_wbc_target'],'product_cat');
+
+                    — SP_WBC_PSFAR possible to skip for ajax ring builder
+                    if( !defined('SP_WBC_ARBU') || constant('SP_WBC_ARBU') !== true ) {
+
+                        $eo_wbc_target = get_term_by('slug',$cart['eo_wbc_target'],'product_cat');
+                    } else {
+
+                        global $SP_WBC_ARB_first_cat_obj, $SP_WBC_ARB_second_cat_obj, $wp_query;
+
+                        $eo_wbc_target = null;
+                        $eo_wbc_slug = $cart['eo_wbc_target'];
+
+                        if (isset($SP_WBC_ARB_first_cat_obj) && $SP_WBC_ARB_first_cat_obj->slug === $eo_wbc_slug) {
+
+                            $eo_wbc_target = $SP_WBC_ARB_first_cat_obj;
+                        } elseif (isset($SP_WBC_ARB_second_cat_obj) && $SP_WBC_ARB_second_cat_obj->slug === $eo_wbc_slug) {
+
+                            $eo_wbc_target = $SP_WBC_ARB_second_cat_obj;
+                        } elseif (isset($wp_query->queried_object) && isset($wp_query->queried_object->slug) && $wp_query->queried_object->slug === $eo_wbc_slug) {
+
+                            $eo_wbc_target = $wp_query->queried_object;
+                        } else {
+                            $eo_wbc_target = get_term_by('slug', $eo_wbc_slug, 'product_cat');
+                        }
+                    }
+
                     if(!empty($eo_wbc_target) and !is_wp_error($eo_wbc_target)) {
                         $cart['eo_wbc_target'] = $eo_wbc_target->slug;
                     }
@@ -620,6 +640,7 @@ class Category {
         
         if(empty($this->first_category_slug)) {
 
+            — SP_WBC_PSFAR possible to skip for ajax ring builder
             if( !defined('SP_WBC_ARBU') || constant('SP_WBC_ARBU') !== true ) {
 
                 $this->first_category_slug = wbc()->options->get_option('configuration','first_slug');
@@ -630,6 +651,7 @@ class Category {
                 $first_category_object = $SP_WBC_ARB_first_cat_obj;
 
             }
+
             if (!empty($first_category_object) && !is_wp_error($first_category_object)) {
                 $this->first_category_slug = $first_category_object->slug;
             }
@@ -638,6 +660,7 @@ class Category {
 
         if(empty($this->second_category_slug)) {
             
+            — SP_WBC_PSFAR possible to skip for ajax ring builder
             if( !defined('SP_WBC_ARBU') || constant('SP_WBC_ARBU') !== true ) {
 
                 $this->second_category_slug = wbc()->options->get_option('configuration','second_slug');
@@ -647,6 +670,7 @@ class Category {
                 global $SP_WBC_ARB_second_cat_obj;
                 $second_category_object = $SP_WBC_ARB_second_cat_obj;
             }
+
             if (!empty($second_category_object) && !is_wp_error($second_category_object)) {
                 $this->second_category_slug = $second_category_object->slug;
             }
