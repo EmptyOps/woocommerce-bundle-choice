@@ -1,0 +1,6 @@
+{    
+    "require": {
+        "woocommerce/woocommerce": "^3.8",
+        "phpunit/phpunit": "7.5.18"
+    }   
+}

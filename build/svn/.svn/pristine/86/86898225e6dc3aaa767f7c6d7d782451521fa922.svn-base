@@ -1,0 +1,16 @@
+[Mar 30 2020 08:24:39] Parse Error in /var/www/html/wpd/wp-content/plugins/woo-bundle-choice/EO_WBC_Frontend/css/eo_wbc_breadcrumb.php at line number 184
+"syntax error, unexpected '\";' (T_CONSTANT_ENCAPSED_STRING)"
+[Mar 30 2020 08:26:42] Parse Error in /var/www/html/wpd/wp-content/plugins/woo-bundle-choice/EO_WBC_Frontend/css/eo_wbc_breadcrumb.php at line number 182
+"syntax error, unexpected '\";' (T_CONSTANT_ENCAPSED_STRING)"
+[Mar 30 2020 08:28:07] Parse Error in /var/www/html/wpd/wp-content/plugins/woo-bundle-choice/EO_WBC_Frontend/css/eo_wbc_breadcrumb.php at line number 182
+"syntax error, unexpected '\";' (T_CONSTANT_ENCAPSED_STRING)"
+[Mar 30 2020 08:29:01] Parse Error in /var/www/html/wpd/wp-content/plugins/woo-bundle-choice/EO_WBC_Frontend/css/eo_wbc_breadcrumb.php at line number 182
+"syntax error, unexpected '\";' (T_CONSTANT_ENCAPSED_STRING)"
+[Mar 30 2020 08:30:46] Parse Error in /var/www/html/wpd/wp-content/plugins/woo-bundle-choice/EO_WBC_Frontend/css/eo_wbc_breadcrumb.php at line number 182
+"syntax error, unexpected '\";' (T_CONSTANT_ENCAPSED_STRING)"
+[Mar 30 2020 08:31:02] Parse Error in /var/www/html/wpd/wp-content/plugins/woo-bundle-choice/EO_WBC_Frontend/css/eo_wbc_breadcrumb.php at line number 182
+"syntax error, unexpected '\";' (T_CONSTANT_ENCAPSED_STRING)"
+[Mar 30 2020 09:24:53] Parse Error in /var/www/html/wpd/wp-content/plugins/woo-bundle-choice/EO_WBC_Frontend/css/eo_wbc_breadcrumb.php at line number 118
+"syntax error, unexpected '.'"
+[Mar 30 2020 09:24:57] Parse Error in /var/www/html/wpd/wp-content/plugins/woo-bundle-choice/EO_WBC_Frontend/css/eo_wbc_breadcrumb.php at line number 118
+"syntax error, unexpected '.'"

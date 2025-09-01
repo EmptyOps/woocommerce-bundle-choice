@@ -1,0 +1,8 @@
+[Oct 07 2019 06:50:08] Parse Error in /usr/local/ampps/www/rd/wp-content/plugins/woo-bundle-choice/EO_WBC_Filter.php at line number 130
+"syntax error, unexpected ')'"
+[Oct 07 2019 06:51:27] Parse Error in /usr/local/ampps/www/rd/wp-content/plugins/woo-bundle-choice/EO_WBC_Filter.php at line number 130
+"syntax error, unexpected ')'"
+[Oct 07 2019 07:01:42] Notice in /usr/local/ampps/www/rd/wp-content/plugins/woo-bundle-choice/EO_WBC_Filter.php at line number 127
+"Array to string conversion"
+[Oct 07 2019 07:02:07] Notice in /usr/local/ampps/www/rd/wp-content/plugins/woo-bundle-choice/EO_WBC_Filter.php at line number 127
+"Array to string conversion"

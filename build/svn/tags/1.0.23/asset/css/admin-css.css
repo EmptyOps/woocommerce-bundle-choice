@@ -1,0 +1,41 @@
+.tab-wrapped{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;  
+}
+.ui.tab .fields{
+	margin:0 0 1em !important;
+}
+
+.ui.tab>.fields>.field{
+	padding-left: 0 !important;	
+}
+
+#wpfooter{
+	position: relative !important;
+}
+
+.notice, div.error, div.updated{
+	margin: 5px 2px !important;
+}
+
+.ui.button.secondary.inverted{
+	color:#1b1c1d !important;
+    box-shadow: 0 0 0 2px #1b1c1d inset !important;
+    background-color: white !important;
+}
+
+.ui.button.secondary.inverted:hover{
+	color:#1b1c1d !important;	
+    box-shadow: 0 0 0 2px #1b1c1d inset !important;
+    background-color: white !important;
+}
+
+.ui.table,.ui.segment[class*="bottom attached"]{
+  border-radius:0 !important;
+}
+
+.ui.top.attached.tabular.menu.tab-wrapped, .ui.pointing.secondary.menu {
+    overflow-x: auto;
+    overflow-y: hidden;
+}

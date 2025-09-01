@@ -1,0 +1,2 @@
+[Mar 06 2020 11:06:03] Recoverable Error in /var/www/html/wpd/wp-content/plugins/woocommerce-bundle-choice/EO_WBC_Frontend/EO_WBC_Product.php at line number 202
+"Object of class WP_Error could not be converted to string"

@@ -1,0 +1,64 @@
+dist: trusty
+language: php
+
+notifications:
+  email:
+    on_success: never
+    on_failure: change
+
+services:
+  - mysql
+  - xvfb
+
+cache:
+  directories:
+    - vendor
+    - $HOME/.composer/cache
+
+env:
+  global:
+    - PATH="$TRAVIS_BUILD_DIR/vendor/bin:$PATH"
+    - WP_CLI_BIN_DIR="$TRAVIS_BUILD_DIR/vendor/bin"
+    - WP_VERSION=latest WP_MULTISITE=0
+
+jobs:
+  include:
+    - php: 7.2
+      env: WP_VERSION=latest WP_MULTISITE=0 RUN_PHPCS=1
+
+before_script:  
+  - export PATH="$HOME/.composer/vendor/bin:$PATH"  
+  
+  - git clone git://develop.git.wordpress.org/ /tmp/wordpress/
+  
+  - git clone https://github.com/EmptyOps/woocommerce.git /home/travis/build/EmptyOps/woocommerce
+  - |
+    if [ -f ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini ]; then
+      phpenv config-rm xdebug.ini
+    else
+      echo "xdebug.ini does not exist"
+    fi
+  - |
+    if [[ ! -z "$WP_VERSION" ]] ; then
+      bash bin/install-wp-tests.sh wordpress_test root '' localhost $WP_VERSION
+      composer global require "phpunit/phpunit=5.7.*|7.5.*"
+    fi
+  - |
+    if [[ "$WP_TRAVISCI" == "phpcs" ]] ; then
+      composer global require wp-coding-standards/wpcs
+      phpcs --config-set installed_paths $HOME/.composer/vendor/wp-coding-standards/wpcs
+    fi
+
+script:
+  - |
+    if [[ ! -z "$WP_VERSION" ]] ; then
+      phpunit
+      WP_MULTISITE=1 phpunit
+    fi
+  - |
+    if [[ "$WP_TRAVISCI" == "phpcs" ]] ; then
+      phpcs
+    fi
+branches:
+  only:    
+    - wbctests

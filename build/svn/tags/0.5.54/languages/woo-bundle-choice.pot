@@ -1,0 +1,738 @@
+# Copyright (C) 2019 emptyopssphere
+# This file is distributed under the same license as the WooCommerce Bundle Choice plugin.
+msgid ""
+msgstr ""
+"Project-Id-Version: WooCommerce Bundle Choice 0.5.2\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/woo-bundle-choice\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2019-09-06T11:48:43+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.3.0\n"
+"X-Domain: woo-bundle-choice\n"
+
+#. Plugin Name of the plugin
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_Config.php:22
+msgid "WooCommerce Bundle Choice"
+msgstr ""
+
+#. Plugin URI of the plugin
+msgid "https://wordpress.org/plugins/woocommerce-bundle-choice/"
+msgstr ""
+
+#. Description of the plugin
+msgid "An E-Commerce tool that let your customer's buy product in a set and create map that relates between your product categories."
+msgstr ""
+
+#. Author of the plugin
+msgid "emptyopssphere"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "https://profiles.wordpress.org/emptyopssphere"
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_Actions.php:39
+msgid "Product mapping preference saved successfully."
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_Actions.php:180
+msgid "Filter(s) Deleted Successfully."
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_Actions.php:189
+msgid "Filter Deleted Successfully."
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_Actions.php:226
+msgid "Filter Already Exists."
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_Actions.php:243
+msgid "New Filter Added Successfully."
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_Actions.php:271
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_Actions.php:279
+msgid "Map Removed Successfully."
+msgstr ""
+
+#. translators: %2$s: </strong> tag
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_Actions.php:364
+msgid "%1$s WooCommerce Bundle Choice %2$s Configured Successfully."
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_Actions.php:389
+msgid "Map Already Exists."
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_Actions.php:398
+msgid "New Map Added Successfully."
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_Actions.php:409
+msgid "Error! Failed to add new map. please contact our developers for help."
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_Config.php:26
+msgid "Configuration"
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_Config.php:30
+msgid "Mapping"
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_Config.php:34
+msgid "Filters"
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_Config.php:38
+msgid "Personalize"
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_First_Filter_Table.php:53
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_Second_Filter_Table.php:50
+msgid "Yes"
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_First_Filter_Table.php:53
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_Second_Filter_Table.php:50
+msgid "No"
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_First_Filter_Table.php:65
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_Second_Filter_Table.php:62
+msgid "No filter(s) exists, please add some filters."
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_First_Filter_Table.php:72
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_First_Filter_Table.php:136
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_List_Table.php:58
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_List_Table.php:116
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_Second_Filter_Table.php:69
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_Second_Filter_Table.php:133
+msgid "Delete"
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_First_Filter_Table.php:83
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_Second_Filter_Table.php:80
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Filter.php:87
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Filter.php:196
+msgid "Filter"
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_First_Filter_Table.php:84
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_Second_Filter_Table.php:81
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Filter.php:103
+msgid "Label"
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_First_Filter_Table.php:85
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_Second_Filter_Table.php:82
+msgid "Advance filter"
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_First_Filter_Table.php:86
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_Second_Filter_Table.php:83
+msgid "Input type"
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_First_Filter_Table.php:87
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_Second_Filter_Table.php:84
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Filter.php:143
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Filter.php:252
+msgid "Ordering"
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_List_Table.php:51
+msgid "No map(s) exists, please add some maps."
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_List_Table.php:68
+msgid "First Term"
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_List_Table.php:69
+msgid "Second Term"
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_List_Table.php:70
+#: index.php:97
+msgid "Discount"
+msgstr ""
+
+#. translators: %3s: rating link
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Config.php:7
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Filter.php:7
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Home.php:183
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Personalize.php:8
+msgid "If you like %1$s WooCommerce Bundle Choice %2$s please leave us a %3$s  rating. A huge thanks in advance!"
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Config.php:92
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Error.php:46
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Home.php:190
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Mapping.php:156
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Personalize.php:33
+msgid "If you are facing any issue, please write to us immediately."
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Config.php:94
+msgid "Configurations"
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Config.php:102
+msgid "Choice Buttons Configuration"
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Config.php:107
+msgid "Buttons Configuration"
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Config.php:108
+msgid "Set custom position of choice buttons."
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Config.php:112
+msgid "Setting"
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Config.php:116
+msgid "Default"
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Config.php:117
+msgid "Shortcode"
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Config.php:120
+msgid "Choose type of setup.<br/>&nbsp;Default : non-technical users.<br/>&nbsp;Shortcode : technical users only."
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Config.php:125
+msgid "Position"
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Config.php:133
+msgid "Begining"
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Config.php:134
+msgid "Middle"
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Config.php:135
+msgid "End"
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Config.php:136
+msgid "After 1st section"
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Config.php:137
+msgid "After 2nd section"
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Config.php:138
+msgid "After 3rd section"
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Config.php:139
+msgid "After 4th section"
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Config.php:140
+msgid "After 5th section"
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Config.php:141
+msgid "After 6th section"
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Config.php:142
+msgid "After 7th section"
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Config.php:143
+msgid "After 8th section"
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Config.php:144
+msgid "After 9th section"
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Config.php:145
+msgid "Hide on home page"
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Config.php:147
+msgid "Position of buttons on your home page."
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Config.php:158
+msgid "Make Pair Button Configuration"
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Config.php:159
+msgid "Configure make pair button available on product page."
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Config.php:163
+msgid "Enabled"
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Config.php:168
+msgid "Check here to show make pair button on product pages."
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Config.php:174
+msgid "Button Label"
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Config.php:178
+msgid "Text that will be displayed on button."
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Config.php:186
+msgid "Navigation & Product Category"
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Config.php:191
+msgid "First Category"
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Config.php:192
+msgid "The first of any two product that would you like to present."
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Config.php:197
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Config.php:262
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Config.php:324
+msgid "Name"
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Config.php:208
+msgid "Name to your first category."
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Config.php:213
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Config.php:276
+msgid "Slug"
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Config.php:224
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Config.php:286
+msgid "Optional! slug is url friendly name."
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Config.php:228
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Config.php:290
+msgid "URL"
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Config.php:232
+msgid "Optional! Set SEO friendly url of your like."
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Config.php:236
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Config.php:298
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Config.php:335
+msgid "Icon"
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Config.php:246
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Config.php:308
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Config.php:345
+msgid "Icon to be shown on breadcrumb."
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Config.php:257
+msgid "Second Category"
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Config.php:258
+msgid "The second of any two product that would you like to present."
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Config.php:272
+msgid "Name to your second category."
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Config.php:294
+msgid "Optional! Set SEO friendly url of your like"
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Config.php:319
+msgid "Preview"
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Config.php:320
+msgid "The final result of first category and second category."
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Config.php:331
+msgid "Name to combination of two categories."
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Config.php:354
+msgid "Horizontal Filter Configurations"
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Config.php:359
+msgid "Filter Configuration"
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Config.php:360
+msgid "Configure horizontal filter bar."
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Config.php:364
+msgid "Filter Status"
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Config.php:368
+msgid "check here to enable horizontal filter bar at category page."
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Config.php:380
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Filter.php:156
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Filter.php:265
+msgid "Save"
+msgstr ""
+
+#. translators: %2s: </strong> tag
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Error.php:24
+msgid "%1$s Woo Bundle Choice %2$s have successfully submited error report, expect fixup within 2-3 working days."
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Error.php:55
+msgid "Following error details will be sent to <strong>Woo Bundle Choice's</strong> support team."
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Error.php:62
+msgid "Clear log and retrun."
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Filter.php:55
+msgid "Filter's menu configuration"
+msgstr ""
+
+#. translators: %s: name of the filter
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Filter.php:62
+msgid "%s's filter configuration"
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Filter.php:113
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Filter.php:222
+msgid "Is advanced filter option ?"
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Filter.php:124
+msgid "Input Type"
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Filter.php:127
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Filter.php:236
+msgid "Icon Only"
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Filter.php:128
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Filter.php:237
+msgid "Icon and Text"
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Filter.php:129
+msgid "Numeric slider"
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Filter.php:130
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Filter.php:239
+msgid "Text slider"
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Filter.php:131
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Filter.php:240
+msgid "Checkbox"
+msgstr ""
+
+#. translators: %s: filter's name
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Filter.php:183
+msgid "Add %s's filter"
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Filter.php:238
+msgid "Number slider"
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Head_Banner.php:12
+msgid "Thank you for installing Woocommerce Bundle Choice! Woocommerce Bundle Choice excites users to buy with joy."
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Home.php:194
+msgid "Getting started! Just do two steps below and you are all done!"
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Home.php:208
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Home.php:226
+msgid "Select Two Categories"
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Home.php:211
+msgid "Map Categories"
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Home.php:215
+msgid "Done"
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Home.php:223
+msgid "Configure Woocommerce Bundled Choice Plugin by selecting two main product category."
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Home.php:231
+msgid "Creating map is process of binding links between product sub-categories, which will eventually let user combine products based on these category mappings."
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Home.php:234
+msgid "Map Categories."
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Home.php:239
+msgid "You are all done, plugin is working."
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Home.php:242
+msgid "Let's check it out"
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Home.php:244
+msgid "It will redirect to buttons widget on home, if you have used shortcode than find it on particular page yourself."
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Mapping.php:165
+msgid "Product mapping preference"
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Mapping.php:166
+msgid "Determine how the product mapping shoul behave.<br/> eg: AND - product belongs to both category/attribute A and B<br/> OR - product belongs to either of category/attribute A or B"
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Mapping.php:170
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Mapping.php:230
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Mapping.php:239
+msgid "Category"
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Mapping.php:172
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Mapping.php:182
+msgid "And"
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Mapping.php:174
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Mapping.php:184
+#: EO_WBC_Frontend/EO_WBC_Home.php:89
+msgid "Or"
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Mapping.php:180
+msgid "Attribute"
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Mapping.php:191
+msgid "Save Preference"
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Mapping.php:202
+msgid "Map creation and modification"
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Mapping.php:223
+msgid "Add New Maps"
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Mapping.php:234
+msgid "Select sub-category from first category."
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Mapping.php:243
+msgid "Select sub-category from second category."
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Mapping.php:247
+msgid "Discount rate in %"
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Mapping.php:250
+msgid "Save New Map"
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Personalize.php:37
+msgid "Extra Features"
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Personalize.php:46
+msgid "Product page content"
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Personalize.php:50
+msgid "Add to Cart Button Text"
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Personalize.php:53
+msgid "Text to be shown on add to cart button on product page."
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Personalize.php:60
+msgid "Home page content"
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Personalize.php:64
+msgid "Custome Tagline"
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Personalize.php:67
+msgid "Tiltle line under which button will appear."
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Personalize.php:71
+msgid "Button Text"
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Personalize.php:74
+msgid "Adds prefix text on button."
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Personalize.php:78
+msgid "Default Button"
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Personalize.php:87
+msgid "Use default button styling or custom styling."
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Personalize.php:91
+msgid "Button Background Color"
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Personalize.php:94
+msgid "Set background color of button."
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Personalize.php:98
+msgid "Button Hover Color"
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Personalize.php:101
+msgid "Color to show when mouse moves over button."
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Personalize.php:105
+msgid "Button Border Color"
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Personalize.php:108
+msgid "Set button's border color."
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Personalize.php:112
+msgid "Button Text Color"
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Personalize.php:115
+msgid "Set custome text color on button."
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Personalize.php:119
+msgid "Button Radius (px)"
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Personalize.php:122
+msgid "Give button ronded corner effect."
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Personalize.php:131
+msgid "Customize Breadcrumb"
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Personalize.php:135
+msgid "Active Breadcrumb"
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Personalize.php:138
+msgid "Color for crumb currently in use."
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Personalize.php:142
+msgid "Non-Active Breadcrumb"
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Personalize.php:145
+msgid "Color for crumb currently not in use."
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Personalize.php:149
+msgid "Radius (px)"
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Personalize.php:152
+msgid "Give rounded corner effect to breadcrumb."
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Personalize.php:156
+msgid "Show/Hide Icons"
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/EO_WBC_View_Personalize.php:177
+msgid "Save Settings"
+msgstr ""
+
+#: EO_WBC_Admin/EO_WBC_Support.php:147
+#: EO_WBC_Admin/EO_WBC_Support.php:152
+msgid "The index key should be either a string or an integer"
+msgstr ""
+
+#. translators: %5$s: reporting </a> ends
+#: EO_WBC_Choice.php:86
+msgid "%1$s WooCommerce Bundle Choice %2$s have noticed %3$s plugin errors, would you like to have a look or %4$s report to the support. %5$s"
+msgstr ""
+
+#. translators: %2$s: </strong> tag
+#: EO_WBC_Choice.php:104
+msgid "%1$s WooCommerce Bundle Choice %2$s hasn`t configured or partially configured yet."
+msgstr ""
+
+#: EO_WBC_Frontend/EO_WBC_Filter_Widget.php:604
+msgid "Advance Filter"
+msgstr ""
+
+#: EO_WBC_Frontend/EO_WBC_Home.php:76
+msgid "Make your own pair from recommendation"
+msgstr ""
+
+#: EO_WBC_Frontend/EO_WBC_Home.php:86
+#: EO_WBC_Frontend/EO_WBC_Home.php:98
+msgid "start with"
+msgstr ""
+
+#: EO_WBC_Frontend/EO_WBC_Product.php:72
+msgid "Add to pair"
+msgstr ""
+
+#: EO_WBC_Frontend/EO_WBC_Product.php:110
+msgid "Continue"
+msgstr ""
+
+#: EO_WBC_Frontend/EO_WBC_Review.php:176
+msgid "Unexpected error has occured"
+msgstr ""
+
+#: EO_WBC_Frontend/EO_WBC_Review.php:233
+msgid "Add This To Cart"
+msgstr ""
+
+#: index.php:66
+msgid "Settings"
+msgstr ""

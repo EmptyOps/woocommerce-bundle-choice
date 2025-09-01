@@ -1,0 +1,121 @@
+<?php 
+if (!defined('ABSPATH')) exit;
+
+if(!class_exists('WP_List_Table')){
+    require_once( ABSPATH . 'wp-admin/includes/class-wp-list-table.php' );    
+}
+
+if(!class_exists('EO_WBC_Second_Filter_Table')){
+	
+	class EO_WBC_Second_Filter_Table extends WP_List_Table{
+		
+		public function __construct(){
+
+			 parent::__construct([
+	                        'singular' => 'second-filter', 
+	                        'plural'   => 'second-filters', 
+	                        'ajax'     => false 
+                        ]);
+		}
+		
+		public function get_filters(){
+
+			$filters_data=unserialize(get_option('eo_wbc_add_filter_second',"a:0:{}"));                	
+			$_rows=array();
+
+        	if(count($filters_data)>0){
+            	foreach ($filters_data as $item) {
+            		$item=(array)$item;
+            		$item_name=@(get_term_by('id',$item['name'],'product_cat')->name);
+            		$item_name=empty($item_name)?wc_get_attribute($item['name'])->name:$item_name;
+
+            		$_rows[]=array( 'id'=>$item['name'],
+            						'filter'=>$item_name,
+            						'label'=>$item['label'],
+            						'type'=>($item['advance']=='1'?'Yes':'No'),
+            						'input'=>$item['input']
+            					);
+            	}
+            	return $_rows;
+            } else {
+	        	return false;
+	        }                     
+		}
+
+		function no_items(){
+			echo "<span style='color:red'>No filter(s) exists, please add some filters.</span>";
+		}
+
+		function column_cb($item) {
+			
+			$actions = array(
+		        /*'edit'      => sprintf('<a href="?page=%s&action=%s&map=%s&eo_wbc_action=single_map">Edit</a>',$_REQUEST['page'],'edit',$item['id']),*/
+		        'delete'    => sprintf('<a href="?page=%s&action=%s&name=%s&eo_wbc_action=%s&eo_filter_target=%s">Delete</a>',$_REQUEST['page'],'delete',$item['id'],'single_filter_delete','eo_wbc_add_filter_second'),		        
+		    );
+
+	        return sprintf('<span><input type="checkbox" name="cb[]" value="%1$s" /></span><div style="width: max-content;">%2$s</div>', $item['id'],$this->row_actions($actions));    
+	    }
+	
+
+		//get list of columns to label on the table's top and bottom.
+        function get_columns(){
+          $columns = array(        
+          	'cb'=>'<input type="checkbox" />',    
+            'filter'    => 'Filter',
+            'label'   => 'Label',
+            'type'=>'Advance filter',
+            'input'=>'Input type'
+          );
+          return $columns;
+        }
+     
+        //make data ready to be shown.
+        function prepare_items() {
+          	$columns = $this->get_columns();
+          
+        	$hidden = array();
+    	    $sortable = array();
+
+	        $this->_column_headers = array($columns, $hidden, $sortable);          
+
+          	$data=$this->get_filters();
+
+		  	$per_page = 5;
+		  	$current_page = $this->get_pagenum();
+		  	$total_items = count($data);
+		  	
+		  	// only ncessary because we have sample data
+		  	if(is_array($data)){
+		  		$data = array_slice($data,(($current_page-1)*$per_page),$per_page);	
+		  	}
+		  	
+		  	$this->set_pagination_args( array(
+			    'total_items' => $total_items,                  //WE have to calculate the total number of items
+		    	'per_page'    => $per_page                     //WE have to determine how many items to show on a page
+		  	) );
+
+		  	$this->items =$data;
+          
+        }
+        
+        function column_default( $item, $column_name ) {
+              switch( $column_name ) { 
+                case 'filter':                    
+                case 'label':
+                case 'type':     
+                case 'input':                
+                  return $item[ $column_name ];
+                default:
+                  return print_r( $item, true ) ; //Show the whole array for troubleshooting purposes
+            }
+        }
+
+        function get_bulk_actions() {
+		  $actions = array(
+		    'delete'    => 'Delete',
+		    /*'edit'    => 'Edit'*/
+		  );
+		  return $actions;
+		}
+	}
+}
