@@ -305,6 +305,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
 		add_filter('sp_wbc_webhook_process', function($status, $data, $webhook_source) {
 
+			ACTIVE_TODO aapde add_filter hook bind kariyo hooks function ni ander ak code mukvano aaviyo hase aemthi subtab_key and field_key mate su pass karvu ae aaviyu nhi hoy to aena example mate kayak hard coder aapi didhu hase aevu kayak hase to tya empty string pass kari devani che. basically aapde jayer multi server support extension api layer mate implement thy tayer decide thase. -- to h
 		    return self::handle_refresh_token_type($status, $data, '', '', $webhook_source);
 		}, 10, 3);
     }
@@ -1003,17 +1004,17 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 	        $new_token = isset( $data['refresh_token'] ) ? $data['refresh_token'] : null;
 
 	        ACTIVE_TODO note that this is not yet the final standard architecture for resolution of that multiple servers support for ext api layers -- to h
-	        $save_filed_key = apply_filters( 'sp_wbc_webhook_refresh_token_save_key', array('subtab_key' => $subtab_key,'field_key'  => $field_key,), $webhook_source );
+	        $save_field_key = apply_filters( 'sp_wbc_webhook_refresh_token_save_key', array('subtab_key' => $subtab_key,'field_key'  => $field_key,), $webhook_source );
 
 	        $saved = false;
 
-	        if ( !empty( $save_filed_key['field_key'] ) && empty( $save_filed_key['subtab_key'] ) ) {
+	        if ( !empty( $save_field_key['field_key'] ) && empty( $save_field_key['subtab_key'] ) ) {
 
-	            $saved = wbc_set_options( $save_filed_key['field_key'], $new_token );
+	            $saved = wbc_set_options( $save_field_key['field_key'], $new_token );
 
-	        } elseif ( !empty( $save_filed_key['subtab_key'] ) && !empty( $save_filed_key['field_key'] ) ) {
+	        } elseif ( !empty( $save_field_key['subtab_key'] ) && !empty( $save_field_key['field_key'] ) ) {
 
-	            $saved = wbc()->options->update_option( $save_filed_key['subtab_key'], $save_filed_key['field_key'], $new_token );
+	            $saved = wbc()->options->update_option( $save_field_key['subtab_key'], $save_field_key['field_key'], $new_token );
 	        }
 
 	        // Check saving result
@@ -1024,6 +1025,15 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 	                'msg'  => 'Refresh token processed & saved successfully'
 	            );
 	        } else {
+
+	        	self::sp_wbc_webhook_log('refresh_token_save_failed', [
+	        	    'headers'        => null,
+	        	    'api_key'        => null,
+	        	    'status'         => null,
+	        	    'data'           => null,
+	        	    'webhook_source' => $webhook_source,
+	        	    'response'       => $status
+	        	]);
 
 	            return array(
 	                'type' => 'error',

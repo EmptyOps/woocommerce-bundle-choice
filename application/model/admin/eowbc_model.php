@@ -415,6 +415,8 @@ class Eowbc_Model {
 
 		$args = $temp;
 
+		$args = apply_filters('sp_wbc_admin_subtab_before_new_entry_add_or_update_args', $args, $form_definition, $is_auto_insert_for_template);
+
 	    $res = apply_filters('sp_wbc_admin_subtab_before_new_entry_add_or_update', $res, $form_definition, $is_auto_insert_for_template, $args);
 
 	    if ( empty($res['type']) || $res['type'] != 'success' ) {
