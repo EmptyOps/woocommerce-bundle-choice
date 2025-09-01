@@ -157,6 +157,24 @@ done
 echo "Copy dierectories done"
 
 
+echo "Checking PHP syntax for all plugin files..."
+PHP_ERROR=0
+for file in $(find "$PLUGIN_BUILDS_PATH/$PLUGIN" -type f -name "*.php"); do
+    ERR_MSG=$(php -l "$file" 2>&1) # Capture both success and error messages
+    if [[ $? -ne 0 ]]; then
+        echo "PHP error in: $file"
+        echo "$ERR_MSG"
+        PHP_ERROR=1
+    fi
+done
+
+# If any error found, stop deployment
+if [[ $PHP_ERROR -ne 0 ]]; then
+    echo "PHP syntax check failed. Fix the above errors before deploying."
+    exit 1
+fi
+
+
 # Back to builds dir
 cd ../
 
