@@ -139,7 +139,6 @@ if(window.document.splugins.common.is_item_page || window.document.splugins.comm
  
  }  
 
-
 window.document.splugins.common.is_empty = function (val) {
 
     return (val == undefined || val == null || val.length <= 0) ? true : false;
@@ -220,7 +219,6 @@ window.document.splugins.common.key_to_number = function (key, replacements = {}
     // Replace dashes and underscores with periods
     return result;
 };    
-
 
  window.document.splugins.common.find_get_parameter = function(parameterName) {
     
