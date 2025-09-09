@@ -17,6 +17,7 @@
  * License URI: http://www.gnu.org/licenses/gpl-3.0.txt
  * Text Domain: woo-bundle-choice
  * Domain Path: /languages
+ * Requires Plugins: woocommerce
  */
 
 // If this file is called directly, abort.
