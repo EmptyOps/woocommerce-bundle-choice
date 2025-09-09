@@ -63,7 +63,14 @@ add_action( ( !is_admin() ? 'wp_enqueue_scripts' : 'admin_enqueue_scripts'),func
 		
 		window.document.splugins.common.is_pair_builder = <?php echo ((wbc()->sanitize->get('EO_WBC') == 1) ? "true" : "false");?>;
 
-		window.document.splugins.common.refresh_token = '<?php echo (empty(wbc_get_option()) ? '' : );?>';	
+		<?php
+
+			ACTIVE_TODO note that this is not yet the final standard architecture for resolution of that multiple servers support for ext api layers
+			$subtabkey = 'config';
+			$field_name = 'token';
+		?>
+
+		window.document.splugins.common.refresh_token = '<?php echo (empty(wbc_get_option($subtabkey."_".$field_name)) ? '' : wbc_get_option($subtabkey."_".$field_name));?>';	
 
 	</script>
 <?php  
