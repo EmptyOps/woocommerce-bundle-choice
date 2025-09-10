@@ -759,67 +759,26 @@ class Eowbc_Model {
     		return $tab_form;
     	}
 
-    	// --	hear we need to prepare the $res form $parsed by creating empty array and so on. -- to h & -- to pi 	done.
-    	// $res = $parsed;
+    	if( !empty( $tab_form['table_data'] ) ){
 
-    	if( 'save' == $mode || 'entry_save_process' == $mode ) {
+    		$first_key = array_key_first($tab_form['table_data']);
 
-    		// // --	from hear most probabely we need to return $res and it will be not prepared by should_return function most probabely. -- to h & -- to pi	done.
-    		// // NOTE: here we need to set in $res the type != success. but we have set all the standard proparty like type, sub_type and so on to ensure that if it have required on underlying layers then they can directly use it. and type != success condition is not nessesry so that is not applyed and type is set for the all scenarios. 
-    		// $res = array('type' => $parsed['type'], 'msg' => $parsed['msg'], 'sub_type' => $parsed['sub_type'], 'sub_msg' => $parsed['sub_msg']);
+    		if( is_array( $tab_form['table_data'][$first_key] ) ){
+
+    			if( isset( $tab_form['table_data'][$first_key][$fk.'_opts_hidden'] ) ){
+
+    				unset( $tab_form['table_data'][$first_key][$fk.'_opts_hidden'] );
+    			}
+    		} else{
+
+    			if( isset( $tab_form['table_data'][$fk.'_opts_hidden'] ) ){
+
+    				unset( $tab_form['table_data'][$fk.'_opts_hidden'] );
+    			}
+    		}
     	}
 
-    	if( 'get' == $mode ) {
-
-    		// $msg = null;
-
-    		// if( 'success' != $parsed['type'] ) {
-
-    		// 	$msg = $parsed['msg'];
-    		// } else {
-
-    		// 	$msg = $parsed['sub_msg'];
-    		// }
-
-    		$tab_form = self::inject_hidden_field($mode, $tab_form, $section_fields, $parsed, $fk, $fv["eas_rf"]);
-    	}
-
-    	return $tab_form;
-    }
-
-    private static function inject_hidden_field($mode, $tab_form, $fk, $eas_rf) {
-
-    	// $style = null;
-
-    	// $type = $parsed['type'] != 'success' ? $parsed['type'] : $parsed['sub_type'];
-
-    	// $style .= $type == 'error' ? 'color: red;' : '';
-		// $style .= $type == 'warning' ? 'background-color: yellow;' : '';
-		// $style .= $type == 'success' ? 'color: green;' : '';
-
-    	// $visible_info = array(
-		// 		    		'label' => eowbc_lang($msg),
-		// 		    		'type' => 'visible_info',
-		// 		    		'class' => array('small'),
-		// 		    		// 'size_class'=>array('sixteen','wide'),
-		// 		    		'attr'=>array('style = "'.$style.'"'),
-	    // 				);
-    	// // wbc_pr($visible_info);
-    	$options = $tab_form[$fk]['options'];
-
-    	$basic_payload = json_encode($options);
-
-    	$basic_payload = base64_encode($basic_payload);
-
-    	$table_data = array(
-						'type'=>'hidden',
-						'easf' => $basic_payload
-					);
-
-    	$tab_form = wbc()->common->array_insert_before($tab_form, $fk, $fk.'_opts_hidden', $table_data, true);
-    	// wbc_pr($tab_form);
     	return $tab_form;
     }
 
 }
-
