@@ -218,7 +218,10 @@ if(!class_exists('EOWBC_Error_Handler')){
 			if(function_exists('wp_get_theme')){
 				$theme=wp_get_theme();
 			} else{
-				$theme=get_current_theme();
+				NOTE:Changes applied on date 11-09-2025 as per the wordpress review team’s suggestion. 
+				// $theme=get_current_theme();
+				$theme=wp_get_theme();
+				
 			}		
 
 			$details='-------------------------------------------------------';

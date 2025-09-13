@@ -1185,7 +1185,10 @@ class EOWBC_Filter_Widget {
 				} else {				
 
 					if(is_wp_error($taxonomies) or empty($taxonomies)){
-						$taxonomies=get_terms(wc_attribute_taxonomy_name_by_id($term->id),array('hide_empty'=>false));
+                		NOTE:Changes applied on date 11-09-2025 as per the wordpress review team’s suggestion. 			
+						// $taxonomies=get_terms(wc_attribute_taxonomy_name_by_id($term->id),array('hide_empty'=>false));
+						$taxonomies=get_terms(array('taxonomy'=> wc_attribute_taxonomy_name_by_id($term->id),'hide_empty'=>false));
+
 					}
 
 					if( is_wp_error($taxonomies) or empty($taxonomies) ) return false;
@@ -1454,7 +1457,9 @@ class EOWBC_Filter_Widget {
 
 				if(is_wp_error($taxonomies)){
 
-					$taxonomies=get_terms(wc_attribute_taxonomy_name_by_id($term->id),array('hide_empty'=>false));
+                	NOTE:Changes applied on date 11-09-2025 as per the wordpress review team’s suggestion. 				
+					// $taxonomies=get_terms(wc_attribute_taxonomy_name_by_id($term->id),array('hide_empty'=>false));
+					$taxonomies=get_terms(array('taxonomy'=> wc_attribute_taxonomy_name_by_id($term->id),'hide_empty'=>false));
 				}
 
 				if(is_wp_error($taxonomies) or empty($taxonomies)) return false;
