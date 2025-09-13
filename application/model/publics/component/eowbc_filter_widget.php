@@ -1444,7 +1444,7 @@ class EOWBC_Filter_Widget {
 		$field_title='';	
 		$field_slug='';
 
-		if ($filter_type) {
+		if ($filter_type) { 
 			
 			$term=wbc()->wc->eo_wbc_get_attribute( str_replace('pa_','',$id) );			
 
