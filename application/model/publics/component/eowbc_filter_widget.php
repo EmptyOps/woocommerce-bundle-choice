@@ -1805,7 +1805,7 @@ class EOWBC_Filter_Widget {
 					// --- start ---
 					// $('[data-filter-slug="<?php /*echo $filter['slug']; */?>"]').on('click',function(event){
 
-						<?php/* if($filter_type==1):*/ ?>
+						<?php /* if($filter_type==1):*/ ?>
 					// 		let filter_target = jQuery('form#<?php /*echo $this->filter_prefix; */?>eo_wbc_filter [name="_attribute"]');
 					// 	<?php /*else:*/ ?>
 					// 		let filter_target = jQuery('form#<?php /*echo $this->filter_prefix; */?>eo_wbc_filter [name="_category"]');
