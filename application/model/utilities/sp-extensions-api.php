@@ -414,7 +414,8 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
 								// die('inside should_handle_response if');
 								// \eo\wbc\system\core\publics\Eowbc_Base_Model_Publics::handle_response($parsed, array());	
-								\eo\wbc\system\core\publics\Eowbc_Base_Model_Publics::handle_response($parsed, array(), array($args['hook_callback_args'][2]));		
+								// \eo\wbc\system\core\publics\Eowbc_Base_Model_Publics::handle_response($parsed, array(), $mode != 'entry_save_process' ? array() : array($args['hook_callback_args'][2]));
+								\eo\wbc\system\core\publics\Eowbc_Base_Model_Publics::handle_response($parsed, array(), array($args['hook_callback_args'][2]));
 							}
 							// die('inside should_handle_response if 123114');
 						}
@@ -862,7 +863,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
     	$table_data = array(
 						'type'=>'hidden',
-						'easf' => $basic_payload
+						/*'easf'*/'eas_rf' => $basic_payload
 					);
 
     	$tab_form = wbc()->common->array_insert_before($tab_form, $fk, $fk.'_opts_hidden', $table_data, true);
@@ -1001,6 +1002,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 	    if ( isset( $data['webhook_type'] ) && $data['webhook_type'] === 'refresh_token' ) {
 	        
 	        // Value from webhook payload
+	        -- aa refresh_token nu Django side api mathi su name aavanu che ae confirm kari ne hirenbhai ne kevanu che.
 	        $new_token = isset( $data['refresh_token'] ) ? $data['refresh_token'] : null;
 
 	        ACTIVE_TODO note that this is not yet the final standard architecture for resolution of that multiple servers support for ext api layers -- to h
