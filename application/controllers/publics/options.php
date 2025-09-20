@@ -72,7 +72,16 @@ class Options extends \eo\wbc\controllers\publics\Controller {
 	        $pid = $post->ID;
 
 	        if(!empty($pid)) {
-	            $product = wbc()->wc->eo_wbc_get_product($pid); 
+                — SP_WBC_PSFAR possible to skip for ajax ring builder
+	            if( !defined('SP_WBC_ARBU') || constant('SP_WBC_ARBU') !== true ) {
+                    $product = wbc()->wc->eo_wbc_get_product($pid);
+                } else {
+                    $product = sp_wbc_get_product_object_by_id_with_scenario(
+                        (int) $pid,
+                        'eo_wbc_get_product'
+                    );
+                }
+ 
 
 	            if(!empty($product) and !is_wp_error($product)){
 

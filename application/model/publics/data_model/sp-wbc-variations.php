@@ -344,7 +344,20 @@ class SP_WBC_Variations extends SP_Variations {
 			}
 
 			if ( $product_id ) {
-				$product    = wc_get_product( $product_id );
+				// $product    = wc_get_product( $product_id );
+				— SP_WBC_PSFAR possible to skip for ajax ring builder
+				if( !defined('SP_WBC_ARBU') || constant('SP_WBC_ARBU') !== true ) {
+
+				    $product = wc_get_product( $product_id );
+
+				} else {
+
+				    $product = sp_wbc_get_product_object_by_id_with_scenario(
+				        (int)$product_id,
+				        'wc_get_product'
+				    );
+				}
+
 				$alt_text[] = wp_strip_all_tags( get_the_title( $product->get_id() ) );
 			}
 
@@ -560,7 +573,18 @@ class SP_WBC_Variations extends SP_Variations {
 
 	public static function get_default_attributes($product_id){
 
-		$product = wc_get_product( $product_id );
+		— SP_WBC_PSFAR possible to skip for ajax ring builder
+		if( !defined('SP_WBC_ARBU') || constant('SP_WBC_ARBU') !== true ) {
+
+		    $product = wc_get_product( $product_id );
+
+		} else {
+
+		    $product = sp_wbc_get_product_object_by_id_with_scenario(
+		        (int)$product_id,
+		        'wc_get_product'
+		    );
+		}
 
 		if ( ! $product->is_type( 'variable' ) ) {
 			return array();
@@ -610,7 +634,20 @@ class SP_WBC_Variations extends SP_Variations {
 		}
 
 		if ( is_numeric( $product ) ) {
-			$product = wc_get_product( $product );
+
+			— SP_WBC_PSFAR possible to skip for ajax ring builder
+			$product_id = (int) $product;
+
+			if( !defined('SP_WBC_ARBU') || constant('SP_WBC_ARBU') !== true ) {
+			    // Normal WooCommerce flow
+			    $product = wc_get_product($product_id);
+			} else {
+			    // Ajax Ring Builder flow → use safe resolver
+			    $product = sp_wbc_get_product_object_by_id_with_scenario(
+			        $product_id,
+			        'wc_get_product'
+			    );
+			}
 		}
 
 		if ( ! $product->is_type( 'variable' ) ) {
@@ -677,7 +714,20 @@ class SP_WBC_Variations extends SP_Variations {
 	public static function get_available_variations( $product ) {
 
 		if ( is_numeric( $product ) ) {
-			$product = wc_get_product( absint( $product ) );
+
+			— SP_WBC_PSFAR possible to skip for ajax ring builder
+			$product_id = absint( $product );
+
+			if( !defined('SP_WBC_ARBU') || constant('SP_WBC_ARBU') !== true ) {
+			    // Normal WooCommerce flow
+			    $product = wc_get_product( $product_id );
+			} else {
+			    // Ajax Ring Builder flow → use safe resolver
+			    $product = sp_wbc_get_product_object_by_id_with_scenario(
+			        $product_id,
+			        'wc_get_product'
+			    );
+			}
 		}
 
 		return $product->get_available_variations();
@@ -821,7 +871,19 @@ class SP_WBC_Variations extends SP_Variations {
 
 			if(!empty($product_id)){
 	
-				$parent_product          = wc_get_product( $product_id );
+				— SP_WBC_PSFAR possible to skip for ajax ring builder
+				$parent_product_id = (int) $product_id;
+
+				if( !defined('SP_WBC_ARBU') || constant('SP_WBC_ARBU') !== true ) {
+				    // Normal WooCommerce flow
+				    $parent_product = wc_get_product( $parent_product_id );
+				} else {
+				    // Ajax Ring Builder flow → use safe resolver
+				    $parent_product = sp_wbc_get_product_object_by_id_with_scenario(
+				        $parent_product_id,
+				        'wc_get_product'
+				    );
+				};
 				$parent_product_image_id = $parent_product->get_image_id();
 			}
 
@@ -917,7 +979,19 @@ class SP_WBC_Variations extends SP_Variations {
 
 	public function get_default_gallery_images( $product_id ) {
 
-		$product              = wc_get_product( $product_id );
+		— SP_WBC_PSFAR possible to skip for ajax ring builder
+		$product_id = (int) $product_id;
+
+		if( !defined('SP_WBC_ARBU') || constant('SP_WBC_ARBU') !== true ) {
+		    // Normal WooCommerce flow
+		    $product = wc_get_product( $product_id );
+		} else {
+		    // Ajax Ring Builder flow → use safe resolver
+		    $product = sp_wbc_get_product_object_by_id_with_scenario(
+		        $product_id,
+		        'wc_get_product'
+		    );
+		}
 		$product_id           = $product->get_id();
 		$attachment_ids       = $product->get_gallery_image_ids( 'edit' );
 		$post_thumbnail_id    = $product->get_image_id( 'edit' );

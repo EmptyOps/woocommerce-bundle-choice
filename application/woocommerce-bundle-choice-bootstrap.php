@@ -75,6 +75,7 @@ class WooCommerce_Bundle_Choice_Bootstrap {
     	// call in builder tools
     	$this->visual_composer();
 
+    	-- Kirtan na 279.16.1 recording mate aa mukel che , aa haju fianlize thyu nthi.
 		if(false && (function_exists('is_ajax') and is_ajax()) or defined('WP_AJAX')) {
 			
 

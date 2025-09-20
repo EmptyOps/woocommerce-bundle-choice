@@ -286,9 +286,17 @@ class Eowbc_Related_Mapping /*extends Eowbc_Model*/ {
 		
 		if(empty(wbc()->sanitize->post('product_id'))){
 			return array();
-		}		
-
-  		$product = wc_get_product(wbc()->sanitize->post('product_id'));
+		}	
+			
+		— SP_WBC_PSFAR possible to skip for ajax ring builder
+  		if( !defined('SP_WBC_ARBU') || constant('SP_WBC_ARBU') !== true ) {
+  			$product = wc_get_product(wbc()->sanitize->post('product_id'));
+  		} else {
+  		    $product = sp_wbc_get_product_object_by_id_with_scenario(
+  		        $product_id,
+  		        'wc_get_product'
+  		    );
+  		}
   		
   		if( empty($product) or is_wp_error($product) ) {
 			return array();
@@ -514,7 +522,20 @@ class Eowbc_Related_Mapping /*extends Eowbc_Model*/ {
   		if( $query->have_posts() ){
   			while( $query->have_posts() ){
   				$query->the_post();
-  				$_product= wc_get_product( get_the_ID() /*$post->ID*/);
+  				--- — SP_WBC_PSFAR possible to skip for ajax ring builder
+  				$product_id = (int) get_the_ID(); // or use $post->ID
+
+  				if( !defined('SP_WBC_ARBU') || constant('SP_WBC_ARBU') !== true ) {
+  				    // Normal WooCommerce flow
+  				    $_product = wc_get_product($product_id);
+  				} else {
+  				    // Ajax Ring Builder flow → use safe resolver
+  				    $_product = sp_wbc_get_product_object_by_id_with_scenario(
+  				        $product_id,
+  				        'wc_get_product'
+  				    );
+  				}
+
   				$products_list[] = $_product;
   			} 
   		}

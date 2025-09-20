@@ -74,15 +74,15 @@ class Public_Handler {
 		wbc()->options->update_option('configuration','config_map',1);*/
 		add_action('template_redirect',function(){
 
-			// — SP_WBC_PSFAR possible to skip for ajax ring builder
+			— SP_WBC_PSFAR possible to skip for ajax ring builder
 
 			if( !defined('SP_WBC_ARB_EAS_ON') || constant('SP_WBC_ARB_EAS_ON') === true ) {
 
             	$bonus_features = array_filter(unserialize(wbc()->options->get_option('setting_status_setting_status_setting','bonus_features',serialize(array()))));
 
             	// added by harshil kirtan 279 task
-            	global $wp_query
-				if(!empty($bonus_features['filters_shop_cat']) and ( is_shop() || is_product_category()) || ( defined('SP_WBC_ARBU') && constant('SP_WBC_ARBU') === true && method_exists($wp_query, 'get_queried_object') && !empty($wp_query->get_queried_object()->term_id) ) and empty(wbc()->sanitize->get('EO_WBC'))) {
+            	global $wp_query;
+				if((!empty($bonus_features['filters_shop_cat']) and ( is_shop() || is_product_category())) || ( defined('SP_WBC_ARBU') && constant('SP_WBC_ARBU') === true && method_exists($wp_query, 'get_queried_object') && !empty($wp_query->get_queried_object()->term_id) ) and empty(wbc()->sanitize->get('EO_WBC'))) {
 
 				    \eo\wbc\controllers\publics\pages\Shop_Category_Filter::instance()->init();
 
@@ -101,7 +101,7 @@ class Public_Handler {
 
 			// }
 
-
+			// added by harshil kirtan 279 task
 			if(is_product() and !empty(wbc()->sanitize->get('eowbc_askq'))) {
 
 			    \eo\wbc\controllers\publics\pages\Product_Question::instance()->init();
@@ -203,7 +203,7 @@ class Public_Handler {
 
 						            	if(!empty($_current_category_id)) {
 
-						            		— SP_WBC_PSFAR possible to skip for ajax ring builder
+						            		// — SP_WBC_PSFAR possible to skip for ajax ring builder
 						            		if( !defined('SP_WBC_ARBU') || constant('SP_WBC_ARBU') !== true ) {
 						            		
 							            		$_current_category_object = wbc()->wc->get_term_by('term_id',$_current_category_id,'product_cat');
@@ -258,7 +258,7 @@ class Public_Handler {
 
 			add_action($hook, function () {
 			    
-			     — SP_WBC_PSFAR possible to skip for ajax ring builder
+			     // — SP_WBC_PSFAR possible to skip for ajax ring builder
 			    global $wp_query;
 			    self::instance()->enable_session();
 
@@ -267,8 +267,7 @@ class Public_Handler {
 
 			    } elseif (is_shop()) {
 
-			    	— SP_WBC_PSFAR possible to skip for ajax ring builder
-
+			    	// — SP_WBC_PSFAR possible to skip for ajax ring builder
 			    	if( !defined('SP_WBC_ARB_EAS_ON') || constant('SP_WBC_ARB_EAS_ON') === true ) {
 			            \eo\wbc\controllers\publics\pages\Shop::instance()->init();
 
@@ -283,7 +282,7 @@ class Public_Handler {
 			        //     \eo\wbc\controllers\publics\pages\Feed::instance()->init();
 			        // }
 
-			     — SP_WBC_PSFAR possible to skip for ajax ring builder
+			     // — SP_WBC_PSFAR possible to skip for ajax ring builder
 			    } elseif (is_product_category() || (defined('SP_WBC_ARBU') && constant('SP_WBC_ARBU') === true && method_exists($wp_query, 'get_queried_object') && !empty($wp_query->get_queried_object()->term_id))) {
 			        \eo\wbc\controllers\publics\pages\Category::instance()->init();
 
@@ -291,8 +290,22 @@ class Public_Handler {
 			            \eo\wbc\controllers\publics\pages\Feed::instance()->init();
 			        }
 
-			    } elseif (is_product()) {
-			        \eo\wbc\controllers\publics\pages\Product::instance()->init();
+			    } elseif (is_product() || defined('SP_WBC_ARBU') && constant('SP_WBC_ARBU') === true) {
+
+			    	if (defined('SP_WBC_ARBU') && constant('SP_WBC_ARBU') === true) {
+			    		
+			    		global $product;
+
+				    	if (defined('SP_WBC_ARBU') && constant('SP_WBC_ARBU') === true && !empty($product) && method_exists($product, 'get_id') && !empty($product->get_id())) {
+
+ 
+
+				        	\eo\wbc\controllers\publics\pages\Product::instance()->init();
+				    	}
+			    	} else {
+
+			    		\eo\wbc\controllers\publics\pages\Product::instance()->init();
+			    	}
 
 			    } elseif (is_page(__('Product Review','woo-bundle-choice'))) {
 			        \eo\wbc\controllers\publics\pages\Preview::instance()->init();

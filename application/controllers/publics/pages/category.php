@@ -687,12 +687,13 @@ class Category {
             }
         }
 
-        if( !($this->is_shop_cat_filter && is_shop())/*when the is_shop_cat_filter flag is on and it is shop page then it generates warnings on below statement so excluded that as category is unnecessary by any means in that case.*/ ) {
-            return wbc()->common->get_category('category',null,array($this->first_category_slug,$this->second_category_slug));
-        }
-        else {
-            return null;
-        }
+        -- Kirtan na 279.16.1 recording mate aa mukel che , aa haju fianlize thyu nthi.
+        // if( !($this->is_shop_cat_filter && is_shop())/*when the is_shop_cat_filter flag is on and it is shop page then it generates warnings on below statement so excluded that as category is unnecessary by any means in that case.*/ ) {
+        //     return wbc()->common->get_category('category',null,array($this->first_category_slug,$this->second_category_slug));
+        // }
+        // else {
+        //     return null;
+        // }
         global $wp_query;  
 
         wbc_pr($wp_query->get_queried_object()->term_id);

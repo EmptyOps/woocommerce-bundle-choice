@@ -45,11 +45,44 @@ add_action( ( !is_admin() ? 'wp_enqueue_scripts' : 'admin_enqueue_scripts'),func
 
     	window.document.splugins.common.ajax_url = '<?php echo admin_url('admin-ajax.php'); ?>';
 
-		window.document.splugins.common.is_shop_page = <?php echo ((is_shop()) ? "true" : "false");?>; 
+		window.document.splugins.common.is_shop_page = <?php 
+		echo ((is_shop()) ? "true" : "false");?>; 
 
-		window.document.splugins.common.is_category_page = <?php echo ((is_product_category()) ? "true" : "false");?>; 
-
+		— SP_WBC_PSFAR possible to skip for ajax ring builder
+		global $wp_query;
+		window.document.splugins.common.is_category_page = <?php echo ((is_product_category()) 
+				|| (
+			        defined('SP_WBC_ARBU')
+			        && constant('SP_WBC_ARBU') === true
+			        && method_exists($wp_query, 'get_queried_object')
+			        && !empty($wp_query->get_queried_object()->term_id)
+			        && empty(wbc()->sanitize->get('EO_WBC'))
+			    )
+			) ? "true" : "false");?>; 
+		-- old che and hirenbhai ne batvi ne niche old if kadhi nakhvi.
 		window.document.splugins.common.is_item_page = <?php echo ((is_product()) ? "true" : "false");?>;
+		— SP_WBC_PSFAR possible to skip for ajax ring builder
+		<?php
+		global $product;
+		?>
+		<script>
+		    <?php if (is_product() || (defined('SP_WBC_ARBU') && constant('SP_WBC_ARBU') === true)) { ?>
+		        
+		        <?php if (defined('SP_WBC_ARBU') && constant('SP_WBC_ARBU') === true) { ?>
+		            
+		            <?php if (defined('SP_WBC_ARBU') && constant('SP_WBC_ARBU') === true && !empty($product) && method_exists($product, 'get_id') && !empty($product->get_id())) { ?>
+		                window.document.splugins.common.is_item_page = true;
+		            <?php } ?>
+		        
+		        <?php } else { ?>
+		            window.document.splugins.common.is_item_page = true;
+		        <?php } ?>
+		    
+		    <?php } else { ?>
+		        window.document.splugins.common.is_item_page = false;
+		    <?php } ?>
+		</script>
+
 
 		window.document.splugins.common.is_mobile = <?php echo ((wbc_is_mobile()) ? "true" : "false");?>;
 		
@@ -65,13 +98,47 @@ add_action( ( !is_admin() ? 'wp_enqueue_scripts' : 'admin_enqueue_scripts'),func
 
 	</script>
 <?php  
-		
-	if( is_shop() || is_product_category() || is_product() ) {
 	
-		// ACTIVE_TODO even though now we are going to use the underscore js but so far it is only by the optionsUI feature so skip loading it here for the rest of features and just put the if condition here for lighter experience to all other users -- to s 
-		//	NOTE: below asset will load in footer, so far it is loading from header only because of the chained dependancy on the common js dependancy of the wc-cart variation asset given below 
-		wp_enqueue_script('underscore'/*, includes_url('js') . '/underscore.min.js'*/ );	 
-		// echo '<script src="'.includes_url('js') . '/underscore.min.js'.'"></script>';
+	— SP_WBC_PSFAR possible to skip for ajax ring builder
+	global $wp_query;
+	if (
+	    is_shop()
+	    || (
+	        is_product_category()
+	        || (
+	            defined('SP_WBC_ARBU')
+	            && constant('SP_WBC_ARBU') === true
+	            && method_exists($wp_query, 'get_queried_object')
+	            && !empty($wp_query->get_queried_object()->term_id)
+	            && empty(wbc()->sanitize->get('EO_WBC'))
+	        )
+	    )
+	    || (
+	    	is_product()
+	    	|| defined('SP_WBC_ARBU') && constant('SP_WBC_ARBU') === true 
+	    )
+	) {
+    	if (defined('SP_WBC_ARBU') && constant('SP_WBC_ARBU') === true) {
+    		
+    		global $product;
+
+	    	if (defined('SP_WBC_ARBU') && constant('SP_WBC_ARBU') === true && !empty($product) && method_exists($product, 'get_id') && !empty($product->get_id())) {
+
+
+
+	        	// ACTIVE_TODO even though now we are going to use the underscore js but so far it is only by the optionsUI feature so skip loading it here for the rest of features and just put the if condition here for lighter experience to all other users -- to s 
+				//	NOTE: below asset will load in footer, so far it is loading from header only because of the chained dependancy on the common js dependancy of the wc-cart variation asset given below 
+				wp_enqueue_script('underscore'/*, includes_url('js') . '/underscore.min.js'*/ );	 
+				// echo '<script src="'.includes_url('js') . '/underscore.min.js'.'"></script>';
+	    	}
+    	} else {
+
+			// ACTIVE_TODO even though now we are going to use the underscore js but so far it is only by the optionsUI feature so skip loading it here for the rest of features and just put the if condition here for lighter experience to all other users -- to s 
+			//	NOTE: below asset will load in footer, so far it is loading from header only because of the chained dependancy on the common js dependancy of the wc-cart variation asset given below 
+			wp_enqueue_script('underscore'/*, includes_url('js') . '/underscore.min.js'*/ );	 
+			// echo '<script src="'.includes_url('js') . '/underscore.min.js'.'"></script>';
+    	}
+
 	}
 
 	if (!is_admin()) {
@@ -123,7 +190,10 @@ add_action( ( !is_admin() ? 'wp_enqueue_scripts' : 'admin_enqueue_scripts'),func
 		}
 
 		// ACTIVE_TODO temp. hold for removel and we need to remove as soon as we refactore the loading sequance of filter widget class and load asset function og that class. so it is highly temporary. and we need to fix if we face issues whwrw filter feature is not active on certain pages but still that is loading below asset then we need to prevent that also and other such issues.
-		if( is_shop() || is_product_category() ) {
+		global $wp_query;
+		— SP_WBC_PSFAR possible to skip for ajax ring builder
+		if (( is_shop() || is_product_category() )|| ( defined('SP_WBC_ARBU')&& constant('SP_WBC_ARBU') === true&& method_exists($wp_query, 'get_queried_object')&& !empty($wp_query->get_queried_object()->term_id)&& empty(wbc()->sanitize->get('EO_WBC')))) {
+
 			 $file_suffix = (WBC_SCRIPT_DEBUG) ? '' : '.min';
 			 wbc()->load->asset('js', 'publics/eo_wbc_filter'.$file_suffix, array('jquery'), "", false, true, null, null, true);
 

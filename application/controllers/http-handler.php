@@ -27,7 +27,8 @@ class Http_Handler {
 
 		do_action( 'before_process_request', array(self::instance(),'preprocess_request') );		
 
-		if(is_admin()){
+		-- Kirtan na 279.16.1 recording mate aa mukel che , aa haju fianlize thyu nthi.
+		if(false && is_admin()){
 
 			do_action( 'wbc_before_process_admin_request' );	
 			// Process as admin request.								
