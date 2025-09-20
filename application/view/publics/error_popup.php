@@ -24,7 +24,7 @@
   $file_suffix = (WBC_SCRIPT_DEBUG) ? '' : '.min';
   wbc()->load->asset('css','publics/buttons'.$file_suffix, array(), "", true);
   $file_suffix = (WBC_SCRIPT_DEBUG) ? '' : '.min';
-  wbc()->load->asset('js','fomantic/semantic.min'.$file_suffix, array(), "", true);
+  wbc()->load->asset('js','fomantic/semantic'.$file_suffix, array(), "", true);
   $file_suffix = (WBC_SCRIPT_DEBUG) ? '' : '.min';
   wbc()->load->asset('js','publics/buttons'.$file_suffix, array(), "", true);
   wp_enqueue_script('jquery-ui-core');

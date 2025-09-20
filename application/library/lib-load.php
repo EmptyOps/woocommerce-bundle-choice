@@ -73,11 +73,11 @@ if(!class_exists('WBC_Loader')) {
 					// add_action( 'wp_enqueue_scripts',function() { 
 			        	
 			            wp_register_style('fomantic-semantic.min',constant('EOWBC_ASSET_URL').'css/fomantic/semantic.min.css');
-			            $file_suffix = (WBC_SCRIPT_DEBUG) ? '' : '.min';
-			            wp_enqueue_style( 'fomantic-semantic'.$file_suffix);
+			            // $file_suffix = (WBC_SCRIPT_DEBUG) ? '' : '.min';
+			            wp_enqueue_style( 'fomantic-semantic'/*.$file_suffix*/);
 			            wp_register_script('fomantic-semantic.min',constant('EOWBC_ASSET_URL').'js/fomantic/semantic.min.js',array('jquery'),false);  
-			            $file_suffix = (WBC_SCRIPT_DEBUG) ? '' : '.min';  
-			            wp_enqueue_script( 'fomantic-semantic'.$file_suffix);        
+			            // $file_suffix = (WBC_SCRIPT_DEBUG) ? '' : '.min';  
+			            wp_enqueue_script( 'fomantic-semantic'/*.$file_suffix*/);        
 		       		// },100);	
 					break;
 

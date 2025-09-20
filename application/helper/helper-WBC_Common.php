@@ -429,12 +429,12 @@ class WBC_Common {
 
     public function load_fomantic(){
 		wp_register_style('eowbc_fomantic_css',constant('EOWBC_ASSET_URL').'css/fomantic/semantic.min.css');
-		$file_suffix = (WBC_SCRIPT_DEBUG) ? '' : '.min';
-		wp_enqueue_style('eowbc_fomantic_css'.$file_suffix);
+		// $file_suffix = (WBC_SCRIPT_DEBUG) ? '' : '.min';
+		wp_enqueue_style('eowbc_fomantic_css'/*.$file_suffix*/);
 		
 		wp_register_script('eowbc_fomantic_js',constant('EOWBC_ASSET_URL').'js/fomantic/semantic.min.js');
-		$file_suffix = (WBC_SCRIPT_DEBUG) ? '' : '.min';
-		wp_enqueue_script('eowbc_fomantic_js'.$file_suffix,'',array('jquery'),'',true);		
+		// $file_suffix = (WBC_SCRIPT_DEBUG) ? '' : '.min';
+		wp_enqueue_script('eowbc_fomantic_js'/*.$file_suffix*/,'',array('jquery'),'',true);		
     }
     
     public function current_theme_key() {
