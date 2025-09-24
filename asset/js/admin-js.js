@@ -754,3 +754,43 @@ function eowbc_do_deactivate( cbs, saved_tab_key, complete_callback ) {
     });
 
 }
+
+jQuery(document).ready(function () {
+
+    jQuery('.template-switch-toggle input[type="radio"], .template-switch-toggle select').on('change', function () {
+
+        handle_template_switch_toggle(jQuery(this));
+    });
+});
+
+function handle_template_switch_toggle($el) {
+
+    var selected_val = $el.val();
+
+    // Determine the selected option:
+    // If it's a <select>, get the selected <option>
+    // If it's a radio input, find the associated <input> using DOM traversal
+    var $selected_option = $el.is('select') 
+        ? $el.find('option:selected') 
+        : $el.is(':radio') 
+            ? $el.closest('.ui.radio.checkbox').find('input[type="radio"]') 
+            : $el; // fallback
+
+    // Get template type from data attribute
+    var template_type = $selected_option.data('template-type'); // new or old
+
+    // Get the specific switch id from data-target-switch-id attribute
+    var target_switch_id = $selected_option.data('target-switch-id');
+
+    // If switch ID is defined, use that to find the switch
+    var $switch = target_switch_id 
+        ? $('#' + target_switch_id) 
+        : $el.closest('.wbc-admin-section').find('.ui.toggle.checkbox');
+
+    // Apply Semantic UI checkbox API methods
+    if (template_type === 'new') {
+        $switch.checkbox('check');
+    } else {
+        $switch.checkbox('uncheck');
+    }
+}

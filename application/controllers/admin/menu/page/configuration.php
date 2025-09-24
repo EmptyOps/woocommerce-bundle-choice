@@ -333,7 +333,8 @@ if ( ! class_exists( 'Configuration' ) ) {
 											'class'=>array('fluid', 'small'),
 											'size_class'=>array('sixteen','wide'),
 										),	
-									),		
+									),
+
 									'config_advance_begin'=>array(
 										'type'=>'accordian',
 										'section_type'=>'start',
@@ -443,6 +444,5 @@ if ( ! class_exists( 'Configuration' ) ) {
 			return $form_definition;
 
 		}
-
 	}
 }		
