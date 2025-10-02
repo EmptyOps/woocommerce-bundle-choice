@@ -1010,9 +1010,10 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
 	        $saved = false;
 
+        	ACTIVE_TODO	niche nu function wbc_update_option and update_option both function call by default return true kre che to koi user na server ma extreme seconiro ma database update  fail thy due to certen reason jeva ke database server ma space availbale no hoy to tayer teva reason ne lidhe aapde aa functionally work karti bandh thy while user na server ma beji badhi functionaliti atleast read more ma work kare rakhe. to aapde first or second revision ma fix karvu pade. -- to h
 	        if ( !empty( $save_field_key['field_key'] ) && empty( $save_field_key['subtab_key'] ) ) {
 
-	            $saved = wbc_set_options( $save_field_key['field_key'], $new_token );
+	            $saved = wbc_update_option( $save_field_key['field_key'], $new_token );
 
 	        } elseif ( !empty( $save_field_key['subtab_key'] ) && !empty( $save_field_key['field_key'] ) ) {
 

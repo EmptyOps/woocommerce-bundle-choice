@@ -66,7 +66,7 @@ add_action( ( !is_admin() ? 'wp_enqueue_scripts' : 'admin_enqueue_scripts'),func
 		<?php
 
 			ACTIVE_TODO note that this is not yet the final standard architecture for resolution of that multiple servers support for ext api layers
-			$subtabkey = 'config';
+			$subtabkey = 'sp360_config';
 			$field_name = 'token';
 		?>
 
