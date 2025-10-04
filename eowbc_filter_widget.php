@@ -490,7 +490,7 @@ class EOWBC_Filter_Widget {
 				?>
 				    <script type="text/javascript">
 
-				        jQuery(document).ready((function(e){jQuery.fn.wbc_flip_toggle_image=function(e){//console.log("eo_wbc_filter_icon_select --");let t=jQuery(e).find("img");if(jQuery(e).hasClass("eo_wbc_filter_icon_select")){let r=jQuery(t).attr("data-toggleimgsrc");void 0!==r&&""!==r.trim()&&(//console.log(r),jQuery(e).addClass("toggled_image"),jQuery(t).attr("src",r))}else{let r=jQuery(t).attr("data-imgsrc");void 0!==r&&""!==r.trim()&&(//console.log(r),jQuery(e).removeClass("toggled_image"),jQuery(t).attr("src",r))}}}));
+				        jQuery(document).ready((function(e){jQuery.fn.wbc_flip_toggle_image=function(e){let t=jQuery(e).find("img");if(jQuery(e).hasClass("eo_wbc_filter_icon_select")){let r=jQuery(t).attr("data-toggleimgsrc");void 0!==r&&""!==r.trim()&&(jQuery(e).addClass("toggled_image"),jQuery(t).attr("src",r))}else{let r=jQuery(t).attr("data-imgsrc");void 0!==r&&""!==r.trim()&&(jQuery(e).removeClass("toggled_image"),jQuery(t).attr("src",r))}}}));
 				    </script>
 
 				    

@@ -665,7 +665,45 @@ class Options extends \eo\wbc\controllers\publics\Controller {
 				?>
 				    
 				    <style type="text/css">
-				       .variable-item-color-fill,.variable-item-span,.variable-items-wrapper .variable-item{height:<?php _e($dimention);line-height:<?php _e($dimention)}.ui.mini.images .variable-item.image{width:auto}.image-variable-item{border:none!important;border-bottom:2px solid transparent!important}.image-variable-item.selected,.image-variable-item:hover{box-shadow:none!important;border-bottom:2px solid!important}.image_text-variable-item,table.variations td{border:none!important}.image_text-variable-item:not(.selected) div{visibility:hidden}.image_text-variable-item:hover div{visibility:visible}.image_text-variable-item.selected,.image_text-variable-item:hover{box-shadow:none!important}.woocommerce .summary.entry-summary table.variations tr{width:auto!important}.rotate-up{-webkit-animation:.3s linear spin-up;-moz-animation:.3s linear spin-up;animation:.3s linear forwards spin-up}@-moz-keyframes spin-up{100%{-moz-transform:rotate(-180deg)}}@-webkit-keyframes spin-up{100%{-webkit-transform:rotate(-180deg)}}@keyframes spin-up{100%{-webkit-transform:rotate(-180deg);transform:rotate(-180deg)}}.rotate-down{-webkit-animation:.3s linear spin-down;-moz-animation:.3s linear spin-down;animation:.3s linear forwards spin-down}@-moz-keyframes spin-down{0%{-moz-transform:rotate(180deg)}100%{-moz-transform:rotate(360deg)}}@-webkit-keyframes spin-down{0%{-webkit-transform:rotate(180deg)}100%{-webkit-transform:rotate(360deg)}}@keyframes spin-down{0%{-webkit-transform:rotate(180deg);transform:rotate(180deg)}100%{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}#wbc_variation_toggle{padding:.7em;margin-bottom:.7em;border:1px solid #5e5c5b;display:inline-block;color:#2d2d2d;font-size:1rem;cursor:pointer;border-radius:1px!important}table.variations{padding:5px;border:1px solid #5e5c5b}.ui.images{width:100%!important;margin:auto!important;float:none!important}.select3-selection,table.variations td.label{display:none!important}table.variations .value{padding-left:1rem!important}.variable-items-wrapper{list-style:none;display:table-cell!important}.ui.red.ribbon.label{margin-bottom:5px!important}.variable-items-wrapper .variable-item div{margin:auto;display:block}.variable-items-wrapper .variable-item{margin:.25rem;text-align:center;border:solid;border-radius:<?php _e($border_radius)}.variable-items-wrapper .selected,.variable-items-wrapper .variable-item:hover{box-shadow:0 0 <?php _e($border_hover_width) ?> <?php _e($border_hover_color) ?>;border:1px solid}ul.variable-items-wrapper{margin:0}.button-variable-item{background-color:<?php _e($bg_color)}
+				       .ui.mini.images .variable-item.image{width:auto}.image-variable-item{border:none!important;border-bottom:2px solid transparent!important}.image-variable-item.selected,.image-variable-item:hover{box-shadow:none!important;border-bottom:2px solid!important}.image_text-variable-item,table.variations td{border:none!important}.image_text-variable-item:not(.selected) div{visibility:hidden}.image_text-variable-item:hover div{visibility:visible}.image_text-variable-item.selected,.image_text-variable-item:hover{box-shadow:none!important}.woocommerce .summary.entry-summary table.variations tr{width:auto!important}.rotate-up{-webkit-animation:.3s linear spin-up;-moz-animation:.3s linear spin-up;animation:.3s linear forwards spin-up}@-moz-keyframes spin-up{100%{-moz-transform:rotate(-180deg)}}@-webkit-keyframes spin-up{100%{-webkit-transform:rotate(-180deg)}}@keyframes spin-up{100%{-webkit-transform:rotate(-180deg);transform:rotate(-180deg)}}.rotate-down{-webkit-animation:.3s linear spin-down;-moz-animation:.3s linear spin-down;animation:.3s linear forwards spin-down}@-moz-keyframes spin-down{0%{-moz-transform:rotate(180deg)}100%{-moz-transform:rotate(360deg)}}@-webkit-keyframes spin-down{0%{-webkit-transform:rotate(180deg)}100%{-webkit-transform:rotate(360deg)}}@keyframes spin-down{0%{-webkit-transform:rotate(180deg);transform:rotate(180deg)}100%{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}#wbc_variation_toggle{padding:.7em;margin-bottom:.7em;border:1px solid #5e5c5b;display:inline-block;color:#2d2d2d;font-size:1rem;cursor:pointer;border-radius:1px!important}table.variations{padding:5px;border:1px solid #5e5c5b}.ui.images{width:100%!important;margin:auto!important;float:none!important}table.variations td.label{display:none!important}table.variations .value{padding-left:1rem!important}.variable-items-wrapper{list-style:none;display:table-cell!important}.ui.red.ribbon.label{margin-bottom:5px!important}.variable-items-wrapper .variable-item div{margin:auto;display:block}
+				       .variable-items-wrapper .variable-item{                 
+				            /*display: inline-table;*/
+				            height: <?php _e($dimention); ?>;
+				            width: <?php _e($dimention); ?>;
+				            min-width: 35px;                        
+				            text-align: center;                     
+				            line-height: <?php _e($dimention); ?>;                      
+				            cursor: pointer;
+				            margin: 0.25rem;
+				            text-align: center;
+				            border: <?php _e($border_width) ?> solid <?php _e($border_color) ?>;
+				            border-radius: <?php _e($border_radius); ?>;
+				            overflow: hidden;
+				        }   
+				        .variable-items-wrapper .variable-item:hover,.variable-items-wrapper .selected{
+				            box-shadow:0px 0px <?php _e($border_hover_width) ?> <?php _e($border_hover_color) ?>;                   
+				            border: 1px <?php _e($border_hover_color) ?> solid;
+				        }
+				        ul.variable-items-wrapper{
+				            margin: 0px;
+				        }
+				        .variable-item-color-fill,.variable-item-span{                  
+				            height: <?php _e($dimention); ?>;
+				            width: 100%;
+				            line-height: <?php _e($dimention); ?>;
+				        }
+				        .select2,.select3-selection{
+				            display: none !important;
+				        }
+				        .button-variable-item{
+				            background-color: <?php _e($bg_color); ?>;
+				            color: <?php _e($font_color); ?>;
+				        }
+				        .button-variable-item:hover{
+				            background-color: <?php _e($bg_hover_color); ?>;
+				            color: <?php _e($font_hover_color); ?>; 
+				        }
+				       
 				    </style>
 				<?php
 				}

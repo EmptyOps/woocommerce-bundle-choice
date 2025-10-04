@@ -175,7 +175,6 @@ if(WBC_SCRIPT_DEBUG == true){
       });
 
       function eo_wbc_error_popup(type,msg) {
-        //console.log("eo_wbc_error_popup called...");
 
         eo_wbc_outer_containers=undefined;
 

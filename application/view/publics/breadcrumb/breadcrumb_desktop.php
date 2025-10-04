@@ -74,15 +74,7 @@ if(isset($_GET['FIRST']) and isset($_GET['SECOND'])) {
         </script>';
     } else {
         $html .= '<script>
-            jQuery(document).ready(function(){
-                jQuery(".onclick_redirect").on("click", function(){
-                    var e = jQuery(this), r = jQuery(e).find("[data-remove-url]");
-                    r.length > 0 ? window.location.href = jQuery(r[0]).data("remove-url") : window.location.href = jQuery(e).data("begin");
-                });
-                jQuery("[data-clickable_breadcrumb]").on("click", function(){
-                    window.location.href = jQuery(this).data("clickable_breadcrumb");
-                });
-            });
+            jQuery(document).ready((function(){jQuery(".onclick_redirect").on("click",(function(){var e=jQuery(this),r=jQuery(e).find("[data-remove-url]");r.length>0?window.location.href=jQuery(r[0]).data("remove-url"):window.location.href=jQuery(e).data("begin")})),jQuery("[data-clickable_breadcrumb]").on("click",(function(){window.location.href=jQuery(this).data("clickable_breadcrumb")}))}));
         </script>';
     }
 
