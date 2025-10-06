@@ -117,14 +117,33 @@ window.document.splugins.common.admin.form_builder.core = function( configs ) {
     	return window.document.splugins.templating.core.get_template( tmpl_id, templating_lib );
     };
 
+   // var set_sp_eid_private = function( thisObj, target_id ) {
+        
+    //     var parentdiv = jQuery( thisObj ).parent();
+    //     // jQuery( parentdiv ).find("#"+target_id)[0].val( jQuery( parentdiv ).dropdown("get selected").data("sp_eid") );
+    //     // console.log( jQuery( thisObj ).dropdown("get value") );
+    //     // console.log( jQuery( thisObj ).dropdown("get item", jQuery( thisObj ).dropdown("get value")) );
+    //     jQuery( "#"+target_id ).val( jQuery( jQuery( thisObj ).dropdown("get item", jQuery( thisObj ).dropdown("get value")) ).data("sp_eid") );
+    //     console.log( jQuery( "#"+target_id ).val( ) );
+    // };
+
+
     var set_sp_eid_private = function( thisObj, target_id ) {
         
-        var parentdiv = jQuery( thisObj ).parent();
-        // jQuery( parentdiv ).find("#"+target_id)[0].val( jQuery( parentdiv ).dropdown("get selected").data("sp_eid") );
-        // console.log( jQuery( thisObj ).dropdown("get value") );
-        // console.log( jQuery( thisObj ).dropdown("get item", jQuery( thisObj ).dropdown("get value")) );
-        jQuery( "#"+target_id ).val( jQuery( jQuery( thisObj ).dropdown("get item", jQuery( thisObj ).dropdown("get value")) ).data("sp_eid") );
-        console.log( jQuery( "#"+target_id ).val( ) );
+        var parentdiv = jQuery(thisObj).dropdown("get value");
+        if (typeof parentdiv === "string") { parentdiv = parentdiv.split(","); }
+
+        var sp_eids = [];
+        parentdiv.forEach(function(val) {
+
+            var item = jQuery(thisObj).dropdown("get item", val);
+            if (item && jQuery(item).data("sp_eid")) {
+                
+                sp_eids.push(jQuery(item).data("sp_eid"));
+            }
+        });
+
+        jQuery("#" + target_id).val(sp_eids.join(",")); 
     };
 
 
