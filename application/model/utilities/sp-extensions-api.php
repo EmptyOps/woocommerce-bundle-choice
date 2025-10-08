@@ -305,7 +305,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
 		add_filter('sp_wbc_webhook_process', function($status, $data, $webhook_source) {
 
-			ACTIVE_TODO Upar na point kithelu che aem aapde haju aagal na prompt ma code baniyo hoy aema navu private static function je aapde add_filter hook bind kariyo hooks function ni ander ak code mukvano aaviyo hase aemthi subtab_key and filed_key mate su pass karvu ae aaviyu nhi hoy to aena example mate kayak hard coder aapi didhu hase aevu kayak hase to tya empty string pass kari devani che and aeni upar active todo muki devanu che. aa point kitho che ae muki devano ch, aa basically aapde jayer multi server support extension api layer mate implement thy tayer decide thase. -- to h
+			ACTIVE_TODO ahi subtab_key and filed_key mate su pass karvu ae aaviyu nathi to aena example mate hard coded aapi didhu che empty string. aa basically aapde jayer multi server support extension api layer mate implement thy tayer decide thase. -- to h
 		    return self::handle_refresh_token_type($status, $data, '', '', $webhook_source);
 		}, 10, 3);
     }
@@ -906,10 +906,10 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
         if (!$api_key || $api_key !== $valid_api_key) {
 
-        	ACTIVE_TODO note that this is not yet the final standard architecture for resolution of that multiple servers support for ext api layers
+        	ACTIVE_TODO note that this is not yet the final standard architecture for resolution of that multiple servers support problem for ext api layers -- to h
         	$valid_api_key = apply_filters('sp_wbc_webhook_api_key', $valid_api_key, $webhook_source);
 
-        	if( $api_key && $api_key !=== $valid_api_key ){
+        	if( $api_key && $api_key === $valid_api_key ){
 
         		// Nothing to do
         	} else {
