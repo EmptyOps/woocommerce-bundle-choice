@@ -996,7 +996,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
         return false;
     }
 
-    private static function handle_refresh_token_type($status, $data, $subtab_key = null, $field_key = null, $webhook_source) {
+    private static function handle_refresh_token_type($status, $data, $subtab_key = null, $field_key = null, $webhook_source = null) {
 
 	    // Check if webhook_type is refresh_token
 	    if ( isset( $data['webhook_type'] ) && $data['webhook_type'] === 'refresh_token' ) {
