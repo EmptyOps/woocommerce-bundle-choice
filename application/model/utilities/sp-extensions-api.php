@@ -306,7 +306,13 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 		add_filter('sp_wbc_webhook_process', function($status, $data, $webhook_source) {
 
 			ACTIVE_TODO ahi subtab_key and filed_key mate su pass karvu ae aaviyu nathi to aena example mate hard coded aapi didhu che empty string. aa basically aapde jayer multi server support extension api layer mate implement thy tayer decide thase. -- to h
+				-- have since On 11-10-2025 aapde price markup, ajax dropdown etc mate webhook use karvano plane kariye chiye to maybe ahi extras subtab ni key and tena token field ni key pass karvani aavshe. but tena badha flow confirm karvana baki che. actully extras tab ni key and token field key to refresh tokern mate che ae mukay gay che. to aapde je jerur che te beja layer mate che and te beja layers par aavshe. so most propbrely ahi nhi aave kai karvanu. aa 2 extension sample data run pela. -- to h
 		    return self::handle_refresh_token_type($status, $data, '', '', $webhook_source);
+		}, 10, 3);
+
+		add_filter('sp_wbc_webhook_process', function($status, $data, $webhook_source) {
+
+		    return self::subtab_fields_ajax_event_handling($status, $data, $webhook_source);
 		}, 10, 3);
     }
 
@@ -1041,6 +1047,43 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 	            return array(
 	                'type' => 'error',
 	                'msg'  => 'Failed to save refresh token'
+	            );
+	        }
+	    }
+
+	    // If not refresh_token type → return original status unchanged
+	    return $status;
+	}
+
+    private static function subtab_fields_ajax_event_handling($status, $data, $webhook_source = null) {
+
+	    // Check if webhook_type is refresh_token
+	    if ( isset( $data['webhook_type'] ) && $data['webhook_type'] === 'subtab_fields_ajax_event_handling' ) {
+
+	        $resp_data = apply_filters( 'sp_wbc_webhook_subtab_fields_ajax_event_handling', array(), $data, $webhook_source );
+
+	        // Check saving result
+	        if ($resp_data) {
+
+	            return array(
+	                'type' => 'success',
+	                'msg'  => 'Subtab fields ajax event executed successfully',
+	                'resp_data' => $resp_data,
+	            );
+	        } else {
+
+	        	self::sp_wbc_webhook_log('subtab_fields_event_failed', [
+	        	    'headers'        => null,
+	        	    'api_key'        => null,
+	        	    'status'         => null,
+	        	    'data'           => null,
+	        	    'webhook_source' => $webhook_source,
+	        	    'response'       => $status
+	        	]);
+
+	            return array(
+	                'type' => 'error',
+	                'msg'  => 'Failed to prepare response data'
 	            );
 	        }
 	    }
