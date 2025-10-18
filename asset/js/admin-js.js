@@ -307,6 +307,43 @@ function eowbc_ready($){
                 var resjson = window.document.splugins.parseJSON(result);     //jQuery.parseJSON(result);
                 if( typeof(resjson["type"]) != undefined && resjson["type"] == "success" ){
 
+                    if (typeof resjson.percent !== 'undefined') {
+
+                        // find the tab key from data attribute
+                        var subtab_key = $thisBtn.data('tab_key');
+                        var progressBarId = 'sync_progress_' + subtab_key;
+                        
+                        // update progress bar value
+                        $('#' + progressBarId).val(resjson.percent);
+
+                        console.log('Progress updated for', progressBarId, '→', resjson.percent + '%');
+
+                        // 🔸 If progress < 100, do not show toast message, only update bar
+                        if (resjson.percent < 100) {
+
+                            // after 3 sec, trigger the save button again (auto-refresh)
+                            setTimeout(function() {
+
+                                console.log('Re-triggering save button after 3 sec...');
+                                $thisBtn.trigger('click');
+                            }, 3000);
+
+                            return; // prevent toast messages
+                        }
+                        // 🔸 If progress >= 100 → show success toast
+                        else {
+
+                            $('body').toast({
+
+                                class:'success',
+                                position: 'bottom right',
+                                message: (typeof(resjson["msg"]) != undefined && resjson["msg"] != "" ? resjson["msg"] : `Completed!`)
+                            });
+                            
+                            return;
+                        }
+                    }
+
                     // console.log({
                     //     class:'success',
                     //     position: 'bottom right',
@@ -350,7 +387,23 @@ function eowbc_ready($){
                 jQuery($this).text(original_txt);
             }
         });
-    });  
+    }); 
+
+    $('button.ui.button[data-action="sync"]').on('click', function(e) {
+
+        e.preventDefault();
+        e.stopPropagation();
+
+        var $syncBtn = $(this);
+        var saveBtnId = $syncBtn.data('save_id'); // e.g. "submit_button"
+        var $saveBtn = $('#' + saveBtnId);
+
+        // Log for debug
+        console.log('Sync button clicked → triggering save button:', saveBtnId);
+
+        // 🔹 Trigger hidden save button click (no other process here)
+        $saveBtn.trigger('click');
+    }); 
 
     $('input[data-action="bulk_select_all"]').on('change',function(e){
         e.preventDefault();
