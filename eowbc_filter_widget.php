@@ -208,9 +208,9 @@ class EOWBC_Filter_Widget {
 
 			$active_color=wbc()->options->get_option('appearance_breadcrumb','breadcrumb_backcolor_active',$fg_color); //get_option('eo_wbc_active_breadcrumb_color',$fg_color);
 			//wp-head here....
-			echo "<?php
+			<?php
 					if(WBC_SCRIPT_DEBUG == true){
-					?>    
+					echo "  
 					    <style>
 					        .ui.labeled.ticked.range.slider .labels{
 					            font-size:".wbc()->options->get_option('appearance_filters','appearance_filters_slider_font_size','0.75em',true,true)." !important;
@@ -418,18 +418,13 @@ class EOWBC_Filter_Widget {
 					        }".((!wp_is_mobile() and !empty(wbc()->options->get_option('appearance_filters','appearance_filters_limit_height')))?".container.filters>.segments>.ui.segment .wide.column{ height: ".wbc()->options->get_option('appearance_filters','appearance_filters_limit_height').";}":"")."
 					                        
 					        /*Modifications............................*/
-					    </style>
-
-					<?php
+					    </style>"
 					}else{
-					?>
-					    
-					    <style>
+					echo "<style>
 					        .image_text-variable-item,table.variations td{border:none!important}.image_text-variable-item:not(.selected) div{visibility:hidden}.image_text-variable-item:hover div{visibility:visible}.image_text-variable-item.selected,.image_text-variable-item:hover{box-shadow:none!important}.woocommerce .summary.entry-summary table.variations tr{width:auto!important}.rotate-up{-webkit-animation:.3s linear spin-up;-moz-animation:.3s linear spin-up;animation:.3s linear forwards spin-up}@-moz-keyframes spin-up{100%{-moz-transform:rotate(-180deg)}}@-webkit-keyframes spin-up{100%{-webkit-transform:rotate(-180deg)}}@keyframes spin-up{100%{-webkit-transform:rotate(-180deg);transform:rotate(-180deg)}}.rotate-down{-webkit-animation:.3s linear spin-down;-moz-animation:.3s linear spin-down;animation:.3s linear forwards spin-down}@-moz-keyframes spin-down{0%{-moz-transform:rotate(180deg)}100%{-moz-transform:rotate(360deg)}}@-webkit-keyframes spin-down{0%{-webkit-transform:rotate(180deg)}100%{-webkit-transform:rotate(360deg)}}@keyframes spin-down{0%{-webkit-transform:rotate(180deg);transform:rotate(180deg)}100%{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}#wbc_variation_toggle{padding:.7em;margin-bottom:.7em;border:1px solid #5e5c5b;display:inline-block;color:#2d2d2d;font-size:1rem;cursor:pointer;border-radius:1px!important}table.variations{padding:5px;border:1px solid #5e5c5b}.ui.images{width:100%!important;margin:auto!important;float:none!important}table.variations td.label{display:none!important}table.variations .value{padding-left:1rem!important}.variable-items-wrapper{list-style:none;display:table-cell!important}.ui.red.ribbon.label{margin-bottom:5px!important}.variable-items-wrapper .variable-item div{margin:auto;display:block}
-					    </style>  
-					<?php
+					    </style> "
 					}
-					?>";	
+					?>;	
 
 				ob_start();
 				if ((in_array(wbc()->options->get_option('filters_altr_filt_widgts','second_category_altr_filt_widgts') ,array('sc3','sc5')) and $this->_category==$this->second_category_slug) or (in_array(wbc()->options->get_option('filters_altr_filt_widgts','first_category_altr_filt_widgts'),array('fc3','fc5')) and $this->_category==$this->first_category_slug)) {
