@@ -309,8 +309,21 @@ function eowbc_ready($){
 
                     if (typeof resjson.percent !== 'undefined') {
 
+                        var autoChangeField = jQuery($this).data('auto-change'); // e.g. 'auto_change_counter'
+                        if (autoChangeField) {
+
+                            var $field = $('#' + autoChangeField);
+                            if ($field.length > 0) {
+                                
+                                var currentVal = parseInt($field.val()) || 0;
+                                $field.val(currentVal + 1);
+                                console.log(autoChangeField + ' incremented →', currentVal + 1);
+                            }
+                        }
+
                         // find the tab key from data attribute
-                        var subtab_key = $thisBtn.data('tab_key');
+                        var subtab_key = jQuery($this).data('tab_key');
+                        console.log('Detected subtab_key →', subtab_key);
                         var progressBarId = 'sync_progress_' + subtab_key;
                         
                         // update progress bar value
@@ -325,7 +338,7 @@ function eowbc_ready($){
                             setTimeout(function() {
 
                                 console.log('Re-triggering save button after 3 sec...');
-                                $thisBtn.trigger('click');
+                                jQuery($this).trigger('click');
                             }, 3000);
 
                             return; // prevent toast messages

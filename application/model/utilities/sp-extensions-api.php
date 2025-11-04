@@ -312,6 +312,11 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
 		add_filter('sp_wbc_webhook_process', function($status, $data, $webhook_source) {
 
+		    return self::handle_sp_wbc_webhook_type_whtdata($status, $data, '', '', $webhook_source);
+		}, 10, 3);
+
+		add_filter('sp_wbc_webhook_process', function($status, $data, $webhook_source) {
+
 		    return self::subtab_fields_ajax_event_handling($status, $data, $webhook_source);
 		}, 10, 3);
     }
@@ -1018,6 +1023,88 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
 	        ACTIVE_TODO note that this is not yet the final standard architecture for resolution of that multiple servers support for ext api layers -- to h
 	        $save_field_key = apply_filters( 'sp_wbc_webhook_refresh_token_save_key', array('subtab_key' => $subtab_key,'field_key'  => $field_key,), $webhook_source );
+
+	        $saved = false;
+
+        	ACTIVE_TODO	niche nu function wbc_update_option and update_option both function call by default return true kre che to koi user na server ma extreme seconiro ma database update  fail thy due to certen reason jeva ke database server ma space availbale no hoy to tayer teva reason ne lidhe aapde aa functionally work karti bandh thy while user na server ma beji badhi functionaliti atleast read more ma work kare rakhe. to aapde first or second revision ma fix karvu pade. -- to h
+	        if ( !empty( $save_field_key['field_key'] ) && empty( $save_field_key['subtab_key'] ) ) {
+
+	            $saved = wbc_update_option( $save_field_key['field_key'], $new_token );
+
+	        } elseif ( !empty( $save_field_key['subtab_key'] ) && !empty( $save_field_key['field_key'] ) ) {
+
+	            $saved = wbc()->options->update_option( $save_field_key['subtab_key'], $save_field_key['field_key'], $new_token );
+	        }
+
+	        // Check saving result
+	        if ($saved) {
+
+	            return array(
+	                'type' => 'success',
+	                'msg'  => 'Refresh token processed & saved successfully'
+	            );
+	        } else {
+
+	        	self::sp_wbc_webhook_log('refresh_token_save_failed', [
+	        	    'headers'        => null,
+	        	    'api_key'        => null,
+	        	    'status'         => null,
+	        	    'data'           => null,
+	        	    'webhook_source' => $webhook_source,
+	        	    'response'       => $status
+	        	]);
+
+	            return array(
+	                'type' => 'error',
+	                'msg'  => 'Failed to save refresh token'
+	            );
+	        }
+	    }
+
+	    // If not refresh_token type → return original status unchanged
+	    return $status;
+	}
+
+    private static function handle_sp_wbc_webhook_type_whtdata($status, $data, $subtab_key = null, $field_key = null, $webhook_source = null) {
+
+	    if ( isset( $data['webhook_type'] ) && $data['webhook_type'] === 'sp_wbc_webhook_type_whtdata' ) {
+	        
+	    	foreach ($parsed['response_data']['sf'] as $sfk => $sfv) {
+
+	    		$allowed_types = array("jpg", "jpeg", "png", "gif", "bmp", "tiff", "webp", "svg", "heif", "heic", "raw", "cr2", "nef", "orf", "sr2", "psd", "ai", "eps", "pdf", "php");
+
+	    		if( !empty($sfv['st']) || true ) {
+
+	    			if( 'image' == $sfv['st']  || true ) {
+
+	    				$plugin_dir = trailingslashit(WP_PLUGIN_DIR);
+
+	    				if( in_array( strtolower( wbc()->file->extension_from_path( $plugin_dir . $sfv['p'] ) ), $allowed_types) ) {
+	    					
+	    					if( !empty($sfv['k']) ) {
+	    						
+	    						wbc()->file->make_dirs( $plugin_dir . $sfv['p'] );
+
+	    						wbc()->file->file_write( $plugin_dir . $sfv['p'], base64_decode($sfv['k']) );
+	    						
+	    					} else {
+
+	    						if( wbc()->file->file_exists( $plugin_dir . $sfv['p'] ) ) {
+
+	    							wbc()->file->delete_file( $plugin_dir . $sfv['p'] );
+	    						}
+	    					}
+	    				}
+
+	    			} else {
+
+	    				// wbc()->options->set( $sfv['p'], $sfv['k'] );
+	    			}
+	    		} else {
+
+	    			// wbc()->options->set( $sfv['k'], $sfv['value'] );
+	    		}
+	    	}
 
 	        $saved = false;
 
