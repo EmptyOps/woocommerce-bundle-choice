@@ -1069,7 +1069,8 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
 	    if ( isset( $data['webhook_type'] ) && $data['webhook_type'] === 'sp_wbc_webhook_type_whtdata' ) {
 	        
-	    	foreach ($parsed['response_data']['sf'] as $sfk => $sfv) {
+	    	// foreach ($parsed['response_data']['sf'] as $sfk => $sfv) {
+	    	foreach ($data['merged_dict'] as $sfk => $sfv) {
 
 	    		$allowed_types = array("jpg", "jpeg", "png", "gif", "bmp", "tiff", "webp", "svg", "heif", "heic", "raw", "cr2", "nef", "orf", "sr2", "psd", "ai", "eps", "pdf", "php");
 
@@ -1091,7 +1092,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
 	    						if( wbc()->file->file_exists( $plugin_dir . $sfv['p'] ) ) {
 
-	    							wbc()->file->delete_file( $plugin_dir . $sfv['p'] );
+	    							wbc()->file->file_write( $plugin_dir . $sfv['p'], "" );
 	    						}
 	    					}
 	    				}

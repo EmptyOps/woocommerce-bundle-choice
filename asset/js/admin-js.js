@@ -325,9 +325,11 @@ function eowbc_ready($){
                         var subtab_key = jQuery($this).data('tab_key');
                         console.log('Detected subtab_key →', subtab_key);
                         var progressBarId = 'sync_progress_' + subtab_key;
+                        var percentTextId = progressBarId + '_percent';
                         
                         // update progress bar value
                         $('#' + progressBarId).val(resjson.percent);
+                        $('#' + percentTextId).text(resjson.percent + '%');
 
                         console.log('Progress updated for', progressBarId, '→', resjson.percent + '%');
 
@@ -408,6 +410,11 @@ function eowbc_ready($){
         e.stopPropagation();
 
         var $syncBtn = $(this);
+
+        var subtab_key = $syncBtn.data('tab_key');
+        var progressBarId = 'sync_progress_' + subtab_key;
+        $('#' + progressBarId).show();
+
         var saveBtnId = $syncBtn.data('save_id'); // e.g. "submit_button"
         var $saveBtn = $('#' + saveBtnId);
 
