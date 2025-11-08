@@ -3451,6 +3451,7 @@ class EOWBC_Filter_Widget {
 
 		$first = wbc()->options->get_option('filters_'.$this->filter_prefix.'scroll_pagination','enable_scroll_pagination_first_cat');
 		$second = wbc()->options->get_option('filters_'.$this->filter_prefix.'scroll_pagination','enable_scroll_pagination_second_cat');
+		$enable_other_cat = wbc()->options->get_option('filters_'.$this->filter_prefix.'scroll_pagination','enable_scroll_pagination_other_cat');
 
 		$is_first_category = false;
 		$is_second_category = false;
@@ -3462,6 +3463,27 @@ class EOWBC_Filter_Widget {
 		} elseif(\eo\wbc\model\SP_WBC_Router::instance()->is_second_category(null, $current_category)){
 
 			$is_second_category = true;
+
+		} else {
+
+			if ($enable_other_cat == 'enable_scroll_pagination_other_cat') {
+
+				// wbc_pr("3471 other_category_sc_scroll_pagination");
+		        $current_category_for_other = wbc()->wc->get_term_by('slug',$current_category,'product_cat');
+		        $current_category_for_other =  !empty($current_category_for_other) ? $current_category_for_other->term_id : '';
+		        
+		        $selected_other_cats = wbc()->options->get_option('filters_'.$this->filter_prefix.'scroll_pagination','other_category_sc_scroll_pagination');
+
+		        if (!is_array($selected_other_cats)) {
+	            
+	                $selected_other_cats = explode(',', $selected_other_cats);
+	            }
+
+		        if ($current_category_for_other && in_array($current_category_for_other, $selected_other_cats)) {
+
+		            return 1;
+		        }
+		    }
 		}
 
 		if($is_first_category) {

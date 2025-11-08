@@ -27,6 +27,7 @@ if ( ! class_exists( 'Shop_Category_Filter' ) ) {
 
 			// update labels, remove unnecessary tabs
 			unset($form_definition['s_fconfig']);
+
 			// unset($form_definition['filter_set']); @h and @a 13-08-2022 enabled filter set for the shop_cat. NOTE: Stile need to enable and confirm emplementation of other applycable layers on admin as well as firntend 
 			
 			if(isset($form_definition['d_fconfig']['form']['d_fconfig_builder'])) {
@@ -45,6 +46,56 @@ if ( ! class_exists( 'Shop_Category_Filter' ) ) {
 			$form_definition['d_fconfig']['label'] = 'Filter Configuration';
 			$form_definition['d_fconfig']['form']['d_fconfig_set']['options'] = parent::get_filter_sets('filters_sc_filter_set');
 			$form_definition['d_fconfig']['form']['d_fconfig_save_sec_title']['label'] = 'Add Filter Field';
+
+			// --- Add new fields under Scroll Pagination tab ---
+			if (isset($form_definition['scroll_pagination'])) {
+
+			    // Optional: give a clear label for this tab
+
+			    $divider_for_other_cat_field = array(
+		            'label' => 'Other Category',
+		            'type'  => 'devider',
+		        );
+			    // Define both fields separately
+			    $enable_for_other_cat_field = array(
+			        'label' => 'Enable Scroll Pagination For Other Category',
+			        'type' => 'checkbox',
+			        'sanitize' => 'sanitize_text_field',
+			        'value' => array(),
+			        'options' => array('enable_other_category_sc_scroll_pagination' => ' '),
+			        'class' => array(),
+			        'size_class' => array('eight', 'wide'),
+			        'inline' => true,
+			    );
+
+			    $select_for_other_cat_field = array(
+			        'label' => eowbc_lang('Enable on Category Pages'),
+			        'type' => 'select',
+			        'value' => '',
+			        'options' => wbc()->wc->get_productCats('', 'term_taxonomy_id_with_slug_label'),
+			        'class' => array('fluid', 'additions', 'search', 'multiple', 'clearable'),
+			        'field_attr' => array('multiple=""'),
+			        'size_class' => array('eight', 'wide'),
+			        'inline' => false,
+			    );
+
+			    $form_definition['scroll_pagination']['form'] = wbc()->common->array_insert_before(
+		            wbc()->common->array_insert_before(
+		                wbc()->common->array_insert_before(
+		                    $form_definition['scroll_pagination']['form'],
+		                    'scroll_pagination_submit_btn',
+		                    'other_category_sc_scroll_pagination',
+		                    $select_for_other_cat_field
+		                ),
+		                'other_category_sc_scroll_pagination',
+		                'enable_other_category_sc_scroll_pagination',
+		                $enable_for_other_cat_field
+		            ),
+		            'enable_other_category_sc_scroll_pagination',
+		            'scroll_pagination_Other_cat',
+		            $divider_for_other_cat_field
+		        );
+			}
 
 			// add new fields 
 			$sh_filter_setting = array(
