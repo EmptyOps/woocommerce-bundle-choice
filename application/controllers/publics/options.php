@@ -331,7 +331,36 @@ class Options extends \eo\wbc\controllers\publics\Controller {
 					if(in_array($type,array('dropdown_image','dropdown_image_only','dropdown'))) {
 						$selected_item = sanitize_title( $args[ 'selected' ] );
 						if(!empty($selected_item)){
-							$selected_item = wbc()->wc->get_term_by( 'slug',$selected_item,$attribute);
+                            // — SP_WBC_PSFAR possible to skip for ajax ring builder
+                            if( !defined('SP_WBC_ARBU') || constant('SP_WBC_ARBU') !== true ) {
+                             
+                                $selected_item = wbc()->wc->get_term_by( 'slug', $selected_item, $attribute );
+                             
+                            } else {
+                             
+                                global $SP_WBC_ARB_first_cat_obj, $SP_WBC_ARB_second_cat_obj, $wp_query, $SP_WBC_ARB_terms;
+                             
+                                $selected_item_object = null;
+                             
+                                if ( isset($SP_WBC_ARB_first_cat_obj) && $SP_WBC_ARB_first_cat_obj->slug === $selected_item ) {
+                             
+                                    $selected_item_object = $SP_WBC_ARB_first_cat_obj;
+                             
+                                } elseif ( isset($SP_WBC_ARB_second_cat_obj) && $SP_WBC_ARB_second_cat_obj->slug === $selected_item ) {
+                             
+                                    $selected_item_object = $SP_WBC_ARB_second_cat_obj;
+                             
+                                } elseif ( isset($wp_query->queried_object) && isset($wp_query->queried_object->slug) && $wp_query->queried_object->slug === $selected_item ) {
+                             
+                                    $selected_item_object = $wp_query->queried_object;
+                             
+                                } else {
+                             
+                                    $selected_item_object = wbc()->wc->get_term_by( 'slug', $selected_item, $attribute );
+                                }
+                             
+                                $selected_item = $selected_item_object;
+                            }
 							if(!is_wp_error($selected_item) and !empty($selected_item) ){
 								$image_url = get_term_meta( $selected_item->term_id, 'wbc_attachment', true );
 								
