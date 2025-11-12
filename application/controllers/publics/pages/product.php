@@ -836,7 +836,9 @@ class Product extends \eo\wbc\system\core\publics\Eowbc_Base_Model_Publics {
                     }else{
                     ?>
                         <script>
-                            jQuery(document).ready((function(){jQuery("form.cart").prepend("<input type='hidden' name='eo_wbc_target' value='<?php echo $this->page_category; ?>'/><input type='hidden' name='eo_wbc_product_id' value='<?php global $post; echo $post->ID; ?>'/>")}));
+                            jQuery(document).ready(function(){
+                                jQuery('form.cart').prepend("<input type='hidden' name='eo_wbc_target' value='<?php echo $this->page_category; ?>'/><input type='hidden' name='eo_wbc_product_id' value='<?php global $post; echo $post->ID; ?>'/>");
+                            });
                         </script>
                         
                     <?php
