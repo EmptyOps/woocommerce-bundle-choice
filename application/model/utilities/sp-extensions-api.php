@@ -1127,7 +1127,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 	            );
 	        } else {
 
-	        	self::sp_wbc_webhook_log('refresh_token_save_failed', [
+	        	self::sp_wbc_webhook_log('whtdata_file_sync_failed', [
 	        	    'headers'        => null,
 	        	    'api_key'        => null,
 	        	    'status'         => null,

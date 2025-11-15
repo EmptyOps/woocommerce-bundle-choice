@@ -307,33 +307,33 @@ function eowbc_ready($){
                 var resjson = window.document.splugins.parseJSON(result);     //jQuery.parseJSON(result);
                 if( typeof(resjson["type"]) != undefined && resjson["type"] == "success" ){
 
-                    if (typeof resjson.percent !== 'undefined') {
+                    if (typeof resjson.percent != undefined) {
 
                         var autoChangeField = jQuery($this).data('auto-change'); // e.g. 'auto_change_counter'
                         if (autoChangeField) {
 
-                            var $field = $('#' + autoChangeField);
+                            var $field = jQuery('#' + autoChangeField);
                             if ($field.length > 0) {
                                 
                                 var currentVal = parseInt($field.val()) || 0;
                                 $field.val(currentVal + 1);
-                                console.log(autoChangeField + ' incremented →', currentVal + 1);
+                                console.log(autoChangeField + ' incremented ->', currentVal + 1);
                             }
                         }
 
                         // find the tab key from data attribute
                         var subtab_key = jQuery($this).data('tab_key');
-                        console.log('Detected subtab_key →', subtab_key);
+                        console.log('Detected subtab_key ->', subtab_key);
                         var progressBarId = 'sync_progress_' + subtab_key;
                         var percentTextId = progressBarId + '_percent';
                         
                         // update progress bar value
-                        $('#' + progressBarId).val(resjson.percent);
-                        $('#' + percentTextId).text(resjson.percent + '%');
+                        jQuery('#' + progressBarId).val(resjson.percent);
+                        jQuery('#' + percentTextId).text(resjson.percent + '%');
 
-                        console.log('Progress updated for', progressBarId, '→', resjson.percent + '%');
+                        console.log('Progress updated for', progressBarId, '->', resjson.percent + '%');
 
-                        // 🔸 If progress < 100, do not show toast message, only update bar
+                        // If progress < 100, do not show toast message, only update bar
                         if (resjson.percent < 100) {
 
                             // after 3 sec, trigger the save button again (auto-refresh)
@@ -345,10 +345,10 @@ function eowbc_ready($){
 
                             return; // prevent toast messages
                         }
-                        // 🔸 If progress >= 100 → show success toast
+                        // If progress >= 100 -> show success toast
                         else {
 
-                            $('body').toast({
+                            jQuery('body').toast({
 
                                 class:'success',
                                 position: 'bottom right',
@@ -404,22 +404,23 @@ function eowbc_ready($){
         });
     }); 
 
-    $('button.ui.button[data-action="sync"]').on('click', function(e) {
+    jQuery('button.ui.button[data-action="sync"]').on('click', function(e) {
 
         e.preventDefault();
         e.stopPropagation();
 
-        var $syncBtn = $(this);
+        var $syncBtn = jQuery(this);
+        $syncBtn.prop('disabled', true);
 
-        var subtab_key = $syncBtn.data('tab_key');
-        var progressBarId = 'sync_progress_' + subtab_key;
-        $('#' + progressBarId).show();
+        // var subtab_key = $syncBtn.data('tab_key');
+        // var progressBarId = 'sync_progress_' + subtab_key;
+        // $('#' + progressBarId).show();
 
         var saveBtnId = $syncBtn.data('save_id'); // e.g. "submit_button"
-        var $saveBtn = $('#' + saveBtnId);
+        var $saveBtn = jQuery('#' + saveBtnId);
 
         // Log for debug
-        console.log('Sync button clicked → triggering save button:', saveBtnId);
+        console.log('Sync button clicked -> triggering save button:', saveBtnId);
 
         // 🔹 Trigger hidden save button click (no other process here)
         $saveBtn.trigger('click');
