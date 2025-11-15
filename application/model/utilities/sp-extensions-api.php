@@ -1155,7 +1155,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 	        $resp_data = apply_filters( 'sp_wbc_webhook_subtab_fields_ajax_event_handling', array(), $data, $webhook_source );
 
 	        // Check saving result
-	        if ($resp_data) {
+	        if ($resp_data !== null) {
 
 	            return array(
 	                'type' => 'success',
