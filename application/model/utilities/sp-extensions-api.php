@@ -691,9 +691,9 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
     		// NOTE: here we need to set in $res the type != success. but we have set all the standard proparty like type, sub_type and so on to ensure that if it have required on underlying layers then they can directly use it. and type != success condition is not nessesry so that is not applyed and type is set for the all scenarios. 
     		$res = array('type' => $parsed['type'], 'msg' => $parsed['msg'], 'sub_type' => $parsed['sub_type'], 'sub_msg' => $parsed['sub_msg']);
 
-    		if (isset($parsed['percent'])) {
+    		if (isset($parsed['data']['percent'])) {
     			
-		        $res['percent'] = $parsed['percent'];
+		        $res['percent'] = $parsed['data']['percent'];
 		    }
     	}
 
