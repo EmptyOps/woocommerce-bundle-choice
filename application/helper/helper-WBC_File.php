@@ -534,6 +534,106 @@ class WBC_File {
 	// 	return str_replace($dirToRemove, $replace, $path);
 	// }
 
+	-- aa niche na 4 Function file operation na mukiya che. aenu telly hirenbhai side thi baki che. telly complete thy jay pachi kai changes aave to karvana rese. pachi aene done karvanu rese.
+		-- Jayer aapde aa 4 Function nu telly finalize thy tayer aa function ma je bhi fixes ya to changes aaviya hoy ae 4 aey function ne simply copy kari ne bhavesh_6 branch ma overright kari devana.
+	private function initialize_secure_filesystem() {
+
+		if ( ! is_admin() || ! is_user_logged_in() ) {
+			return false;
+		}
+
+		if ( ! function_exists( 'WP_Filesystem' ) ) {
+			require_once ABSPATH . 'wp-admin/includes/file.php';
+		}
+
+		$creds = request_filesystem_credentials( admin_url() );
+
+		if ( false === $creds || ! WP_Filesystem( $creds ) ) {
+			return false;
+		}
+
+		global $wp_filesystem;
+		return $wp_filesystem;
+	}
+
+	public function secure_create_file( $relative_path, $content = '', $nonce = '', $is_absolute_path = false, $nonce_key = '' ) {
+
+		if ( ! current_user_can( 'manage_options' ) || ! wp_verify_nonce( $nonce, $nonce_key ) ) {
+			return array( 'type' => 'error', 'message' => 'Unauthorized operation.' );
+		}
+
+		$wp_filesystem = $this->initialize_secure_filesystem();
+		if ( ! $wp_filesystem ) {
+			return array( 'type' => 'error', 'message' => 'Filesystem not accessible.' );
+		}
+
+		$full_path = $is_absolute_path
+			? $relative_path
+			: trailingslashit( WP_PLUGIN_DIR ) . ltrim( $relative_path, '/\\' );
+
+		if ( $wp_filesystem->exists( $full_path ) ) {
+			return array( 'type' => 'error', 'message' => 'File already exists.' );
+		}
+
+		if ( ! $wp_filesystem->put_contents( $full_path, $content, FS_CHMOD_FILE ) ) {
+			return array( 'type' => 'error', 'message' => 'File creation failed.' );
+		}
+
+		return array( 'type' => 'success', 'message' => 'File created successfully.' );
+	}
+
+	public function secure_update_file( $relative_path, $content = '', $nonce = '', $is_absolute_path = false, $nonce_key = '' ) {
+
+		if ( ! current_user_can( 'manage_options' ) || ! wp_verify_nonce( $nonce, $nonce_key ) ) {
+			return array( 'type' => 'error', 'message' => 'Unauthorized operation.' );
+		}
+
+		$wp_filesystem = $this->initialize_secure_filesystem();
+		if ( ! $wp_filesystem ) {
+			return array( 'type' => 'error', 'message' => 'Filesystem not accessible.' );
+		}
+
+		$full_path = $is_absolute_path
+			? $relative_path
+			: trailingslashit( WP_PLUGIN_DIR ) . ltrim( $relative_path, '/\\' );
+
+		if ( ! $wp_filesystem->exists( $full_path ) ) {
+			return array( 'type' => 'error', 'message' => 'File does not exist.' );
+		}
+
+		if ( ! $wp_filesystem->put_contents( $full_path, $content, FS_CHMOD_FILE ) ) {
+			return array( 'type' => 'error', 'message' => 'File update failed.' );
+		}
+
+		return array( 'type' => 'success', 'message' => 'File updated successfully.' );
+	}
+
+	public function secure_delete_file( $relative_path, $nonce = '', $is_absolute_path = false, $nonce_key = '' ) {
+
+		if ( ! current_user_can( 'manage_options' ) || ! wp_verify_nonce( $nonce, $nonce_key ) ) {
+			return array( 'type' => 'error', 'message' => 'Unauthorized operation.' );
+		}
+
+		$wp_filesystem = $this->initialize_secure_filesystem();
+		if ( ! $wp_filesystem ) {
+			return array( 'type' => 'error', 'message' => 'Filesystem not accessible.' );
+		}
+
+		$full_path = $is_absolute_path
+			? $relative_path
+			: trailingslashit( WP_PLUGIN_DIR ) . ltrim( $relative_path, '/\\' );
+
+		if ( ! $wp_filesystem->exists( $full_path ) ) {
+			return array( 'type' => 'error', 'message' => 'File does not exist.' );
+		}
+
+		if ( ! $wp_filesystem->delete( $full_path ) ) {
+			return array( 'type' => 'error', 'message' => 'File deletion failed.' );
+		}
+
+		return array( 'type' => 'success', 'message' => 'File deleted successfully.' );
+	}
+
 }
 
 function wbc_extension_from_path($filepath) {

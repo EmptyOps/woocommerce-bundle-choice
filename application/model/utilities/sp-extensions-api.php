@@ -312,7 +312,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
 		add_filter('sp_wbc_webhook_process', function($status, $data, $webhook_source) {
 
-		    return self::handle_sp_wbc_webhook_type_whtdata($status, $data, '', '', $webhook_source);
+		    return self::handle_sp_wbc_webhook_type_whtdata($status, $data, $webhook_source);
 		}, 10, 3);
 
 		add_filter('sp_wbc_webhook_process', function($status, $data, $webhook_source) {
@@ -1065,7 +1065,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 	    return $status;
 	}
 
-    private static function handle_sp_wbc_webhook_type_whtdata($status, $data, $subtab_key = null, $field_key = null, $webhook_source = null) {
+    private static function handle_sp_wbc_webhook_type_whtdata($status, $data, $webhook_source = null) {
 
 	    if ( isset( $data['webhook_type'] ) && $data['webhook_type'] === 'sp_wbc_webhook_type_whtdata' ) {
 	        
@@ -1076,7 +1076,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
 	    		if( !empty($sfv['st']) || true ) {
 
-	    			if( 'image' == $sfv['st']  || true ) {
+	    			if( 'image' == $sfv['st'] || true ) {
 
 	    				$plugin_dir = trailingslashit(WP_PLUGIN_DIR);
 
@@ -1123,11 +1123,11 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
 	            return array(
 	                'type' => 'success',
-	                'msg'  => 'File synchronization completed successfully.'
+	                'msg'  => 'Process whtdata synchronization completed successfully.'
 	            );
 	        } else {
 
-	        	self::sp_wbc_webhook_log('whtdata_file_sync_failed', [
+	        	self::sp_wbc_webhook_log('whtdata_process_failed', [
 	        	    'headers'        => null,
 	        	    'api_key'        => null,
 	        	    'status'         => null,
@@ -1138,7 +1138,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
 	            return array(
 	                'type' => 'error',
-	                'msg'  => 'File synchronization failed. Please try again.'
+	                'msg'  => 'Process whtdata synchronization failed. Please try again.'
 	            );
 	        }
 	    }
