@@ -1076,7 +1076,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
 	    		if( !empty($sfv['st']) || true ) {
 
-	    			if( 'image' == $sfv['st'] || true ) {
+	    			if( true || 'image' == $sfv['st'] ) {
 
 	    				$plugin_dir = trailingslashit(WP_PLUGIN_DIR);
 
@@ -1119,7 +1119,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 	        // }
 
 	        // Check saving result
-	        if ($data['merged_dict']) {
+	        if ( true || $data['merged_dict'] ) {
 
 	            return array(
 	                'type' => 'success',
