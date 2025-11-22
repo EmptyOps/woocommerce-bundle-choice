@@ -601,7 +601,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
     	if( 'get' == $mode ) {
 
     		return true;
-    	} else{
+    	} else {
 
     		return false;
     	}
