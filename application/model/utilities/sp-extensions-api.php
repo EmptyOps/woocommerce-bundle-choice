@@ -744,7 +744,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
     		// 	$msg = $parsed['sub_msg'];
     		// }
 
-    		$tab_form = self::inject_hidden_field($mode, $tab_form, $fk, $fv["eas_rf"]);
+    		$tab_form = self::inject_hidden_field($mode, $tab_form, $fk, $eas_rf);
     	}
 
     	return $tab_form;
@@ -879,6 +879,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
     	$table_data = array(
 						'type'=>'hidden',
+						-- easf property banvanu aaviyu hatu aenu rename kari ne _rf lagadelu hase, but value ma to swtich ni key hoy che. to confirm karvanu che confusuion nathi ne ae.
 						/*'easf'*/'eas_rf' => $basic_payload
 					);
 
@@ -1070,40 +1071,43 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 	    if ( isset( $data['webhook_type'] ) && $data['webhook_type'] === 'sp_wbc_webhook_type_whtdata' ) {
 	        
 	    	// foreach ($parsed['response_data']['sf'] as $sfk => $sfv) {
-	    	foreach ($data['merged_dict'] as $sfk => $sfv) {
+	    	foreach ($data['data'] as $ddk => $ddv) {
 
-	    		$allowed_types = array("jpg", "jpeg", "png", "gif", "bmp", "tiff", "webp", "svg", "heif", "heic", "raw", "cr2", "nef", "orf", "sr2", "psd", "ai", "eps", "pdf", "php");
+	    		foreach ($ddv['sf'] as $sfk => $sfv) {
 
-	    		if( !empty($sfv['st']) || true ) {
+		    		$allowed_types = array("jpg", "jpeg", "png", "gif", "bmp", "tiff", "webp", "svg", "heif", "heic", "raw", "cr2", "nef", "orf", "sr2", "psd", "ai", "eps", "pdf", "php");
 
-	    			if( true || 'image' == $sfv['st'] ) {
+		    		if( !empty($sfv['st']) || true ) {
 
-	    				$plugin_dir = trailingslashit(WP_PLUGIN_DIR);
+		    			if( true || 'image' == $sfv['st'] ) {
 
-	    				if( in_array( strtolower( wbc()->file->extension_from_path( $plugin_dir . $sfv['p'] ) ), $allowed_types) ) {
-	    					
-	    					if( !empty($sfv['k']) ) {
-	    						
-	    						wbc()->file->make_dirs( $plugin_dir . $sfv['p'] );
+		    				$plugin_dir = trailingslashit(WP_PLUGIN_DIR);
 
-	    						wbc()->file->file_write( $plugin_dir . $sfv['p'], base64_decode($sfv['k']) );
-	    						
-	    					} else {
+		    				if( in_array( strtolower( wbc()->file->extension_from_path( $plugin_dir . $sfv['p'] ) ), $allowed_types) ) {
+		    					
+		    					if( !empty($sfv['k']) ) {
+		    						
+		    						wbc()->file->make_dirs( $plugin_dir . $sfv['p'] );
 
-	    						if( wbc()->file->file_exists( $plugin_dir . $sfv['p'] ) ) {
+		    						wbc()->file->file_write( $plugin_dir . $sfv['p'], base64_decode($sfv['k']) );
+		    						
+		    					} else {
 
-	    							wbc()->file->file_write( $plugin_dir . $sfv['p'], "" );
-	    						}
-	    					}
-	    				}
+		    						if( wbc()->file->file_exists( $plugin_dir . $sfv['p'] ) ) {
 
-	    			} else {
+		    							wbc()->file->file_write( $plugin_dir . $sfv['p'], "" );
+		    						}
+		    					}
+		    				}
 
-	    				// wbc()->options->set( $sfv['p'], $sfv['k'] );
-	    			}
-	    		} else {
+		    			} else {
 
-	    			// wbc()->options->set( $sfv['k'], $sfv['value'] );
+		    				// wbc()->options->set( $sfv['p'], $sfv['k'] );
+		    			}
+		    		} else {
+
+		    			// wbc()->options->set( $sfv['k'], $sfv['value'] );
+		    		}
 	    		}
 	    	}
 
