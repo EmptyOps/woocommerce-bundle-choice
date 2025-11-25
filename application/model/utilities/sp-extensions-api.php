@@ -639,9 +639,9 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
 		if( 'entry_save_process' == $mode  ) {
 
-			if( isset($args[0]) && $args[0] == $sfk ) {
+			if( isset($args["hook_callback_args"][0]) && $args["hook_callback_args"][0] == $sfk ) {
 
-				$basic_payload = json_encode($args[1]);
+				$basic_payload = json_encode($args["hook_callback_args"][1]);
 
 				$basic_payload = base64_encode($basic_payload);
 
