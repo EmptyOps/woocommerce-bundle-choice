@@ -732,7 +732,9 @@ class Eowbc_Model {
 
     private static function section_should_process_asave($mode, $form_definition, $section_property, $fk) {
 
-    	if( 'get' == $mode ) {
+    	-- get mode mathi change kari ne entry_save_process kareli che.
+    	// if( 'get' == $mode ) {
+    	if( 'entry_save_process' == $mode ) {
 
     		return true;
     	} else{
@@ -743,7 +745,7 @@ class Eowbc_Model {
 
     private static function is_empty_hidden_field_asave( $section_property ) {
 
-    	if($eas_rf['type'] == 'eas_sender'){
+    	if($section_property['type'] == 'eas_sender'){
 
     		return true;
     	} else {
@@ -765,11 +767,23 @@ class Eowbc_Model {
 
     		if( is_array( $tab_form['table_data'][$first_key] ) ){
 
+    			-- since aasana recording ma dropdown bhi clear karvanu hatu. to aa if telly darmiyan hirenbhai ae add karavi che.
+    			if( isset( $tab_form['table_data'][$first_key][$fk] ) ){
+
+    				unset( $tab_form['table_data'][$first_key][$fk] );
+    			}
+
     			if( isset( $tab_form['table_data'][$first_key][$fk.'_opts_hidden'] ) ){
 
     				unset( $tab_form['table_data'][$first_key][$fk.'_opts_hidden'] );
     			}
     		} else{
+
+    			-- since aasana recording ma dropdown bhi clear karvanu hatu. to aa if telly darmiyan hirenbhai ae add karavi che.
+    			if( isset( $tab_form['table_data'][$fk] ) ){
+
+    				unset( $tab_form['table_data'][$fk] );
+    			}
 
     			if( isset( $tab_form['table_data'][$fk.'_opts_hidden'] ) ){
 
