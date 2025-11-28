@@ -767,7 +767,6 @@ class Eowbc_Model {
 
     		if( is_array( $tab_form['table_data'][$first_key] ) ){
 
-    			-- since aasana recording ma dropdown bhi clear karvanu hatu. to aa if telly darmiyan hirenbhai ae add karavi che.
     			if( isset( $tab_form['table_data'][$first_key][$fk] ) ){
 
     				unset( $tab_form['table_data'][$first_key][$fk] );
@@ -777,9 +776,8 @@ class Eowbc_Model {
 
     				unset( $tab_form['table_data'][$first_key][$fk.'_opts_hidden'] );
     			}
-    		} else{
+    		} /*else{
 
-    			-- since aasana recording ma dropdown bhi clear karvanu hatu. to aa if telly darmiyan hirenbhai ae add karavi che.
     			if( isset( $tab_form['table_data'][$fk] ) ){
 
     				unset( $tab_form['table_data'][$fk] );
@@ -789,7 +787,7 @@ class Eowbc_Model {
 
     				unset( $tab_form['table_data'][$fk.'_opts_hidden'] );
     			}
-    		}
+    		}*/
     	}
 
     	return $tab_form;
