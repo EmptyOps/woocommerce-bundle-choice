@@ -403,6 +403,7 @@ class Eowbc_Model {
 
 		$temp = array();
 
+		-- ahi thi suffix mariyo che and beju aapde suffix value nu strtrcure che to aa niche na suffix nu kai dhayn ma nathi levanu ne aetelu confirm kari ne aa open comment delete mari devani.
 		// $temp[0] = 'eacs_st_edata';
 		$temp[0] = 'eacs_st_edata_'.$args['subtab_key']; 
 
