@@ -269,14 +269,14 @@ class Eowbc_Base_Model_Publics {
 						throw new \Exception("The operation failed at the handle_response function at st loop layer",1);
 					}
 
-					$st_data = unserialize(wbc()->options->get_option_group($args[0],"a:0:{}"));
+					$st_data = unserialize(wbc()->options->get_option_group(base64_decode($kstb_k),"a:0:{}"));
 
 					foreach($kstb_v as $kstb_k_k => $kstb_v_v){
 	
 						$st_data[$kstb_k_k] = $kstb_v_v;
 					}
 
-					-- get_option_group function call kariyu che aeni niche update_option_group walu function call thavu joy. ae point baki che ka to recording ma baki ray gayo che.
+					wbc()->options->update_option_group( base64_decode($kstb_k), serialize($st_data) );
 
 				}
 

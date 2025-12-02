@@ -424,8 +424,6 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 							if( self::should_handle_response($mode, $parsed) ) {
 
 								// die('inside should_handle_response if');
-								// \eo\wbc\system\core\publics\Eowbc_Base_Model_Publics::handle_response($parsed, array());	
-								\eo\wbc\system\core\publics\Eowbc_Base_Model_Publics::handle_response($parsed, array(), $mode != 'entry_save_process' ? array() : array($args['hook_callback_args'][2])); -- niche ni condition improve kari che to aa line simply delete marvani che.
 								\eo\wbc\system\core\publics\Eowbc_Base_Model_Publics::handle_response( $parsed, array(), isset($args['hook_callback_args'][2]) ? array($args['hook_callback_args'][2]) : array() );
 							}
 							// die('inside should_handle_response if 123114');
