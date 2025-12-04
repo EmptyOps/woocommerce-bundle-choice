@@ -1067,6 +1067,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
     private static function handle_sp_wbc_webhook_type_whtdata($status, $data, $webhook_source = null) {
 
+		-- here we may face conflict of handling the webhook type with the subtab_fields_ajax_event_handling func given below - hiren noted this because two unique types could not be sent from the generic trigger webhoks layers on compse result func 
 	    if ( isset( $data['webhook_type'] ) && $data['webhook_type'] === 'sp_wbc_webhook_type_whtdata' ) {
 	        
 	    	// foreach ($parsed['response_data']['sf'] as $sfk => $sfv) {
