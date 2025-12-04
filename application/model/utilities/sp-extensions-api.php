@@ -914,7 +914,6 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
         $headers = $request->get_headers();
         $api_key = isset($headers['api-key']) ? $headers['api-key'][0] : '';
 
-        -- aa webhook source no support haju api-server side add karvano che. 
         $webhook_source = isset($headers['webhook-source']) ? $headers['webhook-source'][0] : '';
 
         // Step 2: Validate API key using activate/deactivate token
