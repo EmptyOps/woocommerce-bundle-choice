@@ -424,9 +424,11 @@ class Eowbc_Model {
 	        return false;
 	    }
 
-	    self::process_form_definition_rf_asave('entry_save_process',$form_definition,$args['subtab_key'],$args['table_data'],$args);
+		$table_data = $args['table_data'];
 
-	    $res['table_data'] = $args['table_data'];
+	    self::process_form_definition_rf_asave('entry_save_process',$form_definition,$args['subtab_key'],$table_data,$args);
+
+	    $res['table_data'] = $table_data;
 
 	    return true;
 	}
@@ -707,7 +709,8 @@ class Eowbc_Model {
 
 							$res = $args['res'];
 
-							$tab["form"] = self::empty_hidden_field_asave($is_empty_hidden_field_asave, $mode, $tab["form"], $fk, $res, $eas_rf);
+							// $tab["form"] = self::empty_hidden_field_asave($is_empty_hidden_field_asave, $mode, $tab["form"], $fk, $res, $eas_rf);
+							$table_data = self::empty_hidden_field_asave($is_empty_hidden_field_asave, $mode, $table_data, $fk, $res, $eas_rf);
 
 							$args['res'] = $res;
 						}
@@ -732,7 +735,7 @@ class Eowbc_Model {
 
     private static function section_should_process_asave($mode, $form_definition, $section_property, $fk) {
 
-    	-- get mode mathi change kari ne entry_save_process kareli che.
+    	// -- get mode mathi change kari ne entry_save_process kareli che. - done - okay that seems okay
     	// if( 'get' == $mode ) {
     	if( 'entry_save_process' == $mode ) {
 
@@ -754,27 +757,27 @@ class Eowbc_Model {
     	}
     }
 
-    private static function empty_hidden_field_asave($is_empty_hidden_field_asave, $mode, $tab_form, $fk, &$res, $eas_rf) {
+    private static function empty_hidden_field_asave($is_empty_hidden_field_asave, $mode, /*$tab_form*/$table_data, $fk, &$res, $eas_rf) {
 
     	if( !$is_empty_hidden_field_asave ) {
 
-    		return $tab_form;
+    		return $table_data;	
     	}
 
-    	if( !empty( $tab_form['table_data'] ) ){
+    	if( !empty( $table_data ) ){
 
-    		$first_key = array_key_first($tab_form['table_data']);
+			$first_key = array_key_first($table_data);
 
-    		if( is_array( $tab_form['table_data'][$first_key] ) ){
+    		if( is_array( $table_data[$first_key] ) ){
 
-    			if( isset( $tab_form['table_data'][$first_key][$fk] ) ){
+    			if( isset( $table_data[$first_key][$fk] ) ){
 
-    				unset( $tab_form['table_data'][$first_key][$fk] );
+    				unset( $table_data[$first_key][$fk] );
     			}
 
-    			if( isset( $tab_form['table_data'][$first_key][$fk.'_opts_hidden'] ) ){
+    			if( isset( $table_data[$first_key][$fk.'_opts_hidden'] ) ){
 
-    				unset( $tab_form['table_data'][$first_key][$fk.'_opts_hidden'] );
+    				unset( $table_data[$first_key][$fk.'_opts_hidden'] );
     			}
     		} /*else{
 
@@ -790,7 +793,7 @@ class Eowbc_Model {
     		}*/
     	}
 
-    	return $tab_form;
+    	return $table_data;
     }
 
 }
