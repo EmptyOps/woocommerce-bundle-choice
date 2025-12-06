@@ -266,7 +266,7 @@ class Eowbc_Base_Model_Publics {
 
 					if($args[0] != base64_decode($kstb_k)){
 
-						throw new \Exception("The operation failed at the handle_response function at st loop layer",1);
+						throw new \Exception("The operation failed at the handle_response function at kstb loop layer",1);
 					}
 
 					$st_data = unserialize(wbc()->options->get_option_group(base64_decode($kstb_k),"a:0:{}"));
