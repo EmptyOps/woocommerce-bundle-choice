@@ -424,7 +424,7 @@ class Eowbc_Model {
 	        return false;
 	    }
 
-		$table_data = $args['table_data'];
+		$table_data = $args[1];
 
 	    self::process_form_definition_rf_asave('entry_save_process',$form_definition,$args['subtab_key'],$table_data,$args);
 
