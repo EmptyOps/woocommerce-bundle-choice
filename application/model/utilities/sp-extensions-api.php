@@ -877,10 +877,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
     	$table_data = array(
 						'type'=>'hidden',
-						-- easf property banvanu aaviyu hatu aenu rename kari ne _rf lagadelu hase, but value ma to swtich ni key hoy che. to confirm karvanu che confusuion nathi ne ae.
 						'value'=>$basic_payload,
-						/*'easf'*/'eas_rf' => $eas_rf,
-						-- aani ithink jarur nathi. confirm kari ne remove kari devanu che.
 						'easf' => $eas_rf['easf'],
 					);
 
