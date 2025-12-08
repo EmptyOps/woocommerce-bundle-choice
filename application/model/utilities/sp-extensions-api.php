@@ -963,7 +963,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
     /**
      * Logging function to help with debugging webhook events
      */
-    private static function sp_wbc_webhook_log($tag, $log_data) {
+    public static function sp_wbc_webhook_log($tag, $log_data) {
 
         if (!is_string($log_data)) {
             $log_data = json_encode($log_data);
