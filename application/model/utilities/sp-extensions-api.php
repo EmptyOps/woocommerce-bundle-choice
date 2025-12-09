@@ -69,7 +69,8 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
 		if( !isset($args['method']) ) {
 
-			$args['method'] = "wp_remote_get";
+			// $args['method'] = "wp_remote_get";
+			$args['method'] = "wp_remote_post";
 		}
 		// wbc_pr($api_settings);
 		// die('call function after apply_input_by_method');

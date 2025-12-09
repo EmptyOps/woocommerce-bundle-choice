@@ -333,6 +333,23 @@ function eowbc_ready($){
 
                         console.log('Progress updated for', progressBarId, '->', resjson.percent + '%');
 
+                        // 1) batch_number → pmbsync_batch_number_wbhdata
+                        if (resjson.batch_number !== undefined) {
+                              jQuery('input[name="pmbsync_batch_number_wbhdata"]').val(resjson.batch_number);
+                        }
+
+                        // 2) records_processed → pmbsync_records_processed_wbhdata
+                        if (resjson.records_processed !== undefined) {
+                              jQuery('input[name="pmbsync_records_processed_wbhdata"]').val(resjson.records_processed);
+                        }
+
+                        // 3) current_rule_no → pmbsync_current_rule_no_wbhdata
+                        if (resjson.current_rule_no !== undefined) {
+                              jQuery('input[name="pmbsync_current_rule_no_wbhdata"]').val(resjson.current_rule_no);
+                        }
+
+                        console.log("Hidden fields updated from AJAX response");
+
                         // If progress < 100, do not show toast message, only update bar
                         if (resjson.percent < 100) {
 
