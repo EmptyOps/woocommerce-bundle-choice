@@ -770,10 +770,11 @@ class Eowbc_Model {
 
     		if( is_array( $table_data[$first_key] ) ){
 
-    			if( isset( $table_data[$first_key][$fk] ) ){
+    			// NOTE: must never unset the below dropdown or so field so commented it on 11-12-2025 
+				// if( isset( $table_data[$first_key][$fk] ) ){
 
-    				unset( $table_data[$first_key][$fk] );
-    			}
+    			// 	unset( $table_data[$first_key][$fk] );
+    			// }
 
     			if( isset( $table_data[$first_key][$fk.'_opts_hidden'] ) ){
 
