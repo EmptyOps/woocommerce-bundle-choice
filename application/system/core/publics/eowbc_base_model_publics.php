@@ -135,7 +135,7 @@ class Eowbc_Base_Model_Publics {
 
 		
 		// ACTIVE_TODO_OC_END
-		if( 'wp_remote_get' == $method ) {
+		if( 'wp_remote_get' == $method || 'wp_remote_post' == $method ) {
 
 			if( isset($response['body']) ) {
 

@@ -40,7 +40,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 			$url .= (strpos($url, '?') !== FALSE ? '&' . $query_string : "?" . $query_string);
 		} elseif( 'wp_remote_post' == $args['method'] ) {
 
-			// ACTIVE_TODO aa array merge opretion karu che pan a haji wp_remote_post ma jeva post perameter support kare che post mate k data mate na perameter e wise confirm karavanu and test karavanu baki che.	--	to hi & --	to pi
+			// aa array merge opretion karu che pan a haji wp_remote_post ma jeva post perameter support kare che post mate k data mate na perameter e wise confirm karavanu and test karavanu baki che.	--	to hi & --	to pi done
 			$post_fields = array_merge($api_settings, $payload);
 		}
 	}
@@ -69,6 +69,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
 		if( !isset($args['method']) ) {
 
+			// NOTE : aa 9 dec 2025 par default get mathi post set krelu che. aa je che ae nava version ma bhavesh_6 branch ma karelu che. but jayer aa version main branch ma merge thy tayre default post method support karvanu chalu kariyu che. baki future ma koi beja layers ne koi method alag use kari hoy jem ke get use kari hoy to aene potana call jyathi mare tya $args ma method property ma "wp_remote_get" pass karvano.
 			// $args['method'] = "wp_remote_get";
 			$args['method'] = "wp_remote_post";
 		}
@@ -88,8 +89,13 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 			$result = wp_remote_get($url, array('timeout' => 36));
 		} elseif( 'wp_remote_post' == $args['method'] ) {
 
-			// ACTIVE_TODO niche no wp_remote_post call ne documetion joi ne confirm karavanu baki che. and post_fields variabla che e function apply_input_by_method ma format thay che.
-			$result = wp_remote_post($url, $post_fields);
+			$request_args = array(
+		        'timeout' => 36,
+		        'body'    => $post_fields
+		    );
+
+			// niche no wp_remote_post call ne documetion joi ne confirm karavanu baki che. and post_fields variabla che e function apply_input_by_method ma format thay che. done
+			$result = wp_remote_post($url, /*$post_fields*/$request_args);
 		}
 
 		// wbc_pr($result);
@@ -397,7 +403,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 							// wbc_pr($parsed);
 							// die('parsed');
 
-							$is_apply_response_msg = self::is_apply_response_msg($parsed, $fv["eas"]);
+							$is_apply_response_msg = self::is_apply_response_msg($parsed, $fv["eas"], $mode);
 
 							$res = $args['res'];
 
@@ -650,12 +656,18 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 		return $value;
     }
 
-    private static function is_apply_response_msg($parsed, $section_property) {
+    private static function is_apply_response_msg($parsed, $section_property, $mode) {
 
     	if( isset($parsed['type']) && !( 'success' == $parsed['type'] && ('success' == $parsed['sub_type'] && !( isset($section_property['dap']) && $section_property['dap'] ) ) ) ) {
 
     		return true;
     	}
+
+    	// ADDED ON 10 Dec 2025 
+    	if ( 'save' == $mode && isset($parsed['response_data']['data']['resp_data']) ) {
+
+	        return true;
+	    }
 
     	return false;
     }
@@ -689,9 +701,9 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
     		// NOTE: here we need to set in $res the type != success. but we have set all the standard proparty like type, sub_type and so on to ensure that if it have required on underlying layers then they can directly use it. and type != success condition is not nessesry so that is not applyed and type is set for the all scenarios. 
     		$res = array('type' => $parsed['type'], 'msg' => $parsed['msg'], 'sub_type' => $parsed['sub_type'], 'sub_msg' => $parsed['sub_msg']);
 
-    		if (isset($parsed['response_data']['data']['percent'])) {
+    		if (isset($parsed['response_data']['data']['resp_data'])) {
     			
-		        $res['percent'] = $parsed['response_data']['data']['percent'];
+		        $res['resp_data'] = $parsed['response_data']['data']['resp_data'];
 		    }
     	}
 
@@ -916,7 +928,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
         // Step 2: Validate API key using activate/deactivate token
         // $valid_api_key = get_option('extra_sub_tab_token');
-        $valid_api_key = wbc()->sanitize->get_option('extras_configuration','token');
+        $valid_api_key = wbc()->options->get_option('extras_configuration','token');
 
         if (!$api_key || $api_key !== $valid_api_key) {
 

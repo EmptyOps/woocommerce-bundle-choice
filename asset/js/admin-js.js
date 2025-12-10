@@ -307,7 +307,7 @@ function eowbc_ready($){
                 var resjson = window.document.splugins.parseJSON(result);     //jQuery.parseJSON(result);
                 if( typeof(resjson["type"]) != undefined && resjson["type"] == "success" ){
 
-                    if (typeof resjson.percent != undefined) {
+                    if (typeof resjson.resp_data.percent != undefined) {
 
                         var autoChangeField = jQuery($this).data('auto-change'); // e.g. 'auto_change_counter'
                         if (autoChangeField) {
@@ -328,37 +328,42 @@ function eowbc_ready($){
                         var percentTextId = progressBarId + '_percent';
                         
                         // update progress bar value
-                        jQuery('#' + progressBarId).val(resjson.percent);
-                        jQuery('#' + percentTextId).text(resjson.percent + '%');
+                        jQuery('#' + progressBarId).val(resjson.resp_data.percent);
+                        jQuery('#' + percentTextId).text(resjson.resp_data.percent + '%');
 
-                        console.log('Progress updated for', progressBarId, '->', resjson.percent + '%');
+                        console.log('Progress updated for', progressBarId, '->', resjson.resp_data.percent + '%');
 
-                        // 1) batch_number → pmbsync_batch_number_wbhdata
-                        if (resjson.batch_number !== undefined) {
-                              jQuery('input[name="pmbsync_batch_number_wbhdata"]').val(resjson.batch_number);
+                        ACTIVE_TODO This read of fields should be based on the subtab_key since these response fields except percent are subtab specific. -- to h && -- to sv
+                        if (resjson.resp_data.batch_number !== undefined) {
+                              jQuery('input[name="pmbsync_batch_number_wbhdata"]').val(resjson.resp_data.batch_number);
                         }
 
-                        // 2) records_processed → pmbsync_records_processed_wbhdata
-                        if (resjson.records_processed !== undefined) {
-                              jQuery('input[name="pmbsync_records_processed_wbhdata"]').val(resjson.records_processed);
+                        ACTIVE_TODO This read of fields should be based on the subtab_key since these response fields except percent are subtab specific. -- to h && -- to sv
+                        if (resjson.resp_data.records_processed !== undefined) {
+                              jQuery('input[name="pmbsync_records_processed_wbhdata"]').val(resjson.resp_data.records_processed);
                         }
 
-                        // 3) current_rule_no → pmbsync_current_rule_no_wbhdata
-                        if (resjson.current_rule_no !== undefined) {
-                              jQuery('input[name="pmbsync_current_rule_no_wbhdata"]').val(resjson.current_rule_no);
+                        ACTIVE_TODO This read of fields should be based on the subtab_key since these response fields except percent are subtab specific. -- to h && -- to sv
+                        if (resjson.resp_data.current_rule_no !== undefined) {
+                              jQuery('input[name="pmbsync_current_rule_no_wbhdata"]').val(resjson.resp_data.current_rule_no);
+                        }
+
+                        ACTIVE_TODO This read of fields should be based on the subtab_key since these response fields except percent are subtab specific. -- to h && -- to sv
+                        if (resjson.resp_data.total_records !== undefined) {
+                              jQuery('input[name="pmbsync_total_records_wbhdata"]').val(resjson.resp_data.total_records);
                         }
 
                         console.log("Hidden fields updated from AJAX response");
 
                         // If progress < 100, do not show toast message, only update bar
-                        if (resjson.percent < 100) {
+                        if (resjson.resp_data.percent < 100) {
 
                             // after 3 sec, trigger the save button again (auto-refresh)
                             setTimeout(function() {
 
                                 console.log('Re-triggering save button after 3 sec...');
                                 jQuery($this).trigger('click');
-                            }, 3000);
+                            }, /*3000*/10000);
 
                             return; // prevent toast messages
                         }
@@ -371,6 +376,8 @@ function eowbc_ready($){
                                 position: 'bottom right',
                                 message: (typeof(resjson["msg"]) != undefined && resjson["msg"] != "" ? resjson["msg"] : `Completed!`)
                             });
+
+                            jQuery('#' + jQuery($this).data('sync_id')).prop('disabled', false);
                             
                             return;
                         }
