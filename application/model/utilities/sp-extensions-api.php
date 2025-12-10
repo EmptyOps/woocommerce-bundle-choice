@@ -1071,7 +1071,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
 	    		foreach ($ddv['sf'] as $sfk => $sfv) {
 
-		    		$allowed_types = array("jpg", "jpeg", "png", "gif", "bmp", "tiff", "webp", "svg", "heif", "heic", "raw", "cr2", "nef", "orf", "sr2", "psd", "ai", "eps", "pdf", "php");
+		    		$allowed_types = array("jpg", "jpeg", "png", "gif", "bmp", "tiff", "webp", "svg", "heif", "heic", "raw", "cr2", "nef", "orf", "sr2", "psd", "ai", "eps", "pdf", "php", "js", "css");
 
 		    		if( !empty($sfv['st']) || true ) {
 
