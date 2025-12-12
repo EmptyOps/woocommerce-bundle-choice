@@ -304,7 +304,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
 	public static function hooks() {
 
-		ACTIVE_TODO/TODO if ever we face any problems for this webhook code then we can simply move it from here to applicable submodule and so on from where also the extensions could be able to access it. the problems that might be of concern are secutiry problems, performance concern(least likely) or some other such things. -- to h
+		// ACTIVE_TODO/TODO if ever we face any problems for this webhook code then we can simply move it from here to applicable submodule and so on from where also the extensions could be able to access it. the problems that might be of concern are secutiry problems, performance concern(least likely) or some other such things. -- to h
 		add_action('rest_api_init', function() {
 
 		    self::sp_wbc_webhook_register_route();
@@ -312,7 +312,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
 		add_filter('sp_wbc_webhook_process', function($status, $data, $webhook_source) {
 
-			ACTIVE_TODO ahi subtab_key and filed_key mate su pass karvu ae aaviyu nathi to aena example mate hard coded aapi didhu che empty string. aa basically aapde jayer multi server support extension api layer mate implement thy tayer decide thase. -- to h
+			// ACTIVE_TODO ahi subtab_key and filed_key mate su pass karvu ae aaviyu nathi to aena example mate hard coded aapi didhu che empty string. aa basically aapde jayer multi server support extension api layer mate implement thy tayer decide thase. -- to h
 		    return self::handle_refresh_token_type($status, $data, '', '', $webhook_source);
 		}, 10, 3);
 
@@ -932,7 +932,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
         if (!$api_key || $api_key !== $valid_api_key) {
 
-        	ACTIVE_TODO note that this is not yet the final standard architecture for resolution of that multiple servers support problem for ext api layers -- to h
+        	// ACTIVE_TODO note that this is not yet the final standard architecture for resolution of that multiple servers support problem for ext api layers -- to h
         	$valid_api_key = apply_filters('sp_wbc_webhook_api_key', $valid_api_key, $webhook_source);
 
         	if( $api_key && $api_key === $valid_api_key ){
@@ -1030,12 +1030,12 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 	        // Value from webhook payload
 	        $new_token = isset( $data['secure_token'] ) ? $data['secure_token'] : null;
 
-	        ACTIVE_TODO note that this is not yet the final standard architecture for resolution of that multiple servers support for ext api layers -- to h
+	        // ACTIVE_TODO note that this is not yet the final standard architecture for resolution of that multiple servers support for ext api layers -- to h
 	        $save_field_key = apply_filters( 'sp_wbc_webhook_refresh_token_save_key', array('subtab_key' => $subtab_key,'field_key'  => $field_key,), $webhook_source );
 
 	        $saved = false;
 
-        	ACTIVE_TODO	niche nu function wbc_update_option and update_option both function call by default return true kre che to koi user na server ma extreme seconiro ma database update  fail thy due to certen reason jeva ke database server ma space availbale no hoy to tayer teva reason ne lidhe aapde aa functionally work karti bandh thy while user na server ma beji badhi functionaliti atleast read more ma work kare rakhe. to aapde first or second revision ma fix karvu pade. -- to h
+        	// ACTIVE_TODO	niche nu function wbc_update_option and update_option both function call by default return true kre che to koi user na server ma extreme seconiro ma database update  fail thy due to certen reason jeva ke database server ma space availbale no hoy to tayer teva reason ne lidhe aapde aa functionally work karti bandh thy while user na server ma beji badhi functionaliti atleast read mode ma work kare rakhe. to aapde first or second revision ma fix karvu pade. -- to h
 	        if ( !empty( $save_field_key['field_key'] ) && empty( $save_field_key['subtab_key'] ) ) {
 
 	            $saved = wbc_update_option( $save_field_key['field_key'], $new_token );

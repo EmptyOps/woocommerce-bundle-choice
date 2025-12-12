@@ -333,22 +333,22 @@ function eowbc_ready($){
 
                         console.log('Progress updated for', progressBarId, '->', resjson.resp_data.percent + '%');
 
-                        ACTIVE_TODO This read of fields should be based on the subtab_key since these response fields except percent are subtab specific. -- to h && -- to sv
+                        // ACTIVE_TODO This read of fields should be based on the subtab_key since these response fields except percent are subtab specific. -- to h && -- to sv
                         if (resjson.resp_data.batch_number !== undefined) {
                               jQuery('input[name="pmbsync_batch_number_wbhdata"]').val(resjson.resp_data.batch_number);
                         }
 
-                        ACTIVE_TODO This read of fields should be based on the subtab_key since these response fields except percent are subtab specific. -- to h && -- to sv
+                        // ACTIVE_TODO This read of fields should be based on the subtab_key since these response fields except percent are subtab specific. -- to h && -- to sv
                         if (resjson.resp_data.records_processed !== undefined) {
                               jQuery('input[name="pmbsync_records_processed_wbhdata"]').val(resjson.resp_data.records_processed);
                         }
 
-                        ACTIVE_TODO This read of fields should be based on the subtab_key since these response fields except percent are subtab specific. -- to h && -- to sv
+                        // ACTIVE_TODO This read of fields should be based on the subtab_key since these response fields except percent are subtab specific. -- to h && -- to sv
                         if (resjson.resp_data.current_rule_no !== undefined) {
                               jQuery('input[name="pmbsync_current_rule_no_wbhdata"]').val(resjson.resp_data.current_rule_no);
                         }
 
-                        ACTIVE_TODO This read of fields should be based on the subtab_key since these response fields except percent are subtab specific. -- to h && -- to sv
+                        // ACTIVE_TODO This read of fields should be based on the subtab_key since these response fields except percent are subtab specific. -- to h && -- to sv
                         if (resjson.resp_data.total_records !== undefined) {
                               jQuery('input[name="pmbsync_total_records_wbhdata"]').val(resjson.resp_data.total_records);
                         }
