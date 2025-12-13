@@ -307,7 +307,8 @@ function eowbc_ready($){
                 var resjson = window.document.splugins.parseJSON(result);     //jQuery.parseJSON(result);
                 if( typeof(resjson["type"]) != undefined && resjson["type"] == "success" ){
 
-                    if (typeof resjson.resp_data.percent != undefined) {
+                    // if (typeof resjson.resp_data.percent != undefined) {
+                    if (typeof resjson.resp_data !== 'undefined' && typeof resjson.resp_data.percent !== 'undefined') {
 
                         var autoChangeField = jQuery($this).data('auto-change'); // e.g. 'auto_change_counter'
                         if (autoChangeField) {

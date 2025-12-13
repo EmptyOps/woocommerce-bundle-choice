@@ -914,7 +914,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
 	    // Step 0: Rate limit check
 	    $rate_limit_response = self::sp_wbc_webhook_rate_limiter();
-	    if ($rate_limit_response instanceof WP_REST_Response) {
+	    if ($rate_limit_response instanceof \WP_REST_Response) {
 
 	        // NOTE: we are intentionally not logging this response in our log file. because it is counter inituitive to whole idea of avoiding overloading of server because logging to file may also create problems if there are many calls coming. 
 	        return $rate_limit_response;
@@ -922,13 +922,13 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
 
         // Step 1: Get API key from request headers
         $headers = $request->get_headers();
-        $api_key = isset($headers['api-key']) ? $headers['api-key'][0] : '';
+        $api_key = isset($headers['api_key']) ? $headers['api_key'][0] : '';
 
         $webhook_source = isset($headers['webhook-source']) ? $headers['webhook-source'][0] : '';
 
         // Step 2: Validate API key using activate/deactivate token
         // $valid_api_key = get_option('extra_sub_tab_token');
-        $valid_api_key = wbc()->options->get_option('extras_configuration','token');
+        $valid_api_key = wbc()->options->get_option('extras_extras_configuration','token');
 
         if (!$api_key || $api_key !== $valid_api_key) {
 
@@ -940,7 +940,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
         		// Nothing to do
         	} else {
 
-	            $response = new WP_REST_Response([
+	            $response = new \WP_REST_Response([
 	                'type' => 'error',
 	                'msg'  => 'Unauthorized: Invalid API Key'
 	            ], 403);
@@ -1010,7 +1010,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
         if (get_transient($key)) {
 
             // NOTE: we are intentionally not logging this response in our log file. because it is counter inituitive to whole idea of avoiding overloading of server because logging to file may also create problems if there are many calls coming. 
-            return new WP_REST_Response([
+            return new \WP_REST_Response([
                 'type' => 'warning',
                 'msg'  => 'Too many webhook requests, ignored.'
             ]);
