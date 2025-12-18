@@ -506,6 +506,6 @@ Yes, it is.
 Service: SpherePlugins
 Domain: https://sphereplugins.com/
 Purpose: This service is used to retrieve a list of available plugin extensions inside the WordPress admin area.
-Data Sent: No personal user data is sent. Only a simple GET request is made. 
+Data Sent: No personal user data is sent. Only a simple GET request is made.   
 
 
