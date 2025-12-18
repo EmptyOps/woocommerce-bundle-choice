@@ -501,3 +501,11 @@ Yes, it is.
 = 0.1.0 (January 21, 2019) =
   **First Release**. This is the first release of our plugin.
 
+== External Services ==
+
+Service: SpherePlugins
+Domain: https://sphereplugins.com/
+Purpose: This service is used to retrieve a list of available plugin extensions inside the WordPress admin area.
+Data Sent: No personal user data is sent. Only a simple GET request is made. 
+
+

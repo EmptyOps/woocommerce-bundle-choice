@@ -420,9 +420,10 @@ if ( ! class_exists( 'Extensions_Setup_Wizard' ) ) {
 					</form>
 						</div>
 						<?php
-						 wbc()->load->get_script_tag(array(
-			             'src'  => esc_url('https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js'),
-			            ));
+						NOTE: jquery no path hato te remove karel chhe.
+						//  wbc()->load->get_script_tag(array(
+			            //  'src'  => esc_url('https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js'),
+			            // ));
 
 			            if(false){
 			            ?>						
