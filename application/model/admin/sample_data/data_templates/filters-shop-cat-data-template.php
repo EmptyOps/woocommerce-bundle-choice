@@ -285,7 +285,7 @@ class Filters_Shop_Cat_Data_Template extends Pair_Builder_Data_Template {
 
     public function get_categories($feature_key = null/*ACTIVE_TODO The null value set here is temporary, and the actual value should be set as and when required.*/, $args = null) {
         $_img_url= constant('EOWBC_ASSET_URL').'img/sample_data/'.$this->asset_folder.'/';    // EO_WBC_PLUGIN_DIR.'EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/';
-        
+        $file_suffix = (WBC_SCRIPT_DEBUG) ? '' : '.min';
         return array(
             array(
                 'thumb' => '',
@@ -294,80 +294,80 @@ class Filters_Shop_Cat_Data_Template extends Pair_Builder_Data_Template {
                 'slug' => 'eo_diamond_shape_cat',
                 'child'=> array(
                     array(
-                        'thumb' => $_img_url.'round.png',
-                        'thumb_selected' => $_img_url.'round_selected.png',
+                        'thumb' => $_img_url.'round'.$file_suffix .'.png',
+                        'thumb_selected' => $_img_url.'round_selected'.$file_suffix .'.png',
                         'name' => 'Round',
                         'description' => 'Diamond round shape',
                         'slug' => 'eo_diamond_round_shape_cat',
                         'terms_order' =>1
                     ),
                     array(
-                        'thumb' => $_img_url.'oval.png',
-                        'thumb_selected' => $_img_url.'oval_selected.png',
+                        'thumb' => $_img_url.'oval'.$file_suffix .'.png',
+                        'thumb_selected' => $_img_url.'oval_selected'.$file_suffix .'.png',
                         'name' => 'Oval',
                         'description' => 'Diamond oval shape',
                         'slug' => 'eo_diamond_oval_shape_cat',
                         'terms_order' =>2
                     ),
                     array(
-                        'thumb' => $_img_url.'cushion.png',
-                        'thumb_selected' => $_img_url.'cushion_selected.png',
+                        'thumb' => $_img_url.'cushion'.$file_suffix .'.png',
+                        'thumb_selected' => $_img_url.'cushion_selected'.$file_suffix .'.png',
                         'name' => 'Cushion',
                         'description' => 'Diamond cushion shape',
                         'slug' => 'eo_diamond_cushion_shape_cat',
                         'terms_order' =>3
                     ),
                     array(
-                        'thumb' => $_img_url.'pear.png',
-                        'thumb_selected' => $_img_url.'pear_selected.png',
+                        'thumb' => $_img_url.'pear'.$file_suffix .'.png',
+                        'thumb_selected' => $_img_url.'pear_selected'.$file_suffix .'.png',
                         'name' => 'Pear',
                         'description' => 'Diamond pear shape',
                         'slug' => 'eo_diamond_pear_shape_cat',
                         'terms_order' =>4
                     ),
                     array(
-                        'thumb' => $_img_url.'princess.png',
-                        'thumb_selected' => $_img_url.'princess_selected.png',
+                        'thumb' => $_img_url.'princess'.$file_suffix .'.png',
+                        'thumb_selected' => $_img_url.'princess_selected'.$file_suffix .'.png',
                         'name' => 'Princess',
                         'description' => 'Diamond princess shape',
                         'slug' => 'eo_diamond_princess_shape_cat',
                         'terms_order' =>5
                     ),
                     array(
-                        'thumb' => $_img_url.'emerald.png',
-                        'thumb_selected' => $_img_url.'emerald_selected.png',
+                        'thumb' => $_img_url.'emerald'.$file_suffix .'.png',
+                        'thumb_selected' => $_img_url.'emerald_selected'.$file_suffix .'.png',
                         'name' => 'Emerald',
                         'description' => 'Diamond emerald shape',
                         'slug' => 'eo_diamond_emerald_shape_cat',
                         'terms_order' =>6
                     ),
                     array(
-                        'thumb' => $_img_url.'marquise.png',
-                        'thumb_selected' => $_img_url.'marquise_selected.png',
+                        'thumb' => $_img_url.'marquise'.$file_suffix .'.png',
+                        'thumb_selected' => $_img_url.'marquise_selected'.$file_suffix .'.png',
                         'name' => 'Marquise',
                         'description' => 'Diamond marquise shape',
                         'slug' => 'eo_diamond_marquise_shape_cat',
                         'terms_order' =>7
                     ),
                     array(
-                        'thumb' => $_img_url.'asscher.png',
-                        'thumb_selected' => $_img_url.'asscher_selected.png',
+                        'thumb' => $_img_url.'asscher'.$file_suffix .'.png',
+                        'thumb_selected' => $_img_url.'asscher_selected'.$file_suffix .'.png',
                         'name' => 'Asscher',
                         'description' => 'Diamond asscher shape',
                         'slug' => 'eo_diamond_asscher_shape_cat',
                         'terms_order' =>8
                     ),
                     array(
-                        'thumb' => $_img_url.'rediant.png',
-                        'thumb_selected' => $_img_url.'rediant_selected.png',
+                        'thumb' => $_img_url.'rediant'.$file_suffix .'.png',
+                        'thumb_selected' => $_img_url.'rediant_selected'.$file_suffix .'.png',
                         'name' => 'Radiant',
                         'description' => 'Diamond radiant shape',
                         'slug' => 'eo_diamond_radiant_shape_cat',
                         'terms_order' =>9
                     ),
                     array(
-                        'thumb' => $_img_url.'heart.png',
-                        'thumb_selected' => $_img_url.'heart_selected.png',
+                        'thumb' => $_img_url.'heart'.$file_suffix .'.png',
+                        'thumb_selected' => $_img_url.'heart_selected'.$file_suffix .'.png',
                         'name' => 'Heart',
                         'description' => 'Diamond heart shape',
                         'slug' => 'eo_diamond_heart_shape_cat',
@@ -383,80 +383,80 @@ class Filters_Shop_Cat_Data_Template extends Pair_Builder_Data_Template {
                         'terms_order' =>11,
                         'child'=> array(
                             array(
-                                'thumb' => $_img_url.'round.png',
-                                'thumb_selected' => $_img_url.'round_selected.png',
+                                'thumb' => $_img_url.'round'.$file_suffix .'.png',
+                                'thumb_selected' => $_img_url.'round_selected'.$file_suffix .'.png',
                                 'name' => 'Round',
                                 'description' => 'Diamond round shape',
                                 'slug' => 'eo_lab_diamond_round_shape_cat',
                                 'terms_order' =>1
                             ),
                             array(
-                                'thumb' => $_img_url.'oval.png',
-                                'thumb_selected' => $_img_url.'oval_selected.png',
+                                'thumb' => $_img_url.'oval'.$file_suffix .'.png',
+                                'thumb_selected' => $_img_url.'oval_selected'.$file_suffix .'.png',
                                 'name' => 'Oval',
                                 'description' => 'Diamond oval shape',
                                 'slug' => 'eo_lab_diamond_oval_shape_cat',
                                 'terms_order' =>2
                             ),
                             array(
-                                'thumb' => $_img_url.'cushion.png',
-                                'thumb_selected' => $_img_url.'cushion_selected.png',
+                                'thumb' => $_img_url.'cushion'.$file_suffix .'.png',
+                                'thumb_selected' => $_img_url.'cushion_selected'.$file_suffix .'.png',
                                 'name' => 'Cushion',
                                 'description' => 'Diamond cushion shape',
                                 'slug' => 'eo_lab_diamond_cushion_shape_cat',
                                 'terms_order' =>3
                             ),
                             array(
-                                'thumb' => $_img_url.'pear.png',
-                                'thumb_selected' => $_img_url.'pear_selected.png',
+                                'thumb' => $_img_url.'pear'.$file_suffix .'.png',
+                                'thumb_selected' => $_img_url.'pear_selected'.$file_suffix .'.png',
                                 'name' => 'Pear',
                                 'description' => 'Diamond pear shape',
                                 'slug' => 'eo_lab_diamond_pear_shape_cat',
                                 'terms_order' =>4
                             ),
                             array(
-                                'thumb' => $_img_url.'princess.png',
-                                'thumb_selected' => $_img_url.'princess_selected.png',
+                                'thumb' => $_img_url.'princess'.$file_suffix .'.png',
+                                'thumb_selected' => $_img_url.'princess_selected'.$file_suffix .'.png',
                                 'name' => 'Princess',
                                 'description' => 'Diamond princess shape',
                                 'slug' => 'eo_lab_diamond_princess_shape_cat',
                                 'terms_order' =>5
                             ),
                             array(
-                                'thumb' => $_img_url.'emerald.png',
-                                'thumb_selected' => $_img_url.'emerald_selected.png',
+                                'thumb' => $_img_url.'emerald'.$file_suffix .'.png',
+                                'thumb_selected' => $_img_url.'emerald_selected'.$file_suffix .'.png',
                                 'name' => 'Emerald',
                                 'description' => 'Diamond emerald shape',
                                 'slug' => 'eo_lab_diamond_emerald_shape_cat',
                                 'terms_order' =>6
                             ),
                             array(
-                                'thumb' => $_img_url.'marquise.png',
-                                'thumb_selected' => $_img_url.'marquise_selected.png',
+                                'thumb' => $_img_url.'marquise'.$file_suffix .'.png',
+                                'thumb_selected' => $_img_url.'marquise_selected'.$file_suffix .'.png',
                                 'name' => 'Marquise',
                                 'description' => 'Diamond marquise shape',
                                 'slug' => 'eo_lab_diamond_marquise_shape_cat',
                                 'terms_order' =>7
                             ),
                             array(
-                                'thumb' => $_img_url.'asscher.png',
-                                'thumb_selected' => $_img_url.'asscher_selected.png',
+                                'thumb' => $_img_url.'asscher'.$file_suffix .'.png',
+                                'thumb_selected' => $_img_url.'asscher_selected'.$file_suffix .'.png',
                                 'name' => 'Asscher',
                                 'description' => 'Diamond asscher shape',
                                 'slug' => 'eo_lab_diamond_asscher_shape_cat',
                                 'terms_order' =>8
                             ),
                             array(
-                                'thumb' => $_img_url.'rediant.png',
-                                'thumb_selected' => $_img_url.'rediant_selected.png',
+                                'thumb' => $_img_url.'rediant'.$file_suffix .'.png',
+                                'thumb_selected' => $_img_url.'rediant_selected'.$file_suffix .'.png',
                                 'name' => 'Radiant',
                                 'description' => 'Diamond radiant shape',
                                 'slug' => 'eo_lab_diamond_radiant_shape_cat',
                                 'terms_order' =>9
                             ),
                             array(
-                                'thumb' => $_img_url.'heart.png',
-                                'thumb_selected' => $_img_url.'heart_selected.png',
+                                'thumb' => $_img_url.'heart'.$file_suffix .'.png',
+                                'thumb_selected' => $_img_url.'heart_selected'.$file_suffix .'.png',
                                 'name' => 'Heart',
                                 'description' => 'Diamond heart shape',
                                 'slug' => 'eo_lab_diamond_heart_shape_cat',
@@ -475,80 +475,80 @@ class Filters_Shop_Cat_Data_Template extends Pair_Builder_Data_Template {
                 'slug' => 'eo_setting_shape_cat',
                 'child'=> array(
                     array(
-                        'thumb' => $_img_url.'round.png',
-                        'thumb_selected' => $_img_url.'round_selected.png',
+                        'thumb' => $_img_url.'round'.$file_suffix .'.png',
+                        'thumb_selected' => $_img_url.'round_selected'.$file_suffix .'.png',
                         'name' => 'Round',
                         'description' => 'Setting round shape',
                         'slug' => 'eo_setting_round_shape_cat',
                         'terms_order' =>1
                     ),
                     array(
-                        'thumb' => $_img_url.'oval.png',
-                        'thumb_selected' => $_img_url.'oval_selected.png',
+                        'thumb' => $_img_url.'oval'.$file_suffix .'.png',
+                        'thumb_selected' => $_img_url.'oval_selected'.$file_suffix .'.png',
                         'name' => 'Oval',
                         'description' => 'Setting oval shape',
                         'slug' => 'eo_setting_oval_shape_cat',
                         'terms_order' =>2
                     ),
                     array(
-                        'thumb' => $_img_url.'cushion.png',
-                        'thumb_selected' => $_img_url.'cushion_selected.png',
+                        'thumb' => $_img_url.'cushion'.$file_suffix .'.png',
+                        'thumb_selected' => $_img_url.'cushion_selected'.$file_suffix .'.png',
                         'name' => 'Cushion',
                         'description' => 'Setting cushion shape',
                         'slug' => 'eo_setting_cushion_shape_cat',
                         'terms_order' =>3
                     ),
                     array(
-                        'thumb' => $_img_url.'pear.png',
-                        'thumb_selected' => $_img_url.'pear_selected.png',
+                        'thumb' => $_img_url.'pear'.$file_suffix .'.png',
+                        'thumb_selected' => $_img_url.'pear_selected'.$file_suffix .'.png',
                         'name' => 'Pear',
                         'description' => 'Setting pear shape',
                         'slug' => 'eo_setting_pear_shape_cat',
                         'terms_order' =>4
                     ),
                     array(
-                        'thumb' => $_img_url.'princess.png',
-                        'thumb_selected' => $_img_url.'princess_selected.png',
+                        'thumb' => $_img_url.'princess'.$file_suffix .'.png',
+                        'thumb_selected' => $_img_url.'princess_selected'.$file_suffix .'.png',
                         'name' => 'Princess',
                         'description' => 'setting princess shape',
                         'slug' => 'eo_setting_princess_shape_cat',
                         'terms_order' =>5
                     ),
                     array(
-                        'thumb' => $_img_url.'emerald.png',
-                        'thumb_selected' => $_img_url.'emerald_selected.png',
+                        'thumb' => $_img_url.'emerald'.$file_suffix .'.png',
+                        'thumb_selected' => $_img_url.'emerald_selected'.$file_suffix .'.png',
                         'name' => 'Emerald',
                         'description' => 'Setting emerald shape',
                         'slug' => 'eo_setting_emerald_shape_cat',
                         'terms_order' =>6
                     ),
                     array(
-                        'thumb' => $_img_url.'marquise.png',
-                        'thumb_selected' => $_img_url.'marquise_selected.png',
+                        'thumb' => $_img_url.'marquise'.$file_suffix .'.png',
+                        'thumb_selected' => $_img_url.'marquise_selected'.$file_suffix .'.png',
                         'name' => 'Marquise',
                         'description' => 'Setting marquise shape',
                         'slug' => 'eo_setting_marquise_shape_cat',
                         'terms_order' =>7
                     ),
                     array(
-                        'thumb' => $_img_url.'asscher.png',
-                        'thumb_selected' => $_img_url.'asscher_selected.png',
+                        'thumb' => $_img_url.'asscher'.$file_suffix .'.png',
+                        'thumb_selected' => $_img_url.'asscher_selected'.$file_suffix .'.png',
                         'name' => 'Asscher',
                         'description' => 'Setting asscher shape',
                         'slug' => 'eo_setting_asscher_shape_cat',
                         'terms_order' =>8
                     ),
                     array(
-                        'thumb' => $_img_url.'rediant.png',
-                        'thumb_selected' => $_img_url.'rediant_selected.png',
+                        'thumb' => $_img_url.'rediant'.$file_suffix .'.png',
+                        'thumb_selected' => $_img_url.'rediant_selected'.$file_suffix .'.png',
                         'name' => 'Radiant',
                         'description' => 'Setting radiant shape',
                         'slug' => 'eo_setting_radiant_shape_cat',
                         'terms_order' =>9
                     ),
                     array(
-                        'thumb' => $_img_url.'heart.png',
-                        'thumb_selected' => $_img_url.'heart_selected.png',
+                        'thumb' => $_img_url.'heart'.$file_suffix .'.png',
+                        'thumb_selected' => $_img_url.'heart_selected'.$file_suffix .'.png',
                         'name' => 'Heart',
                         'description' => 'Setting heart shape',
                         'slug' => 'eo_setting_heart_shape_cat',
@@ -567,29 +567,29 @@ class Filters_Shop_Cat_Data_Template extends Pair_Builder_Data_Template {
                 'slug' => 'eo_ring_style_cat',
                 'child'=> array(
                     array(
-                        'thumb' => $_img_url.'halo.png',
-                        'thumb_selected' => $_img_url.'halo_selected.png',
+                        'thumb' => $_img_url.'halo'.$file_suffix .'.png',
+                        'thumb_selected' => $_img_url.'halo_selected'.$file_suffix .'.png',
                         'name' => 'Halo',
                         'description' => 'Halo style for ring',
                         'slug' => 'eo_ring_halo_cat'
                     ),
                     array(
-                        'thumb' => $_img_url.'pave.png',
-                        'thumb_selected' => $_img_url.'pave_selected.png',
+                        'thumb' => $_img_url.'pave'.$file_suffix .'.png',
+                        'thumb_selected' => $_img_url.'pave_selected'.$file_suffix .'.png',
                         'name' => 'Pave',
                         'description' => 'Pave style for ring',
                         'slug' => 'eo_ring_pave_cat'
                     ),
                     array(
-                        'thumb' => $_img_url.'solitaire.png',
-                        'thumb_selected' => $_img_url.'solitaire_selected.png',
+                        'thumb' => $_img_url.'solitaire'.$file_suffix .'.png',
+                        'thumb_selected' => $_img_url.'solitaire_selected'.$file_suffix .'.png',
                         'name' => 'Solitaire',
                         'description' => 'Solitaire style for ring',
                         'slug' => 'eo_ring_solitaire_cat'
                     ),
                     array(
-                        'thumb' => $_img_url.'trilogy.png',
-                        'thumb_selected' => $_img_url.'trilogy_selected.png',
+                        'thumb' => $_img_url.'trilogy'.$file_suffix .'.png',
+                        'thumb_selected' => $_img_url.'trilogy_selected'.$file_suffix .'.png',
                         'name' => 'Trilogy',
                         'description' => 'Trilogy style for ring',
                         'slug' => 'eo_ring_trilogy_cat'
