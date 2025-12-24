@@ -924,7 +924,7 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
         $headers = $request->get_headers();
         $api_key = isset($headers['api_key']) ? $headers['api_key'][0] : '';
 
-        $webhook_source = isset($headers['webhook-source']) ? $headers['webhook-source'][0] : '';
+        $webhook_source = isset($headers['webhook_source']) ? $headers['webhook_source'][0] : '';
 
         // Step 2: Validate API key using activate/deactivate token
         // $valid_api_key = get_option('extra_sub_tab_token');
@@ -983,7 +983,9 @@ class SP_Extensions_Api extends Eowbc_Base_Model_Publics {
         }
 
         $log_entry = date('Y-m-d H:i:s') . " [$tag] " . $log_data . "\n";
-        $log_file_path = WP_CONTENT_DIR . '/sp-wbc-webhook.log';
+        // $log_file_path = WP_CONTENT_DIR . '/sp-wbc-webhook.log';
+        $upload_dir = wp_upload_dir();
+        $log_file_path = $upload_dir['basedir'] . '/sp-wbc-webhook.log';
 
         // Recommended way for file writing in WordPress
         if (function_exists('error_log')) {
