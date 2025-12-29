@@ -31,14 +31,15 @@ class Sample_Data_Template {
             
         $_img_url=constant('EOWBC_ASSET_URL').'img/sample_data/'.$this->asset_folder.'/';   //EO_WBC_PLUGIN_DIR.'EO_WBC_Admin/EO_WBC_Config/EO_WBC_View/';
         $this->gallay_img = $_img_url. 'Products/';
+        $file_suffix = (WBC_SCRIPT_DEBUG) ? '' : '.min';
      
         return array(
 
             array(
                 'title' => '11 sample Setting #8800950587',
                 'thumb' => $_img_url.
-                'Products/w-r-2.jpg',
-                'images' => array('w-r-3.jpg', 'w-r-1.jpg'),
+                'Products/w-r-2'.$file_suffix .'.jpg',
+                'images' => array('w-r-3'.$file_suffix .'.jpg', 'w-r-1'.$file_suffix .'.jpg'),
                 'content' => '',
                 'sku' => 'SET-8800950587',
                 'regular_price' => '',
@@ -115,14 +116,14 @@ class Sample_Data_Template {
                 'variation' => array(
                     array(
                         'thumb' => $_img_url.
-                        'Products/w-r-2.jpg',
+                        'Products/w-r-2'.$file_suffix .'.jpg',
                         'regular_price' => '500',
                         'price' => '250',
                         'terms' => array('pa_eo_metal_attr' => '14K Rose Gold', 'pa_eo_size_attr' => '4.0', 'pa_eo_shape_attr' => 'Round')
                     ),
                     array(
                         'thumb' => $_img_url.
-                        'Products/w-r-2.jpg',
+                        'Products/w-r-2'.$file_suffix .'.jpg',
                         'regular_price' => '600',
                         'price' => '550',
                         'terms' => array('pa_eo_metal_attr' => '14K Rose Gold', 'pa_eo_size_attr' => '4.0', 'pa_eo_shape_attr' => 'Oval')
@@ -409,8 +410,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Setting #6461855726',
                 'thumb' => $_img_url.
-                'Products/w-pr-2.jpg',
-                'images' => array('w-pr-3.jpg', 'w-pr-1.jpg'),
+                'Products/w-pr-2'.$file_suffix .'.jpg',
+                'images' => array('w-pr-3'.$file_suffix .'.jpg', 'w-pr-1'.$file_suffix .'.jpg'),
                 'content' => '',
                 'sku' => 'SET-8800950587-30',
                 'regular_price' => '',
@@ -502,8 +503,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Setting #2871986691',
                 'thumb' => $_img_url.
-                'Products/w-e-2.jpg',
-                'images' => array('w-e-3.jpg', 'w-e-1.jpg'),
+                'Products/w-e-2'.$file_suffix .'.jpg',
+                'images' => array('w-e-3'.$file_suffix .'.jpg', 'w-e-1'.$file_suffix .'.jpg'),
                 'content' => '',
                 'sku' => 'SET-8800950587-10',
                 'regular_price' => '',
@@ -594,8 +595,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Setting #1318544274',
                 'thumb' => $_img_url.
-                'Products/w-a-2.jpg',
-                'images' => array('w-a-3.jpg', 'w-a-1.jpg'),
+                'Products/w-a-2'.$file_suffix .'.jpg',
+                'images' => array('w-a-3'.$file_suffix .'.jpg', 'w-a-1'.$file_suffix .'.jpg'),
                 'sku' => 'SET-8800950587-40',
                 'content' => '',
                 'regular_price' => '',
@@ -686,8 +687,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Setting #7707154336',
                 'thumb' => $_img_url.
-                'Products/w-m-2.jpg',
-                'images' => array('w-m-3.jpg', 'w-m-1.jpg'),
+                'Products/w-m-2'.$file_suffix .'.jpg',
+                'images' => array('w-m-3'.$file_suffix .'.jpg', 'w-m-1'.$file_suffix .'.jpg'),
                 'sku' => 'SET-8800950587-31',
                 'content' => '',
                 'regular_price' => '',
@@ -778,8 +779,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Setting #1388912063',
                 'thumb' => $_img_url.
-                'Products/w-o-2.jpg',
-                'images' => array('w-o-3.jpg', 'w-o-1.jpg'),
+                'Products/w-o-2'.$file_suffix .'.jpg',
+                'images' => array('w-o-3'.$file_suffix .'.jpg', 'w-o-1'.$file_suffix .'.jpg'),
                 'content' => '',
                 'sku' => 'SET-8800950587-1',
                 'regular_price' => '',
@@ -870,8 +871,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Setting #0412854474',
                 'thumb' => $_img_url.
-                'Products/w-ra-2.jpg',
-                'images' => array('w-ra-3.jpg', 'w-ra-1.jpg'),
+                'Products/w-ra-2'.$file_suffix .'.jpg',
+                'images' => array('w-ra-3'.$file_suffix .'.jpg', 'w-ra-1'.$file_suffix .'.jpg'),
                 'content' => '',
                 'sku' => 'SET-8800950587-32',
                 'regular_price' => '',
@@ -922,8 +923,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Setting #4270635040',
                 'thumb' => $_img_url.
-                'Products/w-p-2.jpg',
-                'images' => array('w-p-3.jpg', 'w-p-1.jpg'),
+                'Products/w-p-2'.$file_suffix .'.jpg',
+                'images' => array('w-p-3'.$file_suffix .'.jpg', 'w-p-1'.$file_suffix .'.jpg'),
                 'sku' => 'SET-8800950587-41',
                 'content' => '',
                 'regular_price' => '',
@@ -1014,8 +1015,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Setting #4927991215',
                 'thumb' => $_img_url.
-                'Products/w-h-2.jpg',
-                'images' => array('w-h-3.jpg', 'w-h-1.jpg'),
+                'Products/w-h-2'.$file_suffix .'.jpg',
+                'images' => array('w-h-3'.$file_suffix .'.jpg', 'w-h-1'.$file_suffix .'.jpg'),
                 'content' => '',
                 'sku' => 'SET-8800950587-11',
                 'regular_price' => '',
@@ -1106,8 +1107,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Setting #2375118707',
                 'thumb' => $_img_url.
-                'Products/w-c-2.jpg',
-                'images' => array('w-c-3.jpg', 'w-c-1.jpg'),
+                'Products/w-c-2'.$file_suffix .'.jpg',
+                'images' => array('w-c-3'.$file_suffix .'.jpg', 'w-c-1'.$file_suffix .'.jpg'),
                 'content' => '',
                 'sku' => 'SET-8800950587-2',
                 'regular_price' => '',
@@ -1201,8 +1202,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Setting #10000001',
                 'thumb' => $_img_url.
-                'Products/w-r-2.jpg',
-                'images' => array('w-r-3.jpg', 'w-r-1.jpg'),
+                'Products/w-r-2'.$file_suffix .'.jpg',
+                'images' => array('w-r-3'.$file_suffix .'.jpg', 'w-r-1'.$file_suffix .'.jpg'),
                 'sku' => 'SET-8800950587-33',
                 'content' => '',
                 'regular_price' => '',
@@ -1293,8 +1294,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Setting #10000002',
                 'thumb' => $_img_url.
-                'Products/w-pr-2.jpg',
-                'images' => array('w-pr-3.jpg', 'w-pr-1.jpg'),
+                'Products/w-pr-2'.$file_suffix .'.jpg',
+                'images' => array('w-pr-3'.$file_suffix .'.jpg', 'w-pr-1'.$file_suffix .'.jpg'),
                 'sku' => 'SET-8800950587-34',
                 'content' => '',
                 'regular_price' => '',
@@ -1385,8 +1386,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Setting #10000003',
                 'thumb' => $_img_url.
-                'Products/w-e-2.jpg',
-                'images' => array('w-e-3.jpg', 'w-e-1.jpg'),
+                'Products/w-e-2'.$file_suffix .'.jpg',
+                'images' => array('w-e-3'.$file_suffix .'.jpg', 'w-e-1'.$file_suffix .'.jpg'),
                 'content' => '',
                 'sku' => 'SET-8800950587-12',
                 'regular_price' => '',
@@ -1477,8 +1478,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Setting #10000004',
                 'thumb' => $_img_url.
-                'Products/w-a-2.jpg',
-                'images' => array('w-a-3.jpg', 'w-a-1.jpg'),
+                'Products/w-a-2'.$file_suffix .'.jpg',
+                'images' => array('w-a-3'.$file_suffix .'.jpg', 'w-a-1'.$file_suffix .'.jpg'),
                 'sku' => 'SET-8800950587-42',
                 'content' => '',
                 'regular_price' => '',
@@ -1569,8 +1570,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Setting #10000005',
                 'thumb' => $_img_url.
-                'Products/w-m-2.jpg',
-                'images' => array('w-m-3.jpg', 'w-m-1.jpg'),
+                'Products/w-m-2'.$file_suffix .'.jpg',
+                'images' => array('w-m-3'.$file_suffix .'.jpg', 'w-m-1'.$file_suffix .'.jpg'),
                 'sku' => 'SET-8800950587-35',
                 'content' => '',
                 'regular_price' => '',
@@ -1661,8 +1662,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Setting #10000006',
                 'thumb' => $_img_url.
-                'Products/w-o-2.jpg',
-                'images' => array('w-o-3.jpg', 'w-o-1.jpg'),
+                'Products/w-o-2'.$file_suffix .'.jpg',
+                'images' => array('w-o-3'.$file_suffix .'.jpg', 'w-o-1'.$file_suffix .'.jpg'),
                 'content' => '',
                 'sku' => 'SET-8800950587-3',
                 'regular_price' => '',
@@ -1753,8 +1754,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Setting #10000007',
                 'thumb' => $_img_url.
-                'Products/w-ra-2.jpg',
-                'images' => array('w-ra-3.jpg', 'w-ra-1.jpg'),
+                'Products/w-ra-2'.$file_suffix .'.jpg',
+                'images' => array('w-ra-3'.$file_suffix .'.jpg', 'w-ra-1'.$file_suffix .'.jpg'),
                 'sku' => 'SET-8800950587-36',
                 'content' => '',
                 'regular_price' => '',
@@ -1805,8 +1806,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Setting #10000008',
                 'thumb' => $_img_url.
-                'Products/w-p-2.jpg',
-                'images' => array('w-p-3.jpg', 'w-p-1.jpg'),
+                'Products/w-p-2'.$file_suffix .'.jpg',
+                'images' => array('w-p-3'.$file_suffix .'.jpg', 'w-p-1'.$file_suffix .'.jpg'),
                 'sku' => 'SET-8800950587-43',
                 'content' => '',
                 'regular_price' => '',
@@ -1897,8 +1898,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Setting #10000009',
                 'thumb' => $_img_url.
-                'Products/w-h-2.jpg',
-                'images' => array('w-h-3.jpg', 'w-h-1.jpg'),
+                'Products/w-h-2'.$file_suffix .'.jpg',
+                'images' => array('w-h-3'.$file_suffix .'.jpg', 'w-h-1'.$file_suffix .'.jpg'),
                 'content' => '',
                 'sku' => 'SET-8800950587-13',
                 'regular_price' => '',
@@ -1989,8 +1990,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Setting #10000010',
                 'thumb' => $_img_url.
-                'Products/w-c-2.jpg',
-                'images' => array('w-c-3.jpg', 'w-c-1.jpg'),
+                'Products/w-c-2'.$file_suffix .'.jpg',
+                'images' => array('w-c-3'.$file_suffix .'.jpg', 'w-c-1'.$file_suffix .'.jpg'),
                 'content' => '',
                 'sku' => 'SET-8800950587-4',
                 'regular_price' => '',
@@ -2084,8 +2085,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Setting #10000011',
                 'thumb' => $_img_url.
-                'Products/w-r-2.jpg',
-                'images' => array('w-r-3.jpg', 'w-r-1.jpg'),
+                'Products/w-r-2'.$file_suffix .'.jpg',
+                'images' => array('w-r-3'.$file_suffix .'.jpg', 'w-r-1'.$file_suffix .'.jpg'),
                 'content' => '',
                 'sku' => 'SET-8800950587-5',
                 'regular_price' => '',
@@ -2136,8 +2137,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Setting #10000012',
                 'thumb' => $_img_url.
-                'Products/w-pr-2.jpg',
-                'images' => array('w-pr-3.jpg', 'w-pr-1.jpg'),
+                'Products/w-pr-2'.$file_suffix .'.jpg',
+                'images' => array('w-pr-3'.$file_suffix .'.jpg', 'w-pr-1'.$file_suffix .'.jpg'),
                 'sku' => 'SET-8800950587-37',
                 'content' => '',
                 'regular_price' => '',
@@ -2188,8 +2189,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Setting #10000012',
                 'thumb' => $_img_url.
-                'Products/w-e-2.jpg',
-                'images' => array('w-e-3.jpg', 'w-e-1.jpg'),
+                'Products/w-e-2'.$file_suffix .'.jpg',
+                'images' => array('w-e-3'.$file_suffix .'.jpg', 'w-e-1'.$file_suffix .'.jpg'),
                 'content' => '',
                 'sku' => 'SET-8800950587-14',
                 'regular_price' => '',
@@ -2240,8 +2241,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Setting #10000013',
                 'thumb' => $_img_url.
-                'Products/w-a-2.jpg',
-                'images' => array('w-a-3.jpg', 'w-a-1.jpg'),
+                'Products/w-a-2'.$file_suffix .'.jpg',
+                'images' => array('w-a-3'.$file_suffix .'.jpg', 'w-a-1'.$file_suffix .'.jpg'),
                 'sku' => 'SET-8800950587-44',
                 'content' => '',
                 'regular_price' => '',
@@ -2292,8 +2293,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Setting #10000014',
                 'thumb' => $_img_url.
-                'Products/w-m-2.jpg',
-                'images' => array('w-m-3.jpg', 'w-m-1.jpg'),
+                'Products/w-m-2'.$file_suffix .'.jpg',
+                'images' => array('w-m-3'.$file_suffix .'.jpg', 'w-m-1'.$file_suffix .'.jpg'),
                 'sku' => 'SET-8800950587-38',
                 'content' => '',
                 'regular_price' => '',
@@ -2344,8 +2345,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Setting #10000015',
                 'thumb' => $_img_url.
-                'Products/w-o-2.jpg',
-                'images' => array('w-o-3.jpg', 'w-o-1.jpg'),
+                'Products/w-o-2'.$file_suffix .'.jpg',
+                'images' => array('w-o-3'.$file_suffix .'.jpg', 'w-o-1'.$file_suffix .'.jpg'),
                 'content' => '',
                 'sku' => 'SET-8800950587-6',
                 'regular_price' => '',
@@ -2396,8 +2397,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Setting #10000016',
                 'thumb' => $_img_url.
-                'Products/w-ra-2.jpg',
-                'images' => array('w-ra-3.jpg', 'w-ra-1.jpg'),
+                'Products/w-ra-2'.$file_suffix .'.jpg',
+                'images' => array('w-ra-3'.$file_suffix .'.jpg', 'w-ra-1'.$file_suffix .'.jpg'),
                 'sku' => 'SET-8800950587-39',
                 'content' => '',
                 'regular_price' => '',
@@ -2448,8 +2449,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Setting #10000017',
                 'thumb' => $_img_url.
-                'Products/w-p-2.jpg',
-                'images' => array('w-p-3.jpg', 'w-p-1.jpg'),
+                'Products/w-p-2'.$file_suffix .'.jpg',
+                'images' => array('w-p-3'.$file_suffix .'.jpg', 'w-p-1'.$file_suffix .'.jpg'),
                 'sku' => 'SET-8800950587-45',
                 'content' => '',
                 'regular_price' => '',
@@ -2500,8 +2501,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Setting #10000018',
                 'thumb' => $_img_url.
-                'Products/w-h-2.jpg',
-                'images' => array('w-h-3.jpg', 'w-h-1.jpg'),
+                'Products/w-h-2'.$file_suffix .'.jpg',
+                'images' => array('w-h-3'.$file_suffix .'.jpg', 'w-h-1'.$file_suffix .'.jpg'),
                 'content' => '',
                 'sku' => 'SET-8800950587-15',
                 'regular_price' => '',
@@ -2552,8 +2553,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Setting #10000019',
                 'thumb' => $_img_url.
-                'Products/w-c-2.jpg',
-                'images' => array('w-c-3.jpg', 'w-c-1.jpg'),
+                'Products/w-c-2'.$file_suffix .'.jpg',
+                'images' => array('w-c-3'.$file_suffix .'.jpg', 'w-c-1'.$file_suffix .'.jpg'),
                 'content' => '',
                 'sku' => 'SET-8800950587-7',
                 'regular_price' => '',
@@ -2607,8 +2608,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Setting #10000020',
                 'thumb' => $_img_url.
-                'Products/w-r-2.jpg',
-                'images' => array('w-r-3.jpg', 'w-r-1.jpg'),
+                'Products/w-r-2'.$file_suffix .'.jpg',
+                'images' => array('w-r-3'.$file_suffix .'.jpg', 'w-r-1'.$file_suffix .'.jpg'),
                 'content' => '',
                 'sku' => 'SET-8800950587-8',
                 'regular_price' => '',
@@ -2699,8 +2700,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Setting #10000021',
                 'thumb' => $_img_url.
-                'Products/w-pr-2.jpg',
-                'images' => array('w-pr-3.jpg', 'w-pr-1.jpg'),
+                'Products/w-pr-2'.$file_suffix .'.jpg',
+                'images' => array('w-pr-3'.$file_suffix .'.jpg', 'w-pr-1'.$file_suffix .'.jpg'),
                 'sku' => 'SET-8800950587-50',
                 'content' => '',
                 'regular_price' => '',
@@ -2791,8 +2792,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Setting #10000022',
                 'thumb' => $_img_url.
-                'Products/w-e-2.jpg',
-                'images' => array('w-e-3.jpg', 'w-e-1.jpg'),
+                'Products/w-e-2'.$file_suffix .'.jpg',
+                'images' => array('w-e-3'.$file_suffix .'.jpg', 'w-e-1'.$file_suffix .'.jpg'),
                 'content' => '',
                 'sku' => 'SET-8800950587-16',
                 'regular_price' => '',
@@ -2883,8 +2884,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Setting #10000023',
                 'thumb' => $_img_url.
-                'Products/w-a-2.jpg',
-                'images' => array('w-a-3.jpg', 'w-a-1.jpg'),
+                'Products/w-a-2'.$file_suffix .'.jpg',
+                'images' => array('w-a-3'.$file_suffix .'.jpg', 'w-a-1'.$file_suffix .'.jpg'),
                 'sku' => 'SET-8800950587-46',
                 'content' => '',
                 'regular_price' => '',
@@ -2975,8 +2976,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Setting #10000024',
                 'thumb' => $_img_url.
-                'Products/w-m-2.jpg',
-                'images' => array('w-m-3.jpg', 'w-m-1.jpg'),
+                'Products/w-m-2'.$file_suffix .'.jpg',
+                'images' => array('w-m-3'.$file_suffix .'.jpg', 'w-m-1'.$file_suffix .'.jpg'),
                 'sku' => 'SET-8800950587-51',
                 'content' => '',
                 'regular_price' => '',
@@ -3067,8 +3068,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Setting #10000025',
                 'thumb' => $_img_url.
-                'Products/w-o-2.jpg',
-                'images' => array('w-o-3.jpg', 'w-o-1.jpg'),
+                'Products/w-o-2'.$file_suffix .'.jpg',
+                'images' => array('w-o-3'.$file_suffix .'.jpg', 'w-o-1'.$file_suffix .'.jpg'),
                 'content' => '',
                 'sku' => 'SET-8800950587-9',
                 'regular_price' => '',
@@ -3159,8 +3160,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Setting #10000026',
                 'thumb' => $_img_url.
-                'Products/w-ra-2.jpg',
-                'images' => array('w-ra-3.jpg', 'w-ra-1.jpg'),
+                'Products/w-ra-2'.$file_suffix .'.jpg',
+                'images' => array('w-ra-3'.$file_suffix .'.jpg', 'w-ra-1'.$file_suffix .'.jpg'),
                 'sku' => 'SET-8800950587-52',
                 'content' => '',
                 'regular_price' => '',
@@ -3211,8 +3212,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Setting #10000027',
                 'thumb' => $_img_url.
-                'Products/w-p-2.jpg',
-                'images' => array('w-p-3.jpg', 'w-p-1.jpg'),
+                'Products/w-p-2'.$file_suffix .'.jpg',
+                'images' => array('w-p-3'.$file_suffix .'.jpg', 'w-p-1'.$file_suffix .'.jpg'),
                 'sku' => 'SET-8800950587-47',
                 'content' => '',
                 'regular_price' => '',
@@ -3303,8 +3304,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Setting #10000028',
                 'thumb' => $_img_url.
-                'Products/w-h-2.jpg',
-                'images' => array('w-h-3.jpg', 'w-h-1.jpg'),
+                'Products/w-h-2'.$file_suffix .'.jpg',
+                'images' => array('w-h-3'.$file_suffix .'.jpg', 'w-h-1'.$file_suffix .'.jpg'),
                 'content' => '',
                 'sku' => 'SET-8800950587-17',
                 'regular_price' => '',
@@ -3395,8 +3396,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Setting #10000029',
                 'thumb' => $_img_url.
-                'Products/w-c-2.jpg',
-                'images' => array('w-c-3.jpg', 'w-c-1.jpg'),
+                'Products/w-c-2'.$file_suffix .'.jpg',
+                'images' => array('w-c-3'.$file_suffix .'.jpg', 'w-c-1'.$file_suffix .'.jpg'),
                 'content' => '',
                 'sku' => 'SET-8800950587-20',
                 'regular_price' => '',
@@ -3490,8 +3491,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Setting #10000030',
                 'thumb' => $_img_url.
-                'Products/w-r-2.jpg',
-                'images' => array('w-r-3.jpg', 'w-r-1.jpg'),
+                'Products/w-r-2'.$file_suffix .'.jpg',
+                'images' => array('w-r-3'.$file_suffix .'.jpg', 'w-r-1'.$file_suffix .'.jpg'),
                 'content' => '',
                 'sku' => 'SET-8800950587-21',
                 'regular_price' => '',
@@ -3582,8 +3583,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Setting #10000031',
                 'thumb' => $_img_url.
-                'Products/w-pr-2.jpg',
-                'images' => array('w-pr-3.jpg', 'w-pr-1.jpg'),
+                'Products/w-pr-2'.$file_suffix .'.jpg',
+                'images' => array('w-pr-3'.$file_suffix .'.jpg', 'w-pr-1'.$file_suffix .'.jpg'),
                 'sku' => 'SET-8800950587-53',
                 'content' => '',
                 'regular_price' => '',
@@ -3674,8 +3675,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Setting #10000032',
                 'thumb' => $_img_url.
-                'Products/w-e-2.jpg',
-                'images' => array('w-e-3.jpg', 'w-e-1.jpg'),
+                'Products/w-e-2'.$file_suffix .'.jpg',
+                'images' => array('w-e-3'.$file_suffix .'.jpg', 'w-e-1'.$file_suffix .'.jpg'),
                 'content' => '',
                 'sku' => 'SET-8800950587-18',
                 'regular_price' => '',
@@ -3766,8 +3767,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Setting #10000033',
                 'thumb' => $_img_url.
-                'Products/w-a-2.jpg',
-                'images' => array('w-a-3.jpg', 'w-a-1.jpg'),
+                'Products/w-a-2'.$file_suffix .'.jpg',
+                'images' => array('w-a-3'.$file_suffix .'.jpg', 'w-a-1'.$file_suffix .'.jpg'),
                 'sku' => 'SET-8800950587-48',
                 'content' => '',
                 'regular_price' => '',
@@ -3858,8 +3859,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Setting #10000034',
                 'thumb' => $_img_url.
-                'Products/w-m-2.jpg',
-                'images' => array('w-m-3.jpg', 'w-m-1.jpg'),
+                'Products/w-m-2'.$file_suffix .'.jpg',
+                'images' => array('w-m-3'.$file_suffix .'.jpg', 'w-m-1'.$file_suffix .'.jpg'),
                 'sku' => 'SET-8800950587-54',
                 'content' => '',
                 'regular_price' => '',
@@ -3950,8 +3951,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Setting #10000035',
                 'thumb' => $_img_url.
-                'Products/w-o-2.jpg',
-                'images' => array('w-o-3.jpg', 'w-o-1.jpg'),
+                'Products/w-o-2'.$file_suffix .'.jpg',
+                'images' => array('w-o-3'.$file_suffix .'.jpg', 'w-o-1'.$file_suffix .'.jpg'),
                 'content' => '',
                 'sku' => 'SET-8800950587-22',
                 'regular_price' => '',
@@ -4042,8 +4043,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Setting #10000036',
                 'thumb' => $_img_url.
-                'Products/w-ra-2.jpg',
-                'images' => array('w-ra-3.jpg', 'w-ra-1.jpg'),
+                'Products/w-ra-2'.$file_suffix .'.jpg',
+                'images' => array('w-ra-3'.$file_suffix .'.jpg', 'w-ra-1'.$file_suffix .'.jpg'),
                 'sku' => 'SET-8800950587-55',
                 'content' => '',
                 'regular_price' => '',
@@ -4094,8 +4095,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Setting #10000037',
                 'thumb' => $_img_url.
-                'Products/w-p-2.jpg',
-                'images' => array('w-p-3.jpg', 'w-p-1.jpg'),
+                'Products/w-p-2'.$file_suffix .'.jpg',
+                'images' => array('w-p-3'.$file_suffix .'.jpg', 'w-p-1'.$file_suffix .'.jpg'),
                 'sku' => 'SET-8800950587-49',
                 'content' => '',
                 'regular_price' => '',
@@ -4186,8 +4187,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Setting #10000038',
                 'thumb' => $_img_url.
-                'Products/w-h-2.jpg',
-                'images' => array('w-h-3.jpg', 'w-h-1.jpg'),
+                'Products/w-h-2'.$file_suffix .'.jpg',
+                'images' => array('w-h-3'.$file_suffix .'.jpg', 'w-h-1'.$file_suffix .'.jpg'),
                 'content' => '',
                 'sku' => 'SET-8800950587-19',
                 'regular_price' => '',
@@ -4278,8 +4279,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Setting #10000039',
                 'thumb' => $_img_url.
-                'Products/w-c-2.jpg',
-                'images' => array('w-c-3.jpg', 'w-c-1.jpg'),
+                'Products/w-c-2'.$file_suffix .'.jpg',
+                'images' => array('w-c-3'.$file_suffix .'.jpg', 'w-c-1'.$file_suffix .'.jpg'),
                 'content' => '',
                 'sku' => 'SET-8800950587-23',
                 'regular_price' => '',
@@ -4373,8 +4374,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Setting #10000040',
                 'thumb' => $_img_url.
-                'Products/w-r-2.jpg',
-                'images' => array('w-r-3.jpg', 'w-r-1.jpg'),
+                'Products/w-r-2'.$file_suffix .'.jpg',
+                'images' => array('w-r-3'.$file_suffix .'.jpg', 'w-r-1'.$file_suffix .'.jpg'),
                 'content' => '',
                 'sku' => 'SET-8800950587-24',
                 'regular_price' => '',
@@ -4465,8 +4466,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Setting #10000041',
                 'thumb' => $_img_url.
-                'Products/w-pr-2.jpg',
-                'images' => array('w-pr-3.jpg', 'w-pr-1.jpg'),
+                'Products/w-pr-2'.$file_suffix .'.jpg',
+                'images' => array('w-pr-3'.$file_suffix .'.jpg', 'w-pr-1'.$file_suffix .'.jpg'),
                 'sku' => 'SET-8800950587-56',
                 'content' => '',
                 'regular_price' => '',
@@ -4557,8 +4558,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Setting #10000042',
                 'thumb' => $_img_url.
-                'Products/w-e-2.jpg',
-                'images' => array('w-e-3.jpg', 'w-e-1.jpg'),
+                'Products/w-e-2'.$file_suffix .'.jpg',
+                'images' => array('w-e-3'.$file_suffix .'.jpg', 'w-e-1'.$file_suffix .'.jpg'),
                 'content' => '',
                 'sku' => 'SET-8800950587-25',
                 'regular_price' => '',
@@ -4649,8 +4650,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Setting #10000043',
                 'thumb' => $_img_url.
-                'Products/w-a-2.jpg',
-                'images' => array('w-a-3.jpg', 'w-a-1.jpg'),
+                'Products/w-a-2'.$file_suffix .'.jpg',
+                'images' => array('w-a-3'.$file_suffix .'.jpg', 'w-a-1'.$file_suffix .'.jpg'),
                 'content' => '',
                 'sku' => 'SET-8800950587-26',
                 'regular_price' => '',
@@ -4741,8 +4742,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Setting #10000044',
                 'thumb' => $_img_url.
-                'Products/w-m-2.jpg',
-                'images' => array('w-m-3.jpg', 'w-m-1.jpg'),
+                'Products/w-m-2'.$file_suffix .'.jpg',
+                'images' => array('w-m-3'.$file_suffix .'.jpg', 'w-m-1'.$file_suffix .'.jpg'),
                 'sku' => 'SET-8800950587-57',
                 'content' => '',
                 'regular_price' => '',
@@ -4833,8 +4834,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Setting #10000045',
                 'thumb' => $_img_url.
-                'Products/w-o-2.jpg',
-                'images' => array('w-o-3.jpg', 'w-o-1.jpg'),
+                'Products/w-o-2'.$file_suffix .'.jpg',
+                'images' => array('w-o-3'.$file_suffix .'.jpg', 'w-o-1'.$file_suffix .'.jpg'),
                 'content' => '',
                 'sku' => 'SET-8800950587-27',
                 'regular_price' => '',
@@ -4925,8 +4926,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Setting #10000046',
                 'thumb' => $_img_url.
-                'Products/w-ra-2.jpg',
-                'images' => array('w-ra-3.jpg', 'w-ra-1.jpg'),
+                'Products/w-ra-2'.$file_suffix .'.jpg',
+                'images' => array('w-ra-3'.$file_suffix .'.jpg', 'w-ra-1'.$file_suffix .'.jpg'),
                 'sku' => 'SET-8800950587-58',
                 'content' => '',
                 'regular_price' => '',
@@ -4977,8 +4978,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Setting #10000047',
                 'thumb' => $_img_url.
-                'Products/w-p-2.jpg',
-                'images' => array('w-p-3.jpg', 'w-p-1.jpg'),
+                'Products/w-p-2'.$file_suffix .'.jpg',
+                'images' => array('w-p-3'.$file_suffix .'.jpg', 'w-p-1'.$file_suffix .'.jpg'),
                 'sku' => 'SET-8800950587-59',
                 'content' => '',
                 'regular_price' => '',
@@ -5069,8 +5070,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Setting #10000048',
                 'thumb' => $_img_url.
-                'Products/w-h-2.jpg',
-                'images' => array('w-h-3.jpg', 'w-h-1.jpg'),
+                'Products/w-h-2'.$file_suffix .'.jpg',
+                'images' => array('w-h-3'.$file_suffix .'.jpg', 'w-h-1'.$file_suffix .'.jpg'),
                 'content' => '',
                 'sku' => 'SET-8800950587-28',
                 'regular_price' => '',
@@ -5161,8 +5162,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Setting #10000049',
                 'thumb' => $_img_url.
-                'Products/w-c-2.jpg',
-                'images' => array('w-c-3.jpg', 'w-c-1.jpg'),
+                'Products/w-c-2'.$file_suffix .'.jpg',
+                'images' => array('w-c-3'.$file_suffix .'.jpg', 'w-c-1'.$file_suffix .'.jpg'),
                 'content' => '',
                 'sku' => 'SET-8800950587-29',
                 'regular_price' => '',
@@ -5256,15 +5257,15 @@ class Sample_Data_Template {
             array(
                 'title' => '11 sample Diamond #89302496',
                 'thumb' => $_img_url.
-                'Products/Round-4.jpg',
-                'images' => array('Round-5.jpg', 'Round-1.jpg'),
+                'Products/Round-4'.$file_suffix .'.jpg',
+                'images' => array('Round-5'.$file_suffix .'.jpg', 'Round-1'.$file_suffix .'.jpg'),
                 'content' => '',
                 'sku' => 'DIA-89302496-1',
                 'regular_price' => '99',
                 'sale_price' => '1',
                 'price' => '',
                 'sp_variations' => $_img_url.
-                'Products/Round-4.jpg',
+                'Products/Round-4'.$file_suffix .'.jpg',
                 'type' => 'simple', //simple | variable
                 'category' => array('eo_diamond_shape_cat', 'eo_diamond_round_shape_cat'/*, 'eo_diamond_oval_shape_cat', 'eo_diamond_cushion_shape_cat', 'eo_diamond_pear_shape_cat', 'eo_diamond_princess_shape_cat', 'eo_diamond_emerald_shape_cat', 'eo_diamond_asscher_shape_cat', 'eo_diamond_marquise_shape_cat', 'eo_diamond_heart_shape_cat', 'eo_diamond_radiant_shape_cat'*/),
                 'attribute' => array(
@@ -5471,8 +5472,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Emerald Diamond #66984597',
                 'thumb' => $_img_url.
-                'Products/Emerald-1.jpg',
-                'images' => array('Emerald-2.jpg', 'Emerald-3.jpg'),
+                'Products/Emerald-1'.$file_suffix .'.jpg',
+                'images' => array('Emerald-2'.$file_suffix .'.jpg', 'Emerald-3'.$file_suffix .'.jpg'),
                 'content' => '',
                 'sku' => 'DIA-66984597-2',
                 'regular_price' => '',
@@ -5581,8 +5582,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Asscher Diamond #99649028',
                 'thumb' => $_img_url.
-                'Products/asscher-1.jpg',
-                'images' => array('asscher-2.jpg'),
+                'Products/asscher-1'.$file_suffix .'.jpg',
+                'images' => array('asscher-2'.$file_suffix .'.jpg'),
                 'content' => '',
                 'sku' => 'DIA-99649028-3',
                 'regular_price' => '',
@@ -5691,8 +5692,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'PRINCESS DIAMOND #39398077',
                 'thumb' => $_img_url.
-                'Products/Princess-3.jpg',
-                'images' => array('Princess-1.jpg', 'Princess-2.jpg'),
+                'Products/Princess-3'.$file_suffix .'.jpg',
+                'images' => array('Princess-1'.$file_suffix .'.jpg', 'Princess-2'.$file_suffix .'.jpg'),
                 'content' => '',
                 'sku' => 'DIA-39398077-4',
                 'regular_price' => '',
@@ -5801,8 +5802,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Cusion Diamond #87671292',
                 'thumb' => $_img_url.
-                'Products/1_cushion_new.png',
-                'images' => array('1_cushion_new.png'),
+                'Products/1_cushion_new'.$file_suffix .'.png',
+                'images' => array('1_cushion_new'.$file_suffix .'.png'),
                 'content' => '',
                 'sku' => 'DIA-87671292-5',
                 'regular_price' => '',
@@ -5911,8 +5912,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Heart Diamond #95296856',
                 'thumb' => $_img_url.
-                'Products/Heart-1.jpg',
-                'images' => array('Heart-2.jpg', 'Heart-3.jpg'),
+                'Products/Heart-1'.$file_suffix .'.jpg',
+                'images' => array('Heart-2'.$file_suffix .'.jpg', 'Heart-3'.$file_suffix .'.jpg'),
                 'content' => '',
                 'sku' => 'DIA-95296856-6',
                 'regular_price' => '',
@@ -6021,8 +6022,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Marquise Diamond #16931364',
                 'thumb' => $_img_url.
-                'Products/1_marquise_new.png',
-                'images' => array('Marquise-2.jpg'),
+                'Products/1_marquise_new'.$file_suffix .'.png',
+                'images' => array('Marquise-2'.$file_suffix .'.jpg'),
                 'content' => '',
                 'sku' => 'DIA-16931364-7',
                 'regular_price' => '',
@@ -6131,8 +6132,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Oval Diamond #75138961',
                 'thumb' => $_img_url.
-                'Products/Oval-1.jpg',
-                'images' => array('Oval-2.jpg'),
+                'Products/Oval-1'.$file_suffix .'.jpg',
+                'images' => array('Oval-2'.$file_suffix .'.jpg'),
                 'content' => '',
                 'sku' => 'DIA-75138961-8',
                 'regular_price' => '',
@@ -6241,8 +6242,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Radiant Solitaire Diamond #59218358',
                 'thumb' => $_img_url.
-                'Products/Radiant-1.jpg',
-                'images' => array('Radiant-2.jpg'),
+                'Products/Radiant-1'.$file_suffix .'.jpg',
+                'images' => array('Radiant-2'.$file_suffix .'.jpg'),
                 'content' => '',
                 'sku' => 'DIA-59218358-9',
                 'regular_price' => '',
@@ -6351,8 +6352,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Pear Diamond #95299666',
                 'thumb' => $_img_url.
-                'Products/Pear-1.jpg',
-                'images' => array('Pear-2.jpg', 'Pear-3.jpg'),
+                'Products/Pear-1'.$file_suffix .'.jpg',
+                'images' => array('Pear-2'.$file_suffix .'.jpg', 'Pear-3'.$file_suffix .'.jpg'),
                 'content' => '',
                 'sku' => 'DIA-95299666-10',
                 'regular_price' => '',
@@ -6464,8 +6465,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Round Diamond #10000050',
                 'thumb' => $_img_url.
-                'Products/Round-4.jpg',
-                'images' => array('Round-5.jpg', 'Round-1.jpg'),
+                'Products/Round-4'.$file_suffix .'.jpg',
+                'images' => array('Round-5'.$file_suffix .'.jpg', 'Round-1'.$file_suffix .'.jpg'),
                 'content' => '',
                 'sku' => 'DIA-10000050-11',
                 'regular_price' => '',
@@ -6574,8 +6575,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Emerald Diamond #10000051',
                 'thumb' => $_img_url.
-                'Products/Emerald-1.jpg',
-                'images' => array('Emerald-2.jpg', 'Emerald-3.jpg'),
+                'Products/Emerald-1'.$file_suffix .'.jpg',
+                'images' => array('Emerald-2'.$file_suffix .'.jpg', 'Emerald-3'.$file_suffix .'.jpg'),
                 'content' => '',
                 'sku' => 'DIA-10000051-12',
                 'regular_price' => '',
@@ -6684,8 +6685,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Asscher Diamond #10000052',
                 'thumb' => $_img_url.
-                'Products/asscher-1.jpg',
-                'images' => array('asscher-2.jpg'),
+                'Products/asscher-1'.$file_suffix .'.jpg',
+                'images' => array('asscher-2'.$file_suffix .'.jpg'),
                 'content' => '',
                 'sku' => 'DIA-10000052-13',
                 'regular_price' => '',
@@ -6794,8 +6795,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'PRINCESS DIAMOND #10000053',
                 'thumb' => $_img_url.
-                'Products/Princess-3.jpg',
-                'images' => array('Princess-1.jpg', 'Princess-2.jpg'),
+                'Products/Princess-3'.$file_suffix .'.jpg',
+                'images' => array('Princess-1'.$file_suffix .'.jpg', 'Princess-2'.$file_suffix .'.jpg'),
                 'content' => '',
                 'sku' => 'DIA-10000053-14',
                 'regular_price' => '',
@@ -6904,8 +6905,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Cusion Diamond #10000054',
                 'thumb' => $_img_url.
-                'Products/1_cushion_new.png',
-                'images' => array('1_cushion_new.png'),
+                'Products/1_cushion_new'.$file_suffix .'.png',
+                'images' => array('1_cushion_new'.$file_suffix .'.png'),
                 'content' => '',
                 'sku' => 'DIA-10000054-15',
                 'regular_price' => '',
@@ -7014,8 +7015,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Heart Diamond #10000055',
                 'thumb' => $_img_url.
-                'Products/Heart-1.jpg',
-                'images' => array('Heart-2.jpg', 'Heart-3.jpg'),
+                'Products/Heart-1'.$file_suffix .'.jpg',
+                'images' => array('Heart-2'.$file_suffix .'.jpg', 'Heart-3'.$file_suffix .'.jpg'),
                 'content' => '',
                 'sku' => 'DIA-10000055-16',
                 'regular_price' => '',
@@ -7124,8 +7125,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Marquise Diamond #10000056',
                 'thumb' => $_img_url.
-                'Products/1_marquise_new.png',
-                'images' => array('Marquise-2.jpg'),
+                'Products/1_marquise_new'.$file_suffix .'.png',
+                'images' => array('Marquise-2'.$file_suffix .'.jpg'),
                 'content' => '',
                 'sku' => 'DIA-10000056-17',
                 'regular_price' => '',
@@ -7234,8 +7235,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Oval Diamond #10000057',
                 'thumb' => $_img_url.
-                'Products/Oval-1.jpg',
-                'images' => array('Oval-2.jpg'),
+                'Products/Oval-1'.$file_suffix .'.jpg',
+                'images' => array('Oval-2'.$file_suffix .'.jpg'),
                 'content' => '',
                 'sku' => 'DIA-10000057-18',
                 'regular_price' => '',
@@ -7344,8 +7345,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Radiant Solitaire Diamond #10000058',
                 'thumb' => $_img_url.
-                'Products/Radiant-1.jpg',
-                'images' => array('Radiant-2.jpg'),
+                'Products/Radiant-1'.$file_suffix .'.jpg',
+                'images' => array('Radiant-2'.$file_suffix .'.jpg'),
                 'content' => '',
                 'sku' => 'DIA-10000058-19',
                 'regular_price' => '',
@@ -7454,8 +7455,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Pear Diamond #10000059',
                 'thumb' => $_img_url.
-                'Products/Pear-1.jpg',
-                'images' => array('Pear-2.jpg', 'Pear-3.jpg'),
+                'Products/Pear-1'.$file_suffix .'.jpg',
+                'images' => array('Pear-2'.$file_suffix .'.jpg', 'Pear-3'.$file_suffix .'.jpg'),
                 'content' => '',
                 'sku' => 'DIA-10000059-20',
                 'regular_price' => '',
@@ -7567,8 +7568,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Round Diamond #10000060',
                 'thumb' => $_img_url.
-                'Products/Round-4.jpg',
-                'images' => array('Round-5.jpg', 'Round-1.jpg'),
+                'Products/Round-4'.$file_suffix .'.jpg',
+                'images' => array('Round-5'.$file_suffix .'.jpg', 'Round-1'.$file_suffix .'.jpg'),
                 'content' => '',
                 'sku' => 'DIA-10000060-21',
                 'regular_price' => '',
@@ -7677,8 +7678,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Emerald Diamond #10000061',
                 'thumb' => $_img_url.
-                'Products/Emerald-1.jpg',
-                'images' => array('Emerald-2.jpg', 'Emerald-3.jpg'),
+                'Products/Emerald-1'.$file_suffix .'.jpg',
+                'images' => array('Emerald-2'.$file_suffix .'.jpg', 'Emerald-3'.$file_suffix .'.jpg'),
                 'content' => '',
                 'sku' => 'DIA-10000061-22',
                 'regular_price' => '',
@@ -7787,8 +7788,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Asscher Diamond #10000062',
                 'thumb' => $_img_url.
-                'Products/asscher-1.jpg',
-                'images' => array('asscher-2.jpg'),
+                'Products/asscher-1'.$file_suffix .'.jpg',
+                'images' => array('asscher-2'.$file_suffix .'.jpg'),
                 'content' => '',
                 'sku' => 'DIA-10000062-23',
                 'regular_price' => '',
@@ -7897,8 +7898,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'PRINCESS DIAMOND #10000063',
                 'thumb' => $_img_url.
-                'Products/Princess-3.jpg',
-                'images' => array('Princess-1.jpg', 'Princess-2.jpg'),
+                'Products/Princess-3'.$file_suffix .'.jpg',
+                'images' => array('Princess-1'.$file_suffix .'.jpg', 'Princess-2'.$file_suffix .'.jpg'),
                 'content' => '',
                 'sku' => 'DIA-10000063-24',
                 'regular_price' => '',
@@ -8007,8 +8008,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Cusion Diamond #10000064',
                 'thumb' => $_img_url.
-                'Products/1_cushion_new.png',
-                'images' => array('1_cushion_new.png'),
+                'Products/1_cushion_new'.$file_suffix .'.png',
+                'images' => array('1_cushion_new'.$file_suffix .'.png'),
                 'content' => '',
                 'sku' => 'DIA-10000064-25',
                 'regular_price' => '',
@@ -8117,8 +8118,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Heart Diamond #10000065',
                 'thumb' => $_img_url.
-                'Products/Heart-1.jpg',
-                'images' => array('Heart-2.jpg', 'Heart-3.jpg'),
+                'Products/Heart-1'.$file_suffix .'.jpg',
+                'images' => array('Heart-2'.$file_suffix .'.jpg', 'Heart-3'.$file_suffix .'.jpg'),
                 'content' => '',
                 'sku' => 'DIA-10000065-26',
                 'regular_price' => '',
@@ -8227,8 +8228,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Marquise Diamond #10000066',
                 'thumb' => $_img_url.
-                'Products/1_marquise_new.png',
-                'images' => array('Marquise-2.jpg'),
+                'Products/1_marquise_new'.$file_suffix .'.png',
+                'images' => array('Marquise-2'.$file_suffix .'.jpg'),
                 'content' => '',
                 'sku' => 'DIA-10000066-27',
                 'regular_price' => '',
@@ -8337,8 +8338,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Oval Diamond #10000067',
                 'thumb' => $_img_url.
-                'Products/Oval-1.jpg',
-                'images' => array('Oval-2.jpg'),
+                'Products/Oval-1'.$file_suffix .'.jpg',
+                'images' => array('Oval-2'.$file_suffix .'.jpg'),
                 'content' => '',
                 'sku' => 'DIA-10000067-28',
                 'regular_price' => '',
@@ -8447,8 +8448,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Radiant Solitaire Diamond #10000068',
                 'thumb' => $_img_url.
-                'Products/Radiant-1.jpg',
-                'images' => array('Radiant-2.jpg'),
+                'Products/Radiant-1'.$file_suffix .'.jpg',
+                'images' => array('Radiant-2'.$file_suffix .'.jpg'),
                 'content' => '',
                 'sku' => 'DIA-10000068-29',
                 'regular_price' => '',
@@ -8557,8 +8558,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Pear Diamond #10000069',
                 'thumb' => $_img_url.
-                'Products/Pear-1.jpg',
-                'images' => array('Pear-2.jpg', 'Pear-3.jpg'),
+                'Products/Pear-1'.$file_suffix .'.jpg',
+                'images' => array('Pear-2'.$file_suffix .'.jpg', 'Pear-3'.$file_suffix .'.jpg'),
                 'content' => '',
                 'sku' => 'DIA-10000069-30',
                 'regular_price' => '',
@@ -8670,8 +8671,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Round Diamond #10000070',
                 'thumb' => $_img_url.
-                'Products/Round-4.jpg',
-                'images' => array('Round-5.jpg', 'Round-1.jpg'),
+                'Products/Round-4'.$file_suffix .'.jpg',
+                'images' => array('Round-5'.$file_suffix .'.jpg', 'Round-1'.$file_suffix .'.jpg'),
                 'content' => '',
                 'sku' => 'DIA-10000070-31',
                 'regular_price' => '',
@@ -8780,8 +8781,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Emerald Diamond #10000071',
                 'thumb' => $_img_url.
-                'Products/Emerald-1.jpg',
-                'images' => array('Emerald-2.jpg', 'Emerald-3.jpg'),
+                'Products/Emerald-1'.$file_suffix .'.jpg',
+                'images' => array('Emerald-2'.$file_suffix .'.jpg', 'Emerald-3'.$file_suffix .'.jpg'),
                 'content' => '',
                 'sku' => 'DIA-10000071-32',
                 'regular_price' => '',
@@ -8890,8 +8891,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Asscher Diamond #10000072',
                 'thumb' => $_img_url.
-                'Products/asscher-1.jpg',
-                'images' => array('asscher-2.jpg'),
+                'Products/asscher-1'.$file_suffix .'.jpg',
+                'images' => array('asscher-2'.$file_suffix .'.jpg'),
                 'content' => '',
                 'sku' => 'DIA-10000072-33',
                 'regular_price' => '',
@@ -9000,8 +9001,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'PRINCESS DIAMOND #10000073',
                 'thumb' => $_img_url.
-                'Products/Princess-3.jpg',
-                'images' => array('Princess-1.jpg', 'Princess-2.jpg'),
+                'Products/Princess-3'.$file_suffix .'.jpg',
+                'images' => array('Princess-1'.$file_suffix .'.jpg', 'Princess-2'.$file_suffix .'.jpg'),
                 'content' => '',
                 'sku' => 'DIA-10000073-34',
                 'regular_price' => '',
@@ -9110,8 +9111,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Cusion Diamond #10000074',
                 'thumb' => $_img_url.
-                'Products/1_cushion_new.png',
-                'images' => array('1_cushion_new.png'),
+                'Products/1_cushion_new'.$file_suffix .'.png',
+                'images' => array('1_cushion_new'.$file_suffix .'.png'),
                 'content' => '',
                 'sku' => 'DIA-10000074-35',
                 'regular_price' => '',
@@ -9220,8 +9221,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Heart Diamond #10000075',
                 'thumb' => $_img_url.
-                'Products/Heart-1.jpg',
-                'images' => array('Heart-2.jpg', 'Heart-3.jpg'),
+                'Products/Heart-1'.$file_suffix .'.jpg',
+                'images' => array('Heart-2'.$file_suffix .'.jpg', 'Heart-3'.$file_suffix .'.jpg'),
                 'content' => '',
                 'sku' => 'DIA-10000075-36',
                 'regular_price' => '',
@@ -9330,8 +9331,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Marquise Diamond #10000076',
                 'thumb' => $_img_url.
-                'Products/1_marquise_new.png',
-                'images' => array('Marquise-2.jpg'),
+                'Products/1_marquise_new'.$file_suffix .'.png',
+                'images' => array('Marquise-2'.$file_suffix .'.jpg'),
                 'content' => '',
                 'sku' => 'DIA-10000076-37',
                 'regular_price' => '',
@@ -9440,8 +9441,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Oval Diamond #10000077',
                 'thumb' => $_img_url.
-                'Products/Oval-1.jpg',
-                'images' => array('Oval-2.jpg'),
+                'Products/Oval-1'.$file_suffix .'.jpg',
+                'images' => array('Oval-2'.$file_suffix .'.jpg'),
                 'content' => '',
                 'sku' => 'DIA-10000077-38',
                 'regular_price' => '',
@@ -9550,8 +9551,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Radiant Solitaire Diamond #10000078',
                 'thumb' => $_img_url.
-                'Products/Radiant-1.jpg',
-                'images' => array('Radiant-2.jpg'),
+                'Products/Radiant-1'.$file_suffix .'.jpg',
+                'images' => array('Radiant-2'.$file_suffix .'.jpg'),
                 'content' => '',
                 'sku' => 'DIA-10000078-39',
                 'regular_price' => '',
@@ -9660,8 +9661,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Pear Diamond #10000079',
                 'thumb' => $_img_url.
-                'Products/Pear-1.jpg',
-                'images' => array('Pear-2.jpg', 'Pear-3.jpg'),
+                'Products/Pear-1'.$file_suffix .'.jpg',
+                'images' => array('Pear-2'.$file_suffix .'.jpg', 'Pear-3'.$file_suffix .'.jpg'),
                 'content' => '',
                 'sku' => 'DIA-10000079-40',
                 'regular_price' => '',
@@ -9773,8 +9774,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Round Diamond #10000080',
                 'thumb' => $_img_url.
-                'Products/Round-4.jpg',
-                'images' => array('Round-5.jpg', 'Round-1.jpg'),
+                'Products/Round-4'.$file_suffix .'.jpg',
+                'images' => array('Round-5'.$file_suffix .'.jpg', 'Round-1'.$file_suffix .'.jpg'),
                 'content' => '',
                 'sku' => 'DIA-10000080-41',
                 'regular_price' => '',
@@ -9883,8 +9884,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Emerald Diamond #10000081',
                 'thumb' => $_img_url.
-                'Products/Emerald-1.jpg',
-                'images' => array('Emerald-2.jpg', 'Emerald-3.jpg'),
+                'Products/Emerald-1'.$file_suffix .'.jpg',
+                'images' => array('Emerald-2'.$file_suffix .'.jpg', 'Emerald-3'.$file_suffix .'.jpg'),
                 'content' => '',
                 'sku' => 'DIA-10000081-42',
                 'regular_price' => '',
@@ -9993,8 +9994,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Asscher Diamond #10000082',
                 'thumb' => $_img_url.
-                'Products/asscher-1.jpg',
-                'images' => array('asscher-2.jpg'),
+                'Products/asscher-1'.$file_suffix .'.jpg',
+                'images' => array('asscher-2'.$file_suffix .'.jpg'),
                 'content' => '',
                 'sku' => 'DIA-10000082-43',
                 'regular_price' => '',
@@ -10103,8 +10104,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'PRINCESS DIAMOND #10000083',
                 'thumb' => $_img_url.
-                'Products/Princess-3.jpg',
-                'images' => array('Princess-1.jpg', 'Princess-2.jpg'),
+                'Products/Princess-3'.$file_suffix .'.jpg',
+                'images' => array('Princess-1'.$file_suffix .'.jpg', 'Princess-2'.$file_suffix .'.jpg'),
                 'content' => '',
                 'sku' => 'DIA-10000083-44',
                 'regular_price' => '',
@@ -10213,8 +10214,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Cusion Diamond #10000084',
                 'thumb' => $_img_url.
-                'Products/1_cushion_new.png',
-                'images' => array('1_cushion_new.png'),
+                'Products/1_cushion_new'.$file_suffix .'.png',
+                'images' => array('1_cushion_new'.$file_suffix .'.png'),
                 'content' => '',
                 'sku' => 'DIA-10000084-45',
                 'regular_price' => '',
@@ -10323,8 +10324,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Heart Diamond #10000085',
                 'thumb' => $_img_url.
-                'Products/Heart-1.jpg',
-                'images' => array('Heart-2.jpg', 'Heart-3.jpg'),
+                'Products/Heart-1'.$file_suffix .'.jpg',
+                'images' => array('Heart-2'.$file_suffix .'.jpg', 'Heart-3'.$file_suffix .'.jpg'),
                 'content' => '',
                 'sku' => 'DIA-10000085-46',
                 'regular_price' => '',
@@ -10433,8 +10434,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Marquise Diamond #10000086',
                 'thumb' => $_img_url.
-                'Products/1_marquise_new.png',
-                'images' => array('Marquise-2.jpg'),
+                'Products/1_marquise_new'.$file_suffix .'.png',
+                'images' => array('Marquise-2'.$file_suffix .'.jpg'),
                 'content' => '',
                 'sku' => 'DIA-10000086-47',
                 'regular_price' => '',
@@ -10543,8 +10544,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Oval Diamond #10000087',
                 'thumb' => $_img_url.
-                'Products/Oval-1.jpg',
-                'images' => array('Oval-2.jpg'),
+                'Products/Oval-1'.$file_suffix .'.jpg',
+                'images' => array('Oval-2'.$file_suffix .'.jpg'),
                 'content' => '',
                 'sku' => 'DIA-10000087-48',
                 'regular_price' => '',
@@ -10653,8 +10654,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Radiant Solitaire Diamond #10000088',
                 'thumb' => $_img_url.
-                'Products/Radiant-1.jpg',
-                'images' => array('Radiant-2.jpg'),
+                'Products/Radiant-1'.$file_suffix .'.jpg',
+                'images' => array('Radiant-2'.$file_suffix .'.jpg'),
                 'content' => '',
                 'sku' => 'DIA-10000088-49',
                 'regular_price' => '',
@@ -10763,8 +10764,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Pear Diamond #10000089',
                 'thumb' => $_img_url.
-                'Products/Pear-1.jpg',
-                'images' => array('Pear-2.jpg', 'Pear-3.jpg'),
+                'Products/Pear-1'.$file_suffix .'.jpg',
+                'images' => array('Pear-2'.$file_suffix .'.jpg', 'Pear-3'.$file_suffix .'.jpg'),
                 'content' => '',
                 'sku' => 'DIA-10000089-50',
                 'regular_price' => '',
@@ -10876,8 +10877,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Round Diamond #10000090',
                 'thumb' => $_img_url.
-                'Products/Round-4.jpg',
-                'images' => array('Round-5.jpg', 'Round-1.jpg'),
+                'Products/Round-4'.$file_suffix .'.jpg',
+                'images' => array('Round-5'.$file_suffix .'.jpg', 'Round-1'.$file_suffix .'.jpg'),
                 'content' => '',
                 'sku' => 'DIA-10000090-51',
                 'regular_price' => '',
@@ -10986,8 +10987,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Emerald Diamond #10000091',
                 'thumb' => $_img_url.
-                'Products/Emerald-1.jpg',
-                'images' => array('Emerald-2.jpg', 'Emerald-3.jpg'),
+                'Products/Emerald-1'.$file_suffix .'.jpg',
+                'images' => array('Emerald-2'.$file_suffix .'.jpg', 'Emerald-3'.$file_suffix .'.jpg'),
                 'content' => '',
                 'sku' => 'DIA-10000091-52',
                 'regular_price' => '',
@@ -11096,8 +11097,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Asscher Diamond #10000092',
                 'thumb' => $_img_url.
-                'Products/asscher-1.jpg',
-                'images' => array('asscher-2.jpg'),
+                'Products/asscher-1'.$file_suffix .'.jpg',
+                'images' => array('asscher-2'.$file_suffix .'.jpg'),
                 'content' => '',
                 'sku' => 'DIA-10000092-53',
                 'regular_price' => '',
@@ -11206,8 +11207,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'PRINCESS DIAMOND #10000093',
                 'thumb' => $_img_url.
-                'Products/Princess-3.jpg',
-                'images' => array('Princess-1.jpg', 'Princess-2.jpg'),
+                'Products/Princess-3'.$file_suffix .'.jpg',
+                'images' => array('Princess-1'.$file_suffix .'.jpg', 'Princess-2'.$file_suffix .'.jpg'),
                 'content' => '',
                 'sku' => 'DIA-10000093-54',
                 'regular_price' => '',
@@ -11316,8 +11317,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Cusion Diamond #10000094',
                 'thumb' => $_img_url.
-                'Products/1_cushion_new.png',
-                'images' => array('1_cushion_new.png'),
+                'Products/1_cushion_new'.$file_suffix .'.png',
+                'images' => array('1_cushion_new'.$file_suffix .'.png'),
                 'content' => '',
                 'sku' => 'DIA-10000094-55',
                 'regular_price' => '',
@@ -11426,8 +11427,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Heart Diamond #10000095',
                 'thumb' => $_img_url.
-                'Products/Heart-1.jpg',
-                'images' => array('Heart-2.jpg', 'Heart-3.jpg'),
+                'Products/Heart-1'.$file_suffix .'.jpg',
+                'images' => array('Heart-2'.$file_suffix .'.jpg', 'Heart-3'.$file_suffix .'.jpg'),
                 'content' => '',
                 'sku' => 'DIA-10000095-56',
                 'regular_price' => '',
@@ -11536,8 +11537,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Marquise Diamond #10000096',
                 'thumb' => $_img_url.
-                'Products/1_marquise_new.png',
-                'images' => array('Marquise-2.jpg'),
+                'Products/1_marquise_new'.$file_suffix .'.png',
+                'images' => array('Marquise-2'.$file_suffix .'.jpg'),
                 'content' => '',
                 'sku' => 'DIA-10000096-57',
                 'regular_price' => '',
@@ -11646,8 +11647,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Oval Diamond #10000097',
                 'thumb' => $_img_url.
-                'Products/Oval-1.jpg',
-                'images' => array('Oval-2.jpg'),
+                'Products/Oval-1'.$file_suffix .'.jpg',
+                'images' => array('Oval-2'.$file_suffix .'.jpg'),
                 'content' => '',
                 'sku' => 'DIA-10000097-58',
                 'regular_price' => '',
@@ -11756,8 +11757,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Radiant Solitaire Diamond #10000098',
                 'thumb' => $_img_url.
-                'Products/Radiant-1.jpg',
-                'images' => array('Radiant-2.jpg'),
+                'Products/Radiant-1'.$file_suffix .'.jpg',
+                'images' => array('Radiant-2'.$file_suffix .'.jpg'),
                 'content' => '',
                 'sku' => 'DIA-10000098-59',
                 'regular_price' => '',
@@ -11866,8 +11867,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Pear Diamond #10000099',
                 'thumb' => $_img_url.
-                'Products/Pear-1.jpg',
-                'images' => array('Pear-2.jpg', 'Pear-3.jpg'),
+                'Products/Pear-1'.$file_suffix .'.jpg',
+                'images' => array('Pear-2'.$file_suffix .'.jpg', 'Pear-3'.$file_suffix .'.jpg'),
                 'content' => '',
                 'sku' => 'DIA-10000099-60',
                 'regular_price' => '',
@@ -11979,8 +11980,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Lab Round Diamond #10000100',
                 'thumb' => $_img_url.
-                'Products/Round-4.jpg',
-                'images' => array('Round-5.jpg', 'Round-1.jpg'),
+                'Products/Round-4'.$file_suffix .'.jpg',
+                'images' => array('Round-5'.$file_suffix .'.jpg', 'Round-1'.$file_suffix .'.jpg'),
                 'content' => '',
                 'sku' => 'LAB-810000100',
                 'regular_price' => '',
@@ -12089,8 +12090,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Lab Emerald Diamond #10000101',
                 'thumb' => $_img_url.
-                'Products/Emerald-1.jpg',
-                'images' => array('Emerald-2.jpg', 'Emerald-3.jpg'),
+                'Products/Emerald-1'.$file_suffix .'.jpg',
+                'images' => array('Emerald-2'.$file_suffix .'.jpg', 'Emerald-3'.$file_suffix .'.jpg'),
                 'content' => '',
                 'sku' => 'LAB-810000101',
                 'regular_price' => '',
@@ -12199,8 +12200,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Lab Asscher Diamond #10000102',
                 'thumb' => $_img_url.
-                'Products/asscher-1.jpg',
-                'images' => array('asscher-2.jpg'),
+                'Products/asscher-1'.$file_suffix .'.jpg',
+                'images' => array('asscher-2'.$file_suffix .'.jpg'),
                 'content' => '',
                 'sku' => 'LAB-810000102',
                 'regular_price' => '',
@@ -12309,8 +12310,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Lab PRINCESS DIAMOND #10000103',
                 'thumb' => $_img_url.
-                'Products/Princess-3.jpg',
-                'images' => array('Princess-1.jpg', 'Princess-2.jpg'),
+                'Products/Princess-3'.$file_suffix .'.jpg',
+                'images' => array('Princess-1'.$file_suffix .'.jpg', 'Princess-2'.$file_suffix .'.jpg'),
                 'content' => '',
                 'sku' => 'LAB-810000103',
                 'regular_price' => '',
@@ -12419,8 +12420,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Lab Cusion Diamond #10000104',
                 'thumb' => $_img_url.
-                'Products/1_cushion_new.png',
-                'images' => array('1_cushion_new.png'),
+                'Products/1_cushion_new'.$file_suffix .'.png',
+                'images' => array('1_cushion_new'.$file_suffix .'.png'),
                 'content' => '',
                 'sku' => 'LAB-810000104',
                 'regular_price' => '',
@@ -12529,8 +12530,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Lab Heart Diamond #10000105',
                 'thumb' => $_img_url.
-                'Products/Heart-1.jpg',
-                'images' => array('Heart-2.jpg', 'Heart-3.jpg'),
+                'Products/Heart-1'.$file_suffix .'.jpg',
+                'images' => array('Heart-2'.$file_suffix .'.jpg', 'Heart-3'.$file_suffix .'.jpg'),
                 'content' => '',
                 'sku' => 'LAB-810000105',
                 'regular_price' => '',
@@ -12639,8 +12640,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Lab Marquise Diamond #10000106',
                 'thumb' => $_img_url.
-                'Products/1_marquise_new.png',
-                'images' => array('Marquise-2.jpg'),
+                'Products/1_marquise_new'.$file_suffix .'.png',
+                'images' => array('Marquise-2'.$file_suffix .'.jpg'),
                 'content' => '',
                 'sku' => 'LAB-810000106',
                 'regular_price' => '',
@@ -12749,8 +12750,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Lab Oval Diamond #10000107',
                 'thumb' => $_img_url.
-                'Products/Oval-1.jpg',
-                'images' => array('Oval-2.jpg'),
+                'Products/Oval-1'.$file_suffix .'.jpg',
+                'images' => array('Oval-2'.$file_suffix .'.jpg'),
                 'content' => '',
                 'sku' => 'LAB-810000107',
                 'regular_price' => '',
@@ -12859,8 +12860,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Lab Radiant Solitaire Diamond #10000108',
                 'thumb' => $_img_url.
-                'Products/Radiant-1.jpg',
-                'images' => array('Radiant-2.jpg'),
+                'Products/Radiant-1'.$file_suffix .'.jpg',
+                'images' => array('Radiant-2'.$file_suffix .'.jpg'),
                 'content' => '',
                 'sku' => 'LAB-810000108',
                 'regular_price' => '',
@@ -12969,8 +12970,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Lab Pear Diamond #10000109',
                 'thumb' => $_img_url.
-                'Products/Pear-1.jpg',
-                'images' => array('Pear-2.jpg', 'Pear-3.jpg'),
+                'Products/Pear-1'.$file_suffix .'.jpg',
+                'images' => array('Pear-2'.$file_suffix .'.jpg', 'Pear-3'.$file_suffix .'.jpg'),
                 'content' => '',
                 'sku' => 'LAB-810000109',
                 'regular_price' => '',
@@ -13082,8 +13083,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Lab Round Diamond #10000110',
                 'thumb' => $_img_url.
-                'Products/Round-4.jpg',
-                'images' => array('Round-5.jpg', 'Round-1.jpg'),
+                'Products/Round-4'.$file_suffix .'.jpg',
+                'images' => array('Round-5'.$file_suffix .'.jpg', 'Round-1'.$file_suffix .'.jpg'),
                 'content' => '',
                 'sku' => 'LAB-810000110',
                 'regular_price' => '',
@@ -13192,8 +13193,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Lab Emerald Diamond #10000111',
                 'thumb' => $_img_url.
-                'Products/Emerald-1.jpg',
-                'images' => array('Emerald-2.jpg', 'Emerald-3.jpg'),
+                'Products/Emerald-1'.$file_suffix .'.jpg',
+                'images' => array('Emerald-2'.$file_suffix .'.jpg', 'Emerald-3'.$file_suffix .'.jpg'),
                 'content' => '',
                 'sku' => 'LAB-810000111',
                 'regular_price' => '',
@@ -13302,8 +13303,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Lab Asscher Diamond #10000112',
                 'thumb' => $_img_url.
-                'Products/asscher-1.jpg',
-                'images' => array('asscher-2.jpg'),
+                'Products/asscher-1'.$file_suffix .'.jpg',
+                'images' => array('asscher-2'.$file_suffix .'.jpg'),
                 'content' => '',
                 'sku' => 'LAB-810000112',
                 'regular_price' => '',
@@ -13412,8 +13413,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Lab PRINCESS DIAMOND #10000113',
                 'thumb' => $_img_url.
-                'Products/Princess-3.jpg',
-                'images' => array('Princess-1.jpg', 'Princess-2.jpg'),
+                'Products/Princess-3'.$file_suffix .'.jpg',
+                'images' => array('Princess-1'.$file_suffix .'.jpg', 'Princess-2'.$file_suffix .'.jpg'),
                 'content' => '',
                 'sku' => 'LAB-810000113',
                 'regular_price' => '',
@@ -13522,8 +13523,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Lab Cusion Diamond #10000114',
                 'thumb' => $_img_url.
-                'Products/1_cushion_new.png',
-                'images' => array('1_cushion_new.png'),
+                'Products/1_cushion_new'.$file_suffix .'.png',
+                'images' => array('1_cushion_new'.$file_suffix .'.png'),
                 'content' => '',
                 'sku' => 'LAB-810000114',
                 'regular_price' => '',
@@ -13632,8 +13633,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Lab Heart Diamond #10000115',
                 'thumb' => $_img_url.
-                'Products/Heart-1.jpg',
-                'images' => array('Heart-2.jpg', 'Heart-3.jpg'),
+                'Products/Heart-1'.$file_suffix .'.jpg',
+                'images' => array('Heart-2'.$file_suffix .'.jpg', 'Heart-3'.$file_suffix .'.jpg'),
                 'content' => '',
                 'sku' => 'LAB-810000115',
                 'regular_price' => '',
@@ -13742,8 +13743,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Lab Marquise Diamond #10000116',
                 'thumb' => $_img_url.
-                'Products/1_marquise_new.png',
-                'images' => array('Marquise-2.jpg'),
+                'Products/1_marquise_new'.$file_suffix .'.png',
+                'images' => array('Marquise-2'.$file_suffix .'.jpg'),
                 'content' => '',
                 'sku' => 'LAB-810000116',
                 'regular_price' => '',
@@ -13852,8 +13853,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Lab Oval Diamond #10000117',
                 'thumb' => $_img_url.
-                'Products/Oval-1.jpg',
-                'images' => array('Oval-2.jpg'),
+                'Products/Oval-1'.$file_suffix .'.jpg',
+                'images' => array('Oval-2'.$file_suffix .'.jpg'),
                 'content' => '',
                 'sku' => 'LAB-810000117',
                 'regular_price' => '',
@@ -13962,8 +13963,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Lab Radiant Solitaire Diamond #10000118',
                 'thumb' => $_img_url.
-                'Products/Radiant-1.jpg',
-                'images' => array('Radiant-2.jpg'),
+                'Products/Radiant-1'.$file_suffix .'.jpg',
+                'images' => array('Radiant-2'.$file_suffix .'.jpg'),
                 'content' => '',
                 'sku' => 'LAB-810000118',
                 'regular_price' => '',
@@ -14072,8 +14073,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Lab Pear Diamond #10000119',
                 'thumb' => $_img_url.
-                'Products/Pear-1.jpg',
-                'images' => array('Pear-2.jpg', 'Pear-3.jpg'),
+                'Products/Pear-1'.$file_suffix .'.jpg',
+                'images' => array('Pear-2'.$file_suffix .'.jpg', 'Pear-3'.$file_suffix .'.jpg'),
                 'content' => '',
                 'sku' => 'LAB-810000119',
                 'regular_price' => '',
@@ -14185,8 +14186,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Lab Round Diamond #10000120',
                 'thumb' => $_img_url.
-                'Products/Round-4.jpg',
-                'images' => array('Round-5.jpg', 'Round-1.jpg'),
+                'Products/Round-4'.$file_suffix .'.jpg',
+                'images' => array('Round-5'.$file_suffix .'.jpg', 'Round-1'.$file_suffix .'.jpg'),
                 'content' => '',
                 'sku' => 'LAB-810000120',
                 'regular_price' => '',
@@ -14295,8 +14296,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Lab Emerald Diamond #10000121',
                 'thumb' => $_img_url.
-                'Products/Emerald-1.jpg',
-                'images' => array('Emerald-2.jpg', 'Emerald-3.jpg'),
+                'Products/Emerald-1'.$file_suffix .'.jpg',
+                'images' => array('Emerald-2'.$file_suffix .'.jpg', 'Emerald-3'.$file_suffix .'.jpg'),
                 'content' => '',
                 'sku' => 'LAB-810000121',
                 'regular_price' => '',
@@ -14405,8 +14406,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Lab Asscher Diamond #10000122',
                 'thumb' => $_img_url.
-                'Products/asscher-1.jpg',
-                'images' => array('asscher-2.jpg'),
+                'Products/asscher-1'.$file_suffix .'.jpg',
+                'images' => array('asscher-2'.$file_suffix .'.jpg'),
                 'content' => '',
                 'sku' => 'LAB-810000122',
                 'regular_price' => '',
@@ -14515,8 +14516,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Lab PRINCESS DIAMOND #10000123',
                 'thumb' => $_img_url.
-                'Products/Princess-3.jpg',
-                'images' => array('Princess-1.jpg', 'Princess-2.jpg'),
+                'Products/Princess-3'.$file_suffix .'.jpg',
+                'images' => array('Princess-1'.$file_suffix .'.jpg', 'Princess-2'.$file_suffix .'.jpg'),
                 'content' => '',
                 'sku' => 'LAB-810000123',
                 'regular_price' => '',
@@ -14625,8 +14626,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Lab Cusion Diamond #10000124',
                 'thumb' => $_img_url.
-                'Products/1_cushion_new.png',
-                'images' => array('1_cushion_new.png'),
+                'Products/1_cushion_new'.$file_suffix .'.png',
+                'images' => array('1_cushion_new'.$file_suffix .'.png'),
                 'content' => '',
                 'sku' => 'LAB-810000124',
                 'regular_price' => '',
@@ -14735,8 +14736,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Lab Heart Diamond #10000125',
                 'thumb' => $_img_url.
-                'Products/Heart-1.jpg',
-                'images' => array('Heart-2.jpg', 'Heart-3.jpg'),
+                'Products/Heart-1'.$file_suffix .'.jpg',
+                'images' => array('Heart-2'.$file_suffix .'.jpg', 'Heart-3'.$file_suffix .'.jpg'),
                 'content' => '',
                 'sku' => 'LAB-810000125',
                 'regular_price' => '',
@@ -14845,8 +14846,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Lab Marquise Diamond #10000126',
                 'thumb' => $_img_url.
-                'Products/1_marquise_new.png',
-                'images' => array('Marquise-2.jpg'),
+                'Products/1_marquise_new'.$file_suffix .'.png',
+                'images' => array('Marquise-2'.$file_suffix .'.jpg'),
                 'content' => '',
                 'sku' => 'LAB-810000126',
                 'regular_price' => '',
@@ -14955,8 +14956,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Lab Oval Diamond #10000127',
                 'thumb' => $_img_url.
-                'Products/Oval-1.jpg',
-                'images' => array('Oval-2.jpg'),
+                'Products/Oval-1'.$file_suffix .'.jpg',
+                'images' => array('Oval-2'.$file_suffix .'.jpg'),
                 'content' => '',
                 'sku' => 'LAB-810000127',
                 'regular_price' => '',
@@ -15065,8 +15066,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Lab Radiant Solitaire Diamond #10000128',
                 'thumb' => $_img_url.
-                'Products/Radiant-1.jpg',
-                'images' => array('Radiant-2.jpg'),
+                'Products/Radiant-1'.$file_suffix .'.jpg',
+                'images' => array('Radiant-2'.$file_suffix .'.jpg'),
                 'content' => '',
                 'sku' => 'LAB-810000128',
                 'regular_price' => '',
@@ -15175,8 +15176,8 @@ class Sample_Data_Template {
             array(
                 'title' => 'Lab Pear Diamond #10000129',
                 'thumb' => $_img_url.
-                'Products/Pear-1.jpg',
-                'images' => array('Pear-2.jpg', 'Pear-3.jpg'),
+                'Products/Pear-1'.$file_suffix .'.jpg',
+                'images' => array('Pear-2'.$file_suffix .'.jpg', 'Pear-3'.$file_suffix .'.jpg'),
                 'content' => '',
                 'sku' => 'LAB-810000129',
                 'regular_price' => '',

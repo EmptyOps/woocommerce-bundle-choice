@@ -22,10 +22,12 @@ class Extensions_Data_Template extends \eo\wbc\model\admin\sample_data\data_temp
 	}
 
     protected $singleton_function = null;
+    
+    $file_suffix = (WBC_SCRIPT_DEBUG) ? '' : '.min';
 
-    private $first_icon = 'first_icon.png';
-    private $second_icon = 'second_icon.png';
-    private $preview_icon = 'preview_icon.png';
+    private $first_icon = 'first_icon'.$file_suffix .'.png';
+    private $second_icon = 'second_icon'.$file_suffix .'.png';
+    private $preview_icon = 'preview_icon'.$file_suffix .'.png';
 
 	private function __construct() {
 
