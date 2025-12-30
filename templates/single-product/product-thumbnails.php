@@ -20,7 +20,7 @@
      */
 	
 
-
+	defined( 'ABSPATH' ) || exit;
 	// NOTE: Blank because we don't need thumbnails, but keep it
 
 

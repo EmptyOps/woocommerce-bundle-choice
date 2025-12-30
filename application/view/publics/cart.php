@@ -20,11 +20,11 @@
             </div>
         </td>
         <td data-title="Product">           
-            <p><?php esc_html_e($first->get_title().
+            <p><?php echo esc_html($first->get_title().
                 ($cart['FIRST'][2]  ? "<br/>&nbsp; - &nbsp;".implode(',',wbc()->wc->eo_wbc_get_product_variation_attributes($cart['FIRST'][2],$cart['FIRST']['variation'])) :'')); ?></p>          
         
             <?php if($cart['SECOND']):?>
-            <p><?php esc_html_e($second->get_title().
+            <p><?php echo esc_html($second->get_title().
                    ($cart['SECOND'][2] ? "<br/>&nbsp; - &nbsp;".implode(',',wbc()->wc->eo_wbc_get_product_variation_attributes($cart['SECOND'][2],$cart['SECOND']['variation'])):'')); ?></p>
             <?php endif; ?>                                 
         </td>
@@ -32,7 +32,7 @@
             <p>
                 <?php 
                     $product_obj=wbc()->wc->eo_wbc_get_product($cart['FIRST'][2]?$cart['FIRST'][2]:$cart['FIRST'][0]);
-                    esc_html_e(wc_price($product_obj->get_price())); 
+                    echo esc_html(wc_price($product_obj->get_price())); 
                 ?>                    
             </p>
             <?php $price=($product_obj->get_price()*$cart['FIRST'][1]); ?>
@@ -42,21 +42,21 @@
                 <p>
                     <?php 
                         $product_obj=wbc()->wc->eo_wbc_get_product($cart['SECOND'][2]?$cart['SECOND'][2]:$cart['SECOND'][0]);
-                        esc_html_e(wc_price($product_obj->get_price())); 
+                        echo esc_html(wc_price($product_obj->get_price())); 
                     ?>                        
                 </p>
                 <?php $price+=($product_obj->get_price()*$cart['SECOND'][1]); ?>
             <?php endif; ?>             
         </td>
         <td data-title="Quantity">
-            <p><?php esc_html_e($cart['FIRST'][1]); ?></p>
+            <p><?php echo esc_html($cart['FIRST'][1]); ?></p>
             <?php if($cart['SECOND']):?>
-            <p><?php esc_html_e($cart['SECOND'][1]); ?></p>
+            <p><?php echo esc_html($cart['SECOND'][1]); ?></p>
             <?php endif; ?>
         </td>
         <td data-title="Cost">
             <div class="ui middle aligned four column centered grid">
-                <?php esc_html_e(wc_price($price)); ?>
+                <?php echo esc_html(wc_price($price)); ?>
             </div>
         </td>                               
     </tr> 

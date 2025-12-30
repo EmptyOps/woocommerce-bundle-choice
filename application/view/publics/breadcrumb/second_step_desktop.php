@@ -12,7 +12,7 @@ $model_images = \eo\wbc\model\Images::instance();
             <div class="column eowbc_breadcrumb_font"><?php echo esc_html($order); ?></div>
             <div class="column" style="text-align: left;">
                 <div class="description eowbc_breadcrumb_font" <?php _e((!empty(\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$clickable_breadcrumb) and !empty(\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$second_url))?'data-clickable_breadcrumb="'.esc_url(\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$second_url).'"':''); ?>><?php esc_html_e(wbc()->options->get_option('appearance_breadcrumb','appearance_breadcrumb_choose_prefix_text',__('Choose a','woo-bundle-choice'),true,true)); ?></div>
-                <div class="title eowbc_breadcrumb_font"><?php esc_html_e($second_name) ?></div>
+                <div class="title eowbc_breadcrumb_font"><?php echo esc_html($second_name) ?></div>
             </div>
         </div>
         <?php if(empty($second)):?>

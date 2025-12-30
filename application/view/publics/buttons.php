@@ -104,7 +104,7 @@ if(!function_exists('eo_wbc_buttons_css')){
 <!-- Created with Wordpress plugin - BUNDLOICE (formerly Woo Choice Plugin) -->
 <div id="wbc_" class="eo_wbc_container" <?php echo (isset($is_embed_using_js) && $is_embed_using_js) ? 'style="display: none !important;"' : '';?>>
 	<h2 class="ui center aligned header" style="text-align: center !important;">
-		<?php esc_html_e($heading); ?>
+		<?php echo esc_html($heading); ?>
 	</h2>
 	<div class="ui grid center aligned container">
 		<div class="ui buttons large row stackable" style="display: inline-block;display: inline-flex;">

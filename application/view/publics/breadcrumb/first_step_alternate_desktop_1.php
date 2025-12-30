@@ -31,7 +31,7 @@
                     <?php
                 } else {
                     ?>
-                    <div class="description eowbc_breadcrumb_font"><?php esc_html_e($first_name); ?></div>
+                    <div class="description eowbc_breadcrumb_font"><?php echo esc_html($first_name); ?></div>
                     <div><?php /*_e(get_woocommerce_currency().wc_price($first->get_price()));*/ ?><?php esc_html_e(wc_price(apply_filters('eowbc_breadcrumb_first_price',$first->get_price(),$first))); ?></div>
                     <div><u><a href="<?php echo esc_url($view_url); ?>"> <?php esc_html(spext_lang("View", 'woo-bundle-choice')); ?></a></u>&nbsp;|&nbsp;<u><a href="<?php echo esc_url($remove_url); ?>" data-remove-url="<?php echo esc_url($remove_url); ?>"><?php esc_html_e(wbc()->options->get_option('appearance_breadcrumb','appearance_breadcrumb_change_action_text','Change',true,true)); ?></a></u></div>
             <?php } endif; ?>                    

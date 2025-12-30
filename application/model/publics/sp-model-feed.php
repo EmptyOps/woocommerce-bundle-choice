@@ -192,7 +192,7 @@ class SP_Model_Feed extends SP_Feed {
 						ob_start();
 						?>
 							<span id="wbc_variation_toggle" class="ui raised segment">
-								<?php esc_html_e($toggle_text); ?><i class="caret up icon" style="text-align: center;line-height: 1em;"></i>						
+								<?php echo esc_html($toggle_text); ?><i class="caret up icon" style="text-align: center;line-height: 1em;"></i>						
 							</span>
 						<?php
 						echo ob_get_clean();

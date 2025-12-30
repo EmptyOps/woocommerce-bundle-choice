@@ -36,7 +36,7 @@ if(!empty($id) /*and !empty($label)*/){
 
 	    		<?php 
 				if($style != "normal_without_parent_div") { ?>
-		    		<div class="<?php !empty($grouped)?esc_attr_e('grouped'):'inline' ?> fields" style="margin-bottom:0px !important;">
+		    		<div class="<?php !empty($grouped)?echo esc_attr('grouped'):'inline' ?> fields" style="margin-bottom:0px !important;">
 				<?php 
 				}
 				?>			
