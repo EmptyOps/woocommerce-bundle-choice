@@ -3,8 +3,15 @@
 //	the common global vars -- these common global vars will load before any js layer or even inline javascript of the wbc, extensions and themes 
 
 
+$hook = (defined('SP_WBC_ARBU') && constant('SP_WBC_ARBU') === true) ? 'wbc_enqueue_scripts' : 'wp_enqueue_scripts';
+aa ajax ringbuilder time karelu hook nu wp ni jgya ae wbc use kariye chhiye.
 //	enqueue common assets 
-add_action( ( !is_admin() ? 'wp_enqueue_scripts' : 'admin_enqueue_scripts'),function(){
+// add_action( ( !is_admin() ? 'wp_enqueue_scripts' : 'admin_enqueue_scripts'),function(){
+add_action( ( !is_admin() ? $hook : 'admin_enqueue_scripts'),function(){
+//	enqueue common assets 
+// add_action( ( !is_admin() ? 'wp_enqueue_scripts' : 'admin_enqueue_scripts'),function(){
+
+// add_action('wbc_enqueue_scripts', function () {
 	
 	if( wbc()->sanitize->get('is_test') == 1 ) {
 		wbc_pr('js_var_is_loaded');
@@ -185,8 +192,46 @@ add_action( ( !is_admin() ? 'wp_enqueue_scripts' : 'admin_enqueue_scripts'),func
 		// ACTIVE_TODO/TODO when the variations and its child modules are moved out from the below loaded common js then at that time, also move te wc-cart variation dependancy mentioned below 
 		
 		if(!is_front_page()){
-			$file_suffix = (WBC_SCRIPT_DEBUG) ? '' : '.min';
-			wbc()->load->asset('js','common'.$file_suffix,array('jquery','wc-add-to-cart-variation'),"0.1.4",false,true,'common_configs',array('swatches_config'=>$swatches_configs, 'gallery_images_configs'=>$gallery_images_configs),true);
+			// die("19555");
+
+			// $file_suffix = (defined('WBC_SCRIPT_DEBUG') && WBC_SCRIPT_DEBUG) ? '' : '.min';
+			$file_suffix = '';
+
+			$common_config = [
+			        'swatches_config'        => $swatches_configs,
+			        'gallery_images_configs' => $gallery_images_configs,
+			    ];
+
+			    echo "2055555";
+			    wbc()->load->asset(
+			        'js',
+			        'common',
+			        array('jquery','wc-add-to-cart-variation'),
+			        '0.1.4',             // version (consider using plugin version constant)
+			        false,               // (header) or true for footer
+			        true,                // assume this flag triggers localization
+			        'common_configs',    // JS object name
+			        $common_config,      // data array
+			        true                 // maybe enqueue or print (as per WBC API)
+			    );
+			    echo "217777";
+
+			// echo '<script src="' 
+			//      . plugins_url('common' . $file_suffix . '.js', __FILE__) 
+			//      . '?ver=0.1.4"></script>';
+
+
+			// echo '<script>
+			// window.common_configs = ' . wp_json_encode([
+			//     'swatches_config'        => wbc()->config->product_variations_configs(),
+			//     'gallery_images_configs' => wbc()->config->product_variations_configs(),
+			// ]) . ';
+			// </script>';
+
+
+
+			// $file_suffix = (WBC_SCRIPT_DEBUG) ? '' : '.min';
+			// wbc()->load->asset('js','common'.$file_suffix,array('jquery','wc-add-to-cart-variation'),"0.1.4",false,true,'common_configs',array('swatches_config'=>$swatches_configs, 'gallery_images_configs'=>$gallery_images_configs),true);
 		}
 
 		// ACTIVE_TODO temp. hold for removel and we need to remove as soon as we refactore the loading sequance of filter widget class and load asset function og that class. so it is highly temporary. and we need to fix if we face issues whwrw filter feature is not active on certain pages but still that is loading below asset then we need to prevent that also and other such issues.
