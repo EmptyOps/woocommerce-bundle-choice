@@ -88,25 +88,26 @@ class Eowbc_Configuration {
 				//delete and allow our default theme adaption setting to catch up
 				//wbc()->options->remove_option('appearance_breadcrumb','breadcrumb_backcolor_active');	//delete and allow our default theme adaption setting to catch up	
 				//wbc()->options->update_option('appearance_breadcrumb','breadcrumb_backcolor_inactive','#ffffff');			
-
+				$file_suffix = (WBC_SCRIPT_DEBUG) ? '' : '.min';
 				//set icon for this template 
-				$this->set_icons_for_breadcrumb_template( array('default/wbc_breadcrumb_default_step_1.png','default/wbc_breadcrumb_default_step_2.png','default/wbc_breadcrumb_default_step_3.png') );
+				$this->set_icons_for_breadcrumb_template( array('default/wbc_breadcrumb_default_step_1'.$file_suffix .'.png','default/wbc_breadcrumb_default_step_2'.$file_suffix .'.png','default/wbc_breadcrumb_default_step_3'.$file_suffix .'.png') );
 
 			} elseif(wbc()->sanitize->post('config_alternate_breadcrumb') =='template_1'){
 				wbc()->options->update_option('appearance_filter','header_font','Avenir');
 				wbc()->options->update_option('appearance_breadcrumb','breadcrumb_backcolor_active','#dde5ed');
 				wbc()->options->update_option('appearance_breadcrumb','breadcrumb_backcolor_inactive','#ffffff');			
-
+				$file_suffix = (WBC_SCRIPT_DEBUG) ? '' : '.min';
 				//set icon for this template 
-				$this->set_icons_for_breadcrumb_template( array('template_1/wbc_breadcrumb_template_1_step_1.png','template_1/wbc_breadcrumb_template_1_step_2.png','template_1/wbc_breadcrumb_template_1_step_3.png') );
+				$this->set_icons_for_breadcrumb_template( array('template_1/wbc_breadcrumb_template_1_step_1'.$file_suffix .'.png','template_1/wbc_breadcrumb_template_1_step_2'.$file_suffix .'.png','template_1/wbc_breadcrumb_template_1_step_3'.$file_suffix .'.png') );
 
 			} elseif (wbc()->sanitize->post('config_alternate_breadcrumb') =='template_2') {
 				wbc()->options->update_option('appearance_filter','header_font','ZapfHumanist601BT-Roman');
 				wbc()->options->update_option('appearance_breadcrumb','breadcrumb_backcolor_active','#f7f7f7');	
 				wbc()->options->update_option('appearance_breadcrumb','breadcrumb_backcolor_inactive','#ffffff');
 
+				$file_suffix = (WBC_SCRIPT_DEBUG) ? '' : '.min';
 				//set icon for this template 
-				$this->set_icons_for_breadcrumb_template( array('template_2/wbc_breadcrumb_template_2_step_1.png','template_2/wbc_breadcrumb_template_2_step_2.png','template_2/wbc_breadcrumb_template_2_step_3.png') );
+				$this->set_icons_for_breadcrumb_template( array('template_2/wbc_breadcrumb_template_2_step_1'.$file_suffix .'.png','template_2/wbc_breadcrumb_template_2_step_2'.$file_suffix .'.png','template_2/wbc_breadcrumb_template_2_step_3'.$file_suffix .'.png') );
 
 			} elseif (wbc()->sanitize->post('config_alternate_breadcrumb') =='template_3') {
 				wbc()->options->remove_option('appearance_filter','header_font');	//delete and allow our default theme adaption setting to catch up
