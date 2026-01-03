@@ -3,6 +3,7 @@
  * 
  * in case if you want to implement your custom html then follow our documentation guide on how to add add custom html templates by following this link https://sphereplugins.com/docs/how-to-override-templates-using-custom-html
  */
+defined( 'ABSPATH' ) || exit;
 
 if(in_array($variable_item_data['options_loop_type'][$term->slug],array('dropdown_image','dropdown_image_only','dropdown'))) {
     //ACTIVE_TODO niche no code chhe te mastr brach ma comment karelo chhe wordpress.org ma update push karati vakhate minss devlopment branch ma pull thay ne aave to tya tene open comment j ganavani niche ni line ne 

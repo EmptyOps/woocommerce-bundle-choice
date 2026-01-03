@@ -1,5 +1,9 @@
 <?php
-namespace eo\wbc\controllers\visual_tools; 
+namespace eo\wbc\controllers\visual_tools;
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+} 
 
 class WP_Bakery extends \WPBakeryShortCode {
 	private static $_instance = null;

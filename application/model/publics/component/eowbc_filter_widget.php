@@ -1,6 +1,8 @@
 <?php
 namespace eo\wbc\model\publics\component;
 
+defined( 'ABSPATH' ) || exit;
+
 class EOWBC_Filter_Widget {
 	
 	private static $_instance = null;
