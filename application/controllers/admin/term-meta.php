@@ -182,7 +182,7 @@ class Term_Meta {
 			<?php if($is_edit): ?>
 				<th scope="row" valign="top">
 			<?php endif; ?>
-				<label><?php ecs_html_e('Image', 'woo-bundle-choice'); ?></label>
+				<label><?php esc_html_e('Image', 'woo-bundle-choice'); ?></label>
 			<?php if($is_edit): ?>
 					</th>
 					<td>
