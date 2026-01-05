@@ -2,8 +2,8 @@
 	//Semantic UI : fields
 ?>
 
-<div class="ui selection dropdown <?php echo !empty($class) ? esc_attr($class) : ''; ?>" <?php !empty($id) ? 'id="'.esc_attr_e($id.'_dropdown').'"' : ''; ?> <?php /*phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- we are not escaping the $attr because it may contain multiple attributes and we do not want esc_attr function to escape the double qoutes(") of the different attribute values. but anyway we understand the security requirement here so we have always escaped the attribute value with the esc_attr from wherever this $attr var is passed*/!empty($attr) ? _e($attr) : ''; ?>>
-  	<input type="hidden" <?php !empty($id) ? 'id="'.esc_attr_e($id).'"' : ''; ?> <?php !empty($name) ? 'name="'.esc_attr_e($name).'"' : ''; ?> value="<?php !empty($value) ? esc_attr_e($value) : ''; ?>">
+<div class="ui selection dropdown <?php echo (!empty($class) ? esc_attr($class) : ''); ?>" <?php echo (!empty($id) ? 'id="'.esc_attr($id.'_dropdown').'"' : ''); ?> <?php /*phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- we are not escaping the $attr because it may contain multiple attributes and we do not want esc_attr function to escape the double qoutes(") of the different attribute values. but anyway we understand the security requirement here so we have always escaped the attribute value with the esc_attr from wherever this $attr var is passed*/echo (!empty($attr) ? $attr : ''); ?>>
+  	<input type="hidden" <?php echo (!empty($id) ? 'id="'.esc_attr($id).'"' : ''); ?> <?php echo (!empty($name) ? 'name="'.esc_attr($name).'"' : ''); ?> value="<?php echo (!empty($value) ? esc_attr($value) : ''); ?>">
   	<i class="dropdown icon"></i>		
   	<div class="default text"></div>		  	
   	<div class="menu">
