@@ -39,22 +39,22 @@ class Migration_000500 {
         $maps=$wpdb->get_results($query,'ARRAY_A');
         if(!empty($maps)){                
 
-            for ($i=0; $i < count($maps) ; $i++) { 
+            for ($i=0; $i < count($maps) ; $i++) {	 
+        		NOTE wordpress na review update na fix mate aane comment marel chhe baki jarur pade to uncoment karo.
+                // $first_term_taxonomy_id=$wpdb->get_var("SELECT term_taxonomy_id FROM `{$wpdb->prefix}term_taxonomy` INNER JOIN `{$wpdb->prefix}terms` ON wbc_terms.term_id=wbc_term_taxonomy.term_id AND wbc_term_taxonomy.taxonomy='product_cat' AND wbc_terms.term_id={$maps[$i]['first_cat_id']}");
 
-                $first_term_taxonomy_id=$wpdb->get_var("SELECT term_taxonomy_id FROM `{$wpdb->prefix}term_taxonomy` INNER JOIN `{$wpdb->prefix}terms` ON wbc_terms.term_id=wbc_term_taxonomy.term_id AND wbc_term_taxonomy.taxonomy='product_cat' AND wbc_terms.term_id={$maps[$i]['first_cat_id']}");
+                // $second_term_taxonomy_id=$wpdb->get_var("SELECT term_taxonomy_id FROM `{$wpdb->prefix}term_taxonomy` INNER JOIN `{$wpdb->prefix}terms` ON wbc_terms.term_id=wbc_term_taxonomy.term_id AND wbc_term_taxonomy.taxonomy='product_cat' AND wbc_terms.term_id={$maps[$i]['second_cat_id']}");
 
-                $second_term_taxonomy_id=$wpdb->get_var("SELECT term_taxonomy_id FROM `{$wpdb->prefix}term_taxonomy` INNER JOIN `{$wpdb->prefix}terms` ON wbc_terms.term_id=wbc_term_taxonomy.term_id AND wbc_term_taxonomy.taxonomy='product_cat' AND wbc_terms.term_id={$maps[$i]['second_cat_id']}");
+                // if(!$first_term_taxonomy_id){
+                //     $first_term_taxonomy_id=$wpdb->get_var("SELECT term_taxonomy_id FROM `wbc_term_taxonomy` where taxonomy LIKE 'pa_%' and term_id={$maps[$i]['first_cat_id']}");
+                // }
+                // if(!$second_term_taxonomy_id){
+                //     $second_term_taxonomy_id=$wpdb->get_var("SELECT term_taxonomy_id FROM `wbc_term_taxonomy` where taxonomy LIKE 'pa_%' and term_id={$maps[$i]['second_cat_id']}");
+                // }   
 
-                if(!$first_term_taxonomy_id){
-                    $first_term_taxonomy_id=$wpdb->get_var("SELECT term_taxonomy_id FROM `wbc_term_taxonomy` where taxonomy LIKE 'pa_%' and term_id={$maps[$i]['first_cat_id']}");
-                }
-                if(!$second_term_taxonomy_id){
-                    $second_term_taxonomy_id=$wpdb->get_var("SELECT term_taxonomy_id FROM `wbc_term_taxonomy` where taxonomy LIKE 'pa_%' and term_id={$maps[$i]['second_cat_id']}");
-                }   
-
-                if($first_term_taxonomy_id && $second_term_taxonomy_id){
-                    $wpdb->query("UPDATE `wbc_eo_wbc_cat_maps` SET `first_cat_id`={$first_term_taxonomy_id},`second_cat_id`={$second_term_taxonomy_id} WHERE first_cat_id={$maps[$i]['first_cat_id']} AND second_cat_id={$maps[$i]['second_cat_id']}");
-                }
+                // if($first_term_taxonomy_id && $second_term_taxonomy_id){
+                //     $wpdb->query("UPDATE `wbc_eo_wbc_cat_maps` SET `first_cat_id`={$first_term_taxonomy_id},`second_cat_id`={$second_term_taxonomy_id} WHERE first_cat_id={$maps[$i]['first_cat_id']} AND second_cat_id={$maps[$i]['second_cat_id']}");
+                // }
             }                
         }
 	}
