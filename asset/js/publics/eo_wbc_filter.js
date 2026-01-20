@@ -3256,7 +3256,7 @@ if( typeof(eo_wbc_object) != 'undefined'){
 			// ACTIVE_TODO but we may like to move it very soon somwhere in common sections of category and item page -- to h & -- to s
 	// YITH wishlist fix
 	function eowbc_yith_wishlist_fix(){
-		NOTE:Changes applied on date 08-10-2025 as per the wordpress review team’s suggestion.
+		// NOTE:Changes applied on date 08-10-2025 as per the wordpress review team’s suggestion.
 		jQuery(document).ready((function(t) {
 			function i() {
 				void 0 !== t.fn.selectBox && t("select.selectBox").filter(":visible").not(".enhanced").selectBox().addClass("enhanced")

@@ -186,12 +186,12 @@ class WBC_WC {
             }               
         } else {
             if($taxonomy==='product_cat'){
-                NOTE:Changes applied on date 11-09-2025 as per the wordpress review team’s suggestion. 
+                // NOTE:Changes applied on date 11-09-2025 as per the wordpress review team’s suggestion. 
                 // $term_list = get_terms($taxonomy, array('hide_empty' => 0, 'orderby' => $orderby, 'parent'=>$parent_id,'lang'=>''));
                 $term_list = get_terms(array('taxonomy' => $taxonomy,'hide_empty' => false, 'orderby' => $orderby, 'parent'=>$parent_id,'lang'=>''));
             } else{
                 
-                NOTE:Changes applied on date 11-09-2025 as per the wordpress review team’s suggestion. 
+                // NOTE:Changes applied on date 11-09-2025 as per the wordpress review team’s suggestion. 
                 // $term_list = get_terms($taxonomy,array('hide_empty' => 0, 'orderby' => $orderby,'lang'=>''));
                 $term_list = get_terms(array('taxonomy' => $taxonomy,'hide_empty' => false, 'orderby' => $orderby,'lang'=>''));
             }            
@@ -814,7 +814,7 @@ class WBC_WC {
 
             if(is_wp_error($terms)){
 
-                NOTE:Changes applied on date 11-09-2025 as per the wordpress review team’s suggestion. 
+                // NOTE:Changes applied on date 11-09-2025 as per the wordpress review team’s suggestion. 
                 // $terms=get_terms(wc_attribute_taxonomy_name($taxonomy->attribute_name),array('hide_empty'=>false));
                 $terms=get_terms(array('taxonomy' => wc_attribute_taxonomy_name($taxonomy->attribute_name), 'hide_empty'=>false));
             }

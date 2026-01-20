@@ -127,7 +127,7 @@ if ( ! class_exists( 'Tiny_features' ) ) {
 								<div class="spui_custum_video_container">
 									<div class="spui_video_links">
 										<a href="#" class="btn">
-											 NOTE: development adhuru chhe tethi remove karavanu aavshe.	
+											 <!-- NOTE: development adhuru chhe tethi remove karavanu aavshe.	 -->
 											<!-- <img src="https://cdn-icons.flaticon.com/png/512/797/premium/797592.png?token=exp=1653727260~hmac=c2ce871afdfde03d00785cbf295ff801" class="img-fluid"> -->
 										</a>
 										<p><?php echo esc_html(eowbc_lang("video", 'woo-bundle-choice')); ?></p>

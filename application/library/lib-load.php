@@ -56,8 +56,8 @@ if(!class_exists('WBC_Loader')) {
 						wbc_pr('bootstrap case constant is '. $constant);
 					}
 
-					NOTE:Changes applied on date 28-11-2025 as per the wordpress review team’s suggestion. if false hati te removi karel chhe. 
-					NOTE:development adhuru chhe tethi remove karavanu aavshe. 
+					// NOTE:Changes applied on date 28-11-2025 as per the wordpress review team’s suggestion. if false hati te removi karel chhe. 
+					// NOTE:development adhuru chhe tethi remove karavanu aavshe. 
 					wbc()->load->asset('css','https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css',array(),"",true,true,null,null,false,true,null,true);
 					wbc()->load->asset('js','https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js', wbc()->common->current_theme_key() != "themes___purple_theme" ? array():array('jquery'),"",true,true,null,null,false,true,null,true);
 					wbc()->load->asset('js','https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js',wbc()->common->current_theme_key() != "themes___purple_theme" ? array():array('jquery'),"",true,true,null,null,false,true,null,true);	
@@ -121,7 +121,7 @@ if(!class_exists('WBC_Loader')) {
 					    	-- including everything and the admin side also need to be tested in detail, since the setup wizard is affected due to version change so that needs to be tested in detail -- to h && -- to bk  && -- to a
 				     	-- all since the version change is affecting all the admin side layer enter admin panel and need to be tested -- to h && -- to bk  && -- to a
 				ACTIVE_TODO_OC_END*/ 
-				NOTE: jquery no path hato te remove karel chhe.    	
+				// NOTE: jquery no path hato te remove karel chhe.    	
 				// if(false){
 				// 	echo '<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>';
 				// }
@@ -288,7 +288,7 @@ if(!class_exists('WBC_Loader')) {
 
 					if(isset($param[0]) && ($param[0]=='jquery' || $param[0]=='jQuery')) {
 						// ACTIVE_TODO aya woo-bundle ni extention no call nathi avto biji extention no call ave se atle script tag mate wordpress nu function call karva nu avse tenu upgrade karva nu avse -- to a 04-11-2023
-						NOTE: jquery no path hato te remove karel chhe. 
+						// NOTE: jquery no path hato te remove karel chhe. 
 						// if (false) {
 						// 	echo '<script src="https://ajax.googleapis.com/ajax/libs/jquery/'.(!empty($version)?$version:"3.4.1").'/jquery.min.js"></script>';
 						// }

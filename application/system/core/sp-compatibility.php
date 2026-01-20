@@ -272,7 +272,7 @@ class SP_Compatibility {
 					?>
 					<select multiple="multiple" style="width:100%" data-placeholder="<?php echo esc_attr( 'Select terms', 'woo-variation-swatches' ); ?>" class="dokan_attribute_values dokan-select2" name="attribute_values[<?php echo esc_attr( $i ); ?>][]">
 						<?php
-            	    	NOTE:Changes applied on date 11-09-2025 as per the wordpress review team’s suggestion. 			
+            	    	// NOTE:Changes applied on date 11-09-2025 as per the wordpress review team’s suggestion. 			
 						// $all_terms = get_terms( $taxonomy, apply_filters( 'dokan_product_attribute_terms', $args ) );
 						$all_terms = get_terms( apply_filters( 'dokan_product_attribute_terms', array_merge(array( 'taxonomy' => $taxonomy ),$args) ) );
 						if ( $all_terms ) :

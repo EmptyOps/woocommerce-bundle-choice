@@ -53,7 +53,7 @@ class Cache_Manager {
 	            
 	            $taxonomy_slug = wc_attribute_taxonomy_name($taxonomy->attribute_name);	
 
-	            NOTE:Changes applied on date 11-09-2025 as per the wordpress review team’s suggestion. 
+	            // NOTE:Changes applied on date 11-09-2025 as per the wordpress review team’s suggestion. 
 	            /*if((function_exists('taxonomy_exists') and taxonomy_exists($taxonomy_slug)) or 
 	               (is_taxonomy($taxonomy_slug))) {*/
             	if((function_exists('taxonomy_exists') and taxonomy_exists($taxonomy_slug)) or 

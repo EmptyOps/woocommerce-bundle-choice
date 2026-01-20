@@ -75,7 +75,7 @@ wbc()->load->add_inline_script('', $inline_script, 'common');
 }
 </style>
 <?php
-NOTE:Changes applied on date 06-09-2025 as per the wordpress review team’s suggestion. 
+// NOTE:Changes applied on date 06-09-2025 as per the wordpress review team’s suggestion. 
 // $site_url_admin_ajax = site_url('/wp-admin/admin-ajax.php');
 $site_url_admin_ajax = admin_url('admin-ajax.php');
 $empty_eo_wbc_button_testing = empty(wbc()->sanitize->get('eo_wbc_button_testing'))?0:1;

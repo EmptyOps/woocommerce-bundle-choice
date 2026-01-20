@@ -231,8 +231,8 @@ class Setup_Wizard {
 						    	-- including everything and the admin side also need to be tested in detail, since the setup wizard is affected due to version change so that needs to be tested in detail -- to h && -- to bk  && -- to a
 					ACTIVE_TODO_OC_END -->	    	
 		            <?php
-		            NOTE:Changes applied on date 28-11-2025 as per the wordpress review team’s suggestion. if false hati te removi karel chhe.
-		            NOTE: jquery no path hato te remove karel chhe.	  
+		            // NOTE:Changes applied on date 28-11-2025 as per the wordpress review team’s suggestion. if false hati te removi karel chhe.
+		            // NOTE: jquery no path hato te remove karel chhe.	  
 		           	// wbc()->load->get_script_tag(array(
 		            //  'src'  => esc_url('https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js'),
 		            // ));
