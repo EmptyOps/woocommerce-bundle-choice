@@ -311,6 +311,9 @@ Yes, it is.
 8. Once the home page position for button is configured, the home page would look something like this.
 
 == Changelog ==
+= 1.0.25 (january 29, 2026) =
+  **Fix & Security:** Resolved plugin name validation issues and added input sanitization & output escaping for WordPress standards.
+  **Review-ready:** Changes are finalized and ready for submission; no new updates added.
 = 1.0.24 (August 30,2025) =
   ** Fix: Resolved the plugin name validation issue to comply with WordPress.org naming rules. **
   ** Security & Standards: Implemented necessary best practices — added input sanitization & output escaping. **

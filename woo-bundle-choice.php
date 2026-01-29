@@ -10,7 +10,7 @@
  * Plugin Name: BUNDLOICE (formerly Woo Choice Plugin) | Ring Builder | Loose Diamond Search Pages - Variation Swatches - Pair Maker | Guidance Tool
  * Plugin URI: https://wordpress.org/plugins/woo-bundle-choice/
  * Description: Product bundling as ring builder for jewelry, pair maker for clothing and guidance tool for home decor, cosmetics etc. Product bundling as per user's choice.
- * Version: 1.0.24
+ * Version: 1.0.25
  * Author: Sphere Plugins
  * Author URI: https://sphereplugins.com/
  * License: GPLv3+
