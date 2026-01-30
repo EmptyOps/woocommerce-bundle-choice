@@ -415,17 +415,6 @@ if ( ! class_exists( 'Extensions_Setup_Wizard' ) ) {
 					</form>
 						</div>
 						<?php
-						NOTE: jquery no path hato te remove karel chhe.
-						//  wbc()->load->get_script_tag(array(
-			            //  'src'  => esc_url('https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js'),
-			            // ));
-
-			            if(false){
-			            ?>						
-							<script src="<?php echo constant('EOWBC_ASSET_URL').'js/fomantic/semantic.min.js'; ?>"></script>
-						<?php
-						}
-
 						wbc()->load->get_script_tag(array('src'=>constant('EOWBC_ASSET_URL').'js/fomantic/semantic.min.js'));
 						$get_option_eo_wbc_inventory_type = get_option('eo_wbc_inventory_type', '');
 						$admin_url_page_eowbc_eo_wbc_view_auto_jewel = admin_url("admin.php?page=eowbc&eo_wbc_view_auto_jewel=1");
