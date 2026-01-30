@@ -587,7 +587,9 @@ class Eowbc_Related_Mapping /*extends Eowbc_Model*/ {
 			
 			if($second_term->taxonomy === 'product_cat'){
 
-				$categories = get_terms('product_cat', array('hide_empty' => 0, 'orderby' => 'menu_order', 'parent'=>$second_term->parent));
+                // NOTE:Changes applied on date 11-09-2025 as per the wordpress review team’s suggestion. 
+				// $categories = get_terms('product_cat', array('hide_empty' => 0, 'orderby' => 'menu_order', 'parent'=>$second_term->parent));
+				$categories = get_terms(array('taxonomy' => 'product_cat', 'hide_empty' => 0, 'orderby' => 'menu_order', 'parent'=>$second_term->parent));
 
 				if(!empty($categories) and is_array($categories)) {
 

@@ -1,4 +1,4 @@
-<div class="description <?php !empty($class) ? esc_attr_e($class) : ''; ?>" <?php !empty($id) ? 'id="' . esc_attr_e($id) . '"' : ''; ?> style="<?php !empty($style) ? esc_attr_e($style) : ''; ?>">
+<div class="description <?php !empty($class) ? echo esc_attr($class) : ''; ?>" <?php !empty($id) ? 'id="' . echo esc_attr($id) . '"' : ''; ?> style="<?php !empty($style) ? echo esc_attr($style) : ''; ?>">
   <?php 
 		if(!empty($builder) and !empty($child)){
 			$builder->build($child,$option_key,$process_form);

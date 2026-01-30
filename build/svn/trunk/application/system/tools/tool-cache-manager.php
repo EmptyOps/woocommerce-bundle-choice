@@ -51,10 +51,13 @@ class Cache_Manager {
     		$cache = array();
 	        foreach ($_taxonomy_ as $taxonomy) {
 	            
-	            $taxonomy_slug = wc_attribute_taxonomy_name($taxonomy->attribute_name);	            
+	            $taxonomy_slug = wc_attribute_taxonomy_name($taxonomy->attribute_name);	
 
-	            if((function_exists('taxonomy_exists') and taxonomy_exists($taxonomy_slug)) or 
-	               (is_taxonomy($taxonomy_slug))) {
+	            // NOTE:Changes applied on date 11-09-2025 as per the wordpress review team’s suggestion. 
+	            /*if((function_exists('taxonomy_exists') and taxonomy_exists($taxonomy_slug)) or 
+	               (is_taxonomy($taxonomy_slug))) {*/
+            	if((function_exists('taxonomy_exists') and taxonomy_exists($taxonomy_slug)) or 
+	               (taxonomy_exists($taxonomy_slug))) {
 
 	                $taxonomy_terms = get_terms(array('taxonomy'=>$taxonomy_slug,'hide_empty'=>false));
 	                usort($taxonomy_terms,function($a,$b){

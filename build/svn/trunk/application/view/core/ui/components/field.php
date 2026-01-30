@@ -2,7 +2,7 @@
 	//Semantic UI : fields
 ?>
 
-<div class="field <?php !empty($class) ? esc_attr_e($class) : ''; ?>" id="<?php !empty($id) ? esc_attr_e($id) : ''; ?>">
+<div class="field <?php !empty($class) ? echo esc_attr($class) : ''; ?>" id="<?php !empty($id) ? echo esc_attr($id) : ''; ?>">
 	<?php 
 		if(!empty($builder) and !empty($child)){
 			$builder->build($child,$option_key,$process_form);

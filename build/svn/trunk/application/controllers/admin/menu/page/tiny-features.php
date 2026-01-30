@@ -127,7 +127,8 @@ if ( ! class_exists( 'Tiny_features' ) ) {
 								<div class="spui_custum_video_container">
 									<div class="spui_video_links">
 										<a href="#" class="btn">
-											<img src="https://cdn-icons.flaticon.com/png/512/797/premium/797592.png?token=exp=1653727260~hmac=c2ce871afdfde03d00785cbf295ff801" class="img-fluid">
+											 <!-- NOTE: development adhuru chhe tethi remove karavanu aavshe.	 -->
+											<!-- <img src="https://cdn-icons.flaticon.com/png/512/797/premium/797592.png?token=exp=1653727260~hmac=c2ce871afdfde03d00785cbf295ff801" class="img-fluid"> -->
 										</a>
 										<p><?php echo esc_html(eowbc_lang("video", 'woo-bundle-choice')); ?></p>
 									</div>
@@ -139,7 +140,8 @@ if ( ! class_exists( 'Tiny_features' ) ) {
 
 									<div class="spui_form_asset_container upload_image asset_section_two">
 										<a href="#" class="upload_image_button tips">
-											<img src="http://localhost/fresh/wp-content/plugins/woocommerce/assets/images/placeholder.png">
+											NOTE: development adhuru chhe tethi remove karavanu aavshe.	
+											<!-- <img src="http://localhost/fresh/wp-content/plugins/woocommerce/assets/images/placeholder.png"> -->
 											<input type="hidden" name="upload_image_id[0]" class="upload_image_id" value="0">        
 										</a>
 										<div class="spui_asset_upload_cta">

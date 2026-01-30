@@ -270,9 +270,11 @@ class SP_Compatibility {
 					// ACTIVE_TODO_OC_START
  					if( false ): 
 					?>
-					<select multiple="multiple" style="width:100%" data-placeholder="<?php esc_attr_e( 'Select terms', 'woo-variation-swatches' ); ?>" class="dokan_attribute_values dokan-select2" name="attribute_values[<?php echo esc_attr( $i ); ?>][]">
+					<select multiple="multiple" style="width:100%" data-placeholder="<?php echo esc_attr( 'Select terms', 'woo-variation-swatches' ); ?>" class="dokan_attribute_values dokan-select2" name="attribute_values[<?php echo esc_attr( $i ); ?>][]">
 						<?php
-						$all_terms = get_terms( $taxonomy, apply_filters( 'dokan_product_attribute_terms', $args ) );
+            	    	// NOTE:Changes applied on date 11-09-2025 as per the wordpress review team’s suggestion. 			
+						// $all_terms = get_terms( $taxonomy, apply_filters( 'dokan_product_attribute_terms', $args ) );
+						$all_terms = get_terms( apply_filters( 'dokan_product_attribute_terms', array_merge(array( 'taxonomy' => $taxonomy ),$args) ) );
 						if ( $all_terms ) :
 							foreach ( $all_terms as $term ) :
 								echo '<option value="' . esc_attr( $term->slug ) . '" ' . selected( has_term( absint( $term->term_id ), $taxonomy, $product_id ), true, false ) . '>' . esc_html( apply_filters( 'woocommerce_product_attribute_term_name', $term->name, $term ) ) . '</option>';

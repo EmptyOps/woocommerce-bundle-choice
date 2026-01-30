@@ -230,15 +230,16 @@ class Setup_Wizard {
 						    -- Since the version is going to be changed so all the frontend javascript jquery functionality needs to be tested in detail -- to h && -- to bk -- to a
 						    	-- including everything and the admin side also need to be tested in detail, since the setup wizard is affected due to version change so that needs to be tested in detail -- to h && -- to bk  && -- to a
 					ACTIVE_TODO_OC_END -->	    	
-		            <?php 
-		            if (false) {
-		            ?>
-		            	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-		            <?php 
-		        	}
-		           	wbc()->load->get_script_tag(array(
-		             'src'  => esc_url('https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js'),
-		            ));				
+		            <?php
+		            // NOTE:Changes applied on date 28-11-2025 as per the wordpress review team’s suggestion. if false hati te removi karel chhe.
+		            // NOTE: jquery no path hato te remove karel chhe.	  
+		           	// wbc()->load->get_script_tag(array(
+		            //  'src'  => esc_url('https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js'),
+		            // ));
+		            function wbc_enqueue_core_jquery() {
+		                wp_enqueue_script('jquery');
+		            }
+		            add_action('wp_enqueue_scripts', 'wbc_enqueue_core_jquery');				
 			        ?>		            
 		            <link rel="stylesheet" type="text/css" href="<?php echo esc_url(constant('EOWBC_ASSET_URL') . 'css/fomantic/semantic.min.css'); ?>">
 				</head>

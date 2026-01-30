@@ -1,1 +1,1 @@
-<div class="header <?php !empty($class) ? echo esc_attr($class) : ''; ?>"><?php !empty($label) ? echo esc_html($label) : ''; ?></div>
+<div class="header <?php echo !empty($class) ? esc_attr($class) : ''; ?>"><?php echo !empty($label) ? esc_html($label) : ''; ?></div>

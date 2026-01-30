@@ -10,7 +10,7 @@
         <div class="column eowbc_breadcrumb_font">3</div>
         <div class="column" style="text-align: left;">
             <div class="description eowbc_breadcrumb_font"> <?php esc_html(spext_lang("Complete", 'woo-bundle-choice')); ?> </div>
-            <div class="title eowbc_breadcrumb_font"><?php esc_html_e($preview_name); ?></div>
+            <div class="title eowbc_breadcrumb_font"><?php echo esc_html($preview_name); ?></div>
         </div>             
     </div>               
     <div class="column ">

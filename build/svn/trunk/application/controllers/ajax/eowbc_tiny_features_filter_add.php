@@ -4,6 +4,8 @@
 *
 */
 
+defined( 'ABSPATH' ) || exit;
+
 $res = array( "type"=>"success", "msg"=>"Added successfully!" );
 
 if(wp_verify_nonce(wbc()->sanitize->post('_wpnonce'),'eowbc_tiny_features_filter_add')) {

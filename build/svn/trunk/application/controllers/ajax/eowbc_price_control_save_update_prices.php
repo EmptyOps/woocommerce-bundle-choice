@@ -3,7 +3,7 @@
 *	Ajax handler to handle ajax save request for eowbc_price_control_save_update_prices form.	
 *
 */
-
+defined( 'ABSPATH' ) || exit;
 $res = array( "type"=>"success", "msg"=>"" );
 
 // if (isset($_POST)

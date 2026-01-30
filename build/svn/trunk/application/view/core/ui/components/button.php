@@ -3,10 +3,10 @@
 ?>
 
 <div 
-	class="ui button <?php !empty($class) ? esc_attr_e($class) : ''; ?>" 
-	id="<?php !empty($id) ? esc_attr_e($id) : ''; ?>" 
-	name="<?php !empty($name) ? esc_attr_e($name) : ''; ?>"
-	style="<?php !empty($style) ? esc_attr_e($style) : ''; ?>"
+	class="ui button <?php !empty($class) ? echo esc_attr($class) : ''; ?>" 
+	id="<?php !empty($id) ? echo esc_attr($id) : ''; ?>" 
+	name="<?php !empty($name) ? echo esc_attr($name) : ''; ?>"
+	style="<?php !empty($style) ? echo esc_attr($style) : ''; ?>"
 >
-	<?php esc_html_e($label); ?>		
+	<?php echo esc_html($label); ?>		
 </div>

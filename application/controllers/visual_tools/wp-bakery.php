@@ -28,8 +28,6 @@ class WP_Bakery extends \WPBakeryShortCode {
 		        "base"       => 'render_two_buttons',
 		        'category' => esc_html__( 'BUNDLOICE (formerly Woo Choice Plugin)', 'woo-bundle-choice' ),
 		        'description' => esc_html__( 'Add two button widget to show the buttons for starting the bundle builder.', 'woo-bundle-choice' ),
-		        NOTE: development adhuru chhe tethi remove karavanu aavshe.
-		        // "icon" => 'https://img.icons8.com/ios/2x/button2.png',
 		        'params'=>
 				 	array( 
 				 		array(

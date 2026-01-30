@@ -22,7 +22,7 @@ class Orders
     public function init() {
       add_action('woocommerce_admin_order_data_after_order_details',function($order){
            global $wpdb;
-           $sets=$wpdb->get_row('select * from `'.$wpdb->prefix.'eo_wbc_order_maps` where order_id='.$order->get_order_number(),'ARRAY_A');
+           $sets=$wpdb->get_row($wpdb->prepare('select * from `'.$wpdb->prefix.'eo_wbc_order_maps` where order_id='.$order->get_order_number()),'ARRAY_A');
 
            if(empty($sets['order_map'])){
             return true;

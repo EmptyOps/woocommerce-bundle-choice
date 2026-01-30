@@ -25,7 +25,7 @@
 
 	     			<?php 
 	     			if(!empty($column['link']) and isset($column['edit_id'])){
-	     				?> <a href="#" data-wbc-editid="<?php esc_attr_e($column['edit_id']); ?>"> <?php
+	     				?> <a href="#" data-wbc-editid="<?php echo esc_attr($column['edit_id']); ?>"> <?php
 	     			}
 			}
  			

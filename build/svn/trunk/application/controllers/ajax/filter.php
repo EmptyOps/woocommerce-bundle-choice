@@ -3,6 +3,8 @@ namespace eo\wbc\controllers\ajax;
 
 use eo\wbc\model\publics\SP_Model_Query;
 
+defined( 'ABSPATH' ) || exit;
+
 class Filter
 {
 

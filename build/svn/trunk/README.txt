@@ -3,7 +3,7 @@ Contributors: emptyopssphere
 Tags: woocommerce,product bundle,product bundles,woocommerce product bundles,bundles,bundle,woo,woocommerce product bundle,design your own,buy in pair
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=hi0001234d1@gmail.com&item_name=+Favorite+BUNDLOICE+formerly+Woo+Choice+Plugin++Download+BUNDLOICE+formerly+Woo+Choice+Plugin+Donation¤cy_code=USD&source=url
 Requires at least: 3.5
-Tested up to: 6.8.1
+Tested up to: 6.8.3
 Requires PHP: 5.6
 Stable tag: 1.0.24
 License: GPLv3 or later
@@ -199,7 +199,7 @@ These are only some of many extensions. You can see the entire list of [Extensio
  
 = Compatibility with other plugins/Officially tested plugins =
  
-We have tested BUNDLOICE (formerly Woo Choice Plugin) with WordPress 3.5 to 6.8.1 and WooCommerce 2.0 to 10.1.2 and our plugin is technically compatible with all the other plugins.
+We have tested BUNDLOICE (formerly Woo Choice Plugin) with WordPress 3.5 to 6.8.3 and WooCommerce 2.0 to 10.4.3 and our plugin is technically compatible with all the other plugins.
  
 = LIVE DEMOS = 
 Now that you know how this plugin works, is there any reason to not use it? Do you want to see the live demo?
@@ -311,6 +311,9 @@ Yes, it is.
 8. Once the home page position for button is configured, the home page would look something like this.
 
 == Changelog ==
+= 1.0.25 (january 29, 2026) =
+  **Fix & Security:** Resolved plugin name validation issues and added input sanitization & output escaping for WordPress standards.
+  **Review-ready:** Changes are finalized and ready for submission; no new updates added.
 = 1.0.24 (August 30,2025) =
   ** Fix: Resolved the plugin name validation issue to comply with WordPress.org naming rules. **
   ** Security & Standards: Implemented necessary best practices — added input sanitization & output escaping. **
@@ -500,4 +503,12 @@ Yes, it is.
   **Css Improvement**. Css improved in product preview page and in breadcrumb section.
 = 0.1.0 (January 21, 2019) =
   **First Release**. This is the first release of our plugin.
+
+== External Services ==
+
+Service: SpherePlugins
+Domain: https://sphereplugins.com/
+Purpose: This service is used to retrieve a list of available plugin extensions inside the WordPress admin area.
+Data Sent: No personal user data is sent. Only a simple GET request is made.   
+
 

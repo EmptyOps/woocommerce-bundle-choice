@@ -11,9 +11,9 @@
         <div class="ui column left aligned eowbc_breadcrumb_font"><?php echo esc_html($order); ?></div>
         <div class="ui column left aligned eowbc_breadcrumb_font">
             <?php if (empty($first)) { ?>
-                <div class="title eowbc_breadcrumb_font" <?php _e((!empty(\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$clickable_breadcrumb) && !empty(\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$first_url)) ? 'data-clickable_breadcrumb="' . esc_url(\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$first_url) . '"' : ''); ?>><?php esc_html_e(wbc()->options->get_option('appearance_breadcrumb', 'appearance_breadcrumb_choose_prefix_text', __('Choose a', 'woo-bundle-choice'), true, true)); ?> <?php esc_html_e($first_name); ?></div>
+                <div class="title eowbc_breadcrumb_font" <?php _e((!empty(\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$clickable_breadcrumb) && !empty(\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$first_url)) ? 'data-clickable_breadcrumb="' . esc_url(\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$first_url) . '"' : ''); ?>><?php esc_html_e(wbc()->options->get_option('appearance_breadcrumb', 'appearance_breadcrumb_choose_prefix_text', __('Choose a', 'woo-bundle-choice'), true, true)); ?> <?php echo esc_html($first_name); ?></div>
             <?php } else { ?>
-                <div class="title eowbc_breadcrumb_font"><?php esc_html_e($first_name); ?></div>
+                <div class="title eowbc_breadcrumb_font"><?php echo esc_html($first_name); ?></div>
                 <div class="description eowbc_breadcrumb_font"><?php _e(/*$first->get_name()*/$first->get_title()); ?> - <?php _e(wc_price(apply_filters('eowbc_breadcrumb_first_price', $first->get_price(), $first))); ?></div>
                 <div class="ui small hover green text eowbc_breadcrumb_font">                
                     <u><a href="<?php echo esc_url(!empty(wbc()->sanitize->get('FIRST')) ? eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_breadcrumb_view_url(wbc()->sanitize->get('FIRST'),$order):'#'); ?>">View</a></u>&nbsp;|&nbsp;<u><a href="<?php echo esc_url(!empty(wbc()->sanitize->get('FIRST'))?eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_breadcrumb_change_url($order,wbc()->sanitize->get('FIRST')):'#'); ?>"><?php esc_html_e(wbc()->options->get_option('appearance_breadcrumb','appearance_breadcrumb_change_action_text','Change',true,true)); ?></a></u>
@@ -31,7 +31,7 @@
                     $image = $woocommerce->plugin_url() . '/assets/images/placeholder.png';
                 }
             ?>
-                <img src='<?php _e(esc_url($image)); ?>' class='ui mini image' />
+                <img src='<?php echo esc_url($image); ?>' class='ui mini image' />
             <?php } ?>
         </div>
     </div>

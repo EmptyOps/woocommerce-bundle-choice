@@ -1,5 +1,7 @@
 <?php
 
+defined( 'ABSPATH' ) || exit;
+
 if(!class_exists('WBC_Loader')) {
 
 	class WBC_Loader {
@@ -54,15 +56,8 @@ if(!class_exists('WBC_Loader')) {
 						wbc_pr('bootstrap case constant is '. $constant);
 					}
 
-					if (false) {
-						?>
-						<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-						<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-						<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-						<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-						<?php
-					}
-
+					// NOTE:Changes applied on date 28-11-2025 as per the wordpress review team’s suggestion. if false hati te removi karel chhe. 
+					// NOTE:development adhuru chhe tethi remove karavanu aavshe. 
 					wbc()->load->asset('css','https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css',array(),"",true,true,null,null,false,true,null,true);
 					wbc()->load->asset('js','https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js', wbc()->common->current_theme_key() != "themes___purple_theme" ? array():array('jquery'),"",true,true,null,null,false,true,null,true);
 					wbc()->load->asset('js','https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js',wbc()->common->current_theme_key() != "themes___purple_theme" ? array():array('jquery'),"",true,true,null,null,false,true,null,true);	
@@ -125,13 +120,14 @@ if(!class_exists('WBC_Loader')) {
 					    -- Since the version is going to be changed so all the frontend javascript jquery functionality needs to be tested in detail -- to h && -- to bk -- to a
 					    	-- including everything and the admin side also need to be tested in detail, since the setup wizard is affected due to version change so that needs to be tested in detail -- to h && -- to bk  && -- to a
 				     	-- all since the version change is affecting all the admin side layer enter admin panel and need to be tested -- to h && -- to bk  && -- to a
-				ACTIVE_TODO_OC_END*/     	
-				if(false){
-					echo '<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>';
-				}
-	            wbc()->load->get_script_tag(array(
-	             'src'  => esc_url('https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js'),
-	            ));								
+				ACTIVE_TODO_OC_END*/ 
+				// NOTE: jquery no path hato te remove karel chhe.    	
+				// if(false){
+				// 	echo '<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>';
+				// }
+	            // wbc()->load->get_script_tag(array(
+	            //  'src'  => esc_url('https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js'),
+	            // ));								
 				// -- aa jquery no wp_enqueue_scripts script no call kadhi nakhvano avse and extention mathi call karavyo se tena mate alag thi code mukvano avse -- to a
 				// add_action('wp_enqueue_scripts', function(){
 				// 	wp_enqueue_script( 'jquery' );
@@ -291,13 +287,14 @@ if(!class_exists('WBC_Loader')) {
 					$_path = ( isset($data['ASSET_DIR']) ? $data['ASSET_DIR'].$path : $path );	
 
 					if(isset($param[0]) && ($param[0]=='jquery' || $param[0]=='jQuery')) {
-						// ACTIVE_TODO aya woo-bundle ni extention no call nathi avto biji extention no call ave se atle script tag mate wordpress nu function call karva nu avse tenu upgrade karva nu avse -- to a 04-11-2023 
-						if (false) {
-							echo '<script src="https://ajax.googleapis.com/ajax/libs/jquery/'.(!empty($version)?$version:"3.4.1").'/jquery.min.js"></script>';
-						}
-			            wbc()->load->get_script_tag(array(
-			             'src'  => esc_url('https://ajax.googleapis.com/ajax/libs/jquery/'.(!empty($version)?$version:"3.4.1").'/jquery.min.js'),
-			            ));							
+						// ACTIVE_TODO aya woo-bundle ni extention no call nathi avto biji extention no call ave se atle script tag mate wordpress nu function call karva nu avse tenu upgrade karva nu avse -- to a 04-11-2023
+						// NOTE: jquery no path hato te remove karel chhe. 
+						// if (false) {
+						// 	echo '<script src="https://ajax.googleapis.com/ajax/libs/jquery/'.(!empty($version)?$version:"3.4.1").'/jquery.min.js"></script>';
+						// }
+			            // wbc()->load->get_script_tag(array(
+			            //  'src'  => esc_url('https://ajax.googleapis.com/ajax/libs/jquery/'.(!empty($version)?$version:"3.4.1").'/jquery.min.js'),
+			            // ));							
 						unset($param[0]);
 					}
 
