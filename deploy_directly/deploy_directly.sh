@@ -12,6 +12,18 @@ if [[ "$yn" != "YES_AGAIN" ]]; then
     exit; 
 fi
 
+read -p "Please confirm: In readme.txt 'Tested up to' value is set to MAJOR version only (e.g. 6.8 NOT 6.8.3). Type YES_MAJOR_ONLY in capital to continue: " yn
+if [[ "$yn" != "YES_MAJOR_ONLY" ]]; then
+    echo "Confirmation failed. Please ensure 'Tested up to' is set like 6.8 (NOT 6.8.3)"
+    exit;
+fi
+
+read -p "Please confirm again: 'Tested up to' is 6.8 format (NOT 6.8.3). Type CONFIRMED_MAJOR in capital: " yn
+if [[ "$yn" != "CONFIRMED_MAJOR" ]]; then
+    echo "Confirmation failed."
+    exit;
+fi
+
 read -p "Please confirm readme.txt file is updated? please enter YES in capital" yn
 if [[ "$yn" != "YES" ]]; then
     echo "Confirmation failed"
