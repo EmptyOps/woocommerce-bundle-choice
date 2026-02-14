@@ -1,7 +1,6 @@
 === BUNDLOICE Ring Builder | Loose Diamond Search Pages - Variation Swatches - Pair Maker | Guidance Tool (formerly Woo Choice Plugin) ===
 Contributors: emptyopssphere
 Tags: woocommerce,product bundle,product bundles,woocommerce product bundles,bundles,bundle,woo,woocommerce product bundle,design your own,buy in pair
-Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=hi0001234d1@gmail.com&item_name=+Favorite+BUNDLOICE+formerly+Woo+Choice+Plugin++Download+BUNDLOICE+formerly+Woo+Choice+Plugin+Donation¤cy_code=USD&source=url
 Requires at least: 3.5
 Tested up to: 6.8
 Requires PHP: 5.6
