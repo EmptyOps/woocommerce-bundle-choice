@@ -64,8 +64,8 @@ box-shadow: none;">
  						<td>
 						    <?php foreach ($_atttriutes as $index=>$_attr): ?>       <tr>   
 						            <span>                                      
-						                <input type="checkbox" name="attr_<?php echo esc_attr($index)/*$index*/; ?>" id="<?php esc_attr_e($_attr['slug']); ?>" value="<?php esc_attr_e($_attr['slug']) ?>" checked="checked" disabled="disabled"></span>
-						            <span><input type="text" name="attr_value_<?php echo esc_attr($index)/*$index*/; ?>" placeholder="<?php esc_attr_e($_attr['label']) ?>" value="<?php esc_attr_e($_attr['label']); ?>"></span></tr>
+						                <input type="checkbox" name="attr_<?php echo esc_attr($index)/*$index*/; ?>" id="<?php echo esc_attr($_attr['slug']); ?>" value="<?php echo esc_attr($_attr['slug']) ?>" checked="checked" disabled="disabled"></span>
+						            <span><input type="text" name="attr_value_<?php echo esc_attr($index)/*$index*/; ?>" placeholder="<?php echo esc_attr($_attr['label']) ?>" value="<?php echo esc_attr($_attr['label']); ?>"></span></tr>
 						        <!--<label for="<?php //esc_attr_e($_attr['slug']); ?>"><?php //esc_html_e($_attr['label']); ?></label>-->
 						        <br/><br/>                        
 						    <?php endforeach;?>                      

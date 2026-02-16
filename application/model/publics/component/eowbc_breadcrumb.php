@@ -1,6 +1,8 @@
 <?php
 namespace eo\wbc\model\publics\component;
 
+defined( 'ABSPATH' ) || exit;
+
 class EOWBC_Breadcrumb
 {
     public static $set = null;

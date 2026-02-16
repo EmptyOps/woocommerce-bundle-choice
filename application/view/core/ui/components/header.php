@@ -1,6 +1,6 @@
 <?php if(!empty($header)): ?>
-<<?php _e($header); ?> class="ui header <?php !empty($class) ? esc_attr_e($class) : ''; ?>" style="<?php !empty($style) ? esc_attr_e($style) : ''; ?>">
-	<?php !empty($label) ? esc_html_e($label) : ''; ?>
+<<?php _e($header); ?> class="ui header <?php echo !empty($class) ? esc_attr($class) : ''; ?>" style="<?php echo !empty($style) ? esc_attr($style) : ''; ?>">
+	<?php echo !empty($label) ? esc_html($label) : ''; ?>
 	<?php 
 		if(!empty($builder) and !empty($child)){
 			$builder->build($child,$option_key,$process_form);

@@ -1,6 +1,8 @@
 <?php
 namespace eo\wbc\model\publics\component;
 
+defined( 'ABSPATH' ) || exit;
+
 class EOWBC_Filter_Widget {
 	
 	private static $_instance = null;
@@ -119,7 +121,7 @@ class EOWBC_Filter_Widget {
 		?>
 		<!--Primary filter button that will only be visible on desktop/tablet-->
 		<!-- This widget is created with Wordpress plugin - BUNDLOICE (formerly Woo Choice Plugin) -->
-		<div id="loading" style="z-index: -999;height: 100%; width: 100%; position: fixed; top: 0;<?php (wbc()->options->get_option('appearance_filters','appearance_filters_loader') OR apply_filters('eowbc_filter_widget_loader',false))?esc_attr_e('display:none !important;'):'';?>"></div>	
+		<div id="loading" style="z-index: -999;height: 100%; width: 100%; position: fixed; top: 0;<?php (wbc()->options->get_option('appearance_filters','appearance_filters_loader') OR apply_filters('eowbc_filter_widget_loader',false))?esc_attr('display:none !important;'):'';?>"></div>	
 		<?php 
 			if(/*wp_is_mobile()*/ wbc_is_mobile_by_page_sections('cat_shop_page')) {
 
@@ -1185,7 +1187,10 @@ class EOWBC_Filter_Widget {
 				} else {				
 
 					if(is_wp_error($taxonomies) or empty($taxonomies)){
-						$taxonomies=get_terms(wc_attribute_taxonomy_name_by_id($term->id),array('hide_empty'=>false));
+                		// NOTE:Changes applied on date 11-09-2025 as per the wordpress review team’s suggestion. 			
+						// $taxonomies=get_terms(wc_attribute_taxonomy_name_by_id($term->id),array('hide_empty'=>false));
+						$taxonomies=get_terms(array('taxonomy'=> wc_attribute_taxonomy_name_by_id($term->id),'hide_empty'=>false));
+
 					}
 
 					if( is_wp_error($taxonomies) or empty($taxonomies) ) return false;
@@ -1441,7 +1446,7 @@ class EOWBC_Filter_Widget {
 		$field_title='';	
 		$field_slug='';
 
-		if ($filter_type) {
+		if ($filter_type) { 
 			
 			$term=wbc()->wc->eo_wbc_get_attribute( str_replace('pa_','',$id) );			
 
@@ -1454,7 +1459,9 @@ class EOWBC_Filter_Widget {
 
 				if(is_wp_error($taxonomies)){
 
-					$taxonomies=get_terms(wc_attribute_taxonomy_name_by_id($term->id),array('hide_empty'=>false));
+                	// NOTE:Changes applied on date 11-09-2025 as per the wordpress review team’s suggestion. 				
+					// $taxonomies=get_terms(wc_attribute_taxonomy_name_by_id($term->id),array('hide_empty'=>false));
+					$taxonomies=get_terms(array('taxonomy'=> wc_attribute_taxonomy_name_by_id($term->id),'hide_empty'=>false));
 				}
 
 				if(is_wp_error($taxonomies) or empty($taxonomies)) return false;
@@ -1800,7 +1807,7 @@ class EOWBC_Filter_Widget {
 					// --- start ---
 					// $('[data-filter-slug="<?php /*echo $filter['slug']; */?>"]').on('click',function(event){
 
-						<?php/* if($filter_type==1):*/ ?>
+						<?php /* if($filter_type==1):*/ ?>
 					// 		let filter_target = jQuery('form#<?php /*echo $this->filter_prefix; */?>eo_wbc_filter [name="_attribute"]');
 					// 	<?php /*else:*/ ?>
 					// 		let filter_target = jQuery('form#<?php /*echo $this->filter_prefix; */?>eo_wbc_filter [name="_category"]');
@@ -3106,7 +3113,7 @@ class EOWBC_Filter_Widget {
 		?>
 		<!--Primary filter button that will only be visible on desktop/tablet-->
 		<!-- This widget is created with Wordpress plugin - BUNDLOICE (formerly Woo Choice Plugin) -->
-		<div id="loading" style="z-index: -999; height: 100%; width: 100%; position: fixed; top: 0;<?php (wbc()->options->get_option('appearance_filters','appearance_filters_loader') OR apply_filters('eowbc_filter_widget_loader',false))?esc_attr_e('display:none !important;'):'';?>"></div>
+		<div id="loading" style="z-index: -999; height: 100%; width: 100%; position: fixed; top: 0;<?php (wbc()->options->get_option('appearance_filters','appearance_filters_loader') OR apply_filters('eowbc_filter_widget_loader',false))?esc_attr('display:none !important;'):'';?>"></div>
 		
 		<?php
 			// NOTE:From here, we have removed the original code inside the if (false) block. So, whenever there is a need to view the original or any other code for readability purposes, simply take the script below, put it in a new .js file in Sublime Text, and view it in readable format.Apart from that, we had removed the original code, and in some scenarios, that original code might have contained PHP variables like XYZ. Those would have been removed as well.And of course, even if the removed code from the if (false) block is not relevant to the current version, it might be required during future milestone tasks, so for this purpose, refer to the branch named "ui_QCed_ashish_-2" and check the commit dated 07-04-2025 for looking at the original code.

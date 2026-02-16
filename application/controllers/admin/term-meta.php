@@ -414,7 +414,7 @@ class Term_Meta {
 			<td>
 				<div>
 					<input type="hidden" name="wbc_attachment_thumb" id="wbc_attachment_thumb" value="<?php _e(esc_url($src)); ?>">
-					<img src="<?php _e(esc_url($src)); ?>" width="60" height="60" id="wbc_attachment_thumb_img"/>
+					<img src="<?php echo esc_url($src); ?>" width="60" height="60" id="wbc_attachment_thumb_img"/>
 				</div>
 					
 				<div>					

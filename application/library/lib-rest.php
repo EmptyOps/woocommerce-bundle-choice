@@ -1,5 +1,7 @@
 <?php
 
+defined( 'ABSPATH' ) || exit;
+
 if(!class_exists('WBC_REST')) {
 
 	class WBC_REST {

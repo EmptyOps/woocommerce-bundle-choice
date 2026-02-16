@@ -5,10 +5,10 @@
 */
 
 ?>
-<div class="<?php echo esc_attr($width_class); ?>" data-tab-group="<?php esc_attr_e($tab_set); ?>">
+<div class="<?php echo esc_attr($width_class); ?>" data-tab-group="<?php echo esc_attr($tab_set); ?>">
 	<div style="display: inline-block;" class="ui three wide field text_slider">
 		<span class="ui header "><?php echo esc_html($filter['title']); ?></span><?php if($help): ?>
-		&nbsp; <span class="ui grey text" style="cursor: pointer;">&nbsp;<i class="question circle outline icon" data-help="<?php esc_attr_e($help); ?>"></i></span>
+		&nbsp; <span class="ui grey text" style="cursor: pointer;">&nbsp;<i class="question circle outline icon" data-help="<?php echo esc_attr($help); ?>"></i></span>
 		<?php endif; ?>
 		<?php if($reset): ?>
 		&nbsp; <span class="ui grey text" style="cursor: pointer;" onclick="reset_slider(event,'<?php echo esc_attr($filter['slug']); ?>',0,<?php echo ecs_attr(count(array_filter($items_slug))); ?>)">&nbsp;<u><?php esc_html(spext_lang("reset", 'woo-bundle-choice')) ?></u></span>

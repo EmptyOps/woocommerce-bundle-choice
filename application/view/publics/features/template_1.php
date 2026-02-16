@@ -12,12 +12,12 @@ if(!empty($product_data)):
           <td rowspan="2" class="center aligned" style="font-weight: bold;    text-align: center;vertical-align: middle;">Specifications</td>
             <?php foreach ($product_data as $spec):?>
                 
-                <td class="center aligned" style="background-color: rgba(0,0,0,.1);     font-weight: bold;"><?php esc_html_e($spec[0]); ?></td>
+                <td class="center aligned" style="background-color: rgba(0,0,0,.1);     font-weight: bold;"><?php echo esc_html($spec[0]); ?></td>
             <?php endforeach; ?>
         </tr>
         <tr> 
             <?php foreach ($product_data as $spec):?>
-                <td style="border:none;" class="center aligned"><?php esc_html_e($spec[1]); ?></td>        
+                <td style="border:none;" class="center aligned"><?php echo esc_html($spec[1]); ?></td>        
             <?php endforeach; ?>
         </tr>
     </tbody>

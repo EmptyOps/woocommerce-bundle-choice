@@ -37,8 +37,10 @@ if(!class_exists('EOWBC_Error_Handler')){
 			register_shutdown_function(array($this,'shutdown'));
 		}
 
-		public static function log_file_path(){ 
-			return constant('EOWBC_LOG_DIR').'debug.log';
+		public static function log_file_path(){
+			// NOTE:Changes applied on date 27-09-2025 as per the wordpress review team’s suggestion.  
+			// return constant('EOWBC_LOG_DIR').'debug.log';
+			return constant('EOWBC_LOG_DIR').'debug.txt';
 		}
 
 		public static function db_option_name(){ 
@@ -218,7 +220,10 @@ if(!class_exists('EOWBC_Error_Handler')){
 			if(function_exists('wp_get_theme')){
 				$theme=wp_get_theme();
 			} else{
-				$theme=get_current_theme();
+				// NOTE:Changes applied on date 11-09-2025 as per the wordpress review team’s suggestion. 
+				// $theme=get_current_theme();
+				$theme=wp_get_theme();
+				
 			}		
 
 			$details='-------------------------------------------------------';

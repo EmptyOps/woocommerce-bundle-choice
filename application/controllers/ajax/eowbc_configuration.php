@@ -4,7 +4,7 @@
 *
 */
 
-
+defined( 'ABSPATH' ) || exit;
 $res = array( "type"=>"success", "msg"=>"" );
 
 if(wp_verify_nonce(wbc()->sanitize->post('_wpnonce'),'eowbc_configuration')) {                

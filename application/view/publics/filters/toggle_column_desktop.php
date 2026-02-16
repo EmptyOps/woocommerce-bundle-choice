@@ -1,4 +1,4 @@
-<div class="<?php echo esc_attr($width_class); ?>" data-tab-group="<?php esc_attr_e($tab_set); ?>">
+<div class="<?php echo esc_attr($width_class); ?>" data-tab-group="<?php echo esc_attr($tab_set); ?>">
     <p>
         <span class="ui header"><?php echo esc_html($term->name); ?></span>
     </p>

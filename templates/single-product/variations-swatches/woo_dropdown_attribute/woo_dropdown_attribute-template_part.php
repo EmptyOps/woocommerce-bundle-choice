@@ -3,7 +3,7 @@
  * 
  * in case if you want to implement your custom html then follow our documentation guide on how to add add custom html templates by following this link https://sphereplugins.com/docs/how-to-override-templates-using-custom-html
  */
-
+defined( 'ABSPATH' ) || exit;
 $template = null;
 
 // /*echo '<option value="' . esc_attr( $term->slug ) . '" ' . selected( sanitize_title( $woo_dropdown_attribute_html_data['args']['selected'] ), $term->slug, false ) . '>' . esc_html( \eo\wbc\system\core\data_model\SP_Attribute()::instance()->variation_option_name( $term_name, $term, $woo_dropdown_attribute_html_data['attribute'], $woo_dropdown_attribute_html_data['product']) ) . '</option>';*/

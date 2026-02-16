@@ -290,15 +290,16 @@ if ( ! class_exists( 'Admin_Menu' ) ) {
 				add_action( 'admin_notices',function() use($message_type,$message_title,$error_message){
 					//printf('<div class="ui %s message"><i class="close icon"></i><div class="header">%s</div><p>'.constant('EOWBC_NAME').' have noticed <strong>%s</strong>, would you like to <a href="%s">have a look</a> or <a href="%s">report to the support</a>.</p></div>',$message_type,$message_title,$error_message,admin_url('admin.php?page=eowbc-setting-status&atol=setting_status_log'),admin_url('admin.php?page=eowbc-setting-status&atol=setting_status_log'));
 					// printf('<div class="notice notice-%s is-dismissible"><p><strong>%s</strong> '.constant('EOWBC_NAME').' have noticed <strong>%s</strong>, would you like to <a href="%s">have a look</a> or <a href="%s">report to the support</a>.</p></div>',$message_type,$message_title,$error_message,admin_url('admin.php?page=eowbc-setting-status&atol=setting_status_log'),admin_url('admin.php?page=eowbc-setting-status&atol=setting_status_log'));
-					printf(
-					    '<div class="notice notice-%s is-dismissible"><p><strong>%s</strong> %s have noticed <strong>%s</strong>, would you like to <a href="%s">have a look</a> or <a href="%s">report to the support</a>.</p></div>',
-					    esc_attr($message_type),
-					    esc_html($message_title),
-					    esc_html(constant('EOWBC_NAME')),
-					    esc_html($error_message),
-					    esc_url(admin_url('admin.php?page=eowbc-setting-status&atol=setting_status_log')),
-					    esc_url(admin_url('admin.php?page=eowbc-setting-status&atol=setting_status_log'))
-					);
+					// NOTE:Changes applied on date 24-09-2025 as per the wordpress review team’s suggestion. 
+					// printf(
+					//     '<div class="notice notice-%s is-dismissible"><p><strong>%s</strong> %s have noticed <strong>%s</strong>, would you like to <a href="%s">have a look</a> or <a href="%s">report to the support</a>.</p></div>',
+					//     esc_attr($message_type),
+					//     esc_html($message_title),
+					//     esc_html(constant('EOWBC_NAME')),
+					//     esc_html($error_message),
+					//     esc_url(admin_url('admin.php?page=eowbc-setting-status&atol=setting_status_log')),
+					//     esc_url(admin_url('admin.php?page=eowbc-setting-status&atol=setting_status_log'))
+					// );
 				});
 
 			}

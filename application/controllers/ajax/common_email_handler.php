@@ -3,7 +3,7 @@
 *	Ajax handler to handle ajax save request for eowbc_filters form.	
 *
 */
-
+defined( 'ABSPATH' ) || exit;
 // ACTIVE_TODO most probeli now this file is not in use sinche the this leyer wos not applicebel in wbc and it is moved to the pro layers. so to mac sur that wbc leyers are net and do not contain any anneshory junk kode lat jast get rid of this here as sun as we get sanche. and lats do it as sun as posibul. -- to h
 $res = array( "type"=>"success", "msg"=>"" );
 

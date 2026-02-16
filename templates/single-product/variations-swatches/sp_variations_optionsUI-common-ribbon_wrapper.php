@@ -5,7 +5,7 @@
  */
 
 
-
+defined( 'ABSPATH' ) || exit;
 /*--- a code /woo-bundle-choice/application/controllers/publics/options.php file no che */
 $attribute = $woo_dropdown_attribute_html_data['args'][ 'attribute' ];
 $attribute_object = $variable_item_wrapper_data['attribute_object'];

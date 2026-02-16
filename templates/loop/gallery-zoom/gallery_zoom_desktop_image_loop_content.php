@@ -3,7 +3,7 @@
  * 
  * in case if you want to implement your custom html then follow our documentation guide on how to add add custom html templates by following this link https://sphereplugins.com/docs/how-to-override-templates-using-custom-html
  */
-
+defined( 'ABSPATH' ) || exit;
 /*<div class="spui_thumbnail_shop_wrap">
     <!--asset-->
     <div class="spui_thumbnail_shop_asset">

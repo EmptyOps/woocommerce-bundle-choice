@@ -1,4 +1,5 @@
 <?php 
+
 defined( 'ABSPATH' ) || exit;
 
 class Ajax_Handler {

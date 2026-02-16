@@ -2,7 +2,7 @@
 /**
 *	Ajax handler to handle ajax request for sending error report 
 */
-
+defined( 'ABSPATH' ) || exit;
 $res = array( "type"=>"success", "msg"=>"" );
 
 if(wp_verify_nonce(wbc()->sanitize->post('_wpnonce'),'eowbc_send_error_report')) {                

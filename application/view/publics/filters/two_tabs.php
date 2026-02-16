@@ -39,7 +39,7 @@ if( true or in_array( wbc()->common->get_category('category',null,array(wbc()->o
             <?php //_e($tab_data["first_tab_label"]); ?>
             </a>  --> 
 
-            <a class="item center <?php echo esc_attr($class); ?>" data-category="<?php esc_attr_e($tab_data["first_tab_category"]); ?>" style="margin-right: 0px !important;" data-tab="filter_setting_advance_first_tabs_<?php echo esc_attr($tab_data["first_tab_id"]); ?>" data-tab-name="<?php esc_html_e($tab_data["first_tab_id"]); ?>" data-tab-altname=""> <?php esc_html_e($tab_data["first_tab_label"]); ?> </a>
+            <a class="item center <?php echo esc_attr($class); ?>" data-category="<?php echo esc_attr($tab_data["first_tab_category"]); ?>" style="margin-right: 0px !important;" data-tab="filter_setting_advance_first_tabs_<?php echo esc_attr($tab_data["first_tab_id"]); ?>" data-tab-name="<?php esc_html_e($tab_data["first_tab_id"]); ?>" data-tab-altname=""> <?php esc_html_e($tab_data["first_tab_label"]); ?> </a>
 
         <?php } ?>  
 

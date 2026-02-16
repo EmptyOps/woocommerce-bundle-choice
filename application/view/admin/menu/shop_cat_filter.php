@@ -15,8 +15,10 @@ $attributes = \eo\wbc\model\Category_Attribute::instance()->get_attributs();
 
 if(!empty($categories) and is_array($categories)){
 	foreach ($categories as $id => $label) {
-		$term = wbc()->wc->get_term_by('id',$id,'product_cat');		
-		$term_list = get_terms('product_cat', array('hide_empty' => 0, 'orderby' => 'menu_order', 'parent'=>$id));
+		$term = wbc()->wc->get_term_by('id',$id,'product_cat');	
+        // NOTE:Changes applied on date 11-09-2025 as per the wordpress review team’s suggestion.
+        // $term_list = get_terms('product_cat', array('hide_empty' => 0, 'orderby' => 'menu_order', 'parent'=>$id));
+		$term_list = get_terms(array('taxonomy' => 'product_cat', 'hide_empty' => 0, 'orderby' => 'menu_order', 'parent'=>$id));
 		if(!empty($term_list)){
 			$child = array();
 			foreach ($term_list as $term) {
@@ -38,7 +40,9 @@ if(!empty($attributes) and is_array($attributes)){
 
 			if(is_wp_error($taxonomies)){
 
-				$taxonomies=get_terms(wc_attribute_taxonomy_name_by_id($term->id),array('hide_empty'=>false));
+                // NOTE:Changes applied on date 11-09-2025 as per the wordpress review team’s suggestion.
+                // $taxonomies=get_terms(wc_attribute_taxonomy_name_by_id($term->id),array('hide_empty'=>false));
+				$taxonomies=get_terms(array('taxonomy'=> wc_attribute_taxonomy_name_by_id($term->id),'hide_empty'=>false));
 			}
 			
 			if(is_wp_error($taxonomies) or empty($taxonomies)) continue;

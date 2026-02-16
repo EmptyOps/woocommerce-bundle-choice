@@ -14,7 +14,7 @@
 
             <?php if(empty($second)):?>        
                 <div class="description eowbc_breadcrumb_font"><?php esc_html_e(wbc()->options->get_option('appearance_breadcrumb','appearance_breadcrumb_choose_prefix_text',__('Choose a','woo-bundle-choice'),true,true)); ?></div>
-                <div class="title eowbc_breadcrumb_font"><?php esc_html_e($second_name); ?></div>
+                <div class="title eowbc_breadcrumb_font"><?php echo esc_html($second_name); ?></div>
                 <div>&nbsp;</div>
             <?php else:?>
                 <?php 
@@ -27,12 +27,12 @@
                 if(empty($view_url) or $view_url=='#'){
                     ?>
                         <div class="description eowbc_breadcrumb_font">Choose a</div>
-                        <div class="title eowbc_breadcrumb_font"><?php esc_html_e($second_name) ?></div>
+                        <div class="title eowbc_breadcrumb_font"><?php echo esc_html($second_name) ?></div>
                         <div>&nbsp;</div>
                     <?php
                 } else {
                 ?>
-                <div class="description eowbc_breadcrumb_font"><?php esc_html_e($second_name); ?></div>
+                <div class="description eowbc_breadcrumb_font"><?php echo esc_html($second_name); ?></div>
                 <div><?php /*_e(get_woocommerce_currency().wc_price($second->get_price()));*/ ?><?php esc_html_e(wc_price(apply_filters('eowbc_breadcrumb_second_price',$second->get_price(),$second))); ?></div>
                 
                 <div>

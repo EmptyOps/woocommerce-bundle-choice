@@ -186,10 +186,14 @@ class WBC_WC {
             }               
         } else {
             if($taxonomy==='product_cat'){
-                $term_list = get_terms($taxonomy, array('hide_empty' => 0, 'orderby' => $orderby, 'parent'=>$parent_id,'lang'=>''));
+                // NOTE:Changes applied on date 11-09-2025 as per the wordpress review team’s suggestion. 
+                // $term_list = get_terms($taxonomy, array('hide_empty' => 0, 'orderby' => $orderby, 'parent'=>$parent_id,'lang'=>''));
+                $term_list = get_terms(array('taxonomy' => $taxonomy,'hide_empty' => false, 'orderby' => $orderby, 'parent'=>$parent_id,'lang'=>''));
             } else{
-            
-                $term_list = get_terms($taxonomy,array('hide_empty' => 0, 'orderby' => $orderby,'lang'=>''));
+                
+                // NOTE:Changes applied on date 11-09-2025 as per the wordpress review team’s suggestion. 
+                // $term_list = get_terms($taxonomy,array('hide_empty' => 0, 'orderby' => $orderby,'lang'=>''));
+                $term_list = get_terms(array('taxonomy' => $taxonomy,'hide_empty' => false, 'orderby' => $orderby,'lang'=>''));
             }            
         }
         return $term_list;
@@ -810,7 +814,9 @@ class WBC_WC {
 
             if(is_wp_error($terms)){
 
-                $terms=get_terms(wc_attribute_taxonomy_name($taxonomy->attribute_name),array('hide_empty'=>false));
+                // NOTE:Changes applied on date 11-09-2025 as per the wordpress review team’s suggestion. 
+                // $terms=get_terms(wc_attribute_taxonomy_name($taxonomy->attribute_name),array('hide_empty'=>false));
+                $terms=get_terms(array('taxonomy' => wc_attribute_taxonomy_name($taxonomy->attribute_name), 'hide_empty'=>false));
             }
             
             if(!empty($terms) and !is_wp_error($terms)){

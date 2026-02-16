@@ -1,5 +1,7 @@
 <?php
 
+defined( 'ABSPATH' ) || exit;
+
 if(!class_exists('WBC_Migration')) {
 
 	class WBC_Migration {

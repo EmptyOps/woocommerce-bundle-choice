@@ -3,7 +3,7 @@
 *	Ajax handler to handle ajax save request for eowbc_configuration form.	
 *
 */
-
+defined( 'ABSPATH' ) || exit;
 $res = array( "type"=>"success", "msg"=>"Updated successfully!" );
 
 if(wp_verify_nonce(wbc()->sanitize->post('_wpnonce'),'eowbc_tiny_features')){

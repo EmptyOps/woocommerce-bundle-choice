@@ -38,7 +38,8 @@ class Eowbc_Setting_Status {
 	    			continue;
 	    		}
 	    		elseif( $fk == "eo_wbc_view_error" ) {
-	    			$form_definition[$key]["form"][$fk]["value"] = \EOWBC_Error_Handler::get_logs();
+	    			// NOTE:Changes applied on date 24-09-2025 as per the wordpress review team’s suggestion. 
+	    			// $form_definition[$key]["form"][$fk]["value"] = \EOWBC_Error_Handler::get_logs();
 	    			// wbc()->common->pr($form_definition[$key]["form"], false, false);
 	    			continue;
 	    		}
