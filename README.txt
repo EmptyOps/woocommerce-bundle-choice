@@ -513,4 +513,14 @@ Domain: https://sphereplugins.com/
 Purpose: This service is used to retrieve a list of available plugin extensions inside the WordPress admin area.
 Data Sent: No personal user data is sent. Only a simple GET request is made.   
 
+== Development Notes ==
 
+This plugin includes the minified CSS file from the Fomantic UI library.
+
+Minified file included:
+asset/css/fomantic/semantic.min.css
+
+Original readable source code is available at:
+https://github.com/fomantic/Fomantic-UI
+
+The semantic.min.css file is an unmodified minified version from the official Fomantic UI distribution.
