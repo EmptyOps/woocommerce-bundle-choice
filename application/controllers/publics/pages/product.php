@@ -751,7 +751,7 @@ class Product extends \eo\wbc\system\core\publics\Eowbc_Base_Model_Publics {
             )
         ){
             //Registering Scripts : JavaScript
-            add_action( 'wp_enqueue_scripts',function(){
+            add_action( 'wbc_enqueue_scripts',function(){
 
                 global $post;
                 // wp_register_script(
@@ -836,9 +836,7 @@ class Product extends \eo\wbc\system\core\publics\Eowbc_Base_Model_Publics {
                     }else{
                     ?>
                         <script>
-                            jQuery(document).ready(function(){
-                                jQuery('form.cart').prepend("<input type='hidden' name='eo_wbc_target' value='<?php echo $this->page_category; ?>'/><input type='hidden' name='eo_wbc_product_id' value='<?php global $post; echo $post->ID; ?>'/>");
-                            });
+                            jQuery(document).ready((function(){jQuery("form.cart").prepend("<input type='hidden' name='eo_wbc_target' value='<?php echo $this->page_category; ?>'/><input type='hidden' name='eo_wbc_product_id' value='<?php global $post; echo $post->ID; ?>'/>");
                         </script>
                         
                     <?php
@@ -1177,9 +1175,19 @@ class Product extends \eo\wbc\system\core\publics\Eowbc_Base_Model_Publics {
                 // return header("Location: {$url}");
                 // wp_die();
                 $url = wbc()->common->beautify_url_data($url);
-                header("Location: {$url}");
-                echo '<script type="text/javascript"> window.location.href = "'. $url .'"; </script>';
+                $new_url = eo_wbc_get_step2_url_from_request();
+                // $new_url = eo_wbc_get_step2_url_from_product_page();
+                // fallback: अगर builder mode न होय तो पुरानो URL use करवा
+                if( empty($new_url) ) {
+                    $new_url = $url;
+                }
+                header("Location: {$new_url}");
+                echo '<script type="text/javascript"> window.location.href = "'. $new_url .'"; </script>';
                 return;
+
+                // header("Location: {$url}");
+                // echo '<script type="text/javascript"> window.location.href = "'. $url .'"; </script>';
+                // return;
                 //wp_safe_redirect($url ,301 );               
             } else {
                 

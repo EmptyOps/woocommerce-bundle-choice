@@ -191,7 +191,8 @@ add_action( ( !is_admin() ? $hook : 'admin_enqueue_scripts'),function(){
 			// --  ned to make the versions dynamic of assets based on plugin, extensions and themes if there is no other versions system to maintan -- to s & -- to h
 		// ACTIVE_TODO/TODO when the variations and its child modules are moved out from the below loaded common js then at that time, also move te wc-cart variation dependancy mentioned below 
 		
-		if(!is_front_page()){
+		// if(!is_front_page()){
+		if( !is_front_page() || (defined('SP_WBC_ARBU') && SP_WBC_ARBU === true) ){	
 			// die("19555");
 
 			// $file_suffix = (defined('WBC_SCRIPT_DEBUG') && WBC_SCRIPT_DEBUG) ? '' : '.min';
