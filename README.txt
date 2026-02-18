@@ -515,12 +515,49 @@ Data Sent: No personal user data is sent. Only a simple GET request is made.
 
 == Development Notes ==
 
-This plugin includes the minified CSS file from the Fomantic UI library.
+This plugin includes third-party libraries.
 
-Minified file included:
-asset/css/fomantic/semantic.min.css
+== Fomantic UI ==
 
-Original readable source code is available at:
+Minified file:
+asset/js/fomantic/semantic.min.js
+
+Readable source file:
+asset/js/fomantic/semantic.js
+
+Original source:
 https://github.com/fomantic/Fomantic-UI
 
-The semantic.min.css file is an unmodified minified version from the official Fomantic UI distribution.
+== Ion.RangeSlider ==
+
+Minified file:
+asset/js/rangeslider/ion.rangeSlider.min.js
+
+Readable source file:
+asset/js/rangeslider/ion.rangeSlider.js
+
+Original source:
+https://github.com/IonDen/ion.rangeSlider
+
+== Ion.RangeSlider CSS ==
+
+Minified file:
+asset/css/rangeslider/ion.rangeSlider.min.css
+
+Readable source file:
+asset/css/rangeslider/ion.rangeSlider.css
+
+Original source:
+https://github.com/IonDen/ion.rangeSlider
+
+
+== Fomantic UI CSS ==
+
+Minified file:
+asset/css/fomantic/semantic.min.css
+
+Readable source file:
+asset/css/fomantic/semantic.css
+
+Original source:
+https://github.com/fomantic/Fomantic-UI

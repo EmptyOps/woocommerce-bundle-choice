@@ -139,7 +139,8 @@ if(!class_exists('WBC_Loader')) {
 					echo '<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.13.3/underscore-min.js"></script>';
 				}
 	            wbc()->load->get_script_tag(array(
-	             'src'  => esc_url('https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.13.3/underscore-min.js'),
+	             // 'src'  => esc_url('https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.13.3/underscore-min.js'),
+	            	'src' => includes_url('js/underscore.min.js'),
 	            ));				
 			}
 			

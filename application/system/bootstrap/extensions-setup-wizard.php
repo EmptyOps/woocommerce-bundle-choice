@@ -234,9 +234,10 @@ if ( ! class_exists( 'Extensions_Setup_Wizard' ) ) {
 			            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 			            <title><?php esc_html_e( 'WooCommerce Product Bundle Choice &rsaquo; Setup Wizard', 'woocommerce' ); ?></title>
 			            <?php
-			            wbc()->load->get_script_tag(array(
-			             'src'  => esc_url('https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js'),
-			            ));
+			            // wbc()->load->get_script_tag(array(
+			            //  'src'  => esc_url('https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js'),
+			            // ));
+			            wp_enqueue_script('jquery');
 			        	?>
 			           <link rel="stylesheet" type="text/css" href="<?php echo esc_url(constant('EOWBC_ASSET_URL') . 'css/fomantic/semantic.min.css'); ?>">
 			        </head>
