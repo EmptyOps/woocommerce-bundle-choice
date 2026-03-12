@@ -122,11 +122,7 @@ if(!class_exists('WBC_Loader')) {
 				     	-- all since the version change is affecting all the admin side layer enter admin panel and need to be tested -- to h && -- to bk  && -- to a
 				ACTIVE_TODO_OC_END*/ 
 				// NOTE: jquery no path hato te remove karel chhe.    	
-				// if(false){
-				// 	echo '<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>';
-				// }
 	            // wbc()->load->get_script_tag(array(
-	            //  'src'  => esc_url('https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js'),
 	            // ));								
 				// -- aa jquery no wp_enqueue_scripts script no call kadhi nakhvano avse and extention mathi call karavyo se tena mate alag thi code mukvano avse -- to a
 				// add_action('wp_enqueue_scripts', function(){
@@ -139,7 +135,6 @@ if(!class_exists('WBC_Loader')) {
 					echo '<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.13.3/underscore-min.js"></script>';
 				}
 	            wbc()->load->get_script_tag(array(
-	             // 'src'  => esc_url('https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.13.3/underscore-min.js'),
 	            	'src' => includes_url('js/underscore.min.js'),
 	            ));				
 			}
@@ -289,13 +284,7 @@ if(!class_exists('WBC_Loader')) {
 
 					if(isset($param[0]) && ($param[0]=='jquery' || $param[0]=='jQuery')) {
 						// ACTIVE_TODO aya woo-bundle ni extention no call nathi avto biji extention no call ave se atle script tag mate wordpress nu function call karva nu avse tenu upgrade karva nu avse -- to a 04-11-2023
-						// NOTE: jquery no path hato te remove karel chhe. 
-						// if (false) {
-						// 	echo '<script src="https://ajax.googleapis.com/ajax/libs/jquery/'.(!empty($version)?$version:"3.4.1").'/jquery.min.js"></script>';
-						// }
-			            // wbc()->load->get_script_tag(array(
-			            //  'src'  => esc_url('https://ajax.googleapis.com/ajax/libs/jquery/'.(!empty($version)?$version:"3.4.1").'/jquery.min.js'),
-			            // ));							
+						// NOTE: jquery no path hato te remove karel chhe.
 						unset($param[0]);
 					}
 

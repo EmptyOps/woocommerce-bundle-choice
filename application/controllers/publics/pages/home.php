@@ -21,16 +21,27 @@ class Home {
 	public function init() {
     return true;
 
-		if(isset($_GET['wbc_report']) && !empty(wbc()->sanitize->get('wbc_report'))) {
-        	if(isset($_SERVER['HTTP_REFERER'])){
-        		wbc()->options->set('eo_wbc_mapping_error_report',$_SERVER['HTTP_REFERER']);
+		// if(isset($_GET['wbc_report']) && !empty(wbc()->sanitize->get('wbc_report'))) {
+    //     	if(isset($_SERVER['HTTP_REFERER'])){
+    //     		wbc()->options->set('eo_wbc_mapping_error_report',$_SERVER['HTTP_REFERER']);
+    //         /*ACTIVE_TODO_OC_START
+    //         do we need to apply get text call here
+    //         ACTIVE_TODO_OC_END*/
+    //     		\EOWBC_Error_Handler::log('One user has reported mapping issue at this <a href="'.$_SERVER['HTTP_REFERER'].'" target="_blank">link</a>, please ensure you have added mapping to connect products from first to second step.',2);	
+    //     	}
+    //   	} 
+  if(isset($_GET['wbc_report']) && !empty(wbc()->sanitize->get('wbc_report'))) {
+          if(isset(wbc()->sanitize->server('HTTP_REFERER'))){
+
+            $referer = esc_url_raw( wbc()->sanitize->server('HTTP_REFERER') );
+
+            wbc()->options->set('eo_wbc_mapping_error_report',$referer);
             /*ACTIVE_TODO_OC_START
             do we need to apply get text call here
             ACTIVE_TODO_OC_END*/
-        		\EOWBC_Error_Handler::log('One user has reported mapping issue at this <a href="'.$_SERVER['HTTP_REFERER'].'" target="_blank">link</a>, please ensure you have added mapping to connect products from first to second step.',2);	
-        	}
-      	} 
-
+            \EOWBC_Error_Handler::log('One user has reported mapping issue at this <a href="'.$referer.'" target="_blank">link</a>, please ensure you have added mapping to connect products from first to second step.',2);  
+          }
+        } 
       	$this->show_buttons();		
 	}
 

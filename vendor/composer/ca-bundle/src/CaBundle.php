@@ -302,8 +302,12 @@ EOT;
 
     private static function getEnvVariable($name)
     {
-        if (isset($_SERVER[$name])) {
-            return (string) $_SERVER[$name];
+        // if (isset($_SERVER[$name])) {
+        //     return (string) $_SERVER[$name];
+        // }
+
+        if (isset(wbc()->sanitize->server($name))) {
+            return (string) wbc()->sanitize->server($name);
         }
 
         if (PHP_SAPI === 'cli' && ($value = getenv($name)) !== false && $value !== null) {

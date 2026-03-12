@@ -82,7 +82,7 @@ class Setting_status {
 							)
 						)							
 					),
-					'setting_status_log'=>array(
+					'setting_status_log'=>array(	
 						'label'=>'Logs',
 						'form'=>array(
 							'setting_status_log_section'=>array('label'=>'System Log for the Plugin','type'=>'segment','desc'=>'The plugin\'s core error reporting system.'
@@ -155,9 +155,13 @@ class Setting_status {
 							'clear_log_and_return'=>array(
 								'label'=>eowbc_lang('Clear Log and Return'),
 								'type'=>'link',
+								// 'attr'=>array("href='".esc_url(admin_url('admin.php?page=eowbc-setting-status&action=clear&ref='.
+								// (empty($_SERVER['HTTP_REFERER'])? admin_url('admin.php?page=eowbc-setting-status'):$_SERVER['HTTP_REFERER'])))."'"),
+								// 'class'=>array(/*'secondary','hidden'*/)
 								'attr'=>array("href='".esc_url(admin_url('admin.php?page=eowbc-setting-status&action=clear&ref='.
-								(empty($_SERVER['HTTP_REFERER'])? admin_url('admin.php?page=eowbc-setting-status'):$_SERVER['HTTP_REFERER'])))."'"),
-								'class'=>array(/*'secondary','hidden'*/)	
+								(empty(wbc()->sanitize->server('HTTP_REFERER'))? admin_url('admin.php?page=eowbc-setting-status'):wbc()->sanitize->server('HTTP_REFERER'))))."'"),
+								'class'=>array(/*'secondary','hidden'*/)
+
 							)
 						)
 					),

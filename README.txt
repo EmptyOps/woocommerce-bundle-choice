@@ -513,6 +513,11 @@ Domain: https://sphereplugins.com/
 Purpose: This service is used to retrieve a list of available plugin extensions inside the WordPress admin area.
 Data Sent: No personal user data is sent. Only a simple GET request is made.   
 
+Service: WooChoice Plugin Demo Assets
+Domain: https://demo.woochoiceplugin.com/
+Purpose: This service is used to load the zoom functionality JavaScript file required for the product gallery zoom feature inside the plugin.
+Data Sent: No personal user data is sent. The plugin only loads a JavaScript file from the service when the gallery zoom feature is initialized on the product page.
+
 == Development Notes ==
 
 This plugin includes third-party libraries.
@@ -561,3 +566,5 @@ asset/css/fomantic/semantic.css
 
 Original source:
 https://github.com/fomantic/Fomantic-UI
+
+

@@ -447,20 +447,37 @@ class WBC_Common {
     	return $url;
     }
 
-    public function current_uri(){
-    	return $_SERVER['REQUEST_URI'];
-    }
+    // public function current_uri(){
+    // 	return $_SERVER['REQUEST_URI'];
+    // }
+	public function current_uri(){
+		return wbc()->sanitize->server('REQUEST_URI');
+	}
 
-    public function current_url(){
+
+    // public function current_url(){
+    // 	$pageURL = 'http';
+    //     if(isset($_SERVER["HTTPS"]) and $_SERVER["HTTPS"] == "on") {
+    //         $pageURL .= "s";
+    //     }
+    //     $pageURL .= "://";
+    //     if ($_SERVER["SERVER_PORT"] != "80") {
+    //         $pageURL .= $_SERVER["SERVER_NAME"] . ":" . $_SERVER["SERVER_PORT"] . $_SERVER["REQUEST_URI"];
+    //     } else {
+    //         $pageURL .= $_SERVER["SERVER_NAME"] . $_SERVER["REQUEST_URI"];
+    //     }
+    //     return $pageURL;
+    // }
+     public function current_url(){
     	$pageURL = 'http';
-        if(isset($_SERVER["HTTPS"]) and $_SERVER["HTTPS"] == "on") {
+        if(isset(wbc()->sanitize->server('HTTPS')) and (wbc()->sanitize->server('HTTPS') == "on") {
             $pageURL .= "s";
         }
         $pageURL .= "://";
-        if ($_SERVER["SERVER_PORT"] != "80") {
-            $pageURL .= $_SERVER["SERVER_NAME"] . ":" . $_SERVER["SERVER_PORT"] . $_SERVER["REQUEST_URI"];
+        if ((wbc()->sanitize->server('SERVER_PORT') != "80")) {
+            $pageURL .= (wbc()->sanitize->server('SERVER_NAME')) . ":" . (wbc()->sanitize->server('SERVER_PORT')) . (wbc()->sanitize->server('REQUEST_URI'));
         } else {
-            $pageURL .= $_SERVER["SERVER_NAME"] . $_SERVER["REQUEST_URI"];
+            $pageURL .= (wbc()->sanitize->server('SERVER_NAME')) . (wbc()->sanitize->server('REQUEST_URI'));
         }
         return $pageURL;
     }

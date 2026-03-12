@@ -171,6 +171,15 @@ if(!class_exists('WBC_Sanitize')) {
 			}
 		}
 		
+		public function server(string $server_field){
+			if(isset($_SERVER[$server_field])) {
+				// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Sanitization applied below.
+				return sanitize_text_field($_SERVER[$server_field]);
+			} else {
+				return false;
+			}
+		}
+
 		public function post_array(string $post_field){
 			if(isset( $_POST[$post_field] ) and is_array($_POST[$post_field]) and !empty($_POST[$post_field])){
 
