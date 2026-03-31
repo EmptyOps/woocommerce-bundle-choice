@@ -74,10 +74,10 @@ class Preview extends \eo\wbc\system\core\publics\Eowbc_Base_Model_Publics {
                 display: none !important;
             }
             .ui.button {
-                " . __($button_backcolor_active ? 'background-color:' . $button_backcolor_active . ' !important;' : '') . "
-                " . __($button_textcolor ? 'color:' . $button_textcolor . ' !important;' : '') . "
-                " . __($eo_wbc_home_btn_border_color ? 'border-color:' . $eo_wbc_home_btn_border_color . ' !important;' : '') . "
-                " . __($button_radius ? 'border-radius:' . $button_radius . ' !important;' : '') . "
+                " . ($button_backcolor_active ? 'background-color:' . $button_backcolor_active . ' !important;' : '') . "
+                " . ($button_textcolor ? 'color:' . $button_textcolor . ' !important;' : '') . "
+                " . ($eo_wbc_home_btn_border_color ? 'border-color:' . $eo_wbc_home_btn_border_color . ' !important;' : '') . "
+                " . ($button_radius ? 'border-radius:' . $button_radius . ' !important;' : '') . "
             }
         ";
         wbc()->load->add_inline_style('', $custom_css,'common');

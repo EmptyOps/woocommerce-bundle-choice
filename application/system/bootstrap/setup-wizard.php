@@ -234,8 +234,7 @@ class Setup_Wizard {
 		            // NOTE:Changes applied on date 28-11-2025 as per the wordpress review team’s suggestion. if false hati te removi karel chhe.
 		            // NOTE: jquery no path hato te remove karel chhe.	  
 		           	// wbc()->load->get_script_tag(array(
-		            // ));
-		            function wbc_enqueue_core_jquery() {
+		             wbc_enqueue_core_jquery() {
 		                wp_enqueue_script('jquery');
 		            }
 		            add_action('wp_enqueue_scripts', 'wbc_enqueue_core_jquery');				

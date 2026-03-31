@@ -180,7 +180,7 @@ class Eowbc_Sample_Data {
 					$eo_wbc_max_products = $this->get_product_size();
 					$admin_url_admin_eowbc = admin_url('admin.php?page=eowbc');
 					$wp_create_nonce_sample_data_jewelry = wp_create_nonce('sample_data_jewelry');
-					$__feature_key = __($feature_key);
+					$__feature_key = esc_html($feature_key);
 					$admin_url_admin_ajax = admin_url('admin-ajax.php');
 					//$feature_key = ''; // You need to define $feature_key; it wasn't provided in the JavaScript code.
 

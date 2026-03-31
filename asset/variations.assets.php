@@ -555,16 +555,17 @@ if (defined('SP_VARIATIONS_LOADED') && SP_VARIATIONS_LOADED == true) { ?>
 			wbc()->load->add_inline_style('', $custom_css, 'common');
 
 
-		$border_hover_color = _e($border_hover_color);
-		$dimention = _e($dimention);
-		$border_width = _e($border_width);
-		$border_color = _e($border_color);
-		$border_radius = _e($border_radius);
-		$border_hover_width = _e($border_hover_width);
-		$bg_color = _e($bg_color);
-		$font_color = _e($font_color);
-		$bg_hover_color = _e($bg_hover_color);
-		$font_hover_color = _e($font_hover_color);
+		// $border_hover_color = _e($border_hover_color);
+		$border_hover_color = esc_attr($border_hover_color);
+		$dimention = esc_attr($dimention);
+		$border_width = esc_attr($border_width);
+		$border_color = esc_attr($border_color);
+		$border_radius = esc_attr($border_radius);
+		$border_hover_width = esc_attr($border_hover_width);
+		$bg_color = esc_attr($bg_color);
+		$font_color = esc_attr($font_color);
+		$bg_hover_color = esc_attr($bg_hover_color);
+		$font_hover_color = esc_attr($font_hover_color);
 
 		//NOTE:From here, we have removed the original code inside the if (false) block.So, whenever there is a need to view the original or any other code for readability purposes, simply take the css below, put it in a new .css file in Sublime Text,and view it in readable format.Apart from that, we had removed the original code, and in some scenarios,that original code might have contained PHP variables like XYZ. Those would have been removed as well. And of course, even if the removed code from the if (false) block is not relevant to the current version,it might be required during future milestone tasks, so for this purpose,refer to the branch named "ui_QCed_ashish_-2" and check the commit dated 07-04-2025 for looking at the original code.
 		$custom_css = "

@@ -15,7 +15,9 @@ function spext_lang($string, $extension_slug) {
 function eowbc_lang_esc_html__($string, $plugin_slug = null) {
 	// NOTE: plugin_slug parameter is for formatly of passing second parameter for po edit etc tool compeblity from where the get text call are nede.
 
-	return esc_html__($string, 'woo-bundle-choice');
+	// return esc_html__($string, 'woo-bundle-choice');
+	return esc_html($string);
+
 }
 
 class WBC_language {
@@ -29,7 +31,10 @@ class WBC_language {
 		return self::$_instance;
 	}
 
-	public function __($string) {
-		return __($string,'woocommerce-bundle-choice');
+	// public function __($string) {
+	public function esc_html($string) {
+		// return __($string,'woocommerce-bundle-choice');
+		return esc_html($string);
+
 	}
 }

@@ -141,7 +141,8 @@ class Category_Meta {
 				$__columns['cb'] = $columns['cb'];				
 				unset($columns['cb']);			
 			}			
-			$__columns[$column_key] = __($column_title, 'woo-bundle-choice');
+			// $__columns[$column_key] = __($column_title, 'woo-bundle-choice');
+			$__columns[$column_key] = esc_html($column_title);
 			$columns = array_merge($__columns, $columns);	
 		}
 		return $columns;

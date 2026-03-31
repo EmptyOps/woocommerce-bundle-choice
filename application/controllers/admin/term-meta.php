@@ -270,7 +270,8 @@ class Term_Meta {
 		if(is_array($columns) and !empty($columns)){
 			$__columns = array();		
 			$__columns['cb'] = $columns['cb'];			
-			$__columns[$column_key] = __($column_title, 'woo-bundle-choice');			
+			// $__columns[$column_key] = __($column_title, 'woo-bundle-choice');
+			$__columns[$column_key] = esc_html($column_title);			
 			unset($columns['cb']);			
 			$columns = array_merge($__columns, $columns);	
 		}
@@ -290,7 +291,8 @@ class Term_Meta {
 		if(is_array($columns) and !empty($columns)){
 			$__columns = array();		
 			$__columns['cb'] = $columns['cb'];			
-			$__columns[$column_key] = __($column_title, 'woo-bundle-choice');			
+			// $__columns[$column_key] = __($column_title, 'woo-bundle-choice');
+			$__columns[$column_key] = esc_html($column_title);			
 			unset($columns['cb']);			
 			$columns = array_merge($__columns, $columns);	
 		}

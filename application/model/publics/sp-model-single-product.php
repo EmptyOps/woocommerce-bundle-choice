@@ -136,7 +136,7 @@ class SP_Model_Single_Product extends SP_Single_Product {
 						    }
 						    body .image-variable-item.selected, .image-variable-item:hover {	        			
 						        box-shadow: none !important;        			
-						        border-bottom: 2px " . __($border_hover_color) . " solid !important;
+						        border-bottom: 2px " . esc_attr($border_hover_color) . " solid !important;
 						    }
 						    .image_text-variable-item {
 						        border: none !important;
@@ -236,40 +236,42 @@ class SP_Model_Single_Product extends SP_Single_Product {
 						    }
 						    body .variable-items-wrapper .variable-item {        			
 						        /*display: inline-table;*/
-						        height: " . __($dimention) . " !important;
-						        width: " . __($dimention) . " !important;
+						       /* height: " . __($dimention) . " !important;
+						        width: " . __($dimention) . " !important;*/
+					          	height: " . esc_attr($dimention) . " !important;
+						        width: " . esc_attr($dimention) . " !important;
 						        min-width: 35px;						
 						        text-align: center;						
-						        line-height: " . __($dimention) . " !important;	        			
+						        line-height: " . esc_attr($dimention) . " !important;	        			
 						        cursor: pointer;
 						        margin: 0.25rem;
 						        text-align: center;
-						        border: " . __($border_width) . " solid " . __($border_color) . " !important;
-						        border-radius: " . __($border_radius) . " !important;
+						        border: " . esc_attr($border_width) . " solid " . esc_attr($border_color) . " !important;
+						        border-radius: " . esc_attr($border_radius) . " !important;
 						        overflow: hidden;
 						    }	
 						    body .variable-items-wrapper .variable-item:hover, .variable-items-wrapper .selected {
-						        box-shadow: 0px 0px " . __($border_hover_width) . " " . __($border_hover_color) . " !important;        			
-						        border: 1px " . __($border_hover_color) . " solid !important;
+						        box-shadow: 0px 0px " . esc_attr($border_hover_width) . " " . esc_attr($border_hover_color) . " !important;        			
+						        border: 1px " . esc_attr($border_hover_color) . " solid !important;
 						    }
 						    ul.variable-items-wrapper {
 						        margin: 0px;
 						    }
 						    body .variable-item-color-fill, .variable-item-span {        			
-						        height: " . __($dimention) . " !important;
+						        height: " . esc_attr($dimention) . " !important;
 						        width: 100%;
-						        line-height: " . __($dimention) . " !important;
+						        line-height: " . esc_attr($dimention) . " !important;
 						    }
 						    .select2, .select3-selection {
 						        display: none !important;
 						    }
 						    body .button-variable-item {
-						        background-color: " . __($bg_color) . " !important;
-						        color: " . __($font_color) . " !important;
+						        background-color: " . esc_attr($bg_color) . " !important;
+						        color: " . esc_attr($font_color) . " !important;
 						    }
 						    body .button-variable-item:hover {
-						        background-color: " . __($bg_hover_color) . " !important;
-						        color: " . __($font_hover_color) . " !important;	
+						        background-color: " . esc_attr($bg_hover_color) . " !important;
+						        color: " . esc_attr($font_hover_color) . " !important;	
 						    }
 						";
 
@@ -360,7 +362,7 @@ class SP_Model_Single_Product extends SP_Single_Product {
 						// wbc()->load->asset('css','fomantic/semantic.min');
 						// wbc()->load->asset('js','fomantic/semantic.min',array('jquery'));
 						wbc()->load->built_in_asset('semantic');
-						$toggle_text = __($toggle_text);
+						$toggle_text = esc_attr($toggle_text);
 
 						// NOTE:From here, we have removed the original code inside the if (false) block. So, whenever there is a need to view the original or any other code for readability purposes, simply take the script below, put it in a new .js file in Sublime Text, and view it in readable format.Apart from that, we had removed the original code, and in some scenarios, that original code might have contained PHP variables like XYZ. Those would have been removed as well.And of course, even if the removed code from the if (false) block is not relevant to the current version, it might be required during future milestone tasks, so for this purpose, refer to the branch named "ui_QCed_ashish_-2" and check the commit dated 07-04-2025 for looking at the original code.
 						$inline_script = 
