@@ -292,7 +292,7 @@ EOT
             }
 
             if (is_array($value)) {
-                $value = json_encode($value);
+                $value = wp_json_encode($value);
             }
 
             $this->getIO()->write($value, true, IOInterface::QUIET);
@@ -747,7 +747,7 @@ EOT
         if (true !== $validation = $validator($values)) {
             throw new \RuntimeException(sprintf(
                 '%s is an invalid value'.($validation ? ' ('.$validation.')' : ''),
-                json_encode($values)
+                wp_json_encode($values)
             ));
         }
 
@@ -783,7 +783,7 @@ EOT
 
             if (is_array($value)) {
                 $value = array_map(function ($val) {
-                    return is_array($val) ? json_encode($val) : $val;
+                    return is_array($val) ? wp_json_encode($val) : $val;
                 }, $value);
 
                 $value = '['.implode(', ', $value).']';

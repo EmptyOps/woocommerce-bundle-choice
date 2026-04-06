@@ -158,6 +158,6 @@ window.document.splugins.common.admin.form_builder.core = function( configs ) {
     }
 };
 
-window.document.splugins.common.admin.form_builder.api = window.document.splugins.common.admin.form_builder.core( window.document.splugins.common.parseJSON( '<?php echo json_encode($configs);?>', false ) );
+window.document.splugins.common.admin.form_builder.api = window.document.splugins.common.admin.form_builder.core( window.document.splugins.common.parseJSON( '<?php echo wp_json_encode($configs);?>', false ) );
 
 </script>

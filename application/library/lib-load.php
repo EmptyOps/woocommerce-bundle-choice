@@ -328,12 +328,12 @@ if(!class_exists('WBC_Loader')) {
 						if(false){				
 							?>
 							<script>
-								var <?php echo $localize_var; ?> = JSON.parse('<?php echo json_encode($localize_var_val); ?>');
+								var <?php echo $localize_var; ?> = JSON.parse('<?php echo wp_json_encode($localize_var_val); ?>');
 							</script>
 							<?php
 						}
 							
-						$inline_script = "var ".$localize_var." = JSON.parse('" . json_encode($localize_var_val) . "');";
+						$inline_script = "var ".$localize_var." = JSON.parse('" . wp_json_encode($localize_var_val) . "');";
 						// wbc()->load->add_inline_script('', $inline_script, 'common');
 						wbc()->load->get_inline_script_tag($inline_script);
 
@@ -348,12 +348,12 @@ if(!class_exists('WBC_Loader')) {
 						if(false){
 							?>
 							<script>
-								var <?php echo array_keys($param)[0]; ?> = JSON.parse('<?php echo json_encode($param[array_keys($param)[0]]); ?>');
+								var <?php echo array_keys($param)[0]; ?> = JSON.parse('<?php echo wp_json_encode($param[array_keys($param)[0]]); ?>');
 							</script>
 							<?php
 						}
 
-						$inline_script = "var ".$param_key." = JSON.parse('" . json_encode($param_value) . "');";
+						$inline_script = "var ".$param_key." = JSON.parse('" . wp_json_encode($param_value) . "');";
 						// wbc()->load->add_inline_script('', $inline_script, 'common');	
 						wbc()->load->get_inline_script_tag($inline_script);							
 					

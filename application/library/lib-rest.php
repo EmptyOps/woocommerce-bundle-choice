@@ -21,7 +21,7 @@ if(!class_exists('WBC_REST')) {
 		}
 
 		public function response($res, $response_http_code=200){
-			echo json_encode($res);
+			echo wp_json_encode($res);
 		}
 
 	}

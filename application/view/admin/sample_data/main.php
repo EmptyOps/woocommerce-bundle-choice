@@ -99,7 +99,7 @@ box-shadow: none;">
 	            <tr>
 	              <td>
 	                <?php $_steps=["catagorie(s)","attribute(s)","product(s)"]; ?>
-	                <input type="submit" name="save" value="<?php printf(__("Create sample %1s","woo-bundle-choice"),$_steps[$_step-1]); ?>"  class="button button-primary button-hero action ui button secondary">
+	                <input type="submit" name="save" value="<?php echo esc_attr( sprintf( __("Create sample %1s","woo-bundle-choice"),$_steps[$_step-1])); ?>"  class="button button-primary button-hero action ui button secondary">
 	              </td>
 	              <td>
 					    <a href="#" class="button button-hero action ui button secondary inverted" onclick="if(!jQuery(this).hasClass('disabled')){ window.location.href='<?php echo esc_url(admin_url('admin.php?page=eowbc')); ?>'; }">Cancel</a>

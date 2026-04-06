@@ -8,5 +8,5 @@
 	}
 ?>
 <?php if(!empty($postHTML)): ?>
-<?php echo isset($postHTML)? $postHTML :''; ?>	
+<?php echo isset($postHTML)? wp_kses_post($postHTML) :''; ?>	
 <?php endif; ?>

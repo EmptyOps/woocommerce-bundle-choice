@@ -67,7 +67,7 @@ class Filter
 		    	$_GET = apply_filters('filter_widget_ajax_pre_get',$_GET);		        	
 		    	
 		    	if(apply_filters('eowbc_filter_override',false) and (!empty($_REQUEST['eo_wbc_filter']))) {
-		            echo json_encode(apply_filters('eowbc_filter_response',array()));
+		            echo wp_json_encode(apply_filters('eowbc_filter_response',array()));
 		            die();
 		        }
 		        

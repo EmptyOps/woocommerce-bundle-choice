@@ -2510,7 +2510,7 @@ class EOWBC_Filter_Widget {
 
 		?>
 		<script>
-			var eo_wbc_object = JSON.parse('<?php echo json_encode($data); ?>');
+			var eo_wbc_object = JSON.parse('<?php echo wp_json_encode($data); ?>');
 		</script>
 		<?php
 		wbc()->load->asset('js','publics/eo_wbc_filter',array('jquery'));		

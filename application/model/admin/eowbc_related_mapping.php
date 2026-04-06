@@ -269,7 +269,7 @@ class Eowbc_Related_Mapping /*extends Eowbc_Model*/ {
 		$map = unserialize(wbc()->options->get_option_group($prefix.'_map_master'));
 		
 		if(!empty($map[wbc()->sanitize->post('id')])){
-			$res['msg'] = json_encode($map[wbc()->sanitize->post('id')]);
+			$res['msg'] = wp_json_encode($map[wbc()->sanitize->post('id')]);
 		} else {
 			$res['type'] = 'error';
 			$res['msg'] = 'Selected item does not exists!';

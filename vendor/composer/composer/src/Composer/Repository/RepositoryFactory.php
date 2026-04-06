@@ -148,10 +148,10 @@ class RepositoryFactory
                 throw new \UnexpectedValueException('"repositories" should be an array of repository definitions, only a single repository was given');
             }
             if (!is_array($repo)) {
-                throw new \UnexpectedValueException('Repository "'.$index.'" ('.json_encode($repo).') should be an array, '.gettype($repo).' given');
+                throw new \UnexpectedValueException('Repository "'.$index.'" ('.wp_json_encode($repo).') should be an array, '.gettype($repo).' given');
             }
             if (!isset($repo['type'])) {
-                throw new \UnexpectedValueException('Repository "'.$index.'" ('.json_encode($repo).') must have a type defined');
+                throw new \UnexpectedValueException('Repository "'.$index.'" ('.wp_json_encode($repo).') must have a type defined');
             }
 
             $name = self::generateRepositoryName($index, $repo, $repos);

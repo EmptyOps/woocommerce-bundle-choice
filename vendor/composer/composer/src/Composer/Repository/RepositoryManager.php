@@ -120,7 +120,7 @@ class RepositoryManager
         }
 
         if (isset($config['packagist']) && false === $config['packagist']) {
-            $this->io->writeError('<warning>Repository "'.$name.'" ('.json_encode($config).') has a packagist key which should be in its own repository definition</warning>');
+            $this->io->writeError('<warning>Repository "'.$name.'" ('.wp_json_encode($config).') has a packagist key which should be in its own repository definition</warning>');
         }
 
         $class = $this->repositoryClasses[$type];

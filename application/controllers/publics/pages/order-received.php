@@ -37,7 +37,7 @@ class Order_Received extends \WC_Order_Item_Product {
                 }
                 
                 global $wpdb;                
-                $wpdb->insert($wpdb->prefix.'eo_wbc_order_maps',array('order_id'=>$order_id,'order_map'=>json_encode($maps)),array("%s","%s"));                
+                $wpdb->insert($wpdb->prefix.'eo_wbc_order_maps',array('order_id'=>$order_id,'order_map'=>wp_json_encode($maps)),array("%s","%s"));                
                 
                 //Clearing Plugin Session data                
                 wbc()->session->set('EO_WBC_SETS',NULL);
@@ -61,7 +61,7 @@ class Order_Received extends \WC_Order_Item_Product {
             $sets=$wpdb->get_row($query,'ARRAY_A');
             
             if(empty($sets['order_map'])){
-                $sets['order_map'] = json_encode(array());
+                $sets['order_map'] = wp_json_encode(array());
             }
 
             $sets=(json_decode($sets['order_map']));

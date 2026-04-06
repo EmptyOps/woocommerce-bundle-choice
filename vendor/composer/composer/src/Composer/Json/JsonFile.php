@@ -214,7 +214,7 @@ class JsonFile
     public static function encode($data, $options = 448)
     {
         if (PHP_VERSION_ID >= 50400) {
-            $json = json_encode($data, $options);
+            $json = wp_json_encode($data, $options);
             if (false === $json) {
                 self::throwEncodeError(json_last_error());
             }
@@ -228,7 +228,7 @@ class JsonFile
             return $json;
         }
 
-        $json = json_encode($data);
+        $json = wp_json_encode($data);
         if (false === $json) {
             self::throwEncodeError(json_last_error());
         }

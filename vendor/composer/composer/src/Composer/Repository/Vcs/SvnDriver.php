@@ -145,7 +145,7 @@ class SvnDriver extends VcsDriver
             }
 
             if ($this->shouldCache($identifier)) {
-                $this->cache->write($identifier.'.json', json_encode($composer));
+                $this->cache->write($identifier.'.json', wp_json_encode($composer));
             }
 
             $this->infoCache[$identifier] = $composer;

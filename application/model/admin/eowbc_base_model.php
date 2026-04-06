@@ -318,7 +318,7 @@ class Eowbc_Base_Model {
 
 		if(!empty($data[wbc()->sanitize->post('id')])) {
 			$res['type'] = 'success';
-			$res['msg'] = json_encode($data[wbc()->sanitize->post('id')]);
+			$res['msg'] = wp_json_encode($data[wbc()->sanitize->post('id')]);
 		} else {
 			$res['type'] = 'error';
 			$res['msg'] = 'Selected item does not exists!';

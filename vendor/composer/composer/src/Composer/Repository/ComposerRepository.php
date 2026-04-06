@@ -665,7 +665,7 @@ class ComposerRepository extends ArrayRepository implements ConfigurableReposito
 
             return $package;
         } catch (\Exception $e) {
-            throw new \RuntimeException('Could not load package '.(isset($data['name']) ? $data['name'] : json_encode($data)).' in '.$this->url.': ['.get_class($e).'] '.$e->getMessage(), 0, $e);
+            throw new \RuntimeException('Could not load package '.(isset($data['name']) ? $data['name'] : wp_json_encode($data)).' in '.$this->url.': ['.get_class($e).'] '.$e->getMessage(), 0, $e);
         }
     }
 
@@ -719,7 +719,7 @@ class ComposerRepository extends ArrayRepository implements ConfigurableReposito
                         $lastModifiedDate = $rfs->findHeaderValue($rfs->getLastHeaders(), 'last-modified');
                         if ($lastModifiedDate) {
                             $data['last-modified'] = $lastModifiedDate;
-                            $json = json_encode($data);
+                            $json = wp_json_encode($data);
                         }
                     }
                     $this->cache->write($cacheKey, $json);
@@ -782,7 +782,7 @@ class ComposerRepository extends ArrayRepository implements ConfigurableReposito
                 $lastModifiedDate = $rfs->findHeaderValue($rfs->getLastHeaders(), 'last-modified');
                 if ($lastModifiedDate) {
                     $data['last-modified'] = $lastModifiedDate;
-                    $json = json_encode($data);
+                    $json = wp_json_encode($data);
                 }
                 $this->cache->write($cacheKey, $json);
 

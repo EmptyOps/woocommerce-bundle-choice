@@ -99,7 +99,7 @@ class Locker
 
         ksort($relevantContent);
 
-        return md5(json_encode($relevantContent));
+        return md5(wp_json_encode($relevantContent));
     }
 
     /**

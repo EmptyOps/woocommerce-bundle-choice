@@ -302,7 +302,7 @@ class InstallationManager
                 array(
                     'method' => 'POST',
                     'header' => array('Content-Type: application/json'),
-                    'content' => json_encode($postData),
+                    'content' => wp_json_encode($postData),
                     'timeout' => 6,
                 ),
             );

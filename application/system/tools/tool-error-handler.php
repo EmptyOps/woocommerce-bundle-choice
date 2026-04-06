@@ -128,7 +128,7 @@ if(!class_exists('EOWBC_Error_Handler')){
 					$log[]=$error['file'];
 					$log[]=' at line number '.$error['line'];
 					$log[]=PHP_EOL;
-					$log[]=json_encode($error['message']);
+					$log[]=wp_json_encode($error['message']);
 					$log[]=PHP_EOL;
 
 		     	   	//error_log(implode($log),3,constant('EOWBC_LOG_DIR').'debug.log');
@@ -199,7 +199,7 @@ if(!class_exists('EOWBC_Error_Handler')){
 			if(function_exists('get_plugins')){		
 
 				$plugins=get_plugins();		
-				$available_plugins=json_encode(
+				$available_plugins=wp_json_encode(
 										array_combine(
 											array_column($plugins,'Name'),
 											array_column($plugins,'Version')

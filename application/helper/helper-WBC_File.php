@@ -119,7 +119,7 @@ class WBC_File {
 	}
 
 	public function save_json($filepath, $data) {
-		return $this->file_write( $filepath, json_encode($data) );
+		return $this->file_write( $filepath, wp_json_encode($data) );
 	}
 
 	public function get_json($filepath) {

@@ -236,8 +236,6 @@ class SP_Model_Single_Product extends SP_Single_Product {
 						    }
 						    body .variable-items-wrapper .variable-item {        			
 						        /*display: inline-table;*/
-						       /* height: " . __($dimention) . " !important;
-						        width: " . __($dimention) . " !important;*/
 					          	height: " . esc_attr($dimention) . " !important;
 						        width: " . esc_attr($dimention) . " !important;
 						        min-width: 35px;						
@@ -1262,7 +1260,7 @@ class SP_Model_Single_Product extends SP_Single_Product {
 			
 			$simple_types_html_attributes[0]['variation_gallery_images'] = $data['gallery_images_template_data']['attachment_ids'];
 
-			$simple_types_html_attributes = array( 'data-product_id' => esc_attr($data['gallery_images_template_data']['product_sku_experimental']), 'data-product_simple=\''.esc_attr(json_encode($simple_types_html_attributes)).'\''=>null);	
+			$simple_types_html_attributes = array( 'data-product_id' => esc_attr($data['gallery_images_template_data']['product_sku_experimental']), 'data-product_simple=\''.esc_attr(wp_json_encode($simple_types_html_attributes)).'\''=>null);	
 		}
 
 		$ui = array(

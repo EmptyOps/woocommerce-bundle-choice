@@ -41,7 +41,7 @@ class ArrayLoader implements LoaderInterface
     public function load(array $config, $class = 'Composer\Package\CompletePackage')
     {
         if (!isset($config['name'])) {
-            throw new \UnexpectedValueException('Unknown package has no name defined ('.json_encode($config).').');
+            throw new \UnexpectedValueException('Unknown package has no name defined ('.wp_json_encode($config).').');
         }
         if (!isset($config['version'])) {
             throw new \UnexpectedValueException('Package '.$config['name'].' has no version defined.');
@@ -80,7 +80,7 @@ class ArrayLoader implements LoaderInterface
                 throw new \UnexpectedValueException(sprintf(
                     "Package %s's source key should be specified as {\"type\": ..., \"url\": ..., \"reference\": ...},\n%s given.",
                     $config['name'],
-                    json_encode($config['source'])
+                    wp_json_encode($config['source'])
                 ));
             }
             $package->setSourceType($config['source']['type']);
@@ -98,7 +98,7 @@ class ArrayLoader implements LoaderInterface
                     "Package %s's dist key should be specified as ".
                     "{\"type\": ..., \"url\": ..., \"reference\": ..., \"shasum\": ...},\n%s given.",
                     $config['name'],
-                    json_encode($config['dist'])
+                    wp_json_encode($config['dist'])
                 ));
             }
             $package->setDistType($config['dist']['type']);

@@ -122,13 +122,13 @@ class ValidatingArrayLoader implements LoaderInterface
                 if (count($licenses) === 1 && !$licenseValidator->validate($licenses) && $licenseValidator->validate(trim($licenses[0]))) {
                     $this->warnings[] = sprintf(
                         'License %s must not contain extra spaces, make sure to trim it.',
-                        json_encode($this->config['license'])
+                        wp_json_encode($this->config['license'])
                     );
                 } elseif (array() !== $licenses && !$licenseValidator->validate($licenses)) {
                     $this->warnings[] = sprintf(
                         'License %s is not a valid SPDX license identifier, see https://spdx.org/licenses/ if you use an open license.' . PHP_EOL .
                         'If the software is closed-source, you may use "proprietary" as license.',
-                        json_encode($this->config['license'])
+                        wp_json_encode($this->config['license'])
                     );
                 }
             }

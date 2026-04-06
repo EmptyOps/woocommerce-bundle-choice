@@ -1524,7 +1524,7 @@ wbc()->theme->load('css','product');
 			}
 			.image-variable-item.selected,.image-variable-item:hover{	        			
 				box-shadow: none !important;        			
-				border-bottom: 2px <?php _e($border_hover_color) ?> solid !important;
+				border-bottom: 2px <?php echo esc_attr($border_hover_color) ?> solid !important;
 			}
 			.image_text-variable-item{
 				border: none !important;
@@ -1631,40 +1631,40 @@ wbc()->theme->load('css','product');
 			}
 			.variable-items-wrapper .variable-item{        			
 				/*display: inline-table;*/
-				height: <?php _e($dimention); ?>;
-				width: <?php _e($dimention); ?>;
+				height: <?php echo esc_attr($dimention); ?>;
+				width: <?php echo esc_attr($dimention); ?>;
 				min-width: 35px;						
 				text-align: center;						
-				line-height: <?php _e($dimention); ?>;	        			
+				line-height: <?php echo esc_attr($dimention); ?>;	        			
 				cursor: pointer;
 				margin: 0.25rem;
 				text-align: center;
-				border: <?php _e($border_width) ?> solid <?php _e($border_color) ?>;
-				border-radius: <?php _e($border_radius); ?>;
+				border: <?php echo esc_attr($border_width) ?> solid <?php echo esc_attr($border_color) ?>;
+				border-radius: <?php echo esc_attr($border_radius); ?>;
 				overflow: hidden;
 			}	
 			.variable-items-wrapper .variable-item:hover,.variable-items-wrapper .selected{
-				box-shadow:0px 0px <?php _e($border_hover_width) ?> <?php _e($border_hover_color) ?>;        			
-				border: 1px <?php _e($border_hover_color) ?> solid;
+				box-shadow:0px 0px <?php echo esc_attr($border_hover_width) ?> <?php echo esc_attr($border_hover_color) ?>;        			
+				border: 1px <?php echo esc_attr($border_hover_color) ?> solid;
 			}
 			ul.variable-items-wrapper{
 				margin: 0px;
 			}
 			.variable-item-color-fill,.variable-item-span{        			
-				height: <?php _e($dimention); ?>;
+				height: <?php echo esc_attr($dimention); ?>;
 				width: 100%;
-				line-height: <?php _e($dimention); ?>;
+				line-height: <?php echo esc_attr($dimention); ?>;
 			}
 			.select2,.select3-selection{
 				display: none !important;
 			}
 			.ui .button-variable-item{
-				background-color: <?php _e($bg_color); ?>;
-				color: <?php _e($font_color); ?>;
+				background-color: <?php echo esc_attr($bg_color); ?>;
+				color: <?php echo esc_attr($font_color); ?>;
 			}
 			.ui .button-variable-item:hover{
-				background-color: <?php _e($bg_hover_color); ?>;
-				color: <?php _e($font_hover_color); ?>;	
+				background-color: <?php echo esc_attr($bg_hover_color); ?>;
+				color: <?php echo esc_attr($font_hover_color); ?>;	
 			}
 			
 		/*	added 11-09-2023 @a*/

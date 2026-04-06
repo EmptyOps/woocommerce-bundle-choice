@@ -234,7 +234,7 @@ class VersionGuesser
         // ignore feature branches if they have no branch-alias or self.version is used
         // and find the branch they came from to use as a version instead
         if ((isset($packageConfig['extra']['branch-alias']) && !isset($packageConfig['extra']['branch-alias'][$version]))
-            || strpos(json_encode($packageConfig), '"self.version"')
+            || strpos(wp_json_encode($packageConfig), '"self.version"')
         ) {
             $branch = preg_replace('{^dev-}', '', $version);
             $length = PHP_INT_MAX;

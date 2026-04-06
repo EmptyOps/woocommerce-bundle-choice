@@ -52,7 +52,7 @@ class PackageRepository extends ArrayRepository
             try {
                 $package = $loader->load($package);
             } catch (\Exception $e) {
-                throw new InvalidRepositoryException('A repository of type "package" contains an invalid package definition: '.$e->getMessage()."\n\nInvalid package definition:\n".json_encode($package));
+                throw new InvalidRepositoryException('A repository of type "package" contains an invalid package definition: '.$e->getMessage()."\n\nInvalid package definition:\n".wp_json_encode($package));
             }
 
             $this->addPackage($package);

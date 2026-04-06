@@ -173,7 +173,7 @@ class GitHubDriver extends VcsDriver
             }
 
             if ($this->shouldCache($identifier)) {
-                $this->cache->write($identifier, json_encode($composer));
+                $this->cache->write($identifier, wp_json_encode($composer));
             }
 
             $this->infoCache[$identifier] = $composer;

@@ -505,7 +505,7 @@ class Eowbc_Filters extends Eowbc_Model {
 		$data = unserialize(wbc()->options->get_option_group('filters_'.$key,"a:0:{}"));
 
 		if(!empty($data[wbc()->sanitize->post('id')])){
-			$res['msg'] = json_encode($data[wbc()->sanitize->post('id')]);
+			$res['msg'] = wp_json_encode($data[wbc()->sanitize->post('id')]);
 		}
 		/*
 		if(!empty($first[wbc()->sanitize->post('id')])){
