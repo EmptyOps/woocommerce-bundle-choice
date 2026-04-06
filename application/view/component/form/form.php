@@ -1,5 +1,5 @@
 <?php 
-
+defined( 'ABSPATH' ) || exit;
 /*
 *	template to generate form as output by taking $form_html as containing parameters.
 */

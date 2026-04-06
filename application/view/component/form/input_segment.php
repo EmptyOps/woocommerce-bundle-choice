@@ -1,5 +1,5 @@
 <?php
-
+defined( 'ABSPATH' ) || exit;
 // Template to show the segment at very begining of the ui form container
 
 

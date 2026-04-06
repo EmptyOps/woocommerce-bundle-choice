@@ -1,4 +1,5 @@
 <?php
+defined( 'ABSPATH' ) || exit;
 /*
 *	Generate tabs based on the parameters
 *	$tab_data @array : contains details to draw tabs.

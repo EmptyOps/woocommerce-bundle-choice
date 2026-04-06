@@ -1,5 +1,5 @@
 <?php
-
+defined( 'ABSPATH' ) || exit;
 /*
 *	Template for the accordian bein sysntex.
 *	Created by mahesh@emptyops.com

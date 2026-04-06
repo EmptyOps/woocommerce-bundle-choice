@@ -1,4 +1,5 @@
 <?php
+defined( 'ABSPATH' ) || exit;
 /**
 *	Ajax handler to handle ajax save request for eowbc_mapping form.	
 *

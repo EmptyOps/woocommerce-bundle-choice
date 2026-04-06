@@ -1,5 +1,5 @@
 <?php 
-
+defined( 'ABSPATH' ) || exit;
 /*
 * Tab item
 *

@@ -1,4 +1,5 @@
 <?php
+defined( 'ABSPATH' ) || exit;
 /**
 *	A devider in form works as seperator in form.
 */

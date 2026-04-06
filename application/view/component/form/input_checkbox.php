@@ -1,5 +1,5 @@
 <?php
-
+defined( 'ABSPATH' ) || exit;
 /**
 *	template to show checkbox as input method.
 *   for displaying in table etc. layout use where param like where => "in_table" 
