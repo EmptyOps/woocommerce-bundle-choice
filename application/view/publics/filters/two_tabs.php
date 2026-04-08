@@ -1,4 +1,5 @@
 <?php
+defined( 'ABSPATH' ) || exit;
 
 $is_default_tab_active = true;
 foreach ($filter_sets_data as $key => $tab_data ){

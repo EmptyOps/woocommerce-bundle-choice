@@ -1,4 +1,5 @@
-<?php		
+<?php
+defined( 'ABSPATH' ) || exit;
 	if(isset($_GET['EO_WBC_CODE']) && wbc()->sanitize->get('EO_WBC_CODE')) {                   
 		$color=explode('/',base64_decode(wbc()->sanitize->get('EO_WBC_CODE')));
 

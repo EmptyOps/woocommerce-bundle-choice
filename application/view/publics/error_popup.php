@@ -1,6 +1,7 @@
 <?php
+defined( 'ABSPATH' ) || exit;
 /**
- *	Template to show error popup when anything fails to render or something of that sort 
+ *	Template to show error popup when anything fails to render or something of that sort
  */
 
 // Load assets first to avoid zaping effect. 

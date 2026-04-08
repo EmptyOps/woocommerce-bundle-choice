@@ -1,4 +1,5 @@
 <?php
+defined( 'ABSPATH' ) || exit;
 $selected_class = ( sanitize_title( $args[ 'selected' ] ) == $term->slug ) ? 'selected' : '';
 $image_url = get_term_meta( $term->term_id, 'wbc_attachment', true );						
 

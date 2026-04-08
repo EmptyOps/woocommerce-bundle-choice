@@ -1,4 +1,5 @@
-<?php 
+<?php
+defined( 'ABSPATH' ) || exit;
 	//Semantic UI : fields
 ?>
 

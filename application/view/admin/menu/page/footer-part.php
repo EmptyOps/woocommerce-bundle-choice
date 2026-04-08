@@ -1,4 +1,5 @@
 <?php
+defined( 'ABSPATH' ) || exit;
 /*
 *	Displays the footer part of admin's page.
 */

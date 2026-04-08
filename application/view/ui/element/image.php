@@ -1,5 +1,6 @@
 <?php
-	
+defined( 'ABSPATH' ) || exit;
+
 	if(!empty($src) and is_array($src) ){
 		if(!empty($src['function'])){
 			switch ($src['function']) {

@@ -1,4 +1,6 @@
-<?php $ride_id = uniqid() ?>
+<?php
+defined( 'ABSPATH' ) || exit;
+$ride_id = uniqid() ?>
 <div <?php echo (!empty($id) ? "id='" . esc_attr($id) . "'" : ""); ?>
      class="carousel slide <?php echo (!empty($class) ? esc_attr(implode(' ', $class)) : ""); ?>"
      data-ride="<?php echo esc_attr($ride_id); ?>"

@@ -1,4 +1,5 @@
 <?php
+defined( 'ABSPATH' ) || exit;
 /*
 * Template to show specification view as Template series default.
 */

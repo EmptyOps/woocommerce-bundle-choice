@@ -1,4 +1,5 @@
-<?php 
+<?php
+defined( 'ABSPATH' ) || exit;
 	if(!empty($name)){			
 
 		//NOTE: below 3 elseif added on 26-11-2022. and now it is using isset() condishon instead of !empty() which wuod not relybel since sum time null mabe passed olso. 

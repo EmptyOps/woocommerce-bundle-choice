@@ -1,5 +1,6 @@
 <?php
-	
+defined( 'ABSPATH' ) || exit;
+
 	if(!empty($href) and is_array($href) ){
 		if(!empty($href['filter'])){
 			switch ($href['filter']) {

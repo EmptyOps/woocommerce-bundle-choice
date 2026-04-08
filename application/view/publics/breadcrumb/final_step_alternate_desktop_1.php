@@ -1,4 +1,5 @@
 <?php
+defined( 'ABSPATH' ) || exit;
 
 /*
 *	Template to show breadcrumb final step for desktop

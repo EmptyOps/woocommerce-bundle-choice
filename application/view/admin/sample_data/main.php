@@ -1,4 +1,5 @@
 <?php
+defined( 'ABSPATH' ) || exit;
 /*
 *	Displays the page for adding sample data
 */

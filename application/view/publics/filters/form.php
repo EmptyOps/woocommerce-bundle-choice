@@ -1,7 +1,8 @@
 <?php
+defined( 'ABSPATH' ) || exit;
 
 /*
-*	Template to show form for filters 
+*	Template to show form for filters
 */
 
 /*jQuery.fn.eo_wbc_filter_change(false,'#sc_eo_wbc_filter');*/

@@ -1,4 +1,5 @@
 <?php
+defined( 'ABSPATH' ) || exit;
 if(isset($_GET['FIRST']) and isset($_GET['SECOND'])) {
     $html='<!-- Widget start Wordpress plugin - BUNDLOICE (formerly Woo Choice Plugin) --><div class="eo-wbc-container container spui-semantic-breadcrumb" style="direction: ltr;">';
         //$html.='<div class="ui ordered steps">';

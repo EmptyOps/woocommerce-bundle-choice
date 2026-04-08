@@ -1,4 +1,5 @@
-<?php 
+<?php
+defined( 'ABSPATH' ) || exit;
 
 if(!empty($path) and file_exists($path.'.php')) {
 	ob_start();

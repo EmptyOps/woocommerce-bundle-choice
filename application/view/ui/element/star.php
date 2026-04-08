@@ -1,4 +1,6 @@
-<?php if(isset($rate)): ?>
+<?php
+defined( 'ABSPATH' ) || exit;
+if(isset($rate)): ?>
 
 <ul <?php echo (!empty($style) ? 'style="' . esc_attr($style) . '"' : ''); ?>>
 	<?php for ($i = 1; $i <= 5; $i++): ?>

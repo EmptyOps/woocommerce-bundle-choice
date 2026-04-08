@@ -1,4 +1,5 @@
-<?php 
+<?php
+defined( 'ABSPATH' ) || exit;
 	if(!empty($name)){
 		if(empty($param)){
 			echo do_shortcode("[$name]");
