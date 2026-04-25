@@ -173,10 +173,10 @@ class WBC_WC {
         if(class_exists('SitePress')) {
             global $wpdb;
             if($taxonomy==='product_cat'){
-                $query = "SELECT ".$wpdb->term_taxonomy.".term_id FROM ".$wpdb->term_taxonomy." WHERE ".$wpdb->term_taxonomy.".parent=".$parent_id;
+                // $query = "SELECT ".$wpdb->term_taxonomy.".term_id FROM ".$wpdb->term_taxonomy." WHERE ".$wpdb->term_taxonomy.".parent=".$parent_id;
                 $query = $wpdb->prepare("SELECT term_id FROM {$wpdb->term_taxonomy} WHERE parent = %d",$parent_id);
             } else {
-                $query = "SELECT ".$wpdb->term_taxonomy.".term_id FROM ".$wpdb->term_taxonomy." WHERE ".$wpdb->term_taxonomy.".taxonomy='".$taxonomy."'";
+                // $query = "SELECT ".$wpdb->term_taxonomy.".term_id FROM ".$wpdb->term_taxonomy." WHERE ".$wpdb->term_taxonomy.".taxonomy='".$taxonomy."'";
                 $query = $wpdb->prepare("SELECT term_id FROM {$wpdb->term_taxonomy} WHERE taxonomy = %s",$taxonomy);
             }
 

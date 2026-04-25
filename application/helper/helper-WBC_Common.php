@@ -1,7 +1,7 @@
 <?php 
 defined( 'ABSPATH' ) || exit;
 
-class WBC_Common {
+class SP_WBC_Common {
 
 	private static $_instance = null;
 

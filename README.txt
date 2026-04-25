@@ -522,7 +522,18 @@ Data Sent: No personal user data is sent. The plugin only loads a JavaScript fil
 
 This plugin includes third-party libraries.
 
-== Fomantic UI ==
+== Fomantic UI CSS ==
+
+Minified file:
+asset/css/fomantic/semantic.min.css
+
+Readable source file:
+asset/css/fomantic/semantic.css
+
+Original source:
+https://github.com/fomantic/Fomantic-UI
+
+== Fomantic UI JS ==
 
 Minified file:
 asset/js/fomantic/semantic.min.js
@@ -532,17 +543,6 @@ asset/js/fomantic/semantic.js
 
 Original source:
 https://github.com/fomantic/Fomantic-UI
-
-== Ion.RangeSlider ==
-
-Minified file:
-asset/js/rangeslider/ion.rangeSlider.min.js
-
-Readable source file:
-asset/js/rangeslider/ion.rangeSlider.js
-
-Original source:
-https://github.com/IonDen/ion.rangeSlider
 
 == Ion.RangeSlider CSS ==
 
@@ -555,16 +555,19 @@ asset/css/rangeslider/ion.rangeSlider.css
 Original source:
 https://github.com/IonDen/ion.rangeSlider
 
-
-== Fomantic UI CSS ==
+== Ion.RangeSlider JS ==
 
 Minified file:
-asset/css/fomantic/semantic.min.css
+asset/js/rangeslider/ion.rangeSlider.min.js
 
 Readable source file:
-asset/css/fomantic/semantic.css
+asset/js/rangeslider/ion.rangeSlider.js
 
 Original source:
-https://github.com/fomantic/Fomantic-UI
+https://github.com/IonDen/ion.rangeSlider
+
+
+
+
 
 
