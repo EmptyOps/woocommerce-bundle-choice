@@ -2295,8 +2295,8 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 
 				// purple theme mate aa permenent alag if se tenu slider alag ave se atle. So aa permanant if condition se and koi temp. temparary if nathi.
 				if(window.document.splugins.common.current_theme_key != 'themes___purple_theme') {
-					// jQuery(e).slider(_params);
-					jQuery(e).semanticSlider(_params);
+					jQuery(e).slider(_params);
+					// jQuery(e).semanticSlider(_params);
 				}
 			}else{
 				
