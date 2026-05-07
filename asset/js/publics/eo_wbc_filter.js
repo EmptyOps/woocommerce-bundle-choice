@@ -2596,7 +2596,10 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 			
 		jQuery('[name="paged"]').val('1');
 		// <?php if(empty(wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','filter_setting_btnfilter_now'))): ?>
-		if(_this.sub_configs.filter_setting_btnfilter_now != 'filter_setting_btnfilter_now'){
+		// if(_this.sub_configs.filter_setting_btnfilter_now != 'filter_setting_btnfilter_now'){
+
+		// milestone 256 purple woo bundle choice + woo bundle choice integration filter and breadcrumb -- utt
+		if(!window.document.splugins.common.is_mobile){
 
 		console.log("filter input_type_icon_click eo_wbc_filter_change_wrapper call");
 		//////// 27-05-2022 - @drashti /////////
@@ -2672,7 +2675,10 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		} }	
 
 		// <?php if(empty(wbc()->options->get_option('filters_'.$this->filter_prefix.'filter_setting','filter_setting_btnfilter_now'))): ?>
-		if(_this.sub_configs.filter_setting_btnfilter_now != 'filter_setting_btnfilter_now'){
+		// if(_this.sub_configs.filter_setting_btnfilter_now != 'filter_setting_btnfilter_now'){
+
+		// milestone 256 purple woo bundle choice + woo bundle choice integration filter and breadcrumb -- utt
+		if(!window.document.splugins.common.is_mobile){
 
 			//////// 27-05-2022 - @drashti /////////
 			// --add to be confirmed--
