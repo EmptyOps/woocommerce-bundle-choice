@@ -182,7 +182,7 @@ class Term_Meta {
 			<?php if($is_edit): ?>
 				<th scope="row" valign="top">
 			<?php endif; ?>
-				<label><?php ecs_html_e('Image', 'woo-bundle-choice'); ?></label>
+				<label><?php esc_html_e('Image', 'woo-bundle-choice'); ?></label>
 			<?php if($is_edit): ?>
 					</th>
 					<td>
@@ -356,7 +356,7 @@ class Term_Meta {
 		<div class="form-field" style="overflow:visible;">
 			
 			<div id="swatch-photo">
-				<label><?php esp_html_e('Thumb Image', 'woo-bundle-choice'); ?></label>
+				<label><?php esc_html_e('Thumb Image', 'woo-bundle-choice'); ?></label>
 				
 				<div>
 					<input type="hidden" name="wbc_attachment_thumb" id="wbc_attachment_thumb">
@@ -365,7 +365,7 @@ class Term_Meta {
 
 				<div>					
 					<button type="submit" class="wbc_attachment_thumb_button button">
-						<?php esp_html__e('Add/Edit image', 'woo-bundle-choice'); ?>						
+						<?php esc_html_e('Add/Edit image', 'woo-bundle-choice'); ?>						
 					</button>					
 				</div>
 				<?php 
