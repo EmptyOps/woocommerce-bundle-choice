@@ -2,9 +2,9 @@
 Contributors: emptyopssphere
 Tags: woocommerce,product bundle,product bundles,woocommerce product bundles,bundles,bundle,woo,woocommerce product bundle,design your own,buy in pair
 Requires at least: 3.5
-Tested up to: 6.8
+Tested up to: 7.0
 Requires PHP: 5.6
-Stable tag: 1.0.26
+Stable tag: 1.0.27
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 Contributors: ajayemptyops,bhaveshdesai,shraddharaiyani,CmdrMahesh,hi0001234d
@@ -198,7 +198,7 @@ These are only some of many extensions. You can see the entire list of [Extensio
  
 = Compatibility with other plugins/Officially tested plugins =
  
-We have tested BUNDLOICE (formerly Woo Choice Plugin) with WordPress 3.5 to 6.8 and WooCommerce 2.0 to 10.4.3 and our plugin is technically compatible with all the other plugins.
+We have tested BUNDLOICE (formerly Woo Choice Plugin) with WordPress 3.5 to 7.0 and WooCommerce 2.0 to 10.8.1 and our plugin is technically compatible with all the other plugins.
  
 = LIVE DEMOS = 
 Now that you know how this plugin works, is there any reason to not use it? Do you want to see the live demo?
@@ -310,6 +310,9 @@ Yes, it is.
 8. Once the home page position for button is configured, the home page would look something like this.
 
 == Changelog ==
+= 1.0.27 (June 9, 2026) =
+  **Fix & Maintenance:** Addressed reported issues, optimized code performance, and enhanced overall system stability.
+  **Review-ready:** Changes are finalized and ready for submission; no new updates added.
 = 1.0.26 (February 9, 2026) =
   **Fix & Maintenance:** Resolved reported issues and improved overall code stability.
   **Review-ready:** Changes are finalized and ready for submission; no new updates added.
