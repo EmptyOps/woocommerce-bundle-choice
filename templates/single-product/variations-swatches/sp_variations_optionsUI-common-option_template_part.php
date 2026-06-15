@@ -89,11 +89,11 @@ if(!in_array($variable_item_data['options_loop_type'][$term->slug],array('dropdo
                             'spui-wbc-swatches-variable-item-'.$variable_item_data['options_loop_type'][$term->slug],
                             'spui-wbc-swatches-variable-item-header',
                             'spui-wbc-swatches-variable-item-'.$variable_item_data['options_loop_type'][$term->slug].'-header',
-                            'variable-item-'.wbc()->common->current_theme_key(),
-                            'variable-item-'.esc_attr( $variable_item_data['options_loop_type'][$term->slug] ).'-'.wbc()->common->current_theme_key(),
+                            'variable-item-'.wbc()->common->sp_wbc_current_theme_key(),
+                            'variable-item-'.esc_attr( $variable_item_data['options_loop_type'][$term->slug] ).'-'.wbc()->common->sp_wbc_current_theme_key(),
                         ),
 
-        // 'ui image middle aligned variable-item '.esc_attr( $variable_item_data['options_loop_type'][$term->slug] ).'-variable-item '.esc_attr( $variable_item_data['options_loop_type'][$term->slug] ).'-variable-item-'.esc_attr( $term->slug ).' '.esc_attr( $variable_item_data['options_loop_selected_class'][$term->slug]).' spui-wbc-swatches-variable-item-header spui-wbc-swatches-variable-item-'.$variable_item_data['options_loop_type'][$term->slug].'-header variable-item-'.wbc()->common->current_theme_key(). ' variable-item-'.esc_attr( $variable_item_data['options_loop_type'][$term->slug] ).'-'.wbc()->common->current_theme_key(),
+        // 'ui image middle aligned variable-item '.esc_attr( $variable_item_data['options_loop_type'][$term->slug] ).'-variable-item '.esc_attr( $variable_item_data['options_loop_type'][$term->slug] ).'-variable-item-'.esc_attr( $term->slug ).' '.esc_attr( $variable_item_data['options_loop_selected_class'][$term->slug]).' spui-wbc-swatches-variable-item-header spui-wbc-swatches-variable-item-'.$variable_item_data['options_loop_type'][$term->slug].'-header variable-item-'.wbc()->common->sp_wbc_current_theme_key(). ' variable-item-'.esc_attr( $variable_item_data['options_loop_type'][$term->slug] ).'-'.wbc()->common->sp_wbc_current_theme_key(),
         'attr' => array_merge ( array( 'title' => esc_attr( $term->name ), 'data-title' => esc_attr( $term->name ), 'data-value' => esc_attr( $term->slug ), 'role' => 'button', 'tabindex' => '0'/*, 'data-id' => $id*/ ) ),
         'child' => $template_inner
     );

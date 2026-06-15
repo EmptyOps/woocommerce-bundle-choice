@@ -10,7 +10,7 @@
  * Plugin Name: BUNDLOICE (formerly Woo Choice Plugin) | Ring Builder | Loose Diamond Search Pages - Variation Swatches - Pair Maker | Guidance Tool
  * Plugin URI: https://wordpress.org/plugins/woo-bundle-choice/
  * Description: Product bundling as ring builder for jewelry, pair maker for clothing and guidance tool for home decor, cosmetics etc. Product bundling as per user's choice.
- * Version: 1.0.26
+ * Version: 1.0.27
  * Author: Sphere Plugins
  * Author URI: https://sphereplugins.com/
  * License: GPLv3+
@@ -93,7 +93,7 @@ if(!class_exists('Woo_Bundle_Choice') ) {
 			*	where the tool_name should only be added to the list.
 			*/
 
-			$helpers = array('options'=>'WBC_Options','lang'=>'WBC_language','wc'=>'WBC_WC','common'=>'WBC_Common','session'=>'WBC_Session','wp'=>'WBC_WP','config'=>'WBC_Config','theme'=>'WBC_Theme','file'=>'WBC_File', 'currency'=>'WBC_Currency');
+			$helpers = array('options'=>'SP_WBC_Options','lang'=>'SP_WBC_language','wc'=>'SP_WBC_WC','common'=>'SP_WBC_Common','session'=>'SP_WBC_Session','wp'=>'SP_WBC_WP','config'=>'SP_WBC_Config','theme'=>'SP_WBC_Theme','file'=>'SP_WBC_File', 'currency'=>'SP_WBC_Currency');
 
 			if(!empty($helpers)){
 
@@ -113,7 +113,7 @@ if(!class_exists('Woo_Bundle_Choice') ) {
 			*/
 
 
-			$library = array('load'=>'WBC_Loader','migration'=>'WBC_Migration','sanitize'=>'WBC_Sanitize','validate'=>'WBC_Validate','rest'=>'WBC_REST');
+			$library = array('load'=>'SP_WBC_Loader','migration'=>'SP_WBC_Migration','sanitize'=>'SP_WBC_Sanitize','validate'=>'SP_WBC_Validate','rest'=>'SP_WBC_REST');
 
 			if(!empty($library)){
 
@@ -179,8 +179,8 @@ if(!class_exists('Woo_Bundle_Choice') ) {
 			//add action 
 			if( !empty(wbc()->sanitize->get('thadc')) && wbc()->sanitize->get('thadc') == 1 ) {
 				add_action('sp_wbc_theme_adaption_check',function(){
-					wbc()->load->model('utilities/eowbc_theme_adaption_check');
-					eo\wbc\model\utilities\Eowbc_Theme_Adaption_Check::instance()->check( wbc()->config->required_hooks_n_filters_etc() );
+					wbc()->load->model('utilities/sp_wbc_theme_adaption_check');
+					eo\wbc\model\utilities\SP_WBC_Theme_Adaption_Check::instance()->check( wbc()->config->required_hooks_n_filters_etc() );
 				});
 			}
 			
@@ -194,7 +194,7 @@ if(!class_exists('Woo_Bundle_Choice') ) {
 
 			do_action( 'before_eowbc_load' );
 			
-			\eo\wbc\controllers\admin\Customizer::instance()->run();
+			\eo\wbc\controllers\admin\sp_wbc_Customizer::instance()->run();
 			$bootstrap = eo\wbc\WooCommerce_Bundle_Choice_Bootstrap::instance()->run();
 
 			// //TODO temp. hiren added on around 23-04-2020, to manually test activate class
