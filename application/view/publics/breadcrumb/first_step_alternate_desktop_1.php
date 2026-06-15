@@ -8,7 +8,7 @@ defined( 'ABSPATH' ) || exit;
 ?>
 
 
-<div class="onclick_redirect step <?php echo ($step==$order)?'active ':' '; ?>" data-begin="<?php echo esc_url(get_term_link(wbc()->wc->get_term_by('slug', $first_slug, 'product_cat')->term_id,'product_cat').'EO_WBC=1&BEGIN='.$first_slug.'&STEP=1'); ?>" <?php _e((!empty(\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$clickable_breadcrumb) and !empty(\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$first_url))?'data-clickable_breadcrumb="'.esc_url(\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$first_url).'"':''); ?>>  
+<div class="onclick_redirect step <?php echo ($step==$order)?'active ':' '; ?>" data-begin="<?php echo esc_url(get_term_link(wbc()->wc->get_term_by('slug', $first_slug, 'product_cat')->term_id,'product_cat').'EO_WBC=1&BEGIN='.$first_slug.'&STEP=1'); ?>" <?php _e((!empty(\eo\wbc\model\publics\component\SP_WBC_Breadcrumb::$clickable_breadcrumb) and !empty(\eo\wbc\model\publics\component\SP_WBC_Breadcrumb::$first_url))?'data-clickable_breadcrumb="'.esc_url(\eo\wbc\model\publics\component\SP_WBC_Breadcrumb::$first_url).'"':''); ?>>  
     <div class="ui equal width grid" style="width: 100%;margin-top: -1em !important;" >
 
         <div class="column eowbc_breadcrumb_font"><?php esc_html_e($order,'woo-bundle-choice'); ?></div>
@@ -19,14 +19,14 @@ defined( 'ABSPATH' ) || exit;
                 <div>&nbsp;</div>
             <?php else:?>
                 <?php 
-                    $view_url = !empty(wbc()->sanitize->get('FIRST')) ? eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_breadcrumb_view_url(wbc()->sanitize->get('FIRST'),$order):'#';
-                    $remove_url = !empty(wbc()->sanitize->get('FIRST'))?eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_breadcrumb_change_url($order,wbc()->sanitize->get('FIRST')):'#';                            
+                    $view_url = !empty(wbc()->sanitize->get('FIRST')) ? eo\wbc\model\publics\component\SP_WBC_Breadcrumb::eo_wbc_breadcrumb_view_url(wbc()->sanitize->get('FIRST'),$order):'#';
+                    $remove_url = !empty(wbc()->sanitize->get('FIRST'))?eo\wbc\model\publics\component\SP_WBC_Breadcrumb::eo_wbc_breadcrumb_change_url($order,wbc()->sanitize->get('FIRST')):'#';                            
                     if(empty($remove_url) or $remove_url=='#'){
-                        $remove_url = !empty(wbc()->sanitize->get('FIRST'))?eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_breadcrumb_change_url($order,sanitize_text_field($first)):'#';
+                        $remove_url = !empty(wbc()->sanitize->get('FIRST'))?eo\wbc\model\publics\component\SP_WBC_Breadcrumb::eo_wbc_breadcrumb_change_url($order,sanitize_text_field($first)):'#';
                     }                            
                 if(empty($view_url) || $view_url=='#'){
                     ?>
-                    <div class="description eowbc_breadcrumb_font"><?php esc_html(spext_lang("Choose a", 'woo-bundle-choice')); ?></div>
+                    <div class="description eowbc_breadcrumb_font"><?php esc_html(sp_wbc_ext_lang("Choose a", 'woo-bundle-choice')); ?></div>
                     <div class="title eowbc_breadcrumb_font"><?php echo esc_html($first_name); ?></div>
                     <div>&nbsp;</div>
                     <?php
@@ -34,7 +34,7 @@ defined( 'ABSPATH' ) || exit;
                     ?>
                     <div class="description eowbc_breadcrumb_font"><?php echo esc_html($first_name); ?></div>
                     <div><?php /*_e(get_woocommerce_currency().wc_price($first->get_price()));*/ ?><?php esc_html_e(wc_price(apply_filters('eowbc_breadcrumb_first_price',$first->get_price(),$first))); ?></div>
-                    <div><u><a href="<?php echo esc_url($view_url); ?>"> <?php esc_html(spext_lang("View", 'woo-bundle-choice')); ?></a></u>&nbsp;|&nbsp;<u><a href="<?php echo esc_url($remove_url); ?>" data-remove-url="<?php echo esc_url($remove_url); ?>"><?php esc_html_e(wbc()->options->get_option('appearance_breadcrumb','appearance_breadcrumb_change_action_text','Change',true,true)); ?></a></u></div>
+                    <div><u><a href="<?php echo esc_url($view_url); ?>"> <?php esc_html(sp_wbc_ext_lang("View", 'woo-bundle-choice')); ?></a></u>&nbsp;|&nbsp;<u><a href="<?php echo esc_url($remove_url); ?>" data-remove-url="<?php echo esc_url($remove_url); ?>"><?php esc_html_e(wbc()->options->get_option('appearance_breadcrumb','appearance_breadcrumb_change_action_text','Change',true,true)); ?></a></u></div>
             <?php } endif; ?>                    
         </div>                
         <div class="column">

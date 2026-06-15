@@ -7,7 +7,7 @@ defined( 'ABSPATH' ) || exit;
 // ACTIVE_TODO most probeli now this file is not in use sinche the this leyer wos not applicebel in wbc and it is moved to the pro layers. so to mac sur that wbc leyers are net and do not contain any anneshory junk kode lat jast get rid of this here as sun as we get sanche. and lats do it as sun as posibul. -- to h
 $res = array( "type"=>"success", "msg"=>"" );
 
-function sp_validate_unique_email($fields,$key) {
+function sp_wbc_validate_unique_email($fields,$key) {
 	if(!empty($fields) and is_array($fields) and !empty($key)) {
 		$email_value = wbc()->sanitize->post($key);
 		foreach($fields as $field_key=>$field_value) {
@@ -80,7 +80,7 @@ if( !empty(wbc()->sanitize->post('_wpnonce')) ) {
 									}
 									break;
 								case 'unique':
-									if(!(\sp_validate_unique_email($_email_field_vars_,$field_key))) {
+									if(!(\sp_wbc_validate_unique_email($_email_field_vars_,$field_key))) {
 										$res["type"]="error";
 										$res["msg"]=$field_value['label'].' is not a unique email.';
 										wbc()->rest->response($res);	
@@ -141,7 +141,7 @@ if( !empty(wbc()->sanitize->post('_wpnonce')) ) {
 
 					wbc()->load->model('category-attribute');
 
-					$catat_model = \eo\wbc\model\Category_Attribute::instance();
+					$catat_model = \eo\wbc\model\SP_WBC_Category_Attribute::instance();
 					
 					foreach ($attribute as $attr) {
 						

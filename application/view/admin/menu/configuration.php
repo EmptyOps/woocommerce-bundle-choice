@@ -2,14 +2,14 @@
 defined( 'ABSPATH' ) || exit;
 $form = array();
 
-wbc()->load->model('admin/eowbc_configuration');
+wbc()->load->model('admin/sp_wbc_configuration');
 
-$form['id']='eowbc_configuration';
+$form['id']='sp_wbc_configuration';
 $form['title']='General';
 $form['method']='POST';
 $form['tabs'] = true;
 
-$form['data'] = \eo\wbc\model\admin\Eowbc_Configuration::instance()->get( \eo\wbc\controllers\admin\menu\page\Configuration::get_form_definition() );
+$form['data'] = \eo\wbc\model\admin\SP_WBC_Configuration::instance()->get( \eo\wbc\controllers\admin\menu\page\Configuration::get_form_definition() );
 $form['attr']= array('data-is_per_tab_save="true"');
 
 

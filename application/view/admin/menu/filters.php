@@ -2,16 +2,16 @@
 defined( 'ABSPATH' ) || exit;
 
 wbc()->load->model('admin\form-builder');
-wbc()->load->model('admin/eowbc_filters');
+wbc()->load->model('admin/sp_wbc_filters');
 
 $form = array();
 
-$form['id']='eowbc_filters';
+$form['id']='sp_wbc_filters';
 $form['title']='Filter Settings';
 $form['method']='POST';
 $form['tabs'] = true;
 
-$form['data'] = eo\wbc\model\admin\Eowbc_Filters::instance()->get( eo\wbc\controllers\admin\menu\page\Filters::get_form_definition() );
+$form['data'] = eo\wbc\model\admin\SP_WBC_Filters::instance()->get( eo\wbc\controllers\admin\menu\page\Filters::get_form_definition() );
 $form['attr']= array('data-is_per_tab_save="true"');
 
 // wbc()->load->model('admin\form-builder');
@@ -20,8 +20,8 @@ wbc()->load->asset('js','admin/filter');
 
 $_childs = array();
 
-$categories = \eo\wbc\model\Category_Attribute::instance()->get_category();
-$attributes = \eo\wbc\model\Category_Attribute::instance()->get_attributs();
+$categories = \eo\wbc\model\SP_WBC_Category_Attribute::instance()->get_category();
+$attributes = \eo\wbc\model\SP_WBC_Category_Attribute::instance()->get_attributs();
 
 if(!empty($categories) and is_array($categories)){
 	foreach ($categories as $id => $label) {
@@ -44,7 +44,7 @@ if(!empty($categories) and is_array($categories)){
 if(!empty($attributes) and is_array($attributes)){
 	foreach ($attributes as $slug => $value) {
 
-		$term = \eo\wbc\model\Category_Attribute::instance()->get_attribute($slug);
+		$term = \eo\wbc\model\SP_WBC_Category_Attribute::instance()->get_attribute($slug);
 		$term = wbc()->wc->eo_wbc_get_attribute($term->attribute_id);
 		
 		if(!empty($term) && !is_wp_error($term)) {			

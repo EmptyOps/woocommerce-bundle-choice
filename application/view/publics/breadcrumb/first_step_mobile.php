@@ -22,27 +22,27 @@ defined( 'ABSPATH' ) || exit;
 ?>
 
 
-<div class="step <?php echo esc_attr((($step==$order)?'active ':(($step>$order)?'completed ':(!empty(\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$clickable_breadcrumb)?'':'disabled') ))); ?> first_mobile" >
-    <div class="content eowbc_breadcrumb_font" <?php _e((!empty(\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$clickable_breadcrumb) and !empty(\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$first_url))?'data-clickable_breadcrumb="'.esc_url(\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$first_url).'"':''); ?>><?php echo esc_html(\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$first_name); ?></div>                          
+<div class="step <?php echo esc_attr((($step==$order)?'active ':(($step>$order)?'completed ':(!empty(\eo\wbc\model\publics\component\SP_WBC_Breadcrumb::$clickable_breadcrumb)?'':'disabled') ))); ?> first_mobile" >
+    <div class="content eowbc_breadcrumb_font" <?php _e((!empty(\eo\wbc\model\publics\component\SP_WBC_Breadcrumb::$clickable_breadcrumb) and !empty(\eo\wbc\model\publics\component\SP_WBC_Breadcrumb::$first_url))?'data-clickable_breadcrumb="'.esc_url(\eo\wbc\model\publics\component\SP_WBC_Breadcrumb::$first_url).'"':''); ?>><?php echo esc_html(\eo\wbc\model\publics\component\SP_WBC_Breadcrumb::$first_name); ?></div>                          
     <div class="ui flowing popup bottom right transition hidden first_mobile" style="width:80%;">
         <div class="ui grid">
             <div class="sixe wide column eowbc_breadcrumb_font" style="width: 80px;height: auto;margin: auto;">
-                <?php if(!empty(\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$first)) : ?>
-                <?php echo esc_html(\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$first->get_image()); ?>
+                <?php if(!empty(\eo\wbc\model\publics\component\SP_WBC_Breadcrumb::$first)) : ?>
+                <?php echo esc_html(\eo\wbc\model\publics\component\SP_WBC_Breadcrumb::$first->get_image()); ?>
                 <?php endif; ?>
             </div>
             <div class="ten wide column">
                 <div class="ui header eowbc_breadcrumb_font">
-                    <?php if(!empty(\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$first)) : ?>
-                    <?php esc_html_e(wc_price( apply_filters('eowbc_breadcrumb_first_price',\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$first->get_price(),\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$first))); ?>
+                    <?php if(!empty(\eo\wbc\model\publics\component\SP_WBC_Breadcrumb::$first)) : ?>
+                    <?php esc_html_e(wc_price( apply_filters('eowbc_breadcrumb_first_price',\eo\wbc\model\publics\component\SP_WBC_Breadcrumb::$first->get_price(),\eo\wbc\model\publics\component\SP_WBC_Breadcrumb::$first))); ?>
                     <?php endif; ?>
                 </div>
                 <br/>
                 <div class="ui equal width grid eowbc_breadcrumb_font">                            
-                    <u><a href="<?php echo !empty(wbc()->sanitize->get('FIRST')) ? esc_url(\eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_breadcrumb_view_url(wbc()->sanitize->get('FIRST'),$order)):'#'; ?>">View</a>
+                    <u><a href="<?php echo !empty(wbc()->sanitize->get('FIRST')) ? esc_url(\eo\wbc\model\publics\component\SP_WBC_Breadcrumb::eo_wbc_breadcrumb_view_url(wbc()->sanitize->get('FIRST'),$order)):'#'; ?>">View</a>
                     </u>
                     <u>
-                        <a href="<?php echo !empty(wbc()->sanitize->get('FIRST'))? esc_url(\eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_breadcrumb_change_url($order,wbc()->sanitize->get('FIRST'))):'#'; ?>"><?php esc_html_e(wbc()->options->get_option('appearance_breadcrumb','appearance_breadcrumb_change_action_text','Change',true,true)); ?></a>
+                        <a href="<?php echo !empty(wbc()->sanitize->get('FIRST'))? esc_url(\eo\wbc\model\publics\component\SP_WBC_Breadcrumb::eo_wbc_breadcrumb_change_url($order,wbc()->sanitize->get('FIRST'))):'#'; ?>"><?php esc_html_e(wbc()->options->get_option('appearance_breadcrumb','appearance_breadcrumb_change_action_text','Change',true,true)); ?></a>
                     </u>
                 </div>  
             </div>                

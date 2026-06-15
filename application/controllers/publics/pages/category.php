@@ -2,7 +2,7 @@
 namespace eo\wbc\controllers\publics\pages;
 defined( 'ABSPATH' ) || exit;
 
-use eo\wbc\model\publics\SP_Model_Feed;
+use eo\wbc\model\publics\SP_WBC_Model_Feed;
 
 class Category {
 
@@ -62,7 +62,7 @@ class Category {
                 wbc()->theme->load('css','category');
                 wbc()->theme->load('js','category');
                 
-                SP_Model_Feed::instance()->init();
+                SP_WBC_Model_Feed::instance()->init();
 
                 if(
                      // ($this->eo_wbc_get_category()==get_option('eo_wbc_first_slug') && get_option('eo_wbc_add_filter_first',FALSE) )
@@ -75,7 +75,7 @@ class Category {
                 ){
 
                     if($this->eo_wbc_get_category()==$this->first_category_slug && wbc()->options->get_option_group('filters_d_fconfig',FALSE)) {
-                        SP_Model_Feed::instance()->add_to_cart_text();
+                        SP_WBC_Model_Feed::instance()->add_to_cart_text();
                     }
                     if( wbc()->sanitize->get('is_test') == 1 ){
         
@@ -178,9 +178,9 @@ class Category {
             wbc_pr("add_filter_widget_f_eo_wbc_object");
         }
         if(empty($this->filter_showing_status)) {
-            wbc()->load->model('publics/component/eowbc_filter_widget');          
+            wbc()->load->model('publics/component/sp_wbc_filter_widget');          
             // if (class_exists('EO_WBC_Filter_Widget')) {
-                \eo\wbc\model\publics\component\EOWBC_Filter_Widget::instance()->init($this->is_shop_cat_filter,$this->filter_prefix,false);                               
+                \eo\wbc\model\publics\component\SP_WBC_Filter_Widget::instance()->init($this->is_shop_cat_filter,$this->filter_prefix,false);                               
             // }
             $this->filter_showing_status = true;
             do_action('eowbc_category_after_filter_rendered');
@@ -204,7 +204,7 @@ class Category {
                 var_dump($path);
             });*/
 
-            $filter_container_location_action = SP_Model_Feed::instance()->filter_container_location_action( $this->is_shop_cat_filter, $this->is_shortcode_filter );
+            $filter_container_location_action = SP_WBC_Model_Feed::instance()->filter_container_location_action( $this->is_shop_cat_filter, $this->is_shortcode_filter );
             if( wbc()->sanitize->get('is_test') == 1 ){
 
                 wbc_pr("Category eo_wbc_add_filters_f_eo_wbc_object");
@@ -215,7 +215,7 @@ class Category {
         /*}
             */
         if( $this->is_shortcode_filter ) {
-            $add_category = \eo\wbc\model\publics\component\EOWBC_Filter_Widget::instance();
+            $add_category = \eo\wbc\model\publics\component\SP_WBC_Filter_Widget::instance();
             $add_category->_category = $this->_category;
             $add_category->init(false,$this->filter_prefix,$this->is_shortcode_filter);
         }
@@ -229,16 +229,16 @@ class Category {
 
         //Add Breadcumb at top....      
        /* add_action( 'woocommerce_archive_description',function(){     
-            wbc()->load->model('publics/component/eowbc_breadcrumb');       
-            echo \eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_add_breadcrumb(wbc()->sanitize->get('STEP'),wbc()->sanitize->get('BEGIN')).'<br/><br/>';
+            wbc()->load->model('publics/component/sp_wbc_breadcrumb');       
+            echo \eo\wbc\model\publics\component\SP_WBC_Breadcrumb::eo_wbc_add_breadcrumb(wbc()->sanitize->get('STEP'),wbc()->sanitize->get('BEGIN')).'<br/><br/>';
         }, 120);*/
 
         add_action( 'woocommerce_before_shop_loop' /*'woocommerce_archive_description'*/ ,function(){     
             
             do_action('wbc_before_breadcrumb_widget_core');
 
-            wbc()->load->model('publics/component/eowbc_breadcrumb');       
-            echo \eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_add_breadcrumb(wbc()->sanitize->get('STEP'),wbc()->sanitize->get('BEGIN')).'<br/><br/>';
+            wbc()->load->model('publics/component/sp_wbc_breadcrumb');       
+            echo \eo\wbc\model\publics\component\SP_WBC_Breadcrumb::eo_wbc_add_breadcrumb(wbc()->sanitize->get('STEP'),wbc()->sanitize->get('BEGIN')).'<br/><br/>';
     
             do_action('wbc_after_breadcrumb_widget_core');
 
@@ -502,9 +502,9 @@ class Category {
                 );
 
                 // ACTIVE_TODO temp. below implementation need to be moved to its standard place in the particular controller when we upgrade th wbc.                 
-                $ui_definition = \eo\wbc\model\publics\SP_Model_Feed::instance()->ui_appearence_controls_definition(null,'oops_section',array());
-                $ui_definition = \eo\wbc\model\publics\SP_Model_Feed::instance()->ui_configuration_controls_definition($ui_definition,'oops_section',array());
-                $ui_definition = \eo\wbc\model\publics\SP_Model_Feed::instance()->ui_data_controls_definition($ui_definition, 'oops_section',array());
+                $ui_definition = \eo\wbc\model\publics\SP_WBC_Model_Feed::instance()->ui_appearence_controls_definition(null,'oops_section',array());
+                $ui_definition = \eo\wbc\model\publics\SP_WBC_Model_Feed::instance()->ui_configuration_controls_definition($ui_definition,'oops_section',array());
+                $ui_definition = \eo\wbc\model\publics\SP_WBC_Model_Feed::instance()->ui_data_controls_definition($ui_definition, 'oops_section',array());
 
                 \eo\wbc\model\SP_WBC_Ui_Builder::instance()->build($ui,'',true,null, $ui_definition);
 

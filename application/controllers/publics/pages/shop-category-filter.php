@@ -64,7 +64,7 @@ class Shop_Category_Filter extends Category {
             $table_object = new EO_WBC_E_TabView();
             $table_object->load_asset();
         }*/
-        add_filter('eowbc_filter_widget_filters',function($filter){
+        add_filter('sp_wbc_filter_widget_filters',function($filter){
             $_category = $this->eo_wbc_get_category();
             $_filter = array();
             if(!empty($filter) and is_array($filter)){

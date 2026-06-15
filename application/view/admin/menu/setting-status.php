@@ -24,14 +24,14 @@ if(isset($_GET) && isset($_GET['action']) && wbc()->sanitize->get('action')=='cl
 
 $form = array();
 
-wbc()->load->model('admin/eowbc_setting_status');
+wbc()->load->model('admin/sp_wbc_setting_status');
 wbc()->load->model('admin/form-builder');
 
 $form['id']='eowbc_setting_staus';
 $form['title']='Setting & Status';
 $form['method']='POST';
 $form['tabs'] = true;
-$form['data'] = \eo\wbc\model\admin\Eowbc_Setting_Status::instance()->get( eo\wbc\controllers\admin\menu\page\Setting_Status::get_form_definition());
+$form['data'] = \eo\wbc\model\admin\SP_WBC_Setting_Status::instance()->get( eo\wbc\controllers\admin\menu\page\Setting_Status::get_form_definition());
 $form['attr']= array('data-is_per_tab_save="true"');
 $form["active_tab_onload"] = !empty(wbc()->sanitize->get("atol")) ? wbc()->sanitize->get("atol") : "";
 

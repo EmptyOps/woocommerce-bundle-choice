@@ -205,8 +205,8 @@ class Service {
         });
 
 		$this->enque_asset();
-		wbc()->load->model('publics/component/eowbc_filter_widget');
-		$widget = \eo\wbc\model\publics\component\EOWBC_Filter_Widget::instance();
+		wbc()->load->model('publics/component/sp_wbc_filter_widget');
+		$widget = \eo\wbc\model\publics\component\SP_WBC_Filter_Widget::instance();
 		
         $features = array_filter(unserialize(wbc()->options->get_option('setting_status_setting_status_setting','features',serialize(array()))));
 

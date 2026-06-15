@@ -279,7 +279,7 @@ class SP_WBC_Variations extends SP_Variations {
 
 
 		// classes
-		$props['class']                         = 'img-item img-item-'.$props['extra_params_org']['type'].' img-item-'.$props['extra_params_org']['type'].'-'.wbc()->common->current_theme_key();
+		$props['class']                         = 'img-item img-item-'.$props['extra_params_org']['type'].' img-item-'.$props['extra_params_org']['type'].'-'.wbc()->common->sp_wbc_current_theme_key();
 
 		$props['class_wrapper']                 = '';
 
@@ -585,7 +585,7 @@ class SP_WBC_Variations extends SP_Variations {
 		ACTIVE_TODO we must do it by second revision right now we are not supporting the variation id or query paramas of _attributs and checklist and so on to load selected variation based dom and its images. but we must do by second revision or before that as soon as the seo reports and so on requires that or something else requires it.
 			NOTE: the variation_id support is now added in the get_default_variation_id function as that seem to be more suitabe layer for that. 
 		ACTIVE_TODO_OC_END*/
-		// $default_attributes = \eo\wbc\system\core\SP_Router::get_query_params_formated('attr', $input_method, 'key_value');
+		// $default_attributes = \eo\wbc\system\core\SP_WBC_Router::get_query_params_formated('attr', $input_method, 'key_value');
 
 		// if(!empty($default_attributes)) {
 			
@@ -698,7 +698,7 @@ class SP_WBC_Variations extends SP_Variations {
 
 			$args['form_definition'] = \eo\wbc\controllers\admin\menu\page\Tiny_features::instance()->init(array('temporary_get_form_directly'=>true, 'is_legacy_admin'=>true, 'data'=>array('id'=>$id)));
 			// ACTIVE_TODO there is big architectural error here but it as might be because of our incomplete implementation of data class(which would be commonly used by the admin and frontend modules) which planned in get data function of single product model -- the error here is it is directly calling the function of parent class instead of calling its own model of the tiny features. 
-			$data 				= \eo\wbc\model\admin\Eowbc_Model::instance()->get($args['form_definition'],array('page_section'=>'sp_variations', 'is_convert_das_to_array'=>true, 'id'=>$id, 'is_legacy_admin'=>true ));
+			$data 				= \eo\wbc\model\admin\SP_WBC_Model::instance()->get($args['form_definition'],array('page_section'=>'sp_variations', 'is_convert_das_to_array'=>true, 'id'=>$id, 'is_legacy_admin'=>true ));
 		}else{
 
 			$data = $variation_get_max_purchase_quantity['form'];
@@ -1024,7 +1024,7 @@ class SP_WBC_Variations extends SP_Variations {
         // $attribute_name = sanitize_title( $args['hook_callback_args']['hook_args'][ 'attribute' ] );
 
         // wbc()->load->model('category-attribute');
-        // $attribute = \eo\wbc\model\Category_Attribute::instance()->get_attribute(str_replace('pa_','',$args['hook_callback_args']['hook_args'][ 'attribute' ]));
+        // $attribute = \eo\wbc\model\SP_WBC_Category_Attribute::instance()->get_attribute(str_replace('pa_','',$args['hook_callback_args']['hook_args'][ 'attribute' ]));
         $attribute = apply_filters('sp_wbc_get_attribute', null, str_replace('pa_','',$args['hook_callback_args']['hook_args'][ 'attribute' ]) );
 
         // commented on 24-10-2022 becose was unussed
@@ -1403,7 +1403,7 @@ class SP_WBC_Variations extends SP_Variations {
 		$data['woo_dropdown_attribute_html_data']['show_option_none_text'] = $args['hook_callback_args']['hook_args']['show_option_none'] ? $args['hook_callback_args']['hook_args']['show_option_none'] : esc_html__( 'Choose an option', 'woocommerce' ); // We'll do our best to hide the placeholder, but we'll need to show something when resetting options.
 
 		// classes
-		$data['woo_dropdown_attribute_html_data']['class']                 = 'variable-item ' .esc_attr( $data['woo_dropdown_attribute_html_data']['type'] ).'-variable-item spui-wbc-swatches-variable-item spui-wbc-swatches-variable-item-'.$data['woo_dropdown_attribute_html_data']['type']. ' spui-wbc-swatches-variable-item-header spui-wbc-swatches-variable-item-'.$data['woo_dropdown_attribute_html_data']['type'].'-header variable-item-'.wbc()->common->current_theme_key(). ' variable-item-'.esc_attr( $data['woo_dropdown_attribute_html_data']['type'] ).'-'.wbc()->common->current_theme_key();
+		$data['woo_dropdown_attribute_html_data']['class']                 = 'variable-item ' .esc_attr( $data['woo_dropdown_attribute_html_data']['type'] ).'-variable-item spui-wbc-swatches-variable-item spui-wbc-swatches-variable-item-'.$data['woo_dropdown_attribute_html_data']['type']. ' spui-wbc-swatches-variable-item-header spui-wbc-swatches-variable-item-'.$data['woo_dropdown_attribute_html_data']['type'].'-header variable-item-'.wbc()->common->sp_wbc_current_theme_key(). ' variable-item-'.esc_attr( $data['woo_dropdown_attribute_html_data']['type'] ).'-'.wbc()->common->sp_wbc_current_theme_key();
 
 		// defined limit
 			// NOTE: right now we are limiting swatches options right from the data layer here and maintaining actual_total_options var which can be used on template layers. but if in future woo hiden select dropdown or js layer require all options then we need to provide that in seprate variable. 
@@ -2284,7 +2284,7 @@ class SP_WBC_Variations extends SP_Variations {
 			}
 
 			wbc()->load->model('category-attribute');
-        	return \eo\wbc\model\Category_Attribute::instance()->get_attribute($attribute/*str_replace('pa_','',$args['hook_callback_args']['hook_args'][ 'attribute' ])*/);
+        	return \eo\wbc\model\SP_WBC_Category_Attribute::instance()->get_attribute($attribute/*str_replace('pa_','',$args['hook_callback_args']['hook_args'][ 'attribute' ])*/);
         	
 		}, 10, 2);
 

@@ -3,7 +3,7 @@ namespace eo\wbc\controllers\publics\pages;
 defined( 'ABSPATH' ) || exit;
 
 
-class Product extends \eo\wbc\system\core\publics\Eowbc_Base_Model_Publics {
+class Product extends \eo\wbc\system\core\publics\SP_WBC_Base_Model_Publics {
 
     private static $_instance = null;
 
@@ -685,8 +685,8 @@ class Product extends \eo\wbc\system\core\publics\Eowbc_Base_Model_Publics {
         //Adding Breadcrumb
         add_action( 'woocommerce_before_single_product',function(){
             if(!empty($_GET) && !empty(wbc()->sanitize->get('STEP')) && !empty(wbc()->sanitize->get('BEGIN'))) {
-                wbc()->load->model('publics/component/eowbc_breadcrumb'); 
-                echo \eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_add_breadcrumb(
+                wbc()->load->model('publics/component/sp_wbc_breadcrumb'); 
+                echo \eo\wbc\model\publics\component\SP_WBC_Breadcrumb::eo_wbc_add_breadcrumb(
                     wbc()->sanitize->get('STEP'),
                     wbc()->sanitize->get('BEGIN')
                 ).'<br/><br/>';

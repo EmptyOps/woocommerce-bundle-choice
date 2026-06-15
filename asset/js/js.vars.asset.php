@@ -12,7 +12,7 @@ add_action( ( !is_admin() ? 'wp_enqueue_scripts' : 'admin_enqueue_scripts'),func
 	
 
 	$apply_filters_sp_is_legacy_admin_page = ((apply_filters('sp_is_legacy_admin_page', true)) ? "true" : "false");
-	$wbc_common_current_theme_key = wbc()->common->current_theme_key();
+	$wbc_common_current_theme_key = wbc()->common->sp_wbc_current_theme_key();
 	$is_shop = ((is_shop()) ? "true" : "false");
 	$is_product_category = ((is_product_category()) ? "true" : "false");
 	$is_product = ((is_product()) ? "true" : "false");

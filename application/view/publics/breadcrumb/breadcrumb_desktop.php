@@ -39,7 +39,7 @@ if(isset($_GET['FIRST']) and isset($_GET['SECOND'])) {
                             'SECOND' => wbc()->sanitize->get('SECOND')
                         )))
                     : '#'
-            ) . '" class="' . esc_attr((($step == 3) ? 'active ' : ((!empty($breadcrumb_ui::$first) || !empty($breadcrumb_ui::$second)) ? 'completed ' : (!empty(\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$clickable_breadcrumb) ? '' : 'disabled')))) . ' step spui-semantic-step" onclick="window.location.href=jQuery(this).data(\'href\');">';
+            ) . '" class="' . esc_attr((($step == 3) ? 'active ' : ((!empty($breadcrumb_ui::$first) || !empty($breadcrumb_ui::$second)) ? 'completed ' : (!empty(\eo\wbc\model\publics\component\SP_WBC_Breadcrumb::$clickable_breadcrumb) ? '' : 'disabled')))) . ' step spui-semantic-step" onclick="window.location.href=jQuery(this).data(\'href\');">';
 
                     ob_start();
                     $template = wbc()->options->get_option('configuration','config_alternate_breadcrumb','default');

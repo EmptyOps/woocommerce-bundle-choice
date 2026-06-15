@@ -1,7 +1,7 @@
 <?php
 namespace eo\wbc\controllers\ajax;
 
-use eo\wbc\model\publics\SP_Model_Query;
+use eo\wbc\model\publics\SP_WBC_Model_Query;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -67,6 +67,6 @@ class Filter
 		
 		do_action('sp_eo_wbc_filter_process');
 		
-		(new SP_Model_Query())->prepare_query();						
+		(new SP_WBC_Model_Query())->prepare_query();						
 	}	
 }

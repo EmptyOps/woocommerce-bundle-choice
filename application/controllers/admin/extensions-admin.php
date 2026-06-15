@@ -7,9 +7,9 @@
 
 namespace eo\wbc\controllers\admin;
 
-use eo\wbc\model\SP_Extension;
+use eo\wbc\model\SP_WBC_Extension;
 
-use eo\wbc\controllers\admin\menu\Admin_Menu_Factory;
+use eo\wbc\controllers\admin\menu\SP_WBC_Admin_Menu_Factory;
 use eo\wbc\controllers\admin\menu\Extensions_Admin_Menu;
 
 use eo\wbc\system\bootstrap\Extensions_Setup_Wizard;
@@ -33,13 +33,13 @@ class Extensions_Admin extends Admin {
 		return self::$_instance;
 	}
 
-	public function __construct( SP_Extension $SP_Extension ) {
+	public function __construct( SP_WBC_Extension $SP_Extension ) {
 
 		if( empty($SP_Extension) ) {
 			throw new Exception("Sorry, only construct method with SP_Extension class object are supported, so pass SP_Extension object as parameter to construct method. Default construct method is not supported.", 1);
 		}
 
-		$this->SP_Extension = $SP_Extension;
+		$this->SP_WBC_Extension = $SP_Extension;
 	}
 
 	public static function process__( Extensions_Admin $Extensions_Admin) {
@@ -107,7 +107,7 @@ class Extensions_Admin extends Admin {
 
 	public function menu() {
 		//	pass the instence of admin menu to menu factory to build it.
-		$menu = new Extensions_Admin_Menu( $this->SP_Extension );
+		$menu = new Extensions_Admin_Menu( $this->SP_WBC_Extension );
 
 		$menu_items = $menu->get_menu();
 		$menu_slugs = array();
@@ -132,7 +132,7 @@ class Extensions_Admin extends Admin {
 			$this->init();
 		}
 
-		Admin_Menu_Factory::instanceForExtensions()->build_menu($menu);
+		SP_WBC_Admin_Menu_Factory::instanceForExtensions()->build_menu($menu);
 	}
 
 	public function init() {

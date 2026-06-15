@@ -23,9 +23,9 @@ class Filters_Shop_Cat extends Sample_Data {
 
         $this->feature_title = wbc()->config->get_builders()[$this->feature_key];    
 
-        wbc()->load->model('admin/sample_data/eowbc_sample_data');
-        wbc()->load->model('admin/sample_data/eowbc_filters_shop_cat');
-        $this->model = \eo\wbc\model\admin\sample_data\Eowbc_Filters_Shop_Cat::instance();
+        wbc()->load->model('admin/sample_data/sp_wbc_sample_data');
+        wbc()->load->model('admin/sample_data/sp_wbc_filters_shop_cat');
+        $this->model = \eo\wbc\model\admin\sample_data\SP_WBC_Filters_Shop_Cat::instance();
         
     }
 

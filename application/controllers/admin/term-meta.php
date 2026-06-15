@@ -24,7 +24,7 @@ class Term_Meta {
 		$this->taxonomy = wbc()->sanitize->get('taxonomy');
 		$this->attribute_slug = substr($attribute,3);
 		wbc()->load->model('category-attribute');
-		$this->attribute = \eo\wbc\model\Category_Attribute::instance()->get_attribute($this->attribute_slug);
+		$this->attribute = \eo\wbc\model\SP_WBC_Category_Attribute::instance()->get_attribute($this->attribute_slug);
 
 		add_action('admin_enqueue_scripts',function(){		
 			wp_enqueue_media();				
@@ -525,7 +525,7 @@ class Term_Meta {
 		
 		$taxonomy_id = wbc()->sanitize->get('edit');
 		/*wbc()->load->model('category-attribute');
-		eo\wbc\model\Category_Attribute::instance()->get_attribute($taxonomy_id);*/
+		eo\wbc\model\SP_WBC_Category_Attribute::instance()->get_attribute($taxonomy_id);*/
 		
 		ob_start();
 		?>
@@ -570,7 +570,7 @@ class Term_Meta {
 		
 		$taxonomy_id = wbc()->sanitize->get('edit');
 		/*wbc()->load->model('category-attribute');
-		eo\wbc\model\Category_Attribute::instance()->get_attribute($taxonomy_id);*/
+		eo\wbc\model\SP_WBC_Category_Attribute::instance()->get_attribute($taxonomy_id);*/
 		
 		ob_start();
 		?>
@@ -624,7 +624,7 @@ class Term_Meta {
 		
 		$taxonomy_id = wbc()->sanitize->get('edit');
 		/*wbc()->load->model('category-attribute');
-		eo\wbc\model\Category_Attribute::instance()->get_attribute($taxonomy_id);*/
+		eo\wbc\model\SP_WBC_Category_Attribute::instance()->get_attribute($taxonomy_id);*/
 		
 		ob_start();
 		?>

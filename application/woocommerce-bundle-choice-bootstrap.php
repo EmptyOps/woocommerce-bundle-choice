@@ -12,8 +12,8 @@ use eo\wbc\system\bootstrap\Activate;
 use eo\wbc\system\bootstrap\Deactivate;
 use eo\wbc\system\bootstrap\Uninstall;
 
-use eo\wbc\controllers\Ajax_Handler;
-use eo\wbc\controllers\Http_Handler;
+use eo\wbc\controllers\SP_WBC_Ajax_Handler;
+use eo\wbc\controllers\SP_WBC_Http_Handler;
 
 use eo\wbc\system\core\Platform;
 
@@ -66,7 +66,7 @@ class WooCommerce_Bundle_Choice_Bootstrap {
     		\eo\wbc\controllers\admin\Term_Meta::instance()->add_attrubute_term_form(wbc()->sanitize->get('taxonomy'));    		
 
     	} elseif (!empty(wbc()->sanitize->get('post_type')) and wbc()->sanitize->get('post_type')=='product' and !empty(wbc()->sanitize->get('taxonomy'))) {
-    		\eo\wbc\controllers\admin\Category_Meta::instance()->add_category_term_form(wbc()->sanitize->get('taxonomy'));
+    		\eo\wbc\controllers\admin\SP_WBC_Category_Meta::instance()->add_category_term_form(wbc()->sanitize->get('taxonomy'));
     	}
 
     	// call in builder tools
@@ -85,8 +85,8 @@ class WooCommerce_Bundle_Choice_Bootstrap {
 			// system core
 			$this->system_core();
 
-			/*if(class_exists('Http_Handler')){*/
-				Http_Handler::process();				
+			/*if(class_exists('SP_WBC_Http_Handler')){*/
+				SP_WBC_Http_Handler::process();				
 			/*}*/
 
 			if(!empty(wbc()->sanitize->get('eo_wbc_filter'))) {
@@ -143,15 +143,15 @@ class WooCommerce_Bundle_Choice_Bootstrap {
 				// NOTE: for security reasons we must use the resolver if conditions below instead of making the singleton function dynamic. 
 				if( wbc()->sanitize->post('resolver') == 'sp-fmrs' ){
 
-					require_once constant( strtoupper( sp_fmrs()->SP_Extension()->singleton_function() ).'_DIRECTORY' ).'application/library/shared/submodule/sp_ssm_themes/application/controllers/ajax/ui-builder-build-data-controls-type-resolver.php';
+					require_once constant( strtoupper( sp_fmrs()->SP_WBC_Extension()->singleton_function() ).'_DIRECTORY' ).'application/library/shared/submodule/sp_ssm_themes/application/controllers/ajax/ui-builder-build-data-controls-type-resolver.php';
 				
 				} else if( wbc()->sanitize->post('resolver') == 'request-diamond' ){
 
-					require_once constant( strtoupper( sp_rad()->SP_Extension()->singleton_function() ).'_DIRECTORY' ).'application/library/shared/submodule/sp_ssm_themes/application/controllers/ajax/ui-builder-build-data-controls-type-resolver.php';
+					require_once constant( strtoupper( sp_rad()->SP_WBC_Extension()->singleton_function() ).'_DIRECTORY' ).'application/library/shared/submodule/sp_ssm_themes/application/controllers/ajax/ui-builder-build-data-controls-type-resolver.php';
 				
 				} else if( wbc()->sanitize->post('resolver') == 'bookappoint' ){
 
-					require_once constant( strtoupper( sp_baa()->SP_Extension()->singleton_function() ).'_DIRECTORY' ).'application/library/shared/submodule/sp_ssm_themes/application/controllers/ajax/ui-builder-build-data-controls-type-resolver.php';
+					require_once constant( strtoupper( sp_baa()->SP_WBC_Extension()->singleton_function() ).'_DIRECTORY' ).'application/library/shared/submodule/sp_ssm_themes/application/controllers/ajax/ui-builder-build-data-controls-type-resolver.php';
 				}
 				
 			} else {
@@ -163,7 +163,7 @@ class WooCommerce_Bundle_Choice_Bootstrap {
 		else if( wbc()->sanitize->post('resolver') == 'sp_p360g_aj_properties' ) {
 			
 	
-			require_once constant( strtoupper( sp_p360g()->SP_Extension()->singleton_function() ).'_DIRECTORY' ).'application/controllers/ajax/sp_p360g_properties_aj_resolver.php';
+			require_once constant( strtoupper( sp_p360g()->SP_WBC_Extension()->singleton_function() ).'_DIRECTORY' ).'application/controllers/ajax/sp_p360g_properties_aj_resolver.php';
 
 		} elseif(!empty(wbc()->sanitize->post('_wpnonce')) and !empty(wbc()->sanitize->post('resolver'))) {	
 
@@ -202,8 +202,8 @@ class WooCommerce_Bundle_Choice_Bootstrap {
 		//	core init 
 		//
 		// require_once constant('EOWBC_DIRECTORY')."application/system/core/sp-cron-handler.php";
-		if( \eo\wbc\system\core\SP_Cron_Handler::should_init() ) {
-			\eo\wbc\system\core\SP_Cron_Handler::instance()->init();
+		if( \eo\wbc\system\core\SP_WBC_Cron_Handler::should_init() ) {
+			\eo\wbc\system\core\SP_WBC_Cron_Handler::instance()->init();
 		}
 
 	}

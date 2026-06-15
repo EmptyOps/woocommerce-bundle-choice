@@ -2,9 +2,9 @@
 
 defined( 'ABSPATH' ) || exit;
 
-if(!class_exists('WBC_REST')) {
+if(!class_exists('SP_WBC_REST')) {
 
-	class WBC_REST {
+	class SP_WBC_REST {
 
 		private static $_instance = null;
 

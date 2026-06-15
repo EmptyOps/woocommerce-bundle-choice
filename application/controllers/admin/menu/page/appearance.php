@@ -649,7 +649,7 @@ if ( ! class_exists( 'Appearance' ) ) {
 					)
 				)
 			);
-			$form_definition = self::instance()->generate_form_wrapper($form_definition, 'wbc', 'fp', 'Category Page', array('oops_section'=>'Ooops Section'), \eo\wbc\model\publics\SP_Model_Feed::instance());
+			$form_definition = self::instance()->generate_form_wrapper($form_definition, 'wbc', 'fp', 'Category Page', array('oops_section'=>'Ooops Section'), \eo\wbc\model\publics\SP_WBC_Model_Feed::instance());
 
 			if($is_add_sample_values) {
 				//loop through form tabs and set (random) sample values for each field  

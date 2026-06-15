@@ -2,16 +2,16 @@
 defined( 'ABSPATH' ) || exit;
 
 wbc()->load->model('admin/form-builder');
-wbc()->load->model('admin/eowbc_appearance');
+wbc()->load->model('admin/sp_wbc_appearance');
 
 $form = array();
 
-$form['id']='eowbc_appearance';
+$form['id']='sp_wbc_appearance';
 $form['title']='Appearance Settings';
 $form['method']='POST';
 $form['tabs'] = true;
 
-$form['data'] = eo\wbc\model\admin\Eowbc_Appearance::instance()->get( eo\wbc\controllers\admin\menu\page\Appearance::get_form_definition() );
+$form['data'] = eo\wbc\model\admin\SP_WBC_Appearance::instance()->get( eo\wbc\controllers\admin\menu\page\Appearance::get_form_definition() );
 $form['attr']= array('data-is_per_tab_save="true"');
 // $form['submit_button'] = array(
 // 							'label'=>eowbc_lang('Save Appearance Settings'),

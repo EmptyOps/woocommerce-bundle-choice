@@ -8,9 +8,9 @@ namespace eo\wbc\model\admin;
 
 defined( 'ABSPATH' ) || exit;
 
-wbc()->load->model('admin/eowbc_model');
+wbc()->load->model('admin/sp_wbc_model');
 
-class Tiny_Features extends Eowbc_Model {
+class Tiny_Features extends SP_WBC_Model {
 
 	private static $_instance = null;
 

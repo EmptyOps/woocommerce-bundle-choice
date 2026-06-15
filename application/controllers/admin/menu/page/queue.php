@@ -88,7 +88,7 @@ if ( ! class_exists( 'Queue' ) ) {
 
 				$sbcnt++;
 			
-    			$sp_queue_batch_size = \eo\wbc\system\core\SP_Queue::instance()->get_batch_size($sbkey);
+    			$sp_queue_batch_size = \eo\wbc\system\core\SP_WBC_Queue::instance()->get_batch_size($sbkey);
 
 				$form_definition['queue___'.$sbkey] = array(
 					'label'=>( !empty($sbvalue['display_name']) ? $sbvalue['display_name'].'('.$sbkey.')' : $sbkey /*$sbvalue['api_config_api_name']*/ ).' Sync Details',
@@ -106,7 +106,7 @@ if ( ! class_exists( 'Queue' ) ) {
 						
 						// 'resolver_path'=>array(
 						// 	'type'=>'hidden',
-						// 	'value'=>constant('EOWBC_DIRECTORY').'application/controllers/ajax/eowbc_queue.php',
+						// 	'value'=>constant('EOWBC_DIRECTORY').'application/controllers/ajax/sp_wbc_queue.php',
 						// ),
 						'list'=>array_merge( $table , array(
 							'type'=>'table' )
@@ -189,7 +189,7 @@ if ( ! class_exists( 'Queue' ) ) {
 					);
 					$form_definition['queue___'.$sbkey]['form']['resolver_path'] = array(
 						'type'=>'hidden',
-						'value'=>constant('EOWBC_DIRECTORY').'application/controllers/ajax/eowbc_queue.php',
+						'value'=>constant('EOWBC_DIRECTORY').'application/controllers/ajax/sp_wbc_queue.php',
 					);
 					$form_definition['queue___'.$sbkey]['form']['current_page_param'] = array(
 						'type'=>'hidden',

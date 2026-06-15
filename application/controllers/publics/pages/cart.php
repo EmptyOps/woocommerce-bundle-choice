@@ -2,7 +2,7 @@
 namespace eo\wbc\controllers\publics\pages;
 defined( 'ABSPATH' ) || exit;
 
-class Cart extends \eo\wbc\system\core\publics\Eowbc_Base_Model_Publics {
+class Cart extends \eo\wbc\system\core\publics\SP_WBC_Base_Model_Publics {
 
     private static $_instance = null;
 

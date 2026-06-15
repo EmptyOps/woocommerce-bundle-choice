@@ -120,7 +120,7 @@ $this_plugin_id = 126;
 /////////////////////////////////////////////////////////////////////////
 
 
-function get_string_between($string,$start,$end) {
+function sp_wbc_get_string_between($string,$start,$end) {
 	$string = ''.$string;
 	$ini = strpos($string, $start);
 	if($ini == 0) return;
@@ -129,7 +129,7 @@ function get_string_between($string,$start,$end) {
 	return substr($string, $ini, $len);
 }
 
-function get_extensions_data() {
+function sp_get_extensions_data() {
 	$url = "https://sphereplugins.com/?filter_plugin_list=1";
     return wp_remote_get( $url);
 }
@@ -145,13 +145,13 @@ $this_plugin = '';
 
 	    <?php 
 
-	    $response = get_extensions_data();
+	    $response = sp_get_extensions_data();
 	    for($try=0; $try<2; $try++) {
 	    	if( !is_wp_error( $response ) and wp_remote_retrieve_response_code($response)==200 ) {
 	    		break;
 	    	}
 	    	else {
-	    		$response = get_extensions_data();
+	    		$response = sp_get_extensions_data();
 	    	}
 	    }
 
@@ -205,7 +205,7 @@ $this_plugin = '';
 						        <h3 style="align-self: center;"><?php echo esc_html($product->name); ?></h3>
 						        <div style="overflow: hidden;text-overflow: ellipsis;">
 						        <?php 
-						            $findSome = esc_html(get_string_between($product->short_description, '<span>', '</span>'));
+						            $findSome = esc_html(sp_wbc_get_string_between($product->short_description, '<span>', '</span>'));
 						            echo $findSome; 
 						        ?>
 						        </div>
@@ -269,7 +269,7 @@ $this_plugin = '';
 							    <div class="addons-banner-block-item-content">
 							        <h3 style="align-self: center;"><?php echo esc_html($product->name); ?></h3>
 							        <div style="overflow: hidden;text-overflow: ellipsis;">
-							        <?php $findSome = get_string_between($product->short_description, '<span>', '</span>');
+							        <?php $findSome = sp_wbc_get_string_between($product->short_description, '<span>', '</span>');
 							            echo esc_html($findSome); 
 							        ?>
 							        </div>

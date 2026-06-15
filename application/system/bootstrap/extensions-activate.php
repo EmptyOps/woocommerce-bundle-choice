@@ -34,12 +34,12 @@ if ( ! class_exists( 'Extensions_Activate' ) ) {
 		// }
 
 		// NOTE: only construct method with SP_Extension class object are supported, so pass SP_Extension object as parameter to construct method. Default construct method is not supported.
-		private function __construct( SP_Extension $SP_Extension ) {			
-			$this->SP_Extension = $SP_Extension;
+		private function __construct( SP_WBC_Extension $SP_Extension ) {			
+			$this->SP_WBC_Extension = $SP_Extension;
 		}
 
 		public function run() {
-			wp_die('activate run called... for plugin '.$this->SP_Extension->extension_slug());
+			wp_die('activate run called... for plugin '.$this->SP_WBC_Extension->extension_slug());
 			$this->init_options();
 			$this->add_pages();
 			$this->add_table();

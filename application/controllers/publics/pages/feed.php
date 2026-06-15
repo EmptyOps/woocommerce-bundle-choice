@@ -36,20 +36,20 @@ class Feed extends \eo\wbc\controllers\publics\Controller{
             //     wbc()->common->var_dump( "wbc feed init if");
             // }
 
-            $args['data'] = \eo\wbc\model\publics\SP_Model_Feed::instance()->get_data('swatches_init');
+            $args['data'] = \eo\wbc\model\publics\SP_WBC_Model_Feed::instance()->get_data('swatches_init');
             $args['page_section'] = 'swatches';
             self::instance()->selectron($args['page_section'],$args);
             
             // ACTIVE_TODO when we do product simple type implementation at that time most probably we need to move below section out of if or just implement the simple type counter part in else block of this if condition 
-            $args['data'] = \eo\wbc\model\publics\SP_Model_Feed::instance()->get_data('gallery_images_init');
+            $args['data'] = \eo\wbc\model\publics\SP_WBC_Model_Feed::instance()->get_data('gallery_images_init');
             $args['page_section'] = 'gallery_images';
             self::instance()->selectron($args['page_section'],$args);
 
-            $args['data'] = \eo\wbc\model\publics\SP_Model_Feed::instance()->get_data('swatches_cart_form');
+            $args['data'] = \eo\wbc\model\publics\SP_WBC_Model_Feed::instance()->get_data('swatches_cart_form');
             $args['page_section'] = 'swatches_cart_form';
             self::instance()->selectron($args['page_section'],$args);
 
-            $args['data'] = \eo\wbc\model\publics\SP_Model_Feed::instance()->get_data('swatches_reset_link');
+            $args['data'] = \eo\wbc\model\publics\SP_WBC_Model_Feed::instance()->get_data('swatches_reset_link');
             $args['page_section'] = 'swatches_reset_link';
             self::instance()->selectron($args['page_section'],$args);
         }
@@ -108,7 +108,7 @@ class Feed extends \eo\wbc\controllers\publics\Controller{
                 // $args['extra_args'] = $args['hook_callback_args']['extra_args'];
                 // unset($args['hook_callback_args']);
 
-                $data = \eo\wbc\model\publics\SP_Model_Feed::instance()->prepare_swatches_data($args);
+                $data = \eo\wbc\model\publics\SP_WBC_Model_Feed::instance()->prepare_swatches_data($args);
                 if (!empty($data['is_return_default_html'])) {    
 
                     return $data['html'];
@@ -120,7 +120,7 @@ class Feed extends \eo\wbc\controllers\publics\Controller{
 
         } elseif ($page_section == 'gallery_images' ) {
             if ($container_class == 'gallery_images') {
-                // $data = \eo\wbc\model\publics\SP_Model_Feed::instance()->prepare_swatches_data($args);
+                // $data = \eo\wbc\model\publics\SP_WBC_Model_Feed::instance()->prepare_swatches_data($args);
                 // if (!empty($data['is_return_default_html'])) {
                 //     return $data['html'];
                 // }
@@ -131,7 +131,7 @@ class Feed extends \eo\wbc\controllers\publics\Controller{
                 $args['extra_args'] = $args['hook_callback_args']['extra_args'];
                 unset($args['hook_callback_args']);
 
-                \eo\wbc\model\publics\SP_Model_Feed::instance()->render_gallery_images_template_callback($args);
+                \eo\wbc\model\publics\SP_WBC_Model_Feed::instance()->render_gallery_images_template_callback($args);
             }
 
         } elseif ($page_section == 'swatches_cart_form') {
@@ -160,7 +160,7 @@ class Feed extends \eo\wbc\controllers\publics\Controller{
 
             if ($container_class == 'SP_SLCTRN_Swatches_Reset_Link') {
 
-                return \eo\wbc\model\publics\SP_Model_Feed::instance()->prepare_swatches_reset_link_data($args)['content'];
+                return \eo\wbc\model\publics\SP_WBC_Model_Feed::instance()->prepare_swatches_reset_link_data($args)['content'];
             }
 
         } else{
@@ -294,7 +294,7 @@ class Feed extends \eo\wbc\controllers\publics\Controller{
 
         }else{  
 
-            \eo\wbc\model\publics\SP_Model_Feed::instance()->render_ui( $this->get_ui_definition($args) );
+            \eo\wbc\model\publics\SP_WBC_Model_Feed::instance()->render_ui( $this->get_ui_definition($args) );
         }
     } 
 
@@ -458,13 +458,13 @@ class Feed extends \eo\wbc\controllers\publics\Controller{
 
         $args['page_section'] == 'get_default_gallery';
 
-        $args['data'] = \eo\wbc\model\publics\SP_Model_Feed()::instance()->get_data('get_default_gallery_init');
+        $args['data'] = \eo\wbc\model\publics\SP_WBC_Model_Feed()::instance()->get_data('get_default_gallery_init');
 
         \eo\wbc\controller\publics\Feed::instance()->selectron('get_default_gallery');
 
         $args['page_section'] == 'get_variation_gallery';
 
-        $args['data'] = \eo\wbc\model\publics\SP_Model_Feed()::instance()->get_data('get_variation_gallery_init');
+        $args['data'] = \eo\wbc\model\publics\SP_WBC_Model_Feed()::instance()->get_data('get_variation_gallery_init');
 
         \eo\wbc\controller\publics\Feed::instance()->selectron('get_variation_gallery');
 

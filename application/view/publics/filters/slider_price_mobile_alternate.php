@@ -7,7 +7,7 @@ defined( 'ABSPATH' ) || exit;
 
 ?>			
 <div class="ui four wide column toggle_sticky_mob_filter" style="<?php echo $advance?'display: none;':'' ?>" data-target="#sticky_mob_filter_price">
-	<div class="title"><div class="ui segment"><?php esc_html(spext_lang(wbc()->options->get_option('appearance_filters','appearance_filters_price_filter_title_text','Price',false,true), 'woo-bundle-choice')) ?></div></div>
+	<div class="title"><div class="ui segment"><?php esc_html(sp_wbc_ext_lang(wbc()->options->get_option('appearance_filters','appearance_filters_price_filter_title_text','Price',false,true), 'woo-bundle-choice')) ?></div></div>
 </div>
 <div class="bottom_filter_segment hidden ui segment" id="sticky_mob_filter_price">
 	<div class="ui equal width grid">
@@ -22,7 +22,7 @@ defined( 'ABSPATH' ) || exit;
 	</div>
 	<br/>
 	<div class="ui title">
-		<strong><?php esc_html(spext_lang(wbc()->options->get_option('appearance_filters','appearance_filters_price_filter_title_text','Price',false,true), 'woo-bundle-choice')) ?></strong><?php if(!empty($help)): ?>&nbsp;<i class="question circle outline icon" data-help="<?php echo esc_attr($help); ?>"></i><?php endif; ?>
+		<strong><?php esc_html(sp_wbc_ext_lang(wbc()->options->get_option('appearance_filters','appearance_filters_price_filter_title_text','Price',false,true), 'woo-bundle-choice')) ?></strong><?php if(!empty($help)): ?>&nbsp;<i class="question circle outline icon" data-help="<?php echo esc_attr($help); ?>"></i><?php endif; ?>
 	</div><br/>
 	<div class="content">
 		<div class="ui tiny form">

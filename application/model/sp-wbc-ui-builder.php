@@ -4,11 +4,11 @@
 */
 namespace eo\wbc\model;
 use eo\wbc\model\interfaces\Builder;
-use eo\wbc\model\utilities\Eowbc_Theme_Adaption_Check;
+use eo\wbc\model\utilities\SP_WBC_Theme_Adaption_Check;
 
 defined( 'ABSPATH' ) || exit;
 
-class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
+class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_WBC_Ui_Builder {
 
 	private static $_instance = null;
 
@@ -488,7 +488,7 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 
 								if( !empty( $sp_eid ) ) {
 
-									$attribute_slug = wbc()->wc->id_to_slug('attr',\eo\wbc\system\core\publics\Eowbc_Base_Model_Publics::split_sp_eid($sp_eid)[2]);
+									$attribute_slug = wbc()->wc->id_to_slug('attr',\eo\wbc\system\core\publics\SP_WBC_Base_Model_Publics::split_sp_eid($sp_eid)[2]);
 								}
 
 								// if( !empty(wbc()->options->get_option($_option_key_,$_data_key_.'_attribute')) and !empty($item_attributes['pa_'.wbc()->options->get_option($_option_key_,$_data_key_.'_attribute')])) {
@@ -943,8 +943,8 @@ class SP_WBC_Ui_Builder extends \sp\wbc\system\core\SP_Ui_Builder {
 	// ACTIVE_TODO_OC_END
 	public function theme_adaption_check() {
 		if( !empty(wbc()->sanitize->get('thadc')) && wbc()->sanitize->get('thadc') == 1 ) {
-			wbc()->load->model('utilities/eowbc_theme_adaption_check');
-			Eowbc_Theme_Adaption_Check::instance()->run();
+			wbc()->load->model('utilities/sp_wbc_theme_adaption_check');
+			SP_WBC_Theme_Adaption_Check::instance()->run();
 		}
 	}
 

@@ -2,9 +2,9 @@
 
 defined( 'ABSPATH' ) || exit;
 
-if(!class_exists('WBC_Loader')) {
+if(!class_exists('SP_WBC_Loader')) {
 
-	class WBC_Loader {
+	class SP_WBC_Loader {
 
 		private static $_instance;
 
@@ -59,8 +59,8 @@ if(!class_exists('WBC_Loader')) {
 					// NOTE:Changes applied on date 28-11-2025 as per the wordpress review team’s suggestion. if false hati te removi karel chhe. 
 					// NOTE:development adhuru chhe tethi remove karavanu aavshe. 
 					wbc()->load->asset('css','https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css',array(),"",true,true,null,null,false,true,null,true);
-					wbc()->load->asset('js','https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js', wbc()->common->current_theme_key() != "themes___purple_theme" ? array():array('jquery'),"",true,true,null,null,false,true,null,true);
-					wbc()->load->asset('js','https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js',wbc()->common->current_theme_key() != "themes___purple_theme" ? array():array('jquery'),"",true,true,null,null,false,true,null,true);	
+					wbc()->load->asset('js','https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js', wbc()->common->sp_wbc_current_theme_key() != "themes___purple_theme" ? array():array('jquery'),"",true,true,null,null,false,true,null,true);
+					wbc()->load->asset('js','https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js',wbc()->common->sp_wbc_current_theme_key() != "themes___purple_theme" ? array():array('jquery'),"",true,true,null,null,false,true,null,true);	
 					break;
 
 				// case 'direct_load_semantic':		
@@ -100,7 +100,7 @@ if(!class_exists('WBC_Loader')) {
     				}
 		        	
 					wbc()->load->asset('css', constant('EOWBC_ASSET_URL') . 'css/rangeslider/ion.rangeSlider.min.css',array(),"",true,true,null,null,false,true,null,true);
-					wbc()->load->asset('js', constant('EOWBC_ASSET_URL') . 'js/rangeslider/ion.rangeSlider.min.js', wbc()->common->current_theme_key() != "themes___purple_theme" ? array():array('jquery'),"",true,true,null,null,false,true,null,true);
+					wbc()->load->asset('js', constant('EOWBC_ASSET_URL') . 'js/rangeslider/ion.rangeSlider.min.js', wbc()->common->sp_wbc_current_theme_key() != "themes___purple_theme" ? array():array('jquery'),"",true,true,null,null,false,true,null,true);
 					break;
 				default:				
 					break;

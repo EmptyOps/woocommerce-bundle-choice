@@ -26,13 +26,13 @@ class SP_Gallery_Slider extends \eo\wbc\controllers\publics\Controller{
 
     public function init($args = array()){
         
-        \eo\wbc\model\publics\variations\SP_Model_Gallery_Slider::instance()->init_core();
+        \eo\wbc\model\publics\variations\SP_WBC_Model_Gallery_Slider::instance()->init_core();
         
         // ACTIVE_TODO_OC_START
         // --- get ui call
         // ACTIVE_TODO_OC_END
         
-        \eo\wbc\model\publics\variations\SP_Model_Gallery_Slider::instance()->render_core();
+        \eo\wbc\model\publics\variations\SP_WBC_Model_Gallery_Slider::instance()->render_core();
 
         $this->selectron('slider_images',$args);
 
@@ -93,7 +93,7 @@ class SP_Gallery_Slider extends \eo\wbc\controllers\publics\Controller{
 
         }else{  
 
-            \eo\wbc\model\publics\variations\SP_Model_Gallery_Slider::instance()->render_ui( $this->get_ui_definition($args));
+            \eo\wbc\model\publics\variations\SP_WBC_Model_Gallery_Slider::instance()->render_ui( $this->get_ui_definition($args));
         }
     }
 

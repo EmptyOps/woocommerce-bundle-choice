@@ -1,14 +1,14 @@
 <?php
 /**
-*	Ajax handler to handle ajax save request for eowbc_mapping form.	
+*	Ajax handler to handle ajax save request for sp_wbc_mapping form.	
 *
 */
 defined( 'ABSPATH' ) || exit;
 $res = array( "type"=>"success", "msg"=>"" );
 
 if(wp_verify_nonce(wbc()->sanitize->post('_wpnonce'),'sample_data_jewelry')){                
-	wbc()->load->model('admin/sample_data/eowbc_'.wbc()->sanitize->post('feature_key'));
-	$class_name = '\eo\wbc\model\admin\sample_data\Eowbc_'.
+	wbc()->load->model('admin/sample_data/sp_wbc_'.wbc()->sanitize->post('feature_key'));
+	$class_name = '\eo\wbc\model\admin\sample_data\SP_WBC_'.
 		str_replace(' ','_',ucwords(
 			implode(' ',
 				explode('_',wbc()->sanitize->post('feature_key')

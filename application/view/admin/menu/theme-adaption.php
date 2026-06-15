@@ -2,14 +2,14 @@
 defined( 'ABSPATH' ) || exit;
 $form = array();
 
-wbc()->load->model('admin/eowbc_theme_adaption');
+wbc()->load->model('admin/sp_wbc_theme_adaption');
 
-$form['id']='eowbc_theme_adaption';
+$form['id']='sp_wbc_theme_adaption';
 $form['title']='Theme Adaption';
 $form['method']='POST';
 $form['tabs'] = true;
 
-$form['data'] = \eo\wbc\model\admin\Eowbc_Theme_Adaption::instance()->get( \eo\wbc\controllers\admin\menu\page\Theme_Adaption::get_form_definition() );
+$form['data'] = \eo\wbc\model\admin\SP_WBC_Theme_Adaption::instance()->get( \eo\wbc\controllers\admin\menu\page\Theme_Adaption::get_form_definition() );
 $form['attr']= array('data-is_per_tab_save="true"');
 
 

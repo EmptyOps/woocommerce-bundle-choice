@@ -1,8 +1,8 @@
 <?php
 defined( 'ABSPATH' ) || exit;
 if(isset($_POST['slug']) && isset($_POST['type']) ) {
-    wbc()->load->model('publics/component/eowbc_filter_widget');
-    $widget = \eo\wbc\model\publics\component\EOWBC_Filter_Widget::instance();       
+    wbc()->load->model('publics/component/sp_wbc_filter_widget');
+    $widget = \eo\wbc\model\publics\component\SP_WBC_Filter_Widget::instance();       
         
     $slug = wbc()->sanitize->post('slug');
 

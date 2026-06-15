@@ -26,13 +26,13 @@ class SP_Loop_Gallery_Zoom extends \eo\wbc\controllers\publics\Controller{
 
     public function init($args = array()){
 
-        \eo\wbc\model\publics\variations\SP_Model_Loop_Gallery_Zoom::instance()->init_core();
+        \eo\wbc\model\publics\variations\SP_WBC_Model_Loop_Gallery_Zoom::instance()->init_core();
         
         // ACTIVE_TODO_OC_START
         // --- get ui call
         // ACTIVE_TODO_OC_END
         
-        \eo\wbc\model\publics\variations\SP_Model_Loop_Gallery_Zoom::instance()->render_core();
+        \eo\wbc\model\publics\variations\SP_WBC_Model_Loop_Gallery_Zoom::instance()->render_core();
 
         $args['page_section'] = 'loop_gallery_zoom';
         $this->selectron('loop_gallery_zoom',$args);
@@ -91,7 +91,7 @@ class SP_Loop_Gallery_Zoom extends \eo\wbc\controllers\publics\Controller{
 
         }else{  
 
-           \eo\wbc\model\publics\variations\SP_Model_Loop_Gallery_Zoom::instance()->render_ui( $this->get_ui_definition($args));
+           \eo\wbc\model\publics\variations\SP_WBC_Model_Loop_Gallery_Zoom::instance()->render_ui( $this->get_ui_definition($args));
         }
         
     }

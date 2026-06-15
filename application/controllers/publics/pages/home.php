@@ -68,7 +68,7 @@ class Home {
     // {
     //   $self=new self; //initalize self instence.
     //   $self->eo_wbc_clean(); //cleanup session data
-    //   return $self->eo_wbc_buttons().$self->eo_wbc_code(); //return two buttons to shortcode.
+    //   return $self->eo_wbc_buttons().$self->sp_wbc_code(); //return two buttons to shortcode.
     // }
 
     public function eo_wbc_the_content()
@@ -111,17 +111,17 @@ class Home {
           //           "'); }";
           //   }            */
           //   $script.="});</script>";            
-          //   echo $script.$this->eo_wbc_code();    
+          //   echo $script.$this->sp_wbc_code();    
 
           // }
 
-          echo ($this->eo_wbc_buttons())/*.$this->eo_wbc_buttons_css().$this->eo_wbc_code()*/;
+          echo ($this->eo_wbc_buttons())/*.$this->sp_wbc_buttons_css().$this->sp_wbc_code()*/;
            
         },100);
     }
 
     //moved inside buttons template
-    // public function eo_wbc_code() //script to get color code from buttons
+    // public function sp_wbc_code() //script to get color code from buttons
     // {
     //     return '<!-- Created with Wordpress plugin - BUNDLOICE (formerly Woo Choice Plugin) --><script>'.
     //             'jQuery(document).ready(function($){'.
@@ -134,7 +134,7 @@ class Home {
     // }
 
     //moved inside buttons template 
-    // public function eo_wbc_buttons_css(){
+    // public function sp_wbc_buttons_css(){
     //   return '<style>.eo-wbc-container .ui.buttons .button{'.
     //       (get_option('eo_wbc_home_btn_color')?'background-color:'.get_option('eo_wbc_home_btn_color').' !important;':'').
     //       (get_option('eo_wbc_home_btn_text_color')?'color:'.get_option('eo_wbc_home_btn_text_color','#ffffff').' !important;':'').
@@ -175,7 +175,7 @@ class Home {
           $second_url.='?';
       }      
 
-      return '<!-- Created with Wordpress plugin - BUNDLOICE (formerly Woo Choice Plugin) --><div id="wbc_" class="eo-wbc-container"><h2 class="ui center aligned header" style="text-align: center !important;">'.($heading?$heading:__('Make your own pair from recommendation','woo-bundle-choice')).'</h2><div class="ui grid center aligned container"><div class="ui buttons large row stackable"><button class="ui button primary column" href="'. $first_url .'EO_WBC=1&BEGIN='.get_option('eo_wbc_first_slug').'&STEP=1" >'.(get_option('eo_wbc_home_btn_text',__('Start with ','woo-bundle-choice'))).' '.get_option('eo_wbc_first_name','FIRST').'</button> <div class="or"></div><button class="ui button primary column" href="'. $second_url .'EO_WBC=1&BEGIN='.get_option('eo_wbc_second_slug').'&STEP=1" >'. (get_option('eo_wbc_home_btn_text',__('Start with','woo-bundle-choice'))).' '.get_option('eo_wbc_second_name','SECOND').'</button></div></div><style>.ui.grid{margin-left: auto;margin-right: auto;}  '.$this->eo_wbc_buttons_css().' @media only screen and (max-width: 768px){ .eo-wbc-container .ui.buttons .button{ border-radius: 0 !important; } }</style><br/><br/></div><!-- Created with Wordpress plugin - BUNDLOICE (formerly Woo Choice Plugin) -->';
+      return '<!-- Created with Wordpress plugin - BUNDLOICE (formerly Woo Choice Plugin) --><div id="wbc_" class="eo-wbc-container"><h2 class="ui center aligned header" style="text-align: center !important;">'.($heading?$heading:__('Make your own pair from recommendation','woo-bundle-choice')).'</h2><div class="ui grid center aligned container"><div class="ui buttons large row stackable"><button class="ui button primary column" href="'. $first_url .'EO_WBC=1&BEGIN='.get_option('eo_wbc_first_slug').'&STEP=1" >'.(get_option('eo_wbc_home_btn_text',__('Start with ','woo-bundle-choice'))).' '.get_option('eo_wbc_first_name','FIRST').'</button> <div class="or"></div><button class="ui button primary column" href="'. $second_url .'EO_WBC=1&BEGIN='.get_option('eo_wbc_second_slug').'&STEP=1" >'. (get_option('eo_wbc_home_btn_text',__('Start with','woo-bundle-choice'))).' '.get_option('eo_wbc_second_name','SECOND').'</button></div></div><style>.ui.grid{margin-left: auto;margin-right: auto;}  '.$this->sp_wbc_buttons_css().' @media only screen and (max-width: 768px){ .eo-wbc-container .ui.buttons .button{ border-radius: 0 !important; } }</style><br/><br/></div><!-- Created with Wordpress plugin - BUNDLOICE (formerly Woo Choice Plugin) -->';
       */
 
       	if(wbc()->options->get_option('configuration','buttons_page')==3 or wbc()->options->get_option('configuration','buttons_page')==1) {

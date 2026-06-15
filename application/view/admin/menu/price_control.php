@@ -1,7 +1,7 @@
 <?php
 defined( 'ABSPATH' ) || exit;
 
-function eo_wbc_jpc_list_categories($slug='',$prefix='',$opts_arr=array()){
+function sp_wbc_jpc_list_categories($slug='',$prefix='',$opts_arr=array()){
     
     $separator = wbc()->config->separator();
     
@@ -18,17 +18,17 @@ function eo_wbc_jpc_list_categories($slug='',$prefix='',$opts_arr=array()){
     
     foreach ($map_base as $base) {
 
-        // $category_option_list.="<div data-type='0' class='item' data-value='{$base->slug}'>{$prefix}{$base->name}</div>".eo_wbc_jpc_list_categories($base->slug,'--');
+        // $category_option_list.="<div data-type='0' class='item' data-value='{$base->slug}'>{$prefix}{$base->name}</div>".sp_wbc_jpc_list_categories($base->slug,'--');
         // $opts_arr[$base->slug] = array( 'label'=>$prefix.$base->name, 'attr'=>'data-type="0"' );
         $opts_arr[$base->slug] = array( 'label'=>$prefix.$base->name, 'attr'=>'data-type="0" data-sp_eid="'.$separator.'prod_cat'.$separator.$base->term_id.$separator.'"' );
-        $opts_arr = eo_wbc_jpc_list_categories($base->slug,/*'--'*/'  ',$opts_arr);
+        $opts_arr = sp_wbc_jpc_list_categories($base->slug,/*'--'*/'  ',$opts_arr);
     }
 
     // return $category_option_list;
     return $opts_arr;
 }
 
-function eo_wbc_jpc_list_attributes( $opts_arr=array() ){
+function sp_wbc_jpc_list_attributes( $opts_arr=array() ){
     
     $separator = wbc()->config->separator();
 
@@ -43,7 +43,7 @@ function eo_wbc_jpc_list_attributes( $opts_arr=array() ){
     return $opts_arr;
 }
 
-function eo_wbc_jpc_attributes_values(){
+function sp_wbc_jpc_attributes_values(){
     
     $attr_vals=array();
 
@@ -95,8 +95,8 @@ $form['data'] = array(
 						'value'=>'0',
 						'sanitize'=>'sanitize_text_field',
 						'attr'=>array(' onchange="window.document.splugins.common.admin.form_builder.api.set_sp_eid( \'#'.$field_key.'_dropdown_div\', \''.$field_key_sp_eid.'\' )" '),
-						//'options'=>eo_wbc_jpc_list_attributes( eo_wbc_jpc_list_categories() ),
-						'options'=>apply_filters('wbc_price_control_field_options', eo_wbc_jpc_list_attributes( eo_wbc_jpc_list_categories() )),
+						//'options'=>sp_wbc_jpc_list_attributes( sp_wbc_jpc_list_categories() ),
+						'options'=>apply_filters('wbc_price_control_field_options', sp_wbc_jpc_list_attributes( sp_wbc_jpc_list_categories() )),
 						'class'=>array('fluid'),
 						'size_class'=>array('eight','wide'),
 						'inline'=>false,
@@ -120,7 +120,7 @@ $form['data'] = array(
 						),
 				);
 
-// $arr = eo_wbc_jpc_attributes_values();
+// $arr = sp_wbc_jpc_attributes_values();
 // $sizearr = sizeof($arr);
 // $cnt = -1;
 // foreach ($arr as $key => $value) {
@@ -402,7 +402,7 @@ $table['body'] = array(
 // eo\wbc\model\admin\Table_Builder::instance()->build($table);
 
 $form = array();
-$form['id']='eowbc_price_control_save_update_prices';
+$form['id']='sp_wbc_price_control_save_update_prices';
 $form['title']= '';	// eowbc_lang('Pricing Method');
 $form['method']='POST';
 // $form['attr']= array('data-is_serialize="false"');
@@ -452,7 +452,7 @@ if( $jpc_str ) {
 }
 
 //js 
-$eo_wbc_attributes_values_json_encoded = wp_json_encode(eo_wbc_jpc_attributes_values());
+$eo_wbc_attributes_values_json_encoded = wp_json_encode(sp_wbc_jpc_attributes_values());
 $jpc_data_json_encoded = wp_json_encode($jpc_data);
 
 // NOTE:From here, we have removed the original code inside the if (false) block. So, whenever there is a need to view the original or any other code for readability purposes, simply take the script below, put it in a new .js file in Sublime Text, and view it in readable format.Apart from that, we had removed the original code, and in some scenarios, that original code might have contained PHP variables like XYZ. Those would have been removed as well.And of course, even if the removed code from the if (false) block is not relevant to the current version, it might be required during future milestone tasks, so for this purpose, refer to the branch named "ui_QCed_ashish_-2" and check the commit dated 07-04-2025 for looking at the original code.

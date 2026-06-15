@@ -32,12 +32,12 @@ class Options extends \eo\wbc\controllers\publics\Controller {
 
            	// if( wbc()->sanitize->get('is_test') == 2 ) {wbc()->common->var_dump( "wbc options init if");}
 
-	    	$args['data'] = \eo\wbc\model\publics\SP_Model_Single_Product::instance()->get_data('swatches_init');
+	    	$args['data'] = \eo\wbc\model\publics\SP_WBC_Model_Single_Product::instance()->get_data('swatches_init');
 	    	$args['page_section'] = 'swatches';
 	        self::instance()->selectron($args['page_section'],$args);
 
-	        $args['data'] = \eo\wbc\model\publics\SP_Model_Single_Product::instance()->get_data('gallery_images_init');
-	        \eo\wbc\model\publics\SP_Model_Single_Product::instance()->render_gallery_images_template($args);
+	        $args['data'] = \eo\wbc\model\publics\SP_WBC_Model_Single_Product::instance()->get_data('gallery_images_init');
+	        \eo\wbc\model\publics\SP_WBC_Model_Single_Product::instance()->render_gallery_images_template($args);
 
 	    	//call the getUI from here once so that default render_ui is called once at last for handling general matters -- to b done
 	    		//--	and for getUI set two args first is $page_section and second is $args -- to b done
@@ -94,7 +94,7 @@ class Options extends \eo\wbc\controllers\publics\Controller {
     public function selectron_hook_render($page_section,$container_class,$args = array()){
     	if ($page_section == 'swatches') {
     		if ($container_class == 'woo_variation_attr_html') {
-    			$data = \eo\wbc\model\publics\SP_Model_Single_Product::instance()->prepare_swatches_data($args);
+    			$data = \eo\wbc\model\publics\SP_WBC_Model_Single_Product::instance()->prepare_swatches_data($args);
     			if (!empty($data['is_return_default_html'])) {
     				return $data['html'];
     			}
@@ -105,14 +105,14 @@ class Options extends \eo\wbc\controllers\publics\Controller {
     	} elseif ($page_section == 'get_default_gallery') {
     		
     		if ($container_class == 'get_default_gallery_ajax') {
-    			$data = \eo\wbc\model\publics\SP_Model_Single_Product::instance()->prepare_default_gallery_data($args);
+    			$data = \eo\wbc\model\publics\SP_WBC_Model_Single_Product::instance()->prepare_default_gallery_data($args);
     			$this->ajax_response($data,$args);
     		}
 
     	} elseif ($page_section == 'get_variation_gallery') {
     		
     		if ($container_class == 'get_variation_gallery_ajax') {
-    			// $data = \eo\wbc\model\publics\SP_Model_Single_Product::instance()->prepare_default_gallery_data($args);
+    			// $data = \eo\wbc\model\publics\SP_WBC_Model_Single_Product::instance()->prepare_default_gallery_data($args);
     			// $this->ajax_response($data,$args);
     		}
 
@@ -181,15 +181,15 @@ class Options extends \eo\wbc\controllers\publics\Controller {
 
         }elseif($page_section == 'get_default_gallery') {
         
-        	\eo\wbc\model\publics\SP_Model_Single_Product::instance()->render_ui( $this->get_ui_definition($args));
+        	\eo\wbc\model\publics\SP_WBC_Model_Single_Product::instance()->render_ui( $this->get_ui_definition($args));
 
         }elseif($page_section == 'get_variation_gallery') {
         	
-        	\eo\wbc\model\publics\SP_Model_Single_Product::instance()->render_ui( $this->get_ui_definition($args));
+        	\eo\wbc\model\publics\SP_WBC_Model_Single_Product::instance()->render_ui( $this->get_ui_definition($args));
         
         }else{	
 
-        	\eo\wbc\model\publics\SP_Model_Single_Product::instance()->render_ui( $this->get_ui_definition($args));
+        	\eo\wbc\model\publics\SP_WBC_Model_Single_Product::instance()->render_ui( $this->get_ui_definition($args));
         }
     } 
 
@@ -741,7 +741,7 @@ class Options extends \eo\wbc\controllers\publics\Controller {
 	            $attribute_name = sanitize_title( $args[ 'attribute' ] );
 
 	            wbc()->load->model('category-attribute');
-	            $attribute = \eo\wbc\model\Category_Attribute::instance()->get_attribute(str_replace('pa_','',$args[ 'attribute' ]));
+	            $attribute = \eo\wbc\model\SP_WBC_Category_Attribute::instance()->get_attribute(str_replace('pa_','',$args[ 'attribute' ]));
 
 	            $product_id = $args[ 'product' ]->get_id();
 	            /*ACTIVE_TODO_OC_START
@@ -778,7 +778,7 @@ class Options extends \eo\wbc\controllers\publics\Controller {
 	}
 
 	public function product_images_template_callback(){
-		\eo\wbc\model\publics\SP_Model_Single_Product::instance()->render_gallery_images_template_callback();
+		\eo\wbc\model\publics\SP_WBC_Model_Single_Product::instance()->render_gallery_images_template_callback();
 	}
 
 	public function render_swatches_data_by_attribute_type($data,$args = array()){
@@ -833,13 +833,13 @@ class Options extends \eo\wbc\controllers\publics\Controller {
 
 		// $args['page_section'] == 'get_default_gallery';
 
-		// $args['data'] = \eo\wbc\model\publics\SP_Model_Single_Product()::instance()->get_data('get_default_gallery_init');
+		// $args['data'] = \eo\wbc\model\publics\SP_WBC_Model_Single_Product()::instance()->get_data('get_default_gallery_init');
 
         // \eo\wbc\controller\publics\Options::instance()->selectron('get_default_gallery');
 
         // $args['page_section'] == 'get_variation_gallery';
 
-        // $args['data'] = \eo\wbc\model\publics\SP_Model_Single_Product()::instance()->get_data('get_variation_gallery_init');
+        // $args['data'] = \eo\wbc\model\publics\SP_WBC_Model_Single_Product()::instance()->get_data('get_variation_gallery_init');
 
         // \eo\wbc\controller\publics\Options::instance()->selectron('get_variation_gallery');
 
@@ -847,9 +847,9 @@ class Options extends \eo\wbc\controllers\publics\Controller {
 		// ACTIVE_TODO_OC_START
 		// -- for the notes that we may be need to do the similar wc_ajax hooks binding and ajax function calling of perticullar controller in extantion like we did here for all applicable extantions which supports gallery images types since with the standard loading call to the get data function of model for perticullar page section will not happen so we most likely need to do that. so lets confirm that and impliment if requird -- to h 
 		// ACTIVE_TODO_OC_END
-	    /*$args['data'] = */\eo\wbc\model\publics\SP_Model_Single_Product::instance()->get_data('swatches_init');
+	    /*$args['data'] = */\eo\wbc\model\publics\SP_WBC_Model_Single_Product::instance()->get_data('swatches_init');
 	    
-	    /*$args['data'] = */\eo\wbc\model\publics\SP_Model_Single_Product::instance()->get_data('gallery_images_init');
+	    /*$args['data'] = */\eo\wbc\model\publics\SP_WBC_Model_Single_Product::instance()->get_data('gallery_images_init');
 
 	}
 

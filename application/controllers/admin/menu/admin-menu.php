@@ -346,7 +346,7 @@ if ( ! class_exists( 'Admin_Menu' ) ) {
 				else 
 				{
 					// show notification when theme is changed and for that theme the theme adaption check is not ran yet 
-					$curr_theme_key = \eo\wbc\model\utilities\Eowbc_Theme_Adaption_Check::current_theme_key();			
+					$curr_theme_key = \eo\wbc\model\utilities\SP_WBC_Theme_Adaption_Check::sp_wbc_current_theme_key();			
 					if( !isset($theme_adcheck_result[$curr_theme_key]) ) {
 						$this->add_notification( 'error','Run Theme Adaption Check for your new Theme','It seems that your website theme is changed so we suggest you run Theme Adaption Check, click on the link provided below to view Theme Adaption status and then you can run it from there. It will help ensure that our plugin is adapting smoothly to your new theme.',admin_url('admin.php?page='.$plugin_slug.'---theme-adaption'),'Continue');
 

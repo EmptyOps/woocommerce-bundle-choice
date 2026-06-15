@@ -143,7 +143,7 @@ class SP_WBC_Compatibility extends SP_Compatibility {
 	        return $args['product'];
 	    }else if($section == 'woocommerce_archive_container_class'){
 
-	        if (wbc()->common->current_theme_key() == 'themes___dello-child') {
+	        if (wbc()->common->sp_wbc_current_theme_key() == 'themes___dello-child') {
 	        	
 	        	return 'radiantthemes-shop';
 

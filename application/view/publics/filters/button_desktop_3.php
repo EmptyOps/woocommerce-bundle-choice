@@ -13,7 +13,7 @@ defined( 'ABSPATH' ) || exit;
 			&nbsp; <span class="ui grey text" style="cursor: pointer;">&nbsp;<i class="question circle outline icon" data-help="<?php echo esc_attr($help); ?>"></i></span>
 			<?php endif; ?>
 			<?php if($reset): ?>
-			&nbsp; <span class="ui grey text" style="cursor: pointer;" onclick="reset_checkbox(event,'.checklist_<?php echo esc_attr($filter['slug']); ?>')">&nbsp;<u><?php esc_html(spext_lang("reset", 'woo-bundle-choice')) ?></u></span>
+			&nbsp; <span class="ui grey text" style="cursor: pointer;" onclick="reset_checkbox(event,'.checklist_<?php echo esc_attr($filter['slug']); ?>')">&nbsp;<u><?php esc_html(sp_wbc_ext_lang("reset", 'woo-bundle-choice')) ?></u></span>
 			<?php endif; ?>
 		</p>
 		<div class="ui horizontal segments" data-reset="reset_button(new Event('click'),'.checklist_<?php echo esc_attr($filter['slug']); ?>')">

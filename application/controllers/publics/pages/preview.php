@@ -2,7 +2,7 @@
 namespace eo\wbc\controllers\publics\pages;
 defined( 'ABSPATH' ) || exit;
 
-class Preview extends \eo\wbc\system\core\publics\Eowbc_Base_Model_Publics {
+class Preview extends \eo\wbc\system\core\publics\SP_WBC_Base_Model_Publics {
 
     private static $_instance = null;
 
@@ -280,7 +280,7 @@ class Preview extends \eo\wbc\system\core\publics\Eowbc_Base_Model_Publics {
         
     }
 
-    private function eo_wbc_buttons_css(){
+    private function sp_wbc_buttons_css(){
       return '.ui.dimmer .ui.button{'.
           // (get_option('eo_wbc_home_btn_color')?'background-color:'.get_option('eo_wbc_home_btn_color').' !important;':'').
           (wbc()->options->get_option('appearance_wid_btns','button_backcolor_active',false)?'background-color:'.wbc()->options->get_option('appearance_wid_btns','button_backcolor_active',false).' !important;':'').
@@ -321,8 +321,8 @@ class Preview extends \eo\wbc\system\core\publics\Eowbc_Base_Model_Publics {
                 $first=wbc()->wc->eo_wbc_get_product((int)($set['FIRST'][2]?$set['FIRST'][2]:$set['FIRST'][0]));
                 $second=wbc()->wc->eo_wbc_get_product((int)($set['SECOND'][2]?$set['SECOND'][2]:$set['SECOND'][0]));
 
-                wbc()->load->model('publics/component/eowbc_breadcrumb');
-                $content= \eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_add_breadcrumb(wbc()->sanitize->get('STEP'),wbc()->sanitize->get('BEGIN')).'<br/>';
+                wbc()->load->model('publics/component/sp_wbc_breadcrumb');
+                $content= \eo\wbc\model\publics\component\SP_WBC_Breadcrumb::eo_wbc_add_breadcrumb(wbc()->sanitize->get('STEP'),wbc()->sanitize->get('BEGIN')).'<br/>';
                 
                 $content.='<!-- Created with Wordpress plugin - BUNDLOICE (formerly Woo Choice Plugin) --><div class="ui special cards centered" style="margin: auto !important;direction: ltr;
     min-width: fit-content !important;max-width: fit-content !important;">'.
@@ -331,7 +331,7 @@ class Preview extends \eo\wbc\system\core\publics\Eowbc_Base_Model_Publics {
                           '<div class="ui dimmer inverted transition hidden">'.
                             '<div class="content">'.
                                 '<div class="center">'.
-                                    '<a class="ui button primary" href="'.esc_url(\eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_breadcrumb_change_url((!empty(wbc()->sanitize->get('BEGIN')) && wbc()->sanitize->get('BEGIN')==wbc()->options->get_option('configuration','first_slug')/*get_option('eo_wbc_first_slug')*/ ? 1 : 2),(empty($set['FIRST'][2])?$set['FIRST'][0]:$set['FIRST'][2]))).'" >Change</a>'.
+                                    '<a class="ui button primary" href="'.esc_url(\eo\wbc\model\publics\component\SP_WBC_Breadcrumb::eo_wbc_breadcrumb_change_url((!empty(wbc()->sanitize->get('BEGIN')) && wbc()->sanitize->get('BEGIN')==wbc()->options->get_option('configuration','first_slug')/*get_option('eo_wbc_first_slug')*/ ? 1 : 2),(empty($set['FIRST'][2])?$set['FIRST'][0]:$set['FIRST'][2]))).'" >Change</a>'.
                                 '</div>'.
                             '</div>'.
                           '</div>'.esc_html($first->get_image('full')).
@@ -352,7 +352,7 @@ class Preview extends \eo\wbc\system\core\publics\Eowbc_Base_Model_Publics {
                           '<div class="ui dimmer inverted transition hidden">'.
                             '<div class="content">'.
                                 '<div class="center">'.
-                                    '<a class="ui button primary" href="'.esc_url(\eo\wbc\model\publics\component\EOWBC_Breadcrumb::eo_wbc_breadcrumb_change_url((!empty(wbc()->sanitize->get('BEGIN')) && wbc()->sanitize->get('BEGIN')==wbc()->options->get_option('configuration','first_slug')/*get_option('eo_wbc_first_slug')*/ ? 2 : 1),(empty($set['SECOND'][2])?$set['SECOND'][0]:$set['SECOND'][2]))).'">Change</a>'.        
+                                    '<a class="ui button primary" href="'.esc_url(\eo\wbc\model\publics\component\SP_WBC_Breadcrumb::eo_wbc_breadcrumb_change_url((!empty(wbc()->sanitize->get('BEGIN')) && wbc()->sanitize->get('BEGIN')==wbc()->options->get_option('configuration','first_slug')/*get_option('eo_wbc_first_slug')*/ ? 2 : 1),(empty($set['SECOND'][2])?$set['SECOND'][0]:$set['SECOND'][2]))).'">Change</a>'.        
                                 '</div>'.
                             '</div>'.
                           '</div>'.

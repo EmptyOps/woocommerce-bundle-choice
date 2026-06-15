@@ -25,8 +25,8 @@ class Tiny_Filter {
 	public function add_filter() {
 		$filter_datas =  unserialize(wbc()->options->get_option('tiny_feature','filter_widget',"a:0:{}"));
 		if(!empty($filter_datas)){
-			wbc()->load->model('publics/component/eowbc_filter_widget');
-			\eo\wbc\model\publics\component\EOWBC_Filter_Widget::instance()->get_widget_standalone($filter_datas);
+			wbc()->load->model('publics/component/sp_wbc_filter_widget');
+			\eo\wbc\model\publics\component\SP_WBC_Filter_Widget::instance()->get_widget_standalone($filter_datas);
 		}		
 	}
 }

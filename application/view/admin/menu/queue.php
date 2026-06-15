@@ -2,14 +2,14 @@
 defined( 'ABSPATH' ) || exit;
 $form = array();
 
-wbc()->load->model('admin/eowbc_queue');
+wbc()->load->model('admin/sp_wbc_queue');
 
-$form['id']='eowbc_queue';
+$form['id']='sp_wbc_queue';
 $form['title']='Sync Queue';
 $form['method']='POST';
 $form['tabs'] = true;
 
-$form['data'] = \eo\wbc\model\admin\Eowbc_Queue::instance()->get( \eo\wbc\controllers\admin\menu\page\Queue::get_form_definition() );
+$form['data'] = \eo\wbc\model\admin\SP_WBC_Queue::instance()->get( \eo\wbc\controllers\admin\menu\page\Queue::get_form_definition() );
 $form['attr']= array('data-is_per_tab_save="true"');
 
 

@@ -1693,7 +1693,7 @@ wbc()->theme->load('css','product');
 ?>
 
 <?php
-if(wbc()->common->current_theme_key() != 'themes___purple_theme'){
+if(wbc()->common->sp_wbc_current_theme_key() != 'themes___purple_theme'){
 ?>
 	<style type="text/css">
 		a.ui.inverted.secondary.single_add_to_cart_button.button.alt {

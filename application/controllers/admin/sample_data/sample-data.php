@@ -48,7 +48,7 @@ class Sample_Data {
             $_step=1;
 
             // wbc()->load->model('admin/sample_data/eowbc_jewelry');
-            // $res = \eo\wbc\model\admin\sample_data\Eowbc_Sample_Data::instance()->process_post( $_step, $_category, $_atttriutes ); 
+            // $res = \eo\wbc\model\admin\sample_data\SP_WBC_Sample_Data::instance()->process_post( $_step, $_category, $_atttriutes ); 
             $res = $this->model->process_post( $_step, $_category, $_atttriutes, $_maps, $this->feature_key );
 
             wbc()->load->template('admin/sample_data/main', array("feature_title"=>$this->feature_title,'feature_key'=>$this->feature_key,"_step"=>$_step,"number_of_step"=>$this->model->number_of_step(),"_atttriutes"=>$_atttriutes,"_category"=>$_category,"help_info"=>$this->help_info,'sample_data_obj'=>$this)); 

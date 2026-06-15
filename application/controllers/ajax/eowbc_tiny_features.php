@@ -1,6 +1,6 @@
 <?php
 /**
-*	Ajax handler to handle ajax save request for eowbc_configuration form.	
+*	Ajax handler to handle ajax save request for sp_wbc_configuration form.	
 *
 */
 defined( 'ABSPATH' ) || exit;

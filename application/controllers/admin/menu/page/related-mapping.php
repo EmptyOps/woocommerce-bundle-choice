@@ -195,7 +195,7 @@ if ( ! class_exists( 'Related_Mapping' ) ) {
 								'value'=>'',
 								'sanitize'=>'sanitize_text_field',
 								/*'validate'=>array('required'=>''),*/
-								'options'=>array_replace(array('__price__'=>'Price'),\eo\wbc\model\Category_Attribute::instance()->get_attributs()),
+								'options'=>array_replace(array('__price__'=>'Price'),\eo\wbc\model\SP_WBC_Category_Attribute::instance()->get_attributs()),
 								'class'=>array('fluid','search','clearable'),
 								'inline_class'=>array('three'),
 								'next_inline'=>true,

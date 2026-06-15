@@ -23,9 +23,9 @@ class Ring_Builder extends Sample_Data {
 
         $this->feature_title = wbc()->config->get_builders()[$this->feature_key];    
 
-        wbc()->load->model('admin/sample_data/eowbc_sample_data');
-        wbc()->load->model('admin/sample_data/eowbc_ring_builder');
-        $this->model = \eo\wbc\model\admin\sample_data\Eowbc_Ring_Builder::instance();
+        wbc()->load->model('admin/sample_data/sp_wbc_sample_data');
+        wbc()->load->model('admin/sample_data/sp_wbc_ring_builder');
+        $this->model = \eo\wbc\model\admin\sample_data\SP_WBC_Ring_Builder::instance();
     }
 
     public function init() {

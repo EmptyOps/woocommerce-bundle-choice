@@ -41,7 +41,7 @@ class Pair_Builder_Data_Template extends Sample_Data_Template {
         }
 
         $_img_url= constant('EOWBC_ASSET_URL').'img/sample_data/'.$this->asset_folder.'/';
-        $sample_data_instance = \eo\wbc\model\admin\sample_data\Eowbc_Sample_Data::instance();
+        $sample_data_instance = \eo\wbc\model\admin\sample_data\SP_WBC_Sample_Data::instance();
 
 
         // update_option('eo_wbc_first_name','Diamond Shape');//FIRST : NAME

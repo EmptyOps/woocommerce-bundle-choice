@@ -74,7 +74,7 @@ if ( ! class_exists( 'Shop_Category_Filter' ) ) {
 					'validate'=>array('validate_if'=>array('sc_shop_cat_filter_location_cat'=>array('required'=>''))),
 					'sanitize'=>'sanitize_text_field',
 					'validate'=>array('validate_if'=>array('sc_shop_cat_filter_location_cat'=>array('required'=>''))),
-					'options'=>\eo\wbc\model\Category_Attribute::instance()->get_category(),
+					'options'=>\eo\wbc\model\SP_WBC_Category_Attribute::instance()->get_category(),
 					'class'=>array('fluid','multiple','clearable'),
 					'field_attr'=>array('multiple=""'),
 					'inline'=>false,
@@ -144,7 +144,7 @@ if ( ! class_exists( 'Shop_Category_Filter' ) ) {
 					'type'=>'select',
 					'value'=>'',					
 					'sanitize'=>'sanitize_text_field',
-					'options'=>\eo\wbc\model\Category_Attribute::instance()->get_category(),
+					'options'=>\eo\wbc\model\SP_WBC_Category_Attribute::instance()->get_category(),
 					'class'=>array('fluid'/*,'multiple'*/),
 					/*'field_attr'=>array('multiple=""'),*/
 					'inline'=>false,

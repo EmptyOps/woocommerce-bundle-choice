@@ -12,12 +12,12 @@ defined( 'ABSPATH' ) || exit;
 <div class="bottom_filter_segment hidden ui segment" id="sticky_mob_filter_<?php echo esc_attr($filter['slug']); ?>">
     <div class="ui equal width grid">
         <div class="column close_sticky_mob_filter" data-target="#sticky_mob_filter_<?php echo esc_attr($filter['slug']); ?>">
-            <i class="ui icon times" style="cursor: pointer;"></i>&nbsp; <?php esc_html(spext_lang("Close", 'woo-bundle-choice')); ?>
+            <i class="ui icon times" style="cursor: pointer;"></i>&nbsp; <?php esc_html(sp_wbc_ext_lang("Close", 'woo-bundle-choice')); ?>
         </div>
         <div class="column"></div>
         <div class="column"></div>
         <div class="column" style="text-align: right;" onclick="reset_slider(event,'<?php echo esc_attr($filter['slug']); ?>','<?php echo esc_attr($filter['min_value']['name']); ?>','<?php echo esc_attr($filter['max_value']['name']); ?>')">
-            <i class="ui icon redo" style="cursor: pointer;"></i>&nbsp; <?php esc_html(spext_lang("Reset", 'woo-bundle-choice')); ?>
+            <i class="ui icon redo" style="cursor: pointer;"></i>&nbsp; <?php esc_html(sp_wbc_ext_lang("Reset", 'woo-bundle-choice')); ?>
         </div>
     </div>					
     <br/>

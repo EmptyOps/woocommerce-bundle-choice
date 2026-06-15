@@ -3,7 +3,7 @@ defined( 'ABSPATH' ) || exit;
 
 $form = array();
 
-$form['id']='eowbc_shop_category_filter';
+$form['id']='sp_wbc_shop_category_filter';
 $form['title']='Filters for Shop/Category Page';
 $form['method']='POST';
 $form['tabs'] = true;
@@ -11,8 +11,8 @@ $form['tabs'] = true;
 
 $_childs = array();
 
-$categories = \eo\wbc\model\Category_Attribute::instance()->get_category();
-$attributes = \eo\wbc\model\Category_Attribute::instance()->get_attributs();
+$categories = \eo\wbc\model\SP_WBC_Category_Attribute::instance()->get_category();
+$attributes = \eo\wbc\model\SP_WBC_Category_Attribute::instance()->get_attributs();
 
 if(!empty($categories) and is_array($categories)){
 	foreach ($categories as $id => $label) {
@@ -33,7 +33,7 @@ if(!empty($categories) and is_array($categories)){
 if(!empty($attributes) and is_array($attributes)){
 	foreach ($attributes as $slug => $value) {
 
-		$term = \eo\wbc\model\Category_Attribute::instance()->get_attribute($slug);
+		$term = \eo\wbc\model\SP_WBC_Category_Attribute::instance()->get_attribute($slug);
 		$term = wbc()->wc->eo_wbc_get_attribute($term->attribute_id);
 		
 		if(!empty($term) && !is_wp_error($term)) {			
@@ -119,9 +119,9 @@ $inline_script =
     "});";	
 wbc()->load->add_inline_script('', $inline_script, 'common');
 
-wbc()->load->model('admin/eowbc_shop_category_filter');
+wbc()->load->model('admin/sp_wbc_shop_category_filter');
 
-$form['data'] = \eo\wbc\model\admin\Eowbc_Shop_Category_Filter::instance()->get(\eo\wbc\controllers\admin\menu\page\Shop_Category_Filter::get_form_definition());
+$form['data'] = \eo\wbc\model\admin\SP_WBC_Shop_Category_Filter::instance()->get(\eo\wbc\controllers\admin\menu\page\Shop_Category_Filter::get_form_definition());
 $form['attr']= array('data-is_per_tab_save="true"');
 
 // wbc()->load->model('admin\form-builder');

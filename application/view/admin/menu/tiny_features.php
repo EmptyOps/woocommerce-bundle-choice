@@ -68,10 +68,10 @@ if(empty($filter_datas)){
 	foreach ($filter_datas as $filter_name => $filter_data) {
 		$type = $filter_data['type'];
 		if($type === 'true'||$type === true){
-			$attribute = eo\wbc\model\Category_Attribute::instance()->get_attribute($filter_name);
+			$attribute = eo\wbc\model\SP_WBC_Category_Attribute::instance()->get_attribute($filter_name);
 			$filter_data['name'] = $attribute->attribute_label;
 		} else {
-			$category = eo\wbc\model\Category_Attribute::instance()->get_single_category($filter_name);			
+			$category = eo\wbc\model\SP_WBC_Category_Attribute::instance()->get_single_category($filter_name);			
 			$filter_data['name'] = $category->name;
 		}
 		$filter_table['body'][]= array(
@@ -655,7 +655,7 @@ $form['data'] = array(
 					'type'=>'select',
 					'value'=> wbc()->options->get_option('tiny_features','tiny_features_enable_only_for_categories'/*,'#DCC7C7'*/),
 					'sanitize'=>'sanitize_text_field',
-					'options'=> \eo\wbc\model\Category_Attribute::instance()->get_category(),
+					'options'=> \eo\wbc\model\SP_WBC_Category_Attribute::instance()->get_category(),
 					'class'=>array('fluid','additions','search','multiple','clearable'),
 					'visible_info'=>array( 
 						'label'=>eowbc_lang('Simply select the categories for which only you want to enable the variation swatches. Leave it blank if you want to keep it on for all categories, by default it is enabled for all categories.'),
@@ -869,7 +869,7 @@ $form['data'] = array(
 					'type'=>'select',
 					'value'=>wbc()->options->get_option('tiny_features','tiny_features_specification_meta_keys',''),
 					'sanitize'=>'sanitize_text_field',		
-					//'options'=>\eo\wbc\model\Category_Attribute::instance()->get_category(),			
+					//'options'=>\eo\wbc\model\SP_WBC_Category_Attribute::instance()->get_category(),			
 					'class'=>array('fluid','multiple','allow_addition','search'),
 					'field_attr'=>array('multiple=""'),
 					'inline'=>false,					
@@ -902,7 +902,7 @@ $form['data'] = array(
 	// 				'type'=>'select',
 	// 				'value'=>'',
 	// 				'sanitize'=>'sanitize_text_field',
-	// 				'options'=>array_replace(eo\wbc\model\Category_Attribute::instance()->get_category(),eo\wbc\model\Category_Attribute::instance()->get_attributs()),
+	// 				'options'=>array_replace(eo\wbc\model\SP_WBC_Category_Attribute::instance()->get_category(),eo\wbc\model\SP_WBC_Category_Attribute::instance()->get_attributs()),
 	// 				'class'=>array('fluid'),
 	// 				'inline'=>false,
 	// 				'visible_info'=>array( 'label'=>eowbc_lang('( Select category or attribute on which this filter field should do the searching. )'),
@@ -993,7 +993,7 @@ $form['data'] = array(
 	// 				'type'=>'select',
 	// 				'value'=>wbc()->options->get_option('tiny_features','shop_cat_filter_category'),
 	// 				'sanitize'=>'sanitize_text_field',
-	// 				'options'=>eo\wbc\model\Category_Attribute::instance()->get_category(),
+	// 				'options'=>eo\wbc\model\SP_WBC_Category_Attribute::instance()->get_category(),
 	// 				'class'=>array('fluid'),
 	// 				'inline'=>false,
 	// 				'visible_info'=>array( 'label'=>eowbc_lang('( Select category on which to show filter widget. )'),
@@ -1020,7 +1020,7 @@ $form['data'] = array(
 	// 				'type'=>'select',
 	// 				'value'=>wbc()->options->get_option('tiny_features','shop_cat_filter_two_filter_first'),
 	// 				'sanitize'=>'sanitize_text_field',
-	// 				'options'=>eo\wbc\model\Category_Attribute::instance()->get_category(),
+	// 				'options'=>eo\wbc\model\SP_WBC_Category_Attribute::instance()->get_category(),
 	// 				'class'=>array('fluid'),
 	// 				'inline'=>false,
 	// 				'visible_info'=>array( 'label'=>eowbc_lang('( The first category of the two different filters, please select the main category of which all attribute options and products you want to include in this filter\'s layout and search results. )'),
@@ -1047,7 +1047,7 @@ $form['data'] = array(
 	// 				'type'=>'select',
 	// 				'value'=>wbc()->options->get_option('tiny_features','shop_cat_filter_two_filter_second'),
 	// 				'sanitize'=>'sanitize_text_field',
-	// 				'options'=>eo\wbc\model\Category_Attribute::instance()->get_category(),
+	// 				'options'=>eo\wbc\model\SP_WBC_Category_Attribute::instance()->get_category(),
 	// 				'class'=>array('fluid'),
 	// 				'inline'=>false,
 	// 				'visible_info'=>array( 'label'=>eowbc_lang('( The second category of the two different filters, please select the main category of which all attribute options and products you want to include in this filter\'s layout and search results.' ),
@@ -1162,7 +1162,7 @@ $form['data'] = array(
 	// 				'type'=>'select',
 	// 				'value'=>'',
 	// 				'sanitize'=>'sanitize_text_field',
-	// 				'options'=>array_replace(eo\wbc\model\Category_Attribute::instance()->get_category(),eo\wbc\model\Category_Attribute::instance()->get_attributs()),
+	// 				'options'=>array_replace(eo\wbc\model\SP_WBC_Category_Attribute::instance()->get_category(),eo\wbc\model\SP_WBC_Category_Attribute::instance()->get_attributs()),
 	// 				'class'=>array('fluid'),
 	// 				'size_class'=>array('three','wide','required'),
 	// 				'attr'=>array("onchange='document.getElementById(\"shop_cat_filter_add_type\").value=isNaN(document.getElementById(\"shop_cat_filter_add_category\").value)'")

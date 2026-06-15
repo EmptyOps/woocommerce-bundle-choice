@@ -1,6 +1,6 @@
 <?php
 /**
-*	Ajax handler to handle ajax save request for eowbc_mapping form.	
+*	Ajax handler to handle ajax save request for sp_wbc_mapping form.	
 *
 */
 defined( 'ABSPATH' ) || exit;
@@ -8,16 +8,16 @@ $res = array( "type"=>"success", "msg"=>"" );
 
 if(wp_verify_nonce(wbc()->sanitize->post('_wpnonce'),'sample_data_jewelry')) {                
 
-	wbc()->load->model('admin/sample_data/eowbc_filters_shortcode');
+	wbc()->load->model('admin/sample_data/sp_wbc_filters_shortcode');
 	wbc()->load->model('admin\form-builder');
 	    
 	// if( isset($_POST["sub_action"]) && $_POST["sub_action"] == "bulk_delete" ) {
-	// 	$res = eo\wbc\model\admin\Eowbc_Mapping::instance()->delete( $_POST["ids"], $_POST["saved_tab_key"] );
+	// 	$res = eo\wbc\model\admin\SP_WBC_mapping::instance()->delete( $_POST["ids"], $_POST["saved_tab_key"] );
 	// }
 	// else {
-		//$res = eo\wbc\model\admin\Eowbc_Mapping::instance()->save( eo\wbc\controllers\admin\menu\page\Mapping::get_form_definition() );
-		//\eo\wbc\model\admin\sample_data\Eowbc_Filters_Shortcode::instance()->CatAtData__construct();
-		$res /*echo*/ = \eo\wbc\model\admin\sample_data\Eowbc_Filters_Shortcode::instance()->create_product(intval(wbc()->sanitize->post('product_index')));
+		//$res = eo\wbc\model\admin\SP_WBC_Mapping::instance()->save( eo\wbc\controllers\admin\menu\page\Mapping::get_form_definition() );
+		//\eo\wbc\model\admin\sample_data\SP_WBC_Filters_Shortcode::instance()->CatAtData__construct();
+		$res /*echo*/ = \eo\wbc\model\admin\sample_data\SP_WBC_Filters_Shortcode::instance()->create_product(intval(wbc()->sanitize->post('product_index')));
 		// wp_die();
     // }
 	

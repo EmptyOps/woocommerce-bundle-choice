@@ -1,7 +1,7 @@
 <?php 
 
 namespace eo\wbc\controllers\admin;
-use eo\wbc\controllers\admin\menu\Admin_Menu_Factory;
+use eo\wbc\controllers\admin\menu\SP_WBC_Admin_Menu_Factory;
 use eo\wbc\controllers\admin\menu\Admin_Menu;
 
 use eo\wbc\system\bootstrap\Setup_Wizard;
@@ -31,12 +31,12 @@ class Admin {
 		//Hook to update product prices as per the price control feature on the product update feature.		
 		$bonus_features = array_filter(unserialize(wbc()->options->get_option('setting_status_setting_status_setting','bonus_features',serialize(array()))));
         if(!empty($bonus_features['price_control'])){
-            wbc()->load->model('admin/eowbc_price_control_save_update_prices');
+            wbc()->load->model('admin/sp_wbc_price_control_save_update_prices');
             
-            add_action( 'woocommerce_before_data_object_save',array(\eo\wbc\model\admin\Eowbc_Price_Control_Save_Update_Prices::instance(),'update_product'),10,2);
-            add_action( 'woocommerce_before_product_object_save',array(\eo\wbc\model\admin\Eowbc_Price_Control_Save_Update_Prices::instance(),'update_product'),10,2);
+            add_action( 'woocommerce_before_data_object_save',array(\eo\wbc\model\admin\SP_WBC_Price_Control_Save_Update_Prices::instance(),'update_product'),10,2);
+            add_action( 'woocommerce_before_product_object_save',array(\eo\wbc\model\admin\SP_WBC_Price_Control_Save_Update_Prices::instance(),'update_product'),10,2);
 
-			add_action( 'save_post',array(\eo\wbc\model\admin\Eowbc_Price_Control_Save_Update_Prices::instance(),'update_prices'),10,3);
+			add_action( 'save_post',array(\eo\wbc\model\admin\SP_WBC_Price_Control_Save_Update_Prices::instance(),'update_prices'),10,3);
         }
 		
 		// If the setup wizard is ran then save the status.
@@ -127,7 +127,7 @@ class Admin {
 			self::instance()->init();
 		}
 
-		Admin_Menu_Factory::instance()->build_menu($menu);
+		SP_WBC_Admin_Menu_Factory::instance()->build_menu($menu);
 	}
 
 	public function init() {

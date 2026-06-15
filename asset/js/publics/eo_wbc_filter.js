@@ -1694,7 +1694,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 	
 	        jQuery( EO_WBC_FILTER_UI_ICON_TERM_SLUG ).each(function (i, term_slug) {
 
-		    	// --- aa code woo-bundle-choice/application/model/publics/component/eowbc_filter_widget.php eo_wbc_filter_ui_icon() mathi move karyo se @a ---
+		    	// --- aa code woo-bundle-choice/application/model/publics/component/sp_wbc_filter_widget.php eo_wbc_filter_ui_icon() mathi move karyo se @a ---
 		    	// --- start ---
 		    	console.log(term_slug);
 		    	if(term_slug){
@@ -1738,7 +1738,7 @@ window.document.splugins.wbc.filters.core = function( configs ) {
 		    	console.log(term_slug);
 		    	if(term_slug){
 
-			    	// --- aa code woo-bundle-choice/application/model/publics/component/eowbc_filter_widget.php input_button(); mathi move karyo se @a ---
+			    	// --- aa code woo-bundle-choice/application/model/publics/component/sp_wbc_filter_widget.php input_button(); mathi move karyo se @a ---
 			    	// --- start ---
 					// $('[data-filter-slug="<?php echo $filter['slug']; ?>"]').on('click',function(event){
 					jQuery('[data-filter-slug="'+ term_slug +'"]').on('click',function(event){

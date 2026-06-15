@@ -31,7 +31,7 @@ if(isset($_GET['FIRST']) and isset($_GET['SECOND'])) { ?>
             :
             '#' 
         ); ?>" 
-        class="<?php echo esc_attr((($step==3)?'active ':(($step>3)?'completed ':(!empty(\eo\wbc\model\publics\component\EOWBC_Breadcrumb::$clickable_breadcrumb)?'':'disabled')))); ?> step">
+        class="<?php echo esc_attr((($step==3)?'active ':(($step>3)?'completed ':(!empty(\eo\wbc\model\publics\component\SP_WBC_Breadcrumb::$clickable_breadcrumb)?'':'disabled')))); ?> step">
         <div class="content"><?php echo esc_html($breadcrumb_ui::$preview_name/*get_option('eo_wbc_collection_title','Preview')*/); ?></div>
     </div>
 </div>
