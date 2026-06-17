@@ -124,7 +124,6 @@ rsync -avr "${exclude_list[@]/#/--exclude=}" "$PROJECT_ROOT/" "$PLUGIN_BUILDS_PA
 
 # Note :- Date :- 16/06/2026 a niche je URL che ama change karyo che pela old URL hati have Updated URL set kare li che becouse Wordpress.org na deploy ma issue avv to to deploy notu thatu atle a URL ne Update karyu che. 
 # svn co -q "http://svn.wp-plugins.org/$PLUGIN" svn
-
 svn co -q "https://plugins.svn.wordpress.org/$PLUGIN" svn
 
 echo "checkout done"
