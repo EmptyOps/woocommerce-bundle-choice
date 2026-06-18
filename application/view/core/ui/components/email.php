@@ -11,7 +11,7 @@ defined( 'ABSPATH' ) || exit;
     placeholder="<?php echo !empty($placeholder) ? esc_attr($placeholder) : ''; ?>" 
     class="<?php echo !empty($class) ? esc_attr($class) : ''; ?>" 
     style="<?php echo !empty($style) ? esc_attr($style) : ''; ?>"
-    <?php isset($required) ? 'required="required"' : ''; ?>
+    <?php echo isset($required) ? 'required="required"' : ''; ?>
 />
 
 <?php endif; ?>
