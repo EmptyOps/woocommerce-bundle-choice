@@ -1,3 +1,4 @@
+<?php defined( 'ABSPATH' ) || exit; ?>
 <?php
 defined( 'ABSPATH' ) || exit;
 if(!empty($src)): ?>

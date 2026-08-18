@@ -1,3 +1,6 @@
+<?php
+defined( 'ABSPATH' ) || exit;
+?>
 <div class="title" data-tab-group="<?php echo esc_attr($tab_set); ?>">
     <i class="dropdown icon"></i>
     <?php echo esc_html($term->name); ?>

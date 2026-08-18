@@ -1,3 +1,6 @@
+<?php
+defined( 'ABSPATH' ) || exit;
+?>
 <?php add_action('wp_footer' ,function(){
 
 $get_link = /*$_GET*/wbc()->sanitize->_read_global_sanitized('get');

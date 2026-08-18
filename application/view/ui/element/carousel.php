@@ -1,3 +1,4 @@
+<?php defined( 'ABSPATH' ) || exit; ?>
 <?php
 defined( 'ABSPATH' ) || exit;
 $ride_id = uniqid() ?>

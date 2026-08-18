@@ -1,3 +1,6 @@
+<?php
+defined( 'ABSPATH' ) || exit;
+?>
 <div type="submit" name="eowbc-askq" id="eowbc-askq" value="<?php echo esc_attr($product_id); ?>" class="ui inverted primary button" style="margin-left: 1em;">Question?</div>
 
 

@@ -1,5 +1,5 @@
 <?php 
-
+defined( 'ABSPATH' ) || exit;
 //	the common global vars -- these common global vars will load before any js layer or even inline javascript of the wbc, extensions and themes 
 
 

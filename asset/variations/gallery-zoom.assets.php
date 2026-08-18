@@ -1,4 +1,5 @@
 <?php
+defined( 'ABSPATH' ) || exit;
 add_action( 'wp_enqueue_scripts' ,function(){
 
 	// ACTIVE_TODO temp: wen we enabel back the mobile site at that time remove below false condition.
