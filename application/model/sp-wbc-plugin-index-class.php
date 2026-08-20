@@ -194,7 +194,7 @@ if(!class_exists('SP_WBC_Plugin_Index_Class') ) {
 			// defined('EOWBC_ASSET_DIR') || define('EOWBC_ASSET_DIR', constant('EOWBC_DIRECTORY').'asset/');
 			defined( $singleton_functionUpper.'_ASSET_DIR') || define($singleton_functionUpper.'_ASSET_DIR', method_exists($this->SP_WBC_Extension, 'ASSET_DIR') ? $this->SP_WBC_Extension->ASSET_DIR() : constant($singleton_functionUpper.'_DIRECTORY').'assets/' );
 			// defined('EOWBC_ASSET_URL') || define('EOWBC_ASSET_URL', plugins_url(constant('EOWBC_BASE_DIRECTORY')).'/asset/');
-			defined( $singleton_functionUpper.'_ASSET_URL') || define($singleton_functionUpper.'_ASSET_URL', method_exists($this->SP_WBC_Extension, 'ASSET_URL') ? $this->SP_WBC_Extension->ASSET_URL() : plugins_url(constant($singleton_functionUpper.'_BASE_DIRECTORY')).'/assets/' );
+			defined( $singleton_functionUpper.'_ASSET_URL') || define($singleton_functionUpper.'_ASSET_URL', method_exists($this->SP_WBC_Extension, 'ASSET_URL') ? $this->SP_WBC_Extension->ASSET_URL() : plugin_dir_path( $this->getFILE() ).'assets/' );
 			
 			// defined('EOWBC_MIGRATION_DIR') || define('EOWBC_MIGRATION_DIR', constant('EOWBC_DIRECTORY').'application/migration/');			
 			// defined('EOWBC_TOOLS_DIR') || define('EOWBC_TOOLS_DIR', constant('EOWBC_DIRECTORY').'application/system/tools/');

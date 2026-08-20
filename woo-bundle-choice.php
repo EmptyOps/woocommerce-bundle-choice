@@ -138,7 +138,7 @@ if(!class_exists('Woo_Bundle_Choice') ) {
 			defined('EOWBC_VERSION') || define('EOWBC_VERSION', $plugin_data['Version']);
 
 			defined('EOWBC_ASSET_DIR') || define('EOWBC_ASSET_DIR', constant('EOWBC_DIRECTORY').'asset/');
-			defined('EOWBC_ASSET_URL') || define('EOWBC_ASSET_URL', plugins_url(constant('EOWBC_BASE_DIRECTORY')).'/asset/');
+			defined('EOWBC_ASSET_URL') || define('EOWBC_ASSET_URL', plugin_dir_url( __FILE__ ) . 'asset/');
 			
 			defined('EOWBC_MIGRATION_DIR') || define('EOWBC_MIGRATION_DIR', constant('EOWBC_DIRECTORY').'application/migration/');			
 			defined('EOWBC_TOOLS_DIR') || define('EOWBC_TOOLS_DIR', constant('EOWBC_DIRECTORY').'application/system/tools/');
