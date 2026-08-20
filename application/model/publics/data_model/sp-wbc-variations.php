@@ -1000,7 +1000,7 @@ class SP_WBC_Variations extends SP_Variations {
         --	fix the below get text call -- to d 
         ACTIVE_TODO_OC_END*/
 		// For bundle Product static item
-		$args['hook_callback_args']['hook_args']['show_option_none'] = eowbc_lang_esc_html__( 'Choose an option', 'woo-variation-swatches' );
+		$args['hook_callback_args']['hook_args']['show_option_none'] = eowbc_lang_esc_html__( 'Choose an option', 'woo-bundle-choice' );
 
 		/*ACTIVE_TODO_OC_START
 		ACTIVE_TODO we also need to provide default setting and I think we can 
@@ -1374,7 +1374,7 @@ class SP_WBC_Variations extends SP_Variations {
 				/*ACTIVE_TODO_OC_START
 				fix the below get text call -- to d 
 				ACTIVE_TODO_OC_END*/
-				'show_option_none' => esc_html__( 'Choose an option', 'woo-variation-swatches' )
+				'show_option_none' => esc_html__( 'Choose an option', 'woo-bundle-choice' )
 			)
 		);
 

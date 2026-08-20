@@ -45,7 +45,7 @@ class SP_WBC_Single_Product extends SP_WBC_Base_Model_Publics {
 
 	protected function add_to_cart_text(){
         add_filter('woocommerce_product_add_to_cart_text',function($add_to_cart_text,$product){
-            return __('View','WooCommerce');
+            return esc_html__('View','woo-bundle-choice');
         },10,2);
 	}
 
