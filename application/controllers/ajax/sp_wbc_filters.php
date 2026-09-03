@@ -33,5 +33,5 @@ else {
 	$res["msg"] = "Nonce validation failed";
 }
 
-// json_encode($res);
+// wp_json_encode($res);
 wbc()->rest->response($res);

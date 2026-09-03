@@ -55,7 +55,7 @@ if(!class_exists('SP_WBC_Validate')) {
 				    		$validation_state = call_user_func_array( array( $this,$fv['validate']),array($fv['label'], isset($_POST[$fk]) ? wbc()->sanitize->post($fk) : '' ) );
 				    		if($validation_state!==true) {
 				    			$res["msg"] = $validation_state;
-				    			echo json_encode($res);
+				    			echo wp_json_encode($res);
 				    			die();
 				    		}
 				    	} elseif(is_array($fv['validate'])) {
@@ -64,10 +64,10 @@ if(!class_exists('SP_WBC_Validate')) {
 				    				$validation_state = call_user_func_array( array( $this,$sanitize_method),array($fv['label'], isset($_POST[$fk]) ? wbc()->sanitize->post($fk) : '',$sanitize_params));
 				    				if($validation_state!==true) {
 						    			$res["msg"] = $validation_state;
-						    			echo json_encode($res);
+						    			echo wp_json_encode($res);
 						    			die();
 						    		}
-				    			}				    			
+				    			}
 				    		}
 				    	}
 				    }
@@ -90,10 +90,10 @@ if(!class_exists('SP_WBC_Validate')) {
 		    				var_dump($value);
 		    				if($validation_state!==true) {
 				    			$res["msg"] = $validation_state;
-				    			echo json_encode($res);
+				    			echo wp_json_encode($res);
 				    			die();
 				    		}
-		    			}				    			
+		    			}
 		    		}
 		    		return true;
 				} else {
