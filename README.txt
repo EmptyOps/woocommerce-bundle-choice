@@ -4,7 +4,7 @@ Tags: woocommerce,product bundle,product bundles,woocommerce product bundles,bun
 Requires at least: 3.5
 Tested up to: 7.0
 Requires PHP: 5.6
-Stable tag: 1.0.27
+Stable tag: 1.0.28
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 Contributors: ajayemptyops,bhaveshdesai,shraddharaiyani,CmdrMahesh,hi0001234d
@@ -310,6 +310,9 @@ Yes, it is.
 8. Once the home page position for button is configured, the home page would look something like this.
 
 == Changelog ==
+= 1.0.28 (September 3, 2026) =
+  **Fix & Maintenance:** Resolved reported issues, improved performance, and made targeted refinements to enhance overall stability and reliability.
+  **Review-ready:** All changes have been finalized and the release is ready for review and submission.
 = 1.0.27 (June 9, 2026) =
   **Fix & Maintenance:** Addressed reported issues, optimized code performance, and enhanced overall system stability.
   **Review-ready:** Changes are finalized and ready for submission; no new updates added.
