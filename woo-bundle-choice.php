@@ -10,7 +10,7 @@
  * Plugin Name: BUNDLOICE (formerly Woo Choice Plugin) | Ring Builder | Loose Diamond Search Pages - Variation Swatches - Pair Maker | Guidance Tool
  * Plugin URI: https://wordpress.org/plugins/woo-bundle-choice/
  * Description: Product bundling as ring builder for jewelry, pair maker for clothing and guidance tool for home decor, cosmetics etc. Product bundling as per user's choice.
- * Version: 1.0.27
+ * Version: 1.0.28
  * Author: Sphere Plugins
  * Author URI: https://sphereplugins.com/
  * License: GPLv3+
@@ -138,7 +138,7 @@ if(!class_exists('Woo_Bundle_Choice') ) {
 			defined('EOWBC_VERSION') || define('EOWBC_VERSION', $plugin_data['Version']);
 
 			defined('EOWBC_ASSET_DIR') || define('EOWBC_ASSET_DIR', constant('EOWBC_DIRECTORY').'asset/');
-			defined('EOWBC_ASSET_URL') || define('EOWBC_ASSET_URL', plugins_url(constant('EOWBC_BASE_DIRECTORY')).'/asset/');
+			defined('EOWBC_ASSET_URL') || define('EOWBC_ASSET_URL', plugin_dir_url( __FILE__ ) . 'asset/');
 			
 			defined('EOWBC_MIGRATION_DIR') || define('EOWBC_MIGRATION_DIR', constant('EOWBC_DIRECTORY').'application/migration/');			
 			defined('EOWBC_TOOLS_DIR') || define('EOWBC_TOOLS_DIR', constant('EOWBC_DIRECTORY').'application/system/tools/');
@@ -149,6 +149,14 @@ if(!class_exists('Woo_Bundle_Choice') ) {
 			defined('WBC_TEMPLATE_DIR_EXTENDED') || define('WBC_TEMPLATE_DIR_EXTENDED', constant('EOWBC_DIRECTORY').'templates/');
 
 			defined('EOWBC_LOG_DIR') || define('EOWBC_LOG_DIR', constant('EOWBC_ASSET_DIR').'logs/');
+			
+			if ( ! defined( 'EOWBC_LOG_DIR' ) ) {
+				$uploads = wp_upload_dir();
+
+				if ( empty( $uploads['error'] ) && ! empty( $uploads['basedir'] ) ) {
+					define( 'EOWBC_LOG_DIR', trailingslashit( $uploads['basedir'] ) . basename( untrailingslashit( EOWBC_DIRECTORY ) ) . '/logs/' );
+				}
+			}
 
 			defined('EOWBC_ICON') || define('EOWBC_ICON', constant('EOWBC_ASSET_URL').'icon/mini.png');
 			defined('EOWBC_JUMBO_ICON') || define('EOWBC_JUMBO_ICON', constant('EOWBC_ASSET_URL').'/icon/jumbo.png');

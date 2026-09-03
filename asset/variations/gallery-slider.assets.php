@@ -1,3 +1,6 @@
+<?php
+defined( 'ABSPATH' ) || exit;
+?>
 <style type="text/css">
     .sp-variations-gallery-images-slider.splide_slider_container li img {
         display: block;

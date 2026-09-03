@@ -630,7 +630,7 @@ class SP_WBC_WC {
 
             $option_list=array();    
         } elseif( $format == 'detailed_dropdown' ) {
-            $option_list='<div class="divider"></div><div class="header">'.esc_html__('Attributes','diamond-api-integrator').'</div>';
+            $option_list='<div class="divider"></div><div class="header">'.esc_html__('Attributes','woo-bundle-choice').'</div>';
         } elseif( $format == 'detailed' ) {
             $option_list=array();
         } elseif( $format == 'detailed_vattr' ) {

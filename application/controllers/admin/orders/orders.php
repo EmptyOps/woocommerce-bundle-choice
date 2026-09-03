@@ -26,7 +26,7 @@ class Orders
 
            if(empty($sets['order_map'])){
             return true;
-                //$sets['order_map'] = json_encode(array());
+                //$sets['order_map'] = wp_json_encode(array());
             }
 
            $sets=(json_decode($sets['order_map']));

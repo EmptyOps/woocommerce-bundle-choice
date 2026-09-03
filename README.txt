@@ -4,7 +4,7 @@ Tags: woocommerce,product bundle,product bundles,woocommerce product bundles,bun
 Requires at least: 3.5
 Tested up to: 7.0
 Requires PHP: 5.6
-Stable tag: 1.0.27
+Stable tag: 1.0.28
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 Contributors: ajayemptyops,bhaveshdesai,shraddharaiyani,CmdrMahesh,hi0001234d
@@ -310,6 +310,9 @@ Yes, it is.
 8. Once the home page position for button is configured, the home page would look something like this.
 
 == Changelog ==
+= 1.0.28 (September 3, 2026) =
+  **Fix & Maintenance:** Resolved reported issues, improved performance, and made targeted refinements to enhance overall stability and reliability.
+  **Review-ready:** All changes have been finalized and the release is ready for review and submission.
 = 1.0.27 (June 9, 2026) =
   **Fix & Maintenance:** Addressed reported issues, optimized code performance, and enhanced overall system stability.
   **Review-ready:** Changes are finalized and ready for submission; no new updates added.
@@ -511,10 +514,17 @@ Yes, it is.
 
 == External Services ==
 
-Service: SpherePlugins
+This plugin relies on the following external services. Use of these services
+is required for the described features to work.
+
+
+Service: SpherePlugins Extensions Directory
 Domain: https://sphereplugins.com/
-Purpose: This service is used to retrieve a list of available plugin extensions inside the WordPress admin area.
-Data Sent: No personal user data is sent. Only a simple GET request is made.   
+Purpose: Retrieves the list of available Sphere Plugins extensions shown on the "Extensions" tab inside the plugin's admin page.
+When called: Only when a logged-in administrator opens the plugin's Extensions page in wp-admin.
+Data sent: An HTTP GET request with the query parameter filter_plugin_list=1. No personally identifying information is transmitted; the site URL is naturally visible in the request headers as with any HTTP call.
+Terms of Service: https://sphereplugins.com/terms-of-service/
+Privacy Policy:   https://sphereplugins.com/privacy-policy/ 
 
 Service: WooChoice Plugin Demo Assets
 Domain: https://demo.woochoiceplugin.com/

@@ -2,7 +2,9 @@
 <?php
 // --- a code /woo-bundle-choice/application/model/publics/sp-model-single-product.php no che
 ?>
-
+<?php
+defined( 'ABSPATH' ) || exit;
+?>
 <?php
 if (defined('SP_VARIATIONS_LOADED') && SP_VARIATIONS_LOADED == true) { ?>
 

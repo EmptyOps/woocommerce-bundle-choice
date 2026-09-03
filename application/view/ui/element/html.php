@@ -1,4 +1,4 @@
-
+<?php defined( 'ABSPATH' ) || exit; ?>
 <?php if(!empty($preHTML)): ?>
 <?php echo isset($preHTML)? $preHTML:''; ?>	
 <?php endif; ?>

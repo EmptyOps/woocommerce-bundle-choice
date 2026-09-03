@@ -509,9 +509,9 @@ class SP_WBC_Filters extends SP_WBC_Model {
 		}
 		/*
 		if(!empty($first[wbc()->sanitize->post('id')])){
-			$res['msg'] = json_encode($first[wbc()->sanitize->post('id')]);
+			$res['msg'] = wp_json_encode($first[wbc()->sanitize->post('id')]);
 		} elseif (!empty($second[wbc()->sanitize->post('id')])) {
-			$res['msg'] = json_encode($second[wbc()->sanitize->post('id')]);
+			$res['msg'] = wp_json_encode($second[wbc()->sanitize->post('id')]);
 		}*/ else {
 			$res['type'] = 'error';
 			$res['msg'] = 'Selected item does not exists!';

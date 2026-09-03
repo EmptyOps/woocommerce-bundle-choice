@@ -159,7 +159,7 @@ if ( ! class_exists( 'Tiny_features' ) ) {
 						<div data-product_variation_id="<?php echo esc_attr( $variation_id ) ?>" class="form-row form-row-full woo-variation-gallery-wrapper">
 							<div class="woo-variation-gallery-postbox">
 								<div class="postbox-header">
-									<h2><?php esc_html_e( 'Variation Product Gallery', 'woo-variation-gallery' ) ?></h2>
+									<h2><?php esc_html_e( 'Variation Product Gallery', 'woo-bundle-choice' ) ?></h2>
 									<button type="button" class="handle-div" aria-expanded="true">
 										<span class="toggle-indicator" aria-hidden="true"></span>
 									</button>
@@ -176,9 +176,9 @@ if ( ! class_exists( 'Tiny_features' ) ) {
 										</ul>
 									</div>
 									<div class="add-woo-variation-gallery-image-wrapper hide-if-no-js">
-										<a href="#" data-product_variation_loop="<?php echo esc_attr(absint( $loop )) ?>" data-product_variation_id="<?php echo esc_attr( $variation_id ) ?>" class="button-primary add-woo-variation-gallery-image"><?php esc_html_e( 'Add Variation Gallery Image', 'woo-variation-gallery' ) ?></a>
+										<a href="#" data-product_variation_loop="<?php echo esc_attr(absint( $loop )) ?>" data-product_variation_id="<?php echo esc_attr( $variation_id ) ?>" class="button-primary add-woo-variation-gallery-image"><?php esc_html_e( 'Add Variation Gallery Image', 'woo-bundle-choice' ) ?></a>
 										<?php if ( ! woo_variation_gallery()->is_pro() ): ?>
-											<a target="_blank" href="<?php echo esc_url( woo_variation_gallery()->get_backend()->get_pro_link() ) ?>" style="display: none" class="button woo-variation-gallery-pro-button"><?php esc_html_e( 'Upgrade to pro to add more images and videos', 'woo-variation-gallery' ) ?></a>
+											<a target="_blank" href="<?php echo esc_url( woo_variation_gallery()->get_backend()->get_pro_link() ) ?>" style="display: none" class="button woo-variation-gallery-pro-button"><?php esc_html_e( 'Upgrade to pro to add more images and videos', 'woo-bundle-choice' ) ?></a>
 										<?php endif; ?>
 									</div>
 								</div>

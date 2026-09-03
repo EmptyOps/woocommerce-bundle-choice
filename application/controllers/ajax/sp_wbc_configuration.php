@@ -19,5 +19,5 @@ else {
 	$res["msg"] = "Nonce validation failed";
 }
 
-// echo json_encode($res);
+// echo wp_json_encode($res);
 wbc()->rest->response($res);

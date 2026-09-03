@@ -31,13 +31,31 @@ class SP_WBC_File {
 	/**
 	 *
 	 */
-	public function file_write( $filepath, $content )
+	
+	// public function file_write( $filepath, $content )
+	// {
+	// 	$fp = fopen( $filepath, "w") or die("Unable to open file ".$filepath);
+	// 	fwrite( $fp, $content);
+	// 	fclose( $fp );
+	// }
+	public function file_write($filepath, $content)
 	{
-		$fp = fopen( $filepath, "w") or die("Unable to open file ".$filepath);
-		fwrite( $fp, $content);
-		fclose( $fp );
-	}
+		$upload_dir = wp_upload_dir();
+		$allowed_dir = wp_normalize_path($upload_dir['basedir']);
 
+		$filepath = wp_normalize_path($filepath);
+
+		// Allow writing only inside WordPress uploads directory.
+		if (strpos($filepath, trailingslashit($allowed_dir)) !== 0) {
+			return false;
+		}
+
+		$fp = fopen($filepath, "w") or die("Unable to open file ".$filepath);
+		fwrite($fp, $content);
+		fclose($fp);
+
+		return true;
+	}
 	/**
 	 *
 	 */
@@ -119,7 +137,7 @@ class SP_WBC_File {
 	}
 
 	public function save_json($filepath, $data) {
-		return $this->file_write( $filepath, json_encode($data) );
+		return $this->file_write( $filepath, wp_json_encode($data) );
 	}
 
 	public function get_json($filepath) {

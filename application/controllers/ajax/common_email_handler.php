@@ -248,6 +248,6 @@ if( !empty(wbc()->sanitize->post('_wpnonce')) ) {
 else {
 	$res["type"]="error";
 }
-/*echo json_encode($res);
+/*echo wp_json_encode($res);
 die();*/
 wbc()->rest->response($res);

@@ -270,7 +270,7 @@ class SP_Compatibility {
 					// ACTIVE_TODO_OC_START
  					if( false ): 
 					?>
-					<select multiple="multiple" style="width:100%" data-placeholder="<?php echo esc_attr( 'Select terms', 'woo-variation-swatches' ); ?>" class="dokan_attribute_values dokan-select2" name="attribute_values[<?php echo esc_attr( $i ); ?>][]">
+					<select multiple="multiple" style="width:100%" data-placeholder="<?php echo esc_attr( 'Select terms', 'woo-bundle-choice' ); ?>" class="dokan_attribute_values dokan-select2" name="attribute_values[<?php echo esc_attr( $i ); ?>][]">
 						<?php
             	    	// NOTE:Changes applied on date 11-09-2025 as per the wordpress review team’s suggestion. 			
 						// $all_terms = get_terms( $taxonomy, apply_filters( 'dokan_product_attribute_terms', $args ) );
@@ -284,8 +284,8 @@ class SP_Compatibility {
 					</select>
 
 					<div class="dokan-pre-defined-attribute-btn-group">
-						<button class="dokan-btn dokan-btn-default plus dokan-select-all-attributes"><?php esc_html_e( 'Select all', 'woo-variation-swatches' ); ?></button>
-						<button class="dokan-btn dokan-btn-default minus dokan-select-no-attributes"><?php esc_html_e( 'Select none', 'woo-variation-swatches' ); ?></button>
+						<button class="dokan-btn dokan-btn-default plus dokan-select-all-attributes"><?php esc_html_e( 'Select all', 'woo-bundle-choice' ); ?></button>
+						<button class="dokan-btn dokan-btn-default minus dokan-select-no-attributes"><?php esc_html_e( 'Select none', 'woo-bundle-choice' ); ?></button>
 					</div>
 					<?php
 					endif;
