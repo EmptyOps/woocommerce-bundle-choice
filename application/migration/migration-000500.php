@@ -26,7 +26,7 @@ class Migration_000500 {
 	public function db() {
 		global $wpdb;
         $eo_wbc_cat_map= $wpdb->prefix."eo_wbc_cat_maps";
-        require_once( ABSPATH . '/wp-admin/includes/upgrade.php' );
+        // require_once( ABSPATH . '/wp-admin/includes/upgrade.php' );
 
         if($wpdb->get_var("SHOW COLUMNS FROM `".$eo_wbc_cat_map."` LIKE 'discount'" ) != 'discount')
         {
