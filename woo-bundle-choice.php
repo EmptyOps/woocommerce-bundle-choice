@@ -149,6 +149,14 @@ if(!class_exists('Woo_Bundle_Choice') ) {
 			defined('WBC_TEMPLATE_DIR_EXTENDED') || define('WBC_TEMPLATE_DIR_EXTENDED', constant('EOWBC_DIRECTORY').'templates/');
 
 			defined('EOWBC_LOG_DIR') || define('EOWBC_LOG_DIR', constant('EOWBC_ASSET_DIR').'logs/');
+			
+			if ( ! defined( 'EOWBC_LOG_DIR' ) ) {
+				$uploads = wp_upload_dir();
+
+				if ( empty( $uploads['error'] ) && ! empty( $uploads['basedir'] ) ) {
+					define( 'EOWBC_LOG_DIR', trailingslashit( $uploads['basedir'] ) . basename( untrailingslashit( EOWBC_DIRECTORY ) ) . '/logs/' );
+				}
+			}
 
 			defined('EOWBC_ICON') || define('EOWBC_ICON', constant('EOWBC_ASSET_URL').'icon/mini.png');
 			defined('EOWBC_JUMBO_ICON') || define('EOWBC_JUMBO_ICON', constant('EOWBC_ASSET_URL').'/icon/jumbo.png');
