@@ -31,6 +31,7 @@ class SP_WBC_File {
 	/**
 	 *
 	 */
+	
 	// public function file_write( $filepath, $content )
 	// {
 	// 	$fp = fopen( $filepath, "w") or die("Unable to open file ".$filepath);
